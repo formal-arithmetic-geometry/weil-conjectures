@@ -8403,3 +8403,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:48 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ProjGradedModuleChartTildeComparison (stage 3; reviewer PASS; first push; landing 20261012T154830-L-2472768 (interface); batch 20261012T154824; modules 2; new nodes 1)
 - 15:48 L: merged deliver/F2/Sheaf.Algebra.FinitePrimePowerSuccessor (stage 3; reviewer PASS; first push; landing 20261012T154830-L-2472900 (proof); batch 20261012T154824; modules 1; new nodes 0)
 - 15:48 L: merged deliver/G2/Sheaf.AlgebraicGeometry.ProperFlatCechModel (stage 3; reviewer PASS; first push; landing 20261012T154830-L-2473028 (interface); batch 20261012T154824; modules 3; new nodes 2)
+- 15:48 L: merged deliver/H2/Sheaf.ConstructibleSheaf.TorsorSectionEvaluationLocal (stage 3; reviewer PASS; first push; landing 20261012T154831-L-2473160 (interface); batch 20261012T154824; modules 3; new nodes 2)

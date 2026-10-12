@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-torsor-graph-evaluation",
+ "kind": "statement",
+ "title": "Graph evaluation is injective for equivariant locally constant functions",
+ "statement": "Let $V$ be a scheme, $P$ a finite group, $c:Y\\to V$ a finite etale $\\operatorname{ULift}(P)$-torsor [def-sbc-normal-dominant-galois], $\\ell\\in\\mathbb N$, and $N$ a $P$-representation over $\\mathbb Z/\\ell$. Let $W$ be an etale $V$-object and $f:W\\to Y$ a morphism over $V$. The equivariant locally constant functions $s:W\\times_VY\\to N$ are defined in [def-weil-pbc-torsor-associated-module], with $s(gx)=\\rho(g)s(x)$. Restriction of these functions along the graph $j_f=(\\mathrm{id}_W,f)$ is injective. The torsor site object is as in [def-weil-pbc-torsor-section-representation]. No connectedness or primality assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3); explicit section-evaluation implementation of the fixed-torsor argument; explicit graph evaluation and constant-coordinate steps of the local fixed-torsor argument"
+ },
+ "stmt_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-weil-pbc-torsor-associated-module",
+  "def-weil-pbc-torsor-section-representation"
+ ],
+ "proof": [
+  {
+   "text": "Swap the two projections in the defining torsor isomorphism to obtain the splitting with components (id,smul g). Base change along f using the already proved CategoryTheory.FinitaryPreExtensive.isIso_sigmaDesc_lift_comp, and identify the pullback along f followed by c with the pullback along W.hom. Its g-th component is the graph followed by sectionAction g. An isomorphism of schemes is surjective on points, and the sigma open cover therefore makes these components jointly surjective.",
+   "uses": [
+    "def-sbc-normal-dominant-galois",
+    "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two equivariant functions with the same graph restriction, express any point as sectionAction g applied to a graph point. Equivariance makes both values rho(g) applied to the common graph value. Pointwise extensionality then proves equality of the functions and subtype extensionality proves equality of the equivariant sections. Empty W gives vacuous pointwise equality.",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-weil-pbc-torsor-associated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3); explicit section-evaluation implementation of the fixed-torsor argument; explicit graph evaluation and constant-coordinate steps of the local fixed-torsor argument",
+  "note": "Explicit local argument extracted from the parent plan; proof details expanded by H2. Sources read in the available local Stacks mirror."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of equivariant locally constant functions on a torsor at a section is injective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of equivariant locally constant functions on a split torsor at a section is bijective",
+   "results": "8 hits: Profinite.NobelingProof.iso_map_bijective, SubMulAction.ofFixingSubgroupEmpty_equivariantMap_bijective, SubAddAction.ofFixingAddSubgroupEmpty_equivariantMap_bijective, Function.Bijective.mulActionHom_embedding_isBijective, Function.Bijective.addActionHom_embedding_isBijective, CategoryTheory.PreGaloisCategory.toAut_bijective, Profinite.NobelingProof.GoodProducts.range_equiv_smaller_toFun_bijective, SubAddAction.ofFixingAddSubgroup_of_singleton_bijective",
+   "date": "2026-10-12",
+   "verdict": "No theorem of the required form; related declarations inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant.comap",
+   "results": "12 hits: LocallyConstant.comap, LocallyConstant.comap_id, LocallyConstant.comap_injective, LocallyConstant.comap_comap, LocallyConstant.coe_comap_apply, LocallyConstant.coe_comap, LocallyConstant.comap_comp, LocallyConstant.comap_const",
+   "date": "2026-10-12",
+   "verdict": "No theorem of the required form; related declarations inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "equivariantSections|graphEvaluation|SectionEvaluationNormalized",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No theorem of the required form; related declarations inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.TorsorSectionEvaluationLocal",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-torsor-section-evaluation-bijective",
+   "place": "Local fixed-torsor argument, step 2: translates of the supplied section determine equivariant values; only injectivity is needed",
+   "via": [
+    "lem-weil-pbc-torsor-section-evaluation-local",
+    "lem-weil-pbc-torsor-section-evaluation-bijective",
+    "lem-weil-pbc-torsor-associated-module-essential-image",
+    "lem-weil-pbc-torsor-module-descent-equivalence",
+    "lem-weil-pbc-connected-torsor-module-descent",
+    "lem-weil-pbc-sylow-cover-stalk-data",
+    "lem-weil-pbc-sylow-cover-associated-sheaf"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.TorsorGraphEvaluation",
+  "file": "lean/Sheaf/ConstructibleSheaf/TorsorGraphEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.graphEvaluation_injective",
+  "statement": "theorem graphEvaluation_injective\n    {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V)\n    (N : Rep.{u + 1} (ZMod ℓ) P) (W : V.Etale)\n    (f : W ⟶ c.sectionObject) :\n    Function.Injective (fun s : c.equivariantSections ℓ N W ↦\n      LocallyConstant.comap\n        (pullback.lift (f := W.hom) (g := c.π) (𝟙 W.left) f.left\n          (by simpa using (MorphismProperty.Over.w f).symm)).base.hom s.val)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T154831-L-2473160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T154831-L-2473160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

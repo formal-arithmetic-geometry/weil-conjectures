@@ -7,6 +7,8 @@ module
 
 public import Sheaf.ConstructibleSheaf.TorsorSectionRepresentation
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.ConstructibleSheaf.TorsorGraphEvaluation
+import Sheaf.ConstructibleSheaf.TorsorNormalizedGraphEvaluation
 
 /-!
 # Evaluation on etale objects admitting a torsor section
@@ -53,6 +55,26 @@ theorem Scheme.GaloisCover.sectionEvaluation_bijective_of_section
     (α : F.obj ⟶ c.sectionRepresentationPresheaf ℓ F)
     (hα : c.SectionEvaluationNormalized ℓ F α) (W : V.Etaleᵒᵖ)
     (f : W.unop ⟶ c.sectionObject) :
-    Function.Bijective (α.app W) := by sorry
+    Function.Bijective (α.app W) := by
+  have hgraph := c.graphEvaluation_injective ℓ (c.sectionRepresentation ℓ F) W.unop f
+  let β (T : V.Etaleᵒᵖ) : F.obj.obj T →ₗ[ULift.{u + 1} (ZMod ℓ)]
+      LocallyConstant (c.sectionSpace T.unop) (F.obj.obj (Opposite.op c.sectionObject)) :=
+    { toFun s := (α.app T s).val
+      map_add' a b := by
+        change (α.app T (a + b)).val = _
+        rw [map_add]
+        rfl
+      map_smul' r a := by
+        change (α.app T (r • a)).val = _
+        rw [map_smul]
+        rfl }
+  have hβ (T T' : V.Etaleᵒᵖ) (g : T ⟶ T') (s : F.obj.obj T)
+      (x : c.sectionSpace T'.unop) :
+      β T' (F.obj.map g s) x = β T s (c.sectionRestriction g.unop x) := by
+    have hn := ConcreteCategory.congr_hom (α.naturality g) s
+    exact congrArg (fun t : c.equivariantSections ℓ (c.sectionRepresentation ℓ F) T'.unop ↦
+      t.val x) hn
+  have hcomp := c.ordinaryGraphEvaluation_bijective ℓ P F A h β hβ hα W f
+  exact hcomp.of_comp_left hgraph
 
 end AlgebraicGeometry
