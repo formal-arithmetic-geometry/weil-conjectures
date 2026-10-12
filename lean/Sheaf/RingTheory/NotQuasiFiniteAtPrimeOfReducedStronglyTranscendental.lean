@@ -7,8 +7,7 @@ module
 
 public import Mathlib.RingTheory.Algebraic.StronglyTranscendental
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
-import Sheaf.RingTheory.NotQuasiFiniteAtPrimeOfStronglyTranscendental
-import Sheaf.RingTheory.QuasiFiniteFourRings
+import Mathlib.RingTheory.ZariskisMainTheorem
 
 /-!
 # Strong transcendence prevents quasi-finiteness for reduced rings
@@ -30,21 +29,15 @@ at every prime. `FaithfulSMul R S` expresses injectivity of the structure map;
 `Algebra.adjoin R {x}` is `R[x]`. The finite-type instance is derived from finiteness,
 using finite generation of the singleton subalgebra and transitivity of finite type.
 
-Proof, following the five steps of the node:
-1. Given a prime `q`, choose a minimal prime `q'` contained in it by
-`lem-weil-pbc-prime-contains-minimal-prime`. Put `p' = q' ∩ R`. The induced map
-`R/p' → S/q'` is injective, and both quotient rings are domains.
-2. By `lem-weil-pbc-strongly-transcendental-quotient-minimal-prime`, the image of `x`
-is strongly transcendental over `R/p'`.
-3. Reduce a finite set of module generators modulo `q'`. Surjectivity of the quotient
-map makes these generators span `S/q'` over `(R/p')[x]`. Together with `x`, the
-original module generators also generate `S` as an `R`-algebra, proving finite type.
-4. Apply `lem-weil-pbc-domains-strongly-transcendental-not-quasi-finite` to the quotient
-domains. Their map is not quasi-finite at the prime `q/q'`.
-5. The quotient square commutes, and `S ⊗[R] (R/p') → S/q'` is surjective because
-`S → S/q'` is surjective. If the original map were quasi-finite at `q`,
-`lem-weil-pbc-quasi-finite-four-rings` would make the quotient map quasi-finite at
-`q/q'`, contradicting step 4. Since `q` was arbitrary, this proves the conclusion. -/
+Proof:
+1. Factor `Polynomial.aeval x` through `Algebra.adjoin R {x}`. The first map is
+surjective by `Algebra.adjoin_singleton_eq_range_aeval`, hence finite. The inclusion
+into `S` is finite by the module-finiteness hypothesis, so their composite is finite.
+2. If the map were quasi-finite at `q`, its corresponding fibre prime would be an
+open singleton. Transport openness through `PrimeSpectrum.preimageHomeomorphFiber`
+and apply `Algebra.QuasiFiniteAt.of_isOpen_singleton_fiber`.
+3. Mathlib's `Algebra.not_isStronglyTranscendental_of_quasiFiniteAt` (Tag 00Q2)
+applied to the finite evaluation map and `q.asIdeal` contradicts `hx`. -/
 theorem not_isQuasiFiniteAtPrime_of_reduced_isStronglyTranscendental
     (R : Type u) (S : Type v) [CommRing R] [CommRing S]
     [IsReduced R] [IsReduced S] [Algebra R S] [FaithfulSMul R S]
@@ -55,6 +48,35 @@ theorem not_isQuasiFiniteAtPrime_of_reduced_isStronglyTranscendental
         (Algebra.FiniteType.trans
           (Algebra.FiniteType.adjoin_of_finite (Set.finite_singleton x))
           (inferInstance : Algebra.FiniteType (Algebra.adjoin R ({x} : Set S)) S)) q := by
-  sorry
+  -- Mathlib supplies the reduced-ring argument; prove both interface bridges here.
+  let : Algebra.FiniteType R S :=
+    Algebra.FiniteType.trans
+      (Algebra.FiniteType.adjoin_of_finite (Set.finite_singleton x))
+      (inferInstance : Algebra.FiniteType (Algebra.adjoin R ({x} : Set S)) S)
+  have hfinite : (Polynomial.aeval (R := R) x).toRingHom.Finite := by
+    let f : Polynomial R →ₐ[R] Algebra.adjoin R ({x} : Set S) :=
+      (Polynomial.aeval x).codRestrict _ fun p ↦ by
+        rw [Algebra.adjoin_singleton_eq_range_aeval]
+        exact ⟨p, rfl⟩
+    have hf : Function.Surjective f := by
+      intro y
+      have hy : (y : S) ∈ (Polynomial.aeval (R := R) x).range := by
+        rw [← Algebra.adjoin_singleton_eq_range_aeval]
+        exact y.property
+      obtain ⟨p, hp⟩ := hy
+      exact ⟨p, Subtype.ext hp⟩
+    exact (RingHom.finite_algebraMap.mpr
+      (inferInstance : Module.Finite (Algebra.adjoin R ({x} : Set S)) S)).comp
+        (RingHom.Finite.of_surjective f.toRingHom hf)
+  intro q hq
+  let e := PrimeSpectrum.preimageHomeomorphFiber R S (q.comap (algebraMap R S))
+  have hopen : IsOpen
+      (X := PrimeSpectrum.comap (algebraMap R S) ⁻¹' {q.comap (algebraMap R S)})
+      {⟨q, rfl⟩} := by
+    rw [← e.isOpen_image, Set.image_singleton]
+    exact hq
+  have : Algebra.QuasiFiniteAt R q.asIdeal :=
+    Algebra.QuasiFiniteAt.of_isOpen_singleton_fiber q hopen
+  exact Algebra.not_isStronglyTranscendental_of_quasiFiniteAt hfinite q.asIdeal hx
 
 end Algebra
