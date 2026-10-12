@@ -1,0 +1,144 @@
+{
+ "id": "lem-sbc-smooth-pushout-filtered-colimit-stage",
+ "kind": "statement",
+ "title": "Eventual smoothness of a fixed finitely presented ring map after pushout",
+ "statement": "Let $I$ be a small filtered category and $F:I\\to\\mathrm{CommRing}$ a diagram with a colimit cocone $(R,\\iota_j)$ [def-weil-pbc-category-colimit]. Let $A,B$ be commutative rings and $f:A\\to B$ a finitely presented ring map (that is, $B$ has finitely many algebra generators and finitely many defining relations over $A$). Let $t_j:A\\to F_j$ form a natural transformation from the constant diagram at $A$, and let $s:A\\to R$ satisfy $\\iota_jt_j=s$ for every $j$. For every $j$, let $C_j$ be a ring with maps $a_j:B\\to C_j$ and $b_j:F_j\\to C_j$ such that the square $(f,t_j,a_j,b_j)$ is a pushout. Let $L$ be a ring with maps $a_L:B\\to L$ and $b_L:R\\to L$ such that $(f,s,a_L,b_L)$ is a pushout. Here a pushout is the universal commutative square of rings, equivalently the associated tensor product. If $b_L$ is smooth [def-weil-pbc-smooth-ring-map], then $b_j$ is smooth for some $j\\in I$.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0C0B, fixed-map case; proof via Tags 0CAQ and 01ZM(2)-(3)"
+ },
+ "proof": [
+  {
+   "text": "Identify the chosen ring colimit with the categorical colimit. Apply smooth-algebra descent to its smooth algebra L. This supplies an index i, a smooth algebra E_i over F_i, and an algebra isomorphism from L to the tensor product of E_i with the colimit. Transport the tensor-product pushout square through this isomorphism and the colimit comparison.",
+   "uses": [
+    "lem-weil-pbc-smooth-algebra-filtered-colimit-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the original pushout square at i from the total square defining L to see that C_i also models L over F_i. The map F_i to C_i is finitely presented by base change of f; the smooth E_i is also finitely presented. Take spectra of the ring diagram, whose limiting cone is obtained by applying Spec to the opposite colimit cocone.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing finite-presentation comparison theorem to Spec E_i and Spec C_i with common limit model Spec L. It descends the comparison and its inverse by 01ZM(2), then the inverse identities by 01ZM(3), yielding an isomorphism of the two pullback models over a later stage k.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change of Spec E_i to k is smooth. Transfer smoothness through the comparison isomorphism. Naturality of t identifies the k-stage fixed pushout C_k with the base change of C_i: cancel the i-stage pushout from the k-stage pushout. Taking spectra and comparing the canonical pullback gives smoothness of Spec b_k, and hence of b_k.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0C0B (lemma-colimit-smooth), fixed-map case; proof via Tags 0CAQ and 01ZM(2)-(3)",
+  "note": "Lean proof by M3, using the existing named dependencies; no new sorry."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineSourceLimitSmoothStage",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EZJ, family-descent paragraph: descending smoothness to a finite Noetherian stage; affine-local part of Tag 0C0C. Tag 0C0B (lemma-colimit-smooth), fixed-map case; proof via Tags 0CAQ and 01ZM(2)-(3)",
+   "via": [
+    "lem-sbc-affine-source-limit-smooth-stage",
+    "lem-sbc-affine-limit-smooth-stage",
+    "lem-sbc-pointed-smooth-family-stage",
+    "lem-sbc-normal-pointed-family-approximation",
+    "lem-sbc-normal-family-generic-limit",
+    "lem-sbc-noetherian-spreading-data",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of a finitely presented ring map descends from a filtered colimit to a stage",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness of a finitely presented ring map after pushout to a filtered colimit holds after pushout to one stage",
+   "results": "Smooth composition and base-change declarations; in the ring search also Algebra.Smooth.exists_finiteType and finite-presentation factorization through colimits. No theorem with the requested eventual-smoothness conclusion.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Smooth",
+   "results": "Smoothness, composition, localization and base-change declarations; no eventual smoothness.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Smooth.*[Cc]olimit|smooth.*[Cc]olimit|[Cc]olimit.*[Ss]mooth",
+   "results": "Affine search: smooth-locus API and standard-smooth charts, no limit descent. Ring search: four unrelated manifold sheaf hits. Direct source searches found the existing smooth-algebra filtered-colimit model theorem, used as a dependency.",
+   "verdict": "no direct theorem",
+   "date": "2026-10-13"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SmoothPushoutFilteredColimitStage",
+  "file": "lean/Sheaf/RingTheory/SmoothPushoutFilteredColimitStage.lean",
+  "declaration": "CommRingCat.exists_smooth_pushout_stage",
+  "statement": "theorem exists_smooth_pushout_stage {I : Type u} [SmallCategory I] [IsFiltered I]\n    (F : I ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c)\n    {A B : CommRingCat.{u}} (f : A ⟶ B) (hf : f.hom.FinitePresentation)\n    (t : (Functor.const I).obj A ⟶ F) (s : A ⟶ c.pt)\n    (hs : ∀ j, t.app j ≫ c.ι.app j = s)\n    (C : I → CommRingCat.{u}) (a : ∀ j, B ⟶ C j) (b : ∀ j, F.obj j ⟶ C j)\n    (hC : ∀ j, IsPushout f (t.app j) (a j) (b j))\n    {L : CommRingCat.{u}} (aL : B ⟶ L) (bL : c.pt ⟶ L)\n    (hL : IsPushout f s aL bL) (hsm : bL.hom.Smooth) :\n    ∃ j, (b j).hom.Smooth",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T230759-L-1909480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T230759-L-1909480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-affine-diagram-smooth-stage",
+ "kind": "statement",
+ "title": "Smoothness of a fixed affine model over an affine inverse system",
+ "statement": "Let $I$ be a small cofiltered category and $D:I\\to\\mathrm{Scheme}$ an inverse diagram [def-weil-pbc-scheme-conventions] all of whose objects are affine. Let $c$ be a limiting cone with point $T$. Let $P,Q$ be affine schemes, let $t:D\\to\\mathrm{const}(Q)$ be a natural transformation, and let $s:T\\to Q$ satisfy $t_j\\circ c_j=s$ for every $j$. Let $p:P\\to Q$ be locally of finite presentation [def-sbc-locally-finite-presentation]. If the projection $P\\times_Q T\\to T$ for the pair $(p,s)$ is smooth [def-sbc-smooth-morphisms], then for some $j\\in I$ the projection $P\\times_Q D_j\\to D_j$ for $(p,t_j)$ is smooth. An affine scheme means a scheme isomorphic to the spectrum of a commutative ring.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0C0C, affine case, using Tag 0C0B; smooth-model comparison via 0CAQ and 01ZM"
+ },
+ "proof": [
+  {
+   "text": "All transition maps between affine schemes are affine. The limit is affine. Global sections of the limit form the filtered colimit of the stage rings, with the structure maps from Gamma(Q) induced by t and s.",
+   "uses": [
+    "lem-weil-pbc-limit-global-sections-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply global sections to the canonical pullback squares. They become ring pushouts. The affine criteria identify finite presentation of p and smoothness of its limit pullback with finite presentation and smoothness of their global-sections maps.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply eventual smoothness of the pushouts of a fixed finitely presented ring map to this colimit and the ring of P. Translate smoothness of the resulting stage ring map back to smoothness of the stage projection.",
+   "uses": [
+    "lem-sbc-smooth-pushout-filtered-colimit-stage",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-smooth-pushout-filtered-colimit-stage",
+  "lem-weil-pbc-limit-global-sections-colimit",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0C0C, affine case, using Tag 0C0B; smooth-model comparison via 0CAQ and 01ZM",
+  "note": "Lean proof by M3, using the existing named dependencies; no new sorry."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.AffineSourceLimitSmoothStage",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EZJ, family-descent paragraph: descending smoothness to a finite Noetherian stage; affine-local part of Tag 0C0C. Tag 0C0C, affine case, using Tag 0C0B; smooth-model comparison via 0CAQ and 01ZM",
+   "via": [
+    "lem-sbc-affine-source-limit-smooth-stage",
+    "lem-sbc-affine-limit-smooth-stage",
+    "lem-sbc-pointed-smooth-family-stage",
+    "lem-sbc-normal-pointed-family-approximation",
+    "lem-sbc-normal-family-generic-limit",
+    "lem-sbc-noetherian-spreading-data",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An affine finitely presented morphism over an affine inverse limit is smooth at some stage",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented morphism smooth after base change to a cofiltered inverse limit is smooth after base change to some stage",
+   "results": "Smooth composition and base-change declarations; in the ring search also Algebra.Smooth.exists_finiteType and finite-presentation factorization through colimits. No theorem with the requested eventual-smoothness conclusion.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth",
+   "results": "Smoothness, composition, localization and base-change declarations; no eventual smoothness.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*[Ll]imit|[Ll]imit.*smooth|[Ss]mooth[Ll]ocus",
+   "results": "Affine search: smooth-locus API and standard-smooth charts, no limit descent. Ring search: four unrelated manifold sheaf hits. Direct source searches found the existing smooth-algebra filtered-colimit model theorem, used as a dependency.",
+   "verdict": "no direct theorem",
+   "date": "2026-10-13"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineDiagramSmoothStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineDiagramSmoothStage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_smooth_stage_of_affine_diagram",
+  "statement": "theorem exists_smooth_stage_of_affine_diagram {I : Type u} [SmallCategory I]\n    [IsCofiltered I] (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    (hD : ∀ j, IsAffine (D.obj j))\n    {Q P : Scheme.{u}} [IsAffine Q] [IsAffine P]\n    (t : D ⟶ (Functor.const I).obj Q) (s : c.pt ⟶ Q)\n    (hs : ∀ j, c.π.app j ≫ t.app j = s)\n    (p : P ⟶ Q) [LocallyOfFinitePresentation p]\n    [Smooth (pullback.snd p s)] :\n    ∃ j, Smooth (pullback.snd p (t.app j))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T230759-L-1909480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T230759-L-1909480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

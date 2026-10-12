@@ -10018,3 +10018,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:07 L: merged deliver/K4/Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension (stage 3; reviewer PASS; first push; landing 20261012T230758-L-1909158 (proof); batch 20261012T230749; modules 1; new nodes 0)
 - 23:07 L: merged deliver/K4/Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit (stage 3; reviewer PASS; first push; landing 20261012T230759-L-1909257 (proof); batch 20261012T230749; modules 1; new nodes 0)
 - 23:07 L: merged deliver/M2/Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistingSheafCharts (stage 3; reviewer PASS; first push; landing 20261012T230759-L-1909357 (proof); batch 20261012T230749; modules 1; new nodes 0)
+- 23:07 L: merged deliver/M3/Sheaf.AlgebraicGeometry.Morphisms.AffineSourceLimitSmoothStage (stage 3; reviewer PASS; after a return; landing 20261012T230759-L-1909480 (interface); batch 20261012T230749; modules 3; new nodes 2)
