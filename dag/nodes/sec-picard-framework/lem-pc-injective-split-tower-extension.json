@@ -22,24 +22,26 @@
  ],
  "proof": [
   {
-   "text": "Perform the level-by-level extension and correction through the kernel of each split transition exactly as in the compatible lifting argument of Tag 07KW.",
-   "uses": [
-    "lem-pc-injective-split-tower-injective"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
-   }
+   "text": "The components of a monomorphism of towers are monomorphisms by Mathlib CategoryTheory.Limits.FunctorCategory.EpiMono. Use Injective.factorThru at level zero to construct a component extending g_0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Given h_n extending g_n, put p = I(n+1 to n), s = section_(p), b = B(n+1 to n) followed by h_n, and t = Injective.factorThru(g_(n+1), f_(n+1)). Define h_(n+1) = t + (b - t followed by p) followed by s. Naturality gives f_(n+1) followed by b = g_(n+1) followed by p. Thus the correction vanishes on A_(n+1). Since s followed by p is the identity, h_(n+1) followed by p = b. These are the extension and adjacent compatibility equalities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use Nat.rec to construct the sequence of extending components, carrying the extension equation in a subtype. Adjacent compatibility follows from the successor formula. Apply Mathlib NatTrans.ofOpSequence to obtain a natural transformation compatible with all tower maps, and NatTrans.ext to prove f followed by h = g.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-pc-injective-split-tower-injective"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+  "by": "agent",
+  "document": "F1 second reading of Sheaf.CategoryTheory.InjectiveSplitTowerExtension",
+  "place": "Direct recursive proof; related inverse-system context is Stacks Project Tag 07KW, which does not contain the previously claimed compatible-lifting footnote."
  },
  "mathlib_searches": [
   {
@@ -96,10 +98,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T112848-L-770851",
-  "kind": "interface",
+  "landing": "20261012T144106-L-2093297",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
