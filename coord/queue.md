@@ -1,6 +1,6 @@
 # Work queue
 
-840 items; claim with `tools/claim.py next <group> [--stage N]`.
+839 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (20)
 
@@ -32,7 +32,7 @@
 
 Not open yet: 41 nodes that wait for stage 1.
 
-## Stage 3: modules to prove (820)
+## Stage 3: modules to prove (819)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -49,7 +49,6 @@ Not open yet: 41 nodes that wait for stage 1.
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HenselianBoundedAbelianSurjectivity` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictLocalSectionPullback` | 5 | 1 | proof |
-| `Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax` | 5 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations` | 5 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.ProperConstantBaseChangeOne` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GenericFiniteNoetherianSchemeSplitting` | 6 | 1 | proof |
