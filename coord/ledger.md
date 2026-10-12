@@ -9715,3 +9715,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:05 L: merged deliver/E1/Sheaf.RingTheory.SmoothAlgebraFilteredColimitDescent (stage 3; reviewer PASS; first push; landing 20261012T220518-L-1392540 (proof); batch 20261012T220515; modules 1; new nodes 0)
 - 22:05 L: merged deliver/E1/Sheaf.RingTheory.StrictlyStandardLocalizationSmooth (stage 3; reviewer PASS; first push; landing 20261012T220518-L-1392645 (interface); batch 20261012T220515; modules 2; new nodes 1)
 - 22:05 L: merged deliver/E1/Sheaf.Topology.ConstantSubsheafPositivePresentation (stage 3; reviewer PASS; first push; landing 20261012T220519-L-1392754 (interface); batch 20261012T220515; modules 2; new nodes 1)
+- 22:05 L: merged deliver/E3/Sheaf.AlgebraicGeometry.AffinePseudoCoherentLocalizationCover (stage 3; reviewer PASS; first push; landing 20261012T220519-L-1392870 (interface); batch 20261012T220515; modules 2; new nodes 1)

@@ -15,46 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Let $A$ be as in the statement and $E=\\widetilde{M^\\bullet}$. By [def-pur-pseudo-coherent-complex], each point has an open neighbourhood $U$ on which $E$ has a bounded-above finite-free model. Refine these neighbourhoods by standard opens. Since $\\operatorname{Spec}(A)$ is quasi-compact, extract a finite cover $D(f_1),\\ldots,D(f_r)$. The covering condition implies that the $f_i$ generate the unit ideal. The restriction of a finite-free model to a smaller open preserves its upper bound and all its finite ranks.",
+   "text": "Let $S$ be the set of $f\\in A$ for which $Q(A_f\\otimes_A M)$ is pseudo-coherent. At each prime $x$, unfold scheme pseudo-coherence to obtain $U$, a bounded-above finite-free complex $P$ on $U$, and a derived isomorphism with the restricted input. Use Mathlib PrimeSpectrum.isTopologicalBasis_basic_opens.isOpen_iff to choose $D(f)\\subseteq U$ containing $x$. Apply the single-open model comparison to conclude $f\\in S$.",
    "uses": [
-    "def-pur-pseudo-coherent-complex"
+    "def-pur-pseudo-coherent-complex",
+    "lem-pc-affine-pseudo-coherent-principal-model"
    ],
    "elementary": true
   },
   {
-   "text": "For each $f_i$, identify $D(f_i)$ with $\\operatorname{Spec}(A_{f_i})$. By [lem-weil-pbc-spec-module-tilde-sections], restriction of $\\widetilde N$ is the associated sheaf of $A_{f_i}\\otimes_A N$, since their sections and restriction maps agree on the standard-open basis. This is natural in $N$, and therefore identifies the termwise restricted input complex with the tilde of the scalar-extended complex.",
+   "text": "The principal opens defined by $S$ cover the spectrum. Apply PrimeSpectrum.iSup_basicOpen_eq_top_iff' to obtain $\\operatorname{span}(S)=A$. Apply Mathlib Ideal.span_eq_top_iff_finite to extract a finite subset $t\\subseteq S$ with $\\operatorname{span}(t)=A$; this is finite generation of the membership of 1 and needs no separate topological compactness argument.",
    "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Each term of the restricted model is a finite free structure-sheaf module. The fully faithful tilde functor and its finite-sum comparison [lem-weil-pbc-affine-tilde-gamma-adjunction] lift these terms and their differentials to finite free $A_{f_i}$-modules. Faithfulness gives the differential-square-zero identities. The complex has the same upper bound as the sheaf model.",
+   "text": "Enumerate $t$ using the inverse of Fintype.equivFin t. Its range is exactly $t$, so the span condition is unchanged. Each value belongs to $S$ by $t\\subseteq S$, giving every requested localized pseudo-coherence assertion. The same argument applies when the spectrum is empty and $t$ has cardinality zero.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Both sheaf complexes have quasi-coherent cohomology. The full inclusion of the quasi-coherent derived category lifts their derived isomorphism, and [lem-pc-affine-qcoh-derived-equivalence] over $A_{f_i}$ reflects it to the module derived category. Thus each localized complex has the finite-free representative required by [def-pc-ring-pseudo-coherent-complex]. No ring-level gluing is performed in this lemma. For the zero ring the empty family generates the unit ideal and the local condition is vacuous.",
-   "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence",
     "def-pc-ring-pseudo-coherent-complex"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-ring-pseudo-coherent-complex",
   "def-pur-pseudo-coherent-complex",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections"
+  "lem-pc-affine-pseudo-coherent-principal-model",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "E3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08E7, cover and local-model steps, following the reviewed local finite-free route of lem-pc-affine-pseudo-coherent-criterion"
+  "place": "Tag 08E7, finite principal-open extraction; local steps 2–4 split into lem-pc-affine-pseudo-coherent-principal-model"
  },
  "mathlib_searches": [
   {
@@ -131,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T212211-L-1098447",
+  "landing": "20261012T220519-L-1392870",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
