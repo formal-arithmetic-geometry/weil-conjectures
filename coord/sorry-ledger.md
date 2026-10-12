@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **2343**, closure **1546**, holes in definitions **9**, definitions with undetermined data **4** (closure **2**).
+Holes now: library **2343**, closure **1554**, holes in definitions **9**, definitions with undetermined data **4** (closure **2**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -27,7 +27,7 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 2085 | 1505 |
+| Sheaf | 2085 | 1513 |
 | WeilConjectures | 258 | 41 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
@@ -280,21 +280,13 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.QuotientJShriek`
 - `Sheaf.CategoryTheory.SimplicialMatchingObject`
 - `Sheaf.CategoryTheory.SiteCoveringsCommonRefinement`
-- `Sheaf.CategoryTheory.Sites.BinaryContractedProductPresentation`
-- `Sheaf.CategoryTheory.Sites.CoherentContractedPowers`
 - `Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtension`
 - `Sheaf.CategoryTheory.Sites.EtaleTorsorPushoutExtension`
 - `Sheaf.CategoryTheory.Sites.SheafificationPlusTheorem`
 - `Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf`
 - `Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation`
-- `Sheaf.CategoryTheory.Sites.TorsorExtensionPushforward`
-- `Sheaf.CategoryTheory.Sites.TorsorH1BoundaryRepresentative`
 - `Sheaf.CategoryTheory.Sites.TorsorH1Functoriality`
-- `Sheaf.CategoryTheory.Sites.ZariskiContractedPowerExtension`
-- `Sheaf.CategoryTheory.Sites.ZariskiContractedPowerExtensionPresentation`
-- `Sheaf.CategoryTheory.Sites.ZariskiContractedPowerTorsor`
 - `Sheaf.CategoryTheory.Sites.ZariskiContractedProductPresentation`
-- `Sheaf.CategoryTheory.Sites.ZariskiExtTorsor`
 - `Sheaf.CategoryTheory.Sites.ZariskiTorsorExtensionPushout`
 - `Sheaf.CategoryTheory.SpectralSequenceComparison`
 - `Sheaf.CategoryTheory.Triangulated.TriangleMorphismExtension`
@@ -363,9 +355,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.TorStrictlyProZero`
 - `Sheaf.RingTheory.UniversalFirstOrderThickening`
 - `Sheaf.RingTheory.ValuationRingNormal`
-- `Sheaf.Topology.AbelianCohomologyDeltaFunctor`
-- `Sheaf.Topology.ClosedImmersionPushforwardExact`
-- `Sheaf.Topology.ClosedPushforwardBoundaryNaturality`
 - `Sheaf.Topology.ClosedPushforwardConstantRestriction`
 - `Sheaf.Topology.ContinuousOpenNormalStabilizer`
 - `Sheaf.Topology.ExistsUniqueIsGenericPointOfFinite`
