@@ -12,6 +12,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
 public import WeilConjectures.DeligneLaumon.Reduction.RealCurve
 public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
 public import WeilConjectures.WeilSheaf.LisseLocus
+public import WeilConjectures.WeilSheaf.UpperStarPointwise
 
 /-!
 # Real Weil sheaves on an arbitrary base are mixed
@@ -113,18 +114,6 @@ namespace WeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {ι : PadicAlgCl l →+* ℂ}
-
-/-- The pullback of an `ι`-real Weil sheaf is `ι`-real: at a closed point `z` over `x`, the local
-Frobenius of the pullback has the characteristic polynomial of a power of the local Frobenius at
-`x`, whose traces of powers are real. -/
-theorem IsReal.upperStar {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-    [Y.Over (Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l Y} (hF : F.IsReal ι) (φ : X ⟶ Y)
-    [φ.IsOver (Spec (CommRingCat.of k₀))] : ((WeilSheaf.upperStar φ).obj F).IsReal ι := by
-  intro z
-  refine LinearMap.conj_charpolyRev_coeff_of_trace ι _ fun m ↦ ?_
-  rw [LinearMap.trace_pow_eq_of_charpoly_eq (charpoly_frobeniusEnd_stalk_upperStar φ F z),
-    ← pow_mul]
-  exact LinearMap.conj_trace_pow_of_charpolyRev ι _ (hF _) _
 
 /-- Every Weil sheaf on a nonempty open of `𝔸⁰ = Spec k₀` is mixed. -/
 theorem exists_isMixed_upperStar_opensι_of_isEmpty {n : Type u} [IsEmpty n]
