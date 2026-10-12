@@ -10,6 +10,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Geometry.RingedSpace.Basic
+import Sheaf.Algebra.Homology.OpenCoverMateComplexShortExact
+import Sheaf.Algebra.Homology.OpenDerivedMatePresentation
+import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 
 /-! # Canonical adjunction maps in the geometric open-cover triangle
@@ -27,6 +31,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Pretriangulated
 noncomputable section
 
 namespace SheafOfModules
+
 
 /-- The canonical comparison between nested derived restrictions.
 Source: Stacks Project, Tag 08BW
@@ -55,6 +60,39 @@ def openRestrictionComparison {S : Type u} [TopologicalSpace S]
   (Functor.mapDerivedCategoryCompIso A B).symm ≪≫
     Functor.mapDerivedCategoryNatIso (overFunctorMap.{u} R i)
 
+private theorem openExtension_exact (X : AlgebraicGeometry.RingedSpace.{u})
+    (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
+    (hR : R = (sheafCompose (Opens.grothendieckTopology X)
+      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) (U : Opens X) :
+    let S := extensionByZeroPresheaf.{u} R U ⋙
+      PresheafOfModules.sheafification.{u} (𝟙 R.obj)
+    PreservesFiniteLimits S ∧ PreservesFiniteColimits S ∧
+      Nonempty (S ⊣ overFunctor.{u} R U) := by
+  subst R
+  have hJ : (Opens.grothendieckTopology X).toPrecoverage.toGrothendieck =
+      Opens.grothendieckTopology X := by
+    apply le_antisymm
+    · exact GrothendieckTopology.toGrothendieck_toPrecoverage_le _
+    · intro V S hS
+      simpa only [Sieve.generate_sieve] using
+        Precoverage.generate_mem_toGrothendieck
+          ((GrothendieckTopology.arrows_mem_toPrecoverage_iff _ S).mpr hS)
+  let P (J : GrothendieckTopology (Opens X)) (O : Sheaf J CommRingCat.{u}) :=
+    let R := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O
+    let S := extensionByZeroPresheaf.{u} R U ⋙
+      PresheafOfModules.sheafification.{u} (𝟙 R.obj)
+    PreservesFiniteLimits S ∧ PreservesFiniteColimits S ∧
+      Nonempty (S ⊣ overFunctor.{u} R U)
+  change P (Opens.grothendieckTopology X) X.sheaf
+  have h : ∀ O, P (Opens.grothendieckTopology X) O := by
+    rw [← hJ]
+    intro O
+    exact (localizedModule_adjunction_exact
+      (Opens.grothendieckTopology X).toPrecoverage O U).2.2
+  exact h X.sheaf
+
+set_option maxHeartbeats 1600000 in
+-- Comparing the three localized adjunction presentations needs extra elaboration heartbeats.
 /-- The geometric Mayer–Vietoris triangle with its arrows defined as adjunction mates.
 No Hom identifications or shifted Hom groups are part of this statement.
 
@@ -129,6 +167,71 @@ theorem open_cover_adjunction_triangle (X : AlgebraicGeometry.RingedSpace.{u})
     ∃ δ : E ⟶ (LW.obj (RW.obj E))⟦(1 : ℤ)⟧,
       Triangle.mk (biprod.lift κU (-κV))
         (biprod.desc (adjU.counit.app E) (adjV.counit.app E)) δ ∈ distTriang _ := by
-  sorry
+  classical
+  dsimp only
+  let S (O : Opens X) := extensionByZeroPresheaf.{u} R O ⋙
+    PresheafOfModules.sheafification.{u} (𝟙 R.obj)
+  let aU : S U ⊣ overFunctor.{u} R U :=
+    Classical.choice (openExtension_exact X R hR U).2.2
+  let aV : S V ⊣ overFunctor.{u} R V :=
+    Classical.choice (openExtension_exact X R hR V).2.2
+  let aW : S (U ⊓ V) ⊣ overFunctor.{u} R (U ⊓ V) :=
+    Classical.choice (openExtension_exact X R hR (U ⊓ V)).2.2
+  have : (S U).Additive := aU.left_adjoint_additive
+  have : (S V).Additive := aV.left_adjoint_additive
+  have : (S (U ⊓ V)).Additive := aW.left_adjoint_additive
+  have : PreservesFiniteLimits (S U) := (openExtension_exact X R hR U).1
+  have : PreservesFiniteColimits (S U) := (openExtension_exact X R hR U).2.1
+  have : PreservesFiniteLimits (S V) := (openExtension_exact X R hR V).1
+  have : PreservesFiniteColimits (S V) := (openExtension_exact X R hR V).2.1
+  have : PreservesFiniteLimits (S (U ⊓ V)) := (openExtension_exact X R hR (U ⊓ V)).1
+  have : PreservesFiniteColimits (S (U ⊓ V)) := (openExtension_exact X R hR (U ⊓ V)).2.1
+  let K : CochainComplex (SheafOfModules.{u} R) ℤ := DerivedCategory.Q.objPreimage E
+  let e : DerivedCategory.Q.obj K ≅ E := DerivedCategory.Q.objObjPreimageIso E
+  have hs := open_cover_mate_complex_shortExact
+    X R hR U V hcover (S U) (S V) (S (U ⊓ V)) aU aV aW K
+  dsimp only at hs
+  rcases hs with ⟨f, hfU, hfV, hz, hses⟩
+  let pU := aU.derivedPresentation adjU K e
+  let pV := aV.derivedPresentation adjV K e
+  let pW := aW.derivedPresentation adjW K e
+  have hpU := aU.derivedPresentation_counit adjU K e
+  have hpV := aV.derivedPresentation_counit adjV K e
+  have hmU := Adjunction.derivedPresentation_mate aU aW
+    (overFunctorMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U)) adjU adjW K e
+    (f ≫ biprod.fst) hfU
+  have hmV := Adjunction.derivedPresentation_mate aV aW
+    (overFunctorMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V)) adjV adjW K e
+    (-(f ≫ biprod.snd)) hfV
+  have (A B : CochainComplex (SheafOfModules.{u} R) ℤ) :
+      PreservesBinaryBiproduct A B DerivedCategory.Q :=
+    preservesBinaryBiproduct_of_preservesBiproduct DerivedCategory.Q A B
+  let pB := DerivedCategory.Q.mapBiprod _ _ ≪≫
+    biprod.mapIso pU.symm pV.symm
+  let δ := e.inv ≫ DerivedCategory.triangleOfSESδ hses ≫ pW.inv⟦(1 : ℤ)⟧'
+  refine ⟨δ, ?_⟩
+  apply isomorphic_distinguished _ (DerivedCategory.triangleOfSES_distinguished hses) _
+  refine Triangle.isoMk _ _ pW pB.symm e.symm ?_ ?_ ?_
+  · dsimp only [DerivedCategory.triangleOfSES, Triangle.mk]
+    change biprod.lift _ _ ≫ pB.inv = pW.hom ≫ DerivedCategory.Q.map f
+    apply (cancel_mono pB.hom).mp
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    apply biprod.hom_ext
+    · dsimp only at hmU
+      simpa [pB, Functor.mapBiprod_hom, Category.assoc, Functor.map_comp,
+        openRestrictionComparison] using congrArg (fun z => z ≫ pU.inv) hmU.symm
+    · dsimp only at hmV
+      simpa [pB, Functor.mapBiprod_hom, Category.assoc, Functor.map_comp,
+        openRestrictionComparison] using congrArg (fun z => -(z ≫ pV.inv)) hmV.symm
+  · dsimp only [DerivedCategory.triangleOfSES, Triangle.mk]
+    change biprod.desc _ _ ≫ e.inv = pB.inv ≫ DerivedCategory.Q.map _
+    apply (cancel_mono e.hom).mp
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    simp only [pB, Iso.trans_inv, biprod.mapIso_inv, Iso.symm_inv, Category.assoc]
+    apply biprod.hom_ext'
+    · simpa [Functor.mapBiprod_inv, Category.assoc, ← Functor.map_comp_assoc] using hpU.symm
+    · simpa [Functor.mapBiprod_inv, Category.assoc, ← Functor.map_comp_assoc] using hpV.symm
+  · dsimp only [DerivedCategory.triangleOfSES, Triangle.mk_mor₃, δ]
+    simp
 
 end SheafOfModules

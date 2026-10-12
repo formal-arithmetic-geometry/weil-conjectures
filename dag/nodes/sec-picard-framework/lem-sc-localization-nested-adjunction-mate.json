@@ -1,0 +1,139 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OpenCoverAdjunctionTriangle",
+  "group": "S3",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "mathlib_match": null,
+ "proof_origin": {
+  "by": "agent",
+  "group": "S3",
+  "date": "2026-10-12",
+  "note": "Source argument made explicit; localized-unit/counit compatibility supplies the categorical calculation."
+ },
+ "id": "lem-sc-localization-nested-adjunction-mate",
+ "title": "Exact localization preserves a nested adjunction mate",
+ "statement": "Let A,B,C be abelian categories with derived categories [def-weil-abstract-derived-category]. Let L:B→A, R:A→B, L2:C→A, R2:A→C and T:B→C be additive functors preserving finite limits and finite colimits, with adjunctions a1:L⊣R, a2:L2⊣R2 and a natural isomorphism c:R⋙T≅R2. Let d1:LD1⊣D(R), d2:LD2⊣D(R2) be any chosen derived left adjoints. For a complex K of A, an object E of D(A), and e:QK≅E, let p1:LD1(D(R)E)≅Q(L(RK)) and p2:LD2(D(R2)E)≅Q(L2(R2 K)) be the concrete derivedPresentation isomorphisms: leftAdjointUniq to the localized termwise adjunction, followed by e and the mapDerivedCategoryFactors isomorphisms. Suppose f:L2(R2 K)→L(R K) is a complex map whose component in each degree n is the a2-transpose of c(K^n)⁻¹≫T(η1(R K^n))≫c(L R K^n). Form cD:D(R)⋙D(T)≅D(R2) by the exact-functor composition isomorphism and D(c), and κ as the d2-transpose of cD(E)⁻¹≫D(T)(ηd1(D(R)E))≫cD(LD1 D(R) E). Then p2.hom≫Q(f)=κ≫p1.hom. The statement has no cover or exact-sequence hypothesis and asserts no distinguished triangle.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the termwise adjunction on complexes. Its unit and counit components are exactly the original unit and counit in each degree, so the componentwise assumption identifies f with the termwise nested mate by complex extensionality. Localize this identity at quasi-isomorphisms, which all five functors preserve by [lem-weil-pbc-exact-functor-derived-factorization].",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the localized unit and counit on QK using Mathlib Adjunction.localization_unit_app and localization_counit_app (Mathlib/CategoryTheory/Localization/Adjunction.lean:118,127). Use the composition and natural-isomorphism factorization identities mapDerivedCategoryCompIso_fac and mapDerivedCategoryNatIso_fac to replace the localized comparison by cD. Cancel consecutive inverse factorization maps. This gives the asserted equation for E=QK and the localized adjunctions.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality carries the equation along e:QK≅E. The chosen adjunctions are compared with the localized ones by leftAdjointUniq. Its unit and counit compatibility equations carry the mates to each other, yielding the asserted equation with the concrete p1,p2. All these transports are isomorphisms, so no fullness of Q on morphisms is required.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BT; Tag 08BW (adjunction identification); Mathlib localization unit/counit formulas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "localization of an exact adjunction preserves mates of natural transformations",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv_symm_apply; CategoryTheory.Adjunction.Localization.ε_app; CategoryTheory.iterated_mateEquiv_conjugateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_counit_symm",
+   "date": "2026-10-12",
+   "verdict": "No exact match; listed generic results need additional argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localization_unit_app\"",
+   "results": "CategoryTheory.Adjunction.localization_unit_app",
+   "date": "2026-10-12",
+   "verdict": "No exact match; listed generic results need additional argument."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*mate|mate.*localization|open_cover.*shortExact",
+   "results": "Mathlib/RingTheory/Ideal/GoingUp.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match; listed generic results need additional argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact localization of adjunctions preserves nested mates",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "localization_unit_app|mapDerivedCategoryCompIso_fac",
+   "results": "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match; listed generic results need additional argument."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: canonical open-cover triangle, Tag 08BT; Tag 08BW (adjunction identification); Mathlib localization unit/counit formulas",
+   "via": [
+    "lem-sc-open-cover-adjunction-triangle",
+    "lem-sc-open-hom-triangle-realization",
+    "lem-sc-derived-hom-mayer-vietoris"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenDerivedMatePresentation",
+  "file": "lean/Sheaf/Algebra/Homology/OpenDerivedMatePresentation.lean",
+  "declaration": "CategoryTheory.Adjunction.derivedPresentation_mate",
+  "declarations": [
+   "CategoryTheory.Adjunction.derivedPresentation_mate",
+   "CategoryTheory.Adjunction.onDerivedCategory",
+   "CategoryTheory.Adjunction.derivedPresentation",
+   "CategoryTheory.Adjunction.derivedPresentation_counit"
+  ],
+  "statement": "theorem derivedPresentation_mate\n    {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{w} C]\n    {L2 : C ⥤ A} {R2 : A ⥤ C} {T : B ⥤ C}\n    [L2.Additive] [R2.Additive] [T.Additive]\n    [PreservesFiniteLimits L2] [PreservesFiniteColimits L2]\n    [PreservesFiniteLimits R2] [PreservesFiniteColimits R2]\n    [PreservesFiniteLimits T] [PreservesFiniteColimits T]\n    (a1 : L ⊣ R) (a2 : L2 ⊣ R2) (c : R ⋙ T ≅ R2)\n    {LD1 : DerivedCategory B ⥤ DerivedCategory A}\n    {LD2 : DerivedCategory C ⥤ DerivedCategory A}\n    (d1 : LD1 ⊣ R.mapDerivedCategory) (d2 : LD2 ⊣ R2.mapDerivedCategory)\n    (K : CochainComplex A ℤ) {E : DerivedCategory A} (e : DerivedCategory.Q.obj K ≅ E)\n    (f : (L2.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n        ((R2.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ⟶\n      (L.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n        ((R.mapHomologicalComplex (ComplexShape.up ℤ)).obj K))\n    (hf : ∀ n, f.f n = (a2.homEquiv _ _).symm\n      (c.inv.app (K.X n) ≫ T.map (a1.unit.app (R.obj (K.X n))) ≫\n        c.hom.app (L.obj (R.obj (K.X n))))) :\n    letI : PreservesFiniteLimits (R ⋙ T) := comp_preservesFiniteLimits R T\n    letI : PreservesFiniteColimits (R ⋙ T) := comp_preservesFiniteColimits R T\n    let cD := (Functor.mapDerivedCategoryCompIso R T).symm ≪≫\n      Functor.mapDerivedCategoryNatIso c\n    let κ := (d2.homEquiv _ _).symm\n      (cD.inv.app E ≫ T.mapDerivedCategory.map\n        (d1.unit.app (R.mapDerivedCategory.obj E)) ≫\n        cD.hom.app (LD1.obj (R.mapDerivedCategory.obj E)))\n    (a2.derivedPresentation d2 K e).hom ≫ DerivedCategory.Q.map f =\n      κ ≫ (a1.derivedPresentation d1 K e).hom",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T173903-L-3305888",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T173903-L-3305888",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

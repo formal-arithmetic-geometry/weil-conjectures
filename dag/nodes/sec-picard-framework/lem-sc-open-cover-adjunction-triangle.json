@@ -14,42 +14,41 @@
  ],
  "proof": [
   {
-   "text": "Use exact extension by zero and restriction from [lem-pur-site-restriction-module-adjunction-exact]. For a representative complex K of E, construct the nested extension maps sectionwise; their transposes are the nested restriction of the unit, conjugated by c_U and c_V. This termwise identity descends along the exact-functor localization comparisons [lem-weil-pbc-exact-functor-derived-factorization].",
+   "text": "Specialize [lem-pur-site-restriction-module-adjunction-exact] to the precoverage underlying the topological site, identifying its generated topology with the original topology. This supplies exact concrete extension-by-zero functors and adjunctions. Choose a representative K of E using essential surjectivity of Q. Apply [lem-sc-open-cover-mate-complex-short-exact] to obtain the complex-level sequence and its canonical degreewise mate formulas.",
    "uses": [
     "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sc-open-cover-mate-complex-short-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the presentation isomorphisms for the three chosen derived left adjoints by localizing each termwise adjunction and using leftAdjointUniq. The proved derivedPresentation_counit equation identifies their counits. Apply [lem-sc-localization-nested-adjunction-mate] to f≫fst and −(f≫snd). Additivity of Q and biproduct extensionality identify the transported first arrow with (κU,−κV). The mapBiprod comparison and the counit equations identify the second arrow with the pair of chosen counits.",
+   "uses": [
+    "lem-sc-localization-nested-adjunction-mate",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false
   },
   {
-   "text": "The canonical termwise extension maps and the pair of counits form a short exact sequence. On the intersection their stalk maps are m ↦ (m,-m) and (m,n) ↦ m+n; on one open only, the nonzero map is the identity. Use [lem-sc-module-extension-by-zero-stalk-maps] for these stalk identifications and [lem-weil-pbc-module-stalk-exact] to reflect exactness. The cover excludes other points.",
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to the obtained short exact sequence. Define δ by conjugating triangleOfSESδ with e and the shift of the inverse overlap presentation. Build Triangle.isoMk from the three presentation isomorphisms and the two verified arrow equations. The third square is cancellation of inverse shifted isomorphisms. Invariance of distinguishedness under triangle isomorphism proves the original statement.",
    "uses": [
-    "lem-sc-module-extension-by-zero-stalk-maps",
-    "lem-weil-pbc-module-stalk-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [lem-weil-pbc-complex-ses-triangle] and transport the resulting triangle along Q K ≅ E and the exact-functor comparison isomorphisms. The previous mate identities identify its first arrow with the displayed difference of mates and its second with the pair of counits. For any chosen adjunctions to the fixed restriction functors, transport along the unique compatible isomorphisms of left adjoints; the unit and counit identities preserve both formulas and distinguishedness.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-weil-pbc-exact-functor-derived-factorization"
+    "lem-weil-pbc-complex-ses-triangle"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sc-module-extension-by-zero-stalk-maps",
+  "lem-sc-localization-nested-adjunction-mate",
+  "lem-sc-open-cover-mate-complex-short-exact",
   "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-module-stalk-exact"
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof_origin": {
   "by": "agent",
   "group": "S3",
   "date": "2026-10-12",
-  "note": "Geometric step of the original open Hom realization plan; Hom and shift identifications are proved in the parent."
+  "note": "Lean reduction to a termwise canonical short exact sequence and generic compatibility of localization with a single nested mate; the counit and triangle transports are proved."
  },
  "mathlib_searches": [
   {
@@ -151,11 +150,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-90cc6",
+  "reviewer": "COMPILER",
   "group": "S3",
   "result": "pass",
-  "landing": "20261012T135316-L-1692291",
+  "landing": "20261012T173903-L-3305888",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the recorded nodes and repository base; both modules and direct importer compiled cleanly, with unchanged target/signatures and permitted axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
