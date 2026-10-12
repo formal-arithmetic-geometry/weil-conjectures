@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-descend-monomorphism",
+ "kind": "statement",
+ "title": "Monomorphisms descend to a stage under a locally finite type hypothesis",
+ "statement": "Let I be a directed preorder, D : I^op -> Schemes an inverse system with affine transition morphisms [pqf-def-affine-morphism], and c an inverse-limit cone [lem-weil-pbc-limit-affine-transition]. Fix i0 in I. Suppose S_i0, X0, and Y0 are quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], and f0 : X0 -> Y0 is a locally finite type morphism [def-weil-finite-type-morphism] over S_i0. If the base change of f0 to the limit is a monomorphism, some base change to S_i, with i >= i0, is a monomorphism.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 07RQ (lemma-descend-monomorphism), lines 2043-2065 in the source read; Situation 081D. The diagonal proof uses Morphisms Tag 02FV and Schemes Remark 0816. To avoid the published 01ZL -> 01ZP dependency, isomorphism descent is instead obtained from finite-stage model comparison using Tag 01ZM, as proved by AlgebraicGeometry.exists_iso_of_isPullback in WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For an ordinary cartesian model q : Z -> S_k, monicity of its limit base change is equivalent to the diagonal of that base change being an isomorphism. Z x_{S_k} Z is qcqs, by qcqs permanence. The diagonal delta_q followed by the first projection equals the identity of Z; the first projection is locally finite type. Cancellation for local finite presentation (WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation.locallyOfFinitePresentation_of_comp, Tag 02FV) gives local finite presentation of delta_q. The formula diagonal_pullback_fst identifies the limit diagonal with the base change of delta_q, with isomorphisms on the two sides. Cancel these isomorphisms to obtain an isomorphism for the base-changed diagonal.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend an isomorphism of a locally finitely presented model q as follows. Transport its cartesian square by the limiting isomorphism, so the limit itself is the common limit model of q and of the identity of S_k. Apply the existing sorry-free AlgebraicGeometry.exists_iso_of_isPullback to these two models. Its proof descends both comparison maps by factorization into locally finitely presented targets and descends their inverse identities by Mathlib Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; these are the map and equality assertions of Tag 01ZM. Choose the stage models to be Z x_{S_k} S_j and S_j itself. The comparison isomorphism e over S_j satisfies e.hom followed by id_{S_j} = pullback.snd q (D.map (j -> k)); hence this projection is an isomorphism. For a morphism between two schemes over S_k, first base change the inverse system to its target and use its identity-stage model. Scheme-over-limit gives a limiting cone and affine transitions; the identity-stage lift is the original morphism composed with an isomorphism. Cartesian pasting identifies the obtained stage projection with the Over.pullback morphism. This is the proved private pair exists_iso_snd and exists_iso_overPullback. No use is made of 01ZL or of closed-immersion descent.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-map-limit-factorization",
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the previous isomorphism-descent argument to delta_q. Reinsert the two canonical isomorphisms in diagonal_pullback_fst at the resulting stage. The stage diagonal is an isomorphism, so pullback.isIso_diagonal_iff makes the stage model monic. Pullback symmetry transfers monicity to the pullback.snd presentation. To treat f0 : X0 -> Y0 over S_i0, use the diagram baseChanged along Y0 -> S_i0, the morphism from X0 to its identity-stage target, and its cartesian square with the limiting Over.pullback map. Quasi-compactness and quasi-separatedness of all models follow from affine transitions and the qcqs hypotheses. The pasting lemma gives an arrow isomorphism between the descended projection and the desired Over.pullback map, preserving monicity. Finally the arrow j -> op i0 gives i0 <= unop j; the inhabited index required for cofilteredness comes from i0 itself.",
+   "uses": [
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-finite-presentation-map-limit-factorization",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-cartesian-square-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 07RQ, diagonal argument, with the isomorphism-descent step replaced by the already proved finite-stage model comparison from Tag 01ZM. The four private helpers are fully proved in the new module; this node has no remaining sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A monomorphism of schemes locally of finite type descends to a finite stage of an inverse limit with affine transition morphisms",
+   "results": "Service unavailable: Internal Server Error. No declaration returned.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monomorphisms descend to some finite stage of a cofiltered limit of schemes with affine transitions for a locally finite type morphism",
+   "results": "Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; Scheme.exists_isAffine_of_isLimit; isAffineHom_pi_app. No monomorphism-descent declaration.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullback.isIso_diagonal_iff",
+   "results": "pullback.isIso_diagonal_iff : IsIso (pullback.diagonal f) iff Mono f; used for the diagonal reduction, not descent itself.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exists_mono.*(stage|limit)|mono.*baseChange_stage in Mathlib, WeilConjectures and Sheaf; rg 07RQ and descend-monomorphism in dag/nodes; blueprint_refs.py search monomorphism and 07RQ",
+   "results": "No existing monomorphism stage-descent declaration or node. Blueprint hits concern Galois categories and sheaf monomorphisms, not this scheme statement. Source exists_iso_of_isPullback supplies a fully proved finite-stage comparison; no new unproved isomorphism-descent theorem is introduced.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing comparison used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DescendClosedImmersion",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Closed-immersion descent in the essential-surjectivity argument, alternatively decomposed into finiteness descent and monomorphism descent (Limits Tags 01ZO and 07RQ).",
+   "via": [
+    "lem-weil-pbc-descend-closed-immersion",
+    "lem-weil-pbc-eventually-proper",
+    "lem-weil-pbc-proper-limit-noetherian",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DescendMonomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendMonomorphism.lean",
+  "declaration": "AlgebraicGeometry.exists_mono_baseChange_stage",
+  "statement": "theorem exists_mono_baseChange_stage\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (g : i ⟶ j), IsAffineHom (D.map g)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))]\n    (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀)\n    [CompactSpace X₀.left] [QuasiSeparatedSpace X₀.left]\n    [CompactSpace Y₀.left] [QuasiSeparatedSpace Y₀.left]\n    [LocallyOfFiniteType f₀.left]\n    (hmono : Mono ((Over.pullback (c.π.app (op i₀))).map f₀).left) :\n    ∃ (i : I) (hi : i₀ ≤ i),\n      Mono ((Over.pullback (D.map (homOfLE hi).op)).map f₀).left",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T063523-L-3161286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T063523-L-3161286",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

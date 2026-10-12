@@ -32,133 +32,41 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (a stage where $f$ is affine).* Write $f_{ii'}:S_i\\to S_{i'}$ ($i\\ge i'$) for the transition morphisms, $f_{ii}=\\mathrm{id}$, and $p_i:S\\to S_i$ for the projections of the limit. A closed immersion is affine [lem-weil-pbc-closed-immersion-integral-separated-uc](b) (Stacks Morphisms, Lemma Tag 01SE), so $f$ is affine [pqf-def-affine-morphism]. By [lem-weil-pbc-descend-affine] (Stacks Limits, Lemma Tag 01ZN) there is $k\\in I$, $k\\ge0$, such that $f_k:X_k\\to Y_k$ is affine. Fix such a $k$. (Source: 'A closed immersion is affine ... Hence by Lemma 01ZN after increasing $0$ we may assume that $f_0$ is affine.')",
+   "text": "A closed immersion is finite and monic, by the full Mathlib criterion IsClosedImmersion.iff_isFinite_and_mono (the theorem recorded by lem-weil-pbc-closed-immersion-finite). Apply lem-weil-pbc-descend-finite to the finite limit morphism, obtaining i >= i0 with f_i finite. Apply lem-weil-pbc-descend-monomorphism to its monicity, obtaining j >= i0 with f_j monic. Both applications retain the locally finite type and qcqs hypotheses unchanged.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-integral-separated-uc",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-descend-affine"
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-descend-monomorphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "proof of Lemma Tag 01ZP (lemma-descend-closed-immersion-finite-presentation, line 1828)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (replacing $0$ by $k$).* Let $T$ be $S_i$ for some $i\\ge k$, with $q_T=f_{ik}:T\\to S_k$, or $S$, with $q_T=p_k$; in both cases $f_{k0}\\circ q_T:T\\to S_0$ is the structure morphism $f_{i0}$, resp. $p_0$. Let $X_T=X_0\\times_{S_0}T$, $Y_T=Y_0\\times_{S_0}T$ and $f_T=f_0\\times\\mathrm{id}_T$ (so $f_T=f_i$, resp. $f$). (a) Apply [lem-weil-pbc-cartesian-square-pasting] to the diagram whose right column is $T\\xrightarrow{q_T}S_k\\xrightarrow{f_{k0}}S_0$, whose left column is $X_T\\to X_k\\to X_0$ (the first map being $(\\mathrm{pr}_1,q_T\\circ\\mathrm{pr}_2)$ into $X_k=X_0\\times_{S_0}S_k$, the second $\\mathrm{pr}_1$), and whose horizontal maps are the second projections $X_T\\to T$, $X_k\\to S_k$, $X_0\\to S_0$: the lower square is cartesian by definition of $X_k$ and the outer rectangle by definition of $X_T$ [def-pc-fibre-product], so the upper square is cartesian, i.e. $X_T$ with $(\\mathrm{pr}_1,q_T\\mathrm{pr}_2)$ and $\\mathrm{pr}_2$ is a fibre product $X_k\\times_{S_k}T$. In the same way $Y_T$ is a fibre product $Y_k\\times_{S_k}T$. Under these identifications $f_T$ and $f_k\\times\\mathrm{id}_T$ are two morphisms into $Y_k\\times_{S_k}T$ with the same components ($\\mathrm{pr}_1$ gives $(f_0\\mathrm{pr}_1,q_T\\mathrm{pr}_2)=f_k\\circ(\\mathrm{pr}_1,q_T\\mathrm{pr}_2)$, $\\mathrm{pr}_2$ gives $\\mathrm{pr}_2$), hence equal: $f_T=f_k\\times\\mathrm{id}_T$. (b) Apply [lem-weil-pbc-cartesian-square-pasting] to the diagram with left column $X_k\\xrightarrow{f_k}Y_k\\to S_k$, right column $X_0\\xrightarrow{f_0}Y_0\\to S_0$ and horizontal maps the first projections: the lower square ($Y_k$ over $S_k$) and the outer rectangle ($X_k$ over $S_k$) are cartesian, so the upper square is: $f_k$ is the base change of $f_0$ along $Y_k\\to Y_0$. Since $f_0$ is locally of finite type, so is $f_k$ by [lem-weil-pbc-lft-base-change].",
+   "text": "Directedness supplies k >= i,j. The functorial identity D( k -> i ) followed by D( i -> i0 ) = D( k -> i0 ), and the natural isomorphism Over.pullbackComp, identify f_k with the pullback of f_i and also with the pullback of f_j. A morphism property stable under base change transfers across this isomorphism: take the arrow isomorphism whose components are those of Over.pullbackComp, and whose commutativity is its naturality. Thus f_k is finite, by finite-morphism permanence, and monic, because pullbacks preserve monomorphisms. This is implemented by the proved private helper property_overPullback_comp; no premise asks for a smallest stage or an inhabitant of any scheme.",
    "uses": [
     "lem-weil-pbc-cartesian-square-pasting",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-lft-base-change"
+    "lem-weil-pbc-finite-morphism-permanence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "proof of Lemma Tag 01ZP (lemma-descend-closed-immersion-finite-presentation, line 1828)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (finitely many affine pieces at stage $k$).* Write $g_0:Y_0\\to S_0$ for the structure morphism. For $y\\in Y_0$ choose an affine open $W\\subseteq S_0$ containing $g_0(y)$ and an affine open $V\\subseteq g_0^{-1}(W)$ containing $y$ ([lem-weil-pbc-affine-open-spec-points]: an affine open is a spectrum, whose principal opens form a basis of affine opens). Since $Y_0$ is quasi-compact [def-weil-pbc-scheme-conventions], finitely many such pairs $(W_b,V_b)$, $b=1,\\dots,m$, satisfy $Y_0=\\bigcup_bV_b$, $g_0(V_b)\\subseteq W_b$. Fix $b$ and drop it from the notation. Put $W_k=f_{k0}^{-1}(W)\\subseteq S_k$, an affine open since $f_{k0}$ is affine [pqf-def-affine-morphism], and $V_k=\\mathrm{pr}_1^{-1}(V)\\subseteq Y_k$. As $f_{k0}\\mathrm{pr}_2=g_0\\mathrm{pr}_1$ maps $V_k$ into $W$, $\\mathrm{pr}_2(V_k)\\subseteq W_k$, so $V_k=\\mathrm{pr}_1^{-1}(V)\\cap\\mathrm{pr}_2^{-1}(W_k)\\cong V\\times_WW_k$ by [lem-weil-pbc-open-fibre-product], which is affine by [lem-weil-pbc-fibre-product-affine-spectra]; the $V_{b,k}$ cover $Y_k$ (preimages of a covering) and $V_k$ maps into $W_k$. Since $f_k$ is affine (step 1), $U_k=f_k^{-1}(V_k)$ is an affine open of $X_k$ [pqf-def-affine-morphism]. Put $A_k=\\mathcal O_{S_k}(W_k)$, $B_k=\\mathcal O_{Y_k}(V_k)$, $C_k=\\mathcal O_{X_k}(U_k)$, with the ring maps $A_k\\to B_k$ and $\\varphi_k:B_k\\to C_k$ induced by the structure morphism of $Y_k$ and by $f_k$; by [lem-weil-pbc-morphism-into-affine-scheme], under the identifications of [lem-weil-pbc-affine-open-spec-points] the restrictions $U_k\\to V_k\\to W_k$ are $\\operatorname{Spec}$ of these maps. As $f_k$ is locally of finite type (step 2) and $f_k(U_k)\\subseteq V_k$, $\\varphi_k$ is of finite type by [lem-weil-pbc-lft-affine-pairs]. (Only the quasi-compactness of $Y_0$ is used here.)",
+   "text": "Apply the reverse implication of the same Mathlib finite-monomorphism criterion to f_k. Return k together with i0 <= i <= k.",
    "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "def-weil-pbc-scheme-conventions",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "lem-weil-pbc-lft-affine-pairs"
+    "lem-weil-pbc-closed-immersion-finite"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "proof of Lemma Tag 01ZP (lemma-descend-closed-immersion-finite-presentation, line 1828)"
-   }
-  },
-  {
-   "text": "*Step 4 (the base over $W_k$ as a colimit of rings).* For $i\\ge k$ put $W_i=f_{ik}^{-1}(W_k)$, an affine open of $S_i$ ($f_{ik}$ is affine [pqf-def-affine-morphism]), $A_i=\\mathcal O_{S_i}(W_i)$, and for $i\\ge i'\\ge k$ let $A_{i'}\\to A_i$ be induced by $f_{ii'}$; by [lem-weil-pbc-morphism-into-affine-scheme] the restricted transition morphisms are $\\operatorname{Spec}$ of these maps, and $(A_i)_{i\\ge k}$ is a directed system over the directed set $I_{\\ge k}$. Let $A=\\varinjlim_{i\\ge k}A_i$ [def-weil-pbc-category-colimit] and $W_S=p_k^{-1}(W_k)$. By [lem-weil-pbc-limit-affine-transition] (the clause on open subschemes, with $k$ as the base index and $U_0=W_k$) $W_S$ is the limit of $(W_i)_{i\\ge k}$, and by [lem-weil-pbc-spec-colimit-limit] so is $\\operatorname{Spec}A$ with the coprojections; uniqueness of limits gives $W_S\\cong\\operatorname{Spec}A$, under which $p_k|_{W_S}$ is $\\operatorname{Spec}(A_k\\to A)$. Write $A_T=A_i$, $W_T=W_i$ for $T=S_i$ and $A_T=A$, $W_T=W_S$ for $T=S$; then $W_T=q_T^{-1}(W_k)=\\operatorname{Spec}A_T$ over $W_k=\\operatorname{Spec}A_k$.",
-   "uses": [
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-spec-colimit-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "proof of Lemma Tag 01ZP (lemma-descend-closed-immersion-finite-presentation, line 1828)"
-   }
-  },
-  {
-   "text": "*Step 5 (the pieces of $f_T$ are spectra).* Let $T$ be as in step 2 and identify $X_T=X_k\\times_{S_k}T$, $Y_T=Y_k\\times_{S_k}T$, $f_T=f_k\\times\\mathrm{id}_T$ (step 2(a)). Put $V_T=\\mathrm{pr}_1^{-1}(V_k)\\subseteq Y_T$ and $U_T=\\mathrm{pr}_1^{-1}(U_k)\\subseteq X_T$. Since $\\mathrm{pr}_1\\circ f_T=f_k\\circ\\mathrm{pr}_1$ and $U_k=f_k^{-1}(V_k)$, we have $U_T=f_T^{-1}(V_T)$. As in step 3, $\\mathrm{pr}_2(U_T)\\subseteq W_T$ and $\\mathrm{pr}_2(V_T)\\subseteq W_T$, so [lem-weil-pbc-open-fibre-product] identifies $U_T=U_k\\times_{W_k}W_T$ and $V_T=V_k\\times_{W_k}W_T$, and [lem-weil-pbc-fibre-product-affine-spectra] gives $U_T\\cong\\operatorname{Spec}(A_T\\otimes_{A_k}C_k)$ and $V_T\\cong\\operatorname{Spec}(A_T\\otimes_{A_k}B_k)$, the projections becoming $\\operatorname{Spec}$ of $c\\mapsto1\\otimes c$, $a\\mapsto a\\otimes1$ (factors swapped by the symmetry of $\\otimes$). The restriction $f_T|:U_T\\to V_T$ and $\\operatorname{Spec}(\\mathrm{id}_{A_T}\\otimes\\varphi_k)$ are two morphisms into $V_T\\cong V_k\\times_{W_k}W_T$ with the same two components ($f_k|_{U_k}\\circ\\mathrm{pr}_1$ and $\\mathrm{pr}_2$), hence equal; so, under these isomorphisms, $f_T|$ is $\\operatorname{Spec}$ of $\\varphi_T=\\mathrm{id}_{A_T}\\otimes\\varphi_k:B_T=A_T\\otimes_{A_k}B_k\\to C_T=A_T\\otimes_{A_k}C_k$, and by [lem-weil-pbc-morphism-into-affine-scheme] the ring map $\\mathcal O_{Y_T}(V_T)\\to\\mathcal O_{X_T}(U_T)=\\mathcal O_{X_T}(f_T^{-1}(V_T))$ induced by $f_T$ is $\\varphi_T$ composed on both sides with ring isomorphisms. For $T=S_i$ the opens $V^b_{S_i}$, $b=1,\\dots,m$, cover $Y_i$, being the preimages of the covering $Y_k=\\bigcup_bV_{b,k}$ (step 3).",
-   "uses": [
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-morphism-into-affine-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "proof of Lemma Tag 01ZP (lemma-descend-closed-immersion-finite-presentation, line 1828)"
-   }
-  },
-  {
-   "text": "*Step 6 (the hypothesis on the piece over $S$).* Take $T=S$ in step 5. $V_S$ is an affine open of $Y$ with $f^{-1}(V_S)=U_S$; since $f$ is a closed immersion, the ring map $\\mathcal O_Y(V_S)\\to\\mathcal O_X(U_S)$ induced by $f$ is surjective by [lem-weil-pbc-closed-immersion-affine-cover-criterion](1). By step 5 it equals $\\beta\\circ\\varphi\\circ\\alpha$ with ring isomorphisms $\\alpha,\\beta$ and $\\varphi=\\mathrm{id}_A\\otimes\\varphi_k:A\\otimes_{A_k}B_k\\to A\\otimes_{A_k}C_k$; hence $\\varphi=\\beta^{-1}\\circ(\\beta\\varphi\\alpha)\\circ\\alpha^{-1}$ is surjective.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "proof of Lemma Tag 01ZP (lemma-descend-closed-immersion-finite-presentation, line 1828)"
-   }
-  },
-  {
-   "text": "*Step 7 (the algebra fact, and larger indices).* By steps 3 and 6, the directed system $(A_i)_{i\\ge k}$ with colimit $A$ (step 4), the index $k$ and the $A_k$-algebra map $\\varphi_k:B_k\\to C_k$ of finite type satisfy the hypotheses of [lem-weil-pbc-colimit-surjective-ring-map] (Stacks Algebra, Lemma Tag 07RH, with $k$ in place of $0$); so there is $i_b\\ge k$ such that $\\varphi_{i_b}:B_{i_b}\\to C_{i_b}$ is surjective. This persists for every $i\\ge i_b$: let $\\tau:A_{i_b}\\to A_i$ be the transition map; $\\tau\\otimes\\mathrm{id}$ gives ring maps $B_{i_b}\\to B_i$, $C_{i_b}\\to C_i$ with $\\varphi_i\\circ(\\tau\\otimes\\mathrm{id})=(\\tau\\otimes\\mathrm{id})\\circ\\varphi_{i_b}$ (both send $a\\otimes b\\mapsto\\tau(a)\\otimes\\varphi_k(b)$). For $c\\in C_k$ write $1\\otimes c=\\varphi_{i_b}(\\beta)$ with $\\beta\\in B_{i_b}$; applying $\\tau\\otimes\\mathrm{id}$, $1\\otimes c=\\varphi_i(\\bar\\beta)$ in $C_i$, hence $a\\otimes c=(a\\otimes1)(1\\otimes c)=\\varphi_i\\big((a\\otimes1)\\bar\\beta\\big)$ for $a\\in A_i$ (as $a\\otimes1=\\varphi_i(a\\otimes1)$). Since the $a\\otimes c$ span $C_i$ additively and $\\varphi_i$ is additive, $\\varphi_i$ is surjective. (Source: 'The corresponding algebra statement is a consequence of Algebra, Lemma 07RH'.)",
-   "uses": [
-    "lem-weil-pbc-colimit-surjective-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 07RH (lemma-colimit-surjective, line 47547), applied as in the proof of Limits Lemma Tag 01ZP"
-   }
-  },
-  {
-   "text": "*Step 8 (a common index; $f_i$ is a closed immersion).* $I$ is directed and there are finitely many $b$, so there is $i\\in I$ with $i\\ge i_b$ for $b=1,\\dots,m$ (hence $i\\ge k\\ge0$; any $i\\ge k$ if $m=0$). Take $T=S_i$ in step 5. For each $b$, $V^b_{S_i}$ is an affine open of $Y_i$, $f_i^{-1}(V^b_{S_i})=U^b_{S_i}$ is affine, and the ring map $\\mathcal O_{Y_i}(V^b_{S_i})\\to\\mathcal O_{X_i}(U^b_{S_i})$ induced by $f_i$ is $\\varphi^b_i$ composed on both sides with ring isomorphisms, hence surjective by step 7. The $V^b_{S_i}$ cover $Y_i$ (step 5), so $f_i$ is a closed immersion by [lem-weil-pbc-closed-immersion-affine-cover-criterion](2) (Stacks Morphisms, Lemma Tag 01QO).",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "proof of Lemma Tag 01ZP (lemma-descend-closed-immersion-finite-presentation, line 1828)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-integral-separated-uc",
-  "pqf-def-affine-morphism",
-  "lem-weil-pbc-descend-affine",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-descend-monomorphism",
   "lem-weil-pbc-cartesian-square-pasting",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-lft-base-change",
-  "lem-weil-pbc-affine-open-spec-points",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-morphism-into-affine-scheme",
-  "lem-weil-pbc-lft-affine-pairs",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-spec-colimit-limit",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-  "lem-weil-pbc-colimit-surjective-ring-map"
+  "lem-weil-pbc-finite-morphism-permanence"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "proof of Lemma Tag 01ZP (lemma-descend-closed-immersion-finite-presentation, line 1828), with Morphisms Lemmas Tag 01SE and 01QO, Limits Lemma Tag 01ZN and Algebra Lemma Tag 07RH; the reduction to the affine case, which the source only sketches ('By writing $Y_0$ as a finite union of affines we reduce ...'), is written out by the agent after the reviewed sibling lem-weil-pbc-descend-finite (Limits 01ZO), whose steps 2-5 are reused verbatim"
+  "place": "Alternative proof of Tag 01ZP from Tags 01ZO and 07RQ, combined with Mathlib IsClosedImmersion.iff_isFinite_and_mono; V1, 2026-10-12. The monomorphism component uses the diagonal argument of 07RQ, with finite-stage model comparison from 01ZM instead of the published 01ZL argument, avoiding a circular dependency on 01ZP."
  },
  "mathlib_searches": [
   {
@@ -235,5 +143,15 @@
   "group": "F1",
   "result": "fix",
   "note": "I directed preorder now Type u (was independent Type v); D affine transitions IsAffineHom; c+IsLimit; S0,X0,Y0 CompactSpace+QuasiSeparatedSpace; f0 Over-morphism LocallyOfFiniteType; hf IsClosedImmersion of Over.pullback along c.π; concl ∃ i≥i0 IsClosedImmersion of Over.pullback along D.map; #check names"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T063523-L-3161286",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

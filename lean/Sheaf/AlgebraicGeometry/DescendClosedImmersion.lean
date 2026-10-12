@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Sheaf.AlgebraicGeometry.DescendAffine
-import Sheaf.Paper.ColimitSurjectiveRingMap
+import Sheaf.AlgebraicGeometry.DescendFinite
+import Sheaf.AlgebraicGeometry.DescendMonomorphism
 
 /-!
 # Descent of closed immersions to a stage of an inverse limit
@@ -25,6 +25,19 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private theorem property_overPullback_comp
+    (P : MorphismProperty Scheme.{u}) [P.IsStableUnderBaseChange]
+    {S T U : Scheme.{u}} (a : U ⟶ T) (b : T ⟶ S)
+    {X Y : Over S} (f : X ⟶ Y)
+    (h : P ((Over.pullback b).map f).left) :
+    P ((Over.pullback (a ≫ b)).map f).left := by
+  have h' := P.overPullbackMap a ((Over.pullback b).map f) h
+  let e := Over.pullbackComp a b
+  let eX := (Over.forget U).mapIso (e.app X)
+  let eY := (Over.forget U).mapIso (e.app Y)
+  apply (P.arrow_mk_iso_iff (Arrow.isoMk eX eY ?_)).mpr h'
+  exact (congrArg Over.Hom.left (e.hom.naturality f)).symm
+
 /-- A locally finite type morphism between quasi-compact quasi-separated schemes over a
 quasi-compact quasi-separated stage becomes a closed immersion at some later stage if its
 base change to the limit is a closed immersion.
@@ -33,29 +46,11 @@ Source: Stacks Project, Limits, Tag 01ZP, in Situation 081D
 (blueprint: lem-weil-pbc-descend-closed-immersion).
 
 Proof:
-1. A closed immersion is affine (lem-weil-pbc-closed-immersion-integral-separated-uc).
-   Descend affineness to a stage k ≥ i₀ using lem-weil-pbc-descend-affine.
-2. Replace i₀ by k. Cartesian square pasting identifies all later base changes with the
-   original ones (lem-weil-pbc-cartesian-square-pasting), and local finite type persists
-   by lem-weil-pbc-lft-base-change.
-3. Cover Y₀ by finitely many affine opens mapping into affine opens of S₀. At stage k
-   their preimages and inverse images under fₖ are affine, with finite type ring maps
-   (lem-weil-pbc-affine-open-spec-points, lem-weil-pbc-open-fibre-product,
-   lem-weil-pbc-fibre-product-affine-spectra, lem-weil-pbc-morphism-into-affine-scheme,
-   lem-weil-pbc-lft-affine-pairs).
-4. Over each affine base open, the limit is the spectrum of the colimit of the stage
-   rings (lem-weil-pbc-limit-affine-transition, lem-weil-pbc-spec-colimit-limit).
-5. Identify the affine pieces of every base change with the spectra of the corresponding
-   tensor products; the morphism is induced by the base-changed ring map
-   (lem-weil-pbc-open-fibre-product, lem-weil-pbc-fibre-product-affine-spectra,
-   lem-weil-pbc-morphism-into-affine-scheme).
-6. At the limit these ring maps are surjective by the closed immersion hypothesis
-   (lem-weil-pbc-closed-immersion-affine-cover-criterion).
-7. Surjectivity descends to a stage on each piece by lem-weil-pbc-colimit-surjective-ring-map
-   (Stacks 07RH), and persists under further base change.
-8. Directedness gives a common upper bound for the finitely many stages, also above k
-   when the cover is empty. The affine cover criterion then makes the morphism at that
-   stage a closed immersion (lem-weil-pbc-closed-immersion-affine-cover-criterion). -/
+A closed immersion is finite and monic. Descend these two properties separately
+(Stacks Limits, Tags 01ZO and 07RQ). Directedness gives a common upper stage.
+Pullback composition identifies its morphism with a base change of either descended
+morphism, so it is finite and monic there. The finite-monomorphism criterion gives a
+closed immersion. -/
 theorem exists_isClosedImmersion_stage_of_locallyOfFiniteType
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -70,6 +65,29 @@ theorem exists_isClosedImmersion_stage_of_locallyOfFiniteType
     ∃ (i : I) (h : i₀ ≤ i),
       IsClosedImmersion
         ((Over.pullback (D.map (homOfLE h).op)).map f₀).left := by
-  sorry
+  have : IsClosedImmersion ((Over.pullback (c.π.app (op i₀))).map f₀).left := hf
+  obtain ⟨i, hi, hfinite⟩ := exists_isFinite_baseChange_stage D c hc i₀ X₀ Y₀ f₀
+    (inferInstance : IsFinite ((Over.pullback (c.π.app (op i₀))).map f₀).left)
+  obtain ⟨j, hj, hmono⟩ := exists_mono_baseChange_stage D c hc i₀ X₀ Y₀ f₀
+    (inferInstance : Mono ((Over.pullback (c.π.app (op i₀))).map f₀).left)
+  obtain ⟨k, hik, hjk⟩ := exists_ge_ge i j
+  refine ⟨k, hi.trans hik, ?_⟩
+  apply (IsClosedImmersion.iff_isFinite_and_mono _).mpr
+  constructor
+  · have H := property_overPullback_comp (@IsFinite)
+      (D.map (homOfLE hik).op) (D.map (homOfLE hi).op) f₀ hfinite
+    have he : D.map (homOfLE hik).op ≫ D.map (homOfLE hi).op =
+        D.map (homOfLE (hi.trans hik)).op := by
+      rw [← Functor.map_comp]
+      rfl
+    rwa [he] at H
+  · have H := property_overPullback_comp (MorphismProperty.monomorphisms Scheme.{u})
+      (D.map (homOfLE hjk).op) (D.map (homOfLE hj).op) f₀ hmono
+    have he : D.map (homOfLE hjk).op ≫ D.map (homOfLE hj).op =
+        D.map (homOfLE (hi.trans hik)).op := by
+      rw [← Functor.map_comp]
+      rfl
+    rw [he] at H
+    exact H
 
 end AlgebraicGeometry
