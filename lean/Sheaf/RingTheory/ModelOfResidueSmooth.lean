@@ -5,6 +5,9 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Sheaf.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.FormallySmoothAdicLift
+import Sheaf.RingTheory.FormallySmoothAdicULift
+import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.RingTheory.AdicCompletion.Topology
 
 @[expose] public section
 
@@ -53,7 +56,47 @@ theorem model_of_residue_smooth
         Algebra.FormallySmoothAdic A₀ C (IsLocalRing.maximalIdeal C) ∧
         ∃ θ : C →+* E, Function.Surjective θ ∧
           RingHom.ker θ = (IsLocalRing.maximalIdeal A₀).map γ ∧
-          θ.comp γ = algebraMap A₀ E := by sorry
+          θ.comp γ = algebraMap A₀ E := by
+  let _ := A
+  obtain ⟨C, _, _, _, _, _, γ, hγ, hlocal, hfs, σ, hσ⟩ :=
+    Algebra.exists_formallySmoothAdic_lift_residue_field A₀ E hE
+  let B := ULift.{v} C
+  let e : B ≃ₐ[A₀] C := ULift.algEquiv
+  let : IsLocalRing B := e.symm.toRingEquiv.isLocalRing
+  have hmax : (IsLocalRing.maximalIdeal C).map e.symm.toRingHom =
+      IsLocalRing.maximalIdeal B := IsLocalRing.map_ringEquiv_maximalIdeal e.symm.toRingEquiv
+  have hnoeth : IsNoetherianRing B := isNoetherianRing_of_ringEquiv C e.symm.toRingEquiv
+  have hcomplete : IsAdicComplete (IsLocalRing.maximalIdeal B) B := by
+    rw [← hmax]
+    exact (IsAdicComplete.congr_ringEquiv _ e.symm.toRingEquiv).mpr inferInstance
+  have hfsB : Algebra.FormallySmoothAdic A₀ B (IsLocalRing.maximalIdeal B) := by
+    rw [← hmax]
+    exact Algebra.formallySmoothAdic_ulift (IsLocalRing.maximalIdeal C) hfs
+  let θ₀ : C →+* E := σ.toRingHom.comp
+    (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A₀).map γ))
+  let θ : B →+* E := θ₀.comp e.toRingHom
+  have hθ₀ : RingHom.ker θ₀ = (IsLocalRing.maximalIdeal A₀).map γ := by
+    rw [RingHom.ker_comp_of_injective _ σ.injective, Ideal.mk_ker]
+  have hγmap : e.symm.toRingHom.comp γ = algebraMap A₀ B := by
+    rw [← hγ]
+    ext a
+    exact congrArg ULift.down (e.symm.commutes a)
+  have hlocalB : IsLocalHom (algebraMap A₀ B) := by
+    let := hlocal
+    have : IsLocalHom e.symm.toRingHom :=
+      IsLocalHom.of_surjective _ e.symm.surjective
+    rw [← hγmap]
+    exact RingHom.isLocalHom_comp _ _
+  refine ⟨B, inferInstance, inferInstance, inferInstance, hnoeth, hcomplete,
+    algebraMap A₀ B, rfl, hlocalB, hfsB, θ, ?_, ?_, ?_⟩
+  · exact (σ.surjective.comp Ideal.Quotient.mk_surjective).comp e.surjective
+  · change (RingHom.ker θ₀).comap e.toRingHom = _
+    rw [hθ₀, ← hγmap, ← Ideal.map_map]
+    exact (Ideal.map_symm e.toRingEquiv).symm
+  · ext a
+    change θ₀ (e (algebraMap A₀ B a)) = algebraMap A₀ E a
+    rw [e.commutes]
+    exact hσ a
 
 
 end RingHom

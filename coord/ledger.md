@@ -10028,3 +10028,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:08 L: merged deliver/Q1/Sheaf.RingTheory.SemilocalNormalizationDimOne (stage 3; reviewer PASS; first push; landing 20261012T230802-L-1910363 (proof); batch 20261012T230749; modules 1; new nodes 0)
 - 23:08 L: merged deliver/Q3/Sheaf.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology (stage 3; reviewer PASS; first push; landing 20261012T230802-L-1910506 (interface); batch 20261012T230749; modules 4; new nodes 3)
 - 23:08 L: merged deliver/S3/Sheaf.AlgebraicGeometry.LocalDirectImageStalkCohomology (stage 3; reviewer PASS; first push; landing 20261012T230802-L-1910647 (interface); batch 20261012T230749; modules 4; new nodes 3)
+- 23:08 L: merged deliver/T2/Sheaf.RingTheory.ModelOfResidueSmooth (stage 3; reviewer PASS; first push; landing 20261012T230803-L-1910984 (interface); batch 20261012T230749; modules 2; new nodes 1)
