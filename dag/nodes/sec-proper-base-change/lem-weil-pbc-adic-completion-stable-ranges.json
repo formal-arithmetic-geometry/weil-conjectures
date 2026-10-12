@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-adic-completion-stable-ranges",
+ "kind": "statement",
+ "title": "Completion is the limit of a system with stable ranges and cofinal kernels",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, $H$ an $A$-module, and $M:\\mathbb N^{\\mathrm{op}}\\to\\operatorname{Mod}_A$ an inverse system [def-weil-inverse-system], whose index $n$ represents level $n+1$. Suppose $\\rho_n:H\\to M_n$ and $\\theta_n:H/I^{n+1}H\\to M_n$ are $A$-linear maps with $\\theta_n\\circ\\mathrm{mkQ}=\\rho_n$, and $\\theta_n$ commute with all transitions. Suppose $c\\in\\mathbb N$ satisfies $\\ker\\rho_{n+c}\\subseteq I^{n+1}H$ and $\\operatorname{range}(M_{n+c}\\to M_n)=\\operatorname{range}\\rho_n$ for every $n$. Then there is an $A$-linear isomorphism $e:H^\\wedge\\xrightarrow\\sim\\varprojlim M_n$ [def-weil-pbc-adic-completion] whose projection at $n$ is $\\theta_n\\circ\\operatorname{eval}_{n+1}$. No Noetherian or finiteness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02OC, theorem-formal-functions, inverse-limit argument after Lemma 02OB; parent proof steps 3--6"
+ },
+ "stmt_deps": [
+  "def-weil-inverse-system",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Factoring through the quotient and transition compatibility give $(M_m\\to M_n)\\rho_m=\\rho_n$. The maps $\\theta_n\\operatorname{eval}_{n+1}$ form a cone, hence induce a canonical linear map $\\phi:H^\\wedge\\to\\lim M$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Injectivity: if $\\phi(x)=0$, lift the component $x_{n+c+1}$ to $y\\in H$. Its image under $\\rho_{n+c}$ vanishes by the projection equation and factorization. The kernel bound puts $y$ in $I^{n+1}H\\subseteq I^nH$. Compatibility therefore gives $x_n=0$ for every $n$, including $0$.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Surjectivity: for $z\\in\\lim M$, use stabilized ranges to choose $y_n\\in H$ with $\\rho_{n+c}(y_n)=z_{n+c}$. If $m\\le n$, compatibility shows $y_n-y_m\\in\\ker\\rho_{m+c}\\subseteq I^{m+1}H\\subseteq I^mH$. Thus $x_n=y_n\\bmod I^nH$ is a compatible family defining an element of $H^\\wedge$. At positive level $n+1$ its image under $\\theta_n$ is $\\rho_n(y_{n+1})=z_n$. Hence $\\phi$ is surjective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The bijective linear map induces a linear equivalence and a ModuleCat isomorphism. The projection equations are the limit-lift equations of the constructed cone.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02OC, theorem-formal-functions, inverse-limit argument after Lemma 02OB; parent proof steps 3--6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An inverse system of modules with stable images of maps from a fixed module and kernels cofinal with ideal powers has limit isomorphic to adic completion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse system with stable ranges and kernels cofinal with powers of an ideal is isomorphic to adic completion",
+   "results": "AdicCompletion.ofLinearEquiv, IsAdicComplete, Hausdorffification, AdicCompletion.of_apply, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.of_bijective_iff, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cofinal|stable.*range|range.*stable",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TheoremFormalFunctions",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7, the formal-functions input to finite etale lifting: Tag 02OC, theorem-formal-functions, inverse-limit argument after Lemma 02OB; parent proof steps 3--6",
+   "via": [
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Module.AdicCompletionStableRanges",
+  "file": "lean/Sheaf/Algebra/Module/AdicCompletionStableRanges.lean",
+  "declaration": "adicCompletion_iso_of_stable_ranges",
+  "statement": "theorem adicCompletion_iso_of_stable_ranges {A : Type u} [CommRing A]\n    (I : Ideal A) (H : ModuleCat.{u} A) (M : ℕᵒᵖ ⥤ ModuleCat.{u} A)\n    (ρ : ∀ n : ℕ, H →ₗ[A] M.obj (op n))\n    (θ : ∀ n : ℕ, (H ⧸ (I ^ (n + 1) • ⊤ : Submodule A H)) →ₗ[A]\n      M.obj (op n))\n    (hθ : ∀ n, (θ n).comp (Submodule.mkQ (I ^ (n + 1) • ⊤)) = ρ n)\n    (htrans : ∀ (n m : ℕ) (h : n ≤ m),\n      (M.map (homOfLE h).op).hom.comp (θ m) =\n        (θ n).comp (AdicCompletion.transitionMap I H (Nat.succ_le_succ h)))\n    (c : ℕ)\n    (hker : ∀ n : ℕ, LinearMap.ker (ρ (n + c)) ≤\n      I ^ (n + 1) • (⊤ : Submodule A H))\n    (hrange : ∀ n : ℕ, Set.range (M.map (homOfLE (Nat.le_add_right n c)).op).hom =\n      Set.range (ρ n)) :\n    ∃ e : ModuleCat.of A (AdicCompletion I H) ≅ limit M,\n      ∀ n : ℕ, e.hom ≫ limit.π M (op n) =\n        ModuleCat.ofHom ((θ n).comp (AdicCompletion.eval I H (n + 1)))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T173833-L-3297708",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T173833-L-3297708",
+  "kind": "interface"
+ }
+}
