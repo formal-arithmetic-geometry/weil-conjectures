@@ -8255,3 +8255,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:42 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct (stage 3; reviewer PASS; after a return; landing 20261012T144202-L-2113534 (interface); batch 20261012T144049; modules 1; new nodes 0; change records: coord/changes/etale-sheaf-clopen-product-imports.md)
 - 14:42 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.ModuleCechLiftSquares (stage 3; reviewer PASS; first push; landing 20261012T144203-L-2113655 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:42 L: merged deliver/Y3/Sheaf.RingTheory.EssentiallySmoothComp (stage 3; reviewer PASS; first push; landing 20261012T144203-L-2113794 (interface); batch 20261012T144049; modules 2; new nodes 1)
+- 14:42 L: merged deliver/Y3/Sheaf.RingTheory.FlatOverRegular (stage 3; reviewer PASS; first push; landing 20261012T144203-L-2113915 (proof); batch 20261012T144049; modules 1; new nodes 0)
