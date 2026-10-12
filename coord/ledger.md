@@ -8084,3 +8084,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/F2/Sheaf.AlgebraicTopology.SetCechNerveFreeResolution (stage 3; reviewer PASS; first push; landing 20261012T144107-L-2093722 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/F2/Sheaf.ConstructibleSheaf.TorsorSectionEvaluation (stage 3; reviewer PASS; first push; landing 20261012T144108-L-2093819 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/F2/Sheaf.RingTheory.ZariskisMainAway (stage 3; reviewer PASS; first push; landing 20261012T144108-L-2093965 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/F2/WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex (stage 3; reviewer PASS; first push; landing 20261012T144108-L-2094105 (interface); batch 20261012T144049; modules 3; new nodes 3)

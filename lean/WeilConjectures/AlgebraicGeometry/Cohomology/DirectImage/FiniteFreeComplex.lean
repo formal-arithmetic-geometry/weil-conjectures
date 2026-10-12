@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.ProperFlatCechModel
+import Sheaf.AlgebraicGeometry.FlatModelFiniteFreeShortening
 import Sheaf.AlgebraicGeometry.FiniteFreeResidueLocusOpen
 import Sheaf.AlgebraicGeometry.FiniteFreePullbackResidueCriterion
 
@@ -143,8 +145,18 @@ theorem exists_isFiniteFreeComplex_higherDirectImage (hℱ : ℱ.IsFlatOver f) (
       ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
         [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
-          (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) :=
-  sorry
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) := by
+    obtain ⟨U, C, Q, d, ht, hCge, hCle, hCflat, hQle, hQfree, ⟨e, he⟩, hC⟩ :=
+      exists_proper_flat_cech_model f ℱ hℱ t
+    obtain ⟨V, hVU, P, htV, hPge, hPle, hPfree, hPC⟩ :=
+      exists_local_finiteFree_shortening U C Q d hCge hCle hCflat hQle hQfree e he t ht
+    refine ⟨V, P, d, htV, ⟨hPge, hPle, hPfree⟩, ?_⟩
+    intro T' X' g g' f' _ sq q
+    obtain ⟨ePC⟩ := hPC g q
+    have sqU : IsPullback g' f' f ((g ≫ T.homOfLE hVU) ≫ U.ι) := by
+      simpa only [Category.assoc, Scheme.homOfLE_ι] using sq
+    obtain ⟨eC⟩ := hC (g ≫ T.homOfLE hVU) g' f' sqU q
+    exact ⟨ePC ≪≫ eC⟩
 
 /-- **Finiteness of the cohomology of a proper morphism over a Noetherian affine base.** With
 `f : X ⟶ T` proper, `T` affine with Noetherian ring of global sections `Γ(T, ⊤)` and `ℱ` a coherent

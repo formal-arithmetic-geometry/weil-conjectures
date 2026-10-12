@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-universal-finite-free-complex",
+ "kind": "statement",
+ "title": "Universal local finite-free models of proper relatively flat direct images",
+ "statement": "For a proper finitely presented f:X→T [def-pc-morphism-conventions] and a finitely presented O_X-module F flat over T, every t∈T has an open neighbourhood V and a termwise finite-free complex P of O_V-modules [def-weil-pbc-free-module] supported in [0,d] for some natural number d. For every cartesian base change f′:X′→T′ along g:T′→V→T, H^q(g^*P) is isomorphic to R^q f′_*F′ for every q≥0. The isomorphisms are not asserted canonical or functorial.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0A1H and 0B91; Tag 064U; coherence unit sk-thm-picard-coherence, proof part (a)"
+ },
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Use lem-pc-proper-flat-cech-model to choose U,C,Q,d, the quasi-isomorphism e and the universal comparisons for C.",
+   "uses": [
+    "lem-pc-proper-flat-cech-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-pc-flat-model-finite-free-shortening at t to obtain V≤U and P. Its structural properties are precisely IsFiniteFreeComplex P d.",
+   "uses": [
+    "lem-pc-flat-model-finite-free-shortening"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a cartesian square over g:T′→V, composition with the open inclusion V→U gives the square over U, since (V→U)≫U.ι=V.ι. Compose the homology isomorphism H^q(g^*P)≅H^q((g≫V→U)^*C) with the universal C comparison to R^q f′_*F′.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-flat-cech-model",
+  "lem-pc-flat-model-finite-free-shortening"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0A1H and 0B91; Tag 064U; coherence unit sk-thm-picard-coherence, proof part (a)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded flat pseudo coherent complex finite free replacement nonnegative Tor amplitude",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper pushforward of a flat finitely presented sheaf locally computed by bounded finite free complex compatible with arbitrary base change",
+   "results": "SheafOfModules.IsFinitePresentation and flat morphism base-change results; no complex construction or shortening theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsStrictlyGE",
+   "results": "Support and truncation API, including isStrictlyGE_iff and exists_iso_single; no finite free replacement",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.free.*complex|complex.*finite.free|IsFlatOver",
+   "results": "msearch: zero Mathlib hits. Local rg: ring pseudo-coherent finite-free model, derived flat pullback and approximation modules. These use ring/derived carriers rather than the ordinary module-complex interface here; several import DirectImage and would create an import cycle. Blueprint search: no duplicate of either new interface.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Associated coherence unit sk-thm-picard-coherence, proof paragraph, part (a): the flat Cech complex, Mumford replacement and Noetherian approximation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "state": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage/FiniteFreeComplex.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage",
+  "statement": "theorem exists_isFiniteFreeComplex_higherDirectImage (hℱ : ℱ.IsFlatOver f) (t : T) : ∃ (U : T.Opens) (P : CochainComplex U.toScheme.Modules ℤ) (d : ℕ), t ∈ U ∧ IsFiniteFreeComplex P d ∧ ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ, Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅ (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T144108-L-2094105",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T144108-L-2094105",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
