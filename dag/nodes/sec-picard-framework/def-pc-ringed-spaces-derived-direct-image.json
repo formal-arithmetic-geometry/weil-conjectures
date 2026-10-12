@@ -26,9 +26,51 @@
   "prop-pur-kinjective-resolutions-exist",
   "lem-weil-pbc-kinjective-hom-derived"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Specialize SheafOfModules.pushforward to the morphism of ringed spaces. Addition on morphisms is sectionwise, so moduleDirectImage_additive_proof is definitional. Install the Grothendieck instance from prop-pur-kinjective-resolutions-exist and use CochainComplex.kInjectiveResolutionFunctor and toKInjectiveResolution for I and its natural quasi-isomorphism eta.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a quasi-isomorphism s, naturality eta_K followed by I(s) = s followed by eta_L and two-out-of-three imply that I(s) is a quasi-isomorphism. Its endpoints are K-injective, so CochainComplex.IsKInjective.quasiIso_iff makes it a homotopy equivalence. The homotopy quotient, additive pushforward on homotopy categories and Qh send it to an isomorphism; quotientCompQhIso identifies this with the required Q of termwise pushforward.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing source-library rightDerivedFunctor construction for additive moduleDirectImage. Localizing eta gives a natural isomorphism gamma: Q -> I followed by Q. Transport the derived unit along quotientCompQhIso to a transformation beta: termwise direct image followed by Q -> Q followed by Rg_*. Its restriction to I is invertible because all I(K) are K-injective. Whisker gamma with Rg_* and compose with the inverse of I whiskered with beta to obtain derivedModuleDirectImageFactorization. This is the standard K-injective unit computation in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any quasi-isomorphism s: K -> J with J K-injective, apply Rg_* to the isomorphism Q(s) and compose with the existing source-library Functor.rightDerivedFunctorObjQIso J. The latter is the inverse of the derived unit at J, transported between Q and Qh; hence it computes Rg_*(QJ) as Q(g_*J). No comparison morphism between chosen resolutions is needed.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 079V, K-injective construction preceding Lemma 079W; implemented using the source-library rightDerivedFunctor unit and rightDerivedFunctorObjQIso"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -118,5 +160,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T135221-L-1657061",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
