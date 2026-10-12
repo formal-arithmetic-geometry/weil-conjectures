@@ -8,6 +8,12 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+import Sheaf.ConstructibleSheaf.FiniteConstantModel
+import Sheaf.ConstructibleSheaf.EtalePullbackInternalHom
+import Sheaf.ConstructibleSheaf.ConstantFiniteDual
+
 /-! # Local constancy of coefficient duals -/
 
 @[expose] public section
@@ -40,6 +46,25 @@ cover trivializes the coefficient dual. Empty members impose no condition.
 (blueprint: lem-weil-pbc-flc-dual-locally-constant) -/
 theorem IsFiniteLocallyConstantSheaf.ihom_unit_locallyConstant
     (hF : IsFiniteLocallyConstantSheaf F) :
-    IsLocallyConstantSheaf ((ihom F).obj (𝟙_ _)) := by sorry
+    IsLocallyConstantSheaf ((ihom F).obj (𝟙_ _)) := by
+  obtain ⟨d⟩ := hF.toIsLocallyConstantSheaf.nonempty_locallyConstantDatum
+  let A := ModuleCat.{u + 1} Λ
+  refine ⟨⟨⟨d.cover, fun i ↦ ?_⟩⟩⟩
+  rw [isConstant_over_iff_upperStar]
+  let f := d.cover.f i
+  have : Etale f := d.cover.map_prop i
+  have hc : ((Etale.upperStar A f).obj F).IsConstant (d.cover.X i).smallEtaleTopology :=
+    (isConstant_over_iff_upperStar A (d.cover.etalePrecoverageToEtale i) F).mp
+      (d.isConstant i)
+  let := hF.toIsFiniteSheaf
+  have hf := IsFiniteSheaf.upperStar f F
+  obtain ⟨M, hM, ⟨eM⟩⟩ := exists_finite_constant_model _ hc hf
+  let := hM
+  obtain ⟨eH⟩ := nonempty_etale_upperStar_ihom_iso f F (𝟙_ _)
+  obtain ⟨eD⟩ := nonempty_constant_finite_dual_iso (d.cover.X i) M
+  exact Sheaf.isConstant_of_iso _
+    (eH ≪≫ (ihom ((Etale.upperStar A f).obj F)).mapIso
+        (Functor.Monoidal.εIso (Etale.upperStar A f)).symm ≪≫
+      (MonoidalClosed.internalHom.mapIso eM.symm.op).app (𝟙_ _) ≪≫ eD)
 
 end AlgebraicGeometry.Scheme
