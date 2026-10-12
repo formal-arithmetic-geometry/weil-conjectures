@@ -713,6 +713,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.Exactness
 public import WeilConjectures.DeligneLaumon.AffineLine.FiniteBoundary
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierAmplitude
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
+public import WeilConjectures.DeligneLaumon.AffineLine.LaurentPoints
 public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse

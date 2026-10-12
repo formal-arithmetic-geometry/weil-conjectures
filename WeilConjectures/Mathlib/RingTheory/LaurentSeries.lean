@@ -238,7 +238,8 @@ theorem exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single_of_ne_zero {k₀ : T
 /-- The uniformizer `t` of `k((t))` is transcendental over `k`. -/
 theorem transcendental_single_one : Transcendental k (HahnSeries.single (1 : ℤ) (1 : k)) := by
   rintro ⟨p, hp, h⟩
-  refine hp (Polynomial.coe_injective (R := k) (HahnSeries.ofPowerSeries_injective (Γ := ℤ) (R := k) ?_))
+  refine hp (Polynomial.coe_injective (R := k)
+    (HahnSeries.ofPowerSeries_injective (Γ := ℤ) (R := k) ?_))
   have hC : (HahnSeries.ofPowerSeries ℤ k).comp PowerSeries.C = algebraMap k (LaurentSeries k) :=
     RingHom.ext fun x ↦ by simp [RingHom.algebraMap_toAlgebra]
   rw [← Polynomial.eval₂_C_X_eq_coe, Polynomial.hom_eval₂, hC, HahnSeries.ofPowerSeries_X,
