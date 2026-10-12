@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-etale-open-object-hom-bijective",
+ "kind": "statement",
+ "title": "Identity-generator Hom comparison over an étale open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U\\subseteq X$ an open [def-weil-open-immersion], and $F$ an abelian sheaf on the small étale site of $X$ [def-weil-pbc-abelian-etale-sheaves]. Write $A_U$ for the sheafification of the free abelian presheaf on the universe-lifted representable of $U\\to X$, $Z_U$ for the constant sheaf on $U$ with value the universe-lifted integers, and $k_U:Z_U\\to j_U^*A_U$ for the identity-generator morphism constructed in [def-weil-pbc-etale-open-object-cohomology-map]. Then the map $\\operatorname{Hom}(A_U,F)\\to\\operatorname{Hom}(Z_U,j_U^*F)$ sending $f$ to $j_U^*f\\circ k_U$ is bijective.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Lemma cohomology-of-open, the equality of section functors in the last sentence of its proof; free-representable and constant-sheaf adjunctions realize that equality for the identity-generator construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-open-object-cohomology-map"
+ ],
+ "proof": [
+  {
+   "text": "Compose the sheafification adjunction, the whiskered free/forgetful abelian-group adjunction, and uliftYonedaEquiv. This is freeSectionEquiv: Hom(A_U,F) is bijective with F(U). Compose constantSheafAdj at the terminal object of the open étale site, uliftZMultiplesAddEquiv, and evaluation of upperStarIsoLocalizationRestriction to identify Hom(Z_U,j_U^*F) with the same F(U).",
+   "uses": [
+    "def-weil-pbc-etale-open-object-cohomology-map",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For f:A_U -> F, constantSheafAdj.homEquiv_naturality_right carries k_U followed by upperStar.map f to the integer-generator homomorphism followed by the map on terminal-object sections. Evaluation at the integer 1 gives upperStar.map f applied to etaleOpenFreeSheafSection U. Naturality of the inverse-image/restriction isomorphism moves this evaluation to restriction of f. Its inverse followed by its forward map cancels. The remaining expression evaluates f after toSheafify on the generator at the identity. By the definitions of the adjunctions and uliftYonedaEquiv it is freeSectionEquiv f. Thus composition with the second bijection equals the first, and Function.Bijective.of_comp_iff′ proves bijectivity. The same identities apply to zero sheaves and the empty open.",
+   "uses": [
+    "def-weil-pbc-etale-open-object-cohomology-map",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-open-object-cohomology-map",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Degree-zero section comparison; explicit identity-generator calculation by E3 with Mathlib sheafification, free/forgetful, constant-sheaf and Yoneda adjunctions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphisms from free abelian representable sheaf correspond bijectively to sections",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.uliftYonedaEquiv",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.uliftYonedaEquiv, CategoryTheory.uliftYonedaEquiv_apply, CategoryTheory.uliftYonedaEquiv_uliftYoneda_map, CategoryTheory.uliftYonedaEquiv_symm_apply_app, CategoryTheory.uliftYonedaEquiv_comp, CategoryTheory.uliftYonedaEquiv_naturality, CategoryTheory.uliftYonedaEquiv_symm_map, CategoryTheory.uliftYonedaEquiv_symm_comp",
+   "verdict": "Ingredients found; no existing identity-generator comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "uliftYonedaEquiv|constantSheafAdj|uliftZMultiplesAddEquiv",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/RepresentedBy.lean, Mathlib/CategoryTheory/RepresentedBy.lean, Mathlib/CategoryTheory/RepresentedBy.lean, Mathlib/CategoryTheory/RepresentedBy.lean, Mathlib/CategoryTheory/RepresentedBy.lean, Mathlib/CategoryTheory/Presentable/Presheaf.lean, Mathlib/CategoryTheory/Elements.lean, Mathlib/CategoryTheory/Elements.lean",
+   "verdict": "Ingredients found; no existing identity-generator comparison theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMapBijective",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Proof, step 7: passage from neighbourhood cohomology to local-ring cohomology; the degree-zero part of the canonical object/open comparison.",
+   "via": [
+    "lem-weil-pbc-etale-open-object-cohomology-natural",
+    "lem-weil-pbc-etale-open-object-cohomology-map-bijective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenObjectHomBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenObjectHomBijective.lean",
+  "declaration": "AlgebraicGeometry.etaleOpenObjectHom_bijective",
+  "statement": "theorem etaleOpenObjectHom_bijective {X : Scheme.{u}}\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : X.Opens) :\n    Function.Bijective (fun f : (etaleOpenFreeSheaf X).obj (Scheme.Etale.mk U.ι) ⟶ F ↦\n      etaleOpenFreeSheafUnit U ≫ (Etale.upperStar AddCommGrpCat.{u + 1} U.ι).map f)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T135229-L-1660694",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T135229-L-1660694",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
