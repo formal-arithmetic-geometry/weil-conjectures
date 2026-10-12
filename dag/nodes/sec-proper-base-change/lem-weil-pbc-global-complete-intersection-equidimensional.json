@@ -32,96 +32,25 @@
  ],
  "proof": [
   {
-   "text": "(Setup.) Write $J=(f_1,\\dots,f_t)\\subseteq Q$, $\\pi:Q\\to T=Q/J$ for the quotient map and $X=\\operatorname{Spec}T$ [def-weil-affine-spectrum]. $T$ is a finite type $k$-algebra [def-weil-pbc-finite-type-algebra], $\\pi$ being a surjection of $k$-algebras from the polynomial ring $Q$ [def-weil-pbc-mv-polynomial-ring]. A field has only the ideals $0$ and $k$, both finitely generated, so $k$ is Noetherian [def-weil-pbc-noetherian-ring], and $Q=k[y_1,\\dots,y_m]/(0)$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Since $T\\neq0$ it has a maximal, hence prime, ideal, so $X\\neq\\emptyset$ and $m-t=\\dim X\\ge0$ [def-kun-topological-krull-dimension] (a one-point set $\\{\\mathfrak p\\}$ has closure $V(\\mathfrak p)$, an irreducible closed subset, giving a chain of length $0$).",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-finite-type-algebra",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-kun-topological-krull-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, paragraph after Definition Tag 00S9 (definition-lci-field), lines 35834-35849, and the proof of Lemma Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27852)"
-   }
+   "text": "The upper bound follows directly from the infimum defining local dimension: the whole spectrum is an open neighbourhood, and its dimension is the assumed value.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "(Upper bound.) Let $\\mathfrak p\\in X$. The whole space $X$ is an open neighbourhood of $\\mathfrak p$, so by the definition of the Krull dimension at a point as the minimum of $\\dim U$ over open neighbourhoods $U\\ni\\mathfrak p$ [def-kun-topological-dimension-at-point], $\\dim_{\\mathfrak p}X\\le\\dim X=m-t$ [def-kun-topological-krull-dimension] (the hypothesis).",
+   "text": "Apply the lower-bound theorem at the chosen prime and combine the two inequalities by antisymmetry.",
    "uses": [
-    "def-kun-topological-dimension-at-point",
-    "def-kun-topological-krull-dimension"
+    "lem-weil-pbc-global-complete-intersection-equidimensional-lower-bound"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, paragraph after Definition Tag 00S9 (definition-lci-field), lines 35834-35849, and the proof of Lemma Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27852)"
-   }
-  },
-  {
-   "text": "(Every open neighbourhood of $\\mathfrak p$ contains a closed point; the Jacobson argument of 00OT.) Let $U\\subseteq X$ be open with $\\mathfrak p\\in U$. The closed subsets of $X$ are the sets $V(I)=\\{\\mathfrak q:I\\subseteq\\mathfrak q\\}$, $I\\subseteq T$ an ideal [lem-weil-pbc-spec-irreducible-closed-subsets-primes], so $U=X\\setminus V(I)$ for some ideal $I$. As $\\mathfrak p\\in U$, $I\\not\\subseteq\\mathfrak p$: pick $g\\in I$ with $g\\notin\\mathfrak p$. Since $T$ is a finite type $k$-algebra (step 1), [lem-weil-pbc-finite-type-over-field-prime-intersection-maximal] gives a maximal ideal $\\mathfrak M\\subset T$ with $\\mathfrak p\\subseteq\\mathfrak M$ and $g\\notin\\mathfrak M$. Then $I\\not\\subseteq\\mathfrak M$, i.e. $\\mathfrak M\\notin V(I)$, so $\\mathfrak M\\in U$.",
-   "uses": [
-    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, paragraph after Definition Tag 00S9 (definition-lci-field), lines 35834-35849, and the proof of Lemma Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27852)"
-   }
-  },
-  {
-   "text": "($\\dim T_{\\mathfrak M}\\ge m-t$ at every maximal ideal; 00OP and 00KW.) Let $\\mathfrak M\\subset T$ be a maximal ideal and $\\mathfrak M'=\\pi^{-1}(\\mathfrak M)\\subset Q$. Then $Q/\\mathfrak M'\\cong T/\\mathfrak M$ is a field, so $\\mathfrak M'$ is a maximal ideal of $Q$, $J\\subseteq\\mathfrak M'$, and $\\mathfrak M=\\mathfrak M'/J$ under $T=Q/J$. (a) By [lem-weil-pbc-polynomial-ring-maximal-localization-dimension], $\\dim(Q_{\\mathfrak M'})=m$ [def-weil-pbc-localization-at-prime, def-weil-pbc-krull-dimension-ring]. (b) By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim(Q_{\\mathfrak M'})$ is the supremum $\\operatorname{ht}(\\mathfrak M')$ of the lengths of chains of primes of $Q$ whose last member is contained in $\\mathfrak M'$, and $\\dim(T_{\\mathfrak M})$ is the supremum $\\operatorname{ht}(\\mathfrak M)$ of the lengths of chains of primes of $T=Q/J$ whose last member is contained in $\\mathfrak M=\\mathfrak M'/J$. (c) $Q$ is Noetherian (step 1) and $f_1,\\dots,f_t\\in J\\subseteq\\mathfrak M'$, so [lem-weil-pbc-noetherian-height-quotient-bound] (with $R=Q$, $\\mathfrak P=\\mathfrak M'$) gives $\\operatorname{ht}(\\mathfrak M')\\le\\operatorname{ht}(\\mathfrak M'/J)+t$. Together: $m\\le\\dim(T_{\\mathfrak M})+t$ in $\\{0,1,\\dots,\\infty\\}$, hence $\\dim(T_{\\mathfrak M})\\ge m-t$ (if $\\dim(T_{\\mathfrak M})=\\infty$ this is trivial; otherwise subtract $t$). (This is the source's application of 00OP and of 00KW $t$ times, made at the level of heights.)",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "lem-weil-pbc-noetherian-height-quotient-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, paragraph after Definition Tag 00S9 (definition-lci-field), lines 35834-35849, and the proof of Lemma Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27852)"
-   }
-  },
-  {
-   "text": "(Lower bound and conclusion.) Let $U\\subseteq X$ be an open neighbourhood of $\\mathfrak p$ and $\\mathfrak M\\in U$ the maximal ideal of step 3. Then $U$ is also an open neighbourhood of the point $\\mathfrak M$, so by the definition of the dimension at a point as a minimum [def-kun-topological-dimension-at-point], $\\dim U\\ge\\dim_{\\mathfrak M}X$. By [lem-weil-pbc-closed-point-dimension-local-ring] (applied to the finitely generated $k$-algebra $T$, step 1, and its maximal ideal $\\mathfrak M$), $\\dim_{\\mathfrak M}X=\\dim(T_{\\mathfrak M})$ [def-weil-pbc-krull-dimension-ring], which is $\\ge m-t$ by step 4. Hence $\\dim U\\ge m-t$ [def-kun-topological-krull-dimension] for every open neighbourhood $U$ of $\\mathfrak p$, so their minimum satisfies $\\dim_{\\mathfrak p}X\\ge m-t$. With step 2, $\\dim_{\\mathfrak p}(\\operatorname{Spec}T)=m-t$.",
-   "uses": [
-    "def-kun-topological-dimension-at-point",
-    "lem-weil-pbc-closed-point-dimension-local-ring",
-    "def-weil-pbc-krull-dimension-ring",
-    "def-kun-topological-krull-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, paragraph after Definition Tag 00S9 (definition-lci-field), lines 35834-35849, and the proof of Lemma Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27852)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-affine-spectrum",
-  "def-weil-pbc-finite-type-algebra",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "def-kun-topological-krull-dimension",
-  "def-kun-topological-dimension-at-point",
-  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal",
-  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-localization-dimension-chains-below-prime",
-  "lem-weil-pbc-noetherian-height-quotient-bound",
-  "lem-weil-pbc-closed-point-dimension-local-ring"
+  "lem-weil-pbc-global-complete-intersection-equidimensional-lower-bound"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, paragraph after Definition 00S9 (lines 35834-35849): dim(S_m) >= n - c at every maximal ideal by Lemma 00OP and Lemma 00KW (here as the height bound of Krull, step 4), and the conclusion through Lemma 00OT (1) = (3), whose needed inequality is written out from the proof of 00OT (lines 27803-27852): every open neighbourhood of p contains a closed point because S is Jacobson (step 3), and Lemma 00OU at that closed point (step 5)"
+  "place": "The upper-bound part of the source paragraph, combined with the lower-bound intermediate node."
  },
  "mathlib_searches": [
   {
@@ -199,5 +128,15 @@
   "group": "H1",
   "result": "pass",
   "note": "k field (Type u); m,t:ℕ; f:Fin t→MvPolynomial (Fin m) k; T=Q⧸span(range f); T≠0 as Nontrivial; dim Spec T=m-t as t≤m ∧ topologicalKrullDim(Spec T)=↑(m-t) (equivalent given T≠0); ∀ p, topologicalKrullDimAt at ⟨p,_⟩ (#print: the point p itself in Spec's Zariski space) = m-t; recorded decls of def-kun-topological-krull-dimension/-dimension-at-point and AlgebraicGeometry.Spec used"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T203944-L-830888",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

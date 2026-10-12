@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-global-complete-intersection-equidimensional-lower-bound",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-global-complete-intersection-equidimensional",
+   "place": "Step 4 and Step 5 of its split",
+   "via": [
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "lem-weil-pbc-noetherian-height-quotient-bound",
+    "lem-weil-pbc-closed-point-dimension-local-ring"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Local dimension lower bound for a polynomial quotient",
+ "statement": "Let k be a field, m,t natural numbers, f : Fin t → MvPolynomial (Fin m) k, and assume the quotient by the span of the range of f is nontrivial and t ≤ m. Then at every prime p of its spectrum, ((m - t : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDimAt p.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 00S8, lines 35834--35849, the lower-bound argument at maximal ideals and the Jacobson argument in Lemma 00OT."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Every open neighbourhood of a prime contains a maximal ideal by the Jacobson property of a finite type algebra.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The localization at that maximal ideal has dimension at least m-t by the polynomial localization dimension theorem and the Noetherian height bound for the t generators.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "lem-weil-pbc-noetherian-height-quotient-bound",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The dimension at a closed point equals the local ring dimension, hence every neighbourhood has dimension at least m-t; taking the infimum gives the result.",
+   "uses": [
+    "lem-weil-pbc-closed-point-dimension-local-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-closed-point-dimension-local-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 00S8, lines 35834--35849"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local dimension at every prime of a polynomial quotient by t equations over a field",
+   "results": "No exact match; only generic finite type dimension declarations.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDimAt polynomial quotient field",
+   "results": "No exact declaration matching the local lower bound.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"topologicalKrullDimAt.*quotient|equidimensional\" Mathlib",
+   "results": "No theorem for complete intersections or this local lower bound.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalCompleteIntersectionEquidimensional.lean",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_spec_quotient_mvPolynomial_lower_bound",
+  "statement": "theorem topologicalKrullDimAt_spec_quotient_mvPolynomial_lower_bound (k : Type u) [Field k] (m t : ℕ) (f : Fin t → MvPolynomial (Fin m) k) (hT : Nontrivial (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f))) (htm : t ≤ m) : ∀ p : PrimeSpectrum (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)), ((m - t : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDimAt (⟨p, inferInstance⟩ : Spec (CommRingCat.of (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f))))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T203944-L-830888",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T203944-L-830888",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

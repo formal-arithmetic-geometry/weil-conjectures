@@ -21,6 +21,7 @@ Source: literature/stacks-project/algebra.tex, Algebra, Section 00S8
 
 @[expose] public section
 
+
 universe u
 
 namespace AlgebraicGeometry
@@ -62,6 +63,25 @@ Proof (the five DAG steps):
    so step 4 gives `dim U ≥ m - t`. Taking the infimum over all `U` gives
    the lower bound at `p`; combine it with step 2.
 -/
+/- Lower bound on local dimensions for a nonzero polynomial quotient by equations.
+
+Source: literature/stacks-project/algebra.tex, Algebra, Section 00S8, the paragraph
+following Definition 00S9 (lines 35834--35849), via the Jacobson closed-point argument
+and the height bound for the generators.
+(blueprint: lem-weil-pbc-global-complete-intersection-equidimensional-lower-bound)
+-/
+theorem topologicalKrullDimAt_spec_quotient_mvPolynomial_lower_bound
+    (k : Type u) [Field k] (m t : ℕ)
+    (f : Fin t → MvPolynomial (Fin m) k)
+    (hT : Nontrivial (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)))
+    (htm : t ≤ m) :
+    ∀ p : PrimeSpectrum (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)),
+      ((m - t : ℕ) : WithBot ℕ∞) ≤
+        topologicalKrullDimAt
+          (⟨p, inferInstance⟩ :
+            Spec (CommRingCat.of (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)))) := by
+  sorry
+
 theorem topologicalKrullDimAt_spec_quotient_mvPolynomial_of_eq
     (k : Type u) [Field k] (m t : ℕ)
     (f : Fin t → MvPolynomial (Fin m) k)
@@ -75,6 +95,22 @@ theorem topologicalKrullDimAt_spec_quotient_mvPolynomial_of_eq
           (⟨p, inferInstance⟩ :
             Spec (CommRingCat.of (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)))) =
         ((m - t : ℕ) : WithBot ℕ∞) := by
-  sorry
+  intro p
+  let X := Spec (CommRingCat.of (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)))
+  let x : X := ⟨p, inferInstance⟩
+  apply le_antisymm
+  · have hupper : topologicalKrullDimAt x ≤ topologicalKrullDim X := by
+      unfold topologicalKrullDimAt
+      have h : (⨅ U : TopologicalSpace.Opens X, ⨅ (_ : x ∈ U), topologicalKrullDim U) ≤
+        topologicalKrullDim (⊤ : TopologicalSpace.Opens X) :=
+      iInf₂_le (α := WithBot ℕ∞) ⊤ trivial
+      have he := IsHomeomorph.topologicalKrullDim_eq (Homeomorph.Set.univ X)
+        (Homeomorph.Set.univ X).isHomeomorph
+      rw [← he]
+      exact h
+    change topologicalKrullDimAt x ≤ _
+    exact hupper.trans_eq hDim.2
+  · exact topologicalKrullDimAt_spec_quotient_mvPolynomial_lower_bound
+      k m t f hT hDim.1 p
 
 end AlgebraicGeometry
