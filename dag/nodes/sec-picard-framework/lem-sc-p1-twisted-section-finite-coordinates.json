@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-p1-twisted-section-finite-coordinates",
+ "kind": "statement",
+ "title": "Finite scalar coordinates for twisted coherent global sections",
+ "statement": "Let k be a field, P=Proj k[x_0,x_1] [def-sc-p1-standard], and G a coherent O_P-module [pqf-def-coherent]. For every n in N, there are r in N and an additive equivalence e: Gamma(P,G tensor O_P(n)) -> (Fin r -> k) such that multiplication by any constant homogeneous polynomial C(c) using G tensor twistMul [def-weil-pbc-proj-twisting-sheaf], transported along n+0=n, is sent by e to coordinatewise multiplication by c. The assertion is independent of any representing graded polynomial module.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS(3) and proof of (5), https://stacks.math.columbia.edu/tag/01YS; online text read"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Cover polynomial Proj by its two degree-one basic opens. On each, O(n) is rank one; thus tensoring G with O(n) preserves coherence. Transport by the Proj chart isomorphism and the shifted-free twist identification to a coherent module on the standard projective line. Apply finiteDimensional_H in degree zero and the H-zero/global-sections equivalence. Choose a finite basis and its coordinate additive equivalence e to k^r.",
+   "uses": [
+    "lem-sc-p1-proj-shifted-free-twist",
+    "lem-sc-p1-twist-exists",
+    "pqf-def-coherent",
+    "lem-sc-p1-coherent-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On local homogeneous fractions, twistMul by C(c) is multiplication by the image of c in the structure ring. Its tensor product with G therefore acts by c on twisted sections. The coordinate additive equivalence comes from a k-linear basis equivalence and takes this action to coordinatewise scalar multiplication. Transport along n+0=n gives the displayed equality; proof irrelevance makes it independent of p. If the section space is zero choose r=0; n=0 needs no separate argument.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-p1-coherent-finite",
+  "lem-sc-p1-proj-shifted-free-twist",
+  "lem-sc-p1-twist-exists",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS(3) and proof of (5), https://stacks.math.columbia.edu/tag/01YS; online text read"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a coherent sheaf on the projective line are finite dimensional",
+   "results": "HTTP 500; service unavailable, no mathematical verdict.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf on polynomial Proj has finite dimensional global sections compatible with multiplication by constant homogeneous polynomials",
+   "results": "Proj structure sheaf and locally finite type declarations only; no coordinate equivalence compatible with twistMul.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDimensional sections, twist finite, and scalar constant twistMul in Mathlib/AlgebraicGeometry and both library roots; blueprint_refs search coherent global sections finite",
+   "results": "No exact statement. Source finiteDimensional_H is on the glued projective line with quasi-coherent and finite-presentation instances; it does not give the Proj comparison or constant-action formula. Blueprint search returned zero matches.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SerreSectionModuleComponentFinite",
+  "date": "2026-10-12",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, finite generation of the representing graded section module: finite-dimensional individual twisted section spaces",
+   "via": [
+    "lem-sc-p1-section-module-component-finite",
+    "lem-sc-p1-serre-section-module-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TwistedSectionFiniteCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/TwistedSectionFiniteCoordinates.lean",
+  "declaration": "AlgebraicGeometry.serreTwistedSectionFiniteCoordinates",
+  "statement": "theorem serreTwistedSectionFiniteCoordinates (k : Type u) [Field k] (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules) (hG : RingedSpace.IsCoherent (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).toRingedSpace G) (n : ℕ) : ∃ (r : ℕ) (e : Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n : ℤ), ⊤) ≃+ (Fin r → k)), ∀ (c : k) (ha : MvPolynomial.C c ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k 0) (s : Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n : ℤ), ⊤)) (p : G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) ((n : ℤ) + (0 : ℕ)) = G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n : ℤ)), e (Scheme.Modules.Hom.app ((G ◁ Proj.twistMul (n : ℤ) ha) ≫ eqToHom p) ⊤ s) = c • e s",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T110313-L-619757",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T110313-L-619757",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
