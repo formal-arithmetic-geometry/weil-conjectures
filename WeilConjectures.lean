@@ -2006,6 +2006,7 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Frobenius
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.GlobalOperator
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.KernelPushforward
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Localization
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Pairing

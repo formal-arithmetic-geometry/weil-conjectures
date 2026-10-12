@@ -93,6 +93,14 @@ theorem trace_eq_of_iso {X X' : C} [HasRightDual X] [HasRightDual X'] (w : X ≅
   have : f' = w.inv ≫ f ≫ w.hom := by rw [h, Iso.inv_hom_id_assoc]
   rw [this, trace_comp_comm, Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
+/-- Blueprint `def-trf-karoubi-trace`: the trace of an endomorphism `v` on a summand of a
+dualizable object depends only on the summand. If `e = π ≫ i` is an idempotent of `P` split by
+`i : Q ⟶ P`, `π : P ⟶ Q` with `i ≫ π = 𝟙 Q`, the summand trace `tr(v ∘ e ∣ P)` is the trace of
+the induced endomorphism `i ≫ v ≫ π` of the summand `Q = eP`. -/
+theorem trace_comp_idempotent {P Q : C} [HasRightDual P] [HasRightDual Q] (v : P ⟶ P)
+    (i : Q ⟶ P) (π : P ⟶ Q) : trace (v ≫ π ≫ i) = trace (i ≫ v ≫ π) := by
+  rw [← Category.assoc, trace_comp_comm]
+
 /-- In a braided monoidal closed category, the internal hom `[X, 𝟙_ C]` out of an object `X`
 with a right dual `Xᘁ` is isomorphic to `Xᘁ`: both `ihom X` and `tensorRight Xᘁ` are right
 adjoint to `X ⊗ - ≅ - ⊗ X`. -/
