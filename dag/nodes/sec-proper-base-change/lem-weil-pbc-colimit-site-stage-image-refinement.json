@@ -15,13 +15,12 @@
  ],
  "proof": [
   {
-   "text": "Unpack membership into t, W, a presenting arrow f : V_i U to V_t W and a stage section z. Represent f using the arrow colimit, move to a common stage above i and t, then use eventual object equality to align its endpoints with the images of U and W. This produces a stage arrow whose image is f.",
+   "text": "Unpack membership in colimitSiteStageImage as a stage t, object W, arrow f and section z. Use V.w to transport the source of f to the image of F(t.hom)U at t.right. Joint surjectivity of the arrow cocone gives an arrow representative. Move it and the fixed endpoint objects to a common stage. Twice apply eventual equality in the object colimit to identify its endpoints with the images of F(t.hom)U and W. Transport the arrow along these equalities to obtain g at a stage k receiving t.right. Put s = Under.mk(t.hom composed with a). Functoriality of F identifies the source of g with F(s.hom)U, and the image arrow is f in the arrow category.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-categories",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "def-weil-pbc-category-colimit",
     "def-weil-pbc-arrows-functor",
-    "def-weil-pbc-colimit-site-stage-image"
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-colimit-site-stage-image",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false,
    "source": {
@@ -30,13 +29,23 @@
    }
   },
   {
-   "text": "Transpose the later unit to transport z to that stage, and restrict it along the lifted arrow. The two maps to the limit restriction sheaf have identical transposes, by hα and V.w; injectivity of the adjunction hom equivalence identifies them. Naturality at the lifted arrow proves that the new section has image x. Endpoint equalities give the stated HEq.",
+   "text": "Transpose the unit for the composite F(t.hom) followed by F(a) using the adjunction for F(t.hom), giving a sheaf map beta from the t inverse image to the restriction of the s inverse image. To prove beta followed by alpha s equals alpha t, substitute the three functor equalities supplied by F.map_comp and V.w. Apply injectivity of the adjunction hom equivalence: the transpose of the composite is the s unit followed by alpha s, which is the limit unit by hAlpha s, and this is also the transpose of alpha t by hAlpha t. Evaluate at W to transport z to a section y at F(a)W.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraphs"
+   }
+  },
+  {
+   "text": "Restrict y along g. Naturality of alpha s identifies the image of this restriction with restriction along V(k)(g) of alpha s(y). Equality of the image arrows, and heterogeneous equality alpha s(y) = alpha t(z) from the preceding step, identify this with restriction along f of alpha t(z). The membership witness says this last section is x. Thus s and the restricted section are the required witnesses. Use Arrow.mk_eq_mk_iff with equality elimination in the generalized private application lemma, which allows different source types and heterogeneously equal inputs.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-filtered-colimit-categories",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "def-weil-pbc-arrows-functor"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
     "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraphs"
@@ -48,13 +57,12 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-colimit-site-stage-image",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-filtered-colimit-categories",
   "lem-weil-pbc-filtered-colimit-sets-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraphs"
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraphs; explicit Lean proof by U3 using Mathlib filtered set-colimit criteria and adjunction uniqueness; repair removes the duplicate uniqueness helper and generalizes the arrow application helper to heterogeneous inputs"
  },
  "mathlib_searches": [
   {
@@ -134,10 +142,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T184317-L-4009491",
-  "kind": "interface",
+  "landing": "20261012T212211-L-1098319",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
