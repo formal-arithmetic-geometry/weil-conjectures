@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-affine-pseudo-coherent-localization-cover",
+ "kind": "statement",
+ "title": "Finite principal-open cover carrying pseudo-coherent localized module models",
+ "statement": "Let $A$ be a commutative ring and let $M^\\bullet$ be a cochain complex of $A$-modules. Write $X=\\operatorname{Spec}(A)$ [def-pc-scheme] and $E=\\widetilde{M^\\bullet}$ in its derived category [def-pc-derived-category]. If $E$ is pseudo-coherent [def-pur-pseudo-coherent-complex], there exist $r\\geq0$ and $f:\\{0,\\ldots,r-1\\}\\to A$ with $(f_0,\\ldots,f_{r-1})=A$ such that, for every $i$, the scalar-extended complex $A_{f_i}\\otimes_A M^\\bullet$ is pseudo-coherent in the module derived category [def-pc-ring-pseudo-coherent-complex], that is, it is isomorphic to a bounded-above complex of finite free $A_{f_i}$-modules. Derived categories may be chosen independently for $A$, for sheaves on $X$ and its opens, and for the localization rings.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E7 (perfect-lemma-pseudo-coherent-affine), finite standard-open cover and identification of localized module models; local finite-free characterization in Tags 08CB and 08E5"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Let $A$ be as in the statement and $E=\\widetilde{M^\\bullet}$. By [def-pur-pseudo-coherent-complex], each point has an open neighbourhood $U$ on which $E$ has a bounded-above finite-free model. Refine these neighbourhoods by standard opens. Since $\\operatorname{Spec}(A)$ is quasi-compact, extract a finite cover $D(f_1),\\ldots,D(f_r)$. The covering condition implies that the $f_i$ generate the unit ideal. The restriction of a finite-free model to a smaller open preserves its upper bound and all its finite ranks.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each $f_i$, identify $D(f_i)$ with $\\operatorname{Spec}(A_{f_i})$. By [lem-weil-pbc-spec-module-tilde-sections], restriction of $\\widetilde N$ is the associated sheaf of $A_{f_i}\\otimes_A N$, since their sections and restriction maps agree on the standard-open basis. This is natural in $N$, and therefore identifies the termwise restricted input complex with the tilde of the scalar-extended complex.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each term of the restricted model is a finite free structure-sheaf module. The fully faithful tilde functor and its finite-sum comparison [lem-weil-pbc-affine-tilde-gamma-adjunction] lift these terms and their differentials to finite free $A_{f_i}$-modules. Faithfulness gives the differential-square-zero identities. The complex has the same upper bound as the sheaf model.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both sheaf complexes have quasi-coherent cohomology. The full inclusion of the quasi-coherent derived category lifts their derived isomorphism, and [lem-pc-affine-qcoh-derived-equivalence] over $A_{f_i}$ reflects it to the module derived category. Thus each localized complex has the finite-free representative required by [def-pc-ring-pseudo-coherent-complex]. No ring-level gluing is performed in this lemma. For the zero ring the empty family generates the unit ideal and the local condition is vacuous.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E7, cover and local-model steps, following the reviewed local finite-free route of lem-pc-affine-pseudo-coherent-criterion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pseudo coherent complex on affine scheme associated sheaf bounded above finite free complex",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, SheafOfModules.IsFiniteType, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData; no affine pseudo-coherence cover theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde, SheafOfModules.free",
+   "results": "AlgebraicGeometry.tildeFinsupp, AlgebraicGeometry.instIsIsoModulesSpecFromTildeΓFreeOpensCarrierCarrierCommRingCat; no affine pseudo-coherence cover theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo[Cc]oherent|tildeFinsupp|free.*overFunctor",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean; no affine pseudo-coherence cover theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex on Spec A gives a finite cover by principal opens on which the localized module complex is pseudo coherent",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "set-of-representatives proof, affine pseudo-coherence comparison: finite standard-open cover and local module models (steps 2 and 3 of lem-pc-affine-pseudo-coherent-criterion)",
+   "via": [
+    "lem-pc-affine-pseudo-coherent-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePseudoCoherentLocalizationCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePseudoCoherentLocalizationCover.lean",
+  "declaration": "AlgebraicGeometry.affine_pseudoCoherent_localization_cover",
+  "statement": "theorem affine_pseudoCoherent_localization_cover (A : Type u) [CommRing A] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ U : (Spec (.of A)).Opens, HasDerivedCategory.{wX} (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U))] [∀ f : A, HasDerivedCategory.{wL} (ModuleCat.{u} (Localization.Away f))] (M : CochainComplex (ModuleCat.{u} A) ℤ) (h : Scheme.IsPseudoCoherent (Spec (.of A)) (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj M))) : ∃ (r : ℕ) (f : Fin r → A), Ideal.span (Set.range f) = ⊤ ∧ ∀ i : Fin r, DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i)))) (ComplexShape.up ℤ)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T212211-L-1098447",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T212211-L-1098447",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

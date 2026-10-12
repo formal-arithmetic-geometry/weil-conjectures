@@ -10,6 +10,7 @@ public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue
+import Sheaf.AlgebraicGeometry.AffinePseudoCoherentLocalizationCover
 
 /-! # Pseudo-coherence on an affine scheme
 
@@ -24,6 +25,24 @@ universe u wA wX
 open CategoryTheory
 
 namespace AlgebraicGeometry
+
+private theorem tilde_finite_free_restrict_iso (A : Type u) [CommRing A]
+    (N : ModuleCat.{u} A) [Module.Free A N] [Module.Finite A N]
+    (U : (Spec (.of A)).Opens) :
+    ∃ r : ℕ, Nonempty
+      ((SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) U).obj
+        ((tilde.functor (.of A)).obj N) ≅
+          SheafOfModules.free
+            (R := (moduleRings (Spec (.of A)).toRingedSpace).over U) (ULift.{u} (Fin r))) := by
+  classical
+  let r := Fintype.card (Module.Free.ChooseBasisIndex A N)
+  let b := (Module.Free.chooseBasis A N).reindex
+    ((Fintype.equivFin _).trans (Equiv.ulift.symm : Fin r ≃ ULift.{u} (Fin r)))
+  let t := (tilde.functor (.of A)).mapIso (b.repr.toModuleIso) ≪≫
+    tildeFinsupp (R := .of A) (ULift.{u} (Fin r))
+  let F := SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) U
+  refine ⟨r, ⟨F.mapIso t ≪≫ ?_⟩⟩
+  exact (SheafOfModules.mapFreeIso F (ULift.{u} (Fin r)) (Iso.refl _)).symm
 
 /-- The object obtained by associating sheaves termwise to a complex of `A`-modules on
 `Spec A` is pseudo-coherent precisely when the module complex is quasi-isomorphic to a
@@ -65,6 +84,34 @@ theorem isPseudoCoherent_affine_iff (A : Type u) [CommRing A]
           _ _ _ _ (tilde.functor (.of A))
           ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj M)) ↔
       DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj M) := by
-  sorry
+  constructor
+  · intro h
+    let _ : ∀ f : A, HasDerivedCategory.{u + 1}
+        (ModuleCat.{u} (Localization.Away f)) := fun _ ↦ HasDerivedCategory.standard _
+    obtain ⟨r, f, hf, hlocal⟩ := affine_pseudoCoherent_localization_cover A M h
+    exact (DerivedCategory.ringPseudoCoherent_localization_glue (0 : ℤ) M r f hf).2 hlocal
+  · rintro ⟨E, b, hbound, hfree, ⟨i⟩⟩
+    obtain ⟨e, ⟨c⟩, _⟩ := exists_affineQCohDerivedEquivalence A
+    let T := @Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+      _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)
+    let j : DerivedCategory.Q.obj (T.obj M) ≅ DerivedCategory.Q.obj (T.obj E) :=
+      (c.app M).symm ≪≫
+        (e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).mapIso i.symm ≪≫ c.app E
+    intro y
+    let U : (Spec (.of A)).Opens := ⊤
+    let F := SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) U
+    let P := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (T.obj E)
+    refine ⟨U, by simp [U], P, ⟨b, ?_⟩, ?_, ?_⟩
+    · intro n hn
+      let _ : (tilde.functor (.of A)).PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
+      let _ := hbound
+      exact F.map_isZero ((tilde.functor (.of A)).map_isZero
+        (E.isZero_of_isStrictlyLE b n hn))
+    · intro n
+      let _ := (hfree n).1
+      let _ := (hfree n).2
+      exact tilde_finite_free_restrict_iso A (E.X n) U
+    · exact ⟨F.mapDerivedCategory.mapIso j ≪≫ F.mapDerivedCategoryFactors.app (T.obj E)⟩
 
 end AlgebraicGeometry
