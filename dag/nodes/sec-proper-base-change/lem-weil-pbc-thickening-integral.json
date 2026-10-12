@@ -75,20 +75,11 @@
    }
   },
   {
-   "text": "($f'$ affine: 09ZV (1), direction $f\\Rightarrow f'$.) Let $V'\\subseteq S'$ be an affine open [pqf-def-affine-morphism]. (i) $V:=i_S^{-1}(V')$ is an open subscheme of $S$ and $i_S|_V:V\\to V'$ is a closed immersion (restriction of a closed immersion over an open of the target, immediate from [def-weil-closed-immersion]); it is affine (step 1), so $V$ is affine as the source of an affine morphism to an affine scheme [lem-weil-pbc-affine-morphism-permanence (2)]. (ii) Since $f$ is affine (step 3), $f^{-1}(V)$ is affine. (iii) Put $U':=f'^{-1}(V')$, open in $X'$. From $f'\\circ i_X=i_S\\circ f$, $i_X^{-1}(U')=f^{-1}(i_S^{-1}(V'))=f^{-1}(V)$, so $i_X$ restricts to a closed immersion $f^{-1}(V)\\to U'$ which is surjective on spaces since $i_X$ is; i.e. $U'$ is a thickening of the affine scheme $f^{-1}(V)$. (iv) By More on Morphisms 06AD [lem-weil-pbc-thickening-affine-scheme], $U'$ is affine. As $V'$ was arbitrary, $f'$ is affine [pqf-def-affine-morphism]. (Stacks: 'Part (1) follows from Lemma 06AD which tells us that there is a 1-to-1 correspondence between affine opens of $S$ and $S'$ and between affine opens of $X$ and $X'$'; (i) and (iv) are the two halves of that correspondence used here.)",
+   "text": "Affineness of f implies affineness of f′ by isAffineHom_of_thickenings, the affine-open reduction recorded in lem-weil-pbc-thickening-affine-morphism.",
    "uses": [
-    "pqf-def-affine-morphism",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-closed-immersion-integral-separated-uc",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-thickening-affine-scheme",
-    "def-sbc-first-order-thickening"
+    "lem-weil-pbc-thickening-affine-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 09ZV, sentence 3 (part (1)), with Lemma 06AD"
-   }
+   "elementary": false
   },
   {
    "text": "($f'$ integral.) By steps 4 and 5, $f'$ is affine and universally closed, hence integral by Morphisms 01WM [pqf-lem-integral-univclosed] ((2)⇒(1)). With step 2: $f$ is integral iff $f'$ is integral.",
@@ -109,15 +100,12 @@
   "pqf-lem-integral-univclosed",
   "lem-weil-pbc-image-universally-closed",
   "def-weil-proper-morphism",
-  "pqf-def-affine-morphism",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-thickening-affine-scheme"
+  "lem-weil-pbc-thickening-affine-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 09ZV (label lemma-thicken-property-morphisms), proof of parts (1), (4), (5), with Lemma 06AD and Morphisms 01WM; the direction f' integral ⇒ f integral is written by the agent via Morphisms 035D (2), and the 'immediate' universal-homeomorphism argument for (4) is written out"
+  "place": "More on Morphisms, Lemma 09ZV (label lemma-thicken-property-morphisms), proof of parts (1), (4), (5), with Lemma 06AD and Morphisms 01WM; the direction f' integral ⇒ f integral is written by the agent via Morphisms 035D (2), and the 'immediate' universal-homeomorphism argument for (4) is written out; stage 3 uses the proved affine component isAffineHom_of_thickenings for step 5"
  },
  "mathlib_searches": [
   {
@@ -210,5 +198,15 @@
   "group": "G1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T120536-L-961186",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
