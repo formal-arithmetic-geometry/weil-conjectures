@@ -14,6 +14,7 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Sheaf.AlgebraicGeometry.ValuationProperCoherentHigherDirectImages
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-!
 # Global sections of an invertible module over a valuation ring
@@ -50,6 +51,10 @@ theorem finitePresentation_moduleCohomology_zero_of_valuationRing
     Module.FinitePresentation A
       ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom).obj
         ((RingedSpace.moduleCohomology X.toRingedSpace 0).obj F)) := by
-  sorry
+  have : SheafOfModules.IsInvertible.{u, u, u} F :=
+    IsInvertible.sheafOfModules_isInvertible F
+  have : F.IsFiniteLocallyFreeOfRank 1 :=
+    (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one F).mp inferInstance
+  exact finitePresentation_moduleCohomology_of_valuationRing f 1 F 0
 
 end AlgebraicGeometry.Scheme.Modules
