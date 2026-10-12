@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-cech-differential-permutation",
+ "kind": "statement",
+ "title": "The Cech differential preserves permutation equivariance",
+ "statement": "Let X be a scheme [def-pc-scheme], I any type, U : I → Opens(X) a family of opens [def-sc-zariski-site], F : Opens(X)^op → Ab a presheaf of abelian groups, and S the chosen finite-intersection Čech complex [def-weil-pbc-site-cech-complex]. Let p ≥ 0 and let c be a degree-p full Čech cochain. Assume for every tuple t : Fin(p+1) → I and permutation σ of Fin(p+1) that c(t) = sign(σ) F(S.indexMap(t,σ)^op)(c(t ∘ σ)). Then for every t : Fin(p+2) → I and permutation σ of Fin(p+2), d_p(c)(t) = sign(σ) F(S.indexMap(t,σ)^op)(d_p(c)(t ∘ σ)).",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 20.23, Tag 01FG: verification omitted immediately before Definition 01FH; signed extension preceding Lemma 01FJ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "expand both differentials as signed face sums. For a permutation σ and a deleted position j, put k = σ⁻¹(j), and let τ be the induced permutation of the remaining positions, so σ ∘ k.succAbove = j.succAbove ∘ τ. Moving j and k to the last position shows (-1)^j sign(τ) = sign(σ) (-1)^k. Apply the assumed transformation law to the jth face, then reindex the sum by k. The two restriction composites agree since opens form a poset. Restriction preserves finite sums and integer scalar multiplication, giving exactly the asserted equality. This proof does not require the tuple to be injective, nor division by two; it also works for p = 0 and for an empty index type.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 20.23, Tag 01FG: verification omitted immediately before Definition 01FH; signed extension preceding Lemma 01FJ",
+  "note": "Expands the verification expressly omitted by Stacks; isolates one of the two invariants needed for differential stability."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The differential of an alternating Cech cochain is alternating and vanishes on repeated tuples",
+   "results": "AlternatingCofaceMapComplex.obj and d_squared describe the differential and its square, but not permutation compatibility or repeated-tuple cancellation. No match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.Perm.sign, Fin",
+   "results": "Found sign_cycleRange, sign_cycleIcc_of_le and sign_decomposeFinSymm variants. These supply permutation signs, not the presheaf cochain differential statements.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The alternating Cech differential commutes with the sign action of permutations",
+   "results": "Service unavailable according to msearch.py.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "sign.*succAbove|succAbove.*sign|alternating.*[Cc]ech",
+   "results": "No existing differential permutation law or repeated-tuple vanishing theorem; inspected Mathlib.GroupTheory.Perm.Fin and Mathlib.Data.Fin.Tuple.Sort, and both library roots.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SignedCechExtension",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "Proof: ordered-to-alternating Cech comparison; permutation compatibility of the signed differential (original node step 2)",
+   "via": [
+    "lem-pc-signed-cech-extension-differential",
+    "lem-pc-alternating-cech-section",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CechDifferentialPermutation",
+  "file": "lean/Sheaf/AlgebraicGeometry/CechDifferentialPermutation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechDifferential_permutation",
+  "statement": "theorem cechDifferential_permutation (X : Scheme.{u}) {I : Type v}\n    (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})\n    (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))\n    (p : ℕ) (c : S.cochains F p)\n    (hc : ∀ (t : Fin (p + 1) → I) (σ : Equiv.Perm (Fin (p + 1))),\n      c t = (Equiv.Perm.sign σ : ℤ) • F.map (S.indexMap t σ).op (c (t ∘ σ)))\n    (t : Fin (p + 2) → I) (σ : Equiv.Perm (Fin (p + 2))) :\n    S.differentialValue F p c t =\n      (Equiv.Perm.sign σ : ℤ) •\n        F.map (S.indexMap t σ).op (S.differentialValue F p c (t ∘ σ))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T173840-L-3299514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T173840-L-3299514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

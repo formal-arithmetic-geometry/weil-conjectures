@@ -8,6 +8,8 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.CategoryTheory.SiteCechComplex
 public import Mathlib.Data.Fin.Tuple.Sort
 public import Mathlib.GroupTheory.Perm.Sign
+import Sheaf.AlgebraicGeometry.CechDifferentialPermutation
+import Sheaf.AlgebraicGeometry.CechDifferentialRepeated
 
 /-!
 # Signed extension of ordered Čech cochains
@@ -92,6 +94,48 @@ theorem signedCechExtension_increasing (p : ℕ)
     simp
   exact h _ _ hs
 
+private theorem signedCechExtension_permutation (p : ℕ)
+    (s : ∀ t : {t : Fin (p + 1) → I // StrictMono t}, F.obj (op (S.W p t.1)))
+    (t : Fin (p + 1) → I) (σ : Equiv.Perm (Fin (p + 1))) :
+    signedCechExtension X U F S p s t =
+      (Equiv.Perm.sign σ : ℤ) • F.map (S.indexMap t σ).op
+        (signedCechExtension X U F S p s (t ∘ σ)) := by
+  classical
+  change signedCechExtensionValue X U F S p s t =
+    (Equiv.Perm.sign σ : ℤ) • F.map (S.indexMap t σ).op
+      (signedCechExtensionValue X U F S p s (t ∘ σ))
+  by_cases ht : Function.Injective t
+  · have htσ : Function.Injective (t ∘ σ) := ht.comp σ.injective
+    have hs : σ * Tuple.sort (t ∘ σ) = Tuple.sort t := by
+      apply Equiv.ext
+      intro i
+      apply ht
+      exact congrFun (Tuple.comp_perm_comp_sort_eq_comp_sort (f := t) (σ := σ)) i
+    simp only [signedCechExtensionValue, dif_pos ht, dif_pos htσ]
+    have h (a b : Equiv.Perm (Fin (p + 1)))
+        (ha : StrictMono (t ∘ a)) (hb : StrictMono ((t ∘ σ) ∘ b))
+        (hab : σ * b = a) :
+        (Equiv.Perm.sign a : ℤ) • F.map (S.indexMap t a).op (s ⟨t ∘ a, ha⟩) =
+          (Equiv.Perm.sign σ : ℤ) • F.map (S.indexMap t σ).op
+            ((Equiv.Perm.sign b : ℤ) •
+              F.map (S.indexMap (t ∘ σ) b).op (s ⟨(t ∘ σ) ∘ b, hb⟩)) := by
+      subst a
+      simp only [Equiv.Perm.sign_mul, Units.val_mul, mul_smul]
+      rw [← map_zsmul]
+      have hi : S.indexMap t (σ * b) =
+          S.indexMap t σ ≫ S.indexMap (t ∘ σ) b := Subsingleton.elim _ _
+      rw [hi, op_comp, F.map_comp]
+      simp only [ConcreteCategory.comp_apply, map_zsmul, Equiv.Perm.coe_mul,
+        Function.comp_assoc]
+    exact h _ _ _ _ hs
+  · have htσ : ¬ Function.Injective (t ∘ σ) := by
+      intro h
+      apply ht
+      intro a b hab
+      have he := h (show (t ∘ σ) (σ.symm a) = (t ∘ σ) (σ.symm b) by simpa)
+      simpa using congrArg σ he
+    simp [signedCechExtensionValue, ht, htσ]
+
 /-- The differential of a signed extension is again a signed extension of its ordered
 coordinates.
 
@@ -121,6 +165,20 @@ theorem signedCechExtension_differential (p : ℕ)
     (s : ∀ t : {t : Fin (p + 1) → I // StrictMono t}, F.obj (op (S.W p t.1))) :
     S.differentialValue F p (signedCechExtension X U F S p s) =
       signedCechExtension X U F S (p + 1)
-        (fun t ↦ S.differentialValue F p (signedCechExtension X U F S p s) t.1) := by sorry
+        (fun t ↦ S.differentialValue F p (signedCechExtension X U F S p s) t.1) := by
+  classical
+  have hc := signedCechExtension_permutation X U F S p s
+  funext t
+  change S.differentialValue F p (signedCechExtension X U F S p s) t =
+    signedCechExtensionValue X U F S (p + 1)
+      (fun a ↦ S.differentialValue F p (signedCechExtension X U F S p s) a.1) t
+  by_cases ht : Function.Injective t
+  · simp only [signedCechExtensionValue, dif_pos ht]
+    exact cechDifferential_permutation X U F S p _ hc t (Tuple.sort t)
+  · simp only [signedCechExtensionValue, dif_neg ht]
+    apply cechDifferential_repeated X U F S p _ hc _ t ht
+    intro a ha
+    change signedCechExtensionValue X U F S p s a = 0
+    simp [signedCechExtensionValue, ha]
 
 end AlgebraicGeometry.Scheme
