@@ -6,12 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
-import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.CategoryTheory.SiteCechComplex
-import Sheaf.Paper.PQFCohomology
-import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import Sheaf.Paper.CechComparisonMapNaturality
 
 /-! # Naturality of the first Čech-to-cohomology comparison
 
@@ -36,22 +31,12 @@ Source: Stacks Project, Cohomology of Sheaves, Lemma 01EQ
 (blueprint: lem-sc-cech-h1-map-natural).
 
 Proof:
-1. By lem-weil-pbc-scheme-modules-enough-injectives and def-sp-injective-resolutions,
-choose an injective resolution. Form its Čech double complex (def-weil-pbc-site-cech-complex)
-and total complex (def-sp-double-complex-total). Restrictions of global sections give alpha;
-the resolution augmentation gives beta. Both commute with the differentials.
-2. By lem-weil-pbc-module-injective-open-cover-cech-acyclic the horizontal rows have zero
-positive cohomology, and the sheaf axiom identifies their degree-zero cohomology with global
-sections. The row-first spectral sequence (thm-sp-double-complex-spectral-sequences) implies
-that alpha induces an isomorphism on total cohomology.
-3. Compose H(beta) with the inverse of H(alpha) and the resolution identification for
-pqf-def-cohomology. Comparison maps (lem-weil-pbc-injective-resolution-lift-exists) and
-lem-weil-pbc-derived-functor-map-via-lift show that the resulting map satisfies
-IsModuleCechComparison for every resolution, independently of the chosen resolution.
-4. Lift a module morphism to the two resolutions. Termwise Čech functoriality gives a map
-of total complexes. Its squares with alpha commute by naturality of restriction and those
-with beta commute by the lifting equation. Taking first cohomology and using the lifted
-formula for the right derived map gives the displayed equality. -/
+Specialize `cechComparisonMapNaturality` to degree one. Choose the canonical comparison
+for each module using its existence conjunct. The comparison predicate determines the
+map uniquely: evaluate it at one injective resolution and cancel the resolution
+identification and the invertible homology map of alpha. Apply the theorem's naturality
+conjunct to these comparisons. This reuses the same injective-resolution double-complex
+construction and its lift squares, without repeating them. -/
 theorem cechH1Map_natural (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
     (hcover : iSup U = ⊤) :
     ∃ c : ∀ F : X.Modules,
@@ -63,6 +48,11 @@ theorem cechH1Map_natural (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
             ((PresheafOfModules.forgetToPresheafModuleCat
               (op ⊤) isTerminalTop.op).map φ.val)) 1 ≫ c F' =
           c F ≫ (RingedSpace.moduleCohomology X.toRingedSpace 1).map φ := by
-  sorry
+  classical
+  obtain ⟨hexists, hnatural⟩ := (cechComparisonMapNaturality X U hcover).2 1
+  choose c hc using hexists
+  refine ⟨c, hc, ?_⟩
+  intro F F' φ
+  exact hnatural F F' φ (c F) (c F') (hc F) (hc F')
 
 end AlgebraicGeometry.Scheme.Modules
