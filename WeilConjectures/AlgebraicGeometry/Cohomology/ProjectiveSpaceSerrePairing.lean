@@ -294,4 +294,109 @@ lemma cechComplexTwistIso_hom_comp_monomialCechMul (F : AddMonoidAlgebra A (n �
 
 end Cech
 
+/-- Restriction of scalars commutes with the maps induced on homology. -/
+lemma _root_.ModuleCat.restrictScalarsHomologyIso_inv_naturality {R S : Type u} [Ring R]
+    [Ring S] (f : R →+* S) {ι : Type*} {c : ComplexShape ι}
+    {K L : HomologicalComplex (ModuleCat.{u} S) c} (φ : K ⟶ L) (i : ι) :
+    (ModuleCat.restrictScalars.{u} f).map (HomologicalComplex.homologyMap φ i) ≫
+        (ModuleCat.restrictScalarsHomologyIso f L i).inv =
+      (ModuleCat.restrictScalarsHomologyIso f K i).inv ≫
+        HomologicalComplex.homologyMap
+          (((ModuleCat.restrictScalars.{u} f).mapHomologicalComplex c).map φ) i :=
+  ShortComplex.mapHomologyIso_inv_naturality _ _
+
+section Leray
+
+omit [Fintype n] in
+variable (A) in
+/-- The finite intersections of the standard opens of `ℙ(n; Spec A)` are affine. -/
+lemma isAffineOpen_biInf_standardOpen [Finite n] (s : Finset n) (hs : s.Nonempty) :
+    IsAffineOpen (⨅ i ∈ s, standardOpen n (Spec (.of A)) i) :=
+  have := Fintype.ofFinite n
+  haveI : IsSeparated (terminal.from ℙ(n; Spec (.of A))) := by
+    rw [← terminal.comp_from (ℙ(n; Spec (.of A)) ↘ Spec (.of A))]
+    infer_instance
+  IsAffineOpen.biInf (s : Set n) s.finite_toSet hs fun i _ ↦ isAffineOpen_standardOpen n _ i
+
+variable (A) in
+/-- **The cohomology of `𝒪(m)` on `ℙ(n; Spec A)` is that of the monomial Čech complex**, as
+`A`-modules: Leray's isomorphism `cechComplexHomologyLinearEquivH` for the standard affine
+covering, followed by the identification `cechComplexTwistIso` of the Čech complex of `𝒪(m)`
+with the monomial Čech complex. It is natural for morphisms of twisting sheaves which are
+compatible with morphisms of monomial Čech complexes
+(`twistHLinearEquivMonomialCechHomology_map`).
+
+(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+def twistHLinearEquivMonomialCechHomology (m : ℤ) (q : ℕ) :
+    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) q
+    (twist n (Spec (.of A)) m).H q ≃ₗ[A] (monomialCechComplex n A m).homology q :=
+  letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) q
+  let e₁ := cechComplexHomologyLinearEquivH (standardOpen n (Spec (.of A)))
+    (isAffineOpen_biInf_standardOpen A) (iSup_standardOpen n _) (twist n (Spec (.of A)) m) q
+  ({ e₁.symm.toAddEquiv with map_smul' := fun c x ↦ e₁.symm.map_smul (structureRingHom A c) x } :
+      (twist n (Spec (.of A)) m).H q ≃ₗ[A] (ModuleCat.restrictScalars (structureRingHom A)).obj
+        (((cechComplexFunctor (standardOpen n (Spec (.of A)))).obj
+          (twist n (Spec (.of A)) m).presheafModuleCat).homology q)) ≪≫ₗ
+    ((ModuleCat.restrictScalarsHomologyIso (structureRingHom A) _ q).symm ≪≫
+      (HomologicalComplex.homologyFunctor _ _ q).mapIso (cechComplexTwistIso n A m)).toLinearEquiv
+
+lemma twistHLinearEquivMonomialCechHomology_cechComplexHomologyLinearEquivH (m : ℤ) (q : ℕ)
+    (x : ((cechComplexFunctor (standardOpen n (Spec (.of A)))).obj
+      (twist n (Spec (.of A)) m).presheafModuleCat).homology q) :
+    twistHLinearEquivMonomialCechHomology A m q (cechComplexHomologyLinearEquivH
+        (standardOpen n (Spec (.of A))) (isAffineOpen_biInf_standardOpen A)
+        (iSup_standardOpen n _) (twist n (Spec (.of A)) m) q x) =
+      HomologicalComplex.homologyMap (cechComplexTwistIso n A m).hom q
+        ((ModuleCat.restrictScalarsHomologyIso (structureRingHom A) _ q).inv x) := by
+  simp [twistHLinearEquivMonomialCechHomology]
+  rfl
+
+/-- **Naturality of `twistHLinearEquivMonomialCechHomology`**: a morphism `φ : 𝒪(m) ⟶ 𝒪(m')`
+whose map on Čech complexes corresponds to a morphism `g` of monomial Čech complexes induces on
+cohomology the map induced by `g` on homology. -/
+lemma twistHLinearEquivMonomialCechHomology_map {m m' : ℤ}
+    (φ : twist n (Spec (.of A)) m ⟶ twist n (Spec (.of A)) m')
+    (g : monomialCechComplex n A m ⟶ monomialCechComplex n A m')
+    (hg : ((ModuleCat.restrictScalars (structureRingHom (n := n) A)).mapHomologicalComplex _).map
+        ((cechComplexFunctor (standardOpen n (Spec (.of A)))).map (presheafModuleCatMap φ)) ≫
+      (cechComplexTwistIso n A m').hom = (cechComplexTwistIso n A m).hom ≫ g)
+    (q : ℕ) (x : (twist n (Spec (.of A)) m).H q) :
+    twistHLinearEquivMonomialCechHomology A m' q (H.map φ q x) =
+      HomologicalComplex.homologyMap g q (twistHLinearEquivMonomialCechHomology A m q x) := by
+  obtain ⟨z, rfl⟩ := (cechComplexHomologyLinearEquivH (standardOpen n (Spec (.of A)))
+    (isAffineOpen_biInf_standardOpen A) (iSup_standardOpen n _) (twist n (Spec (.of A)) m)
+    q).surjective x
+  rw [← cechComplexHomologyLinearEquivH_map,
+    twistHLinearEquivMonomialCechHomology_cechComplexHomologyLinearEquivH,
+    twistHLinearEquivMonomialCechHomology_cechComplexHomologyLinearEquivH]
+  have h₁ := ConcreteCategory.congr_hom (ModuleCat.restrictScalarsHomologyIso_inv_naturality
+    (structureRingHom (n := n) A) ((cechComplexFunctor (standardOpen n (Spec (.of A)))).map
+      (presheafModuleCatMap φ)) q) z
+  have h₂ := ConcreteCategory.congr_hom (congrArg (HomologicalComplex.homologyMap · q) hg)
+    ((ModuleCat.restrictScalarsHomologyIso (structureRingHom A) _ q).inv z)
+  simp only [HomologicalComplex.homologyMap_comp, ConcreteCategory.comp_apply] at h₁ h₂
+  rw [← h₂]
+  exact congrArg _ h₁
+
+end Leray
+
+section Pairing
+
+omit [Fintype n] in
+/-- Multiplication by `r • t`, for `r ∈ A` and a global section `t` of `𝒪(a)`, is
+multiplication by `t` followed by multiplication by `r`. -/
+lemma twistMulHom_smul_structureRingHom {a b c : ℤ} (h : a + b = c) (r : A)
+    (t : (ModuleCat.restrictScalars (structureRingHom (n := n) A)).obj
+      ((twist n (Spec (.of A)) a).presheafModuleCat.obj (op ⊤))) :
+    twistMulHom h (r • t) =
+      twistMulHom h t ≫ (twist n (Spec (.of A)) c).smulHom (structureRingHom A r) := by
+  rw [← twistMulHom_smul]
+  congr 1
+  rw [ModuleCat.restrictScalars.smul_def, ModuleCat.restrictScalars.smul_def]
+  congr 1
+  rw [Subsingleton.elim (isTerminalTop.op.to (op ⊤)) (𝟙 (op (⊤ : (ℙ(n; Spec (.of A))).Opens)))]
+  exact ConcreteCategory.congr_hom ((ℙ(n; Spec (.of A))).presheaf.map_id _) _
+
+end Pairing
+
 end AlgebraicGeometry.ProjectiveSpace

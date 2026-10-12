@@ -165,6 +165,27 @@ lemma twistMulHom_app {a b : ℤ} (t : Γ(twist n S a, ⊤)) (U : (ℙ(n; S)).Op
     (unitSectionsEquiv U 1) x).trans
     (congrArg (tmulSection · x) (homOfGlobalSection_app_one _ t U))
 
+omit [Fintype n] in
+variable {S} in
+/-- `twistMulHom t` is additive in `t`. -/
+lemma twistMulHom_add {a b c : ℤ} (h : a + b = c) (t t' : Γ(twist n S a, ⊤)) :
+    twistMulHom h (t + t') = twistMulHom h t + twistMulHom h t' := by
+  subst h
+  ext U x
+  rw [Hom.add_app, AddCommGrpCat.hom_add_apply, twistMulHom_app, twistMulHom_app,
+    twistMulHom_app, map_add, add_tmulSection, map_add]
+
+omit [Fintype n] in
+variable {S} in
+/-- `twistMulHom (r • t)` is `twistMulHom t` followed by multiplication by the global function
+`r`. -/
+lemma twistMulHom_smul {a b c : ℤ} (h : a + b = c) (r : Γ(ℙ(n; S), ⊤)) (t : Γ(twist n S a, ⊤)) :
+    twistMulHom h (r • t) = twistMulHom h t ≫ (twist n S c).smulHom r := by
+  subst h
+  ext U x
+  rw [Hom.comp_app, ConcreteCategory.comp_apply, smulHom_app_apply, twistMulHom_app,
+    twistMulHom_app, map_smul, smul_tmulSection, Hom.app_smul]
+
 end ProjectiveSpace
 
 end AlgebraicGeometry
