@@ -8,6 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.FourierTateTwist
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.StalkFunctor
+public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryTransform
 public import WeilConjectures.DeligneLaumon.AffineLine.Punctual
 public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
 
@@ -298,11 +299,66 @@ theorem isLE_fourierTransform_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ �
     ((WeilComplex.objectProperty k₀ l _).ι.mapTriangle.obj (Triangle.mk f g h)) hT (m + 1)
     ‹_› ‹_›
 
-/-- A sheaf of finite support transforms into a complex `≤ -1`. -/
+/-- The complement of a finite set of closed points of the affine line is a dense open: it
+contains the image of the generic point of the irreducible geometric line, which is not a
+closed point since the affine line is not a single point. -/
+theorem affineLine.exists_opens_dense_compl_finite (S : Set (affineLine k₀).finitePoints)
+    (hS : S.Finite) :
+    ∃ V : (affineLine k₀).Opens, Dense (V : Set (affineLine k₀)) ∧
+      ∀ x ∈ S, x.1 ∉ (V : Set (affineLine k₀)) := by
+  set T : Set (affineLine k₀) := ⋃ x ∈ S, {x.1} with hT
+  have hTc : IsClosed T :=
+    hS.isClosed_biUnion fun x _ ↦ (affineLine k₀).isClosed_singleton_of_mem_finitePoints x.2
+  refine ⟨⟨Tᶜ, hTc.isOpen_compl⟩, ?_, fun x hx hxV ↦ hxV (Set.mem_biUnion hx rfl)⟩
+  set prA := (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj
+  have : IrreducibleSpace (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+    Scheme.Hom.irreducibleSpace_geometricFiber _
+  have hsp (z : affineLine k₀) : prA.base (genericPoint _) ⤳ z := by
+    obtain ⟨z', hz'⟩ :=
+      Scheme.Hom.geometricFiberProj_surjective (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) z
+    have h1 := ((genericPoint_spec _).specializes (Set.mem_univ z')).map prA.continuous
+    rwa [hz'] at h1
+  have hξ : prA.base (genericPoint _) ∈ Tᶜ := by
+    intro hS'
+    obtain ⟨x, -, hxe⟩ := Set.mem_iUnion₂.1 hS'
+    have hcl := (affineLine k₀).isClosed_singleton_of_mem_finitePoints x.2
+    rw [Set.mem_singleton_iff] at hxe
+    obtain ⟨a, b, hab⟩ := affineLine.nontrivial k₀
+    have key (z : affineLine k₀) : z = x.1 := by
+      have h1 := hsp z
+      rw [hxe] at h1
+      exact h1.mem_closed hcl rfl
+    exact hab ((key a).trans (key b).symm)
+  intro z
+  exact closure_mono (Set.singleton_subset_iff.2 hξ) (specializes_iff_mem_closure.1 (hsp z))
+
+/-- A sheaf of finite support transforms into a complex `≤ -1`: it vanishes on the dense
+complement of its support, so its transform is a lisse sheaf placed in degree `-1`
+(`AlgebraicGeometry.WeilSheaf.exists_isLisse_iso_fourierTransform_of_isZero_upperStar`). -/
 theorem isLE_fourierTransform_toComplex_of_support_finite (ψ : AddChar k₀ (PadicAlgCl l))
     (P : WeilSheaf k₀ l (affineLine k₀)) (hP : P.support.Finite) :
-    ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj P)).obj.IsLE (-1) :=
-  sorry
+    ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj P)).obj.IsLE (-1) := by
+  obtain ⟨V, hV, hVS⟩ := affineLine.exists_opens_dense_compl_finite _ hP
+  have hz : IsZero ((WeilSheaf.upperStar V.ι).obj P) := by
+    refine WeilSheaf.isZero_upperStar_of_forall_notMem_support V.ι P fun y hy ↦ ?_
+    refine hVS _ hy ?_
+    change V.ι.base y.1 ∈ (V : Set (affineLine k₀))
+    rw [Scheme.Opens.ι_apply]
+    exact y.1.2
+  have : IsDominant V.ι := ⟨by rwa [DenseRange, Scheme.Opens.range_ι]⟩
+  have : TopologicalSpace.NoetherianSpace (affineLine k₀) := by
+    have := LocallyOfFiniteType.isLocallyNoetherian (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+    have : IsNoetherian (affineLine k₀) := {}
+    infer_instance
+  have : TopologicalSpace.NoetherianSpace V :=
+    V.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact V.ι := ⟨fun U _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  obtain ⟨B', -, ⟨e⟩⟩ :=
+    WeilSheaf.exists_isLisse_iso_fourierTransform_of_isZero_upperStar ψ V.ι P hz
+  rw [WeilComplex.isLE_iff_isZero_homologySheaf]
+  intro a ha
+  exact (WeilSheaf.isZero_homologySheaf_toShiftedComplex (by lia) B').of_iso
+    ((WeilComplex.homologySheaf a).mapIso e)
 
 /-- A complex concentrated in degree `n` whose `𝓗ⁿ` has finite support transforms into a
 complex `≤ n - 1`: it is a sheaf of finite support placed in degree `n`. -/
