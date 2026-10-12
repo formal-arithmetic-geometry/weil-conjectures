@@ -16,12 +16,23 @@
  ],
  "proof": [
   {
-   "text": "Evaluate the defining left-derived lift factorization for each unit comparison on P. Naturality of the counits and the normalization of i reduce each path, after composition with ε_f at P, to the underived tensor unit comparison. The latter equals the whiskered identity comparison by Adjunction.leftAdjointCompIso_comp_id and Adjunction.leftAdjointCompIso_id_comp, using pushforward_id_comp and pushforward_comp_id. Transport the pinned adjunctions along id_comp and comp_id when comparing the mates. Cancel ε_f at P, invertible by the K-flat counit hypothesis, to obtain the two component equalities. No descent or resolution of other complexes is required.",
+   "text": "Transport the pinned tensor adjunctions along id_comp f and comp_id f by equality induction. Check on sections that pushforwardComp followed by this equality transport is the corresponding whiskering of pushforwardId and the functor unitor. Apply Mathlib Adjunction.leftAdjointCompIso_comp_id and Adjunction.leftAdjointCompIso_id_comp. Map these equalities to complexes and the homotopy quotient; quotient_obj_surjective reduces the component identities to termwise identities. This is the proved private helper tensorPullback_homotopy_unit.",
    "uses": [
-    "def-pc-derived-pullback",
     "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
+  },
+  {
+   "text": "At the homotopy image H of P, transport the supplied counits along id_comp and comp_id. Expand hc and Functor.leftDerived_fac_app. Apply Qh to the two tensor mate identities from the preceding calculation, then substitute the normalization hi at T_f^h(H) and at H. Naturality of i X proves the first path equality after postcomposition with epsilon_f(H); naturality of epsilon_f and functoriality prove the second.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assumption hK f P hP makes epsilon_f(H) invertible. Cancel this component as a monomorphism in both calculations; the functor unitor components are identities. No K-flatness of a tensor pullback, boundedness, descent, or resolution of any other object is needed.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -31,7 +42,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0D5S K-flat computation, expanded by C2 using the pinned-adjunction mate laws; component calculation only"
+  "place": "Tag 0D5S K-flat computation; N3 proof and independent second reading, using Mathlib leftAdjointCompIso_comp_id/id_comp, equality transport of pinned adjunctions, homotopy quotient, and leftDerived_fac_app"
  },
  "mathlib_searches": [
   {
@@ -118,10 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T144056-L-2089948",
-  "kind": "interface",
+  "landing": "20261012T184326-L-4012875",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
