@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsCofan
+import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
 
 /-! # Direct sums in the derived category of module sheaves
 
@@ -50,6 +51,7 @@ theorem derivedAmbientDirectSums (X : Scheme.{u})
       (DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) q).map
           ((e i).inv ≫ DerivedCategory.Q.map (Sigma.ι K i)))) := by
-  sorry
+  exact ⟨derivedAmbientDirectSumsCofan X I E K e,
+    fun q ↦ derivedAmbientDirectSumsHomology X I E K e q⟩
 
 end AlgebraicGeometry
