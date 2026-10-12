@@ -18,24 +18,21 @@
  },
  "proof": [
   {
-   "text": "The structure sheaf in degree zero is K-flat and represents the recorded derived tensor unit. Its F-image is isomorphic to the target underived unit by m_F. Apply Q to that unit isomorphism and compose with the inverse of the counit computing L on this K-flat single complex, using the source and target localization unit comparisons. This gives eta from the target derived unit to L of the source derived unit.",
+   "text": "Apply the proved unit-counit invertibility lemma. Construct eta using derivedPullback_tensorUnitIso: compose the target localization unit, the localized degree-zero monoidal unit map, the inverse supplied unit counit, and the image of the inverse source localization unit. All data are explicit.",
    "uses": [
-    "def-pc-kflat-complex",
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-pc-derived-pullback-tensor-unit-counit"
    ],
    "elementary": false
   },
   {
-   "text": "For a K-flat complex P use the supplied tensorator computation with the unit single complex and P, respectively P and the unit single complex. Postcompose each proposed unit identity with the invertible counit and localization maps. On the only nonzero summand (0,n), respectively (n,0), the summand condition for phi reduces the identity to the left, respectively right, unit law of m_F. Coproduct extensionality and cancellation give both laws on Q(P).",
+   "text": "The K-flat coherence lemma gives both left and right identities at Q(P), for every K-flat complex P and for this exact eta.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-pc-derived-pullback-tensor-unit-kflat-coherence"
    ],
    "elementary": false
   },
   {
-   "text": "Resolve an arbitrary A by a K-flat complex P. Both sides of each unit identity are natural in A. Transport the identities along the resolution isomorphism Q(P) to A. No derived associativity identity is used.",
+   "text": "For any derived object A, choose its complex preimage under Q. Apply the existing K-flat resolution theorem to that complex; Q(s) is an isomorphism because s is a quasi-isomorphism. Compose asIso(Q(s)) with Q.objObjPreimageIso A to obtain e:Q(P) isomorphic to A. Convert each unit equality to the inverse equality between composites of isomorphisms using Iso.ext. Apply the already proved Functor.OplaxMonoidal.oplax_left_unitality_of_iso and oplax_right_unitality_of_iso to mu.inv and eta.inv along e, then use Iso.symm_eq_iff and congrArg Iso.hom to return to the original hom equality. Both applications are implemented as proved private helpers.",
    "uses": [
     "lem-pc-kflat-resolution"
    ],
@@ -43,17 +40,15 @@
   }
  ],
  "proof_deps": [
-  "def-pc-derived-pullback",
-  "def-pc-kflat-complex",
-  "def-pc-scheme-derived-tensor-structure",
-  "def-pc-tensor-complex-sheaves",
+  "lem-pc-derived-pullback-tensor-unit-counit",
+  "lem-pc-derived-pullback-tensor-unit-kflat-coherence",
   "lem-pc-kflat-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 079U, lemma-pullback-tensor-product, and section-derived-pullback; parent lem-pc-derived-pullback-monoidal-descent proof, step 3 (unit)",
-  "note": "Refinement of the parent proof. Stacks establishes the K-flat bifunctor comparison; the detailed coherence checks with the supplied counit and summand formula are written by this worker."
+  "place": "Tag 079U, lemma-pullback-tensor-product; parent unit proof steps 1–3",
+  "note": "H4: explicit unit comparison; counit invertibility proved using recorded computation and Mathlib leftDerivedUnique; both unit laws reduced to one K-flat coherence theorem; complete transport via proved OplaxOfLaxSquare lemmas and existing K-flat resolutions."
  },
  "mathlib_searches": [
   {
@@ -131,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-9c512",
-  "group": "Y2",
+  "reviewer": "X-447ca",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261012T184400-L-4025866",
+  "landing": "20261012T232858-L-2041709",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and repository declarations; all modules and the direct importer compiled cleanly."
+  "note": "independent Codex review: Packet, delivered files, DAG statements, compiler results, and direct importer all matched successfully"
  }
 }

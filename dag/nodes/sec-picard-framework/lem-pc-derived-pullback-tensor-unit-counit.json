@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-derived-pullback-tensor-unit-counit",
+ "kind": "statement",
+ "title": "Invertibility of the supplied derived-pullback counit at the unit complex",
+ "statement": "Let $g:T\\to X$ be a morphism of schemes [def-pc-scheme], with the recorded derived categories [def-pc-derived-category], derived tensor structures [def-pc-scheme-derived-tensor-structure] and $L=Lg^*$ [def-pc-derived-pullback]. Let $F$ be an additive functor from sheaves of $\\mathcal O_X$-modules to sheaves of $\\mathcal O_T$-modules, identified with the module tensor pullback [def-pc-module-pullback]: there are equalities $h_M:F(M)=g^*M$ and $F(a)=h_M;g^*(a);h_N^{-1}$ for every $a:M\\to N$. Let $\\epsilon:Q_hL\\to K(F)Q_h$ exhibit $L$ as a left-derived functor for quasi-isomorphisms. Write $U_X=\\mathcal O_X[0]$ for the tensor unit of the category of cochain complexes. Then $\\epsilon_{q(U_X)}$ is invertible, where $q$ is the homotopy quotient. This conclusion concerns only the counit at the unit complex and contains no assertion about the tensor comparison or its coherence.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 06YJ, lemma-derived-pullback, and Tag 079U, lemma-pullback-tensor-product; parent unit proof, step 1"
+ },
+ "proof": [
+  {
+   "text": "The equalities hF and hmap imply F equals the recorded tensor pullback by Functor.ext. Extract its recorded left-derived counit and K-flat computation from exists_derivedPullback and identify that functor with the same tensor pullback by Functor.ext.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit sheaf is flat: its right tensor functor is isomorphic to the identity. The degree-zero single complex is bounded above and all its terms are flat, using invariance under the singleObjXSelf isomorphism in degree zero and flatness of zero objects in other degrees. Apply bounded-above flat implies K-flat.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The recorded counit at this unit complex is invertible. Mathlib Functor.leftDerivedUnique compares the supplied counit with the recorded one. leftDerivedNatTrans_app identifies the supplied component as an invertible comparison followed by the recorded component, so it is invertible. If F is additionally equipped with a strong monoidal structure mF, the accompanying auxiliary definitions give the explicit unit isomorphism eT;Qh(uF);epsilon_U inverse;L(eX inverse), where uF is single(mF.epsilon) followed by inverse singleMapHomologicalComplex and the inverse mapHomotopyCategoryFactors; eX and eT are the localization unit maps. This construction uses only inverses of specified maps.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-bounded-above-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 06YJ, lemma-derived-pullback, and Tag 079U, lemma-pullback-tensor-product; parent unit proof, step 1",
+  "note": "H4 refinement of parent unit proof; see the Lean for the explicit comparison and transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A unit isomorphism and left and right unit coherence of a derived monoidal functor computed on K-flat complexes",
+   "results": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor'_map_app",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unitality_of_iso|isIso_ε_Q|singleMapHomologicalComplex",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback counit at the degree zero tensor unit is invertible; derived tensor unit coherence on K flat complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable (no mathematical verdict)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent descent proof, step 3, unit comparison and two unit laws; refines the derived tensor comparisons used in lem-sc-finite-duality-trace. Here the unit subargument is refined: Invertibility of the supplied derived-pullback counit at the unit complex.",
+   "via": [
+    "lem-pc-derived-pullback-tensor-unit",
+    "lem-pc-derived-pullback-monoidal-descent",
+    "def-pc-derived-pullback-monoidal-model",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-pc-perfect-tensor-hom-duality",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorUnitCounit.lean",
+  "declaration": "AlgebraicGeometry.derivedPullback_tensor_unit_counit_isIso",
+  "statement": "theorem derivedPullback_tensor_unit_counit_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]\n    (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤\n      SheafOfModules.{uModel} (moduleRings T.toRingedSpace))\n    (hF : ∀ M, F.obj M = Scheme.Modules.tensorPullbackObj g M)\n    (hmap : ∀ {M N} (a : M ⟶ N),\n      F.map a = eqToHom (hF M) ≫ Scheme.Modules.tensorPullbackMap g a ≫\n        eqToHom (hF N).symm)\n    [F.Additive]\n    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶\n      F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (hε : (derivedPullback g).IsLeftDerivedFunctor ε\n      (HomotopyCategory.quasiIso\n        (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)))\n    : IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj\n        (𝟙_ (CochainComplex\n          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ))))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.derivedPullback_tensor_unit_counit_isIso",
+   "AlgebraicGeometry.tensorPullback_unitHomotopyIso",
+   "AlgebraicGeometry.derivedPullback_tensorUnitIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-447ca",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261012T232858-L-2041709",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-447ca",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261012T232858-L-2041709",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG statements, compiler results, and direct importer all matched successfully"
+ }
+}

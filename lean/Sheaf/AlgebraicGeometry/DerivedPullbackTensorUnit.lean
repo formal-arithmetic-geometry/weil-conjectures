@@ -6,10 +6,9 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent
-import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnitKFlat
 import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.AlgebraicGeometry.DerivedPullback
-import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 /-! # Unit laws for derived pullback tensor comparisons
 
@@ -20,7 +19,7 @@ and section-derived-pullback; the parent descent proof, step 3.
 
 @[expose] public section
 
-universe uModel wModel
+universe uModel wModel uTransport vTransport uTransport' vTransport'
 
 open CategoryTheory CategoryTheory.MonoidalCategory
 
@@ -39,6 +38,53 @@ attribute [local instance]
   tensorDescentModuleResolutions
   tensorDescentModuleDerivedMonoidal
   tensorDescentPullbackDescentQLax
+
+private theorem tensorUnit_left_of_iso
+    {C : Type uTransport} {D : Type uTransport'}
+    [Category.{vTransport} C] [Category.{vTransport'} D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    (L : C ⥤ D) (μ : curriedTensorPre L ≅ curriedTensorPost L)
+    (η : 𝟙_ D ≅ L.obj (𝟙_ C)) {A B : C} (e : A ≅ B)
+    (h : (λ_ (L.obj A)).hom = η.hom ▷ L.obj A ≫
+      ((μ.app (𝟙_ C)).app A).hom ≫ L.map (λ_ A).hom) :
+    (λ_ (L.obj B)).hom = η.hom ▷ L.obj B ≫
+      ((μ.app (𝟙_ C)).app B).hom ≫ L.map (λ_ B).hom := by
+  let a := λ_ (L.obj A)
+  let b := whiskerRightIso η (L.obj A) ≪≫ (μ.app (𝟙_ C)).app A ≪≫ L.mapIso (λ_ A)
+  have hab : a = b := Iso.ext h
+  have hi : (λ_ (L.obj A)).inv = L.map (λ_ A).inv ≫
+      ((μ.symm.app (𝟙_ C)).app A).hom ≫ η.inv ▷ L.obj A :=
+    by simpa [a, b, Category.assoc] using congrArg Iso.inv hab
+  have hj := Functor.OplaxMonoidal.oplax_left_unitality_of_iso μ.inv e hi
+  let c := λ_ (L.obj B)
+  let d := whiskerRightIso η (L.obj B) ≪≫ (μ.app (𝟙_ C)).app B ≪≫ L.mapIso (λ_ B)
+  have hcd : c.symm = d.symm := by
+    apply Iso.ext
+    simpa [c, d, Category.assoc] using hj
+  exact congrArg Iso.hom (Iso.symm_eq_iff.mp hcd)
+private theorem tensorUnit_right_of_iso
+    {C : Type uTransport} {D : Type uTransport'}
+    [Category.{vTransport} C] [Category.{vTransport'} D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    (L : C ⥤ D) (μ : curriedTensorPre L ≅ curriedTensorPost L)
+    (η : 𝟙_ D ≅ L.obj (𝟙_ C)) {A B : C} (e : A ≅ B)
+    (h : (ρ_ (L.obj A)).hom = L.obj A ◁ η.hom ≫
+      ((μ.app A).app (𝟙_ C)).hom ≫ L.map (ρ_ A).hom) :
+    (ρ_ (L.obj B)).hom = L.obj B ◁ η.hom ≫
+      ((μ.app B).app (𝟙_ C)).hom ≫ L.map (ρ_ B).hom := by
+  let a := ρ_ (L.obj A)
+  let b := whiskerLeftIso (L.obj A) η ≪≫ (μ.app A).app (𝟙_ C) ≪≫ L.mapIso (ρ_ A)
+  have hab : a = b := Iso.ext h
+  have hi : (ρ_ (L.obj A)).inv = L.map (ρ_ A).inv ≫
+      ((μ.symm.app A).app (𝟙_ C)).hom ≫ L.obj A ◁ η.inv :=
+    by simpa [a, b, Category.assoc] using congrArg Iso.inv hab
+  have hj := Functor.OplaxMonoidal.oplax_right_unitality_of_iso μ.inv e hi
+  let c := ρ_ (L.obj B)
+  let d := whiskerLeftIso (L.obj B) η ≪≫ (μ.app B).app (𝟙_ C) ≪≫ L.mapIso (ρ_ B)
+  have hcd : c.symm = d.symm := by
+    apply Iso.ext
+    simpa [c, d, Category.assoc] using hj
+  exact congrArg Iso.hom (Iso.symm_eq_iff.mp hcd)
 
 /-- The extended natural tensor comparison admits a unit isomorphism satisfying
 both unit laws. The associativity law is not assumed or asserted here.
@@ -117,6 +163,29 @@ theorem derivedPullback_tensor_unit {T X : Scheme.{uModel}} (g : T ⟶ X)
           (ρ_ ((derivedPullback g).obj A)).hom =
             (derivedPullback g).obj A ◁ η.hom ≫
               ((μ.app A).app (𝟙_ (schemeDerivedCategory X))).hom ≫
-              (derivedPullback g).map (ρ_ A).hom) := by sorry
+              (derivedPullback g).map (ρ_ A).hom) := by
+  have : IsIso (ε.app (𝟙_ (HomotopyCategory
+      (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)))) :=
+    derivedPullback_tensor_unit_counit_isIso g F hF hmap ε hε
+  let η := derivedPullback_tensorUnitIso g F mF ε
+  refine ⟨η, ?_, ?_⟩
+  · intro A
+    let Q := DerivedCategory.Q
+      (C := SheafOfModules.{uModel} (moduleRings X.toRingedSpace))
+    obtain ⟨P, s, hP, _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage A)
+    have : QuasiIso s := hs
+    let e : Q.obj P ≅ A := asIso (Q.map s) ≪≫ Q.objObjPreimageIso A
+    exact tensorUnit_left_of_iso (derivedPullback g) μ η e
+      (derivedPullback_tensor_unit_kFlat g F hF hmap mF ε hε φ hφ μ hμ P hP).1
+  · intro A
+    let Q := DerivedCategory.Q
+      (C := SheafOfModules.{uModel} (moduleRings X.toRingedSpace))
+    obtain ⟨P, s, hP, _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage A)
+    have : QuasiIso s := hs
+    let e : Q.obj P ≅ A := asIso (Q.map s) ≪≫ Q.objObjPreimageIso A
+    exact tensorUnit_right_of_iso (derivedPullback g) μ η e
+      (derivedPullback_tensor_unit_kFlat g F hF hmap mF ε hε φ hφ μ hμ P hP).2
 
 end AlgebraicGeometry
