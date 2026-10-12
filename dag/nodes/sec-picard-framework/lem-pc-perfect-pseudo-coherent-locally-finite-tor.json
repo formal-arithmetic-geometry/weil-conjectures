@@ -28,41 +28,55 @@
  ],
  "proof": [
   {
-   "text": "Choose the open covering supplied by [def-pc-perfect-complex] and refine it by affine opens. On an affine member U=Spec(A), the affine clause of [def-pc-perfect-complex] represents E|_U by a bounded complex P^bullet of finite projective A-modules. For each term, [lem-weil-pbc-finite-projective-standard-free-cover] gives a finite principal-open cover on which that term is finite free; intersecting the finitely many covers over the finitely many nonzero degrees gives an open cover of U on each member of which P^bullet is a bounded-above complex of finite free O_U-modules. Thus the local condition in [def-pur-pseudo-coherent-complex] holds, and E is pseudo-coherent.",
+   "text": "At each point unpack perfectness [def-pc-perfect-complex]. Apply [lem-pc-strictly-perfect-finite-free-refinement] to the chosen strictly perfect local model. This gives a smaller neighbourhood and a bounded finite-free complex representing the restriction. Forget its lower bound to obtain the bounded-above finite-free model in [def-pur-pseudo-coherent-complex].",
    "uses": [
     "def-pc-perfect-complex",
-    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-pc-strictly-perfect-finite-free-refinement",
     "def-pur-pseudo-coherent-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Lemma 08CQ, proof of (1) => (2): perfect implies pseudo-coherent"
-   }
+   "elementary": true
   },
   {
-   "text": "On the same U, every term of P^bullet is flat because it is a direct summand of a finite free module. The bounded-above flat complex is K-flat by [lem-pc-bounded-above-flat-kflat], so for every O_U-module G the derived tensor E|_U tensor^L G is represented by the ordinary tensor complex P^bullet tensor G. Since P^bullet is bounded, this tensor complex is zero outside one finite interval [a_U,b_U] independent of G; therefore H^i(E|_U tensor^L G)=0 for i outside [a_U,b_U]. The chosen U form an open cover, proving locally finite Tor dimension.",
+   "text": "For the Tor clause use the same finite-free refinement. Transport the complex through Modules.overEquiv U. The equivalence preserves zero objects and coproducts and identifies the unit with the unit of U.toScheme, so the transported complex has the same termwise bounds and finite-free terms. Finite free terms are flat: use [lem-pc-sheaf-modules-tensor-closed] and the Grothendieck abelian structure, apply [lem-weil-pbc-flat-coproduct] to a finite coproduct of units, and transport exactness along the term isomorphisms. Apply [lem-pc-bounded-above-flat-kflat] to obtain a K-flat representative.",
    "uses": [
-    "def-pc-perfect-complex",
+    "lem-pc-strictly-perfect-finite-free-refinement",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-flat-coproduct",
     "lem-pc-bounded-above-flat-kflat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Lemma 08CQ, proof of (1) => (2): perfect implies finite Tor dimension"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The private open_model_iso proves that the transported representative represents derivedPullback U.ι of E: tensorPullback is isomorphic to ordinary open restriction by uniqueness of left adjoints; exact open restriction composed with the over-site equivalence induces mapDerivedCategory. The universal property in [def-pc-derived-pullback] and leftDerivedUnique identify its derived functor with this exact restriction. Compose mapDerivedCategoryNatIso, mapDerivedCategoryCompIso, the given model isomorphism, and mapDerivedCategoryFactors.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any module G and degree n outside [min a b,b], n is outside [a,b], so the transported representative P has zero term in degree n. mapBifunctorSingle₂Iso identifies P tensor G[0] with termwise tensorRight G applied to P. Tensor preserves zero objects; the short-complex lemma isZero_homology_of_isZero_X₂ gives zero homology in degree n. P, its K-flatness, and the inverse representing isomorphism are the witnesses in [def-pc-derived-tensor-cohomology-vanishes]. Since min a b ≤ b and the bounds are independent of G, unpacking [def-pc-locally-finite-tor-dimension] concludes.",
+   "uses": [
+    "def-pc-derived-tensor-cohomology-vanishes",
+    "def-pc-locally-finite-tor-dimension"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-perfect-complex",
+  "lem-pc-strictly-perfect-finite-free-refinement",
   "def-pur-pseudo-coherent-complex",
-  "lem-weil-pbc-finite-projective-standard-free-cover",
-  "lem-pc-bounded-above-flat-kflat"
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-flat-coproduct",
+  "lem-pc-bounded-above-flat-kflat",
+  "def-pc-derived-pullback",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-pc-locally-finite-tor-dimension"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology of Sheaves, Lemma 08CQ (cohomology-lemma-perfect), implication (1) => (2)"
+  "place": "Lemma 08CQ (cohomology-lemma-perfect), implication (1) => (2); formalized by K3 using the existing finite-free refinement and exact-functor localization comparisons."
  },
  "mathlib_searches": [
   {
@@ -163,5 +177,15 @@
   "group": "J1",
   "result": "fix",
   "note": "08CQ (1)=>(2): X Scheme, E : schemeDerivedCategory X, hE Scheme.IsPerfect (M1); conclusion Scheme.IsPseudoCoherent (M1) and HasLocallyFiniteTorDimension; new def-pc-locally-finite-tor-dimension pointwise open nbhd U, a<=b, all O_U-modules G, i<a or b<i, restated via landed schemeDerivedTensorCohomologyVanishes on U.toScheme of (derivedPullback U.ι).obj E (was an over-site re-spelling with 3 letI); extra HasDerivedCategory binder on U.toScheme is a localization model; no let, universes shared"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T204509-L-869603",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
