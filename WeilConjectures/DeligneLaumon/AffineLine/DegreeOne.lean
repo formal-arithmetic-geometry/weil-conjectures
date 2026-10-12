@@ -114,26 +114,6 @@ theorem WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_fourierTransform_middleE
   -- `K = (j_*M)[1]`, and `H_c^0(𝔸¹, j_*M) = 0`
   sorry
 
-namespace WeilSheaf
-
-/-- *Boundary semicontinuity of weights* on a curve: let `j : U₀ ⟶ C₀` be a dense open immersion
-into a smooth geometrically connected curve over `k₀`. If the lisse sheaf `F` on `U₀` has punctual
-weights at most `β`, then so has its direct image `j_*F` at every closed point of `C₀`, including
-the finitely many points outside `U₀`, where it may be singular.
-(blueprint: `lem-wf-boundary-semicontinuity`) -/
-theorem IsLisse.hasWeightsAtMost_directImage {U C : Scheme.{u}}
-    [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
-    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
-    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
-    (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
-    (hj : Dense (Set.range j.base)) {F : WeilSheaf k₀ l U} (hF : F.IsLisse)
-    {ι : PadicAlgCl l →+* ℂ} {β : ℝ} (hβ : F.HasWeightsAtMost ι β) :
-    ((directImage j).obj F).HasWeightsAtMost ι β :=
-  sorry
-
-end WeilSheaf
-
 namespace WeilSheaf.LisseOnDenseOpen
 
 /-- *Boundary semicontinuity of weights* on the affine line: if the lisse sheaf `M` on the

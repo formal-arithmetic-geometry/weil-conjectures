@@ -171,4 +171,47 @@ theorem HasWeightsAtMost.of_powFrobenius {M : FrobeniusModule.{u, v} K} {ι : K 
   rw [map_pow, norm_pow, Nat.cast_pow, e] at hb
   exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg (Nat.cast_nonneg _) _) hm).1 hb
 
+/-- A Frobenius module with weights at most `w` whose dual has weights at most `-w` (through an
+isomorphism `N ≃ M^∨`) is pure of weight `w`: the eigenvalues of the Frobenius of `M^∨` are the
+inverses of those of `M`. -/
+theorem IsPureOfWeight.of_hasWeightsAtMost_of_equiv_dual {ι : K →+* ℂ} {q : ℕ}
+    {M : FrobeniusModule.{u, v} K} {N : FrobeniusModule.{max u v, v} K} (e : N.Equiv M.dual) {w : ℝ}
+    (h : M.HasWeightsAtMost ι q w) (h' : N.HasWeightsAtMost ι q (-w)) :
+    M.IsPureOfWeight ι q w := by
+  intro α hα
+  obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hx
+  have hα0 : α ≠ 0 := by
+    rintro rfl
+    exact hx.2 (M.frobenius.injective
+      ((by simpa using hx.1 : M.frobeniusEnd x = 0).trans (map_zero _).symm))
+  have hx' : M.frobenius.symm x = α⁻¹ • x := by
+    apply M.frobenius.injective
+    rw [LinearEquiv.apply_symm_apply, map_smul]
+    change x = α⁻¹ • M.frobeniusEnd x
+    rw [hx.1, smul_smul, inv_mul_cancel₀ hα0, one_smul]
+  have hinv : Module.End.HasEigenvalue (M.frobenius.symm.toLinearMap : Module.End K M.carrier)
+      α⁻¹ :=
+    Module.End.hasEigenvalue_of_hasEigenvector
+      (Module.End.hasEigenvector_iff.2 ⟨Module.End.mem_eigenspace_iff.2 hx', hx.2⟩)
+  have hN : N.frobeniusEnd.HasEigenvalue α⁻¹ := by
+    have hF : M.dual.frobeniusEnd.charpoly = M.frobenius.symm.toLinearMap.charpoly :=
+      LinearMap.charpoly_dualMap _
+    rw [Module.End.hasEigenvalue_iff_isRoot_charpoly, ← e.charpoly_frobeniusEnd, hF,
+      ← Module.End.hasEigenvalue_iff_isRoot_charpoly]
+    exact hinv
+  have hn := h' _ hN
+  rw [map_inv₀, norm_inv, neg_div, Real.rpow_neg (Nat.cast_nonneg q)] at hn
+  have hpos : 0 < ‖ι α‖ := norm_pos_iff.2 ((map_ne_zero ι).2 hα0)
+  have hq : 0 < (q : ℝ) ^ (w / 2) := by
+    rcases (Nat.cast_nonneg q : (0 : ℝ) ≤ q).lt_or_eq with hq | hq
+    · exact Real.rpow_pos_of_pos hq _
+    · have := h α hα
+      rw [← hq] at this ⊢
+      by_contra hle
+      have h0 : (0 : ℝ) ^ (w / 2) = 0 := le_antisymm (not_lt.1 hle) (Real.rpow_nonneg le_rfl _)
+      rw [h0] at this
+      exact absurd this (not_le.2 hpos)
+  exact le_antisymm (h α hα) ((inv_le_inv₀ hpos hq).1 hn)
+
 end FrobeniusModule
