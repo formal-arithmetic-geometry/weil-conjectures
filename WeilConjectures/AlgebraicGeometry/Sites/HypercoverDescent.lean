@@ -393,6 +393,41 @@ lemma surjective_toMatching_of_hasUniqueLifts {V : SemiSimplicialObject Y.Etale}
   have := h.isIso_toMatching
   infer_instance
 
+
+/-- Unique lifts are preserved by base change. -/
+lemma _root_.CategoryTheory.SemiSimplicialObject.HasUniqueLifts.baseChange
+    {V : SemiSimplicialObject Y.Etale} {n : ℕ} (h : V.HasUniqueLifts n) {Z : Scheme.{u}}
+    (g : Z ⟶ Y) : (V.baseChange g).HasUniqueLifts n :=
+  h.map (MorphismProperty.Over.pullback @Etale ⊤ g : Y.Etale ⥤ Z.Etale)
+
+/-- **Coskeletal replacement** of a hypercover: the coskeletal extension `V'` of the truncation of
+a hypercover `V` in degrees `≤ N` is a hypercover with lifts above degree `N`, and the canonical
+morphism `V ⟶ V'` is an isomorphism in degrees `≤ N`. -/
+theorem exists_coskeletal_replacement (V : SemiSimplicialObject Y.Etale)
+    (hV : V.IsHypercover Y.smallEtaleTopology) (N : ℕ) :
+    ∃ (V' : SemiSimplicialObject Y.Etale) (u : V ⟶ V'), V'.IsHypercover Y.smallEtaleTopology ∧
+      (∀ n, n ≤ N → IsIso (u.app n)) ∧ ∀ n, N ≤ n → V'.HasUniqueLifts n := by
+  let T := V.truncate N
+  let u : V ⟶ T.cosk := extendHom N (fun n h ↦ T.cosk_hasLifts n h)
+    (fun n h ↦ (T.coskIso n h).inv) (fun n h i ↦ by
+      rw [T.cosk_δ n h, Iso.inv_hom_id_assoc]
+      rfl)
+  have hu (n : ℕ) (h : n ≤ N) : IsIso (u.app n) := by
+    rw [extendHom_app _ _ _ _ n h]
+    infer_instance
+  refine ⟨T.cosk, u, ?_, hu, fun n h ↦ T.cosk_hasUniqueLifts n h⟩
+  rw [Scheme.Etale.isHypercover_iff_surjective] at hV ⊢
+  refine ⟨?_, fun n ↦ ?_⟩
+  · have := hu 0 (Nat.zero_le _)
+    have e : (Scheme.Etale.leftIso (asIso (u.app 0))).inv ≫ (V.obj 0).hom = (T.cosk.obj 0).hom :=
+      MorphismProperty.Over.w (asIso (u.app 0)).inv
+    have := hV.1
+    rw [← e]
+    infer_instance
+  · by_cases hn : n < N
+    · rw [← surjective_toMatching_iff_of_isIso u n (fun j hj ↦ hu j (by omega))]
+      exact hV.2 n
+    · exact surjective_toMatching_of_hasUniqueLifts (T.cosk_hasUniqueLifts n (by omega))
 end Matching
 
 namespace Etale
@@ -411,6 +446,12 @@ noncomputable def baseChangeProj (n : ℕ) : (U.obj n).left ⟶ (V.obj n).left :
 
 lemma baseChangeProj_eq (n : ℕ) :
     baseChangeProj g φ n = (φ.app n).left ≫ pullback.fst (V.obj n).hom g := rfl
+
+omit φ in
+@[simp]
+lemma baseChangeProj_id (n : ℕ) :
+    baseChangeProj g (𝟙 (V.baseChange g)) n = pullback.fst (V.obj n).hom g :=
+  Category.id_comp _
 
 include φ in
 lemma baseChangeProj_w (n : ℕ) :
@@ -476,6 +517,7 @@ noncomputable def baseChangeLift {Z' : Scheme.{u}} (g' : Y ⟶ Z') (h : Z' ⟶ Z
       · rw [Category.assoc, baseChange_δ_left_snd, pullback.lift_snd, Category.assoc,
           pullback.lift_snd, ← Category.assoc, MorphismProperty.Over.w])
 
+@[reassoc]
 lemma baseChangeProj_baseChangeLift {Z' : Scheme.{u}} (g' : Y ⟶ Z') (h : Z' ⟶ Z)
     (hgh : g' ≫ h = g) (n : ℕ) :
     baseChangeProj g' (baseChangeLift g φ g' h hgh) n ≫ pullback.fst (V.obj n).hom h =

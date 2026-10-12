@@ -122,6 +122,30 @@ theorem cohomologyRestrictOver_cohomologyClass (hV : V.IsHypercover Z.smallEtale
   rw [this]
   rfl
 
+
+/-- Restricting along `φ : U ⟶ V ×_Z Y` and then further along the base change `U ×_Y Y' ⟶ U` is
+restricting along the composite. -/
+lemma restrictAlongBaseChange_trans {Y' : Scheme.{u}} (pY' : Y' ⟶ S) (g' : Y' ⟶ Y)
+    (hg' : g' ≫ pY = pY') (n : ℕ)
+    (s : ((pZ)^*[ModuleCat.{u + 1} Λ].obj F).obj.obj (op (V.obj n))) :
+    restrictAlongBaseChange pY' pZ (g' ≫ g) (by rw [Category.assoc, hg, hg'])
+        (baseChangeTrans g' g (baseChangeComp g' (𝟙 (U.baseChange g')) φ)) F n s =
+      restrictAlongBaseChange pY' pY g' hg' (𝟙 (U.baseChange g')) F n
+        (restrictAlongBaseChange pY pZ g hg φ F n s) := by
+  simp only [restrictAlongBaseChange]
+  rw [ModuleSheaf.restrictAlong_restrictAlong]
+  have hm : baseChangeProj (g' ≫ g) (baseChangeTrans g' g
+      (baseChangeComp g' (𝟙 (U.baseChange g')) φ)) n =
+        baseChangeProj g' (𝟙 (U.baseChange g')) n ≫ baseChangeProj g φ n := by
+    rw [baseChangeProj_baseChangeTrans, baseChangeProj_baseChangeComp, baseChangeProj_eq g φ,
+      Category.assoc]
+  rw [ModuleSheaf.restrictAlong_congr _ _ _ _ _ _ hm]
+
+lemma cohomologyRestrictOver_congr' {g₁ g₂ : Y ⟶ Z} (hg₁ : g₁ ≫ pZ = pY) (h : g₁ = g₂) (q : ℕ) :
+    cohomologyRestrictOver Λ pY pZ g₁ hg₁ F q =
+      cohomologyRestrictOver Λ pY pZ g₂ (h ▸ hg₁) F q := by
+  subst h
+  rfl
 end Restrict
 
 variable {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)
@@ -224,6 +248,7 @@ theorem exists_cohomologyRestrictOver_eq_of_isLimit (q : ℕ)
       (c'.π.app k'') (D'.map f'') hgh q
   rw [ModuleSheaf.restrictAlong_congr _ _ _ _ _ _ hm]
 
+set_option maxHeartbeats 1000000 in
 /-- **Continuity of étale cohomology, injectivity** (blueprint
 `lemma-weil-pbc-etale-cohomology-continuity`): a cohomology class of the pullback of `F` to some
 `Xᵢ` which vanishes on the limit `X = lim Xᵢ` vanishes on some `Xⱼ`, `j ⟶ i`. -/
@@ -233,7 +258,145 @@ theorem exists_cohomologyRestrictOver_eq_zero_of_isLimit (q : ℕ) (i : I)
       ((Etale.upperStar (ModuleCat.{u + 1} Λ) (D.obj i).hom).obj F) q)
     (hy : cohomologyRestrictOver Λ c.pt.hom (D.obj i).hom (c.π.app i).left (Over.w _) F q y = 0) :
     ∃ (j : I) (φ : j ⟶ i),
-      cohomologyRestrictOver Λ (D.obj j).hom (D.obj i).hom (D.map φ).left (Over.w _) F q y = 0 :=
+      cohomologyRestrictOver Λ (D.obj j).hom (D.obj i).hom (D.map φ).left (Over.w _) F q y = 0 := by
+  classical
+  set D' := D ⋙ Over.forget S with hD'
+  set c' := (Over.forget S).mapCone c with hc'
+  let π : D' ⟶ (Functor.const I).obj S :=
+    { app i := (D.obj i).hom
+      naturality _ _ f := by simp [D'] }
+  have hP (j : I) : c.pt.hom = c'.π.app j ≫ π.app j := (Over.w (c.π.app j)).symm
+  have hπ {j j' : I} (f : j ⟶ j') : D'.map f ≫ π.app j' = π.app j :=
+    (π.naturality f).trans (Category.comp_id _)
+  have : ∀ i, CompactSpace (D'.obj i) := fun i ↦ inferInstanceAs (CompactSpace (D.obj i).left)
+  have : ∀ i, QuasiSeparatedSpace (D'.obj i) := fun i ↦
+    inferInstanceAs (QuasiSeparatedSpace (D.obj i).left)
+  have : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (D'.map f) := fun f ↦
+    inferInstanceAs (IsAffineHom (D.map f).left)
+  have : CompactSpace c.pt.left := Scheme.compactSpace_of_isLimit D' c' hc
+  have : QuasiSeparatedSpace c.pt.left := quasiSeparatedSpace_pt hc
+  -- the final step: a class whose restriction along a morphism of hypercovers is a coboundary
+  -- vanishes at that stage
+  have final {V : SemiSimplicialObject (D'.obj i).Etale}
+      (hV : V.IsHypercover (D'.obj i).smallEtaleTopology)
+      {s : ((π.app i)^*[ModuleCat.{u + 1} Λ].obj F).obj.obj (op (V.obj q))}
+      (hs : V.IsCocycle ((π.app i)^*[ModuleCat.{u + 1} Λ].obj F) q s) {j : I} (φ : j ⟶ i)
+      {W : SemiSimplicialObject (D'.obj j).Etale}
+      (hW : W.IsHypercover (D'.obj j).smallEtaleTopology)
+      (g : D'.obj j ⟶ D'.obj i) (hgφ : D'.map φ = g) (ψ : W ⟶ V.baseChange g)
+      (h : W.IsCoboundary _ q
+        (restrictAlongBaseChange (π.app j) (π.app i) g (hgφ ▸ hπ φ) ψ F q s)) :
+      cohomologyRestrictOver Λ (D.obj j).hom (D.obj i).hom (D.map φ).left (Over.w _) F q
+        (hV.cohomologyClass _ q s hs) = 0 := by
+    subst hgφ
+    refine (cohomologyRestrictOver_cohomologyClass (π.app j) (π.app i) (D'.map φ) (hπ φ) ψ F hV
+      hW q s hs).trans ?_
+    exact SemiSimplicialObject.IsHypercover.cohomologyClass_eq_zero_of_isCoboundary _ _ _ _ _ h
+  -- a class on the stage `i` is the class of a cocycle on a qcqs hypercover `V₀`
+  obtain ⟨V₀, hV₀, s₀, hs₀, rfl⟩ := Scheme.exists_cohomologyClass_eq_of_isQcqsHypercover Λ _ q y
+  -- replace `V₀` by a hypercover `V` with unique lifts above degree `q + 1`
+  obtain ⟨V, w, hV, hw, hVl⟩ := exists_coskeletal_replacement V₀ hV₀.isHypercover (q + 1)
+  let G : Sheaf (D'.obj i).smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+    (π.app i)^*[ModuleCat.{u + 1} Λ].obj F
+  have hw₀ := hw q (Nat.le_succ q)
+  have hw₁ := hw (q + 1) le_rfl
+  let s : G.obj.obj (op (V.obj q)) := (G.obj.map (inv (w.app q)).op) s₀
+  have hws : (G.obj.map (w.app q).op) s = s₀ := by
+    simp only [s, ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
+      IsIso.hom_inv_id, op_id, CategoryTheory.Functor.map_id, ConcreteCategory.id_apply]
+  have hs : V.IsCocycle G q s := by
+    have h1 := SemiSimplicialObject.cochainDifferential_restrict_apply w G.obj q s
+    rw [hws, show (V₀.cochainDifferential G.obj q).hom s₀ = 0 from hs₀] at h1
+    have h2 : (G.obj.map (inv (w.app (q + 1))).op) ((G.obj.map (w.app (q + 1)).op)
+        ((V.cochainDifferential G.obj q).hom s)) = (V.cochainDifferential G.obj q).hom s := by
+      simp only [← ConcreteCategory.comp_apply, Category.assoc, ← Functor.map_comp, ← op_comp,
+        IsIso.inv_hom_id, op_id, CategoryTheory.Functor.map_id, Category.comp_id]
+    rw [SemiSimplicialObject.IsCocycle, ← h2, ← h1, map_zero]
+  have hclass : hV₀.isHypercover.cohomologyClass G q s₀ hs₀ = hV.cohomologyClass G q s hs :=
+    (hV₀.isHypercover.cohomologyClass_congr G q hws.symm hs₀ (hs.restrict w)).trans
+      (hV.cohomologyClass_restrict hV₀.isHypercover w G q s hs)
+  rw [hclass]
+  -- the restriction of the class to the limit is the class of a cocycle on `V₀ ×_{Dᵢ} X`, which
+  -- is a coboundary on a refinement `U'`
+  have := isAffineHom_π_app D' c' hc i
+  have : CompactSpace (((Functor.const I).obj c'.pt).obj i) := ‹CompactSpace c.pt.left›
+  have : QuasiSeparatedSpace (((Functor.const I).obj c'.pt).obj i) :=
+    ‹QuasiSeparatedSpace c.pt.left›
+  have hV₀X := hV₀.baseChange (c'.π.app i)
+  have hs₀X := hs₀.restrictAlongBaseChange c.pt.hom (π.app i) (c'.π.app i) (hP i).symm (𝟙 _) F
+  have h0 : hV₀X.isHypercover.cohomologyClass _ q _ hs₀X = 0 := by
+    rw [← cohomologyRestrictOver_cohomologyClass c.pt.hom (π.app i) (c'.π.app i) (hP i).symm
+      (𝟙 _) F hV₀.isHypercover hV₀X.isHypercover q s₀ hs₀]
+    exact hy
+  obtain ⟨U', hU', f, hf⟩ := Scheme.exists_isCoboundary_of_isQcqsHypercover Λ _ q hV₀X _ hs₀X h0
+  let f' : U' ⟶ V.baseChange (c'.π.app i) := baseChangeComp (c'.π.app i) f w
+  let σ := restrictAlongBaseChange c.pt.hom (π.app i) (c'.π.app i) (hP i).symm f' F q s
+  have hfσ : (((c.pt.hom)^*[ModuleCat.{u + 1} Λ].obj F).obj.map (f.app q).op)
+      (restrictAlongBaseChange c.pt.hom (π.app i) (c'.π.app i) (hP i).symm (𝟙 _) F q s₀) = σ := by
+    rw [← hws]
+    simp only [restrictAlongBaseChange, σ]
+    rw [ModuleSheaf.map_restrictAlong, ModuleSheaf.restrictAlong_map]
+    have hm : ((f.app q).left ≫ baseChangeProj (c'.π.app i) (𝟙 (V₀.baseChange (c'.π.app i))) q) ≫
+        (w.app q).left = baseChangeProj (c'.π.app i) f' q := by
+      rw [baseChangeProj_baseChangeComp, baseChangeProj_id, baseChangeProj_eq]
+    rw [ModuleSheaf.restrictAlong_congr _ _ _ _ _ _ hm]
+  -- the truncation of `U'` descends, together with the morphism `U' ⟶ V ×_{Dᵢ} X`
+  obtain ⟨k, ⟨d⟩⟩ := exists_truncatedDescent hc U'
+    (fun n ↦ ⟨hU'.compactSpace n, hU'.quasiSeparatedSpace n⟩) (q + 1)
+  let e₀ : IsCofiltered.min k i ⟶ i := IsCofiltered.minToRight k i
+  let d₀ := d.baseChange (IsCofiltered.minToLeft k i)
+  let f₀ := baseChangeLift (c'.π.app i) f' (c'.π.app (IsCofiltered.min k i)) (D'.map e₀)
+    (c'.w e₀)
+  obtain ⟨k₁, g₁, ⟨Ψ₁⟩⟩ := d₀.exists_hom hc (V.baseChange (D'.map e₀)) f₀
+  obtain ⟨k₂, g₂, hΨ₂⟩ := Ψ₁.exists_isCompatible hc
+  obtain ⟨k₃, g₃, hk₃⟩ :=
+    ((d₀.baseChange g₁).baseChange g₂).exists_isHypercover hc hU'.isHypercover
+  let d₃ := ((d₀.baseChange g₁).baseChange g₂).baseChange (𝟙 k₃ ≫ g₃)
+  let Ψ₃ := (Ψ₁.baseChange g₂).baseChange (𝟙 k₃ ≫ g₃)
+  have hΨ₃ : Ψ₃.IsCompatible := hΨ₂.baseChange _
+  let V₃ := d₃.T.cosk
+  have hV₃ : V₃.IsHypercover (D'.obj k₃).smallEtaleTopology := hk₃ k₃ (𝟙 _)
+  have hW₃ : ∀ n, q + 1 ≤ n → ((((V.baseChange (D'.map e₀)).baseChange (D'.map g₁)).baseChange
+      (D'.map g₂)).baseChange (D'.map (𝟙 k₃ ≫ g₃))).HasLifts n := fun n h ↦
+    ((((hVl n h).baseChange _).baseChange _).baseChange _).baseChange _ |>.hasLifts
+  let Φ := Ψ₃.toCosk hΨ₃ hW₃
+  let tot : D'.obj k₃ ⟶ D'.obj i :=
+    ((D'.map (𝟙 k₃ ≫ g₃) ≫ D'.map g₂) ≫ D'.map g₁) ≫ D'.map e₀
+  let φtot : k₃ ⟶ i := (𝟙 k₃ ≫ g₃) ≫ g₂ ≫ g₁ ≫ e₀
+  have hφtot : D'.map φtot = tot := by simp only [φtot, tot, Functor.map_comp, Category.assoc]
+  have hπtot : tot ≫ π.app i = π.app k₃ := hφtot ▸ hπ φtot
+  let φ₃ : V₃ ⟶ V.baseChange tot := baseChangeTrans _ (D'.map e₀)
+    (baseChangeTrans _ (D'.map g₁) (baseChangeTrans (D'.map (𝟙 k₃ ≫ g₃)) (D'.map g₂) Φ))
+  let s₃ := restrictAlongBaseChange (π.app k₃) (π.app i) tot hπtot φ₃ F q s
+  -- `V₃` agrees with `U'` in degrees `≤ q + 1`
+  have hqc (n : ℕ) (hn : n ≤ q + 1) : Scheme.Etale.qcqs _ (V₃.obj n) :=
+    (Scheme.Etale.qcqs _).prop_of_iso (d₃.T.coskIso n hn).symm (d₃.qcqs n hn)
+  have hpb (n : ℕ) (hn : n ≤ q + 1) : IsPullback (baseChangeProj (c'.π.app k₃) d₃.toCosk n)
+      (U'.obj n).hom (V₃.obj n).hom (c'.π.app k₃) := by
+    have := d₃.isIso_toCosk_app n hn
+    refine IsPullback.of_iso_pullback ⟨baseChangeProj_w _ _ _⟩
+      (Scheme.Etale.leftIso (asIso (d₃.toCosk.app n))) rfl ?_
+    exact MorphismProperty.Over.w (d₃.toCosk.app n)
+  -- the restriction of `s₃` to the limit is `σ`
+  have hs₃ : restrictAlongBaseChange c.pt.hom (π.app k₃) (c'.π.app k₃) (hP k₃).symm d₃.toCosk F
+      q s₃ = σ := by
+    simp only [s₃, σ, restrictAlongBaseChange]
+    rw [ModuleSheaf.restrictAlong_restrictAlong,
+      ModuleSheaf.restrictAlong_congr_hom F (π.app i) c.pt.hom _
+        (show c'.π.app k₃ ≫ tot = c'.π.app i by rw [← hφtot]; exact c'.w φtot)]
+    have hm : baseChangeProj (c'.π.app k₃) d₃.toCosk q ≫ baseChangeProj tot φ₃ q =
+        baseChangeProj (c'.π.app i) f' q := by
+      have e1 := Ψ₃.baseChangeProj_toCosk hΨ₃ hW₃ q (Nat.le_succ q)
+      simp only [φ₃, tot, baseChangeProj_baseChangeTrans, Category.assoc]
+      rw [baseChangeProj_eq (D'.map (𝟙 k₃ ≫ g₃)) Φ q]
+      calc _ = (baseChangeProj (c'.π.app k₃) d₃.toCosk q ≫ (Φ.app q).left) ≫
+            pullback.fst _ _ ≫ pullback.fst _ _ ≫ pullback.fst _ _ ≫ pullback.fst _ _ :=
+            (Category.assoc _ _ _).symm
+        _ = _ := by
+          rw [e1]
+          simp only [Ψ₃, baseChangeProj_baseChangeLift_assoc, baseChangeProj_baseChangeLift]
+          exact baseChangeProj_baseChangeLift _ _ _ _ _ q
+    rw [ModuleSheaf.restrictAlong_congr _ _ _ _ _ _ hm]
   sorry
 
 end AlgebraicGeometry.Etale
