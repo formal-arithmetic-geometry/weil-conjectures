@@ -10,12 +10,8 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.KInjectiveResolutions
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Higher direct images as sheafified cohomology presheaves
@@ -44,24 +40,23 @@ Source: Stacks Project, Lemma Tag 072W and Section 21.2, equation-cohomology-obj
 (blueprint: lem-weil-pbc-higher-direct-image-sheafified-presheaf).
 
 Proof:
-1. Choose an injective resolution of `F` (def-sp-injective-resolutions), using the
-Grothendieck property (def-weil-pbc-etale-sheaves, lem-sp-grothendieck-enough-injectives).
-It is bounded below and K-injective (lem-weil-pbc-dplus-injective-representative,
-def-weil-pbc-kinjective-resolutions), so the derived pushforward is represented by
-`p_* I^•` (def-weil-pbc-direct-image). Comparison of resolutions is canonical up to
-homotopy (prop-weil-pbc-kinjective-resolutions-exist).
-2. Sections of `p_* I^•` over `V` are `I^•(V ×_S X)`, with restrictions along base change
-(def-weil-pbc-direct-image, lem-weil-pbc-etale-base-change-finite-limits).
-3. The right derived inclusion has value `H^q(I^•(U))` at `U`, since cohomology of
-presheaves is sectionwise. This is `H^q(U,F)` with the required restrictions
-(def-sp-left-exact-additive, lem-sp-derived-well-defined,
-lem-weil-pbc-sheafification-exact).
-4. Sheafification is exact and its counit is an isomorphism
-(def-weil-pbc-sheafification, lem-weil-pbc-sheafification-exact), so it commutes with
-cohomology (lem-weil-pbc-exact-functor-complex-cohomology). Therefore the cohomology sheaf
-of `p_* I^•` is the sheafification of its sectionwise cohomology presheaf.
-5. Combine these identifications. Their naturality and independence of resolutions
-make the comparison canonical. -/
+1. Choose an injective resolution `R` of `F`, using the Grothendieck property of
+abelian etale sheaves and enough injectives. Put `K = p_* R.cocomplex` and let `L`
+be its underlying complex of presheaves. `InjectiveResolution.isoRightDerivedObj`
+computes each classical right derived functor from `R`.
+2. Evaluation of `L` at `V` is evaluation of `R.cocomplex` at `V ×_S X`, including
+differentials and restriction maps, by the definition of direct image.
+3. Exact evaluation commutes with homology. Compose its homology comparison with
+`R.isoRightDerivedObj` to identify the specified derived-evaluation presheaf with
+`L.homology q`. Naturality follows from `InjectiveResolution.rightDerived_app_eq`
+and `ShortComplex.homologyMap_mapNatTrans`.
+4. Exact sheafification commutes with homology, and the counit identifies the
+sheafification of `L` with `K`. Thus the sheafification of the specified presheaf
+is `K.homology q`, hence the classical `q`-th right derived direct image.
+5. The proved source-library comparison
+`Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso` identifies this with
+homology of the total bounded-below derived pushforward of `F` in degree zero.
+No separate arbitrary K-injective resolution comparison is needed. -/
 theorem higherDirectImageSheafifiedPresheaf {X S : Scheme.{u}} (p : X ⟶ S)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     Nonempty
@@ -85,6 +80,57 @@ theorem higherDirectImageSheafifiedPresheaf {X S : Scheme.{u}} (p : X ⟶ S)
           ((Etale.rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} p).obj
             ((DerivedCategory.Plus.singleFunctor
               (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))) := by
-  sorry
+  -- Compute both classical derived functors with the same injective resolution.
+  let R := injectiveResolution F
+  let f := Etale.lowerStar AddCommGrpCat.{u + 1} p
+  let ι := sheafToPresheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let a := presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let K := (f.mapHomologicalComplex (.up ℕ)).obj R.cocomplex
+  let L := (ι.mapHomologicalComplex (.up ℕ)).obj K
+  let P : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
+    { obj := fun U ↦
+        ((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+          (evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj U).rightDerived q).obj F
+      map := fun g ↦
+        (NatTrans.rightDerived
+          (Functor.whiskerLeft (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+            ((evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).map g)) q).app F
+      map_id := fun U ↦ by
+        simp only [CategoryTheory.Functor.map_id, Functor.whiskerLeft_id',
+          NatTrans.rightDerived_id, NatTrans.id_app]
+      map_comp := fun g h ↦ by
+        simp only [CategoryTheory.Functor.map_comp, Functor.whiskerLeft_comp,
+          NatTrans.rightDerived_comp, NatTrans.comp_app] }
+  -- Evaluation is exact; its homology comparison respects restriction maps.
+  let eP : (MorphismProperty.Over.pullback @Etale ⊤ p).op ⋙ P ≅ L.homology q :=
+    NatIso.ofComponents
+      (fun V ↦ R.isoRightDerivedObj
+          (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+            (evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj
+              ((MorphismProperty.Over.pullback @Etale ⊤ p).op.obj V)) q ≪≫
+        (L.sc q).mapHomologyIso ((evaluation S.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj V))
+      (by
+        intro V W g
+        dsimp [P]
+        rw [R.rightDerived_app_eq]
+        simp only [Category.assoc, Iso.inv_hom_id_assoc]
+        congr 1
+        change ShortComplex.homologyMap
+            ((L.sc q).mapNatTrans ((evaluation S.Etaleᵒᵖ AddCommGrpCat.{u + 1}).map g)) ≫
+            ((L.sc q).mapHomologyIso
+              ((evaluation S.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj W)).hom = _
+        rw [ShortComplex.homologyMap_mapNatTrans]
+        simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+        rfl)
+  -- Sheafification of the underlying complex recovers the complex of sheaves.
+  let eK : (a.mapHomologicalComplex (.up ℕ)).obj L ≅ K :=
+    (Functor.mapHomologicalComplexCompIso (sheafificationNatIso
+      S.smallEtaleTopology AddCommGrpCat.{u + 1}).symm (.up ℕ)).app K ≪≫
+      (Functor.mapHomologicalComplexIdIso _ (.up ℕ)).app K
+  -- Exact sheafification commutes with homology, then PlusSingle gives the total derived value.
+  exact ⟨a.mapIso eP ≪≫ ((L.sc q).mapHomologyIso a).symm ≪≫
+    (HomologicalComplex.homologyFunctor _ (.up ℕ) q).mapIso eK ≪≫
+    (R.isoRightDerivedObj f q).symm ≪≫
+    (f.homologyRightDerivedFunctorPlusObjSingleFunctorIso F q).symm⟩
 
 end AlgebraicGeometry
