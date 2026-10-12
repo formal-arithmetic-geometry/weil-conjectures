@@ -12,41 +12,42 @@
  ],
  "proof": [
   {
-   "text": "Identify abelian sheaves on C and D with commutative group objects in sheaves of sets, compatibly with forgetting their structure, using the abelian component alone.",
+   "text": "Apply sheavesAlgebraicStructuresAbelian on J and K, at universes u,u,u. Form equivalences EJ and EK from the two strict inverse identities, and retain their strict underlying-functor equalities and their sectionwise addition and zero equations.",
    "uses": [
     "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
    ],
    "elementary": false
   },
   {
-   "text": "The set-valued sheaf pullback is left adjoint to continuous pushforward. Its finite-limit preservation supplies finite products; its right adjoint preserves limits. Lift this adjunction to commutative group objects. Its underlying left functor is precisely set-valued pullback, by the strict forgetful equality of the lifted-commutative-group theorem.",
+   "text": "For R = continuous set-valued pushforward, use its canonical Cartesian braided structure. Its terminal comparison inverse is the identity. Its product comparison hom is the identity by sectionwise precomposition; its inverse is the identity by the hom-inverse equation. The lifted right functor therefore uses precisely the sectionwise zero and addition.",
    "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-lifted-comm-group-branch"
+    "lem-weil-pbc-adjunction-lifts-abelian-group-objects"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the transported right functor with abelian pushforward. On each object of C it is the same group of sections over U(X); the right-adjoint product and terminal comparisons are the sectionwise identifications, so the displayed transported multiplication, unit and inverse equations identify its addition, zero and negation. This gives a natural isomorphism of the right functors, including their action on homomorphisms.",
+   "text": "Construct the underlying natural isomorphism e between FK followed by R.mapCommGrp and abelian pushforward followed by FJ, using the two strict forgetful equalities. After composing with the J forgetful identification, e equals R applied to the K forgetful identification. Cancel that J identification: the two sectionwise zero equations prove that e preserves the unit, and the two sectionwise addition equations prove that it preserves multiplication. CommGrp.mkIso supplies the group isomorphism (inverse preservation follows automatically for group objects). Underlying naturality and CommGrp.hom_ext prove naturality of this group isomorphism. Whisker with GJ and use FJ followed by GJ equal to identity to identify the transported right adjoint with abelian pushforward.",
    "uses": [
     "lem-weil-pbc-sheaf-algebraic-structures-abelian-component",
-    "lem-weil-pbc-lifted-comm-group-branch"
+    "lem-weil-pbc-adjunction-lifts-abelian-group-objects"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the group-object adjunction across these equivalences. Both its left functor and constructed abelian sheaf pullback are left adjoint to abelian continuous pushforward. Uniqueness of left adjoints identifies them. Whisker by the forgetful functor, then compose with the strict underlying equalities to obtain the claimed natural isomorphism.",
+   "text": "Use the constructed set-valued pullback adjunction from Mathlib and lift it with Adjunction.mapCommGrp. Finite-limit preservation supplies the required finite products on the left, and the right adjoint preserves limits. Compose with EJ.toAdjunction and EK.symm.toAdjunction, and transport the right functor by the proved pushforward comparison. The constructed abelian pullback is also left adjoint to that same abelian pushforward; Adjunction.leftAdjointUniq gives the comparison of left functors. Whisker by the abelian forgetful functor and compose associators with the strict underlying equalities of GK and FJ. The underlying left group lift is definitionally the set-valued pullback followed after forgetting, yielding the stated natural isomorphism.",
    "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
     "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+    "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-lifted-comm-group-branch",
   "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
  ],
  "proof_origin": {
@@ -137,10 +138,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T070542-L-3473562",
-  "kind": "interface",
+  "landing": "20261012T085316-L-30429",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
