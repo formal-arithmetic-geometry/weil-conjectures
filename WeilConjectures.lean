@@ -93,6 +93,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.AffineCount
 public import WeilConjectures.AlgebraicGeometry.Curve.AffineGeneric
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.AlgebraicGeometry.Curve.BaseChange
+public import WeilConjectures.AlgebraicGeometry.Curve.Boundary
 public import WeilConjectures.AlgebraicGeometry.Curve.BoundaryNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.Curve.Brauer
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
@@ -809,6 +810,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceAdjunction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
@@ -1833,6 +1835,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.HomCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
@@ -1907,6 +1910,7 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Con
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Injective
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.LocalVanishing
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mono
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Projection
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
@@ -1933,6 +1937,7 @@ public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.KFlat
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.LocalVanishing
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.MonoidalIso
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Restriction

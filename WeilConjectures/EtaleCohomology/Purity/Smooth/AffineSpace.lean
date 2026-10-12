@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceAdjunction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
@@ -281,18 +282,25 @@ over a field, on which the exponent of `Λ` is invertible, and `K ∈ D^b_{ctf}(
 In the blueprint the isomorphism is the comparison `γ_{p,K}`, the transpose under
 `Rp_! ⊣ Rp^!` of the integration map built from the projective-line trace
 (`def-pur-affine-line-purity-comparison`); this comparison is not constructed, so only the
-existence of the isomorphism is recorded. -/
+existence of the isomorphism is recorded.
+
+The proof follows the blueprint: `Rp^!` is by definition the right adjoint of `Rp_!`, and
+`Rp_! ⊣ p^*(1)[2]` is the affine-space ambient adjunction
+(`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`,
+`cor-amb-affine-space-adjunction`), so the two right adjoints agree. In particular the
+isomorphism holds for every `K`, constructible or not. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLine [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
     (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     [HasInvertibleExponent Λ Y]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
+    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
           (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).obj K ≅
       (twistShift Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj
-        ((L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj K)) :=
-  sorry
+        ((L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+  obtain ⟨adj⟩ := nonempty_rightDerivedLowerShriek_adjunction_affineSpace Λ 1 Y
+  exact ⟨((rightDerivedUpperShriekAdjunction _ _).rightAdjointUniq adj).app K⟩
 
 omit [HasTateTwist Λ] in
 /-- Blueprint `sk-prop-an`, Step 6: the projection of `𝔸^{d+1}_Y` is that of `𝔸¹_{Y'}`
