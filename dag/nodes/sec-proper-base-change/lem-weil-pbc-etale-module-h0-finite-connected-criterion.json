@@ -1,165 +1,143 @@
 {
-  "id": "lem-weil-pbc-etale-module-h0-finite-connected-criterion",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-etale-degree-zero",
-      "place": "proof, Zariski comparison on all finite covers and final etale upgrade through Tag 09ZF",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-weil-pbc-etale-module-h0-finite-connected-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-etale-degree-zero",
+   "place": "proof, Zariski comparison on all finite covers and final etale upgrade through Tag 09ZF",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Finite-cover connectedness criterion for etale module sections",
-  "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion]. Assume that for every finite morphism $h:X\\prime\\to X$ [def-weil-finite-integral-morphism] and every irreducible closed subset $C\\subseteq X\\prime$, the intersection $C\\cap h^{-1}(i(Z))$ is nonempty and connected [def-weil-connected-scheme]. For every commutative coefficient ring $\\Lambda$ and every sheaf $F$ of $\\Lambda$-modules on the small etale site of $X$ [def-weil-pbc-etale-site], [def-weil-pbc-etale-sheaves], the canonical inverse-image restriction [def-weil-pbc-finite-section-pullback] $\\Gamma(X,F)\\to\\Gamma(Z,i^{-1}F)$ is an isomorphism of $\\Lambda$-modules.",
-  "source": {
-    "document": "https://stacks.math.columbia.edu/tag/09ZF",
-    "place": "Lemma 59.82.2; spectral input at Tag 09ZG, Lemma 59.82.4"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-closed-immersion",
-    "def-weil-finite-integral-morphism",
-    "def-weil-connected-scheme",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-etale-sheaves",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-cover connectedness criterion for etale module sections",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion]. Assume that for every finite morphism $h:X\\prime\\to X$ [def-weil-finite-integral-morphism] and every irreducible closed subset $C\\subseteq X\\prime$, the intersection $C\\cap h^{-1}(i(Z))$ is nonempty and connected [def-weil-connected-scheme]. For every commutative coefficient ring $\\Lambda$ and every sheaf $F$ of $\\Lambda$-modules on the small etale site of $X$ [def-weil-pbc-etale-site], [def-weil-pbc-etale-sheaves], the canonical inverse-image restriction [def-weil-pbc-finite-section-pullback] $\\Gamma(X,F)\\to\\Gamma(Z,i^{-1}F)$ is an isomorphism of $\\Lambda$-modules.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09ZF",
+  "place": "Lemma 59.82.2; spectral input at Tag 09ZG, Lemma 59.82.4"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-finite-section-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Forget the scalar action on F, obtaining an abelian etale sheaf G. Apply the abelian finite-cover connected-intersection criterion to i, hconn and G. In the definition of globalSectionsUpperStarMap, the factors before and after the adjunction-unit evaluation are isomorphisms. Cancel them to conclude that the abelian adjunction unit evaluated at the terminal etale object is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-abelian-h0-finite-connected-criterion",
     "def-weil-pbc-finite-section-pullback"
-  ],
-  "proof": [
-    {
-      "text": "Let h:X'→X be finite. Its source is quasi-compact and quasi-separated since finite morphisms are quasi-compact and separated and these properties compose; hence X' is spectral. The base change i' is a closed immersion, and the pullback image formula identifies its image with h⁻¹(range i). The assumed intersection condition therefore holds for this closed subset of X'.",
-      "uses": [
-        "def-weil-pbc-scheme-conventions",
-        "lem-weil-pbc-qcqs-scheme-spectral",
-        "lem-weil-pbc-closed-immersion-base-change",
-        "lem-weil-pbc-fibre-product-points"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "https://stacks.math.columbia.edu/tag/09ZF",
-        "place": "Lemma 59.82.2; spectral input at Tag 09ZG, Lemma 59.82.4"
-      }
-    },
-    {
-      "text": "For each point x of X', the closure of {x} is irreducible closed. The hypothesis makes its intersection with the image of i' nonempty and connected. The spectral closed restriction theorem gives bijectivity of sections for every Zariski sheaf of sets. Use h=id for X itself, and arbitrary finite h for every finite cover. Apply Gabber's degree-zero criterion to obtain bijective restriction of every etale sheaf of sets. The value universe may be u+1: the proof of spectral restriction uses finite constant sheaves and filtered colimits and does not require the values to have the same universe as the space.",
-      "uses": [
-        "lem-weil-pbc-h0-spectral-closed-restriction",
-        "lem-weil-pbc-gabber-h0-etale-criterion"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "https://stacks.math.columbia.edu/tag/09ZF",
-        "place": "Lemma 59.82.2; spectral input at Tag 09ZG, Lemma 59.82.4"
-      }
-    },
-    {
-      "text": "Apply the set-valued conclusion to the underlying sheaf of F. Etale inverse image preserves finite products and acts on algebraic structure maps, compatibly with the inverse-image adjunction unit. The same construction acts on addition and on each scalar operation of a Lambda-module. Equivalently, its presheaf construction uses filtered colimits (the etale neighbourhood index is filtered via finite fibre products and equalizers), for which the underlying-set functor on modules creates colimits; sheafification's matching families carry pointwise module operations. Thus module inverse image and its unit forget to set inverse image and its unit. Evaluation on the terminal object, followed by the terminal-base-change isomorphism and the global-sections identification, identifies the underlying function of globalSectionsUpperStarMap with the bijection in the preceding step. The inverse of a bijective module map preserves addition and scalar multiplication: apply the original injective map to both sides of each proposed identity. This constructs an inverse in ModuleCat and proves IsIso.",
-      "uses": [
-        "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-        "def-weil-pbc-inverse-image",
-        "def-weil-pbc-finite-section-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "https://stacks.math.columbia.edu/tag/09ZF",
-        "place": "degree-zero criterion applied to underlying sets; algebraic-structure comparison expanded using the inverse-image construction"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-finite-section-pullback",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-weil-pbc-fibre-product-points",
-    "lem-weil-pbc-gabber-h0-etale-criterion",
-    "lem-weil-pbc-h0-spectral-closed-restriction",
-    "lem-weil-pbc-qcqs-scheme-spectral"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "https://stacks.math.columbia.edu/tag/09ZF",
-    "place": "Tags 09ZG and 09ZF combined; module coefficient and universe compatibility expanded by J1"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "A closed immersion of quasi compact quasi separated schemes induces an isomorphism of global sections of etale module sheaves when every irreducible closed subset of every finite cover meets the closed subscheme in a nonempty connected set",
-      "results": [
-        "AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen",
-        "AlgebraicGeometry.IsClosedImmersion.isIso_lift",
-        "AlgebraicGeometry.IsClosedImmersion.isIso_of_ker_eq",
-        "AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData",
-        "AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec",
-        "AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine",
-        "AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot",
-        "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage"
-      ],
-      "date": "2026-10-12",
-      "verdict": "no match: none states the finite-cover connectedness criterion for etale module sections"
-    },
-    {
-      "tool": "grep",
-      "query": "globalSections.*henselian|gabber_h0",
-      "results": [],
-      "date": "2026-10-12",
-      "verdict": "no match: none states the finite-cover connectedness criterion for etale module sections"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Global sections restriction along a closed immersion with connected intersections after finite covers is bijective",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-12"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero",
-    "date": "2026-10-12",
-    "group": "J1"
+  {
+   "text": "Let eta be the module adjunction unit and c the abelian adjoint of its underlying abelian morphism. The canonical module-to-abelian inverse-image comparison theorem states that c is an isomorphism. By the adjunction hom equivalence, the abelian unit followed by direct image of c equals the underlying morphism of eta. Evaluate this equality at the terminal etale object. The two factors on the left are isomorphisms, hence so is the forgotten module unit component. This uses exactly the canonical comparison specified by the module unit, not an arbitrary objectwise isomorphism.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-iff",
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion",
-    "file": "lean/Sheaf/AlgebraicGeometry/EtaleH0FiniteConnectedCriterion.lean",
-    "declaration": "AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_finite_connected_closed_intersections",
-    "statement": "theorem isIso_globalSectionsUpperStarMap_of_finite_connected_closed_intersections (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (i : Z ⟶ X) [IsClosedImmersion i] (hconn : ∀ (X' : Scheme.{u}) (h : X' ⟶ X) [IsFinite h], ∀ C : Set X', IsClosed C → IsIrreducible C → IsConnected (C ∩ h ⁻¹' Set.range i)) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F)",
-    "branch": "sheaf-dag",
-    "by": "J1",
-    "date": "2026-10-12"
-  },
-  "reviewed": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "X-b38f5",
-    "group": "J1",
-    "result": "pass",
-    "landing": "20261011T231708-L-352269",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "X-b38f5",
-    "group": "J1",
-    "result": "pass",
-    "landing": "20261011T231708-L-352269",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered files compile cleanly; target statement and existing interfaces are unchanged; proof, node metadata, report, imports, and named remaining sorry satisfy stage-3 requirements."
+  {
+   "text": "The functor forgetting ModuleCat Lambda to AddCommGrpCat reflects isomorphisms (Mathlib isIso_of_reflects_iso). Thus the module unit component is an isomorphism. Compose it with the global-section/terminal-section and terminal-base-change isomorphisms appearing in globalSectionsUpperStarMap. All four factors are isomorphisms, which proves the unchanged statement. This works also for the empty scheme and the zero coefficient ring.",
+   "uses": [
+    "def-weil-pbc-finite-section-pullback"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-section-pullback",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-abelian-h0-finite-connected-criterion",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09ZF",
+  "place": "Tags 09ZG and 09ZF through the existing abelian criterion; module upgrade through the canonical comparison of Tags 03D2 and 03D3 and its adjunction-unit identity (E3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion of quasi compact quasi separated schemes induces an isomorphism of global sections of etale module sheaves when every irreducible closed subset of every finite cover meets the closed subscheme in a nonempty connected set",
+   "results": [
+    "AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen",
+    "AlgebraicGeometry.IsClosedImmersion.isIso_lift",
+    "AlgebraicGeometry.IsClosedImmersion.isIso_of_ker_eq",
+    "AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData",
+    "AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec",
+    "AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine",
+    "AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot",
+    "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage"
+   ],
+   "date": "2026-10-12",
+   "verdict": "no match: none states the finite-cover connectedness criterion for etale module sections"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*henselian|gabber_h0",
+   "results": [],
+   "date": "2026-10-12",
+   "verdict": "no match: none states the finite-cover connectedness criterion for etale module sections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections restriction along a closed immersion with connected intersections after finite covers is bijective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleH0FiniteConnectedCriterion.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_finite_connected_closed_intersections",
+  "statement": "theorem isIso_globalSectionsUpperStarMap_of_finite_connected_closed_intersections (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (i : Z ⟶ X) [IsClosedImmersion i] (hconn : ∀ (X' : Scheme.{u}) (h : X' ⟶ X) [IsFinite h], ∀ C : Set X', IsClosed C → IsIrreducible C → IsConnected (C ∩ h ⁻¹' Set.range i)) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-b38f5",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261011T231708-L-352269",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T144104-L-2092464",
+  "kind": "proof"
+ }
 }
