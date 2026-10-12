@@ -24,64 +24,47 @@
  ],
  "proof": [
   {
-   "text": "The boundary $S$ is nonempty. If $S$ were empty, then $C=\\overline C$ would be both proper and affine over $k$, so [lem-sc-proper-affine-finite] would make it finite over $k$, hence of dimension zero, contradicting that a connected curve has dimension one ([def-sc-curves]).",
+   "text": "If the boundary is empty, the open immersion c.i has full opensRange and is an isomorphism (Mathlib isIso_of_isOpenImmersion_of_opensRange_eq_top). The factorization c.comm then makes f proper. By lem-sc-proper-affine-finite its source has topological Krull dimension at most zero, contradicting IsConnectedCurve.krullDim_eq_one from def-sc-curves.",
    "uses": [
     "lem-sc-proper-affine-finite",
     "def-sc-curves"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
-    "place": "Proof: first paragraph, nonemptiness of S"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sc-divisor-class-curve], for each of the smooth connected curves $C$ and $\\overline C$ the map $D\\mapsto[\\mathcal O(D)]$ identifies $\\operatorname{Cl}$ with $\\operatorname{Pic}$, compatibly with restriction to the open $C\\subseteq\\overline C$. Restriction of divisors $\\operatorname{Div}(\\overline C)\\to\\operatorname{Div}(C)$ (forget the coefficients at the points of $S$) is surjective (extend by coefficient zero on $S$), and its kernel is the free subgroup $\\bigoplus_{P\\in S}\\mathbf Z\\,P$. Since $C$ is dense open in the integral curve $\\overline C$, both have the same function field $K$, and $\\operatorname{div}_{\\overline C}(f)$ restricts to $\\operatorname{div}_C(f)$ for $f\\in K^\\times$; so restriction maps principal divisors onto principal divisors, and a divisor on $\\overline C$ whose restriction is $\\operatorname{div}_C(f)$ differs from $\\operatorname{div}_{\\overline C}(f)$ by a divisor supported on $S$. Hence $\\bigoplus_{P\\in S}\\mathbf Z\\to\\operatorname{Cl}(\\overline C)\\to\\operatorname{Cl}(C)\\to0$ is exact, i.e. $\\operatorname{Pic}(C)\\cong\\operatorname{Pic}(\\overline C)/B$ with $B:=\\langle[P]:P\\in S\\rangle$, $[P]=[\\mathcal O_{\\overline C}(P)]$ (Hartshorne II.6.5).",
+   "text": "For a boundary point P0, apply Scheme.Hom.pic_restriction_boundary from lem-sc-pic-restriction-boundary to obtain a subgroup H with underlying set picZero, a subgroup Lambda of H whose image under H.subtype is the closure of boundary differences, and a multiplicative equivalence t : H / Lambda -> Pic(C). Since the given G has the same underlying set, H = G; substitute this equality.",
    "uses": [
-    "lem-sc-divisor-class-curve"
+    "lem-sc-pic-restriction-boundary"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
-    "place": "Proof: first paragraph, restriction and boundary divisors"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sc-pic-proper-decomposition], $\\deg:\\operatorname{Pic}(\\overline C)\\to\\mathbf Z$ is surjective with kernel $\\operatorname{Pic}^0(\\overline C)$. Fix $P_0\\in S$ (possible by step 1); $\\deg[P_0]=1$. The map $r:\\operatorname{Pic}(\\overline C)\\to\\operatorname{Pic}^0(\\overline C)$, $x\\mapsto x-\\deg(x)[P_0]$, is a homomorphism that is the identity on $\\operatorname{Pic}^0(\\overline C)$, so it is surjective with kernel $\\mathbf Z[P_0]$. Since $[P]=[P_0]+([P]-[P_0])$ for $P\\in S$, we have $B=\\mathbf Z[P_0]+\\Lambda_0$ with $\\Lambda_0:=\\langle[P]-[P_0]:P\\in S\\rangle\\subseteq\\operatorname{Pic}^0(\\overline C)$, and $r(B)=\\Lambda_0$; as $\\ker r\\subseteq B$, $r$ induces an isomorphism $\\operatorname{Pic}(\\overline C)/B\\cong\\operatorname{Pic}^0(\\overline C)/\\Lambda_0$. With step 2, $\\operatorname{Pic}(C)\\cong\\operatorname{Pic}^0(\\overline C)/\\Lambda_0$.",
-   "uses": [
-    "lem-sc-pic-proper-decomposition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
-    "place": "Proof: first paragraph, splitting by P0"
-   }
+   "text": "Let s be the set of boundary point differences viewed as elements of G. The image G.subtype(s) is exactly the set of boundary point differences in Pic(c.Z): for the reverse inclusion, each such difference is in the closure, hence in the image of Lambda, so has a lift to G. MonoidHom.map_closure and Subgroup.map_injective for the injective subtype show Lambda = closure(s).",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "By the canonical identification $J(k)=\\operatorname{Pic}^0(\\overline C)$ of the statement ([def-sc-jacobian], [thm-sc-jacobian-representability]), a group isomorphism, $\\Lambda_0$ corresponds to $\\Lambda=\\langle[P]-[P_0]:P\\in S\\rangle\\subseteq J(k)$, and step 3 becomes the group isomorphism $\\operatorname{Pic}(C)\\cong J(k)/\\Lambda$.",
-   "uses": [
-    "def-sc-jacobian",
-    "thm-sc-jacobian-representability"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
-    "place": "Proof: first paragraph, Jacobian identification"
-   }
+   "text": "Compose the quotient projection G -> G / Lambda with t, obtaining a surjective homomorphism r : G -> Pic(C) with kernel Lambda. Pass to Additive; QuotientAddGroup.quotientKerEquivOfSurjective identifies Additive G / Lambda.toAddSubgroup with Additive Pic(C).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Subgroup.toAddSubgroup_closure and AddMonoidHom.map_closure show that the image of Lambda.toAddSubgroup under e.toAdditive is precisely the closure of the displayed boundary-difference generators in the Jacobian points. QuotientAddGroup.congr transports the quotient along the given equivalence e. Compose it with the inverse of the preceding first-isomorphism equivalence, using quotientAddEquivOfEq for its kernel identification.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-proper-affine-finite",
   "def-sc-curves",
-  "lem-sc-divisor-class-curve",
-  "lem-sc-pic-proper-decomposition",
-  "def-sc-jacobian",
-  "thm-sc-jacobian-representability"
+  "lem-sc-pic-restriction-boundary"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "P1",
+  "date": "2026-10-12",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
-  "place": "## Proof, quotient presentation paragraph"
+  "place": "First proof paragraph; second reading uses the existing boundary-restriction theorem and Mathlib quotient transport"
  },
  "mathlib_searches": [
   {
@@ -182,5 +165,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T053946-L-2641739",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

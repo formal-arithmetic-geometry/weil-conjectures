@@ -8,10 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
 public import Mathlib.GroupTheory.QuotientGroup.Basic
-import Sheaf.AlgebraicGeometry.Curve.PicardDecomposition
-import Sheaf.AlgebraicGeometry.DivisorClassCurve
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+import Sheaf.AlgebraicGeometry.Curve.PicRestrictionBoundary
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
@@ -71,6 +68,67 @@ theorem IsConnectedCurve.pic_affine_quotient
                 L.val = @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P /
                   @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P₀ ∧
                 a = Additive.ofMul (e L)}) := by
-  sorry
+  classical
+  have _ := hfin
+  have _ := hcl
+  constructor
+  · by_contra hempty
+    have hrange : Set.range c.i.base = Set.univ := by
+      simpa only [Set.nonempty_compl, not_not] using hempty
+    have hi : c.i.opensRange = ⊤ := TopologicalSpace.Opens.ext hrange
+    have : IsIso c.i := isIso_of_isOpenImmersion_of_opensRange_eq_top c.i hi
+    have : IsProper f := by rw [c.comm]; infer_instance
+    have hdim := (isFinite_of_isProper_of_isAffine f).2
+    rw [IsConnectedCurve.krullDim_eq_one (f := f)] at hdim
+    exact (by norm_num : ¬ (1 : WithBot ℕ∞) ≤ 0) hdim
+  · intro P₀ hP₀
+    obtain ⟨H, hH, Λ, hΛ, t, _⟩ := (f.pic_restriction_boundary c).2.2 P₀ hP₀
+    have hHG : H = G := SetLike.coe_injective (hH.trans hG.symm)
+    subst H
+    let s : Set G := {L | ∃ P : closedPoints c.Z, P.val ∉ Set.range c.i.base ∧
+      L.val = @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P /
+        @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P₀}
+    have hΛs : Λ = Subgroup.closure s := by
+      apply Subgroup.map_injective G.subtype_injective
+      rw [hΛ, MonoidHom.map_closure]
+      congr 1
+      ext x
+      constructor
+      · rintro ⟨P, hP, hx⟩
+        have hxΛ : x ∈ Λ.map G.subtype := by
+          rw [hΛ]
+          exact Subgroup.subset_closure ⟨P, hP, hx⟩
+        obtain ⟨L, _, rfl⟩ := hxΛ
+        exact ⟨L, ⟨P, hP, hx⟩, rfl⟩
+      · rintro ⟨L, ⟨P, hP, hx⟩, rfl⟩
+        exact ⟨P, hP, hx⟩
+    let r : G →* C.Pic := t.toMonoidHom.comp (QuotientGroup.mk' Λ)
+    have hr : Function.Surjective r := t.surjective.comp QuotientGroup.mk_surjective
+    have hker : r.ker = Λ := by
+      ext L
+      change t (QuotientGroup.mk L) = 1 ↔ L ∈ Λ
+      rw [← t.map_one, t.injective.eq_iff, QuotientGroup.eq_one_iff]
+    have haker : r.toAdditive.ker = Λ.toAddSubgroup := by
+      change r.ker.toAddSubgroup = Λ.toAddSubgroup
+      rw [hker]
+    have hmap : Λ.toAddSubgroup.map e.toAdditive.toAddMonoidHom =
+        AddSubgroup.closure
+          {a | ∃ (P : closedPoints c.Z) (L : G),
+            P.val ∉ Set.range c.i.base ∧
+            L.val = @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P /
+              @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P₀ ∧
+            a = Additive.ofMul (e L)} := by
+      rw [hΛs, Subgroup.toAddSubgroup_closure, AddMonoidHom.map_closure]
+      congr 1
+      ext a
+      constructor
+      · rintro ⟨L, ⟨P, hP, hL⟩, rfl⟩
+        exact ⟨P, L.toMul, hP, hL, rfl⟩
+      · rintro ⟨P, L, hP, hL, rfl⟩
+        exact ⟨Additive.ofMul L, ⟨P, hP, hL⟩, rfl⟩
+    have hra : Function.Surjective r.toAdditive := fun x ↦ hr x
+    exact ⟨(QuotientAddGroup.quotientKerEquivOfSurjective r.toAdditive hra).symm.trans
+      ((QuotientAddGroup.quotientAddEquivOfEq haker).trans
+        (QuotientAddGroup.congr _ _ e.toAdditive hmap))⟩
 
 end AlgebraicGeometry

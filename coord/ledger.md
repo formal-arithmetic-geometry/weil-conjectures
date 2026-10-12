@@ -6246,3 +6246,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/N2/Sheaf.AlgebraicGeometry.EventuallyProper (stage 3; reviewer PASS; first push; landing 20261012T053945-L-2641387 (interface); batch 20261012T053916; modules 2; new nodes 1)
 - 05:39 L: merged deliver/N2/Sheaf.RingTheory.StrictlyHenselianQuotient (stage 3; reviewer PASS; first push; landing 20261012T053945-L-2641492 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:39 L: merged deliver/N2/Sheaf.Topology.ClosedPushforwardConstantRestriction (stage 3; reviewer PASS; after a return; landing 20261012T053945-L-2641588 (proof); batch 20261012T053916; modules 1; new nodes 0)
+- 05:39 L: merged deliver/P1/Sheaf.AlgebraicGeometry.Curve.PicAffineQuotient (stage 3; reviewer PASS; first push; landing 20261012T053946-L-2641739 (proof); batch 20261012T053916; modules 1; new nodes 0)
