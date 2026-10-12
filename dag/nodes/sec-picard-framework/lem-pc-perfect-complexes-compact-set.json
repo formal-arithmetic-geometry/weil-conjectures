@@ -23,40 +23,44 @@
  ],
  "proof": [
   {
-   "text": "Let W = Spec(A) be an affine open. By [lem-pc-perfect-affine-bounded-projective] (Stacks 08EB), every perfect object of D_QCoh(O_W) is isomorphic to the complex of quasi-coherent sheaves associated with a bounded complex P^\\bullet of finite projective A-modules. Each finite projective A-module is isomorphic to a direct summand of some A^n, hence to a submodule of some A^n, and these submodules form a set; so every such P^\\bullet is isomorphic, as a complex, to one whose terms are submodules of finite free modules A^n and whose differentials are A-linear maps between them, and these data (a finite range of degrees, terms, and differentials) form a set. Isomorphic complexes give isomorphic objects of the derived category, so the isomorphism classes of perfect objects on W form a set.",
+   "text": "Use P(U)=PerfectComplexClassesSmallOnOpen X U. If U is affine and an open immersion f:Y into X has image U, the equal-range isomorphism Y ≅ U.toScheme makes Y affine. Apply the affine smallness theorem for every derived-category structure on Y. This proves P on affine opens.",
    "uses": [
-    "lem-pc-perfect-affine-bounded-projective"
+    "def-pc-perfect-classes-small-on-open",
+    "lem-pc-perfect-affine-classes-small"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
-    "place": "Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives input for perfect complexes"
-   }
+   "elementary": true
   },
   {
-   "text": "Let P(W) assert that perfect objects of D_QCoh(O_W) have a set of isomorphism representatives. Suppose W = U union V with U quasi-compact and V affine open, and P(U), P(V), and P(U intersect V). For E perfect on W, each restriction of E to an open is again perfect (restrict the covering in [def-pc-perfect-complex]), and U, V, U intersect V are quasi-compact opens of the qcqs scheme W, so the derived Mayer–Vietoris triangle [lem-pc-derived-mayer-vietoris-triangle] expresses E as the first object of a distinguished triangle whose other terms are R(j_U)_*E|_U direct-sum R(j_V)_*E|_V and R(j_{U intersect V})_*E|_{U intersect V}. Choose representatives for the three restrictions using P(U), P(V), and P(U intersect V); transporting along the chosen isomorphisms, the second morphism of the triangle becomes a morphism between the derived direct images of the three representatives. For fixed representatives, the Hom-set between these two objects of the derived category is a set, so the possible morphisms form a set, and E is isomorphic to a cocone of one of them; each cone (equivalently, cocone) is unique up to isomorphism once this morphism is fixed, by the triangulated-category morphism-of-triangles axiom (TR3) and the five-lemma. Thus P(W) holds. The qcqs induction principle [lem-sc-invert-s-cohomology-induction] then gives P(X) from the affine case of Step 1 and this gluing implication.",
+   "text": "For U quasi-compact and V affine use the gluing smallness implication with P(U),P(V),P(U intersect V). Apply quasiCompactOpen_induction to get P(top), then evaluate at the identity open immersion of X and its given derived-category structures.",
    "uses": [
-    "lem-pc-derived-mayer-vietoris-triangle",
-    "lem-sc-invert-s-cohomology-induction",
-    "def-pc-perfect-complex"
+    "lem-pc-perfect-classes-small-gluing",
+    "lem-sc-invert-s-cohomology-induction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
-    "place": "Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives input for perfect complexes"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Let Q be the property IsPerfect on D_QCoh(X). Shrink Skeleton(Q.FullSubcategory) to Type u. For each shrunk class use fromSkeleton to get a perfect quasi-coherent representative and forget Q. For each E with proof of perfectness, use its skeleton class as the index. The equivShrink inverse identity and fromSkeletonToSkeletonIso give an isomorphism in the perfect full subcategory; mapping by Q.ι gives E ≅ P i in D_QCoh(X). This constructs all clauses of the original existential statement.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-derived-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-affine-bounded-projective",
-  "lem-pc-derived-mayer-vietoris-triangle",
+  "def-pc-perfect-classes-small-on-open",
+  "lem-pc-perfect-affine-classes-small",
+  "lem-pc-perfect-classes-small-gluing",
   "lem-sc-invert-s-cohomology-induction",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "def-pc-derived-category"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/derived-categories-of-schemes.tex",
-  "place": "Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives input for perfect complexes"
+  "by": "worker",
+  "group": "X2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Original affine/Mayer-Vietoris/08DR route, reduced to affine and gluing smallness; skeleton-to-representatives combination formalized by X2"
  },
  "mathlib_searches": [
   {
@@ -162,5 +166,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T095931-L-327423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

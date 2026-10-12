@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-perfect-affine-classes-small",
+ "kind": "statement",
+ "title": "Affine smallness of perfect isomorphism classes",
+ "statement": "Let $Y$ be an affine scheme in universe $u$ [def-pc-scheme], with derived categories for its module sheaves and module sheaves on its open sites [def-pc-derived-category]. The skeleton of the full subcategory of perfect objects [def-pc-perfect-complex] of $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ is $u$-small: its type of objects, equivalently perfect derived isomorphism classes, is equivalent to a type in universe $u$. No quasi-separatedness hypothesis beyond affineness and no relation between the morphism universe $w$ and $u$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma perfect-lemma-perfect-affine, Tag 08EB; the finite-projective encoding in Step 1 of lem-pc-perfect-complexes-compact-set"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Identify Y with Spec of its global section ring by the affine scheme isomorphism and transport derived module categories. Apply the affine bounded finite projective criterion to each perfect object.",
+   "uses": [
+    "lem-pc-perfect-affine-bounded-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Encode the finite projective terms as images of finite free idempotent matrices (submodules of A^n), with integer degree bounds and linear differentials. These are u-small data. The complex identities, boundedness and termwise projectivity are predicates. Conjugate differentials along termwise module isomorphisms, obtaining an isomorphic complex of encoded modules. The map from the subtype of perfect quasi-coherent encoded derived objects to their skeleton is surjective. Apply Mathlib small_of_surjective. Zero modules and the zero ring are allowed. Mathlib.Algebra.Category.FGModuleCat.EssentiallySmall supplies an alternative existing small model for the finite terms; projectivity is a predicate on those terms.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-affine-bounded-projective",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma perfect-lemma-perfect-affine, Tag 08EB; the finite-projective encoding in Step 1 of lem-pc-perfect-complexes-compact-set",
+  "note": "Argument written out by X2 from the existing item proof and the cited sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "perfect complexes on affine schemes have small isomorphism classes",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complexes on affine schemes have small isomorphism classes",
+   "date": "2026-10-12",
+   "results": "8 hits: CategoryTheory.hasExt_iff; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; DerivedCategory.exists_iso_Q_obj_of_isLE; CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE. No exact match.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Skeleton|small_of_surjective|Small.*Perfect",
+   "date": "2026-10-12",
+   "results": "25 hits: Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Topology/MetricSpace/Perfect.lean; Mathlib/Topology/MetricSpace/Perfect.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean. No exact match.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "set-of-representatives input, Affine smallness of perfect isomorphism classes",
+   "via": [
+    "lem-pc-perfect-complexes-compact-set"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectAffineClassesSmall",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectAffineClassesSmall.lean",
+  "declaration": "AlgebraicGeometry.Scheme.small_perfectComplex_classes_of_isAffine",
+  "statement": "theorem small_perfectComplex_classes_of_isAffine (Y : Scheme.{u}) [IsAffine Y]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ V : Y.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))] :\n    Small.{u} (Skeleton (ObjectProperty.FullSubcategory\n      (fun E : schemeDerivedQCohCategory Y ↦ IsPerfect Y E.obj)))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T095931-L-327423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T095931-L-327423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

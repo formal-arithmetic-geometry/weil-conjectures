@@ -7302,3 +7302,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/W3/Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses (stage 3; reviewer PASS; first push; landing 20261012T095930-L-327007 (proof); batch 20261012T095846; modules 1; new nodes 0)
 - 09:59 L: merged deliver/W3/Sheaf.CategoryTheory.CartanEilenbergSecondFiltration (stage 3; reviewer PASS; first push; landing 20261012T095930-L-327103 (interface); batch 20261012T095846; modules 5; new nodes 4)
 - 09:59 L: merged deliver/W3/Sheaf.CategoryTheory.CartanEilenbergTotalResolution (stage 3; reviewer PASS; first push; landing 20261012T095931-L-327283 (interface); batch 20261012T095846; modules 2; new nodes 1)
+- 09:59 L: merged deliver/X2/Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives (stage 3; reviewer PASS; first push; landing 20261012T095931-L-327423 (interface); batch 20261012T095846; modules 4; new nodes 3)
