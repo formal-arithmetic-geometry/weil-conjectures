@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeOpenSquareIso
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeSquareRestrictionCommutes
 import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
@@ -123,7 +125,23 @@ theorem moduleBaseChangeMap_open_restriction
       IsIso a ∧ IsIso b ∧
         (tensorPullback jV).map beta ≫ b = a ≫ betaV ∧
         (IsIso ((tensorPullback jV).map beta) ↔ IsIso betaV) := by
-  sorry
+  intro adj c rho rho'
+  have hr : ∀ F : X.Modules, IsIso (rho F) := fun F ↦
+    moduleBaseChangeMap_open_square_isIso f fU jU jX hf hX F
+  have hr' : ∀ G : X'.Modules, IsIso (rho' G) := fun G ↦
+    moduleBaseChangeMap_open_square_isIso f' fV' jV jX' hf' hX' G
+  refine ⟨hr, hr', ?_⟩
+  intro F a b beta betaV
+  have : IsIso (rho F) := hr F
+  have : IsIso (rho' ((tensorPullback g').obj F)) := hr' _
+  have ha : IsIso a := by dsimp only [a]; infer_instance
+  have hb : IsIso b := by dsimp only [b]; infer_instance
+  have hc : (tensorPullback jV).map beta ≫ b = a ≫ betaV :=
+    moduleBaseChangeMap_square_restriction_commutes f f' g g' h
+      jU jV jX jX' fU fV' gV gV' hf hf' hg hg' hV F
+  refine ⟨ha, hb, hc, ?_⟩
+  rw [← isIso_comp_right_iff ((tensorPullback jV).map beta) b, hc,
+    isIso_comp_left_iff a betaV]
 
 end
 end AlgebraicGeometry.Scheme.Modules

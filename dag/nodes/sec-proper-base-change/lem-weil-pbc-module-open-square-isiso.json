@@ -1,0 +1,174 @@
+{
+ "id": "lem-weil-pbc-module-open-square-isiso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Steps 1 and 4 of lem-weil-pbc-module-base-change-map-open-restriction",
+   "via": [
+    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The exchange map of a full inverse-image open square is an isomorphism",
+ "statement": "Let f:X\\to S and f_U:X_U\\to U be morphisms of schemes [def-pc-scheme], and j_U:U\\to S and j_X:X_U\\to X open immersions [def-weil-open-immersion]. Assume j_X followed by f equals f_U followed by j_U, and image(j_X)=f^{-1}(image(j_U)). For every module F [def-weil-sheaf-of-modules-category], the mate of f_*(eta_{j_X,F}) followed by the canonical pushforward composition and equality identifications, under the chosen adjunction for tensorPullback(j_U) [lem-pc-module-pullback-adjunction], is an isomorphism j_U^* f_*F \\to f_{U*}j_X^*F [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Lemma 00A0 (lemma-j-pullback), parts (2) and (5) and the module variant; Cohomology on Sites, Remark 08HY for the defining mate"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Compare the restriction adjunctions with the chosen tensor-pullback adjunctions by leftAdjointUniq. Form d as the mate, for restriction along jU, of the pushforward of the restriction unit along jX and the canonical pushforward square.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 00A0 (lemma-j-pullback), parts (2) and (5) and the module variant; Cohomology on Sites, Remark 08HY for the defining mate"
+   }
+  },
+  {
+   "text": "For every open W in U, f inverse-image of jU(W) equals jX(fU inverse-image of W). The reverse inclusion uses the full image hypothesis and injectivity of jU; the forward inclusion uses the commuting square. Evaluate d on W with homEquiv_counit and the restriction unit/counit section formulas. Pushforward composition maps are identities and the congruence maps are restrictions. Hence d.app W is F.presheaf.map of a morphism between equal opens. That morphism is an isomorphism in the thin category of opens, so d is an isomorphism by Hom.isIso_iff_isIso_app.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 00A0 (lemma-j-pullback), parts (2) and (5) and the module variant; Cohomology on Sites, Remark 08HY for the defining mate"
+   }
+  },
+  {
+   "text": "The equality eU.hom followed by bc = d followed by fU pushforward of eX.hom follows by injectivity of the restriction Hom equivalence. Naturality of the pushforward square and unit_leftAdjointUniq_hom_app give identical adjoints. Both eU and eX are isomorphisms; cancel eU to conclude bc is an isomorphism.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 00A0 (lemma-j-pullback), parts (2) and (5) and the module variant; Cohomology on Sites, Remark 08HY for the defining mate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Lemma 00A0 (lemma-j-pullback), parts (2) and (5) and the module variant; Cohomology on Sites, Remark 08HY for the defining mate"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of sheaves of modules along full inverse image of open immersion is isomorphism",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no mathematical verdict recorded.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change map for sheaves of modules along an open immersion and its full inverse image is an isomorphism",
+   "results": "restrictFunctorIsoPullback, restrictFunctorComp_inv_app_app and Hom.appIso; none states the full inverse-image exchange map is an isomorphism.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg baseChange|base_change|restrictAdjunction in Mathlib/AlgebraicGeometry/Modules/Sheaf.lean and lean/{Sheaf,WeilConjectures}",
+   "results": "restrictAdjunction, restrictAdjunction_unit_app_app, restrictAdjunction_counit_app_app and Hom.isIso_iff_isIso_app supply the sectionwise proof. No existing declaration states this single-square claim independently of the item. Blueprint search open square returned no match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleBaseChangeOpenSquareIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleBaseChangeOpenSquareIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleBaseChangeMap_open_square_isIso",
+  "statement": "theorem moduleBaseChangeMap_open_square_isIso {X S U XU : Scheme.{u}} (f : X ⟶ S) (fU : XU ⟶ U) (jU : U ⟶ S) (jX : XU ⟶ X) [IsOpenImmersion jU] [IsOpenImmersion jX] (hf : jX ≫ f = fU ≫ jU) (hX : Set.range jX = f ⁻¹' Set.range jU) (F : X.Modules) : let bc : ∀ {A B C D : Scheme.{u}} (p : A ⟶ B) (q : C ⟶ D) (r : D ⟶ B) (s : C ⟶ A) (_hs : s ≫ p = q ≫ r) (M : A.Modules), (tensorPullback r).obj ((pushforward p).obj M) ⟶ (pushforward q).obj ((tensorPullback s).obj M) := fun {_A _B _C _D : Scheme.{u}} p q r s hs M ↦ ((Classical.choose (exists_tensorPullbackAdjunction r)).homEquiv _ _).symm ((pushforward p).map ((Classical.choose (exists_tensorPullbackAdjunction s)).unit.app M) ≫ (pushforwardComp s p).hom.app ((tensorPullback s).obj M) ≫ (pushforwardCongr hs).hom.app ((tensorPullback s).obj M) ≫ (pushforwardComp q r).inv.app ((tensorPullback s).obj M)) IsIso (bc f fU jU jX hf F)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T163622-L-2788146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T163622-L-2788146",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

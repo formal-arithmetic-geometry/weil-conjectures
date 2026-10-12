@@ -30,76 +30,46 @@
  ],
  "proof": [
   {
-   "text": "*(1) Restriction along the two open squares.* For an open immersion, the restriction functor and its sectionwise description are the adjoint of [lem-weil-pbc-module-restriction-open-immersion-colimits], while [lem-weil-pbc-open-immersion-module-pullback-restriction] identifies that restriction with the module pullback and identifies its adjunction unit with restriction of sections. For an open W in U, the two sides of rho_F therefore have sections F(f^{-1}(j_U(W))) and F(j_X(f_U^{-1}(W))). The square relation and the hypothesis that the image of j_X is f^{-1}(j_U(U)) identify these opens, and under this identification the map is the restriction map, hence an isomorphism. The same argument for the primed square proves that every rho'_G is an isomorphism.",
+   "text": "Apply the single-square open isomorphism theorem twice, once to each full inverse-image square, obtaining all rho and rho′ isomorphisms.",
    "uses": [
-    "def-pc-scheme",
-    "def-weil-open-immersion",
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-module-pullback",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+    "lem-weil-pbc-module-open-square-isiso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A0 (lemma-j-pullback), parts (2) and (5), together with its module statement; the base-change-map adjunction is Cohomology on Sites, Remark 08HY"
+    "place": "Lemma 00A0 (lemma-j-pullback), parts (2) and (5) and the module variant; Cohomology on Sites, Remark 08HY for the defining mate"
    }
   },
   {
-   "text": "*(2) First pasting description.* Paste the original square (f,f',g,g') with the open restriction square (f',f'_V,j_V,j_X'). The horizontal pasting formula for module base-change maps [lem-weil-pbc-module-base-change-map-pasting], with the pullback composition isomorphisms, says that the base-change map of the resulting outer square (f,f'_V,g after j_V,g' after j_X') is exactly the composite b after j_V^*(beta_F); the first restriction map in b is rho' applied to g'^*F.",
+   "text": "For each F, infer that a and b are composites of component isomorphisms and functor images of rho and rho′. Apply the independent square-restriction coherence theorem to obtain jV*beta followed by b = a followed by betaV.",
    "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-module-base-change-map-pasting",
-    "def-pc-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Remark 0ATM (remark-compose-base-change-horizontal), with Remark 08HY (remark-base-change) for the definition of the base-change map"
-   }
-  },
-  {
-   "text": "*(3) Second pasting description and comparison.* Paste instead the open restriction square (f,f_U,j_U,j_X) with the restricted square (f_U,f'_V,g_V,g'_V). The same pasting formula identifies the base-change map of the same outer square with beta-circle after a, including the displayed composition isomorphisms in a and b. The two outer squares agree by the stated commutation relations, so their defining adjoint maps agree; hence the two descriptions give b after j_V^*(beta_F) equals beta-circle after a.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-module-base-change-map-pasting",
-    "def-pc-scheme",
-    "def-weil-open-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Remark 0ATL (remark-compose-base-change) and Remark 0ATM (remark-compose-base-change-horizontal), whose omitted verification is the pasting used here"
-   }
-  },
-  {
-   "text": "*(4) Isomorphism criterion.* The maps a and b are isomorphisms because they are composites of pullback composition isomorphisms, pullbacks of rho_F, and rho' applied to g'^*F from step 1. In the commutative equality of step 3, composition with these isomorphisms shows that j_V^*(beta_F) is an isomorphism exactly when beta-circle applied to j_X^*F is.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-module-base-change-map-pasting",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+    "lem-weil-pbc-module-square-restriction-commutes",
+    "lem-weil-pbc-module-open-square-isiso"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 02KG (lemma-affine-base-change), proof, first sentence: locality on the base and its open restriction maps"
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remarks 0ATL and 0ATM (composition of base-change maps); underived mate calculation in Mathlib/CategoryTheory/Adjunction/Mates.lean"
+   }
+  },
+  {
+   "text": "Rewrite IsIso(jV*beta) via isIso_comp_right_iff for b, the proved commutation equation, and isIso_comp_left_iff for a. This yields the required equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Iso.lean",
+    "place": "isIso_comp_right_iff and isIso_comp_left_iff"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-weil-open-immersion",
-  "def-weil-sheaf-of-modules-category",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
-  "lem-weil-pbc-module-base-change-map-pasting"
+  "lem-weil-pbc-module-open-square-isiso",
+  "lem-weil-pbc-module-square-restriction-commutes"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Remarks 0ATL and 0ATM (pasting base-change maps), with Sheaves Lemma 00A0 and Cohomology of Schemes Lemma 02KG for open restriction"
+  "place": "Remarks 0ATL and 0ATM (composition of base-change maps); underived mate calculation in Mathlib/CategoryTheory/Adjunction/Mates.lean"
  },
  "mathlib_searches": [
   {
@@ -187,18 +157,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "Q3",
+  "reviewer": "COMPILER",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T135307-L-1688187",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.moduleBaseChangeMap_naturality",
-   "AlgebraicGeometry.Scheme.Modules.moduleBaseChangeMap_open_restriction"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.Modules.moduleBaseChangeMap_open_restriction"
-  ]
+  "landing": "20261012T163622-L-2788146",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

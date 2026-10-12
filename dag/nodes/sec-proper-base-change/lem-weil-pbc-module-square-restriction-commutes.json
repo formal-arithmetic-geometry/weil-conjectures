@@ -1,0 +1,173 @@
+{
+ "id": "lem-weil-pbc-module-square-restriction-commutes",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Steps 2 and 3 of lem-weil-pbc-module-base-change-map-open-restriction",
+   "via": [
+    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pasting coherence for restriction of a module base-change square",
+ "statement": "For schemes [def-pc-scheme] and module pullbacks and pushforwards [def-pc-module-pullback], fix commuting squares (f,f\\prime,g,g\\prime), (f,f_U,j_U,j_X), (f\\prime,f_V\\prime,j_V,j_X\\prime), and (f_U,f_V\\prime,g_V,g_V\\prime), with j_V followed by g = g_V followed by j_U and j_X\\prime followed by g\\prime = g_V\\prime followed by j_X. Define beta, rho, rho\\prime and beta_V on modules [def-weil-sheaf-of-modules-category] as mates of pushforwards of the top-map units under the chosen tensor-pullback adjunctions [lem-pc-module-pullback-adjunction]. Define c(k,l) as the inverse conjugate of pushforwardComp(k,l). For every F, define a=c(j_V,g).inv followed by bottom equality transport, c(g_V,j_U).hom and g_V^*rho_F; define b=rho\\prime_{g\\prime^*F} followed by f_V\\prime pushforward of c(j_X\\prime,g\\prime).inv, top equality transport and c(g_V\\prime,j_X).hom. Then j_V^*beta_F followed by b equals a followed by beta_V at j_X^*F. No openness or full inverse-image hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remarks 0ATL and 0ATM (composition of base-change maps); underived mate calculation in Mathlib/CategoryTheory/Adjunction/Mates.lean"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the Mathlib inverse-mate and conjugate-equivalence whiskering identities to the private core equal to the displayed adjunction formula. After mateEquiv_hcomp, evaluate the right-adjoint squares on each module and open. Their sectionwise equality is directly Functor.map_comp, since the category of opens is thin. No separate scheme-specific pushforwardSquare_pasting theorem is declared or reproved; the general Mathlib functoriality theorem supplies this elementary step. The resulting identity gives horizontal pasting for the private core.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remarks 0ATL and 0ATM (composition of base-change maps); underived mate calculation in Mathlib/CategoryTheory/Adjunction/Mates.lean"
+   }
+  },
+  {
+   "text": "Apply the private pasting formula to (f,f′,g,g′) followed by (f′,fV′,jV,jX′), and to (f,fU,jU,jX) followed by (fU,fV′,gV,gV′). The commutations hg and hg′ identify the two outer squares; equality elimination proves the transport identity for their adjoint-defined maps.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remarks 0ATL and 0ATM (composition of base-change maps); underived mate calculation in Mathlib/CategoryTheory/Adjunction/Mates.lean"
+   }
+  },
+  {
+   "text": "Precompose the desired equation with c(jV,g).hom and postcompose it with fV′ pushforward of c(gV′,jX).inv. Cancel the composition isomorphisms and substitute the two pasting equalities. The resulting goal is the transport identity from the preceding step.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remarks 0ATL and 0ATM (composition of base-change maps); underived mate calculation in Mathlib/CategoryTheory/Adjunction/Mates.lean"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remarks 0ATL and 0ATM (composition of base-change maps); underived mate calculation in Mathlib/CategoryTheory/Adjunction/Mates.lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "mate equivalence compatible with composition and base change of sheaves",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no mathematical verdict recorded.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change maps for sheaves of modules commute with restriction of commutative squares by pasting",
+   "results": "SheafOfModules.pullback_assoc, conjugateEquiv_pullbackComp_inv and Scheme.Modules.restrictFunctorComp; no complete exchange-map commutation statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg moduleBaseChangeMap in lean/{Sheaf,WeilConjectures}; rg mateEquiv_hcomp in Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "results": "The proved moduleBaseChangeMap_pasting imports the item and cannot be imported here. Its private mate argument can be reused independently; mateEquiv_hcomp and the two conjugate whiskering lemmas supply it. Blueprint search base change restriction returned no match.",
+   "date": "2026-10-12",
+   "verdict": "no independent exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleBaseChangeSquareRestrictionCommutes",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleBaseChangeSquareRestrictionCommutes.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleBaseChangeMap_square_restriction_commutes",
+  "statement": "theorem moduleBaseChangeMap_square_restriction_commutes {X S X' S' U V XU X'V : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (h : g' ≫ f = f' ≫ g) (jU : U ⟶ S) (jV : V ⟶ S') (jX : XU ⟶ X) (jX' : X'V ⟶ X') (fU : XU ⟶ U) (fV' : X'V ⟶ V) (gV : V ⟶ U) (gV' : X'V ⟶ XU) (hf : jX ≫ f = fU ≫ jU) (hf' : jX' ≫ f' = fV' ≫ jV) (hg : jV ≫ g = gV ≫ jU) (hg' : jX' ≫ g' = gV' ≫ jX) (hV : gV' ≫ fU = fV' ≫ gV) : let bc : ∀ {A B C D : Scheme.{u}} (p : A ⟶ B) (q : C ⟶ D) (r : D ⟶ B) (s : C ⟶ A) (_hs : s ≫ p = q ≫ r) (M : A.Modules), (tensorPullback r).obj ((pushforward p).obj M) ⟶ (pushforward q).obj ((tensorPullback s).obj M) := fun {_A _B _C _D : Scheme.{u}} p q r s hs M ↦ ((Classical.choose (exists_tensorPullbackAdjunction r)).homEquiv _ _).symm ((pushforward p).map ((Classical.choose (exists_tensorPullbackAdjunction s)).unit.app M) ≫ (pushforwardComp s p).hom.app ((tensorPullback s).obj M) ≫ (pushforwardCongr hs).hom.app ((tensorPullback s).obj M) ≫ (pushforwardComp q r).inv.app ((tensorPullback s).obj M)) let adj : ∀ {A B : Scheme.{u}} (k : A ⟶ B), tensorPullback k ⊣ pushforward k := fun {A B : Scheme.{u}} (k : A ⟶ B) ↦ Classical.choose (exists_tensorPullbackAdjunction k) let c : ∀ {A B C : Scheme.{u}} (k : A ⟶ B) (l : B ⟶ C), tensorPullback (k ≫ l) ≅ tensorPullback l ⋙ tensorPullback k := fun {A B C : Scheme.{u}} (k : A ⟶ B) (l : B ⟶ C) ↦ (conjugateIsoEquiv ((adj l).comp (adj k)) (adj (k ≫ l))).symm (pushforwardComp k l) let rho := fun F : X.Modules ↦ bc f fU jU jX hf F let rho' := fun G : X'.Modules ↦ bc f' fV' jV jX' hf' G ∀ F : X.Modules, let a := (c jV g).inv.app ((pushforward f).obj F) ≫ (eqToIso (congrArg (fun k ↦ (tensorPullback k).obj ((pushforward f).obj F)) hg)).hom ≫ (c gV jU).hom.app ((pushforward f).obj F) ≫ (tensorPullback gV).map (rho F) let b := rho' ((tensorPullback g').obj F) ≫ (pushforward fV').map ((c jX' g').inv.app F) ≫ (pushforward fV').map (eqToIso (congrArg (fun k ↦ (tensorPullback k).obj F) hg')).hom ≫ (pushforward fV').map ((c gV' jX).hom.app F) let beta := bc f f' g g' h F let betaV := bc fU fV' gV gV' hV ((tensorPullback jX).obj F) (tensorPullback jV).map beta ≫ b = a ≫ betaV",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T163622-L-2788146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T163622-L-2788146",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
