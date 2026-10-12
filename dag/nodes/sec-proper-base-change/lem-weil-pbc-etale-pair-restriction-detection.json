@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-etale-pair-restriction-detection",
+ "kind": "statement",
+ "title": "A qcqs overlap detects matching after every base change",
+ "statement": "Let S be any scheme and W,U,V qcqs etale objects over S, with maps f : U → W and g : V → W. There exist a qcqs etale object Z and arrows p : Z → U, q : Z → V satisfying pf=qg such that the following holds. For any scheme T, h : T → S, sheaf of sets F on T, and sections s,t on U_T,V_T, equality of their restrictions to Z_T implies equality of their restrictions along any a : Y → U_T, a′ : Y → V_T with af_T=a′g_T, for any etale Y over T.",
+ "source": {
+  "document": "Stacks Project, Étale Cohomology, Tags 03Q4 and 09YQ",
+  "place": "finite affine-cover overlap reduction"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Take Z to be the scheme pullback of f.left and g.left, with structure map its first projection followed by U.hom. Its two projections define maps p,q of etale objects, and pullback.condition gives pf=qg. The arrow g.left is quasi-compact and quasi-separated by cancellation against W.hom; stability under base change and composition make Z.hom qcqs.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Given a,a′ after an arbitrary base change h, compose their underlying arrows with the first projections back to U,V. Their composites to W agree by the hypothesis. Lift this pair into Z, then lift that arrow together with Y.hom into Z ×_S T. The two pullback projection identities prove that the resulting v has composites a,a′ with the base changes of p,q. Restrict the equality on Z_T along v and use presheaf functoriality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "document": "Stacks Project, Étale Cohomology, Tags 03Q4 and 09YQ",
+  "place": "finite overlap reduction, explicit scheme pullback and cofiltered common predecessor"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of eventual equalities in a cofiltered category holds at a common stage",
+   "results": "Found IsCofiltered.inf_objs_exists; geometric query found etale pullbacks and base-change instances, not an existing matching theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "CategoryTheory.Limits.pullback.lift",
+   "results": "Found pullback.lift, lift_fst, lift_snd and Over.pullback_map_left, used in the explicit factorization.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*lift|finite_matching|pair_matching",
+   "results": "Found elementary pullback constructions; local rg in Sheaf and WeilConjectures found no existing fixed-pair matching theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite matching equations on etale sheaf sections over an inverse limit hold at a common stage",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionFiniteMatching",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sets-section-pair-matching-eventually",
+   "place": "qcqs fibre product and restriction along its base changed universal factorization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtalePairRestrictionDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePairRestrictionDetection.lean",
+  "declaration": "AlgebraicGeometry.etale_pair_restriction_detection",
+  "statement": "theorem etale_pair_restriction_detection {S : Scheme.{u}} (W U V : S.Etale) [QuasiCompact W.hom] [QuasiSeparated W.hom] [QuasiCompact U.hom] [QuasiSeparated U.hom] [QuasiCompact V.hom] [QuasiSeparated V.hom] (f : U ⟶ W) (g : V ⟶ W) : ∃ (Z : S.Etale) (p : Z ⟶ U) (q : Z ⟶ V), QuasiCompact Z.hom ∧ QuasiSeparated Z.hom ∧ p ≫ f = q ≫ g ∧ ∀ (T : Scheme.{u}) (h : T ⟶ S) (F : Sheaf T.smallEtaleTopology (Type (u + 1))) (s : F.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj U))) (t : F.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj V))), F.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ h).map p).op s = F.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ h).map q).op t → ∀ (Y : T.Etale) (a : Y ⟶ (MorphismProperty.Over.pullback @Etale ⊤ h).obj U) (a' : Y ⟶ (MorphismProperty.Over.pullback @Etale ⊤ h).obj V), a ≫ (MorphismProperty.Over.pullback @Etale ⊤ h).map f = a' ≫ (MorphismProperty.Over.pullback @Etale ⊤ h).map g → F.obj.map a.op s = F.obj.map a'.op t",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T112830-L-764502",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T112830-L-764502",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

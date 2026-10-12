@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-sets-section-pair-matching-eventually",
+ "kind": "statement",
+ "title": "One overlap equation remains effective at later stages",
+ "statement": "Let I be a nonempty directed preorder and D : Iᵒᵖ → Scheme a diagram of qcqs schemes with affine transition maps, with limit cone c and fixed i₀. Let G be a sheaf of sets on D(i₀), and W,U,V qcqs etale objects over D(i₀), with f : U → W and g : V → W. Fix j in Over(i₀ᵒᵖ) and sections s,t on the stage-j base changes of U,V. Suppose that for every etale Z and p : Z → U, q : Z → V with pf=qg the two restrictions have equal images under the limit section comparison of def-weil-pbc-sets-section-comparison. There exist l and d : l → j such that for every k and e : k → l and every etale Y over D(k), restrictions of the two sections transported along e then d agree along any a : Y → U_k, a′ : Y → V_k with af_k=a′g_k.",
+ "source": {
+  "document": "Stacks Project, Étale Cohomology, Tags 03Q4 and 09YQ",
+  "place": "finite affine-cover overlap reduction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sets-section-comparison",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof": [
+  {
+   "text": "Apply the qcqs overlap restriction detector to obtain Z,p,q. Restrict the two sections to Z. Apply eventual equality using the assumed limit equation on p,q. Thinness identifies its two arrows to j.",
+   "uses": [
+    "lem-weil-pbc-etale-pair-restriction-detection",
+    "lem-weil-pbc-sets-section-eventual-equality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At any further stage, apply the transition comparison to the equality on Z. The composition law identifies the resulting sections with their transport along the composite arrow. Restriction naturality moves the composite comparisons past p and q. Apply the overlap detector at that base change to the given Y,a,a′.",
+   "uses": [
+    "lem-weil-pbc-sets-section-comparison-laws",
+    "lem-weil-pbc-sets-section-comparison-naturality",
+    "lem-weil-pbc-etale-pair-restriction-detection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-pair-restriction-detection",
+  "lem-weil-pbc-sets-section-comparison-laws",
+  "lem-weil-pbc-sets-section-comparison-naturality",
+  "lem-weil-pbc-sets-section-eventual-equality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "document": "Stacks Project, Étale Cohomology, Tags 03Q4 and 09YQ",
+  "place": "finite overlap reduction, explicit scheme pullback and cofiltered common predecessor"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of eventual equalities in a cofiltered category holds at a common stage",
+   "results": "Found IsCofiltered.inf_objs_exists; geometric query found etale pullbacks and base-change instances, not an existing matching theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "CategoryTheory.Limits.pullback.lift",
+   "results": "Found pullback.lift, lift_fst, lift_snd and Over.pullback_map_left, used in the explicit factorization.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*lift|finite_matching|pair_matching",
+   "results": "Found elementary pullback constructions; local rg in Sheaf and WeilConjectures found no existing fixed-pair matching theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite matching equations on etale sheaf sections over an inverse limit hold at a common stage",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionFiniteMatching",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sets-section-finite-matching",
+   "place": "the fixed-pair overlap argument and persistence under later transition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionPairMatchingEventually",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSectionPairMatchingEventually.lean",
+  "declaration": "AlgebraicGeometry.etaleSetSection_pair_matching_eventually",
+  "statement": "theorem etaleSetSection_pair_matching_eventually {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1))) (W : (D.obj (op i₀)).Etale) [QuasiCompact W.hom] [QuasiSeparated W.hom] (U V : (D.obj (op i₀)).Etale) (f : U ⟶ W) (g : V ⟶ W) [QuasiCompact U.hom] [QuasiSeparated U.hom] [QuasiCompact V.hom] [QuasiSeparated V.hom] (j : Over (op i₀)) (s : ((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj U))) (t : ((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj V))) (hmatch : ∀ (Z : (D.obj (op i₀)).Etale) (p : Z ⟶ U) (p' : Z ⟶ V), p ≫ f = p' ≫ g → (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom) G Z) (((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.map ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).map p).op s) = (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom) G Z) (((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.map ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).map p').op t)) : ∃ (l : Over (op i₀)) (d : l ⟶ j), ∀ (k : Over (op i₀)) (e : k ⟶ l) (Y : (D.obj k.left).Etale) (a : Y ⟶ (MorphismProperty.Over.pullback @Etale ⊤ (D.map k.hom)).obj U) (a' : Y ⟶ (MorphismProperty.Over.pullback @Etale ⊤ (D.map k.hom)).obj V), a ≫ (MorphismProperty.Over.pullback @Etale ⊤ (D.map k.hom)).map f = a' ≫ (MorphismProperty.Over.pullback @Etale ⊤ (D.map k.hom)).map g → ((Scheme.etaleSetPullback (D.map k.hom)).obj G).obj.map a.op ((etaleSetSectionComparison (D.map (e ≫ d).left) (D.map j.hom) (D.map k.hom) ((D.map_comp (e ≫ d).left j.hom).symm.trans (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) (e ≫ d).w)) G U) s) = ((Scheme.etaleSetPullback (D.map k.hom)).obj G).obj.map a'.op ((etaleSetSectionComparison (D.map (e ≫ d).left) (D.map j.hom) (D.map k.hom) ((D.map_comp (e ≫ d).left j.hom).symm.trans (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) (e ≫ d).w)) G V) t)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T112830-L-764502",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T112830-L-764502",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
