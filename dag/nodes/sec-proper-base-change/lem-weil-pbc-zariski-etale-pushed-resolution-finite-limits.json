@@ -15,25 +15,26 @@
  ],
  "proof": [
   {
-   "text": "Put W=i(top). Applying the forgetful equality to U -> top identifies its underlying map with the open immersion X|U -> X. Thus i factors through the localized etale site over W as the usual Zariski inclusion for the underlying scheme W.left=X. The latter inverse image is exact. Direct image is restriction to W followed by this usual direct image, so its left adjoint is usual inverse image followed by extension by zero along the localized-site projection. Extension by zero is exact, so uniqueness of left adjoints gives finite-limit preservation for the specified abelian sheafPullback i. The existential usual-inclusion lemma alone is not applied to this arbitrary i.",
+   "text": "Obtain the usual inclusion j with forgetful equality and finite-limit preservation from zariski_to_etale_is_morphism. The forgetful functor lands in Over X and is fully faithful. Thus Mathlib Functor.fullyFaithfulCancelRight applied to eqToIso (hi_inclusion.trans hj.symm) gives i ≅ j. Transfer finite-limit preservation along this isomorphism.",
    "uses": [
-    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-    "lem-weil-pbc-site-extension-by-zero-exact",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib flat_of_preservesFiniteLimits to i, since X.Opens has finite limits. Apply the proved universe-general CategoryTheory.preservesFiniteLimits_op_lan_of_flat (WeilConjectures.Mathlib.CategoryTheory.Functor.Flat) to abelian coefficients, using the AB5 instance from Mathlib.Algebra.Category.Grp.AB. Unfold the constructed sheafPullback and compose the preservation instances for sheafToPresheaf, i.op.lan, and presheafToSheaf with comp_preservesFiniteLimits.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-  "lem-weil-pbc-site-extension-by-zero-exact",
-  "def-weil-pbc-sites-and-cohomology"
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "W2 stage-3 worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 072W and 0733(1), direct injective-resolution proof; etale-cohomology.tex Tag 09AX; sites.tex Tags 00X5 and 00X6; extension by zero as in sites-modules.tex Tag 03DJ.",
-  "note": "Second reading: component of the original sourced argument; no dependency on the combined theorem."
+  "place": "Sites Tags 00X5 and 00X6; finite-limit preservation transferred by full faithfulness of Scheme.Etale.forget, followed by the proved universe-general presheaf Kan-extension lemma.",
+  "note": "The old localization argument incorrectly treated Scheme.Etale.forget as a functor to Scheme rather than Over X. The signature is unchanged."
  },
  "mathlib_searches": [
   {
@@ -128,9 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T131917-L-1402366",
-  "kind": "interface"
+  "landing": "20261012T144157-L-2111625",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

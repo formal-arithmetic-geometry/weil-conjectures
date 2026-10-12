@@ -3,7 +3,8 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
-import Sheaf.CategoryTheory.SiteExtensionByZeroExact
+import Mathlib.Algebra.Category.Grp.AB
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
 @[expose] public section
 universe u
@@ -15,19 +16,17 @@ Source: Stacks Project, Sites, Tags 00X5 and 00X6; Etale Cohomology, Tag 09AX;
 Modules on Sites, Tag 03DJ.
 (blueprint: lem-weil-pbc-zariski-etale-pushed-resolution-finite-limits)
 
-Proof: put W = i(top). The forgetful equality identifies the underlying scheme of
-W with X. Each map i(U) -> W has underlying map X|U -> X, hence is the usual open
-immersion into the underlying scheme of W. Thus i factors through the localized
-etale site over W as its usual Zariski inclusion. Restriction of etale sheaves to
-W followed by the usual Zariski direct image is the given continuous direct image.
-The usual abelian inverse image is exact. Restriction to W has exact left adjoint
-extension by zero: its presheaf construction is the direct sum over arrows to W,
-which preserves monomorphisms, followed by exact sheafification; its adjunction
-also gives right exactness. Compose these two exact left adjoints. Uniqueness of
-left adjoints identifies that composite with the displayed sheaf pullback. Exact
-additive functors between abelian categories preserve finite limits, giving the
-claim. This argument applies to arbitrary i, without asserting that W is terminal
-in X.Etale. Neither a coefficient sheaf nor cohomology vanishing is needed. -/
+Proof: the usual inclusion j preserves finite limits. Both i and j become
+X.restrictFunctor after applying Scheme.Etale.forget X, whose codomain is Over X,
+not Scheme. This forgetful functor is fully faithful, so cancel it from the
+natural isomorphism induced by the two equalities to obtain i ≅ j. Transfer
+finite-limit preservation to i. Since the opens have finite limits, i is
+representably flat. The universe-general left-Kan-extension theorem then gives
+finite-limit preservation for i.op.lan with abelian coefficients: its pointwise
+values are filtered colimits, which are exact in AddCommGrpCat. Finally the
+constructed sheaf pullback is the composite of the sheaf inclusion, this Kan
+extension, and sheafification, each preserving finite limits. No localized-site
+factorization or extension by zero is required. -/
 theorem zariski_etale_pushed_resolution_finite_limits
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)
@@ -38,4 +37,16 @@ theorem zariski_etale_pushed_resolution_finite_limits
     [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}]
     :
     PreservesFiniteLimits (sheafPullback i AddCommGrpCat.{u + 1}
-      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology) := by sorry
+      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology) := by
+  let := hi
+  obtain ⟨j, hj, _, hjlim, _, _⟩ := zariski_to_etale_is_morphism.{u + 1, 0} X
+  let e : i ≅ j := Functor.fullyFaithfulCancelRight (Scheme.Etale.forget X)
+    (eqToIso (hi_inclusion.trans hj.symm))
+  have : PreservesFiniteLimits j := hjlim
+  have : PreservesFiniteLimits i := preservesFiniteLimits_of_natIso e.symm
+  have : RepresentablyFlat i := flat_of_preservesFiniteLimits i
+  have : PreservesFiniteLimits (i.op.lan :
+      (X.Opensᵒᵖ ⥤ AddCommGrpCat.{u + 1}) ⥤ X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1}) :=
+    preservesFiniteLimits_op_lan_of_flat i
+  unfold sheafPullback
+  exact comp_preservesFiniteLimits _ _
