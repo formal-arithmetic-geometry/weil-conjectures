@@ -350,6 +350,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import WeilConjectures.AlgebraicGeometry.Picard.DegreeDecomposition
 public import WeilConjectures.AlgebraicGeometry.Picard.DegreeMorphism
+public import WeilConjectures.AlgebraicGeometry.Picard.DegreePoints
 public import WeilConjectures.AlgebraicGeometry.Picard.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian

@@ -213,6 +213,73 @@ theorem isMonHom_of_isPicardMul {P P₀ : Over (Spec (.of k))} [GrpObj P] [GrpOb
   · rw [MonObj.mul_eq_mul, MonObj.mul_eq_mul, hmul, MonObj.comp_mul, tensorHom_fst,
       tensorHom_snd]
 
+/-- **The comparison of two Jacobians is a homomorphism.** Let `J` and `J'` be group schemes
+representing `Pic^0_{X/k}` by `e` and `e'`, both respecting the group laws. Then the unique
+isomorphism `u : J ≅ J'` compatible with `e` and `e'`
+(`CategoryTheory.Functor.RepresentableBy.uniqueUpToIso`) is a morphism of group objects.
+
+(blueprint: `lem-sc-jacobian-unique`) -/
+theorem isMonHom_uniqueUpToIso_hom_of_isPicardZeroMul [SmoothOfRelativeDimension 1 f]
+    [IsProper f] {J J' : Over (Spec (.of k))} [GrpObj J] [GrpObj J']
+    (e : (picardFunctorDegree f 0).obj.RepresentableBy J) (he : IsPicardZeroMul f e)
+    (e' : (picardFunctorDegree f 0).obj.RepresentableBy J') (he' : IsPicardZeroMul f e') :
+    IsMonHom (e.uniqueUpToIso e').hom := by
+  let Jt := fppfTopology.over (Spec (.of k))
+  let S := (picardSubfunctorDegree f 0).toFunctor
+  let u := e.uniqueUpToIso e'
+  have hsub {T : Over (Spec (.of k))} (L M : (pullback f T.hom).Pic)
+      (hL : L ∈ (picardSubfunctorDegree f 0).obj (.op T))
+      (hM : M ∈ (picardSubfunctorDegree f 0).obj (.op T)) :
+      L * M ∈ (picardSubfunctorDegree f 0).obj (.op T) := by
+    simpa using mul_mem_picardSubfunctorDegree f hL hM
+  have hj {T : Over (Spec (.of k))} (s : (picardFunctorDegree f 0).obj.obj (.op T)) :
+      e.homEquiv.symm s ≫ u.hom = e'.homEquiv.symm s := by
+    apply e'.homEquiv.injective
+    rw [Functor.RepresentableBy.homEquiv_comp_uniqueUpToIso_hom, Equiv.apply_symm_apply,
+      Equiv.apply_symm_apply]
+  have hmul {Y : Over (Spec (.of k))} (a b : Y ⟶ J) :
+      (a * b) ≫ u.hom = (a ≫ u.hom) * (b ≫ u.hom) := by
+    apply e'.homEquiv.injective
+    refine SheafifyGrp.ext (J := Jt) (P := S) _
+      (Jt.intersection_covering (SheafifyGrp.imageSieve_mem (J := Jt) (P := S) (e.homEquiv a))
+        (SheafifyGrp.imageSieve_mem (J := Jt) (P := S) (e.homEquiv b)))
+      fun Z g ⟨⟨⟨L, hL₀⟩, hL⟩, ⟨⟨M, hM₀⟩, hM⟩⟩ ↦ ?_
+    have ha : g ≫ a = e.homEquiv.symm ((toSheafify Jt S).app (.op Z) ⟨L, hL₀⟩) := by
+      rw [hL]
+      exact e.homEquiv.eq_symm_apply.2 (e.homEquiv_comp g a)
+    have hb : g ≫ b = e.homEquiv.symm ((toSheafify Jt S).app (.op Z) ⟨M, hM₀⟩) := by
+      rw [hM]
+      exact e.homEquiv.eq_symm_apply.2 (e.homEquiv_comp g b)
+    refine (e'.homEquiv_comp g _).symm.trans (Eq.trans ?_ (e'.homEquiv_comp g _))
+    congr 1
+    rw [← Category.assoc, MonObj.comp_mul, ha, hb, ← he L M hL₀ hM₀ (hsub L M hL₀ hM₀), hj,
+      he' L M hL₀ hM₀ (hsub L M hL₀ hM₀), MonObj.comp_mul, ← Category.assoc, ← Category.assoc,
+      ha, hb, hj, hj]
+  refine ⟨?_, ?_⟩
+  · rw [MonObj.one_eq_one, MonObj.one_eq_one]
+    have h := hmul (1 : 𝟙_ _ ⟶ J) 1
+    rw [_root_.mul_one] at h
+    exact mul_eq_left.mp h.symm
+  · rw [MonObj.mul_eq_mul, MonObj.mul_eq_mul, hmul, MonObj.comp_mul, tensorHom_fst,
+      tensorHom_snd]
+
+/-- **Uniqueness of the Jacobian.** Let `J` and `J'` be group schemes representing `Pic^0_{X/k}`
+by `e` and `e'`, both respecting the group laws. Then there is a unique isomorphism `u : J ≅ J'`
+with `e' ∘ h_u = e`, and it is an isomorphism of group schemes.
+
+(blueprint: `lem-sc-jacobian-unique`) -/
+theorem existsUnique_iso_isMonHom_of_isPicardZeroMul [SmoothOfRelativeDimension 1 f]
+    [IsProper f] {J J' : Over (Spec (.of k))} [GrpObj J] [GrpObj J']
+    (e : (picardFunctorDegree f 0).obj.RepresentableBy J) (he : IsPicardZeroMul f e)
+    (e' : (picardFunctorDegree f 0).obj.RepresentableBy J') (he' : IsPicardZeroMul f e') :
+    ∃! u : J ≅ J', (∀ {T : Over (Spec (.of k))} (a : T ⟶ J),
+      e'.homEquiv (a ≫ u.hom) = e.homEquiv a) ∧ IsMonHom u.hom := by
+  obtain ⟨u, hu, huniq⟩ := Functor.RepresentableBy.existsUnique_iso e e'
+  have hu' : u = e.uniqueUpToIso e' :=
+    (huniq _ fun a ↦ Functor.RepresentableBy.homEquiv_comp_uniqueUpToIso_hom e e' a).symm
+  refine ⟨u, ⟨hu, hu' ▸ isMonHom_uniqueUpToIso_hom_of_isPicardZeroMul f e he e' he'⟩,
+    fun v hv ↦ huniq v hv.1⟩
+
 variable [IsSepClosed k] [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
   [IsProper (X ↘ Spec (.of k))] [GeometricallyIntegral (X ↘ Spec (.of k))]
 
@@ -284,19 +351,20 @@ theorem exists_iso_representableBy_picardFunctorDegree {d d' e : ℤ} (M : X.Pic
   refine Eq.trans ?_ h₂.symm
   exact (congr_arg (fun ψ ↦ ψ.app (.op T) L) (toSheafify_naturality J ε.hom))
 
-variable [IsSepClosed k] [GeometricallyIntegral (X ↘ Spec (.of k))]
+variable [GeometricallyIntegral (X ↘ Spec (.of k))]
 
 /-- **`Pic^0 ≅ Pic^d` by tensoring with `𝒪_X(dx)`.** Let `X` be a smooth projective curve over a
-separably closed field `k`. There are a rational point `x` of `X` and an isomorphism between
+field `k` and let `x` be a rational point of `X`. There is an isomorphism between
 schemes `P₀`, `P_d` representing `Pic^0_{X/k}` and `Pic^d_{X/k}` whose functor of points is
 `ℒ ↦ ℒ ⊗ pr_X^* 𝒪_X(dx)`. Here `𝒪_X(dx)` is the class `M` of `𝒪_X(-x)^{⊗(-d)}`, `𝒪_X(-x)` the
 ideal sheaf of `x`, and the inverse isomorphism is tensoring with `pr_X^* 𝒪_X(-dx)`.
 
 (blueprint: `prop-pd-picard-degree-decomposition`, part (4)) -/
-theorem exists_iso_representableBy_picardFunctorDegree_zero (d : ℤ) (P₀ Pd : Over (Spec (.of k)))
+theorem exists_iso_representableBy_picardFunctorDegree_zero (d : ℤ)
+    (x : (X ↘ Spec (.of k)).fieldPoints k) (P₀ Pd : Over (Spec (.of k)))
     (hP₀ : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy P₀)
     (hPd : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy Pd) :
-    ∃ (x : (X ↘ Spec (.of k)).fieldPoints k) (M : X.Pic) (hM : picDegreeHom k X M = .ofAdd d),
+    ∃ (M : X.Pic) (hM : picDegreeHom k X M = .ofAdd d),
       (letI := (Hom.isInvertible_ker_fieldPoints x).isInvertible_toModules;
         M = Pic.ofIsInvertible x.1.ker.toModules ^ (-d)) ∧
       ∃ φ : P₀ ≅ Pd, ∀ {T : Over (Spec (.of k))}
@@ -308,12 +376,11 @@ theorem exists_iso_representableBy_picardFunctorDegree_zero (d : ℤ) (P₀ Pd :
               ((picardSubfunctorDegreeMulMapFst M hM (zero_add d).symm).app (.op T) L)) := by
   have : Smooth (X ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
   have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton (X ↘ Spec (.of k))
-  obtain ⟨x⟩ := Hom.nonempty_fieldPoints (k := k) (X ↘ Spec (.of k))
   have := (Hom.isInvertible_ker_fieldPoints x).isInvertible_toModules
   have hM : picDegreeHom k X (Pic.ofIsInvertible x.1.ker.toModules ^ (-d)) = .ofAdd d := by
     rw [map_zpow, picDegreeHom_ofIsInvertible, degree_toModules_ker_fieldPoints, ← ofAdd_zsmul,
       smul_eq_mul, neg_mul_neg, _root_.mul_one]
-  exact ⟨x, _, hM, rfl, exists_iso_representableBy_picardFunctorDegree _ hM _ P₀ Pd hP₀ hPd⟩
+  exact ⟨_, hM, rfl, exists_iso_representableBy_picardFunctorDegree _ hM _ P₀ Pd hP₀ hPd⟩
 
 end Translation
 
