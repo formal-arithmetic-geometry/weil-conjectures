@@ -266,4 +266,76 @@ theorem map_canonicalGenerator_eq_transitionUnit_smul {i j : n} (hij : i ≠ j) 
     ← toSheafificationObj_app_smul]
   exact congrArg _ key
 
+/-- **Families of free generators with the same transition units.** Let `e i`, `f i` be free
+generators of `M`, `N` on `U i`, and suppose that on each overlap `U i ⊓ U j` (`i ≠ j`) both
+satisfy `e i = c i j • e j` and `f i = c i j • f j` for the same functions `c i j`. Then they have
+the same transition functions on every open of `U i ⊓ U j`, as required by
+`Scheme.Modules.isoOfIsFreeGenerator`. -/
+lemma _root_.AlgebraicGeometry.Scheme.Modules.transition_of_eq_smul {X : Scheme.{u}}
+    {M N : X.Modules} {ι : Type*} {U : ι → X.Opens} {e : ∀ i, Γ(M, U i)} {f : ∀ i, Γ(N, U i)}
+    (he : ∀ i, IsFreeGenerator (e i)) (c : ∀ i j, Γ(X, U i ⊓ U j))
+    (hce : ∀ i j, i ≠ j → M.presheaf.map (homOfLE inf_le_left).op (e i) =
+      c i j • M.presheaf.map (homOfLE inf_le_right).op (e j))
+    (hcf : ∀ i j, i ≠ j → N.presheaf.map (homOfLE inf_le_left).op (f i) =
+      c i j • N.presheaf.map (homOfLE inf_le_right).op (f j))
+    (i j : ι) (W : X.Opens) (hi : W ≤ U i) (hj : W ≤ U j) (a b : Γ(X, W))
+    (hab : a • M.presheaf.map (homOfLE hi).op (e i) = b • M.presheaf.map (homOfLE hj).op (e j)) :
+    a • N.presheaf.map (homOfLE hi).op (f i) = b • N.presheaf.map (homOfLE hj).op (f j) := by
+  by_cases hij : i = j
+  · subst hij
+    rw [((he i).map hi).smul_left_injective hab]
+  · have hW : W ≤ U i ⊓ U j := le_inf hi hj
+    have key {P : X.Modules} {s : ∀ i, Γ(P, U i)}
+        (hs : P.presheaf.map (homOfLE inf_le_left).op (s i) =
+          c i j • P.presheaf.map (homOfLE inf_le_right).op (s j)) :
+        P.presheaf.map (homOfLE hi).op (s i) =
+          X.presheaf.map (homOfLE hW).op (c i j) • P.presheaf.map (homOfLE hj).op (s j) := by
+      rw [← presheaf_map_homOfLE_map_homOfLE inf_le_left hW, hs, map_smul,
+        presheaf_map_homOfLE_map_homOfLE]
+    have hb : a * X.presheaf.map (homOfLE hW).op (c i j) = b := by
+      refine ((he j).map hj).smul_left_injective ?_
+      dsimp only
+      rw [mul_smul, ← key (hce i j hij), hab]
+    rw [key (hcf i j hij), smul_smul, hb]
+
+/-- **The canonical module of projective space is a twisting sheaf**: `ω_ℙ ≅ 𝒪(-d-1)` on
+`ℙ = ℙ(n; Spec A)`, `Nat.card n = d + 1`. It is the isomorphism sending the local generator
+`ηᵢ = (-1)ⁱ ⋀_{k ≠ i} d(x_k / xᵢ)` of `ω_ℙ` to the generator `eᵢ^{(-d-1)}` of `𝒪(-d-1)` on each
+standard open `Uᵢ` (`canonicalModuleIsoTwist_hom_app`): both families have the transition units
+`(xᵢ / xⱼ)^{-d-1}` (`map_canonicalGenerator_eq_transitionUnit_smul`,
+`map_twistGenerator_eq_transitionUnit_smul`), so the local isomorphisms glue
+(`Scheme.Modules.isoOfIsFreeGenerator`). The signs `(-1)ⁱ` refer to the order on `n` given by
+`e : n ≃ Fin (d + 1)`.
+
+(blueprint: `lem-pc-projective-space-canonical`) -/
+def canonicalModuleIsoTwist :
+    canonicalModule n (Spec (.of A)) d ≅ twist n (Spec (.of A)) (-(d : ℤ) - 1) :=
+  isoOfIsFreeGenerator (iSup_standardOpen n _) (isFreeGenerator_canonicalGenerator A e)
+    (isFreeGenerator_twistGenerator n _ _)
+    (transition_of_eq_smul (isFreeGenerator_canonicalGenerator A e)
+      (fun i j ↦ (transitionUnit n _ (-(d : ℤ) - 1) i j).1)
+      (fun _ _ hij ↦ map_canonicalGenerator_eq_transitionUnit_smul A e hij)
+      (fun i j _ ↦ map_twistGenerator_eq_transitionUnit_smul n _ _ i j))
+
+/-- **`ω_ℙ ≅ 𝒪(-d-1)` sends `ηᵢ` to `eᵢ^{(-d-1)}`** on the standard open `Uᵢ`.
+
+(blueprint: `lem-pc-projective-space-canonical`) -/
+lemma canonicalModuleIsoTwist_hom_app (i : n) :
+    (canonicalModuleIsoTwist A e).hom.app (standardOpen n _ i) (canonicalGenerator A e i) =
+      twistGenerator n _ (-(d : ℤ) - 1) i :=
+  isoOfIsFreeGenerator_hom_app _ _ _ _ i
+
+/-- **Local description of `canonicalModuleIsoTwist`**: on an open `W ⊆ Uᵢ`, it sends
+`r • ηᵢ|_W` to `r • eᵢ^{(-d-1)}|_W`.
+
+(blueprint: `lem-pc-projective-space-canonical`) -/
+lemma canonicalModuleIsoTwist_hom_app_smul (i : n) {W : ℙ(n; Spec (.of A)).Opens}
+    (hW : W ≤ standardOpen n _ i) (r : Γ(ℙ(n; Spec (.of A)), W)) :
+    (canonicalModuleIsoTwist A e).hom.app W
+        (r • (canonicalModule n (Spec (.of A)) d).presheaf.map (homOfLE hW).op
+          (canonicalGenerator A e i)) =
+      r • (twist n (Spec (.of A)) (-(d : ℤ) - 1)).presheaf.map (homOfLE hW).op
+        (twistGenerator n _ (-(d : ℤ) - 1) i) :=
+  isoOfIsFreeGenerator_hom_app_smul _ _ _ _ i hW r
+
 end AlgebraicGeometry.ProjectiveSpace
