@@ -7591,3 +7591,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:50 L: merged deliver/G3/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (stage 3; reviewer PASS; first push; landing 20261012T115053-L-879077 (interface); batch 20261012T114925; modules 2; new nodes 2)
 - 11:51 L: merged deliver/K3/Sheaf.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZero (stage 3; reviewer PASS; first push; landing 20261012T115125-L-881367 (interface); batch 20261012T114925; modules 3; new nodes 2)
 - 11:51 L: merged deliver/Q3/Sheaf.Algebra.Homology.MixedTotalTensor (stage 3; reviewer PASS; first push; landing 20261012T115156-L-883530 (proof); batch 20261012T114925; modules 1; new nodes 0)
+- 11:52 L: returned deliver/P2/Sheaf.AlgebraicGeometry.AffineOverLimitInclusion (reviewer RETURN: (reviewer X-c1b8d, head c1b8d8ff9) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Af)
