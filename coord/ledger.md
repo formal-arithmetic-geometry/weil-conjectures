@@ -7651,3 +7651,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:14 L: merged deliver/T1/Sheaf.Topology.DirectedInjectiveDerivedSectionsAcyclic (stage 3; reviewer PASS; after a return; landing 20261012T121407-L-1004909 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 12:14 L: merged deliver/T3/Sheaf.AlgebraicGeometry.DerivedGlobalGermExchange (stage 3; reviewer PASS; first push; landing 20261012T121423-L-1005431 (interface); batch 20261012T120425; modules 4; new nodes 3)
 - 12:14 L: returned deliver/T2/Sheaf.Paper.CechComparisonMapNaturality (reviewer RETURN: (reviewer X-3966b, head 3966b9802) B9: In dag/nodes/sec-picard-framework/lem-sc-module-cech-lift-squares.json, replace t)
+- 12:14 L: merged deliver/W3/Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange (stage 3; reviewer PASS; first push; landing 20261012T121455-L-1008250 (interface); batch 20261012T120425; modules 2; new nodes 1)
