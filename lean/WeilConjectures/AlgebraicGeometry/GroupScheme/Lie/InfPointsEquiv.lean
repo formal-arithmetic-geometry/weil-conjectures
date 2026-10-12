@@ -98,7 +98,11 @@ theorem lieEquiv_mul (v w : infPoints G) : lieEquiv G (v * w) = lieEquiv G v + l
   sorry
 
 theorem lieEquiv_one : lieEquiv G 1 = 0 := by
-  sorry
+  have h := lieEquiv_mul G (1 : infPoints G) 1
+  rw [one_mul] at h
+  exact (add_left_cancel (show lieEquiv G 1 + lieEquiv G 1 = lieEquiv G 1 + 0 by
+    rw [add_zero]
+    exact h.symm))
 
 theorem lieEquiv_symm_add (x y : Lie G) :
     (lieEquiv G).symm (x + y) = (lieEquiv G).symm x * (lieEquiv G).symm y :=
