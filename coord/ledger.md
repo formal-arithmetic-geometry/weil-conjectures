@@ -6876,3 +6876,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/H3/Sheaf.RingTheory.FlatPermanence (stage 3; reviewer PASS; first push; landing 20261012T085250-L-19465 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/H3/Sheaf.RingTheory.RelativeSmoothDimensionDescent (stage 3; reviewer PASS; first push; landing 20261012T085250-L-19569 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/J1/Sheaf.Algebra.Homology.KFlatStalkCriterion (stage 3; reviewer PASS; first push; landing 20261012T085251-L-19664 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/J1/Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing (stage 3; reviewer PASS; first push; landing 20261012T085251-L-19783 (interface); batch 20261012T085205; modules 2; new nodes 1)

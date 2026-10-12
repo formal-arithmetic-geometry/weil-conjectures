@@ -1,0 +1,166 @@
+{
+ "id": "new-etale-affine-tensor-cech-amitsur-comparison",
+ "kind": "statement",
+ "title": "Comparison of lifted affine tensor-section Cech complexes with Amitsur complexes",
+ "statement": "Let X be a scheme, F a quasi-coherent X-module, U an etale X-scheme, and (V_i to U) a finite affine etale Cech cover [new-etale-finite-affine-cech-basis]. Put A = Gamma(U, O_U) and M = Gamma(U, U.hom*F), using the tensor pullback [lem-pc-module-pullback-identity-composition]. There exist a commutative ring B and a ring homomorphism a from A to B for which B is a faithfully flat A-module, and an isomorphism between the Mathlib Cech complex of the restricted lifted tensor-section sheaf [def-sc-etale-qcoherent-module] and the Amitsur complex of B over A with coefficients in M [lem-pc-cech-exact], after forgetting scalars and applying ULift. The isomorphism is an isomorphism of complexes in every nonnegative degree; no exactness or vanishing is asserted.",
+ "stmt_deps": [
+  "new-etale-finite-affine-cech-basis",
+  "lem-pc-module-pullback-identity-composition",
+  "def-sc-etale-qcoherent-module",
+  "lem-pc-cech-exact"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03OZ and 03P2, affine-case proof: identification with (B/A) tensor M before applying exactness; https://stacks.math.columbia.edu/tag/03P2 and https://stacks.math.columbia.edu/tag/03OZ"
+ },
+ "proof": [
+  {
+   "text": "Pull F back to the affine U. Quasi-coherence transports from abstract pullback to tensorPullback through the unique isomorphism of left adjoints to pushforward. The unit-normalized composition isomorphisms identify the restricted tensor-section presheaf with the tensor sections of this pullback on U. Set A = Gamma(U, O_U) and M = Gamma(U, U.hom*F).",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-identity-composition",
+    "def-sc-etale-qcoherent-module",
+    "lem-sc-etale-qcoherent-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reindex the finite type I by Fin n and view its members as etale U-schemes. The standard-cover theorem replaces the finite affine family by the affine disjoint union W and identifies their Cech complexes. Set B = Gamma(W, O_W) and a the homomorphism on global sections. Since W to U is flat and surjective, B is faithfully flat over A. Transfer across the affine chart U isomorphic to Spec A.",
+   "uses": [
+    "lem-sc-etale-standard-cover-cech"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine fibre products identify the rings of iterated products of W over U with tensor powers of B. Apply the affine pullback-sections formula with the quasi-coherent pullback of F to identify the degree n group with M tensor B tensor ... tensor B, with n+1 copies of B. The pure-tensor formula for section pullback and coherence of the normalized composition isomorphisms show that the face maps insert 1 into the indicated tensor position. Thus these identifications form an isomorphism with the underlying abelian-group Amitsur complex, not just isomorphisms of its terms.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equivalence from the small etale site of U to the over category over U preserves products. Apply the existing nonempty_etale_siteCech_complex_iso (lem-weil-pbc-etale-site-cech-complex-comparison) to compare SiteCechComplex with Mathlib cechComplexFunctor, including compatibility with every face map. Compose with the standard-cover comparison. Apply ULift to all groups and maps and use its preservation of finite products to obtain the displayed isomorphism of lifted complexes. If I is empty, the covering condition forces U empty; the section ring and module are zero, and both complexes are zero.",
+   "uses": [
+    "lem-sc-etale-standard-cover-cech",
+    "def-sc-etale-qcoherent-module",
+    "lem-weil-pbc-etale-site-cech-complex-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-module-pullback-identity-composition",
+  "def-sc-etale-qcoherent-module",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-sc-etale-standard-cover-cech",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-etale-site-cech-complex-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 03OZ and 03P2; categorical and universe-lift implementation details expanded by J1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech complex of quasi coherent sections on a finite affine etale cover is isomorphic to an Amitsur complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism Cech complex sections quasi coherent module affine faithfully flat Amitsur tensor powers",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-12",
+   "verdict": "No geometric Cech-Amitsur comparison; use the existing standard-cover and affine-section declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.amitsurComplex",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No geometric Cech-Amitsur comparison; use the existing standard-cover and affine-section declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor|amitsurComplex",
+   "results": "2 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+   "date": "2026-10-12",
+   "verdict": "No geometric Cech-Amitsur comparison; use the existing standard-cover and affine-section declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coproduct affine schemes tensor sections cosimplicial descent complex",
+   "results": "Second reader: eight hits including sigmaSpec and coprodPresheafObjIso; none states the tensor-section complex comparison.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"iso\"",
+   "results": "Second reader: twelve hits about CechNerveTerminalFrom and FormalCoproduct; no affine tensor-section Amitsur comparison.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "amitsur|Amitsur|cosimplicial.*[Ii]so",
+   "results": "Second reader: four generic cosimplicial isomorphisms in Mathlib. Repository rg found nonempty_etale_siteCech_complex_iso, now explicitly reused in proof step 4. No duplicate full comparison.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-affine-qcoherent",
+   "place": "Proof step 2: finite affine cover replaced by its disjoint union and its tensor-section complex identified with Amitsur before applying exactness.",
+   "via": [
+    "new-etale-affine-tensor-cech-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineTensorCechAmitsurComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineTensorCechAmitsurComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etaleTensorSectionsSheaf_ulift_cech_amitsur_iso",
+  "statement": "theorem exists_etaleTensorSectionsSheaf_ulift_cech_amitsur_iso\n    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]\n    (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U)\n    (hf : finiteAffineEtaleCechCover X U I V f) :\n    ∃ (B : CommRingCat.{u}) (a : Γ(U.left, ⊤) →+* B),\n      letI : Algebra Γ(U.left, ⊤) B := a.toAlgebra\n      Module.FaithfullyFlat Γ(U.left, ⊤) B ∧\n        Nonempty (((cechComplexFunctor fun i : I ↦ Over.mk (f i)).obj\n          ((Over.forget U).op ⋙\n            ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n              (Modules.etaleTensorSectionsSheaf F)).obj)) ≅\n          (((forget₂ (ModuleCat.{u} Γ(U.left, ⊤)) AddCommGrpCat.{u}) ⋙\n            AddCommGrpCat.uliftFunctor.{u + 1, u}).mapHomologicalComplex (.up ℕ)).obj\n              (Algebra.TensorProduct.amitsurComplex Γ(U.left, ⊤) B\n                Γ((Modules.tensorPullback U.hom).obj F, ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T085251-L-19783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T085251-L-19783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
