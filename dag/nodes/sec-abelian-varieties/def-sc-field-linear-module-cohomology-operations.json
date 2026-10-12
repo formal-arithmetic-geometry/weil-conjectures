@@ -17,9 +17,15 @@
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 0BED, lemma-kunneth, the projection pullbacks and cup product before equation-kunneth-on-cech; Cohomology Tag 01F7"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "Definition repair (partial): bundle the ring map k to global sections as scalarUnitLinear, proving additivity by map_add and restricted scalar linearity by map_mul. Its value formula is reflexive. Construct scalarTensorCoefficientApp by tensorLift of tmulSection; its four bilinear laws are the tensor-section additivity and scalar laws. Tensor extensionality and tmulSection_map prove naturality. Form the presheaf morphism and extend it along the sheafification adjunction, using Sheaf.tensorLeftIso for the tensor source. The sectionwise formula remains the named characterization theorem exists_scalarTensorCoefficient. Other comparison constructions are unchanged and remain unrepaired.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": "Z2 explicit-data definition repair, Stacks 01F7 and 0BED; partial repair only.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -140,15 +146,19 @@
    "AlgebraicGeometry.Scheme.Modules.scalarCohomologyMap",
    "AlgebraicGeometry.Scheme.Modules.externalCupCoefficients",
    "AlgebraicGeometry.Scheme.Modules.externalCup",
-   "AlgebraicGeometry.Scheme.Modules.externalCupPullbackIso"
+   "AlgebraicGeometry.Scheme.Modules.externalCupPullbackIso",
+   "AlgebraicGeometry.Scheme.Modules.scalarTensorCoefficientApp",
+   "AlgebraicGeometry.Scheme.Modules.scalarTensorCoefficientApp_naturality",
+   "AlgebraicGeometry.Scheme.Modules.scalarTensorPresheafCoefficient"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/FieldLinearModuleCohomologyOperations.lean",
   "statement": "def scalarCohomologyCup (F G : SheafOfModules.{u} X.ringCatSheaf) (p q : ℕ) (a : scalarCohomology f F p) (b : scalarCohomology f G q) : scalarCohomology f (F ⊗ G) (p+q)",
   "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-11",
+  "by": "Z2",
+  "date": "2026-10-12",
   "existing": false,
-  "fixed_by": "R-pkq2"
+  "fixed_by": "R-pkq2",
+  "note": "Partial explicit-data repair. Changed characterization signatures (verbatim):\ntheorem exists_scalarUnitLinear (r : k) : scalarUnitLinear f r = scalarMap f ⊤ r\ntheorem exists_scalarTensorCoefficient (F G : SheafOfModules.{u} X.ringCatSheaf) :\n    ∀ (U : X.Opens) (s : scalarObj f F (op U)) (t : scalarObj f G (op U)),\n      (scalarTensorCoefficient f F G).hom.app (op U)\n        (((Functor.LaxMonoidal.μ (sheafToPresheaf (Opens.grothendieckTopology X)\n          (ModuleCat.{u} k)) (scalarSheaf f F) (scalarSheaf f G)).app (op U))\n            (s ⊗ₜ[k] t)) = tmulSection s t\nAll other existing signatures unchanged; no TeX statement changes. Remaining hollow comparisons are documented in the report."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -164,5 +174,15 @@
   "reviewer": "R-pkq2",
   "group": "G1",
   "result": "fix"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2a438",
+  "group": "Z2",
+  "result": "pass",
+  "landing": "20261012T135340-L-1703279",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered mirror matched the packet, node metadata, change record, and repository interfaces; all delivered files and direct importers compiled cleanly."
  }
 }
