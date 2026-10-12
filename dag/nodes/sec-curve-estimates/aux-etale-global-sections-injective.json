@@ -1,0 +1,106 @@
+{
+ "id": "aux-etale-global-sections-injective",
+ "kind": "statement",
+ "title": "Canonical terminal germ injective",
+ "statement": "Let K be a field, Ks a separable closure, and Omega an algebraically closed extension containing Ks over K with the compatible scalar tower. Let T be terminal in the small etale site of Spec K, and x its geometric lift. Let E be an equivalence from abelian sheaves to discrete continuous integer Galois representations, with an additive natural stalk isomorphism i. No action-compatibility hypothesis is needed for injectivity. For every sheaf F, the map F(T) to E(F) given by the germ at x followed by i_F inverse is injective.",
+ "stmt_deps": [
+  "def-exc-discrete-modules-category",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-geometric-stalks",
+  "def-pd-separable-closure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JM, lemma-global-sections-point; Tag 04JQ, lemma-equivalence-abelian-sheaves-point"
+ },
+ "proof": [
+  {
+   "text": "Equality of germs is witnessed on a common pointed etale neighbourhood.\nIts structural map to Spec K is an etale surjection: its image is nonempty and\nSpec K has one point. It therefore covers the terminal object. The separatedness\npart of the sheaf condition makes restriction along this cover injective.\nThe two terminal sections are equal. Transport through the additive stalk\nisomorphism preserves and reflects equality. In Lean, filtered-colimit preservation of the additive-group forgetful functor supplies the equality criterion. Terminality gives a retract of the identity etale object, so T has a singleton underlying space. Apply the singleton-cover separatedness criterion to the underlying sheaf of types.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JM direct injectivity proof; formalized on second reading by A2 using Mathlib Point.toPresheafFiber_eq_iff and sheaf separatedness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of an etale sheaf over a field are the Galois invariant geometric stalk elements",
+   "results": "AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.Γevaluation, AlgebraicGeometry.Scheme.fromSpecStalk_appTop, AlgebraicGeometry.StructureSheaf.toOpen_Γgerm_apply, AlgebraicGeometry.Scheme.evaluation, AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc",
+   "date": "2026-10-13",
+   "verdict": "No exact comparison; germ naturality and invariants membership are tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.invariants",
+   "results": "Representation.invariants, Representation.invariants_eq_top, Representation.isProj_averageMap, Representation.averageMap_invariant, Representation.averageMap_id, Representation.invariants_eq_inter, Representation.mem_invariants, Representation.mem_invariants_iff_of_forall_mem_zpowers",
+   "date": "2026-10-13",
+   "verdict": "No exact comparison; germ naturality and invariants membership are tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "toPresheafFiber|globalSections.*invariant",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact comparison; germ naturality and invariants membership are tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The terminal section germ of an etale sheaf over a field is injective and its image is the Galois invariant stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisInvariants",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-global-sections-galois-invariants",
+   "place": "canonical germ injectivity and image steps"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGlobalSectionsGaloisInjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleGlobalSections_galoisInvariants_injective",
+  "statement": "theorem etaleGlobalSections_galoisInvariants_injective\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (T : (Spec (.of K)).Etale) (hT : Limits.IsTerminal T)\n    (E : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1} ≌\n      Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K)))\n    (i : E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.RepToAction ℤ (Gal(Ks/K)) ⋙\n      Action.forget (ModuleCat.{u + 1} ℤ) (Gal(Ks/K)) ⋙\n      forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat ≅\n      (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber)\n    (x : (pointSmallEtale\n      (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj T)\n    : ∀ F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1},\n      Function.Injective (fun z : F.obj.obj (op T) ↦ (i.inv.app F) ((pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber T x F.obj z))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T210407-L-969302",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T210407-L-969302",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

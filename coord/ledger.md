@@ -9526,3 +9526,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:00 L: merged deliver/W2/Sheaf.FieldTheory.NormalExtensionFixedField (stage 3; reviewer PASS; first push; landing 20261012T210030-L-954061 (interface); batch 20261012T210027; modules 3; new nodes 2)
 - 21:02 L: returned deliver/N2/Sheaf.AlgebraicGeometry.ChowRelativeAmple (reviewer RETURN: (reviewer X-c052a, head c052aac3b) H9/§5: remove unused imports `public import WeilConjectures.AlgebraicGeometry.Project)
 - 21:02 L: returned deliver/P2/Sheaf.Paper.FiniteStructureAlgebraOperationsLift (reviewer RETURN: (reviewer X-6f074, head 6f0746292) E4 / brief point 4: repair the remaining statement's comparison interface. In lean/Sh)
+- 21:04 L: merged deliver/A2/Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisInvariants (stage 3; reviewer PASS; first push; landing 20261012T210407-L-969302 (interface); batch 20261012T210406; modules 3; new nodes 2)
