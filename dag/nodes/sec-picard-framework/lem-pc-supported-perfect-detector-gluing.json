@@ -28,83 +28,34 @@
  ],
  "proof": [
   {
-   "text": "Choose a member V of s and put U equal to the union of the remaining members. The latter give an affine cover of U with at most card(s)-1 members: restrict the remaining charts, each already contained in U. Thus the induction hypothesis applies to U and T intersect U. U is quasi-compact and quasi-separated; its complement of T is quasi-compact by quasi-separatedness of X. Restriction and the module equivalence for an open subscheme supply derived localizations in the same Hom universe. Apply the hypothesis to these localizations, obtaining a perfect supported detector P on U.",
+   "text": "Obtain U,V,R,adj,Q with conditional detection after inversion of the open unit from the lifted smaller-cover detector theorem.",
+   "uses": [
+    "lem-pc-supported-detector-open-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the supported Koszul summand theorem to Q and obtain E, perfect and supported on T, with Q a retract and the unit invertible for supported objects orthogonal to E.",
+   "uses": [
+    "lem-pc-supported-koszul-unit-summand"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a supported K orthogonal to all shifts of E, its open unit is invertible. Map the retract Q of E through each shift functor. Precomposition with its split projection embeds Hom(Q[n],K) into Hom(E[n],K): precompose equality there by the split inclusion and use inclusion followed by projection equals identity. Thus every Hom(Q[n],K) is subsingleton. Apply conditional detection to conclude K is zero.",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A, induction paragraphs"
-   }
-  },
-  {
-   "text": "Apply exists_perfect_supported_map_lift to P, the zero quasi-coherent object on X, and the zero map. It gives a perfect Q supported on T with P a retract of Q restricted to U. No global detection property is assumed in this step.",
-   "uses": [
-    "lem-sc-perfect-support-map-lift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A, induction paragraphs"
-   }
-  },
-  {
-   "text": "Put Z = X minus U and W = V minus (Z intersect T). This open is the union of U intersect V and V minus T, hence quasi-compact. Choose a finite tuple cutting out Z intersect T on the affine V and form its Koszul complex K. It is perfect and supported on Z intersect T. supported_open_pushforward identifies K' = Ri_*K with extension by zero and makes it perfect and supported on T. Form Q plus K'.",
-   "uses": [
-    "lem-pc-supported-open-pushforward"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A, induction paragraphs"
-   }
-  },
-  {
-   "text": "If all shifted maps from this sum to a supported object E vanish, they vanish from each summand. Exact extension-by-zero adjunction gives orthogonality to K on V. koszul_open_orthogonality makes E restricted to V the pushforward from W.",
-   "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "lem-pc-perfect-generation-koszul-orthogonal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A, induction paragraphs"
-   }
-  },
-  {
-   "text": "On W the support is T intersect U intersect V, closed in W and contained in U intersect V. supported_open_pushforward and derived direct-image composition identify this pushforward with that from U intersect V. Open restriction base change then shows the canonical unit E to Rj_*(E restricted to U) is invertible on U and V. Its cone has zero cohomology stalks on this cover, hence is zero globally.",
-   "uses": [
-    "lem-pc-supported-open-pushforward",
-    "lem-pc-ringed-spaces-derived-direct-image-composition",
-    "lem-pc-restrict-derived-direct-image-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A, induction paragraphs"
-   }
-  },
-  {
-   "text": "Derived adjunction and the retract P of Q restricted to U give vanishing of every shifted Hom from P to E restricted to U. The detector P makes this restriction zero, and step 5 makes E zero. The finite sum Q plus K' is perfect, quasi-coherent and supported on T, so it is the claimed detector. Empty U and redundant affine charts are allowed; the strictly smaller cover condition remains valid.",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A, induction paragraphs"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-perfect-support-map-lift",
-  "lem-pc-supported-open-pushforward",
-  "lem-sc-derived-open-restriction-adjunction-exact",
-  "lem-pc-perfect-generation-koszul-orthogonal",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
-  "lem-pc-restrict-derived-direct-image-open"
+  "lem-pc-supported-detector-open-lift",
+  "lem-pc-supported-koszul-unit-summand"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0A9A, gluing step"
+  "place": "Tag 0A9A, Lemma perfect-lemma-supported-generator, induction paragraphs",
+  "note": "B2: split into open-lift conditional detection and Koszul unit summand; combine by shifted retract cancellation."
  },
  "mathlib_searches": [
   {
@@ -170,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T085319-L-31861",
+  "landing": "20261012T135218-L-1656293",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

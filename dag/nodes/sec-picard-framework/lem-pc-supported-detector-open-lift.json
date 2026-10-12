@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-supported-detector-open-lift",
+ "kind": "statement",
+ "title": "The lifted smaller-cover detector detects after the open unit is invertible",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions] with the derived localizations for module sheaves and their open restrictions [def-pc-derived-category]. Let $s$ be a finite affine open cover with $|s|\\geq2$. Assume every scheme with these same hypotheses and a strictly smaller finite affine cover has a perfect quasi-coherent zero detector supported on each closed subset with quasi-compact complement [def-pc-perfect-complex]. Let $T\\subseteq X$ be closed with quasi-compact complement. There exist a quasi-compact open $U$, an affine open $V$ with $X=U\\cup V$, a right adjoint $R$ of derived open restriction $L$ to the localized module site on $U$, an adjunction $L\\dashv R$, and a perfect quasi-coherent $Q$ supported on $T$, such that every quasi-coherent $K$ supported on $T$ with invertible adjunction unit $K\\to R L K$ and $\\operatorname{Hom}(Q[n],K)=0$ for all integers $n$ is zero. Support means every cohomology stalk outside $T$ is zero. No detection property is asserted without invertibility of the unit.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A9A, Lemma perfect-lemma-supported-generator, induction paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Remove one affine member V from the finite cover and let U be the union of the rest. The restricted charts form a strictly smaller cover of U. Transport the given derived localizations across the canonical equivalences for U and its opens. Quasi-separatedness and compactness give the needed compact complements. Apply the induction hypothesis on U to T intersect U and obtain the supported perfect detector P.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the supported perfect map-lifting theorem to the zero map P to the zero quasi-coherent object. Its source Q is perfect and supported on T, and P is a retract of its restriction to U. Local strictly perfect representatives imply that Q has quasi-coherent cohomology.",
+   "uses": [
+    "lem-sc-perfect-support-map-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use unbounded derived open direct image as the right adjoint R of exact restriction, transported to the localized module site. For K with invertible unit, adjunction and restriction commuting with shifts identify shifted maps from Q with maps from its restriction. The retract P gives shifted orthogonality to P. Induction makes the restriction zero; the invertible unit then makes K zero.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-sc-perfect-support-map-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A9A, Lemma perfect-lemma-supported-generator, induction paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "perfect generator with closed support gluing affine open cover derived category",
+   "date": "2026-10-12",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.of_affine_open_cover, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover, AlgebraicGeometry.Scheme.AffineZariskiSite.mem_grothendieckTopology_iff_sectionsOfPresieve, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx, AlgebraicGeometry.Scheme.AffineZariskiSite.generate_presieveOfSections_mem_grothendieckTopology",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "supported_perfect|koszul_open|IsPerfect.*biprod",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "supported perfect detector on quasi compact scheme open affine gluing",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedPerfectDetectorGluing",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "induction: choosing U and lifting P; final paragraph: adjunction when the open unit is invertible",
+   "via": [
+    "lem-pc-supported-perfect-detector-gluing",
+    "lem-pc-supported-perfect-generator",
+    "lem-sc-right-adjoint-open-support-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedDetectorOpenLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedDetectorOpenLift.lean",
+  "declaration": "AlgebraicGeometry.exists_supported_detector_open_lift",
+  "statement": "theorem exists_supported_detector_open_lift (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (s : Finset X.affineOpens) (hcover : (⨆ U ∈ s, (U : X.Opens)) = ⊤) (hcard : 2 ≤ s.card) (ih : ∀ (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (t : Finset Y.affineOpens), t.card < s.card → (⨆ U ∈ t, (U : Y.Opens)) = ⊤ → ∀ (S : Set Y), IsClosed S → IsCompact Sᶜ → ∃ E : schemeDerivedQCohCategory Y, Scheme.IsPerfect Y E.obj ∧ (∀ (n : ℤ) (x : Y), x ∉ S → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj E.obj).val.presheaf x))) ∧ ∀ K : schemeDerivedQCohCategory Y, (∀ (n : ℤ) (x : Y), x ∉ S → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj K.obj).val.presheaf x))) → (∀ n : ℤ, Subsingleton (E.obj⟦n⟧ ⟶ K.obj)) → IsZero K.obj) (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ) : ∃ (U : X.Opens) (V : X.affineOpens), IsCompact (U : Set X) ∧ U ⊔ (V : X.Opens) = ⊤ ∧ ∃ (R : DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤ schemeDerivedCategory X) (adj : (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R) (Q : schemeDerivedQCohCategory X), Scheme.IsPerfect X Q.obj ∧ (∀ (n : ℤ) (x : X), x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj Q.obj).val.presheaf x))) ∧ ∀ K : schemeDerivedQCohCategory X, (∀ (n : ℤ) (x : X), x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K.obj).val.presheaf x))) → IsIso (adj.unit.app K.obj) → (∀ n : ℤ, Subsingleton (Q.obj⟦n⟧ ⟶ K.obj)) → IsZero K.obj",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T135218-L-1656293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T135218-L-1656293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

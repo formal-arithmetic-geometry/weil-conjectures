@@ -8,12 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality
-import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
-import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
+import Sheaf.AlgebraicGeometry.SupportedDetectorOpenLift
+import Sheaf.AlgebraicGeometry.SupportedKoszulUnitSummand
 
 /-! # Gluing supported perfect zero detectors
 
@@ -94,6 +90,18 @@ theorem supported_perfect_detector_gluing
           Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K.obj).val.presheaf x))) →
         (∀ n : ℤ, Subsingleton (E.obj⟦n⟧ ⟶ K.obj)) → IsZero K.obj := by
-  sorry
+  obtain ⟨U, V, hU, hUV, R, adj, Q, hQ, hQT, hdetect⟩ :=
+    exists_supported_detector_open_lift X s hcover hcard ih T hT hTc
+  obtain ⟨E, hE, hET, ⟨r⟩, hunit⟩ :=
+    exists_supported_koszul_unit_summand X T hT hTc U V hU hUV R adj Q hQ hQT
+  refine ⟨E, hE, hET, ?_⟩
+  intro K hKT hHom
+  refine hdetect K hKT (hunit K hKT hHom) ?_
+  intro n
+  let rn := r.map (shiftFunctor (schemeDerivedCategory X) n)
+  refine ⟨fun f g ↦ ?_⟩
+  have hfg : rn.r ≫ f = rn.r ≫ g := (hHom n).elim _ _
+  have h := congrArg (fun k ↦ rn.i ≫ k) hfg
+  simpa only [← Category.assoc, rn.retract, Category.id_comp] using h
 
 end AlgebraicGeometry

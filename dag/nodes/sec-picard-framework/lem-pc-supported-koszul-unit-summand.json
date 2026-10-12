@@ -1,0 +1,138 @@
+{
+ "id": "lem-pc-supported-koszul-unit-summand",
+ "kind": "statement",
+ "title": "The supported Koszul summand forces invertibility of the open unit",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions] with derived localizations for module sheaves and open restrictions [def-pc-derived-category]. Let $T\\subseteq X$ be closed with quasi-compact complement. Let $U$ be a quasi-compact open and $V$ an affine open with $X=U\\cup V$. Let $R$ be any right adjoint of the derived restriction $L$ to the localized module site on $U$, with a specified adjunction. Let $Q$ be a perfect quasi-coherent object supported on $T$ [def-pc-perfect-complex]. There exists a perfect quasi-coherent $E$ supported on $T$ with $Q$ a retract of $E$, such that for every quasi-coherent $K$ supported on $T$, vanishing of $\\operatorname{Hom}(E[n],K)$ for all integers $n$ implies that the adjunction unit $K\\to R L K$ is invertible. Support means zero cohomology stalks outside $T$. This statement asserts only invertibility of the unit, without a smaller-cover hypothesis or a global zero-detection conclusion.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A9A, Lemma perfect-lemma-supported-generator, induction paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "On affine V choose finitely many functions cutting out (X minus U) intersect T, whose complement is compact. The Koszul complex A is perfect and supported on this closed subset of X contained in V. Supported open pushforward yields a perfect supported A-prime equal to extension by zero. Let E be the biproduct Q plus A-prime; it is perfect, quasi-coherent, supported on T, and admits Q as a retract.",
+   "uses": [
+    "lem-pc-supported-open-pushforward"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Orthogonality to shifts of E implies orthogonality to A-prime. Exact extension-by-zero adjunction and Koszul open orthogonality identify K on V with derived pushforward from W = V minus ((X minus U) intersect T).",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-perfect-generation-koszul-orthogonal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On W the cohomology support is closed and contained in U intersect V. Supported open pushforward, derived composition, and open-restriction base change show that the canonical restriction unit to U is an isomorphism on V. It is also an isomorphism on U. The cone has zero stalks on this cover and hence is zero globally. Uniqueness of the right adjoint gives the statement for every specified R and adj.",
+   "uses": [
+    "lem-pc-supported-open-pushforward",
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-generation-koszul-orthogonal",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-supported-open-pushforward",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A9A, Lemma perfect-lemma-supported-generator, induction paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "perfect generator with closed support gluing affine open cover derived category",
+   "date": "2026-10-12",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.of_affine_open_cover, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover, AlgebraicGeometry.Scheme.AffineZariskiSite.mem_grothendieckTopology_iff_sectionsOfPresieve, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx, AlgebraicGeometry.Scheme.AffineZariskiSite.generate_presieveOfSections_mem_grothendieckTopology",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "supported_perfect|koszul_open|IsPerfect.*biprod",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "supported perfect detector on quasi compact scheme open affine gluing",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedPerfectDetectorGluing",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "supported Koszul construction and the unit-isomorphism paragraph",
+   "via": [
+    "lem-pc-supported-perfect-detector-gluing",
+    "lem-pc-supported-perfect-generator",
+    "lem-sc-right-adjoint-open-support-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedKoszulUnitSummand",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedKoszulUnitSummand.lean",
+  "declaration": "AlgebraicGeometry.exists_supported_koszul_unit_summand",
+  "statement": "theorem exists_supported_koszul_unit_summand (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ) (U : X.Opens) (V : X.affineOpens) (hU : IsCompact (U : Set X)) (hcover : U ⊔ (V : X.Opens) = ⊤) (R : DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤ schemeDerivedCategory X) (adj : (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R) (Q : schemeDerivedQCohCategory X) (hQ : Scheme.IsPerfect X Q.obj) (hQT : (∀ (n : ℤ) (x : X), x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj Q.obj).val.presheaf x)))) : ∃ E : schemeDerivedQCohCategory X, Scheme.IsPerfect X E.obj ∧ (∀ (n : ℤ) (x : X), x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E.obj).val.presheaf x))) ∧ Nonempty (Retract Q.obj E.obj) ∧ ∀ K : schemeDerivedQCohCategory X, (∀ (n : ℤ) (x : X), x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K.obj).val.presheaf x))) → (∀ n : ℤ, Subsingleton (E.obj⟦n⟧ ⟶ K.obj)) → IsIso (adj.unit.app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T135218-L-1656293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T135218-L-1656293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
