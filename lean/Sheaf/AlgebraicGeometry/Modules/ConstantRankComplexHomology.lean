@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
+import Sheaf.LinearAlgebra.MatrixRankFieldExtension
+import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Homology of a complex with constant differential ranks over a reduced scheme
 

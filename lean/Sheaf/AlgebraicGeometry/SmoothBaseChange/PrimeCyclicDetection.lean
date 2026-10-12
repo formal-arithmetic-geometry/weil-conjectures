@@ -6,6 +6,11 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
+import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
+import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 
 /-!
 # Prime cyclic detection of a geometric-point coefficient

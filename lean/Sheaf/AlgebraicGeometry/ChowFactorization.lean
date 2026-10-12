@@ -11,6 +11,7 @@ import Sheaf.AlgebraicGeometry.NagataFinitePresentationEnvelope
 import WeilConjectures.AlgebraicGeometry.ChowLemma
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.NagataFinalDescendedModel
+import Sheaf.AlgebraicGeometry.NagataFinalDescendedModelProperties
 
 /-!
 # Chow factorization over an affine base

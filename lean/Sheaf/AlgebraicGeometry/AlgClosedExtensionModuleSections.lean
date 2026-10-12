@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Module sections after algebraically closed field extension
 

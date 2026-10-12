@@ -7,6 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
+import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
+import Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology
+import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Acyclicity of extended injective torsion module sheaves
 

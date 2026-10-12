@@ -6,6 +6,10 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
+import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
+import Sheaf.RingTheory.PairHenselization
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Continuity at the henselization of a closed affine pair -/
 

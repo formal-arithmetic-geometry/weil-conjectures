@@ -6,6 +6,8 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+import Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Detecting a prime cyclic coefficient inside a nonzero ring quotient
