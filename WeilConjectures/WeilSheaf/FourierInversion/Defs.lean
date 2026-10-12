@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Subtraction
 public import WeilConjectures.WeilSheaf.Fourier
+public import WeilConjectures.WeilSheaf.LisseLocus
 
 /-!
 # Fourier inversion: definitions
@@ -50,12 +51,6 @@ noncomputable def artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, 
 theorem isLisse_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
     (artinSchreierOf ψ a).IsLisse :=
   ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_artinSchreier ψ 1)
-
-/-- The pullback of a lisse Weil sheaf is lisse. -/
-theorem WeilSheaf.IsLisse.upperStar {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
-    (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] {G : WeilSheaf k₀ l Y} (hG : G.IsLisse) :
-    ((WeilSheaf.upperStar φ).obj G).IsLisse :=
-  ProEtale.IsAdicLisseSheaf.upperStar _ hG
 
 end ArtinSchreierOf
 

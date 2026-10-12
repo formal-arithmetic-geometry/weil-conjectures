@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.FourierInversion.Composite
 public import WeilConjectures.WeilSheaf.FourierInversion.Delta
+public import WeilConjectures.WeilSheaf.FourierTraceAux
 
 /-!
 # Fourier inversion for Weil complexes
@@ -57,18 +58,6 @@ theorem WeilComplex.nonempty_iso_upperStar_of_eq {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] {f g : X ⟶ Y}
     [f.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))] (h : f = g) :
     Nonempty (WeilComplex.upperStar (k₀ := k₀) (l := l) f ≅ WeilComplex.upperStar g) := by
-  subst h
-  exact ⟨Iso.refl _⟩
-
-/-- Compact-support direct images of Weil complexes along equal morphisms are isomorphic. -/
-theorem WeilComplex.nonempty_iso_derivedLowerShriek_of_eq {X Y : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] {f g : X ⟶ Y}
-    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
-    [QuasiCompact f] [g.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated g]
-    [LocallyOfFiniteType g] [QuasiCompact g] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (h : f = g) :
-    Nonempty (WeilComplex.derivedLowerShriek k₀ l f ≅ WeilComplex.derivedLowerShriek k₀ l g) := by
   subst h
   exact ⟨Iso.refl _⟩
 
