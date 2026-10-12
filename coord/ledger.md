@@ -7383,3 +7383,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/M1/Sheaf.AlgebraicGeometry.SheafCoinductionAdjunction (stage 3; reviewer PASS; first push; landing 20261012T110310-L-618359 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:03 L: merged deliver/M1/Sheaf.AlgebraicGeometry.SmoothSectionDifferentialBasis (stage 3; reviewer PASS; first push; landing 20261012T110311-L-618535 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/M1/Sheaf.CategoryTheory.RightDerivedPairSequence (stage 3; reviewer PASS; first push; landing 20261012T110311-L-618632 (interface); batch 20261012T110249; modules 3; new nodes 2)
+- 11:03 L: merged deliver/M2/Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives (stage 3; reviewer PASS; first push; landing 20261012T110311-L-618748 (proof); batch 20261012T110249; modules 1; new nodes 0)
