@@ -8650,3 +8650,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/N1/Sheaf.AlgebraicGeometry.ProperCoproduct (stage 3; reviewer PASS; first push; landing 20261012T165524-L-2937225 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/N1/Sheaf.ConstructibleSheaf.TorsorOrdinaryEvaluationEquivariant (stage 3; reviewer PASS; first push; landing 20261012T165525-L-2937380 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/N2/Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeComparison (stage 3; reviewer PASS; first push; landing 20261012T165525-L-2937538 (proof); batch 20261012T165503; modules 1; new nodes 1)
+- 16:55 L: merged deliver/N3/Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonTop (stage 3; reviewer PASS; first push; landing 20261012T165525-L-2937714 (interface); batch 20261012T165503; modules 3; new nodes 2)

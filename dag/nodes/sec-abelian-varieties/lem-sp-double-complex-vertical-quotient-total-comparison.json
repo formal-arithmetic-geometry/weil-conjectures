@@ -1,0 +1,151 @@
+{
+ "id": "lem-sp-double-complex-vertical-quotient-total-comparison",
+ "kind": "statement",
+ "title": "DoubleComplexVerticalQuotientComparison",
+ "statement": "Let $C$ be an abelian category and $K$ a double cochain complex indexed by $\\mathbb N^2$, with all such complexes admitting totalization in degree $p+q$. For an integer $a$, let $i_a$ be the columnwise inclusion of the smart cutoff below $a$ into the reextension of $K$ from [lem-sp-double-complex-vertical-tower-maps]. Let $Q_a=\\operatorname{coker}(i_a)$ in the category of double complexes. Let $L_a$ be obtained columnwise by extending to $\\mathbb Z$, smart truncating from below at $a$, and restricting to $\\mathbb N$ (the lower component of [def-sp-double-complex-vertical-window]). The canonical lower projection kills $i_a$, so it descends to a map $q_a:Q_a\\to L_a$. The total map $\\operatorname{Tot}(q_a)$, extended by zero to integer indices, is a quasi-isomorphism.",
+ "stmt_deps": [
+  "lem-sp-double-complex-vertical-tower-maps",
+  "def-sp-double-complex-vertical-window"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Finite-diagonal total complex construction and Lemma 12.25.3; complementary truncation comparison in Mathlib Algebra/Homology/Embedding/AreComplementary.lean, lines 306-328"
+ },
+ "proof": [
+  {
+   "text": "Evaluation at horizontal p and restriction in the vertical direction preserve cokernels. Identify the column of Q_a with the restriction of the cokernel of the smart truncation inclusion of the integer extension of K.X p. Its descended map is Mathlib shortComplexTruncLEX₃ToTruncGE for complementary embeddings at a-1 and a, which is a quasi-isomorphism. Both the cokernel and the lower truncation have zero negative components, including when a<=0, so restriction preserves this quasi-isomorphism.",
+   "uses": [
+    "lem-sp-double-complex-vertical-tower-maps",
+    "def-sp-double-complex-vertical-window"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Keep the columnwise cone integer-indexed, including degree -1. Its columns are acyclic and it has uniform horizontal lower bound 0 and vertical lower bound -1. The finite-diagonal filtration of Stacks tag 012X, Lemma 12.25.3, converges. Its first page is zero, so finite filtration induction gives acyclic total cone. Totalization identifies this cone with the cone of the total quotient comparison, with the standard sign change on the shifted source. The cone criterion implies that the total map is a quasi-isomorphism. Extension by zero preserves it, including every negative homology degree.",
+   "uses": [
+    "lem-sp-double-complex-vertical-tower-maps",
+    "def-sp-double-complex-vertical-window"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Finite-diagonal argument, specialized to canonical smart truncations; Lean assembly by N3"
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T16:17:43Z",
+   "tool": "leansearch",
+   "query": "cokernel of smart upper truncation inclusion maps quasi-isomorphically to lower truncation after totalization",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-12T15:16:35Z",
+   "tool": "leanfinder",
+   "query": "mapping cone of smart truncation inclusion quasi-isomorphic to complementary truncation",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+    "CochainComplex.instQuasiIsoIntπTruncGEOfIsGE",
+    "CochainComplex.quasiIso_truncGEMap_iff",
+    "CochainComplex.quasiIso_truncLEMap_iff",
+    "CochainComplex.quasiIso_ιTruncLE_iff",
+    "HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g",
+    "CochainComplex.quasiIso_πTruncGE_iff",
+    "HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE"
+   ],
+   "digest": "1cbbb6f5f54e70cd",
+   "date": "2026-10-12",
+   "results": "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE, CochainComplex.quasiIso_truncGEMap_iff, CochainComplex.quasiIso_truncLEMap_iff, CochainComplex.quasiIso_ιTruncLE_iff, HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g, CochainComplex.quasiIso_πTruncGE_iff, HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE",
+   "verdict": "Component APIs found; no exact totalized comparison in the returned hits."
+  },
+  {
+   "t": "2026-10-12T16:17:41Z",
+   "tool": "grep",
+   "query": "shortComplexTruncLEX₃ToTruncGE|quasiIso_descShortComplex",
+   "sub": "Algebra/Homology",
+   "ok": true,
+   "n_hits": 18,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/AreComplementary.lean",
+    "Mathlib/Algebra/Homology/Embedding/AreComplementary.lean"
+   ],
+   "digest": "d0cb241c0b55ba33",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/AreComplementary.lean, Mathlib/Algebra/Homology/Embedding/AreComplementary.lean",
+   "verdict": "Component APIs found; no exact totalized comparison in the returned hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonTop",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-double-complex-vertical-tower-comparison-top",
+   "place": "Cokernel factorization of the top endpoint comparison",
+   "via": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DoubleComplexVerticalQuotientComparison",
+  "file": "lean/Sheaf/Algebra/Homology/DoubleComplexVerticalQuotientComparison.lean",
+  "declaration": "HomologicalComplex₂.verticalQuotientToLower_total_quasiIso",
+  "statement": "theorem verticalQuotientToLower_total_quasiIso (a : ℤ) : QuasiIso (HomologicalComplex.extendMap (total.map (verticalQuotientToLower K a) (ComplexShape.up ℕ)) ComplexShape.embeddingUpNat)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T165525-L-2937714",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T165525-L-2937714",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

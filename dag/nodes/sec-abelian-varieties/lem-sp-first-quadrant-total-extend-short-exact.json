@@ -1,0 +1,139 @@
+{
+ "id": "lem-sp-first-quadrant-total-extend-short-exact",
+ "kind": "statement",
+ "title": "FirstQuadrantTotalShortExact",
+ "statement": "Let $C$ be an abelian category in which every double cochain complex indexed by $\\mathbb N^2$ has its total complex for degree $p+q$ (the totalization used in [lem-sp-double-complex-vertical-tower-maps]). For every short exact short complex $S$ of such double complexes, applying totalization and then extension by zero from $\\mathbb N$ to $\\mathbb Z$ to its objects and maps gives a short exact short complex.",
+ "stmt_deps": [
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Finite-diagonal total complex construction and Lemma 12.25.3; complementary truncation comparison in Mathlib Algebra/Homology/Embedding/AreComplementary.lean, lines 306-328"
+ },
+ "proof": [
+  {
+   "text": "Evaluate S in each bidegree; evaluation preserves short exactness. For total degree n the set of pairs p+q=n is finite, including the single pair in degree zero. A finite biproduct of kernel sequences is a kernel sequence: lift each component through its kernel and use biproduct uniqueness. The summed first map is mono and the summed second map is epi, so the diagonal sequence is short exact. The coproduct-biproduct isomorphisms identify this sequence with the degree-n totalized short complex. Apply the degreewise short exactness criterion. Extension by zero has the same sequence in nonnegative degrees and a zero sequence in negative degrees; use extendXIso and the criterion again.",
+   "uses": [
+    "lem-sp-double-complex-vertical-tower-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Finite-diagonal argument, specialized to canonical smart truncations; Lean assembly by N3"
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T15:44:04Z",
+   "tool": "leansearch",
+   "query": "finite direct sums preserve short exact sequences in an abelian category",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-12T15:44:03Z",
+   "tool": "leanfinder",
+   "query": "totalization of first quadrant double complexes preserves short exact sequences",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "HomologicalComplex.shortExact_of_degreewise_shortExact",
+    "HomologicalComplex.shortExact_iff_degreewise_shortExact",
+    "HomologicalComplex.exact_of_degreewise_exact",
+    "HomologicalComplex.exact_iff_degreewise_exact",
+    "HomologicalComplex.HomologySequence.composableArrows₃_exact",
+    "HomologicalComplex.HomologySequence.composableArrows₂_exact",
+    "HomologicalComplex.exactAt_iff'",
+    "HomologicalComplex.HomologySequence.composableArrows₅_exact"
+   ],
+   "digest": "5464b2c45c02c334",
+   "date": "2026-10-12",
+   "results": "HomologicalComplex.shortExact_of_degreewise_shortExact, HomologicalComplex.shortExact_iff_degreewise_shortExact, HomologicalComplex.exact_of_degreewise_exact, HomologicalComplex.exact_iff_degreewise_exact, HomologicalComplex.HomologySequence.composableArrows₃_exact, HomologicalComplex.HomologySequence.composableArrows₂_exact, HomologicalComplex.exactAt_iff', HomologicalComplex.HomologySequence.composableArrows₅_exact",
+   "verdict": "Component APIs found; no exact totalized comparison in the returned hits."
+  },
+  {
+   "t": "2026-10-12T15:44:02Z",
+   "tool": "grep",
+   "query": "biproduct.map_epi|biproduct.map_mono|shortExact_of_degreewise_shortExact",
+   "sub": "",
+   "ok": true,
+   "n_hits": 7,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean",
+    "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+    "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+    "Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean",
+    "Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean",
+    "Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean",
+    "Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean"
+   ],
+   "digest": "7c3b2f3f1efb5d71",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean, Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean, Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean",
+   "verdict": "Component APIs found; no exact totalized comparison in the returned hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonTop",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-double-complex-vertical-tower-comparison-top",
+   "place": "Cokernel factorization of the top endpoint comparison",
+   "via": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FirstQuadrantTotalShortExact",
+  "file": "lean/Sheaf/Algebra/Homology/FirstQuadrantTotalShortExact.lean",
+  "declaration": "HomologicalComplex₂.totalExtendShortComplex_shortExact",
+  "statement": "theorem totalExtendShortComplex_shortExact (S : ShortComplex (HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ))) (hS : S.ShortExact) : (totalExtendShortComplex S).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T165525-L-2937714",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T165525-L-2937714",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
