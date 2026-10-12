@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-module-sections-acyclic-of-cohomology-vanishing",
+ "kind": "statement",
+ "title": "Vanishing module cohomology on all opens implies acyclicity for module-valued sections",
+ "statement": "Let S be a scheme [def-pc-scheme] and F an O_S-module [def-weil-sheaf-of-modules-category]. Suppose that H^p(V,F|V)=0 [pqf-def-cohomology, lem-weil-pbc-module-restriction-open-immersion-colimits] for every open V and p>0. Then F is right acyclic [def-sp-acyclic] for the O_S(V)-module-valued sections functor on S.Modules, for every open V.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E1 (2), proof; Tag 01EX final reformulation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-sp-acyclic"
+ ],
+ "proof": [
+  {
+   "text": "For fixed V, take an injective resolution F→J• in S.Modules. Restriction to V is exact and preserves injectives; thus F|V→J•|V is an injective resolution in V.toScheme.Modules.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-module-open-restriction-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E1 (2), proof; Tag 01EX final reformulation"
+   }
+  },
+  {
+   "text": "Derived evaluation at V is computed by J•(V). Module cohomology of the restricted F is computed by global sections of J•|V. Restricted sections equal the original sections on V, naturally in every term and differential. The canonical identification of rings O_V(V)≅O_S(V) transports these module complexes and their cohomology by a scalar equivalence.",
+   "uses": [
+    "pqf-def-cohomology",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E1 (2), proof; Tag 01EX final reformulation"
+   }
+  },
+  {
+   "text": "Equivalences reflect zero objects. Apply the assumed vanishing with p=q+1, for every natural q. This is precisely rightAcyclic for sections on V. Quantify over V.",
+   "uses": [
+    "def-sp-acyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E1 (2), proof; Tag 01EX final reformulation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-module-open-restriction-injectives",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-sp-left-exact-additive",
+  "def-sp-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E1 (2), proof; Tag 01EX final reformulation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of injective module resolutions to an open identifies derived sections with cohomology of the restricted module",
+   "date": "2026-10-12",
+   "results": "['ModuleCat.Tilde.res_apply', 'PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective', 'ModuleCat.Tilde.toOpen_res', 'TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff', 'ModuleCat.Tilde.res_const', 'TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst', 'CategoryTheory.Sheaf.cohomologyPresheaf', 'TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd']",
+   "digest": "4de3be70c4be6f89",
+   "verdict": "No comparison/vanishing theorem; hits are evaluation or generic homological algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation",
+   "date": "2026-10-12",
+   "results": "['SheafOfModules.evaluation', 'SheafOfModules.evaluationPreservesLimitsOfSize', 'SheafOfModules.Finite.evaluationPreservesFiniteLimits', 'SheafOfModules.evaluationPreservesLimitsOfShape', 'SheafOfModules.hasLimit', 'SheafOfModules.createsLimit', 'SheafOfModules.evaluationPreservesLimit', 'SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatObjFunctorIsSheafPresheafOfModulesForgetEvaluationForgetLinearMapIdCarrierSections']",
+   "digest": "a5898d43d0a10714",
+   "verdict": "No comparison/vanishing theorem; hits are evaluation or generic homological algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomology|rightDerived).*(restrict|evaluation)|(restrict|evaluation).*(cohomology|rightDerived)",
+   "date": "2026-10-12",
+   "results": "[]",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No comparison/vanishing theorem; hits are evaluation or generic homological algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing cohomology of restrictions to all open subschemes implies acyclicity for module valued evaluation",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-pushforward-injective-acyclic",
+   "place": "Step 4",
+   "via": [
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleSectionsAcyclicOfCohomologyVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSectionsAcyclicOfCohomologyVanishing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.module_sections_acyclic_of_cohomology_vanishing",
+  "statement": "theorem module_sections_acyclic_of_cohomology_vanishing (S : Scheme.{u}) (F : S.Modules)\n    (hcoh : ∀ (V : S.Opens) (p : ℕ), 0 < p →\n      IsZero ((RingedSpace.moduleCohomology V.toScheme.toRingedSpace p).obj\n        ((restrictFunctor V.ι).obj F))) :\n    ∀ V : S.Opens,\n      (SheafOfModules.forget.{u} S.ringCatSheaf ⋙\n        PresheafOfModules.evaluation.{u} S.ringCatSheaf.obj (op V)).rightAcyclic F",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T060757-L-2917450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T060757-L-2917450",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

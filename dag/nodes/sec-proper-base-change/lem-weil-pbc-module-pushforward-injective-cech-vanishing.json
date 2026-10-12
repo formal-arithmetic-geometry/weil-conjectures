@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-module-pushforward-injective-cech-vanishing",
+ "kind": "statement",
+ "title": "Positive Čech cohomology of direct images of injective module sheaves vanishes",
+ "statement": "Let h:X→S be a scheme morphism [def-pc-scheme], and let I be an injective O_X-module [def-sp-injective-resolutions, def-weil-sheaf-of-modules-category]. For every open U of S, every family V_j of opens with arrows V_j→U and union U [def-sc-zariski-site], every choice C of the iterated fibre products and index maps [def-weil-pbc-site-cech-complex], and every p>0, the p-th Čech cohomology of C with coefficients in the underlying additive presheaf of h_*I [def-pc-module-pullback] is zero. The index type may lie in any universe max u w.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01EX (1), proof using Tag 01EP"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Pull back the covering to h⁻¹U. Inverse image preserves unions and finite intersections. On the poset of opens, the universal properties of the products C.W p t identify them with the relevant intersections, so their inverse images are the products of the inverse-image family.",
+   "uses": [
+    "def-sc-zariski-site",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EX (1), proof using Tag 01EP"
+   }
+  },
+  {
+   "text": "Direct image sections on W are I(h⁻¹W), with scalar restriction leaving the additive groups unchanged. The restrictions agree; hence the products of sections and alternating sums identify both additive Čech complexes, including every differential.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EX (1), proof using Tag 01EP"
+   }
+  },
+  {
+   "text": "Apply module_injective_open_cover_cech_acyclic to the inverse-image covering on X. Transport IsZero across the cohomology isomorphism. Uniqueness of products makes the argument independent of the chosen C.",
+   "uses": [
+    "lem-weil-pbc-module-injective-open-cover-cech-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EX (1), proof using Tag 01EP"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01EX (1), proof using Tag 01EP"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology of the direct image of an injective module vanishes on all open coverings",
+   "date": "2026-10-12",
+   "results": "['CochainComplex.cm5b.instInjectiveXIntI', 'CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex', 'CochainComplex.isKInjective_of_injective', 'CochainComplex.isKInjective_of_injective_aux', 'CategoryTheory.Sheaf.isLocallyInjective_iff_injective', 'CategoryTheory.Sheaf.cohomologyPresheaf', 'PresheafOfModules.instIsLocallyInjectiveToSheafify', 'CategoryTheory.Sheaf.H']",
+   "digest": "327a4b2ce5aa96ac",
+   "verdict": "No comparison/vanishing theorem; hits are evaluation or generic homological algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation",
+   "date": "2026-10-12",
+   "results": "['SheafOfModules.evaluation', 'SheafOfModules.evaluationPreservesLimitsOfSize', 'SheafOfModules.Finite.evaluationPreservesFiniteLimits', 'SheafOfModules.evaluationPreservesLimitsOfShape', 'SheafOfModules.hasLimit', 'SheafOfModules.createsLimit', 'SheafOfModules.evaluationPreservesLimit', 'SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatObjFunctorIsSheafPresheafOfModulesForgetEvaluationForgetLinearMapIdCarrierSections']",
+   "digest": "a5898d43d0a10714",
+   "verdict": "No comparison/vanishing theorem; hits are evaluation or generic homological algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomology|rightDerived).*(restrict|evaluation)|(restrict|evaluation).*(cohomology|rightDerived)",
+   "date": "2026-10-12",
+   "results": "[]",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No comparison/vanishing theorem; hits are evaluation or generic homological algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The direct image of an injective sheaf of modules is Cech acyclic for every open covering",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-pushforward-injective-acyclic",
+   "place": "Steps 1–2",
+   "via": [
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveCechVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePushforwardInjectiveCechVanishing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.module_pushforward_injective_cech_vanishing",
+  "statement": "theorem module_pushforward_injective_cech_vanishing {X S : Scheme.{u}} (h : X ⟶ S)\n    (I : X.Modules) [Injective I] :\n    ∀ (U : S.Opens) (J : Type (max u w)) (V : J → S.Opens)\n      (hom : ∀ j, V j ⟶ U), (⨆ j, V j) = U →\n      ∀ (C : SiteCechComplex V hom) (p : ℕ), 0 < p →\n        IsZero ((C.cohomologyFunctor p).obj\n          ((toPresheaf S).obj ((pushforward h).obj I)))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T060757-L-2917450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T060757-L-2917450",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

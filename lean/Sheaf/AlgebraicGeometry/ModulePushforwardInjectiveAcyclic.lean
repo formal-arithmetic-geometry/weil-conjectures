@@ -9,11 +9,8 @@ public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import Sheaf.AlgebraicGeometry.ModuleCechVanishingCriterion
-import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
-import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveCechVanishing
+import Sheaf.AlgebraicGeometry.ModuleSectionsAcyclicOfCohomologyVanishing
 
 /-!
 # Direct images of injective modules are acyclic on every open
@@ -67,6 +64,8 @@ theorem module_pushforward_injective_acyclic {X S : Scheme.{u}} (h : X ⟶ S)
       (SheafOfModules.forget.{u} S.ringCatSheaf ⋙
         PresheafOfModules.evaluation.{u} S.ringCatSheaf.obj (op V)).rightAcyclic
         ((pushforward h).obj I)) := by
-  sorry
+  have hcoh := module_cohomology_isZero_of_cech_vanishing.{u, u} S ((pushforward h).obj I)
+    (module_pushforward_injective_cech_vanishing h I)
+  exact ⟨hcoh, module_sections_acyclic_of_cohomology_vanishing S _ hcoh⟩
 
 end AlgebraicGeometry.Scheme.Modules
