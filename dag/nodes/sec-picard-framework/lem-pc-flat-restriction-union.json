@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-flat-restriction-union",
+ "kind": "statement",
+ "title": "Flatness on a union of finite locally free loci",
+ "statement": "Let T be a scheme [def-pc-scheme], M an O_T-module, and U a family of open subsets indexed by an arbitrary type. Assume that for each index a the ordinary restriction [def-pc-module-pullback] M|U(a) is finite locally free of some natural rank r(a) [def-pc-finite-locally-free]. Then M restricted to the union of U(a) is flat [def-pc-flat-sheaf-modules]. No uniform rank, finite covering, or nonemptiness hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, third paragraph: identify E on the open locus through its cohomology sheaf; first step of lem-pc-derived-pullback-single-cohomology"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-finite-locally-free",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Refine each U(a) by finite free trivializing opens using [def-pc-finite-locally-free]. These opens cover W, the union of U(a); ranks may vary between members of the cover.",
+   "uses": [
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tensor products commute with open restriction [def-pc-module-pullback]. On a trivializing open, right tensoring with M is a finite direct sum of the identity functor, so is exact. Kernels and exactness of module sheaf sequences are local on an open cover: equivalently apply the exact stalk functors and use their conservativity. Hence right tensoring with M|W is exact. An additive exact functor of abelian categories preserves finite limits and finite colimits, which is the definition [def-pc-flat-sheaf-modules]. If the indexing family is empty then W is empty, its module category is zero and the same exactness assertion holds. Rank zero also gives the zero tensor functor.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-pc-module-pullback",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof third paragraph: finite local freeness makes tensoring exact on the open locus; step 2 of lem-pc-derived-single-open-locus"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules locally finite free is flat and sheaf vanishing is local on an arbitrary union of open subsets",
+   "results": "Returned finite-type and finite-presentation sheaf definitions; no sheaf flatness locality statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteLocallyFree\"",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*[Ll]ocally[Ff]ree|[Ll]ocally[Ff]ree.*flat|isZero.*iSup",
+   "results": "No matching declarations in Mathlib. Source library has fixed-rank locality but no IsFlat-on-union theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules is flat on a union of open subsets if it is finite locally free on each subset",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedSingleOpenLocus",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof third paragraph: finite local freeness makes tensoring exact on the open locus; step 2 of lem-pc-derived-single-open-locus",
+   "via": [
+    "lem-pc-derived-single-open-locus",
+    "lem-pc-derived-pullback-single-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatRestrictionUnion",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatRestrictionUnion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isFlat_restrict_iSup_of_finiteLocallyFree",
+  "statement": "theorem isFlat_restrict_iSup_of_finiteLocallyFree\n    {T : Scheme.{u}} (M : T.Modules) {ι : Type v} (U : ι → T.Opens)\n    (hU : ∀ a, ∃ r : ℕ, ((restrictFunctor (U a).ι).obj M).IsFiniteLocallyFreeOfRank r) :\n    SheafOfModules.IsFlat ((restrictFunctor (⨆ a, U a).ι).obj M)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T112843-L-769139",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T112843-L-769139",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

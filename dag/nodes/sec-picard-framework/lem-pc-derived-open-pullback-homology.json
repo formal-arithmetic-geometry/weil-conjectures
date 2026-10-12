@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-derived-open-pullback-homology",
+ "kind": "statement",
+ "title": "Homology of derived open pullback is restricted homology",
+ "statement": "Let T be a scheme, W an open subset, E an object of D(O_T) [def-pc-derived-category], and n an integer. Choose derived-category localizations of the module-sheaf categories on T and W in the same morphism universe. Then H^n(L(W.ι)^*E) [def-pc-derived-pullback] is isomorphic to ordinary restriction of H^n(E) [def-pc-module-pullback]. No boundedness, flatness, or quasi-coherence hypothesis on E is needed; W may be empty.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, third paragraph: identify E on the open locus through its cohomology sheaf; first step of lem-pc-derived-pullback-single-cohomology"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the specification of the chosen derivedPullback [def-pc-derived-pullback]. Functor extensionality identifies its stated underived functor with tensorPullback. Use [lem-pc-module-pullback-adjunction] and Mathlib pullbackPushforwardAdjunction to identify tensorPullback with ordinary pullback by uniqueness of left adjoints; compose with restrictFunctorIsoPullback to identify it with exact open restriction.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent E by the localization preimage G. Take a K-flat resolution s:P→G from [lem-pc-kflat-resolution]. The chosen derived counit is invertible at P, so the localization and homotopy-quotient comparison isomorphisms identify L(W.ι)^*E with the localization of termwise tensor pullback of P. This uses only the counit clause of [def-pc-derived-pullback], not derived-functor choices for arbitrary witnesses.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport exactness from restriction to tensorPullback by the natural isomorphism of step 1. Apply Mathlib mapHomologicalComplexHomologyIso and homologyFunctorFactors to identify the degree-n homology with tensorPullback of H^n(P). The quasi-isomorphism P→G and Q(G)≅E identify H^n(P) with H^n(E). Finally apply the degree-n component of the tensorPullback-to-restriction isomorphism. All these are ordinary compositions of isomorphisms and are valid for every integer n, including on the empty open.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-kflat-resolution",
+  "def-pc-module-pullback",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof third paragraph: exact open restriction commutes with cohomology; step 3 of lem-pc-derived-single-open-locus"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of sheaves to an open subscheme commutes with derived category homology",
+   "results": "Returned restrictFunctorComp, restriction formulas and the scheme restriction functor; no comparison for the chosen derivedPullback.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctor",
+   "results": "Returned restrictFunctorIsoPullback, restrictAdjunction and restrictFunctorComp.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexHomologyIso|mapDerivedCategoryFactors|restrictFunctorIsoPullback",
+   "results": "Mathlib has exact-functor homology comparisons and ordinary restriction/pullback comparison. The additional comparison with the project chosen derivedPullback is proved in this delivery.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homology of derived pullback along an open immersion is ordinary restriction of homology",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedSingleOpenLocus",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof third paragraph: exact open restriction commutes with cohomology; step 3 of lem-pc-derived-single-open-locus",
+   "via": [
+    "lem-pc-derived-single-open-locus",
+    "lem-pc-derived-pullback-single-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenPullbackHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenPullbackHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_homology_derivedOpenPullback_iso_restrict",
+  "statement": "theorem nonempty_homology_derivedOpenPullback_iso_restrict\n    {T : Scheme.{u}} (W : T.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))]\n    (E : schemeDerivedCategory T) (n : ℤ) :\n    Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) n).obj\n        ((derivedPullback W.ι).obj E) ≅\n      (restrictFunctor W.ι).obj ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).obj E))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T112843-L-769139",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T112843-L-769139",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
