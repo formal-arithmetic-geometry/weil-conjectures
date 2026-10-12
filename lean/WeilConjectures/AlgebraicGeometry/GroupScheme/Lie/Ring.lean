@@ -42,7 +42,11 @@ noncomputable instance : Module R (Lie G) :=
 
 /-- `Lie(G)` is a Lie algebra over `R`. (blueprint: `sk-d-tangent`) -/
 noncomputable instance : LieAlgebra R (Lie G) where
-  lie_smul := by sorry
+  lie_smul := by
+    intro c x y
+    change ⁅x, (Scheme.ΓSpecIso (.of R)).inv.hom c • y⁆ =
+      (Scheme.ΓSpecIso (.of R)).inv.hom c • ⁅x, y⁆
+    exact LieAlgebra.lie_smul _ _ _
 
 variable {G} {H : Over (Spec (.of R))} [GrpObj H]
 
@@ -72,17 +76,30 @@ theorem differential_congr {f g : G ⟶ H} [IsMonHom f] [IsMonHom g] (e : f = g)
   subst e; rfl
 
 theorem differential_id : differential (𝟙 G) = LieHom.id := by
-  sorry
+  ext x
+  change lieEquiv G (infPointsMap (𝟙 G) ((lieEquiv G).symm x)) = x
+  have h (v : infPoints G) : infPointsMap (𝟙 G) v = v :=
+    Subtype.ext (by simp)
+  rw [h, Equiv.apply_symm_apply]
 
 theorem differential_comp {K : Over (Spec (.of R))} [GrpObj K] (f : G ⟶ H) (g : H ⟶ K)
     [IsMonHom f] [IsMonHom g] : differential (f ≫ g) = (differential g).comp (differential f) := by
-  sorry
+  ext x
+  change lieEquiv K (infPointsMap (f ≫ g) ((lieEquiv G).symm x)) =
+    lieEquiv K (infPointsMap g ((lieEquiv H).symm
+      (lieEquiv H (infPointsMap f ((lieEquiv G).symm x)))))
+  rw [Equiv.symm_apply_apply]
+  congr 1
 
 /-- The differential of a monomorphism of group schemes, for instance of a closed immersion, is
 injective. -/
 theorem differential_injective (f : G ⟶ H) [IsMonHom f] [Mono f] :
     Function.Injective (differential f) := by
-  sorry
+  intro x y h
+  apply (lieEquiv G).symm.injective
+  apply Subtype.ext
+  apply (cancel_mono f).1
+  exact congrArg Subtype.val ((lieEquiv H).injective h)
 
 /-- If the commutators of the points of `H` over `Spec R[ε, δ]/(ε², δ²)` factor through the
 subgroup scheme `f : G ⟶ H`, then the brackets of tangent vectors of `H` are tangent to `G`: the
@@ -110,14 +127,67 @@ so the mixed term `⁅df(x), y⁆` of their commutator vanishes. (blueprint: `sk
 theorem range_differential_le_center (f : G ⟶ H) [IsMonHom f]
     (hf : ∀ (X : Over (Spec (.of R))) (a : X ⟶ G) (b : X ⟶ H), (a ≫ f) * b = b * (a ≫ f)) :
     (differential f).range ≤ (LieAlgebra.center R (Lie H) : LieSubalgebra R (Lie H)) := by
-  sorry
+  rintro z hz
+  obtain ⟨x, rfl⟩ := (LieHom.mem_range _ _).1 hz
+  change ∀ y : Lie H, ⁅y, differential f x⁆ = 0
+  intro y
+  rw [← lie_skew]
+  suffices h : ⁅differential f x, y⁆ = 0 by rw [h, neg_zero]
+  rw [lie_def, differential_apply, Equiv.symm_apply_apply]
+  have hc : toε H (infPointsMap f ((lieEquiv G).symm x)) *
+      toδ H ((lieEquiv H).symm y) =
+      toδ H ((lieEquiv H).symm y) *
+        toε H (infPointsMap f ((lieEquiv G).symm x)) := by
+    simpa only [toε, coe_infPointsMap_apply, Category.assoc] using
+      hf _ (toε G ((lieEquiv G).symm x)) (toδ H ((lieEquiv H).symm y))
+  have hi : infBracket H (infPointsMap f ((lieEquiv G).symm x))
+      ((lieEquiv H).symm y) = 1 := by
+    apply (mixedEquiv H).injective
+    change (mixedEquiv H) ((mixedEquiv H).symm _) = (mixedEquiv H) 1
+    rw [Equiv.apply_symm_apply]
+    apply Subtype.ext
+    change toε H (infPointsMap f ((lieEquiv G).symm x)) *
+        toδ H ((lieEquiv H).symm y) *
+        (toε H (infPointsMap f ((lieEquiv G).symm x)))⁻¹ *
+        (toδ H ((lieEquiv H).symm y))⁻¹ =
+      Scheme.dualNumbersMulOver _ ≫ (1 : Scheme.dualNumbersOver _ ⟶ H)
+    rw [hc, mul_inv_cancel_right, mul_inv_cancel, MonObj.comp_one]
+  rw [hi, lieEquiv_one]
 
 /-- The differential of an open immersion of group schemes `f : G ⟶ H` is bijective: every
 infinitesimal point of `H` has the same underlying map as the identity section, hence factors
 through the open subscheme `G`. -/
 theorem differential_bijective_of_isOpenImmersion (f : G ⟶ H) [IsMonHom f]
     [IsOpenImmersion f.left] : Function.Bijective (differential f) := by
-  sorry
+  have : Mono f := Over.mono_of_mono_left f
+  refine ⟨differential_injective f, ?_⟩
+  intro y
+  let v := (lieEquiv H).symm y
+  have hr : Set.range v.val.left ⊆ Set.range f.left := by
+    rintro _ ⟨s, rfl⟩
+    refine ⟨unitSection G s, ?_⟩
+    have he := congrArg (fun a : Over.mk (𝟙 (Spec (.of R))) ⟶ H ↦ a.left s)
+      ((mem_infPoints H).1 v.property)
+    have hu := congrArg (fun a : Over.mk (𝟙 (Spec (.of R))) ⟶ H ↦ a.left s)
+      (MonObj.one_comp f)
+    change v.val.left s = unitSection H s at he
+    change f.left (unitSection G s) = unitSection H s at hu
+    exact hu.trans he.symm
+  let w : Scheme.dualNumbersOver (Spec (.of R)) ⟶ G :=
+    Over.homMk (IsOpenImmersion.lift f.left v.val.left hr) (by
+      rw [← Over.w f, ← Category.assoc, IsOpenImmersion.lift_fac]
+      exact Over.w v.val)
+  have hwf : w ≫ f = v.val := by
+    ext1
+    exact IsOpenImmersion.lift_fac _ _ _
+  have hw : w ∈ infPoints G := by
+    rw [mem_infPoints, ← cancel_mono f, Category.assoc, hwf,
+      (mem_infPoints H).1 v.property, MonObj.one_comp]
+  refine ⟨lieEquiv G ⟨w, hw⟩, ?_⟩
+  rw [differential_apply, Equiv.symm_apply_apply]
+  have hmap : infPointsMap f ⟨w, hw⟩ = v := Subtype.ext hwf
+  rw [hmap]
+  exact (lieEquiv H).apply_symm_apply y
 
 /-- An open immersion of group schemes `G ⟶ H` identifies `Lie(G)` with `Lie(H)`. -/
 noncomputable def lieEquivOfIsOpenImmersion (f : G ⟶ H) [IsMonHom f] [IsOpenImmersion f.left] :

@@ -5937,3 +5937,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:11 L: merged deliver/F1/WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum (stage 3; reviewer PASS; first push; landing 20261012T040945-L-1687428 (interface); modules 3; new nodes 2)
 - 04:12 L: merged deliver/Z2/lem-weil-matrix-rank-field-extension (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.MatrixRankFieldExtension Matrix.rank_map_field_extension)
 - 04:12 L: merged deliver/S2/Sheaf.AlgebraicGeometry.GeometricStalkColimits (stage 3; reviewer PASS; first push; landing 20261012T041234-L-1711133 (interface); modules 1; new nodes 0; change records: coord/changes/geometricStalkColimits-imports.md)
+- 04:13 L: merged deliver/M2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring (stage 3; reviewer PASS; after a return; landing 20261012T041341-L-1718443 (interface); modules 1; new nodes 0; change records: coord/changes/lie-ring-scalar-compatibility.md)
