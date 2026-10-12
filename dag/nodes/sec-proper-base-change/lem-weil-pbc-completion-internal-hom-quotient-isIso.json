@@ -29,11 +29,32 @@
  ],
  "proof": [
   {
-   "text": "Write Q = F/I^n F. Multiplication by I^n on Q is zero: the quotient\nprojection kills the image of multiplication I^n tensor F → F, and sections\nof Q locally lift to F. Since n ≤ m, I^m is contained in I^n, so I^m also\nannihilates Q. On any open U, an O_U-linear sheaf map G|U → Q|U therefore\nkills I^m G|U: locally its generators ax map to a times the image of x,\nwhich is zero. Restriction to U preserves cokernels of sheaves of modules,\nso the cokernel universal property gives a unique map (G/I^m G)|U → Q|U\nwhose precomposition is the given map. Uniqueness makes these factorizations\ncompatible with restrictions, addition and scalar multiplication. Thus they\ndefine a morphism between the internal-Hom sheaves in the reverse direction.\nPrecomposition after this morphism is the identity by its defining property;\nthe reverse composite is the identity by uniqueness in the cokernel property.\nThese two identities give the required isomorphism.",
+   "text": "Use the existing sheaf tensor-Hom adjunction, implemented by SheafOfModules.tensorHomEquiv and its naturality in the first factor, and Mathlib isIso_of_yoneda_map_bijective. For each test module T, precomposition becomes precomposition with the tensor of the source cokernel projection. Tensoring is a left adjoint in the symmetric monoidal closed category, hence preserves this cokernel and its epimorphic projection. Cancellation of that projection proves injectivity.",
    "uses": [
     "def-weil-pbc-coherent-formal-module",
     "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom"
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-module-tensor-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set J = I^m, Q = F/I^nF and a(M): J tensor M -> M to be multiplication. Multiplication naturality gives a(M) followed by f = (J tensor f) followed by a(N). The proved formalModuleQuotient_map_zero I (identity F) (n <= m) says that the image inclusion of a(F) followed by the projection F -> Q is zero. The image factorization gives a(F) followed by the projection zero, and cancellation of its tensor by J gives a(Q)=0. The associator and left-unitor identities then show that every phi: G tensor T -> Q kills a(G) tensor T. Cancel the tensor of the epimorphism onto the image of a(G) to show phi kills (I^m G -> G) tensor T.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-module-tensor-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For surjectivity curry a test map T -> internal Hom(G,Q) backwards to phi: G tensor T -> Q. By the preceding annihilation, cokernel.desc factors phi through the cokernel of the tensored ideal-product inclusion. Mathlib PreservesCokernel.iso identifies that cokernel with (G/I^mG) tensor T. Curry the resulting map back. Tensor-Hom naturality, PreservesCokernel.pi_iso_hom and cokernel.pi_desc verify that precomposition recovers the original test map. Yoneda therefore proves IsIso.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-module-tensor-hom-adjunction"
    ],
    "elementary": false
   }
@@ -41,12 +62,13 @@
  "proof_deps": [
   "def-weil-pbc-coherent-formal-module",
   "def-pur-sheaf-tensor-product",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "lem-weil-pbc-module-tensor-hom-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Detailed construction and finite-level universal property following Tag 0882 and the parent proof; the local checkout omits the literature file; the published Tag 0882 was read online."
+  "place": "Finite-level universal-property argument for the comparison implicit in Tag 0882 and Section 0EHN; formal proof via tensor-Hom adjunction, multiplication naturality and preserved cokernels. Published Tags 0882 and 0EHN read online during the H3 second reading."
  },
  "mathlib_searches": [
   {
@@ -104,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T213042-L-1151980",
-  "kind": "interface",
+  "landing": "20261012T225315-L-1807603",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
