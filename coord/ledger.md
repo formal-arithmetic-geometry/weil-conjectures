@@ -9555,3 +9555,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:16 L: merged deliver/R1/Sheaf.CategoryTheory.DerivedCoupleMapExactness (stage 3; reviewer PASS; after a return; landing 20261012T211617-L-1058020 (proof); batch 20261012T211610; modules 1; new nodes 0)
 - 21:16 L: merged deliver/S1/Sheaf.Algebra.Homology.RoosComparisonHomotopies (stage 3; reviewer PASS; first push; landing 20261012T211617-L-1058118 (proof); batch 20261012T211610; modules 1; new nodes 0)
 - 21:16 L: merged deliver/S1/Sheaf.RingTheory.FormallySmoothAdicLift (stage 3; reviewer PASS; first push; landing 20261012T211617-L-1058216 (interface); batch 20261012T211610; modules 3; new nodes 2)
+- 21:16 L: merged deliver/S2/Sheaf.AlgebraicGeometry.AffineFreeComplexUnitCancellation (stage 3; reviewer PASS; first push; landing 20261012T211618-L-1058319 (interface); batch 20261012T211610; modules 3; new nodes 2)

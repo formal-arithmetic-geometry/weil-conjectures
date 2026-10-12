@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-affine-free-complex-module-lift",
+ "kind": "statement",
+ "title": "Affine lifting of a free complex with its supplied unit coefficient",
+ "statement": "Let R be a commutative ring, S=Spec R [def-weil-affine-spectrum], P a cochain complex [def-pc-derived-category] of O_S-modules [def-weil-sheaf-of-modules-category], and n:Z→N. Supply identifications e_j:P^j≅O_S^{n(j)} [def-weil-pbc-free-module]. Fix i and basis indices p in degree i and q in degree i+1 such that the (q,p) coefficient of e_{i+1}d^ie_i^{-1} is a unit of Γ(S,O_S). There exist a chain complex C of R-modules, m:Z→N, finite bases b_k indexed by Fin(m(k)), and indices p′ in degree -i and q′ in degree -i-1, such that m(-j)=n(j), the (q′,p′) coefficient of d_C at -i is a unit, and isomorphisms φ_j:tilde(C_{-j})≅P^j [lem-weil-pbc-spec-tilde-free-module] with φ_k∘tilde(d_C(-j,-k))=d_P(j,k)∘φ_j for every adjacent j,k. This lifts the original complex; it does not assert cancellation or a homotopy equivalent complement.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01HV(1)-(2), 01I7: affine associated-sheaf comparison and its global-sections mapping property; read https://stacks.math.columbia.edu/tag/01HV and https://stacks.math.columbia.edu/tag/01I7; step 1 of lem-pc-affine-free-complex-unit-cancellation"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-spec-tilde-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Take C_k to be the finitely supported functions on the ULift basis in degree -k, with m(k)=n(-k). Use tildeFinsupp and e_{-k}^{-1} to identify its associated sheaf with P^{-k}. Fullness lifts each conjugated differential, and faithfulness transfers the shape and square-zero identities. These give a chain complex; double negation gives m(-j)=n(j).",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reindex the standard ULift bases by Fin. The coproduct comparison defining tildeFinsupp preserves the standard injections and coordinate projections. The global-sections isomorphism ΓSpecIso then identifies the displayed freeMatrix coefficient with the module coefficient. A ring isomorphism preserves units, so the supplied pivot indices give the unit entry of C. The sheaf identifications intertwine the differentials by the defining preimage equation. This comparison works without a nontriviality hypothesis.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S2",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01HV(1)-(2), 01I7: affine associated-sheaf comparison and its global-sections mapping property; read https://stacks.math.columbia.edu/tag/01HV and https://stacks.math.columbia.edu/tag/01I7; step 1 of lem-pc-affine-free-complex-unit-cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complex of free sheaves on an affine scheme lifts to a complex of free modules preserving a unit coefficient; a split contractible summand can be removed by homotopy equivalence",
+   "results": "Internal Server Error from LeanSearch; search attempted, no verdict of absence from this unavailable service",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tildeFinsupp; HomotopyEquiv",
+   "results": "tildeFinsupp, HomotopyEquiv.ofIso/trans, Functor.mapHomotopyEquiv supply comparison and transport tools, not either complete statement",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential compatible direct sum splitting with a two term identity complex induces a homotopy equivalence with the complementary complex",
+   "results": "HomologicalComplex.cylinder.homotopyEquiv, HomotopyEquiv, CochainComplex.cm5b.homotopyEquiv; no supplied-splitting contraction or affine unit lifting theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyEquiv|tildeFinsupp|exists_splitting_of_isUnit_entry; blueprint contractible and matrix coefficient",
+   "results": "Mathlib Homotopy.lean:829, Tilde.lean:428 and associated-sheaf comparisons; project UnitEntrySplits supplies the algebraic splitting. Blueprint searches give no duplicate of these steps.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFreeComplexUnitCancellation",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Tags 01HV(1)-(2), 01I7: affine associated-sheaf comparison and its global-sections mapping property; read https://stacks.math.columbia.edu/tag/01HV and https://stacks.math.columbia.edu/tag/01I7; step 1 of lem-pc-affine-free-complex-unit-cancellation",
+   "via": [
+    "lem-pc-affine-free-complex-unit-cancellation",
+    "lem-pc-finite-free-stalk-unit-cancellation-at",
+    "lem-pc-finite-free-stalk-unit-cancellation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeComplexModuleLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeComplexModuleLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_free_complex_module_lift",
+  "statement": "theorem exists_affine_free_complex_module_lift (R : CommRingCat.{u}) (P : CochainComplex (Spec R).Modules ℤ) (n : ℤ → ℕ) (e : ∀ j : ℤ, P.X j ≅ SheafOfModules.free (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin (n j)))) (i : ℤ) (p : ULift.{u} (Fin (n i))) (q : ULift.{u} (Fin (n (i + 1)))) (hunit : IsUnit (freeMatrix ((e i).inv ≫ P.d i (i + 1) ≫ (e (i + 1)).hom) q p)) : ∃ (C : ChainComplex (ModuleCat.{u} R) ℤ) (m : ℤ → ℕ) (b : ∀ k : ℤ, Module.Basis (Fin (m k)) R (C.X k)) (p' : Fin (m (-i))) (q' : Fin (m (-i - 1))), (∀ j : ℤ, m (-j) = n j) ∧ IsUnit (LinearMap.toMatrix (b (-i)) (b (-i - 1)) (C.d (-i) (-i - 1)).hom q' p') ∧ ∃ φ : ∀ j : ℤ, tilde (C.X (-j)) ≅ P.X j, ∀ j k : ℤ, (ComplexShape.up ℤ).Rel j k → (φ j).hom ≫ P.d j k = tilde.map (C.d (-j) (-k)) ≫ (φ k).hom",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T211618-L-1058319",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T211618-L-1058319",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

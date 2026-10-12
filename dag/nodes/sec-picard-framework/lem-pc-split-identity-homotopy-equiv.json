@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-split-identity-homotopy-equiv",
+ "kind": "statement",
+ "title": "Contracting a supplied split identity summand",
+ "statement": "Let R be a commutative ring and C,C′,T chain complexes of R-modules. Fix i∈Z and assume T_j is subsingleton outside i,i-1. Supply linear equivalences e:T_i≅R and f:T_{i-1}≅R with f(d_T t)=e(t). Supply linear equivalences ψ_j:C′_j⊕T_j≅C_j for the Bool-indexed direct sum [def-weil-pbc-direct-sum-modules] satisfying d_C ψ_j(x,t)=ψ_{j-1}(d_{C′}x,d_Tt). Then C and C′ are homotopy equivalent [def-pc-derived-category]. No bases, ranks, unit coefficients, or affine schemes are assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MT (lemma-add-trivial-complex), two-term identity summand; its elementary contraction, read https://stacks.math.columbia.edu/tag/00MT; step 3 of lem-pc-affine-free-complex-unit-cancellation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Identify the binary direct sum with the product by its two component maps. Through ψ define the complementary projection π and inclusion ι, and the T projection π_T and inclusion ι_T. Differential compatibility gives all four chain-map equations. Componentwise linear algebra proves ιπ=id_C′ and πι+π_Tι_T=id_C.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The map s=e^{-1}f from T_{i-1} to T_i is inverse to its differential: applying e or f reduces either identity to f(d_Tt)=e(t). Set h(j,k)=s for (j,k)=(i-1,i), transported along index equalities, and zero otherwise. Its homotopy equation id_T=d h+h d holds at i and i-1 by these inverse identities. In all other degrees equality of maps follows from the subsingleton codomain. Thus id_T is homotopic to zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the T contraction with π_T and ι_T to get π_Tι_T homotopic to zero. Add the reflexive homotopy of πι. Using πι+π_Tι_T=id_C gives id_C homotopic to πι; reverse it. Together with ιπ=id_C′ this constructs the desired homotopy equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S2",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MT (lemma-add-trivial-complex), two-term identity summand; its elementary contraction, read https://stacks.math.columbia.edu/tag/00MT; step 3 of lem-pc-affine-free-complex-unit-cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complex of free sheaves on an affine scheme lifts to a complex of free modules preserving a unit coefficient; a split contractible summand can be removed by homotopy equivalence",
+   "results": "Internal Server Error from LeanSearch; search attempted, no verdict of absence from this unavailable service",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tildeFinsupp; HomotopyEquiv",
+   "results": "tildeFinsupp, HomotopyEquiv.ofIso/trans, Functor.mapHomotopyEquiv supply comparison and transport tools, not either complete statement",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential compatible direct sum splitting with a two term identity complex induces a homotopy equivalence with the complementary complex",
+   "results": "HomologicalComplex.cylinder.homotopyEquiv, HomotopyEquiv, CochainComplex.cm5b.homotopyEquiv; no supplied-splitting contraction or affine unit lifting theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyEquiv|tildeFinsupp|exists_splitting_of_isUnit_entry; blueprint contractible and matrix coefficient",
+   "results": "Mathlib Homotopy.lean:829, Tilde.lean:428 and associated-sheaf comparisons; project UnitEntrySplits supplies the algebraic splitting. Blueprint searches give no duplicate of these steps.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFreeComplexUnitCancellation",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Tag 00MT (lemma-add-trivial-complex), two-term identity summand; its elementary contraction, read https://stacks.math.columbia.edu/tag/00MT; step 3 of lem-pc-affine-free-complex-unit-cancellation",
+   "via": [
+    "lem-pc-affine-free-complex-unit-cancellation",
+    "lem-pc-finite-free-stalk-unit-cancellation-at",
+    "lem-pc-finite-free-stalk-unit-cancellation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.SplitIdentityHomotopyEquiv",
+  "file": "lean/Sheaf/Algebra/Homology/SplitIdentityHomotopyEquiv.lean",
+  "declaration": "ChainComplex.nonempty_homotopyEquiv_of_split_identity",
+  "statement": "theorem nonempty_homotopyEquiv_of_split_identity {R : Type u} [CommRing R] (C C' T : ChainComplex (ModuleCat.{u} R) ℤ) (i : ℤ) (hT : ∀ j : ℤ, j ≠ i → j ≠ i - 1 → Subsingleton (T.X j)) (e : T.X i ≃ₗ[R] R) (f : T.X (i - 1) ≃ₗ[R] R) (hef : ∀ t : T.X i, f ((T.d i (i - 1)).hom t) = e t) : let M : ℤ → Bool → ModuleCat.{u} R := fun j s ↦ if s then T.X j else C'.X j ∀ (ψ : ∀ j : ℤ, (⨁ s : Bool, M j s) ≃ₗ[R] C.X j) (_hψ : ∀ (j : ℤ) (x : C'.X j) (t : T.X j), (C.d j (j - 1)).hom (ψ j (DirectSum.lof R Bool (fun s ↦ M j s) false x + DirectSum.lof R Bool (fun s ↦ M j s) true t)) = ψ (j - 1) (DirectSum.lof R Bool (fun s ↦ M (j - 1) s) false ((C'.d j (j - 1)).hom x) + DirectSum.lof R Bool (fun s ↦ M (j - 1) s) true ((T.d j (j - 1)).hom t))), Nonempty (HomotopyEquiv C C')",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T211618-L-1058319",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T211618-L-1058319",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
