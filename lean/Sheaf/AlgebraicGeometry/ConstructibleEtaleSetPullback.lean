@@ -7,11 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullbackStratum
 import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-!
@@ -57,6 +53,9 @@ theorem isConstructibleEtaleSheafOfSets_upperStar
     IsConstructibleEtaleSheafOfSets
       ((sheafCompose Y.smallEtaleTopology
         (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
-          ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj E)) := by sorry
+          ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj E)) := by
+  obtain ⟨S, hS⟩ := hE
+  refine ⟨S.pullback g, ?_⟩
+  exact finiteLocallyConstant_pullback_stratum g E S hS
 
 end AlgebraicGeometry.Scheme

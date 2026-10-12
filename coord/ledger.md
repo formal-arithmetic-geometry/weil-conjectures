@@ -6217,3 +6217,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/K1/Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence (stage 3; reviewer PASS; first push; landing 20261012T053937-L-2637556 (interface); batch 20261012T053916; modules 3; new nodes 2)
 - 05:39 L: merged deliver/K1/Sheaf.AlgebraicGeometry.GabberConstantH1Vanishing (stage 3; reviewer PASS; first push; landing 20261012T053937-L-2637656 (interface); batch 20261012T053916; modules 3; new nodes 2)
 - 05:39 L: merged deliver/K2/Sheaf.Algebra.LocallyFreeCharpoly (stage 3; reviewer PASS; first push; landing 20261012T053938-L-2637791 (proof); batch 20261012T053916; modules 1; new nodes 0)
+- 05:39 L: merged deliver/K2/Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback (stage 3; reviewer PASS; first push; landing 20261012T053938-L-2637889 (interface); batch 20261012T053916; modules 2; new nodes 1)
