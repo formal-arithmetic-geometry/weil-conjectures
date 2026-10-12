@@ -392,7 +392,8 @@ theorem Orientation.nonempty_iso_dualizingComplex (o : Orientation Λ a d) :
 variable (Λ X d) in
 omit [Finite Λ] in
 /-- The shifted Tate twist `Λ_X(d)[2d]` is invertible. -/
-theorem isInvertible_tateObject_shift : IsInvertible ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
+theorem isInvertible_tateObject_shift [HasInvertibleExponent Λ X] :
+    IsInvertible ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
   DerivedCategory.isInvertible_shift
     ((isInvertible_iff_exists_derivedTensor _).2 (isInvertible_tateObject Λ X d)) _
 
@@ -410,14 +411,15 @@ the composite of `RHom_X(K, γ_f⁻¹)` and of the twist interchange
 `a_X : X ⟶ Spec k` this is `θ_K : 𝔻_X K ≅ K^∨(d)[2d]`. The isomorphism `θ_{f,K}` exists for
 every `K`; the subsection's perfectness hypothesis is only needed for the biduality
 (`AlgebraicGeometry.Etale.Orientation.isIso_verdierDualDoubleDual_app_of_isDualizable`). -/
-noncomputable def Orientation.verdierDualIso (o : Orientation Λ a d) :
+noncomputable def Orientation.verdierDualIso [HasInvertibleExponent Λ X] (o : Orientation Λ a d) :
     verdierDual (ModuleCat.{u + 1} Λ) a ≅
       DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X ⋙
         (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
   verdierDualIsoCoefficientDualTensor o.purity (isInvertible_tateObject_shift Λ X d)
 
 /-- The component of `θ_f` at `K` is `RHom_X(K, γ_f⁻¹)` followed by the twist interchange. -/
-lemma Orientation.verdierDualIso_app (o : Orientation Λ a d) (K : DerivedCategoryModule Λ X) :
+lemma Orientation.verdierDualIso_app [HasInvertibleExponent Λ X] (o : Orientation Λ a d)
+    (K : DerivedCategoryModule Λ X) :
     o.verdierDualIso.app (op K) =
       (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).mapIso o.purity.symm ≪≫
         DerivedCategory.derivedHomIsoCoefficientDualTensor K
@@ -461,14 +463,15 @@ Under an orientation the Verdier dual `𝔻_{X/S} = RHom_X(-, Rf^! Λ_S)` restri
 anti-equivalence of the perfect objects of `D(X_ét, Λ)`, its own quasi-inverse; the unit and
 the counit are the double-dual isomorphisms
 (`AlgebraicGeometry.Etale.Orientation.isIso_verdierDualDoubleDual_app_of_isDualizable`). -/
-noncomputable def Orientation.verdierDualEquivalence (o : Orientation Λ a d) :
+noncomputable def Orientation.verdierDualEquivalence [HasInvertibleExponent Λ X]
+    (o : Orientation Λ a d) :
     (ObjectProperty.FullSubcategory (IsDualizable (C := DerivedCategoryModule Λ X)))ᵒᵖ ≌
       ObjectProperty.FullSubcategory (IsDualizable (C := DerivedCategoryModule Λ X)) :=
   verdierDualEquivalenceOfIso o.purity (isInvertible_tateObject_shift Λ X d)
 
 /-- The isomorphism `𝔻_{X/S} 𝔻_{X/S} K ≅ K^∨∨` induced by `θ_f`. -/
-noncomputable def Orientation.verdierDualVerdierDualIso (o : Orientation Λ a d)
-    (K : DerivedCategoryModule Λ X) :
+noncomputable def Orientation.verdierDualVerdierDualIso [HasInvertibleExponent Λ X]
+    (o : Orientation Λ a d) (K : DerivedCategoryModule Λ X) :
     (verdierDual (ModuleCat.{u + 1} Λ) a).obj
         (op ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K))) ≅
       (DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) X).obj
@@ -481,7 +484,7 @@ Under the isomorphism `𝔻_{X/S} 𝔻_{X/S} K ≅ K^∨∨` induced by `θ_f`, 
 `K ⟶ 𝔻_{X/S} 𝔻_{X/S} K` is the coefficient-dual biduality `K ⟶ K^∨∨`. -/
 @[reassoc]
 lemma Orientation.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom
-    (o : Orientation Λ a d) (K : DerivedCategoryModule Λ X) :
+    [HasInvertibleExponent Λ X] (o : Orientation Λ a d) (K : DerivedCategoryModule Λ X) :
     (verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K ≫ (o.verdierDualVerdierDualIso K).hom =
       (DerivedCategory.coefficientDualDoubleDual _ X).app K :=
   Etale.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom _ _ K
@@ -490,7 +493,8 @@ lemma Orientation.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom
 
 Under an orientation, the double-dual map `K ⟶ 𝔻_{X/S} 𝔻_{X/S} K` of a perfect `K` is an
 isomorphism. -/
-theorem Orientation.isIso_verdierDualDoubleDual_app_of_isDualizable (o : Orientation Λ a d)
+theorem Orientation.isIso_verdierDualDoubleDual_app_of_isDualizable [HasInvertibleExponent Λ X]
+    (o : Orientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : IsDualizable K) :
     IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K) :=
   Etale.isIso_verdierDualDoubleDual_app_of_isDualizable o.purity
