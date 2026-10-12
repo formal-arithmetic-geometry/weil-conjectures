@@ -14,27 +14,24 @@
  ],
  "proof": [
   {
-   "text": "Construct the short exact sequence of free abelian sheaves on the intersection, the two opens and X. Its maps are (inclusion, minus inclusion) and the sum of inclusions. Exactness is checked on stalks. The restriction/extension-by-zero adjunction gives the three Ext presentations, and their naturality in the coefficient gives scalar compatibility. The full argument is recorded in the Lean docstring.",
+   "text": "Construct the actual signed free-sheaf short complex and apply its short exactness theorem. Apply the single-term global comparison and the open comparison to U, V and their intersection. Combine the U,V additive equivalences using Ext.biprodAddEquiv and the explicit mapped biproduct equivalence. Scalar compatibility follows from Ext.add_comp and comp_assoc_of_third_deg_zero. The product comparison follows from exact-functor preservation of addition and composition and the same associativity identity. Assemble the two ExtRowPresentation structures and the three vertical identities.",
    "uses": [
-    "def-pc-flat-cohomology-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Exact inverse image carries each free abelian sheaf on an open to the free sheaf on its preimage: use the inverse-image adjunction and the representing property for sections. The identifications commute with inclusions and finite sums. Cartesian open-subscheme and module-pullback composition isomorphisms give the lower Ext presentations. Adjunction naturality identifies each H.baseChangeLinear with exact-functor action on Ext followed by the adjoint coefficient map, giving the three vertical identities. These identities assert no boundary or row exactness.",
-   "uses": [
-    "def-pc-flat-cohomology-comparison"
+    "lem-pc-global-free-ext-comparison",
+    "lem-pc-open-free-ext-comparison",
+    "lem-pc-free-mayer-vietoris-short-exact"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-flat-cohomology-comparison"
+  "lem-pc-global-free-ext-comparison",
+  "lem-pc-open-free-ext-comparison",
+  "lem-pc-free-mayer-vietoris-short-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01EB",
-  "place": "Free-sheaf/Ext expansion of 01EB and the 02KH Mayer--Vietoris argument, using 01F7 comparison."
+  "place": "Constructed free complex and two single-term derived adjunction comparisons, with proved Ext product glue"
  },
  "mathlib_searches": [
   {
@@ -124,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T085309-L-27334",
+  "landing": "20261012T135331-L-1698936",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

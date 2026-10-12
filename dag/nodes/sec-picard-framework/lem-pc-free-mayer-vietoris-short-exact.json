@@ -1,0 +1,110 @@
+{
+ "id": "lem-pc-free-mayer-vietoris-short-exact",
+ "kind": "statement",
+ "title": "MayerVietorisFreeComplex",
+ "statement": "theorem H.openFreeShortComplex_shortExact {X : Scheme.{u}} (U V : X.Opens)\n    (hc : U ⊔ V = ⊤) : (H.openFreeShortComplex U V).ShortExact",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EB",
+  "place": "Tag 01EB; Section 01F7 inverse-image cohomology comparison"
+ },
+ "stmt_deps": [
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Construct the pullback square of the intersection and the two opens mapping to the top open. The cover hypothesis makes its two arrows a covering sieve. Apply Mathlib MayerVietorisSquare.mk_of_isPullback and shortComplex_shortExact; its signed complex is definitionally the constructed free-sheaf complex.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01EB",
+  "place": "Expansion of free-sheaf Ext argument and Section 01F7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of open subset is Ext from free abelian sheaf represented by open subset",
+   "results": "Sheaf.H, cohomologyPresheaf, InjectiveResolution.extAddEquivCohomologyClass; no full natural comparison",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.biprodAddEquiv",
+   "results": "Ext.biprodAddEquiv and MayerVietorisSquare sequence isomorphism",
+   "date": "2026-10-12",
+   "verdict": "Supports product glue only"
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietorisSquare|cohomologyPresheaf|Ext",
+   "results": "Mathlib Sites/MayerVietorisSquare and SheafCohomology/Basic; derived open restriction comparison absent",
+   "date": "2026-10-12",
+   "verdict": "Free short exactness is Mathlib; comparison still needs proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext cohomology on an open subset and inverse image naturality",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CohomologyMayerVietorisExtPresentation",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cohomology-mayer-vietoris-ext-presentation",
+   "place": "free-sheaf construction and single-term Ext comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/MayerVietorisFreeComplex.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.H.openFreeShortComplex_shortExact",
+  "statement": "theorem H.openFreeShortComplex_shortExact {X : Scheme.{u}} (U V : X.Opens)\n    (hc : U ⊔ V = ⊤) : (H.openFreeShortComplex U V).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T135331-L-1698936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T135331-L-1698936",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

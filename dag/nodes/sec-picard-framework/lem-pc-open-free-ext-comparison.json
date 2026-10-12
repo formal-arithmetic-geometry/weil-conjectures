@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-open-free-ext-comparison",
+ "kind": "statement",
+ "title": "MayerVietorisOpenExtComparison",
+ "statement": "theorem H.openFreeExtComparison (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Opens) :\n    let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj M\n    let G := invImage (baseChangeFst (S := S) f)\n    let N := (SheafOfModules.toSheaf (baseChangedScheme (S := S) f).ringCatSheaf).obj\n      (baseChangedModule (S := S) f M)\n    let φ := coeff (baseChangeFst (S := S) f) (baseChangeUnit (S := S) f M)\n    let ρ := (scalarRep M).comp (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom)\n    let τ := (scalarRep (baseChangedModule (S := S) f M)).comp\n      (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom)\n    ∃ (e : ∀ n, HOver (W.ι ≫ f) ((pullback W.ι).obj M) n ≃+ Ext (H.openFreeSheaf W) F n)\n      (e' : ∀ n, HOver (baseChangeSnd (S := S) (W.ι ≫ f))\n        (baseChangedModule (S := S) (W.ι ≫ f) ((pullback W.ι).obj M)) n ≃+\n        Ext (G.obj (H.openFreeSheaf W)) N n),\n      (∀ n a x, e n (a • x) = (e n x).comp (Ext.mk₀ (ρ a)) (add_zero n)) ∧\n      (∀ n a x, e' n (a • x) = (e' n x).comp (Ext.mk₀ (τ a)) (add_zero n)) ∧\n      (∀ n x, e' n (H.baseChangeLinear (S := S) (W.ι ≫ f) ((pullback W.ι).obj M) n x) =\n        ((e n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n))",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EB",
+  "place": "Tag 01EB; Section 01F7 inverse-image cohomology comparison"
+ },
+ "stmt_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-free-mayer-vietoris-short-exact"
+ ],
+ "proof": [
+  {
+   "text": "The sheafification of the free abelian presheaf on the represented open\nrepresents sections on that open by the free/forgetful and sheafification\nadjunctions. Restriction and extension by zero for an open immersion are exact\nadjoint functors. Their derived adjunction identifies Ext from this free sheaf\nwith cohomology of the restricted coefficient sheaf. For the top open this is\nalso the usual constant-integer-sheaf definition of global cohomology. Naturality\nin coefficients identifies scalar multiplication with Ext postcomposition.\nInverse image carries the represented free sheaf to the free sheaf on the\npreimage open: under inverse-image adjunction both represent sections of direct\nimage on the original open. Cartesian open-subscheme isomorphisms and composition\nof module pullback identify its coefficients with the displayed base-changed\nmodule. Apply the same derived adjunction on the base-changed scheme. Its\ncoefficient naturality gives the second scalar equation. Its naturality under\ninverse image and the adjoint coefficient morphism identifies the comparison with\nH.baseChangeLinear, whose definition uses this same constant-sheaf comparison and\ncoefficient map. This proves the last equation. Empty opens and zero coefficients\ngive zero groups and require no additional hypotheses.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "lem-pc-free-mayer-vietoris-short-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-free-mayer-vietoris-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01EB",
+  "place": "Expansion of free-sheaf Ext argument and Section 01F7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of open subset is Ext from free abelian sheaf represented by open subset",
+   "results": "Sheaf.H, cohomologyPresheaf, InjectiveResolution.extAddEquivCohomologyClass; no full natural comparison",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.biprodAddEquiv",
+   "results": "Ext.biprodAddEquiv and MayerVietorisSquare sequence isomorphism",
+   "date": "2026-10-12",
+   "verdict": "Supports product glue only"
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietorisSquare|cohomologyPresheaf|Ext",
+   "results": "Mathlib Sites/MayerVietorisSquare and SheafCohomology/Basic; derived open restriction comparison absent",
+   "date": "2026-10-12",
+   "verdict": "Free short exactness is Mathlib; comparison still needs proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext cohomology on an open subset and inverse image naturality",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CohomologyMayerVietorisExtPresentation",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cohomology-mayer-vietoris-ext-presentation",
+   "place": "free-sheaf construction and single-term Ext comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/MayerVietorisOpenExtComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.H.openFreeExtComparison",
+  "statement": "theorem H.openFreeExtComparison (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Opens) :\n    let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj M\n    let G := invImage (baseChangeFst (S := S) f)\n    let N := (SheafOfModules.toSheaf (baseChangedScheme (S := S) f).ringCatSheaf).obj\n      (baseChangedModule (S := S) f M)\n    let φ := coeff (baseChangeFst (S := S) f) (baseChangeUnit (S := S) f M)\n    let ρ := (scalarRep M).comp (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom)\n    let τ := (scalarRep (baseChangedModule (S := S) f M)).comp\n      (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom)\n    ∃ (e : ∀ n, HOver (W.ι ≫ f) ((pullback W.ι).obj M) n ≃+ Ext (H.openFreeSheaf W) F n)\n      (e' : ∀ n, HOver (baseChangeSnd (S := S) (W.ι ≫ f))\n        (baseChangedModule (S := S) (W.ι ≫ f) ((pullback W.ι).obj M)) n ≃+\n        Ext (G.obj (H.openFreeSheaf W)) N n),\n      (∀ n a x, e n (a • x) = (e n x).comp (Ext.mk₀ (ρ a)) (add_zero n)) ∧\n      (∀ n a x, e' n (a • x) = (e' n x).comp (Ext.mk₀ (τ a)) (add_zero n)) ∧\n      (∀ n x, e' n (H.baseChangeLinear (S := S) (W.ι ≫ f) ((pullback W.ι).obj M) n x) =\n        ((e n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T135331-L-1698936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T135331-L-1698936",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
