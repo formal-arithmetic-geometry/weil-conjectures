@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SheafCoinductionAdjunction",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "mathlib_match": null,
+ "id": "lem-sc-sheaf-coinduction-action",
+ "title": "Coinduction functor with action",
+ "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-pc-scheme], $A=f_*\\mathcal O_Y$, $T:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(\\mathcal O_X)$ restriction of scalars along $f^\\sharp$, $M=T(A)$, and $K=\\mathcal Hom_{\\mathcal O_X}(M,-)$ [def-pur-sheaf-hom]. There exist a functor $H:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Mod}(A)$ and a natural isomorphism $i:T\\circ H\\cong K$ such that for every $\\mathcal F$, open $U$, $a\\in A(U)$, $\\phi\\in H(\\mathcal F)(U)$, open $W\\subseteq U$, and $b\\in A(W)$, $$i(a\\phi)_W(b)=i(\\phi)_W(a|_W b).$$ This statement constructs the functor and its multiplication action; it does not assert an adjunction.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0A6F, lemma-adjoint-tensor-restrict; duality.tex Tag 0BUZ"
+ },
+ "proof": [
+  {
+   "text": "For an O_X-module F and open U, take the additive group\nHom_{O_X|U}(A|U,F|U). For a in A(U), precompose a section phi with the\nO_X-linear endomorphism of A|U which on W sends b to a|W * b. This is\nO_X-linear since A is commutative and the scalar map is a ring map.\nThese endomorphisms commute with restriction. The identities for addition,\nzero, one and multiplication give the A(U)-module laws (commutativity\nremoves the order reversal from precomposition). Restricting the A-action\nalong f-sharp gives the existing O_X action on internal Hom, by O_X-linearity\nof phi. The restriction maps are additive and semilinear for A, so these\nmodules form a presheaf. Its additive presheaf is exactly the internal Hom\npresheaf; the existing internal Hom sheaf condition makes it an A-module\nsheaf. For F -> F', postcomposition defines an A-linear natural morphism.\nIdentity and composition hold componentwise, yielding H. After restriction\nof scalars the identity maps give the natural isomorphism i to K. Unfolding\nprecomposition gives the claimed action formula. This works also for empty\nopens and zero rings, where all modules concerned have the forced zero action.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0A6F, lemma-adjoint-tensor-restrict; duality.tex Tag 0BUZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of scalars along a sheaf of rings morphism has right adjoint internal hom",
+   "results": "PullbackConstruction.adjunction and pushforward right adjoint results only; no coinduction",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "restrictScalars, instAdditiveRestrictScalars, restrictScalars_obj_val, restrictScalars_map_val; no right adjoint",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduct|coextend|restrict.*[Aa]djunction|[Aa]djunction.*restrict",
+   "results": "Representation coinduction and constant-ring sheaf coextension exist, but do not handle a varying sheaf of rings; local source search finds only internal Hom and tensor-Hom adjunction",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars for a sheaf of rings has right adjoint given by internal Hom",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine sheaf-Hom adjunction",
+   "via": [
+    "lem-sc-sheaf-coinduction-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SheafCoinductionAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafCoinductionAction.lean",
+  "declaration": "AlgebraicGeometry.sheafHom_restrictScalars_with_action",
+  "statement": "theorem sheafHom_restrictScalars_with_action\n    {X Y : Scheme.{u}} (f : Y ⟶ X) :\n    let A := ((TopologicalSpace.Opens.map f.base).sheafPushforwardContinuous\n      RingCat.{u} _ _).obj Y.ringCatSheaf\n    let T := SheafOfModules.restrictScalars.{u} f.toRingCatSheafHom\n    let M := T.obj (SheafOfModules.unit A)\n    let K := (SheafOfModules.homFunctor X.sheaf).obj (op M)\n    ∃ H : SheafOfModules.{u} X.ringCatSheaf ⥤ SheafOfModules.{u} A,\n      ∃ i : H ⋙ T ≅ K,\n        ∀ (F : SheafOfModules.{u} X.ringCatSheaf) (U : X.Opens)\n          (a : A.obj.obj (op U)) (φ : (H.obj F).val.obj (op U))\n          (W : Over U) (b : A.obj.obj (op W.left)),\n          (((i.hom.app F).val.app (op U)).hom (a • φ)).app (op W) b =\n            (((i.hom.app F).val.app (op U)).hom φ).app (op W)\n              (A.obj.map W.hom.op a * b)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T110310-L-618359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T110310-L-618359",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

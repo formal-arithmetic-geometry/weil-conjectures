@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SheafCoinductionAdjunction",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "mathlib_match": null,
+ "id": "lem-sc-sheaf-coinduction-counit",
+ "title": "Evaluation counit for coinduction",
+ "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-pc-scheme], $A=f_*\\mathcal O_Y$, $T:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(\\mathcal O_X)$ restriction of scalars along $f^\\sharp$, $M=T(A)$, and $K=\\mathcal Hom_{\\mathcal O_X}(M,-)$ [def-pur-sheaf-hom]. Let $H:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Mod}(A)$ be any functor, and $i:T\\circ H\\cong K$ any natural isomorphism satisfying $i(a\\phi)_W(b)=i(\\phi)_W(a|_W b)$ for every $\\mathcal F$, open $U$, $a\\in A(U)$, $\\phi\\in H(\\mathcal F)(U)$, open $W\\subseteq U$, and $b\\in A(W)$. There exists a family of bijections $$e_{\\mathcal G,\\mathcal F}:\\operatorname{Hom}_{\\mathcal O_X}(T\\mathcal G,\\mathcal F)\\cong\\operatorname{Hom}_A(\\mathcal G,H\\mathcal F)$$ natural in both arguments. Its inverse satisfies, for every $\\psi:\\mathcal G\\to H\\mathcal F$, open $U$, and $m\\in\\mathcal G(U)$, $$e_{\\mathcal G,\\mathcal F}^{-1}(\\psi)_U(m)=i(\\psi_U(m))_U(1).$$ The Lean family and naturality identities are packaged as `Adjunction.CoreHomEquiv`. No adjunction is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0A6F, lemma-adjoint-tensor-restrict; duality.tex Tag 0BUZ"
+ },
+ "proof": [
+  {
+   "text": "Given g : T(G) -> F, on U send m in G(U) to the local O_X-linear\nmap whose component on W sends b in A(W) to g_W(b * m|W). This is O_X-linear\nin b because g_W is O_X-linear. It commutes with restrictions by naturality\nof g and semilinearity of the restriction maps of G. Transport this section\nthrough i.inv to obtain a section of H(F). The resulting map is additive and\nA-linear: the given action formula identifies both the image of a*m and the\na-multiple of the image of m with b -> g_W((a|W*b)*m|W), using commutativity.\nThus these section maps define a morphism G -> H(F). Conversely, for\npsi : G -> H(F), restrict scalars and evaluate i(psi(m)) on the identity open\nat 1. This is O_X-linear since i and psi are O_X-linear, and evaluation at\n1 of an O_X-linear local morphism is O_X-linear in that morphism. Naturality\nof i and psi and restriction of 1 ensure compatibility with restriction.\nEvaluation of the transpose gives g because 1*m=m. For the other inverse,\nA-linearity of psi, the specified action, and naturality give\n i(psi(m))_W(b) = i(psi(b*m|W))_W(1).\nConsequently the two assignments are inverse by internal-Hom extensionality\nand injectivity of i. Both assignments commute with precomposition in G and\npostcomposition in F; the latter uses naturality of i. These two naturality\nidentities give Adjunction.CoreHomEquiv. Its inverse is the evaluation map\njust constructed, which proves the displayed formula. The argument needs no\nnonempty open or nonzero ring hypothesis.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0A6F, lemma-adjoint-tensor-restrict; duality.tex Tag 0BUZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of scalars along a sheaf of rings morphism has right adjoint internal hom",
+   "results": "PullbackConstruction.adjunction and pushforward right adjoint results only; no coinduction",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "restrictScalars, instAdditiveRestrictScalars, restrictScalars_obj_val, restrictScalars_map_val; no right adjoint",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduct|coextend|restrict.*[Aa]djunction|[Aa]djunction.*restrict",
+   "results": "Representation coinduction and constant-ring sheaf coextension exist, but do not handle a varying sheaf of rings; local source search finds only internal Hom and tensor-Hom adjunction",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars for a sheaf of rings has right adjoint given by internal Hom",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine sheaf-Hom adjunction",
+   "via": [
+    "lem-sc-sheaf-coinduction-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SheafCoinductionCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafCoinductionCounit.lean",
+  "declaration": "AlgebraicGeometry.sheafHom_restrictScalars_counit",
+  "statement": "theorem sheafHom_restrictScalars_counit\n    {X Y : Scheme.{u}} (f : Y ⟶ X) :\n    let A := ((TopologicalSpace.Opens.map f.base).sheafPushforwardContinuous\n      RingCat.{u} _ _).obj Y.ringCatSheaf\n    let T := SheafOfModules.restrictScalars.{u} f.toRingCatSheafHom\n    let M := T.obj (SheafOfModules.unit A)\n    let K := (SheafOfModules.homFunctor X.sheaf).obj (op M)\n    ∀ (H : SheafOfModules.{u} X.ringCatSheaf ⥤ SheafOfModules.{u} A)\n      (i : H ⋙ T ≅ K),\n      (∀ (F : SheafOfModules.{u} X.ringCatSheaf) (U : X.Opens)\n        (a : A.obj.obj (op U)) (φ : (H.obj F).val.obj (op U))\n        (W : Over U) (b : A.obj.obj (op W.left)),\n        (((i.hom.app F).val.app (op U)).hom (a • φ)).app (op W) b =\n          (((i.hom.app F).val.app (op U)).hom φ).app (op W)\n            (A.obj.map W.hom.op a * b)) →\n      ∃ e : Adjunction.CoreHomEquiv T H,\n        ∀ (G : SheafOfModules.{u} A) (F : SheafOfModules.{u} X.ringCatSheaf)\n          (ψ : G ⟶ H.obj F) (U : X.Opens) (m : G.val.obj (op U)),\n          (((e.homEquiv G F).symm ψ).val.app (op U)).hom m =\n            ((((i.hom.app F).val.app (op U)).hom\n              (((ψ.val.app (op U)).hom) m)).app\n              (op (Over.mk (𝟙 U)))) (1 : A.obj.obj (op U))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T110310-L-618359",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T110310-L-618359",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

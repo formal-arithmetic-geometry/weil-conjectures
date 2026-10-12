@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.AlgebraicGeometry.SheafCoinductionAction
+import Sheaf.AlgebraicGeometry.SheafCoinductionCounit
 
 /-!
 # The sheaf coinduction adjunction
@@ -67,6 +69,12 @@ theorem sheafHom_restrictScalars_adjunction
           ((adj.counit.app F).val.app (op U)).hom φ =
             ((((i.hom.app F).val.app (op U)).hom φ).app
               (op (Over.mk (𝟙 U)))) (1 : A.obj.obj (op U))) := by
-  sorry
+  dsimp only
+  obtain ⟨H, i, haction⟩ := sheafHom_restrictScalars_with_action f
+  obtain ⟨e, he⟩ := sheafHom_restrictScalars_counit f H i haction
+  refine ⟨H, i, Adjunction.mkOfHomEquiv e, haction, ?_⟩
+  intro F U φ
+  change (((e.homEquiv (H.obj F) F).symm (𝟙 (H.obj F))).val.app (op U)).hom φ = _
+  simpa using he (H.obj F) F (𝟙 (H.obj F)) U φ
 
 end AlgebraicGeometry
