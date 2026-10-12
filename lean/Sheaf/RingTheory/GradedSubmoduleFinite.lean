@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.DirectSum.Decomposition
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Submodule
+import Mathlib.RingTheory.Polynomial.Basic
+import Mathlib.RingTheory.PrincipalIdealDomain
 
 /-!
 # Finite homogeneous generators for graded submodules over the projective-line ring
@@ -51,6 +53,36 @@ theorem graded_submodule_finite {k : Type u} [Field k]
     (hK : letI : DirectSum.Decomposition ℳ := hℳ.chooseDecomposition; K.IsHomogeneous ℳ) :
     ∃ s : Set N, s.Finite ∧ (∀ x ∈ s, SetLike.IsHomogeneousElem ℳ x) ∧
       Submodule.span (MvPolynomial (Fin 2) k) s = K := by
-  sorry
+  classical
+  have _hsmul := hsmul
+  let : DirectSum.Decomposition ℳ := hℳ.chooseDecomposition
+  obtain ⟨sN, hsN, _, hspanN⟩ := hN
+  let : Module.Finite (MvPolynomial (Fin 2) k) N :=
+    Module.Finite.of_fg_top (Submodule.fg_def.mpr ⟨sN, hsN, hspanN⟩)
+  obtain ⟨s, hs⟩ := IsNoetherian.noetherian K
+  let t : Finset N := s.biUnion fun x ↦
+    (DirectSum.decompose ℳ x).support.image fun i ↦ (DirectSum.decompose ℳ x i : N)
+  have ht : ∀ y ∈ t, ∃ x ∈ s, ∃ i : ℤ, y = (DirectSum.decompose ℳ x i : N) := by
+    intro y hy
+    obtain ⟨x, hx, hy⟩ := Finset.mem_biUnion.mp hy
+    obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp hy
+    exact ⟨x, hx, i, rfl⟩
+  refine ⟨(t : Set N), t.finite_toSet, ?_, ?_⟩
+  · intro y hy
+    obtain ⟨x, _, i, rfl⟩ := ht y hy
+    exact ⟨i, (DirectSum.decompose ℳ x i).property⟩
+  · apply le_antisymm
+    · apply Submodule.span_le.mpr
+      intro y hy
+      obtain ⟨x, hx, i, rfl⟩ := ht y hy
+      exact (hK.mem_iff ℳ).mp (hs ▸ Submodule.subset_span hx) i
+    · rw [← hs]
+      apply Submodule.span_le.mpr
+      intro x hx
+      rw [← DirectSum.sum_support_decompose ℳ x]
+      apply Submodule.sum_mem
+      intro i hi
+      apply Submodule.subset_span
+      exact Finset.mem_biUnion.mpr ⟨x, hx, Finset.mem_image.mpr ⟨i, hi, rfl⟩⟩
 
 end MvPolynomial
