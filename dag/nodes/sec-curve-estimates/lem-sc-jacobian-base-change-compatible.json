@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-jacobian-base-change-compatible",
+ "kind": "statement",
+ "title": "Compatibility of Jacobian representing identifications under base change",
+ "statement": "Let k ⊆ K be algebraically closed fields, C a proper smooth connected curve over k, geometrically integral, and C_K its base change, supplied with its connected-curve structure. Let J over k and JK over K be Jacobians with arbitrary degree-zero Picard representing identifications e and eK respecting multiplication. There is an isomorphism i: JK ≅ J ×_k K such that, for every K-scheme T and every fibrewise degree-zero invertible class L on C ×_k T, its transport along C_K ×_K T ≅ C ×_k T is fibrewise degree zero, and its classifying map via eK, followed by i and the projection to J, equals the classifying map of L via e.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-genus-invariant.md",
+  "place": "node lem-sc-genus-invariant, order 1030"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-jacobian",
+  "def-pc-base-change",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Proof: on each test scheme T over K, the iterated-pullback isomorphism identifies\nC_K ×_K T with C ×_k T. Pullback of invertible modules along this isomorphism preserves\nfibrewise degree, because the two fibres and their Euler characteristics agree. Thus it\ninduces an isomorphism of degree-zero Picard presheaves. Restriction along Over.map b\ncommutes with fppf sheafification, since covers of T in the two slice sites are the same;\ncompose this comparison with the sheafification of the presheaf isomorphism to get E.\nThe units of sheafification commute with E, so E sends the class of L to the class of its\nspecified pullback. The adjunction Over.map b ⊣ Over.pullback b transports e to a\nrepresentation r of the restricted sheaf by J_K. Transport r along E, and compare it with\neK using uniqueness of representing objects (Yoneda). This gives i : JK ≅ J_K with\nr.homEquiv (a ≫ i.hom) = eK.homEquiv a. Apply this to the classifying map of the\npullback of L, use the unit compatibility, and invert e.homEquiv. The inverse adjunction\nsends a map to J_K to its composite with pullback.fst J.hom b, giving exactly the square.\nThis construction applies to arbitrary representing identifications, hence also to those\nrespecting the group laws. Identity extensions and genus-zero curves are included.\n",
+   "uses": [
+    "cor-pd-pic0-base-change",
+    "def-sc-jacobian",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "cor-pd-pic0-base-change",
+  "def-sc-jacobian",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-genus-invariant.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Picard functor degree zero canonical base change compatibility for Jacobian representing objects",
+   "results": "Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical Picard degree zero sheaf base change compatible on line bundles",
+   "results": "CommRing.Pic.mapAlgebra and related ring Picard lemmas; no scheme Picard comparison",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"uniqueUpToIso\"",
+   "results": "CategoryTheory.Functor.RepresentableBy.uniqueUpToIso gives uniqueness after constructing a common represented functor; does not supply the Picard comparison square",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "picard.*base[Cc]hange|picardFunctorDegree.*[Ii]so",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenusInvariant",
+  "group": "U2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-genus-invariant",
+   "place": "Proof, third paragraph: compatibility of the identifications through Picard base change and Yoneda",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.JacobianBaseChangeCompatible",
+  "file": "lean/Sheaf/AlgebraicGeometry/JacobianBaseChangeCompatible.lean",
+  "declaration": "AlgebraicGeometry.jacobian_compatibility",
+  "statement": "theorem jacobian_compatibility {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] [GeometricallyIntegral f] : let b := Spec.map (CommRingCat.ofHom (algebraMap k K)) let fK := pullback.snd f b ∀ [hcurve : IsConnectedCurve fK], ∀ (J : Over (Spec (.of k))) [GrpObj J] [IsJacobian f J] (e : (picardFunctorDegree f 0).obj.RepresentableBy J), IsPicardZeroMul f e → ∀ (JK : Over (Spec (.of K))) [GrpObj JK] [IsJacobian fK JK] (eK : (picardFunctorDegree fK 0).obj.RepresentableBy JK), IsPicardZeroMul fK eK → ∃ i : JK ≅ Over.mk (pullback.snd J.hom b), ∀ (T : Over (Spec (.of K))) (L : (pullback f (T.hom ≫ b)).Pic) (hL : L ∈ (picardSubfunctorDegree f 0).obj (.op ((Over.map b).obj T))), ∃ hLK : Pic.map (pullbackLeftPullbackSndIso f b T.hom).hom L ∈ (picardSubfunctorDegree fK 0).obj (.op T), (eK.homEquiv.symm ((toSheafify (Scheme.fppfTopology.over (Spec (.of K))) (picardSubfunctorDegree fK 0).toFunctor).app (.op T) ⟨Pic.map (pullbackLeftPullbackSndIso f b T.hom).hom L, hLK⟩)).left ≫ i.hom.left ≫ pullback.fst J.hom b = (e.homEquiv.symm ((toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f 0).toFunctor).app (.op ((Over.map b).obj T)) ⟨L, hL⟩)).left",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T060757-L-2917111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T060757-L-2917111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
