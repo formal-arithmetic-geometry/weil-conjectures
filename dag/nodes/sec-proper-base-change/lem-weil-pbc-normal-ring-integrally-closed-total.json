@@ -30,55 +30,42 @@
  ],
  "proof": [
   {
-   "text": "Fix an element x = a/s in Q(R), with a in R and s in S [def-weil-pbc-module-localization] [def-weil-pbc-integral-closure]. Since s is a nonzerodivisor, the map R to Q(R) is injective: r/1 = 0 implies ur = 0 for some u in S, hence r = 0. Fix any prime p of R. The image s/1 is nonzero in the domain R_p [def-weil-pbc-localization-at-prime]: if it were zero, some t outside p would satisfy ts = 0 in R, forcing t = 0 in p. Thus (a/1)/(s/1) is defined in the fraction field of R_p. It is integral over R_p, since the monic equation for x maps coefficientwise to one for this fraction.",
+   "text": "Write x = a/s in the total fraction ring, using IsLocalization.exists_mk'_eq [def-weil-pbc-module-localization]. For each maximal ideal p, normality gives that A = R_p is an integrally closed domain [def-weil-pbc-normal-ring] [def-weil-pbc-localization-at-prime]. Localization preserves nonzerodivisors (IsLocalization.nonZeroDivisors_le_comap), and these become units in K = FractionRing A. Thus IsLocalization.liftAlgHom constructs an R-algebra map f : Q(R) to K. Integrality maps along f and extends from R to A by IsIntegral.map and IsIntegral.tower_top [def-weil-pbc-integral-closure].",
    "uses": [
     "def-weil-pbc-module-localization",
     "def-weil-pbc-integral-closure",
     "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-normal-ring"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 034M (lemma-normal-ring-integrally-closed, lines 8223-8229), first half; the nonzerodivisor check spells out the source's flat-localization inclusion"
-   }
+   "elementary": false
   },
   {
-   "text": "By normality [def-weil-pbc-normal-ring], R_p is a domain integrally closed in its fraction field, so the fraction from Step 1 is b/f for some b in R and f outside p [def-weil-pbc-localization-at-prime]. Equality (a/1)/(s/1) = (b/1)/(f/1) in that fraction field gives (fa - bs)/1 = 0 in R_p, since its map into its fraction field is injective. By the localization equality criterion, there is t outside p with t(fa - bs) = 0 in R. In Q(R) this implies (tf)x = tb/1, because s becomes a unit there; and tf is outside p since p is prime. Let I be the set of u in R such that (u/1)x lies in R as a subring of Q(R), an ideal since R embeds in Q(R) by Step 1. Then tf is in I and outside p. Since p was arbitrary, I is contained in no prime ideal.",
+   "text": "By isIntegrallyClosed_iff K, f(x) is the image of b in A [def-weil-pbc-normal-ring]. Map the fraction identity x times s = a into K. Injectivity of A to K gives a/1 = b times s/1 in A. Hence a/1 belongs to the image of the principal ideal (s), by Ideal.map_span and Ideal.mem_span_singleton [def-weil-pbc-localization-at-prime].",
    "uses": [
     "def-weil-pbc-normal-ring",
     "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-module-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 034M (lemma-normal-ring-integrally-closed, lines 8227-8237), local membership and denominator clearing"
-   }
+   "elementary": false
   },
   {
-   "text": "If I is not R, then [lem-weil-pbc-proper-ideal-contained-in-maximal] gives a maximal ideal m containing I; every maximal ideal is prime, contrary to Step 2. Therefore I = R, so 1 is in I and x is in R as a subring of Q(R). This proves every element of Q(R) integral over R comes from R.",
+   "text": "Apply Mathlib Ideal.mem_of_localization_maximal to the ideal (s), obtaining a in (s) in R. Ideal.mem_span_singleton yields a = s*r for some r. IsLocalization.eq_mk'_of_mul_eq identifies r/1 with a/s = x [def-weil-pbc-module-localization]. This packages the original conductor-ideal argument into Mathlib's local criterion for ideal membership, without a separate invocation of the maximal-ideal existence node.",
    "uses": [
-    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+    "def-weil-pbc-module-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 034M (lemma-normal-ring-integrally-closed, lines 8236-8238), final ideal argument; Lemma Tag 00E0 for the maximal ideal"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-module-localization",
   "def-weil-pbc-integral-closure",
   "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-normal-ring",
-  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+  "def-weil-pbc-normal-ring"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "M1 stage 3",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 034M (lemma-normal-ring-integrally-closed, line 8218), with its proof"
+  "place": "Tag 034M; local-to-global denominator argument implemented with Mathlib Ideal.mem_of_localization_maximal"
  },
  "mathlib_searches": [
   {
@@ -163,5 +150,15 @@
   "group": "J1",
   "result": "pass",
   "note": "R:Type u CommRing (no nontriviality, zero ring vacuous ok); normal = STATE NORMAL RING inline form verbatim; Q(R)=FractionRing R = Localization (nonZeroDivisors R) (ring case of LocalizedModule, no domain/field assumed); hx IsIntegral R x; conclusion elementwise range membership = IsIntegrallyClosedIn modulo IsFractionRing.injective; no defs, no let, no hollow hyp; node diff lean-only"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T095913-L-320738",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
