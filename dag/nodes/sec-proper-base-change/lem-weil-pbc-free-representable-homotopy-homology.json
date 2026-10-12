@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-free-representable-homotopy-homology",
+ "kind": "statement",
+ "title": "Free representable homotopy classes compute section homology",
+ "statement": "Let C be a category with object universe u and morphism universe v, J a Grothendieck topology [def-weil-pbc-sites-and-cohomology], and assume sheafification with coefficients in abelian groups of universe v [def-weil-pbc-sheafification]. Let K be any nonnegative cochain complex in the abelian category of abelian sheaves [def-sp-abelian], and let q be a natural number. Let A(U) be the sheafification of the free abelian presheaf on the representable U. Extend K by zero to an integer-indexed complex. Define P(U) to be the abelian group of maps in the homotopy category from A(U)[0] to K[q]; restrictions are precomposition with A on morphisms of C. Define L to be the degree-q homology presheaf of K after applying sheafToPresheaf termwise. For every universe w, the lift of P from max(u,v) to max(u,v,w) is naturally isomorphic to the lift of L from v to max(u,v,w). No injectivity, resolution, or HasExt assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 01FT and Tag 03F3, Hom-sections part of the injective-resolution computation; combined with derived.tex Tag 06XR (1), the homotopy-class description. Read https://stacks.math.columbia.edu/tag/03F3 and https://stacks.math.columbia.edu/tag/06XR in second reading. Mathlib CohomologyClass.homAddEquiv and leftHomologyData supply the homotopy-classes/Hom-complex identification; the Hom-sections argument does not use injectivity."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "The sheafification adjunction, free abelian adjunction and Yoneda identify Hom(A(U),G) with G(U), additively and naturally in both U and G. Apply degreewise to the integer extension of K to identify the Hom complex from A(U)[0] with the lifted section complex.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Homotopy classes of maps from A(U)[0] to K[q] are degree-q cocycles modulo coboundaries, hence homology of the Hom complex. Use Mathlib CohomologyClass.homAddEquiv and leftHomologyData.homologyIso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation of presheaves and additive ULift preserve homology. Extension by zero identifies homology in every nonnegative degree, including q=0 with zero incoming differential. All comparisons are natural in U, so after lifting to max(u,v,w) their composites assemble into a natural isomorphism.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 01FT; Tag 03F3; derived.tex Tag 06XR",
+  "note": "The Hom-sections part of the original plan, separated after proving Ext-to-homotopy comparison and naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy classes from free representable sheaves to a nonnegative cochain complex compute its section homology naturally in the object",
+   "results": "8 hits: CochainComplex.HomComplex.leftHomologyData', CategoryTheory.Sheaf.cohomologyPresheaf, CochainComplex.HomComplex.homologyAddEquiv, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H, CochainComplex.HomComplex.leftHomologyData'_H_coe, CochainComplex.HomComplex.leftHomologyData_H_coe, CochainComplex.HomComplex.CohomologyClass.homAddEquiv; checked the declarations: no complete free-representable presheaf comparison.",
+   "date": "2026-10-12",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.CohomologyClass.homAddEquiv",
+   "results": "2 hits: CochainComplex.HomComplex.CohomologyClass.homAddEquiv, CochainComplex.HomComplex.CohomologyClass.homAddEquiv_apply; checked the declarations: no complete free-representable presheaf comparison.",
+   "date": "2026-10-12",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromSingle.*[Hh]omology|[Hh]omotopy.*[Pp]resheaf|[Ff]ree.*[Hh]omology",
+   "results": "0 hits: ; checked the declarations: no complete free-representable presheaf comparison.",
+   "date": "2026-10-12",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy classes from free representable sheaves compute section homology of an arbitrary complex naturally in the site object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ObjectCohomologyPresheafResolution",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Injective-resolution computation of object cohomology used in the Tag 09AX effacement argument; presheaf naturality before taking Zariski stalks.",
+   "via": [
+    "lem-weil-pbc-etale-object-cohomology-stalk-complex",
+    "lem-weil-pbc-strict-henselian-cohomology-locally-zero",
+    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+    "lem-weil-pbc-gabber-criterion",
+    "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+    "lem-weil-pbc-integral-cover-trivial-cohomology",
+    "lem-weil-pbc-integral-cover-kills-constant-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FreeRepresentableHomotopyHomology",
+  "file": "lean/Sheaf/Paper/FreeRepresentableHomotopyHomology.lean",
+  "declaration": "freeRepresentableHomotopyPresheaf_homology",
+  "declarations": [
+   "freeRepresentableHomotopyPresheaf",
+   "freeRepresentableHomotopyPresheaf_homology"
+  ],
+  "statement": "theorem freeRepresentableHomotopyPresheaf_homology\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{v}]\n    (K : CochainComplex (Sheaf J AddCommGrpCat.{v}) ℕ) (q : ℕ) :\n    Nonempty\n      (freeRepresentableHomotopyPresheaf J K q ⋙ AddCommGrpCat.uliftFunctor.{w, max u v} ≅\n        (((sheafToPresheaf J AddCommGrpCat.{v}).mapHomologicalComplex (.up ℕ)).obj\n          K).homology q ⋙ AddCommGrpCat.uliftFunctor.{max u w, v})",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T165527-L-2938275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T165527-L-2938275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
