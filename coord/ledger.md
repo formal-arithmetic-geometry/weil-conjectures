@@ -9986,3 +9986,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:59 L: returned deliver/P2/Sheaf.Paper.FiniteStructureAlgebraOperationsLift (reviewer RETURN: (reviewer X-aa844, head aa844457d) G1 / brief point 2 and reader gate: the promised coordinated repair is absent. Only F)
 - 23:00 L: returned deliver/H4/Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts (reviewer RETURN: (reviewer X-7836e, head 7836e9fa0) D1: `derivedTensorRight_preservesCofan` is logically equivalent to the target `Preser)
 - 23:04 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts (reviewer RETURN: (reviewer X-21678, head 21678d209) H9 (review brief points 2 and 5): In coord/changes/projective-space-standard-charts-i)
+- 23:07 L: returned deliver/F3/Sheaf.RingTheory.MinimalComponentDimensionMaximumCore (reviewer RETURN: (the landing tools, head 3b908f59e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
