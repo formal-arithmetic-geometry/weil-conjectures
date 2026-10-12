@@ -14,7 +14,7 @@
  },
  "proof": [
   {
-   "text": "The sheaf-to-presheaf functor and object evaluation preserve finite limits, so a short exact sheaf sequence evaluates to an exact sequence on the left at each intersection. Surjectivity is assumed, so each section sequence is short exact.",
+   "text": "For degree p restrict the underlying presheaves to the discrete category of tuples a : Fin (p+1) -> T, evaluated at the corresponding iterated fibre products. This functor Q preserves finite limits and zero morphisms. Apply ShortComplex.Exact.map_of_mono_of_preservesKernel to hS.exact and the mono hS.mono_f; Q also preserves that mono. Each component of Q.map S.g is epi by the assumed surjectivity and AddCommGrpCat.epi_iff_surjective. NatTrans.epi_of_epi_app supplies the epi in the functor category, hence S.map Q is short exact.",
    "uses": [
     "def-weil-pbc-abelian-etale-sheaves",
     "def-sp-left-exact-additive"
@@ -22,14 +22,14 @@
    "elementary": false
   },
   {
-   "text": "In degree p the Cech maps are products of section maps over all tuples. Products of short exact sequences of abelian groups are short exact, by choosing preimages componentwise; injectivity and exactness at the middle are likewise componentwise. Empty index products are zero and give a short exact zero sequence. Identify the categorical product via its universal property.",
+   "text": "Apply ShortComplex.ShortExact.map_of_exact to the limit functor on the discrete tuple category. Mathlib.Algebra.Category.Grp.AB supplies preservation of finite colimits by this limit functor, while limits preserve finite limits. Identify the resulting sequence with the degree-p Cech sequence using the inverses of Pi.isoLimit on its three objects. For the two commutativity squares, apply Pi.hom_ext, Pi.map_pi, Pi.isoLimit_inv_pi and limMap_pi. This works for arbitrary indexing types, including empty types.",
    "uses": [
     "def-weil-pbc-cech-complex"
    ],
    "elementary": true
   },
   {
-   "text": "A sequence of cochain complexes is short exact if and only if it is degreewise short exact. Apply this criterion.",
+   "text": "Apply HomologicalComplex.shortExact_of_degreewise_shortExact to the short exact degree-p sequences obtained above.",
    "uses": [
     "lem-weil-pbc-cochain-complexes-degreewise-exact"
    ],
@@ -124,10 +124,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T033109-L-1443148",
-  "kind": "interface",
+  "landing": "20261012T040352-L-1642826",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -5929,3 +5929,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:01 L: merged deliver/C2/WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank (stage 3; reviewer PASS; first push; landing 20261012T040020-L-1617116 (interface); modules 3; new nodes 2)
 - 04:03 L: merged deliver/D2/WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity (stage 3; reviewer PASS; first push; landing 20261012T040223-L-1633574 (interface); modules 2; new nodes 1)
 - 04:03 L: returned deliver/S2/WeilConjectures.AlgebraicGeometry.TheoremOfCube (reviewer RETURN: (reviewer X-55523, head 555231055) the reviewer passed it, but the landing failed: NOT MERGED WeilConjectures.AlgebraicG)
+- 04:04 L: merged deliver/E1/Sheaf.AlgebraicGeometry.EtaleCechSectionwiseShortExact (stage 3; reviewer PASS; first push; landing 20261012T040352-L-1642826 (proof); modules 1; new nodes 0)

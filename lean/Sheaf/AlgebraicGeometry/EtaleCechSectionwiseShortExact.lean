@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+
 /-!
 # Sectionwise short exactness of étale Čech complexes
 
@@ -69,6 +72,45 @@ theorem etale_cech_shortExact_of_sections
         (op (piObj (fun j : Fin (p + 1) ↦ Over.mk (f (a j)))).left))) :
     (S.map (sheafToPresheaf _ _ ⋙
       (Functor.whiskeringLeft _ _ _).obj (Over.forget U).op ⋙
-      cechComplexFunctor (fun t ↦ Over.mk (f t)))).ShortExact := by sorry
+      cechComplexFunctor (fun t ↦ Over.mk (f t)))).ShortExact := by
+  classical
+  have := hS.mono_f
+  refine HomologicalComplex.shortExact_of_degreewise_shortExact _ fun p ↦ ?_
+  let W : (Fin (p + 1) → T) → X.Etaleᵒᵖ := fun a ↦
+    op (piObj (fun j : Fin (p + 1) ↦ Over.mk (f (a j)))).left
+  let Q := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+    (Functor.whiskeringLeft _ _ _).obj (Discrete.functor W)
+  have hQ : (S.map Q).ShortExact := by
+    refine ShortComplex.ShortExact.mk'
+      (hS.exact.map_of_mono_of_preservesKernel Q inferInstance inferInstance) ?_ ?_
+    · change Mono (Q.map S.f)
+      infer_instance
+    · have he : ∀ a, Epi ((S.map Q).g.app a) := fun a ↦
+        (AddCommGrpCat.epi_iff_surjective _).2 (hsurj p a.as)
+      exact NatTrans.epi_of_epi_app _
+  have hL := hQ.map_of_exact (lim (J := Discrete (Fin (p + 1) → T)))
+  apply ShortComplex.shortExact_of_iso _ hL
+  refine ShortComplex.isoMk
+    (Pi.isoLimit (Q.obj S.X₁)).symm
+    (Pi.isoLimit (Q.obj S.X₂)).symm
+    (Pi.isoLimit (Q.obj S.X₃)).symm ?_ ?_
+  · change (Pi.isoLimit (Q.obj S.X₁)).inv ≫
+        Limits.Pi.map (fun a ↦ S.f.hom.app (W a)) =
+      lim.map (Q.map S.f) ≫ (Pi.isoLimit (Q.obj S.X₂)).inv
+    apply Pi.hom_ext
+    intro a
+    rw [Category.assoc, Limits.Pi.map_π, ← Category.assoc,
+      Pi.isoLimit_inv_π (Q.obj S.X₁) a, Category.assoc]
+    erw [Pi.isoLimit_inv_π (Q.obj S.X₂) a]
+    exact (limMap_π (Q.map S.f) ⟨a⟩).symm
+  · change (Pi.isoLimit (Q.obj S.X₂)).inv ≫
+        Limits.Pi.map (fun a ↦ S.g.hom.app (W a)) =
+      lim.map (Q.map S.g) ≫ (Pi.isoLimit (Q.obj S.X₃)).inv
+    apply Pi.hom_ext
+    intro a
+    rw [Category.assoc, Limits.Pi.map_π, ← Category.assoc,
+      Pi.isoLimit_inv_π (Q.obj S.X₂) a, Category.assoc]
+    erw [Pi.isoLimit_inv_π (Q.obj S.X₃) a]
+    exact (limMap_π (Q.map S.g) ⟨a⟩).symm
 
 end AlgebraicGeometry.Scheme
