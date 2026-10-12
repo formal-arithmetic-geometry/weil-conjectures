@@ -7,9 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleInverseImageSectionDescription
-import Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent
-import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen
+import Sheaf.AlgebraicGeometry.EtaleFpqcMatchingFamily
 
 /-! # EtaleSectionsFpqcExistence
 
@@ -97,6 +95,61 @@ theorem exists_etaleSection_of_fpqc_cover
           (S.smallGrothendieckTopology @Etale)
           ((T i).smallGrothendieckTopology @Etale)).unit.app F).hom.app
             (op (Scheme.Etale.mk (𝟙 S))) t) = s i := by
-  sorry
+  classical
+  obtain ⟨R, x, hR, hx, hmatch⟩ :=
+    etaleFpqcSections_exists_matching_family T g hcover F s hcompat
+  let hF := F.property.isSheafFor R hR
+  let t := hF.amalgamate x hx
+  refine ⟨t, ?_⟩
+  intro i
+  let β := MorphismProperty.Over.pullback @Etale ⊤ (g i)
+  let H := (Scheme.etaleSetPullback (g i)).obj F
+  let η := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    β (Type (u + 1)) (S.smallGrothendieckTopology @Etale)
+    ((T i).smallGrothendieckTopology @Etale)).unit.app F
+  let E := Scheme.Etale.mk (𝟙 S)
+  let q : β.obj E ⟶ Scheme.Etale.mk (𝟙 (T i)) :=
+    MorphismProperty.Over.homMk (β.obj E).hom (Category.comp_id _)
+  have hRp : R.functorPushforward β ∈ (T i).smallEtaleTopology (β.obj E) :=
+    (Scheme.Hom.coverPreserving_etale (g i)).cover_preserve hR
+  have heq : η.hom.app (op E) t = H.obj.map q.op (s i) := by
+    apply (H.property.isSheafFor _ hRp).isSeparatedFor.ext
+    intro Z a ha
+    obtain ⟨V, f, b, hf, rfl⟩ := ha
+    have hn := η.hom.naturality_apply f.op t
+    change η.hom.app (op V) (F.obj.map f.op t) =
+      H.obj.map (β.map f).op (η.hom.app (op E) t) at hn
+    have ht : F.obj.map f.op t = x f hf := hF.valid_glue hx f hf
+    have hq : β.map f ≫ q =
+        (MorphismProperty.Over.homMk (β.obj V).hom (Category.comp_id _) :
+          β.obj V ⟶ Scheme.Etale.mk (𝟙 (T i))) := by
+      apply MorphismProperty.Over.Hom.ext
+      exact (β.map f).w
+    have hu : H.obj.map (β.map f).op (η.hom.app (op E) t) =
+        H.obj.map (β.map f).op (H.obj.map q.op (s i)) := by
+      calc
+        _ = η.hom.app (op V) (F.obj.map f.op t) := hn.symm
+        _ = η.hom.app (op V) (x f hf) := congrArg (η.hom.app (op V)) ht
+        _ = H.obj.map (MorphismProperty.Over.homMk (β.obj V).hom
+            (Category.comp_id _) : β.obj V ⟶ Scheme.Etale.mk (𝟙 (T i))).op (s i) :=
+          hmatch i V f hf
+        _ = _ := by
+          have h := congrArg (fun k ↦ H.obj.map k.op (s i)) hq
+          simpa only [op_comp, Functor.map_comp, types_comp_apply] using h.symm
+    simpa only [op_comp, Functor.map_comp, types_comp_apply] using
+      congrArg (fun z ↦ H.obj.map b.op z) hu
+  let δ : Scheme.Etale.mk (𝟙 (T i)) ⟶ β.obj E :=
+    MorphismProperty.Over.homMk (pullback.lift (g i) (𝟙 (T i))
+      ((Category.comp_id _).trans (Category.id_comp _).symm)) (by
+        change pullback.lift _ _ _ ≫ pullback.snd _ _ = 𝟙 (T i)
+        simp)
+  change H.obj.map δ.op (η.hom.app (op E) t) = s i
+  rw [heq, ← types_comp_apply, ← H.obj.map_comp, ← op_comp]
+  have hδq : δ ≫ q = 𝟙 _ := by
+    apply MorphismProperty.Over.Hom.ext
+    change pullback.lift _ _ _ ≫ pullback.snd _ _ = 𝟙 (T i)
+    simp
+  rw [hδq, op_id, H.obj.map_id]
+  rfl
 
 end AlgebraicGeometry

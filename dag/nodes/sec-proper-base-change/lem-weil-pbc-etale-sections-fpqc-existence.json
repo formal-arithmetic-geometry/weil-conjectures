@@ -17,30 +17,41 @@
  ],
  "proof": [
   {
-   "text": "For each etale V and section t, take the largest agreement opens between its\npullbacks and the prescribed sections. Overlap compatibility identifies their two\npullbacks. Fpqc open descent gives an open W in V. The local description of inverse\nimage sections supplies etale local representatives t_ia on V_ia. Apply the preceding\nconstruction to each representative. Compatibility and joint surjectivity imply that\nits test scheme factors through W_ia. These W_ia therefore cover S in the etale site.\nTwo restricted representatives agree on their overlap: their largest agreement open\npulls back to the entire overlap under every T_i, and joint surjectivity makes it the\nentire overlap. The sheaf axiom glues the representatives to t. Its pullback agrees\nwith each prescribed section on its etale representative cover, hence globally by\nsheaf separatedness.",
+   "text": "Use the compatible-local-family theorem to obtain a covering sieve R and x. Apply the sheaf axiom of F to amalgamate x to t, with F(f)(t)=x_f on every arrow of R.",
    "uses": [
-    "lem-weil-pbc-etale-sections-equal-open",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-etale-open-fpqc-descent",
-    "lem-weil-pbc-etale-inverse-image-section-description",
-    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-etale-fpqc-matching-family",
     "def-weil-pbc-etale-sheaf-of-sets"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each i, base change preserves the covering sieve R, giving a covering sieve on S times_S T_i. Check on every arrow of this pushed-forward sieve that the unit image of t equals s_i restricted along the projection q:S times_S T_i → T_i: factor the arrow through the base change of f in R, use unit naturality, the amalgamation equation, and the matching equation for x_f. Sheaf separatedness gives equality on S times_S T_i.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict this equality along the diagonal delta=(g_i,id):T_i → S times_S T_i. The composite delta q is id by the fibre-product projection equation, so functoriality of restriction gives exactly the required pullback equation for t.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-sections-equal-open",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-etale-open-fpqc-descent",
-  "lem-weil-pbc-etale-inverse-image-section-description",
-  "def-weil-pbc-fpqc-covering",
-  "def-weil-pbc-etale-sheaf-of-sets"
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-fpqc-matching-family",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 59.39.2 (Tag 09XN), proof"
+  "place": "Tag 09XN, final gluing and verification; formalized using the Mathlib sheaf axiom, naturality, and base-change cover preservation"
  },
  "mathlib_searches": [
   {
@@ -118,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T135244-L-1670937",
+  "landing": "20261012T144050-L-2088009",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
