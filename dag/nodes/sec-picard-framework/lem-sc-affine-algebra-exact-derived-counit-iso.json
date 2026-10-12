@@ -18,67 +18,51 @@
  ],
  "proof": [
   {
-   "text": "Use exact scalar restriction from the direct-image algebra to O_Y. Its composite with the underlying abelian-sheaf functor is unchanged, so exactness and reflection of isomorphisms follow from the corresponding forgetful functor properties. The right-derived composition and exact-functor comparisons identify this restriction of Rg_*K with Rf_*K, without changing the original derived-category universes.",
+   "text": "Choose a K-injective complex I and an isomorphism K to Q(I), using the ringed-space K-injective resolutions. Transport quasi-coherence of cohomology across the homology functor and its Q comparison.",
    "uses": [
     "def-pc-ringed-spaces-derived-direct-image",
-    "lem-weil-pbc-exact-functor-bounded-below"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
-   }
-  },
-  {
-   "text": "The affine unbounded cohomology formula gives H^i(Rf_*K)=f_*H^i(K). Retain the f_*O_X action on the same pushed K-injective complex, obtaining H^i(Rg_*K)=g_*H^i(K). On affine opens the comparison is algebra-linear; its maps commute with restriction and hence glue. Exact P gives H^i(D(P)(Rg_*K))=P(g_*H^i(K)). These comparisons are natural, and use the unbounded cohomological bound in the proof of the affine formula rather than claiming exactness of arbitrary direct image.",
-   "uses": [
-    "lem-sc-affine-derived-cohomology",
-    "lem-weil-pbc-exact-functor-bounded-below"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
-   }
-  },
-  {
-   "text": "Compute the canonical derived counit on a K-injective resolution of K. The derived-adjunction counit equation makes it the ordinary counit after the right-derived comparison and the exact pullback comparison. Applying cohomology and the kernel/image comparisons of Step 2 identifies this with P(g_*H^i(K))→H^i(K). On affine opens its map sends b tensor s to b*s; compatibility with restrictions identifies it with the ordinary affine module counit. This is the counit calculation in 0AVW, independent of any derived unit factorization.",
-   "uses": [
-    "lem-sc-derived-adjunction-from-underived",
-    "lem-weil-pbc-affine-module-correspondence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
-   }
-  },
-  {
-   "text": "For each i the ordinary counit is invertible because H^i(K) is quasi-coherent. The homology comparisons in Step 2 therefore make H^i of the canonical derived counit invertible. The homology criterion for isomorphisms in the derived category proves its invertibility. Transport the underived adjunction from tensor pullback to the given a by uniqueness of left adjoints; the induced exact derived natural isomorphism transports the canonical counit. Empty schemes, zero modules and shifts satisfy the same argument.",
-   "uses": [
-    "lem-sc-affine-algebra-module-adjunction-isos",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
-   }
+   "elementary": true
+  },
+  {
+   "text": "In every integer degree apply lem-sc-affine-algebra-kinjective-counit-homology-factorization. Its comparison factors the homology of the termwise counit as the exact P homology comparison, P of the algebra-linear pushforward comparison, and the ordinary module counit. Install the right-adjoint instance supplied by a. The canonical ordinary counit is invertible on H^n(I) by new-affine-algebra-module-counit-iso; transport to a with leftAdjointUniq_hom_app_counit. Every factor is invertible. Thus the termwise counit is a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-affine-algebra-kinjective-counit-homology-factorization",
+    "new-affine-algebra-module-counit-iso",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The homotopy counit on the quotient of I is the quotient of the termwise counit, hence Qh sends it to an isomorphism. Apply derivedε_fac_app to the canonical derived adjunction. The right-derived unit at I is invertible because I is K-injective, and the exact P comparison is invertible. Cancellation in this equation proves that the canonical derived counit at Qh(I) is invertible.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose K to Q(I) with the inverse of quotientCompQhIso. Naturality of the canonical derived counit along this isomorphism transports invertibility to K. This preserves both derived-category universes and uses no derived unit or unit homology factorization.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-ringed-spaces-derived-direct-image",
   "def-weil-abstract-derived-category",
-  "lem-sc-affine-algebra-module-adjunction-isos",
-  "lem-sc-affine-derived-cohomology",
+  "lem-sc-affine-algebra-kinjective-counit-homology-factorization",
   "lem-sc-derived-adjunction-from-underived",
-  "lem-weil-pbc-affine-module-correspondence",
-  "lem-weil-pbc-exact-functor-bounded-below"
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "new-affine-algebra-module-counit-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW, first adjunction map in the proof; canonical exact-derived counit calculation, with Tag 079W"
+  "place": "Tag 0AVW, proof; K-injective termwise counit calculation, followed by the canonical derived counit equation of Tag 079W"
  },
  "mathlib_searches": [
   {
@@ -172,9 +156,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T144151-L-2109321",
+  "landing": "20261012T165510-L-2932678",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
