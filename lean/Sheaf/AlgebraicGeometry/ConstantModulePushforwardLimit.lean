@@ -6,10 +6,8 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
-import Sheaf.AlgebraicGeometry.HigherDirectImageLimitSystem
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.ConstantModulePushforwardLimitInjectivity
+import Sheaf.AlgebraicGeometry.ConstantModulePushforwardLimitSurjectivity
 
 /-!
 # Constant module direct images on an inverse limit
@@ -93,6 +91,33 @@ theorem isColimit_constantModulePushforwardCocone [IsCofiltered I]
     [∀ i : I, QuasiCompact (p i)] [∀ i : I, QuasiSeparated (p i)]
     [QuasiCompact ν] [QuasiSeparated ν]
     (hc : IsLimit (Cone.mk Y π)) :
-    Nonempty (IsColimit (constantModulePushforwardCocone Λ M D p hp ν π hπ)) := by sorry
+    Nonempty (IsColimit (constantModulePushforwardCocone Λ M D p hp ν π hπ)) := by
+  let K := constantModulePushforwardDiagram Λ M D p hp
+  let c := constantModulePushforwardCocone Λ M D p hp ν π hπ
+  let eK : ∀ i : Iᵒᵖ, K.obj i ≅
+      (lowerStar (ModuleCat.{u + 1} Λ) (p i.unop)).obj
+        ((constantSheaf (D.obj i.unop).smallEtaleTopology
+          (ModuleCat.{u + 1} Λ)).obj M) := fun _ => Iso.refl _
+  have hK : ∀ {i j : Iᵒᵖ} (g : i ⟶ j), K.map g =
+      (eK i).hom ≫ constantModulePushforwardMap Λ M _ _ (D.map g.unop) (hp g.unop) ≫
+        (eK j).inv := by
+    intro i j g
+    simp only [eK, Iso.refl_hom, Iso.refl_inv, Category.id_comp]
+    rfl
+  let e : c.pt ≅ (lowerStar (ModuleCat.{u + 1} Λ) ν).obj
+      ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := Iso.refl _
+  have hι : ∀ i : Iᵒᵖ, c.ι.app i ≫ e.hom =
+      (eK i).hom ≫ constantModulePushforwardMap Λ M _ _ (π.app i.unop) (hπ i.unop) := by
+    intro i
+    simp only [e, eK, Iso.refl_hom, Category.id_comp]
+    rfl
+  have : Mono (colimit.desc K c) :=
+    mono_constantModulePushforwardComparison Λ M D p hp ν π hπ hc K eK hK c e hι
+  have : Epi (colimit.desc K c) :=
+    epi_constantModulePushforwardComparison Λ M D p hp ν π hπ hc K eK hK c e hι
+  have : IsIso (colimit.desc K c) := isIso_of_mono_of_epi _
+  change Nonempty (IsColimit c)
+  exact (colimit.isColimit K).nonempty_isColimit_iff_isIso_desc.mpr
+    (show IsIso (colimit.desc K c) from inferInstance)
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,184 @@
+{
+ "id": "lem-weil-pbc-constant-module-pushforward-limit-surjectivity",
+ "kind": "statement",
+ "title": "Constant-module pushforward continuity: surjectivity",
+ "statement": "Fix a universe u, a commutative ring Lambda : Type (u+1), a Lambda-module M, schemes X and Y in universe u, a small cofiltered category I in universe u, a diagram D : I -> Scheme with affine transition maps, morphisms p_i : D_i -> X which are quasi-compact and quasi-separated, and compatibility equations hp_g : D(g) followed by p_j = p_i for every g : i -> j. Let nu : Y -> X be quasi-compact and quasi-separated, pi : const(Y) -> D a natural transformation, hpi_i : pi_i followed by p_i = nu for every i, and hc a proof that (Y,pi) is a limit cone. For each i let A_i be p_i,* of the constant M-sheaf on D_i, and let B be nu_* of the constant M-sheaf on Y. Let K : I^op -> Sheaf(X_etale,Mod_Lambda), eK_i : K_i ~= A_i be isomorphisms, and suppose for every g : i -> j in I^op that K(g) = eK_i.hom followed by constantModulePushforwardMap(Lambda,M,p_i,p_j,D(g.unop),hp_(g.unop)) followed by eK_j.inv. Let c be a cocone on K, e : c.pt ~= B an isomorphism, and suppose c.leg_i followed by e.hom = eK_i.hom followed by constantModulePushforwardMap(Lambda,M,p_i,nu,pi_i,hpi_i) for every i. Then the canonical morphism colimit.desc K c is an epimorphism (only surjectivity, with no assertion of monomorphy).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-constant-module-pushforward-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Reindex the opposite of the small cofiltered category by a final functor from a nonempty directed partial order (Tag 0032). Its opposite is initial, so the restricted scheme cone is limiting. Affineness and qcqs are preserved. Finality identifies the colimits of the restricted and original pushforward diagrams.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
+   }
+  },
+  {
+   "text": "Pull each constant sheaf back to the limit. The constant-sheaf pullback comparison identifies it with the same constant sheaf on the limit. The identity and composition equations for pullback, including the adjunction units, show that transitions become identities. The colimit on the limit is the constant sheaf, since the directed category is nonempty and connected.",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-constant-module-pushforward-functoriality",
+    "lem-weil-pbc-colimit-constant-connected-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
+   }
+  },
+  {
+   "text": "Forget coefficients to abelian sheaves. Constant-sheaf pullback comparisons and pushforward commute with this forgetful functor. Apply Tag 09Z1 in degree zero: left exactness identifies R^0 of pushforward with ordinary pushforward. Under this identification, the higher-direct-image comparison components are the adjunction unit, constant-sheaf pullback comparison, and direct-image composition comparison. Thus `hK` and `hι` identify the supplied diagrams and cocone with the canonical continuity comparison.",
+   "uses": [
+    "sbc-lem-higher-direct-image-limit",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-constant-module-pushforward-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
+   }
+  },
+  {
+   "text": "Use only the surjectivity part of degree-zero continuity. A section on an affine etale test object at the limit descends to some stage. Its image in the filtered colimit is a preimage under the comparison. For an arbitrary etale test object, cover by affine etale objects and do this locally. Local lifting of sections makes the abelian comparison epic; global lifting on arbitrary test objects is not required.",
+   "uses": [
+    "sbc-lem-higher-direct-image-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
+   }
+  },
+  {
+   "text": "Forgetting coefficients preserves filtered colimits: sheafify the sectionwise filtered module colimit, whose underlying group is the filtered group colimit; the underlying abelian sheaf of module sheafification is abelian sheafification. Thus the underlying comparison is the abelian comparison of step 4. The forgetful functor is faithful, so it reflects epimorphisms by cancellation of any two maps. Hence the module comparison is epic. This argument does not need eventual equality of representatives.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
+   }
+  },
+  {
+   "text": "Transfer along the final reindexing and the isomorphisms `eK` and `e`. Composition with these isomorphisms preserves surjectivity.\n",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-constant-module-pushforward-functoriality",
+  "lem-weil-pbc-filtered-category-exists-directed-final",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lemma-constructible-pullback-constant",
+  "sbc-lem-higher-direct-image-limit"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008",
+  "by": "agent",
+  "note": "Split into the injectivity and surjectivity halves of degree-zero continuity; canonical Stacks Tags 09Z1, 09Z6 and 09YQ read online on 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "direct image constant module sheaf cofiltered inverse limit schemes affine transitions colimit",
+   "results": "Eight hits, all on affine-transition continuity of structure-sheaf sections in Mathlib.AlgebraicGeometry.AffineTransitionLimit. None is constant-module etale pushforward injectivity or surjectivity.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mono\", \"colimit.desc\"",
+   "results": "Five hits in SemiRingCat.FilteredColimits, on auxiliary descMonoidHom and descAddMonoidHom constructions; no etale constant-module comparison result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*pushforward.*(mono|epi)|[Mm]ono.*colimit.desc|[Ee]pi.*colimit.desc",
+   "results": "Five Mathlib hits on generators and coproducts; none proves either half of etale constant-module continuity.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "injectivity and surjectivity of constant module etale direct images under inverse limits with affine transitions",
+   "results": "Service unavailable: Internal Server Error. Loogle, LeanFinder and grep also run.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantModulePushforwardLimit",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constant-module-pushforward-limit",
+   "place": "Degree-zero continuity, surjectivity half"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantModulePushforwardLimitSurjectivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantModulePushforwardLimitSurjectivity.lean",
+  "declaration": "AlgebraicGeometry.Etale.epi_constantModulePushforwardComparison",
+  "statement": "theorem epi_constantModulePushforwardComparison\n    (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)\n    {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Scheme.{u}) (p : ∀ i, D.obj i ⟶ X)\n    (hp : ∀ {i j : I} (g : i ⟶ j), D.map g ≫ p j = p i)\n    [∀ {i j : I} (g : i ⟶ j), IsAffineHom (D.map g)]\n    [∀ i : I, QuasiCompact (p i)] [∀ i : I, QuasiSeparated (p i)]\n    {Y : Scheme.{u}} (ν : Y ⟶ X)\n    (π : (Functor.const I).obj Y ⟶ D) (hπ : ∀ i, π.app i ≫ p i = ν)\n    [QuasiCompact ν] [QuasiSeparated ν]\n    (hc : IsLimit (Cone.mk Y π))\n    (K : Iᵒᵖ ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (eK : ∀ i : Iᵒᵖ, K.obj i ≅\n      (lowerStar (ModuleCat.{u + 1} Λ) (p i.unop)).obj\n        ((constantSheaf (D.obj i.unop).smallEtaleTopology\n          (ModuleCat.{u + 1} Λ)).obj M))\n    (hK : ∀ {i j : Iᵒᵖ} (g : i ⟶ j), K.map g =\n      (eK i).hom ≫ constantModulePushforwardMap Λ M _ _ (D.map g.unop) (hp g.unop) ≫\n        (eK j).inv)\n    (c : Cocone K)\n    (e : c.pt ≅ (lowerStar (ModuleCat.{u + 1} Λ) ν).obj\n      ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))\n    (hι : ∀ i : Iᵒᵖ, c.ι.app i ≫ e.hom =\n      (eK i).hom ≫ constantModulePushforwardMap Λ M _ _ (π.app i.unop) (hπ i.unop)) :\n    Epi (colimit.desc K c)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T063515-L-3157596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T063515-L-3157596",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6500,3 +6500,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: merged deliver/M1/Sheaf.Topology.PresheafModuleStalkFunctor (stage 3; reviewer PASS; first push; landing 20261012T063514-L-3157254 (proof); batch 20261012T063502; modules 1; new nodes 0)
 - 06:35 L: merged deliver/M2/Sheaf.AlgebraicGeometry.Curve.DenseOpenPulledCounitHigh (stage 3; reviewer PASS; first push; landing 20261012T063515-L-3157398 (interface); batch 20261012T063502; modules 2; new nodes 1)
 - 06:35 L: merged deliver/M2/Sheaf.AlgebraicGeometry.NormalizedGenericDataCore (stage 3; reviewer PASS; first push; landing 20261012T063515-L-3157501 (proof); batch 20261012T063502; modules 1; new nodes 0)
+- 06:35 L: merged deliver/N1/Sheaf.AlgebraicGeometry.ConstantModulePushforwardLimit (stage 3; reviewer PASS; after a return; landing 20261012T063515-L-3157596 (interface); batch 20261012T063502; modules 3; new nodes 2)
