@@ -5796,3 +5796,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:30 L: merged deliver/M1/Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison (stage 3; reviewer PASS; after a return; landing 20261012T012858-L-817697 (interface); modules 1; new nodes 0; change records: coord/changes/etale-sheafH-comparison-proof-scopes.md)
 - 01:32 L: merged deliver/N1/Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints (stage 3; reviewer PASS; after a return; landing 20261012T013028-L-824126 (interface); modules 5; new nodes 4)
 - 01:33 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding (stage 3; reviewer PASS; after a return; landing 20261012T013244-L-831553 (interface); modules 2; new nodes 0)
+- 01:33 L: merged deliver/R1/Sheaf.AlgebraicGeometry.TensorPullback (stage 3; reviewer PASS; first push; landing 20261012T013337-L-835556 (proof); modules 1; new nodes 0)

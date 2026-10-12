@@ -152,7 +152,8 @@ same functor. Uniqueness of left adjoints gives the isomorphism; this is the ide
 case of step three, lem-pc-module-pullback-identity-composition. -/
 theorem nonempty_tensorPullbackId (T : Scheme.{w}) :
     Nonempty (tensorPullback (𝟙 T) ≅ 𝟭 T.Modules) := by
-  sorry
+  exact ⟨Adjunction.leftAdjointIdIso
+    (Classical.choice (nonempty_tensorPullbackAdjunction (𝟙 T))) (pushforwardId T)⟩
 
 /-- Composite pullback is naturally isomorphic to successive pullback.
 Source: Stacks, Tag 0097 (blueprint: def-pc-module-pullback).
@@ -161,7 +162,11 @@ identifies their right adjoint with pushforward along `g ≫ h`. Uniqueness of l
 gives this isomorphism; this is step three, lem-pc-module-pullback-identity-composition. -/
 theorem nonempty_tensorPullbackComp (h : Y ⟶ Z) :
     Nonempty (tensorPullback (g ≫ h) ≅ tensorPullback h ⋙ tensorPullback g) := by
-  sorry
+  exact ⟨(Adjunction.leftAdjointCompIso
+    (Classical.choice (nonempty_tensorPullbackAdjunction h))
+    (Classical.choice (nonempty_tensorPullbackAdjunction g))
+    (Classical.choice (nonempty_tensorPullbackAdjunction (g ≫ h)))
+    (pushforwardComp g h)).symm⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules
