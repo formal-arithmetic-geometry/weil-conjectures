@@ -14,24 +14,33 @@
  ],
  "proof": [
   {
-   "text": "Extend a function on increasing tuples by zero to arbitrary tuples. The\nrestriction formula and the isomorphisms e therefore show that every component of r\nis surjective. Apply the chain-map equation to such lifts: in e coordinates the\ndifferential of A is the signed face differential on increasing tuples.\nFor each injective tuple, sort its entries increasingly, multiply by the sign of the\nsorting permutation, and transport the section along the unique isomorphism between\nits chosen intersection and the sorted intersection. Set the value to zero on tuples\nwith repeated entries. The product universal properties provide these isomorphisms;\nsince opens form a poset, all their composites with face maps agree.\nThe signed extension is additive. For distinct entries, deleting an entry changes\nits sorting sign by exactly the quotient of the two face signs, so extension commutes\nwith the differential. With one repeated pair only the two faces deleting an\noccurrence survive, and their coefficients are opposite. With further repetitions\nevery face is zero. Transport through e gives a cochain map i. On increasing tuples\nthe sorting permutation is the identity, so hr gives i followed by r equal to the\nidentity, componentwise. Empty I gives zero products and the same construction.",
+   "text": "Define E_p by signed sorting and restriction along the index map for the sorting permutation; use zero on repeated tuples. The construction is additive. For an increasing tuple the sorting permutation is the identity; its sign is one and its index map is the identity since opens form a poset. Therefore E_p(s)(t)=s(t). Set f_p=e_p.hom followed by E_p. The hypothesis hr gives f_p followed by r_p equal to identity, after canceling the isomorphism e_p.hom.",
    "uses": [
     "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, Cohomology of Sheaves",
-    "place": "Tags 01FJ and 01FK; signed extension and restriction"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply the chain-map equation for r to f_p(a). The degreewise section identity gives r_{p+1}(d(f_p(a)))=d_A(a). Using hr, the increasing coordinates of d(f_p(a)) are consequently e_{p+1}.hom(d_A(a)). Apply [lem-pc-signed-cech-extension-differential]: d(f_p(a)) is signed extension of these coordinates, so equals f_{p+1}(d_A(a)).",
+   "uses": [
+    "lem-pc-signed-cech-extension-differential"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct i with CochainComplex.ofHom using the degree maps f_p and their commutation equations. HomologicalComplex.hom_ext and the already proved degreewise section identities show i followed by r is identity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-site-cech-complex"
+  "def-weil-pbc-site-cech-complex",
+  "lem-pc-signed-cech-extension-differential"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tags 01FJ and 01FK; signed extension and restriction"
+  "place": "Tags 01FJ and 01FK: explicit signed extension; the Lean assembly uses differential stability and hr directly"
  },
  "mathlib_searches": [
   {
@@ -119,9 +128,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T110325-L-624560",
+  "landing": "20261012T135248-L-1675443",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

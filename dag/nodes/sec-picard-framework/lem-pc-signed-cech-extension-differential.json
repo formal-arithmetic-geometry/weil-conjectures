@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-signed-cech-extension-differential",
+ "kind": "statement",
+ "title": "Signed Cech extension image is stable under differential",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ any linearly ordered type, $U:I\\to\\operatorname{Opens}(X)$ any family of opens [def-sc-zariski-site], and $F:\\operatorname{Opens}(X)^{\\mathrm{op}}\\to\\mathrm{Ab}$ an abelian presheaf. Let $S$ be chosen finite intersections and their index maps [def-weil-pbc-site-cech-complex]. For $p\\geq0$ put $O^p=\\prod_{t:\\operatorname{Fin}(p+1)\\to I,\\ t\\text{ strictly increasing}}F(S.W(p,t))$. Define $E_p:O^p\\to S.C^p(F)$ as follows. For injective $t$, let $\\sigma_t$ be its unique sorting permutation and set $E_p(s)(t)=\\operatorname{sgn}(\\sigma_t) F(S.\\operatorname{indexMap}(t,\\sigma_t)^{\\mathrm{op}})(s(t\\circ\\sigma_t))$; for noninjective $t$ set $E_p(s)(t)=0$. Let $d_p$ be the full signed Cech differential of $S$. Then for every $p\\geq0$ and $s\\in O^p$ one has $d_p(E_p(s))=E_{p+1}((d_p(E_p(s))(t))_{t\\text{ strictly increasing}})$.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FG: signed-extension formula following Definition 01FI; Lemma 01FJ and the differential-stability assertion before Definition 01FH"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the construction of [def-weil-pbc-site-cech-complex]. On injective t sort its entries by sigma=Tuple.sort(t), multiply by sign(sigma), and restrict along S.indexMap(t,sigma). Sorting is strictly increasing because it is monotone and injective. On a repeated tuple define E(s) to be zero. Restriction and integer multiplication are additive, so E is a group homomorphism. On an increasing tuple sigma is identity, and the index map is identity in the poset of opens; hence E(s)(t)=s(t).",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a tuple t of p+2 distinct entries, write sigma for its sorting permutation, and let k be the position in the sorted tuple of the entry originally at j. Write tau for the sorting permutation after deleting j. Move this entry to the end before and after sorting. These moves have p+1-j and p+1-k transpositions, respectively, while the remaining permutation is tau. Multiplicativity of the permutation sign therefore gives (-1)^j sign(tau)=sign(sigma)(-1)^k. Reindex the signed face sum by k. Both composed restriction maps have the same source and target and are equal since opens form a poset. Thus d(E(s))(t) equals sign(sigma) times the restriction of d(E(s)) at the sorted tuple.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If t has exactly one repeated pair in positions a<b, with other entries distinct, only the two faces deleting a or b can contribute. They have the same sorted tuple. Their sorting permutations differ in sign by (-1)^(b-a-1), as the surviving equal entry moves past precisely b-a-1 entries. Including the face coefficients (-1)^a and (-1)^b makes the two coefficients opposite. Their restriction maps coincide in the poset of opens, so the terms cancel. If the repeated entry occurs at least three times or there are two different repeated pairs, deleting any one entry leaves a repeated tuple, so every face term is zero. Hence d(E(s)) vanishes on all repeated tuples.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The distinct-tuple formula and vanishing on repeated tuples together identify d(E_p(s)) with E_{p+1} of its increasing coordinates, pointwise. When I is empty no tuple exists, so the same equality is vacuous; in degree zero the distinct/repeated cases specialize to the signed two-term difference on pairs.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FG: signed-extension formula following Definition 01FI; Lemma 01FJ and the differential-stability assertion before Definition 01FH",
+  "note": "The Stacks source omits the verification; the steps here spell out the deletion-sign identity and repeated-pair cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "signed extension from strictly increasing tuples to all tuples commutes with Cech differential",
+   "results": "Candidates: Rep.standardComplex.d_of, AlgebraicTopology.DoldKan.hσ'_eq, AlgebraicTopology.DoldKan.hσ'_eq', AlgebraicTopology.DoldKan.hσ, AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq, AlgebraicTopology.DoldKan.decomposition_Q, AlgebraicTopology.DoldKan.N₂_obj_X_d, AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq. No signed Cech extension theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.Perm.sign",
+   "results": "Candidates: Equiv.Perm.sign, Equiv.Perm.sign_surjective, Equiv.Perm.sign_abs, Equiv.Perm.sign_refl, Equiv.Perm.sign_one, Equiv.Perm.mem_ofSign, Equiv.Perm.IsSwap.sign_eq, Equiv.Perm.sign_swap. No signed Cech extension theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sign.*succAbove|succAbove.*sign|signed.*[Cc]ech|[Cc]ech.*signed",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The differential of an alternating Cech cochain is alternating",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSection",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "Proof: passage from full Cech tuples to the alternating complex indexed by subsets; differential compatibility of the signed extension in the alternating comparison",
+   "via": [
+    "lem-pc-alternating-cech-section",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SignedCechExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/SignedCechExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.signedCechExtension_differential",
+  "statement": "theorem signedCechExtension_differential (p : ℕ)\n    (s : ∀ t : {t : Fin (p + 1) → I // StrictMono t}, F.obj (op (S.W p t.1))) :\n    S.differentialValue F p (signedCechExtension X U F S p s) =\n      signedCechExtension X U F S (p + 1)\n        (fun t ↦ S.differentialValue F p (signedCechExtension X U F S p s) t.1)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T135248-L-1675443",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T135248-L-1675443",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
