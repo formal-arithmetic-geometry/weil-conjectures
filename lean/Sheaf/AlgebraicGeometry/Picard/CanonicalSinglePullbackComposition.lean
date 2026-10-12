@@ -6,8 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.Picard.HomotopySinglePullbackComposition
 
 /-! # Single-module comparison and composition of two pullbacks
 
@@ -26,6 +25,10 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 200000 in
+-- The selected derived counits have large dependent types.
 /-- Compatibility with composition of two morphisms, before comparing square paths.
 Source: Stacks Project, Tag 0D5S, and `Functor.leftDerived_fac_app` applied to the
 factorization in `exists_derivedPullbackComposition`.
@@ -59,6 +62,131 @@ theorem canonicalSinglePullbackComposition
       canonicalSinglePullbackMap f ((pullback g).obj N) ≫
       (DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map
-          ((pullbackComp f g).hom.app N) := by sorry
+          ((pullbackComp f g).hom.app N) := by
+  let Q_X := DerivedCategory.Qh.{w}
+    (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  let Q_Y := DerivedCategory.Qh.{w}
+    (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+  let Q_Z := DerivedCategory.Qh.{w}
+    (C := SheafOfModules.{u} (moduleRings Z.toRingedSpace))
+  let E := (HomotopyCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj N
+  let :=  (Classical.choose exists_derivedPullbackComposition.{u,w}) f
+  let :=  (Classical.choose exists_derivedPullbackComposition.{u,w}) g
+  let :=  (Classical.choose exists_derivedPullbackComposition.{u,w}) (f ≫ g)
+  let C := (Classical.choose (Classical.choose_spec (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition.{u,w})))) f g
+  let eps := (Classical.choose (Classical.choose_spec
+    exists_derivedPullbackComposition.{u,w})) (f ≫ g)
+  let W := HomotopyCategory.quasiIso
+    (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ)
+  let : (derivedPullback (f ≫ g)).IsLeftDerivedFunctor eps W :=
+    (Classical.choose (Classical.choose_spec (Classical.choose_spec
+      exists_derivedPullbackComposition.{u,w}))) (f ≫ g)
+  have hfac := (derivedPullback (f ≫ g)).leftDerived_fac_app eps W
+    (derivedPullback g ⋙ derivedPullback f)
+    ((Functor.associator DerivedCategory.Qh (derivedPullback g)
+        (derivedPullback f)).inv ≫
+      Functor.whiskerRight
+        ((Classical.choose (Classical.choose_spec
+          exists_derivedPullbackComposition.{u,w})) g) (derivedPullback f) ≫
+      (Functor.associator _ DerivedCategory.Qh (derivedPullback f)).hom ≫
+      Functor.whiskerLeft _
+        ((Classical.choose (Classical.choose_spec
+          exists_derivedPullbackComposition.{u,w})) f) ≫
+      (Functor.associator _ _
+        (DerivedCategory.Qh
+          (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))).inv ≫
+      Functor.whiskerRight
+        (Functor.mapHomotopyCategoryCompIso
+          ((conjugateIsoEquiv
+            (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g)))
+            ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp
+              (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm
+            (Scheme.Modules.pushforwardComp f g).symm)
+          (ComplexShape.up ℤ)).hom
+        (DerivedCategory.Qh
+          (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))) E
+  have hc := (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition.{u,w})))).1 f g
+  simp only [Functor.comp_obj, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.associator_hom_app,
+    Category.id_comp] at hfac
+  have hfacC := (congrArg
+    (fun α ↦ α.app (Q_Z.obj E) ≫ eps.app E) hc).trans hfac
+  let ε_f := (Classical.choose (Classical.choose_spec
+    exists_derivedPullbackComposition.{u,w})) f
+  let ε_g := (Classical.choose (Classical.choose_spec
+    exists_derivedPullbackComposition.{u,w})) g
+  let t_f := (Classical.choose (exists_tensorPullbackAdjunction f)).leftAdjointUniq
+    (pullbackPushforwardAdjunction f)
+  let t_g := (Classical.choose (exists_tensorPullbackAdjunction g)).leftAdjointUniq
+    (pullbackPushforwardAdjunction g)
+  let t_fg := (Classical.choose (exists_tensorPullbackAdjunction (f ≫ g))).leftAdjointUniq
+    (pullbackPushforwardAdjunction (f ≫ g))
+  let r_f := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+    ((HomologicalComplex.singleMapHomologicalComplex
+      (tensorPullback f) (ComplexShape.up ℤ) 0).hom.app ((pullback g).obj N)) ≫
+    (HomotopyCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map (t_f.hom.app ((pullback g).obj N))
+  let r_g := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+    ((HomologicalComplex.singleMapHomologicalComplex
+      (tensorPullback g) (ComplexShape.up ℤ) 0).hom.app N) ≫
+    (HomotopyCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map (t_g.hom.app N)
+  let r_fg := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+    ((HomologicalComplex.singleMapHomologicalComplex
+      (tensorPullback (f ≫ g)) (ComplexShape.up ℤ) 0).hom.app N) ≫
+    (HomotopyCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map (t_fg.hom.app N)
+  let T_f := (tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ)
+  let T_g := (tensorPullback g).mapHomotopyCategory (ComplexShape.up ℤ)
+  let c := (Functor.mapHomotopyCategoryCompIso
+    ((conjugateIsoEquiv
+      (Classical.choose (exists_tensorPullbackAdjunction (f ≫ g)))
+      ((Classical.choose (exists_tensorPullbackAdjunction g)).comp
+        (Classical.choose (exists_tensorPullbackAdjunction f)))).symm
+      (pushforwardComp f g).symm) (ComplexShape.up ℤ)).hom.app E
+  let p := (HomotopyCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map ((pullbackComp f g).hom.app N)
+  have ht : c ≫ r_fg = T_f.map r_g ≫ r_f ≫ p :=
+    homotopySinglePullbackComposition f g N
+  have hn := ε_f.naturality r_g
+  change (derivedPullback f).map (Q_Y.map r_g) ≫
+      ε_f.app ((HomotopyCategory.singleFunctor
+        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((pullback g).obj N)) =
+    ε_f.app (T_g.obj E) ≫ Q_X.map (T_f.map r_g) at hn
+  change C.hom.app (Q_Z.obj E) ≫ eps.app E =
+    (derivedPullback f).map (ε_g.app E) ≫ ε_f.app (T_g.obj E) ≫
+      Q_X.map c at hfacC
+  have h : C.hom.app (Q_Z.obj E) ≫
+      (eps.app E ≫ Q_X.map r_fg) =
+    (derivedPullback f).map (ε_g.app E ≫ Q_Y.map r_g) ≫
+      (ε_f.app ((HomotopyCategory.singleFunctor
+        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((pullback g).obj N)) ≫
+        Q_X.map r_f) ≫ Q_X.map p := by
+    calc
+      _ = (C.hom.app (Q_Z.obj E) ≫ eps.app E) ≫
+          Q_X.map r_fg := (Category.assoc _ _ _).symm
+      _ = ((derivedPullback f).map (ε_g.app E) ≫ ε_f.app (T_g.obj E) ≫
+          Q_X.map c) ≫ Q_X.map r_fg :=
+        congrArg (fun k ↦ k ≫ Q_X.map r_fg) hfacC
+      _ = (derivedPullback f).map (ε_g.app E) ≫ ε_f.app (T_g.obj E) ≫
+          Q_X.map (c ≫ r_fg) := by
+        simp only [Functor.map_comp, Category.assoc]
+      _ = (derivedPullback f).map (ε_g.app E) ≫ ε_f.app (T_g.obj E) ≫
+          Q_X.map (T_f.map r_g ≫ r_f ≫ p) :=
+        congrArg (fun k ↦ (derivedPullback f).map (ε_g.app E) ≫
+          ε_f.app (T_g.obj E) ≫ Q_X.map k) ht
+      _ = _ := by
+        simp only [Functor.map_comp, Category.assoc]
+        simpa only [Category.assoc] using congrArg
+          (fun k ↦ (derivedPullback f).map (ε_g.app E) ≫
+            k ≫ Q_X.map r_f ≫ Q_X.map p) hn.symm
+  simpa only [canonicalSinglePullbackMap, r_f, r_g, r_fg, p, E, C, eps, ε_f, ε_g,
+    t_f, t_g, t_fg, Q_X, Q_Y, Q_Z, DerivedCategory.singleFunctor, DerivedCategory.singleFunctors,
+    SingleFunctors.postcomp, Functor.map_comp, Functor.comp_map, Functor.comp_obj,
+    Category.assoc] using h
+
 
 end AlgebraicGeometry.Scheme.Modules
