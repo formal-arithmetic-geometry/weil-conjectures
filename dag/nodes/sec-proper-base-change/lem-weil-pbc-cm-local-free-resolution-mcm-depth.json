@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-cm-local-free-resolution-mcm-depth",
+ "kind": "statement",
+ "title": "Lower depth bound for a nonzero finite left syzygy",
+ "statement": "Let R be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], let d,e be natural numbers with e ≤ d, and suppose depth(R) ≥ d [def-weil-pbc-depth]. Let M be a nonzero finite R-module [def-weil-finitely-generated-module] of depth e. Let S be an exact sequence [def-weil-pbc-exact-sequence] 0 → K → F_{d-e-1} → ⋯ → F_0 → M → 0, with finite free F_i [def-weil-pbc-free-module], permitting a linear equivalence from its penultimate object to M. If K is finite and nonzero, then depth(K) ≥ d. When e=d the sequence is 0 → K → M → 0.",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-free-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tags 00NG, 00NE and 00LX; decomposition of the syzygy argument"
+ },
+ "proof": [
+  {
+   "text": "Represent successive syzygies by kernels. Exactness gives the short exact sequences 0 → N_{j+1} → F_j → N_j → 0, with N_0 linearly equivalent to M and N_{d-e} to K. Each kernel is finite by the Noetherian submodule theorem.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each nonzero finite free F_j, choose a finite basis and transport regular sequences on R componentwise to the finite power. Regularity and depth are invariant under linear equivalence. Taking suprema shows depth(F_j) ≥ depth(R) ≥ d.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct to show depth(N_j) ≥ min(d,e+j) for nonzero N_j. The initial case is depth(M)=e. For three nonzero terms apply part (3) of the depth lemma. A zero quotient identifies the next syzygy with the free middle term. A zero middle term forces its kernel zero. A zero kernel makes the assertion vacuous, with the next step handled by the zero-quotient case.",
+   "uses": [
+    "lem-weil-pbc-depth-in-ses",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At j=d-e the minimum equals d since e≤d. Nontriviality of K supplies the desired lower bound. For d=e, exactness with zero endpoints gives K ≃ M directly.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-depth",
+  "lem-weil-pbc-depth-in-ses"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00NG, 00NE and 00LX(3); explicit syzygy induction, including zero terms, reviewed and written out by T3 second reader."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lower bound on depth of successive kernels in a finite exact sequence of free modules over a local Cohen Macaulay ring",
+   "results": "Module.supportDim_add_length_eq_supportDim_of_isRegular, Module.length_eq_add_of_exact, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Module.supportDim_le_supportDim_quotSMulTop_succ, ringKrullDim_le_ringKrullDim_add_spanFinrank, Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, ringKrullDim_le_ringKrullDim_add_card",
+   "date": "2026-10-13",
+   "verdict": "Related facts only; no finite-sequence lower-depth theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, RingTheory.Sequence.IsRegular",
+   "results": "No results",
+   "date": "2026-10-13",
+   "verdict": "Related facts only; no finite-sequence lower-depth theorem found."
+  },
+  {
+   "tool": "grep",
+   "query": "first_term|syzygy|depth.*[Ff]ree|[Ff]ree.*depth; Module.Finite.of_injective; supportDim_le_ringKrullDim",
+   "results": "Searched lean/Sheaf/RingTheory and lean/WeilConjectures/RingTheory plus Mathlib Noetherian/Basic and KrullDimension/Module. Found original item, its caller CohenMacaulayFreeResolution and unrelated graded syzygies; no lower-depth theorem. Module.Finite.of_injective closes finiteness directly; depth_le_supportDim and supportDim_le_ringKrullDim close the upper bound in the item.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate lower-bound theorem; used existing results to avoid two unnecessary holes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The depth of a nonzero syzygy in an exact sequence of finite free modules is at least the original depth plus its order capped by the depth of the ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CohenMacaulayFreeResolutionMCM",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cm-local-free-resolution-mcm",
+   "place": "stage-3 decomposition",
+   "via": [
+    "lem-weil-pbc-cm-local-free-resolution-mcm"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CohenMacaulayDepthFirstTerm",
+  "file": "lean/Sheaf/RingTheory/CohenMacaulayDepthFirstTerm.lean",
+  "declaration": "IsLocalRing.first_term_depth_ge",
+  "statement": "theorem first_term_depth_ge\n    {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M]\n    (d e : ℕ)\n    (hcm : (d : ℕ∞) ≤ depth (R := R) R)\n    (he : depth (R := R) M = (e : ℕ∞)) (hed : e ≤ d)\n    (S : ComposableArrows (ModuleCat.{max u v} R) (d - e + 3))\n    (hS : S.Exact) (hzero0 : IsZero (S.obj' 0))\n    (hzero1 : IsZero (S.obj' (d - e + 3)))\n    (hM : Nonempty ((S.obj' (d - e + 2)) ≃ₗ[R] M))\n    (hfree : ∀ i : Fin (d - e),\n      Module.Free R (S.obj' (i.val + 2) (by omega)) ∧\n      Module.Finite R (S.obj' (i.val + 2) (by omega)))\n    [Module.Finite R (S.obj' 1)] [Nontrivial (S.obj' 1)] :\n    (d : ℕ∞) ≤ depth (R := R) (S.obj' 1)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T225331-L-1813427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T225331-L-1813427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

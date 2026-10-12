@@ -27,7 +27,7 @@
  },
  "proof": [
   {
-   "text": "Read the sequence from M to K as short exact sequences 0 → N_{j+1} → F_j → N_j → 0, with N_0 isomorphic to M. Each N_{j+1} is finite by the Noetherian submodule theorem.",
+   "text": "Exactness at object 1 and the zero initial object make S.map' 1 2 injective (ShortComplex.Exact.mono_g and ModuleCat.mono_iff_injective). If d-e>0, object 2 is finite by hfree at index zero; if d=e, its linear equivalence with M makes it finite (Module.Finite.equiv). Module.Finite.of_injective then makes object 1 finite over the Noetherian ring.",
    "uses": [
     "def-weil-pbc-exact-sequence",
     "lem-weil-pbc-noetherian-submodule-finite"
@@ -35,45 +35,32 @@
    "elementary": false
   },
   {
-   "text": "Every nonzero finite free term has depth at least d: every R-regular sequence acts componentwise regularly on R^n for n≥1. A finite basis transports this fact to F_j. Taking suprema of lengths gives depth(F_j) ≥ depth(R) ≥ d.",
+   "text": "Split object 1 into subsingleton or nontrivial. The first branch is the conclusion. In the nontrivial branch apply the lower-depth induction lemma.",
    "uses": [
-    "def-weil-pbc-free-module",
-    "def-weil-pbc-regular-sequence",
-    "def-weil-pbc-depth"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Induct on j to obtain depth(N_j) ≥ min(d,e+j) whenever N_j is nonzero. For nonzero terms use part (3) of the depth lemma. If N_j=0, N_{j+1} is isomorphic to F_j and the free-module bound applies; if F_j=0 its kernel is zero. A zero next kernel needs no depth estimate, and the induction continues with the zero-quotient case. Depth is preserved by the linear isomorphisms since regular sequences are preserved.",
-   "uses": [
-    "lem-weil-pbc-depth-in-ses",
-    "def-weil-pbc-depth"
+    "lem-weil-pbc-cm-local-free-resolution-mcm-depth"
    ],
    "elementary": false
   },
   {
-   "text": "At j=d-e, e≤d makes the lower bound d. For nonzero K, depth(K) ≤ dim Supp(K) ≤ dim R=d supplies the opposite inequality. If K is zero use the subsingleton alternative. When e=d the endpoint exactness gives K ≅ M directly.",
+   "text": "For the nontrivial finite object 1, depth_le_supportDim bounds its depth by its support dimension, and Mathlib Module.supportDim_le_ringKrullDim bounds that by ringKrullDim R=d. Combine this upper bound with the lower bound by antisymmetry.",
    "uses": [
     "lem-weil-pbc-depth-le-support-dimension",
     "def-weil-pbc-krull-dimension-ring"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-exact-sequence",
   "lem-weil-pbc-noetherian-submodule-finite",
-  "def-weil-pbc-free-module",
-  "def-weil-pbc-regular-sequence",
-  "def-weil-pbc-depth",
-  "lem-weil-pbc-depth-in-ses",
+  "lem-weil-pbc-cm-local-free-resolution-mcm-depth",
   "lem-weil-pbc-depth-le-support-dimension",
   "def-weil-pbc-krull-dimension-ring"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tags 00NG and 00NE, whose proof refers to 00LX, part (3), and 00LK for the upper bound; https://stacks.math.columbia.edu/tag/00NG; finite truncation/depth induction written out by E1 second reader"
+  "place": "Second reading by T3: direct Mathlib finiteness proof and existing support-dimension upper bound; only the lower-depth induction is split off."
  },
  "mathlib_searches": [
   {
@@ -139,9 +126,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T194107-L-453882",
+  "landing": "20261012T225331-L-1813427",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
