@@ -7874,3 +7874,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/N1/Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal (stage 3; reviewer PASS; first push; landing 20261012T135255-L-1678731 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/N1/Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluation (stage 3; reviewer PASS; first push; landing 20261012T135256-L-1678841 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:52 L: merged deliver/N1/Sheaf.AlgebraicGeometry.EtaleTensorOpenSections (stage 3; reviewer PASS; first push; landing 20261012T135256-L-1679188 (interface); batch 20261012T135212; modules 2; new nodes 2)
+- 13:52 L: merged deliver/N1/Sheaf.CategoryTheory.SheafRingObjectsInjective (stage 3; reviewer PASS; first push; landing 20261012T135256-L-1679383 (proof); batch 20261012T135212; modules 1; new nodes 0)
