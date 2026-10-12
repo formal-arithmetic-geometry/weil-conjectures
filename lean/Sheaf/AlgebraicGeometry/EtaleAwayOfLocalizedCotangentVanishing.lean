@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Mathlib.RingTheory.Etale.Locus
+import Mathlib.RingTheory.Etale.Locus
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
@@ -51,6 +51,13 @@ theorem exists_etale_away_of_localized_cotangent_vanishing
     (hΩ : Subsingleton (LocalizedModule q.primeCompl (KaehlerDifferential A C))) :
     ∃ h : C, h ∉ q ∧
       Etale (Spec.map (CommRingCat.ofHom (algebraMap A (Localization.Away h)))) := by
-  sorry
+  have hq : (⟨q, inferInstance⟩ : PrimeSpectrum C) ∈ Algebra.etaleLocus A C := by
+    rw [Algebra.etaleLocus_eq_compl_support]
+    exact ⟨Module.notMem_support_iff.mpr hΩ, Module.notMem_support_iff.mpr hH⟩
+  have : Algebra.IsEtaleAt A q := hq
+  obtain ⟨h, hh, he⟩ := Algebra.exists_etale_of_isEtaleAt (R := A) q
+  refine ⟨h, hh, ?_⟩
+  apply (HasRingHomProperty.Spec_iff (P := @Etale)).mpr
+  exact (RingHom.etale_algebraMap).mpr he
 
 end AlgebraicGeometry
