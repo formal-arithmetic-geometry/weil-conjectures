@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-finite-free-stalk-unit-cancellation-at",
+ "kind": "statement",
+ "title": "One unit cancellation at a specified stalk differential",
+ "statement": "Let Y be a scheme [def-pc-scheme], y a point, S=Spec(O_{Y,y}), and t:Spec(kappa(y))->S its residue morphism. Let P be a cochain complex [def-pc-derived-category] of O_S-modules supported in degrees 0 through d. Suppose n:Z->N gives free-sheaf sizes [def-weil-pbc-free-module] for P in every degree. Fix a natural number i<d such that the degree i to i+1 differential of t^*P [def-pc-derived-pullback] is nonzero. Then there exist a complex P′ and sizes n′ with P homotopy equivalent to P′, both original support bounds, free terms of the specified sizes, n′(i)+1=n(i), n′(i+1)+1=n(i+1), and n′(j)=n(j) for all other degrees. The cancellation takes place at the supplied degree i; this statement does not locate a nonzero differential.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MT (lemma-add-trivial-complex), one unit-entry cancellation; blueprint lem-pc-perfect-locus proof step 4. Source read at https://stacks.math.columbia.edu/tag/00MT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-weil-pbc-free-module",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-spec-tilde-free-module] (Mathlib tildeFinsupp and isoTop) to identify each chosen free sheaf with the sheaf associated to the finite free module on ULift(Fin(n(j))). Morphisms between these free sheaves are determined by their generator images (SheafOfModules.freeHomEquiv). Reading these images in global sections gives their matrices over the stalk. The pullbackFreeIso identifications send each generator to the corresponding generator; naturality of the pullback unit says the coefficient r becomes its residue image. Thus a nonzero pulled-back differential has a coefficient whose residue is nonzero.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specified nonzero residue differential has a nonzero coefficient. Its lift is outside the maximal ideal of the local stalk, hence is a unit. Both supplied degrees i and i+1 lie in [0,d] by i<d.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Reverse the grading, replace ULift(Fin(n(j))) by Fin(n(j)) using its canonical equivalence, and apply [lem-weil-pbc-free-complex-unit-entry-splits] to the unit coefficient. Its complement has rank one less at the two affected degrees and unchanged ranks elsewhere. The split identity complex is contractible: its homotopy has the inverse of its differential in the reverse direction and zero in every other position. The homotopy identity is the identity map in the two affected degrees and the unique zero map outside them. The direct-sum decomposition therefore gives projection and inclusion inverse up to this homotopy.",
+   "uses": [
+    "lem-weil-pbc-free-complex-unit-entry-splits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the additive associated-sheaf functor to the complement, the projection, inclusion and contracting homotopy, and reverse grading back. Functorial preservation of composition, addition, identities and zero carries the homotopy equations to the sheaf complex. Its basis identifications give its free terms by [lem-weil-pbc-spec-tilde-free-module]. Both cancelled degrees lie inside [0,d]; outside that interval the complement agrees up to isomorphism with the original zero term. Thus the support bounds persist. Record the two exact rank equalities and equality in every other degree. No iteration or minimality conclusion is used.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-weil-pbc-free-complex-unit-entry-splits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C2",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MT, https://stacks.math.columbia.edu/tag/00MT, read in second review; fixed-degree matrix cancellation and sheafification, with degree selection removed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A nonzero residue differential in a specified degree of a finite free complex over a local ring splits off a contractible identity complex",
+   "results": "Service returned Internal Server Error; unavailable, no absence conclusion.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unit matrix coefficient at a fixed degree gives a homotopy equivalent finite free complex whose two adjacent ranks decrease by one",
+   "results": "Homotopy.mkInductive and its auxiliary declarations, Homotopy.nullHomotopy′ and DoldKan homotopy lemmas. None constructs the complementary finite free complex with specified ranks.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, HomotopyEquiv",
+   "results": "Mapping cone and K-injective/projective homotopy equivalence operations; no fixed-degree unit cancellation.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(cancel|splitting)|isZero_of_isStrictly; rg cancellation, nonzero differential, unit, splitting and HomotopyEquiv in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib has HomologicalComplex.shape and CochainComplex.isZero_of_isStrictlyGE/LE, used to locate the degree in the parent proof. Sheaf.Algebra.Homology.UnitEntrySplits is module-valued, not the associated-sheaf contraction. LocalSplittingFiniteFree and FlatModelFiniteFreeShortening concern different hypotheses; FiniteFreeStalkMinimalComplex depends on this item, so cannot be used to prove it. No existing fixed-degree sheaf cancellation found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkUnitCancellation",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-free-stalk-unit-cancellation",
+   "place": "Matrix cancellation at the degree first located by the support argument",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkUnitCancellationAt",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkUnitCancellationAt.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_stalk_unit_cancellation_at",
+  "statement": "theorem exists_stalk_unit_cancellation_at {Y : Scheme.{u}} (y : Y)\n    (P : CochainComplex (Spec (Y.presheaf.stalk y)).Modules ℤ) (d : ℕ)\n    (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d) (n : ℤ → ℕ)\n    (hfree : ∀ j : ℤ, Nonempty\n      (P.X j ≅ SheafOfModules.free\n        (R := (Spec (Y.presheaf.stalk y)).ringCatSheaf) (ULift.{u} (Fin (n j)))))\n    (i : ℕ) (hi : i < d)\n    (hne :\n      (((Modules.pullback (Spec.map (Y.residue y))).mapHomologicalComplex _).obj\n        P).d (i : ℤ) ((i : ℤ) + 1) ≠ 0) :\n    ∃ (P' : CochainComplex (Spec (Y.presheaf.stalk y)).Modules ℤ)\n      (n' : ℤ → ℕ),\n      Nonempty (HomotopyEquiv P P') ∧\n      P'.IsStrictlyGE 0 ∧ P'.IsStrictlyLE d ∧\n      (∀ j : ℤ, Nonempty\n        (P'.X j ≅ SheafOfModules.free\n          (R := (Spec (Y.presheaf.stalk y)).ringCatSheaf) (ULift.{u} (Fin (n' j))))) ∧\n      n' (i : ℤ) + 1 = n (i : ℤ) ∧\n      n' ((i : ℤ) + 1) + 1 = n ((i : ℤ) + 1) ∧\n      (∀ j : ℤ, j ≠ (i : ℤ) → j ≠ (i : ℤ) + 1 → n' j = n j)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T173812-L-3291614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T173812-L-3291614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,41 +15,26 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-weil-pbc-spec-tilde-free-module] (Mathlib tildeFinsupp and isoTop) to identify each chosen free sheaf with the sheaf associated to the finite free module on ULift(Fin(n(j))). Morphisms between these free sheaves are determined by their generator images (SheafOfModules.freeHomEquiv). Reading these images in global sections gives their matrices over the stalk. The pullbackFreeIso identifications send each generator to the corresponding generator; naturality of the pullback unit says the coefficient r becomes its residue image. Thus a nonzero pulled-back differential has a coefficient whose residue is nonzero.",
-   "uses": [
-    "lem-weil-pbc-spec-tilde-free-module"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A coefficient with nonzero residue is not in the maximal ideal of the local stalk, hence is a unit. Off-shape differentials are zero. A differential involving a degree outside [0,d] is zero because that term is a zero object and pullback preserves zero objects. Hence the nonzero map goes from i to i+1 with i a natural number less than d.",
+   "text": "Unpack the negation of all residue differentials vanishing to obtain Q.d a b nonzero. HomologicalComplex.shape forces a+1=b. A zero original differential would have zero pullback by Functor.map_zero, so P.d a b is nonzero. The lower support bound and CochainComplex.isZero_of_isStrictlyGE rule out a<0 by IsZero.eq_of_src; the upper bound and isZero_of_isStrictlyLE rule out b>d by IsZero.eq_of_tgt. Write a as a natural number i and deduce i<d. All these statements are Mathlib lemmas and integer arithmetic.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Reverse the grading, replace ULift(Fin(n(j))) by Fin(n(j)) using its canonical equivalence, and apply [lem-weil-pbc-free-complex-unit-entry-splits] to the unit coefficient. Its complement has rank one less at the two affected degrees and unchanged ranks elsewhere. The split identity complex is contractible: its homotopy has the inverse of its differential in the reverse direction and zero in every other position. The homotopy identity is the identity map in the two affected degrees and the unique zero map outside them. The direct-sum decomposition therefore gives projection and inclusion inverse up to this homotopy.",
+   "text": "Apply [lem-pc-finite-free-stalk-unit-cancellation-at] to the specified nonzero degree i to i+1. Unpack its complementary complex and ranks and insert the already proved i<d to assemble all clauses of the unchanged statement.",
    "uses": [
-    "lem-weil-pbc-free-complex-unit-entry-splits"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the additive associated-sheaf functor to the complement, the projection, inclusion and contracting homotopy, and reverse grading back. Functorial preservation of composition, addition, identities and zero carries the homotopy equations to the sheaf complex. Its basis identifications give its free terms by [lem-weil-pbc-spec-tilde-free-module]. Both cancelled degrees lie inside [0,d]; outside that interval the complement agrees up to isomorphism with the original zero term. Thus the support bounds persist. Record the two exact rank equalities and equality in every other degree. No iteration or minimality conclusion is used.",
-   "uses": [
-    "lem-weil-pbc-spec-tilde-free-module"
+    "lem-pc-finite-free-stalk-unit-cancellation-at"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-spec-tilde-free-module",
-  "lem-weil-pbc-free-complex-unit-entry-splits"
+  "lem-pc-finite-free-stalk-unit-cancellation-at"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "V2",
+  "group": "C2",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00MT applied once; free-sheaf matrix comparison and contraction spelled out"
+  "place": "Tag 00MT; second reading proves support/degree selection using Mathlib and leaves only cancellation at the supplied degree open"
  },
  "mathlib_searches": [
   {
@@ -136,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T165538-L-2941850",
+  "landing": "20261012T173812-L-3291614",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
