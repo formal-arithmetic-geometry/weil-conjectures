@@ -8,6 +8,8 @@ module
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+
 /-!
 # Higher right derived functors of exact functors
 
@@ -41,7 +43,10 @@ theorem isZero_rightDerived_obj_of_exact
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]
     [Abelian A] [Abelian B] [EnoughInjectives A] [EnoughInjectives B]
     (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v]
-    (M : A) (q : ℕ) : IsZero ((v.rightDerived (q + 1)).obj M) :=
-  sorry
+    (M : A) (q : ℕ) : IsZero ((v.rightDerived (q + 1)).obj M) := by
+  let I : InjectiveResolution M := Classical.choice (HasInjectiveResolution.out (Z := M))
+  refine IsZero.of_iso ?_ (I.isoRightDerivedObj v (q + 1))
+  exact (v.map_isZero (I.cocomplex_exactAt_succ q).isZero_homology).of_iso
+    ((I.cocomplex.sc (q + 1)).mapHomologyIso v)
 
 end CategoryTheory.Functor
