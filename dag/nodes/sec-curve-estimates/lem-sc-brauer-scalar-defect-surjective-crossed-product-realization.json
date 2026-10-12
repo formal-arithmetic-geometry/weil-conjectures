@@ -1,0 +1,105 @@
+{
+ "id": "lem-sc-brauer-scalar-defect-surjective-crossed-product-realization",
+ "kind": "statement",
+ "title": "Crossed-product realization data",
+ "statement": "For every field K and continuous degree-two units class x, there exist a central simple K-algebra, a nonzero matrix size, a splitting equivalence, and locally constant matrix lifts satisfying the descent and scalar-defect equations for x.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "The scalar-defect construction following Lemma 03R6, Theorem 03R7, and Section 0DVG"
+ },
+ "stmt_deps": [
+  "def-sc-brauer-scalar-defect",
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct a finite crossed product from a locally constant cocycle representative and use its regular splitting representation to obtain the stated descent and scalar-defect equations.",
+   "uses": [
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-brauer-scalar-defect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "The scalar-defect construction following Lemma 03R6, Theorem 03R7, and Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous second Galois cohomology Brauer scalar defect",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "central simple algebra matrix splitting Galois descent scalar two cocycle; equal scalar defect cohomology classes if and only if Brauer equivalent; continuous Galois two cocycle realized by a central simple crossed product algebra",
+   "results": "IsBrauerEquivalent, CSA, BrauerGroup, Hilbert90 degree one only. No scalar-defect construction, faithfulness, or crossed-product realization.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "BrauerGroup|scalarDefect|crossedProduct|HasBrauerScalarDefect in Mathlib, WeilConjectures and Sheaf; blueprint_refs scalar defect, 03R7, crossed product, Brauer equivalence",
+   "results": "Only the parent comparison. Upstream ReducedNorm proves separable-closure matrix splitting and pointwise inner conjugacy, but not locally constant lifts or continuous scalar-defect classes. Blueprint searches found no corresponding node.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.BrauerScalarDefectSurjective",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-scalar-defect-surjective",
+   "place": "crossed-product realization data",
+   "via": [
+    "lem-sc-brauer-scalar-defect-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.CrossedProductRealization",
+  "file": "lean/Sheaf/FieldTheory/CrossedProductRealization.lean",
+  "declaration": "Field.exists_crossedProduct_realization_data",
+  "statement": "theorem exists_crossedProduct_realization_data (K : Type u) [Field K] (x : GaloisUnitsH2 K) : ∃ (A : CSA.{u, u} K) (n : ℕ) (hn : n ≠ 0) (e : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K] Matrix (Fin n) (Fin n) (SeparableClosure K)) (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) → Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K)), IsLocallyConstant b ∧ ∃ z : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2, (ContinuousCohomology.π (galoisUnitsTopRep K) 2).hom z = x ∧ (∀ (g : SeparableClosure K ≃ₐ[K] SeparableClosure K) (a : A), (e (1 ⊗ₜ[K] a)).map g = ((b g)⁻¹).val * e (1 ⊗ₜ[K] a) * (b g).val) ∧ (∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) = Matrix.GeneralLinearGroup.scalar (Fin n) (galoisUnitsCocycleValue K z g h) * b (g * h))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T112841-L-768275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T112841-L-768275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

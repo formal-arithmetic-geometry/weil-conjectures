@@ -6,6 +6,7 @@ Authors: SHEAF worker T1
 module
 
 public import Sheaf.FieldTheory.BrauerScalarDefect
+import Sheaf.FieldTheory.CrossedProductRealization
 
 /-!
 # Crossed-product realization of continuous degree-two classes
@@ -47,6 +48,9 @@ Source: Stacks Project, Theorem 03R7, surjectivity argument; Section 0DVG for co
 cochains and their homogeneous-coordinate interpretation.
 (blueprint: lem-sc-brauer-scalar-defect-surjective). -/
 theorem exists_csa_brauerScalarDefect (K : Type u) [Field K] (x : GaloisUnitsH2 K) :
-    ∃ A : CSA.{u, u} K, HasBrauerScalarDefect K A x := by sorry
+    ∃ A : CSA.{u, u} K, HasBrauerScalarDefect K A x := by
+  obtain ⟨A, n, hn, e, b, hb, z, hz, hdesc, hdefect⟩ :=
+    exists_crossedProduct_realization_data K x
+  exact ⟨A, n, hn, e, b, hb, z, hz, hdesc, hdefect⟩
 
 end Field
