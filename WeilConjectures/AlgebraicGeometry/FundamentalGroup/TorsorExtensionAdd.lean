@@ -37,6 +37,7 @@ section Algebra
 
 variable {m : ℕ} [NeZero m] {A : Type*} [AddCommGroup A]
 
+omit [AddCommGroup A] in
 /-- A function on `ℤ/m × ℤ/m` invariant under the shifts by `-e₁` and `-e₂` is constant. -/
 lemma apply_eq_apply_zero_of_forall_sub_pair
     {F : ULift.{u + 1} (ZMod m) × ULift.{u + 1} (ZMod m) → A}
@@ -51,7 +52,8 @@ lemma apply_eq_apply_zero_of_forall_sub_pair
   obtain ⟨x, y⟩ := a
   exact (e₁ x y).trans (e₂ y)
 
-
+omit [NeZero m] in
+/-- The character `zmodChar c` increases by `c` from `-x` to `-(x - 1)`. -/
 lemma zmodChar_neg_sub_one (c : A) (hc : m • c = 0) (x : ZMod m) :
     zmodChar c hc (-(x - 1)) - zmodChar c hc (-x) = c := by
   rw [← map_sub]

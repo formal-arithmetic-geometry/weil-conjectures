@@ -193,10 +193,11 @@ lemma transportLinearEquiv_apply (F : Y.FiniteLocallyConstantModule Λ) (x : sta
 
 section Invariants
 
-variable [ConnectedSpace Y] (G : Type u) [Group G]
+variable (G : Type u) [Group G]
   [∀ P, MulAction G ((FiniteEtale.fiber s).obj P)]
   [PreGaloisCategory.IsNaturalSMul (FiniteEtale.fiber s) G]
 
+/-- The action on stalks fixes zero. -/
 lemma smul_stalk_zero (F : Y.FiniteLocallyConstantModule Λ) (g : G) :
     smul s G g (0 : stalk s F) = 0 := by
   have := smul_smul s G g (0 : Λ) (0 : stalk s F)

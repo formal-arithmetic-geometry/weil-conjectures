@@ -79,7 +79,8 @@ noncomputable def kummerSequenceMap (m d : ℕ) :
     simp only [kummerSequence, Preadditive.comp_nsmul, Category.comp_id]
     rw [mul_comm, mul_smul]
 
-omit [IsProper (X ↘ Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
+omit [IsProper (X ↘ Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+  [IsAlgClosed k] in
 /-- The Kummer map to `H²` is compatible with the inclusion `μ_m ⊆ μ_{dm}`: the class of `L`
 is sent to the class of `L^d`. -/
 lemma map_rootsOfUnityInclusion_picToSheafHTwo (m d : ℕ) (hm : (m : k) ≠ 0)

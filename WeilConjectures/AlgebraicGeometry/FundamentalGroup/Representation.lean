@@ -139,7 +139,7 @@ lemma forgetStalkEquiv_toPresheafFiber (F : Y.FiniteLocallyConstantModule Λ)
 end Stalk
 section Action
 
-variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) [ConnectedSpace Y]
+variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
   (G : Type u) [Group G] [∀ P, MulAction G ((FiniteEtale.fiber s).obj P)]
   [IsNaturalSMul (FiniteEtale.fiber s) G]
 
@@ -149,6 +149,7 @@ noncomputable def smul {F : Y.FiniteLocallyConstantModule Λ} (g : G) (x : stalk
     stalk s F :=
   forgetStalkEquiv s F (FiniteLocallyConstant.smul s G g ((forgetStalkEquiv s F).symm x))
 
+/-- Morphisms of sheaves of modules induce equivariant maps of stalks. -/
 lemma stalkMap_smul {F F' : Y.FiniteLocallyConstantModule Λ} (f : F ⟶ F') (g : G)
     (x : stalk s F) : stalkMap s f (smul s G g x) = smul s G g (stalkMap s f x) := by
   simp only [smul]
@@ -160,6 +161,7 @@ noncomputable abbrev double (F : Y.FiniteLocallyConstantModule Λ) :
     Y.FiniteLocallyConstantModule Λ :=
   ⟨F.obj ⊞ F.obj, by have := F.property; exact IsFiniteLocallyConstantSheaf.biprod _ _⟩
 
+/-- The action on stalks is additive. -/
 lemma smul_add {F : Y.FiniteLocallyConstantModule Λ} (g : G) (x y : stalk s F) :
     smul s G g (x + y) = smul s G g x + smul s G g y := by
   have := (pointSmallEtale s).sheafFiber_additive (A := ModuleCat.{u + 1} Λ)
@@ -210,6 +212,7 @@ lemma smul_add {F : Y.FiniteLocallyConstantModule Λ} (g : G) (x y : stalk s F) 
     simp only [z, map_add, e₃, e₄, zero_add]
   rw [← hfst, ← hsnd, ← hadd, ← stalkMap_smul, hadd, stalkMap_smul, stalkMap_smul]
 
+/-- The action on stalks is `Λ`-linear. -/
 lemma smul_smul {F : Y.FiniteLocallyConstantModule Λ} (g : G) (c : Λ) (x : stalk s F) :
     smul s G g (c • x) = c • smul s G g x := by
   let m : F ⟶ F := ObjectProperty.homMk (c • 𝟙 F.obj)
@@ -219,9 +222,13 @@ lemma smul_smul {F : Y.FiniteLocallyConstantModule Λ} (g : G) (c : Λ) (x : sta
     rfl
   rw [← hm, ← stalkMap_smul, hm]
 
+omit [IsNaturalSMul (FiniteEtale.fiber s) G] in
+/-- The identity acts trivially on stalks. -/
 lemma one_smul {F : Y.FiniteLocallyConstantModule Λ} (x : stalk s F) : smul s G 1 x = x := by
   simp [smul, FiniteLocallyConstant.one_smul]
 
+omit [IsNaturalSMul (FiniteEtale.fiber s) G] in
+/-- The action on stalks is compatible with multiplication. -/
 lemma mul_smul {F : Y.FiniteLocallyConstantModule Λ} (g h : G) (x : stalk s F) :
     smul s G (g * h) x = smul s G g (smul s G h x) := by
   simp [smul, FiniteLocallyConstant.mul_smul]

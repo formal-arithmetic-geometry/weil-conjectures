@@ -53,7 +53,8 @@ lemma picDegreeHom_map_of_comp_eq [SmoothOfRelativeDimension 1 (X ↘ Spec (.of 
 
 variable [IsAlgClosed k]
 
-instance : Etale f := MorphismProperty.of_isIso @Etale f
+/-- An automorphism is étale. -/
+local instance : Etale f := MorphismProperty.of_isIso @Etale f
 
 /-- The restriction map `H^q(X, μ_m) ⟶ H^q(X, R μ_m) ≅ H^q(X, μ_m)` along `f`. -/
 noncomputable abbrev restrictMuH (m q : ℕ) :
@@ -78,6 +79,7 @@ lemma coe_kummerTorsionEquiv_restrictMuH [IsProper (X ↘ Spec (.of k))] (m : �
   rw [← hL, AddEquiv.symm_apply_apply, AddEquiv.symm_apply_eq]
   exact etaleRestrictionH_toCohomologicalPicardGroup f L.toMul
 
+omit [IsAlgClosed k] in
 /-- Restriction along `f` is compatible with the Kummer map `Pic(X) ⟶ H²(X, μ_m)` and the
 pullback of line bundles along `f`. -/
 lemma restrictMuH_picToSheafHTwo (m : ℕ) (hm : (m : k) ≠ 0) (L : Additive X.Pic) :
