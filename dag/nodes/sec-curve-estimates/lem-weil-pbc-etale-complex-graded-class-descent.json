@@ -16,50 +16,33 @@
  ],
  "proof": [
   {
-   "text": "Choose a directed cofinal reindexing. Sheaf continuity for each term identifies the first-page colimits with the first page of the limit complex. The common lower bound is preserved by pullback and termwise colimit.",
+   "text": "Choose the directed spectral diagram, its compatible comparison maps, the finite target filtration S, and its stage quotient models from the first-page/abutment construction. This establishes only page-one comparison; for each n<N it supplies a common finite page r and quotient maps q,t_j compatible with v.",
    "uses": [
-    "lem-weil-pbc-filtered-category-directed-cofinal",
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+    "lem-weil-pbc-etale-complex-first-page-abutment"
    ],
    "elementary": false
   },
   {
-   "text": "Choose functorial termwise hypercohomology spectral sequences using the cited first-page, convergence and pullback-functoriality statements. By lem-weil-pbc-filtered-colimit-abelian-groups-exact, filtered colimits preserve homology. Induct on r: the comparison is an isomorphism at r=1 by termwise continuity; if it is an isomorphism at page r in every bidegree, compatibility with differentials identifies the colimit short complex of incoming and outgoing differentials with the target short complex. Preservation of homology and the spectral-sequence page isomorphisms therefore give the comparison isomorphism at page r+1. Vanishing outside s>=a and t>=0 persists because each next page is homology. In (complex,resolution) coordinates the outgoing differential lands at (s+r,t-r+1), and the incoming differential starts at (s-r,t+r-1). Both vanish for r>max(t+1,s-a), uniformly over the stages. Hence the stable-page colimit comparison is an isomorphism.",
+   "text": "Form Q by evaluating page r at (p-a-n,a+n), and form its cocone C with legs given by v. Compatibility of v proves naturality. The finite-page comparison theorem applies to page-one continuity, proving that ψ=colimit.desc Q C is an isomorphism.",
    "uses": [
-    "thm-sp-if-e1",
-    "def-sp-etale-dictionary",
-    "def-sp-kinjective-bridge",
-    "thm-sp-spectral-object-yields",
-    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+    "lem-weil-pbc-spectral-sequence-finite-page-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the degree-p target abutment filtration along eB and let S_n be its step at a+n. Its bounds are whole at a and zero at p+1. If p<a, all degree-p abutments vanish, giving the length-zero case. Otherwise convergence identifies S_n/S_(n+1) with the stable page (a+n,p-a-n). A class there has a stage representative by the stable-page colimit isomorphism. Lift the corresponding stage graded class to its stage filtration step. Pullback functoriality and hP,hH,hB identify its image with B_i(y), and equality of cosets says x-B_i(y) belongs to S_(n+1). No finite abutment induction is used in this step.",
-   "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "def-sp-kinjective-bridge",
-    "lem-weil-pbc-hypercohomology-e1-pullback-functorial"
-   ],
-   "elementary": false
+   "text": "For x in S_n, surjectivity of ψ gives a colimit preimage of q(x). Since the forgetful functor of abelian groups preserves filtered colimits, Concrete.colimit_exists_rep supplies a stage j and w representing that preimage. Surjectivity of t_j lifts w to y in T_j. Compatibility identifies q(B_(k(j))(y)) with q(x). The subgroup difference lies in S_n and its q-image is zero by additivity. The kernel equation therefore puts x-B_(k(j))(y) in S_(n+1). The original stage k(j) and the underlying y are the required witnesses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-etale-dictionary",
-  "def-sp-kinjective-bridge",
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-  "lem-weil-pbc-filtered-category-directed-cofinal",
-  "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
-  "thm-sp-if-e1",
-  "thm-sp-spectral-object-yields"
+  "lem-weil-pbc-etale-complex-first-page-abutment",
+  "lem-weil-pbc-spectral-sequence-finite-page-comparison"
  ],
  "proof_origin": {
-  "by": "worker D2 (second reading)",
+  "by": "worker W2",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0EZM and Tag 015J; graded lifting part only; page and representative details expanded by D2"
+  "place": "Tag 0EZM finite-page comparison followed by lifting a single abutment coset; implemented using the existing finite-page theorem and Mathlib filtered-colimit representatives"
  },
  "mathlib_searches": [
   {
@@ -141,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-9a491",
-  "group": "D2",
+  "reviewer": "COMPILER",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T070532-L-3468502",
+  "landing": "20261012T085357-L-46770",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged main signature and finite-filtration proof with its node, the graded lifting statement with its node and Stacks 0EZM/015J, and the import changes with downstream source; both modules compile cleanly and axiom checks show only standard axioms plus expected sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

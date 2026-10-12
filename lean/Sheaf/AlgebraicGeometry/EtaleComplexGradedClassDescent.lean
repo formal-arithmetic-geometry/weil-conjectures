@@ -7,13 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import Sheaf.CategoryTheory.KInjectiveBridge
-import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.CategoryTheory.ExistsDirectedReindexing
-import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleComplexFirstPageAbutment
+import Sheaf.CategoryTheory.SpectralSequenceFinitePageComparison
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Etale complex graded class descent
 
@@ -142,6 +138,43 @@ theorem exists_etale_complex_graded_class_rep
       ∀ (n : ℕ), n < (p + 1 - a).toNat → ∀ x : B.pt, x ∈ S n →
         ∃ (i : I) (y : H.obj (op i)),
           @Sub.sub B.pt inferInstance x (B.ι.app (op i) y) ∈ S (n + 1) := by
-  sorry
+  classical
+  obtain ⟨J, hJ, hdir, hne, k, E, E', v, S, hv, hpage, htop, hbot, hanti, hmodels⟩ :=
+    exists_etale_complex_first_page_and_abutment
+      D c hc F φ hidentity hcomposition a hbelow G eG hG p P hP H eH hH L hL B eB hB
+  let := hJ
+  let := hdir
+  let := hne
+  refine ⟨S, htop, hbot, hanti, ?_⟩
+  intro n hn x hx
+  obtain ⟨r, hr, T, q, t, hker, ht, hcompat⟩ := hmodels n hn
+  let Q := E ⋙ SpectralSequence.pageFunctor AddCommGrpCat.{u + 1}
+    (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1 r hr ⋙
+      HomologicalComplex.eval _ _ ⟨p - a - n, a + n⟩
+  let C : Cocone Q :=
+    { pt := (E'.page r hr).X ⟨p - a - n, a + n⟩
+      ι :=
+        { app := fun j ↦ ((v j).hom r hr).f ⟨p - a - n, a + n⟩
+          naturality := by
+            intro i j f
+            simpa [Q] using congrArg
+              (fun w : E.obj i ⟶ E' ↦ (w.hom r hr).f ⟨p - a - n, a + n⟩) (hv f) } }
+  let ψ : colimit Q ⟶ C.pt := colimit.desc Q C
+  have hψ : ∀ j : J, colimit.ι Q j ≫ ψ = ((v j).hom r hr).f ⟨p - a - n, a + n⟩ :=
+    fun j ↦ colimit.ι_desc C j
+  have : IsIso ψ := spectral_sequence_finite_page_comparison
+    E E' v hv hpage r hr (p - a - n) (a + n) ψ hψ
+  obtain ⟨z, hz⟩ := (AddCommGrpCat.epi_iff_surjective ψ).mp inferInstance (q ⟨x, hx⟩)
+  obtain ⟨j, w, hw⟩ := Concrete.colimit_exists_rep Q z
+  obtain ⟨y, hy⟩ := ht j w
+  obtain ⟨himage, hq⟩ := hcompat j y
+  refine ⟨k j, y, ?_⟩
+  apply (hker (⟨x, hx⟩ - ⟨B.ι.app (op (k j)) y, himage⟩)).mp
+  rw [map_sub, hq, hy]
+  have heq : ((v j).hom r hr).f ⟨p - a - n, a + n⟩ w = q ⟨x, hx⟩ := by
+    rw [← hψ j]
+    change ψ (colimit.ι Q j w) = q ⟨x, hx⟩
+    rw [hw, hz]
+  rw [heq, sub_self]
 
 end AlgebraicGeometry.Etale
