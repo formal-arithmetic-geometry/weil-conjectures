@@ -8359,3 +8359,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:30 L: merged deliver/X2/Sheaf.AlgebraicGeometry.PerfectImmersionStandardPerfection (stage 3; reviewer PASS; first push; landing 20261012T153014-L-2352023 (proof); batch 20261012T153007; modules 1; new nodes 0)
 - 15:32 L: returned deliver/G1/Sheaf.AlgebraicGeometry.AffineAlgebraModulePresentation (reviewer RETURN: (the landing tools, head 57448fa35) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 15:32 L: returned deliver/P2/Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleAssertions (reviewer RETURN: (the landing tools, head aa99a58ad) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 15:32 L: merged deliver/C3/Sheaf.AlgebraicGeometry.DescendQCOpenFGSubalgebra (stage 3; reviewer PASS; first push; landing 20261012T153258-L-2369849 (interface); batch 20261012T153257; modules 2; new nodes 1)
