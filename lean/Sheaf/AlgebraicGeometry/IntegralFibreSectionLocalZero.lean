@@ -7,12 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
-import Sheaf.RingTheory.IntegralOverHenselianPair
+import Sheaf.AlgebraicGeometry.StrictHenselizationModuleFibreFactorization
+import Sheaf.AlgebraicGeometry.StrictHenselianIntegralSectionsInjective
 import Sheaf.Paper.StrictHenselizationLocalStructure
-import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
-import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 
 /-! # Local sections of an integral geometric fibre
 
@@ -61,6 +58,35 @@ theorem integralFibreSection_localZero
     (hz : (geometricFibreSectionRestriction Λ sq.toCommSq F V v).hom z = 0) :
     ∃ (W : Y.Etale) (w : (pointSmallEtale s).fiber.obj W) (a : W ⟶ V),
       (pointSmallEtale s).fiber.map a w = v ∧
-        (F.obj.map (f.Etale.map a).op).hom z = 0 := by sorry
+        (F.obj.map (f.Etale.map a).op).hom z = 0 := by
+  classical
+  have : Limits.PreservesFilteredColimitsOfSize.{u, u} (forget (ModuleCat.{u + 1} Λ)) :=
+    Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨hlocal, hstrict⟩ := strictHenselizationLocalStructure s
+  let := hlocal
+  let := hstrict
+  obtain ⟨t, ht, hclosed, i, hsq, hi, Θ, b, hformula⟩ :=
+    strictHenselizationModuleFibre_factorization Λ sq F
+  have hintegral : IsIntegralHom (Limits.pullback.snd f
+      (strictHenselizationStructuralMap s)) := inferInstance
+  let := hintegral
+  have hinj := strictHenselianIntegralSections_injective Λ (strictHenselizationRing s)
+    (Limits.pullback.snd f (strictHenselizationStructuralMap s)) t hclosed i f' hsq
+    ((Limits.pullback.fst f (strictHenselizationStructuralMap s))^*[ModuleCat.{u + 1} Λ].obj F)
+  let germ := (pointSmallEtale s).toPresheafFiber V v
+    ((f)_*[ModuleCat.{u + 1} Λ].obj F).obj
+  have hzero : germ.hom z = 0 := by
+    apply (ConcreteCategory.bijective_of_isIso Θ.hom).1
+    apply hinj
+    apply (ConcreteCategory.bijective_of_isIso b.hom).1
+    simpa only [map_zero] using (hformula V v z).trans hz
+  have heq : germ z = germ 0 := by simpa only [map_zero] using hzero
+  obtain ⟨W, a, w, hw, ha⟩ :=
+    ((pointSmallEtale s).toPresheafFiber_eq_iff'
+      (P := ((f)_*[ModuleCat.{u + 1} Λ].obj F).obj) V v z 0).mp heq
+  refine ⟨W, w, a, hw, ?_⟩
+  change (F.obj.map (f.Etale.map a).op).hom z =
+    (F.obj.map (f.Etale.map a).op).hom 0 at ha
+  simpa only [map_zero] using ha
 
 end AlgebraicGeometry.Etale

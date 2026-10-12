@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-strict-henselian-integral-sections-injective",
+ "kind": "statement",
+ "title": "Integral section injectivity at a closed geometric point of a strictly henselian base",
+ "statement": "Let A be a strictly henselian local ring, Lambda a commutative ring, p:Z -> Spec A an integral morphism [def-weil-finite-integral-morphism], and F an etale sheaf of Lambda-modules [def-weil-pbc-etale-sheaves]. For an algebraically closed field Omega and t:Spec Omega -> Spec A with image the closed point, let (i:Z' -> Z,p':Z' -> Spec Omega,p,t) be Cartesian [def-weil-pbc-cartesian-square]. Then the canonical inverse-image unit map on global sections Gamma(Z,F) -> Gamma(Z',i^*F) is injective. No finite-type, torsion, or nonempty-fibre assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XK, 09ZH and 0A3I; henselian degree-zero consequence used for the integral comparison"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "Since p is integral and the base is affine, write Z as Spec B for an integral A-algebra B using the canonical affine presentation. Set J=m_A B. Apply the integral-over-henselian-pair theorem to obtain HenselianRing B J.",
+   "uses": [
+    "lem-weil-pbc-integral-over-henselian-pair"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the degree-zero comparison to the proper identity of Spec B and the quotient map B -> B/J. It makes restriction of F to the closed fibre an isomorphism on sections. This also covers B=0.",
+   "uses": [
+    "lemma-weil-pbc-etale-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed-image condition on t says that the corresponding A -> Omega map kills m_A, hence factors through k=A/m_A. This is a field embedding, with k separably closed. Identify Z′ with the extension of the closed fibre along k -> Omega. Apply the base-field-extension section comparison and the canonical module/set inverse-image comparison, with its unit equation, to get bijectivity on module sections.",
+   "uses": [
+    "lem-weil-pbc-sections-base-field-extension",
+    "lem-sc-etale-module-set-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Composition of inverse-image units, transported through the affine presentation and pullback isomorphism, identifies the displayed global-section map with the two successive restrictions. The composition formula on global sections makes this identification explicit. Compose the two injective maps.",
+   "uses": [
+    "lemma-weil-pbc-finite-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-module-set-pullback-comparison",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-sections-base-field-extension",
+  "lemma-weil-pbc-etale-degree-zero",
+  "lemma-weil-pbc-finite-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XK, 09ZH and 0A3I; henselian degree-zero consequence used for the integral comparison; assembly of the canonical maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The sections of an etale sheaf on an integral scheme over a strictly henselian local ring inject into sections on its closed geometric fibre",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of etale sheaf global sections over an integral algebra over a strictly henselian local ring after restriction to the closed geometric fibre",
+   "results": "8 hits; AlgebraicGeometry.germ_injective_of_isIntegral, AlgebraicGeometry.map_injective_of_isIntegral, AlgebraicGeometry.Scheme.IsGermInjective.Spec, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.Scheme.germToFunctionField_injective, AlgebraicGeometry.specTargetImageFactorization_app_injective, AlgebraicGeometry.Scheme.IsGermInjectiveAt, AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective",
+   "date": "2026-10-13",
+   "verdict": "No exact match; structure sheaf and module tilde results concern a different site."
+  },
+  {
+   "tool": "grep",
+   "query": "globalSectionsUpperStarMap.*[Ii]ntegral|[Ii]ntegral.*globalSectionsUpperStarMap",
+   "results": "0 hits; ",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralFibreSectionLocalZero",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-integral-base",
+   "place": "Integral section injectivity at a closed geometric point of a strictly henselian base",
+   "via": [
+    "lem-sbc-integral-fibre-section-local-zero",
+    "lem-sbc-integral-geometric-fibre-sections",
+    "lem-sbc-integral-underived-exchange",
+    "lem-sbc-integral-geometric-point-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselianIntegralSectionsInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselianIntegralSectionsInjective.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictHenselianIntegralSections_injective",
+  "statement": "theorem strictHenselianIntegralSections_injective (Λ : Type (u + 1)) [CommRing Λ] (A : Type u) [CommRing A] [IsStrictlyHenselianLocalRing A] {Z Z' : Scheme.{u}} (p : Z ⟶ Spec (.of A)) [IsIntegralHom p] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of A)) (ht : t (IsLocalRing.closedPoint Ω) = IsLocalRing.closedPoint A) (i : Z' ⟶ Z) (p' : Z' ⟶ Spec (.of Ω)) (sq : IsPullback i p' p t) (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Function.Injective (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F).hom",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T173900-L-3304977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T173900-L-3304977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
