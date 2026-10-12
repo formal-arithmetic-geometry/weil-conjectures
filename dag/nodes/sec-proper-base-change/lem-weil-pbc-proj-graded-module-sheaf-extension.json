@@ -17,34 +17,48 @@
  ],
  "proof": [
   {
-   "text": "1. For each distinct positive homogeneous standard open choose one denominator. Identity\n   and composition give a presheaf of abelian groups on these opens. For any homogeneous\n   fraction y/f^m its given restriction has the canonical ordinary localization formula,\n   so it agrees with the restriction supplied by gradedModuleAwayRestriction. The same\n   is true of rhoS: an ambient map commuting with S is the unique map out of S_f into\n   S_g, and injectivity of the homogeneous localization's inclusion determines rhoS.\n2. Identify R[f] with the structure-sheaf sections using basicOpenIsoAway. To check ring\n   restriction compatibility, take a germ at x in D[g]. awayToSection_germ identifies\n   both ring restrictions with the image of the same fraction in S_(x); the ambient\n   localization map preserves that fraction. Sheaf separatedness proves their equality.\n   Transport scalar actions along the ring equivalences; semilinearity now gives a\n   presheaf of modules over the restriction of the structure sheaf to the basis.\n3. For a finite cover D[f] = union D[g_i], standardOpenProperties gives generators\n   u_i = g_i^deg(f)/f^deg(g_i) of the unit ideal in R[f]. The principal localization\n   comparisons in gradedModuleAwayRestriction identify Z[g_i] with Z[f] localized at\n   u_i, and Z[g_i*g_j] with Z[f] localized at u_i*u_j. Indeed its generator for the\n   product chart equals u_i*u_j, and the given rho agrees with its maps by step 1.\n   The comparison's composition law identifies both overlap maps with canonical\n   localization maps. coverModuleExact therefore gives existence and uniqueness of\n   gluing, including the empty cover. Intersections and finite refinements are given by\n   standardOpenProperties. Apply exists_sheafOfModules_from_basis to obtain F.\n4. For a denominator f not chosen for its open, transport the basis identification by\n   rho from the chosen denominator to f. Its inverse is the reverse rho: composition\n   and identity prove both inverse laws. Semilinearity and the ring compatibility of\n   step 2 give the scalar law; composition gives the restriction law for all f,g.\n   For another chart system on G, the maps beta_f.symm composed with alpha_f are linear\n   and compatible. The basis-extension universal property gives a unique morphism to G;\n   the inverse chart maps extend likewise, and uniqueness makes the composites identities.\n   Any compatible morphism is this one, so the conclusion is uniqueness of the morphism\n   together with its being an isomorphism.\n5. On the affine chart D[f] identified with Spec R[f], represent an arbitrary principal\n   generator r in R[f] by a homogeneous fraction a/f^n with deg(a)=n*deg(f). Put h=f*a,\n   a homogeneous element of positive degree (also if a=0). Its standard open is contained\n   in D[f] and corresponds to D(r): its principal generator h^deg(f)/f^deg(h) equals\n   r^deg(f), which has the same powers localization as r since deg(f)>0. The principal\n   localization comparisons of gradedModuleAwayRestriction thus identify F(D[h]) with\n   Z[f] localized at r. For two such opens their comparison maps are the canonical ones\n   by the fraction formulas and composition. Mathlib's tilde of the R[f]-module Z[f]\n   has these same sections and restrictions on principal opens. Basis uniqueness yields\n   a module-sheaf isomorphism on D[f]. The tilde sheaf is quasi-coherent, and these affine\n   charts cover X, hence F is quasi-coherent. If a chart is empty, its positive homogeneous\n   denominator is nilpotent, so its localized ring and module are zero and empty gluing\n   is valid. If X is empty the construction is the unique module sheaf on the empty space.",
+   "text": "Ring restriction compatibility: compare the maps at every point using awayToSection_apply. The two ambient localization maps agree on S, so IsLocalization.ringHom_ext identifies them. Pointwise injectivity of homogeneous localization and Subtype.ext give equality of sections.",
+   "uses": [
+    "lem-weil-pbc-proj-structure-sheaf-standard-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport each Z_f along the inverse of basicOpenIsoAway to a module over structure-sheaf sections. Ring restriction compatibility and the supplied semilinearity give rsmul. Use standardOpenProperties for the basis and finite refinement; multiplication defines the intersection index. Apply finite chart gluing and indexed basis extension to obtain F, linear equivalences iota, and its morphism universal property.",
    "uses": [
     "lem-weil-pbc-proj-standard-open-inclusion",
-    "lem-weil-pbc-graded-module-away-restriction",
-    "lem-weil-pbc-proj-structure-sheaf-standard-sections",
-    "lem-weil-pbc-cover-module-exact",
-    "lem-weil-pbc-sheaf-of-modules-from-basis",
-    "lem-weil-pbc-proj-basic-open-intersection",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "pqf-def-coherent"
+    "lem-weil-pbc-proj-graded-module-chart-gluing",
+    "lem-weil-pbc-sheaf-of-modules-from-indexed-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take alpha to be the additive part of iota. Its scalar law is map_smul after canceling the ring equivalence. Given beta on G, beta inverse is linear for the transported scalar action and compatible with restriction. Apply the morphism universal property to beta inverse, use its bijectivity to get IsIso, and translate the component formulas through beta. Injectivity of beta translates uniqueness of the underlying morphism into the displayed unique compatible isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the chart quasi-coherence theorem to F, alpha, the proved scalar law and restriction compatibility.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-chart-quasicoherent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proj-standard-open-inclusion",
-  "lem-weil-pbc-graded-module-away-restriction",
   "lem-weil-pbc-proj-structure-sheaf-standard-sections",
-  "lem-weil-pbc-cover-module-exact",
-  "lem-weil-pbc-sheaf-of-modules-from-basis",
-  "lem-weil-pbc-proj-basic-open-intersection",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "pqf-def-coherent"
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-proj-graded-module-chart-gluing",
+  "lem-weil-pbc-sheaf-of-modules-from-indexed-basis",
+  "lem-weil-pbc-proj-graded-module-chart-quasicoherent"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "Q2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Section 01M3; parent proof step(s) 3--6"
+  "place": "Section 01M3, text before Definition 01M6; Lemma 01M7 (1)--(3); Lemma 01MB",
+  "note": "Basis-extension argument with ring compatibility and uniqueness proved in Lean; finite chart gluing, indexed basis extension, and chart quasi-coherence split off."
  },
  "mathlib_searches": [
   {
@@ -123,9 +137,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T085249-L-18897",
+  "landing": "20261012T110315-L-620526",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

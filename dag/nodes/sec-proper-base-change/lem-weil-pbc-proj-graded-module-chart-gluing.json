@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-proj-graded-module-chart-gluing",
+ "kind": "statement",
+ "title": "Finite gluing of graded-module charts",
+ "statement": "Let $S$ be an $\\mathbb N$-graded commutative ring with grading $\\mathcal A$, and $M$ a $\\mathbb Z$-graded $S$-module with internal grading $\\mathcal M$ compatible with scalar multiplication. Set $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]. Index charts by pairs $f=(a,d)$ with $d>0$ and $a\\in S_d$, put $D_f=D_+(a)$, $R_f=S_{(a)}$ [def-nagata-homogeneous-localization-degree-zero], and let $Z_f$ be submodules of $M_a$ whose carriers are precisely the equal-degree fractions [def-sc-degree-zero-module-fractions]. Suppose additive maps $\\rho_{f,g}:Z_f\\to Z_g$ and ring maps $\\rho^S_{f,g}:R_f\\to R_g$ are given for every $D_g\\subseteq D_f$. Suppose each inclusion admits a homogeneous relation $g^e=bf$ with $e>0$, each $\\rho$ is semilinear over $\\rho^S$, and for every such relation it sends $y/f^m$ to $b^my/g^{em}$. Assume identities, composition and bijectivity when chart opens coincide. Assume moreover every ring restriction is induced by a ring map $S_f\\to S_g$ commuting with $S$. For every finite cover $D_f=\\bigcup_iD_{g_i}$ and elements $q_i\\in Z_{g_i}$ agreeing after restriction to the product chart $g_ig_j$, there exists a unique $t\\in Z_f$ restricting to all $q_i$. The empty cover is included.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01M3, text before Definition 01M6; Lemma 01M7 (1)--(3); Lemma 01MB"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "1. Use standardOpenProperties to obtain the unit-ideal generators\n   u_i = g_i^deg(f)/f^deg(g_i) in R[f] for the displayed cover.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Apply gradedModuleAwayRestriction. Its submodule has the same carrier as Z, so\n   Submodule.ext identifies them. The given rho agrees with its restriction: represent\n   each element by an ordinary localized fraction and use the stated fraction formula.\n   The ambient ring maps agree by the uniqueness of maps out of S_f that commute with S;\n   injectivity of homogeneous-localization inclusion gives equality of rhoS.",
+   "uses": [
+    "lem-weil-pbc-graded-module-away-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Transport the principal localization comparisons to Z. The comparison to each chart\n   sends t/1 to rho(t). The generator for the product chart is u_i*u_j: this follows by\n   multiplying the two fractions. The comparison composition law identifies the two\n   overlap maps with the canonical localization maps in coverModuleExact.",
+   "uses": [
+    "lem-weil-pbc-graded-module-away-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "4. Transport q_i back along these comparisons. The overlap assumption is exactly the\n   compatibility hypothesis of coverModuleExact. That theorem gives a unique t in Z f,\n   and its localization equations give the asserted restriction equations. Conversely\n   any solution localizes to this glued t and hence equals it. For n=0 the unit-ideal\n   hypothesis forces R[f] to be the zero ring and Z f the zero module, so the same\n   existence and uniqueness proof applies without a maximum over an empty set.",
+   "uses": [
+    "lem-weil-pbc-cover-module-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-graded-module-away-restriction",
+  "lem-weil-pbc-cover-module-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01M3, text before Definition 01M6; Lemma 01M7 (1)--(3); Lemma 01MB",
+  "note": "Source argument specialized to the existing Lean chart interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite gluing of graded-module charts",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj",
+   "results": "Structure-sheaf and chart isomorphisms only; basis topology lemmas only. No matching module gluing or indexed extension declaration.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedModuleChart|gradedModuleSheaf|indexed_basis|sheafOfModules_from",
+   "results": "Existing exists_sheafOfModules_from_basis takes a set of opens, not an indexed basis. Existing gradedModuleAwayRestriction supplies localization comparisons, not finite chart gluing or quasi-coherence of a given sheaf.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExtension",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proj-graded-module-sheaf-extension",
+   "place": "Extension proof decomposition",
+   "via": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "lem-weil-pbc-projective-morphism-chart-preimage"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleChartGluing.lean",
+  "declaration": "AlgebraicGeometry.Proj.gradedModuleChart_gluing",
+  "statement": "theorem gradedModuleChart_gluing (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜) (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M), a ∈ 𝒜 n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z)) (Z : ∀ f : Fidx, Submodule R[f] N[f]) (hZ : (∀ f : Fidx, (Z f : Set N[f]) = degreeZeroFractions (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M)) (Submonoid.powers f.val.1))) (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g]) (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g) (hlaws : (∀ (f g : Fidx) (i : D[g] ≤ D[f]), (∃ (e k : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1) ∧ (∀ (r : R[f]) (q : Z f), rho f g i (r • q) = rhoS f g i r • rho f g i q) ∧ (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k → g.val.1 ^ e = a * f.val.1 → ∀ (m : ℕ) (y : M) (q : Z f), (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) → (rho f g i q : N[g]) = mk (a ^ m • y) (⟨g.val.1 ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g.val.1))) ∧ (∀ (f : Fidx) (i : D[f] ≤ D[f]) (q : Z f), rho f f i q = q) ∧ (∀ (f g h : Fidx) (i : D[g] ≤ D[f]) (j : D[h] ≤ D[g]) (q : Z f), rho g h j (rho f g i q) = rho f h (j.trans i) q) ∧ (∀ (f g : Fidx) (i : D[g] ≤ D[f]), D[f] = D[g] → Function.Bijective (rho f g i))) (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]), ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1, (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) = algebraMap S (Localization.Away g.val.1) a) ∧ ∀ r : R[f], (rhoS f g i r).val = l r.val) : let fg := fun f g : Fidx ↦ (⟨(f.val.1 * g.val.1, f.val.2 + g.val.2), Nat.add_pos_left f.property.1 g.val.2, SetLike.mul_mem_graded f.property.2 g.property.2⟩ : Fidx) ∀ (f : Fidx) (n : ℕ) (g : Fin n → Fidx) (hg : ∀ i, D[g i] ≤ D[f]), (⨆ i, D[g i]) = D[f] → ∀ q : ∀ i, Z (g i), (∀ i j, rho (g i) (fg (g i) (g j)) (by simpa only [fg, basicOpen_mul] using (inf_le_left : D[g i] ⊓ D[g j] ≤ D[g i])) (q i) = rho (g j) (fg (g i) (g j)) (by simpa only [fg, basicOpen_mul] using (inf_le_right : D[g i] ⊓ D[g j] ≤ D[g j])) (q j)) → ∃! t : Z f, ∀ i, rho f (g i) (hg i) t = q i",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T110315-L-620526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T110315-L-620526",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

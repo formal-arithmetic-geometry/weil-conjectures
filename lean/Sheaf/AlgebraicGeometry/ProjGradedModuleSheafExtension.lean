@@ -8,11 +8,10 @@ module
 public import Sheaf.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.Algebra.Module.GradedModuleAwayRestriction
+import Sheaf.AlgebraicGeometry.ProjGradedModuleChartGluing
+import Sheaf.AlgebraicGeometry.ProjGradedModuleChartQuasicoherent
 import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
-import Sheaf.RingTheory.CoverModuleExact
-import Sheaf.Topology.SheafOfModulesFromBasis
-import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.Topology.SheafOfModulesFromIndexedBasis
 
 /-!
 # ProjGradedModuleSheafExtension
@@ -56,6 +55,42 @@ local notation "T[" x "]" => (x).asHomogeneousIdeal.toIdeal.primeCompl
 local notation "Rp[" x "]" => HomogeneousLocalization 𝒜 T[x]
 local notation "Np[" x "]" => LocalizedModule T[x] M
 local notation "ModX" => SheafOfModules (moduleRings (Proj 𝒜).toRingedSpace)
+
+private theorem ringRestriction
+    (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])
+    (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),
+      ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1,
+        (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) =
+          algebraMap S (Localization.Away g.val.1) a) ∧
+        ∀ r : R[f], (rhoS f g i r).val = l r.val) :
+    ∀ (f g : Fidx) (i : D[g] ≤ D[f]) (r : R[f]),
+      (Proj 𝒜).presheaf.map (homOfLE i).op (awayToSection 𝒜 f.val.1 r) =
+        awayToSection 𝒜 g.val.1 (rhoS f g i r) := by
+  intro f g i r
+  obtain ⟨l, hl, hr⟩ := hcanonical f g i
+  apply Subtype.ext
+  funext x
+  apply HomogeneousLocalization.val_injective
+  change
+    (((ProjectiveSpectrum.Proj.awayToSection 𝒜 f.val.1).hom r).val
+      ⟨x.1, i x.2⟩).val =
+    (((ProjectiveSpectrum.Proj.awayToSection 𝒜 g.val.1).hom (rhoS f g i r)).val x).val
+  erw [ProjectiveSpectrum.Proj.awayToSection_apply,
+    ProjectiveSpectrum.Proj.awayToSection_apply, hr]
+  let pf : Localization.Away f.val.1 →+* Localization T[x.1] :=
+    IsLocalization.map (M := Submonoid.powers f.val.1)
+    (T := T[x.1]) (Localization T[x.1]) (RingHom.id S)
+    (Submonoid.powers_le.mpr (i x.2))
+  let pg : Localization.Away g.val.1 →+* Localization T[x.1] :=
+    IsLocalization.map (M := Submonoid.powers g.val.1)
+    (T := T[x.1]) (Localization T[x.1]) (RingHom.id S)
+    (Submonoid.powers_le.mpr x.2)
+  have he : pf = pg.comp l := by
+    apply IsLocalization.ringHom_ext (Submonoid.powers f.val.1)
+    ext a
+    simp [pf, pg, hl, IsLocalization.map_eq]
+  exact RingHom.congr_fun he r.val
+
 
 /-- Extension for a graded-module chart system.
 Source: Stacks Project, Constructions, Section 01M3 before Definition 01M6;
@@ -150,6 +185,101 @@ theorem gradedModuleSheaf_extension
         ∃! phi : F ⟶ G, IsIso phi ∧
           ∀ (f : Fidx) (s : F.val.obj (op D[f])),
             beta f (phi.val.app (op D[f]) s) = alpha f s) ∧
-      F.IsQuasicoherent := by sorry
+      F.IsQuasicoherent := by
+  classical
+  have hring := ringRestriction 𝒜 rhoS hcanonical
+  let D := fun f : Fidx ↦ basicOpen 𝒜 f.val.1
+  let R := moduleRings (Proj 𝒜).toRingedSpace
+  let e := fun f : Fidx ↦
+    (basicOpenIsoAway 𝒜 f.val.1 f.property.2 f.property.1).commRingCatIsoToRingEquiv
+  let chartModule (f : Fidx) : Module (R.obj.obj (op (D f))) (Z f) :=
+    Module.compHom (Z f) (e f).symm.toRingHom
+  let Q := fun f : Fidx ↦ ModuleCat.of (R.obj.obj (op (D f))) (Z f)
+  let cap := fun f g : Fidx ↦
+    (⟨(f.val.1 * g.val.1, f.val.2 + g.val.2),
+      Nat.add_pos_left f.property.1 g.val.2,
+      SetLike.mul_mem_graded f.property.2 g.property.2⟩ : Fidx)
+  have hcap (f g : Fidx) : D (cap f g) = D f ⊓ D g := by
+    exact basicOpen_mul 𝒜 f.val.1 g.val.1
+  have hB : Opens.IsBasis (Set.range D) := by
+    have heq : Set.range D =
+        {U | ∃ (f : S) (d : ℕ), 0 < d ∧ f ∈ 𝒜 d ∧ U = basicOpen 𝒜 f} := by
+      ext U
+      constructor
+      · rintro ⟨f, rfl⟩
+        exact ⟨f.val.1, f.val.2, f.property.1, f.property.2, rfl⟩
+      · rintro ⟨f, d, hd, hf, rfl⟩
+        exact ⟨⟨(f, d), hd, hf⟩, rfl⟩
+    rw [heq]
+    exact (standardOpenProperties.{u, u, u} 𝒜).1
+  have hrefine (f : Fidx) (J : Type u) (V : J → Fidx)
+      (hV : (⨆ j, D (V j)) = D f) :
+      ∃ (n : ℕ) (W : Fin n → Fidx), (⨆ k, D (W k)) = D f ∧
+        ∀ k, ∃ j, D (W k) ≤ D (V j) := by
+    obtain ⟨n, g, k, hk, hc, hr⟩ := (standardOpenProperties 𝒜).2.2.2.1
+      f.val.1 f.val.2 f.property.1 f.property.2 J (fun j ↦ D (V j)) hV
+    exact ⟨n, (fun i ↦ ⟨(g i, k i), hk i⟩), hc.symm, hr⟩
+  have rsmul (f g : Fidx) (i : D g ≤ D f)
+      (a : R.obj.obj (op (D f))) (q : Q f) :
+      rho f g i (a • q) = R.obj.map (homOfLE i).op a • rho f g i q := by
+    obtain ⟨r, rfl⟩ := (e f).surjective a
+    change rho f g i ((e f).symm (e f r) • q) =
+      (e g).symm ((Proj 𝒜).presheaf.map (homOfLE i).op (e f r)) • rho f g i q
+    rw [(e f).symm_apply_apply]
+    change rho f g i (r • q) =
+      (e g).symm ((Proj 𝒜).presheaf.map (homOfLE i).op
+        (awayToSection 𝒜 f.val.1 r)) • rho f g i q
+    rw [hring]
+    change rho f g i (r • q) = (e g).symm (e g (rhoS f g i r)) • rho f g i q
+    rw [(e g).symm_apply_apply]
+    exact (hlaws.1 f g i).2.1 r q
+  have hglue := gradedModuleChart_gluing 𝒜 𝓜 h𝓜 hsmul Z hZ rhoS rho hlaws hcanonical
+  obtain ⟨F, iota, hiota, hmap⟩ := Opens.exists_sheafOfModules_from_indexed_basis
+    (Proj 𝒜).toTopCat Fidx D hB cap hcap hrefine R Q rho
+    (fun f q ↦ hlaws.2.1 f le_rfl q)
+    (fun f g h i j q ↦ hlaws.2.2.1 f g h i j q) rsmul hglue
+  let alpha := fun f : Fidx ↦ (iota f).toAddEquiv
+  have hscalar (f : Fidx) (r : HomogeneousLocalization.Away 𝒜 f.val.1)
+      (s : F.val.obj (op (D f))) :
+      alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s := by
+    have hh := (iota f).map_smul (e f r) s
+    change alpha f ((awayToSection 𝒜 f.val.1 r) • s) =
+      (e f).symm (e f r) • alpha f s at hh
+    simpa only [RingEquiv.symm_apply_apply] using hh
+  refine ⟨F, alpha, hscalar, hiota, hring, ?_, ?_⟩
+  · intro G beta hbscalar hbrestrict
+    let psi : ∀ f : Fidx, Q f →ₗ[R.obj.obj (op (D f))] G.val.obj (op (D f)) :=
+      fun f ↦
+        { toAddHom := (beta f).symm.toAddMonoidHom
+          map_smul' := by
+            intro a q
+            obtain ⟨r, rfl⟩ := (e f).surjective a
+            apply (beta f).injective
+            change beta f ((beta f).symm ((e f).symm (e f r) • q)) =
+              beta f ((awayToSection 𝒜 f.val.1 r) • (beta f).symm q)
+            rw [AddEquiv.apply_symm_apply, hbscalar,
+              AddEquiv.apply_symm_apply, RingEquiv.symm_apply_apply] }
+    have hpsi (f g : Fidx) (i : D g ≤ D f) (q : Q f) :
+        psi g (rho f g i q) = G.val.map (homOfLE i).op (psi f q) := by
+      apply (beta g).injective
+      change beta g ((beta g).symm (rho f g i q)) =
+        beta g (G.val.map (homOfLE i).op ((beta f).symm q))
+      rw [AddEquiv.apply_symm_apply, hbrestrict, AddEquiv.apply_symm_apply]
+    obtain ⟨hunique, hiso⟩ := hmap G psi hpsi
+    obtain ⟨phi, hphi, huniq⟩ := hunique
+    have hcompat : ∀ (f : Fidx) (s : F.val.obj (op (D f))),
+        beta f (phi.val.app (op (D f)) s) = alpha f s := by
+      intro f s
+      rw [hphi]
+      exact (beta f).apply_symm_apply (alpha f s)
+    refine ⟨phi, ⟨hiso phi hphi (fun f ↦ (beta f).symm.bijective), hcompat⟩, ?_⟩
+    intro phi' hphi'
+    apply huniq phi'
+    intro f s
+    apply (beta f).injective
+    change beta f (phi'.val.app (op (D f)) s) = beta f ((beta f).symm (alpha f s))
+    rw [hphi'.2, AddEquiv.apply_symm_apply]
+  · exact gradedModuleChart_quasicoherent 𝒜 𝓜 h𝓜 hsmul Z hZ rhoS rho hlaws
+      hcanonical F alpha hscalar hiota
 
 end AlgebraicGeometry.Proj

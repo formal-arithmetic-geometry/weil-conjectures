@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-sheaf-of-modules-from-indexed-basis",
+ "kind": "statement",
+ "title": "Sheaf of modules from an indexed basis",
+ "statement": "Let $X$ be a topological space, $I$ a small type, and $U_i$ opens whose range is a basis. Let $c(i,j)$ satisfy $U_{c(i,j)}=U_i\\cap U_j$. Assume every indexed basis cover of $U_i$ has a finite basis refinement. Let $R$ be a sheaf of rings and $Q_i$ an $R(U_i)$-module [def-weil-sheaf-of-modules-category], with additive restrictions for every inclusion, satisfying identity, composition and semilinearity. Assume unique gluing for finite covers, with overlap comparisons on $c(i,j)$, including empty covers. Then there is a sheaf $E$ of $R$-modules with linear isomorphisms $E(U_i)\\cong Q_i$ commuting with restriction. Every compatible linear family $Q_i\\to G(U_i)$ for a sheaf $G$ extends uniquely to $E\\to G$; this morphism is an isomorphism if all the family maps are bijective. Distinct indices may represent the same open.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Section 009H, Tags 009L, 009N, 009T and 009U; choose one index per basis open"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "1. Set B=range U and choose one index c(V) for each V in B. Give V the module Q(c(V)),\n   transported along U(c(V))=V. Restriction is r between the chosen indices. The identity,\n   composition and scalar laws descend to this presheaf of modules.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "2. For any i,j with U i=U j, restriction in each direction is inverse to the other:\n   apply composition and then identity. These inverse maps identify all representatives.\n   In particular the chosen representative of an intersection identifies with cap i j.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "3. The finite refinement hypothesis descends to B: index a covering by its members,\n   choose an index for each, apply hrefine and take the displayed finite basis opens.\n   Transport each compatible finite family to the chosen representatives. Composition\n   and the inverse identifications from step 2 translate overlap equality into hglue.\n   Transport its unique glued element back to obtain finite unique gluing on B.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "4. Apply exists_sheafOfModules_from_basis. For each original i compose its chosen-basis\n   section equivalence with the inverse representative identification of step 2 to obtain\n   iota i. Composition proves its restriction law.",
+   "uses": [
+    "lem-weil-pbc-sheaf-of-modules-from-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "5. A compatible linear family psi restricts to the chosen representatives. Apply the\n   basis-extension universal property to obtain its unique morphism. Composition extends\n   its section formula to every original index, and uniqueness on chosen indices proves\n   uniqueness on all indices. If every psi i is bijective, so is every chosen map, and\n   the basis-extension isomorphism criterion applies. Empty covers are included in hglue,\n   so this construction also applies to the empty space and empty basis.",
+   "uses": [
+    "lem-weil-pbc-sheaf-of-modules-from-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-of-modules-from-basis"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Section 009H, Tags 009L, 009N, 009T and 009U; choose one index per basis open",
+  "note": "Source argument specialized to the existing Lean chart interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of modules from an indexed basis",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopologicalSpace.Opens.IsBasis",
+   "results": "Structure-sheaf and chart isomorphisms only; basis topology lemmas only. No matching module gluing or indexed extension declaration.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedModuleChart|gradedModuleSheaf|indexed_basis|sheafOfModules_from",
+   "results": "Existing exists_sheafOfModules_from_basis takes a set of opens, not an indexed basis. Existing gradedModuleAwayRestriction supplies localization comparisons, not finite chart gluing or quasi-coherence of a given sheaf.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExtension",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proj-graded-module-sheaf-extension",
+   "place": "Extension proof decomposition",
+   "via": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "lem-weil-pbc-projective-morphism-chart-preimage"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.SheafOfModulesFromIndexedBasis",
+  "file": "lean/Sheaf/Topology/SheafOfModulesFromIndexedBasis.lean",
+  "declaration": "TopologicalSpace.Opens.exists_sheafOfModules_from_indexed_basis",
+  "statement": "theorem exists_sheafOfModules_from_indexed_basis (X : TopCat.{u}) (I : Type u) (U : I → Opens X) (hB : IsBasis (Set.range U)) (cap : I → I → I) (hcap : ∀ i j, U (cap i j) = U i ⊓ U j) (hrefine : ∀ (i : I) (J : Type u) (V : J → I), (⨆ j, U (V j)) = U i → ∃ (n : ℕ) (W : Fin n → I), (⨆ k, U (W k)) = U i ∧ ∀ k, ∃ j, U (W k) ≤ U (V j)) (R : TopCat.Sheaf RingCat.{u} X) (Q : ∀ i : I, ModuleCat.{u} (R.obj.obj (op (U i)))) (r : ∀ (i j : I), U j ≤ U i → Q i →+ Q j) (rid : ∀ (i : I) (s : Q i), r i i le_rfl s = s) (rcomp : ∀ (i j k : I) (hji : U j ≤ U i) (hkj : U k ≤ U j) (s : Q i), r j k hkj (r i j hji s) = r i k (hkj.trans hji) s) (rsmul : ∀ (i j : I) (h : U j ≤ U i) (a : R.obj.obj (op (U i))) (s : Q i), r i j h (a • s) = R.obj.map (homOfLE h).op a • r i j h s) (hglue : ∀ (i : I) (n : ℕ) (V : Fin n → I) (hV : ∀ j, U (V j) ≤ U i), (⨆ j, U (V j)) = U i → ∀ s : ∀ j, Q (V j), (∀ j k, r (V j) (cap (V j) (V k)) (by rw [hcap]; exact inf_le_left) (s j) = r (V k) (cap (V j) (V k)) (by rw [hcap]; exact inf_le_right) (s k)) → ∃! t : Q i, ∀ j, r i (V j) (hV j) t = s j) : ∃ (E : SheafOfModules.{u} R) (iota : ∀ i : I, E.val.obj (op (U i)) ≃ₗ[R.obj.obj (op (U i))] Q i), (∀ (i j : I) (h : U j ≤ U i) (s : E.val.obj (op (U i))), iota j (E.val.map (homOfLE h).op s) = r i j h (iota i s)) ∧ (∀ (G : SheafOfModules.{u} R) (psi : ∀ i : I, Q i →ₗ[R.obj.obj (op (U i))] G.val.obj (op (U i))), (∀ (i j : I) (h : U j ≤ U i) (s : Q i), psi j (r i j h s) = G.val.map (homOfLE h).op (psi i s)) → (∃! phi : E ⟶ G, ∀ (i : I) (s : E.val.obj (op (U i))), phi.val.app (op (U i)) s = psi i (iota i s)) ∧ (∀ (phi : E ⟶ G), (∀ (i : I) (s : E.val.obj (op (U i))), phi.val.app (op (U i)) s = psi i (iota i s)) → (∀ i : I, Function.Bijective (psi i)) → IsIso phi))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T110315-L-620526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T110315-L-620526",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
