@@ -320,4 +320,13 @@ theorem isInvertible_dual_and_nonempty_iso (M : X.Modules) [M.IsInvertible] :
     Mᵛ.IsInvertible ∧ Nonempty (M ⊗ Mᵛ ≅ 𝟙_ X.Modules) ∧ Nonempty (M ≅ Mᵛᵛ) :=
   ⟨inferInstance, nonempty_tensorObj_dual_iso_unit M, nonempty_iso_dual_dual M⟩
 
+/-- **An invertible module has a tensor inverse.** For an invertible `𝒪_X`-module `M` there is
+an invertible `𝒪_X`-module `M⁻¹` with `M ⊗ M⁻¹ ≅ 𝒪_X`, namely the dual
+`Mᵛ = ℋom(M, 𝒪_X)`.
+
+(blueprint: `def-sc-invertible-module`) -/
+theorem exists_tensorObj_iso_unit (M : X.Modules) [M.IsInvertible] :
+    ∃ N : X.Modules, N.IsInvertible ∧ Nonempty (M ⊗ N ≅ 𝟙_ X.Modules) :=
+  ⟨Mᵛ, inferInstance, nonempty_tensorObj_dual_iso_unit M⟩
+
 end AlgebraicGeometry.Scheme.Modules

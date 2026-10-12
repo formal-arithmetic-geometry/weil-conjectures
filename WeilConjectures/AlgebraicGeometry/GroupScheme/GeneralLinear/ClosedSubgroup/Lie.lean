@@ -83,7 +83,7 @@ open Matrix.GeneralLinearGroup
 
 section ClosedSubgroup
 
-variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [CommRing k]
+variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [Field k]
   {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] [J.IsHopfIdeal k]
 
 /-- The differential `Lie(V(J)) → Lie(V(I))` of the closed immersion `V(J) ⟶ V(I)`, an injective
@@ -174,49 +174,66 @@ theorem dualUnit_mem_zeroLocus_identityComponent [IsAlgClosed k] [CharZero k] {X
   rw [map_mul, map_zero] at h
   exact (hunit.mul_right_eq_zero).1 h
 
+set_option synthInstance.maxHeartbeats 400000 in
+-- the group structure on points of the quotient scheme makes instance search slow
+/-- A tangent vector of `V(I)` whose matrix satisfies the equations of `J ≥ I` is tangent to
+`V(J)`. -/
+theorem exists_kerPost_eq_of_mem_zeroLocus {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k]
+    (h : I ≤ J) (p : GrpObj.pointsKer (subgroupScheme I) GrpObj.aug₁)
+    (hp : GeneralLinearGroup.homMulEquiv n k (DualNumber k) (p.1 ≫ subgroupSchemeι I) ∈
+      zeroLocus J (DualNumber k)) :
+    ∃ q : GrpObj.pointsKer (subgroupScheme J) GrpObj.aug₁,
+      GrpObj.kerPost (subgroupSchemeHom h) q = p := by
+  set q₀ := zeroLocusMulEquiv J (DualNumber k) ⟨_, hp⟩
+  have hq₀ : q₀ ≫ subgroupSchemeHom h = p.1 := by
+    rw [zeroLocusMulEquiv_comp_subgroupSchemeHom]
+    apply injective_homMulEquiv_comp I (DualNumber k)
+    dsimp only
+    rw [homMulEquiv_zeroLocusMulEquiv_comp]
+  have hmem : q₀ ∈ GrpObj.pointsKer (subgroupScheme J) (GrpObj.aug₁ (k := k)) := by
+    rw [GrpObj.mem_pointsKer]
+    apply (cancel_mono (subgroupSchemeHom h)).1
+    rw [MonObj.one_comp]
+    change (_ ≫ q₀) ≫ subgroupSchemeHom h = 1
+    rw [Category.assoc, hq₀]
+    exact GrpObj.mem_pointsKer.1 p.2
+  exact ⟨⟨q₀, hmem⟩, Subtype.ext hq₀⟩
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the group structure on points of the quotient scheme makes instance search slow
 /-- In characteristic zero, every tangent vector of `G = V(I)` is tangent to the reduced identity
 component `V(identityComponent I)`: the differential `Lie(G°) → Lie(G)` is bijective.
 
 `CharZero` is needed because `identityComponent I` is the ideal of the *reduced* identity
 component. The matrix form, for the points `1 + εX` of `V(I)` over the dual numbers, is
-`dualUnit_mem_zeroLocus_identityComponent`. Proof sketch (not formalised): by Cartier's theorem
-(`AlgebraicGeometry.GrpObj.isReduced_of_charZero`) `V(I)` is reduced, so the open identity
-component `AlgebraicGeometry.GrpObj.identityComponent (subgroupScheme I)`, whose differential is
-bijective by `AlgebraicGeometry.GrpObj.differential_identityComponentι_bijective`, is the reduced
-closed subscheme on the connected component of the identity, that is `V(identityComponent I)`
-(`range_subgroupSchemeHom_le_identityComponent`). (blueprint: `sk-i-cartier`) -/
+`dualUnit_mem_zeroLocus_identityComponent`: a tangent vector `1 + εX` of `V(I)` satisfies the
+equations of `identityComponent I`, so it is the image of a tangent vector of
+`V(identityComponent I)` (`exists_kerPost_eq_of_mem_zeroLocus`). (blueprint: `sk-i-cartier`) -/
 theorem lieAlgebraMap_identityComponent_bijective [IsAlgClosed k] [CharZero k] :
     Function.Bijective (lieAlgebraMap (le_identityComponent I)) := by
-  sorry
+  refine ⟨lieAlgebraMap_injective _, fun x ↦ ?_⟩
+  obtain ⟨p, hpx⟩ : ∃ p, GrpObj.lieEquivTangent _ x = p := ⟨_, rfl⟩
+  obtain ⟨X, hXp⟩ : ∃ X, tangentMatrix n k (GrpObj.kerPost (subgroupSchemeι I) p) = X :=
+    ⟨_, rfl⟩
+  have hX : GeneralLinearGroup.homMulEquiv n k (DualNumber k) (p.1 ≫ subgroupSchemeι I) =
+      dualUnit X :=
+    Units.ext (by
+      rw [show p.1 ≫ subgroupSchemeι I = (GrpObj.kerPost (subgroupSchemeι I) p).1 from rfl,
+        coe_homMulEquiv_tangent, hXp, coe_dualUnit])
+  have hI : dualUnit X ∈ zeroLocus I (DualNumber k) := by
+    rw [← hX, ← SetLike.mem_coe, ← range_homMulEquiv_comp I (DualNumber k)]
+    exact Set.mem_range_self p.1
+  have hI' := dualUnit_mem_zeroLocus_identityComponent I hI
+  rw [← hX] at hI'
+  obtain ⟨q, hq⟩ := exists_kerPost_eq_of_mem_zeroLocus I (le_identityComponent I) p hI'
+  refine ⟨(GrpObj.lieEquivTangent _).symm q, (GrpObj.lieEquivTangent _).injective ?_⟩
+  rw [GrpObj.lieEquivTangent_differential, Equiv.apply_symm_apply, hq, hpx]
 
 /-- Over an algebraically closed field of characteristic zero, the Lie algebra of an algebraic
 group is the Lie algebra of its reduced identity component. (blueprint: `sk-i-cartier`) -/
 noncomputable def lieAlgebraEquivIdentityComponent [IsAlgClosed k] [CharZero k] :
     GrpObj.Lie (subgroupScheme (identityComponent I)) ≃ₗ⁅k⁆ GrpObj.Lie (subgroupScheme I) :=
   LieEquiv.ofBijective _ (lieAlgebraMap_identityComponent_bijective I)
-
-/-- Cartier's theorem, Lie algebra form: over a field of characteristic zero, the Lie algebra of
-a closed subgroup scheme `V(I)` has dimension the Krull dimension of its coordinate ring. This is
-`AlgebraicGeometry.GrpObj.finrank_lie_eq_topologicalKrullDim` for the affine scheme
-`V(I) = Spec (k[GL_n] ⧸ I)`. (blueprint: `sk-i-cartier`) -/
-theorem finrank_lie_eq_ringKrullDim [CharZero k] :
-    (Module.finrank k (GrpObj.Lie (subgroupScheme I)) : WithBot ℕ∞) =
-      ringKrullDim (CoordinateRing n k ⧸ I) :=
-  (GrpObj.finrank_lie_eq_topologicalKrullDim (subgroupScheme I)).trans
-    (PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim (CoordinateRing n k ⧸ I))
-
-/-- A closed subgroup `V(J)` of a connected matrix group `V(I)` with the same Lie algebra is all of
-`V(I)`, in characteristic zero: the Lie algebras have the dimensions of the groups
-(`finrank_lie_eq_ringKrullDim`), and `V(I)` is irreducible
-(`Matrix.GeneralLinearGroup.IsConnected.isPrime`).
-(blueprint: `lem-wf-same-lie-closed-subgroup`, clause (1)) -/
-theorem eq_of_le_of_bijective_lieAlgebraMap [IsAlgClosed k] [CharZero k] (hconn : IsConnected I)
-    {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (hIJ : I ≤ J)
-    (h : Function.Bijective (lieAlgebraMap hIJ)) : J = I := by
-  have := hconn.isPrime
-  refine eq_of_le_of_ringKrullDim_eq I hIJ ?_
-  rw [← finrank_lie_eq_ringKrullDim J, ← finrank_lie_eq_ringKrullDim I,
-    (LieEquiv.ofBijective _ h).toLinearEquiv.finrank_eq]
 
 /-! #### The tangent space at the identity, in matrices
 
@@ -300,6 +317,86 @@ theorem finrank_cotangent_eq_finrank_range_dualCotangentToMatrixₗ :
   have := (Bialgebra.counitAlgHom k (CoordinateRing n k ⧸ I)).finiteDimensional_cotangent
   rw [LinearMap.finrank_range_of_inj (dualCotangentToMatrixₗ_injective I),
     Subspace.dual_finrank_eq]
+
+/-- The matrix `X` of a tangent vector `1 + εX` of `V(I)`: the differential of `V(I) ⟶ GL_n`
+followed by `Lie(GL_n) = gl_n`. -/
+noncomputable def lieToMatrix : GrpObj.Lie (subgroupScheme I) →ₗ[k] Matrix n n k :=
+  (lieAlgebraEquivMatrix n k).toLinearEquiv.toLinearMap ∘ₗ
+    (GrpObj.differential (subgroupSchemeι I)).toLinearMap
+
+theorem lieToMatrix_apply (x : GrpObj.Lie (subgroupScheme I)) :
+    lieToMatrix I x = tangentMatrix n k
+      (GrpObj.kerPost (subgroupSchemeι I) (GrpObj.lieEquivTangent _ x)) := by
+  change toMatrix n k (GrpObj.differential (subgroupSchemeι I) x) = _
+  rw [toMatrix, GrpObj.lieEquivTangent_differential]
+
+theorem lieToMatrix_injective : Function.Injective (lieToMatrix I) :=
+  (lieAlgebraEquivMatrix n k).injective.comp (GrpObj.differential_injective _)
+
+/-- The matrices of the tangent vectors of `V(I)` are the `X` with `1 + εX ∈ V(I)`. -/
+theorem range_lieToMatrix :
+    LinearMap.range (lieToMatrix I) = LinearMap.range (dualCotangentToMatrixₗ I) := by
+  ext X
+  rw [mem_range_dualCotangentToMatrixₗ]
+  constructor
+  · rintro ⟨x, rfl⟩
+    obtain ⟨p, hp⟩ : ∃ p, GrpObj.lieEquivTangent _ x = p := ⟨_, rfl⟩
+    have hX : GeneralLinearGroup.homMulEquiv n k (DualNumber k) (p.1 ≫ subgroupSchemeι I) =
+        dualUnit (lieToMatrix I x) :=
+      Units.ext (by
+        rw [lieToMatrix_apply, hp, coe_dualUnit,
+          show p.1 ≫ subgroupSchemeι I = (GrpObj.kerPost (subgroupSchemeι I) p).1 from rfl,
+          coe_homMulEquiv_tangent])
+    rw [← hX, ← SetLike.mem_coe, ← range_homMulEquiv_comp I (DualNumber k)]
+    exact Set.mem_range_self p.1
+  · intro hX
+    set q₀ := zeroLocusMulEquiv I (DualNumber k) ⟨_, hX⟩
+    have hq₀ : GeneralLinearGroup.homMulEquiv n k (DualNumber k) (q₀ ≫ subgroupSchemeι I) =
+        dualUnit X :=
+      homMulEquiv_zeroLocusMulEquiv_comp _
+    have hmem : q₀ ∈ GrpObj.pointsKer (subgroupScheme I) (GrpObj.aug₁ (k := k)) := by
+      rw [GrpObj.mem_pointsKer]
+      apply (cancel_mono (subgroupSchemeι I)).1
+      rw [MonObj.one_comp]
+      apply (GeneralLinearGroup.homMulEquiv n k k).injective
+      change GeneralLinearGroup.homMulEquiv n k k
+        (points.map _ (GrpObj.aug₁ (k := k)) (q₀ ≫ subgroupSchemeι I)) = _
+      rw [homMulEquiv_points_map, hq₀, map_one]
+      exact map_fstHom_dualUnit X
+    refine ⟨(GrpObj.lieEquivTangent _).symm ⟨q₀, hmem⟩, ?_⟩
+    rw [lieToMatrix_apply, Equiv.apply_symm_apply, tangentMatrix]
+    change (((GeneralLinearGroup.homMulEquiv n k (DualNumber k) (q₀ ≫ subgroupSchemeι I)) :
+      GL n (DualNumber k)) : Matrix n n (DualNumber k)).map snd = X
+    rw [hq₀, coe_dualUnit]
+    ext i j
+    simp [Matrix.one_apply, apply_ite]
+
+/-- Cartier's theorem, Lie algebra form: over a field of characteristic zero, the Lie algebra of
+a closed subgroup scheme `V(I)` has dimension the Krull dimension of its coordinate ring. This is
+`AlgebraicGeometry.GrpObj.finrank_lie_eq_topologicalKrullDim` for the affine scheme
+`V(I) = Spec (k[GL_n] ⧸ I)`: `Lie(V(I))` is the dual of the cotangent space at the identity, whose
+dimension is `dim (k[GL_n] ⧸ I)` by `HopfAlgebra.finrank_cotangent_eq_ringKrullDim`.
+(blueprint: `sk-i-cartier`) -/
+theorem finrank_lie_eq_ringKrullDim [CharZero k] :
+    (Module.finrank k (GrpObj.Lie (subgroupScheme I)) : WithBot ℕ∞) =
+      ringKrullDim (CoordinateRing n k ⧸ I) := by
+  have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
+  rw [← LinearMap.finrank_range_of_inj (lieToMatrix_injective I), range_lieToMatrix,
+    ← finrank_cotangent_eq_finrank_range_dualCotangentToMatrixₗ]
+  exact HopfAlgebra.finrank_cotangent_eq_ringKrullDim k _
+
+/-- A closed subgroup `V(J)` of a connected matrix group `V(I)` with the same Lie algebra is all of
+`V(I)`, in characteristic zero: the Lie algebras have the dimensions of the groups
+(`finrank_lie_eq_ringKrullDim`), and `V(I)` is irreducible
+(`Matrix.GeneralLinearGroup.IsConnected.isPrime`).
+(blueprint: `lem-wf-same-lie-closed-subgroup`, clause (1)) -/
+theorem eq_of_le_of_bijective_lieAlgebraMap [IsAlgClosed k] [CharZero k] (hconn : IsConnected I)
+    {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (hIJ : I ≤ J)
+    (h : Function.Bijective (lieAlgebraMap hIJ)) : J = I := by
+  have := hconn.isPrime
+  refine eq_of_le_of_ringKrullDim_eq I hIJ ?_
+  rw [← finrank_lie_eq_ringKrullDim J, ← finrank_lie_eq_ringKrullDim I,
+    (LieEquiv.ofBijective _ h).toLinearEquiv.finrank_eq]
 
 end Cartier
 
@@ -387,7 +484,18 @@ theorem lie_mem_range_lieAlgebraMap_identityComponent [IsAlgClosed k] [CharZero 
     [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
     (X Y : GrpObj.Lie (subgroupScheme (identityComponent I))) :
     ⁅X, Y⁆ ∈ (lieAlgebraMap (identityComponent_mono I h)).range := by
-  sorry
+  have hcomm (w : GrpObj.Lie (subgroupScheme (identityComponent J))) :
+      lieAlgebraMap (le_identityComponent I) (lieAlgebraMap (identityComponent_mono I h) w) =
+        lieAlgebraMap h (lieAlgebraMap (le_identityComponent J) w) := by
+    rw [lieAlgebraMap, lieAlgebraMap, lieAlgebraMap, lieAlgebraMap, ← LieHom.comp_apply,
+      ← LieHom.comp_apply, ← GrpObj.differential_comp, ← GrpObj.differential_comp,
+      GrpObj.differential_congr (subgroupSchemeHom_comp _ _),
+      GrpObj.differential_congr (subgroupSchemeHom_comp _ _)]
+  obtain ⟨z, hz⟩ := (LieHom.mem_range _ _).1 (lie_mem_range_lieAlgebraMap h
+    (lieAlgebraMap (le_identityComponent I) X) (lieAlgebraMap (le_identityComponent I) Y))
+  obtain ⟨w, rfl⟩ := (lieAlgebraMap_identityComponent_bijective J).2 z
+  refine (LieHom.mem_range _ _).2 ⟨w, (lieAlgebraMap_identityComponent_bijective I).1 ?_⟩
+  rw [hcomm, hz, LieHom.map_lie]
 
 /-- The standard representation of the `k`-points of `V(I)` on `kⁿ`: a point `Spec k ⟶ V(I)` acts
 through its image in `GL_n(k)` under the closed immersion `V(I) ⟶ GL_n`: the algebraic-group
