@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-finite-locally-constant-sets-local-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+   "place": "converse descent part: finite local values",
+   "via": [
+    "lem-weil-pbc-finite-locally-constant-sets-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite locally constant sheaves admit finite constant local models",
+ "statement": "Let T be a scheme [def-pc-scheme] and E a sheaf of sets [def-weil-pbc-etale-sheaf-of-sets] on its small etale site [def-weil-pbc-etale-site]. If E is constant [def-weil-pbc-constant-sheaf] on the members of some etale cover and all its separably closed geometric stalks are finite, there is an etale cover on every member U of which the restriction of E is isomorphic to a constant sheaf of some finite set S. The sets S may have different sizes and may lie in the next universe.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV, converse descent part"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use the essential-image definition of a constant sheaf to choose its constant value on every cover member. On a nonempty member choose a geometric point via an algebraic closure of a residue field. Restriction preserves the stalk at that point, and sheafification preserves stalks; the stalk of the constant presheaf is its value because pointed neighbourhoods are filtered and nonempty. The finite-stalk hypothesis therefore makes this value finite. Delete empty members, retaining a jointly surjective cover with subtype index set. On the empty base use the empty cover.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV; local-value and effective-descent argument expanded in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of a constant sheaf of sets at a point is isomorphic to its constant value",
+   "results": "CategoryTheory.Sheaf.isConstant_of_iso; TopCat.Presheaf.toType_isSheaf; CategoryTheory.Sheaf.IsConstant; AlgebraicGeometry.PresheafedSpace.const; CategoryTheory.constantSheaf; TopCat.sheafInhabited; AlgebraicGeometry.SheafedSpace.unit; TopCat.Presheaf.isSheaf_unit",
+   "date": "2026-10-12",
+   "verdict": "No theorem proves either new interface; supporting constant-sheaf definitions only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of sets with finite geometric stalks which is constant on an etale cover admits finite constant local values",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Ff]iber|[Ff]iber.*constant|finite.*represent",
+   "results": "No matches in Mathlib CategoryTheory/Sites.",
+   "date": "2026-10-12",
+   "verdict": "No theorem proves either new interface; supporting constant-sheaf definitions only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsLocalModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyConstantSetsLocalModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteLocallyConstant_exists_local_models",
+  "statement": "theorem finiteLocallyConstant_exists_local_models\n    (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))\n    (hloc : ∃ 𝒰 : Cover.{u} etalePrecoverage T, ∀ i,\n      (E.over (𝒰.etalePrecoverageToEtale i)).IsConstant\n        (T.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i)))\n    (hfin : IsFiniteSheaf E) :\n    ∃ 𝒰 : Cover.{u} etalePrecoverage T, ∀ i,\n      ∃ S : Type (u + 1), Finite S ∧\n        Nonempty ((E.over (𝒰.etalePrecoverageToEtale i)) ≅\n          (constantSheaf (T.smallEtaleTopology.over\n            (𝒰.etalePrecoverageToEtale i)) (Type (u + 1))).obj S)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053951-L-2644380",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053951-L-2644380",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

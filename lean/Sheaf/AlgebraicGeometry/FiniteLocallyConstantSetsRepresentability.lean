@@ -7,8 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
-import Sheaf.AlgebraicGeometry.FiniteEtaleDescent
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsLocalModels
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsDescent
 
 /-! # Representability of finite locally constant sheaves of sets
 
@@ -48,6 +48,8 @@ theorem finiteLocallyConstant_sets_representable
         (T.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i)))
     (hfin : IsFiniteSheaf E) :
     ∃ (P : Scheme.{u}) (π : P ⟶ T) (_ : IsFinite π) (_ : Etale π),
-      Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Etale.mk π)) := by sorry
+      Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Etale.mk π)) := by
+  obtain ⟨hlocal, hmodels⟩ := finiteLocallyConstant_exists_local_models T E hloc hfin
+  exact finiteLocallyConstant_descent_of_local_models T E ⟨hlocal, hmodels⟩
 
 end AlgebraicGeometry.Scheme
