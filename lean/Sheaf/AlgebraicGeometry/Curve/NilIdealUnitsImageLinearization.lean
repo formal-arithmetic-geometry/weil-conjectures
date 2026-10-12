@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+import Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsAdditiveImageComparison
+import Sheaf.AlgebraicGeometry.Curve.AdditiveIdealImageTensorComparison
 import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-! # Linearization of the image of nilpotent units modulo an ideal
@@ -52,6 +54,10 @@ theorem nonempty_nilIdealUnitsImageIso (X : Scheme.{u}) (I J : X.IdealSheafData)
         gmSheafToLowerStarGmSheaf J.subschemeι) ≅
       ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
         (Modules.etaleTensorSectionsSheaf
-          (cokernel (IdealSheafData.toModulesOfLE hJI))))) := by sorry
+          (cokernel (IdealSheafData.toModulesOfLE hJI))))) := by
+  obtain ⟨unitsToAdditive⟩ :=
+    nonempty_nilIdealUnitsAdditiveImageIso X I J hJI hII hIN
+  obtain ⟨additiveToTensor⟩ := nonempty_additiveIdealImageTensorIso X I J hJI
+  exact ⟨unitsToAdditive.trans additiveToTensor⟩
 
 end AlgebraicGeometry.Scheme

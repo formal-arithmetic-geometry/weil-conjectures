@@ -16,56 +16,33 @@
  ],
  "proof": [
   {
-   "text": "On an affine etale V over an affine open U=Spec A, write B=Gamma(V,O). Extend the ideals I,J to I_B,J_B in B. Flatness and the affine description of the specified ideal modules identify sections of the tensor pullback of their module cokernel with I_B/J_B. Kernels of abelian sheaves are computed on sections; images are sheafifications of sectionwise images. Thus the image in the statement is locally the image of 1+I_B in the units of B/J_B.",
+   "text": "Apply the nil-unit to additive-image comparison, which uses nilpotence and the square-zero multiplication calculation but no tensor-section comparison.",
    "uses": [
-    "def-pc-scheme",
-    "def-sbc-ideal-sheaf-powers",
-    "def-weil-pbc-scheme-reduction",
-    "def-sc-gm-torsor",
-    "def-sc-etale-qcoherent-module"
+    "lem-sc-nil-ideal-units-additive-image-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-    "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
-   }
+   "elementary": false
   },
   {
-   "text": "Every a in I_B is nilpotent: it is a finite sum of multiples of the images of nilpotents in I. The finite geometric series makes 1+a a unit. Send the image of 1+a in B/J_B to a modulo J_B. Equality of the unit images is exactly membership of the difference in J_B, so the map is well defined and injective. Every additive class is represented by such an a, so it is surjective. Multiplication is addition under this map because ab lies in J_B.",
+   "text": "Apply the additive ideal image to tensor-section comparison, which uses J contained in I and quasi-coherence of the specified cokernel but neither nilpotence nor square-zero.",
    "uses": [
-    "def-sbc-ideal-sheaf-powers",
-    "def-weil-pbc-scheme-reduction"
+    "lem-sc-additive-ideal-image-tensor-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-    "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
-   }
+   "elementary": false
   },
   {
-   "text": "Pullback of functions commutes with the formula 1+a to a mod J_B and its inverse. These bijective homomorphisms therefore glue over affine etale refinements to mutually inverse maps of the image sheaf and the specified tensor-sections sheaf. Lift the additive groups to the coefficient universe of Gm. The same argument covers I=J, zero ideals, empty schemes, and j=0 in the power specialization.",
-   "uses": [
-    "def-sc-gm-torsor",
-    "def-sc-etale-qcoherent-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-    "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
-   }
+   "text": "Compose the two isomorphisms through the concrete additive image sheaf. Their intermediate objects are definitionally equal, and the composite has precisely the original source and target.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-sbc-ideal-sheaf-powers",
-  "def-weil-pbc-scheme-reduction",
-  "def-sc-gm-torsor",
-  "def-sc-etale-qcoherent-module"
+  "lem-sc-nil-ideal-units-additive-image-comparison",
+  "lem-sc-additive-ideal-image-tensor-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel; J1 separates the ring-theoretic unit linearization from the additive flat-base-change comparison"
  },
  "mathlib_searches": [
   {
@@ -145,9 +122,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T163617-L-2786369",
+  "landing": "20261012T194118-L-457376",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

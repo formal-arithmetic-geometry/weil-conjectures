@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-additive-ideal-image-tensor-comparison",
+ "kind": "statement",
+ "title": "Additive ideal image equals tensor sections of the module quotient",
+ "statement": "Let X be a scheme [def-pc-scheme] and J contained in I be quasi-coherent ideal sheaves [def-sbc-ideal-sheaf-powers]. Let r_K:A_X to (i_K)_*A_{Z_K} be the additive structure restriction [def-sc-etale-additive-structure-restriction]. Let F be the specified categorical module cokernel of J.toModules to I.toModules, and assume F is quasi-coherent. Then im(ker(r_I) to A_X to (i_J)_*A_{Z_J}) is isomorphic to ULift(F_et), where F_et is the tensor-sections sheaf [def-sc-etale-qcoherent-module]. This assertion has no nilpotence or square-zero hypothesis.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-etale-additive-structure-restriction",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof": [
+  {
+   "text": "Refine by affine etale V over affine U=Spec A. With B=Gamma(V,O), the additive kernel for I is I_B and its restriction into B/J_B has kernel J_B. Hence its sectionwise image is I_B/J_B. These are the ideals cut out by the specified subscheme restrictions.",
+   "uses": [
+    "def-sc-etale-additive-structure-restriction",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flatness of B over A identifies I_B/J_B with B tensor_A coker(J(U) to I(U)). The specified ideal modules are the kernels of the same structure-module maps and the specified morphism is their inclusion. Affine sections of the tensor pullback of their specified cokernel are thus precisely this quotient.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient maps, inclusion maps, and tensor base change commute with restriction ring maps; the local identifications and their inverses therefore glue. Categorical sheaf images are sheafifications of the presheaf images, giving the required isomorphism with tensor sections. Lift additive coefficients to the Gm universe. If I=J, I=0, or X is empty the same comparison is between zero sheaves.",
+   "uses": [
+    "def-sc-etale-additive-structure-restriction",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-additive-structure-restriction",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel; the existing affine argument is separated into additive and multiplicative comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "image of an ideal in a quotient ring is the cokernel of the inclusion of ideals and tensor sections sheaf",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "image of an ideal in a quotient ring is the cokernel of the inclusion of ideals and tensor sections sheaf",
+   "results": "Algebra.Extension.tensorCotangentSpace and KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale concern cotangent modules, not the specified etale sheaf image and module cokernel.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg additiveIdealImageTensorIso|etaleTensor.*cokernel|cokernel.*etaleTensor in Mathlib and both library roots",
+   "results": "No comparison theorem; generic module exactness and tensor-sections definitions exist.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsImageLinearization",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and its Claim: Additive ideal image equals tensor sections of the module quotient",
+   "via": [
+    "lem-sc-nil-ideal-units-image-linearization",
+    "lem-sc-reduction-units-power-cokernel",
+    "lem-sc-reduction-units-power-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.AdditiveIdealImageTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/AdditiveIdealImageTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_additiveIdealImageTensorIso",
+  "statement": "theorem nonempty_additiveIdealImageTensorIso (X : Scheme.{u}) (I J : X.IdealSheafData)\n    (hJI : J ≤ I) [(cokernel (IdealSheafData.toModulesOfLE hJI)).IsQuasicoherent] :\n    Nonempty (image (kernel.ι (etaleAdditiveSheafToLowerStar I.subschemeι) ≫\n        etaleAdditiveSheafToLowerStar J.subschemeι) ≅\n      ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n        (Modules.etaleTensorSectionsSheaf\n          (cokernel (IdealSheafData.toModulesOfLE hJI)))))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

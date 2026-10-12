@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-nil-ideal-units-additive-image-comparison",
+ "kind": "statement",
+ "title": "Linearization of the unit image into the additive ideal image",
+ "statement": "Let X be a scheme [def-pc-scheme] and J contained in I be quasi-coherent ideal sheaves [def-sbc-ideal-sheaf-powers], with I*I contained in J and I contained in the nilradical [def-weil-pbc-scheme-reduction]. For K let q_K:Gm_X to (i_K)_*Gm_{Z_K} be restriction of units [def-sc-gm-torsor], and r_K:A_X to (i_K)_*A_{Z_K} be the specified additive restriction [def-sc-etale-additive-structure-restriction]. Then im(ker(q_I) to Gm_X to (i_J)_*Gm_{Z_J}) is isomorphic to im(ker(r_I) to A_X to (i_J)_*A_{Z_J}). All kernels and images are categorical in abelian sheaves, with additive coefficients lifted to the universe of Gm. No module cokernel or quasi-coherence hypothesis on it is involved.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-pbc-scheme-reduction",
+  "def-sc-gm-torsor",
+  "def-sc-etale-additive-structure-restriction"
+ ],
+ "proof": [
+  {
+   "text": "On affine etale V over affine U, write B=Gamma(V,O), I_B and J_B for the extended ideals. The kernels on sections are the units congruent to one modulo I_B and the additive ideal I_B. Every a in I_B is nilpotent, since nilpotents form an ideal in a commutative ring and ideal extension consists of finite sums of multiples of the original nilpotents. The finite geometric series makes 1+a a unit.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "def-weil-pbc-scheme-reduction",
+    "def-sc-etale-additive-structure-restriction",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the image of 1+a in (B/J_B)^units to a mod J_B in the additive image. Equality of unit representatives and equality of additive representatives are both exactly a-b in J_B. The map is therefore well defined, injective and surjective. Since ab lies in J_B, multiplication of 1+a and 1+b corresponds to addition of their images. The inverse sends a mod J_B to 1+a mod J_B.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The formulas commute with all restriction ring maps. Refine by affine etale objects as above and glue the natural group isomorphisms, using that categorical images of sheaves are sheafifications of presheaf images. Apply the coefficient universe lift. For I=J or I=0 both images vanish; empty affine objects give the zero ring and trivial groups.",
+   "uses": [
+    "def-sc-etale-additive-structure-restriction",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-pbc-scheme-reduction",
+  "def-sc-etale-additive-structure-restriction",
+  "def-sc-gm-torsor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel; the existing affine argument is separated into additive and multiplicative comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "nilpotent units one plus ideal modulo square zero ideal image is additive ideal image",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "nilpotent units one plus ideal modulo square zero ideal image is additive ideal image",
+   "results": "Ideal.cotangentEquivIdeal and Ideal.quotCotangent identify additive quotients, not units or etale sheaf images; IsNilpotent.isUnit_add_one proves only that the local representatives are units.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg nilIdealUnits|nil.*[Uu]nits|units.*squareZero in Mathlib/Algebra and both library roots",
+   "results": "No theorem comparing these sheaf images. General unit infrastructure and the parent statement only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsImageLinearization",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and its Claim: Linearization of the unit image into the additive ideal image",
+   "via": [
+    "lem-sc-nil-ideal-units-image-linearization",
+    "lem-sc-reduction-units-power-cokernel",
+    "lem-sc-reduction-units-power-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsAdditiveImageComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/NilIdealUnitsAdditiveImageComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_nilIdealUnitsAdditiveImageIso",
+  "statement": "theorem nonempty_nilIdealUnitsAdditiveImageIso (X : Scheme.{u})\n    (I J : X.IdealSheafData) (hJI : J ≤ I) (hII : I * I ≤ J)\n    (hIN : I ≤ X.nilradical) :\n    Nonempty (image (kernel.ι (gmSheafToLowerStarGmSheaf I.subschemeι) ≫\n        gmSheafToLowerStarGmSheaf J.subschemeι) ≅\n      image (kernel.ι (etaleAdditiveSheafToLowerStar I.subschemeι) ≫\n        etaleAdditiveSheafToLowerStar J.subschemeι))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
