@@ -9977,3 +9977,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/W3/Sheaf.AlgebraicGeometry.VanishingProjective (stage 3; reviewer PASS; first push; landing 20261012T225337-L-1815675 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:53 L: merged deliver/W3/Sheaf.CategoryTheory.FiniteCoconeExactCouple (stage 3; reviewer PASS; first push; landing 20261012T225338-L-1815821 (interface); batch 20261012T225253; modules 3; new nodes 2)
 - 22:53 L: merged deliver/X2/Sheaf.Algebra.Homology.KInjectiveHomComplex (stage 3; reviewer PASS; first push; landing 20261012T225338-L-1815922 (interface); batch 20261012T225253; modules 2; new nodes 1)
+- 22:53 L: merged deliver/X2/Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts (stage 3; reviewer PASS; first push; landing 20261012T225338-L-1816023 (proof); batch 20261012T225253; modules 1; new nodes 0)
