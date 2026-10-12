@@ -48,7 +48,7 @@ def classify(g: str, item: str):
         if f3.exists():
             for l in f3.read_text().split("\n"):
                 p = l.split("\t")
-                if len(p) >= 3 and p[0] == g and p[1] == item and head.startswith(p[2]):
+                if len(p) >= 3 and p[0] == g and p[1] == item and head.startswith(p[2]) and "merge.lock held" not in l:
                     return "CODEX", "automatic landing failed: " + (p[3] if len(p) > 3 else ""), head
         sys.path.insert(0, str(ROOT / "tools")); import stage2_delivery as s2, stage3_delivery as s3
         try:
@@ -56,7 +56,16 @@ def classify(g: str, item: str):
             why = s3.classify(D, g, item)
         except Exception as e:   # a delivery the tool cannot read needs a reader
             return "CODEX", "the delivery could not be read: " + repr(e)[:200], head
-        return ("AUTO", "", head) if not why else ("CODEX", "; ".join(why), head)
+        # the human, 2026-10-12: in stage 3 a proof that compiles is checked by the compiler, not by a reader. A reader
+        # is kept only where the compiler cannot see the harm: an existing statement or interface changed, a declaration
+        # removed, a unit-route import removed, a disputed statement, a forbidden keyword, failed static checks.
+        KEEP = ("the static checks fail", "statement changed", "removes declarations", "removes the import of unit-route",
+                "new ", "STATEMENT-DISPUTED", "changes what other modules see")
+        allwhy = why
+        why = [w for w in why if w.startswith(KEEP) and not w.endswith(": (new module)")]
+        # "compiler-only": landed without a reader although it is more than a proof of one module (new lemmas, nodes,
+        # modules); the lander passes --reviewer COMPILER so that the proofs-only guard of AUTO does not revert it
+        return ("AUTO", ("compiler-only: " + "; ".join(allwhy)) if allwhy else "", head) if not why else ("CODEX", "; ".join(why), head)
     base = git("merge-base", "sheaf-dag", br).strip()
     ch = [l.split("\t") for l in git("diff", "--name-status", f"{base}..{br}").strip().split("\n") if l]
     nodes = [(c[0], c[-1]) for c in ch if c[-1].startswith("dag/nodes/") and c[-1].endswith(".json")]
