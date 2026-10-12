@@ -8591,3 +8591,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.AffineModuleTensorUnitLift (stage 3; reviewer PASS; first push; landing 20261012T163625-L-2789199 (proof); batch 20261012T163610; modules 1; new nodes 0)
 - 16:36 L: returned deliver/S2/Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroCompatibility (reviewer RETURN: (reviewer X-96f76, head 96f763d07) E2 (brief point 4): the sorry theorem is false because a and b are arbitrary while Is)
 - 16:45 L: returned deliver/W3/Sheaf.AlgebraicGeometry.EtaleZariskiAbelianPositiveComparison (reviewer RETURN: (reviewer X-4d2b7, head 4d2b7d7d3) F (report accuracy; review points 5 and 7): In coord/reports/W3/Sheaf.AlgebraicGeomet)
+- 16:46 L: returned deliver/S3/Sheaf.RingTheory.PopescuSeparablePreparationCore (reviewer RETURN: (reviewer X-cc535, head cc535c0b1) F: In coord/reports/S3/Sheaf.RingTheory.PopescuSeparablePreparationCore.md, lines 33–)
