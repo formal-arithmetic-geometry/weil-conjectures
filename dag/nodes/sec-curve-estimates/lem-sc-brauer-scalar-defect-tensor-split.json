@@ -13,33 +13,41 @@
  ],
  "proof": [
   {
-   "text": "Choose the splitting matrices and locally constant lifts in the two realizations. Transposition gives a splitting of the opposite of B; its lifts are inverse transposes. Kronecker tensoring gives a splitting of A⊗Bop whose scalar defect is the quotient c_z/c_w of the two scalar defects.",
+   "text": "Apply exists_tensor_opposite_scalarDefect_lifts to retain n≠0, the tensor splitting e, locally constant b, and actual cocycles z,w with their class projection and quotient-defect equations.",
    "uses": [
-    "def-sc-brauer-scalar-defect"
+    "lem-sc-brauer-scalar-defect-tensor-lifts"
    ],
    "elementary": false
   },
   {
-   "text": "Equality of the homogeneous degree-two cohomology classes implies z−w is a continuous homogeneous boundary. Evaluating its witnessing one-cochain at (1,g) gives a locally constant scalar cochain a with c_z(g,h)/c_w(g,h)=a(g)g(a(h))/a(gh). Rescaling the tensor lifts by a(g) inverse makes their scalar defect trivial, so they form a genuine GL cocycle.",
+   "text": "Compose the two projection equations with x=y and obtain a locally constant scalar cochain a from exists_scalar_cochain_of_galoisUnits_class_eq.",
    "uses": [
-    "def-sc-galois-units-cohomology"
+    "lem-sc-galois-units-scalar-coboundary"
    ],
    "elementary": false
   },
   {
-   "text": "The rescaled cocycle is locally constant on the compact Galois group. Choose an open normal subgroup on whose cosets the cocycle is constant and which fixes its finitely many matrix entries and the finitely many splitting coefficients. The cocycle is one on this subgroup and factors through the finite Galois quotient with coefficients in its fixed field. Finite Galois descent of vector spaces trivializes this matrix cocycle. Conjugate the splitting by the trivializing matrix so that its descent action is entrywise Galois action. Fixed points then give A⊗Bop ≅ M_n(K), where n is the product of the positive original splitting sizes. This proves tensor splitting without invoking Brauer equivalence.",
+   "text": "Define b′(g)=scalar(a(g) inverse)*b(g). Local constancy is preserved by composition and multiplication. Use centrality of scalar matrices and the quotient-defect identity to prove b′(g)g(b′(h))=b′(gh), cancelling a(g), g(a(h)), and a(gh). Scalar matrices commute with each e(1 tensor d), so their inverse pair cancels and the original conjugation equation is unchanged. These are explicit Lean calculations, not new hypotheses.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply nonempty_algEquiv_matrix_of_galois_cocycle to D=A tensor Bop, e and the genuine cocycle b′; pair the resulting K-algebra equivalence with n and n≠0.",
+   "uses": [
+    "lem-sc-galois-matrix-cocycle-split"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-brauer-scalar-defect",
-  "def-sc-galois-units-cohomology"
+  "lem-sc-brauer-scalar-defect-tensor-lifts",
+  "lem-sc-galois-units-scalar-coboundary",
+  "lem-sc-galois-matrix-cocycle-split"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Etale Cohomology",
-  "place": "Tag 03R7, injectivity argument; Section 0DVG"
+  "place": "Tag 03R7; Section 0DVG; explicit scalar rescaling calculation in Lean"
  },
  "mathlib_searches": [
   {
@@ -111,9 +119,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T144053-L-2088808",
+  "landing": "20261012T194124-L-459378",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

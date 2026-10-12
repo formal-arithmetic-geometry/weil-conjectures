@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-galois-units-scalar-coboundary",
+ "kind": "statement",
+ "title": "Equal homogeneous classes give a locally constant scalar coboundary",
+ "statement": "Let $K$ be a field, $S$ its separable closure, $G=\\mathrm{Gal}(S/K)$, and $z,w$ homogeneous continuous degree-two cocycles for the discrete units of $S$ [def-sc-galois-units-cohomology]. If their cohomology projections agree, there is a locally constant $a:G\\to S^\\times$ with $c_z(g,h)/c_w(g,h)=a(g)g(a(h))/a(gh)$ for all $g,h$, where $c_z,c_w$ are the homogeneous evaluations [def-sc-brauer-scalar-defect].",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Section 0DVG, degree-one differential"
+ },
+ "stmt_deps": [
+  "def-sc-galois-units-cohomology",
+  "def-sc-brauer-scalar-defect"
+ ],
+ "proof": [
+  {
+   "text": "the homogeneous cohomology is the kernel of d2 modulo the image of d1.\nEquality of the projections therefore supplies an invariant continuous homogeneous\none-cochain F whose differential is z-w. Evaluate at (1,g) and put a(g)=F(1,g).toMul.\nThe coefficient topology is discrete, so continuity makes a locally constant.\nHomogeneous equivariance gives F(g,g*h)=g(F(1,h)), while the degree-one differential\nat (1,g,g*h) is F(g,g*h)-F(1,g*h)+F(1,g). Translating this additive equality to units\ngives c_z/c_w=a(g)*g(a(h))/a(g*h), with precisely the sign shown below.\nNo normalization of either representative is required.",
+   "uses": [
+    "def-sc-galois-units-cohomology",
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-galois-units-cohomology",
+  "def-sc-brauer-scalar-defect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Expanded steps of Tag 03R7 and Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equal homogeneous continuous cohomology classes unit cocycles quotient is locally constant scalar coboundary",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equal homogeneous continuous cohomology classes unit cocycles quotient is locally constant scalar coboundary",
+   "results": "groupCohomology.H1π_eq_iff, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous.class_eq, groupCohomology.H2π_eq_iff, CategoryTheory.PresheafOfGroups.OneCocycle.class_eq_iff, groupCohomology.cocyclesMk₀_eq, groupCohomology.cocycles₂_map_one_fst, CategoryTheory.PresheafOfGroups.OneCocycle.class",
+   "date": "2026-10-12",
+   "verdict": "No exact match; elementary ingredients used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyπ_comp_homologyIso_hom|cyclesIso_hom_comp_i",
+   "results": "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match; elementary ingredients used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.BrauerScalarDefectTensorSplit",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: scalar-defect injectivity in the field Brauer comparison",
+   "via": [
+    "lem-sc-brauer-scalar-defect-tensor-split",
+    "lem-sc-brauer-scalar-defect-faithful-backward",
+    "lem-sc-brauer-scalar-defect-faithful",
+    "lem-sc-brauer-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.GaloisUnitsScalarCoboundary",
+  "file": "lean/Sheaf/FieldTheory/GaloisUnitsScalarCoboundary.lean",
+  "declaration": "Field.exists_scalar_cochain_of_galoisUnits_class_eq",
+  "statement": "theorem exists_scalar_cochain_of_galoisUnits_class_eq (K : Type u) [Field K] (z w : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2) (hzw : (ContinuousCohomology.π (galoisUnitsTopRep K) 2).hom z = (ContinuousCohomology.π (galoisUnitsTopRep K) 2).hom w) : ∃ a : Gal(SeparableClosure K/K) → (SeparableClosure K)ˣ, IsLocallyConstant a ∧ ∀ g h, galoisUnitsCocycleValue K z g h / galoisUnitsCocycleValue K w g h = a g * Units.map g.toRingHom (a h) / a (g * h)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T194124-L-459378",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T194124-L-459378",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

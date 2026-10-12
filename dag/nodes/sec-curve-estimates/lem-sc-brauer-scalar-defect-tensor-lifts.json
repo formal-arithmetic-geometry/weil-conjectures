@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-brauer-scalar-defect-tensor-lifts",
+ "kind": "statement",
+ "title": "Tensor lifts with quotient scalar defect",
+ "statement": "Let $K$ be a field, $S$ its separable closure, $G=\\mathrm{Gal}(S/K)$, and $A,B$ central simple $K$-algebras. Suppose scalar-defect realizations $R(A,x),R(B,y)$ are given [def-sc-brauer-scalar-defect], where $x,y$ are continuous homogeneous degree-two unit cohomology classes [def-sc-galois-units-cohomology]. There exist $n>0$, an $S$-algebra splitting $e:S\\otimes_K(A\\otimes_K B^{op})\\cong M_n(S)$, locally constant lifts $b:G\\to GL_n(S)$, and homogeneous cocycles $z,w$ projecting to $x,y$. For every $g$ and $d$ in $A\\otimes_K B^{op}$, $g(e(1\\otimes d))=b(g)^{-1}e(1\\otimes d)b(g)$, and $b(g)g(b(h))=\\mathrm{scalar}(c_z(g,h)/c_w(g,h))b(gh)$, with $c_z,c_w$ the evaluations at $(1,g,gh)$.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7, tensor computation and injectivity via vector-space descent"
+ },
+ "stmt_deps": [
+  "def-sc-brauer-scalar-defect",
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "unpack both scalar-defect realizations, retaining their actual homogeneous\ncocycles z and w and their projection equations. The transpose anti-isomorphism identifies\nmatrices opposite with matrices. Combine it with the second splitting, commute opposite\nwith scalar extension, and use the first splitting and the Kronecker matrix isomorphism\nto split the tensor product over the separable closure. Reindex Fin n × Fin m as Fin (n*m).\nFor its lifts take the Kronecker product of the first lifts with the inverse transpose\nof the second lifts. Inverse transpose is a group homomorphism on invertible matrices,\ncommutes with coefficient automorphisms, and sends scalar u to scalar u inverse.\nThus the two defect identities multiply to the displayed quotient identity. The\nconjugation identity holds on pure tensors by the two original identities, hence on the\nwhole algebra by bilinearity. Local constancy follows by composing the two locally\nconstant lifts with inverse transpose and the Kronecker map. The size n*m is nonzero\nbecause both original sizes are nonzero. This step uses no equality of cohomology classes\nand supplies only a splitting over the separable closure, not a splitting over K.",
+   "uses": [
+    "def-sc-brauer-scalar-defect",
+    "def-sc-galois-units-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-brauer-scalar-defect",
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Expanded steps of Tag 03R7 and Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor product projective Galois matrix lifts inverse transpose quotient scalar defect",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product projective Galois matrix lifts inverse transpose quotient scalar defect",
+   "results": "MatrixEquivTensor.invFun_algebraMap, MatrixEquivTensor.left_inv, MatrixEquivTensor.right_inv, MatrixEquivTensor.invFun_smul, MatrixEquivTensor.invFun, AlgHom.mulLeftRightMatrix_inv, ModularGroup.lcRow0Extend_symm_apply, matrixEquivTensor_apply_symm",
+   "date": "2026-10-12",
+   "verdict": "No exact match; elementary ingredients used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyπ_comp_homologyIso_hom|cyclesIso_hom_comp_i|map_scalar|kronecker",
+   "results": "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Basic.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match; elementary ingredients used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.BrauerScalarDefectTensorSplit",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: scalar-defect injectivity in the field Brauer comparison",
+   "via": [
+    "lem-sc-brauer-scalar-defect-tensor-split",
+    "lem-sc-brauer-scalar-defect-faithful-backward",
+    "lem-sc-brauer-scalar-defect-faithful",
+    "lem-sc-brauer-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.BrauerScalarDefectTensorLifts",
+  "file": "lean/Sheaf/FieldTheory/BrauerScalarDefectTensorLifts.lean",
+  "declaration": "Field.exists_tensor_opposite_scalarDefect_lifts",
+  "statement": "theorem exists_tensor_opposite_scalarDefect_lifts (K : Type u) [Field K] (A B : CSA.{u, u} K) (x y : GaloisUnitsH2 K) (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K B y) : ∃ (n : ℕ) (_ : n ≠ 0) (e : (SeparableClosure K ⊗[K] (A ⊗[K] Bᵐᵒᵖ)) ≃ₐ[SeparableClosure K] Matrix (Fin n) (Fin n) (SeparableClosure K)) (b : Gal(SeparableClosure K/K) → Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K)) (z w : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2), IsLocallyConstant b ∧ (ContinuousCohomology.π (galoisUnitsTopRep K) 2).hom z = x ∧ (ContinuousCohomology.π (galoisUnitsTopRep K) 2).hom w = y ∧ (∀ (g : Gal(SeparableClosure K/K)) (a : A ⊗[K] Bᵐᵒᵖ), (e (1 ⊗ₜ[K] a)).map g = ((b g)⁻¹).val * e (1 ⊗ₜ[K] a) * (b g).val) ∧ (∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) = Matrix.GeneralLinearGroup.scalar (Fin n) (galoisUnitsCocycleValue K z g h / galoisUnitsCocycleValue K w g h) * b (g * h))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T194124-L-459378",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T194124-L-459378",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
