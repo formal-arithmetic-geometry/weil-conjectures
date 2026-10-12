@@ -7,9 +7,10 @@ module
 
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkOutside
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkInside
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkTransitions
 public import Mathlib.Topology.Sheaves.Module
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
-import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Stalks and maps for extension by zero of modules
 
@@ -130,6 +131,7 @@ theorem module_extensionByZero_stalk_maps (X : RingedSpace.{u}) :
           (∀ (W W' : Opens X) (h : W ≤ W') (x : X) (hx : x ∈ W),
             (e W x hx).hom ≫ (RingedSpace.moduleStalkFunctor X x).map (iota W W' h) =
               (e W' x (h hx)).hom)) := by
-  sorry
+  exact ⟨ModuleExtensionByZeroStalkOutside X,
+    ⟨ModuleExtensionByZeroStalkInside X, ModuleExtensionByZeroStalkTransitions X⟩⟩
 
 end AlgebraicGeometry

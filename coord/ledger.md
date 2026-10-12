@@ -7695,3 +7695,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:14 L: returned deliver/K1/Sheaf.AlgebraicGeometry.EventuallyClosedImmersion (reviewer RETURN: (reviewer X-c169c, head c169ca695) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ev)
 - 13:15 L: returned deliver/V2/WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations (reviewer RETURN: (reviewer X-f603e, head f603ef0a6) the reviewer passed it, but the landing failed: mport_prune_check.py for lean/WeilCon)
 - 13:15 L: returned deliver/R1/Sheaf.AlgebraicGeometry.RelativeSpecMorphismChart (reviewer RETURN: (reviewer X-2ac18, head 2ac18a1d5) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Re)
+- 13:15 L: merged deliver/R3/Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps (stage 3; reviewer PASS; first push; landing 20261012T131559-L-1374052 (interface); batch 20261012T120425; modules 4; new nodes 3)
