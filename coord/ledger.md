@@ -6631,3 +6631,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/M2/Sheaf.RingTheory.EtaleResidueTriplesExistsColimit (stage 3; reviewer PASS; first push; landing 20261012T070544-L-3474267 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/N1/Sheaf.AlgebraicGeometry.RefineNonzeroGerm (stage 3; reviewer PASS; first push; landing 20261012T070544-L-3474398 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/N2/Sheaf.CategoryTheory.GrothendieckEdgeCocycle (stage 3; reviewer PASS; first push; landing 20261012T070544-L-3474530 (interface); batch 20261012T070523; modules 2; new nodes 1; change records: coord/changes/GrothendieckEdgeCocycleImports.md)
+- 07:05 L: merged deliver/N2/Sheaf.RingTheory.EtaleResidueTriplesFiltered (stage 3; reviewer PASS; first push; landing 20261012T070545-L-3474670 (proof); batch 20261012T070523; modules 1; new nodes 0)
