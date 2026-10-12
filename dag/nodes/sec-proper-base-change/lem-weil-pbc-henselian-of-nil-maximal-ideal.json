@@ -1,0 +1,102 @@
+{
+ "id": "lem-weil-pbc-henselian-of-nil-maximal-ideal",
+ "kind": "statement",
+ "title": "A local ring with nil maximal ideal is henselian",
+ "statement": "Let $R$ be a commutative local ring with maximal ideal $\\mathfrak m$. If every element of $\\mathfrak m$ is nilpotent, then $R$ is a henselian local ring [def-weil-pbc-henselian-terminology].",
+ "source": {
+  "document": "Mathlib/Dynamics/Newton.lean; literature/stacks-project/algebra.tex",
+  "place": "Polynomial.existsUnique_nilpotent_sub_and_aeval_eq_zero, lines 100-127; Tag 06RS"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "For a polynomial f and x with f(x) in the maximal ideal and f'(x) a unit, f(x) is nilpotent. Mathlib's Polynomial.existsUnique_nilpotent_sub_and_aeval_eq_zero supplies a with f(a)=0 and x-a nilpotent. Its finite Newton-iteration proof squares the error at each step; nilpotent corrections preserve invertibility of the derivative. If f(x)^N=0, an iteration with 2^n >= N has zero error. The negative a-x of the nilpotent difference lies in every prime ideal (nilradical_le_prime), hence in the maximal ideal. This is precisely HenselianLocalRing.is_henselian.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib/Dynamics/Newton.lean",
+  "place": "Second reading Q2: specialization of the proved Newton lemma to R as its own algebra"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If a polynomial has nilpotent value and unit derivative, there is a root differing by a nilpotent element",
+   "status": "unavailable",
+   "results": "HTTP Internal Server Error; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "nil ideal henselian simple root lifting nilpotent polynomial value",
+   "results": "Polynomial.existsUnique_nilpotent_sub_and_aeval_eq_zero, Mathlib.Dynamics.Newton",
+   "verdict": "General Newton correction lemma found; no local-ring instance found."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.existsUnique_nilpotent_sub_and_aeval_eq_zero",
+   "results": "Exact Newton correction theorem",
+   "verdict": "Use the existing proved theorem, not a new correction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "maximalIdeal_le_nilradical|henselian.*nilradical|nilradical.*henselian; Newton.lean lines 100-127",
+   "results": "No local-ring theorem in Mathlib, library or upstream; direct root correction theorem verified in Newton.lean.",
+   "verdict": "No duplicate of the local-ring implication."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.StrictlyHenselianOfDimensionZero",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-field-extension",
+   "place": "step 1, 4 of its split (source: ## Proof (its base change is $\\coprod_c\\operatorname{Spec}k'$); literature/stacks-project/etale-cohomology.tex proof of Lemma Tag 0GJA (lemma-restrict-to-open): a zero-dimensional $Z$ is a finite set of $k$-rational points)",
+   "via": [
+    "lem-weil-pbc-zero-dimensional-sections-stalks"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.HenselianOfNilMaximalIdeal",
+  "file": "lean/Sheaf/RingTheory/HenselianOfNilMaximalIdeal.lean",
+  "declaration": "henselianLocalRing_of_maximalIdeal_le_nilradical",
+  "statement": "theorem henselianLocalRing_of_maximalIdeal_le_nilradical\n    (R : Type*) [CommRing R] [IsLocalRing R]\n    (hnil : IsLocalRing.maximalIdeal R ≤ nilradical R) : HenselianLocalRing R",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T042416-L-1819680",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T042416-L-1819680",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
