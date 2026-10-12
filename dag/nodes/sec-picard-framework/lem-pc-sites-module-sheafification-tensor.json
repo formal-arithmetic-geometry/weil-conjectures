@@ -30,64 +30,52 @@
  ],
  "proof": [
   {
-   "text": "Define $(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)(U)=\\mathcal F(U)\\otimes_{\\mathcal O(U)}\\mathcal G(U)$ with restriction maps induced by $\\mathcal F$, $\\mathcal G$, and $\\mathcal O$. The module-sheafification maps are $\\mathcal O$-linear and $\\mathcal F^\\#$, $\\mathcal G^\\#$ are $\\mathcal O^\\#$-modules by [lem-pc-sites-module-sheafification-interface]. Pure tensors therefore define compatible balanced maps on sections, hence a morphism $\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G\\to\\mathcal F^\\#\\otimes_{p,\\mathcal O^\\#}\\mathcal G^\\#$.",
+   "text": "Construct tensorSheafificationUnits sectionwise by ModuleCat.MonoidalCategory.tensorLift on the two sheafification units. Additivity and scalar compatibility follow from linearity of the units and the tensor relations. Naturality follows from PresheafOfModules.naturality_apply. This is a genuine construction with no postponed data.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.26.2 (Tag 0GMW), construction of the comparison map"
-   }
+   "elementary": true
   },
   {
-   "text": "Sheafifying the morphism of Step 1 and using [def-pur-sheaf-tensor-product], which defines the sheaf tensor product as sheafification of the presheaf tensor, gives a canonical morphism $(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#\\to\\mathcal F^\\#\\otimes_{\\mathcal O^\\#}\\mathcal G^\\#$.",
+   "text": "Use sheafificationHomEquiv to extend tensorSheafificationUnits followed by the ring-sheaf module sheafification unit. Compose with tensorObjIsoSheafification.inv to obtain sheafificationTensorComparisonApp. comparisonApp_unit follows from Equiv.apply_symm_apply; evaluation on pure tensors gives comparisonApp_tmul. The adjunction equivalence and sectionwise tensor extensionality give sheafifiedTensor_hom_ext.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.26.2 (Tag 0GMW), passage to sheafification"
-   }
+   "elementary": true
   },
   {
-   "text": "The pure-tensor map $\\mathcal F\\times\\mathcal G\\to(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#$ extends uniquely to an $\\mathcal O^\\#$-bilinear map $\\mathcal F^\\#\\times\\mathcal G^\\#\\to(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#$ by [lem-pc-sites-module-sheafification-bilinear-extension]. The universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] then gives a unique morphism $\\mathcal F^\\#\\otimes_{\\mathcal O^\\#}\\mathcal G^\\#\\to(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#$.",
+   "text": "For tensorSheaf_hom_ext, curry the maps obtained by precomposition with the pure-tensor pairing. Uniqueness in existsUnique_bilinear_sheafification_extension identifies the two extended bilinear families from equality on the original presheaf factors. Uniqueness in tensor_bilinear_universal then identifies the two sheaf tensor morphisms.",
    "uses": [
     "lem-pc-sites-module-sheafification-bilinear-extension",
     "lem-pc-sites-sheaf-tensor-bilinear-universal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.26.2 (Tag 0GMW), inverse comparison map"
-   }
+   "elementary": false
   },
   {
-   "text": "For the composite on $(\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G)^\\#$, precompose with its sheafification map from the presheaf tensor. Both the identity and the composite send a pure tensor $f\\otimes g$ to the class of the same pair of sheafification sections, so they agree on the presheaf tensor; the unique factorization through sheafification in [lem-pc-sites-module-sheafification-interface] makes the composite the identity. For the other composite, precompose its associated bilinear map with $\\mathcal F\\times\\mathcal G\\to\\mathcal F^\\#\\times\\mathcal G^\\#$; both maps are the original pure-tensor map, so uniqueness in [lem-pc-sites-module-sheafification-bilinear-extension] and the bijection of [lem-pc-sites-sheaf-tensor-bilinear-universal] make this composite the identity. The same descriptions commute with restriction maps, hence the isomorphism is natural.",
+   "text": "Apply bilinear extension to the tensor pairing of the unit at F tensor G, with target its sheafification. Apply tensor_bilinear_universal to obtain the inverse morphism phi. Its original-section characterization is hphi. For comparison followed by phi, sheafifiedTensor_hom_ext reduces the identity to comparisonApp_tmul and hphi. For phi followed by comparison, tensorSheaf_hom_ext reduces it to the same two formulas. This proves comparisonApp_isIso without choosing any data from a mere unproved existence theorem.",
    "uses": [
-    "lem-pc-sites-module-sheafification-interface",
     "lem-pc-sites-module-sheafification-bilinear-extension",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-interface"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.26.2 (Tag 0GMW), verification and naturality"
-   }
+   "elementary": false
   },
   {
-   "text": "For the particular case, apply the isomorphism to the presheaves $\\iota\\mathcal G$ and $\\mathcal F$: $(\\iota\\mathcal G)^\\#\\otimes_{\\mathcal O^\\#}\\mathcal F^\\#\\cong(\\iota\\mathcal G\\otimes_{p,\\mathcal O}\\mathcal F)^\\#$. By [lem-pc-sites-module-sheafification-interface] the identity $\\iota\\mathcal G\\to\\iota\\mathcal G$ factors uniquely as $\\iota\\mathcal G\\xrightarrow{\\eta}(\\iota\\mathcal G)^\\#\\xrightarrow{r}\\mathcal G$ with $r$ $\\mathcal O^\\#$-linear, and the underlying abelian sheaf of $(\\iota\\mathcal G)^\\#$ is the abelian sheafification of $\\mathcal G$. Since $\\mathcal G$ is already a sheaf, $\\eta$ is an isomorphism of abelian sheaves by the uniqueness clause of [def-weil-pbc-sheafification] ($\\eta r\\eta=\\eta$ forces $\\eta r=\\mathrm{id}$); so $r=\\eta^{-1}$ is a bijective $\\mathcal O^\\#$-linear map, an isomorphism $(\\iota\\mathcal G)^\\#\\cong\\mathcal G$ natural in $\\mathcal G$. Substituting it gives $\\mathcal G\\otimes_{\\mathcal O^\\#}\\mathcal F^\\#\\cong(\\iota\\mathcal G\\otimes_{p,\\mathcal O}\\mathcal F)^\\#$.",
+   "text": "Naturality of tensorObjIsoSheafification follows by composing the source library whiskerLeft_tensorObjIsoSheafification_hom and whiskerRight_tensorObjIsoSheafification_hom lemmas. Naturality of the ring-sheafification unit gives tensorPure_natural. The two original unit naturality equations, evaluated on pure tensors, give tensorUnits_natural. Apply sheafificationHomEquiv.injective and combine these equations with comparisonApp_unit to prove comparisonApp_natural. Package the components into a natural transformation c; componentwise invertibility gives IsIso c. Its inverse natural isomorphism is the requested e, and comparisonApp_tmul supplies the specified pure-tensor identity.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the sheaf-factor specialization let B be forget followed by restrictScalars and S be sheafification. Mathlib already proves the counit B composed with S to the identity invertible (via the underlying abelian sheafification counit). Tensor the inverse counit with the identity of S using NatIso.prod and whisker by tensor, then compose with the first comparison whiskered by B.prod identity. This gives exactly the stated bifunctor isomorphism.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface",
     "def-weil-pbc-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.26.2 (Tag 0GMW) applied with a sheaf factor; sheafification of a sheaf"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -100,7 +88,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemma 18.26.2 (Tag 0GMW, lemma-sheafification-tensor)"
+  "place": "Tag 0GMW; T3 Lean realization of comparison, bilinear inverse, two uniqueness checks, naturality, and counit specialization (2026-10-12)"
  },
  "mathlib_searches": [
   {
@@ -190,5 +178,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-bd85b",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T135319-L-1693934",
+  "kind": "interface",
+  "note": "independent Codex review: Both unchanged public statements match the node and Stacks Tag 0GMW; proof and node records agree. Delivery and sole direct importer SheafificationFlat compile cleanly; all declarations have only permitted axioms, with sorryAx confined to uses of the two reported existing dependencies."
  }
 }
