@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-p1-twisted-sections-finite-dimensional",
+ "kind": "statement",
+ "title": "Finite dimensional twisted sections for the canonical base-field action",
+ "statement": "Put A=k[x_0,x_1] with its total-degree grading, P=Proj A [def-sc-p1-standard], and let rho:k -> Gamma(P,O_P) be the composite sending c to C(c) in A_0, then to Gamma(Spec A_0,O) via the inverse affine global-sections isomorphism, then to Gamma(P,O_P) by the pullback of Proj.toSpecZero. Scalars act on sections by restriction along rho. Let G be a coherent O_P-module [pqf-def-coherent]. For every integer n, Gamma(P,G tensor O_P(n)) [def-weil-pbc-proj-twisting-sheaf] is finite-dimensional over k for this specified action.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS(3) and proof of (5), https://stacks.math.columbia.edu/tag/01YS; online text read"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "The degree-one opens D_+(x_0) and D_+(x_1) cover polynomial Proj. The homogeneous-fraction description of O(n) gives a rank-one trivialization on each open, for every integer n. Locally, tensoring G with this rank-one free module is isomorphic to G, so it preserves finite type and the finite-type kernel condition defining coherence. Thus G tensor O(n) is coherent. Polynomial Proj is Noetherian, and a coherent module on it is quasi-coherent and finitely presented.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use proj_shifted_free_is_twist to identify polynomial Proj with the glued projective line and O(n) with the transported glued twist. Transport G tensor O(n) to a coherent module on that line. Apply finiteDimensional_H in degree zero and H.zeroLinearEquiv to its global sections. The chart maps carry constants to C(c)/1, so the scalar structure of this equivalence is precisely restriction along rho. Transport finite dimensionality back along the linear equivalence. Zero G gives dimension zero; all integer twists use the same local argument.",
+   "uses": [
+    "lem-sc-p1-proj-shifted-free-twist",
+    "lem-sc-p1-coherent-finite"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-p1-coherent-finite",
+  "lem-sc-p1-proj-shifted-free-twist",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS(3) and proof of (5), https://stacks.math.columbia.edu/tag/01YS; online text read"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a coherent sheaf twisted by O(n) on polynomial Proj over a field are finite dimensional for its base field scalar action",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional global sections of coherent sheaf tensored with an invertible twisting sheaf on projective line",
+   "date": "2026-10-12",
+   "results": "Hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj, AlgebraicGeometry.Proj.mul_apply, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "digest": "53897f72952b9db7",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteDimensional.*twist|twist.*FiniteDimensional|finite.*sections",
+   "date": "2026-10-12",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Noetherian.lean",
+   "digest": "e8cd37d993ae7e84",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TwistedSectionFiniteCoordinates",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, finite scalar coordinates for individual twisted section spaces",
+   "via": [
+    "lem-sc-p1-twisted-section-finite-coordinates",
+    "lem-sc-p1-section-module-component-finite",
+    "lem-sc-p1-serre-section-module-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TwistedSectionsFiniteDimensional",
+  "file": "lean/Sheaf/AlgebraicGeometry/TwistedSectionsFiniteDimensional.lean",
+  "declaration": "AlgebraicGeometry.serreTwistedSectionsFiniteDimensional",
+  "statement": "theorem serreTwistedSectionsFiniteDimensional (k : Type u) [Field k] (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules) (hG : RingedSpace.IsCoherent (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).toRingedSpace G) (n : ℤ) : let ρ := ((Proj.toSpecZero (MvPolynomial.homogeneousSubmodule (Fin 2) k)).appTop.hom.comp (Scheme.ΓSpecIso _).inv.hom).comp (MvPolynomial.homogeneousSubmoduleZeroEquiv (Fin 2) k).toRingHom letI := Module.compHom Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n, ⊤) ρ FiniteDimensional k Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n, ⊤)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697674",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

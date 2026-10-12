@@ -8,10 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist
-import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
-import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import Sheaf.AlgebraicGeometry.TwistedSectionsFiniteDimensional
+import Sheaf.AlgebraicGeometry.TwistedSectionsConstantAction
 
 /-! # Finite scalar coordinates for twisted coherent global sections
 
@@ -60,6 +58,20 @@ theorem serreTwistedSectionFiniteCoordinates
           ((n : ℤ) + (0 : ℕ)) =
           G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n : ℤ)),
         e (Scheme.Modules.Hom.app
-          ((G ◁ Proj.twistMul (n : ℤ) ha) ≫ eqToHom p) ⊤ s) = c • e s := by sorry
+          ((G ◁ Proj.twistMul (n : ℤ) ha) ≫ eqToHom p) ⊤ s) = c • e s := by
+  classical
+  let S := Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n : ℤ), ⊤)
+  let ρ := ((Proj.toSpecZero (MvPolynomial.homogeneousSubmodule (Fin 2) k)).appTop.hom.comp
+    (Scheme.ΓSpecIso _).inv.hom).comp
+      (MvPolynomial.homogeneousSubmoduleZeroEquiv (Fin 2) k).toRingHom
+  let : Module k S := Module.compHom S ρ
+  let : FiniteDimensional k S := serreTwistedSectionsFiniteDimensional k G hG (n : ℤ)
+  let e := (Module.finBasis k S).equivFun
+  refine ⟨Module.finrank k S, e.toAddEquiv, ?_⟩
+  intro c ha s p
+  change e (Scheme.Modules.Hom.app
+    ((G ◁ Proj.twistMul (n : ℤ) ha) ≫ eqToHom p) ⊤ s) = c • e s
+  rw [serreTwistedSectionsConstantAction k G (n : ℤ) c ha s p]
+  exact e.map_smul c s
 
 end AlgebraicGeometry

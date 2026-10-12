@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-p1-twisted-sections-constant-action",
+ "kind": "statement",
+ "title": "Constant twist multiplication is the canonical scalar action",
+ "statement": "Put A=k[x_0,x_1] with its total-degree grading, P=Proj A [def-sc-p1-standard], and let rho:k -> Gamma(P,O_P) be the composite sending c to C(c) in A_0, then to Gamma(Spec A_0,O) via the inverse affine global-sections isomorphism, then to Gamma(P,O_P) by the pullback of Proj.toSpecZero. Scalars act on sections by restriction along rho. For every O_P-module G, every integer n, every c in k, every proof that C(c) is homogeneous of degree zero, and every section s of G tensor O_P(n) [def-weil-pbc-proj-twisting-sheaf], the section map of G tensor twistMul(C(c)), transported along any equality n+0=n, sends s to c*s. Coherence and finite dimensionality are not assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS(3) and proof of (5), https://stacks.math.columbia.edu/tag/01YS; online text read"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "On each standard open and its subopens, the structure-map image of c is the fraction C(c)/1. By the definition of twistMul, multiplication by C(c) on a degree-n fraction a/b equals multiplication by this restricted global function. The cover therefore identifies twistMul, after transport n+0=n, with multiplication by rho(c) as a morphism of sheaves.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the preceding equality with the identity of G. On pure tensors x tensor y, the balanced tensor-product relation gives x tensor (rho(c)y)=rho(c)(x tensor y). Additivity proves the equality on the presheaf tensor product, and sheafification preserves the equality of these morphisms. Evaluate at the top open to obtain the asserted section formula. The equality proofs p and ha are irrelevant, so no choice of those proofs matters. This argument needs neither coherence nor nonnegative n; it includes the zero sheaf, c=0 and c=1.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project, Lemma 01YS(3) and proof of (5), https://stacks.math.columbia.edu/tag/01YS; online text read"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by a constant homogeneous polynomial on the twisting sheaf equals scalar multiplication on sections including after tensoring",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant polynomial multiplication twistMul sheaf tensor equals scalar action",
+   "date": "2026-10-12",
+   "results": "Hits: Polynomial.X_pow_smul_rTensor_monomial, PolyEquivTensor.toFunBilinear_apply_eq_smul, MvPolynomial.universalFactorizationMapPresentation_algebra_smul, polyEquivTensor_symm_apply_tmul_eq_smul, MvPolynomial.scalarRTensor_apply_tmul_apply, PolyEquivTensor.toFunAlgHom_apply_tmul_eq_smul, MvPolynomial.tensorEquivSum_C_tmul_C, PolyEquivTensor.toFunBilinear_apply_apply",
+   "digest": "45ffc6508ad67ee4",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "twistMul|toSpecZero.*app|constant.*twist",
+   "date": "2026-10-12",
+   "results": "No hits.",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TwistedSectionFiniteCoordinates",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, finite scalar coordinates for individual twisted section spaces",
+   "via": [
+    "lem-sc-p1-twisted-section-finite-coordinates",
+    "lem-sc-p1-section-module-component-finite",
+    "lem-sc-p1-serre-section-module-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TwistedSectionsConstantAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/TwistedSectionsConstantAction.lean",
+  "declaration": "AlgebraicGeometry.serreTwistedSectionsConstantAction",
+  "statement": "theorem serreTwistedSectionsConstantAction (k : Type u) [Field k] (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules) (n : ℤ) : let ρ := ((Proj.toSpecZero (MvPolynomial.homogeneousSubmodule (Fin 2) k)).appTop.hom.comp (Scheme.ΓSpecIso _).inv.hom).comp (MvPolynomial.homogeneousSubmoduleZeroEquiv (Fin 2) k).toRingHom letI := Module.compHom Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n, ⊤) ρ ∀ (c : k) (ha : MvPolynomial.C c ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k 0) (s : Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n, ⊤)) (p : G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n + (0 : ℕ)) = G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n), Scheme.Modules.Hom.app ((G ◁ Proj.twistMul n ha) ≫ eqToHom p) ⊤ s = c • s",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697674",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
