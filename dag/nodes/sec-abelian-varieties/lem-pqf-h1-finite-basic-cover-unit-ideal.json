@@ -14,21 +14,21 @@
  ],
  "proof": [
   {
-   "text": "Enumerate $s$ as $f_1,\\ldots,f_n$. The map $\\mathcal O_X^{\\oplus n}\\to\\mathcal O_X$ with coordinates $f_i$ is surjective: at each point at least one $f_i$ is a stalk unit. Its kernel $\\mathcal F$ is quasi-coherent. Set $\\mathcal F_i=\\mathcal F\\cap\\mathcal O_X^{\\oplus i}$ using the first $i$ summands. Projection to coordinate $i$ identifies $\\mathcal F_i/\\mathcal F_{i-1}$ with a quasi-coherent ideal subsheaf of $\\mathcal O_X$.",
+   "text": "Construct the finite free sheaf map p from the covering sections using freeHomEquiv. On each stalk, a covering section has unit germ; every unit-sheaf germ is a scalar multiple of the germ of 1, hence a scalar multiple of that covering section. Apply generating_sections_iff_stalk_span to obtain Epi p, including the vacuous empty-scheme case.",
    "uses": [
-    "pqf-def-coherent"
+    "lem-weil-pbc-generating-sections-stalk-span"
    ],
    "elementary": false
   },
   {
-   "text": "Start with $H^1(X,\\mathcal F_0)=0$ since $\\mathcal F_0=0$. In the long exact sequence for $0\\to\\mathcal F_{i-1}\\to\\mathcal F_i\\to\\mathcal F_i/\\mathcal F_{i-1}\\to0$, the segment in degree one has zero outer terms by induction and the ideal vanishing hypothesis. Therefore $H^1(X,\\mathcal F_i)=0$, and finally $H^1(X,\\mathcal F)=0$.",
+   "text": "Apply finite_free_kernel_h1_zero to p and the ideal H¹ hypothesis. This is the separate kernel-filtration step of the original proof; it does not assert existence of global coefficients.",
    "uses": [
-    "lem-weil-pbc-derived-functor-long-exact"
+    "lem-pqf-finite-free-kernel-h1-vanishing"
    ],
    "elementary": false
   },
   {
-   "text": "The initial segment for $0\\to\\mathcal F\\to\\mathcal O_X^{\\oplus n}\\to\\mathcal O_X\\to0$ now makes the map on global sections surjective. A preimage of $1$ gives $a_i$ with $\\sum_i a_i f_i=1$. Thus $1$ belongs to the generated ideal. If $s$ is empty, the cover forces $X$ empty and its section ring is the zero ring, so the conclusion still holds.",
+   "text": "For the short exact kernel sequence, use exists_rightDerived_full_long_exact in degree zero. The connecting map is zero because H¹(kernel p) is a subsingleton, so exactness makes R⁰Γ(p) epi. Conjugate by rightDerivedZeroIsoSelf to obtain Γ(p) epi, hence surjective on elements. Lift 1. Express its preimage with freeSectionsEquiv; the i-th component of p multiplies by the corresponding member of s. The image is therefore a finite sum of multiples of elements of s and lies in Ideal.span s. Since it equals 1, the ideal is top.",
    "uses": [
     "lem-weil-pbc-derived-functor-long-exact"
    ],
@@ -36,13 +36,14 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-derived-functor-long-exact",
-  "pqf-def-coherent"
+  "lem-weil-pbc-generating-sections-stalk-span",
+  "lem-pqf-finite-free-kernel-h1-vanishing",
+  "lem-weil-pbc-derived-functor-long-exact"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 01XF, label lemma-quasi-compact-h1-zero-covering; last two paragraphs of proof, lines 365-388"
+  "place": "Tag 01XF, final two paragraphs; formal reduction uses the source-library freeSectionsEquiv and Mathlib rightDerivedZeroIsoSelf"
  },
  "mathlib_searches": [
   {
@@ -126,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-05611",
-  "group": "S2",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T202252-L-708722",
+  "landing": "20261012T225259-L-1801145",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures, proof, imports and node records against the clone, Stacks 01XF, change record and earlier return; delivery and sole direct importer compile cleanly; axioms conform."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
