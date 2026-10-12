@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.ExactCouple
 public import Sheaf.CategoryTheory.Filtration
 
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
+import Sheaf.CategoryTheory.SubobjectHomologyStep
 
 /-!
 # Convergence of bigraded exact couples
@@ -67,6 +68,85 @@ structure CycleBoundaryTower (X : BigradedExactCouple C 0) where
     projection (r + 1) p q =
       cycleLift r p q ≫ (X.pageCouple r).derivedEProjection p q
 
+private structure TowerStage (X : BigradedExactCouple C 0) (r : ℕ) where
+  Z : ∀ p q : ℤ, Subobject (X.E p q)
+  B : ∀ p q : ℤ, Subobject (X.E p q)
+  B_le_Z : ∀ p q, B p q ≤ Z p q
+  projection : ∀ p q, (Z p q : C) ⟶ (X.pageCouple r).E p q
+  projection_epi : ∀ p q, Epi (projection p q)
+  projection_kernel : ∀ p q,
+    kernelSubobject (projection p q) =
+      Subobject.mk (Subobject.ofLE (B p q) (Z p q) (B_le_Z p q))
+
+private noncomputable def stageCycles {X : BigradedExactCouple C 0} {r : ℕ}
+    (S : TowerStage X r) (p q : ℤ) : Subobject (X.E p q) :=
+  (Subobject.«exists» (S.Z p q).arrow).obj
+    ((Subobject.pullback (S.projection p q)).obj
+      (kernelSubobject ((X.pageCouple r).d p q)))
+
+private noncomputable def stageBoundaries {X : BigradedExactCouple C 0} {r : ℕ}
+    (S : TowerStage X r) (p q : ℤ) : Subobject (X.E p q) :=
+  (Subobject.«exists» (S.Z p q).arrow).obj
+    ((Subobject.pullback (S.projection p q)).obj
+      (imageSubobject ((X.pageCouple r).dInto p q)))
+
+private structure StageTransition {X : BigradedExactCouple C 0} {r : ℕ}
+    (S : TowerStage X r) (p q : ℤ) where
+  decreasing : stageCycles S p q ≤ S.Z p q
+  increasing : S.B p q ≤ stageBoundaries S p q
+  boundary_le_cycle : stageBoundaries S p q ≤ stageCycles S p q
+  lift : (stageCycles S p q : C) ⟶ kernel ((X.pageCouple r).d p q)
+  comm : lift ≫ kernel.ι ((X.pageCouple r).d p q) =
+    Subobject.ofLE _ _ decreasing ≫ S.projection p q
+  epi : Epi (lift ≫ (X.pageCouple r).derivedEProjection p q)
+  kernel_eq : kernelSubobject (lift ≫ (X.pageCouple r).derivedEProjection p q) =
+    Subobject.mk (Subobject.ofLE _ _ boundary_le_cycle)
+
+private theorem stageTransition_exists {X : BigradedExactCouple C 0} {r : ℕ}
+    (S : TowerStage X r) (p q : ℤ) : Nonempty (StageTransition S p q) := by
+  let : Epi (S.projection p q) := S.projection_epi p q
+  obtain ⟨hZ, hB, hBZ, l, hl, hepi, hker⟩ :=
+    subobjectHomology_step (S.Z p q) (S.B p q) (S.B_le_Z p q)
+      (S.projection p q) (S.projection_kernel p q)
+      ((X.pageCouple r).dInto p q) ((X.pageCouple r).d p q)
+      ((X.pageCouple r).dInto_comp_d p q)
+  exact ⟨⟨hZ, hB, hBZ, l, hl, hepi, hker⟩⟩
+
+-- The subobjects are explicit pullbacks/images. Only their unique kernel lift is chosen:
+-- its composite with the monomorphic kernel inclusion is specified by `comm`.
+private noncomputable def stageTransition {X : BigradedExactCouple C 0} {r : ℕ}
+    (S : TowerStage X r) (p q : ℤ) : StageTransition S p q :=
+  Classical.choice (stageTransition_exists S p q)
+
+private noncomputable def nextStage {X : BigradedExactCouple C 0} {r : ℕ}
+    (S : TowerStage X r) : TowerStage X (r + 1) where
+  Z := stageCycles S
+  B := stageBoundaries S
+  B_le_Z p q := (stageTransition S p q).boundary_le_cycle
+  projection p q := (stageTransition S p q).lift ≫
+    (X.pageCouple r).derivedEProjection p q
+  projection_epi p q := (stageTransition S p q).epi
+  projection_kernel p q := (stageTransition S p q).kernel_eq
+
+private noncomputable def initialStage (X : BigradedExactCouple C 0) : TowerStage X 0 where
+  Z _ _ := ⊤
+  B _ _ := ⊥
+  B_le_Z _ _ := bot_le
+  projection p q := (⊤ : Subobject (X.E p q)).arrow
+  projection_epi _ _ := inferInstance
+  projection_kernel p q := by
+    have hk : kernelSubobject (⊤ : Subobject (X.E p q)).arrow = ⊥ :=
+      Subobject.mk_eq_bot_iff_zero.mpr (kernel.ι_of_mono _)
+    have hb : Subobject.ofLE (⊥ : Subobject (X.E p q)) ⊤ bot_le = 0 := by
+      apply (cancel_mono (⊤ : Subobject (X.E p q)).arrow).mp
+      simp
+    exact hk.trans (Subobject.mk_eq_bot_iff_zero.mpr hb).symm
+
+private noncomputable def towerStages (X : BigradedExactCouple C 0) :
+    ∀ r : ℕ, TowerStage X r
+  | 0 => initialStage X
+  | r + 1 => nextStage (towerStages X r)
+
 /-- The canonical cycle/boundary tower exists. Start with the whole initial page and zero,
 with its identity quotient. Inductively pull back the kernel and image of the differential
 along the quotient, and embed these pullbacks in the initial page. Since the differential
@@ -78,7 +158,23 @@ Source: blueprint def-sp-convergence; Stacks Sections 12.20--12.21
 (blueprint: def-sp-convergence). -/
 theorem cycleBoundaryTower_exists (X : BigradedExactCouple C 0) :
     Nonempty (CycleBoundaryTower X) := by
-  sorry
+  refine ⟨{
+    Z := fun r ↦ (towerStages X r).Z
+    B := fun r ↦ (towerStages X r).B
+    B_le_Z := fun r ↦ (towerStages X r).B_le_Z
+    Z_zero := fun _ _ ↦ rfl
+    B_zero := fun _ _ ↦ rfl
+    projection := fun r ↦ (towerStages X r).projection
+    projection_epi := fun r ↦ (towerStages X r).projection_epi
+    projection_kernel := fun r ↦ (towerStages X r).projection_kernel
+    projection_zero := fun _ _ ↦ rfl
+    Z_succ := fun _ _ _ ↦ rfl
+    B_succ := fun _ _ _ ↦ rfl
+    Z_decreasing := fun r p q ↦ (stageTransition (towerStages X r) p q).decreasing
+    B_increasing := fun r p q ↦ (stageTransition (towerStages X r) p q).increasing
+    cycleLift := fun r p q ↦ (stageTransition (towerStages X r) p q).lift
+    cycleLift_comm := fun r p q ↦ (stageTransition (towerStages X r) p q).comm
+    projection_succ := fun _ _ _ ↦ rfl }⟩
 
 /-- The cycle/boundary tower constructed recursively from the exact couple.
 Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/

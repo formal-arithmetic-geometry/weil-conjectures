@@ -1,0 +1,124 @@
+{
+ "id": "lem-sp-subobject-homology-step",
+ "kind": "lemma",
+ "title": "Lifting a homology quotient through an epimorphic subobject presentation",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], and let $T,E,H,F$ be objects. Let $B\\subseteq Z\\subseteq T$ be subobjects and $\\pi:Z\\twoheadrightarrow E$ an epimorphism whose kernel inside $Z$ is the inclusion of $B$. For morphisms $b:H\\to E$ and $d:E\\to F$ with $b\\,d=0$, put $Z^{\\prime}=\\pi^{-1}(\\ker d)$ and $B^{\\prime}=\\pi^{-1}(\\operatorname{im}b)$, regarded as subobjects of $T$ via $Z\\hookrightarrow T$. Then $B\\subseteq B^{\\prime}\\subseteq Z^{\\prime}\\subseteq Z$. There is a morphism $l:Z^{\\prime}\\to\\ker d$ whose composite with the kernel inclusion is the inclusion $Z^{\\prime}\\hookrightarrow Z$ followed by $\\pi$. This equation uniquely determines $l$. Its composite with the cokernel projection of the kernel lift of $b$ is epimorphic and has kernel equal to the inclusion of $B^{\\prime}$ in $Z^{\\prime}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/def-sp-convergence.md",
+  "place": "def-sp-convergence: successor cycle/boundary quotient recursion, expanded to a local epimorphic presentation"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Use imageSubobject_le_iff and kernelSubobject_factors to put image(b) below kernel(d). Apply monotonicity of pullback and image pushforward to get B prime below Z prime. Write Z prime as mk(P.arrow followed by Z.arrow) using exists_iso_map and map_obj_eq_mk, giving Z prime below Z.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The old kernel lies below the pullback of image(b): its arrow followed by pi is zero and factors_zero gives the factorization. Push forward this inequality along Z.arrow and use the assumed kernel equality, map_mk and ofLE_arrow to identify the pushed-forward kernel with B.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The representative of Z prime is isomorphic to the pullback subobject P by isoOfEqMk. Compose this isomorphism with pullbackπ and kernelSubobjectIso to define l. The pullback square and ofLE_arrow give its restriction equation. Abelian.epi_fst_of_isLimit makes pullbackπ epi; composing the isomorphisms and cokernel projection stays epi. Cancellation of the kernel inclusion proves uniqueness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The private pullback_kernel lemma follows in both directions from factors_pullback_obj_iff and kernelSubobject_factors_iff. Exactness of a cokernel sequence, via exact_of_g_is_cokernel and exact_iff_image_eq_kernel, identifies the kernel of the homology projection with the image of kernel.lift d b. Mapping along kernel.ι d gives image(b), since precomposition with factorThruImageSubobject does not change images.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply pullback_kernel to l and the cokernel projection. Substitute the preceding image identity and use pullback_comp and pullback_map_self along kernel.ι d. The restriction equation replaces l followed by kernel.ι d with ofLE followed by pi. Pullback_comp and pullback_map_self along Z.arrow identify this with the pullback of B prime along Z prime.arrow. Finally map_mk and ofLE_arrow identify that pullback with mk(ofLE B prime Z prime).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/def-sp-convergence.md",
+  "place": "M2, local quotient calculation expanding the cycle/boundary recursion, 2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pull back a homology quotient along an epimorphism; lifted cycles modulo lifted boundaries",
+   "results": "8 hits: CategoryTheory.ShortComplex.epi_homologyMap_of_epi_cyclesMap', CategoryTheory.ShortComplex.instEpiLeftHomologyπ, CategoryTheory.ShortComplex.epi_homologyMap_of_epi_cyclesMap, CategoryTheory.ShortComplex.instEpiHomologyπ, CategoryTheory.ShortComplex.LeftHomologyData.instEpiπ, CategoryTheory.ShortComplex.Exact.epi_toCycles, CategoryTheory.ShortComplex.LeftHomologyData.ofEpiOfIsIsoOfMono_π, CategoryTheory.ShortComplex.LeftHomologyData.ofEpiOfIsIsoOfMono'_π",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.kernelSubobject",
+   "results": "loogle: unknown identifier 'CategoryTheory.kernelSubobject'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(epi|kernel)|kernelSubobject.*cokernel",
+   "results": "25 hits: Mathlib/Algebra/Homology/Opposite.lean, Mathlib/Algebra/Homology/Opposite.lean, Mathlib/Algebra/Homology/CommSq.lean, Mathlib/Algebra/Homology/CommSq.lean, Mathlib/Algebra/Homology/CommSq.lean, Mathlib/Algebra/Homology/Square.lean, Mathlib/Algebra/Homology/Square.lean, Mathlib/Algebra/Homology/Square.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pull back cycles and boundaries through an epimorphism to obtain a presentation of homology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ExactCoupleConvergence",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sp-convergence",
+   "place": "Sentences defining successor cycles, successor boundaries, and E_(r+1)=Z_(r+1)/B_(r+1)"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SubobjectHomologyStep",
+  "file": "lean/Sheaf/CategoryTheory/SubobjectHomologyStep.lean",
+  "declaration": "CategoryTheory.subobjectHomology_step",
+  "statement": "theorem subobjectHomology_step {T E H F : C} (Z B : Subobject T) (hBZ : B ≤ Z)\n    (π : (Z : C) ⟶ E) [Epi π]\n    (hker : kernelSubobject π = Subobject.mk (Subobject.ofLE B Z hBZ))\n    (b : H ⟶ E) (d : E ⟶ F) (w : b ≫ d = 0) :\n    let Z' := (Subobject.«exists» Z.arrow).obj\n      ((Subobject.pullback π).obj (kernelSubobject d))\n    let B' := (Subobject.«exists» Z.arrow).obj\n      ((Subobject.pullback π).obj (imageSubobject b))\n    ∃ (hZ : Z' ≤ Z) (_hB : B ≤ B') (hBZ' : B' ≤ Z'),\n      ∃ l : (Z' : C) ⟶ kernel d,\n        l ≫ kernel.ι d = Subobject.ofLE Z' Z hZ ≫ π ∧\n        Epi (l ≫ cokernel.π (kernel.lift d b w)) ∧\n        kernelSubobject (l ≫ cokernel.π (kernel.lift d b w)) =\n          Subobject.mk (Subobject.ofLE B' Z' hBZ')",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T135254-L-1677720",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T135254-L-1677720",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
