@@ -5,46 +5,30 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.PullbackCarrier
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.Supports
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-!
+# The external product and restriction to closed subschemes
 
-# Tensor products with complexes supported on a closed subscheme
+For closed immersions `i : Z ⟶ X` and `j : W ⟶ Y` over a base `B`, with product
+`i ×_B j : Z ×_B W ⟶ X ×_B Y`,
 
-Let `i : Z ⟶ X` be a closed immersion and let
+`(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L`
 
-```
-  T' --a'--> Z
-  |          |
-  s          i
-  v          v
-  T ---a---> X
-```
+(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion_of_flat`).
 
-be a cartesian square. For `M ∈ D(Z_ét)` and `N ∈ D(T_ét)` the complex `La^*(Ri_* M) ⊗ᴸ N` is
-supported on `T'`, and
-
-`La^*(Ri_* M) ⊗ᴸ N ≅ Rs_*(La'^* M ⊗ᴸ Ls^* N)`.
-
-This holds for arbitrary coefficients: an object `P` of `D(T_ét)` whose restriction to the open
-complement of `T'` vanishes is `Rs_* s^* P`, by open–closed conservativity
-(`AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar'`), and
-`Ls^*` is monoidal while `i^* Ri_* ≅ 𝟭`. No projection formula or proper base change is
-involved.
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_mapDerivedCategoryUpperStar`:
-  `P ≅ Rs_* s^* P` for `P` vanishing on the open complement of the closed immersion `s`.
-- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar`,
-  `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar'`:
-  `La^*(Ri_* M) ⊗ᴸ N ≅ Rs_*(La'^* M ⊗ᴸ Ls^* N)` and its mirror image.
-
+The proof characterises the objects `ι_* ι^* N` of `D(X_ét)` for a closed immersion `ι` by their
+support: if `φ : N ⟶ M` becomes invertible after `Lι^*` and `M` vanishes on the open
+complement of `ι`, then `M ≅ Rι_* Lι^* N`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_obj_leftDerivedUpperStar_obj`), by
+the open–closed triangle. It is applied to `i ×_B 𝟙` and `𝟙 ×_B j` separately: the open
+complement of `i ×_B 𝟙` is the preimage of the open complement of `i`, on which `Ri_* Li^* K`,
+hence `Ri_* Li^* K ⊠ L`, vanishes; and the unit `K ⟶ Ri_* Li^* K` is invertible after `Li^*`.
 -/
 
 @[expose] public section
@@ -59,172 +43,364 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-namespace Etale
-
-section Supported
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-
-/-- An object `P` of `D(T_ét)` whose restriction to the open complement `v` of a closed
-immersion `s : T' ⟶ T` vanishes is supported on `T'`: the unit `P ⟶ Rs_* s^* P` is an
-isomorphism, by open–closed conservativity, as it becomes one after `v^*` (both sides vanish)
-and after `s^*` (where it is a section of the counit `s^* Rs_* ⟶ 𝟭`, an isomorphism since
-`Rs_*` is fully faithful). -/
-theorem nonempty_iso_rightDerivedLowerStar_mapDerivedCategoryUpperStar {T T' V : Scheme.{u}}
-    (s : T' ⟶ T) [IsClosedImmersion s] (v : V ⟶ T) [IsOpenImmersion v]
-    (hsv : Set.range s.base = (Set.range v.base)ᶜ)
-    {P : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)}
-    (hP : IsZero (D((v)^*[A]).obj P)) :
-    Nonempty (P ≅ (R((s)_*[A])).obj (D((s)^*[A]).obj P)) := by
-  let adj := mapDerivedUpperStarLowerStarAdjunction A s
-  have hd : Disjoint (Set.range v.base) (Set.range s.base) := by
-    rw [hsv]
-    exact disjoint_compl_right
-  have : IsIso (adj.unit.app P) := by
-    refine (jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar' A v s hsv).isIso_of_pairFunctor
-      _ ?_ ?_
-    · exact ⟨⟨0, hP.eq_of_src _ _,
-        (isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_of_disjoint_range
-          A v s hd _).eq_of_src _ _⟩⟩
-    · rw [← IsIso.inv_eq_of_inv_hom_id (adj.left_triangle_components P)]
-      infer_instance
-  exact ⟨asIso (adj.unit.app P)⟩
-
-end Supported
-
-section Tensor
-
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
-variable {T T' Z X : Scheme.{u}}
+namespace Etale
 
-/-- For a closed immersion `i : Z ⟶ X` and `M ∈ D(Z_ét)`, the derived pullback of `Ri_* M` along
-`a : T ⟶ X` vanishes on every open `v : V ⟶ T` whose image under `a` misses `Z`. -/
-lemma isZero_leftDerivedUpperStar_comp_rightDerivedLowerStar {V : Scheme.{u}} (a : T ⟶ X)
-    (i : Z ⟶ X) [IsClosedImmersion i] (v : V ⟶ T)
-    (hv : ∀ x, a.base (v.base x) ∉ Set.range i.base)
-    (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    IsZero ((L((v)^*[A])).obj ((L((a)^*[A])).obj ((R((i)_*[A])).obj M))) := by
-  let u := i.openComplement.ι
-  have hu' : Set.range u.base = (Set.range i.base)ᶜ :=
-    eq_compl_comm.mp i.range_eq_compl_range_openComplement_ι
-  have hu : Set.range (v ≫ a).base ⊆ Set.range u.base := by
-    rintro _ ⟨x, rfl⟩
-    rw [hu']
-    exact hv x
-  have hd : Disjoint (Set.range u.base) (Set.range i.base) := by
-    rw [i.range_eq_compl_range_openComplement_ι]
-    exact disjoint_compl_right
-  have h₀ : IsZero ((L((u)^*[A])).obj ((R((i)_*[A])).obj M)) :=
-    (isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_of_disjoint_range
-      A u i hd M).of_iso ((leftDerivedUpperStarIsoMapDerivedCategory A u).app _)
-  have h₁ := (L((IsOpenImmersion.lift u (v ≫ a) hu)^*[A])).map_isZero h₀
-  exact h₁.of_iso (((leftDerivedUpperStarComp A v a).app _).symm ≪≫
-    (leftDerivedUpperStarComp A _ u (v ≫ a) (IsOpenImmersion.lift_fac u (v ≫ a) hu).symm).app _)
+section Support
 
-/-- For a closed immersion `i : Z ⟶ X` and `M ∈ D(Z_ét)`, `Li^*(Ri_* M) ≅ M`. -/
-noncomputable def leftDerivedUpperStarRightDerivedLowerStarIso (i : Z ⟶ X) [IsClosedImmersion i]
-    (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    (L((i)^*[A])).obj ((R((i)_*[A])).obj M) ≅ M :=
-  (leftDerivedUpperStarIsoMapDerivedCategory A i).app _ ≪≫
-    asIso ((mapDerivedUpperStarLowerStarAdjunction A i).counit.app M)
+variable {Z X U : Scheme.{u}}
 
-/-- The points of `T` over the closed subscheme `Z` lie in the closed subscheme `T'` of a
-cartesian square. -/
-lemma mem_range_of_isPullback {a : T ⟶ X} {i : Z ⟶ X} {s : T' ⟶ T} {a' : T' ⟶ Z}
-    (h : IsPullback a' s i a) (x : T) (hx : a.base x ∈ Set.range i.base) :
-    x ∈ Set.range s.base := by
-  have hs : Set.range s.base = Set.range (pullback.fst a i).base := by
-    rw [← h.flip.isoPullback_hom_fst, Scheme.Hom.comp_base, TopCat.coe_comp]
-    exact h.flip.isoPullback.hom.homeomorph.surjective.range_comp _
-  rw [hs, Scheme.Pullback.range_fst]
-  exact hx
+/-- **Objects supported on a closed subscheme.** Let `i : Z ⟶ X` be a closed immersion with open
+complement `j : U ⟶ X`. If `φ : N ⟶ M` becomes invertible after `Li^*` and `Lj^* M = 0`, then
+`Ri_* Li^* N ≅ M`: the open–closed triangle of `M` identifies `M` with `Ri_* i^* M`. -/
+theorem nonempty_iso_rightDerivedLowerStar_obj_leftDerivedUpperStar_obj (i : Z ⟶ X)
+    [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    {N M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : N ⟶ M)
+    (hM : IsZero ((L((j)^*[A])).obj M)) (hφ : IsIso ((L((i)^*[A])).map φ)) :
+    Nonempty ((R((i)_*[A])).obj ((L((i)^*[A])).obj N) ≅ M) := by
+  obtain ⟨w, hT⟩ := exists_distTriang_openClosed A j i hij M
+  have h₁ : IsZero (D((j)_!open[A]).obj (D((j)^*[A]).obj M)) :=
+    D((j)_!open[A]).map_isZero
+      (hM.of_iso ((leftDerivedUpperStarIsoMapDerivedCategory A j).app M).symm)
+  have : IsIso ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M) :=
+    (Pretriangulated.Triangle.isZero₁_iff_isIso₂ _ hT).1 h₁
+  exact ⟨(R((i)_*[A])).mapIso (asIso ((L((i)^*[A])).map φ) ≪≫
+      (leftDerivedUpperStarIsoMapDerivedCategory A i).app M) ≪≫
+    (asIso ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M)).symm⟩
+
+/-- For a closed immersion `i`, the unit `K ⟶ Ri_* Li^* K` becomes invertible after `Li^*`:
+`Ri_*` is fully faithful, so the counit of `Li^* ⊣ Ri_*` is invertible. -/
+lemma isIso_leftDerivedUpperStar_map_unit_of_isClosedImmersion (i : Z ⟶ X)
+    [IsClosedImmersion i] (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    IsIso ((L((i)^*[A])).map ((derivedUpperStarLowerStarAdjunction A i).unit.app K)) := by
+  have : ((i)_*[A]).PreservesKInjectiveComplexes :=
+    (Etale.upperStarLowerStarAdjunction A i).preservesKInjectiveComplexes
+  have : IsIso (derivedUpperStarLowerStarAdjunction A i).counit :=
+    (derivedUpperStarLowerStarAdjunction A i).counit_isIso_of_R_fully_faithful
+  have h := (derivedUpperStarLowerStarAdjunction A i).left_triangle_components K
+  have : IsIso ((L((i)^*[A])).map ((derivedUpperStarLowerStarAdjunction A i).unit.app K) ≫
+      (derivedUpperStarLowerStarAdjunction A i).counit.app ((L((i)^*[A])).obj K)) := by
+    rw [h]
+    exact IsIso.id _
+  exact IsIso.of_isIso_comp_right _ ((derivedUpperStarLowerStarAdjunction A i).counit.app _)
+
+end Support
+
+section ExternalProduct
+
+variable {B X Y Z W : Scheme.{u}}
+
+/-- The external product `a ⊠ b : K ⊠ L ⟶ K' ⊠ L'` of two morphisms. -/
+noncomputable def externalProductMap (f : X ⟶ B) (g : Y ⟶ B)
+    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {L L' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (a : K ⟶ K') (b : L ⟶ L') :
+    externalProduct A f g K L ⟶ externalProduct A f g K' L' :=
+  ((derivedTensor A (pullback f g)).map ((L((pullback.fst f g)^*[A])).map a)).app _ ≫
+    ((derivedTensor A (pullback f g)).obj _).map ((L((pullback.snd f g)^*[A])).map b)
 
 variable [UpperStarPreservesFlat A]
 
-/-- Let `i : Z ⟶ X` be a closed immersion and let
+/-- The derived pullback along `ψ` of the derived tensor product with a morphism `x` in the first
+variable is invertible if `Lψ^* x` is. -/
+lemma isIso_leftDerivedUpperStar_map_derivedTensor_map_app {P Q : Scheme.{u}} (ψ : P ⟶ Q)
+    {M M' : _root_.DerivedCategory (Sheaf Q.smallEtaleTopology A)} (x : M ⟶ M')
+    (y : _root_.DerivedCategory (Sheaf Q.smallEtaleTopology A))
+    (hx : IsIso ((L((ψ)^*[A])).map x)) :
+    IsIso ((L((ψ)^*[A])).map (((derivedTensor A Q).map x).app y)) := by
+  have h := NatTrans.congr_app ((leftDerivedUpperStarTensorNatIso A ψ).hom.naturality x) y
+  have : IsIso (((derivedTensorLeftDerivedUpperStar A ψ).map x).app y) :=
+    inferInstanceAs (IsIso (((derivedTensor A P).map ((L((ψ)^*[A])).map x)).app
+      ((L((ψ)^*[A])).obj y)))
+  simp only [NatTrans.comp_app] at h
+  have : IsIso ((L((ψ)^*[A])).map (((derivedTensor A Q).map x).app y) ≫
+      (((leftDerivedUpperStarTensorNatIso A ψ).hom.app M').app y)) := by
+    erw [h]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ (((leftDerivedUpperStarTensorNatIso A ψ).hom.app M').app y)
 
-```
-  T' --a'--> Z
-  |          |
-  s          i
-  v          v
-  T ---a---> X
-```
+/-- The derived pullback along `ψ` of the derived tensor product with a morphism `y` in the second
+variable is invertible if `Lψ^* y` is. -/
+lemma isIso_leftDerivedUpperStar_map_derivedTensor_obj_map {P Q : Scheme.{u}} (ψ : P ⟶ Q)
+    (x : _root_.DerivedCategory (Sheaf Q.smallEtaleTopology A))
+    {M M' : _root_.DerivedCategory (Sheaf Q.smallEtaleTopology A)} (y : M ⟶ M')
+    (hy : IsIso ((L((ψ)^*[A])).map y)) :
+    IsIso ((L((ψ)^*[A])).map (((derivedTensor A Q).obj x).map y)) := by
+  have h := ((leftDerivedUpperStarTensorNatIso A ψ).hom.app x).naturality y
+  have : IsIso (((derivedTensorLeftDerivedUpperStar A ψ).obj x).map y) :=
+    inferInstanceAs (IsIso (((derivedTensor A P).obj ((L((ψ)^*[A])).obj x)).map
+      ((L((ψ)^*[A])).map y)))
+  have : IsIso ((L((ψ)^*[A])).map (((derivedTensor A Q).obj x).map y) ≫
+      (((leftDerivedUpperStarTensorNatIso A ψ).hom.app x).app M')) := by
+    erw [h]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ (((leftDerivedUpperStarTensorNatIso A ψ).hom.app x).app M')
 
-be a cartesian square. For `M ∈ D(Z_ét)` and `N ∈ D(T_ét)`,
+/-- Let `ψ : Z ×_B W ⟶ X ×_B Y` be compatible with `i : Z ⟶ X` and `j : W ⟶ Y`. The pullback
+`Lψ^* (a ⊠ b)` of an external product of morphisms is invertible if `Li^* a` and `Lj^* b` are. -/
+lemma isIso_leftDerivedUpperStar_map_externalProductMap (f : X ⟶ B) (g : Y ⟶ B)
+    (f' : Z ⟶ B) (g' : W ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y) (ψ : pullback f' g' ⟶ pullback f g)
+    (h₁ : ψ ≫ pullback.fst f g = pullback.fst f' g' ≫ i)
+    (h₂ : ψ ≫ pullback.snd f g = pullback.snd f' g' ≫ j)
+    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {L L' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (a : K ⟶ K') (b : L ⟶ L')
+    (ha : IsIso ((L((i)^*[A])).map a)) (hb : IsIso ((L((j)^*[A])).map b)) :
+    IsIso ((L((ψ)^*[A])).map (externalProductMap A f g a b)) := by
+  let e₁ : L((pullback.fst f g)^*[A]) ⋙ L((ψ)^*[A]) ≅
+      L((i)^*[A]) ⋙ L((pullback.fst f' g')^*[A]) :=
+    (leftDerivedUpperStarComp A ψ (pullback.fst f g) (pullback.fst f' g' ≫ i) h₁.symm).symm ≪≫
+      leftDerivedUpperStarComp A (pullback.fst f' g') i
+  let e₂ : L((pullback.snd f g)^*[A]) ⋙ L((ψ)^*[A]) ≅
+      L((j)^*[A]) ⋙ L((pullback.snd f' g')^*[A]) :=
+    (leftDerivedUpperStarComp A ψ (pullback.snd f g) (pullback.snd f' g' ≫ j) h₂.symm).symm ≪≫
+      leftDerivedUpperStarComp A (pullback.snd f' g') j
+  have hx : IsIso ((L((ψ)^*[A])).map ((L((pullback.fst f g)^*[A])).map a)) :=
+    (NatIso.isIso_map_iff e₁ a).2 (inferInstanceAs
+      (IsIso ((L((pullback.fst f' g')^*[A])).map ((L((i)^*[A])).map a))))
+  have hy : IsIso ((L((ψ)^*[A])).map ((L((pullback.snd f g)^*[A])).map b)) :=
+    (NatIso.isIso_map_iff e₂ b).2 (inferInstanceAs
+      (IsIso ((L((pullback.snd f' g')^*[A])).map ((L((j)^*[A])).map b))))
+  have := isIso_leftDerivedUpperStar_map_derivedTensor_map_app A ψ _
+    ((L((pullback.snd f g)^*[A])).obj L) hx
+  have := isIso_leftDerivedUpperStar_map_derivedTensor_obj_map A ψ
+    ((L((pullback.fst f g)^*[A])).obj K') _ hy
+  rw [externalProductMap, Functor.map_comp]
+  infer_instance
 
-`La^*(Ri_* M) ⊗ᴸ N ≅ Rs_*(La'^* M ⊗ᴸ Ls^* N)`.
+/-- The external product is compatible with pullback along a morphism
+`ψ : Z ×_B W ⟶ X ×_B Y` compatible with `i : Z ⟶ X` and `j : W ⟶ Y`:
+`Lψ^* (K ⊠ L) ≅ Li^* K ⊠ Lj^* L`. -/
+theorem nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp (f : X ⟶ B) (g : Y ⟶ B)
+    (f' : Z ⟶ B) (g' : W ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y) (ψ : pullback f' g' ⟶ pullback f g)
+    (h₁ : ψ ≫ pullback.fst f g = pullback.fst f' g' ≫ i)
+    (h₂ : ψ ≫ pullback.snd f g = pullback.snd f' g' ≫ j)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    Nonempty ((L((ψ)^*[A])).obj (externalProduct A f g K L) ≅
+      externalProduct A f' g' ((L((i)^*[A])).obj K) ((L((j)^*[A])).obj L)) := by
+  let pb₁ : (L((ψ)^*[A])).obj ((L((pullback.fst f g)^*[A])).obj K) ≅
+      (L((pullback.fst f' g')^*[A])).obj ((L((i)^*[A])).obj K) :=
+    ((leftDerivedUpperStarComp A ψ (pullback.fst _ _)).app K).symm ≪≫
+      (leftDerivedUpperStarComp A _ _ (ψ ≫ pullback.fst _ _) h₁).app K
+  let pb₂ : (L((ψ)^*[A])).obj ((L((pullback.snd f g)^*[A])).obj L) ≅
+      (L((pullback.snd f' g')^*[A])).obj ((L((j)^*[A])).obj L) :=
+    ((leftDerivedUpperStarComp A ψ (pullback.snd _ _)).app L).symm ≪≫
+      (leftDerivedUpperStarComp A _ _ (ψ ≫ pullback.snd _ _) h₂).app L
+  exact ⟨leftDerivedUpperStarTensorIso A ψ _ _ ≪≫ ((derivedTensor A _).mapIso pb₁).app _ ≪≫
+    ((derivedTensor A _).obj _).mapIso pb₂⟩
 
-The left-hand side vanishes on the open complement of `T'`, so it is `Rs_*` of its restriction
-to `T'` (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_mapDerivedCategoryUpperStar`),
-which is computed by the monoidality of `Ls^*` and `Li^* Ri_* ≅ 𝟭`. -/
-theorem nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar (a : T ⟶ X)
-    (i : Z ⟶ X) [IsClosedImmersion i] (s : T' ⟶ T) (a' : T' ⟶ Z) (h : IsPullback a' s i a)
-    (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
-    (N : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    Nonempty (((derivedTensor A T).obj ((L((a)^*[A])).obj ((R((i)_*[A])).obj M))).obj N ≅
-      (R((s)_*[A])).obj (((derivedTensor A T').obj ((L((a')^*[A])).obj M)).obj
-        ((L((s)^*[A])).obj N))) := by
-  have : IsClosedImmersion s :=
-    MorphismProperty.of_isPullback (P := @IsClosedImmersion) h inferInstance
-  let v := s.openComplement.ι
-  have hP : IsZero (D((v)^*[A]).obj
-      (((derivedTensor A T).obj ((L((a)^*[A])).obj ((R((i)_*[A])).obj M))).obj N)) := by
-    refine (isZero_derivedTensor_obj_obj_of_isZero_left
-      (isZero_leftDerivedUpperStar_comp_rightDerivedLowerStar A a i v (fun x hx ↦ ?_) M)
-      _).of_iso (((leftDerivedUpperStarIsoMapDerivedCategory A v).app _).symm ≪≫
-        leftDerivedUpperStarTensorIso A v _ _)
-    have := x.2
-    exact this (mem_range_of_isPullback h _ hx)
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerStar_mapDerivedCategoryUpperStar A s v
-    s.range_eq_compl_range_openComplement_ι hP
-  let e₁ : (L((s)^*[A])).obj ((L((a)^*[A])).obj ((R((i)_*[A])).obj M)) ≅
-      (L((a')^*[A])).obj M :=
-    ((leftDerivedUpperStarComp A s a (a' ≫ i) h.w).app _).symm ≪≫
-      (leftDerivedUpperStarComp A a' i).app _ ≪≫
-      (L((a')^*[A])).mapIso (leftDerivedUpperStarRightDerivedLowerStarIso A i M)
-  exact ⟨e ≪≫ (R((s)_*[A])).mapIso
-    ((leftDerivedUpperStarIsoMapDerivedCategory A s).app _).symm ≪≫ (R((s)_*[A])).mapIso
-      (leftDerivedUpperStarTensorIso A s _ _ ≪≫ ((derivedTensor A T').mapIso e₁).app _)⟩
+/-- The external product is compatible with pullback along a morphism
+`ψ : Z ×_B Y ⟶ X ×_B Y` compatible with `i : Z ⟶ X` and the identity of `Y`:
+`Lψ^* (K ⊠ L) ≅ Li^* K ⊠ L`. -/
+theorem nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp_left (f : X ⟶ B) (g : Y ⟶ B)
+    (f' : Z ⟶ B) (i : Z ⟶ X) (ψ : pullback f' g ⟶ pullback f g)
+    (h₁ : ψ ≫ pullback.fst f g = pullback.fst f' g ≫ i)
+    (h₂ : ψ ≫ pullback.snd f g = pullback.snd f' g)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    Nonempty ((L((ψ)^*[A])).obj (externalProduct A f g K L) ≅
+      externalProduct A f' g ((L((i)^*[A])).obj K) L) := by
+  let pb₁ : (L((ψ)^*[A])).obj ((L((pullback.fst f g)^*[A])).obj K) ≅
+      (L((pullback.fst f' g)^*[A])).obj ((L((i)^*[A])).obj K) :=
+    ((leftDerivedUpperStarComp A ψ (pullback.fst _ _)).app K).symm ≪≫
+      (leftDerivedUpperStarComp A _ _ (ψ ≫ pullback.fst _ _) h₁).app K
+  let pb₂ : (L((ψ)^*[A])).obj ((L((pullback.snd f g)^*[A])).obj L) ≅
+      (L((pullback.snd f' g)^*[A])).obj L :=
+    ((leftDerivedUpperStarComp A ψ (pullback.snd f g) (pullback.snd f' g) h₂.symm).app L).symm
+  exact ⟨leftDerivedUpperStarTensorIso A ψ _ _ ≪≫ ((derivedTensor A _).mapIso pb₁).app _ ≪≫
+    ((derivedTensor A _).obj _).mapIso pb₂⟩
 
-/-- The mirror image of
-`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar`:
-for a cartesian square as there,
+/-- The external product is compatible with pullback along a morphism
+`ψ : X ×_B W ⟶ X ×_B Y` compatible with the identity of `X` and `j : W ⟶ Y`:
+`Lψ^* (K ⊠ L) ≅ K ⊠ Lj^* L`. -/
+theorem nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp_right (f : X ⟶ B) (g : Y ⟶ B)
+    (g' : W ⟶ B) (j : W ⟶ Y) (ψ : pullback f g' ⟶ pullback f g)
+    (h₁ : ψ ≫ pullback.fst f g = pullback.fst f g')
+    (h₂ : ψ ≫ pullback.snd f g = pullback.snd f g' ≫ j)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    Nonempty ((L((ψ)^*[A])).obj (externalProduct A f g K L) ≅
+      externalProduct A f g' K ((L((j)^*[A])).obj L)) := by
+  let pb₁ : (L((ψ)^*[A])).obj ((L((pullback.fst f g)^*[A])).obj K) ≅
+      (L((pullback.fst f g')^*[A])).obj K :=
+    ((leftDerivedUpperStarComp A ψ (pullback.fst f g) (pullback.fst f g') h₁.symm).app K).symm
+  let pb₂ : (L((ψ)^*[A])).obj ((L((pullback.snd f g)^*[A])).obj L) ≅
+      (L((pullback.snd f g')^*[A])).obj ((L((j)^*[A])).obj L) :=
+    ((leftDerivedUpperStarComp A ψ (pullback.snd _ _)).app L).symm ≪≫
+      (leftDerivedUpperStarComp A _ _ (ψ ≫ pullback.snd _ _) h₂).app L
+  exact ⟨leftDerivedUpperStarTensorIso A ψ _ _ ≪≫ ((derivedTensor A _).mapIso pb₁).app _ ≪≫
+    ((derivedTensor A _).obj _).mapIso pb₂⟩
 
-`N ⊗ᴸ La^*(Ri_* M) ≅ Rs_*(Ls^* N ⊗ᴸ La'^* M)`. -/
-theorem nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar' (a : T ⟶ X)
-    (i : Z ⟶ X) [IsClosedImmersion i] (s : T' ⟶ T) (a' : T' ⟶ Z) (h : IsPullback a' s i a)
-    (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
-    (N : _root_.DerivedCategory (Sheaf T.smallEtaleTopology A)) :
-    Nonempty (((derivedTensor A T).obj N).obj ((L((a)^*[A])).obj ((R((i)_*[A])).obj M)) ≅
-      (R((s)_*[A])).obj (((derivedTensor A T').obj ((L((s)^*[A])).obj N)).obj
-        ((L((a')^*[A])).obj M))) := by
-  have : IsClosedImmersion s :=
-    MorphismProperty.of_isPullback (P := @IsClosedImmersion) h inferInstance
-  let v := s.openComplement.ι
-  have hP : IsZero (D((v)^*[A]).obj
-      (((derivedTensor A T).obj N).obj ((L((a)^*[A])).obj ((R((i)_*[A])).obj M)))) := by
-    refine (isZero_derivedTensor_obj_obj_of_isZero_right _
-      (isZero_leftDerivedUpperStar_comp_rightDerivedLowerStar A a i v (fun x hx ↦ ?_) M)
-      ).of_iso (((leftDerivedUpperStarIsoMapDerivedCategory A v).app _).symm ≪≫
-        leftDerivedUpperStarTensorIso A v _ _)
-    have := x.2
-    exact this (mem_range_of_isPullback h _ hx)
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerStar_mapDerivedCategoryUpperStar A s v
-    s.range_eq_compl_range_openComplement_ι hP
-  let e₁ : (L((s)^*[A])).obj ((L((a)^*[A])).obj ((R((i)_*[A])).obj M)) ≅
-      (L((a')^*[A])).obj M :=
-    ((leftDerivedUpperStarComp A s a (a' ≫ i) h.w).app _).symm ≪≫
-      (leftDerivedUpperStarComp A a' i).app _ ≪≫
-      (L((a')^*[A])).mapIso (leftDerivedUpperStarRightDerivedLowerStarIso A i M)
-  exact ⟨e ≪≫ (R((s)_*[A])).mapIso
-    ((leftDerivedUpperStarIsoMapDerivedCategory A s).app _).symm ≪≫ (R((s)_*[A])).mapIso
-      (leftDerivedUpperStarTensorIso A s _ _ ≪≫ ((derivedTensor A T').obj _).mapIso e₁)⟩
+/-- The base change `i ×_B Y : Z ×_B Y ⟶ X ×_B Y` of `i : Z ⟶ X`. -/
+noncomputable abbrev pullbackMapLeft (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) :
+    pullback (i ≫ f) g ⟶ pullback f g :=
+  pullback.map (i ≫ f) g f g i (𝟙 Y) (𝟙 B) (by simp) (by simp)
 
-end Tensor
+/-- The base change `X ×_B j : X ×_B W ⟶ X ×_B Y` of `j : W ⟶ Y`. -/
+noncomputable abbrev pullbackMapRight (f : X ⟶ B) (g : Y ⟶ B) (j : W ⟶ Y) :
+    pullback f (j ≫ g) ⟶ pullback f g :=
+  pullback.map f (j ≫ g) f g (𝟙 X) j (𝟙 B) (by simp) (by simp)
+
+lemma isPullback_pullbackMapLeft (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) :
+    IsPullback (pullback.fst (i ≫ f) g) (pullbackMapLeft f g i) i (pullback.fst f g) :=
+  (IsPullback.of_right (h₁₁ := pullbackMapLeft f g i) (h₂₁ := i)
+    (by simpa using (IsPullback.of_hasPullback (i ≫ f) g).flip) (by simp)
+    (IsPullback.of_hasPullback f g).flip).flip
+
+lemma isPullback_pullbackMapRight (f : X ⟶ B) (g : Y ⟶ B) (j : W ⟶ Y) :
+    IsPullback (pullback.snd f (j ≫ g)) (pullbackMapRight f g j) j (pullback.snd f g) :=
+  (IsPullback.of_right (h₁₁ := pullbackMapRight f g j) (h₂₁ := j)
+    (by simpa using IsPullback.of_hasPullback f (j ≫ g)) (by simp)
+    (IsPullback.of_hasPullback f g)).flip
+
+
+end ExternalProduct
+
+section OneSided
+
+variable [UpperStarPreservesFlat A] {B X Y Z W : Scheme.{u}}
+
+/-- A closed immersion `ι : P ⟶ Q` together with an open immersion onto its complement. -/
+lemma exists_openImmersion_range_compl {P Q : Scheme.{u}} (ι : P ⟶ Q) [IsClosedImmersion ι] :
+    ∃ V : Q.Opens, Set.range ι.base = (Set.range V.ι.base)ᶜ ∧
+      (V : Set Q) = (Set.range ι.base)ᶜ :=
+  ⟨⟨(Set.range ι.base)ᶜ, ι.isClosedEmbedding.isClosed_range.isOpen_compl⟩,
+    by rw [Scheme.Opens.range_ι]; simp, rfl⟩
+
+/-- **The one-sided closed Künneth formula.** For a closed immersion `i : Z ⟶ X` with base change
+`ι = i ×_B Y`, `Rι_* Lι^* (K ⊠ L) ≅ Ri_* Li^* K ⊠ L`. -/
+theorem nonempty_iso_externalProduct_closedImmersion_left (f : X ⟶ B) (g : Y ⟶ B)
+    (i : Z ⟶ X) [IsClosedImmersion i]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    Nonempty ((R((pullbackMapLeft f g i)_*[A])).obj
+        ((L((pullbackMapLeft f g i)^*[A])).obj (externalProduct A f g K L)) ≅
+      externalProduct A f g ((R((i)_*[A])).obj ((L((i)^*[A])).obj K)) L) := by
+  set ι := pullbackMapLeft f g i
+  have hpb := isPullback_pullbackMapLeft f g i
+  have : IsClosedImmersion ι :=
+    MorphismProperty.of_isPullback (P := @IsClosedImmersion) hpb inferInstance
+  obtain ⟨V, hij, hV⟩ := exists_openImmersion_range_compl ι
+  obtain ⟨U, hiU, hU⟩ := exists_openImmersion_range_compl i
+  -- points of `X ×_B Y` over `Z` lie in the range of `ι`
+  have hrange : ∀ x, (pullback.fst f g).base x ∈ Set.range i.base → x ∈ Set.range ι.base := by
+    intro x hx
+    have h := Scheme.Pullback.range_snd i (pullback.fst f g)
+    obtain ⟨y, hy⟩ : x ∈ Set.range (pullback.snd i (pullback.fst f g)).base := by
+      rw [h]; exact hx
+    refine ⟨hpb.isoPullback.inv.base y, ?_⟩
+    rw [← Scheme.Hom.comp_apply, hpb.isoPullback_inv_snd, hy]
+  -- `Ri_* Li^* K ⊠ L` vanishes on the open complement of `ι`
+  have hM : IsZero ((L((V.ι)^*[A])).obj
+      (externalProduct A f g ((R((i)_*[A])).obj ((L((i)^*[A])).obj K)) L)) := by
+    have h₀ := isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i U.ι
+      (by rw [Scheme.Opens.range_ι, hU]; exact disjoint_compl_right) (V.ι ≫ pullback.fst f g)
+      (by
+        rintro _ ⟨x, rfl⟩
+        rw [Scheme.Opens.range_ι, hU]
+        intro hx
+        have hxV : V.ι.base x ∉ Set.range ι.base := by
+          rw [hij]; exact fun h ↦ h ⟨x, rfl⟩
+        exact hxV (hrange _ (by rwa [← Scheme.Hom.comp_apply])))
+      ((L((i)^*[A])).obj K)
+    have h₁ : IsZero ((L((V.ι)^*[A])).obj ((L((pullback.fst f g)^*[A])).obj
+        ((R((i)_*[A])).obj ((L((i)^*[A])).obj K)))) :=
+      h₀.of_iso (((leftDerivedUpperStarComp A V.ι (pullback.fst f g)).app _).symm ≪≫
+        (L((V.ι ≫ pullback.fst f g)^*[A])).mapIso
+          ((rightDerivedLowerShriekIsoRightDerivedLowerStar A i).app _).symm)
+    exact (isZero_derivedTensor_obj_obj_of_isZero_left h₁ _).of_iso
+      (leftDerivedUpperStarTensorIso A V.ι _ _)
+  have hφ := isIso_leftDerivedUpperStar_map_externalProductMap A f g (i ≫ f) g i (𝟙 Y) ι
+    (by simp [ι]) (by simp [ι]) ((derivedUpperStarLowerStarAdjunction A i).unit.app K) (𝟙 L)
+    (isIso_leftDerivedUpperStar_map_unit_of_isClosedImmersion A i K)
+    (by rw [CategoryTheory.Functor.map_id]; infer_instance)
+  exact nonempty_iso_rightDerivedLowerStar_obj_leftDerivedUpperStar_obj A ι V.ι hij _ hM hφ
+
+/-- **The one-sided closed Künneth formula**, second factor. For a closed immersion
+`j : W ⟶ Y` with base change `ι = X ×_B j`, `Rι_* Lι^* (K ⊠ L) ≅ K ⊠ Rj_* Lj^* L`. -/
+theorem nonempty_iso_externalProduct_closedImmersion_right (f : X ⟶ B) (g : Y ⟶ B)
+    (j : W ⟶ Y) [IsClosedImmersion j]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    Nonempty ((R((pullbackMapRight f g j)_*[A])).obj
+        ((L((pullbackMapRight f g j)^*[A])).obj (externalProduct A f g K L)) ≅
+      externalProduct A f g K ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) := by
+  set ι := pullbackMapRight f g j
+  have hpb := isPullback_pullbackMapRight f g j
+  have : IsClosedImmersion ι :=
+    MorphismProperty.of_isPullback (P := @IsClosedImmersion) hpb inferInstance
+  obtain ⟨V, hij, hV⟩ := exists_openImmersion_range_compl ι
+  obtain ⟨U, hjU, hU⟩ := exists_openImmersion_range_compl j
+  -- points of `X ×_B Y` over `W` lie in the range of `ι`
+  have hrange : ∀ x, (pullback.snd f g).base x ∈ Set.range j.base → x ∈ Set.range ι.base := by
+    intro x hx
+    have h := Scheme.Pullback.range_snd j (pullback.snd f g)
+    obtain ⟨y, hy⟩ : x ∈ Set.range (pullback.snd j (pullback.snd f g)).base := by
+      rw [h]; exact hx
+    refine ⟨hpb.isoPullback.inv.base y, ?_⟩
+    rw [← Scheme.Hom.comp_apply, hpb.isoPullback_inv_snd, hy]
+  -- `K ⊠ Rj_* Lj^* L` vanishes on the open complement of `ι`
+  have hM : IsZero ((L((V.ι)^*[A])).obj
+      (externalProduct A f g K ((R((j)_*[A])).obj ((L((j)^*[A])).obj L)))) := by
+    have h₀ := isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A j U.ι
+      (by rw [Scheme.Opens.range_ι, hU]; exact disjoint_compl_right) (V.ι ≫ pullback.snd f g)
+      (by
+        rintro _ ⟨x, rfl⟩
+        rw [Scheme.Opens.range_ι, hU]
+        intro hx
+        have hxV : V.ι.base x ∉ Set.range ι.base := by
+          rw [hij]; exact fun h ↦ h ⟨x, rfl⟩
+        exact hxV (hrange _ (by rwa [← Scheme.Hom.comp_apply])))
+      ((L((j)^*[A])).obj L)
+    have h₁ : IsZero ((L((V.ι)^*[A])).obj ((L((pullback.snd f g)^*[A])).obj
+        ((R((j)_*[A])).obj ((L((j)^*[A])).obj L)))) :=
+      h₀.of_iso (((leftDerivedUpperStarComp A V.ι (pullback.snd f g)).app _).symm ≪≫
+        (L((V.ι ≫ pullback.snd f g)^*[A])).mapIso
+          ((rightDerivedLowerShriekIsoRightDerivedLowerStar A j).app _).symm)
+    exact (isZero_derivedTensor_obj_obj_of_isZero_right _ h₁).of_iso
+      (leftDerivedUpperStarTensorIso A V.ι _ _)
+  have hφ := isIso_leftDerivedUpperStar_map_externalProductMap A f g f (j ≫ g) (𝟙 X) j ι
+    (by simp [ι]) (by simp [ι]) (𝟙 K) ((derivedUpperStarLowerStarAdjunction A j).unit.app L)
+    (by rw [CategoryTheory.Functor.map_id]; infer_instance)
+    (isIso_leftDerivedUpperStar_map_unit_of_isClosedImmersion A j L)
+  exact nonempty_iso_rightDerivedLowerStar_obj_leftDerivedUpperStar_obj A ι V.ι hij _ hM hφ
+
+/-- **The closed Künneth formula.** For closed immersions `i : Z ⟶ X` and `j : W ⟶ Y` over `B`,
+with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
+`R(i ×_B j)_* L(i ×_B j)^* (K ⊠ L) ≅ Ri_* Li^* K ⊠ Rj_* Lj^* L`. It is obtained from the
+one-sided formulas, `i ×_B j` being `(Z ×_B j) ≫ (i ×_B Y)`. -/
+theorem nonempty_iso_externalProduct_closedImmersion_of_flat (f : X ⟶ B) (g : Y ⟶ B)
+    (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    Nonempty ((R((pullback.mapOverBase i j f g)_*[A])).obj
+        ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L)) ≅
+      externalProduct A f g ((R((i)_*[A])).obj ((L((i)^*[A])).obj K))
+        ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) := by
+  let ι₁ := pullbackMapLeft f g i
+  let ι₂ := pullbackMapRight (i ≫ f) g j
+  have hι : ι₂ ≫ ι₁ = pullback.mapOverBase i j f g := by
+    apply pullback.hom_ext <;> simp [ι₁, ι₂]
+  let L' := (R((j)_*[A])).obj ((L((j)^*[A])).obj L)
+  obtain ⟨a⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp_left A f g (i ≫ f) i ι₁
+    (by simp [ι₁]) (by simp [ι₁]) K L
+  obtain ⟨a'⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp_left A f g (i ≫ f) i
+    ι₁ (by simp [ι₁]) (by simp [ι₁]) K L'
+  obtain ⟨r⟩ := nonempty_iso_externalProduct_closedImmersion_right A (i ≫ f) g j
+    ((L((i)^*[A])).obj K) L
+  obtain ⟨l⟩ := nonempty_iso_externalProduct_closedImmersion_left A f g i K L'
+  exact ⟨(rightDerivedLowerStarCongr A hι).symm.app _ ≪≫
+    ((rightDerivedLowerStarComp A ι₂ ι₁).symm.app _ ≪≫
+    (R((ι₁)_*[A])).mapIso ((R((ι₂)_*[A])).mapIso
+      ((leftDerivedUpperStarComp A ι₂ ι₁ _ hι.symm).app _)) ≪≫
+    (R((ι₁)_*[A])).mapIso ((R((ι₂)_*[A])).mapIso ((L((ι₂)^*[A])).mapIso a) ≪≫ r) ≪≫
+    (R((ι₁)_*[A])).mapIso a'.symm ≪≫ l)⟩
+
+end OneSided
+
 
 end Etale
 

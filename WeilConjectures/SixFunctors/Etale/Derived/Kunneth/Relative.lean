@@ -17,8 +17,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
 
 /-!
 
@@ -142,12 +142,130 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (f : X ⟶ B) (g : 
   sorry
 
 omit [HasSmallSiteSheafify A] in
+/-- The assembly step of the ordinary Künneth formula with an identity factor for a morphism
+`p : X ⟶ Y` with base change `p' = p × 𝟙_Z : X ×_S Z ⟶ Y ×_S Z`: base change along the
+projection `Y ×_S Z ⟶ Y` and the projection formula for `p'` give
+`Rp_* M ⊠ Q ≅ Rp'_* (M ⊠ Q)`. -/
+theorem nonempty_iso_externalProduct_rightDerivedLowerStar_of_iso [UpperStarPreservesFlat A]
+    {S Z : Scheme.{u}} (b : Y ⟶ S) (c : Z ⟶ S) (p : X ⟶ Y)
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    (e : (L((pullback.fst b c)^*[A])).obj ((R((p)_*[A])).obj M) ≅
+      (R((pullback.mapOverBaseRight p b c)_*[A])).obj
+        ((L((pullback.fst (p ≫ b) c)^*[A])).obj M))
+    (hpf : IsIso (((rightDerivedLowerStarProjectionMap A (pullback.mapOverBaseRight p b c)).app
+      ((L((pullback.fst (p ≫ b) c)^*[A])).obj M)).app ((L((pullback.snd b c)^*[A])).obj Q))) :
+    Nonempty (externalProduct A b c ((R((p)_*[A])).obj M) Q ≅
+      (R((pullback.mapOverBaseRight p b c)_*[A])).obj (externalProduct A (p ≫ b) c M Q)) := by
+  let e' : (L((pullback.mapOverBaseRight p b c)^*[A])).obj ((L((pullback.snd b c)^*[A])).obj Q) ≅
+      (L((pullback.snd (p ≫ b) c)^*[A])).obj Q :=
+    ((leftDerivedUpperStarComp A (pullback.mapOverBaseRight p b c) (pullback.snd b c)
+      (pullback.snd (p ≫ b) c) (by simp)).app Q).symm
+  exact ⟨((derivedTensor A _).mapIso e).app _ ≪≫ asIso (((rightDerivedLowerStarProjectionMap A
+    (pullback.mapOverBaseRight p b c)).app ((L((pullback.fst (p ≫ b) c)^*[A])).obj M)).app
+      ((L((pullback.snd b c)^*[A])).obj Q)) ≪≫
+    (R((pullback.mapOverBaseRight p b c)_*[A])).mapIso (((derivedTensor A _).obj _).mapIso e')⟩
+
+/-- The ordinary Künneth formula with an identity factor `sk-lem-sf-kunneth-star` for a
+*proper* morphism `p : X ⟶ Y` and a finite coefficient ring: `Rp_* M ⊠ Q ≅ R(p × 𝟙_Z)_* (M ⊠ Q)`
+for all `M` and `Q`, by proper base change
+(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`) and the
+projection formula for the proper morphism `p × 𝟙_Z`
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`). For a
+compactification `f = g ∘ j` of a general `f` this handles the proper factor `g`; the open
+factor `j` is the non-formal part of
+`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`. -/
+theorem nonempty_iso_externalProduct_rightDerivedLowerStar_of_isProper (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] {S Z : Scheme.{u}} (b : Y ⟶ S) (c : Z ⟶ S) (p : X ⟶ Y) [IsProper p]
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty (externalProduct (ModuleCat.{u + 1} Λ) b c
+        ((R((p)_*[ModuleCat.{u + 1} Λ])).obj M) Q ≅
+      (R((pullback.mapOverBaseRight p b c)_*[ModuleCat.{u + 1} Λ])).obj
+        (externalProduct (ModuleCat.{u + 1} Λ) (p ≫ b) c M Q)) := by
+  have sq : IsPullback (pullback.fst (p ≫ b) c) (pullback.mapOverBaseRight p b c) p
+      (pullback.fst b c) := isPullback_pullbackMapLeft b c p
+  have : IsProper (pullback.mapOverBaseRight p b c) :=
+    MorphismProperty.of_isPullback (P := @IsProper) sq inferInstance
+  have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
+  have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ (pullback.mapOverBaseRight p b c)
+  exact nonempty_iso_externalProduct_rightDerivedLowerStar_of_iso (ModuleCat.{u + 1} Λ) b c p M Q
+    ((asIso (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq)).app M) inferInstance
+
+omit [HasSmallSiteSheafify A] in
+/-- The assembly step of the relative product theorem `sk-thm-sf-kunneth-relative`: with
+`p`, `q` the projections of `X ×_B Y`, a composition isomorphism
+`R(f ×_B g)_! ≅ Rq_! ⋙ Rg_!`, the projection formula for `q` at `(Lp^*K, M)`, compact-support
+base change `Lg^* Rf_! K ≅ Rq_! Lp^* K` and the projection formula for `g` at `(M, Rf_! K)` give
+`R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`. -/
+theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_of_iso [UpperStarPreservesFlat A]
+    [(CategoryTheory.forget A).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+    [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [HasCompactification g]
+    [HasCompactification (pullback.toBase f g)]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))
+    (e₁ : R(pullback.toBase f g)_![A] ≅ R(pullback.snd f g)_![A] ⋙ R(g)_![A])
+    (h₂ : HasProjectionFormula A (pullback.snd f g)
+      ((L((pullback.fst f g)^*[A])).obj K) M)
+    (e₃ : (L((g)^*[A])).obj ((R(f)_![A]).obj K) ≅
+      (R(pullback.snd f g)_![A]).obj ((L((pullback.fst f g)^*[A])).obj K))
+    (h₄ : HasProjectionFormula A g M ((R(f)_![A]).obj K)) :
+    Nonempty ((R(pullback.toBase f g)_![A]).obj (externalProduct A f g K M) ≅
+      ((-⊗ᴸ-(B)[A]).obj ((R(f)_![A]).obj K)).obj ((R(g)_![A]).obj M)) := by
+  have : IsIso (((projectionMap A (pullback.snd f g)).app
+    ((L((pullback.fst f g)^*[A])).obj K)).app M) := h₂
+  have : IsIso (((projectionMap A g).app M).app ((R(f)_![A]).obj K)) := h₄
+  obtain ⟨βY⟩ := nonempty_iso_derivedTensor_flip A Y
+  obtain ⟨βB⟩ := nonempty_iso_derivedTensor_flip A B
+  exact ⟨e₁.app _ ≪≫ (R(g)_![A]).mapIso
+    ((asIso (((projectionMap A (pullback.snd f g)).app
+      ((L((pullback.fst f g)^*[A])).obj K)).app M)).symm ≪≫
+    ((-⊗ᴸ-(Y)[A]).mapIso e₃.symm).app M ≪≫ (βY.app _).app M) ≪≫
+    (asIso (((projectionMap A g).app M).app ((R(f)_![A]).obj K))).symm ≪≫ (βB.app _).app _⟩
+
+/-- The relative product theorem `sk-thm-sf-kunneth-relative` for a finite coefficient ring:
+`R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M` for every `K` and `M`. This is the case of
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` with
+coefficients `ModuleCat Λ`, by the four steps of the blueprint proof: the composition law for
+`f ×_B g = q ≫ g`, the projection formula for `q`, compact-support base change for the
+cartesian square of `f` and `g`, and the projection formula for `g`. -/
+theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_of_finite (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f]
+    [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
+    [HasCompactification (pullback.toBase f g)]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).obj
+        (externalProduct (ModuleCat.{u + 1} Λ) f g K M) ≅
+      ((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj
+        ((R(g)_![ModuleCat.{u + 1} Λ]).obj M)) := by
+  have sq : IsPullback (pullback.fst f g) (pullback.snd f g) f g := IsPullback.of_hasPullback f g
+  have : QuasiCompact (pullback.snd f g) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact) sq inferInstance
+  have hcomp : ∀ (t : pullback f g ⟶ B) [HasCompactification t], pullback.snd f g ≫ g = t →
+      Nonempty (R(t)_![ModuleCat.{u + 1} Λ] ≅
+        R(pullback.snd f g)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) := by
+    rintro t _ rfl
+    exact nonempty_iso_rightDerivedLowerShriek_comp Λ (pullback.snd f g) g
+  obtain ⟨e₁⟩ := hcomp (pullback.toBase f g) (by simp)
+  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
+  exact nonempty_iso_rightDerivedLowerShriek_externalProduct_of_iso (ModuleCat.{u + 1} Λ) f g K M e₁
+    (hasProjectionFormula_of_finite Λ _ _ _)
+    ((asIso (rightDerivedLowerShriekBaseChangeMap Λ sq)).app K)
+    (hasProjectionFormula_of_finite Λ _ _ _)
+
+omit [HasSmallSiteSheafify A] in
 /-- The external product is compatible with pullback: for morphisms `i : Z ⟶ X`, `j : W ⟶ Y`
 over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
 
 `L(i ×_B j)^* (K ⊠ L) ≅ Li^* K ⊠ Lj^* L`,
 
-the external product on the right being taken along `i ≫ f` and `j ≫ g`. -/
+the external product on the right being taken along `i ≫ f` and `j ≫ g`. The pullbacks are
+assumed to preserve flat sheaves (`AlgebraicGeometry.Etale.UpperStarPreservesFlat`, true for
+`ModuleCat Λ`), which is what makes the derived pullback monoidal
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso`). -/
 theorem nonempty_iso_leftDerivedUpperStar_externalProduct [UpperStarPreservesFlat A]
     (f : X ⟶ B) (g : Y ⟶ B) {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -173,7 +291,13 @@ omit [HasSmallSiteSheafify A] in
 /-- The external product is compatible with restriction to closed subschemes: for closed
 immersions `i : Z ⟶ X`, `j : W ⟶ Y` over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
 
-`(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L`. -/
+`(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L`.
+
+The pullbacks are assumed to preserve flat sheaves
+(`AlgebraicGeometry.Etale.UpperStarPreservesFlat`, true for `ModuleCat Λ`), which makes the
+derived pullback monoidal. This is
+`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion_of_flat`: both sides are
+supported on `Z ×_B W` and agree there. -/
 theorem nonempty_iso_externalProduct_closedImmersion [UpperStarPreservesFlat A]
     (f : X ⟶ B) (g : Y ⟶ B)
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
@@ -182,43 +306,8 @@ theorem nonempty_iso_externalProduct_closedImmersion [UpperStarPreservesFlat A]
     Nonempty ((R((pullback.mapOverBase i j f g)_*[A])).obj
         ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L)) ≅
       externalProduct A f g ((R((i)_*[A])).obj ((L((i)^*[A])).obj K))
-        ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) := by
-  -- Restrict in two steps: `i_* i^* K ⊠ j_* j^* L` is supported on `Z ×_B Y`, where it is
-  -- `i^* K ⊠ j_* j^* L`, which is supported on `Z ×_B W`, where it is `i^* K ⊠ j^* L`
-  -- (`nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar`).
-  let s : pullback (i ≫ f) g ⟶ pullback f g :=
-    pullback.map (i ≫ f) g f g i (𝟙 Y) (𝟙 B) (by simp) (by simp)
-  let s' : pullback (i ≫ f) (j ≫ g) ⟶ pullback (i ≫ f) g :=
-    pullback.map (i ≫ f) (j ≫ g) (i ≫ f) g (𝟙 Z) j (𝟙 B) (by simp) (by simp)
-  have hsq : s ≫ pullback.snd f g = pullback.snd (i ≫ f) g := by simp [s]
-  have hs : IsPullback (pullback.fst (i ≫ f) g) s i (pullback.fst f g) :=
-    (IsPullback.of_right (by rw [hsq]; exact (IsPullback.of_hasPullback (i ≫ f) g).flip)
-      (by simp [s]) (IsPullback.of_hasPullback f g).flip).flip
-  have hs' : IsPullback (pullback.snd (i ≫ f) (j ≫ g)) s' j (pullback.snd (i ≫ f) g) :=
-    (IsPullback.of_right (by simpa [s'] using IsPullback.of_hasPullback (i ≫ f) (j ≫ g))
-      (by simp [s']) (IsPullback.of_hasPullback (i ≫ f) g)).flip
-  have hc : s' ≫ s = pullback.mapOverBase i j f g := by
-    ext <;> simp [s, s']
-  obtain ⟨e₁⟩ := nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar A
-    (pullback.fst f g) i s _ hs ((L((i)^*[A])).obj K)
-    ((L((pullback.snd f g)^*[A])).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj L)))
-  let e₂ : (L((s)^*[A])).obj
-      ((L((pullback.snd f g)^*[A])).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) ≅
-      (L((pullback.snd (i ≫ f) g)^*[A])).obj ((R((j)_*[A])).obj ((L((j)^*[A])).obj L)) :=
-    ((leftDerivedUpperStarComp A s (pullback.snd f g) _ hsq.symm).app _).symm
-  obtain ⟨e₃⟩ := nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar' A
-    (pullback.snd (i ≫ f) g) j s' _ hs' ((L((j)^*[A])).obj L)
-    ((L((pullback.fst (i ≫ f) g)^*[A])).obj ((L((i)^*[A])).obj K))
-  let e₄ : (L((s')^*[A])).obj
-      ((L((pullback.fst (i ≫ f) g)^*[A])).obj ((L((i)^*[A])).obj K)) ≅
-      (L((pullback.fst (i ≫ f) (j ≫ g))^*[A])).obj ((L((i)^*[A])).obj K) :=
-    ((leftDerivedUpperStarComp A s' (pullback.fst (i ≫ f) g) _ (by simp [s'])).app _).symm
-  obtain ⟨e₅⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct A f g i j K L
-  exact ⟨(e₁ ≪≫ (R((s)_*[A])).mapIso (((derivedTensor A _).obj _).mapIso e₂ ≪≫ e₃ ≪≫
-      (R((s')_*[A])).mapIso (((derivedTensor A _).mapIso e₄).app _)) ≪≫
-    (rightDerivedLowerStarComp A s' s).app _ ≪≫ (rightDerivedLowerStarCongr A hc).app _ ≪≫
-    (R((pullback.mapOverBase i j f g)_*[A])).mapIso e₅.symm).symm⟩
-
+        ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) :=
+  nonempty_iso_externalProduct_closedImmersion_of_flat A f g i j K L
 /-- Blueprint `sk-thm-product`: Supported product over a relative base.
 
 Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type, `h = f ×_B g`, and let
