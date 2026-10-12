@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Group.Subgroup.Finsupp
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+public import WeilConjectures.AlgebraicGeometry.Curve.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
@@ -31,8 +33,8 @@ collects the inputs of the computation of the étale cohomology of `C`
 * `Pic(C)` is a quotient of the `k`-points of the Jacobian of the smooth compactification of `C`
   by a finitely generated subgroup; hence it is `n`-divisible with finite `n`-torsion for `n`
   prime to `char k`;
-* `H²(C, ℤ/ℓ) = 0` for every prime `ℓ`, and `H²(C, η_* M) = 0` for every torsion sheaf `M` on
-  the generic point `η` of `C`.
+* `H²(C, ℤ/ℓ) = 0` for every prime `ℓ`; the vanishing of `H²(C, η_* M)` for torsion sheaves `M`
+  on the generic point `η` of `C` is in `WeilConjectures.AlgebraicGeometry.Curve.AffineGeneric`.
 
 ## Main statements
 
@@ -41,7 +43,6 @@ collects the inputs of the computation of the étale cohomology of `C`
 - `AlgebraicGeometry.IsConnectedCurve.surjective_zsmul_pic_and_finite_torsionBy`: `Pic(C)` is
   `n`-divisible with finite `n`-torsion.
 - `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_constantZMod`: `H²(C, ℤ/ℓ) = 0`.
-- `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar`: `H²(C, η_* M) = 0`.
 -/
 
 @[expose] public section
@@ -251,8 +252,170 @@ theorem exists_addEquiv_pic_quotient (f : C ⟶ Spec (.of k)) [IsConnectedCurve 
       IsConnectedCurve c.g ∧ Smooth c.g ∧
         (∃ e : (picardFunctorDegree c.g 0).obj.RepresentableBy J, IsPicardZeroMul c.g e) ∧
         Λ.FG ∧
-        Nonempty (Additive C.Pic ≃+ Additive (𝟙_ (Over (Spec (.of k))) ⟶ J) ⧸ Λ) :=
-  sorry
+        Nonempty (Additive C.Pic ≃+ Additive (𝟙_ (Over (Spec (.of k))) ⟶ J) ⧸ Λ) := by
+  classical
+  obtain ⟨c, hconn, hsm, hfin, hcl⟩ := IsConnectedCurve.exists_smooth_properCompactification f
+  have := c.isProper
+  have := c.isOpenImmersion
+  -- `C̄ = c.Z` and `C` are noetherian integral curves
+  let : c.Z.Over (Spec (.of k)) := ⟨c.g⟩
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  have := IsConnectedCurve.connectedSpace' c.g
+  have := IsConnectedCurve.connectedSpace' f
+  have : SmoothOfRelativeDimension 1 (c.Z ↘ Spec (.of k)) :=
+    IsConnectedCurve.smoothOfRelativeDimension_one c.g
+  have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
+    IsConnectedCurve.smoothOfRelativeDimension_one f
+  have : IsProper (c.Z ↘ Spec (.of k)) := c.isProper
+  have : IsCurve (c.Z ↘ Spec (.of k)) := inferInstanceAs (IsCurve c.g)
+  have : IsCurve (C ↘ Spec (.of k)) := inferInstanceAs (IsCurve f)
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : IsRegular c.Z := IsRegular.of_smooth c.g
+  have : IrreducibleSpace c.Z := IsRegular.irreducibleSpace c.Z
+  have : IsReduced c.Z := isReduced_of_isReduced_stalk c.Z
+  have : IsIntegral c.Z := isIntegral_of_irreducibleSpace_of_isReduced c.Z
+  have : CompactSpace c.Z := (quasiCompact_iff_compactSpace c.g).mp inferInstance
+  have : IsNoetherian c.Z := ⟨⟩
+  have : JacobsonSpace c.Z := LocallyOfFiniteType.jacobsonSpace c.g
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsRegular C := IsRegular.of_smooth f
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  have : IsReduced C := isReduced_of_isReduced_stalk C
+  have : IsIntegral C := isIntegral_of_irreducibleSpace_of_isReduced C
+  have : IsNoetherian C := ⟨⟩
+  -- the Jacobian of `C̄` and `Pic(C̄) ≅ ℤ × J(k)`
+  obtain ⟨J, _, e, _, he, -, -, E, hE⟩ := Scheme.exists_jacobian_addEquiv_prod k c.Z
+  set G := Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)
+  obtain ⟨eC, -⟩ := Scheme.exists_divisorClassGroup_addEquiv_pic (k := k) (C := C)
+  obtain ⟨eX, heX⟩ := Scheme.exists_divisorClassGroup_addEquiv_pic (k := k) (C := c.Z)
+  -- `T : Div(C̄) → Pic(C̄) ≅ ℤ × J(k)`
+  let T : c.Z.Divisor →+ ℤ × G := E.toAddMonoidHom.comp (Scheme.Divisor.toPic k c.Z)
+  have hT (D : c.Z.Divisor) : T D = E (Scheme.Divisor.toPic k c.Z D) := rfl
+  have hTker (D : c.Z.Divisor) : T D = 0 ↔ D ∈ c.Z.principalDivisors := by
+    rw [hT, AddEquiv.map_eq_zero_iff]
+    rw [← heX, AddEquiv.map_eq_zero_iff, QuotientAddGroup.eq_zero_iff]
+  have hTsurj : Function.Surjective T := by
+    intro y
+    obtain ⟨D, hD⟩ := QuotientAddGroup.mk_surjective (eX.symm (E.symm y))
+    refine ⟨D, ?_⟩
+    rw [hT, ← heX, hD, AddEquiv.apply_symm_apply, AddEquiv.apply_symm_apply]
+  have hT1 (P : closedPoints c.Z) : (T (Finsupp.single P 1)).1 = 1 := by
+    rw [hT, hE]
+    simp only [Scheme.Divisor.toPic_single, one_smul, toMul_ofMul,
+      Scheme.picDegreeHom_ofClosedPoint, toAdd_ofAdd]
+  -- the boundary `S = C̄ ∖ C`, a finite nonempty set of closed points
+  let S := {P : closedPoints c.Z // P.1 ∉ Set.range c.i}
+  have : Finite S := by
+    have := hfin.to_subtype
+    exact Finite.of_injective (fun P : S ↦ (⟨P.1.1, P.2⟩ : ((Set.range c.i.base)ᶜ : Set c.Z)))
+      fun P Q h ↦ Subtype.ext (Subtype.ext (by simpa using h))
+  obtain ⟨x, hx⟩ : ∃ x, x ∉ Set.range c.i := by
+    by_contra! h
+    have : Surjective c.i := ⟨h⟩
+    have : IsIso c.i := (isIso_iff_isOpenImmersion_and_surjective c.i).mpr ⟨inferInstance, ‹_›⟩
+    have : IsProper f := c.comm ▸ inferInstance
+    have h0 := (isFinite_of_isProper_of_isAffine f).2
+    rw [IsConnectedCurve.krullDim_eq_one (f := f)] at h0
+    exact absurd h0 (by decide)
+  let P₀ : S := ⟨⟨x, hcl x hx⟩, hx⟩
+  -- `ψ(a, g) = g - a • x₀` with `x₀` the class of `[P₀]` in `J(k)`, and `Λ = ⟨ψ [P] : P ∈ S⟩`
+  let x₀ : G := (T (Finsupp.single P₀.1 1)).2
+  let ψ : ℤ × G →+ G := AddMonoidHom.snd ℤ G - (zmultiplesHom G x₀).comp (AddMonoidHom.fst ℤ G)
+  have hψ (y : ℤ × G) : ψ y = y.2 - y.1 • x₀ := rfl
+  let v : S → G := fun P ↦ ψ (T (Finsupp.single P.1 1))
+  let Λ : AddSubgroup G := AddSubgroup.closure (Set.range v)
+  have hΛ : Λ.FG := ⟨(Set.finite_range v).toFinset, by simp [Λ]⟩
+  let Θ : c.Z.Divisor →+ G ⧸ Λ := (QuotientAddGroup.mk' Λ).comp (ψ.comp T)
+  -- `Θ` kills principal divisors and divisors supported on `S`
+  have hΘS (D : c.Z.Divisor) (hD : Scheme.Divisor.comap c.i D = 0) : Θ D = 0 := by
+    rw [Scheme.Divisor.comap_eq_zero_iff] at hD
+    conv_lhs => rw [← Finsupp.sum_single D]
+    rw [map_finsuppSum]
+    refine Finset.sum_eq_zero fun P hP ↦ ?_
+    dsimp only
+    rw [← Finsupp.smul_single_one, map_zsmul]
+    have hP' : P.1 ∉ Set.range c.i := hD P (Finsupp.mem_support_iff.mp hP)
+    have : Θ (Finsupp.single P 1) = 0 := by
+      simp only [Θ, AddMonoidHom.comp_apply, QuotientAddGroup.mk'_apply,
+        QuotientAddGroup.eq_zero_iff]
+      exact AddSubgroup.subset_closure ⟨⟨P, hP'⟩, rfl⟩
+    rw [this, smul_zero]
+  have hΘker (D : c.Z.Divisor) (hD : Θ D = 0) :
+      ∃ D₁ ∈ c.Z.principalDivisors, Scheme.Divisor.comap c.i (D - D₁) = 0 := by
+    simp only [Θ, AddMonoidHom.comp_apply, QuotientAddGroup.mk'_apply,
+      QuotientAddGroup.eq_zero_iff] at hD
+    obtain ⟨a, ha⟩ := AddSubgroup.mem_closure_range_iff.mp hD
+    let DS : c.Z.Divisor := Finsupp.mapDomain Subtype.val a
+    have hDS : ψ (T DS) = ψ (T D) := by
+      have hDS' : DS = a.sum fun P n ↦ Finsupp.single P.1 n := rfl
+      rw [hDS', map_finsuppSum, map_finsuppSum, ha]
+      refine Finsupp.sum_congr fun P _ ↦ ?_
+      rw [← Finsupp.smul_single_one, map_zsmul, map_zsmul]
+    set b := (T (D - DS)).1
+    have hb : T (D - DS - Finsupp.single P₀.1 b) = 0 := by
+      have h1 : ψ (T (D - DS)) = 0 := by
+        calc ψ (T (D - DS)) = ψ (T D) - ψ (T DS) := by rw [map_sub, map_sub]
+          _ = 0 := by rw [hDS, sub_self]
+      rw [hψ, sub_eq_zero] at h1
+      have h2 : T (Finsupp.single P₀.1 b) = (b, b • x₀) := by
+        rw [← Finsupp.smul_single_one, map_zsmul]
+        exact Prod.ext (by simp [hT1]) rfl
+      rw [map_sub, h2]
+      refine Prod.ext ?_ ?_
+      · change (T (D - DS)).1 - b = 0
+        exact sub_self _
+      · change (T (D - DS)).2 - b • x₀ = 0
+        rw [h1, sub_self]
+    refine ⟨D - DS - Finsupp.single P₀.1 b, (hTker _).1 hb, ?_⟩
+    rw [Scheme.Divisor.comap_eq_zero_iff]
+    intro P hP hPr
+    rw [show D - (D - DS - Finsupp.single P₀.1 b) = DS + Finsupp.single P₀.1 b by abel] at hP
+    by_cases h₀ : P = P₀.1
+    · exact P₀.2 (h₀ ▸ hPr)
+    · rw [Finsupp.add_apply, Finsupp.single_eq_of_ne h₀, add_zero] at hP
+      obtain ⟨Q, -, rfl⟩ := Finset.mem_image.mp (Finsupp.mapDomain_support (f := Subtype.val)
+        (s := a) (Finsupp.mem_support_iff.mpr hP))
+      exact Q.2 hPr
+  -- `Ξ : Div(C) → J(k) / Λ`, through the extension by zero `Div(C) → Div(C̄)`
+  let ext : C.Divisor →+ c.Z.Divisor := Finsupp.mapDomain.addMonoidHom c.i.closedPointsMap
+  have hext (D : C.Divisor) : Scheme.Divisor.comap c.i (ext D) = D := by
+    ext P
+    rw [Scheme.Divisor.comap_apply]
+    exact Finsupp.mapDomain_apply c.i.closedPointsMap_injective D P
+  have hΘext (D : c.Z.Divisor) : Θ (ext (Scheme.Divisor.comap c.i D)) = Θ D := by
+    rw [← sub_eq_zero, ← map_sub]
+    exact hΘS _ (by rw [map_sub, hext, sub_self])
+  let Ξ : C.Divisor →+ G ⧸ Λ := Θ.comp ext
+  have hΞ : Function.Surjective Ξ := by
+    intro y
+    obtain ⟨g, rfl⟩ := QuotientAddGroup.mk'_surjective Λ y
+    obtain ⟨D, hD⟩ := hTsurj (0, g)
+    refine ⟨Scheme.Divisor.comap c.i D, ?_⟩
+    change Θ (ext _) = _
+    rw [hΘext]
+    simp [Θ, hD, hψ]
+  let Φ := (c.i.functionFieldIso.commRingCatIsoToRingEquiv : c.Z.functionField ≃+* _)
+  have hker : C.principalDivisors = Ξ.ker := by
+    ext D
+    rw [AddMonoidHom.mem_ker]
+    constructor
+    · rintro ⟨h, rfl⟩
+      let g : Additive c.Z.functionFieldˣ := .ofMul (Units.map Φ.symm.toMonoidHom h.toMul)
+      have hg : Scheme.Divisor.comap c.i (c.Z.div g) = C.div h := by
+        rw [Scheme.Divisor.comap_div]
+        congr 1
+        ext
+        exact Φ.apply_symm_apply _
+      change Θ (ext _) = 0
+      rw [← hg, hΘext]
+      simp [Θ, (hTker _).2 ⟨g, rfl⟩]
+    · intro hD
+      obtain ⟨D₁, ⟨g, rfl⟩, hD₁⟩ := hΘker (ext D) hD
+      rw [map_sub, hext, sub_eq_zero, Scheme.Divisor.comap_div] at hD₁
+      exact ⟨_, hD₁.symm⟩
+  exact ⟨c, J, inferInstance, inferInstance, Λ, hconn, hsm, ⟨e, he⟩, hΛ,
+    ⟨eC.symm.trans ((QuotientAddGroup.quotientAddEquivOfEq hker).trans
+      (QuotientAddGroup.quotientKerEquivOfSurjective Ξ hΞ))⟩⟩
 
 /-- **`Pic` of an affine curve is divisible with finite torsion.** Let `C` be a smooth affine
 connected curve over an algebraically closed field `k` and `n` prime to `char k`. Then `Pic(C)`
@@ -329,27 +492,5 @@ theorem subsingleton_sheafH_two_constantZMod (f : C ⟶ Spec (.of k)) [IsConnect
   have e' := ((Sheaf.functorH _ 2).mapIso
     (C.constantZModIsoRootsOfUnitySheaf ℓ f hζ)).addCommGroupIsoToAddEquiv
   exact (e'.trans e).subsingleton
-
-/-- **Second cohomology of a generic extension on an affine curve.** Let `C` be a smooth integral
-affine connected curve over an algebraically closed field `k`, with generic point
-`η : Spec k(C) ⟶ C`. Then `H²(C_ét, η_* M) = 0` for every torsion étale sheaf `M` on
-`Spec k(C)`.
-
-For `M` finite and `ℓ`-primary, a finite separable extension `K'/k(C)` of degree prime to `ℓ`
-over which `M` has a filtration with trivial `𝔽_ℓ` quotients makes `η_* M` a direct summand of
-`h_* b_* M|_{K'}`, where `h : C' ⟶ C` is the normalization of `C` in `K'`
-(`AlgebraicGeometry.IsConnectedCurve.normalizationIn`) and `b` the generic point of `C'`. Since
-`h_*` is exact, the claim reduces along the filtration to
-`AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_constantZMod` on `C'`. A general
-torsion module is the filtered union of its finite submodules, and cohomology commutes with
-filtered colimits on the quasi-compact quasi-separated scheme `C`.
-(blueprint: `lem-sc-affine-generic-second`) -/
-theorem subsingleton_sheafH_two_lowerStar (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
-    [Smooth f] [IsAffine C] [IsIntegral C]
-    (M : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})
-    (hM : M.IsTorsion) :
-    Subsingleton
-      (Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj M) 2) :=
-  sorry
 
 end AlgebraicGeometry.IsConnectedCurve

@@ -53,7 +53,7 @@ the hypotheses of the reduction statements) a sheaf of modules over `ULift (ZMod
 
 @[expose] public section
 
-universe u
+universe w w' u
 
 open CategoryTheory Limits
 
@@ -72,11 +72,12 @@ abelian étale sheaves on `X`. Then for every `q` the canonical map
 every class on the colimit comes from some `D_λ`, and a class on `D_λ` which dies on the colimit
 already dies on some `D_μ`, `λ ⟶ μ`. The compatibility with the pullback along a field
 extension is the naturality `AlgebraicGeometry.Etale.cohomologyMap_map` of the pullback maps.
-The statement holds for arbitrary (not only torsion) abelian sheaves.
+The statement holds for arbitrary (not only torsion) abelian sheaves and filtered
+categories of any size.
 (blueprint: `lemma-weil-pbc-curve-filtered-cohomology`) -/
 @[stacks 03Q6]
 theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
-    [QuasiSeparatedSpace X] {J : Type u} [SmallCategory J] [IsFiltered J]
+    [QuasiSeparatedSpace X] {J : Type w} [Category.{w'} J] [IsFiltered J]
     {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
     (hc : IsColimit c) (q : ℕ) :
     (∀ x : Sheaf.H c.pt q, ∃ (j : J) (y : Sheaf.H (D.obj j) q),

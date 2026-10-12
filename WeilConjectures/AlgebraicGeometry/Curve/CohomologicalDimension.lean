@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
-public import WeilConjectures.AlgebraicGeometry.Curve.Affine
+public import WeilConjectures.AlgebraicGeometry.Curve.AffineGeneric
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
