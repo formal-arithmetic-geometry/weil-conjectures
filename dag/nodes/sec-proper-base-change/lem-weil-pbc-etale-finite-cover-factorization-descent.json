@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-etale-finite-cover-factorization-descent",
+ "kind": "statement",
+ "title": "Finite affine covering descent with auxiliary factorizations",
+ "statement": "Let $I$ be a nonempty directed preorder, $D:I^{op}\\to\\mathrm{Scheme}$ a diagram of quasi-compact quasi-separated schemes with affine transitions, and $c$ a limit cone with apex $X$ and projections $p_j$. Fix $i_0\\in I$, an affine étale object $W$ over $D(i_0)$ [def-weil-pbc-full-affine-etale-site], and $n\\in\\mathbb N$. Let $V_q$ be affine étale objects over $X$ with a covering family $a_q:V_q\\to p_{i_0}^*W$ [def-weil-pbc-etale-site]. For each $q$ fix an arbitrary étale object $U_q$ over $D(i_0)$ and an arrow $b_q:V_q\\to p_{i_0}^*U_q$. There exist $j\\in\\mathrm{Over}(op\\,i_0)$, affine étale objects $V_{j,q}$ over $D(j)$, a covering family $a_{j,q}:V_{j,q}\\to f_j^*W$, arrows $b_{j,q}:V_{j,q}\\to f_j^*U_q$, and isomorphisms $d_q:p_j^*V_{j,q}\\cong V_q$. For the canonical iterated-pullback isomorphism $e_j(Z):p_{i_0}^*Z\\cong p_j^*f_j^*Z$, the equations $p_j^*a_{j,q}\\circ e_j(W)^{-1}=d_q\\circ a_q$ and $p_j^*b_{j,q}\\circ e_j(U_q)^{-1}=d_q\\circ b_q$ hold, with composition written in diagrammatic order. This assertion contains no sheaf or section.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYL (lemma-colimit-affine-sites), qcqs proof; Limits Tag 01ZM (lemma-descend-finite-presentation) and Tag 01ZC (proposition-characterize-locally-finite-presentation)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-full-affine-etale-site",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the cofinal tail above i₀. Descend the affine objects V_q and their arrows into the fixed W using the object and arrow clauses of affine étale site descent. Move finitely many models to a common stage, identifying them with canonical pullbacks by their cartesian squares.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply morphism descent into the locally finitely presented original étale object U_q to the qcqs inverse system of base changes of the descended affine source. Its limit is V_q. The structure-map equation gives a descended map over the original stage, hence an arrow into f_j*U_q. Choose a common stage for the finitely many arrows. The projection equations identify their limit images under the same source isomorphisms.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite family of descended covering arrows covers at the limit. Apply eventual covering descent and base change all the data to its later stage. This preserves affineness and both arrow equations. For n=0, eventual covering says the fixed target becomes empty.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-covering-eventually"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-covering-eventually",
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-scheme-over-limit",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V1",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "0EYL qcqs proof and 01ZC for extra maps to original étale objects"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite affine etale covering families and their maps to finitely many original etale schemes descend along inverse limits with affine transition maps",
+   "results": "Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite affine etale cover and finitely many morphisms descend along a directed inverse limit of qcqs schemes with affine transition maps",
+   "results": "Eight hits, including Scheme.exists_isOpenCover_and_isAffine and eventual equality of morphisms in Mathlib.AlgebraicGeometry.AffineTransitionLimit; none packages this finite étale diagram.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(descend|hom_of_isLimit)",
+   "results": "Six Mathlib descending-chain results. Local rg additionally found Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation in AffineTransitionLimit.lean:1232, which supplies the auxiliary morphism descent step.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation",
+   "results": "One exact morphism-descent theorem for qcqs source inverse systems and arbitrary locally finitely presented targets; no finite étale covering or factorization package. Second reader also searched Lean Finder for finite diagrams and rg for finiteCover, factorizationDescent, and descend-cover terminology.",
+   "verdict": "tool lemma for auxiliary-arrow step only",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetFiniteLocalStageRepresentatives",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "degree-zero continuity: descend finite local representing objects and arrows before matching sections",
+   "via": [
+    "lem-weil-pbc-sets-finite-local-stage-representatives",
+    "lem-weil-pbc-sets-stage-presheaf-locally-surjective",
+    "lem-weil-pbc-sets-stage-sheaf-colimit",
+    "lem-weil-pbc-sets-section-lift-affine",
+    "lem-weil-pbc-sets-section-lift",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFiniteCoverFactorizationDescent.lean",
+  "declaration": "AlgebraicGeometry.etale_finiteCoverFactorizationDescent",
+  "statement": "theorem etale_finiteCoverFactorizationDescent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (W : (D.obj (op i₀)).FullAffineEtale)\n    (n : ℕ) (V : Fin n → c.pt.Etale)\n    (a : ∀ q, V q ⟶\n      (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj W.obj)\n    (U : Fin n → (D.obj (op i₀)).Etale)\n    (b : ∀ q, V q ⟶\n      (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj (U q))\n    (ha : Sieve.ofArrows V a ∈ c.pt.smallEtaleTopology\n      ((MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj W.obj))\n    (hV : ∀ q, IsAffine (V q).left) :\n    let B := fun j : Over (op i₀) ↦ MorphismProperty.Over.pullback @Etale ⊤ (c.π.app j.left)\n    let F := fun j : Over (op i₀) ↦ MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)\n    let e := fun (j : Over (op i₀)) (Z : (D.obj (op i₀)).Etale) ↦\n      (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)\n        (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom).symm).app Z\n    ∃ (j : Over (op i₀)) (Vj : Fin n → (D.obj j.left).Etale)\n      (aj : ∀ q, Vj q ⟶ (F j).obj W.obj)\n      (bj : ∀ q, Vj q ⟶ (F j).obj (U q))\n      (d : ∀ q, (B j).obj (Vj q) ≅ V q),\n      Sieve.ofArrows Vj aj ∈ (D.obj j.left).smallEtaleTopology ((F j).obj W.obj) ∧\n      (∀ q, IsAffine (Vj q).left) ∧\n      (∀ q, (B j).map (aj q) ≫ (e j W.obj).inv = (d q).hom ≫ a q) ∧\n      (∀ q, (B j).map (bj q) ≫ (e j (U q)).inv = (d q).hom ≫ b q)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T194149-L-467515",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T194149-L-467515",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
