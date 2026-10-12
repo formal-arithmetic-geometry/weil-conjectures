@@ -14,22 +14,39 @@
  ],
  "proof": [
   {
-   "text": "For each n define the p-th step on H^n(K) to be the image of H^n(L^pK) → H^n(K). The factorization through L^pK of the inclusion of L^qK for p ≤ q gives antitonicity. Pick bounds for degrees n-1,n,n+1. For p below all their lower bounds the subcomplex inclusion is an isomorphism in these three degrees, so its homology image is top. Above the upper bound in degree n its homology image is zero. Thus the image filtration is finite. Fix p,n. Choose t ≥ 1 so that L^(p+t)K^(n+1)=0 and L^(p-t+1)K^(n-1)=K^(n-1). Antitonicity keeps these equalities true for every r ≥ t. In the formulas for Z_r and B_r the outer steps can therefore be replaced by zero and the whole object. The cycles are the images in gr^pK^n of actual cycles in L^pK^n, while the boundaries are the images of actual boundaries of K intersected with L^pK^n. The abelian subquotient isomorphism identifies Z_r/B_r with the quotient of the image of H^n(L^pK) by the image of H^n(L^(p+1)K). This is the graded piece of the image filtration. For a family c_n:H^n(K) ≅ Y^n, take direct images of these steps along c_n.hom. Their antitonicity is preserved by the direct-image functor. Since each c_n is an isomorphism, direct image preserves top and bottom and identifies the successive inclusion arrows up to isomorphism. Applying the cokernel functor to these squares gives the graded-piece comparisons. This yields the exact step formula, finiteness and stationary-quotient isomorphisms below.",
+   "text": "Use lem-sp-filtered-cohomology-image-finite to construct the cohomology image filtration I_n and prove it finite. Define H_n as its quotient/direct image along c_n.hom. The formula for its steps is definitional. Subobject.exists_iso_map, map_top and map_bot transport the finite bounds.",
    "uses": [
-    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-cohomology-image-finite",
     "def-sp-filtration"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Fix p,n. Choose a lower bound lo in degree n-1 and an upper bound hi in degree n+1. Set t=max(1,max(hi-p,p+1-lo)). Degree-step antitonicity, proved by evaluating inclusion factorizations, gives both outer bounds for every r≥t. The relation d^(n-1)≫d^n=0 shows im(d^(n-1))≤d^(-1)(0). Monotonicity of infimum, supremum, pullback and direct image gives B_r≤Z_r.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sp-filtered-stable-subquotient-at-bounds to identify the stationary quotient with gr^p I_n. For a filtration F and an isomorphism c, identify each transported subobject with the original one using Subobject.isoOfEqMk. Cancel the monomorphism F^p→Y to show the successive inclusion square commutes. cokernel.mapIso gives gr^p F≅gr^p(c_*F). Compose these isomorphisms to finish.",
+   "uses": [
+    "lem-sp-filtered-stable-subquotient-at-bounds",
+    "def-sp-filtration"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-filtered-complex-subquotients",
-  "def-sp-filtration"
+  "def-sp-filtration",
+  "lem-sp-filtered-cohomology-image-finite",
+  "lem-sp-filtered-stable-subquotient-at-bounds"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/homology.tex",
-  "place": "Tags 012Q, 012W and 0132; thm-sp-if-e1 proof paragraph 1, stationary quotients and transport"
+  "document": "Stacks Project, Homology, Tags 012P, 012Q and 012W",
+  "place": "P1 reduction: cohomology finiteness, explicit eventual outer bounds, boundary inclusion from d²=0, and cokernel transport along c; local stationary isomorphism split off"
  },
  "mathlib_searches": [
   {
@@ -106,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T095930-L-327103",
+  "landing": "20261012T144133-L-2103441",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

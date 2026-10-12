@@ -1,0 +1,140 @@
+{
+ "id": "lem-sp-filtered-cohomology-image-finite",
+ "kind": "statement",
+ "title": "Finite cohomology image filtration of a degreewise finite filtered complex",
+ "statement": "Let C be an abelian category [def-sp-abelian], K an integer-indexed cochain complex, and L a decreasing filtration by subcomplexes [def-sp-filtration]. Define I_n^p=im(H^n(L^p K)→H^n(K)); functoriality of homology makes I_n a decreasing filtration. Suppose that for every integer j there exist integers lo,hi with L^lo K^j=K^j and L^hi K^j=0, where degree steps are defined in [def-sp-filtered-complex-subquotients]. Then for every integer n the cohomology image filtration I_n is finite.",
+ "source": {
+  "document": "Stacks Project, Homology, https://stacks.math.columbia.edu/tag/012K",
+  "place": "Tag 012P, definition of induced cohomology filtration; Tag 012W, part (2)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Construct I_n by the images of the maps on homology. For p≤q the inclusion L^q→K factors through L^p→K. Functoriality of homology and imageSubobject_comp_le prove antitonicity. The same argument in degree j proves antitonicity of the degree steps.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the minimum lo of the lower bounds in the predecessor, middle and successor degrees of n. All three degree steps are top by antitonicity. Evaluation of the subcomplex inclusion is monic; top image makes it an isomorphism in these three degrees. The induced short-complex map is an isomorphism, so quasiIsoAt_iff implies an isomorphism on H^n and I_n^lo=top.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At the upper bound hi in degree n the subcomplex inclusion is zero and monic. Its source term is therefore zero. ExactAt.of_isZero and ExactAt.isZero_homology give zero H^n of this subcomplex, so its homology map has zero image. Thus I_n^hi=bottom, giving the two finite-filtration bounds.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homology",
+  "place": "Tag 012P, definition of induced cohomology filtration; Tag 012W, part (2); agent expansion of the categorical glue"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite cohomology image filtration and stationary cycle boundary quotients of filtered cochain complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image filtration on cohomology of a degreewise finite filtered cochain complex is finite and its graded pieces are stable cycle boundary quotients",
+   "results": "General support and injective-resolution lemmas; no filtered cohomology image or stationary quotient theorem. Loogle imageSubobject query also returned unknown identifier.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyImage|stableSubquotient|filtered.*cohomology|cohomology.*filtration",
+   "results": "msearch grep: 0 hits. Direct Mathlib searches located imageSubobject_comp_le, quasiIsoAt_iff, kernel/image factorization API, but no cohomology image filtration or stable filtered quotient theorem. Project search found only globally bounded page-core theorems and quotient-complex image comparisons.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DegreewiseFilteredStableQuotient",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Tags 012Q, 012W and 0132; thm-sp-if-e1 proof paragraph 1, stationary quotients and transport; Tag 012P, definition of induced cohomology filtration; Tag 012W, part (2)",
+   "via": [
+    "lem-sp-degreewise-filtered-stable-quotient",
+    "lem-sp-cartan-eilenberg-second-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredCohomologyImage",
+  "file": "lean/Sheaf/CategoryTheory/FilteredCohomologyImage.lean",
+  "declaration": "CategoryTheory.DecreasingFiltration.cohomologyImage_isFinite",
+  "statement": "theorem cohomologyImage_isFinite\n    (hfinite : ∀ n : ℤ, ∃ lo hi : ℤ,\n      L.complexStep lo n = ⊤ ∧ L.complexStep hi n = ⊥)\n    (n : ℤ) : (L.cohomologyImage n).IsFinite",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12",
+  "declarations": [
+   "CategoryTheory.DecreasingFiltration.cohomologyImage",
+   "CategoryTheory.DecreasingFiltration.cohomologyImage_isFinite"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T144133-L-2103441",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T144133-L-2103441",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
