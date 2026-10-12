@@ -25,89 +25,45 @@
  ],
  "proof": [
   {
-   "text": "*Finite affine open cover of $U$.* Apply [lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings] to the open covering of $U$ by the single open $U$ ($U$ is quasi-compact and quasi-separated): there are a finite set $J$ and affine opens $U_j\\subseteq U$ ($j\\in J$) with $U=\\bigcup_{j\\in J}U_j$. (Only quasi-compactness of $U$ is used here.) Write $\\iota_j:U_j\\to U$ for the open immersions.",
+   "text": "Convert the covering sieve to joint surjectivity with Scheme.ofArrows_mem_smallEtaleTopology_iff [def-weil-pbc-etale-site]. The over-category commutativity identity identifies each (f a).left with (T a).hom. Construct the etale scheme cover C with Scheme.Cover.mkOfCovers.",
    "uses": [
-    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings"
+    "def-weil-pbc-etale-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01IT (lemma-basis-affine-opens) and quasi-compactness of $U$; this is the 'finite affine open cover' of a quasi-compact scheme"
-   }
+   "elementary": true
   },
   {
-   "text": "*Restriction of the covering to each $U_j$.* Fix $j\\in J$. By [lem-weil-pbc-etale-covering-base-change] applied to the jointly surjective etale family $(f_a:T_a\\to U)_{a\\in A}$ and to $g=\\iota_j$, the projections $p_{j,a}:T_a\\times_UU_j\\to U_j$ (fibre product [def-pc-fibre-product]) are etale and jointly surjective. This is axiom (3) of etale coverings, Topologies, Lemma Tag 0217 (label lemma-etale), part (3).",
-   "uses": [
-    "lem-weil-pbc-etale-covering-base-change",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Topologies, Lemma Tag 0217 (label lemma-etale), part (3) (base change of an etale covering is an etale covering)"
-   }
-  },
-  {
-   "text": "*Affine refinement over each affine $U_j$.* $U_j$ is affine, so [lem-weil-pbc-etale-covering-affine-refinement] (Topologies, Lemma Tag 0218) applied to the etale covering $(p_{j,a})_{a\\in A}$ of step 2 gives $m_j\\ge0$, indices $a(j,1),\\dots,a(j,m_j)\\in A$ and affine open subschemes $W_{j,k}\\subseteq T_{a(j,k)}\\times_UU_j$ with $U_j=\\bigcup_{k=1}^{m_j}p_{j,a(j,k)}(W_{j,k})$. Put $B=\\{(j,k):j\\in J,1\\le k\\le m_j\\}$, a finite set, and for $b=(j,k)$ put $V_b=W_{j,k}$ (an affine scheme), $a(b)=a(j,k)$, and $v_b:V_b\\to U$ the composite $V_b\\hookrightarrow T_{a(b)}\\times_UU_j\\xrightarrow{p_{j,a(b)}}U_j\\xrightarrow{\\iota_j}U$.",
+   "text": "Use the Mathlib declaration recorded for [lem-weil-pbc-etale-covering-affine-refinement], QuasiCompactCover.exists_hom, in its actual generality: it assumes only CompactSpace of the base, not affineness. Etale structure maps are open by Scheme.Hom.isOpenMap (Morphisms/UniversallyOpen.lean:48 and the flat, locally finitely presented instance), so QuasiCompactCover.of_isOpenMap supplies its remaining hypothesis. Obtain a finite affine etale cover D and a refinement g : D.cover ⟶ C. This is a direct application of the recorded Lean declaration, rather than an application of the narrower natural-language affine-base specialization.",
    "uses": [
     "lem-weil-pbc-etale-covering-affine-refinement"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Topologies, Lemma Tag 0218 (label lemma-etale-affine): an etale covering of an affine scheme is refined by a finite one by affine opens of the $T_i$, i.e. a standard etale covering (Definition Tag 0219, label definition-standard-etale)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The $V_b$ form an etale covering refining $(T_a\\to U)$.* (i) $v_b$ is etale: the inclusion $V_b\\hookrightarrow T_{a(b)}\\times_UU_j$ and $\\iota_j$ are open immersions, hence etale, and $p_{j,a(b)}$ is etale (step 2); a composite of etale morphisms is etale [lem-weil-pbc-etale-composition-cancellation](1),(2). (ii) $v_b$ factors through $f_{a(b)}$: with $q:T_{a(b)}\\times_UU_j\\to T_{a(b)}$ the first projection, the fibre square gives $f_{a(b)}\\circ q=\\iota_j\\circ p_{j,a(b)}$ [def-pc-fibre-product], so $v_b=f_{a(b)}\\circ(q|_{V_b})$. (iii) Joint surjectivity: $v_b(V_b)=\\iota_j(p_{j,a(b)}(W_{j,k}))$, so $\\bigcup_{b\\in B}v_b(V_b)=\\bigcup_{j\\in J}\\bigcup_{k}p_{j,a(j,k)}(W_{j,k})=\\bigcup_{j\\in J}U_j=U$ by steps 1 and 3.",
+   "text": "Reindex the finite type D.I₀ by B = ULift (Fin (Fintype.card D.I₀)), in the required universe w, using Equiv.ulift and Fintype.equivFin. Put V b = Scheme.Etale.mk (D.f (e b)). Each member is a spectrum and is affine. The refinement component g.h₀ (e b), with g.w₀ (e b), defines its factorization through T (g.s₀ (e b)); equality of over-category morphisms is equality of their left components. Joint surjectivity follows from D.cover.iUnion_range and the surjective reindexing identity Function.Surjective.iUnion_comp. Convert back to the small etale topology using [def-weil-pbc-etale-site].",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-pc-fibre-product"
+    "def-weil-pbc-etale-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Topologies, Lemma Tag 0217 (label lemma-etale), part (2) (composition of etale coverings), with Morphisms, Lemma Tag 02GN (label lemma-composition-etale) and Lemma Tag 02GP (label lemma-open-immersion-etale)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Quasi-compact pairwise fibre products.* Let $b,b'\\in B$. $V_b$ and $V_{b'}$ are affine, hence quasi-compact [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii). Since $U$ is quasi-separated and $V_b$ is quasi-compact, $v_b:V_b\\to U$ is quasi-compact [lem-weil-pbc-qcqs-morphism-permanence](1). Its base change, the projection $V_b\\times_UV_{b'}\\to V_{b'}$, is quasi-compact [lem-weil-pbc-qcqs-morphism-permanence](3), and $V_{b'}$ is quasi-compact, so $V_b\\times_UV_{b'}$ is quasi-compact [lem-weil-pbc-qcqs-morphism-permanence](2). (Equivalently, Schemes Lemma Tag 01KO: in the quasi-separated $U$ the intersection of two quasi-compact opens is quasi-compact; the argument above avoids the reduction to opens.)",
+   "text": "Each spectrum V b is compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii). Since U is quasi-separated, each structure map V b → U is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1); its base change to V b′ is quasi-compact by (3), and the pullback is compact by (2). Lean infers these instances using quasiCompact_of_compactSpace (Morphisms/QuasiSeparated.lean:255) and the CompactSpace pullback instance (Morphisms/QuasiCompact.lean:190). This proves the final clause and hence the cofinal refinement assertion.",
    "uses": [
     "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
     "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 03GI (label lemma-quasi-compact-permanence), Lemma Tag 01K5 (label lemma-quasi-compact-preserved-base-change) and Lemma Tag 01K6 (label lemma-composition-quasi-compact); Algebra, Lemma Tag 00E8 (label lemma-quasi-compact); alternative: Schemes, Lemma Tag 01KO (label lemma-characterize-quasi-separated)"
-   }
-  },
-  {
-   "text": "*Cofinality.* Steps 3--5 show that every covering $(T_a\\to U)_{a\\in A}$ of $U$ in its small etale site [def-weil-pbc-etale-site] is refined (step 4 (ii)) by the covering $(v_b:V_b\\to U)_{b\\in B}$ (step 4 (i),(iii)), which has finite index set, affine members and quasi-compact pairwise fibre products; this is the cofinality of the system of such coverings, by definition of refinement.",
-   "uses": [
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Section Tag 03Q4 (label section-colimit), first paragraph: 'U is a quasi-compact object which has a cofinal system of coverings by quasi-compact objects', the hypothesis of Sites, Lemma Tag 0738 (label lemma-directed-colimits-sections)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
-  "lem-weil-pbc-etale-covering-base-change",
-  "def-pc-fibre-product",
+  "def-weil-pbc-etale-site",
   "lem-weil-pbc-etale-covering-affine-refinement",
-  "lem-weil-pbc-etale-composition-cancellation",
   "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-weil-pbc-etale-site"
+  "lem-weil-pbc-qcqs-morphism-permanence"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/topologies.tex",
-  "place": "Topologies, Lemma Tag 0218 (label lemma-etale-affine; proof omitted in Stacks) applied on a finite affine open cover (Schemes, Lemma Tag 01IT), with Schemes, Lemma Tag 03GI / 01KO for the fibre products; the assembly for a qcqs base is left implicit in Etale Cohomology, Section Tag 03Q4 and was written out by an agent"
+  "by": "agent",
+  "document": "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+  "place": "QuasiCompactCover.exists_hom (line 183), with Morphisms/UniversallyOpen.lean:48, Morphisms/QuasiSeparated.lean:255 and Morphisms/QuasiCompact.lean:190; direct Mathlib route recorded in the original node split_report, implemented by Q1 on 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -219,5 +175,15 @@
   "group": "J1",
   "result": "fix",
   "note": "FIX: covering restated in the recorded site U.smallEtaleTopology (T : A -> U.Etale, Sieve.ofArrows ... in U.smallEtaleTopology (Etale.mk (𝟙 U))) for hypothesis and refinement covering; factorization as U.Etale morphisms V b ⟶ T (a b); IsAffine (V b).left; Finite B; CompactSpace of scheme pullback of structure maps; qcqs as CompactSpace+QuasiSeparatedSpace; empty A/B and universes checked"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T042415-L-1819315",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
