@@ -15,21 +15,37 @@
  ],
  "proof": [
   {
-   "text": "For W etale over c.P, evaluate an equivariant function on the graph of\nW.hom in W times_V c.P. The torsor isomorphism identifies this latter scheme\nwith the disjoint union of copies of W indexed by P. The inverse extends a\nlocally constant function t on W by the formula rho(g)(t(w)) on the translate\nof the graph by g. These copies are open, so the extension is locally constant;\nthe action law proves equivariance. Evaluation and extension are inverse and\nlinear, including after scalar restriction. Composition of W with an etale\nmap and postcomposition with an intertwiner commute with both formulas.\nLocally constant functions on W are the sections of the constant module sheaf:\nthe map from the constant presheaf sends a coefficient to its constant function,\nis locally surjective on its open fibers, and is locally injective (on an empty\nobject use the empty covering). Sheafification gives this identification.\nThis establishes the stated natural presheaf isomorphism, without sheafifying\nthe equivariant presheaf or invoking inverse image. -/",
+   "text": "Use objectwise graph evaluation and its bijectivity to make a linear isomorphism after restriction of scalars, by LinearEquiv.ofBijective and toModuleIso.",
+   "uses": [
+    "lem-weil-pbc-torsor-diagonal-evaluation-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality in etale objects follows from the equality of scheme morphisms d_W followed by section restriction and the etale morphism followed by d_Wprime. Check this equality by pullback.hom_ext. Naturality in representations is pointwise postcomposition. NatIso.ofComponents therefore assembles these linear isomorphisms into a natural presheaf isomorphism.",
    "uses": [
     "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker the natural locally-constant/constant-module-sheaf comparison by the scalar-restricted underlying representation functor and compose with the evaluation isomorphism.",
+   "uses": [
+    "lem-weil-pbc-constant-module-locally-constant"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-torsor-associated-module"
+  "def-weil-pbc-torsor-associated-module",
+  "lem-weil-pbc-constant-module-locally-constant",
+  "lem-weil-pbc-torsor-diagonal-evaluation-bijective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)",
-  "note": "Concrete local torsor trivialization argument; the source finite-type comparison is implemented here at the presheaf level for arbitrary modules."
+  "note": "X2: complete Lean proof via objectwise graph evaluation, both naturality squares, and the natural constant-module comparison; both helper theorems are also proved in this delivery."
  },
  "mathlib_searches": [
   {
@@ -102,10 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-a2263",
-  "group": "R1",
+  "reviewer": "COMPILER",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T131109-L-1340790",
-  "kind": "interface"
+  "landing": "20261012T154246-L-2435526",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-constant-module-locally-constant",
+ "kind": "statement",
+ "title": "Natural locally constant model of the constant module sheaf",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions] and let $R$ be a ring. On the small etale site [def-weil-pbc-etale-site], the functor taking an $R$-module $M$ to the presheaf $W\\mapsto\\operatorname{LocallyConstant}(|W|,M)$, with restrictions by precomposition and coefficient maps by postcomposition, is naturally isomorphic to the underlying presheaf of the constant module sheaf functor [def-weil-pbc-constant-sheaf]. No finiteness, nonzero-ring, or nonemptiness hypotheses are needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Give the coefficient module the discrete topology. Identify locally constant functions with continuous functions. The already proved Scheme.Etale.continuousMapSheaf is a sheaf of abelian groups; composition with its forgetful functor gives a sheaf of sets. The forgetful functor from ModuleCat preserves and reflects the required limits, so Presheaf.isSheaf_of_isSheaf_comp proves the module presheaf is a sheaf.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural map from the constant presheaf sends m to its constant function. It is locally surjective by restricting a section to its open fibers; these open immersions are etale and jointly cover. It is locally injective because distinct constants agreeing as functions force the object to be empty, where the empty covering suffices.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift that map across sheafification. The unit of sheafification is locally bijective. The composite is the locally bijective map just proved, so the lift is locally bijective and hence an isomorphism by Sheaf.isLocallyBijective_iff_isIso. Use sheafify_hom_ext and toSheafify_naturality to check naturality in each linear coefficient map: both composites send m to the constant function with value its image. Invert this natural isomorphism to obtain the asserted direction.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)",
+  "note": "X2 formal proof of the argument recorded in the parent node. The literature checkout is not present on this machine; the concrete constructions and generic library lemmas were checked directly in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally constant functions with module values on the small etale site form the constant sheaf naturally in the module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant sheaf of modules on the small etale site is naturally isomorphic to locally constant functions on schemes",
+   "results": "LightCondMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.LocallyConstant.functorIsoDiscrete, CompHausLike.LocallyConstant.functorToPresheavesIso, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CategoryTheory.Sheaf.isConstant_iff_forget, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂",
+   "date": "2026-10-12",
+   "verdict": "No exact result on the small etale site; existing generic tools used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant, ModuleCat",
+   "results": "CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CompHausLike.LocallyConstantModule.functor_obj_obj_obj_carrier, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CompHausLike.LocallyConstantModule.functorToPresheaves_map_app, CompHausLike.LocallyConstantModule.functor_obj_obj_map_hom_apply_apply",
+   "date": "2026-10-12",
+   "verdict": "No exact result on the small etale site; existing generic tools used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheafIso|locallyConstantModulePresheaf|diagonalEvaluation",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No exact result on the small etale site; existing generic tools used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.TorsorDiagonalEvaluation",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "split-locally-constant-cover-filtration",
+   "place": "Natural locally constant model of the constant module sheaf in the diagonal-evaluation argument",
+   "via": [
+    "lem-weil-pbc-torsor-diagonal-evaluation",
+    "lem-weil-pbc-torsor-associated-module-comparisons",
+    "lem-weil-pbc-torsor-module-descent-equivalence",
+    "lem-weil-pbc-connected-torsor-module-descent",
+    "lem-weil-pbc-sylow-cover-stalk-data",
+    "lem-weil-pbc-sylow-cover-associated-sheaf"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.ConstantModuleLocallyConstant",
+  "file": "lean/Sheaf/ConstructibleSheaf/ConstantModuleLocallyConstant.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Etale.locallyConstantModulePresheafFunctor_iso_constantSheaf",
+  "statement": "theorem locallyConstantModulePresheafFunctor_iso_constantSheaf (X : Scheme.{u}) (R : Type (u + 1)) [Ring R] : Nonempty (locallyConstantModulePresheafFunctor X R ≅ constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} R) ⋙ sheafToPresheaf X.smallEtaleTopology _)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T154246-L-2435526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T154246-L-2435526",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

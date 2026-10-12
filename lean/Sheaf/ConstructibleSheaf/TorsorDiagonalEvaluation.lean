@@ -6,6 +6,8 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.ConstructibleSheaf.TorsorAssociatedModule
+import Sheaf.ConstructibleSheaf.TorsorDiagonalEvaluationBijective
+import Sheaf.ConstructibleSheaf.ConstantModuleLocallyConstant
 
 /-!
 # Evaluation on the diagonal section of a torsor
@@ -54,6 +56,40 @@ theorem equivariantModulePresheaf_diagonal {V : Scheme.{u}} (ℓ : ℕ)
           (ULift.ringEquiv.toRingHom : ULift.{u + 1} (ZMod ℓ) →+* ZMod ℓ) ⋙
         constantSheaf c.P.smallEtaleTopology
           (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) ⋙
-        sheafToPresheaf c.P.smallEtaleTopology _) := by sorry
+        sheafToPresheaf c.P.smallEtaleTopology _) := by
+  let R := ULift.{u + 1} (ZMod ℓ)
+  let S := ModuleCat.restrictScalars.{u + 1}
+    (ULift.ringEquiv.toRingHom : R →+* ZMod ℓ)
+  let F := c.equivariantModulePresheafFunctor ℓ ⋙
+    (Functor.whiskeringRight V.Etaleᵒᵖ _ _).obj S ⋙
+    (Functor.whiskeringLeft c.P.Etaleᵒᵖ V.Etaleᵒᵖ _).obj
+      (MorphismProperty.Over.map ⊤ c.etale).op
+  let G := forget₂ (Rep.{u + 1} (ZMod ℓ) P) (ModuleCat.{u + 1} (ZMod ℓ)) ⋙ S
+  let e : F ≅ G ⋙ Scheme.Etale.locallyConstantModulePresheafFunctor c.P R :=
+    NatIso.ofComponents (fun N ↦
+      NatIso.ofComponents (fun W ↦
+        (LinearEquiv.ofBijective (c.diagonalEvaluation ℓ N W.unop).hom
+          (c.diagonalEvaluation_bijective ℓ N W.unop)).toModuleIso) (by
+        intro W W' f
+        ext s
+        apply LocallyConstant.ext
+        intro x
+        change s.val (c.sectionRestriction
+          ((MorphismProperty.Over.map ⊤ c.etale).map f.unop)
+          (c.diagonalSection W'.unop x)) =
+          s.val (c.diagonalSection W.unop (f.unop.left x))
+        have h : c.diagonalSection W'.unop ≫ c.sectionRestriction
+            ((MorphismProperty.Over.map ⊤ c.etale).map f.unop) =
+            f.unop.left ≫ c.diagonalSection W.unop := by
+          apply Limits.pullback.hom_ext <;>
+            simp [diagonalSection, sectionRestriction, MorphismProperty.Over.w f.unop]
+          rfl
+        simpa only [Scheme.Hom.comp_apply] using
+          congrArg (fun k ↦ s.val (k x)) h)) (by
+      intro N N' f
+      ext W s
+      rfl)
+  obtain ⟨h⟩ := Scheme.Etale.locallyConstantModulePresheafFunctor_iso_constantSheaf c.P R
+  exact ⟨e ≪≫ Functor.isoWhiskerLeft G h⟩
 
 end AlgebraicGeometry.Scheme.GaloisCover
