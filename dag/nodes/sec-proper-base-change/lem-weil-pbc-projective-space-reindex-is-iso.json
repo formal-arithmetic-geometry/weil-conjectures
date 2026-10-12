@@ -1,155 +1,137 @@
 {
-  "id": "lem-weil-pbc-projective-space-reindex-is-iso",
-  "kind": "statement",
-  "title": "The morphism given by a bijective reordering of the coordinate sections is invertible",
-  "statement": "Let $S$ be a scheme [def-pc-scheme], let $\\beta,\\gamma$ be coordinate types, and let $b:\\gamma\\simeq\\beta$ be an equivalence. Write $X=\\mathbb P(\\beta;S)$ [def-pc-proj], $M=(\\operatorname{id}_X)^*\\mathcal O_X(1)$ [def-pc-module-pullback, def-pc-projective-space-twist], $s_j=(\\operatorname{id}_X)^*T_{b(j)}$, and $U_j=D_+(T_{b(j)})$. The morphism $\\phi:X\\to\\mathbb P(\\gamma;S)$ constructed by the native homOfIsFreeGenerator from the sections $s_j$, their free-generator witnesses on $U_j$, and the cover $\\bigcup_j U_j=X$, over the structure morphism $X\\to S$, is an isomorphism. No finiteness or nonemptiness assumption on the coordinate types is required.",
-  "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions Definition 01NF and Lemma 01NE: projective-space charts and coordinate construction, applied to bijective renaming and its inverse."
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-pc-proj",
-    "def-pc-module-pullback",
-    "def-pc-projective-space-twist"
-  ],
-  "proof": [
-    {
-      "text": "The native homOfIsFreeGenerator_appLE_coordRatio sends T_j/T_i to the coefficient of s_j relative to s_i. Apply pullbackSection_twistOneSection_map_eq_smul to the identity morphism and use uniqueness of the coefficient of a free generator. The coefficient is T_(b j)/T_(b i). Thus on the standard chart indexed by b i, the morphism is the affine coordinate reindexing from variables other than i to variables other than b i. For an arbitrary base S, standardOpenIso identifies these charts with relative affine spaces. Restrict over an affine open Spec R of S before referring to polynomial coordinate rings; homOfIsFreeGenerator_over ensures that the map fixes R. These affine base opens cover S.",
-      "uses": [
-        "def-pc-projective-space-twist",
-        "def-pc-module-pullback"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The bijection b restricts to a bijection between these sets of variables. The polynomial rename equivalence and its inverse give mutually inverse affine chart morphisms. Their restrictions to intersections agree: both maps replace each coordinate ratio by the ratio with its two indices renamed. They therefore glue; alternatively use the existing native homOfIsFreeGenerator construction for b.symm to define the inverse.",
-      "uses": [
-        "def-pc-proj",
-        "lem-weil-pbc-scheme-morphism-gluing"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "On every standard chart the composites of these maps fix the base and every affine coordinate, since b.symm (b j) = j and b (b.symm i) = i. The affine-space hom_ext theorem makes these chart composites identities. Equality on the covering standard charts makes the global composites identities. Therefore phi is an isomorphism. When the coordinate types are empty, the schemes have the empty standard cover, and the same covering equality proves the claim.",
-      "uses": [
-        "def-pc-proj"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-pc-module-pullback",
-    "def-pc-proj",
-    "def-pc-projective-space-twist",
+ "id": "lem-weil-pbc-projective-space-reindex-is-iso",
+ "kind": "statement",
+ "title": "The morphism given by a bijective reordering of the coordinate sections is invertible",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $\\beta,\\gamma$ be coordinate types, and let $b:\\gamma\\simeq\\beta$ be an equivalence. Write $X=\\mathbb P(\\beta;S)$ [def-pc-proj], $M=(\\operatorname{id}_X)^*\\mathcal O_X(1)$ [def-pc-module-pullback, def-pc-projective-space-twist], $s_j=(\\operatorname{id}_X)^*T_{b(j)}$, and $U_j=D_+(T_{b(j)})$. The morphism $\\phi:X\\to\\mathbb P(\\gamma;S)$ constructed by the native homOfIsFreeGenerator from the sections $s_j$, their free-generator witnesses on $U_j$, and the cover $\\bigcup_j U_j=X$, over the structure morphism $X\\to S$, is an isomorphism. No finiteness or nonemptiness assumption on the coordinate types is required.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions Definition 01NF and Lemma 01NE: projective-space charts and coordinate construction, applied to bijective renaming and its inverse."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-proj",
+  "def-pc-module-pullback",
+  "def-pc-projective-space-twist"
+ ],
+ "proof": [
+  {
+   "text": "Construct psi by the native homOfIsFreeGenerator for b.symm. Apply the chart comparison for b and b.symm. On each source standard chart, the composite of the two chart isomorphisms cancels and the two affine reindexings compose to the identity: their base maps agree, and their coordinate maps are identities by the two inverse laws of b. AffineSpace.hom_ext proves this affine identity; cancellation of the chart isomorphism gives the identity on the source standard chart. Scheme.Opens.hom_ext_of_iSup_eq_top gives phi composed with psi equal to the identity globally. Repeat with b.symm for the opposite composite. This supplies the IsIso witness. The same cover argument handles empty coordinate types without choosing an index.",
+   "uses": [
+    "lem-weil-pbc-projective-space-reindex-chart",
     "lem-weil-pbc-scheme-morphism-gluing"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01NE and 01NF: the coordinate construction and base change, applied to a coordinate bijection and its inverse; native chart implementation in ProjectiveSpace.OfInvertible."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "isomorphism projective space bijective permutation homogeneous coordinates",
-      "results": "msearch.py returned UNAVAILABLE: Internal Server Error.",
-      "date": "2026-10-12"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An equivalence of coordinate types induces an isomorphism of projective spaces preserving O(1)",
-      "results": "Affine-space reindexing and MvPolynomial.renameEquiv; no direct theorem about the homOfIsFreeGenerator morphism.",
-      "date": "2026-10-12",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"renameEquiv\"",
-      "results": "MvPolynomial.renameEquiv, renameEquiv_symm, renameEquiv_trans, totalDegree_renameEquiv. These provide ring-level reindexing but no isomorphism witness for this scheme morphism.",
-      "date": "2026-10-12",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg reindex/renameEquiv/homOfIsFreeGenerator in Mathlib.AlgebraicGeometry, WeilConjectures.AlgebraicGeometry and Sheaf.AlgebraicGeometry",
-      "results": "Native OfInvertible constructs the map and the O(1) comparison; Charts supplies standardOpenIso and the coordinate computation. No invertibility theorem for this coordinate-reindexing morphism. Proj.map_comp and map_id are available but do not identify this morphism with Proj.map.",
-      "date": "2026-10-12",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "second reading: loogle, leanfinder, rg",
-      "query": "\"homOfIsFreeGenerator\"; morphism is an isomorphism on an open cover; hom_ext / reindex in AffineSpace, ProjectiveSpectrum and ProjectiveSpace.LinearCombination",
-      "results": "Loogle has no homOfIsFreeGenerator result. LeanFinder finds locality of isomorphisms on the target. Local source has AffineSpace.reindex_comp, reindex_id, hom_ext and ProjectiveSpace.hom_ext_of_preimage_standardOpen_eq_top. These can finish the chartwise argument but do not identify the displayed constructed morphism with affine reindexing. No duplicate or immediate proof found.",
-      "date": "2026-10-12",
-      "verdict": "no exact match; remaining coordinate comparison is substantive"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.ProjectiveSpaceFiniteIndexIso",
-    "date": "2026-10-12",
-    "group": "C2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-finite-etale-lifting",
-      "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
-      "via": [
-        "lem-weil-pbc-projective-space-finite-index-iso",
-        "lem-weil-pbc-ample-very-ample-immersion-affine-base",
-        "lem-weil-pbc-coherent-serre-vanishing",
-        "lem-weil-pbc-formal-systems-graded-vanishing",
-        "lem-weil-pbc-grothendieck-existence-projective",
-        "prop-weil-pbc-grothendieck-existence",
-        "lem-weil-pbc-algebraize-finite-over-proper",
-        "lem-weil-pbc-finite-etale-lifting-complete",
-        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-      ]
-    },
-    "same_as": []
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceReindexIsIso",
-    "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceReindexIsIso.lean",
-    "declaration": "AlgebraicGeometry.ProjectiveSpace.isIso_homOfIsFreeGenerator_reindex",
-    "statement": "theorem isIso_homOfIsFreeGenerator_reindex (β γ : Type u) (b : γ ≃ β)\n    (S : Scheme.{u}) :\n    let s := fun j : γ ↦ Scheme.Modules.pullbackSection (𝟙 ℙ(β; S))\n      (twistOneSection β S (b j))\n    let U := fun j : γ ↦ standardOpen β S (b j)\n    let hs := fun j : γ ↦\n      isFreeGenerator_pullbackSection_twistOneSection (𝟙 ℙ(β; S)) (b j)\n    let hU : ⨆ j, U j = ⊤ := (b.iSup_comp).trans (iSup_standardOpen β S)\n    IsIso (homOfIsFreeGenerator s U hs (ℙ(β; S) ↘ S) hU)",
-    "branch": "sheaf-dag",
-    "by": "C2",
-    "date": "2026-10-12"
-  },
-  "reviewed": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "C2",
-    "result": "pass",
-    "landing": "20261012T085220-L-5902",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "C2",
-    "result": "pass",
-    "landing": "20261012T085220-L-5902",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projective-space-reindex-chart",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Coordinate construction of Tags 01NE and 01NF, with the standard chart calculations expanded in Lean by C3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "isomorphism projective space bijective permutation homogeneous coordinates",
+   "results": "msearch.py returned UNAVAILABLE: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of coordinate types induces an isomorphism of projective spaces preserving O(1)",
+   "results": "Affine-space reindexing and MvPolynomial.renameEquiv; no direct theorem about the homOfIsFreeGenerator morphism.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"renameEquiv\"",
+   "results": "MvPolynomial.renameEquiv, renameEquiv_symm, renameEquiv_trans, totalDegree_renameEquiv. These provide ring-level reindexing but no isomorphism witness for this scheme morphism.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg reindex/renameEquiv/homOfIsFreeGenerator in Mathlib.AlgebraicGeometry, WeilConjectures.AlgebraicGeometry and Sheaf.AlgebraicGeometry",
+   "results": "Native OfInvertible constructs the map and the O(1) comparison; Charts supplies standardOpenIso and the coordinate computation. No invertibility theorem for this coordinate-reindexing morphism. Proj.map_comp and map_id are available but do not identify this morphism with Proj.map.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "second reading: loogle, leanfinder, rg",
+   "query": "\"homOfIsFreeGenerator\"; morphism is an isomorphism on an open cover; hom_ext / reindex in AffineSpace, ProjectiveSpectrum and ProjectiveSpace.LinearCombination",
+   "results": "Loogle has no homOfIsFreeGenerator result. LeanFinder finds locality of isomorphisms on the target. Local source has AffineSpace.reindex_comp, reindex_id, hom_ext and ProjectiveSpace.hom_ext_of_preimage_standardOpen_eq_top. These can finish the chartwise argument but do not identify the displayed constructed morphism with affine reindexing. No duplicate or immediate proof found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; remaining coordinate comparison is substantive"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpaceFiniteIndexIso",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-projective-space-finite-index-iso",
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "lem-weil-pbc-coherent-serre-vanishing",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceReindexIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceReindexIsIso.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.isIso_homOfIsFreeGenerator_reindex",
+  "statement": "theorem isIso_homOfIsFreeGenerator_reindex (β γ : Type u) (b : γ ≃ β)\n    (S : Scheme.{u}) :\n    let s := fun j : γ ↦ Scheme.Modules.pullbackSection (𝟙 ℙ(β; S))\n      (twistOneSection β S (b j))\n    let U := fun j : γ ↦ standardOpen β S (b j)\n    let hs := fun j : γ ↦\n      isFreeGenerator_pullbackSection_twistOneSection (𝟙 ℙ(β; S)) (b j)\n    let hU : ⨆ j, U j = ⊤ := (b.iSup_comp).trans (iSup_standardOpen β S)\n    IsIso (homOfIsFreeGenerator s U hs (ℙ(β; S) ↘ S) hU)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T085220-L-5902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T122332-L-1058669",
+  "kind": "interface"
+ }
 }
