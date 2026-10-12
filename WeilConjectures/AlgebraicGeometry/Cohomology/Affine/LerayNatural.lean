@@ -34,6 +34,7 @@ noncomputable def presheafModuleCatMap {ℱ 𝒢 : X.Modules} (φ : ℱ ⟶ 𝒢
     ℱ.presheafModuleCat ⟶ 𝒢.presheafModuleCat :=
   (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map φ.val
 
+/-- `presheafModuleCatMap φ` is `φ` on sections. -/
 lemma presheafModuleCatMap_app_apply {ℱ 𝒢 : X.Modules} (φ : ℱ ⟶ 𝒢) (V : X.Opensᵒᵖ)
     (x : ℱ.presheafModuleCat.obj V) :
     (presheafModuleCatMap φ).app V x = φ.app V.unop x :=
@@ -143,6 +144,7 @@ noncomputable def cechComplexHomologyLinearEquivH {ι : Type u} (U : ι → X.Op
       (cechComplexHomologyAddEquiv_smul U ℱ q r x)).trans ?_
     exact h.trans (H.smul_eq_map ℱ q r _).symm
 
+/-- `cechComplexHomologyLinearEquivH` as the composite of its two defining isomorphisms. -/
 lemma cechComplexHomologyLinearEquivH_apply {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)
     (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ)

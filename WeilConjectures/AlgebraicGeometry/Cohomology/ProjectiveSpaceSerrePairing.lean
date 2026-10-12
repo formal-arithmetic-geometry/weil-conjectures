@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.LerayNatural
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceTwist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistMul
@@ -12,7 +13,43 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistMul
 /-!
 # The Serre pairing on projective space
 
-TODO
+Let `A` be a commutative ring and `ℙ = ℙ(n; Spec A)` with `Fintype.card n = d + 1`. Multiplying
+by a global section `t` of `𝒪(a)` is a morphism `𝒪(b) ⟶ 𝒪(a + b)` (`twistMulHom`); the induced
+map on cohomology gives the `A`-bilinear **Serre pairing**
+`H⁰(ℙ, 𝒪(a)) × H^q(ℙ, 𝒪(b)) → H^q(ℙ, 𝒪(a + b))`, `(t, x) ↦ H^q(t ·)(x)`
+(`AlgebraicGeometry.ProjectiveSpace.twistMulPairing`).
+
+For `d ≥ 1`, `m ≤ -d - 1` and `D = -m - d - 1`, composing with the trace
+`Hᵈ(ℙ, 𝒪(-d-1)) ≅ A` gives a perfect pairing `H⁰(ℙ, 𝒪(D)) × Hᵈ(ℙ, 𝒪(m)) → A`
+(`AlgebraicGeometry.ProjectiveSpace.isPerfPair_twistSerrePairing`), and the induced isomorphism
+`Hᵈ(ℙ, 𝒪(m)) ≅ Hom_A(A[x₀, …, x_d]_D, A)` is described by
+`AlgebraicGeometry.ProjectiveSpace.twistHTopLinearEquivDual_apply`.
+
+The proof transports the problem to the monomial Čech complex, where the perfectness is
+`AlgebraicGeometry.ProjectiveSpace.monomialCechComplexHomologyTopLinearEquivDual_apply`:
+
+* Leray's isomorphism is chosen naturally in the sheaf (`cechComplexHomologyLinearEquivH`), which
+  gives a named isomorphism `H^q(ℙ, 𝒪(m)) ≅ H^q` of the monomial Čech complex
+  (`twistHLinearEquivMonomialCechHomology`) natural for morphisms of twisting sheaves which are
+  compatible with morphisms of monomial Čech complexes;
+* the product of Laurent polynomial sections is the section of the product
+  (`twistTensorIso_hom_app_twistLaurentSection`), so multiplication by the global section of a
+  polynomial `F` corresponds to multiplication by `F` on the monomial Čech complex
+  (`cechComplexTwistIso_hom_comp_monomialCechMul`);
+* global sections of `𝒪(D)`, `D ≥ 0`, are the homogeneous polynomials of degree `D`
+  (`bijective_homogeneousSubmoduleToTwist`).
+
+## Main definitions and statements
+
+- `AlgebraicGeometry.ProjectiveSpace.twistMulPairing`: the Serre pairing.
+- `AlgebraicGeometry.ProjectiveSpace.twistTopTrace`: the trace `Hᵈ(ℙ, 𝒪(-d-1)) ≅ A`.
+- `AlgebraicGeometry.ProjectiveSpace.twistSerrePairing`: the Serre pairing followed by the trace.
+- `AlgebraicGeometry.ProjectiveSpace.isPerfPair_twistSerrePairing`: it is perfect.
+- `AlgebraicGeometry.ProjectiveSpace.twistHTopLinearEquivDual` and
+  `AlgebraicGeometry.ProjectiveSpace.twistHTopLinearEquivDual_apply`: the induced isomorphism
+  `Hᵈ(ℙ, 𝒪(m)) ≅ Hom_A(A[x₀, …, x_d]_D, A)`.
+- `AlgebraicGeometry.ProjectiveSpace.homogeneousSubmoduleLinearEquivTwist`:
+  `A[x₀, …, x_d]_D ≅ H⁰(ℙ, 𝒪(D))`.
 -/
 
 @[expose] public section
@@ -50,6 +87,7 @@ def twistLaurentMonomial (m : ℤ) (s : Set n) (e : n → ℤ) :
     Γ(twist n (Spec (.of A)) m, toProjInt n (Spec (.of A)) ⁻¹ᵁ basicOpenInt n s) :=
   if h : e ∈ laurentExponents s m then twistMonomialSection (Spec (.of A)) s ⟨e, h⟩ else 0
 
+/-- A Laurent monomial regular on `U_s` is the section `xᵉ`. -/
 lemma twistLaurentMonomial_of_mem {m : ℤ} {s : Set n} {e : n → ℤ}
     (h : e ∈ laurentExponents s m) :
     twistLaurentMonomial A m s e = twistMonomialSection (Spec (.of A)) s ⟨e, h⟩ :=
@@ -98,6 +136,7 @@ lemma twistMonomialLinearMap_supportedEquivFinsupp {m : ℤ} {s : Set n}
   refine Finsupp.sum_congr fun e _ ↦ ?_
   simp only [Finsupp.linearCombination_single, one_smul]
 
+/-- The section of a single Laurent monomial `r xᵉ`. -/
 lemma twistLaurentSection_single (m : ℤ) (s : Set n) (e : n → ℤ) (r : A) :
     twistLaurentSection A m s (Finsupp.single e r) =
       structureRingHomOpen A (toProjInt n (Spec (.of A)) ⁻¹ᵁ basicOpenInt n s) r •
@@ -105,6 +144,7 @@ lemma twistLaurentSection_single (m : ℤ) (s : Set n) (e : n → ℤ) (r : A) :
   rw [twistLaurentSection, twistLaurentLinearMap, Finsupp.linearCombination_single]
   rfl
 
+/-- `twistLaurentSection` is `A`-linear. -/
 lemma twistLaurentSection_smul (m : ℤ) (s : Set n) (r : A) (c : (n → ℤ) →₀ A) :
     twistLaurentSection A m s (r • c) =
       structureRingHomOpen A (toProjInt n (Spec (.of A)) ⁻¹ᵁ basicOpenInt n s) r •
@@ -112,11 +152,13 @@ lemma twistLaurentSection_smul (m : ℤ) (s : Set n) (r : A) (c : (n → ℤ) �
   rw [twistLaurentSection, LinearMap.map_smul]
   rfl
 
+/-- `twistLaurentSection` is additive. -/
 lemma twistLaurentSection_add (m : ℤ) (s : Set n) (c c' : (n → ℤ) →₀ A) :
     twistLaurentSection A m s (c + c') =
       twistLaurentSection A m s c + twistLaurentSection A m s c' :=
   map_add _ _ _
 
+/-- `twistLaurentSection` sends `0` to `0`. -/
 lemma twistLaurentSection_zero (m : ℤ) (s : Set n) :
     twistLaurentSection A m s 0 = 0 :=
   map_zero _
@@ -174,6 +216,7 @@ lemma twistTensorIso_hom_app_twistLaurentSection {s : Set n} (hs : s.Nonempty) {
       twistLaurentSection_smul]
 
 omit [Fintype n] in
+/-- The structure morphism `A ⟶ Γ(ℙ, U)` is compatible with restriction. -/
 lemma presheaf_map_structureRingHomOpen {U V : (ℙ(n; Spec (.of A))).Opens} (h : V ≤ U) (r : A) :
     (ℙ(n; Spec (.of A))).presheaf.map (homOfLE h).op (structureRingHomOpen A U r) =
       structureRingHomOpen A V r := by
@@ -340,6 +383,7 @@ def twistHLinearEquivMonomialCechHomology (m : ℤ) (q : ℕ) :
     ((ModuleCat.restrictScalarsHomologyIso (structureRingHom A) _ q).symm ≪≫
       (HomologicalComplex.homologyFunctor _ _ q).mapIso (cechComplexTwistIso n A m)).toLinearEquiv
 
+/-- `twistHLinearEquivMonomialCechHomology` on classes coming from Čech cohomology. -/
 lemma twistHLinearEquivMonomialCechHomology_cechComplexHomologyLinearEquivH (m : ℤ) (q : ℕ)
     (x : ((cechComplexFunctor (standardOpen n (Spec (.of A)))).obj
       (twist n (Spec (.of A)) m).presheafModuleCat).homology q) :
@@ -421,6 +465,7 @@ def twistMulPairing {a b c : ℤ} (h : a + b = c) (q : ℕ) :
     (fun r _ x ↦ H.map_smul _ q (structureRingHom A r) x)
 
 omit [Fintype n] in
+/-- The Serre pairing of `t` and `x` is `H^q(t ·)(x)`. -/
 lemma twistMulPairing_apply {a b c : ℤ} (h : a + b = c) (q : ℕ)
     (t : (ModuleCat.restrictScalars (structureRingHom (n := n) A)).obj
         ((twist n (Spec (.of A)) a).presheafModuleCat.obj (op ⊤)))
@@ -439,6 +484,7 @@ def twistPolynomialLinearMap (a : ℤ) :
       (homOfLE (preimage_basicOpenInt_empty n (Spec (.of A))).ge).op)).hom ∘ₗ
     twistLaurentLinearMap A a ∅
 
+/-- `twistPolynomialLinearMap` is `twistPolynomialSection`. -/
 lemma twistPolynomialLinearMap_apply (a : ℤ) (c : (n → ℤ) →₀ A) :
     twistPolynomialLinearMap A a c = twistPolynomialSection A a c :=
   rfl
@@ -515,6 +561,7 @@ theorem twistHTopLinearEquivDual_apply {p : ℕ} (hn : Fintype.card n = p + 1 + 
 
 /-! ### Global sections of `𝒪(D)` -/
 
+/-- A Laurent polynomial regular on `U_s` is determined by its section over `U_s`. -/
 lemma twistLaurentSection_injective {m : ℤ} {s : Set n} (hs : s.Nonempty) {c c' : (n → ℤ) →₀ A}
     (hc : c ∈ Finsupp.supported A A (laurentExponents s m))
     (hc' : c' ∈ Finsupp.supported A A (laurentExponents s m))
@@ -525,6 +572,8 @@ lemma twistLaurentSection_injective {m : ℤ} {s : Set n} (hs : s.Nonempty) {c c
     exact h
   exact congrArg Subtype.val ((Finsupp.supportedEquivFinsupp _).injective
     ((bijective_twistMonomialLinearMap hs).1 hm))
+
+/-- Every section of `𝒪(m)` over `U_s` is the section of a Laurent polynomial regular on `U_s`. -/
 lemma exists_twistLaurentSection_eq {m : ℤ} {s : Set n} (hs : s.Nonempty)
     (x : Γ(twist n (Spec (.of A)) m, toProjInt n (Spec (.of A)) ⁻¹ᵁ basicOpenInt n s)) :
     ∃ c ∈ Finsupp.supported A A (laurentExponents s m), twistLaurentSection A m s c = x := by
@@ -594,16 +643,19 @@ lemma twistPolynomialSection_injective [Nonempty n] {m : ℤ} {c c' : (n → ℤ
   rw [← twistPolynomialSection_map _ hc, ← twistPolynomialSection_map _ hc', h]
 
 omit [Fintype n] in
+/-- `natCastExponents` is injective. -/
 lemma natCastExponents_injective : Function.Injective (natCastExponents n) :=
   fun _ _ h ↦ Finsupp.ext fun i ↦ Int.ofNat_inj.1 (congr_fun h i)
 
 omit [Fintype n] in
+/-- The coefficients of a homogeneous polynomial, as a Laurent polynomial. -/
 lemma homogeneousSubmoduleCoeff_apply (D : ℕ) (f : MvPolynomial.homogeneousSubmodule n A D) :
     homogeneousSubmoduleCoeff A D f =
       Finsupp.mapDomain (natCastExponents n) (AddMonoidAlgebra.coeff (f : MvPolynomial n A)) :=
   rfl
 
 omit [Fintype n] in
+/-- A homogeneous polynomial is determined by its coefficients as a Laurent polynomial. -/
 lemma homogeneousSubmoduleCoeff_injective (D : ℕ) :
     Function.Injective (homogeneousSubmoduleCoeff A (n := n) D) := fun f g h ↦ by
   rw [homogeneousSubmoduleCoeff_apply, homogeneousSubmoduleCoeff_apply] at h
@@ -651,6 +703,68 @@ def homogeneousSubmoduleLinearEquivTwist [Nonempty n] (D : ℕ) :
       (ModuleCat.restrictScalars (structureRingHom (n := n) A)).obj
         ((twist n (Spec (.of A)) D).presheafModuleCat.obj (op ⊤)) :=
   LinearEquiv.ofBijective _ (bijective_homogeneousSubmoduleToTwist D)
+
+variable (A) in
+/-- **The Serre pairing with values in `A`**: for `d ≥ 1`, `m ≤ -d - 1` and `D = -m - d - 1`,
+the pairing `H⁰(ℙᵈ_A, 𝒪(D)) × Hᵈ(ℙᵈ_A, 𝒪(m)) → Hᵈ(ℙᵈ_A, 𝒪(-d-1)) ≅ A`, `(t, x) ↦ tr (t x)`,
+of the Serre pairing `twistMulPairing` with the trace `twistTopTrace`. It is perfect
+(`isPerfPair_twistSerrePairing`).
+
+(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+def twistSerrePairing {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
+    (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1) :
+    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
+    (ModuleCat.restrictScalars (structureRingHom (n := n) A)).obj
+        ((twist n (Spec (.of A)) (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat).presheafModuleCat.obj
+          (op ⊤)) →ₗ[A] (twist n (Spec (.of A)) m).H (p + 1) →ₗ[A] A :=
+  letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
+  letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A))
+    (twist n (Spec (.of A)) (-((p + 1 : ℕ) : ℤ) - 1)) (p + 1)
+  (twistMulPairing A (monomialCechPairing_aux hm) (p + 1)).compr₂ (twistTopTrace A hn).toLinearMap
+
+/-- `twistSerrePairing` is the trace of the Serre pairing. -/
+lemma twistSerrePairing_apply {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
+    (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
+    (t : (ModuleCat.restrictScalars (structureRingHom (n := n) A)).obj
+        ((twist n (Spec (.of A)) (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat).presheafModuleCat.obj
+          (op ⊤)))
+    (x : (twist n (Spec (.of A)) m).H (p + 1)) :
+    twistSerrePairing A hn hm t x =
+      twistTopTrace A hn (twistMulPairing A (monomialCechPairing_aux hm) (p + 1) t x) :=
+  rfl
+
+/-- **The Serre pairing on projective space is perfect**: for `d ≥ 1`, `m ≤ -d - 1` and
+`D = -m - d - 1`, the pairing `H⁰(ℙᵈ_A, 𝒪(D)) × Hᵈ(ℙᵈ_A, 𝒪(m)) → Hᵈ(ℙᵈ_A, 𝒪(-d-1)) ≅ A` induced
+by multiplication of sections identifies each side with the `A`-dual of the other. Both sides are
+finite free `A`-modules (`homogeneousSubmoduleLinearEquivTwist`, `twistHTopLinearEquivDual`).
+
+(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+theorem isPerfPair_twistSerrePairing {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
+    (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1) :
+    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
+    (twistSerrePairing A hn hm).IsPerfPair := by
+  let := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
+  have : Nonempty n := Fintype.card_pos_iff.1 (by omega)
+  have : Finite {s : n →₀ ℕ | s.degree = (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat} :=
+    (Finsupp.finite_of_degree_eq _).to_subtype
+  let L := homogeneousSubmoduleLinearEquivTwist (n := n) A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat
+  have := Module.Free.of_basis (homogeneousSubmoduleBasis n A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat)
+  have := Module.Finite.of_basis
+    (homogeneousSubmoduleBasis n A (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat)
+  have := Module.Free.of_equiv L
+  have := Module.Finite.equiv L
+  have hflip : (twistSerrePairing A hn hm).flip =
+      ((twistHTopLinearEquivDual A hn hm).trans L.symm.dualMap).toLinearMap := by
+    refine LinearMap.ext fun x ↦ LinearMap.ext fun t ↦ ?_
+    refine (congrArg (fun t' ↦ twistTopTrace A hn
+      (twistMulPairing A (monomialCechPairing_aux hm) (p + 1) t' x))
+      (L.apply_symm_apply t).symm).trans ?_
+    exact (twistHTopLinearEquivDual_apply hn hm x (L.symm t)).symm
+  have hb : Function.Bijective (twistSerrePairing A hn hm).flip := by
+    rw [hflip]
+    exact ((twistHTopLinearEquivDual A hn hm).trans L.symm.dualMap).bijective
+  have h := (LinearMap.IsPerfPair.of_bijective _ hb).flip
+  rwa [LinearMap.flip_flip] at h
 
 end Pairing
 
