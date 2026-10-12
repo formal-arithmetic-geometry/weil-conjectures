@@ -25,6 +25,9 @@ namespace CategoryTheory
 /-- An injective abelian sheaf has vanishing positive Čech cohomology on every covering,
 and degree-zero Čech cohomology is its sections on the covered object.
 (blueprint: lem-weil-pbc-site-injective-cech-acyclic) -/
+-- STATEMENT-DISPUTED: independent universes allow small-valued injective sheaves
+-- on Type 1 whose Cech H^1 for the three edges of a triangle is nonzero.
+-- The free representables in the source argument need not be w-small; see report.md.
 theorem site_injective_cech_acyclic
     {C : Type u} [Category.{v} C]
     {J : Precoverage C} [J.HasIsos] [J.IsStableUnderComposition]

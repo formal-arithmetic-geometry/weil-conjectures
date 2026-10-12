@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-site-cech-zero-cohomology",
+ "kind": "statement",
+ "title": "Degree-zero Cech cohomology of an abelian sheaf equals sections",
+ "statement": "For any site presented by a precoverage with isomorphisms, composition, base change and pullbacks [def-weil-pbc-sites-and-cohomology], any covering family and any chosen SiteCechComplex for it [def-weil-pbc-site-cech-complex], the degree-zero Cech cohomology of an abelian sheaf is isomorphic to its group of sections on the covered object. Neither injectivity nor nonemptiness of the covering is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03AN (lemma-cech-h0)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Transport a zero cocycle along the degree-zero product identifications. Evaluate its differential on each pair and restrict along the map given by the pairwise universal property. This gives compatibility on arbitrary arrows with equal composites. Apply the sheaf condition to obtain a unique amalgamation.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restriction of a global section has zero differential by the index-map projection identities. It is additive and bijective onto the concrete kernel by unique amalgamation. The incoming differential in degree zero is zero. Mathlib homologyIsoSc', asIsoHomologyπ and abCyclesIso identify degree-zero homology with this kernel; compose with the inverse additive restriction isomorphism.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03AN (lemma-cech-h0); existing E2 proof isolated by the second reader"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Zeroth Cech cohomology of an abelian sheaf equals its sections on the covered object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero Cech cohomology of a sheaf is the group of sections of the covered object",
+   "results": "CategoryTheory.PresheafOfGroups.ZeroCochain, CategoryTheory.PresheafOfGroups.H1, CategoryTheory.typesGlue, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.PresheafOfGroups.instGroupZeroCochain, CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_, CategoryTheory.PresheafOfGroups.instOneH1, CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.existsUnique_section",
+   "date": "2026-10-12",
+   "verdict": "ingredients, no theorem for SiteCechComplex"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.isSheafFor_arrows_iff",
+   "results": "CategoryTheory.Presieve.isSheafFor_arrows_iff",
+   "date": "2026-10-12",
+   "verdict": "ingredients, no theorem for SiteCechComplex"
+  },
+  {
+   "tool": "grep",
+   "query": "isSheafFor_arrows_iff|asIsoHomologyπ|abCyclesIso",
+   "results": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/ConcreteCategory.lean, Mathlib/Algebra/Homology/ShortComplex/ConcreteCategory.lean",
+   "date": "2026-10-12",
+   "verdict": "ingredients, no theorem for SiteCechComplex"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteInjectiveCechAcyclic",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-site-injective-cech-acyclic",
+   "place": "degree-zero clause / original step 5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteCechZeroCohomology",
+  "file": "lean/Sheaf/CategoryTheory/SiteCechZeroCohomology.lean",
+  "declaration": "CategoryTheory.site_cech_zero_cohomology",
+  "statement": "theorem site_cech_zero_cohomology\n    {C : Type u} [Category.{v} C]\n    {J : Precoverage C} [J.HasIsos] [J.IsStableUnderComposition]\n    [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    {T : Type w} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U)\n    (hcover : Presieve.ofArrows f hom ∈ J U) (S : SiteCechComplex f hom)\n    (I : Sheaf J.toGrothendieck AddCommGrpCat.{w}) :\n    Nonempty (((S.cohomologyFunctor 0).obj I.obj) ≅ I.obj.obj (op U))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c6c63",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T060735-L-2906394",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c6c63",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T060735-L-2906394",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery files and declarations match the node statements; compilation succeeds, proofs contain no unauthorized axioms or sorry usage beyond the explicitly disputed original theorem, and the reported universe counterexample is documented."
+ }
+}
