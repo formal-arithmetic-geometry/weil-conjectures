@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-constant-module-affine-section-vanishing",
+ "kind": "statement",
+ "title": "Eventual vanishing of constant-module sections on affine etale test schemes",
+ "statement": "Fix a universe u, a commutative ring Lambda in Type (u+1), and a Lambda-module M. Let D:I -> Scheme be a small cofiltered diagram with affine transitions. Let p_i:D_i -> X be qcqs morphisms compatible with the transitions, and let nu:Y -> X be qcqs with a limiting cone pi:const(Y) -> D compatible with these structure maps. These are the conventions of [def-weil-pbc-scheme-conventions]. Use the constant module sheaves [def-weil-pbc-constant-sheaf] and direct images [def-weil-pbc-direct-image], with the canonical maps [lem-weil-pbc-constant-module-pushforward-functoriality]. For every affine object U of the small etale site of X [def-weil-pbc-etale-sheaves], every stage i, and every section a in (p_i,* M_Di)(U), if its canonical image in (nu_* M_Y)(U) is zero, there are a stage j and an arrow g:j -> i whose canonical transition sends a to zero in (p_j,* M_Dj)(U). This is sectionwise eventual vanishing on a fixed affine test scheme, without geometric points or germs.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z1, proof on qcqs etale test objects, and Tag 09YQ, degree zero; read https://stacks.math.columbia.edu/tag/09Z1 and https://stacks.math.columbia.edu/tag/09YQ on 2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-constant-module-pushforward-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Put E_j=U times_X D_j and E_limit=U times_X Y. Pullback preserves the limit cone (cofiltered categories are connected), affine transitions, and qcqs morphisms. Since U is affine, all E_j are qcqs. Regard the system as lying over U; this base is quasi-separated, even though X need not be.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forget coefficients in the section equality to abelian groups. A constant module sheaf has the constant underlying abelian sheaf: the coefficient forgetful functor preserves colimits and finite limits, hence commutes with the plus sheafification construction. Pullback identifies each constant sheaf with the inverse image of the constant sheaf G on U. By naturality of this identification with the adjunction unit, the constantModulePushforwardMap section maps are the unitComparison section maps after these identifications; equivalently both send constant generators to the same constant generators. Direct-image composition is the usual fiber-product pasting identification.",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-constant-module-pushforward-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_unitComparison_app_eq_zero_of_isLimit to this system over the affine base U, the constant abelian sheaf G, and the terminal etale object of U. It already accepts any small cofiltered category. Its injectivity half gives a later stage and an arrow to the original stage on which the section vanishes. Faithfulness of coefficient forgetting reflects the zero equality in module sections. No germ or stalk occurs in this step.",
+   "uses": [
+    "lem-weil-pbc-etale-section-continuity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-module-pushforward-functoriality",
+  "lem-weil-pbc-etale-section-continuity",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09Z1 and 09YQ, degree-zero local section injectivity; steps 2--4 of the parent germ-vanishing plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine etale test object detects eventual vanishing of a constant module section under inverse limits of schemes with affine transitions",
+   "results": "Eight hits, including exists_appTop_map_eq_zero_of_isLimit and exists_app_map_eq_zero_of_isLimit in Mathlib.AlgebraicGeometry.AffineTransitionLimit. They concern structure-sheaf sections, not constant etale module sheaves. No exact match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unitComparison\"",
+   "results": "No indexed hit. Local rg finds exists_unitComparison_app_eq_zero_of_isLimit in WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity; it concerns pullbacks of abelian sheaves and needs qcqs total schemes over a quasi-separated base. The fibre-product system over U and coefficient and canonical-map identifications are still required.",
+   "date": "2026-10-12",
+   "verdict": "use abelian section continuity after comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "constantModulePushforward|constant.*section.*zero|toPresheafFiber_eq_iff",
+   "results": "Mathlib contains the filtered-colimit stalk equality API and structure-sheaf continuity, but no constant-module section theorem. Local Sheaf search finds the parent germ-vanishing and limit-comparison modules, which depend on that parent and cannot be imported here.",
+   "date": "2026-10-12",
+   "verdict": "no exact noncircular section theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section of a constant etale module sheaf which vanishes on an inverse limit vanishes at a later stage",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict. The other search kinds were completed.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantModulePushforwardGermVanishing",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Sectionwise step of the parent germ-vanishing argument; parent is a stage-3 creation, not an imported blueprint node.",
+   "via": [
+    "lem-weil-pbc-constant-module-pushforward-germ-vanishing",
+    "lem-weil-pbc-constant-module-pushforward-limit-injectivity",
+    "lem-weil-pbc-constant-module-pushforward-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantModulePushforwardAffineSectionVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantModulePushforwardAffineSectionVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_constantModulePushforward_affine_section_eq_zero",
+  "statement": "theorem exists_constantModulePushforward_affine_section_eq_zero\n    (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)\n    {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Scheme.{u}) (p : ∀ i, D.obj i ⟶ X)\n    (hp : ∀ {i j : I} (g : i ⟶ j), D.map g ≫ p j = p i)\n    [∀ {i j : I} (g : i ⟶ j), IsAffineHom (D.map g)]\n    [∀ i : I, QuasiCompact (p i)] [∀ i : I, QuasiSeparated (p i)]\n    {Y : Scheme.{u}} (ν : Y ⟶ X)\n    (π : (Functor.const I).obj Y ⟶ D) (hπ : ∀ i, π.app i ≫ p i = ν)\n    [QuasiCompact ν] [QuasiSeparated ν]\n    (hc : IsLimit (Cone.mk Y π))\n    (U : X.Etale) [IsAffine U.left] (i : I)\n    (a : ((lowerStar (ModuleCat.{u + 1} Λ) (p i)).obj\n      ((constantSheaf (D.obj i).smallEtaleTopology\n        (ModuleCat.{u + 1} Λ)).obj M)).obj.obj (op U))\n    (ha : (constantModulePushforwardMap Λ M (p i) ν (π.app i) (hπ i)).hom.app\n      (op U) a = 0) :\n    ∃ (j : I) (g : j ⟶ i),\n      (constantModulePushforwardMap Λ M (p i) (p j) (D.map g) (hp g)).hom.app\n        (op U) a = 0",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T095929-L-326671",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T095929-L-326671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

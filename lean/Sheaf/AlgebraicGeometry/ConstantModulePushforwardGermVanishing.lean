@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
-import WeilConjectures.ConstructibleSheaf.Defs
+import Sheaf.AlgebraicGeometry.ConstantModulePushforwardAffineSectionVanishing
 
 /-! # Eventual vanishing of constant-module direct-image germs
 
@@ -25,6 +24,40 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem affine_point_refinement
+    {X : Scheme.{u}} (s : X) (U : X.Etale)
+    (v : (X.uliftPointSmallEtale s).fiber.obj U) :
+    ∃ (W : X.Etale) (k : W ⟶ U) (w : (X.uliftPointSmallEtale s).fiber.obj W),
+      IsAffine W.left ∧ (X.uliftPointSmallEtale s).fiber.map k w = v := by
+  classical
+  let v₀ := v.down
+  change Over.mk (X.algClosurePoint s) ⟶ Over.mk U.hom at v₀
+  obtain ⟨R, j, hj, hmem, _⟩ := Scheme.exists_affine_mem_range_and_range_subset
+    (x := v₀.left (default : Spec (.of (AlgebraicClosure (X.residueField s)))))
+    (U := ⊤) (by simp)
+  have := hj
+  have : Subsingleton (Over.mk (X.algClosurePoint s)).left := by
+    change Subsingleton (Spec (.of (AlgebraicClosure (X.residueField s))))
+    infer_instance
+  have hrange : Set.range v₀.left ⊆ Set.range j := by
+    rintro _ ⟨a, rfl⟩
+    rwa [Subsingleton.elim a
+      (default : Spec (.of (AlgebraicClosure (X.residueField s))))]
+  let l := IsOpenImmersion.lift j v₀.left hrange
+  have hl : l ≫ j = v₀.left := IsOpenImmersion.lift_fac j v₀.left hrange
+  let W : X.Etale := Scheme.Etale.mk (j ≫ U.hom)
+  let k : W ⟶ U := MorphismProperty.Over.homMk j rfl
+  let w₀ : (Scheme.pointSmallEtale (X.algClosurePoint s)).fiber.obj W :=
+    Over.homMk l (by
+      change l ≫ (j ≫ U.hom) = X.algClosurePoint s
+      rw [← Category.assoc, hl]
+      exact Over.w v₀)
+  refine ⟨W, k, ULift.up w₀, inferInstanceAs (IsAffine (Spec R)), ?_⟩
+  apply ULift.ext
+  apply Over.OverMorphism.ext
+  exact hl
 
 /-- A germ of a constant-module direct image which vanishes at the limit already
 vanishes after one transition of the inverse system.
@@ -74,6 +107,36 @@ theorem exists_constantModulePushforward_germ_eq_zero
       ((X.uliftPointSmallEtale s).sheafFiber
         (A := ModuleCat.{u + 1} Λ)).map
           (constantModulePushforwardMap Λ M (p i) (p j) (D.map g) (hp g)) x = 0 := by
-  sorry
+  classical
+  let Φ := X.uliftPointSmallEtale s
+  let F := (lowerStar (ModuleCat.{u + 1} Λ) (p i)).obj
+    ((constantSheaf (D.obj i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)
+  let G := (lowerStar (ModuleCat.{u + 1} Λ) ν).obj
+    ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)
+  let f : F ⟶ G := constantModulePushforwardMap Λ M (p i) ν (π.app i) (hπ i)
+  obtain ⟨U, v, a, ha⟩ := Φ.toPresheafFiber_jointly_surjective (P := F.obj) x
+  have hz : Φ.toPresheafFiber U v G.obj (f.hom.app (op U) a) =
+      Φ.toPresheafFiber U v G.obj 0 := by
+    rw [map_zero, ← Φ.toPresheafFiber_naturality_apply, ha]
+    exact hx
+  obtain ⟨V, k, w, hw, hzero⟩ := (Φ.toPresheafFiber_eq_iff' U v _ _).mp hz
+  obtain ⟨W, l, t, hW, ht⟩ := affine_point_refinement s V w
+  let := hW
+  let b := F.obj.map l.op (F.obj.map k.op a)
+  have hb : f.hom.app (op W) b = 0 := by
+    dsimp [b]
+    rw [f.hom.naturality_apply, f.hom.naturality_apply]
+    rw [hzero, map_zero, map_zero]
+  obtain ⟨j, g, hg⟩ := exists_constantModulePushforward_affine_section_eq_zero
+    Λ M D p hp ν π hπ hc W i b hb
+  refine ⟨j, g, ?_⟩
+  have hrep : Φ.toPresheafFiber W t F.obj b = x := by
+    dsimp [b]
+    rw [Φ.toPresheafFiber_w_apply, ht, Φ.toPresheafFiber_w_apply, hw, ha]
+  rw [← hrep]
+  change Φ.presheafFiber.map
+    (constantModulePushforwardMap Λ M (p i) (p j) (D.map g) (hp g)).hom
+      (Φ.toPresheafFiber W t F.obj b) = 0
+  rw [Φ.toPresheafFiber_naturality_apply, hg, map_zero]
 
 end AlgebraicGeometry.Etale
