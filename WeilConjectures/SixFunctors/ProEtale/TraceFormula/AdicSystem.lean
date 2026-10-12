@@ -138,7 +138,10 @@ lemma compactCoefficientIso_hom_app {s : Scheme.{u}} (aX : X ⟶ s) [HasCompacti
     (compactCoefficientIso ρ aX δ αs).hom.app K =
       (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s).map (δ.hom.app K) ≫
         αs.hom.app ((rightDerivedLowerShriek (ModuleCat.{u + 1} Λ') aX).obj K) := by
-  dsimp [compactCoefficientIso]
+  simp only [Functor.comp_obj, compactCoefficientIso, Iso.trans_hom, Iso.symm_hom,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
+    Functor.associator_inv_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Category.comp_id, Category.id_comp]
   exact Category.id_comp _
 
 variable {k : Type u} [Field k] [IsSepClosed k] (aX : X ⟶ Spec (.of k)) [IsGeometric aX]
