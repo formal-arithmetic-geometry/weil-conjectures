@@ -34,7 +34,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), filtered-colimit reduction; Tag 03Q5 (lemma-colimit), constant-scheme case of Theorem 09YQ; transposition to global cohomology"
+  "place": "Stacks 0A4B filtered-colimit reduction and 03Q5, transposed to global cohomology; completed by P1 second reader using the torsion kernel colimit, the existing natural Ext comparison, upstream pullback naturality and Mathlib isIso_app_coconePt_of_preservesColimit."
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
@@ -43,41 +43,42 @@
  "statement": "For schemes X Y, morphism u : Y ⟶ X, compact and quasi-separated, if pullback cohomology is bijective for every sheaf annihilated by a positive integer, then it is bijective for every torsion abelian sheaf F. Notation and conventions are those of [def-pc-scheme], [def-weil-pbc-scheme-conventions], [def-weil-pbc-abelian-etale-sheaves], [def-weil-pbc-cohomology-pullback], [def-weil-pbc-etale-cohomology], [def-weil-pbc-inverse-image], [def-weil-pbc-torsion-etale-sheaf].",
  "proof": [
   {
-   "text": "Use the positive-integer kernel diagram and its colimit cocone from the definition of torsion. Multiplication by n on F[n] vanishes by cancelling the kernel inclusion. The divisibility poset is nonempty and filtered (product is an upper bound).",
+   "text": "Construct the positive-integer kernel diagram and its canonical cocone exactly as in IsTorsionAbelianSheaf. Divisibility is nonempty and directed, with nm a common bound. The torsion hypothesis makes colimit.desc an isomorphism; IsColimit.ofPointIso yields the colimit cocone. Cancel each monic kernel inclusion to prove n times the identity of F[n] is zero.",
    "uses": [
     "def-weil-pbc-torsion-etale-sheaf",
-    "def-pur-abelian-sheaf-kernel"
+    "def-pur-abelian-sheaf-kernel",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "Inverse image preserves the colimit cocone. Cohomology on X and Y preserves it by filtered-colimit compatibility, transported to Sheaf.H by the natural Ext-to-derived comparison.",
+   "text": "For each degree q, lift the positive-integer category to AsSmall in the scheme universe, whisker along its equivalence, apply etaleCohomology_isColimit_of_isFiltered, and reflect the colimit back along the equivalence. Transport it to Sheaf.functorH through the proved nonempty_sheafH_extDerivedIso. The upstream upperStar IsLeftAdjoint instance preserves the original sheaf colimit; apply the same cohomology argument on Y. No use is made of the open inverseImage_preservesColimits theorem.",
    "uses": [
-    "lem-weil-pbc-inverse-image-preserves-colimits",
     "lem-weil-pbc-cohomology-filtered-colimit",
-    "lem-weil-pbc-sheafH-ext-derived-comparison"
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality gives a transformation of the cohomology diagrams. hbounded gives bijective components; their inverses are natural by multiplying the commuting squares by inverses. The induced colimit map is bijective and agrees with pullback on F by naturality on each kernel inclusion and uniqueness of colimit descent.",
+   "text": "Define the natural transformation from Sheaf.functorH on X to upperStar followed by Sheaf.functorH on Y using the upstream proved cohomologyMap_map naturality lemma. Each kernel-stage component is an isomorphism by hbounded and ConcreteCategory.isIso_iff_bijective. Apply Mathlib isIso_app_coconePt_of_preservesColimit to the two colimit-preserving functors and the torsion cocone. Its cocone-point component is the original cohomologyMap; ConcreteCategory.bijective_of_isIso concludes. This is the usual colimit universal-property argument, with no elementwise colimit lemma or additional split-off theorem.",
    "uses": [
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-pbc-category-colimit",
-    "def-weil-directed-colimit-abelian-groups"
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-torsion-etale-sheaf",
   "def-pur-abelian-sheaf-kernel",
-  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "def-weil-pbc-category-colimit",
   "lem-weil-pbc-cohomology-filtered-colimit",
   "lem-weil-pbc-sheafH-ext-derived-comparison",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "def-weil-pbc-category-colimit",
-  "def-weil-directed-colimit-abelian-groups"
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-pbc-cohomology-pullback"
  ],
  "mathlib_searches": [
   {
@@ -146,11 +147,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-ff4a6",
-  "group": "V1",
+  "reviewer": "X-591da",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T013435-L-839109",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, source reductions, dependency declarations, compilation and axiom results."
+  "landing": "20261012T021534-L-1019339",
+  "kind": "proof",
+  "note": "independent Codex review: Matched delivered proof and unchanged signature with the node, dependencies and unit route; verified permitted metadata changes, clean compilation, and axioms with sorryAx from the reported existing filtered-cohomology obligation."
  }
 }
