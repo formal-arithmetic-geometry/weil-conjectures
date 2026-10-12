@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Homology.HomologicalBicomplex
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Sheaf.CategoryTheory.Abelian.HorseshoePrescribedResolutions
-import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.CartanEilenbergRowsExists
+import Sheaf.CategoryTheory.CartanEilenbergRowsIdentifications
 
 /-! # Existence of Cartan--Eilenberg injective resolutions
 
@@ -79,6 +79,41 @@ theorem exists_cartanEilenberg_resolution
         QuasiIso
           (image.map (Arrow.homMk' (e.f (p - 1)) (e.f p) (e.comm (p - 1) p))) ∧
         QuasiIso (HomologicalComplex.homologyMap e p)) := by
-  sorry
+  obtain ⟨R, hneg, hqi, hinj⟩ := exists_cartanEilenberg_rows B K hK
+  obtain ⟨z, d, h, hz, hd, hh⟩ := cartanEilenberg_rows_identifications R
+  refine ⟨R.complex, R.augmentation, hneg, ?_, ?_, ?_, ?_⟩
+  · intro p
+    exact (hqi p).1
+  · intro p q
+    exact (hinj p q).1
+  · intro p q
+    refine ⟨?_, ?_, ?_⟩
+    · exact Injective.of_iso
+        ((HomologicalComplex.eval B (ComplexShape.up ℕ) q).mapIso (z p)).symm
+        (hinj p q).2.1
+    · exact Injective.of_iso
+        ((HomologicalComplex.eval B (ComplexShape.up ℕ) q).mapIso (d p)).symm
+        (hinj p q).2.2.1
+    · exact Injective.of_iso
+        ((HomologicalComplex.eval B (ComplexShape.up ℕ) q).mapIso (h p)).symm
+        (hinj p q).2.2.2
+  · intro p
+    refine ⟨?_, ?_, ?_⟩
+    · have : QuasiIso
+          (HomologicalComplex.cyclesMap R.augmentation p ≫ (z p).hom) := by
+        rw [hz p]
+        exact (hqi p).2.1
+      exact quasiIso_of_comp_right _ (z p).hom
+    · have : QuasiIso
+          (image.map (Arrow.homMk' (R.augmentation.f (p - 1))
+            (R.augmentation.f p) (R.augmentation.comm (p - 1) p)) ≫ (d p).hom) := by
+        rw [hd p]
+        exact (hqi p).2.2.1
+      exact quasiIso_of_comp_right _ (d p).hom
+    · have : QuasiIso
+          (HomologicalComplex.homologyMap R.augmentation p ≫ (h p).hom) := by
+        rw [hh p]
+        exact (hqi p).2.2.2
+      exact quasiIso_of_comp_right _ (h p).hom
 
 end CategoryTheory

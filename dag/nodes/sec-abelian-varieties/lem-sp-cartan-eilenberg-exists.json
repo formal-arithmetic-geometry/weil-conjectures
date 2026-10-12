@@ -24,66 +24,44 @@
  ],
  "proof": [
   {
-   "text": "Use the given bound with $n=0$, and put $Z^p=\\ker(d_K^p)$, $B^p=\\operatorname{im}(d_K^{p-1})$, and $H^p=Z^p/B^p$. Exactness of kernels, images, and cokernels in the abelian category gives the alternating short exact sequences $0\\to Z^0\\to K^0\\to B^1\\to0$, $0\\to B^1\\to Z^1\\to H^1\\to0$, and the analogous pair in every later degree.",
+   "text": "Obtain compatible injective resolution rows and their four augmentations.",
    "uses": [
-    "def-sp-abelian"
+    "lem-sp-cartan-eilenberg-rows-exists"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015I (lemma-cartan-eilenberg), proof: decomposition into the alternating short exact sequences"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose an injective resolution $Z^0\\to J_Z^{0,\\bullet}$ with $J_Z^{0,q}=0$ for $q<0$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1). Apply the horseshoe lemma with prescribed end resolutions [lem-sp-horseshoe-prescribed-resolutions] to $0\\to Z^0\\to K^0\\to B^1\\to0$, with the given resolution $J_Z^{0,\\bullet}$ of $Z^0$ and any injective resolution of $B^1$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1); it yields an injective resolution $K^0\\to I^{0,\\bullet}$ and a degreewise short exact sequence $0\\to J_Z^{0,\\bullet}\\to I^{0,\\bullet}\\to J_B^{1,\\bullet}\\to0$ of complexes compatible with the augmentations, in which the outer complexes are the prescribed ones. Apply the same lemma to $0\\to B^1\\to Z^1\\to H^1\\to0$ with the resolution $J_B^{1,\\bullet}$ just obtained (and any resolution of $H^1$), giving $0\\to J_B^{1,\\bullet}\\to J_Z^{1,\\bullet}\\to J_H^{1,\\bullet}\\to0$; then to $0\\to Z^1\\to K^1\\to B^2\\to0$ with this $J_Z^{1,\\bullet}$, and so on inductively through all degrees. Prescribing the subobject resolution is what makes consecutive rows share $J_B^{p+1,\\bullet}$ and $J_Z^{p,\\bullet}$. Put $J_B^{0,\\bullet}=0$ and $J_H^{0,\\bullet}=J_Z^{0,\\bullet}$ (as $B^0=0$, $H^0=Z^0$). All complexes vanish in negative resolution degrees.",
+   "text": "Construct the horizontal complex with differential v^pw^(p+1)u^(p+1). Its square is zero because u^(p+1)v^(p+1)=0. The component augmentations form a complex morphism by the row compatibility equation. The negative-degree vanishing and column resolution properties are inherited directly.",
    "uses": [
-    "lem-sp-horseshoe-prescribed-resolutions",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-sp-cartan-eilenberg-rows"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify cycles, boundaries and homology with the row objects, retaining the induced augmentation equations.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-rows-identifications"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Injective.of_iso to each evaluation of the three isomorphisms. Each augmentation composed with its identification is the corresponding row quasi-isomorphism; cancel the isomorphism using quasiIso_of_comp_right. This gives exactly all clauses of the original statement.",
+   "uses": [
     "def-sp-injective-resolutions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015I (lemma-cartan-eilenberg), proof Steps 1-4, using Lemma 013T (in its 'given injective resolutions' form)"
-   }
-  },
-  {
-   "text": "Let $I^{p,\\bullet}$ be the resolution of $K^p$ produced at the $p$-th stage. Define the horizontal differential $d_I:I^{p,\\bullet}\\to I^{p+1,\\bullet}$ as the composite $I^{p,\\bullet}\\to J_B^{p+1,\\bullet}\\to J_Z^{p+1,\\bullet}\\to I^{p+1,\\bullet}$ through the quotient and subobject resolutions supplied by the two adjacent horseshoe rows [lem-sp-horseshoe-prescribed-resolutions]. The compatibility in the horseshoe diagrams makes these maps commute with vertical differentials and induces $d_K$ on the augmentations; exactness of the rows gives $d_I d_I=0$.",
-   "uses": [
-    "lem-sp-horseshoe-prescribed-resolutions",
-    "def-sp-double-complex-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015I (lemma-cartan-eilenberg), proof conclusion: define d_1 by the composite through J_B and J_Z"
-   }
-  },
-  {
-   "text": "The construction is zero for horizontal degree $p<0$ (we started at $n=0$) and for resolution degree $q<0$, so it is first quadrant. Each vertical column resolves $K^p$ by construction. In each fixed $q$, exactness of the two adjacent horseshoe rows [lem-sp-horseshoe-prescribed-resolutions] (the composite $J_B^{p+1,q}\\to J_Z^{p+1,q}\\to I^{p+1,q}$ is monic and $I^{p,q}\\to J_B^{p+1,q}$ is epic) identifies the horizontal cycles with the chosen injective resolution of $Z^p(K)$, the horizontal boundaries with that of $B^p(K)$, and horizontal cohomology with that of $H^p(K)$; all terms are injective and the augmentations are quasi-isomorphisms. Thus the stated Cartan--Eilenberg conditions hold.",
-   "uses": [
-    "lem-sp-horseshoe-prescribed-resolutions",
-    "def-sp-injective-resolutions",
-    "def-sp-double-complex-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definition 015H and Lemma 015I, proof conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-abelian",
-  "lem-sp-horseshoe-prescribed-resolutions",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "def-sp-injective-resolutions",
-  "def-sp-double-complex-total"
+  "lem-sp-cartan-eilenberg-rows-exists",
+  "def-sp-cartan-eilenberg-rows",
+  "lem-sp-cartan-eilenberg-rows-identifications",
+  "def-sp-injective-resolutions"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Definition 015H and Lemma 015I"
+  "place": "Lemma 015I, factored into compatible rows and their homology identifications; Lean assembly and identifications by S2, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -179,5 +157,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T144144-L-2107105",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-cartan-eilenberg-rows-identifications",
+ "kind": "statement",
+ "title": "Identification of cycles, boundaries and homology of alternating exact rows",
+ "statement": "Let $C$ be an abelian category [def-sp-abelian], $S$ a cochain complex over $\\mathbb Z$, and $R$ a compatible row system [def-sp-cartan-eilenberg-rows]. Let $A_R$ be its associated complex and $e:S\\to A_R$ its augmentation. There are isomorphisms $z^p:Z^p(A_R)\\cong R.Z^p$, $b^p:\\operatorname{im}(d_{A_R}^{p-1})\\cong R.D^p$, $h^p:H^p(A_R)\\cong R.H^p$, such that the induced cycle, image and homology maps of $e$, followed by these isomorphisms, equal respectively $R.j_Z^p$, $R.j_D^p$ and $R.j_H^p$. There is no injectivity, resolution or boundedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015I, proof conclusion: verification of the composite differential"
+ },
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-rows",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "The monomorphism w^(p+1)u^(p+1) lets the first short exact row identify u^p as a kernel of v^pw^(p+1)u^(p+1). Construct its limit fork and use LeftHomologyData.cyclesIso to identify the cycles.",
+   "uses": [
+    "def-sp-cartan-eilenberg-rows",
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport v^(p-1) to a map into D^p. It is epic, and w^pu^p is monic; their composite is the differential. image.isoStrongEpiMono identifies the image with D^p.",
+   "uses": [
+    "def-sp-cartan-eilenberg-rows",
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The lifted incoming differential is v^(p-1)w^p. Since v^(p-1) is epic, the second short exact row identifies x^p as its cokernel. Construct LeftHomologyData and use its homologyIso, compatible with the cycle isomorphism and the homology projection.",
+   "uses": [
+    "def-sp-cartan-eilenberg-rows",
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Cancel the cycle and image monomorphisms using naturality and commZ/commD. Cancel the source homology projection using homology naturality and commH. This proves all augmentation identities.",
+   "uses": [
+    "def-sp-cartan-eilenberg-rows",
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-rows",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015I, proof conclusion: verification of the composite differential"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact cycle boundary homology rows Cartan Eilenberg resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.LeftHomologyData.homologyIso",
+   "results": "12 hits; top: CategoryTheory.ShortComplex.LeftHomologyData.homologyIso, CategoryTheory.ShortComplex.LeftHomologyData.homologyIso_leftHomologyData, CategoryTheory.ShortComplex.HomologyData.right_homologyIso_eq_left_homologyIso_trans_iso, CategoryTheory.ShortComplex.leftRightHomologyComparison'_fac, CategoryTheory.ShortComplex.HomologyData.left_homologyIso_eq_right_homologyIso_trans_iso_symm, CategoryTheory.ShortComplex.LeftHomologyData.homologyIso_hom_comp_leftHomologyIso_inv, CategoryTheory.ShortComplex.LeftHomologyData.leftHomologyIso_hom_comp_homologyIso_inv, CategoryTheory.ShortComplex.LeftHomologyData.π_comp_homologyIso_inv. Used together with cyclesIso, kernel uniqueness, and image.isoStrongEpiMono; no bundled match.",
+   "date": "2026-10-12",
+   "verdict": "Used together with cyclesIso, kernel uniqueness, and image.isoStrongEpiMono; no bundled match."
+  },
+  {
+   "tool": "grep",
+   "query": "LeftHomologyData|isoStrongEpiMono",
+   "results": "25 hits; top: Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean. Generic homology and image constructions used in proof.",
+   "date": "2026-10-12",
+   "verdict": "Generic homology and image constructions used in proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergExists",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-cartan-eilenberg-exists",
+   "place": "Lemma 015I, proof conclusion: verification of the composite differential",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergRowsIdentifications",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergRowsIdentifications.lean",
+  "declaration": "CategoryTheory.cartanEilenberg_rows_identifications",
+  "statement": "theorem cartanEilenberg_rows_identifications {C : Type u} [Category.{v} C] [Abelian C] {S : CochainComplex C ℤ} (R : CartanEilenbergRows S) : ∃ (z : ∀ p : ℤ, R.complex.cycles p ≅ R.Z p) (d : ∀ p : ℤ, image (R.complex.d (p - 1) p) ≅ R.D p) (h : ∀ p : ℤ, R.complex.homology p ≅ R.H p), (∀ p : ℤ, HomologicalComplex.cyclesMap R.augmentation p ≫ (z p).hom = R.jZ p) ∧ (∀ p : ℤ, image.map (Arrow.homMk' (R.augmentation.f (p - 1)) (R.augmentation.f p) (R.augmentation.comm (p - 1) p)) ≫ (d p).hom = R.jD p) ∧ (∀ p : ℤ, HomologicalComplex.homologyMap R.augmentation p ≫ (h p).hom = R.jH p)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T144144-L-2107105",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T144144-L-2107105",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

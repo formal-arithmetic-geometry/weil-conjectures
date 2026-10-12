@@ -1,0 +1,126 @@
+{
+ "id": "lem-sp-cartan-eilenberg-rows-exists",
+ "kind": "statement",
+ "title": "Existence of compatible alternating injective resolution rows",
+ "statement": "Let $B$ be an abelian category [def-sp-abelian] with enough injectives [def-sp-enough-injectives]. Let $K$ be a $\\mathbb Z$-indexed cochain complex with $K^p=0$ for $p<0$, and let $S$ be its image under the single-degree-zero functor $B\\to\\operatorname{CochainComplex}(B,\\mathbb N)$. There is a compatible row system $R$ for $S$ [def-sp-cartan-eilenberg-rows] such that $A^p=0$ for $p<0$, each of $A^p,Z^p,D^p,H^p$ has injective terms, and each of its four augmentations $j_A^p,j_Z^p,j_D^p,j_H^p$ is a quasi-isomorphism [def-sp-injective-resolutions]. This asserts only existence of the row system, not any identification with the cycles, images or homology of its associated complex.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015I, proof Steps 1--4; prescribed horseshoe Lemma 013T"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-enough-injectives",
+  "def-sp-cartan-eilenberg-rows",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Form the two alternating short exact sequences of cycles, terms, boundaries and homology.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Start with an injective resolution of Z^0. At each degree choose the free boundary or homology resolution using InjectiveResolution.of; apply the prescribed horseshoe twice, reusing the shared columns. Retain the commuting augmentation squares and the degreewise short exact rows.",
+   "uses": [
+    "lem-sp-horseshoe-prescribed-resolutions",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose zero columns in negative degrees and for D^0, identifying H^0 with Z^0. The hypotheses imply all negative source cycles, boundaries and homology vanish. Prolong the source by the exact single-degree-zero functor. Its canonical cycle/image/homology isomorphisms transport the augmentations, and the horseshoe squares and factorization of d_K give the four compatibility equations.",
+   "uses": [
+    "def-sp-cartan-eilenberg-rows",
+    "def-sp-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "lem-sp-horseshoe-prescribed-resolutions",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-sp-injective-resolutions",
+  "def-sp-cartan-eilenberg-rows"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015I, proof Steps 1--4; prescribed horseshoe Lemma 013T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact cycle boundary homology rows Cartan Eilenberg resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible injective resolutions of alternating short exact sequences Cartan Eilenberg",
+   "results": "8 hits; top: CategoryTheory.InjectiveResolution.exact₀, CategoryTheory.InjectiveResolution.descFSucc, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.of_def, CategoryTheory.InjectiveResolution.exact_succ, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.descFOne, CategoryTheory.InjectiveResolution.injective. Only ordinary resolutions, not the compatible alternating rows.",
+   "date": "2026-10-12",
+   "verdict": "Only ordinary resolutions, not the compatible alternating rows."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan|cartanEilenberg",
+   "results": "25 hits; top: Mathlib/LinearAlgebra/Matrix/ZMatrix.lean, Mathlib/LinearAlgebra/Matrix/ZMatrix.lean, Mathlib/LinearAlgebra/Matrix/Cartan.lean, Mathlib/LinearAlgebra/Matrix/Cartan.lean, Mathlib/LinearAlgebra/Matrix/Cartan.lean, Mathlib/LinearAlgebra/Matrix/Cartan.lean, Mathlib/LinearAlgebra/Matrix/Cartan.lean, Mathlib/Algebra/LieRinehartAlgebra/Defs.lean. No Cartan--Eilenberg resolution declarations.",
+   "date": "2026-10-12",
+   "verdict": "No Cartan--Eilenberg resolution declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergExists",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-cartan-eilenberg-exists",
+   "place": "Lemma 015I, proof Steps 1--4; prescribed horseshoe Lemma 013T",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergRowsExists",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergRowsExists.lean",
+  "declaration": "CategoryTheory.exists_cartanEilenberg_rows",
+  "statement": "theorem exists_cartanEilenberg_rows (B : Type u) [Category.{v} B] [Abelian B] [EnoughInjectives B] (K : CochainComplex B ℤ) (hK : ∀ p : ℤ, p < 0 → IsZero (K.X p)) : let S := ((CochainComplex.single₀ B).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ∃ R : CartanEilenbergRows S, (∀ p : ℤ, p < 0 → IsZero (R.A p)) ∧ (∀ p : ℤ, QuasiIso (R.jA p) ∧ QuasiIso (R.jZ p) ∧ QuasiIso (R.jD p) ∧ QuasiIso (R.jH p)) ∧ (∀ (p : ℤ) (q : ℕ), Injective ((R.A p).X q) ∧ Injective ((R.Z p).X q) ∧ Injective ((R.D p).X q) ∧ Injective ((R.H p).X q))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T144144-L-2107105",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T144144-L-2107105",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
