@@ -8,8 +8,7 @@ module
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Sheaf.CategoryTheory.DeltaFunctor
 import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 
 /-!
 # Right derived functors form a universal delta-functor
@@ -66,6 +65,12 @@ theorem Functor.exists_universal_rightDerived_deltaFunctor
     ∃ G : CohomologicalDeltaFunctor A B,
       G.F = (fun n : ℕ ↦ v.rightDerived n) ∧ G.IsUniversal ∧
         Nonempty (v.rightDerived 0 ≅ v) := by
-  sorry
+  obtain ⟨G, hG, _⟩ := exists_horseshoe_rightDerived_deltaFunctor v
+  refine ⟨G, hG, effaceable_deltaFunctor_isUniversal G ?_, ⟨v.rightDerivedZeroIsoSelf⟩⟩
+  intro n hn X
+  obtain ⟨m, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hn)
+  refine ⟨Injective.under X, Injective.ι X, inferInstance, ?_⟩
+  rw [hG]
+  exact (v.isZero_rightDerived_obj_injective_succ m (Injective.under X)).eq_of_tgt _ _
 
 end CategoryTheory
