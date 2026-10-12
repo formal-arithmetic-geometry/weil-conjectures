@@ -60,6 +60,16 @@ def inventory(upstream):
     # Census warnings describe individual modules; they must not stop exports
     # of unrelated sections. cut/check remain strict validation gates.
     census = {m: ledger.scan_text(text) for m, text in modules.items()}
+    effective = {}
+    relocation = {m: mapped(m) for m in modules if m.startswith('Sheaf.')}
+    for m, text in modules.items():
+        if not m.startswith('WeilConjectures.') or not (upstream/path(m)).is_file(): continue
+        try:
+            merged, _, accepted = merge_file(upstream, m, text, set(modules), relocation)
+            effective[m] = merged != (upstream/path(m)).read_text()
+        except ValueError:
+            # A changed signature/new declaration is still a real review item.
+            effective[m] = True
     available = {'.'.join(p.relative_to(upstream).with_suffix('').parts) for p in (upstream/'WeilConjectures').rglob('*.lean')}
     destinations = {}
     # A merged mapping is authoritative only when the destination really exists.
@@ -75,7 +85,7 @@ def inventory(upstream):
         ms = sorted({(n.get('lean') or {}).get('module') for n in ns} & modules.keys())
         ms = [m for m in ms if m.startswith('Sheaf.') and m not in available or
               m.startswith('WeilConjectures.') and (upstream/path(m)).is_file() and
-              modules[m] != (upstream/path(m)).read_text()]
+              modules[m] != (upstream/path(m)).read_text() and effective.get(m, True)]
         rows = [r for m in ms for r in census[m][0]]
         deps = sorted({d for m in ms for d in IMPORT.findall(modules[m])
                        if d.startswith(('Sheaf.', 'WeilConjectures.')) and d not in available and d not in ms})
@@ -170,7 +180,7 @@ def merge_file(upstream, module, ours, selected, mapping):
     for a,b,new in sorted(edits,reverse=True): theirs=theirs[:a]+new+theirs[b:]
     # Only selected imports enter this PR; imports for unrelated proofs stay out.
     added=[m for m in IMPORT.findall(ours) if m in selected|set(mapping) and m not in IMPORT.findall(theirs)]
-    if added and (accepted or not kept):
+    if added and accepted:
         last=list(IMPORT.finditer(theirs))[-1].end()
         theirs=theirs[:last]+''.join('\nimport '+mapping[m] for m in sorted(added))+theirs[last:]
     return rewrite(theirs,mapping), kept, accepted
