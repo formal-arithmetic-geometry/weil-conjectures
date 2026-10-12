@@ -8,6 +8,9 @@ module
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KInjectiveHomComplex
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Canonical derived tensor/internal-Hom bijections
 Source: Stacks Project, cohomology.tex, Tag 08DJ (lemma-internal-hom).
@@ -79,6 +82,25 @@ def schemeDerivedInternalHomResolutionIso (X : Scheme.{uCD})
         CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{uCD} _ M⟩))
     (DerivedCategory.Q.op.prod DerivedCategory.Q)).app (op L, M)
 
+/-- The uncurried component of a map into the fixed Hom complex.
+Source: Stacks Project, cohomology.tex, Tag 08DJ, componentwise evaluation.
+(blueprint: def-pc-canonical-derived-tensor-hom-bijection). -/
+def schemeTensorHomUncurryComponent (X : Scheme.{uCD})
+    (P L M : CochainComplex (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ)
+    (φ : P ⟶ homComplex (R := X.sheaf) L
+      ((schemeHomKInjectiveResolution X).obj M))
+    (p q n : ℤ) (h' : q + p = n) :
+    letI := SheafOfModules.monoidalCategory X.sheaf
+    P.X p ⊗ L.X q ⟶ ((schemeHomKInjectiveResolution X).obj M).X n :=
+  letI := SheafOfModules.monoidalCategory X.sheaf
+  letI := SheafOfModules.symmetricCategory X.sheaf
+  (β_ (P.X p) (L.X q)).hom ≫
+    (SheafOfModules.tensorHomEquiv (L.X q) (P.X p)
+      (((schemeHomKInjectiveResolution X).obj M).X n)).symm
+      (φ.f p ≫ (Classical.choose (Classical.choose_spec
+        (homComplex_exists (R := X.sheaf)))) L
+          ((schemeHomKInjectiveResolution X).obj M) p q n h')
+
 /-- Naturality and the actual representative evaluation equation characterize the family.
 The chain map ψ is fixed on every total-tensor summand by currying the degree-p
 component of φ, projected to Hom(L^q,I(M)^(q+p)). The symmetry restores the order
@@ -111,13 +133,7 @@ def IsCanonicalDerivedTensorHom (X : Scheme.{uCD})
         (∀ (p q n : ℤ) (h : p + q = n) (h' : q + p = n),
           HomologicalComplex.ιMapBifunctor P L (curriedTensor _) (.up ℤ) p q n h ≫
             ψ.f n =
-          (β_ (P.X p) (L.X q)).hom ≫
-            (SheafOfModules.tensorHomEquiv (L.X q) (P.X p)
-              (((schemeHomKInjectiveResolution X).obj M).X n)).symm
-              (φ.f p ≫ (Classical.choose (Classical.choose_spec
-                (homComplex_exists (R := X.sheaf)))) L
-                  ((schemeHomKInjectiveResolution X).obj M)
-                  p q n h')) ∧
+          schemeTensorHomUncurryComponent X P L M φ p q n h') ∧
         e (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)
             (DerivedCategory.Q.map φ ≫ (schemeDerivedInternalHomResolutionIso X L M).inv) =
           pullbackTensorModelMap X P L ≫ DerivedCategory.Q.map ψ ≫
@@ -139,6 +155,11 @@ theorem exists_canonicalDerivedTensorHom (X : Scheme.{uCD})
         X.toRingedSpace.sheaf).obj (op L, M)) ≃ (K ⊗ L ⟶ M),
       IsCanonicalDerivedTensorHom X e := by sorry
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+set_option linter.style.haveILetI false in
+set_option maxHeartbeats 1000000 in
+-- The representative predicate requires extra heartbeats to elaborate the sheaf tensor instances.
 /-- Uniqueness of the family specified on representatives.
 Source: Stacks, cohomology.tex, Tag 08DJ
 (blueprint: def-pc-canonical-derived-tensor-hom-bijection).
@@ -152,7 +173,85 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
       (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
         X.toRingedSpace.sheaf).obj (op L, M)) ≃ (K ⊗ L ⟶ M)}
     (h : IsCanonicalDerivedTensorHom X e)
-    (h' : IsCanonicalDerivedTensorHom X e') : e = e' := by sorry
+    (h' : IsCanonicalDerivedTensorHom X e') : e = e' := by
+  classical
+  let C := SheafOfModules.{uCD} (moduleRings X.toRingedSpace)
+  let Q := DerivedCategory.Q.{wCD} (C := C)
+  let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+    X.toRingedSpace.sheaf
+  have := SheafOfModules.isMonoidal_W X.sheaf
+  have : (Opens.grothendieckTopology X).WEqualsLocallyBijective AddCommGrpCat.{uCD} :=
+    inferInstance
+  have : HasWeakSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{uCD} :=
+    inferInstance
+  letI := SheafOfModules.monoidalCategory X.sheaf
+  letI := schemeDerivedTensorMonoidal X
+  letI := SheafOfModules.symmetricCategory X.sheaf
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
+  have : IsGrothendieckAbelian.{uCD} C := SheafOfModules.isGrothendieckAbelian _
+  have : Limits.HasColimitsOfSize.{0, 0} C :=
+    Limits.hasColimitsOfSizeShrink.{0, 0, uCD, uCD} C
+  funext K L M
+  apply Equiv.ext
+  intro f
+  obtain ⟨P, p, hP, _, hp, _⟩ :=
+    CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage K)
+  obtain ⟨Lc, l, hL, _, hl, _⟩ :=
+    CochainComplex.exists_isKFlatResolution (R := X.sheaf) (Q.objPreimage L)
+  have : IsIso (Q.map p) := (DerivedCategory.isIso_Q_map_iff_quasiIso _ p).2 hp
+  have : IsIso (Q.map l) := (DerivedCategory.isIso_Q_map_iff_quasiIso _ l).2 hl
+  let a : Q.obj P ≅ K := asIso (Q.map p) ≪≫ Q.objObjPreimageIso K
+  let b : Q.obj Lc ≅ L := asIso (Q.map l) ≪≫ Q.objObjPreimageIso L
+  let Mc := Q.objPreimage M
+  let c : Q.obj Mc ≅ M := Q.objObjPreimageIso M
+  let I := (schemeHomKInjectiveResolution X).obj Mc
+  have : I.IsKInjective :=
+    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{uCD} C Mc
+  have : (homComplex (R := X.sheaf) Lc I).IsKInjective :=
+    CochainComplex.isKInjective_homComplex_of_isKFlat (R := X.sheaf) Lc I hL
+  let j := schemeDerivedInternalHomResolutionIso X Lc Mc
+  let g : Q.obj P ⟶ H.obj (op (Q.obj Lc), Q.obj Mc) :=
+    a.hom ≫ f ≫ H.map (b.hom.op, c.inv)
+  let q := HomotopyCategory.quotient C (.up ℤ)
+  let d := DerivedCategory.quotientCompQhIso.{wCD} C
+  obtain ⟨v, hv⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+    (q.obj P) (homComplex (R := X.sheaf) Lc I)).surjective
+      ((d.app P).hom ≫ g ≫ j.hom ≫ (d.app _).inv)
+  obtain ⟨φ, hφ⟩ := q.map_surjective v
+  have hφQ : Q.map φ = g ≫ j.hom := by
+    have hn := DerivedCategory.quotientCompQhIso_hom_naturality φ
+    rw [hφ, hv] at hn
+    change ((d.app P).hom ≫ g ≫ j.hom ≫ (d.app _).inv) ≫
+      (d.app _).hom = (d.app P).hom ≫ Q.map φ at hn
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id] at hn
+    exact ((cancel_epi (d.app P).hom).1 hn).symm
+  have hg : Q.map φ ≫ j.inv = g := by
+    rw [hφQ]
+    simp
+  obtain ⟨ψ, hψ, he⟩ := h.2 P Lc Mc hP φ
+  obtain ⟨ψ', hψ', he'⟩ := h'.2 P Lc Mc hP φ
+  have eqψ : ψ = ψ' := by
+    apply HomologicalComplex.hom_ext
+    intro n
+    apply HomologicalComplex.mapBifunctor.hom_ext
+      (K₁ := P) (K₂ := Lc) (F := curriedTensor C) (c := .up ℤ)
+    intro p q hpq
+    change p + q = n at hpq
+    exact (hψ p q n hpq (by omega)).trans (hψ' p q n hpq (by omega)).symm
+  have heq := he.trans ((congrArg (fun t ↦ pullbackTensorModelMap X P Lc ≫
+    DerivedCategory.Q.map t ≫ schemeHomResolutionInverse X Mc) eqψ).trans he'.symm)
+  change e (Q.obj P) (Q.obj Lc) (Q.obj Mc) (Q.map φ ≫ j.inv) =
+    e' (Q.obj P) (Q.obj Lc) (Q.obj Mc) (Q.map φ ≫ j.inv) at heq
+  rw [hg] at heq
+  have hn := h.1 K (Q.obj P) L (Q.obj Lc) M (Q.obj Mc) a.hom b.hom c.inv f
+  have hn' := h'.1 K (Q.obj P) L (Q.obj Lc) M (Q.obj Mc) a.hom b.hom c.inv f
+  change e (Q.obj P) (Q.obj Lc) (Q.obj Mc) g = _ at hn
+  change e' (Q.obj P) (Q.obj Lc) (Q.obj Mc) g = _ at hn'
+  rw [hn, hn'] at heq
+  have : IsIso (a.hom ⊗ₘ b.hom) := inferInstance
+  exact (cancel_epi (a.hom ⊗ₘ b.hom)).1 ((cancel_mono c.inv).1
+    (by simpa only [← Category.assoc] using heq))
 
 /-- Canonical family fixed by the representative equation.
 Source: Stacks, cohomology.tex, Tag 08DJ

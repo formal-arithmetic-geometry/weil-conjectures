@@ -39,9 +39,55 @@
   "lem-sc-derived-hom-tensor-total",
   "def-pc-derived-pullback-tensor-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Existence remains open: use K-flat representatives of both tensor inputs and the fixed K-injective replacement of the target. The componentwise tensor-Hom adjunction produces the uncurried chain maps; common resolutions give a natural family compatible with the localization tensor model map. This is the argument still required by exists_canonicalDerivedTensorHom.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-pur-hom-kflat-into-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, choose K-flat resolutions P and Lc of complex representatives of K and L using lem-pc-kflat-resolution. Their quasi-isomorphisms give isomorphisms a:QP≅K and b:QLc≅L; essential surjectivity gives c:QMc≅M. The fixed replacement I(Mc) is K-injective, and lem-pur-hom-kflat-into-kinjective makes Hom(Lc,I(Mc)) K-injective.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-hom-kflat-into-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport f:K→RHom(L,M) to g:QP→RHom(QLc,QMc), then compose with the fixed resolution-factorization isomorphism j. The K-injective localization Hom bijection (lem-weil-pbc-kinjective-hom-derived) lifts this to the homotopy category; quotient fullness lifts further to a chain map φ. Naturality of quotientCompQhIso and cancellation give Qφ;j⁻¹=g.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply each family’s representative clause to φ. Its two uncurried maps ψ and ψ′ have equal restriction to every tensor summand, since both restrictions equal schemeTensorHomUncurryComponent. HomologicalComplex.mapBifunctor.hom_ext followed by HomologicalComplex.hom_ext gives ψ=ψ′. Their coordinate equations therefore give equal values at g.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the two naturality clauses at a.hom, b.hom and c.inv to identify the equal coordinate values with (a.hom⊗b.hom);e(f);c.inv and (a.hom⊗b.hom);e′(f);c.inv. Cancel the tensor of the two isomorphisms and c.inv. Function and Equiv extensionality give e=e′.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DJ; uniqueness formalized using sites-cohomology Tag 0A96 and Mathlib KInjective.Qh_map_bijective. Existence remains open."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -109,6 +155,7 @@
    "AlgebraicGeometry.schemeHomKInjectiveResolution",
    "AlgebraicGeometry.schemeHomResolutionInverse",
    "AlgebraicGeometry.schemeDerivedInternalHomResolutionIso",
+   "AlgebraicGeometry.schemeTensorHomUncurryComponent",
    "AlgebraicGeometry.IsCanonicalDerivedTensorHom",
    "AlgebraicGeometry.exists_canonicalDerivedTensorHom",
    "AlgebraicGeometry.IsCanonicalDerivedTensorHom.unique",
@@ -138,5 +185,15 @@
   "group": "V1",
   "result": "pass",
   "note": "independent Codex review: Matched the item’s hypotheses, objects, c-map, and both explicit A-linear composite factors to the node; verified the pinned tensor–Hom family replaces prior arbitrary choices and all four modules compile together cleanly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6e677",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T194110-L-454887",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered file, DAG node, change record, report, compile result, and all five direct importers match the stage-3 review brief."
  }
 }
