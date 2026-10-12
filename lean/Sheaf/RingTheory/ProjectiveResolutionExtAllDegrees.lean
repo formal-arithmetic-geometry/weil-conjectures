@@ -2,6 +2,7 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+import Sheaf.RingTheory.ProjectiveResolutionExtDegree
 @[expose] public section
 universe u v
 open CategoryTheory
@@ -22,5 +23,18 @@ theorem projective_resolution_ext_all_degrees
       ∀ (Y : ModuleCat.{max u v} R) (i : ℕ), n + 1 ≤ i →
         Subsingleton
           (@Abelian.Ext _ _ _ (HasExt.standard (ModuleCat.{max u v} R)) X Y i)) := by
-  sorry
+  constructor
+  · intro h Y i hi
+    have hle : HasProjectiveResolutionLE X (i - 1) := by
+      obtain ⟨P, hP⟩ := h
+      refine ⟨P, fun j hj => hP j (by omega)⟩
+    have hdeg := (projective_resolution_ext_degree X (i - 1)).mp hle Y
+    have hi0 : 0 < i := by omega
+    have heq : i - 1 + 1 = i := by omega
+    rw [← heq]
+    exact hdeg
+  · intro h
+    apply (projective_resolution_ext_degree X n).mpr
+    intro Y
+    exact h Y (n + 1) (by omega)
 end ModuleCat
