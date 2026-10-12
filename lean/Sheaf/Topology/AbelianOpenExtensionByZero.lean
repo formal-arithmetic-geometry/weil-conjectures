@@ -110,7 +110,29 @@ theorem abelianOpenCounitApp_naturality {X : TopCat.{u}} (U : Opens X)
     ((abelianOpenExtensionPresheaf U).obj (abelianOpenRestriction U F)).map a ≫
         abelianOpenCounitApp U F W =
       abelianOpenCounitApp U F V ≫ F.obj.map a := by
-  sorry
+  classical
+  let : DecidableEq (V.unop ⟶ U) := Classical.decEq _
+  let : DecidableEq (W.unop ⟶ U) := Classical.decEq _
+  apply AddCommGrpCat.hom_ext
+  apply DirectSum.addHom_ext
+  intro φ x
+  simp only [abelianOpenExtensionPresheaf, Functor.comp_obj,
+    siteExtensionByZeroPresheaf, siteExtensionByZeroPresheafObj,
+    siteExtensionByZeroRestrict, abelianOpenCounitApp, AddCommGrpCat.hom_comp,
+    AddCommGrpCat.hom_ofHom, AddMonoidHom.comp_apply]
+  erw [DirectSum.toAddMonoid_of, AddMonoidHom.comp_apply, DirectSum.toAddMonoid_of,
+    DirectSum.toAddMonoid_of]
+  -- The two paths are equal already in the thin category of opens.
+  let b :
+      op (U.isOpenEmbedding.functor.obj ((Opens.map U.inclusion').obj V.unop)) ⟶
+        op (U.isOpenEmbedding.functor.obj ((Opens.map U.inclusion').obj W.unop)) :=
+    (U.isOpenEmbedding.functor.map ((Opens.map U.inclusion').map a.unop)).op
+  have eV := congrArg op (openImage_preimage_eq U V.unop φ.le)
+  have eW := congrArg op (openImage_preimage_eq U W.unop (a.unop ≫ φ).le)
+  have h : b ≫ eqToHom eW = eqToHom eV ≫ a := Subsingleton.elim _ _
+  have h' := congrArg (fun f ↦ F.obj.map f) h
+  simp only [Functor.map_comp, eqToHom_map] at h'
+  exact congrArg (fun f ↦ f.hom x) h'
 
 /-- The presheaf map inducing the counit after sheafification.
 Source: Stacks, Lemma 00A5 (blueprint: def-sc-abelian-open-extension-by-zero). -/

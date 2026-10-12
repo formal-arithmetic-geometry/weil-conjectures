@@ -5811,3 +5811,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:49 L: returned deliver/J1/Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit (reviewer RETURN: (reviewer X-d74a6, head d74a65977) C1/G1: In dag/nodes/sec-curve-estimates/lem-weil-pbc-cohomology-filtered-colimit.json)
 - 01:50 L: merged deliver/P1/Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections (stage 3; reviewer PASS; after a return; landing 20261012T014912-L-898850 (interface); modules 3; new nodes 2)
 - 01:51 L: merged deliver/R1/Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1 (stage 3; reviewer PASS; first push; landing 20261012T015045-L-906585 (interface); modules 2; new nodes 1)
+- 01:51 L: merged deliver/N1/Sheaf.Topology.AbelianOpenExtensionByZero (stage 3; reviewer PASS; first push; landing 20261012T015140-L-913131 (proof); modules 1; new nodes 0)
