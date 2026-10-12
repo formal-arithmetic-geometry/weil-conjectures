@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-strict-henselization-base-change-cone",
+ "kind": "statement",
+ "title": "Explicit limiting cone for the strict-henselization fibre product",
+ "statement": "Let $f:X\\to Y$ be any morphism of schemes, $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ a geometric point [def-weil-geometric-point], and $\\mathcal J$ the small representative category of affine pointed etale neighbourhoods from [def-weil-pbc-strict-henselization-limit]. Let $A:\\mathcal J\\to Y_{\\Et}$ forget the pointing, and put $B_j=A_j\\times_YX$ [def-pc-fibre-product]. Let $q:Y^{\\mathrm{sh}}\\to Y$ be [def-weil-pbc-strict-henselization-structural-map]. There is a limit cone of the underlying schemes $B_j$, with vertex $Y^{\\mathrm{sh}}\\times_YX$, whose leg $\\pi_j$ has second projection to $X$ equal to the second projection $p:Y^{\\mathrm{sh}}\\times_YX\\to X$, and whose first projection to $A_j$ equals the first projection to $Y^{\\mathrm{sh}}$ followed by its canonical leg $c_j$ (the spectrum cone leg followed by $\\operatorname{Spec}\\Gamma(A_j)\\cong A_j$).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 03Q9 (theorem-higher-direct-images), proof in degree zero; Theorem Tag 09YQ (theorem-colimit), and Tag 03S2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the double-opposite equivalence to reindex the canonical spectrum limit from [def-weil-pbc-strict-henselization-limit]. The Gamma-Spec adjunction unit is a componentwise isomorphism on the affine stages. Postcomposing the cone by its inverse transports the limit to the diagram A. The inverse component is Spec.map (GammaSpecIso _).inv.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By [def-weil-pbc-strict-henselization-structural-map], every leg followed by the stage structure map is q. Define the new legs by the two projections of [def-pc-fibre-product]. Naturality is proved by checking the two projections and using original cone naturality. Pullback pasting identifies each leg square over the original cone as a pullback.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-structural-map",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Cofilteredness from [def-weil-pbc-strict-henselization-limit] gives connectedness. Mathlib CategoryTheory.Limits.isLimitOfIsPullbackOfIsConnected (Limits/Shapes/Pullback/Connected.lean:30) applies to the original limit and the cartesian leg squares, proving the new cone is a limit. The two leg formulas are the defining pullback.lift projection equations.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 03Q9 (theorem-higher-direct-images), proof in degree zero; Theorem Tag 09YQ (theorem-colimit), and Tag 03S2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cofiltered limit of quasi compact quasi separated schemes with affine transition maps computes sections of the inverse image of an etale sheaf of sets as a colimit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections of pullback etale sheaf of sets cofiltered limit qcqs schemes affine transitions",
+   "results": "exists_appTop_π_eq_of_isLimit, exists_appTop_π_eq_of_isAffine_of_isLimit and related AffineTransitionLimit structure-sheaf statements; no sets-valued etale sheaf theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPullback, IsLimit",
+   "results": "0 hits; unknown identifier 'IsPullback'",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "isLimitOfIsPullbackOfIsConnected|strictHenselizationCone",
+   "results": "Mathlib/CategoryTheory/Limits/Shapes/Pullback/Connected.lean:30 isLimitOfIsPullbackOfIsConnected; AffineTransitionLimit.lean:236 invocation. This proves the geometric base-change limit, not section continuity.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization",
+  "group": "V2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Within the Tag 03Q9 calculation used for Tag 0A0C: the displayed identity X times_Y Spec(O^sh) = lim_V X times_Y V and its projection maps, before applying section continuity.",
+   "via": [
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationBaseChangeCone",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationBaseChangeCone.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationBaseChangeCone_exists",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.strictHenselizationEtaleDiagram",
+   "AlgebraicGeometry.Scheme.strictHenselizationBaseChangeCone_exists"
+  ],
+  "statement": "theorem strictHenselizationBaseChangeCone_exists {X Y : Scheme.{v}} (f : X ⟶ Y) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) : let B := strictHenselizationEtaleDiagram y ⋙ MorphismProperty.Over.pullback @Etale ⊤ f ∃ π : (Functor.const _).obj (pullback (strictHenselizationStructuralMap y) f) ⟶ (B ⋙ Etale.forget X ⋙ Over.forget X), Nonempty (IsLimit (Cone.mk _ π)) ∧ (∀ j, π.app j ≫ (B.obj j).hom = pullback.snd (strictHenselizationStructuralMap y) f) ∧ (∀ j, π.app j ≫ pullback.fst ((strictHenselizationEtaleDiagram y).obj j).hom f = pullback.fst (strictHenselizationStructuralMap y) f ≫ (strictHenselizationCone y).π.app (op (op j)) ≫ Spec.map (ΓSpecIso ((equivSmallModel.{v} (strictHenselizationNeighbourhoods y)).inverse.obj j).1.left.unop).inv)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T044758-L-2042538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T044758-L-2042538",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,12 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import Sheaf.CategoryTheory.ExistsDirectedReindexing
+import Sheaf.AlgebraicGeometry.CofilteredEtaleLimitSections
+import Sheaf.AlgebraicGeometry.StrictHenselizationBaseChangeCone
 
 /-! # Stalk of a direct image over the strict henselization
 
@@ -48,7 +44,9 @@ theorem strictHenselizationBaseChange_condition
         ((AffineEtale.Spec Y).obj
           ((equivSmallModel.{v} (strictHenselizationNeighbourhoods y)).inverse.obj j).1).hom =
       pullback.snd (strictHenselizationStructuralMap y) f ≫ f := by
-  sorry
+  rw [Category.assoc, Category.assoc]
+  rw [Classical.choose_spec (exists_strictHenselizationStructuralMap y) j]
+  exact pullback.condition
 
 /-- The map X^sh → V ×_Y X with components c_V ∘ f^sh and p, for a representative affine
 pointed neighbourhood `j`.
@@ -93,6 +91,7 @@ namespace AlgebraicGeometry
 
 open Scheme
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Every direct-image germ has an affine representative, and the canonical comparison
 with sections on the strict henselization pullback is the unique map with the unit and
 restriction formula, and is bijective.
@@ -194,6 +193,103 @@ theorem sets_pushforward_stalk_strictHenselization
                     ((equivSmallModel.{v} (strictHenselizationNeighbourhoods y)).inverse.obj j).1)))
                 s)) →
         Θ' = Θ := by
-  sorry
+  classical
+  let P := (((MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous
+    (Type (v + 1)) (Y.smallGrothendieckTopology @Etale)
+    (X.smallGrothendieckTopology @Etale)).obj H).obj
+  let F := (equivSmallModel.{v} (strictHenselizationNeighbourhoods y)).inverse ⋙
+    strictHenselizationAffineInclusion y ⋙ ObjectProperty.ι
+      (fun n : (pointSmallEtale y).fiber.Elements ↦ IsAffine n.1.left)
+  let : F.Initial := (strictHenselization_properties y).1
+  let B := strictHenselizationEtaleDiagram y ⋙
+    MorphismProperty.Over.pullback @Etale ⊤ f
+  let stalkCocone := ((pointSmallEtale y).presheafFiberCocone P).whisker F.op
+  have hcStalk : IsColimit stalkCocone :=
+    (Functor.Final.isColimitWhiskerEquiv F.op _).symm
+      ((pointSmallEtale y).isColimitPresheafFiberCocone P)
+  have hcStalk' : IsColimit (show Cocone (B.op ⋙ H.obj) from stalkCocone) := hcStalk
+  obtain ⟨π, hπ, hp, hf⟩ := strictHenselizationBaseChangeCone_exists f y
+  let c := Cone.mk _ π
+  let := (strictHenselization_properties y).2.1
+  have hAff (j : SmallModel.{v} (strictHenselizationNeighbourhoods y)) :
+      IsAffine ((strictHenselizationEtaleDiagram y).obj j).left := by
+    change IsAffine (Spec _)
+    infer_instance
+  let hComp (j : SmallModel.{v} (strictHenselizationNeighbourhoods y)) :
+      CompactSpace (B.obj j).left := by
+    let : IsAffine ((strictHenselizationEtaleDiagram y).obj j).left := hAff j
+    let : CompactSpace ((strictHenselizationEtaleDiagram y).obj j).left :=
+      inferInstance
+    exact QuasiCompact.compactSpace_of_compactSpace
+      (Y := ((strictHenselizationEtaleDiagram y).obj j).left)
+      (pullback.fst ((strictHenselizationEtaleDiagram y).obj j).hom f)
+  let hQS (j : SmallModel.{v} (strictHenselizationNeighbourhoods y)) :
+      QuasiSeparatedSpace (B.obj j).left := by
+    let : IsAffine ((strictHenselizationEtaleDiagram y).obj j).left := hAff j
+    let : QuasiSeparatedSpace ((strictHenselizationEtaleDiagram y).obj j).left :=
+      inferInstance
+    exact quasiSeparatedSpace_of_quasiSeparated
+      (Y := ((strictHenselizationEtaleDiagram y).obj j).left)
+      (pullback.fst ((strictHenselizationEtaleDiagram y).obj j).hom f)
+  let hTrans {j k : SmallModel.{v} (strictHenselizationNeighbourhoods y)}
+      (a : j ⟶ k) : IsAffineHom (B.map a).left := by
+    let : IsAffine ((strictHenselizationEtaleDiagram y).obj j).left := hAff j
+    let : IsAffine ((strictHenselizationEtaleDiagram y).obj k).left := hAff k
+    change IsAffineHom (pullback.lift _ _ _)
+    exact MorphismProperty.pullbackLift_fst_snd
+      (P := @IsAffineHom) f
+        (MorphismProperty.Over.w ((strictHenselizationEtaleDiagram y).map a)).symm
+        (isAffineHom_of_isAffine
+          (X := ((strictHenselizationEtaleDiagram y).obj j).left)
+          (Y := ((strictHenselizationEtaleDiagram y).obj k).left) _)
+  have hc := cofilteredLimitSections B c
+    (pullback.snd (strictHenselizationStructuralMap y) f) hp H hπ.some
+  let e := hcStalk'.coconePointUniqueUpToIso hc.some
+  have he (j : SmallModel.{v} (strictHenselizationNeighbourhoods y)) :
+      stalkCocone.ι.app (op j) ≫ e.hom =
+        (limitSectionCocone B c (pullback.snd (strictHenselizationStructuralMap y) f)
+          hp H).ι.app (op j) :=
+    hcStalk'.comp_coconePointUniqueUpToIso_hom hc.some (op j)
+  have hσ (j : SmallModel.{v} (strictHenselizationNeighbourhoods y)) :
+      limitSectionMap B c (pullback.snd (strictHenselizationStructuralMap y) f) hp j =
+        strictHenselizationSectionMap f y j := by
+    apply MorphismProperty.Over.Hom.ext
+    change pullback.lift _ _ _ = pullback.lift _ _ _
+    apply pullback.hom_ext
+    · simp only [pullback.lift_fst]
+      change π.app j = strictHenselizationBaseChangeMap f y j
+      unfold strictHenselizationBaseChangeMap
+      apply pullback.hom_ext
+      · exact (hf j).trans (pullback.lift_fst _ _ _).symm
+      · exact (hp j).trans (pullback.lift_snd _ _ _).symm
+    · simp only [pullback.lift_snd]
+      rfl
+  have hFormula (j : SmallModel.{v} (strictHenselizationNeighbourhoods y))
+      (s : H.obj.obj (op (B.obj j))) :
+      e.hom (stalkCocone.ι.app (op j) s) =
+        ((etaleSetPullback (pullback.snd (strictHenselizationStructuralMap y) f)).obj
+          H).obj.map (strictHenselizationSectionMap f y j).op
+          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+            (MorphismProperty.Over.pullback @Etale ⊤
+              (pullback.snd (strictHenselizationStructuralMap y) f))
+            (Type (v + 1)) (X.smallGrothendieckTopology @Etale)
+            ((pullback (strictHenselizationStructuralMap y) f).smallGrothendieckTopology
+              @Etale)).unit.app H).hom.app (op (B.obj j)) s) := by
+    have hs := congrArg (fun a ↦ a s) (he j)
+    change e.hom (stalkCocone.ι.app (op j) s) =
+      ((etaleSetPullback (pullback.snd (strictHenselizationStructuralMap y) f)).obj
+        H).obj.map (limitSectionMap B c _ hp j).op _ at hs
+    rw [hσ] at hs
+    exact hs
+  refine ⟨?_, e.hom, hFormula, ConcreteCategory.bijective_of_isIso e.hom, ?_⟩
+  · intro t
+    obtain ⟨j, s, hs⟩ := Types.jointly_surjective_of_isColimit hcStalk' t
+    exact ⟨(strictHenselizationAffineInclusion y).obj
+      ((equivSmallModel.{v} (strictHenselizationNeighbourhoods y)).inverse.obj j.unop),
+      s, hs⟩
+  · intro Θ' hΘ'
+    funext t
+    obtain ⟨j, s, rfl⟩ := Types.jointly_surjective_of_isColimit hcStalk' t
+    exact (hΘ' j.unop s).trans (hFormula j.unop s).symm
 
 end AlgebraicGeometry
