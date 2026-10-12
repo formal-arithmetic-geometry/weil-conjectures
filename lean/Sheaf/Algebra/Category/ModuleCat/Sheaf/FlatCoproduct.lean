@@ -7,8 +7,8 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-!
@@ -33,17 +33,17 @@ Source: Stacks Project, Modules on Sites, Lemma 18.28.5, Tag 03EU, clause (2)
 (blueprint: lem-pc-sites-modules-coproduct-flat).
 
 Proof:
-1. Use the chosen small site of `def-weil-size-convention`. The category of sheaves of
-   modules is Grothendieck abelian by `prop-pur-kinjective-resolutions-exist`, and its
-   sheaf tensor product is symmetric monoidal closed by `lem-pc-sheaf-modules-tensor-closed`.
-   For each summand, `def-pc-flat-sheaf-modules` gives exactness of tensoring on the right.
-   Symmetry transports this to tensoring on the left; hence each summand satisfies the
-   abstract flatness condition used in `lem-weil-pbc-flat-coproduct`.
-2. Apply `lem-weil-pbc-flat-coproduct`: closedness makes tensor commute with coproducts,
-   and coproducts are exact in this Grothendieck abelian category. Tensoring on the left
-   with the coproduct preserves finite limits. Symmetry gives the same on the right;
-   closedness also gives right exactness. Thus tensoring on the right with the coproduct
-   is exact, precisely `def-pc-flat-sheaf-modules`. -/
+1. The site is already small by the universe hypotheses. The source theorem
+   `SheafOfModules.isGrothendieckAbelian` supplies the Grothendieck abelian structure,
+   without requiring the generator description or K-injective resolutions. Install
+   `monoidalCategory R`, `symmetricCategory R`, and the source's `monoidalClosed`.
+2. For each summand, `IsFlat` supplies finite-limit preservation by `tensorRight`.
+   Transport this across `BraidedCategory.tensorLeftIsoTensorRight` to `tensorLeft`.
+   In the closed category, `ObjectProperty.flat_iff_preservesFiniteLimits` upgrades
+   this to abstract flatness, since the tensor functors preserve colimits.
+3. Apply `ObjectProperty.flat_coproduct` and take its `tensorRight` exactness clause.
+   This is definitionally `IsFlat` of the coproduct. The abstract theorem allows an
+   arbitrary index type, including the empty type. -/
 theorem isFlat_coproduct
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
@@ -51,6 +51,19 @@ theorem isFlat_coproduct
     (M : B → SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
     (hflat : ∀ b : B, IsFlat (M b)) : IsFlat (∐ M) := by
-  sorry
+  let := monoidalCategory R
+  let := symmetricCategory R
+  have := isGrothendieckAbelian
+    ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
+  let := monoidalClosed (R := R)
+  change exactFunctor _ _ (MonoidalCategory.tensorRight (∐ M))
+  apply ObjectProperty.flat.tensorRight
+  apply ObjectProperty.flat_coproduct M
+  intro b
+  have hb : exactFunctor _ _ (MonoidalCategory.tensorRight (M b)) := hflat b
+  have : PreservesFiniteLimits (MonoidalCategory.tensorRight (M b)) := hb.1
+  apply (ObjectProperty.flat_iff_preservesFiniteLimits (M b)).2
+  exact preservesFiniteLimits_of_natIso
+    (BraidedCategory.tensorLeftIsoTensorRight (M b)).symm
 
 end SheafOfModules
