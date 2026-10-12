@@ -7588,7 +7588,6 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:50 L: merged deliver/E3/Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclic (stage 3; reviewer PASS; first push; landing 20261012T115005-L-875809 (interface); batch 20261012T114925; modules 2; new nodes 1)
 - 11:50 L: merged deliver/F3/Sheaf.Paper.QCohAcyclicDerivedSectionsComparison (stage 3; reviewer PASS; first push; landing 20261012T115021-L-877059 (interface); batch 20261012T114925; modules 3; new nodes 2)
 - 11:50 L: merged deliver/G1/Sheaf.CategoryTheory.RightDerivedPlusCube (stage 3; reviewer PASS; first push; landing 20261012T115037-L-878199 (proof); batch 20261012T114925; modules 1; new nodes 0)
-- 11:50 L: merged deliver/G3/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (stage 3; reviewer PASS; first push; landing 20261012T115053-L-879077 (interface); batch 20261012T114925; modules 2; new nodes 2)
 - 11:51 L: merged deliver/K3/Sheaf.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZero (stage 3; reviewer PASS; first push; landing 20261012T115125-L-881367 (interface); batch 20261012T114925; modules 3; new nodes 2)
 - 11:51 L: merged deliver/Q3/Sheaf.Algebra.Homology.MixedTotalTensor (stage 3; reviewer PASS; first push; landing 20261012T115156-L-883530 (proof); batch 20261012T114925; modules 1; new nodes 0)
 - 11:52 L: returned deliver/P2/Sheaf.AlgebraicGeometry.AffineOverLimitInclusion (reviewer RETURN: (reviewer X-c1b8d, head c1b8d8ff9) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Af)
@@ -7603,3 +7602,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:56 L: returned deliver/N3/Sheaf.AlgebraicGeometry.EtaleFreeSheafDerivedSections (reviewer RETURN: (reviewer X-8f30d, head 8f30d9b30) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Et)
 - 11:57 L: returned deliver/J3/Sheaf.AlgebraicGeometry.EtaleSetTerminalCone (reviewer RETURN: (reviewer X-ca520, head ca520e4ed) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Et)
 - 11:58 L: returned deliver/N3/Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalization (reviewer RETURN: (reviewer X-3cb22, head 3cb2247bf) 6: Add dag/nodes/sec-proper-base-change/lem-weil-pbc-finite-etale-trace-localization.)
+
+- 19:58 L: (the batch landing, head 02772da77) the global build refused the delivery; it was taken out of the library again (landing 20261012T115053-L-879077 reverted) and the item is yours t
