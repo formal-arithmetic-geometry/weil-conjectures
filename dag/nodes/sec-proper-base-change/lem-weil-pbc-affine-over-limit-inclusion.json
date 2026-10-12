@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Use the relative-spectrum anti-equivalence to send the limiting cone to a colimit of quasi-coherent algebras. Apply the algebra-colimit theorem in all algebra sheaves; its vertex is quasi-coherent, so full-subcategory reflection gives a colimit in quasi-coherent algebras. Uniqueness of colimits identifies it with the image of the given cone, compatibly with every leg. Sections over an affine open U of S are consequently the colimit of the stage section rings.",
+   "text": "Send the given limiting cone through the relative-spectrum anti-equivalence E to a colimit cocone of quasi-coherent algebras. The directed algebra-colimit theorem provides an ambient algebra-sheaf colimit with quasi-coherent vertex. The full-subcategory inclusion creates this colimit and hence preserves the colimit cocone supplied by E.",
    "uses": [
     "lem-weil-pbc-affine-morphism-relative-spec",
     "lem-weil-pbc-quasi-coherent-algebra-colimit"
@@ -22,31 +22,36 @@
    "elementary": false
   },
   {
-   "text": "The relative-spectrum charts and their morphism compatibility identify the restricted cone over every affine U with the spectrum of that ring colimit. The spectrum-colimit theorem gives its universal property for arbitrary test schemes, including tests not affine over U.",
+   "text": "Construct the contravariant structure-algebra functor K on all of Over S by f maps to f_* O_X, with section maps h.appLE. The object and morphism clauses for E give a natural isomorphism from E followed by the algebra inclusion to the affine-over inclusion followed contravariantly by K. Transport the preceding colimit along that isomorphism.",
    "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-spec-colimit-limit"
+    "lem-weil-pbc-affine-morphism-relative-spec"
    ],
    "elementary": false
   },
   {
-   "text": "For any cone in schemes over S with vertex T, restrict along its S-map to inverse images of affine base opens U. The local spectrum limits give unique factorizations. Choose any index j: the factorization followed by its j-th projection and structure map to U equals the given test-scheme map to U. Hence it is over U and restricts to inverse images of smaller base opens; nonemptiness supplies j. For two affine base opens U and V, cover their intersection by affine opens W; both factorizations restrict over W to the unique factorization. Thus they agree on the overlap, without assuming the intersection itself affine. Glue the local maps to a morphism T to the given vertex. The map is over S and has the required projection composites, since both identities hold on the cover. A second factorization agrees on every open by local uniqueness, hence globally by the gluing uniqueness theorem.",
+   "text": "For any test scheme X over S and an affine Y over S, prove that K induces a bijection Hom_S(X,Y) to Hom_Alg(K(Y),K(X)). Injectivity is checked on inverse images of affine base opens using the Gamma-Spec adjunction. For surjectivity apply affine_algebra_local_maps to obtain compatible maps, glue them over the inverse-image cover of X, prove the glued map is over S by cover extensionality, and identify its algebra map on the affine basis.",
    "uses": [
+    "lem-weil-pbc-affine-algebra-local-maps",
     "lem-weil-pbc-scheme-morphism-gluing"
    ],
    "elementary": false
+  },
+  {
+   "text": "An arbitrary cone in Over S gives an algebra cocone by K. Its unique algebra-colimit factorization corresponds through the Hom bijection to a map into the original cone vertex. Contravariant functoriality and injectivity at each affine stage prove every projection identity. Injectivity at the affine cone vertex and uniqueness of the algebra-colimit factorization prove uniqueness of this map.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-affine-algebra-local-maps",
   "lem-weil-pbc-affine-morphism-relative-spec",
   "lem-weil-pbc-quasi-coherent-algebra-colimit",
-  "lem-weil-pbc-spec-colimit-limit",
   "lem-weil-pbc-scheme-morphism-gluing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "lean/Sheaf/AlgebraicGeometry/AffineOverLimitInclusion.lean",
-  "place": "Docstring argument expanding the universal-property step of Stacks 01YX; second reader checked https://stacks.math.columbia.edu/tag/01YX and https://stacks.math.columbia.edu/tag/01YW"
+  "place": "E2 proof via the structure-algebra Hom bijection and ambient directed colimits; Stacks 01YX, 01SA and 01LT. Local gluing adapts the proved private helper of AffineStructureAlgebraFullyFaithful; injectivity proves local extensionality directly without duplicating affine_over_ext."
  },
  "mathlib_searches": [
   {
@@ -146,10 +151,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T070542-L-3473369",
-  "kind": "interface",
+  "landing": "20261012T144102-L-2091864",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
