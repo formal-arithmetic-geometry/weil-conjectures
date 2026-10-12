@@ -8,7 +8,9 @@ module
 public import Sheaf.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.EssentialFiniteness
+import Sheaf.FieldTheory.SmoothFractionFieldLocalizations
 import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
+import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 
 /-!
 # Finitely generated separable extensions and smooth subalgebras
@@ -45,6 +47,8 @@ theorem fg_separable_extension_is_filtered_colimit_smooth
         (∀ i, (A i).FG) ∧
         Directed (· ≤ ·) A ∧
         ∀ x : L, ∃ i, x ∈ A i := by
-  sorry
+  obtain ⟨B, hBsm, hfrac⟩ := exists_smooth_subalgebra_fraction_field
+    (IntermediateField.fg_top_iff.mpr inferInstance) hsep
+  exact exists_smooth_fg_localization_family B hBsm hfrac
 
 end FieldTheory

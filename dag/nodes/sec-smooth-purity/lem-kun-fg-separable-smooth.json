@@ -21,38 +21,22 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "(A smooth subalgebra with fraction field $L$.) Read \"separable\" in the sense of [def-weil-pbc-separable-field-extension] and \"smooth\" in the sense of [def-weil-pbc-smooth-ring-map]. Since $L/K$ is finitely generated and separable, [lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra] gives a $K$-subalgebra $B\\subseteq L$ such that $K\\to B$ is smooth and every element of $L$ is $b/b'$ with $b,b'\\in B$, $b'\\neq0$; $B$ is a domain, being a subring of the field $L$.",
+   "text": "Convert EssFiniteType K L to finite field generation with IntermediateField.fg_top_iff and apply FieldTheory.exists_smooth_subalgebra_fraction_field. Apply the proved localization-family theorem to the resulting smooth subalgebra B with fraction field L.",
    "uses": [
     "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
-    "def-weil-pbc-separable-field-extension",
-    "def-weil-pbc-smooth-ring-map"
+    "new-smooth-fraction-field-localizations"
    ],
    "elementary": false
-  },
-  {
-   "text": "(The localizations are smooth subalgebras.) For $0\\neq f\\in B$ let $B[1/f]=\\{bf^{-m}:b\\in B,m\\ge0\\}\\subseteq L$. The map $B_f\\to L$, $b/f^m\\mapsto bf^{-m}$, from the localization of $B$ at $\\{1,f,f^2,\\dots\\}$ is well defined ($f$ is a unit of $L$), injective ($bf^{-m}=0$ forces $b=0$) with image $B[1/f]$, so $B_f\\cong B[1/f]$ as $K$-algebras. By [lem-weil-pbc-smooth-ring-map-principal-localization] applied to the smooth map $K\\to B$ and $g=f$, $K\\to B_f$ is smooth, hence so is $K\\to B[1/f]$ (the conditions of [def-weil-pbc-smooth-ring-map] are carried along a $K$-algebra isomorphism); in particular $B[1/f]$ is of finite presentation, so a finitely generated smooth $K$-subalgebra of $L$.",
-   "uses": [
-    "lem-weil-pbc-smooth-ring-map-principal-localization",
-    "def-weil-pbc-smooth-ring-map"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "(Filtered colimit.) The subalgebras $B[1/f]$, $0\\neq f\\in B$, ordered by inclusion, form a directed family: $B[1/f]$ and $B[1/g]$ lie in $B[1/fg]$, and $fg\\neq0$ since $B$ is a domain; the family is nonempty ($B=B[1/1]$). Its union is $L$, since each $b/b'\\in L$ lies in $B[1/b']$. A directed union of subalgebras is their filtered colimit with the inclusions as transition maps, so $L=\\operatorname{colim}_{f}B[1/f]$ is a filtered colimit of finitely generated smooth $K$-subalgebras of $L$ (Step 2) with inclusions as transition maps.",
-   "uses": [],
-   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
-  "def-weil-pbc-separable-field-extension",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-smooth-ring-map-principal-localization"
+  "new-smooth-fraction-field-localizations"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma 10.158.11, Tag 07BV (separable case via Lemma 10.158.10, Tag 07BU)"
+  "place": "Tag 07BV, lemma-colimit-syntomic, separable case via Tag 037X, lemma-localization-smooth-separable"
  },
  "mathlib_searches": [
   {
@@ -180,5 +164,15 @@
   "group": "C1",
   "result": "fix",
   "note": "fields K L, Algebra K L; separable = IsSeparableExtension (Tag 030O); fg as field = EssFiniteType (fg_top_iff); ι : Type v nonempty; each A i smooth and FG; directed by inclusion; union = L"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T184340-L-4018859",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

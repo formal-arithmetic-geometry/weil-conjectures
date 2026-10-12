@@ -1,0 +1,118 @@
+{
+ "id": "new-smooth-fraction-field-localizations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-fg-separable-smooth",
+   "place": "proof decomposition",
+   "via": [
+    "lem-kun-fg-separable-smooth"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Localization family of a smooth fraction-field subalgebra",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BV (lemma-colimit-syntomic), separable-case proof, using Tag 037X (lemma-localization-smooth-separable) and Tag 00T3 (lemma-localize-smooth)"
+ },
+ "stmt_deps": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.FgSeparableSmooth",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.SmoothFractionFieldLocalizations",
+  "file": "lean/Sheaf/FieldTheory/SmoothFractionFieldLocalizations.lean",
+  "declaration": "FieldTheory.exists_smooth_fg_localization_family",
+  "statement": "theorem exists_smooth_fg_localization_family\n    {K : Type u} {L : Type v} [Field K] [Field L] [Algebra K L]\n    (B : Subalgebra K L) (hBsm : Algebra.Smooth K B)\n    (hfrac : IsFractionRing B L) :\n    ∃ (ι : Type v) (A : ι → Subalgebra K L),\n      Nonempty ι ∧\n        (∀ i, Algebra.Smooth K (A i)) ∧\n        (∀ i, (A i).FG) ∧\n        Directed (· ≤ ·) A ∧\n        ∀ x : L, ∃ i, x ∈ A i",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "statement": "Let K and L be fields with an algebra structure K → L, and let B be a smooth K-subalgebra of L such that L is its fraction field. There is a nonempty Type v-indexed family A of smooth finitely generated K-subalgebras of L, directed by inclusion, and every element of L belongs to some A i. Here L : Type v.",
+ "proof": [
+  {
+   "text": "Index by the nonzero elements f of B. The inclusion B → L extends to φ_f : B[1/f] → L. It is injective because B is a subalgebra of the field L and f is nonzero. Define A_f as its image and identify B[1/f] with A_f by the induced algebra equivalence.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Principal localization is smooth over B; composition with the given smooth K-algebra structure makes it smooth over K. Transport along the algebra equivalence. Smooth algebras have finite presentation and hence finite type, so each A_f is finitely generated.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-principal-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An element z lies in A_f precisely when z f^n = a for some n ≥ 0 and a ∈ B: use the localization denominator representation in one direction, and the image of a times the nth power of the inverse of f in the other. The index f=1 gives nonemptiness. For f,g ≠ 0, the index fg is nonzero; z f^n=a implies z(fg)^n=ag^n, and z g^n=a implies z(fg)^n=af^n. Thus A_f and A_g are contained in A_fg. Finally write z=a/b with a,b∈B and b≠0 using the fraction-field property. Then zb=a and z∈A_b, giving coverage.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-ring-map-principal-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BV, separable case, with principal localization as in Tag 00T3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "fraction field directed union principal localizations smooth subalgebra",
+   "results": "Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, Algebra.Smooth.of_isLocalization_Away, Algebra.IsStandardSmooth.localization_away",
+   "date": "2026-10-12",
+   "verdict": "No exact localization-family theorem; the principal-localization smoothness and finite-type tools are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, Algebra.Smooth",
+   "results": "Algebra.Smooth.of_isLocalization_Away",
+   "date": "2026-10-12",
+   "verdict": "No exact localization-family theorem; the principal-localization smoothness and finite-type tools are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fraction field of a smooth domain is a directed union of smooth principal localizations",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "directed.*localization|localization.*directed|Away.surj|of_isLocalization_Away|fg_iff_finiteType",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/LocalIso.lean, Mathlib/RingTheory/Flat/LocallyFree.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/FiniteType.lean, Mathlib/RingTheory/FiniteType.lean, Mathlib/RingTheory/Unramified/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact localization-family theorem; the principal-localization smoothness and finite-type tools are used in the proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T184340-L-4018859",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T184340-L-4018859",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
