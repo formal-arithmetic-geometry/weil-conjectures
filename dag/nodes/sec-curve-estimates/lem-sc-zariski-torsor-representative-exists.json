@@ -15,39 +15,39 @@
  ],
  "proof": [
   {
-   "text": "Form the free abelian sheaf Z[T] by sheafifying sectionwise finite integer sums. Its augmentation sends every generator to 1 in the constant integer sheaf. It is locally surjective since T has local sections. If t0 is a local section of T, the augmentation kernel sends sum n_i[t_i], with sum n_i = 0, to sum n_i(t_i - t0) in G. Changing t0 does not change this value because the sum of coefficients is zero. This defines a natural additive map a from the kernel to G.",
+   "text": "Use the explicitly constructed free abelian relation pushout E, its coefficient inclusion i, its degree projection p, and their proved short exactness. This uses the same universe u as X and G.",
    "uses": [
+    "lem-sc-zariski-torsor-free-extension-short-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map each torsor section t to its free generator in E. Naturality follows from the unit of sheafification and the pushout inclusion. The sheafified augmentation gives degree one. Evaluate pushout.condition on (t,g + t), use toSheafify_naturality and toSheafify_sheafifyLift, and use Torsor.sub_vadd_eq: the relation is [g + t]-[t]=i(g). This proves equivariance of the map into the lifting torsor.",
+   "uses": [
+    "lem-sc-zariski-torsor-free-extension-short-exact",
     "def-sc-gm-torsor",
     "def-sc-zariski-site"
    ],
    "elementary": false
   },
   {
-   "text": "Push out the augmentation kernel inclusion along a. Concretely E is the sheaf quotient of G direct-sum Z[T] by the image of k mapped to (-a(k),k). In the abelian sheaf category this gives a short exact sequence 0 -> G -> E -> Z_X -> 0. Locally at t0, the quotient is G direct-sum Z with [t] represented by (t - t0,1); in particular the inclusion is injective, the augmentation is surjective, and its kernel is precisely G. Exactness is local and hence holds globally.",
+   "text": "Apply the already proved Torsor.Iso.ofHom to this natural equivariant map between T and the lifting torsor. An equivariant map between torsors is locally bijective by simple transitivity and local nonemptiness, hence an isomorphism of sheaves. Package E,i,p,the zero-composition equality, short exactness and this isomorphism into the required existential.",
    "uses": [
-    "def-sc-topological-abelian-cohomology",
     "def-sc-gm-torsor"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The natural map t mapped to [t] takes values in the fibre over one and satisfies [g + t]=[t]+g. On any open where t0 exists, each fibre section is uniquely [t0]+g, so this map is a bijection on the fibre there. These local equivariant bijections glue to an isomorphism of T with the torsor of lifts of one. All sectionwise free groups, direct sums and quotients have coefficient universe u; sheafification on a topological space preserves that universe. This also applies when X is empty or G is zero.",
-   "uses": [
-    "def-sc-gm-torsor",
-    "def-sc-zariski-site"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-zariski-torsor-free-extension-short-exact",
   "def-sc-gm-torsor",
-  "def-sc-topological-abelian-cohomology",
   "def-sc-zariski-site"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "N1",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 02FQ (cohomology-lemma-torsors-h1), first construction by pushout of the free abelian sheaf; read at https://stacks.math.columbia.edu/tag/02FQ"
+  "place": "Lemma 02FQ, first construction; fully proved pair-relation presentation and cokernel argument implementing the free-abelian pushout construction"
  },
  "mathlib_searches": [
   {
@@ -129,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T144126-L-2101088",
+  "landing": "20261012T184322-L-4011334",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
