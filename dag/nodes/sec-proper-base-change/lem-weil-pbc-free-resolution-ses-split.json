@@ -31,51 +31,50 @@
  ],
  "proof": [
   {
-   "text": "One step (Stacks 065P, first half of the proof; the source's $M',M,M''$ are here $A,A',A''$). Claim: for every short exact sequence $0\\to A\\xrightarrow{a}A'\\xrightarrow{b}A''\\to0$ of $R$-modules there are free $R$-modules $P,P',P''$, $R$-linear surjections $\\eta:P\\to A$, $\\eta':P'\\to A'$, $\\eta'':P''\\to A''$ and $R$-linear maps $\\alpha:P\\to P'$, $\\beta:P'\\to P''$, $\\pi:P'\\to P$, $s:P''\\to P'$ with $\\beta\\alpha=0$, $\\pi\\alpha=\\mathrm{id}_P$, $\\beta s=\\mathrm{id}_{P''}$, $\\alpha\\pi+s\\beta=\\mathrm{id}_{P'}$, $\\eta'\\alpha=a\\eta$, $\\eta''\\beta=b\\eta'$, and such that $\\alpha$ maps $K=\\ker\\eta$ into $K'=\\ker\\eta'$, $\\beta$ maps $K'$ into $K''=\\ker\\eta''$, and the restrictions give a short exact sequence $0\\to K\\xrightarrow{\\alpha|_K}K'\\xrightarrow{\\beta|_{K'}}K''\\to0$. Construction: pick generating families $(x_i)_{i\\in I}$ of $A$ and $(z_j)_{j\\in J}$ of $A''$ (for instance all elements), and for each $j$ choose $y_j\\in A'$ with $b(y_j)=z_j$ ($b$ is surjective). Put $P=\\bigoplus_{i\\in I}R$, $P''=\\bigoplus_{j\\in J}R$, $P'=P\\oplus P''$; these are free [def-weil-pbc-free-module], with the standard bases $(e_i)$, $(f_j)$, and $P'$ has the basis $(e_i,0)_{i}\\cup(0,f_j)_{j}$. Let $\\eta(e_i)=x_i$, $\\eta''(f_j)=z_j$, $\\eta'(p,q)=a(\\eta(p))+\\lambda(q)$ where $\\lambda:P''\\to A'$ is the $R$-linear map with $\\lambda(f_j)=y_j$ (a linear map out of $\\bigoplus_JR$ is given by any choice of images of the $f_j$), so $b\\lambda=\\eta''$. $\\eta,\\eta''$ are surjective since their images contain generating families. Let $\\alpha(p)=(p,0)$, $\\beta(p,q)=q$, $\\pi(p,q)=p$, $s(q)=(0,q)$. The identities $\\beta\\alpha=0$, $\\pi\\alpha=\\mathrm{id}$, $\\beta s=\\mathrm{id}$, $\\alpha\\pi+s\\beta=\\mathrm{id}$ are checked on $(p,q)$: $(p,0)+(0,q)=(p,q)$. Also $\\eta'\\alpha(p)=a\\eta(p)$ and $\\eta''\\beta(p,q)=\\eta''(q)=b\\lambda(q)=b(a\\eta(p)+\\lambda(q))=b\\eta'(p,q)$ as $ba=0$. Now apply [lem-weil-pbc-snake-lemma-modules] with $\\Lambda=R$ to the commutative diagram with top row $P\\xrightarrow{\\alpha}P'\\xrightarrow{\\beta}P''\\to0$ (exact: $\\beta$ is surjective and $\\ker\\beta=P\\oplus0=\\operatorname{im}\\alpha$, see [def-weil-pbc-exact-sequence]), bottom row $0\\to A\\xrightarrow{a}A'\\xrightarrow{b}A''$ (exact by hypothesis) and vertical maps $\\eta,\\eta',\\eta''$ (the squares commute by the two identities just shown). It gives that $\\ker\\eta\\xrightarrow{\\alpha|}\\ker\\eta'\\xrightarrow{\\beta|}\\ker\\eta''\\xrightarrow{\\partial}\\operatorname{coker}\\eta\\to\\operatorname{coker}\\eta'\\to\\operatorname{coker}\\eta''$ is exact, with $\\alpha|_K$ injective because $\\alpha$ is. Since $\\eta$ and $\\eta''$ are surjective, $\\operatorname{coker}\\eta=\\operatorname{coker}\\eta''=0$, so $\\beta|_{K'}:K'\\to K''$ is surjective and $\\operatorname{coker}\\eta'=0$, i.e. $\\eta'$ is surjective. Thus $0\\to K\\to K'\\to K''\\to0$ is short exact, which proves the claim (the source: 'By the snake lemma we see that the sequence of kernels $0\\to K'\\to K\\to K''\\to0$ is short exact').",
+   "text": "Lift Q, Q′, Q″ to the common universe max(u,v₁,v₂,v₃) with ULift.moduleEquiv and conjugate u and v. Injectivity, exactness and surjectivity are preserved by these linear equivalences. Package the resulting sequence as ResolutionSES.",
    "uses": [
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-snake-lemma-modules",
     "def-weil-pbc-exact-sequence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext), lines 17682-17698"
-   }
+   "elementary": true
   },
   {
-   "text": "Iteration (Stacks 065P: 'Hence we can continue this process indefinitely'). Define by recursion on $n\\ge0$ a short exact sequence $E_n:0\\to A_n\\xrightarrow{a_n}A'_n\\xrightarrow{b_n}A''_n\\to0$ and the data of Step 1 for it. Start with $E_0=(0\\to Q\\xrightarrow{u}Q'\\xrightarrow{v}Q''\\to0)$. Given $E_n$, apply Step 1 to $E_n$ and call the result $F_n=P$, $F'_n=P'$, $F''_n=P''$, $\\eta_n:F_n\\to A_n$, $\\eta'_n$, $\\eta''_n$, $\\alpha_n$, $\\beta_n$, $\\pi_n$, $s_n$; then let $E_{n+1}$ be the short exact sequence of kernels $0\\to\\ker\\eta_n\\xrightarrow{\\alpha_n|}\\ker\\eta'_n\\xrightarrow{\\beta_n|}\\ker\\eta''_n\\to0$ given by Step 1, so $A_{n+1}=\\ker\\eta_n\\subseteq F_n$, $A'_{n+1}=\\ker\\eta'_n\\subseteq F'_n$, $A''_{n+1}=\\ker\\eta''_n\\subseteq F''_n$, and $a_{n+1},b_{n+1}$ are the restrictions of $\\alpha_n,\\beta_n$. Write $j_n:A_{n+1}\\to F_n$, $j'_n$, $j''_n$ for the inclusions, so that $\\alpha_nj_n=j'_na_{n+1}$ and $\\beta_nj'_n=j''_nb_{n+1}$. Put $\\varepsilon=\\eta_0$, $\\varepsilon'=\\eta'_0$, $\\varepsilon''=\\eta''_0$ and, for $n\\ge0$, $d_{n+1}=j_n\\eta_{n+1}:F_{n+1}\\to F_n$, $d'_{n+1}=j'_n\\eta'_{n+1}$, $d''_{n+1}=j''_n\\eta''_{n+1}$. (Each stage involves choices; a recursive definition with a choice at each stage is the usual one, by dependent choice.)",
+   "text": "For a short exact sequence E, construct P=E.A →₀ R and T=E.C →₀ R with evaluation maps η and θ, and a linear lift of θ obtained by choosing preimages of all elements of E.C under the proved surjection E.p. Define μ(x,z)=E.i(η(x))+lift(z). The endpoint evaluation maps are surjective, and an explicit subtraction and lift argument proves μ surjective. These modules and P×T are free by the Finsupp and product free-module instances.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define ki:ker η→ker μ by x↦(x,0) and kp:ker μ→ker θ by (x,z)↦z. Injectivity of ki follows from first projection. If kp(y)=0, injectivity of E.i forces η(y.1)=0, giving exactness. For z∈ker θ, exactness of E gives a with E.i(a)=−lift(z); choose x with η(x)=a, so (x,z) lies in ker μ and maps to z. This proves kp surjective directly, without the general snake lemma.",
    "uses": [
     "def-weil-pbc-exact-sequence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext), lines 17699-17707"
-   }
+   "elementary": true
   },
   {
-   "text": "Verification. Each $F_n,F'_n,F''_n$ is free by Step 1 [def-weil-pbc-free-module]. Complexes and exactness [def-weil-pbc-exact-sequence], written for the unprimed sequence (the primed and double-primed ones are identical): $\\varepsilon d_1=\\eta_0j_0\\eta_1=0$ and $d_nd_{n+1}=j_{n-1}\\eta_nj_n\\eta_{n+1}=0$ for $n\\ge1$, since $\\eta_nj_n=0$ ($j_n$ is the inclusion of $\\ker\\eta_n$). $\\varepsilon=\\eta_0$ is surjective. Since $\\eta_{n+1}$ is surjective onto $A_{n+1}=\\ker\\eta_n$, $\\operatorname{im}d_{n+1}=j_n(A_{n+1})=\\ker\\eta_n$; and $\\ker\\eta_0=\\ker\\varepsilon$, while for $n\\ge1$ $\\ker d_n=\\ker(j_{n-1}\\eta_n)=\\ker\\eta_n$ because $j_{n-1}$ is injective. So $\\operatorname{im}d_1=\\ker\\varepsilon$ and $\\operatorname{im}d_{n+1}=\\ker d_n$: the augmented complex $\\cdots\\to F_1\\to F_0\\xrightarrow{\\varepsilon}Q\\to0$ is exact. Morphisms of complexes: by Step 1 for $E_{n+1}$, $\\eta'_{n+1}\\alpha_{n+1}=a_{n+1}\\eta_{n+1}$, hence $d'_{n+1}\\alpha_{n+1}=j'_n\\eta'_{n+1}\\alpha_{n+1}=j'_na_{n+1}\\eta_{n+1}=\\alpha_nj_n\\eta_{n+1}=\\alpha_nd_{n+1}$; likewise $d''_{n+1}\\beta_{n+1}=j''_nb_{n+1}\\eta'_{n+1}=\\beta_nj'_n\\eta'_{n+1}=\\beta_nd'_{n+1}$. The augmentation identities are those of Step 1 for $E_0$: $\\varepsilon'\\alpha_0=u\\varepsilon$, $\\varepsilon''\\beta_0=v\\varepsilon'$. Finally $\\beta_n\\alpha_n=0$, $\\pi_n\\alpha_n=\\mathrm{id}$, $\\beta_ns_n=\\mathrm{id}$, $\\alpha_n\\pi_n+s_n\\beta_n=\\mathrm{id}$ hold by Step 1 for $E_n$; they give that $\\alpha_n$ is injective, $\\beta_n$ surjective and $\\ker\\beta_n=\\operatorname{im}\\alpha_n$ (if $\\beta_n(x)=0$ then $x=\\alpha_n\\pi_n(x)$), i.e. $0\\to F_n\\to F'_n\\to F''_n\\to0$ is split exact, which is the source's 'each of the sequences $0\\to F'_n\\to F_n\\to F''_n\\to0$ is split exact (by construction)'.",
+   "text": "Recursively define stage(0)=E and stage(n+1) as the short exact sequence of the three kernels just constructed. In degree n use stage(n).P, stage(n).P×stage(n).T and stage(n).T. Define differentials as the next evaluation map followed by kernel inclusion. A surjection onto ker f followed by inclusion has range ker f, and its kernel equals the kernel of the surjection because inclusion is injective. This proves all three augmented exactness assertions.",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inclusion and second projection are chain maps: for the first use the definition of μ at the next stage and the induced kernel inclusion ki; for the second use p(μ(z))=θ(z.2) at the next stage and the induced kernel projection kp. Transport the degree-zero augmentations back through ULift.moduleEquiv. Their kernels are unchanged by these injective equivalences and their surjectivity is preserved. The augmentation squares follow from μ(x,0)=i(η(x)) and p(μ(x,z))=θ(z.2). First projection and second inclusion give the remaining splitting maps. All four splitting identities are the product identities checked by extensionality. Package these explicit witnesses into the original dependent existential.",
    "uses": [
     "def-weil-pbc-free-module",
     "def-weil-pbc-exact-sequence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext), lines 17708-17709"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-exact-sequence",
-  "def-weil-pbc-free-module",
-  "lem-weil-pbc-snake-lemma-modules"
+  "def-weil-pbc-free-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker H1",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext), lines 17682-17709"
+  "place": "Proof of Tag 065P: explicit free covers, kernel sequence, indefinite iteration and degreewise splitting; kernel exactness proved by direct diagram chase in place of snake lemma."
  },
  "mathlib_searches": [
   {
@@ -189,5 +188,15 @@
   "group": "M1",
   "result": "fix",
   "note": "R CommRing; Q,Q',Q'' modules (own universes); u,v with Injective/Function.Exact/Surjective; three free resolutions F,F',F'' (Module.Free terms, d_i : F(i+1)→F i, eps surjective, ker eps = range d0, ker d_i = range d_(i+1)); alpha,beta chain-map equations; eps'alpha0 = u eps, eps''beta0 = v eps'; pi_n, s_n non-chain families with beta alpha=0, pi alpha=id, beta s=id, alpha pi + s beta = id; n=0 covered; zero ring/modules allowed"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T095905-L-317701",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
