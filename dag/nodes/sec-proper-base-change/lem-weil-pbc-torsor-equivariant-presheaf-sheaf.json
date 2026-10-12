@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-torsor-equivariant-presheaf-sheaf",
+ "kind": "statement",
+ "title": "Equivariant locally constant torsor functions form a sheaf",
+ "statement": "Let V be any scheme, ell a natural number, P a finite group, c:Y -> V a finite etale ULift(P)-torsor, and N a ZMod ell representation of P. The equivariant locally constant module presheaf of [def-weil-pbc-torsor-associated-module], after coefficient restriction along ULift.ringEquiv:ULift(ZMod ell) -> ZMod ell, is a sheaf on the small etale site of V. No connectedness, primality, or finite generation is needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3); explicit section-evaluation implementation of the fixed-torsor argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-torsor-associated-module"
+ ],
+ "proof": [
+  {
+   "text": "Give N the discrete topology. The existing small-etale continuous function sheaf on Y, precomposed with the continuous base-change functor along c, gives the sheaf H(W)=C(W times_V Y,N). Forgetting abelian groups preserves the sheaf property. This is functionPresheaf_isSheaf, using Scheme.Etale.continuousMapSheaf and Etale.isContinuous_overPullback.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define the subfunctor G of H by equivariance. Restriction commutes with the deck action by pullback.hom_ext. To show that equivariance is local, compare the two continuous functions s composed with a deck action and rho(g) composed with s. They agree on a covering sieve on which s is equivariant; separatedness of H gives their equality globally. Mathlib Subfunctor.isSheaf_iff now proves G is a sheaf.",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For discrete N, locally constant functions and continuous functions are inverse pointwise constructions. They identify the underlying presheaf of the scalar-restricted equivariant module presheaf with G. Naturality follows by comparing the pullback restriction maps with pullback.hom_ext. Transport the sheaf property through this natural isomorphism and reflect it through the forgetful functor from modules, with explicit universe-shrunk limit instances.",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-torsor-associated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3); explicit section-evaluation implementation of the fixed-torsor argument",
+  "note": "Fixed-torsor proof step extracted from the parent; sources read in the available local Stacks mirror."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivariant locally constant functions on a finite etale torsor form a sheaf",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant functions satisfying equivariance are a sheaf on the small etale site",
+   "results": "CompHausLike.LocallyConstant.functor and LocallyConstantModule.functor, LightCondensed.locallyConstantPresheaf: different sites, no exact match.",
+   "date": "2026-10-12",
+   "verdict": "Use the existing small-etale continuous function sheaf and Subfunctor.isSheaf_iff instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSheaf\", \"LocallyConstant\"",
+   "results": "No hits.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousMapSheaf|Subfunctor.isSheaf_iff|equivariantModulePresheaf_isSheaf",
+   "results": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf supplies Scheme.Etale.continuousMapSheaf; Mathlib.CategoryTheory.Sites.Subsheaf supplies Subfunctor.isSheaf_iff. No exact equivariant presheaf result. Both interfaces inspected and used in the compiling proof.",
+   "date": "2026-10-12",
+   "verdict": "Closed by these tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.TorsorSectionEvaluationBijective",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-torsor-section-evaluation-bijective",
+   "place": "Equivariant locally constant torsor functions form a sheaf",
+   "via": [
+    "lem-weil-pbc-torsor-section-evaluation-bijective",
+    "lem-weil-pbc-torsor-associated-module-essential-image",
+    "lem-weil-pbc-torsor-module-descent-equivalence",
+    "lem-weil-pbc-connected-torsor-module-descent",
+    "lem-weil-pbc-sylow-cover-stalk-data",
+    "lem-weil-pbc-sylow-cover-associated-sheaf"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf",
+  "file": "lean/Sheaf/ConstructibleSheaf/TorsorEquivariantPresheafSheaf.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf",
+  "statement": "theorem Scheme.GaloisCover.equivariantModulePresheaf_isSheaf\n    {V : Scheme.{u}} (ℓ : ℕ) (P : Type u) [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V) (N : Rep.{u + 1} (ZMod ℓ) P) :\n    Presheaf.IsSheaf V.smallEtaleTopology\n      (c.equivariantModulePresheaf ℓ N ⋙ ModuleCat.restrictScalars\n        (ULift.ringEquiv.toRingHom : ULift.{u + 1} (ZMod ℓ) →+* ZMod ℓ))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T135236-L-1666481",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T135236-L-1666481",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

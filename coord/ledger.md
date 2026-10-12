@@ -7809,3 +7809,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/G2/Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension (stage 3; reviewer PASS; first push; landing 20261012T135235-L-1666139 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometry (stage 3; reviewer PASS; first push; landing 20261012T135235-L-1666278 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:52 L: merged deliver/G2/Sheaf.AlgebraicGeometry.StrictHenselizationCohomologyComparisonIso (stage 3; reviewer PASS; first push; landing 20261012T135236-L-1666382 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:52 L: merged deliver/G2/Sheaf.ConstructibleSheaf.TorsorSectionEvaluationBijective (stage 3; reviewer PASS; first push; landing 20261012T135236-L-1666481 (interface); batch 20261012T135212; modules 3; new nodes 2)
