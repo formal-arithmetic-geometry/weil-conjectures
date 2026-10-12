@@ -26,57 +26,53 @@
  ],
  "proof": [
   {
-   "text": "Fix an object Y of C. Let X_1=\\bigoplus_{(i,m,\\varphi)} E_i[m], the coproduct indexed by all triples (i,m,\\varphi) with i in the indexing set, m\\in\\mathbf Z and \\varphi:E_i[m]\\to Y. The maps \\varphi assemble, by the universal property of the coproduct, to a canonical morphism X_1\\to Y, and X_1 has the required form by construction.",
+   "text": "Form the initial coproduct indexed by triples (i,m,g), where g:E_i[m] → Y. Its coproduct-desc evaluation f₀ has a lift for every such g, namely its coprojection.",
    "uses": [
     "def-weil-triangulated-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: construction of X_1"
+    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone"
    }
   },
   {
-   "text": "Inductively, suppose a morphism f_n:X_n\\to Y has been constructed. Let Z_n=\\bigoplus_{(i,m,\\varphi)} E_i[m], indexed by the triples (i,m,\\varphi) with \\varphi:E_i[m]\\to X_n and f_n\\circ\\varphi=0, and let u_n:Z_n\\to X_n be the map assembled from the \\varphi. Complete u_n to a distinguished triangle Z_n\\xrightarrow{u_n}X_n\\to X_{n+1}\\to Z_n[1]. Since f_n\\circ u_n=0 (it vanishes on every summand), exactness of \\Hom(-,Y) on this triangle gives f_{n+1}:X_{n+1}\\to Y whose composite with X_n\\to X_{n+1} is f_n. Thus every transition has the asserted triangle and Z_n is a coproduct of shifts of the E_i.",
+   "text": "For each state (X,f:X → Y), form the coproduct Z of triples (i,m,g) with g:E_i[m] → X and g followed by f zero. Its evaluation a:Z → X has a followed by f zero by coproduct extensionality. Complete a to a distinguished triangle and use Triangle.yoneda_exact₂ to lift f to the next object. Each kernel map g is a summand of Z, so its composite with the transition is zero. This constructs the private GeneratorStep; generatorStep_exists is fully proved. Choose these proved steps and iterate by Nat.rec, retaining their triangle witnesses, coproduct presentations, compatible maps f_n and kernel-killing equations.",
    "uses": [
     "def-weil-triangulated-category",
-    "lem-weil-pbc-hom-out-of-triangle-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: inductive construction of Y_n and X_{n+1}"
-   }
-  },
-  {
-   "text": "Form the telescope X of the sequence by a distinguished triangle \\bigoplus_n X_n\\xrightarrow{1-\\mathrm{shift}}\\bigoplus_n X_n\\to X\\to(\\bigoplus_n X_n)[1]. The map (f_n)_n:\\bigoplus_n X_n\\to Y vanishes after composing with 1-\\mathrm{shift}, because the f_n commute with the transition maps; exactness of \\Hom(-,Y) on the telescope triangle gives f:X\\to Y restricting to f_n on each X_n. Complete f to a distinguished triangle C\\to X\\xrightarrow{f}Y\\to C[1] and rotate it to Y[-1]\\to C\\to X\\to Y. Compactness is invariant under shifts (the shift is an automorphism commuting with coproducts, so the defining coproduct bijection for E_i applies to E_i[m]). Let \\alpha:E_i[m]\\to C. By the compact-Hom homotopy-colimit lemma, the composite E_i[m]\\to C\\to X equals E_i[m]\\xrightarrow{\\beta}X_n\\to X for some n and \\beta. Then f_n\\circ\\beta=f\\circ(E_i[m]\\to C\\to X)=0, since C\\to X\\to Y is zero, so \\beta is a summand index of Z_n and E_i[m]\\xrightarrow{\\beta}X_n\\to X_{n+1} is zero; as X_n\\to X factors through X_{n+1}\\to X, the composite E_i[m]\\to C\\to X is zero. Exactness of \\Hom(E_i[m],-) on the rotated triangle gives \\gamma:E_i[m]\\to Y[-1] with \\alpha equal to \\gamma followed by Y[-1]\\to C. The shift \\gamma[1]:E_i[m+1]\\to Y is a summand index of X_1, so \\gamma[1] factors through X_1\\to X\\xrightarrow{f}Y, hence \\gamma factors through f[-1]:X[-1]\\to Y[-1]; since X[-1]\\to Y[-1]\\to C is a composite of consecutive maps of a distinguished triangle, it is zero, and \\alpha=0. So every map from every E_i[m] to C is zero; hence every map \\bigoplus_i E_i\\to C[n] is zero, and since \\bigoplus_i E_i is a generator, C=0. Then f is an isomorphism (exactness of \\Hom(W,-) on the triangle with C=0), and replacing X by Y through f in the telescope triangle gives a distinguished triangle by (TR1), so Y is the asserted sequential homotopy colimit.",
-   "uses": [
-    "def-weil-triangulated-category",
-    "def-pc-compact-object",
-    "def-pc-generators",
-    "lem-pc-compact-hom-hocolim",
     "lem-weil-pbc-hom-out-of-triangle-exact",
     "lem-weil-pbc-hom-into-triangle-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: telescope triangle and vanishing of its cone"
+    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone"
+   }
+  },
+  {
+   "text": "Complete identity minus transition shift on the countable coproduct to a distinguished triangle with third vertex H. The coproduct-desc of f_n kills that first arrow: check on each coprojection using transition compatibility. Triangle.yoneda_exact₂ gives c:H → Y; its coprojection restrictions give the comparison equations. Apply the generator-telescope isomorphism criterion to initial lifting and kernel killing. Transport the telescope triangle through c, using Triangle.isoMk with identity first and second components and inverse of c as third component.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-pc-compact-generator-telescope-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone"
    }
   }
  ],
  "proof_deps": [
   "def-weil-triangulated-category",
   "lem-weil-pbc-hom-out-of-triangle-exact",
-  "def-pc-compact-object",
-  "def-pc-generators",
-  "lem-pc-compact-hom-hocolim",
-  "lem-weil-pbc-hom-into-triangle-exact"
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-pc-compact-generator-telescope-iso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 09SN, Lemma lemma-write-as-colimit"
+  "place": "Tag 09SN, Lemma lemma-write-as-colimit; formal construction and telescope comparison by F1"
  },
  "mathlib_searches": [
   {
@@ -177,5 +173,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T194108-L-454239",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,182 @@
+{
+ "id": "lem-pc-compact-generator-telescope-iso",
+ "kind": "statement",
+ "title": "Recognize a kernel-killing generator telescope comparison",
+ "statement": "Let $C$ be triangulated [def-weil-triangulated-category], with morphism universe $v$ and coproducts indexed by types in universe $\\max(w,v)$. Let $E_i$, $i\\in I$ with $I$ in that universe, be compact [def-pc-compact-object], and suppose their coproduct is a weak generator [def-pc-generators]. Let $Y,H\\in C$, $X_n\\in C$, $t_n:X_n\\to X_{n+1}$, and $f_n:X_n\\to Y$. Suppose every $g:E_i[m]\\to Y$ factors through $f_0$, and every $g:E_i[m]\\to X_n$ with $f_n\\circ g=0$ satisfies $t_n\\circ g=0$. Write $A=\\bigoplus_{n\\in\\mathbf N}X_n$, with coprojections $j_n$, and let $s:A\\to A$ have $s\\circ j_n=j_{n+1}\\circ t_n$. Suppose $A\\xrightarrow{1-s}A\\xrightarrow{q}H\\xrightarrow{r}A[1]$ is distinguished and $c:H\\to Y$ satisfies $c\\circ q\\circ j_n=f_n$ for all $n$. Then $c$ is an isomorphism. No coproduct presentation of the stages or transition cones is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pc-compact-object",
+  "def-pc-generators"
+ ],
+ "proof": [
+  {
+   "text": "Set ι_n equal to the nth coprojection followed by q. Restrict the zero composite in the telescope triangle to each coprojection and expand identity minus shift. This gives t_n followed by ι_(n+1) equal to ι_n.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone"
+   }
+  },
+  {
+   "text": "Prove compactness of E_i[m] from the definition: use the additive shift adjunction, DirectSum.congrAddEquiv on its Hom equivalences, and postcomposition with the inverse coproduct comparison of the inverse shift. Check commutativity on each direct-sum summand using adjunction naturality. The shifted compactness map is conjugate to the original bijection. This is the proved compact_shift argument of BrownTelescopeAssembly, generalized to coproduct universe max w v; no Brown theorem is assumed.",
+   "uses": [
+    "def-pc-compact-object",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone"
+   }
+  },
+  {
+   "text": "Convert (X_n,t_n) into Functor.ofSequence t. Apply the compact-Hom homotopy-colimit comparison to E_i[m]. Its surjectivity and Types.jointly_surjective' give factorization of every map E_i[m] to H through a stage.",
+   "uses": [
+    "lem-pc-compact-hom-hocolim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone"
+   }
+  },
+  {
+   "text": "Postcomposition with c is bijective on Hom(E_i[m],H). Initial lifting and the comparison equations give surjectivity. If a has zero composite with c, write a as b followed by ι_n. The comparison equation gives b followed by f_n zero. Kernel killing and transition compatibility give a zero. Apply this zero-kernel assertion to the difference of two maps to obtain injectivity.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone"
+   }
+  },
+  {
+   "text": "For any target shift n, the adjunction between shifts -n and n and the source shift-addition isomorphism identify postcomposition with c[n] with the preceding bijective map for E_i[m-n]. Naturality of the adjunction proves this identification; hence all these shifted Hom maps are bijective.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone"
+   }
+  },
+  {
+   "text": "Complete c to a distinguished triangle H → Y → D → H[1]. A map E_i[m] → D has zero composite to H[1], since its composite with c[1] is zero and postcomposition with c[1] is injective. Hom exactness factors it through Y. Surjectivity for c lifts that factor through H; the consecutive composite H → Y → D is zero, so the original map vanishes. Shift adjunction makes every map E_i → D[n] zero. If D were nonzero, generation would give a nonzero map from the coproduct of E_i to some D[n], contradicting coproduct extensionality. Thus D is zero. Mathlib Triangle.isZero₃_iff_isIso₁ applied to this triangle gives IsIso c.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-pc-generators",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-pc-compact-object",
+  "lem-pc-compact-hom-hocolim",
+  "def-pc-generators"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A telescope comparison map in a compactly generated triangulated category is an isomorphism when maps from generators lift initially and every kernel map dies at the next stage",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error. No result or no-match verdict is asserted. LeanFinder, Loogle and grep were also run.",
+   "date": "2026-10-13",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a sequential homotopy colimit to a target is an isomorphism if maps from compact generators lift at the first stage and maps in its kernel are killed at the next stage",
+   "results": "8 hits: eventually constant colimit isomorphisms, Grothendieck presentability, orthogonal reflection, local cohomology, and ordinary colimit criteria; none is this triangulated telescope criterion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"Triangle\"",
+   "results": "10 hits including Triangle.isZero₃_iff_isIso₁ (Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:388); used for the final zero-cone step, no full criterion.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*telescope|telescope.*[Ii]so|hocolim.*[Ii]so",
+   "results": "msearch Mathlib grep: 0 hits. Local rg of lean/Sheaf found BrownTelescopeAssembly compact_shift and factorization proof, but its Hom/coproduct universe is v, unlike the independent max w v here. DAG search found no duplicate criterion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CompactGeneratorsBuildObjects",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 09SN, Lemma lemma-write-as-colimit, proof: comparison map and vanishing of its cone",
+   "via": [
+    "lem-pc-brown-cohomological-representability",
+    "lem-pc-brown-representability-right-adjoint",
+    "lem-pc-compact-generators-build-objects"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CompactGeneratorTelescopeIso",
+  "file": "lean/Sheaf/CategoryTheory/CompactGeneratorTelescopeIso.lean",
+  "declaration": "CategoryTheory.compactGenerator_telescope_isIso",
+  "statement": "theorem compactGenerator_telescope_isIso\n    {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]\n    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]\n    [Pretriangulated C] [IsTriangulated C] [HasCoproducts.{max w v} C]\n    {I : Type (max w v)} (E : I → C)\n    (hcompact : ∀ i : I, IsCompactObject (E i))\n    (hgenerate : IsTriangulatedGeneratingFamily E)\n    (Y : C) (X : ℕ → C) (t : ∀ n : ℕ, X n ⟶ X (n + 1))\n    (f : ∀ n : ℕ, X n ⟶ Y)\n    (hstart : ∀ (i : I) (m : ℤ) (g : (E i)⟦m⟧ ⟶ Y),\n      ∃ a : (E i)⟦m⟧ ⟶ X 0, a ≫ f 0 = g)\n    (hkill : ∀ (n : ℕ) (i : I) (m : ℤ) (g : (E i)⟦m⟧ ⟶ X n),\n      g ≫ f n = 0 → g ≫ t n = 0)\n    (H : C)\n    (q : (∐ fun n : ULift.{max w v} ℕ => X n.down) ⟶ H)\n    (r : H ⟶ (∐ fun n : ULift.{max w v} ℕ => X n.down)⟦(1 : ℤ)⟧)\n    (hT : Triangle.mk\n      (𝟙 (∐ fun n : ULift.{max w v} ℕ => X n.down) -\n        Sigma.desc (fun n : ULift.{max w v} ℕ =>\n          t n.down ≫ Sigma.ι (fun k : ULift.{max w v} ℕ => X k.down)\n            ⟨n.down + 1⟩)) q r ∈ distTriang C)\n    (c : H ⟶ Y)\n    (hstage : ∀ n : ℕ,\n      Sigma.ι (fun k : ULift.{max w v} ℕ => X k.down) ⟨n⟩ ≫ q ≫ c = f n) :\n    IsIso c",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T194108-L-454239",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T194108-L-454239",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
