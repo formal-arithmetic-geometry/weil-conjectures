@@ -16,38 +16,37 @@
  ],
  "proof": [
   {
-   "text": "Put E_j=U times_X D_j and E_limit=U times_X Y. Pullback preserves the limit cone (cofiltered categories are connected), affine transitions, and qcqs morphisms. Since U is affine, all E_j are qcqs. Regard the system as lying over U; this base is quasi-separated, even though X need not be.",
+   "text": "Form E_i = U times_X D_i with transitions the canonical pullback maps, and the cone c with vertex U times_X Y. Construct its natural transformation to D by the second projections. The pullback squares of each cone leg and connectedness of the cofiltered category give IsLimit c by isLimitOfIsPullbackOfIsConnected. The first projections define the system over U. The qcqs hypotheses on p_i base change to these projections; affineness of U gives compact and quasi-separated E_i. Affine transitions follow by base change. All this geometry is proved explicitly in Lean.",
    "uses": [
     "lem-weil-pbc-qcqs-morphism-permanence"
    ],
    "elementary": false
   },
   {
-   "text": "Forget coefficients in the section equality to abelian groups. A constant module sheaf has the constant underlying abelian sheaf: the coefficient forgetful functor preserves colimits and finite limits, hence commutes with the plus sheafification construction. Pullback identifies each constant sheaf with the inverse image of the constant sheaf G on U. By naturality of this identification with the adjunction unit, the constantModulePushforwardMap section maps are the unitComparison section maps after these identifications; equivalently both send constant generators to the same constant generators. Direct-image composition is the usual fiber-product pasting identification.",
+   "text": "Set G to the constant abelian sheaf on U with value the underlying abelian group of M. Apply exists_constantModule_pullback_section_comparison to get the additive section equivalences and compatibility for every cartesian transition and cone leg. Applying the cone-leg compatibility to a and its assumed zero image, and preservation of zero by an additive equivalence, proves vanishing of the corresponding abelian global section at the limit.",
    "uses": [
-    "lemma-constructible-pullback-constant",
-    "lem-weil-pbc-constant-module-pushforward-functoriality"
+    "lem-weil-pbc-constant-module-pullback-section-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply exists_unitComparison_app_eq_zero_of_isLimit to this system over the affine base U, the constant abelian sheaf G, and the terminal etale object of U. It already accepts any small cofiltered category. Its injectivity half gives a later stage and an arrow to the original stage on which the section vanishes. Faithfulness of coefficient forgetting reflects the zero equality in module sections. No germ or stalk occurs in this step.",
+   "text": "Apply the injectivity half of globalSections_limit_comparison to E, its first projections to U, c and G. It gives j and g:j -> i killing the abelian section. The transition compatibility identifies this zero with the additive-equivalence image of the required constantModulePushforwardMap section. Injectivity and preservation of zero of that additive equivalence reflect the equality to module sections.",
    "uses": [
-    "lem-weil-pbc-etale-section-continuity"
+    "lem-weil-pbc-global-sections-limit-comparison",
+    "lem-weil-pbc-constant-module-pullback-section-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constant-module-pushforward-functoriality",
-  "lem-weil-pbc-etale-section-continuity",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lemma-constructible-pullback-constant"
+  "lem-weil-pbc-constant-module-pullback-section-comparison",
+  "lem-weil-pbc-global-sections-limit-comparison",
+  "lem-weil-pbc-qcqs-morphism-permanence"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 09Z1 and 09YQ, degree-zero local section injectivity; steps 2--4 of the parent germ-vanishing plan"
+  "place": "Tags 09Z1 and 09YQ, degree-zero injectivity; T3 uses the existing single-square constant-module comparison and the global-section continuity theorem directly."
  },
  "mathlib_searches": [
   {
@@ -125,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V3",
+  "reviewer": "X-2c353",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T095929-L-326671",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T135320-L-1694088",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module, node metadata, report, and direct importer compiled successfully; signatures and target statement unchanged, with no mechanical findings."
  }
 }
