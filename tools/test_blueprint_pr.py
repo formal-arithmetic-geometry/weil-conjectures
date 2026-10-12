@@ -21,7 +21,7 @@ class RulesTests(unittest.TestCase):
             text = bp.fields({'id': ident, 'kind': 'lemma'}) + 'A statement.\n'
             bp.write(self.root / rel, text)
             self.baseline[rel] = text
-        bp.write(self.root / '.blueprint-cut.json', json.dumps({'baseline': self.baseline}))
+        bp.write(self.root / '.blueprint-cut.json', json.dumps({'baseline': self.baseline, 'outside': {}}))
 
     def check(self):
         output = io.StringIO()
@@ -69,6 +69,10 @@ class RulesTests(unittest.TestCase):
         (self.root / 'blueprint/sec-a/sk-a/lem-a.md').unlink()
         self.assertIn('blueprint file removed', self.check()[1])
 
+    def test_outside_file_fails_without_git(self):
+        (self.root / 'unexpected.txt').write_text('An unintended artifact.')
+        self.assertIn('changed outside blueprint/: unexpected.txt', self.check()[1])
+
     def test_missing_dependency_fails(self):
         bp.write(self.root / 'blueprint/sec-a/sk-a/lem-b.md', bp.fields({'id': 'lem-b', 'kind': 'lemma', 'uses': ['lem-absent']}) + 'Statement.')
         self.assertIn('missing dependency lem-absent', self.check()[1])
@@ -92,12 +96,40 @@ class CitationTests(unittest.TestCase):
         self.assertTrue(text.startswith('[lem-internal], `A.foo'))
         self.assertNotIn('lem-leaf', text)
 
+    def test_mathlib_clause_suffix_is_preserved(self):
+        text = bp.rendered('[lem-leaf](iii)', self.nodes)
+        self.assertNotIn('[lem-leaf]', text)
+        self.assertTrue(text.endswith('(iii)'))
+
+    def test_mathlib_semicolon_group_and_qualifier(self):
+        text = bp.rendered('[lem-other; lem-leaf, first clause]', self.nodes)
+        self.assertNotIn('lem-leaf', text)
+        self.assertIn('first clause', text)
+        self.assertIn('Mathlib/A.lean)', text)
+
+    def test_polynomial_notation_is_never_a_citation(self):
+        text = r'$k[X,T][Y]$ and $k[X,T,Y]$ and $k[X_1,\dots,X_d]$'
+        self.assertEqual(bp.rendered(text, self.nodes), text)
+
     def test_imported_mathlib_node_keeps_internal_reference(self):
         self.nodes['lem-leaf']['blueprint']['is'] = 'lem-leaf'
         self.assertEqual(bp.rendered('[lem-leaf]', self.nodes), '[lem-leaf]')
 
     def test_mathlib_leaf_removed_from_structural_dependencies(self):
         self.assertEqual(bp.dependencies(['lem-leaf', 'lem-other'], self.nodes), ['lem-other'])
+
+
+class ForbiddenTests(unittest.TestCase):
+    def test_mathematical_landing_is_preserved(self):
+        self.assertIsNone(bp.forbidden('a morphism landing in $B_0$'))
+
+    def test_equation_numbers_are_not_host_addresses(self):
+        self.assertIsNone(bp.forbidden('Equation (21.2.0.1)'))
+        self.assertIsNone(bp.forbidden('equations 20.23.6.1 and 20.23.6.2'))
+
+    def test_process_and_network_text_still_fails(self):
+        for text in ['delivery report', 'stage3', 'landing', 'host 192.168.0.1']:
+            self.assertIsNotNone(bp.forbidden(text))
 
 
 if __name__ == '__main__':

@@ -26,7 +26,23 @@ def load_nodes():
         if ident in result:
             raise ValueError(f'duplicate DAG id: {ident}')
         result[ident] = node
-    return result
+    # Public identifiers describe mathematics, rather than local work stages.
+    mapping = {ident: ident.replace('stage3', 'aux') for ident, node in result.items()
+               if 'stage3' in ident and not (node.get('blueprint') or {}).get('is')}
+    for old, new in mapping.items():
+        if new in result:
+            raise ValueError(f'public id collision: {old} -> {new}')
+    def remap(value):
+        if isinstance(value, str):
+            for old, new in mapping.items():
+                value = value.replace(old, new)
+            return value
+        if isinstance(value, list):
+            return [remap(v) for v in value]
+        if isinstance(value, dict):
+            return {k: (v if k in ('lean', 'mathlib_match') else remap(v)) for k, v in value.items()}
+        return value
+    return {mapping.get(ident, ident): remap(node) for ident, node in result.items()}
 
 
 @contextlib.contextmanager
@@ -147,32 +163,43 @@ def write(path, text):
         path.write_text(text)
 
 
+def forbidden(text):
+    # Mathematical uses of 'landing in' and numbered equations are not
+    # process terminology or host addresses. Preserve them verbatim.
+    clean = re.sub(r'(?i)\blanding(?= in\b)', 'taking values', text)
+    clean = re.sub(r'(?i)\bequations?\s*\(?\d+(?:\.\d+){3}\)?(?:\s+and\s+\(?\d+(?:\.\d+){3}\)?)*', 'equation reference', clean)
+    return FORBIDDEN.search(clean)
+
+
 def rendered(text, ns):
-    # Mathlib leaves remain citations, never blueprint objects.
-    def replace(match):
-        ident = match.group(1)
+    # Mathlib leaves remain source citations, never blueprint objects.
+    def reference(ident):
         node = ns.get(ident, {})
         if node.get('status') != 'mathlib' or (node.get('blueprint') or {}).get('is'):
-            return match.group(0)
+            return '[' + ident + ']'
         found = node.get('mathlib_match') or {}
         if isinstance(found, list):
             found = found[0] if found else {}
         if not isinstance(found, dict):
             found = {}
         decl = found.get('declaration') or ident
-        file = found.get('file', '')
-        paths = sorted(set(re.findall(r'Mathlib/[A-Za-z0-9_/]+\.lean', str(file))))
+        paths = sorted(set(re.findall(r'Mathlib/[A-Za-z0-9_/]+\.lean', str(found.get('file', '')))))
         label = '`' + str(decl).replace('`', '') + '`'
         if paths:
             links = ', '.join('[Mathlib source](https://github.com/leanprover-community/mathlib4/blob/master/' + path + ')' for path in paths)
             return label + ' (' + links + ')'
         return label + ' (Mathlib)'
-    # Expand grouped blueprint citations before substituting Mathlib leaves.
-    def group(match):
-        ids = [part.strip() for part in match.group(1).split(',')]
-        return ', '.join('[' + ident + ']' for ident in ids)
-    text = re.sub(r'\[([A-Za-z0-9_.-]+(?:,\s*[A-Za-z0-9_.-]+)+)\](?!\()', group, text)
-    return re.sub(r'\[([A-Za-z0-9_.-]+)\](?!\()', replace, text)
+    def citation(match):
+        content, suffix = match.group(1), match.group(2)
+        if suffix and (re.match(r'(?:https?://|#|/)', suffix) or re.search(r'\.(?:md|html|lean|pdf)(?:#|$)', suffix)):
+            return match.group(0)
+        tokens = re.findall(r'[A-Za-z0-9_.-]+', content)
+        if not any(token in ns for token in tokens):
+            return match.group(0)
+        # Preserve semicolons, commas, and clause qualifiers verbatim.
+        value = re.sub(r'[A-Za-z0-9_.-]+', lambda m: reference(m.group()) if m.group() in ns or re.match(r'^(?:def|lem|prop|thm|cor|sk|sec|aux)-', m.group()) else m.group(), content)
+        return value + ('(' + suffix + ')' if suffix is not None else '')
+    return re.sub(r'\[([^\]\n]+)\](?:\(([^)\n]*)\))?', citation, text)
 
 
 def dependencies(values, ns):
@@ -261,7 +288,9 @@ def cut(args):
                     meta = {'kind': 'proof', 'of': ident}
                     if uses: meta['uses'] = uses
                     write(out / proof_path, fields(meta) + rendered(proof_body(node), ns) + '\n')
-        manifest = {'baseline': baseline, 'chapter': args.chapter, 'sketch': args.sketch, 'asks': ask}
+        outside = {str(p.relative_to(tree)): hashlib.sha256(p.read_bytes()).hexdigest()
+                   for p in tree.rglob('*') if p.is_file() and 'blueprint' not in p.relative_to(tree).parts[:1] and '.git' not in p.relative_to(tree).parts}
+        manifest = {'mathlib_leaves': [ident for ident, node in ns.items() if node.get('status') == 'mathlib' and not (node.get('blueprint') or {}).get('is')], 'outside': outside, 'baseline': baseline, 'chapter': args.chapter, 'sketch': args.sketch, 'asks': ask}
         write(out / '.blueprint-cut.json', json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
     changed = [str(p.relative_to(out)) for p in (out / 'blueprint').rglob('*.md') if baseline.get(str(p.relative_to(out))) != p.read_text()]
     print(json.dumps({'changed_files': len(changed), 'proposals': len(ask), 'files': sorted(changed)}, indent=2))
@@ -319,6 +348,7 @@ def check(args):
     except (ValueError, tomllib.TOMLDecodeError) as ex:
         print('FAIL:', ex); return 1
     edges = graph(bp)
+    omitted = set(manifest.get('mathlib_leaves', []))
     changed = []
     for ident, (path, front, body) in bp.items():
         actual = (root / path).read_text()
@@ -332,8 +362,14 @@ def check(args):
             errors.append(f'{path}: id {ident} != filename {expected}')
         if high(path) or (front.get('of') in bp and high(bp[front['of']][0])):
             errors.append(f'protected layer changed: {path}')
-        if FORBIDDEN.search(actual):
-            errors.append(f'forbidden text: {path}: {FORBIDDEN.search(actual).group()}')
+        if forbidden(actual):
+            errors.append(f'forbidden text: {path}: {forbidden(actual).group()}')
+        for citation in re.finditer(r'\[([^\]\n]+)\](?:\(([^)\n]*)\))?', body):
+            if citation.group(2) and re.match(r'https?://', citation.group(2)):
+                continue
+            for token in re.findall(r'[A-Za-z0-9_.-]+', citation.group(1)):
+                if token in omitted:
+                    errors.append(f'{path}: omitted Mathlib leaf remains an internal citation: {token}')
         for error in tex_errors(body):
             errors.append(f'{path}: {error}')
         for target in edges[ident]:
@@ -369,6 +405,13 @@ def check(args):
         base_graph[ident] = set(front.get('uses', [])) | ({front['of']} if front.get('of') else set())
     for cycle in cycles(edges) - cycles(base_graph):
         errors.append('new cycle: ' + ', '.join(cycle))
+    if 'outside' in manifest:
+        for file in root.rglob('*'):
+            rel = file.relative_to(root)
+            if not file.is_file() or rel.parts[0] in ('blueprint', '.git') or str(rel) == '.blueprint-cut.json':
+                continue
+            if manifest['outside'].get(str(rel)) != hashlib.sha256(file.read_bytes()).hexdigest():
+                errors.append('changed outside blueprint/: ' + str(rel))
     if (root / '.git').exists():
         paths = subprocess.check_output(['git', '-C', str(root), 'diff', '--name-only', 'HEAD'], text=True).splitlines()
         paths += subprocess.check_output(['git', '-C', str(root), 'ls-files', '--others', '--exclude-standard'], text=True).splitlines()
