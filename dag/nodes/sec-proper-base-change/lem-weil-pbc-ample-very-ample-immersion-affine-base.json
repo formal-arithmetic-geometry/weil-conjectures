@@ -38,104 +38,73 @@
  ],
  "proof": [
   {
-   "text": "*A finite cover by affine loci of sections of one power of $\\mathcal L$.* For $n\\ge1$ and $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$ let $X_s$ be as in [def-weil-pbc-ample-invertible-module]. By condition (1) of that definition $X$ is quasi-compact [def-weil-pbc-quasi-compact-scheme], and by [lem-weil-pbc-ample-scheme-separated] $X$ is separated, i.e. separated over the affine scheme $\\operatorname{Spec}\\mathbf Z$. By condition (2) every $x\\in X$ lies in an affine open $X_s$ with $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$, $n\\ge1$; these opens cover $X$, so finitely many do: $X=X_{c_0}\\cup\\dots\\cup X_{c_r}$ with $X_{c_k}$ affine, $c_k\\in\\Gamma(X,\\mathcal L^{\\otimes n_k})$, $n_k\\ge1$. (If $X=\\emptyset$, take $d=1$, $n=0$ and for $i$ the empty morphism, which is a closed immersion into the empty open subscheme of $P_0$; the isomorphism $\\mathcal L\\cong i^*\\mathcal O_{P_0}(1)$ is between zero modules. From now on $X\\neq\\emptyset$, so $r\\ge0$.) Put $m=n_0n_1\\cdots n_r\\ge1$ and $a_k=c_k^{\\otimes m/n_k}\\in\\Gamma(X,\\mathcal L^{\\otimes m})$, using the canonical isomorphisms $\\mathcal L^{\\otimes p}\\otimes\\mathcal L^{\\otimes q}\\cong\\mathcal L^{\\otimes p+q}$ [def-pur-sheaf-tensor-product]. Then $X_{a_k}=X_{c_k}$: at $x\\in X$ choose a generator $\\epsilon$ of the free rank-one $\\mathcal O_{X,x}$-module $(\\mathcal L^{\\otimes n_k})_x$ [def-sc-invertible-module], write $(c_k)_x=u\\epsilon$; then $(a_k)_x=u^{m/n_k}\\epsilon^{\\otimes m/n_k}$ with $\\epsilon^{\\otimes m/n_k}$ a generator of $(\\mathcal L^{\\otimes m})_x$, and $u^{m/n_k}\\notin\\mathfrak m_x$ iff $u\\notin\\mathfrak m_x$ since $\\mathfrak m_x$ is prime. The same computation shows $X_{a^{\\otimes e}}=X_a$ for every section $a$ of a power of $\\mathcal L$ and $e\\ge1$. So $X=X_{a_0}\\cup\\dots\\cup X_{a_r}$ with every $X_{a_k}$ affine and every $a_k\\in\\Gamma(X,\\mathcal L^{\\otimes m})$. (Stacks 01VS takes the $X_a$ from the basis of Properties 01Q3 and needs each $X_{a_i}$ to map into an affine open of $S$; here $S=\\operatorname{Spec}A$ is affine, so a finite cover, which the definition gives directly, suffices.)",
+   "text": "Obtain a finite affine section cover of L.tensorPow m with m>0 from the new common-power cover lemma. Ampleness also gives separatedness, and its quasi-compactness is hL.1.",
    "uses": [
-    "def-weil-pbc-ample-invertible-module",
-    "def-weil-pbc-quasi-compact-scheme",
+    "lem-weil-pbc-ample-finite-common-power-cover",
     "lem-weil-pbc-ample-scheme-separated",
-    "def-pur-sheaf-tensor-product",
-    "def-sc-invertible-module",
-    "def-weil-closed-immersion"
+    "def-weil-pbc-ample-invertible-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01VS (lemma-quasi-projective-finite-type-over-S), proof, first paragraph: the finitely many a_0,...,a_n in A_+ with X = union of the affine X_{a_i}; Properties, Definition 01PS (definition-ample)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The affine pieces are finitely generated $A$-algebras.* Since $f$ is locally of finite type, [lem-weil-pbc-lft-affine-pairs] applied to the affine open $V=\\operatorname{Spec}(A)$ of $\\operatorname{Spec}(A)$, whose ring of sections is $A$ [def-weil-affine-spectrum], and to the affine open $U=X_{a_k}$ (trivially $f(U)\\subseteq V$) shows that the ring map $A\\to\\mathcal O_X(X_{a_k})$ induced by $f$ (that is, $f^\\sharp$ followed by restriction) is of finite type. Choose, for each $k=0,\\dots,r$, finitely many elements $f_{k1},\\dots,f_{kn_k}\\in\\mathcal O_X(X_{a_k})$ ($n_k\\ge0$) generating $\\mathcal O_X(X_{a_k})$ as an $A$-algebra.",
+   "text": "Follow the proved source ProjectiveSpace.OfAmple argument: finite-type affine chart rings have finitely many generators, clear their denominators, and enlarge to one positive degree N. Form the cover sections and numerator sections of (L.tensorPow m).tensorPow N.",
    "uses": [
     "lem-weil-pbc-lft-affine-pairs",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01VS, proof, first paragraph ('By Lemma 01T2 we see that the ring maps O_S(V_i) -> O_X(X_{a_i}) are of finite type')"
-   }
-  },
-  {
-   "text": "*The generators as quotients of global sections of one power $\\mathcal L^{\\otimes d}$.* Fix $k$ and $l\\in\\{1,\\dots,n_k\\}$. The module $\\mathcal L^{\\otimes m}$ is invertible (locally $\\mathcal L\\cong\\mathcal O_X$, so locally $\\mathcal L^{\\otimes m}\\cong\\mathcal O_X$ [def-sc-invertible-module], [def-pur-sheaf-tensor-product]), $X_{a_k}$ is the complement of the zero locus of $a_k$, and $X$ is quasi-compact and separated over an affine scheme (Step 1). So [lem-pc-section-clearing-denominators], applied to $\\mathcal L^{\\otimes m}$, its section $a_k$, the quasi-coherent module $\\mathcal O_X$ and $t=f_{kl}\\in\\Gamma(X_{a_k},\\mathcal O_X)$, gives $e_{kl}\\ge0$ and $u_{kl}\\in\\Gamma(X,\\mathcal O_X\\otimes(\\mathcal L^{\\otimes m})^{\\otimes e_{kl}})=\\Gamma(X,\\mathcal L^{\\otimes me_{kl}})$ with $u_{kl}|_{X_{a_k}}=f_{kl}\\,a_k^{\\otimes e_{kl}}|_{X_{a_k}}$ (identifying $\\mathcal O_X\\otimes\\mathcal N=\\mathcal N$ and $(\\mathcal L^{\\otimes m})^{\\otimes e}=\\mathcal L^{\\otimes me}$ [def-pur-sheaf-tensor-product]; for $e_{kl}=0$, $u_{kl}\\in\\Gamma(X,\\mathcal O_X)$). Let $E=1+\\max_{k,l}e_{kl}$ ($E=1$ if there are no $f_{kl}$) and $d=mE\\ge1$. Put $b_k=a_k^{\\otimes E}\\in\\Gamma(X,\\mathcal L^{\\otimes d})$ and $b_{kl}=u_{kl}\\otimes a_k^{\\otimes(E-e_{kl})}\\in\\Gamma(X,\\mathcal L^{\\otimes d})$ (here $E-e_{kl}\\ge1$). Then $X_{b_k}=X_{a_k}$ (Step 1) and $b_{kl}|_{X_{b_k}}=f_{kl}\\,a_k^{\\otimes e_{kl}}\\otimes a_k^{\\otimes(E-e_{kl})}|_{X_{b_k}}=f_{kl}\\,b_k|_{X_{b_k}}$. These are the sections $a_i^{N/\\deg a_i}$, $a_{ij}a_i^{N/\\deg(a_i)-e_{ij}}$ of the source with $N=d$.",
-   "uses": [
     "lem-pc-section-clearing-denominators",
     "def-sc-invertible-module",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01VS, proof, first paragraph (write f_{ij} = a_{ij}/a_i^{e_{ij}} by Properties Lemma 01PW, label properties-lemma-invert-s-sections; N a common multiple of the degrees)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The morphism $j$ to $P_n$.* Index the $1+r+\\sum_kn_k$ sections $b_k$ ($0\\le k\\le r$) and $b_{kl}$ ($0\\le k\\le r$, $1\\le l\\le n_k$) of $\\mathcal M:=\\mathcal L^{\\otimes d}$ by $\\{0,\\dots,n\\}$, $n=r+\\sum_kn_k$, the section $b_k$ getting the index $k$ and $b_{kl}$ an index $(kl)>r$; write the variables of $A[x_0,\\dots,x_n]$ accordingly as $x_k$, $x_{(kl)}$. $\\mathcal M$ is invertible (Step 3) and $X=X_{b_0}\\cup\\dots\\cup X_{b_r}$ (Steps 1 and 3), so the loci of all $n+1$ sections cover $X$. By [lem-weil-pbc-sections-morphism-to-proj-polynomial-ring] (with $Y=X$, $g=f$, $m=n$) there are a morphism $j:X\\to P_n$ and an isomorphism $\\alpha:j^*\\mathcal O_{P_n}(1)\\to\\mathcal L^{\\otimes d}$ with: $q_n\\circ j=f$; $j^{-1}(D_+(x_k))=X_{b_k}=X_{a_k}$ for $0\\le k\\le r$; and for $0\\le k\\le r$ the ring map $\\theta_k:A[x_0,\\dots,x_n]_{(x_k)}\\to\\mathcal O_X(X_{a_k})$ induced by $j$ is an $A$-algebra homomorphism (for the $A$-algebra structure through $f^\\sharp$, the one of Step 2) with $\\theta_k(x_{(kl)}/x_k)=b_{kl}/b_k$. By the uniqueness of $b_{kl}/b_k$ in that statement and $b_{kl}|_{X_{b_k}}=f_{kl}\\,b_k|_{X_{b_k}}$ (Step 3), $b_{kl}/b_k=f_{kl}$, so $\\theta_k(x_{(kl)}/x_k)=f_{kl}$.",
+   "text": "Use the proved native projective-space construction ProjectiveSpace.homOfIsFreeGenerator and twistRestrictHom. Retain the isomorphism witness omitted from the packaged source existence theorem. The preimages of the chosen standard charts equal the original affine section loci. On each chart the coordinate ratios contain the chosen ring generators, so isImmersion_homOfVector_divBasicOpen applies; target locality proves that the global morphism is an immersion.",
    "uses": [
-    "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01VS, proof, first paragraph ('Hence they give rise to a morphism j : X -> P^m_S ... j^*O(1) = L^{otimes N} ... j^{-1}(D_+(T_i)) = X_{a_i} ... pulling back T_{ij}/T_i via j^sharp we get f_{ij}'), via Constructions Lemma 01NE and Definition 01NF"
-   }
-  },
-  {
-   "text": "*$j$ is an immersion.* Let $U=D_+(x_0)\\cup\\dots\\cup D_+(x_r)\\subseteq P_n$, an open subset, viewed as an open subscheme with inclusion $\\iota:U\\to P_n$, an open immersion [def-weil-open-immersion]. By Step 4, $j^{-1}(U)=X_{a_0}\\cup\\dots\\cup X_{a_r}=X$, so $j(X)\\subseteq U$, and by [lem-weil-pbc-morphism-factors-through-open-subscheme] there is a unique $j':X\\to U$ with $\\iota\\circ j'=j$. We show that $j'$ is a closed immersion using [lem-weil-pbc-closed-immersion-affine-cover-criterion] (2) for the covering of $U$ by $V_k=D_+(x_k)$, $0\\le k\\le r$: each $V_k$ is affine, $V_k=\\operatorname{Spec}(A[x_0,\\dots,x_n]_{(x_k)})$ [def-pc-proj]; $j'^{-1}(V_k)=j^{-1}(V_k)=X_{a_k}$ is affine (Step 1); and since $\\iota$ is the identity on $V_k\\subseteq U$, the ring map $j'^\\sharp_{V_k}$ is $\\theta_k$. Its image is an $A$-subalgebra of $\\mathcal O_X(X_{a_k})$ (as $\\theta_k$ is an $A$-algebra map) containing $f_{k1},\\dots,f_{kn_k}$ (Step 4), which generate $\\mathcal O_X(X_{a_k})$ as an $A$-algebra for the same $A$-algebra structure (Step 2); so $\\theta_k$ is surjective. Hence $j'$ is a closed immersion [def-weil-closed-immersion], and $i:=j=\\iota\\circ j'$ is a closed immersion into the open subscheme $U$ followed by the inclusion $U\\to P_n$, i.e. an immersion [def-weil-closed-immersion].",
-   "uses": [
-    "def-weil-open-immersion",
-    "lem-weil-pbc-morphism-factors-through-open-subscheme",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
     "def-pc-proj",
-    "def-weil-closed-immersion"
+    "def-pc-projective-space-twist",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01VS, proof, first paragraph ('Hence the morphism j restricted to X_{a_i} gives a closed immersion of X_{a_i} into the affine open D_+(T_i) ... Hence we conclude that the morphism j is an immersion')"
-   }
+   "elementary": false
   },
   {
-   "text": "*Conclusion.* With $d\\ge1$ (Step 3), $n\\ge0$ and the immersion $i=j:X\\to P_n$ (Step 5) we have $q_n\\circ i=f$ and the isomorphism $\\alpha^{-1}:\\mathcal L^{\\otimes d}\\to i^*\\mathcal O_{P_n}(1)$ of $\\mathcal O_X$-modules (Step 4).",
+   "text": "The finite coordinate type is nonempty because it contains the nonempty cover index type. Reindex using the new finite-index scheme and twist isomorphism; compose the immersion with its hom. The structure-map equation follows by associativity.",
    "uses": [
-    "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring"
+    "lem-weil-pbc-projective-space-finite-index-iso"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01VS, proof, end of the first paragraph ('This implies the lemma holds for some d and n')"
-   }
+   "elementary": true
+  },
+  {
+   "text": "The positiveTensorPower/tensorPow isomorphism is proved by two-step induction, the right unitor, tensor functoriality, and symmetry. Compose it with tensorPowMulIso, the retained twist isomorphism, the reindex twist isomorphism, and pullbackComp. Identify tensorPullback with the source pullback by uniqueness of left adjoints to the same pushforward. This supplies the degree m*N, its positivity, the base equation and the final module isomorphism.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-ample-invertible-module",
-  "def-weil-pbc-quasi-compact-scheme",
-  "lem-weil-pbc-ample-scheme-separated",
+  "def-pc-module-pullback",
+  "def-pc-proj",
+  "def-pc-projective-space-twist",
   "def-pur-sheaf-tensor-product",
   "def-sc-invertible-module",
   "def-weil-closed-immersion",
-  "lem-weil-pbc-lft-affine-pairs",
-  "def-weil-affine-spectrum",
-  "lem-pc-section-clearing-denominators",
-  "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring",
   "def-weil-open-immersion",
-  "lem-weil-pbc-morphism-factors-through-open-subscheme",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-  "def-pc-proj"
+  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-section-clearing-denominators",
+  "lem-weil-pbc-ample-finite-common-power-cover",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-projective-space-finite-index-iso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 01VS (morphisms-lemma-quasi-projective-finite-type-over-S), proof, first paragraph, for S = Spec(A); the morphism to Proj(A[x_0..x_n]) from Constructions Lemma 01N8 (constructions-lemma-converse-construction)"
+  "place": "Lemma 01VS first proof paragraph, implemented by extending the proved WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfAmple construction to retain its twist isomorphism; finite common-power cover and finite coordinate reindexing separated into named nodes."
  },
  "mathlib_searches": [
   {
@@ -242,5 +211,15 @@
   "group": "E1",
   "result": "fix",
   "note": "A ring, X, f:X->Spec A [LocallyOfFiniteType f], L [IsInvertible], absolute Scheme.Modules.IsAmple X L (#check); exists d>0, n>=0, i:X->P(ULift(Fin(n+1));Spec A) IsImmersion, i ≫ ↘ = f, L^{⊗d} ≅ tensorPullback i (ProjectiveSpace.twist 1); empty X, zero ring, n=0 allowed; reverted the delivery's change of existing node(s) def-pc-projective-space-twist (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/PolynomialProjectiveTwist.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2f65b",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070530-L-3467643",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature, two new statements and node records, proof reduction, pruning and report; all three scratch files compile cleanly, and axiom checks agree with the reported sorries."
  }
 }

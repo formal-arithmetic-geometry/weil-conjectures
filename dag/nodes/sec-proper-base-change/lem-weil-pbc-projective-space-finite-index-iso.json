@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-projective-space-finite-index-iso",
+ "kind": "statement",
+ "title": "Finite projective coordinate reindexing preserves the twisting module",
+ "statement": "Let $S$ be any scheme [def-pc-scheme], and $\\beta$ a finite nonempty coordinate type. For projective space with its base-change integral-model convention [def-pc-proj] and twisting module [def-pc-projective-space-twist], there are $n\\ge0$ and a scheme isomorphism $e:\\mathbb P(\\beta;S)\\cong\\mathbb P(\\operatorname{ULift}(\\operatorname{Fin}(n+1));S)$ over $S$ such that $e^*\\mathcal O(1)\\cong\\mathcal O(1)$ [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions Definition 01NF and Lemma 01NE: projective-space charts and coordinate construction, applied to bijective renaming and its inverse."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-proj",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose n+1 equal to the cardinality of beta and a coordinate bijection. Polynomial variable renaming and its inverse preserve grading and coefficients.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Rename each standard chart and its degree-zero localization. The affine scheme isomorphisms agree on overlaps since they preserve all coordinate ratios; glue them and their inverses, and then base change the integral-model isomorphism to S.",
+   "uses": [
+    "def-pc-proj",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The maps preserve constants, hence are over S. Send each rank-one twist basis to its renamed basis; preservation of coordinate-ratio transition units makes these isomorphisms glue. The result is the pullback of O(1) along e.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pc-proj",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions Definition 01NF and Lemma 01NE: projective-space charts and coordinate construction, applied to bijective renaming and its inverse."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite affine section cover of one ample tensor power; projective-space coordinate reindexing preserves O(1)",
+   "results": "Attempted using msearch.py: service unavailable (Internal Server Error).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ample invertible sheaf positive tensor power immersion projective space affine base; reindex finite projective-space coordinates",
+   "results": "Proj.fromOfGlobalSections and affine basic opens; for reindexing, AffineSpace.reindex and its composition/coordinate lemmas, but no projective-space twist-compatible isomorphism.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsImmersion\"; \"renameEquiv\"",
+   "results": "Immersion composition and locality; MvPolynomial.renameEquiv renames variables, but does not package the projective-space scheme and twisting-module isomorphisms.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg IsAmple/exists_isImmersion in WeilConjectures and Mathlib; rg rename/reindex/equiv in ProjectiveSpace and ProjectiveSpectrum",
+   "results": "Source OfAmple proves the immersion from a common-power cover; no conversion from absolute IsAmple to that cover and no finite index scheme/twist comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AmpleImmersionAffineBase",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "lem-weil-pbc-coherent-serre-vanishing",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceFiniteIndexIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceFiniteIndexIso.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_finite_index_iso",
+  "statement": "theorem exists_finite_index_iso (β : Type u) [Finite β] [Nonempty β] (S : Scheme.{u}) : ∃ (n : ℕ) (e : ℙ(β; S) ≅ ℙ(ULift.{u} (Fin (n + 1)); S)), e.hom ≫ ℙ(ULift.{u} (Fin (n + 1)); S) ↘ S = ℙ(β; S) ↘ S ∧ Nonempty ((Scheme.Modules.pullback e.hom).obj (twist (ULift.{u} (Fin (n + 1))) S 1) ≅ twist β S 1)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2f65b",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070530-L-3467643",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2f65b",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070530-L-3467643",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature, two new statements and node records, proof reduction, pruning and report; all three scratch files compile cleanly, and axiom checks agree with the reported sorries."
+ }
+}
