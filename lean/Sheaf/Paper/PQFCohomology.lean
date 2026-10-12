@@ -10,8 +10,8 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.AlgebraicGeometry.GlobalSectionsLeftExact
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 
 /-!
 # Sheaf cohomology and higher direct images
@@ -68,6 +68,22 @@ theorem sheafCohomologyAndHigherDirectImages (X : Scheme.{u}) :
         DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (p : ℤ)) ≅
         (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p) := by
-  sorry
+  constructor
+  · let : PreservesFiniteLimits (RingedSpace.globalSectionsFunctor X.toRingedSpace) :=
+      inferInstanceAs (PreservesFiniteLimits
+        (SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op ⊤)))
+    obtain ⟨G, hG, _, _⟩ :=
+      (RingedSpace.globalSectionsFunctor X.toRingedSpace).exists_universal_rightDerived_deltaFunctor
+    exact ⟨G, hG⟩
+  · intro S f _ _ p
+    let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
+    exact ⟨Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft
+        (DerivedCategory.Plus.singleFunctor
+          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0)
+        F.rightDerivedFunctorPlusCompatibility.symm)
+      (DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (p : ℤ)) ≪≫
+      F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p⟩
 
 end AlgebraicGeometry

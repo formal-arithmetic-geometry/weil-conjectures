@@ -32,55 +32,35 @@
  ],
  "proof": [
   {
-   "text": "For an $\\mathcal O_X$-module, use the established ringed-space module-cohomology definition: choose an injective resolution and take the cohomology of its global-sections complex; this is independent of the resolution and realizes the right derived functors of global sections. This is exactly the cohomology functor $\\mathrm H^p(X,-)$ in the item.",
+   "text": "Global sections on ringed-space modules is evaluation at the whole space, so Mathlib SheafOfModules.evaluationPreservesFiniteLimits supplies left exactness. Its additivity is the existing globalSectionsFunctor_additive instance. Enough injectives is inferred from moduleGrothendieckAbelian. Apply Functor.exists_universal_rightDerived_deltaFunctor and retain its degree-functor equality. The definition moduleCohomology is definitionally the family of classical right derived functors; proof irrelevance identifies its enough-injectives proof with the inferred one.",
    "uses": [
-    "def-sc-ringed-space-module-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section 20.11, Tag 01DZ, ringed-space module paragraph"
-   }
-  },
-  {
-   "text": "For a morphism of schemes, regard it as a morphism of ringed spaces. The direct image on module sheaves is an additive pushforward functor, and its derived direct image is defined by applying pushforward to a K-injective resolution, with $Rf_*\\mathcal F$ represented by $f_*\\mathcal J$ for every K-injective resolution $\\mathcal F[0]\\to\\mathcal J$. An injective resolution $\\mathcal F[0]\\to\\mathcal I^\\bullet$ (which exists as $\\operatorname{Mod}(\\mathcal O_X)$ has enough injectives) is a bounded below complex of injectives, hence K-injective; so $H^p(Rf_*\\mathcal F)=H^p(f_*\\mathcal I^\\bullet)$, which is the $p$-th right derived functor $R^p f_*\\mathcal F$ computed by injective resolutions. This is the higher-direct-image clause.",
-   "uses": [
+    "def-sc-ringed-space-module-cohomology",
     "def-pc-ringed-spaces-derived-direct-image",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "lem-sc-ringed-space-module-sheaves-enough-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079W, derived direct image"
-   }
-  },
-  {
-   "text": "The category $\\operatorname{Mod}(\\mathcal O_X)$ is abelian with enough injectives, and $\\Gamma(X,-)$ is additive and left exact. Right derived functors of a left exact additive functor on such a category form a universal delta-functor. Applying this to global sections, whose right derived functors are $\\mathrm H^p(X,-)$ by the first step, gives connecting morphisms for every short exact sequence of $\\mathcal O_X$-modules and the associated long exact cohomology sequence.",
-   "uses": [
-    "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "lem-sc-global-sections-left-exact",
     "lem-weil-pbc-right-derived-universal-delta-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015B (2), (4), and Tag 05TE"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For each scheme morphism, take F to be moduleDirectImage of its ringed-space morphism. The shared Grothendieck instance supplies enough injectives and K-injective resolutions, and F is additive. Whisker the inverse of F.rightDerivedFunctorPlusCompatibility by the bounded-below single functor on the left and the target homology functor on the right. Compose with F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso. The bounded-below single functor followed by inclusion, and bounded-below homology, identify definitionally with the corresponding unbounded single and homology functors. This gives the required natural isomorphism, without constructing comparison maps afresh.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "src-right-derived-functor-plus-compatibility",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-ringed-space-module-cohomology",
   "def-pc-ringed-spaces-derived-direct-image",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
-  "lem-sc-ringed-space-module-sheaves-enough-injectives",
-  "lem-sc-global-sections-left-exact",
-  "lem-weil-pbc-right-derived-universal-delta-functor"
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sp-derived-functor-single-identification"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Sections 20.11 and 20.13; Tags 01DZ, 01EO, 01EY, 079W"
+  "document": "literature/stacks-project/cohomology.tex; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusCompatibility.lean; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusSingle.lean",
+  "place": "Tags 01DZ and 079W; rightDerivedFunctorPlusCompatibility; singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso. Lean composition by U1, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -161,5 +141,15 @@
   "group": "T1",
   "result": "fix",
   "note": "node: H^p(X,-)=R^pΓ on O_X-modules, LES for SES, R^p f_* = R^p of f_*; H^p = recorded moduleCohomology (dropped tautological rfl conjunct moduleCohomology = rightDerived Γ); LES = ∃ CohomologicalDeltaFunctor with G.F = moduleCohomology; R^p f_*: H^p(Rf_*(F[0])) ≅ (moduleDirectImage f).rightDerived p, f scheme morphism, p:ℕ; removed inline @InjectiveResolution.instHasInjectiveResolutions (shared moduleGrothendieckAbelian instance + Mathlib EnoughInjectives import); no new definition"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T053958-L-2647757",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
