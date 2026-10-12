@@ -1,179 +1,39 @@
 {
  "proof": [
   {
-   "text": "*Clause 1.* The inverse image $u^{-1}:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ is an exact functor and carries short exact sequences to short exact sequences [prop-weil-pbc-inverse-image-exact]; applied to $0\\to G_1\\xrightarrow{\\alpha}G\\xrightarrow{\\beta}G_2\\to0$ it gives the exactness of $0\\to u^{-1}G_1\\xrightarrow{u^{-1}\\alpha}u^{-1}G\\xrightarrow{u^{-1}\\beta}u^{-1}G_2\\to0$ on $Y_{\\Et}$.",
+   "text": "For the recorded Ext encoding, obtain hY by ShortComplex.ShortExact.map_of_exact applied to the existing exact inverse-image functor. [prop-weil-pbc-inverse-image-exact]. The generic sheaf Ext long exactness and degree-zero injectivity are supplied by [lem-weil-pbc-sheaf-ext-cohomology-long-exact], whose declarations are the existing Sheaf.H.δSucc, Sheaf.H.exact_map_map, Sheaf.H.exact_map_δSucc, Sheaf.H.exact_δSucc_map, and Ext.postcomp_mk₀_injective_of_mono. Choose the boundaries Sheaf.H.δSucc hS and Sheaf.H.δSucc hY; their values are definitionally postcomposition with extClass. The instances hS.mono_f and hY.mono_f give the two degree-zero injections by Ext.postcomp_mk₀_injective_of_mono. On each site apply the existing source-library Sheaf.H.exact_map_map, Sheaf.H.exact_map_δSucc and Sheaf.H.exact_δSucc_map in every natural degree.",
    "uses": [
-    "prop-weil-pbc-inverse-image-exact"
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-sheaf-ext-cohomology-long-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Section 04I0 (etale-cohomology-section-functoriality): $u^{-1}$ is exact"
-   }
+   "elementary": true
   },
   {
-   "text": "*The two triangles.* Notation: for a scheme $T$ and an abelian sheaf $F$ on $T_{\\Et}$ write $QF=F[0]$ for $F$ placed in degree $0$, an object of $\\Dplus(T_{\\Et})$ (its cohomology sheaves vanish outside degree $0$) [def-weil-pbc-derived-categories]. Apply [lem-sf-derived-ses-triangle] in the abelian category $\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] to $0\\to G_1\\to G\\to G_2\\to0$: $T_X=(QG_1\\xrightarrow{Q\\alpha}QG\\xrightarrow{Q\\beta}QG_2\\xrightarrow{w_X}QG_1[1])$ is a distinguished triangle of $D(X_{\\Et})$, $w_X$ the morphism constructed there. Its vertices lie in $\\Dplus(X_{\\Et})$, a strictly full triangulated subcategory of $D(X_{\\Et})$ whose distinguished triangles are those of $D(X_{\\Et})$ with vertices in it [def-weil-pbc-derived-categories], so $T_X$ is distinguished in $\\Dplus(X_{\\Et})$. Likewise, by clause 1 (step 1), [lem-sf-derived-ses-triangle] in $\\Ab(Y_{\\Et})$ gives the distinguished triangle $T_Y=(Q(u^{-1}G_1)\\to Q(u^{-1}G)\\to Q(u^{-1}G_2)\\xrightarrow{w_Y}Q(u^{-1}G_1)[1])$ of $\\Dplus(Y_{\\Et})$, with maps $Q(u^{-1}\\alpha)$, $Q(u^{-1}\\beta)$.",
+   "text": "The first two squares are the existing source-library cohomologyMap_map, naturality of the Ext-defined pullback map [def-weil-pbc-cohomology-pullback] with respect to each sheaf morphism S.f and S.g.",
    "uses": [
-    "lem-sf-derived-ses-triangle",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Section 014Z and Lemma 0152 (lemma-derived-canonical-delta-functor): the triangle $(A,B,C,a,b,\\delta)$ of a short exact sequence"
-   }
-  },
-  {
-   "text": "*$\\RGamma$ of the triangles; the long exact sequences for $q\\in\\mathbf Z$.* For $T\\in\\{X,Y\\}$ the global sections functor $\\Gamma(T,-):\\Ab(T_{\\Et})\\to\\Ab$ (evaluation at the final object $T$) is additive and left exact (sums and kernels of abelian sheaves are computed sectionwise), and $\\Ab(T_{\\Et})$ has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives] (case $R=\\mathbf Z$). So [lem-weil-pbc-derived-direct-image-triangulated] applies with $v=\\Gamma(T,-)$: $\\RGamma(T_{\\Et},-)=R\\Gamma(T,-):\\Dplus(T_{\\Et})\\to\\Dplus(\\Ab)$, $\\RGamma(T_{\\Et},K)=\\Gamma(T,I(K))$ for the chosen K-injective resolution $K\\to I(K)$ as in [def-weil-pbc-etale-cohomology], and on morphisms through the homotopy class of the induced map of resolutions, is triangulated with the shift isomorphism $\\sigma^T_K:\\RGamma(T_{\\Et},K[1])\\xrightarrow{\\sim}\\RGamma(T_{\\Et},K)[1]$ (comparison of the resolutions $K[1]\\to I(K[1])$ and $K[1]\\to I(K)[1]$). Hence $\\RGamma(T_{\\Et},T_T)=(\\RGamma(QF_1)\\to\\RGamma(QF)\\to\\RGamma(QF_2)\\xrightarrow{\\sigma^T_{QF_1}\\circ\\RGamma(w_T)}\\RGamma(QF_1)[1])$, where $(F_1,F,F_2)=(G_1,G,G_2)$ for $T=X$ and $(u^{-1}G_1,u^{-1}G,u^{-1}G_2)$ for $T=Y$, is a distinguished triangle of $\\Dplus(\\Ab)$, hence of $D(\\Ab)$ [def-weil-pbc-derived-categories]. By [lem-sf-derived-homology-long-exact] (in $D(\\Ab)$, with $\\mathcal H^q$ the cohomology of a representing complex) the sequence $\\cdots\\to\\mathcal H^q\\RGamma(QF_1)\\to\\mathcal H^q\\RGamma(QF)\\to\\mathcal H^q\\RGamma(QF_2)\\xrightarrow{\\delta^q_T}\\mathcal H^{q+1}\\RGamma(QF_1)\\to\\cdots$ is exact for all $q\\in\\mathbf Z$, its connecting map being $\\mathcal H^q$ of the third morphism $\\sigma^T_{QF_1}\\circ\\RGamma(T_{\\Et},w_T)$ followed by the identification $\\mathcal H^q(M[1])=\\mathcal H^{q+1}(M)$ ($(M[1])^q=M^{q+1}$, the differential only changes sign) [def-weil-abstract-derived-category]; this is the $\\delta^q_T$ of the statement.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-derived-categories",
-    "lem-sf-derived-homology-long-exact",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 0151 (lemma-exact-compose-delta-functor (1): composing with an exact functor of triangulated categories, here $\\RGamma$) and Lemma 05SR (lemma-compose-delta-functor-homological: $\\mathcal H^n$ of a delta-functor)"
-   }
-  },
-  {
-   "text": "*Identification of the terms.* For $q\\ge0$ and a sheaf $F$ on $T_{\\Et}$, $\\mathcal H^q(\\RGamma(T_{\\Et},QF))=\\mathcal H^q(\\Gamma(T,I(QF)))=H^q(T_{\\Et},F)$ by [def-weil-pbc-etale-cohomology] ($F\\to I(QF)$ is a K-injective resolution of $F$). For a sheaf map $\\varphi:F\\to F'$, $\\RGamma(T_{\\Et},Q\\varphi)$ is the class of $\\Gamma(T,\\tilde\\varphi)$ for a map of the resolutions $\\tilde\\varphi$ lifting $\\varphi$ up to homotopy [lem-weil-pbc-derived-direct-image-triangulated], so $\\mathcal H^q(\\RGamma(T_{\\Et},Q\\varphi))=\\mathcal H^q(\\Gamma(T,\\tilde\\varphi))=H^q(\\varphi)$, the map of [lem-weil-pbc-cohomology-pullback-functorial] (independent of $\\tilde\\varphi$ there). Hence in degrees $q\\ge0$ the exact sequence of step 3 is $\\cdots\\to H^q(T,F_1)\\xrightarrow{H^q(\\alpha_T)}H^q(T,F)\\xrightarrow{H^q(\\beta_T)}H^q(T,F_2)\\xrightarrow{\\delta^q_T}H^{q+1}(T,F_1)\\to\\cdots$ with $(\\alpha_X,\\beta_X)=(\\alpha,\\beta)$ and $(\\alpha_Y,\\beta_Y)=(u^{-1}\\alpha,u^{-1}\\beta)$.",
-   "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Cohomology on Sites, Section 01FT (sites-cohomology-section-cohomology-sheaves): $H^i(\\mathcal C,-)$ computed by injective resolutions, functorial in the sheaf"
-   }
-  },
-  {
-   "text": "*Start of the sequence (clause 2).* $\\mathcal H^{-1}(\\RGamma(T_{\\Et},QF_2))=0$: the cohomology sheaves of $QF_2$ vanish in degrees $<0$, so by [lem-weil-pbc-dplus-injective-representative] (1) with $n=0$, in $\\Ab(T_{\\Et})$ (enough injectives, step 3) there are a complex $L$ of injective sheaves with $L^i=0$ for $i<0$ and an isomorphism $QL\\cong QF_2$; by (2) of that node $L$ is K-injective. By [lem-weil-pbc-cohomology-pullback-derived-unit] (last sentence of its statement: a complex $\\Gamma(T,I)$ computed from any K-injective $I$ with $QI\\cong K$ is identified with $\\RGamma(T_{\\Et},K)$ by the canonical isomorphism) $\\RGamma(T_{\\Et},QF_2)\\cong Q\\Gamma(T,L)$, and $\\Gamma(T,L)^{-1}=L^{-1}(T)=0$, so $\\mathcal H^{-1}=0$. By exactness of step 3 at $\\mathcal H^0\\RGamma(QF_1)$, $\\ker H^0(\\alpha_T)=\\operatorname{im}(\\mathcal H^{-1}\\RGamma(QF_2)\\to H^0(T,F_1))=0$. With step 4 the sequence $0\\to H^0(T,F_1)\\to H^0(T,F)\\to H^0(T,F_2)\\xrightarrow{\\delta^0_T}H^1(T,F_1)\\to\\cdots$ of the statement is exact at every place, for $T=X$ and for $T=Y$. This is clause 2.",
-   "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-cohomology-pullback-derived-unit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 05SR (lemma-compose-delta-functor-homological: the hypothesis $H^{-1}(G(A))=0$ makes $\\{H^n\\circ G\\}_{n\\ge0}$ a delta-functor starting with $0\\to H^0$)"
-   }
-  },
-  {
-   "text": "*$u^{-1}$ carries $T_X$ to $T_Y$.* The inverse image $u^{-1}:\\Dplus(X_{\\Et})\\to\\Dplus(Y_{\\Et})$ is the restriction of the triangulated functor $u^{-1}_D$ induced by the exact functor $u^{-1}$ on abelian sheaves [lem-sf-exact-functor-derived-triangulated], with shift isomorphism $\\iota_K:u^{-1}(K[1])\\to(u^{-1}K)[1]$ the identity of termwise shifted complexes and with the natural isomorphism $\\varphi_F:u^{-1}(QF)\\xrightarrow{\\sim}Q(u^{-1}F)$ for sheaves in degree $0$ ($\\varphi_{K^\\bullet}$ of [def-weil-pbc-derived-inverse-image] for $K^\\bullet=F[0]$). By [lem-weil-pbc-exact-functor-ses-triangle-image] for $F=u^{-1}$ and the sequence $0\\to G_1\\to G\\to G_2\\to0$, whose image sequence is the one of clause 1 with connecting morphism $w_Y$: $\\varphi_{G_1}[1]\\circ\\iota_{QG_1}\\circ u^{-1}(w_X)=w_Y\\circ\\varphi_{G_2}$, and $(\\varphi_{G_1},\\varphi_G,\\varphi_{G_2})$ is an isomorphism of triangles from $u^{-1}T_X:=(u^{-1}QG_1,u^{-1}QG,u^{-1}QG_2,u^{-1}Q\\alpha,u^{-1}Q\\beta,\\iota_{QG_1}\\circ u^{-1}w_X)$ to $T_Y$ [def-weil-pbc-triangles-with-shift].",
-   "uses": [
-    "def-weil-pbc-derived-inverse-image",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-exact-functor-ses-triangle-image",
-    "def-weil-pbc-triangles-with-shift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Lemma 0151 (lemma-exact-compose-delta-functor (2)) and the construction of Lemma 0152: an exact functor of abelian categories commutes with mapping cones termwise"
-   }
-  },
-  {
-   "text": "*Naturality of $u^*$ on $\\Dplus$.* For $K\\in\\Dplus(X_{\\Et})$, $u^*_K:\\RGamma(X_{\\Et},K)\\to\\RGamma(Y_{\\Et},u^{-1}K)$ of [def-weil-pbc-cohomology-pullback] equals $\\lambda_{u^{-1}K}\\circ\\RGamma(X,\\eta^D_{u,K})$ [lem-weil-pbc-cohomology-pullback-derived-unit] (2), with $\\eta^D_u:\\mathrm{id}\\to Ru_*u^{-1}$ the unit of the adjunction $u^{-1}\\dashv Ru_*$ [prop-weil-pbc-derived-inverse-image-adjunction], a natural transformation, and $\\lambda_L:\\RGamma(X_{\\Et},Ru_*L)\\xrightarrow{\\sim}\\RGamma(Y_{\\Et},L)$ natural in $L\\in\\Dplus(Y_{\\Et})$ (clause 1 of the same node). For a morphism $a:K\\to K'$ of $\\Dplus(X_{\\Et})$ (not necessarily induced by a map of complexes): $u^*_{K'}\\circ\\RGamma(X,a)=\\lambda_{u^{-1}K'}\\circ\\RGamma(X,\\eta^D_{K'}\\circ a)=\\lambda_{u^{-1}K'}\\circ\\RGamma(X,Ru_*u^{-1}a)\\circ\\RGamma(X,\\eta^D_K)=\\RGamma(Y,u^{-1}a)\\circ\\lambda_{u^{-1}K}\\circ\\RGamma(X,\\eta^D_K)=\\RGamma(Y,u^{-1}a)\\circ u^*_K$ (functoriality of $\\RGamma(X,-)$, naturality of $\\eta^D$, naturality of $\\lambda$ at $u^{-1}a$). So $u^*$ is a natural transformation $\\RGamma(X_{\\Et},-)\\to\\RGamma(Y_{\\Et},u^{-1}(-))$ of functors $\\Dplus(X_{\\Et})\\to\\Dplus(\\Ab)$.",
-   "uses": [
-    "lem-weil-pbc-cohomology-pullback-derived-unit",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
     "def-weil-pbc-cohomology-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Section 04I0 (etale-cohomology-section-functoriality): the pullback map as global sections of the adjunction unit"
-   }
+   "elementary": true
   },
   {
-   "text": "*$u^*$ commutes with the shift.* Claim: $\\psi_K\\circ u^*_{K[1]}=u^*_K[1]\\circ\\sigma^X_K$ for $K\\in\\Dplus(X_{\\Et})$, where $\\psi_K:=\\sigma^Y_{u^{-1}K}\\circ\\RGamma(Y,\\iota_K):\\RGamma(Y,u^{-1}(K[1]))\\xrightarrow{\\sim}\\RGamma(Y,u^{-1}K)[1]$. Represent $K$ by a bounded below complex $K^\\bullet$, choose a K-injective resolution $s:K^\\bullet\\to I$ and a K-injective resolution $r:u^{-1}I\\to J$ on $Y_{\\Et}$; then $u^*_K$ is the class of the map of complexes $c:\\Gamma(X,I)\\to\\Gamma(Y,J)$, $c(a)=r(\\eta_u(a))$ [def-weil-pbc-cohomology-pullback]. By [lem-weil-pbc-kinjective-shift], $s[1]:K^\\bullet[1]\\to I[1]$ is a K-injective resolution of $K^\\bullet[1]$, and $r[1]:u^{-1}(I[1])=(u^{-1}I)[1]\\to J[1]$ is a K-injective resolution (termwise $u^{-1}$ commutes with the shift: $(u^{-1}(I[1]))^n=u^{-1}I^{n+1}$ and $u^{-1}(-d)=-u^{-1}d$ by additivity). The recipe of [def-weil-pbc-cohomology-pullback] for $K[1]$ with these resolutions gives the map $\\Gamma(X,I[1])\\to\\Gamma(Y,J[1])$ which in degree $n$ is $c^{n+1}$, i.e. $c[1]$ (as complexes $\\Gamma(T,M[1])=\\Gamma(T,M)[1]$ termwise, since $\\Gamma$ is additive). By [lem-weil-pbc-cohomology-pullback-functorial] (1) (independence of the resolutions for $K\\in\\Dplus$, up to the canonical isomorphisms between complexes computed from different resolutions) $u^*_{K[1]}$, computed from the chosen resolutions $K[1]\\to I(K[1])$ and $u^{-1}(K[1])\\to I(u^{-1}(K[1]))$, equals $c[1]$ after these canonical isomorphisms. On $X$ the canonical isomorphism $\\RGamma(X,K[1])=\\Gamma(X,I(K[1]))\\cong\\Gamma(X,I[1])=\\Gamma(X,I)[1]\\cong\\RGamma(X,K)[1]$ is the comparison of the resolutions $K[1]\\to I(K[1])$ and $K[1]\\to I(K)[1]$ (comparisons of K-injective resolutions are unique up to homotopy and compose), which is $\\sigma^X_K$ [lem-weil-pbc-derived-direct-image-triangulated]; on $Y$ the canonical isomorphism $\\RGamma(Y,u^{-1}(K[1]))\\cong\\Gamma(Y,J[1])=\\Gamma(Y,J)[1]\\cong\\RGamma(Y,u^{-1}K)[1]$ is, for the same reason, $\\sigma^Y_{u^{-1}K}\\circ\\RGamma(Y,\\iota_K)=\\psi_K$ ($\\iota_K$ being the identity of the termwise shifted complexes [def-weil-pbc-derived-inverse-image]). This gives the claim. The analogous statement for $[n]$ follows by iteration but is not needed.",
+   "text": "For the boundary square unfold cohomologyMap_apply and the chosen δSucc. Ext.mapExactFunctor_comp carries the composition through inverse image, and Ext.mapExactFunctor_extClass carries the extension class to that of the image short exact sequence (the Ext form of [lem-weil-pbc-exact-functor-ses-triangle-image]). Ext.comp_assoc then moves the constant-sheaf comparison past this composition. This proves exactly the recorded Lean statement without invoking derived-global-sections or K-injective comparison machinery; the separate identification of this encoding with derived global sections is unchanged.",
    "uses": [
     "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-kinjective-shift",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "def-weil-pbc-derived-inverse-image"
+    "lem-weil-pbc-exact-functor-ses-triangle-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Section 05S7-05SR (right derived functors computed by K-injective resolutions; the shift isomorphism as a comparison of resolutions); written out by the agent"
-   }
-  },
-  {
-   "text": "*A morphism of triangles $\\RGamma(X,T_X)\\to\\RGamma(Y,T_Y)$.* Apply [lem-weil-pbc-commshift-nattrans-triangle-morphism] with $\\mathcal D=\\Dplus(X_{\\Et})$, $\\mathcal D'=\\Dplus(\\Ab)$, $F_1=\\RGamma(X_{\\Et},-)$ with shift isomorphism $\\sigma^X$, $F_2=\\RGamma(Y_{\\Et},u^{-1}(-))$ with $\\psi$ of step 8, $\\tau=u^*$ (natural by step 7, compatible with the shifts by step 8) and the triangle $T_X$: $(u^*_{QG_1},u^*_{QG},u^*_{QG_2})$ is a morphism of triangles from $\\RGamma(X,T_X)$ (step 3) to $F_2T_X=(\\RGamma(Y,u^{-1}QG_1),\\RGamma(Y,u^{-1}QG),\\RGamma(Y,u^{-1}QG_2),\\ldots,\\sigma^Y_{u^{-1}QG_1}\\circ\\RGamma(Y,\\iota_{QG_1}\\circ u^{-1}w_X))$. Next apply $\\RGamma(Y,-)$ to the isomorphism of triangles $(\\varphi_{G_1},\\varphi_G,\\varphi_{G_2}):u^{-1}T_X\\to T_Y$ of step 6: the first two squares commute by functoriality of $\\RGamma(Y,-)$, and the third because $\\sigma^Y_{Q(u^{-1}G_1)}\\circ\\RGamma(Y,w_Y)\\circ\\RGamma(Y,\\varphi_{G_2})=\\sigma^Y_{Q(u^{-1}G_1)}\\circ\\RGamma(Y,\\varphi_{G_1}[1])\\circ\\RGamma(Y,\\iota_{QG_1}\\circ u^{-1}w_X)=\\RGamma(Y,\\varphi_{G_1})[1]\\circ\\sigma^Y_{u^{-1}QG_1}\\circ\\RGamma(Y,\\iota_{QG_1}\\circ u^{-1}w_X)$ (step 6, then naturality of $\\sigma^Y$ [lem-weil-pbc-derived-direct-image-triangulated]). Composing [def-weil-pbc-triangles-with-shift], $\\theta=(\\theta_{G_1},\\theta_G,\\theta_{G_2})$ with $\\theta_F:=\\RGamma(Y,\\varphi_F)\\circ u^*_{QF}:\\RGamma(X,QF)\\to\\RGamma(Y,Q(u^{-1}F))$ is a morphism of triangles $\\RGamma(X,T_X)\\to\\RGamma(Y,T_Y)$, both distinguished by step 3.",
-   "uses": [
-    "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "def-weil-pbc-triangles-with-shift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Derived Categories, Definition 0145 (morphisms of triangles) and Section 05QI/0151 (exact functors and natural transformations); written out by the agent"
-   }
-  },
-  {
-   "text": "*$\\mathcal H^q(\\theta_F)$ is the pullback map.* By [lem-weil-pbc-cohomology-pullback-derived-unit] (2), for an abelian sheaf $F$ on $X_{\\Et}$ placed in degree $0$, $u^*:H^q(X_{\\Et},F)\\to H^q(Y_{\\Et},u^{-1}F)$ of [def-weil-pbc-cohomology-pullback] is $\\mathcal H^q$ of $u^*_{QF}$, where $u^{-1}(QF)$ is represented by the termwise complex $(u^{-1}F)[0]$ through $\\varphi_F$ [def-weil-pbc-derived-inverse-image]; that is, $\\mathcal H^q(\\theta_F)=\\mathcal H^q(\\RGamma(Y,\\varphi_F)\\circ u^*_{QF})$ is the map $u^*:H^q(X_{\\Et},F)\\to H^q(Y_{\\Et},u^{-1}F)$ in the identifications of step 4, for every $q\\ge0$ (the identifications of K-injective resolutions are those of [lem-weil-pbc-cohomology-pullback-functorial] (1)).",
-   "uses": [
-    "lem-weil-pbc-cohomology-pullback-derived-unit",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-derived-inverse-image",
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Section 04I0 (etale-cohomology-section-functoriality)"
-   }
-  },
-  {
-   "text": "*Clause 3.* Apply [lem-weil-pbc-derived-cohomology-ladder] in $D(\\Ab)$ to the morphism of distinguished triangles $\\theta:\\RGamma(X,T_X)\\to\\RGamma(Y,T_Y)$ of step 9: for every $q$, $\\mathcal H^q(\\theta_G)\\circ\\mathcal H^q(\\RGamma(X,Q\\alpha))=\\mathcal H^q(\\RGamma(Y,Q(u^{-1}\\alpha)))\\circ\\mathcal H^q(\\theta_{G_1})$, $\\mathcal H^q(\\theta_{G_2})\\circ\\mathcal H^q(\\RGamma(X,Q\\beta))=\\mathcal H^q(\\RGamma(Y,Q(u^{-1}\\beta)))\\circ\\mathcal H^q(\\theta_G)$ and $\\mathcal H^{q+1}(\\theta_{G_1})\\circ\\delta^q_X=\\delta^q_Y\\circ\\mathcal H^q(\\theta_{G_2})$, the connecting maps of that node being the $\\delta^q_T$ of step 3. By step 4 and step 10 these read $u^*\\circ H^q(\\alpha)=H^q(u^{-1}\\alpha)\\circ u^*$, $u^*\\circ H^q(\\beta)=H^q(u^{-1}\\beta)\\circ u^*$ (also given by [lem-weil-pbc-cohomology-pullback-functorial] (3)) and $u^*\\circ\\delta^q_X=\\delta^q_Y\\circ u^*:H^q(X_{\\Et},G_2)\\to H^{q+1}(Y_{\\Et},u^{-1}G_1)$ for every $q\\ge0$. This is clause 3.",
-   "uses": [
-    "lem-weil-pbc-derived-cohomology-ladder",
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Homology, Definition 010S/010Q (morphism of delta-functors: the maps commute with the connecting maps); Derived Categories Lemma 0153-05SR for the cohomology of triangles"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "prop-weil-pbc-inverse-image-exact",
-  "lem-sf-derived-ses-triangle",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "def-weil-pbc-etale-cohomology",
-  "lem-sf-derived-homology-long-exact",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "def-weil-pbc-derived-inverse-image",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-exact-functor-ses-triangle-image",
-  "def-weil-pbc-triangles-with-shift",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
   "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-kinjective-shift",
-  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-  "lem-weil-pbc-derived-cohomology-ladder"
+  "lem-weil-pbc-exact-functor-ses-triangle-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Derived Categories, Section 014Z and Lemmas 0151, 0152, 05SR (the canonical delta-functor composed with an exact functor and with cohomology), with Cohomology on Sites Section 01FT and Etale Cohomology Section 04I0; the sources state the long exact sequence and the functoriality of the pullback, the agent wrote out the comparison of the two delta-functors through the derived adjunction unit"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites 01FT and Etale Cohomology 04I0; direct proof of the unchanged Ext-encoded Lean statement using source-library Sheaf.H.δSucc and exactness lemmas, cohomologyMap_map, and Mathlib Ext.mapExactFunctor_extClass. The latter three-line boundary argument also appears as cohomologyMap_comp_extClass in WeilConjectures/SixFunctors/Etale/Gabber.lean; no additional import of that module is needed."
  },
  "merged_into": null,
  "created": {
@@ -318,5 +178,15 @@
   "group": "J1",
   "result": "pass",
   "note": "arbitrary f:Y->X; S ShortComplex of Ab(X_et) + hS.ShortExact; clause1 S.map upperStar ShortExact; deltaX/deltaY tied to x.comp extClass rfl (extClass_hom = singleδ); H0 injections + three Function.Exact per q on X and Y; alpha/beta/delta squares with cohomologyMap (node clause 3, not copied from landed records)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025525-L-1249023",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

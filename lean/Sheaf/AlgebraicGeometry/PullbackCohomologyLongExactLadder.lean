@@ -92,6 +92,32 @@ theorem pullbackCohomology_longExact_ladder {X Y : Scheme.{u}} (f : Y ⟶ X)
             (cohomologyMap f S.X₂ q x)) ∧
       (∀ (q : ℕ) (x : Sheaf.H S.X₃ q),
         cohomologyMap f S.X₁ (q + 1) (δX q x) = δY q (cohomologyMap f S.X₃ q x)) := by
-  sorry
+  have hY := hS.map_of_exact ((f)^*[AddCommGrpCat.{u + 1}])
+  have := hS.mono_f
+  have := hY.mono_f
+  refine ⟨hY, Sheaf.H.δSucc hS, Sheaf.H.δSucc hY, ?_, ?_, ?_, ?_, ?_, ?_,
+    ?_, ?_, ?_⟩
+  · intro q x
+    rfl
+  · intro q x
+    rfl
+  · exact Ext.postcomp_mk₀_injective_of_mono _ S.f
+  · exact Ext.postcomp_mk₀_injective_of_mono _ (((f)^*[AddCommGrpCat.{u + 1}]).map S.f)
+  · intro q
+    exact ⟨Sheaf.H.exact_map_map hS q, Sheaf.H.exact_map_δSucc hS q,
+      Sheaf.H.exact_δSucc_map hS q⟩
+  · intro q
+    exact ⟨Sheaf.H.exact_map_map hY q, Sheaf.H.exact_map_δSucc hY q,
+      Sheaf.H.exact_δSucc_map hY q⟩
+  · intro q x
+    exact cohomologyMap_map f q S.f x
+  · intro q x
+    exact cohomologyMap_map f q S.g x
+  · intro q x
+    change cohomologyMap f S.X₁ (q + 1) (x.comp hS.extClass rfl) =
+      (cohomologyMap f S.X₃ q x).comp hY.extClass rfl
+    rw [cohomologyMap_apply,
+      cohomologyMap_apply, Ext.mapExactFunctor_comp, Ext.mapExactFunctor_extClass]
+    exact (Ext.comp_assoc _ _ _ (zero_add q) rfl (by omega)).symm
 
 end AlgebraicGeometry.Etale

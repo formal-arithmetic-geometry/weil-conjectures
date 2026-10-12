@@ -1,0 +1,102 @@
+{
+ "id": "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+   "place": "step 1",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Long exact Ext cohomology sequence for abelian sheaves",
+ "statement": "Let C be a category with Grothendieck topology J, HasSheafify J AddCommGrpCat and HasExt (Sheaf J AddCommGrpCat), at compatible universes. For every short complex S of abelian sheaves with hS : S.ShortExact and every n : ℕ, define δSucc hS n by postcomposition with hS.extClass. Then H.map S.f 0 is injective, and Function.Exact holds for each of the pairs (H.map S.f n, H.map S.g n), (H.map S.g n, δSucc hS n), and (δSucc hS n, H.map S.f (n + 1)). Here H is Ext from the sheafification of the constant abelian presheaf ℤ, with the library universe lifts.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+  "place": "Connecting section, Sheaf.H.δSucc and its two exactness lemmas; HOneCokernel section, Sheaf.H.exact_map_map; Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Ext.postcomp_mk₀_injective_of_mono.",
+  "external": []
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Define δSucc as hS.extClass.postcomp of the constant integer sheaf. Ext.covariant_sequence_exact₂ gives exactness at H(S.X₂). Ext.covariant_sequence_exact₃′ and Ext.covariant_sequence_exact₁′ give exactness at H(S.X₃) and H(S.X₁,n+1); ShortComplex.ab_exact_iff_function_exact translates them to Function.Exact. These are the existing Sheaf.H exactness lemmas in the cited source module. Finally hS.mono_f makes S.f a monomorphism, so postcomposition in Ext degree zero is injective by Ext.postcomp_mk₀_injective_of_mono (equivalently cancellation in Hom via Ext.addEquiv₀). This works also for n=0 and zero sheaves and imposes no terminal-object hypothesis.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+  "place": "Existing proved source-library exactness declarations specialize Mathlib Ext.covariant_sequence_exact₂, Ext.covariant_sequence_exact₃′ and Ext.covariant_sequence_exact₁′; degree-zero injectivity is Mathlib Ext.postcomp_mk₀_injective_of_mono."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a short exact sequence of sheaves the Ext cohomology connecting map has kernel equal to the image of the preceding map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.covariant_sequence_exact₃'",
+   "results": "CategoryTheory.Abelian.Ext.covariant_sequence_exact₃'",
+   "date": "2026-10-12",
+   "verdict": "Generic Ext exactness found; local source search identifies the existing sheaf specializations. No new Lean declaration needed."
+  },
+  {
+   "tool": "grep",
+   "query": "covariant_sequence_exact|postcomp_mk₀_injective",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean",
+   "date": "2026-10-12",
+   "verdict": "Generic Ext exactness found; local source search identifies the existing sheaf specializations. No new Lean declaration needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic",
+  "declaration": "CategoryTheory.Sheaf.H.exact_map_δSucc",
+  "statement": "lemma Sheaf.H.exact_map_δSucc (n : ℕ) : Function.Exact (H.map S.g n) (H.δSucc hS n)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "declarations": [
+   "CategoryTheory.Sheaf.H.δSucc",
+   "CategoryTheory.Sheaf.H.exact_map_map",
+   "CategoryTheory.Sheaf.H.exact_δSucc_map",
+   "CategoryTheory.Abelian.Ext.postcomp_mk₀_injective_of_mono"
+  ],
+  "note": "The primary signature is verbatim with section variables supplied by the source. The additional declarations realize the remaining clauses; the degree-zero injectivity lemma is in Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences, imported by this source module."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025525-L-1249023",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025525-L-1249023",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
