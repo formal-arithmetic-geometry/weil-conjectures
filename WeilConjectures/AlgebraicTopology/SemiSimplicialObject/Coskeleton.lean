@@ -471,6 +471,31 @@ lemma cosk_hasUniqueLifts (n : ℕ) (h : N ≤ n) : T.cosk.HasUniqueLifts n := b
 lemma cosk_hasLifts (n : ℕ) (h : N ≤ n) : T.cosk.HasLifts n :=
   (T.cosk_hasUniqueLifts n h).hasLifts
 
+section Map
+
+variable {D : Type u'} [Category.{v'} D] [HasFiniteLimits D] (G : C ⥤ D) [PreservesFiniteLimits G]
+
+/-- The comparison morphism from the coskeletal extension of the image of `T` under a functor
+preserving finite limits to the image of the coskeletal extension of `T`. It is an isomorphism
+in degrees `≤ N` (`CategoryTheory.SemiSimplicialObject.Truncated.isIso_coskMapHom_app`), and in
+fact in all degrees. -/
+noncomputable def coskMapHom : (T.map G).cosk ⟶ T.cosk.map G :=
+  extendHom N (fun n h ↦ ((T.cosk_hasUniqueLifts n h).map G).hasLifts)
+    (fun n h ↦ ((T.map G).coskIso n h).hom ≫ G.map (T.coskIso n h).inv) (fun n h i ↦ by
+      change _ ≫ G.map (T.cosk.δ n i) = _
+      rw [T.cosk_δ n h, (T.map G).cosk_δ n h]
+      simp [G.map_comp])
+
+lemma coskMapHom_app (n : ℕ) (h : n ≤ N) :
+    (T.coskMapHom G).app n = ((T.map G).coskIso n h).hom ≫ G.map (T.coskIso n h).inv :=
+  extendHom_app _ _ _ _ n h
+
+lemma isIso_coskMapHom_app (n : ℕ) (h : n ≤ N) : IsIso ((T.coskMapHom G).app n) := by
+  rw [coskMapHom_app _ _ n h]
+  infer_instance
+
+end Map
+
 end Truncated
 
 end Truncated

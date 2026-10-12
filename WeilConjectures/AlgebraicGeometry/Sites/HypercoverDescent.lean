@@ -53,6 +53,19 @@ namespace Scheme.Etale
 
 variable {X : Scheme.{u}}
 
+/-- Base change of étale schemes along `f : X ⟶ Y`, as a functor between small étale sites. -/
+noncomputable abbrev baseChangeFunctor {Y : Scheme.{u}} (f : X ⟶ Y) : Y.Etale ⥤ X.Etale :=
+  MorphismProperty.Over.pullback @Etale ⊤ f
+
+/-- Base change of étale schemes preserves finite limits. -/
+instance preservesFiniteLimits_pullback {Y : Scheme.{u}} (f : X ⟶ Y) :
+    PreservesFiniteLimits (MorphismProperty.Over.pullback @Etale ⊤ f : Y.Etale ⥤ X.Etale) :=
+  inferInstance
+
+instance preservesFiniteLimits_baseChangeFunctor {Y : Scheme.{u}} (f : X ⟶ Y) :
+    PreservesFiniteLimits (baseChangeFunctor f) :=
+  preservesFiniteLimits_pullback f
+
 /-- The terminal object `X` of the small étale site of `X`. -/
 noncomputable def isTerminal (X : Scheme.{u}) :
     IsTerminal (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem _ X) : X.Etale) :=
@@ -68,6 +81,32 @@ lemma leftIso_hom {A B : X.Etale} (e : A ≅ B) : (leftIso e).hom = e.hom.left :
 @[simp]
 lemma leftIso_inv {A B : X.Etale} (e : A ≅ B) : (leftIso e).inv = e.inv.left := rfl
 
+@[reassoc (attr := simp)]
+lemma inv_hom_id_left {A B : X.Etale} (e : A ≅ B) : e.inv.left ≫ e.hom.left = 𝟙 _ := by
+  rw [← MorphismProperty.Comma.comp_left, e.inv_hom_id]
+  rfl
+
+@[reassoc (attr := simp)]
+lemma hom_inv_id_left {A B : X.Etale} (e : A ≅ B) : e.hom.left ≫ e.inv.left = 𝟙 _ := by
+  rw [← MorphismProperty.Comma.comp_left, e.hom_inv_id]
+  rfl
+
+/-- The morphism of étale schemes to a base change induced by a pullback square is an
+isomorphism. -/
+lemma isIso_homToPullback_of_isPullback {Y : Scheme.{u}} {t : X ⟶ Y} {V : X.Etale} {W : Y.Etale}
+    {φ : V.left ⟶ W.left} (hφ : IsPullback φ V.hom W.hom t) :
+    IsIso (Etale.homToPullback t φ hφ.w) := by
+  have : IsIso (Etale.homToPullback t φ hφ.w).left := by
+    have : (Etale.homToPullback t φ hφ.w).left = hφ.isoPullback.hom := by
+      apply pullback.hom_ext <;> simp
+    rw [this]
+    infer_instance
+  have : IsIso ((Over.forget X).map
+      ((Scheme.Etale.forget X).map (Etale.homToPullback t φ hφ.w))) := this
+  have : IsIso ((Scheme.Etale.forget X).map (Etale.homToPullback t φ hφ.w)) :=
+    isIso_of_reflects_iso _ (Over.forget X)
+  exact (Scheme.Etale.forgetFullyFaithful X).isIso_of_isIso_map _
+
 /-- Surjectivity of the underlying morphism of schemes is invariant under isomorphisms of
 arrows. -/
 lemma surjective_left_iff_of_comm {A B A' B' : X.Etale} (e : A ⟶ B) (e' : A' ⟶ B')
@@ -78,6 +117,11 @@ lemma surjective_left_iff_of_comm {A B A' B' : X.Etale} (e : A ⟶ B) (e' : A' �
       simp only [Arrow.mk_left, Arrow.mk_right, Arrow.mk_hom, leftIso_hom]
       rw [← MorphismProperty.Comma.comp_left, ← h, MorphismProperty.Comma.comp_left]))
 
+lemma isTerminal_from_left (V : X.Etale) : ((isTerminal X).from V).left = V.hom := by
+  have := MorphismProperty.Over.w ((isTerminal X).from V)
+  erw [Category.comp_id] at this
+  exact this
+
 /-- A semi-simplicial object of the small étale site is a hypercover if and only if its
 `0`-simplices cover `X` and all its matching maps are surjective. -/
 lemma isHypercover_iff_surjective (V : SemiSimplicialObject X.Etale) :
@@ -86,11 +130,7 @@ lemma isHypercover_iff_surjective (V : SemiSimplicialObject X.Etale) :
   rw [SemiSimplicialObject.isHypercover_iff _ V (isTerminal X)]
   simp only [ofArrows_mem_smallEtaleTopology_iff, Set.iUnion_const, Set.range_eq_univ,
     ← surjective_iff]
-  have h : ((isTerminal X).from (V.obj 0)).left = (V.obj 0).hom := by
-    have := MorphismProperty.Over.w ((isTerminal X).from (V.obj 0))
-    erw [Category.comp_id] at this
-    exact this
-  rw [h]
+  rw [isTerminal_from_left]
 
 /-- The quasi-compact quasi-separated étale `X`-schemes. -/
 def qcqs (X : Scheme.{u}) : ObjectProperty X.Etale :=
@@ -303,5 +343,208 @@ lemma exists_surjective_descent_stage {k : I} {A B : (D.obj k).Etale} [CompactSp
   exact (congrArg (fun φ ↦ φ.base z) H.isoPullback_inv_snd).trans hz
 
 end Stage
+
+section Matching
+
+variable {Y : Scheme.{u}}
+
+open SemiSimplicialObject
+
+/-- Surjectivity of the matching maps is invariant under morphisms which are isomorphisms in
+low degrees. -/
+lemma surjective_toMatching_iff_of_isIso {A B : SemiSimplicialObject Y.Etale} (f : A ⟶ B)
+    (n : ℕ) (hf : ∀ k, k ≤ n + 1 → IsIso (f.app k)) :
+    Surjective (A.toMatching n).left ↔ Surjective (B.toMatching n).left := by
+  have := hf (n + 1) le_rfl
+  have := isIso_matchingMap f n fun k hk ↦ hf k (by omega)
+  exact Scheme.Etale.surjective_left_iff_of_comm _ _ (asIso (f.app (n + 1)))
+    (asIso (matchingMap f n)) (toMatching_matchingMap f n)
+
+/-- The matching maps of the base change of a semi-simplicial object are the base changes of its
+matching maps. -/
+lemma surjective_baseChange_toMatching_iff {Z : Scheme.{u}} (g : Z ⟶ Y)
+    (V : SemiSimplicialObject Y.Etale) (n : ℕ) :
+    Surjective ((MorphismProperty.Over.pullback @Etale ⊤ g).map (V.toMatching n)).left ↔
+      Surjective ((V.baseChange g).toMatching n).left := by
+  have : IsIso (V.mapMatchingComparison
+      (MorphismProperty.Over.pullback @Etale ⊤ g : Y.Etale ⥤ Z.Etale) n) := inferInstance
+  exact Scheme.Etale.surjective_left_iff_of_comm _ _ (Iso.refl _)
+    (asIso (V.mapMatchingComparison
+      (MorphismProperty.Over.pullback @Etale ⊤ g : Y.Etale ⥤ Z.Etale) n)) (by simp)
+
+/-- A matching map which is an isomorphism is surjective. -/
+lemma surjective_toMatching_of_hasUniqueLifts {V : SemiSimplicialObject Y.Etale} {n : ℕ}
+    (h : V.HasUniqueLifts n) : Surjective (V.toMatching n).left := by
+  have := h.isIso_toMatching
+  infer_instance
+
+end Matching
+
+section Descent
+
+variable {I : Type u} [SmallCategory I] {D : I ⥤ Scheme.{u}} {c : Cone D}
+
+open SemiSimplicialObject
+
+variable (c) in
+/-- **Descent datum of a truncated étale hypercover** (blueprint
+`lemma-weil-pbc-finite-hypercover-descent`): for a semi-simplicial object `U` of the small étale
+site of the limit `X = lim Dᵢ`, an `N`-truncated semi-simplicial object `T` of the small étale
+site of the stage `Dₖ`, with quasi-compact quasi-separated terms, together with pullback squares
+`U_n ≅ T_n ×_{Dₖ} X` for `n ≤ N`, compatible with the face maps. -/
+structure TruncatedDescent (U : SemiSimplicialObject c.pt.Etale) (N : ℕ) (k : I) where
+  /-- The truncated semi-simplicial object at the stage `Dₖ`. -/
+  T : Truncated (D.obj k).Etale N
+  /-- The terms are quasi-compact and quasi-separated. -/
+  qcqs (n : ℕ) (h : n ≤ N) : Scheme.Etale.qcqs _ (T.obj n h)
+  /-- The projections `U_n ⟶ T_n`. -/
+  m (n : ℕ) (h : n ≤ N) : (U.obj n).left ⟶ (T.obj n h).left
+  /-- `U_n` is the base change of `T_n`. -/
+  isPullback (n : ℕ) (h : n ≤ N) : IsPullback (m n h) (U.obj n).hom (T.obj n h).hom (c.π.app k)
+  /-- Compatibility with the face maps. -/
+  m_δ (n : ℕ) (h : n < N) (i : Fin (n + 2)) :
+    m (n + 1) h ≫ (T.δ n h i).left = (U.δ n i).left ≫ m n h.le
+
+namespace TruncatedDescent
+
+variable {U : SemiSimplicialObject c.pt.Etale} {N : ℕ} {k : I} (d : TruncatedDescent c U N k)
+
+variable [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] in
+/-- Moving a descent datum to a later stage, by base change. -/
+noncomputable def baseChange {k' : I} (g : k' ⟶ k) : TruncatedDescent c U N k' where
+  T := d.T.map (MorphismProperty.Over.pullback @Etale ⊤ (D.map g))
+  qcqs n h := by
+    obtain ⟨_, _⟩ := d.qcqs n h
+    have : CompactSpace ((𝟭 Scheme).obj (d.T.obj n h).left) :=
+      inferInstanceAs (CompactSpace (d.T.obj n h).left)
+    have : QuasiSeparatedSpace ((𝟭 Scheme).obj (d.T.obj n h).left) :=
+      inferInstanceAs (QuasiSeparatedSpace (d.T.obj n h).left)
+    have : QuasiSeparatedSpace ((Functor.fromPUnit (D.obj k)).obj (d.T.obj n h).right) :=
+      inferInstanceAs (QuasiSeparatedSpace (D.obj k))
+    have : QuasiCompact (d.T.obj n h).hom := quasiCompact_of_compactSpace _
+    exact ⟨inferInstanceAs (CompactSpace ↥(pullback (d.T.obj n h).hom (D.map g))),
+      quasiSeparatedSpace_of_quasiSeparated (pullback.snd (d.T.obj n h).hom (D.map g))⟩
+  m n h := pullback.lift (d.m n h) ((U.obj n).hom ≫ c.π.app k')
+    (by rw [(d.isPullback n h).w, Category.assoc, c.w g])
+  isPullback n h := isPullback_lift_of_isPullback g (d.isPullback n h)
+  m_δ n h i := by
+    apply pullback.hom_ext
+    · simp [d.m_δ n h i]
+    · simp
+
+/-- (Implementation) The components of `AlgebraicGeometry.TruncatedDescent.toCosk` in degrees
+`≤ N`. -/
+noncomputable def toCoskApp (n : ℕ) (h : n ≤ N) :
+    U.obj n ⟶ (d.T.cosk.baseChange (c.π.app k)).obj n :=
+  Etale.homToPullback (c.π.app k) (d.m n h ≫ (d.T.coskIso n h).inv.left) (by
+    rw [Category.assoc, MorphismProperty.Over.w, (d.isPullback n h).w])
+
+lemma isIso_toCoskApp (n : ℕ) (h : n ≤ N) : IsIso (d.toCoskApp n h) := by
+  have H : IsPullback (d.m n h ≫ (d.T.coskIso n h).inv.left) (U.obj n).hom
+      (d.T.cosk.obj n).hom (c.π.app k) := by
+    refine IsPullback.of_iso (d.isPullback n h) (Iso.refl _)
+      (Scheme.Etale.leftIso (d.T.coskIso n h).symm) (Iso.refl _) (Iso.refl _) ?_ ?_ ?_ ?_ <;>
+      simp
+  exact Scheme.Etale.isIso_homToPullback_of_isPullback H
+
+/-- The morphism from `U` to the base change to the limit of the coskeletal extension of the
+descended truncation. In degrees `≤ N` it is the isomorphism `U_n ≅ T_n ×_{Dₖ} X`
+(`AlgebraicGeometry.TruncatedDescent.toCosk_app`). -/
+noncomputable def toCosk : U ⟶ d.T.cosk.baseChange (c.π.app k) :=
+  extendHom N (fun n h ↦ ((d.T.cosk_hasUniqueLifts n h).map
+      (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app k) :
+        (D.obj k).Etale ⥤ c.pt.Etale)).hasLifts)
+    d.toCoskApp
+    (fun n h i ↦ by
+      apply Etale.hom_ext_pullback
+      simp [toCoskApp, Truncated.cosk_δ _ n h, reassoc_of% (d.m_δ n h i)])
+
+lemma toCosk_app (n : ℕ) (h : n ≤ N) : d.toCosk.app n = d.toCoskApp n h :=
+  extendHom_app (U := U) (W := d.T.cosk.baseChange (c.π.app k)) _ _ _ _ n h
+
+lemma isIso_toCosk_app (n : ℕ) (h : n ≤ N) : IsIso (d.toCosk.app n) := by
+  rw [d.toCosk_app n h]
+  exact d.isIso_toCoskApp n h
+
+lemma toCosk_app_left_fst (n : ℕ) (h : n ≤ N) :
+    (d.toCosk.app n).left ≫ pullback.fst _ _ = d.m n h ≫ (d.T.coskIso n h).inv.left := by
+  rw [d.toCosk_app n h, toCoskApp, Etale.homToPullback_left_fst]
+
+section Hypercover
+
+variable [IsCofiltered I] [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]
+  [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)]
+
+/-- **Descended truncated hypercovers are hypercovers at late stages** (blueprint
+`lemma-weil-pbc-finite-hypercover-descent`): if `U` is a hypercover of `X`, then for every late
+enough stage `Dₖ'`, the coskeletal extension of the base change to `Dₖ'` of the descended
+truncation is a hypercover of `Dₖ'`. -/
+theorem exists_isHypercover (hc : IsLimit c) (hU : U.IsHypercover c.pt.smallEtaleTopology) :
+    ∃ (k₀ : I) (f₀ : k₀ ⟶ k), ∀ (k' : I) (g : k' ⟶ k₀),
+      (d.baseChange (g ≫ f₀)).T.cosk.IsHypercover (D.obj k').smallEtaleTopology := by
+  rw [Scheme.Etale.isHypercover_iff_surjective] at hU
+  obtain ⟨hU₀, hU₁⟩ := hU
+  let V := d.T.cosk
+  have hVq (n : ℕ) (h : n ≤ N) : Scheme.Etale.qcqs _ (V.obj n) :=
+    (Scheme.Etale.qcqs _).prop_of_iso (d.T.coskIso n h).symm (d.qcqs n h)
+  -- the matching maps in degrees `< N` are surjective after base change to the limit, ...
+  have hM (n : ℕ) (h : n < N) : Surjective
+      ((Scheme.Etale.baseChangeFunctor (c.π.app k)).map (V.toMatching n)).left := by
+    rw [surjective_baseChange_toMatching_iff, ← surjective_toMatching_iff_of_isIso d.toCosk n
+      (fun j hj ↦ d.isIso_toCosk_app j (by omega))]
+    exact hU₁ n
+  -- ... hence at all late enough stages
+  have key (n : Fin N) : ∃ (k' : I) (g : k' ⟶ k), ∀ (k'' : I) (g' : k'' ⟶ k'), Surjective
+      ((Scheme.Etale.baseChangeFunctor (D.map (g' ≫ g))).map (V.toMatching n)).left := by
+    obtain ⟨_, -⟩ := Scheme.Etale.qcqs_matching V n fun j hj ↦ hVq j (by omega)
+    exact exists_surjective_descent_stage hc (V.toMatching n) (hM n n.2)
+  choose kM gM hgM using key
+  -- the `0`-simplices cover after base change to the limit, hence at all late enough stages
+  have key₀ : ∃ (k' : I) (g : k' ⟶ k), ∀ (k'' : I) (g' : k'' ⟶ k'), Surjective
+      ((Scheme.Etale.baseChangeFunctor (D.map (g' ≫ g))).map
+        ((Scheme.Etale.isTerminal _).from (V.obj 0))).left := by
+    have : CompactSpace (MorphismProperty.Over.mk ⊤ (𝟙 (D.obj k))
+        (MorphismProperty.id_mem _ _) : (D.obj k).Etale).left :=
+      inferInstanceAs (CompactSpace (D.obj k))
+    refine exists_surjective_descent_stage hc _ ?_
+    have := d.isIso_toCosk_app 0 (Nat.zero_le _)
+    let ht := (Scheme.Etale.isTerminal (D.obj k)).isTerminalObj
+      (Scheme.Etale.baseChangeFunctor (c.π.app k))
+    rw [Scheme.Etale.surjective_left_iff_of_comm _ ((Scheme.Etale.isTerminal c.pt).from (U.obj 0))
+      (asIso (d.toCosk.app 0)).symm (ht.uniqueUpToIso (Scheme.Etale.isTerminal _))
+      ((Scheme.Etale.isTerminal _).hom_ext _ _), Scheme.Etale.isTerminal_from_left]
+    exact hU₀
+  obtain ⟨k₀, g₀, hg₀⟩ := key₀
+  -- a common stage
+  obtain ⟨K, h, b, hb⟩ := IsCofiltered.exists_comp_eq_of_finite (ι := Option (Fin N))
+    (fun i ↦ i.elim k₀ kM) (fun i ↦ match i with | none => g₀ | some n => gM n)
+  refine ⟨K, h, fun k' g ↦ ?_⟩
+  let G := Scheme.Etale.baseChangeFunctor (D.map (g ≫ h))
+  let ψ := d.T.coskMapHom G
+  have hψ (n : ℕ) (hn : n ≤ N) : IsIso (ψ.app n) := d.T.isIso_coskMapHom_app G n hn
+  change (d.T.map G).cosk.IsHypercover _
+  rw [Scheme.Etale.isHypercover_iff_surjective]
+  refine ⟨?_, fun n ↦ ?_⟩
+  · have := hψ 0 (Nat.zero_le _)
+    have H := hg₀ k' (g ≫ b none)
+    rw [Category.assoc, hb none] at H
+    let ht := (Scheme.Etale.isTerminal (D.obj k)).isTerminalObj G
+    rw [← Scheme.Etale.isTerminal_from_left, Scheme.Etale.surjective_left_iff_of_comm _
+      (G.map ((Scheme.Etale.isTerminal _).from (V.obj 0))) (asIso (ψ.app 0))
+      ((Scheme.Etale.isTerminal _).uniqueUpToIso ht) (ht.hom_ext _ _)]
+    exact H
+  · by_cases hn : n < N
+    · have H := hgM ⟨n, hn⟩ k' (g ≫ b (some ⟨n, hn⟩))
+      rw [Category.assoc, hb (some ⟨n, hn⟩)] at H
+      rw [surjective_toMatching_iff_of_isIso ψ n (fun j hj ↦ hψ j (by omega)),
+        ← surjective_baseChange_toMatching_iff]
+      exact H
+    · exact surjective_toMatching_of_hasUniqueLifts ((d.T.map G).cosk_hasUniqueLifts n (by omega))
+
+end Hypercover
+
+end TruncatedDescent
+
+end Descent
 
 end AlgebraicGeometry
