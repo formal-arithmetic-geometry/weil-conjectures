@@ -8538,3 +8538,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:21 L: returned deliver/N2/WeilConjectures.SixFunctors.Etale.Gabber (reviewer RETURN: (reviewer X-4d8e7, head 4d8e78adb) E2 (brief point 4): Gabber.lean leaves a known false theorem with sorry. Counterexamp)
 - 16:21 L: returned deliver/H2/Sheaf.AlgebraicGeometry.FlatModelFiniteFreeQuasiIso (reviewer RETURN: (reviewer X-db2df, head db2df3c3f) E2: The declaration `exists_local_finiteFree_quasiIso` remains a false sorry theorem:)
 - 16:31 L: returned deliver/F3/Sheaf.RingTheory.TorKernelBoundaryNaturalityOf (reviewer RETURN: (reviewer X-46a60, head 46a607329) E2 / review point 4: CategoryTheory.tor_kernel_boundary_naturality_of remains false. )
+- 16:35 L: returned deliver/K1/Sheaf.Paper.FiniteStructureAlgebraOperationsLift (reviewer RETURN: (reviewer X-94a24, head 94a2483e9) E7: The `hc` hypothesis uses the unnormalized `(Classical.choice (Scheme.Modules.none)
