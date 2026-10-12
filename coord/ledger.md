@@ -8763,3 +8763,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/J1/Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle (stage 3; reviewer PASS; first push; landing 20261012T173835-L-3298166 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/J1/Sheaf.AlgebraicGeometry.KoszulRegularImmersionAlgebraDualHomology (stage 3; reviewer PASS; first push; landing 20261012T173835-L-3298286 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/J2/Sheaf.Algebra.Homology.FirstQuadrantTotalComparisonFinite (stage 3; reviewer PASS; first push; landing 20261012T173836-L-3298505 (interface); batch 20261012T173801; modules 2; new nodes 2)
+- 17:38 L: merged deliver/J2/Sheaf.AlgebraicGeometry.CoherentFormalModule (stage 3; reviewer PASS; first push; landing 20261012T173837-L-3298642 (proof); batch 20261012T173801; modules 1; new nodes 0)

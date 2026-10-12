@@ -16,6 +16,9 @@ import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
 
+import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+
 /-! # Coherent formal modules and completion
 
 Source: Stacks Project, Cohomology of Schemes, Section 0EHN, equation 0880,
@@ -78,8 +81,35 @@ Source: Stacks, Section 0EHN (blueprint: def-weil-pbc-coherent-formal-module). -
 abbrev CoherentFormalModule (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) :=
   (IsCoherentFormalModule I).FullSubcategory
 
+private theorem idealSheafPower_factor {X : Scheme.{u}} (I : X.IdealSheafData)
+    {m n : ℕ} (h : n ≤ m) :
+    ∃ j : (Scheme.idealSheafPower I.toModulesι m).1 ⟶
+        (Scheme.idealSheafPower I.toModulesι n).1,
+      j ≫ (Scheme.idealSheafPower I.toModulesι n).2 =
+        (Scheme.idealSheafPower I.toModulesι m).2 := by
+  have hs (k : ℕ) :
+      ∃ j : (Scheme.idealSheafPower I.toModulesι (k + 1)).1 ⟶
+          (Scheme.idealSheafPower I.toModulesι k).1,
+        j ≫ (Scheme.idealSheafPower I.toModulesι k).2 =
+          (Scheme.idealSheafPower I.toModulesι (k + 1)).2 := by
+    cases k with
+    | zero => exact ⟨I.toModulesι, Category.comp_id _⟩
+    | succ k => exact ⟨Scheme.idealModuleProductι I.toModulesι
+        (Scheme.idealSheafPower I.toModulesι (k + 1)).1, rfl⟩
+  induction h with
+  | refl => exact ⟨𝟙 _, Category.id_comp _⟩
+  | @step m h ih =>
+    obtain ⟨j, hj⟩ := ih
+    obtain ⟨k, hk⟩ := hs m
+    exact ⟨k ≫ j, by rw [Category.assoc, hj, hk]⟩
+
+set_option backward.isDefEq.respectTransparency false in
 /-- A map carries the product by the m-th ideal power into the product by the n-th
 ideal power when n ≤ m, hence factors through that product inclusion.
+Proof: induct on n ≤ m to factor the power inclusion through lower powers, using the
+recursive product inclusion at each successor. Whisker this factorization with F and
+use multiplication naturality for f to obtain a commutative square. Mathlib's image map
+of this square gives the required map between ideal-module products.
 Source: Stacks Project, Cohomology of Schemes, Section 0EHN, equation 0880
 (blueprint: lem-weil-pbc-formal-module-ideal-power-factor). -/
 theorem formalModuleQuotient_factor {X : Scheme.{u}} (I : X.IdealSheafData)
@@ -88,7 +118,152 @@ theorem formalModuleQuotient_factor {X : Scheme.{u}} (I : X.IdealSheafData)
         Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι n).2 G,
       Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι m).2 F ≫ f =
         k ≫ Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2 G := by
-  sorry
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  obtain ⟨j, hj⟩ := idealSheafPower_factor I h
+  let a := (Scheme.idealSheafPower I.toModulesι m).2
+  let b := (Scheme.idealSheafPower I.toModulesι n).2
+  have w : (MonoidalCategoryStruct.whiskerRight j F ≫
+      MonoidalCategoryStruct.whiskerLeft (Scheme.idealSheafPower I.toModulesι n).1 f) ≫
+      (MonoidalCategoryStruct.whiskerRight b G ≫
+        (MonoidalCategoryStruct.leftUnitor G).hom) =
+      (MonoidalCategoryStruct.whiskerRight a F ≫
+        (MonoidalCategoryStruct.leftUnitor F).hom) ≫ f := by
+    rw [Category.assoc, ← MonoidalCategory.whisker_exchange_assoc,
+      ← MonoidalCategory.comp_whiskerRight_assoc, hj,
+      MonoidalCategory.whisker_exchange_assoc]
+    exact (congrArg (((MonoidalCategoryStruct.whiskerRight a F)) ≫ ·)
+      (MonoidalCategory.leftUnitor_naturality f)).trans (Category.assoc _ _ _).symm
+  refine ⟨image.map (Arrow.homMk' _ _ w), ?_⟩
+  exact (image.map_homMk'_ι w).symm
+
+private theorem idealModuleProduct_mono {X : Scheme.{u}} {J : X.Modules}
+    (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) :
+    Mono (Scheme.idealModuleProductι ι F) := by
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  dsimp [Scheme.idealModuleProductι]
+  infer_instance
+
+private theorem multiplication_naturality {C : Type*} [Category C] [MonoidalCategory C]
+    {J F G : C} (ι : J ⟶ MonoidalCategoryStruct.tensorUnit C) (f : F ⟶ G) :
+    (MonoidalCategoryStruct.whiskerRight ι F ≫
+      (MonoidalCategoryStruct.leftUnitor F).hom) ≫ f =
+      MonoidalCategoryStruct.whiskerLeft J f ≫ (MonoidalCategoryStruct.whiskerRight ι G ≫
+        (MonoidalCategoryStruct.leftUnitor G).hom) := by
+  rw [Category.assoc, ← MonoidalCategory.leftUnitor_naturality,
+    ← MonoidalCategory.whisker_exchange_assoc]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem idealModuleProduct_zero_of_mono {X : Scheme.{u}} {J F G : X.Modules}
+    (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (f : F ⟶ G) [Mono f]
+    (hz : IsZero (Scheme.idealModuleProduct ι G)) :
+    IsZero (Scheme.idealModuleProduct ι F) := by
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  let a := (MonoidalCategoryStruct.whiskerRight ι F) ≫ (MonoidalCategoryStruct.leftUnitor F).hom
+  let b := (MonoidalCategoryStruct.whiskerRight ι G) ≫ (MonoidalCategoryStruct.leftUnitor G).hom
+  have hb : b = 0 := by
+    rw [← image.fac b]
+    have hi : image.ι b = 0 := hz.eq_zero_of_src _
+    rw [hi, comp_zero]
+  have ha : a = 0 := by
+    apply (cancel_mono f).1
+    rw [zero_comp]
+    change (MonoidalCategoryStruct.whiskerRight ι F ≫
+      (MonoidalCategoryStruct.leftUnitor F).hom) ≫ f = 0
+    rw [multiplication_naturality ι f]
+    change ((MonoidalCategoryStruct.whiskerLeft J f)) ≫ b = 0
+    rw [hb, comp_zero]
+  have : Mono (image.ι a) := inferInstance
+  apply IsZero.of_mono_eq_zero (image.ι a)
+  apply (cancel_epi (factorThruImage a)).1
+  simpa only [image.fac, comp_zero] using ha
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem idealModuleProduct_comp_zero_iff {X : Scheme.{u}} {J F G : X.Modules}
+    (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (f : F ⟶ G) :
+    let _ : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+    Scheme.idealModuleProductι ι F ≫ f = 0 ↔
+      (MonoidalCategoryStruct.whiskerRight ι F ≫
+        (MonoidalCategoryStruct.leftUnitor F).hom) ≫ f = 0 := by
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  let a := (MonoidalCategoryStruct.whiskerRight ι F) ≫ (MonoidalCategoryStruct.leftUnitor F).hom
+  change image.ι a ≫ f = 0 ↔ a ≫ f = 0
+  rw [← cancel_epi (factorThruImage a)]
+  simp only [← Category.assoc, image.fac, comp_zero]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem idealModuleProduct_quotient_comp_zero_iff {X : Scheme.{u}}
+    {J F Q G : X.Modules} (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf)
+    (q : F ⟶ Q) [Epi q] (f : Q ⟶ G) :
+    Scheme.idealModuleProductι ι Q ≫ f = 0 ↔
+      Scheme.idealModuleProductι ι F ≫ q ≫ f = 0 := by
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  let : MonoidalClosed X.Modules := SheafOfModules.monoidalClosed (R := X.sheaf)
+  have : Epi ((MonoidalCategory.tensorLeft J).map q) :=
+    (MonoidalCategory.tensorLeft J).map_epi q
+  have h₁ := idealModuleProduct_comp_zero_iff ι f
+  have h₂ := idealModuleProduct_comp_zero_iff ι (q ≫ f)
+  dsimp only at h₁ h₂
+  rw [h₁, h₂, ← cancel_epi ((MonoidalCategory.tensorLeft J).map q)]
+  rw [comp_zero, ← Category.assoc _ _ f]
+  change (MonoidalCategoryStruct.whiskerLeft J q ≫
+    (MonoidalCategoryStruct.whiskerRight ι Q ≫
+      (MonoidalCategoryStruct.leftUnitor Q).hom)) ≫ f = 0 ↔
+    (MonoidalCategoryStruct.whiskerRight ι F ≫
+      (MonoidalCategoryStruct.leftUnitor F).hom) ≫ q ≫ f = 0
+  rw [← multiplication_naturality ι q, Category.assoc]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem idealModuleProduct_quotient_zero {X : Scheme.{u}} {J F : X.Modules}
+    (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) :
+    IsZero (Scheme.idealModuleProduct ι (cokernel (Scheme.idealModuleProductι ι F))) := by
+  have := idealModuleProduct_mono ι (cokernel (Scheme.idealModuleProductι ι F))
+  apply IsZero.of_mono_eq_zero (Scheme.idealModuleProductι ι _)
+  have hz := (idealModuleProduct_quotient_comp_zero_iff ι
+    (cokernel.π (Scheme.idealModuleProductι ι F)) (𝟙 _)).mpr (by simp)
+  simpa only [Category.comp_id] using hz
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem idealModuleProduct_quasicoherent {X : Scheme.{u}} {J : X.Modules}
+    (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules)
+    [J.IsQuasicoherent] [F.IsQuasicoherent] :
+    (Scheme.idealModuleProduct ι F).IsQuasicoherent := by
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  have := (Scheme.Modules.quasiCoherent_tensor_product_affine_sections J F).1
+  let a := (MonoidalCategoryStruct.whiskerRight ι F) ≫ (MonoidalCategoryStruct.leftUnitor F).hom
+  have := Scheme.Modules.isQuasicoherent_cokernel a
+  have := Scheme.Modules.isQuasicoherent_kernel (cokernel.π a)
+  exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso
+    (Abelian.imageIsoImage a) inferInstance
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem idealSheafPower_quasicoherent {X : Scheme.{u}} (I : X.IdealSheafData)
+    (n : ℕ) : (Scheme.idealSheafPower I.toModulesι n).1.IsQuasicoherent := by
+  have := Scheme.Modules.isQuasicoherent_toModules I
+  induction n using Nat.twoStepInduction with
+  | zero =>
+    change (SheafOfModules.unit X.ringCatSheaf).IsQuasicoherent
+    exact @SheafOfModules.isQuasicoherent_unit _ _ _ _ X.ringCatSheaf _ _ _ _
+  | one => assumption
+  | more n ih₁ ih₂ =>
+    exact idealModuleProduct_quasicoherent I.toModulesι _
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem isFiniteType_of_epi {X : Scheme.{u}} {F G : X.Modules}
+    (f : F ⟶ G) [Epi f] [F.IsFiniteType] : G.IsFiniteType := by
+  obtain ⟨p, hp⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
+  let q : G.LocalGeneratorsData :=
+    { I := p.I
+      X := p.X
+      coversTop := p.coversTop
+      generators i := (p.generators i).ofEpi
+        ((SheafOfModules.overFunctor X.ringCatSheaf (p.X i)).map f) }
+  have hq : q.IsFiniteType := by
+    constructor
+    intro i
+    have := hp.isFiniteType i
+    exact inferInstance
+  constructor
+  exact ⟨q, hq⟩
 
 /-- Linear maps preserve ideal products; inclusion of powers for n ≤ m gives the
 factorization needed for the canonical quotient map. Proof: node steps 1--3: on affine
@@ -139,6 +314,36 @@ theorem formalModuleQuotientMap_comp {X : Scheme.{u}} (I : X.IdealSheafData)
   apply (cancel_epi (cokernel.π
     (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι _).2 _))).1
   simp [formalModuleQuotientMap, formalModuleQuotientπ, Category.assoc]
+
+private theorem formalModuleQuotient_iterated {X : Scheme.{u}} (I : X.IdealSheafData)
+    (F : X.Modules) {m n : ℕ} (h : n ≤ m) :
+    ∃ e : formalModuleQuotient I n (formalModuleQuotient I m F) ≅
+        formalModuleQuotient I n F,
+      formalModuleQuotientπ I n (formalModuleQuotient I m F) ≫ e.hom =
+        formalModuleQuotientMap I (𝟙 F) h := by
+  let b := Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2 F
+  let q := formalModuleQuotientπ I m F
+  let t := formalModuleQuotientMap I (𝟙 F) h
+  let k := Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2
+    (formalModuleQuotient I m F)
+  have : Epi q := inferInstanceAs (Epi (cokernel.π _))
+  have ht : k ≫ t = 0 := by
+    apply (idealModuleProduct_quotient_comp_zero_iff _ q t).mpr
+    simp [q, t, formalModuleQuotientπ, formalModuleQuotientMap]
+  let a := cokernel.desc k t ht
+  have hv : b ≫ q ≫ cokernel.π k = 0 :=
+    (idealModuleProduct_quotient_comp_zero_iff _ q (cokernel.π k)).mp
+      (cokernel.condition k)
+  let v := cokernel.desc b (q ≫ cokernel.π k) hv
+  have hav : a ≫ v = 𝟙 _ := by
+    apply (cancel_epi (cokernel.π k)).1
+    apply (cancel_epi q).1
+    simp [a, v, q, t, b, formalModuleQuotientπ, formalModuleQuotientMap]
+  have hva : v ≫ a = 𝟙 _ := by
+    apply (cancel_epi (cokernel.π b)).1
+    simp [a, v, q, t, b, formalModuleQuotientπ, formalModuleQuotientMap, Category.assoc]
+  refine ⟨⟨a, v, hav, hva⟩, ?_⟩
+  exact cokernel.π_desc k t ht
 
 /-- Canonical reductions form an inverse system. Proof: node steps 5--6; quotient
 projections are epi, and both sides of each identity or composition law agree after
@@ -191,16 +396,46 @@ def formalCompletionMap {X : Scheme.{u}} (I : X.IdealSheafData)
   app n := formalModuleQuotientMap I u (Nat.le_refl (n.unop + 1))
   naturality := formalCompletionMap_naturality I u
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Completion of a coherent module satisfies the object conditions. Proof: node steps
-1--5. Products and quotients are computed on affine opens; coherence of the quotient
-follows from quasi-coherence and finite type on a locally Noetherian scheme. For M/I^n M,
-I^n acts by zero, and (M/I^(n+1)M)/I^n(M/I^(n+1)M) is canonically M/I^n M by the third
-isomorphism theorem. Checking this on the affine basis gives the induced sheaf isomorphism.
+1--5. Ideal powers and their products with F are quasi-coherent: tensor products are
+quasi-coherent, and their images are kernels of quasi-coherent cokernels. The quotient
+is quasi-coherent and of finite type, since images of finite local generators generate
+any epimorphic quotient; the locally Noetherian coherence criterion applies.
+Naturality of multiplication and epimorphy of tensoring a quotient projection show that
+I^n acts by zero on F/I^n F. The same calculation identifies maps out of the iterated
+quotient with maps out of F killing I^n F. Construct both directions of the resulting
+quotient isomorphism by cokernel.desc; cancel the quotient projections to prove that
+they are inverse and that the isomorphism induces the specified transition map.
 Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
 theorem formalCompletionSystem_coherent {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentModules X) :
     IsCoherentFormalModule I (formalCompletionSystem I F.obj) := by
-  sorry
+  have hF := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+    X F.obj).mp F.property
+  have : F.obj.IsQuasicoherent := hF.1
+  have : F.obj.IsFiniteType := hF.2
+  refine ⟨?_, ?_, ?_⟩
+  · intro n
+    change RingedSpace.IsCoherent X.toRingedSpace (formalModuleQuotient I (n + 1) F.obj)
+    have := idealSheafPower_quasicoherent I (n + 1)
+    have := idealModuleProduct_quasicoherent
+      (Scheme.idealSheafPower I.toModulesι (n + 1)).2 F.obj
+    have := Scheme.Modules.isQuasicoherent_cokernel
+      (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι (n + 1)).2 F.obj)
+    have := isFiniteType_of_epi
+      (cokernel.π (Scheme.idealModuleProductι
+        (Scheme.idealSheafPower I.toModulesι (n + 1)).2 F.obj))
+    apply (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mpr
+    change (cokernel (Scheme.idealModuleProductι
+      (Scheme.idealSheafPower I.toModulesι (n + 1)).2 F.obj)).IsQuasicoherent ∧
+      (cokernel (Scheme.idealModuleProductι
+        (Scheme.idealSheafPower I.toModulesι (n + 1)).2 F.obj)).IsFiniteType
+    exact ⟨inferInstance, inferInstance⟩
+  · intro n
+    exact idealModuleProduct_quotient_zero (Scheme.idealSheafPower I.toModulesι (n + 1)).2
+  · intro n
+    exact formalModuleQuotient_iterated I F.obj (Nat.le_succ (n + 1))
 
 /-- The reduced maps satisfy functor laws. Proof: node step 6; check each component and
 precompose with its quotient projection. For identities both sides give the projection;
@@ -256,10 +491,13 @@ def IsIdealPowerTorsion {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (Scheme.idealSheafPower I.toModulesι c).2 (M.obj.obj (op n)))
 
 /-- Uniform annihilation by I^(c+1) is equivalent to stabilization at level c+1.
-Proof: node step 7. On affine opens the transition from M_n to M_c is surjective with
-kernel I^c M_n, by induction using I^(n-1) M_n ⊆ I^c M_n. Thus it is an isomorphism iff
-I^c M_n=0 for n≥c; for smaller n this follows from I^c M_n ⊆ I^n M_n=0. The affine basis
-criterion promotes these equalities and isomorphisms to sheaves.
+Proof: node step 7. Inclusions of higher ideal powers into lower ones transfer
+annihilation to all higher powers. Uniform annihilation therefore makes each successive
+quotient projection at or above c an isomorphism; the defining quotient isomorphisms
+of M and induction on c ≤ n make every transition to level c an isomorphism.
+Conversely, level c is annihilated by I^(c+1). Naturality of multiplication transports
+this to every level n ≥ c along the monomorphic transition to level c. For n < c,
+the higher-power product factors through I^(n+1)M_n, which is zero by the adic condition.
 Source: Stacks, paragraph before Lemma 0889
 (blueprint: def-weil-pbc-coherent-formal-module). -/
 theorem formalModule_annihilated_power_iff {X : Scheme.{u}} [IsNoetherian X]
@@ -267,7 +505,50 @@ theorem formalModule_annihilated_power_iff {X : Scheme.{u}} [IsNoetherian X]
     (∀ n : ℕ, IsZero (Scheme.idealModuleProduct
       (Scheme.idealSheafPower I.toModulesι (c + 1)).2 (M.obj.obj (op n)))) ↔
     ∀ (n : ℕ) (h : c ≤ n), IsIso (M.obj.map (homOfLE h).op) := by
-  sorry
+  have hzero {a b : ℕ} (h : a ≤ b) (F : X.Modules)
+      (hz : IsZero (Scheme.idealModuleProduct
+        (Scheme.idealSheafPower I.toModulesι a).2 F)) :
+      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι b).2 F) := by
+    obtain ⟨k, hk⟩ := formalModuleQuotient_factor I (𝟙 F) h
+    have hi := hz.eq_zero_of_src
+      (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι a).2 F)
+    have := idealModuleProduct_mono (Scheme.idealSheafPower I.toModulesι b).2 F
+    apply IsZero.of_mono_eq_zero
+      (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι b).2 F)
+    simpa [hi] using hk
+  constructor
+  · intro hz n hn
+    have hsucc (k : ℕ) (hk : c ≤ k) :
+        IsIso (M.obj.map (homOfLE (Nat.le_succ k)).op) := by
+      obtain ⟨e, he⟩ := M.property.2.2 k
+      have hi : Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι (k + 1)).2
+          (M.obj.obj (op (k + 1))) = 0 :=
+        (hzero (Nat.add_le_add_right hk 1) _ (hz (k + 1))).eq_zero_of_src _
+      have : IsIso (formalModuleQuotientπ I (k + 1) (M.obj.obj (op (k + 1)))) := by
+        exact CokernelCofork.IsColimit.isIso_π
+          (CokernelCofork.ofπ (cokernel.π _) (cokernel.condition _))
+          (cokernelIsCokernel _) hi
+      rw [← he]
+      infer_instance
+    induction hn with
+    | refl =>
+      have he : (homOfLE (show c ≤ c from le_rfl)).op = 𝟙 (op c) := Subsingleton.elim _ _
+      rw [he, M.obj.map_id]
+      infer_instance
+    | @step n hn ih =>
+      have := hsucc n hn
+      have he : (homOfLE (show c ≤ n + 1 from Nat.le_succ_of_le hn)).op =
+          (homOfLE (Nat.le_succ n)).op ≫ (homOfLE hn).op := Subsingleton.elim _ _
+      rw [he, M.obj.map_comp]
+      infer_instance
+  · intro hs n
+    by_cases hn : c ≤ n
+    · have := hs n hn
+      exact idealModuleProduct_zero_of_mono
+        (Scheme.idealSheafPower I.toModulesι (c + 1)).2
+        (M.obj.map (homOfLE hn).op) (M.property.2.1 c)
+    · exact hzero (Nat.add_le_add_right (Nat.le_of_lt (Nat.lt_of_not_ge hn)) 1)
+        _ (M.property.2.1 n)
 
 /-- Support on a closed subscheme means annihilation by its ideal, including its nilpotents.
 Source: Stacks, proof of Theorem 088E (blueprint: def-weil-pbc-coherent-formal-module). -/
