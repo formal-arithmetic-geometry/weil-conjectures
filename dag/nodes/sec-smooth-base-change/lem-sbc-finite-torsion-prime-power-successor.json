@@ -1,0 +1,113 @@
+{
+ "id": "lem-sbc-finite-torsion-prime-power-successor",
+ "kind": "statement",
+ "title": "Successor prime-power extension step",
+ "statement": "For a property P of lifted-integer modules invariant under isomorphism and closed under short exact extensions, if r is prime, P holds for lifted ZMod (r ^ e) and lifted ZMod r, then P holds for lifted ZMod (r ^ (e + 1)).",
+ "source": {
+  "document": "Stacks Project Tag 0F08",
+  "place": "cyclic coefficient reduction"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "proof": [
+  {
+   "text": "Set a = r ^ e > 0. The maps i([x]) = [r*x] from Z/a to Z/(a*r), and q([y]) = [y] from Z/(a*r) to Z/r, are well-defined integer-linear maps. Cancellation of r proves i injective; integer representatives prove q surjective; r divides y exactly when [y] lies in the image of i, proving exactness. Lift this short exact sequence to ULift modules, identify a*r with r ^ (e+1), and apply extension closure to hind and hprime, transporting along the canonical module isomorphisms.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project Tag 0F08",
+  "place": "cyclic coefficient reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence ZMod (r ^ e) ZMod (r ^ (e + 1)) ZMod r",
+   "results": "No result; service unavailable.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ZMod (r ^ (e + 1)) ShortExact",
+   "results": "No exact match.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ZMod.*ShortExact|prime.*power.*exact",
+   "results": "No exact Mathlib declaration found.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension closed property cyclic groups prime power induction short exact sequence",
+   "date": "2026-10-12",
+   "results": "8 hits about IsZGroup, Sylow cyclicity and IsPGroup; no cyclic-module extension induction.",
+   "verdict": "No match for the successor statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "ZMod, Function.Exact",
+   "date": "2026-10-12",
+   "results": "0 hits.",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "ZMod.*exact|exact.*ZMod|zmod.*exact|exact.*zmod; focused search of Data/ZMod and Algebra/Exact; rg in lean/Sheaf/Algebra and lean/WeilConjectures/Algebra",
+   "date": "2026-10-12",
+   "results": "Cast, torsion and arithmetic ingredients only; no short exact cyclic successor statement.",
+   "verdict": "No duplicate in Mathlib or the project."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.FiniteTorsionExtensionInduction",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-finite-torsion-prime-power-step",
+   "place": "successor induction case"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.FinitePrimePowerSuccessor",
+  "file": "lean/Sheaf/Algebra/FinitePrimePowerSuccessor.lean",
+  "declaration": "ModuleCat.finite_torsion_prime_power_successor",
+  "statement": "theorem finite_torsion_prime_power_successor (P : ModuleCat.{u + 1} (ULift.{u + 1} ℤ) → Prop) (hiso : ∀ {A B}, (A ≅ B) → P A → P B) (hext : ∀ (S : ShortComplex (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))), S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂) (r e : ℕ) (hr : r.Prime) (hind : P (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod (r ^ e))))) (hprime : P (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod r)))) : P (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod (r ^ (e + 1)))))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T151910-L-2289205",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T151910-L-2289205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
