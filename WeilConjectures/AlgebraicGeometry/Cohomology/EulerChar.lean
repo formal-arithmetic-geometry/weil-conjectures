@@ -144,7 +144,7 @@ scheme over a field `k` and let `K/k` be a field extension. Then the base change
 `X_K = X ×_{Spec k} Spec K` has `dim_K H¹(X_K, 𝒪_{X_K}) = dim_k H¹(X, 𝒪_X)`: by flat base change
 `H¹(X_K, 𝒪_{X_K}) ≅ H¹(X, 𝒪_X) ⊗_k K` (Stacks 02KH).
 
-(blueprint: `lem-pc-genus-base-change`) -/
+(blueprint: `lem-pc-genus-base-change`, `rem-ptr-pc-genus-15`) -/
 theorem arithmeticGenus_pullback [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] :
     arithmeticGenus K

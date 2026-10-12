@@ -210,7 +210,7 @@ lemma linearChartHom_over (i : ι) :
 /-- **The chart morphisms of a linear projection agree on overlaps**: on
 `D₊(lᵢ) ∩ D₊(lⱼ) = D₊(lᵢ lⱼ)` the sections `lₘ / lᵢ` and `lₘ / lⱼ` differ by the unit
 `lᵢ / lⱼ`, so the two chart morphisms coincide
-(blueprint: `lem-pc-linear-pair-morphism-gluing`). -/
+(blueprint: `lem-pc-linear-pair-morphism-gluing`, `rem-ptr-pc-linear-pair-morphism-16`). -/
 lemma linearChartHom_compatible (i j : ι) :
     pullback.fst (awayι 𝒜 (l i) (hl i) Nat.one_pos) (awayι 𝒜 (l j) (hl j) Nat.one_pos) ≫
         linearChartHom 𝒜 l hl i =

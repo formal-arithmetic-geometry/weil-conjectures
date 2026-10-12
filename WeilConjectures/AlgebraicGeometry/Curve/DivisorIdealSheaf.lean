@@ -475,7 +475,8 @@ include f in
 /-- The ideal sheaf of an effective divisor on a smooth curve is invertible: every effective
 divisor is an effective Cartier divisor.
 
-(blueprint: `lem-sc-point-cartier`) -/
+(blueprint: `lem-sc-point-cartier`, `rem-ptr-sc-divisor-2`,
+`rem-ptr-sc-effective-cartier-divisor-1`) -/
 lemma isInvertible_idealSheaf (E : closedPoints C →₀ ℕ) : (idealSheaf E).IsInvertible := by
   induction E using Finsupp.induction_linear with
   | zero => exact idealSheaf_zero (X := C) ▸ IdealSheafData.isInvertible_top
@@ -875,7 +876,8 @@ effective divisor `E = ∑_P ord_P(I) [P]`: near every point, local generators o
 (`AlgebraicGeometry.Scheme.Divisor.ordAt_idealSheaf`), i.e. its stalk at `P` is `(t_P^{n_P})`
 for a uniformizer `t_P` of the discrete valuation ring `𝒪_{C,P}`, and order `0` elsewhere.
 
-(blueprint: `lem-sc-cartier-divisor-points`) -/
+(blueprint: `lem-sc-cartier-divisor-points`, `rem-ptr-sc-divisor-2`,
+`rem-ptr-sc-effective-cartier-divisor-1`) -/
 theorem IdealSheafData.IsInvertible.exists_eq_idealSheaf {I : C.IdealSheafData}
     (hI : I.IsInvertible) : ∃ E : closedPoints C →₀ ℕ, I = Divisor.idealSheaf E := by
   have hfin : {P : closedPoints C | (I.ordAt P.1).toNat ≠ 0}.Finite :=

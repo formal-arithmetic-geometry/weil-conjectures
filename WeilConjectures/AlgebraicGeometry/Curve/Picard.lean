@@ -243,7 +243,7 @@ statement is therefore the equality of the classes in `Pic(C)`, which is the con
 downstream. See `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.toMul_toPic_eq` for the
 version starting from an effective Cartier divisor, an invertible ideal sheaf.
 
-(blueprint: `lem-pc-divisor-line-bundle-agrees-sc`) -/
+(blueprint: `lem-pc-divisor-line-bundle-agrees-sc`, `rem-ptr-pc-divisor-line-bundle-4`) -/
 lemma Divisor.toMul_toPic_mapRange_eq_dual (E : closedPoints C →₀ ℕ) :
     haveI := (Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E).isInvertible_dual_toModules
     (Divisor.toPic k C (E.mapRange Nat.cast Nat.cast_zero)).toMul =

@@ -318,7 +318,7 @@ an invertible module; and it is unique up to unique isomorphism compatible with 
 
 The blueprint states this for `S = Spec k`, `k` a field.
 
-(blueprint: `lem-sc-p1-twist-exists`) -/
+(blueprint: `lem-sc-p1-twist-exists`, `rem-ptr-sc-p1-standard-5`) -/
 theorem nonempty_twistData (d : ℤ) :
     Nonempty (TwistData S d (twist T₂ S d)) ∧ (twist T₂ S d).IsInvertible ∧
       ∀ {𝓛 𝓛' : (ProjectiveLine S).Modules} (D : TwistData S d 𝓛) (D' : TwistData S d 𝓛'),

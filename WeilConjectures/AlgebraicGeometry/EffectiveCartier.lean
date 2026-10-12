@@ -204,7 +204,8 @@ theorem IdealSheafData.IsInvertible.isInvertible_toModules {J : X.IdealSheafData
 `D` (blueprint `def-pc-divisor-line-bundle`) is invertible, where `𝒪_X(-D)` is the ideal sheaf
 of the invertible ideal `J`.
 
-(blueprint: `sk-thm-picard-rr`, `lem-pc-divisor-line-bundle-properties`, part 1) -/
+(blueprint: `sk-thm-picard-rr`, `lem-pc-divisor-line-bundle-properties`, part 1;
+`rem-ptr-pc-divisor-line-bundle-4`) -/
 theorem IdealSheafData.IsInvertible.isInvertible_dual_toModules {J : X.IdealSheafData}
     (hJ : J.IsInvertible) : J.toModulesᵛ.IsInvertible := by
   have := hJ.isInvertible_toModules
