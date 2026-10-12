@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Affine refinement of proper inverse-system construction",
- "statement": "theorem proper_limit_noetherian_affine_clause {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [CompactSpace S] [QuasiSeparatedSpace S] (hS : IsAffine S) (Λ : Type u) (_ : Preorder Λ) (_ : Nonempty Λ) (_ : IsDirected Λ (· ≤ ·)) (Xs Ss : Λᵒᵖ ⥤ Scheme.{u}) (fs : Xs ⟶ Ss) (πX : (Functor.const Λᵒᵖ).obj X ⟶ Xs) (πS : (Functor.const Λᵒᵖ).obj S ⟶ Ss) (hlimX : Nonempty (IsLimit (Cone.mk X πX))) (hlimS : Nonempty (IsLimit (Cone.mk S πS))) : (∀ i : Λᵒᵖ, IsAffine (Ss.obj i) ∧ RingHom.FiniteType (algebraMap ℤ (Scheme.Γ.obj (Opposite.op (Ss.obj i))))) ∧ Nonempty (IsColimit (Scheme.Γ.mapCocone (Cone.mk S πS).op))",
+ "statement": "theorem proper_limit_noetherian_affine_clause {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [CompactSpace S] [QuasiSeparatedSpace S] (hS : IsAffine S) : ∃ (Λ : Type u) (_ : Preorder Λ) (_ : Nonempty Λ) (_ : IsDirected Λ (· ≤ ·)) (Xs Ss : Λᵒᵖ ⥤ Scheme.{u}) (fs : Xs ⟶ Ss) (πX : (Functor.const Λᵒᵖ).obj X ⟶ Xs) (πS : (Functor.const Λᵒᵖ).obj S ⟶ Ss), Nonempty (IsLimit (Cone.mk X πX)) ∧ Nonempty (IsLimit (Cone.mk S πS)) ∧ (∀ (i j : Λᵒᵖ) (a : i ⟶ j), IsAffineHom (Xs.map a) ∧ IsAffineHom (Ss.map a)) ∧ (∀ i : Λᵒᵖ, IsProper (fs.app i)) ∧ (∀ i : Λᵒᵖ, LocallyOfFiniteType (specULiftZIsTerminal.from (Ss.obj i)) ∧ QuasiCompact (specULiftZIsTerminal.from (Ss.obj i))) ∧ (∀ i : Λᵒᵖ, πX.app i ≫ fs.app i = f ≫ πS.app i) ∧ (∀ i : Λᵒᵖ, IsAffine (Ss.obj i) ∧ RingHom.FiniteType (algebraMap ℤ (Scheme.Γ.obj (Opposite.op (Ss.obj i))))) ∧ Nonempty (IsColimit (Scheme.Γ.mapCocone (Cone.mk S πS).op))",
  "source": {
   "document": "literature/stacks-project/limits.tex",
   "place": "Lemma Tag 0A0P proof"
@@ -19,16 +19,58 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Apply the named intermediate construction theorem and discharge the remaining structural obligations.",
-   "uses": [],
+   "text": "Use the envelope clause of exists_proper_finitePresentation_closedImmersion_limit to embed X as a closed subscheme i:X → Y, with g:Y → S proper and finitely presented and i followed by g equal to f.",
+   "uses": [
+    "lem-weil-pbc-proper-closed-in-proper-fp"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Choose N := Scheme.NoetherianApproximation.ofIsAffine S and apply exists_proper_noetherian_stage to g. This gives a proper finite-stage morphism p and a cartesian square H. Over its stage a, form baseChangeDiagram N.D p and baseChangeDiagramπ. Transport the baseChangeCone limit structure along H.isoPullback to obtain a limiting cone with vertex Y. The base diagram is N restricted to Over a, which retains the limiting cone with vertex S.",
+   "uses": [
+    "prop-nagata-noetherian-inverse-system",
+    "lem-weil-pbc-proper-noetherian-stage",
+    "lem-weil-pbc-scheme-over-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_closed_image_limit_system to i and that base-change diagram. Obtain the diagram Z, closed stage inclusions k, and a limiting cone with vertex X. The components k followed by the pullback projection give the natural transformation to the base diagram.",
+   "uses": [
+    "lem-weil-pbc-closed-image-limit-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use IsFiltered.exists_directed on the opposite of Over a. Whisker both diagrams, their structure maps, and their cones by the resulting initial leftOp functor. Initiality transports both limit structures. Transitions of the source diagram are affine by the closed-image theorem; transitions of the base diagram are affine by N.",
+   "uses": [
+    "lem-weil-pbc-cofiltered-limit-directed-reindex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stage maps are proper because a closed immersion followed by the base change of p is proper. Their bases have finite type over Spec Z by the fields of N and the quasi-compactness instance for compact schemes over quasi-separated bases. Finally use the image factorization equation, baseChangeCone_π_app_snd, H.isoPullback_hom_snd, and i followed by g equal to f to prove the cone equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "All base stages are affine, since the chosen approximation is ofIsAffine. The affine-open finite-type theorem applied to the top open gives finite-type section rings. Global sections preserve the limiting cone of affine schemes as a colimit.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-closed-image-limit-system",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-proper-closed-in-proper-fp",
+  "lem-weil-pbc-proper-noetherian-stage",
+  "lem-weil-pbc-scheme-over-limit",
+  "prop-nagata-noetherian-inverse-system"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 0A0P"
+  "place": "Tag 0A0P affine construction, with Tag 01ZA"
  },
  "mathlib_searches": [
   {
@@ -68,7 +110,7 @@
   "module": "Sheaf.AlgebraicGeometry.ProperLimitNoetherianCore",
   "file": "lean/Sheaf/AlgebraicGeometry/ProperLimitNoetherianCore.lean",
   "declaration": "AlgebraicGeometry.proper_limit_noetherian_affine_clause",
-  "statement": "theorem proper_limit_noetherian_affine_clause {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [CompactSpace S] [QuasiSeparatedSpace S] (hS : IsAffine S) (Λ : Type u) (_ : Preorder Λ) (_ : Nonempty Λ) (_ : IsDirected Λ (· ≤ ·)) (Xs Ss : Λᵒᵖ ⥤ Scheme.{u}) (fs : Xs ⟶ Ss) (πX : (Functor.const Λᵒᵖ).obj X ⟶ Xs) (πS : (Functor.const Λᵒᵖ).obj S ⟶ Ss) (hlimX : Nonempty (IsLimit (Cone.mk X πX))) (hlimS : Nonempty (IsLimit (Cone.mk S πS))) : (∀ i : Λᵒᵖ, IsAffine (Ss.obj i) ∧ RingHom.FiniteType (algebraMap ℤ (Scheme.Γ.obj (Opposite.op (Ss.obj i))))) ∧ Nonempty (IsColimit (Scheme.Γ.mapCocone (Cone.mk S πS).op))",
+  "statement": "theorem proper_limit_noetherian_affine_clause {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [CompactSpace S] [QuasiSeparatedSpace S] (hS : IsAffine S) : ∃ (Λ : Type u) (_ : Preorder Λ) (_ : Nonempty Λ) (_ : IsDirected Λ (· ≤ ·)) (Xs Ss : Λᵒᵖ ⥤ Scheme.{u}) (fs : Xs ⟶ Ss) (πX : (Functor.const Λᵒᵖ).obj X ⟶ Xs) (πS : (Functor.const Λᵒᵖ).obj S ⟶ Ss), Nonempty (IsLimit (Cone.mk X πX)) ∧ Nonempty (IsLimit (Cone.mk S πS)) ∧ (∀ (i j : Λᵒᵖ) (a : i ⟶ j), IsAffineHom (Xs.map a) ∧ IsAffineHom (Ss.map a)) ∧ (∀ i : Λᵒᵖ, IsProper (fs.app i)) ∧ (∀ i : Λᵒᵖ, LocallyOfFiniteType (specULiftZIsTerminal.from (Ss.obj i)) ∧ QuasiCompact (specULiftZIsTerminal.from (Ss.obj i))) ∧ (∀ i : Λᵒᵖ, πX.app i ≫ fs.app i = f ≫ πS.app i) ∧ (∀ i : Λᵒᵖ, IsAffine (Ss.obj i) ∧ RingHom.FiniteType (algebraMap ℤ (Scheme.Γ.obj (Opposite.op (Ss.obj i))))) ∧ Nonempty (IsColimit (Scheme.Γ.mapCocone (Cone.mk S πS).op))",
   "branch": "sheaf-dag",
   "by": "U1",
   "date": "2026-10-12"
@@ -86,18 +128,36 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-877b3",
-  "group": "N2",
+  "reviewer": "X-a22f2",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T085312-L-28775",
+  "landing": "20261012T135319-L-1693699",
   "kind": "interface",
-  "note": "independent Codex review: Compiled delivery files and checked their declarations, nodes, report, proof dependencies, and disputed affine-clause counterexample against the review brief",
-  "sorry_before": [
-   "AlgebraicGeometry.exists_proper_limit_noetherian_core",
-   "AlgebraicGeometry.proper_limit_noetherian_affine_clause"
+  "note": "independent Codex review: Delivered files, DAG/change record, report, forced adaptation, and three direct importers matched and compiled against the changed dependency set; no target or unintended signatures changed."
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "T2 stage 2",
+  "old_statement": "theorem proper_limit_noetherian_affine_clause {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [CompactSpace S] [QuasiSeparatedSpace S] (hS : IsAffine S) (Λ : Type u) (_ : Preorder Λ) (_ : Nonempty Λ) (_ : IsDirected Λ (· ≤ ·)) (Xs Ss : Λᵒᵖ ⥤ Scheme.{u}) (fs : Xs ⟶ Ss) (πX : (Functor.const Λᵒᵖ).obj X ⟶ Xs) (πS : (Functor.const Λᵒᵖ).obj S ⟶ Ss) (hlimX : Nonempty (IsLimit (Cone.mk X πX))) (hlimS : Nonempty (IsLimit (Cone.mk S πS))) : (∀ i : Λᵒᵖ, IsAffine (Ss.obj i) ∧ RingHom.FiniteType (algebraMap ℤ (Scheme.Γ.obj (Opposite.op (Ss.obj i))))) ∧ Nonempty (IsColimit (Scheme.Γ.mapCocone (Cone.mk S πS).op))",
+  "what": "The old theorem quantified over an arbitrary supplied inverse system and asserted affine finite-type stages; this is false (constant Spec ℚ system). The corrected theorem constructs the system itself from the affine Noetherian approximation, as required by Tag 0A0P.",
+  "source": {
+   "document": "literature/stacks-project/limits.tex",
+   "place": "Lemma Tag 0A0P proof, affine clause and Tag 01ZA"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-proper-limit-noetherian",
+    "holds": true,
+    "note": "The caller now obtains the affine system directly from the corrected construction theorem."
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.proper_limit_noetherian_affine_clause"
-  ]
+  "old_proof": [
+   {
+    "text": "Apply the named intermediate construction theorem and discharge the remaining structural obligations.",
+    "uses": [],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": []
  }
 }

@@ -78,11 +78,15 @@ theorem exists_proper_limit_noetherian
         (∀ i : Λᵒᵖ, IsAffine (Ss.obj i) ∧
           RingHom.FiniteType (algebraMap ℤ (Scheme.Γ.obj (Opposite.op (Ss.obj i))))) ∧
         Nonempty (IsColimit (Scheme.Γ.mapCocone (Cone.mk S πS).op))) := by
-  obtain ⟨Λ, hpre, hne, hdir, Xs, Ss, fs, πX, πS, hlimX, hlimS,
-    htrans, hproper, hfinite, hcomm⟩ := exists_proper_limit_noetherian_core f
-  refine ⟨Λ, hpre, hne, hdir, Xs, Ss, fs, πX, πS, hlimX, hlimS,
-    htrans, hproper, hfinite, hcomm, ?_⟩
-  intro hS
-  exact proper_limit_noetherian_affine_clause f hS Λ hpre hne hdir Xs Ss fs πX πS hlimX hlimS
+  by_cases hS : IsAffine S
+  · obtain ⟨Λ, hpre, hne, hdir, Xs, Ss, fs, πX, πS, hlimX, hlimS,
+      htrans, hproper, hfinite, hcomm, haff, hcol⟩ :=
+      proper_limit_noetherian_affine_clause f hS
+    exact ⟨Λ, hpre, hne, hdir, Xs, Ss, fs, πX, πS, hlimX, hlimS,
+      htrans, hproper, hfinite, hcomm, fun _ => ⟨haff, hcol⟩⟩
+  · obtain ⟨Λ, hpre, hne, hdir, Xs, Ss, fs, πX, πS, hlimX, hlimS,
+      htrans, hproper, hfinite, hcomm⟩ := exists_proper_limit_noetherian_core f
+    exact ⟨Λ, hpre, hne, hdir, Xs, Ss, fs, πX, πS, hlimX, hlimS,
+      htrans, hproper, hfinite, hcomm, fun h => (hS h).elim⟩
 
 end AlgebraicGeometry
