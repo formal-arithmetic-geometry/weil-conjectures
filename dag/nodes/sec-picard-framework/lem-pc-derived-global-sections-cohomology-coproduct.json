@@ -1,0 +1,168 @@
+{
+ "id": "lem-pc-derived-global-sections-cohomology-coproduct",
+ "kind": "statement",
+ "title": "Zeroth derived global sections preserves quasi-coherent coproducts",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-pc-scheme]. In $D(\\mathcal O_X)$ [def-pc-derived-category], let $(E_i)_{i\\in I}$ be any set-indexed family of objects with quasi-coherent cohomology, and let $\\iota_i:E_i\\to S$ exhibit $S$ as their ambient coproduct. Put $F(E)=H^0(R\\Gamma(X,E))$ as an additive group, using the module-valued global-sections functor [def-sc-ringed-space-module-cohomology] and its unbounded derived functor [def-pc-global-derived-rhom]. The homomorphism $\\bigoplus_{i\\in I}F(E_i)\\to F(S)$ induced on the i-th summand by $F(\\iota_i)$ is bijective. The assertion includes the empty family and arbitrary unbounded complexes.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-global-derived-rhom"
+ ],
+ "proof": [
+  {
+   "text": "Let a:X → Spec(ULift ℤ) be the structure morphism. It is quasi-compact and quasi-separated because X is qcqs and the target is affine. By [lem-pc-derived-direct-image-preserves-direct-sums], Ra_* preserves the ambient coproduct of the E_i. Its terms are quasi-coherent by [lem-pc-derived-direct-image-preserves-qcoh].",
+   "uses": [
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-pc-derived-direct-image-preserves-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
+   }
+  },
+  {
+   "text": "The equivalence [lem-pc-affine-qcoh-derived-equivalence] computes RΓ on Spec(ULift ℤ) by module complexes, and preserves coproducts. Global sections after Ra_* compute RΓ(X,-): underived global sections after a_* are global sections on X with scalar action restricted to ℤ, and K-injective resolutions compute both derived functors as in [def-pc-global-derived-rhom] and [def-pc-ringed-spaces-derived-direct-image]. Thus it suffices to compute H^0 of the module coproduct.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-pc-global-derived-rhom",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
+   }
+  },
+  {
+   "text": "Use [lem-pc-derived-module-direct-sums] to represent that coproduct by termwise sums. Exactness of module direct sums identifies kernels and images of the sum differential with sums of kernels and images, so H^0 of the termwise sum is the direct sum of H^0. The identifications commute with every coprojection. Forgetting ring actions preserves the resulting additive bijection. Therefore it is precisely the canonical direct-sum map in the statement; the empty sum gives the zero-to-zero bijection.",
+   "uses": [
+    "lem-pc-derived-module-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-direct-image-preserves-direct-sums",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pc-global-derived-rhom",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-derived-module-direct-sums"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "V1",
+  "based_on": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
+  },
+  "note": "Detailed structure-sheaf specialization of the first paragraph of Tag 09M1; calculations expanded by V1.",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "zeroth derived global sections preserves direct sums of quasi coherent complexes on a quasi compact quasi separated scheme",
+   "results": "Eight hits for module categories and sheaf cohomology; no unbounded quasi-coherent derived global-section coproduct comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.toAddMonoid",
+   "results": "Ten hits for the algebraic direct-sum universal map, none for derived global sections.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*coproduct|coproduct.*globalSections",
+   "results": "Zero hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived global sections preserves coproducts of quasi coherent complexes",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict claimed.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedTensorUnitCompact",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "right adjoint commutes with direct sums: compactness of the structure sheaf in the perfect-object argument",
+   "via": [
+    "lem-pc-derived-tensor-unit-compact",
+    "lem-pc-perfect-object-compact",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedGlobalSectionsCohomologyCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedGlobalSectionsCohomologyCoproduct.lean",
+  "declaration": "AlgebraicGeometry.derivedGlobalSections_cohomology_coproduct",
+  "statement": "theorem derivedGlobalSections_cohomology_coproduct (X : Scheme.{u})\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :\n    letI := HasDerivedCategory.standard\n      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))\n    let F := (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor ⋙\n      DerivedCategory.homologyFunctor\n        (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) 0 ⋙\n      forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat\n    ∀ (I : Type u) (E : I → schemeDerivedQCohCategory X)\n      (S : schemeDerivedCategory X) (ι : ∀ i, (E i).obj ⟶ S),\n      IsColimit (Cofan.mk S ι) →\n      Function.Bijective (DirectSum.toAddMonoid (fun i ↦ (F.map (ι i)).hom) :\n        (⨁ i : I, F.obj (E i).obj) →+ F.obj S) ",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T110322-L-623155",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T110322-L-623155",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

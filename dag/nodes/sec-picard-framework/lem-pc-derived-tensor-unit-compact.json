@@ -16,21 +16,23 @@
  ],
  "proof": [
   {
-   "text": "The fixed K-flat derived tensor unit [def-pc-scheme-derived-tensor-structure] is isomorphic to the structure sheaf in degree zero: the underived structure sheaf is flat and the monoidal localization takes its degree-zero complex to its unit. Its only nonzero cohomology is the quasi-coherent structure sheaf, so it gives an object U of D_QCoh.",
+   "text": "Construct O_X[0] using the single functor. Its degree-zero homology is O_X, and all other homology sheaves are zero. The structure sheaf and the zero free sheaf are quasi-coherent. The fixed derived tensor unit is definitionally O_X[0], so this constructs U in the full quasi-coherent subcategory with Iso.refl as its ambient unit identification.",
    "uses": [
     "def-pc-scheme-derived-tensor-structure",
     "def-pc-derived-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
     "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
    }
   },
   {
-   "text": "Take the structure morphism a:X to Spec(Z), using ULift(Z) to stay in the scheme universe. It is quasi-compact and quasi-separated. The structure sheaf is flat, so derived pullback of O_Spec(Z) is O_X. Apply [lem-pc-ringed-spaces-derived-adjoint] to obtain Hom(O_X,N) = Hom(O_Spec(Z),Ra_*N), additively and naturally in N.",
+   "text": "Use [lem-pc-derived-ambient-has-coproducts] and [lem-pc-derived-qcoh-closed-coproducts] to see that the inclusion of the quasi-coherent full subcategory preserves coproducts. Apply [lem-pc-derived-global-sections-cohomology-coproduct] to the ambient cofan formed from its coprojections.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint"
+    "lem-pc-derived-ambient-has-coproducts",
+    "lem-pc-derived-qcoh-closed-coproducts",
+    "lem-pc-derived-global-sections-cohomology-coproduct"
    ],
    "elementary": false,
    "source": {
@@ -39,15 +41,12 @@
    }
   },
   {
-   "text": "Derived direct image commutes with coproducts of quasi-coherent objects by [lem-pc-derived-direct-image-preserves-direct-sums]. By [lem-pc-affine-qcoh-derived-equivalence] on Spec(Z), Hom(O_Spec(Z),L) is H^0(RGamma(L)). That equivalence preserves coproducts. Coproducts of complexes of Z-modules are termwise and exact; hence their H^0 is the direct sum of the H^0 groups. The ambient and full-subcategory coproducts agree by [lem-pc-derived-ambient-direct-sums] and [lem-pc-derived-qcoh-direct-sums]. Naturality identifies this bijection on each summand with composition by its inclusion, so the canonical map in [def-pc-compact-object] is bijective, including for the empty family.",
+   "text": "Apply the natural additive equivalences [lem-pc-derived-structure-sheaf-hom-hypercohomology] to each summand and the coproduct. Lift ambient maps to the full subcategory and apply DirectSum.map to the component equivalences. This map is bijective by componentwise injectivity and surjectivity. Naturality identifies the conjugate of the canonical compactness map with the bijective global-sections comparison. DirectSum.addHom_ext checks this equality on every summand. Cancel the target equivalence to obtain injectivity and surjectivity of the canonical Hom map of [def-pc-compact-object], and assemble the existence statement.",
    "uses": [
-    "lem-pc-derived-direct-image-preserves-direct-sums",
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-pc-derived-ambient-direct-sums",
-    "lem-pc-derived-qcoh-direct-sums",
+    "lem-pc-derived-structure-sheaf-hom-hypercohomology",
     "def-pc-compact-object"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
     "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
@@ -57,15 +56,20 @@
  "proof_deps": [
   "def-pc-scheme-derived-tensor-structure",
   "def-pc-derived-category",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-pc-derived-direct-image-preserves-direct-sums",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-derived-ambient-direct-sums",
-  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-derived-ambient-has-coproducts",
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "lem-pc-derived-global-sections-cohomology-coproduct",
+  "lem-pc-derived-structure-sheaf-hom-hypercohomology",
   "def-pc-compact-object"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "V1",
+  "based_on": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
+  },
+  "note": "Constructed unit; canonical direct-sum map proved from two strictly smaller intermediate calculations.",
   "document": "literature/stacks-project/perfect.tex",
   "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
  },
@@ -156,9 +160,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T085401-L-48510",
+  "landing": "20261012T110322-L-623155",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
