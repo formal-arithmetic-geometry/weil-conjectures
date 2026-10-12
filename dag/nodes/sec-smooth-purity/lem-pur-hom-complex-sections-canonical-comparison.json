@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-hom-complex-sections-canonical-comparison",
+ "kind": "lemma",
+ "title": "Canonical shifted comparison specified on section cocycles",
+ "statement": "For any ringed site [def-pur-localized-ringed-site] with commutative ring sheaf R, object U, arbitrary cochain complexes L and I of R-modules [def-pc-cochain-complex-modules] and integer n, let S be the abelian-group complex obtained by taking sections at U of the sheaf Hom complex [def-pur-hom-complex], let res be restriction to U and Q the homotopy-category quotient. There is an equivalence e from S.cycles n to external degree-n cocycles between res L and res I, whose component at p,q with p+n=q and localized object W is the evaluated product projection applied to the image of z in S.X n. There is an equivalence a from S.homology n to homotopy-category morphisms res L to (res I)[n], and a applied to the homology class of z is Q applied to Cocycle.equivHomShift.symm (e z).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8Y, Equation 21.34.0.1; componentwise composition in Section 21.34"
+ },
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the product cone in homComplex_exists at U. The forgetful functor on module sheaves and evaluation preserve products, and the underlying abelian-group functor preserves them. Internal Hom sections at U are localized presheaf-module maps; since the objects are module sheaves these are exactly localized sheaf-module maps. Thus the product projections give an additive bijection from each degree of the section complex to all external cochains of that degree between L restricted to U and I restricted to U. Its components are precisely the evaluated projections appearing in the conclusion.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the differential projection formula in homComplex_exists to every p. Under the degreewise additive bijections, the differential is d_I composed with the family minus n.negOnePow times the family composed with d_L. This is the external Hom differential. Hence the bijections carry kernels to external cocycles and images to external coboundaries, yielding the equivalence e with the stated component formula and an additive bijection on the corresponding quotient groups. The standard homology projection and the external cocycle quotient both have exactly these kernels, so their universal properties give an equivalence from S.homology n to external Hom cohomology classes, sending S.homologyπ n z to the class of e z.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the quotient equivalence with Mathlib CochainComplex.HomComplex.CohomologyClass.homAddEquiv. Its representative lemma toHom_mk identifies the class of e z with the homotopy-category image of Cocycle.equivHomShift.symm (e z), giving a and the requested formula. This uses no K-injectivity. At n=0 it is the usual unshifted comparison; for a zero complex both quotients are singleton groups. All degrees use products over every integer, so unbounded complexes introduce no finite-support condition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expansion of the immediate comparison of Tag 0A8Y, Equation 21.34.0.1, via product projections and Mathlib external Hom cohomology"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical cocycle equivalence sections of internal Hom complex localized morphisms",
+   "results": "CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CochainComplex.HomComplex.Cocycle.ofHom_coe, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CochainComplex.HomComplex.CohomologyClass.toHom_mk, CochainComplex.HomComplex.Cocycle.ofHom_homOf_eq_self",
+   "date": "2026-10-13",
+   "verdict": "No sheaf-section comparison: these are external Hom cocycle and homotopy-category tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.Cocycle.equivHomShift",
+   "results": "CochainComplex.HomComplex.Cocycle.equivHomShift, CochainComplex.HomComplex.Cocycle.equivHomShift_apply, CochainComplex.HomComplex.Cocycle.equivHomShift_symm_apply, CochainComplex.HomComplex.Cocycle.equivHomShift_comp, CochainComplex.HomComplex.Cocycle.equivHomShift_comp_shift, CochainComplex.HomComplex.Cocycle.equivHomShift_symm_precomp, CochainComplex.HomComplex.Cocycle.equivHomShift_smul, CochainComplex.HomComplex.Cocycle.equivHomShift_symm_postcomp",
+   "date": "2026-10-13",
+   "verdict": "No sheaf-section comparison: these are external Hom cocycle and homotopy-category tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.Cocycle.equivHomShift",
+   "results": "CochainComplex.HomComplex.Cocycle.equivHomShift, CochainComplex.HomComplex.Cocycle.equivHomShift_apply, CochainComplex.HomComplex.Cocycle.equivHomShift_symm_apply, CochainComplex.HomComplex.Cocycle.equivHomShift_comp, CochainComplex.HomComplex.Cocycle.equivHomShift_comp_shift, CochainComplex.HomComplex.Cocycle.equivHomShift_symm_precomp, CochainComplex.HomComplex.Cocycle.equivHomShift_smul, CochainComplex.HomComplex.Cocycle.equivHomShift_symm_postcomp",
+   "date": "2026-10-13",
+   "verdict": "No sheaf-section comparison: these are external Hom cocycle and homotopy-category tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology sections internal Hom complex morphisms shifted homotopy category",
+   "results": "CochainComplex.HomComplex.CohomologyClass.toHom, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, CochainComplex.HomComplex.CohomologyClass.toHom_mk, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom, CochainComplex.HomComplex.CohomologyClass.homAddEquiv, CochainComplex.HomComplex.CohomologyClass.homAddEquiv_apply, CochainComplex.HomComplex.leftHomologyData'_H_coe, CochainComplex.HomComplex.leftHomologyData_H_coe",
+   "date": "2026-10-13",
+   "verdict": "No sheaf-section comparison: these are external Hom cocycle and homotopy-category tools."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex_sections|localizedHomComplex|equivHomShift_symm",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+   "date": "2026-10-13",
+   "verdict": "No sheaf-section comparison: these are external Hom cocycle and homotopy-category tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "sections internal Hom complex cohomology canonical cocycle equivalence homotopy category shifted target",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomComplexSectionsHomotopyNaturality",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-hom-complex-sections-derived-naturality",
+   "place": "The shifted cocycle and boundary comparison, before naturality and derived localization",
+   "via": [
+    "lem-pur-hom-complex-sections-homotopy-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexSectionsCanonicalComparison",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexSectionsCanonicalComparison.lean",
+  "declaration": "CategoryTheory.homComplex_sections_canonical_comparison",
+  "statement": "theorem homComplex_sections_canonical_comparison\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    (L I : CochainComplex\n      (SheafOfModules.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ)\n    (n : ℤ) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let E := (SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n      forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℤ)\n    letI := module_overFunctor_preservesZero R₀ U\n    let res := (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex\n      (ComplexShape.up ℤ)\n    let Q := HomotopyCategory.quotient (SheafOfModules.{max u v} (R₀.over U))\n      (ComplexShape.up ℤ)\n    let S := E.obj (homComplex (R := R) L I)\n    let π := Classical.choose (Classical.choose_spec\n      (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))\n    ∃ e : S.cycles n ≃ CochainComplex.HomComplex.Cocycle (res.obj L) (res.obj I) n,\n      (∀ (z : S.cycles n) (p q : ℤ) (hpq : p + n = q) (W : (Over U)ᵒᵖ),\n        ((e z).val.v p q hpq).val.app W =\n          (((π L I n p q hpq).val.app (op U)) (S.iCycles n z)).app W) ∧\n      ∃ a : S.homology n ≃ (Q.obj (res.obj L) ⟶ Q.obj ((res.obj I)⟦n⟧)),\n        ∀ z : S.cycles n, a (S.homologyπ n z) =\n          Q.map (CochainComplex.HomComplex.Cocycle.equivHomShift.symm (e z))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T173815-L-3292495",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T173815-L-3292495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

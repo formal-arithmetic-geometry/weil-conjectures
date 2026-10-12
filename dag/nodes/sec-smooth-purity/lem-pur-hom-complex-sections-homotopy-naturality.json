@@ -14,27 +14,33 @@
  ],
  "proof": [
   {
-   "text": "Evaluate the product projections of the sheaf Hom complex at U. Internal Hom sections are localized module maps, and sections preserve products, so degree-n sections are families L^p|U→I^(p+n)|U. The differential equation d_I f=(-1)^n f d_L is precisely the chain-map equation into I|U[n]. The degree-(n−1) differential becomes the null-homotopy formula after multiplying the homotopy family by (-1)^n. Both quotient projections are surjective, so their quotients identify homology with homotopy classes.",
+   "text": "Apply the canonical shifted section comparison to (L,I′) and (L′,I), obtaining e,e′ and a,b with component and representative formulas.",
    "uses": [
-    "def-pur-hom-complex"
+    "lem-pur-hom-complex-sections-canonical-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The chosen Hom bifunctor has componentwise pre- and post-composition by its projection formulas. Thus the map on cycles is f↦s f t, whose image in the homotopy category is precomposition by t|U and postcomposition by (s|U)[n]. The same sign depends only on n, so it commutes with both maps. Pass to homology using surjectivity of the cycle projection.",
+   "text": "The cyclesMap_i identity and the bifunctor projection formula in homComplex_exists show that e′ of the induced cycle is e precomposed by res t and postcomposed by res s. Prove this by cocycle and cochain extensionality, then module-sheaf extensionality. On each localized component, homObjMap is the composite t, the section map, and s; substitute the component formula for e.",
    "uses": [
     "def-pur-hom-complex"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The homology projection is epi in AddCommGrpCat, hence surjective. Choose a cycle representative of x and use homologyπ_naturality. Apply the representative formula for b, the cycle equality, Mathlib equivHomShift_symm_postcomp and equivHomShift_symm_precomp, and preservation of composition by Q. Finally substitute the representative formula for a. This proves the naturality equality for every x.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pur-hom-complex-sections-canonical-comparison",
   "def-pur-hom-complex"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A8Y, Equation 21.34.0.1 and componentwise composition"
+  "place": "Tag 0A8Y comparison and componentwise composition; D3 Lean projection calculation and descent by homologyπ, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -108,9 +114,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T152348-L-2313446",
+  "landing": "20261012T173815-L-3292495",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
