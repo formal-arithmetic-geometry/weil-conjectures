@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
+import Mathlib.FieldTheory.PurelyInseparable.Exponent
+import Sheaf.RingTheory.FiniteFractionRootSubstitution
 
 /-!
 # A coefficient-root cover for a purely inseparable polynomial field extension
@@ -21,6 +23,39 @@ Source: Stacks Project, Algebra, Lemma 10.161.13 (Tag 032O), second assertion.
 universe u
 set_option autoImplicit false
 
+private theorem extend_from_basis_roots
+    (F L M : Type u) [Field F] [Field L] [Field M] [Algebra F L]
+    (p n m : ℕ) [Fact p.Prime] [CharP M p]
+    (b : Module.Basis (Fin m) F L) (φ : L →+* F)
+    (hφ : ∀ c : F, φ (algebraMap F L c) = c ^ (p ^ n))
+    (h : F →+* M) (z : Fin m → M) (hz : ∀ i, z i ^ (p ^ n) = h (φ (b i))) :
+    ∃ f : L →+* M, ∀ c : F, f (algebraMap F L c) = h c := by
+  classical
+  let f₀ (y : L) : M := ∑ i, h (b.repr y i) * z i
+  have hp (y : L) : f₀ y ^ (p ^ n) = h (φ y) := by
+    dsimp only [f₀]
+    rw [sum_pow_char_pow]
+    simp only [mul_pow, hz, ← map_pow, ← map_mul, ← map_sum]
+    congr 1
+    conv_rhs => rw [← b.sum_repr y]
+    simp only [map_sum, Algebra.smul_def, map_mul, hφ]
+  have hinj : Function.Injective (fun x : M ↦ x ^ (p ^ n)) :=
+    (iterateFrobenius M p n).injective
+  let f : L →+* M :=
+    { toFun := f₀
+      map_zero' := hinj (by simp only [hp, map_zero, zero_pow (pow_ne_zero n
+        (Fact.out : p.Prime).ne_zero)])
+      map_one' := hinj (by simp [hp])
+      map_add' := fun x y ↦ hinj (by
+        dsimp only
+        rw [hp, add_pow_char_pow, hp, hp, map_add, map_add])
+      map_mul' := fun x y ↦ hinj (by
+        dsimp only
+        rw [hp, mul_pow, hp, hp, map_mul, map_mul]) }
+  refine ⟨f, fun c ↦ hinj ?_⟩
+  change f₀ (algebraMap F L c) ^ (p ^ n) = (h c) ^ (p ^ n)
+  rw [hp, hφ, map_pow]
+
 /-- A finite purely inseparable extension of `Frac(R[X])` embeds in the fraction
 field of a polynomial ring over the integral closure of R in a finite coefficient
 extension. The map sends X to a positive power of the new variable. No Japanese,
@@ -30,26 +65,18 @@ Source: Stacks Project, Algebra, Lemma 10.161.13 (Tag 032O), coefficient-root co
 in the proof of the second assertion.
 (blueprint: lem-weil-pbc-purely-inseparable-polynomial-cover).
 
-Proof: Put K = Frac(R), F = Frac(R[X]), and identify F with K(x) by clearing
-coefficient denominators. Take a finite F-basis of L and choose a common q = p^e
-such that its q-th powers lie in F. Express these powers as quotients of polynomials
-over K. Inside an algebraic closure of L, adjoin to K the q-th roots of their finitely
-many coefficients. Their generated algebra is spanned by monomials with each exponent
-less than q, hence is finite dimensional; being a domain over a field, it is a field E.
-Choose t with t^q = x. Taking coefficient roots in each numerator and denominator
-produces polynomials in t whose q-th powers are the original numerator and denominator.
-The denominator is nonzero, since its q-th power is nonzero. Injectivity of iterated
-Frobenius identifies each original basis element with the quotient of these rooted
-polynomials. Hence all of L lies in E(t). The element t is transcendental over E:
-otherwise E/K finite would make x = t^q algebraic over K, contradicting the
-transcendence of x. Let A be the integral closure of R in E. Because E/K is finite,
-E is the fraction field of A. Clearing coefficient denominators then identifies
-Frac(A[T]) with E(T); evaluation at t gives an isomorphism E(T) with E(t). Composing
-the embedding L into E(t) with its inverse yields the ring map f. On R[X] it is
-evaluation with r mapped to its constant image in A[T] and X mapped to T^q, exactly
-the displayed equation. The algebraic closure, its finite subfields and Frac(A[T])
-all lie in Type u; no universe enlargement is needed. For the trivial extension,
-take q = 1, E = K and the ordinary fraction-field identification. -/
+Proof: Put F = Frac(R[X]). The finite purely inseparable extension has a common
+exponent n. Its descended iterated Frobenius is a ring map φ : L → F satisfying
+φ(c) = c^(p^n) for c in F. Choose a finite F-basis b of L. Apply the finite-fraction
+root-substitution theorem to the family φ(b_i): it constructs a finite coefficient
+extension E, the substitution map h : F → Frac(A[T]) with A = integralClosure R E,
+and elements z_i with z_i^(p^n) = h(φ(b_i)). Explicitly set
+f(y) = Σ_i h((b.repr y)_i) z_i. The Frobenius sum and product identities and the
+basis expansion show f(y)^(p^n) = h(φ(y)). Since iterated Frobenius is injective in
+the target field, this identity proves that f preserves zero, one, addition and
+multiplication, and f(c) = h(c) for every c in F. The scalar-tower identity and the
+substitution formula for h give the displayed equation on R[X]. The exponent
+q = p^n is positive, and every construction preserves the universe of R. -/
 theorem exists_purelyInseparable_polynomial_cover
     (R : Type u) [CommRing R] [IsDomain R]
     (p : ℕ) [Fact p.Prime] [CharP (FractionRing (Polynomial R)) p]
@@ -68,4 +95,26 @@ theorem exists_purelyInseparable_polynomial_cover
               (Polynomial.eval₂RingHom
                 (Polynomial.C.comp (algebraMap R (integralClosure R E)))
                 (Polynomial.X ^ q) a) := by
-  sorry
+  classical
+  let F := FractionRing (Polynomial R)
+  let n := IsPurelyInseparable.exponent F L
+  let φ : L →+* F := IsPurelyInseparable.iterateFrobenius F L p (le_refl n)
+  let b := Module.finBasis F L
+  obtain ⟨E, hE, aKE, aRE, ht, hfin, h, hpoly, hroots⟩ :=
+    exists_finite_fraction_root_substitution R p n (Module.finrank F L)
+      (fun i ↦ φ (b i))
+  let := hE
+  let := aKE
+  let := aRE
+  let := ht
+  let := hfin
+  let M := FractionRing (Polynomial (integralClosure R E))
+  have : CharP M p := charP_of_injective_ringHom h.injective p
+  choose z hz using hroots
+  obtain ⟨f, hf⟩ := extend_from_basis_roots F L M p n (Module.finrank F L) b φ
+    (IsPurelyInseparable.iterateFrobenius_algebraMap L p (le_refl n)) h z hz
+  refine ⟨E, hE, aKE, aRE, ht, hfin, p ^ n, pow_pos (Fact.out : p.Prime).pos _,
+    f, ?_⟩
+  intro a
+  rw [IsScalarTower.algebraMap_apply (Polynomial R) F L, hf]
+  exact hpoly a

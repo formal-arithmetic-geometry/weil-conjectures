@@ -1,0 +1,161 @@
+{
+ "id": "lem-weil-pbc-finite-fraction-root-substitution",
+ "kind": "statement",
+ "title": "Finite rational functions acquire roots under polynomial substitution",
+ "statement": "Let $R$ be an integral domain [def-weil-pbc-normal-ring], $F=\\operatorname{Frac}(R[X])$ [def-weil-polynomial-ring] of prime characteristic $p$ [def-pc-field-characteristic], and let $n,m\\geq0$ and $a_i\\in F$ for $i\\in\\{0,\\ldots,m-1\\}$. There exists a finite field extension $E/\\operatorname{Frac}(R)$ [def-weil-finitely-generated-module] with compatible $R$-algebra structure. Put $A=\\operatorname{integralClosure}_R(E)$ [def-weil-pbc-integral-closure]. There is a field embedding $h:F\\to\\operatorname{Frac}(A[T])$ whose restriction to $R[X]$ is the coefficient map $R\\to A$ and substitution $X\\mapsto T^{p^n}$, and for each $i$ an element $z_i\\in\\operatorname{Frac}(A[T])$ with $z_i^{p^n}=h(a_i)$. Every field is in the universe of $R$. No normality, Noetherian or Japanese hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 032O, coefficient-root construction in the second assertion (https://stacks.math.columbia.edu/tag/032O); omitted finite-coefficient details expanded in the Lean proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-polynomial-ring",
+  "def-pc-field-characteristic",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Use IsFractionRing.div_surjective to present the finitely many a_i as quotients of polynomials P_i/D_i over R. Take the finite union S of their nonzero coefficients. In an algebraic closure Ω of K=Frac(R), choose p^n-th roots rt(r) of the images of r in S. Adjoin their finite image to K to form the actual subfield E. Every generator is integral over K since its positive p^n-th power is in K (IsIntegral.of_pow). IntermediateField.finiteDimensional_adjoin gives E/K finite.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 032O, coefficient-root construction in the second assertion (https://stacks.math.columbia.edu/tag/032O); omitted finite-coefficient details expanded in the Lean proof"
+   }
+  },
+  {
+   "text": "Equip E with the R-algebra structure through K. Each rt(r) is integral over R, again by IsIntegral.of_pow because its power is the image of r. Thus it gives an element of A=integralClosure R E with the same power equation. The coefficient map R→A is injective, as follows by composing with A→E and the injective maps R→K→E.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 032O, coefficient-root construction in the second assertion (https://stacks.math.columbia.edu/tag/032O); omitted finite-coefficient details expanded in the Lean proof"
+   }
+  },
+  {
+   "text": "Define j:R[X]→A[T] by coefficient mapping and X↦T^(p^n). This equals polynomial map followed by Polynomial.expand; both are injective, the latter by positivity of p^n. Compose with A[T]→Frac(A[T]) and extend to F using IsFractionRing.lift. Its algebraMap compatibility gives precisely the required substitution formula.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 032O, coefficient-root construction in the second assertion (https://stacks.math.columbia.edu/tag/032O); omitted finite-coefficient details expanded in the Lean proof"
+   }
+  },
+  {
+   "text": "For each P_i and D_i, the coefficient-root equations show its mapped polynomial belongs to the image of Polynomial.mapRingHom(iterateFrobenius A p n), by Polynomial.mem_map_range. Choose its preimage Q_i or B_i. Polynomial.map_iterateFrobenius_expand and Polynomial.map_expand imply Q_i^(p^n)=j(P_i) and B_i^(p^n)=j(D_i). Their quotient in Frac(A[T]) has p^n-th power h(a_i), using div_pow, map_pow and map_div₀. The rooted denominator is nonzero because its power is the injective image of the original denominator. Zero numerators, n=0 and m=0 all fit the same proof.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 032O, coefficient-root construction in the second assertion (https://stacks.math.columbia.edu/tag/032O); omitted finite-coefficient details expanded in the Lean proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-integral-closure",
+  "def-weil-ring-frobenius"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 032O, coefficient-root construction in the second assertion (https://stacks.math.columbia.edu/tag/032O); omitted finite-coefficient details expanded in the Lean proof",
+  "note": "The explicit denominator-over-R construction expands the coefficient-root details omitted in Tag 032O."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For finitely many rational functions over a domain, adjoining roots of their coefficients and substituting X by a prime power gives roots in a finite coefficient extension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.map_iterateFrobenius_expand",
+   "results": "Polynomial.map_iterateFrobenius_expand",
+   "date": "2026-10-13",
+   "verdict": "No full match. These APIs implement polynomial coefficient lifting, Frobenius expansion and fraction presentations in the complete Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mem_map_range|map_iterateFrobenius_expand|div_surjective",
+   "results": "Mathlib/Algebra/Algebra/Epi.lean, Mathlib/Algebra/Polynomial/Eval/Subring.lean, Mathlib/Algebra/Polynomial/Eval/Subring.lean, Mathlib/Algebra/Polynomial/Eval/Subring.lean, Mathlib/Algebra/Polynomial/Eval/Subring.lean, Mathlib/Algebra/Polynomial/Eval/Subring.lean, Mathlib/Algebra/Polynomial/Lifts.lean, Mathlib/Algebra/Polynomial/Lifts.lean",
+   "date": "2026-10-13",
+   "verdict": "No full match. These APIs implement polynomial coefficient lifting, Frobenius expansion and fraction presentations in the complete Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PurelyInseparablePolynomialCover",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Finite coefficient-root construction in the positive-characteristic normalization argument, refined to a finite family of fractions; step 2 of lem-weil-pbc-purely-inseparable-polynomial-cover",
+   "via": [
+    "lem-weil-pbc-purely-inseparable-polynomial-cover",
+    "lem-weil-pbc-polynomial-purely-inseparable-closure-finite",
+    "lem-weil-pbc-polynomial-ring-n2",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteFractionRootSubstitution",
+  "file": "lean/Sheaf/RingTheory/FiniteFractionRootSubstitution.lean",
+  "declaration": "exists_finite_fraction_root_substitution",
+  "statement": "theorem exists_finite_fraction_root_substitution\n    (R : Type u) [CommRing R] [IsDomain R]\n    (p : ℕ) [Fact p.Prime] [CharP (FractionRing (Polynomial R)) p]\n    (n m : ℕ) (a : Fin m → FractionRing (Polynomial R)) :\n    ∃ (E : Type u) (_ : Field E) (_ : Algebra (FractionRing R) E) (_ : Algebra R E)\n      (_ : IsScalarTower R (FractionRing R) E) (_ : FiniteDimensional (FractionRing R) E),\n      ∃ h : FractionRing (Polynomial R) →+* FractionRing (Polynomial (integralClosure R E)),\n        (∀ b : Polynomial R,\n          h (algebraMap (Polynomial R) (FractionRing (Polynomial R)) b) =\n            algebraMap (Polynomial (integralClosure R E))\n              (FractionRing (Polynomial (integralClosure R E)))\n              (Polynomial.eval₂RingHom\n                (Polynomial.C.comp (algebraMap R (integralClosure R E)))\n                (Polynomial.X ^ (p ^ n)) b)) ∧\n        ∀ i, ∃ z : FractionRing (Polynomial (integralClosure R E)), z ^ (p ^ n) = h (a i)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T220516-L-1391872",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T220516-L-1391872",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
