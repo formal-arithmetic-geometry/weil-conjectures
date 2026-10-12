@@ -10,9 +10,8 @@ public import Mathlib.CategoryTheory.CofilteredSystem
 public import Mathlib.RingTheory.Ideal.Operations
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.CohomologyPowersIdealApplication
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+import Sheaf.Paper.MLCohomologyPowersIdealKernelBound
+import Sheaf.Paper.MLCohomologyPowersIdealImageStabilization
 
 /-! # Mittag-Leffler and Artin-Rees bounds for cohomology of ideal-power quotients
 
@@ -95,6 +94,30 @@ theorem ml_cohomology_powers_ideal
           (I.map (Scheme.ΓSpecIso (.of A)).inv.hom)).comap f) F ⋙
         RingedSpace.moduleCohomology X.toRingedSpace p ⋙
         forget (ModuleCat ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))).IsMittagLeffler := by
-  sorry
+  obtain ⟨c₁, hker⟩ := ml_cohomology_powers_ideal_kernel_bound f I F hF p
+  obtain ⟨c₂, himage⟩ := ml_cohomology_powers_ideal_image_stabilization f I F hF p
+  refine ⟨max c₁ c₂, ?_, ?_, ?_⟩
+  · intro n hn hc
+    exact (hker n hn ((le_max_left c₁ c₂).trans hc)).trans
+      (Submodule.smul_mono_left
+        (Ideal.pow_le_pow_right (Nat.sub_le_sub_left (le_max_left c₁ c₂) n)))
+  · intro n k hn hk
+    exact himage n k hn ((Nat.add_le_add_left (le_max_right c₁ c₂) n).trans hk)
+  · apply (Functor.isMittagLeffler_iff_subset_range_comp _).2
+    intro j
+    refine ⟨op (j.unop + c₂), (homOfLE (Nat.le_add_right j.unop c₂)).op, ?_⟩
+    intro k g
+    have hj : j.unop + 1 + c₂ ≤ j.unop + c₂ + 1 := by omega
+    have hk : j.unop + 1 + c₂ ≤ k.unop + 1 := by
+      have hg := leOfHom g.unop
+      change j.unop + c₂ ≤ k.unop at hg
+      omega
+    change Set.range (((RingedSpace.moduleCohomology X.toRingedSpace p).map
+      (formalModuleQuotientMap _ (𝟙 F) (by dsimp; omega))).hom) ⊆
+      Set.range (((RingedSpace.moduleCohomology X.toRingedSpace p).map
+      (formalModuleQuotientMap _ (𝟙 F) (by omega))).hom)
+    rw [himage (j.unop + 1) (j.unop + c₂ + 1) (by omega) hj,
+      himage (j.unop + 1) (k.unop + 1) (by omega) hk]
 
 end AlgebraicGeometry
+

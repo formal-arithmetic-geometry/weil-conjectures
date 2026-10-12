@@ -8204,3 +8204,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/S3/Sheaf.RingTheory.GenericFormalFiberFractionFieldTransport (stage 3; reviewer PASS; first push; landing 20261012T144146-L-2107628 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:41 L: merged deliver/T1/Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyAction (stage 3; reviewer PASS; first push; landing 20261012T144146-L-2107726 (interface); batch 20261012T144049; modules 4; new nodes 3)
 - 14:41 L: merged deliver/T1/Sheaf.AlgebraicGeometry.StalkFlatTensorPullbackKernels (stage 3; reviewer PASS; first push; landing 20261012T144146-L-2107827 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/T1/Sheaf.Paper.MLCohomologyPowersIdeal (stage 3; reviewer PASS; first push; landing 20261012T144147-L-2107926 (interface); batch 20261012T144049; modules 3; new nodes 2)
