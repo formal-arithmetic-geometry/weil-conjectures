@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
+import Sheaf.AlgebraicGeometry.RestrictedAffineComplexSystem
 
 /-! # Complex presentation of raw restricted cohomology
 
@@ -126,28 +126,21 @@ restricted-cohomology system), Tag 03Q8 (derived Hom computes restricted cohomol
 and Tag 0EZM (the canonical complex cohomology maps).
 (blueprint: lem-sbc-higher-direct-image-raw-affine-complex-presentation).
 
-Proof: Base change D and c along U.hom, taking the schemes U times_S X_i and
-U times_S X and their pullback projections. The pullback universal property
-makes the new cone limiting. Base change preserves affine transitions and
-qcqs structure maps; since U is affine the stages are compact and quasi-separated.
-Restrict F_i along the second projections and restrict H to the limit. Use
-inverse-image composition to transport phi and its identity and composition
-laws, and eH and hH. Put these sheaves in single complexes in degree zero, with
-common lower bound zero. Inverse image preserves the coefficient colimit, and
-single complexes preserve colimits; hence their coefficient cocone L is colimiting.
-Take the cohomology diagram of these single complexes and the cocone whose legs
-are canonical derived pullback followed by the shifted coefficient map. Construct
-P by taking homology of the derived adjunction unit and the global-sections
-composition comparison; this is the equation hP, and functoriality gives hH and hB.
-For each stage and the limit, the free abelian sheaf sections adjunction identifies
-raw derived Hom with restricted cohomology: restriction to an etale scheme has
-an exact left adjoint and thus preserves injectives. The fully faithful bounded-below
-inclusion identifies the Hom groups with unbounded cohomology of the single
-complexes. These identifications are additive, giving stageIso and limitIso.
-Naturality of derived adjunction, inverse-image composition, the single-functor
-comparison and the shift comparison identifies each leg with exactly the raw
-pullback followed by the specified coefficient map. This proves compatibility.
-No cohomology continuity or existence of representatives is used here. -/
+Proof: Apply exists_restricted_affine_complex_system to the geometric and coefficient
+system. It supplies the qcqs limiting diagram, single-complex transitions, common
+lower bound zero, coefficient colimit and canonical cohomology cocone. These data
+involve restricted cohomology, without raw derived Hom. Independently apply
+exists_raw_restricted_cohomology_natural_iso: for every structure morphism and
+coefficient map it identifies raw derived Hom with restricted cohomology and
+intertwines the explicit raw pullback with rawAffineRestrictedCohomologyMap.
+Compose its stage isomorphisms with the geometric restrictionIso, and its limit
+isomorphism with restrictionLimitIso. Fill the presentation constructor using
+the geometric data and rawAffineComplexPullback; the prescribed equation hP is
+reflexivity. For a class t, expand these composite isomorphisms, use the geometric
+leg equation on the image of t, and use the natural-comparison equation under
+the limit isomorphism. This proves the required compatibility. The two imported
+theorems retain the geometric construction and restricted-Hom comparison as
+separate obligations; no continuity or existence of representatives is used. -/
 theorem exists_raw_affine_complex_presentation {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)
@@ -183,6 +176,24 @@ theorem exists_raw_affine_complex_presentation {S : Scheme.{v}}
       (fun i t ↦ abelianHigherDirectImageRawPullback (c.π.app (op i.unop.unop)).left
         (D.obj (op i.unop.unop)).hom c.pt.hom (Over.w (c.π.app (op i.unop.unop))) p
         (F i.unop.unop) (colimit H) ((eH i.unop.unop).inv ≫ colimit.ι H i.unop.unop) U t)
-      (p : ℤ) := by sorry
+      (p : ℤ) := by
+  obtain ⟨e, he⟩ := exists_raw_restricted_cohomology_natural_iso S p U
+  obtain ⟨D', c', hc', compact, quasiSeparated, affine, K, ψ, hid, hcomp,
+      hbelow, G, eG, hG, T, eT, hT, L, hL, B, eB, hB, r, s, hs⟩ :=
+    exists_restricted_affine_complex_system D c hc F φ hφid hφcomp H eH hH p U
+  refine RawCohomologyComplexPresentation.mk D' c' hc' compact quasiSeparated affine
+    K ψ hid hcomp 0 hbelow G eG hG (rawAffineComplexPullback (p : ℤ))
+    (fun _ _ ↦ rfl) T eT hT L hL B eB hB
+    (fun i ↦ e (D.obj (op i.unop.unop)).hom (F i.unop.unop) ≪≫ r i)
+    (e c.pt.hom (colimit H) ≪≫ s) ?_
+  intro i t
+  change B.ι.app i ((r i).hom
+      ((e (D.obj (op i.unop.unop)).hom (F i.unop.unop)).hom t)) =
+    s.hom ((e c.pt.hom (colimit H)).hom _)
+  rw [hs]
+  exact congrArg (fun x ↦ s.hom x)
+    (he (c.π.app (op i.unop.unop)).left (D.obj (op i.unop.unop)).hom c.pt.hom
+      (Over.w (c.π.app (op i.unop.unop))) (F i.unop.unop) (colimit H)
+      ((eH i.unop.unop).inv ≫ colimit.ι H i.unop.unop) t)
 
 end AlgebraicGeometry.Etale

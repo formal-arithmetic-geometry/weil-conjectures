@@ -21,58 +21,38 @@
  ],
  "proof": [
   {
-   "text": "Form the pullback diagram with stage U times_S X_i and limit U times_S X, taking maps from pullback universal properties. The same universal property proves the limit assertion. Qcqs morphisms remain qcqs after base change; since U is affine the stages are qcqs schemes. Affine transition morphisms remain affine. Restrict the sheaves and their transition maps along the second projections, transport the identity, composition and H-transition laws through the inverse-image composition isomorphisms, and put all sheaves into degree-zero single complexes, zero below zero. Inverse image, being a left adjoint, preserves the coefficient colimit; termwise colimits of single complexes are again single complexes. This supplies D,c,hc,compact,quasiSeparated,affine,F,phi,hidentity,hcomposition,a,hbelow,G,eG,hG,L,hL in the presentation.",
+   "text": "Apply the restricted affine complex-system construction, obtaining the qcqs limiting scheme diagram, coherent complexes zero below zero, coefficient colimit and canonical cohomology cocone, with stage and limit identifications for restricted cohomology.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-composition"
+    "lem-sbc-restricted-affine-complex-system"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/09Z1",
-    "place": "Lemma 59.51.7 proof, base change to affine etale U; Tag 03Q8 restricted-cohomology presentation, and Tag 0EZM canonical maps of complexes"
-   }
+   "elementary": false
   },
   {
-   "text": "Take H to be the stage cohomology groups of these single complexes. Define their maps by the canonical derived pullback followed by the transition complex map. Define P by homology applied to the derived adjunction unit and the composition comparison with global sections: this is exactly hP in the presentation. Pullback and coefficient composition give hH. At the limit take B with these canonical cohomology groups and their pullback/coefficient legs; this gives eH,eB and hB, with no assertion that B is a colimit.",
+   "text": "Obtain the raw-to-restricted additive comparison family and its naturality for all scheme triangles and coefficient maps. Compose its stage and limit isomorphisms with the geometric identifications.",
    "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "lem-weil-pbc-inverse-image-composition"
+    "lem-sbc-raw-restricted-cohomology-natural-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/09Z1",
-    "place": "Lemma 59.51.7 proof, base change to affine etale U; Tag 03Q8 restricted-cohomology presentation, and Tag 0EZM canonical maps of complexes"
-   }
+   "elementary": false
   },
   {
-   "text": "The sheafification/free-forgetful/Yoneda adjunctions identify maps from the free abelian represented sheaf with sections on the corresponding etale object. Its inverse image represents sections on U times_S X_i. Restriction to this etale scheme preserves injectives because its left adjoint is exact: extension by zero is the sheafification of the direct sum over lifts, and exactness can be checked on geometric stalks, where it is a direct sum of abelian groups. Apply this sections equivalence to a bounded-below injective resolution and identify derived Hom from the degree-zero free sheaf with restricted cohomology. The fully faithful bounded-below inclusion identifies the resulting Hom groups with unbounded derived cohomology of the single complexes. This supplies additive stageIso and limitIso. Naturality of these adjunctions and of the inverse-image single/shift comparisons identifies each cocone leg with exactly raw pullback and the specified coefficient map, proving compatibility. This construction uses no class descent or continuity conclusion.",
+   "text": "Fill RawCohomologyComplexPresentation.mk using lower bound zero and P_p = rawAffineComplexPullback. The prescribed hP equation is reflexivity. Expand the composite stage and limit isomorphisms on a class t; the geometric leg equation rewrites the left side, and the raw/restricted naturality equation under restrictionLimitIso proves equality with the right side. This is the explicit Lean proof in the parent module.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "prop-weil-pbc-derived-inverse-image-adjunction"
+    "def-sbc-raw-affine-restricted-cohomology",
+    "lem-sbc-restricted-affine-complex-system",
+    "lem-sbc-raw-restricted-cohomology-natural-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/03Q8",
-    "place": "Restricted cohomology presentation; the proof refers to Cohomology on Sites 21.7.4 and 21.20.3; explicit derived-Hom naturality elaboration by N2"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-composition",
-  "def-weil-pbc-etale-cohomology",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-sbc-restricted-affine-complex-system",
+  "lem-sbc-raw-restricted-cohomology-natural-iso",
+  "def-sbc-raw-affine-restricted-cohomology"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/09Z1",
-  "place": "Lemma 59.51.7 proof, base change to affine etale U; Tag 03Q8 restricted-cohomology presentation, and Tag 0EZM canonical maps of complexes; explicit complex-presentation and naturality elaboration by N2"
+  "by": "agent M3 stage 3",
+  "document": "Stacks Project, Tags 09Z1, 03Q8 and 0EZM",
+  "place": "Parent proof steps 1-2 separated from step 3; Lean composition of the restricted system and natural raw-Hom comparison"
  },
  "mathlib_searches": [
   {
@@ -155,9 +135,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T161503-L-2648602",
+  "landing": "20261012T173843-L-3300559",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,136 @@
+{
+ "id": "lem-sbc-raw-restricted-cohomology-natural-iso",
+ "kind": "statement",
+ "title": "Natural comparison between raw derived Hom and restricted cohomology",
+ "statement": "Let $S$ be any scheme [def-weil-pbc-scheme-conventions], $p\\in\\mathbb N$ and $U\\to S$ any etale scheme. There exists a family of additive isomorphisms $e_{h,F}:A(h,F,U,p)\\simeq R(h,F,U,p)$ for every $h:Y\\to S$ and every abelian etale sheaf $F$, where $A$ is the raw derived-Hom group of [lem-sbc-abelian-higher-direct-image-natural-comparison] and $R$ is [def-sbc-raw-affine-restricted-cohomology]. For every triangle $a:Y'\\to Y$, $h'=ah$ and coefficient map $\\phi:a^{-1}F\\to F'$, the canonical restricted-cohomology map carries $e_{h,F}(t)$ to $e_{h',F'}$ of the explicit raw pullback of $t$, for every raw class $t$. No affine, qcqs, directed-system or limit hypothesis is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Tag 03Q8, with Cohomology on Sites Tags 072W and 0BKV; parent proof step 3, derived-Hom identification and its explicit naturality"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-affine-restricted-cohomology",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Identify the inverse image of the free abelian represented sheaf of U with the free sheaf of U times_S Y by the sheafification and sections adjunctions and inverse-image composition. The free sheaf corepresents sections on this etale Y-scheme.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to the etale scheme preserves injectives: its left adjoint is extension by zero, whose stalk is the direct sum over lifts of the geometric point. Direct sums are exact and geometric stalks detect exactness. Apply the sections adjunction to a bounded-below injective resolution, computing derived Hom from the single free sheaf as cohomology of restricted sections. Full faithfulness of D+ into D identifies this with R and yields additive isomorphisms e. The same argument includes p=0 and the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a triangle over S, its pullback projection equation is r prime followed by a equals q followed by r. The two inverse-image composition comparisons give exactly rawAffineRestrictedCoefficient. Naturality of the derived adjunction unit, its triangle identities, the single-functor comparison and the shift comparison identify the raw pullback factors with P followed by this coefficient map. Applying homology gives the displayed naturality equation uniformly for all h, F, a and phi.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-sbc-raw-affine-restricted-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-etale-cohomology",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-sbc-raw-affine-restricted-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent M3",
+  "document": "Stacks Project",
+  "place": "Tag 03Q8, with Cohomology on Sites Tags 072W and 0BKV; parent proof step 3, derived-Hom identification and its explicit naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from a free abelian representable etale sheaf computes cohomology on its etale scheme naturally under pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from free abelian etale representable sheaf computes cohomology on the etale scheme naturally under pullback",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instFormallyUnramified, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Etale.formallyEtale; no matching complete declaration.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "free.*[Hh]om|[Hh]om.*free|cohomology.*single",
+   "results": "25 hits: Mathlib/Algebra/Star/Free.lean, Mathlib/GroupTheory/PresentedGroup.lean, Mathlib/GroupTheory/PresentedGroup.lean, Mathlib/GroupTheory/PresentedGroup.lean, Mathlib/GroupTheory/PresentedGroup.lean, Mathlib/GroupTheory/PresentedGroup.lean, Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean, Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean; no matching complete declaration.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineComplexPresentation",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 03Q8, with Cohomology on Sites Tags 072W and 0BKV; parent proof step 3, derived-Hom identification and its explicit naturality",
+   "via": [
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedCohomologyNaturalIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_raw_restricted_cohomology_natural_iso",
+  "statement": "theorem exists_raw_restricted_cohomology_natural_iso (S : Scheme.{v}) (p : ℕ) (U : S.Etale) : ∃ e : ∀ {Y : Scheme.{v}} (h : Y ⟶ S) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}), (abelianHigherDirectImageRawPresheaf h p F).obj (op U) ≅ rawAffineRestrictedCohomology h p F U, ∀ {Y Y' : Scheme.{v}} (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1}) (φ : (upperStar AddCommGrpCat.{v + 1} a).obj F ⟶ F') (t : (abelianHigherDirectImageRawPresheaf h p F).obj (op U)), rawAffineRestrictedCohomologyMap a h h' w p F F' φ U ((e h F).hom t) = (e h' F').hom (abelianHigherDirectImageRawPullback a h h' w p F F' φ U t)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T173843-L-3300559",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T173843-L-3300559",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
