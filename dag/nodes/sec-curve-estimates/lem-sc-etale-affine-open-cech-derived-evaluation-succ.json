@@ -1,0 +1,155 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cech-complex"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluation",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-affine-open-cech-derived-evaluation",
+   "place": "Degree-zero and positive-degree cases of the affine-open comparison",
+   "via": [
+    "lem-sc-etale-affine-open-cech-derived-evaluation"
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The zeroth homology of the Cech complex of an open covering with coefficients in an abelian sheaf is isomorphic to global sections",
+   "digest": "64e81b70e7beb0c4",
+   "date": "2026-10-12",
+   "results": "TopCat.Presheaf.generateEquivalenceOpensLe_counitIso; TopCat.Presheaf.generateEquivalenceOpensLe_unitIso; TopCat.Presheaf.SheafCondition.pairwiseDiagramIso; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso; TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst; TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_hom; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_counitIso; TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_right_as",
+   "verdict": "No exact theorem for the stated categorical comparison; related sheaf-condition results were inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"homology\"",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "No hits.",
+   "verdict": "No exact theorem for the stated categorical comparison; related sheaf-condition results were inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections are the zeroth homology of the Cech complex of an open cover",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(ZeroIso|zeroth|zero.*homology)|homology.*cech",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "No hits.",
+   "verdict": "No exact theorem for the stated categorical comparison; related sheaf-condition results were inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on the etale site acyclic on affine objects has positive derived evaluation computed by the Cech complex of a finite affine open covering",
+   "digest": "e62b8393d64c1834",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.Scheme.smallEtaleTopology; HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic",
+   "verdict": "No exact theorem for the stated categorical comparison; related sheaf-condition results were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*cech|cech.*rightDerived|cech.*[Zz]ero",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "No hits.",
+   "verdict": "No exact theorem for the stated categorical comparison; related sheaf-condition results were inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sc-etale-affine-open-cech-derived-evaluation-succ",
+ "title": "Positive-degree affine-open Čech derived evaluation",
+ "statement": "Let $X$ be a separated scheme [def-weil-pbc-scheme-conventions]. Let $i:X_{Zar}\\to X_{et}$ be a cover-preserving finite-limit-preserving functor [def-weil-pbc-sites-and-cohomology] whose composite with forgetting to schemes over $X$ is the open-subscheme restriction functor; assume $i(X)$ is terminal. Let $U_j$ be a finite affine open cover of $X$, and $G$ an additive etale sheaf with coefficients in $\\mathrm{Ab}_{u+1}$ [def-weil-pbc-abelian-etale-sheaves], whose sheaf category has injective resolutions. Assume that $R^q\\mathrm{ev}_W(G)=0$ for every affine etale $X$-scheme $W$ and every $q>0$. Then for every positive degree $q=n+1$, $R^q\\mathrm{ev}_{i(X)}(G)$ is isomorphic as an additive group to the degree-$q$ homology of $C^\\bullet(U,i^*G)$ [def-weil-pbc-cech-complex]. Here $i^*G$ is the section presheaf $W\\mapsto G(i(W))$, and derived evaluation means the right-derived functor of sheaf evaluation at that object.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03AZ",
+  "place": "Lemma 03AZ, Cech-to-cohomology spectral sequence, acyclic-cover specialization; Theorem 03P2 separated-case proof. Worker-written derived-evaluation formulation."
+ },
+ "proof": [
+  {
+   "text": "Cover preservation makes the image of U a covering of i(X). Finite-limit preservation identifies its nonempty iterated products over the terminal object with open intersections. Separatedness makes each intersection affine. Therefore hvan vanishes on all these products. The affineness follows by iterating IsAffineOpen.inf in a separated scheme (Mathlib AlgebraicGeometry/Morphisms/Affine.lean:335-345); the categorical product of opens is their infimum.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the Cech-to-derived spectral sequence with large coefficients. Identify its cohomology-over-object groups with derived evaluation by computing Hom from the sheafified free representable on an injective resolution: the free-Yoneda adjunction identifies this Hom naturally with evaluation, so their complexes are isomorphic. All positive rows vanish by hvan; the zero row identifies naturally with the sections complex.",
+   "uses": [
+    "lem-sc-cech-spectral",
+    "new-sheaf-cohomology-derived-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each r>=2 differential entering or leaving (q,0) has one end in a positive row or outside the first quadrant, hence is zero. Thus its stable value is its E2 value. The abutment filtration has all graded pieces zero except (q,0), so its unique nonzero quotient is the whole abutment. The finite-product comparisons commute with projections, thus with cofaces, identifying the zero row with the displayed open Cech complex. The empty scheme with an empty cover has zero groups on both sides.",
+   "uses": [
+    "lem-sc-cech-spectral"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cech-spectral",
+  "new-sheaf-cohomology-derived-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03AZ",
+  "place": "Lemma 03AZ, Cech-to-cohomology spectral sequence, acyclic-cover specialization; Theorem 03P2 separated-case proof. Worker-written derived-evaluation formulation."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluationSucc",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineOpenCechDerivedEvaluationSucc.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_rightDerived_etale_affineOpenCech_succ",
+  "statement": "theorem nonempty_rightDerived_etale_affineOpenCech_succ\n    (X : Scheme.{u}) [X.IsSeparated]\n    (i : X.Opens ⥤ X.Etale)\n    (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor)\n    (hc : CoverPreserving (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology i)\n    [PreservesFiniteLimits i] (ht : IsTerminal (i.obj ⊤))\n    {ι : Type u} [Finite ι] (U : ι → X.Opens)\n    (hU : ∀ j, IsAffineOpen (U j)) (hcover : iSup U = ⊤)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    [HasInjectiveResolutions (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]\n    (hvan : ∀ (W : X.Etale), IsAffine W.left → ∀ (q : ℕ), 0 < q →\n      IsZero (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n        (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj\n          (op W)).rightDerived q).obj G))\n    (n : ℕ) :\n    Nonempty ((((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n      (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj\n        (op (i.obj ⊤))).rightDerived (n + 1)).obj G)\n        ≅ ((cechComplexFunctor U).obj (i.op ⋙ G.obj)).homology (n + 1))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T135256-L-1678841",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T135256-L-1678841",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,8 +10,8 @@ public import Mathlib.CategoryTheory.Sites.CoverPreserving
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
-import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluationSucc
+import Sheaf.Topology.OpenCechZerothHomology
 
 /-! # The affine-open Čech edge comparison for étale sheaves
 
@@ -68,6 +68,19 @@ theorem nonempty_rightDerived_etale_affineOpenCech
     Nonempty ((((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
       (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj
         (op (i.obj ⊤))).rightDerived q).obj G)
-        ≅ ((cechComplexFunctor U).obj (i.op ⋙ G.obj)).homology q) := by sorry
+        ≅ ((cechComplexFunctor U).obj (i.op ⋙ G.obj)).homology q) := by
+  cases q with
+  | zero =>
+    let : RepresentablyFlat i := flat_of_preservesFiniteLimits i
+    let : i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology :=
+      (i.isContinuous_iff_coverPreserving).2 hc
+    let F : Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} :=
+      ⟨i.op ⋙ G.obj, i.op_comp_isSheaf_of_isSheaf _ _ _ G.property⟩
+    let E := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+      (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (op (i.obj ⊤))
+    obtain ⟨e⟩ := TopCat.Sheaf.nonempty_openCech_zerothHomology U hcover F
+    exact ⟨E.rightDerivedZeroIsoSelf.app G ≪≫ e⟩
+  | succ n =>
+    exact nonempty_rightDerived_etale_affineOpenCech_succ X i hi hc ht U hU hcover G hvan n
 
 end AlgebraicGeometry.Scheme
