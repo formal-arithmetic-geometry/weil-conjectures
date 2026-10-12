@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "For each object d of D, define H_d:C^{op}\\to Ab by H_d(c)=Hom_D(F(c),d). Since F is exact and D is triangulated, applying Hom_D(-,d) to the image under F of every distinguished triangle gives the long exact sequence required for H_d to be cohomological.",
+   "text": "For each object d of D, define H_d:C^{op}\\to Ab by H_d(c)=Hom_D(F(c),d). Since F is exact and D is triangulated, applying Hom_D(-,d) to the image under F of every distinguished triangle gives the long exact sequence required for H_d to be cohomological. In Lean use F.op composed with preadditiveYoneda.obj d, opening Pretriangulated.Opposite; Mathlib provides the triangulated opposite and the homological-composition instances.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -33,7 +33,7 @@
    }
   },
   {
-   "text": "Because F preserves set-indexed coproducts, for every family (c_i) the canonical map H_d(\\bigoplus_i c_i)\\to\\prod_i H_d(c_i) is the usual Hom-out-of-a-coproduct isomorphism. Thus H_d sends coproducts to products.",
+   "text": "Because F preserves set-indexed coproducts, for every family (c_i) the canonical map H_d(\\bigoplus_i c_i)\\to\\prod_i H_d(c_i) is the usual Hom-out-of-a-coproduct isomorphism. Thus H_d sends coproducts to products. Transport preservation along Discrete.opposite, apply preservesLimitsOfShape_op, and reflect preservation through the forgetful functor AddCommGrpCat to Type to obtain preservation for the additive Yoneda functor in every required indexing universe.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -42,8 +42,9 @@
    }
   },
   {
-   "text": "The Brown representability statement [lem-pc-brown-cohomological-representability] applies to H_d by steps 1 and 2. Hence for every d there are an object G(d) of C and natural isomorphisms Hom_D(F(c),d)\\cong Hom_C(c,G(d)).",
+   "text": "Put V = max w v₁ v₂. Apply [lem-pc-brown-representability-universe-transfer] to H_d, its compactly generated source, and the product-preservation proof. Supply its common-universe Brown principle by the existing declaration [lem-pc-brown-cohomological-representability], instantiated on every category with morphisms in V. This gives representability of F.op composed with yoneda.obj d.",
    "uses": [
+    "lem-pc-brown-representability-universe-transfer",
     "lem-pc-brown-cohomological-representability"
    ],
    "elementary": false,
@@ -53,11 +54,9 @@
    }
   },
   {
-   "text": "For a morphism u:d\\to d' in D, naturality of the representing isomorphisms gives a unique morphism G(u):G(d)\\to G(d') whose precomposition action corresponds to postcomposition by u on Hom_D(F(-),-). The identity and composition laws follow by the uniqueness part of representability (Yoneda), so G is a functor and the displayed isomorphisms are natural in both c and d. Therefore F is left adjoint to G, and G is the required right adjoint.",
-   "uses": [
-    "lem-pc-brown-cohomological-representability"
-   ],
-   "elementary": false,
+   "text": "For every d the preceding representability says that F.rightAdjointObjIsDefined d holds. Thus that object property equals top. Apply Mathlib Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top, which constructs the right adjoint and adjunction from the representing Hom equivalences by Yoneda.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
     "place": "Tag 0A8G, Proposition proposition-brown proof; representability-to-adjunction argument"
@@ -65,12 +64,14 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-brown-cohomological-representability"
+  "lem-pc-brown-cohomological-representability",
+  "lem-pc-brown-representability-universe-transfer"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 0A8G, Proposition proposition-brown"
+  "by": "agent",
+  "group": "E2",
+  "date": "2026-10-12",
+  "description": "Lean implementation of Stacks 0A8G via the existing 0A8F declaration and Mathlib PartialAdjoint; one universe-transport step split off."
  },
  "mathlib_searches": [
   {
@@ -180,5 +181,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dad82",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085229-L-10437",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, the unchanged library interface, change record, and report; both modules compile cleanly and axiom checks show only standard axioms plus sorryAx from the recorded open dependencies."
  }
 }
