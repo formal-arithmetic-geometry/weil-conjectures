@@ -12,7 +12,8 @@ public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.RingTheory.TensorProduct.Maps
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.AffineOpenDirectedRingSystem
+import Sheaf.AlgebraicGeometry.AffineBasePieceTensorComparison
 
 /-!
 # Tensor-product presentation of an affine base piece
@@ -91,6 +92,35 @@ theorem exists_affine_base_piece_tensor_presentation
                   (D.map (homOfLE (hk.trans j.property)).op)) ⁻¹ᵁ V)) ≅
               Arrow.mk (Spec.map (CommRingCat.ofHom
                 (Algebra.TensorProduct.map
-                  (AlgHom.id (F.obj ⟨k, le_rfl⟩) (F.obj j)) φ).toRingHom)))) := by sorry
+                  (AlgHom.id (F.obj ⟨k, le_rfl⟩) (F.obj j)) φ).toRingHom)))) := by
+  let d := D.map (homOfLE hk).op
+  have hWk : IsAffineOpen (d ⁻¹ᵁ W) := hW.preimage d
+  obtain ⟨F, e0, hi, eL, hL⟩ :=
+    exists_affineOpen_directedRingSystem D c hc k (d ⁻¹ᵁ W) hWk
+  obtain ⟨B, C, aB, aC, φ, hφ, hcomp⟩ :=
+    exists_affine_base_piece_tensor_comparison d X₀ Y₀ f₀ haffine V hV W hVW
+      (F.obj ⟨k, le_rfl⟩) e0
+  let := aB.toAlgebra
+  let := aC.toAlgebra
+  refine ⟨F, B, C, aB, aC, φ, hφ, ?_, ?_⟩
+  · let aL : Algebra (F.obj ⟨k, le_rfl⟩) (colimit F : CommRingCat.{u}) :=
+      (CommRingCat.Hom.hom (colimit.ι F ⟨k, le_rfl⟩)).toAlgebra
+    have h := hcomp c.pt (c.π.app (op k)) (colimit F) aL eL hL
+    have heq : c.π.app (op k) ≫ d = c.π.app (op i₀) :=
+      c.w (homOfLE hk).op
+    rw [heq] at h
+    exact h
+  · intro j
+    let aj : Algebra (F.obj ⟨k, le_rfl⟩) (F.obj j) :=
+      (CommRingCat.Hom.hom (F.map (homOfLE j.property))).toAlgebra
+    obtain ⟨ej, hej⟩ := hi j
+    have h := hcomp (D.obj (op j.val)) (D.map (homOfLE j.property).op)
+      (F.obj j) aj ej hej
+    have heq : D.map (homOfLE j.property).op ≫ d =
+        D.map (homOfLE (hk.trans j.property)).op := by
+      rw [← D.map_comp]
+      congr 1
+    rw [heq] at h
+    exact h
 
 end AlgebraicGeometry
