@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-qcqs-geometric-exchange-factorization",
+ "kind": "statement",
+ "title": "Qcqs geometric exchange factors through strict-local sections",
+ "statement": "Let $\\Lambda$ be a commutative ring, $f:X\\to Y$ a quasi-compact quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], $s:\\operatorname{Spec}\\Omega\\to Y$ a geometric point with $\\Omega$ algebraically closed [def-weil-geometric-point], and $F$ a sheaf of $\\Lambda$-modules on $X_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves]. Let $g':X'\\to X$ and $f':X'\\to\\operatorname{Spec}\\Omega$ give a cartesian square with $f,s$ [def-weil-pbc-cartesian-square]. Put $R=\\mathcal O^{sh}_{Y,s}$ and $\\rho:\\operatorname{Spec}R\\to Y$ as the affine-neighbourhood colimit and structural map [def-weil-pbc-strict-henselization-limit; def-weil-pbc-strict-henselization-structural-map]. Put $Z=X\\times_Y\\operatorname{Spec}R$, with projections $p:Z\\to X$ and $h:Z\\to\\operatorname{Spec}R$, and $H=p^{-1}F$. There exist a local-ring structure on R making it strictly henselian [def-weil-pbc-henselian-terminology], a geometric closed point $t:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$, and $q:X'\\to Z$ with a cartesian square $(q,f',h,t)$ and $pq=g'$, together with an isomorphism $e:(f_*F)_s\\simeq\\Gamma(Z,H)$. On the identity geometric stalk of $\\operatorname{Spec}\\Omega$, the specified exchange [def-weil-pbc-underived-exchange] is the composite of the inverse-image stalk isomorphism, $e$, restriction $\\Gamma(Z,H)\\to\\Gamma(X',q^{-1}H)$ [def-weil-pbc-finite-section-pullback], the composition identification $q^{-1}p^{-1}F\\simeq g'^{-1}F$, the inverse global-sections pushforward identification, and the terminal-neighbourhood germ. No properness or invertibility of the middle restriction is asserted. The terminal germ is the real global-sections identification followed by toPresheafFiber at the identity object, and is invertible.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9 (theorem-higher-direct-images), degree zero and its canonical representative restriction; Tag 03Q1 inverse-image stalks; Tag 0A3U (lemma-proper-base-change-f-star), compatibility omitted in the source and expanded here"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-finite-section-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The residue-field description of the strict henselization supplies its local and strictly henselian structures. Construct t as the spectrum of the residue map followed by the residue-field equivalence and its inclusion into Ω. Its prime-comap formula gives the closed-point condition, and the pointed-neighbourhood equations give tρ=s. Define q by the pullback lift of g′ and f′t. Pullback pasting, using the original cartesian square, gives its cartesian square and qp=g′.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the underlying sheaf of sets, qcqs continuity identifies the direct-image stalk with sections of the strict-henselian base change, with the representative restriction formula. The module forgetful functor preserves the filtered stalk colimit. Apply the module/set inverse-image comparison, whose adjoint-transpose identity respects units. These comparisons identify the bijective set map with a linear map e.hom and make it invertible, with the same representative formula. Orient the fibre product by its symmetry isomorphism and transport terminal sections to global sections.",
+   "uses": [
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+    "lem-sc-etale-module-set-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse-image stalk/germ theorem identifies the source stalk. For a pointed affine representative (U,u), expand the exchange unit, square comparison and counit. The unit pulls the section on U×Y X to its iterated inverse image. The square comparison identifies the two iterated pullbacks, and the counit restricts to the pointed fibre. Because t maps to u on this representative, this is precisely e.hom followed by restriction along q. The inverse upperStarComp identifies q inverse image of p inverse image with g′ inverse image. The inverse lowerStarCompGlobalSectionsIso and global terminal germ identify the result with the target stalk. Agreement on these representatives gives the displayed equality by the colimit hom-ext principle.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On Spec Ω every pointed neighbourhood (U,u) admits the section u from the identity object. Equality of identity germs is witnessed on a common pointed neighbourhood; pull back along its section to recover equality. Every germ has a neighbourhood representative; pull it back along the pointed section to give an identity representative. Thus the identity-object germ is bijective. The Lean proof uses toPresheafFiber_eq_iff′ and toPresheafFiber_jointly_surjective, and a universe-shrunk filtered-colimit preservation instance. Compose with the actual global-sections/terminal-sections isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "lem-sc-etale-module-set-pullback-comparison",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9 (theorem-higher-direct-images), degree zero and its canonical representative restriction; Tag 03Q1 inverse-image stalks; Tag 0A3U (lemma-proper-base-change-f-star), compatibility omitted in the source and expanded here"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictHenselization|globalSectionsUpperStarMap|baseChangeMap",
+   "results": "0 hits: ; no matching comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi compact quasi separated etale direct image stalk strict henselization global sections factorization of base change exchange",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi compact quasi separated etale direct image stalk strict henselization global sections factorization of base change exchange",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.IsEtaleAt.comp, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.IsEtale, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale; no matching comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperGeometricPointExchange",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Tag 03Q9 (theorem-higher-direct-images), degree zero and its canonical representative restriction; Tag 03Q1 inverse-image stalks; Tag 0A3U (lemma-proper-base-change-f-star), compatibility omitted in the source and expanded here; strict-local sections and the degree-zero restriction in its stalk argument",
+   "via": [
+    "lem-weil-pbc-proper-geometric-point-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QcqsGeometricExchangeFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsGeometricExchangeFactorization.lean",
+  "declaration": "AlgebraicGeometry.Etale.qcqs_geometricExchange_factorization",
+  "statement": "theorem qcqs_geometricExchange_factorization (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) [QuasiCompact f] [QuasiSeparated f] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : let R := Scheme.strictHenselizationRing s let ρ := Scheme.strictHenselizationStructuralMap s let Z := pullback f ρ let p := pullback.fst f ρ let H := (upperStar (ModuleCat.{u + 1} Λ) p).obj F ∃ (_ : IsLocalRing R), IsStrictlyHenselianLocalRing R ∧ ∃ (t : Spec (.of Ω) ⟶ Spec R) (q : X' ⟶ Z), t default = IsLocalRing.closedPoint R ∧ IsPullback q f' (pullback.snd f ρ) t ∧ ∃ (hq : q ≫ p = g') (e : (Scheme.pointSmallEtale ((𝟙 (Spec (.of Ω))) ≫ s)).sheafFiber.obj ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ≅ (Sheaf.Γ Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj H), (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).sheafFiber.map ((baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F) = (upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) s (𝟙 (Spec (.of Ω)))).hom.app ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ≫ e.hom ≫ globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q H ≫ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map ((upperStarComp (ModuleCat.{u + 1} Λ) q p g' hq.symm).inv.app F) ≫ (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) f').inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) ≫ geometricPointGlobalGerm Λ Ω ((lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) g').obj F))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.Etale.qcqs_geometricExchange_factorization",
+   "AlgebraicGeometry.Etale.geometricPointGlobalGerm"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T144101-L-2091642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T144101-L-2091642",
+  "kind": "interface"
+ }
+}
