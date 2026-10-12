@@ -8594,3 +8594,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:49 L: returned deliver/K3/Sheaf.AlgebraicGeometry.DualTensorHomComparison (reviewer RETURN: (reviewer X-2be2b, head 2be2b75ba) D1/D2 — Relabelling, not decomposition (brief §4): dualTensorHom_transpose restates t)
 
 - 00:52 L: batch 20261012T163610 dependency take-out
+- 16:52 L: returned deliver/E3/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (reviewer RETURN: (reviewer X-ab24a, head ab24a0059) E1/E2 (review point 4): the theorem remains a false sorry. In GluedEffectiveModelChar)
