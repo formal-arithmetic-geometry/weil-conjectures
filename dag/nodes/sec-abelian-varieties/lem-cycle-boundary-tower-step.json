@@ -1,0 +1,103 @@
+{
+ "id": "lem-cycle-boundary-tower-step",
+ "kind": "lemma",
+ "title": "One canonical successor of a cycle-boundary quotient presentation",
+ "statement": "For a type-zero bigraded exact couple X of [def-sp-exact-couple] in an abelian category, an index r ≥ 0, and subobjects B ≤ Z of the initial page in every bidegree with epimorphic projections π : Z → E_(r+2) having kernel B, there is a successor quotient presentation. Its subobjects Z' and B' are the images in the initial page of the pullbacks along π of the outgoing differential kernel and incoming differential image. They satisfy B' ≤ Z', Z' ≤ Z and B ≤ B'. The restricted projection has its unique lift to the outgoing differential kernel, and the successor projection is this lift followed by the canonical derivedEProjection. It is epimorphic and its kernel in Z' is B'. This is a single successor step, not existence of a full tower.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/def-sp-convergence.md",
+  "place": "node def-sp-convergence, cycle/boundary recursion"
+ },
+ "proof": [
+  {
+   "text": "A single successor quotient presentation exists.\nPull back the differential kernel and incoming image along the given epimorphic\nprojection, and map these subobjects along the monic inclusion of Z in the initial\npage. The differential squares to zero, so the incoming image is in the kernel;\nthis gives B' ≤ Z'. The image of the old kernel of the projection is in the\npullback of the incoming image, giving B ≤ B', and both pullbacks lie in Z.\nRestrict the projection to Z'. Its composite with the differential is zero, so\nkernel universality gives a unique cycle lift. This lift is epimorphic onto the\nkernel: it is the pullback of the old epimorphism. Compose it with the canonical\nhomology quotient derivedEProjection to define the next projection. This composite\nis epi. Its kernel is the pullback of the kernel of derivedEProjection, namely\nthe incoming differential image inside the differential kernel; therefore its\nkernel is precisely B' as a subobject of Z'. These constructions give all fields.\nThe displayed equations determine Z', B', the lift (by monicity of kernel.ι), and\nthen the next projection; hence the witness contains no arbitrary quotient choice.",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/def-sp-convergence.md",
+  "place": "Single successor quotient construction in the cycle/boundary recursion; second reading M2, 2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "epimorphic quotient presentation pullback differential kernel incoming image homology successor",
+   "results": "Found ShortComplex homology projection epi declarations and exact-sequence results; no complete successor presentation of initial-page subobjects.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.kernel.lift",
+   "results": "Found kernel.lift, kernel.lift_ι and related universal-property lemmas; no successor quotient presentation.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedEProjection|CycleBoundaryStep|cycleBoundaryTower",
+   "results": "msearch: zero hits. Local rg found derivedEProjection and full tower in ExactCouple and ExactCoupleConvergence, but no one-step construction; other hits concern functoriality and convergence consequences.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an abelian category pull back the kernel and boundary image along an epimorphism and obtain the next homology quotient presentation",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict inferred. Other search services and local source searches were used.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ExactCoupleConvergence",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "def-sp-convergence",
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CycleBoundaryTowerStep",
+  "file": "lean/Sheaf/CategoryTheory/CycleBoundaryTowerStep.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.cycleBoundaryStep_exists",
+  "statement": "theorem cycleBoundaryStep_exists (X : BigradedExactCouple C 0) (r : ℕ)\n    (T : CycleBoundaryStage X r) : Nonempty (CycleBoundaryStep X r T)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T125216-L-1215213",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T125216-L-1215213",
+  "kind": "interface"
+ }
+}
