@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **2346**, closure **1551**, holes in definitions **9**, definitions with undetermined data **4** (closure **2**).
+Holes now: library **2343**, closure **1546**, holes in definitions **9**, definitions with undetermined data **4** (closure **2**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -27,73 +27,73 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 2088 | 1510 |
+| Sheaf | 2085 | 1505 |
 | WeilConjectures | 258 | 41 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1038 | 455 | 583 | 0 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 963 | 436 | 527 | 0 | 1 |
-| 660345513 (Application of proof-dependency imports) | closure | 945 | 413 | 532 | 0 | 1 |
+| 889327369 (Queue at the start of stage 3) | library | 1047 | 461 | 586 | 0 | 1 |
+| 660345513 (Application of proof-dependency imports) | library | 972 | 442 | 530 | 0 | 1 |
+| 660345513 (Application of proof-dependency imports) | closure | 954 | 419 | 535 | 0 | 1 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 780 |
+| proved | 788 |
 | decomposed | 8 |
-| moved | 772 |
+| moved | 782 |
 | pruned | 35 |
-| other | 6 |
+| other | 7 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
 | group | landings | closed | added | net | moved share |
 |---|---:|---:|---:|---:|---:|
-| A2 | 31 | 30 | 25 | 5 | 19/31 (61.3%) |
+| A2 | 32 | 31 | 25 | 6 | 19/32 (59.4%) |
 | A3 | 28 | 31 | 22 | 9 | 13/28 (46.4%) |
 | B2 | 29 | 30 | 25 | 5 | 17/29 (58.6%) |
 | B3 | 40 | 44 | 22 | 22 | 15/40 (37.5%) |
 | C1 | 44 | 48 | 36 | 12 | 24/44 (54.5%) |
 | C2 | 28 | 28 | 22 | 6 | 16/28 (57.1%) |
-| C3 | 13 | 13 | 12 | 1 | 9/13 (69.2%) |
+| C3 | 14 | 14 | 14 | 0 | 10/14 (71.4%) |
 | D2 | 34 | 38 | 29 | 9 | 20/34 (58.8%) |
 | D3 | 16 | 16 | 11 | 5 | 6/16 (37.5%) |
 | E1 | 43 | 53 | 25 | 28 | 19/43 (44.2%) |
 | E2 | 32 | 31 | 29 | 2 | 19/32 (59.4%) |
 | E3 | 13 | 13 | 9 | 4 | 6/13 (46.2%) |
 | F1 | 41 | 45 | 31 | 14 | 18/41 (43.9%) |
-| F2 | 27 | 42 | 18 | 24 | 13/27 (48.1%) |
+| F2 | 28 | 43 | 18 | 25 | 13/28 (46.4%) |
 | F3 | 15 | 19 | 7 | 12 | 4/15 (26.7%) |
 | G1 | 39 | 42 | 38 | 4 | 21/39 (53.8%) |
-| G2 | 34 | 37 | 33 | 4 | 19/34 (55.9%) |
+| G2 | 35 | 38 | 35 | 3 | 20/35 (57.1%) |
 | G3 | 14 | 17 | 10 | 7 | 7/14 (50.0%) |
 | H1 | 33 | 34 | 24 | 10 | 18/33 (54.5%) |
-| H2 | 28 | 30 | 21 | 9 | 17/28 (60.7%) |
+| H2 | 30 | 32 | 21 | 11 | 17/30 (56.7%) |
 | H3 | 16 | 24 | 9 | 15 | 7/16 (43.8%) |
 | J1 | 39 | 45 | 20 | 25 | 15/39 (38.5%) |
-| J2 | 30 | 33 | 29 | 4 | 19/30 (63.3%) |
-| J3 | 13 | 13 | 4 | 9 | 3/13 (23.1%) |
-| K1 | 38 | 42 | 33 | 9 | 22/38 (57.9%) |
-| K2 | 36 | 40 | 28 | 12 | 22/36 (61.1%) |
+| J2 | 31 | 34 | 30 | 4 | 20/31 (64.5%) |
+| J3 | 14 | 14 | 4 | 10 | 3/14 (21.4%) |
+| K1 | 39 | 43 | 33 | 10 | 22/39 (56.4%) |
+| K2 | 38 | 42 | 29 | 13 | 23/38 (60.5%) |
 | K3 | 13 | 14 | 2 | 12 | 2/13 (15.4%) |
-| M1 | 39 | 44 | 26 | 18 | 16/39 (41.0%) |
+| M1 | 40 | 44 | 26 | 18 | 16/40 (40.0%) |
 | M2 | 28 | 36 | 19 | 17 | 10/28 (35.7%) |
-| M3 | 14 | 14 | 4 | 10 | 4/14 (28.6%) |
+| M3 | 15 | 15 | 4 | 11 | 4/15 (26.7%) |
 | N1 | 37 | 39 | 28 | 11 | 20/37 (54.1%) |
-| N2 | 26 | 32 | 15 | 17 | 12/26 (46.2%) |
+| N2 | 27 | 33 | 16 | 17 | 13/27 (48.1%) |
 | N3 | 11 | 11 | 7 | 4 | 5/11 (45.5%) |
 | P1 | 37 | 57 | 27 | 30 | 17/37 (45.9%) |
-| P2 | 33 | 36 | 19 | 17 | 9/33 (27.3%) |
+| P2 | 34 | 37 | 20 | 17 | 10/34 (29.4%) |
 | P3 | 15 | 15 | 17 | -2 | 9/15 (60.0%) |
 | Q1 | 28 | 30 | 20 | 10 | 14/28 (50.0%) |
-| Q2 | 27 | 28 | 21 | 7 | 13/27 (48.1%) |
+| Q2 | 28 | 29 | 22 | 7 | 14/28 (50.0%) |
 | Q3 | 14 | 15 | 13 | 2 | 7/14 (50.0%) |
 | R1 | 37 | 47 | 22 | 25 | 14/37 (37.8%) |
 | R2 | 30 | 33 | 24 | 9 | 17/30 (56.7%) |
 | R3 | 9 | 12 | 0 | 12 | 0/9 (0.0%) |
 | S1 | 33 | 36 | 33 | 3 | 19/33 (57.6%) |
-| S2 | 32 | 34 | 27 | 7 | 16/32 (50.0%) |
+| S2 | 33 | 35 | 29 | 6 | 17/33 (51.5%) |
 | S3 | 10 | 12 | 4 | 8 | 3/10 (30.0%) |
 | T1 | 37 | 38 | 30 | 8 | 19/37 (51.4%) |
 | T2 | 26 | 36 | 15 | 21 | 10/26 (38.5%) |
@@ -108,7 +108,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | W3 | 17 | 17 | 11 | 6 | 7/17 (41.2%) |
 | X2 | 31 | 31 | 32 | -1 | 17/31 (54.8%) |
 | X3 | 7 | 8 | 4 | 4 | 2/7 (28.6%) |
-| Y2 | 30 | 32 | 20 | 12 | 13/30 (43.3%) |
+| Y2 | 32 | 34 | 24 | 10 | 15/32 (46.9%) |
 | Y3 | 9 | 10 | 9 | 1 | 7/9 (77.8%) |
 | Z2 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 
@@ -118,7 +118,7 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 |---|---:|---:|---|
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty | 0 | 1 | ORCHESTRA |
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine | 0 | 1 | ORCHESTRA |
-| WeilConjectures.AlgebraicGeometry.Curve.Reductions | 1 | 1 | — |
+| WeilConjectures.AlgebraicGeometry.Curve.Reductions | 1 | 1 | B3 |
 | Sheaf.AlgebraicGeometry.ProperGeometricPointExchange | 2 | 1 | ORCHESTRA |
 | WeilConjectures.SixFunctors.Etale.Gabber | 2 | 2 | S2 |
 | Sheaf.AlgebraicGeometry.Curve.FinitePushforwardOpenQuotientConstant | 3 | 1 | T2 |
@@ -129,10 +129,10 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | WeilConjectures.ConstructibleSheaf.FinitePushforward | 3 | 4 | — |
 | Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferCore | 4 | 1 | V1 |
 | Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres | 4 | 1 | ORCHESTRA |
-| Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore | 4 | 1 | — |
+| Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore | 4 | 1 | G3 |
 | Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime | 4 | 1 | ORCHESTRA |
 | Sheaf.Paper.StrictHenselizationPointedMap | 4 | 2 | W2 |
-| Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreData | 5 | 1 | — |
+| Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreData | 5 | 1 | G3 |
 | Sheaf.AlgebraicGeometry.ConstantExtensionCokernelAux | 5 | 2 | W2 |
 | Sheaf.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit | 5 | 1 | U2 |
 | Sheaf.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence | 5 | 2 | X2 |
@@ -245,6 +245,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives`
 - `Sheaf.CategoryTheory.BoundedSubobjectSize`
 - `Sheaf.CategoryTheory.BoundedSubobjectSurjection`
+- `Sheaf.CategoryTheory.CartanEilenbergProperties`
 - `Sheaf.CategoryTheory.CohomologyColimitSites`
 - `Sheaf.CategoryTheory.CoskeletonMatchingTuples`
 - `Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification`
@@ -266,6 +267,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveCriterion`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveDegreewiseExistence`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.ObjectsSmall`
+- `Sheaf.CategoryTheory.GrothendieckSSDoubleComplexModel`
 - `Sheaf.CategoryTheory.HalfPlaneGradedCanonical`
 - `Sheaf.CategoryTheory.HomotopyHomExactOfInjective`
 - `Sheaf.CategoryTheory.HomotopyLimitVanishing`
