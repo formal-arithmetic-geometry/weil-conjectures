@@ -665,7 +665,7 @@ lemma Etale.constantClassesDieLocally_of_forall_fg [QuasiCompact h] [QuasiSepara
   have : PreservesColimitsOfShape (Finset A) C :=
     (constantSheafAdj _ AddCommGrpCat.{u + 1} terminalIsTerminal).leftAdjoint_preservesColimits
       |>.preservesColimitsOfShape
-  obtain ⟨s, y, hy⟩ := (Scheme.H_map_isColimit_of_isFiltered_of_large _
+  obtain ⟨s, y, hy⟩ := (Scheme.H_map_isColimit_of_isFiltered _
     (isColimitOfPreserves C hc) q).1 η
   obtain ⟨S, hS, hz⟩ := hA s y
   refine ⟨S, hS, fun W' g hg ↦ ?_⟩
@@ -757,7 +757,7 @@ are computed with sheaves of `Λ`-modules; their classes die locally as soon as 
 underlying abelian sheaf do (`AlgebraicGeometry.Etale.classesDieLocally_of_classesDieLocallyAb`).
 The underlying abelian group of `Λ/dΛ` is the filtered colimit of its finitely generated
 subgroups, and cohomology of the quasi-compact quasi-separated scheme `U ×_X Y` commutes with
-filtered colimits (`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_of_large`); a
+filtered colimits (`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`); a
 finitely generated subgroup is a finite direct sum of cyclic groups `ℤ/e` with `e ∣ d`, for
 which the classes die locally by hypothesis. -/
 @[stacks 03Q8]

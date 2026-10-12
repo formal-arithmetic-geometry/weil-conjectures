@@ -62,7 +62,8 @@ The proof is the second, shorter proof of the Stacks Project.
   base change; the proof ends by specialising along `𝟙 S` with
   `AlgebraicGeometry.Etale.UniversalBaseChangeProperty.baseChangeProperty`.
 
-Compare `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`, the proper base change
+Compare `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`,
+the proper base change
 theorem, in which the roles of the two legs of the square are exchanged.
 
 The seams of the argument (blueprint `sk-rem-seams`, `rem-seams`): a first failure in degree `q`
