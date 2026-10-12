@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-picard-external-cup-scalar-comparison",
+ "kind": "statement",
+ "title": "Scalar normalization of individual external cup products with unit coefficients",
+ "statement": "Let $k$ be a field [def-weil-field], and let $X,Y$ be schemes over $\\operatorname{Spec}(k)$ [def-weil-scheme-over-base], with bijective structure ring maps $k\\to\\Gamma(X,\\mathcal O_X)$ and $k\\to\\Gamma(Y,\\mathcal O_Y)$. Write $f,g$ for the structure morphisms and $P=X\\times_kY$, with projections $p_X,p_Y$ [def-pc-fibre-product]. Let $F=\\mathcal O_X$, $G=\\mathcal O_Y$ be the unit module sheaves, and $E=p_X^*F\\otimes p_Y^*G$ [def-sc-field-linear-module-cohomology-operations]. There exist additive equivalences $e_X:H^1_{\\mathrm{mod}}(X,F)\\cong H^1(X,\\mathcal O_X)$, $e_Y:H^1_{\\mathrm{mod}}(Y,G)\\cong H^1(Y,\\mathcal O_Y)$, $e_P:H^1_{\\mathrm{mod}}(P,E)\\cong H^1(P,\\mathcal O_P)$, and $k$-linear equivalences $d_X:H^0_{\\mathrm{mod}}(X,F)\\cong k$, $d_Y:H^0_{\\mathrm{mod}}(Y,G)\\cong k$, such that $e_P(p_X^*a\\cup p_Y^*b)=p_X^*e_X(d_Y(b)a)$ for all $a\\in H^1_{\\mathrm{mod}}(X,F)$, $b\\in H^0_{\\mathrm{mod}}(Y,G)$, and $e_P(p_X^*a\\cup p_Y^*b)=p_Y^*e_Y(d_X(a)b)$ for all $a\\in H^0_{\\mathrm{mod}}(X,F)$, $b\\in H^1_{\\mathrm{mod}}(Y,G)$. The abelian cohomology and its pullbacks are those of [def-sc-structure-sheaf-cohomology-pullback]. No properness, compactness, separatedness or spanning assertion is assumed or concluded.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/sites-cohomology.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 0BED, varieties-lemma-kunneth, maps preceding varieties-equation-kunneth-on-cech; Tag 03FD, lemma-cohomology-modules-abelian-agree; Tag 01F7, cohomology-equation-functorial and cohomology-equation-choice; compatibility with scalar degree-zero sections"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-scheme-over-base",
+  "def-pc-fibre-product",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For the unit modules on X and Y apply the module-to-abelian cohomology comparison, and identify the terminal-open abelian cohomology with Ext from the constant integer sheaf using the constant-sheaf adjunction. This supplies additive equivalences eX,eY. On P use tensor pullback of the unit and the tensor unitor to identify the external coefficient module with O_P; apply its induced cohomology isomorphism followed by the same comparison to obtain eP.",
+   "uses": [
+    "lem-sc-module-abelian-zariski-cohomology",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation at 1 identifies degree-zero unit-module cohomology with global sections k-linearly for the restricted scalar action. Invert each bijective structure ring map k to Gamma(X,O_X) or Gamma(Y,O_Y) and compose with this evaluation to obtain the linear scalar coordinates dX,dY.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compute the comparisons on injective module resolutions: the underlying abelian global-sections complex computes the same cohomology because forgotten injective modules are acyclic. A resolution map lifting the structure morphism gives the same cohomology pullback on both sides; uniqueness of comparison maps up to homotopy identifies the derived-functor and Ext constructions. For the external cup products use a computing tensor pairing (or the Godement pairing) extending multiplication of sections. Forgetting preserves this pairing. After the unit-coefficient identification the pairing is multiplication; on a degree-zero scalar section r it is the chain map multiplying by r. The pulled-back scalar section remains r since both projections are over k. Thus in degrees (1,0) the image is pX*(eX(dY(b) times a)); in degrees (0,1) it is pY*(eY(dX(a) times b)). There is no sign because one degree is zero.",
+   "uses": [
+    "lem-sc-module-abelian-zariski-cohomology",
+    "def-sc-field-linear-module-cohomology-operations",
+    "def-sc-module-cohomology-cup-product",
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-abelian-zariski-cohomology",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "def-sc-module-cohomology-cup-product"
+ ],
+ "proof_origin": {
+  "by": "agent U3",
+  "document": "Stacks Project, Tags 0BED, 03FD, 01F7",
+  "place": "Unit-coefficient scalar normalization of the canonical maps; resolution-comparison details written by the worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of module sheaf cohomology and abelian sheaf cohomology preserves cup products with scalar global sections",
+   "results": "8 hits on nonabelian and group cohomology and Sheaf.instAddCommGroupH; none compares the relevant module and abelian cup/pullback constructions.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cup\"",
+   "results": "4 hits on characteristic upper central series; no sheaf cohomology comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarCohomology|externalCup",
+   "results": "0 Mathlib hits. Local library searches found the field-linear operations and the module-abelian natural comparison, but no scalar-normalized compatibility statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparison of module and abelian sheaf cohomology preserves cup product with global sections",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1ProductSpanning",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof of Tag 0BF3, the Kunneth degree-one argument on the special fibre: identify the two external cup summands with scalar multiples of projection pullbacks",
+   "via": [
+    "lem-sc-picard-h1-product-spanning",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupScalarComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_external_cup_scalar_comparison",
+  "statement": "theorem picard_external_cup_scalar_comparison (k : Type u) [Field k] (X Y : Scheme.{u})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (hX : Function.Bijective (scalarMap f ⊤))\n    (hY : Function.Bijective (scalarMap g ⊤)) :\n    let F := SheafOfModules.unit X.ringCatSheaf\n    let G := SheafOfModules.unit Y.ringCatSheaf\n    ∃ (eX : scalarCohomology f F 1 ≃+ Sheaf.H (structureSheafAb X) 1)\n      (eY : scalarCohomology g G 1 ≃+ Sheaf.H (structureSheafAb Y) 1)\n      (eP : scalarCohomology (pullback.fst f g ≫ f) (externalCupCoefficients f g F G) 1\n        ≃+ Sheaf.H (structureSheafAb (pullback f g)) 1)\n      (dX : scalarCohomology f F 0 ≃ₗ[k] k)\n      (dY : scalarCohomology g G 0 ≃ₗ[k] k),\n      (∀ (a : scalarCohomology f F 1) (b : scalarCohomology g G 0),\n        eP (externalCup f g F G 1 0 a b) =\n          structureSheafCohomologyPullback (pullback.fst f g) 1 (eX (dY b • a))) ∧\n      (∀ (a : scalarCohomology f F 0) (b : scalarCohomology g G 1),\n        eP (externalCup f g F G 0 1 a b) =\n          structureSheafCohomologyPullback (pullback.snd f g) 1 (eY (dX a • b)))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6482b",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T225334-L-1814390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6482b",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T225334-L-1814390",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged spanning signature and new comparison theorem with their nodes, dependencies, and sources; both delivered modules and the sole direct importer compiled cleanly; axioms were propext, Classical.choice, Quot.sound, and justified sorryAx."
+ }
+}
