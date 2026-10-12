@@ -7654,3 +7654,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:14 L: merged deliver/W3/Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange (stage 3; reviewer PASS; first push; landing 20261012T121455-L-1008250 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 12:15 L: merged deliver/Y2/Sheaf.Topology.TopologicalInducedCohomologyCocycle (stage 3; reviewer PASS; first push; landing 20261012T121511-L-1009544 (interface); batch 20261012T120425; modules 3; new nodes 2)
 - 12:15 L: returned deliver/U3/Sheaf.AlgebraicGeometry.ModuleSheafificationAffineRestriction (reviewer RETURN: (reviewer X-9171d, head 9171d33db) A (brief point 2): coord/changes/ModuleSheafificationAffineRestriction.md, after line)
+- 12:15 L: returned deliver/A3/Sheaf.RingTheory.EtaleResidueTripleUnitRefinement (reviewer RETURN: (reviewer X-3918e, head 3918e328b) C3/C4: In dag/nodes/sec-proper-base-change/lem-weil-pbc-etale-triple-unit-refinement.)
