@@ -6,6 +6,10 @@ public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Sheaf.CategoryTheory.FilteredColimitPreservesPullback
+import Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsHasPullbacks
+import Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsFiniteBaseChange
+import Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsFiniteComposition
+import Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsHasIsos
 
 @[expose] public section
 
@@ -97,7 +101,15 @@ theorem colimit_site_covering_axioms
           ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),
             S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)) :
         ∃ (_ : Q.HasIsos) (_ : Q.IsStableUnderFiniteComposition)
-          (_ : Q.IsStableUnderFiniteBaseChange) (_ : Q.HasPullbacks), True := by sorry
+          (_ : Q.IsStableUnderFiniteBaseChange) (_ : Q.HasPullbacks), True := by
+  refine ⟨colimit_site_covering_axioms_HasIsos J F P hfinite hcover
+      hpullback V hobjects harrows Q hQ,
+    colimit_site_covering_axioms_FiniteComposition J F P hfinite hcover
+      hpullback V hobjects harrows Q hQ,
+    colimit_site_covering_axioms_FiniteBaseChange J F P hfinite hcover
+      hpullback V hobjects harrows Q hQ,
+    colimit_site_covering_axioms_HasPullbacks J F P hfinite hcover
+      hpullback V hobjects harrows Q hQ, trivial⟩
 
 /-- Preservation of covering pullbacks and continuity for the transported precoverage.
 Source: Stacks Project, Sites, Tags 09YL and 0A35.

@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-colimit-site-covering-axioms-finitecomposition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-covering-construction",
+   "place": "Tag 09YL",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite composition in the colimit precoverage",
+ "statement": "Let $J$ be a small filtered category [def-weil-pbc-category-colimit], a strict diagram $F:J\\to\\mathit{Cat}$, and $P_j$ precoverages on its stages. Assume each $P_j$ contains singleton isomorphisms, is stable under finite indexed composition and finite indexed base change [def-weil-pbc-finite-precoverage], and has pullbacks of its covering arrows. Every covering presieve has finite uncurried arrow set. Every transition functor maps covering presieves to covering presieves and preserves the pullback of a covering arrow along any arrow. Let $V$ be a cocone whose object and arrow cocones [def-weil-pbc-arrows-functor] are colimits of sets, and let $Q$ be a precoverage on its vertex. Assume a presieve $R$ on $Y$ belongs to $Q$ exactly when there are a stage $j$, an object $X$, a covering $S$ of $P_j$ on $X$, and an equality $V_j(X)=Y$ such that transport of $S.map(V_j)$ along that equality is $R$. Then $Q$ is stable under composition of finite indexed covering families, with finite inner index at each outer index.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-precoverage",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Fix a finite indexed outer covering f and finite indexed coverings of each of its sources. Use hQ to represent each covering presieve by a finite stage covering. There are finitely many coverings because the outer index is finite. For each requested arrow choose a member of the corresponding stage presieve whose image is that arrow; conversely, for each stage presieve member choose an index whose requested arrow is its image. These are finite choices by hfinite, even when arrows are repeated. Move all stages to one common stage and enforce all source and target equalities using eventual equality in the object colimit. Enforce the finitely many equalities between representatives using eventual equality in the arrow colimit. Thus the transported stage presieves equal the families with the original index types, and inner targets are exactly outer sources. Transition maps keep the stage presieves covering by hcover. Apply (P j).IsStableUnderFiniteComposition at this stage to those families. The composite family is finite, and its image is precisely the requested composite family by functoriality of composition. Apply hQ to its covering presieve to obtain the Q-cover. For an empty outer index only its target needs a representative; hcover and the empty stage covering suffice. Empty inner indices cause no additional lifting equations.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-finite-precoverage"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-finite-precoverage"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, finite diagram, covering pullback and composition paragraphs; expanded by K1 second reader to include endpoint transports and empty indices."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of categories inherits finite precoverage composition and base change axioms from its stages",
+   "results": "8 hits: CategoryTheory.extensiveCoverage, CategoryTheory.extensiveTopology, CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag, CategoryTheory.IsFiltered.of_hasFiniteColimits, CategoryTheory.extensiveTopology.mem_sieves_iff_contains_colimit_cofan, CategoryTheory.Precoverage.finite, CategoryTheory.GrothendieckTopology.Point.instHasExactColimitsOfShapeOppositeElementsFiberOfLocallySmallOfAB5OfSizeOfHasFiniteLimits, CategoryTheory.Pretopology.finite",
+   "date": "2026-10-13",
+   "verdict": "No exact match; inspected candidates are generic finite-site or set-colimit tools, not this transport statement."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*Precoverage|Precoverage.*colimit|filteredColimit.*[Ii]so|filteredColimit.*[Pp]ullback",
+   "results": "4 hits: Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Stalk.lean, Mathlib/Algebra/Category/ModuleCat/Stalk.lean, Mathlib/CategoryTheory/Sites/Pullback.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; inspected candidates are generic finite-site or set-colimit tools, not this transport statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "precoverage transported along cocone to filtered colimit category contains singleton isomorphisms and covering pullbacks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteCoveringConstructionParts",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsFiniteComposition",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteCoveringAxiomsFiniteComposition.lean",
+  "declaration": "CategoryTheory.colimit_site_covering_axioms_FiniteComposition",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13",
+  "statement": "theorem colimit_site_covering_axioms_FiniteComposition\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderFiniteComposition]\n    [∀ j, (P j).IsStableUnderFiniteBaseChange] [∀ j, (P j).HasPullbacks]\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),\n      R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (F.map a).toFunctor)\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    (hQ : (∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n          ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),\n            S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)) :\n        Q.IsStableUnderFiniteComposition"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T184313-L-4008001",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T184313-L-4008001",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
