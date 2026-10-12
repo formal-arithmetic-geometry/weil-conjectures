@@ -6,8 +6,9 @@ Authors: SHEAF group G2
 module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
-import Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality
-import Sheaf.RingTheory.SmoothOverFieldRegularLocal
+import Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDual
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Mathlib.LinearAlgebra.Dual.Lemmas
 
 /-!
 # Lie dimension and the local ring at a smooth identity
@@ -47,6 +48,20 @@ theorem finrank_lie_eq_localKrullDim_of_smooth
     {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] [Smooth G.hom] :
     (Module.finrank k (Lie G) : WithBot ℕ∞) =
       ringKrullDim (G.left.presheaf.stalk
-        (unitSection G (IsLocalRing.closedPoint k))) := by sorry
+        (unitSection G (IsLocalRing.closedPoint k))) := by
+  let R := G.left.presheaf.stalk (unitSection G (IsLocalRing.closedPoint k))
+  have : IsRegularLocalRing R :=
+    Smooth.isRegularLocalRing_stalk G.hom (unitSection G (IsLocalRing.closedPoint k))
+  obtain ⟨r, ⟨E⟩⟩ := exists_lie_identity_cotangent_dual_equiv G
+  let : RingHomInvPair r.toRingHom r.symm.toRingHom := RingHomInvPair.of_ringEquiv r
+  let : RingHomInvPair r.symm.toRingHom r.toRingHom :=
+    RingHomInvPair.of_ringEquiv r.symm
+  have hdim : Module.finrank k (Lie G) =
+      Module.finrank (IsLocalRing.ResidueField R)
+        (Module.Dual (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)) := by
+    exact congrArg Cardinal.toNat
+      (rank_eq_of_equiv_equiv r E.toAddEquiv r.bijective (fun c v ↦ E.map_smulₛₗ c v))
+  rw [hdim, Subspace.dual_finrank_eq]
+  exact (IsRegularLocalRing.iff_finrank_cotangentSpace R).mp inferInstance
 
 end AlgebraicGeometry.GrpObj

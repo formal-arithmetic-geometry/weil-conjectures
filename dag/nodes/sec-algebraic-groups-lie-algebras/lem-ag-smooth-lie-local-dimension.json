@@ -13,32 +13,29 @@
  ],
  "proof": [
   {
-   "text": "The identity section makes e rational. On an affine neighbourhood, identify the fibre of the relative cotangent sheaf with m/m² at e by the conormal sequence and its splitting over k. Its dual computes Lie(G); use rational tangent-cotangent duality to identify the two descriptions.",
+   "text": "Apply the cotangent-dual identification at the rational identity, obtaining a ring isomorphism r from k to the residue field and a semilinear equivalence E from Lie G to the residue-field dual of its cotangent space. rank_eq_of_equiv_equiv, followed by Cardinal.toNat, identifies their finranks. Subspace.dual_finrank_eq identifies the dual finrank with the cotangent finrank.",
    "uses": [
-    "lem-sc-rational-tangent-cotangent-duality",
-    "def-wf-lie-algebra-derivation"
+    "lem-ag-lie-identity-cotangent-dual"
    ],
    "elementary": false
   },
   {
-   "text": "The smooth affine algebra has regular local ring at e. Its cotangent space is finite dimensional. Duality preserves finite dimension, and regularity equates cotangent dimension to local Krull dimension.",
+   "text": "Use the proved source-library theorem Smooth.isRegularLocalRing_stalk for the local ring at the identity. Apply Mathlib IsRegularLocalRing.iff_finrank_cotangentSpace to identify the cotangent finrank with ringKrullDim. Combining these equalities proves the assertion with no extra hypotheses.",
    "uses": [
-    "lem-weil-pbc-smooth-over-field-regular-local",
     "lem-weil-pbc-regular-local-cotangent-dimension"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-wf-lie-algebra-derivation",
-  "lem-sc-rational-tangent-cotangent-duality",
-  "lem-weil-pbc-regular-local-cotangent-dimension",
-  "lem-weil-pbc-smooth-over-field-regular-local"
+  "lem-ag-lie-identity-cotangent-dual",
+  "lem-weil-pbc-regular-local-cotangent-dimension"
  ],
  "proof_origin": {
-  "by": "G2 stage 3",
+  "by": "K1 stage 3",
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-  "place": "Dimension paragraph; sk-i-cartier third proof paragraph"
+  "place": "Dimension paragraph; sk-i-cartier third proof paragraph",
+  "note": "Regularity is supplied by the proved source-library scheme-stalk theorem; the Lie/cotangent interface is split off without a smoothness hypothesis."
  },
  "mathlib_searches": [
   {
@@ -106,9 +103,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T042408-L-1815281",
+  "landing": "20261012T085257-L-22229",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

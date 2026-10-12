@@ -1,0 +1,138 @@
+{
+ "id": "lem-ag-lie-identity-cotangent-dual",
+ "kind": "statement",
+ "title": "Lie algebra is the cotangent dual at the rational identity",
+ "statement": "Let $k$ be a field and $G$ a group scheme over $k$ [def-sc-group-scheme]. Put $e=e_G(\\operatorname{Spec}k)$, $R=\\mathcal O_{G,e}$, and $\\kappa=\\kappa(e)$ [def-weil-residue-field]. There exists a ring isomorphism $r:k\\simeq\\kappa$ and an $r$-semilinear equivalence from $\\operatorname{Lie}(G)$ [def-wf-lie-algebra-derivation] to $\\operatorname{Hom}_\\kappa(\\mathfrak m_R/\\mathfrak m_R^2,\\kappa)$, with the canonical residue-field scalar structure on the cotangent space [lem-sc-rational-tangent-cotangent-duality]. No smoothness or finite-type hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+  "place": "Dimension paragraph, identification of Lie algebra with tangent space at the identity; sk-i-cartier third paragraph; Stacks Project Tag 0B2C"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-weil-residue-field",
+  "def-wf-lie-algebra-derivation",
+  "lem-sc-rational-tangent-cotangent-duality"
+ ],
+ "proof": [
+  {
+   "text": "The identity section is a rational point: its equation e composed with p equals id makes the structural residue-field homomorphism k to kappa(e) bijective. Indeed the residue map back along the section is injective as a field homomorphism and its composite with the structural map is id. Take the associated ring equivalence r.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use lieEquiv to identify the sheaf-defined Lie algebra with infinitesimal group points. Transport dual numbers from k to kappa(e) by r; the restriction-to-the-identity condition is exactly the definition of tangent vectors at e. lieEquiv_mul and toLie_infPointsScale identify addition and scalar multiplication.",
+   "uses": [
+    "def-wf-lie-algebra-derivation",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply rational tangent-cotangent duality at e (with the identity morphism of G) to identify tangent vectors with the k-linear dual of m/m squared. Transport the functional values through r to get the kappa(e)-linear dual. The inverse transports values back through r inverse; the two are mutually inverse and compatible with scalars, yielding the semilinear equivalence. This works without smoothness or any finite-dimensional hypothesis. Explicitly subtract the structural scalar lift of the residue of a before applying the functional to its maximal-ideal class; the product formula modulo m squared gives the Leibniz rule. The unit laws make the differential of multiplication the sum of the two vectors, and epsilon scaling agrees with scalar multiplication.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-sc-scheme-tangent-space",
+  "def-weil-residue-field",
+  "def-wf-lie-algebra-derivation",
+  "lem-sc-rational-tangent-cotangent-duality"
+ ],
+ "proof_origin": {
+  "by": "K1 stage 3",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+  "place": "Identity tangent-space identification, expanded using rational cotangent duality and the library lieEquiv"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Lie.*CotangentSpace|CotangentSpace.*Lie|lie.*cotangent",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lie algebra of group scheme over a field is linearly equivalent to dual of cotangent space at identity",
+   "results": "Algebra.SubmersivePresentation.cotangentEquiv, Algebra.SubmersivePresentation.cotangentEquiv_apply, KaehlerDifferential.endEquivDerivation', LieAlgebra.lieCharacterEquivLinearDual, Algebra.H1Cotangent, Algebra.Extension.instAddCommGroupH1Cotangent, Algebra.Extension.H1Cotangent, LieAlgebra.lieCharacterEquivLinearDual_symm_apply",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "19184a8b62b8f729"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual",
+   "results": "Module.Dual, Module.Dual.instInhabited, Dual.apply_one_mul_eq, Module.instIsReflexiveDual, Module.Dual.instIsReflecive, Submodule.dualAnnihilator, Submodule.dualCoannihilator, Submodule.dualAnnihilator_dualCoannihilator_dualAnnihilator",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "9700c4277554ac2a"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lie algebra of group scheme is the dual of cotangent space at identity",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GroupScheme.LieLocalDimension",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-same-lie-closed-subgroup",
+   "place": "Dimension paragraph: identify Lie with cotangent dual before using smooth regularity",
+   "via": [
+    "lem-ag-smooth-lie-local-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-i-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDual",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LieCotangentDual.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.exists_lie_identity_cotangent_dual_equiv",
+  "statement": "theorem exists_lie_identity_cotangent_dual_equiv\n    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let R := G.left.presheaf.stalk (unitSection G (IsLocalRing.closedPoint k))\n    ∃ r : k ≃+* IsLocalRing.ResidueField R,\n      letI : RingHomInvPair r.toRingHom r.symm.toRingHom :=\n        RingHomInvPair.of_ringEquiv r\n      letI : RingHomInvPair r.symm.toRingHom r.toRingHom :=\n        RingHomInvPair.of_ringEquiv r.symm\n      Nonempty (Lie G ≃ₛₗ[r.toRingHom]\n        Module.Dual (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T085257-L-22229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T085257-L-22229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
