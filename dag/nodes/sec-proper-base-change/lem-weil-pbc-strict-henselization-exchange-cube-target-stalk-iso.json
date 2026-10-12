@@ -24,30 +24,39 @@
  ],
  "proof": [
   {
-   "text": "Apply the strict-henselization restriction and closed-point stalk arguments of the parent theorem to the target cube leg.",
+   "text": "Quasi-compactness and quasi-separatedness of f′ follow by base change along the cartesian square sq. Apply the existing closed-stalk strict-henselization base-change theorem to f′, the point ντ, the affine model eB, the cartesian square sqB, the residue lift ρB, and the sheaf g′*G in degree q.",
    "uses": [
     "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-derived-inverse-image",
-    "lem-weil-pbc-geometric-point-field-extension",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-strictly-henselian-sections-stalk",
-    "lem-weil-pbc-unrestricted-strict-henselization-stalk"
+    "lem-weil-pbc-strict-local-base-change-closed-stalk"
    ],
    "elementary": false
+  },
+  {
+   "text": "Whisker the sqB derived base-change natural transformation by homology and the closed-point fibre functor. Apply NatTrans.isIso_app_iff_of_iso to the inverse-image/single-complex isomorphism at G. This transports invertibility from the single complex of g′*G to D(g′*)(G[0]).",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand exchangeCubeTargetComparison. Its first factor is the sqB mate just proved invertible after homology and fibre. Its remaining factors are images of inverse-image composition, equality transport, and inverse-image/single-complex isomorphisms. In the target proof, quantify locally over the source geometric point and its equality to the composite point, then eliminate that equality. Expand derivedStalkComparison directly; its additional factors are inverse-image/stalk and inverse-image/homology isomorphisms. Functors preserve invertibility, so the full composite is invertible. No separate stalk-comparison helper theorem is declared.",
+   "uses": [
+    "lem-weil-pbc-abelian-exchange-cube-comparisons",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-cartesian-square",
+  "lem-weil-pbc-strict-local-base-change-closed-stalk",
   "def-weil-pbc-derived-inverse-image",
-  "lem-weil-pbc-geometric-point-field-extension",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-strictly-henselian-sections-stalk",
-  "lem-weil-pbc-unrestricted-strict-henselization-stalk"
+  "lem-weil-pbc-abelian-exchange-cube-comparisons"
  ],
  "proof_origin": {
-  "by": "worker Y2",
+  "by": "worker T1",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Stacks Project, Tag 03Q9 (theorem-higher-direct-images, restriction complexes) and Tag 03QO (lemma-cohomology-strictly-henselian, closed point sections); canonical-map transport along chosen cartesian models. Canonical-map formulation written by an agent."
+  "place": "Stacks Project, Tags 03Q9 and 03QO, via the existing chosen-model closed-stalk base-change theorem; formal naturality and composition argument written by T1."
  },
  "mathlib_searches": [
   {
@@ -126,10 +135,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T144111-L-2095191",
-  "kind": "interface",
+  "landing": "20261012T165533-L-2940415",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

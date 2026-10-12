@@ -2,12 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Sheaf.AlgebraicGeometry.AbelianExchangeCubeComparisons
-import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.BaseChange.Square
+import Sheaf.AlgebraicGeometry.StrictLocalBaseChangeClosedStalk
 
 @[expose] public section
 universe u
@@ -16,6 +11,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry
 open Scheme Etale
 
+set_option linter.unusedVariables false in
 /-- Component theorem: the target strict-local cube stalk comparison is invertible.
 Source: Stacks Project, Tags 03Q9 and 03QO.
 (blueprint: lem-weil-pbc-strict-henselization-exchange-cube-target-stalk-iso). -/
@@ -72,7 +68,38 @@ theorem Etale.isIso_strictHenselization_exchangeCube_target_stalkComparison
     let N₂ := (D+((p₁)^*[AddCommGrpCat.{u + 1}]) ⋙
       R+((f₁)_*[AddCommGrpCat.{u + 1}])).obj K₀
     IsIso (derivedStalkComparison jB t τ ht M₂ N₂
-      (exchangeCubeTargetComparison sqB.toCommSq hb G) (q : ℤ)) := by sorry
+      (exchangeCubeTargetComparison sqB.toCommSq hb G) (q : ℤ)) := by
+  dsimp only
+  have : QuasiCompact f' := MorphismProperty.of_isPullback sq inferInstance
+  have : QuasiSeparated f' := MorphismProperty.of_isPullback sq inferInstance
+  let F' := ((g')^*[AddCommGrpCat.{u + 1}]).obj G
+  have hm := isIso_strictHenselization_baseChange_closedStalk f' (ν ≫ τ)
+    eB b f₁ sqB ρB F' q
+  let E := Functor.mapDerivedCategoryPlusSingleFunctor ((g')^*[AddCommGrpCat.{u + 1}]) 0
+  have hm' : IsIso ((pointSmallEtale
+      (ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber.map
+        ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map
+          ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sqB.toCommSq).app
+            ((D+((g')^*[AddCommGrpCat.{u + 1}])).obj
+              ((DerivedCategory.Plus.singleFunctor _ 0).obj G))))) := by
+    exact (NatTrans.isIso_app_iff_of_iso
+      (Functor.whiskerRight (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sqB.toCommSq)
+        (DerivedCategory.Plus.homologyFunctor _ (q : ℤ) ⋙
+          (pointSmallEtale
+            (ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber))
+      (E.app G)).mpr hm
+  suffices ∀ (s : Spec (.of k') ⟶ T)
+      (ht : (ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))) ≫
+        (eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ)) = s),
+      IsIso (derivedStalkComparison
+        (eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ))
+        (ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))) s ht
+        _ _ (exchangeCubeTargetComparison sqB.toCommSq hb G) (q : ℤ)) by
+    exact this τ (by simpa only [Category.assoc] using hρB)
+  intro s ht
+  subst s
+  simp only [derivedStalkComparison, exchangeCubeTargetComparison, Functor.map_comp]
+  infer_instance
 
 
 end AlgebraicGeometry
