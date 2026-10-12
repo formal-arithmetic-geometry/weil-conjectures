@@ -12,7 +12,40 @@
  },
  "proof": [
   {
-   "text": "Each iterated cokernel corepresents maps from H killing both ideal products. Tensoring the ideal module with an epimorphic quotient is epimorphic, so the product-vanishing condition descends across the first quotient. Factor each composite projection through the other order of quotient. Cancel composite quotient projections to show the two maps inverse and to verify the projection identity. For each transition in either index, both paths precomposed with the projection from H are the same projection at the lower indices. Cancel that epimorphism; the resulting natural component isomorphisms assemble into θ.",
+   "text": "Reuse the proved idealModuleProduct_quotient_comp_zero_iff from CoherentFormalModule through a proof-only import all. It identifies vanishing on a quotient ideal product with vanishing after the original epimorphic quotient projection. Its existing proof uses image factorization, multiplication naturality, and preservation of epimorphisms by tensoring.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A, quotient by I^n + K^e"
+   }
+  },
+  {
+   "text": "Construct quotientSwapMap I K H e n by two successive cokernel.desc factorizations of the projection H → H/I^n H → (H/I^n H)/K^e. The descent equivalence proves the two required vanishing conditions. Two applications of cokernel.π_desc give quotientSwapMap_projection, identifying its composite with the two quotient projections with the projection in the opposite order. This construction is valid at all nonnegative exponents.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A, quotient by I^n + K^e"
+   }
+  },
+  {
+   "text": "Construct quotientSwapIso with forward map quotientSwapMap I K H e n and inverse quotientSwapMap K I H n e. Precompose each inverse-law equation with the two epimorphic quotient projections and use quotientSwapMap_projection in both orders to identify both composites with the identity.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A, quotient by I^n + K^e"
+   }
+  },
+  {
+   "text": "At positive indices e+1,n+1, use NatIso.ofComponents twice to assemble quotientSwapIso into the required doubly indexed diagram isomorphism. In each index naturality equation, cancel both quotient projections, unfold quotientSwapMap and formalModuleQuotientMap, and simplify using Mathlib cokernel.π_desc, cokernel.π_desc_assoc and associativity. These give equality for every index morphism. The component projection equation is exactly the required displayed identity.",
    "uses": [
     "def-weil-pbc-coherent-formal-module"
    ],
@@ -28,9 +61,10 @@
  ],
  "proof_origin": {
   "by": "agent",
+  "agent": "D3",
   "document": "literature/stacks-project/coherent.tex",
   "place": "Tag 088A, quotient by I^n + K^e",
-  "note": "Source tags read online; local literature checkout absent. Explicit universal-property/naturality argument supplied by second reader."
+  "note": "Existing universal-property route implemented and compiled in Lean by D3. Repair reuses the private descent theorem of CoherentFormalModule with import all, removes all four duplicate helpers, and uses Mathlib cokernel equations directly for naturality. No new proof dependency or hole."
  },
  "mathlib_searches": [
   {
@@ -115,10 +149,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T213437-L-1178493",
-  "kind": "interface",
+  "landing": "20261012T235110-L-2171290",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
