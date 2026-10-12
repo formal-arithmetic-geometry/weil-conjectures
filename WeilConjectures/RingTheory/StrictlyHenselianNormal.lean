@@ -232,6 +232,8 @@ lemma injective_atPrimeToField : Function.Injective (atPrimeToField Q) := by
   rw [IsLocalization.mk'_eq_zero_iff]
   exact ⟨1, by rw [OneMemClass.coe_one, one_mul]; exact Subtype.ext hx⟩
 
+section StrictlyHenselian
+
 variable [IsSepClosed Ω] [Algebra.IsAlgebraic R Ω]
 
 /-- The localization at a prime of the integral closure of a domain `R` in a separably closed
@@ -250,5 +252,69 @@ theorem isStrictlyHenselianLocalRing_atPrime (hR : Function.Injective (algebraMa
   have : IsFractionRing (Localization.AtPrime Q) Ω :=
     IsFractionRing.isFractionRing_of_isDomain_of_isLocalization Q.primeCompl _ Ω
   exact IsStrictlyHenselianLocalRing.of_isFractionRing_of_isSepClosed Ω
+
+end StrictlyHenselian
+
+section Action
+
+open scoped Pointwise
+
+variable {G : Type*} [Group G] [MulSemiringAction G Ω] [SMulCommClass G R Ω]
+
+omit [Q.IsPrime] in
+lemma comap_toRingHom_eq_of_mem_stabilizer {g : G} (hg : g ∈ MulAction.stabilizer G Q) :
+    Q = Q.comap (MulSemiringAction.toRingHom G (integralClosure R Ω) g) := by
+  ext x
+  rw [Ideal.mem_comap, MulSemiringAction.toRingHom_apply]
+  conv_rhs => rw [← (MulAction.mem_stabilizer_iff.1 hg : g • Q = Q)]
+  rw [Ideal.mem_pointwise_smul_iff_inv_smul_mem, inv_smul_smul]
+
+/-- The automorphism of `B_Q` induced by an element `g` of the stabiliser of `Q`. -/
+noncomputable def atPrimeMap (g : G) (hg : g ∈ MulAction.stabilizer G Q) :
+    Localization.AtPrime Q →+* Localization.AtPrime Q :=
+  Localization.localRingHom Q Q (MulSemiringAction.toRingHom G (integralClosure R Ω) g)
+    (comap_toRingHom_eq_of_mem_stabilizer Q hg)
+
+instance (g : G) (hg : g ∈ MulAction.stabilizer G Q) : IsLocalHom (atPrimeMap Q g hg) :=
+  Localization.isLocalHom_localRingHom _ _ _ _
+
+lemma atPrimeMap_algebraMap (g : G) (hg : g ∈ MulAction.stabilizer G Q)
+    (b : integralClosure R Ω) :
+    atPrimeMap Q g hg (algebraMap _ (Localization.AtPrime Q) b) =
+      algebraMap _ (Localization.AtPrime Q) (g • b) :=
+  Localization.localRingHom_to_map _ _ _ _ _
+
+lemma atPrimeMap_algebraMap_base (g : G) (hg : g ∈ MulAction.stabilizer G Q) (r : R) :
+    atPrimeMap Q g hg (algebraMap R (Localization.AtPrime Q) r) =
+      algebraMap R (Localization.AtPrime Q) r := by
+  rw [IsScalarTower.algebraMap_apply R (integralClosure R Ω) (Localization.AtPrime Q),
+    atPrimeMap_algebraMap]
+  congr 1
+  exact Subtype.ext (smul_algebraMap g r)
+
+lemma atPrimeToField_atPrimeMap (g : G) (hg : g ∈ MulAction.stabilizer G Q)
+    (x : Localization.AtPrime Q) :
+    atPrimeToField Q (atPrimeMap Q g hg x) = g • atPrimeToField Q x := by
+  have : (atPrimeToField Q).comp (atPrimeMap Q g hg) =
+      (MulSemiringAction.toRingHom G Ω g).comp (atPrimeToField Q) := by
+    refine IsLocalization.ringHom_ext Q.primeCompl (RingHom.ext fun b ↦ ?_)
+    simp only [RingHom.comp_apply, atPrimeMap_algebraMap, atPrimeToField_algebraMap,
+      MulSemiringAction.toRingHom_apply, integralClosure.coe_smul]
+  exact RingHom.congr_fun this x
+
+lemma residue_atPrimeMap_of_mem_inertia {g : G} (hg : g ∈ Q.inertia G)
+    (x : Localization.AtPrime Q) :
+    IsLocalRing.residue _ (atPrimeMap Q g (Ideal.inertia_le_stabilizer Q hg) x) =
+      IsLocalRing.residue _ x := by
+  have : (IsLocalRing.residue _).comp (atPrimeMap Q g (Ideal.inertia_le_stabilizer Q hg)) =
+      IsLocalRing.residue (Localization.AtPrime Q) := by
+    refine IsLocalization.ringHom_ext Q.primeCompl (RingHom.ext fun b ↦ ?_)
+    simp only [RingHom.comp_apply, atPrimeMap_algebraMap]
+    rw [← sub_eq_zero, ← map_sub, ← map_sub, IsLocalRing.residue_eq_zero_iff,
+      IsLocalization.AtPrime.to_map_mem_maximal_iff _ Q]
+    exact hg b
+  exact RingHom.congr_fun this x
+
+end Action
 
 end Ideal
