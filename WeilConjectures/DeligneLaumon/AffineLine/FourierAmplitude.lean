@@ -9,6 +9,7 @@ public import WeilConjectures.WeilSheaf.FourierTateTwist
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.DeligneLaumon.AffineLine.Punctual
+public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
 
 /-!
 # The ordinary amplitude of the Fourier–Deligne transform on the line
@@ -52,17 +53,34 @@ lemma isGE_iff_isZero_homologySheaf (K : WeilComplex k₀ l X) (n : ℤ) :
   rw [_root_.DerivedCategory.isGE_iff]
   exact forall₂_congr fun a _ ↦ (isZero_homologySheaf_obj_iff a K).symm
 
+/-- The cohomology sheaves of a Tate twist are the constant twists of the cohomology sheaves:
+`𝓗ᵃ(K(m)) ≅ 𝓗ᵃ(K) ⊗ 𝓑_{χ_ℓ(σ)^m}`, the Tate twist being the derived functor of the exact
+constant twist (`ProEtaleWeilSheaf.rightDerivedFunctorIhomFunctorTateTwistIso`). -/
+noncomputable def homologySheafTateTwistIso (m a : ℤ) (K : WeilComplex k₀ l X) :
+    (homologySheaf a).obj ((tateTwist k₀ l X m).obj K) ≅
+      ((homologySheaf a).obj K).constantTwist (WeilSheaf.cyclotomicUnit k₀ l ^ m) :=
+  ObjectProperty.isoMk _
+    ((_root_.DerivedCategory.homologyFunctor _ a).mapIso
+        ((ProEtaleWeilSheaf.rightDerivedFunctorIhomFunctorTateTwistIso m).app K.obj) ≪≫
+      ((ProEtaleWeilSheaf.constantTwist k₀ l X
+        (WeilSheaf.cyclotomicUnit k₀ l ^ m)).mapDerivedCategoryHomologyFunctorIso a).symm.app
+          K.obj ≪≫
+      (ProEtaleWeilSheaf.mkConstantTwistIso k₀ l X _ _).symm)
+
 /-- The Tate twist does not change the vanishing of a cohomology sheaf. -/
 lemma isZero_homologySheaf_tateTwist_iff (m a : ℤ) (K : WeilComplex k₀ l X) :
     IsZero ((homologySheaf a).obj ((tateTwist k₀ l X m).obj K)) ↔
-      IsZero ((homologySheaf a).obj K) :=
-  sorry
+      IsZero ((homologySheaf a).obj K) := by
+  rw [(homologySheafTateTwistIso m a K).isZero_iff, WeilSheaf.isZero_iff_isZero_carrier,
+    WeilSheaf.isZero_iff_isZero_carrier]
+  rfl
 
 /-- The Tate twist does not change the support of a cohomology sheaf. -/
 lemma support_homologySheaf_tateTwist (m a : ℤ) (K : WeilComplex k₀ l X) :
     ((homologySheaf a).obj ((tateTwist k₀ l X m).obj K)).support =
-      ((homologySheaf a).obj K).support :=
-  sorry
+      ((homologySheaf a).obj K).support := by
+  rw [WeilSheaf.support_congr (homologySheafTateTwistIso m a K)]
+  rfl
 
 
 /-- The truncation triangle `τ_{<n} K ⟶ K ⟶ τ_{≥n} K ⟶` of a Weil complex `K ≤ n`, whose third
@@ -70,8 +88,16 @@ term is concentrated in degree `n`, with the same `𝓗ⁿ` as `K`. -/
 lemma exists_distTriang_of_isLE (K : WeilComplex k₀ l X) (n : ℤ) (hK : K.obj.IsLE n) :
     ∃ (K₁ K₃ : WeilComplex k₀ l X) (f : K₁ ⟶ K) (g : K ⟶ K₃) (h : K₃ ⟶ K₁⟦(1 : ℤ)⟧),
       Triangle.mk f g h ∈ distTriang _ ∧ K₁.obj.IsLE (n - 1) ∧ K₃.obj.IsLE n ∧
-        K₃.obj.IsGE n ∧ Nonempty ((homologySheaf n).obj K₃ ≅ (homologySheaf n).obj K) :=
-  sorry
+        K₃.obj.IsGE n ∧ Nonempty ((homologySheaf n).obj K₃ ≅ (homologySheaf n).obj K) := by
+  obtain ⟨A, Z, f, g, h, hT, hA, hZ, -, hZ'⟩ := exists_distTriang_truncLT K n
+  refine ⟨A, Z, f, g, h, hT, hA, hZ' n hK, hZ, ⟨?_⟩⟩
+  have : IsIso ((_root_.DerivedCategory.homologyFunctor _ n).map g.hom) :=
+    @_root_.DerivedCategory.isIso_homologyFunctor_map_mor₂_of_isLE_of_isGE _ _ _ _
+      ((WeilComplex.objectProperty k₀ l X).ι.mapTriangle.obj (Triangle.mk f g h)) hT n n le_rfl
+      hA hZ
+  exact (ObjectProperty.isoMk _ (asIso ((_root_.DerivedCategory.homologyFunctor _ n).map
+    g.hom))).symm
+
 end WeilComplex
 
 /-- **Fourier inversion** on the line: `FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)`.
