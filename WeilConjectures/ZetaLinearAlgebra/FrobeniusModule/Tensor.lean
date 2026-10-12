@@ -171,6 +171,20 @@ def Equiv.homCongr {M M' : FrobeniusModule.{u, v} K} {N N' : FrobeniusModule.{t,
     simp only [hom, LinearEquiv.arrowCongr_apply]
     rw [e₂.map_frobenius, e₁.symm_map_frobenius_symm]
 
+/-- A perfect pairing `p : P × A → C` invariant under the Frobenius,
+`p (F_P x) (F_A y) = F_C (p x y)`, identifies `P` with `Hom(A, C)`. -/
+noncomputable def Equiv.ofBilinear {P : FrobeniusModule.{max u t, v} K}
+    {A : FrobeniusModule.{u, v} K} {C : FrobeniusModule.{t, v} K}
+    (p : P.carrier →ₗ[K] A.carrier →ₗ[K] C.carrier) (hp : Function.Bijective p)
+    (h : ∀ x y, p (P.frobenius x) (A.frobenius y) = C.frobenius (p x y)) :
+    P.Equiv (A.hom C) where
+  toLinearEquiv := LinearEquiv.ofBijective p hp
+  map_frobenius x := LinearMap.ext fun y ↦ by
+    obtain ⟨z, rfl⟩ := A.frobenius.surjective y
+    rw [hom_frobenius_apply, LinearMap.comp_apply, LinearMap.comp_apply, LinearEquiv.coe_coe,
+      LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply]
+    exact h x z
+
 /-- The linear isomorphism `Hom(M^∨, N) ≃ M ⊗ N` underlying `FrobeniusModule.homDualEquiv`,
 sending the map `φ ↦ φ(x) y` to `x ⊗ y`. -/
 noncomputable def homDualLinearEquiv (M : FrobeniusModule.{u, v} K)
@@ -212,6 +226,17 @@ lemma homDualEquiv_symm_tmul (M N : FrobeniusModule.{max u v, v} K) (x : M.carri
       (homDualEquiv M N).toLinearEquiv.symm (x ⊗ₜ y)) φ =
       φ x • y :=
   homDualLinearEquiv_symm_tmul M N x y φ
+
+/-- An isomorphism `P ≅ Hom(A, N)` together with `A ≅ M^∨` gives `P ≅ M ⊗ N`, through
+`Hom(M^∨, N) ≅ M ⊗ N` (`FrobeniusModule.homDualEquiv`). -/
+noncomputable def Equiv.tensorOfHomDual {P A M N : FrobeniusModule.{max u v, v} K}
+    (e : P.Equiv (A.hom N)) (f : A.Equiv M.dual) : P.Equiv (M.tensor N) where
+  toLinearEquiv := e.toLinearEquiv ≪≫ₗ
+    (Equiv.homCongr f ⟨LinearEquiv.refl K N.carrier, fun x ↦ by
+      rw [LinearEquiv.refl_apply, LinearEquiv.refl_apply]⟩).toLinearEquiv ≪≫ₗ
+    (homDualEquiv M N).toLinearEquiv
+  map_frobenius x := by
+    simp only [LinearEquiv.trans_apply, Equiv.map_frobenius]
 
 /-- `a b` is an eigenvalue of the Frobenius of `M ⊗ N` if `a` is one of `M` and `b` one of `N`.
 -/

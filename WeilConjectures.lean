@@ -1970,6 +1970,7 @@ public import WeilConjectures.WeilSheaf.StalkFrobenius
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkMonoidal
 public import WeilConjectures.WeilSheaf.StalkPairing
+public import WeilConjectures.WeilSheaf.StalkTensor
 public import WeilConjectures.WeilSheaf.StalkUpperStar
 public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 public import WeilConjectures.WeilSheaf.TateTwist
