@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 
 /-!
 
@@ -27,12 +28,12 @@ Both halves are stated here and combined into
 
 ## The proof of the projective-line case
 
-By `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity` it suffices to
-prove injective acyclicity for the projection, which is
-`AlgebraicGeometry.Etale.hasInjectiveAcyclicity_projectiveLine` of
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk`. The
-Lean proof checks that the exchange morphism is an isomorphism at every geometric point, since
-geometric stalks are conservative. There, by
+The proof first treats a single torsion sheaf `F` on `ℙ¹_S`: the degreewise exchange maps
+`g⁻¹ Rᵠp_* F ⟶ Rᵠp'_* g'⁻¹ F` are isomorphisms
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine` of
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk`). There
+the exchange morphism is checked at every geometric point, since geometric stalks are
+conservative; by
 `AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine`, the
 stalk is the pullback map `Hᵠ(ℙ¹_{κ(s̄)}, F) ⟶ Hᵠ(ℙ¹_{κ(t̄)}, F)` between two separably closed
 fields. That map is bijective by the invariance of the cohomology of a curve under extension
@@ -41,6 +42,12 @@ of separably closed base fields. The strictly henselian route of
 (Mayer–Vietoris on the two standard charts, finite étale lifting) is not used by the Lean
 proof; it is the intended proof of the `sorry`ed stalk statement, through the comparison of
 `ℙ¹` over a strictly henselian ring with its closed fibre.
+
+Complexes are then reached by truncation dévissage
+(`AlgebraicGeometry.Etale.isIso_baseChange_app_projectiveLine`): both sides of the derived
+exchange morphism do not lower the cohomological degree, so `Hᵐ` of both sides only depends
+on `τ_{≤ m} K`, a bounded complex which is built from its shifted cohomology sheaves by
+truncation triangles.
 
 ## The proof of the reduction
 
@@ -100,6 +107,50 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
+/-- The derived exchange morphism of the projective line is an isomorphism at a torsion sheaf
+placed in degree `0`: in nonnegative degrees, its cohomology sheaves are the degreewise exchange
+maps `g⁻¹ Rᵠp_* F ⟶ Rᵠp'_* g'⁻¹ F`, which are isomorphisms by
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`, and in negative degrees
+both sides vanish. This is step (iii) of the proof of `sk-thm-p1`. -/
+lemma Etale.isIso_baseChange_app_singleFunctor_obj_projectiveLine {S T X' : Scheme.{u}}
+    {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
+    (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
+    (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsTorsionSheaf F] :
+    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) := by
+  refine (Etale.isIso_baseChange_app_singleFunctor_obj_iff Λ sq F).2 fun q ↦ ?_
+  rcases le_or_gt 0 q with hq | hq
+  · lift q to ℕ using hq
+    exact Etale.isIso_baseChangeHomologyMap_projectiveLine Λ sq F q
+  · rw [Etale.isIso_baseChangeHomologyMap_iff]
+    exact ⟨0, (Etale.isZero_homologyFunctor_baseChangeSource_obj Λ g _ _ 0 q hq).eq_of_src _ _,
+      (Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ g' f' _ 0 q hq).eq_of_src _ _⟩
+
+/-- The derived exchange morphism of the projective line is an isomorphism at every bounded
+below complex `K` with torsion cohomology sheaves. This is the truncation dévissage of step (iv)
+of the proof of `sk-thm-p1`: both `g⁻¹ ∘ Rp_*` and `Rp'_* ∘ g'⁻¹` do not lower the
+cohomological degree, so `Hᵐ` of both sides at `K` only depends on `τ_{≤ m} K`, which is
+reached from its shifted cohomology sheaves by the truncation triangles and the five lemma
+(`DerivedCategory.Plus.isIso_app_of_forall_homology`); for the cohomology sheaves, which are
+torsion, this is
+`AlgebraicGeometry.Etale.isIso_baseChange_app_singleFunctor_obj_projectiveLine`. -/
+lemma Etale.isIso_baseChange_app_projectiveLine {S T X' : Scheme.{u}}
+    {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
+    (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
+    (K : DerivedCategory.Plus (Sheaf (ProjectiveLine S).smallEtaleTopology
+      (ModuleCat.{u + 1} Λ)))
+    (hK : Etale.DerivedCategory.Plus.torsionHomology Λ (ProjectiveLine S) K) :
+    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := by
+  let P : ObjectProperty (Sheaf (ProjectiveLine S).smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)) := fun F ↦ IsTorsionSheaf F
+  have : P.IsClosedUnderIsomorphisms := ⟨fun φ (_ : IsTorsionSheaf _) ↦ .of_epi φ.hom⟩
+  exact DerivedCategory.Plus.isIso_app_of_forall_homology _ P
+    (fun F (_ : IsTorsionSheaf F) ↦
+      Etale.isIso_baseChange_app_singleFunctor_obj_projectiveLine Λ sq F)
+    (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeSource_obj Λ g _ K n q hq)
+    (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ g' f' K n q hq) K hK
+
 /-- **The projective line satisfies base change**: for every scheme `S`, the projection
 `ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasTorsionBaseChange`, that is, for every
 cartesian square
@@ -115,11 +166,11 @@ cartesian square
 the derived base change map is an isomorphism on every bounded below complex with torsion
 cohomology. This is the geometric half of the proof of proper base change; see the module
 docstring, and Stacks Project, Tag 095T, whose proof it is.
-(blueprint: `prop:weil-pbc-projective-line`) -/
+(blueprint: `sk-thm-p1`, `prop-weil-pbc-projective-line`) -/
 theorem Etale.hasTorsionBaseChange_projectiveLine (S : Scheme.{u}) :
-    Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S) :=
-  Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity Λ _
-    (Etale.hasInjectiveAcyclicity_projectiveLine Λ S)
+    Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S) := fun _ _ _ _ _ sq K hK ↦ by
+  have := Etale.isIso_baseChange_app_projectiveLine Λ sq K hK
+  rwa [Etale.baseChange_eq_derivedBaseChangeMapPlus] at this
 
 /-- **Reduction of proper base change to the projective line**: if the projection
 `ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasTorsionBaseChange` for every scheme `S`,
