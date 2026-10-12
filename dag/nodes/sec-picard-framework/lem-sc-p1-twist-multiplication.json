@@ -15,51 +15,49 @@
  },
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-proj-polynomial-twist-chart] with $A=k$, $m=1$ (only its clauses on the cover and on functions are used, not its glued module): $U_0=D_+(x_0)$ and $U_1=D_+(x_1)$ cover $P$, $\\Gamma(U_i,\\mathcal O_P)=S_{(x_i)}$, and for $i\\ne j$, $U_i\\cap U_j$ is the basic open of the function $x_i/x_j$ in $U_j$. By (2) of [def-weil-pbc-proj-twisting-sheaf], for every $n\\in\\mathbf Z$ and every homogeneous $f$ of positive degree with $D_+(f)\\subseteq U_i$, $\\Gamma(D_+(f),\\mathcal O_P(n))=(S_f)_n$ is free of rank one over $S_{(f)}$ with basis $x_i^n/1$ (elementary: $x_i$ is a unit of $S_f$, so $c=(c\\,x_i^{-n})\\cdot x_i^n$ with $c\\,x_i^{-n}\\in S_{(f)}$, uniquely), compatibly with the restriction maps, which are localization maps. Hence $a\\mapsto a\\cdot x_i^n$ is an isomorphism $\\mathcal O_{U_i}\\to\\mathcal O_P(n)|_{U_i}$; in particular $\\mathcal O_P(1)$ is quasi-coherent (by construction) and locally free of rank one, i.e. invertible [def-sc-invertible-module], with generator $x_i$ (the global section of (3) of [def-weil-pbc-proj-twisting-sheaf], equal to $x_i/1$ on every $D_+(f)$) on $U_i$. This is the computation of Stacks 01MS with $d=1$, $f=x_i$.",
-   "uses": [
-    "lem-weil-pbc-proj-polynomial-twist-chart",
-    "def-weil-pbc-proj-twisting-sheaf",
-    "def-sc-invertible-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01MS (lemma-when-invertible) and Lemma 01NG"
-   }
-  },
-  {
-   "text": "Being a morphism of sheaves, $\\mu_{n,m}$ is an isomorphism if its restrictions to $U_0$ and $U_1$ are. On $U_i$, by Step 1, $\\mathcal O_P(n)|_{U_i}\\otimes\\mathcal O_P(m)|_{U_i}$ is free of rank one with basis $x_i^n\\otimes x_i^m$, and $\\mu_{n,m}$ sends it to $x_i^nx_i^m=x_i^{n+m}$, the basis of $\\mathcal O_P(n+m)|_{U_i}$; so $\\mu_{n,m}|_{U_i}$ is an isomorphism (Stacks 01MS). Consequently: for $n\\ge0$ the iterated multiplication $\\mathcal O_P(1)^{\\otimes n}\\to\\mathcal O_P(n)$ is an isomorphism (induction on $n$ via $\\mu_{n,1}$); $\\mu_{1,-1}:\\mathcal O_P(1)\\otimes\\mathcal O_P(-1)\\to\\mathcal O_P$ is an isomorphism of invertible modules, so its adjoint $\\mathcal O_P(-1)\\to\\mathcal Hom(\\mathcal O_P(1),\\mathcal O_P)=\\mathcal O_P(1)^\\vee$ is an isomorphism (on $U_i$ it sends the basis $x_i^{-1}$ to the dual basis of $x_i$), and for $n<0$ iterating $\\mu_{-1,-1}$ gives $(\\mathcal O_P(1)^\\vee)^{\\otimes(-n)}\\cong\\mathcal O_P(n)$. Tensoring with $\\mathcal G$ gives $\\mathcal G\\otimes\\mathcal O_P(1)^{\\otimes n}\\cong\\mathcal G\\otimes\\mathcal O_P(n)$. Under these isomorphisms $t\\otimes x_i$ goes to $\\mu(t\\otimes x_i)$ by associativity of multiplication in $S_f$ (for $n<0$ also using that the dual pairing is $\\mu_{1,-1}$). Elementary: a check on the bases over the two charts.",
+   "text": "The variables generate the polynomial algebra, so Proj.iSup_basicOpen_eq_top' gives the degree-one cover. Proj.isInvertible_twist proves invertibility of O(1). This avoids the polynomial chart gluing theorem.",
    "uses": [
     "def-weil-pbc-proj-twisting-sheaf",
     "def-sc-invertible-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01MS (lemma-when-invertible) and Lemma 01MU (lemma-where-invertible)"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $x\\in P$. If $x\\in U_i$, then $x_i$ is a free generator of $\\mathcal O_P(1)$ near $x$ (Step 1), so its image in $\\mathcal O_P(1)_x\\otimes\\kappa(x)\\cong\\kappa(x)$ is nonzero. If $x\\in U_j$, $j\\ne i$, then on $U_j$ we have $x_i=(x_i/x_j)\\cdot x_j$ with $x_j$ a free generator, so $x_i$ does not vanish at $x$ iff the function $x_i/x_j$ does not vanish at $x$, iff $x$ lies in the basic open of $x_i/x_j$ in $U_j$, which is $U_i\\cap U_j$ by [lem-weil-pbc-proj-polynomial-twist-chart]. Since $U_0\\cup U_1=P$, $P_{x_i}=D_+(x_i)$ (Stacks 01MV with $n=d=1$). Elementary.",
+   "text": "Obtain multiplication maps with the prime-localization formula from lem-sc-p1-twist-product-morphism. On any degree-one chart f the source has basis f^n tensor f^m and the target has basis f^(n+m), by isFreeGenerator_twistPowSection and its tensor-section rule. val_twistPowSection_mul and the product formula show the morphism sends source basis to target basis. Write arbitrary sections uniquely as scalar multiples of these bases to prove injectivity and surjectivity. Hom.isIso_of_forall_bijective_app then makes each multiplication map an isomorphism.",
    "uses": [
-    "lem-weil-pbc-proj-polynomial-twist-chart"
+    "lem-sc-p1-twist-product-morphism",
+    "def-weil-pbc-proj-twisting-sheaf"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01MV (lemma-principal-open)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sc-p1-twist-coherent-powers to this same multiplication family and its isomorphism and product proofs. It supplies exactly the normalized positive and negative tensor-power families and both coordinate successor squares.",
+   "uses": [
+    "lem-sc-p1-twist-coherent-powers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply proj_homogeneous_section_tensor_powers_locus to d=1, f=X_i. Its basic-open equality is the requested coordinate nonvanishing equality, reversed; unitSectionsEquiv is definitionally the identity.",
+   "uses": [
+    "lem-sc-p1-homogeneous-section-tensor-powers-locus"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "def-sc-invertible-module",
   "def-weil-pbc-proj-twisting-sheaf",
-  "def-sc-invertible-module"
+  "lem-sc-p1-homogeneous-section-tensor-powers-locus",
+  "lem-sc-p1-twist-coherent-powers",
+  "lem-sc-p1-twist-product-morphism"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions, Lemmas 01MS, 01MU and 01MV"
+  "place": "Tags 01MS, 01MU, 01MV, 01NG; direct polynomial cover, free-basis proof of isomorphism, coherent-power reduction and existing homogeneous nonvanishing theorem",
+  "group": "V2",
+  "date": "2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -160,5 +158,15 @@
   "group": "P1",
   "result": "fix",
   "note": "field k, S=k[x0,x1] homogeneousSubmodule grading, raw Proj per node; O(n)=Proj.twist; O(1) IsInvertible; mu tied by the tmulSection pointwise-product formula (determines it), IsIso; ePos/eNeg were untied up to a global unit (only the successor squares and ePos 0 = eNeg 0 constrained them) -> added (ePos 0).hom = Proj.unitToTwist(1) >> eqToHom, which with the squares (x0,x1 generate O(1); t->(t x0,t x1) mono) fixes all of them; G-version via tensorLeft; nonvanishingLocus of unitToTwist x_i at 1 = basicOpen X_i (STATE NON-VANISHING LOCUS); stmt_deps += def-weil-pbc-ample-invertible-module justified (records nonvanishingLocus), check_dag no new faults/cycles; no dispute, no let/notation/inline instances"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T225335-L-1814964",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

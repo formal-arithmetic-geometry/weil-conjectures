@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-p1-twist-coherent-powers",
+ "kind": "statement",
+ "title": "Normalized coherent tensor powers of twists",
+ "statement": "Let $k$ be a field and $P=\\operatorname{Proj} k[x_0,x_1]$ [def-sc-p1-standard], with twists $L_n=\\mathcal O_P(n)$ and coordinate sections $x_i:\\mathcal O_P\\to L_1$ [def-weil-pbc-proj-twisting-sheaf]. Suppose morphisms $\\mu_{n,m}:L_n\\otimes L_m\\to L_{n+m}$ are isomorphisms and send every pure tensor of sections to the pointwise product in the prime localization. Then there are isomorphisms $e^+_a:L_1^{\\otimes a}\\cong L_a$ and $e^-_a:(L_1^\\vee)^{\\otimes a}\\cong L_{-a}$ for $a\\in\\mathbf N$, where the dual and its evaluation are as in [lem-sc-invertible-dual]. The degree-zero positive morphism is the canonical unit morphism $1\\mapsto1$, and $e^+_0=e^-_0$. For each $a$ and $i$, tensoring with $x_i$ and then multiplying agrees with the positive successor identification, with the braiding which exchanges $L_1$ and its tensor power. The negative successor square agrees with braiding $L_1$ to the front, reassociating, applying $L_1\\otimes L_1^\\vee\\to\\mathcal O_P$, and then $e^-_a$. These are precisely the two morphism equalities displayed in the Lean signature. No multiplication morphism is constructed and no coordinate nonvanishing locus is asserted.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MS and 01MU; source node step 2, iterated multiplication, dual pairing and compatibility"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-invertible-module",
+  "lem-sc-invertible-dual"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical unit isomorphism sending 1 to 1 for both families in degree zero. Define positive successor isomorphisms by braiding O(1) to the right, applying the previous isomorphism tensored with O(1), and multiplying. In a coordinate chart each map sends the tensor basis to the corresponding ordinary power. This proves the positive coordinate square.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The given multiplication and the inverse unit isomorphism define the perfect pairing O(1) tensor O(-1) to O. Its adjoint identifies O(-1) with the dual of O(1); on each degree-one chart inverse coordinate and dual coordinate are the corresponding bases. Iterate multiplication to define the negative family.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-invertible-module",
+    "lem-sc-invertible-dual"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each coordinate chart the negative successor square sends a pure tensor of the dual basis and a coordinate to the same lower negative-degree basis: x_i^(-(a+1)) x_i = x_i^(-a). The case a=0 is the evaluation pairing to the unit. The charts cover, so equality on these bases gives the global square. The zero families were both defined by the same unit isomorphism.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-invertible-dual"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MS and 01MU; source node step 2, iterated multiplication, dual pairing and compatibility",
+  "group": "V2",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Twisting sheaf tensor products multiplication coherent positive negative tensor powers",
+   "results": "Service unavailable: Internal Server Error; no verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication of Serre twisting sheaves on polynomial Proj is an isomorphism",
+   "results": "Eight structure-sheaf and standard-open results, no twisting multiplication or coherent tensor-power family.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.twist",
+   "results": "Unknown identifier, zero hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "twist.*[Mm]ul|[Mm]ul.*twist; tensor_bilinear_universal; tensorPow; unitToTwist in Mathlib and both library roots; blueprint_refs search twist multiplication tensor powers",
+   "results": "Source has local twisting bases and unnormalized tensor isomorphism. Existing SheafOfModules.tensor_bilinear_universal supplies the general bilinear extension. No coherent positive/negative twist family found; blueprint search returned no match.",
+   "date": "2026-10-13",
+   "verdict": "general universal-property input exists; no duplicate twist result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineTwistMultiplication",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof comparison on D_+(x_i), via step 2 of lem-sc-p1-twist-multiplication: Tags 01MS and 01MU; source node step 2, iterated multiplication, dual pairing and compatibility",
+   "via": [
+    "lem-sc-p1-twist-multiplication"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineTwistCoherentPowers",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineTwistCoherentPowers.lean",
+  "declaration": "AlgebraicGeometry.projectiveLine_twist_coherent_powers",
+  "statement": "theorem projectiveLine_twist_coherent_powers (k : Type u) [Field k]\n    (μ : ∀ n m : ℤ,\n        Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n ⊗\n          Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m ⟶\n            Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n + m))\n    (hiso : ∀ n m : ℤ, IsIso (μ n m))\n    (hmul : (∀ (n m : ℤ) (U : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Opens)\n        (s : Γ(Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n, U))\n        (t : Γ(Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m, U)) (x : U),\n        (((μ n m).app U (tmulSection s t)).1 x :\n            Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =\n          (s.1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) * (t.1 x))) :\n    (∃ (ePos : ∀ a : ℕ,\n          (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1).tensorPow a ≅\n            Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (a : ℤ))\n        (eNeg : ∀ a : ℕ,\n          (dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)).tensorPow a ≅\n            Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (-(a : ℤ))),\n        (ePos 0).hom =\n            Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin 2) k)\n                (SetLike.GradedOne.one_mem (A := MvPolynomial.homogeneousSubmodule (Fin 2) k)) ≫\n              eqToHom (congrArg\n                (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k)) (by norm_num)) ∧\n        ePos 0 = eNeg 0 ∧\n        (∀ (a : ℕ) (i : Fin 2),\n          (ρ_ _).inv ≫\n              (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1).tensorPow a ◁\n                Proj.unitToTwist\n                  (𝒜 := MvPolynomial.homogeneousSubmodule (Fin 2) k)\n                  (MvPolynomial.X_mem_homogeneousSubmodule_one k i) ≫\n              (ePos a).hom ▷ _ ≫ μ (a : ℤ) 1 =\n            (ρ_ _).inv ≫\n              (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1).tensorPow a ◁\n                Proj.unitToTwist\n                  (𝒜 := MvPolynomial.homogeneousSubmodule (Fin 2) k)\n                  (MvPolynomial.X_mem_homogeneousSubmodule_one k i) ≫\n              (β_ _ _).hom ≫ (ePos (a + 1)).hom ≫ eqToHom (congrArg\n                (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k)) (by omega))) ∧\n        (∀ (a : ℕ) (i : Fin 2),\n          (ρ_ _).inv ≫\n              (dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)).tensorPow\n                (a + 1) ◁ Proj.unitToTwist\n                  (𝒜 := MvPolynomial.homogeneousSubmodule (Fin 2) k)\n                  (MvPolynomial.X_mem_homogeneousSubmodule_one k i) ≫\n              (eNeg (a + 1)).hom ▷ _ ≫ μ (-((a + 1 : ℕ) : ℤ)) 1 ≫\n                eqToHom (congrArg\n                  (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k)) (by omega)) =\n            (ρ_ _).inv ≫\n              (dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)).tensorPow\n                (a + 1) ◁ Proj.unitToTwist\n                  (𝒜 := MvPolynomial.homogeneousSubmodule (Fin 2) k)\n                  (MvPolynomial.X_mem_homogeneousSubmodule_one k i) ≫\n              (β_ _ _).hom ≫\n              (α_ (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)\n                (dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1))\n                ((dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)).tensorPow\n                  a)).inv ≫\n              dualEvaluation (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1) ▷\n                (dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)).tensorPow a ≫\n              (λ_ _).hom ≫ (eNeg a).hom))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T225335-L-1814964",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T225335-L-1814964",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

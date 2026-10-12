@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-p1-twist-product-morphism",
+ "kind": "statement",
+ "title": "Pointwise multiplication morphism of polynomial Proj twists",
+ "statement": "Let $k$ be a field, $P=\\operatorname{Proj} k[x_0,x_1]$ [def-sc-p1-standard], and $L_n=\\mathcal O_P(n)$ [def-weil-pbc-proj-twisting-sheaf]. There exist morphisms $\\mu_{n,m}:L_n\\otimes L_m\\to L_{n+m}$ for all integers $n,m$, with $\\mu_{n,m}(s\\otimes t)(x)=s(x)t(x)$ in the prime localization for every open $U$, sections $s\\in\\Gamma(U,L_n)$ and $t\\in\\Gamma(U,L_m)$ and point $x\\in U$. The tensor product and its pure-tensor section are those of [lem-pc-sites-sheaf-tensor-bilinear-universal]. No invertibility, tensor-power identification or coordinate locus is asserted.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Equation 27.10.1.1 (equation-multiply), Tag 01MS; source node step 2, multiplication map"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "proof": [
+  {
+   "text": "Multiply twisting sections pointwise in the prime localizations. The degree-addition rule and isLocallyFraction_mul show the product is a section of the sum-degree twist. The ring laws show bilinearity and restriction compatibility.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing sheaf tensor bilinear universal property to this actual bilinear family. Its factorization formula is exactly the definition of tmulSection, so evaluating at a point gives the asserted product formula.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Equation 27.10.1.1 (equation-multiply), Tag 01MS; source node step 2, multiplication map",
+  "group": "V2",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Twisting sheaf tensor products multiplication coherent positive negative tensor powers",
+   "results": "Service unavailable: Internal Server Error; no verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication of Serre twisting sheaves on polynomial Proj is an isomorphism",
+   "results": "Eight structure-sheaf and standard-open results, no twisting multiplication or coherent tensor-power family.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.twist",
+   "results": "Unknown identifier, zero hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "twist.*[Mm]ul|[Mm]ul.*twist; tensor_bilinear_universal; tensorPow; unitToTwist in Mathlib and both library roots; blueprint_refs search twist multiplication tensor powers",
+   "results": "Source has local twisting bases and unnormalized tensor isomorphism. Existing SheafOfModules.tensor_bilinear_universal supplies the general bilinear extension. No coherent positive/negative twist family found; blueprint search returned no match.",
+   "date": "2026-10-13",
+   "verdict": "general universal-property input exists; no duplicate twist result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineTwistMultiplication",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof comparison on D_+(x_i), via step 2 of lem-sc-p1-twist-multiplication: Equation 27.10.1.1 (equation-multiply), Tag 01MS; source node step 2, multiplication map",
+   "via": [
+    "lem-sc-p1-twist-multiplication"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineTwistProductMorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineTwistProductMorphism.lean",
+  "declaration": "AlgebraicGeometry.projectiveLine_twist_product_morphism",
+  "statement": "theorem projectiveLine_twist_product_morphism (k : Type u) [Field k] :\n    ∃ μ : ∀ n m : ℤ,\n        Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n ⊗\n          Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m ⟶\n            Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n + m),\n      (∀ (n m : ℤ) (U : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Opens)\n        (s : Γ(Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n, U))\n        (t : Γ(Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m, U)) (x : U),\n        (((μ n m).app U (tmulSection s t)).1 x :\n            Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =\n          (s.1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) * (t.1 x))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T225335-L-1814964",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T225335-L-1814964",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,9 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import Sheaf.AlgebraicGeometry.ProjectiveLineTwistProductMorphism
+import Sheaf.AlgebraicGeometry.ProjectiveLineTwistCoherentPowers
+import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+import Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersLocus
 
 /-!
 # Multiplication and coordinate loci of twists on the projective line
@@ -33,6 +34,75 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+private theorem degree_one_cover (k : Type u) [Field k]
+    (x : Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)) :
+    ∃ f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k 1,
+      x ∈ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) f := by
+  have h := Proj.iSup_basicOpen_eq_top' (MvPolynomial.homogeneousSubmodule (Fin 2) k)
+    (MvPolynomial.X : Fin 2 → MvPolynomial (Fin 2) k)
+    (fun i ↦ ⟨1, MvPolynomial.isHomogeneous_X k i⟩)
+    (MvPolynomial.adjoin_range_X_eq_top (Fin 2) k)
+  have hx : x ∈ ⨆ i : Fin 2, Proj.basicOpen
+      (MvPolynomial.homogeneousSubmodule (Fin 2) k) (MvPolynomial.X i) := by
+    rw [h]
+    trivial
+  obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+  exact ⟨_, MvPolynomial.isHomogeneous_X k i, hi⟩
+
+private theorem coordinate_locus (k : Type u) [Field k] (i : Fin 2) :
+    nonvanishingLocus (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)
+      (Hom.app (Proj.unitToTwist (MvPolynomial.X_mem_homogeneousSubmodule_one k i)) ⊤
+        (1 : Γ(Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k), ⊤))) =
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) (MvPolynomial.X i) :
+        Set (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k))) := by
+  exact (proj_homogeneous_section_tensor_powers_locus k (d := 1) Nat.zero_lt_one
+      (MvPolynomial.X_mem_homogeneousSubmodule_one k i)).symm
+
+private theorem multiplication_isIso (k : Type u) [Field k]
+    (μ : ∀ n m : ℤ,
+        Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n ⊗
+          Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m ⟶
+            Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n + m))
+    (hmul : (∀ (n m : ℤ) (U : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Opens)
+        (s : Γ(Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n, U))
+        (t : Γ(Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m, U)) (x : U),
+        (((μ n m).app U (tmulSection s t)).1 x :
+            Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) =
+          (s.1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) * (t.1 x)))
+    (n m : ℤ) : IsIso (μ n m) := by
+  apply Hom.isIso_of_forall_bijective_app
+  intro x
+  obtain ⟨f, hf, hx⟩ := degree_one_cover k x
+  refine ⟨Proj.basicOpen _ f, hx, ?_⟩
+  intro W hW
+  let s := (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n).presheaf.map
+    (homOfLE hW).op (Proj.twistPowSection n hf)
+  let t := (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m).presheaf.map
+    (homOfLE hW).op (Proj.twistPowSection m hf)
+  let v := (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n + m)).presheaf.map
+    (homOfLE hW).op (Proj.twistPowSection (n + m) hf)
+  have hs : IsFreeGenerator s := (Proj.isFreeGenerator_twistPowSection n hf).map hW
+  have ht : IsFreeGenerator t := (Proj.isFreeGenerator_twistPowSection m hf).map hW
+  have hv : IsFreeGenerator v :=
+    (Proj.isFreeGenerator_twistPowSection (n + m) hf).map hW
+  have hst : (μ n m).app W (tmulSection s t) = v := by
+    refine Subtype.ext (funext fun y ↦ Subtype.ext ?_)
+    rw [hmul]
+    exact Proj.val_twistPowSection_mul n hf rfl ⟨y.1, hW y.2⟩
+  have hgen := (hs.tmulSection ht).bijective
+  constructor
+  · intro a b hab
+    obtain ⟨r, rfl⟩ := hgen.2 a
+    obtain ⟨q, rfl⟩ := hgen.2 b
+    have hrq : r = q := hv.bijective.1 (by
+      simpa only [Hom.app_smul, hst] using hab)
+    exact congrArg (fun c ↦ c • tmulSection s t) hrq
+  · intro z
+    obtain ⟨r, hr⟩ := hv.bijective.2 z
+    refine ⟨r • tmulSection s t, ?_⟩
+    simpa only [Hom.app_smul, hst] using hr
+
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Twists on `Proj k[x₀,x₁]`: multiplication is an isomorphism, tensor powers of `O(1)`
 (and of its dual in negative degree) identify coherently with the twists, and the
 nonvanishing locus of each coordinate section is its standard chart.
@@ -40,21 +110,18 @@ nonvanishing locus of each coordinate section is its standard chart.
 Source: Stacks Project, Constructions, Tags 01MS, 01MU, 01MV and 01NG
 (blueprint: lem-sc-p1-twist-multiplication).
 
-Proof: By lem-weil-pbc-proj-polynomial-twist-chart, the two coordinate charts cover the
-Proj. On the i-th chart, def-weil-pbc-proj-twisting-sheaf identifies the degree-n twist
-with the degree-n fractions, freely generated by x_i^n. Restrictions are localization
-maps, so these trivializations are compatible. This proves invertibility using
- def-sc-invertible-module (01MS). Multiplication sends x_i^n tensor x_i^m to x_i^(n+m),
-so it is an isomorphism locally and hence globally. Iterate multiplication for positive
-powers. The pairing O(1) tensor O(-1) to O(0) identifies O(-1) with the dual of O(1),
-sending x_i^(-1) to the dual basis. Iteration gives the negative powers; tensor with any
-module G. Associativity of fraction multiplication proves compatibility with each
-coordinate, also across degree -1 to 0 by the dual evaluation pairing (01MU). In degree 0
-both identifications are the unit isomorphism O -> O(0), 1 -> 1, which with the successor
-squares fixes every tensor-power identification.
-Finally x_i is a generator on its own chart. On the other chart x_i=(x_i/x_j)x_j;
-its residue-field value is nonzero precisely on the basic open of x_i/x_j. The chart
-intersection calculation and the covering give exactly D₊(x_i) (01MV). -/
+Proof: The polynomial variables generate the algebra, so their basic opens cover
+by Proj.iSup_basicOpen_eq_top'. Apply Proj.isInvertible_twist to this degree-one
+cover. Obtain the pointwise multiplication morphisms from
+lem-sc-p1-twist-product-morphism. On each degree-one chart the source has free
+basis f^n tensor f^m and the target has free basis f^(n+m). The multiplication
+formula and Proj.val_twistPowSection_mul identify these bases. Thus multiplication
+is bijective on sections over all subopens of the chart, and
+Hom.isIso_of_forall_bijective_app makes it globally an isomorphism. Apply
+lem-sc-p1-twist-coherent-powers for the normalized positive and negative families.
+Finally apply lem-sc-p1-homogeneous-section-tensor-powers-locus with d=1 and
+f=X_i to identify the coordinate nonvanishing loci. No polynomial chart gluing
+or chart ring isomorphism is needed. -/
 theorem projectiveLine_twist_multiplication (k : Type u) [Field k] :
     (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1).IsInvertible ∧
     ∃ μ : ∀ n m : ℤ,
@@ -121,7 +188,10 @@ theorem projectiveLine_twist_multiplication (k : Type u) [Field k] :
                   (MvPolynomial.X_mem_homogeneousSubmodule_one k i)) ⊤
               (1 : Γ(Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k), ⊤))) =
           (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k)
-            (MvPolynomial.X i) : Set (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)))) :=
-  sorry
+            (MvPolynomial.X i) : Set (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)))) := by
+  obtain ⟨μ, hmul⟩ := projectiveLine_twist_product_morphism k
+  have hμ : ∀ n m : ℤ, IsIso (μ n m) := multiplication_isIso k μ hmul
+  exact ⟨Proj.isInvertible_twist _ 1 (degree_one_cover k), μ, hμ, hmul,
+    projectiveLine_twist_coherent_powers k μ hμ hmul, coordinate_locus k⟩
 
 end AlgebraicGeometry
