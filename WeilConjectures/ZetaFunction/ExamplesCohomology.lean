@@ -178,7 +178,7 @@ theorem isPureOfWeightOver_compactlySupportedCohomology_two_adicConstant
     ((lowerStarIdIso k₀ l C).app (adicConstant k₀ l C)) 2
   have h := isPureOfWeightOver_compactlySupportedCohomology_directImage_two (j := 𝟙 C)
     (F := adicConstant k₀ l C) ι (isLisse_adicConstant k₀ l C)
-    (isPunctuallyPureOfWeight_adicConstant k₀ l C ι)
+    (isPunctuallyPureOfWeight_adicConstant (k₀ := k₀) (l := l) (X := C) (ι := ι))
   rw [zero_add] at h
   exact fun α hα ↦ h α (e.symm.hasEigenvalue hα)
 

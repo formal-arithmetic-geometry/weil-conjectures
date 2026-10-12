@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.WeilSheaf.StalkPairing
@@ -79,58 +80,9 @@ theorem WeilComplex.finsum_trace_compactlySupportedCohomology_eq (K : WeilComple
 
 end Separated
 
-/-- Isomorphic Frobenius modules have the same traces of the powers of the Frobenius. -/
-theorem _root_.FrobeniusModule.Equiv.trace_frobeniusEnd_pow {K : Type*} [Field K]
-    {M N : FrobeniusModule K} (e : M.Equiv N) (m : ℕ) :
-    LinearMap.trace K _ (N.frobeniusEnd ^ m) = LinearMap.trace K _ (M.frobeniusEnd ^ m) := by
-  have hpow : ∀ k : ℕ, e.toLinearEquiv.conj M.frobeniusEnd ^ k =
-      e.toLinearEquiv.conj (M.frobeniusEnd ^ k) := by
-    intro k
-    induction k with
-    | zero => simp only [pow_zero, Module.End.one_eq_id, LinearEquiv.conj_id]
-    | succ k ih =>
-      rw [pow_succ, pow_succ, ih, Module.End.mul_eq_comp, Module.End.mul_eq_comp,
-        LinearEquiv.conj_comp]
-  rw [e.frobeniusEnd_eq_conj, hpow, LinearMap.trace_conj']
-
 section Stalks
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- The maps induced on the stalks by morphisms `g : G ⟶ F`, `f : F ⟶ G` with `g ≫ f = 𝟙 G`
-compose to the identity. -/
-theorem WeilSheaf.stalkAtMap_stalkAtMap_of_comp_eq_id {F G : WeilSheaf k₀ l X} (f : F ⟶ G)
-    (g : G ⟶ F) (hfg : g ≫ f = 𝟙 G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (x : (G.stalkAt s m hs).carrier) :
-    WeilSheaf.stalkAtMap s m hs f (WeilSheaf.stalkAtMap s m hs g x) = x := by
-  rw [← WeilSheaf.stalkAtMap_comp, hfg, WeilSheaf.stalkAtMap_id]
-
-/-- An isomorphism of Weil sheaves induces isomorphisms of Frobenius modules between their
-stalks (`AlgebraicGeometry.WeilSheaf.stalkAtMap_frobenius`). -/
-theorem WeilSheaf.nonempty_equiv_stalkAt_of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    Nonempty ((F.stalkAt s m hs).Equiv (G.stalkAt s m hs)) := by
-  -- the identities are passed through explicitly to keep the kernel check fast
-  have h₁ : (WeilSheaf.stalkAtMap s m hs e.hom).comp (WeilSheaf.stalkAtMap s m hs e.inv) =
-      LinearMap.id :=
-    LinearMap.ext fun x ↦ (LinearMap.comp_apply _ _ x).trans
-      ((WeilSheaf.stalkAtMap_stalkAtMap_of_comp_eq_id _ _ e.inv_hom_id s m hs x).trans
-        (LinearMap.id_apply x).symm)
-  have h₂ : (WeilSheaf.stalkAtMap s m hs e.inv).comp (WeilSheaf.stalkAtMap s m hs e.hom) =
-      LinearMap.id :=
-    LinearMap.ext fun x ↦ (LinearMap.comp_apply _ _ x).trans
-      ((WeilSheaf.stalkAtMap_stalkAtMap_of_comp_eq_id _ _ e.hom_inv_id s m hs x).trans
-        (LinearMap.id_apply x).symm)
-  have hc : ⇑(LinearEquiv.ofLinearMap _ _ h₁ h₂ :
-      (F.stalkAt s m hs).carrier ≃ₗ[PadicAlgCl l] (G.stalkAt s m hs).carrier) =
-      WeilSheaf.stalkAtMap s m hs e.hom :=
-    LinearEquiv.coe_ofLinearMap _ _ h₁ h₂
-  exact ⟨⟨LinearEquiv.ofLinearMap _ _ h₁ h₂, fun x ↦ (congrFun hc _).trans
-    ((WeilSheaf.stalkAtMap_frobenius s m hs e.hom x).trans (congrArg _ (congrFun hc x).symm))⟩⟩
 
 /-- Isomorphic Weil sheaves have stalks with the same Frobenius trace. -/
 theorem WeilSheaf.trace_frobeniusEnd_stalkAt_congr {F G : WeilSheaf k₀ l X} (e : F ≅ G)

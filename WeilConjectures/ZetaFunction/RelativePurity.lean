@@ -83,15 +83,6 @@ namespace FrobeniusModule
 
 variable {K : Type v} [Field K]
 
-/-- The eigenvalues of the Frobenius of a Frobenius module are nonzero, the Frobenius being an
-automorphism. -/
-theorem ne_zero_of_hasEigenvalue {M : FrobeniusModule.{u, v} K} {α : K}
-    (hα : M.frobeniusEnd.HasEigenvalue α) : α ≠ 0 := by
-  rintro rfl
-  obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
-  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff, zero_smul] at hx
-  exact hx.2 ((map_eq_zero_iff M.frobenius M.frobenius.injective).1 hx.1)
-
 /-- If `α` is an eigenvalue of the Frobenius of `M`, then `α⁻¹` is an eigenvalue of the
 Frobenius `(F⁻¹)^∨` of the dual `M^∨`. -/
 theorem hasEigenvalue_dual_inv {M : FrobeniusModule.{u, v} K} {α : K}
@@ -226,14 +217,6 @@ end ProperCoincidence
 namespace WeilSheaf
 
 variable {ι : PadicAlgCl l →+* ℂ}
-
-/-- A punctually `ι`-pure sheaf of weight `w` is `ι`-mixed of weights at most `w`: take the
-filtration `0 ⊆ F` (blueprint `def-weil-punctual-weights`, with `m = 1` and `w₁ = w`). -/
-theorem IsPunctuallyPureOfWeight.isMixedOfWeightsAtMost
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X} {w : ℝ}
-    (h : F.IsPunctuallyPureOfWeight ι w) : F.IsMixedOfWeightsAtMost ι w :=
-  isMixedOfWeightsAtMost_iff_filtrationClosure.2
-    (ObjectProperty.le_filtrationClosure _ ⟨w, le_rfl, h⟩)
 
 /-- The Tate twist `(d)` multiplies the local Frobenius at a closed point `x` by `q_x⁻ᵈ`, so it
 lowers the weights by `2d`: the constant twist by `χ_ℓ(σ)ᵈ = q⁻ᵈ` has
@@ -399,7 +382,7 @@ smooth proper morphism `f` of separated `k₀`-schemes of finite type, `Rⁱf₀
 theorem isPunctuallyPureOfWeight_higherLowerStar_adicConstant (i : ℕ) :
     ((higherLowerStar f i).obj (adicConstant k₀ l X)).IsPunctuallyPureOfWeight ι i := by
   simpa using isPunctuallyPureOfWeight_higherLowerStar f d (isLisse_adicConstant k₀ l X)
-    (isPunctuallyPureOfWeight_adicConstant k₀ l X ι) i
+    (isPunctuallyPureOfWeight_adicConstant (k₀ := k₀) (l := l) (X := X) (ι := ι)) i
 
 end Relative
 

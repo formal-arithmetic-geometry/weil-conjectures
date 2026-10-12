@@ -28,11 +28,11 @@ weight `i`: every eigenvalue `α` of the geometric Frobenius satisfies `|ι α| 
 
 - `AlgebraicGeometry.WeilComplex.proper_compact_coincidence`: `Ra_! ≅ Ra_*` and `H_c^i ≅ Hⁱ` for a
   proper `k₀`-scheme (`prop-weil-proper-compact-coincidence`).
-- `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_adicConstant`: the constant Weil sheaf is
-  punctually pure of weight `0` (`lem-zl-constant-sheaf-weight-zero`).
 - `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_toComplex_adicConstant`: the constant Weil
-  sheaf, as a Weil complex, is mixed of weights at most `0`; together with the previous statement
-  this is `prop-weight-purity` (`AlgebraicGeometry.WeilSheaf.weightPurity_adicConstant`).
+  sheaf, as a Weil complex, is mixed of weights at most `0`; together with
+  `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_adicConstant` (the constant Weil sheaf is
+  punctually pure of weight `0`, `lem-zl-constant-sheaf-weight-zero`) this is `prop-weight-purity`
+  (`AlgebraicGeometry.WeilSheaf.weightPurity_adicConstant`).
 - `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.hasWeightsAtMostOver_globalSections`: a
   Weil sheaf on `Spec k₀` mixed of weights at most `w` has global sections of weights at most `w`.
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_adicConstant`:
@@ -76,22 +76,6 @@ namespace WeilSheaf
 
 variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `lem-zl-constant-sheaf-weight-zero`: the constant Weil sheaf `ℚ̄_ℓ` is punctually
-`ι`-pure of weight zero: at every closed point the local Frobenius is the identity of the
-one-dimensional stalk, whose only eigenvalue `1` has `|ι 1| = 1 = q_x^{0/2}`. -/
-theorem isPunctuallyPureOfWeight_adicConstant (ι : PadicAlgCl l →+* ℂ) :
-    (adicConstant k₀ l X).IsPunctuallyPureOfWeight ι 0 := by
-  intro x α hα
-  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
-  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hv
-  have h1 : ((adicConstant k₀ l X).stalk x).frobenius = LinearEquiv.refl _ _ :=
-    adicConstant_stalkAt_frobenius _ _ _
-  have h : (1 : PadicAlgCl l) • v = α • v := by
-    rw [one_smul]
-    exact (LinearEquiv.congr_fun h1 v).symm.trans hv.1
-  rw [← smul_left_injective (PadicAlgCl l) hv.2 h, map_one, norm_one, zero_div,
-    Real.rpow_zero]
-
 /-- Blueprint `prop-weight-purity` (the complex form): the constant Weil sheaf, viewed as a Weil
 complex concentrated in degree `0`, is `ι`-mixed of weights at most `0`: its cohomology sheaf in
 degree `0` is the constant sheaf, punctually pure of weight `0`, and the others vanish. -/
@@ -105,7 +89,7 @@ theorem isMixedOfWeightsAtMost_toComplex_adicConstant
     refine ObjectProperty.prop_of_iso _
       (WeilComplex.homologySheafSingleComplexIso 0 (adicConstant k₀ l X)).symm
       (ObjectProperty.le_filtrationClosure _
-        ⟨0, le_rfl, isPunctuallyPureOfWeight_adicConstant k₀ l X ι⟩)
+        ⟨0, le_rfl, isPunctuallyPureOfWeight_adicConstant (k₀ := k₀) (l := l) (X := X) (ι := ι)⟩)
   · exact isMixedOfWeightsAtMost_of_isZero
       (WeilComplex.isZero_homologySheaf_singleComplex hb _) _
 
@@ -116,7 +100,7 @@ theorem weightPurity_adicConstant [LocallyOfFiniteType (X ↘ Spec (CommRingCat.
     (ι : PadicAlgCl l →+* ℂ) :
     (adicConstant k₀ l X).IsPunctuallyPureOfWeight ι 0 ∧
       (toComplex.obj (adicConstant k₀ l X)).IsMixedOfWeightsAtMost ι 0 :=
-  ⟨isPunctuallyPureOfWeight_adicConstant k₀ l X ι,
+  ⟨isPunctuallyPureOfWeight_adicConstant (k₀ := k₀) (l := l) (X := X) (ι := ι),
     isMixedOfWeightsAtMost_toComplex_adicConstant k₀ l X ι⟩
 
 variable {k₀ l} in
@@ -249,7 +233,7 @@ theorem deligne_purity (ι : PadicAlgCl l →+* ℂ) (i : ℤ) :
       ((adicConstant k₀ l X).cohomology i).IsPureOfWeightOver k₀ ι i ∧
       ∀ α : PadicAlgCl l, ((adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue α →
         ‖ι α‖ = (Nat.card k₀ : ℝ) ^ ((i : ℝ) / 2) :=
-  ⟨isPunctuallyPureOfWeight_adicConstant k₀ l X ι,
+  ⟨isPunctuallyPureOfWeight_adicConstant (k₀ := k₀) (l := l) (X := X) (ι := ι),
     hasWeightsAtMostOver_compactlySupportedCohomology_adicConstant k₀ l X ι i,
     WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology _ i,
     isPureOfWeightOver_cohomology_adicConstant k₀ l X d ι i,
