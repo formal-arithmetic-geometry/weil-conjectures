@@ -11,14 +11,12 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
-import Sheaf.AlgebraicGeometry.AffineModuleFiniteType
+import Sheaf.Paper.GradedModuleRelativeSpecRealization
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
+import Sheaf.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
 import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
-import Sheaf.AlgebraicGeometry.RelativeSpecBaseChange
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 
 /-!
@@ -39,6 +37,57 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace AlgebraicGeometry
 
 
+/-- Transfer proper coherent finiteness from higher direct image sections to the
+module-valued right-derived sections, preserving the given base-ring action. -/
+private theorem finite_moduleCohomology
+    {B : Type u} [CommRing B] [IsNoetherianRing B]
+    {Y : Scheme.{u}} (fB : Y ⟶ Spec (CommRingCat.of B)) [IsProper fB]
+    (F : Y.Modules) [F.IsQuasicoherent] [F.IsFinitePresentation] (p : ℕ) :
+    Module.Finite B ((RingedSpace.moduleCohomology Y.toRingedSpace p ⋙
+      ModuleCat.restrictScalars
+        ((Scheme.ΓSpecIso (CommRingCat.of B)).inv ≫ fB.appTop).hom).obj F) := by
+  classical
+  have : IsNoetherianRing Γ(Spec (CommRingCat.of B), ⊤) :=
+    isNoetherianRing_of_ringEquiv _
+      (Scheme.ΓSpecIso (CommRingCat.of B)).commRingCatIsoToRingEquiv.symm
+  let : EnoughInjectives Y.Modules :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives Y.toRingedSpace).2
+  have := Scheme.Modules.finite_sections_higherDirectImage fB F p
+  obtain ⟨b, hb⟩ :=
+    Scheme.Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H fB F p
+  let R := Γ(Spec (CommRingCat.of B), ⊤)
+  let H := (RingedSpace.moduleCohomology Y.toRingedSpace p).obj F
+  let : Module R H := Module.compHom H fB.appTop.hom
+  obtain ⟨a, ha⟩ := Scheme.Modules.exists_moduleCohomology_source_comparison Y p
+  let : Module R (F.H p) := Module.compHom _ fB.appTop.hom
+  let aR : H ≃ₗ[R] F.H p :=
+    { a F with
+      map_smul' := fun r x ↦ by
+        have hn := ha F F (F.smulHom (fB.appTop r)) x
+        have hm := moduleCohomology_scalar_endomorphism F
+          (F.smulHom (fB.appTop r)) (fB.appTop r)
+          (fun U t ↦ Scheme.Modules.smulHom_app_apply F (fB.appTop r) U t) p x
+        rw [hm] at hn
+        exact hn }
+  let bR : Γ((Scheme.Modules.higherDirectImage fB p).obj F, ⊤) →ₗ[R] F.H p :=
+    { b.toAddMonoidHom with map_smul' := fun r x ↦ b.map_smulₛₗ r x }
+  have : Module.Finite R (F.H p) := Module.Finite.of_surjective bR hb.2
+  have : Module.Finite R H := Module.Finite.equiv aR.symm
+  let C := (RingedSpace.moduleCohomology Y.toRingedSpace p ⋙
+    ModuleCat.restrictScalars
+      ((Scheme.ΓSpecIso (CommRingCat.of B)).inv ≫ fB.appTop).hom).obj F
+  let c : C →ₛₗ[(Scheme.ΓSpecIso (CommRingCat.of B)).inv.hom] H :=
+    { toFun := fun x ↦ x
+      map_add' := fun _ _ ↦ rfl
+      map_smul' := fun _ _ ↦ rfl }
+  let : RingHomSurjective (Scheme.ΓSpecIso (CommRingCat.of B)).inv.hom :=
+    ⟨(Scheme.ΓSpecIso (CommRingCat.of B)).commRingCatIsoToRingEquiv.symm.surjective⟩
+  exact (c.finite_iff_of_bijective Function.bijective_id).mpr inferInstance
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- Naturality and scalar transport need additional elaboration heartbeats.
 /-- The compatible graded cohomology direct sum has a finitely generated top submodule.
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 0897(1), relative-spectrum
@@ -124,7 +173,108 @@ theorem gradedCohomologyModuleFinite_generators
           ((RingedSpace.moduleCohomology X.toRingedSpace p).map (mu m k b) x)) →
       (⊤ : Submodule B (DirectSum ℕ (fun m =>
         ((RingedSpace.moduleCohomology X.toRingedSpace p).obj (G m) : Type u)))).FG := by
-  sorry
+  classical
+  intro mod hcompat
+  let : Module B (DirectSum ℕ (fun m ↦
+    ((RingedSpace.moduleCohomology X.toRingedSpace p).obj (G m) : Type u))) := mod
+  let : IsNoetherianRing B := Algebra.FiniteType.isNoetherianRing A B
+  let g := Spec.map (CommRingCat.ofHom (algebraMap A B))
+  let Y := pullback f (Spec.map (CommRingCat.ofHom (algebraMap A B)))
+  let pi : Y ⟶ X := pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap A B)))
+  let fB : Y ⟶ Spec (.of B) :=
+    pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap A B)))
+  have : IsProper fB := inferInstanceAs (IsProper (pullback.snd f g))
+  have : IsAffineHom g := isAffineHom_of_isAffine _
+  have : IsAffineHom pi := MorphismProperty.pullback_fst f g inferInstance
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
+  obtain ⟨F, hFqc, hFfp, iota, ⟨hiota⟩, hact⟩ :=
+    gradedModule_relativeSpec_realization graded hgrading hunit hmul hscalar f
+      G hG mu hmu_add hmu_mul hmu_scalar hfinite
+  have : F.IsQuasicoherent := hFqc
+  have : F.IsFinitePresentation := hFfp
+  let M := fun m ↦ ((RingedSpace.moduleCohomology X.toRingedSpace p).obj (G m) : Type u)
+  let S := (Scheme.Modules.pushforward pi).obj F
+  let C := (RingedSpace.moduleCohomology Y.toRingedSpace p ⋙
+    ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom).obj F
+  have : Module.Finite B C := finite_moduleCohomology fB F p
+  let D := DirectSum.toModule ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ℕ
+    ((RingedSpace.moduleCohomology X.toRingedSpace p).obj S)
+    (fun m ↦ ((RingedSpace.moduleCohomology X.toRingedSpace p).map (iota m)).hom)
+  have hD : Function.Bijective D := by
+    have h := Scheme.moduleCohomology_directSum_bijective X ℕ G S iota hiota p
+    have hd : (fun a b : ℕ ↦ Classical.propDecidable (a = b)) =
+        instDecidableEqNat := Subsingleton.elim _ _
+    rw [hd] at h
+    exact h
+  let edge := Scheme.Modules.moduleCohomologyEdgeMap pi F p
+  have : IsIso edge := (Scheme.Modules.affine_morphism_cohomology_edge pi F).2 p |>.1
+  let phi : DirectSum ℕ M →+ C := edge.hom.comp D.toAddMonoidHom
+  have hphi : Function.Bijective phi :=
+    (ConcreteCategory.bijective_of_isIso edge).comp hD
+  have hphi_of (m : ℕ) (x : M m) :
+      phi (DirectSum.of M m x) =
+        edge (((RingedSpace.moduleCohomology X.toRingedSpace p).map (iota m)).hom x) := by
+    change edge (D (DirectSum.of M m x)) = _
+    congr 1
+    exact DirectSum.toModule_lof
+      (φ := fun m ↦ ((RingedSpace.moduleCohomology X.toRingedSpace p).map (iota m)).hom)
+      ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) m x
+  have hhomogeneous (k : ℕ) (b : graded k) (x : DirectSum ℕ M) :
+      phi (b.val • x) = b.val • phi x := by
+    induction x using DirectSum.induction_on with
+    | zero => simp
+    | of m x =>
+      have hc : b.val • DirectSum.of M m x =
+          DirectSum.of M (m + k)
+            ((RingedSpace.moduleCohomology X.toRingedSpace p).map (mu m k b) x) := by
+        convert hcompat k m b x using 1
+        congr 2
+      rw [hc, hphi_of, hphi_of]
+      let r : Γ(Y, ⊤) := ((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val
+      let tau := F.smulHom r
+      have hn (z : (RingedSpace.moduleCohomology X.toRingedSpace p).obj S) :
+          edge (((RingedSpace.moduleCohomology X.toRingedSpace p).map
+            ((Scheme.Modules.pushforward pi).map tau)).hom z) =
+            ((RingedSpace.moduleCohomology Y.toRingedSpace p).map tau).hom (edge z) := by
+        have hs := Scheme.Modules.moduleCohomologyFMap_source_naturality pi
+          ((Scheme.Modules.pushforward pi).map tau) (𝟙 S) p
+        have ht := Scheme.Modules.moduleCohomologyFMap_target_naturality pi tau (𝟙 S) p
+        have hst := hs.trans ht.symm
+        have hz := ConcreteCategory.congr_hom hst z
+        change edge (((RingedSpace.moduleCohomology X.toRingedSpace p).map
+          ((Scheme.Modules.pushforward pi).map tau)).hom z) =
+            ((RingedSpace.moduleCohomology Y.toRingedSpace p).map tau).hom
+              (edge z) at hz
+        exact hz
+      have hx : ((RingedSpace.moduleCohomology X.toRingedSpace p).map (iota (m + k))).hom
+          (((RingedSpace.moduleCohomology X.toRingedSpace p).map (mu m k b)).hom x) =
+          ((RingedSpace.moduleCohomology X.toRingedSpace p).map
+            ((Scheme.Modules.pushforward pi).map tau)).hom
+            (((RingedSpace.moduleCohomology X.toRingedSpace p).map (iota m)).hom x) := by
+        change ((RingedSpace.moduleCohomology X.toRingedSpace p).map (mu m k b) ≫
+          (RingedSpace.moduleCohomology X.toRingedSpace p).map (iota (m + k))).hom x =
+          ((RingedSpace.moduleCohomology X.toRingedSpace p).map (iota m) ≫
+            (RingedSpace.moduleCohomology X.toRingedSpace p).map
+              ((Scheme.Modules.pushforward pi).map tau)).hom x
+        rw [← (RingedSpace.moduleCohomology X.toRingedSpace p).map_comp,
+          ← (RingedSpace.moduleCohomology X.toRingedSpace p).map_comp, hact k m b]
+      rw [hx, hn]
+      exact moduleCohomology_scalar_endomorphism F tau r
+        (fun U t ↦ Scheme.Modules.smulHom_app_apply F r U t) p _
+    | add x y hx hy => simp only [smul_add, map_add, hx, hy]
+  have hlinear (b : B) (x : DirectSum ℕ M) : phi (b • x) = b • phi x := by
+    obtain ⟨v, hv⟩ := hgrading.2 b
+    subst b
+    induction v using DirectSum.induction_on with
+    | zero => simp
+    | of k b =>
+      simpa only [DirectSum.coeAddMonoidHom_of] using hhomogeneous k b x
+    | add v w hv hw => simp only [map_add, add_smul, hv, hw]
+  let L : DirectSum ℕ M →ₗ[B] C := { phi with map_smul' := hlinear }
+  have : Module.Finite B (DirectSum ℕ M) :=
+    Module.Finite.equiv (LinearEquiv.ofBijective L hphi).symm
+  exact Module.Finite.fg_top
 
 theorem gradedCohomologyModuleFinite
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]

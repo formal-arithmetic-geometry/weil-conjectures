@@ -38,44 +38,54 @@
  ],
  "proof": [
   {
-   "text": "Construct the relative-spectrum module from the compatible graded action. Proper base change gives a proper scheme over Spec B; finite type over the noetherian base makes the pulled-back module coherent. Proper coherent cohomology is a finite B-module. The affine cohomology edge map and the quasi-compact quasi-separated direct-sum comparison identify this finite module with the stated direct sum and preserve the homogeneous action. Hence the supplied compatible action has a finite spanning set, equivalently its top B-submodule is FG.",
+   "text": "Use the geometric realization lemma to obtain a quasi-coherent finitely presented module F on Y = X times_(Spec A) Spec B, coproduct inclusions into pi_*F, and the homogeneous multiplication squares. B is Noetherian and fB proper by finite type and base change. X is quasi-compact and quasi-separated.",
    "uses": [
+    "lem-weil-pbc-graded-module-relative-spec-realization",
     "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-relative-spec-base-change",
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-affine-module-correspondence",
-    "lem-weil-pbc-affine-module-finite-type",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-pc-coherent-hi",
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "lem-weil-pbc-qcqs-cohomology-direct-sum"
+    "lem-weil-pbc-finite-type-algebra-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 0897(1), relative-spectrum proof lines 5267-5300"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Proper coherent finiteness gives finite higher direct image sections over Spec B. The source comparison identifies module right-derived cohomology with ordinary H, naturally in F. Apply scalar endomorphism compatibility to this naturality square, obtaining a linear comparison; restrict scalars along GammaSpecIso to deduce that H^p(Y,F) is finite over B. This is the proved private helper finite_moduleCohomology.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-sc-module-cohomology-source-comparison",
+    "lem-weil-pbc-module-cohomology-scalar-endomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The direct-sum comparison is bijective for the coproduct pi_*F, and the affine cohomology edge map is invertible. Compose these additive maps. For a homogeneous scalar and a homogeneous vector, apply H^p to the realization square, then use source and target naturality of the edge map and scalar endomorphism compatibility. This gives compatibility with the specified mod, not an existential replacement action.",
+   "uses": [
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-weil-pbc-module-cohomology-scalar-endomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "DirectSum.induction_on extends homogeneous-vector compatibility to every vector. Surjectivity of the internal grading writes each scalar as a finite sum of homogeneous scalars; a second direct-sum induction proves B-linearity. The bijective linear map is a linear equivalence. Transport Module.Finite through its inverse and apply Module.Finite.fg_top for the requested top submodule.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-graded-module-relative-spec-realization",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-relative-spec-base-change",
-  "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-affine-module-correspondence",
-  "lem-weil-pbc-affine-module-finite-type",
-  "pqf-lem-coherent-ft-locnoeth",
   "lem-pc-coherent-hi",
+  "lem-sc-module-cohomology-source-comparison",
+  "lem-weil-pbc-module-cohomology-scalar-endomorphism",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
   "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "lem-weil-pbc-qcqs-cohomology-direct-sum"
+  "lem-weil-pbc-module-cohomology-fmap-functorial"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 0897(1), relative-spectrum proof lines 5267-5300, specialized to a supplied action satisfying the homogeneous compatibility formula"
+  "place": "Tag 0897, lemma-graded-finiteness, relative-spectrum construction and finite-type paragraph, lines 5267--5292; pinned Stacks commit a04446e57ec1fbc252a871afcec7752fb2807b14"
  },
  "mathlib_searches": [
   {
@@ -173,10 +183,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T214713-L-1272516",
-  "kind": "proof",
+  "landing": "20261012T232142-L-1993482",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

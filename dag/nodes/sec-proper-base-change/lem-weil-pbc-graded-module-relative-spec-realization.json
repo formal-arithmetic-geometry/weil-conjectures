@@ -1,0 +1,171 @@
+{
+ "id": "lem-weil-pbc-graded-module-relative-spec-realization",
+ "kind": "statement",
+ "title": "Geometric realization of a finite-type graded module on the base-changed scheme",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $B=\\bigoplus_{k\\ge0}B_k$ a commutative graded $A$-algebra (the $B_k$ are $A$-submodules with $B_kB_l\\subseteq B_{k+l}$ and $1\\in B_0$, the structure map $A\\to B$ landing in $B_0$) which is a finite type $A$-algebra [def-weil-pbc-finite-type-algebra]. Let $f:X\\to\\operatorname{Spec}A$ be a proper morphism [def-weil-proper-morphism], and write $f^\\sharp(a)\\in\\Gamma(X,\\mathcal O_X)$ for the image of $a\\in A$. Let $(\\mathcal G_m)_{m\\ge0}$ be quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent], and for all $k,m\\ge0$ and $b\\in B_k$ let $\\mu^{(m)}_b:\\mathcal G_m\\to\\mathcal G_{m+k}$ be an $\\mathcal O_X$-linear map [def-weil-sheaf-of-modules-category], such that: (i) $\\mu^{(m)}_{b+b'}=\\mu^{(m)}_b+\\mu^{(m)}_{b'}$ for $b,b'\\in B_k$; (ii) $\\mu^{(m+l)}_b\\circ\\mu^{(m)}_{b'}=\\mu^{(m)}_{bb'}$ for $b\\in B_k$, $b'\\in B_l$; (iii) for $a\\in A$ with image $a\\cdot1\\in B_0$, $\\mu^{(m)}_{a\\cdot1}$ is multiplication by $f^\\sharp(a)$ on $\\mathcal G_m$; (iv) (finite type) $X$ is covered by open sets $U$ for each of which there are finitely many integers $d_1,\\dots,d_r\\ge0$ and sections $s_i\\in\\mathcal G_{d_i}(U)$ such that for every $m\\ge0$, every open $V\\subseteq U$ and every $t\\in\\mathcal G_m(V)$, each point of $V$ has an open neighbourhood $W\\subseteq V$ on which $t|_W=\\sum_{i:\\,d_i\\le m}\\sum_jc_{ij}\\,\\mu^{(d_i)}_{b_{ij}}(s_i)|_W$ for finitely many $c_{ij}\\in\\mathcal O_X(W)$ and $b_{ij}\\in B_{m-d_i}$. (These data are the same as a quasi-coherent graded module $\\bigoplus_m\\mathcal G_m$ of finite type over the graded $\\mathcal O_X$-algebra $f^*\\widetilde B$, $b\\in B_k$ acting through its pulled-back global section.) Put $g=\\operatorname{Spec}(A\\to B)$, $Y=X\\times_{\\operatorname{Spec} A}\\operatorname{Spec} B$, $\\pi:Y\\to X$ and $f_B:Y\\to\\operatorname{Spec} B$. There exists a quasi-coherent finitely presented $\\mathcal O_Y$-module $F$ and maps $\\iota_m:G_m\\to\\pi_*F$ making $\\pi_*F$ a coproduct of the $G_m$ in $\\mathcal O_X$-modules. For every $b\\in B_k$, $\\mu^{(m)}_b$ followed by $\\iota_{m+k}$ equals $\\iota_m$ followed by the pushforward of multiplication by $f_B^\\sharp(b)$ on $F$. This statement contains no cohomology conclusion.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0897, lemma-graded-finiteness, relative-spectrum construction and finite-type paragraph, lines 5267--5292; pinned Stacks commit a04446e57ec1fbc252a871afcec7752fb2807b14"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-fibre-product",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open Spec C of X, extend the homogeneous action by finite sums to sum_m G_m(U) over C tensor_A B. The internal grading makes the extension unique. hmu_add, hmu_mul and hmu_scalar give additivity, multiplication and unit. Quasi-coherence and localization of direct sums make restrictions compatible, giving a quasi-coherent module over the pulled-back algebra sheaf.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Relative-spec base change identifies the relative spectrum of the pulled-back algebra sheaf with Y. The affine module correspondence realizes the constructed algebra module as pi_*F. The homogeneous coproduct inclusions iota have the coproduct universal property after restriction of scalars. Multiplication by fB^sharp(b) on F restricts on the degree-m inclusion to mu m k b, proving the displayed square.",
+   "uses": [
+    "lem-weil-pbc-relative-spec-base-change",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-affine-module-correspondence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local generators in hfinite generate the algebra module: homogeneous sections are locally in their span and a section of a sheaf coproduct is locally a finite sum of homogeneous sections. The affine finite-type correspondence makes F finite type. B is Noetherian and Y locally Noetherian by proper base change and finite type. Quasi-coherent finite-type modules on a locally Noetherian scheme are coherent, hence finitely presented: on affine opens finite modules over Noetherian rings have finitely generated relation modules, and these finite presentations cover Y.",
+   "uses": [
+    "lem-weil-pbc-affine-module-finite-type",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-relative-spec-base-change",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-module-correspondence",
+  "lem-weil-pbc-affine-module-finite-type",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0897, lemma-graded-finiteness, relative-spectrum construction and finite-type paragraph, lines 5267--5292; pinned Stacks commit a04446e57ec1fbc252a871afcec7752fb2807b14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "realize a quasi coherent graded sheaf module as the direct image of a finitely presented module on a relative spectrum",
+   "date": "2026-10-13",
+   "results": "SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation; SheafOfModules.QuasicoherentData.presentation; SheafOfModules.IsFinitePresentation",
+   "digest": "7d174dde2d267680",
+   "verdict": "No matching geometric realization; available presentation infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-13",
+   "results": "SheafOfModules.instIsQuasicoherentOfIsFinitePresentation",
+   "digest": "0767b60e21425786",
+   "verdict": "No matching geometric realization; available presentation infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Ss]pec|graded.*[Ss]heaf",
+   "date": "2026-10-13",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "digest": "2d90a701f18e8871",
+   "verdict": "No matching geometric realization; available presentation infrastructure only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A graded quasi coherent finite type module is the pushforward of a finitely presented module on the relative spectrum",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GradedCohomologyModuleFinite",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0897(1) relative-spectrum argument: realize the finite-type graded module before taking cohomology; steps 1--3 of lem-weil-pbc-graded-cohomology-module-finite",
+   "via": [
+    "lem-weil-pbc-graded-finiteness-cohomology",
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GradedModuleRelativeSpecRealization",
+  "file": "lean/Sheaf/Paper/GradedModuleRelativeSpecRealization.lean",
+  "declaration": "AlgebraicGeometry.gradedModule_relativeSpec_realization",
+  "statement": "theorem gradedModule_relativeSpec_realization\n    {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]\n    [IsNoetherianRing A] [Algebra.FiniteType A B]\n    (graded : ℕ → Submodule A B)\n    (hgrading : DirectSum.IsInternal graded)\n    (hunit : (1 : B) ∈ graded 0)\n    (hmul : ∀ (k l : ℕ) {x y : B}, x ∈ graded k → y ∈ graded l → x * y ∈ graded (k + l))\n    (hscalar : ∀ (a : A), algebraMap A B a ∈ graded 0)\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsProper f]\n    (G : ℕ → SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (hG : ∀ m : ℕ, (G m).IsQuasicoherent)\n    (mu : ∀ (m k : ℕ), graded k → (G m ⟶ G (m + k)))\n    (hmu_add : ∀ (m k : ℕ) (b b' : graded k),\n      mu m k (b + b') = mu m k b + mu m k b')\n    (hmu_mul : ∀ (m k l : ℕ) (b : graded k) (b' : graded l),\n      HEq (mu m l b' ≫ mu (m + l) k b)\n        (mu m (k + l) ⟨b.val * b'.val, hmul k l b.property b'.property⟩))\n    (hmu_scalar : ∀ (m : ℕ) (a : A) (U : X.Opens)\n      (t : (G m).val.obj (op U)),\n      HEq ((mu m 0 ⟨algebraMap A B a, hscalar a⟩).val.app (op U) t)\n        ((X.presheaf.map (homOfLE (le_top (a := U))).op).hom\n          (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) • t))\n    (hfinite : ∀ x : X, ∃ (U : X.Opens), x ∈ U ∧\n      ∃ (r : ℕ) (d : Fin r → ℕ) (s : ∀ i : Fin r, (G (d i)).val.obj (op U)),\n        ∀ (m : ℕ) (V : X.Opens) (hVU : V ≤ U) (t : (G m).val.obj (op V))\n          (y : X), y ∈ V → ∃ (W : X.Opens) (hWV : W ≤ V), y ∈ W ∧\n            (G m).val.map (homOfLE hWV).op t ∈\n              Submodule.span ((moduleRings X.toRingedSpace).obj.obj (op W))\n                {z | ∃ (i : Fin r), d i ≤ m ∧\n                  ∃ b : graded (m - d i),\n                    HEq z ((mu (d i) (m - d i) b).val.app (op W)\n                      ((G (d i)).val.map (homOfLE (hWV.trans hVU)).op (s i)))})\n    :\n    let g := Spec.map (CommRingCat.ofHom (algebraMap A B))\n    let Y := pullback f g\n    let pi : Y ⟶ X := pullback.fst f g\n    let fB : Y ⟶ Spec (.of B) := pullback.snd f g\n    ∃ (F : Y.Modules), F.IsQuasicoherent ∧ F.IsFinitePresentation ∧\n      ∃ (iota : ∀ m : ℕ, G m ⟶ (Scheme.Modules.pushforward pi).obj F),\n        Nonempty (IsColimit (Cofan.mk ((Scheme.Modules.pushforward pi).obj F) iota)) ∧\n          ∀ (k m : ℕ) (b : graded k),\n            mu m k b ≫ iota (m + k) = iota m ≫\n              (Scheme.Modules.pushforward pi).map\n                (F.smulHom (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b.val))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T232142-L-1993482",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T232142-L-1993482",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
