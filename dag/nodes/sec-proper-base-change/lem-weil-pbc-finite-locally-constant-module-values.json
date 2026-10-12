@@ -32,134 +32,74 @@
  ],
  "proof": [
   {
-   "text": "*Stalks as $\\Lambda$-modules.* For a sheaf $\\mathcal H$ of $\\Lambda$-modules on the small etale site of a scheme $T$ and a geometric point $\\bar t$ of $T$, $\\mathcal H_{\\bar t}$ is the colimit of the abelian groups $\\mathcal H(V)$ over the pointed etale neighbourhoods $(V,\\bar v)$ of $\\bar t$ [def-weil-pbc-geometric-stalks]. This index category is cofiltered [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], so by [lem-weil-pbc-filtered-colimit-modules-elementwise] (1), (2), applied with $R=\\mathbf Z$ and with $R=\\Lambda$, the colimit in abelian groups and the colimit in $\\Lambda$-modules are the same set of germs (every element is a germ, two germs agree iff the sections agree on a common refinement), and the $\\Lambda$-module structure of the latter is $\\lambda\\cdot(\\text{germ of }s)=\\text{germ of }\\lambda s$, the structure of the statement. A morphism $\\varphi:\\mathcal H\\to\\mathcal H'$ of sheaves of $\\Lambda$-modules induces the $\\Lambda$-linear map $\\varphi_{\\bar t}$ (germ of $s$ $\\mapsto$ germ of $\\varphi(s)$), and an isomorphism induces an isomorphism.",
-   "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition 040R (definition-stalk) with Lemma 03PQ (cofinal-etale), stalks as filtered colimits"
-   }
-  },
-  {
-   "text": "*Stalk of a restriction.* Let $u:U\\to Y$ be etale, $\\bar u$ a geometric point of $U$ and $\\bar y=u\\circ\\bar u$. By [lem-weil-pbc-etale-inverse-image-restriction] (1), applied to the underlying abelian sheaf of $\\mathcal G$, there is an isomorphism of abelian sheaves $\\rho_{\\mathcal G}:u^{-1}\\mathcal G\\xrightarrow{\\sim}\\mathcal G|_U$ [def-weil-pbc-inverse-image], natural in the abelian sheaf $\\mathcal G$, and by [lem-weil-pbc-inverse-image-stalk-germ] an isomorphism $c_{u,\\bar u,\\mathcal G}:(u^{-1}\\mathcal G)_{\\bar u}\\xrightarrow{\\sim}\\mathcal G_{\\bar y}$, natural in $\\mathcal G$. Hence $c_{u,\\bar u,\\mathcal G}\\circ((\\rho_{\\mathcal G})_{\\bar u})^{-1}:(\\mathcal G|_U)_{\\bar u}\\xrightarrow{\\sim}\\mathcal G_{\\bar y}$ is an isomorphism of abelian groups. It is $\\Lambda$-linear: for $\\lambda\\in\\Lambda$, multiplication by $\\lambda$ is an endomorphism $m_\\lambda$ of the abelian sheaf $\\mathcal G$, its restriction $m_\\lambda|_U$ is multiplication by $\\lambda$ on $\\mathcal G|_U$, and by step 1 the induced maps on stalks are multiplication by $\\lambda$; naturality of $\\rho$ and $c$ with respect to $m_\\lambda$ says that the composite commutes with multiplication by $\\lambda$.",
+   "text": "For an etale cover member U and a constant-value trivialization F.over U ≅ constant M, use AlgebraicGeometry.Scheme.overSheafEquivFunctorObjOverIso and CategoryTheory.Equivalence.constantSheafSheafCongrIso to obtain an isomorphism from the pullback to the constant sheaf on U. Compose AlgebraicGeometry.Etale.upperStarCompSheafFiberIso with the stalk of this isomorphism and CategoryTheory.GrothendieckTopology.Point.sheafFiberConstantSheafIso. This gives F_(s followed by U.hom) ≅ M directly in ModuleCat, for every separably closed point s of U. The categorical constructions already preserve scalar multiplication. This proves the moreover clause, even without finite values.",
    "uses": [
     "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03Q1 (lemma-stalk-pullback: stalks of an inverse image), Section 03PZ (section-inverse-image); the identification of restriction and inverse image along an etale morphism is the cited node; agent-assembled"
-   }
-  },
-  {
-   "text": "*Stalk of a constant sheaf of $\\Lambda$-modules.* Let $T$ be a scheme, $M$ a $\\Lambda$-module, $\\underline M$ the constant sheaf of $\\Lambda$-modules on $T_{\\Et}$ with its canonical $\\Lambda$-linear map $\\iota:(V\\mapsto M)\\to\\underline M$ from the constant presheaf, and $\\bar t$ a geometric point of $T$. By [lem-weil-pbc-constant-module-sheaf-underlying] the underlying abelian sheaf of $\\underline M$ is the constant abelian sheaf with value $M$, compatibly with the maps from the constant presheaf; so by [lem-weil-pbc-constant-sheaf-geometric-stalk] the map $M\\to\\underline M_{\\bar t}$, $m\\mapsto$ germ of $\\iota_T(m)$ at $(T,\\bar t)$, is an isomorphism of abelian groups. It is $\\Lambda$-linear, since $\\iota_T$ is $\\Lambda$-linear and $\\lambda\\cdot(\\text{germ of }s)=\\text{germ of }\\lambda s$ (step 1). So $\\underline M_{\\bar t}\\cong M$ as $\\Lambda$-modules.",
-   "uses": [
-    "lem-weil-pbc-constant-module-sheaf-underlying",
+    "lemma-openclosed-stalk-upperstar",
     "lem-weil-pbc-constant-sheaf-geometric-stalk"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 093I (section-constant): the constant sheaf of Lambda-modules is the constant sheaf with its module structure; Etale Cohomology Lemma 03PT (2) for the stalk"
-   }
+   "elementary": false
   },
   {
-   "text": "*The 'moreover' clause, for any values.* Suppose $\\{u_i:U_i\\to Y\\}$ is an etale covering and $\\mathcal G|_{U_i}\\cong\\underline{N_i}$ (constant sheaf of $\\Lambda$-modules on $(U_i)_{\\Et}$) for $\\Lambda$-modules $N_i$, not necessarily finite. Let $\\bar u$ be a geometric point of $U_i$ and $\\bar y=u_i\\circ\\bar u$. Then, as $\\Lambda$-modules, $\\mathcal G_{\\bar y}\\cong(\\mathcal G|_{U_i})_{\\bar u}$ by step 2, $(\\mathcal G|_{U_i})_{\\bar u}\\cong(\\underline{N_i})_{\\bar u}$ by step 1 (the stalk of the given isomorphism), and $(\\underline{N_i})_{\\bar u}\\cong N_i$ by step 3 with $T=U_i$. In particular, under (1) ($N_i=M_i$) this is the 'moreover' clause.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition 03RU (definition-finite-locally-constant), part for Lambda-modules; composition of steps 1-3"
-   }
-  },
-  {
-   "text": "*(1) implies (2).* Assume (1). Each $\\underline{M_i}$ is a constant sheaf of $\\Lambda$-modules in the sense of [def-constructible-constant] (coefficient category the $\\Lambda$-modules), so $\\{U_i\\to Y\\}$ is a trivialising datum and $\\mathcal G$ is locally constant [def-constructible-locally-constant]. Let $\\bar y$ be a geometric point of $Y$. Since the $u_i$ are etale and jointly surjective, [lem-weil-pbc-etale-cover-geometric-point-lift] gives $i$ and a geometric point $\\bar u$ of $U_i$ with $u_i\\circ\\bar u=\\bar y$; by step 4, $\\mathcal G_{\\bar y}\\cong M_i$ is a finite set. So $\\mathcal G$ is finite [def-constructible-finite], hence finite locally constant [def-constructible-finite-locally-constant].",
+   "text": "A finite-type generating cover has on each member an epimorphism from a constant finite free module. Lift any separably closed point to a member using the joint surjectivity of the cover and Mathlib exists_fac_of_etale_of_isSepClosed. Transport this epimorphism across the local-site equivalence and take its stalk. The equivalence preserves epimorphisms; the stalk functor preserves them because it is left adjoint to the skyscraper functor (Mathlib Point.skyscraperSheafAdjunction). Identify the source stalk with Fin n → Λ by Point.sheafFiberConstantSheafIso. It is finite, including n = 0, and ModuleCat.epi_iff_surjective makes the target finite by Finite.of_surjective. A finite module is finitely generated by Module.Finite.of_finite. Finally transport this property to the original stalk using overSheafEquivFunctorObjOverIso and upperStarCompSheafFiberIso. Thus finite type implies IsFiniteSheaf at all separably closed points.",
    "uses": [
-    "def-constructible-constant",
-    "def-constructible-locally-constant",
+    "def-weil-pbc-etale-module-finite-type",
     "lem-weil-pbc-etale-cover-geometric-point-lift",
-    "def-constructible-finite",
-    "def-constructible-finite-locally-constant"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition 03RU (definition-finite-locally-constant); Section 03PN (section-stalks)"
-   }
-  },
-  {
-   "text": "*(2) implies (1).* Assume (2): there are an etale covering $\\{u_i:U_i\\to Y\\}_{i\\in I}$ and $\\Lambda$-modules $N_i$ with $\\mathcal G|_{U_i}\\cong\\underline{N_i}$ [def-constructible-locally-constant], [def-constructible-constant]. Let $I'=\\{i\\in I:U_i\\neq\\emptyset\\}$; since an empty $U_i$ has empty image, $\\{u_i\\}_{i\\in I'}$ is still jointly surjective, hence an etale covering. For $i\\in I'$ choose a point $x\\in U_i$ and an algebraic closure $\\Omega$ of $\\kappa(x)$ [def-weil-algebraic-closure]; the point $x$ with $\\kappa(x)\\to\\Omega$ is a geometric point $\\bar u$ of $U_i$ [def-weil-geometric-point]. By step 4, $N_i\\cong\\mathcal G_{u_i\\circ\\bar u}$, which is finite by (2) [def-constructible-finite]. So $\\{u_i\\}_{i\\in I'}$ with $M_i=N_i$ satisfies (1).",
-   "uses": [
-    "def-constructible-locally-constant",
-    "def-constructible-constant",
-    "def-weil-algebraic-closure",
-    "def-weil-geometric-point",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lemma-openclosed-stalk-upperstar",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "def-weil-finitely-generated-module",
     "def-constructible-finite"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition 03RU (definition-finite-locally-constant)"
-   }
+   "elementary": false
   },
   {
-   "text": "*(1) implies (3).* Assume (1). By step 5, $\\mathcal G$ is locally constant. Each $M_i$ is finite, so it is a finitely generated $\\Lambda$-module (generated by its finitely many elements) [def-weil-finitely-generated-module]. By [lem-weil-pbc-locally-constant-finite-values-finite-type], applied to the covering $\\{U_i\\to Y\\}$ and the isomorphisms $\\mathcal G|_{U_i}\\cong\\underline{M_i}$, $\\mathcal G$ is of finite type [def-weil-pbc-etale-module-finite-type].",
+   "text": "Given finite constant values, each M_i is finitely generated by Module.Finite.of_finite. Apply locallyConstant_finiteValues_isFiniteType, the stated finite-values-to-finite-type lemma. The supplied LocallyConstantDatum gives local constancy. The previous step gives IsFiniteSheaf, so the sheaf is finite locally constant.",
    "uses": [
-    "def-weil-finitely-generated-module",
     "lem-weil-pbc-locally-constant-finite-values-finite-type",
-    "def-weil-pbc-etale-module-finite-type"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 093N (lemma-locally-constant-finite-type) (1)"
-   }
-  },
-  {
-   "text": "*(3) implies (2).* Assume (3). $\\mathcal G$ is locally constant by assumption. Let $\\bar y$ be a geometric point of $Y$. By [lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated], $\\mathcal G_{\\bar y}$ is a finitely generated $\\Lambda$-module, say generated by $x_1,\\dots,x_n$; then $\\Lambda^n\\to\\mathcal G_{\\bar y}$, $(\\lambda_j)\\mapsto\\sum_j\\lambda_jx_j$, is surjective, so $\\mathcal G_{\\bar y}$ has at most $|\\Lambda|^n<\\infty$ elements, $\\Lambda$ being finite. So $\\mathcal G$ is finite [def-constructible-finite] and locally constant, i.e. (2) [def-constructible-finite-locally-constant].",
-   "uses": [
-    "lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated",
-    "def-constructible-finite",
+    "def-weil-finitely-generated-module",
+    "def-constructible-locally-constant",
     "def-constructible-finite-locally-constant"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition 03RW (definition-constructible) (3), 'of finite type and locally constant'"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Given a finite locally constant sheaf, take its LocallyConstantDatum and restrict the cover index to members with Nonempty underlying space. This is still jointly surjective: a member covering a point is nonempty. Restrict the constant trivializations to these indices. Choose a point x of each remaining member, let Ω be the separable closure of its residue field, and construct Spec Ω → U via Scheme.SpecToEquivOfField and the residue-field inclusion. The sheaf has finitely generated stalk at its composite point on Y by IsFiniteSheaf. The first step transfers finite generation to its constant value. ModuleCat.isFinitelyGenerated_iff and Module.finite_of_finite show that value is finite as a set. This constructs the required finite-value trivialization, including the empty-base case, where the new index type is empty.",
+   "uses": [
+    "def-constructible-locally-constant",
+    "def-constructible-constant",
+    "def-constructible-finite",
+    "def-weil-geometric-point",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine the finite-value-to-finite-type implication and the first equivalence. In the reverse direction, local constancy together with finite type gives IsFiniteLocallyConstantSheaf by the second step, hence finite values by the fourth. Apply the first step to each specified isomorphism to obtain the final universally quantified stalk isomorphism. IsAlgClosed supplies IsSepClosed.",
+   "uses": [
+    "def-constructible-finite-locally-constant"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
   "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-constant-module-sheaf-underlying",
+  "lemma-openclosed-stalk-upperstar",
   "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "def-constructible-constant",
-  "def-constructible-locally-constant",
-  "lem-weil-pbc-etale-cover-geometric-point-lift",
-  "def-constructible-finite",
-  "def-constructible-finite-locally-constant",
-  "def-weil-algebraic-closure",
-  "def-weil-geometric-point",
-  "def-weil-finitely-generated-module",
-  "lem-weil-pbc-locally-constant-finite-values-finite-type",
   "def-weil-pbc-etale-module-finite-type",
-  "lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated"
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "def-weil-finitely-generated-module",
+  "def-constructible-finite",
+  "lem-weil-pbc-locally-constant-finite-values-finite-type",
+  "def-constructible-locally-constant",
+  "def-constructible-finite-locally-constant",
+  "def-constructible-constant",
+  "def-weil-geometric-point"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Definition 03RU (definition-finite-locally-constant) and Definition 03RW (definition-constructible) (3); the equivalences are not stated in Stacks and were written by the agent from these definitions, Modules on Sites Lemma 093N (lemma-locally-constant-finite-type) (1) and Definition 03DL (definition-site-local) (5), and the stalk computations of Section 03PN (section-stalks)"
+  "place": "Definitions 03RU and 03RW(3); Modules on Sites 093N(1), and stalk calculations 03PN/03Q1. R1 stage-3 Lean proof uses existing categorical restriction, pullback-stalk and constant-stalk isomorphisms directly in ModuleCat; finite-type stalks are proved from stalk ⊣ skyscraper and preservation of epimorphisms, avoiding elementwise germ and abelian-forgetful comparisons."
  },
  "mathlib_searches": [
   {
@@ -251,5 +191,15 @@
   "group": "H1",
   "result": "pass",
   "note": "Y Scheme.{u}; finite comm ring Λ:Type(u+1); F Sheaf smallEtale (ModuleCat Λ) per STATE two-encodings; (1) LocallyConstantDatum cover + Finite M + iso F.over≅constantSheaf.obj M; (2) recorded IsFiniteLocallyConstantSheaf (f.g. stalks at sep-closed pts = finite over finite Λ); (3) IsLocallyConstantSheaf ∧ IsFiniteTypeEtaleModuleSheaf (dep module: cover + epi from constant Λ^n on slice = n generating sections, H13 ok, no duplicate in lean/Sheaf); moreover over all d,M,i, alg-closed Ω, s≫f i, sheafFiber in ModuleCat ≅ M i; combined #check/#print compiled 2.4 s"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T042417-L-1820069",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
