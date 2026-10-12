@@ -1,214 +1,211 @@
 {
-  "id": "lem-weil-pbc-thickening-integral",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-finite-etale-lifting",
-      "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
-      "via": [
-        "lem-weil-pbc-thickening-finite-cartesian",
-        "lem-weil-pbc-finite-etale-lifting-complete",
-        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-      ]
-    },
-    "same_as": null
+ "id": "lem-weil-pbc-thickening-integral",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
   },
-  "kind": "statement",
-  "title": "Integrality is insensitive to thickenings",
-  "statement": "Let $i_S:S\\to S'$ and $i_X:X\\to X'$ be thickenings of schemes [def-sbc-first-order-thickening] (closed immersions that are surjective on underlying spaces), and let $f':X'\\to S'$ and $f:X\\to S$ be morphisms with $f'\\circ i_X=i_S\\circ f$ (a morphism of thickenings $(X\\subseteq X')\\to(S\\subseteq S')$; no cartesian or finite order hypothesis). Then $f$ is integral if and only if $f'$ is integral [def-weil-finite-integral-morphism]. (Stacks proves it from: $f$ affine iff $f'$ affine (part (1), via the bijection of affine opens of a thickening, More on Morphisms 06AD), $f$ universally closed iff $f'$ universally closed (part (4), since $i_S$, $i_X$ are universal homeomorphisms, Morphisms 054M), and integral = affine + universally closed (Morphisms 01WM).)",
-  "source": {
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Integrality is insensitive to thickenings",
+ "statement": "Let $i_S:S\\to S'$ and $i_X:X\\to X'$ be thickenings of schemes [def-sbc-first-order-thickening] (closed immersions that are surjective on underlying spaces), and let $f':X'\\to S'$ and $f:X\\to S$ be morphisms with $f'\\circ i_X=i_S\\circ f$ (a morphism of thickenings $(X\\subseteq X')\\to(S\\subseteq S')$; no cartesian or finite order hypothesis). Then $f$ is integral if and only if $f'$ is integral [def-weil-finite-integral-morphism]. (Stacks proves it from: $f$ affine iff $f'$ affine (part (1), via the bijection of affine opens of a thickening, More on Morphisms 06AD), $f$ universally closed iff $f'$ universally closed (part (4), since $i_S$, $i_X$ are universal homeomorphisms, Morphisms 054M), and integral = affine + universally closed (Morphisms 01WM).)",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 09ZV (label lemma-thicken-property-morphisms), part (5), with parts (1), (4) and the proof"
+ },
+ "stmt_deps": [
+  "def-sbc-first-order-thickening",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "(Setup.) $i_S:S\\to S'$ and $i_X:X\\to X'$ are closed immersions that are surjective on underlying spaces [def-sbc-first-order-thickening], hence homeomorphisms onto $S'$, $X'$. By the closed-immersion clauses, $i_S$ and $i_X$ are separated, affine, integral and universally closed. Write $g:=f'\\circ i_X=i_S\\circ f:X\\to S'$.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 09ZV (label lemma-thicken-property-morphisms), part (5), with parts (1), (4) and the proof"
+    "place": "More on Morphisms, proof of Lemma 09ZV, first sentence (S→S', X→X' are universal homeomorphisms); the clauses used are Morphisms 01QU, 01SE, 035C, 01W5"
+   }
   },
-  "stmt_deps": [
-    "def-sbc-first-order-thickening",
-    "def-weil-finite-integral-morphism"
-  ],
-  "proof": [
-    {
-      "text": "(Setup.) $i_S:S\\to S'$ and $i_X:X\\to X'$ are closed immersions that are surjective on underlying spaces [def-sbc-first-order-thickening], hence homeomorphisms onto $S'$, $X'$. By the closed-immersion clauses, $i_S$ and $i_X$ are separated, affine, integral and universally closed. Write $g:=f'\\circ i_X=i_S\\circ f:X\\to S'$.",
-      "uses": [
-        "def-sbc-first-order-thickening",
-        "lem-weil-pbc-closed-immersion-integral-separated-uc"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "More on Morphisms, proof of Lemma 09ZV, first sentence (S→S', X→X' are universal homeomorphisms); the clauses used are Morphisms 01QU, 01SE, 035C, 01W5"
-      }
-    },
-    {
-      "text": "($f'$ integral $\\Rightarrow$ $f$ integral.) If $f'$ is integral, then $g=f'\\circ i_X$ is integral as a composite of the integral morphisms $i_X$ (step 1) and $f'$ [lem-weil-pbc-closed-immersion-integral-separated-uc (c),(e)]. So $i_S\\circ f=g$ is integral and $i_S$ is separated (step 1); hence $f$ is integral by Morphisms 035D (2) [lem-weil-pbc-integral-of-comp-separated]. (Stacks derives this direction from (1), (4) and 01WM as for the converse; this argument is shorter and uses only 035D.)",
-      "uses": [
-        "lem-weil-pbc-closed-immersion-integral-separated-uc",
-        "lem-weil-pbc-integral-of-comp-separated"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Morphisms, Lemma 01WK (composition) and Lemma 035D (2); route of the direction written by the agent in place of 09ZV (1)+(4)"
-      }
-    },
-    {
-      "text": "(From now on $f$ integral. $f$ is affine and universally closed.) By Morphisms 01WM [pqf-lem-integral-univclosed], the integral morphism $f$ is affine and universally closed.",
-      "uses": [
-        "pqf-lem-integral-univclosed"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Morphisms, Lemma 01WM (lemma-integral-universally-closed), (1)⇒(2)"
-      }
-    },
-    {
-      "text": "($f'$ universally closed: 09ZV (4), direction $f\\Rightarrow f'$.) $g=i_S\\circ f$ is universally closed as the composite of the universally closed morphisms $f$ (step 3) and $i_S$ (step 1) [lem-weil-pbc-closed-immersion-integral-separated-uc (d),(f)]. Now $g=f'\\circ i_X$ with $g$ universally closed and $i_X$ surjective [def-sbc-first-order-thickening]; by the image lemma [lem-weil-pbc-image-universally-closed] (Mathlib UniversallyClosed.of_comp_surjective) (with $p:=g$, the surjection $i_X:X\\to X'$ and $q:=f'$, $q\\circ i_X=p$) $f'$ is universally closed. (Stacks says (4) follows 'immediately' from $i_S$, $i_X$ being universal homeomorphisms; this is that argument written out.)",
-      "uses": [
-        "lem-weil-pbc-closed-immersion-integral-separated-uc",
-        "lem-weil-pbc-image-universally-closed",
-        "def-sbc-first-order-thickening",
-        "def-weil-proper-morphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "More on Morphisms, proof of Lemma 09ZV, sentences 1-2 (part (4))"
-      }
-    },
-    {
-      "text": "($f'$ affine: 09ZV (1), direction $f\\Rightarrow f'$.) Let $V'\\subseteq S'$ be an affine open [pqf-def-affine-morphism]. (i) $V:=i_S^{-1}(V')$ is an open subscheme of $S$ and $i_S|_V:V\\to V'$ is a closed immersion (restriction of a closed immersion over an open of the target, immediate from [def-weil-closed-immersion]); it is affine (step 1), so $V$ is affine as the source of an affine morphism to an affine scheme [lem-weil-pbc-affine-morphism-permanence (2)]. (ii) Since $f$ is affine (step 3), $f^{-1}(V)$ is affine. (iii) Put $U':=f'^{-1}(V')$, open in $X'$. From $f'\\circ i_X=i_S\\circ f$, $i_X^{-1}(U')=f^{-1}(i_S^{-1}(V'))=f^{-1}(V)$, so $i_X$ restricts to a closed immersion $f^{-1}(V)\\to U'$ which is surjective on spaces since $i_X$ is; i.e. $U'$ is a thickening of the affine scheme $f^{-1}(V)$. (iv) By More on Morphisms 06AD [lem-weil-pbc-thickening-affine-scheme], $U'$ is affine. As $V'$ was arbitrary, $f'$ is affine [pqf-def-affine-morphism]. (Stacks: 'Part (1) follows from Lemma 06AD which tells us that there is a 1-to-1 correspondence between affine opens of $S$ and $S'$ and between affine opens of $X$ and $X'$'; (i) and (iv) are the two halves of that correspondence used here.)",
-      "uses": [
-        "pqf-def-affine-morphism",
-        "def-weil-closed-immersion",
-        "lem-weil-pbc-closed-immersion-integral-separated-uc",
-        "lem-weil-pbc-affine-morphism-permanence",
-        "lem-weil-pbc-thickening-affine-scheme",
-        "def-sbc-first-order-thickening"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "More on Morphisms, proof of Lemma 09ZV, sentence 3 (part (1)), with Lemma 06AD"
-      }
-    },
-    {
-      "text": "($f'$ integral.) By steps 4 and 5, $f'$ is affine and universally closed, hence integral by Morphisms 01WM [pqf-lem-integral-univclosed] ((2)⇒(1)). With step 2: $f$ is integral iff $f'$ is integral.",
-      "uses": [
-        "pqf-lem-integral-univclosed"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "More on Morphisms, proof of Lemma 09ZV: 'Part (5) follows from (1) and (4) by Morphisms, Lemma 01WM'"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-sbc-first-order-thickening",
+  {
+   "text": "($f'$ integral $\\Rightarrow$ $f$ integral.) If $f'$ is integral, then $g=f'\\circ i_X$ is integral as a composite of the integral morphisms $i_X$ (step 1) and $f'$ [lem-weil-pbc-closed-immersion-integral-separated-uc (c),(e)]. So $i_S\\circ f=g$ is integral and $i_S$ is separated (step 1); hence $f$ is integral by Morphisms 035D (2) [lem-weil-pbc-integral-of-comp-separated]. (Stacks derives this direction from (1), (4) and 01WM as for the converse; this argument is shorter and uses only 035D.)",
+   "uses": [
     "lem-weil-pbc-closed-immersion-integral-separated-uc",
-    "lem-weil-pbc-integral-of-comp-separated",
-    "pqf-lem-integral-univclosed",
-    "lem-weil-pbc-image-universally-closed",
-    "def-weil-proper-morphism",
-    "pqf-def-affine-morphism",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-thickening-affine-scheme"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 09ZV (label lemma-thicken-property-morphisms), proof of parts (1), (4), (5), with Lemma 06AD and Morphisms 01WM; the direction f' integral ⇒ f integral is written by the agent via Morphisms 035D (2), and the 'immediate' universal-homeomorphism argument for (4) is written out"
+    "lem-weil-pbc-integral-of-comp-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01WK (composition) and Lemma 035D (2); route of the direction written by the agent in place of 09ZV (1)+(4)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "integral morphism of schemes over a nilpotent thickening; f integral iff restriction to closed subscheme with same underlying space integral",
-      "results": "IsIntegralHom, IsIntegralHom.mk, IsIntegralHom.hasAffineProperty, IsIntegralHom.instOfIsClosedImmersion, IsIntegralHom.instMorphismRestrict (Mathlib.AlgebraicGeometry.Morphisms.Integral)",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "morphism of schemes is integral if its restriction over a closed subscheme defined by a nilpotent ideal (homeomorphic) is integral; affine morphism over thickening",
-      "results": "Scheme.Hom.isIntegral_app, isIntegralHom_iff, IsIntegralHom.integral_app, IsIntegralHom.hasAffineProperty, IsIntegralHom.instOfIsClosedImmersion: definitional API only",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.IsIntegralHom, IsNilpotent",
-      "results": "no results",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rnE 'UniversallyClosed|IsAffineHom|IsIntegralHom|LocallyOfFiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -iE 'nilpot|thicken|ker|square|surjective'; grep -rniE 'thickening' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-      "results": "Morphisms/UniversallyClosed.lean:79 (UniversallyClosed g from f ≫ g with f surjective: a tool for part (4), not the statement); FormallyUnramified.lean:189 only; no permanence of affineness/integrality over thickenings (IsIntegralHom.iff_universallyClosed_and_isAffineHom, Integral.lean:135, is 01WM, a tool)",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -n 'of_comp\\|comp_iff\\|iff_universallyClosed_and_isAffineHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/{Integral,UniversallyClosed,Proper,Separated}.lean",
-      "results": "IsIntegralHom.of_comp (Integral.lean:86), IsIntegralHom.comp_iff (:89), IsIntegralHom.iff_universallyClosed_and_isAffineHom (:135), UniversallyClosed.of_comp_surjective (UniversallyClosed.lean:78), UniversallyClosed.of_comp_of_isSeparated (Proper.lean:111, Stacks 01W6 (1)), IsAffineHom.of_comp (Separated.lean:272): the tools of the proof; the hard direction needs 06AD, absent",
-      "date": "2026-10-10",
-      "verdict": "no match (tools only)"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "lem-weil-pbc-thickening-finite-cartesian",
-    "date": "2026-10-10"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "result": "accepted",
-    "note": "Six steps along Stacks 09ZV (5): closed immersions separated/affine/integral/universally closed (new Mathlib leaf lem-weil-pbc-closed-immersion-integral-separated-uc, one declaration per clause, checked), f′ ⇒ f by 035D (2) (new leaf IsIntegralHom.of_comp Integral.lean:86, checked; shorter than Stacks′ route), 01WM as the tool use pqf-lem-integral-univclosed (unit sk-prop-av-pqf-finite, unsplit; it is exactly IsIntegralHom.iff_universallyClosed_and_isAffineHom Integral.lean:135: stage-3 note to make it a leaf), 09ZV (4) via the reviewed leaf lem-weil-pbc-image-universally-closed, 09ZV (1) via 06AD as the new unsplit node lem-weil-pbc-thickening-affine-scheme (general thickening; the finite-order case suffices for the caller). Checked."
-  },
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-weil-pbc-thickening-integral",
-    "worker": "stage1",
-    "summary": "Read Stacks More on Morphisms 09ZV and its proof, 06AD (with Limits 05YU), Morphisms 01WM, 035D, 01WK, 01W3/01W5, 01QU, 01SE, 035C. Statement kept (09ZV (5) for general thickenings, matching Stacks). Proof in six steps: setup (closed-immersion properties, new Mathlib leaf lem-weil-pbc-closed-immersion-integral-separated-uc); easy direction f' integral => f integral via composition and Morphisms 035D (2) (new Mathlib leaf lem-weil-pbc-integral-of-comp-separated = IsIntegralHom.of_comp), shorter than Stacks' route through (1),(4); hard direction: f affine + universally closed by 01WM (existing node pqf-lem-integral-univclosed, which is Mathlib IsIntegralHom.iff_universallyClosed_and_isAffineHom), f' universally closed via composite i_S∘f = f'∘i_X and UniversallyClosed.of_comp_surjective (lem-weil-pbc-image-universally-closed), f' affine via affine opens and 06AD (new unsplit node lem-weil-pbc-thickening-affine-scheme; no Mathlib), then 01WM again. Mathlib searched with leansearch, leanfinder, loogle and grep."
-  },
-  "tool_uses": [
+  {
+   "text": "(From now on $f$ integral. $f$ is affine and universally closed.) By Morphisms 01WM [pqf-lem-integral-univclosed], the integral morphism $f$ is affine and universally closed.",
+   "uses": [
     "pqf-lem-integral-univclosed"
-  ],
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.ThickeningIntegral",
-    "declaration": "AlgebraicGeometry.isIntegralHom_iff_of_thickenings",
-    "file": "lean/Sheaf/AlgebraicGeometry/ThickeningIntegral.lean",
-    "statement": "theorem isIntegralHom_iff_of_thickenings {S S' X X' : Scheme.{u}} (i_S : S ⟶ S') (i_X : X ⟶ X') (f' : X' ⟶ S') (f : X ⟶ S) (hS : IsThickening i_S) (hX : IsThickening i_X) (hcomm : i_X ≫ f' = f ≫ i_S) : IsIntegralHom f ↔ IsIntegralHom f'",
-    "branch": "sheaf-dag",
-    "by": "G1",
-    "date": "2026-10-11",
-    "existing": false
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01WM (lemma-integral-universally-closed), (1)⇒(2)"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "AUTO",
-    "group": "G1",
-    "result": "pass",
-    "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+  {
+   "text": "($f'$ universally closed: 09ZV (4), direction $f\\Rightarrow f'$.) $g=i_S\\circ f$ is universally closed as the composite of the universally closed morphisms $f$ (step 3) and $i_S$ (step 1) [lem-weil-pbc-closed-immersion-integral-separated-uc (d),(f)]. Now $g=f'\\circ i_X$ with $g$ universally closed and $i_X$ surjective [def-sbc-first-order-thickening]; by the image lemma [lem-weil-pbc-image-universally-closed] (Mathlib UniversallyClosed.of_comp_surjective) (with $p:=g$, the surjection $i_X:X\\to X'$ and $q:=f'$, $q\\circ i_X=p$) $f'$ is universally closed. (Stacks says (4) follows 'immediately' from $i_S$, $i_X$ being universal homeomorphisms; this is that argument written out.)",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-image-universally-closed",
+    "def-sbc-first-order-thickening",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 09ZV, sentences 1-2 (part (4))"
+   }
+  },
+  {
+   "text": "Affineness of f implies affineness of f′ by isAffineHom_of_thickenings, the affine-open reduction recorded in lem-weil-pbc-thickening-affine-morphism.",
+   "uses": [
+    "lem-weil-pbc-thickening-affine-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "($f'$ integral.) By steps 4 and 5, $f'$ is affine and universally closed, hence integral by Morphisms 01WM [pqf-lem-integral-univclosed] ((2)⇒(1)). With step 2: $f$ is integral iff $f'$ is integral.",
+   "uses": [
+    "pqf-lem-integral-univclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 09ZV: 'Part (5) follows from (1) and (4) by Morphisms, Lemma 01WM'"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-integral-of-comp-separated",
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-image-universally-closed",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-thickening-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 09ZV (label lemma-thicken-property-morphisms), proof of parts (1), (4), (5), with Lemma 06AD and Morphisms 01WM; the direction f' integral ⇒ f integral is written by the agent via Morphisms 035D (2), and the 'immediate' universal-homeomorphism argument for (4) is written out; stage 3 uses the proved affine component isAffineHom_of_thickenings for step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral morphism of schemes over a nilpotent thickening; f integral iff restriction to closed subscheme with same underlying space integral",
+   "results": "IsIntegralHom, IsIntegralHom.mk, IsIntegralHom.hasAffineProperty, IsIntegralHom.instOfIsClosedImmersion, IsIntegralHom.instMorphismRestrict (Mathlib.AlgebraicGeometry.Morphisms.Integral)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of schemes is integral if its restriction over a closed subscheme defined by a nilpotent ideal (homeomorphic) is integral; affine morphism over thickening",
+   "results": "Scheme.Hom.isIntegral_app, isIntegralHom_iff, IsIntegralHom.integral_app, IsIntegralHom.hasAffineProperty, IsIntegralHom.instOfIsClosedImmersion: definitional API only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, IsNilpotent",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'UniversallyClosed|IsAffineHom|IsIntegralHom|LocallyOfFiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry | grep -iE 'nilpot|thicken|ker|square|surjective'; grep -rniE 'thickening' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Morphisms/UniversallyClosed.lean:79 (UniversallyClosed g from f ≫ g with f surjective: a tool for part (4), not the statement); FormallyUnramified.lean:189 only; no permanence of affineness/integrality over thickenings (IsIntegralHom.iff_universallyClosed_and_isAffineHom, Integral.lean:135, is 01WM, a tool)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'of_comp\\|comp_iff\\|iff_universallyClosed_and_isAffineHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/{Integral,UniversallyClosed,Proper,Separated}.lean",
+   "results": "IsIntegralHom.of_comp (Integral.lean:86), IsIntegralHom.comp_iff (:89), IsIntegralHom.iff_universallyClosed_and_isAffineHom (:135), UniversallyClosed.of_comp_surjective (UniversallyClosed.lean:78), UniversallyClosed.of_comp_of_isSeparated (Proper.lean:111, Stacks 01W6 (1)), IsAffineHom.of_comp (Separated.lean:272): the tools of the proof; the hard direction needs 06AD, absent",
+   "date": "2026-10-10",
+   "verdict": "no match (tools only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-thickening-finite-cartesian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Six steps along Stacks 09ZV (5): closed immersions separated/affine/integral/universally closed (new Mathlib leaf lem-weil-pbc-closed-immersion-integral-separated-uc, one declaration per clause, checked), f′ ⇒ f by 035D (2) (new leaf IsIntegralHom.of_comp Integral.lean:86, checked; shorter than Stacks′ route), 01WM as the tool use pqf-lem-integral-univclosed (unit sk-prop-av-pqf-finite, unsplit; it is exactly IsIntegralHom.iff_universallyClosed_and_isAffineHom Integral.lean:135: stage-3 note to make it a leaf), 09ZV (4) via the reviewed leaf lem-weil-pbc-image-universally-closed, 09ZV (1) via 06AD as the new unsplit node lem-weil-pbc-thickening-affine-scheme (general thickening; the finite-order case suffices for the caller). Checked."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-thickening-integral",
+  "worker": "stage1",
+  "summary": "Read Stacks More on Morphisms 09ZV and its proof, 06AD (with Limits 05YU), Morphisms 01WM, 035D, 01WK, 01W3/01W5, 01QU, 01SE, 035C. Statement kept (09ZV (5) for general thickenings, matching Stacks). Proof in six steps: setup (closed-immersion properties, new Mathlib leaf lem-weil-pbc-closed-immersion-integral-separated-uc); easy direction f' integral => f integral via composition and Morphisms 035D (2) (new Mathlib leaf lem-weil-pbc-integral-of-comp-separated = IsIntegralHom.of_comp), shorter than Stacks' route through (1),(4); hard direction: f affine + universally closed by 01WM (existing node pqf-lem-integral-univclosed, which is Mathlib IsIntegralHom.iff_universallyClosed_and_isAffineHom), f' universally closed via composite i_S∘f = f'∘i_X and UniversallyClosed.of_comp_surjective (lem-weil-pbc-image-universally-closed), f' affine via affine opens and 06AD (new unsplit node lem-weil-pbc-thickening-affine-scheme; no Mathlib), then 01WM again. Mathlib searched with leansearch, leanfinder, loogle and grep."
+ },
+ "tool_uses": [
+  "pqf-lem-integral-univclosed"
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ThickeningIntegral",
+  "declaration": "AlgebraicGeometry.isIntegralHom_iff_of_thickenings",
+  "file": "lean/Sheaf/AlgebraicGeometry/ThickeningIntegral.lean",
+  "statement": "theorem isIntegralHom_iff_of_thickenings {S S' X X' : Scheme.{u}} (i_S : S ⟶ S') (i_X : X ⟶ X') (f' : X' ⟶ S') (f : X ⟶ S) (hS : IsThickening i_S) (hX : IsThickening i_X) (hcomm : i_X ≫ f' = f ≫ i_S) : IsIntegralHom f ↔ IsIntegralHom f'",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T122435-L-1065351",
+  "kind": "interface"
+ }
 }
