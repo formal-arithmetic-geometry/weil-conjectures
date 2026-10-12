@@ -9,7 +9,9 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.RingTheory.Polynomial.Basic
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Dense opens of the affine line
@@ -70,6 +72,49 @@ locus of an ideal of `k₀[x]`, which is principal, so the open is a basic open.
 theorem affineLine.isAffineOpen (V : (affineLine k₀).Opens) : IsAffineOpen V :=
   IsAffineOpen.of_isPrincipalIdealRing V
 
+section Opens
+
+variable {X : Scheme.{u}} [X.Over (Spec (.of k₀))] (W : X.Opens)
+
+/-- An open of a scheme smooth of relative dimension one over `k₀` is smooth of relative dimension
+one over `k₀`. -/
+theorem Scheme.Opens.smoothOfRelativeDimension_one
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k₀))] :
+    SmoothOfRelativeDimension 1 (W.toScheme ↘ Spec (.of k₀)) := by
+  rw [← comp_over W.ι, ← zero_add 1]
+  infer_instance
+
+/-- A nonempty open of a geometrically irreducible `k₀`-scheme is geometrically irreducible. -/
+theorem Scheme.Opens.geometricallyIrreducible [Nonempty W]
+    [GeometricallyIrreducible (X ↘ Spec (.of k₀))] :
+    GeometricallyIrreducible (W.toScheme ↘ Spec (.of k₀)) := by
+  rw [← comp_over W.ι]
+  exact GeometricallyIrreducible.comp_of_isOpenImmersion W.ι _
+
+/-- An open of a `k₀`-scheme locally of finite type is locally of finite type over `k₀`. -/
+theorem Scheme.Opens.locallyOfFiniteType [LocallyOfFiniteType (X ↘ Spec (.of k₀))] :
+    LocallyOfFiniteType (W.toScheme ↘ Spec (.of k₀)) := by
+  rw [← comp_over W.ι]
+  infer_instance
+
+/-- An open of a separated `k₀`-scheme is separated over `k₀`. -/
+theorem Scheme.Opens.isSeparated [IsSeparated (X ↘ Spec (.of k₀))] :
+    IsSeparated (W.toScheme ↘ Spec (.of k₀)) := by
+  rw [← comp_over W.ι]
+  infer_instance
+
+/-- The geometric fiber of a geometrically irreducible smooth `k₀`-scheme is irreducible: the
+structure morphism is universally open. -/
+theorem irreducibleSpace_geometricFiber_of_smooth (Y : Scheme.{u}) [Y.Over (Spec (.of k₀))]
+    [GeometricallyIrreducible (Y ↘ Spec (.of k₀))] [Smooth (Y ↘ Spec (.of k₀))] :
+    IrreducibleSpace (Y ↘ Spec (.of k₀)).geometricFiber := by
+  have : IrreducibleSpace (Scheme.specAlgebraicClosure k₀).left :=
+    inferInstanceAs (IrreducibleSpace (Spec (.of (AlgebraicClosure k₀))))
+  exact inferInstanceAs (IrreducibleSpace ↥(pullback (C := Scheme.{u})
+    (Y ↘ Spec (.of k₀)) (Scheme.specAlgebraicClosure k₀).hom))
+
+end Opens
+
 namespace WeilSheaf.LisseOnDenseOpen
 
 variable [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
@@ -115,6 +160,40 @@ instance geometricallyIrreducible : GeometricallyIrreducible (D.U ↘ Spec (.of 
 /-- The dense open `U₀` is geometrically connected over `k₀`. -/
 instance geometricallyConnected : GeometricallyConnected (D.U ↘ Spec (.of k₀)) :=
   GeometricallyConnected.of_geometricallyIrreducible _
+
+/-- The dense open `U₀` is separated over `k₀`, as an open of the affine line. -/
+instance isSeparated : IsSeparated (D.U ↘ Spec (.of k₀)) := by
+  rw [over_eq]
+  infer_instance
+
+/-- The dense open `U₀` is quasi-compact over `k₀`, as a quasi-compact open of the affine line. -/
+instance quasiCompact_over : QuasiCompact (D.U ↘ Spec (.of k₀)) := by
+  rw [over_eq]
+  infer_instance
+
+/-- The geometric fiber `Ū` of the dense open `U₀` is irreducible: `U₀` is geometrically
+irreducible and smooth, hence universally open, over `k₀`. -/
+instance irreducibleSpace_geometricFiber :
+    IrreducibleSpace (D.U ↘ Spec (.of k₀)).geometricFiber := by
+  have : UniversallyOpen (D.U ↘ Spec (.of k₀)) := by
+    have := SmoothOfRelativeDimension.smooth 1 (D.U ↘ Spec (.of k₀))
+    infer_instance
+  have : IrreducibleSpace (Scheme.specAlgebraicClosure k₀).left :=
+    inferInstanceAs (IrreducibleSpace (Spec (.of (AlgebraicClosure k₀))))
+  exact inferInstanceAs (IrreducibleSpace ↥(pullback (C := Scheme.{u})
+    (D.U ↘ Spec (.of k₀)) (Scheme.specAlgebraicClosure k₀).hom))
+
+/-- The dense open `U₀` is irreducible. -/
+instance irreducibleSpace : IrreducibleSpace D.U :=
+  GeometricallyIrreducible.irreducibleSpace_of_subsingleton (f := D.U ↘ Spec (.of k₀))
+
+/-- The dense open `U₀` is Noetherian, being of finite type over a field. -/
+instance isNoetherian : IsNoetherian D.U :=
+  isNoetherian_of_locallyOfFiniteType (D.U ↘ Spec (.of k₀))
+
+/-- The dense open `U₀` is reduced, as an open of the affine line. -/
+instance isReduced : IsReduced D.U :=
+  isReduced_of_isOpenImmersion D.j
 
 end WeilSheaf.LisseOnDenseOpen
 
