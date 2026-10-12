@@ -261,9 +261,8 @@ characteristic of every quasi-coherent `𝒪_X`-module `M` is `χ(M) = h⁰(M) -
 theorem Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (M : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M] :
     M.eulerChar k = M.finrankH k 0 - M.finrankH k 1 := by
-  rw [Modules.eulerChar_eq_sum_range_of_finrankH_eq_zero k M (n := 1) fun q hq ↦
-    have := Modules.subsingleton_H_of_two_le k M hq
-    Module.finrank_zero_of_subsingleton]
+  rw [Modules.eulerChar_eq_sum_range_of_subsingleton k M (D := 1) fun q hq ↦
+    Modules.subsingleton_H_of_two_le k M hq]
   simp [Finset.sum_range_succ]
   ring
 
