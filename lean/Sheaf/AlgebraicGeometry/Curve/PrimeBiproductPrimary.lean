@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
 
 /-! # Componentwise curve assertions for finite biproducts
 
@@ -22,6 +22,8 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 
 namespace AlgebraicGeometry.IsCurve
 
+-- The base morphism is unused, but belongs to the existing public signature.
+set_option linter.unusedVariables false in
 /-- Componentwise equivalence for the primary assertions of a prime-killed finite sum.
 Source: Stacks Project, Theorem 03SC, proof, fourth paragraph; Lemma 0A5C.
 (blueprint: lem-pbc-f1-prime-biproduct-primary).
@@ -49,6 +51,54 @@ theorem prime_biproduct_primary_iff (Λ : Type (u + 1)) [CommRing Λ]
     {H : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : H ≅ ⨁ G)
     (hHr : r • 𝟙 H = 0) :
     VanishingAboveOneOfIsPrimaryTorsionSheaf Λ H k ↔
-      ∀ a, VanishingAboveOneOfIsPrimaryTorsionSheaf Λ (G a) k := by sorry
+      ∀ a, VanishingAboveOneOfIsPrimaryTorsionSheaf Λ (G a) k := by
+  classical
+  have := Fintype.ofFinite ι
+  let U := sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  have : U.Additive := { map_add := by intros; rfl }
+  have hvan (q : ℕ) : Subsingleton (Sheaf.H (U.obj H) q) ↔
+      ∀ a, Subsingleton (Sheaf.H (U.obj (G a)) q) := by
+    let T := U ⋙ Sheaf.functorH X.smallEtaleTopology q
+    change Subsingleton (T.obj H) ↔ ∀ a, Subsingleton (T.obj (G a))
+    constructor
+    · intro h a
+      have hz : IsZero (T.obj H) := AddCommGrpCat.isZero_iff_subsingleton.mpr h
+      apply AddCommGrpCat.subsingleton_of_isZero
+      apply (IsZero.iff_id_eq_zero _).mpr
+      calc
+        𝟙 (T.obj (G a)) =
+            T.map (biproduct.ι G a ≫ e.inv) ≫
+              T.map (e.hom ≫ biproduct.π G a) := by
+          rw [← T.map_comp]
+          simp only [Category.assoc, Iso.inv_hom_id_assoc, biproduct.ι_π_self, T.map_id]
+        _ = 0 := by rw [hz.eq_zero_of_src (T.map (e.hom ≫ biproduct.π G a)), comp_zero]
+    · intro h
+      have hz (a : ι) : IsZero (T.obj (G a)) :=
+        AddCommGrpCat.isZero_iff_subsingleton.mpr (h a)
+      apply AddCommGrpCat.subsingleton_of_isZero
+      apply (IsZero.iff_id_eq_zero _).mpr
+      have hb : 𝟙 (T.obj (⨁ G)) = 0 := by
+        rw [← T.map_id, ← IsBilimit.total (biproduct.isBilimit G), T.map_sum]
+        apply Finset.sum_eq_zero
+        intro a _
+        rw [T.map_comp, (hz a).eq_zero_of_src (T.map (biproduct.ι G a)), comp_zero]
+      calc
+        𝟙 (T.obj H) = T.map e.hom ≫ 𝟙 (T.obj (⨁ G)) ≫ T.map e.inv := by
+          simp only [Category.id_comp, ← T.map_comp, Iso.hom_inv_id, T.map_id]
+        _ = 0 := by rw [hb, zero_comp, comp_zero]
+  have hH := Scheme.prime_annihilated_primary_cases Λ r H hHr
+  have hG (a : ι) := Scheme.prime_annihilated_primary_cases Λ r (G a) (hGr a)
+  constructor
+  · intro h a p _ _ hp q hq
+    by_cases hrp : r = p
+    · subst p
+      exact (hvan q).mp (h r hH.1 q hq) a
+    · exact Sheaf.subsingleton_H_of_isZero (U.map_isZero ((hG a).2 p hrp hp)) q
+  · intro h p _ _ hp q hq
+    by_cases hrp : r = p
+    · subst p
+      exact (hvan q).mpr (fun a ↦ h a r (hG a).1 q hq)
+    · exact Sheaf.subsingleton_H_of_isZero (U.map_isZero (hH.2 p hrp hp)) q
 
 end AlgebraicGeometry.IsCurve
