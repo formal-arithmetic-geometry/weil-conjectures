@@ -215,3 +215,80 @@ theorem exists_isPunctuallyPureOfWeight_of_correction {ι : PadicAlgCl l →+* �
   exact ⟨v, D'.lisse.isPunctuallyPureOfWeight_of_upperStar W.ι (hv.of_epi eS.hom)⟩
 
 end AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen
+
+namespace AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  {ψ : AddChar k₀ (PadicAlgCl l)} {D D' D'' : LisseOnDenseOpen k₀ l}
+
+/-- The curve perverse middle extension of the datum, unfolded. Rewriting with this equation
+avoids a slow kernel check of the definitional unfolding. -/
+theorem middleExtension_eq (D : LisseOnDenseOpen k₀ l) :
+    D.middleExtension = (toComplex.obj D.directImage)⟦(1 : ℤ)⟧ :=
+  rfl
+
+/-- Two Fourier partners `D'` and `D''` of `D` have isomorphic middle extensions
+`j'_*M' ≅ j''_*M''`: both `(j'_*M')[1]` and `(j''_*M'')[1]` are the transform of `(j_*M)[1]`;
+take `𝓗⁻¹`. -/
+theorem IsFourierPartner.nonempty_directImage_iso (h' : D.IsFourierPartner ψ D')
+    (h'' : D.IsFourierPartner ψ D'') : Nonempty (D'.directImage ≅ D''.directImage) := by
+  obtain ⟨e'⟩ := h'
+  obtain ⟨e''⟩ := h''
+  rw [middleExtension_eq] at e' e''
+  let f := (shiftFunctor (WeilComplex k₀ l (affineLine k₀)) (1 : ℤ)).preimageIso (e'.symm ≪≫ e'')
+  exact ⟨(toComplexCompHomologySheafIso.app _).symm ≪≫ (WeilComplex.homologySheaf 0).mapIso f ≪≫
+    toComplexCompHomologySheafIso.app _⟩
+
+/-- At a closed point `x` of the affine line in the image of `j : U₀ ↪ 𝔸¹`, the stalk of the
+middle extension `j_*M` is pure of weight `v` if `M` is punctually pure of weight `v`:
+`j^* j_* M ≅ M`. -/
+theorem isPureOfWeight_stalk_directImage {ι : PadicAlgCl l →+* ℂ} {v : ℝ}
+    (hv : D.sheaf.IsPunctuallyPureOfWeight ι v) (x : (affineLine k₀).finitePoints)
+    (hx : x.1 ∈ Set.range D.j.base) :
+    (D.directImage.stalk x).IsPureOfWeight ι
+      ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).residueCard x.1) v := by
+  obtain ⟨x, hxf⟩ := x
+  obtain ⟨y, rfl⟩ := hx
+  have hy : y ∈ D.U.finitePoints := Scheme.Hom.mem_finitePoints_of_isOpenImmersion D.j hxf
+  obtain ⟨e⟩ := D.nonempty_upperStar_directImage_iso
+  obtain ⟨E⟩ := nonempty_equiv_stalk_of_iso e ⟨y, hy⟩
+  exact (isPureOfWeight_stalk_upperStar_iff D.j D.directImage ⟨y, hy⟩).1
+    ((hv ⟨y, hy⟩).of_equiv E)
+
+/-- **Purity does not depend on the choice of Fourier partner.** If `D'` and `D''` are Fourier
+partners of `D` and `M''` is punctually `ι`-pure of weight `v`, so is `M'`: on the dense open
+`j'⁻¹(U'')` the stalks of `M'` and `M''` are those of `j'_*M' ≅ j''_*M''`, and purity extends from
+a dense open of `U'` to `U'`. -/
+theorem IsFourierPartner.isPunctuallyPureOfWeight (h' : D.IsFourierPartner ψ D')
+    (h'' : D.IsFourierPartner ψ D'') {ι : PadicAlgCl l →+* ℂ} {v : ℝ}
+    (hv : D''.sheaf.IsPunctuallyPureOfWeight ι v) : D'.sheaf.IsPunctuallyPureOfWeight ι v := by
+  obtain ⟨e⟩ := h'.nonempty_directImage_iso h''
+  obtain ⟨e'⟩ := D'.nonempty_upperStar_directImage_iso
+  let O : D'.U.Opens := D'.j ⁻¹ᵁ D''.j.opensRange
+  have hO : (O : Set D'.U).Nonempty := by
+    have := D'.nonempty_U
+    have := D''.nonempty_U
+    obtain ⟨x, hx', hx''⟩ := nonempty_preirreducible_inter D'.j.opensRange.isOpen
+      D''.j.opensRange.isOpen ⟨_, D'.j.mem_opensRange.2 ⟨Classical.arbitrary _, rfl⟩⟩
+      ⟨_, D''.j.mem_opensRange.2 ⟨Classical.arbitrary _, rfl⟩⟩
+    obtain ⟨y, rfl⟩ := D'.j.mem_opensRange.1 hx'
+    exact ⟨y, hx''⟩
+  have := D'.isDominant_opens_ι O hO
+  have key : ∀ y : D'.U.finitePoints, D'.j.base y.1 ∈ Set.range D''.j.base →
+      (D'.sheaf.stalk y).IsPureOfWeight ι ((D'.U ↘ Spec (CommRingCat.of k₀)).residueCard y.1) v := by
+    intro y hy
+    obtain ⟨E⟩ := nonempty_equiv_stalk_of_iso e'.symm y
+    let x : (affineLine k₀).finitePoints :=
+      ⟨D'.j.base y.1, Scheme.Hom.map_mem_finitePoints D'.j y.2⟩
+    obtain ⟨E'⟩ := nonempty_equiv_stalk_of_iso e x
+    exact FrobeniusModule.IsPureOfWeight.of_equiv E
+      ((isPureOfWeight_stalk_upperStar_iff D'.j D'.directImage y).2
+        (FrobeniusModule.IsPureOfWeight.of_equiv E' (isPureOfWeight_stalk_directImage hv x hy)))
+  have hmem (z : O.toScheme) : D'.j.base (O.ι.base z) ∈ Set.range D''.j.base :=
+    D''.j.mem_opensRange.1 z.2
+  have hO' : ((upperStar O.ι).obj D'.sheaf).IsPunctuallyPureOfWeight ι v := fun z ↦
+    (isPureOfWeight_stalk_upperStar_iff O.ι D'.sheaf z).2
+      (key ⟨O.ι.base z.1, Scheme.Hom.map_mem_finitePoints O.ι z.2⟩ (hmem z.1))
+  exact D'.lisse.isPunctuallyPureOfWeight_of_upperStar O.ι hO'
+
+end AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen
