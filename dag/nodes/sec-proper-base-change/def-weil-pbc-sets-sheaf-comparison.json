@@ -1,0 +1,110 @@
+{
+ "id": "def-weil-pbc-sets-sheaf-comparison",
+ "kind": "definition",
+ "title": "Sheaf-level unit and composition comparison",
+ "statement": "Let $R,S,T$ be schemes, $h:T\\to S$, $f:S\\to R$, $k:T\\to R$, with $h\\circ f=k$ in diagrammatic order, and let $G$ be a sheaf of sets on the small étale site of $R$ [def-weil-pbc-etale-sheaves]. Write $f^*,h^*,k^*$ for the constructed inverse images and $h_*$ for restriction along base change. Define $\\beta(h,f,k):f^*G\\to h_*k^*G$ to be the adjunction unit $f^*G\\to h_*h^*f^*G$ followed by $h_*$ of the unique unit-compatible composition isomorphism $h^*f^*G\\cong k^*G$ [lem-weil-pbc-sets-etale-inverse-image-composition-units], transported along the given equality $h\\circ f=k$. This definition has no unspecified data: the composition isomorphism is uniquely determined by its unit equation. Its value on a base-changed test object, followed by the canonical iterated-base-change restriction, is the section comparison of [def-weil-pbc-sets-section-comparison].",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites Tags 03CB and 03CC, composition of morphisms of sites and adjunction units; Étale Cohomology Tag 09YQ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-sets-section-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q2",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites Tags 03CB and 03CC, composition of morphisms of sites and adjunction units; Étale Cohomology Tag 09YQ; explicit finite-cover decomposition of the existence argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf inverse image has local representatives under its adjunction unit; finite presentation sections and matching equations descend along directed inverse limits of schemes",
+   "results": "Service returned Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of inverse image of etale sheaf along inverse limit of affine transition schemes descend to a finite stage",
+   "results": "Eight hits, chiefly AlgebraicGeometry.exists_appTop_π_eq_of_isLimit and structure-sheaf eventual equality. None states local representatives of arbitrary etale sheaf inverse images or finite matching descent.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleSet.*(SheafComparison|local.*[Rr]epresent|eventual.*[Mm]atch)",
+   "results": "msearch grep returned zero hits. Additional rg found the existing fixed-base finite matching and local-family lemmas; their import closure reaches the current item, so using them here would be circular. The sheaf-level comparison is not declared in the existing library.",
+   "verdict": "no usable match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetStagePresheafLocallySurjective",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "degree-zero continuity: Sheaf-level unit and composition comparison",
+   "via": [
+    "lem-weil-pbc-sets-stage-presheaf-locally-surjective",
+    "lem-weil-pbc-sets-stage-sheaf-colimit",
+    "lem-weil-pbc-sets-section-lift-affine",
+    "lem-weil-pbc-sets-section-lift",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetSheafComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSheafComparison.lean",
+  "declaration": "AlgebraicGeometry.etaleSetSheafComparison",
+  "statement": "def etaleSetSheafComparison\n    {R S T : Scheme.{u}} (h : T ⟶ S) (f : S ⟶ R) (k : T ⟶ R) (hk : h ≫ f = k)\n    (G : Sheaf R.smallEtaleTopology (Type (u + 1))) :\n    (Scheme.etaleSetPullback f).obj G ⟶\n      ((MorphismProperty.Over.pullback @Etale ⊤ h).sheafPushforwardContinuous\n        (Type (u + 1)) (S.smallGrothendieckTopology @Etale)\n        (T.smallGrothendieckTopology @Etale)).obj\n          ((Scheme.etaleSetPullback k).obj G)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T173855-L-3303323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T173855-L-3303323",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
