@@ -14,22 +14,36 @@
  ],
  "proof": [
   {
-   "text": "The retained total in degree n is the finite coproduct of exactly the diagonal summands with second index at least q. The finite-diagonal sections comparison identifies this coproduct with the image defining the second-filtration step, so the induced map onto that step is epic.",
+   "text": "Evaluate factorThru_arrow at n for the already proved restricted-sections factorization. Its image therefore lies in the subobject represented by the degree-n step inclusion. Precomposition with the explicit finite-diagonal comparison isomorphism does not change the image of the mapped-total inclusion.",
+   "uses": [
+    "def-weil-pbc-etale-restricted-total-construction",
+    "lem-weil-pbc-etale-restricted-sections-factors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each s in the finite interval [q,n], write s=q+(s-q).toNat. The stupid-truncation inclusion in degree s is an isomorphism. Applying sections, extending the resolution complex by zero, and evaluating at n-s preserves this isomorphism. The total-map coprojection identity identifies the restricted coprojection followed by the mapped-total inclusion with this isomorphism followed by the full coprojection. Hence the image of every full retained coprojection lies in the image of the mapped-total inclusion. Finset.sup_le and T.filtration_formula give the reverse containment. The argument is vacuous when n<q and works for negative q and zero summands.",
    "uses": [
     "def-weil-pbc-etale-restricted-total-construction",
     "def-weil-pbc-termwise-hypercohomology-presentation"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The two containments give equality of the sections inclusion image with the subobject of the degree-n filtered step. Transport the factor map along Subobject.underlyingIso to that subobject. The proved upstream lemma epi_of_imageSubobject_comp_arrow_eq makes the transported map epic; composing with the underlying isomorphism gives the original degree-n factor map and preserves epimorphicity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-restricted-total-construction",
+  "lem-weil-pbc-etale-restricted-sections-factors",
   "def-weil-pbc-termwise-hypercohomology-presentation"
  ],
  "proof_origin": {
-  "by": "stage-3 worker B3",
-  "document": "Stacks Project",
-  "place": "Tag 015J, proof remark (3), finite diagonal comparison"
+  "by": "stage-3 worker U3",
+  "document": "Stacks Project, Tag 015J; existing Lean total-complex and subobject API",
+  "place": "Finite-diagonal total comparison and column filtration; proof implemented using isIso_ιStupidTrunc_f, ιTotal_map, imageSubobject_iso_comp, and epi_of_imageSubobject_comp_arrow_eq"
  },
  "mathlib_searches": [
   {
@@ -118,10 +132,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T225257-L-1800595",
-  "kind": "interface",
+  "landing": "20261012T234225-L-2127077",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

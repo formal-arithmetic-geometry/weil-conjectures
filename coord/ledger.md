@@ -10148,3 +10148,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: merged deliver/S4/Sheaf.AlgebraicGeometry.PicardKunnethQcohFunctoriality (stage 3; reviewer PASS; first push; landing 20261012T234224-L-2126777 (interface); batch 20261012T234214; modules 3; new nodes 2)
 - 23:42 L: merged deliver/T3/Sheaf.AlgebraicGeometry.KernelTensorPullbackIsoExists (stage 3; reviewer PASS; first push; landing 20261012T234225-L-2126878 (proof); batch 20261012T234214; modules 1; new nodes 0)
 - 23:42 L: merged deliver/U2/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientIsoB (stage 3; reviewer PASS; first push; landing 20261012T234225-L-2126975 (interface); batch 20261012T234214; modules 3; new nodes 2)
+- 23:42 L: merged deliver/U3/Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsComponentEpi (stage 3; reviewer PASS; first push; landing 20261012T234225-L-2127077 (proof); batch 20261012T234214; modules 1; new nodes 0)
