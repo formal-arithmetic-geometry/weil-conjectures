@@ -1539,8 +1539,6 @@ public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.StrictlyHenselianNormal
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
-public import WeilConjectures.Scratch.AllBranch
-public import WeilConjectures.Scratch.SorryAudit
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
@@ -1929,6 +1927,7 @@ public import WeilConjectures.Topology.SpectralSpace.WLocal.Pullback
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
+public import WeilConjectures.WeilSheaf.BoundaryStalk
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
@@ -1975,6 +1974,7 @@ public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 public import WeilConjectures.WeilSheaf.Tensor
+public import WeilConjectures.WeilSheaf.TensorPower
 public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.WeilSheaf.TraceSeries
 public import WeilConjectures.WeilSheaf.Triangle
