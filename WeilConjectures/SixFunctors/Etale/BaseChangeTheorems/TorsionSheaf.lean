@@ -5,9 +5,12 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib
-public import WeilConjectures.CategoryTheory.RingObjects.Ab
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+public import Mathlib.Algebra.Homology.DerivedCategory.Plus
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+
 /-!
 
 # Torsion étale sheaves and torsion cohomology

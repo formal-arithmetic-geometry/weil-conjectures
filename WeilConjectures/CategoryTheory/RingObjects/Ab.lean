@@ -276,7 +276,19 @@ theorem monoidalClosed_uncurry {M N P : Ab.{u}} (f : N ⟶ (ihom M).obj P) (m : 
     (MonoidalClosed.uncurry f).hom (m ⊗ₜ[ℤ] n) = (f.hom n).hom m :=
   rfl
 
-instance : CategoryTheory.Abelian.HasFunctorialFlatResolution Ab.{u} := sorry
+/-- The unit `ℤ` of the tensor product is a separator of `Ab`: a morphism out of an abelian
+group `M` is determined by its composites with the maps `ℤ ⟶ M`, `n ↦ n • m`. -/
+theorem isSeparator_tensorUnit : IsSeparator (𝟙_ Ab.{u}) := by
+  rw [isSeparator_def]
+  intro M N f g h
+  ext m
+  simpa using congrArg (fun k ↦ k.hom (ULift.up (1 : ℤ)))
+    (h (ofHom (AddMonoidHom.mk' (fun n : ULift.{u} ℤ ↦ n.down • m) fun _ _ ↦ add_smul _ _ _)))
+
+/-- `Ab` admits functorial flat resolutions: the unit `ℤ` is a flat separator. -/
+instance : CategoryTheory.Abelian.HasFunctorialFlatResolution Ab.{u} :=
+  CategoryTheory.Abelian.hasFunctorialFlatResolution_of_flat_separator _
+    isSeparator_tensorUnit (ObjectProperty.prop_unit _)
 
 section Ring
 
