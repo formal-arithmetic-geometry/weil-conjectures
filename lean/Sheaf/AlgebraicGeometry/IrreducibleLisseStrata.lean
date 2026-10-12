@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
+import Sheaf.AlgebraicGeometry.IrreducibleLisseRefinement
 
 /-!
 # Irreducible lisse strata
@@ -57,6 +57,9 @@ theorem exists_irreducible_lisse_stratification
           ((etaleSetPullback (S.immersion i)).obj
             ((sheafCompose X.smallEtaleTopology
               (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F)) := by
-  sorry
+  rcases hF with ⟨S, hS⟩
+  exact exists_irreducible_refinement X
+    ((sheafCompose X.smallEtaleTopology
+      (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F) S hS
 
 end AlgebraicGeometry.Scheme

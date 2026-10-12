@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-irreducible-refinement",
+ "kind": "statement",
+ "title": "Irreducible refinement of a lisse stratification",
+ "statement": "Let X be Noetherian, F a sheaf of sets on X, and S a finite stratification such that F is finite locally constant on every stratum. Then there is a finite stratification T whose strata are irreducible and on which F remains finite locally constant.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-irreducible-lisse-strata.md",
+  "place": "proof step 2, order 1602"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Refine each Noetherian lisse stratum by finitely many irreducible components, remove earlier components, and use pullback preservation of finite local constancy.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-weil-pbc-pullback-finite-locally-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-pullback-finite-locally-constant"
+ ],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite stratification irreducible locally closed refinement",
+   "results": "No exact theorem found",
+   "date": "2026-10-12",
+   "verdict": "new intermediate statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Stratification irreducibleSpace",
+   "results": "No exact theorem found",
+   "date": "2026-10-12",
+   "verdict": "new intermediate statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Stratification irreducibleSpace",
+   "results": "No exact theorem found",
+   "date": "2026-10-12",
+   "verdict": "new intermediate statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IrreducibleLisseStrata",
+  "group": "U2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-irreducible-lisse-strata",
+   "place": "proof step 2",
+   "via": "irreducible refinement"
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IrreducibleLisseRefinement",
+  "declaration": "AlgebraicGeometry.Scheme.exists_irreducible_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/IrreducibleLisseRefinement.lean",
+  "statement": "theorem exists_irreducible_refinement (X : Scheme.{u}) [IsNoetherian X] (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (S : Stratification X) (hS : ∀ i : Fin S.n, IsFiniteLocallyConstantEtaleSheafOfSets ((etaleSetPullback (S.immersion i)).obj F)) : ∃ T : Stratification X, ∀ i : Fin T.n, IrreducibleSpace (T.domain i) ∧ IsFiniteLocallyConstantEtaleSheafOfSets ((etaleSetPullback (T.immersion i)).obj F)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T044757-L-2041677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T044757-L-2041677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
