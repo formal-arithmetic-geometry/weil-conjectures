@@ -1,0 +1,116 @@
+{
+ "id": "lem-sbc-pullback-single-comp",
+ "kind": "statement",
+ "title": "Pullback composition commutes with a sheaf in degree zero",
+ "statement": "Let Λ be a commutative ring, T,T₂,T₁ schemes [def-weil-pbc-scheme-conventions], π₂:T₂→T and π₁:T₁→T₂ arbitrary morphisms, and F an étale Λ-module sheaf on T [def-weil-pbc-etale-sheaves]. The π₁-derived pullback of the π₂ single-complex comparison, followed by the π₁ single-complex comparison and the degree-zero image of the inverse sheaf composition comparison π₁*π₂*F→(π₁≫π₂)*F, equals the inverse derived composition comparison evaluated on F[0], followed by the single-complex comparison for π₁≫π₂. This is an identity only on T₁; it contains no square, no morphism e and no direct image.",
+ "source": {
+  "document": "dag/nodes/sec-smooth-base-change/lem-sbc-pullback-comparison-comp.json; WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
+  "place": "Proof step 2 (coefficient identity); definitions mapDerivedCategoryPlusSingleFunctor, mapDerivedCategoryPlusCompIso, mapDerivedCategoryPlusNatIso, and their factorization lemmas"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "sbc-def-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Represent F[0] by the single cochain complex on F. The levelwise composition isomorphism is the sheaf pullback composition isomorphism in degree zero; in every other degree both routes are the unique zero morphisms. The levelwise single comparison is identity in degree zero and the unique zero-object comparison elsewhere. Thus the two routes agree degreewise.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the homotopy quotient and localization to this equality. Expand mapDerivedCategorySingleFunctor and the composition and natural-isomorphism comparisons using their factorization equations; naturality moves each factor past the levelwise comparison and intermediate factors cancel. Their restrictions define the bounded-below comparisons. The fully faithful inclusion of D⁺ into D reflects equality. Compose with the inverse underived sheaf composition comparison to obtain exactly the displayed inverse orientation. No hypotheses on π₁ or π₂ are needed, so identities and the zero sheaf satisfy the same calculation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "dag/nodes/sec-smooth-base-change/lem-sbc-pullback-comparison-comp.json; WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
+  "place": "Proof step 2 (coefficient identity); definitions mapDerivedCategoryPlusSingleFunctor, mapDerivedCategoryPlusCompIso, mapDerivedCategoryPlusNatIso, and their factorization lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical composition comparison for exact derived functors commutes with single complexes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of exact derived functors commutes with the functor placing a sheaf in degree zero",
+   "results": "mapDerivedCategoryFactorsh_hom_app, mapDerivedCategoryFactors and derived natural transformation composition; none states the single-complex composition compatibility.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "mapDerivedCategoryPlusSingleFunctor",
+   "results": "Unknown identifier; no match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlusSingleFunctor.*comp|upperStarPlusComp_single",
+   "results": "Only construction and shift compatibility in source ExactFunctor; no composition compatibility. Mathlib ExactFunctor gives single functor factorization but not this composite identity. Blueprint search single complex composition: no matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangePullbackComparisonComp",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof, condition (1): coefficient comparison in canonical restriction transitions",
+   "via": [
+    "lem-sbc-pullback-comparison-comp",
+    "lem-sbc-target-transition-comp"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtalePullbackSingleComp",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePullbackSingleComp.lean",
+  "declaration": "AlgebraicGeometry.Etale.upperStarPlusComp_single",
+  "statement": "theorem Etale.upperStarPlusComp_single\n    {T T₁ T₂ : Scheme.{u}} (π₁ : T₁ ⟶ T₂) (π₂ : T₂ ⟶ T)\n    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    D+((π₁)^*[ModuleCat.{u + 1} Λ]).map\n        ((((π₂)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F) ≫\n      ((((π₁)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app\n        (((π₂)^*[ModuleCat.{u + 1} Λ]).obj F)) ≫\n      (DerivedCategory.Plus.singleFunctor _ 0).map\n        ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) π₁ π₂ (π₁ ≫ π₂) rfl).inv.app F) =\n    (Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) π₁ π₂).inv.app\n        ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ≫\n      ((((π₁ ≫ π₂)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T110319-L-621902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T110319-L-621902",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

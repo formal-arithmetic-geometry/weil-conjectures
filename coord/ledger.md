@@ -7411,3 +7411,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/S3/Sheaf.Paper.ZariskiEtaleCanonicalLeray (stage 3; reviewer PASS; first push; landing 20261012T110318-L-621602 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:03 L: merged deliver/T1/Sheaf.Algebra.Homology.BaseTensorOrdinaryIso (stage 3; reviewer PASS; first push; landing 20261012T110319-L-621707 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/T2/Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechCocycles (stage 3; reviewer PASS; first push; landing 20261012T110319-L-621806 (interface); batch 20261012T110249; modules 2; new nodes 1)
+- 11:03 L: merged deliver/T3/Sheaf.AlgebraicGeometry.BaseChangePullbackComparisonComp (stage 3; reviewer PASS; first push; landing 20261012T110319-L-621902 (interface); batch 20261012T110249; modules 2; new nodes 1)
