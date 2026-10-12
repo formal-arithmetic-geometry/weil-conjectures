@@ -28,8 +28,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Let `R` be a normal domain with separably closed fraction field, `I` an ideal of `R` and
-`h ∈ R ⧸ I`. Then there are a normal domain `S` with separably closed fraction field and a closed
-immersion of the principal open `D(h)` of `Spec (R ⧸ I)` into `Spec S`.
+`h ∈ R ⧸ I`. Then there are a normal domain `S` with separably closed fraction field and a
+closed immersion of the principal open `D(h)` of `Spec (R ⧸ I)` into `Spec S`.
 
 (blueprint: `lem-weil-pbc-gabber-principal-open-closed-presentation`) -/
 theorem gabber_principal_open_closed_presentation {R : Type u} [CommRing R] [IsDomain R]
