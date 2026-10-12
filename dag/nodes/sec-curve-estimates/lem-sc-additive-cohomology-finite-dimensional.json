@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-additive-cohomology-finite-dimensional",
+ "kind": "statement",
+ "title": "Finite-dimensionality of the section-induced scalar action on first additive cohomology",
+ "statement": "Let f:C → Spec(k) be a smooth connected curve over an algebraically closed field k [def-sc-curves]. Let G be a sheaf of abelian groups in coefficient universe u+1 on the small etale site, with natural additive equivalences a_U:G(U) ≃ Γ(U,O_U). Let T be first derived etale cohomology on sheaves [def-weil-pbc-etale-cohomology]. Suppose m is a k-module structure on T(G), and for every c in k a sheaf endomorphism μ_c exists which multiplies sections under a_U by the pullback of c along U → C → Spec(k), and whose map on T(G) is multiplication by c for m. Then T(G), with this given action m, is finite-dimensional over k. There is no positive-characteristic, Frobenius, or surjectivity assertion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0A3N (proof), 03P2, 02O6; blueprint lem-sc-artin-schreier-dimension, steps 3--6"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sc-proper-or-affine. For an affine curve, lem-sc-etale-affine-qcoherent makes first cohomology zero. For a proper curve use the natural etale/Zariski comparison on O_C and proper coherent cohomology finiteness. Naturality for scalar multiplication gives finite-dimensionality for the transported action. The assumed section formula uniquely determines each scalar sheaf map, so the comparison preserves the given module action m, rather than merely some abstract additive equivalence.",
+   "uses": [
+    "lem-sc-proper-or-affine",
+    "lem-sc-etale-affine-qcoherent",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the injective-resolution model naturally with derived global sections using lem-sp-derived-functor-single-identification. For the larger coefficient universe compute with finite affine etale hypercovers: quasi-compactness supplies finite affine refinements, and lifting each finite cochain group identifies cocycles, boundaries, and scalar maps. Transport the Module structure, finiteness, and the scalar identities across these additive comparisons; no preservation of injectives by ULift is asserted.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proper-or-affine",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-pc-coherent-hi",
+  "lem-sp-derived-functor-single-identification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 0A3N, 03P2, 02O6; scalar and universe encoding supplied explicitly by K1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar multiplication on cohomology of the additive structure sheaf of a curve is finite dimensional",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar multiplication on the first cohomology group of the additive structure sheaf of a smooth curve over an algebraically closed field gives a finite dimensional vector space",
+   "date": "2026-10-12",
+   "results": "Cotangent cohomology and group-cohomology Hilbert90 results, no etale scalar model.",
+   "verdict": "No match; unrelated objects."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDimensional.*H|isProper_or_isAffine|homologyRightDerivedFunctorObjSingleFunctorIso; scalar.*cohomology|cohomology.*scalar",
+   "date": "2026-10-12",
+   "results": "Scheme.Modules.finiteDimensional_H_of_isProper; IsConnectedCurve.isProper_or_isAffine; Scheme.Modules.scalarCohomologyModule; EtaleZariskiQcohComparison; EtaleZariskiCohomology.",
+   "verdict": "The existing declarations provide component results but not the finite-dimensional derived etale scalar model for arbitrary natural section equivalences and large coefficients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierCohomologyEpi",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proof steps 3--6: proper/affine dichotomy, scalar action and finite-dimensionality of first additive cohomology",
+   "via": [
+    "lem-sc-artin-schreier-first-cohomology-epi"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyFiniteDimensional",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/AdditiveCohomologyFiniteDimensional.lean",
+  "declaration": "AlgebraicGeometry.finiteDimensional_etaleCohomology_one_of_scalar_model",
+  "statement": "theorem finiteDimensional_etaleCohomology_one_of_scalar_model {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤)) (ha : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U), a V (G.obj.map g x) = g.unop.left.appTop (a U x)) : let T := DerivedCategory.singleFunctor (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙ Etale.cohomology AddCommGrpCat.{u + 1} C (1 : ℤ) ∀ m : Module k (T.obj G), letI := m (∀ c : k, ∃ μ : G ⟶ G, (∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U), let ρ : k →+* Γ(U.unop.left, ⊤) := U.unop.hom.appTop.hom.comp (f.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom) a U (μ.hom.app U x) = a U x * ρ c) ∧ ∀ x : T.obj G, T.map μ x = c • x) → FiniteDimensional k (T.obj G)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T070540-L-3472542",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T070540-L-3472542",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

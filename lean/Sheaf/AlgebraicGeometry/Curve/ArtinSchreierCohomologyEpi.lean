@@ -2,15 +2,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
-import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
-import Sheaf.CategoryTheory.KInjectiveComputes
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.Paper.PQFCohomology
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
-import WeilConjectures.AlgebraicGeometry.Curve.Compactification
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyScalarModel
 import WeilConjectures.LinearAlgebra.SemilinearFrobenius
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 
 @[expose] public section
@@ -58,6 +52,50 @@ theorem epi_etaleCohomology_artinSchreier_one
     Epi ((Etale.cohomology AddCommGrpCat.{u + 1} C (1 : ℤ)).map
       ((DerivedCategory.singleFunctor
         (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).map wp)) := by
-  sorry
+  classical
+  let T := DerivedCategory.singleFunctor
+    (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
+      Etale.cohomology AddCommGrpCat.{u + 1} C (1 : ℤ)
+  obtain ⟨m, hfinite, hscalar⟩ :=
+    exists_finiteDimensional_etaleCohomology_one_scalar_model f G a ha
+  let := m
+  let := hfinite
+  have : T.Additive := by
+    dsimp [T, Etale.cohomology, Etale.rightDerivedGlobalSections]
+    infer_instance
+  let φ : G ⟶ G := wp + 𝟙 G
+  have hφ (U : C.Etaleᵒᵖ) (x : G.obj.obj U) :
+      a U (φ.hom.app U x) = (a U x) ^ p := by
+    change a U (wp.hom.app U x + x) = _
+    rw [map_add, hwp, sub_add_cancel]
+  have hsemi (c : k) (x : T.obj G) : T.map φ (c • x) = c ^ p • T.map φ x := by
+    obtain ⟨μ, hμ, hμmap⟩ := hscalar c
+    obtain ⟨ν, hν, hνmap⟩ := hscalar (c ^ p)
+    have hcomm : μ ≫ φ = φ ≫ ν := by
+      apply Sheaf.hom_ext
+      ext U y
+      apply (a U).injective
+      change a U (φ.hom.app U (μ.hom.app U y)) =
+        a U (ν.hom.app U (φ.hom.app U y))
+      rw [hφ, hμ, hν, hφ]
+      let ρ : k →+* Γ(U.unop.left, ⊤) := U.unop.hom.appTop.hom.comp
+        (f.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)
+      change (a U y * ρ c) ^ p = (a U y) ^ p * ρ (c ^ p)
+      rw [mul_pow, map_pow]
+    rw [← hμmap, ← AddCommGrpCat.comp_apply, ← T.map_comp, hcomm, T.map_comp,
+      AddCommGrpCat.comp_apply, hνmap]
+  let F : T.obj G →ₛₗ[frobenius k p] T.obj G :=
+    { toFun := T.map φ
+      map_add' := (T.map φ).hom.map_add
+      map_smul' := fun c x ↦ by simpa only [frobenius_def] using hsemi c x }
+  have hF (x : T.obj G) : F x - x = T.map wp x := by
+    change T.map (wp + 𝟙 G) x - x = _
+    rw [T.map_add, T.map_id]
+    change (T.map wp x + x) - x = _
+    exact add_sub_cancel_right _ _
+  apply (AddCommGrpCat.epi_iff_surjective _).mpr
+  intro y
+  obtain ⟨x, hx⟩ := LinearMap.Frobenius.surjective_sub_id F y
+  exact ⟨x, (hF x).symm.trans hx⟩
 
 end AlgebraicGeometry
