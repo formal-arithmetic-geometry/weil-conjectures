@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-total-bifunctor-comparison-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "Affine K-flat computation in the proof of Tag 08DV, used by the affine projection-formula argument",
+   "via": [
+    "lem-pc-affine-tilde-kflat",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An invertible bifunctor comparison induces an invertible total-complex comparison",
+ "statement": "Let $C_1,C_2,D,C_1^{\\prime},C_2^{\\prime},D^{\\prime}$ be categories, with zero morphisms in the four $C$ categories and preadditive structures on $D,D^{\\prime}$. Let $F:C_1\\times C_2\\to D$ and $F^{\\prime}:C_1^{\\prime}\\times C_2^{\\prime}\\to D^{\\prime}$ be bifunctors preserving zero morphisms in each variable, let $G_1:C_1\\to C_1^{\\prime}$ and $G_2:C_2\\to C_2^{\\prime}$ preserve zero morphisms, and let $G:D\\to D^{\\prime}$ be additive. Suppose $\\tau_{Y,Z}:G(F(Y,Z))\\to F^{\\prime}(G_1Y,G_2Z)$ is natural in both variables and each component is invertible. For complex shapes $c_1,c_2,c$ admitting signed totalization and decidable equality on total degrees, let $K_1,K_2$ be complexes of shapes $c_1,c_2$. Assume both total complexes below exist and that $G$ preserves coproducts indexed by the pairs of bidegrees contributing to each total degree. Then the induced comparison $G(\\operatorname{Tot}F(K_1,K_2))\\to \\operatorname{Tot}F^{\\prime}(G_1K_1,G_2K_2)$ is invertible.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/Bifunctor.lean",
+  "place": "HomologicalComplex.mapBifunctorComparison, lines 234-298; isomorphism instances at lines 284-298, already proved in the source library"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "In each total degree, the source after applying G is the coproduct of the images of the summands, because G preserves the indicated coproducts. The comparison sends each summand by its invertible component of tau to the corresponding summand of the target. Its inverse is the coproduct map induced by the inverse components. Checking on coproduct inclusions proves the inverse identities. Naturality of tau and additivity of G make the degreewise maps commute with the two differentials and their signs. A morphism of complexes invertible in every degree is invertible. This is precisely the existing proof in the recorded Lean source.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/Bifunctor.lean",
+    "place": "HomologicalComplex.mapBifunctorComparison, lines 234-298; isomorphism instances at lines 284-298, already proved in the source library"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/Bifunctor.lean",
+  "place": "HomologicalComplex.mapBifunctorComparison, lines 234-298; isomorphism instances at lines 284-298, already proved in the source library"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive functor preserving the coproducts defining total complexes and a natural isomorphism of bifunctors induce an isomorphism between the corresponding total tensor complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving the coproducts defining total complexes and a natural isomorphism of bifunctors induce an isomorphism between the corresponding total tensor complexes",
+   "results": "Eight hits, mainly HomologicalComplex.mapBifunctorAssociator and tensor associativity; no general postcomposition comparison in the pinned Mathlib. The exact theorem is already proved in WeilConjectures.Mathlib.Algebra.Homology.Bifunctor.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison|total.*[Ii]so",
+   "results": "Twenty hits concerning totalFlipIso and totalShiftIso; no mapBifunctorComparison in Mathlib. Source-library search located the exact comparison and its proved IsIso instance.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.Algebra.Homology.Bifunctor",
+  "declaration": "HomologicalComplex.instIsIsoMapBifunctorComparisonOfAppFunctor",
+  "statement": "instance [∀ X₁ X₂, IsIso ((τ.app X₁).app X₂)] :\n    IsIso (mapBifunctorComparison τ c K₁ K₂)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "HomologicalComplex.instIsIsoMapBifunctorComparisonOfAppFunctor",
+     "module": "WeilConjectures.Mathlib.Algebra.Homology.Bifunctor",
+     "line": 295
+    }
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T085238-L-14261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T085238-L-14261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

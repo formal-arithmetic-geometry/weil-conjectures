@@ -26,39 +26,51 @@
  ],
  "proof": [
   {
-   "text": "Fix a point x of X, corresponding to a prime ideal p of A. The stalk of the associated sheaf of each term of K^\\bullet is canonically K^n_p, and these identifications commute with the differentials; hence the stalk complex (\\widetilde{K^\\bullet})_x is the localization complex K^\\bullet \\otimes_A A_p, by the affine associated-sheaf stalk computation (Tag 01HV).",
+   "text": "For the affine tilde-stalk functor S and the restriction-of-scalars functor U, take the natural tensor isomorphism U(N tensor_B S(M)) ≅ U(N) tensor_A M.",
    "uses": [
-    "lem-weil-pbc-spec-tilde-stalk-localization"
+    "lem-pc-affine-tilde-stalk-tensor-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Lemma 01HV (lemma-spec-sheaves), item (7)"
+    "place": "Tag 01HV, lemma-spec-sheaves, item (7) and functoriality; combined with more-algebra.tex, Tag 06Y1, lemma-base-change-K-flat, tensor identity in the proof of Tag 08DV"
    }
   },
   {
-   "text": "For every prime p, the complex K^\\bullet \\otimes_A A_p is K-flat over A_p (base change of a K-flat complex, Tag 06Y1): if L^\\bullet is an acyclic complex of A_p-modules, it is also an acyclic complex of A-modules by restriction of scalars, and termwise L^a \\otimes_{A_p} (K^b \\otimes_A A_p) \\cong L^a \\otimes_A K^b naturally, compatibly with the differentials and signs, so \\operatorname{Tot}(L^\\bullet \\otimes_{A_p} (K^\\bullet \\otimes_A A_p)) \\cong \\operatorname{Tot}(L^\\bullet \\otimes_A K^\\bullet), which is acyclic by the K-flatness of K^\\bullet.",
+   "text": "The tilde-stalk functor and its tensor bifunctor preserve zero morphisms, as checked explicitly in Lean. Restriction of scalars is additive and preserves coproducts. Apply the proved general total-bifunctor comparison to the natural isomorphism of step 1. This gives U(Tot(F tensor_B stalk(tilde K))) ≅ Tot(U(F) tensor_A K) for every stalk-ring complex F.",
+   "uses": [
+    "lem-pc-total-bifunctor-comparison-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/Bifunctor.lean",
+    "place": "HomologicalComplex.mapBifunctorComparison, lines 234-298; isomorphism instances at lines 284-298, already proved in the source library"
+   }
+  },
+  {
+   "text": "Restriction of scalars preserves and reflects acyclicity. Indeed, in each degree exactness is the elementwise assertion that every element in the kernel of the outgoing differential is in the image of the incoming differential. Restriction leaves both underlying groups and both maps unchanged. The private lemma acyclic_restrictScalars_iff proves this by ShortComplex.moduleCat_exact_iff.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "lemma-base-change-K-flat (Tag 06Y1), more-algebra.tex lines 14209-14221"
+    "document": "Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean",
+    "place": "ShortComplex.moduleCat_exact_iff"
    }
   },
   {
-   "text": "Thus every stalk of \\widetilde{K^\\bullet} is K-flat. The reverse implication of the stalk criterion [lem-pc-kflat-stalk-criterion] then implies that \\widetilde{K^\\bullet} is K-flat as a complex of \\mathcal O_X-modules.",
+   "text": "If F is acyclic over the stalk ring, U(F) is acyclic over A by step 3, so hK makes Tot(U(F) tensor_A K) acyclic. Transport exactness degree by degree across the isomorphism of step 2, then reflect acyclicity using step 3. Every stalk of tilde K is therefore K-flat; the reverse implication of the stalk criterion proves isKFlat_tilde.",
    "uses": [
     "lem-pc-kflat-stalk-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 20.26.8 (Tag 06YB), reverse implication"
+    "place": "Tag 06YB, lemma-check-K-flat-stalks, reverse implication"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-pc-affine-tilde-stalk-tensor-comparison",
+  "lem-pc-total-bifunctor-comparison-iso",
   "lem-pc-kflat-stalk-criterion"
  ],
  "mathlib_searches": [
@@ -81,7 +93,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemma 36.3.6 (Tag 08DV), proof"
+  "place": "Tag 08DV, lemma-affine-K-flat; same affine stalk and scalar-extension argument, with totalization supplied by the source library"
  },
  "split_report": {
   "date": "2026-10-11",
@@ -137,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T085238-L-14261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,164 @@
+{
+ "id": "lem-pc-affine-tilde-stalk-tensor-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "Affine K-flat computation in the proof of Tag 08DV, used by the affine projection-formula argument",
+   "via": [
+    "lem-pc-affine-tilde-kflat",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Natural tensor comparison for associated-sheaf stalks",
+ "statement": "Let $A$ be a commutative ring, let $X=\\operatorname{Spec}(A)$ [def-pc-scheme], and let $x\\in X$. Put $B=\\mathcal O_{X,x}$ and let $\\rho:A\\to B$ be the canonical germ homomorphism. Write $S(M)=\\widetilde M_x$ for the stalk of the associated sheaf [lem-weil-pbc-spec-module-tilde-sections, def-pc-module-stalk-functor], as a $B$-module, and $U$ for restriction of scalars along $\\rho$. There exists an isomorphism of bifunctors from $\\operatorname{Mod}(B)\\times\\operatorname{Mod}(A)$ to $\\operatorname{Mod}(A)$, with components $U(N\\otimes_B S(M))\\cong U(N)\\otimes_A M$, natural in both $B$-module $N$ and $A$-module $M$. No flatness, acyclicity or boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, lemma-spec-sheaves, item (7) and functoriality; combined with more-algebra.tex, Tag 06Y1, lemma-base-change-K-flat, tensor identity in the proof of Tag 08DV"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the pinned Mathlib instance IsLocalizedModule for StructureSheaf.toStalkₗ A M x, and the IsLocalization instance for the stalk ring. The scalar tower identifying the restricted A-action with the germ action is proved by reflexivity. IsLocalizedModule.isBaseChange then identifies the stalk with B tensor_A M.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves, item (7) and functoriality; combined with more-algebra.tex, Tag 06Y1, lemma-base-change-K-flat, tensor identity in the proof of Tag 08DV"
+   }
+  },
+  {
+   "text": "Construct each component directly using IsBaseChange.tensorEquiv N, restricted to A, and convert the resulting linear equivalence to a ModuleCat isomorphism. Its inverse on pure tensors is n tensor m ↦ n tensor germ(m), as verified using cancelBaseChange_symm_tmul. This uses only proved Mathlib declarations; no existence witness is chosen.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y1, lemma-base-change-K-flat, tensor identity in its proof"
+   }
+  },
+  {
+   "text": "For naturality in M, compute the stalk map on the germ of the global section corresponding to m. stalkFunctor_map_germ_apply and tilde.toOpen_map_app give S(f)(germ(m)) = germ(f(m)). Thus the inverse component commutes with tensoring f, by TensorProduct.ext'. For naturality in N, the inverse formula on pure tensors immediately commutes with g tensor identity. NatIso.ofComponents first assembles the isomorphism in M and then in N; invert it to get the stated orientation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves, item (7) and functoriality; combined with more-algebra.tex, Tag 06Y1, lemma-base-change-K-flat, tensor identity in the proof of Tag 08DV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, lemma-spec-sheaves, item (7) and functoriality; combined with more-algebra.tex, Tag 06Y1, lemma-base-change-K-flat, tensor identity in the proof of Tag 08DV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor product of a module over the stalk ring of Spec A with the stalk of the associated sheaf of M, restricted to A, is naturally isomorphic to its tensor product over A with M",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of the total tensor of a stalk complex of an associated sheaf with a complex over the stalk ring is isomorphic to tensoring the restriction of scalars with the original complex",
+   "results": "Eight hits: ModuleCat.Tilde.stalkIso and related localization lemmas in an older snapshot, but no natural tensor comparison. Their names are absent from the pinned Tilde.lean.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictScalars",
+   "results": "Twelve restriction-of-scalars declarations, including faithfulness, additivity and adjunctions; none identifies tilde stalk tensors.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic|tensor",
+   "results": "No occurrences of acyclic or tensor in the pinned Mathlib AlgebraicGeometry/Modules subtree.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism tensor with extension of scalars, restriction of scalars, stalk module Spec",
+   "results": "Older ModuleCat.Tilde.stalkIso family; no exact natural tensor comparison in pinned Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsBaseChange.tensorEquiv",
+   "results": "Exact componentwise tensor equivalence found. It does not package the naturality for the actual tilde-stalk bifunctor; used in the complete proof.",
+   "date": "2026-10-12",
+   "verdict": "component tool used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.TildeStalkTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/TildeStalkTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.nonempty_restrictScalars_tensor_tildeStalkNatIso",
+  "statement": "theorem nonempty_restrictScalars_tensor_tildeStalkNatIso\n    (A : Type u) [CommRing A] (x : Spec (.of A)) :\n    let S := tilde.functor (.of A) ⋙\n      RingedSpace.moduleStalkFunctor (Spec (.of A)).toRingedSpace x\n    let U := ModuleCat.restrictScalars (StructureSheaf.toStalk A x).hom\n    Nonempty\n      ((Functor.postcompose₂.obj U).obj\n        ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj S).obj (curriedTensor _)) ≅\n      (((Functor.whiskeringLeft₂ _).obj U).obj (𝟭 _)).obj (curriedTensor _))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T085238-L-14261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T085238-L-14261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
