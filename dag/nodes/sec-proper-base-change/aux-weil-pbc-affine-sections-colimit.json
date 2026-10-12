@@ -1,0 +1,107 @@
+{
+ "id": "aux-weil-pbc-affine-sections-colimit",
+ "kind": "statement",
+ "title": "Filtered colimit of affine étale sections",
+ "statement": "For a scheme $S$, let $\\mathcal C$ be its full affine étale site with finite coverings [def-weil-pbc-full-affine-etale-site]. Let $J$ be a small filtered category, $E:J\\to\\operatorname{Sh}(\\mathcal C,\\mathrm{Set})$ a diagram, and $K$ a colimit cocone. For every $W\\in\\mathcal C$, evaluation at $W$ takes $K$ to a colimit cocone of sets. The index category may have no distinguished initial object, and empty affine objects and empty coverings are allowed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0738(4), lemma-colimits-are-sheafifications; Tag 00VM, sheaf condition; Categories Tag 002W"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-full-affine-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation preserves presheaf colimits. For a finite covering presieve, lift its finitely many sections to a common stage; the eventual equality criterion at finitely many pairwise pullbacks and a filtered wide span give compatibility. Glue at that stage. The analogous finite equality argument gives separatedness. Thus the presheaf colimit is a sheaf for the finite affine pretopology. Inclusion creates this colimit, and evaluation preserves it. Apply uniqueness of colimits to the supplied cocone K. Implemented in the private finite_sections_lift, finite_sections_equal and finitePresieve_isSheafFor_filteredColimit_large helpers.",
+   "uses": [
+    "def-weil-pbc-full-affine-etale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-full-affine-etale-site"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ proof; finite-cover argument for evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit sections of sheaves on a finite site",
+   "results": "unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections preserve filtered colimits on finite covering site",
+   "results": "Eight hits include Sheaf.hasFilteredColimitsOfSize, isSheaf_pointwiseColimit for extensive topology, and Point sheafFiber preservation. These do not state this affine étale assertion; the existing project SiteFilteredColimitSections theorem has smaller universes.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "affineSections_colimit|sheafToPresheaf|siteFilteredColimit_sections_bijective",
+   "results": "25 Mathlib text hits, chiefly Condensed, module sheaves, and sheaf-to-presheaf constructions. Project rg also found SiteFilteredColimitSections and ColimitSiteSections; their SmallCategory and coefficient universes do not apply directly to the full affine site.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionLiftAffine",
+  "date": "2026-10-12",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "degree-zero continuity: affine stage lifting, sheaf colimit and finite-cover evaluation portions",
+   "via": [
+    "lem-weil-pbc-sets-section-lift-affine",
+    "lem-weil-pbc-sets-section-lift",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSectionsColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSectionsColimit.lean",
+  "declaration": "AlgebraicGeometry.affineSections_colimit",
+  "statement": "theorem affineSections_colimit {S : Scheme.{u}} {J : Type u} [SmallCategory J] [IsFiltered J] (E : J ⥤ Sheaf (Scheme.fullAffineEtaleTopology S) (Type (u + 1))) (K : Cocone E) (hK : IsColimit K) (W : S.FullAffineEtale) : Nonempty (IsColimit (((sheafSections (Scheme.fullAffineEtaleTopology S) (Type (u + 1))).obj (op W)).mapCocone K))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-884e1",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101954",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-884e1",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101954",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules, DAG statements, report, change record, and both direct importers matched the stage-3 brief and compiled successfully."
+ }
+}

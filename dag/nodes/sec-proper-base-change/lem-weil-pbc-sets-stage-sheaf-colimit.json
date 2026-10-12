@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-sets-stage-sheaf-colimit",
+ "kind": "statement",
+ "title": "Stage inverse-image sheaf colimit on the affine site",
+ "statement": "Let $I$ be a nonempty directed preorder and $D:I^{op}\\to\\mathrm{Scheme}$ a system of qcqs schemes with affine transition maps. Let $c$ be a limit cone and fix $i_0$ and a sheaf of sets $G$ on $D(i_0)$ [def-weil-pbc-sets-section-comparison]. On the full affine étale site [def-weil-pbc-full-affine-etale-site] of $D(i_0)$, set $A_j=(f_j)_*f_j^{-1}G$ and $L=p_*p^{-1}G$, restricted to that site, where $f_j=D(j\\to i_0)$ and $p=c.\\pi_{i_0}$. Any diagram $E$ and cocone $K$ with objects $A_j$, point $L$, and maps and legs equal componentwise to the canonical section comparisons is a colimit cocone in sheaves of sets. This assertion is at sheaf level and does not assert that evaluation preserves the colimit.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ, proof via Sites Tags 09YN and 0A35"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sets-section-comparison",
+  "def-weil-pbc-full-affine-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Apply the affine-site colimit presentation to the cofinal upper tail. Use the inverse-image description of 0A35, local section representatives and local equality, then transport along full-affine restriction and unit-compatible composition. This identifies the sheafification of the stage presheaf colimit with the limit push-pull sheaf. The universal property of sheafification gives the colimit. The supplied component equations identify the diagram and cocone with these canonical maps. This step asserts local representatives, not preservation by evaluation.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-colimit-of-sites",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A35 inverse-image formula and local representative/equality argument; transport via affine étale site presentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit sections of sheaves on a finite site",
+   "results": "unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections preserve filtered colimits on finite covering site",
+   "results": "Eight hits include Sheaf.hasFilteredColimitsOfSize, isSheaf_pointwiseColimit for extensive topology, and Point sheafFiber preservation. These do not state this affine étale assertion; the existing project SiteFilteredColimitSections theorem has smaller universes.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "affineSections_colimit|sheafToPresheaf|siteFilteredColimit_sections_bijective",
+   "results": "25 Mathlib text hits, chiefly Condensed, module sheaves, and sheaf-to-presheaf constructions. Project rg also found SiteFilteredColimitSections and ColimitSiteSections; their SmallCategory and coefficient universes do not apply directly to the full affine site.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image sheaf on the limit of qcqs schemes is the filtered colimit of the stage push pull sheaves on the original etale site",
+   "results": "Eight hits in Mathlib.AlgebraicGeometry.AffineTransitionLimit concern structure-sheaf sections or scheme morphisms, not arbitrary set-valued sheaf continuity. Independent second-reader search.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionLiftAffine",
+  "date": "2026-10-12",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "degree-zero continuity: affine stage lifting, sheaf colimit and finite-cover evaluation portions",
+   "via": [
+    "lem-weil-pbc-sets-section-lift-affine",
+    "lem-weil-pbc-sets-section-lift",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetStageSheafColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetStageSheafColimit.lean",
+  "declaration": "AlgebraicGeometry.etaleSetStageSheaf_isColimit",
+  "statement": "theorem etaleSetStageSheaf_isColimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1))) : let ρ := (Scheme.fullAffineEtaleInclusion (D.obj (op i₀))).sheafPushforwardContinuous (Type (u + 1)) (Scheme.fullAffineEtaleTopology (D.obj (op i₀))) (D.obj (op i₀)).smallEtaleTopology let A := fun j : Over (op i₀) ↦ ρ.obj (((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).sheafPushforwardContinuous (Type (u + 1)) ((D.obj (op i₀)).smallGrothendieckTopology (P := @Etale) (Q := @Etale)) ((D.obj j.left).smallGrothendieckTopology (P := @Etale) (Q := @Etale))).obj ((Scheme.etaleSetPullback (D.map j.hom)).obj G)) let L := ρ.obj ((@Functor.sheafPushforwardContinuous _ _ _ _ (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))) (Type (u + 1)) _ ((D.obj (op i₀)).smallGrothendieckTopology (P := @Etale) (Q := @Etale)) (c.pt.smallGrothendieckTopology (P := @Etale) (Q := @Etale)) (Etale.isContinuous_overPullback (c.π.app (op i₀)))).obj ((Scheme.etaleSetPullback (c.π.app (op i₀))).obj G)) ∀ (E : (Over (op i₀))ᵒᵖ ⥤ Sheaf (Scheme.fullAffineEtaleTopology (D.obj (op i₀))) (Type (u + 1))) (K : Cocone E), (∀ j : Over (op i₀), E.obj (op j) = A j) → K.pt = L → (∀ (j k : Over (op i₀)) (a : k ⟶ j) (W : (D.obj (op i₀)).FullAffineEtale), Arrow.mk ((E.map a.op).hom.app (op W)) = Arrow.mk (etaleSetSectionComparison (D.map a.left) (D.map j.hom) (D.map k.hom) ((D.map_comp a.left j.hom).symm.trans (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) a.w)) G W.obj)) → (∀ (j : Over (op i₀)) (W : (D.obj (op i₀)).FullAffineEtale), Arrow.mk ((K.ι.app (op j)).hom.app (op W)) = Arrow.mk (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom) G W.obj)) → Nonempty (IsColimit K)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-884e1",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101954",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-884e1",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101954",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules, DAG statements, report, change record, and both direct importers matched the stage-3 brief and compiled successfully."
+ }
+}
