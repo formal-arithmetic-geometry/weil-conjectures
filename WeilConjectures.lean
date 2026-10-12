@@ -103,6 +103,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechFlat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModule
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModuleBaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
@@ -1756,7 +1757,6 @@ public import WeilConjectures.RingTheory.TateResidue.ResidueTheorem
 public import WeilConjectures.RingTheory.TateResidue.TateIdeals
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
-public import WeilConjectures.Scratch.ZzCensus
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
