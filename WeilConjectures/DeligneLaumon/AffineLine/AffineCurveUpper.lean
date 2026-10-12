@@ -364,6 +364,43 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology (D : LisseOnDenseOpen 
 
 end LisseOnDenseOpen
 
+/-- **Exceptional rank-one constituents.** Let `j : U₀ ⟶ 𝔸¹` be a dense open immersion and `𝓔` a
+Weil sheaf on `U₀` which is either a constant twist `ℚ̄_ℓ(b)` of the constant sheaf or the
+restriction of a twisted Artin–Schreier sheaf `ℒ_{ψ(a x)}(b)` with `a ≠ 0`. If `𝓔` is punctually
+`ι`-pure of weight `w`, then `H_c^i(U, 𝓔)` has weights at most `w + i` for every `i`: `𝓔` is
+lisse, and the estimate on dense opens of the line applies. The blueprint computes the
+cohomology of the line instead; the general estimate makes this unnecessary.
+(blueprint: `lem-a1-exceptional-constituents`) -/
+theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_exceptional {U : Scheme.{u}}
+    [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ affineLine k₀) [IsOpenImmersion j]
+    [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] [IsDominant j]
+    (ψ : AddChar k₀ (PadicAlgCl l)) (b : (PadicAlgCl l)ˣ) {E : WeilSheaf k₀ l U}
+    (hE : Nonempty (E ≅ (adicConstant k₀ l U).constantTwist b) ∨
+      ∃ a : k₀, a ≠ 0 ∧ Nonempty (E ≅ (upperStar j).obj ((artinSchreier ψ a).constantTwist b)))
+    {w : ℝ} (hw : E.IsPunctuallyPureOfWeight ι w) (i : ℤ) :
+    haveI : LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀)) := by
+      rw [← comp_over j]; infer_instance
+    haveI : IsSeparated (U ↘ Spec (CommRingCat.of k₀)) := by
+      rw [← comp_over j]; infer_instance
+    haveI : QuasiCompact (U ↘ Spec (CommRingCat.of k₀)) := by
+      rw [← comp_over j]; infer_instance
+    (E.compactlySupportedCohomology i).HasWeightsAtMostOver k₀ ι (w + i) := by
+  have hE' : E.IsLisse := by
+    rcases hE with ⟨⟨e⟩⟩ | ⟨a, -, ⟨e⟩⟩
+    · exact (IsLisse.constantTwist (isLisse_adicConstant k₀ l U)).of_iso e.symm
+    · exact (((isLisse_artinSchreier ψ a).constantTwist).upperStar j).of_iso e.symm
+  exact LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology ⟨U, j, E, hE'⟩ hw i
+
+/-- **Subquotients of pure sheaves are pure.** If `𝓖` is punctually `ι`-pure of weight `w` and
+`𝓢` is a subquotient of `𝓖`, a quotient `A ↠ 𝓢` of a subobject `A ↪ 𝓖`, then `𝓢` is punctually
+`ι`-pure of weight `w`: its stalks are Frobenius-stable subquotients of those of `𝓖`.
+(blueprint: `lem-a1-subquotient-pure`) -/
+theorem IsPunctuallyPureOfWeight.of_subquotient {X : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    {G A S : WeilSheaf k₀ l X} (i : A ⟶ G) [Mono i] (p : A ⟶ S) [Epi p] {w : ℝ}
+    (h : G.IsPunctuallyPureOfWeight ι w) : S.IsPunctuallyPureOfWeight ι w :=
+  (h.of_mono i).of_epi p
+
 end WeilSheaf
 
 end AlgebraicGeometry
