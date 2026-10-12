@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-etale-units-stalk-evaluation-overfield",
+ "kind": "lemma",
+ "title": "Evaluation equivalence of units stalks for arbitrary algebraically closed overfields",
+ "statement": "Let $K$ be a field, $K^s$ its separable closure, and $\\Omega$ an algebraically closed field containing $K^s$ in a compatible $K$-tower [def-pc-field-extension], [def-pd-separable-closure]. Let $p$ be the corresponding geometric point of $S=\\operatorname{Spec}K$ [def-weil-pbc-geometric-stalks] and let $\\mathbf G_m$ be its additive units sheaf [def-sc-gm-torsor]. There is an additive equivalence $e:(\\mathbf G_m)_p\\simeq\\operatorname{Additive}((K^s)^\\times)$ whose value on every germ, embedded into $\\Omega$, is evaluation of its section along its geometric lift, with the canonical global-sections isomorphism of Spec Omega and removal of ULift. No sheaf-representation equivalence or Galois-action datum is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QV, Example sheaves-point (2), 03QU; Morphisms 02G8"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pd-separable-closure",
+  "def-weil-pbc-geometric-stalks",
+  "def-sc-gm-torsor"
+ ],
+ "proof": [
+  {
+   "text": "The private proved helper factors a geometric lift through its image residue field. The source etale residue-field map theorem, and the isomorphism between Spec K and its residue-field spectrum, make that extension separable. The factorization is K-linear. Evaluation naturality and IsSeparable.map show every evaluated function is separable over K; this works for arbitrary Omega.",
+   "uses": [
+    "lem-sc-etale-residue-field-map-etale-tool"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Corestrict the given embedding Ks -> Omega to the relative separable closure of K in Omega. Both domain and codomain are separable closures, so Mathlib Algebra.IsAlgebraic.algHom_bijective2 (Lean algHom_bijective₂) makes this homomorphism bijective, using IsSepClosed.lift in the reverse direction. Invert it. Compose evaluation into the relative closure with this inverse, apply Units.map, Additive and ULift. Pullback compatibility and embedding injectivity give a compatible cocone. Use presheafFiberDesc and ULift.down to obtain an additive map, and its cocone identity for the displayed germ formula.",
+   "uses": [
+    "def-pd-separable-closure",
+    "def-weil-pbc-geometric-stalks",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the independent bijectivity theorem to the constructed map and its germ formula; AddEquiv.ofBijective gives the equivalence with the same evaluation formula.",
+   "uses": [
+    "lem-sc-etale-units-stalk-evaluation-overfield-bijective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pd-separable-closure",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-geometric-stalks",
+  "lem-sc-etale-residue-field-map-etale-tool",
+  "lem-sc-etale-units-stalk-evaluation-overfield-bijective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QV, Example sheaves-point (2), 03QU; Morphisms 02G8; E2 writes the residue-field refinement proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of geometric germs of the etale multiplicative group identifies its stalk over a field with the units of a separable closure",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk of the etale units sheaf on the spectrum of a field is the units of its separable closure equivariantly for Galois action",
+   "results": "Hits: AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.stalkClosedPointIso, ModuleCat.Tilde.isUnit_toStalk, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.stalkClosedPointIso_inv, AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom_germ, AlgebraicGeometry.Scheme.stalkClosedPointTo",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match; source tools used"
+  },
+  {
+   "tool": "grep",
+   "query": "gmSheaf.*(stalk|Fiber)|galois.*extend|toPresheafFiber_jointly_surjective",
+   "results": "Hits: Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/FieldTheory/Galois/Abelian.lean, Mathlib/FieldTheory/Galois/GaloisClosure.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean Read both library roots: algebraic-closure stalk evaluation exists but does not cover arbitrary Omega. Scheme.Hom.etale_residueFieldMap is proved in the source library.",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match; source tools used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleUnitsStalkRepresentation",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "geometric units-stalk identification in the field Brauer comparison: Tags 03QV, Example sheaves-point (2), 03QU; Morphisms 02G8",
+   "via": [
+    "lem-sc-etale-units-stalk-representation",
+    "lem-sc-etale-units-h2-reverse-embedding",
+    "lem-sc-etale-units-two-cocycle-comparison",
+    "lem-sc-etale-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfield",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleUnitsStalkEvaluationOverfield.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etaleUnits_stalk_evaluation_overfield",
+  "statement": "theorem exists_etaleUnits_stalk_evaluation_overfield (K Ω : Type u) [Field K] [Field Ω] [Algebra (SeparableClosure K) Ω] [Algebra K Ω] [IsScalarTower K (SeparableClosure K) Ω] [IsAlgClosed Ω] : let S := Spec (.of K) let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) ∃ e : ↑((p.sheafFiber (A := AddCommGrpCat.{u + 1})).obj S.gmSheaf) ≃+ Additive (SeparableClosure K)ˣ, ∀ (X : S.Etale) (x : p.fiber.obj X) (z : S.gmSheaf.obj.obj (op X)), algebraMap (SeparableClosure K) Ω (↑(Additive.toMul (e (p.toPresheafFiber X x S.gmSheaf.obj z)))) = (ΓSpecIso (.of Ω)).hom (x.left.appTop ((Additive.toMul z.down : Γ(X.left, ⊤)ˣ) : Γ(X.left, ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T202236-L-703212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T202236-L-703212",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

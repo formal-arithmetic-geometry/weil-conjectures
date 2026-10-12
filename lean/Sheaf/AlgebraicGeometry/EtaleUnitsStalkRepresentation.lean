@@ -8,8 +8,9 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
-import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfield
 import Sheaf.FieldTheory.GaloisAutomorphismExtension
+import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
@@ -27,6 +28,12 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+-- The categorical fibre and integer-module coercions require additional elaboration work.
+set_option maxHeartbeats 800000 in
+-- Keep the existing names of the two proof binders in the action hypothesis.
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
 /-- The geometric stalk of the units sheaf, transported by a canonical stalk equivalence,
 is equivariantly linearly equivalent to separable-closure units. No cohomology occurs here.
 
@@ -75,6 +82,57 @@ theorem exists_etaleUnits_stalk_linearEquiv
         ∀ (g : G) (x : (E.functor.obj S.gmSheaf).obj.V),
           e ((E.functor.obj S.gmSheaf).obj.ρ g x) =
             (Field.galoisUnitsTopRep K).ρ g (e x) := by
-  sorry
+  classical
+  dsimp only
+  intro E i hi
+  let S := Spec (.of K)
+  let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
+  obtain ⟨a, ha⟩ := exists_etaleUnits_stalk_evaluation_overfield K Ω
+  let b := (i.app S.gmSheaf).addCommGroupIsoToAddEquiv
+  let e : (E.functor.obj S.gmSheaf).obj.V ≃ₗ[ℤ] (Field.galoisUnitsTopRep K).V :=
+    (b.trans a).toIntLinearEquiv
+  refine ⟨e, ?_⟩
+  intro g v
+  let : Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨X, x, z, hz⟩ := p.toPresheafFiber_jointly_surjective
+    (P := S.gmSheaf.obj) ((i.hom.app S.gmSheaf) v)
+  have hv : (i.inv.app S.gmSheaf) (p.toPresheafFiber X x S.gmSheaf.obj z) = v := by
+    rw [hz, i.hom_inv_id_app_apply]
+  obtain ⟨τ, hτ⟩ := exists_algEquiv_extending_separableClosure K (SeparableClosure K) Ω g
+  let x' : p.fiber.obj X :=
+    Over.homMk (Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (by
+      rw [Category.assoc, x.w]
+      change Spec.map (CommRingCat.ofHom τ.toRingHom) ≫
+        Spec.map (CommRingCat.ofHom (algebraMap K Ω)) = _
+      rw [← Spec.map_comp]
+      congr 1
+      ext k
+      exact τ.commutes k)
+  have haction := (congrArg
+    (fun t ↦ (i.hom.app S.gmSheaf) ((E.functor.obj S.gmSheaf).obj.ρ g t)) hv).symm.trans
+      (hi S.gmSheaf g τ hτ X x x' rfl z)
+  change a ((i.hom.app S.gmSheaf) ((E.functor.obj S.gmSheaf).obj.ρ g v)) =
+    (Field.galoisUnitsTopRep K).ρ g (a ((i.hom.app S.gmSheaf) v))
+  rw [haction, ← hz]
+  apply Additive.toMul.injective
+  apply Units.ext
+  apply (algebraMap (SeparableClosure K) Ω).injective
+  rw [ha]
+  change (ΓSpecIso (.of Ω)).hom
+    (x'.left.appTop ((Additive.toMul z.down : Γ(X.left, ⊤)ˣ) : Γ(X.left, ⊤))) =
+    algebraMap (SeparableClosure K) Ω
+      (g (↑(Additive.toMul (a (p.toPresheafFiber X x S.gmSheaf.obj z)))))
+  have hτ' (t : SeparableClosure K) :
+      algebraMap (SeparableClosure K) Ω (g t) = τ (algebraMap (SeparableClosure K) Ω t) :=
+    DFunLike.congr_fun hτ t
+  rw [hτ', ha]
+  change (ΓSpecIso (.of Ω)).hom
+    ((Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left).appTop
+      ((Additive.toMul z.down : Γ(X.left, ⊤)ˣ) : Γ(X.left, ⊤))) = _
+  rw [Scheme.Hom.comp_appTop]
+  exact ConcreteCategory.congr_hom (ΓSpecIso_naturality (CommRingCat.ofHom τ.toRingHom))
+    (x.left.appTop ((Additive.toMul z.down : Γ(X.left, ⊤)ˣ) : Γ(X.left, ⊤)))
 
 end AlgebraicGeometry.Scheme
