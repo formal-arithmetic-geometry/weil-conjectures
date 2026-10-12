@@ -1,0 +1,247 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group H1
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
+
+/-!
+# Transport of the etale module inverse image
+
+Source: Stacks Project, Modules on Sites, Tags 03D2, 03D3, 03D6, 03D7, 04JC;
+Sites and Sheaves, Example 0H7J
+(blueprint: lem-weil-pbc-etale-module-inverse-image-transport).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits
+open scoped TensorProduct ChangeOfRings
+
+namespace AlgebraicGeometry
+
+/-- Transport the module inverse image and its adjunction along a ring comparison.
+Source: Stacks Project, Modules on Sites, Lemmas 03D2, 03D3, 03D7 and Definition 03D6.
+(blueprint: lem-weil-pbc-etale-module-inverse-image-transport).
+
+Proof: Use the module lift and adjunction of `etaleInverseImageModuleAdjunction`
+for RV. Identify its ring lift with the supplied Lr by uniqueness of left
+adjoints, using the hom-equivalence compatibility to identify their underlying
+set comparisons. Transport the module action across this identification to
+obtain L0 and e0. Applying the set pullback to the original action gives the
+required action equation. The prescribed sectionwise scalar multiplication
+uniquely determines muU, since morphisms of sheaves are determined by sections.
+Restrict scalars along c.inv to obtain LM, the comparison t and e. The inverse
+restriction along c.hom gives an equivalence. Compose this equivalence with
+the module adjunction: its right adjoint is pushforward along gamma because
+      ar.homEquiv c.hom = gamma. Under forgetting, the hom equivalence, unit and
+counit are those of the abelian adjunction, with the displayed comparison e.
+For the tensor comparison, sectionwise send a tensor m to c.inv(a) times m;
+the inverse sends m to 1 tensor m. The balancing relation and the inverse-ring
+identities prove these maps are inverse linear maps. They commute with
+restriction and module morphisms, and sheafification gives d and its formulas.
+No exactness is asserted here. -/
+theorem etaleModuleInverseImageTransport (U V : Scheme.{u}) (f : U ⟶ V)
+    (R : CommRingCat.{u + 1})
+    (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
+    (RU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1})
+    (etaV : ((Functor.const V.Etaleᵒᵖ).obj R) ⟶ RV.obj)
+    (etaU : ((Functor.const U.Etaleᵒᵖ).obj R) ⟶ RU.obj)
+    (Lr : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤ Sheaf U.smallEtaleTopology
+      CommRingCat.{u + 1})
+      (ar : Lr ⊣ (MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous
+        CommRingCat.{u + 1} (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology
+        @Etale))
+      (er : Lr ⋙ sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology ≅ sheafForget (D :=
+        CommRingCat.{u + 1}) V.smallEtaleTopology ⋙ Scheme.etaleSetPullback f)
+      (ea : Etale.upperStar AddCommGrpCat.{u + 1} f ⋙ sheafForget (D := AddCommGrpCat.{u + 1})
+        U.smallEtaleTopology ≅ sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology ⋙
+        Scheme.etaleSetPullback f)
+      (gamma : RV ⟶ ((MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous
+        CommRingCat.{u + 1} (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology
+        @Etale)).obj RU) (c : Lr.obj RV ≅ RU)
+    (hc :
+      ar.homEquiv RV RU c.hom = gamma)
+    (hconst :
+      (∀ (W : V.Etaleᵒᵖ) (r : R),
+      gamma.hom.app W ((etaV).app W r) =
+        (etaU).app ((MorphismProperty.Over.pullback @Etale ⊤ f).op.obj W) r))
+    (hr :
+      (∀ (G : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
+      (F : Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (h : Lr.obj G ⟶ F),
+      (sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology).map (ar.homEquiv G F h) =
+        (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+          (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1)) (V.smallGrothendieckTopology
+          @Etale) (U.smallGrothendieckTopology @Etale)).homEquiv ((sheafForget (D :=
+          CommRingCat.{u + 1}) V.smallEtaleTopology).obj G) ((sheafForget (D := CommRingCat.{u +
+          1}) U.smallEtaleTopology).obj F)
+          (er.inv.app G ≫ (sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology).map h)))
+    (ha :
+      (∀ (G : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1})
+      (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (h : (Etale.upperStar
+        AddCommGrpCat.{u + 1} f).obj G ⟶ F),
+      (sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology).map
+        ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv G F h) =
+        (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+          (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1)) (V.smallGrothendieckTopology
+          @Etale) (U.smallGrothendieckTopology @Etale)).homEquiv ((sheafForget (D :=
+          AddCommGrpCat.{u + 1}) V.smallEtaleTopology).obj G) ((sheafForget (D := AddCommGrpCat.{u
+          + 1}) U.smallEtaleTopology).obj F)
+          (ea.inv.app G ≫ (sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).map h)))
+    :
+    ∃ (L0 : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u +
+      1} RingCat.{u + 1})).obj RV) ⥤ SheafOfModules.{u + 1} ((sheafCompose U.smallEtaleTopology
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj RV)))
+      (LM : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u +
+        1} RingCat.{u + 1})).obj RV) ⥤ SheafOfModules.{u + 1} ((sheafCompose U.smallEtaleTopology
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU))
+      (e0 : L0 ⋙ SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂
+        CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj RV)) ≅ SheafOfModules.toSheaf
+        ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)
+        ⋙ Etale.upperStar AddCommGrpCat.{u + 1} f)
+      (e : LM ⋙ SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u
+        + 1} RingCat.{u + 1})).obj RU) ≅ SheafOfModules.toSheaf ((sheafCompose
+        V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV) ⋙
+        Etale.upperStar AddCommGrpCat.{u + 1} f)
+      (t : LM ⋙ SheafOfModules.pushforward (F := 𝟭 U.Etale) ((sheafCompose U.smallEtaleTopology
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c).hom ≅ L0)
+      (am : LM ⊣ SheafOfModules.pushforward (J := V.smallGrothendieckTopology @Etale) (K :=
+        U.smallGrothendieckTopology @Etale) (F := MorphismProperty.Over.pullback @Etale ⊤ f)
+        ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+        gamma)),
+    (∀ G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1}
+      RingCat.{u + 1})).obj RV),
+      (SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1}
+        RingCat.{u + 1})).obj (Lr.obj RV))).map (t.hom.app G) ≫ e0.hom.app G = e.hom.app G) ∧
+    (∀ G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1}
+      RingCat.{u + 1})).obj RV),
+      ∃ (muV : ((sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology).obj RV) ⨯
+        ((sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology).obj
+        ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1}
+        RingCat.{u + 1})).obj RV)).obj G)) ⟶
+          (sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology).obj
+            ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u +
+            1} RingCat.{u + 1})).obj RV)).obj G)),
+      (∀ (W : V.Etaleᵒᵖ)
+        (x : ((((sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology).obj RV) ⨯
+          ((sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology).obj
+          ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u +
+          1} RingCat.{u + 1})).obj RV)).obj G))).obj.obj W)),
+        HEq (muV.hom.app W x)
+          (@SMul.smul (((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u
+            + 1})).obj RV).obj.obj W) (G.val.obj W) (G.val.obj W).isModule.toSMul
+          ((prod.fst : ((sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology).obj RV) ⨯
+            ((sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology).obj
+            ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u +
+            1} RingCat.{u + 1})).obj RV)).obj G)) ⟶ (sheafForget (D := CommRingCat.{u + 1})
+            V.smallEtaleTopology).obj RV).hom.app W x : ((sheafCompose V.smallEtaleTopology
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV).obj.obj W)
+            ((prod.snd : ((sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology).obj RV) ⨯
+              ((sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology).obj
+              ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u
+              + 1} RingCat.{u + 1})).obj RV)).obj G)) ⟶ (sheafForget (D := AddCommGrpCat.{u + 1})
+              V.smallEtaleTopology).obj ((SheafOfModules.toSheaf ((sheafCompose
+              V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)).obj
+              G)).hom.app W x : G.val.obj W))) ∧
+      ∃! (muU : ((sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology).obj (Lr.obj RV)) ⨯
+          ((sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).obj
+            ((SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u +
+            1} RingCat.{u + 1})).obj (Lr.obj RV))).obj (L0.obj G))) ⟶
+          (sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).obj
+            ((SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u +
+            1} RingCat.{u + 1})).obj (Lr.obj RV))).obj (L0.obj G))),
+      (∀ (W : U.Etaleᵒᵖ)
+        (x : ((((sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology).obj (Lr.obj RV)) ⨯
+          ((sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).obj
+            ((SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u +
+            1} RingCat.{u + 1})).obj (Lr.obj RV))).obj (L0.obj G)))).obj.obj W)),
+        HEq (muU.hom.app W x)
+          (@SMul.smul (((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u
+            + 1})).obj (Lr.obj RV)).obj.obj W) ((L0.obj G).val.obj W) ((L0.obj G).val.obj
+            W).isModule.toSMul
+          ((prod.fst : ((sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology).obj (Lr.obj
+            RV)) ⨯ ((sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).obj
+            ((SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u +
+            1} RingCat.{u + 1})).obj (Lr.obj RV))).obj (L0.obj G))) ⟶ (sheafForget (D :=
+            CommRingCat.{u + 1}) U.smallEtaleTopology).obj (Lr.obj RV)).hom.app W x :
+            ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+            (Lr.obj RV)).obj.obj W)
+            ((prod.snd : ((sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology).obj
+              (Lr.obj RV)) ⨯ ((sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).obj
+              ((SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u
+              + 1} RingCat.{u + 1})).obj (Lr.obj RV))).obj (L0.obj G))) ⟶ (sheafForget (D :=
+              AddCommGrpCat.{u + 1}) U.smallEtaleTopology).obj ((SheafOfModules.toSheaf
+              ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u +
+              1})).obj (Lr.obj RV))).obj (L0.obj G))).hom.app W x : (L0.obj G).val.obj W))) ∧
+      (Scheme.etaleSetPullback f).map muV =
+        prodComparison (Scheme.etaleSetPullback f) ((sheafForget (D := CommRingCat.{u + 1})
+          V.smallEtaleTopology).obj RV)
+          ((sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology).obj
+            ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u +
+            1} RingCat.{u + 1})).obj RV)).obj G)) ≫
+        prod.map (er.inv.app RV)
+          (((sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).mapIso (e0.app G) ≪≫
+            ea.app ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂
+            CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)).obj G)).inv) ≫
+        muU ≫ ((sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).mapIso (e0.app G) ≪≫
+          ea.app ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂
+            CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)).obj G)).hom) ∧
+    (∃ (d : ∀ G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂
+      CommRingCat.{u + 1} RingCat.{u + 1})).obj RV),
+        SheafOfModules.changeOfRings.{u, u + 1, u + 1} (J := U.smallEtaleTopology) c.hom (L0.obj
+          G) ≅ LM.obj G),
+      (∀ (G H : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u
+        + 1} RingCat.{u + 1})).obj RV)) (h : G ⟶ H),
+        SheafOfModules.changeOfRingsHom.{u, u + 1, u + 1} (J := U.smallEtaleTopology) c.hom
+          (L0.obj G) (L0.map h) ≫ (d H).hom =
+          (d G).hom ≫ LM.map h) ∧
+      (∀ (G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u +
+        1} RingCat.{u + 1})).obj RV)) (W : U.Etaleᵒᵖ)
+        (a : RU.obj.obj W) (m : (L0.obj G).val.obj W),
+        (d G).hom.val.app W
+          ((toSheafify U.smallEtaleTopology
+            (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} (J := U.smallEtaleTopology)
+              c.hom (L0.obj G)).presheaf).app W
+              (a ⊗ₜ[(Lr.obj RV).obj.obj W, (c.hom.hom.app W).hom] m)) =
+          (t.inv.app G).val.app W ((c.inv.hom.app W a) • m))) ∧
+    (∀ (G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u +
+      1} RingCat.{u + 1})).obj RV)) (F : SheafOfModules.{u + 1} ((sheafCompose
+      U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU))
+      (h : LM.obj G ⟶ F),
+      (SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1}
+        RingCat.{u + 1})).obj RV)).map (am.homEquiv G F h) =
+        (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv
+          ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u +
+          1} RingCat.{u + 1})).obj RV)).obj G)
+          ((SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u +
+            1} RingCat.{u + 1})).obj RU)).obj F)
+          (e.inv.app G ≫ (SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂
+            CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)).map h)) ∧
+    (∀ G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1}
+      RingCat.{u + 1})).obj RV),
+      (SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1}
+        RingCat.{u + 1})).obj RV)).map (am.unit.app G) =
+        (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app
+          ((SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u +
+          1} RingCat.{u + 1})).obj RV)).obj G) ≫
+          (Etale.lowerStar AddCommGrpCat.{u + 1} f).map (e.inv.app G)) ∧
+    (∀ F : SheafOfModules.{u + 1} ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1}
+      RingCat.{u + 1})).obj RU),
+      (SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1}
+        RingCat.{u + 1})).obj RU)).map (am.counit.app F) =
+        e.hom.app ((SheafOfModules.pushforward (J := V.smallGrothendieckTopology @Etale) (K :=
+          U.smallGrothendieckTopology @Etale) (F := MorphismProperty.Over.pullback @Etale ⊤ f)
+          ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          gamma)).obj F) ≫
+          (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).counit.app
+            ((SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u +
+            1} RingCat.{u + 1})).obj RU)).obj F)) := by sorry
+
+end AlgebraicGeometry

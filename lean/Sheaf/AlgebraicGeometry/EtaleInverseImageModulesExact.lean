@@ -8,10 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleConstantRingInverseImageComparison
+import Sheaf.AlgebraicGeometry.EtaleModuleInverseImageTransport
 
 /-!
 # Exact inverse image of constant-ring modules on the small etale site
@@ -30,6 +28,8 @@ open scoped TensorProduct ChangeOfRings
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 1200000 in
+-- Elaborating the dependent witness package and its comparisons exceeds the default limit.
 set_option backward.defeqAttrib.useBackward true in
 /-- Constant-ring inverse image is the exact module pullback, with the abelian adjunction.
 Source: Stacks Project, Tags 03D2, 03D3, 03D6, 03D7, 04JC and Example 0H7J
@@ -258,6 +258,25 @@ theorem etaleInverseImageModulesExact (U V : Scheme.{u}) (f : U ⟶ V)
       ((constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj R)
       (toSheafify V.smallEtaleTopology ((Functor.const V.Etaleᵒᵖ).obj R))
       (toSheafify U.smallEtaleTopology ((Functor.const U.Etaleᵒᵖ).obj R)) := by
-  sorry
+  classical
+  obtain ⟨Lr, ar, er, ea, gamma, c, hc, hconst, hr, ha⟩ :=
+    etaleConstantRingInverseImageComparison U V f R
+  obtain ⟨L0, LM, e0, e, t, am, ht, hmu, hd, hm, hu, he⟩ :=
+    etaleModuleInverseImageTransport U V f R _ _ _ _ Lr ar er ea gamma c
+      hc hconst hr ha
+  refine ⟨Lr, ar, er, ea, gamma, c, hc, hconst, hr, ha,
+    L0, LM, e0, e, t, am, ?_, ?_, ?_, ht, hmu, hd, hm, hu, he⟩
+  · let FU := SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      ((constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj R))
+    have : (LM ⋙ FU).Additive := Functor.additive_of_iso e.symm
+    exact Functor.additive_of_comp_faithful LM FU
+  · let FU := SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      ((constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj R))
+    have : PreservesFiniteLimits (LM ⋙ FU) := preservesFiniteLimits_of_natIso e.symm
+    exact preservesFiniteLimits_of_reflects_of_preserves LM FU
+  · let := am.isLeftAdjoint
+    infer_instance
 
 end AlgebraicGeometry
