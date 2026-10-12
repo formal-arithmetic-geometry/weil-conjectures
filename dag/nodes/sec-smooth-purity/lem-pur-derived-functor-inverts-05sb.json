@@ -24,37 +24,37 @@
  ],
  "proof": [
   {
-   "text": "Write J_X=S/X and J_Y=S/Y for the cofiltered denominator categories of Definition 05S9. Since s lies in S, MS1 gives a functor c:J_X→J_Y, (u:X'→X) ↦ (s∘u:X'→Y), and the pro-diagram of J_Y composed with c is literally the pro-diagram (u:X'→X) ↦ F(X') of J_X. The functor c is initial: for every denominator t:Z→Y, the second MS2 clause applied to t∈S and s gives a denominator u:W→X and v:W→Z with t∘v=s∘u, i.e. a morphism c(u)→t in J_Y; and given two morphisms c(u)→t, c(u')→t, pass to a common object u'' of the cofiltered J_X mapping to u and u', so that one gets two maps a,b:W''→Z with t∘a=t∘b, and the second MS3 clause (t∈S with source Z) gives a denominator r with a∘r=b∘r, which (composed into J_X) connects the two morphisms. By Stacks Categories Lemma 0A1T (restriction along an initial functor of cofiltered categories), the pro-diagram of J_X is essentially constant exactly when that of J_Y is. Therefore LF is defined at X if and only if it is defined at Y.",
+   "text": "Install the right fraction calculus supplied by Situation 05S8. Construct S/X as a cofiltered category: the identity denominator proves nonemptiness, MS2 completes a pair of denominators to a common source, and MS3 equalizes parallel arrows after a denominator refinement. For s in S construct c:S/X→S/Y by postcomposition. MS2 gives an arrow c(a)→b for each b in S/Y. For parallel arrows c(a)→b, MS3 applied to b.hom gives a refinement of a equalizing them. Mathlib Functor.initial_of_exists_of_isCofiltered proves c initial. The composite of c with the denominator diagram over Y is definitionally the denominator diagram over X. Apply initial_iff_essentiallyConstantProDiagram to obtain equivalence of essential constancy with each fixed value L; existentially quantify L to obtain the iff of definedness.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "lem-pur-essential-constant-cofinal-0a1s"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SB(2), using Situation 05S8 MS1-MS3 and Categories Lemma 0A1T"
+   }
+  },
+  {
+   "text": "For the supplied cone uX, prove the limit property explicitly: if j₀ and r witness essential constancy, lift a cone v by v(j₀) composed with r. At each j the common-stage factorization and naturality of v give the leg equation; the retraction equation at j₀ gives uniqueness. Apply the same construction to uY. Mathlib Functor.Initial.isLimitWhiskerEquiv restricts the uY limit along c. The two limit cones over S/X have a canonical conePointUniqueUpToIso e:LX≅LY. Its hom satisfies e.hom composed with uY(c(a)) = uX(a). Every denominator square gives an actual arrow c(a)→b, so naturality of uY supplies the required first equation for e.hom. Applying F to the denominator square, using functoriality and this first equation gives the outer rectangle. The hom of e is an isomorphism. This constructs the comparison directly, without invoking 05SA or leaving a separately chosen inverse.",
    "uses": [
     "def-pur-saturated-triangulated-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SB(2), using Situation 05S8 MS1-MS3, Definition 05S9 and Categories Lemma 0A1T"
-   }
-  },
-  {
-   "text": "Assume both values exist. Lemma 05SA(2) gives LF(s):LF(X)→LF(Y). Use the reverse MS2 comparison: for each denominator s':Y'→Y choose a denominator t':X'→X and a map t:X'→Y' with s∘t'=s'∘t. Applying F(t) and the cone maps defines a morphism LF(Y)→LF(X); MS3 makes it independent of the chosen square. After a further common denominator, MS3 also makes each composite equal to the corresponding identity comparison. The uniqueness clause of 05SA(2) then identifies the composites with id_{LF(X)} and id_{LF(Y)}, so LF(s) is an isomorphism.",
-   "uses": [
-    "def-pur-saturated-triangulated-localization",
-    "lem-pur-derived-functor-morphisms-05sa"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SB(2), using Lemma 05SA(2) and Situation 05S8 MS2-MS3"
+    "place": "Lemma 05SB(2); the limit-cone argument follows the retraction and common-stage criterion of Categories Definition 05PU(2)"
    }
   }
  ],
  "proof_deps": [
   "def-pur-saturated-triangulated-localization",
-  "lem-pur-derived-functor-morphisms-05sa"
+  "lem-pur-essential-constant-cofinal-0a1s"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05SB(2) (source proof is omitted; argument written from Situation 05S8 MS2-MS3 and Lemma 05SA(2))"
+  "place": "Lemma 05SB(2), via MS1-MS3, Categories Lemma 0A1T and uniqueness of limit cones (W3 stage-3 Lean proof)"
  },
  "mathlib_searches": [
   {
@@ -133,5 +133,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-84fa0",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T144158-L-2111996",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and proof to the node, dependencies, and report; verified declared import changes, DAG fields, clean compilation of the delivery and sole direct importer LeftDerivedExactWhenDefined, and axioms (sorryAx only through the reported upstream essential-constancy theorem)."
  }
 }
