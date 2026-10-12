@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-flat-ring-map-iff-ind-flat",
+ "kind": "statement",
+ "title": "A ring map is flat if and only if it is ind-flat",
+ "statement": "Let $A$ and $B$ be commutative rings in one universe and let $f:A\\to B$ be a ring map. Then $f$ is flat [def-weil-pbc-flat-ring-map] if and only if it is a filtered colimit of flat ring maps out of $A$, with the colimit formed in the category of $A$-algebras [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "WeilConjectures/RingTheory/ProEtale/FaithfullyFlat.lean",
+  "place": "RingHom.Flat.iff_ind_flat and CommRingCat.ind_flat_eq_flat; the module-colimit flatness argument is Stacks Tag 05UT, https://stacks.math.columbia.edu/tag/05UT"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "For the forward implication take the one-object diagram consisting of f. For the reverse implication forget the filtered algebra colimit to modules: the forgetful functors preserve filtered colimits [lem-weil-pbc-filtered-colimit-algebras-elementwise]. Every stage is a flat A-module, so [lem-weil-pbc-filtered-colimit-flat-modules] makes the underlying A-module of B flat. This is exactly flatness of f. The existing source proof implements this through ObjectProperty.ind_inverseImage_le and ModuleCat.ind_flat.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-filtered-colimit-flat-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-filtered-colimit-flat-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "WeilConjectures/RingTheory/ProEtale/FaithfullyFlat.lean",
+  "place": "CommRingCat.ind_flat_eq_flat, lines 178-189; RingHom.Flat.iff_ind_flat, lines 248-252"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of flat ring homomorphisms is flat",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of flat ring maps is flat",
+   "results": "RingHom.Flat.stableUnderComposition, RingHom.Flat.comp, RingHom.Flat.propertyIsLocal; no direct match among returned hits.",
+   "date": "2026-10-12",
+   "verdict": "Use the existing source-library theorem instead."
+  },
+  {
+   "tool": "grep",
+   "query": "ind_flat_eq_flat|iff_ind_flat|flat_of_colimitPresentation in Mathlib, WeilConjectures, Sheaf and dag/nodes",
+   "results": "Found RingHom.Flat.iff_ind_flat and CommRingCat.ind_flat_eq_flat in WeilConjectures.RingTheory.ProEtale.FaithfullyFlat; no DAG node records them. Pinned sorry map marks both s=false, ts=false.",
+   "date": "2026-10-12",
+   "verdict": "exact existing source theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PairHenselizationFlatQuotients",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Flatness step of the henselization argument used for finite etale lifting",
+   "via": [
+    "lem-weil-pbc-henselization-flat-quotients",
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "WeilConjectures.RingTheory.ProEtale.FaithfullyFlat",
+  "declaration": "RingHom.Flat.iff_ind_flat",
+  "statement": "lemma iff_ind_flat (f : R →+* S) : f.Flat ↔ MorphismProperty.ind.{u} CommRingCat.flat (CommRingCat.ofHom f)",
+  "branch": "slopmaster2",
+  "by": "X2",
+  "date": "2026-10-12",
+  "existing": true
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "RingHom.Flat.iff_ind_flat",
+     "sorry": false
+    }
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085402-L-48799",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085402-L-48799",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
