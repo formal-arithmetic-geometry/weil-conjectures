@@ -10,6 +10,11 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+import Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisInvariants
+import Sheaf.RepresentationTheory.DiscreteInvariantsContinuousComparison
+import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
+import Sheaf.FieldTheory.GaloisAutomorphismExtension
+import Mathlib.FieldTheory.Galois.Profinite
 
 /-!
 # Continuous cohomology of the geometric stalk over a field
@@ -26,6 +31,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+set_option linter.unusedVariables false in
 /-- Compare cohomology of any abelian etale sheaf with continuous cohomology of its stalk.
 The additive identification `c` must carry geometric transport of germs to the action on
 `M`. Coefficients live in the field universe; sheaf values may be one universe higher.
@@ -77,6 +83,66 @@ theorem nonempty_equiv_etale_cohomology_continuous_stalk
       M.ρ g (c ((pointSmallEtale
         (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x F.obj z)))
     (n : ℕ) :
-    Nonempty (Sheaf.H.{u + 1} F n ≃ continuousCohomology n M) := by sorry
+    Nonempty (Sheaf.H.{u + 1} F n ≃ continuousCohomology n M) := by
+  classical
+  obtain ⟨E, Eset, i, j, _, hi, _⟩ :=
+    abelianSheaves_equiv_discreteGModules.{u, 0} K Ks Ω
+  let S := Spec (.of K)
+  let T : S.Etale := MorphismProperty.Over.mk ⊤ (𝟙 S)
+    (MorphismProperty.id_mem @AlgebraicGeometry.Etale S)
+  have hT : Limits.IsTerminal T := MorphismProperty.Over.mkIdTerminal _ S
+  let V := sheafToPresheaf S.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+    (CategoryTheory.evaluation S.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (op T)
+  obtain ⟨t, ht⟩ := etaleGlobalSections_galoisInvariants K Ks Ω T hT E i hi
+  let d : (E.functor.obj F).obj.V ≃+ M :=
+    (i.app F).addCommGroupIsoToAddEquiv.trans c
+  have hd : ∀ (g : Gal(Ks/K)) (z : (E.functor.obj F).obj.V),
+      d ((E.functor.obj F).obj.ρ g z) = M.ρ g (d z) := by
+    intro g z
+    obtain ⟨τ, hτ⟩ := exists_algEquiv_extending_separableClosure K Ks Ω g
+    have : Limits.PreservesFilteredColimitsOfSize.{u, u}
+        (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+      Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+    let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
+    obtain ⟨X, x, a, ha⟩ := p.toPresheafFiber_jointly_surjective
+      (P := F.obj) ((i.hom.app F) z)
+    let x' : p.fiber.obj X := Over.homMk
+      (Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (by
+        rw [Category.assoc, Over.w x]
+        change Spec.map (CommRingCat.ofHom τ.toRingHom) ≫
+          Spec.map (CommRingCat.ofHom (algebraMap K Ω)) = _
+        rw [← Spec.map_comp]
+        congr 1
+        ext b
+        exact τ.commutes b)
+    have hcanonical := hi F g τ hτ X x x' rfl a
+    have hgiven := hc g τ hτ X x x' rfl a
+    have hz : (i.inv.app F) (p.toPresheafFiber X x F.obj a) = z := by
+      rw [ha]
+      exact (i.app F).addCommGroupIsoToAddEquiv.symm_apply_apply z
+    rw [hz] at hcanonical
+    change c ((i.hom.app F) ((E.functor.obj F).obj.ρ g z)) =
+      M.ρ g (c ((i.hom.app F) z))
+    rw [hcanonical, ← ha]
+    exact hgiven
+  let η : V ≅ E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ (Gal(Ks/K)) ⋙
+      forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat :=
+    NatIso.ofComponents (fun X ↦ (t X).toAddCommGrpIso) (by
+      intro X Y f
+      ext z
+      apply Subtype.ext
+      exact ht X Y f z)
+  obtain ⟨e⟩ := Rep.nonempty_equiv_rightDerived_continuousCohomology.{u, u + 2, u + 1, u + 1, u}
+    (Gal(Ks/K)) _ E V η F M d.toIntLinearEquiv hd n
+  have hH : Nonempty (Sheaf.H.{u + 1} F n ≃+ (V.rightDerived n).obj F) := by
+    cases n with
+    | zero =>
+      exact ⟨(Sheaf.H.equiv₀ F hT).trans
+        (V.rightDerivedZeroIsoSelf.app F).addCommGroupIsoToAddEquiv.symm⟩
+    | succ q =>
+      exact Sheaf.cohomology_nonempty_addEquiv_rightDerived_evaluation_succ
+        S.smallEtaleTopology T hT F q
+  obtain ⟨eH⟩ := hH
+  exact ⟨eH.toEquiv.trans e⟩
 
 end AlgebraicGeometry.Scheme
