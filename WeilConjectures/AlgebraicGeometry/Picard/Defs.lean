@@ -37,7 +37,8 @@ four theorems `injective_pic_map_snd`, `pic_map_sectionBaseChange_snd`,
 `bijective_toPicardFunctor_picardFunctorNormalized` and `bijective_pic_split` below.  Likewise
 the exactness in the middle, `toPicardFunctor_app_eq_iff`, says that two classes have the same
 image in `Pic_{X/S}(T)` if and only if they differ by a class pulled back from `T`, the
-difference being expressed with the tensor product of modules.
+difference being expressed with the tensor product of modules. The group-theoretic forms are in
+`WeilConjectures/AlgebraicGeometry/Picard/Group.lean`.
 
 ## Main definitions
 
@@ -45,6 +46,8 @@ difference being expressed with the tensor product of modules.
   sheafification of `AlgebraicGeometry.picardPresheaf` (blueprint `sk-def-picard-pic`).
 - `AlgebraicGeometry.picardFunctorNormalized`: the `σ`-normalized relative Picard functor
   `Pic_{X/S,σ}` (blueprint `sk-def-picard-pic`).
+- `AlgebraicGeometry.picardFunctorNormalizedObjEquivPic`: `Pic_{X/k,σ}(k) ≃ Pic (X)` (blueprint
+  `lem-pc-sigma-k-points`).
 
 ## Main statements
 
@@ -55,6 +58,13 @@ difference being expressed with the tensor product of modules.
   `AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized` and
   `AlgebraicGeometry.bijective_pic_split`: the split exact sequence
   `0 → Pic T → Pic (X_T) → Pic_{X/S}(T) → 0` (blueprint `sk-prop-picard-pic-split`).
+- `AlgebraicGeometry.isIso_picardFunctorNormalized_ι_comp_toPicardFunctor`: under the hypotheses
+  of the split exact sequence, `Pic_{X/S,σ} ⟶ Pic_{X/S}` is an isomorphism, so one is
+  representable if and only if the other is
+  (`AlgebraicGeometry.isRepresentable_picardFunctorNormalized_iff`).
+- `AlgebraicGeometry.isIso_presheafToSheaf_map_picardFunctorNormalized_ι` and
+  `AlgebraicGeometry.sheafifyPicardFunctorNormalizedIso`: `Pic_{X/S}` is the fppf sheafification
+  of `Pic_{X/S,σ}` (blueprint `thm-pc-pic-split`).
 - `AlgebraicGeometry.picardFunctorNormalized_eq_of_iso_tensorObj`: two `σ`-normalized classes
   which differ by a module pulled back from the base are equal.
 - `AlgebraicGeometry.isSheaf_picardFunctorNormalized`: the `σ`-normalized relative Picard

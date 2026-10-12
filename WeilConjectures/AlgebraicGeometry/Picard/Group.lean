@@ -37,12 +37,22 @@ the kernel of `σ_T^* : Pic (X_T) ⟶ Pic T`, so it is a presheaf of groups; thi
   group laws.
 - `AlgebraicGeometry.picardFunctorNormalizedGrp`: the `σ`-normalized Picard functor as a presheaf
   of groups (blueprint `rem-pc-group-structure`).
+- `AlgebraicGeometry.picardFunctorGrp`, `AlgebraicGeometry.toPicardFunctorHom`: `Pic_{X/S}` as a
+  presheaf of groups, and the homomorphism `Pic (X_T) →* Pic_{X/S}(T)`.
+- `AlgebraicGeometry.picMulEquivProdPicardFunctorNormalized`: the splitting
+  `Pic (X_T) ≃* Pic T × Pic_{X/S,σ}(T)` (blueprint `thm-pc-pic-split`).
+- `AlgebraicGeometry.picardFunctorNormalizedMulEquiv`: `Pic_{X/S,σ}(T) ≃* Pic_{X/S}(T)` under
+  the hypotheses of the split exact sequence.
 
 ## Main statements
 
 - `AlgebraicGeometry.exists_commGrpObj_isPicardMul`: a scheme representing `Pic_{X/S}` carries a
   commutative group scheme structure respecting the group laws (blueprint
   `rem-pc-group-structure`).
+- `AlgebraicGeometry.range_pic_mapHom_snd_eq_ker_toPicardFunctorHom` and
+  `AlgebraicGeometry.surjective_toPicardFunctorHom`: exactness of
+  `0 → Pic T → Pic (X_T) → Pic_{X/S}(T) → 0` as groups (blueprint `lem-pc-pic-exact`,
+  `thm-pc-pic-split`).
 -/
 
 @[expose] public section
