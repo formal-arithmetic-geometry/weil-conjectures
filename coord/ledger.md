@@ -7644,3 +7644,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:27 L: merged deliver/G1/Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsos (stage 3; reviewer PASS; first push; landing 20261012T122725-L-1074497 (interface); batch 20261012T120425; modules 3; new nodes 2)
 - 12:27 L: returned deliver/X3/Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor (reviewer RETURN: (reviewer X-31dfb, head 31dfbae86) F (incomplete interface-change review; brief point 2): repair coord/changes/stalk-ten)
 - 12:27 L: returned deliver/M3/Sheaf.AlgebraicGeometry.EtaleSetSectionLiftAffine (reviewer RETURN: (reviewer X-11d4e, head 11d4efc6f) A (change-record completeness; review point 2): In coord/changes/EtaleSetSectionLiftA)
+- 12:28 L: merged deliver/H1/Sheaf.CategoryTheory.IdentityDerivedHomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T122812-L-1078632 (proof); batch 20261012T120425; modules 1; new nodes 2)
