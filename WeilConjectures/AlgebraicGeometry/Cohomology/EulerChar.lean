@@ -14,6 +14,7 @@ public import Mathlib.LinearAlgebra.Dimension.Constructions
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatBaseChange
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
@@ -99,6 +100,7 @@ section BaseChange
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
   (K : Type u) [Field K] [Algebra k K]
 
+open TensorProduct in
 /-- **Flat base change of cohomology along a field extension.** Let `X` be a quasi-compact
 quasi-separated scheme over a field `k`, let `K/k` be a field extension and let `M` be a
 quasi-coherent `𝒪_X`-module. Then `H^q(X_K, M_K) ≅ H^q(X, M) ⊗_k K` as `K`-vector spaces, where
@@ -114,8 +116,64 @@ theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k
     [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
     Nonempty (((Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M).H q ≃ₗ[K]
-        TensorProduct k K (M.H q)) :=
-  sorry
+        TensorProduct k K (M.H q)) := by
+  set f := X ↘ Spec (.of k)
+  set g := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  have H := IsPullback.of_hasPullback f g
+  -- `A = Γ(Spec k, ⊤) ≅ k` and `B = Γ(Spec K, ⊤) ≅ K`, compatibly with `g`.
+  let σe : k ≃+* Γ(Spec (.of k), ⊤) :=
+    (Scheme.ΓSpecIso (CommRingCat.of k)).symm.commRingCatIsoToRingEquiv
+  let τe : K ≃+* Γ(Spec (.of K), ⊤) :=
+    (Scheme.ΓSpecIso (CommRingCat.of K)).symm.commRingCatIsoToRingEquiv
+  let σ : k →+* Γ(Spec (.of k), ⊤) := σe
+  let τ : K →+* Γ(Spec (.of K), ⊤) := τe
+  let : Algebra Γ(Spec (.of k), ⊤) Γ(Spec (.of K), ⊤) := g.appTop.hom.toAlgebra
+  let : Algebra k Γ(Spec (.of k), ⊤) := σ.toAlgebra
+  let : Algebra K Γ(Spec (.of K), ⊤) := τ.toAlgebra
+  let : Algebra k Γ(Spec (.of K), ⊤) := (g.appTop.hom.comp σ).toAlgebra
+  have hnat : g.appTop.hom.comp σ = τ.comp (algebraMap k K) := by
+    have := Scheme.ΓSpecIso_inv_naturality (CommRingCat.ofHom (algebraMap k K))
+    exact congrArg CommRingCat.Hom.hom this.symm
+  have : IsScalarTower k Γ(Spec (.of k), ⊤) Γ(Spec (.of K), ⊤) :=
+    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower k K Γ(Spec (.of K), ⊤) :=
+    IsScalarTower.of_algebraMap_eq fun c ↦ (RingHom.congr_fun hnat c :)
+  -- `e₀ : B ⊗[A] H^q(X, M) ≃ₗ[B] H^q(X_K, M_K)` (Stacks 02KH).
+  obtain ⟨e₀⟩ := Modules.nonempty_H_baseChange_linearEquiv H M rfl q
+  let W := Abelian.Ext.WithAction (Modules.baseAction f M) ((constantSheaf
+    (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) q
+  -- The `k`-action on `W = H^q(X, M)` through `σ` is the one of `moduleHOfField`.
+  let : Module k W := Module.compHom W σ
+  have : IsScalarTower k Γ(Spec (.of k), ⊤) W := ⟨fun c a x ↦ mul_smul (σ c) a x⟩
+  have : CompatibleSMul k Γ(Spec (.of k), ⊤) Γ(Spec (.of K), ⊤) W := ⟨fun a m n ↦ by
+    obtain ⟨c, rfl⟩ := σe.surjective a
+    exact smul_tmul (R := k) c m n⟩
+  -- `e₁ : B ⊗[A] W ≃ₗ[B] B ⊗[k] W` and `e₂ : B ⊗[k] W ≃ₗ[K] K ⊗[k] W`.
+  let e₁ :=
+    equivOfCompatibleSMul k Γ(Spec (.of k), ⊤) Γ(Spec (.of K), ⊤) Γ(Spec (.of K), ⊤) W
+  let τl : Γ(Spec (.of K), ⊤) ≃ₗ[K] K :=
+    { τe.symm.toAddEquiv with
+      map_smul' := fun c b ↦ by
+        change τe.symm (τe c * b) = c * τe.symm b
+        rw [map_mul, RingEquiv.symm_apply_apply] }
+  let e₂ : Γ(Spec (.of K), ⊤) ⊗[k] W ≃ₗ[K] K ⊗[k] W :=
+    AlgebraTensorModule.congr τl (LinearEquiv.refl k W)
+  have key (z : Γ(Spec (.of K), ⊤) ⊗[Γ(Spec (.of k), ⊤)] W) (c : K) :
+      e₂ (e₁ (τ c • z)) = c • e₂ (e₁ z) := by
+    rw [LinearEquiv.map_smul e₁]
+    exact (congrArg e₂ (algebraMap_smul Γ(Spec (.of K), ⊤) c (e₁ z))).trans
+      (e₂.map_smul c _)
+  refine ⟨{ (e₀.symm.trans e₁).toAddEquiv.trans e₂.toAddEquiv with
+    map_smul' := fun c y ↦ ?_ }⟩
+  -- The `K`-action on `H^q(X_K, M_K)` is the `B`-action through `τ`.
+  let WY := Abelian.Ext.WithAction (Modules.pullbackAction (Limits.pullback.snd f g)
+    (Limits.pullback.fst f g) M) ((constantSheaf (Opens.grothendieckTopology
+      (Limits.pullback f g : Scheme.{u})) AddCommGrpCat.{u}).obj
+        (AddCommGrpCat.of (ULift.{u} ℤ))) q
+  let y' : WY := y
+  change e₂ (e₁ (e₀.symm (τ c • y'))) = c • e₂ (e₁ (e₀.symm y'))
+  rw [LinearEquiv.map_smul e₀.symm]
+  exact key _ c
 
 /-- **Flat base change of `h^q`.** For a quasi-coherent module `M` on a quasi-compact
 quasi-separated scheme `X` over `k` and a field extension `K/k`,
