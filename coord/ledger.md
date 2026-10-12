@@ -7121,3 +7121,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/W3/Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat (stage 3; reviewer PASS; first push; landing 20261012T085358-L-47156 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/W3/Sheaf.AlgebraicGeometry.FiniteOpenCoverDegreeSum (stage 3; reviewer PASS; first push; landing 20261012T085359-L-47253 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/W3/Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge (stage 3; reviewer PASS; first push; landing 20261012T085359-L-47432 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/W3/Sheaf.CategoryTheory.SpectralSequencePageInduction (stage 3; reviewer PASS; first push; landing 20261012T085359-L-47568 (proof); batch 20261012T085205; modules 1; new nodes 0)
