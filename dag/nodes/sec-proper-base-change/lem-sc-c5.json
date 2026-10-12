@@ -18,28 +18,53 @@
  ],
  "proof": [
   {
-   "text": "If $r\\neq\\operatorname{char}k$, the finiteness is the explicit\ncomputation of [thm-sc-proper-cohomology] and the vanishing for\n$q>2$, which is [lem-sc-cohomological-dimension]. If\n$r=\\operatorname{char}k=p>0$, then $H^q(C,\\mathbf F_p)=0$ for\n$q>1$ by the Artin–Schreier bound\n([lem-sc-artin-schreier-dimension]),\n$H^0(C,\\mathbf F_p)=\\mathbf Z/p\\mathbf Z$, and\n$H^1(C,\\mathbf F_p)=\\ker(\\wp:H^1(C,\\mathcal O_C)\\to H^1(C,\\mathcal O_C))$ by the Artin–Schreier sequence\n([lem-sc-as-sequence]), an $\\mathbf F_p$-vector space of\ndimension at most $g$ by [lem-sc-fixed-points-finite],\nhence finite.",
+   "text": "If r is nonzero in k apply C4. Otherwise CharP.charP_iff_prime_eq_zero supplies CharP k r. Degree zero is finite by connected constant-sheaf H0 and the proved finite coefficient biproduct argument. Degrees above one vanish by C3.",
    "uses": [
-    "thm-sc-proper-cohomology",
-    "lem-sc-cohomological-dimension",
-    "lem-sc-artin-schreier-dimension",
+    "lem-sc-c4",
+    "lem-sc-c3"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree one, the zero-dimensional case follows from zero_dimensional_etale_cohomology_rest and the Ext/derived comparison. In dimension one use the Artin-Schreier sequence and apply derived global sections to its distinguished triangle. The degree-zero Artin-Schreier map is epi; the homology sequence then makes the degree-one inclusion mono.",
+   "uses": [
+    "zero-dimensional-etale-cohomology-rest",
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
     "lem-sc-as-sequence",
+    "lem-sc-artin-schreier-proper-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proper specialization of the finite scalar model for additive H1. With φ = wp + id, naturality of sectionwise scalar multiplication shows that H1(φ) is p-semilinear. Its difference from the identity is H1(wp). Hence the kernel of H1(wp) injects into the finite Frobenius-fixed subgroup. The composite of the degree-one inclusion with H1(wp) is zero, so the mono above injects H1(C,ZMod r) into this finite kernel.",
+   "uses": [
+    "lem-sc-additive-cohomology-finite-scalar-model",
     "lem-sc-fixed-points-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the finite derived degree-one group to Ext cohomology, then transfer finiteness to Λ/(r) through the finite coefficient biproduct coordinates proved in this module.",
+   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-sc-proper-cohomology",
-  "lem-sc-cohomological-dimension",
-  "lem-sc-artin-schreier-dimension",
+  "lem-sc-additive-cohomology-finite-scalar-model",
+  "lem-sc-artin-schreier-proper-degree-zero",
   "lem-sc-as-sequence",
-  "lem-sc-fixed-points-finite"
+  "lem-sc-c3",
+  "lem-sc-c4",
+  "lem-sc-fixed-points-finite",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "zero-dimensional-etale-cohomology-rest"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c5.md",
-  "place": "## Proof"
+  "place": "X3 stage-3 Lean proof: finite coefficient coordinates and dimension cases"
  },
  "mathlib_searches": [
   {
@@ -145,28 +170,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-57c3b",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T085218-L-5119",
+  "landing": "20261012T165541-L-2942732",
   "kind": "interface",
-  "note": "independent Codex review: Matched the C₈ proof with lem-sc-c8 and its dependencies; signatures and targets are unchanged, node edits are permitted, all 100 downstream users are recorded, compilation is clean, and axioms match unfinished upstream dependencies.",
-  "sorry_before": [
-   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_charP",
-   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_ne_zero",
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_isProper",
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_ne_zero",
-   "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
-   "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_ne_zero",
-   "AlgebraicGeometry.IsCurve.surjective_cohomologyMap_constantModSheaf_two"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_charP",
-   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_ne_zero",
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_isProper",
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_ne_zero",
-   "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
-   "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_ne_zero"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-artin-schreier-proper-degree-zero",
+ "kind": "statement",
+ "title": "Proper degree-zero Artin-Schreier map is surjective",
+ "statement": "Let k be algebraically closed of prime characteristic p and f : C → Spec k a smooth proper connected curve [def-sc-curves]. Let G be an abelian etale sheaf [def-weil-pbc-etale-sheaves] with natural section identifications a_U : G(U) ≃+ Γ(U,O_U), and let wp : G → G have section formula a_U(wp(x)) = a_U(x)^p-a_U(x). Then the endomorphism induced by wp on degree-zero derived etale cohomology [def-weil-pbc-etale-cohomology] is an epimorphism. This is only the global-functions part of the Artin-Schreier calculation, not a finiteness or field-extension assertion.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c5.md",
+  "place": "Characteristic-p branch; lem-sc-c7 proof paragraph 2; Stacks Tag 0A3P"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Smoothness implies regularity and reducedness. Put C over Spec k via f. The proper, reduced, connected global-functions theorem identifies Γ(C,O_C) with k by the structural ring map. Algebraic closedness makes x ↦ x^p-x onto k; its surjectivity transports to Γ(C,O_C) because the structural map respects powers and subtraction.",
+   "uses": [
+    "lem-sc-global-functions",
+    "lem-sc-artin-schreier-k"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the terminal etale object id C, the given section equivalence a and the formula hwp identify wp with that surjective ring map. Use H.equiv₀ and its naturality to prove Sheaf.H.map wp 0 is surjective. Finally the natural Ext/derived comparison conjugates this map with degree-zero derived cohomology of wp. Its component is an additive equivalence; its naturality transports the displayed surjectivity, which is epimorphy in AddCommGrpCat.",
+   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-artin-schreier-k",
+  "lem-sc-global-functions",
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c7.md",
+  "place": "Paragraph 2, formalized by X3 through the natural Ext/derived comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Artin Schreier map on global functions of a proper smooth connected scheme over an algebraically closed field is surjective",
+   "results": "UNAVAILABLE: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Schreier map x to x^p minus x is surjective on global functions of a smooth proper connected curve over an algebraically closed field",
+   "results": "Eight hits about polynomial maps and field extensions; no matching etale degree-zero statement.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "artinSchreier|GlobalSectionsBijective",
+   "results": "msearch gives no Mathlib hits. Local source search finds IsAlgClosed.artinSchreier_surjective_and_kernel and Scheme.GlobalSectionsBijective.of_isAlgClosed, both used in the proof.",
+   "verdict": "partial match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+  "date": "2026-10-12",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-c5",
+   "place": "Characteristic-p branch, global functions",
+   "via": [
+    "lem-sc-c5"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierProperDegreeZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ArtinSchreierProperDegreeZero.lean",
+  "declaration": "AlgebraicGeometry.epi_etaleCohomology_artinSchreier_zero_of_isProper",
+  "statement": "theorem epi_etaleCohomology_artinSchreier_zero_of_isProper {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] (p : ℕ) [Fact p.Prime] [CharP k p] (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤)) (wp : G ⟶ G) (_ha : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U), a V (G.obj.map g x) = g.unop.left.appTop (a U x)) (hwp : ∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U), a U (wp.hom.app U x) = (a U x) ^ p - a U x) : Epi ((Etale.cohomology AddCommGrpCat.{u + 1} C (0 : ℤ)).map ((DerivedCategory.singleFunctor (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).map wp))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T165541-L-2942732",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T165541-L-2942732",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
