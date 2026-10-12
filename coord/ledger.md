@@ -10030,3 +10030,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:08 L: merged deliver/S3/Sheaf.AlgebraicGeometry.LocalDirectImageStalkCohomology (stage 3; reviewer PASS; first push; landing 20261012T230802-L-1910647 (interface); batch 20261012T230749; modules 4; new nodes 3)
 - 23:08 L: merged deliver/T2/Sheaf.RingTheory.ModelOfResidueSmooth (stage 3; reviewer PASS; first push; landing 20261012T230803-L-1910984 (interface); batch 20261012T230749; modules 2; new nodes 1)
 - 23:08 L: merged deliver/T4/Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapBijective (stage 3; reviewer PASS; first push; landing 20261012T230803-L-1911109 (interface); batch 20261012T230749; modules 3; new nodes 2)
+- 23:08 L: returned deliver/U1/Sheaf.AlgebraicGeometry.AffineModuleFiniteType (reviewer RETURN: (reviewer X-bb7cc, head bb7cc73be) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Af)
