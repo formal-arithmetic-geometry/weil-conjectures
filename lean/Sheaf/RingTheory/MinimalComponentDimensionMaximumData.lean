@@ -4,9 +4,8 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
-import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+import Sheaf.RingTheory.MinimalComponentDimensionMaximumCore
 
 @[expose] public section
 
@@ -37,6 +36,33 @@ theorem minimal_component_dimension_maximum_data
       qs.Nonempty ∧
       ((∀ q ∈ qs, ringKrullDim (S ⧸ q) ≤ ((d + r : ℕ) : WithBot ℕ∞)) ∧
         (∃ q ∈ qs, ringKrullDim (S ⧸ q) = ((d + r : ℕ) : WithBot ℕ∞))) := by
-  sorry
+  classical
+  let : IsNoetherianRing S := Algebra.FiniteType.isNoetherianRing k S
+  let T : Set (Ideal S) := {q | q ∈ minimalPrimes S ∧ q ≤ p}
+  have hT : T.Finite := (minimalPrimes.finite_of_isNoetherianRing S).subset
+    (fun _ h ↦ h.1)
+  let qs := hT.toFinset
+  have hqs : ∀ q : Ideal S, q ∈ qs ↔ q.IsPrime ∧ q ≤ p ∧
+      ∀ t : Ideal S, t.IsPrime → t ≤ q → t = q := by
+    intro q
+    simp only [qs, Set.Finite.mem_toFinset, T, Set.mem_ofPred_eq]
+    constructor
+    · rintro ⟨hq, hqp⟩
+      exact ⟨hq.isPrime, hqp, fun t ht htq ↦
+        le_antisymm htq (hq.2 ⟨ht, bot_le⟩ htq)⟩
+    · rintro ⟨hq, hqp, hmin⟩
+      exact ⟨⟨⟨hq, bot_le⟩, fun t ht htq ↦ (hmin t ht.1 htq).ge⟩, hqp⟩
+  have hne : qs.Nonempty := by
+    obtain ⟨q, hq, hqp⟩ := Ideal.exists_minimalPrimes_le (I := (⊥ : Ideal S))
+      (J := p) bot_le
+    exact ⟨q, hT.mem_toFinset.mpr ⟨hq, hqp⟩⟩
+  have hbound := minimal_component_dimension_maximum_bound (k := k) p d r hd hr
+  have hattain := minimal_component_dimension_maximum_attained (k := k) p d r hd hr
+  refine ⟨qs, hqs, hne, ?_, ?_⟩
+  · intro q hq
+    obtain ⟨hprime, hbelow, hminimal⟩ := (hqs q).mp hq
+    exact hbound q hprime hbelow hminimal
+  · obtain ⟨q, hprime, hbelow, hminimal, hqeq⟩ := hattain
+    exact ⟨q, (hqs q).mpr ⟨hprime, hbelow, hminimal⟩, hqeq⟩
 
 end AlgebraicGeometry

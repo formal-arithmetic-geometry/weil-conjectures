@@ -26,32 +26,34 @@
  ],
  "proof": [
   {
-   "text": "Use Noetherianity to form the finite nonempty set of minimal primes below p, then use localization prime correspondence and maximal prime-chain lengths to bound every quotient dimension by d+r and attain the bound by concatenating a chain below p with a maximal chain above p.",
+   "text": "Use Algebra.FiniteType.isNoetherianRing and minimalPrimes.finite_of_isNoetherianRing to form the finite set of minimal primes contained in p; Ideal.exists_minimalPrimes_le proves it is nonempty. Unfolding minimalPrimes identifies membership with the stated prime/minimality predicate.",
    "uses": [
-    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
     "lem-weil-pbc-finite-type-algebra-noetherian",
     "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-    "lem-weil-pbc-prime-contains-minimal-prime",
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "lem-weil-pbc-localization-dimension-chains-below-prime"
+    "lem-weil-pbc-prime-contains-minimal-prime"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply minimal_component_dimension_maximum_bound to each member and minimal_component_dimension_maximum_attained to obtain the member with equality. Package these with the finite set and membership equivalence.",
+   "uses": [
+    "lem-weil-pbc-minimal-component-dimension-maximum-bound",
+    "lem-weil-pbc-minimal-component-dimension-maximum-attained"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
-  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
   "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
   "lem-weil-pbc-prime-contains-minimal-prime",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "lem-weil-pbc-localization-dimension-chains-below-prime"
+  "lem-weil-pbc-minimal-component-dimension-maximum-bound",
+  "lem-weil-pbc-minimal-component-dimension-maximum-attained"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Tag 00P1 (prime-chain subargument)"
+  "place": "Tag 00P1; finite minimal-prime packaging, bound and attainment reduction reviewed by S1"
  },
  "mathlib_searches": [
   {
@@ -110,9 +112,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T184348-L-4021464",
+  "landing": "20261012T214713-L-1272347",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
