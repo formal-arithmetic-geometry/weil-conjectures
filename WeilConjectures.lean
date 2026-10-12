@@ -1555,6 +1555,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalism
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalismComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
@@ -1700,6 +1701,7 @@ public import WeilConjectures.SixFunctors.Finite.Stalk
 public import WeilConjectures.SixFunctors.Integral.BaseChange
 public import WeilConjectures.SixFunctors.Integral.Exact
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Associativity
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Basic
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Coherence
