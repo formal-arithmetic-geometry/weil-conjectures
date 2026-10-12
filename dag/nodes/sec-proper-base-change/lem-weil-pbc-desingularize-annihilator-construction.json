@@ -45,7 +45,7 @@
    }
   },
   {
-   "text": "The hypotheses of [lem-weil-pbc-popescu-desingularize] hold for the Noetherian base ring $D$, the $D$-algebra $\\Lambda$, the element $\\pi_D\\in D$, the $D$-algebra $A'$ of finite presentation and $\\alpha':A'\\to\\Lambda$. (a) $\\mathrm{Ann}_\\Lambda(\\pi_D)=\\mathrm{Ann}_\\Lambda(\\pi_D^2)$: $\\pi_D$ acts on $\\Lambda$ as $\\pi$ does, and this is the hypothesis on $\\Lambda$. (b) $\\pi_A$ is strictly standard in $A$ over $R$ by (1), so its image $\\pi_A\\otimes1$, which is the image of $\\pi_D$ in $A'$, is strictly standard in $A'$ over $D$ by [lem-weil-pbc-strictly-standard-base-change] (with $R'=D$). (c) The section: the map $A'\\to D/\\pi^4D$, $a\\otimes d\\mapsto\\varphi(\\bar a)\\bar d$ ($\\bar a$ the class of $a$ in $A/\\pi^4A$, $\\bar d$ that of $d$), is a homomorphism of $D$-algebras by the universal property of the tensor product (the composite $A\\to A/\\pi^4A\\xrightarrow{\\varphi}D/\\pi^4D$ and the reduction $D\\to D/\\pi^4D$ are $R$-algebra maps); it kills $\\pi_D^4A'$ because $\\pi_D^4\\mapsto0$, so it induces a homomorphism of $D$-algebras $\\rho:A'/\\pi_D^4A'\\to D/\\pi_D^4D$. Its composite with $D/\\pi^4D\\to\\Lambda/\\pi^4\\Lambda$ (induced by $\\delta$) sends the class of $a\\otimes d$ to $(\\text{image of }\\varphi(\\bar a))\\cdot\\overline{\\delta(d)}=\\overline{\\alpha(a)}\\,\\overline{\\delta(d)}=\\overline{\\alpha'(a\\otimes d)}$, using that $\\varphi$ is compatible with the maps to $\\Lambda/\\pi^4\\Lambda$; as the elements $a\\otimes d$ generate $A'$ additively, the composite is the map induced by $\\alpha'$, which is condition (2) of [lem-weil-pbc-popescu-desingularize].",
+   "text": "The hypotheses of [lem-weil-pbc-popescu-desingularize] hold for the Noetherian base ring $D$, the $D$-algebra $\\Lambda$, the element $\\pi_D\\in D$, the $D$-algebra $A'$ of finite presentation and $\\alpha':A'\\to\\Lambda$. (a) $\\mathrm{Ann}_\\Lambda(\\pi_D)=\\mathrm{Ann}_\\Lambda(\\pi_D^2)$: $\\pi_D$ acts on $\\Lambda$ as $\\pi$ does, and this is the hypothesis on $\\Lambda$. (b) $\\pi_A$ is strictly standard in $A$ over $R$ by (1), so its image $\\pi_A\\otimes1$, which is the image of $\\pi_D$ in $A'$, is strictly standard in $A'$ over $D$ by [lem-weil-pbc-strictly-standard-base-change] (with $R'=D$). (c) The section: the map $A'\\to D/\\pi^4D$, $a\\otimes d\\mapsto\\varphi(\\bar a)\\bar d$ ($\\bar a$ the class of $a$ in $A/\\pi^4A$, $\\bar d$ that of $d$), is a homomorphism of $D$-algebras by the universal property of the tensor product (the composite $A\\to A/\\pi^4A\\xrightarrow{\\varphi}D/\\pi^4D$ and the reduction $D\\to D/\\pi^4D$ are $R$-algebra maps); it kills $\\pi_D^4A'$ because $\\pi_D^4\\mapsto0$, so it induces a homomorphism of $D$-algebras $\\rho:A'/\\pi_D^4A'\\to D/\\pi_D^4D$. Its composite with $D/\\pi^4D\\to\\Lambda/\\pi^4\\Lambda$ (induced by $\\delta$) sends the class of $a\\otimes d$ to $(\\text{image of }\\varphi(\\bar a))\\cdot\\overline{\\delta(d)}=\\overline{\\alpha(a)}\\,\\overline{\\delta(d)}=\\overline{\\alpha'(a\\otimes d)}$, using that $\\varphi$ is compatible with the maps to $\\Lambda/\\pi^4\\Lambda$; as the elements $a\\otimes d$ generate $A'$ additively, the composite is the map induced by $\\alpha'$, which is condition (2) of [lem-weil-pbc-popescu-desingularize]. In Lean construct the map σ:D⊗_R A→D/(p⁴) with AlgHom.liftEquiv, and descend with Ideal.Quotient.liftₐ since σ(p⁴)=0. Construct δq:D/(p⁴)→Λ/(π⁴Λ) the same way. TensorProduct.ext_ring reduces δq∘σ=(quotient map)∘α′ to the A-factor; choose a representative d of φ(a) and apply the given representative compatibility. Evaluating this map equality proves the section compatibility on every tensor element.",
    "uses": [
     "lem-weil-pbc-popescu-desingularize",
     "lem-weil-pbc-strictly-standard-base-change",
@@ -58,10 +58,11 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-popescu-desingularize] over $D$ to the tensor algebra and compatible section from the preceding steps. It gives a finitely presented $D$-algebra $B$ and a factorization of the tensor map with $\\mathfrak a B\\subset H_{B/D}$, where $\\mathfrak a$ consists exactly of the $r\\in D$ satisfying $p^2x=0\\Rightarrow rpx=0$ for every $x\\in D$, with $p$ the image of $\\pi$. Restrict the tensor inclusion to $A$ and $D$ and restrict scalars of the map to $\\Lambda$. On pure tensors these maps recover $\\alpha$ and $\\delta$, giving the two composite equalities. Retain finite presentation over $D$; do not yet assert either singular-ideal comparison.",
+   "text": "Apply [lem-weil-pbc-popescu-desingularize] over $D$ to the tensor algebra and compatible section from the preceding steps. It gives a finitely presented $D$-algebra $B$ and a factorization of the tensor map with $\\mathfrak a B\\subset H_{B/D}$, where $\\mathfrak a$ consists exactly of the $r\\in D$ satisfying $p^2x=0\\Rightarrow rpx=0$ for every $x\\in D$, with $p$ the image of $\\pi$. Restrict the tensor inclusion to $A$ and $D$ and restrict scalars of the map to $\\Lambda$. On pure tensors these maps recover $\\alpha$ and $\\delta$, giving the two composite equalities. Retain finite presentation over $D$; do not yet assert either singular-ideal comparison. The result of Tag 07CR lies in Type(max w z), so take the actual ring construction U=ULift B to reach Type(max u v w z), and equip it with the transported D- and R-algebra structures. FinitePresentation.equiv transports finite presentation. Compose the factorization maps with the ULift algebra equivalence and its inverse; the two composite identities follow by evaluation on 1⊗a and by the D-algebra map law. Ideal.map_span and the commutation of the equivalence with algebraMap identify the extended annihilator ideal with the image of its ideal in B. Apply Ideal.map_mono to the bound in B and then [lem-weil-pbc-singular-ideal-map-equiv] to obtain the bound in U. Algebra.algebra_ext identifies the D-algebra structure induced by dU with the canonical transported one.",
    "uses": [
     "lem-weil-pbc-popescu-desingularize",
-    "def-weil-pbc-singular-ideal"
+    "def-weil-pbc-singular-ideal",
+    "lem-weil-pbc-singular-ideal-map-equiv"
    ],
    "elementary": false,
    "source": {
@@ -78,12 +79,13 @@
   "lem-weil-pbc-popescu-desingularize",
   "lem-weil-pbc-strictly-standard-base-change",
   "def-weil-pbc-strictly-standard-element",
-  "def-weil-pbc-singular-ideal"
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-singular-ideal-map-equiv"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, proof of Lemma Tag 07CT (lemma-desingularize-strictly-standard, lines 1831-1860), applying Lemma Tag 07CR (lemma-desingularize, line 1665)"
+  "place": "Tag 07CT, first paragraph, applying Tag 07CR; M1 Lean implementation of the existing tensor route with explicit quotient compatibility and ULift transport, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -151,10 +153,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T135225-L-1658655",
-  "kind": "interface",
+  "landing": "20261012T160828-L-2611720",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
