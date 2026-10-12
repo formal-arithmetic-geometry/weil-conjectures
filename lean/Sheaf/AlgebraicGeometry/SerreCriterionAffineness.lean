@@ -9,9 +9,8 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
+import Sheaf.AlgebraicGeometry.FiniteTypeIdealH1Representatives
 import Sheaf.Paper.QuasiCompactH1Zero
-import WeilConjectures.Compactification.FiniteTypeDirected
 
 /-!
 # Serre's criterion for affineness
@@ -50,6 +49,14 @@ theorem isAffine_of_finiteType_ideal_h1_zero (X : Scheme.{u})
     (h : ∀ I : X.IdealSheafData, I.toModules.IsFiniteType →
       IsZero ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj I.toModules)) :
     IsAffine X := by
-  sorry
+  apply AlgebraicGeometry.quasiCompact_affine_of_h1_ideal_zero X
+  intro I hI
+  have hzero : ∀ x : (RingedSpace.moduleCohomology X.toRingedSpace 1).obj I.toModules,
+      x = 0 := by
+    intro x
+    obtain ⟨K, _, hK, f, y, _, hy⟩ := ideal_h1_finiteType_representative X I hI x
+    have := ModuleCat.subsingleton_of_isZero (h K hK)
+    rw [← hy, Subsingleton.elim y 0, map_zero]
+  exact ⟨fun x y ↦ (hzero x).trans (hzero y).symm⟩
 
 end AlgebraicGeometry.Scheme

@@ -25,38 +25,39 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent sheaf of ideals. Since $X$ is quasi-compact and quasi-separated, by [lemma-nagata-ideal-directed-union-finite-type] (first paragraph; Properties, Tag 01PG) the quasi-coherent subideals $\\mathcal K\\subseteq\\mathcal I$ of finite type form a family directed under inclusion whose union is $\\mathcal I$; with the inclusions as transition maps, $\\mathcal I$ together with the inclusions $\\mathcal K\\hookrightarrow\\mathcal I$ is therefore a colimit of this directed system in the category of $\\mathcal O_X$-modules (a directed union of subsheaves is their colimit). The hypotheses of [lem-weil-pbc-qs-scheme-cohomology-directed-colimit] hold for $X$: the affine opens, which are quasi-compact, form a basis of the topology, and the intersection of two quasi-compact opens is a finite union of intersections of two affine opens, hence quasi-compact by quasi-separatedness. Applying it with $U=X$ and $q=1$, every class in $H^1(X,\\mathcal I)$ comes from some $H^1(X,\\mathcal K)$ with $\\mathcal K$ of finite type, which is zero by hypothesis. Hence $H^1(X,\\mathcal I)=0$ for every quasi-coherent sheaf of ideals $\\mathcal I$.",
+   "text": "For each quasi-coherent ideal I and each first cohomology class x, use the finite-type representative theorem to choose K, its finite-type proof, an inclusion f, and y with H1(f)(y)=x. By the vanishing hypothesis H1(K) is a zero module and hence a subsingleton; y=0. The linear map H1(f) sends zero to zero, so x=0. Thus H1(I) is a subsingleton.",
    "uses": [
-    "lemma-nagata-ideal-directed-union-finite-type",
-    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit"
+    "lem-pqf-finite-type-ideal-h1-representatives"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma Tag 01XG, proof lines 410-417"
+    "document": "Stacks Project",
+    "place": "Tag 01XG, first two sentences of proof, with Tags 01PG and 01FF",
+    "url": "https://stacks.math.columbia.edu/tag/01XG"
    }
   },
   {
-   "text": "The hypotheses of the quasi-compact vanishing criterion (Tag 01XF) now hold: $X$ is quasi-compact by assumption and $H^1(X,\\mathcal I)=0$ for every quasi-coherent sheaf of ideals by step 1. Therefore $X$ is affine.",
+   "text": "Apply quasiCompact_affine_of_h1_ideal_zero to this subsingleton statement for every quasi-coherent ideal. The required QuasiCompact identity-morphism instance follows from CompactSpace X and QuasiSeparatedSpace X. This concludes IsAffine X.",
    "uses": [
     "lem-pqf-quasicompact-h1-zero"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma Tag 01XG, proof lines 410-417"
+    "document": "Stacks Project",
+    "place": "Tag 01XG, last sentence of proof"
    }
   }
  ],
  "proof_deps": [
-  "lemma-nagata-ideal-directed-union-finite-type",
-  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "lem-pqf-finite-type-ideal-h1-representatives",
   "lem-pqf-quasicompact-h1-zero"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma Tag 01XG (label lemma-quasi-separated-h1-zero-covering), proof lines 410-417"
+  "document": "Stacks Project",
+  "place": "Tag 01XG, first two sentences of proof, with Tags 01PG and 01FF",
+  "url": "https://stacks.math.columbia.edu/tag/01XG",
+  "note": "The finite-type representative step is isolated in a new theorem; the vanishing argument and application of Tag 01XF are formal Lean proofs."
  },
  "mathlib_searches": [
   {
@@ -168,5 +169,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T144119-L-2098725",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

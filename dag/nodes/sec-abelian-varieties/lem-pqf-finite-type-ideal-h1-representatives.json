@@ -1,0 +1,135 @@
+{
+ "id": "lem-pqf-finite-type-ideal-h1-representatives",
+ "kind": "statement",
+ "title": "Finite-type subideal representatives of first cohomology",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-pc-scheme], and let $I$ be a quasi-coherent ideal sheaf [pqf-def-coherent]. Every $x\\in H^1(X,I)$ [pqf-def-cohomology] is $H^1(X,f)(y)$ for some quasi-coherent subideal $K\\subseteq I$ of finite type, some $y\\in H^1(X,K)$, and an inclusion morphism $f:K\\to I$ whose composite with $I\\to\\mathcal O_X$ is $K\\to\\mathcal O_X$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01XG, first two sentences of proof, with Tags 01PG and 01FF",
+  "url": "https://stacks.math.columbia.edu/tag/01XG"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Index the finite-type quasi-coherent subideals K of I by inclusion. The zero ideal belongs to the family and sums give upper bounds. Use directedOn_ofFiniteType_le and sSup_ofFiniteType_le_eq. Construct their inclusions as module-sheaf maps, compatible with the inclusions into the structure sheaf. Over affine opens range_toModulesι_app identifies their images with K.ideal. Their union is I.ideal, so compatible maps glue uniquely on local sections to a map from I.toModules. This proves that I.toModules is the colimit of the diagram. Finite local generators of K.ideal give K.toModules.IsFiniteType.",
+   "uses": [
+    "lemma-nagata-ideal-directed-union-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 01PG, statement and proof"
+   }
+  },
+  {
+   "text": "The compact opens of a scheme form a basis (affine opens form a compact basis). Quasi-separatedness supplies compact intersections, and X is compact. Apply openModuleCohomology_directedColimit to the preceding colimit at the top open in degree 1. Its surjectivity clause gives a stage class whose image is the prescribed class.",
+   "uses": [
+    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 01FF, applied in Tag 01XG"
+   }
+  },
+  {
+   "text": "Compare module-valued global cohomology with group-valued cohomology at the top open. Both use the same injective module resolution. The exact forgetful functor from global modules to abelian groups preserves homology, so it identifies the groups naturally in the module sheaf. Transport the class and the equality from the previous step across this natural identification. The stage K and its cocone map f satisfy K ≤ I, finite type, and f followed by the inclusion of I is the inclusion of K. When I is zero or X is empty the zero stage and zero class still work.",
+   "uses": [
+    "pqf-def-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 01XG, first two sentences of proof, with Tags 01PG and 01FF",
+    "url": "https://stacks.math.columbia.edu/tag/01XG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-ideal-directed-union-finite-type",
+  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 01XG, first two sentences of proof, with Tags 01PG and 01FF",
+  "url": "https://stacks.math.columbia.edu/tag/01XG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every first cohomology class of a quasi-coherent ideal sheaf on a quasi-compact quasi-separated scheme comes from a finite type subideal",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every H1 cohomology class of an ideal sheaf comes from a finite type subideal on a qcqs scheme",
+   "results": "Eight hits: exists_of_res_zero_of_qcqs, IdealSheafData.ext_of_iSup_eq_top, IsFiniteType.exists_localGeneratorsData and related local generation/section lemmas; none gives a cohomology representative.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*[Cc]ohomology|[Cc]ohomology.*ideal|finiteType.*representative",
+   "results": "Mathlib localCohomology concerns module cohomology supported in a ring ideal, not ideal sheaf cohomology on a scheme. Upstream and Sheaf searches found no ideal-sheaf H1 finite-type representative theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SerreCriterionAffineness",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "pqf-lem-serre-criterion",
+   "place": "Tag 01XG proof, first two sentences; step 1 of the existing split",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeIdealH1Representatives",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeIdealH1Representatives.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ideal_h1_finiteType_representative",
+  "statement": "theorem ideal_h1_finiteType_representative (X : Scheme.{u})\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    (I : X.IdealSheafData) (_hI : I.toModules.IsQuasicoherent)\n    (x : (RingedSpace.moduleCohomology X.toRingedSpace 1).obj I.toModules) :\n    ∃ (K : X.IdealSheafData), K ≤ I ∧ K.toModules.IsFiniteType ∧\n      ∃ (f : K.toModules ⟶ I.toModules)\n        (y : (RingedSpace.moduleCohomology X.toRingedSpace 1).obj K.toModules),\n        f ≫ I.toModulesι = K.toModulesι ∧\n          ((RingedSpace.moduleCohomology X.toRingedSpace 1).map f).hom y = x",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T144119-L-2098725",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T144119-L-2098725",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
