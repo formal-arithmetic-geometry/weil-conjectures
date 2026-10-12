@@ -225,7 +225,6 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHom` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeInverse` | 15 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisInvariants` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatOpenDiagonalConormalZero` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FormalSystemsPushPullCore` | 15 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FractionZeroTensorPower` | 15 | 1 | proof |
@@ -336,6 +335,7 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts` | 16 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisImage` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationInjective` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationSurjective` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations` | 16 | 24 | proof |
@@ -372,7 +372,6 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.SelfProductRightAdjointBaseChangeLocal` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SemilocalDimOneConductorPower` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.FieldInvariantGermRepresentative` | 16 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackComposition` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackIdentity` | 16 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SupportedOpenUnitImageProperties` | 16 | 1 | proof |
@@ -462,7 +461,6 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.RingTheory.SmoothOverProductRing` | 16 | 1 | proof |
 | `Sheaf.RingTheory.SplitInjectionAfterCompletion` | 16 | 1 | proof |
 | `Sheaf.RingTheory.SymmetricConormalFreePresentation` | 16 | 1 | proof |
-| `Sheaf.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection` | 16 | 1 | proof |
 | `Sheaf.RingTheory.UniversalFirstOrderThickening` | 16 | 1 | proof |
 | `Sheaf.Topology.StalkDirectSums` | 16 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact` | 17 | 1 | proof |
@@ -530,6 +528,7 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModelExistence` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectGenerationAffineBase` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus` | 17 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PerfectRightAdjointTensorHomComparison` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectSupportedStabilizedLift` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardKunnethQcohFunctoriality` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardKunnethQcohIso` | 17 | 1 | proof |
@@ -573,7 +572,6 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiber` | 17 | 1 | proof |
 | `Sheaf.RingTheory.FormallySmoothCompleteDegreePUnitDerivation` | 17 | 1 | proof |
 | `Sheaf.RingTheory.FreeComplexModNonzerodivisorExact` | 17 | 1 | proof |
-| `Sheaf.RingTheory.GlobalCompleteIntersectionPrincipalLocalization` | 17 | 1 | proof |
 | `Sheaf.RingTheory.HenselianFiniteTypeProductDecomposition` | 17 | 1 | proof |
 | `Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes` | 17 | 1 | proof |
 | `Sheaf.RingTheory.IsRegularOfDimensionDrop` | 17 | 1 | proof |
@@ -591,6 +589,8 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.RingTheory.SimpleFiltration` | 17 | 1 | proof |
 | `Sheaf.RingTheory.SmoothProductAlgebra` | 17 | 1 | proof |
 | `Sheaf.RingTheory.SymmetricProjectivePresentationConormal` | 17 | 1 | proof |
+| `Sheaf.RingTheory.SyntomicEquationCountComparison` | 17 | 1 | proof |
+| `Sheaf.RingTheory.SyntomicPrincipalLocalizationHypotheses` | 17 | 1 | proof |
 | `Sheaf.RingTheory.TateN2CompletePrincipal` | 17 | 1 | proof |
 | `Sheaf.RingTheory.TransitivityGamma` | 17 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels` | 18 | 1 | proof |
