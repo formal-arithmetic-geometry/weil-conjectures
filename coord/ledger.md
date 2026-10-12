@@ -7485,3 +7485,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/C2/Sheaf.AlgebraicGeometry.SchemeTorsorPullbackEquivariantHom (stage 3; reviewer PASS; first push; landing 20261012T112832-L-765167 (interface); batch 20261012T112824; modules 2; new nodes 1)
 - 11:28 L: merged deliver/C3/Sheaf.AlgebraicGeometry.PerfectTensorHomDuality (stage 3; reviewer PASS; first push; landing 20261012T112833-L-765270 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/D2/Sheaf.Topology.ConstantSubsheafNormalizedPresentation (stage 3; reviewer PASS; first push; landing 20261012T112833-L-765404 (interface); batch 20261012T112824; modules 2; new nodes 2)
+- 11:28 L: merged deliver/D3/Sheaf.AlgebraicGeometry.AffineModuleTensorConstruction (stage 3; reviewer PASS; first push; landing 20261012T112833-L-765501 (interface); batch 20261012T112824; modules 4; new nodes 3)

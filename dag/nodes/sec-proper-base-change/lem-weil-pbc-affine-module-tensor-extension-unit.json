@@ -1,0 +1,139 @@
+{
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01SB (lemma-affine-equivalence-modules), construction of h and elucidation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-affine-module-tensor-extension-unit",
+ "kind": "statement",
+ "title": "AffineModuleTensorExtensionUnit",
+ "statement": "Let $f:U\\to X$ be a scheme morphism, $A=f_*O_U$, and $S$ scalar restriction along $O_X\\to A$. Given a ring sheaf $B$, maps $b:O_U\\to B$, $t:f^{-1}A\\to B$, $\\epsilon:B\\to O_U$ with $b\\epsilon=1$, a functor $P$ with specified objects $B\\otimes_{f^{-1}A}f^{-1}G$, and $\\kappa:P\\operatorname{Res}_b\\simeq Sf^*$, there is $H(G)=O_U\\otimes_{B,\\epsilon}P(G)$ with its scalar-extension map formula and natural $\\gamma:Sf^*\\to H$. For every local section $p$ of $P(G)$, $\\gamma_G\\kappa_G(p)$ equals the sheafification of $1\\otimes p$. Conventions: [def-pc-scheme], [pqf-def-affine-morphism], [def-weil-sheaf-of-modules-category], [pqf-def-coherent], [def-pc-module-pullback], [def-pur-sheaf-tensor-product], [lem-pc-module-pullback-adjunction].",
+ "proof": [
+  {
+   "text": "Use change of rings along ε on P objects and sheafify id tensor P(a) on morphisms.\nThe maps preserve identities and composition because tensor extension and sheafification\ndo. The scalar-extension adjunction unit sends p to the sheafification of 1 tensor p.\nCompose this unit, after P, with κ inverse to define γ. Its naturality follows from\nnaturality of the unit and κ. Composing with κ cancels κ inverse, giving the section\nformula. The equation bε=1 makes the unit O_U-linear; no affineness or\nquasi-coherence is needed; the zero ring\nand zero module satisfy the same construction.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma 01SB; tensor construction and elucidation, extracted stage by D3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor pullback sheaf modules scalar extension comparison affine equivalence",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associativity of change of rings sheaves of modules tensor pushout scalar extension",
+   "results": "Algebra.IsPushout.cancelBaseChange and CommRingCat tensorProdObjIsoPushoutObj formulas concern ring/module pushouts, not sheaf-level functors and their canonical units. No complete match.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*(comp|assoc)|restrictScalars.*changeOfRings|cancelBaseChange",
+   "results": "AlgebraTensorModule.cancelBaseChange and Algebra.IsPushout.cancelBaseChange found, but no sheaf-level comparison. Repository rg found no affine_module correspondence theorem other than this item.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "Four Mathlib hits: restriction of scalars, additive instance and val formulas. None includes the pushout comparison, extension unit with the stated morphism formula, or affine algebra-linear comparisons. Independent second reading by D3.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars functor for sheaves of modules has natural map from the original module into tensor extension",
+   "results": "SheafOfModules.unitToPushforwardObjUnit, restriction-of-scalars formulas, PresheafOfModules.toSheafify and module-level tensor Hom equivalence; no complete match for the three stages. Repository search also found exists_changeOfRingsAdjunction, useful for the extension unit but lacking its explicit functor map formula and restriction along bε=1.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModuleTensorConstruction",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); affine module correspondence step 3: tensor construction and comparison maps; AffineModuleTensorExtensionUnit",
+   "via": [
+    "lem-weil-pbc-affine-module-tensor-construction",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModuleTensorExtensionUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModuleTensorExtensionUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_module_tensor_extensionUnit",
+  "statement": "theorem affine_module_tensor_extensionUnit\n    (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)\n    (ε : B ⟶ U.sheaf) (hb : b ≫ ε = 𝟙 U.sheaf)\n    (P : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B))\n        (pobj : ∀ G, P.obj G = SheafOfModules.changeOfRings.{u, u, u} t (I G))\n        (κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f) :\n        ∃ (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules)\n          (hobj : ∀ G, H.obj G = SheafOfModules.changeOfRings.{u, u, u} ε (P.obj G))\n          (γ : S ⋙ tensorPullback f ⟶ H),\n          (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'),\n            H.map a = eqToHom (hobj G) ≫\n              SheafOfModules.changeOfRingsHom.{u, u, u} ε (P.obj G) (P.map a) ≫\n              eqToHom (hobj G').symm) ∧\n          (∀ (G : SheafOfModules.{u} (𝓡 A)) (W : (Opens U)ᵒᵖ)\n              (p : (P.obj G).val.obj W),\n            ((eqToHom (hobj G)).val.app W)\n              ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) =\n              ((PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app\n                (SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε (P.obj G))).app W\n                  ((1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W, (ε.hom.app W).hom] p))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-cf5bf",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T112833-L-765501",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-cf5bf",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T112833-L-765501",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet and node statements; all four modules and direct importer AffineModuleCorrespondence compile successfully, with only permitted named sorry declarations remaining."
+ }
+}

@@ -9,12 +9,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction
-import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.TensorPullback
+import Mathlib.CategoryTheory.Sites.Limits
+import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+import Sheaf.AlgebraicGeometry.AffineModuleTensorBaseChange
+import Sheaf.AlgebraicGeometry.AffineModuleTensorExtensionUnit
+import Sheaf.AlgebraicGeometry.AffineModuleTensorCoherenceComparisons
 
 /-! # Tensor construction for affine module correspondence
 
@@ -72,6 +72,8 @@ local notation "qU" => SheafOfModules.isQuasicoherent U.ringCatSheaf
 set_option hygiene false in
 local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
+set_option maxHeartbeats 1600000 in
+-- The deeply nested functor and transport equalities require additional elaboration steps.
 /-- The tensor pushout, its extension-of-scalars functors, and the canonical comparison maps.
 This assertion constructs the maps; it does not assert that they are isomorphisms.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
@@ -141,7 +143,29 @@ theorem affine_module_tensor_construction [IsAffineHom f] :
             (∀ F : U.Modules, γ.app ((R).obj F) ≫ α.app F = (adj₀).counit.app F) ∧
             (∀ G : SheafOfModules.{u} (𝓡 A),
               (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) := by
-  sorry
+  classical
+  have hc : r₀ = t₀ ≫ e₀ := by
+    let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)
+    simpa [tensorPullbackRingMap, TopCat.Sheaf.inverseImageConstruction] using
+      adj.homEquiv_naturality_left_symm ρ (𝟙 A)
+  have : HasPushout r₀ t₀ := inferInstance
+  let B := pushout r₀ t₀
+  let b := pushout.inl r₀ t₀
+  let t := pushout.inr r₀ t₀
+  let ε : B ⟶ U.sheaf := pushout.desc (𝟙 U.sheaf) e₀ (by simpa using hc)
+  have hp : IsPushout r₀ t₀ b t := IsPushout.of_hasPushout r₀ t₀
+  have hb : b ≫ ε = 𝟙 U.sheaf := pushout.inl_desc _ _ _
+  have ht : t ≫ ε = e₀ := pushout.inr_desc _ _ _
+  refine ⟨B, b, t, ε, hp, hb, ht, ?_⟩
+  obtain ⟨P, pobj, κ, hmapP, hunitP⟩ :=
+    affine_module_tensor_baseChange f B b t hp
+  obtain ⟨H, hobj, γ, hmapH, hunitH⟩ :=
+    affine_module_tensor_extensionUnit f B b t ε hb P pobj κ
+  obtain ⟨hqc, α, β, hα, hβ⟩ :=
+    affine_module_tensor_coherenceComparisons f B b t ε
+      hp hb ht P pobj κ H hobj γ ⟨hmapP, hunitP⟩ ⟨hmapH, hunitH⟩
+  exact ⟨P, pobj, κ, hmapP, hunitP, H, hobj, γ, hmapH, hunitH, hqc, α, β, hα, hβ⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules
