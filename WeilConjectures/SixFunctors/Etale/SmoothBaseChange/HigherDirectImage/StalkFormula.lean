@@ -424,6 +424,13 @@ lemma stalkPoint_map {x y : Scheme.PointedEtaleNeighborhood s} (g : x ⟶ y) :
   congr 1
   exact (Scheme.strictLocalizationConeAll s).w g
 
+
+lemma stalkPoint_ι (x : Scheme.AffinePointedEtaleNeighborhood s) :
+    stalkPoint f s ((Scheme.AffinePointedEtaleNeighborhood.ι s).obj x) =
+      pullback.fst _ _ ≫ (Scheme.strictLocalizationCone s).π.app x := by
+  rw [stalkPoint]
+  erw [Functor.Initial.extendCone_obj_π_app' (F := Scheme.AffinePointedEtaleNeighborhood.ι s) _
+      (𝟙 _), CategoryTheory.Functor.map_id, Category.comp_id]
 variable (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ)
 
 lemma cohomologyPresheafRestrict_stalkPoint_map {V V' : S.Etale} (a : V ⟶ V')
@@ -479,7 +486,90 @@ theorem nonempty_geometricStalk_higherDirectImage_addEquiv {X S : Scheme.{u}} (f
       Ext (SemiSimplicialObject.constSheaf
           (pullback (Scheme.strictLocalizationToBase s) f).smallEtaleTopology Λ)
         ((Etale.upperStar (ModuleCat.{u + 1} Λ)
-          (pullback.snd (Scheme.strictLocalizationToBase s) f)).obj F) q) :=
-  sorry
+          (pullback.snd (Scheme.strictLocalizationToBase s) f)).obj F) q) := by
+  classical
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have : LocallySmall.{u} S.Etale := locallySmall_self _
+  let P := Etale.higherDirectImagePresheaf Λ f q ((DerivedCategory.Plus.singleFunctor _ 0).obj F)
+  let Θ := stalkComparison Λ f s F q
+  suffices hΘ : Function.Bijective Θ from
+    ⟨(presheafFiberHigherDirectImagePresheafAddEquiv Λ f s (q : ℤ)
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).symm.trans
+        (AddEquiv.ofBijective Θ.hom hΘ)⟩
+  -- a small cofiltered model of the affine pointed étale neighbourhoods of `s`
+  obtain ⟨J, _, _, G₀, _⟩ :=
+    InitiallySmall.exists_of_isCofiltered.{u} (Scheme.AffinePointedEtaleNeighborhood s)
+  let D : J ⥤ Over X := G₀ ⋙ Scheme.affineNeighborhoodDiagramOver s ⋙ Over.pullback f
+  let c : Cone D := (Over.pullback f).mapCone ((Scheme.strictLocalizationConeOver s).whisker G₀)
+  have hc : IsLimit ((Over.forget X).mapCone c) :=
+    (Functor.Initial.isLimitWhiskerEquiv G₀ _).symm
+      (Scheme.isLimitStrictLocalizationConePullback s f)
+  -- the neighbourhood `V_j` of `s` and its point
+  let V (j : J) : S.Etale := (G₀.obj j).obj.1
+  let v (j : J) : (Scheme.pointSmallEtale s).fiber.obj (V j) := (G₀.obj j).obj.2
+  have : ∀ j, CompactSpace (D.obj j).left := fun j ↦ by
+    have : CompactSpace ((𝟭 Scheme).obj (V j).left) :=
+      inferInstanceAs (CompactSpace (G₀.obj j).obj.1.left)
+    exact QuasiCompact.compactSpace_of_compactSpace (pullback.fst (V j).hom f)
+  have : ∀ j, QuasiSeparatedSpace (D.obj j).left := fun j ↦ by
+    have : QuasiSeparatedSpace ((𝟭 Scheme).obj (V j).left) :=
+      inferInstanceAs (QuasiSeparatedSpace (G₀.obj j).obj.1.left)
+    exact quasiSeparatedSpace_of_quasiSeparated (pullback.fst (V j).hom f)
+  have : ∀ {i j : J} (φ : i ⟶ j), IsAffineHom (D.map φ).left := fun {i j} φ ↦ by
+    let a : (V i).left ⟶ (V j).left := (G₀.map φ).hom.1.left
+    have : IsAffineHom a := inferInstance
+    have H : IsPullback (D.map φ).left (pullback.fst (V i).hom f) (pullback.fst (V j).hom f) a := by
+      refine IsPullback.of_right ?_ (pullback.lift_fst _ _ _)
+        (IsPullback.of_hasPullback (V j).hom f).flip
+      have e1 : (D.map φ).left ≫ pullback.snd (V j).hom f = pullback.snd (V i).hom f :=
+        Over.w (D.map φ)
+      have e2 : a ≫ (V j).hom = (V i).hom := MorphismProperty.Over.w (G₀.map φ).hom.1
+      rw [e1, e2]
+      exact (IsPullback.of_hasPullback (V i).hom f).flip
+    exact MorphismProperty.of_isPullback H.flip this
+  -- the comparison maps at the stages
+  have KI (j : J) : (c.π.app j).left ≫ pullback.fst (V j).hom f = stalkPoint f s ⟨V j, v j⟩ := by
+    refine Eq.trans ?_ (stalkPoint_ι f s (G₀.obj j)).symm
+    simp only [c, Scheme.strictLocalizationConeOver]
+    exact pullback.lift_fst _ _ _
+  have hΘj (j : J) (p : P.obj (op (V j))) :
+      Θ ((Scheme.pointSmallEtale s).toPresheafFiber (V j) (v j) P p) =
+        cohomologyRestrictOver Λ c.pt.hom (D.obj j).hom (c.π.app j).left (Over.w _) F q
+          (cohomologyPresheafRestrict Λ f F q (pullback.snd (V j).hom f) (V j)
+            (pullback.fst (V j).hom f) pullback.condition p) :=
+    (toPresheafFiber_stalkComparison Λ f s F q (V j) (v j) p).trans
+      (cohomologyPresheafRestrict_comp' Λ f F q (pullback.snd (V j).hom f) (c.π.app j).left (V j)
+        (pullback.fst (V j).hom f) pullback.condition _ (Over.w _) _ (KI j) p)
+  refine ⟨(injective_iff_map_eq_zero Θ.hom).2 fun ξ hξ ↦ ?_, fun x ↦ ?_⟩
+  · obtain ⟨W, w, p, rfl⟩ := (Scheme.pointSmallEtale s).toPresheafFiber_jointly_surjective ξ
+    obtain ⟨y, ⟨g₁⟩⟩ := Scheme.AffinePointedEtaleNeighborhood.exists_hom s ⟨W, w⟩
+    obtain ⟨⟨j, ⟨⟩, g₂⟩⟩ : Nonempty (CostructuredArrow G₀ y) := IsConnected.is_nonempty
+    let g : (Scheme.AffinePointedEtaleNeighborhood.ι s).obj (G₀.obj j) ⟶
+        (Scheme.pointSmallEtale s).fiber.elementsMk W w :=
+      (Scheme.AffinePointedEtaleNeighborhood.ι s).map g₂ ≫ g₁
+    have hp : (Scheme.pointSmallEtale s).toPresheafFiber W w P p =
+        (Scheme.pointSmallEtale s).toPresheafFiber (V j) (v j) P (P.map g.1.op p) := by
+      have h2 : (Scheme.pointSmallEtale s).fiber.map g.1 (v j) = w := g.2
+      exact (congrArg (fun z ↦ (Scheme.pointSmallEtale s).toPresheafFiber W z P p) h2).symm.trans
+        ((Scheme.pointSmallEtale s).toPresheafFiber_w_apply g.1 (v j) P p).symm
+    rw [hp] at hξ ⊢
+    rw [hΘj] at hξ
+    obtain ⟨j', φ, hφ⟩ := Etale.exists_cohomologyRestrictOver_eq_zero_of_isLimit Λ D c hc F q j _
+      hξ
+    let a : V j' ⟶ V j := (G₀.map φ).hom.1
+    have hφ' := (cohomologyPresheafRestrict_comp' Λ f F q (pullback.snd (V j).hom f)
+      (D.map φ).left (V j) (pullback.fst (V j).hom f) pullback.condition
+      (pullback.snd (V j').hom f) (Over.w (D.map φ)) (pullback.fst (V j').hom f ≫ a.left)
+      (pullback.lift_fst _ _ _) _).trans hφ
+    have h3 := cohomologyPresheafRestrict_map Λ f F q (pullback.snd (V j').hom f) a
+      (pullback.fst (V j').hom f) pullback.condition (P.map g.1.op p)
+    have h0 := (bijective_cohomologyPresheafRestrict Λ f F q (V j')).1
+      ((h3.trans hφ').trans (map_zero _).symm)
+    have hv : (Scheme.pointSmallEtale s).fiber.map a (v j') = v j := (G₀.map φ).hom.2
+    rw [← hv, ← (Scheme.pointSmallEtale s).toPresheafFiber_w_apply, h0, map_zero]
+  · obtain ⟨j, y, hy⟩ := Etale.exists_cohomologyRestrictOver_eq_of_isLimit Λ D c hc F q x
+    obtain ⟨p, rfl⟩ := (bijective_cohomologyPresheafRestrict Λ f F q (V j)).2 y
+    exact ⟨_, (hΘj j p).trans hy⟩
 
 end AlgebraicGeometry.Etale
