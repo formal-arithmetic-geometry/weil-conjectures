@@ -9839,3 +9839,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/W2/Sheaf.Paper.H1ClosedPointAffineBasicOpen (stage 3; reviewer PASS; first push; landing 20261012T223425-L-1643802 (interface); batch 20261012T223357; modules 2; new nodes 1)
 - 22:34 L: merged deliver/W3/Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitEpi (stage 3; reviewer PASS; first push; landing 20261012T223425-L-1643902 (proof); batch 20261012T223357; modules 1; new nodes 0)
 - 22:34 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.TangentVectorsVectorSpace (stage 3; reviewer PASS; first push; landing 20261012T223426-L-1644010 (interface); batch 20261012T223357; modules 3; new nodes 2)
+- 22:34 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertions (stage 3; reviewer PASS; first push; landing 20261012T223426-L-1644168 (interface); batch 20261012T223357; modules 3; new nodes 2)

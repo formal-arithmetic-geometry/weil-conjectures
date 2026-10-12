@@ -6,6 +6,8 @@ Authors: SHEAF group K2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+import Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertionsFirst
+import Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertionsLast
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly
@@ -54,6 +56,9 @@ theorem assertions_constant_of_isClopen (Λ : Type (u + 1)) [CommRing Λ]
     (hcov : ∀ x : X, ∃ i, x ∈ U i)
     (H : ∀ i, Assertions Λ ((U i).ι ≫ f)
       ((constantSheaf (U i).toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :
-    Assertions Λ f ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by sorry
+    Assertions Λ f ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := by
+  rcases clopen_first_four Λ f M U hU hdisj hcov H with ⟨h1, h2, h3, h4⟩
+  rcases clopen_last_four Λ f M U hU hdisj hcov H with ⟨h5, h6, h7, h8⟩
+  exact ⟨h1, h2, h3, h4, h5, h6, h7, h8⟩
 
 end AlgebraicGeometry.IsCurve
