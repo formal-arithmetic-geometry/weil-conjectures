@@ -7275,3 +7275,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/S2/Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal (stage 3; reviewer PASS; first push; landing 20261012T095922-L-324295 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:59 L: merged deliver/S2/Sheaf.Algebra.Homology.RoosComplex (stage 3; reviewer PASS; first push; landing 20261012T095923-L-324393 (interface); batch 20261012T095846; modules 4; new nodes 3)
 - 09:59 L: merged deliver/S2/Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde (stage 3; reviewer PASS; first push; landing 20261012T095923-L-324492 (interface); batch 20261012T095846; modules 3; new nodes 2)
+- 09:59 L: merged deliver/S3/Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap (stage 3; reviewer PASS; first push; landing 20261012T095923-L-324608 (proof); batch 20261012T095846; modules 1; new nodes 0; change records: coord/changes/schemeDerivedAdjunction-proof-options.md)

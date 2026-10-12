@@ -8,9 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedAdjoint
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 
 /-!
-REPAIR: Construct schemeDerivedBaseChangeMap with fixed canonical data; follow coord/hollow-definitions.md (class 2), claim/adapt users and record the definition change.
+REPAIR: Construct schemeDerivedBaseChangeMap with fixed canonical data; follow
+coord/hollow-definitions.md (class 2), claim/adapt users and record the definition change.
  # The derived base-change morphism of O-modules
 
 Source: Stacks Project, Cohomology, Remark 08HY; equivalently the unit construction
@@ -27,6 +31,10 @@ set_option backward.isDefEq.respectTransparency.types false
 noncomputable section
 namespace AlgebraicGeometry
 
+
+set_option synthInstance.maxSize 2048 in
+set_option maxHeartbeats 800000 in
+-- The sheaf tensor and total-complex instances require larger search terms and budget.
 /-- Derived pullback is left adjoint to derived direct image, bifunctorially on the
 unbounded derived categories of O-modules. Source: Stacks, Tag 079W
 (blueprint: def-pc-derived-base-change-map).
@@ -68,7 +76,77 @@ theorem exists_schemeDerivedAdjunction {X Y : Scheme.{uAdj}} (f : X ⟶ Y)
                 (ComplexShape.up ℤ)).homEquiv M K a) ≫
             (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K
       := by
-  sorry
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  let A := SheafOfModules.{uAdj} (moduleRings Y.toRingedSpace)
+  let B := SheafOfModules.{uAdj} (moduleRings X.toRingedSpace)
+  let : MonoidalCategory A := SheafOfModules.monoidalCategory Y.sheaf
+  let : SymmetricCategory A := SheafOfModules.symmetricCategory Y.sheaf
+  have : MonoidalPreadditive A := Classical.choice (SheafOfModules.tensorClosed Y.sheaf).1
+  let : MonoidalClosed A := Classical.choice (SheafOfModules.tensorClosed Y.sheaf).2.1
+  have : CategoryTheory.Limits.HasColimitsOfSize.{0, 0} A :=
+    CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uAdj, uAdj} A
+  have : Abelian.HasFunctorialFlatResolution A := schemeModule_hasFunctorialFlatResolution Y
+  have : IsGrothendieckAbelian.{uAdj} A :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)
+  let G : A ⥤ B := Scheme.Modules.tensorPullback f
+  have : G.PreservesKFlatQuasiIso := by
+    refine ⟨?_⟩
+    intro P Q hP hQ s hs
+    have toIsKFlat (P : CochainComplex A ℤ)
+        (hP : (HomologicalComplex.quasiIso A (.up ℤ)).kFlat P) :
+        CochainComplex.IsKFlat (R := Y.sheaf) P := by
+      intro F hF
+      have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
+        ((HomotopyCategory.quotient A (.up ℤ)).obj P)).mp
+          ((HomotopyCategory.kFlat_quotient_obj_iff P).mpr hP)
+      exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
+        (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr hF)).2
+    exact tensorPullback_quasiIso_of_isKFlat f s (toIsKFlat P hP) (toIsKFlat Q hQ) hs
+  have := hε
+  have : (derivedPullback f ⋙ schemeDerivedDirectImage f).IsLeftDerivedFunctor
+      ((Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight ε (schemeDerivedDirectImage f))
+      (HomotopyCategory.quasiIso A (.up ℤ)) :=
+    (HomotopyCategory.quasiIso A (.up ℤ)).localizerMorphismKFlat
+      |>.isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure ε
+        (fun P ↦ G.derives_kFlat
+          |>.isIso_of_isLeftDerivedFunctor ε P) (schemeDerivedDirectImage f)
+  let β := (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit
+  have : (schemeDerivedDirectImage f ⋙ derivedPullback f).IsRightDerivedFunctor
+      (Functor.whiskerRight β (derivedPullback f) ≫ (Functor.associator _ _ _).hom)
+      (HomotopyCategory.quasiIso B (.up ℤ)) :=
+    (HomotopyCategory.KInjectives.localizerMorphism B)
+      |>.isRightDerivedFunctor_comp_of_isRightDerivabilityStructure β
+        (fun I ↦ (HomotopyCategory.KInjectives.localizerMorphism_derives _)
+          |>.isIso_of_isRightDerivedFunctor β I) (derivedPullback f)
+  let adj := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f))
+    |>.mapHomotopyCategory (.up ℤ)
+  let d := adj.derived (HomotopyCategory.quasiIso A (.up ℤ))
+    (HomotopyCategory.quasiIso B (.up ℤ)) ε β
+  refine ⟨d, ?_⟩
+  intro M K a
+  have fac := adj.derivedη_fac_app (HomotopyCategory.quasiIso A (.up ℤ)) ε β M
+  change d.unit.app (DerivedCategory.Qh.obj M) ≫
+      (schemeDerivedDirectImage f).map (ε.app M ≫ DerivedCategory.Qh.map a) = _
+  change d.unit.app (DerivedCategory.Qh.obj M) ≫
+      (schemeDerivedDirectImage f).map (ε.app M) = _ at fac
+  calc
+    _ = (d.unit.app (DerivedCategory.Qh.obj M) ≫
+        (schemeDerivedDirectImage f).map (ε.app M)) ≫
+        (schemeDerivedDirectImage f).map (DerivedCategory.Qh.map a) := by
+      rw [Functor.map_comp, Category.assoc]
+    _ = ((DerivedCategory.Qh (C := A)).map (adj.unit.app M) ≫ β.app _) ≫
+        (schemeDerivedDirectImage f).map (DerivedCategory.Qh.map a) :=
+      congrArg (fun b ↦ b ≫ _) fac
+    _ = (DerivedCategory.Qh (C := A)).map (adj.unit.app M) ≫
+        ((DerivedCategory.Qh (C := A)).map ((RingedSpace.moduleDirectImage
+          f.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ) |>.map a) ≫ β.app K) := by
+      erw [Category.assoc, ← β.naturality a]
+      rfl
+    _ = _ := by
+      erw [← Category.assoc, ← DerivedCategory.Qh.map_comp]
+      rfl
+
 
 
 /-- The canonical base-change map for a commutative square of schemes. In particular

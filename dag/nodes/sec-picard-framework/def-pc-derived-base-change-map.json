@@ -27,9 +27,67 @@
   "lem-pc-derived-direct-image-composition",
   "lem-pc-ringed-spaces-derived-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use SheafOfModules.tensorClosed for the additive symmetric monoidal closed structure and schemeModule_hasFunctorialFlatResolution for functorial flat resolutions of O_Y-modules.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "HomotopyCategory.kFlat_iff_preserves_acyclic and kFlat_quotient_obj_iff translate the generic K-flat predicate to the acyclic tensor predicate. Apply tensorPullback_quasiIso_of_isKFlat to obtain the generic PreservesKFlatQuasiIso instance.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-pc-tensor-pullback-kflat-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The library derives_kFlat theorem and isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure show that the supplied left-derived counit remains a derived counit after postcomposition. Dually KInjectives.localizerMorphism and isRightDerivedFunctor_comp_of_isRightDerivabilityStructure show the same for the recorded direct-image unit. Both comparisons are isomorphisms on their resolution classes.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply CategoryTheory.Adjunction.derived to the mapped tensor-pullback/direct-image adjunction. Its derived-unit factorization and naturality of the right-derived unit yield the displayed Hom equivalence.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unchanged schemeDerivedBaseChangeMap transposes the canonical pullback-composition comparison followed by the derived counit, using the pinned adjunction just constructed. The composition comparisons and their supplied left-derived counits come from exists_derivedPullbackComposition.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-tensor-pullback-kflat-quasi-iso",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S3",
+  "date": "2026-10-12",
+  "document": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+  "place": "Adjunction.derived and derivedη_fac_app, using library K-flat/K-injective derivability structures; specialization of Stacks Tag 079W."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -113,5 +171,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T095923-L-324608",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
