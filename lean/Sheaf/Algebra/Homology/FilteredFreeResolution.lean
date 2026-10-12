@@ -10,7 +10,8 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Sheaf.Algebra.Homology.FreeComplexCover
+import Sheaf.Algebra.Homology.FreeCoverBicomplex
+import Sheaf.Algebra.Homology.TotalFreeFiltration
 import Sheaf.Paper.DerivedTotalResolutionQuasiIso
 
 /-!
@@ -62,6 +63,11 @@ theorem exists_filtered_free_resolution {A : Type u} [CommRing A]
             ∐ (fun i : I =>
               (HomologicalComplex.single (ModuleCat.{u} A) (ComplexShape.up ℤ) (degree i)).obj
                 (ModuleCat.of A A)))) := by
-  sorry
+  obtain ⟨K, ε, a, hpos, hε₀, hεneg, hex, hex₀, hsurj, hcyc, hcyc₀, hcycsurj,
+    hcols⟩ := exists_freeCoverBicomplex M
+  refine ⟨K.total (ComplexShape.up ℤ), ε, ?_, ?_⟩
+  · exact WeilConjectures.DerivedTotalResolution.total_resolution_quasiIso M K ε a
+      hpos hε₀ hεneg hex hex₀ hsurj hcyc hcyc₀ hcycsurj
+  · exact exists_totalFreeFiltration K hpos hcols
 
 end CochainComplex

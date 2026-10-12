@@ -24,56 +24,48 @@
  ],
  "proof": [
   {
-   "text": "Starting with $M_0^\\bullet=M^\\bullet$, apply [lem-pc-derived-free-complex-cover] to obtain a degreewise surjection $P_0^\\bullet \\to M_0^\\bullet$ which is surjective on cocycles; let $M_1^\\bullet$ be its kernel. Iterating gives exact sequences $0 \\to M_{i+1}^\\bullet \\to P_i^\\bullet \\to M_i^\\bullet \\to 0$ and a resolution $\\cdots \\to P_1^\\bullet \\to P_0^\\bullet \\to M^\\bullet \\to 0$.",
+   "text": "Apply [lem-pc-derived-free-cover-bicomplex] to $M$ to obtain the nonpositive-column bicomplex $K$, its augmentation $\\epsilon:\\operatorname{Tot}(K)\\to M$, the column-zero map $a$, exact augmented rows of terms and cycles, and split two-step free presentations of the columns.",
    "uses": [
-    "lem-pc-derived-free-complex-cover"
+    "lem-pc-derived-free-cover-bicomplex"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dga.tex",
-    "place": "Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP), proof"
+    "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
    }
   },
   {
-   "text": "Totalize this resolution with $P^n=\\bigoplus_{a+b=n}P_{-a}^b$ and differential $d(x)=f_{-a}(x)+(-1)^a d_{P_{-a}}(x)$ on $x\\in P_{-a}^b$. The identity $d^2=0$ follows from $d^2=0$ on each $P_i$ and the relation $f_{i-1}f_i=0$, so $P^\\bullet$ is a cochain complex, and the augmentation is induced by $P_0^\\bullet \\to M^\\bullet$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dga.tex",
-    "place": "Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP), construction of the total complex"
-   }
-  },
-  {
-   "text": "For each $i$, [lem-pc-derived-free-complex-cover] (applied to $M_i^\\bullet$ in Step 1) provides a degreewise split short exact sequence of complexes $0 \\to P_i'^\\bullet \\to P_i^\\bullet \\to P_i''^\\bullet \\to 0$ in which $P_i'^\\bullet$ and $P_i''^\\bullet$ are direct sums of shifts $A[k]$ with zero differential; in particular $d_{P_i}$ vanishes on $P_i'^\\bullet$ and maps $P_i^\\bullet$ into $P_i'^\\bullet$. Set $F_{-1}P^\\bullet=0$, $F_{2i}P^\\bullet=\\bigoplus_{j<i}P_j^\\bullet\\oplus P_i'^\\bullet$ and $F_{2i+1}P^\\bullet=\\bigoplus_{j\\le i}P_j^\\bullet$ inside the total complex of Step 2. Each is a subcomplex: on $x\\in P_i'$ the total differential is $f_i(x)\\pm d_{P_i}(x)=f_i(x)\\in P_{i-1}$, and on $x\\in P_j$ it lies in $P_j\\oplus P_{j-1}$. The quotient $F_{2i}P^\\bullet/F_{2i-1}P^\\bullet$ is $P_i'^\\bullet$ with differential induced by $\\pm d_{P_i}$, which is zero, and $F_{2i+1}P^\\bullet/F_{2i}P^\\bullet$ is $P_i''^\\bullet$ with its zero differential; both are direct sums of shifts $A[k]$ as complexes. The degreewise splittings of $P_i'\\subset P_i$ give termwise split inclusions $F_nP^\\bullet\\to F_{n+1}P^\\bullet$, and every summand $P_i$ lies in $F_{2i+1}P^\\bullet$, so the filtration is increasing and exhaustive.",
-   "uses": [
-    "lem-pc-derived-free-complex-cover"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/dga.tex",
-    "place": "Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP), filtration construction"
-   }
-  },
-  {
-   "text": "The exactness of the resolution and the surjectivity on cocycles at every stage give the hypotheses of [lem-pc-derived-total-resolution-quasi-iso]. Therefore the augmentation $P^\\bullet \\to M^\\bullet$ is a quasi-isomorphism.",
+   "text": "Apply [lem-pc-derived-total-resolution-quasi-iso] to this $K,\\epsilon,a$. Vanishing of positive columns, the augmentation identities, exactness in every negative column and at column zero, and surjectivity of the augmented term and cycle maps are exactly the supplied hypotheses. It follows that $\\epsilon$ is a quasi-isomorphism.",
    "uses": [
     "lem-pc-derived-total-resolution-quasi-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dga.tex",
-    "place": "Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP), final sentence invoking Homology, Lemma 09IZ"
+    "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-derived-total-free-filtration] to $K$, its vanishing positive columns and the split two-step free column presentations. This gives $F,\\iota,s$ with all six filtration properties. Take $P=\\operatorname{Tot}(K)$ and $q=\\epsilon$ and combine this filtration with the preceding quasi-isomorphism.",
+   "uses": [
+    "lem-pc-derived-total-free-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-free-complex-cover",
-  "lem-pc-derived-total-resolution-quasi-iso"
+  "lem-pc-derived-free-cover-bicomplex",
+  "lem-pc-derived-total-resolution-quasi-iso",
+  "lem-pc-derived-total-free-filtration"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/dga.tex",
-  "place": "Differential Graded Algebra, Lemma 15.60.9 (Tag 09KP), proof"
+  "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
  },
  "mathlib_searches": [
   {
@@ -153,5 +145,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T054000-L-2648627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
