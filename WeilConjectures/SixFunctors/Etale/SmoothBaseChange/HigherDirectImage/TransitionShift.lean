@@ -98,18 +98,31 @@ lemma Etale.lowerStarPlusShiftedHomEquiv_comp_lowerStarPlusTransition (a : Y' �
       adj'.counit.app (D+((a)^*[ModuleCat.{u + 1} Λ]).obj K) =
       c.hom.app (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K) ≫
         D+((a)^*[ModuleCat.{u + 1} Λ]).map (adj.counit.app K) := by
-    simp only [Etale.lowerStarPlusTransition, eqToIso_refl, Iso.refl_trans, Functor.map_comp,
-      Category.assoc, Adjunction.counit_naturality, Adjunction.left_triangle_components_assoc]
-    rfl
-  rw [Etale.lowerStarPlusShiftedHomEquiv_apply, Etale.lowerStarPlusShiftedHomEquiv_apply,
-    Functor.map_comp, Category.assoc, Functor.commShiftIso_hom_naturality_assoc,
-    ← Functor.map_comp, key, Functor.map_comp, Functor.map_comp, Functor.map_comp,
-    Category.assoc, Category.assoc, ← Functor.commShiftIso_hom_naturality,
-    ← NatTrans.naturality_assoc]
+    dsimp only [Etale.lowerStarPlusTransition]
+    rw [eqToIso_refl, Iso.refl_trans, ← Adjunction.homEquiv_unit]
+    exact (Adjunction.homEquiv_counit _ _ _ _).symm.trans (Equiv.symm_apply_apply _ _)
+  have key' : D+((a ≫ h)^*[ModuleCat.{u + 1} Λ]).map
+        ((Etale.lowerStarPlusTransition Λ a h (a ≫ h) rfl K)⟦q⟧') ≫
+      (D+((a ≫ h)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app _ ≫
+      (adj'.counit.app (D+((a)^*[ModuleCat.{u + 1} Λ]).obj K))⟦q⟧' =
+      (D+((a ≫ h)^*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app _ ≫
+        (c.hom.app (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K))⟦q⟧' ≫
+        (D+((a)^*[ModuleCat.{u + 1} Λ]).map (adj.counit.app K))⟦q⟧' := by
+    rw [Functor.commShiftIso_hom_naturality_assoc, ← Functor.map_comp, key, Functor.map_comp]
+  have nat : c.hom.app A ≫ D+((a)^*[ModuleCat.{u + 1} Λ]).map
+        (D+((h)^*[ModuleCat.{u + 1} Λ]).map x) =
+      D+((a ≫ h)^*[ModuleCat.{u + 1} Λ]).map x ≫ c.hom.app _ :=
+    (c.hom.naturality x).symm
   have hc := NatTrans.shift_app_comm c.hom q (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K)
   rw [Functor.commShiftIso_comp_hom_app] at hc
-  simp only [Functor.comp_obj, Functor.comp_map, Category.assoc] at hc ⊢
-  rw [reassoc_of% hc]
+  have na := (D+((a)^*[ModuleCat.{u + 1} Λ])).commShiftIso_hom_naturality
+    ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).counit.app K) q
+  rw [Etale.lowerStarPlusShiftedHomEquiv_apply, Etale.lowerStarPlusShiftedHomEquiv_apply,
+    Functor.map_comp, Category.assoc, key', reassoc_of% hc, Functor.map_comp, Functor.map_comp,
+    Category.assoc, Category.assoc]
+  erw [na]
+  rw [reassoc_of% nat]
+  rfl
 
 /-- Naturality of `AlgebraicGeometry.Etale.lowerStarPlusShiftedHomEquiv` in `K`. -/
 lemma Etale.lowerStarPlusShiftedHomEquiv_comp_map (h : Y ⟶ X) (q : ℤ)
@@ -121,6 +134,8 @@ lemma Etale.lowerStarPlusShiftedHomEquiv_comp_map (h : Y ⟶ X) (q : ℤ)
       Etale.lowerStarPlusShiftedHomEquiv Λ h q A K x ≫ f⟦q⟧' := by
   rw [Etale.lowerStarPlusShiftedHomEquiv_apply, Etale.lowerStarPlusShiftedHomEquiv_apply,
     Functor.map_comp, Category.assoc, Functor.commShiftIso_hom_naturality_assoc,
-    Category.assoc, Category.assoc, ← Functor.map_comp, ← Functor.map_comp,
-    Adjunction.counit_naturality]
-  rw [Functor.map_comp]
+    Category.assoc, Category.assoc, ← Functor.map_comp, ← Functor.map_comp]
+  congr 3
+  exact (Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).counit_naturality f
+
+end AlgebraicGeometry
