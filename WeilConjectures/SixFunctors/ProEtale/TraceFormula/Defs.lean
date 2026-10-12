@@ -327,6 +327,11 @@ lemma id_source {f : X ⟶ Y} (hf : IsGeometricHom s f) : IsGeometricHom s (𝟙
   obtain ⟨a, _, _⟩ := hf
   exact .id (f ≫ a)
 
+/-- The target of a morphism of geometric schemes is geometric. -/
+lemma id_target {f : X ⟶ Y} (hf : IsGeometricHom s f) : IsGeometricHom s (𝟙 Y) := by
+  obtain ⟨a, _, _⟩ := hf
+  exact .id a
+
 /-- Morphisms of geometric schemes are stable under composition. -/
 lemma comp {f : X ⟶ Y} {g : Y ⟶ Z} (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) :
     IsGeometricHom s (f ≫ g) := by
@@ -341,8 +346,8 @@ end IsGeometricHom
 /-- Coefficients and geometric categories (blueprint: `sk-d-setup`): the stability of the
 categories `Dᵇctf(X, A)` of bounded constructible objects of finite Tor amplitude
 (`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`) on geometric schemes over
-`s` under the operations: they contain `A_X`, are stable under `⊗ᴸ`, `Lf^*`, `Rf_!`, `Rf^!`
-and, for `f` proper, `Rf_*`. These are the stability theorems of the six functors chapter
+`s` under the operations: they contain `A_X`, are stable under `⊗ᴸ`, `RHom`, `Lf^*`, `Rf_!`,
+`Rf^!` and, for `f` proper, `Rf_*`. These are the stability theorems of the six functors chapter
 (blueprint `sk-thm-sf-ctf-stability`, `sk-prop-sf-rf-shriek-preservation`), which hold at the
 finite coefficient stages `A = 𝒪_E/ϖⁿ` over a field in which `ℓ` is invertible. A scheme `X` is
 geometric when `𝟙 X` is a morphism of geometric schemes. -/
@@ -356,6 +361,13 @@ structure GeometricCoefficients (s : Scheme.{u}) : Prop where
     (hK : DerivedCategory.constructibleFiniteTor A X K)
     (hL : DerivedCategory.constructibleFiniteTor A X L) :
     DerivedCategory.constructibleFiniteTor A X (K ⊗ L)
+  /-- `Dᵇctf(X)` is stable under the internal hom `RHom` (blueprint `prop-functor-package`: at
+  the finite stages internal Hom preserves `Dᵇctf` in both variables). -/
+  ctf_ihom {X : Scheme.{u}} (hX : IsGeometricHom s (𝟙 X))
+    {K L : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+    (hK : DerivedCategory.constructibleFiniteTor A X K)
+    (hL : DerivedCategory.constructibleFiniteTor A X L) :
+    DerivedCategory.constructibleFiniteTor A X ((ihom K).obj L)
   /-- `Dᵇctf` is stable under `Lf^*`. -/
   ctf_upperStar {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsGeometricHom s f)
     {K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
