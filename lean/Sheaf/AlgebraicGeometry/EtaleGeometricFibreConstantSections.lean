@@ -6,8 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant
-import Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import all Sheaf.ConstructibleSheaf.ModuleConstantOfSetPullback
 
 /-!
 # Sections on a connected geometric fibre
@@ -96,6 +95,18 @@ theorem etaleGeometricFibreConstantSections
                 ((Scheme.pointSmallEtale s).sheafFiber.obj F))).app
                   (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj
                     (Scheme.Etale.mk (𝟙 U)))) e) := by
-  sorry
+  classical
+  let α := Classical.choose (etaleGeometricFibreInverseImageConstant S Ω s)
+  have hα := Classical.choose_spec (etaleGeometricFibreInverseImageConstant S Ω s)
+  refine ⟨α, rfl, ?_⟩
+  intro U h _ F
+  constructor
+  · have hi : Function.Bijective
+        (((α U h).inv.app F).hom.app (op (Scheme.Etale.mk (𝟙 U)))) := by
+      exact (CategoryTheory.isIso_iff_bijective _).1 inferInstance
+    exact hi.comp (Scheme.set_constant_sections_bijective U
+      ((Scheme.pointSmallEtale s).sheafFiber.obj F))
+  · intro V v e
+    exact hα.2 U V h v F (Scheme.Etale.mk (𝟙 U)) e
 
 end AlgebraicGeometry

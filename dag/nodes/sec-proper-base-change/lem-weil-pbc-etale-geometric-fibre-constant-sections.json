@@ -34,7 +34,7 @@
  ],
  "proof": [
   {
-   "text": "Let $q:U\\to S$ be the composite $U\\to\\operatorname{Spec}\\Omega\\xrightarrow{\\bar s}S$. By [lem-weil-pbc-etale-geometric-fibre-inverse-image-constant], together with the canonical composition isomorphism and its unit compatibility from [lem-weil-pbc-sets-etale-inverse-image-composition-units], there is a canonical natural isomorphism $q^{-1}F\\cong\\underline{F_{\\bar s}}$ on $U_{\\Et}$. Thus the inverse image in the statement is the claimed constant sheaf.",
+   "text": "Choose the germ-normalized comparison family from [lem-weil-pbc-etale-geometric-fibre-inverse-image-constant]. Its naturality is expressed using the fixed unit-preserving comparison of [lem-weil-pbc-sets-etale-inverse-image-composition-units], exactly as in the statement.",
    "uses": [
     "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
@@ -46,10 +46,10 @@
    }
   },
   {
-   "text": "Assume $U$ is nonempty and connected. Applying [lem-weil-pbc-constant-sheaf-set-sections-connected-natural] to the set $E=F_{\\bar s}$ identifies $\\Gamma(U,q^{-1}F)$ with $F_{\\bar s}$ by sending $a$ to the corresponding constant section.",
+   "text": "Import all Sheaf.ConstructibleSheaf.ModuleConstantOfSetPullback and apply its already-proved private helper AlgebraicGeometry.Scheme.set_constant_sections_bijective to U and the geometric stalk F_s. This helper is the connected constant-set sections argument in step 1 of [lem-weil-pbc-module-constant-of-set-pullback], proved by embedding E into FreeAbelianGroup E and using a local representative on a nonempty neighbourhood. The import-all form makes the existing private proof available without copying it or changing its visibility. Its E : Type (u+1) binder matches the stalk universe exactly. Compose its bijection with the component of the inverse comparison isomorphism from [lem-weil-pbc-etale-geometric-fibre-inverse-image-constant].",
    "uses": [
+    "lem-weil-pbc-module-constant-of-set-pullback",
     "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
-    "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
     "def-weil-connected-scheme"
    ],
    "elementary": false,
@@ -59,13 +59,12 @@
    }
   },
   {
-   "text": "For an $\\Omega$-morphism $v:V\\to U$, naturality of the isomorphism in Step 1 and the naturality clause of [lem-weil-pbc-constant-sheaf-set-sections-connected-natural] identify the pullback of the section corresponding to $a\\in F_{\\bar s}$ with the constant section of value $a$ on $V$, independently of connectedness of $V$.",
+   "text": "Specialize the generator-compatibility equation in [lem-weil-pbc-etale-geometric-fibre-inverse-image-constant] to the identity etale object of U. This is exactly the required further-pullback equation, using the composition witness of [lem-weil-pbc-sets-etale-inverse-image-composition-units]. No hypothesis on connectedness or nonemptiness of V is needed.",
    "uses": [
     "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
-    "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
     "place": "Etale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph, lines 5052-5067"
@@ -75,13 +74,13 @@
  "proof_deps": [
   "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
   "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
+  "lem-weil-pbc-module-constant-of-set-pullback",
   "def-weil-connected-scheme"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph, together with Remark 59.23.2 (Tag 03P5)"
+  "place": "Tag 03P5 and Tag 0A3H, final paragraph; Lean proof imports and applies the existing private connected-set-section helper from Sheaf.ConstructibleSheaf.ModuleConstantOfSetPullback using import all, then specializes the existing comparison naturality"
  },
  "mathlib_searches": [
   {
@@ -157,5 +156,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T144114-L-2096741",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
