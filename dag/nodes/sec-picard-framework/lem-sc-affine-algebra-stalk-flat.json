@@ -15,16 +15,17 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine neighborhood Spec B of f(x); its inverse image is Spec A. For p = x and q = f(x), distinguished opens D(b) with b outside q are cofinal neighborhoods. Their inverse images have section rings A localized at the image of b. Taking the stalk colimit gives S^{-1}A for S the image of B minus q. Germ compatibility identifies the source-to-target map with S^{-1}A → A_p.",
+   "text": "Choose an affine neighborhood U of f(x). Its inverse image is affine. Set A = Γ(X,f⁻¹U), S = (f_*O_X)_{f(x)}, T = O_{X,x}. The pushforward germ makes S the localization of A at the image of Γ(Y,U) minus the prime of f(x), by affine_pushforward_stalk_isLocalization.",
    "uses": [
     "pqf-def-affine-morphism",
-    "lem-weil-pbc-affine-open-stalk-localization"
+    "lem-sc-affine-pushforward-stalk-localization"
    ],
    "elementary": false
   },
   {
-   "text": "S avoids p, so A_p is a further localization of S^{-1}A. Localization is flat. The calculation applies at each point; the empty source case is vacuous.",
+   "text": "The affine stalk theorem identifies T as a prime localization of A, so IsLocalization.flat gives Module.Flat A T. PresheafedSpace.stalkMap_germ for the canonical ringed-space map identifies the composite A → S → T with the germ A → T, giving IsScalarTower A S T. Module.flat_iff_of_isLocalization S M T then descends Module.Flat A T to Module.Flat S T, exactly the stated RingHom.Flat.",
    "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
     "lem-weil-pbc-localization-flat"
    ],
    "elementary": false
@@ -32,13 +33,17 @@
  ],
  "proof_deps": [
   "pqf-def-affine-morphism",
+  "lem-sc-affine-pushforward-stalk-localization",
   "lem-weil-pbc-affine-open-stalk-localization",
   "lem-weil-pbc-localization-flat"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "C2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW, lemma-affine-morphism-equivalence, affine stalk calculation; read at https://stacks.math.columbia.edu/tag/0AVW"
+  "place": "Tag 0AVW, lemma-affine-morphism-equivalence, affine stalk calculation; read at https://stacks.math.columbia.edu/tag/0AVW",
+  "note": "Direct Lean proof using Mathlib localization properties, affine basic opens, and germ compatibility."
  },
  "mathlib_searches": [
   {
@@ -111,9 +116,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T112853-L-772992",
+  "landing": "20261012T135221-L-1657293",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

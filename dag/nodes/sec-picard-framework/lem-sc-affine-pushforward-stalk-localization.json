@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-affine-pushforward-stalk-localization",
+ "kind": "statement",
+ "title": "Affine pushforward stalk as a localization of inverse-image sections",
+ "statement": "Let f:X → Y be an affine morphism of schemes [pqf-def-affine-morphism, def-pc-scheme], U an affine open of Y, y ∈ U, B = Γ(Y,U), A = Γ(X,f⁻¹U), and q the prime of B corresponding to y [lem-weil-pbc-affine-open-stalk-localization]. The germ A → (f_*O_X)_y makes (f_*O_X)_y an A-algebra which is a localization of A at the submonoid image of B minus q under f.app U. This includes an empty inverse image.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, lemma-affine-morphism-equivalence, affine stalk calculation; read at https://stacks.math.columbia.edu/tag/0AVW"
+ },
+ "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "proof": [
+  {
+   "text": "Write B = Γ(Y,U), A = Γ(X,f⁻¹U), q = hU.primeIdealOf y, and F = f_*O_X. The germ A → F_y defines its A-algebra structure. Use the affine stalk localization B → O_{Y,y} and IsLocalization.AtPrime.isUnit_to_map_iff to identify membership of y in D(b) with b ∈ B minus q. For every b outside q, its germ in O_{Y,y} is a unit. Mapping this germ through stalkFunctor.map f.c and applying stalkFunctor_map_germ_apply proves that the image of f.app U b in F_y is a unit.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For z ∈ F_y choose a section over a neighborhood V using exists_germ_eq. Shrink V to a basic open D(b) of the affine U containing y, using IsAffineOpen.exists_basicOpen_le. Its inverse image is D(f.app U b), by Scheme.Hom.preimage_basicOpen. Since f⁻¹U is affine, isLocalization_of_eq_basicOpen identifies its sections with A localized at powers of f.app U b. IsLocalization.surj supplies a numerator a and denominator (f.app U b)^n. Apply the germ ring homomorphism, use germ_res_apply and map_mul, and obtain z times the denominator germ equal to the numerator germ. The denominator lies in the image of B minus q.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If a,b ∈ A have equal germs in F_y, germ_eq supplies a neighborhood V where their restrictions agree. Shrink to D(c) containing y. Functoriality of restriction preserves the equality there. Its inverse image is D(f.app U c), whose sections are a localization of A at powers of f.app U c. IsLocalization.exists_of_eq gives an exponent n with (f.app U c)^n a = (f.app U c)^n b. This denominator also lies in the image of B minus q. Combining the units, fractions, and equality properties with isLocalization_iff proves the claim. All constructions also apply to the zero ring when the inverse image is empty.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-open-section-vanishing-prime"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, lemma-affine-morphism-equivalence, affine stalk calculation; read at https://stacks.math.columbia.edu/tag/0AVW",
+  "note": "Direct Lean proof using Mathlib localization properties, affine basic opens, and germ compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The map from the stalk of the pushforward structure sheaf of an affine morphism to the source stalk is a localization and flat",
+   "results": "AlgebraicGeometry.IsAffineOpen.isLocalization_stalk', AlgebraicGeometry.IsAffineOpen.isLocalization_stalk, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux, AlgebraicGeometry.Flat.iff_flat_stalkMap",
+   "date": "2026-10-12",
+   "verdict": "partial matches: used Mathlib ingredients; no general affine-open pushforward-stalk localization theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization",
+   "results": "IsLocalization, IsLocalization.fintype', IsLocalization.toLocalizationMap, Localization.isLocalization, IsLocalization.noZeroDivisors, IsLocalization.mk', IsLocalization.sec, IsLocalization.subsingleton",
+   "date": "2026-10-12",
+   "verdict": "partial matches: used Mathlib ingredients; no general affine-open pushforward-stalk localization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalization.*stalk|isLocalizedModule_toPushforwardStalk",
+   "results": "Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean",
+   "date": "2026-10-12",
+   "verdict": "partial matches: used Mathlib ingredients; no general affine-open pushforward-stalk localization theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an affine scheme morphism f and affine open U, the pushforward structure sheaf stalk at y in U is the localization of sections on the inverse image of U at images of functions outside the prime of y",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraStalkFlat",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AVW, affine stalk calculation: the source stalk is the localization of inverse-image affine sections.",
+   "via": [
+    "lem-sc-affine-algebra-stalk-flat",
+    "lem-sc-affine-algebra-tensor-pullback-exact",
+    "lem-sc-affine-algebra-derived-adjunction-qcoh",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePushforwardStalkLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePushforwardStalkLocalization.lean",
+  "declaration": "AlgebraicGeometry.affine_pushforward_stalk_isLocalization",
+  "statement": "theorem affine_pushforward_stalk_isLocalization\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]\n    {U : Y.Opens} (hU : IsAffineOpen U) (y : U) :\n    let F := (TopCat.Presheaf.pushforward CommRingCat f.base).obj X.presheaf\n    letI : Algebra (X.presheaf.obj (op (f ⁻¹ᵁ U))) (F.stalk y) :=\n      (F.germ U y y.property).hom.toAlgebra\n    IsLocalization\n      ((hU.primeIdealOf y).asIdeal.primeCompl.map (f.app U).hom) (F.stalk y)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T135221-L-1657293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T135221-L-1657293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
