@@ -12,42 +12,34 @@
  ],
  "proof": [
   {
-   "text": "Write C_ab for the canonical pushforward composition comparison. Define q_a:B_j → R_a B_k by the universal product map whose t-component is π_(a≫t) followed by C_at inverse. Pushforward preserves products, since it is right adjoint to sheaf pullback. Checking the component indexed by t reduces the cocycle for q to F.map_comp and F.map_assoc, hence to naturality and coherence of the comparison.",
+   "text": "Obtain the product transitions q with their cocycle and compatibility with d.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-arrow-product-compatible-transitions"
    ],
    "elementary": false
   },
   {
-   "text": "The maps d_j:M_j → B_j with t-component φ_t R_t(i_k) satisfy φ_a R_a(d_k)=d_j q_a by the assumed cocycle, comparison naturality at i_k, and the product projection equations.",
+   "text": "Obtain vanishing φ_a R_a(z_k)=0 for z_k=(1−φ_id E_k)ι_k.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-transition-identity-defect"
    ],
    "elementary": false
   },
   {
-   "text": "Set e_j=φ_id E_j. The cocycle with the second arrow identity and identity-comparison coherence imply φ_a R_a(e_k)=φ_a. Thus φ_a R_a((1-e_k)i_k)=0 because continuous pushforward is additive.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Define ψ_a on A_j × B_j with zero component toward R_a A_k and q_a after the second projection toward R_a B_k, using the inverse binary-product comparison. Its cocycle follows by checking the two projections: the first is zero, and the second is the cocycle of q. Compatibility of γ follows similarly from the preceding two steps.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false
+   "text": "Define ψ_a=prod.lift(0, prod.snd≫q_a) followed by the inverse binary product comparison. Prove limit preservation of R_a by composing with the faithful inclusion into presheaves: that composite is precomposition, and the inclusion reflects limits. The first mapped projection of ψ is zero; the second is prod.snd≫q_a. Check the cocycle using naturality of c_ab at both projections: the first component is zero because R_a is additive, the second is the q cocycle. Check compatibility with γ by mapped projections: the first follows from the defect vanishing, the second from compatibility with d.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology"
+  "lem-weil-pbc-arrow-product-compatible-transitions",
+  "lem-weil-pbc-transition-identity-defect"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0EXZ product transitions, with explicit extra-factor correction for the missing identity law",
-  "note": "The product route follows the source; the nonunital correction is written by X3."
+  "place": "Lemma Tag 0EXZ proof, displayed product and transition formula",
+  "note": "F3: explicit binary-product augmentation, reduced to arrow-product transitions and identity-defect vanishing; retains the original route."
  },
  "mathlib_searches": [
   {
@@ -119,9 +111,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T095932-L-327868",
+  "landing": "20261012T112838-L-767257",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

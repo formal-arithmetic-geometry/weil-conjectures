@@ -1,0 +1,107 @@
+{
+ "id": "lem-weil-pbc-transition-identity-defect",
+ "kind": "statement",
+ "title": "Identity transition defect vanishes",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 0EXZ proof, displayed product and transition formula"
+ },
+ "proof": [
+  {
+   "text": "set e_k=φ_id followed by the identity comparison E_k.\nThe cocycle for a and id_k, together with a≫id_k=a and the coherence of the\nidentity and composition comparisons, says φ_a R_a(e_k)=φ_a. Since pushforward\nis additive, φ_a R_a(1-e_k)=φ_a-φ_a=0. Postcomposing with R_a(ι_k) proves\nthis assertion. The argument also covers zero identity transitions and empty J.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0EXZ product transition construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Construct compatible transition maps on products over outgoing arrows of pushforward sheaves",
+   "results": "Eight unrelated results, mainly cover-dense pushforward families.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.prodComparison",
+   "results": "Generic comparison maps, projections and inverse projection equations; no system theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "product_transitions|sheafPushforwardContinuous.*[Aa]dditive",
+   "results": "No existing system construction in WeilConjectures or Sheaf.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward of abelian sheaves product transition cocycle",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "statement": "Let J be a small category, F:J→Cat a functor, T_j topologies on F(j), and each F(a) continuous [def-weil-pbc-sites-and-cohomology]. Put R_a=F(a)_*, c_ab:R_a R_b≅R_ab, and E_k:R_id≅Id, the canonical comparisons. Given abelian sheaves M_j,A_j, maps φ_a:M_j→R_a M_k satisfying φ_ab=φ_a R_a(φ_b)c_ab, and arbitrary ι_j:M_j→A_j, every arrow a:j→k satisfies φ_a R_a((1−φ_id E_k)ι_k)=0. This requires no identity law for φ.",
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSystemProductTransitions",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-system-product-transitions",
+   "place": "Step 3"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSystemTransitionIdentityDefect",
+  "declaration": "CategoryTheory.colimitSystem_transition_identity_defect",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSystemTransitionIdentityDefect.lean",
+  "statement": "theorem colimitSystem_transition_identity_defect\n    {J : Type u} [SmallCategory J]\n    (F : J ⥤ Cat.{u, u}) (T : ∀ j : J, GrothendieckTopology (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k), (F.map a).toFunctor.IsContinuous (T j) (T k)]\n    (Fs : ∀ j : J, Sheaf (T j) AddCommGrpCat.{u})\n    (φ : ∀ {j k : J} (a : j ⟶ k),\n      Fs j ⟶ ((F.map a).toFunctor.sheafPushforwardContinuous\n        AddCommGrpCat.{u} (T j) (T k)).obj (Fs k))\n    (hφ : ∀ {j k l : J} (a : j ⟶ k) (b : k ⟶ l),\n      φ (a ≫ b) = φ a ≫\n        ((F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u}\n          (T j) (T k)).map (φ b) ≫\n        (Functor.sheafPushforwardContinuousComp'\n          (eqToIso (congrArg Cat.Hom.toFunctor (F.map_comp a b).symm))\n          AddCommGrpCat.{u} (T j) (T k) (T l)).hom.app (Fs l))\n    (A : ∀ j : J, Sheaf (T j) AddCommGrpCat.{u}) (ι : ∀ j, Fs j ⟶ A j) :\n    let R := fun {j k : J} (a : j ⟶ k) ↦\n      (F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (T j) (T k)\n    let E := fun j ↦ Functor.sheafPushforwardContinuousId'\n      (eqToIso (congrArg Cat.Hom.toFunctor (F.map_id j))) AddCommGrpCat.{u} (T j)\n    ∀ {j k : J} (a : j ⟶ k),\n      φ a ≫ (R a).map\n        ((𝟙 (Fs k) - (φ (𝟙 k) ≫ (E k).hom.app (Fs k) : Fs k ⟶ Fs k)) ≫ ι k) =\n          0",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T112838-L-767257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T112838-L-767257",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

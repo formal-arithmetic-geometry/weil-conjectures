@@ -10,6 +10,11 @@ public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+import Mathlib.CategoryTheory.Sites.Limits
+import Sheaf.CategoryTheory.ColimitSystemArrowProductTransitions
+import Sheaf.CategoryTheory.ColimitSystemTransitionIdentityDefect
+
 /-! # Transitions on an augmented product of direct images
 
 Source: Stacks Project, Sites, Lemma 0EXZ, product and transition construction.
@@ -81,6 +86,83 @@ theorem exists_colimitSystem_product_transitions
             (eqToIso (congrArg Cat.Hom.toFunctor (F.map_comp a b).symm))
             AddCommGrpCat.{u} (T j) (T k) (T l)).hom.app (Gs l)) ∧
       (∀ {j k : J} (a : j ⟶ k), φ a ≫ (R a).map (γ k) = γ j ≫ ψ a) := by
-  sorry
+  classical
+  let R := fun {j k : J} (a : j ⟶ k) ↦
+    (F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (T j) (T k)
+  have : ∀ {j k : J} (a : j ⟶ k), PreservesLimits (R a) := by
+    intro j k a
+    have : PreservesLimits (R a ⋙ sheafToPresheaf (T j) AddCommGrpCat.{u}) := by
+      change PreservesLimits
+        (sheafToPresheaf (T k) AddCommGrpCat.{u} ⋙
+          (Functor.whiskeringLeft _ _ _).obj (F.map a).toFunctor.op)
+      infer_instance
+    exact preservesLimits_of_reflects_of_preserves (R a) (sheafToPresheaf _ _)
+  have : ∀ {j k : J} (a : j ⟶ k), (R a).Additive := by
+    intro j k a
+    dsimp only [R, Functor.sheafPushforwardContinuous]
+    infer_instance
+  let C := fun {j k l : J} (a : j ⟶ k) (b : k ⟶ l) ↦
+    Functor.sheafPushforwardContinuousComp'
+      (eqToIso (congrArg Cat.Hom.toFunctor (F.map_comp a b).symm))
+      AddCommGrpCat.{u} (T j) (T k) (T l)
+  let E := fun j ↦ Functor.sheafPushforwardContinuousId'
+    (eqToIso (congrArg Cat.Hom.toFunctor (F.map_id j))) AddCommGrpCat.{u} (T j)
+  let P := fun j (t : Σ k : J, j ⟶ k) ↦ (R t.2).obj (A t.1)
+  let B := fun j ↦ ∏ᶜ P j
+  let G := fun j ↦ A j ⨯ B j
+  let d := fun j ↦ Pi.lift fun t : Σ k : J, j ⟶ k ↦ φ t.2 ≫ (R t.2).map (ι t.1)
+  let z := fun j ↦
+    (𝟙 (Fs j) - (φ (𝟙 j) ≫ (E j).hom.app (Fs j) : Fs j ⟶ Fs j)) ≫ ι j
+  let γ := fun j ↦ prod.lift (z j) (d j)
+  change ∃ (ψ : ∀ {j k : J} (a : j ⟶ k), G j ⟶ (R a).obj (G k)),
+    (∀ {j k l : J} (a : j ⟶ k) (b : k ⟶ l),
+      ψ (a ≫ b) = ψ a ≫ (R a).map (ψ b) ≫ (C a b).hom.app (G l)) ∧
+    (∀ {j k : J} (a : j ⟶ k), φ a ≫ (R a).map (γ k) = γ j ≫ ψ a)
+  obtain ⟨q, hq, hd⟩ := exists_colimitSystem_arrow_product_transitions F T Fs φ hφ A ι
+  have hz {j k : J} (a : j ⟶ k) : φ a ≫ (R a).map (z k) = 0 :=
+    colimitSystem_transition_identity_defect F T Fs φ hφ A ι a
+  let ψ := fun {j k : J} (a : j ⟶ k) ↦
+    prod.lift (0 : G j ⟶ (R a).obj (A k)) (prod.snd ≫ q a) ≫
+      inv (prodComparison (R a) (A k) (B k))
+  have hψfst {j k : J} (a : j ⟶ k) :
+      ψ a ≫ (R a).map prod.fst = 0 := by
+    dsimp only [ψ]
+    simp only [Category.assoc, inv_prodComparison_map_fst]
+    exact prod.lift_fst _ _
+  have hψsnd {j k : J} (a : j ⟶ k) :
+      ψ a ≫ (R a).map prod.snd = prod.snd ≫ q a := by
+    dsimp only [ψ]
+    simp only [Category.assoc, inv_prodComparison_map_snd, prod.lift_snd]
+    rfl
+  have hγfst (j : J) : γ j ≫ prod.fst = z j := prod.lift_fst _ _
+  have hγsnd (j : J) : γ j ≫ prod.snd = d j := prod.lift_snd _ _
+  refine ⟨ψ, ?_, ?_⟩
+  · intro j k l a b
+    apply (cancel_mono (prodComparison (R (a ≫ b)) (A l) (B l))).1
+    apply prod.hom_ext
+    · simp only [Category.assoc, prodComparison_fst]
+      rw [hψfst, ← (C a b).hom.naturality prod.fst]
+      change 0 = ψ a ≫ (R a).map (ψ b) ≫
+        (R a).map ((R b).map prod.fst) ≫ (C a b).hom.app (A l)
+      simp only [← Category.assoc, ← Functor.map_comp]
+      rw [hψfst]
+      simp
+    · simp only [Category.assoc, prodComparison_snd]
+      rw [hψsnd, ← (C a b).hom.naturality prod.snd]
+      change prod.snd ≫ q (a ≫ b) = ψ a ≫ (R a).map (ψ b) ≫
+        (R a).map ((R b).map prod.snd) ≫ (C a b).hom.app (B l)
+      simp only [← Category.assoc, ← Functor.map_comp]
+      rw [hψsnd, (R a).map_comp]
+      simp only [← Category.assoc]
+      rw [hψsnd]
+      simp only [Category.assoc]
+      exact congrArg (prod.snd ≫ ·) (hq a b)
+  · intro j k a
+    apply (cancel_mono (prodComparison (R a) (A k) (B k))).1
+    apply prod.hom_ext
+    · simp only [Category.assoc, prodComparison_fst]
+      rw [← (R a).map_comp, hγfst, hz, hψfst, comp_zero]
+    · simp only [Category.assoc, prodComparison_snd]
+      rw [← (R a).map_comp, hγsnd, hd a, hψsnd, ← Category.assoc, hγsnd]
 
 end CategoryTheory
