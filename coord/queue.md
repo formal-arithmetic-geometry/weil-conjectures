@@ -1,6 +1,6 @@
 # Work queue
 
-936 items; claim with `tools/claim.py next <group> [--stage N]`.
+937 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (19)
 
@@ -31,7 +31,7 @@
 
 Not open yet: 41 nodes that wait for stage 1.
 
-## Stage 3: modules to prove (917)
+## Stage 3: modules to prove (918)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -171,6 +171,7 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise` | 13 | 2 | proof |
 | `Sheaf.RingTheory.FormallySmoothCompleteLocalGenericFiber` | 13 | 1 | proof |
 | `Sheaf.RingTheory.JacobianPresentationLift` | 13 | 1 | proof |
+| `Sheaf.RingTheory.LocalizationFiniteGlobalDimension` | 13 | 1 | proof |
 | `Sheaf.RingTheory.PolynomialFormalFiberFiniteReduction` | 13 | 1 | proof |
 | `Sheaf.RingTheory.PopescuCharPPreparationGlobal` | 13 | 1 | proof |
 | `Sheaf.RingTheory.PopescuLiftSmooth` | 13 | 1 | proof |
