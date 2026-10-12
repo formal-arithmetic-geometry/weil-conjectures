@@ -13,8 +13,9 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus
+import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocus
+import Sheaf.AlgebraicGeometry.PicardRankMatchBaseChange
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # The simultaneous rank-matched direct-image locus
 
@@ -103,6 +104,43 @@ theorem exists_picardDirectImageRankLocus {X S : Scheme.{u}} (f : X ⟶ S)
       IsImmersion j ∧ LocallyOfFinitePresentation j ∧ QuasiCompact j ∧
       QuasiSeparated j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S),
         (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardDirectImageRankCondition f E g := by
-  sorry
+  classical
+  obtain ⟨W, j, hj, hfp, hqc, hW⟩ := exists_picardUniversalRankMatchLocus f hO E
+  have : IsImmersion j := hj
+  refine ⟨W, j, hj, hfp, hqc, inferInstance, ?_⟩
+  intro T g
+  constructor
+  · intro hg
+    have hR : PicardUniversalRankMatch f E g := (hW g).mp hg
+    refine ⟨?_, hR, picardRankMatch_baseChange f E g hR⟩
+    let N := (Modules.pushforward (pullback.snd f g)).obj
+      ((Modules.tensorPullback (pullback.fst f g)).obj E)
+    have hlocal (t : T) : ∃ U : T.Opens, t ∈ U ∧
+        ((Modules.tensorPullback U.ι).obj N).IsFiniteLocallyFree := by
+      obtain ⟨U, ht, r, hN, _, _⟩ := hR (𝟙 _) t
+      have hr : SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+          ((Modules.tensorPullback U.ι).obj N) r := by
+        exact (congrArg (fun k : T ⟶ S ↦
+          SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+            ((Modules.tensorPullback U.ι).obj
+              ((Modules.pushforward (pullback.snd f k)).obj
+                ((Modules.tensorPullback (pullback.fst f k)).obj E))) r)
+          (Category.id_comp g)).mp hN
+      have := hr
+      exact ⟨U, ht, SheafOfModules.IsFiniteLocallyFreeOfRank.isFiniteLocallyFree.{u, u, u} _ r⟩
+    choose U ht hU using hlocal
+    apply Modules.isFiniteLocallyFree_of_isOpenImmersion N (fun t ↦ (U t).ι)
+    · apply eq_top_iff.mpr
+      intro t _
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨t, by
+        rw [Scheme.Opens.opensRange_ι]
+        exact ht t⟩
+    · intro t
+      have := hU t
+      exact SheafOfModules.IsFiniteLocallyFree.of_iso.{u, u, u}
+        (((Classical.choose (Modules.exists_tensorPullbackAdjunction (U t).ι)).leftAdjointUniq
+          (Modules.pullbackPushforwardAdjunction (U t).ι)).app N)
+  · intro hg
+    exact (hW g).mpr hg.2.1
 
 end AlgebraicGeometry.Scheme

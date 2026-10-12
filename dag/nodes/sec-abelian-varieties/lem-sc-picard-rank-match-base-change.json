@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-picard-rank-match-base-change",
+ "kind": "statement",
+ "title": "Canonical base-change maps on the universal rank condition",
+ "statement": "Let $f:X\\to S$ be flat [def-weil-flat-morphism], proper [def-weil-proper-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $E$ be finite locally free [def-sc-finite-locally-free-sheaf], $g:T\\to S$, and assume $R(f,E,g)$ [def-sc-picard-universal-rank-match]. For every $h:T'\\to T$, the two canonical ordinary module base-change maps [lem-weil-pbc-module-base-change-map-open-restriction] for $p_g:X\\times_S T\\to T$ and the modules $q_g^*E$ and $q_g^*(E^\\vee)$ are isomorphisms. The square is the categorical pullback of $p_g$ along $h$. No structure-sheaf unit hypothesis is required and no representing scheme is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "third proof paragraph: the omitted canonical base-change detail, expanded using Tags 0B91 and 0BDL"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-picard-universal-rank-match",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Work on common-rank neighbourhoods of T. Perfect derived direct images with arbitrary base change have local finite-free models starting in degree zero. Universal rank matching implies the rank-r lowest-cohomology condition on these neighbourhoods and on every further test scheme.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor each neighbourhood through the lowest-cohomology rank-r locus. The residue-field tests give lowest fibre dimension r at the image points. Choose the residue models used in Tag 0BDL, cancelling contractible summands so that the first term has rank r and there are no negative terms. On the locus the outgoing degree-zero matrix in this chosen model is zero, so H^0 is the first free term. Every further scalar extension leaves that matrix zero. The canonical degree-zero cohomology base-change morphism is the identity on this scalar extension, hence an isomorphism for E and for its dual. Identify this morphism with the ordinary adjoint-defined moduleBaseChangeMap by naturality of degree-zero direct-image comparison and the adjunction triangle identities; an arbitrary object isomorphism does not suffice.",
+   "uses": [
+    "lem-sc-perfect-h0-locally-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Open restriction compares these canonical maps with those in the restricted squares. Isomorphisms of sheaves can be checked on the common-rank open cover, so the local invertibility proves both global claims. Rank zero is zero-to-zero; empty schemes impose no point conditions.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-open-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-h0-locally-closed",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "third proof paragraph: the omitted canonical base-change detail, expanded using Tags 0B91 and 0BDL",
+  "note": "Stage-3 decomposition of the rank-locus proof; the unit route is retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If degree zero cohomology of a perfect complex is universally free of a fixed lowest rank, the canonical base change morphism is an isomorphism",
+   "results": "HTTP Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical cohomology base change isomorphism on universal lowest cohomology rank locus of a perfect complex",
+   "results": "Eight hits: cotangent localization and group cohomology comparisons; none gives this canonical ordinary base-change statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Rr]ank|[Rr]ank.*baseChange",
+   "results": "Module.rank_baseChange, rankAtStalk_baseChange and localization lemmas; none is a sheaf cohomology base-change map.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: use Tag 0BDP to obtain the universal locally closed subscheme; third proof paragraph: the omitted canonical base-change detail, expanded using Tags 0B91 and 0BDL",
+   "via": [
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardRankMatchBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardRankMatchBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardRankMatch_baseChange",
+  "statement": "theorem picardRankMatch_baseChange {X S T : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)\n    (hR : PicardUniversalRankMatch f E g) :\n  ∀ {T' : Scheme.{u}} (h : T' ⟶ T),\n    IsIso (Modules.moduleBaseChangeMap (pullback.snd f g)\n      (pullback.snd (pullback.snd f g) h) h (pullback.fst (pullback.snd f g) h)\n      pullback.condition ((Modules.tensorPullback (pullback.fst f g)).obj E)) ∧\n    IsIso (Modules.moduleBaseChangeMap (pullback.snd f g)\n      (pullback.snd (pullback.snd f g) h) h (pullback.fst (pullback.snd f g) h)\n      pullback.condition ((Modules.tensorPullback (pullback.fst f g)).obj (Modules.dual E)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T194131-L-461842",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T194131-L-461842",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

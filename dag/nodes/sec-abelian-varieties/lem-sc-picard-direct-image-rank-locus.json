@@ -17,39 +17,34 @@
  ],
  "proof": [
   {
-   "text": "The unit hypothesis gives nonempty connected fibres, using their field-valued global functions and idempotents. Take the open-and-closed rank loci of E in X. Their images are open by flat finite presentation and closed by properness. They give disjoint open-and-closed rank components S_r covering S.",
+   "text": "Obtain the finitely presented immersion representing universal rank matching, without a base-change-map clause.",
    "uses": [
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-proper-closed-image"
+    "lem-sc-picard-universal-rank-match-locus"
    ],
    "elementary": false
   },
   {
-   "text": "On S_r, E and its dual have rank r, are finitely presented, and are flat relative to S. Their derived direct images are perfect and commute with arbitrary base change. They have no negative cohomology after any base change; choose local finite-free models with Tor amplitude [0,b].",
-   "uses": [
-    "lem-pc-rf-perfect-base-change"
-   ],
-   "elementary": false
+   "text": "For a map factoring through this immersion, apply the rank clause at the identity of its source. Forget rank on each resulting neighbourhood. Uniqueness of left adjoints to pushforward identifies tensor pullback with ordinary pullback along the open inclusion. Apply the source library locality theorem Modules.isFiniteLocallyFree_of_isOpenImmersion to this cover to prove that the ordinary direct image itself is finite locally free. This works also for an empty source because the empty family covers it.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply the universal lowest-cohomology rank-r locus to both direct images, and take their fibre product. The canonical degree-zero base-change maps are invertible on this locus by the cohomology-pullback clause of that result. Conversely P gives both universal rank-r conditions after restriction to S_r, so it gives both factorizations. Glue by the unique representing identifications over affine overlaps, then take the disjoint union over S_r. Finite presentation and immersion are local on the target; quasi-compact target opens meet only finitely many rank components. Immersions are separated and hence quasi-separated.",
+   "text": "Universal rank matching gives both canonical base-change-map isomorphisms by picardRankMatch_baseChange. Combine finite local freeness, rank matching, and these isomorphisms to give PicardDirectImageRankCondition. Conversely that condition contains rank matching as its second conjunct, hence gives the factorization. An immersion is separated, hence quasi-separated, supplying the remaining morphism property.",
    "uses": [
-    "lem-sc-perfect-h0-locally-closed"
+    "lem-sc-picard-rank-match-base-change"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-proper-closed-image",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-perfect-h0-locally-closed"
+  "lem-sc-picard-universal-rank-match-locus",
+  "lem-sc-picard-rank-match-base-change"
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "first three paragraphs of the proof: rank decomposition, perfect direct images, and the simultaneous degree-zero locus",
-  "note": "A stage-3 reduction of the existing proof, retaining the unit route."
+  "place": "first three proof paragraphs: rank locus and the canonical base-change detail",
+  "note": "Q1 separates rank-only representability from canonical map compatibility; finite local freeness and the equivalence are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -120,9 +115,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T173920-L-3310815",
+  "landing": "20261012T194131-L-461842",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
