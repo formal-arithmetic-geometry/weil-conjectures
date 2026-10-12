@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Idempotents
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.EtaleSectionCore
+import Sheaf.RingTheory.EtaleSectionLocalization
 
 /-!
 # Idempotent splitting of an étale algebra with a section
@@ -52,6 +54,8 @@ theorem exists_idempotent_splitting_of_algHom
         ∃ Φ : S ≃ₐ[R] R × he.one_sub.Corner, ∀ x : S, (Φ x).1 = s x) ∧
       (∃ ψ : Localization.Away e ≃ₐ[R] R,
         ∀ x : S, ψ (algebraMap S (Localization.Away e) x) = s x) := by
-  sorry
+  obtain ⟨e, he, hse, hker, hprod⟩ := exists_idempotent_core s
+  obtain ⟨ψ, hψ⟩ := exists_localization_equiv_of_idempotent s e he hse hker
+  exact ⟨e, he, hse, hker, hprod, ⟨ψ, hψ⟩⟩
 
 end Algebra.Etale

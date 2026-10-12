@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-etale-section-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-section-idempotent-splitting",
+   "place": "intermediate theorem extracted from the parent proof",
+   "via": [
+    "lem-weil-pbc-etale-section-idempotent-splitting"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Localization equivalence from an idempotent kernel",
+ "statement": "Let R and S be commutative rings, S an R-algebra, and s:S→R an R-algebra homomorphism. Let e in S be idempotent, s(e)=1, and ker(s)=(1-e)S. There is an R-algebra equivalence S[1/e]≅R sending x/1 to s(x) for every x in S.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "proof of Lemma Tag 09XI (lemma-characterize-henselian-pair), (5)$\\Rightarrow$(2), first paragraph: 'the surjective ring map $A'/IA'\\to A/I$ is etale by Algebra, Lemma 00U7 (lemma-map-between-etale) and then we get the desired idempotent by Algebra, Lemma 00U8 (lemma-surjective-flat-finitely-presented)' (literature/stacks-project/algebra.tex); used without comment in the proof of Lemma Tag 0A02 (lemma-henselization): '$B'/IB'=A/I\\times C$'"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Proof: Give R its S-algebra structure through s. Since s(e)=1, each r is the\nimage of e*algebraMap R S r, so this algebra map is surjective. Its kernel is\n(1-e), and e is idempotent. The Mathlib criterion\nIsLocalization.away_of_isIdempotentElem therefore makes R a localization of S\naway from e. Uniqueness of localization gives an S-algebra equivalence from\nLocalization.Away e to R, which sends the image of x to s(x). Its underlying\nring equivalence is an R-algebra equivalence: on an R-scalar r, the scalar-tower\nformula expresses its image as the image of algebraMap R S r, and s sends that\nelement to r. This proves both the equivalence and the required extension formula.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A2",
+  "date": "2026-10-12",
+  "description": "Closed Lean proof using Mathlib ingredients, detailed in the proof step and declaration docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization away from an idempotent equivalence with a surjective algebra map target",
+   "results": "Service unavailable: Internal Server Error. Real attempt logged in searches.jsonl; used leanfinder, loogle and grep instead.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization at an idempotent is equivalent to target of a surjective map with complementary kernel",
+   "results": "FormallyEtale.iff_of_surjective; away_of_isIdempotentElem; no exact corner-splitting statement",
+   "date": "2026-10-12",
+   "verdict": "Ingredients used in the closed Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.algEquiv",
+   "results": "FormallyEtale.iff_of_surjective; IsLocalization.away_of_isIdempotentElem; IsLocalization.algEquiv",
+   "date": "2026-10-12",
+   "verdict": "Ingredients used; no exact statement with the specified corner/extension."
+  },
+  {
+   "tool": "grep",
+   "query": "Corner|away_of_isIdempotentElem|isIdempotentElem_iff_of_fg",
+   "results": "Upstream Section.lean has an abstract complementary product factor (same-universe statement), not the explicit corner algebra; Mathlib has the corner definition and quotient product equivalence. Away.Basic has the localization criterion.",
+   "date": "2026-10-12",
+   "verdict": "Direct Mathlib proof supports independent universes and the exact requested corner."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleSectionIdempotentSplitting",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleSectionLocalization",
+  "declaration": "Algebra.Etale.exists_localization_equiv_of_idempotent",
+  "file": "lean/Sheaf/RingTheory/EtaleSectionLocalization.lean",
+  "statement": "theorem exists_localization_equiv_of_idempotent {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (s : S →ₐ[R] R) (e : S) (he : IsIdempotentElem e) (hse : s e = 1) (hker : RingHom.ker s.toRingHom = Ideal.span {1 - e}) : ∃ ψ : Localization.Away e ≃ₐ[R] R, ∀ x : S, ψ (algebraMap S (Localization.Away e) x) = s x",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T060729-L-2903483",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T060729-L-2903483",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
