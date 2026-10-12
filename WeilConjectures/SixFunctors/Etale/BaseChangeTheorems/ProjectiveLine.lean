@@ -92,7 +92,7 @@ lemma Etale.isIso_baseChange_app_singleFunctor_obj_projectiveLine {S T X' : Sche
     {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
     (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
     (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] :
+    [IsTorsionModuleSheaf F] :
     IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) := by
   refine (Etale.isIso_baseChange_app_singleFunctor_obj_iff Λ sq F).2 fun q ↦ ?_
@@ -116,13 +116,13 @@ lemma Etale.isIso_baseChange_app_projectiveLine {S T X' : Scheme.{u}}
     (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
     (K : DerivedCategory.Plus (Sheaf (ProjectiveLine S).smallEtaleTopology
       (ModuleCat.{u + 1} Λ)))
-    (hK : Etale.DerivedCategory.Plus.torsionHomology Λ (ProjectiveLine S) K) :
+    (hK : Etale.DerivedCategory.Plus.moduleTorsionHomology Λ (ProjectiveLine S) K) :
     IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := by
   let P : ObjectProperty (Sheaf (ProjectiveLine S).smallEtaleTopology
-    (ModuleCat.{u + 1} Λ)) := fun F ↦ IsTorsionSheaf F
-  have : P.IsClosedUnderIsomorphisms := ⟨fun φ (_ : IsTorsionSheaf _) ↦ .of_epi φ.hom⟩
+    (ModuleCat.{u + 1} Λ)) := fun F ↦ IsTorsionModuleSheaf F
+  have : P.IsClosedUnderIsomorphisms := ⟨fun φ (_ : IsTorsionModuleSheaf _) ↦ .of_epi φ.hom⟩
   exact DerivedCategory.Plus.isIso_app_of_forall_homology _ P
-    (fun F (_ : IsTorsionSheaf F) ↦
+    (fun F (_ : IsTorsionModuleSheaf F) ↦
       Etale.isIso_baseChange_app_singleFunctor_obj_projectiveLine Λ sq F)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeSource_obj Λ g _ K n q hq)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ g' f' K n q hq) K hK

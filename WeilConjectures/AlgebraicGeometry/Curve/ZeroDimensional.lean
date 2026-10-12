@@ -117,7 +117,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 /-- Over a finite coefficient ring every étale sheaf of modules is torsion: its stalks are
 killed by the characteristic of `Λ`. -/
 lemma isTorsionSheaf_of_finite [Finite Λ] {X : Scheme.{u}}
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Scheme.IsTorsionSheaf F where
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Scheme.IsTorsionModuleSheaf F where
   isTorsion_sheafFiber Ω _ _ s x := by
     have hn : ringChar Λ ≠ 0 := CharP.char_ne_zero_of_finite Λ (ringChar Λ)
     refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨ringChar Λ, Nat.pos_of_ne_zero hn, ?_⟩
