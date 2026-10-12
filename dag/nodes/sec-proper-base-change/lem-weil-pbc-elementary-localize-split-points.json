@@ -44,7 +44,7 @@
    }
   },
   {
-   "text": "Apply Scheme.residueFieldMap_comp to the equality of the two composites in the pullback square, with residueFieldCongr for the displayed point equalities. This gives a commuting square κ(u)→κ(y) and κ(u′)→κ(v). Its vertical maps are isomorphisms by the elementary theorem used in step 1. Under these identifications, the images of a finite generating set still generate; if a p-power of an element lies in the base, its image has the same p-power in the identified base. Thus finiteness and pure inseparability transport. This is an elementary transport of the assumed extension properties, not an additional residue-field theorem.",
+   "text": "For each transported open let a:V→P and r:V→U′ be its projections, so a≫q=r≫ψ and κ(a(v))→κ(v) is an isomorphism. Scheme.residueFieldMap_comp and residueFieldMap_congr give the commuting residue-field square after the point equalities are substituted. Transfer κ(u)→κ(y) across the point field isomorphism to obtain κ(v)/κ(u) finite purely inseparable. The square supplies the scalar tower κ(u)→κ(u′)→κ(v). Module.Finite.of_restrictScalars_finite and IsPurelyInseparable.tower_top imply the desired properties over κ(u′). These are proved private helpers, not additional postponed statements.",
    "uses": [
     "def-weil-residue-field",
     "def-weil-pbc-finite-purely-inseparable-extension"
@@ -56,9 +56,10 @@
    }
   },
   {
-   "text": "Project equality of two output points to P: the assumed injectivity of the sigma family forces equality of their indices. For exhaustion, a final point w over u′ and x_i projects to y_{i,j} by the given exhaustion. The lifts over (y_{i,j},u′) correspond to primes of κ(y_{i,j})⊗_{κ(u)}κ(u′). The base residue map is an isomorphism, so this tensor ring is the field κ(y_{i,j}) and has exactly one prime. The distinguished point is one such lift, hence w is that point.",
+   "text": "Project equality of two output points to P and use hinj. For exhaustion project w to P, obtaining y_{i,j} by hex. In the pullback square P×_U U′→P, Mathlib isPullback_fiberToSpecResidueField_of_isPullback gives a cartesian square of the fibres over u′ and ψ(u′), with bottom map Spec(κ(u)→κ(u′)). This bottom map is an isomorphism by the elementary neighborhood property. Hence the map of fibres is an isomorphism by IsPullback.isIso_fst_of_isIso. The fibre inclusions are embeddings and Scheme.Hom.fiberHomeo identifies their points with the set-theoretic fibres. Thus any two points above u′ with the same projection to P coincide. Apply this to w and the distinguished point above y_{i,j}. This proves exhaustion without a tensor-spectrum enumeration.",
    "uses": [
-    "lem-weil-pbc-fibre-product-points",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
     "def-weil-residue-field"
    ],
    "elementary": false,
@@ -76,12 +77,12 @@
   "def-weil-finite-integral-morphism",
   "def-weil-residue-field",
   "def-weil-pbc-finite-purely-inseparable-extension",
-  "lem-weil-pbc-fibre-product-points"
+  "def-pc-scheme-fibre"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "J3 stage 3",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Lemma 02LM; extracted subargument with the omitted verification written out from Schemes 01JT"
+  "place": "Lemma 02LM, enumerated split-point localization; implemented using Mathlib fibre base change in place of the tensor-spectrum uniqueness calculation"
  },
  "mathlib_searches": [
   {
@@ -188,10 +189,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T060735-L-2906263",
-  "kind": "interface",
+  "landing": "20261012T085254-L-20857",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
