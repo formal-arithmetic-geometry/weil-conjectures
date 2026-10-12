@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
 
 /-!
 # Composition of derived direct images
@@ -43,6 +42,8 @@ theorem derivedDirectImageComposition (p : X ⟶ Y) (f : Y ⟶ Z) :
     Nonempty
       (schemeDerivedDirectImage (p ≫ f) ≅
         schemeDerivedDirectImage p ⋙ schemeDerivedDirectImage f) := by
-  sorry
+  obtain ⟨e, _⟩ := RingedSpace.exists_derivedModuleDirectImageComposition
+    p.toLRSHom.toShHom f.toLRSHom.toShHom
+  exact ⟨e.symm⟩
 
 end AlgebraicGeometry
