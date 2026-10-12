@@ -1,0 +1,167 @@
+{
+ "id": "lem-sp-derived-couple-image-prefix",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-hypercohomology-filtrations",
+   "place": "step 4 of its split (source: ## Proof)",
+   "via": [
+    "lem-sp-exact-functor-couple"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Recursive image and inclusion properties of iterated derived couples",
+ "statement": "The prefix of the iterated image and inclusion assertions for an exact couple, consisting of the seven clauses before the derived E recurrence.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section 12.21 (Spectral sequences: exact couples): Lemma 12.21.2 (Tag 011R), proof omitted there; Definition 12.21.1 (Tag 011Q); Definition 12.21.3 (Tag 011S) for the iteration; Remark 12.21.5 (Tag 0AMJ) for the shifted (bigraded) form, whose footnote gives the well-definedness of g'; Lemma 12.21.4 (Tag 011T) for the use of elements T -> X with a test object T."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-exact-couple"
+ ],
+ "proof": [
+  {
+   "text": "This is the induction argument of Step 11 of the parent node, establishing the A and I recurrences, monicity, image equality, and alpha compatibility.",
+   "uses": [
+    "lem-sp-derived-couple-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-derived-couple-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section 12.21: statement Lemma 12.21.2 (Tag 011R, proof omitted) with Definitions 12.21.1, 12.21.3 (Tags 011Q, 011S) and Remark 12.21.5 (Tag 0AMJ, whose footnote sketches the well-definedness of g'); the element chases of Steps 2-3 and 7-9 are written by the agent, in the test-object style of Lemma 12.21.4 (Tag 011T) and Lemma Tag 08N5. WANTED: Weibel, An Introduction to Homological Algebra, Section 5.9 (exact couples)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ExactCouple\\|exactCouple\\|exact couple\\|derivedCouple\\|DerivedCouple\\|derived couple' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralObject; grep -rn '^structure\\|^class\\|def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/SpectralSequence/Basic.lean",
+   "results": "SpectralSequence (pages, differentials, iso to homology) and Abelian.SpectralObject (Cycles, Page, EpiMono, SpectralSequence.lean: the spectral sequence of a spectral object); no exact couples and no derived couple",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact couple in an abelian category and its derived couple spectral sequence",
+   "results": "HasDerivedCategory, IsPushout.exact_shortComplex, kernelCokernelCompSequence.snakeInput, ShortComplex.SnakeInput.L₁'_exact / L₂'_exact: nothing on exact couples",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExactCouple\"",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived couple of an exact couple is again an exact couple",
+   "results": "HomologicalComplex.HomologySequence.composableArrows₂_exact / composableArrows₅_exact (long exact homology sequence), ShortComplex.SnakeInput.L₂'_exact, exact_C₂_up/down, L₂_exact: no exact couples",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived couple of an exact couple, exactness of the derived couple",
+   "results": "ShortComplex.SnakeInput.L1'_exact / L2'_exact / L0'_exact (SnakeLemma), ProjectiveResolution.exact_succ, groupCohomology.mapShortComplex1_exact, Abelian.Ext.covariantSequence_exact: no exact couples",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact couple (D, E, i, j, k) with derived couple and associated spectral sequence",
+   "results": "HomologicalComplex.HomologySequence.composableArrows5_exact / composableArrows2_exact / composableArrows3_exact / snakeInput, HomologicalComplex.shortExact_of_degreewise_shortExact: no exact couples",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'exact couple\\|ExactCouple' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'Pseudoelement' same; sed -n 60,75p Mathlib/CategoryTheory/Subobject/Basic.lean",
+   "results": "no file on exact couples; Pseudoelement only in CategoryTheory/Abelian/Pseudoelements.lean, Abelian/Refinements.lean and a comment of Subobject/Basic.lean (\"Pseudoelements X agrees with Subobject X, but we haven't developed this in mathlib yet\"); the element calculus used is Abelian/Refinements.lean, node lem-sp-abelian-refinements",
+   "date": "2026-10-09",
+   "verdict": "no match for the lemma; element calculus available (lem-sp-abelian-refinements)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedCoupleExact",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-sp-derived-couple-exact",
+  "worker": "stage1",
+  "summary": "Read Stacks homology.tex Section 12.21 (Lemma 011R, proof omitted; Definitions 011Q, 011S; Lemma 011T; Remark 0AMJ with its footnote) and Section 12.5 (Lemmas 08N5, 05PK, 010C). Statement generalized from the type-0 couple of def-sp-exact-couple to an exact couple of type s (g of bidegree (s,-s)), which the iteration needs: the derived couple of a type-0 couple has g' of bidegree (1,-1), so the induction for C_r runs over types r-2; for s=0 the statement is the old one. Claims stated as before (ker d, im d, well-definedness of alpha', f', g', exactness of the derived couple, D_r = im alpha^{r-2}, bidegrees). Proof written in 12 steps: element calculus with elements T -> X up to epimorphic refinement (Stacks 011T/08N5; Mathlib Refinements.lean, new Mathlib-leaf node lem-sp-abelian-refinements), d o d = 0, the two subobject identities, the three constructions by universal properties (epi = cokernel of its kernel, def-sp-abelian), the three exactness chases, assembly, and the induction on r. No Freyd-Mitchell; differences of elements are differences in Hom(T,X). Proof is agent-written (Stacks omits it). Searches: the item's earlier five plus leansearch, leanfinder and grep; Mathlib has no exact couples."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T231641-L-1963887",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCoupleExact",
+  "declaration": "CategoryTheory.BigradedExactCouple.pageCouple_image_prefix",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCoupleExact.lean",
+  "statement": "theorem pageCouple_image_prefix {C : Type u} [Category.{v} C] [Abelian C]\n    (X : BigradedExactCouple C 0) :\n    ∃ (A : ∀ (n : ℕ) (p q : ℤ), X.D (p + n) (q - n) ⟶ X.D p q)\n      (I : ∀ (n : ℕ) (p q : ℤ), (X.pageCouple n).D p q ⟶ X.D p q),\n      (∀ p q : ℤ, A 0 p q = eqToHom (by congr 1 <;> omega)) ∧\n      (∀ (n : ℕ) (p q : ℤ), A (n + 1) p q =\n        X.alpha (p + (n + 1 : ℕ)) (q - (n + 1 : ℕ)) ≫\n          eqToHom (by congr 1 <;> omega) ≫ A n p q) ∧\n      (∀ p q : ℤ, I 0 p q = 𝟙 (X.D p q)) ∧\n      (∀ (n : ℕ) (p q : ℤ), I (n + 1) p q =\n        (X.pageCouple n).derivedDInclusion p q ≫ I n p q) ∧\n      (∀ (n : ℕ) (p q : ℤ), Mono (I n p q)) ∧\n      (∀ (n : ℕ) (p q : ℤ), imageSubobject (I n p q) = imageSubobject (A n p q)) ∧\n      (∀ (n : ℕ) (p q : ℤ),\n        (X.pageCouple n).alpha p q ≫ I n (p - 1) (q + 1) =\n          I n p q ≫ X.alpha p q)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dce1312",
+  "group": "C1",
+  "result": "fix",
+  "note": "Abelian C, s:ℕ, X:BigradedExactCouple C s (bidegrees, 3 complexes, 3 exactness); clause 1 kernel/pullback and image identities (incoming form reindexed to outgoing target over all p,q); clause 2 f(ker d)≤im α, g→cycles, d∘d=0, π∘ĝ kills ker ᾱ, existence + per-map uniqueness from alpha_comm/f_comm/g_comm (fixed); clause 3 DerivedMaps exactness type s+1; clause 4 A=α^n, I mono, im I=im A, α_r restriction, E_{r+1} cycles/boundaries, degrees by pageCouple types"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T231641-L-1963887",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

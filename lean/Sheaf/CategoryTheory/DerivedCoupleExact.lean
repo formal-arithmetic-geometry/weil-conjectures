@@ -103,6 +103,32 @@ theorem derived_couple_exact {C : Type u} [Category.{v} C] [Abelian C]
   · exact derived_couple_boundary_vanishes X
 
 
+/-- The recursive image and inclusion properties of iterated derived couples.
+(blueprint: lem-sp-derived-couple-image-prefix)
+
+This theorem isolates the seven recursive image/inclusion clauses from the parent theorem.
+The intended proof is induction on `n`: unfold `pageCouple`, use `derived_couple_exact`
+at each step, compose the canonical image inclusions, and transport image equalities and
+alpha compatibility through those inclusions. -/
+theorem pageCouple_image_prefix {C : Type u} [Category.{v} C] [Abelian C]
+    (X : BigradedExactCouple C 0) :
+    ∃ (A : ∀ (n : ℕ) (p q : ℤ), X.D (p + n) (q - n) ⟶ X.D p q)
+      (I : ∀ (n : ℕ) (p q : ℤ), (X.pageCouple n).D p q ⟶ X.D p q),
+      (∀ p q : ℤ, A 0 p q = eqToHom (by congr 1 <;> omega)) ∧
+      (∀ (n : ℕ) (p q : ℤ), A (n + 1) p q =
+        X.alpha (p + (n + 1 : ℕ)) (q - (n + 1 : ℕ)) ≫
+          eqToHom (by congr 1 <;> omega) ≫ A n p q) ∧
+      (∀ p q : ℤ, I 0 p q = 𝟙 (X.D p q)) ∧
+      (∀ (n : ℕ) (p q : ℤ), I (n + 1) p q =
+        (X.pageCouple n).derivedDInclusion p q ≫ I n p q) ∧
+      (∀ (n : ℕ) (p q : ℤ), Mono (I n p q)) ∧
+      (∀ (n : ℕ) (p q : ℤ), imageSubobject (I n p q) = imageSubobject (A n p q)) ∧
+      (∀ (n : ℕ) (p q : ℤ),
+        (X.pageCouple n).alpha p q ≫ I n (p - 1) (q + 1) =
+          I n p q ≫ X.alpha p q) := by
+  sorry
+
+
 /-- Iterated derived couples are the images of the iterated `alpha` maps.
 Here `n` is `r - 2`: the actual page number is `n + 2`. The quantified families
 `A` and `I` are uniquely prescribed by their recurrences: `A` is the incoming
@@ -141,6 +167,10 @@ theorem pageCouple_image {C : Type u} [Category.{v} C] [Abelian C]
       (∀ (n : ℕ) (p q : ℤ), (X.pageCouple (n + 1)).E p q =
         cokernel (kernel.lift ((X.pageCouple n).d p q)
           ((X.pageCouple n).dInto p q) ((X.pageCouple n).dInto_comp_d p q))) := by
-  sorry
+  obtain ⟨A, I, h⟩ := pageCouple_image_prefix X
+  refine ⟨A, I, h.1, h.2.1, h.2.2.1, h.2.2.2.1, h.2.2.2.2.1,
+    h.2.2.2.2.2.1, h.2.2.2.2.2.2, ?_⟩
+  intro n p q
+  rfl
 
 end CategoryTheory.BigradedExactCouple
