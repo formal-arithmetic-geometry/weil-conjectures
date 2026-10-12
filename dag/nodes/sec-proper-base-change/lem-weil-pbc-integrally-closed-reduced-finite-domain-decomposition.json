@@ -13,47 +13,41 @@
  ],
  "proof": [
   {
-   "text": "The total ring of fractions splits at the minimal primes. Let $\\mathfrak p_1,\\dots,\\mathfrak p_n$ be the finitely many minimal primes. In a reduced ring the nonzerodivisors are exactly the elements outside their union [lem-weil-pbc-reduced-zerodivisors-union-minimal-primes], so every denominator becomes a unit in each $R_{\\mathfrak p_i}$. The localization map therefore gives $Q(R)\\to\\prod_iR_{\\mathfrak p_i}$. The standard localization-prime correspondence identifies the primes of $Q(R)$ with the primes of $R$ disjoint from the denominators; prime avoidance forces each such prime to be one of the $\\mathfrak p_i$. By [lem-weil-pbc-minimal-prime-reduced-localization-field] each $R_{\\mathfrak p_i}$ is a field. The localization $Q(R)$ is reduced: if $(r/s)^m=0$, then some nonzerodivisor $u$ kills $r^m$, hence $r^m=0$ and then $r=0$. Therefore the intersection of the finitely many maximal ideals of $Q(R)$ is its nilradical and is zero [lem-weil-pbc-zero-locus-eq-iff-radical-eq]. The product-of-localizations decomposition [lem-weil-pbc-product-of-localizations-at-maximal] identifies the displayed map with an isomorphism. (If $n=0$, then $R=0$ and the assertion is the evident zero-ring case.)",
+   "text": "For a minimal prime p, let S be the finite set of the other minimal primes. Minimality implies p is not contained in any r in S. Finite prime avoidance [lem-weil-pbc-prime-avoidance] gives b in p outside all r in S. The finite intersection of S is not contained in p: otherwise primality of p implies one r in S is contained in p, contradicting minimality. Choose a in this intersection outside p. Every minimal prime contains ab, so ab=0 by reducedness and the intersection-of-minimal-primes formula [lem-weil-pbc-zero-locus-eq-iff-radical-eq]. The sum a+b avoids every minimal prime, hence is a nonzerodivisor by [lem-weil-pbc-reduced-zerodivisors-union-minimal-primes].",
    "uses": [
-    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
-    "lem-weil-pbc-minimal-prime-reduced-localization-field",
-    "lem-weil-pbc-product-of-localizations-at-maximal",
-    "lem-weil-pbc-localization-prime-residue-field-iso",
     "lem-weil-pbc-prime-avoidance",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 030C proof, using Lemmas Tags 00EW, 02LX, 00EU and the localization-prime correspondence"
-   }
+   "elementary": false
   },
   {
-   "text": "The coordinate idempotents of the product of fields satisfy the monic polynomial T^2-T. Integral closedness in the total fractions lifts each uniquely to R. Injectivity of R into its total fractions gives orthogonality and sum one. Multiplication by these idempotents gives R isomorphic to the product of the image rings, with inverse summation. Each image ring embeds in its corresponding field, since all other coordinates are zero. Its identity has coordinate one, so it is nonzero and hence a domain. Enumerate the factors by Fin n and package them in CommRingCat. In the zero-ring case n=0 gives the empty product.",
+   "text": "Set x=a/(a+b) in the total fraction ring. Clearing the invertible denominator twice and using ab=0 proves x*x=x. Thus x is integral, being a root of the monic polynomial T(T-1) [def-weil-pbc-integral-closure]. Integral closedness gives e in R mapping to x, and injectivity yields e(a+b)=a and (1-e)(a+b)=b. For every other minimal prime q, primality and a+b not in q imply e in q. Likewise 1-e is in p. Hence p and q are coprime, with the explicit witnesses 1-e and e. This constructs the separating coordinate idempotents directly, without first decomposing the entire total fraction ring.",
    "uses": [
-    "def-weil-pbc-integral-closure",
-    "lem-weil-pbc-minimal-prime-reduced-localization-field"
+    "def-weil-pbc-integral-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Tag 030C (lemma-characterize-reduced-ring-normal), proof, second and third paragraphs; https://stacks.math.columbia.edu/tag/030C"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Enumerate minimalPrimes R by Fin n using its finiteness. Their intersection is the nilradical and hence zero by reducedness [lem-weil-pbc-zero-locus-eq-iff-radical-eq]. Apply Mathlib Ideal.quotientInfRingEquivPiQuotient to the pairwise coprime family and compose with Ideal.quotEquivOfEq and RingEquiv.quotientBot to obtain R isomorphic to the product of R/p. Every quotient is a domain because p is prime. Package these explicitly defined quotients as CommRingCat objects. The same Chinese remainder theorem handles the empty family, so no nontriviality assumption or separate zero-ring construction is required.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
-  "lem-weil-pbc-minimal-prime-reduced-localization-field",
-  "lem-weil-pbc-product-of-localizations-at-maximal",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
   "lem-weil-pbc-prime-avoidance",
   "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
   "def-weil-pbc-integral-closure"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "A3",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 030C (lemma-characterize-reduced-ring-normal), proof, second and third paragraphs; https://stacks.math.columbia.edu/tag/030C"
+  "place": "Algebra, Tag 030C, idempotent argument; agent-written direct separating-fraction realization using Tag 00DS prime avoidance and the Mathlib Chinese remainder theorem"
  },
  "mathlib_searches": [
   {
@@ -137,10 +131,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T085216-L-3938",
-  "kind": "interface",
+  "landing": "20261012T095851-L-312043",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
