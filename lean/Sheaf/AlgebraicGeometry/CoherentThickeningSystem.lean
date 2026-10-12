@@ -52,7 +52,7 @@ theorem id_compatibility (F : CoherentThickeningSystem T i) (n : ℕ) :
     (F.comparison n).hom ≫ 𝟙 (F.term n) =
       (Scheme.Modules.tensorPullback (i n)).map (𝟙 (F.term (n + 1))) ≫
         (F.comparison n).hom := by
-  sorry
+  simp
 
 /-- Composition preserves compatibility: substitute the two compatibility equations,
 associate compositions and use preservation of composition by pullback.
@@ -62,7 +62,8 @@ theorem comp_compatibility {F G H : CoherentThickeningSystem T i}
     (F.comparison n).hom ≫ (f.app n ≫ g.app n) =
       (Scheme.Modules.tensorPullback (i n)).map (f.app (n + 1) ≫ g.app (n + 1)) ≫
         (H.comparison n).hom := by
-  sorry
+  rw [Functor.map_comp, ← Category.assoc, f.compatibility n]
+  rw [Category.assoc, g.compatibility n, ← Category.assoc]
 
 /-- The identity compatible family.
 Source: Stacks, Remark 088F (blueprint: def-weil-pbc-coherent-thickening-system). -/
@@ -85,7 +86,18 @@ theorem category_laws :
       composition f (identity G) = f) ∧
     (∀ (F G H K : CoherentThickeningSystem T i) (f : Hom F G) (g : Hom G H) (h : Hom H K),
       composition (composition f g) h = composition f (composition g h)) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro F G f
+    cases f
+    simp only [composition, identity, Category.id_comp]
+  · intro F G f
+    cases f
+    simp only [composition, identity, Category.comp_id]
+  · intro F G H K f g h
+    cases f
+    cases g
+    cases h
+    simp only [composition, Category.assoc]
 
 /-- The category of coherent systems, with exactly the compatible families as arrows.
 Source: Stacks, Remark 088F (blueprint: def-weil-pbc-coherent-thickening-system). -/
