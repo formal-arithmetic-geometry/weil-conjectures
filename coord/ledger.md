@@ -9465,3 +9465,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:39 L: merged deliver/T2/Sheaf.Algebra.Module.GradedLocalizationExact (stage 3; reviewer PASS; first push; landing 20261012T203949-L-832576 (proof); batch 20261012T203936; modules 1; new nodes 1)
 - 20:39 L: merged deliver/U2/Sheaf.AlgebraicGeometry.LocalUniformHigherDirectImageBound (stage 3; reviewer PASS; first push; landing 20261012T203949-L-832748 (interface); batch 20261012T203936; modules 2; new nodes 1)
 - 20:39 L: merged deliver/V1/Sheaf.AlgebraicGeometry.PicardH1IntersectionSection (stage 3; reviewer PASS; first push; landing 20261012T203950-L-832860 (interface); batch 20261012T203936; modules 2; new nodes 1)
+- 20:39 L: merged deliver/V3/Sheaf.Algebra.Homology.RoosComparisonMaps (stage 3; reviewer PASS; first push; landing 20261012T203950-L-833027 (proof); batch 20261012T203936; modules 1; new nodes 0)
