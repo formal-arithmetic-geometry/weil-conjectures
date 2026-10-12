@@ -29,52 +29,36 @@
  ],
  "proof": [
   {
-   "text": "Because $Y$ is affine, [lem-sc-affine-cap-section-open] applied with $U=Y$ shows that the principal nonvanishing open $Y_s=Y\\cap Y_s$ is affine.",
+   "text": "Apply [lem-sc-affine-cap-section-open] to the top open. Its membership equivalence identifies the resulting affine open U with the nonvanishing locus by extensionality.",
    "uses": [
     "lem-sc-affine-cap-section-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PV (properties-lemma-affine-cap-s-open), applied to U=Y"
-   }
+   "elementary": false
   },
   {
-   "text": "For every integer $n$, the sheaf $\\mathcal F\\otimes\\mathcal L^{\\otimes n}$ is quasi-coherent by [lem-sc-invertible-tensor-qcoherent], so [pqf-lem-affine-vanishing] gives $H^p(Y,\\mathcal F\\otimes\\mathcal L^{\\otimes n})=0$ for $p>0$. The restriction $\\mathcal F|_{Y_s}$ is quasi-coherent by [lem-weil-pbc-module-restriction-open-immersion-colimits], and Step 1 plus [pqf-lem-affine-vanishing] gives $H^p(Y_s,\\mathcal F|_{Y_s})=0$ for $p>0$. Therefore the graded direct sum and its localization have zero degree-$p$ part for $p>0$, and the target is zero as well.",
+   "text": "For every nonnegative numerator degree n, use the source theorem Scheme.Modules.isQuasicoherent_tensorObj and the IsInvertible.tensorPow instance to obtain quasi-coherence of F tensor L^n. Apply [pqf-lem-affine-vanishing] on the top open and U. A direct sum of subsingleton additive groups and its fraction quotient are subsingleton by extensionality and quotient induction. The unique additive equivalence satisfies the fraction formula because the target twisted cohomology group is also subsingleton. The restriction quasi-coherence needed by affine vanishing is internal to that declaration.",
    "uses": [
-    "lem-sc-invertible-tensor-qcoherent",
-    "pqf-lem-affine-vanishing",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "pqf-lem-affine-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09MR proof, affine-open paragraph (using Tag 01XB)"
-   }
+   "elementary": false
   },
   {
-   "text": "In degree $p=0$, the canonical map is an isomorphism by [lem-sc-affine-section-localization], which is the section-localization theorem of [01PW]. Its map sends each homogeneous fraction $\\xi/s^n$ to the section $s^{-n}\\xi$ on $Y_s$, exactly the map $c^0_Y$ in the statement.",
+   "text": "In degree zero apply [new-affine-cohomology-localization-zero] to this same open U and its set equality. This intermediate transports the section comparison through zeroth derived cohomology and its fraction relations.",
    "uses": [
-    "lem-sc-affine-section-localization"
+    "new-affine-cohomology-localization-zero"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09MR proof, p = 0 affine paragraph; Properties, Lemma 01PW"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-affine-cap-section-open",
-  "lem-sc-invertible-tensor-qcoherent",
   "pqf-lem-affine-vanishing",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-sc-affine-section-localization"
+  "new-affine-cohomology-localization-zero"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 09MR (coherent-lemma-invert-s-cohomology), affine case"
+  "place": "Lemma 09MR affine paragraph; D3 Lean reduction using affine vanishing and zeroth comparison"
  },
  "mathlib_searches": [
   {
@@ -156,5 +140,15 @@
   "group": "E1",
   "result": "fix",
   "note": "Stacks 09MR affine case: IsAffine Y, invertible L, s : Γ(L,⊤), quasi-coherent F; U = nonvanishingLocus L s; ∀ p, e : landed CohomologyFractionPresentation L F s p ⊤ ≃+ H^p(U,F) tied by s^n·e(ξ/s^n) = ξ|_U exactly as invertS_cohomology/gluing; p>0 both Subsingleton. FIX: numerator twist spelled (F ⊗ L.tensorPow n : Y.Modules) with the landed ascription instead of tensorObj, matching b8dc3bd8a/80e2708ed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T184248-L-3999160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

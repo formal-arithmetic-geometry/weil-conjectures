@@ -10,8 +10,7 @@ public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import Sheaf.AlgebraicGeometry.AffineSectionLocalization
-import Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent
+import Sheaf.AlgebraicGeometry.AffineCohomologyLocalizationZero
 
 /-! # Localization of cohomology on an affine scheme
 
@@ -38,12 +37,13 @@ Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, affine case
 (blueprint: lem-sc-invert-s-cohomology-affine-case).
 Proof:
 1. By lem-sc-affine-cap-section-open, the nonvanishing open `Y_s` is affine.
-2. By lem-sc-invertible-tensor-qcoherent, each integer twist of `F` is quasi-coherent.
-Apply pqf-lem-affine-vanishing on `Y` to all twists, and on `Y_s` to the restriction
-of `F`, quasi-coherent by lem-weil-pbc-module-restriction-open-immersion-colimits.
-Thus all positive-degree numerator groups, their direct sum and its fraction quotient,
-and the target group vanish.
-3. For degree zero apply lem-sc-affine-section-localization (Stacks 01PW). Its formula
+2. The source theorem `isQuasicoherent_tensorObj` and the tensor-power invertibility
+instance give quasi-coherence of every nonnegative numerator twist. Apply
+pqf-lem-affine-vanishing on `Y` and `Y_s` (restriction quasi-coherence is handled
+inside that declaration). Thus all positive-degree numerator groups, their direct sum
+and its fraction quotient, and the target group vanish.
+3. For degree zero use new-affine-cohomology-localization-zero, which transports
+lem-sc-affine-section-localization (Stacks 01PW). Its formula
 `ξ/s^n ↦ s⁻ⁿ ξ` is the displayed cohomology formula under the degree-zero identification
 with sections. In positive degrees the unique map between zero groups is the comparison.
 The additive isomorphism with this fraction formula is automatically compatible with
@@ -67,6 +67,84 @@ theorem affine_cohomology_localization
                 (homOfLE (le_top : U ≤ ⊤))).app (F ⊗ L.tensorPow n : Y.Modules) t) ∧
         (0 < p → Subsingleton (CohomologyFractionPresentation L F s p ⊤) ∧
           Subsingleton ((RingedSpace.openModuleCohomology Y.toRingedSpace p U).obj F)) := by
-  sorry
+  obtain ⟨⟨U, hU, hiff⟩, _⟩ := affine_cap_section_open Y L s ⊤ (isAffineOpen_top Y)
+  have hset : (U : Set Y) = nonvanishingLocus L s := by
+    ext x
+    change x ∈ U ↔
+      (TopCat.Presheaf.germ L.val.presheaf ⊤ x trivial) s ∉
+        (IsLocalRing.maximalIdeal (Y.presheaf.stalk x)) •
+          (⊤ : Submodule (Y.presheaf.stalk x)
+            ↑(TopCat.Presheaf.stalk L.val.presheaf x))
+    simpa using (hiff x)
+  refine ⟨U, hset, ?_⟩
+  intro p
+  constructor
+  · by_cases hp : p = 0
+    · subst p
+      exact affine_cohomology_localization_zero Y L s F U hset
+    · have hp' : 0 < p := Nat.pos_of_ne_zero hp
+      let : IsAffineOpen U := hU
+      have htop (n : ℕ) : Subsingleton ((RingedSpace.openModuleCohomology
+          Y.toRingedSpace p ⊤).obj (F ⊗ L.tensorPow n : Y.Modules)) := by
+        let := isQuasicoherent_tensorObj F (L.tensorPow n)
+        apply subsingleton_openModuleCohomology_of_isAffineOpen Y
+          (F ⊗ L.tensorPow n : Y.Modules) ⊤ (isAffineOpen_top Y) p hp'
+      have hfrac : Subsingleton (CohomologyFractionPresentation L F s p ⊤) := by
+        let : ∀ n : ℕ, Subsingleton ((RingedSpace.openModuleCohomology
+            Y.toRingedSpace p ⊤).obj (F ⊗ L.tensorPow n : Y.Modules)) := fun n => htop n
+        let DS := DirectSum ℕ (fun n : ℕ =>
+          (RingedSpace.openModuleCohomology Y.toRingedSpace p ⊤).obj
+            (F ⊗ L.tensorPow n : Y.Modules))
+        let : Subsingleton DS := ⟨fun x y => by
+          apply DirectSum.ext
+          intro n
+          exact Subsingleton.elim _ _⟩
+        constructor
+        intro a b
+        induction a using QuotientAddGroup.induction_on with | _ a =>
+          induction b using QuotientAddGroup.induction_on with | _ b =>
+            rw [← sub_eq_zero]
+            apply (QuotientAddGroup.eq_zero_iff _).2
+            simp [Subsingleton.elim a b]
+      let := hfrac
+      let : Subsingleton ((RingedSpace.openModuleCohomology Y.toRingedSpace p U).obj F) :=
+        subsingleton_openModuleCohomology_of_isAffineOpen Y F U hU p hp'
+      let : Inhabited (CohomologyFractionPresentation L F s p ⊤) := ⟨0⟩
+      let : Inhabited ((RingedSpace.openModuleCohomology Y.toRingedSpace p U).obj F) := ⟨0⟩
+      let : Unique (CohomologyFractionPresentation L F s p ⊤) :=
+        { default := 0, uniq := fun _ => Subsingleton.elim _ _ }
+      let : Unique ((RingedSpace.openModuleCohomology Y.toRingedSpace p U).obj F) :=
+        { default := 0, uniq := fun _ => Subsingleton.elim _ _ }
+      refine ⟨AddEquiv.ofUnique, ?_⟩
+      intro n t
+      let := isQuasicoherent_tensorObj F (L.tensorPow n)
+      let := subsingleton_openModuleCohomology_of_isAffineOpen Y
+        (F ⊗ L.tensorPow n : Y.Modules) U hU p hp'
+      apply Subsingleton.elim
+  · intro hp
+    let : IsAffineOpen U := hU
+    have htop (n : ℕ) : Subsingleton ((RingedSpace.openModuleCohomology
+        Y.toRingedSpace p ⊤).obj (F ⊗ L.tensorPow n : Y.Modules)) := by
+      let := isQuasicoherent_tensorObj F (L.tensorPow n)
+      exact subsingleton_openModuleCohomology_of_isAffineOpen Y
+        (F ⊗ L.tensorPow n : Y.Modules) ⊤ (isAffineOpen_top Y) p hp
+    let DS := DirectSum ℕ (fun n : ℕ =>
+      (RingedSpace.openModuleCohomology Y.toRingedSpace p ⊤).obj
+        (F ⊗ L.tensorPow n : Y.Modules))
+    let : ∀ n : ℕ, Subsingleton ((RingedSpace.openModuleCohomology
+        Y.toRingedSpace p ⊤).obj (F ⊗ L.tensorPow n : Y.Modules)) := fun n => htop n
+    let : Subsingleton DS := ⟨fun x y => by
+      apply DirectSum.ext
+      intro n
+      exact Subsingleton.elim _ _⟩
+    have hfrac : Subsingleton (CohomologyFractionPresentation L F s p ⊤) := by
+      constructor
+      intro a b
+      induction a using QuotientAddGroup.induction_on with | _ a =>
+        induction b using QuotientAddGroup.induction_on with | _ b =>
+          rw [← sub_eq_zero]
+          apply (QuotientAddGroup.eq_zero_iff _).2
+          simp [Subsingleton.elim a b]
+    exact ⟨hfrac, subsingleton_openModuleCohomology_of_isAffineOpen Y F U hU p hp⟩
 
 end AlgebraicGeometry.Scheme.Modules
