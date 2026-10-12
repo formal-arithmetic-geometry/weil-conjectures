@@ -5819,3 +5819,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:01 L: returned deliver/P1/Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest (reviewer RETURN: (reviewer X-8478c, head 8478cc598) C4/C1: dag/nodes/sec-curve-estimates/zero-dimensional-global-sections-exact.json, pro)
 - 02:02 L: merged deliver/R1/Sheaf.Topology.NoetherianExtensionByZeroReduction (stage 3; reviewer PASS; first push; landing 20261012T020117-L-955673 (interface); modules 2; new nodes 1)
 - 02:02 L: returned deliver/S1/Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic (reviewer RETURN: (reviewer X-f3301, head f3301b1b9) C1/C4: In dag/nodes/sec-proper-base-change/lem-weil-pbc-module-sheaf-constant-ring-eq)
+- 02:02 L: returned deliver/T1/Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer (reviewer RETURN: (reviewer X-c5b1c, head c5b1c1db0) B2/B3: In both new node JSON files, replace statement = 'Intermediate theorem used by)
