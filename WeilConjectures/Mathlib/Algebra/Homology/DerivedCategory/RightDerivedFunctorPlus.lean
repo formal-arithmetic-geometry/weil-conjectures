@@ -222,7 +222,12 @@ noncomputable def rightDerivedFunctorPlusIsoInjectiveObject :
 noncomputable instance : F.rightDerivedFunctorPlus.CommShift ℤ :=
   Functor.CommShift.ofIso F.rightDerivedFunctorPlusIsoInjectiveObject.symm ℤ
 
-instance : F.rightDerivedFunctorPlus.IsTriangulated := by
+/-- The right derived functor `RF : D⁺(C) ⥤ D⁺(D)` of an additive functor `F` (for `C` with
+enough injectives) is triangulated, for the shift isomorphism transported along
+`Functor.rightDerivedFunctorPlusIsoInjectiveObject` from `F` applied termwise to complexes of
+injectives. In particular so is the derived direct image `Ru_*` on bounded below derived
+categories of étale sheaves. (blueprint: `lem-weil-pbc-derived-direct-image-triangulated`) -/
+instance isTriangulated_rightDerivedFunctorPlus : F.rightDerivedFunctorPlus.IsTriangulated := by
   have := Functor.CommShift.ofIso_compatibility F.rightDerivedFunctorPlusIsoInjectiveObject.symm ℤ
   exact Functor.isTriangulated_of_iso F.rightDerivedFunctorPlusIsoInjectiveObject.symm
 

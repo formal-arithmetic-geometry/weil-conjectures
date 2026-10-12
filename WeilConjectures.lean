@@ -1870,6 +1870,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.DisjointUnion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Exact
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalars
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalarsComp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalarsExact
