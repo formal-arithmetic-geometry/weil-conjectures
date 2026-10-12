@@ -28,67 +28,52 @@
  ],
  "proof": [
   {
-   "text": "Define K^\\vee globally as R\\mathcal Hom(K,\\mathcal O_X). By [lem-pc-perfect-rhom-tensor-comparison], K^\\vee lies in D_QCoh(O_X), the global evaluation map \\epsilon:K^\\vee\\otimes^L K\\to\\mathcal O_X and the global coevaluation \\eta:\\mathcal O_X\\to K\\otimes^L K^\\vee (corresponding to \\mathrm{id}_K under K\\otimes^L K^\\vee\\cong R\\mathcal Hom(K,K)) satisfy the zig-zag identities, so (K,K^\\vee,\\epsilon,\\eta) is an exact pairing in D_QCoh(O_X). All these maps are defined globally; no gluing of morphisms in the derived category is used.",
+   "text": "Obtain the natural tensor-internal-Hom bijections and their naturality from scheme_derivedInternalHom_adjunction. Apply perfect_rhom_tensor_comparison to K with M=K. Its dual lies in D_QCoh, is perfect, and has the specified exact pairing with K. Apply that comparison again to the perfect dual. The first bidual isomorphism identifies K with the second dual, by its recorded equality with RHom(Kdual,O). Transport the second exact pairing using exactPairingCongrRight to obtain the opposite pairing on Kdual and K.",
    "uses": [
+    "lem-sc-derived-internal-hom-adjunction",
     "lem-pc-perfect-rhom-tensor-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DQ, lemma-dual-perfect-complex; Tag 0FPC, cohomology-example-dual-derived"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the tensor-Hom equivalences for an exact dual pair [lem-pc-dualizable-tensor-hom-equivalences] in the monoidal category D_QCoh(O_X), with the globally defined dual pair (K,K^\\vee). They give naturally Hom(K\\otimes^L A,B) \\cong Hom(A,K^\\vee\\otimes^L B) and Hom(A,K\\otimes^L B) \\cong Hom(K^\\vee\\otimes^L A,B) for all quasi-coherent A and B.",
+   "text": "Apply Mathlib tensorLeftAdjunction to each orientation of the global exact pairing. For each quasi-coherent A, apply canonical_derivedTensor_preserve_QCoh to K and A, and to Kdual and A.",
    "uses": [
     "lem-pc-dualizable-tensor-hom-equivalences",
-    "lem-pc-perfect-rhom-tensor-comparison"
+    "lem-pc-canonical-derived-tensor-qcoh"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DQ, lemma-dual-perfect-complex and Tag 0FPC, cohomology-example-dual-derived"
-   }
+   "elementary": false
   },
   {
-   "text": "Let g:X'\\to X. Perfectness of Lg^*K is local on X': on the inverse images of an open cover of X on which K is isomorphic to a strictly perfect complex \\mathcal E^\\bullet, [lem-pc-flat-complex-derived-pullback] represents Lg^*K by the termwise pullback g^*\\mathcal E^\\bullet [def-pc-derived-pullback], whose terms are again direct summands of finite free modules (pullback preserves finite free modules and idempotent summands), so Lg^*K is perfect [def-pc-perfect-complex]; only the isomorphism class of a restriction is checked locally. By [lem-pc-derived-pullback-tensor-qcoh], Lg^*K and Lg^*(K^\\vee) lie in D_QCoh(O_{X'}). Applying [lem-pc-perfect-rhom-tensor-comparison] on X' to the perfect complex Lg^*K gives an exact pairing (Lg^*K, R\\mathcal Hom(Lg^*K,\\mathcal O_{X'})) in D_QCoh(O_{X'}), and the same node gives the global base-change isomorphism Lg^*(K^\\vee)\\cong R\\mathcal Hom(Lg^*K,\\mathcal O_{X'}). Transporting the evaluation and coevaluation along this isomorphism makes (Lg^*K,Lg^*(K^\\vee)) an exact pairing, i.e. Lg^*(K^\\vee) is a dual of Lg^*K.",
+   "text": "For g:T to X, instantiate exists_derivedPullbackMonoidalModel and install its monoidal structure within the proof. ExactPairing.map sends both global exact pairings to exact pairings of Lg*K and Lg*Kdual. This is the direct functoriality of evaluation, coevaluation and triangle identities, so the RHom base-change clause is not needed. derivedPullback_preserve_perfect gives perfectness; the pullback clause of derivedPullback_tensor_preserve_QCoh gives quasi-coherence of both objects.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-pc-derived-pullback",
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-derived-pullback-tensor-qcoh",
-    "lem-pc-perfect-rhom-tensor-comparison"
+    "def-pc-derived-pullback-monoidal-model",
+    "lem-pc-derived-pullback-perfect",
+    "lem-pc-derived-pullback-tensor-qcoh"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex",
-    "place": "Tag 08DQ, cohomology-lemma-dual-perfect-complex; Tag 0FPC; Tag 0GM7, cohomology-lemma-pullback-internal-hom (1); Tag 09UA, cohomology-lemma-perfect-pullback; Tag 08DW"
-   }
+   "elementary": false
   },
   {
-   "text": "Applying the exact-pairing tensor-Hom equivalences of [lem-pc-dualizable-tensor-hom-equivalences] in D_QCoh(O_{X'}) to the exact pairing (Lg^*K,Lg^*(K^\\vee)) of Step 3 gives both displayed isomorphisms on X' for arbitrary quasi-coherent A and B, naturally in A and B.",
+   "text": "Apply tensorLeftAdjunction to each pulled exact pairing and canonical_derivedTensor_preserve_QCoh to each pulled object with an arbitrary quasi-coherent A. Assemble the existential witness and the conjunctions.",
    "uses": [
-    "lem-pc-dualizable-tensor-hom-equivalences"
+    "lem-pc-dualizable-tensor-hom-equivalences",
+    "lem-pc-canonical-derived-tensor-qcoh"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DQ, lemma-dual-perfect-complex and Tag 0FPC, cohomology-example-dual-derived"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sc-derived-internal-hom-adjunction",
   "lem-pc-perfect-rhom-tensor-comparison",
   "lem-pc-dualizable-tensor-hom-equivalences",
-  "def-pc-derived-pullback",
-  "def-pc-perfect-complex",
-  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-canonical-derived-tensor-qcoh",
+  "def-pc-derived-pullback-monoidal-model",
+  "lem-pc-derived-pullback-perfect",
   "lem-pc-derived-pullback-tensor-qcoh"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9T proof"
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DQ and 0FPC; bidual transport and monoidal functor preservation of exact pairings, using Mathlib tensorLeftAdjunction and upstream ExactPairing.map"
  },
  "mathlib_searches": [
   {
@@ -190,5 +175,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T112833-L-765270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

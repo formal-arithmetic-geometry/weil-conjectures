@@ -1,0 +1,114 @@
+{
+ "id": "lem-pc-canonical-derived-tensor-qcoh",
+ "kind": "statement",
+ "title": "Quasi-coherent closure for the canonical derived tensor",
+ "statement": "Let X be a scheme [def-pc-scheme], and let E,F be objects of D(O_X) with quasi-coherent cohomology [def-pc-derived-category]. Their tensor E\\otimes^L F, using the canonical K-flat derived tensor monoidal structure [def-pc-scheme-derived-tensor-structure], has quasi-coherent cohomology.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DX, lemma-quasi-coherence-tensor-product"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Choose a K-flat resolution P representing E and a complex N representing F. The canonical derived tensor is isomorphic to Q(Tot(P tensor N)) by its K-flat construction. Apply the tensor clause of derivedPullback_tensor_preserve_QCoh with the identity morphism of X, and transport quasi-coherence along this comparison: homology preserves isomorphisms and quasi-coherence is invariant under sheaf isomorphisms.",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08DX, lemma-quasi-coherence-tensor-product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DX, lemma-quasi-coherence-tensor-product; proof reconstructed from the recorded interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "perfect complexes of scheme modules derived pullback preserves perfectness and tensor product quasi coherent cohomology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instAbelian",
+   "date": "2026-10-12",
+   "verdict": "no exact scheme-level match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*pullback|tensor.*QCoh",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact scheme-level match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of quasi coherent complexes has quasi coherent cohomology; derived pullback of perfect complexes is perfect",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectTensorHomDuality",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "comparison isomorphism for perfect complexes: use the dualizability of a perfect complex in the adjunction calculation",
+   "via": [
+    "lem-pc-perfect-tensor-hom-duality",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorQCohClosure.lean",
+  "declaration": "AlgebraicGeometry.canonical_derivedTensor_preserve_QCoh",
+  "statement": "theorem canonical_derivedTensor_preserve_QCoh (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (E F : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) (hF : schemeDerivedQCohProperty X F) : schemeDerivedQCohProperty X (E ⊗ F)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T112833-L-765270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T112833-L-765270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

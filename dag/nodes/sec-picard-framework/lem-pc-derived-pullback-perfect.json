@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-derived-pullback-perfect",
+ "kind": "statement",
+ "title": "Derived pullback preserves perfect complexes",
+ "statement": "Let g:T\\to X be a morphism of schemes [def-pc-scheme], and let E be a perfect object of D(O_X) [def-pc-derived-category, def-pc-perfect-complex]. The derived pullback Lg^*E [def-pc-derived-pullback] is perfect on T.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09UA, lemma-perfect-pullback"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "At t choose an open neighbourhood U of g(t) carrying a strictly perfect representative P of E. Restrict to the inverse image of U. Restriction commutes with derived pullback, and flatComplexDerivedPullback computes it by termwise pullback, since P is bounded with flat terms. Pullback preserves zero terms, finite free modules and the splitting equation of each finite projective summand. Thus the pulled complex is strictly perfect and gives the neighbourhood required by IsPerfect at t.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-flat-complex-derived-pullback",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09UA, lemma-perfect-pullback"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-flat-complex-derived-pullback",
+  "def-pc-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09UA, lemma-perfect-pullback; proof reconstructed from the recorded interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "perfect complexes of scheme modules derived pullback preserves perfectness and tensor product quasi coherent cohomology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instAbelian",
+   "date": "2026-10-12",
+   "verdict": "no exact scheme-level match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*pullback|tensor.*QCoh",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact scheme-level match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of quasi coherent complexes has quasi coherent cohomology; derived pullback of perfect complexes is perfect",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectTensorHomDuality",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "comparison isomorphism for perfect complexes: use the dualizability of a perfect complex in the adjunction calculation",
+   "via": [
+    "lem-pc-perfect-tensor-hom-duality",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackPerfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackPerfect.lean",
+  "declaration": "AlgebraicGeometry.derivedPullback_preserve_perfect",
+  "statement": "theorem derivedPullback_preserve_perfect {T X : Scheme.{u}} (g : T ⟶ X) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] [∀ U : T.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over U))] (E : schemeDerivedCategory X) (hE : Scheme.IsPerfect X E) : Scheme.IsPerfect T ((derivedPullback g).obj E)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T112833-L-765270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T112833-L-765270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

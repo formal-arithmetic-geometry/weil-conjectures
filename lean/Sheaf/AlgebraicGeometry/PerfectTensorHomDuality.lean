@@ -10,8 +10,12 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
+import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
+import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
+import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
+import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-! # Tensor-Hom duality for perfect complexes
 
@@ -86,6 +90,39 @@ theorem perfect_tensor_hom_duality
         ∀ A : schemeDerivedQCohCategory T,
           schemeDerivedQCohProperty T (((derivedPullback g).obj K.obj) ⊗ A.obj) ∧
           schemeDerivedQCohProperty T (((derivedPullback g).obj Kdual.obj) ⊗ A.obj) := by
-  sorry
+  classical
+  obtain ⟨adj, s, adj', hadj, hs, he, hadj'⟩ := scheme_derivedInternalHom_adjunction X
+  obtain ⟨Kdual, hdual, ev, hev, hperfect, comparison, hcomparison, hCM, hCK,
+    bidual, hbidual, hbidualIso, η, hη, hηuniq, ⟨p, hp⟩, hbc⟩ :=
+    perfect_rhom_tensor_comparison X K K hK adj hadj adj' hadj'
+  let : ExactPairing K.obj Kdual.obj := p
+  obtain ⟨Ddual, hDdual, evD, hevD, hDperfect, comparisonD, hcomparisonD, hDM, hDD,
+    bidualD, hbidualD, hbidualDIso, ηD, hηD, hηDuniq, ⟨pD, hpD⟩, hbcD⟩ :=
+    perfect_rhom_tensor_comparison X Kdual Kdual hperfect adj hadj adj' hadj'
+  let : IsIso bidual := hbidualIso
+  let : ExactPairing Kdual.obj Ddual.obj := pD
+  let : ExactPairing Kdual.obj K.obj :=
+    exactPairingCongrRight (asIso bidual ≪≫ eqToIso hDdual.symm)
+  refine ⟨Kdual, ⟨p⟩, ⟨inferInstance⟩, ⟨tensorLeftAdjunction Kdual.obj K.obj⟩,
+    ⟨tensorLeftAdjunction K.obj Kdual.obj⟩, ?_, ?_⟩
+  · intro A
+    exact ⟨canonical_derivedTensor_preserve_QCoh X K.obj A.obj K.property A.property,
+      canonical_derivedTensor_preserve_QCoh X Kdual.obj A.obj Kdual.property A.property⟩
+  · intro T g _ _
+    obtain ⟨m, hm⟩ := exists_derivedPullbackMonoidalModel g
+    let := m.toMonoidal
+    let := ExactPairing.map (derivedPullback g) K.obj Kdual.obj
+    let := ExactPairing.map (derivedPullback g) Kdual.obj K.obj
+    have hKq := (derivedPullback_tensor_preserve_QCoh g).1 K.obj K.property
+    have hDq := (derivedPullback_tensor_preserve_QCoh g).1 Kdual.obj Kdual.property
+    refine ⟨derivedPullback_preserve_perfect g K.obj hK, hKq, hDq,
+      ⟨inferInstance⟩, ⟨inferInstance⟩,
+      ⟨tensorLeftAdjunction ((derivedPullback g).obj Kdual.obj)
+        ((derivedPullback g).obj K.obj)⟩,
+      ⟨tensorLeftAdjunction ((derivedPullback g).obj K.obj)
+        ((derivedPullback g).obj Kdual.obj)⟩, ?_⟩
+    intro A
+    exact ⟨canonical_derivedTensor_preserve_QCoh T _ A.obj hKq A.property,
+      canonical_derivedTensor_preserve_QCoh T _ A.obj hDq A.property⟩
 
 end AlgebraicGeometry
