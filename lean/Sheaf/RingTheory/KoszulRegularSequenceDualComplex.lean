@@ -11,10 +11,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
 public import Mathlib.RingTheory.Localization.Defs
 import Sheaf.RingTheory.KoszulConormalBasis
+import Sheaf.RingTheory.KoszulConormalComparisonExistence
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.LinearAlgebra.Dual.Basis
 import Mathlib.Algebra.Homology.SingleHomology
-import Sheaf.Paper.KoszulComplex
 
 /-!
 # Duality for a Koszul-regular quotient
@@ -148,7 +148,24 @@ theorem exists_unique_koszul_conormal_comparison
         (HomologicalComplex.single (ModuleCat A) (ComplexShape.up ℕ) r).obj
           (koszulNormalDeterminant A I r),
       IsKoszulConormalComparison A I r f hf φ ∧ QuasiIso φ := by
-  sorry
+  obtain ⟨ψ, hψ⟩ := exists_koszul_conormal_comparison A I r f hreg hf
+  refine ⟨ψ, hψ, ?_⟩
+  intro ψ' hψ'
+  apply HomologicalComplex.to_single_hom_ext
+  apply (cancel_mono (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) r
+    (koszulNormalDeterminant A I r)).hom).mp
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  obtain ⟨b, _hb⟩ := exists_koszul_conormal_basis A I r f hreg hf
+  apply pairingDual_injective_of_basis b r
+  apply exteriorPower.linearMap_ext
+  ext v
+  choose w hw using fun i ↦ conormalVector_surjective A I r f hf (v i)
+  have hwv : (fun i ↦ koszulConormalVector A I r f hf (w i)) = v := funext hw
+  have hh := (hψ'.1 x w).trans (hψ.1 x w).symm
+  rw [hwv] at hh
+  convert hh using 1 <;> rfl
 
 /-- The canonical comparison `φ`, extended by zero to integer degrees, becomes an
 isomorphism in `D(A)` onto the determinant placed in degree `r`; all cohomology
