@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-module-abelian-stalk-exchange",
+ "kind": "statement",
+ "title": "Forgetting module coefficients in the stalk of derived exchange",
+ "statement": "Let Λ be any commutative ring, X prime → X, X → Y and X prime → Y prime a cartesian square [def-weil-pbc-cartesian-square], t: Spec Ω → Y prime with Ω separably closed [def-weil-pbc-geometric-stalks], F a sheaf of Λ-modules on X [def-weil-pbc-etale-sheaves], and q ≥ 0. Write G=F_ab [def-weil-pbc-abelian-etale-sheaves]. There exist additive equivalences b1 and b2 from the underlying groups of the source and target stalks of the module baseChangeHomologyMap to the corresponding stalks of H^q(g^* Rf_* G[0]) and H^q(Rf prime_* g prime^* G[0]), such that b2 Ex_module = Ex_abelian b1, where Ex_abelian is degree-q homology of derivedBaseChangeMapPlus [def-weil-pbc-derived-exchange]. There is no strict-local, compactness, properness or torsion hypothesis, and no total-space cohomology group occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD and proof (acyclic module/abelian comparison); Tag 0736 and Remark 07A7 (termwise mate). The compatibility of these comparisons is expanded by worker J1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "0",
+  "0",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient forgetful functor and its sheaf version are exact. Module inverse image commutes with the underlying abelian inverse image, compatibly with the unit. Direct image commutes with forgetting by evaluation, and stalks commute with forgetting by filtered-colimit creation.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve F by injective module sheaves. Their underlying abelian sheaves are acyclic for all etale evaluations, hence for direct image via the sheafification description of higher direct images. The acyclic-resolution comparison gives the underlying direct-image derived comparison. Apply exact inverse image and exact stalks; repeat with an injective module replacement of the inverse-image complex to obtain b1 and b2.",
+   "uses": [
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-higher-direct-image-sheafified-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For modules, identify the mate baseChange with derivedBaseChangeMapPlus by the existing baseChange_eq_derivedBaseChangeMapPlus theorem. Forget the termwise mate: the unit, square isomorphism, and counit become their abelian counterparts. Compare the underlying acyclic resolutions to injective abelian ones. Homotopy uniqueness makes this comparison commute with the maps. Apply homology and the exact stalk to get b2 Ex_module = Ex_abelian b1.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-termwise",
+    "prop-weil-pbc-cohomology-resolution-independent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-injective-module-abelian-acyclic",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "prop-weil-pbc-cohomology-resolution-independent",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "worker J1",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD and proof (acyclic module/abelian comparison); Tag 0736 and Remark 07A7 (termwise mate). The compatibility of these comparisons is expanded by worker J1.",
+  "note": "Agent expansion of the original node proof, separating coefficient comparison from the geometric calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived direct image forget module coefficients abelian sheaf cohomology comparison",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric stalk higher direct image strictly henselian scheme total space cohomology natural pullback comparison",
+   "date": "2026-10-12",
+   "results": "Eight hits, mainly TopCat.Presheaf.stalkPullbackHom, stalkPullbackInv, stalkPullbackIso and germToPullbackStalk. These concern topological sheaves and not the etale derived exchange or its Ext comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "date": "2026-10-12",
+   "results": "Sheaf.H, H.equiv₀, H.mapFunctor and map lemmas found; no higher-direct-image stalk exchange comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*sheafCompose|sheafCompose.*rightDerived|baseChange.*forget",
+   "date": "2026-10-12",
+   "results": "Mathlib search through msearch returned zero hits. Repository search found EtaleModuleCohomologyForget, ModuleAbelianInverseImageComparison and StrictLocalBaseChangeGlobalHomology: the first compares global cohomology, the second underived inverse image, and the third needs qcqs and a strict henselization structural map. None states the present comparisons.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalTotalCohomologyExchange",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-local-exchange",
+   "place": "its proof, computing exchange termwise and applying the two closed-fibre comparisons; Forgetting module coefficients in the stalk of derived exchange",
+   "via": [
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleAbelianStalkExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleAbelianStalkExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_addEquiv_module_abelian_stalk_exchange",
+  "statement": "theorem Etale.exists_addEquiv_module_abelian_stalk_exchange (Λ : Type (u + 1)) [CommRing Λ] {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X) (g : Y' ⟶ Y) (sq : IsPullback g' f' f g) {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Y') (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) : let G := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G let S := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((R+((f)_*[AddCommGrpCat.{u + 1}]) ⋙ D+((g)^*[AddCommGrpCat.{u + 1}])).obj K) let T := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙ R+((f')_*[AddCommGrpCat.{u + 1}])).obj K) let e := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K) ∃ (b₁ : (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj ((Etale.baseChangeSourceFunctor Λ g f q).obj F)) ≃+ (((pointSmallEtale t).sheafFiber (A := AddCommGrpCat.{u + 1})).obj S)) (b₂ : (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj ((Etale.baseChangeTargetFunctor Λ g' f' q).obj F)) ≃+ (((pointSmallEtale t).sheafFiber (A := AddCommGrpCat.{u + 1})).obj T)), ∀ x, b₂ ((((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} Λ)).map (Etale.baseChangeHomologyMap Λ sq q F)).hom x) = ((((pointSmallEtale t).sheafFiber (A := AddCommGrpCat.{u + 1})).map e).hom (b₁ x))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T053936-L-2637123",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T053936-L-2637123",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

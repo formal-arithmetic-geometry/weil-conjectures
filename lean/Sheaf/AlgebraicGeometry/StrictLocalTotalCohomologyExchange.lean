@@ -9,13 +9,9 @@ public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.Paper.InverseImageStalkGerm
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
+
+import Sheaf.AlgebraicGeometry.StrictLocalAbelianTotalExchange
+import Sheaf.AlgebraicGeometry.ModuleAbelianStalkExchange
 
 /-!
 # Exchange on total-space cohomology over strictly henselian bases
@@ -86,6 +82,17 @@ theorem Etale.exists_addEquiv_strictLocal_totalCohomology_exchange
           (Etale.baseChangeHomologyMap Λ sq q F)).hom x) =
         Etale.cohomologyMap g'
           ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)
-          q (a₁ x) := by sorry
+          q (a₁ x) := by
+  obtain ⟨b₁, b₂, hb⟩ := Etale.exists_addEquiv_module_abelian_stalk_exchange
+    Λ f f' g' (Spec.map (CommRingCat.ofHom φ)) sq
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))) F q
+  obtain ⟨a₁, a₂, ha⟩ := Etale.exists_addEquiv_strictLocal_abelian_total_exchange
+    φ f f' g' sq
+    ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q
+  refine ⟨b₁.trans a₁, b₂.trans a₂, ?_⟩
+  intro x
+  change a₂ (b₂ _) = Etale.cohomologyMap g' _ q (a₁ (b₁ x))
+  rw [hb x]
+  exact ha (b₁ x)
 
 end AlgebraicGeometry
