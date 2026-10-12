@@ -7460,3 +7460,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:25 L: returned deliver/J2/Sheaf.FieldTheory.MakeSeparablyGenerated (reviewer RETURN: (reviewer X-96716, head 967163cdc) F1 / stage-3 point 6: In dag/nodes/sec-proper-base-change/lem-weil-pbc-make-separably)
 - 11:25 L: returned deliver/G1/Sheaf.CategoryTheory.Sites.CohomologySiteEquivalence (reviewer RETURN: (reviewer X-4ca35, head 4ca359986) C3/D1: `CohomologySiteEquivalenceCovering.lean` documents `covering_iff_of_equivalenc)
 - 11:25 L: returned deliver/M2/Sheaf.FieldTheory.SeparablyGeneratedSeparable (reviewer RETURN: (reviewer X-81f91, head 81f91f125) H9 / brief point 5 (pruning): In lean/Sheaf/FieldTheory/SeparablyGeneratedSeparable.l)
+- 11:25 L: returned deliver/J2/Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentGermLifts (reviewer RETURN: (reviewer X-583d0, head 583d0b88a) H1: add lean/Sheaf/AlgebraicGeometry/FiniteSurjectiveSetDescentCoordinatesConstant.le)
