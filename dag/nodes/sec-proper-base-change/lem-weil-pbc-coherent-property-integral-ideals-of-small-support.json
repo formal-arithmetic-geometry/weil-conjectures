@@ -1,0 +1,195 @@
+{
+ "id": "lem-weil-pbc-coherent-property-integral-ideals-of-small-support",
+ "kind": "statement",
+ "title": "Generic-point patching for ideals from small-support coherent modules",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions]. Let $\\mathcal P$ be a property of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Suppose $\\mathcal P(0)$; suppose for every short exact sequence of coherent modules [pqf-def-coherent], $0\\to F_1\\to F\\to F_2\\to0$, $\\mathcal P(F_1)$ and $\\mathcal P(F_2)$ imply $\\mathcal P(F)$; and suppose for any coherent $F$ and integer $r\\ge1$, $\\mathcal P(F^{\\oplus r})$ implies $\\mathcal P(F)$. Fix a closed immersion $i:Z\\to X$ [def-weil-closed-immersion], with $Z$ integral [def-pc-integral-scheme], and $\\xi\\in X$ such that $\\overline{\\{\\xi\\}}=i(Z)$. Stalks are as in [def-weil-pbc-module-stalk], support as in [def-weil-pbc-closed-subset-proper-over-base], and $\\mathfrak m_\\xi$ as in [def-weil-residue-field]. Assume that every coherent $Q$ with $\\operatorname{Supp}(Q)\\subseteq i(Z)$ and $Q_\\xi=0$ has $\\mathcal P$. Assume there exists a coherent $G$ with $\\operatorname{Supp}(G)=i(Z)$ and $\\mathfrak m_\\xi G_\\xi=0$, such that for every quasi-coherent ideal $J\\subseteq\\mathcal O_X$ [def-sbc-closed-immersion-ideal-sheaf] with $J_\\xi=\\mathcal O_{X,\\xi}$, there is a coherent submodule $G'\\subseteq JG$ with $G'_\\xi=G_\\xi$ and $\\mathcal P(G')$. Here $JG$ is the image of ideal multiplication [lem-weil-pbc-ideal-module-product-stalk], formed using [def-pur-sheaf-tensor-product]. Then for every quasi-coherent ideal $I\\subseteq\\mathcal O_Z$, represented by $Z.\\operatorname{IdealSheafData}$ [def-sbc-closed-immersion-ideal-sheaf], $\\mathcal P(i_*I)$ holds. The pushforward is the module pushforward [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 01YL (lemma-property-irreducible-higher-rank-cohomological), third proof paragraph and its final ideal-intersection argument; 01YM (lemma-property-higher-rank-cohomological). Read online at https://stacks.math.columbia.edu/tag/01YL because the literature checkout is absent on this machine."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-residue-field",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Extension closure and P(0) imply invariance under isomorphisms of coherent modules, using the short exact sequence 0 → 0 → F → G → 0 for F ≅ G. Closed immersions are finite [lem-weil-pbc-closed-immersion-finite]; their sources are locally Noetherian [pqf-lem-locnoeth-lft]. Ideal modules on the source and their pushforwards are coherent by [pqf-lem-coherent-ft-locnoeth], [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] and [lem-weil-pbc-finite-pushforward-coherent].",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The generic point η of Z maps to ξ by [lem-weil-pbc-scheme-sober] and the closed embedding. Apply [lem-weil-pbc-coherent-generic-point-ideal-inclusion] to G: obtain a mono from i_*(I^{⊕r}) into G which is an isomorphism near ξ. Since Supp(G)=i(Z), G_ξ is nonzero, so r≥1 and I is nonzero. For every nonzero ideal I′≤I, its generic stalk inclusion is bijective by [lem-weil-pbc-integral-scheme-ideal-generic-stalk]. Sectionwise pushforward commutes with finite sums. Its composite β:(i_*I′)^{⊕r}→G is a mono, bijective at ξ by naturality [lem-weil-pbc-closed-pushforward-stalks].",
+   "uses": [
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cokernel Q of β is coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth], supported in i(Z), and has zero ξ-stalk by [lem-weil-pbc-module-stalk-exact]. Set J=Ann(Q), using [lem-weil-pbc-scheme-theoretic-support]. The support of Q is closed [lem-weil-pbc-finite-type-module-support-closed] and misses ξ, so Q vanishes on its open complement by [lem-weil-pbc-module-iso-on-stalks]. Thus J is the unit ideal on this complement and has full ξ-stalk. J is quasi-coherent and coherent by the structure-sheaf kernel construction and finite closed pushforward from step 1. The image of multiplication J⊗G→G lies in ker(G→Q)=im β, because J kills Q; use the construction [def-pur-sheaf-tensor-product] or its stalk image [lem-weil-pbc-ideal-module-product-stalk]. Apply the distinguished-module hypothesis to J. Pull its subobject G′ back along β to a coherent subobject H of (i_*I′)^{⊕r}. It is isomorphic to G′ and therefore has P. Its quotient is coherent, supported in i(Z), and vanishes at ξ by stalk exactness. The hypothesis for small-support modules gives P of the quotient. Extension closure gives P((i_*I′)^{⊕r}), and the positive-sum hypothesis gives P(i_*I′).",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-scheme-theoretic-support",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-module-iso-on-stalks",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any nonzero ideal I″, take I′=I″∩I. This is quasi-coherent [lem-weil-pbc-quasi-coherent-ideal-intersection]. On a nonempty affine open, [lem-weil-pbc-integral-scheme-ideal-generic-stalk] supplies nonzero elements of I and I″; their product is nonzero since Z is integral, and lies in the intersection. Step 3 gives P(i_*I′). The mono i_*I′→i_*I″ is bijective at ξ; its coherent cokernel is supported in i(Z) and has zero ξ-stalk [lem-weil-pbc-module-stalk-exact]. Apply the small-support hypothesis and extension closure. If I″=0, its pushforward is zero; P(0) and isomorphism invariance give the conclusion.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-intersection",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-finite",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-scheme-theoretic-support",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-quasi-coherent-ideal-intersection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 01YL (lemma-property-irreducible-higher-rank-cohomological), third proof paragraph and its final ideal-intersection argument; 01YM (lemma-property-higher-rank-cohomological). Read online at https://stacks.math.columbia.edu/tag/01YL because the literature checkout is absent on this machine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent sheaves: generically full subobjects and extension-closed properties on integral closed subschemes",
+   "results": "Internal Server Error; service unavailable, 0 hits.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Devissage of extension closed properties of coherent sheaves on Noetherian schemes via integral closed subschemes",
+   "results": "Eight hits: IsLocallyNoetherian, IsNoetherian and affine-cover Noetherianity criteria; no devissage or generic-point patching theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCoherent",
+   "results": "Unknown identifier IsCoherent, 0 hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*(devissage|property)|devissage.*coherent",
+   "results": "Mathlib: isQuasicoherent and coherent-site equivalence, four hits. Local rg found CoherentPropertyDevissage and CoherentPropertyIrreducible; both require two-out-of-three, stronger than extension closure. Blueprint searches higher-rank and 01YL: 0 hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentPropertyDevissageIntegralSubschemes",
+  "date": "2026-10-12",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "01YL generic-point annihilator and ideal-intersection argument, steps 6–8 of the parent devissage proof supporting the finite-surjective affine-target step of the finite-etale lifting proof.",
+   "via": [
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentPropertyIntegralIdealsOfSmallSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentPropertyIntegralIdealsOfSmallSupport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_property_integral_ideals_of_small_support",
+  "statement": "theorem coherent_property_integral_ideals_of_small_support (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (P : X.Modules → Prop) (hP_zero : P (0 : X.Modules)) (hP_ext : ∀ (S : ShortComplex X.Modules), S.ShortExact → RingedSpace.IsCoherent X.toRingedSpace S.X₁ → RingedSpace.IsCoherent X.toRingedSpace S.X₂ → RingedSpace.IsCoherent X.toRingedSpace S.X₃ → P S.X₁ → P S.X₃ → P S.X₂) (hP_sum : ∀ (F : X.Modules) (r : ℕ), RingedSpace.IsCoherent X.toRingedSpace F → 1 ≤ r → P (@biproduct (Fin r) X.Modules _ _ (fun _ : Fin r ↦ F) (HasBiproduct.of_hasProduct (fun _ : Fin r ↦ F))) → P F) (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z] (ξ : X) (hclosure : closure ({ξ} : Set X) = Set.range i.base) (hsmall : ∀ Q : X.Modules, RingedSpace.IsCoherent X.toRingedSpace Q → {x : X | ¬ Subsingleton (Q.presheaf.stalk x)} ⊆ Set.range i.base → Subsingleton (Q.presheaf.stalk ξ) → P Q) (hG : ∃ G : X.Modules, RingedSpace.IsCoherent X.toRingedSpace G ∧ ({x : X | ¬ Subsingleton (G.presheaf.stalk x)} = Set.range i.base) ∧ (∀ g : X.presheaf.stalk ξ, ∀ m : (RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj G, g ∈ IsLocalRing.maximalIdeal _ → g • m = 0) ∧ ∀ (J : X.Modules) (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι] [J.IsQuasicoherent], Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map ι).hom → ∃ G' : Subobject G, RingedSpace.IsCoherent X.toRingedSpace (G' : X.Modules) ∧ (∃ h : (G' : X.Modules) ⟶ idealModuleProduct ι G, G'.arrow = h ≫ idealModuleProductι ι G) ∧ Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map G'.arrow).hom ∧ P (G' : X.Modules)) : ∀ I : Z.IdealSheafData, P ((pushforward i).obj I.toModules)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4bb4a",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T144202-L-2113393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4bb4a",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T144202-L-2113393",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet's statements, proof metadata, and report; all delivered modules and the direct importer compile cleanly."
+ }
+}

@@ -8251,3 +8251,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:42 L: merged deliver/Y2/Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural (stage 3; reviewer PASS; first push; landing 20261012T144201-L-2113025 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:42 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison (stage 3; reviewer PASS; first push; landing 20261012T144201-L-2113152 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:42 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.AffineFibreProductTransition (stage 3; reviewer PASS; first push; landing 20261012T144201-L-2113272 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:42 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.CoherentPropertyDevissageIntegralSubschemes (stage 3; reviewer PASS; first push; landing 20261012T144202-L-2113393 (interface); batch 20261012T144049; modules 2; new nodes 1)
