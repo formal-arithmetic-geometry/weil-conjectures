@@ -31,128 +31,68 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (notation and conventions).* Put $A=f_*G$ on $X_{\\Et}$ [def-weil-pbc-direct-image], $B=i^{-1}A$ on $Z_{\\Et}$, $A'=f'_*\\pi^{-1}G$. The squares of fibre products [def-pc-fibre-product] give the equalities of morphisms $f\\circ i_Y=i\\circ f_Z$, $f'\\circ i_{Y'}=i\\circ f'_Z$, $f_Z\\circ\\pi_Z=f'_Z$, $i_Y\\circ\\pi_Z=\\pi\\circ i_{Y'}$ ($\\pi_Z=\\pi\\times_X\\mathrm{id}_Z$ is the morphism with these two compositions), $f\\circ\\pi=f'$; so all composites $Y'_Z\\to X$ below are one morphism $k=i f'_Z=i f_Z\\pi_Z=f i_Y\\pi_Z=f\\pi i_{Y'}=f' i_{Y'}$ and have one inverse image $k^{-1}$. Units and counits of $s^{-1}\\dashv s_*$ are $\\eta_s,\\varepsilon_s$ [def-weil-pbc-inverse-image]; $c_{s,t}:t^{-1}s^{-1}\\xrightarrow{\\sim}(st)^{-1}$ and $d_{s,t}:(st)_*\\xrightarrow{\\sim}s_*t_*$ are the isomorphisms of [lem-weil-pbc-inverse-image-composition] (1), (2), so $u=d^{-1}_{f,\\pi,\\pi^{-1}G}\\circ f_*(\\eta_{\\pi,G})$ and $\\kappa=c^{-1}_{\\pi,i_{Y'},G}\\circ c_{i_Y,\\pi_Z,G}$ (natural in $G$, as the $c$ are). For a cartesian square $\\square=(h,h',i,i')$ as in the statement, $\\theta_\\square=c^{-1}_{h,i'}\\circ c_{i,h'}$ [def-weil-pbc-cartesian-square], [lem-weil-pbc-edge-map-base-change], and $\\Ex^0_{\\square,E}=h'_*(\\varphi_{\\square,E})\\circ\\eta_{h',i^{-1}h_*E}$ is the adjoint under $h'^{-1}\\dashv h'_*$ of $\\varphi_{\\square,E}=i'^{-1}(\\varepsilon_{h,E})\\circ c^{-1}_{h,i',h_*E}\\circ c_{i,h',h_*E}:h'^{-1}i^{-1}h_*E\\to i'^{-1}E$ [def-weil-pbc-underived-exchange]. Cohomology groups and maps are read as in step 1 of [lem-weil-pbc-edge-map-base-change]: a K-injective resolution [def-weil-pbc-kinjective-resolutions] of every sheaf occurring is fixed, each $H^q(T_{\\Et},-)$ is computed from it, each pullback map $s^*$ [def-weil-pbc-cohomology-pullback] is followed by the identification $H^q(\\mathrm{id})$ with the fixed resolution of the target (independent of the auxiliary resolution by clause 1 of [lem-weil-pbc-cohomology-pullback-functorial]), and $H^q(\\psi)$ for a morphism of sheaves $\\psi$ is as in the preamble of that lemma. Then $H^q(\\psi'\\circ\\psi)=H^q(\\psi')\\circ H^q(\\psi)$ and $H^q(\\mathrm{id})=\\mathrm{id}$ (a composite of lifts is a lift of the composite; $H^q(-)$ does not depend on the lift: step 1(b) of the proof of [lem-weil-pbc-cohomology-pullback-functorial], written out as step 2 of [lem-weil-pbc-edge-map-base-change]), so $H^q$ of an isomorphism is bijective with inverse $H^q(\\psi^{-1})$. The identity to be proved does not depend on the choices, since other choices change every map by the identifications $H^q(\\mathrm{id})$ on source and target.",
+   "text": "Set F = f_* G, B = i^* F, E = π^* G, U = f_*(η_π,G) followed by lowerStarComp.hom, and V = i^* U. Substitute fZ′ = πZ ≫ fZ using hZ. Keep the statement and all its hypotheses unchanged.",
    "uses": [
-    "def-pc-fibre-product",
     "def-weil-pbc-direct-image",
     "def-weil-pbc-inverse-image",
     "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the composite-counit identity in the private lemma counit_pushforward_unit: (π ≫ f)^*(U) followed by ε_(π ≫ f),E equals upperStarComp.hom at F followed by π^*(ε_f,G). Precompose by upperStarComp.inv, use its naturality and the source library upperStarComp_inv_app_counit_app. Functoriality cancels lowerStarComp.hom with its inverse. Naturality of ε_f at η_π,G and the left triangle identity for π finish the computation.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let θ₁ and θ₂ be the squareUpperStarIso components for sq and sq′, ε₁ = iY^*(ε_f,G), ε₂ = iY′^*(ε_(π ≫ f),E), κ = squareUpperStarIso(sqπ).hom at G, and c = upperStarComp(πZ,fZ).hom at B. Prove the sheaf identity (πZ ≫ fZ)^*(V) ≫ θ₂ ≫ ε₂ = c ≫ πZ^*(θ₁ ≫ ε₁) ≫ κ. Naturality of θ₂ moves U to iY′^*(π ≫ f)^*(U); apply the preceding counit identity. The already-proved squareUpperStarIso_paste_vert_hom applied to sqπ and sq rewrites the square comparison at F. Cancel the mapped upperStarComp inverse/hom pair and use naturality of κ at ε_f,G. This directly supplies the comparison calculation of the original steps 5–7 without derived inverse images.",
+   "uses": [
     "def-weil-pbc-cartesian-square",
-    "lem-weil-pbc-edge-map-base-change",
     "def-weil-pbc-underived-exchange",
-    "def-weil-pbc-kinjective-resolutions",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-square-iso-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private lemma exchange_edge_apply writes exchange followed by the edge map as H^q(θ ≫ pullback(ε)) after cohomology pullback. Apply cohomologyMap_map to the exchange, combine the two H^q maps by Sheaf.H.map_comp_apply, and use upperStar_map_baseChangeMap_app_counit. This is valid for any commutative square and needs neither finite morphisms nor resolutions.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
     "def-weil-pbc-cohomology-pullback",
     "lem-weil-pbc-cohomology-pullback-functorial"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Definition 0037 and the paragraph after it (adjoint beta = v(alpha) o unit; alpha = counit o u(beta)); the computation is written by an agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 ($\\Phi$ through one pullback map).* For a square $\\square=(h,h',i,i')$ and $E$ as in the statement, $\\Phi^q_{\\square,E}=H^q(\\varphi_{\\square,E})\\circ h'^*$ as maps $H^q(Z_{\\Et},i^{-1}h_*E)\\to H^q((W\\times_XZ)_{\\Et},i'^{-1}E)$. Indeed, by [lem-weil-pbc-adjunct-counit-identity] for $h'^{-1}\\dashv h'_*$, $\\psi=\\Ex^0_{\\square,E}=h'_*(\\varphi_{\\square,E})\\circ\\eta_{h'}$ gives $\\varepsilon_{h',i'^{-1}E}\\circ h'^{-1}(\\Ex^0_{\\square,E})=\\varphi_{\\square,E}$ (step 3 of [lem-weil-pbc-edge-map-base-change]). By definition $\\Phi^q_{\\square,E}=H^q(\\varepsilon_{h',i'^{-1}E})\\circ h'^*\\circ H^q(\\Ex^0_{\\square,E})$; clause 3 (naturality) of [lem-weil-pbc-cohomology-pullback-functorial] for $h'$ and $\\Ex^0_{\\square,E}$ gives $h'^*\\circ H^q(\\Ex^0)=H^q(h'^{-1}\\Ex^0)\\circ h'^*$, and by step 1 $H^q(\\varepsilon_{h'})\\circ H^q(h'^{-1}\\Ex^0)=H^q(\\varepsilon_{h'}\\circ h'^{-1}\\Ex^0)=H^q(\\varphi_{\\square,E})$. Write $\\varphi_1=\\varphi_{(f,f_Z,i,i_Y),G}:f_Z^{-1}B\\to i_Y^{-1}G$ and $\\varphi_2=\\varphi_{(f',f'_Z,i,i_{Y'}),\\pi^{-1}G}:f'^{-1}_Zi^{-1}A'\\to i_{Y'}^{-1}\\pi^{-1}G$.",
+   "text": "Evaluate the desired equality at an arbitrary x in H^q(Z,B), and apply exchange_edge_apply to sq′ at H^q(V)(x) and to sq at x. Naturality of cohomological pullback gives the left side as H^q((πZ ≫ fZ)^*(V) ≫ θ₂ ≫ ε₂) applied to d = (πZ ≫ fZ)^*(x). For the right side first use naturality along πZ at θ₁ ≫ ε₁; clause 2 of the Lean theorem cohomologyPullbackFunctorial (the composition clause) identifies πZ^* fZ^*(x) with H^q(c)(d). Combine H^q maps to get H^q(c ≫ πZ^*(θ₁ ≫ ε₁) ≫ κ)(d). Apply H^q to the sheaf identity and conclude by extensionality. The original unit route is preserved; the item is not itself a realized statement or step of sk-thm-p1.",
    "uses": [
-    "lem-weil-pbc-adjunct-counit-identity",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-underived-exchange",
-    "lem-weil-pbc-edge-map-base-change",
+    "def-weil-pbc-cohomology-pullback",
     "lem-weil-pbc-cohomology-pullback-functorial"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Definition 0037 and the paragraph after it (adjoint beta = v(alpha) o unit; alpha = counit o u(beta)); the computation is written by an agent"
-   }
-  },
-  {
-   "text": "*Step 3 (reduction to an identity of sheaf morphisms).* Left side: by step 2 and clause 3 of [lem-weil-pbc-cohomology-pullback-functorial] for $f'_Z$ and the morphism $i^{-1}u:B\\to i^{-1}A'$ of $\\Ab(Z_{\\Et})$, $\\Phi^q_2\\circ H^q(i^{-1}u)=H^q(\\varphi_2)\\circ f'^*_Z\\circ H^q(i^{-1}u)=H^q(\\varphi_2\\circ f'^{-1}_Zi^{-1}(u))\\circ f'^*_Z$ (step 1). Right side: by step 2 and clause 3 for $\\pi_Z$ and $\\varphi_1$, $H^q(\\kappa)\\circ\\pi_Z^*\\circ\\Phi^q_1=H^q(\\kappa)\\circ H^q(\\pi_Z^{-1}\\varphi_1)\\circ\\pi_Z^*\\circ f_Z^*$; by clause 4 (composition) for $u=f_Z$, $v=\\pi_Z$ and the sheaf $B$, $f'^*_Z=(f_Z\\pi_Z)^*=H^q(c_{f_Z,\\pi_Z,B})\\circ\\pi_Z^*\\circ f_Z^*$, so $\\pi_Z^*\\circ f_Z^*=H^q(c^{-1}_{f_Z,\\pi_Z,B})\\circ f'^*_Z$ (step 1). Hence the right side is $H^q(\\kappa_G\\circ\\pi_Z^{-1}(\\varphi_1)\\circ c^{-1}_{f_Z,\\pi_Z,B})\\circ f'^*_Z$. So the lemma follows from the identity of morphisms $f'^{-1}_ZB\\to i_{Y'}^{-1}\\pi^{-1}G$ in $\\Ab((Y'_Z)_{\\Et})$\n$$(\\star)\\qquad \\varphi_2\\circ f'^{-1}_Zi^{-1}(u)=\\kappa_G\\circ\\pi_Z^{-1}(\\varphi_1)\\circ c^{-1}_{f_Z,\\pi_Z,B},$$\nproved in steps 4–7.",
-   "uses": [
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, second paragraph: the compatibility is used there without being stated; the steps are written by an agent"
-   }
-  },
-  {
-   "text": "*Step 4 (the counit of $f'$ on $u$).* Claim: $\\varepsilon_{f',\\pi^{-1}G}\\circ f'^{-1}(u)=\\pi^{-1}(\\varepsilon_{f,G})\\circ c^{-1}_{f,\\pi,A}:f'^{-1}A\\to\\pi^{-1}G$. By [lem-weil-pbc-adjunct-counit-identity] for $f'^{-1}\\dashv f'_*$ it suffices that $u=f'_*(\\rho)\\circ\\eta_{f',A}$ for $\\rho=\\pi^{-1}(\\varepsilon_{f,G})\\circ c^{-1}_{f,\\pi,A}$. The unit equation [lem-weil-pbc-inverse-image-composition] (2) for $(f,\\pi)$ at $A$ gives $\\eta_{f',A}=d^{-1}_{f,\\pi,f'^{-1}A}\\circ f_*\\pi_*(c_{f,\\pi,A})\\circ f_*(\\eta_{\\pi,f^{-1}A})\\circ\\eta_{f,A}$. Naturality of $d_{f,\\pi}$ gives $f'_*(\\rho)\\circ d^{-1}_{f,\\pi}=d^{-1}_{f,\\pi}\\circ f_*\\pi_*(\\rho)$, hence $f'_*(\\rho)\\circ\\eta_{f',A}=d^{-1}_{f,\\pi,\\pi^{-1}G}\\circ f_*\\bigl(\\pi_*\\pi^{-1}(\\varepsilon_{f,G})\\circ\\eta_{\\pi,f^{-1}A}\\bigr)\\circ\\eta_{f,A}$. Naturality of $\\eta_\\pi$ [def-weil-pbc-inverse-image] for $\\varepsilon_{f,G}:f^{-1}A\\to G$ gives $\\pi_*\\pi^{-1}(\\varepsilon_{f,G})\\circ\\eta_{\\pi,f^{-1}A}=\\eta_{\\pi,G}\\circ\\varepsilon_{f,G}$, and the triangle identity $f_*(\\varepsilon_{f,G})\\circ\\eta_{f,f_*G}=\\mathrm{id}_{f_*G}$ [lem-weil-pbc-adjunct-counit-identity] then gives $f'_*(\\rho)\\circ\\eta_{f',A}=d^{-1}_{f,\\pi,\\pi^{-1}G}\\circ f_*(\\eta_{\\pi,G})=u$.",
-   "uses": [
-    "lem-weil-pbc-adjunct-counit-identity",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Definition 0037 and the paragraph after it (adjoint beta = v(alpha) o unit; alpha = counit o u(beta)); the computation is written by an agent"
-   }
-  },
-  {
-   "text": "*Step 5 (the left side of $(\\star)$).* $\\varphi_2=i_{Y'}^{-1}(\\varepsilon_{f',\\pi^{-1}G})\\circ c^{-1}_{f',i_{Y'},A'}\\circ c_{i,f'_Z,A'}$ (step 1). Naturality of $c_{i,f'_Z}$ and of $c_{f',i_{Y'}}$ [lem-weil-pbc-inverse-image-composition] (2) for $u:A\\to A'$: $c_{i,f'_Z,A'}\\circ f'^{-1}_Zi^{-1}(u)=k^{-1}(u)\\circ c_{i,f'_Z,A}$ and $c^{-1}_{f',i_{Y'},A'}\\circ k^{-1}(u)=i_{Y'}^{-1}f'^{-1}(u)\\circ c^{-1}_{f',i_{Y'},A}$. With step 4 (and functoriality of $i_{Y'}^{-1}$): $\\varphi_2\\circ f'^{-1}_Zi^{-1}(u)=i_{Y'}^{-1}\\pi^{-1}(\\varepsilon_{f,G})\\circ i_{Y'}^{-1}(c^{-1}_{f,\\pi,A})\\circ c^{-1}_{f',i_{Y'},A}\\circ c_{i,f'_Z,A}$.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Definition 0037 and the paragraph after it (adjoint beta = v(alpha) o unit; alpha = counit o u(beta)); the computation is written by an agent"
-   }
-  },
-  {
-   "text": "*Step 6 (the right side of $(\\star)$).* $\\pi_Z^{-1}(\\varphi_1)=\\pi_Z^{-1}i_Y^{-1}(\\varepsilon_{f,G})\\circ\\pi_Z^{-1}(c^{-1}_{f,i_Y,A})\\circ\\pi_Z^{-1}(c_{i,f_Z,A})$ (step 1, $\\pi_Z^{-1}$ a functor), and naturality of $\\kappa$ (step 1) for $\\varepsilon_{f,G}:f^{-1}A\\to G$ gives $\\kappa_G\\circ\\pi_Z^{-1}i_Y^{-1}(\\varepsilon_{f,G})=i_{Y'}^{-1}\\pi^{-1}(\\varepsilon_{f,G})\\circ\\kappa_{f^{-1}A}$. Hence the right side of $(\\star)$ is $i_{Y'}^{-1}\\pi^{-1}(\\varepsilon_{f,G})\\circ c^{-1}_{\\pi,i_{Y'},f^{-1}A}\\circ c_{i_Y,\\pi_Z,f^{-1}A}\\circ\\pi_Z^{-1}(c^{-1}_{f,i_Y,A})\\circ\\pi_Z^{-1}(c_{i,f_Z,A})\\circ c^{-1}_{f_Z,\\pi_Z,B}$.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Definition 0037 and the paragraph after it (adjoint beta = v(alpha) o unit; alpha = counit o u(beta)); the computation is written by an agent"
-   }
-  },
-  {
-   "text": "*Step 7 (coherence of the composition isomorphisms).* By steps 5 and 6 it suffices that the isomorphisms $\\Lambda=i_{Y'}^{-1}(c^{-1}_{f,\\pi,A})\\circ c^{-1}_{f',i_{Y'},A}\\circ c_{i,f'_Z,A}$ and $P=c^{-1}_{\\pi,i_{Y'},f^{-1}A}\\circ c_{i_Y,\\pi_Z,f^{-1}A}\\circ\\pi_Z^{-1}(c^{-1}_{f,i_Y,A})\\circ\\pi_Z^{-1}(c_{i,f_Z,A})\\circ c^{-1}_{f_Z,\\pi_Z,B}$, both $f'^{-1}_Zi^{-1}A\\to i_{Y'}^{-1}\\pi^{-1}f^{-1}A$, are equal. Use the associativity of [lem-weil-pbc-derived-inverse-image-composition] (1): for composable $s,t,r$, $c_{s,tr}\\circ(c_{t,r}s^{-1})=c_{st,r}\\circ(r^{-1}c_{s,t})$ $(\\mathrm{As})$. Compose both with the isomorphism $T=c_{f',i_{Y'},A}\\circ i_{Y'}^{-1}(c_{f,\\pi,A}):i_{Y'}^{-1}\\pi^{-1}f^{-1}A\\to k^{-1}A$; then $T\\circ\\Lambda=c_{i,f'_Z,A}$. By $(\\mathrm{As})$ for $(f,\\pi,i_{Y'})$ (with $f\\pi=f'$), $T=c_{f,\\pi i_{Y'},A}\\circ c_{\\pi,i_{Y'},f^{-1}A}$, so $T\\circ P=c_{f,i_Y\\pi_Z,A}\\circ c_{i_Y,\\pi_Z,f^{-1}A}\\circ\\pi_Z^{-1}(c^{-1}_{f,i_Y,A})\\circ\\pi_Z^{-1}(c_{i,f_Z,A})\\circ c^{-1}_{f_Z,\\pi_Z,B}$ ($\\pi i_{Y'}=i_Y\\pi_Z$). By $(\\mathrm{As})$ for $(f,i_Y,\\pi_Z)$, $c_{f,i_Y\\pi_Z,A}\\circ c_{i_Y,\\pi_Z,f^{-1}A}=c_{fi_Y,\\pi_Z,A}\\circ\\pi_Z^{-1}(c_{f,i_Y,A})$, so $T\\circ P=c_{if_Z,\\pi_Z,A}\\circ\\pi_Z^{-1}(c_{i,f_Z,A})\\circ c^{-1}_{f_Z,\\pi_Z,i^{-1}A}$ ($fi_Y=if_Z$). By $(\\mathrm{As})$ for $(i,f_Z,\\pi_Z)$, $c_{if_Z,\\pi_Z,A}\\circ\\pi_Z^{-1}(c_{i,f_Z,A})=c_{i,f_Z\\pi_Z,A}\\circ c_{f_Z,\\pi_Z,i^{-1}A}$, so $T\\circ P=c_{i,f'_Z,A}=T\\circ\\Lambda$ ($f_Z\\pi_Z=f'_Z$). As $T$ is an isomorphism, $P=\\Lambda$.",
-   "uses": [
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma 03CB (composition of morphisms of topoi, (u o v)^{-1} = v^{-1} o u^{-1} as left adjoints) and Categories, Lemma 0B65; the coherence computation is written by an agent"
-   }
-  },
-  {
-   "text": "*Step 8 (conclusion).* By steps 5, 6 and 7 both sides of $(\\star)$ equal $i_{Y'}^{-1}\\pi^{-1}(\\varepsilon_{f,G})\\circ\\Lambda$, so $(\\star)$ holds, and by step 3 $\\Phi^q_{(f',f'_Z,i,i_{Y'}),\\pi^{-1}G}\\circ H^q(i^{-1}u)=H^q(\\kappa)\\circ\\pi_Z^*\\circ\\Phi^q_{(f,f_Z,i,i_Y),G}$ for every $q\\ge0$. No finiteness of $f$ or $\\pi$ was used, and $Z=X$, $i=\\mathrm{id}$ is covered.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZE (lemma-efface-cohomology-on-closed-by-finite-cover), proof, second paragraph: the compatibility is used there without being stated; the steps are written by an agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-inverse-image",
   "lem-weil-pbc-inverse-image-composition",
   "def-weil-pbc-cartesian-square",
-  "lem-weil-pbc-edge-map-base-change",
-  "def-weil-pbc-underived-exchange",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-cohomology-pullback-functorial",
   "lem-weil-pbc-adjunct-counit-identity",
-  "lem-weil-pbc-derived-inverse-image-composition"
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-square-iso-pasting",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-cohomology-pullback-functorial"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 09ZE, proof, second paragraph (the compatibility is used there without statement); written by the agent from the adjunction identities (Categories 0037), the unit equation characterizing c (lem-weil-pbc-inverse-image-composition (2), after Sites 03CB / Categories 0B65), its associativity (lem-weil-pbc-derived-inverse-image-composition (1)) and clauses 3, 4 of lem-weil-pbc-cohomology-pullback-functorial"
+  "place": "Lemma 09ZE, proof, second paragraph; M2 stage 3 realizes the original adjunct calculation using the proved source counit comparison and vertical square-isomorphism pasting, then cohomology naturality/composition."
  },
  "mathlib_searches": [
   {
@@ -256,5 +196,15 @@
   "group": "P1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T044748-L-2037144",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
