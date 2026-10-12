@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.GRing
 public import Mathlib.FieldTheory.IntermediateField.Basic
 import Sheaf.FieldTheory.FinitePurelyInseparableScalarDescent
+import Sheaf.FieldTheory.FinitePresentationSubfieldModel
 
 /-!
 # Geometric regularity over a directed union of subfields
@@ -53,4 +54,28 @@ theorem geometricallyRegular_of_directed_subfields
     (hA : IsNoetherianRing A)
     (hgeom : ∀ i : I, Algebra.IsGeometricallyRegular (K i) A) :
     Algebra.IsGeometricallyRegular k A := by
-  sorry
+  classical
+  refine ⟨hA, ?_⟩
+  intro E _ _ _ _
+  have : Algebra.FinitePresentation k E :=
+    Algebra.FinitePresentation.of_finiteType.mp inferInstance
+  obtain ⟨i, B, hB, aB, ⟨e⟩⟩ := Algebra.exists_subfield_model k I K hdir hUnion E
+  let := hB
+  let := aB
+  have : Module.Finite k (TensorProduct (K i) k B) :=
+    Module.Finite.equiv e.symm.toLinearEquiv
+  have : IsPurelyInseparable k (TensorProduct (K i) k B) :=
+    e.symm.isPurelyInseparable
+  have ht : IsField (TensorProduct (K i) k B) := by
+    exact MulEquiv.isField (Field.toIsField E) e.toMulEquiv
+  obtain ⟨hf, hm, hp, _⟩ :=
+    Algebra.TensorProduct.finite_purelyInseparable_of_tensorProduct (K i) k B ht
+  let : Field B := hf.toField
+  have := hm
+  have := hp
+  have : IsRegularRing (TensorProduct (K i) B A) := (hgeom i).2 B
+  let t := (Algebra.TensorProduct.comm (K i) B A).toRingEquiv.trans
+    ((Algebra.TensorProduct.cancelBaseChange (K i) k k A B).toRingEquiv.symm.trans
+      ((Algebra.TensorProduct.congr (AlgEquiv.refl : A ≃ₐ[k] A) e).toRingEquiv.trans
+        (Algebra.TensorProduct.comm k A E).toRingEquiv))
+  exact IsRegularRing.of_ringEquiv t
