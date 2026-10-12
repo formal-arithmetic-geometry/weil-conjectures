@@ -121,8 +121,8 @@ lemma powersAwayEvalRingHom_mk' (n : ℕ) (F : (span k (Set.range a)).powersAlge
     (hF : F ∈ (span k (Set.range a)).powersGrading (n • 1)) :
     IsLocalization.Away.lift (powersLinearForm k a i₀)
       (isUnit_powersEvalOne_powersLinearForm k h)
-      (Localization.mk (M := Submonoid.powers (powersLinearForm k a i₀)) F
-        ⟨powersLinearForm k a i₀ ^ n, by use n⟩) = (F : K[X]).coeff n := by
+      (Localization.mk F ⟨powersLinearForm k a i₀ ^ n, n, rfl⟩ :
+        Localization.Away (powersLinearForm k a i₀)) = (F : K[X]).coeff n := by
   rw [Localization.mk_eq_mk', IsLocalization.Away.lift, IsLocalization.lift_mk'_spec]
   simp only [map_pow]
   rw [powersEvalOne_of_mem (powersLinearForm_mem k a i₀),

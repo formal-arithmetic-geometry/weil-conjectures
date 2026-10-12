@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechResolution
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import WeilConjectures.AlgebraicGeometry.Modules.StalkExact
 public import WeilConjectures.AlgebraicGeometry.Modules.StalkPullback
 
 /-!
