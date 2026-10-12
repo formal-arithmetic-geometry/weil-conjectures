@@ -13,27 +13,27 @@
  ],
  "proof": [
   {
-   "text": "Extend r to the fraction field polynomial ring. Since that ring is a PID, choose an irreducible generator and clear denominators to obtain f in r whose localization generates the extended prime.",
+   "text": "Take K to be the residue field of the zero ideal of A, which Mathlib proves is a fraction field. Use Ideal.exists_mem_span_singleton_map_residueField_eq to choose f in r generating rK[X]. The hypothesis on contraction makes r disjoint from the nonzero constants, so localization preserves primality; injectivity preserves nonzeroness. Ideal.span_singleton_prime then shows the mapped f is irreducible. This is the fully proved private helper exists_irreducible_fibre_generator.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Localizing the quotient A[X]/r at the nonzero constants identifies the fibre with the quotient of the explicit localization R by the image of f.",
+   "text": "Construct the ring equivalence rather than choosing it from an unproved existence theorem. Evaluate K[X] in the explicit quotient Q=R/(image f), using the localization lift for coefficients. The generator identity kills r. Since K[X]/rK[X] is a field and localization contracts the extended prime back to r, every polynomial outside r maps to a unit of Q. Lift to the residue field and then to r.Fiber S by the tensor product universal property. In the other direction, nonzero base constants are units in r.Fiber S and f vanishes there, so localization followed by quotient gives a map Q to r.Fiber S. Tensor-product and residue-field extensionality prove one inverse law; quotient and localization extensionality prove the other. This is the fully proved private helper fibre_equiv_of_fraction_generator, which uses no characteristic-zero hypothesis.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "In characteristic zero the irreducible generator is separable, so f and f' are coprime. A Bezout identity makes the image of f' invertible modulo f.",
+   "text": "Injectivity of A into K transfers characteristic zero. Irreducible.separable supplies the Bezout identity for the mapped f and its derivative. Evaluate that identity in Q, commute coefficient mapping with derivative, and use the vanishing of f to conclude that its derivative image is a unit. This is the fully proved private helper isUnit_derivative_of_separable_fraction. Combine the generator, equivalence and unit proofs to obtain the unchanged statement.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Proof of Proposition 07PV, paragraph 4",
-  "note": "Agent adaptation of the quotient presentation in 07PU from a linear equation to an irreducible equation over a characteristic-zero fraction field. Mathlib Ideal.exists_mem_span_singleton_map_residueField_eq supplies the denominator-cleared generator; Irreducible.separable supplies coprimality. The source does not state this general packaging verbatim."
+  "place": "Proof of Lemma 07PU, second paragraph; characteristic-zero case of Proposition 07PV",
+  "note": "R3, 2026-10-13: full Lean proof of the existing agent adaptation, using only proved Mathlib lemmas. All three private helpers compile without sorry. The explicit equivalence is built from localization, residue-field, tensor-product and quotient universal properties. No additional project nodes or proof dependencies are needed."
  },
  "mathlib_searches": [
   {
@@ -108,10 +108,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T153013-L-2351563",
-  "kind": "interface",
+  "landing": "20261012T184340-L-4018961",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
