@@ -16,37 +16,44 @@
  ],
  "proof": [
   {
-   "text": "Over X×_S X the two sides of the required compatibility are morphisms between the corresponding pullbacks. After refinement to X′×_S X′, base-change and reconstruction identify their pullbacks with β’s compatibility equation.",
+   "text": "For a test scheme T with f0,f1:T→X, form P=T×_{X,f0}X′ and Q=P×_{X,p≫f1}X′. Write g:Q→T for the composite projections, and x0,x1:Q→X′ for the two lifts. The pullback equations give g≫fi=xi≫r. Use the cartesian square for A to lift g≫z.left to v:Q→F(A).V.left over x0. This is a genuine pullback lift, with v≫q_A=g≫z.left.",
    "uses": [
-    "lem-galois-fpqc-morphisms-descend",
     "lem-galois-fpqc-covering-base-change",
-    "def-pd-descent-datum",
     "def-pc-fibre-product"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Factor this refinement into two base changes of r. Both are fpqc. Apply the injectivity of morphism descent first to one cover and then to the other to reflect equality. Evaluation at points yields transport compatibility.",
+   "text": "Apply the base-change transport equations for A to v and for B to v≫β.hom.left. Reconstruction hα identifies their images with g≫z.left and g≫z.left≫α.left. Compose β.commutes with q_B; associativity and hα identify its right side with the A transport followed by α. Naturality of both descent data along g converts this into equality of the two required morphisms after precomposition by g. Equal test points and their Over morphisms are identified by substitution and Over morphism extensionality.",
    "uses": [
-    "lem-galois-fpqc-morphisms-descend",
-    "lem-galois-fpqc-covering-base-change",
     "def-pd-descent-datum",
-    "def-pc-fibre-product"
+    "def-galois-scheme-descent-data-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Both projections Q→P and P→T are singleton fpqc covers by Mathlib Precoverage.mem_coverings_of_isPullback. For any singleton fpqc cover f, fpqcTopology.Subcanonical gives isSheafFor for every representable on the generated covering sieve. Presieve.EffectiveEpimorphic.iff_forall_isSheafFor_yoneda and Sieve.effectiveEpimorphic_singleton therefore give EffectiveEpi f and hence Epi f. Cancel the two projections successively using cancel_epi, then use Over morphism extensionality. This uses only injectivity of representable descent, not existence of a descended morphism.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-scheme"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-galois-fpqc-morphisms-descend",
   "lem-galois-fpqc-covering-base-change",
+  "def-pc-fibre-product",
   "def-pd-descent-datum",
-  "def-pc-fibre-product"
+  "def-galois-scheme-descent-data-category",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-scheme"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/descent.tex",
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0241",
   "place": "0241, final verification of the descent-data compatibility",
-  "note": "Transport-form details supplied from the cited argument."
+  "note": "C1: complete Lean proof by explicit double test-point refinement, pullback lift, transport naturality and cancellation. Mathlib fpqc subcanonicity supplies the injectivity directly; no import of the full morphism descent theorem is needed."
  },
  "mathlib_searches": [
   {
@@ -192,11 +199,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-e2404",
-  "group": "T2",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T070553-L-3478150",
-  "kind": "interface",
-  "note": "independent Codex review: Delivery packet, node records, report, and compiled Lean files match the stage-3 review requirements; target statement is byte-for-byte unchanged."
+  "landing": "20261012T110255-L-612202",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
