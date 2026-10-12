@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-ring-m-pseudo-coherent-shift",
+ "kind": "statement",
+ "title": "Degree change of m-pseudo-coherence under shift by one",
+ "statement": "Let $R$ be a commutative ring, $m\\in\\mathbf Z$, and $C\\in D(R)$ [def-weil-abstract-derived-category]. Then $C[1]$ is $m$-pseudo-coherent [def-pc-ring-m-pseudo-coherent] if and only if $C$ is $(m+1)$-pseudo-coherent.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064R, proof of lemma-cone-pseudo-coherent, assertions (2) and (3), using shifts"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-m-pseudo-coherent"
+ ],
+ "proof": [
+  {
+   "text": "An isomorphism C -> D transports any witness by composition: functors preserve the isomorphism, so all homology isomorphisms and the boundary epimorphism are preserved.",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any integer shift n, shift a witness E -> C through degree m to E[n] -> C[n], using Q.commShiftIso. The bounds become a-n,b-n by CochainComplex.isStrictlyGE_shift and isStrictlyLE_shift. Each shifted term is isomorphic to E^{i+n}; transfer freeness with Module.Free.of_equiv and finiteness with Module.Finite.equiv. The homology shift isomorphisms Functor.shiftIso identify the shifted map in degree i with the original map in degree i+n. Naturality conjugates the maps by isomorphisms, preserving IsIso and Epi. Thus the new approximation degree is m-n.",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Shift a witness for C[1] by -1 and compose with shiftFunctorCompIsoId to get a witness for C at m+1. Conversely shift a witness for C at m+1 by 1 to get a witness for C[1] at m. The integer index equalities are immediate.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-m-pseudo-coherent",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064R, proof of lemma-cone-pseudo-coherent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "shift of m pseudo coherent derived category object has approximation degree m minus shift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pseudo coherence of shifted derived category objects and distinguished triangles",
+   "results": "8 hits: DerivedCategory.instCommShiftCochainComplexIntQ, DerivedCategory.instHasShiftInt, DerivedCategory.instIsTriangulated, DerivedCategory.instPretriangulated, DerivedCategory.TStructure.t, CategoryTheory.Functor.mem_homologicalKernel_W_iff, DerivedCategory.instCommShiftHomotopyCategoryIntUpQh, CategoryTheory.Functor.mem_homologicalKernel_trW_iff; no theorem on finite-free pseudo-coherent approximations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.shiftIso",
+   "results": "12 hits: CategoryTheory.Functor.shiftIso, CategoryTheory.Functor.shiftIso_zero, CategoryTheory.Functor.shiftIso_zero_hom_app, CategoryTheory.Functor.shiftIso_zero_inv_app, CategoryTheory.Functor.shiftIso_hom_naturality, CategoryTheory.Functor.shiftIso_inv_naturality, CategoryTheory.Functor.shiftIso_add', CategoryTheory.Functor.shiftIso_hom_naturality_assoc; no theorem on finite-free pseudo-coherent approximations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMPseudoCoherent|MPseudoCoherent|pseudo.?coherent",
+   "results": "0 hits: ; no theorem on finite-free pseudo-coherent approximations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free module complex approximation degree under translation suspension",
+   "results": "LeanFinder returned generic DerivedCategory support and single-complex results, including isGE_Q_obj_iff and left_fac_of_isStrictlyGE; none states the finite-free approximation shift equivalence.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.free.*triangle|approximation.*triangle|shift.*pseudo|pseudo.*shift",
+   "results": "msearch Mathlib grep: zero hits. rg on lean/Sheaf and lean/WeilConjectures: the cone wrapper imports the item (cycle); no independent shift equivalence or compatible finite-free approximation triangle. StupidTrunc.lean still lists its inclusion as TODO.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: closure of pseudo-coherence under distinguished triangles in the affine ring reduction; shift compatibility in the rotation argument",
+   "via": [
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+    "lem-pc-ring-pseudo-coherent-summand"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.MPseudoCoherentShift",
+  "file": "lean/Sheaf/RingTheory/MPseudoCoherentShift.lean",
+  "declaration": "DerivedCategory.isMPseudoCoherent_shift_one_iff",
+  "statement": "theorem isMPseudoCoherent_shift_one_iff\n    (R : Type u) [CommRing R]\n    [HasDerivedCategory.{w} (ModuleCat.{v} R)]\n    (m : ℤ) (C : DerivedCategory (ModuleCat.{v} R)) :\n    IsMPseudoCoherent m (C⟦(1 : ℤ)⟧) ↔ IsMPseudoCoherent (m + 1) C",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T214706-L-1269816",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T214706-L-1269816",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

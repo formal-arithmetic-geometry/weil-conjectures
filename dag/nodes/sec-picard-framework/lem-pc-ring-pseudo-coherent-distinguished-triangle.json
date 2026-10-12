@@ -24,47 +24,46 @@
  ],
  "proof": [
   {
-   "text": "For the first clause, choose a bounded finite-free witness $P^\\bullet\\to A$ which is an isomorphism on $H^i$ for $i>m+1$ and surjective on $H^{m+1}$, and a bounded finite-free witness $\\beta:E^\\bullet\\to B$ which is an isomorphism on $H^i$ for $i>m$ and surjective on $H^m$. Replace $P^\\bullet$ by its brutal truncation $\\sigma_{\\ge m+1}P^\\bullet$ (terms of degree $\\ge m+1$): its $H^i$ agrees with that of $P^\\bullet$ for $i>m+1$ and $H^{m+1}(\\sigma_{\\ge m+1}P^\\bullet)=\\ker d^{m+1}\\to H^{m+1}(P^\\bullet)$ is surjective, so the witness conditions are unchanged and now $P^i=0$ for $i<m+1$, in particular for $i<m$. Apply [lem-pc-ring-derived-map-lift] with $n=m$, $\\alpha=\\beta:E^\\bullet\\to B$ and the composite $P^\\bullet\\to A\\to B$: it gives a chain map $\\gamma:P^\\bullet\\to E^\\bullet$ with $\\beta\\circ Q(\\gamma)$ equal to $P^\\bullet\\to A\\to B$ in $D(R)$. The cone construction in [def-weil-abstract-derived-category] gives a bounded finite-free complex $Q^\\bullet=C(\\gamma)^\\bullet$ and a distinguished triangle $P^\\bullet\\to E^\\bullet\\to Q^\\bullet\\to P^\\bullet[1]$; by (TR3) of [def-weil-triangulated-category] the commutative square extends to a morphism of distinguished triangles to $A\\to B\\to C\\to A[1]$. Take the long exact cohomology sequences of both triangles [lem-sf-derived-homology-long-exact]; the morphism of triangles gives a commutative ladder between them [lem-weil-pbc-derived-cohomology-ladder]. For every $i>m$, consider the five terms $H^i(P)\\to H^i(E)\\to H^i(Q)\\to H^{i+1}(P)\\to H^{i+1}(E)$ over the corresponding terms for $A,B,C$: the first vertical map is surjective ($i\\ge m+1$), the second, fourth and fifth are isomorphisms ($i>m$, $i+1>m+1$), so the five-lemma [lem-weil-pbc-five-lemma] gives $H^i(Q)\\cong H^i(C)$. At $i=m$, consider the four terms $H^m(E)\\to H^m(Q)\\to H^{m+1}(P)\\to H^{m+1}(E)$: the vertical maps on $H^m(E)$ and $H^{m+1}(P)$ are surjective and the one on $H^{m+1}(E)$ is an isomorphism, hence a monomorphism, so the four lemma [lem-pc-four-lemma-epi] gives surjectivity $H^m(Q)\\twoheadrightarrow H^m(C)$. Thus $Q^\\bullet\\to C$ is the required $m$-pseudo-coherent witness for $C$.",
+   "text": "Apply the compatible finite-free approximation triangle theorem to hA,hB. It gives a distinguished source triangle S with finite-free third vertex Q(E), and phi:S -> T whose first two components have the witness homology conditions.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
-    "lem-pc-ring-derived-map-lift",
+    "lem-pc-ring-pseudo-coherent-approximation-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build the five-term homology ladder in degree i from phi.comm1, phi.comm2 and naturality of the connecting map. Mathlib homologySequenceComposableArrows5_exact gives exactness of both rows. For i>m, the first component is epi (i=m+1 uses the boundary epi; larger i uses an iso), the second and fourth are iso, and the fifth is mono. Apply the five lemma to get an iso on the third component. At i=m, delete the first vertex of the five-term ladder and apply the four lemma with epi on H^m(phi2), epi on H^{m+1}(phi1), and mono on H^{m+1}(phi2). This gives epi on H^m(phi3). Transport along S.obj3=Q(E); E and phi3 form the required witness.",
+   "uses": [
     "lem-sf-derived-homology-long-exact",
     "lem-weil-pbc-derived-cohomology-ladder",
     "lem-weil-pbc-five-lemma",
-    "lem-pc-four-lemma-epi"
+    "lem-pc-four-lemma-epi",
+    "def-pc-ring-m-pseudo-coherent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064R, proof of lemma-cone-pseudo-coherent, part (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "For the second clause, rotate twice to the distinguished triangle $C\\to A[1]\\to B[1]\\to C[1]$. From $A$ being $m$-pseudo-coherent, the identity $H^i(A[1])=H^{i+1}(A)$ gives that $A[1]$ is $(m-1)$-pseudo-coherent; $C$ is $(m-1+1)$-pseudo-coherent because it is $m$-pseudo-coherent. Applying the first clause with index $m-1$ gives that $B[1]$ is $(m-1)$-pseudo-coherent, and shifting back gives that $B$ is $m$-pseudo-coherent. For the third clause, rotate to $B\\to C\\to A[1]\\to B[1]$, apply the first clause with index $m$ to obtain that $A[1]$ is $m$-pseudo-coherent, and use $H^i(A[1])=H^{i+1}(A)$ to conclude that $A$ is $(m+1)$-pseudo-coherent. Rotation preserves distinguished triangles by the triangulated structure in [def-weil-abstract-derived-category].",
+   "text": "For clause (2), rotate twice to C -> A[1] -> B[1]. Shift compatibility changes m-pseudo-coherence of A to (m-1)-pseudo-coherence of A[1], and m=(m-1)+1 for C. Apply clause (1) at m-1 and shift back. For clause (3), rotate once to B -> C -> A[1], apply clause (1) at m, and shift back. Mathlib rot_of_distTriang supplies distinguishedness of both rotations.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "lem-pc-ring-m-pseudo-coherent-shift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064R, proof of lemma-cone-pseudo-coherent, assertions (2) and (3)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category",
-  "lem-pc-ring-derived-map-lift",
+  "lem-pc-ring-pseudo-coherent-approximation-triangle",
   "lem-sf-derived-homology-long-exact",
   "lem-weil-pbc-derived-cohomology-ladder",
   "lem-weil-pbc-five-lemma",
-  "lem-pc-four-lemma-epi"
+  "lem-pc-four-lemma-epi",
+  "def-pc-ring-m-pseudo-coherent",
+  "def-weil-abstract-derived-category",
+  "lem-pc-ring-m-pseudo-coherent-shift"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 064R, lemma-cone-pseudo-coherent"
+  "place": "Tag 064R, lemma-cone-pseudo-coherent; E3 formalized the homology ladder, diagram lemmas and rotations, isolating only the finite-free triangle construction"
  },
  "mathlib_searches": [
   {
@@ -156,5 +155,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T214706-L-1269816",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

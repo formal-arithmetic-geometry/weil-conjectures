@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-ring-pseudo-coherent-approximation-triangle",
+ "kind": "statement",
+ "title": "Compatible finite-free approximation triangle before cohomology comparison",
+ "statement": "Let $R$ be a commutative ring, $m\\in\\mathbf Z$, and $T=(A\\to B\\to C\\to A[1])$ a distinguished triangle in $D(R)$ [def-weil-abstract-derived-category]. Suppose $A$ is $(m+1)$-pseudo-coherent and $B$ is $m$-pseudo-coherent [def-pc-ring-m-pseudo-coherent]. There exist a bounded complex $E^\\bullet$ of finite free $R$-modules, a distinguished triangle $S$, and a morphism of triangles $\\varphi:S\\to T$, with $S_3=Q(E^\\bullet)$, such that $H^i(\\varphi_1)$ is an isomorphism for $i>m+1$ and an epimorphism for $i=m+1$, and $H^i(\\varphi_2)$ is an isomorphism for $i>m$ and an epimorphism for $i=m$. No assertion about $H^i(\\varphi_3)$ is made.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064R, proof of lemma-cone-pseudo-coherent, assertion (1), through the construction of the morphism of distinguished triangles"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-m-pseudo-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the finite-free witnesses P -> A and F -> B. Replace P by its brutal truncation in degrees >= m+1. This keeps finite-free terms and boundedness. Above m+1 the cohomology is unchanged; at m+1 its cycles surject onto the original cohomology, so the composite to A remains epi there. The truncated P vanishes below m.",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent B by a complex L using essential surjectivity of Q, transporting F -> B and P -> A -> B through the chosen isomorphism. The finite-free terms of P are projective. Apply the derived map lift at n=m to obtain a chain map gamma:P -> F whose image in D(R) composes to P -> A -> B.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-ring-derived-map-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the mapping cone E of gamma. Its terms are F^i direct sum P^{i+1}, so they are finite free and vanish outside a bounded interval. The cone triangle S is distinguished. TR3 extends the commuting square to phi:S -> T. Its first two maps are the chosen approximations and hence have the claimed homology conditions. The third map has not yet been analyzed.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-m-pseudo-coherent",
+  "def-weil-abstract-derived-category",
+  "lem-pc-ring-derived-map-lift",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064R, proof of lemma-cone-pseudo-coherent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free approximation triangle compatible morphism distinguished triangle pseudo coherent",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free approximation triangle compatible morphism distinguished triangle pseudo coherent",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.triangle_map_exists, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₃, CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂, DerivedCategory.mem_distTriang_iff, CategoryTheory.Pretriangulated.Triangle.yoneda_exact₃, CategoryTheory.Triangulated.TStructure.exists_triangle, HomotopyCategory.Pretriangulated.complete_distinguished_triangle_morphism; no theorem on finite-free pseudo-coherent approximations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.shiftIso",
+   "results": "12 hits: CategoryTheory.Functor.shiftIso, CategoryTheory.Functor.shiftIso_zero, CategoryTheory.Functor.shiftIso_zero_hom_app, CategoryTheory.Functor.shiftIso_zero_inv_app, CategoryTheory.Functor.shiftIso_hom_naturality, CategoryTheory.Functor.shiftIso_inv_naturality, CategoryTheory.Functor.shiftIso_add', CategoryTheory.Functor.shiftIso_hom_naturality_assoc; no theorem on finite-free pseudo-coherent approximations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMPseudoCoherent|MPseudoCoherent|pseudo.?coherent",
+   "results": "0 hits: ; no theorem on finite-free pseudo-coherent approximations.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite free complexes mapping cone compatible approximation morphism triangles",
+   "results": "LeanFinder returned mappingCone.triangle, triangleh, triangleMap, and generic distinguishedness results; none supplies the finite-free approximations or truncation/lifting construction. Loogle complete_distinguished_triangle_morphism supplies only TR3.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.free.*triangle|approximation.*triangle|shift.*pseudo|pseudo.*shift",
+   "results": "msearch Mathlib grep: zero hits. rg on lean/Sheaf and lean/WeilConjectures: the cone wrapper imports the item (cycle); no independent shift equivalence or compatible finite-free approximation triangle. StupidTrunc.lean still lists its inclusion as TODO.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: closure of pseudo-coherence under distinguished triangles in the affine ring reduction; finite-free cone and compatible triangle before the cohomology comparison",
+   "via": [
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+    "lem-pc-ring-pseudo-coherent-summand"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PseudoCoherentApproximationTriangle",
+  "file": "lean/Sheaf/RingTheory/PseudoCoherentApproximationTriangle.lean",
+  "declaration": "DerivedCategory.exists_pseudoCoherent_approximation_triangle",
+  "statement": "theorem exists_pseudoCoherent_approximation_triangle\n    (R : Type u) [CommRing R]\n    [HasDerivedCategory.{w} (ModuleCat.{v} R)]\n    (m : ℤ) (T : Triangle (DerivedCategory (ModuleCat.{v} R)))\n    (hT : T ∈ distTriang (DerivedCategory (ModuleCat.{v} R)))\n    (hA : IsMPseudoCoherent (m + 1) T.obj₁)\n    (hB : IsMPseudoCoherent m T.obj₂) :\n    ∃ (E : CochainComplex (ModuleCat.{v} R) ℤ) (a b : ℤ),\n      E.IsStrictlyGE a ∧ E.IsStrictlyLE b ∧\n      (∀ i : ℤ, Module.Free R (E.X i) ∧ Module.Finite R (E.X i)) ∧\n      ∃ (S : Triangle (DerivedCategory (ModuleCat.{v} R))) (φ : S ⟶ T),\n        S ∈ distTriang (DerivedCategory (ModuleCat.{v} R)) ∧ S.obj₃ = Q.obj E ∧\n        (∀ i : ℤ, m + 1 < i →\n          IsIso ((homologyFunctor (ModuleCat.{v} R) i).map φ.hom₁)) ∧\n        Epi ((homologyFunctor (ModuleCat.{v} R) (m + 1)).map φ.hom₁) ∧\n        (∀ i : ℤ, m < i →\n          IsIso ((homologyFunctor (ModuleCat.{v} R) i).map φ.hom₂)) ∧\n        Epi ((homologyFunctor (ModuleCat.{v} R) m).map φ.hom₂)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T214706-L-1269816",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T214706-L-1269816",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
