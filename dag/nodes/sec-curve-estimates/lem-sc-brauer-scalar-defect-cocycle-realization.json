@@ -13,12 +13,26 @@
  ],
  "proof": [
   {
-   "text": "set f(g₀,g₁,g₂) = g₀(c(g₀⁻¹g₁,g₁⁻¹g₂)) and write its values\nadditively using Additive.ofMul. The action on each fixed unit is locally\nconstant, since the unit is algebraic and its stabilizer is Krull-open.\nTogether with joint local constancy of c and continuous group operations,\nthis makes f jointly continuous into the discrete coefficient module.\nThe absolute Galois group is compact Hausdorff, so the compact-open exponential\nlaw curries f into the iterated continuous-map object in degree two.\nLeft translation of all three coordinates applies that same translation to\nf, placing it in the invariant homogeneous cochains. At four coordinates,\nput g = g₀⁻¹g₁, h = g₁⁻¹g₂ and k = g₂⁻¹g₃. The given identity, acted on\nby g₀, is exactly the vanishing alternating homogeneous differential.\nLift this closed cochain along the kernel inclusion to obtain z. Evaluation\nat (1,g,gh) is c(g,h), proving the requested equality. Normalization is unused.",
+   "text": "Give the coefficient group its defining discrete topology. Joint continuity of the Galois action follows from continuous_prod_of_discrete_right and stabilizer_isOpen_of_isIntegral. Convert the scalar cocycle to an additive continuous cochain; use Units.ext on the field-valued identity and additive cancellation to obtain the additive differential equation.",
+   "uses": [
+    "def-sc-galois-units-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an abstract locally compact topological group and a topological representation with jointly continuous action, construct F(a,b,d) = rho(a)(ca(a^-1*b,b^-1*d)). Curry twice, and verify invariance using the representation multiplication law. Expand homogeneousCochains.d_apply in degree two; apply rho(a) to the inhomogeneous cocycle equation to prove the differential is zero. All constructions and verifications are local in the proof, with no new statements or holes.",
+   "uses": [
+    "def-sc-galois-units-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply KernelFork.mapIsoOfIsLimit to cyclesIsKernel and TopModuleCat.isLimitKer. The inverse carries the constructed closed cochain to a cycle; mapOfIsLimit_ι proves its inclusion is the constructed cochain. Evaluation at (1,g,g*h) cancels the group coordinates and yields the original scalar cocycle.",
    "uses": [
     "def-sc-brauer-scalar-defect",
     "def-sc-galois-units-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -137,10 +151,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T144102-L-2091747",
-  "kind": "interface",
+  "landing": "20261012T184321-L-4010740",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

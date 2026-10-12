@@ -9002,3 +9002,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/M3/Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian (stage 3; reviewer PASS; after a return; landing 20261012T184320-L-4010447 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/M3/Sheaf.AlgebraicGeometry.SupportedThickeningDictionary (stage 3; reviewer PASS; first push; landing 20261012T184320-L-4010544 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/M3/Sheaf.AlgebraicGeometry.ValuativeSquareOfMemClosureRange (stage 3; reviewer PASS; first push; landing 20261012T184320-L-4010643 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/M3/Sheaf.FieldTheory.BrauerScalarDefectCocycleRealization (stage 3; reviewer PASS; first push; landing 20261012T184321-L-4010740 (proof); batch 20261012T184234; modules 1; new nodes 0)
