@@ -25,38 +25,39 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "First prove part (9) of the source. Let $Q$ be any $R$-module with $Q=IQ$. By induction on $n\\geq 0$, $Q=I^nQ$: the case $n=0$ is immediate, and if $Q=I^nQ$, then $Q=IQ=I(I^nQ)=I^{n+1}Q$. Choose $k\\geq1$ with $I^k=0$. Then $Q=I^kQ=0$.",
+   "text": "Write L = range(u). By LinearMap.range_eq_top, Submodule.range_mapQ and Submodule.map_mkQ_eq_top, surjectivity of the induced quotient map gives IM + L = M.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00DV (label lemma-NAK), proof of part (9)"
+    "place": "Algebra, Lemma 00DV (label lemma-NAK), parts (9)-(11) and proof"
    }
   },
   {
-   "text": "Now let $L,L'\\subseteq M$ be submodules with $M=L+IL'$. In the quotient $Q=M/L$, every class is represented by an element $l+\\sum_j i_jx_j$ with $l\\in L$, $i_j\\in I$, and $x_j\\in L'$, hence lies in $IQ$; conversely $IQ\\subseteq Q$, so $Q=IQ$. Step 1 gives $Q=0$, and therefore $M=L$. This is part (10) of the source.",
+   "text": "Prove I^n M + L = M by induction on n. At n = 0, I^0 M = M. For the successor, use (I^n I)M = I^n(IM), distribution over submodule sums, and I^n L contained in L to obtain I^(n+1)M + L = I^n(IM + L) + L = I^n M + L = M. These are Submodule.mul_smul, Submodule.smul_sup, and Submodule.smul_le_right. This carries out the source nilpotent-power argument directly in submodules, without introducing the quotient M/L.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00DV (label lemma-NAK), part (10) and the proof's reference to the quotient argument used for part (3)"
+    "place": "Algebra, Lemma 00DV (label lemma-NAK), parts (9)-(11) and proof"
    }
   },
   {
-   "text": "Apply Step 2 with $L=u(N)$ and $L'=M$. Surjectivity of $N/IN\\to M/IM$ is equivalent to $M=u(N)+IM$, so Step 2 yields $M=u(N)$. Thus $u$ is surjective, proving part (11) and the stated result.",
+   "text": "Choose k with I^k = 0 from nilpotence. The induction yields 0M + L = M, hence L = M. LinearMap.range_eq_top converts this equality into surjectivity of u.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00DV (label lemma-NAK), part (11) and the proof's reference to the image-submodule argument used for part (5)"
+    "place": "Algebra, Lemma 00DV (label lemma-NAK), parts (9)-(11) and proof"
    }
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 00DV (label lemma-NAK), parts (9)-(11) and proof"
+  "place": "Algebra, Lemma 00DV (label lemma-NAK), parts (9)-(11) and proof",
+  "note": "P3 formalizes the source nilpotent-power argument directly as I^n M + range(u) = M, using Mathlib submodule identities."
  },
  "mathlib_searches": [
   {
@@ -162,5 +163,15 @@
   "group": "H1",
   "result": "fix",
   "note": "R CommRing; I : Ideal R with ∃ k>0, I^k=⊥ (node I^k=0, k≥1); N M arbitrary R-modules, no finiteness; u linear; hypothesis now surjectivity of the induced N/IN→M/IM as Submodule.mapQ with smul_top_le_comap_smul_top (STATE REDUCTION MOD IDEAL) instead of range u ⊔ I•⊤ = ⊤; conclusion Function.Surjective u; not Mathlib verbatim (Mathlib's Nakayama needs Module.Finite/jacobson)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T173851-L-3302476",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

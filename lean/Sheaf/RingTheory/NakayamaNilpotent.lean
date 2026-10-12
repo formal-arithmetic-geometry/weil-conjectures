@@ -48,6 +48,27 @@ theorem surjective_of_surjective_mod_nilpotent
     (h : Function.Surjective ((I • ⊤ : Submodule R N).mapQ (I • ⊤ : Submodule R M) u
       (Submodule.smul_top_le_comap_smul_top I u))) :
     Function.Surjective u := by
-  sorry
+  have hrange : (I • ⊤ : Submodule R M) ⊔ u.range = ⊤ := by
+    apply (Submodule.map_mkQ_eq_top _ _).mp
+    rw [← Submodule.range_mapQ (I • ⊤ : Submodule R N)
+      (I • ⊤ : Submodule R M) u (Submodule.smul_top_le_comap_smul_top I u)]
+    exact LinearMap.range_eq_top.mpr h
+  have hpow : ∀ n : ℕ, (I ^ n • ⊤ : Submodule R M) ⊔ u.range = ⊤ := by
+    intro n
+    induction n with
+    | zero => simp [Ideal.one_eq_top]
+    | succ n ih =>
+      calc
+        (I ^ (n + 1) • ⊤ : Submodule R M) ⊔ u.range =
+            I ^ n • (I • ⊤ : Submodule R M) ⊔ u.range := by
+          rw [pow_succ, Submodule.mul_smul]
+        _ = I ^ n • ((I • ⊤ : Submodule R M) ⊔ u.range) ⊔ u.range := by
+          rw [Submodule.smul_sup, sup_assoc,
+            sup_of_le_right (Submodule.smul_le_right (I := I ^ n) (N := u.range))]
+        _ = (I ^ n • ⊤ : Submodule R M) ⊔ u.range := by rw [hrange]
+        _ = ⊤ := ih
+  obtain ⟨k, _, hk⟩ := hI
+  apply LinearMap.range_eq_top.mp
+  simpa [hk] using hpow k
 
 end RingTheory
