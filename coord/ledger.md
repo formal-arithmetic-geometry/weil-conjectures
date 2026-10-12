@@ -6837,3 +6837,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/G1/Sheaf.AlgebraicGeometry.DerivedPullbackComposition (stage 3; reviewer PASS; first push; landing 20261012T085239-L-14766 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:52 L: merged deliver/G1/Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension (stage 3; reviewer PASS; first push; landing 20261012T085240-L-14884 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/G1/Sheaf.AlgebraicGeometry.GlueComponentLineBundles (stage 3; reviewer PASS; first push; landing 20261012T085240-L-15002 (interface); batch 20261012T085205; modules 3; new nodes 2)
+- 08:52 L: merged deliver/G1/Sheaf.AlgebraicGeometry.GrothendieckExistence (stage 3; reviewer PASS; first push; landing 20261012T085240-L-15135 (interface); batch 20261012T085205; modules 4; new nodes 3)

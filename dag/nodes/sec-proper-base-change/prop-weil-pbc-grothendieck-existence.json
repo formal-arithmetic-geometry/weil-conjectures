@@ -33,176 +33,52 @@
  ],
  "proof": [
   {
-   "text": "(Setting and translation.) $A$ is Noetherian and $X\\to S$ is of finite type, so $X$ is locally Noetherian [pqf-lem-locnoeth-lft] and quasi-compact ($S$ is affine), i.e. Noetherian; the same holds for every closed subscheme of $X$ and every scheme of finite type over $A$. Put $\\mathcal I=I\\mathcal O_X$. By [lem-weil-pbc-thickening-systems-dictionary] (2)-(4), the systems $(\\mathcal F_n,\\varphi_n)$ of (b) are the objects of $\\mathit{Coh}_{\\text{support proper over }S}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module], the families $(u_n)$ of (a) are the morphisms $\\mathcal G^\\wedge\\to\\mathcal F^\\wedge$ of $\\mathit{Coh}(X,\\mathcal I)$ with $(u|_{X_n})_n$ corresponding to $u^\\wedge$, and isomorphisms $\\psi_n$ as in (b) are an isomorphism $\\mathcal F^\\wedge\\cong(\\mathcal F_n)$. So the theorem is equivalent to: (a') for coherent $\\mathcal F,\\mathcal G$ with support proper over $S$, $u\\mapsto u^\\wedge$ is a bijection $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal G,\\mathcal F)\\to\\operatorname{Hom}_{\\mathit{Coh}(X,\\mathcal I)}(\\mathcal G^\\wedge,\\mathcal F^\\wedge)$; (b') every object of $\\mathit{Coh}_{\\text{support proper over }S}(X,\\mathcal I)$ is isomorphic to $\\mathcal F^\\wedge$ for a coherent $\\mathcal O_X$-module $\\mathcal F$ with support proper over $S$. This is Stacks' Theorem 088E for the functor 088D, unwound as in Remark 088F.",
+   "text": "Finite type over the Noetherian affine base supplies an IsNoetherian structure on $X$ [pqf-lem-locnoeth-lft]. Use [pqf-lem-coherent-ft-locnoeth] to equip each coherent module with quasi-coherent and finite-type instances. Apply [lem-weil-pbc-module-support-proper-over-base] to obtain proper closed subschemes $Z_F,Z_G$ whose ideals annihilate the two modules.",
    "uses": [
     "pqf-lem-locnoeth-lft",
-    "lem-weil-pbc-thickening-systems-dictionary",
-    "def-weil-pbc-coherent-formal-module"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-module-support-proper-over-base"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Remark 088F (remark-reformulate-existence-theorem) and Section 0CYW (section-existence-proper-support), first paragraph, equation 088D"
-   }
+   "elementary": false
   },
   {
-   "text": "(Proof of (a').) By [lem-weil-pbc-module-support-proper-over-base] (2) there are closed subschemes $Z_1,Z_2\\subseteq X$, proper over $S$, with $\\mathcal I_{Z_1}\\mathcal F=0$ and $\\mathcal I_{Z_2}\\mathcal G=0$. Let $Z\\subseteq X$ be the closed subscheme with ideal $\\mathcal I_{Z_1}\\cap\\mathcal I_{Z_2}$; its underlying set is $Z_1\\cup Z_2$ (as $\\mathcal I_{Z_1}\\mathcal I_{Z_2}\\subseteq\\mathcal I_{Z_1}\\cap\\mathcal I_{Z_2}$), which is proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-union-preimage] (1), so $Z\\to S$ is proper [lem-weil-pbc-closed-subset-proper-over-base-properties] (1); and $\\mathcal F,\\mathcal G$ are annihilated by $\\mathcal I_Z$. By [lem-weil-pbc-closed-immersion-coherent-equivalence] (1), $\\mathcal F=i_*\\mathcal F'$, $\\mathcal G=i_*\\mathcal G'$ for coherent $\\mathcal O_Z$-modules and $\\operatorname{Hom}_X(\\mathcal G,\\mathcal F)=\\operatorname{Hom}_Z(\\mathcal G',\\mathcal F')$; by its part (2), $\\mathcal F^\\wedge\\cong i_*(\\mathcal F'^\\wedge)$, $\\mathcal G^\\wedge\\cong i_*(\\mathcal G'^\\wedge)$ and $\\operatorname{Hom}_{\\mathit{Coh}(X,\\mathcal I)}(\\mathcal G^\\wedge,\\mathcal F^\\wedge)=\\operatorname{Hom}_{\\mathit{Coh}(Z,\\mathcal I\\mathcal O_Z)}(\\mathcal G'^\\wedge,\\mathcal F'^\\wedge)$, compatibly with $u\\mapsto u^\\wedge$. Since $Z\\to\\operatorname{Spec}A$ is proper, the latter map $u'\\mapsto u'^\\wedge$ is bijective by [lem-weil-pbc-formal-completion-fully-faithful-proper]. Hence (a').",
+   "text": "Construct $K=\\mathcal I_{Z_F}\\mathcal I_{Z_G}$ and its canonical closed subscheme. Mathlib IdealSheafData.support_mul identifies its support with the union of the two kernel supports; Hom.support_ker and closedness identify these with the ranges. [lem-weil-pbc-closed-subset-proper-over-base-union-preimage] makes this union proper; [lem-weil-pbc-closed-subset-proper-over-base-properties] transfers properness to the constructed subscheme. The product ideal is contained in both ideals. Use the existing upstream Scheme.IdealSheafData.idealOfOpens_mono from Curve.DivisorIdealSheaf for monotonicity on arbitrary-open sections. Hence K kills both modules.",
    "uses": [
-    "lem-weil-pbc-module-support-proper-over-base",
     "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-weil-pbc-formal-completion-fully-faithful-proper",
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, first paragraph ('it suffices to show that every object ... is supported on a closed subscheme Z proper over A'; for objects of Coh_{support proper over A}(O_X) 'by definition'), with Lemmas 0CYS, 0CYR, 0CYL, 087T and 0883 (lemma-fully-faithful)"
-   }
-  },
-  {
-   "text": "(Reduction of (b') to a support claim.) Claim $(*)$: every object $(\\mathcal F_n)$ of $\\mathit{Coh}_{\\text{support proper over }S}(X,\\mathcal I)$ is supported on a closed subscheme $Z\\subseteq X$ with $Z\\to S$ proper [def-weil-pbc-coherent-formal-module] (3). Given $(*)$ for $(\\mathcal F_n)$: by [lem-weil-pbc-closed-immersion-coherent-equivalence] (2), $(\\mathcal F_n)\\cong(i_*\\mathcal F'_n)$ for an object $(\\mathcal F'_n)$ of $\\mathit{Coh}(Z,\\mathcal I\\mathcal O_Z)$; as $Z\\to\\operatorname{Spec}A$ is proper, [prop-weil-pbc-grothendieck-existence-proper] gives a coherent $\\mathcal O_Z$-module $\\mathcal F'$ with $\\mathcal F'^\\wedge\\cong(\\mathcal F'_n)$; then $\\mathcal F=i_*\\mathcal F'$ is coherent with $\\mathcal F^\\wedge\\cong i_*(\\mathcal F'^\\wedge)\\cong(\\mathcal F_n)$, and $\\operatorname{Supp}\\mathcal F=i(\\operatorname{Supp}\\mathcal F')$ is closed [lem-weil-pbc-module-support-proper-over-base] (1) and contained in $Z$, hence proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-properties] (1),(2). So $(*)$ implies (b'); it remains to prove $(*)$.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "prop-weil-pbc-grothendieck-existence-proper",
-    "lem-weil-pbc-module-support-proper-over-base",
     "lem-weil-pbc-closed-subset-proper-over-base-properties"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, first paragraph (use of Proposition 088C, proposition-existence-proper, on closed subschemes Z proper over A, and of Lemma 087T)"
-   }
+   "elementary": false
   },
   {
-   "text": "(Noetherian induction.) Let $\\Xi$ be the set of quasi-coherent ideals $\\mathcal K\\subseteq\\mathcal O_X$ such that $(*)$ holds for every object of $\\mathit{Coh}_{\\text{support proper over }S}(X,\\mathcal I)$ annihilated by $\\mathcal K$ ($\\mathcal O_X\\in\\Xi$: such objects are $0$). We show $(0)\\in\\Xi$, which is $(*)$. If not, by [lem-weil-pbc-noetherian-acc-quasi-coherent] there is a quasi-coherent ideal $\\mathcal K$ maximal among those not in $\\Xi$. Let $X'=V(\\mathcal K)$ be the closed subscheme it defines; $X'$ is separated and of finite type over $A$. By [lem-weil-pbc-closed-immersion-coherent-equivalence] (2), the objects of $\\mathit{Coh}(X,\\mathcal I)$ annihilated by $\\mathcal K$ are the $i_*$ of the objects of $\\mathit{Coh}(X',\\mathcal I\\mathcal O_{X'})$, with the same supports, and an object annihilated by an ideal $\\mathcal K'\\supseteq\\mathcal K$ corresponds to one annihilated by $\\mathcal K'/\\mathcal K\\subseteq\\mathcal O_{X'}$; a closed subset of $X'$ is proper over $S$ as a subset of $X'$ iff it is as a subset of $X$ (same reduced induced subscheme, [lem-weil-pbc-closed-subset-proper-over-base-properties] (1)), and closed subschemes of $X'$ are closed subschemes of $X$. Every quasi-coherent ideal of $\\mathcal O_X$ strictly containing $\\mathcal K$ lies in $\\Xi$. So, renaming $X'$ as $X$, it suffices to prove $(*)$ for $X$ under the hypothesis (H): every nonzero quasi-coherent ideal of $\\mathcal O_X$ lies in $\\Xi$; this then shows $\\mathcal K\\in\\Xi$, a contradiction. We may assume $X\\ne\\emptyset$. Fix an object $(\\mathcal F_n)$ of $\\mathit{Coh}_{\\text{support proper over }S}(X,\\mathcal I)$.",
+   "text": "Use [lem-weil-pbc-grothendieck-existence-supported-hom] on this common proper closed subscheme. Surjectivity gives a morphism lifting the given compatible family. Evaluate its subtype equality at each index to prove the desired restriction equations. Injectivity, subtype extensionality and function extensionality show that any other such lift equals it.",
    "uses": [
-    "lem-weil-pbc-noetherian-acc-quasi-coherent",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
-    "def-weil-pbc-coherent-formal-module"
+    "lem-weil-pbc-grothendieck-existence-supported-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, second paragraph (the collection Xi, Lemma 01Y8 lemma-acc-coherent, replacing X by the closed subscheme of K), as in the proof of Proposition 088C"
-   }
+   "elementary": false
   },
   {
-   "text": "(Chow's lemma and a projective compactification.) By [lem-weil-pbc-chow-noetherian] applied to $X\\to S$ there are a proper surjective $f:Y\\to X$, a dense open $U\\subseteq X$ with $f^{-1}(U)\\to U$ an isomorphism, and an immersion $Y\\to\\mathbf P^n_A$ over $A$. $Y$ is of finite type over $A$, hence Noetherian, in particular quasi-compact. By [lem-chow-closed-model] (with the affine base $\\operatorname{Spec}A$) the scheme-theoretic closure $Y'\\subseteq\\mathbf P^n_A$ of $Y$ is a closed subscheme of $\\mathbf P^n_A$, $Y\\to Y'$ is an open immersion $j$, and $p':Y'\\to\\operatorname{Spec}A$ is proper. (Stacks phrases this as: $Y$ is H-quasi-projective over $A$ and $j:Y\\to Y'$ is an open immersion into an H-projective $Y'$, Morphisms Lemma 01WA.)",
+   "text": "For a coherent system with proper first support, [lem-weil-pbc-grothendieck-existence-system-support] gives a proper closed subscheme annihilating all the pushed terms. Supply this subscheme, its closed-immersion and properness instances, and its annihilation equations to [lem-weil-pbc-grothendieck-existence-supported-system]. Its conclusion is exactly the algebraization and the compatible restriction isomorphisms required.",
    "uses": [
-    "lem-weil-pbc-chow-noetherian",
-    "lem-chow-closed-model"
+    "lem-weil-pbc-grothendieck-existence-system-support",
+    "lem-weil-pbc-grothendieck-existence-supported-system"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, third paragraph (Lemma 0200 lemma-chow-Noetherian; Morphisms Lemma 01WA lemma-H-quasi-projective-open-H-projective)"
-   }
-  },
-  {
-   "text": "(Pulling back and extending the system.) By [lem-weil-pbc-formal-systems-pullback], $(f^*\\mathcal F_n)$ is an object of $\\mathit{Coh}(Y,I\\mathcal O_Y)$ (note $f^{-1}\\mathcal I\\cdot\\mathcal O_Y=I\\mathcal O_Y$). For each $n$, $\\mathcal F_1=\\mathcal F_n/\\mathcal I\\mathcal F_n$, and $\\operatorname{Supp}\\mathcal F_n\\subseteq V(\\mathcal I)$ as $\\mathcal I^n\\mathcal F_n=0$; by [lem-weil-pbc-support-pullback-finite-type] (2) (at $x\\in V(\\mathcal I)$, $\\mathcal I_x\\subseteq\\mathfrak m_x$, so $(\\mathcal F_n/\\mathcal I\\mathcal F_n)_x\\otimes\\kappa(x)=\\mathcal F_{n,x}\\otimes\\kappa(x)$) we get $\\operatorname{Supp}\\mathcal F_n=\\operatorname{Supp}\\mathcal F_1$. Hence by [lem-weil-pbc-support-pullback-finite-type] (3), $\\operatorname{Supp}(f^*\\mathcal F_n)=f^{-1}\\operatorname{Supp}(\\mathcal F_1)$, which is a closed subset of $Y$ proper over $S$ by [lem-weil-pbc-closed-subset-proper-over-base-union-preimage] (2). Since $Y'$ is separated over $S$, $T:=j(f^{-1}\\operatorname{Supp}\\mathcal F_1)$ is a closed subset of $Y'$ (proper over $S$) [lem-weil-pbc-closed-subset-proper-over-base-properties] (3), contained in $j(Y)$. So $\\mathcal F'_n:=j_*f^*\\mathcal F_n$ is a coherent $\\mathcal O_{Y'}$-module [lem-weil-pbc-pushforward-coherent-on-open], equal to $f^*\\mathcal F_n$ on $j(Y)$ and to $0$ on $Y'\\setminus T$. The conditions defining $\\mathit{Coh}(Y',I\\mathcal O_{Y'})$ [def-weil-pbc-coherent-formal-module] are local on $Y'$ and hold on both opens of the cover $Y'=j(Y)\\cup(Y'\\setminus T)$, so $(\\mathcal F'_n)$ is an object of $\\mathit{Coh}(Y',I\\mathcal O_{Y'})$ with $(\\mathcal F'_n)|_{j(Y)}=(f^*\\mathcal F_n)$.",
-   "uses": [
-    "lem-weil-pbc-formal-systems-pullback",
-    "lem-weil-pbc-support-pullback-finite-type",
-    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
-    "lem-weil-pbc-pushforward-coherent-on-open",
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, third paragraph (Morphisms Lemma 056J; Lemma 0CYQ parts (3) and (1); Lemma 0CYJ lemma-pushforward-coherent-on-open; Lemma 0887)"
-   }
-  },
-  {
-   "text": "(Projective case and the support of the algebraization.) $Y'$ is a closed subscheme of $\\mathbf P^n_A$, so by [lem-weil-pbc-grothendieck-existence-projective] there is a coherent $\\mathcal O_{Y'}$-module $\\mathcal F'$ with $\\mathcal F'^\\wedge\\cong(\\mathcal F'_n)$. Then $\\mathcal F'/I\\mathcal F'\\cong\\mathcal F'_1$, so as in the previous step $\\operatorname{Supp}(\\mathcal F')\\cap V(I\\mathcal O_{Y'})=\\operatorname{Supp}(\\mathcal F'_1)=T\\subseteq j(Y)$ [lem-weil-pbc-support-pullback-finite-type] (2). $\\operatorname{Supp}\\mathcal F'$ is closed [lem-weil-pbc-support-pullback-finite-type] (1), so $\\operatorname{Supp}(\\mathcal F')\\setminus j(Y)$ is closed in $Y'$ and its image $W$ under the proper, hence closed [def-weil-proper-morphism], map $p'$ is closed in $\\operatorname{Spec}A$. If $W\\ne\\emptyset$ it meets $V(I)$ [lem-weil-pbc-adic-complete-jacobson-radical], giving a point of $\\operatorname{Supp}(\\mathcal F')\\setminus j(Y)$ in $p'^{-1}V(I)=V(I\\mathcal O_{Y'})$, which contradicts the displayed equality. Hence $\\operatorname{Supp}\\mathcal F'\\subseteq j(Y)$. Put $\\mathcal G=j^*\\mathcal F'=\\mathcal F'|_Y$, a coherent $\\mathcal O_Y$-module. $\\operatorname{Supp}\\mathcal F'$ is a closed subset of $Y'$, proper over $S$ since $Y'\\to S$ is proper [lem-weil-pbc-closed-subset-proper-over-base-properties] (1),(2); it lies in the open $j(Y)$, so its reduced induced subscheme is the same in $Y$ and in $Y'$, and $Z':=\\operatorname{Supp}\\mathcal G$ is a closed subset of $Y$ proper over $S$. Finally $\\mathcal G^\\wedge=(\\mathcal F'^\\wedge)|_Y\\cong(\\mathcal F'_n)|_Y=(f^*\\mathcal F_n)$ [lem-weil-pbc-formal-systems-pullback] (2); call this isomorphism $\\beta$.",
-   "uses": [
-    "lem-weil-pbc-grothendieck-existence-projective",
-    "lem-weil-pbc-support-pullback-finite-type",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-adic-complete-jacobson-radical",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
-    "lem-weil-pbc-formal-systems-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, third paragraph (Lemma 0885 lemma-existence-projective; Algebra Lemma 05GI lemma-radical-completion)"
-   }
-  },
-  {
-   "text": "(Comparison with a proper pushforward.) Let $\\mathcal K\\subseteq\\mathcal O_X$ be the ideal sheaf of the reduced induced closed subscheme on $X\\setminus U$ [lem-weil-pbc-reduced-induced-closed-subscheme]; then $V(\\mathcal K)=X\\setminus U$, and $f$ is an isomorphism over $X\\setminus V(\\mathcal K)=U$. Put $\\mathcal H:=f_*\\mathcal G$. By [lem-weil-pbc-formal-systems-push-pull] (with its $Y,\\mathcal J,X,\\mathcal F,(\\mathcal G_n)$ being our $X,\\mathcal I,Y,\\mathcal G,(\\mathcal F_n)$, and $\\beta$ of the previous step) $\\mathcal H$ is a coherent $\\mathcal O_X$-module ($f$ proper, $X$ Noetherian; Stacks Proposition 02O5, which that lemma's statement includes) and there are a morphism $\\alpha:(\\mathcal F_n)\\to\\mathcal H^\\wedge$ in $\\mathit{Coh}(X,\\mathcal I)$ and $t\\ge1$ such that $\\operatorname{Ker}\\alpha$ and $\\operatorname{Coker}\\alpha$, taken in the abelian category $\\mathit{Coh}(X,\\mathcal I)$ [lem-weil-pbc-coherent-formal-modules-abelian], are annihilated by $\\mathcal K^t$.",
-   "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-formal-systems-push-pull",
-    "lem-weil-pbc-coherent-formal-modules-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, fourth paragraph (Proposition 02O5 proposition-proper-pushforward-coherent; Lemma 088B lemma-inverse-systems-push-pull)"
-   }
-  },
-  {
-   "text": "(Support of $\\mathcal H$.) $f$ is proper, hence closed [def-weil-proper-morphism], so $f(Z')$ is closed; on the open $X\\setminus f(Z')$ one has $\\mathcal H=f_*(\\mathcal G|_{f^{-1}(X\\setminus f(Z'))})=0$, so $\\operatorname{Supp}\\mathcal H\\subseteq f(Z')$. As $X$ is separated over $S$, $f(Z')$ is a closed subset of $X$ proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-properties] (3), hence so is $\\operatorname{Supp}\\mathcal H$ (closed by [lem-weil-pbc-module-support-proper-over-base] (1); proper by [lem-weil-pbc-closed-subset-proper-over-base-properties] (2)). By [lem-weil-pbc-module-support-proper-over-base] (2) the scheme-theoretic support $Z_0$ of $\\mathcal H$ is a closed subscheme with $Z_0\\to S$ proper and $\\mathcal I_{Z_0}\\mathcal H=0$; hence $\\mathcal I_{Z_0}$ kills every $\\mathcal H/\\mathcal I^n\\mathcal H$, so $\\mathcal H^\\wedge$ lies in the subcategory (2) of [lem-weil-pbc-formal-systems-proper-support-serre], and also in its subcategory (1) since $\\operatorname{Supp}(\\mathcal H/\\mathcal I\\mathcal H)\\subseteq\\operatorname{Supp}\\mathcal H$.",
-   "uses": [
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
-    "lem-weil-pbc-module-support-proper-over-base",
-    "lem-weil-pbc-formal-systems-proper-support-serre"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, fourth paragraph ('If Z_0 is the scheme theoretic support of H, then ... Z_0 is proper over A by Lemma 0CYN and Lemma 0CYQ part (2)'; we use 0CYQ part (1), X being separated over A)"
-   }
-  },
-  {
-   "text": "(Conclusion.) In the abelian category $\\mathit{Coh}(X,\\mathcal I)$ [lem-weil-pbc-coherent-formal-modules-abelian] there are exact sequences $0\\to\\operatorname{Ker}\\alpha\\to(\\mathcal F_n)\\to\\operatorname{Im}\\alpha\\to0$ and $0\\to\\operatorname{Im}\\alpha\\to\\mathcal H^\\wedge\\to\\operatorname{Coker}\\alpha\\to0$. As $(\\mathcal F_n)$ and $\\mathcal H^\\wedge$ lie in the Serre subcategory (1) of [lem-weil-pbc-formal-systems-proper-support-serre], so do $\\operatorname{Ker}\\alpha$, $\\operatorname{Im}\\alpha$ and $\\operatorname{Coker}\\alpha$. $\\mathcal K^t\\neq0$, since $U\\neq\\emptyset$ ($U$ is dense in $X\\ne\\emptyset$) and $\\mathcal K^t|_U=\\mathcal O_U$. By (H), $\\mathcal K^t\\in\\Xi$; as $\\operatorname{Ker}\\alpha$ and $\\operatorname{Coker}\\alpha$ are annihilated by $\\mathcal K^t$, they satisfy $(*)$, i.e. lie in the subcategory (2). This is a Serre subcategory, so $\\operatorname{Im}\\alpha\\subseteq\\mathcal H^\\wedge$ lies in (2), and then so does the extension $(\\mathcal F_n)$ of $\\operatorname{Im}\\alpha$ by $\\operatorname{Ker}\\alpha$. This is $(*)$ for $(\\mathcal F_n)$ [def-weil-pbc-coherent-formal-module] (3), which completes the induction, hence (b') by the reduction step and (b) by the translation step.",
-   "uses": [
-    "lem-weil-pbc-coherent-formal-modules-abelian",
-    "lem-weil-pbc-formal-systems-proper-support-serre",
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, fourth paragraph (exact sequence, Lemma 0CYV parts (1) and (2), induction hypothesis for K^t)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "pqf-lem-locnoeth-lft",
-  "lem-weil-pbc-thickening-systems-dictionary",
-  "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-module-support-proper-over-base",
-  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
   "lem-weil-pbc-closed-subset-proper-over-base-properties",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
-  "lem-weil-pbc-formal-completion-fully-faithful-proper",
-  "prop-weil-pbc-grothendieck-existence-proper",
-  "lem-weil-pbc-noetherian-acc-quasi-coherent",
-  "lem-weil-pbc-chow-noetherian",
-  "lem-chow-closed-model",
-  "lem-weil-pbc-formal-systems-pullback",
-  "lem-weil-pbc-support-pullback-finite-type",
-  "lem-weil-pbc-pushforward-coherent-on-open",
-  "lem-weil-pbc-grothendieck-existence-projective",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-adic-complete-jacobson-radical",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-formal-systems-push-pull",
-  "lem-weil-pbc-coherent-formal-modules-abelian",
-  "lem-weil-pbc-formal-systems-proper-support-serre"
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lem-weil-pbc-grothendieck-existence-supported-hom",
+  "lem-weil-pbc-grothendieck-existence-supported-system",
+  "lem-weil-pbc-grothendieck-existence-system-support",
+  "lem-weil-pbc-module-support-proper-over-base",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-locnoeth-lft"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence) and its proof, in the form of Remark 088F (remark-reformulate-existence-theorem); the translation between the two forms (step 1, node lem-weil-pbc-thickening-systems-dictionary), the treatment of full faithfulness (step 2) and of Supp F_n = Supp F_1, of the system j_*f^*F_n and of K^t != 0, which Stacks leaves implicit, are written out by the agent"
+  "place": "Theorem 088E, first paragraph (proper closed supports), and Remark 088F. The common annihilating subscheme is explicitly constructed from the product ideal, which has the same union support as the intersection ideal in the former plan. The three remaining transport/support arguments are named intermediate nodes; existence and uniqueness are combined in Lean."
  },
  "mathlib_searches": [
   {
@@ -277,5 +153,15 @@
   "reviewer": "R-gex2",
   "group": "Q1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T085240-L-15135",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

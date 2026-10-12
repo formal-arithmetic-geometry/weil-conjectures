@@ -9,25 +9,15 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
-import Sheaf.AlgebraicGeometry.FormalSystemsProperSupportSerre
-import Sheaf.AlgebraicGeometry.FormalSystemsPullback
-import Sheaf.AlgebraicGeometry.FormalSystemsPushPull
-import Sheaf.AlgebraicGeometry.GrothendieckExistenceProjective
-import Sheaf.AlgebraicGeometry.GrothendieckExistenceProper
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
-import Sheaf.AlgebraicGeometry.PushforwardCoherentOnOpen
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.AlgebraicGeometry.ThickeningSystemsDictionary
-import WeilConjectures.AlgebraicGeometry.ChowLemma
-import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
+import Sheaf.AlgebraicGeometry.GrothendieckExistenceSupportedHom
+import Sheaf.AlgebraicGeometry.GrothendieckExistenceSystemSupport
+import Sheaf.AlgebraicGeometry.GrothendieckExistenceSupportedSystem
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 
 /-!
 # Grothendieck existence with proper support
@@ -128,6 +118,96 @@ theorem grothendieck_existence
       (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G ≅ F n,
     ∀ n : ℕ, (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫ (φ n).hom = (c
       n).hom.app G ≫ (ψ n).hom) := by
-  sorry
+  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
+  constructor
+  · intro F G hF hG hproperF hproperG v hv
+    obtain ⟨hFqc, hFft⟩ :=
+      (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp hF
+    obtain ⟨hGqc, hGft⟩ :=
+      (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X G).mp hG
+    let := hFqc
+    let := hFft
+    let := hGqc
+    let := hGft
+    obtain ⟨ZF, jF, hjF, hpF, hkF, _⟩ :=
+      (Scheme.Modules.module_support_proper_over_base f F).2.1.mp hproperF
+    obtain ⟨ZG, jG, hjG, hpG, hkG, _⟩ :=
+      (Scheme.Modules.module_support_proper_over_base f G).2.1.mp hproperG
+    let := hjF
+    let := hjG
+    let := hpF
+    let := hpG
+    have hclosedF : IsClosed (Set.range jF) := jF.isClosedMap.isClosed_range
+    have hclosedG : IsClosed (Set.range jG) := jG.isClosedMap.isClosed_range
+    have hrF : Set.range jF.base = (jF.ker.support : Set X) := by
+      rw [jF.support_ker, hclosedF.closure_eq]
+    have hrG : Set.range jG.base = (jG.ker.support : Set X) := by
+      rw [jG.support_ker, hclosedG.closure_eq]
+    have hsF : Scheme.IsClosedSubsetProperOver f jF.ker.support :=
+      (Scheme.closed_subset_proper_over_base_properties f jF.ker.support).1.mpr
+        ⟨ZF, jF, hjF, hrF, hpF⟩
+    have hsG : Scheme.IsClosedSubsetProperOver f jG.ker.support :=
+      (Scheme.closed_subset_proper_over_base_properties f jG.ker.support).1.mpr
+        ⟨ZG, jG, hjG, hrG, hpG⟩
+    have hsup : Scheme.IsClosedSubsetProperOver f (jF.ker.support ⊔ jG.ker.support) := by
+      let Z : Fin 2 → TopologicalSpace.Closeds X :=
+        fun n ↦ Fin.cases jF.ker.support (fun _ ↦ jG.ker.support) n
+      have h := (Scheme.isClosedSubsetProperOver_union_preimage f).1 2 Z (by
+          intro n
+          fin_cases n
+          · exact hsF
+          · exact hsG)
+      have heq : ⨆ n, Z n = jF.ker.support ⊔ jG.ker.support := by
+        apply le_antisymm
+        · apply iSup_le
+          intro n
+          fin_cases n
+          · exact le_sup_left
+          · exact le_sup_right
+        · apply sup_le
+          · exact le_iSup Z 0
+          · exact le_iSup Z 1
+      rw [← heq]
+      exact h
+    let K : X.IdealSheafData := jF.ker * jG.ker
+    have hproperK : Scheme.IsClosedSubsetProperOver f K.support := by
+      simpa [K, Scheme.IdealSheafData.support_mul] using hsup
+    have hpK : IsProper (K.subschemeι ≫ f) :=
+      (Scheme.closed_subset_proper_over_base_properties f K.support).2.1.mp
+        hproperK K.subscheme K.subschemeι (Scheme.IdealSheafData.range_subschemeι K)
+    have : IsProper (K.subschemeι ≫ f) := hpK
+    have hleF : K ≤ jF.ker := by
+      intro U
+      exact Ideal.mul_le_left
+    have hleG : K ≤ jG.ker := by
+      intro U
+      exact Ideal.mul_le_right
+    have hkKF : ∀ (V : X.Opens) (a : Γ(X, V)),
+        a ∈ K.subschemeι.ker.idealOfOpens V → ∀ t : Γ(F, V), a • t = 0 := by
+      intro V a ha t
+      have hmem : a ∈ K.idealOfOpens V := by simpa using ha
+      exact hkF V a (Scheme.IdealSheafData.idealOfOpens_mono hleF V hmem) t
+    have hkKG : ∀ (V : X.Opens) (a : Γ(X, V)),
+        a ∈ K.subschemeι.ker.idealOfOpens V → ∀ t : Γ(G, V), a • t = 0 := by
+      intro V a ha t
+      have hmem : a ∈ K.idealOfOpens V := by simpa using ha
+      exact hkG V a (Scheme.IdealSheafData.idealOfOpens_mono hleG V hmem) t
+    have hb := grothendieckExistence_supported_hom A I f i hi hp c hc
+      F G hF hG K.subscheme K.subschemeι hkKF hkKG
+    obtain ⟨w, hw⟩ := hb.surjective ⟨v, hv⟩
+    refine ⟨w, ?_, ?_⟩
+    · intro n
+      exact congrArg (fun t ↦ t.val n) hw
+    · intro w' hw'
+      apply hb.injective
+      apply Subtype.ext
+      funext n
+      exact (hw' n).trans (congrArg (fun t ↦ t.val n) hw).symm
+  · intro F φ hF hproper
+    obtain ⟨Z, j, hj, hpj, hkill⟩ :=
+      grothendieckExistence_system_support A I f i hi hp F φ hF hproper
+    let := hj
+    let := hpj
+    exact grothendieckExistence_supported_system A I f i hi hp c hc F φ hF Z j hkill
 
 end AlgebraicGeometry

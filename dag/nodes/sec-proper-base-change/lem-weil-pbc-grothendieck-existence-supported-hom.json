@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-grothendieck-existence-supported-hom",
+ "kind": "statement",
+ "title": "Infinitesimal morphisms for coherent modules on a fixed proper closed subscheme",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and $I\\subseteq A$ an ideal such that $A$ is $I$-adically complete [def-weil-pbc-adically-complete-ring]. Let $f:X\\to S=\\operatorname{Spec}A$ be separated [def-weil-proper-morphism] and of finite type [def-weil-finite-type-morphism]. For $n\\geq0$ put $S_n=\\operatorname{Spec}(A/I^{n+1})$ and $X_n=X\\times_S S_n$ [def-pc-base-change], and let $j_n:X_n\\to X$ and $i_n:X_n\\to X_{n+1}$ be the canonical closed immersions [def-weil-closed-immersion]. Pullback is tensor pullback [def-pc-module-pullback]; coherent modules are as in [pqf-def-coherent]. Write $c_n:i_n^*j_{n+1}^*\\cong j_n^*$ for the canonical natural comparison induced by $i_nj_{n+1}=j_n$. Let $j:Z\\to X$ be a closed immersion with $Z\\to S$ proper. Let $F,G$ be coherent $\\mathcal O_X$-modules both annihilated by the ideal sheaf $\\mathcal J_Z$ of $j$, meaning $a t=0$ for all opens $V\\subseteq X$, $a\\in\\mathcal J_Z(V)$ and $t\\in F(V)$, and likewise for $G$. Then the map $w\\mapsto(j_n^*w)_n$ is a bijection from $\\operatorname{Hom}_X(G,F)$ to the set of families $v_n:j_n^*G\\to j_n^*F$ satisfying $v_n\\circ c_{n,G}=c_{n,F}\\circ i_n^*v_{n+1}$ for every $n$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E (theorem-grothendieck-existence), first paragraph; Lemma 0883 (lemma-fully-faithful), and Remark 088F (remark-reformulate-existence-theorem)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "pqf-def-coherent",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The proper closed subscheme $Z$ is given. By [lem-weil-pbc-closed-immersion-coherent-equivalence] (1), lift both coherent modules to $Z$ and identify their Hom sets. Its formal version (2) identifies Hom sets of their completions and is compatible with completion of a morphism.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-formal-completion-fully-faithful-proper] on $Z\\to\\operatorname{Spec}A$. Transport its completion bijection through the two preceding Hom identifications to obtain a bijection on $X$.",
+   "uses": [
+    "lem-weil-pbc-formal-completion-fully-faithful-proper",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "[lem-weil-pbc-thickening-systems-dictionary] identifies the morphisms of the completed objects with compatible families on $X_n$, and takes a completed morphism to its restrictions. The canonical comparison is the given $c_n$; thus the resulting bijection is the displayed restriction map.",
+   "uses": [
+    "lem-weil-pbc-thickening-systems-dictionary"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the natural transformation c_n gives compatibility for each restricted morphism. This supplies the proof component of the compatible-family subtype.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-formal-completion-fully-faithful-proper",
+  "lem-weil-pbc-thickening-systems-dictionary"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E and Remark 088F; the dictionary and natural comparison details are expanded as in the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent sheaves annihilated by the ideal of a proper closed subscheme have bijective restriction maps to compatible infinitesimal thickening systems",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of coherent infinitesimal thickening systems annihilated by the ideal of a fixed proper closed subscheme",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, Algebra.FormallyUnramified.ext_of_iInf, AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.IdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, Ideal.cotangentIdeal_square, Ideal.toCotangent_eq_zero",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grothendieck|formalCompletion|coherentFormal|thickening",
+   "results": "Actual search returned 25 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistence",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split: essential surjectivity over a complete Noetherian ring, via Grothendieck existence with proper support; GrothendieckExistenceSupportedHom",
+   "via": [
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckExistenceSupportedHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckExistenceSupportedHom.lean",
+  "declaration": "AlgebraicGeometry.grothendieckExistence_supported_hom",
+  "statement": "theorem grothendieckExistence_supported_hom (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [IsAdicComplete I A] {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (i : ∀ n : ℕ, pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) ⟶ pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) (hi : ∀ n : ℕ, i n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))) = pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) (hp : ∀ n : ℕ, i n ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))) = pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := I) (Nat.le_succ (n + 1)))))) (c : ∀ n : ℕ, Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))) ⋙ Scheme.Modules.tensorPullback (i n) ≅ Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))) (hc : ∀ n : ℕ, c n = (Classical.choice (Scheme.Modules.nonempty_tensorPullbackComp (i n) (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))))).symm ≪≫ eqToIso (congrArg Scheme.Modules.tensorPullback (hi n))) (F G : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hG : RingedSpace.IsCoherent X.toRingedSpace G) (Z : Scheme.{u}) (j : Z ⟶ X) [IsClosedImmersion j] [IsProper (j ≫ f)] (hkillF : ∀ (V : X.Opens) (a : Γ(X, V)), a ∈ j.ker.idealOfOpens V → ∀ t : Γ(F, V), a • t = 0) (hkillG : ∀ (V : X.Opens) (a : Γ(X, V)), a ∈ j.ker.idealOfOpens V → ∀ t : Γ(G, V), a • t = 0) : Function.Bijective (fun w : G ⟶ F ↦ (⟨fun n ↦ (Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).map w, fun n ↦ ((c n).hom.naturality w).symm⟩ : {v : ∀ n : ℕ, (Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G ⟶ (Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj F | ∀ n : ℕ, (c n).hom.app G ≫ v n = (Scheme.Modules.tensorPullback (i n)).map (v (n + 1)) ≫ (c n).hom.app F}))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T085240-L-15135",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T085240-L-15135",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
