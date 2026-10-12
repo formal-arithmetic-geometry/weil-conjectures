@@ -29,118 +29,52 @@
  ],
  "proof": [
   {
-   "text": "*The fibre of $g$.* Fix $z\\in Z$, put $k=\\kappa(z)$ [def-weil-residue-field], $Y_z=Y\\times_Z\\operatorname{Spec}k$ and $X_z=X\\times_Z\\operatorname{Spec}k$ (fibres of $g$ and of $g\\circ f$ [def-pc-scheme-fibre]). Since $m$ bounds the degrees of the fibres of $g$ [def-weil-pbc-fibre-degree-bound], $Y_z$ is finite over $k$ with $\\dim_k\\Gamma(Y_z,\\mathcal O_{Y_z})\\le m$; by [lem-weil-pbc-finite-over-field-affine-finite-dim] $Y_z\\cong\\operatorname{Spec}B$ over $\\operatorname{Spec}k$ with $B=\\Gamma(Y_z,\\mathcal O_{Y_z})$ a $k$-algebra and $\\dim_kB\\le m$. The field $k$ is a local ring whose only prime is $(0)$ and $B$ is a finite $k$-algebra, so by [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] $B$ has finitely many prime ideals $\\mathfrak n_1,\\dots,\\mathfrak n_r$, all maximal, whose intersection is the nilradical; thus $|Y_z|=\\operatorname{Spec}B$ is a finite discrete set. By [lem-weil-pbc-product-of-localizations-at-maximal] the canonical map $B\\to\\prod_{i=1}^rB_i$, $B_i=B_{\\mathfrak n_i}$, is an isomorphism of $k$-algebras with each $B_i$ local, so $\\dim_kB=\\sum_i\\dim_kB_i$. Each $B_i$ is a quotient of $B$ (a factor of the product), hence finite-dimensional over $k$, hence Artinian [lem-weil-pbc-finite-dim-algebra-artinian], so its maximal ideal $\\mathfrak n_iB_i$ is nilpotent [lem-weil-pbc-artinian-local-noetherian-nilpotent]; and $B_i/\\mathfrak n_iB_i=\\kappa(\\mathfrak n_i)=B/\\mathfrak n_i=:K_i$.",
+   "text": "Fix z, let gz be the finite fibre projection of g and let fz be the pullback of f along the inclusion of that fibre. The base-change bound gives BoundsFiberDegrees fz n.",
    "uses": [
-    "def-weil-residue-field",
     "def-pc-scheme-fibre",
     "def-weil-pbc-fibre-degree-bound",
-    "lem-weil-pbc-finite-over-field-affine-finite-dim",
-    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-    "lem-weil-pbc-product-of-localizations-at-maximal",
-    "lem-weil-pbc-finite-dim-algebra-artinian",
-    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+    "lem-weil-pbc-fibre-degree-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371, sentences 'By assumption the scheme Y_z is finite over Spec(kappa(z)). In particular, the underlying topological space of Y_z is a finite discrete set' and 'Note that B is the product of its localizations B_m ... by Algebra, Lemmas 00J6 and 00JB'"
-   }
+   "elementary": false
   },
   {
-   "text": "*The fibres of $f_z$.* In the diagram $X_z\\to Y_z\\to\\operatorname{Spec}k$ over $X\\to Y\\to Z$ the lower square ($Y_z$) and the outer rectangle ($X_z$) are cartesian, so by [lem-weil-pbc-cartesian-square-pasting] $X_z=X\\times_YY_z$ with projection $f_z:X_z\\to Y_z$, and the structure morphism $X_z\\to\\operatorname{Spec}k$ is $f_z$ followed by $Y_z\\to\\operatorname{Spec}k$. For a point $\\mathfrak n_i$ of $Y_z$ with canonical morphism $\\operatorname{Spec}K_i\\to Y_z$, pasting again [lem-weil-pbc-cartesian-square-pasting] gives $F_i:=X_z\\times_{Y_z}\\operatorname{Spec}K_i\\cong X\\times_Y\\operatorname{Spec}K_i$ over $\\operatorname{Spec}K_i$, where $\\operatorname{Spec}K_i\\to Y$ is the composite $\\operatorname{Spec}K_i\\to Y_z\\to Y$ [def-pc-fibre-product]. Since $n$ bounds the degrees of the fibres of $f$, [lem-weil-pbc-fibre-degree-bound-field-points] shows that $F_i$ is finite over $K_i$ with $\\dim_{K_i}\\Gamma(F_i,\\mathcal O_{F_i})\\le n$. By [lem-weil-pbc-finite-over-field-affine-finite-dim] $F_i=\\operatorname{Spec}C_i$ with $C_i$ a finite $K_i$-algebra, so $|F_i|$ is a finite discrete set [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum]; $F_i$ is the fibre of $f_z$ at $\\mathfrak n_i$ [def-pc-scheme-fibre], hence homeomorphic to the subspace $f_z^{-1}(\\mathfrak n_i)\\subseteq X_z$.",
+   "text": "Prove fz finite: finite fibres imply LocallyQuasiFinite by Mathlib LocallyQuasiFinite.of_fiberToSpecResidueField. The target is Artinian since it is finite over a field. The source is a finite union of the finite underlying fibres, transported by fiberHomeo, hence finite and compact. It is quasi-compact over the affine target. Mathlib IsFinite.of_locallyQuasiFinite now applies. This is the fully proved private helper finite_of_finite_fibers_over_field.",
    "uses": [
-    "lem-weil-pbc-cartesian-square-pasting",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-degree-bound-field-points",
-    "lem-weil-pbc-finite-over-field-affine-finite-dim",
     "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
     "def-pc-scheme-fibre"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371, sentence 'The fibres of the morphism f_z : X_z -> Y_z are the fibres of f at the corresponding points of Y, which are finite discrete sets by the reasoning above', with Morphisms, Lemma Tag 03J5 for the degree of these fibres"
-   }
+   "elementary": false
   },
   {
-   "text": "*$X_z$ is affine.* $|X_z|=\\bigcup_{i=1}^rf_z^{-1}(\\mathfrak n_i)$ is a finite union of finite sets, so finite. Every point $x\\in f_z^{-1}(\\mathfrak n_i)$ is closed in $X_z$: $\\{x\\}$ is closed in the discrete subspace $f_z^{-1}(\\mathfrak n_i)$ (step 2), which is closed in $X_z$ as the preimage under the continuous map $f_z$ of the closed point $\\mathfrak n_i$ of the discrete space $|Y_z|$ (step 1). A finite space whose points are closed is discrete (every subset is a finite union of closed points, hence closed, so every complement is closed). Hence by [lem-weil-pbc-finite-discrete-scheme-affine] $X_z\\cong\\operatorname{Spec}A$ with $A=\\Gamma(X_z,\\mathcal O_{X_z})$. By [lem-weil-pbc-morphism-into-affine-scheme] $f_z:\\operatorname{Spec}A\\to\\operatorname{Spec}B$ is $\\operatorname{Spec}$ of the ring map $B\\to A$ it induces on global sections, and the structure morphisms give $k\\to B\\to A$; the $k$-algebra structure of $A$ is the one of the degree in [def-weil-pbc-fibre-degree-bound].",
+   "text": "Paste the two pullback squares using IsPullback.paste_vert. Its isoPullback identifies fz followed by gz with the composite fibre projection, and transports finiteness and finrankΓ via finrankΓ_eq_of_iso.",
    "uses": [
-    "lem-weil-pbc-finite-discrete-scheme-affine",
-    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-field tower degree estimate to fz, gz and their degree bound n. Then multiply the bound finrankΓ gz <= m by n and use transitivity, giving n*m. For the existential clause, choose n and m from the two hypotheses and use their product as the witness.",
+   "uses": [
+    "lem-weil-pbc-finite-field-tower-degree-bound",
     "def-weil-pbc-fibre-degree-bound"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371, sentences 'Hence we conclude that the underlying topological space of X_z is a finite discrete set as well. Thus X_z is an affine scheme (... Properties, Lemma 01ZV ...). Write X_z = Spec(A), Y_z = Spec(B), and k = kappa(z). Then k -> B -> A'"
-   }
-  },
-  {
-   "text": "*The fibres algebraically.* By [lem-weil-pbc-fibre-product-affine-spectra], $F_i=\\operatorname{Spec}A\\times_{\\operatorname{Spec}B}\\operatorname{Spec}K_i\\cong\\operatorname{Spec}(A\\otimes_BK_i)$ over $\\operatorname{Spec}K_i$, and $A\\otimes_BK_i=A\\otimes_BB/\\mathfrak n_i=A/\\mathfrak n_iA$. Isomorphic schemes over $K_i$ have isomorphic $K_i$-algebras of global sections, so by step 2 $\\dim_{K_i}(A/\\mathfrak n_iA)=\\dim_{K_i}\\Gamma(F_i,\\mathcal O_{F_i})\\le n$ for every $i$.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371, '(b) for every maximal ideal m of B we have dim_{kappa(m)}(A/mA) <= n'"
-   }
-  },
-  {
-   "text": "*Decomposition of $A$.* Tensoring the $k$-algebra isomorphism $B\\cong\\prod_iB_i$ of step 1 with the $B$-module $A$ (tensor product commutes with finite products) gives $A\\cong\\prod_iA_i$ with $A_i=A\\otimes_BB_i$ (the localization of $A$ at $\\mathfrak n_i$ as a $B$-module), an isomorphism of $k$-vector spaces; hence $\\dim_kA=\\sum_i\\dim_kA_i$, where each side may a priori be infinite.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371, 'dim_k(A) = sum_m dim_k(A_m) where ... m runs over the maximal ideals of B (not of A)'"
-   }
-  },
-  {
-   "text": "*Nakayama.* Fix $i$. As $B_i$-modules, $A_i/\\mathfrak n_iA_i=A\\otimes_BB_i\\otimes_{B_i}B_i/\\mathfrak n_iB_i=A\\otimes_BK_i=A/\\mathfrak n_iA$ (steps 1 and 4), a $K_i$-vector space of dimension $d_i\\le n$. Choose $a_1,\\dots,a_{d_i}\\in A_i$ whose images form a $K_i$-basis of $A_i/\\mathfrak n_iA_i$ and let $u:B_i^{\\oplus d_i}\\to A_i$, $(b_j)\\mapsto\\sum_jb_ja_j$. The induced map $B_i^{\\oplus d_i}/\\mathfrak n_iB_i^{\\oplus d_i}\\to A_i/\\mathfrak n_iA_i$ is surjective and $\\mathfrak n_iB_i$ is nilpotent (step 1), so $u$ is surjective by [lem-weil-pbc-nakayama-nilpotent]. Since $u$ is $k$-linear, $\\dim_kA_i\\le d_i\\dim_kB_i\\le n\\dim_kB_i$.",
-   "uses": [
-    "lem-weil-pbc-nakayama-nilpotent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371, 'By the above, and Nakayama's Lemma (Algebra, Lemma 00DV) we see that each A_m is a quotient of B_m^{oplus n} as a B_m-module. Hence dim_k(A_m) <= n dim_k(B_m)' (00DV part (11): I nilpotent, N/IN -> M/IM surjective implies N -> M surjective)"
-   }
-  },
-  {
-   "text": "*Conclusion.* By steps 5, 6 and 1, $\\dim_kA=\\sum_i\\dim_kA_i\\le\\sum_in\\dim_kB_i=n\\dim_kB\\le nm$. So $A$ is a finitely generated $k$-module, and the structure morphism $X_z=\\operatorname{Spec}A\\to\\operatorname{Spec}k$ is finite by [lem-weil-pbc-finite-local-on-target] ((2)$\\Rightarrow$(1), with the cover of $\\operatorname{Spec}k$ by itself, whose preimage $X_z$ is affine with ring map $k\\to A$ finite); its degree is $\\dim_k\\Gamma(X_z,\\mathcal O_{X_z})=\\dim_kA\\le nm$. As $z$ was arbitrary, $nm$ bounds the degrees of the fibres of $g\\circ f$ [def-weil-pbc-fibre-degree-bound]. In particular, if the fibres of $f$ and of $g$ are universally bounded, with bounds $n$ and $m$, then those of $g\\circ f$ are universally bounded, with bound $nm$.",
-   "uses": [
-    "lem-weil-pbc-finite-local-on-target",
-    "def-weil-pbc-fibre-degree-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371, the displayed chain 'dim_k(A) = sum dim_k(A_m) <= sum n dim_k(B_m) = n dim_k(B) <= nm', and the first sentence of the lemma"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-residue-field",
   "def-pc-scheme-fibre",
   "def-weil-pbc-fibre-degree-bound",
-  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-fibre-degree-base-change",
   "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-  "lem-weil-pbc-product-of-localizations-at-maximal",
-  "lem-weil-pbc-finite-dim-algebra-artinian",
-  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
   "lem-weil-pbc-cartesian-square-pasting",
   "def-pc-fibre-product",
-  "lem-weil-pbc-fibre-degree-bound-field-points",
-  "lem-weil-pbc-finite-discrete-scheme-affine",
-  "lem-weil-pbc-morphism-into-affine-scheme",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-nakayama-nilpotent",
-  "lem-weil-pbc-finite-local-on-target"
+  "lem-weil-pbc-finite-field-tower-degree-bound"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371, and its proof"
+  "place": "Stacks Tag 03J6, geometric part; Mathlib quasi-finite/Artinian shortcuts. Algebraic steps 4-6 split into lem-weil-pbc-finite-field-tower-degree-bound (K2 stage 3, 2026-10-12)."
  },
  "mathlib_searches": [
   {
@@ -227,5 +161,15 @@
   "group": "C1",
   "result": "pass",
   "note": "X,Y,Z schemes/f,g arbitrary (no instances); n,m : ℕ per dep's n>=0; hf/hg = landed H1 BoundsFiberDegrees (IsFinite fiberToSpecResidueField ∧ finrankΓ ≤ n, #print checked); g∘f = f ≫ g; conclusion both clauses at n*m; 'in particular' as hasUniversallyBoundedFibers_comp; #check of both names in AlgebraicGeometry.Scheme.Hom"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T085258-L-22887",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

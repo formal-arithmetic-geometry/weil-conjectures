@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-finite-field-tower-degree-bound",
+ "kind": "statement",
+ "title": "Degree estimate for a finite tower over a field",
+ "statement": "Let $K$ be a field and let $f:X\\to Y$ and $g:Y\\to\\operatorname{Spec}K$ be finite morphisms [def-weil-finite-integral-morphism] of schemes [def-pc-scheme]. For each $y\\in Y$, suppose $\\dim_{\\kappa(y)}\\Gamma(X_y,\\mathcal O_{X_y})\\le n$, with the fibre and its scalar action as in [def-weil-pbc-fibre-degree-bound]. Then $\\dim_K\\Gamma(X,\\mathcal O_X)\\le n\\dim_K\\Gamma(Y,\\mathcal O_Y)$, where the actions come from $g\\circ f$ and $g$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Proof of Tag 03J6 (lemma-composition-universally-bounded), algebraic part starting Write X_z = Spec(A), Y_z = Spec(B), and k = kappa(z); https://stacks.math.columbia.edu/tag/03J6"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-fibre-degree-bound"
+ ],
+ "proof": [
+  {
+   "text": "The finite structure morphisms make X and Y affine. Write B=Gamma(Y,O) and A=Gamma(X,O), with K -> B -> A induced by g and f. B is a finite-dimensional K-algebra.",
+   "uses": [
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "B is Artinian and is the finite product of its localizations B_i at maximal ideals. Each B_i is finite-dimensional and Artinian local with nilpotent maximal ideal m_i. Tensor this product decomposition with A to get A = product A_i, where A_i=A tensor_B B_i. All decompositions preserve the K action.",
+   "uses": [
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-weil-pbc-product-of-localizations-at-maximal",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine fibre product formula identifies the fibre over the corresponding point of Spec B with Spec(A_i/m_i A_i). Its dimension over the residue field is d_i <= n by hf, using the canonical global sections isomorphisms over that field.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift a residue-field basis of size d_i to A_i. The resulting B_i-linear map B_i^{d_i} -> A_i is surjective modulo m_i and hence surjective by nilpotent Nakayama. Restrict scalars to K to get dim_K A_i <= d_i dim_K B_i <= n dim_K B_i.",
+   "uses": [
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Dimensions add across the finite products. Sum the local estimates to get dim_K A <= n dim_K B, which is exactly the finrankΓ inequality. If Y is empty both section rings are zero and the sum is empty. When n=0 every local quotient is zero and Nakayama gives A_i=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-product-of-localizations-at-maximal",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-nakayama-nilpotent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Proof of Tag 03J6, algebraic estimate (original composition node steps 4-6)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finrank.*le.*mul|finrank.*fiber|finrank.*Fiber",
+   "date": "2026-10-12",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/RamificationInertia/Basic.lean",
+   "verdict": "No match: no finite tower upper bound; available fibre finrank equalities require flatness, absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For finite morphisms X to Y to Spec K over a field, degree of X is at most n times degree of Y if every fiber of X to Y has degree at most n",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finrank\", \"fiber\"",
+   "date": "2026-10-12",
+   "results": "Ideal.finrank_fiber_eq_rankAtStalk, Ideal.finrank_fiber_eq_finrank, Ideal.sum_ramification_inertia_eq_finrank_fiber",
+   "verdict": "No match: no finite tower upper bound; available fibre finrank equalities require flatness, absent here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundsFiberDegreesComp",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Algebraic dimension estimate in Stacks Tag 03J6, original composition node steps 4-6.",
+   "via": [
+    "lem-weil-pbc-composition-fibre-degree-bound",
+    "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFieldTowerDegreeBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFieldTowerDegreeBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.finrankΓ_comp_le_mul_of_finite",
+  "statement": "theorem finrankΓ_comp_le_mul_of_finite {X Y : Scheme.{u}} {K : Type u} [Field K] (f : X ⟶ Y) (g : Y ⟶ Spec (.of K)) [IsFinite f] [IsFinite g] (n : ℕ) (hf : ∀ y, (f.fiberToSpecResidueField y).finrankΓ ≤ n) : (f ≫ g).finrankΓ ≤ n * g.finrankΓ",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T085258-L-22887",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T085258-L-22887",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
