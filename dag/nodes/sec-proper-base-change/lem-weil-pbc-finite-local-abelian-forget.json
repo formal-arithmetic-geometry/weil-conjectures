@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-finite-local-abelian-forget",
+ "kind": "statement",
+ "title": "Finite local constancy of abelian sheaves is detected on underlying sets",
+ "statement": "Let $Y$ be any scheme [def-weil-pbc-scheme-conventions] and $G$ an abelian sheaf on its small etale site [def-weil-pbc-abelian-etale-sheaves]. Let $|G|$ be its underlying sheaf of sets [def-weil-pbc-etale-sheaves]. Then $|G|$ is locally constant with finite stalks at every algebraically closed geometric point [def-weil-pbc-geometric-stalks] if and only if $G$ is locally constant as an abelian sheaf [def-constructible-locally-constant] and its stalks at every such point are finite sets. No quasi-compactness, connectedness or nonemptiness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03RU (definition-finite-locally-constant), set and abelian clauses; Definition 03RW (definition-constructible) (1),(2). Agent-formulated finite-operation refinement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-sheaves",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Forget an abelian constant-value trivialization to sets. Constant sheafification commutes with forgetting; filtered stalk colimits commute with forgetting as well, so the stalk finiteness conditions agree.",
+   "uses": [
+    "def-constructible-locally-constant",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely choose a set trivialization and discard empty members. A geometric stalk identifies the value of every remaining constant set with a finite set. Transport the abelian group operations of the stalk to this finite set. Each value of addition on a pair, inversion on an element, and the unit is a section of a finite constant sheaf, hence locally constant. Refine near each point so these finitely many values agree with the transported operations. The refined set trivializations are now abelian trivializations: the operations and the group laws agree. Their underlying stalks are still finite. On the empty scheme use the empty cover.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "def-constructible-locally-constant",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-locally-constant",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03RU (definition-finite-locally-constant), set and abelian clauses; Definition 03RW (definition-constructible) (1),(2). Agent-formulated finite-operation refinement.; local part of lem-weil-pbc-constructible-torsion-modules-agree"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite locally constant sheaf of sets with an abelian group structure is locally constant as a sheaf of abelian groups",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsConstant",
+   "results": "12 hits: CategoryTheory.Sheaf.IsConstant, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Sheaf.isConstant_iff_mem_essImage. No exact finite local coefficient comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstantSheaf|finite_local_abelian|finite_local_cyclic",
+   "results": "0 hits: . No exact finite local coefficient comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleTorsionModulesAgree",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-constructible-complexes",
+   "place": "Constructible coefficient sheaves: compare finite local systems on each stratum; Definition 03RU (definition-finite-locally-constant), set and abelian clauses; Definition 03RW (definition-constructible) (1),(2). Agent-formulated finite-operation refinement.",
+   "via": [
+    "lem-weil-pbc-constructible-torsion-modules-agree"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocalAbelianForget.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_local_abelian_forget_iff",
+  "statement": "theorem finite_local_abelian_forget_iff {Y : Scheme.{u}}\n    (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    IsFiniteLocallyConstantEtaleSheafOfSets\n      ((sheafCompose Y.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G) ↔\n    IsLocallyConstantSheaf G ∧\n      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),\n        Finite (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj G)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T063512-L-3156318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T063512-L-3156318",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
