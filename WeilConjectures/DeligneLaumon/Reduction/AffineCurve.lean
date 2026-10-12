@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
 public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
@@ -40,128 +41,11 @@ universe u
 
 open CategoryTheory Limits
 
+
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (ι : PadicAlgCl l →+* ℂ)
-
-namespace WeilSheaf
-
-variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-
-/-- The stalk functor of Weil sheaves at a geometric point preserves homology: it preserves
-finite limits and epimorphisms. -/
-instance preservesHomology_stalkFunctor
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
-    (stalkFunctor k₀ l s).PreservesHomology := by
-  have : PreservesFiniteLimits (C := WeilSheaf k₀ l X) (WeilSheaf.objectProperty k₀ l X).ι :=
-    inferInstance
-  have : PreservesFiniteLimits (stalkFunctor k₀ l s) := by
-    unfold stalkFunctor sheafFunctor
-    infer_instance
-  exact Functor.preservesHomology_of_preservesEpis_and_kernels _
-
-/-- The stalks of an exact sequence of Weil sheaves form an exact sequence. -/
-theorem range_stalkAtMap_eq_ker {S : ShortComplex (WeilSheaf k₀ l X)} (hS : S.Exact)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    LinearMap.range (stalkAtMap s m hs S.f) = LinearMap.ker (stalkAtMap s m hs S.g) := by
-  have h := (hS.map (stalkFunctor k₀ l s))
-  rw [ShortComplex.moduleCat_exact_iff] at h
-  refine le_antisymm ?_ fun y hy ↦ ?_
-  · rintro _ ⟨x, rfl⟩
-    rw [LinearMap.mem_ker, ← stalkAtMap_comp, S.zero, stalkAtMap_zero]
-  · obtain ⟨x, hx⟩ := h y hy
-    exact ⟨x, hx⟩
-
-variable {ι}
-
-/-- In an exact sequence `A ⟶ B ⟶ C` of Weil sheaves whose outer terms have punctual weights at
-most `v`, so has the middle term: the stalks form an exact sequence of Frobenius modules
-(blueprint: `lem-zl-morphism-open-closed-reduction`, step 0, punctual form). -/
-theorem HasWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} (hS : S.Exact) {v : ℝ}
-    (h₁ : S.X₁.HasWeightsAtMost ι v) (h₃ : S.X₃.HasWeightsAtMost ι v) :
-    S.X₂.HasWeightsAtMost ι v := by
-  have := hS.epi_kernelLift
-  intro x
-  exact FrobeniusModule.HasWeightsAtMost.of_exact _ (stalkAtMap_frobenius _ _ _ (kernel.ι S.g))
-    _ (stalkAtMap_frobenius _ _ _ (Abelian.coimage.π S.g)) (injective_stalkAtMap _ _ _ _)
-    (range_stalkAtMap_eq_ker (ShortComplex.exact_cokernel (kernel.ι S.g)) _ _ _)
-    ((h₁.of_epi (kernel.lift S.g S.f S.zero)) x) ((h₃.of_mono (Abelian.factorThruCoimage S.g)) x)
-
-end WeilSheaf
-
-section CompactSupport
-
-/-- **Compactly supported cohomology as a direct image to the point.** For a separated
-`k₀`-scheme `X` of finite type and a morphism `f : X ⟶ Spec k₀` over `k₀` (that is, the structure
-morphism), `H_c^0(Spec k₀, Rʳf₀!F) ≅ H_c^r(X, F)` as Frobenius modules: `R(id)₀!` is concentrated
-in degree zero on Weil sheaves, and `R(f ≫ id)₀! ≅ R(id)₀! ∘ Rf₀!` (blueprint:
-`lem-zl-relative-curve-punctual`, the stalks of `Rʳf₀!F` over a point). -/
-theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_zero_higherLowerShriek
-    {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    (f : X ⟶ Spec (CommRingCat.of k₀)) [f.IsOver (Spec (CommRingCat.of k₀))]
-    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (F : WeilSheaf k₀ l X) (r : ℕ) :
-    Nonempty ((((WeilSheaf.higherLowerShriek k₀ l f r).obj F).compactlySupportedCohomology
-      0).Equiv (F.compactlySupportedCohomology r)) := by
-  have ha (G : WeilSheaf k₀ l (Spec (CommRingCat.of k₀))) (n : ℤ) (hn : n ≠ 0) :
-      IsZero ((WeilComplex.homologySheaf n).obj
-        ((WeilComplex.derivedLowerShriek k₀ l
-          (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))).obj
-            (WeilSheaf.toComplex.obj G))) := by
-    rcases lt_or_gt_of_ne hn with hn | hn
-    · exact WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg G hn
-    · obtain ⟨m, rfl⟩ : ∃ m : ℕ, n = m := ⟨n.toNat, (Int.toNat_of_nonneg hn.le).symm⟩
-      exact isZero_higherLowerShriek_of_quasiFinite
-        (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)) m (by exact_mod_cast hn) G
-  let L := (WeilComplex.derivedLowerShriek k₀ l f).obj (WeilSheaf.toComplex.obj F)
-  obtain ⟨e₂⟩ := WeilComplex.nonempty_homologySheaf_map_iso
-    (WeilComplex.derivedLowerShriek k₀ l
-      (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))) ha L r
-  obtain ⟨e₅⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) f
-    (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))
-  let E := (e₅.app _).symm ≪≫
-    (WeilComplex.derivedLowerShriekCongr (comp_over f _)).app (WeilSheaf.toComplex.obj F)
-  exact ⟨WeilSheaf.globalSectionsEquivOfIso
-    (e₂.symm ≪≫ (WeilComplex.homologySheaf r).mapIso E)⟩
-
-/-- **Compactly supported cohomology along a quasi-finite morphism.** For a separated
-quasi-finite morphism `f : X ⟶ Y` of separated `k₀`-schemes of finite type and a Weil sheaf `F`
-on `X`, `H_c^r(X, F) ≅ H_c^r(Y, f₀!F)` as Frobenius modules, for every `r`: `Rf₀!F` is `f₀!F`
-placed in degree zero, and `R(f ≫ a_Y)₀! ≅ R(a_Y)₀! ∘ Rf₀!` (blueprint: `lem-zl-quasi-finite`,
-`lem-zl-shriek-composition`). -/
-theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_higherLowerShriek_zero
-    {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
-    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyQuasiFinite f]
-    [LocallyOfFiniteType f] [QuasiCompact f] (F : WeilSheaf k₀ l X) (r : ℤ) :
-    Nonempty ((F.compactlySupportedCohomology r).Equiv
-      (((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).compactlySupportedCohomology r)) := by
-  -- `Rf₀!F` is `f₀!F` placed in degree zero
-  obtain ⟨e₂⟩ := WeilComplex.nonempty_iso_toComplex_homologySheaf_zero
-    ((WeilComplex.derivedLowerShriek k₀ l f).obj (WeilSheaf.toComplex.obj F)) fun b hb ↦ by
-      rcases lt_or_gt_of_ne hb with hb | hb
-      · exact WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg F hb
-      · obtain ⟨n, rfl⟩ : ∃ n : ℕ, b = n := ⟨b.toNat, (Int.toNat_of_nonneg hb.le).symm⟩
-        exact isZero_higherLowerShriek_of_quasiFinite f n (by exact_mod_cast hb) F
-  obtain ⟨e₅⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) f
-    (Y ↘ Spec (CommRingCat.of k₀))
-  let E := (WeilComplex.derivedLowerShriekCongr (comp_over f _).symm).app
-      (WeilSheaf.toComplex.obj F) ≪≫ e₅.app _ ≪≫
-    (WeilComplex.derivedLowerShriek k₀ l (Y ↘ Spec (CommRingCat.of k₀))).mapIso e₂
-  exact ⟨WeilSheaf.globalSectionsEquivOfIso ((WeilComplex.homologySheaf r).mapIso E)⟩
-
-end CompactSupport
 
 section AffineLine
 

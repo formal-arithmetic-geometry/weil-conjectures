@@ -696,6 +696,7 @@ public import WeilConjectures.ConstructibleSheaf.Restriction
 public import WeilConjectures.ConstructibleSheaf.Simple
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 public import WeilConjectures.Convergence
+public import WeilConjectures.DeligneLaumon.AffineLine.AffineCurveUpper
 public import WeilConjectures.DeligneLaumon.AffineLine.Concentration
 public import WeilConjectures.DeligneLaumon.AffineLine.ConstantTwist
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
@@ -717,6 +718,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.Upper
 public import WeilConjectures.DeligneLaumon.AffineLine.UpperReduction
 public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
 public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
+public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
 public import WeilConjectures.DeligneLaumon.Reduction.DirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
@@ -1494,6 +1496,10 @@ public import WeilConjectures.RingTheory.RelativeComponentGeneralization
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
+public import WeilConjectures.Scratch.All
+public import WeilConjectures.Scratch.F1
+public import WeilConjectures.Scratch.F2
+public import WeilConjectures.Scratch.Frontier
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting

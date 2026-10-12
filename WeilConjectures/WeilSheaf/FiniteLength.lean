@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AbelianIrreducible
-public import WeilConjectures.WeilSheaf.StalkFunctor
+public import WeilConjectures.WeilSheaf.LisseFiltration
 
 /-!
 # Lisse Weil sheaves have finite length
@@ -41,26 +41,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [IrreducibleSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
 
-variable (k₀ l X) in
-/-- The underlying `ℓ`-adic sheaf of a Weil sheaf, as a functor. -/
-noncomputable abbrev carrierFunctor :
-    WeilSheaf k₀ l X ⥤ ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  ObjectProperty.ι _ ⋙ IsoAlgebra.forget _
-
-instance : PreservesFiniteColimits (carrierFunctor k₀ l X) := by
-  have := (WeilSheaf.objectProperty k₀ l X).preservesCokernels_ι
-  have : PreservesFiniteColimits (WeilSheaf.objectProperty k₀ l X).ι :=
-    Functor.preservesFiniteColimits_of_preservesCokernels _
-  unfold carrierFunctor
-  infer_instance
-
-instance : PreservesFiniteLimits (carrierFunctor k₀ l X) := by
-  have := (WeilSheaf.objectProperty k₀ l X).preservesKernels_ι
-  have : PreservesFiniteLimits (WeilSheaf.objectProperty k₀ l X).ι :=
-    Functor.preservesFiniteLimits_of_preservesKernels _
-  unfold carrierFunctor
-  infer_instance
-
 /-- The cokernel of a morphism of lisse Weil sheaves is lisse, the geometric fiber being
 irreducible. -/
 theorem IsLisse.cokernel {F G : WeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.IsLisse)
@@ -86,14 +66,14 @@ theorem IsLisse.nontrivial_stalk {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (hF0 
   this
 
 /-- The rank of a Weil sheaf at a closed point: the dimension of its geometric stalk. -/
-noncomputable abbrev stalkRank (F : WeilSheaf k₀ l X) (x : X.finitePoints) : ℕ :=
+noncomputable abbrev finrankStalk (F : WeilSheaf k₀ l X) (x : X.finitePoints) : ℕ :=
   Module.finrank (PadicAlgCl l) (F.stalk x).carrier
 
 omit [IrreducibleSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber] in
 /-- A proper subobject of a Weil sheaf whose cokernel has a nonzero stalk at `x` has smaller
 rank at `x`. -/
-theorem stalkRank_lt_of_mono {G F : WeilSheaf k₀ l X} (i : G ⟶ F) [Mono i] (x : X.finitePoints)
-    (hQ : Nontrivial ((cokernel i).stalk x).carrier) : G.stalkRank x < F.stalkRank x := by
+theorem finrankStalk_lt_of_mono {G F : WeilSheaf k₀ l X} (i : G ⟶ F) [Mono i] (x : X.finitePoints)
+    (hQ : Nontrivial ((cokernel i).stalk x).carrier) : G.finrankStalk x < F.finrankStalk x := by
   let s := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x
   let m := (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1
   have hs := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
@@ -112,17 +92,17 @@ theorem stalkRank_lt_of_mono {G F : WeilSheaf k₀ l X} (i : G ⟶ F) [Mono i] (
     obtain ⟨z, hz⟩ := exists_ne (0 : ((cokernel i).stalk x).carrier)
     obtain ⟨y, rfl⟩ := hb z
     exact hz (LinearMap.mem_ker.1 (h ▸ Submodule.mem_top))
-  calc G.stalkRank x = Module.finrank _ (LinearMap.range a) :=
+  calc G.finrankStalk x = Module.finrank _ (LinearMap.range a) :=
         (LinearMap.finrank_range_of_inj ha).symm
     _ ≤ Module.finrank _ (LinearMap.ker b) := Submodule.finrank_mono hab
-    _ < F.stalkRank x := Submodule.finrank_lt hker
+    _ < F.finrankStalk x := Submodule.finrank_lt hker
 
 omit [IrreducibleSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber] in
 /-- The cokernel of a monomorphism from a sheaf with a nonzero stalk at `x` has smaller rank at
 `x`. -/
-theorem stalkRank_cokernel_lt {G F : WeilSheaf k₀ l X} (i : G ⟶ F) [Mono i]
+theorem finrankStalk_cokernel_lt {G F : WeilSheaf k₀ l X} (i : G ⟶ F) [Mono i]
     (x : X.finitePoints) (hG : Nontrivial (G.stalk x).carrier) :
-    (cokernel i).stalkRank x < F.stalkRank x := by
+    (cokernel i).finrankStalk x < F.finrankStalk x := by
   let s := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x
   let m := (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1
   have hs := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
@@ -141,10 +121,10 @@ theorem stalkRank_cokernel_lt {G F : WeilSheaf k₀ l X} (i : G ⟶ F) [Mono i]
     rw [h, Submodule.mem_bot] at this
     exact hy (ha (this.trans (map_zero a).symm))
   have h := LinearMap.finrank_range_add_finrank_ker b
-  have h2 : Module.finrank (PadicAlgCl l) (LinearMap.range b) = (cokernel i).stalkRank x := by
+  have h2 : Module.finrank (PadicAlgCl l) (LinearMap.range b) = (cokernel i).finrankStalk x := by
     rw [LinearMap.range_eq_top.2 hb, finrank_top]
     rfl
-  have h3 : F.stalkRank x = Module.finrank (PadicAlgCl l) (F.stalkAt s m hs).carrier := rfl
+  have h3 : F.finrankStalk x = Module.finrank (PadicAlgCl l) (F.stalkAt s m hs).carrier := rfl
   have hpos : 0 < Module.finrank (PadicAlgCl l) (LinearMap.ker b) :=
     Module.finrank_pos_iff.2 (Submodule.nontrivial_iff_ne_bot.2 hker)
   omega
@@ -167,7 +147,7 @@ theorem IsLisse.induction_on_shortExact {P : WeilSheaf k₀ l X → Prop}
   by_cases hF0 : IsZero F
   · exact zero F hF0
   obtain ⟨x, -⟩ := F.exists_nontrivial_stalk_of_not_isZero hF0
-  suffices key : ∀ n : ℕ, ∀ F : WeilSheaf k₀ l X, F.IsLisse → F.stalkRank x ≤ n → P F from
+  suffices key : ∀ n : ℕ, ∀ F : WeilSheaf k₀ l X, F.IsLisse → F.finrankStalk x ≤ n → P F from
     key _ F hF le_rfl
   intro n
   induction n with
@@ -176,7 +156,7 @@ theorem IsLisse.induction_on_shortExact {P : WeilSheaf k₀ l X → Prop}
     by_contra hP
     have hF0 : ¬ IsZero F := fun h ↦ hP (zero F h)
     have := hF.nontrivial_stalk hF0 x
-    have : 0 < F.stalkRank x := Module.finrank_pos
+    have : 0 < F.finrankStalk x := Module.finrank_pos
     omega
   | succ n ih =>
     intro F hF hn
@@ -201,8 +181,8 @@ theorem IsLisse.induction_on_shortExact {P : WeilSheaf k₀ l X → Prop}
         hi (inferInstanceAs (Epi (cokernel.π i)))
     refine extension _ hS hG hF hQ ?_ ?_
     · exact ih G hG (Nat.lt_succ_iff.1
-        ((stalkRank_lt_of_mono i x (hQ.nontrivial_stalk hQ0 x)).trans_le hn))
+        ((finrankStalk_lt_of_mono i x (hQ.nontrivial_stalk hQ0 x)).trans_le hn))
     · exact ih _ hQ (Nat.lt_succ_iff.1
-        ((stalkRank_cokernel_lt i x (hG.nontrivial_stalk hG0 x)).trans_le hn))
+        ((finrankStalk_cokernel_lt i x (hG.nontrivial_stalk hG0 x)).trans_le hn))
 
 end AlgebraicGeometry.WeilSheaf

@@ -9,7 +9,7 @@ public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
-public import WeilConjectures.WeilSheaf.StalkUpperStar
+public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 
 /-!
 # The local Frobenius of the Artin–Schreier sheaves
@@ -146,54 +146,6 @@ section UpperStar
 
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))]
-
-/-- **The local Frobenius of a pullback.** At a closed point `z` of `X` over `x = φ z`, the local
-Frobenius of `φ^* F` has the characteristic polynomial of `Fₓʳ`, `r = [κ(z) : κ(x)]`. -/
-theorem charpoly_frobeniusEnd_stalk_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l Y) (z : X.finitePoints) :
-    (((upperStar φ).obj F).stalk z).frobeniusEnd.charpoly =
-      ((F.stalk ⟨φ.base z.1, Scheme.Hom.map_mem_finitePoints φ z.2⟩).frobeniusEnd ^
-        ((X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1 /
-          (Y ↘ Spec (CommRingCat.of k₀)).degreeOver (φ.base z.1))).charpoly := by
-  have hφ := comp_over φ (Spec (CommRingCat.of k₀))
-  let x : Y.finitePoints := ⟨φ.base z.1, Scheme.Hom.map_mem_finitePoints φ z.2⟩
-  have hdvd : (Y ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ∣
-      (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1 := by
-    have := Scheme.Hom.degreeOver_dvd_degreeOver_comp φ (Y ↘ Spec (CommRingCat.of k₀)) z.2
-    rwa [hφ] at this
-  set s := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint z
-  have ht := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
-    (X ↘ Spec (CommRingCat.of k₀)) z
-  have ht' : (s ≫ Scheme.Hom.geometricFiberMap φ hφ) ≫
-      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom =
-      (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom ≫
-        (s ≫ Scheme.Hom.geometricFiberMap φ hφ) := by
-    rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow,
-      ← Category.assoc, ht, Category.assoc]
-  have : IsIso (𝟙 _ : (Scheme.Hom.geometricFiberMap φ hφ)^*[WeilCoefficients.{u} l].obj
-      F.obj.carrier.X ⟶ ((WeilSheaf.upperStar φ).obj F).obj.carrier.X) :=
-    inferInstanceAs (IsIso (𝟙 ((Scheme.Hom.geometricFiberMap φ hφ)^*[WeilCoefficients.{u} l].obj
-      F.obj.carrier.X)))
-  obtain ⟨e₁⟩ := nonempty_equiv_stalkAt_of_upperStar (G := (WeilSheaf.upperStar φ).obj F)
-    (θ := 𝟙 _) (upperStar_frobeniusStr_compatible (φ := φ) F) s _ ht ht'
-  have hbase : (((Y ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x) ≫
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
-        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) = x.1 :=
-    Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base _ x
-  have hss' : (((Y ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x) ≫
-      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
-        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) =
-      ((s ≫ Scheme.Hom.geometricFiberMap φ hφ) ≫
-        (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
-          (IsLocalRing.closedPoint (AlgebraicClosure k₀)) := by
-    rw [hbase, Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricFiberProj,
-      ← Category.assoc]
-    exact (congrArg φ.base
-      (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base _ z)).symm
-  exact e₁.charpoly_frobeniusEnd.trans (F.charpoly_frobeniusEnd_stalkAt_of_dvd _ _ hss'
-    (hbase ▸ x.2) hdvd
-    (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow _ x) ht')
 
 /-- The stalks of a pullback have the dimensions of the stalks below. -/
 theorem finrank_stalk_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]

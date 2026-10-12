@@ -27,7 +27,7 @@ an isomorphism.
 
 - `AlgebraicGeometry.WeilSheaf.dualTranspose`: the transpose `M ⟶ N^∨` of a morphism
   `N ⟶ M^∨` of Weil sheaves.
-- `AlgebraicGeometry.WeilSheaf.stalkRank_dual`: the dual of a lisse Weil sheaf has the same
+- `AlgebraicGeometry.WeilSheaf.finrankStalk_dual`: the dual of a lisse Weil sheaf has the same
   ranks.
 - `AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse.dual`.
 -/
@@ -117,15 +117,15 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 omit [IrreducibleSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber] in
 /-- A subobject of a Weil sheaf has at most the same rank at every closed point. -/
-theorem stalkRank_le_of_mono {G F : WeilSheaf k₀ l X} (i : G ⟶ F) [Mono i]
-    (x : X.finitePoints) : G.stalkRank x ≤ F.stalkRank x :=
+theorem finrankStalk_le_of_mono {G F : WeilSheaf k₀ l X} (i : G ⟶ F) [Mono i]
+    (x : X.finitePoints) : G.finrankStalk x ≤ F.finrankStalk x :=
   LinearMap.finrank_le_finrank_of_injective (injective_stalkAtMap _ _ _ i)
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [IrreducibleSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber] in
 /-- The dual of a lisse Weil sheaf has the same rank as the sheaf at every closed point. -/
-theorem stalkRank_dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (x : X.finitePoints) :
-    (F.dual hF).stalkRank x = F.stalkRank x := by
+theorem finrankStalk_dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (x : X.finitePoints) :
+    (F.dual hF).finrankStalk x = F.finrankStalk x := by
   obtain ⟨e⟩ := nonempty_equiv_stalk_dual hF x
   exact e.toLinearEquiv.finrank_eq.trans Subspace.dual_finrank_eq
 
@@ -138,13 +138,13 @@ theorem IsIrreducibleLisse.dual {M : WeilSheaf k₀ l X} (hM : M.IsIrreducibleLi
     (M.dual hM.1).IsIrreducibleLisse := by
   obtain ⟨hL, hM0, hirr⟩ := hM
   obtain ⟨x, hx⟩ := M.exists_nontrivial_stalk_of_not_isZero hM0
-  have hrk : 0 < M.stalkRank x := Module.finrank_pos
+  have hrk : 0 < M.finrankStalk x := Module.finrank_pos
   refine ⟨hL.dual, fun h ↦ ?_, fun N i hi hN ↦ ?_⟩
   · have h1 : ¬ Nontrivial ((M.dual hL).stalk x).carrier :=
       Set.eq_empty_iff_forall_notMem.1 (support_eq_empty_of_isZero h) x
     rw [not_nontrivial_iff_subsingleton] at h1
-    have h2 : (M.dual hL).stalkRank x = 0 := Module.finrank_zero_of_subsingleton
-    rw [stalkRank_dual] at h2
+    have h2 : (M.dual hL).finrankStalk x = 0 := Module.finrank_zero_of_subsingleton
+    rw [finrankStalk_dual] at h2
     omega
   by_cases hT : dualTranspose hL hN i = 0
   · left
@@ -159,13 +159,13 @@ theorem IsIrreducibleLisse.dual {M : WeilSheaf k₀ l X} (hM : M.IsIrreducibleLi
     · exact Preadditive.mono_of_kernel_zero (hK.eq_of_src _ _)
     · exact absurd (by rw [← cancel_epi (kernel.ι (dualTranspose hL hN i)), kernel.condition,
         comp_zero]) hT
-  have h1 := stalkRank_le_of_mono (dualTranspose hL hN i) x
-  have h2 := stalkRank_le_of_mono i x
-  rw [stalkRank_dual] at h1 h2
+  have h1 := finrankStalk_le_of_mono (dualTranspose hL hN i) x
+  have h2 := finrankStalk_le_of_mono i x
+  rw [finrankStalk_dual] at h1 h2
   have hQ : IsZero (cokernel i) := by
     by_contra hQ
-    have h3 := stalkRank_lt_of_mono i x ((hN.cokernel hL.dual i).nontrivial_stalk hQ x)
-    rw [stalkRank_dual] at h3
+    have h3 := finrankStalk_lt_of_mono i x ((hN.cokernel hL.dual i).nontrivial_stalk hQ x)
+    rw [finrankStalk_dual] at h3
     omega
   have : Epi i := Preadditive.epi_of_cokernel_zero (hQ.eq_of_tgt _ _)
   exact isIso_of_mono_of_epi i

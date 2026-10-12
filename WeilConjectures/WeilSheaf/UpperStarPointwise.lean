@@ -54,6 +54,25 @@ theorem isPureOfWeight_iff_of_charpoly_eq_pow [IsAlgClosed K] {ι : K →+* ℂ}
     Real.rpow_mul_natCast hq] at key
   exact (pow_left_inj₀ (norm_nonneg _) (Real.rpow_nonneg hq _) hr.ne').1 key
 
+/-- If the Frobenius of `N` has the characteristic polynomial of the `r`-th power of the
+Frobenius of `M`, `r ≥ 1`, and `M` has weights at most `w` relative to `q`, then `N` has weights
+at most `w` relative to `q ^ r`: every eigenvalue of `F_Mʳ` is the `r`-th power of an eigenvalue
+of `F_M`. -/
+theorem HasWeightsAtMost.of_charpoly_eq_pow [IsAlgClosed K] {ι : K →+* ℂ} {q : ℕ}
+    {M N : FrobeniusModule.{u, v} K} {w : ℝ} (h : M.HasWeightsAtMost ι q w) {r : ℕ} (hr : 0 < r)
+    (hMN : N.frobeniusEnd.charpoly = (M.frobeniusEnd ^ r).charpoly) :
+    N.HasWeightsAtMost ι (q ^ r) w := by
+  intro β hβ
+  rw [Module.End.hasEigenvalue_iff_isRoot_charpoly, hMN,
+    ← Module.End.hasEigenvalue_iff_isRoot_charpoly, Module.End.hasEigenvalue_iff_mem_spectrum,
+    spectrum.map_pow_of_pos _ hr] at hβ
+  obtain ⟨α, hα, rfl⟩ := hβ
+  rw [← Module.End.hasEigenvalue_iff_mem_spectrum] at hα
+  have hq : (0 : ℝ) ≤ q := Nat.cast_nonneg q
+  rw [map_pow, norm_pow, Nat.cast_pow, ← Real.rpow_natCast (q : ℝ), ← Real.rpow_mul hq,
+    mul_comm, Real.rpow_mul hq, Real.rpow_natCast]
+  exact pow_le_pow_left₀ (norm_nonneg _) (h α hα) r
+
 /-- If the Frobenius of `N` has the characteristic polynomial of a power of the Frobenius of an
 `ι`-real Frobenius module `M`, then `N` is `ι`-real: the traces of the powers of `F_Mʳ` are
 traces of powers of `F_M`, which are `ι`-real (`FrobeniusModule.isReal_iff_forall_trace_pow`). -/
@@ -122,6 +141,18 @@ theorem isPureOfWeight_stalk_upperStar_iff (φ : X ⟶ Y) [φ.IsOver (Spec (Comm
   rw [hq]
   exact (FrobeniusModule.isPureOfWeight_iff_of_charpoly_eq_pow hr
     (charpoly_frobeniusEnd_stalk_upperStar φ F z)).symm
+
+/-- **Pullbacks preserve upper weight bounds**: the local Frobenius of `φ^* F` at a closed point
+`z` has the characteristic polynomial of a power of that of `F` at `φ z`. -/
+theorem HasWeightsAtMost.upperStar {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l Y} {w : ℝ}
+    (h : F.HasWeightsAtMost ι w) (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] :
+    ((upperStar φ).obj F).HasWeightsAtMost ι w := by
+  intro z
+  obtain ⟨hr, hq⟩ := residueCard_eq_pow_of_upperStar (k₀ := k₀) φ z
+  rw [hq]
+  exact FrobeniusModule.HasWeightsAtMost.of_charpoly_eq_pow
+    (h ⟨φ.base z.1, Scheme.Hom.map_mem_finitePoints φ z.2⟩) hr
+    (charpoly_frobeniusEnd_stalk_upperStar φ F z)
 
 /-- **The pullback of an `ι`-real sheaf is `ι`-real**: the local Frobenius of `φ^* F` at a closed
 point `z` has the characteristic polynomial of a power of that of `F` at `φ z`. -/

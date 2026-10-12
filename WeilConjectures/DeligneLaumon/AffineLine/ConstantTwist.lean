@@ -8,6 +8,7 @@ module
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
 public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
+public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.FourierTateTwist.Transform
 
 /-!
@@ -53,22 +54,15 @@ section Equivalence
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- The constant twist by `b` as an endofunctor of Weil sheaves: the restriction of the constant
-twist `AlgebraicGeometry.ProEtaleWeilSheaf.constantTwist` of pro-étale Weil sheaves, which does
-not change the underlying sheaf. On objects it is isomorphic to `F ↦ F.constantTwist b`
-(`AlgebraicGeometry.WeilSheaf.constantTwistIsoConstantTwistFunctorObj`). -/
-noncomputable def constantTwistFunctor (b : (PadicAlgCl l)ˣ) :
-    WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l X :=
-  (WeilSheaf.objectProperty k₀ l X).liftFullSubcategory (WeilSheaf.objectProperty k₀ l X)
-    (ProEtaleWeilSheaf.constantTwist k₀ l X b) fun _ hF ↦ hF
-
 /-- The constant twist of Weil sheaves is an autoequivalence, with inverse the twist by the
-inverse automorphism. -/
+inverse automorphism. Its functor is the restriction of the constant twist
+`AlgebraicGeometry.ProEtaleWeilSheaf.constantTwist` of pro-étale Weil sheaves, which does not
+change the underlying sheaf. -/
 noncomputable def constantTwistEquivalence (b : (PadicAlgCl l)ˣ) :
     WeilSheaf k₀ l X ≌ WeilSheaf k₀ l X :=
   let E := IsoAlgebra.twistEquivalence (ProEtaleWeilSheaf.frobeniusPullbackSmulIso k₀ l X b)
   let P := WeilSheaf.objectProperty k₀ l X
-  { functor := constantTwistFunctor b
+  { functor := P.liftFullSubcategory P (ProEtaleWeilSheaf.constantTwist k₀ l X b) fun _ hF ↦ hF
     inverse := P.liftFullSubcategory P E.inverse fun _ hF ↦ hF
     unitIso := NatIso.ofComponents (fun F ↦ P.isoMk (E.unitIso.app F.obj)) fun _ ↦
       ObjectProperty.hom_ext _ (IsoAlgebra.hom_ext
@@ -80,13 +74,9 @@ noncomputable def constantTwistEquivalence (b : (PadicAlgCl l)ˣ) :
 
 /-- The constant twist `F.constantTwist b` is the image of `F` under the constant twist
 autoequivalence. -/
-noncomputable def constantTwistIsoConstantTwistFunctorObj (F : WeilSheaf k₀ l X)
+noncomputable def constantTwistIsoConstantTwistEquivalenceObj (F : WeilSheaf k₀ l X)
     (b : (PadicAlgCl l)ˣ) : F.constantTwist b ≅ (constantTwistEquivalence b).functor.obj F :=
   ObjectProperty.isoMk _ (F.constantTwistObjIso b)
-
-/-- Being lisse is invariant under isomorphism. -/
-theorem IsLisse.of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G) (h : F.IsLisse) : G.IsLisse :=
-  ProEtale.IsAdicLisseSheaf.of_iso ((IsoAlgebra.forget _).mapIso ((ObjectProperty.ι _).mapIso e)) h
 
 /-- Being irreducible lisse is invariant under isomorphism. -/
 theorem IsIrreducibleLisse.of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
@@ -117,7 +107,7 @@ an autoequivalence of Weil sheaves which does not change underlying sheaves. -/
 theorem IsIrreducibleLisse.constantTwist {F : WeilSheaf k₀ l X} (h : F.IsIrreducibleLisse)
     (b : (PadicAlgCl l)ˣ) : (F.constantTwist b).IsIrreducibleLisse :=
   (h.map_equivalence (constantTwistEquivalence b) fun _ ↦ Iff.rfl).of_iso
-    (F.constantTwistIsoConstantTwistFunctorObj b).symm
+    (F.constantTwistIsoConstantTwistEquivalenceObj b).symm
 
 end Equivalence
 
