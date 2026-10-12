@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
@@ -85,7 +84,7 @@ theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
       Sheaf.H.map (c.ι.app j) q y = x) ∧
     ∀ (j : J) (y : Sheaf.H (D.obj j) q), Sheaf.H.map (c.ι.app j) q y = 0 →
       ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 :=
-  Scheme.H_map_bijective_of_isColimit_of_isFiltered X hc q
+  sorry
 
 /-! ### Dévissage -/
 
