@@ -2,6 +2,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Restrict
+import Sheaf.AlgebraicGeometry.FlatModelFiniteFreeStructuralData
+import Sheaf.AlgebraicGeometry.FlatModelFiniteFreeQuasiIso
 
 @[expose] public section
 
@@ -36,6 +38,10 @@ theorem exists_local_finiteFree_construction {T : Scheme.{u}} (U : T.Opens)
             (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r))))) ∧
       ∃ (eP : P ⟶ ((Modules.pullback (T.homOfLE hVU)).mapHomologicalComplex _).obj C),
         QuasiIso eP := by
-  sorry
+  obtain ⟨V, hVU, P, hstruct⟩ :=
+    exists_local_finiteFree_structural_data U C Q d hCge hCle hCflat hQle hQfree e he t ht
+  refine ⟨V, hVU, P, hstruct, ?_⟩
+  exact exists_local_finiteFree_quasiIso U C Q d hCge hCle hCflat hQle hQfree e he t
+    V hVU P hstruct
 
 end AlgebraicGeometry.Scheme.Modules
