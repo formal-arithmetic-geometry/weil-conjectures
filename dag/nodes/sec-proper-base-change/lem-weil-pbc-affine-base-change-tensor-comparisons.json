@@ -13,17 +13,33 @@
  ],
  "proof": [
   {
-   "text": "Construct the first comparison from the pullback-tilde isomorphism and the tilde global-sections adjunction. Construct the second similarly after replacing B by R' ⊗[R] B. The unit formulas give the generator equations; the balancing relation gives the displayed tensor generators.",
+   "text": "Use the unit-compatible pullback-tilde comparison and tilde.isoTop to identify tensor products with global sections of the tensor pullback of a tilde module. For a quasi-coherent affine module, transport this comparison through the isomorphism fromTildeΓ; naturality of the pullback unit and fromTildeΓ_app_toOpen give the unit formula.",
+   "uses": [
+    "lem-weil-pbc-tilde-pullback-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib isIso_fromTildeΓ_pushforward makes pushforward of tilde quasi-coherent. Identify its global sections with the original module restricted to R using tilde.isoTop and pushforwardSpecMapCompΓIso. Tensor this identification with R′ and compose with the preceding comparison to construct a.",
+   "uses": [
+    "lem-weil-pbc-pushforward-tilde-spec",
+    "lem-weil-pbc-pushforward-spec-global-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the tilde tensor-pullback comparison over B to D = R′ tensor_R B, restrict scalars from D to R′, and use pushforwardSpecMapCompΓIso to construct b. The two unit formulas give the required equations; tensor balancing identifies (1 tensor z) tensor m with 1 tensor (z smul m).",
    "uses": [
     "lem-weil-pbc-tilde-pullback-base-change",
-    "lem-weil-pbc-pushforward-tilde-spec"
+    "lem-weil-pbc-pushforward-spec-global-sections"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-tilde-pullback-base-change",
-  "lem-weil-pbc-pushforward-tilde-spec"
+  "lem-weil-pbc-pushforward-tilde-spec",
+  "lem-weil-pbc-pushforward-spec-global-sections"
  ],
  "proof_origin": {
   "by": "agent",
@@ -96,11 +112,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H3",
+  "reviewer": "X-00e32",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T110305-L-616655",
+  "landing": "20261012T135223-L-1658072",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module and DAG node matched against the packet, baseline source, and importer; both modules compiled cleanly and axioms are limited to propext, Classical.choice, and Quot.sound."
  }
 }
