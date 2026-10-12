@@ -32,58 +32,51 @@
  ],
  "proof": [
   {
-   "text": "Write $\\pi:C_{k'}\\to C$; by [lem-sc-base-change-curve] $C_{k'}$ is a smooth separated connected curve over the algebraically closed field $k'$, and $n$ is prime to $\\operatorname{char}k'=\\operatorname{char}k$. The comparison map $c:\\pi^{-1}\\mathbf G_{m,C}\\to\\mathbf G_{m,C_{k'}}$ is adjoint to pullback of units, and it carries $\\pi^{-1}\\mu_{n,C}$ into $\\mu_{n,C_{k'}}$ and commutes with $t\\mapsto t^n$ because $t\\mapsto t^n$ commutes with every ring homomorphism (elementary). The source sequence $0\\to\\pi^{-1}\\mu_{n,C}\\to\\pi^{-1}\\mathbf G_{m,C}\\to\\pi^{-1}\\mathbf G_{m,C}\\to0$ is exact by [lem-sc-kummer-exact] for $C$ and clause 1 of [lem-weil-pbc-pullback-cohomology-long-exact-ladder]; the target Kummer sequence of $C_{k'}$ is exact by [lem-sc-kummer-exact] for $C_{k'}$. Hence $(c|_{\\mu_n},c,c)$ is a morphism of short exact sequences of abelian sheaves on $(C_{k'})_{\\Et}$. Clause 3 of the ladder makes $\\rho^q_{k'/k}$ a morphism from the Kummer long exact sequence of $C$ to that of the pulled-back sequence (commuting with $H^q$ of the sheaf maps and with the connecting maps), and the $\\delta$-functor property of $H^q((C_{k'})_{\\Et},-)$ as right derived functors of $\\Gamma(C_{k'},-)$ [lem-weil-pbc-right-derived-universal-delta-functor] makes $H^q(c|_{\\mu_n}),H^q(c),H^q(c)$ a morphism from the long exact sequence of the pulled-back sequence to that of the Kummer sequence of $C_{k'}$. Composing, the maps $H^q(c|_{\\mu_n})\\circ\\rho^q_{k'/k}(C,\\mu_n)$ and $H^q(c)\\circ\\rho^q_{k'/k}(C,\\mathbf G_m)$ form a morphism of long exact sequences. In degree zero, clause 2 of [lem-weil-pbc-cohomology-pullback-degree-zero] identifies $\\rho^0$ with pulling back global sections, so $H^0(c)\\circ\\rho^0$ is pullback of global units; the $H^1$ Picard interpretation is [lem-sc-h1-gm-pic-pullback] for $u=\\pi$. Finally [lem-sc-brauer-zero-all-curves] applies to both $C$ and $C_{k'}$, so [lem-sc-kummer-les] applies to both long exact sequences.",
+   "text": "Map the unit n in k to global sections of C and then along pi to global sections of P. Apply Kummer exactness to both schemes. The comparison of units commutes with n times the identity by additivity of inverse image. Its composite with the inverse image of the kernel inclusion is killed by n, so the kernel universal property gives the roots-of-unity component and its commuting square.",
    "uses": [
     "def-sc-kummer-sequence",
-    "lem-sc-kummer-exact",
-    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-    "lem-weil-pbc-cohomology-pullback-degree-zero",
-    "lem-sc-h1-gm-pic-pullback",
-    "lem-sc-kummer-les",
-    "lem-sc-brauer-zero-all-curves",
-    "lem-sc-base-change-curve",
-    "def-sc-field-extension",
-    "lem-weil-pbc-right-derived-universal-delta-functor"
+    "lem-sc-kummer-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
-    "place": "Proof, first paragraph: naturality of the Kummer sequence under base-field extension"
-   }
+   "elementary": true
   },
   {
-   "text": "Assume $C$ is affine. Choose a smooth compactification $\\overline C$ and boundary $S=\\overline C\\setminus C$, and fix $P_0\\in S$. The compactification, boundary, pullback of the divisor line bundles, and compatibility of the quotient presentations with the Jacobian base-change map are exactly [lem-sc-pic-affine-base-change-compatibility]. Thus the map on Picard groups is the map between $G/\\Lambda$ and $G'/\\Lambda'$ induced by $G=J_{\\overline C}(k)\\to G'=J_{\\overline C_{k'}}(k')$, and it carries $\\Lambda$ isomorphically to $\\Lambda'$. Clause (d) of [thm-av-final] makes multiplication by $n$ surjective on $G$ and $G'$, while clause (c) gives an isomorphism $G[n]\\xrightarrow{\\sim}G'[n]$. Apply [lem-sc-divisible-quotient-torsion] to both pairs $(G,\\Lambda)$ and $(G',\\Lambda')$: naturality of the quotient maps and of $\\delta(g+\\Lambda)=ng+n\\Lambda$ makes their exact sequences a commutative diagram. Its left and right vertical maps are isomorphisms, so the middle map is an isomorphism by exactness (or the short five lemma), namely $\\operatorname{Pic}(C)[n]\\xrightarrow{\\sim}\\operatorname{Pic}(C_{k'})[n]$.",
+   "text": "Apply the pullback cohomology long exact ladder to the Kummer sequence of C. Identify its connecting maps with Sheaf.H.deltaSucc using the given extClass formulas. Compose with Sheaf.H.map_deltaSucc for the constructed short-complex morphism. The other two squares follow by applying Sheaf.H.map to its commuting-square identities and using map_comp_apply.",
    "uses": [
-    "lem-sc-pic-affine-base-change-compatibility",
-    "thm-av-final",
-    "lem-sc-divisible-quotient-torsion"
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "def-sc-field-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
-    "place": "Proof, affine case: compactification, Jacobian quotient, and n-torsion comparison"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use the curve base-change theorem and the homeomorphism from the specified pullback square to the categorical pullback to give P its curve structure. Apply Picard cohomology pullback: its second clause proves the units formula. Represent a Picard class by its invertible skeleton representative. Tensor pullback and Modules.pullback are left adjoints to the same pushforward, hence naturally isomorphic; this identifies the class of tensor pullback with Pic.map. The first clause proves the degree-one formula.",
+   "uses": [
+    "lem-sc-base-change-curve",
+    "lem-sc-h1-gm-pic-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "When C is affine, define the subtype map by Pic.map pi and preservation of powers. Its bijectivity is [lem-sc-affine-picard-torsion-base-change], and its underlying-value formula is reflexivity.",
+   "uses": [
+    "lem-sc-affine-picard-torsion-base-change"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-kummer-sequence",
   "lem-sc-kummer-exact",
   "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-  "lem-weil-pbc-cohomology-pullback-degree-zero",
-  "lem-sc-h1-gm-pic-pullback",
-  "lem-sc-kummer-les",
-  "lem-sc-brauer-zero-all-curves",
   "def-sc-field-extension",
   "lem-sc-base-change-curve",
-  "lem-sc-pic-affine-base-change-compatibility",
-  "thm-av-final",
-  "lem-sc-divisible-quotient-torsion",
-  "lem-weil-pbc-right-derived-universal-delta-functor"
+  "lem-sc-h1-gm-pic-pullback",
+  "lem-sc-affine-picard-torsion-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
-  "place": "Proof, first paragraph and affine case"
+  "place": "Proof, first paragraph and affine case",
+  "note": "P1 stage-3 kernel construction and composition of the existing cohomology ladder; affine torsion split off."
  },
  "mathlib_searches": [
   {
@@ -189,5 +182,15 @@
   "group": "V1",
   "result": "fix",
   "note": "alg-closed k⊆k' via [Algebra k k'], smooth connected curve f, n≠0 in k; base change as IsPullback square; Kummer SES both sides; φ with τ₂=τ₃=upperStarGmSheafToGmSheaf; δ/f/g ladder via Etale.cohomologyMap; H^1 Pic and H^0 equiv₀ unit clauses; affine Pic[n] bijection tied to Pic.map π; reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-20abc",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T070545-L-3474868",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, cited dependencies, unit route, import-change record, and repaired return; both modules and all three direct importers compile cleanly, and axiom probes show only standard axioms plus sorryAx for the reported open dependencies."
  }
 }

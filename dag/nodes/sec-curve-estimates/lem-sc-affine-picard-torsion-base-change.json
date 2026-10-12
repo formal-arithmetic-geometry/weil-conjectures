@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-affine-picard-torsion-base-change",
+ "kind": "statement",
+ "title": "Canonical pullback on affine Picard n-torsion is bijective",
+ "statement": "Let $k\\subseteq k\\prime$ be algebraically closed fields [def-sc-field-extension], let $f:C\\to\\operatorname{Spec}k$ be a smooth connected affine curve [def-sc-curves], and let $P$ with projections $\\pi:P\\to C$ and $g:P\\to\\operatorname{Spec}k\\prime$ be a pullback square for this extension. For $n\\geq1$ nonzero in $k$, the canonical map $\\{L\\in\\operatorname{Pic}(C):L^n=1\\}\\to\\{M\\in\\operatorname{Pic}(P):M^n=1\\}$ sending $L$ to $\\pi^*L$ [def-sc-picard-group] is bijective.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Proper-case Kummer naturality sentence and affine-case Picard-torsion paragraph"
+ },
+ "stmt_deps": [
+  "def-sc-field-extension",
+  "def-sc-curves",
+  "def-sc-picard-group"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-compactification], choose a smooth proper connected compactification. By [thm-sc-jacobian-representability], choose its Jacobian. By [lem-sc-pic-affine-quotient], the boundary is nonempty; choose a boundary point, which is rational because k is algebraically closed. Apply the affine Picard base-change compatibility theorem to obtain presentations Pic(C)=G/Lambda and Pic(P)=Gprime/Lambdaprime, compatible with pullback and identifying the two boundary subgroups. Identify the degree-zero Picard groups G and Gprime with points of the Jacobians.",
+   "uses": [
+    "lem-sc-pic-affine-base-change-compatibility",
+    "thm-sc-jacobian-representability",
+    "lem-sc-compactification",
+    "lem-sc-pic-affine-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the algebraically closed abelian-variety estimate, clauses (c) and (d): n multiplication on G is surjective and the map on G[n] is bijective. Injectivity on points is elementary: a k-point is determined by its image point and its residue-field map to k; equality after extension recovers both, since k to kprime is injective. These properties are transported through the Jacobian identification.",
+   "uses": [
+    "thm-av-final"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Injectivity: a representative mapping into Lambdaprime is the image of some lambda in Lambda; injectivity on points makes the representatives equal. Surjectivity: for y with ny in Lambdaprime, lift ny to lambda in Lambda and divide lambda by n in G to obtain x. Then y-j(x) is n-torsion. Lift this difference through G[n] to t; the class of x+t is n-torsion and maps to the class of y. This is the representative form of the divisible-quotient-torsion exact sequence. Compatibility of the presentations identifies the resulting bijection with the stated subtype map.",
+   "uses": [
+    "lem-sc-divisible-quotient-torsion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport from the categorical pullback to the specified pullback square using its canonical isomorphism. Picard pullback along an isomorphism is a group isomorphism and preserves torsion. The formula for the subtype map holds by construction. For n=1 its source and target are singleton types; n=0 is excluded.",
+   "uses": [
+    "def-sc-field-extension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-pic-affine-base-change-compatibility",
+  "thm-sc-jacobian-representability",
+  "thm-av-final",
+  "lem-sc-divisible-quotient-torsion",
+  "def-sc-field-extension",
+  "lem-sc-compactification",
+  "lem-sc-pic-affine-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
+  "place": "Proof, first paragraph and affine case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Picard group torsion invariant algebraically closed field extension smooth affine curve",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard group n torsion base change affine curve",
+   "results": "WeierstrassCurve.Affine.Point.baseChange, WeierstrassCurve.Affine.Point.map, WeierstrassCurve.Affine.baseChange_slope, WeierstrassCurve.Affine.Point.map_baseChange, WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Affine.Equation.baseChange, WeierstrassCurve.Affine.Point.map_id, WeierstrassCurve.VariableChange.baseChange",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*torsion|torsion.*Picard",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Affine case: canonical pullback is bijective on Picard n-torsion",
+   "via": [
+    "lem-sc-kummer-base-change-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.AffinePicardTorsionBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/AffinePicardTorsionBaseChange.lean",
+  "declaration": "AlgebraicGeometry.affine_picard_torsion_base_change",
+  "statement": "theorem affine_picard_torsion_base_change\n    (k k' : Type u) [Field k] [Field k'] [IsAlgClosed k] [IsAlgClosed k'] [Algebra k k']\n    (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]\n    (P : Scheme.{u}) (π : P ⟶ C) (g : P ⟶ Spec (.of k'))\n    (hπ : IsPullback π g f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))\n    (n : ℕ) [NeZero n] (hn : (n : k) ≠ 0) :\n    Function.Bijective (fun x : {x : C.Pic // x ^ n = 1} =>\n      (⟨Scheme.Pic.map π x.1, by\n        change (Scheme.Pic.mapHom π x.1) ^ n = 1\n        rw [← map_pow, x.2, map_one]⟩ : {x : P.Pic // x ^ n = 1}))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-20abc",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T070545-L-3474868",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-20abc",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T070545-L-3474868",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, cited dependencies, unit route, import-change record, and repaired return; both modules and all three direct importers compile cleanly, and axiom probes show only standard axioms plus sorryAx for the reported open dependencies."
+ }
+}
