@@ -1,0 +1,201 @@
+{
+ "id": "lem-weil-pbc-zariski-pair-finite-gabber-polynomial-upstairs-relation",
+ "kind": "statement",
+ "title": "Gabber relation in a quotient after faithfully flat base change",
+ "statement": "Let A and B be commutative rings and B a finite A-algebra [def-weil-finitely-generated-module]. Let I be an ideal of A contained in its Jacobson radical. Suppose B/IB is compatibly a product of A/I-algebras B1 and B2, A/I to B1 is surjective, and b maps to (1,0). Then there is a commutative A-algebra C in the universe of A, faithfully flat over A, and d >= 1 such that 1 tensor the class of (b-1)b^d vanishes in C tensor_A (B/N_d). Here N_d is the range of the A-linear map from tuples (i_j) in I, j in Fin(d+1), sending the tuple to the sum i_j b^j.",
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0EM0 (lemma-helper-finite, line 2290) and its proof (uses Lemma 07M4 lemma-lift-idempotent-upstairs, Nakayama Algebra Lemma 00DV lemma-NAK, Algebra Lemma 00H5 lemma-integral-integral-over-ideal, and faithful flatness of the etale A -> A' whose image contains V(I): Algebra Lemma 05CK lemma-faithfully-flat-universally-injective, Proposition 00I1 proposition-fppf-open); Stacks writes the hypothesis as 'A/I -> B_1/IB_1 surjective', where B_1 is already an A/I-algebra, so B_1/IB_1 = B_1"
+ },
+ "proof": [
+  {
+   "text": "*Lifting the idempotent.* Write $\\bar e=(1,0)\\in B/IB=B_1\\times B_2$, an idempotent, which is the image of $b$. Since $B$ is a finitely generated $A$-module, $B$ is integral over $A$ [lem-weil-pbc-finite-algebra-is-integral]. By [lem-weil-pbc-lift-idempotent-upstairs] there are a ring map $A\\to A'$ with $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ etale such that $\\alpha:A/I\\to A'/IA'$ is an isomorphism, and an idempotent $e'\\in B':=B\\otimes_AA'$ whose image under $B'\\to B'/IB'=B\\otimes_A(A'/IA')\\xrightarrow{\\mathrm{id}\\otimes\\alpha^{-1}}B\\otimes_A(A/I)=B/IB$ is $\\bar e$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-lift-idempotent-upstairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), first sentence (Lemma 07M4)"
+   }
+  },
+  {
+   "text": "*The decomposition upstairs.* $B'$ is a finitely generated $A'$-module (if $b_1,\\dots,b_n$ generate $B$ over $A$, the $b_k\\otimes1$ generate $B'$ over $A'$). Put $B'_1=B'/(1-e')B'$ and $B'_2=B'/e'B'$; since $e'$ is idempotent, $B'\\to B'_1\\times B'_2$ is an isomorphism of $A'$-algebras, and both factors are finitely generated $A'$-modules. Reducing modulo $I$ and using the identification $B'/IB'\\cong B/IB$ of step 1, under which $e'\\mapsto\\bar e=(1,0)$, we get $B'_1/IB'_1\\cong(B/IB)/(1-\\bar e)=B_1$ and $B'_2/IB'_2\\cong(B/IB)/\\bar e=B_2$, compatibly with the structure maps from $A'/IA'\\cong A/I$. In particular the image $b'=(b'_1,b'_2)$ of $b$ in $B'$ satisfies $b'_1\\equiv1$ modulo $IB'_1$ and $b'_2\\in IB'_2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'Consider the corresponding A'-algebra decomposition B' = B'_1 x B'_2 which is compatible with the one given in the lemma upon reduction modulo I'"
+   }
+  },
+  {
+   "text": "*Nakayama.* Let $C$ be the cokernel of the $A'$-linear map $A'\\to B'_1$; it is a finitely generated $A'$-module (a quotient of $B'_1$). Since $C/IC$ is the cokernel of $A'/IA'\\to B'_1/IB'_1$, which by step 2 is the cokernel of the surjection $A/I\\to B_1$, we have $C=(IA')C$. By [lem-weil-pbc-nakayama-one-plus-ideal-annihilator] (applied to the ring $A'$ and the ideal $IA'$) there is $g\\in A'$ with $g-1\\in IA'$ and $gC=0$, i.e. $gy$ lies in the image of $A'$ for every $y\\in B'_1$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'The map A' -> B'_1 is surjective modulo IA'. By Nakayama's lemma (Algebra, Lemma 00DV) we can find i in IA' such that ...'"
+   }
+  },
+  {
+   "text": "*Replacing $A'$ by $A'':=A'_g$.* (a) $A\\to A''$ is flat: $A\\to A'$ is flat because it is etale [lem-weil-pbc-etale-algebra-flat], $A'\\to A'_g$ is flat as a localization [lem-weil-pbc-localization-flat], and a composite of flat ring maps is flat [lem-weil-pbc-flat-ring-map-comp]. (b) $A/I\\to A''/IA''$ is an isomorphism: $A''/IA''=(A'/IA')_{\\bar g}$ and $\\bar g=1$ in $A'/IA'$, so $A'/IA'\\to A''/IA''$ is an isomorphism, and we compose with $\\alpha$. (c) Put $B''=B\\otimes_AA''=B'\\otimes_{A'}A''=B'_g$ and $B''_k=(B'_k)_g$, so $B''=B''_1\\times B''_2$ as $A''$-algebras, each $B''_k$ is a finitely generated $A''$-module, and $B''_k/IB''_k\\cong B'_k/IB'_k$ (again because $g\\equiv1$ modulo $IA'$). The map $A''\\to B''_1$ is surjective: an element $y/g^n$ of $(B'_1)_g$ equals $(gy)/g^{n+1}$, and $gy$ is the image of some $a\\in A'$ by step 3, so $y/g^n$ is the image of $a/g^{n+1}$. (d) By step 2 the image $b''=(b''_1,b''_2)$ of $b$ in $B''$ satisfies $b''_1-1\\in IB''_1$ and $b''_2\\in IB''_2$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'after replacing A' by A'_{1+i} the map A' -> B'_1 is surjective'; 'The map A -> A' [is] flat because it is etale (Algebra, Lemma 00U2)'"
+   }
+  },
+  {
+   "text": "*The first component.* Since $A''\\to B''_1$ is surjective, $IB''_1$ is the image of $IA''$; so there is $a'\\in IA''$ mapping to $b''_1-1$, i.e. $b''_1-1-a'=0$ in $B''_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'Thus we may pick a' in IA' mapping to b'_1 - 1'"
+   }
+  },
+  {
+   "text": "*The second component.* $B''_2$ is a finitely generated $A''$-module, hence integral over $A''$ [lem-weil-pbc-finite-algebra-is-integral], and $b''_2\\in IB''_2=(IA'')B''_2$. By [lem-weil-pbc-integral-extended-ideal-element-monic] (Algebra, Lemma 00H5, applied to $A''\\to B''_2$ and the ideal $IA''$) there is a monic $g_2=x^e+\\sum_{j<e}c_jx^j\\in A''[x]$ with all $c_j\\in IA''$ and $g_2(b''_2)=0$. Put $d=e+1$ and $G=xg_2=x^d+\\sum_{j<d}c'_jx^j$ (so $c'_0=0$, $c'_j=c_{j-1}$); then $d\\ge1$, all $c'_j\\in IA''$ and $G(b''_2)=0$. (Stacks takes $g$ of degree $d$ directly; multiplying by $x$ ensures $d\\ge1$, which fails for $g_2$ only when $e=0$, i.e. $B''_2=0$.)",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-extended-ideal-element-monic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'By Algebra, Lemma 00H5 there exist a monic polynomial g(x) = x^d + sum a'_j x^j of degree d with a'_j in IA' such that g(b'_2) = 0'"
+   }
+  },
+  {
+   "text": "*A relation in $B''$.* Let $H=(x-1-a')G\\in A''[x]$. Its value at $b''=(b''_1,b''_2)$ is computed componentwise: the first factor vanishes at $b''_1$ (step 5) and $G$ vanishes at $b''_2$ (step 6), so $H(b'')=0$. Moreover $H-(x-1)x^d=(x-1)(G-x^d)-a'G$ has degree $\\le d$ and all its coefficients in $IA''$ (as $G-x^d$ has coefficients in $IA''$ and $a'\\in IA''$). Hence $(b''-1)(b'')^d\\in N'':=\\sum_{j=0}^dIA''\\cdot(b'')^j\\subseteq B''$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'Thus the image b' = (b'_1, b'_2) in B' of b is a root of the polynomial (x - 1 - a')g(x). We conclude that (b' - 1)(b')^d in sum IA' (b')^j'"
+   }
+  },
+  {
+   "text": "*$A\\to A''$ is faithfully flat.* Let $\\mathfrak m\\subset A$ be a maximal ideal. As $I$ lies in the Jacobson radical, $I\\subseteq\\mathfrak m$, so by step 4(b) $A''/\\mathfrak mA''\\cong(A''/IA'')/\\mathfrak m(A''/IA'')\\cong(A/I)/(\\mathfrak m/I)=A/\\mathfrak m\\neq0$. Since $A\\to A''$ is flat (step 4(a)), it is faithfully flat [lem-weil-pbc-flat-faithfully-flat-maximal-ideals]. (Stacks argues that the image of $\\operatorname{Spec}A''\\to\\operatorname{Spec}A$ is open (Proposition 00I1) and contains $V(I)$, hence every maximal ideal, hence is everything; the fact used is the same, that every maximal ideal of $A$ lies in $V(I)$ and is in the image, and the criterion Algebra Lemma 00HP makes the openness unnecessary.)",
+   "uses": [
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'For this it is enough to see that the ring map A -> A' is faithfully flat ... the image contains V(I). Since I is contained in the Jacobson radical of A we conclude'"
+   }
+  },
+  {
+   "text": "Let L send the tuple (i_j) in I^(d+1) to the sum of i_j b^j. Its range is the finite coefficient submodule N. Right exactness identifies C tensor (B/N) with the quotient by the extended N; the upstairs relation of step 7 therefore makes 1 tensor the class of (b-1)b^d zero. Descent is not part of this statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-lift-idempotent-upstairs",
+  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-integral-extended-ideal-element-monic",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EM0, construction preceding descent; positive degree ensured by multiplying the second-factor annihilator by X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "gabber|helper.finite|exists_etale_lift_isIdempotentElem",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No match for the upstairs construction; tensorProduct_mk_injective proves the separate descent step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite algebra Zariski pair relation vanishes in quotient module after faithfully flat etale extension preserving residue ring",
+   "results": "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField; Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Algebra.IsEtaleAt; Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-12",
+   "verdict": "No match for the upstairs construction; tensorProduct_mk_injective proves the separate descent step."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat, TensorProduct.mk",
+   "results": "Module.FaithfullyFlat.tensorProduct_mk_injective",
+   "date": "2026-10-12",
+   "verdict": "No match for the upstairs construction; tensorProduct_mk_injective proves the separate descent step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite algebra over a Zariski pair with an element lifting the idempotent (1,0) has a positive power relation after a faithfully flat extension preserving the quotient",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteGabberPolynomial",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zariski-pair-finite-gabber-polynomial",
+   "place": "steps 1-8 and the tensor-quotient identification in step 9",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteGabberPolynomialRelation",
+  "file": "lean/Sheaf/RingTheory/FiniteGabberPolynomialRelation.lean",
+  "declaration": "Algebra.exists_gabber_relation_after_base_change",
+  "statement": "theorem exists_gabber_relation_after_base_change\n    {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]\n    [Module.Finite A B] (I : Ideal A) (hI : I ≤ Ideal.jacobson ⊥)\n    (B₁ : Type w) (B₂ : Type z) [CommRing B₁] [CommRing B₂]\n    [Algebra (A ⧸ I) B₁] [Algebra (A ⧸ I) B₂]\n    (e : (B ⧸ I.map (algebraMap A B)) ≃+* (B₁ × B₂))\n    (he : ∀ a : A, e (Ideal.Quotient.mk (I.map (algebraMap A B)) (algebraMap A B a)) =\n      (algebraMap (A ⧸ I) B₁ (Ideal.Quotient.mk I a),\n        algebraMap (A ⧸ I) B₂ (Ideal.Quotient.mk I a)))\n    (h₁ : Function.Surjective (algebraMap (A ⧸ I) B₁))\n    (b : B) (hb : e (Ideal.Quotient.mk (I.map (algebraMap A B)) b) = (1, 0)) :\n    ∃ (C : CommRingCat.{u}) (f : A →+* C),\n      letI : Algebra A C := f.toAlgebra;\n      Module.FaithfullyFlat A C ∧ ∃ d : ℕ, 1 ≤ d ∧\n        let L : (Fin (d + 1) → I) →ₗ[A] B :=\n          ∑ j : Fin (d + 1), (I.subtype.comp (LinearMap.proj j)).smulRight (b ^ (j : ℕ));\n        TensorProduct.mk A C (B ⧸ LinearMap.range L) 1\n          ((LinearMap.range L).mkQ ((b - 1) * b ^ d)) = 0",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T060731-L-2903983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T060731-L-2903983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
