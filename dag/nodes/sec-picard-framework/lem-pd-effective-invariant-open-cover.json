@@ -1,0 +1,149 @@
+{
+ "id": "lem-pd-effective-invariant-open-cover",
+ "kind": "statement",
+ "title": "Effective descent glues along compatible invariant opens",
+ "statement": "Let p:X\\to Y be a singleton fpqc covering of schemes [def-weil-pbc-fpqc-covering] and let D be a transport descent datum [def-pd-descent-datum] on V\\to X. Let (U_i)_{i\\in I} be an open covering of V [def-weil-open-immersion]. For each i suppose a descent datum E_i on U_i\\to X is given, and the inclusion U_i\\to V intertwines its transport with D for every test scheme and pair of maps to X with equal image in Y. If each E_i is effective, then D is effective. No affine or finite morphism hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Descent, Lemma 35.35.13, Tag 0AP4, proof; transport formulation and general singleton fpqc covering"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-fpqc-covering",
+  "def-pd-descent-datum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "If needed, select one covering open for each point of V to obtain a small index type. Choose an effective model W_i over Y and a transport-invariant cartesian projection q_i:U_i -> W_i for each E_i. Transport compatibility of the inclusions identifies each E_i with the restriction of D. Inverse transport supplies reverse invariance. Thus each intersection U_i intersect U_j is invariant under the restricted data.",
+   "uses": [
+    "def-pd-descent-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The projection q_i is a base change of the fpqc cover p. Identify its double pullback with the two transports on U_i, using the effective pullback square. The invariance of U_i intersect U_j says its preimages under the two projections agree. Apply open-subscheme fpqc descent to obtain a unique open W_ij of W_i whose inverse image is U_i intersect U_j.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity of U_i intersect U_j intertwines the two restricted data. Under the effective pullback identifications it is a compatible base-change morphism between W_ij and W_ji. Fpqc descent of morphisms supplies a unique transition isomorphism; descend the inverse likewise. Injectivity gives the inverse, identity and triple cocycle laws. The descended preimages of the triple intersections agree by uniqueness of descended opens.",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend",
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Scheme.GlueData to glue the W_i along W_ij and the transition isomorphisms to a scheme W. Their structure morphisms to Y agree on overlaps by fpqc faithfulness, so glue to W -> Y. The projections U_i -> W_i -> W agree on overlaps and glue to q:V -> W. Their cartesian squares identify the open cover U_i of V with the base changes of the covering W_i of W. The local identifications and their inverses glue to an isomorphism V = W times_Y X, so the resulting square is cartesian. For any test-scheme point a of V, restrict its source to the inverse images of the U_i. On each such open transport compatibility and invariance of q_i give invariance of q; morphism extensionality on an open cover gives it globally. Thus W and q witness D.IsEffective. If V is empty, use the empty Y-scheme, whose pullback is empty; transport invariance is unique.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Descent, Tag 0AP4, proof; the omitted cocycle and local transport checks are written out in transport form"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Effective descent data on invariant open subschemes glue to effective descent data on a scheme",
+   "results": "UNAVAILABLE: Internal Server Error from service; no verdict assigned.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme descent datum is effective if an invariant open covering has effective descent on every open",
+   "results": "EffectiveEpiFamily and effective presentations, not scheme effectiveness from invariant opens. Scheme.GlueData and open-cover morphism gluing are available ingredients.",
+   "verdict": "No exact existing theorem found.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "DescentDatum; isEffective_of; effective.*cover in Mathlib/AlgebraicGeometry, lean/Sheaf and lean/WeilConjectures; 0AP4 in dag/nodes; blueprint_refs.py search 0AP4",
+   "results": "No existing general invariant-open effectivity theorem. The assigned affine-neighbourhood criterion is a different statement. Existing Scheme.GlueData is only the final scheme-gluing ingredient; no imported blueprint node matches 0AP4.",
+   "verdict": "No duplicate statement found.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing schemes that represent a descent datum on a covering by open subobjects with effective restricted data",
+   "results": "Second reading: Scheme.Cover.gluedCover, Scheme.Cover.glueMorphisms, Scheme.GlueData, RelativeGluingData.glued and LocalRepresentability.glueData; inspected local representability declarations as ingredients.",
+   "verdict": "No duplicate effective-open-cover descent theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.GlueData",
+   "results": "Second reading: twelve gluing construction/interface declarations, none asserting effectiveness of a transport datum from an invariant open cover.",
+   "verdict": "No duplicate statement.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InvariantAffineDescentGluing",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-effective-descent",
+   "place": "proof: glue effective descents on invariant affine neighbourhoods, Stacks 0AP4",
+   "via": [
+    "lem-pd-invariant-affine-descent-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InvariantOpenEffectiveDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantOpenEffectiveDescent.lean",
+  "declaration": "CategoryTheory.Over.DescentDatum.isEffective_of_effective_open_cover",
+  "statement": "theorem isEffective_of_effective_open_cover {X Y : Scheme.{u}} {p : X ⟶ Y} (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage Y) {V : Over X} (D : Over.DescentDatum p V) {I : Type v} (U : I → V.left.Opens) (hcover : ∀ x : V.left, ∃ i, x ∈ U i) (E : ∀ i, Over.DescentDatum p (Over.mk ((U i).ι ≫ V.hom))) (hcompat : ∀ (i : I) {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ Over.mk ((U i).ι ≫ V.hom)), ((E i).transport f₁ f₂ h a).left ≫ (U i).ι = (D.transport f₁ f₂ h (Over.homMk (a.left ≫ (U i).ι) (by simpa only [Over.mk_hom, Category.assoc] using Over.w a))).left) (heffective : ∀ i, (E i).IsEffective) : D.IsEffective",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "def-pd-descent-datum",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T085225-L-8472",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T085225-L-8472",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
