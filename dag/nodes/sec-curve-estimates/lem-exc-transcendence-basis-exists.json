@@ -1,0 +1,111 @@
+{
+ "id": "lem-exc-transcendence-basis-exists",
+ "kind": "statement",
+ "title": "Existence of a transcendence basis",
+ "statement": "Let $F\\to E$ be a field extension [def-pc-field-extension]. There exists a subset $B\\subseteq E$ whose inclusion is a transcendence basis over $F$ [def-weil-pbc-transcendence-basis].",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 030F (lemma-transcendence-degree), existence part; read https://stacks.math.columbia.edu/tag/030F"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-transcendence-basis"
+ ],
+ "proof": [
+  {
+   "text": "Apply Zorn to algebraically independent subsets. A union of a chain is independent since every polynomial uses finitely many variables. Maximality forces every element to be algebraic over the generated rational function field. Mathlib exists_isTranscendenceBasis gives this directly; scalar multiplication in a field extension is faithful.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 030F (lemma-transcendence-degree), existence part; read https://stacks.math.columbia.edu/tag/030F"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every field extension has a transcendence basis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every field extension has a transcendence basis",
+   "results": "exists_isTranscendenceBasis found; signature inspected in the pinned Mathlib source",
+   "date": "2026-10-12",
+   "verdict": "exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "exists_isTranscendenceBasis",
+   "results": "exists_isTranscendenceBasis found",
+   "date": "2026-10-12",
+   "verdict": "exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isTranscendenceBasis|isAlgClosure_of_transcendence_basis",
+   "results": "TranscendenceBasis.lean:58 and Classification.lean:50, source read",
+   "date": "2026-10-12",
+   "verdict": "exact match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "exists_isTranscendenceBasis",
+  "file": "Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis.lean",
+  "how": "Exact field specialization of the declaration; source read at TranscendenceBasis.lean:58-61"
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.GaloisAutomorphismExtension",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "Galois action on a geometric stalk: extend an automorphism to the algebraically closed overfield; transcendence-basis step",
+   "via": [
+    "lem-exc-galois-automorphism-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis",
+  "declaration": "exists_isTranscendenceBasis",
+  "statement": "theorem exists_isTranscendenceBasis (R : Type*) (A : Type*) [CommRing R] [CommRing A] [Algebra R A] [FaithfulSMul R A] : ∃ s : Set A, IsTranscendenceBasis R ((↑) : s → A)",
+  "branch": "mathlib",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T160138-L-2564981",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T160138-L-2564981",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
