@@ -15,31 +15,38 @@
  ],
  "proof": [
   {
-   "text": "For each object take its fibre product with X′ over X. Lift the transported original point and the new structure map to define transport. Projecting to both factors verifies naturality, self-transport, and the cocycle.",
+   "text": "For each datum A, take the concrete chosen pullback V_A = A.V ×_X X′. Apply exists_canonical_pullback_descent_datum with g = r≫a to equip V_A with its datum E_A and its base-change equation. The witness is selected from an already proved theorem; the pullback projection equations also uniquely determine its transport.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-pd-descent-datum"
+    "lem-galois-fpqc-canonical-pullback-datum"
    ],
    "elementary": false
   },
   {
-   "text": "Take the usual fibre-product map on morphisms; compatibility, identity, composition, the cartesian square and the two comparison equations follow from the universal property and the original compatibility.",
+   "text": "For f:A→B define its pullback map by lifting (fst≫f.hom.left,snd). To check transport compatibility, compare both projections. For fst, apply the base-change equations for A and B, the original compatibility f.commutes, and associativity; for snd, both maps are over the same new base point. Pullback hom_ext and OverMorphism.ext give the equality.",
    "uses": [
     "def-pc-fibre-product",
     "def-pd-descent-datum"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Identity and composition of the lifted maps follow by comparing the two pullback projections. These maps define F. Set q_A = fst; pullback.condition supplies its commutativity equation, IsPullback.of_hasPullback gives the cartesian square, the chosen datum supplies IsBaseChange, and pullback.lift_fst gives q naturality.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-galois-fpqc-canonical-pullback-datum",
   "def-pc-fibre-product",
   "def-pd-descent-datum"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "023Y(1), construction of the pullback functor",
-  "note": "Transport-form details supplied from the cited argument. Second reading found the proved object-level construction AlgebraicGeometry.exists_canonical_pullback_descent_datum (lem-galois-fpqc-canonical-pullback-datum). Use it for the object datum when its module enters the last green build; the functor-on-morphisms extension remains part of this node."
+  "place": "Tag 023Y(1), pullback construction",
+  "note": "J3: reuse the proved canonical objectwise datum, then directly construct morphism maps and prove compatibility and functor laws by the two pullback projections. No new holes or statements."
  },
  "mathlib_searches": [
   {
@@ -185,11 +192,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-e2404",
-  "group": "T2",
+  "reviewer": "COMPILER",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T070553-L-3478150",
-  "kind": "interface",
-  "note": "independent Codex review: Delivery packet, node records, report, and compiled Lean files match the stage-3 review requirements; target statement is byte-for-byte unchanged."
+  "landing": "20261012T095910-L-319489",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
