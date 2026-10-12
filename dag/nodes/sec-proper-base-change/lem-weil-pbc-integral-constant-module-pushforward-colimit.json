@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "*Finite approximation of $\\nu$.* $X$ is Noetherian, hence quasi-compact and quasi-separated, and $\\nu$ is integral, so by [lem-weil-pbc-integral-morphism-limit-of-finite] $Y=\\lim_{i\\in I}Y_i$ for a directed inverse system of finite (and finitely presented) $X$-schemes $\\nu_i:Y_i\\to X$ with affine transition morphisms $t_{i'i}$ and projections $p_i:Y\\to Y_i$. The morphisms $\\nu_i$ (finite) and $\\nu$ (integral) are affine, hence quasi-compact and quasi-separated [def-weil-finite-integral-morphism]. (Stacks: 'we write $Y=\\lim Y_i$ with $Y_i$ ... finite over $Z$'; the $Y_i$ there are finite over $Z$, here finite over $X$, which is what the node needs; Stacks' extra 'irreducible, integral' is used only for the 'Moreover' clause, not part of this node.)",
+   "text": "Choose a finite approximation F of nu using Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom (the version of the existing approximation theorem without finite presentation, which is not needed here). Noetherian X is compact and quasi-separated. The index F.I is small and cofiltered; F.p gives finite structure maps; F.D has affine transitions, F.pi is a limit cone and F.pi_p identifies its structure map with nu.",
    "uses": [
     "lem-weil-pbc-integral-morphism-limit-of-finite",
     "def-weil-finite-integral-morphism"
@@ -26,36 +26,43 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 09Z6 (1), lines 12999-13006, using Properties Lemma 0817 / Limits Lemma 09YZ"
+    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
    }
   },
   {
-   "text": "*$\\nu_*\\underline M$ is the colimit of the finite pushforwards.* On $Y_i$ take the constant sheaves $\\underline M_{Y_i}$, with the transition maps $t_{i'i}^{-1}\\underline M_{Y_i}\\xrightarrow{\\sim}\\underline M_{Y_{i'}}$ the canonical isomorphisms of [lemma-constructible-pullback-constant]; then $p_i^{-1}\\underline M_{Y_i}\\cong\\underline M_Y$ compatibly, so $\\operatorname{colim}_ip_i^{-1}\\underline M_{Y_i}$ is the colimit of a diagram of isomorphisms onto $\\underline M_Y$ over the directed (nonempty, connected) set $I$, i.e. $\\underline M_Y$. By [sbc-lem-higher-direct-image-limit] in degree $p=0$ (with $S=X$, $g_i=\\nu_i$, $g=\\nu$; hypotheses checked in the previous step) the canonical map $\\operatorname{colim}_i\\nu_{i,*}\\underline M_{Y_i}\\to\\nu_*\\underline M_Y$ is an isomorphism of abelian sheaves; its components are the $\\Lambda$-linear maps $\\nu_{i,*}$(unit$)$ composed with the identifications above, and filtered colimits in $\\Mod(X_{\\Et},\\Lambda)$ [def-weil-pbc-category-colimit] are computed on underlying abelian sheaves (both are sheafifications of the sectionwise colimit, and a filtered colimit of $\\Lambda$-modules is computed on the underlying groups), so $\\nu_*\\underline M_Y=\\operatorname{colim}_i\\nu_{i,*}\\underline M_{Y_i}$ in $\\Mod(X_{\\Et},\\Lambda)$. (Stacks: 'Then $f_*\\underline E=\\colim f_{i,*}\\underline E$ by Lemma 09Z1'.) The small cofiltered-category approximation may be replaced by a cofinal directed inverse system to use the directed-poset statement of the relative colimit theorem; finality preserves the resulting colimit. Record the finite stage objects, their direct-image diagram and its colimit cocone; the result does not involve a constructible source F.",
+   "text": "Reverse F.I. Define D by constantModulePushforwardDiagram and c by constantModulePushforwardCocone. The identity and composition laws and cocone naturality follow from the two parts of the functoriality theorem. The stage objects are definitionally the finite constant-module pushforwards, so take Iso.refl at every stage.",
    "uses": [
-    "lemma-constructible-pullback-constant",
-    "sbc-lem-higher-direct-image-limit",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-direct-image"
+    "lem-weil-pbc-constant-module-pushforward-functoriality"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 09Z6 (1), lines 13006-13007, Lemma 09Z1 (lemma-relative-colimit, line 7535) in degree 0"
+    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
+   }
+  },
+  {
+   "text": "All stage structure maps are finite and hence affine and qcqs; nu is integral and hence affine and qcqs. Apply isColimit_constantModulePushforwardCocone to F.isLimit. Return F.I^op, the stages F.D.obj, F.p, D, the identity stage isomorphisms, and c.iota. Cocone.mk with these legs is definitionally c, so this closes exactly the original existential conclusion.",
+   "uses": [
+    "lem-weil-pbc-constant-module-pushforward-limit",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-integral-morphism-limit-of-finite",
   "def-weil-finite-integral-morphism",
-  "lemma-constructible-pullback-constant",
-  "sbc-lem-higher-direct-image-limit",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-direct-image"
+  "lem-weil-pbc-constant-module-pushforward-functoriality",
+  "lem-weil-pbc-constant-module-pushforward-limit",
+  "lem-weil-pbc-integral-morphism-limit-of-finite"
  ],
  "proof_origin": {
-  "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09Z6 proof of (1), finite approximation paragraph, using Tags 09YZ and 09Z1, transferred to (3)"
+  "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008",
+  "by": "agent"
  },
  "mathlib_searches": [
   {
@@ -129,11 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2f722",
-  "group": "U1",
+  "reviewer": "COMPILER",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T022144-L-1050150",
+  "landing": "20261012T042419-L-1820990",
   "kind": "interface",
-  "note": "independent Codex review: Matched all five Lean declarations with their nodes and the Stacks 09Z6/09Z1 route; existing signature unchanged, node changes confined to proof fields, compilation clean, axioms limited to the standard three plus sorryAx from recorded open obligations."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

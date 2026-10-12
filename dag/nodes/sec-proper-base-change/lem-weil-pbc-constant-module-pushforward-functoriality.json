@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-constant-module-pushforward-functoriality",
+ "kind": "statement",
+ "title": "ConstantModulePushforwardFunctoriality",
+ "statement": "For every commutative ring Lambda in universe u+1 and every Lambda-module M, the map from f1_* M_Y1 to f2_* M_Y2 associated to g:Y2 -> Y1 over X is defined by the inverse-image unit, the canonical constant-sheaf comparison [lemma-constructible-pullback-constant], and direct-image composition [def-weil-pbc-direct-image]. This map preserves identity and composition contravariantly in g. No finiteness assumptions are imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-category-colimit",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof": [
+  {
+   "text": "For g:Y2 -> Y1 over X, take the inverse-image unit at the constant M-sheaf, followed by g_* of the canonical comparison g^* M_Y1 -> M_Y2. Push this map forward by f1 and compose with the canonical g_* f1_* composition comparison. This is exactly constantModulePushforwardMap.",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
+   }
+  },
+  {
+   "text": "Under the constant-sheaf/global-sections adjunction, the canonical pullback comparison preserves the section with each value m. On etale U over X the resulting map is restriction along U times_X Y2 -> U times_X Y1. Restrictions along an identity are identities, and along a composite are the composites in reverse order. This holds on the constant presheaves and extends uniquely to their sheafifications. The pushforward comparison is the fibre-product pasting map, so the identity and composition equalities are the asserted ones. Equivalently, take mates under the inverse-image adjunction and use its unit and composition coherence; the uniqueness of the constant-sheaf comparison gives the same mates.",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z1, degree-zero transition maps and continuity; Tag 09Z6, finite approximation paragraph, lines 12999-13008",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback maps constant module pushforward functorial cofiltered limit sheaves",
+   "results": "Service unavailable: Internal Server Error. LeanFinder and Loogle were also run.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\"",
+   "results": "CategoryTheory.constantSheaf, constantSheafAdj, constantCommuteCompose. These supply constant sheaves and adjunctions but not scheme-over-base transition functoriality or inverse-limit continuity.",
+   "date": "2026-10-12",
+   "verdict": "tools only, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(Comp|comp)|colimit.*constantSheaf; sheaf.*[Cc]olimit",
+   "results": "Mathlib CategoryTheory/Sites/ConstantSheaf.lean has constantCommuteCompose; Condensed/Discrete/Colimit.lean concerns a different site. Source ConstantSheafMap.lean proves functoriality only for the monoidal unit Lambda, not general M.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical maps between pushforwards of constant module sheaves preserve composition and identity",
+   "results": "SheafOfModules.unitToPushforwardObjUnit, pushforwardSections_unitHomEquiv, pushforwardNatTrans_app_val_app: constructions for ringed sites, not the given general constant M maps.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralConstantModulePushforwardColimit",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Tag 09Z6 finite approximation paragraph: form the finite direct-image diagram and use Tag 09Z1 for its colimit",
+   "via": [
+    "lem-weil-pbc-integral-constant-module-pushforward-colimit",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantModulePushforwardFunctoriality.lean",
+  "declaration": "AlgebraicGeometry.Etale.constantModulePushforwardMap_id_comp",
+  "statement": "theorem constantModulePushforwardMap_id_comp\n    (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ) :\n    (∀ {X Y : Scheme.{u}} (f : Y ⟶ X),\n      constantModulePushforwardMap Λ M f f (𝟙 Y) (Category.id_comp f) = 𝟙 _) ∧\n    (∀ {X Y₁ Y₂ Y₃ : Scheme.{u}} (f₁ : Y₁ ⟶ X) (f₂ : Y₂ ⟶ X) (f₃ : Y₃ ⟶ X)\n      (g : Y₂ ⟶ Y₁) (g' : Y₃ ⟶ Y₂) (h : g ≫ f₁ = f₂) (h' : g' ≫ f₂ = f₃),\n      constantModulePushforwardMap Λ M f₁ f₃ (g' ≫ g)\n          (by rw [Category.assoc, h, h']) =\n        constantModulePushforwardMap Λ M f₁ f₂ g h ≫\n          constantModulePushforwardMap Λ M f₂ f₃ g' h')",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T042419-L-1820990",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T042419-L-1820990",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

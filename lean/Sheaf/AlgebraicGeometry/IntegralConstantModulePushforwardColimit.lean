@@ -9,6 +9,9 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
+
+import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
+import Sheaf.AlgebraicGeometry.ConstantModulePushforwardLimit
 import Sheaf.AlgebraicGeometry.HigherDirectImageLimitSystem
 import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
@@ -63,6 +66,14 @@ theorem exists_filtered_colimit_finite_lowerStar_constant
         ∃ (η : D ⟶ (Functor.const I).obj
           ((lowerStar (ModuleCat.{u + 1} Λ) ν).obj
             ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))),
-          Nonempty (IsColimit (Cocone.mk _ η)) := by sorry
+          Nonempty (IsColimit (Cocone.mk _ η)) := by
+  obtain ⟨F⟩ := ν.nonempty_finiteApproximation_of_isIntegralHom
+  let D := constantModulePushforwardDiagram Λ M F.D F.p F.map_p
+  let c := constantModulePushforwardCocone Λ M F.D F.p F.map_p ν F.π F.π_p
+  refine ⟨F.Iᵒᵖ, inferInstance, inferInstance,
+    (fun i ↦ F.D.obj i.unop), (fun i ↦ F.p i.unop),
+    (fun i ↦ F.isFinite_p i.unop), D, (fun i ↦ ⟨Iso.refl _⟩), c.ι, ?_⟩
+  exact isColimit_constantModulePushforwardCocone Λ M F.D F.p F.map_p ν F.π F.π_p
+    F.isLimit
 
 end AlgebraicGeometry.Etale
