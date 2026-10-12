@@ -27,43 +27,52 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-closed-immersion-pushforward-exact], applying the direct-image functor defined by $(i_*A)(U)=A(U\\cap Z)$ to the given short exact sequence produces a short exact sequence $0\\to i_*F\\to i_*E\\to i_*\\mathbf Z_Z\\to0$. Pulling it back along the restriction morphism $u:\\mathbf Z_X\\to i_*\\mathbf Z_Z$ gives the displayed sequence $0\\to i_*F\\to P\\to\\mathbf Z_X\\to0$ with $P=i_*E\\times_{i_*\\mathbf Z_Z}\\mathbf Z_X$.",
+   "text": "Use the underlying closed embedding directly. At a point i(z), Mathlib stalkPushforward_iso_of_isInducing identifies all three pushed-forward stalks with the original stalks; the germ formulas verify that both maps commute with these isomorphisms. Outside the closed image, restrict a germ representative to the complement of the image; its inverse image is empty and the sheaf has zero sections there, so every pushed-forward stalk is zero. Apply lem-sc-abelian-sheaf-short-exact-stalkwise to conclude short exactness.",
    "uses": [
-    "lem-sc-closed-immersion-pushforward-exact",
-    "def-sc-topological-abelian-cohomology"
+    "def-weil-closed-immersion",
+    "def-sc-zariski-site",
+    "lem-sc-abelian-sheaf-short-exact-stalkwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Lemma 01AX (modules-lemma-i-star-exact), exactness of direct image; pullback of a short exact sequence along u is the defining pullback construction"
+    "place": "Tag 01AX, proof by stalks; Mathlib.Topology.Sheaves.Stalks and Abelian"
    }
   },
   {
-   "text": "For every open $U\\subseteq X$, a section of the fibre of $P$ over $1\\in\\mathbf Z_X(U)$ is exactly a section $e\\in E(U\\cap Z)$ satisfying $p(e)=1|_{U\\cap Z}$, because $u(1)$ is the restricted locally constant integer section. By the definition of $T$ as the fibre of $E\\to\\mathbf Z_Z$ over $1$, these sections are exactly $T(U\\cap Z)=(i_*T)(U)$. The identifications commute with restriction maps and with translation by $F(U\\cap Z)=(i_*F)(U)$, so they assemble to a canonical isomorphism of $i_*F$-torsors $P\\times_{\\mathbf Z_X,1}*\\cong i_*T$.",
+   "text": "Restrict the sheafification unit of the constant integer presheaf on Z along inverse-image opens. Its naturality gives a map of presheaves from the constant presheaf on X to the pushed-forward constant sheaf. The universal property of sheafification constructs r, and toSheafify_sheafifyLift proves the required formula on each integer section. Construct k as pullback.lift of the pushed-forward inclusion and zero. Its projections are the inclusion and zero. In an abelian category pullback.snd is epi since the original projection is epi, and k is mono since its composite with pullback.fst is mono. Exactness follows by applying exact_up_to_refinements to the first projection of any map killed by the second projection, then using pullback.hom_ext.",
    "uses": [
-    "def-weil-closed-immersion",
-    "def-sc-zariski-site",
-    "def-sc-topological-abelian-cohomology",
-    "def-sc-gm-torsor"
+    "def-sc-zariski-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01AX and the pullback of an extension; Mathlib sheafification and abelian pullback universal properties"
+   }
+  },
+  {
+   "text": "First projection sends the pullback fibre over the restricted global section s to the pushforward fibre over q. The pullback equation and r(s)=q verify membership; naturality of first projection verifies restrictions. Apply sheafToPresheaf, evaluation, and forget to the pullback square. These preserve pullbacks. Types.ext_of_isPullback gives injectivity on the fibres, since both second projections are s. Types.exists_of_isPullback lifts (e,s), giving surjectivity. The resulting natural transformation is pointwise an isomorphism and hence yields a sheaf isomorphism whose value is first projection. For s=q=1, naturality of the constant presheaf sheafification unit gives r(s)=q on each open. Finally, lifts.vadd adds the kernel inclusion, so additivity of first projection and k followed by first projection equal to the pushed-forward inclusion prove the translation formula by Subtype.ext.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "def-sc-zariski-site"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 02FQ (cohomology-lemma-torsors-h1), fibre over 1; Lemma 02UV (cohomology-lemma-cohomology-and-closed-immersions), direct-image section formula"
+    "place": "Tags 02FQ and 02UV, fibre-of-an-extension and direct-image section formula"
    }
   }
  ],
  "proof_deps": [
-  "lem-sc-closed-immersion-pushforward-exact",
-  "def-sc-topological-abelian-cohomology",
   "def-weil-closed-immersion",
   "def-sc-zariski-site",
+  "lem-sc-abelian-sheaf-short-exact-stalkwise",
   "def-sc-gm-torsor"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemmas 02UV and 02FQ; direct-image exactness and fibre-over-1 construction"
+  "place": "Tags 02UV and 02FQ; Modules Tag 01AX; fully proved private helpers implement the stalk and sectionwise arguments using Mathlib."
  },
  "mathlib_searches": [
   {
@@ -142,5 +151,15 @@
   "group": "S1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-57a50",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T150953-L-2230930",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged Lean signature and completed proof match the node and updated proof dependencies; delivery and sole direct importer Sheaf.AlgebraicGeometry.UnitsTorsorClosedRestriction compile cleanly; all five proved declarations use only propext, Classical.choice, and Quot.sound."
  }
 }
