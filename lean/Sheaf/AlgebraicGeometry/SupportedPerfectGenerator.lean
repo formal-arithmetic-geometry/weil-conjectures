@@ -9,13 +9,10 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Topology.QuasiSeparated
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality
-import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
-import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffine
+import Sheaf.AlgebraicGeometry.SupportedPerfectDetectorGluing
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
 
 /-! # Perfect generators with support
 
@@ -89,6 +86,42 @@ theorem supported_perfect_generator (X : Scheme.{u})
           Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K.obj).val.presheaf x))) →
         (IsZero K.obj ↔ ∀ n : ℤ, Subsingleton (E.obj⟦n⟧ ⟶ K.obj)) := by
-  sorry
+  classical
+  refine ⟨supported_qcoh_isTriangulated X T, ?_⟩
+  have detectors : ∀ (m : ℕ) (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y]
+      [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+      [∀ U : Y.Opens,
+        HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]
+      (s : Finset Y.affineOpens), s.card = m →
+      (⨆ U ∈ s, (U : Y.Opens)) = ⊤ →
+      ∀ (S : Set Y), IsClosed S → IsCompact Sᶜ →
+        ∃ E : schemeDerivedQCohCategory Y, Scheme.IsPerfect Y E.obj ∧
+          (∀ (n : ℤ) (x : Y), x ∉ S →
+            Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
+              (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj E.obj).val.presheaf x))) ∧
+          ∀ K : schemeDerivedQCohCategory Y,
+            (∀ (n : ℤ) (x : Y), x ∉ S →
+              Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
+                (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj K.obj).val.presheaf x))) →
+            (∀ n : ℤ, Subsingleton (E.obj⟦n⟧ ⟶ K.obj)) → IsZero K.obj := by
+    intro m
+    induction m using Nat.strong_induction_on with
+    | h m ih =>
+      intro Y _ _ _ _ s hm hcover S hS hSc
+      by_cases hsmall : s.card ≤ 1
+      · exact supported_perfect_detector_affine Y s hcover hsmall S hS hSc
+      · refine supported_perfect_detector_gluing Y s hcover (by omega) ?_ S hS hSc
+        intro Z _ _ _ _ t ht htcover R hR hRc
+        exact ih t.card (hm ▸ ht) Z t rfl htcover R hR hRc
+  obtain ⟨s, hs, hcover⟩ :=
+    (isCompact_iff_finite_and_eq_biUnion_affineOpens (X := X) (U := ⊤)).mp
+      (by simpa using (isCompact_univ : IsCompact (Set.univ : Set X)))
+  obtain ⟨E, hE, hET, hdetect⟩ :=
+    detectors hs.toFinset.card X hs.toFinset rfl (by simpa using hcover.symm) T hT hTc
+  refine ⟨E, hE, hET, ?_⟩
+  intro K hKT
+  refine ⟨?_, hdetect K hKT⟩
+  intro hK n
+  exact ⟨fun f g ↦ hK.eq_of_tgt f g⟩
 
 end AlgebraicGeometry
