@@ -6,7 +6,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.RingTheory.SmoothAlgebraFilteredColimitDescent
+import Sheaf.AlgebraicGeometry.SmoothStageAffineModel
+import Sheaf.AlgebraicGeometry.SmoothStageGluing
 
 /-!
 # Eventual smoothness in a noetherian approximation
@@ -53,6 +54,8 @@ theorem Scheme.NoetherianApproximation.exists_smooth_stage {S : Scheme.{u}}
     (p : Y ⟶ N.D.obj i) [LocallyOfFinitePresentation p] [QuasiCompact p]
     [QuasiSeparated p] (f : X ⟶ S) [Smooth f] (a : X ⟶ Y)
     (H : IsPullback a f p (N.π.app i)) :
-    ∃ j : Over i, Smooth (pullback.snd p (N.D.map j.hom)) := by sorry
+    ∃ j : Over i, Smooth (pullback.snd p (N.D.map j.hom)) := by
+  apply Scheme.NoetherianApproximation.smooth_stage_of_affine_models N p f a H
+  exact Scheme.NoetherianApproximation.exists_smooth_affine_model N p f a H
 
 end AlgebraicGeometry
