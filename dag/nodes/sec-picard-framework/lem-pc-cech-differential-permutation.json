@@ -14,21 +14,23 @@
  ],
  "proof": [
   {
-   "text": "expand both differentials as signed face sums. For a permutation σ and a deleted position j, put k = σ⁻¹(j), and let τ be the induced permutation of the remaining positions, so σ ∘ k.succAbove = j.succAbove ∘ τ. Moving j and k to the last position shows (-1)^j sign(τ) = sign(σ) (-1)^k. Apply the assumed transformation law to the jth face, then reindex the sum by k. The two restriction composites agree since opens form a poset. Restriction preserves finite sums and integer scalar multiplication, giving exactly the asserted equality. This proof does not require the tuple to be injective, nor division by two; it also works for p = 0 and for an empty index type.",
+   "text": "Expand differentialValue and move the presheaf map and integer scalar across the sum. Reindex the left sum by sigma. For each k use Fin.signed_face_permutation to obtain tau and its sign identity; apply the equivariance hypothesis to the sigma(k)-deleted face. Combine the two restrictions using functoriality; the indexMap composites agree because opens form a thin category. Rewrite the face identity and the sign identity, yielding the matching summand.",
    "uses": [
-    "def-weil-pbc-site-cech-complex"
+    "def-weil-pbc-site-cech-complex",
+    "lem-pc-signed-face-permutation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-site-cech-complex"
+  "def-weil-pbc-site-cech-complex",
+  "lem-pc-signed-face-permutation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Section 20.23, Tag 01FG: verification omitted immediately before Definition 01FH; signed extension preceding Lemma 01FJ",
-  "note": "Expands the verification expressly omitted by Stacks; isolates one of the two invariants needed for differential stability."
+  "note": "Q1 second reading: full Lean proof from the proved deleted-index sign lemma; no expansion restatement and no sorry remain."
  },
  "mathlib_searches": [
   {
@@ -108,9 +110,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T173840-L-3299514",
+  "landing": "20261012T184332-L-4015461",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

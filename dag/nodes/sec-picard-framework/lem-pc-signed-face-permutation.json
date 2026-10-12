@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-signed-face-permutation",
+ "kind": "statement",
+ "title": "Sign of the permutation induced on deleted finite indices",
+ "statement": "Let n be a natural number, sigma a permutation of Fin(n+1), and k in Fin(n+1). There exists a permutation tau of Fin(n) such that sigma(k.succAbove(a)) = (sigma(k)).succAbove(tau(a)) for every a, and (-1)^(sigma(k)) sign(tau) = sign(sigma) (-1)^k as integers.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FG",
+  "place": "Omitted verification of differential stability, expanded using Mathlib.GroupTheory.Perm.Fin and Mathlib.GroupTheory.Perm.Option"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Form pi by moving k to zero before applying sigma, then moving sigma(k) to zero. It fixes zero. Transport with finSuccEquiv and use Equiv.removeNone to construct tau; map_equiv_removeNone identifies tau.optionCongr with the transported pi. Fin.cycleRange_symm_succ and cycleRange_succAbove give the face identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Equiv.optionCongr_sign and Equiv.Perm.sign_permCongr identify sign(tau) with sign(pi). Apply sign_trans, sign_symm and Fin.sign_cycleRange to compute sign(pi). Multiply by (-1)^(sigma(k)); its square is one. This also covers n=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01FG",
+  "place": "Omitted verification before Definition 20.23.1",
+  "note": "Q1 second reader expands the deleted-index sign calculation using Mathlib; fully proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The permutation induced by deleting k and sigma k has sign (-1)^(k+sigma k) times sign sigma",
+   "results": "decomposeFin.symm_sign and signAux lemmas found; none states the ordered-deletion identity. Used the existing cycleRange and optionCongr tools instead.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.Perm.sign, Fin",
+   "results": "sign_cycleRange and decomposition sign lemmas; no signed succAbove identity. Online sign_decomposeFin'Symm is absent from the pinned local Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "succAbove.*sign|sign.*succAbove|signed_face_permutation",
+   "results": "No hit in Mathlib. Direct searches in both library roots found no existing deleted-index sign theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sign of the induced permutation on the complement of one element of Fin",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CechDifferentialPermutation",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-differential-permutation",
+   "place": "Deleted-index permutation and sign step of the signed-face proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Combinatorics.SignedFacePermutation",
+  "file": "lean/Sheaf/Combinatorics/SignedFacePermutation.lean",
+  "declaration": "Fin.signed_face_permutation",
+  "statement": "theorem signed_face_permutation (n : ℕ) (σ : Equiv.Perm (Fin (n + 1)))\n    (k : Fin (n + 1)) :\n    ∃ τ : Equiv.Perm (Fin n),\n      (∀ a, σ (k.succAbove a) = (σ k).succAbove (τ a)) ∧\n      (-1 : ℤ) ^ (σ k).val * (Equiv.Perm.sign τ : ℤ) =\n        (Equiv.Perm.sign σ : ℤ) * (-1 : ℤ) ^ k.val",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T184332-L-4015461",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T184332-L-4015461",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
