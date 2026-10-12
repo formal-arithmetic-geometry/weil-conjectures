@@ -6,19 +6,9 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.CategoryTheory.ColimitSiteSections
-import Sheaf.CategoryTheory.SiteCechVanishingCriterion
-import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Paper.ColimitSitesInjectiveSystem
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleLimitAcyclicReplacement
+import Sheaf.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 
 /-! # Degree reduction for etale limit cohomology
 
@@ -33,6 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
 /-- A connecting-map ladder lowers a successor-degree descent problem by one.
 
 Source: Stacks Project, Cohomology on Sites, proof of Tag 09YP via the
@@ -141,6 +132,35 @@ theorem etale_limit_cohomology_connecting_ladder
         AddCommGrpCat.ofHom (Sheaf.H.map ((eGR i).inv ≫ LR.ι.app i) n)),
       ∃ (δ : BR.pt ⟶ B.pt) (δstage : ∀ i : I, HR.obj i ⟶ H.obj i),
         Function.Surjective δ.hom ∧
-        (∀ i : I, δstage i ≫ B.ι.app i = BR.ι.app i ≫ δ) := by sorry
+        (∀ i : I, δstage i ≫ B.ι.app i = BR.ι.app i ≫ δ) := by
+  classical
+  obtain ⟨FR, φR, hidentityR, hcompositionR, GR, eGR, hGR, LR, hLR,
+      E, a, b, w, hE, d, hdformula, hacyclic, beta, hbeta⟩ :=
+    etale_limit_acyclic_replacement
+      D c hc F φ hidentity hcomposition G eG hG L hL n
+  obtain ⟨HR, eHR, hHR, BR, eBR, hBR⟩ :=
+    etale_limit_canonical_cohomology_diagram
+      D c FR φR hidentityR hcompositionR GR eGR hGR LR n
+  have hd : Function.Surjective d.hom := by
+    let := hacyclic
+    intro x
+    obtain ⟨y, hy⟩ := Abelian.Ext.covariant_sequence_exact₁ _ hE x
+      (Subsingleton.elim _ _) rfl
+    exact ⟨y, (hdformula y).trans hy⟩
+  let δ : BR.pt ⟶ B.pt := eBR.hom ≫ d ≫ eB.inv
+  let δstage (i : I) : HR.obj i ⟶ H.obj i := (eHR i).hom ≫ beta i ≫ (eH i).inv
+  refine ⟨FR, φR, hidentityR, hcompositionR, GR, eGR, hGR, LR, hLR,
+    HR, eHR, hHR, BR, eBR, hBR, δ, δstage, ?_, ?_⟩
+  · have : Epi d := (AddCommGrpCat.epi_iff_surjective d).mpr hd
+    exact (AddCommGrpCat.epi_iff_surjective δ).mp (by dsimp [δ]; infer_instance)
+  · intro i
+    apply (cancel_mono eB.hom).mp
+    dsimp [δstage, δ]
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [hB i]
+    simp only [Iso.inv_hom_id_assoc]
+    rw [← Category.assoc (BR.ι.app i), hBR i]
+    simpa only [Category.assoc] using congrArg (fun z ↦ (eHR i).hom ≫ z) (hbeta i)
+
 
 end AlgebraicGeometry.Etale

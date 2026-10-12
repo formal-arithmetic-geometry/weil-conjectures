@@ -18,73 +18,35 @@
  ],
  "proof": [
   {
-   "text": "Choose injective embeddings F_k -> A_k. Define E_i as the product of direct images of A_k over arrows i -> k. Adjunction transposes the maps F_i -> E_i and gives their compatibility. The identity component proves they are monomorphisms. Exact inverse image implies direct image preserves injectives; products of injectives are injective. Take the stage cokernels R_i and cancel their epimorphisms to prove the unit and cocycle laws.",
+   "text": "Apply the acyclic replacement to obtain FR, its compatible inverse-image diagram and colimit, a short exact sequence L -> E -> LR, its extension-class boundary d and the untransported stage boundaries beta. Apply the canonical degree-n cohomology diagram construction to FR, GR and LR to obtain HR and BR.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites-injective-system",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-site-pullback-abelian-exact"
+    "lem-weil-pbc-etale-limit-acyclic-replacement",
+    "lem-weil-pbc-etale-limit-canonical-cohomology-diagram"
    ],
    "elementary": false
   },
   {
-   "text": "Pull these systems to the limit and take filtered sheaf colimits. Exactness gives 0 -> L -> LE -> LR -> 0 with its canonical coprojection maps.",
+   "text": "For x in H^(n+1)(L), the map to H^(n+1)(E) is zero because that group is subsingleton. Ext.covariant_sequence_exact₁ supplies y in H^n(LR) with y composed with the extension class equal to x. The boundary formula identifies d(y)=x, so d is surjective. Conjugate d by eBR.hom and eB.inv to obtain delta; epi_iff_surjective and isomorphism invariance prove surjectivity of delta.",
    "uses": [
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-site-pullback-abelian-exact"
+    "lem-weil-pbc-sheaf-ext-cohomology-long-exact"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use the qcqs etale basis on the limit. Descend each finite affine covering and its object to a stage using the affine-site colimit presentation. On a cofinal tail all its iterated covering fibre products are qcqs systems. Apply the full degree-zero section comparison from 09YN (including its equality criterion) on each, with the same prescribed units; finite products give the Cech-complex colimit. The stage injective Cech complexes are positively acyclic, exact filtered group colimits preserve this, and cofinal finite qcqs coverings permit the Cech criterion. Thus LE has zero positive object cohomology at every qcqs object, including the terminal object. This step uses no higher-degree continuity.",
-   "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-    "lem-weil-pbc-site-injective-cech-acyclic",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-site-cech-vanishing-criterion",
-    "lem-weil-pbc-colimit-of-sites-sections",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "lem-weil-pbc-pretopology-sheaf-condition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Form HR and BR from R in degree n. Cohomology pullback functoriality gives the diagram and canonical cocone laws. The long exact sequence of step 2 gives a surjective limit connecting map since H^(n+1)(LE)=0. The stage sequences give delta_i. Connecting-map naturality for inverse image and for coefficient morphisms identifies their square with the canonical legs. Conjugate by the specified eH and eB to obtain delta, delta_i and the final equality.",
-   "uses": [
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-derived-functor-long-exact",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-cohomology-pullback"
-   ],
-   "elementary": false
+   "text": "Define delta_stage_i=eHR_i.hom followed by beta_i followed by eH_i.inv. Cancel eB.hom from the desired square. Rewrite hB and hBR, cancel inverse/hom pairs and reassociate. Precompose the untransported hbeta square by eHR_i.hom; this is the resulting equality. Package FR and all its supplied witnesses together with these maps. No inductive descent result is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-colimit-of-sites-injective-system",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-  "lem-weil-pbc-site-injective-cech-acyclic",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-site-cech-vanishing-criterion",
-  "lem-weil-pbc-colimit-of-sites-sections",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-pretopology-sheaf-condition",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-cohomology-pullback"
+  "lem-weil-pbc-etale-limit-acyclic-replacement",
+  "lem-weil-pbc-etale-limit-canonical-cohomology-diagram",
+  "lem-weil-pbc-sheaf-ext-cohomology-long-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/09YP",
-  "place": "Explicit scheme translation of the degree-zero and dimension-shifting parts of 09YP/0739, retaining finite qcqs covers."
+  "place": "Dimension shifting via Tag 0739: Lean proof of long-exact-sequence surjectivity and transport of connecting maps, from separate acyclic replacement and canonical diagram statements."
  },
  "mathlib_searches": [
   {
@@ -167,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-9abe6",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T085234-L-12487",
+  "landing": "20261012T112835-L-766146",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files, node metadata, statements, proofs, report, full compilation, and direct importer reader-gate check matched the stage-3 brief."
  }
 }
