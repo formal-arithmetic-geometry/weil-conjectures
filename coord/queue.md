@@ -19,10 +19,10 @@
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-nagata-relative-gluing-valid-stage` | 2 | state | 5 |
+| `def-nagata-finite-presentation-descent` | 3 | state | 3 |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
 
-Not open yet: 42 nodes that wait for stage 1, 4 nodes that wait for a statement dependency.
+Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (96)
 
@@ -47,13 +47,13 @@ Not open yet: 42 nodes that wait for stage 1, 4 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ConstantExtensionCover` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues` | 3 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ModuleSubobjectGenericConstancy` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineClosedEtaleNeighborhoodComparison` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferCore` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferRetract` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekReduction` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InjectiveModuleSheafHCohomology` | 4 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ModuleSubobjectGenericNeighbourhood` | 4 | 1 | proof |
 | `Sheaf.ConstructibleSheaf.LocallyConstantCoverFiltration` | 4 | 1 | proof |
 | `Sheaf.ConstructibleSheaf.LocallyConstantRetraction` | 4 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyIso` | 4 | 1 | proof |
