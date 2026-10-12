@@ -6,8 +6,6 @@ Authors: SHEAF group K1
 module
 
 public import Mathlib.AlgebraicGeometry.ResidueField
-public import Mathlib.AlgebraicGeometry.AffineScheme
-public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-! # Morphisms from a field spectrum and residue fields
 
@@ -47,7 +45,9 @@ theorem spec_field_point_residue_field
         (Spec R).residue p ∧
     RingHom.ker (algebraMap R p.asIdeal.ResidueField) = p.asIdeal ∧
     IsFractionRing (R ⧸ p.asIdeal) p.asIdeal.ResidueField := by
-  sorry
+  refine ⟨⟨Scheme.Spec.residueFieldIso R p⟩, ?_, ?_, inferInstance⟩
+  · exact Scheme.Spec.algebraMap_residueFieldIso_inv R p
+  · exact Ideal.ker_algebraMap_residueField p.asIdeal
 
 /-- Stacks, Schemes, discussion before 01J9 and its following diagram
 (blueprint: lem-weil-pbc-spec-field-point-residue-field), clause (2).
@@ -68,7 +68,18 @@ theorem spec_field_point_residue_field_affine_open
       X.fromSpecResidueField x =
         Spec.map (CommRingCat.ofHom (algebraMap Γ(X, U) p.asIdeal.ResidueField) ≫ e.inv) ≫
           hU.fromSpec := by
-  sorry
+  have hx' : x ∈ Set.range hU.fromSpec := by
+    rw [hU.range_fromSpec]
+    exact hx
+  obtain ⟨p, rfl⟩ := hx'
+  let e := asIso (hU.fromSpec.residueFieldMap p) ≪≫
+    Scheme.Spec.residueFieldIso Γ(X, U) p
+  refine ⟨p, rfl, e, ?_, ?_⟩
+  · simp [e]
+  · simp only [e, Iso.trans_inv, asIso_inv, Spec.map_comp, Category.assoc]
+    rw [Scheme.Spec.map_residueFieldIso_inv_eq_fromSpecResidueField_assoc]
+    rw [← Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField hU.fromSpec p]
+    simp
 
 /-- Stacks, Schemes, discussion before 01J9; Algebra, 00E2 and 00CT
 (blueprint: lem-weil-pbc-spec-field-point-residue-field), clause (3).
