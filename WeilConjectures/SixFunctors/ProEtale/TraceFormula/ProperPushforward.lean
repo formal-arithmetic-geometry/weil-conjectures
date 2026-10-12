@@ -166,6 +166,63 @@ lemma fixMap_ι : P.fixMap ≫ equalizer.ι P.fst P.snd = c.fixι ≫ P.g :=
 lemma fixMap_str : P.fixMap ≫ equalizer.ι P.fst P.snd ≫ P.str = c.fixStr := by
   rw [← Category.assoc, fixMap_ι, Category.assoc, P.g_comp_str, Correspondence.fixStr]
 
+/-- The inclusion `Fix(b) ⟶ D` of the fixed scheme of the target is a closed immersion when
+`Y` is separated over `s`: it is the base change of the diagonal of `a_Y` along
+`b = (b₁, b₂) : D ⟶ Y ×_s Y`. -/
+instance isClosedImmersion_equalizer_ι [IsSeparated P.tgtStr] :
+    IsClosedImmersion (equalizer.ι P.fst P.snd) :=
+  MorphismProperty.of_isPullback (P := @IsClosedImmersion)
+    (isPullback_equalizer_ι_diagonal P.fst P.snd (P.fst_comp.trans P.snd_comp.symm)).flip
+    (inferInstanceAs (IsClosedImmersion (pullback.diagonal P.tgtStr)))
+
+/-- The first factor `κ = (i_c, h) : Fix(c) ⟶ C ×_D Fix(b)` of the factorisation
+`h = π ∘ κ` of the induced map on fixed schemes, where `π : C ×_D Fix(b) ⟶ Fix(b)` is the base
+change of `g` (part of blueprint `lem-trf-fixed-map-proper`). -/
+noncomputable def fixMapFactor : c.fix ⟶ pullback P.g (equalizer.ι P.fst P.snd) :=
+  pullback.lift c.fixι P.fixMap P.fixMap_ι.symm
+
+@[reassoc (attr := simp)]
+lemma fixMapFactor_snd :
+    P.fixMapFactor ≫ pullback.snd P.g (equalizer.ι P.fst P.snd) = P.fixMap :=
+  pullback.lift_snd _ _ _
+
+@[reassoc (attr := simp)]
+lemma fixMapFactor_fst :
+    P.fixMapFactor ≫ pullback.fst P.g (equalizer.ι P.fst P.snd) = c.fixι :=
+  pullback.lift_fst _ _ _
+
+/-- `κ : Fix(c) ⟶ C ×_D Fix(b)` is a closed immersion: its composite with the separated
+projection to `C` is the closed immersion `i_c : Fix(c) ⟶ C`. -/
+instance isClosedImmersion_fixMapFactor [IsSeparated aX] [IsSeparated P.tgtStr] :
+    IsClosedImmersion P.fixMapFactor := by
+  have : IsClosedImmersion (P.fixMapFactor ≫ pullback.fst P.g (equalizer.ι P.fst P.snd)) := by
+    rw [fixMapFactor_fst]
+    infer_instance
+  exact IsClosedImmersion.of_comp _ (pullback.fst P.g (equalizer.ι P.fst P.snd))
+
+/-- The induced map `h : Fix(c) ⟶ Fix(b)` is proper: `i_b ∘ h = g ∘ i_c` is proper and the
+closed immersion `i_b` is separated. -/
+instance isProper_fixMap [IsSeparated aX] [IsSeparated P.tgtStr] : IsProper P.fixMap := by
+  have : IsProper (P.fixMap ≫ equalizer.ι P.fst P.snd) := by
+    rw [fixMap_ι]
+    infer_instance
+  exact IsProper.of_comp _ (equalizer.ι P.fst P.snd)
+
+/-- Blueprint `lem-trf-fixed-map-proper`: for `X` and `Y` separated over `s`,
+
+1. the induced map `h : Fix(c) ⟶ Fix(b)` factors as `h = π ∘ κ` with `π` the base change of
+   `g` along `i_b : Fix(b) ⟶ D` and `κ` a closed immersion;
+2. `h` and `q = f × f : X ×_s X ⟶ Y ×_s Y` are proper. -/
+theorem fixMap_factorization_and_isProper [IsSeparated aX] [IsSeparated P.tgtStr] :
+    P.fixMapFactor ≫ pullback.snd P.g (equalizer.ι P.fst P.snd) = P.fixMap ∧
+      IsClosedImmersion P.fixMapFactor ∧ IsProper P.fixMap ∧
+      IsProper (pullback.map aX aX P.tgtStr P.tgtStr P.f P.f (𝟙 s)
+        ((Category.comp_id _).trans P.f_comp.symm) ((Category.comp_id _).trans P.f_comp.symm)) :=
+  ⟨P.fixMapFactor_snd, inferInstance, inferInstance,
+    MorphismProperty.pullbackMap (P := @IsProper) (inferInstanceAs (IsProper P.f))
+      (inferInstanceAs (IsProper P.f))
+      P.f_comp.symm P.f_comp.symm⟩
+
 /-- The support map `b = (b₁, b₂) : D ⟶ Y ×_s Y` of the target. -/
 noncomputable def toProd : P.supp ⟶ pullback P.tgtStr P.tgtStr :=
   pullback.lift P.fst P.snd (P.fst_comp.trans P.snd_comp.symm)

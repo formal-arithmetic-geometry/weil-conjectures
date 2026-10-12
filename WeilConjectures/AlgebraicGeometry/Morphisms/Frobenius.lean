@@ -187,6 +187,22 @@ lemma comp_eq_comp {Y : Scheme.{u}} {F' : Y ⟶ Y} (hF' : F'.IsFrobenius (Nat.ca
   change X.affineOpenCover.f j ≫ f ≫ F' = X.affineOpenCover.f j ≫ F ≫ f
   rw [← Category.assoc, hF' _ φ hφ, reassoc_of% (hF _ φ hφ)]
 
+/-- Over an open immersion `t : U ⟶ X` of schemes over `Spec k`, the `#k`-power Frobenius of
+`X` restricts to an endomorphism `F_U` of `U` with `F_U ≫ t = t ≫ F` (for instance the
+`#k`-power Frobenius of `U`, by `comp_eq_comp`), and the square `F_U ≫ t = t ≫ F` is Cartesian:
+the Frobenius is the identity on underlying points, so it preserves every open subscheme. -/
+lemma isPullback_of_isOpenImmersion {U : Scheme.{u}} {FU : U ⟶ U} (t : U ⟶ X)
+    [IsOpenImmersion t] (hw : FU ≫ t = t ≫ F) : IsPullback FU t t F := by
+  have hr (s : PullbackCone t F) : Set.range s.snd ⊆ Set.range t := by
+    rintro _ ⟨w, rfl⟩
+    refine ⟨s.fst w, ?_⟩
+    rw [← Scheme.Hom.comp_apply, s.condition, Scheme.Hom.comp_apply, base_apply hF f₀]
+  refine ⟨⟨hw⟩, ⟨PullbackCone.IsLimit.mk hw (fun s ↦ IsOpenImmersion.lift t s.snd (hr s))
+    (fun s ↦ ?_) (fun s ↦ IsOpenImmersion.lift_fac _ _ _) (fun s m _ h₂ ↦ ?_)⟩⟩
+  · rw [← cancel_mono t, Category.assoc, hw, ← Category.assoc, IsOpenImmersion.lift_fac,
+      s.condition]
+  · rw [← cancel_mono t, h₂, IsOpenImmersion.lift_fac]
+
 /-- The `m`-th iterate of the `#k`-power Frobenius of a scheme over `Spec k` is its
 `#k ^ m`-power Frobenius (blueprint `d-relative-frob`). -/
 lemma pow (m : ℕ) : (End.asHom (End.of F ^ m)).IsFrobenius (Nat.card k ^ m) := by

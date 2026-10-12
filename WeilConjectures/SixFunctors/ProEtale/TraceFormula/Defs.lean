@@ -583,7 +583,8 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
   /-- the normalisation `ω_s ≃ A_s` of the dualizing complex of the base. -/
   dualizingBase :
     dualizing (𝟙 s) ≅ 𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))
-  /-- dualizing composition: `f^! ω_Y ≃ ω_X`. -/
+  /-- dualizing composition: `f^! ω_Y ≃ ω_X` (blueprint `thm-trf-dualizing-complex-composition`;
+  it is functorial in `f` by `dualizingComp_comp` and canonical by `dualizingComp_eq`). -/
   dualizingComp {X Y : Scheme.{u}} (f : X ⟶ Y) (a : Y ⟶ s) [IsGeometric a]
       [IsGeometric (f ≫ a)] [HasCompactification f] :
     (rightDerivedUpperShriek A f).obj (dualizing a) ≅ dualizing (f ≫ a)
@@ -955,6 +956,22 @@ noncomputable def bidualityMap {X : Scheme.{u}} (a : X ⟶ s)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
     K ⟶ G.verdierDual a (G.verdierDual a K) :=
   MonoidalClosed.curry ((β_ (G.verdierDual a K) K).hom ≫ (ihom.ev K).app (G.dualizing a))
+
+/-- Blueprint `thm-trf-verdier-biduality`: Verdier biduality `K ≃ D_X D_X K` for `K ∈ Dᵇctf(X)`
+on a geometric scheme: the evaluation-adjoint map `GeometricOperations.bidualityMap`, the
+tensor-hom adjoint of the evaluation `ev_K : D_X K ⊗ᴸ K ⟶ ω_X` preceded by the braiding, is
+invertible (the field `isIso_bidualityMap`). It is natural in `K`. -/
+noncomputable def bidualityIso {X : Scheme.{u}} (a : X ⟶ s) [IsGeometric a]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : G.ctf X K) :
+    K ≅ G.verdierDual a (G.verdierDual a K) :=
+  haveI : IsIso (G.bidualityMap a K) := G.isIso_bidualityMap a K hK
+  asIso (G.bidualityMap a K)
+
+@[simp]
+lemma bidualityIso_hom {X : Scheme.{u}} (a : X ⟶ s) [IsGeometric a]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : G.ctf X K) :
+    (G.bidualityIso a K hK).hom = G.bidualityMap a K :=
+  rfl
 
 /-- Transport of the dualizing complex along an equality of structure morphisms:
 `ω_a ≅ ω_b` for `a = b`. -/

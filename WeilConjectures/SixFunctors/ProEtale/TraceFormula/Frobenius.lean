@@ -573,6 +573,42 @@ theorem isPullback_relativeFrobenius_of_isFrobenius (hX : IsPullback pX aX gX σ
     isPullback_relativeFrobenius hX hfp h₀ (pow_comp_eq_of_comp_eq (hFX.comp_eq gX) m) _
       (pow_comp_eq_of_comp_eq hΦXa m) (pow_comp_eq_comp_pow hΦX m) hYm⟩
 
+/-- Blueprint `lem-trf-frobenius-open-square`: the Frobenius preserves an open subscheme defined
+over the finite field. Let `j : X ⟶ Y` be the base change along `σ : s₀ ⟶ Spec k` of an open
+immersion `j₀ : X₀ ⟶ Y₀` of schemes over a finite field `k`, and let `Φ_X`, `Φ_Y` be the base
+changes of the `#k`-power Frobenii of `X₀`, `Y₀`. Then for every `m` the square
+
+```
+  X ──Φ_X^m──▶ X
+  │j           │j
+  ▼            ▼
+  Y ──Φ_Y^m──▶ Y
+```
+
+is Cartesian. (For automorphisms in place of `Φ^m`, such as the Galois Frobenius `g^m`, every
+commutative square of this shape is Cartesian.) -/
+theorem isPullback_frobenius_pow_of_isOpenImmersion (hX : IsPullback pX aX gX σ)
+    (hY : IsPullback pY aY gY σ) (hFX : FX.IsFrobenius (Nat.card k))
+    (hFY : FY.IsFrobenius (Nat.card k)) (hΦXa : ΦX ≫ aX = aX) (hΦYa : ΦY ≫ aY = aY)
+    (hΦX : ΦX ≫ pX = pX ≫ FX) (hΦY : ΦY ≫ pY = pY ≫ FY) {j₀ : X₀ ⟶ Y₀} [IsOpenImmersion j₀]
+    {j : X ⟶ Y} (hj : IsPullback pX j j₀ pY) (hja : j ≫ aY = aX) (m : ℕ) :
+    IsPullback (End.asHom (End.of ΦX ^ m)) j j (End.asHom (End.of ΦY ^ m)) := by
+  have hw : j ≫ ΦY = ΦX ≫ j := comp_eq_comp_of_isPullback hY
+    (hFX.comp_eq_comp gX hFY j₀) hΦXa hΦYa hΦX hΦY hj.w.symm hja
+  have h₀ : IsPullback FX j₀ j₀ FY :=
+    hFY.isPullback_of_isOpenImmersion gY j₀ (hFX.comp_eq_comp gX hFY j₀).symm
+  have h₁ : IsPullback ΦX j j ΦY := by
+    refine IsPullback.of_right ?_ hw.symm hj
+    rw [hΦX, hΦY]
+    exact hj.paste_horiz h₀
+  induction m with
+  | zero =>
+    simp only [pow_zero, End.one_def]
+    exact IsPullback.of_horiz_isIso ⟨by simp⟩
+  | succ m ih =>
+    rw [pow_succ, pow_succ, End.mul_def, End.mul_def]
+    exact h₁.paste_horiz ih
+
 end Model
 
 /-- The relative Frobenius of an affine morphism. Let `g : R ⟶ S` be a ring map and `φ_R`, `φ_S`
@@ -718,7 +754,8 @@ with `f' = pullback.fst g_Y f` and `p = pullback.snd g_Y f`. It is the natural t
 
 For the Frobenius square of a Weil complex this is the Weil comparison `θ_{f,m}` with
 `g_X = Φ_{X,m}`, `g_Y = Φ_{Y,m}` and `r = r_m`, and it is invertible when `r` is a finite
-universal homeomorphism (`isIso_lowerShriekExchange`) (blueprint: `sk-d-weil-push`). -/
+universal homeomorphism (`isIso_lowerShriekExchange`) (blueprint: `sk-d-weil-push`,
+`def-trf-weil-shriek-pushforward` (1)). -/
 noncomputable def lowerShriekExchange (G : GeometricOperations A s) {aX : X ⟶ s} {aY : Y ⟶ s}
     [IsGeometric aX] [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
     (gX : X ⟶ X) (gY : Y ⟶ Y) (hgX : gX ≫ aX = aX) (hgY : gY ≫ aY = aY)
@@ -789,7 +826,8 @@ noncomputable def WeilComplex.lowerShriekPushCoeff {aX : X ⟶ s} (W : WeilCompl
 
 /-- The `!`-pushforward of a Weil complex `(K, φ)` with `K ∈ Dᵇctf(X)` along a morphism
 `f : X ⟶ Y` of geometric schemes compatible with the Frobenius morphisms: the Weil complex
-`L = Rf_! K` on `Y` with coefficient map `ψ = Rf_! φ ∘ θ_{f,1}` (blueprint: `sk-d-weil-push`). -/
+`L = Rf_! K` on `Y` with coefficient map `ψ = Rf_! φ ∘ θ_{f,1}` (blueprint: `sk-d-weil-push`,
+`def-trf-weil-shriek-pushforward` (2)). -/
 noncomputable def WeilComplex.lowerShriekPush {aX : X ⟶ s} {aY : Y ⟶ s}
     (W : WeilComplex (A := A) aX) (G : GeometricOperations A s) (hW : G.ctf X W.obj)
     [IsGeometric aX] [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
