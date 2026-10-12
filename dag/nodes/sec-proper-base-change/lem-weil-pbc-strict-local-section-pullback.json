@@ -22,11 +22,12 @@
  ],
  "proof": [
   {
-   "text": "/-- Pulling a strict-local representative section back to the pointed fibre is the\nunit restriction along that representative's marked point.\nSource: Stacks Project, Tag 03Q9, canonical restriction on representatives, and\nTag 0A3U, degree-zero compatibility in the parent factorization.\n(blueprint: lem-weil-pbc-strict-local-section-pullback).\n\nProof: expand `qcqsStrictLocalSectionRestriction` and the global-sections pullback.\nNaturality of terminal evaluation changes the latter into the unit for q followed\nby restriction along its terminal lift. Naturality of the unit moves the strict-local\nlimit-leg restriction past this unit. The composition-unit identity and the inverse\nof `upperStarComp` identify the two successive inverse-image units with the unit for\ng'. The remaining morphism from the terminal object to g'^*f^*V has outer second\nprojection identity. Its inner projections are g', by hq, and f' followed by the\nmarked point: use hqt to replace the map to the strict-local base by f't, then use\nhpoint to replace t followed by the limit leg by the marked point. Pullback hom-ext\ntherefore identifies this morphism with `geometricFibreSectionLift`. The terminal\nsection/global-section isomorphisms cancel, leaving exactly the stated identity.\nNo isomorphism of stalks, comparison map a, qcqs hypothesis, or exchange map occurs.\nThe argument is valid for empty schemes and zero coefficient modules as well. -/",
+   "text": "Expand qcqsStrictLocalSectionRestriction and geometricFibreSectionRestriction. Identify terminal evaluation with ΓRes and use terminal uniqueness and unit naturality to compute globalSectionsUpperStarMap at the identity étale object. Move the strict-local restriction past the q-unit and the inverse upperStarComp comparison. Use upperStarComp_hom_app_unit_app, cancel the comparison isomorphisms, and evaluate the resulting composition-unit identity at f*V. Identify the remaining lift with geometricFibreSectionLift by pullback hom-ext: the inner first projection follows from hqt and hpoint j, the inner second from hq, and the outer second from the over-category equations. Cancel terminal evaluation isomorphisms.",
    "uses": [
     "lem-weil-pbc-qcqs-strict-local-module-comparison",
     "def-weil-pbc-finite-section-pullback",
-    "lem-sbc-geometric-fibre-exchange-germs"
+    "lem-sbc-geometric-fibre-exchange-germs",
+    "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false
   }
@@ -34,12 +35,13 @@
  "proof_deps": [
   "lem-weil-pbc-qcqs-strict-local-module-comparison",
   "def-weil-pbc-finite-section-pullback",
-  "lem-sbc-geometric-fibre-exchange-germs"
+  "lem-sbc-geometric-fibre-exchange-germs",
+  "lem-weil-pbc-inverse-image-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Parent factorization proof step 3; Tag 03Q1 (3) germ formula and Tag 0A3U omitted exchange compatibility expanded on representatives; current second reading U3: geometricFibreSectionLift/Restriction definitions explicitly retained in the proof dependencies"
+  "place": "J1 stage-3 proof and second reading, 2026-10-13: canonical representative restriction via terminal evaluation naturality, the proved upstream composition-unit identity, and pullback projection extensionality; original unit route retained."
  },
  "mathlib_searches": [
   {
@@ -157,10 +159,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T184351-L-4022487",
-  "kind": "interface",
+  "landing": "20261012T213850-L-1208603",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
