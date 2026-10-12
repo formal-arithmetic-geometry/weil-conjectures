@@ -1,0 +1,108 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/sga/SGA1_arXiv-math0206203.pdf",
+  "place": "SGA 1 V, Proposition 6.13"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-galois-categories",
+  "def-galois-fibre-functor"
+ ],
+ "proof": [
+  {
+   "text": "The underlying scheme of P is X, so [lem-galois-finite-etale-connected-object] gives IsConnected P. The finite-etale Galois category and geometric fibre functor are supplied by [lem-fet-galois-category]. Mathlib CategoryTheory.Galois.IsFundamentalgroup, lines 266–267, then supplies transitivity of the GY action. Its continuous action on the discrete fibre implies openness by stabilizer_isOpen (Mathlib/Topology/Algebra/MulAction.lean:277). Orbit–stabilizer gives the index by MulAction.index_stabilizer_of_transitive (Mathlib/GroupTheory/Index.lean:870).",
+   "uses": [
+    "lem-galois-finite-etale-connected-object",
+    "lem-fet-galois-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-finite-etale-connected-object",
+  "lem-fet-galois-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/sga/SGA1_arXiv-math0206203.pdf",
+  "place": "SGA 1 V.6.13 and §7; connectedness and Mathlib continuous-action/orbit–stabilizer lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A continuous action of a fundamental group on the finite fibre of a connected object has open stabilizers whose index equals the cardinality.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "index of a point stabilizer of a transitive action equals cardinality and stabilizer is open continuous finite action",
+   "results": "stabilizer_isOpen, ProperlyDiscontinuousSMul.finite_stabilizer', ProperlyDiscontinuousSMul.finite_stabilizer, ProperlyDiscontinuousVAdd.finite_stabilizer', ProperlyDiscontinuousVAdd.finite_stabilizer, MulAction.index_stabilizer_of_transitive, AddAction.index_stabilizer_of_transitive, normalClosure_of_stabilizer_eq_top",
+   "date": "2026-10-12",
+   "verdict": "Related generic results found; no exact finite-etale image theorem. The generic stabilizer and index results are used for the open/index component."
+  },
+  {
+   "tool": "grep",
+   "query": "fundamentalGroupMap|stabilizer_isOpen|index_stabilizer_of_transitive",
+   "results": "Mathlib/FieldTheory/KrullTopology.lean, Mathlib/FieldTheory/KrullTopology.lean, Mathlib/Topology/Algebra/MulAction.lean, Mathlib/Topology/Algebra/MulAction.lean, Mathlib/Topology/Algebra/MulAction.lean, Mathlib/GroupTheory/Index.lean, Mathlib/GroupTheory/GroupAction/Blocks.lean, Mathlib/GroupTheory/GroupAction/MultipleTransitivity.lean",
+   "date": "2026-10-12",
+   "verdict": "Related generic results found; no exact finite-etale image theorem. The generic stabilizer and index results are used for the open/index component."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizer",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-fundamental",
+   "place": "statement, last clause: 'where it corresponds to the passage to the open subgroup of the fundamental group', and proof, last sentence: 'the limit of the corresponding automorphism groups is the stabilizer of the fibre ... an open subgroup because stabilizers in a finite continuous pi_1-set are open'",
+   "via": [
+    "lem-galois-pi1-finite-etale-image-stabilizer"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-galois-pi1-finite-etale-image-stabilizer-open-index",
+ "title": "The marked-point stabilizer is open and its index is the cardinality of the geometric fibre.",
+ "statement": "Let $f:X\\to Y$ be a finite etale morphism of connected schemes [def-weil-pbc-scheme-conventions], $\\Omega$ an algebraically closed field, and $s:\\operatorname{Spec}\\Omega\\to X$ a geometric point. Set $t=f\\circ s$, let $P=(X\\xrightarrow{f}Y)$ be its finite etale cover [def-galois-categories], and let $a=s\\in F_t(P)$ for the geometric fibre functor [def-galois-fibre-functor]. Let $G_X,G_Y$ be compact topological fundamental-group models of $F_s,F_t$, with their natural continuous fibre actions, and put $U=\\operatorname{Stab}_{G_Y}(a)$. Then $U$ is open in $G_Y$ and $[G_Y:U]=\\#F_t(P)$.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizerOpenIndex",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/ImageStabilizerOpenIndex.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_stabilizer_open_and_index",
+  "statement": "theorem fundamentalGroupMap_stabilizer_open_and_index\n    {X Y : Scheme.{u}} [ConnectedSpace X] [ConnectedSpace Y]\n    (f : X ⟶ Y) [IsFinite f] [Etale f]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X)\n    (GX GY : Type u) [Group GX] [TopologicalSpace GX] [IsTopologicalGroup GX]\n    [CompactSpace GX] [∀ Q, MulAction GX ((fiber s).obj Q)]\n    [IsFundamentalGroup (fiber s) GX]\n    [Group GY] [TopologicalSpace GY] [IsTopologicalGroup GY] [CompactSpace GY]\n    [∀ P, MulAction GY ((fiber (s ≫ f)).obj P)]\n    [IsFundamentalGroup (fiber (s ≫ f)) GY] :\n    let P : Y.FiniteEtale := ⟨Etale.mk f, inferInstanceAs (IsFinite f)⟩\n    let a : (fiber (s ≫ f)).obj P := fiberMk (s ≫ f) P s rfl\n    let U := MulAction.stabilizer GY a\n    IsOpen (U : Set GY) ∧ U.index = Nat.card ((fiber (s ≫ f)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T060751-L-2913868",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T060751-L-2913868",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

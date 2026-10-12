@@ -1,0 +1,144 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/sga/SGA1_arXiv-math0206203.pdf",
+  "place": "SGA 1 V, Proposition 6.13"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-galois-categories",
+  "def-galois-fibre-functor",
+  "lem-galois-pi1-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\pi_1(Y,\\bar y)$, $G'=\\pi_1(Y',\\bar y')$, $P=(Y'\\xrightarrow{f}Y)$ in $\\mathrm{F\\acute Et}(Y)$, and $a=\\bar y'\\in|P_{\\bar y}|$. By [lem-galois-pi1-functoriality], $f_*$ is characterized by $f_*(h)\\cdot\\tau_R(z)=\\tau_R(h\\cdot z)$ for every finite etale $R/Y$ and $z\\in|(R\\times_YY')_{\\bar y'}|$. For $R=P$, the diagonal $d:Y'\\to Y'\\times_YY'$ is a section of the second projection, and its value $d(\\bar y')$ maps under $\\tau_P$ to $a$. Every $h\\in G'$ fixes $d(\\bar y')$: $d$ is a morphism from the final object of $\\mathrm{F\\acute Et}(Y')$, whose fibre has one element, and the components of a natural automorphism commute with its fibre map. Hence $f_*(h)\\cdot a=a$, so $\\operatorname{im}(f_*)\\subseteq U$.",
+   "uses": [
+    "lem-galois-pi1-functoriality",
+    "def-galois-categories",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/sga/SGA1_arXiv-math0206203.pdf",
+    "place": "SGA 1, Expose V, Proposition 6.13, pp. 114-115, inclusion of the induced group in the stabilizer; proof omitted there"
+   }
+  },
+  {
+   "text": "For the reverse inclusion let $g\\in U$. Take any $Q=(Z\\xrightarrow{q}Y')$ in $\\mathrm{F\\acute Et}(Y')$. The composite $f\\circ q:Z\\to Y$ is finite by [lem-weil-pbc-finite-composition] and etale by [lem-weil-pbc-etale-composition-cancellation](2), so it is an object $\\widetilde Q$ of $\\mathrm{F\\acute Et}(Y)$. The fibre $|Q_{\\bar y'}|$ identifies with the subset $T_Q=\\{z\\in|\\widetilde Q_{\\bar y}|:q(z)=a\\}$: a point over $\\bar y'$ is exactly a geometric point of $Z$ over $\\bar y$ whose composite with $q$ is the specified point $a$ of $Y'$. Since $q:\\widetilde Q\\to P$ is a morphism in $\\mathrm{F\\acute Et}(Y)$, naturality of the $G$-action gives $q(g\\cdot z)=g\\cdot q(z)=g\\cdot a=a$ for $z\\in T_Q$; thus $g$ preserves $T_Q$. The same holds for $g^{-1}$ because it also fixes $a$, so the restriction is a bijection of $|Q_{\\bar y'}|$.",
+   "uses": [
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-galois-categories",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA1_arXiv-math0206203.pdf",
+    "place": "SGA 1, Expose V, Proposition 6.13, pp. 114-115: objects over the connected object $S$ and the fibre as inverse image of the marked element; proof omitted there"
+   }
+  },
+  {
+   "text": "If $u:Q\\to Q'$ is a morphism over $Y'$, it is also a morphism $\\widetilde Q\\to\\widetilde Q'$ over $Y$, so $u(g\\cdot z)=g\\cdot u(z)$; the restrictions of step 2 therefore form a natural automorphism of the fibre functor on $\\mathrm{F\\acute Et}(Y')$, with inverse obtained from $g^{-1}$. The compact fundamental-group model is isomorphic to the automorphism group of its fibre functor (toAutMulEquiv), so this natural automorphism is represented by an element $h\\in G'$. For any $R\\in\\mathrm{F\\acute Et}(Y)$, put $Q=R\\times_YY'$; the projection $Q\\to R$ is a morphism over $Y$ and restricts on $T_Q$ to the bijection $\\tau_R$ of [lem-galois-pi1-functoriality]. Therefore $\\tau_R(h\\cdot z)=g\\cdot\\tau_R(z)$ for every $z\\in|Q_{\\bar y'}|$. The defining characterization of $f_*$ in that lemma, and faithfulness of evaluation in [def-galois-fibre-functor], imply $f_*(h)=g$. Thus $U\\subseteq\\operatorname{im}(f_*)$.",
+   "uses": [
+    "def-galois-categories",
+    "def-galois-fibre-functor",
+    "lem-galois-pi1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA1_arXiv-math0206203.pdf",
+    "place": "SGA 1, Expose V, Proposition 6.13, pp. 114-115, reverse inclusion in the asserted isomorphism; proof omitted there"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-pi1-functoriality",
+  "def-galois-categories",
+  "def-galois-fibre-functor",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/sga/SGA1_arXiv-math0206203.pdf",
+  "place": "SGA 1 V.6.13 and §7; the two inclusions filled in from naturality and toAutMulEquiv"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The image of the fundamental group of a connected finite etale cover is the stabilizer of a marked geometric fibre point.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of natural automorphisms to the fibre of a connected object gives the stabilizer as image of the fundamental group of a slice category",
+   "results": "CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.PreGaloisCategory.autIsoFibers, CategoryTheory.PreGaloisCategory.FibreFunctor.end_isIso, CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, CategoryTheory.PreGaloisCategory.stabilizer_normal_of_isGalois",
+   "date": "2026-10-12",
+   "verdict": "Related generic results found; no exact finite-etale image theorem. The generic stabilizer and index results are used for the open/index component."
+  },
+  {
+   "tool": "grep",
+   "query": "fundamentalGroupMap|stabilizer_isOpen|index_stabilizer_of_transitive",
+   "results": "Mathlib/FieldTheory/KrullTopology.lean, Mathlib/FieldTheory/KrullTopology.lean, Mathlib/Topology/Algebra/MulAction.lean, Mathlib/Topology/Algebra/MulAction.lean, Mathlib/Topology/Algebra/MulAction.lean, Mathlib/GroupTheory/Index.lean, Mathlib/GroupTheory/GroupAction/Blocks.lean, Mathlib/GroupTheory/GroupAction/MultipleTransitivity.lean",
+   "date": "2026-10-12",
+   "verdict": "Related generic results found; no exact finite-etale image theorem. The generic stabilizer and index results are used for the open/index component."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizer",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-fundamental",
+   "place": "statement, last clause: 'where it corresponds to the passage to the open subgroup of the fundamental group', and proof, last sentence: 'the limit of the corresponding automorphism groups is the stabilizer of the fibre ... an open subgroup because stabilizers in a finite continuous pi_1-set are open'",
+   "via": [
+    "lem-galois-pi1-finite-etale-image-stabilizer"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-galois-pi1-finite-etale-image-stabilizer-range",
+ "title": "The image of the induced fundamental-group map is the marked-point stabilizer.",
+ "statement": "Let $f:X\\to Y$ be a finite etale morphism of connected schemes [def-weil-pbc-scheme-conventions], $\\Omega$ an algebraically closed field, and $s:\\operatorname{Spec}\\Omega\\to X$ a geometric point. Set $t=f\\circ s$, let $P=(X\\xrightarrow{f}Y)$ be its finite etale cover [def-galois-categories], and let $a=s\\in F_t(P)$ for the geometric fibre functor [def-galois-fibre-functor]. Let $G_X,G_Y$ be compact topological fundamental-group models of $F_s,F_t$, with their natural continuous fibre actions, and put $U=\\operatorname{Stab}_{G_Y}(a)$. The homomorphism $f_*:G_X\\to G_Y$ induced by pullback and its canonical fibre identification [lem-galois-pi1-functoriality] has image $U$.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizerRange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/ImageStabilizerRange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_range_eq_stabilizer_range",
+  "statement": "theorem fundamentalGroupMap_range_eq_stabilizer_range\n    {X Y : Scheme.{u}} [ConnectedSpace X] [ConnectedSpace Y]\n    (f : X ⟶ Y) [IsFinite f] [Etale f]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X)\n    (GX GY : Type u) [Group GX] [TopologicalSpace GX] [IsTopologicalGroup GX]\n    [CompactSpace GX] [∀ Q, MulAction GX ((fiber s).obj Q)]\n    [IsFundamentalGroup (fiber s) GX]\n    [Group GY] [TopologicalSpace GY] [IsTopologicalGroup GY] [CompactSpace GY]\n    [∀ P, MulAction GY ((fiber (s ≫ f)).obj P)]\n    [IsFundamentalGroup (fiber (s ≫ f)) GY] :\n    let P : Y.FiniteEtale := ⟨Etale.mk f, inferInstanceAs (IsFinite f)⟩\n    let a : (fiber (s ≫ f)).obj P := fiberMk (s ≫ f) P s rfl\n    let U := MulAction.stabilizer GY a\n    (fundamentalGroupMap (pullbackFiberIso f s) GX GY).range = U",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T060751-L-2913868",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T060751-L-2913868",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

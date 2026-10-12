@@ -7,13 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import Mathlib.GroupTheory.Index
-import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
-import Sheaf.AlgebraicGeometry.GaloisCategories
-import Sheaf.CategoryTheory.Galois.GaloisTransitive
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+import Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizerRange
+import Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizerOpenIndex
 
 /-!
 # The image of the fundamental group of a finite étale cover
@@ -50,14 +45,13 @@ Proof (the source leaves Proposition 6.13 to the reader):
    point. Naturality shows that an element fixing the marked point preserves this subset;
    its inverse does too, giving a permutation (`def-galois-fibre-functor`).
 3. These restrictions commute with morphisms and form a natural automorphism of the fibre
-   functor over `X`, hence an element of its fundamental group. The equivalence with finite
-   locally constant sheaves (`thm-galois-lc-etale`) identifies the two descriptions.
+   functor over `X`, hence an element of its fundamental group via `toAutMulEquiv`.
    On pullback covers the restrictions intertwine the actions, so the characterization in
    `lem-galois-pi1-functoriality` and faithful evaluation give the required preimage.
 4. Evaluation is continuous into the finite discrete permutation group, so the stabilizer
    is open (`def-galois-fibre-functor`). The cover is a connected object by
    `lem-galois-finite-etale-connected-object` in the Galois category
-   `lem-fet-galois-category`. Its fibre is transitive by `lem-galois-transitive`, and
+   `lem-fet-galois-category`. Mathlib's fundamental-group instance makes its fibre transitive, and
    sending a coset to the translate of the marked point is a bijection with the fibre.
    Thus the index equals its cardinality, including the one-point case. -/
 theorem fundamentalGroupMap_range_eq_stabilizer
@@ -75,6 +69,9 @@ theorem fundamentalGroupMap_range_eq_stabilizer
     let U := MulAction.stabilizer GY a
     (fundamentalGroupMap (pullbackFiberIso f s) GX GY).range = U ∧
       IsOpen (U : Set GY) ∧ U.index = Nat.card ((fiber (s ≫ f)).obj P) := by
-  sorry
+  dsimp
+  constructor
+  · exact fundamentalGroupMap_range_eq_stabilizer_range f s GX GY
+  · exact fundamentalGroupMap_stabilizer_open_and_index f s GX GY
 
 end AlgebraicGeometry.Scheme.FiniteEtale
