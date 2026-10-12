@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-!
 # Acyclicity in a tensored cone sequence
@@ -61,6 +63,31 @@ theorem tensor_mappingCone_two_out_of_three :
       ((A.mapBifunctor K₂ (curriedTensor (moduleCategory R))).Acyclic ∧
           (A.mapBifunctor (CochainComplex.mappingCone f)
             (curriedTensor (moduleCategory R))).Acyclic →
-        (A.mapBifunctor K₁ (curriedTensor (moduleCategory R))).Acyclic) := sorry
+        (A.mapBifunctor K₁ (curriedTensor (moduleCategory R))).Acyclic) := by
+  intro A K₁ K₂ f _hA
+  have : MonoidalPreadditive (moduleCategory R) := (tensorClosed R).1.some
+  let g := HomologicalComplex.mapBifunctorMap (𝟙 A) f
+    (curriedTensor (moduleCategory R)) (.up ℤ)
+  let e := CochainComplex.mapBifunctorMappingCone₂Iso A f
+    (curriedTensor (moduleCategory R))
+  let P := HomotopyCategory.subcategoryAcyclic (moduleCategory R)
+  have hT := HomotopyCategory.mappingCone_triangleh_distinguished g
+  have he : P ((HomotopyCategory.quotient _ _).obj
+      (A.mapBifunctor (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R)))) ↔
+      P ((HomotopyCategory.quotient _ _).obj (CochainComplex.mappingCone g)) := by
+    exact ⟨fun h ↦ P.prop_of_iso ((HomotopyCategory.quotient _ _).mapIso e) h,
+      fun h ↦ P.prop_of_iso ((HomotopyCategory.quotient _ _).mapIso e.symm) h⟩
+  refine ⟨⟨e, CochainComplex.mapBifunctorMap_inr_mapBifunctorMappingCone₂Iso_hom A f
+    (curriedTensor (moduleCategory R))⟩, ?_, ?_, ?_⟩
+  · rintro ⟨h₁, h₂⟩
+    rw [← HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at h₁ h₂ ⊢
+    apply he.mpr
+    exact P.ext_of_isTriangulatedClosed₃ _ hT h₁ h₂
+  · rintro ⟨h₁, h₃⟩
+    rw [← HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at h₁ h₃ ⊢
+    exact P.ext_of_isTriangulatedClosed₂ _ hT h₁ (he.mp h₃)
+  · rintro ⟨h₂, h₃⟩
+    rw [← HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at h₂ h₃ ⊢
+    exact P.ext_of_isTriangulatedClosed₁ _ hT h₂ (he.mp h₃)
 
 end SheafOfModules

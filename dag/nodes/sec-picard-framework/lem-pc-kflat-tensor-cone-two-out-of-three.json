@@ -1,162 +1,176 @@
 {
-  "id": "lem-pc-kflat-tensor-cone-two-out-of-three",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-weil-derived-tensor",
-      "place": "the cone part of the closure argument in the proof of Lemma 07A3",
-      "via": [
-        "lem-pc-kflat-cone-direct-sum"
-      ]
-    },
-    "same_as": []
+ "id": "lem-pc-kflat-tensor-cone-two-out-of-three",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "the cone part of the closure argument in the proof of Lemma 07A3",
+   "via": [
+    "lem-pc-kflat-cone-direct-sum"
+   ]
   },
-  "kind": "statement",
-  "title": "Tensor-triangle two-out-of-three for acyclicity",
-  "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, $\\mathcal A^\\bullet$ an acyclic complex of $\\mathcal O$-modules [def-pc-acyclic-complex-modules], and $K_1^\\bullet\\to K_2^\\bullet$ a morphism of cochain complexes [def-pc-cochain-complex-modules] with mapping cone $K_3^\\bullet$ [def-weil-abstract-derived-category]. Tensoring the cone sequence with $\\mathcal A^\\bullet$ identifies the resulting total complex with the mapping cone of the tensor map. If two of the three total tensor complexes $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_i^\\bullet)$ [def-pc-tensor-complex-sheaves] are acyclic, then the third is acyclic.",
-  "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 07A3 (sites-cohomology-lemma-K-flat-two-out-of-three), with the cone description from Definition 06YN"
-  },
-  "stmt_deps": [
-    "def-pc-cochain-complex-modules",
-    "def-pc-acyclic-complex-modules",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
-  ],
-  "proof": [
-    {
-      "text": "By the cone comparison for total tensor complexes [lem-pc-tensor-mapping-cone-iso], applied to $\\mathcal A^\\bullet$ and the morphism $K_1^\\bullet\\to K_2^\\bullet$, the total complex $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_3^\\bullet)$ [def-pc-tensor-complex-sheaves] is isomorphic to the mapping cone of the induced map $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_1^\\bullet)\\to\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_2^\\bullet)$. This is the identification of the tensored cone sequence with the cone of the tensor map.",
-      "uses": [
-        "def-pc-tensor-complex-sheaves",
-        "lem-pc-tensor-mapping-cone-iso"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Lemma 07A3, cone comparison in the proof"
-      }
-    },
-    {
-      "text": "The cone sequence for $K_1^\\bullet\\to K_2^\\bullet\\to K_3^\\bullet$ is a distinguished triangle in the homotopy category. After tensoring with the acyclic complex $\\mathcal A^\\bullet$, Step 1 gives the corresponding triangle of total tensor complexes. The two-out-of-three acyclicity statement [lem-pc-acyclic-triangle-two-out-of-three] therefore implies that if any two of $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes K_i^\\bullet)$ are acyclic, then the third is acyclic.",
-      "uses": [
-        "def-pc-acyclic-complex-modules",
-        "def-weil-abstract-derived-category",
-        "lem-pc-acyclic-triangle-two-out-of-three",
-        "lem-pc-tensor-mapping-cone-iso"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Lemma 07A3, two-out-of-three conclusion"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor-triangle two-out-of-three for acyclicity",
+ "statement": "Let $\\mathcal C$ be a site, $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, $\\mathcal A^\\bullet$ an acyclic complex of $\\mathcal O$-modules [def-pc-acyclic-complex-modules], and $K_1^\\bullet\\to K_2^\\bullet$ a morphism of cochain complexes [def-pc-cochain-complex-modules] with mapping cone $K_3^\\bullet$ [def-weil-abstract-derived-category]. Tensoring the cone sequence with $\\mathcal A^\\bullet$ identifies the resulting total complex with the mapping cone of the tensor map. If two of the three total tensor complexes $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_i^\\bullet)$ [def-pc-tensor-complex-sheaves] are acyclic, then the third is acyclic.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 07A3 (sites-cohomology-lemma-K-flat-two-out-of-three), with the cone description from Definition 06YN"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the additive monoidal structure of sheaves of modules [lem-pc-sheaf-modules-tensor-closed] to provide additivity in the second tensor variable. Apply CochainComplex.mapBifunctorMappingCone₂Iso and its inclusion compatibility lemma to A and f [lem-pc-tensor-mapping-cone-iso]. This gives the required isomorphism between the total tensor complex of the cone and the cone of the tensor map [def-pc-tensor-complex-sheaves].",
+   "uses": [
     "def-pc-tensor-complex-sheaves",
     "lem-pc-tensor-mapping-cone-iso",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 07A3, cone comparison in the proof"
+   }
+  },
+  {
+   "text": "The mapping cone triangle of the tensor map is distinguished in the homotopy category [def-weil-abstract-derived-category]. Translate acyclicity to membership in HomotopyCategory.subcategoryAcyclic [def-pc-acyclic-complex-modules], and transport membership in both directions across the quotient image of the cone comparison isomorphism. Apply ObjectProperty.ext_of_isTriangulatedClosed₃, ext_of_isTriangulatedClosed₂, and ext_of_isTriangulatedClosed₁ to this distinguished triangle [lem-pc-acyclic-triangle-two-out-of-three], giving respectively the three pairwise acyclicity implications.",
+   "uses": [
     "def-pc-acyclic-complex-modules",
     "def-weil-abstract-derived-category",
-    "lem-pc-acyclic-triangle-two-out-of-three"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "lem-pc-acyclic-triangle-two-out-of-three",
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 07A3"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "tensoring a distinguished triangle of complexes with an acyclic complex, two acyclic terms imply the third",
-      "results": "DerivedCategory.triangleOfSES and HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic; no direct tensor-cone theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "mappingCone tensor acyclic HomologicalComplex",
-      "results": "unknown identifier mappingCone; no match",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "mappingCone|Acyclic.*cone|cone.*Acyclic in Mathlib/Algebra/Homology",
-      "results": "superseded: the recorded 'no hits' was wrong (CochainComplex.mappingCone exists in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean); see the reviewer's grep below",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "tensoring a mapping cone with an acyclic complex preserves the cone triangle",
-      "results": "service unavailable",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "mappingCone.*tensor|tensor.*mappingCone|mapBifunctor.*mappingCone|mappingCone.*mapBifunctor in Mathlib",
-      "results": "no hits; mappingCone itself exists (HomotopyCategory/MappingCone.lean) but nothing on tensoring a cone or on sheaf-module tensor complexes",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-pc-kflat-cone-direct-sum",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-semicon",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-kflat-tensor-cone-two-out-of-three",
-    "worker": "stage1",
-    "summary": "Split the K-flat cone argument into two Mathlib leaves: additive functors commute with mapping cones, and acyclic complexes form a triangulated subcategory. The item proof applies these to the sheaf tensor total complex and the cone triangle, yielding the stated two-out-of-three acyclicity.",
-    "blueprint": "Realizes the cone comparison and two-out-of-three clauses in the proof of Lemma 07A3.",
-    "blueprint_places": [
-      "the cone description in the proof of Lemma 07A3",
-      "the two-out-of-three acyclicity conclusion in the proof of Lemma 07A3"
-    ]
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-ktc2544",
-    "group": "F1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ktc2544 (reviewer sub-agent of L); spot-checked: No cycle: item and new nodes cite only defs and the two new nodes (kflat-cone-direct-sum appears only in blueprint.via/created.item). 2-of-3 leaf HomotopyCategory subcategoryAcyclic IsTriangulated (Acyclic.lean 40-43) is a one-line specialization to Mod(O); Step 2 cites it (C1 ok). FIX more, RETURN less: (1) B8/C4: lem-pc-tensor-mapping-cone-iso was matched to mappingCone.mapHomologicalComplexIso, which is for a degreewise functor H : C ⥤ D, not the total complex of the tensor bifunctor; leaf removed, node set unsplit, attached (B10) to sorry-free slopmaster2 CochainComplex.mapBifunctorMappingCone₂Iso (FromJoel/Algebra/Homology/BifunctorMappingCone.lean 493-497; Mathlib total-complex sign (-1)^p on the second differential and cone differential match def-pc-tensor-complex-sheaves and def-weil-abstract-derived-category), grep recorded. (2) B3: its stmt_deps lacked def-pc-tensor-complex-sheaves; added; the unneeded acyclicity hypothesis on A and its uncited dep dropped; title corrected. (3) Item Step 1 text no longer describes the comparison as an additive functor applied termwise.; 2 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree",
-    "declaration": "SheafOfModules.tensor_mappingCone_two_out_of_three",
-    "file": "lean/Sheaf/Algebra/Homology/KFlatTensorConeTwoOutOfThree.lean",
-    "statement": "theorem tensor_mappingCone_two_out_of_three : ∀ (A K₁ K₂ : CochainComplex (moduleCategory R) ℤ) (f : K₁ ⟶ K₂), A.Acyclic → (∃ e : CochainComplex.mapBifunctor A (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R)) ≅ CochainComplex.mappingCone (HomologicalComplex.mapBifunctorMap (𝟙 A) f (curriedTensor (moduleCategory R)) (.up ℤ)), HomologicalComplex.mapBifunctorMap (𝟙 A) (CochainComplex.mappingCone.inr f) (curriedTensor (moduleCategory R)) (.up ℤ) ≫ e.hom = CochainComplex.mappingCone.inr (HomologicalComplex.mapBifunctorMap (𝟙 A) f (curriedTensor (moduleCategory R)) (.up ℤ))) ∧ ((A.mapBifunctor K₁ (curriedTensor (moduleCategory R))).Acyclic ∧ (A.mapBifunctor K₂ (curriedTensor (moduleCategory R))).Acyclic → (A.mapBifunctor (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R))).Acyclic) ∧ ((A.mapBifunctor K₁ (curriedTensor (moduleCategory R))).Acyclic ∧ (A.mapBifunctor (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R))).Acyclic → (A.mapBifunctor K₂ (curriedTensor (moduleCategory R))).Acyclic) ∧ ((A.mapBifunctor K₂ (curriedTensor (moduleCategory R))).Acyclic ∧ (A.mapBifunctor (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R))).Acyclic → (A.mapBifunctor K₁ (curriedTensor (moduleCategory R))).Acyclic)",
-    "branch": "sheaf-dag",
-    "by": "E1",
-    "date": "2026-10-11",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-kct0917",
-    "group": "E1",
-    "result": "pass",
-    "note": "site C:Type u/Category.{u}, R:Sheaf J CommRingCat (comm rings), A acyclic, f:K1->K2, K3=Mathlib mappingCone f; clause 1 = iso Tot(A⊗cone f) ≅ cone(Tot map) with inr compatibility, exactly the sorry-free slopmaster2 mapBifunctorMappingCone₂Iso + mapBifunctorMap_inr_..._hom (BifunctorMappingCone.lean 493-504), so true; three 2-of-3 implications cover all pairs; not the F1 node (cone closure of K-flat, isKFlat_mappingCone) so no H4; uses landed KFlat instances, docstring has both proof steps, lines <=100"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "place": "Lemma 07A3, two-out-of-three conclusion"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-tensor-mapping-cone-iso",
+  "def-pc-acyclic-complex-modules",
+  "def-weil-abstract-derived-category",
+  "lem-pc-acyclic-triangle-two-out-of-three",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 07A3; existing two-step cone comparison and triangulated acyclicity argument realized in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensoring a distinguished triangle of complexes with an acyclic complex, two acyclic terms imply the third",
+   "results": "DerivedCategory.triangleOfSES and HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic; no direct tensor-cone theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "mappingCone tensor acyclic HomologicalComplex",
+   "results": "unknown identifier mappingCone; no match",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone|Acyclic.*cone|cone.*Acyclic in Mathlib/Algebra/Homology",
+   "results": "superseded: the recorded 'no hits' was wrong (CochainComplex.mappingCone exists in Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean); see the reviewer's grep below",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensoring a mapping cone with an acyclic complex preserves the cone triangle",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*tensor|tensor.*mappingCone|mapBifunctor.*mappingCone|mappingCone.*mapBifunctor in Mathlib",
+   "results": "no hits; mappingCone itself exists (HomotopyCategory/MappingCone.lean) but nothing on tensoring a cone or on sheaf-module tensor complexes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-pc-kflat-cone-direct-sum",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-kflat-tensor-cone-two-out-of-three",
+  "worker": "stage1",
+  "summary": "Split the K-flat cone argument into two Mathlib leaves: additive functors commute with mapping cones, and acyclic complexes form a triangulated subcategory. The item proof applies these to the sheaf tensor total complex and the cone triangle, yielding the stated two-out-of-three acyclicity.",
+  "blueprint": "Realizes the cone comparison and two-out-of-three clauses in the proof of Lemma 07A3.",
+  "blueprint_places": [
+   "the cone description in the proof of Lemma 07A3",
+   "the two-out-of-three acyclicity conclusion in the proof of Lemma 07A3"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ktc2544",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ktc2544 (reviewer sub-agent of L); spot-checked: No cycle: item and new nodes cite only defs and the two new nodes (kflat-cone-direct-sum appears only in blueprint.via/created.item). 2-of-3 leaf HomotopyCategory subcategoryAcyclic IsTriangulated (Acyclic.lean 40-43) is a one-line specialization to Mod(O); Step 2 cites it (C1 ok). FIX more, RETURN less: (1) B8/C4: lem-pc-tensor-mapping-cone-iso was matched to mappingCone.mapHomologicalComplexIso, which is for a degreewise functor H : C ⥤ D, not the total complex of the tensor bifunctor; leaf removed, node set unsplit, attached (B10) to sorry-free slopmaster2 CochainComplex.mapBifunctorMappingCone₂Iso (FromJoel/Algebra/Homology/BifunctorMappingCone.lean 493-497; Mathlib total-complex sign (-1)^p on the second differential and cone differential match def-pc-tensor-complex-sheaves and def-weil-abstract-derived-category), grep recorded. (2) B3: its stmt_deps lacked def-pc-tensor-complex-sheaves; added; the unneeded acyclicity hypothesis on A and its uncited dep dropped; title corrected. (3) Item Step 1 text no longer describes the comparison as an additive functor applied termwise.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree",
+  "declaration": "SheafOfModules.tensor_mappingCone_two_out_of_three",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatTensorConeTwoOutOfThree.lean",
+  "statement": "theorem tensor_mappingCone_two_out_of_three : ∀ (A K₁ K₂ : CochainComplex (moduleCategory R) ℤ) (f : K₁ ⟶ K₂), A.Acyclic → (∃ e : CochainComplex.mapBifunctor A (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R)) ≅ CochainComplex.mappingCone (HomologicalComplex.mapBifunctorMap (𝟙 A) f (curriedTensor (moduleCategory R)) (.up ℤ)), HomologicalComplex.mapBifunctorMap (𝟙 A) (CochainComplex.mappingCone.inr f) (curriedTensor (moduleCategory R)) (.up ℤ) ≫ e.hom = CochainComplex.mappingCone.inr (HomologicalComplex.mapBifunctorMap (𝟙 A) f (curriedTensor (moduleCategory R)) (.up ℤ))) ∧ ((A.mapBifunctor K₁ (curriedTensor (moduleCategory R))).Acyclic ∧ (A.mapBifunctor K₂ (curriedTensor (moduleCategory R))).Acyclic → (A.mapBifunctor (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R))).Acyclic) ∧ ((A.mapBifunctor K₁ (curriedTensor (moduleCategory R))).Acyclic ∧ (A.mapBifunctor (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R))).Acyclic → (A.mapBifunctor K₂ (curriedTensor (moduleCategory R))).Acyclic) ∧ ((A.mapBifunctor K₂ (curriedTensor (moduleCategory R))).Acyclic ∧ (A.mapBifunctor (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R))).Acyclic → (A.mapBifunctor K₁ (curriedTensor (moduleCategory R))).Acyclic)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kct0917",
+  "group": "E1",
+  "result": "pass",
+  "note": "site C:Type u/Category.{u}, R:Sheaf J CommRingCat (comm rings), A acyclic, f:K1->K2, K3=Mathlib mappingCone f; clause 1 = iso Tot(A⊗cone f) ≅ cone(Tot map) with inr compatibility, exactly the sorry-free slopmaster2 mapBifunctorMappingCone₂Iso + mapBifunctorMap_inr_..._hom (BifunctorMappingCone.lean 493-504), so true; three 2-of-3 implications cover all pairs; not the F1 node (cone closure of K-flat, isKFlat_mappingCone) so no H4; uses landed KFlat instances, docstring has both proof steps, lines <=100"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T135245-L-1672248",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
