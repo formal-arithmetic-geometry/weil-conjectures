@@ -20,6 +20,34 @@ universe u v
 
 namespace LocalizedModule
 
+/-- Clear the source denominator, then apply the target localization zero criterion.
+This ordinary-localization calculation also applies to the ring regarded as a module. -/
+private theorem awayKernelFraction
+    {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]
+    (f g : S) (d j : ℕ) (hd : 0 < d)
+    (T : LocalizedModule.Away f M →ₗ[S] LocalizedModule.Away g M)
+    (hT : ∀ b : M, T (mk b 1) = mk b 1)
+    (y : LocalizedModule.Away f M) (hy : T y = 0) :
+    ∃ n : ℕ, (Localization.mk (g ^ d)
+      (⟨f ^ j, ⟨j, rfl⟩⟩ : Submonoid.powers f)) ^ n • y = 0 := by
+  induction y using LocalizedModule.induction_on with
+  | h b s =>
+    have hb : (mk b 1 : LocalizedModule.Away g M) = 0 := by
+      rw [← hT]
+      have hs : (s : S) • mk b s = (mk b 1 : LocalizedModule.Away f M) := by
+        simpa only [smul'_mk, Submonoid.smul_def] using mk_cancel s b
+      rw [← hs, T.map_smul, hy, smul_zero]
+    obtain ⟨t, ht⟩ := mk_eq.mp (hb.trans (zero_mk 1).symm)
+    have ht' : (t : S) • b = 0 := by simpa [Submonoid.smul_def] using ht
+    obtain ⟨n, hn⟩ := t.property
+    have hn' : g ^ n • b = 0 := by simpa [← hn] using ht'
+    obtain ⟨d', hd'⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hd)
+    have hdn : (g ^ d) ^ n • b = 0 := by
+      rw [← pow_mul, Nat.mul_comm, hd', Nat.mul_succ, pow_add, mul_smul,
+        hn', smul_zero]
+    refine ⟨n, ?_⟩
+    rw [Localization.mk_pow, mk_smul_mk, hdn, zero_mk]
+
 set_option linter.unusedVariables false in
 /-- Detection of the kernel by powers of the principal comparison denominator.
 Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), (1)(e),(h).
@@ -88,6 +116,42 @@ theorem gradedModuleAwayKernel
         IsUnit (rhoS f g p (U f g))) →
     ∀ (f g : F) (p : Rel f g),
       (∀ x : Z f, rho f g p x = 0 → ∃ n : ℕ, (U f g) ^ n • x = 0) ∧
-      (∀ x : R f, rhoS f g p x = 0 → ∃ n : ℕ, (U f g) ^ n * x = 0) := by sorry
+      (∀ x : R f, rhoS f g p x = 0 → ∃ n : ℕ, (U f g) ^ n * x = 0) := by
+  intro F R L N Rel Z hZ lambda lambdaS rho rhoS U h f g p
+  obtain ⟨_, _, _, hbase, _, _, hbaseS, _, hrho, hrhoS, _, _⟩ := h.2 f g p
+  constructor
+  · intro x hx
+    have hl : lambda f g p (x : N f) = 0 := by
+      rw [← hrho x, hx]
+      rfl
+    obtain ⟨n, hn⟩ := awayKernelFraction f.val.1 g.val.1 f.val.2 g.val.2
+      f.property.1 (lambda f g p) hbase (x : N f) hl
+    refine ⟨n, ?_⟩
+    apply Subtype.ext
+    change (algebraMap (R f) (L f) ((U f g) ^ n)) • (x : N f) = 0
+    rw [map_pow]
+    change (U f g).val ^ n • (x : N f) = 0
+    rw [h.1 f g]
+    exact hn
+  · intro x hx
+    let T : L f →ₗ[S] L g :=
+      { toFun := lambdaS f g p
+        map_add' := (lambdaS f g p).map_add
+        map_smul' := fun r z ↦ by
+          simp only [Algebra.smul_def, map_mul, hbaseS, RingHom.id_apply] }
+    have hT : ∀ b : S, T (mk b 1) = mk b 1 := by
+      intro b
+      change lambdaS f g p (algebraMap S (L f) b) = algebraMap S (L g) b
+      exact hbaseS b
+    have hl : T x.val = 0 := by
+      change lambdaS f g p x.val = 0
+      rw [← hrhoS x, hx, HomogeneousLocalization.val_zero]
+    obtain ⟨n, hn⟩ := awayKernelFraction f.val.1 g.val.1 f.val.2 g.val.2
+      f.property.1 T hT x.val hl
+    refine ⟨n, ?_⟩
+    apply HomogeneousLocalization.val_injective
+    rw [HomogeneousLocalization.val_mul, HomogeneousLocalization.val_pow,
+      HomogeneousLocalization.val_zero, h.1 f g]
+    exact hn
 
 end LocalizedModule

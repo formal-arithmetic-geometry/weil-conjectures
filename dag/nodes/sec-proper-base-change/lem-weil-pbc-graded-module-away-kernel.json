@@ -15,30 +15,39 @@
  ],
  "proof": [
   {
-   "text": "Represent z in Z f by x/f^m and choose the homogeneous relation g^e = a*f.\nIf rho(z) = 0, the lambda fraction formula gives a^m • x/g^(e*m) = 0.\nThe ordinary localization zero criterion supplies N with g^N*a^m • x = 0.\nMultiplying this equality by f^m yields g^(N+e*m) • x = 0. Since d = deg f\nis positive, choose K with K*d >= N+e*m. Then g^(K*d) • x = 0, which\nsays U^K • z = 0 in N f and hence in its submodule Z f. For the ring\nkernel the identical computation uses multiplication rather than scalar action,\nthe given compatibility of rhoS with lambdaS, and localization's zero criterion.\nIndeed lambdaS preserves S and hence sends b/f^m to b*(a/g^e)^m, since it\npreserves inverses and the given inverse of f/1 is a/g^e. The formula for U\nidentifies U^K*z with g^(K*d)*x/f^(K*deg g+m). The inclusions of Z f and R f\nin their ordinary localizations are injective, so vanishing there suffices.\nIf a denominator is nilpotent the same zero criterion still applies; cancellation\nin the original ring is never used.",
+   "text": "For an ordinary localized-module element y=b/s killed by an S-linear map T from M_f to M_g which fixes b/1, multiply y by s. The identity s*(b/s)=b/1 and linearity give b/1=0 in M_g. Mathlib LocalizedModule.mk_eq applied against zero_mk yields a power g^n annihilating b. Since d>0, write d=d′+1 and factor g^(d*n)=g^(n*d′)*g^n, so it too annihilates b. Mathlib Localization.mk_pow and LocalizedModule.mk_smul_mk show (g^d/f^j)^n*y=0. This calculation is the proved private helper awayKernelFraction; it works without cancelling in S, including nilpotent denominators.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For x in Z_f with rho(x)=0, the given equality between rho and lambda makes its image under lambda zero in N_g. Apply the ordinary calculation with d=deg f, j=deg g. The given value of U and the scalar action induced by algebraMap identify the resulting annihilator with U^n. Injectivity of the submodule inclusion proves U^n*x=0.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the ring claim, view lambdaS as an S-linear map from S_f to S_g: its preservation of algebraMap and multiplication prove scalar compatibility. The ring S_f is definitionally its ordinary localized module with M=S. Compatibility of rhoS with lambdaS transfers the zero hypothesis. Apply the same calculation with M=S, then use HomogeneousLocalization.val_mul, val_pow and val_injective to obtain U^n*x=0 in R_f.",
    "uses": [
     "def-nagata-homogeneous-localization-degree-zero",
     "def-weil-pbc-module-localization-away",
-    "def-weil-ring-localization-away",
-    "def-sc-degree-zero-module-fractions"
+    "def-weil-ring-localization-away"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-nagata-homogeneous-localization-degree-zero",
   "def-weil-pbc-module-localization-away",
   "def-weil-ring-localization-away",
-  "def-sc-degree-zero-module-fractions"
+  "def-nagata-homogeneous-localization-degree-zero"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/01M4",
-  "place": "Expansion of the fraction computations in (1)(e),(h); source text read online"
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Shorter ordinary-localization proof of Constructions Lemma 01M4 (lemma-standard-open), kernel claims (1)(e),(h): clear the source denominator before applying the target zero criterion. Implemented using Mathlib fraction identities."
  },
  "mathlib_searches": [
   {
@@ -141,11 +150,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-c2166",
-  "group": "X3",
+  "reviewer": "COMPILER",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T135335-L-1701016",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three DAG records, the original interface, Stacks 01M4, axiom checks, and compilation of all delivered modules plus the sole direct importer."
+  "landing": "20261012T153259-L-2370240",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

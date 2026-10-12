@@ -8363,3 +8363,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:32 L: merged deliver/E3/Sheaf.AlgebraicGeometry.EtaleObjectSections (stage 3; reviewer PASS; first push; landing 20261012T153258-L-2369947 (proof); batch 20261012T153257; modules 1; new nodes 0)
 - 15:32 L: merged deliver/G3/Sheaf.Algebra.Homology.SubcategoryRightResolutionAssembly (stage 3; reviewer PASS; first push; landing 20261012T153258-L-2370045 (proof); batch 20261012T153257; modules 1; new nodes 0)
 - 15:32 L: merged deliver/K1/Sheaf.AlgebraicGeometry.ModulePullbackFiniteType (stage 3; reviewer PASS; first push; landing 20261012T153259-L-2370143 (proof); batch 20261012T153257; modules 1; new nodes 0)
+- 15:32 L: merged deliver/M1/Sheaf.Algebra.Module.GradedModuleAwayKernel (stage 3; reviewer PASS; first push; landing 20261012T153259-L-2370240 (proof); batch 20261012T153257; modules 1; new nodes 0)
