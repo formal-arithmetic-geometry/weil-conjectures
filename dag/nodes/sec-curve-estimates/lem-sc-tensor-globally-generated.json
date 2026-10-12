@@ -28,43 +28,42 @@
  ],
  "proof": [
   {
-   "text": "By induction on $n$, the tensor product $\\mathcal L_1\\otimes_{\\mathcal O_X}\\cdots\\otimes_{\\mathcal O_X}\\mathcal L_n$ is invertible. Here the $n$-fold tensor product is the iterated one, $\\mathcal L_1\\otimes\\cdots\\otimes\\mathcal L_n=(\\mathcal L_1\\otimes\\cdots\\otimes\\mathcal L_{n-1})\\otimes_{\\mathcal O_X}\\mathcal L_n$ [def-pur-sheaf-tensor-product]. For $n=1$ there is nothing to prove; for $n\\ge 2$ the first factor is invertible by induction and the tensor product of two invertible $\\mathcal O_X$-modules is invertible by [lem-weil-pbc-invertible-pullback-tensor] (1).",
+   "text": "Induct on n. The zero case is hL 0; the successor uses the proven source-library instance IsInvertible.tensorObj in ProjectionFormula, the tensor-invertibility part of lem-pc-tensor-dual-invertible, on the induction hypothesis and the last factor.",
    "uses": [
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "def-pur-sheaf-tensor-product"
+    "def-sc-positive-tensor-family",
+    "lem-pc-tensor-dual-invertible"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AO, tensor product construction"
+    "document": "WeilConjectures/AlgebraicGeometry/Modules/ProjectionFormula.lean",
+    "place": "instance IsInvertible.tensorObj"
    }
   },
   {
-   "text": "For each $\\mathcal L_i$, global generation gives a family whose nonvanishing opens cover $X$: in a local rank-one stalk at least one generating section has a unit coefficient. Quasi-compactness [def-weil-pbc-quasi-compact-scheme] gives a finite subcover, hence a finite global generating family. Choose such families for the factors. The tensor products of these sections generate the tensor product module by [lem-sc-tensor-generating-sections]. Hence the tensor product is globally generated, and the displayed tensor products are a generating family.",
+   "text": "For each factor apply lem-sc-finite-global-generating-family and choose its finite generating family. Apply lem-sc-finite-tensor-generating-sections to this family, construct a GeneratingSections record from its tuple-indexed epi, and retain the universal version of the same lemma for all finite generating families. Combine these with the invertibility induction to prove all four conjuncts.",
    "uses": [
-    "def-weil-pbc-generating-sections",
-    "lem-sc-tensor-generating-sections",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-quasi-compact-scheme"
+    "lem-sc-finite-global-generating-family",
+    "lem-sc-finite-tensor-generating-sections",
+    "def-weil-pbc-generating-sections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AO, proof"
+    "place": "Modules, Lemma 01AO (tensor generation); Varieties, Tag 09NC (quasi-compact selection)"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-generating-sections",
-  "lem-sc-tensor-generating-sections",
-  "def-weil-pbc-quasi-compact-scheme"
+  "def-sc-positive-tensor-family",
+  "lem-pc-tensor-dual-invertible",
+  "lem-sc-finite-global-generating-family",
+  "lem-sc-finite-tensor-generating-sections",
+  "def-weil-pbc-generating-sections"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01AO (lemma-tensor-product-globally-generated)"
+  "place": "Modules, Lemma 01AO (tensor generation); Varieties, Tag 09NC (quasi-compact selection)"
  },
  "mathlib_searches": [
   {
@@ -209,5 +208,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101848",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

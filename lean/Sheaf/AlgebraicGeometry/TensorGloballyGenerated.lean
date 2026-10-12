@@ -7,9 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import Sheaf.AlgebraicGeometry.TensorGeneratingSections
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+import Sheaf.AlgebraicGeometry.FiniteGlobalGeneratingFamily
+import Sheaf.AlgebraicGeometry.FiniteTensorGeneratingSections
 
 /-!
 # Tensor products of globally generated invertible modules
@@ -56,6 +56,26 @@ theorem isInvertible_and_globallyGenerated_positiveTensorFamily
         Epi ((positiveTensorFamily n L).freeHomEquiv.symm
           (fun j : (i : Fin (n + 1)) → (σ i).I ↦
             positiveTensorFamilySection n L (fun i ↦ (σ i).s (j i))))) := by
-  sorry
+  classical
+  have hInv : ∀ (k : ℕ) (F : Fin (k + 1) → X.Modules),
+      (∀ i, (F i).IsInvertible) → (positiveTensorFamily k F).IsInvertible := by
+    intro k
+    induction k with
+    | zero => intro F hF; exact hF 0
+    | succ k ih =>
+      intro F hF
+      let := ih (fun i ↦ F i.castSucc) (fun i ↦ hF i.castSucc)
+      let := hF (Fin.last (k + 1))
+      exact IsInvertible.tensorObj _ _
+  obtain ⟨σ, hσ⟩ : ∃ σ : (i : Fin (n + 1)) →
+      SheafOfModules.GeneratingSections (L i), ∀ i, (σ i).IsFiniteType := by
+    choose σ hσ using fun i ↦ finite_global_generating_family X (L i) (hL i) (hG i)
+    exact ⟨σ, hσ⟩
+  have hEpi := finite_tensor_generating_sections n L
+  have hp := hEpi σ hσ
+  exact ⟨hInv n L hL,
+    ⟨{ I := (i : Fin (n + 1)) → (σ i).I
+       s := fun j ↦ positiveTensorFamilySection n L (fun i ↦ (σ i).s (j i))
+       epi := hp }⟩, ⟨σ, hσ⟩, hEpi⟩
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,107 @@
+{
+ "id": "lem-sc-finite-tensor-generating-sections",
+ "kind": "statement",
+ "title": "Pure tensor generators with arbitrary finite index types",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $L_i$ be a nonempty finite family of $X$-modules with generating families $σ_i$ [def-weil-pbc-generating-sections], each indexed by an arbitrary finite type $I_i$. Then the free-sheaf map indexed by $∏_i I_i$ sending a tuple to the pure tensor section [def-sc-positive-tensor-family] is an epimorphism. No invertibility or quasi-compactness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01AO (tensor generation); Varieties, Tag 09NC (quasi-compact selection)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-generating-sections",
+  "def-sc-positive-tensor-family"
+ ],
+ "proof": [
+  {
+   "text": "When each I_i is nonempty, enumerate it by ULift (Fin(m_i+1)) and transport its generating map across the induced free-sheaf isomorphism. Apply lem-sc-tensor-generating-sections and reindex its tuple map by the product of these equivalences. When some I_i is empty, its free sheaf is zero and its epimorphic generating map forces L_i to be zero. Tensor with zero is zero, and induction on the left-associated tensor construction shows the whole product is zero. The tuple index type is empty, so its free sheaf is zero too, and the map to the zero tensor product is epi.",
+   "uses": [
+    "lem-sc-tensor-generating-sections",
+    "def-sc-positive-tensor-family",
+    "def-weil-pbc-generating-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-tensor-generating-sections",
+  "def-sc-positive-tensor-family",
+  "def-weil-pbc-generating-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01AO (tensor generation); Varieties, Tag 09NC (quasi-compact selection)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "globally generated invertible sheaf quasi compact finite global generators; finite tensor generating sections",
+   "results": "Service returned Internal Server Error on both queries",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A globally generated invertible sheaf on a quasi compact scheme admits finite global generators",
+   "results": "GeneratingSections and IsFiniteType APIs only, no global compactness lemma",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*generat|generat.*tensor; finite global generation in lean/WeilConjectures and lean/Sheaf",
+   "results": "Existing tensor_generating_sections only supports nonempty ULift Fin(m+1) indices; finite_sections_cover_of_globally_generated and invertible_generating_sections_fibre_criterion together give finite generation",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorGloballyGenerated",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-tensor-globally-generated",
+   "place": "proof step 2, finite families and tensor generation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTensorGeneratingSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTensorGeneratingSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_tensor_generating_sections",
+  "statement": "theorem finite_tensor_generating_sections {X : Scheme.{v}} (n : ℕ) (L : Fin (n + 1) → X.Modules) (σ : (i : Fin (n + 1)) → SheafOfModules.GeneratingSections (L i)) (hσ : ∀ i, (σ i).IsFiniteType) : Epi ((positiveTensorFamily n L).freeHomEquiv.symm (fun j : (i : Fin (n + 1)) → (σ i).I ↦ positiveTensorFamilySection n L (fun i ↦ (σ i).s (j i))))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101848",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101848",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
