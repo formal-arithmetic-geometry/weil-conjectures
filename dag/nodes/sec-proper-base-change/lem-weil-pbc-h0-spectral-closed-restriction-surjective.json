@@ -1,0 +1,187 @@
+{
+ "id": "lem-weil-pbc-h0-spectral-closed-restriction-surjective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Split from lem-weil-pbc-h0-spectral-closed-restriction, Steps 2-5",
+   "via": [
+    "lem-weil-pbc-h0-spectral-closed-restriction",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Surjectivity of spectral closed restriction",
+ "statement": "Let $X$ be a spectral space [def-weil-spectral-space] and let $Z\\subseteq X$ be a closed subset such that for every $x\\in X$ the intersection $Z\\cap\\overline{\\{x\\}}$ is connected [def-weil-connected-scheme] (in particular nonempty). Let $\\mathcal F$ be a sheaf of sets on $X$ (a functor from the open subsets of $X$, ordered by inclusion, to sets, satisfying the gluing condition for every open covering), and let $\\mathcal F|_Z$ be its inverse image along the inclusion $i:Z\\to X$: the sheafification [def-weil-pbc-sheafification] $\\theta:i_p\\mathcal F\\to\\mathcal F|_Z$ of the presheaf $i_p\\mathcal F:U\\mapsto\\varinjlim_{V\\supseteq U}\\mathcal F(V)$ on $Z$ ($V$ open in $X$, colimit [def-weil-pbc-category-colimit] of sets over the directed set of such $V$ ordered by reverse inclusion, coprojections $\\iota^U_V$), i.e. the construction of [def-weil-pbc-topological-inverse-image] (2), (3) with values in sets. Then the restriction map $\\Gamma(X,\\mathcal F)\\to\\Gamma(Z,\\mathcal F|_Z)$, $s\\mapsto\\theta_Z(\\iota^Z_X(s))$ (the component at $X$ of the unit $\\mathcal F\\to i_*(\\mathcal F|_Z)$), is surjective.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 59.82.1 (Tag 09ZG, label lemma-h0-topological, line 15099); Example (Tag 0CAF, label example-quinard, line 15167) shows that spectrality cannot be dropped"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "*Step 2 (finite constant sheaves; Tag 0CAM).* Claim: if $X'$ is a spectral space, $Z''\\subseteq X'$ closed with $Z''\\cap\\overline{\\{x\\}}$ connected for all $x\\in X'$, and $S$ a finite set, then restriction $\\rho:\\mathrm{LC}(X',S)\\to\\mathrm{LC}(Z'',S)$ of locally constant maps is bijective. Injective: if $g,g'$ are locally constant and agree on $Z''$, the set $\\{g=g'\\}$ is open (both are constant near each point) and contains $Z''$; for $x\\in X'$ it contains a $z\\in Z''\\cap\\overline{\\{x\\}}$, hence $x$ (as in Step 1 (**)). Surjective, by induction on the number $m$ of values of $h\\in\\mathrm{LC}(Z'',S)$ ($m\\le|S|$): if $m=0$ then $Z''=\\emptyset$, hence $X'=\\emptyset$ (each $Z''\\cap\\overline{\\{x\\}}$ is nonempty) and there is nothing to do; if $m=1$, $h$ is constant with value $s$ and the constant map $s$ on $X'$ restricts to $h$. If $m\\ge2$, pick a value $s$ and put $Z_1=h^{-1}(s)$, $Z_2=Z''\\setminus Z_1$; both are closed in $Z''$ ($h$ is locally constant, so its fibres are open and closed) and $Z''=Z_1\\amalg Z_2$. By [lem-weil-pbc-spectral-closed-clopen-decomposition-lift] $X'=X_1\\amalg X_2$ with $X_1,X_2$ closed, hence also open, and $Z_i=Z''\\cap X_i$. $X_2$ is spectral [lem-weil-pbc-spectral-closed-subspace], $Z_2=Z''\\cap X_2$ is closed in $X_2$, and for $x\\in X_2$ the closure of $\\{x\\}$ in $X_2$ is $\\overline{\\{x\\}}\\subseteq X_2$, so $Z_2\\cap\\overline{\\{x\\}}=Z''\\cap\\overline{\\{x\\}}$ is connected [def-weil-connected-scheme] (connectedness of a subset does not depend on the ambient space). $h|_{Z_2}$ takes $m-1$ values, so by induction it is the restriction of some $h_2\\in\\mathrm{LC}(X_2,S)$. The map equal to $s$ on $X_1$ and to $h_2$ on $X_2$ is locally constant ($X_1,X_2$ open) and restricts to $h$ on $Z''=Z_1\\amalg Z_2$.",
+   "uses": [
+    "lem-weil-pbc-spectral-closed-clopen-decomposition-lift",
+    "lem-weil-pbc-spectral-closed-subspace",
+    "def-weil-spectral-space",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 59.82.1 (Tag 09ZG), last sentence ('This case is a restatement of Lemma 0CAM'), and Lemma Tag 0CAM (lemma-connected-topological, line 15071)"
+   }
+  },
+  {
+   "text": "*Step 3 (finite products of pushed-forward constant sheaves).* Let $Z_1,\\dots,Z_n\\subseteq X$ be closed ($n\\ge0$), $S_1,\\dots,S_n$ finite sets, $\\mathcal G_k=(i_{Z_k})_*\\underline{S_k}_{Z_k}$ ($\\mathcal G_k(V)=\\mathrm{LC}(V\\cap Z_k,S_k)$) and $\\mathcal P=\\prod_k\\mathcal G_k$, computed sectionwise with projections $p_k$. Claim: $r_{\\mathcal P}$ is bijective. By [lem-weil-pbc-sets-inverse-image-colimits-finite-products] (b) the morphism $\\mathcal P|_Z\\to\\prod_k\\mathcal G_k|_Z$ with components $p_k|_Z$ is an isomorphism, so $\\Gamma(Z,\\mathcal P|_Z)\\to\\prod_k\\Gamma(Z,\\mathcal G_k|_Z)$, $t\\mapsto((p_k|_Z)_Z(t))_k$, is bijective, and by naturality (Step 1) it sends $r_{\\mathcal P}(s)$ to $(r_{\\mathcal G_k}(p_{k,X}s))_k$; as $\\mathcal P(X)=\\prod_k\\mathcal G_k(X)$, $r_{\\mathcal P}$ is bijective if every $r_{\\mathcal G_k}$ is. By [lem-weil-pbc-closed-pushforward-constant-restriction] (with $Z'=Z_k$, $S=S_k$) there is a bijection $\\beta_k:\\Gamma(Z,\\mathcal G_k|_Z)\\to\\mathrm{LC}(Z\\cap Z_k,S_k)$ with $\\beta_k\\circ r_{\\mathcal G_k}=\\rho_k$, the restriction $\\mathrm{LC}(Z_k,S_k)\\to\\mathrm{LC}(Z\\cap Z_k,S_k)$; so it suffices that $\\rho_k$ is bijective. This is Step 2 for $X'=Z_k$, $Z''=Z\\cap Z_k$: $Z_k$ is spectral [lem-weil-pbc-spectral-closed-subspace], $Z\\cap Z_k$ is closed in $Z_k$, and for $x\\in Z_k$ the closure of $\\{x\\}$ in $Z_k$ is $\\overline{\\{x\\}}$ ($Z_k$ closed), so $(Z\\cap Z_k)\\cap\\overline{\\{x\\}}=Z\\cap\\overline{\\{x\\}}$, connected by hypothesis.",
+   "uses": [
+    "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+    "lem-weil-pbc-closed-pushforward-constant-restriction",
+    "lem-weil-pbc-spectral-closed-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 59.82.1 (Tag 09ZG), fourth paragraph (lines 15141-15158: reduction to the sheaves (Z_i -> X)_* S_i, their sections, and conditions (1), (2) inherited by Z_i)"
+   }
+  },
+  {
+   "text": "*Step 4 (subsheaves).* Let $\\mathcal F'$ be a sheaf of sets on $X$ with a morphism $\\varphi:\\mathcal F'\\to\\mathcal P$, injective on sections over every open, into a sheaf $\\mathcal P$ for which $r_{\\mathcal P}$ is surjective. Claim: $r_{\\mathcal F'}$ is surjective. Let $t\\in\\Gamma(Z,\\mathcal F'|_Z)$ and choose $s\\in\\mathcal P(X)$ with $r_{\\mathcal P}(s)=(\\varphi|_Z)_Z(t)$. Let $x\\in X$ and $z\\in Z$ as in Step 1 (**). Write $c_{\\mathcal F',z}^{-1}(t_z)=f_z$ with $f\\in\\mathcal F'(W)$, $W\\ni z$ open (Step 1). Then $c_{\\mathcal P,z}(\\varphi_z(f_z))=(\\varphi|_Z)_z(t_z)=((\\varphi|_Z)_Zt)_z=(r_{\\mathcal P}s)_z=c_{\\mathcal P,z}(s_z)$, so $\\varphi_z(f_z)=s_z$, i.e. $\\varphi_{W'}(f|_{W'})=s|_{W'}$ for some open $z\\in W'\\subseteq W$, and $x\\in W'$. Thus $X$ is covered by opens $W_x\\ni x$ with $f^x\\in\\mathcal F'(W_x)$, $\\varphi(f^x)=s|_{W_x}$. On $W_x\\cap W_y$, $\\varphi(f^x|)=s|=\\varphi(f^y|)$, so $f^x|=f^y|$ by injectivity; by the sheaf property of $\\mathcal F'$ they glue to $f\\in\\mathcal F'(X)$, and $\\varphi_X(f)=s$ because both restrict to $s|_{W_x}$ on every $W_x$ ($\\mathcal P$ is a sheaf). Then $(\\varphi|_Z)_Z(r_{\\mathcal F'}(f))=r_{\\mathcal P}(\\varphi_Xf)=r_{\\mathcal P}(s)=(\\varphi|_Z)_Z(t)$, and $(\\varphi|_Z)_Z$ is injective by Step 1 (*), so $r_{\\mathcal F'}(f)=t$.",
+   "uses": [
+    "lem-weil-pbc-sets-inverse-image-stalk",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-sheaf-sections-determined-by-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 59.82.1 (Tag 09ZG), third paragraph (lines 15128-15139: for F ⊂ G, Γ(X,F) = Γ(Z,F|_Z) ∩ Γ(X,G), checked on stalks using that every point specializes to Z)"
+   }
+  },
+  {
+   "text": "*Step 5 (general $\\mathcal F$; conclusion).* By [lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings], $\\mathcal F$ is the colimit $(\\mathcal F,(c_\\lambda)_\\lambda)$, in sheaves of sets on $X$, of a directed system $(\\mathcal F_\\lambda)_{\\lambda\\in\\Lambda}$ such that each $\\mathcal F_\\lambda$ has a morphism, injective on sections, into a finite product $\\mathcal P_\\lambda=\\prod_k(i_{Z_k})_*\\underline{S_k}_{Z_k}$ with $Z_k$ closed and $S_k$ finite. By Step 3 $r_{\\mathcal P_\\lambda}$ is bijective, so by Step 4 every $r_{\\mathcal F_\\lambda}$ is surjective. Let $t\\in\\Gamma(Z,\\mathcal F|_Z)$. By [lem-weil-pbc-sets-inverse-image-colimits-finite-products] (a), $(\\mathcal F|_Z,(c_\\lambda|_Z)_\\lambda)$ is a colimit of the directed system $(\\mathcal F_\\lambda|_Z)$ in sheaves of sets on $Z$. The space $Z$ is spectral [lem-weil-pbc-spectral-closed-subspace], so the open $U=Z$ satisfies the hypothesis of part (2) of [lem-weil-pbc-sheaves-directed-colimit-sections]: given an open covering of $Z$, each point lies in a quasi-compact open contained in a member (quasi-compact opens form a basis [def-weil-spectral-space]), finitely many of these cover the quasi-compact $Z$, and pairwise intersections of quasi-compact opens are quasi-compact ($Z$ is quasi-separated); the coverings of $Z$ by finitely many quasi-compact opens therefore form a cofinal system as required. Hence $t=(c_\\lambda|_Z)_Z(t_\\lambda)$ for some $\\lambda$ and $t_\\lambda\\in\\Gamma(Z,\\mathcal F_\\lambda|_Z)$. Choose $s_\\lambda\\in\\mathcal F_\\lambda(X)$ with $r_{\\mathcal F_\\lambda}(s_\\lambda)=t_\\lambda$; by naturality (Step 1) $r_{\\mathcal F}(c_{\\lambda,X}(s_\\lambda))=(c_\\lambda|_Z)_Z(r_{\\mathcal F_\\lambda}(s_\\lambda))=t$. So $r_{\\mathcal F}$ is surjective, and it is injective by Step 1: $\\Gamma(X,\\mathcal F)\\to\\Gamma(Z,\\mathcal F|_Z)$ is bijective.",
+   "uses": [
+    "lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings",
+    "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+    "lem-weil-pbc-spectral-closed-subspace",
+    "lem-weil-pbc-sheaves-directed-colimit-sections",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 59.82.1 (Tag 09ZG), second paragraph (lines 15119-15127: F is a filtered colimit of sheaves as in Modules (0CAJ), restriction to Z is a left adjoint, Γ(X,-) and Γ(Z,-) commute with filtered colimits, Sheaves 009F)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spectral-closed-clopen-decomposition-lift",
+  "lem-weil-pbc-spectral-closed-subspace",
+  "def-weil-spectral-space",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+  "lem-weil-pbc-closed-pushforward-constant-restriction",
+  "lem-weil-pbc-sets-inverse-image-stalk",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-sheaf-sections-determined-by-germs",
+  "lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings",
+  "lem-weil-pbc-sheaves-directed-colimit-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 59.82.1 (Tag 09ZG, label lemma-h0-topological, line 15099); Example (Tag 0CAF, label example-quinard, line 15167) shows that spectrality cannot be dropped"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections of a sheaf on a spectral space equal sections on a closed subset meeting every point closure in a connected set",
+   "results": "AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, Scheme.ΓSpecIso, CategoryTheory.Sheaf.Γ, SheafedSpace.Γ_obj (none relevant)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf on spectral space, closed subset, restriction of global sections bijective",
+   "results": "TopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective (Topology.Sheaves.Stalks; bijectivity from stalks, a different statement), AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, LightCondSet.topCatAdjunctionCounit_bijective, Sheaf.isLocallyBijective_iff_isIso",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSpace, TopCat.Sheaf",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln SpectralSpace ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'connectedComponent\\|IsConnected' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/*.lean",
+   "results": "SpectralSpace only in Topology/Spectral/{Basic,Hom}.lean and RingTheory/Spectrum/Prime/Topology.lean (the class and the instance for PrimeSpectrum); no connectedness statement in Topology/Sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.SpectralClosedRestriction",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralClosedRestrictionSurjective",
+  "declaration": "TopCat.spectral_closed_restriction_surjective",
+  "file": "lean/Sheaf/Topology/SpectralClosedRestrictionSurjective.lean",
+  "statement": "theorem spectral_closed_restriction_surjective\n    (X : TopCat.{u}) [SpectralSpace X]\n    (Z : Set X) (hZ : IsClosed Z)\n    (hconn : ∀ x : X, ConnectedSpace (↥(Z ∩ closure ({x} : Set X))))\n    (F : X.Sheaf (Type u)) :\n    let i : TopCat.of Z ⟶ X := TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩\n    let R := (Sheaf.pullbackPushforwardAdjunction (Type u) i).unit.app F\n    Function.Surjective\n      (fun s : F.1.obj (op ⊤) =>\n        (R.1.app (op ⊤)) s)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T044738-L-2031940",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T044738-L-2031940",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

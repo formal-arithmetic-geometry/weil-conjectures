@@ -27,95 +27,30 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (restriction maps, stalks, injectivity).* For a sheaf of sets $\\mathcal G$ on $X$ and an open $W\\subseteq X$ write $r_{\\mathcal G,W}:\\mathcal G(W)\\to(\\mathcal G|_Z)(W\\cap Z)$, $s\\mapsto\\theta_{W\\cap Z}(\\iota^{W\\cap Z}_W(s))$, so $r_{\\mathcal G}=r_{\\mathcal G,X}$ is the map of the statement; these maps commute with restrictions, and for a morphism $\\varphi:\\mathcal G\\to\\mathcal G'$ of sheaves of sets with induced $\\varphi|_Z:\\mathcal G|_Z\\to\\mathcal G'|_Z$ (sheafification of $i_p\\varphi$) one has $(\\varphi|_Z)_{W\\cap Z}\\circ r_{\\mathcal G,W}=r_{\\mathcal G',W}\\circ\\varphi_W$ (definitions of $i_p\\varphi$ and of sheafification of a morphism, [def-weil-pbc-topological-inverse-image], [def-weil-pbc-sheafification]). Stalks $\\mathcal G_x=\\varinjlim_{W\\ni x}\\mathcal G(W)$ are directed colimits of sets, so $s_x=s'_x$ for $s,s'\\in\\mathcal G(W)$ iff $s|_{W'}=s'|_{W'}$ for some open $x\\in W'\\subseteq W$, and every element of $\\mathcal G_x$ is a germ [lem-weil-pbc-filtered-colimit-sets-elementwise]. By [lem-weil-pbc-sets-inverse-image-stalk] applied to $i:Z\\to X$, for $z\\in Z$ there is a bijection $c_{\\mathcal G,z}:\\mathcal G_z\\to(\\mathcal G|_Z)_z$ with $c_{\\mathcal G,z}(s_z)=(r_{\\mathcal G,W}(s))_z$ for $W\\ni z$ open, $s\\in\\mathcal G(W)$. It is natural: $(\\varphi|_Z)_z(c_{\\mathcal G,z}(s_z))=((\\varphi|_Z)(r_{\\mathcal G,W}s))_z=(r_{\\mathcal G',W}(\\varphi_Ws))_z=c_{\\mathcal G',z}(\\varphi_z(s_z))$. Two consequences. (*) If $\\varphi$ is injective on sections over every open of $X$, then $\\varphi|_Z$ is injective on sections over every open of $Z$: $\\varphi_z$ is injective (if $\\varphi(s)_z=\\varphi(s')_z$ then $\\varphi(s|_{W'})=\\varphi(s'|_{W'})$ on some $W'\\ni z$, so $s|_{W'}=s'|_{W'}$), hence so is $(\\varphi|_Z)_z=c_{\\mathcal G',z}\\varphi_zc_{\\mathcal G,z}^{-1}$, and two sections of $\\mathcal G|_Z$ with the same image then have equal germs at every point, so are equal [lem-weil-pbc-sheaf-sections-determined-by-germs]. (**) Every $x\\in X$ specializes to a point of $Z$: by hypothesis there is $z\\in Z\\cap\\overline{\\{x\\}}$, and every open $W\\ni z$ contains $x$ (otherwise $\\overline{\\{x\\}}\\subseteq X\\setminus W$). Injectivity of $r_{\\mathcal F}$: let $s,s'\\in\\mathcal F(X)$ with $r_{\\mathcal F}(s)=r_{\\mathcal F}(s')$, let $x\\in X$ and $z$ as in (**). Then $c_{\\mathcal F,z}(s_z)=(r_{\\mathcal F}s)_z=(r_{\\mathcal F}s')_z=c_{\\mathcal F,z}(s'_z)$, so $s_z=s'_z$, i.e. $s|_W=s'|_W$ for an open $W\\ni z$; as $x\\in W$, $s_x=s'_x$. Hence $s=s'$ [lem-weil-pbc-sheaf-sections-determined-by-germs].",
+   "text": "For injectivity, equality of restricted sections gives equality of germs at each z in Z by the proved private germ-comparison helper, obtained from Mathlib stalkPullbackIso, stalkFunctor_map_unit_toSheafify_isIso, and compatibility of the abstract and constructed pullback adjunction units via Adjunction.unit_leftAdjointUniq_hom_app. Connectedness supplies z in Z ∩ closure {x} for every x. Equal germs at z give equal restrictions on a neighbourhood W of z by Mathlib germ_eq. Specialization implies x is in W. Applying the germ map at x gives equality of germs at x, and Mathlib section_ext gives equality of the original global sections.",
    "uses": [
-    "def-weil-pbc-topological-inverse-image",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
     "lem-weil-pbc-sets-inverse-image-stalk",
     "lem-weil-pbc-sheaf-sections-determined-by-germs"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 59.82.1 (Tag 09ZG), first paragraph (line 15112: specialization maps on stalks; every point specializes to a point of Z)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (finite constant sheaves; Tag 0CAM).* Claim: if $X'$ is a spectral space, $Z''\\subseteq X'$ closed with $Z''\\cap\\overline{\\{x\\}}$ connected for all $x\\in X'$, and $S$ a finite set, then restriction $\\rho:\\mathrm{LC}(X',S)\\to\\mathrm{LC}(Z'',S)$ of locally constant maps is bijective. Injective: if $g,g'$ are locally constant and agree on $Z''$, the set $\\{g=g'\\}$ is open (both are constant near each point) and contains $Z''$; for $x\\in X'$ it contains a $z\\in Z''\\cap\\overline{\\{x\\}}$, hence $x$ (as in Step 1 (**)). Surjective, by induction on the number $m$ of values of $h\\in\\mathrm{LC}(Z'',S)$ ($m\\le|S|$): if $m=0$ then $Z''=\\emptyset$, hence $X'=\\emptyset$ (each $Z''\\cap\\overline{\\{x\\}}$ is nonempty) and there is nothing to do; if $m=1$, $h$ is constant with value $s$ and the constant map $s$ on $X'$ restricts to $h$. If $m\\ge2$, pick a value $s$ and put $Z_1=h^{-1}(s)$, $Z_2=Z''\\setminus Z_1$; both are closed in $Z''$ ($h$ is locally constant, so its fibres are open and closed) and $Z''=Z_1\\amalg Z_2$. By [lem-weil-pbc-spectral-closed-clopen-decomposition-lift] $X'=X_1\\amalg X_2$ with $X_1,X_2$ closed, hence also open, and $Z_i=Z''\\cap X_i$. $X_2$ is spectral [lem-weil-pbc-spectral-closed-subspace], $Z_2=Z''\\cap X_2$ is closed in $X_2$, and for $x\\in X_2$ the closure of $\\{x\\}$ in $X_2$ is $\\overline{\\{x\\}}\\subseteq X_2$, so $Z_2\\cap\\overline{\\{x\\}}=Z''\\cap\\overline{\\{x\\}}$ is connected [def-weil-connected-scheme] (connectedness of a subset does not depend on the ambient space). $h|_{Z_2}$ takes $m-1$ values, so by induction it is the restriction of some $h_2\\in\\mathrm{LC}(X_2,S)$. The map equal to $s$ on $X_1$ and to $h_2$ on $X_2$ is locally constant ($X_1,X_2$ open) and restricts to $h$ on $Z''=Z_1\\amalg Z_2$.",
+   "text": "Combine this injectivity with the surjectivity component, which carries Steps 2-5 of the original argument, using Function.Bijective = Injective ∧ Surjective.",
    "uses": [
-    "lem-weil-pbc-spectral-closed-clopen-decomposition-lift",
-    "lem-weil-pbc-spectral-closed-subspace",
-    "def-weil-spectral-space",
-    "def-weil-connected-scheme"
+    "lem-weil-pbc-h0-spectral-closed-restriction-surjective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 59.82.1 (Tag 09ZG), last sentence ('This case is a restatement of Lemma 0CAM'), and Lemma Tag 0CAM (lemma-connected-topological, line 15071)"
-   }
-  },
-  {
-   "text": "*Step 3 (finite products of pushed-forward constant sheaves).* Let $Z_1,\\dots,Z_n\\subseteq X$ be closed ($n\\ge0$), $S_1,\\dots,S_n$ finite sets, $\\mathcal G_k=(i_{Z_k})_*\\underline{S_k}_{Z_k}$ ($\\mathcal G_k(V)=\\mathrm{LC}(V\\cap Z_k,S_k)$) and $\\mathcal P=\\prod_k\\mathcal G_k$, computed sectionwise with projections $p_k$. Claim: $r_{\\mathcal P}$ is bijective. By [lem-weil-pbc-sets-inverse-image-colimits-finite-products] (b) the morphism $\\mathcal P|_Z\\to\\prod_k\\mathcal G_k|_Z$ with components $p_k|_Z$ is an isomorphism, so $\\Gamma(Z,\\mathcal P|_Z)\\to\\prod_k\\Gamma(Z,\\mathcal G_k|_Z)$, $t\\mapsto((p_k|_Z)_Z(t))_k$, is bijective, and by naturality (Step 1) it sends $r_{\\mathcal P}(s)$ to $(r_{\\mathcal G_k}(p_{k,X}s))_k$; as $\\mathcal P(X)=\\prod_k\\mathcal G_k(X)$, $r_{\\mathcal P}$ is bijective if every $r_{\\mathcal G_k}$ is. By [lem-weil-pbc-closed-pushforward-constant-restriction] (with $Z'=Z_k$, $S=S_k$) there is a bijection $\\beta_k:\\Gamma(Z,\\mathcal G_k|_Z)\\to\\mathrm{LC}(Z\\cap Z_k,S_k)$ with $\\beta_k\\circ r_{\\mathcal G_k}=\\rho_k$, the restriction $\\mathrm{LC}(Z_k,S_k)\\to\\mathrm{LC}(Z\\cap Z_k,S_k)$; so it suffices that $\\rho_k$ is bijective. This is Step 2 for $X'=Z_k$, $Z''=Z\\cap Z_k$: $Z_k$ is spectral [lem-weil-pbc-spectral-closed-subspace], $Z\\cap Z_k$ is closed in $Z_k$, and for $x\\in Z_k$ the closure of $\\{x\\}$ in $Z_k$ is $\\overline{\\{x\\}}$ ($Z_k$ closed), so $(Z\\cap Z_k)\\cap\\overline{\\{x\\}}=Z\\cap\\overline{\\{x\\}}$, connected by hypothesis.",
-   "uses": [
-    "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
-    "lem-weil-pbc-closed-pushforward-constant-restriction",
-    "lem-weil-pbc-spectral-closed-subspace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 59.82.1 (Tag 09ZG), fourth paragraph (lines 15141-15158: reduction to the sheaves (Z_i -> X)_* S_i, their sections, and conditions (1), (2) inherited by Z_i)"
-   }
-  },
-  {
-   "text": "*Step 4 (subsheaves).* Let $\\mathcal F'$ be a sheaf of sets on $X$ with a morphism $\\varphi:\\mathcal F'\\to\\mathcal P$, injective on sections over every open, into a sheaf $\\mathcal P$ for which $r_{\\mathcal P}$ is surjective. Claim: $r_{\\mathcal F'}$ is surjective. Let $t\\in\\Gamma(Z,\\mathcal F'|_Z)$ and choose $s\\in\\mathcal P(X)$ with $r_{\\mathcal P}(s)=(\\varphi|_Z)_Z(t)$. Let $x\\in X$ and $z\\in Z$ as in Step 1 (**). Write $c_{\\mathcal F',z}^{-1}(t_z)=f_z$ with $f\\in\\mathcal F'(W)$, $W\\ni z$ open (Step 1). Then $c_{\\mathcal P,z}(\\varphi_z(f_z))=(\\varphi|_Z)_z(t_z)=((\\varphi|_Z)_Zt)_z=(r_{\\mathcal P}s)_z=c_{\\mathcal P,z}(s_z)$, so $\\varphi_z(f_z)=s_z$, i.e. $\\varphi_{W'}(f|_{W'})=s|_{W'}$ for some open $z\\in W'\\subseteq W$, and $x\\in W'$. Thus $X$ is covered by opens $W_x\\ni x$ with $f^x\\in\\mathcal F'(W_x)$, $\\varphi(f^x)=s|_{W_x}$. On $W_x\\cap W_y$, $\\varphi(f^x|)=s|=\\varphi(f^y|)$, so $f^x|=f^y|$ by injectivity; by the sheaf property of $\\mathcal F'$ they glue to $f\\in\\mathcal F'(X)$, and $\\varphi_X(f)=s$ because both restrict to $s|_{W_x}$ on every $W_x$ ($\\mathcal P$ is a sheaf). Then $(\\varphi|_Z)_Z(r_{\\mathcal F'}(f))=r_{\\mathcal P}(\\varphi_Xf)=r_{\\mathcal P}(s)=(\\varphi|_Z)_Z(t)$, and $(\\varphi|_Z)_Z$ is injective by Step 1 (*), so $r_{\\mathcal F'}(f)=t$.",
-   "uses": [
-    "lem-weil-pbc-sets-inverse-image-stalk",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-sheaf-sections-determined-by-germs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 59.82.1 (Tag 09ZG), third paragraph (lines 15128-15139: for F ⊂ G, Γ(X,F) = Γ(Z,F|_Z) ∩ Γ(X,G), checked on stalks using that every point specializes to Z)"
-   }
-  },
-  {
-   "text": "*Step 5 (general $\\mathcal F$; conclusion).* By [lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings], $\\mathcal F$ is the colimit $(\\mathcal F,(c_\\lambda)_\\lambda)$, in sheaves of sets on $X$, of a directed system $(\\mathcal F_\\lambda)_{\\lambda\\in\\Lambda}$ such that each $\\mathcal F_\\lambda$ has a morphism, injective on sections, into a finite product $\\mathcal P_\\lambda=\\prod_k(i_{Z_k})_*\\underline{S_k}_{Z_k}$ with $Z_k$ closed and $S_k$ finite. By Step 3 $r_{\\mathcal P_\\lambda}$ is bijective, so by Step 4 every $r_{\\mathcal F_\\lambda}$ is surjective. Let $t\\in\\Gamma(Z,\\mathcal F|_Z)$. By [lem-weil-pbc-sets-inverse-image-colimits-finite-products] (a), $(\\mathcal F|_Z,(c_\\lambda|_Z)_\\lambda)$ is a colimit of the directed system $(\\mathcal F_\\lambda|_Z)$ in sheaves of sets on $Z$. The space $Z$ is spectral [lem-weil-pbc-spectral-closed-subspace], so the open $U=Z$ satisfies the hypothesis of part (2) of [lem-weil-pbc-sheaves-directed-colimit-sections]: given an open covering of $Z$, each point lies in a quasi-compact open contained in a member (quasi-compact opens form a basis [def-weil-spectral-space]), finitely many of these cover the quasi-compact $Z$, and pairwise intersections of quasi-compact opens are quasi-compact ($Z$ is quasi-separated); the coverings of $Z$ by finitely many quasi-compact opens therefore form a cofinal system as required. Hence $t=(c_\\lambda|_Z)_Z(t_\\lambda)$ for some $\\lambda$ and $t_\\lambda\\in\\Gamma(Z,\\mathcal F_\\lambda|_Z)$. Choose $s_\\lambda\\in\\mathcal F_\\lambda(X)$ with $r_{\\mathcal F_\\lambda}(s_\\lambda)=t_\\lambda$; by naturality (Step 1) $r_{\\mathcal F}(c_{\\lambda,X}(s_\\lambda))=(c_\\lambda|_Z)_Z(r_{\\mathcal F_\\lambda}(s_\\lambda))=t$. So $r_{\\mathcal F}$ is surjective, and it is injective by Step 1: $\\Gamma(X,\\mathcal F)\\to\\Gamma(Z,\\mathcal F|_Z)$ is bijective.",
-   "uses": [
-    "lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings",
-    "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
-    "lem-weil-pbc-spectral-closed-subspace",
-    "lem-weil-pbc-sheaves-directed-colimit-sections",
-    "def-weil-spectral-space"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 59.82.1 (Tag 09ZG), second paragraph (lines 15119-15127: F is a filtered colimit of sheaves as in Modules (0CAJ), restriction to Z is a left adjoint, Γ(X,-) and Γ(Z,-) commute with filtered colimits, Sheaves 009F)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-topological-inverse-image",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
   "lem-weil-pbc-sets-inverse-image-stalk",
   "lem-weil-pbc-sheaf-sections-determined-by-germs",
-  "lem-weil-pbc-spectral-closed-clopen-decomposition-lift",
-  "lem-weil-pbc-spectral-closed-subspace",
-  "def-weil-spectral-space",
-  "def-weil-connected-scheme",
-  "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
-  "lem-weil-pbc-closed-pushforward-constant-restriction",
-  "lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings",
-  "lem-weil-pbc-sheaves-directed-colimit-sections"
+  "lem-weil-pbc-h0-spectral-closed-restriction-surjective"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Lemma 59.82.1 (Tag 09ZG, label lemma-h0-topological, line 15099) and its proof (lines 15111-15163), with Lemma Tag 0CAM (lemma-connected-topological) for the constant case"
+  "place": "Tag 09ZG; entire injectivity step formalized using Mathlib stalk comparison, germ_eq and section_ext; only surjectivity isolated for further work"
  },
  "mathlib_searches": [
   {
@@ -198,5 +133,15 @@
   "group": "M1",
   "result": "pass",
   "note": "SpectralSpace X instance; Z : Set X with IsClosed (used, not hollow); hconn ConnectedSpace of subtype Z ∩ closure {x} for all x (includes nonempty); F : X.Sheaf (Type u) sheaf of sets; i subtype inclusion as in landed ClosedPushforwardConstantRestriction; inverse image = Mathlib Sheaf.pullback (≅ presheafToSheaf ∘ Presheaf.pullback, the node's (2),(3)); conclusion bijectivity of unit component at op ⊤; no extra universe, no private copy"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T044738-L-2031940",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -6038,3 +6038,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:47 L: merged deliver/A3/Sheaf.RingTheory.StrictHenselizationTriples (stage 3; reviewer PASS; first push; landing 20261012T044737-L-2031325 (interface); batch 20261012T044734; modules 5; new nodes 4)
 - 04:47 L: merged deliver/B2/Sheaf.Paper.FreeCechComplexExact (stage 3; reviewer PASS; first push; landing 20261012T044737-L-2031582 (interface); batch 20261012T044734; modules 2; new nodes 1)
 - 04:47 L: merged deliver/B3/Sheaf.AlgebraicGeometry.ArtinSchreierSequence (stage 3; reviewer PASS; first push; landing 20261012T044737-L-2031778 (interface); batch 20261012T044734; modules 3; new nodes 2)
+- 04:47 L: merged deliver/B3/Sheaf.Topology.SpectralClosedRestriction (stage 3; reviewer PASS; first push; landing 20261012T044738-L-2031940 (interface); batch 20261012T044734; modules 2; new nodes 1)
