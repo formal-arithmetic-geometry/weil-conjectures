@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-right-kan-extension-coherent-shift",
+ "kind": "statement",
+ "title": "Coherent shifts on a right Kan extension",
+ "statement": "Let $D,L,D^{\\prime}$ be categories with coherent integer shifts, as in [def-weil-triangulated-category], without requiring a triangulation. Let $Q:D\\to L$ and $F:D\\to D^{\\prime}$ commute coherently with these shifts. Suppose $LF:L\\to D^{\\prime}$ and $\\alpha:Q\\circ LF\\to F$ have the right Kan universal property: for every $G:L\\to D^{\\prime}$, composing a transformation $G\\to LF$ with $\\alpha$ after whiskering by $Q$ is a bijection onto the transformations $Q\\circ G\\to F$. Then $LF$ admits coherent integer-shift comparisons for which $\\alpha$ commutes with shifts.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 05SU (lemma-derived-shift), Lemma Tag 05SC (lemma-2-out-of-3-defined), Proposition Tag 05SE (proposition-derived-functor), LF part"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "For each integer n, the source and target shift functors are equivalences. Precomposition and postcomposition by them transport terminal objects of right-extension categories. The shift comparisons of Q and F identify the corresponding extension problems. Apply the equivalence invariance and rightKanExtensionUniqueOfIso APIs of Mathlib.CategoryTheory.Functor.KanExtension.Basic.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The unique comparison between the two shifted Kan extensions gives shiftFunctor L n composed with LF isomorphic to LF composed with shiftFunctor D-prime n. Its defining counit equation is exactly the shift-compatibility square of alpha.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For zero, the unit comparison satisfies the counit equation. For a+b, the composite of the a and b comparisons satisfies it, using the coherence of Q and F. Right Kan hom-ext uniqueness identifies these candidates with the canonical comparisons. These are the two CommShift laws; the counit equations give NatTrans.CommShift alpha.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "The shift-comparison assembly in the exactness clause of Proposition 05SE for the everywhere-defined left derived functor; generic universal-property form of the 05SU comparisons; proved in Lean by equivalence transport, right Kan uniqueness, and explicit zero/addition coherence calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A right Kan extension commutes coherently with integer shifts when the original functor and the extension functor commute with shifts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right Kan extension of an exact triangulated functor along a localization is triangulated if its pointwise left derived values exist everywhere",
+   "results": "CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Triangulated.Localization.isTriangulated_functor, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization', CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization, DerivedCategory.instIsTriangulated",
+   "date": "2026-10-12",
+   "verdict": "no exact match; localization descent APIs found"
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftOfLocalization|isTriangulated_of_precomp_iso",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; localization descent APIs found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.LeftDerivedExactWhenDefined",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-complete-integral-detailed",
+   "place": "The shift-comparison assembly in the exactness clause of Proposition 05SE for the everywhere-defined left derived functor; generic universal-property form of the 05SU comparisons",
+   "via": [
+    "lem-pur-left-derived-exact-when-defined"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightKanExtensionCoherentShift",
+  "file": "lean/Sheaf/CategoryTheory/RightKanExtensionCoherentShift.lean",
+  "declaration": "CategoryTheory.Functor.rightKanExtension_coherentShift",
+  "statement": "theorem rightKanExtension_coherentShift {D : Type u} [Category.{v} D] [HasShift D ℤ] {D' : Type u'} [Category.{v'} D'] [HasShift D' ℤ] {L : Type u''} [Category.{v''} L] [HasShift L ℤ] (F : D ⥤ D') [F.CommShift ℤ] (Q : D ⥤ L) [Q.CommShift ℤ] (LF : L ⥤ D') (α : Q ⋙ LF ⟶ F) (hLF : LF.IsRightKanExtension α) : ∃ (hshift : LF.CommShift ℤ), letI := hshift NatTrans.CommShift α ℤ",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-963dd",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697773",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-963dd",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697773",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery packet, changed modules, node records, change record, report, and scratch compilation matched the stated proof and documented localization interface correction; all delivery modules and the unchanged direct importer compile cleanly."
+ }
+}

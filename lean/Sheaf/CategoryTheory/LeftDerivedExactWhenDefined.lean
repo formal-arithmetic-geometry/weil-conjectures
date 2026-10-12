@@ -7,10 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 public import Mathlib.CategoryTheory.Functor.KanExtension.Basic
-import Sheaf.CategoryTheory.DerivedFunctorInverts
-import Sheaf.CategoryTheory.DerivedFunctorShift
-import Sheaf.CategoryTheory.DerivedFunctorTriangles
-import Sheaf.CategoryTheory.LeftDerivedValueMorphism
+import Sheaf.CategoryTheory.RightKanExtensionCoherentShift
+import Sheaf.CategoryTheory.LeftDerivedKanSourceTriangles
 
 /-!
 # Exactness of everywhere-defined left derived functors
@@ -35,19 +33,19 @@ The hypothesis `hLF` records that `LF` is characterized by the universal
 (right Kan extension) property along the localization functor `Q`; the
 conclusion supplies a compatible shift structure and exactness. The triangulation
 on the localization is the induced one, expressed by exactness of `Q`.
+The localization hypothesis uses Mathlib's universe-polymorphic localization interface.
 
 Proof:
-1. Lemma 05SA(2) (`lem-pur-derived-functor-morphisms-05sa`) makes the values functorial.
-2. Lemma 05SB(2) (`lem-pur-derived-functor-inverts-05sb`) inverts the denominators,
-so the functor factors through `Q` by its localization universal property.
-3. Lemma 05SU(2) (`lem-pur-derived-functor-shift-05su`) supplies integer-shift
-comparison isomorphisms.
-4. Lemma 05SC (`lem-pur-derived-functor-triangles-05sc`) shows that distinguished
-triangles in the source map to distinguished triangles under the derived values.
-5. Proposition 05R6 (`lem-pur-localization-triangles-05r6`) represents every localized
-distinguished triangle by a source triangle. Descend the shift comparisons by the
-universal property on natural transformations and use closure under isomorphisms
-to deduce exactness on the localization. -/
+1. The right Kan universal property transports along shift equivalences, giving coherent
+integer shifts on LF and making alpha commute with shifts.
+2. Everywhere-defined denominator values give pointwise Kan limits. Lemma 05SC
+(`lem-pur-derived-functor-triangles-05sc`) supplies a distinguished triangle of values
+for every distinguished source triangle. Canonical limit comparisons, fraction squares,
+and split-mono cancellation identify it with the image under Q followed by LF.
+3. Proposition 05R6 (`lem-pur-localization-triangles-05r6`) represents every localized
+distinguished triangle by a source triangle. Map the representing isomorphism by LF,
+compose with the triangle-composition comparison, and use closure under isomorphisms
+in D' to obtain exactness. -/
 theorem leftDerived_exact_when_defined
     (D : Type u) [Category.{v} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
@@ -62,12 +60,29 @@ theorem leftDerived_exact_when_defined
     (S : MorphismProperty D)
     (hS : S.IsSaturatedTriangulatedMultiplicativeSystem)
     (Q : D ⥤ L) [Q.CommShift ℤ] [Q.IsTriangulated]
-    (hQ : Q.IsStrictLocalizationAt S)
+    [Q.IsLocalization S]
+    (_hQ : Q.IsStrictLocalizationAt S)
     (LF : L ⥤ D')
     (α : Q ⋙ LF ⟶ F)
     (hLF : LF.IsRightKanExtension α)
     (hdefined : ∀ X : D, F.IsTriangulatedLeftDerivedDefinedAt S hS X) :
     ∃ (_ : LF.CommShift ℤ), LF.IsTriangulated := by
-  sorry
+  classical
+  let : S.HasLeftCalculusOfFractions := hS.1.1.1
+  obtain ⟨hshift, hα⟩ := rightKanExtension_coherentShift F Q LF α hLF
+  let : LF.CommShift ℤ := hshift
+  let : NatTrans.CommShift α ℤ := hα
+  have hsource : (Q ⋙ LF).IsTriangulated := by
+    constructor
+    intro T hT
+    exact leftDerived_kan_map_source_distinguished D D' L F S hS Q LF α hLF
+      hdefined hα T hT
+  let : (Q ⋙ LF).IsTriangulated := hsource
+  have := Localization.essSurj_mapArrow Q S
+  refine ⟨hshift, ⟨fun T hT ↦ ?_⟩⟩
+  obtain ⟨T₀, e, hT₀⟩ := (Q.distTriang_iff T).1 hT
+  exact Pretriangulated.isomorphic_distinguished _
+    ((Q ⋙ LF).map_distinguished T₀ hT₀) _
+    (LF.mapTriangle.mapIso e ≪≫ (mapTriangleCompIso Q LF).symm.app T₀)
 
 end CategoryTheory.Functor

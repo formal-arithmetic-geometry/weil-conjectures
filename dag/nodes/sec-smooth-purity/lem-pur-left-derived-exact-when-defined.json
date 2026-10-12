@@ -25,77 +25,38 @@
  ],
  "proof": [
   {
-   "text": "The everywhere-defined values of LF are functorial on morphisms by Lemma 05SA(2), so they define the morphism part of LF.",
+   "text": "Give LF coherent integer shifts and make alpha shift-compatible, using rightKanExtension_coherentShift. This is a generic right Kan universal-property construction; no pointwise-value object is chosen.",
    "uses": [
-    "lem-pur-derived-functor-morphisms-05sa"
+    "lem-pur-right-kan-extension-coherent-shift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "/home/ubuntu/c1-stacks-review/derived.tex",
-    "place": "Lemma 05SA(2)"
-   }
+   "elementary": false
   },
   {
-   "text": "For every s in S, Lemma 05SB(2) says that LF(s) is an isomorphism, so the value construction factors through the abstract localization Q by its universal property.",
+   "text": "For each distinguished source triangle T, leftDerived_kan_map_source_distinguished identifies its image under Q composed with LF with the distinguished triangle of left-derived values. Consequently Q composed with LF is triangulated.",
    "uses": [
-    "lem-pur-derived-functor-inverts-05sb",
-    "def-pur-saturated-triangulated-localization"
+    "lem-pur-left-derived-kan-source-triangles"
    ],
-   "elementary": false,
-   "source": {
-    "document": "/home/ubuntu/c1-stacks-review/derived.tex",
-    "place": "Lemma 05SB(2) and the localization universal property"
-   }
+   "elementary": false
   },
   {
-   "text": "Lemma 05SU(2) supplies canonical isomorphisms LF(X)[n] \\to LF(X[n]) for every integer n, hence LF is compatible with the shift.",
-   "uses": [
-    "lem-pur-derived-functor-shift-05su"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "/home/ubuntu/c1-stacks-review/derived.tex",
-    "place": "Lemma 05SU(2)"
-   }
-  },
-  {
-   "text": "Applying Lemma 05SC to any distinguished triangle $(X,Y,Z,f,g,h)$ of $D$ (where $LF$ is defined at all objects) shows that $(LF(X),LF(Y),LF(Z),LF(f),LF(g),LF(h))$, with $LF(X[1])$ identified with $LF(X)[1]$ by the shift isomorphism of Step 3, is distinguished in $D'$. Thus $LF\\circ Q$, with the shift isomorphisms of Step 3, sends distinguished triangles of $D$ to distinguished triangles of $D'$.",
-   "uses": [
-    "lem-pur-derived-functor-triangles-05sc",
-    "lem-pur-derived-functor-morphisms-05sa",
-    "lem-pur-derived-functor-shift-05su"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "/home/ubuntu/c1-stacks-review/derived.tex",
-    "place": "Lemma 05SC, LF clause"
-   }
-  },
-  {
-   "text": "By Proposition 05R6, $S^{-1}D$ carries the triangulated structure with $[1]\\circ Q=Q\\circ[1]$, and every distinguished triangle of $S^{-1}D$ is isomorphic to $Q$ applied to a distinguished triangle of $D$. The shift isomorphisms of Step 3 for $LF\\circ Q$ descend to $LF$ by the universal property for natural transformations in [def-pur-saturated-triangulated-localization]; an isomorphic triangle of a distinguished triangle is distinguished (TR1 in $D'$), so Step 4 shows that $LF$ sends every distinguished triangle of $S^{-1}D$ to a distinguished triangle, and $LF$ is exact.",
+   "text": "Use the left calculus of fractions in hS and Mathlib Localization.essSurj_mapArrow Q S. By Functor.distTriang_iff (the 05R6 localization-triangle statement), every distinguished T of L is isomorphic to Q.mapTriangle(T0) for a distinguished T0 of D. Apply LF.mapTriangle to that isomorphism and compose with mapTriangleCompIso. Closure under triangle isomorphism makes LF(T) distinguished, and gives LF.IsTriangulated.",
    "uses": [
     "lem-pur-localization-triangles-05r6",
     "def-pur-saturated-triangulated-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "/home/ubuntu/c1-stacks-review/derived.tex",
-    "place": "Proposition 05R6 and Proposition 05SE, LF part"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-derived-functor-morphisms-05sa",
-  "lem-pur-derived-functor-inverts-05sb",
-  "lem-pur-derived-functor-shift-05su",
-  "lem-pur-derived-functor-triangles-05sc",
+  "lem-pur-right-kan-extension-coherent-shift",
+  "lem-pur-left-derived-kan-source-triangles",
   "lem-pur-localization-triangles-05r6",
   "def-pur-saturated-triangulated-localization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Definition Tag 05S9, Lemma Tag 05SA, and Proposition Tag 05SE in Situation Tag 05S8"
+  "place": "Proposition Tag 05SE, LF part, assembled through coherent Kan shifts, source triangles, and the Mathlib 05R6 triangle-image criterion"
  },
  "mathlib_searches": [
   {
@@ -155,7 +116,7 @@
   "module": "Sheaf.CategoryTheory.LeftDerivedExactWhenDefined",
   "declaration": "CategoryTheory.Functor.leftDerived_exact_when_defined",
   "file": "lean/Sheaf/CategoryTheory/LeftDerivedExactWhenDefined.lean",
-  "statement": "theorem leftDerived_exact_when_defined (D : Type u) [Category.{v} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [CategoryTheory.IsTriangulated D] (D' : Type u') [Category.{v'} D'] [HasZeroObject D'] [HasShift D' ℤ] [Preadditive D'] [∀ n : ℤ, (shiftFunctor D' n).Additive] [Pretriangulated D'] [CategoryTheory.IsTriangulated D'] (L : Type u'') [Category.{v''} L] [HasZeroObject L] [HasShift L ℤ] [Preadditive L] [∀ n : ℤ, (shiftFunctor L n).Additive] [Pretriangulated L] [CategoryTheory.IsTriangulated L] (F : D ⥤ D') [F.CommShift ℤ] [F.IsTriangulated] (S : MorphismProperty D) (hS : S.IsSaturatedTriangulatedMultiplicativeSystem) (Q : D ⥤ L) [Q.CommShift ℤ] [Q.IsTriangulated] (hQ : Q.IsStrictLocalizationAt S) (LF : L ⥤ D') (α : Q ⋙ LF ⟶ F) (hLF : LF.IsRightKanExtension α) (hdefined : ∀ X : D, F.IsTriangulatedLeftDerivedDefinedAt S hS X) : ∃ (_ : LF.CommShift ℤ), LF.IsTriangulated",
+  "statement": "theorem leftDerived_exact_when_defined (D : Type u) [Category.{v} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [CategoryTheory.IsTriangulated D] (D' : Type u') [Category.{v'} D'] [HasZeroObject D'] [HasShift D' ℤ] [Preadditive D'] [∀ n : ℤ, (shiftFunctor D' n).Additive] [Pretriangulated D'] [CategoryTheory.IsTriangulated D'] (L : Type u'') [Category.{v''} L] [HasZeroObject L] [HasShift L ℤ] [Preadditive L] [∀ n : ℤ, (shiftFunctor L n).Additive] [Pretriangulated L] [CategoryTheory.IsTriangulated L] (F : D ⥤ D') [F.CommShift ℤ] [F.IsTriangulated] (S : MorphismProperty D) (hS : S.IsSaturatedTriangulatedMultiplicativeSystem) (Q : D ⥤ L) [Q.CommShift ℤ] [Q.IsTriangulated] [Q.IsLocalization S] (_hQ : Q.IsStrictLocalizationAt S) (LF : L ⥤ D') (α : Q ⋙ LF ⟶ F) (hLF : LF.IsRightKanExtension α) (hdefined : ∀ X : D, F.IsTriangulatedLeftDerivedDefinedAt S hS X) : ∃ (_ : LF.CommShift ℤ), LF.IsTriangulated",
   "branch": "sheaf-dag",
   "by": "G1",
   "date": "2026-10-11",
@@ -180,5 +141,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-963dd",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697773",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery packet, changed modules, node records, change record, report, and scratch compilation matched the stated proof and documented localization interface correction; all delivery modules and the unchanged direct importer compile cleanly."
  }
 }

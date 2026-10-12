@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-left-derived-kan-source-triangles",
+ "kind": "statement",
+ "title": "The Kan extension preserves distinguished source triangles",
+ "statement": "Let $D,D^{\\prime}$ be triangulated categories [def-weil-triangulated-category] and let $L$ be a category with coherent integer shifts. Let $F:D\\to D^{\\prime}$ be exact and let $S$ be a saturated triangulated multiplicative system [def-pur-saturated-triangulated-localization]. Let $Q:D\\to L$ be a shift-compatible localization of $D$ at $S$. Let $LF:L\\to D^{\\prime}$ have coherent integer-shift comparisons and let $\\alpha:Q\\circ LF\\to F$ exhibit a right Kan extension and commute with shifts. If the denominator pro-diagram of $F$ at every object of $D$ is essentially constant, then for every distinguished triangle $T$ of $D$, the triangle $(Q\\circ LF)(T)$ is distinguished in $D^{\\prime}$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 05SU (lemma-derived-shift), Lemma Tag 05SC (lemma-2-out-of-3-defined), Proposition Tag 05SE (proposition-derived-functor), LF part"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pur-saturated-triangulated-localization"
+ ],
+ "proof": [
+  {
+   "text": "For each X, unpack a witnessing denominator value and apply leftDerived_defined_pointwiseKan_bridge. This gives HasPointwiseRightKanExtensionAt at Q(X). Essential surjectivity of Q and invariance of pointwise existence under object isomorphisms give HasPointwiseRightKanExtension everywhere.",
+   "uses": [
+    "lem-pur-left-derived-defined-pointwise-kan-bridge"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply leftDerived_map_distinguished_of_two_defined to T, using the first two supplied instances of definedness. Unpack its three values, witnessing cones, maps, denominator equations, and distinguishedness conclusion.",
+   "uses": [
+    "lem-pur-derived-functor-triangles-05sc"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply leftDerived_kan_triangle_value_comparison to this data. It identifies the image triangle with the distinguished value triangle. Closure under triangle isomorphism proves distinguishedness of the image.",
+   "uses": [
+    "lem-pur-left-derived-kan-triangle-value-comparison",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "lem-pur-derived-functor-triangles-05sc",
+  "lem-pur-left-derived-kan-triangle-value-comparison",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Step 4 of the exactness clause in Proposition 05SE: identify the given Kan extension with the 05SC triangle of pointwise values before the localization descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A right Kan extension commutes coherently with integer shifts when the original functor and the extension functor commute with shifts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right Kan extension of an exact triangulated functor along a localization is triangulated if its pointwise left derived values exist everywhere",
+   "results": "CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Triangulated.Localization.isTriangulated_functor, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization', CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization, DerivedCategory.instIsTriangulated",
+   "date": "2026-10-12",
+   "verdict": "no exact match; localization descent APIs found"
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftOfLocalization|isTriangulated_of_precomp_iso",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; localization descent APIs found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.LeftDerivedExactWhenDefined",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-complete-integral-detailed",
+   "place": "Step 4 of the exactness clause in Proposition 05SE: identify the given Kan extension with the 05SC triangle of pointwise values before the localization descent",
+   "via": [
+    "lem-pur-left-derived-exact-when-defined"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.LeftDerivedKanSourceTriangles",
+  "file": "lean/Sheaf/CategoryTheory/LeftDerivedKanSourceTriangles.lean",
+  "declaration": "CategoryTheory.Functor.leftDerived_kan_map_source_distinguished",
+  "statement": "theorem leftDerived_kan_map_source_distinguished (D : Type u) [Category.{v} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [CategoryTheory.IsTriangulated D] (D' : Type u') [Category.{v'} D'] [HasZeroObject D'] [HasShift D' ℤ] [Preadditive D'] [∀ n : ℤ, (shiftFunctor D' n).Additive] [Pretriangulated D'] [CategoryTheory.IsTriangulated D'] (L : Type u'') [Category.{v''} L] [HasShift L ℤ] (F : D ⥤ D') [F.CommShift ℤ] [F.IsTriangulated] (S : MorphismProperty D) (hS : S.IsSaturatedTriangulatedMultiplicativeSystem) (Q : D ⥤ L) [Q.CommShift ℤ] [Q.IsLocalization S] (LF : L ⥤ D') [LF.CommShift ℤ] (α : Q ⋙ LF ⟶ F) (hLF : LF.IsRightKanExtension α) (hdefined : ∀ X : D, F.IsTriangulatedLeftDerivedDefinedAt S hS X) (hα : NatTrans.CommShift α ℤ) (T : Triangle D) (hT : T ∈ distTriang D) : (Q ⋙ LF).mapTriangle.obj T ∈ distTriang D'",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-963dd",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697773",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-963dd",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697773",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery packet, changed modules, node records, change record, report, and scratch compilation matched the stated proof and documented localization interface correction; all delivery modules and the unchanged direct importer compile cleanly."
+ }
+}

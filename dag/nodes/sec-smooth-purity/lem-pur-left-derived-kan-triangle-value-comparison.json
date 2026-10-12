@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-left-derived-kan-triangle-value-comparison",
+ "kind": "statement",
+ "title": "Canonical comparison of the Kan image triangle with denominator values",
+ "statement": "Let $D,D^{\\prime}$ be triangulated categories [def-weil-triangulated-category], $L$ a category with integer shifts, $F:D\\to D^{\\prime}$ exact, and $S$ a saturated triangulated multiplicative system [def-pur-saturated-triangulated-localization]. Let $Q:D\\to L$ be a shift-compatible localization and $LF:L\\to D^{\\prime}$ a shift-compatible right Kan extension of $F$ with shift-compatible counit $\\alpha:Q\\circ LF\\to F$. Assume all structured-arrow diagrams for this Kan extension have limits. Let $T=(X,Y,Z,f,g,h)$ be any triangle of $D$, not necessarily distinguished. For $U=X,Y,Z$, let $L_U$ be a left-derived value and $u_U$ a witnessing cone on its denominator diagram, with a stage $s_0$ and retraction $r$ such that $u_U(s_0)r=1$, and every transition to a stage $s$ factors at a common earlier stage through $r$ and $u_U(s)$. Suppose maps $l_f:L_X\\to L_Y$, $l_g:L_Y\\to L_Z$, $l_h:L_Z\\to L_X[1]$ satisfy $u_X(s)F(f^{\\prime})=l_fu_Y(s^{\\prime})$ whenever $sf=f^{\\prime}s^{\\prime}$, and $u_Y(s)F(g^{\\prime})=l_gu_Z(s^{\\prime})$ whenever $sg=g^{\\prime}s^{\\prime}$; for the last map suppose $u_Z(s)F(h^{\\prime})=l_h u_X(s^{\\prime})[1](F\\text{ shift comparison})^{-1}$ whenever $sh=h^{\\prime}s^{\\prime}[1]$. Then there is a triangle isomorphism $(Q\\circ LF)(T)\\cong(L_X,L_Y,L_Z,l_f,l_g,l_h)$. No distinguishedness conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 05SU (lemma-derived-shift), Lemma Tag 05SC (lemma-2-out-of-3-defined), Proposition Tag 05SE (proposition-derived-functor), LF part"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pur-saturated-triangulated-localization"
+ ],
+ "proof": [
+  {
+   "text": "Compare each supplied denominator value with the pointwise Kan extension using the structured-arrow bridge and cone uniqueness; Mathlib isPointwiseRightKanExtensionOfIsRightKanExtension identifies the given global right Kan extension with its pointwise limit because pointwise limits exist everywhere. No total-derived-functor construction is used.",
+   "uses": [
+    "lem-pur-left-derived-defined-pointwise-kan-bridge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the first two maps, right fractions give denominator squares. The fraction identity, naturality of alpha, and the supplied equations identify the maps after the value isomorphisms; split-mono cancellation from the chosen retractions closes each square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the third map, shift the first denominator by S shift invariance, use the shift compatibility of alpha and F, and apply the analogous fraction square and split-mono cancellation.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The three value isomorphisms and their three commutative squares form Triangle.isoMk, yielding the claimed triangle isomorphism.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Value-identification step in Proposition 05SE; proved by cone uniqueness, fraction squares and split-mono cancellation, with shifted naturality for the third map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical isomorphism between a right Kan extension image triangle and a triangle of denominator pro diagram limit values compatible with shifts and denominator squares",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism between a right Kan extension image triangle and a triangle of denominator pro diagram limit values compatible with shifts and denominator squares",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, DerivedCategory.triangleOfSESIso, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso, CategoryTheory.Pretriangulated.Triangle.functorIsoMk', CochainComplex.mappingCone.mapTriangleIso, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₂",
+   "date": "2026-10-12",
+   "verdict": "no exact match; standard limit and triangle isomorphism APIs found"
+  },
+  {
+   "tool": "grep",
+   "query": "conePointUniqueUpToIso|isPointwiseRightKanExtensionOfIsRightKanExtension|isoMk",
+   "results": "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean, Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean, Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; standard limit and triangle isomorphism APIs found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.LeftDerivedExactWhenDefined",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-complete-integral-detailed",
+   "place": "The identification of the LF image triangle with the triangle of left-derived values in Step 4 of the exactness clause in Proposition 05SE",
+   "via": [
+    "lem-pur-left-derived-exact-when-defined"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.LeftDerivedKanTriangleValueComparison",
+  "file": "lean/Sheaf/CategoryTheory/LeftDerivedKanTriangleValueComparison.lean",
+  "declaration": "CategoryTheory.Functor.leftDerived_kan_triangle_value_comparison",
+  "statement": "theorem leftDerived_kan_triangle_value_comparison (D : Type u) [Category.{v} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [CategoryTheory.IsTriangulated D] (D' : Type u') [Category.{v'} D'] [HasZeroObject D'] [HasShift D' ℤ] [Preadditive D'] [∀ n : ℤ, (shiftFunctor D' n).Additive] [Pretriangulated D'] [CategoryTheory.IsTriangulated D'] (L : Type u'') [Category.{v''} L] [HasShift L ℤ] (F : D ⥤ D') [F.CommShift ℤ] [F.IsTriangulated] (S : MorphismProperty D) (hS : S.IsSaturatedTriangulatedMultiplicativeSystem) (Q : D ⥤ L) [Q.CommShift ℤ] [Q.IsLocalization S] (LF : L ⥤ D') [LF.CommShift ℤ] (α : Q ⋙ LF ⟶ F) (hLF : LF.IsRightKanExtension α) [Q.HasPointwiseRightKanExtension F] (hα : NatTrans.CommShift α ℤ) (T : Triangle D) (LX LY LZ : D') (hX : F.IsTriangulatedLeftDerivedValue S hS T.obj₁ LX) (hY : F.IsTriangulatedLeftDerivedValue S hS T.obj₂ LY) (hZ : F.IsTriangulatedLeftDerivedValue S hS T.obj₃ LZ) (uX : (Functor.const (S.Over ⊤ T.obj₁)).obj LX ⟶ MorphismProperty.Over.forget S ⊤ T.obj₁ ⋙ Over.forget T.obj₁ ⋙ F) (huX : ∃ s₀ : S.Over ⊤ T.obj₁, ∃ r : F.obj s₀.left ⟶ LX, uX.app s₀ ≫ r = 𝟙 LX ∧ ∀ s : S.Over ⊤ T.obj₁, ∃ t : S.Over ⊤ T.obj₁, ∃ a : t ⟶ s₀, ∃ b : t ⟶ s, F.map b.left = F.map a.left ≫ r ≫ uX.app s) (uY : (Functor.const (S.Over ⊤ T.obj₂)).obj LY ⟶ MorphismProperty.Over.forget S ⊤ T.obj₂ ⋙ Over.forget T.obj₂ ⋙ F) (huY : ∃ s₀ : S.Over ⊤ T.obj₂, ∃ r : F.obj s₀.left ⟶ LY, uY.app s₀ ≫ r = 𝟙 LY ∧ ∀ s : S.Over ⊤ T.obj₂, ∃ t : S.Over ⊤ T.obj₂, ∃ a : t ⟶ s₀, ∃ b : t ⟶ s, F.map b.left = F.map a.left ≫ r ≫ uY.app s) (uZ : (Functor.const (S.Over ⊤ T.obj₃)).obj LZ ⟶ MorphismProperty.Over.forget S ⊤ T.obj₃ ⋙ Over.forget T.obj₃ ⋙ F) (huZ : ∃ s₀ : S.Over ⊤ T.obj₃, ∃ r : F.obj s₀.left ⟶ LZ, uZ.app s₀ ≫ r = 𝟙 LZ ∧ ∀ s : S.Over ⊤ T.obj₃, ∃ t : S.Over ⊤ T.obj₃, ∃ a : t ⟶ s₀, ∃ b : t ⟶ s, F.map b.left = F.map a.left ≫ r ≫ uZ.app s) (lf : LX ⟶ LY) (lg : LY ⟶ LZ) (lh : LZ ⟶ (shiftFunctor D' (1 : ℤ)).obj LX) (hf : ∀ (s : S.Over ⊤ T.obj₁) (s' : S.Over ⊤ T.obj₂) (f' : s.left ⟶ s'.left), s.hom ≫ T.mor₁ = f' ≫ s'.hom → uX.app s ≫ F.map f' = lf ≫ uY.app s') (hg : ∀ (s : S.Over ⊤ T.obj₂) (s' : S.Over ⊤ T.obj₃) (g' : s.left ⟶ s'.left), s.hom ≫ T.mor₂ = g' ≫ s'.hom → uY.app s ≫ F.map g' = lg ≫ uZ.app s') (hh : ∀ (s : S.Over ⊤ T.obj₃) (s' : S.Over ⊤ T.obj₁) (h' : s.left ⟶ (shiftFunctor D (1 : ℤ)).obj s'.left), s.hom ≫ T.mor₃ = h' ≫ (shiftFunctor D (1 : ℤ)).map s'.hom → uZ.app s ≫ F.map h' = lh ≫ (shiftFunctor D' (1 : ℤ)).map (uX.app s') ≫ (F.commShiftIso (1 : ℤ)).inv.app s'.left) : Nonempty ((Q ⋙ LF).mapTriangle.obj T ≅ Triangle.mk lf lg lh)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-963dd",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697773",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-963dd",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135328-L-1697773",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery packet, changed modules, node records, change record, report, and scratch compilation matched the stated proof and documented localization interface correction; all delivery modules and the unchanged direct importer compile cleanly."
+ }
+}
