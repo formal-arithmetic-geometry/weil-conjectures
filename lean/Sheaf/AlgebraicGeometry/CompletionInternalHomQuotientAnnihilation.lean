@@ -2,6 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Finite-level internal Hom quotient annihilation
@@ -17,6 +18,81 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
+
+
+open MonoidalCategory in
+private theorem scalar_tensor_eval {C : Type*} [Category C] [MonoidalCategory C]
+    [BraidedCategory C] {J G H F : C} (ι : J ⟶ 𝟙_ C) (e : G ⊗ H ⟶ F) :
+    G ◁ (ι ▷ H ≫ (λ_ H).hom) ≫ e =
+      (α_ G J H).inv ≫ (β_ G J).hom ▷ H ≫ (α_ J G H).hom ≫
+        J ◁ e ≫ ι ▷ F ≫ (λ_ F).hom := by
+  rw [whisker_exchange_assoc, leftUnitor_naturality]
+  rw [← associator_naturality_left_assoc]
+  rw [← comp_whiskerRight_assoc, ← BraidedCategory.braiding_naturality_right]
+  rw [comp_whiskerRight_assoc, ← associator_inv_naturality_middle_assoc]
+  rw [whiskerLeft_comp, Category.assoc]
+  congr 1
+  rw [← leftUnitor_whiskerRight_assoc,
+    ← comp_whiskerRight_assoc, braiding_leftUnitor,
+    triangle_assoc_comp_right_assoc]
+
+open MonoidalCategory in
+private theorem multiplication_naturality {C : Type*} [Category C] [MonoidalCategory C]
+    {J F Q : C} (ι : J ⟶ 𝟙_ C) (f : F ⟶ Q) :
+    (ι ▷ F ≫ (λ_ F).hom) ≫ f = J ◁ f ≫ ι ▷ Q ≫ (λ_ Q).hom := by
+  rw [Category.assoc, ← leftUnitor_naturality, ← whisker_exchange_assoc]
+
+set_option backward.isDefEq.respectTransparency false in
+open MonoidalCategory in
+private theorem product_comp_zero_iff {X : Scheme.{u}} {J F Q : X.Modules}
+    (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (f : F ⟶ Q) :
+    let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+    Scheme.idealModuleProductι ι F ≫ f = 0 ↔
+      (ι ▷ F ≫ (λ_ F).hom) ≫ f = 0 := by
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  let a := ι ▷ F ≫ (λ_ F).hom
+  change image.ι a ≫ f = 0 ↔ a ≫ f = 0
+  rw [← cancel_epi (factorThruImage a)]
+  simp only [← Category.assoc, image.fac, comp_zero]
+
+set_option backward.isDefEq.respectTransparency false in
+open MonoidalCategory in
+private theorem quotient_multiplication_zero {X : Scheme.{u}} {J F : X.Modules}
+    (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) :
+    let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+    let Q := cokernel (Scheme.idealModuleProductι ι F)
+    ι ▷ Q ≫ (λ_ Q).hom = 0 := by
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  let : MonoidalClosed X.Modules := SheafOfModules.monoidalClosed (R := X.sheaf)
+  let q := cokernel.π (Scheme.idealModuleProductι ι F)
+  have : Epi ((tensorLeft J).map q) := (tensorLeft J).map_epi q
+  apply (cancel_epi ((tensorLeft J).map q)).1
+  rw [comp_zero]
+  change J ◁ q ≫ ι ▷ _ ≫ (λ_ _).hom = 0
+  erw [← multiplication_naturality ι q]
+  exact (product_comp_zero_iff ι q).mp (cokernel.condition _)
+
+set_option backward.isDefEq.respectTransparency false in
+open MonoidalCategory in
+private theorem hom_multiplication_zero {X : Scheme.{u}} {J Q : X.Modules}
+    (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (G : X.Modules)
+    (hz : let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+      ι ▷ Q ≫ (λ_ Q).hom = 0) :
+    let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+    let H : X.Modules := SheafOfModules.homObj (R := X.sheaf) G Q
+    ι ▷ H ≫ (λ_ H).hom = 0 := by
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  let : SymmetricCategory X.Modules := SheafOfModules.symmetricCategory X.sheaf
+  let : MonoidalClosed X.Modules := SheafOfModules.monoidalClosed (R := X.sheaf)
+  apply MonoidalClosed.uncurry_injective
+  rw [MonoidalClosed.uncurry_eq]
+  erw [scalar_tensor_eval ι ((ihom.ev G).app Q)]
+  erw [hz]
+  simp only [comp_zero, MonoidalClosed.uncurry_eq]
+  have hzero : G ◁ (0 : J ⊗ SheafOfModules.homObj (R := X.sheaf) G Q ⟶
+      SheafOfModules.homObj (R := X.sheaf) G Q) = 0 :=
+    (tensorLeft G).map_zero _ _
+  rw [hzero, zero_comp]
 
 /-- Postcomposition with the level-n quotient kills the level-n ideal product
 of the internal Hom.
@@ -42,6 +118,18 @@ theorem completion_internal_hom_quotient_annihilation {X : Scheme.{u}}
         (SheafOfModules.homObj (R := X.toRingedSpace.sheaf) G F) ≫
       SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
         (𝟙 G) (formalModuleQuotientπ I n F) = 0 := by
-  sorry
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  let ι := (Scheme.idealSheafPower I.toModulesι n).2
+  let q := formalModuleQuotientπ I n F
+  have hz := quotient_multiplication_zero (F := F) ι
+  have hh := hom_multiplication_zero ι G hz
+  apply (product_comp_zero_iff ι _).mpr
+  erw [multiplication_naturality ι
+    (SheafOfModules.homObjMap (R := X.sheaf) (𝟙 G) q)]
+  rw [← Category.assoc]
+  change _ ≫ (MonoidalCategoryStruct.whiskerRight ι _ ≫
+    (MonoidalCategoryStruct.leftUnitor _).hom) = 0
+  erw [hh]
+  exact comp_zero
 
 end AlgebraicGeometry

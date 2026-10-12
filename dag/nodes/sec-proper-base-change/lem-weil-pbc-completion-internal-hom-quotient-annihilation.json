@@ -29,24 +29,53 @@
  ],
  "proof": [
   {
-   "text": "Put J = I^n and Q = F/JF, the cokernel of the product inclusion.\nThe product JF is the image of multiplication J tensor F → F. Its sections\nare locally finite sums of products ax. The cokernel projection kills this\nimage. Sections of Q locally lift to F, so multiplication by J on Q vanishes\nlocally and hence vanishes as a sheaf morphism. For a local section a of J\nand a local linear map t : G → F, postcomposition sends at to the map\nx ↦ a times the class of t(x) in Q. This is zero by the preceding annihilation.\nSections of J Hom(G,F) are locally finite sums of such products. Their images\nare therefore locally zero, hence zero. This proves the displayed composite\nvanishes. The argument uses local lifts, not surjectivity on all open sections.",
+   "text": "Write J = I^n, with inclusion ι, and let a_M : J tensor M → M be multiplication. The ideal-module product is the image of a_M. Cancelling its epic image factor proves that image.ι(a_M) followed by f is zero if and only if a_M followed by f is zero (product_comp_zero_iff).",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let q : F → Q be the cokernel projection of JF → F. The cokernel relation and the previous image-factor cancellation give a_F followed by q = 0. Naturality of multiplication gives (J tensor q) followed by a_Q = a_F followed by q. Tensoring with J is a left adjoint by the tensor-Hom adjunction, so it preserves the epimorphism q. Cancel J tensor q to obtain a_Q = 0 (quotient_multiplication_zero). This uses no surjectivity on open sections.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set H = Hom(G,Q). Under the tensor-Hom adjunction, a_H becomes (G tensor a_H) followed by evaluation. Naturality of associators, braiding and unitors identifies this with the permutation G tensor (J tensor H) → J tensor (G tensor H), followed by J tensor evaluation and a_Q (scalar_tensor_eval). Since a_Q = 0 the uncurried map vanishes. Tensoring with G preserves zero morphisms, and uncurrying is injective, hence a_H = 0 (hom_multiplication_zero).",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For h = Hom(identity G,q), multiplication naturality identifies a_Hom(G,F) followed by h with (J tensor h) followed by a_Hom(G,Q), which is zero by the previous step. Apply the image-factor cancellation from the first step to get the required composite with the ideal-module product inclusion. The construction works for all n, including n = 0.",
    "uses": [
     "def-weil-pbc-coherent-formal-module",
     "def-pur-sheaf-tensor-product",
     "def-pur-sheaf-hom"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-coherent-formal-module",
   "def-pur-sheaf-tensor-product",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "M1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Detailed construction and finite-level universal property following Tag 0882 and the parent proof; the local checkout omits the literature file; the published Tag 0882 was read online."
+  "place": "Tag 0882 comparison-map construction and Section 0EHN equation 0880; finite-level argument formalized categorically using the existing tensor-Hom adjunction (Stacks Modules on Sites, Tag 03EO)."
  },
  "mathlib_searches": [
   {
@@ -104,10 +133,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T213042-L-1151980",
-  "kind": "interface",
+  "landing": "20261012T223407-L-1637587",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
