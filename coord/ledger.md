@@ -7540,3 +7540,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/R1/Sheaf.RingTheory.CompletionRegularLocal (stage 3; reviewer PASS; first push; landing 20261012T112849-L-771252 (proof); batch 20261012T112824; modules 1; new nodes 0)
 - 11:28 L: merged deliver/R2/Sheaf.FieldTheory.BrauerScalarDefectExists (stage 3; reviewer PASS; first push; landing 20261012T112849-L-771349 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/R2/Sheaf.LinearAlgebra.IdempotentCharpolyLeadingCoeff (stage 3; reviewer PASS; first push; landing 20261012T112849-L-771463 (interface); batch 20261012T112824; modules 2; new nodes 1)
+- 11:28 L: merged deliver/T1/Sheaf.AlgebraicGeometry.SquareZeroSectionPowerLocus (stage 3; reviewer PASS; first push; landing 20261012T112850-L-771580 (interface); batch 20261012T112824; modules 2; new nodes 1)

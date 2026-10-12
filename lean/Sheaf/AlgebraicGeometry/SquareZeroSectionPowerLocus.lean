@@ -10,11 +10,10 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import Sheaf.AlgebraicGeometry.SectionAffineOpenKillsCohomology
-import Sheaf.Paper.BoundaryDerivationSquareZero
+import Sheaf.AlgebraicGeometry.SquareZeroSectionPowerLift
+import Sheaf.AlgebraicGeometry.NonvanishingTensorPullback
+import Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
+import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 
 /-! # Lifting the nonvanishing open of a section across a square-zero immersion
 
@@ -79,6 +78,30 @@ theorem exists_section_power_locus_of_square_zero
     (hAffine : IsAffineOpen U) :
     ∃ k : ℕ, 0 < k ∧
       ∃ t : (L.tensorPow (n * k)).val.presheaf.obj (Opposite.op ⊤),
-        ∀ z : Z, j z ∈ nonvanishingLocus (L.tensorPow (n * k)) t ↔ z ∈ U := by sorry
+        ∀ z : Z, j z ∈ nonvanishingLocus (L.tensorPow (n * k)) t ↔ z ∈ U := by
+  classical
+  have : ((tensorPullback j).obj L).IsInvertible :=
+    ((invertible_pullback_tensor j).1 L).2
+  obtain ⟨k, hk, t, e, he⟩ := exists_section_power_lift_of_square_zero
+    j L hI n s U hU hAffine
+  let res := (((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
+    (L.tensorPow (n * k))).val.app (Opposite.op ⊤) t)
+  have hz := Hom.zeroLocus_eq_of_arrowIso
+    (homOfGlobalSection ((tensorPullback j).obj (L.tensorPow (n * k))) res)
+    (tensorPowSection (homOfGlobalSection (((tensorPullback j).obj L).tensorPow n) s) k)
+    (Arrow.isoMk (Iso.refl _) e (by
+      change 𝟙 _ ≫ _ = _
+      rw [Category.id_comp]
+      exact he.symm))
+  have hloc : nonvanishingLocus ((tensorPullback j).obj (L.tensorPow (n * k))) res =
+      nonvanishingLocus (((tensorPullback j).obj L).tensorPow n) s := by
+    have : ((tensorPullback j).obj (L.tensorPow (n * k))).IsInvertible :=
+      ((invertible_pullback_tensor j).1 (L.tensorPow (n * k))).2
+    rw [nonvanishingLocus_eq_compl_support_zeroLocus,
+      nonvanishingLocus_eq_compl_support_zeroLocus, hz,
+      compl_support_zeroLocus_tensorPowSection _ _ hk]
+  refine ⟨k, hk, t, fun z ↦ ?_⟩
+  exact (nonvanishing_tensorPullback j (L.tensorPow (n * k)) t z).symm.trans
+    ((Set.ext_iff.mp hloc z).trans (Set.ext_iff.mp hU z).symm)
 
 end AlgebraicGeometry.Scheme.Modules
