@@ -10,7 +10,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
-universe u w
+universe u v w
 
 /-! # Local sections after sheafification
 Source: literature/stacks-project/sites.tex, Sites, Theorem 00WB and Lemma 00WK
@@ -21,7 +21,7 @@ Source: literature/stacks-project/sites.tex, Sites, Theorem 00WB and Lemma 00WK
 -- its locally generated image is a subsheaf of its target, and the universal
 -- property provides a retraction of that image's inclusion.
 private theorem unit_locally_surjective
-    {C : Type u} [SmallCategory C] (K : GrothendieckTopology C)
+    {C : Type u} [Category.{v} C] (K : GrothendieckTopology C)
     [HasWeakSheafify K (Type w)] (F : Cᵒᵖ ⥤ Type w) :
     Presheaf.IsLocallySurjective K (toSheafify K F) := by
   let G := sheafify K F
@@ -50,7 +50,7 @@ private theorem unit_locally_surjective
 -- Extract a precoverage cover inside the unit's covering image sieve,
 -- then choose a preimage on each covering arrow.
 private theorem local_representatives
-    {C : Type u} [SmallCategory C]
+    {C : Type u} [Category.{v} C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
     [J.IsStableUnderBaseChange] [J.HasPullbacks]
     [HasWeakSheafify J.toGrothendieck (Type w)]
@@ -73,7 +73,7 @@ private theorem local_representatives
 -- maps to local agreement in G; separatedness gives compatibility, and
 -- the sheaf condition glues the family uniquely.
 private theorem local_descent
-    {C : Type u} [SmallCategory C]
+    {C : Type u} [Category.{v} C]
     (J : Precoverage C) {F G : Cᵒᵖ ⥤ Type w} (η : F ⟶ G)
     (hG : Presieve.IsSheaf J.toGrothendieck G) :
     (∀ (U : C) (S : Presieve U) (_ : S ∈ J U)
@@ -104,21 +104,20 @@ private theorem local_descent
 /-- Local representability and descent for sheafification on a site.
 Source: Sites, Theorem Tag 00WB and Lemma Tag 00WK
 (blueprint: lem-weil-pbc-site-sheafification-sections-local).
-The private lemmas below establish local surjectivity of the unit, extract a
-precoverage cover with representatives, and prove the converse descent argument.
-The final local-injectivity clause in the public statement is disputed for the
-independent universes written here; see the report for the size counterexample.
+The unit is locally surjective by the image-subsheaf argument above. Extract a
+precoverage cover and representatives from each covering image sieve. Local
+injectivity of the unit gives local equality of representatives on every overlap.
+Conversely, local agreement gives compatibility in the sheaf by separatedness;
+the sheaf condition then glues uniquely. Finally, local injectivity and the
+precoverage criterion give local equality of any sections with equal images.
+The value universe includes both site universes, as required for the plus construction.
 -/
--- STATEMENT-DISPUTED: unrestricted u and w allow a reflector to small subterminal
--- sheaves on a large Boolean site; its unit identifies sections that are nowhere
--- locally equal. HasWeakSheafify alone does not assert local injectivity.
--- See the U2 worker report for the Boolean-site counterexample and size mismatch.
 theorem sheafification_sections_local
-    {C : Type u} [SmallCategory C]
+    {C : Type u} [Category.{w} C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
     [J.IsStableUnderBaseChange] [J.HasPullbacks]
-    [HasWeakSheafify J.toGrothendieck (Type w)]
-    (F : Cᵒᵖ ⥤ Type w) :
+    [HasWeakSheafify J.toGrothendieck (Type (max u w))]
+    (F : Cᵒᵖ ⥤ Type (max u w)) :
     (∀ (U : C) (s : (sheafify J.toGrothendieck F).obj (op U)),
       ∃ (S : Presieve U) (x : ∀ (V : C) (f : V ⟶ U), S f → F.obj (op V)),
         S ∈ J U ∧
@@ -144,10 +143,37 @@ theorem sheafification_sections_local
           (sheafify J.toGrothendieck F).map f.op s =
             (toSheafify J.toGrothendieck F).app (op V) (x V f hf)) ∧
     (∀ (U : C) (p q : F.obj (op U)),
-      (toSheafify J.toGrothendieck F).app (op U) p = (toSheafify J.toGrothendieck F).app (op U) q →
+      (toSheafify J.toGrothendieck F).app (op U) p =
+        (toSheafify J.toGrothendieck F).app (op U) q →
       ∃ (S : Presieve U), S ∈ J U ∧
         ∀ (V : C) (f : V ⟶ U) (_ : S f),
           F.map f.op p = F.map f.op q) := by
-  sorry
+  have hlocal : ∀ (U : C) (p q : F.obj (op U)),
+      (toSheafify J.toGrothendieck F).app (op U) p =
+        (toSheafify J.toGrothendieck F).app (op U) q →
+      ∃ (S : Presieve U), S ∈ J U ∧
+        ∀ (V : C) (f : V ⟶ U), S f → F.map f.op p = F.map f.op q := by
+    intro U p q hpq
+    obtain ⟨S, hS, hle⟩ :=
+      J.mem_toGrothendieck_iff_of_isStableUnderComposition.mp
+        (Presheaf.equalizerSieve_mem J.toGrothendieck
+          (toSheafify J.toGrothendieck F) p q hpq)
+    exact ⟨S, hS, fun V f hf ↦ hle V f hf⟩
+  refine ⟨?_, ?_, hlocal⟩
+  · intro U s
+    obtain ⟨S, x, hS, hx⟩ := local_representatives J F U s
+    refine ⟨S, x, hS, hx, ?_⟩
+    intro V W f g hf hg Z a b hab
+    obtain ⟨T, hT, ht⟩ := hlocal Z
+      (F.map a.op (x V f hf)) (F.map b.op (x W g hg)) (by
+      rw [NatTrans.naturality_apply, NatTrans.naturality_apply,
+        ← hx V f hf, ← hx W g hg, ← Functor.map_comp_apply,
+        ← Functor.map_comp_apply, ← op_comp, ← op_comp, hab])
+    refine ⟨T, hT, ?_⟩
+    intro Y h hh
+    simpa only [op_comp, Functor.map_comp_apply] using ht Y h hh
+  · exact local_descent J (toSheafify J.toGrothendieck F)
+      ((isSheaf_iff_isSheaf_of_type J.toGrothendieck _).mp
+        ((presheafToSheaf J.toGrothendieck (Type (max u w))).obj F).property)
 
 end CategoryTheory

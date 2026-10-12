@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Sections and local equality after sheafification on a site",
- "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], let $\\mathcal F$ be a presheaf of sets on $\\mathcal C$, and let $\\theta^2:\\mathcal F\\to\\mathcal F^\\#$ be its sheafification [def-weil-pbc-sheafification]. For every object $U$ and section $s\\in\\mathcal F^\\#(U)$, there is a covering $(U_i\\to U)_{i\\in I}$ and sections $s_i\\in\\mathcal F(U_i)$ such that $s|_{U_i}=\\theta^2(s_i)$ and, for every $i,j$, the pullbacks of $s_i$ and $s_j$ agree after a further covering of $U_i\\times_UU_j$. Conversely, any such compatible local sections glue uniquely to a section of $\\mathcal F^\\#(U)$. In particular, if $p,q\\in\\mathcal F(U)$ have equal images in $\\mathcal F^\\#(U)$, then there is a covering $(U_i\\to U)_{i\\in I}$ on which $p|_{U_i}=q|_{U_i}$. This is Sites, Theorem Tag 00WB (theorem-plus) and Lemma Tag 00WK (lemma-sections-sheafification).",
+ "statement": "Universe convention: let the objects of the site lie in Type u, its morphisms in Type w, and take set-valued presheaves in Type (max u w), so the set universe contains the site data and the plus construction. Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], let $\\mathcal F$ be a presheaf of sets on $\\mathcal C$, and let $\\theta^2:\\mathcal F\\to\\mathcal F^\\#$ be its sheafification [def-weil-pbc-sheafification]. For every object $U$ and section $s\\in\\mathcal F^\\#(U)$, there is a covering $(U_i\\to U)_{i\\in I}$ and sections $s_i\\in\\mathcal F(U_i)$ such that $s|_{U_i}=\\theta^2(s_i)$ and, for every $i,j$, the pullbacks of $s_i$ and $s_j$ agree after a further covering of $U_i\\times_UU_j$. Conversely, any such compatible local sections glue uniquely to a section of $\\mathcal F^\\#(U)$. In particular, if $p,q\\in\\mathcal F(U)$ have equal images in $\\mathcal F^\\#(U)$, then there is a covering $(U_i\\to U)_{i\\in I}$ on which $p|_{U_i}=q|_{U_i}$. This is Sites, Theorem Tag 00WB (theorem-plus) and Lemma Tag 00WK (lemma-sections-sheafification).",
  "source": {
   "document": "literature/stacks-project/sites.tex",
   "place": "Sites, Theorem Tag 00WB (theorem-plus), especially parts (2) and (4), and Lemma Tag 00WK (lemma-sections-sheafification)"
@@ -24,22 +24,14 @@
  ],
  "proof": [
   {
-   "text": "Proved partial step: the universal sheafification unit is locally surjective, without a universe comparison. Let G be sheafify(F), eta its unit, and R the sheaf closure of the image subfunctor of eta inside G. Mathlib Subfunctor.sheafify_isSheaf makes R a sheaf. Factor F -> R through G using sheafifyLift. Composing the resulting lift with R -> G gives the identity by sheafify_hom_ext. Consequently every section of G belongs to R, so the image sieve of every section covers. This is the private Lean lemma unit_locally_surjective.",
+   "text": "Proved step: the universal sheafification unit is locally surjective, without a universe comparison. Let G be sheafify(F), eta its unit, and R the sheaf closure of the image subfunctor of eta inside G. Mathlib Subfunctor.sheafify_isSheaf makes R a sheaf. Factor F -> R through G using sheafifyLift. Composing the resulting lift with R -> G gives the identity by sheafify_hom_ext. Consequently every section of G belongs to R, so the image sieve of every section covers. This is the private Lean lemma unit_locally_surjective. The private helper is generalized to Category.{v} C; this argument does not require equal object and morphism universes.",
    "uses": [
     "def-weil-pbc-sheafification"
    ],
    "elementary": false
   },
   {
-   "text": "Proved partial step: for each section of sheafify(F), use Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition to extract a precoverage covering presieve inside its covering image sieve. Choose a preimage on each covering arrow. The resulting family represents the section locally. This is local_representatives; the locally-equal overlap assertion is not included.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Proved partial step: given locally compatible presheaf representatives, map them through the unit into the sheaf. Naturality carries each further-cover equality into equality after restriction in the sheaf. Separatedness on that cover proves compatibility on every overlap cone. The sheaf condition on the original covering then gives the unique amalgamation. This is the private Lean lemma local_descent.",
+   "text": "For p and q with equal images under the unit, Mathlib Presheaf.isLocallyInjective_toSheafify′ supplies a covering equalizer sieve in the corrected universe. Apply Presheaf.equalizerSieve_mem and Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition to extract a covering presieve on which their restrictions agree. This proves hlocal and the final conjunct.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
     "def-weil-pbc-sheafification"
@@ -47,7 +39,15 @@
    "elementary": false
   },
   {
-   "text": "STATEMENT-DISPUTED: the remaining local-injectivity assertion is false with the unrestricted independent universes u and w in the recorded Lean signature. For a sufficiently large complete atomless Boolean site, all Type w-valued sheaves are subterminal and their reflector exists as the sheaf closure of the support of a presheaf. The constant two-element presheaf reflects to the terminal sheaf, so its distinct sections have equal images and are nowhere locally equal on a nonzero object. The worker report gives the cardinality and support-reflector arguments. The previous double-plus dependencies only apply to Type (max u w), not to arbitrary Type w. No theorem of local injectivity in the unrestricted universes is added.",
+   "text": "Use local_representatives (image-sieve extraction and choice of preimages) to represent each sheaf section over a precoverage cover. For any overlap cone a >> f = b >> g, naturality of the unit and functoriality of restriction show that the two restricted representatives have equal images. Apply hlocal to those two sections and use Functor.map_comp_apply to identify their further restrictions with the desired composites. This proves the first conjunct including overlap compatibility.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Proved step: given locally compatible presheaf representatives, map them through the unit into the sheaf. Naturality carries each further-cover equality into equality after restriction in the sheaf. Separatedness on that cover proves compatibility on every overlap cone. The sheaf condition on the original covering then gives the unique amalgamation. This is the private Lean lemma local_descent. Apply local_descent to toSheafify with the sheaf property of presheafToSheaf.obj F. Combine all three conjuncts by And.intro.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
     "def-weil-pbc-sheafification"
@@ -62,7 +62,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Partial Lean proof using the sheafification universal property and Mathlib Subsheaf/IsSheafFor; Sites Tags 00WB and 00WK consulted. The unrestricted-universe signature is disputed by the Boolean-site counterexample in the U2 report."
+  "place": "Sites, Theorem 00WB and Lemma 00WK; complete Lean proof from Mathlib local injectivity, image subsheaf, sheafification universal property, precoverage criterion, and separatedness. Corrected size convention follows the plus construction and Mathlib Category.{w} C / Type (max u w)."
  },
  "mathlib_searches": [
   {
@@ -133,9 +133,9 @@
   "module": "Sheaf.Paper.SiteSheafificationSectionsLocal",
   "declaration": "CategoryTheory.sheafification_sections_local",
   "file": "lean/Sheaf/Paper/SiteSheafificationSectionsLocal.lean",
-  "statement": "theorem sheafification_sections_local {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [HasWeakSheafify J.toGrothendieck (Type w)] (F : Cᵒᵖ ⥤ Type w) : (∀ (U : C) (s : (sheafify J.toGrothendieck F).obj (op U)), ∃ (S : Presieve U) (x : ∀ (V : C) (f : V ⟶ U), S f → F.obj (op V)), S ∈ J U ∧ (∀ (V : C) (f : V ⟶ U) (hf : S f), (sheafify J.toGrothendieck F).map f.op s = (toSheafify J.toGrothendieck F).app (op V) (x V f hf)) ∧ (∀ (V W : C) (f : V ⟶ U) (g : W ⟶ U) (hf : S f) (hg : S g), ∀ (Z : C) (a : Z ⟶ V) (b : Z ⟶ W), a ≫ f = b ≫ g → ∃ (T : Presieve Z), T ∈ J Z ∧ ∀ (Y : C) (h : Y ⟶ Z), T h → F.map (h ≫ a).op (x V f hf) = F.map (h ≫ b).op (x W g hg))) ∧ (∀ (U : C) (S : Presieve U) (_ : S ∈ J U) (x : ∀ (V : C) (f : V ⟶ U), S f → F.obj (op V)), (∀ (V W : C) (f : V ⟶ U) (g : W ⟶ U) (hf : S f) (hg : S g), ∀ (Z : C) (a : Z ⟶ V) (b : Z ⟶ W), a ≫ f = b ≫ g → ∃ (T : Presieve Z), T ∈ J Z ∧ ∀ (Y : C) (h : Y ⟶ Z), T h → F.map (h ≫ a).op (x V f hf) = F.map (h ≫ b).op (x W g hg)) → ∃! s : (sheafify J.toGrothendieck F).obj (op U), ∀ (V : C) (f : V ⟶ U) (hf : S f), (sheafify J.toGrothendieck F).map f.op s = (toSheafify J.toGrothendieck F).app (op V) (x V f hf)) ∧ (∀ (U : C) (p q : F.obj (op U)), (toSheafify J.toGrothendieck F).app (op U) p = (toSheafify J.toGrothendieck F).app (op U) q → ∃ (S : Presieve U), S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U) (_ : S f), F.map f.op p = F.map f.op q)",
+  "statement": "theorem sheafification_sections_local\n    {C : Type u} [Category.{w} C]\n    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]\n    [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    [HasWeakSheafify J.toGrothendieck (Type (max u w))]\n    (F : Cᵒᵖ ⥤ Type (max u w)) :\n    (∀ (U : C) (s : (sheafify J.toGrothendieck F).obj (op U)),\n      ∃ (S : Presieve U) (x : ∀ (V : C) (f : V ⟶ U), S f → F.obj (op V)),\n        S ∈ J U ∧\n        (∀ (V : C) (f : V ⟶ U) (hf : S f),\n          (sheafify J.toGrothendieck F).map f.op s =\n            (toSheafify J.toGrothendieck F).app (op V) (x V f hf)) ∧\n        (∀ (V W : C) (f : V ⟶ U) (g : W ⟶ U)\n          (hf : S f) (hg : S g),\n          ∀ (Z : C) (a : Z ⟶ V) (b : Z ⟶ W), a ≫ f = b ≫ g →\n            ∃ (T : Presieve Z), T ∈ J Z ∧\n              ∀ (Y : C) (h : Y ⟶ Z), T h →\n                F.map (h ≫ a).op (x V f hf) = F.map (h ≫ b).op (x W g hg))) ∧\n    (∀ (U : C) (S : Presieve U) (_ : S ∈ J U)\n      (x : ∀ (V : C) (f : V ⟶ U), S f → F.obj (op V)),\n      (∀ (V W : C) (f : V ⟶ U) (g : W ⟶ U)\n        (hf : S f) (hg : S g),\n        ∀ (Z : C) (a : Z ⟶ V) (b : Z ⟶ W), a ≫ f = b ≫ g →\n          ∃ (T : Presieve Z), T ∈ J Z ∧\n            ∀ (Y : C) (h : Y ⟶ Z), T h →\n              F.map (h ≫ a).op (x V f hf) = F.map (h ≫ b).op (x W g hg)) →\n      ∃! s : (sheafify J.toGrothendieck F).obj (op U),\n        ∀ (V : C) (f : V ⟶ U) (hf : S f),\n          (sheafify J.toGrothendieck F).map f.op s =\n            (toSheafify J.toGrothendieck F).app (op V) (x V f hf)) ∧\n    (∀ (U : C) (p q : F.obj (op U)),\n      (toSheafify J.toGrothendieck F).app (op U) p =\n        (toSheafify J.toGrothendieck F).app (op U) q →\n      ∃ (S : Presieve U), S ∈ J U ∧\n        ∀ (V : C) (f : V ⟶ U) (_ : S f),\n          F.map f.op p = F.map f.op q)",
   "branch": "sheaf-dag",
-  "by": "N1",
+  "by": "P3",
   "date": "2026-10-12",
   "existing": false
  },
@@ -150,11 +150,91 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-0aeb6",
-  "group": "U2",
+  "reviewer": "X-c2176",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T044757-L-2041863",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module and DAG node preserve the target statement; helper proofs compile cleanly, imports are pruned, and the universe counterexample is explicitly documented with the disputed theorem marked."
+  "landing": "20261012T135302-L-1685823",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module and node compiled cleanly; Challenge.lean has no target declaration, the documented universe correction has a complete change record, all 9 direct importers compile against it, and #print axioms reports only propext, Classical.choice, Quot.sound."
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "P3 stage 2",
+  "old_statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], let $\\mathcal F$ be a presheaf of sets on $\\mathcal C$, and let $\\theta^2:\\mathcal F\\to\\mathcal F^\\#$ be its sheafification [def-weil-pbc-sheafification]. For every object $U$ and section $s\\in\\mathcal F^\\#(U)$, there is a covering $(U_i\\to U)_{i\\in I}$ and sections $s_i\\in\\mathcal F(U_i)$ such that $s|_{U_i}=\\theta^2(s_i)$ and, for every $i,j$, the pullbacks of $s_i$ and $s_j$ agree after a further covering of $U_i\\times_UU_j$. Conversely, any such compatible local sections glue uniquely to a section of $\\mathcal F^\\#(U)$. In particular, if $p,q\\in\\mathcal F(U)$ have equal images in $\\mathcal F^\\#(U)$, then there is a covering $(U_i\\to U)_{i\\in I}$ on which $p|_{U_i}=q|_{U_i}$. This is Sites, Theorem Tag 00WB (theorem-plus) and Lemma Tag 00WK (lemma-sections-sheafification).",
+  "what": "The original independent Type w values on SmallCategory C are too small for covering constructions and make the final local-injectivity clause false (the U2 Boolean-site counterexample). Use the common value universe Type (max u w) and allow Category.{w} C, matching the standard plus sheafification construction; all three conclusions are retained. This is a size correction of a disputed intermediate statement, not a proof of its false former signature.",
+  "source": {
+   "document": "literature/stacks-project/sites.tex",
+   "place": "Sites, Theorem Tag 00WB (theorem-plus), especially parts (2) and (4), and Lemma Tag 00WK (lemma-sections-sheafification)"
+  },
+  "citers": [
+   {
+    "id": "lem-sbc-cyclic-higher-direct-image-local-vanishing",
+    "holds": true,
+    "note": "Only local surjectivity is used. The site and underlying abelian values are in the adequate u+1 universe; its statement is unchanged."
+   },
+   {
+    "id": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "holds": false,
+    "note": "The landed Lean signature uses AddCommGrpCat.{u} on an etale category whose objects live in u+1. The corrected theorem cannot directly justify its planned local-equality step at those sizes. A bridge via an essentially small affine-etale site (or another direct proof) is needed; this delivery leaves its signature and proof untouched."
+   },
+   {
+    "id": "lem-weil-pbc-image-presheaf-sheafification-iso",
+    "holds": false,
+    "note": "Its unrestricted Type w values and Category.{v} C do not meet the corrected local-injectivity size convention. Its planned last-clause use requires its own size or local-injectivity correction; the original Boolean-site counterexample also obstructs its current generality. The module is not adapted because it currently makes no application and compiles unchanged."
+   },
+   {
+    "id": "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+    "holds": true,
+    "note": "The small etale site objects and coefficient values lie in u+1; scalar units already have local injectivity and surjectivity from Mathlib. No application of the changed declaration occurs."
+   },
+   {
+    "id": "lem-weil-pbc-sheaf-cokernel-local-image",
+    "holds": true,
+    "note": "The opens site has objects and section values in Type u, and small morphisms. Local equality and representation apply in this common universe; module-to-sets identification remains a separate dependency."
+   },
+   {
+    "id": "lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections",
+    "holds": true,
+    "note": "Opens X and the Type u-valued presheaf colimit have the common u universe. Both representation and local equality are available with all clauses unchanged."
+   },
+   {
+    "id": "lem-weil-pbc-site-module-sheafification-lift-injective",
+    "holds": true,
+    "note": "Its proof uses only local representations. The general image-subsheaf surjectivity argument remains valid in arbitrary value universes; its WEqualsLocallyBijective assumption also supplies the needed module unit properties. No existing declaration application needs adaptation."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Proved partial step: the universal sheafification unit is locally surjective, without a universe comparison. Let G be sheafify(F), eta its unit, and R the sheaf closure of the image subfunctor of eta inside G. Mathlib Subfunctor.sheafify_isSheaf makes R a sheaf. Factor F -> R through G using sheafifyLift. Composing the resulting lift with R -> G gives the identity by sheafify_hom_ext. Consequently every section of G belongs to R, so the image sieve of every section covers. This is the private Lean lemma unit_locally_surjective.",
+    "uses": [
+     "def-weil-pbc-sheafification"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Proved partial step: for each section of sheafify(F), use Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition to extract a precoverage covering presieve inside its covering image sieve. Choose a preimage on each covering arrow. The resulting family represents the section locally. This is local_representatives; the locally-equal overlap assertion is not included.",
+    "uses": [
+     "def-weil-pbc-sites-and-cohomology",
+     "def-weil-pbc-sheafification"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Proved partial step: given locally compatible presheaf representatives, map them through the unit into the sheaf. Naturality carries each further-cover equality into equality after restriction in the sheaf. Separatedness on that cover proves compatibility on every overlap cone. The sheaf condition on the original covering then gives the unique amalgamation. This is the private Lean lemma local_descent.",
+    "uses": [
+     "def-weil-pbc-sites-and-cohomology",
+     "def-weil-pbc-sheafification"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "STATEMENT-DISPUTED: the remaining local-injectivity assertion is false with the unrestricted independent universes u and w in the recorded Lean signature. For a sufficiently large complete atomless Boolean site, all Type w-valued sheaves are subterminal and their reflector exists as the sheaf closure of the support of a presheaf. The constant two-element presheaf reflects to the terminal sheaf, so its distinct sections have equal images and are nowhere locally equal on a nonzero object. The worker report gives the cardinality and support-reflector arguments. The previous double-plus dependencies only apply to Type (max u w), not to arbitrary Type w. No theorem of local injectivity in the unrestricted universes is added.",
+    "uses": [
+     "def-weil-pbc-sites-and-cohomology",
+     "def-weil-pbc-sheafification"
+    ],
+    "elementary": false
+   }
+  ]
  }
 }
