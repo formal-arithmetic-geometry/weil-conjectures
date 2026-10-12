@@ -28,14 +28,19 @@
  ],
  "proof": [
   {
-   "text": "(The inductive construction.) We construct by induction on $t=0,\\dots,m$ a finite pairwise-disjoint family $\\mathcal C_t$ of basic subsets with $\\bigcup\\mathcal C_t=B_1\\cup\\dots\\cup B_t$. Put $\\mathcal C_0=\\emptyset$ (empty union). Given $\\mathcal C_t=\\{C_1,\\dots,C_q\\}$, define $\\mathcal R$ as follows: start with the one-element family $\\mathcal R_0=\\{B_{t+1}\\}$; for $l=1,\\dots,q$ let $\\mathcal R_l$ be obtained from $\\mathcal R_{l-1}$ by replacing every member $P$ by the finite pairwise-disjoint family of basic sets with union $P\\setminus C_l$ given by [lem-weil-pbc-affine-basic-set-difference]; put $\\mathcal R=\\mathcal R_q$. By induction on $l$, $\\mathcal R_l$ is a finite family of basic sets, pairwise disjoint (pieces coming from the same $P$ are disjoint by that node, pieces coming from distinct members $P\\ne P'$ of $\\mathcal R_{l-1}$ are disjoint because $P\\cap P'=\\emptyset$), with $\\bigcup\\mathcal R_l=B_{t+1}\\setminus(C_1\\cup\\dots\\cup C_l)$. So $\\mathcal R$ is a finite pairwise-disjoint family of basic sets with $\\bigcup\\mathcal R=B_{t+1}\\setminus\\bigcup\\mathcal C_t$.",
+   "text": "Let basics be the range of BasicConstructibleSetData.toSet. It contains the empty set, represented by f = 0 and no closed generators. The intersection of the basic data P and Q is represented by f = P.f * Q.f and the concatenation of their closed generators: membership follows from primality and membership in both lists. For two members, use [lem-weil-pbc-affine-basic-set-difference] and take the finite image of its indexed pieces under toSet. Distinct sets in that image come from distinct indices, so pairwise disjointness descends to the image; its union is the difference. These constructions prove MeasureTheory.IsSetSemiring basics.",
    "uses": [
     "lem-weil-pbc-affine-basic-set-difference"
    ],
    "elementary": false
   },
   {
-   "text": "(The new family.) Put $\\mathcal C_{t+1}=\\mathcal C_t\\cup\\mathcal R$. It is finite, and pairwise disjoint: members of $\\mathcal C_t$ are pairwise disjoint by the inductive hypothesis, members of $\\mathcal R$ are pairwise disjoint by Step 1, and a member of $\\mathcal R$ is contained in $B_{t+1}\\setminus\\bigcup\\mathcal C_t$, hence disjoint from every member of $\\mathcal C_t$. Its union is $\\bigcup\\mathcal C_t\\cup(B_{t+1}\\setminus\\bigcup\\mathcal C_t)=\\bigcup\\mathcal C_t\\cup B_{t+1}=B_1\\cup\\dots\\cup B_{t+1}$. After $m$ steps, $\\mathcal C_m$ is the required family (for $m=0$ it is empty). (The delivered proof formed the family from the pieces of $C\\setminus B_{t+1}$ for $C\\in\\mathcal C_t$ together with $\\mathcal R$, whose union is the symmetric difference and omits $\\bigcup\\mathcal C_t\\cap B_{t+1}$; corrected by L, found by the worker of the difference node.)",
+   "text": "Take the finite image J of the input family under toSet. Apply Mathlib MeasureTheory.IsSetSemiring.disjointOfUnion_props (Mathlib/MeasureTheory/SetSemiring.lean) to J and the semiring proof. It supplies a finite family K(s) of basic sets for each s in J such that all members of their finite union Q = J.biUnion K are pairwise disjoint and the union of Q equals the union of J. This is Mathlib's already-proved finite disjointization argument, replacing the hand-written nested induction below the unit level.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each member q of Q choose basic data D(q) whose toSet is q, using membership of K(s) in basics. Index Q by Fin Q.card with Q.equivFin.symm and use C(i) = D(Q.equivFin.symm i). Injectivity of this equivalence and of subtype coercion transfers pairwise disjointness to the indices. Surjectivity transfers the union equality to the required indexed union. Finite images permit duplicate or empty input sets; when m = 0, J and Q are empty and p = 0, so the empty-family case also holds.",
    "uses": [],
    "elementary": true
   }
@@ -46,7 +51,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Lemma Tag 03S0, proof at line 12049; the source's refinement step is expanded using the explicit basic-set difference calculation"
+  "place": "Etale Cohomology, Lemma Tag 03S0, refinement step; implemented via the basic-set difference theorem and Mathlib MeasureTheory.IsSetSemiring.disjointOfUnion_props (Mathlib/MeasureTheory/SetSemiring.lean), with elementary basic-set intersection and finite reindexing proofs. R1, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -131,5 +136,15 @@
   "group": "C1",
   "result": "pass",
   "note": "CommRing A any universe; basic set = BasicConstructibleSetData.toSet = V(range g)\\V{f} = D(f)∩V(g), n=0 allowed; inputs Fin m (m=0 ok); ∃ p, C : Fin p (p=0 ok); Pairwise Disjoint on toSet; iUnion equality; docstring carries the repaired induction (keep C_t, add pieces of B_{t+1}\\∪C_t)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T085327-L-34909",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
