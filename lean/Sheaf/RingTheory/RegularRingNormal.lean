@@ -7,7 +7,6 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Sheaf.RingTheory.Depth
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.SerreConditions
 import Sheaf.RingTheory.SerreCriterionNormal
@@ -45,6 +44,36 @@ Proof:
 theorem isNormalRing (R : Type u) [CommRing R] [IsRegularRing R] :
     ∀ (p : Ideal R) [p.IsPrime],
       IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p) := by
-  sorry
+  apply (Ring.serreCriterionNormal R).mpr
+  constructor
+  · intro p hp
+    exact inferInstance
+  · classical
+    intro p hp
+    let A := Localization.AtPrime p
+    let m := IsLocalRing.maximalIdeal A
+    obtain ⟨s, hcard, hs⟩ := (IsNoetherian.noetherian m).exists_span_finset_card_eq_spanFinrank
+    let rs := s.toList
+    have hspan : Ideal.span {x | x ∈ rs} = m := by
+      simpa [rs] using hs
+    have hdim : ringKrullDim A = (rs.length : WithBot ℕ∞) := by
+      simpa [rs, hcard, m] using
+        (IsRegularLocalRing.spanFinrank_maximalIdeal (R := A)).symm
+    have hparams : IsLocalRing.IsRegularSystemOfParameters rs := ⟨hspan, hdim.symm⟩
+    have hreg := (IsRegularLocalRing.isRegular_and_quotients_of_generators
+      A rs.length hdim rs hparams).1
+    have hmem : ∀ x ∈ rs, x ∈ m := by
+      intro x hx
+      rw [← hspan]
+      exact Ideal.subset_span hx
+    have hdepth : (rs.length : ℕ∞) ≤ IsLocalRing.depth (R := A) A := by
+      unfold IsLocalRing.depth Ideal.depth
+      split_ifs
+      · exact le_top
+      · exact le_sSup ⟨rs, hreg, hmem, rfl⟩
+    have hheight : p.height = (rs.length : ℕ∞) := by
+      have h := (IsLocalization.AtPrime.ringKrullDim_eq_height p A).symm.trans hdim
+      exact WithBot.coe_inj.mp h
+    exact (min_le_right _ _).trans (hheight ▸ hdepth)
 
 end IsRegularRing
