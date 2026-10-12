@@ -13,11 +13,21 @@
  },
  "proof": [
   {
-   "text": "Termwise tilde commutes with shifts and mapping cones; localization descends this to the derived functor and preserves distinguished triangles.",
+   "text": "Use the shared SheafOfModules category from def-pc-derived-category. The tilde functor is additive there: its map-add equation is exactly Mathlib AlgebraicGeometry.tilde.map_add. Let T be this functor, G be F followed by inclusion, and H be T.mapHomotopyCategory followed by DerivedCategory.Qh. Mathlib HomotopyCategory.instIsTriangulatedMapHomotopyCategory gives the triangulation of termwise additive T on homotopy categories; DerivedCategory.Qh is triangulated, so their composite H is triangulated (Functor.IsTriangulated.instComp).",
    "uses": [
     "def-pc-derived-category"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Compose the assumed isomorphism with DerivedCategory.quotientCompQhIso on source and target and T.mapHomotopyCategoryFactors, using functor associators and whiskering. This gives quotient followed by Qh followed by G naturally isomorphic to quotient followed by H. The homotopy quotient has fully faithful precomposition; Functor.preimageIso therefore gives eh : Qh followed by G naturally isomorphic to H.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Register eh as Localization.Lifting for Qh and the homotopy quasi-isomorphisms. Apply Functor.commShiftOfLocalization to give G an integer-shift structure. Mathlib NatTrans.commShift_iso_hom_of_localization makes eh compatible with this structure. Finally Functor.isTriangulated_of_precomp_iso eh proves G triangulated, since Qh is triangulated and its arrow functor is essentially surjective. Return this shift structure and its triangulatedness. No exactness lemma or separate derived-tilde construction is needed, because the hypothesis already supplies the factorization.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -92,10 +102,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T070527-L-3466278",
-  "kind": "interface",
+  "landing": "20261012T085309-L-27214",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
