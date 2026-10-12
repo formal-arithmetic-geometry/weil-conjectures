@@ -1,6 +1,6 @@
 # Work queue
 
-58 items; claim with `tools/claim.py next <group> [--stage N]`.
+57 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (48)
+## Stage 3: modules to prove (47)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -72,7 +72,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.Topology.FiniteClosedCoverCohomologyVanishing` | 6 | 1 | proof |
 | `Sheaf.Topology.IrreducibleIntegerExtensionVanishing` | 6 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
-| `Sheaf.Topology.AbelianOpenExtensionByZeroStalks` | 7 | 1 | proof |
 | `Sheaf.Topology.CohomologyReductionConstantSubsheaves` | 7 | 1 | proof |
 | `Sheaf.Topology.ConstantSubsheafFiniteFiltration` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf` | 8 | 6 | proof |
