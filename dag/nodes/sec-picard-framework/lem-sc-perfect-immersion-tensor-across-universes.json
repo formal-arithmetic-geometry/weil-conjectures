@@ -18,20 +18,28 @@
  ],
  "proof": [
   {
-   "text": "Compare both localizations with their standard models. Their Qh comparisons identify homology, single functors, and exact closed-immersion pushforward. On K-flat representatives their tensors compute the same termwise tensor complex, so the tensor and unit comparisons are invertible. The single of i_*O_Z is the standard Ri* of the tensor unit because the closed-immersion module pushforward is exact. Restriction to opens and single-functor comparisons transfer its perfection. Restrict equivalences to quasi-coherent objects and conjugate the specified adjunction; right-derived uniqueness identifies its left adjoint with the standard restricted Ri*.",
+   "text": "Transfer perfection to the standard pushforward of the tensor unit by lem-sc-perfect-immersion-standard-perfection. Apply the proved lem-pc-derived-qcoh-standard-adjunction to conjugate the supplied right adjunction, obtaining qY, cS, their natural inclusion comparisons and a standard preservation witness.",
    "uses": [
-    "def-pc-derived-pullback-across-universes",
+    "lem-sc-perfect-immersion-standard-perfection",
+    "lem-pc-derived-qcoh-standard-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sc-smooth-proper-diagonal-tensor-formula in the standard localizations at qY(K). Form its specified adjunction mate; its invertibility gives an isomorphism in the full QCoh subcategory. Apply inclusion and invert it. The Qh localization comparison at the single O_Y gives the standard unit comparison. Compose with hOP and map through cS to identify the right factor.",
+   "uses": [
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
     "def-pc-derived-category",
+    "def-pc-derived-pullback-across-universes",
     "def-pc-scheme-derived-tensor-structure"
    ],
    "elementary": false
   },
   {
-   "text": "Apply smooth_proper_diagonal_tensor_formula to the standard perfect proper immersion i and the image of K. Its displayed adjunction mate is invertible, hence gives an isomorphism between Li*K tensor c(unit_Y) and c(K) in the full quasi-coherent category. Apply inclusion and transport back. The transported pullback is the explicitly defined mixed-universe pullback. Map the supplied isomorphism hOP through c, tensor it with Li*K, and invert the isomorphism to get the asserted orientation.",
+   "text": "Map the standard tensor formula through the inverse ambient comparison on Z, using the comparison of c(K). Apply lem-pc-derived-localization-tensor-comparison. The left factor comparison is the pullback functor applied to the inclusion comparison of K, by the definition def-pc-derived-pullback-across-universes. The right factor comparison uses the cS comparison at OP and the equivalence unit on c(OP). Tensor these factor isomorphisms and compose, giving the original orientation.",
    "uses": [
-    "lem-sc-smooth-proper-diagonal-tensor-formula",
-    "def-pc-derived-pullback-across-universes",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-pc-derived-localization-tensor-comparison",
+    "def-pc-derived-pullback-across-universes"
    ],
    "elementary": false
   }
@@ -40,12 +48,15 @@
   "def-pc-derived-category",
   "def-pc-derived-pullback-across-universes",
   "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-derived-localization-tensor-comparison",
+  "lem-pc-derived-qcoh-standard-adjunction",
+  "lem-sc-perfect-immersion-standard-perfection",
   "lem-sc-smooth-proper-diagonal-tensor-formula"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tags 0E2Q and 0A9U, and Tag 05RU localization uniqueness; source text read online because local Stacks source is absent. Universe-transport details written by Q2."
+  "place": "Tags 0A9U and 0BRT with 05RU localization uniqueness. Q2 wrote and compiled adjunction conjugation, structure-unit comparison, invertible-mate extraction and tensor-isomorphism composition. Tensor compatibility and standard perfection are split into their strictly smaller comparison statements."
  },
  "mathlib_searches": [
   {
@@ -121,7 +132,7 @@
   "reviewer": "COMPILER",
   "group": "Q2",
   "result": "pass",
-  "landing": "20261012T110315-L-620416",
+  "landing": "20261012T135305-L-1687273",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

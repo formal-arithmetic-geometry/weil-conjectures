@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-derived-localization-tensor-comparison",
+ "kind": "statement",
+ "title": "Tensor comparison for independent derived localizations",
+ "statement": "For a scheme X with a specified derived localization [def-pc-derived-category], let e be its comparison to the standard localization [def-pc-derived-pullback-across-universes]. For every two standard derived objects A,B, the inverse comparison identifies e.inverse(A tensor^L B) with e.inverse(A) tensor^L e.inverse(B), for the fixed K-flat derived tensors [def-pc-scheme-derived-tensor-structure]. No quasi-coherence, boundedness, or Noetherian hypotheses are required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YH and 05RU (https://stacks.math.columbia.edu/tag/06YH and /tag/05RU)"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback-across-universes",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "The tensors in both localizations are the images of termwise tensor on K-flat replacements under the fixed construction [def-pc-scheme-derived-tensor-structure]. Use the same replacements before either localization. The Qh comparison in [def-pc-derived-pullback-across-universes] identifies the images, and both functors invert the resolution quasi-isomorphisms. Their composites give the asserted isomorphism for arbitrary A and B. Equivalently, uncurry the tensor into a right Kan extension along Qh times Qh, conjugate both domain and codomain by the localization equivalences, and apply uniqueness of right Kan extensions. These operations require no boundedness or QCoh condition.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-pullback-across-universes"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback-across-universes",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YH and 05RU (https://stacks.math.columbia.edu/tag/06YH and /tag/05RU); localization glue written by Q2 from the first step of lem-sc-perfect-immersion-tensor-across-universes. Sources read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The equivalence between two derived localizations preserves the derived tensor product and the quasi coherent subcategory and transports adjunctions",
+   "results": "8 hits: isLeftDerivedFunctor_iff_of_iso, Adjunction.derived, mapDerivedCategoryFactors and other generic localization tools; no scheme standard-comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "generic components only; used localization and full-subcategory equivalence APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsRightKanExtension; Localization.uniq",
+   "results": "The first query reported unknown identifier; the second was used in the initial generic localization search. No exact scheme tensor or QCoh transport result was obtained.",
+   "date": "2026-10-12",
+   "verdict": "no exact match obtained; no absence claim from the unrecognized identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "rightKanExtensionUniqueOfIso|congrFullSubcategory|derivedModuleDirectImageFactorization; rg schemeDerivedStandardEquivalence in both library roots and localization/equivalence in the DAG",
+   "results": "Mathlib generic Kan uniqueness and congrFullSubcategory found. RingedSpace.derivedModuleDirectImageFactorization is an existing library declaration attached to def-pc-ringed-spaces-derived-direct-image. The only existing scheme standard equivalence is the defining module; the restriction comparison in DerivedPullbackOpenRestrictionUniverses is private and does not state these results.",
+   "date": "2026-10-12",
+   "verdict": "reuse generic APIs and the existing direct-image factorization; no duplicate statement found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "equivalence between localizations of derived categories preserves derived tensor and quasi coherent cohomology and right adjoints",
+   "results": "Service unavailable: Internal Server Error (msearch reported UNAVAILABLE).",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence claim"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectImmersionTensorAcrossUniverses",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0BRT displayed chain, second equality: comparison of derived localization models before applying the perfect-immersion tensor formula",
+   "via": [
+    "lem-sc-perfect-immersion-tensor-across-universes",
+    "lem-sc-perfect-diagonal-dualizing-evaluation",
+    "lem-sc-smooth-proper-dualizing-tensor-evaluation",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedLocalizationTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedLocalizationTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.derivedLocalization_tensorComparison",
+  "statement": "theorem derivedLocalization_tensorComparison (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (A B : @schemeDerivedCategory X (HasDerivedCategory.standard _)) :\n    Nonempty ((schemeDerivedStandardEquivalence X).inverse.obj (A ⊗ B) ≅\n      (schemeDerivedStandardEquivalence X).inverse.obj A ⊗\n        (schemeDerivedStandardEquivalence X).inverse.obj B)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135305-L-1687273",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135305-L-1687273",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

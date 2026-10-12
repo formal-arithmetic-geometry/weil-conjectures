@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-perfect-immersion-standard-perfection",
+ "kind": "statement",
+ "title": "Standard-model perfection of a closed immersion pushforward",
+ "statement": "Let i:Z→Y be a closed immersion of schemes, with a specified derived localization of O_Y-modules and localizations of the same Hom universe on every open of Y [def-pc-derived-category]. Assume the single i_*O_Z[0] is perfect on Y [def-pc-perfect-complex]. Then the standard derived direct image [def-pc-derived-direct-image] of the standard tensor unit on Z [def-pc-scheme-derived-tensor-structure] is perfect in the standard derived model of Y (using standard localizations on its opens). No properness, Noetherianity, right adjoint, or object K is assumed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0A9U, 08CM and 05RU, comparison step before the second equality of Tag 0BRT"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "On Y and each open, use the canonical Qh comparisons between the two localizations. Open restriction is the localization lift of the exact module restriction functor, so comparing the lifts gives a natural isomorphism with restriction after comparison. The same Qh comparisons identify single complexes and the localization of each witnessing strictly perfect complex. Keep the original covering and strictly perfect complexes: composing these restriction isomorphisms transports their local witnesses to the standard single i_*O_Z.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A closed immersion has a closed embedding as its underlying map. The natural stalk identifications [lem-weil-pbc-closed-pushforward-stalks] make module pushforward restriction of scalars on the image, and zero off the image. Restriction of scalars is exact, zero is exact, and module sheaf exactness is detected stalkwise. Hence module pushforward is exact. Apply it termwise to a K-injective resolution: exactness preserves its quasi-isomorphism, so localization identifies right derived pushforward of a single with the single of its module pushforward.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The standard tensor unit is the Qh image of the single structure module by [def-pc-scheme-derived-tensor-structure]. Thus its derived pushforward is the perfect standard single i_*O_Z from the first two steps. Compose the local witnesses with this isomorphism; the definition of perfection is invariant under isomorphism.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-perfect-complex",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-weil-pbc-closed-pushforward-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0A9U, 08CM and 05RU, comparison step before the second equality of Tag 0BRT; localization glue written by Q2 from the first step of lem-sc-perfect-immersion-tensor-across-universes. Sources read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact pushforward by a closed immersion sends the structure module in degree zero to the derived pushforward of the unit and perfect complexes are preserved by localization equivalences",
+   "results": "8 generic/module pushforward hits, including Scheme.Modules.pushforward and pushforwardComp; no exact statement of the perfection transport.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; use the recorded definitions"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, CategoryTheory.Limits.PreservesFiniteColimits",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "closedImmersion.*exact|IsClosedImmersion.*PreservesFiniteColimits|perfect.*[Ll]ocalization; rg standard.*perfection in the DAG and both project roots",
+   "results": "Mathlib search returned 0 hits; project has the proved closedImmersion_pushforward_stalks, but not exact closed-immersion derived-unit or local perfection transport. No equivalent blueprint statement was found.",
+   "date": "2026-10-12",
+   "verdict": "new comparison needed; the stalk calculation is available to its eventual prover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "perfect single pushforward of structure module of closed immersion gives perfect derived pushforward of tensor unit in standard localization",
+   "results": "Service unavailable: Internal Server Error (msearch reported UNAVAILABLE).",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence claim"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectImmersionTensorAcrossUniverses",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0BRT displayed chain, second equality: comparison of derived localization models before applying the perfect-immersion tensor formula",
+   "via": [
+    "lem-sc-perfect-immersion-tensor-across-universes",
+    "lem-sc-perfect-diagonal-dualizing-evaluation",
+    "lem-sc-smooth-proper-dualizing-tensor-evaluation",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectImmersionStandardPerfection",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectImmersionStandardPerfection.lean",
+  "declaration": "AlgebraicGeometry.perfectImmersion_standardPerfection",
+  "statement": "theorem perfectImmersion_standardPerfection\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : Y.Opens, HasDerivedCategory.{wY}\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (hperfect : Y.IsPerfect\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj\n        ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)))) :\n    @Scheme.IsPerfect Y (HasDerivedCategory.standard _)\n      (fun _ ↦ HasDerivedCategory.standard _)\n      ((@schemeDerivedDirectImage Z Y (HasDerivedCategory.standard _)\n        (HasDerivedCategory.standard _) i).obj\n        (𝟙_ (@schemeDerivedCategory Z (HasDerivedCategory.standard _))))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135305-L-1687273",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135305-L-1687273",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

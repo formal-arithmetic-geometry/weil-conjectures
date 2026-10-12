@@ -13,7 +13,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula
-import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedLocalizationTensorComparison
+import Sheaf.AlgebraicGeometry.DerivedQCohStandardAdjunction
+import Sheaf.AlgebraicGeometry.PerfectImmersionStandardPerfection
 
 /-! # The perfect immersion tensor formula in independent derived universes
 
@@ -31,34 +33,39 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry
 
+/-- Qh comparison identifies the single structure module with the standard tensor unit. -/
+private noncomputable def standardUnitComparison (X : Scheme.{u})
+    (h : HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings X.toRingedSpace))) :
+    (@schemeDerivedStandardEquivalence X h).functor.obj
+      ((@DerivedCategory.singleFunctor _ _ _ h 0).obj
+        (SheafOfModules.unit X.ringCatSheaf)) ≅
+      𝟙_ (@schemeDerivedCategory X (HasDerivedCategory.standard _)) := by
+  let A := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  exact (Localization.compUniqFunctor (@DerivedCategory.Qh A _ _ h)
+    (@DerivedCategory.Qh A _ _ (HasDerivedCategory.standard _))
+    (HomotopyCategory.quasiIso A (.up ℤ))).app
+      ((HomotopyCategory.singleFunctor A 0).obj (SheafOfModules.unit X.ringCatSheaf))
+
 /-- The tensor formula for a specified right adjoint of a perfect proper closed immersion.
 Source: Stacks Project, Tag 0A9U, the second equality of Tag 0BRT, and Tag 05RU.
 (blueprint: lem-sc-perfect-immersion-tensor-across-universes).
 
-Proof: compare the localizations on Z and Y with their standard localizations via
-`schemeDerivedStandardEquivalence`. Their composites with Qh are isomorphic to the
-standard Qh, by `Localization.compUniqFunctor`. Homology factors through Qh and hence
-commutes with these equivalences, by uniqueness of localization lifts. Thus they restrict
-to equivalences of the full quasi-coherent subcategories. The same argument for the
-single functors identifies the supplied OP with the standard structure single object.
-On K-flat representatives the transported tensor is the standard tensor: both tensors
-are represented by termwise tensor of K-flat complexes, and the comparison maps descend
-through localization. In particular the unit comparison is invertible. The direct-image
-comparison follows by uniqueness of the right derived functor of module pushforward;
-conjugating the given adjunction by the restricted equivalences then gives a right adjoint
-of the standard restricted direct image. Uniqueness of right adjoints identifies this
-adjoint with the one used in the tensor formula, for the supplied preservation witness.
-A closed immersion has exact module pushforward. Consequently its derived pushforward
-of the tensor unit is isomorphic to the single of its pushforward of O_Z. Transport the
-perfection hypothesis to the standard category, using the comparisons of restrictions
-and single functors on every open of Y. Apply `smooth_proper_diagonal_tensor_formula`
-to i in the standard universe, at the image of K. The asserted invertible mate gives an
-isomorphism from the tensor of the pulled-back K and c(O_Y) to c(K), after inclusion in
-D(Z). Transport this isomorphism back, use the definition of the mixed-universe pullback,
-and map the structure-object comparison through c. Invert to obtain the displayed
-orientation. No smoothness or flatness is used: perfection of i_*O_Z is the required
-finite Tor condition. Identity immersions give the tensor unitor; the empty scheme has
-only zero objects, so the statement also holds there. -/
+Proof: `perfectImmersion_standardPerfection` transfers the perfection hypothesis
+and identifies the standard derived pushforward of the tensor unit. The proved
+`derivedQCoh_standardAdjunction` conjugates the given adjunction to a standard
+one, with natural comparisons of the quasi-coherent objects and right adjoints.
+Apply `smooth_proper_diagonal_tensor_formula` to the standard immersion and the
+image of K. Its invertible mate gives an isomorphism in the full quasi-coherent
+category; apply inclusion and invert it. The Qh comparison identifies the image
+of the supplied single structure module with the standard tensor unit. Compose
+this with hOP and the quasi-coherent inclusion comparison and map through the
+standard right adjoint. Apply the inverse standard comparison to the tensor
+formula, then `derivedLocalization_tensorComparison`. The pullback comparison
+follows from the definition of `derivedPullbackAcrossUniverses` and the inclusion
+comparison for K. The right factor comparison follows from the right-adjoint
+comparison for OP and the unit isomorphism of the ambient equivalence. Compose
+these isomorphisms to obtain the displayed orientation. No extra hypotheses or
+changes of definitions are used. Identity and empty immersions are covered. -/
 theorem perfectImmersion_tensor_acrossUniverses
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y]
     (i : Z ⟶ Y) [IsClosedImmersion i] [IsProper i]
@@ -82,6 +89,58 @@ theorem perfectImmersion_tensor_acrossUniverses
         (SheafOfModules.unit Y.ringCatSheaf))
     (K : schemeDerivedQCohCategory Y) :
     Nonempty ((c.obj K).obj ≅
-      (derivedPullbackAcrossUniverses i).obj K.obj ⊗ (c.obj OP).obj) := by sorry
+      (derivedPullbackAcrossUniverses i).obj K.obj ⊗ (c.obj OP).obj) := by
+  let hZ : HasDerivedCategory.{wZ}
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) := inferInstance
+  let hY : HasDerivedCategory.{wY}
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) := inferInstance
+  let hU : ∀ U : Y.Opens, HasDerivedCategory.{wY}
+      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U)) := inferInstance
+  let sZ := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings Z.toRingedSpace))
+  let sY := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+  let sU := fun U : Y.Opens ↦ HasDerivedCategory.standard
+    (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))
+  let PY := @schemeDerivedQCohProperty Y sY
+  let PZ := @schemeDerivedQCohProperty Z sZ
+  let L := @derivedPullback Z Y i sY sZ
+  let eZ := @schemeDerivedStandardEquivalence Z hZ
+  let eY := @schemeDerivedStandardEquivalence Y hY
+  obtain ⟨qY, hRiS, cS, ⟨adjS⟩, ⟨ηY⟩, ⟨ηC⟩⟩ :=
+    @derivedQCoh_standardAdjunction.{u, wZ, wY} Z Y i
+      hZ hY hRi c adjC
+  have hperfectS :=
+    @perfectImmersion_standardPerfection.{u, wY} Z Y i
+      inferInstance hY hU hperfect
+  obtain ⟨hRf, hO, hTensor, ⟨mon⟩, ⟨a⟩, formula⟩ :=
+    @smooth_proper_diagonal_tensor_formula Z Y inferInstance inferInstance i
+      inferInstance inferInstance sZ sY sU hperfectS
+  let KS := qY.functor.obj K
+  let OS : PY.FullSubcategory := ⟨𝟙_ _, hO⟩
+  obtain ⟨pf, _, hm⟩ := formula mon a cS adjS KS
+  let m : (⟨L.obj KS.obj ⊗ (cS.obj OS).obj,
+      hTensor KS (cS.obj OS)⟩ : PZ.FullSubcategory) ⟶ cS.obj KS :=
+    (adjS.homEquiv _ KS)
+      (ObjectProperty.homMk (pf.hom ≫
+        KS.obj ◁ (adjS.counit.app OS).hom ≫ (ρ_ KS.obj).hom))
+  have : IsIso m := hm
+  let stdIso : (cS.obj KS).obj ≅ L.obj KS.obj ⊗ (cS.obj OS).obj :=
+    (PZ.ι.mapIso (asIso m)).symm
+  let hunitY := standardUnitComparison Y hY
+  let opIso : qY.functor.obj OP ≅ OS :=
+    PY.isoMk ((ηY.app OP) ≪≫ eY.functor.mapIso hOP ≪≫ hunitY)
+  let cUnitIso : (cS.obj OS).obj ≅ eZ.functor.obj (c.obj OP).obj :=
+    PZ.ι.mapIso (cS.mapIso opIso.symm) ≪≫ ηC.app OP
+  obtain ⟨tensorComparison⟩ := @derivedLocalization_tensorComparison.{u, wZ} Z hZ
+    (L.obj KS.obj) (cS.obj OS).obj
+  let pullbackIso : eZ.inverse.obj (L.obj KS.obj) ≅
+      (@derivedPullbackAcrossUniverses Z Y i hZ hY).obj K.obj :=
+    eZ.inverse.mapIso (L.mapIso (ηY.app K))
+  let rightIso : eZ.inverse.obj (cS.obj OS).obj ≅ (c.obj OP).obj :=
+    eZ.inverse.mapIso cUnitIso ≪≫ (eZ.unitIso.app (c.obj OP).obj).symm
+  exact ⟨(eZ.unitIso.app (c.obj K).obj) ≪≫
+    eZ.inverse.mapIso (ηC.app K).symm ≪≫
+    eZ.inverse.mapIso stdIso ≪≫ tensorComparison ≪≫ (pullbackIso ⊗ᵢ rightIso)⟩
 
 end AlgebraicGeometry
