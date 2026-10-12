@@ -7020,3 +7020,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/R3/Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonIdentity (stage 3; reviewer PASS; first push; landing 20261012T085330-L-36104 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/R3/Sheaf.AlgebraicGeometry.EtaleSplitResiduePoints (stage 3; reviewer PASS; first push; landing 20261012T085330-L-36199 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/R3/Sheaf.AlgebraicGeometry.EtaleSplitsOffQuasiFinitePart (stage 3; reviewer PASS; first push; landing 20261012T085331-L-36295 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/R3/Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism (stage 3; reviewer PASS; first push; landing 20261012T085331-L-36390 (proof); batch 20261012T085205; modules 1; new nodes 0)

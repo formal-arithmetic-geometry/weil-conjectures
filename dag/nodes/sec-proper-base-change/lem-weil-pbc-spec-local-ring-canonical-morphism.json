@@ -36,144 +36,63 @@
  ],
  "proof": [
   {
-   "text": "(Construction through an affine open.) Choose an affine open $V\\subseteq Y$ with $y\\in V$ ([lem-weil-pbc-affine-opens-basis] with $W=Y$), put $R=\\mathcal O_Y(V)$, let $\\iota_V:\\operatorname{Spec}R\\to Y$ be the canonical open immersion with image $V$ and $\\mathfrak p\\subset R$ the prime with $\\iota_V(\\mathfrak p)=y$ [lem-weil-pbc-affine-open-spec-points]. By [lem-weil-pbc-affine-open-stalk-localization] (c) the germ map $\\gamma_V:R\\to A=\\mathcal O_{Y,y}$, $r\\mapsto r_y$, is a localization of $R$ at $R\\setminus\\mathfrak p$, so $R_{\\mathfrak p}\\to A$, $r/s\\mapsto r_ys_y^{-1}$, is an isomorphism [def-weil-pbc-localization-at-prime]; this is the natural isomorphism $R_{\\mathfrak p}\\to\\mathcal O_{Y,y}$ of the statement. Put $c_V=\\iota_V\\circ\\operatorname{Spec}(\\gamma_V):\\operatorname{Spec}A\\to Y$ [def-weil-affine-spectrum]. Since $\\gamma_V$ is the composite of $R\\to R_{\\mathfrak p}$ with the isomorphism $R_{\\mathfrak p}\\cong A$, contravariant functoriality of $\\operatorname{Spec}$ shows that $c_V$ is the composite $\\operatorname{Spec}(A)\\cong\\operatorname{Spec}(R_{\\mathfrak p})\\to\\operatorname{Spec}R\\xrightarrow{\\iota_V}Y$ of the statement. Every affine open $V\\ni y$ may be used here.",
+   "text": "For each affine neighborhood, use IsAffineOpen.isLocalization_stalk and IsLocalization.algEquiv to obtain the ring equivalence compatible with the germ algebra map. Mathlib IsAffineOpen.fromSpecStalk_eq_fromSpecStalk gives the asserted factorization and independence directly.",
    "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "lem-weil-pbc-affine-open-spec-points",
     "lem-weil-pbc-affine-open-stalk-localization",
     "def-weil-pbc-localization-at-prime",
-    "def-weil-affine-spectrum"
+    "lem-weil-pbc-morphism-from-spec-local-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, proof of Lemma 01J6 (lemma-morphism-from-spec-local-ring), affine case, and proof of Lemma 01J7 (lemma-specialize-points): $\\operatorname{Spec}(\\mathcal O_{X,x})=\\operatorname{Spec}(R_{\\mathfrak p})\\to\\operatorname{Spec}(R)=U\\subset X$"
-   }
+   "elementary": false
   },
   {
-   "text": "(Independence of $V$.) Let $V_1,V_2$ be affine opens containing $y$, $R_i=\\mathcal O_Y(V_i)$. By [lem-weil-pbc-affine-opens-basis] (applied to the open $V_1\\cap V_2\\ni y$) there is an affine open $W$ with $y\\in W\\subseteq V_1\\cap V_2$; put $T=\\mathcal O_Y(W)$ and let $\\rho_i:R_i\\to T$ be the restriction maps. The germ at $y$ of a section equals the germ of its restriction [def-weil-pbc-module-stalk], so $\\gamma_{V_i}=\\gamma_W\\circ\\rho_i$ and $\\operatorname{Spec}(\\gamma_{V_i})=\\operatorname{Spec}(\\rho_i)\\circ\\operatorname{Spec}(\\gamma_W)$ [def-weil-affine-spectrum]; and $\\iota_{V_i}\\circ\\operatorname{Spec}(\\rho_i)=\\iota_W$ by [lem-weil-pbc-affine-open-inclusion-spec-map] (as $W\\subseteq V_i$). Hence $c_{V_i}=\\iota_{V_i}\\circ\\operatorname{Spec}(\\rho_i)\\circ\\operatorname{Spec}(\\gamma_W)=\\iota_W\\circ\\operatorname{Spec}(\\gamma_W)=c_W$ for $i=1,2$, and $c_{V_1}=c_{V_2}$. Call this morphism $c$, and fix from now on one affine open $V\\ni y$ with $R$, $\\mathfrak p$, $\\gamma=\\gamma_V$ as in Step 1, so that $c=\\iota_V\\circ\\operatorname{Spec}(\\gamma)$. (That $c$ corresponds to the pair $(y,\\mathrm{id}_A)$ is shown in Step 5; Stacks obtains the independence from the uniqueness in 01J6, which this comparison makes explicit.)",
+   "text": "For the local-properties conjunction, Mathlib Scheme.fromSpecStalk_closedPoint, range_fromSpecStalk, and stalkClosedPointTo_fromSpecStalk prove the closed-point, range, and normalized identity clauses. Membership of a generalization in every open containing its specialization gives the preimage clause. Choose an affine neighborhood using isBasis_affineOpens. For its germ localization, Mathlib IsLocalization.isLocalization_isLocalization_atPrime_isLocalization identifies the localization at q as a localization of the affine ring at the contracted prime. IsLocalization.algEquiv gives the algebra equivalence. IsLocalization.ringHom_ext, AlgEquiv.commutes and Localization.localRingHom_to_map identify its underlying ring map with Localization.localRingHom. Scheme.localRingHom_comp_stalkIso transports this to an isomorphism on spectrum stalks; compose with the affine open immersion stalk isomorphism using Hom.stalkMap_comp. Finally apply Flat.of_stalkMap and RingHom.Flat.of_bijective to these isomorphisms.",
    "uses": [
     "lem-weil-pbc-affine-opens-basis",
-    "def-weil-pbc-module-stalk",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-open-inclusion-spec-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Equation 02NA (equation-canonical-morphism) and the proof of Lemma 01J6 (lemma-morphism-from-spec-local-ring): the morphism does not depend on the affine open chosen"
-   }
-  },
-  {
-   "text": "(Clause (1).) By [lem-weil-pbc-localization-prime-residue-field-iso] (1) for $\\lambda=\\gamma$ and $W=R\\setminus\\mathfrak p$, $Q\\mapsto\\gamma^{-1}(Q)$ is a bijection from the primes of $A$ onto the primes $\\mathfrak q\\subset R$ with $\\mathfrak q\\cap(R\\setminus\\mathfrak p)=\\emptyset$, i.e. $\\mathfrak q\\subseteq\\mathfrak p$, with inverse $\\mathfrak q\\mapsto\\mathfrak qA$; and $\\operatorname{Spec}(\\gamma)$ maps the point $Q$ to $\\gamma^{-1}(Q)$ [lem-weil-pbc-spec-map-residue-field-naturality] (1). So $\\operatorname{Spec}(\\gamma)(Y')=\\{\\mathfrak q\\in\\operatorname{Spec}R:\\mathfrak q\\subseteq\\mathfrak p\\}$. The closed point: $\\mathfrak pA$ is a prime of $A$ with $\\gamma^{-1}(\\mathfrak pA)=\\mathfrak p$, and $\\mathfrak pA\\subseteq\\mathfrak m$ ($\\mathfrak m$ the unique maximal ideal), so $\\mathfrak p=\\gamma^{-1}(\\mathfrak pA)\\subseteq\\gamma^{-1}(\\mathfrak m)\\subseteq\\mathfrak p$; hence $\\operatorname{Spec}(\\gamma)(y')=\\mathfrak p$ and $c(y')=\\iota_V(\\mathfrak p)=y$. The image: in $\\operatorname{Spec}R$ the closure of $\\{\\mathfrak q\\}$ is $V(\\mathfrak q)=\\{\\mathfrak q'\\supseteq\\mathfrak q\\}$ (Zariski topology [def-weil-affine-spectrum]), so $\\mathfrak q\\subseteq\\mathfrak p$ if and only if $\\mathfrak q$ is a generalization of $\\mathfrak p$. As $\\iota_V$ is a homeomorphism onto the open subset $V$ [lem-weil-pbc-affine-open-spec-points], [def-weil-open-immersion], it maps the generalizations of $\\mathfrak p$ onto the points $x\\in V$ with $y\\in\\overline{\\{x\\}}\\cap V$ (the closure in the subspace $V$ is the closure in $Y$ intersected with $V$), i.e. onto the generalizations of $y$ lying in $V$. Finally every generalization $x$ of $y$ lies in every open $V'\\ni y$: otherwise $x$ lies in the closed set $Y\\setminus V'$, hence so does $\\overline{\\{x\\}}\\ni y$, a contradiction. Therefore $c(Y')=\\iota_V(\\operatorname{Spec}(\\gamma)(Y'))$ is exactly the set of generalizations of $y$, and $c(Y')\\subseteq V'$, i.e. $c^{-1}(V')=Y'$, for every open $V'\\ni y$.",
-   "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "lem-weil-pbc-spec-map-residue-field-naturality",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-open-spec-points",
-    "def-weil-open-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01J7 (lemma-specialize-points) and its proof; the last paragraph of the proof of Lemma 01J6 (an open containing the closed point is everything)"
-   }
-  },
-  {
-   "text": "(Clause (2): the stalk maps are isomorphisms.) Let $q\\in Y'$ with prime $Q\\subset A$ and $\\mathfrak q=\\gamma^{-1}(Q)$, so $\\operatorname{Spec}(\\gamma)(q)=\\mathfrak q$ (Step 3) and $x:=c(q)=\\iota_V(\\mathfrak q)\\in V$; as $\\iota_V$ is injective, $\\mathfrak q=\\mathfrak p_x$ is the prime of $x$. By [lem-weil-pbc-scheme-stalk-map-composition] (b) applied to $c=\\iota_V\\circ\\operatorname{Spec}(\\gamma)$, $c^\\sharp_q=\\operatorname{Spec}(\\gamma)^\\sharp_Q\\circ\\iota^\\sharp_{V,\\mathfrak q}$ with $\\iota^\\sharp_{V,\\mathfrak q}:\\mathcal O_{Y,x}\\to\\mathcal O_{\\operatorname{Spec}R,\\mathfrak q}$ and $\\operatorname{Spec}(\\gamma)^\\sharp_Q:\\mathcal O_{\\operatorname{Spec}R,\\mathfrak q}\\to\\mathcal O_{Y',q}$. The first is an isomorphism by [lem-weil-pbc-affine-open-stalk-localization] (b). By [lem-weil-pbc-spec-map-stalk-localization], under the identifications $\\mathcal O_{\\operatorname{Spec}R,\\mathfrak q}\\cong R_{\\mathfrak q}$ and $\\mathcal O_{Y',q}\\cong A_Q$ given by the germ maps of global sections [lem-weil-pbc-spec-domain-stalks-function-field] (1), the second is $\\gamma_Q:R_{\\mathfrak q}\\to A_Q$, $r/s\\mapsto\\gamma(r)/\\gamma(s)$, which is an isomorphism by [lem-weil-pbc-localization-prime-residue-field-iso] (2). So $c^\\sharp_q$ is a composite of two ring isomorphisms, hence an isomorphism (and local, an isomorphism of local rings carrying the maximal ideal onto the maximal ideal).",
-   "uses": [
-    "lem-weil-pbc-scheme-stalk-map-composition",
     "lem-weil-pbc-affine-open-stalk-localization",
-    "lem-weil-pbc-spec-map-stalk-localization",
-    "lem-weil-pbc-spec-domain-stalks-function-field",
-    "lem-weil-pbc-localization-prime-residue-field-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OD (lemma-formal-functions-stalk): 'a flat morphism as it identifies local rings'; the identification is written out here from Schemes 01J7's description $\\operatorname{Spec}(\\mathcal O_{X,x})=\\operatorname{Spec}(R_{\\mathfrak p})\\to\\operatorname{Spec}(R)$"
-   }
-  },
-  {
-   "text": "(Clause (2) at $y'$, and $c$ is the morphism of 02NA.) Let $\\varepsilon:A\\to\\mathcal O_{Y',y'}$ be the germ at $y'$ of global sections of $Y'=\\operatorname{Spec}A$; it is an isomorphism [lem-weil-pbc-morphism-from-spec-local-ring] (a), the identification $\\mathcal O_{Y',y'}=A_{\\mathfrak m}=A$ of the statement. Let $r\\in R$. By [lem-weil-pbc-affine-open-stalk-localization] (b), $\\iota^\\sharp_{V,\\mathfrak p}(r_y)$ is the germ of $r$ at $\\mathfrak p$; by [lem-weil-pbc-spec-map-stalk-localization] (with $\\psi=\\gamma$, $Q=\\mathfrak m$, $\\gamma^{-1}(\\mathfrak m)=\\mathfrak p$ by Step 3), $\\operatorname{Spec}(\\gamma)^\\sharp_{y'}$ sends the germ of $r$ at $\\mathfrak p$ to the germ of $\\gamma(r)$ at $y'$, which is $\\varepsilon(\\gamma(r))=\\varepsilon(r_y)$. With the factorization $c^\\sharp_{y'}=\\operatorname{Spec}(\\gamma)^\\sharp_{y'}\\circ\\iota^\\sharp_{V,\\mathfrak p}$ [lem-weil-pbc-scheme-stalk-map-composition] (b) this gives $c^\\sharp_{y'}(r_y)=\\varepsilon(r_y)$ for all $r\\in R$. Every element of $A$ is $r_ys_y^{-1}$ with $r\\in R$, $s\\in R\\setminus\\mathfrak p$ (Step 1), and ring homomorphisms preserve inverses, so $c^\\sharp_{y'}=\\varepsilon$, i.e. $\\varepsilon^{-1}\\circ c^\\sharp_{y'}=\\mathrm{id}_A$: under $\\mathcal O_{Y',y'}=A$ the map $c^\\sharp_{y'}$ is the identity of $A$. Together with $c(y')=y$ (Step 3) this says that $c$ corresponds to the pair $(y,\\mathrm{id}_A)$ under the bijection of [lem-weil-pbc-morphism-from-spec-local-ring] (b), as the statement asserts.",
-   "uses": [
     "lem-weil-pbc-morphism-from-spec-local-ring",
-    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-of-localization",
     "lem-weil-pbc-spec-map-stalk-localization",
-    "lem-weil-pbc-scheme-stalk-map-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Equation 02NA (equation-canonical-morphism): the canonical morphism corresponds to the identity map on the local ring under Lemma 01J6 (lemma-morphism-from-spec-local-ring)"
-   }
-  },
-  {
-   "text": "(Clause (3): flatness.) For every $q\\in Y'$ the local homomorphism $c^\\sharp_q:\\mathcal O_{Y,c(q)}\\to\\mathcal O_{Y',q}$ is a ring isomorphism (Step 4). A ring isomorphism $\\varphi:B\\to C$ is flat [def-weil-pbc-flat-ring-map]: for every $B$-module $N$ the map $N\\to N\\otimes_BC$, $n\\mapsto n\\otimes1$, is an isomorphism, natural in $N$, with inverse $n\\otimes c'\\mapsto\\varphi^{-1}(c')n$; so $-\\otimes_BC$ carries injective maps to injective maps. Hence $\\mathcal O_{Y',q}$ is a flat $\\mathcal O_{Y,c(q)}$-module for every $q\\in Y'$, i.e. $c$ is flat at every point, and $c$ is flat [def-weil-flat-morphism].",
-   "uses": [
+    "lem-weil-pbc-scheme-stalk-map-composition",
     "def-weil-pbc-flat-ring-map",
     "def-weil-flat-morphism"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OD (lemma-formal-functions-stalk): 'This is a flat morphism as it identifies local rings'"
-   }
+   "elementary": false
   },
   {
-   "text": "(Clause (4): the stalk of the pullback.) Let $\\mathcal G$ be an $\\mathcal O_Y$-module, $V'\\ni y$ open and $s\\in\\mathcal G(V')$, and let $c^*s\\in(c^*\\mathcal G)(c^{-1}V')=(c^*\\mathcal G)(Y')$ (Step 3) be the image of $s$ under the unit $\\mathcal G\\to c_*c^*\\mathcal G$ [def-pc-module-pullback]. By [lem-weil-pbc-module-stalk-pullback] (for $f=c$ and the point $y'$, $c(y')=y$) there is an isomorphism of $\\mathcal O_{Y',y'}$-modules $\\beta:(c^*\\mathcal G)_{y'}\\to\\mathcal G_y\\otimes_{\\mathcal O_{Y,y}}\\mathcal O_{Y',y'}$, the tensor product formed with $c^\\sharp_{y'}$, with $\\beta((c^*s)_{y'})=s_y\\otimes1$. Since $c^\\sharp_{y'}$ is a ring isomorphism (Step 4), $\\tau:\\mathcal G_y\\to\\mathcal G_y\\otimes_{\\mathcal O_{Y,y}}\\mathcal O_{Y',y'}$, $g\\mapsto g\\otimes1$, is bijective, with inverse $g\\otimes b\\mapsto(c^\\sharp_{y'})^{-1}(b)\\,g$ (well defined, the expression being bilinear and balanced; the composites are the identity on the elements $g$ and on the generators $g\\otimes b=(c^\\sharp_{y'})^{-1}(b)g\\otimes1$). Every element of $\\mathcal G_y$ is a germ $s_y$ [def-weil-pbc-module-stalk], and the map of the statement, $s_y\\mapsto(c^*s)_{y'}$, equals $\\beta^{-1}\\circ\\tau$; so it is well defined and bijective. It is linear for $\\mathcal O_{Y,y}$ acting on $(c^*\\mathcal G)_{y'}$ through $c^\\sharp_{y'}$ ($\\tau(ag)=ag\\otimes1=g\\otimes c^\\sharp_{y'}(a)$), and $c^\\sharp_{y'}=\\varepsilon$ is the identification $A=\\mathcal O_{Y',y'}$ (Step 5); hence it is an isomorphism of $A$-modules, and $(c^*\\mathcal G)_{y'}=\\mathcal G_y\\otimes_{\\mathcal O_{Y,y}}\\mathcal O_{Y',y'}$ with $c^\\sharp_{y'}$ the identity.",
+   "text": "At the closed point the stalk ring map is an isomorphism by the preceding clause. Restriction of scalars along its ring equivalence is an equivalence of module categories, so the unit of the extension/restriction adjunction is an isomorphism. Compose this unit with the restriction of the inverse of exists_tensorPullback_stalk_iso evaluated on G. Apply the forward stalk isomorphism to check the germ formula: its inverse cancels and its stated formula identifies the pulled-back germ with the pure tensor 1 tensor s, exactly the adjunction unit.",
    "uses": [
-    "def-pc-module-pullback",
     "lem-weil-pbc-module-stalk-pullback",
-    "def-weil-pbc-module-stalk"
+    "def-pc-module-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 0098 (lemma-stalk-pullback-modules), applied to $c$ at $y'$ with $c^\\sharp_{y'}$ the identity"
-   }
+   "elementary": false
   },
   {
-   "text": "(Clause (5).) Let $J\\subsetneq A$ be an ideal and $\\pi:A\\to A/J$ the quotient map. Since $J\\subseteq\\mathfrak m$ and the ideals of $A/J$ are the $I/J$ with $J\\subseteq I$, $A/J$ is a local ring with maximal ideal $\\mathfrak m/J$, and $\\pi^{-1}(\\mathfrak m/J)=\\mathfrak m$, so $\\pi$ is a local homomorphism. $\\operatorname{Spec}(\\pi):\\operatorname{Spec}(A/J)\\to Y'$ is a closed immersion [lem-weil-pbc-spec-quotient-closed-immersion]. Put $h=c\\circ\\operatorname{Spec}(\\pi)$ and let $z$ be the closed point $\\mathfrak m/J$ of $\\operatorname{Spec}(A/J)$. Then $\\operatorname{Spec}(\\pi)(z)=\\pi^{-1}(\\mathfrak m/J)=\\mathfrak m=y'$ [lem-weil-pbc-spec-map-residue-field-naturality] (1), so $h(z)=c(y')=y$ (Step 3). By [lem-weil-pbc-scheme-stalk-map-composition] (b), $h^\\sharp_z=\\operatorname{Spec}(\\pi)^\\sharp_z\\circ c^\\sharp_{y'}$. Let $\\varepsilon':A/J\\to\\mathcal O_{\\operatorname{Spec}(A/J),z}$ be the germ map of global sections, an isomorphism by [lem-weil-pbc-morphism-from-spec-local-ring] (a). By [lem-weil-pbc-spec-map-stalk-localization] (with $\\psi=\\pi$, $Q=\\mathfrak m/J$), $\\operatorname{Spec}(\\pi)^\\sharp_z\\circ\\varepsilon=\\varepsilon'\\circ\\pi$, and $c^\\sharp_{y'}=\\varepsilon$ (Step 5); hence $h^\\sharp_z=\\varepsilon'\\circ\\pi$, i.e. $\\varepsilon'^{-1}\\circ h^\\sharp_z=\\pi$. So $h$ corresponds to the pair $(y,\\pi)$ under the bijection of [lem-weil-pbc-morphism-from-spec-local-ring] (b): $h=c\\circ\\operatorname{Spec}(\\pi)$ is the morphism induced by $\\mathcal O_{Y,y}=A\\to A/J$.",
+   "text": "For J proper, Ideal.Quotient.nontrivial_iff supplies nontriviality. IsLocalRing.of_surjective' and IsLocalHom.of_surjective applied to the quotient map give its local structures. The inverse of SpecToEquivOfLocalRing is definitionally Spec.map of the given local homomorphism followed by fromSpecStalk, so the factorization is reflexivity. IsClosedImmersion.spec_of_surjective gives the closed immersion.",
    "uses": [
-    "lem-weil-pbc-spec-quotient-closed-immersion",
-    "lem-weil-pbc-spec-map-residue-field-naturality",
-    "lem-weil-pbc-scheme-stalk-map-composition",
     "lem-weil-pbc-morphism-from-spec-local-ring",
-    "lem-weil-pbc-spec-map-stalk-localization"
+    "lem-weil-pbc-spec-quotient-closed-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, the reformulation of Lemma 01J6 after Equation 02NA: a morphism $\\operatorname{Spec}(R)\\to X$ factors as $\\operatorname{Spec}(R)\\to\\operatorname{Spec}(\\mathcal O_{X,x})\\to X$ with the first map coming from a local homomorphism $\\mathcal O_{X,x}\\to R$"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-affine-open-spec-points",
   "lem-weil-pbc-affine-open-stalk-localization",
   "def-weil-pbc-localization-at-prime",
-  "def-weil-affine-spectrum",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-affine-open-inclusion-spec-map",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "lem-weil-pbc-spec-map-residue-field-naturality",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-scheme-stalk-map-composition",
-  "lem-weil-pbc-spec-map-stalk-localization",
-  "lem-weil-pbc-spec-domain-stalks-function-field",
   "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-scheme-stalk-map-composition",
   "def-weil-pbc-flat-ring-map",
   "def-weil-flat-morphism",
-  "def-pc-module-pullback",
   "lem-weil-pbc-module-stalk-pullback",
+  "def-pc-module-pullback",
   "lem-weil-pbc-spec-quotient-closed-immersion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 01J6 (lemma-morphism-from-spec-local-ring) and its proof, Equation 02NA (equation-canonical-morphism) with the factorization after it, Lemma 01J7 (lemma-specialize-points) and its proof; flatness from the proof of Cohomology of Schemes, Lemma 02OD (coherent.tex); the pullback stalk from Sheaves, Lemma 0098 (sheaves.tex). The comparison of two affine opens (Step 2) and the stalk-map computations (Steps 4, 5, 8) are written out by the worker where the sources leave them implicit."
+  "place": "Schemes, Lemma 01J6 (lemma-morphism-from-spec-local-ring) and its proof, Equation 02NA (equation-canonical-morphism) with the factorization after it, Lemma 01J7 (lemma-specialize-points) and its proof; flatness from the proof of Cohomology of Schemes, Lemma 02OD (coherent.tex); the pullback stalk from Sheaves, Lemma 0098 (sheaves.tex). The comparison of two affine opens (Step 2) and the stalk-map computations (Steps 4, 5, 8) are written out by the worker where the sources leave them implicit. Stage-3 R3 (2026-10-12): use Mathlib canonical-morphism API for construction, range and normalized closed-stalk map; use the existing localization and pullback-stalk declarations for the remaining clauses, with extension/restriction adjunction equivalence for the module unit. Second reading by R3: replace the open prime-localization/residue-field theorem by Mathlib localization transitivity and uniqueness, identifying the canonical ring map by ringHom_ext."
  },
  "mathlib_searches": [
   {
@@ -288,5 +207,15 @@
   "group": "K1",
   "result": "pass",
   "note": "Y:Scheme.{u}, y; Mathlib fromSpecStalk as c; affine V: localization e pinned by algebraMap/germ, Spec.map germ ≫ fromSpec = c; (1) c(y')=y, range = generalizations, preimage of every V∋y = ⊤; (2) IsIso stalkMap ∀q, closed stalk = stalkCongr (Mathlib form); (3) Flat; (4) iso in ModuleCat O_{Y,c(y')} pinned to germ of canonical exists_tensorPullbackAdjunction unit; (5) J≠⊤, SpecToEquivOfLocalRing.symm (y, mk J) = Spec.map mk ≫ c, closed immersion; added stmt_deps both used"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T085331-L-36390",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

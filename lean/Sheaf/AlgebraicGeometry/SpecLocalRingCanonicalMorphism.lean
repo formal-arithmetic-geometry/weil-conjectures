@@ -10,11 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
-import Sheaf.Topology.PresheafModuleStalkFunctor
-import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.PropertyC
 
 /-!
 # The canonical morphism from the spectrum of a local ring
@@ -58,7 +55,18 @@ theorem fromSpecStalk_affine_description (Y : Scheme.{u}) (y : Y)
         (Localization.AtPrime (hV.primeIdealOf ⟨y, hy⟩).asIdeal)) =
           (Y.presheaf.germ V y hy).hom) ∧
     Spec.map (Y.presheaf.germ V y hy) ≫ hV.fromSpec = Y.fromSpecStalk y := by
-  sorry
+  constructor
+  · let : Algebra (Y.presheaf.obj (op V)) (Y.presheaf.stalk y) :=
+      (Y.presheaf.germ V y hy).hom.toAlgebra
+    have := hV.isLocalization_stalk ⟨y, hy⟩
+    refine ⟨(IsLocalization.algEquiv (hV.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl
+      (Localization.AtPrime (hV.primeIdealOf ⟨y, hy⟩).asIdeal)
+      (Y.presheaf.stalk y)).toRingEquiv, ?_⟩
+    ext r
+    exact (IsLocalization.algEquiv (hV.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl
+      (Localization.AtPrime (hV.primeIdealOf ⟨y, hy⟩).asIdeal)
+      (Y.presheaf.stalk y)).commutes r
+  · exact hV.fromSpecStalk_eq_fromSpecStalk hy
 
 /-- The closed point maps to `y`; the image is its generalizations, every neighborhood
 pulls back to the whole spectrum, all stalk maps are isomorphisms, the closed stalk map
@@ -81,7 +89,60 @@ theorem fromSpecStalk_local_properties (Y : Scheme.{u}) (y : Y) :
       (Y.presheaf.stalkCongr
         (Inseparable.of_eq (fromSpecStalk_closedPoint (X := Y) (x := y)))).hom ∧
     Flat (Y.fromSpecStalk y) := by
-  sorry
+  have hstalk : ∀ q : Spec (Y.presheaf.stalk y),
+      IsIso ((Y.fromSpecStalk y).stalkMap q) := by
+    intro q
+    obtain ⟨V, hV, hy, _⟩ :=
+      Opens.isBasis_iff_nbhd.mp Y.isBasis_affineOpens
+        (show y ∈ (⊤ : Y.Opens) from trivial)
+    rw [← hV.fromSpecStalk_eq_fromSpecStalk hy, IsAffineOpen.fromSpecStalk,
+      Hom.stalkMap_comp]
+    let : Algebra (Y.presheaf.obj (op V)) (Y.presheaf.stalk y) :=
+      (Y.presheaf.germ V y hy).hom.toAlgebra
+    have := hV.isLocalization_stalk ⟨y, hy⟩
+    let R := Y.presheaf.obj (op V)
+    let A := Y.presheaf.stalk y
+    have := IsLocalization.isLocalization_isLocalization_atPrime_isLocalization
+      (hV.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl
+      (Localization.AtPrime q.asIdeal) q.asIdeal
+    let e := IsLocalization.algEquiv
+      (q.asIdeal.comap (algebraMap R A)).primeCompl
+      (Localization.AtPrime (q.asIdeal.comap (algebraMap R A)))
+      (Localization.AtPrime q.asIdeal)
+    have he : e.toRingHom = Localization.localRingHom
+        (q.asIdeal.comap (algebraMap R A)) q.asIdeal (algebraMap R A) rfl := by
+      apply IsLocalization.ringHom_ext (q.asIdeal.comap (algebraMap R A)).primeCompl
+      ext r
+      change e (algebraMap R _ r) = _
+      simp only [RingHom.comp_apply]
+      rw [AlgEquiv.commutes, Localization.localRingHom_to_map]
+      rfl
+    have : IsIso (CommRingCat.ofHom (Localization.localRingHom
+        (q.comap (Y.presheaf.germ V y hy).hom).asIdeal q.asIdeal
+        (Y.presheaf.germ V y hy).hom rfl)) := by
+      change IsIso (CommRingCat.ofHom (Localization.localRingHom
+        (q.asIdeal.comap (algebraMap (Y.presheaf.obj (op V)) (Y.presheaf.stalk y)))
+        q.asIdeal (algebraMap (Y.presheaf.obj (op V)) (Y.presheaf.stalk y)) rfl))
+      rw [← he]
+      exact e.toRingEquiv.toCommRingCatIso.isIso_hom
+    have : IsIso ((Spec.map (Y.presheaf.germ V y hy)).stalkMap q) := by
+      rw [← localRingHom_comp_stalkIso]
+      infer_instance
+    infer_instance
+  refine ⟨fromSpecStalk_closedPoint, range_fromSpecStalk, ?_, hstalk,
+    stalkClosedPointTo_fromSpecStalk y, ?_⟩
+  · intro V hy
+    apply top_unique
+    intro q _
+    have hspec : (Y.fromSpecStalk y) q ⤳ y := by
+      have h := Set.mem_range_self (f := Y.fromSpecStalk y) q
+      rw [range_fromSpecStalk] at h
+      exact h
+    exact hspec.mem_open V.isOpen hy
+  · apply Flat.of_stalkMap
+    intro q
+    have := hstalk q
+    exact RingHom.Flat.of_bijective (ConcreteCategory.bijective_of_isIso _)
 
 /-- The map on germs induced by the canonical tensor-pullback unit is an isomorphism
 at the closed point. The source point is written as `c(y')`, equal to `y` by the
@@ -112,7 +173,25 @@ theorem fromSpecStalk_module_stalk (Y : Scheme.{u}) (y : Y) (G : Y.Modules) :
           ((Y.fromSpecStalk y) ⁻¹ᵁ V) (closedPoint (Y.presheaf.stalk y)) hy
           (((Classical.choose (Modules.exists_tensorPullbackAdjunction
             (Y.fromSpecStalk y))).unit.app G).val.app (op V) s) := by
-  sorry
+  let f := Y.fromSpecStalk y
+  let x := closedPoint (Y.presheaf.stalk y)
+  have hf : IsIso (f.stalkMap x) := (fromSpecStalk_local_properties Y y).2.2.2.1 x
+  have hr : (ModuleCat.restrictScalars (f.stalkMap x).hom).IsEquivalence := by
+    let e := (asIso (f.stalkMap x)).commRingCatIsoToRingEquiv
+    change (ModuleCat.restrictScalars e.toRingHom).IsEquivalence
+    infer_instance
+  obtain ⟨e, he⟩ := Modules.exists_tensorPullback_stalk_iso f x
+  let M := (RingedSpace.moduleStalkFunctor Y.toRingedSpace (f x)).obj G
+  let η := (ModuleCat.extendRestrictScalarsAdj (f.stalkMap x).hom).unit.app M
+  have : IsIso η := inferInstance
+  refine ⟨asIso η ≪≫ (ModuleCat.restrictScalars (f.stalkMap x).hom).mapIso
+    (e.app G).symm, ?_⟩
+  intro V hy s
+  apply (ConcreteCategory.bijective_of_isIso (e.hom.app G)).1
+  change (e.hom.app G) ((e.inv.app G) (η
+    (TopCat.Presheaf.germ G.val.presheaf V (f x) hy s))) = _
+  rw [← ModuleCat.comp_apply, e.inv_hom_id_app, ModuleCat.id_apply, he]
+  rfl
 
 /-- For every proper ideal, the local-ring correspondence sends the quotient map to
 its spectrum map followed by the canonical morphism; the spectrum map is a closed
@@ -131,7 +210,14 @@ theorem fromSpecStalk_quotient_factorization (Y : Scheme.{u}) (y : Y)
         ⟨y, ⟨CommRingCat.ofHom (Ideal.Quotient.mk J), hmap⟩⟩ =
           Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)) ≫ Y.fromSpecStalk y ∧
       IsClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J))) := by
-  sorry
+  have : Nontrivial ((Y.presheaf.stalk y) ⧸ J) :=
+    Ideal.Quotient.nontrivial_iff.mpr hJ
+  have hlocal : IsLocalRing ((Y.presheaf.stalk y) ⧸ J) :=
+    IsLocalRing.of_surjective' (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective
+  have hmap : IsLocalHom (Ideal.Quotient.mk J) :=
+    IsLocalHom.of_surjective (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective
+  refine ⟨hlocal, hmap, rfl, ?_⟩
+  exact IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
 
 end
 end AlgebraicGeometry.Scheme
