@@ -7646,3 +7646,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:27 L: returned deliver/M3/Sheaf.AlgebraicGeometry.EtaleSetSectionLiftAffine (reviewer RETURN: (reviewer X-11d4e, head 11d4efc6f) A (change-record completeness; review point 2): In coord/changes/EtaleSetSectionLiftA)
 - 12:28 L: merged deliver/H1/Sheaf.CategoryTheory.IdentityDerivedHomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T122812-L-1078632 (proof); batch 20261012T120425; modules 1; new nodes 2)
 - 12:28 L: returned deliver/M2/Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase (reviewer RETURN: (reviewer X-77b04, head 77b04f488) F1 / change-record completeness: coord/changes/ModuleSupportProperOverBase-proof-impo)
+- 12:28 L: returned deliver/X3/Sheaf.AlgebraicGeometry.SheafAlgebraDerivedHomAdjunction (reviewer RETURN: (reviewer X-65974, head 659749a4b) D1/D2: SheafAlgebraMapDerivedAdjunction.lean:21–31 moves the original adjunction into)
