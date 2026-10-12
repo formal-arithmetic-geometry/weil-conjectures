@@ -9540,3 +9540,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:16 L: merged deliver/A2/Sheaf.RingTheory.LocalizedConormalBasisJacobian (stage 3; reviewer PASS; first push; landing 20261012T211611-L-1056211 (proof); batch 20261012T211610; modules 1; new nodes 0)
 - 21:16 L: merged deliver/B3/Sheaf.RingTheory.PopescuCharPPreparationGlobal (stage 3; reviewer PASS; first push; landing 20261012T211612-L-1056327 (interface); batch 20261012T211610; modules 3; new nodes 2)
 - 21:16 L: merged deliver/C3/Sheaf.AlgebraicGeometry.FlatModelFiniteFreeQuasiIso (stage 3; reviewer PASS; first push; landing 20261012T211612-L-1056488 (interface); batch 20261012T211610; modules 2; new nodes 1)
+- 21:16 L: merged deliver/D2/Sheaf.AlgebraicGeometry.StrictHenselizationModuleFibreFactorization (stage 3; reviewer PASS; after a return; landing 20261012T211612-L-1056618 (proof); batch 20261012T211610; modules 1; new nodes 0)
