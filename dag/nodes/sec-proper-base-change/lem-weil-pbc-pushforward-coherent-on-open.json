@@ -30,68 +30,34 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 ($j_*\\mathcal F$ on $U$).* For an open $V\\subseteq U$ we have $j^{-1}(V)=V$, so by the definition of the pushforward of modules [def-pc-module-pullback] $(j_*\\mathcal F)(V)=\\mathcal F(j^{-1}V)=\\mathcal F(V)$, with the restriction maps of $\\mathcal F$ and with $\\mathcal O_X(V)=\\mathcal O_U(V)$ acting as on $\\mathcal F(V)$ ($j^\\sharp_V$ is the identity for the inclusion of an open subscheme). By the definition of the restriction to the open subscheme $U$ [lem-weil-pbc-module-restriction-open-immersion-colimits], $(j_*\\mathcal F)|_U=\\mathcal F$ as $\\mathcal O_U$-modules. (In Mathlib this is AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:416.)",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0CYJ (lemma-pushforward-coherent-on-open), proof"
-   }
+   "text": "Restrict the pushforward back to U using Mathlib Scheme.Modules.restrictFunctorAdjCounitIso. This supplies the isomorphism with F directly, without the tensor pullback construction.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*Step 2 ($\\mathcal F$ vanishes on $U\\setminus T$).* $U\\setminus T=U\\cap(X\\setminus T)$ is open in $U$. Let $W\\subseteq U\\setminus T$ be open and $s\\in\\mathcal F(W)$. For every $x\\in W$ we have $x\\notin T\\supseteq\\operatorname{Supp}(\\mathcal F)$, so the stalk $\\mathcal F_x$ [def-weil-pbc-module-stalk] is $0$ by the definition of the support [def-weil-pbc-closed-subset-proper-over-base](2); hence the germs of $s$ and of $0$ at $x$ agree. Since $\\mathcal F$ is a sheaf, a section is determined by its germs [lem-weil-pbc-sheaf-sections-determined-by-germs] (applied to the underlying sheaf of sets of $\\mathcal F$, whose stalks are those of $\\mathcal F$), so $s=0$. Thus $\\mathcal F(W)=0$ for every open $W\\subseteq U\\setminus T$.",
-   "uses": [
-    "def-weil-pbc-module-stalk",
-    "def-weil-pbc-closed-subset-proper-over-base",
-    "lem-weil-pbc-sheaf-sections-determined-by-germs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0CYJ (lemma-pushforward-coherent-on-open), proof"
-   }
+   "text": "For an open V of the complement of T, sections of the restricted pushforward are sections of F on the inverse image under U.ι of the image of V. Every point in this open lies outside T, hence hSupp implies its stalk is subsingleton. Mathlib TopCat.Presheaf.section_ext makes each section equal to zero. Extensionality gives identity equals zero, and IsZero.iff_id_eq_zero proves the restriction is zero. This uses Mathlib stalks directly; no separately defined module-stalk functor or proper-support construction is needed.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "*Step 3 ($j_*\\mathcal F$ on $X\\setminus T$).* $X\\setminus T$ is open since $T$ is closed. For an open $V\\subseteq X\\setminus T$, $(j_*\\mathcal F)(V)=\\mathcal F(V\\cap U)$ [def-pc-module-pullback], and $V\\cap U$ is an open subset of $U\\setminus T$, so $(j_*\\mathcal F)(V)=0$ by Step 2. Hence $(j_*\\mathcal F)|_{X\\setminus T}=0$ [lem-weil-pbc-module-restriction-open-immersion-colimits].",
+   "text": "Construct the two-element open cover indexed by ULift Bool: true maps to U, false to the complement of T. The containment T subset U proves its supremum is top. Transport hF across the restriction-back isomorphism; transport coherence of zero across the zero restriction isomorphism. Both coherence transports and coherence of zero are the corresponding clauses of coherent_kernel_cokernel_sum. Apply the local-on-open-cover clause of coherent_module_local_on_open_cover and combine the three conclusions.",
    "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0CYJ (lemma-pushforward-coherent-on-open), proof"
-   }
-  },
-  {
-   "text": "*Step 4 (coherence).* Since $T\\subseteq U$, the opens $U$ and $X\\setminus T$ cover $X$. On $U$, $(j_*\\mathcal F)|_U=\\mathcal F$ (Step 1) is coherent by hypothesis. On $X\\setminus T$, $(j_*\\mathcal F)|_{X\\setminus T}=0$ (Step 3), and the zero module $0$ on an open subscheme $W$ is coherent by [pqf-def-coherent]: it is of finite type (the map $\\mathcal O_W^{\\oplus0}=0\\to0$ is surjective), and for every open $W'\\subseteq W$ the kernel of any map $\\mathcal O_{W'}^{\\oplus n}\\to0$ is $\\mathcal O_{W'}^{\\oplus n}$, of finite type via the identity. Since coherence is local on an open covering [lem-weil-pbc-coherent-module-local-on-open-cover](2), $j_*\\mathcal F$ is a coherent $\\mathcal O_X$-module.",
-   "uses": [
-    "pqf-def-coherent",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
     "lem-weil-pbc-coherent-module-local-on-open-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0CYJ (lemma-pushforward-coherent-on-open), proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "def-weil-pbc-module-stalk",
-  "def-weil-pbc-closed-subset-proper-over-base",
-  "lem-weil-pbc-sheaf-sections-determined-by-germs",
-  "pqf-def-coherent",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
   "lem-weil-pbc-coherent-module-local-on-open-cover"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "R1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 0CYJ (lemma-pushforward-coherent-on-open) and its proof"
+  "place": "Cohomology of Schemes, Lemma 0CYJ, proof; formalized with Mathlib restriction counit and section extensionality, and the existing coherence locality/closure declarations"
  },
  "mathlib_searches": [
   {
@@ -166,5 +132,15 @@
   "reviewer": "R-pco",
   "group": "E1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T202250-L-708078",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
