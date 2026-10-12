@@ -7,9 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.HypercohomologyLeftEdge
 
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Sheaf.Paper.CartanEilenbergLeftExactCohomology
-import Sheaf.CategoryTheory.TruncationHypercohomology
+import Sheaf.CategoryTheory.HypercohomologyLeftEdgeCanonical
 
 /-! # The cocycle equation for the hypercohomology left edge
 
@@ -62,6 +60,18 @@ theorem cochainHypercohomologyLeftEdge_cocycle
       G.map (K.iCycles n)) :
     c ≫ ((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj K).homologyπ n ≫
         G.cochainHypercohomologyLeftEdge K n = G.map (K.homologyπ n) := by
-  sorry
+  let T := ((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj K)
+  let c₀ := T.liftCycles (G.map (K.iCycles n)) (n + 1) (by simp)
+    (by
+      change G.map (K.iCycles n) ≫ G.map (K.d n (n + 1)) = 0
+      rw [← G.map_comp, K.iCycles_d, G.map_zero])
+  have hc₀ : c₀ ≫ T.iCycles n = G.map (K.iCycles n) := by
+    dsimp [c₀]
+    exact T.liftCycles_i _ _ _ _
+  have hcc₀ : c = c₀ := by
+    apply (cancel_mono (T.iCycles n)).1
+    exact hc.trans hc₀.symm
+  rw [hcc₀]
+  exact cochainHypercohomologyLeftEdge_canonical G K n
 
 end CategoryTheory.Functor
