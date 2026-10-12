@@ -35,6 +35,11 @@ Apply the pointwise criterion for locally finite type
 pairs, obtaining `LocallyOfFiniteType f` (def-weil-finite-type-morphism). -/
 theorem locallyOfFiniteType_of_isLocallyQuasiFinite {X S : Scheme.{u}} (f : X ⟶ S)
     (hf : f.IsLocallyQuasiFinite) : LocallyOfFiniteType f := by
-  sorry
+  rw [HasRingHomProperty.iff_exists_appLE (P := @LocallyOfFiniteType)
+    (RingHom.finiteType_stableUnderComposition.stableUnderCompositionWithLocalizationAway
+      RingHom.finiteType_holdsForLocalizationAway).left]
+  intro x
+  obtain ⟨U, hx, hU, V, hV, e, hft, _⟩ := hf x
+  exact ⟨⟨V, hV⟩, ⟨U, hU⟩, hx, e, hft⟩
 
 end AlgebraicGeometry.Scheme.Hom

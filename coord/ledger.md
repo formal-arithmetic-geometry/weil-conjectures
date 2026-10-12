@@ -6811,3 +6811,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/E3/Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs (stage 3; reviewer PASS; first push; landing 20261012T085231-L-11426 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/E3/Sheaf.AlgebraicGeometry.LiftProjectiveModuleEtale (stage 3; reviewer PASS; first push; landing 20261012T085232-L-11530 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:52 L: merged deliver/E3/Sheaf.AlgebraicGeometry.LimitContainedInConstructible (stage 3; reviewer PASS; first push; landing 20261012T085232-L-11686 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/E3/Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite (stage 3; reviewer PASS; first push; landing 20261012T085232-L-11791 (proof); batch 20261012T085205; modules 1; new nodes 0)
