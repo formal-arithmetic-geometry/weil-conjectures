@@ -9901,3 +9901,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/G1/Sheaf.CategoryTheory.FilteredCohomologyImagePresentation (stage 3; reviewer PASS; first push; landing 20261012T225310-L-1805182 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:53 L: merged deliver/G2/Sheaf.RingTheory.FreePrimeMembership (stage 3; reviewer PASS; first push; landing 20261012T225310-L-1805391 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/G3/Sheaf.AlgebraicGeometry.AffineHomComplexEvaluationD (stage 3; reviewer PASS; first push; landing 20261012T225310-L-1805579 (interface); batch 20261012T225253; modules 3; new nodes 2)
+- 22:53 L: merged deliver/G3/Sheaf.AlgebraicGeometry.DiagonalConormalMorphism (stage 3; reviewer PASS; first push; landing 20261012T225311-L-1805731 (interface); batch 20261012T225253; modules 2; new nodes 1)

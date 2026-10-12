@@ -3,6 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.DiagonalConormal
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+import Sheaf.AlgebraicGeometry.DiagonalConormalDerivationCore
 
 @[expose] public section
 
@@ -37,6 +38,12 @@ theorem exists_diagonalConormalMorphism (f : X ⟶ S) :
               (pullback.diagonal f))).unit.app
                 (kernel (SheafOfModules.unitToPushforwardObjUnit
                   (pullback.diagonal f).toRingCatSheafHom))).val.app (op W) s) := by
-  sorry
+  obtain ⟨D, hD⟩ := exists_diagonalConormalDerivation_core f
+  let φ : f.relativeDifferentials ⟶ diagonalConormal f :=
+    (f.relativeDifferentialsHomEquiv (diagonalConormal f)).symm D
+  refine ⟨φ, ?_⟩
+  intro U W h₁ h₂ hδ a s hs
+  have he := f.relativeDifferentialsHomEquiv_symm_app_d D a
+  exact he.trans (hD U W h₁ h₂ hδ a s hs)
 
 end AlgebraicGeometry
