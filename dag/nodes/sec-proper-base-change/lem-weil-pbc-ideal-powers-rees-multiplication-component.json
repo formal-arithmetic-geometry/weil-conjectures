@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-ideal-powers-rees-multiplication-component",
+ "kind": "statement",
+ "title": "Componentwise multiplication on ideal-power products",
+ "statement": "For each m,k and homogeneous b of degree k, there exists a module-sheaf morphism G_m → G_(m+k) satisfying the displayed coefficient formula on every open and section.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02O8, lines 5330--5400"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module",
+  "def-nagata-rees-algebra",
+  "def-nagata-rees-piece"
+ ],
+ "proof": [
+  {
+   "text": "On affine opens, multiplication by the coefficient preserves the ideal-power product; the resulting local maps agree on overlaps and glue.",
+   "uses": [
+    "lemma-nagata-rees-piece-membership",
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-rees-piece-membership",
+  "lem-weil-pbc-module-pullback-ideal-quotient",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02O8, lines 5330--5400",
+  "note": "Componentwise affine multiplication and gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "idealModuleProduct rees multiplication",
+   "results": "No exact existing theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "idealPowersReesMultiplication component sheaf",
+   "results": "No exact match found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ideal module product multiplication morphism",
+   "results": "No exact match found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "idealModuleProductι reesGrading",
+   "results": "No exact match found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IdealPowersReesMultiplication",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-ideal-powers-rees-multiplication"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealPowersReesMultiplicationComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowersReesMultiplicationComponent.lean",
+  "declaration": "AlgebraicGeometry.idealPowersReesMultiplication_component",
+  "statement": "theorem idealPowersReesMultiplication_component {A : Type v} [CommRing A]\n    {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))\n    (I : Ideal A) (J : X.IdealSheafData)\n    (hJ : J = (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)\n    (F : X.Modules) [F.IsQuasicoherent] :\n    let G := fun m ↦ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F\n    let graded := reesGrading I\n    ∀ (m k : ℕ) (b : graded k), ∃ mu : G m ⟶ G (m + k),\n      ∀ (U : X.Opens) (s : (G m).val.obj (op U)),\n        ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι (m + k)).2 F).app\n          U).hom ((mu.app U) s) =\n        (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U le_top).hom\n          (b.val.val.coeff k)) •\n        ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι m).2 F).app\n          U).hom s",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T213851-L-1209178",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T213851-L-1209178",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

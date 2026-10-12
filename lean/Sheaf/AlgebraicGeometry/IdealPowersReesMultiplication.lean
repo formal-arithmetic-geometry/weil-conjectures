@@ -10,8 +10,7 @@ public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
+import Sheaf.AlgebraicGeometry.IdealPowersReesMultiplicationComponent
 
 /-! # Multiplication maps on ideal powers
 
@@ -57,6 +56,12 @@ theorem idealPowersReesMultiplication {A : Type v} [CommRing A]
           (b.val.val.coeff k)) •
         ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι m).2 F).app
           U).hom s) := by
-  sorry
+  classical
+  dsimp
+  let G := fun m ↦ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F
+  let graded := reesGrading I
+  have h := idealPowersReesMultiplication_component f I J hJ F
+  choose mu hmu using h
+  exact ⟨mu, fun m k b U s => hmu m k b U s⟩
 
 end AlgebraicGeometry
