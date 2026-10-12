@@ -134,13 +134,31 @@ noncomputable def strictHenselizationMap :
               (Scheme.Γ.map _ ≫ _) ≫ 𝟙 _
             rw [Category.comp_id, ← h, op_comp, Scheme.Γ.map_comp, Category.assoc] } }
 
+
+/-- Ring homomorphisms out of the strict henselization are determined by the composites of their
+spectra with the legs of the strict localization cone. -/
+lemma strictHenselization_hom_ext {s : Spec (.of Ω) ⟶ S} {R : CommRingCat.{u}}
+    {f₁ f₂ : strictHenselization s ⟶ R}
+    (h : ∀ x, Spec.map f₁ ≫ (strictLocalizationCone s).π.app x =
+      Spec.map f₂ ≫ (strictLocalizationCone s).π.app x) : f₁ = f₂ :=
+  Spec.map_injective ((isLimitStrictLocalizationCone s).hom_ext h)
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The composite `T_(t) ⟶ S_(t ≫ g) ⟶ V` is `strictLocalizationLift g t x`. -/
 @[reassoc]
 lemma spec_map_strictHenselizationMap_comp_strictLocalizationCone_π_app
     (x : AffinePointedEtaleNeighborhood (t ≫ g)) :
     Spec.map (strictHenselizationMap g t) ≫ (strictLocalizationCone (t ≫ g)).π.app x =
-      strictLocalizationLift g t x :=
-  sorry
+      strictLocalizationLift g t x := by
+  have hy : Spec.map (Scheme.Γ.map (strictLocalizationLift g t x).op ≫
+      (Scheme.ΓSpecIso (strictHenselization t)).hom) =
+      strictLocalizationLift g t x ≫ x.obj.1.left.toSpecΓ := by
+    rw [Spec.map_comp, SpecMap_ΓSpecIso_hom, Scheme.Γ_map_op, Scheme.toSpecΓ_naturality]
+  rw [strictLocalizationCone_π_app, ← Spec.map_comp_assoc, strictHenselizationMap,
+    colimit.ι_desc]
+  change Spec.map (Scheme.Γ.map (strictLocalizationLift g t x).op ≫
+      (Scheme.ΓSpecIso (strictHenselization t)).hom) ≫ inv x.obj.1.left.toSpecΓ = _
+  rw [hy, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
 /-- `Spec` of the strict henselization map is compatible with the structure morphisms:
 `j_S ∘ Spec h = g ∘ j_T`.
@@ -149,8 +167,11 @@ lemma spec_map_strictHenselizationMap_comp_strictLocalizationCone_π_app
 @[reassoc]
 lemma spec_map_strictHenselizationMap_comp_strictLocalizationToBase :
     Spec.map (strictHenselizationMap g t) ≫ strictLocalizationToBase (t ≫ g) =
-      strictLocalizationToBase t ≫ g :=
-  sorry
+      strictLocalizationToBase t ≫ g := by
+  obtain ⟨x⟩ := IsCofiltered.nonempty (C := AffinePointedEtaleNeighborhood (t ≫ g))
+  rw [← strictLocalizationCone_π_app_hom (t ≫ g) x,
+    spec_map_strictHenselizationMap_comp_strictLocalizationCone_π_app_assoc,
+    strictLocalizationLift_comp_hom]
 
 /-- The strict henselization map is compatible with the evaluations at the geometric points,
 i.e. it induces the inclusion of residue fields inside `Ω`.
@@ -158,14 +179,33 @@ i.e. it induces the inclusion of residue fields inside `Ω`.
 (blueprint: `lem-weil-pbc-strict-henselization-functoriality`) -/
 @[reassoc (attr := simp)]
 lemma strictHenselizationMap_comp_strictHenselizationEval :
-    strictHenselizationMap g t ≫ strictHenselizationEval t = strictHenselizationEval (t ≫ g) :=
-  sorry
+    strictHenselizationMap g t ≫ strictHenselizationEval t = strictHenselizationEval (t ≫ g) := by
+  refine strictHenselization_hom_ext fun x ↦ ?_
+  rw [Spec.map_comp, Category.assoc,
+    spec_map_strictHenselizationMap_comp_strictLocalizationCone_π_app,
+    spec_map_strictHenselizationEval_comp_strictLocalizationLift,
+    spec_map_strictHenselizationEval_comp_strictLocalizationCone_π_app]
 
 /-- The strict henselization map is a local homomorphism.
 
 (blueprint: `lem-weil-pbc-strict-henselization-functoriality`) -/
-instance isLocalHom_strictHenselizationMap : IsLocalHom (strictHenselizationMap g t).hom :=
-  sorry
+instance isLocalHom_strictHenselizationMap : IsLocalHom (strictHenselizationMap g t).hom := by
+  refine ⟨fun a ha ↦ ?_⟩
+  rw [isUnit_iff_strictHenselizationEval_ne_zero] at ha ⊢
+  rwa [← CommRingCat.comp_apply, strictHenselizationMap_comp_strictHenselizationEval] at ha
+
+/-- Uniqueness of the strict henselization map: a ring homomorphism compatible with the structure
+morphisms and the evaluations at the geometric points is `strictHenselizationMap g t`. -/
+lemma eq_strictHenselizationMap (h : strictHenselization (t ≫ g) ⟶ strictHenselization t)
+    (h₁ : Spec.map h ≫ strictLocalizationToBase (t ≫ g) = strictLocalizationToBase t ≫ g)
+    (h₂ : h ≫ strictHenselizationEval t = strictHenselizationEval (t ≫ g)) :
+    h = strictHenselizationMap g t := by
+  refine strictHenselization_hom_ext fun x ↦ ?_
+  rw [spec_map_strictHenselizationMap_comp_strictLocalizationCone_π_app]
+  refine eq_strictLocalizationLift g t _ _ ?_ ?_
+  · rw [Category.assoc, strictLocalizationCone_π_app_hom, h₁]
+  · rw [← Category.assoc, ← Spec.map_comp, h₂,
+      spec_map_strictHenselizationEval_comp_strictLocalizationCone_π_app]
 
 /-- **Functoriality of the strict henselization** (clause 3): the strict henselization map is the
 unique (local) ring homomorphism `h : 𝒪^{sh}_{S,t ≫ g} ⟶ 𝒪^{sh}_{T,t}` with
@@ -177,7 +217,10 @@ theorem existsUnique_strictHenselizationMap :
       IsLocalHom h.hom ∧
       Spec.map h ≫ strictLocalizationToBase (t ≫ g) = strictLocalizationToBase t ≫ g ∧
       h ≫ strictHenselizationEval t = strictHenselizationEval (t ≫ g) :=
-  sorry
+  ⟨strictHenselizationMap g t, ⟨inferInstance,
+    spec_map_strictHenselizationMap_comp_strictLocalizationToBase g t,
+    strictHenselizationMap_comp_strictHenselizationEval g t⟩,
+    fun h ⟨_, h₁, h₂⟩ ↦ eq_strictHenselizationMap g t h h₁ h₂⟩
 
 /-- **Compatibility of the strict henselization map with neighbourhoods** (clause 4): if `(V, v)`
 is an affine pointed étale neighbourhood of `t ≫ g`, `(W, w)` one of `t` and `w : W ⟶ V` is
@@ -189,8 +232,11 @@ theorem strictLocalizationCone_π_app_comp_eq (x : AffinePointedEtaleNeighborhoo
     (y : AffinePointedEtaleNeighborhood t) (w : y.obj.1.left ⟶ x.obj.1.left)
     (hw : w ≫ x.obj.1.hom = y.obj.1.hom ≫ g) (hpt : y.obj.2.left ≫ w = x.obj.2.left) :
     (strictLocalizationCone t).π.app y ≫ w =
-      Spec.map (strictHenselizationMap g t) ≫ (strictLocalizationCone (t ≫ g)).π.app x :=
-  sorry
+      Spec.map (strictHenselizationMap g t) ≫ (strictLocalizationCone (t ≫ g)).π.app x := by
+  rw [spec_map_strictHenselizationMap_comp_strictLocalizationCone_π_app]
+  refine eq_strictLocalizationLift g t _ _ ?_ ?_
+  · rw [Category.assoc, hw, strictLocalizationCone_π_app_hom_assoc]
+  · rw [spec_map_strictHenselizationEval_comp_strictLocalizationCone_π_app_assoc, hpt]
 
 end Scheme
 
