@@ -9748,3 +9748,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:10 L: returned deliver/B3/Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent (reviewer RETURN: (reviewer X-b3fc8, head b3fc8cee3) C1: In dag/nodes/sec-picard-framework/lem-pc-ordinary-higher-image-open-base-change.j)
 - 22:12 L: returned deliver/K3/Sheaf.RingTheory.Derivation.DetectNonPthPower (reviewer RETURN: (reviewer X-1cf1a, head 1cf1a2589) 1. C1 (brief §6): In dag/nodes/sec-proper-base-change/lem-weil-pbc-fraction-field-der)
 - 22:13 L: returned deliver/P2/Sheaf.AlgebraicGeometry.ModulePullbackIdealPowerProductImage (reviewer RETURN: (the landing tools, head 02278ea6c) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 22:17 L: returned deliver/N2/Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion (reviewer RETURN: (reviewer X-cc891, head cc891fba3) H10 / G1: the earlier reader-gate return remains unresolved. Add the unchanged origin)
