@@ -18,7 +18,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-!
-REPAIR: Construct affineDerivedExtensionAdjunction, canonicalPullbackAdjunction with fixed canonical data; follow coord/hollow-definitions.md (class 2), claim/adapt users and record the definition change.
+REPAIR: Construct affineDerivedExtensionAdjunction and canonicalPullbackAdjunction
+with fixed canonical data; follow coord/hollow-definitions.md (class 2), claim/adapt
+users and record the definition change.
  # The affine global derived Hom base-change comparison
 Source: Stacks Project, perfect.tex, Tag 0AA7 (blueprint:
 def-pc-affine-global-hom-base-change-map).
@@ -132,6 +134,8 @@ def canonicalPullbackAdjunction {T S : Scheme.{u}} (g : T ⟶ S) :
     ((Classical.choose (Classical.choose_spec
       (Classical.choose_spec exists_derivedPullbackComposition))) g))
 
+set_option linter.unusedSectionVars false in
+-- Retain the original module-category instance in the public theorem signature.
 /-- Existence of tensor/internal-Hom adjunctions with the normalized evaluation counit.
 The inverse Hom equivalences satisfy the shared K-flat representative equation: the
 chain evaluation is specified on every summand using the recorded sheaf tensor-Hom
@@ -159,7 +163,46 @@ theorem exists_canonicalTensorHomAdjunction (S : Scheme.{u}) :
           schemeDerivedTensorHomEquiv S
             ((derivedInternalHom (Opens.grothendieckTopology S)
               S.toRingedSpace.sheaf).obj (op K, L)) K L (𝟙 _) := by
-  sorry
+  let e := schemeDerivedTensorHomEquiv S
+  have he : IsCanonicalDerivedTensorHom S e :=
+    Classical.choose_spec (exists_canonicalDerivedTensorHom S)
+  let core (K : schemeDerivedCategory S) : Adjunction.CoreHomEquiv
+      (tensorRight K)
+      ((Functor.curry.obj
+        (derivedInternalHom (Opens.grothendieckTopology S) S.toRingedSpace.sheaf)).obj
+          (op K)) :=
+    { homEquiv := fun A L => (e A K L).symm
+      homEquiv_naturality_left_symm := by
+        intro A' A L a h
+        change e A' K L (a ≫ h) = (a ▷ K) ≫ e A K L h
+        have hn := he.1 A A' K K L L a (𝟙 K) (𝟙 L) h
+        erw [op_id, ← CategoryTheory.prod_id', CategoryTheory.Functor.map_id,
+          Category.comp_id, tensorHom_id, Category.comp_id] at hn
+        exact hn
+      homEquiv_naturality_right := by
+        intro A L L' h c
+        apply (e A K L').injective
+        change e A K L' ((e A K L').symm (h ≫ c)) =
+          e A K L' ((e A K L).symm h ≫
+            (derivedInternalHom (Opens.grothendieckTopology S)
+              S.toRingedSpace.sheaf).map (𝟙 (op K), c))
+        simpa only [op_id, id_tensorHom_id, Category.comp_id,
+          Category.id_comp, Equiv.apply_symm_apply] using
+          (he.1 A A K K L L' (𝟙 A) (𝟙 K) c ((e A K L).symm h)).symm }
+  let b (K : schemeDerivedCategory S) := Adjunction.mkOfHomEquiv (core K)
+  have hb (A K L : schemeDerivedCategory S) :
+      ((b K).homEquiv A L).symm = e A K L := by
+    simp only [b, Adjunction.mkOfHomEquiv_homEquiv]
+    rfl
+  refine ⟨b, ?_, ?_⟩
+  · have hbfun : (fun A K L => ((b K).homEquiv A L).symm) = e := by
+      funext A K L
+      exact hb A K L
+    rw [hbfun]
+    exact he
+  · intro K L
+    exact ((b K).homEquiv_symm_id L).symm.trans
+      (congrArg (fun q => q (𝟙 _)) (hb _ K L))
 
 /-- The tensor/internal-Hom adjunction selected with the K-flat/K-injective
 Hom-complex evaluation normalization, rather than from an unrestricted adjunction package.
