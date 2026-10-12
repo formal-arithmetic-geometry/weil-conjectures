@@ -38,6 +38,11 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
+-- The derived tensor product of étale sheaves (`AlgebraicGeometry.Etale.derivedTensor`) is defined
+-- for a symmetric monoidal coefficient category, with the braiding of the symmetric structure;
+-- finding the braiding of `ModuleCat` through the same path avoids expensive kernel unfoldings.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+
 variable {Λ : Type (u + 1)} [CommRing Λ] (J : Ideal Λ) (X : Scheme.{u})
 
 /-- The small étale site of a scheme is locally small. Instance search does not find this in the

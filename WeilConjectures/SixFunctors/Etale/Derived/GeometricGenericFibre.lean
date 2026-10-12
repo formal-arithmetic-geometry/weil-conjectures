@@ -46,6 +46,13 @@ The affine line is `Spec k[t]`. The exchange for `Ri^!` is stated as the existen
 isomorphism, as is the exchange `Ri^! 𝔻_T ≅ 𝔻_Z i^*` of `lem-weil-closed-costalk-duality`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual`); the other two
 exchanges are stated for the canonical comparison maps.
+
+The exchange for `Rh_*` is proved on the bounded below derived categories
+(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_ι_iff`), by pasting two base changes:
+along the generic fibre `X_K ⟶ X`, a limit of the open immersions of the nonempty affine opens of
+`B` (`AlgebraicGeometry.Etale.isIso_baseChange_app_of_isLimit_of_smooth`, blueprint
+`lem-kun-0f09`), and along the field extension `\overline{K(B)} / K(B)`
+(`AlgebraicGeometry.Etale.isIso_baseChange_app_of_field`, blueprint `lem-kun-0f1c`).
 -/
 
 @[expose] public section
@@ -157,7 +164,7 @@ theorem isIso_derivedBaseChangeMap_geometricGenericPoint {X T : Scheme.{u}} (πX
     exact Scheme.IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ n hn.ne' hnΛ hnS F
   let L₀ : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
     ⟨L, hL.1.1⟩
-  rw [show L = DerivedCategory.Plus.ι.obj L₀ from rfl, isIso_derivedBaseChangeMap_app_ι_iff]
+  refine (isIso_derivedBaseChangeMap_app_ι_iff (ModuleCat.{u + 1} Λ) _ L₀).2 ?_
   -- the generic fibre `X_K = X ×_B Spec k(B)` as a limit of the `X ×_B U`
   set η := B.fromSpecFunctionField
   let a : Spec (.of (AlgebraicClosure B.functionField)) ⟶ Spec B.functionField :=
@@ -168,9 +175,8 @@ theorem isIso_derivedBaseChangeMap_geometricGenericPoint {X T : Scheme.{u}} (πX
   have hc := Etale.isLimitStageFunctorMapCone sqX B.functionFieldOverCone
     B.isLimitFunctionFieldOverCone
   have hstage (U : Over B) : ((Etale.stageFunctor sqX).obj U).hom =
-      pullback.snd (U.hom ≫ 𝟙 B) πX := by
-    simp only [Etale.stageFunctor_obj, Over.mk_hom]
-    exact (Category.comp_id _).symm.trans (sqX.lift_snd _ _ _)
+      pullback.snd (U.hom ≫ 𝟙 B) πX :=
+    (Category.comp_id _).symm.trans (sqX.lift_snd _ _ _)
   have hsm (U : B.NonemptyAffineOpens) :
       Smooth ((B.affineOpensOverDiagram ⋙ Etale.stageFunctor sqX).obj U).hom := by
     rw [Functor.comp_obj, hstage]
@@ -213,11 +219,13 @@ theorem isIso_derivedBaseChangeMap_geometricGenericPoint {X T : Scheme.{u}} (πX
     IsPullback.of_right (by rwa [he, hp]) (by simp [e₁]) sq₂
   have hS : IsPullback p₁ (pullback.snd πX B.geometricGenericPoint)
       (pullback.fst (η ≫ 𝟙 B) πX) a := by
-    refine IsPullback.of_right (h₂₂ := η) ?_ (by simp [p₁]) ?_
-    · rw [hp, ← hη]
+    refine IsPullback.of_right (h₁₂ := pullback.snd (η ≫ 𝟙 B) πX) (v₁₃ := πX) (h₂₂ := η) ?_
+      (by simp [p₁]) ?_
+    · have hp' : p₁ ≫ pullback.snd (η ≫ 𝟙 B) πX = pullback.fst πX B.geometricGenericPoint := by
+        simp [p₁]
+      rw [hp', ← hη]
       exact IsPullback.of_hasPullback πX B.geometricGenericPoint
-    · rw [hp₂]
-      simpa using (IsPullback.of_hasPullback (η ≫ 𝟙 B) πX).flip
+    · simpa using (IsPullback.of_hasPullback (η ≫ 𝟙 B) πX).flip
   rw [Etale.baseChange_app_paste_horiz_of_eq Λ sq₂.toCommSq sq₁.toCommSq
     (geometricGenericFibreMap_commSq h rfl) he hp L₀]
   have : IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq₂.toCommSq).app L₀) :=

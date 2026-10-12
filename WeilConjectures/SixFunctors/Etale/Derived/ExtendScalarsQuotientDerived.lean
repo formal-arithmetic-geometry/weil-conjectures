@@ -40,6 +40,11 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
+-- The derived tensor product of étale sheaves (`AlgebraicGeometry.Etale.derivedTensor`) is defined
+-- for a symmetric monoidal coefficient category, with the braiding of the symmetric structure;
+-- finding the braiding of `ModuleCat` through the same path avoids expensive kernel unfoldings.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+
 variable {Λ : Type (u + 1)} [CommRing Λ] (J : Ideal Λ) (X : Scheme.{u})
 
 /-- The small étale site of a scheme is locally small. Instance search does not find this in the
@@ -179,18 +184,5 @@ theorem nonempty_iso_restrictScalars_leftDerived_obj (K : 𝐃(X, Λ)) :
       (etaleSheafExtendScalarsCompRestrictScalarsIso J X) (.up ℤ)).app P) ≪≫
     (derivedTensorQObjSingleFunctorObjIsoOfKFlat P hP c).symm ≪≫
     ((derivedTensor _ X).flip.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj c)).mapIso e'⟩
-
-/-- **Internal extension–restriction adjunction.** For `K ∈ D(X_ét, Λ)` and
-`N ∈ D(X_ét, Λ ⧸ J)`, `RHom_Λ(K, Res N) ≅ Res RHom_{Λ ⧸ J}(K ⊗ᴸ_Λ (Λ ⧸ J), N)`, naturally in `N`:
-both are right adjoint to `T ↦ (K ⊗ᴸ T) ⊗ᴸ_Λ (Λ ⧸ J) ≅ (K ⊗ᴸ_Λ (Λ ⧸ J)) ⊗ᴸ (T ⊗ᴸ_Λ (Λ ⧸ J))`,
-the derived extension of scalars being monoidal. -/
-noncomputable def derivedHomRestrictScalarsIso (K : 𝐃(X, Λ)) :
-    (Sheaf.restrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).mapDerivedCategory ⋙
-        (derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K) ≅
-      (derivedHom (ModuleCat.{u + 1} (Λ ⧸ J)) X).obj
-          (op ((ProEtale.etaleSheafExtendScalars (Ideal.Quotient.mk J) X).leftDerivedFunctor.obj
-            K)) ⋙
-        (Sheaf.restrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).mapDerivedCategory :=
-  derivedHomCompIsoOfAdjunction (derivedExtendScalarsAdjunction J X) K
 
 end AlgebraicGeometry.Etale

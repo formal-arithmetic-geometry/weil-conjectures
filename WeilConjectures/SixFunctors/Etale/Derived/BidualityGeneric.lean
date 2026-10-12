@@ -217,7 +217,7 @@ theorem isIso_sheafFiber_map_verdierDualDoubleDual_app_of_not_isClosed (d : ℕ)
         Set.range (Scheme.fromSpecStalk _ (genericPoint (Spec (.of (Polynomial k))))) := by
       rw [affineLineGeometricGenericPoint, Scheme.geometricGenericPoint, Scheme.Hom.comp_apply]
       exact Set.mem_range_self _
-    rw [Scheme.range_fromSpecStalk, Set.mem_setOf_eq, specializes_iff_mem_closure,
+    rw [Scheme.range_fromSpecStalk, Set.mem_ofPred_eq, specializes_iff_mem_closure,
       hc.closure_eq, Set.mem_singleton_iff] at hmem
     rw [hmem]
     exact hc
@@ -236,7 +236,7 @@ theorem isIso_sheafFiber_map_verdierDualDoubleDual_app_of_not_isClosed (d : ℕ)
     | bot => exact absurd h0 (by simp)
     | coe m =>
       induction m using ENat.recTopCoe with
-      | top => exact absurd hdim (by norm_cast; simp)
+      | top => exact absurd hdim (by norm_cast)
       | coe m =>
         norm_cast at hdim
         exact ⟨m, by omega, le_rfl⟩
