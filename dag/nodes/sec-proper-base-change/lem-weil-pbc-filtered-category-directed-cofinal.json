@@ -23,50 +23,31 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-filtered-category-exists-directed-final] to obtain a nonempty directed set A and a functor F:A\\to\\mathcal J satisfying the finality conditions (1) and (2) of that statement. Write x_a=F(a) and let \\varphi_{ab}:x_a\\to x_b be the image under F of the unique morphism a\\to b of A when a\\le b. Functoriality gives \\varphi_{aa}=\\mathrm{id} and \\varphi_{bc}\\circ\\varphi_{ab}=\\varphi_{ac}, and A, x_a, \\varphi_{ab} do not depend on any target category or diagram.",
+   "text": "Apply [lem-weil-pbc-filtered-category-exists-directed-final], realized by Mathlib CategoryTheory.IsFiltered.exists_directed, to obtain a nonempty directed partial order A in the same universe as J and a final functor F : A → J. Use its underlying preorder. The chosen A and F precede the quantification over target categories and diagrams; functoriality supplies the system laws.",
    "uses": [
     "lem-weil-pbc-filtered-category-exists-directed-final"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma Tag 0032 (lemma-directed-category-system), categories.tex line 2710, construction of the directed system"
-   }
+   "elementary": false
   },
   {
-   "text": "Put H=F^{\\mathrm{op}}:A^{\\mathrm{op}}\\to\\mathcal J^{\\mathrm{op}}. The category A^{\\mathrm{op}} is cofiltered since A is a nonempty directed set. H satisfies hypotheses (i) and (ii) of clause (1) of [lem-weil-pbc-initial-functor-cofiltered-criterion]: a morphism H(a)\\to y in \\mathcal J^{\\mathrm{op}} is a morphism y\\to F(a) in \\mathcal J, so (i) is condition (1) of [lem-weil-pbc-filtered-category-exists-directed-final]. For (ii), let s,s':y\\to F(a) in \\mathcal J. Condition (2) of that statement gives a sequence a=a_0\\ge a_1\\le a_2\\ge\\cdots\\le a_{2n}=a and b_i:y\\to F(a_i) with b_0=s, b_{2n}=s' and F(a_{2k+1}\\to a_{2k})\\circ b_{2k+1}=b_{2k}, F(a_{2k+1}\\to a_{2k+2})\\circ b_{2k+1}=b_{2k+2}. Choose c\\in A with c\\ge a_i for all i (A is directed and the sequence is finite). By functoriality F(a_i\\to c)\\circ b_i is the same morphism for all i, so F(a\\to c)\\circ s=F(a\\to c)\\circ s'; in \\mathcal J^{\\mathrm{op}} this is s\\circ H(t)=s'\\circ H(t) for the morphism t:c\\to a of A^{\\mathrm{op}}. Now take \\mathcal B=\\mathcal J^{\\mathrm{op}}, so \\mathcal B^{\\mathrm{op}}=\\mathcal J and H^{\\mathrm{op}}=F. For a category \\mathcal C, a functor M:\\mathcal J\\to\\mathcal C and a colimit cocone (L,(\\iota_x)_x) of M, the cited statement says that M\\circ F has a colimit and that the canonical map \\varinjlim_A M\\circ F\\to L induced by the \\iota_{x_a} is an isomorphism; hence (L,(\\iota_{x_a})_a) is a colimit of the directed system (M(x_a),M(\\varphi_{ab})). This is clause (1).",
-   "uses": [
-    "lem-weil-pbc-initial-functor-cofiltered-criterion",
-    "lem-weil-pbc-filtered-category-exists-directed-final"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma Tag 0032 (lemma-directed-category-system), clause (1), via Lemma Tag 04E7 (lemma-cofinal)"
-   }
+   "text": "For any target category C, diagram M : J → C and colimit cocone c, the inverse of Mathlib Functor.Final.isColimitWhiskerEquiv F c sends the given colimit witness to a witness for c.whisker F. This is one application of the equivalence, retaining the vertex and restricting the legs.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Let H=F^{\\mathrm{op}}:A^{\\mathrm{op}}\\to\\mathcal J^{\\mathrm{op}} as in step 2. H is initial in the sense of conditions (1) and (2) of [lem-weil-pbc-initial-functor-limit]: (1) is condition (1) of [lem-weil-pbc-filtered-category-exists-directed-final] read in \\mathcal J^{\\mathrm{op}}. For (2), given b:y\\to F(a), b':y\\to F(a') in \\mathcal J, take the sequence a=a_0\\ge a_1\\le\\cdots\\le a_{2n}=a' and the b_i of condition (2) of that statement and insert identities at both ends, c_0=c_1=a_0, c_{j+1}=a_j (1\\le j\\le 2n), c_{2n+2}=a_{2n}, with the corresponding morphisms from y; then c_0\\le c_1\\ge c_2\\le c_3\\ge\\cdots\\ge c_{2n+2} in A, i.e. c_0\\leftarrow c_1\\rightarrow c_2\\leftarrow\\cdots\\rightarrow c_{2n+2} in A^{\\mathrm{op}}, and the compatibilities of (2) of [lem-weil-pbc-initial-functor-limit] are, read in \\mathcal J, those of the given sequence (and trivial at the identities). For a category \\mathcal C, a functor M:\\mathcal J^{\\mathrm{op}}\\to\\mathcal C and a limit cone (S,(\\pi_x)_x) of M, clause (a) of [lem-weil-pbc-initial-functor-limit] says that the restricted cone (S,(\\pi_{x_a})_a) is a limit of M\\circ H, which is the inverse system (M(x_a),M(\\varphi_{ab})) over A. This proves clause (2) with the same A, x_a, \\varphi_{ab}.",
-   "uses": [
-    "lem-weil-pbc-initial-functor-limit",
-    "lem-weil-pbc-filtered-category-exists-directed-final"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma Tag 0032 (lemma-directed-category-system), clause (2), via Lemma Tag 002R (lemma-initial)"
-   }
+   "text": "Mathlib Functor.initial_op_of_final supplies initiality of F.op. For any diagram M : Jᵒᵖ → C and limit cone c, the inverse of Functor.Initial.isLimitWhiskerEquiv F.op c sends the limit witness to one for c.whisker F.op. Pair the two witnesses under the same A and F. This is one application of the equivalence after instance inference.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-category-exists-directed-final",
-  "lem-weil-pbc-initial-functor-cofiltered-criterion",
-  "lem-weil-pbc-initial-functor-limit"
+  "lem-weil-pbc-filtered-category-exists-directed-final"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/categories.tex",
-  "place": "Lemma Tag 0032 (lemma-directed-category-system), categories.tex line 2710"
+  "by": "agent",
+  "group": "P2",
+  "date": "2026-10-12",
+  "description": "Direct Mathlib proof of Stacks Categories Tag 0032 clauses (1) and (2): exists_directed followed by final/initial whiskering equivalences."
  },
  "mathlib_searches": [
   {
@@ -146,5 +127,15 @@
   "group": "J1",
   "result": "pass",
   "note": "Stacks 0032 (1)(2) vs node: small filtered J = [SmallCategory J] [IsFiltered J]; nonempty directed set = Preorder+IsDirected+Nonempty (STATE DIRECTED SETS); x_a, phi_ab with phi_aa=id, phi_bc.phi_ab=phi_ac = F : A ⥤ J (functoriality); exists A,F before forall C,M (same system for all C,M); (1) every colimit cocone of M:J⥤C stays colimit after whisker F (same vertex, legs iota_{x_a}); (2) every limit cone of M:Jᵒᵖ⥤C stays limit after whisker F.op (inverse system over Aᵒᵖ); no completeness hypotheses; not literally Mathlib (exists_directed gives Final only, transport via Final.isColimitWhiskerEquiv separate) so existing:false right; deps Cocone/IsColimit/IsFiltered recorded Mathlib; universe of C fixed per instance (u v outer) unavoidable"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T042415-L-1818990",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

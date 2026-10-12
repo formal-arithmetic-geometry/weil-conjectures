@@ -6,6 +6,8 @@ Authors: SHEAF group J1
 module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
+import Mathlib.CategoryTheory.Presentable.Directed
+import Mathlib.CategoryTheory.Limits.Final
 
 /-!
 # One directed reindexing for colimits and inverse limits
@@ -51,6 +53,15 @@ theorem exists_directed_reindexing (J : Type w) [SmallCategory J] [IsFiltered J]
           IsColimit c → Nonempty (IsColimit (c.whisker F))) ∧
         (∀ (M : Jᵒᵖ ⥤ C) (c : Cone M),
           IsLimit c → Nonempty (IsLimit (c.whisker F.op))) := by
-  sorry
+  obtain ⟨A, horder, hdirected, hnonempty, F, hfinal⟩ := IsFiltered.exists_directed J
+  let :=  horder
+  let :=  hfinal
+  refine ⟨A, horder.toPreorder, hdirected, hnonempty, F, ?_⟩
+  intro C hC
+  constructor
+  · intro M c hc
+    exact ⟨(Functor.Final.isColimitWhiskerEquiv F c).symm hc⟩
+  · intro M c hc
+    exact ⟨(Functor.Initial.isLimitWhiskerEquiv F.op c).symm hc⟩
 
 end CategoryTheory
