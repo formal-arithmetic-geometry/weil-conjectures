@@ -1,6 +1,6 @@
 # Work queue
 
-1343 items; claim with `tools/claim.py next <group> [--stage N]`.
+1344 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (20)
 
@@ -32,7 +32,7 @@
 
 Not open yet: 41 nodes that wait for stage 1.
 
-## Stage 3: modules to prove (1323)
+## Stage 3: modules to prove (1324)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -81,6 +81,7 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.SheafHRightDerivedPullback` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictLocalMateProjectionFormulas` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.RightDerivedPlusCube` | 6 | 1 | proof |
+| `Sheaf.ConstructibleSheaf.ConstantModuleDual` | 6 | 1 | proof |
 | `Sheaf.ConstructibleSheaf.EtalePullbackInternalHom` | 6 | 1 | proof |
 | `Sheaf.RingTheory.EtaleResidueTripleUnitRefinement` | 6 | 1 | proof |
 | `Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise` | 6 | 3 | proof |
