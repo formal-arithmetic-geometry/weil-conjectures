@@ -1,0 +1,175 @@
+{
+ "id": "lem-weil-pbc-dvr-completion-generic-fiber",
+ "kind": "statement",
+ "title": "Geometric regularity of the generic fibre of a characteristic-zero DVR completion",
+ "statement": "Let A be a discrete valuation ring and let K be a characteristic-zero fraction field of A. Let B be the maximal-ideal-adic completion [def-weil-pbc-adic-completion]. The generic fibre (zero prime).Fiber B [def-weil-pbc-localization-at-prime] is geometrically regular over (zero prime).ResidueField in the sense of [def-weil-pbc-g-ring].",
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition Tag 07PX, proof of (3) and (4), expanded into the generic and closed fibre calculations; https://stacks.math.columbia.edu/tag/07PX"
+ },
+ "proof": [
+  {
+   "text": "Install the domain and DVR structures on B using [lem-weil-pbc-completion-of-dvr-is-dvr]. The completion maximal ideal is the image of that of A by [lem-weil-pbc-local-completion-local-ring].",
+   "uses": [
+    "lem-weil-pbc-completion-of-dvr-is-dvr",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The residue field k at zero is a fraction field of A. Apply the proved source-library lemma IsDiscreteValuationRing.isFractionRing_tensorProduct to the maximal-ideal equality, obtaining IsFractionRing B (B tensor_A k). This lemma composes [lem-weil-pbc-localization-base-change] with the uniformizer argument [lem-weil-pbc-dvr-unit-times-uniformizer-power]. Swap tensor factors to identify the generic fibre with this field.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport characteristic zero from K to A by natural-cast injectivity and then to k by the fraction-field lemma. Every finite purely inseparable extension kprime of k has bijective algebraMap by [def-weil-pbc-finite-purely-inseparable-extension] and separability in characteristic zero. The includeRight map to kprime tensor_k fibre is therefore bijective. Transport regularity from the field fibre across this ring equivalence by [lem-weil-pbc-field-regular-ring]. Field Noetherianity and these regular base changes give [def-weil-pbc-g-ring].",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-field-regular-ring",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completion-of-dvr-is-dvr",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-field-regular-ring",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition Tag 07PX, proof of (3) and (4), expanded into the generic and closed fibre calculations; https://stacks.math.columbia.edu/tag/07PX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isMaximal.*ne_bot|isMaximal_of_prime|isPrime.*isMaximal",
+   "results": "['Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean', 'Mathlib/RingTheory/Spectrum/Prime/Topology.lean', 'Mathlib/RingTheory/RamificationInertia/Inertia.lean', 'Mathlib/RingTheory/Spectrum/Maximal/Localization.lean', 'Mathlib/RingTheory/Spectrum/Maximal/Localization.lean', 'Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean', 'Mathlib/RingTheory/Artinian/Module.lean', 'Mathlib/RingTheory/Artinian/Module.lean']",
+   "date": "2026-10-12",
+   "verdict": "supporting lemmas only; no exact geometric-regularity match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic fibre of the completion of a characteristic zero discrete valuation ring is geometrically regular",
+   "results": "['instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers', 'Tilt.instField', 'Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing', 'Tilt', 'IsLocalRing.finrank_CotangentSpace_eq_one_iff', 'IsDedekindDomainDvr.is_dvr_at_nonzero_prime', 'IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers', 'IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain']",
+   "date": "2026-10-12",
+   "verdict": "supporting lemmas only; no exact geometric-regularity match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.IsPrime, IsPrincipalIdealRing",
+   "results": "['Ideal.isPrime_iff_of_isPrincipalIdealRing', 'Ideal.isPrime_iff_of_isPrincipalIdealRing_of_noZeroDivisors', 'IsPrime.to_maximal_ideal', 'IsDiscreteValuationRing.iff_pid_with_one_nonzero_prime', 'tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain', 'IsPrincipalIdealRing.of_prime', 'IsPrincipalIdealRing.of_prime_ne_bot', 'IsPrincipalIdealRing.of_finite_primes']",
+   "date": "2026-10-12",
+   "verdict": "supporting lemmas only; no exact geometric-regularity match"
+  },
+  {
+   "tool": "grep",
+   "query": "residueField_map_bijective|ker_evalOneₐ_eq_map|quotIdealMapEquivQuotTensor|isFractionRing_tensorProduct",
+   "results": "['Mathlib/RingTheory/EssentialFiniteness.lean', 'Mathlib/RingTheory/EssentialFiniteness.lean', 'Mathlib/RingTheory/TensorProduct/Quotient.lean', 'Mathlib/RingTheory/TensorProduct/Quotient.lean', 'Mathlib/RingTheory/TensorProduct/Quotient.lean', 'Mathlib/RingTheory/AdicCompletion/Completeness.lean', 'Mathlib/RingTheory/Unramified/Basic.lean', 'Mathlib/RingTheory/AdicCompletion/LocalRing.lean']",
+   "date": "2026-10-12",
+   "verdict": "supporting lemmas only; no exact geometric-regularity match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closed fibre of the completion of a Noetherian local ring is the residue field and geometrically regular",
+   "results": "['IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing', 'IsLocalRing.ResidueField.finite_of_finite', 'Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing', 'Algebra.instFiniteResidueFieldOfQuasiFiniteAt', 'RingHom.EssFiniteType.residueFieldMap', 'Algebra.instFiniteResidueFieldOfFormallyUnramified', 'Algebra.instFormallyUnramifiedResidueField', 'Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal']",
+   "date": "2026-10-12",
+   "verdict": "supporting lemmas only; no exact geometric-regularity match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.quotIdealMapEquivQuotTensor",
+   "results": "['Algebra.TensorProduct.quotIdealMapEquivQuotTensor', 'Algebra.TensorProduct.quotIdealMapEquivQuotTensor_mk']",
+   "date": "2026-10-12",
+   "verdict": "supporting lemmas only; no exact geometric-regularity match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field algebra over a characteristic zero field is geometrically regular after purely inseparable base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no match claimed; LeanFinder, Loogle, and source grep used instead"
+  },
+  {
+   "tool": "grep",
+   "query": "IsGeometricallyRegular|isFractionRing_tensorProduct|residueField.*completion",
+   "results": "['Mathlib/RingTheory/AdicCompletion/LocalRing.lean']",
+   "date": "2026-10-12",
+   "verdict": "second reading: supporting APIs only; no exact replacement"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable.bijective_algebraMap_of_isSeparable",
+   "results": "['IsPurelyInseparable.bijective_algebraMap_of_isSeparable']",
+   "date": "2026-10-12",
+   "verdict": "second reading: supporting APIs only; no exact replacement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion residue field tensor fibre algebra equivalence for a local noetherian ring",
+   "results": "['Ideal.fiberIsoOfBijectiveResidueField', 'Ideal.ResidueField.exists_smul_eq_tmul_one', 'Ideal.comap_fiberIsoOfBijectiveResidueField_apply', 'PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal', 'PrimeSpectrum.coe_preimageOrderIsoFiber_apply_asIdeal', 'PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal', 'PrimeSpectrum.preimageOrderIsoTensorResidueField', 'Ideal.comap_fiberIsoOfBijectiveResidueField_symm']",
+   "date": "2026-10-12",
+   "verdict": "second reading: supporting APIs only; no exact replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DVRCompletionRegular",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-dvr-completion-regular",
+   "place": "generic fibre steps 3-5"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DVRCompletionGenericFiber",
+  "file": "lean/Sheaf/RingTheory/DVRCompletionGenericFiber.lean",
+  "declaration": "AdicCompletion.isGeometricallyRegular_genericFiber_of_isDiscreteValuationRing_of_charZero",
+  "statement": "theorem isGeometricallyRegular_genericFiber_of_isDiscreteValuationRing_of_charZero\n    (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]\n    (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] [CharZero K] :\n    Algebra.IsGeometricallyRegular (⊥ : Ideal A).ResidueField\n      ((⊥ : Ideal A).Fiber (AdicCompletion (IsLocalRing.maximalIdeal A) A))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T070551-L-3477510",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T070551-L-3477510",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
