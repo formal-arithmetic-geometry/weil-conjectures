@@ -13,19 +13,24 @@
  ],
  "proof": [
   {
-   "text": "Apply the four exact functors termwise to complexes. Their induced derived functors and single-complex and shift comparisons are those of the exact-functor factorization theorem. The termwise natural isomorphism c induces a natural chain isomorphism between the composite functors, commuting with shifts in each degree.",
+   "text": "Prove a private exact-functor composition comparison with independent Ext universes. Use mapDerivedCategoryNatIso followed by mapDerivedCategoryCompIso and the proved shift-compatibility instances in WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor. Normalize the three single-complex comparison components directly using the Mathlib definitions mapDerivedCategorySingleFunctor and singleFunctorIsoCompQ, with localized conv simplification; no separate singleComparison_hom theorem is declared. The factorization identities reduce the endpoint comparison to complex morphisms, verified degreewise at zero and away from zero.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false
   },
   {
-   "text": "Localize this chain isomorphism at quasi-isomorphisms. Its naturality for chain maps holds also for inverses of quasi-isomorphisms by cancelling isomorphisms, and then for composites of such maps, hence for derived morphisms. Apply naturality to the morphism A[0] to F[0][n] representing x. Under the single-complex comparisons its components at A and F are the degree-zero classes of c_A and c_F. The two orders of applying exact functors have the same termwise comparison; their shift comparisons agree termwise. The resulting equality is the displayed one; shrinking the morphism sets does not change it.",
+   "text": "Apply Ext hom injectivity and expand Ext.comp_hom, Ext.mk₀_hom and Ext.mapExactFunctor_hom. Obtain the inverse endpoint comparison by cancellation. Apply ShiftedHom.map_naturality to the derived morphism representing x, conjugate by the endpoint single-complex comparisons, and simplify the shift comparison for composite functors. This proves the private composition comparison without identifying the universes used to shrink Ext in the three categories.",
    "uses": [
     "def-pc-ext",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the private composition comparison first to G, J', H = G ⋙ J' and the identity isomorphism. Simplifying the degree-zero identity classes gives x.mapExactFunctor (G ⋙ J') = (x.mapExactFunctor G).mapExactFunctor J'. Apply it a second time to J, GW, H = G ⋙ J' and c, then substitute the first equality. This is exactly the claimed square, with the original four independent Ext universes and unchanged hypotheses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -35,7 +40,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01F7; https://stacks.math.columbia.edu/tag/015F",
-  "place": "Functoriality of cohomology (01F7) and derived functors of exact functors (015F, lemma-right-derived-exact-functor); specialization to derived morphisms between single complexes."
+  "place": "R3 Lean proof, repaired after the duplicate-helper return: directly normalize single-complex components from Mathlib definitions, with no duplicate singleComparison_hom declaration; private universe-independent composition comparison followed by two applications. No new admitted theorem."
  },
  "mathlib_searches": [
   {
@@ -107,10 +112,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T194144-L-466176",
-  "kind": "interface",
+  "landing": "20261012T214712-L-1272141",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
