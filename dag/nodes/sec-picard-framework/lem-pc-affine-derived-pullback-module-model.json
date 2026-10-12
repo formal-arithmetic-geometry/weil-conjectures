@@ -15,37 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Use the canonical spectrum presentations Y≅Spec(A) and X≅Spec(B). Their naturality identifies f with Spec(φ) after these isomorphisms. Exact restriction along an isomorphism is an equivalence of module categories and of their localizations.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "The core affine derived equivalence gives a module complex M representing the transported E. Resolve M by a K-flat module complex P, using the K-flat resolution theorem on the one-point ringed site with ring A. Exact tilde sends P→M to an isomorphism after Q, so restriction back to Y gives the first required isomorphism.",
+   "text": "Obtain a module complex M representing E from exists_affine_module_complex_representative.",
    "uses": [
-    "new-affine-qcoh-derived-equivalence-core",
-    "lem-pc-kflat-resolution"
+    "lem-pc-affine-module-complex-representative"
    ],
    "elementary": false
   },
   {
-   "text": "Apply derivedPullback_tilde_iso to φ and P→M, obtaining tilde of extendScalars(φ)(P). Transport through the spectrum presentations. The pullback/restriction comparison follows on K-flat representatives from termwise tensor pullback and the counit in exists_derivedPullback; uniqueness of localization and of the left-derived functor permits the independent spectrum localization universe. This gives the second isomorphism and the stated K-flatness of P.",
+   "text": "Use the source library ModuleCat.hasFunctorialFlatResolution and the reduced LeftResolution.resolutionFunctor to construct P and its augmentation s to M. LeftResolution.kFlat_resolutionFunctor_obj proves P K-flat and kFlatResolutionNatTrans gives QuasiIso s. Tilde preserves monomorphisms by injectivity of localization maps and preserves cokernels by its adjunction. Hence tilde followed by exact chart restriction preserves quasi-isomorphisms. Q of its image of s is an isomorphism; compose its inverse with E ≅ Q(restrict tilde M) to get eP:E ≅ Q(restrict tilde P). These are already proved source-library and Mathlib declarations; no ringed-site resolution theorem is used.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply affine_kFlat_pullback_chart_comparison to f,P,hP. Map eP through derivedPullback f and compose it with the chart comparison. Supply P,hP,eP and the composite as the existential witness.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "def-pc-derived-pullback"
+    "lem-pc-affine-kflat-pullback-chart-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-pullback",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-kflat-resolution",
-  "new-affine-qcoh-derived-equivalence-core"
+  "lem-pc-affine-module-complex-representative",
+  "lem-pc-affine-kflat-pullback-chart-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Tag 08DW, proof of (1) by compatibility with open restriction and the affine computation (2); Tag 06Z0"
+  "place": "Tag 08DW(2) via Tag 06Z0; T3 formal assembly using source-library functorial module K-flat resolution"
  },
  "mathlib_searches": [
   {
@@ -116,9 +112,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T085326-L-34617",
+  "landing": "20261012T095924-L-324819",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

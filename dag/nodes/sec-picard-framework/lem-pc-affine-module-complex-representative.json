@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-affine-module-complex-representative",
+ "kind": "statement",
+ "title": "Module-complex representative on an affine scheme",
+ "statement": "Let $Y$ be an affine scheme [def-pc-scheme], and let $E$ be an object of $D(\\mathcal O_Y)$ with quasi-coherent cohomology [def-pc-derived-category]. There exists an unbounded complex $M$ of $\\Gamma(Y,\\mathcal O_Y)$-modules [def-weil-abstract-derived-category] such that $E\\cong Q((Y\\to\\operatorname{Spec}\\Gamma(Y,\\mathcal O_Y))^*\\widetilde M)$, where restriction is applied termwise. No K-flatness condition on $M$ and no scheme morphism other than the canonical chart occurs.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06Z0",
+  "place": "Tag 06Z0 (perfect-lemma-affine-compare-bounded), equivalence and essential surjectivity; canonical affine chart transport"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Define F as restriction along the inverse spectrum chart and G as restriction along the chart. The restriction composition, congruence, and identity isomorphisms give F followed by G isomorphic to the identity. Exact-functor localization transports this isomorphism to their derived functors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The exact restriction homology comparison and preservation of quasi-coherent sheaves show F(E) has quasi-coherent cohomology. Apply the core affine derived equivalence to K=F(E), choose M representing its inverse image using essential surjectivity of Q, and compose the equivalence counit with its termwise tilde comparison.",
+   "uses": [
+    "new-affine-qcoh-derived-equivalence-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the derived G functor to this isomorphism. Compose on the left with the inverse of the F-G identity comparison and on the right with G.mapDerivedCategoryFactors. This yields the required representative.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-affine-qcoh-derived-equivalence-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/06Z0",
+  "place": "Tag 06Z0 (perfect-lemma-affine-compare-bounded), equivalence and essential surjectivity; canonical affine chart transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every derived object with quasi coherent cohomology on an affine scheme is represented by a module complex",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent derived complex on an affine scheme is represented by a K flat module complex",
+   "results": "8 hits, including flat_appLE and IsQuasicoherent; no derived module representative.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "results": "12 hits; exact-functor localization comparison is usable as glue, not an affine representative theorem.",
+   "verdict": "ingredient",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctor.*mapDerivedCategory|toSpecΓ.*derived|kFlatResolutionNatTrans",
+   "results": "msearch: 0 Mathlib hits. Direct rg found LeftResolution.kFlatResolutionNatTrans in the source library and the existing affine equivalence.",
+   "verdict": "existing ingredients",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineDerivedPullbackModuleModel",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2): represent the quasi-coherent pullback factor by a K-flat module complex and compute its affine derived base change; Module-complex representative on an affine scheme",
+   "via": [
+    "lem-pc-affine-derived-pullback-module-model",
+    "lem-pc-derived-pullback-qcoh-component",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModuleComplexRepresentative",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModuleComplexRepresentative.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_module_complex_representative",
+  "statement": "theorem exists_affine_module_complex_representative (Y : Scheme.{u}) [IsAffine Y]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (E : schemeDerivedCategory Y) (hE : schemeDerivedQCohProperty Y E) :\n    ∃ M : CochainComplex (ModuleCat.{u} Γ(Y, ⊤)) ℤ,\n      Nonempty (E ≅ DerivedCategory.Q.obj\n        ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n          (@id (SheafOfModules.{u} (moduleRings (Spec Γ(Y, ⊤)).toRingedSpace) ⥤\n            SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n            (Scheme.Modules.restrictFunctor Y.toSpecΓ))\n          (by change (Scheme.Modules.restrictFunctor Y.toSpecΓ).PreservesZeroMorphisms\n              infer_instance) (.up ℤ)).obj\n            ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n              (@id (ModuleCat.{u} Γ(Y, ⊤) ⥤\n                SheafOfModules.{u} (moduleRings (Spec Γ(Y, ⊤)).toRingedSpace))\n                (tilde.functor Γ(Y, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T095924-L-324819",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T095924-L-324819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

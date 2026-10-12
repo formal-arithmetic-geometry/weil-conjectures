@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-affine-kflat-pullback-chart-comparison",
+ "kind": "statement",
+ "title": "K-flat affine pullback chart comparison",
+ "statement": "Let $f:X\\to Y$ be a morphism of affine schemes [def-pc-scheme], $A=\\Gamma(Y,\\mathcal O_Y)$, $B=\\Gamma(X,\\mathcal O_X)$, and $\\varphi=f^\\sharp:A\\to B$. Let $P$ be a K-flat complex of $A$-modules [def-pc-module-kflat-complex]. Then $Lf^*Q((Y\\to\\operatorname{Spec} A)^*\\widetilde P)$ [def-pc-derived-pullback] is isomorphic to the exact derived restriction along $X\\to\\operatorname{Spec} B$ of $Q(\\widetilde{B\\otimes_A P})$ [def-pc-derived-category]. The localization on $\\operatorname{Spec} B$ may have an independent universe. This computes pullback of a given model, without an existence assertion for a representative of an arbitrary object.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW(2) (perfect-lemma-pullback), affine computation using Tag 08DV and canonical chart transport"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of toSpecΓ gives the commutative square f;Y.toSpecΓ = X.toSpecΓ;Spec.map(f.appTop). Restriction along either canonical chart is an exact equivalence of module categories.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the literal-spectrum affine formula derivedPullback_tilde_iso on the identity resolution of P. Tilde(P) is K-flat, so its derived pullback is computed termwise and identified with tilde of extension of scalars.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor pullback commutes with restriction along the chart isomorphisms, by its inverse-image and change-of-rings formula. Chart restriction preserves K-flatness since it is a ringed-space isomorphism. Evaluate the counit of exists_derivedPullback on the chart-restricted K-flat complex; it is invertible. These identifications and the square of step 1 transport the spectrum formula to f. The exact restriction localization factors give the displayed right-hand side. If the spectrum localization universe differs, the canonical equivalence between the two localizations transports the same factors; uniqueness of localization lifts identifies their comparisons.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW(2) (perfect-lemma-pullback), affine computation using Tag 08DV and canonical chart transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of the restricted tilde of a K flat complex through canonical affine spectrum charts",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback is compatible with canonical affine spectrum chart restriction",
+   "results": "8 hits including Scheme.isPullback_toSpecΓ_toSpecΓ and SpecMap_appLE_fromSpec; no derived comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "affine_kFlat_pullback_chart|exists_affine_module_complex_representative|toSpecΓ.*derivedPullback",
+   "results": "0 Mathlib hits through msearch; direct rg found no duplicate declarations in either library root. Existing derivedPullback_tilde_iso applies to literal spectra only.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineDerivedPullbackModuleModel",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2): represent the quasi-coherent pullback factor by a K-flat module complex and compute its affine derived base change; K-flat affine pullback chart comparison",
+   "via": [
+    "lem-pc-affine-derived-pullback-module-model",
+    "lem-pc-derived-pullback-qcoh-component",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineKFlatPullbackChartComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineKFlatPullbackChartComparison.lean",
+  "declaration": "AlgebraicGeometry.affine_kFlat_pullback_chart_comparison",
+  "statement": "theorem affine_kFlat_pullback_chart_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [IsAffine X] [IsAffine Y]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [HasDerivedCategory.{wS}\n      (SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace))]\n    (P : CochainComplex (ModuleCat.{u} Γ(Y, ⊤)) ℤ)\n    (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} Γ(Y, ⊤)) (.up ℤ)).kFlat P) :\n    Nonempty ((derivedPullback f).obj\n      (DerivedCategory.Q.obj\n        ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n          (@id (SheafOfModules.{u} (moduleRings (Spec Γ(Y, ⊤)).toRingedSpace) ⥤\n            SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n            (Scheme.Modules.restrictFunctor Y.toSpecΓ))\n          (by change (Scheme.Modules.restrictFunctor Y.toSpecΓ).PreservesZeroMorphisms\n              infer_instance) (.up ℤ)).obj\n            ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n              (@id (ModuleCat.{u} Γ(Y, ⊤) ⥤\n                SheafOfModules.{u} (moduleRings (Spec Γ(Y, ⊤)).toRingedSpace))\n                (tilde.functor Γ(Y, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj P))) ≅\n        (@Functor.mapDerivedCategory _ _ _ _ _ _ _ _\n          (@id (SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace) ⥤\n            SheafOfModules.{u} (moduleRings X.toRingedSpace))\n            (Scheme.Modules.restrictFunctor X.toSpecΓ))\n          (by change (Scheme.Modules.restrictFunctor X.toSpecΓ).Additive; infer_instance)\n          (by change PreservesFiniteLimits (Scheme.Modules.restrictFunctor X.toSpecΓ)\n              infer_instance)\n          (by change PreservesFiniteColimits (Scheme.Modules.restrictFunctor X.toSpecΓ)\n              infer_instance)).obj\n            (DerivedCategory.Q.obj\n              ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _\n                (@id (ModuleCat.{u} Γ(X, ⊤) ⥤\n                  SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace))\n                  (tilde.functor Γ(X, ⊤))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj\n                  (((ModuleCat.extendScalars f.appTop.hom).mapHomologicalComplex\n                    (.up ℤ)).obj P))))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T095924-L-324819",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T095924-L-324819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
