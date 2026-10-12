@@ -10,7 +10,7 @@ Stages 1 and 2 are read from the DAG by dag_queue.py: the nodes still to split, 
 because every node their statement needs is stated. Stage 3 is read from the Lean code: the targets are the
 library modules imported by lean/TargetsCheck.lean, the active set is their import closure, and the items are
 the active modules that still contain `sorry` or `admit`, in this order:
-  1. modules listed in coord/repairs.txt (proofs the maintainer replaced by `sorry` to make a red build green),
+  1. modules listed in coord/repairs.txt, in file order (proof or definition repairs),
   2. modules containing `STATEMENT-DISPUTED`,
   3. the rest, nearest to a target first (distance = fewest import steps from a target module).
 A module whose proof would use a node that has no Lean declaration yet is not an item: it is listed as waiting
@@ -50,10 +50,12 @@ def analyse():
 
 
 def stage3(imports, dist, waiting: set[str]):
-    repairs = set()
+    repairs = {}
     rp = WORK / "repairs.txt"
     if rp.exists():
-        repairs = {l.split()[0] for l in rp.read_text().splitlines() if l.strip() and not l.startswith("#")}
+        for line in rp.read_text().splitlines():
+            if line.strip() and not line.lstrip().startswith("#"):
+                repairs.setdefault(line.split()[0], len(repairs))
     items, held = [], []
     for m in dist:
         p = li.file_of(m)
@@ -67,7 +69,8 @@ def stage3(imports, dist, waiting: set[str]):
         if m in waiting and kind == "proof":
             held.append((dist[m], m, n)); continue
         items.append((("repair", "disputed", "proof").index(kind), dist[m], m, n, kind))
-    items.sort(); held.sort()
+    items.sort(key=lambda x: (x[0], repairs[x[2]] if x[4] == "repair" else x[1],
+                              x[1], x[2])); held.sort()
     return items, held
 
 
