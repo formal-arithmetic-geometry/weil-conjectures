@@ -25,40 +25,29 @@
  ],
  "proof": [
   {
-   "text": "For each U, define H(U)=Hom_{O|_U}(F|_U,G|_U), and for V→U restrict a morphism along the relocalization C/V→C/U. Multiplication by a section f∈O(U) is defined by multiplying the source or target; commutativity of O makes the two definitions agree, and restriction is semilinear over O(U)→O(V). This is the pointwise construction of the presheaf and module structure.",
+   "text": "Use the existing presheaf homObj construction and PresheafOfModules.isSheaf_homObj N.isSheaf from WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom. The latter proves the sheaf condition by identifying linear morphisms with a subpresheaf of the ordinary Hom sheaf; linearity is local by separatedness of N. No covering-family gluing lemma or pullback hypotheses are needed.",
    "uses": [
     "def-pur-sheaf-modules-hom-module"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 04TT (sites-modules-section-internal-hom)"
+    "place": "Section 04TT (sites-modules-section-internal-hom), the paragraph defining the restriction maps and O-module structure; Lemma 03EM (sites-modules-lemma-internal-hom; proof omitted there, with the hint: reduce to sheaves and use Sites, Lemma 04TQ, sites-lemma-glue-maps); Lemma sites-modules-lemma-internal-hom-restriction"
    }
   },
   {
-   "text": "For every covering family of U, compatible local O-linear maps F|_{U_i}→G|_{U_i} glue uniquely to an O-linear map on C/U by [lem-pur-sheaf-hom-cover-gluing]; O-linearity is local because addition and scalar multiplication are sectionwise.",
-   "uses": [
-    "lem-pur-sheaf-hom-cover-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EM (sites-modules-lemma-internal-hom), using Sites Lemma 04TQ"
-   }
-  },
-  {
-   "text": "The localized site C/U has final object U/U, so a section of H over C/U is the same as an element of H(U); this gives H(U)≅Γ(C/U,H|_U), compatibly with restrictions and the O(U)-module structures.",
+   "text": "On C/U, evaluate a compatible family at U/U. Injectivity follows because every W/U maps to U/U and section compatibility identifies the W/U value with the restriction of the U/U value. For surjectivity, send x in H(U) to the family H(W -> U)(x). Functoriality and the triangle identity of a morphism in Over U give compatibility; restriction along the identity recovers x.",
    "uses": [
     "def-pur-localized-ringed-site"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma sites-modules-lemma-internal-hom-restriction and Section 03DD"
+    "place": "Section 04TT (sites-modules-section-internal-hom), the paragraph defining the restriction maps and O-module structure; Lemma 03EM (sites-modules-lemma-internal-hom; proof omitted there, with the hint: reduce to sheaves and use Sites, Lemma 04TQ, sites-lemma-glue-maps); Lemma sites-modules-lemma-internal-hom-restriction"
    }
   },
   {
-   "text": "A global section of H is a family (φ_U)_{U∈C}, φ_U∈H(U), with φ_U|_V=φ_V for every a:V→U, i.e. (φ_U)_{W/U}=(φ_V)_{W/V} for W→V→U [def-pur-localized-ringed-site]. Given such a family define φ:F→G by φ_V=(φ_V)_{V/V}:F(V)→G(V) (using F|_V(V/V)=F(V), G|_V(V/V)=G(V)). For a:W→V, compatibility gives (φ_V)_{W/V}=(φ_W)_{W/W}=φ_W, so naturality of φ_V for the morphism W/V→V/V of C/V is naturality of φ for a; each φ_V is O(V)-linear, so φ∈Hom_O(F,G). Conversely a morphism φ gives the compatible family (φ|_U)_U with (φ|_U)_{V/U}=φ_V. The two constructions are inverse: (φ|_V)_{V/V}=φ_V, and for a given family (φ_U)_{W/U}=(φ_W)_{W/W}, which is the W/U-component of the restriction to C/U of the morphism built from it. For s∈Γ(C,O) the family s·(φ_U)_U has components s_U φ_U, whose V/V-component is s_V(φ_V)_{V/V}; by the formula (sφ)_V(x)=s_Vφ_V(x) of [def-pur-sheaf-modules-hom-module] this is sφ, so the bijection is Γ(C,O)-linear. (Direct construction, no gluing: C need not have a final object, so the covering-gluing lemma does not apply here.)",
+   "text": "Use the existing homObjSectionsEquiv of presheaves and the fully faithful forgetful functor to sheaf-module morphisms. An equivalence is bijective, and the inverse restricts a morphism to C/U by definition. To prove additivity, evaluate the assumed pointwise sum identity at each U/U and apply extensionality of sheaf-module and presheaf-module morphisms.",
    "uses": [
     "def-pur-localized-ringed-site",
     "def-pur-sheaf-modules-hom-module"
@@ -66,19 +55,29 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 04TT and Lemma 03EM; Section 03DD"
+    "place": "Section 04TT (sites-modules-section-internal-hom), the paragraph defining the restriction maps and O-module structure; Lemma 03EM (sites-modules-lemma-internal-hom; proof omitted there, with the hint: reduce to sheaves and use Sites, Lemma 04TQ, sites-lemma-glue-maps); Lemma sites-modules-lemma-internal-hom-restriction"
+   }
+  },
+  {
+   "text": "For global scalar compatibility, apply morphism extensionality and evaluate at x in M(U). The left side evaluates the local scalar action at U/U, which is multiplication by the restriction of s_U along the identity. The right side is the transported Hom module action, multiplication by s_U. The ring functor identity law makes the two expressions equal.",
+   "uses": [
+    "def-pur-sheaf-modules-hom-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 04TT (sites-modules-section-internal-hom), the paragraph defining the restriction maps and O-module structure; Lemma 03EM (sites-modules-lemma-internal-hom; proof omitted there, with the hint: reduce to sheaves and use Sites, Lemma 04TQ, sites-lemma-glue-maps); Lemma sites-modules-lemma-internal-hom-restriction"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-sheaf-hom-cover-gluing",
   "def-pur-sheaf-modules-hom-module",
   "def-pur-localized-ringed-site"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Sections 04TT, 03DD and Lemmas 03EM, sites-modules-lemma-internal-hom-restriction"
+  "place": "Sections 04TT, 03DD and Lemma 03EM; Lean implementation reuses the proved source-library isSheaf_homObj and homObjSectionsEquiv, and directly proves evaluation and linearity."
  },
  "mathlib_searches": [
   {
@@ -152,5 +151,15 @@
   "group": "F1",
   "result": "pass",
   "note": "Read packet whole; site C/J free universes, R CommRingCat presheaf + hR as recorded homModule/K1, M N SheafOfModules; H = upstream PresheafOfModules.homObj: obj (r.phi)_W = r|_W phi_W, map restrictOverMap (phi|_V)_{W/V}=phi_{W/U}, restrictOverMap_smul = semilinear (clause 1 in the type); checked by rfl that (M.over U).val = restrictOver R U M.val so H(U) = (M.over U).val -> (N.over U).val, i.e. K1's F.over U -> G.over U via fullyFaithfulForget; clause 2 IsSheaf J H.presheaf; clause 3 local = eval at U/U on sections of H.over U bijective; global e = upstream homObjSectionsEquiv o homEquiv.symm, inverse formula phi -> (phi|_U)_U, additive and s-linear with s . e t resolving rfl to recorded homModule; no final object assumed; existing:false right (upstream homObj/isSheaf_homObj/homObjSectionsEquiv split, unstructured, no local clause, Sheaf-J R form); docstring tag + 4 proof steps; compile clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T203940-L-829387",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

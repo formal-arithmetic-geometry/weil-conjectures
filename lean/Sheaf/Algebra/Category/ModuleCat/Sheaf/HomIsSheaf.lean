@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-!
 # The internal Hom is a sheaf of modules
@@ -65,6 +64,54 @@ theorem homObj_isSheaf_and_sections
          (t : H.sections),
        e (PresheafOfModules.sectionsMap (PresheafOfModules.sectionsSMul H s) t) =
          s • e t))) := by
-  sorry
+  -- The source library already proves the sheaf condition via local linearity.
+  dsimp only
+  refine ⟨PresheafOfModules.isSheaf_homObj N.isSheaf, ?_, ?_⟩
+  · intro U
+    let H := PresheafOfModules.homObj (R := R) M.val N.val
+    refine ⟨?_, ?_⟩
+    · intro t t' h
+      apply PresheafOfModules.sections_ext
+      intro W
+      have ht := t.2 (Over.homMk W.unop.hom : W.unop ⟶ Over.mk (𝟙 U)).op
+      have ht' := t'.2 (Over.homMk W.unop.hom : W.unop ⟶ Over.mk (𝟙 U)).op
+      exact ht.symm.trans ((congrArg (fun x ↦ H.map W.unop.hom.op x) h).trans ht')
+    · intro x
+      refine ⟨PresheafOfModules.sectionsMk
+        (fun W ↦ H.map W.unop.hom.op x) ?_, ?_⟩
+      · intro W W' f
+        change H.map f.unop.left.op (H.map W.unop.hom.op x) = _
+        rw [← PresheafOfModules.map_comp_apply, ← op_comp, Over.w]
+      · change H.map (𝟙 U).op x = x
+        rw [op_id, H.map_id]
+        rfl
+  · refine ⟨Equiv.bijective _, ?_, ?_, ?_⟩
+    · intro φ U
+      rfl
+    · intro t t' t'' h
+      apply hom_ext
+      apply PresheafOfModules.hom_ext
+      intro X
+      change (t''.1 X).app (op (Over.mk (𝟙 X.unop))) =
+        (t.1 X).app (op (Over.mk (𝟙 X.unop))) +
+          (t'.1 X).app (op (Over.mk (𝟙 X.unop)))
+      rw [h X]
+      rfl
+    · intro s t
+      apply hom_ext
+      apply PresheafOfModules.hom_ext
+      intro X
+      ext x
+      change (((show R.obj (op X.unop) from s.1 X) •
+        (show (PresheafOfModules.restrictOver R X.unop).obj M.val ⟶
+          (PresheafOfModules.restrictOver R X.unop).obj N.val from t.1 X)).app
+            (op (Over.mk (𝟙 X.unop)))) x =
+        s.1 X • (t.1 X).app (op (Over.mk (𝟙 X.unop))) x
+      rw [PresheafOfModules.smul_app]
+      change R.map (𝟙 X.unop).op (s.1 X) •
+        (t.1 X).app (op (Over.mk (𝟙 X.unop))) x =
+          s.1 X • (t.1 X).app (op (Over.mk (𝟙 X.unop))) x
+      rw [op_id, R.map_id]
+      rfl
 
 end SheafOfModules
