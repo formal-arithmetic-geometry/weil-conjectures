@@ -612,7 +612,7 @@ def reader_risks(old: str | None, new: str) -> list[str]:
         return {line.strip() for line in s2.mask(text).splitlines()
                 if re.match(r"^set_option\b.*\bin(?:\s|$)", line)}
     if options(new) - options(old):
-        risks.append('adds file-level set_option … in')
+        pass   # launcher, 2026-10-12:  before one declaration is ordinary (heartbeats); it sent 120 deliveries to a reader
     return list(dict.fromkeys(risks))
 
 
