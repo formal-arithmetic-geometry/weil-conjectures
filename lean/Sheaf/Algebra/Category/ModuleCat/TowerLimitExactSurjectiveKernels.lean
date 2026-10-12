@@ -9,6 +9,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.Algebra.Exact.Basic
 
+import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+
 /-!
 # Inverse limits of towers and exact sequences
 
@@ -44,7 +47,24 @@ theorem tower_limit_projection_surjective
     (f : ∀ n : ℕ, K (n + 1) ⟶ K n)
     (hsurj : ∀ n : ℕ, Function.Surjective (f n)) :
     ∀ m : ℕ, Function.Surjective (limit.π (Functor.ofOpSequence f) (Opposite.op m)) := by
-  sorry
+  intro m
+  let shift : ℕ ⥤ ℕ := (show Monotone (fun n : ℕ ↦ m + n) from
+    fun _ _ h ↦ Nat.add_le_add_left h m).functor
+  have hfinal : shift.Final := by
+    apply (Monotone.final_functor_iff _).2
+    intro n
+    exact ⟨n, Nat.le_add_left n m⟩
+  have hc := (Functor.Initial.isLimitWhiskerEquiv shift.op
+    (limit.cone (Functor.ofOpSequence f))).symm (limit.isLimit _)
+  have hs : ∀ n, Function.Surjective
+      ((shift.op ⋙ Functor.ofOpSequence f).map (homOfLE (Nat.le_succ n)).op) := by
+    intro n
+    change Function.Surjective ((Functor.ofOpSequence f).map
+      (homOfLE (Nat.le_succ (m + n))).op)
+    convert hsurj (m + n) using 1
+    all_goals simp [Functor.ofOpSequence_map_homOfLE_succ]
+    all_goals rfl
+  exact Concrete.surjective_π_app_zero_of_surjective_map hc hs
 
 /-- The limit of a short exact sequence of towers is left exact, and short exact when the
 kernel transitions are surjective. Source: Stacks Project, Algebra Lemma 03CA and
