@@ -29,91 +29,56 @@
  ],
  "proof": [
   {
-   "text": "*Continuity of base change and the direct image on sheaves of sets.* Let $b:V_{\\Et}\\to U_{\\Et}$, $W\\mapsto U\\times_VW$, be the base-change functor; it is a functor, $V_{\\Et}$ has finite limits (final object $\\mathrm{id}_V$, fibre products the scheme fibre products) and $b$ commutes with them: $b(V)=U\\times_VV\\cong U$ is final in $U_{\\Et}$ and $U\\times_V(W_1\\times_WW_2)\\to(U\\times_VW_1)\\times_{U\\times_VW}(U\\times_VW_2)$ is an isomorphism [lem-weil-pbc-etale-base-change-finite-limits] (clauses 1-3). By [lem-weil-pbc-etale-base-change-continuous] $b$ sends etale coverings $\\{W_i\\to W\\}$ to etale coverings $\\{U\\times_VW_i\\to U\\times_VW\\}$, is continuous, and for every sheaf of sets $\\mathcal F$ on $U_{\\Et}$ the presheaf $u_*\\mathcal F=\\mathcal F\\circ b$ is a sheaf on $V_{\\Et}$. So $u_*:\\Sh(U_{\\Et})\\to\\Sh(V_{\\Et})$ is a functor ($u_*\\varphi=\\varphi\\circ b$ on morphisms), and $\\iota_Vu_*=b^p\\iota_U$ where $\\iota_T:\\Sh(T_{\\Et})\\to\\mathrm{PSh}(T_{\\Et})$ is the inclusion of sheaves of sets into presheaves of sets and $b^p\\mathcal P=\\mathcal P\\circ b$; the same formula defines $u_*$ on sheaves of abelian groups and of commutative rings (sectionwise structures of $\\mathcal F(U\\times_VW)$), whose sheaf condition is that of the underlying presheaf of sets.",
-   "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-base-change-continuous"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Definition 00WV and Lemma 00WW (lemma-pushforward-sheaf); Proposition 00X6, hypotheses (1)-(2)"
-   }
-  },
-  {
-   "text": "*(1) The adjunction on sheaves of sets.* Let $b_p:\\mathrm{PSh}(V_{\\Et})\\to\\mathrm{PSh}(U_{\\Et})$ be the presheaf pullback of presheaves of sets along $b$: $b_p\\mathcal P(U')=\\varinjlim\\mathcal P(W)$, the colimit over $\\mathcal I_{U'}^{\\mathrm{op}}$, $\\mathcal I_{U'}$ the category of pairs $(W/V,\\ \\phi:U'\\to U\\times_VW$ over $U)$; it is left adjoint to $b^p$ [lem-weil-pbc-presheaf-pullback-sets-left-exact] (clause 1). Let $\\#$ be the sheafification of presheaves of sets on $U_{\\Et}$, left adjoint to $\\iota_U$ [def-weil-pbc-sheafification]. By definition $u^{-1}\\mathcal G=(b_p\\iota_V\\mathcal G)^\\#$, a functor $\\Sh(V_{\\Et})\\to\\Sh(U_{\\Et})$ as a composite of functors. For $\\mathcal G\\in\\Sh(V_{\\Et})$ and $\\mathcal F\\in\\Sh(U_{\\Et})$ we have, naturally in both, $\\operatorname{Hom}_{\\Sh(U_{\\Et})}((b_p\\iota_V\\mathcal G)^\\#,\\mathcal F)=\\operatorname{Hom}_{\\mathrm{PSh}(U_{\\Et})}(b_p\\iota_V\\mathcal G,\\iota_U\\mathcal F)=\\operatorname{Hom}_{\\mathrm{PSh}(V_{\\Et})}(\\iota_V\\mathcal G,b^p\\iota_U\\mathcal F)=\\operatorname{Hom}_{\\Sh(V_{\\Et})}(\\mathcal G,u_*\\mathcal F)$, the last equality because $\\iota_V$ is fully faithful and $b^p\\iota_U\\mathcal F=\\iota_Vu_*\\mathcal F$ (step 1). Hence $u^{-1}\\dashv u_*$ on sheaves of sets; the unit $\\eta_{\\mathcal G}:\\mathcal G\\to u_*u^{-1}\\mathcal G$ is, at $W\\in V_{\\Et}$, the composite of the coprojection $\\mathcal G(W)\\to b_p\\mathcal G(U\\times_VW)$ at the pair $(W,\\mathrm{id}_{U\\times_VW})$ (the unit of $b_p\\dashv b^p$) with the sheafification map $b_p\\mathcal G(U\\times_VW)\\to(b_p\\mathcal G)^\\#(U\\times_VW)$.",
-   "uses": [
-    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-etale-base-change-continuous"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 00VE (lemma-adjoints-u), Proposition 00WH (proposition-sheafification-adjoint), Lemma 00WX (lemma-adjoint-sheaves: u_s = (u_p)^# is left adjoint to u^s), Definition 00X1"
-   }
-  },
-  {
-   "text": "*(1) Commuting with finite limits.* By step 1 the category $V_{\\Et}$ has a final object $V$ with $b(V)$ final in $U_{\\Et}$, has fibre products, and $b$ commutes with them [lem-weil-pbc-etale-base-change-finite-limits] (clauses 2, 3). Hence by [lem-weil-pbc-presheaf-pullback-sets-left-exact] (clause 2) every index category $\\mathcal I_{U'}^{\\mathrm{op}}$ is filtered (nonempty: $U'\\to U=b(V)$; connected: two pairs $(W_1,\\phi_1)$, $(W_2,\\phi_2)$ both receive a map from $(W_1\\times_VW_2,(\\phi_1,\\phi_2))$ since $b(W_1\\times_VW_2)=b(W_1)\\times_Ub(W_2)$; equalizers through fibre products) and $b_p$ commutes with finite limits, filtered colimits of sets commuting with finite limits and finite limits of presheaves being sectionwise. The inclusion $\\iota_V$ commutes with finite limits [lem-weil-pbc-presheaf-finite-limits-objectwise] (clause 2, with values in sets), and the sheafification $\\#$ of presheaves of sets on $U_{\\Et}$ commutes with finite limits [lem-weil-pbc-sheafification-sets-exact]. A composite of functors commuting with finite limits commutes with finite limits, so $u^{-1}=\\#\\circ b_p\\circ\\iota_V$ does; in particular $u^{-1}(*)$ is a final sheaf, i.e. $u^{-1}(*)=*$, and the map $u^{-1}(\\mathcal G_1\\times\\mathcal G_2)\\to u^{-1}\\mathcal G_1\\times u^{-1}\\mathcal G_2$ induced by $u^{-1}$ of the projections is an isomorphism. (The sites are taken, as in the source, with set-sized underlying categories, Stacks, Topologies, Definition 021B; the lemma on $b_p$ needs this smallness.) Being a left adjoint, $u^{-1}$ also commutes with all colimits, so $u^{-1}$ is exact and $b$ defines a morphism of sites $U_{\\Et}\\to V_{\\Et}$ with $f^{-1}=u^{-1}$, $f_*=u_*$.",
+   "text": "Base change preserves finite limits and is representably flat. Its opposite left Kan extension is left exact by CategoryTheory.preservesFiniteLimits_op_lan_of_flat (imported from WeilConjectures.Mathlib.CategoryTheory.Functor.Flat), applied to Type (u+1). Supply AB5OfSize.{u,u+1} by AB5OfSize_of_univLE from the Mathlib AB5 instance for types. Compose the finite-limit preserving inclusion, this Kan extension, and the set sheafification. This proves PreservesFiniteLimits (Scheme.etaleSetPullback f). The large-category version avoids the small-category restriction of the originally recorded Mathlib lemma. Continuity of base change supplies the sheaf adjunction used below.",
    "uses": [
     "lem-weil-pbc-etale-base-change-finite-limits",
     "lem-weil-pbc-presheaf-pullback-sets-left-exact",
     "lem-weil-pbc-presheaf-finite-limits-objectwise",
-    "lem-weil-pbc-sheafification-sets-exact"
+    "lem-weil-pbc-sheafification-sets-exact",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-etale-base-change-continuous"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Proposition 00X6 (proposition-get-morphism) and its proof by Lemma 00X3 (lemma-directed) and Lemma 00X5 (lemma-directed-morphism: u_p commutes with finite limits as the (I_Y)^opp are filtered, Categories Lemma 002W; sheafification commutes with finite limits, Lemma 00WJ; u_s = # o u_p); Definition 00X1"
-   }
+   "elementary": false
   },
   {
-   "text": "*(2) Sheaves of abelian groups and of commutative rings.* By [lem-weil-pbc-sheaf-algebraic-structures-objects], applied on $V_{\\Et}$ and on $U_{\\Et}$, sheaves of abelian groups (resp. commutative rings) are, compatibly with the forgetful functors, the abelian group objects $(\\mathcal F,+,0,i)$ (resp. commutative ring objects $(\\mathcal F,+,0,i,\\cdot,1)$) of the categories of sheaves of sets, and morphisms are the morphisms of sheaves of sets commuting with the structure maps. Apply [lem-weil-pbc-adjunction-lifts-group-ring-objects] to $L=u^{-1}:\\Sh(V_{\\Et})\\to\\Sh(U_{\\Et})$, $R=u_*$, which is legitimate by step 2 ($u^{-1}\\dashv u_*$) and step 3 ($u^{-1}$ preserves the final object and binary products). It gives: for a sheaf of abelian groups (rings) $\\mathcal G$ on $V_{\\Et}$ the sheaf of sets $u^{-1}\\mathcal G$ with structure maps $u^{-1}(+)\\circ\\lambda^{-1}$, $u^{-1}(0)$, $u^{-1}(i)$ (and $u^{-1}(\\cdot)\\circ\\lambda^{-1}$, $u^{-1}(1)$), $\\lambda$ the comparison isomorphism of step 3, is an abelian group (commutative ring) object, i.e. a sheaf of abelian groups (rings) on $U_{\\Et}$; this is a functor commuting with the forgetful functors; it is left adjoint to the lift of $u_*$, the adjunction bijection being the restriction of that of step 2 (a map $u^{-1}\\mathcal G\\to\\mathcal F$ respects the structures iff its adjoint does), and the unit and counit are those of step 2. Finally the lift of $u_*$ is the direct image $u_*$ on sheaves of abelian groups (rings) of step 1: the comparison $u_*(\\mathcal F\\times\\mathcal F)\\cong u_*\\mathcal F\\times u_*\\mathcal F$ is the identity of $W\\mapsto\\mathcal F(U\\times_VW)\\times\\mathcal F(U\\times_VW)$, so the transported structure maps $u_*(+)$, $u_*(0)$, $u_*(i)$ (and $u_*(\\cdot)$, $u_*(1)$) are, over $W$, the operations of the group (ring) $\\mathcal F(U\\times_VW)$; that is, the sectionwise structure of $(u_*\\mathcal F)(W)=\\mathcal F(U\\times_VW)$ of [def-weil-pbc-direct-image].",
+   "text": "Apply the independent abelian and ring lift lemmas with this finite-limit proof, obtaining ea and its hom-set/operation equations, and Lr, ar, er with their ring hom-set/operation equations.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-etale-inverse-image-abelian-lift",
+    "lem-weil-pbc-etale-inverse-image-ring-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose da and dr to be Iso.refl. Forgetting commutes definitionally with precomposition, so both right-image comparisons are the identity on sections. Their hom-set compatibility statements simplify to the two equations supplied by the lift lemmas.",
+   "uses": [
     "def-weil-pbc-direct-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "discussion before Proposition 00YV (abelian sheaves as quadruples (F,+,0,i); 'f^{-1}* = *, f^{-1}(F x F) = f^{-1}F x f^{-1}F', so f^{-1}F = (f^{-1}F, f^{-1}+, f^{-1}0, f^{-1}i)) and Proposition 00YV with its proof of (2) and the paragraph on rings; Lemma 00YT (lemma-push-pull-good-case: compatible with the underlying sheaves of sets)"
-   }
+   "elementary": true
   },
   {
-   "text": "*(3) Agreement with the abelian inverse image.* By [def-weil-pbc-inverse-image] the inverse image $u^{-1}_{\\mathrm{ab}}:\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ between the categories of abelian sheaves [def-weil-pbc-abelian-etale-sheaves] is a left adjoint of the direct image $u_*:\\Ab(U_{\\Et})\\to\\Ab(V_{\\Et})$ of [def-weil-pbc-direct-image], with unit $\\eta_u$. By step 4 the functor $u^{-1}$ of (2) on sheaves of abelian groups is a left adjoint of the same functor $u_*$ (same objects $W\\mapsto F(U\\times_VW)$ with sectionwise structures, same action on morphisms), with unit $\\eta$, the unit of (1) on underlying sheaves of sets. By [lem-weil-pbc-conjugate-iso-unit-equation] (case $R_1=R_2=u_*$, $\\delta=\\mathrm{id}$) there is a unique natural isomorphism $c:u^{-1}\\xrightarrow{\\sim}u^{-1}_{\\mathrm{ab}}$ of functors $\\Ab(V_{\\Et})\\to\\Ab(U_{\\Et})$ with $u_*(c_G)\\circ\\eta_G=\\eta_{u,G}$ for every $G$; consequently the two adjunction bijections correspond under $c$: for $\\alpha:u^{-1}_{\\mathrm{ab}}G\\to F$ the adjoint $u_*(\\alpha)\\circ\\eta_{u,G}$ equals $u_*(\\alpha\\circ c_G)\\circ\\eta_G$, the adjoint of $\\alpha\\circ c_G$. Applying the forgetful functor to sheaves of sets [lem-weil-pbc-sheaf-algebraic-structures-objects], $c_G$ is an isomorphism of sheaves of sets from the set-theoretic inverse image $u^{-1}$ of the underlying sheaf of sets of $G$ (step 4) to the underlying sheaf of sets of $u^{-1}_{\\mathrm{ab}}G$, and through it $\\eta_u$ is, on underlying sheaves of sets, the unit of (1).",
+   "text": "For each lift, evaluate its hom-set equation at the identity morphism of the inverse image. Adjunction.homEquiv_id identifies the left side with the forgotten algebraic unit. The private proved lemma unit_of_homEquiv rewrites the right side as the set unit followed by R.map of the inverse comparison; compose with R.map of the forward comparison and cancel the inverse. This proves both unit equations. Assemble the witnesses and all eight clauses.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+    "def-weil-pbc-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Definition 00X1 and Example 00X2 (example-continuous-map: two left adjoints of one functor are canonically isomorphic, 'since u_s is an adjoint and since the usual pullback functor f^{-1} is an adjoint as well, we get a canonical isomorphism'); uniqueness of adjoints"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-base-change-continuous",
   "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-  "def-weil-pbc-sheafification",
   "lem-weil-pbc-presheaf-finite-limits-objectwise",
   "lem-weil-pbc-sheafification-sets-exact",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-etale-inverse-image-abelian-lift",
+  "lem-weil-pbc-etale-inverse-image-ring-lift",
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-conjugate-iso-unit-equation"
+  "def-weil-pbc-inverse-image"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Proposition 00X6 with Lemmas 00X3, 00X5, 00WX, 00VE, 00WW; Definition 00X1; Proposition 00YV with the discussion before it and Lemma 00YT; for (3) uniqueness of adjoints as in Example 00X2"
+  "place": "N1 specialization of Proposition 00X6 (finite limits), Proposition 00YV (independent coefficient lifts), and elementary deduction of unit compatibility from adjunction hom-set compatibility"
  },
  "mathlib_searches": [
   {
@@ -191,5 +156,15 @@
   "group": "C1",
   "result": "fix",
   "note": "U V f arbitrary (no etale/separation hyp); b = Over.pullback; set u^{-1} now the recorded Scheme.etaleSetPullback f (was its body inlined, H4), R = sheafPushforwardContinuous, a = sheafAdjunctionContinuous; (1) PreservesFiniteLimits L; (2) ab = recorded Etale.upperStar/upperStarLowerStarAdjunction, ring lift existential Lr ⊣ Rr, forget comparisons ea/er, da/dr identity on sections (tested Iso.refl), homEquiv+unit equal set ones, +,0,-,(*,1) pinned sectionwise and transported via prodComparison/terminal.from; (3) La = upperStar itself"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T044749-L-2037472",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

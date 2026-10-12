@@ -12,8 +12,10 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
+import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLift
+import Sheaf.AlgebraicGeometry.EtaleInverseImageRingLift
 /-!
 # Inverse image on small étale sites and algebraic structures
 Source: Stacks Project, Sites and Sheaves, Tags 00X6, 00X1, and 00YV
@@ -25,6 +27,15 @@ Source: Stacks Project, Sites and Sheaves, Tags 00X6, 00X1, and 00YV
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
+private theorem unit_of_homEquiv
+    {C : Type*} [Category C] {D : Type*} [Category D]
+    {L : C ⥤ D} {R : D ⥤ C} (a : L ⊣ R) {X : C} {Y : D}
+    (e : Y ≅ L.obj X) (η : X ⟶ R.obj Y)
+    (h : η = a.homEquiv X Y e.inv) : η ≫ R.map e.hom = a.unit.app X := by
+  rw [h, Adjunction.homEquiv_unit, Category.assoc, ← R.map_comp,
+    e.inv_hom_id, R.map_id]
+  exact Category.comp_id _
+
 /-- Source: Stacks Project, Tags 00X6, 00X1, and 00YV
 (blueprint: lem-weil-pbc-etale-inverse-image-algebraic-structures).
 The set inverse image is the recorded `Scheme.etaleSetPullback` (def-weil-pbc-etale-sheaves):
@@ -210,5 +221,39 @@ theorem etaleInverseImageAlgebraicStructures (U V : Scheme.{u}) (f : U ⟶ V) :
                 (x : (⊤_ (Sheaf U.smallEtaleTopology (Type (u + 1)))).obj.obj W),
               oneU.hom.app W x = (1 : (Lr.obj G).obj.obj W)) ∧
             L.map oneV = terminal.from _ ≫ oneU ≫ er.hom.app G) := by
-  sorry
+  have hL : PreservesFiniteLimits (Scheme.etaleSetPullback f) := by
+    unfold Scheme.etaleSetPullback Functor.sheafPullbackConstruction.sheafPullback
+    let : AB5OfSize.{u, u + 1} (Type (u + 1)) :=
+      AB5OfSize_of_univLE.{u, u + 1, u + 1, u + 1} (Type (u + 1))
+    infer_instance
+  let a := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1))
+    (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)
+  refine ⟨hL, ?_⟩
+  obtain ⟨ea, ha, opa⟩ := etaleInverseImageAbelianLift U V f hL
+  obtain ⟨Lr, ar, er, hr, opr⟩ := etaleInverseImageRingLift U V f hL
+  refine ⟨ea, Iso.refl _, Lr, ar, er, Iso.refl _, ?_, ?_, ?_, ?_, ?_, ?_, opa, opr⟩
+  · intro F W x
+    rfl
+  · intro F W x
+    rfl
+  · simpa using ha
+  · intro G
+    have h := unit_of_homEquiv a (ea.app G)
+      ((sheafForget V.smallEtaleTopology).map
+        ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app G))
+      (by
+        have hh := ha G _ (𝟙 _)
+        rw [(Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv_id] at hh
+        simpa using hh)
+    simpa using h
+  · simpa using hr
+  · intro G
+    have h := unit_of_homEquiv a (er.app G)
+      ((sheafForget V.smallEtaleTopology).map (ar.unit.app G))
+      (by
+        have hh := hr G _ (𝟙 _)
+        rw [ar.homEquiv_id] at hh
+        simpa using hh)
+    simpa using h
 end AlgebraicGeometry
