@@ -266,14 +266,13 @@ end Extend
 
 section Truncated
 
-/-- An `N`-truncated semi-simplicial object: objects `obj n` and face maps
-`δ n i : obj (n + 1) ⟶ obj n` for `n < N`, satisfying the simplicial identities. The objects
-`obj n` for `n > N` play no role. -/
+/-- An `N`-truncated semi-simplicial object: objects `obj n` for `n ≤ N` and face maps
+`δ n i : obj (n + 1) ⟶ obj n` for `n < N`, satisfying the simplicial identities. -/
 structure Truncated (C : Type u) [Category.{v} C] (N : ℕ) where
-  /-- The object of `n`-simplices (only relevant for `n ≤ N`). -/
-  obj : ℕ → C
+  /-- The object of `n`-simplices, for `n ≤ N`. -/
+  obj (n : ℕ) (hn : n ≤ N) : C
   /-- The `i`-th face map from `(n + 1)`-simplices to `n`-simplices, for `n < N`. -/
-  δ (n : ℕ) (hn : n < N) (i : Fin (n + 2)) : obj (n + 1) ⟶ obj n
+  δ (n : ℕ) (hn : n < N) (i : Fin (n + 2)) : obj (n + 1) hn ⟶ obj n hn.le
   /-- The simplicial identities. -/
   δ_comp_δ (n : ℕ) (hn : n + 1 < N) {i j : Fin (n + 2)} (h : i ≤ j) :
     δ (n + 1) hn j.succ ≫ δ n (by omega) i = δ (n + 1) hn i.castSucc ≫ δ n (by omega) j
@@ -283,7 +282,7 @@ variable {N : ℕ}
 /-- The `N`-truncation of a semi-simplicial object. -/
 @[simps]
 def truncate (U : SemiSimplicialObject C) (N : ℕ) : Truncated C N where
-  obj := U.obj
+  obj n _ := U.obj n
   δ n _ := U.δ n
   δ_comp_δ n _ _ _ h := U.δ_comp_δ n h
 
@@ -292,7 +291,7 @@ namespace Truncated
 /-- The image of a truncated semi-simplicial object under a functor. -/
 @[simps]
 def map {D : Type u'} [Category.{v'} D] (G : C ⥤ D) (T : Truncated C N) : Truncated D N where
-  obj n := G.obj (T.obj n)
+  obj n h := G.obj (T.obj n h)
   δ n h i := G.map (T.δ n h i)
   δ_comp_δ n hn _ _ h := by simp only [← G.map_comp, T.δ_comp_δ n hn h]
 
@@ -359,13 +358,15 @@ lemma Window.zero_existsUnique (X : C) {W : C} (x : Fin 2 → (W ⟶ X)) :
 
 /-- (Implementation) The windows of the coskeletal extension. -/
 noncomputable def window (T : Truncated C N) : (n : ℕ) → Window C n
-  | 0 => if h : 0 < N then ⟨T.obj 0, T.obj 1, T.δ 0 h⟩ else Window.zero (T.obj 0)
-  | n + 1 => if h : n + 1 < N then ⟨T.obj (n + 1), T.obj (n + 2), T.δ (n + 1) h⟩
+  | 0 => if h : 0 < N then ⟨T.obj 0 h.le, T.obj 1 h, T.δ 0 h⟩
+      else Window.zero (T.obj 0 (Nat.zero_le _))
+  | n + 1 => if h : n + 1 < N then ⟨T.obj (n + 1) h.le, T.obj (n + 2) h, T.δ (n + 1) h⟩
       else (window T n).next
 
 variable (T : Truncated C N)
 
-lemma window_of_lt {n : ℕ} (h : n < N) : T.window n = ⟨T.obj n, T.obj (n + 1), T.δ n h⟩ := by
+lemma window_of_lt {n : ℕ} (h : n < N) :
+    T.window n = ⟨T.obj n h.le, T.obj (n + 1) h, T.δ n h⟩ := by
   cases n with
   | zero => rw [window, dif_pos h]
   | succ n => rw [window, dif_pos h]
@@ -373,7 +374,7 @@ lemma window_of_lt {n : ℕ} (h : n < N) : T.window n = ⟨T.obj n, T.obj (n + 1
 lemma window_succ_of_le {n : ℕ} (h : N ≤ n + 1) : T.window (n + 1) = (T.window n).next := by
   rw [window, dif_neg (by omega)]
 
-lemma window_zero_of_eq (h : N = 0) : T.window 0 = Window.zero (T.obj 0) := by
+lemma window_zero_of_eq (h : N = 0) : T.window 0 = Window.zero (T.obj 0 (Nat.zero_le _)) := by
   rw [window, dif_neg (by omega)]
 
 lemma window_lower_succ (n : ℕ) : (T.window (n + 1)).lower = (T.window n).upper := by
@@ -382,7 +383,7 @@ lemma window_lower_succ (n : ℕ) : (T.window (n + 1)).lower = (T.window n).uppe
   · rw [T.window_succ_of_le (by omega)]
     rfl
 
-lemma window_lower (n : ℕ) (h : n ≤ N) : (T.window n).lower = T.obj n := by
+lemma window_lower (n : ℕ) (h : n ≤ N) : (T.window n).lower = T.obj n h := by
   cases n with
   | zero =>
     by_cases h0 : 0 < N
@@ -401,9 +402,10 @@ noncomputable def cosk : SemiSimplicialObject C where
     simp only [Category.assoc]
     congr 1
     by_cases hn : n + 1 < N
-    · have key : ∀ (w₁ : Window C (n + 1)) (_ : w₁ = ⟨T.obj (n + 1), T.obj (n + 2),
-          T.δ (n + 1) hn⟩) (w₀ : Window C n) (_ : w₀ = ⟨T.obj n, T.obj (n + 1),
-          T.δ n (by omega)⟩) (e : w₁.lower = w₀.upper),
+    · have key : ∀ (w₁ : Window C (n + 1)) (_ : w₁ = ⟨T.obj (n + 1) hn.le, T.obj (n + 2) hn,
+          T.δ (n + 1) hn⟩) (w₀ : Window C n)
+          (_ : w₀ = ⟨T.obj n (by omega), T.obj (n + 1) (by omega), T.δ n (by omega)⟩)
+          (e : w₁.lower = w₀.upper),
           w₁.face j.succ ≫ eqToHom e ≫ w₀.face i = w₁.face i.castSucc ≫ eqToHom e ≫ w₀.face j := by
         rintro _ rfl _ rfl e
         simpa using T.δ_comp_δ n hn h
@@ -417,13 +419,13 @@ noncomputable def cosk : SemiSimplicialObject C where
       exact key _ (T.window_succ_of_le (by omega)) _
 
 /-- The coskeletal extension agrees with `T` in degrees `≤ N`. -/
-noncomputable def coskIso (n : ℕ) (h : n ≤ N) : T.cosk.obj n ≅ T.obj n :=
+noncomputable def coskIso (n : ℕ) (h : n ≤ N) : T.cosk.obj n ≅ T.obj n h :=
   eqToIso (T.window_lower n h)
 
 lemma cosk_δ (n : ℕ) (h : n < N) (i : Fin (n + 2)) :
     T.cosk.δ n i = (T.coskIso (n + 1) h).hom ≫ T.δ n h i ≫ (T.coskIso n h.le).inv := by
-  have key : ∀ (w : Window C n) (_ : w = ⟨T.obj n, T.obj (n + 1), T.δ n h⟩)
-      (e : (T.window (n + 1)).lower = w.upper) (e' : w.lower = T.obj n),
+  have key : ∀ (w : Window C n) (_ : w = ⟨T.obj n h.le, T.obj (n + 1) h, T.δ n h⟩)
+      (e : (T.window (n + 1)).lower = w.upper) (e' : w.lower = T.obj n h.le),
       eqToHom e ≫ w.face i = eqToHom (T.window_lower (n + 1) h) ≫ T.δ n h i ≫ eqToHom e'.symm := by
     rintro _ rfl e e'
     simp
@@ -445,7 +447,7 @@ lemma cosk_hasUniqueLifts (n : ℕ) (h : N ≤ n) : T.cosk.HasUniqueLifts n := b
   intro W x hx
   cases n with
   | zero =>
-    have key : ∀ (w : Window C 0) (_ : w = Window.zero (T.obj 0))
+    have key : ∀ (w : Window C 0) (_ : w = Window.zero (T.obj 0 (Nat.zero_le _)))
         (x : Fin 2 → (W ⟶ w.lower)), ∃! y : W ⟶ w.upper, ∀ i, y ≫ w.face i = x i := by
       rintro _ rfl x
       exact Window.zero_existsUnique _ x
