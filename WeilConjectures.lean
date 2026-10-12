@@ -1681,6 +1681,7 @@ public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.StrictHenselization.Triples
 public import WeilConjectures.RingTheory.StrictHenselization.TriplesHenselian
 public import WeilConjectures.RingTheory.TensorLocalizationAway
+public import WeilConjectures.RingTheory.TensorProduct.DirectedColimitBaseChange
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
