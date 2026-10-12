@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-preserves-pullback",
+ "kind": "statement",
+ "title": "A pullback stable at later stages is preserved in the category colimit",
+ "statement": "Let $J$ be a small filtered category, $F:J\\to\\mathrm{Cat}$ a diagram of small categories, and $V$ a cocone of $F$. Its object and arrow set cocones [def-weil-pbc-arrows-functor] are colimits [def-weil-pbc-category-colimit]. Fix $j\\in J$ and arrows $f:Y\\to X$ and $g:Z\\to X$ in $F(j)$ whose pullback exists. Suppose every transition functor $F(a)$ for $a:j\\to k$ preserves this pullback. Then the cocone functor $V_j:F(j)\\to V.pt$ preserves this pullback.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL (lemma-colimit-sites), pullback paragraph and displayed Hom calculation; consulted at https://stacks.math.columbia.edu/tag/09YL"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Map a chosen limiting pullback cone at j to the cocone category. Given a cone over the image cospan, represent its vertex and legs using joint surjectivity of the object and arrow colimits. Move their representatives and j to a common stage using filteredness. Apply eventual equality in the object colimit to align all endpoints, then eventual equality in the arrow colimit to enforce the cone equation. These are finitely many refinements, so their successive composite suffices.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transition out of j preserves the original pullback. Its universal property at that stage supplies a mediating arrow; the cocone equations show that its image has the required factorizations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For two candidate mediating arrows, joint surjectivity lifts them to stages and filteredness moves them above j. Eventual equality aligns their endpoints and enforces both factorization equations. The preserved pullback at that stage identifies the arrows. Their cocone images therefore agree.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Thus the image of the chosen limiting pullback cone is limiting. Any limiting cone of the cospan is uniquely isomorphic to the chosen cone; mapping this isomorphism proves preservation of the cospan limit.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL; specialize the Hom calculation to one fixed cospan, expressed through the limiting cone universal property"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of categories canonical functor preserves a pullback preserved by all later transition functors",
+   "results": "filtered_colim_preservesFiniteLimits_of_types and general filtered_colim_preservesFiniteLimits; no category-colimit cospan preservation theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimit, CategoryTheory.Limits.cospan",
+   "results": "preservesPullback_symmetry, hasPullback_of_preservesPullback, PreservesPullback.iso, isLimitPullbackConeMapOfIsLimit and pullback comparison lemmas; none establishes filtered category colimit preservation",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*pullback|colimit.*pullback",
+   "results": "25 hits, including filtered colimit pullback comparison in GrothendieckCategory/ColimCoyoneda and algebraic geometry colimit pullbacks; none gives the requested small category colimit statement",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of categories preserves a pullback preserved by every transition functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite diagram limit preserved by all transition functors is preserved by the cocone functor of a filtered colimit of categories",
+   "results": "Returned filtered-colimit/finite-limit commutation in Types, Indization and siftedness results; none proves preservation of one stage pullback by a Cat cocone component.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesLimit, CategoryTheory.Cat",
+   "results": "Returned SSet.hoFunctor.preservesTerminal and CategoryTheory.hoFunctor.preservesBinaryProduct; neither applies.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]at.*[Cc]olimit|[Cc]olimit.*[Cc]at|[Ss]table.*[Pp]ullback",
+   "results": "msearch returned general colimit and object-property modules. Additional rg of lean/Sheaf/CategoryTheory/FilteredColimit*, upstream WeilConjectures/CategoryTheory, Mathlib Category/Cat and Limits/Shapes found finite diagram lifting and equality results, but no replacement theorem.",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteCoveringConstructionParts",
+  "date": "2026-10-12",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-of-sites",
+   "place": "Tag 09YL pullback paragraph in the construction of the colimit site, needed for cocone functor continuity",
+   "via": [
+    "lem-weil-pbc-colimit-site-covering-construction",
+    "lem-weil-pbc-colimit-site-covering-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredColimitPreservesPullback",
+  "file": "lean/Sheaf/CategoryTheory/FilteredColimitPreservesPullback.lean",
+  "declaration": "CategoryTheory.filteredColimit_preservesPullback",
+  "statement": "theorem filteredColimit_preservesPullback\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (j : J) {X Y Z : F.obj j} (f : Y ⟶ X) (g : Z ⟶ X) [HasPullback f g]\n    (hpres : ∀ (k : J) (a : j ⟶ k),\n      PreservesLimit (cospan f g) (F.map a).toFunctor) :\n    PreservesLimit (cospan f g) (V.ι.app j).toFunctor",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T165543-L-2943278",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T165543-L-2943278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
