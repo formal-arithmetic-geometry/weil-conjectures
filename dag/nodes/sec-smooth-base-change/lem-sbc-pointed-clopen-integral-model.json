@@ -1,0 +1,111 @@
+{
+ "id": "lem-sbc-pointed-clopen-integral-model",
+ "kind": "statement",
+ "title": "Integral-base model and fibre homeomorphisms for a pointed clopen piece",
+ "statement": "Let $g:P\\to T$ be a finite type morphism of schemes [def-weil-finite-type-morphism] with section $\\sigma$, and let $y\\in V\\subseteq T$ with $V$ open. Let $A\\subseteq P$ have clopen trace in $g^{-1}(V\\cap\\overline{\\{y\\}})$, and assume $\\sigma(y)\\in A$. There exist schemes $S,X$, with $S$ integral [def-pc-integral-scheme], a finite type morphism $f:X\\to S$, and an open embedding $j:|S|\\to\\overline{\\{y\\}}$ taking the generic point $\\eta$ to $y$. For every $s\\in S$ there is a homeomorphism $|X_s|\\simeq g^{-1}(\\{j(s)\\})\\cap A$ [def-pc-scheme-fibre]. Moreover, $X_\\eta$ has a $\\kappa(\\eta)$-rational point: there is $r:\\operatorname{Spec}\\kappa(\\eta)\\to X_\\eta$ whose composite with the fibre structure map is the identity. No connectedness is assumed or concluded.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055N, more-morphisms.tex, lemma-connected-along-section-good; reduced closure and restriction to an open and closed subscheme."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "put the reduced closed subscheme structure on the closure of `y` and restrict\nit to the inverse image of `V`. This is a nonempty open of an integral scheme, with\ngeneric point mapping to `y`. Base change `g` to it. The projection is a locally\nclosed immersion, hence identifies its underlying space\nwith the inverse image of `V ∩ closure {y}`. Pull back `A` under this identification\nand take its open subscheme. It is also closed, so its inclusion is quasi-compact:\nits intersection with any quasi-compact open is closed in that open. The resulting\nmorphism `f` is locally of finite type and quasi-compact by base change and composition.\nThe base inclusion gives the open embedding `j` into the closure of `y`. Closed base\nchange preserves residue fields, so the fibre homeomorphisms followed by restriction\nto `A` give the displayed homeomorphisms. The base-changed section at the generic\npoint belongs to this open subscheme by `hpoint`; its factorization yields the\nrational point `r`, and the section equation yields the final equality.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 055N, more-morphisms.tex, lemma-connected-along-section-good; reduced closure and restriction to an open and closed subscheme.",
+  "note": "The construction is fully proved in Lean using existing proved subscheme, embedding, and pullback declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Realize a relatively clopen piece over the closure of a point by a finite type family over an integral scheme with fibre homeomorphisms and a rational generic point",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realize a clopen subset of a base changed scheme over the closure of a point by an integral scheme with fibre homeomorphisms",
+   "digest": "ce9bf1bc7aabc859",
+   "results": "8 hits: AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.isIntegral_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.Scheme.Hom.range_fiberι; no exact statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "subscheme.*vanishingIdeal|vanishingIdeal.*subscheme|fiberHomeo|exists.*geometricallyConnected",
+   "digest": "7301b03e2b937c26",
+   "results": "22 hits: Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/FiberBundle/Trivialization.lean, Mathlib/Topology/Covering/Basic.lean, Mathlib/Topology/Covering/Basic.lean, Mathlib/Topology/Covering/Basic.lean, Mathlib/Topology/Covering/Basic.lean; no exact statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericPointedClopenFibresCore",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Proof input Tag 0EY4: relative connectedness of the section component; generic shrinking of Tag 055N using Tags 04KV and 055G.",
+   "via": [
+    "new-lem-sbc-generic-pointed-clopen-fibres-core",
+    "lem-sbc-generic-pointed-clopen-fibres",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PointedClopenIntegralModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointedClopenIntegralModel.lean",
+  "declaration": "AlgebraicGeometry.exists_pointed_clopen_integral_model",
+  "statement": "theorem exists_pointed_clopen_integral_model {P T : Scheme.{u}}\n    (g : P ⟶ T) [LocallyOfFiniteType g] [QuasiCompact g]\n    (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (y : T) (V : Set T) (A : Set P)\n    (hV : IsOpen V) (hyV : y ∈ V)\n    (hA : IsClopen {q : g ⁻¹' (V ∩ closure {y}) | (q : P) ∈ A})\n    (hpoint : σ y ∈ A) :\n    ∃ (S X : Scheme.{u}) (_ : IsIntegral S) (f : X ⟶ S)\n      (_ : LocallyOfFiniteType f) (_ : QuasiCompact f) (j : S → closure {y}),\n      IsOpenEmbedding j ∧ (j (genericPoint S)).val = y ∧\n      ∃ (_ : ∀ s : S, ↥(f.fiber s) ≃ₜ ↥(g ⁻¹' {(j s).val} ∩ A))\n        (r : Spec (S.residueField (genericPoint S)) ⟶ f.fiber (genericPoint S)),\n        r ≫ f.fiberToSpecResidueField (genericPoint S) = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T194132-L-462085",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T194132-L-462085",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

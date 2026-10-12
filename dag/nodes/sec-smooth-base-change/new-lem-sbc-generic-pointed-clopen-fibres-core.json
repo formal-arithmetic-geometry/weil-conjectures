@@ -12,17 +12,42 @@
  ],
  "proof": [
   {
-   "text": "Construct the open and closed subscheme determined by A on the reduced closure of y, then apply geometric connectedness and generic connectedness of fibres; transport the resulting open back to T.",
-   "uses": [],
+   "text": "Construct the integral model, its open embedding into the closure of y, its fibre homeomorphisms, and the generic rational point. No connectedness is used in this construction.",
+   "uses": [
+    "lem-sbc-pointed-clopen-integral-model"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Transfer preconnectedness along the generic fibre homeomorphism. The rational point supplies nonemptiness, hence connectedness. Apply the proved connected-rational-point criterion to obtain geometric connectedness of the generic fibre.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply generic geometric connectedness spreading. This gives an open W in the integral model base containing the generic point and geometric connectedness of every fibre over W.",
+   "uses": [
+    "lem-sbc-generic-geometrically-connected-spread"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image j(W) is open in closure {y}; express it as the inverse image of an ambient open U in T. The generic point maps to y, so y belongs to U. For t in U intersect closure {y}, choose s in W with j(s)=t. Geometric connectedness implies connectedness of the model fibre. Transfer this along its fibre homeomorphism and then forget nonemptiness to get preconnectedness of g inverse image {t} intersect A.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sbc-generic-geometrically-connected-spread",
+  "lem-sbc-pointed-clopen-integral-model"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
-  "place": "Tag 055N, Tags 04KV and 055G",
-  "note": "Core geometric shrinking step."
+  "place": "Tag 055N, integral clopen model, then Tags 04KV and 055G",
+  "note": "The integral model and final ambient-open transport are fully proved. Only the general generic geometric connectedness spreading theorem is postponed."
  },
  "mathlib_searches": [
   {
@@ -94,9 +119,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T165532-L-2939875",
+  "landing": "20261012T194132-L-462085",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,111 @@
+{
+ "id": "lem-sbc-generic-geometrically-connected-spread",
+ "kind": "statement",
+ "title": "Geometrically connected generic fibre spreads on an irreducible base",
+ "statement": "Let $f:X\\to S$ be a finite type morphism of schemes [def-weil-finite-type-morphism]. Assume $S$ is irreducible with generic point $\\eta$ and the fibre morphism $X_\\eta\\to\\operatorname{Spec}\\kappa(\\eta)$ is geometrically connected [def-pc-scheme-fibre, def-pc-geometrically-irreducible]. Then there is an open $W\\subseteq S$ containing $\\eta$ such that $X_s\\to\\operatorname{Spec}\\kappa(s)$ is geometrically connected for every $s\\in W$. No reducedness, noetherianity, quasi-separatedness, rational point, or section is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055G, more-morphisms.tex, lemma-geometrically-connected-generic-fibre."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "after a finite extension of the generic field and shrinking the base, arrange\nthat the finitely many generic irreducible components are geometrically irreducible.\nThis change of base is open and surjective over an open, so geometric connectedness\nof fibres descends. Reduce the base. Take closures of the generic components.\nShrink so these closures cover the total space and so pairs having empty generic\nintersection are disjoint. Shrink again so every component has geometrically\nirreducible fibres. For each pair with nonempty generic intersection, generic\nflatness makes that intersection flat and finitely presented after further\nshrinking; its image is then open and contains the generic point. Intersect these\nfinitely many images. The graph of nonempty intersections of the generic components\nis connected because the generic fibre is connected. On the resulting open, after\nany separably closed field extension each component is irreducible and this same\nconnected graph of intersections persists. Their union is therefore connected.\nDescent returns a nonempty open in the original base, which contains its generic\npoint by irreducibility. The argument also covers a single generic component.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 055G, more-morphisms.tex, lemma-geometrically-connected-generic-fibre.",
+  "note": "General geometric spreading step, without a section or clopen subset."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite type scheme morphism with geometrically connected generic fibre has geometrically connected fibres on a nonempty open subset",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected",
+   "digest": "e07012d05a1956f0",
+   "results": "12 hits: AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyConnected, AlgebraicGeometry.GeometricallyConnected, AlgebraicGeometry.instSurjectiveOfGeometricallyConnected, AlgebraicGeometry.GeometricallyConnected.eq_geometrically, AlgebraicGeometry.GeometricallyConnected.geometrically_connectedSpace, AlgebraicGeometry.GeometricallyConnected.mk, AlgebraicGeometry.geometricallyConnected_iff, AlgebraicGeometry.instGeometricallyConnectedFiberToSpecResidueField; no exact statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*[Gg]eometrically|[Gg]eometrically.*generic",
+   "digest": "4f53cda18c2baa0c",
+   "results": "0 hits: ; no exact statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericPointedClopenFibresCore",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Proof input Tag 0EY4: relative connectedness of the section component; generic shrinking of Tag 055N using Tags 04KV and 055G.",
+   "via": [
+    "new-lem-sbc-generic-pointed-clopen-fibres-core",
+    "lem-sbc-generic-pointed-clopen-fibres",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericGeometricallyConnectedSpread",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericGeometricallyConnectedSpread.lean",
+  "declaration": "AlgebraicGeometry.exists_open_geometricallyConnected_fibres_of_generic",
+  "statement": "theorem exists_open_geometricallyConnected_fibres_of_generic {X S : Scheme.{u}}\n    [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f]\n    (hη : GeometricallyConnected (f.fiberToSpecResidueField (genericPoint S))) :\n    ∃ W : Set S, IsOpen W ∧ genericPoint S ∈ W ∧\n      ∀ s ∈ W, GeometricallyConnected (f.fiberToSpecResidueField s)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T194132-L-462085",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T194132-L-462085",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,6 +7,10 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
+import Sheaf.AlgebraicGeometry.PointedClopenIntegralModel
+import Sheaf.AlgebraicGeometry.GenericGeometricallyConnectedSpread
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+
 /-! Core geometric spreading statement for pointed clopen fibres.
 
 Source: Stacks Project, Tag 055N, using Tags 04KV and 055G.
@@ -39,6 +43,39 @@ theorem exists_open_preconnected_fibres_of_pointed_clopen_core {P T : Scheme.{u}
     (hA : IsClopen {q : g ⁻¹' (V ∩ closure {y}) | (q : P) ∈ A})
     (hconn : IsPreconnected (g ⁻¹' {y} ∩ A)) (hpoint : σ y ∈ A) :
     ∃ U : Set T, IsOpen U ∧ y ∈ U ∧
-      ∀ t ∈ U ∩ closure {y}, IsPreconnected (g ⁻¹' {t} ∩ A) := by sorry
+      ∀ t ∈ U ∩ closure {y}, IsPreconnected (g ⁻¹' {t} ∩ A) := by
+  obtain ⟨S, X, hS, f, hft, hqc, j, hj, hη, e, r, hr⟩ :=
+    exists_pointed_clopen_integral_model g σ hσ y V A hV hyV hA hpoint
+  have hconn' : IsPreconnected (g ⁻¹' {(j (genericPoint S)).val} ∩ A) := by
+    simpa only [hη] using hconn
+  have : PreconnectedSpace ↥(g ⁻¹' {(j (genericPoint S)).val} ∩ A) :=
+    isPreconnected_iff_preconnectedSpace.mp hconn'
+  have : Nonempty ↥(g ⁻¹' {(j (genericPoint S)).val} ∩ A) :=
+    ⟨e (genericPoint S) (r (Nonempty.some inferInstance))⟩
+  have : ConnectedSpace ↥(g ⁻¹' {(j (genericPoint S)).val} ∩ A) := ⟨inferInstance⟩
+  have : ConnectedSpace (f.fiber (genericPoint S)) :=
+    (e (genericPoint S)).connectedSpace_iff.mpr inferInstance
+  have hgeom := GeometricallyConnected.of_connectedSpace_of_section
+    (f.fiberToSpecResidueField (genericPoint S)) r hr
+  obtain ⟨W, hW, hηW, hWconn⟩ :=
+    exists_open_geometricallyConnected_fibres_of_generic f hgeom
+  obtain ⟨U, hU, hUW⟩ := isOpen_induced_iff.mp (hj.isOpenMap W hW)
+  refine ⟨U, hU, ?_, ?_⟩
+  · have : j (genericPoint S) ∈ j '' W := ⟨genericPoint S, hηW, rfl⟩
+    rw [← hUW] at this
+    simpa only [Set.mem_preimage, hη] using this
+  · intro t ht
+    have ht' : (⟨t, ht.2⟩ : closure {y}) ∈ j '' W := by
+      rw [← hUW]
+      exact ht.1
+    obtain ⟨s, hs, hst⟩ := ht'
+    have : GeometricallyConnected (f.fiberToSpecResidueField s) := hWconn s hs
+    have : ConnectedSpace (f.fiber s) :=
+      GeometricallyConnected.connectedSpace_of_subsingleton (f.fiberToSpecResidueField s)
+    have : ConnectedSpace ↥(g ⁻¹' {(j s).val} ∩ A) :=
+      (e s).connectedSpace_iff.mp inferInstance
+    have hc : IsPreconnected (g ⁻¹' {(j s).val} ∩ A) :=
+      isPreconnected_iff_preconnectedSpace.mpr inferInstance
+    simpa only [hst] using hc
 
 end AlgebraicGeometry
