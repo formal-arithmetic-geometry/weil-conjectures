@@ -67,6 +67,49 @@ theorem truncation_isDerivedLimitTriangle_of_local_bound (X : Scheme.{u})
           (Pi.lift (fun n : ℕ => ((DerivedCategory.TStructure.t
             (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).truncGEπ
               (-(n : ℤ))).app E)) δ := by
-  sorry
+  obtain ⟨d, B, hB, hvan⟩ := hE
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let t := DerivedCategory.TStructure.t (C := C)
+  let T : ℕ → schemeDerivedCategory X := fun n => (t.truncGE (-(n : ℤ))).obj E
+  let f : ∀ n : ℕ, T (n + 1) ⟶ T n := fun n =>
+    (t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E
+  have := RingedSpace.derivedProducts X.toRingedSpace
+  have hP : HasProduct T := inferInstance
+  refine ⟨hP, ?_⟩
+  obtain ⟨K, π, δ, hK⟩ := (exists_isDerivedLimit_and_iso T f).1
+  have hlocal : ∀ x : X.toRingedSpace, ∃ (b : ℤ → ℤ)
+      (Bx : Set (Opens X.toRingedSpace)),
+      (∀ U ∈ Bx, x ∈ U) ∧
+      (∀ V : Opens X.toRingedSpace, x ∈ V → ∃ U ∈ Bx, U ≤ V) ∧
+      (∀ (m : ℤ) (p : ℕ) (U : Opens X.toRingedSpace), U ∈ Bx → b m < (p : ℤ) →
+        IsZero ((RingedSpace.openModuleCohomology X.toRingedSpace p U).obj
+          ((DerivedCategory.homologyFunctor C (m - (p : ℤ))).obj E))) := by
+    intro x
+    refine ⟨fun m => (d : ℤ) + max 0 m, {U | U ∈ B ∧ x ∈ U}, ?_, ?_, ?_⟩
+    · exact fun U hU => hU.2
+    · intro V hxV
+      obtain ⟨W, hW, hxW, hWV⟩ := hB.exists_subset_of_mem_open hxV V.isOpen
+      obtain ⟨U, hUB, rfl⟩ := hW
+      exact ⟨U, ⟨hUB, hxW⟩, hWV⟩
+    · intro m p U hU hp
+      change (d : ℤ) + max 0 m < (p : ℤ) at hp
+      apply hvan U hU.1 p
+      · omega
+      · omega
+  obtain ⟨⟨c, hc⟩, hiso⟩ :=
+    RingedSpace.pointwise_truncation_limit X.toRingedSpace E hlocal K π δ hK
+  have : IsIso c := hiso c hc
+  have hπ : Pi.lift (fun n : ℕ => (t.truncGEπ (-(n : ℤ))).app E) = c ≫ π := by
+    apply Pi.hom_ext
+    intro n
+    simpa only [Pi.lift_π, Category.assoc] using (hc n).symm
+  refine ⟨δ ≫ (shiftFunctor _ (1 : ℤ)).map (inv c), ?_⟩
+  apply Pretriangulated.isomorphic_distinguished _ hK
+  refine Pretriangulated.Triangle.isoMk _ _ (asIso c) (Iso.refl _) (Iso.refl _) ?_ ?_ ?_
+  · simpa using hπ
+  · simp only [Pretriangulated.Triangle.mk_mor₂, Iso.refl_hom, Category.comp_id,
+      Category.id_comp]
+    rfl
+  · simp
 
 end AlgebraicGeometry
