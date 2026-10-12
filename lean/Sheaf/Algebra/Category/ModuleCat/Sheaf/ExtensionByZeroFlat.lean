@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-!
 # Flatness of the localized unit extended by zero
@@ -51,6 +52,26 @@ theorem isFlat_extensionByZero_unit
         ((extensionByZeroPresheaf.{u}
           ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) U).obj
             (unit (((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).over U)))) := by
-  sorry
+  classical
+  let O := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R
+  let P := (extensionByZeroPresheaf.{u} O U).obj (unit (O.over U))
+  have hflat (V : Cᵒᵖ) : Module.Flat (R.obj.obj V) (P.obj V) := by
+    change Module.Flat (R.obj.obj V)
+      (DirectSum (V.unop ⟶ U) (fun _ => R.obj.obj V))
+    infer_instance
+  have hP : Limits.PreservesFiniteLimits (MonoidalCategory.tensorRight P) := by
+    constructor
+    intro K _ _
+    have (V : Cᵒᵖ) : Module.Flat (R.obj.obj V) (P.obj V) := hflat V
+    exact ⟨⟨fun hc => ⟨PresheafOfModules.evaluationJointlyReflectsLimits _ _
+      (fun V => Limits.isLimitOfPreserves
+        (MonoidalCategory.tensorRight (show ModuleCat (R.obj.obj V) from P.obj V))
+        (Limits.isLimitOfPreserves (PresheafOfModules.evaluation O.obj V) hc))⟩⟩⟩
+  have : Presheaf.IsLocallyInjective J (𝟙 O.obj) :=
+    Presheaf.isLocallyInjective_of_injective J _ (fun _ => Function.injective_id)
+  have : Presheaf.IsLocallySurjective J (𝟙 O.obj) :=
+    Presheaf.isLocallySurjective_of_surjective J _ (fun _ => Function.surjective_id)
+  exact (PresheafOfModules.isFlat_sheafification_obj
+    (R := R) (𝟙 O.obj) P hP).2
 
 end SheafOfModules
