@@ -8476,3 +8476,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:08 L: merged deliver/A3/Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomology (stage 3; reviewer PASS; first push; landing 20261012T160823-L-2609539 (interface); batch 20261012T160822; modules 3; new nodes 2)
 - 16:08 L: merged deliver/A3/Sheaf.AlgebraicGeometry.RefineFiniteDomainSplitting (stage 3; reviewer PASS; first push; landing 20261012T160824-L-2609665 (interface); batch 20261012T160822; modules 3; new nodes 2)
 - 16:08 L: merged deliver/A3/Sheaf.RingTheory.TorKernelBoundaryExact (stage 3; reviewer PASS; first push; landing 20261012T160824-L-2609793 (proof); batch 20261012T160822; modules 1; new nodes 0)
+- 16:08 L: merged deliver/C2/Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneralColumns (stage 3; reviewer PASS; first push; landing 20261012T160824-L-2609957 (proof); batch 20261012T160822; modules 1; new nodes 0)
