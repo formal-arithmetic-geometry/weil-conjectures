@@ -6,6 +6,8 @@ Authors: SHEAF group Q3
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionRepresentatives
+import Sheaf.AlgebraicGeometry.EtaleLimitScalarSectionZeroEventually
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
 import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
@@ -113,6 +115,11 @@ theorem etale_limit_scalar_sections_representatives_and_zero
     (∀ x : L.pt.obj.obj (op Tlim),
       ∃ (j : J) (z : (F j.val).obj.obj (op (Tj j))), μ j z = x) ∧
     (∀ (j : J) (z : (F j.val).obj.obj (op (Tj j))), μ j z = 0 →
-      ∃ (k : J) (a : j ⟶ k), ρ j k a z = 0) := by sorry
+      ∃ (k : J) (a : j ⟶ k), ρ j k a z = 0) := by
+  dsimp
+  intro γ δ hγ hδ
+  constructor
+  · apply etale_limit_scalar_sections_representatives <;> assumption
+  · apply etale_limit_scalar_sections_zero_eventually <;> assumption
 
 end AlgebraicGeometry.Etale
