@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-localized-separable-polynomial-model",
+ "kind": "statement",
+ "title": "Descending a separable minimal polynomial and its Bezout identity",
+ "statement": "Let A be an integral domain, K its fraction field, and L a field extension of K with compatible A-algebra structure [def-pc-field-extension]. Let alpha in L be algebraic over K [def-weil-algebraic-element], with separable minimal polynomial p in K[T] [def-weil-pbc-separable-algebraic-extension] [def-weil-polynomial-ring]. There exist a nonzero c in A, an A-subalgebra S of L identified with A[c^{-1}] [def-weil-ring-localization-away], an injective ring map phi:S to K whose composition with K to L is the inclusion S to L, and a monic f in S[T] whose image under phi is p and such that f is coprime with its derivative.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "finite-algebra spreading calculation, clearing denominators in the minimal polynomial; realized by parent node step 2"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-polynomial-ring",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Let p be the minimal polynomial of alpha and choose u,v with u*p+v*p' = 1 from separability. Use IsLocalization.integerNormalization_spec on p,u,v to obtain polynomials over A equal to nonzero A-multiples of them. Let c be the product of those three nonzero multipliers.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Construct the injective localization map A[1/c] to K and compose it into L. Let S be its image in L, and use the range equivalence to transfer the localization structure. Its inverse followed by the map to K gives phi:S to K compatible with the inclusion into L.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Each of the three multipliers is invertible in S since their product c is invertible. Multiply each integer-normalized polynomial by the inverse multiplier to obtain f,uS,vS over S. Their images under phi are p,u,v. Injectivity of phi implies f is monic and uS*f+vS*f' = 1, proving coprimality. All these calculations are implemented in Lean.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/RingTheory/Localization/Integral.lean",
+  "place": "Explicit denominator calculation using integerNormalization_spec; standard-etale criterion from Stacks Tags 00UB and 00UC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "etale.*adjoin|adjoin.*etale|isIntegral.*adjoin|finite.*adjoin",
+   "results": "25 hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/FractionalIdeal/Operations.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/EssentialFiniteness.lean, Mathlib/RingTheory/Artinian/Algebra.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean",
+   "date": "2026-10-12",
+   "verdict": "related lemmas; full construction proved from normalization and localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, Algebra.Etale",
+   "results": "1 hits: Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+   "date": "2026-10-12",
+   "verdict": "related lemmas; full construction proved from normalization and localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite separable extension of fraction field spreads to finite etale algebra after localization",
+   "results": "8 hits: Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.of_isLocalization_Away, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.of_isLocalizationAway, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.exists_etale_of_isEtaleAt, RingHom.Etale.ofLocalizationSpanTarget",
+   "date": "2026-10-12",
+   "verdict": "related lemmas; full construction proved from normalization and localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clear denominators in a separable minimal polynomial to obtain a monic coprime polynomial over a principal localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SpreadFiniteSeparableExtension",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-generic-constructible",
+   "place": "finite-algebra calculation: spreading out the separable extension; parent node step 2",
+   "via": [
+    "lem-weil-pbc-spread-finite-separable-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalizedSeparablePolynomialModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedSeparablePolynomialModel.lean",
+  "declaration": "AlgebraicGeometry.exists_localized_separable_polynomial_model",
+  "statement": "theorem exists_localized_separable_polynomial_model (A : Type u) [CommRing A] [IsDomain A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (L : Type w) [Field L] [Algebra K L] [Algebra A L] [IsScalarTower A K L] (α : L) (hα : IsIntegral K α) (hsep : (minpoly K α).Separable) : ∃ c : A, c ≠ 0 ∧ ∃ S : Subalgebra A L, IsLocalization.Away c S ∧ ∃ φ : S →+* K, (algebraMap K L).comp φ = algebraMap S L ∧ ∃ f : Polynomial S, f.Monic ∧ IsCoprime f f.derivative ∧ f.map φ = minpoly K α",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T135334-L-1700459",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T135334-L-1700459",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -24,49 +24,37 @@
  ],
  "proof": [
   {
-   "text": "By the primitive-element theorem, choose alpha in K' with K'=K(alpha). Let f in K[T] be the monic minimal polynomial of alpha. It has positive degree, is irreducible, and is separable because K'/K is separable. The existing minimal-polynomial quotient isomorphism identifies K[T]/(f) with K' and sends T to alpha.",
+   "text": "Choose a primitive element alpha using Field.exists_primitive_element. Apply the proved localized-separable-polynomial model to descend its minimal polynomial and a Bezout identity to S=A[1/c] inside L.",
    "uses": [
     "lem-weil-pbc-finite-separable-primitive-element",
-    "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
+    "lem-weil-pbc-localized-separable-polynomial-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Fields, Lemma Tag 09GN and algebraic case of Tag 09G1"
-   }
+   "elementary": false
   },
   {
-   "text": "Clear the finitely many denominators in the coefficients of f and in the coefficients of its derivative, and then invert one further nonzero element so that the discriminant of f is a unit. Thus for S=A[c^{-1}] the polynomial f lies in S[T], remains monic, and its derivative is a unit in S[T]/(f). The quotient A'=S[T]/(f) is finite free over S (basis 1,T,...,T^(deg f-1)), is a domain because it embeds into K' through T to alpha, and has fraction field K' because its localization at A\\{0} is K[T]/(f) = K'.",
+   "text": "Construct B=S[alpha]. The evaluation map AdjoinRoot f to B is surjective by adjoin_singleton_eq_range_aeval; injectivity follows from minpoly.dvd after mapping coefficients into K, and monic map_dvd_map. Transfer finite generation from the monic AdjoinRoot. For the fraction field, lift Frac(B) into L and view its field range as an intermediate field containing K and alpha; primitivity makes it all of L.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00UB (standard etale construction), denominator-clearing calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "The algebra A' is the standard etale algebra S[T][1/f']/(f), since f' is invertible modulo f; hence Spec(A') to Spec(S) is etale by [lem-weil-pbc-standard-etale-monic-derivative], and it is finite because A' is finite free over S by Step 2. For surjectivity: the map S to A' is injective, since A' is free over S with a basis containing 1 (deg f >= 1), and it is integral, since A' is a finite S-module. By [pqf-lem-lying-over] every prime of S is the contraction of a prime of A', so Spec(A') to Spec(S) is surjective.",
+   "text": "Use the Bezout identity to define the standard-etale pair (f,1), whose algebra is the localization of AdjoinRoot f at 1. This is AdjoinRoot f itself, so transfer etaleness to B. The finite and etale Spec characterizations give the geometric clauses. The subalgebra map S to B is injective, and finite implies integral, so lying-over makes the spectrum map surjective.",
    "uses": [
     "lem-weil-pbc-standard-etale-monic-derivative",
     "pqf-lem-lying-over"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Definition Tag 00UB and Lemma Tag 00UC; Lemma Tag 00GQ (lying over)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-separable-primitive-element",
-  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-weil-pbc-localized-separable-polynomial-model",
   "lem-weil-pbc-standard-etale-monic-derivative",
   "pqf-lem-lying-over"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemmas Tags 00UB, 00UC and finite-etale spreading calculation"
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "finite-algebra calculation, implemented with integer normalization, a Bezout identity and an explicit monogenic subalgebra"
  },
  "mathlib_searches": [
   {
@@ -158,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T135334-L-1700459",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
