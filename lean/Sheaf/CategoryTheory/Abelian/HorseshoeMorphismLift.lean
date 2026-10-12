@@ -7,6 +7,9 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
+import Sheaf.CategoryTheory.Abelian.HorseshoeGradedDefects
+import Sheaf.CategoryTheory.Abelian.HorseshoeDefectHomotopy
+
 /-!
 # Lifting a morphism between horseshoe resolutions
 
@@ -75,7 +78,53 @@ theorem horseshoe_preliminary_data
     ∃ χ q : IB.cocomplex ⟶ JB.cocomplex,
       α ≫ χ = φA ≫ α' ∧ χ ≫ β' = β ≫ φC ∧ α ≫ q = 0 ∧ q ≫ β' = 0 ∧
       IB.ι ≫ χ - IB.ι ≫ q = (CochainComplex.single₀ C).map F.τ₂ ≫ JB.ι := by
-  sorry
+  obtain ⟨χ, E, e, hχα, hχβ, hD, hw, hE, he⟩ := horseshoe_graded_defects
+    S T hS hT F IA IB IC JA JB JC α β α' β' hαβ hαβ' hα hβ hα' hβ'
+    hexact hexact' φA φC hφA hφC
+  obtain ⟨k, hk₀, hk⟩ := horseshoe_defect_homotopy IC JA E e hE he
+  let ψ : IB.cocomplex ⟶ JB.cocomplex :=
+    { f := fun n ↦ χ n - β.f n ≫ k n ≫ α'.f n
+      comm' := by
+        intro n j hnj
+        have hj : n + 1 = j := hnj
+        subst j
+        rw [Preadditive.sub_comp, Preadditive.comp_sub]
+        have hd := hD n
+        rw [← hk n] at hd
+        simp only [Preadditive.comp_sub, Preadditive.sub_comp] at hd
+        simp only [Category.assoc] at hd ⊢
+        rw [α'.comm, ← β.comm_assoc]
+        apply sub_eq_sub_iff_add_eq_add.mpr
+        have hd' := sub_eq_sub_iff_add_eq_add.mp hd
+        exact hd'.trans (add_comm _ _) }
+  have hψα : α ≫ ψ = φA ≫ α' := by
+    ext n
+    change α.f n ≫ (χ n - β.f n ≫ k n ≫ α'.f n) = φA.f n ≫ α'.f n
+    rw [Preadditive.comp_sub, hχα n, ← Category.assoc, ← Category.assoc]
+    have hz : α.f n ≫ β.f n = 0 := HomologicalComplex.congr_hom hαβ n
+    rw [hz, zero_comp, zero_comp, sub_zero]
+  have hψβ : ψ ≫ β' = β ≫ φC := by
+    ext n
+    change (χ n - β.f n ≫ k n ≫ α'.f n) ≫ β'.f n = β.f n ≫ φC.f n
+    rw [Preadditive.sub_comp, hχβ n, Category.assoc, Category.assoc]
+    have hz : α'.f n ≫ β'.f n = 0 := HomologicalComplex.congr_hom hαβ' n
+    rw [hz, comp_zero, comp_zero, sub_zero]
+  have hψι : IB.ι ≫ ψ = (CochainComplex.single₀ C).map F.τ₂ ≫ JB.ι := by
+    apply HomologicalComplex.from_single_hom_ext
+    simp only [HomologicalComplex.comp_f, CochainComplex.single₀_map_f_zero]
+    change (IB.ι.f 0 : S.X₂ ⟶ _) ≫ (χ 0 - β.f 0 ≫ k 0 ≫ α'.f 0) =
+      F.τ₂ ≫ JB.ι.f 0
+    rw [Preadditive.comp_sub]
+    have hb : IB.ι.f 0 ≫ β.f 0 = S.g ≫ IC.ι.f 0 := by
+      simpa using HomologicalComplex.congr_hom hβ 0
+    rw [← Category.assoc, ← Category.assoc, hb]
+    simp only [Category.assoc]
+    rw [← Category.assoc (IC.ι.f 0), hk₀, ← hw]
+    exact sub_sub_cancel _ _
+  refine ⟨ψ, 0, hψα, hψβ, ?_, ?_, ?_⟩
+  · simp
+  · simp
+  · simpa using hψι
 
 /-- Any prescribed lifts on the outer resolutions extend to a compatible middle lift
 between two horseshoe resolutions of a morphism of short exact sequences.
