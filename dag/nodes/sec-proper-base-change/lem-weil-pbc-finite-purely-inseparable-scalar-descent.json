@@ -29,101 +29,52 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (setup).* Write $A=L\\otimes_KB$, a commutative ring with $(l\\otimes b)(l'\\otimes b')=ll'\\otimes bb'$ and unit $1\\otimes1$, and an $L$-algebra via $l\\mapsto l\\otimes1$; its $L$-module structure is $l\\cdot(l'\\otimes b)=ll'\\otimes b$, i.e. multiplication by $l\\otimes1$. As a module, $A$ is the base change of the $K$-module $B$ along $K\\to L$ [def-weil-module-base-change] (with the factors written in the other order). Since $A$ is a field, $A\\neq0$; if $B=0$ then $A=L\\otimes_K0=0$, so $B\\neq0$, i.e. $1\\neq0$ in $B$. The fields $K\\subseteq L$ [def-pc-field-extension] have the same characteristic, and so does $A$ (it contains $L$ via $l\\mapsto l\\otimes1$, injective because $L$ is a field and $A\\neq0$).",
+   "text": "Step 1: Module.finrank_baseChange gives dim_K B = dim_L (L tensor_K B). The latter is positive since the tensor product is a nontrivial finite-dimensional L-vector space. Module.finite_of_finrank_pos then gives Module.Finite K B. This uses Mathlib directly and does not choose a basis of B through 1.",
    "uses": [
     "def-weil-module-base-change",
-    "def-pc-field-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 07QG (lemma-geometrically-regular-over-subfields, line 47202): the assertion that $k_i'$ is finite purely inseparable over $k_i$, made without argument; argument written by an agent"
-   }
-  },
-  {
-   "text": "*Step 2 (a basis of $B$ containing $1$).* Since $1\\neq0$ in $B$ (step 1), by [lem-weil-pbc-vector-space-basis-through-vector] the $K$-vector space $B$ has a $K$-basis $(b_\\lambda)_{\\lambda\\in\\Lambda}$ with an index $0\\in\\Lambda$ such that $b_0=1$.",
-   "uses": [
-    "lem-weil-pbc-vector-space-basis-through-vector"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 07QG (lemma-geometrically-regular-over-subfields, line 47202): the assertion that $k_i'$ is finite purely inseparable over $k_i$, made without argument; argument written by an agent"
-   }
-  },
-  {
-   "text": "*Step 3 (the basis of $A$; finiteness and dimension).* By [def-weil-vector-space-scalar-extension], $(b_\\lambda\\otimes1)_{\\lambda\\in\\Lambda}$ is an $L$-basis of the extension of scalars $B\\otimes_KL$; the swap $B\\otimes_KL\\to L\\otimes_KB$, $b\\otimes l\\mapsto l\\otimes b$, is an $L$-linear isomorphism (both sides being the base change of [def-weil-module-base-change], with $L$ acting on the $L$-factor), so $(1\\otimes b_\\lambda)_{\\lambda\\in\\Lambda}$ is an $L$-basis of $A$. By hypothesis $A$ is finite-dimensional over $L$, say $\\dim_LA=d$; a basis of a $d$-dimensional space has exactly $d$ elements [def-weil-vector-space-dimension], so $\\Lambda$ is finite with $|\\Lambda|=d$. Hence $(b_\\lambda)$ is a finite $K$-basis of $B$: $B$ is finite-dimensional over $K$ [def-weil-finite-dimensional-subspace] and $\\dim_KB=|\\Lambda|=d=\\dim_L(L\\otimes_KB)$, the last assertion of the statement.",
-   "uses": [
     "def-weil-vector-space-scalar-extension",
-    "def-weil-module-base-change",
     "def-weil-vector-space-dimension",
     "def-weil-finite-dimensional-subspace"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 07QG (lemma-geometrically-regular-over-subfields, line 47202): the assertion that $k_i'$ is finite purely inseparable over $k_i$, made without argument; argument written by an agent"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 4 ($B$ is a domain).* The map $\\iota:B\\to A$, $b\\mapsto1\\otimes b$, is a ring homomorphism ($1\\otimes1$ is the unit and $(1\\otimes b)(1\\otimes b')=1\\otimes bb'$) and is injective: if $b=\\sum_\\lambda c_\\lambda b_\\lambda$ ($c_\\lambda\\in K$, finitely many nonzero) then $\\iota(b)=\\sum_\\lambda c_\\lambda(1\\otimes b_\\lambda)$ with coefficients the images of $c_\\lambda$ in $L$, which vanish only if all $c_\\lambda=0$, because $(1\\otimes b_\\lambda)$ is $L$-linearly independent (step 3) and $K\\to L$ is injective. So $B$ is isomorphic to a subring of the field $A$; with $1\\neq0$ in $B$ (step 1) it follows that $B$ is an integral domain.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 07QG (lemma-geometrically-regular-over-subfields, line 47202): the assertion that $k_i'$ is finite purely inseparable over $k_i$, made without argument; argument written by an agent"
-   }
-  },
-  {
-   "text": "*Step 5 ($B$ is a finite field extension of $K$).* By steps 3 and 4, $B$ is a commutative $K$-algebra that is an integral domain and finite-dimensional over $K$, so $B$ is a field by [lem-weil-pbc-finite-dimensional-domain-is-field]. With its structure map $K\\to B$ it is a field extension of $K$ [def-pc-field-extension], finite because $\\dim_KB=d<\\infty$ (step 3), as required by [def-weil-pbc-finite-purely-inseparable-extension].",
+   "text": "Step 2: Algebra.TensorProduct.includeRight_injective, using flatness over the field K and injectivity of K to L, embeds B in L tensor_K B. Transfer IsDomain along this injection; fieldOfFiniteDimensional K B then gives IsField B.",
    "uses": [
-    "lem-weil-pbc-finite-dimensional-domain-is-field",
     "def-pc-field-extension",
-    "def-weil-pbc-finite-purely-inseparable-extension"
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 07QG (lemma-geometrically-regular-over-subfields, line 47202): the assertion that $k_i'$ is finite purely inseparable over $k_i$, made without argument; argument written by an agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 6 (purely inseparable, characteristic $p>0$).* Suppose $\\operatorname{char}K=\\operatorname{char}L=p>0$ and let $\\beta\\in B$. By hypothesis and [def-weil-pbc-finite-purely-inseparable-extension] applied to $A/L$, the element $1\\otimes\\beta$ satisfies $(1\\otimes\\beta)^{p^n}\\in L$ for some $n\\ge0$, i.e. $(1\\otimes\\beta)^{p^n}=l\\otimes1$ for some $l\\in L$. Since $\\iota$ is a ring homomorphism (step 4), $(1\\otimes\\beta)^{p^n}=1\\otimes\\beta^{p^n}$. Write $\\beta^{p^n}=\\sum_\\lambda c_\\lambda b_\\lambda$ with $c_\\lambda\\in K$. Then in $A$, $\\sum_\\lambda c_\\lambda(1\\otimes b_\\lambda)=1\\otimes\\beta^{p^n}=l\\otimes1=l\\cdot(1\\otimes b_0)$ (as $b_0=1$). Comparing coefficients in the $L$-basis $(1\\otimes b_\\lambda)$ (step 3) gives $c_\\lambda=0$ for $\\lambda\\neq0$ (and $c_0=l$). Hence $\\beta^{p^n}=c_0b_0=c_0\\cdot1\\in K$. So every element of $B$ is purely inseparable over $K$, and $B/K$ is purely inseparable [def-weil-pbc-finite-purely-inseparable-extension].",
+   "text": "Step 3: Choose a K-linear functional f on L with f(1)=1, by Module.Projective.exists_dual_eq_one (vector spaces are free and hence projective). Tensor f with the identity on B and compose with TensorProduct.lid K B. The resulting K-linear map pi sends l tensor b to f(l) times b. This is a fully proved Mathlib existence theorem, not data chosen from an unproved theorem.",
    "uses": [
-    "def-weil-pbc-finite-purely-inseparable-extension"
+    "def-weil-module-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Definition Tag 09HE (purely inseparable); argument written by an agent"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 7 (purely inseparable, characteristic $0$).* Suppose $\\operatorname{char}K=\\operatorname{char}L=0$. Then by [def-weil-pbc-finite-purely-inseparable-extension] the hypothesis says $A=L$, i.e. $L\\to A$, $l\\mapsto l\\otimes1$, is bijective, so $d=\\dim_LA=1$. By step 3, $|\\Lambda|=1$, so $\\Lambda=\\{0\\}$ and $B=K\\cdot b_0=K\\cdot1$: the structure map $K\\to B$ is surjective, and it is injective since $K$ is a field and $B\\neq0$. So $B=K$, which is the definition of purely inseparable in characteristic $0$ [def-weil-pbc-finite-purely-inseparable-extension]. Together with steps 3, 5 and 6 this proves the statement.",
+   "text": "Step 4: Let q be the exponential characteristic of K. Injectivity of K to L gives ExpChar L q. For each b in B, IsPurelyInseparable.pow_mem gives n and l such that (1 tensor b)^(q^n)=l tensor 1. The ring homomorphism includeRight identifies the left side with 1 tensor b^(q^n). Applying pi from step 3 gives b^(q^n)=f(l) times 1, hence membership in the image of K. Apply isPurelyInseparable_iff_pow_mem K q. This simultaneously treats positive characteristic and characteristic zero (q=1). Combine with steps 1 and 2.",
    "uses": [
-    "def-weil-pbc-finite-purely-inseparable-extension"
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-pc-field-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Definition Tag 09HE (purely inseparable); argument written by an agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-module-base-change",
-  "def-pc-field-extension",
-  "lem-weil-pbc-vector-space-basis-through-vector",
   "def-weil-vector-space-scalar-extension",
   "def-weil-vector-space-dimension",
   "def-weil-finite-dimensional-subspace",
+  "def-pc-field-extension",
   "lem-weil-pbc-finite-dimensional-domain-is-field",
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 07QG (line 47202), where the conclusion is used without argument; definition from fields.tex Tag 09HE; proof written by an agent (basis argument)"
+  "place": "Tag 07QG (implicit descent claim), with the power criterion of fields.tex Tag 09HE; V1 Lean proof replaces basis coordinate comparison by a K-linear retraction of L at 1 and uses Mathlib finrank_baseChange."
  },
  "mathlib_searches": [
   {
@@ -213,5 +164,15 @@
   "group": "K1",
   "result": "pass",
   "note": "K,L fields+Algebra K L; B CommRing+Algebra K B; L⊗[K]B via leftAlgebra l↦l⊗1; IsField hyp; Module.Finite+IsPurelyInseparable over L (landed form, cf. PurelyInseparableDegreePIntermediate); concl IsField B ∧ Module.Finite K B ∧ IsPurelyInseparable K B ∧ finrank eq; char 0 via Mathlib class; zero B excluded by hfield"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T085352-L-44802",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
