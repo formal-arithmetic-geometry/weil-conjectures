@@ -11,17 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
-import Sheaf.AlgebraicGeometry.CurveCoefficientPair
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
-import Sheaf.Paper.ZeroDimensionalCohomology
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.SixFunctors.OpenClosed.Exact
+
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomology
+import Sheaf.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit
 
 /-!
 # DenseOpenRestrictionComparison
@@ -61,6 +53,71 @@ theorem IsCurve.dense_open_restriction_comparison {k : Type u} [Field k] [IsAlgC
       ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj P.F)
     let G := (sheafCompose P.C.smallEtaleTopology E).obj F'
     IsCurve.SurjectiveRestrictionTwo (ULift.{u + 1} ℤ) F ↔
-      IsCurve.SurjectiveRestrictionTwo (ULift.{u + 1} ℤ) G := by sorry
+      IsCurve.SurjectiveRestrictionTwo (ULift.{u + 1} ℤ) G := by
+  have _hconstructible := hP
+  let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
+    ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom
+  let T := sheafCompose P.C.smallEtaleTopology E
+  let V := sheafCompose P.C.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})
+  let F := T.obj P.F
+  let B := (Etale.openImmersionLowerShriek AddCommGrpCat.{u + 1} U.ι).obj
+    ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj P.F)
+  let G := T.obj B
+  let ε : V.obj G ⟶ V.obj F := V.map (T.map
+    ((Etale.openImmersionLowerShriekUpperStarAdjunction AddCommGrpCat.{u + 1}
+      U.ι).counit.app P.F))
+  let : IsCurve P.toSpec := P.isCurve
+  obtain ⟨e, he⟩ := Etale.exists_lowerShriek_coefficient_counit U P.F
+  let e' := V.mapIso e
+  let δ := V.map ((Etale.openImmersionLowerShriekUpperStarAdjunction
+    (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) U.ι).counit.app F)
+  have hcomp : e'.hom ≫ ε = δ := by
+    change V.map e.hom ≫ V.map (T.map _) = V.map _
+    rw [← V.map_comp]
+    exact congrArg V.map he
+  obtain ⟨hhigh, hopen⟩ := IsCurve.dense_open_high_cohomology
+    (ULift.{u + 1} ℤ) P.toSpec F U hU
+  have hi : Function.Bijective (Sheaf.H.map ε 2) := by
+    have hc : (Sheaf.H.map ε 2) ∘ (Sheaf.H.map e'.hom 2) = Sheaf.H.map δ 2 := by
+      funext x
+      dsimp only [Function.comp_apply]
+      rw [← Sheaf.H.map_comp_apply, hcomp]
+      rfl
+    have he : Function.Bijective (Sheaf.H.map e'.hom 2) :=
+      (Iso.addCommGroupIsoToAddEquiv
+        ((Sheaf.functorH P.C.smallEtaleTopology 2).mapIso e')).bijective
+    exact he.of_comp_iff _ |>.mp (hc.symm ▸ hhigh 2 (by omega))
+  have hj {W : Scheme.{u}} (a : W ⟶ P.C) [IsOpenImmersion a] :
+      Function.Bijective (Sheaf.H.map ((Etale.upperStar AddCommGrpCat.{u + 1} a).map ε) 2) := by
+    let A := Etale.upperStar AddCommGrpCat.{u + 1} a
+    have hc : (Sheaf.H.map (A.map ε) 2) ∘ (Sheaf.H.map (A.map e'.hom) 2) =
+        Sheaf.H.map (A.map δ) 2 := by
+      funext x
+      dsimp only [Function.comp_apply]
+      rw [← Sheaf.H.map_comp_apply, ← A.map_comp, hcomp]
+      rfl
+    have he : Function.Bijective (Sheaf.H.map (A.mapIso e').hom 2) :=
+      (Iso.addCommGroupIsoToAddEquiv
+        ((Sheaf.functorH W.smallEtaleTopology 2).mapIso (A.mapIso e'))).bijective
+    exact he.of_comp_iff _ |>.mp (hc.symm ▸ hopen a)
+  change IsCurve.SurjectiveRestrictionTwo (ULift.{u + 1} ℤ) F ↔
+    IsCurve.SurjectiveRestrictionTwo (ULift.{u + 1} ℤ) G
+  have hrestriction {W : Scheme.{u}} (a : W ⟶ P.C) [IsOpenImmersion a] :
+      Function.Surjective (Etale.cohomologyMap a (V.obj G) 2) ↔
+        Function.Surjective (Etale.cohomologyMap a (V.obj F) 2) := by
+    have hcomm :
+        (Sheaf.H.map ((Etale.upperStar AddCommGrpCat.{u + 1} a).map ε) 2) ∘
+          (Etale.cohomologyMap a (V.obj G) 2) =
+        (Etale.cohomologyMap a (V.obj F) 2) ∘ (Sheaf.H.map ε 2) := by
+      funext x
+      exact (Etale.cohomologyMap_map a 2 ε x).symm
+    rw [← Function.Surjective.of_comp_iff' (hj a), hcomm,
+      Function.Surjective.of_comp_iff _ hi.surjective]
+  constructor
+  · intro h W a _
+    exact (hrestriction a).mpr (h a)
+  · intro h W a _
+    exact (hrestriction a).mp (h a)
 
 end AlgebraicGeometry

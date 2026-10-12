@@ -1,0 +1,136 @@
+{
+ "id": "lem-pbc-n2-lower-shriek-coefficient-counit",
+ "kind": "statement",
+ "title": "Coefficient conversion preserves the extension-by-zero counit",
+ "statement": "Let $X$ be a scheme and $j:U\\hookrightarrow X$ the inclusion of an open subscheme. Let $A$ be an abelian sheaf on $X_{\\mathrm{Et}}$ [def-weil-pbc-abelian-etale-sheaves]. Let $E:\\mathrm{Ab}\\to\\mathrm{Mod}(\\mathrm{ULift}\\,\\mathbf Z)$ be the inverse of the forgetful equivalence from integer modules followed by restriction of scalars along the ring isomorphism $\\mathrm{ULift}\\,\\mathbf Z\\simeq\\mathbf Z$. Write $T_X$ for objectwise composition with $E$ on sheaves. Using inverse image [def-weil-pbc-inverse-image] and extension by zero [def-weil-pbc-extension-by-zero] in the respective coefficient categories, there exists an isomorphism\n$$e:j_!j^*(T_X A)\\xrightarrow{\\sim}T_X(j_!j^*A)$$\nwith\n$$e\\,;\\,T_X(\\epsilon_A)=\\epsilon_{T_X A},$$\nwhere both arrows $\\epsilon$ are the counits of the extension-by-zero adjunction [lem-weil-pbc-extension-by-zero-adjunction]. No density or curve hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095L (lemma-ses-associated-to-open), counit arrow; Tag 0GJA (lemma-restrict-to-open), conversion to module coefficients in the application"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The integer-module forgetful equivalence and restriction along the ring isomorphism give the coefficient equivalence E. Its inverse, unit and counit applied objectwise give equivalences of the sheaf categories: equivalences preserve the limits defining the sheaf condition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The module inverse-image/underlying-abelian-sheaf compatibility, together with the coefficient equivalence unit and counit, identifies module inverse image of T_X A with T_U of abelian inverse image. For the open immersion this can also be seen directly by upperStarIsoOpenImmersionRestriction: restriction is precomposition, which commutes with coefficient composition.",
+   "uses": [
+    "lem-weil-pbc-etale-module-pullback-forget-naturality",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the abelian extension-by-zero adjunction through these coefficient equivalences. Its right adjoint is identified with module inverse image, so uniqueness of left adjoints supplies the isomorphism e with module extension by zero. The counit compatibility of the canonical leftAdjointUniq isomorphism yields e.hom followed by T_X of the abelian counit equal to the module counit. This specifies the isomorphism rather than asserting compatibility for an arbitrary isomorphism.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-module-pullback-forget-naturality",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Categorical expansion of the coefficient convention for the counit in 095L and 0GJA; uniqueness and counit compatibility of left adjoints"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of coefficient categories commutes with extension by zero of sheaves and identifies the adjunction counits",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of coefficient categories commutes with extension by zero of sheaves and identifies the adjunction counits",
+   "results": "Eight hits, including Equivalence.sheafCongrPrecoherent_counitIso_hom_app_val_app and constantSheafAdj_counit_w. These concern site equivalences or constant sheaves, not the extension-by-zero counit.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Cc]omp|[Cc]omp.*sheafPullback|counit_leftAdjointUniq",
+   "results": "Mathlib/Topology/Sheaves/Functors.lean:139, open embedding sheaf pullback. Local source inspection also finds Adjunction.leftAdjointUniq_hom_app_counit (Mathlib/CategoryTheory/Adjunction/Unique.lean:71), a useful tool after transporting the adjunctions, but not the stated coefficient compatibility.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; adjunction uniqueness is a tool."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.DenseOpenRestrictionComparison",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-algebraically-closed-extension",
+   "place": "Dense-open reduction, counit comparison in step 3; expands the coefficient-conversion clause of lem-pbc-j2-dense-open-restriction-comparison",
+   "via": [
+    "lem-pbc-j2-dense-open-restriction-comparison",
+    "lem-weil-pbc-curve-assertions-dense-open"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/LowerShriekCoefficientCounit.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_lowerShriek_coefficient_counit",
+  "statement": "theorem exists_lowerShriek_coefficient_counit {X : Scheme.{u}}\n    (U : X.Opens) (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙\n      ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom\n    let T := sheafCompose X.smallEtaleTopology E\n    ∃ e : (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) U.ι).obj\n        ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) U.ι).obj (T.obj A)) ≅\n      T.obj ((openImmersionLowerShriek AddCommGrpCat.{u + 1} U.ι).obj\n        ((upperStar AddCommGrpCat.{u + 1} U.ι).obj A)),\n      e.hom ≫ T.map\n          ((openImmersionLowerShriekUpperStarAdjunction AddCommGrpCat.{u + 1} U.ι).counit.app A)\n        = (openImmersionLowerShriekUpperStarAdjunction\n          (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) U.ι).counit.app (T.obj A)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T085311-L-28353",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T085311-L-28353",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
