@@ -65,7 +65,7 @@
    }
   },
   {
-   "text": "Clause 2. Put $a=\\mathrm{id}_U$, $b=u$. The pushforward $\\mathrm{id}_{U*}$ is the identity functor (definition in [lem-pc-module-pullback-adjunction]: $\\mathrm{id}^{-1}V=V$ and restriction of scalars along the identity), so $\\eta^{\\mathrm{id}}_{u^*\\mathcal G}$ is a natural map $u^*\\mathcal G\\to\\mathrm{id}^*u^*\\mathcal G$ and $\\lambda_{\\mathcal G}=c_{\\mathrm{id},u,\\mathcal G}\\circ\\eta^{\\mathrm{id}}_{u^*\\mathcal G}$ is a natural transformation $u^*\\to u^*$. Since $u\\circ\\mathrm{id}=u$, the defining equation of $c_{\\mathrm{id},u}$ reads $u_*(\\lambda_{\\mathcal G})\\circ\\eta^u_{\\mathcal G}=\\eta^u_{\\mathcal G}$, which the identity of $u^*$ also satisfies. By the uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] (both adjunctions $u^*\\dashv u_*$, $\\delta=\\mathrm{id}$), $\\lambda=\\mathrm{id}_{u^*}$. Applied to $\\mathcal G=\\mathcal F$ on global sections: $\\rho_{\\mathrm{id}_U}(s)=c_{\\mathrm{id},u}(\\eta^{\\mathrm{id}}_{u^*\\mathcal F}(s))=\\lambda_{\\mathcal F}(s)=s$.",
+   "text": "Clause 2. Specialize Mathlib's Adjunction.leftAdjointCompIso_comp_id to the adjunctions of b^* and id^*. The right-adjoint compatibility is pushforwardComp(id,b) = isoWhiskerRight(pushforwardId, b_*) followed by the functor left unitor; its components are identities on sections. Consequently c_{id,b} followed by transport along id composed with b = b has component equal to the normalized identity isomorphism id^* -> id on b^*F. Apply the conjugate-isomorphism unit equation [lem-weil-pbc-conjugate-iso-unit-equation] to the identity adjunction and id^* left adjoint to id_*: taking global sections shows that the unit of id^* followed by this normalized identity isomorphism is the identity, since pushforwardId has identity components on sections. The extra restriction from id inverse image of the whole scheme to the whole scheme is the presheaf identity map. Combining these two equalities proves rho_id = id. These calculations are proved first for an arbitrary family L_f left adjoint to f_* and then specialized to the pinned tensor-pullback adjunctions [lem-pc-module-pullback-adjunction].",
    "uses": [
     "lem-pc-module-pullback-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation"
@@ -112,7 +112,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Tag 03DR (section-quasi-coherent-sheaves), equation (35.8.1): the source states the functor without proof; the argument (naturality of units, the unit equation of the composition isomorphism, uniqueness of conjugates, associativity) is written by an agent"
+  "place": "Tag 03DR, equation (35.8.1), functoriality implicit in the source; G2 formalized the identity clause via Mathlib normalized left-adjoint composition and the conjugate-unit equation. Semilinearity and composition retain the existing plan."
  },
  "mathlib_searches": [
   {
@@ -209,5 +209,15 @@
   "group": "N1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e19b7",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-15771",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered identity proof with the node’s identity clause, unchanged signatures and definitions, Mathlib coherence lemmas, node updates, and report; compilation is clean and all proved declarations use only permitted axioms."
  }
 }
