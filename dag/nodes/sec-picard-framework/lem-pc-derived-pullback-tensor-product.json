@@ -31,13 +31,10 @@
  ],
  "proof": [
   {
-   "text": "Choose K-flat flat-term complexes $\\mathcal P^\\bullet\\to K$ and $\\mathcal L^\\bullet\\to L$ with quasi-isomorphisms by [lem-pc-kflat-resolution]. Their termwise pullbacks are K-flat by [lem-pc-kflat-pullback-preservation] and represent $Lg^*K$ and $Lg^*L$ by [def-pc-derived-pullback]. Then [def-pc-tensor-complex-sheaves] identifies $K\\otimes^{\\mathbf L}_{\\mathcal O_S}L$ with $\\operatorname{Tot}(\\mathcal P^\\bullet\\otimes_{\\mathcal O_S}\\mathcal L^\\bullet)$, and [lem-pc-kflat-tensor-product] makes this total complex K-flat, so it is a valid representative for applying $Lg^*$.",
+   "text": "Unpack Classical.choose_spec of exists_derivedPullback in [def-pc-derived-pullback]. This supplies the recorded additive termwise functor F, its left-derived counit epsilon and invertibility of epsilon on every K-flat complex. Functor.ext applied to its object equalities and map formula identifies F strictly with tensorPullback. The adjunction recorded in [def-pc-module-pullback] makes tensorPullback a left adjoint, so it preserves the coproducts used in totalization.",
    "uses": [
-    "lem-pc-kflat-resolution",
     "def-pc-derived-pullback",
-    "lem-pc-kflat-pullback-preservation",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-kflat-tensor-product"
+    "def-pc-module-pullback"
    ],
    "elementary": false,
    "source": {
@@ -46,12 +43,23 @@
    }
   },
   {
-   "text": "For every bidegree $(p,q)$, [lem-weil-pbc-module-pullback-tensor] gives the isomorphism $g^*(\\mathcal P^p\\otimes_{\\mathcal O_S}\\mathcal L^q)\\cong g^*\\mathcal P^p\\otimes_{\\mathcal O_T}g^*\\mathcal L^q$ of $\\mathcal O_T$-modules, natural in both factors and sending $g^*(s\\otimes t)$ to $g^*s\\otimes g^*t$. By this naturality these maps commute with the differentials $d\\otimes1$ and $(-1)^p1\\otimes d$, and pullback commutes with the direct sums in totalization, so they induce an isomorphism of total complexes. The target total complex computes $Lg^*K\\otimes^{\\mathbf L}_{\\mathcal O_T}Lg^*L$ because $g^*\\mathcal P^\\bullet$ is K-flat and represents $Lg^*K$, while $g^*\\mathcal L^\\bullet$ represents $Lg^*L$ by [def-pc-derived-pullback] and [lem-pc-kflat-pullback-preservation]. The construction is canonical and natural in $K$ and $L$ because resolution comparison and tensor associativity maps are natural.",
+   "text": "Take exactly the module tensor isomorphisms chosen in [lem-weil-pbc-module-pullback-tensor]. Their two-variable naturality gives a natural transformation from tensor followed by pullback to tensor of the two pullbacks: specialize one morphism to an identity for each naturality equation. Apply the already proved total-complex comparison [lem-pc-total-bifunctor-comparison-iso] to the tensor total complexes of [def-pc-tensor-complex-sheaves]. Additivity handles the signed differentials, and preservation of coproducts gives its invertibility. Its map_ιMapBifunctor_mapBifunctorComparisonX formula is precisely the required summand identity; mapBifunctorComparison_naturality is precisely the required complex naturality. After identifying F strictly, all equality transports in the statement are identities.",
    "uses": [
-    "def-pc-derived-pullback",
-    "lem-pc-kflat-pullback-preservation",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-module-pullback-tensor"
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-total-bifunctor-comparison-iso",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 079U (cohomology-lemma-pullback-tensor-product), line 6411"
+   }
+  },
+  {
+   "text": "For K-flat P and N, [lem-pc-kflat-tensor-product] shows their tensor total complex is K-flat. The counit supplied by [def-pc-derived-pullback] is therefore invertible on that total complex. The quotient and localization functors preserve the total-complex comparison isomorphism. Composition of these two isomorphisms proves the final IsIso clause. No new resolution or K-flatness theorem for pullbacks is needed in this representative-level statement.",
+   "uses": [
+    "lem-pc-kflat-tensor-product",
+    "def-pc-derived-pullback"
    ],
    "elementary": false,
    "source": {
@@ -61,17 +69,18 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-pullback-preservation",
   "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-total-bifunctor-comparison-iso",
   "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-tensor-product",
-  "lem-weil-pbc-module-pullback-tensor"
+  "lem-pc-kflat-tensor-product"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 079U (cohomology-lemma-pullback-tensor-product)"
+  "by": "agent",
+  "agent": "Y3 stage-3 worker",
+  "date": "2026-10-13",
+  "note": "Stacks 079U route implemented using the existing derived-pullback counit and the proved generic total-bifunctor comparison; checked against the cited Lean sources."
  },
  "mathlib_searches": [
   {
@@ -156,5 +165,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T184402-L-4026227",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
