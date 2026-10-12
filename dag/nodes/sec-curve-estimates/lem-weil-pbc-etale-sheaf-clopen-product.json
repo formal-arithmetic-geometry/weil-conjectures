@@ -25,63 +25,75 @@
  ],
  "proof": [
   {
-   "text": "For an object U \\to C of C_Et put U_i = U x_C C_i. By [lem-weil-pbc-scheme-coproduct-family] the U_i are pairwise disjoint open and closed subschemes covering U, so {U_i \\to U}_i is a covering of C_Et and U_i x_U U_j is empty for i != j. The equalizer sheaf condition in [def-weil-pbc-abelian-etale-sheaves], together with F(empty)=0 obtained from the empty covering of the empty scheme, therefore gives a natural isomorphism F(U) ~= product_i F(U_i).",
+   "text": "Transport the standard scheme coproduct along (coproductIsCoproduct C).coconePointUniqueUpToIso hc. Its coprojections are open immersions, have pairwise disjoint ranges, and cover X [lem-weil-pbc-scheme-coproduct-family]. The helpers component_open and component_disjoint use Sigma.ι and sigmaι_eq_iff; components_cover uses sigmaOpenCover, Scheme.ofArrows_mem_smallEtaleTopology_iff and GrothendieckTopology.coversTop_iff_of_isTerminal to obtain a CoversTop family on the small etale site.",
    "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5B proof, first paragraph, finite disjoint-union decomposition; categorical implementation by Y3 using the existing Lean APIs"
+   }
+  },
+  {
+   "text": "In the abelian sheaf categories [def-weil-pbc-abelian-etale-sheaves], let R be Functor.pi' of the component upperStar functors and let S be Functor.pi of the component lowerStar functors followed by Pi.functor I. Construct the natural transformation eta: id -> R S by Pi.lift of the units of Etale.upperStarLowerStarAdjunction. Construct epsilon: S R -> id componentwise by upperStar.map of the product projection followed by the counit of that same adjunction. Their naturality follows from Pi.lift_π, Pi.map_π and adjunction naturality.",
+   "uses": [
     "def-weil-pbc-abelian-etale-sheaves"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A5B proof, first paragraph, finite disjoint-union decomposition"
+    "place": "Lemma 0A5B proof, first paragraph, finite disjoint-union decomposition; categorical implementation by Y3 using the existing Lean APIs"
    }
   },
   {
-   "text": "For each i, the localized site C_Et/C_i is equivalent to (C_i)_Et by [lem-weil-pbc-etale-site-localization-open]. The restriction theorem [lem-weil-pbc-etale-inverse-image-restriction] identifies the inverse-image sheaf iota_i^{-1}F evaluated on U_i with F(U_i), naturally in U and F. Thus the preceding decomposition identifies F(U) with product_i (iota_i^{-1}F)(U_i).",
+   "text": "Prove eta invertible by the helper iso_of_component_iso: apply Sheaf.isIso_of_coversTop to the coprojection cover, compare upperStar with openImmersionRestriction using Etale.upperStarIsoLocalizationRestriction [lem-weil-pbc-etale-inverse-image-restriction], and identify the over-site evaluations directly by MorphismProperty.Over.isoMk; sheafToPresheaf reflects isomorphisms. For fixed i, all upperStar_i(lowerStar_j(G_j)) with j != i are zero by Etale.isZero_openImmersionRestriction_lowerStar and the restriction comparison. The proved helper single_product_projection therefore makes the i-th product projection invertible. upperStar_i preserves these products, so piComparison_comp_π makes the pulled-back projection invertible. Its composite with upperStar_i.map eta is the pulled-back adjunction unit, invertible by Etale.isIso_upperStar_map_upperStarLowerStarAdjunction_unit_of_isOpenImmersion and fully faithful open-immersion pushforward [lem-sc-open-immersion-pushforward-fully-faithful]. NatIso.isIso_of_isIso_app yields id ~= R S.",
    "uses": [
-    "lem-weil-pbc-etale-site-localization-open",
-    "lem-weil-pbc-etale-inverse-image-restriction"
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-sc-open-immersion-pushforward-fully-faithful"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Section 00XZ, localization of the etale site and inverse-image restriction"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5B proof, first paragraph, finite disjoint-union decomposition; categorical implementation by Y3 using the existing Lean APIs"
    }
   },
   {
-   "text": "Conversely, for a family (G_i)_i with G_i in Ab((C_i)_Et), define G on C_Et by G(U)=product_i G_i(U x_C C_i), with restriction maps induced by base change. The decomposition in step 1 shows that G satisfies the sheaf equalizer condition. The same componentwise formula gives natural isomorphisms from each G_i to the restriction of G and from F to the sheaf reconstructed from its restrictions; hence restriction and this construction are quasi-inverse functors.",
+   "text": "For epsilon, the same disjointness, cross-component vanishing, restriction comparison, single_product_projection and product-preservation argument makes upperStar_i.map of the i-th projection invertible. The counit of upperStar_i / lowerStar_i is invertible because lowerStar_i is fully faithful for an open immersion [lem-sc-open-immersion-pushforward-fully-faithful]. Thus every component of epsilon is invertible, hence S R ~= id by componentwise inverses and NatIso.isIso_of_isIso_app. CategoryTheory.Equivalence.mk R S eta epsilon gives R.IsEquivalence.",
    "uses": [
     "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-sc-open-immersion-pushforward-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A5B proof, first paragraph, finite disjoint-union decomposition; categorical implementation by Y3 using the existing Lean APIs"
+   }
+  },
+  {
+   "text": "Let Gamma and Gamma_i be the global-sections functors, evaluated at Scheme.Etale.mk of the identity. Etale.lowerStarCompSheafSectionsTerminalIso, transported from the chosen terminal objects with terminalIsoIsTerminal, gives lowerStar_i followed by Gamma ~= Gamma_i. Gamma preserves products because sheafToPresheaf and evaluation preserve limits. PreservesProduct.iso and Pi.mapIso consequently give S followed by Gamma ~= Functor.pi Gamma_i followed by Pi.functor I; naturality follows by Pi.hom_ext, piComparison_comp_π_assoc and the component comparison naturality. Whisker the reconstruction unit iso by Gamma and compose these comparisons using Functor.leftUnitor and Functor.associator to obtain the asserted global-sections iso.",
+   "uses": [
     "def-weil-pbc-abelian-etale-sheaves"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A5B proof, first paragraph, finite-product assembly"
-   }
-  },
-  {
-   "text": "A morphism between two sheaves is determined by its components on the U_i because the isomorphism of step 1 is natural; conversely, a family of component morphisms defines a morphism by the product formula. Taking U=C in step 2 gives F(C) ~= product_i (iota_i^{-1}F)(C_i), which is the asserted global-sections identification.",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A5B proof, first paragraph, finite-product assembly and final object"
+    "place": "Lemma 0A5B proof, first paragraph, finite disjoint-union decomposition; categorical implementation by Y3 using the existing Lean APIs"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-scheme-coproduct-family",
   "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-pbc-etale-inverse-image-restriction"
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sc-open-immersion-pushforward-fully-faithful"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "first paragraph of the proof of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements), finite-product assembly"
+  "place": "Y3 categorical implementation of Lemma 0A5B proof, first paragraph: product of component lowerStar functors and the upperStarLowerStarAdjunction unit/counit; Sheaf.isIso_of_coversTop, upperStarIsoLocalizationRestriction, isZero_openImmersionRestriction_lowerStar, fullyFaithfulLowerStarOfIsOpenImmersion and the pulled-back-unit isomorphism instance; piComparison_comp_π and PreservesProduct.iso; lowerStarCompSheafSectionsTerminalIso for global sections. Replaces the explicit objectwise equalizer and site-equivalence construction without changing the clopen-coproduct route."
  },
  "mathlib_searches": [
   {
@@ -172,5 +184,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-81409",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T144202-L-2113534",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered proof, DAG metadata, report, and importer compile checks match the stage-3 brief and node"
  }
 }
