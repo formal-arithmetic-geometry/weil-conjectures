@@ -26,49 +26,46 @@
  ],
  "proof": [
   {
-   "text": "For a descent datum $(V,\\varphi)$ on $V\\to X$, the pair $(r_0,r_1)$ is a morphism $T\\to X\\times_S X$ by the assumption that both maps are over $S$. Pulling the isomorphism $\\varphi:\\mathrm{pr}_0^*V\\cong\\mathrm{pr}_1^*V$ back along this pair gives an isomorphism $T\\times_{X,r_0}V\\cong T\\times_{X,r_1}V$ over $T$. The universal property and functoriality of fibre products make this construction natural in $(V,\\varphi)$ and in morphisms of descent data, so it defines a natural isomorphism between the two pullback functors.",
+   "text": "Use descent_pullback_construction to obtain the pullback functor, underlying projections, pullback squares, base-change transport equations and morphism equations for every r. Replace the codomain structure map r≫a by b using hr. Choose these already proved constructions uniformly over the scheme morphisms.",
+   "uses": [
+    "lem-galois-descent-pullback-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two maps r₀,r₁, project the universal point of the r₀-pullback to D.V, transport it from V.hom≫r₀ to V.hom≫r₁, and lift it together with V.hom to the r₁-pullback. Naturality of transport identifies the effect of this arrow on every point. Projecting the descent-morphism equation to D.V gives two cocycle composites with identical endpoints; projecting to T gives the same base point. Pullback hom_ext proves compatibility. Reverse transport defines the inverse: the transport_transport and transport_self laws and both projections prove the inverse identities.",
    "uses": [
     "def-pc-fibre-product",
     "def-pd-descent-datum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 023Y (lemma-pullback), part (2) and its proof (the map r: X' -> X x_S X); family version Tag 02VS (lemma-pullback-family), part (3)"
-   }
+   "elementary": true
   },
   {
-   "text": "The isomorphism in Step 1 is an isomorphism of descent data over $T/S$: after pulling it back to $T\\times_ST$ and then to $T\\times_ST\\times_ST$, both possible composites are the pullback of the two sides of the cocycle identity for $\\varphi$. Thus the equality required of a morphism in $DD(T/S)$ follows from the cocycle condition in the definition of descent datum, and the inverse gives the inverse morphism.",
-   "uses": [
-    "def-pd-descent-datum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 023Y (lemma-pullback), part (2) and its proof (the map r: X' -> X x_S X); family version Tag 02VS (lemma-pullback-family), part (3)"
-   }
-  },
-  {
-   "text": "For morphisms $r:T\\to X$ and $t:U\\to T$ over $S$, the pullback along $r\\circ t$ has underlying scheme $U\\times_XV$, while the iterated pullback has underlying scheme $U\\times_T(T\\times_XV)$. The universal property of fibre products gives the canonical associativity isomorphism $U\\times_T(T\\times_XV)\\cong U\\times_XV$; functoriality identifies the pulled-back descent data and morphisms under this isomorphism. These identifications are natural and yield the asserted canonical natural isomorphism of functors.",
+   "text": "A morphism of original descent data commutes with transport. Combine this equation with the naturality equations for the two projections to prove naturality of the component isomorphisms by pullback hom_ext. NatIso.ofComponents assembles the natural isomorphism. The lift_fst equation is exactly the required canonical component formula.",
    "uses": [
     "def-pc-fibre-product",
     "def-pd-descent-datum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 023Y (lemma-pullback), parts (1)--(2)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For r and t paste the two underlying pullback squares horizontally. The composite q_t≫q_r satisfies the pullback equation and naturality by associativity. Apply the two IsBaseChange equations successively to identify its transport with transport along t≫r; transport_congr_left handles the associativity equalities in the dependent point types. Apply the comparison construction to the direct and iterated functors for the identical map t≫r. Its universal transport is the identity by transport_self, so its hom preserves the composite projection, giving the asserted associativity comparison.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-galois-descent-pullback-construction",
   "def-pc-fibre-product",
   "def-pd-descent-datum"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/descent.tex",
-  "place": "Descent, Tags 02VS(3) and 023Y(1)--(2); details written out from the fibre-product universal property"
+  "document": "https://stacks.math.columbia.edu/tag/023Y",
+  "place": "Tag 023Y(1)--(2); direct Lean verification of the omitted compatibility and naturality checks in transport form, and of composition via pasted pullback squares. G2, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -147,5 +144,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-88cfb",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T144112-L-2095736",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, direct importer, theorem statement, node metadata, and report matched the stage-3 review requirements; all compilation checks passed."
  }
 }
