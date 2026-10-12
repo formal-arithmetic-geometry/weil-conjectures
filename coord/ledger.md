@@ -7439,3 +7439,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.StrictHenselizationAbelianStalkExchangeLocalization (stage 3; reviewer PASS; first push; landing 20261012T110326-L-625176 (interface); batch 20261012T110249; modules 4; new nodes 3)
 - 11:03 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometryExistence (stage 3; reviewer PASS; first push; landing 20261012T110327-L-625275 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:03 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDual (stage 3; reviewer PASS; first push; landing 20261012T110327-L-625402 (interface); batch 20261012T110249; modules 3; new nodes 2)
+- 11:07 L: returned deliver/C3/Sheaf.AlgebraicGeometry.ProjectiveSpaceReindexIsIso (reviewer RETURN: (the landing tools, head 900b3ba97) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
