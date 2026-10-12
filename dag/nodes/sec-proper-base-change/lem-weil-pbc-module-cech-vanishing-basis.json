@@ -75,7 +75,7 @@
    }
   },
   {
-   "text": "**Step 4 (the sequence is exact on sections over every member of $\\mathcal B$).** Let $W\\in\\mathcal B$. The sequence $0\\to\\mathcal G(W)\\xrightarrow{\\iota_W}\\mathcal I(W)\\xrightarrow{\\pi_W}\\mathcal Q(W)\\to0$ of abelian groups is exact. Exactness at $\\mathcal G(W)$ and $\\mathcal I(W)$ (this holds for every open $W$): by Step 2, $\\iota$ is a kernel of $\\pi$ in $\\Mod(\\mathcal O_X)$ [def-weil-pbc-exact-sequence], and kernels in $\\Mod(\\mathcal O_X)$ are computed sectionwise [def-weil-sheaf-of-modules-category], so $\\iota_W$ is injective with image $\\ker\\pi_W$. Surjectivity of $\\pi_W$: let $\\Sigma_W$ be the set of the coverings of $W$ that occur in $\\mathrm{Cov}$ (the $\\mathcal U:U=\\bigcup_jU_j$ in $\\mathrm{Cov}$ with $U=W$). By hypothesis (2), since $W\\in\\mathcal B$, $\\Sigma_W$ is cofinal among the open coverings of $W$: every open covering of $W$ is refined by a member of $\\Sigma_W$. Since $\\mathcal G$ is $\\mathrm{Cov}$-acyclic, $\\check H^1(\\mathcal U,\\mathcal G)=0$ for every $\\mathcal U\\in\\Sigma_W$. So [lem-weil-pbc-module-ses-cech-h1-surjective] (Stacks 01EU), applied to $0\\to\\mathcal G\\to\\mathcal I\\to\\mathcal Q\\to0$, the open $W$ and $\\Sigma=\\Sigma_W$, gives that $\\pi_W:\\mathcal I(W)\\to\\mathcal Q(W)$ is surjective.",
+   "text": "**Step 4 (the sequence is exact on sections over every member of $\\mathcal B$).** Let $W\\in\\mathcal B$. The sequence $0\\to\\mathcal G(W)\\xrightarrow{\\iota_W}\\mathcal I(W)\\xrightarrow{\\pi_W}\\mathcal Q(W)\\to0$ of abelian groups is exact. Exactness at $\\mathcal G(W)$ and $\\mathcal I(W)$ (this holds for every open $W$): by Step 2, $\\iota$ is a kernel of $\\pi$ in $\\Mod(\\mathcal O_X)$ [def-weil-pbc-exact-sequence], and kernels in $\\Mod(\\mathcal O_X)$ are computed sectionwise [def-weil-sheaf-of-modules-category], so $\\iota_W$ is injective with image $\\ker\\pi_W$. Surjectivity of $\\pi_W$: let $\\Sigma_W$ be the set of the coverings of $W$ that occur in $\\mathrm{Cov}$ (the $\\mathcal U:U=\\bigcup_jU_j$ in $\\mathrm{Cov}$ with $U=W$). By hypothesis (2), since $W\\in\\mathcal B$, $\\Sigma_W$ is cofinal among the open coverings of $W$: every open covering of $W$ is refined by a member of $\\Sigma_W$. Since $\\mathcal G$ is $\\mathrm{Cov}$-acyclic, $\\check H^1(\\mathcal U,\\mathcal G)=0$ for every $\\mathcal U\\in\\Sigma_W$. So [lem-weil-pbc-module-ses-cech-h1-surjective] (Stacks 01EU), applied to $0\\to\\mathcal G\\to\\mathcal I\\to\\mathcal Q\\to0$, the open $W$ and $\\Sigma=\\Sigma_W$, gives that $\\pi_W:\\mathcal I(W)\\to\\mathcal Q(W)$ is surjective. In Lean use the predicate Cov I Z hZ := ∃ c, ∃ e : J c = I, (e ▸ V c) = Z ∧ U c = W. Cofinality supplies such a covering; comparison_exists transports the given vanishing from S c to any choice of Cech fibre products required by the section-surjectivity theorem.",
    "uses": [
     "def-weil-pbc-exact-sequence",
     "def-weil-sheaf-of-modules-category",
@@ -88,7 +88,7 @@
    }
   },
   {
-   "text": "**Step 5 (short exact sequence of Cech complexes for $\\mathcal U\\in\\mathrm{Cov}$).** Let $\\mathcal U:U=\\bigcup_{j\\in J}U_j$ be in $\\mathrm{Cov}$, a covering of $X_{\\rm Zar}$ [def-sc-zariski-site] whose fibre products are the intersections $U_{j_0\\ldots j_p}$. The morphisms $\\iota,\\pi$ of $\\mathcal O_X$-modules are in particular morphisms of the underlying presheaves of abelian groups on $X_{\\rm Zar}$, so they induce morphisms of Cech complexes $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal Q)$ (functoriality, part (e) of [def-weil-pbc-site-cech-complex]), with composite $0$. In degree $p\\ge0$ this sequence is the product over $(j_0,\\ldots,j_p)\\in J^{p+1}$ of the sequences $0\\to\\mathcal G(U_{j_0\\ldots j_p})\\to\\mathcal I(U_{j_0\\ldots j_p})\\to\\mathcal Q(U_{j_0\\ldots j_p})\\to0$. By hypothesis (1) every $U_{j_0\\ldots j_p}$ lies in $\\mathcal B$, so each of these sequences is short exact by Step 4 (with $W=U_{j_0\\ldots j_p}$); a product of short exact sequences of abelian groups is short exact (kernel and image of a product of homomorphisms are the products of the kernels and images); in degrees $p<0$ all terms are $0$. Hence $0\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal Q)\\to0$ is a short exact sequence of cochain complexes of abelian groups, short exactness of complexes being degreewise [lem-weil-pbc-cochain-complexes-degreewise-exact].",
+   "text": "**Step 5 (short exact sequence of Cech complexes for $\\mathcal U\\in\\mathrm{Cov}$).** Let $\\mathcal U:U=\\bigcup_{j\\in J}U_j$ be in $\\mathrm{Cov}$, a covering of $X_{\\rm Zar}$ [def-sc-zariski-site] whose fibre products are the intersections $U_{j_0\\ldots j_p}$. The morphisms $\\iota,\\pi$ of $\\mathcal O_X$-modules are in particular morphisms of the underlying presheaves of abelian groups on $X_{\\rm Zar}$, so they induce morphisms of Cech complexes $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal Q)$ (functoriality, part (e) of [def-weil-pbc-site-cech-complex]), with composite $0$. In degree $p\\ge0$ this sequence is the product over $(j_0,\\ldots,j_p)\\in J^{p+1}$ of the sequences $0\\to\\mathcal G(U_{j_0\\ldots j_p})\\to\\mathcal I(U_{j_0\\ldots j_p})\\to\\mathcal Q(U_{j_0\\ldots j_p})\\to0$. By hypothesis (1) every $U_{j_0\\ldots j_p}$ lies in $\\mathcal B$, so each of these sequences is short exact by Step 4 (with $W=U_{j_0\\ldots j_p}$); a product of short exact sequences of abelian groups is short exact (kernel and image of a product of homomorphisms are the products of the kernels and images); in degrees $p<0$ all terms are $0$. Hence $0\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal Q)\\to0$ is a short exact sequence of cochain complexes of abelian groups, short exactness of complexes being degreewise [lem-weil-pbc-cochain-complexes-degreewise-exact]. The chosen fibre-product open (S c).W n t equals the finite intersection: the projections give one inclusion and universal gives the other. Only left exactness of the underlying-presheaf sequence is needed globally; surjectivity is used only at these intersection opens, not at arbitrary opens of X.",
    "uses": [
     "def-sc-zariski-site",
     "def-weil-pbc-site-cech-complex",
@@ -125,13 +125,11 @@
    }
   },
   {
-   "text": "**Step 8 (cohomology of $U$ as derived functors).** For $U\\in\\mathcal B$ the open subscheme $U$ is a scheme [def-pc-scheme], and $H^n(U,-)=R^nv$ ($n\\ge0$) are the right derived functors of the global sections functor $v=\\Gamma(U,-):\\Mod(\\mathcal O_U)\\to\\textit{Ab}$, $\\mathcal A\\mapsto\\mathcal A(U)$ [pqf-def-cohomology], computed by injective resolutions [def-sp-left-exact-additive]; this makes sense because $\\Mod(\\mathcal O_U)$ is an abelian category with enough injectives [def-weil-sheaf-of-modules-category], [lem-weil-pbc-scheme-modules-enough-injectives] (applied to the scheme $U$), and $v$ is additive and left exact, since kernels in $\\Mod(\\mathcal O_U)$ are computed sectionwise [def-weil-sheaf-of-modules-category]. (Whether $v$ takes values in abelian groups or in $\\mathcal O_U(U)$-modules does not change the underlying groups $R^nv(\\mathcal A)$, hence not their vanishing.)",
+   "text": "Use def-sc-ringed-space-module-cohomology: cohomology is definitionally the right derived functor of module-valued global sections. The evaluation functor is additive and preserves finite limits. Enough injectives in the exact ringed-space module carrier are supplied by lem-sc-ringed-space-module-sheaves-enough-injectives, also on the open subscheme. No derived-direct-image comparison or general cohomological delta-functor is required.",
    "uses": [
-    "def-pc-scheme",
-    "pqf-def-cohomology",
+    "def-sc-ringed-space-module-cohomology",
     "def-sp-left-exact-additive",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-scheme-modules-enough-injectives"
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
    ],
    "elementary": false,
    "source": {
@@ -140,11 +138,11 @@
    }
   },
   {
-   "text": "**Step 9 (dimension shifting).** Let $U\\in\\mathcal B$ and apply the long exact sequence of the right derived functors $H^n(U,-)=R^nv$ of Step 8 [lem-weil-pbc-derived-functor-long-exact] to the short exact sequence $0\\to\\mathcal G|_U\\to\\mathcal I|_U\\to\\mathcal Q|_U\\to0$ of Step 7; since $\\mathcal I|_U$ is injective in $\\Mod(\\mathcal O_U)$ (Step 7), $H^n(U,\\mathcal I|_U)=0$ for $n>0$ [lem-weil-pbc-derived-functor-injective-vanishing] (Stacks 015B). Case $p=1$: the piece $H^0(U,\\mathcal I|_U)\\to H^0(U,\\mathcal Q|_U)\\to H^1(U,\\mathcal G|_U)\\to H^1(U,\\mathcal I|_U)=0$ is exact, and under the natural isomorphism $R^0v\\cong v$ [lem-weil-pbc-right-derived-universal-delta-functor] its first map is $v(\\pi|_U)=\\pi_U:\\mathcal I(U)\\to\\mathcal Q(U)$ (Step 7), which is surjective by Step 4 with $W=U\\in\\mathcal B$; hence $H^1(U,\\mathcal G|_U)=0$. This holds for every $\\mathrm{Cov}$-acyclic $\\mathcal G$ and every $U\\in\\mathcal B$, which is $P(1)$. Case $p\\ge2$, assuming $P(p-1)$: the piece $H^{p-1}(U,\\mathcal Q|_U)\\to H^p(U,\\mathcal G|_U)\\to H^p(U,\\mathcal I|_U)=0$ is exact, and $H^{p-1}(U,\\mathcal Q|_U)=0$ by $P(p-1)$ applied to $\\mathcal Q$, which is $\\mathrm{Cov}$-acyclic by Step 6, and to $U\\in\\mathcal B$; hence $H^p(U,\\mathcal G|_U)=0$, which is $P(p)$. By induction $P(p)$ holds for all $p\\ge1$; with $\\mathcal G=\\mathcal F$ (Step 1) this is the lemma.",
+   "text": "**Step 9 (dimension shifting).** Let $U\\in\\mathcal B$ and apply the long exact sequence of the right derived functors $H^n(U,-)=R^nv$ of Step 8 [lem-weil-pbc-derived-functor-long-exact] to the short exact sequence $0\\to\\mathcal G|_U\\to\\mathcal I|_U\\to\\mathcal Q|_U\\to0$ of Step 7; since $\\mathcal I|_U$ is injective in $\\Mod(\\mathcal O_U)$ (Step 7), $H^n(U,\\mathcal I|_U)=0$ for $n>0$ [lem-weil-pbc-derived-functor-injective-vanishing] (Stacks 015B). Case $p=1$: the piece $H^0(U,\\mathcal I|_U)\\to H^0(U,\\mathcal Q|_U)\\to H^1(U,\\mathcal G|_U)\\to H^1(U,\\mathcal I|_U)=0$ is exact, and under the natural isomorphism $R^0v\\cong v$ [lem-sp-derived-well-defined] its first map is $v(\\pi|_U)=\\pi_U:\\mathcal I(U)\\to\\mathcal Q(U)$ (Step 7), which is surjective by Step 4 with $W=U\\in\\mathcal B$; hence $H^1(U,\\mathcal G|_U)=0$. This holds for every $\\mathrm{Cov}$-acyclic $\\mathcal G$ and every $U\\in\\mathcal B$, which is $P(1)$. Case $p\\ge2$, assuming $P(p-1)$: the piece $H^{p-1}(U,\\mathcal Q|_U)\\to H^p(U,\\mathcal G|_U)\\to H^p(U,\\mathcal I|_U)=0$ is exact, and $H^{p-1}(U,\\mathcal Q|_U)=0$ by $P(p-1)$ applied to $\\mathcal Q$, which is $\\mathrm{Cov}$-acyclic by Step 6, and to $U\\in\\mathcal B$; hence $H^p(U,\\mathcal G|_U)=0$, which is $P(p)$. By induction $P(p)$ holds for all $p\\ge1$; with $\\mathcal G=\\mathcal F$ (Step 1) this is the lemma.",
    "uses": [
     "lem-weil-pbc-derived-functor-long-exact",
     "lem-weil-pbc-derived-functor-injective-vanishing",
-    "lem-weil-pbc-right-derived-universal-delta-functor"
+    "lem-sp-derived-well-defined"
    ],
    "elementary": false,
    "source": {
@@ -166,17 +164,17 @@
   "lem-weil-pbc-complex-ses-homology-long-exact",
   "lem-weil-pbc-module-open-restriction-injectives",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "def-pc-scheme",
-  "pqf-def-cohomology",
+  "def-sc-ringed-space-module-cohomology",
   "def-sp-left-exact-additive",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
   "lem-weil-pbc-derived-functor-long-exact",
   "lem-weil-pbc-derived-functor-injective-vanishing",
-  "lem-weil-pbc-right-derived-universal-delta-functor"
+  "lem-sp-derived-well-defined"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology of Sheaves, Lemma 01EW (lemma-cech-vanish-basis, line 1696), proof; Lemma 01E1 (lemma-cohomology-of-open, line 496) (2)"
+  "place": "Cohomology of Sheaves, Lemma 01EW (lemma-cech-vanish-basis, line 1696), proof; Lemma 01E1 (lemma-cohomology-of-open, line 496) (2); realized by K4 as section-surjectivity on the fixed family, Cech exactness on basis intersections, exact open restriction and simultaneous induction; R^0 uses Mathlib rightDerivedZeroIsoSelf directly"
  },
  "mathlib_searches": [
   {
@@ -255,5 +253,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261012T230758-L-1909060",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
