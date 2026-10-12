@@ -26,37 +26,25 @@
  ],
  "proof": [
   {
-   "text": "For an object $V\\to W$ of the slice, the restricted sheaf $j_W^*G$ is defined by the same section group $G(V)$, and a covering family in the slice is exactly a covering family of $V$ in $\\mathcal C$. Thus the maps in the restricted sequence are the maps of the original sequence on every slice object, with the same local lifting condition for surjectivity.",
+   "text": "Write F = J.toGrothendieck.overPullback AddCommGrpCat W. By Mathlib CategoryTheory/Sites/Over.lean:276-291, this is the continuous sheaf pushforward along Over.forget W, which is also cocontinuous. Mathlib Functor.sheafAdjunctionCocontinuous (Sites/CoverLifting.lean:322-327) identifies F as the left adjoint of the sheaf pushforward defined by right Kan extension. The required pointwise right Kan extensions exist because the sites are small and AddCommGrpCat has small limits. Apply [lem-weil-pbc-left-adjoint-preserves-colimits], namely Adjunction.leftAdjoint_preservesColimits, to obtain PreservesColimitsOfSize.{u,u} F, hence preservation of finite colimits.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Section 00XZ (section-localize), definition of the localized site and restriction"
-   }
+   "elementary": true
   },
   {
-   "text": "By [def-weil-pbc-sites-and-cohomology], $\\textit{Ab}(\\mathcal C)$ is a full subcategory of presheaves of abelian groups; for a morphism $\\psi:\\mathcal A\\to\\mathcal B$ of abelian sheaves the sectionwise kernel $V\\mapsto\\ker\\psi_V$ is again a sheaf (a compatible family of sections of $\\ker\\psi$ glues in $\\mathcal A$ and the glued section maps to $0$ because $\\mathcal B$ is separated), so it is the kernel of $\\psi$ in $\\textit{Ab}(\\mathcal C)$, and $\\psi$ is a monomorphism iff every $\\psi_V$ is injective. The same holds on $\\mathcal C/W$. A short exact sequence $0\\to G_1\\xrightarrow{f}G_2\\xrightarrow{g}G_3\\to0$ means: $f$ is a monomorphism, $f$ is a kernel of $g$, and $g$ is an epimorphism. The first two conditions say that every $f_V$ is injective and $f_V(G_1(V))=\\ker g_V$ for every object $V$; by step 1 these sectionwise conditions on the objects $V\\to W$ of $\\mathcal C/W$ are instances of the same conditions on $\\mathcal C$, so they hold for the restricted sequence. By [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] on $\\mathcal C$, $g$ is locally surjective: every $h\\in G_3(V)$ lifts after restriction to the members of some covering $\\{V_j\\to V\\}$ of $\\mathcal C$. For $V\\to W$ in the slice, the composites $V_j\\to V\\to W$ make this a covering of $V$ in $\\mathcal C/W$ with the same lifts, so $j_W^*g$ is locally surjective, hence an epimorphism of $\\textit{Ab}(\\mathcal C/W)$ by the same lemma applied to the site $\\mathcal C/W$. Hence $0\\to j_W^*G_1\\to j_W^*G_2\\to j_W^*G_3\\to0$ is short exact in $\\textit{Ab}(\\mathcal C/W)$.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Section 00XZ (localized site); kernels of abelian sheaves are sectionwise and epimorphisms are the locally surjective maps"
-   }
+   "text": "The proved library instance Functor.preservesFiniteLimits_sheafPushforwardContinuous (WeilConjectures/Mathlib/CategoryTheory/Sites/Continuous.lean:93-95) gives PreservesFiniteLimits F. Preservation of the terminal zero object also supplies PreservesZeroMorphisms F. Apply ShortComplex.ShortExact.map_of_exact (Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean:107-113) to hS and F. This gives precisely the unchanged conclusion that the restricted short complex is short exact.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Section 00XZ; exactness of restriction in Modules on Sites, Lemma 03DJ"
+  "by": "agent",
+  "document": "Mathlib/CategoryTheory/Sites/CoverLifting.lean; WeilConjectures/Mathlib/CategoryTheory/Sites/Continuous.lean; Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean",
+  "place": "sheafAdjunctionCocontinuous; preservesFiniteLimits_sheafPushforwardContinuous; ShortComplex.ShortExact.map_of_exact (M3, 2026-10-12)"
  },
  "mathlib_searches": [
   {
@@ -139,5 +127,15 @@
   "group": "G1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T112845-L-769834",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

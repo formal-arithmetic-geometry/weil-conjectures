@@ -53,6 +53,11 @@ theorem siteRestriction_exact
     (S : ShortComplex (Sheaf J.toGrothendieck AddCommGrpCat.{u}))
     (hS : S.ShortExact) :
     (S.map (J.toGrothendieck.overPullback AddCommGrpCat.{u} W)).ShortExact := by
-  sorry
+  -- Restriction preserves limits and is also a left adjoint by cover lifting.
+  let F := J.toGrothendieck.overPullback AddCommGrpCat.{u} W
+  have : Limits.PreservesColimitsOfSize.{u, u} F :=
+    ((Over.forget W).sheafAdjunctionCocontinuous AddCommGrpCat.{u}
+      (J.toGrothendieck.over W) J.toGrothendieck).leftAdjoint_preservesColimits
+  exact hS.map_of_exact F
 
 end CategoryTheory
