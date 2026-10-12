@@ -29,16 +29,24 @@
  ],
  "proof": [
   {
-   "text": "For each m, restrict the tower along the cofinal shift n ↦ m+n. Mathlib’s initial-functor limit theorem identifies the shifted limit cone as a limit; its surjective-tower projection theorem gives surjectivity at index 0, which is the original projection at m.",
+   "text": "Construct the induced componentwise linear maps on the inverse limits and verify their coordinate projection equations using the naturality hypotheses.",
    "uses": [
-    "CategoryTheory.Limits.Concrete.surjective_π_app_zero_of_surjective_map",
-    "CategoryTheory.Functor.Initial.isLimitWhiskerEquiv",
-    "Monotone.final_functor_iff"
+    "new-tower-limit-induced-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the coordinate exactness theorem to the induced maps; it gives injectivity, exactness in the middle, and surjectivity under surjective kernel transitions.",
+   "uses": [
+    "new-tower-limit-exact-coordinate-maps"
    ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-tower-limit-induced-maps",
+  "new-tower-limit-exact-coordinate-maps"
+ ],
  "proof_origin": {
   "by": "mathlib",
   "declaration": "CategoryTheory.Limits.Concrete.surjective_π_app_zero_of_surjective_map",
@@ -178,10 +186,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261012T184249-L-3999589",
-  "kind": "proof",
+  "landing": "20261012T225303-L-1802796",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
