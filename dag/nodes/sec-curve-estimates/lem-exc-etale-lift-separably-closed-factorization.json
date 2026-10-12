@@ -1,0 +1,112 @@
+{
+ "id": "lem-exc-etale-lift-separably-closed-factorization",
+ "kind": "statement",
+ "title": "Etale lifts descend along extensions of a separably closed field",
+ "statement": "Let $f:X\\to S$ be an etale morphism of schemes in one universe [def-weil-pbc-etale-morphism]. Let $L$ be a separably closed field and $\\Omega$ any field in the same universe, and let $\\beta:L\\to\\Omega$ be a field homomorphism [def-pc-field-extension]. Given $t:\\operatorname{Spec}L\\to S$ and $x:\\operatorname{Spec}\\Omega\\to X$ with $f\\circ x=t\\circ\\operatorname{Spec}\\beta$, there is $y:\\operatorname{Spec}L\\to X$ with $y\\circ\\operatorname{Spec}\\beta=x$ and $f\\circ y=t$.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/EtaleFiniteRefinement/GeometricLifts.lean",
+  "place": "Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed, lines 54-88; existing proved source theorem"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-morphism",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing proved declaration AlgebraicGeometry.Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed f beta t x to the stated compatibility. Its two conclusion equations are exactly the required factorization and base equation. The source proof factors x through its residue field, uses separability of the etale residue extension, and RingHom.exists_comp_eq_of_isSepClosed to factor that embedding through L.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/EtaleFiniteRefinement/GeometricLifts.lean",
+  "place": "Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed, lines 54-88; existing proved source theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_SpecMap_comp_eq_of_isSepClosed|SpecMap_comp_injective|exists_fac_of_etale_of_isSepClosed",
+   "results": "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; repository search found the already proved GeometricLifts and ResidueField declarations recorded here.",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match; inspected source tools"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an etale morphism, a point over an extension of a separably closed field factors through that field, and precomposition with a field embedding is injective on scheme morphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism, a point over an extension of a separably closed field factors through that field, and precomposition with a field embedding is injective on scheme morphisms",
+   "results": "Algebra.FormallyEtale.iff_exists_algEquiv_prod, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.comp, Algebra.IsEtaleAt.comp, StandardEtalePair.homEquiv",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match; inspected source tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisStalkFiniteActionRealization",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, third and fourth paragraphs: canonical set-valued stalk equivalence and realizing discrete G-sets; the finite representable realization is its finite-action step",
+   "via": [
+    "lem-exc-galois-stalk-finite-action-realization",
+    "lem-exc-galois-stalk-action-essentially-surjective",
+    "lem-exc-abelian-sheaves-gmodules-action",
+    "lem-exc-abelian-sheaves-gmodules"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed",
+  "statement": "lemma Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed (f : X ⟶ S) [Etale f] {L Ω : Type u}\n    [Field L] [IsSepClosed L] [Field Ω] (β : CommRingCat.of L ⟶ CommRingCat.of Ω)\n    (τ : Spec (.of L) ⟶ S) (g : Spec (.of Ω) ⟶ X) (hg : g ≫ f = Spec.map β ≫ τ) :\n    ∃ g' : Spec (.of L) ⟶ X, Spec.map β ≫ g' = g ∧ g' ≫ f = τ",
+  "branch": "slopmaster2",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "AlgebraicGeometry.Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed"
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0b7b6",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135318-L-1693206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0b7b6",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135318-L-1693206",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and delivered proofs with the DAG statements, dependencies, source results, and repaired report; both modules and direct importer Sheaf.AlgebraicGeometry.GaloisStalkActionEssSurj compile cleanly, and axiom checks show only standard axioms plus sorryAx from recorded unfinished dependencies."
+ }
+}

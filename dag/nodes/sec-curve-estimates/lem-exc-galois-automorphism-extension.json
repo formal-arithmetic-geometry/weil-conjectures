@@ -1,0 +1,118 @@
+{
+ "id": "lem-exc-galois-automorphism-extension",
+ "kind": "statement",
+ "title": "Extension of a Galois automorphism to an algebraically closed overfield",
+ "statement": "Let $K,K_s,\\Omega$ be fields in one universe, with compatible embeddings $K\\to K_s\\to\\Omega$ [def-pc-field-extension], with $K_s$ a separable closure of $K$ [def-pd-separable-closure] and $\\Omega$ algebraically closed. For every $K$-automorphism $g$ of $K_s$ there is a $K$-automorphism $\\tau$ of $\\Omega$ such that $i\\circ g=\\tau\\circ i$, where $i:K_s\\to\\Omega$ is the given embedding. No algebraicity of $\\Omega/K$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QW, section-galois-action-stalks, paragraph after example-nonalgebraic-point: restriction Aut(Omega/K) to Gal(Ks/K) is surjective; checked at https://stacks.math.columbia.edu/tag/03QW"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pd-separable-closure"
+ ],
+ "proof": [
+  {
+   "text": "The algebraic elements of Omega over K form an algebraic closure A of K. The embedded Ks is contained in A, and A/K is normal. Lift g to a K-automorphism of A by the extension theorem for normal algebraic extensions.",
+   "uses": [
+    "lem-weil-pbc-relative-algebraic-closure-algclosed",
+    "lem-weil-pbc-normal-subextension-automorphism-extends"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a transcendence basis B of Omega/A. Extend the automorphism of A to A(B) by acting on coefficients and fixing the independent variables B. Omega is an algebraic closure of A(B). Regard the two copies of Omega as algebraic closures of A(B), with the second structure map twisted by this automorphism. Uniqueness of algebraic closures gives an isomorphism between them extending the automorphism of A(B). It fixes K and restricts to the original g on Ks. If B is empty this is the algebraic case; inseparable algebraic elements have unique extensions, so all characteristics are covered.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-normal-subextension-automorphism-extends",
+  "lem-weil-pbc-relative-algebraic-closure-algclosed"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QW, section-galois-action-stalks, paragraph after example-nonalgebraic-point: restriction Aut(Omega/K) to Gal(Ks/K) is surjective; checked at https://stacks.math.columbia.edu/tag/03QW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a separable closure inside an algebraically closed field extends to an automorphism of that algebraically closed field",
+   "results": "IsSepClosed.lift, IsSepClosed.lift_def, Field.embEquivOfIsAlgClosed, Field.finSepDegree_eq_of_isAlgClosed, Field.embProdEmbOfIsAlgebraic, Normal.algHomEquivAut, separableClosure.algEquivOfAlgEquiv, AlgEquiv.liftNormal; liftNormal requires the ambient extension to be algebraic, so cannot handle transcendental Omega.",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match; inspected source tools"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of a separable closure inside an algebraically closed field extends to an automorphism of that algebraically closed field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "liftNormal|restrictNormalHom_surjective|surjective_domRestrict",
+   "results": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Closure.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match; inspected source tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisStalkFiniteActionRealization",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, third and fourth paragraphs: canonical set-valued stalk equivalence and realizing discrete G-sets; the finite representable realization is its finite-action step",
+   "via": [
+    "lem-exc-galois-stalk-finite-action-realization",
+    "lem-exc-galois-stalk-action-essentially-surjective",
+    "lem-exc-abelian-sheaves-gmodules-action",
+    "lem-exc-abelian-sheaves-gmodules"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.GaloisAutomorphismExtension",
+  "file": "lean/Sheaf/FieldTheory/GaloisAutomorphismExtension.lean",
+  "declaration": "exists_algEquiv_extending_separableClosure",
+  "statement": "theorem exists_algEquiv_extending_separableClosure\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω] (g : Gal(Ks/K)) :\n    ∃ τ : Ω ≃ₐ[K] Ω,\n      (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0b7b6",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135318-L-1693206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0b7b6",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135318-L-1693206",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and delivered proofs with the DAG statements, dependencies, source results, and repaired report; both modules and direct importer Sheaf.AlgebraicGeometry.GaloisStalkActionEssSurj compile cleanly, and axiom checks show only standard axioms plus sorryAx from recorded unfinished dependencies."
+ }
+}

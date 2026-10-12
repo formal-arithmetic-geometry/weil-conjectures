@@ -1,0 +1,111 @@
+{
+ "id": "lem-exc-field-point-precomposition-injective",
+ "kind": "statement",
+ "title": "Field-extension precomposition is injective on scheme points",
+ "statement": "Let $X$ be a scheme, let $K,L$ be fields in its universe, and let $\\alpha:K\\to L$ be a field homomorphism [def-pc-field-extension]. For morphisms $y_1,y_2:\\operatorname{Spec}K\\to X$, the equality $y_1\\circ\\operatorname{Spec}\\alpha=y_2\\circ\\operatorname{Spec}\\alpha$ implies $y_1=y_2$.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/ResidueField.lean",
+  "place": "AlgebraicGeometry.Scheme.SpecMap_comp_injective, lines 90-108; existing proved source theorem"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing proved declaration AlgebraicGeometry.Scheme.SpecMap_comp_injective alpha to the assumed equality. The source proof observes that both points have the same image, factors both through the same residue-field spectrum, and cancels the injective field map alpha on the resulting residue-field homomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/ResidueField.lean",
+  "place": "AlgebraicGeometry.Scheme.SpecMap_comp_injective, lines 90-108; existing proved source theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_SpecMap_comp_eq_of_isSepClosed|SpecMap_comp_injective|exists_fac_of_etale_of_isSepClosed",
+   "results": "Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; repository search found the already proved GeometricLifts and ResidueField declarations recorded here.",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match; inspected source tools"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an etale morphism, a point over an extension of a separably closed field factors through that field, and precomposition with a field embedding is injective on scheme morphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism, a point over an extension of a separably closed field factors through that field, and precomposition with a field embedding is injective on scheme morphisms",
+   "results": "Algebra.FormallyEtale.iff_exists_algEquiv_prod, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.comp, Algebra.IsEtaleAt.comp, StandardEtalePair.homEquiv",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match; inspected source tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisStalkFiniteActionRealization",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, third and fourth paragraphs: canonical set-valued stalk equivalence and realizing discrete G-sets; the finite representable realization is its finite-action step",
+   "via": [
+    "lem-exc-galois-stalk-finite-action-realization",
+    "lem-exc-galois-stalk-action-essentially-surjective",
+    "lem-exc-abelian-sheaves-gmodules-action",
+    "lem-exc-abelian-sheaves-gmodules"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField",
+  "declaration": "AlgebraicGeometry.Scheme.SpecMap_comp_injective",
+  "statement": "lemma SpecMap_comp_injective {X : Scheme.{u}} {K L : Type u} [Field K] [Field L]\n    (α : CommRingCat.of K ⟶ CommRingCat.of L) {g₁ g₂ : Spec (.of K) ⟶ X}\n    (h : Spec.map α ≫ g₁ = Spec.map α ≫ g₂) : g₁ = g₂",
+  "branch": "slopmaster2",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "AlgebraicGeometry.Scheme.SpecMap_comp_injective"
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0b7b6",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135318-L-1693206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0b7b6",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135318-L-1693206",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and delivered proofs with the DAG statements, dependencies, source results, and repaired report; both modules and direct importer Sheaf.AlgebraicGeometry.GaloisStalkActionEssSurj compile cleanly, and axiom checks show only standard axioms plus sorryAx from recorded unfinished dependencies."
+ }
+}
