@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-etale-limit-finite-cech-complex-colimit",
+ "kind": "statement",
+ "title": "Finite scheme Cech complexes as tail colimits",
+ "statement": "Let $I$ be a nonempty directed preorder and let $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ be an inverse diagram of qcqs schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition morphisms. Let $(X,\\pi)$ be a limiting cone [def-weil-pbc-category-colimit]. Let $F_i$ be abelian sheaves on $D_i$ [def-weil-pbc-abelian-etale-sheaves] with inverse-image transitions $\\varphi_f$ satisfying the canonical identity and composition equations [def-weil-pbc-inverse-image]. Let $G:I\\to\\mathrm{Ab}(X_{\\acute{e}t})$ be identified objectwise with $\\pi_i^{-1}F_i$, with arrows given by inverse-image composition followed by pullback of $\\varphi_f$. Let $L$ be a colimit cocone on $G$. For any qcqs object $U$ in the small etale site of $X$ [def-weil-pbc-etale-site], a finite type $K$, and a covering family $(f_k:V_k\\to U)_{k\\in K}$ with every $V_k$ qcqs, there exist $i_0\\in I$, a diagram $A:I_{\\ge i_0}\\to\\mathrm{CochainComplex}(\\mathrm{Ab})$, etale objects $U_j,V_{j,k}$ over $D_j$, and covering arrows $f_{j,k}:V_{j,k}\\to U_j$ for each $j\\ge i_0$, isomorphisms $A_j\\cong\\check C^\\bullet((f_{j,k}),F_j)$ [def-weil-pbc-cech-complex], and a colimit cocone $c_A$ on $A$ with $c_A.\\mathrm{pt}\\cong\\check C^\\bullet((f_k),L.\\mathrm{pt})$. A cochain complex is a sequence of abelian groups with consecutive differential composites zero; the complexes here have degrees in the natural numbers. The tail has its induced order. No injectivity or positive cohomological vanishing is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09YP, lemma-colimit, proof: displayed equality of Cech complexes by degree-zero continuity. Scheme realization: etale-cohomology.tex Tag 09YQ; degree-zero continuity: sites.tex Tag 09YN."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Descend the qcqs etale U, all V_k, and the finite family of arrows by finite-presentation spreading out. Their structure maps are finitely presented: etale is locally finitely presented, and a map from a qcqs domain to a qcqs base is qcqs. Descend etaleness and surjectivity of the finite disjoint union after moving to a common upper stage; the resulting finite stage family is a covering.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-descend-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change the descended family on the directed tail. Pullback pasting identifies its iterated nerve products with those of the original covering. Each product is qcqs and is the limit of its tail diagram with affine transitions. For section comparisons use the affine site presentation on these schemes and restriction to affine objects; finite affine gluing gives the corresponding qcqs-object comparison.",
+   "uses": [
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-affine-etale-site-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply degree-zero continuity with its canonical adjunction units to each nerve object. Naturality with respect to face projections gives transition maps of complexes. Form A and its cocone; the coefficient identity and composition laws and the prescribed hG give their functoriality and naturality. The generic Cech-complex comparison gives this construction on the strict affine-site model, transported to the small etale nerve complexes.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites-sections",
+    "lem-weil-pbc-colimit-of-sites-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree q the finite product index is Fin(q+1) -> K. Commuting the tail colimit with this product makes the comparison colimiting degreewise. The comparisons commute with alternating differentials, so the cocone is colimiting in complexes. Pullback/product uniqueness gives eA and eK. Only existence of this complex cocone is used, not any chosen coefficient data.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 09YP, 09YN and 09YQ",
+  "place": "Finite-cover complex comparison, separated from stage injectivity, exact filtered homology, and the Cech vanishing criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite Cech complexes of pulled back sheaves on inverse limits of schemes are filtered colimits of stage Cech complexes",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Cech complexes of pulled back sheaves on inverse limits of schemes are filtered colimits of stage Cech complexes",
+   "date": "2026-10-12",
+   "results": "Eight hits: affine-transition structure-sheaf section colimits, condensed locally constant presheaf colimits and sheaf-condition limits; none gives the coefficient-system Cech comparison.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyFunctor",
+   "date": "2026-10-12",
+   "results": "Twelve homology-functor declarations and natural isomorphisms; no scheme coefficient-system comparison.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor|isAffineHom_π_app",
+   "date": "2026-10-12",
+   "results": "Six hits: Mathlib Cech complex definition and affine limit projections; no coefficient-system Cech comparison. Repository searches found ColimitSiteCechComplex, whose strict abstract-site input still requires scheme translation.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitInjectiveColimitAcyclic",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Step 3 of the acyclic-replacement plan: the finite Cech-complex colimit comparison in the proof of 09YP.",
+   "via": [
+    "lem-weil-pbc-etale-limit-injective-colimit-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechComplexColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitFiniteCechComplexColimit.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_finite_cech_complex_colimit",
+  "statement": "theorem etale_limit_finite_cech_complex_colimit\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : IsColimit L)\n    (U : c.pt.Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left]\n    (K : Type (u + 1)) [Finite K] (V : K → c.pt.Etale) (f : ∀ k, V k ⟶ U)\n    (hV : ∀ k, CompactSpace (V k).left ∧ QuasiSeparatedSpace (V k).left)\n    (hf : Sieve.ofArrows V f ∈ c.pt.smallEtaleTopology U) :\n    ∃ (i₀ : I) (A : {j : I // i₀ ≤ j} ⥤ CochainComplex AddCommGrpCat.{u + 1} ℕ)\n      (Uj : ∀ j : {j : I // i₀ ≤ j}, (D.obj (op j.val)).Etale)\n      (Vj : ∀ j : {j : I // i₀ ≤ j}, K → (D.obj (op j.val)).Etale)\n      (fj : ∀ (j : {j : I // i₀ ≤ j}) (k : K), Vj j k ⟶ Uj j)\n      (eA : ∀ j : {j : I // i₀ ≤ j}, A.obj j ≅\n        (cechComplexFunctor (fun k : K ↦ Over.mk (fj j k))).obj\n          ((Over.forget (Uj j)).op ⋙ (F j.val).obj))\n      (cA : Cocone A)\n      (eK : cA.pt ≅ (cechComplexFunctor (fun k : K ↦ Over.mk (f k))).obj\n        ((Over.forget U).op ⋙ L.pt.obj)),\n      (∀ j : {j : I // i₀ ≤ j},\n        Sieve.ofArrows (Vj j) (fj j) ∈ (D.obj (op j.val)).smallEtaleTopology (Uj j)) ∧\n      Nonempty (IsColimit cA)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-colimit-of-sites-sections",
+  "lem-weil-pbc-colimit-of-sites-cech-complex",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T160140-L-2565581",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T160140-L-2565581",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
