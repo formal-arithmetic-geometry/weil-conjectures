@@ -293,7 +293,7 @@ instance : IsClosedImmersion (ProjectiveLine.infinity Y) := by
     infer_instance
   exact IsClosedImmersion.of_comp _ (ProjectiveLine Y ↘ Y)
 
-omit [HasKummerClass.IsNormalized Λ] in
+omit [Finite Λ] [HasKummerClass.IsNormalized Λ] in
 /-- Restricting a class pulled back from the base to the section at infinity gives the class
 back: `Λ_Y(1)[2] ⟶ Rq_* Λ(1)[2] ⟶ Rq_* R∞_* ∞^* Λ(1)[2]` is an isomorphism, `q ∘ ∞` being the
 identity. -/
