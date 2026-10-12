@@ -135,6 +135,19 @@ lemma verdierDualDoubleDual_app (K : _root_.DerivedCategory (Sheaf X.smallEtaleT
     (verdierDualDoubleDual A a).app K = MonoidalClosed.toIhomIhom (dualizingComplex A a) K :=
   rfl
 
+/-- **Verdier biduality for dualizable complexes when `ω_X` is invertible.** If the dualizing
+complex `ω_X` is invertible — for instance for `X` smooth over a field, where an orientation
+gives `ω_X ≅ Λ_X(d)[2d]` — then the double Verdier dual of a dualizable `K` is `K`:
+`𝔻_X 𝔻_X K ≅ K`. This is the duality `[[K, ω], ω] ≅ K` of
+`CategoryTheory.nonempty_iso_ihom_obj_ihom_obj_of_isInvertible`, the derived category of étale
+sheaves being braided (`AlgebraicGeometry.Etale.derivedBraidedCategory`). -/
+theorem nonempty_iso_verdierDual_verdierDual_of_isInvertible
+    (hω : IsInvertible (dualizingComplex A a))
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
+    Nonempty (K ≅ (verdierDual A a).obj (op ((verdierDual A a).obj (op K)))) := by
+  obtain ⟨e⟩ := nonempty_iso_ihom_obj_ihom_obj_of_isInvertible hK hω
+  exact ⟨e.symm⟩
+
 section Field
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
