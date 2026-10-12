@@ -15,22 +15,22 @@
  },
  "proof": [
   {
-   "text": "Write G_j for the generic direct images, I for the image of G_2 to G_3, and Q for its cokernel. Left exactness gives the short exact sequences 0 to G_1 to G_2 to I to 0 and 0 to I to G_3 to Q to 0.",
+   "text": "Apply generic direct image to S. Finite-limit preservation gives exactness and monicity on the left. Let beta be the pushed-forward last map, I its abelian image and Q its cokernel. Factor beta through I. The exactness comparison with the monic image inclusion produces a short exact sequence G1 to G2 to I. The kernel-cokernel sequence I to G3 to Q is short exact.",
    "uses": [
     "lem-weil-pbc-direct-image-left-exact"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
     "place": "proof paragraph 3"
    }
   },
   {
-   "text": "The generic pullback/pushforward counit is invertible by stalk comparison. Exact inverse image identifies the generic restriction of Q with the cokernel of S.g, hence zero. G_3 and Q are killed by ell because the third generic term is constant Z/ell. Thus Q is torsion and generically zero. Continuity of sections at the generic-point limit makes each section of Q vanish locally on a nonempty affine open, which is the hypothesis of generic acyclicity. Generic acyclicity gives H¹(Q)=H²(Q)=0.",
+   "text": "The generic counit is invertible. Naturality identifies generic inverse image of beta with S.g up to invertible maps; hence it is epic. Inverse image preserves cokernels as a left adjoint, so generic inverse image of Q is zero. Therefore its generic adjunction unit is zero. On every affine etale object, continuity at the function-field limit shrinks a nonempty affine open until the image of any section under its open unit is zero. Affine etale objects form a covering basis, so Q has generically vanishing sections. Generic acyclicity gives H1(Q)=0.",
    "uses": [
-    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sc-zero-generic-acyclic"
+    "lem-sc-generic-direct-image-counit",
+    "lem-weil-pbc-etale-section-continuity",
+    "lem-sc-generic-vanishing-acyclic"
    ],
    "elementary": false,
    "source": {
@@ -39,8 +39,9 @@
    }
   },
   {
-   "text": "Smoothness over a field implies normality, and finite type implies Noetherianity. Normal generic constant comparison identifies G_3 with D.constantZMod ell, after transporting along the canonical generic residue-field/function-field identification. hconstant gives H²(G_3)=0.",
+   "text": "Smoothness gives integrally closed local rings and thus normality of D; finite type gives Noetherianity. Apply normal generic constant comparison for the finite group ULift ZMod ell. The residue map at the generic point is invertible because its stalk is the function field. Composition coherence of adjunction units cancels this residue-field isomorphism and gives the constant comparison for fromSpecFunctionField. Transport along e and use hconstant to obtain H2(G3)=0.",
    "uses": [
+    "lem-sc-smooth-normal",
     "lem-fin-normal-generic-constant"
    ],
    "elementary": false,
@@ -50,11 +51,9 @@
    }
   },
   {
-   "text": "The long exact sequence for I,G_3,Q identifies H²(I) with H²(G_3), using H¹(Q)=H²(Q)=0. In the sequence for G_1,G_2,I, both groups flanking H²(G_2) vanish, by hfirst and H²(I)=0, so H²(G_2)=0.",
-   "uses": [
-    "lem-weil-pbc-derived-functor-long-exact"
-   ],
-   "elementary": false,
+   "text": "Use the existing Ext long exact sequence, which computes Sheaf.H directly. Exactness at H2(I) in I to G3 to Q and H1(Q)=0 implies H2(I)=0. Exactness at H2(G2) in G1 to G2 to I and hfirst then implies H2(G2)=0. The Lean proof explicitly chooses the preimages and shows they are zero.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
     "place": "proof paragraph 3"
@@ -63,11 +62,11 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-direct-image-left-exact",
-  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-sc-zero-generic-acyclic",
-  "lem-fin-normal-generic-constant",
-  "lem-weil-pbc-derived-functor-long-exact"
+  "lem-sc-generic-direct-image-counit",
+  "lem-weil-pbc-etale-section-continuity",
+  "lem-sc-generic-vanishing-acyclic",
+  "lem-sc-smooth-normal",
+  "lem-fin-normal-generic-constant"
  ],
  "proof_origin": {
   "by": "agent",
@@ -152,9 +151,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T070542-L-3473708",
+  "landing": "20261012T085344-L-41759",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
