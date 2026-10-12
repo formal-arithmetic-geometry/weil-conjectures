@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-presheaf-cech-sheaf-hom-comparison",
+ "kind": "statement",
+ "title": "Hom cochains on the sheafified free Čech nerve",
+ "statement": "Let $(\\mathcal C,J)$ and abelian sheafification be as in [def-weil-pbc-sites-and-cohomology], let $f:E\\to P$ be any map of $v$-valued presheaves of sets, and let $F$ be an abelian sheaf. For $A_\\bullet=(\\mathbb Z[N_\\bullet(f)])^\\#$, the actual alternating-face complex described in [lem-sc-presheaf-cech-sheaf-resolution], there are additive equivalences $e_n:\\operatorname{Hom}(A_n,F)\\simeq\\check C^n(f,F)$ [def-sc-presheaf-cech-complex] satisfying $e_{n+1}(a\\circ d_{n+1})=d^n(e_n(a))$ for every $n\\geq0$ and every $a:A_n\\to F$. Neither local surjectivity nor Ext vanishing is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 079Z, zero-row Hom identification; additive sheafification adjunction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sc-presheaf-cech-complex",
+  "lem-sc-presheaf-cech-sheaf-resolution"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib Adjunction.homAddEquiv for sheafification in each degree to obtain e_n. The target is definitionally the Hom group defining the presheaf Čech term.",
+   "uses": [
+    "def-sc-presheaf-cech-complex",
+    "lem-sc-presheaf-cech-sheaf-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand both alternating differentials. Preadditive.sum_comp and zsmul_comp, and additivity of e_n, express both sides as sums indexed by Fin(n+2).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each face use Adjunction.homEquiv_naturality_left on its free abelian presheaf map. Finset.sum_congr combines the equalities of summands, proving differential compatibility.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-presheaf-cech-complex",
+  "lem-sc-presheaf-cech-sheaf-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 01GC and 079Z; explicit syzygy and adjunction details of the published argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The additive sheafification adjunction identifies Hom cochains on the free Cech nerve including alternating differentials",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cechNerve|extraDegeneracy",
+   "date": "2026-10-13",
+   "results": "10 hits: Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification adjunction is an additive equivalence on Hom groups and is natural under precomposition",
+   "date": "2026-10-13",
+   "results": "8 hits: PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, CategoryTheory.plusPlusAdjunction",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.PresheafCechExtEdgeKernel",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "Second paragraph, via the presheaf-nerve vanishing criterion: augmented free nerve and its Hom comparison.",
+   "via": [
+    "lem-sc-presheaf-cech-ext-edge-kernel",
+    "lem-sc-presheaf-cech-ext-edge-injective",
+    "lem-sc-presheaf-cech-vanishing-criterion",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.PresheafCechSheafHomComparison",
+  "file": "lean/Sheaf/CategoryTheory/Sites/PresheafCechSheafHomComparison.lean",
+  "declaration": "CategoryTheory.Sheaf.presheafCechSheafComplex_hom_comparison",
+  "statement": "theorem presheafCechSheafComplex_hom_comparison {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{v}] (F : Sheaf J AddCommGrpCat.{v}) (f : Arrow (Cᵒᵖ ⥤ Type v)) : ∃ e : ∀ n, ((presheafCechSheafComplex J f).X n ⟶ F) ≃+ (presheafCechComplex f F.obj).X n, ∀ n (a : (presheafCechSheafComplex J f).X n ⟶ F), e (n + 1) ((presheafCechSheafComplex J f).d (n + 1) n ≫ a) = (presheafCechComplex f F.obj).d n (n + 1) (e n a)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T184314-L-4008387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T184314-L-4008387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

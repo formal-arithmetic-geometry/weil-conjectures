@@ -12,20 +12,46 @@
  ],
  "proof": [
   {
-   "text": "Use Yoneda Ext long exact sequences of the successive short exact sequences in the augmented free Cech nerve. Lower-row vanishing lifts a class in the edge kernel to a final syzygy; Cech vanishing makes the cocycle a coboundary, so the class is zero.",
+   "text": "Obtain the exact syzygy ladder of [lem-sc-presheaf-cech-sheaf-resolution] and the additive cochain comparison of [lem-sc-presheaf-cech-sheaf-hom-comparison]. Keep the original augmentation under its degree-zero isomorphism.",
    "uses": [
-    "lem-sc-presheaf-cech-ext-edge-injective"
+    "lem-sc-presheaf-cech-sheaf-resolution",
+    "lem-sc-presheaf-cech-sheaf-hom-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For n+1=q, a map g:K_n -> F produces a cocycle p_n followed by g. Exactness in degree q follows from the given zero Čech homology using HomologicalComplex.exactAt_iff_isZero_homology. ShortComplex.ab_exact_iff makes the cocycle a boundary; the additive comparison transports its primitive to t:A_n -> F. Cancel the epimorphism p_n to obtain i_n followed by t equal to g.",
+   "uses": [
+    "lem-sc-presheaf-cech-sheaf-resolution",
+    "lem-sc-presheaf-cech-sheaf-hom-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on b>0 with n+b+1=q to prove Ext^b(K_n,F)=0. Lower Ext vanishing on A_(n+1) lets Ext.contravariant_sequence_exact₃ lift any class through the next short exact sequence. For b=1 its lift is a morphism K_(n+1)->F; the preceding extension argument and ShortExact.extClass_comp_assoc kill its connecting class. For b>1 the induction hypothesis kills the lift. This is the proved private helper syzygy_ext_vanish.",
+   "uses": [
+    "lem-sc-presheaf-cech-sheaf-resolution",
+    "lem-sc-presheaf-cech-sheaf-hom-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the original edge-kernel equation across e0 using Ext.mk₀_comp_mk₀_assoc. The initial short exact sequence lifts x to Ext^(q-1)(K0,F) by Ext.contravariant_sequence_exact₃. For q=1 extend the corresponding morphism to A0 and use extClass_comp_assoc. For q>1 apply syzygy_ext_vanish at n=0. In both cases the connecting image x is zero.",
+   "uses": [
+    "lem-sc-presheaf-cech-sheaf-resolution",
+    "lem-sc-presheaf-cech-sheaf-hom-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-presheaf-cech-ext-edge-injective"
+  "lem-sc-presheaf-cech-sheaf-resolution",
+  "lem-sc-presheaf-cech-sheaf-hom-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 079Z"
+  "place": "Tag 079Z edge-kernel consequence, using the augmented nerve of Tag 01GC; direct Yoneda Ext syzygy proof formalized by K2."
  },
  "mathlib_searches": [
   {
@@ -92,9 +118,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T161501-L-2647916",
+  "landing": "20261012T184314-L-4008387",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
