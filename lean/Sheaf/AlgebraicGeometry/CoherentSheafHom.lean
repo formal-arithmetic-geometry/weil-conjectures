@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
+import Sheaf.AlgebraicGeometry.CoherentHomLocalKernel
 import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 
@@ -49,6 +49,21 @@ theorem isCoherent_homObj (X : Scheme.{u}) (F G : X.Modules)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F)
     (hG : RingedSpace.IsCoherent X.toRingedSpace G) :
     RingedSpace.IsCoherent X.toRingedSpace (SheafOfModules.homObj (R := X.sheaf) G F) := by
-  sorry
+  classical
+  let H := SheafOfModules.homObj (R := X.sheaf) G F
+  choose U hx m n α e using homObj_locally_kernel_of_coherent X G F hG
+  have hU : ⨆ x : X, U x = ⊤ := by
+    apply top_le_iff.mp
+    intro x _
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hx x⟩
+  have hlocal := coherent_module_local_on_open_cover X F X U hU
+  apply (coherent_module_local_on_open_cover X H X U hU).2
+  intro x
+  have hFU := hlocal.1 hF (U x)
+  have hclosure := RingedSpace.coherent_kernel_cokernel_sum (U x).toScheme.toRingedSpace
+  have hn := hclosure.2.2.1 (n x) (fun _ ↦ F.restrict (U x).ι) (fun _ ↦ hFU)
+  have hm := hclosure.2.2.1 (m x) (fun _ ↦ F.restrict (U x).ι) (fun _ ↦ hFU)
+  have hk := (hclosure.1 _ _ (α x) hn hm).1
+  exact hclosure.2.2.2.2 _ _ (e x).some.symm hk
 
 end AlgebraicGeometry.Scheme.Modules
