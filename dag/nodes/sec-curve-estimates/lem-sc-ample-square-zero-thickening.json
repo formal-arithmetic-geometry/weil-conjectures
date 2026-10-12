@@ -33,111 +33,88 @@
  ],
  "proof": [
   {
-   "text": "Write M_n=I tensor L^{tensor n}. The closed immersion's ideal sequence is 0 \\to I \\to O_X \\to j_*O_Z \\to 0. Since L^{tensor n} is locally free of rank one, tensoring is exact: I tensor L^{tensor n} \\to L^{tensor n} is injective with image I L^{tensor n}. Apply [lem-weil-pbc-closed-immersion-unit-quotient] with F=L^{tensor n}: L^{tensor n}/I L^{tensor n} is isomorphic to j_*j^*L^{tensor n}. Thus 0 \\to M_n \\to L^{tensor n} \\to j_*j^*L^{tensor n} \\to 0 is exact. The closed-immersion ideal I is quasi-coherent [def-sbc-closed-immersion-ideal-sheaf], and M_n is quasi-coherent locally because L^{tensor n} is free of rank one. For every local a in I and v in M_n, av=0 since I^2=0 [def-sbc-ideal-sheaf-powers]. Apply [lem-weil-pbc-closed-immersion-pushforward-annihilated] (2) with F=M_n: G_n:=j^*M_n is quasi-coherent on Z and j_*G_n is isomorphic to M_n. Since a closed immersion is affine, [lem-weil-pbc-affine-morphism-cohomology-edge] for j and G_n gives H^1(X,M_n) = H^1(X,j_*G_n) isomorphic to H^1(Z,G_n) as O_X(X)-modules.",
+   "text": "The Mathlib support of a positive power of an ideal sheaf equals its support. Taking support in j.ker^2=bot gives j.ker.support=top by support_bot. Mathlib Hom.support_ker identifies this support with the closure of the image of j. The image is closed because j is a closed immersion. Thus j is surjective.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-unit-quotient",
-    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
     "def-sbc-closed-immersion-ideal-sheaf",
-    "def-sbc-ideal-sheaf-powers"
+    "def-sbc-ideal-sheaf-powers",
+    "def-weil-closed-immersion"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology Lemma 09MS, square-zero proof, exact sequence (equation-ses) and paragraph identifying I as an O_Z-module"
+    "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
    }
   },
   {
-   "text": "Fix x in X. As I^2=0, i.e. I(U)^2=0 on every affine open U [def-sbc-ideal-sheaf-powers], the quasi-coherent ideal I [def-sbc-closed-immersion-ideal-sheaf] is contained in every prime of each affine coordinate ring; [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] identifies j(Z)=V(I)=X, so x has a preimage z in Z. Ampleness of j^*L [def-weil-pbc-ample-invertible-module] supplies n>=1 and s in Gamma(Z,j^*L^{tensor n}) with z in the affine principal open Z_s. In the degree-n exact sequence of step 1, the obstruction to lifting s is its connecting class xi=partial(s) in H^1(X,M_n), identified with a class in H^1(Z,G_n) by the edge isomorphism of step 1.",
+   "text": "Use invertible_pullback_tensor to register the invertibility of N=(tensorPullback j).obj L. For any x in X, choose z with j(z)=x by step 1. Unpack ampleness of N at z to obtain n>0, a section s of N^n, and an affine open U=Z_s containing z. Apply the single-section power-locus lifting theorem to obtain k>0 and t in Gamma(X,L^(n*k)), with j(zeta) in X_t iff zeta is in U for every zeta in Z.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "lem-weil-pbc-invertible-pullback-tensor",
     "def-weil-pbc-ample-invertible-module",
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-sbc-ideal-sheaf-powers"
+    "lem-sc-square-zero-section-power-locus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology Lemma 09MS, square-zero proof, paragraph beginning 'Let x in X'"
+    "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
    }
   },
   {
-   "text": "Set O'=direct sum over m>=0 of L^{tensor m} and O=direct sum over m>=0 of j_*j^*L^{tensor m}, with multiplication by tensor product. These are sheaves of commutative O_X-algebras: locally a frame for the invertible L identifies O' with a polynomial algebra in one generator, so its multiplication is commutative; the quotient O is commutative too. The degreewise surjection from step 1 gives O' \\to O with kernel K=direct sum over m>=0 of I tensor L^{tensor m}; products of two kernel terms land in I^2 tensor L^{tensor (a+b)}=0. Apply [lem-sc-boundary-derivation-square-zero] to O' \\to O. By naturality of the long exact sequence for inclusion of a degree-m summand and projection onto it, projecting the boundary of the summed sequence to degree m is the boundary of the degree-m exact sequence. Thus the image of s in the degree-n summand has boundary xi. Induct on k>=1: for k=1 this is xi; if partial(s^k)=k s^{k-1}xi, the Leibniz rule gives partial(s^{k+1})=s partial(s^k)+s^k partial(s)=(k+1)s^k xi. Taking k=e+1 gives partial(s^{e+1})=(e+1)s^e xi, where s^e acts through O on K.",
+   "text": "Tensor powers of an invertible module are invertible (the proved source instance IsInvertible.tensorPow in ProjectionFormula). Apply nonvanishing_section_trivializes to L^(n*k) and t to get an open V whose underlying set is X_t. Extensionality and the lifting equivalence show j^{-1}(V)=U. In particular x=j(z) lies in V.",
    "uses": [
-    "lem-sc-boundary-derivation-square-zero"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology Lemma 0B8S, boundary derivation"
-   }
-  },
-  {
-   "text": "Apply [lem-sc-section-affine-open-kills-cohomology] on Z to the invertible module j^*L^{tensor n} [lem-weil-pbc-invertible-pullback-invertible], its section s, the quasi-coherent module F=G_n from step 1, p=1, and the class xi transported through the edge isomorphism of step 1. Z is quasi-compact since it is Noetherian, and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; Z_s is affine by step 2. The node gives e>=0 for which multiplication by s^e kills xi in H^1(Z,G_n tensor (j^*L^{tensor n})^{tensor e}). This multiplication is induced by G_n \\to G_n tensor (j^*L^{tensor n})^{tensor e}, f \\mapsto f tensor s^e. Naturality of the affine-morphism edge isomorphism for this map identifies it with the action s^e xi in step 3. Thus partial(s^{e+1})=(e+1)s^e xi=0, and exactness of the degree-(e+1)n sequence lifts s^{e+1} to s' in Gamma(X,L^{tensor (e+1)n}).",
-   "uses": [
-    "lem-sc-section-affine-open-kills-cohomology",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "lem-weil-pbc-invertible-pullback-invertible"
+    "lem-weil-pbc-nonvanishing-section-trivializes",
+    "def-sc-invertible-module",
+    "def-weil-pbc-ample-invertible-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology Lemma 09MS, invocation of Lemma 01XR"
+    "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
    }
   },
   {
-   "text": "By the stalkwise definition of X_{s'} in [def-weil-pbc-ample-invertible-module], j^*s'=s^{e+1}, and a power has the same nonvanishing locus, so j^{-1}(X_{s'})=Z_s. The base change Z_s \\to X_{s'} of j is a closed immersion by [lem-weil-pbc-proper-fp-permanence] (b), hence finite by [lem-weil-pbc-closed-immersion-finite]. Since I^2=0, i.e. I(U)^2=0 on every affine open U [def-sbc-ideal-sheaf-powers], the quasi-coherent ideal I [def-sbc-closed-immersion-ideal-sheaf] lies in every prime of each affine coordinate ring; [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] identifies j(Z)=V(I)=X, so the restricted map Z_s \\to X_{s'} is surjective. Its source Z_s is affine by step 2. The target X_{s'} is Noetherian in the sense of [def-weil-pbc-scheme-conventions]: it is locally Noetherian as an open subscheme of X, and quasi-compact because any open subset of the Noetherian topological space X is quasi-compact. These four inputs to [lem-weil-pbc-finite-surjective-affine-target-noetherian] show X_{s'} is affine.",
+   "text": "Restrict j to V. This restriction is a closed immersion by the Mathlib restriction instance, hence finite. Its source j^{-1}(V)=U is affine. Its underlying map is surjective: for v in V choose z with j(z)=v, and the preimage membership proof supplies a point of j^{-1}(V). Since X is locally Noetherian and quasi-compact, it is Noetherian; every open of its Noetherian topological space is compact, and open subschemes are locally Noetherian. Thus V is Noetherian. Apply finite-surjective affine descent to j restricted to V to conclude V is affine.",
    "uses": [
-    "def-weil-pbc-ample-invertible-module",
     "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
     "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-sbc-ideal-sheaf-powers"
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology Lemma 09MS, final paragraph, invocation of Lemma 01YQ"
+    "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
    }
   },
   {
-   "text": "X is quasi-compact by the Noetherian hypothesis, giving clause (1) of [def-weil-pbc-ample-invertible-module]. For every x in X, steps 2-5 produce s' in Gamma(X,L^{tensor (e+1)n}) with x in X_{s'} and X_{s'} affine. Here n>=1 from step 2 and e>=0 from step 4, so (e+1)n>=1. This is clause (2) of the ampleness definition, hence L is ample.",
+   "text": "Use the given CompactSpace X for the compactness clause of IsAmple. For every x the preceding steps produce the section t of L^(n*k) and affine open V=X_t containing x. Nat.mul_pos proves n*k>0. These witnesses are exactly the second clause of IsAmple, so L is ample.",
    "uses": [
     "def-weil-pbc-ample-invertible-module"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology Lemma 09MS, conclusion"
+    "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-unit-quotient",
-  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
-  "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "def-weil-pbc-ample-invertible-module",
-  "lem-sc-boundary-derivation-square-zero",
-  "lem-sc-section-affine-open-kills-cohomology",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-finite-surjective-affine-target-noetherian",
   "def-sbc-closed-immersion-ideal-sheaf",
   "def-sbc-ideal-sheaf-powers",
-  "lem-weil-pbc-invertible-pullback-invertible"
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-square-zero-section-power-locus",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-closed-immersion-finite",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-finite-surjective-affine-target-noetherian"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 09MS, square-zero case"
+  "place": "Cohomology of Schemes, Lemma 09MS, square-zero case; Lean reduction by K2, with cohomological section-power lifting split off and surjectivity proved directly from Mathlib ideal supports."
  },
  "mathlib_searches": [
   {
@@ -272,5 +249,15 @@
   "group": "J1",
   "result": "fix",
   "note": "j:Z->X closed immersion=[IsClosedImmersion j]; X,Z Noetherian=[IsLocallyNoetherian][CompactSpace] on both (sibling a29f681a4 form); I^2=0 = j.ker ^ 2 = ⊥ in IdealSheafData (checked (I^2).ideal U = (I.ideal U)^2 by simp); L : X.Modules [L.IsInvertible]; j^*L = tensorPullback j; invertibility of j^*L now from landed invertible_pullback_tensor (.1 L).2 instead of the delivered sorry'd duplicate tensorPullback_isInvertible (H4/H12); conclusion IsAmple Z (j^*L) -> IsAmple X L with landed Scheme.Modules.IsAmple; same universe u; docstring proof filled with the node's steps"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T085258-L-22644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
