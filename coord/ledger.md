@@ -5898,3 +5898,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:24 L: returned deliver/N1/Sheaf.Topology.ConstantSubsheafFiniteFiltration (reviewer RETURN: (reviewer X-3eb8f, head 3eb8f7cfe) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Topology.ConstantSub)
 - 03:25 L: merged deliver/E2/Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback (stage 3; reviewer PASS; first push; landing 20261012T032447-L-1407544 (proof); modules 1; new nodes 0)
 - 03:25 L: merged deliver/Z2/def-nagata-finite-presentation-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataFinitePresentationDescent AlgebraicGeometry.nagataFinitePresentationDescent; statement corrected (3 citers))
+- 03:26 L: merged deliver/F1/Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison (stage 3; reviewer PASS; after a return; landing 20261012T032608-L-1414923 (proof); modules 1; new nodes 0)

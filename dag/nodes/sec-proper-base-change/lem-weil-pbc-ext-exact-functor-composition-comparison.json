@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Apply the termwise functors on complexes. Exactness ensures that each preserves quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization]. On complexes, applying F and then G is applying their composite, and e is the termwise natural isomorphism H to that composite. Localization carries this natural isomorphism and the composite identification to the derived categories; this is the universal property in [def-weil-abstract-derived-category]. Both comparisons commute with shifts, since the termwise components are unchanged on shifted complexes.",
+   "text": "Use the exact functors on derived categories from [lem-weil-pbc-exact-functor-derived-factorization]. Form the comparison mapDerivedCategoryNatIso e followed by mapDerivedCategoryCompIso F G; the existing library instances show that this comparison commutes with shifts. Expand mapDerivedCategorySingleFunctor on single complexes into the factorization isomorphism followed by localization of singleMapHomologicalComplex. Apply mapDerivedCategoryCompIso_fac and mapDerivedCategoryNatIso_fac. The two remaining complex-morphism equalities are checked degreewise: at degree zero the single comparisons are identities and elsewhere the maps are zero. This proves compatibility of the comparison with e on each single complex.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
     "def-weil-abstract-derived-category"
@@ -22,7 +22,7 @@
    "elementary": false
   },
   {
-   "text": "Represent x as A[0] to B[0][n] by [def-pc-ext]. Naturality of the induced e for this morphism gives e at B[0][n] after H(x) equal to G(F(x)) after e at A[0]. Its components on single complexes are the images of e_A and e_B; shift compatibility makes the target component e_B[n]. These are the degree-zero classes mk_0(e_A), mk_0(e_B). Thus the naturality equation is precisely the displayed Ext equality; no sheaf, constant object or cohomology pullback is involved.",
+   "text": "Identify Ext classes with shifted morphisms by [def-pc-ext], using Ext.comp_hom, Ext.mk₀_hom and Ext.mapExactFunctor_hom. Cancel the single-complex comparison isomorphisms to obtain the corresponding inverse-component equality. Apply ShiftedHom.map_naturality to x.hom and the shift-compatible comparison. Precompose with the inverse H single comparison and postcompose with the shifted composite F/G single comparison. Substitute the endpoint equalities just proved, expand the composite functor shift isomorphism, and use commShiftIso_hom_naturality_assoc to obtain precisely the required Ext equality.",
    "uses": [
     "def-pc-ext"
    ],
@@ -37,7 +37,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma Tag 015F (lemma-right-derived-exact-functor), parts (3)-(4), and Definition Tag 06XQ (definition-ext); argument by naturality on localized complexes, written by K1"
+  "place": "Tag 015F and Definition Tag 06XQ; F1 Lean proof using the existing derived natural-isomorphism and composition comparisons, their localization factorization equations and shifted naturality."
  },
  "mathlib_searches": [
   {
@@ -126,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-4e198",
-  "group": "K1",
+  "reviewer": "COMPILER",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T015900-L-944365",
-  "kind": "interface",
-  "note": "independent Codex review: All five modules compile cleanly; unchanged existing signature, four auxiliary signatures, DAG proof records, canonical comparisons, report, and axiom audit satisfy the stage-3 brief."
+  "landing": "20261012T032608-L-1414923",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
