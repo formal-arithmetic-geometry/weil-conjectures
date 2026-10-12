@@ -7630,3 +7630,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:19 L: returned deliver/W2/Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficientsBackward (reviewer RETURN: (reviewer X-73d23, head 73d235df2) C7 — Fixed unit route bypassed: dag/units/sk-def-pbc.json records lem-weil-pbc-torsio)
 
 - 20:20 L: batch 20261012T120425 withdrawn: failing import closure differs from published commit; skip not-the-batch agent
+- 12:21 L: returned deliver/X2/Sheaf.AlgebraicGeometry.FiniteEtaleSchemeTorsorLift (reviewer RETURN: (reviewer X-6c2c1, head 6c2c1b204) the reviewer passed it, but the landing failed: eilConjectures.AlgebraicGeometry.Morp)
