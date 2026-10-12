@@ -6,6 +6,7 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.Filtration
 
 /-! # The normalized stationary quotient presentation
 

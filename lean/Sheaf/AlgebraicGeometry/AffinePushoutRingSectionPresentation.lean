@@ -1,6 +1,7 @@
 module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 set_option linter.style.longLine false
 set_option linter.style.whitespace false
 @[expose] public section

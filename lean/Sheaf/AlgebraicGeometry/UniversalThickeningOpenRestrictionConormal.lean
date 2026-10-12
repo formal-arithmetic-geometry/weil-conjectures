@@ -2,6 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal
 import Sheaf.AlgebraicGeometry.UniversalThickeningOpenRestrictionCore
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists
 
 @[expose] public section
 

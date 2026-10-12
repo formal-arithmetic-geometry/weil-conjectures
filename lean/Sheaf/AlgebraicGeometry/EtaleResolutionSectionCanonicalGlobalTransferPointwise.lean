@@ -6,6 +6,10 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Pointwise canonical global transfer identity

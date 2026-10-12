@@ -6,6 +6,11 @@ Authors: SHEAF group K2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
+import Sheaf.Paper.FiniteCoproductCohomologyAssembly
+import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
+import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Assembling constant-coefficient assertions over a finite clopen partition -/
 

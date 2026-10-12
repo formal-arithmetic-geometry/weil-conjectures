@@ -3,6 +3,9 @@ module
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.Filtration
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 @[expose] public section
 

@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Sheaf.CategoryTheory.ColimitSiteStageImage
+import Sheaf.CategoryTheory.FilteredColimitCategories
 
 /-! Local sheaf condition for stage image.
 Source: Stacks Project, Sites, Tag 0A35.

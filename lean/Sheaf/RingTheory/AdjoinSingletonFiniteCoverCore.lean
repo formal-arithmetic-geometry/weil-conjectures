@@ -11,6 +11,9 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.Submodule
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.FiniteOverNagata
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.NagataLocalization
 
 /-! # Structural finite cover for a fractional monogenic algebra
 Source: Stacks Project, Algebra, Tag 0334, Step 5. -/

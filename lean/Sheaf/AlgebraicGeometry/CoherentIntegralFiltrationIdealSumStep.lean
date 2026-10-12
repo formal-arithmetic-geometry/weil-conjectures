@@ -6,6 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 
 /-! The split-sum induction step for coherent integral filtrations.
 (blueprint: lem-weil-pbc-coherent-integral-filtration-ideal-sum-succ)

@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullback
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import
   WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 

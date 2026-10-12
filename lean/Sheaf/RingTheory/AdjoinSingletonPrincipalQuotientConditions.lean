@@ -12,6 +12,11 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Localization.Submodule
+import Sheaf.RingTheory.FiniteOverNagata
+import Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes
+import Sheaf.RingTheory.IsAnalyticallyUnramifiedOfIsNagataRing
+import Sheaf.RingTheory.NagataLocalization
+import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
 # Principal-quotient conditions for a fractional monogenic algebra

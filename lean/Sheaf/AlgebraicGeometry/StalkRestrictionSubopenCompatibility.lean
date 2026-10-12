@@ -6,6 +6,7 @@ Authors: SHEAF group P3
 module
 
 public import Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Compatibility of stalk comparison with a second open restriction
 

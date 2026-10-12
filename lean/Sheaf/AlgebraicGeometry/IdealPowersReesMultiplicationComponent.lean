@@ -4,6 +4,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 @[expose] public section
 set_option autoImplicit false

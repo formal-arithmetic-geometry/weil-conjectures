@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Sheaf.RingTheory.CompleteIntersectionOverField
+import Sheaf.RingTheory.GlobalCompleteIntersectionPrincipalLocalization
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Syntomic hypotheses after principal localization

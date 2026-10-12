@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.CategoryTheory.ExactCoupleMorphism
 import Sheaf.CategoryTheory.FilteredComplexPositivePages
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Exact-couple realization of the cycle-boundary quotient pages

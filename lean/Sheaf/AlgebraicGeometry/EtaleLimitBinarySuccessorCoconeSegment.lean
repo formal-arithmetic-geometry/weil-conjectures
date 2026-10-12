@@ -18,6 +18,7 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
 import Mathlib.CategoryTheory.Adjunction.Limits
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Native restricted cohomology rows
 

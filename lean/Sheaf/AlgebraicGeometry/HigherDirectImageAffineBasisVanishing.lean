@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.Paper.HigherDirectImagePresheaf
 import Sheaf.Topology.RestrictInjectiveResolution
+import Sheaf.AlgebraicGeometry.SheafZeroStalks
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Vanishing of higher direct image on an affine neighbourhood basis
 

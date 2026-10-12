@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Sheaf.RingTheory.CompleteIntersectionOverField
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.LciConormalFreeRankCodimension
+import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
 
 /-!
 # An equation-count comparison quotient at a syntomic prime

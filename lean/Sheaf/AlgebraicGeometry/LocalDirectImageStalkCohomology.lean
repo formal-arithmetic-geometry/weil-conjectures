@@ -8,6 +8,11 @@ module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import Sheaf.Paper.HigherDirectImagePresheaf
 
 /-! # Local direct-image stalks and total cohomology
 

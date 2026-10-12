@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import Mathlib.Algebra.Exact.Basic
+import Sheaf.Topology.OpenModuleCohomology
 
 /-! # Exact Mayer--Vietoris row of fractions
 

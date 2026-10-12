@@ -12,6 +12,11 @@ import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
 import Sheaf.Algebra.Homology.FilteredComplexZBDescription
 import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.CategoryTheory.CartanEilenbergExists
+import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
+import Sheaf.CategoryTheory.HypercohomologyFirstPage
+import Sheaf.Paper.EtaleTermwiseHypercohomology
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Coherent filtered maps between CE totals
 

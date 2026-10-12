@@ -6,6 +6,8 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension
 
 /-! # Coherent CokernelRelations
 

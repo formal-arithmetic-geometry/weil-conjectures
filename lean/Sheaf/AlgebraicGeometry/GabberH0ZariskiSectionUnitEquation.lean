@@ -6,6 +6,7 @@ Authors: SHEAF group X2
 module
 
 public import Sheaf.AlgebraicGeometry.GabberH0ZariskiConstructions
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # The canonical section comparison and the étale unit
 

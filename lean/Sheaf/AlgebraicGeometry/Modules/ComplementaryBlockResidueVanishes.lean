@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Fibrewise vanishing of the complementary block -/
 

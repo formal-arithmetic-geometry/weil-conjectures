@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
 
 /-! # Lower truncation of universally connective affine flat complexes -/
 

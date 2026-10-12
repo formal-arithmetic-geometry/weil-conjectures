@@ -8,6 +8,8 @@ module
 public import Sheaf.Topology.OpenModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.Paper.NonvanishingSectionTrivializes
+import Sheaf.Topology.RestrictInjectiveResolution
 
 /-! # Dividing restricted twisted cohomology by a nonvanishing section
 

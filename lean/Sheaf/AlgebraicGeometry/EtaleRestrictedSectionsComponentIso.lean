@@ -6,6 +6,8 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsFactors
+import Sheaf.AlgebraicGeometry.EtaleRestrictedTotalConstruction
+import Sheaf.Paper.EtaleTermwiseHypercohomology
 
 /-! # Degreewise restricted sections comparison
 

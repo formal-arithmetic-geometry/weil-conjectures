@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.PopescuLiftPresentation
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+import Sheaf.RingTheory.SingularIdeal
 
 /-! # Smooth fibres of the prepared Popescu quotient on a chart
 

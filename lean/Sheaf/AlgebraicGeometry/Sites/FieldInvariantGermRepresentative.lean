@@ -13,6 +13,7 @@ public import Mathlib.FieldTheory.KrullTopology
 import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import Sheaf.AlgebraicGeometry.Sites.FiniteGaloisSectionsDescent
 import Mathlib.FieldTheory.Galois.GaloisClosure
+import Sheaf.FieldTheory.GaloisAutomorphismExtension
 
 /-!
 # A section representing an invariant geometric germ

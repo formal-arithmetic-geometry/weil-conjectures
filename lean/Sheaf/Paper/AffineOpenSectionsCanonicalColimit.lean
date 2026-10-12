@@ -3,6 +3,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 @[expose] public section
 

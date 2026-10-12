@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.ColimitSiteAbelianStageImage
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
+import Sheaf.CategoryTheory.ColimitSiteFiniteUnitZeroDetection
 
 /-! # Matching lifts of generated abelian sections
 

@@ -5,6 +5,8 @@ Authors: SHEAF group E2
 -/
 module
 
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+
 public import
   WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 

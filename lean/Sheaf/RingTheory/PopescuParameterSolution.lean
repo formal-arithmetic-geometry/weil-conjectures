@@ -11,6 +11,15 @@ public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Extension.Presentation.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Artinian.Defs
+import Sheaf.AlgebraicGeometry.Ogoma
+import Sheaf.RingTheory.EssentiallySmoothBaseChange
+import Sheaf.RingTheory.EssentiallySmoothComp
+import Sheaf.RingTheory.PopescuEnlargeSolutionModulo
+import Sheaf.RingTheory.PopescuSolutionModulo
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.RegularRingSmoothAscent
+import Sheaf.RingTheory.RegularSequencePolynomialVariables
+import Sheaf.RingTheory.RegularSequencePowers
 
 /-!
 # Parameters and coefficient solutions for the explicit standardizer

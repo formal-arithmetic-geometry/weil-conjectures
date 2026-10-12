@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
 import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 /-! Degreewise exactness for the concrete Mayer--Vietoris complex.
 

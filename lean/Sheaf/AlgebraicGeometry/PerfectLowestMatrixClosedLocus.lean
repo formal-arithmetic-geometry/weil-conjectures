@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 import Sheaf.AlgebraicGeometry.PerfectJumpLoci
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 
 /-! # The lowest matrix-zero closed locus
 

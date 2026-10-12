@@ -1,6 +1,10 @@
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+import Sheaf.AlgebraicGeometry.EtaleOpenFreeSheafUnitCoherence
+import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
+import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison
 
 @[expose] public section
 

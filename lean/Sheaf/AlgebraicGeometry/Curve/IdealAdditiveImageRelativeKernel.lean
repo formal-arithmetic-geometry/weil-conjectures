@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # The additive ideal image is the pushforward of the relative additive kernel.
 

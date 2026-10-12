@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 import Sheaf.Algebra.Homology.KInjectiveProducts
 import Sheaf.Algebra.Homology.RoosComplex
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
 
 @[expose] public section
 universe w v u

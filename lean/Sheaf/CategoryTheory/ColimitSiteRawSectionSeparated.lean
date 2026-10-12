@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+import Sheaf.CategoryTheory.FilteredColimitCategories
 
 /-! # Raw sections: separated on stage-image covers
 

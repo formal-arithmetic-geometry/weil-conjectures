@@ -20,6 +20,7 @@ import Sheaf.RingTheory.FormalGlueingIsogeny
 import Sheaf.Topology.GlueSheavesOfModules
 import Sheaf.AlgebraicGeometry.CompletionIsogenyFromHomLift
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.Coherent
 
 /-! # Existence of outgoing coherent formal algebraizations
 

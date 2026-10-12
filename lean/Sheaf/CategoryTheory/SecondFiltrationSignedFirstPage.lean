@@ -8,6 +8,9 @@ module
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
 import Sheaf.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.Filtration
 
 /-! # The signed row comparison for one concrete quotient page
 

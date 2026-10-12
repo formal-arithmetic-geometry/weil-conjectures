@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.OpenModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.Topology.RestrictInjectiveResolution
 
 /-! # Affine-local presentation of ordinary higher direct images
 

@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial
 public import Mathlib.RingTheory.Ideal.CotangentBaseChange
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
+import Sheaf.AlgebraicGeometry.AffineConormalSections
 
 /-! # Affine comparison for the canonical conormal base-change map
 

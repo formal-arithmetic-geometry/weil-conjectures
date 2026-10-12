@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.CategoryTheory.Abelian.ExtRightDerivedHom
+import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
 
 /-! # Terminal-section resolution computations and Ext cocycles
 

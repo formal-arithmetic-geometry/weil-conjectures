@@ -7,6 +7,9 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.FilteredComplexBoundariesLECycles
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Successor boundaries are the inverse image of page boundaries

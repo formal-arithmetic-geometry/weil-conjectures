@@ -1,5 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.EtaleCoefficientInjectiveSystemData
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 @[expose] public section
 universe u

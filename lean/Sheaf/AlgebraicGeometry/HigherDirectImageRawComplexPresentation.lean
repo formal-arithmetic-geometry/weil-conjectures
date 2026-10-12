@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
+import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Presenting raw module cohomology by abelian etale complexes
 

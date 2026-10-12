@@ -6,6 +6,9 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+import Sheaf.AlgebraicGeometry.AffineEtaleCoveringEventually
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Descent of a finite affine covering with finitely many factorizations
 

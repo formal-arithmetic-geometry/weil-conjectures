@@ -9,6 +9,14 @@ public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionSections
+import Sheaf.AlgebraicGeometry.LerayDegenerateSections
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
+import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-! # Affine sections of the resolution-defined flat base-change comparison
 

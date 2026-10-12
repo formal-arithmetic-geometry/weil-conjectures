@@ -2,6 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Finite-level internal Hom quotient annihilation
 

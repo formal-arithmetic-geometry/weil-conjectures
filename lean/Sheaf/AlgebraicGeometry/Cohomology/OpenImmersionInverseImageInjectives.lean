@@ -5,6 +5,8 @@ Authors: SHEAF group K1
 -/
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import Sheaf.AlgebraicGeometry.ZariskiOpenRestrictionInjectives
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 /-! # Open inverse image preserves injectives
 
 Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.

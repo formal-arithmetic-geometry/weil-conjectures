@@ -6,6 +6,11 @@ Authors: SHEAF group V1
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+import Sheaf.AlgebraicGeometry.DescendSurjective
+import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Descent of a finite qcqs étale covering
 

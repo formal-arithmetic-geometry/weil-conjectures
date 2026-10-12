@@ -6,6 +6,11 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
+import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Transfer of normalized resolution comparisons

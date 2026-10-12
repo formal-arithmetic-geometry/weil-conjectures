@@ -5,6 +5,8 @@ Authors: SHEAF group K1
 -/
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
 /-! # Restriction of morphisms from a represented open
 
 Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.

@@ -5,6 +5,7 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
+import Sheaf.RingTheory.PresentationLocalizedConormalSplit
 
 @[expose] public section
 

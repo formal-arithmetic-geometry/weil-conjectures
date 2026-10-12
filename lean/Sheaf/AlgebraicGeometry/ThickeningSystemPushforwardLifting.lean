@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Lifting an adic system to the closed thickenings
 

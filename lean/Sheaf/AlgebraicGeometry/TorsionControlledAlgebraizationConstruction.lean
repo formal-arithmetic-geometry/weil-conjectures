@@ -18,6 +18,7 @@ import Sheaf.RingTheory.FormalGlueingIsogeny
 import Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLift
 import Sheaf.Topology.GlueSheavesOfModules
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.Coherent
 
 /-! # Construction of a torsion-controlled algebraization
 

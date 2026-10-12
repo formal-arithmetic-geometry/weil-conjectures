@@ -8,6 +8,14 @@ module
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct
+import Sheaf.RingTheory.ClosedPointDimensionLocalRing
+import Sheaf.RingTheory.FlatOfFlatClosedFiber
+import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
+import Sheaf.RingTheory.MiracleFlatness
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
+import Sheaf.RingTheory.SmoothFibreRegularLocal
 
 /-! # Fibrewise flatness of an unramified smooth chart
 

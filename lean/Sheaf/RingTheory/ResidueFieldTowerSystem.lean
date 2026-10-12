@@ -8,6 +8,7 @@ module
 public import Mathlib.Order.DirectedInverseSystem
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+import Sheaf.RingTheory.FlatLocalTowerDirectLimit
 
 /-!
 # A coherent system of flat local rings covering a residue-field extension

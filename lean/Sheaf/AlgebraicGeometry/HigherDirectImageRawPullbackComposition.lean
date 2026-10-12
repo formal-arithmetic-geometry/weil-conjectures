@@ -6,6 +6,8 @@ Authors: SHEAF group E2
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
+import Sheaf.AlgebraicGeometry.EtalePullbackSingleComp
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Composition of raw cohomology pullbacks
 

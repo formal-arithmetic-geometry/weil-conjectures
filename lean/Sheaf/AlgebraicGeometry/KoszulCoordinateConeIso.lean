@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Linear
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Sheaf.RingTheory.KoszulTensorConeCoordinates
 
 /-! # A Koszul coordinate as a scalar mapping cone
 

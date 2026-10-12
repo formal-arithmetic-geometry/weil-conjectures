@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Homology.HomComplex
 public import Sheaf.Paper.DerivedHomMayerVietoris
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-!
 # Hom complexes commute with open restriction

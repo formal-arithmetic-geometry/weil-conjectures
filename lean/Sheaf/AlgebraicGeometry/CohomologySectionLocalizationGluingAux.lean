@@ -2,6 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.Paper.LocalizedCohomologyMayerVietoris
 
 universe u_1
 @[expose] public section

@@ -7,6 +7,13 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Algebra.Homology.DerivedInternalHom
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.StrictlyPerfectDerivedInternalHom
+import Sheaf.Paper.DerivedInternalHomRestrictOpen
 
 /-! # The local ordinary model of canonical derived evaluation
 

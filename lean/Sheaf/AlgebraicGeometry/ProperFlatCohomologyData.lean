@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 
 /-! # Bounded flat models for quasi-compact separated cohomology -/
 

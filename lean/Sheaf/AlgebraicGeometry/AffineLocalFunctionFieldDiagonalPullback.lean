@@ -3,6 +3,8 @@ module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import Sheaf.RingTheory.LocalDomainDimOnePrincipalLocalization
 
 @[expose] public section
 

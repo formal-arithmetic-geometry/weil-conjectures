@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # The image of nil-ideal units is the pushforward of the relative unit kernel.
 

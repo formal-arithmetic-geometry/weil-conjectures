@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineQuotient
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-! # CoherentFormalModulesAffineReconstruction
 

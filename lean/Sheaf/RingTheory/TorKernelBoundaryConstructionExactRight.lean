@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.RingTheory.TorKernelBoundaryConstruction
+import Sheaf.Algebra.Homology.FreeResolutionSesSplit
 
 @[expose] public section
 universe u

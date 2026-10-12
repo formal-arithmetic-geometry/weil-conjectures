@@ -6,6 +6,8 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMapBijective
 
 /-!
 # Existence of normalized resolution comparisons

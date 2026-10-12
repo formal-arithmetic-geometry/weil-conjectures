@@ -20,6 +20,7 @@ import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
+import Sheaf.RingTheory.KoszulConormalBasis
 
 /-! # Cohomology sheaves of a Koszul-regular immersion
 

@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
+import Sheaf.AlgebraicGeometry.Thickening
 
 @[expose] public section
 

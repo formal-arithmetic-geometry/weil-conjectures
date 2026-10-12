@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.Algebra.Homology.HomTensorTotal
 
 /-! # Canonical derived tensor/internal-Hom bijections
 Source: Stacks Project, cohomology.tex, Tag 08DJ (lemma-internal-hom).

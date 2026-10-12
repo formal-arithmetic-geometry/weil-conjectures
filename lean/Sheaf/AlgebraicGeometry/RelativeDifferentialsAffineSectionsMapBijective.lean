@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMap
+import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 
 @[expose] public section
 

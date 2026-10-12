@@ -6,6 +6,8 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonIso
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
 
 /-! # Nested-open compatibility for the explicit comparison
 

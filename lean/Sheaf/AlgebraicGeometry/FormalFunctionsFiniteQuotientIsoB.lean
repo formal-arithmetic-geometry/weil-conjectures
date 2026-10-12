@@ -7,6 +7,9 @@ import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 @[expose] public section
 universe u
 set_option autoImplicit false

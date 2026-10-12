@@ -14,6 +14,8 @@ import Sheaf.CategoryTheory.TruncationHypercohomology
 import Sheaf.CategoryTheory.TruncationTriangle
 import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
 import Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification
+import Sheaf.CategoryTheory.KInjectiveBridge
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-! # Individual natural truncation couples
 

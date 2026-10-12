@@ -1,5 +1,6 @@
 module
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 universe u

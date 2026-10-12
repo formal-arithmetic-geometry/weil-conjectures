@@ -4,6 +4,8 @@ public import Sheaf.Paper.PQFCohomology
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.Algebra.Homology.HomologySequence
+import Sheaf.AlgebraicGeometry.BoundaryCechLocalLifts
+import Sheaf.AlgebraicGeometry.CechH1MapNatural
 
 @[expose] public section
 

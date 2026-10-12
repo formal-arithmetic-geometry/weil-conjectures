@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
+import Sheaf.Algebra.Homology.HomComplex
 
 /-!
 # Degreewise sections of the sheaf Hom complex

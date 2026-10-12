@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.ModulePullbackComparisonTargetAutomorphism
+import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Coordinate compatibility with a prescribed module comparison
 

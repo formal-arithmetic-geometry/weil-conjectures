@@ -6,6 +6,9 @@ Authors: SHEAF group J3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Whole-to-open restriction of normalized resolution comparisons

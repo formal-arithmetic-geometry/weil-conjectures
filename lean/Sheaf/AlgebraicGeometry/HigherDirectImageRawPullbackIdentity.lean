@@ -6,6 +6,7 @@ Authors: SHEAF group E2
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Identity of raw cohomology pullback
 

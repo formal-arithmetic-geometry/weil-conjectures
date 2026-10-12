@@ -16,6 +16,10 @@ public import Sheaf.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 import Sheaf.RingTheory.FiniteFreeMapResidueLocalization
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Local fibre-generator lifting after descent of the pullback bundles
 

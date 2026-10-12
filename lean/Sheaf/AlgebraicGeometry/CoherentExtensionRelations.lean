@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeSubKernel
 
 /-! # Coherent ExtensionRelations
 

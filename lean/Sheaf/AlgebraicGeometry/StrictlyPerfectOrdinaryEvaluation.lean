@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 
 /-! # Ordinary evaluation for a strictly perfect complex
 

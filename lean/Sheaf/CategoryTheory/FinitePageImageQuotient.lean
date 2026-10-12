@@ -6,6 +6,9 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.DerivedCoupleExact
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # The finite derived-couple quotient in a half-plane

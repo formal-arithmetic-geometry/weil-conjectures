@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
 public import Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso
 
 /-! # Čech comparison and the inverse-image unit
 

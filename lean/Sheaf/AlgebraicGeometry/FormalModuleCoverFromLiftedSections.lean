@@ -10,6 +10,10 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # A completed cover from liftable generating sections
 

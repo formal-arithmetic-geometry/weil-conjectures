@@ -6,6 +6,8 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.CategoryTheory.FilteredCohomologyImage
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.Filtration
 
 /-! # A cycle presentation of the graded cohomology image
 

@@ -4,6 +4,7 @@ module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.RingTheory.Etale.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 # Generic algebra of a finite etale open cover

@@ -5,6 +5,8 @@ Authors: SHEAF group U1
 -/
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
 /-! # Restriction data for the cartesian open-subscheme square
 
 Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.

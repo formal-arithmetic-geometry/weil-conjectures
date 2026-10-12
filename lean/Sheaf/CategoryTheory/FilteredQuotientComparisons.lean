@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison
 import Sheaf.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
 import Sheaf.CategoryTheory.FilteredComplexBoundariesLECycles
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Natural comparisons for concrete cycle-boundary quotients

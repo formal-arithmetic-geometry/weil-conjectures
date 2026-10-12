@@ -6,6 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.ExactCouple
 
 /-!
 # Exact couples with finite diagonal cocones

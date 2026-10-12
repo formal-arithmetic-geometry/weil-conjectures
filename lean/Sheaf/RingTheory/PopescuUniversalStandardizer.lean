@@ -8,6 +8,11 @@ module
 public import Sheaf.RingTheory.PopescuResolution
 public import Sheaf.RingTheory.StrictlyStandardElement
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.RingTheory.ImprovePresentation
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.SingularIdealLocalizationSmooth
+import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
+import Sheaf.RingTheory.StrictlyStandardBaseChange
 
 /-!
 # The universal standardizer before choosing parameters

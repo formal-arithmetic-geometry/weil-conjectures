@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 import Sheaf.CategoryTheory.LeftDerivedValueMorphism
 import Sheaf.CategoryTheory.DerivedFunctorShift
+import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 
 @[expose] public section
 

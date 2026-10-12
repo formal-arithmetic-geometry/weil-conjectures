@@ -1,6 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.AlgebraicGeometry.DerivedPullback
 @[expose] public section
 set_option autoImplicit false
 universe u
