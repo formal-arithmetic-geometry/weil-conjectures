@@ -8,7 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints
 import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
@@ -43,6 +42,8 @@ theorem IsAffineOpen.finite_compl_of_integral_dim_one
     (hdim : topologicalKrullDim X = 1) {U : X.Opens}
     (hU : IsAffineOpen U) (hne : (U : Set X).Nonempty) :
     ((U : Set X)ᶜ).Finite := by
-  sorry
+  have _ := hU
+  let : IsNoetherian X := IsNoetherian.mk
+  exact U.isOpen.finite_compl_of_topologicalKrullDim_le_one hdim.le hne
 
 end AlgebraicGeometry

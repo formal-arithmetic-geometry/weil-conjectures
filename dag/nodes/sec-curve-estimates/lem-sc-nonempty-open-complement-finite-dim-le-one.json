@@ -1,0 +1,103 @@
+{
+ "id": "lem-sc-nonempty-open-complement-finite-dim-le-one",
+ "kind": "statement",
+ "title": "Nonempty opens have finite complements in irreducible Noetherian curves",
+ "statement": "Let $X$ be an irreducible [def-weil-irreducible-components] quasi-sober Noetherian Kolmogorov topological space with topological Krull dimension at most one [def-kun-topological-krull-dimension]. The complement of any nonempty open subset of $X$ is finite.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/Topology/KrullDimension.lean",
+  "place": "IsOpen.finite_compl_of_topologicalKrullDim_le_one; proved source-library theorem"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "The complement is closed and Noetherian, hence has a finite cover by irreducible closed subsets, by the topological finite-component theorem underlying [lem-sc-noetherian-closed-subset-finite-components]. Each has a generic point by quasi-sobriety. The generic point lies outside the nonempty open, so [lem-sc-dim-one-point-outside-open-closed] makes its singleton closed. Each subset is therefore that singleton, and their finite union is finite. This is the existing complete Lean proof of IsOpen.finite_compl_of_topologicalKrullDim_le_one.",
+   "uses": [
+    "lem-sc-dim-one-point-outside-open-closed",
+    "lem-sc-noetherian-closed-subset-finite-components"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dim-one-point-outside-open-closed",
+  "lem-sc-noetherian-closed-subset-finite-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/Topology/KrullDimension.lean",
+  "place": "IsOpen.finite_compl_of_topologicalKrullDim_le_one; proved source-library theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The complement of a nonempty open subset of an irreducible noetherian sober T0 space of dimension at most one is finite",
+   "results": "genericPoints.finite, TopologicalSpace.NoetherianSpace.finite_irreducibleComponents, TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent, TopologicalSpace.NoetherianSpace.exists_open_ne_empty_le_irreducibleComponent, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, TopologicalSpace.NoetherianSpace.exists_finset_irreducible, TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible, TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib match; existing source-library theorem read and used."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*compl|compl.*finite",
+   "results": "Mathlib/Topology/Bornology/Basic.lean, Mathlib/Topology/Bornology/Basic.lean, Mathlib/Topology/Bornology/Basic.lean, Mathlib/Topology/DiscreteSubset.lean, Mathlib/Topology/DiscreteSubset.lean, Mathlib/Topology/DiscreteSubset.lean, Mathlib/Topology/DiscreteSubset.lean, Mathlib/Topology/DiscreteSubset.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib match; existing source-library theorem read and used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The complement of a nonempty open in an irreducible Noetherian sober T0 space of dimension at most one is finite",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComplementFiniteOnIntegralCurve",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-complement-finite-on-integral-curve",
+   "place": "direct specialization of the proved general topological complement theorem",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.Topology.KrullDimension",
+  "declaration": "IsOpen.finite_compl_of_topologicalKrullDim_le_one",
+  "statement": "theorem IsOpen.finite_compl_of_topologicalKrullDim_le_one [QuasiSober X] [NoetherianSpace X] (h : topologicalKrullDim X ≤ 1) {U : Set X} (hU : IsOpen U) (hne : U.Nonempty) : Uᶜ.Finite",
+  "branch": "slopmaster2",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T110315-L-620274",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T110315-L-620274",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

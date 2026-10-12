@@ -30,47 +30,22 @@
  ],
  "proof": [
   {
-   "text": "Because $U$ is open, its complement $E:=X\\setminus U$ is closed. Since $U$ is nonempty, the hypotheses of the point-outside-open lemma apply to every $x\\in E$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09ND, proof, setup before the sentence 'Since X is Noetherian'"
-   }
-  },
-  {
-   "text": "For each $x\\in E$, [lem-sc-dim-one-point-outside-open-closed] gives that $\\{x\\}$ is closed in $X$. Its hypotheses hold: $X$ is irreducible because it is integral [def-pc-integral-scheme]; $X$ is Kolmogorov, since for $y\\neq z$ in $X$ the closures $\\overline{\\{y\\}}$, $\\overline{\\{z\\}}$ are irreducible closed subsets with generic points $y$ and $z$, hence distinct by the uniqueness of generic points in [lem-sc-scheme-sober], so one of the points, say $z$, is not in the closure of the other and the open set $X\\setminus\\overline{\\{y\\}}$ contains $z$ but not $y$; $X$ has topological Krull dimension $1\\leq1$ [def-kun-topological-krull-dimension]; and $U$ is a nonempty open subset with $x\\notin U$.",
+   "text": "Combine the given IsLocallyNoetherian and CompactSpace instances using IsNoetherian.mk. Mathlib supplies the NoetherianSpace instance, integrality supplies IrreducibleSpace, and schemes have T0Space and QuasiSober instances [lem-sc-scheme-sober]. Apply [lem-sc-nonempty-open-complement-finite-dim-le-one] to U.isOpen, hne, and hdim.le. Affineness is unnecessary for this stronger theorem, but the statement and its named binders remain unchanged.",
    "uses": [
     "lem-sc-scheme-sober",
-    "lem-sc-dim-one-point-outside-open-closed"
+    "lem-sc-nonempty-open-complement-finite-dim-le-one"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09ND, proof, second sentence and the dimension-one point argument"
-   }
-  },
-  {
-   "text": "Thus every point of the closed subset $E$ is closed in $X$. Applying [lem-sc-noetherian-closed-points-finite] to $E$ shows that $E=X\\setminus U$ is finite.",
-   "uses": [
-    "lem-sc-noetherian-closed-points-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 0BA8, conclusion that a closed subset all of whose points are closed is finite"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-scheme-sober",
-  "lem-sc-dim-one-point-outside-open-closed",
-  "lem-sc-noetherian-closed-points-finite"
+  "lem-sc-nonempty-open-complement-finite-dim-le-one"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09ND, proof, sentence 'Since X is Noetherian, each of the sets X \\setminus U_i is finite', with Properties Lemma 0BA8"
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/Topology/KrullDimension.lean",
+  "place": "IsOpen.finite_compl_of_topologicalKrullDim_le_one; proved source-library theorem"
  },
  "mathlib_searches": [
   {
@@ -152,5 +127,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T110315-L-620274",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
