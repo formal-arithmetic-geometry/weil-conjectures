@@ -10142,3 +10142,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: merged deliver/N4/Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift (stage 3; reviewer PASS; first push; landing 20261012T234222-L-2126079 (proof); batch 20261012T234214; modules 1; new nodes 1)
 - 23:42 L: merged deliver/P1/Sheaf.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent (stage 3; reviewer PASS; after a return; landing 20261012T234222-L-2126206 (interface); batch 20261012T234214; modules 3; new nodes 2)
 - 23:42 L: merged deliver/P4/Sheaf.AlgebraicGeometry.Curve.NilIdealUnitImageRelativeKernel (stage 3; reviewer PASS; after a return; landing 20261012T234223-L-2126313 (proof); batch 20261012T234214; modules 1; new nodes 0)
+- 23:42 L: merged deliver/R1/Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftExists (stage 3; reviewer PASS; first push; landing 20261012T234223-L-2126460 (interface); batch 20261012T234214; modules 3; new nodes 2)

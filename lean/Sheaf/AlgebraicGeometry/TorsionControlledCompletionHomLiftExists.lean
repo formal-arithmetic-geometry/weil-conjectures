@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftRaw
+import Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftCompletion
 
 @[expose] public section
 
@@ -35,6 +37,9 @@ theorem torsionControlled_completion_hom_lift_exists
         (cokernel a'.hom))))
     (θ : (completion X J).obj F ⟶ (completion X J).obj F')
     (hθ : θ ≫ (completion X J).map a' = (completion X J).map a) :
-    ∃ g : F ⟶ F', g ≫ a' = a ∧ (completion X J).map g = θ := by sorry
+    ∃ g : F ⟶ F', g ≫ a' = a ∧ (completion X J).map g = θ := by
+  obtain ⟨g, hg⟩ := torsionControlled_completion_hom_lift_raw J H F F' a a' ha ha'
+  exact ⟨g, hg, torsionControlled_completion_hom_lift_completion
+    J H F F' a a' ha ha' θ hθ g hg⟩
 
 end AlgebraicGeometry

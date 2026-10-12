@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), affine gluing argument"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "torsion controlled completion hom lift coherent modules",
+   "results": "No exact match found; decomposition statement retained.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion map coherent module lift",
+   "results": "Only generic adic completion map lemmas; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent completion morphism gluing",
+   "results": "No exact match found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*hom.*lift|[Gg]lue.*[Mm]odule.*[Hh]om",
+   "results": "No relevant declaration found in Mathlib source; only unrelated completion maps and gluing APIs.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftExists",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-torsion-controlled-completion-hom-lift-exists",
+   "place": "decomposition of affine gluing step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-weil-pbc-torsion-controlled-completion-hom-lift-completion",
+ "title": "Completion compatibility of the lift",
+ "statement": "Under the hypotheses of lem-weil-pbc-torsion-controlled-completion-hom-lift-exists, if g:F→F′ satisfies g≫a′=a then completion.map g=θ.",
+ "proof": [
+  {
+   "text": "Identify the localized comparison maps with θ after completion and use formal gluing exactness and sheaf gluing to preserve the equality globally.",
+   "uses": [
+    "lem-weil-pbc-torsion-controlled-completion-hom-lift-raw"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-torsion-controlled-completion-hom-lift-raw"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), affine gluing argument"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftCompletion",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionControlledCompletionHomLiftCompletion.lean",
+  "declaration": "AlgebraicGeometry.torsionControlled_completion_hom_lift_completion",
+  "statement": "theorem torsionControlled_completion_hom_lift_completion\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    (H F F' : CoherentModules X) (a : F ⟶ H) (a' : F' ⟶ H)\n    (ha : (∃ s : ℕ, 1 ≤ s ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (kernel a.hom)) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (cokernel a.hom))))\n    (ha' : (∃ s : ℕ, 1 ≤ s ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (kernel a'.hom)) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (cokernel a'.hom))))\n    (θ : (completion X J).obj F ⟶ (completion X J).obj F')\n    (hθ : θ ≫ (completion X J).map a' = (completion X J).map a)\n    (g : F ⟶ F') (hg : g ≫ a' = a) :\n    (completion X J).map g = θ",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T234223-L-2126460",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T234223-L-2126460",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
