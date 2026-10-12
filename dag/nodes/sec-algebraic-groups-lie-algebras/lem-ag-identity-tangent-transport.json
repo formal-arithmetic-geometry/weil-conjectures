@@ -1,0 +1,123 @@
+{
+ "id": "lem-ag-identity-tangent-transport",
+ "kind": "statement",
+ "title": "Identity tangent infinitesimal-point transport",
+ "statement": "For a field k and group scheme G over Spec k, writing x for the identity and r for the structural residue map, there is an equivalence e : infPoints G ≃ schemeTangentSpace k G.left G.hom x whose underlying morphism is Spec.map (DualNumber.mapRingHom r) composed with the corresponding tangent-group point.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-tangent/def-wf-lie-algebra-derivation.md",
+  "place": "identity tangent-space infinitesimal-point argument"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sc-scheme-tangent-space",
+  "def-weil-residue-field",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "The identity residue rationality theorem supplies a bijective structural residue map a and Spec.map a followed by the identity section equals the canonical residue point. Regard a as an isomorphism of commutative rings. Naturality of the augmentation and constants inclusion gives cK composed with d = b composed with ck and d composed with qk = qK composed with b, for d the dual-number spectrum map and b = Spec.map a. The identity section equation also gives the canonical residue point composed with the structural morphism = b.",
+   "uses": [
+    "lem-ag-lie-identity-residue-rational"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a tangent-group point v, precompose its underlying morphism by d. The first naturality identity and v reducing to the identity prove the tangent closed-point condition; the second identity and v being an over-morphism prove the tangent base condition. This gives the forward function.",
+   "uses": [
+    "def-wf-lie-algebra-derivation",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The forward function is injective because d is an epimorphism and equality of underlying maps detects over-morphisms and subtype points. For a tangent vector theta use inv d composed with theta as an over-morphism; its over equation follows from the second naturality identity and its reducing-to-identity equation from the first one after cancelling b. This gives a tangent-group point. Both inverse identities follow by cancelling d with inv d. Compose this type equivalence with infPointsEquivTangentGroup.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra-derivation",
+  "lem-ag-lie-identity-residue-rational"
+ ],
+ "proof_origin": {
+  "by": "E3 stage 3; explicit argument of the parent node",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-tangent/def-wf-lie-algebra-derivation.md",
+  "place": "identity tangent-space infinitesimal-point argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lie algebra of group scheme linearly equivalent to dual number tangent vectors at identity",
+   "results": "No exact match; hits: ['GroupLieAlgebra', 'derivationToSquareZeroEquivLift', 'instLieAlgebraGroupLieAlgebra', 'derivationToSquareZeroEquivLift_apply_coe_apply', 'LieAlgebra.Extension.toKer', 'instLieRingGroupLieAlgebra', 'instLieAlgebraAddGroupLieAlgebra', 'AddGroupLieAlgebra']",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "51d9f160f4affdf1"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTangentSpace.*Lie|Lie.*schemeTangentSpace|infPointsEquiv",
+   "results": "No exact match; hits: []",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group scheme dual number tangent vectors addition agrees with multiplication infinitesimal points",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-ag-lie-identity-tangent-equiv",
+   "place": "infinitesimal-point identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-i-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.IdentityTangentTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/IdentityTangentTransport.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.exists_identity_tangent_transport",
+  "statement": "theorem exists_identity_tangent_transport\n    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let x := unitSection G (IsLocalRing.closedPoint k)\n    let r : k →+* G.left.residueField x :=\n      (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom\n    ∃ e : infPoints G ≃ schemeTangentSpace k G.left G.hom x,\n      ∀ v : infPoints G, (e v).val =\n        Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom r)) ≫\n          (infPointsEquivTangentGroup G v).val.left",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T144104-L-2092562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T144104-L-2092562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

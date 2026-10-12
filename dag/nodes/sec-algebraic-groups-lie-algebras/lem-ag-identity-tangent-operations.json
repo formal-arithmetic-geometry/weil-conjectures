@@ -1,0 +1,118 @@
+{
+ "id": "lem-ag-identity-tangent-operations",
+ "kind": "statement",
+ "title": "Identity tangent operation compatibility",
+ "statement": "Let k be any field and G a group object over Spec k, x its identity point, and r the structural residue-field homomorphism. Equip the dual-number tangent subtype at x with its specified additive group and with the k-module action obtained by restricting residue-field scalars along r. For every function F from infPoints G to this subtype whose underlying morphism on v is Spec.map (DualNumber.mapRingHom r) composed with the tangent-group point of v, F(v*w)=F(v)+F(w); and for every scalar t in k, F(infPointsScale G ((Scheme.ΓSpecIso k).inv t) v)=t • F(v). No bijectivity of F is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-tangent/def-wf-lie-algebra-derivation.md",
+  "place": "identity tangent-space infinitesimal-point argument"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sc-scheme-tangent-space",
+  "def-weil-residue-field",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "Apply identity_tangent_transport_addition to obtain multiplication compatibility for the prescribed transport function F.",
+   "uses": [
+    "lem-ag-identity-tangent-addition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "First prove the private scale_toSpec lemma: unfold dualNumbersToSpec, use toSpecΓ_naturality and combine the spectrum maps. Equality of the ring maps is coefficientwise: the constant coefficient is unchanged and the epsilon coefficient is multiplied by the scalar read through ΓSpecIso.inv. Cancel dualNumbersToSpec to obtain the conjugation formula for the scaling map. Coefficientwise calculation also proves that the dual-number map induced by the structural residue map commutes with scaling by t on k and by r(t) on the residue field. The chosen module specification from exists_tangentVectors_vectorSpace identifies its scalar action with precomposition by exactly that residue scaling map. Unfold infPointsScale and the underlying infPointsEquivTangentGroup map, use functoriality of inverses under Over.forget, and the two scaling identities. Associativity and subtype extensionality give the scalar compatibility identity. This holds also at scalar zero.",
+   "uses": [
+    "lem-sc-tangent-space-vector-space",
+    "def-wf-lie-algebra-derivation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra-derivation",
+  "lem-ag-identity-tangent-addition",
+  "lem-sc-tangent-space-vector-space"
+ ],
+ "proof_origin": {
+  "by": "E3 stage 3; explicit argument of the parent node",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-tangent/def-wf-lie-algebra-derivation.md",
+  "place": "identity tangent-space infinitesimal-point argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lie algebra of group scheme linearly equivalent to dual number tangent vectors at identity",
+   "results": "No exact match; hits: ['GroupLieAlgebra', 'derivationToSquareZeroEquivLift', 'instLieAlgebraGroupLieAlgebra', 'derivationToSquareZeroEquivLift_apply_coe_apply', 'LieAlgebra.Extension.toKer', 'instLieRingGroupLieAlgebra', 'instLieAlgebraAddGroupLieAlgebra', 'AddGroupLieAlgebra']",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "51d9f160f4affdf1"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTangentSpace.*Lie|Lie.*schemeTangentSpace|infPointsEquiv",
+   "results": "No exact match; hits: []",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group scheme dual number tangent vectors addition agrees with multiplication infinitesimal points",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-ag-lie-identity-tangent-equiv",
+   "place": "infinitesimal-point identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-i-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.IdentityTangentOperations",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/IdentityTangentOperations.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.identity_tangent_transport_operations",
+  "statement": "theorem identity_tangent_transport_operations\n    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let x := unitSection G (IsLocalRing.closedPoint k)\n    let r : k →+* G.left.residueField x :=\n      (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom\n    letI : Module k (schemeTangentSpace k G.left G.hom x) :=\n      Module.compHom (schemeTangentSpace k G.left G.hom x) r\n    ∀ F : infPoints G → schemeTangentSpace k G.left G.hom x,\n      (∀ v : infPoints G, (F v).val =\n        Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom r)) ≫\n          (infPointsEquivTangentGroup G v).val.left) →\n      (∀ v w, F (v * w) = F v + F w) ∧\n      (∀ (t : k) v,\n        F (infPointsScale G ((Scheme.ΓSpecIso (.of k)).inv.hom t) v) = t • F v)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T144104-L-2092562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T144104-L-2092562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

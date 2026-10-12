@@ -1,0 +1,114 @@
+{
+ "id": "lem-ag-identity-tangent-addition",
+ "kind": "statement",
+ "title": "Identity tangent addition compatibility",
+ "statement": "Let k be a field and G a group scheme over Spec k. Let x be its identity point, r the structural residue-field map, and F any function from infPoints G to schemeTangentSpace k G.left G.hom x such that the underlying morphism of F(v) is Spec.map (DualNumber.mapRingHom r) followed by the tangent-group point of v. Then F(v*w)=F(v)+F(w) for all infinitesimal points v,w. No bijectivity of F is assumed and no scalar compatibility is concluded.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-tangent/def-wf-lie-algebra-derivation.md",
+  "place": "identity tangent-space infinitesimal-point argument"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sc-scheme-tangent-space",
+  "def-weil-residue-field",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "Use the tangent vector-space specification to compute addition as precomposition of the unique gluing with the sum map. Over the two-direction square-zero spectrum extend each point by its coordinate projection and multiply the extensions in the group of over-morphisms. Restriction to either axis is the corresponding point times the identity (or identity times the point), by the common closed-point equation; the unit laws identify these restrictions with the original points. Uniqueness of the pushout gluing identifies the product extension with the gluing. Restriction along the sum map is the product of the original points because both coordinate projections composed with that map are identities. Mapping coefficients by r commutes with all these maps. Subtype extensionality gives the addition identity.",
+   "uses": [
+    "lem-sc-tangent-space-vector-space",
+    "def-sc-group-scheme",
+    "def-wf-lie-algebra-derivation",
+    "lem-ag-lie-identity-residue-rational"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-wf-lie-algebra-derivation",
+  "lem-ag-lie-identity-residue-rational",
+  "lem-sc-tangent-space-vector-space"
+ ],
+ "proof_origin": {
+  "by": "E3 stage 3; explicit argument of the parent node",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-d-tangent/def-wf-lie-algebra-derivation.md",
+  "place": "identity tangent-space infinitesimal-point argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lie algebra of group scheme linearly equivalent to dual number tangent vectors at identity",
+   "results": "No exact match; hits: ['GroupLieAlgebra', 'derivationToSquareZeroEquivLift', 'instLieAlgebraGroupLieAlgebra', 'derivationToSquareZeroEquivLift_apply_coe_apply', 'LieAlgebra.Extension.toKer', 'instLieRingGroupLieAlgebra', 'instLieAlgebraAddGroupLieAlgebra', 'AddGroupLieAlgebra']",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "51d9f160f4affdf1"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeTangentSpace.*Lie|Lie.*schemeTangentSpace|infPointsEquiv",
+   "results": "No exact match; hits: []",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group scheme dual number tangent vectors addition agrees with multiplication infinitesimal points",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-ag-lie-identity-tangent-equiv",
+   "place": "infinitesimal-point identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-i-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.IdentityTangentAddition",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/IdentityTangentAddition.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.identity_tangent_transport_addition",
+  "statement": "theorem identity_tangent_transport_addition\n    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let x := unitSection G (IsLocalRing.closedPoint k)\n    let r : k →+* G.left.residueField x :=\n      (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom\n    letI : Module k (schemeTangentSpace k G.left G.hom x) :=\n      Module.compHom (schemeTangentSpace k G.left G.hom x) r\n    ∀ F : infPoints G → schemeTangentSpace k G.left G.hom x,\n      (∀ v : infPoints G, (F v).val =\n        Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom r)) ≫\n          (infPointsEquivTangentGroup G v).val.left) →\n      ∀ v w, F (v * w) = F v + F w",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T144104-L-2092562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T144104-L-2092562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
