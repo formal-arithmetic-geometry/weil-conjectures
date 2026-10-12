@@ -7,7 +7,15 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.RingHom.Flat
-import Sheaf.RingTheory.FiniteAfterCompletion
+import Mathlib.RingTheory.AdicCompletion.LocalRing
+import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+
+/-!
+# Bijectivity of flat compatible completion maps
+
+Source: More on Algebra, Lemma Tag 0AGX. The proof uses completeness and separation
+for surjectivity, and faithful flatness for injectivity.
+-/
 
 @[expose] public section
 
@@ -51,6 +59,49 @@ theorem completion_map_bijective
       (AdicCompletion (IsLocalRing.maximalIdeal A) A)) =
       (algebraMap B (AdicCompletion (IsLocalRing.maximalIdeal B) B)).comp φ)
     (hflat : φhat.Flat) : Function.Bijective φhat := by
-  sorry
+  let m := IsLocalRing.maximalIdeal A
+  let n := IsLocalRing.maximalIdeal B
+  let R := AdicCompletion m A
+  let S := AdicCompletion n B
+  have hn : n.FG := Ideal.fg_of_isNoetherianRing n
+  let := φhat.toAlgebra
+  have hmaxhat : Ideal.map φhat (IsLocalRing.maximalIdeal R) =
+      IsLocalRing.maximalIdeal S := by
+    rw [AdicCompletion.maximalIdeal_eq_map, Ideal.map_map, hcomp,
+      ← Ideal.map_map, hmax, ← AdicCompletion.maximalIdeal_eq_map]
+  have : IsLocalHom φhat :=
+    ((IsLocalRing.local_hom_TFAE φhat).out 0 2).mpr hmaxhat.le
+  have : Module.Flat R S := hflat
+  -- Flat local maps are faithfully flat, hence injective.
+  have : Module.FaithfullyFlat R S := Module.FaithfullyFlat.of_flat_of_isLocalHom
+  refine ⟨FaithfulSMul.algebraMap_injective R S, ?_⟩
+  -- Lift residues, then use completeness of R and separation of S.
+  have hlift (s : S) : ∃ r : R, s - φhat r ∈ IsLocalRing.maximalIdeal S := by
+    obtain ⟨b, hb⟩ := Ideal.Quotient.mk_surjective (AdicCompletion.evalOneₐ n s)
+    obtain ⟨q, hq⟩ := hres.surjective (Ideal.Quotient.mk n b)
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective q
+    have hqa : Ideal.Quotient.mk n (φ a) = Ideal.Quotient.mk n b := by
+      simpa only [Ideal.quotientMap_mk] using hq
+    refine ⟨algebraMap A R a, ?_⟩
+    rw [AdicCompletion.maximalIdeal_eq_map]
+    have hzero : AdicCompletion.evalOneₐ n (s - φhat (algebraMap A R a)) = 0 := by
+      have ha : φhat (algebraMap A R a) = algebraMap B S (φ a) :=
+        DFunLike.congr_fun hcomp a
+      rw [map_sub, ha, (AdicCompletion.evalOneₐ n).commutes]
+      exact sub_eq_zero.mpr (hb.symm.trans hqa.symm)
+    rw [← AdicCompletion.ker_evalOneₐ_eq_map n hn]
+    exact hzero
+  have : IsHausdorff (Ideal.map φhat (IsLocalRing.maximalIdeal R)) S := by
+    rw [hmaxhat]
+    infer_instance
+  apply surjective_of_mk_map_comp_surjective (I := IsLocalRing.maximalIdeal R) φhat
+  intro z
+  obtain ⟨s, rfl⟩ := Ideal.Quotient.mk_surjective z
+  obtain ⟨r, hr⟩ := hlift s
+  refine ⟨r, ?_⟩
+  change Ideal.Quotient.mk _ (φhat r) = Ideal.Quotient.mk _ s
+  apply (Ideal.Quotient.mk_eq_mk_iff_sub_mem _ _).mpr
+  rw [hmaxhat]
+  simpa only [neg_sub] using (IsLocalRing.maximalIdeal S).neg_mem hr
 
 end RingHom

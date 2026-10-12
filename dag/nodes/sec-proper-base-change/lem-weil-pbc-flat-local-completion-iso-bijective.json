@@ -19,38 +19,47 @@
  ],
  "proof": [
   {
-   "text": "The completions are local, with maximal ideals extended from A and B and residue fields A/mA and B/mB. Compatibility and hmax give mR S = nS, hence continuity; approximation by elements of A and separation of S identify the given map with the canonical componentwise map.",
+   "text": "Write R and S for the maximal-adic completions. Mathlib maximalIdeal_eq_map for both completions, Ideal.map_map, compatibility hcomp and hmax give map φhat (maximalIdeal R) = maximalIdeal S. Therefore φhat is local by IsLocalRing.local_hom_TFAE.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Regard S as an R-algebra using φhat.toAlgebra. The assumed flatness and locality give Module.FaithfullyFlat.of_flat_of_isLocalHom. Its FaithfulSMul instance and FaithfulSMul.algebraMap_injective give injectivity. No finiteness is used.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For s in S represent evalOneₐ(s) by b in B, lift its residue using hres to a residue in A/m_A and choose a representative a in A. Compatibility gives evalOneₐ(s - φhat(i_A(a))) = 0. Mathlib ker_evalOneₐ_eq_map and maximalIdeal_eq_map put this difference in maximalIdeal S. Thus composing φhat with the quotient by map φhat (maximalIdeal R) is surjective.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Mathlib IsAdicComplete instance for the maximal-adic completion makes R precomplete for maximalIdeal R and S Hausdorff for maximalIdeal S. Rewrite the latter ideal using step 1. Apply Mathlib surjective_of_mk_map_comp_surjective to the quotient surjectivity from step 3. This theorem lifts residues by successive approximation in the complete source and uses separation of the target, requiring no finite-module hypothesis. Combine with step 2.",
    "uses": [
     "lem-weil-pbc-local-completion-local-ring",
     "lem-weil-pbc-adic-completion-mod-ideal"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The special fibre B/mA B is A/mA by hmax and hres. Apply finiteness after completion. The levelwise formula and separation identify its map with the supplied map, so S is finite over R.",
-   "uses": [
-    "lem-weil-pbc-finite-after-completion"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use assumed flatness and finite flat local freeness. Reduction modulo mR has dimension one, so the finite basis has one member e. Write 1 = u e; u is outside the maximal ideal because otherwise 1 lies in nS. Thus u is a unit and 1 is a basis, proving bijectivity.",
-   "uses": [
-    "lem-weil-pbc-finite-flat-local-free"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-local-completion-local-ring",
-  "lem-weil-pbc-adic-completion-mod-ideal",
-  "lem-weil-pbc-finite-after-completion",
-  "lem-weil-pbc-finite-flat-local-free"
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-adic-completion-mod-ideal"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 0AGX, final rank-one argument"
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 0AGX completion comparison; second reading B2 replaces the finite-rank argument by Mathlib surjective_of_mk_map_comp_surjective (AdicCompletion/Functoriality.lean), using successive approximation and separation, and faithful flatness (Tags 00HR and 05CK) for injectivity."
  },
  "mathlib_searches": [
   {
@@ -114,10 +123,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T060736-L-2906814",
-  "kind": "interface",
+  "landing": "20261012T085213-L-2985",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
