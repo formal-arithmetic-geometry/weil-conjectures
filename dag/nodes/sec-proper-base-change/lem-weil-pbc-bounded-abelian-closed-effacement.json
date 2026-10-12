@@ -1,0 +1,207 @@
+{
+ "id": "lem-weil-pbc-bounded-abelian-closed-effacement",
+ "kind": "statement",
+ "title": "Bounded abelian closed-subscheme effacement",
+ "statement": "Let $X$ be an affine scheme [def-weil-affine-spectrum, def-weil-pbc-scheme-conventions], $i:Z\\to X$ a closed immersion [def-weil-closed-immersion], $n>0$, and $G$ an abelian sheaf on the small etale site of $X$ [def-weil-pbc-abelian-etale-sheaves] with $n\\operatorname{id}_G=0$. For any $q>0$ and class $x\\in H^q(Z,i^{-1}G)$ [def-weil-pbc-inverse-image, def-weil-pbc-etale-cohomology], there are an abelian sheaf $G\\prime$ and a monomorphism $a:G\\to G\\prime$ such that $n\\operatorname{id}_{G\\prime}=0$ and $H^q(i^{-1}a)(x)=0$.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09ZE, first paragraph and pushout; finite Z/n coefficient specialization",
+  "url": "https://stacks.math.columbia.edu/tag/09ZE"
+ },
+ "proof": [
+  {
+   "text": "Use the existing sectionwise module-sheaf lift to give G its canonical ULift(Z/n)-module structure M and underlying-sheaf isomorphism. Transport x across that isomorphism and the natural inverse-image/forgetful isomorphism.",
+   "uses": [
+    "lem-weil-pbc-killed-sheaf-module-lift",
+    "lem-weil-pbc-etale-module-pullback-forget-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since Z is affine, the constructible-restriction-class theorem yields a constructible module sheaf C mapping to M and a representing class. Naturality of the inverse-image/forgetful isomorphism transports its representation equation to abelian pullback.",
+   "uses": [
+    "lem-weil-pbc-constructible-restriction-class",
+    "lem-weil-pbc-etale-module-pullback-forget-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply constructible-module closed effacement to obtain a monomorphism b:C to D killing the representing class. Form the module-sheaf pushout of b along a:C to M. Its map m:M to P is monic. Forgetting coefficients preserves finite limits (by its composition with sheafToPresheaf), hence preserves this monomorphism. Compose with the underlying-sheaf isomorphism to obtain G to U(P).",
+   "uses": [
+    "lem-weil-pbc-constructible-module-closed-effacement",
+    "lem-weil-pbc-abelian-pushout-mono"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pushout equation a followed by m equals b followed by the other coprojection; applying underlying abelian pullback and cohomology proves the original class dies. Every section of P is a Z/n-module; n is zero in the scalar ring, so sectionwise scalar multiplication proves n times its underlying identity is zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-killed-sheaf-module-lift",
+  "lem-weil-pbc-etale-module-pullback-forget-naturality",
+  "lem-weil-pbc-constructible-restriction-class",
+  "lem-weil-pbc-constructible-module-closed-effacement",
+  "lem-weil-pbc-abelian-pushout-mono"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 09ZE, first paragraph and pushout; finite Z/n coefficient specialization; C3 coefficient and categorical glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology comparison successor degree from previous degree and effacement of cohomology classes",
+   "results": [
+    "CochainComplex.isKInjective_of_injective_aux",
+    "CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk",
+    "CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk",
+    "CochainComplex.HomComplex.leftHomologyData'_H_coe",
+    "CategoryTheory.InjectiveResolution.extMk_surjective",
+    "CochainComplex.cm5b",
+    "groupCohomology.epi_δ_of_isZero",
+    "CategoryTheory.InjectiveResolution.extEquivCohomologyClass"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": "",
+   "verdict": "No exact effacement theorem; generic exactness and categorical primitives are available."
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact",
+   "results": [
+    "Function.Exact",
+    "Function.Exact.apply_apply_eq_zero",
+    "Function.Exact.comp_eq_zero",
+    "Function.Exact.comp_injective",
+    "Function.Exact.of_comp_eq_zero_of_ker_in_range",
+    "Function.Exact.of_comp_of_mem_range",
+    "Function.Exact.rangeFactorization",
+    "Function.Exact.iff_rangeFactorization"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": "",
+   "verdict": "No exact effacement theorem; generic exactness and categorical primitives are available."
+  },
+  {
+   "tool": "grep",
+   "query": "efface|cohomologyMap.*succ",
+   "results": [],
+   "date": "2026-10-12",
+   "available": true,
+   "note": "",
+   "verdict": "No exact effacement theorem; generic exactness and categorical primitives are available."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A positive degree cohomology class of a sheaf killed by n on a closed subscheme of an affine scheme is killed by embedding into another sheaf killed by n",
+   "results": [],
+   "date": "2026-10-12",
+   "available": false,
+   "note": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaf of modules over a finite ring on an affine scheme can be embedded into another module sheaf to kill a positive cohomology class on a closed subscheme",
+   "results": [
+    "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+    "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+    "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+    "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+    "ModuleCat.Tilde.exists_const",
+    "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+    "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+    "AlgebraicGeometry.exists_of_res_eq_of_qcqs"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": "",
+   "verdict": "No exact effacement theorem; generic exactness and categorical primitives are available."
+  },
+  {
+   "tool": "grep",
+   "query": "mono_pushout_of_mono_f|sheafCompose",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean",
+    "Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Conservative.lean",
+    "Mathlib/CategoryTheory/Sites/Point/Conservative.lean",
+    "Mathlib/CategoryTheory/Sites/Canonical.lean",
+    "Mathlib/CategoryTheory/Sites/Canonical.lean"
+   ],
+   "date": "2026-10-12",
+   "available": true,
+   "note": "",
+   "verdict": "No exact effacement theorem; generic exactness and categorical primitives are available."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HenselianBoundedAbelianComparisonStep",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "via": [
+    "lem-weil-pbc-henselian-bounded-abelian-surjectivity",
+    "lem-weil-pbc-henselian-bounded-abelian-comparison-step"
+   ],
+   "place": "Tag 09ZE, first paragraph and pushout; finite Z/n coefficient specialization"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedAbelianClosedEffacement",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedAbelianClosedEffacement.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_bounded_mono_closed_cohomology_eq_zero",
+  "statement": "theorem exists_bounded_mono_closed_cohomology_eq_zero\n    {X Z : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) [IsClosedImmersion i]\n    (n : ℕ) (hn : 0 < n)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : n • 𝟙 G = 0)\n    (q : ℕ) (hq : 0 < q)\n    (x : Sheaf.H (((i)^*[AddCommGrpCat.{u + 1}]).obj G) q) :\n    ∃ (G' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (a : G ⟶ G'),\n      Mono a ∧ n • 𝟙 G' = 0 ∧\n        Sheaf.H.map (((i)^*[AddCommGrpCat.{u + 1}]).map a) q x = 0",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T223400-L-1634742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T223400-L-1634742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
