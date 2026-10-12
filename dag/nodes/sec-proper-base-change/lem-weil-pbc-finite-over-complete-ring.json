@@ -29,56 +29,35 @@
  ],
  "proof": [
   {
-   "text": "Notation for all steps: $A$, $I$, $M$ satisfy (1)-(3); $x_1,\\dots,x_r\\in M$ are elements whose images generate $M/IM$ over $A/I$ (they exist by (3); $r=0$ is allowed), and $N=\\sum_iAx_i\\subseteq M$. (Generation modulo every power of $I$.) For every $k\\ge0$ and every $y\\in I^kM$ there are $c_1,\\dots,c_r\\in I^k$ with $y-\\sum_ic_ix_i\\in I^{k+1}M$ (with $I^0=A$). Proof: for $k=0$, the image of $y$ in $M/IM$ is $\\sum_i\\bar a_i\\bar x_i$ with $\\bar a_i\\in A/I$; lifting $\\bar a_i$ to $a_i\\in A$ gives $y-\\sum_ia_ix_i\\in IM$. For $k\\ge1$, write $y=\\sum_jt_jm_j$ (finite sum) with $t_j\\in I^k$, $m_j\\in M$; by the case $k=0$, $m_j=\\sum_ia_{ji}x_i+m_j'$ with $a_{ji}\\in A$, $m_j'\\in IM$. Then $y=\\sum_ic_ix_i+\\sum_jt_jm_j'$ with $c_i=\\sum_jt_ja_{ji}\\in I^k$ and $t_jm_j'\\in I^k\\cdot IM=I^{k+1}M$. (In other words $I^kM=I^kN+I^{k+1}M$.)",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0315 (lemma-completion-generalities, line 22571), proof of (1), lines 22589-22610: the claim that K_{n+1}/I^{n+1}M -> K_n/I^nM is surjective ('write phi(x)=sum z_j n_j with z_j in I^n ... n_j = phi(m_j) + sum z_{jk} n_{jk}'), here for phi: A^r -> M"
-   }
-  },
-  {
-   "text": "(Successive approximation.) Fix $m\\in M$. Define inductively $m_0=m$ and, for $k\\ge0$ with $m_k\\in I^kM$ already defined, choose by Step 1 elements $c^{(k)}_1,\\dots,c^{(k)}_r\\in I^k$ with $m_{k+1}:=m_k-\\sum_ic^{(k)}_ix_i\\in I^{k+1}M$. Put $s^{(n)}_i=\\sum_{k=0}^{n-1}c^{(k)}_i\\in A$ for $n\\ge0$. By induction on $n$ (the case $n=0$ being $m=m_0$, and $m_n=\\sum_ic^{(n)}_ix_i+m_{n+1}$ giving the step), $m=\\sum_is^{(n)}_ix_i+m_n$, hence $m-\\sum_is^{(n)}_ix_i\\in I^nM$ for every $n\\ge0$. Moreover, for $n'\\ge n$, $s^{(n')}_i-s^{(n)}_i=\\sum_{k=n}^{n'-1}c^{(k)}_i\\in I^n$, since $c^{(k)}_i\\in I^k\\subseteq I^n$ for $k\\ge n$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0315 (lemma-completion-generalities, line 22571), proof of (1), lines 22589-22610: the claim that K_{n+1}/I^{n+1}M -> K_n/I^nM is surjective ('write phi(x)=sum z_j n_j with z_j in I^n ... n_j = phi(m_j) + sum z_{jk} n_{jk}'), here for phi: A^r -> M; the elements x' = x - sum z_j m_j of that proof are the m_{k+1} here"
-   }
-  },
-  {
-   "text": "(The limits of the coefficients exist in $A$.) For each $i$, the classes $(s^{(n)}_i\\bmod I^n)_{n\\ge1}$ form a compatible sequence, since $s^{(n+1)}_i\\equiv s^{(n)}_i\\pmod{I^n}$ (Step 2), i.e. an element of the completion $\\varprojlim_nA/I^n$ [def-weil-pbc-adic-completion]. By (1) the canonical map $A\\to\\varprojlim_nA/I^n$, $a\\mapsto(a\\bmod I^n)_n$, is bijective [def-weil-pbc-adically-complete-ring]; by its surjectivity there is $a_i\\in A$ with $a_i\\equiv s^{(n)}_i\\pmod{I^n}$ for every $n\\ge1$.",
+   "text": "For a finite free module A^r, membership in J A^r is equivalent to every coordinate lying in J: project for one direction, and write a vector as the sum of its coordinates times the standard basis vectors for the other. Every I-adic Cauchy sequence in A^r is therefore coordinatewise Cauchy. Precompleteness of A gives a limit in each coordinate, and the same membership criterion shows convergence in A^r. This also covers r=0.",
    "uses": [
-    "def-weil-pbc-adic-completion",
     "def-weil-pbc-adically-complete-ring"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 031D (lemma-finite-over-complete-ring, line 22860), proof: 'By Lemma 0315 the map (M')^ -> M^ is surjective ... by Lemma 031B M' is complete' (lines 22874-22879); here the compatible system of 0315 lives in A^r and completeness of A (hypothesis (1)) replaces 031B and the Mittag-Leffler step of 0315"
-   }
+   "elementary": true
   },
   {
-   "text": "(Conclusion.) For every $n\\ge1$, $m-\\sum_ia_ix_i=\\bigl(m-\\sum_is^{(n)}_ix_i\\bigr)+\\sum_i\\bigl(s^{(n)}_i-a_i\\bigr)x_i$, where the first summand lies in $I^nM$ by Step 2 and the second lies in $I^nM$ since $s^{(n)}_i-a_i\\in I^n$ by Step 3. Hence $m-\\sum_ia_ix_i\\in\\bigcap_{n\\ge1}I^nM=0$ by (2), so $m=\\sum_ia_ix_i\\in N$. As $m\\in M$ was arbitrary, $M=N$ is generated over $A$ by $x_1,\\dots,x_r$, in particular finitely generated [def-weil-finitely-generated-module].",
+   "text": "Given x : Fin r -> M spanning M/IM over A/I, consider f : A^r -> M, the finite linear combination map. The composite of f with M -> M/IM is surjective: express an arbitrary quotient element using the given generators and lift each of its finitely many coefficients along A -> A/I. Apply Mathlib surjective_of_mkQ_comp_surjective to f, using precompleteness of A^r from the preceding step and Hausdorffness of M. Its proof implements successive approximation (Stacks 0315 and 031D): lift through successive powers, take the precomplete source limit, and use the Hausdorff target to identify its image. The range of the finite linear combination map is exactly span_A(range x), so this span is top.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Module.Finite.exists_fin supplies a finite generating family in M/IM. Lift its vectors using the quotient map. By the preceding step their A-span is M. The span of a finite range is finitely generated, giving Module.Finite A M. Together with the preceding step this proves both clauses of the original statement.",
    "uses": [
     "def-weil-finitely-generated-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 031D (lemma-finite-over-complete-ring, line 22860), proof lines 22872-22885: 'the kernel of M -> M^ is zero since it is equal to the intersection of the I^nM = (0). Hence we conclude that M = M' = M^ is finitely generated'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-finitely-generated-module",
-  "def-weil-pbc-adic-completion",
   "def-weil-pbc-adically-complete-ring"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 031D (lemma-finite-over-complete-ring, line 22860) and its proof (lines 22872-22885), with the lifting argument of the proof of Lemma Tag 0315 (1) (lines 22589-22610) applied to the map A^r -> M, (a_i) -> sum a_i x_i, written out directly with completeness of A in place of Lemma 031B and the Mittag-Leffler lemma"
+  "place": "Tags 031D and 0315, via Mathlib.RingTheory.AdicCompletion.Functoriality.surjective_of_mkQ_comp_surjective; finite-free precompleteness is proved coordinatewise, and generation/finiteness use Mathlib finite linear combinations and Module.Finite.exists_fin."
  },
  "mathlib_searches": [
   {
@@ -189,5 +168,15 @@
   "group": "F1",
   "result": "pass",
   "note": "CommRing A, Ideal I, A-module M (indep. universes); (1) IsAdicComplete I A = def-weil-pbc-adically-complete-ring; (2) IsHausdorff I M (n=0 vacuous); (3) Module.Finite (A/I) (M/I•⊤) via canonical quotient action; concl Module.Finite A M and every Fin r family lifting A/I-generators spans M (r=0 ok); no Mathlib lemma (grep IsAdicComplete+finite/span: none)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T173921-L-3311185",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
