@@ -5,161 +5,155 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
-public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
+public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftComparison
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
-# Monoidal equivalences and the derived tensor product
+# Monoidal equivalences of abelian categories and derived internal homs
 
-Let `E : C ≌ D` be an equivalence of monoidal Grothendieck abelian categories with functorial
-flat resolutions, whose functor is monoidal. The induced equivalence `D(E) : D(C) ≌ D(D)` of
-derived categories is compatible with the derived tensor products and with duals:
+Let `F : C₁ ⥤ C₂` be an equivalence of monoidal closed braided Grothendieck abelian categories
+with functorial flat resolutions, which is moreover a monoidal functor. Then the induced
+equivalence `D(F) : D(C₁) ≌ D(C₂)` of derived categories commutes with the derived tensor
+products, and its quasi-inverse `D(F⁻¹)` commutes with the derived internal homs:
 
-`D(E)(K ⊗ᴸ L) ≅ D(E)(K) ⊗ᴸ D(E)(L)` and `D(E)(RHom(K, 𝟙)) ≅ RHom(D(E)(K), 𝟙)`.
-
-Both sides of the first isomorphism are computed on a K-flat representative of `K`, which `E`
-carries to a K-flat complex. The second follows from the first by uniqueness of right adjoints.
+`D(F⁻¹)(RHom(X, Y)) ≅ RHom(D(F⁻¹) X, D(F⁻¹) Y)`.
 
 ## Main results
 
-- `CategoryTheory.Equivalence.kFlat_mapHomotopyCategory_obj`: `E` preserves K-flat complexes.
-- `CategoryTheory.Equivalence.nonempty_tensorLeft_comp_mapDerivedCategory_iso`:
-  `D(E)(K ⊗ᴸ -) ≅ D(E)(K) ⊗ᴸ D(E)(-)`.
-- `CategoryTheory.Equivalence.mapDerivedCategoryObjUnitIso`: `D(E)(𝟙) ≅ 𝟙`.
-- `CategoryTheory.Equivalence.nonempty_mapDerivedCategory_obj_ihom_obj_unit_iso`:
-  `D(E)(RHom(K, 𝟙)) ≅ RHom(D(E)(K), 𝟙)`.
+- `DerivedCategory.tensorLeftCompMapDerivedCategoryIso`: `D(F)(N ⊗ᴸ M) ≅ D(F) N ⊗ᴸ D(F) M`,
+  naturally in `M`.
+- `DerivedCategory.ihomCompMapDerivedCategoryInvIso`:
+  `D(F⁻¹)(RHom(X, Y)) ≅ RHom(D(F⁻¹) X, D(F⁻¹) Y)`, naturally in `Y`.
+
+## Implementation notes
+
+The comparison of the tensor products is computed on a K-flat representative `P` of `N`
+whose image `F(P)` is again K-flat: the functorial flat resolutions are such representatives,
+since `F` preserves flat objects and colimits
+(`CategoryTheory.Functor.kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj`). The
+comparison of the internal homs is then the conjugate, under the adjunctions
+`D(F) ⋙ (X ⊗ᴸ -) ⊣ RHom(X, -) ⋙ D(F⁻¹)` and `(D(F⁻¹) X ⊗ᴸ -) ⋙ D(F) ⊣ D(F⁻¹) ⋙ RHom(D(F⁻¹) X, -)`,
+of the comparison of the tensor products.
 -/
 
 @[expose] public section
 
-open CategoryTheory Limits MonoidalCategory DerivedCategory
+universe w v
 
-universe w v u u₁ u₂
+open CategoryTheory Limits MonoidalCategory
 
-namespace HomotopyCategory
+namespace DerivedCategory
 
-variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
+variable {C₁ C₂ : Type*} [Category.{v} C₁] [Abelian C₁] [IsGrothendieckAbelian.{w} C₁]
+  [HasDerivedCategory.{w} C₁] [MonoidalCategory C₁] [MonoidalClosed C₁] [MonoidalPreadditive C₁]
+  [BraidedCategory C₁] [Abelian.HasFunctorialFlatResolution C₁]
+  [Category.{v} C₂] [Abelian C₂] [IsGrothendieckAbelian.{w} C₂]
+  [HasDerivedCategory.{w} C₂] [MonoidalCategory C₂] [MonoidalClosed C₂] [MonoidalPreadditive C₂]
+  [BraidedCategory C₂] [Abelian.HasFunctorialFlatResolution C₂]
 
-/-- An object of the homotopy category is acyclic if and only if its image in the derived
-category is zero. -/
-lemma subcategoryAcyclic_iff_isZero_Qh_obj (Z : HomotopyCategory C (.up ℤ)) :
-    subcategoryAcyclic C Z ↔ IsZero (Qh.obj Z) := by
-  rw [mem_subcategoryAcyclic_iff, DerivedCategory.isZero_iff]
-  exact forall_congr' fun n ↦ ((homologyFunctorFactorsh C n).app Z).isZero_iff.symm
+local instance hasColimitsOfSize_monoidalEquivalence₁ : HasColimitsOfSize.{0, 0} C₁ :=
+  hasColimitsOfSizeShrink C₁
+local instance hasColimitsOfSize_monoidalEquivalence₂ : HasColimitsOfSize.{0, 0} C₂ :=
+  hasColimitsOfSizeShrink C₂
 
-variable {D : Type*} [Category D] [Abelian D] [HasDerivedCategory.{w} D]
+variable (F : C₁ ⥤ C₂) [F.Monoidal] [F.IsEquivalence] [F.Additive]
 
-/-- An exact functor carries acyclic complexes to acyclic complexes. -/
-lemma subcategoryAcyclic_mapHomotopyCategory_obj (F : C ⥤ D) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F] {Z : HomotopyCategory C (.up ℤ)}
-    (hZ : subcategoryAcyclic C Z) :
-    subcategoryAcyclic D ((F.mapHomotopyCategory (.up ℤ)).obj Z) := by
-  rw [subcategoryAcyclic_iff_isZero_Qh_obj] at hZ ⊢
-  exact (F.mapDerivedCategory.map_isZero hZ).of_iso (F.mapDerivedCategoryFactorsh.app Z).symm
+local instance additive_asEquivalence_functor : F.asEquivalence.functor.Additive := ‹F.Additive›
 
-end HomotopyCategory
-
-namespace CategoryTheory.Equivalence
-
-open HomotopyCategory Functor.OplaxMonoidal
-
-variable {C : Type u₁} {D : Type u₂} [Category.{v} C] [Category.{v} D] [Abelian C] [Abelian D]
-  [IsGrothendieckAbelian.{v} C] [IsGrothendieckAbelian.{v} D]
-  [MonoidalCategory C] [MonoidalCategory D] [MonoidalPreadditive C] [MonoidalPreadditive D]
-  [MonoidalClosed C] [MonoidalClosed D] [BraidedCategory C] [BraidedCategory D]
-  [HasDerivedCategory.{v} C] [HasDerivedCategory.{v} D]
-  [Abelian.HasFunctorialFlatResolution C] [Abelian.HasFunctorialFlatResolution D]
-  (E : C ≌ D) [E.functor.Additive] [E.inverse.Additive] [E.functor.Monoidal]
-
-omit [Abelian.HasFunctorialFlatResolution C] [Abelian.HasFunctorialFlatResolution D] in
-/-- A monoidal equivalence of abelian categories carries K-flat complexes to K-flat
-complexes. -/
-lemma kFlat_mapHomotopyCategory_obj {P : HomotopyCategory C (.up ℤ)}
-    (hP : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat P) :
-    (HomotopyCategory.quasiIso D (.up ℤ)).kFlat
-      ((E.functor.mapHomotopyCategory (.up ℤ)).obj P) := by
-  rw [kFlat_iff_preserves_acyclic] at hP ⊢
-  intro Z hZ
-  obtain ⟨K, rfl⟩ := Z.quotient_obj_surjective
-  let Z' := (quotient C (.up ℤ)).obj ((E.inverse.mapHomologicalComplex _).obj K)
-  have hZ' : subcategoryAcyclic C Z' := subcategoryAcyclic_mapHomotopyCategory_obj E.inverse hZ
-  let e : (quotient D _).obj K ≅ (E.functor.mapHomotopyCategory _).obj Z' :=
-    (quotient D _).mapIso ((E.mapHomologicalComplex (.up ℤ)).counitIso.app K).symm
-  let δ := asIso (mapHomotopyCategoryδNatTrans (.up ℤ) E.functor)
-  constructor
-  · exact (subcategoryAcyclic D).prop_of_iso ((δ.app P).app Z' ≪≫ whiskerLeftIso _ e.symm)
-      (subcategoryAcyclic_mapHomotopyCategory_obj E.functor (hP Z' hZ').1)
-  · exact (subcategoryAcyclic D).prop_of_iso ((δ.app Z').app P ≪≫ whiskerRightIso e.symm _)
-      (subcategoryAcyclic_mapHomotopyCategory_obj E.functor (hP Z' hZ').2)
-
-/-- For a K-flat complex `P`, the derived functor of a monoidal equivalence `E` commutes with
-`Qh.obj P ⊗ᴸ -`: `D(E)(Qh P ⊗ᴸ K) ≅ D(E)(Qh P) ⊗ᴸ D(E)(K)`, naturally in `K`. -/
-lemma nonempty_tensorLeft_Qh_obj_comp_mapDerivedCategory_iso {P : HomotopyCategory C (.up ℤ)}
-    (hP : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat P) :
-    Nonempty ((curriedTensor (DerivedCategory C)).obj (Qh.obj P) ⋙
-        E.functor.mapDerivedCategory ≅
-      E.functor.mapDerivedCategory ⋙ (curriedTensor (DerivedCategory D)).obj
-        (E.functor.mapDerivedCategory.obj (Qh.obj P))) := by
-  let F := E.functor.mapDerivedCategory
-  let EK := E.functor.mapHomotopyCategory (.up ℤ)
-  have hP' := E.kFlat_mapHomotopyCategory_obj hP
+/-- For a complex `P` of `C₁` such that both `P` and `F(P)` are K-flat, the functor `D(F)`
+commutes with tensoring by `Qh P`: `D(F)(Qh P ⊗ᴸ M) ≅ D(F)(Qh P) ⊗ᴸ D(F) M`, naturally in `M`. -/
+noncomputable def tensorLeftCompMapDerivedCategoryIsoOfKFlat (P : HomotopyCategory C₁ (.up ℤ))
+    (hP : (HomotopyCategory.quasiIso C₁ (.up ℤ)).kFlat P)
+    (hFP : (HomotopyCategory.quasiIso C₂ (.up ℤ)).kFlat
+      ((F.mapHomotopyCategory (.up ℤ)).obj P)) :
+    (curriedTensor _).obj (Qh.obj P) ⋙ F.mapDerivedCategory ≅
+      F.mapDerivedCategory ⋙ (curriedTensor _).obj (F.mapDerivedCategory.obj (Qh.obj P)) :=
   have := isIso_tensorLeftCounit P hP
-  have := isIso_tensorLeftCounit (EK.obj P) hP'
-  let δ := asIso (mapHomotopyCategoryδNatTrans (.up ℤ) E.functor)
-  let e₁ : Qh ⋙ ((curriedTensor _).obj (Qh.obj P) ⋙ F) ≅
-      Qh ⋙ (F ⋙ (curriedTensor _).obj (F.obj (Qh.obj P))) :=
-    (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (asIso (tensorLeftCounit P)) F ≪≫
-      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ E.functor.mapDerivedCategoryFactorsh ≪≫
-      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (δ.app P) Qh ≪≫
-      Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft EK (asIso (tensorLeftCounit (EK.obj P))).symm ≪≫
+  have := isIso_tensorLeftCounit _ hFP
+  Localization.liftNatIso Qh (HomotopyCategory.quasiIso C₁ (.up ℤ))
+    (Qh ⋙ ((curriedTensor _).obj (Qh.obj P) ⋙ F.mapDerivedCategory))
+    (Qh ⋙ (F.mapDerivedCategory ⋙ (curriedTensor _).obj (F.mapDerivedCategory.obj (Qh.obj P))))
+    _ _
+    ((Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (asIso (tensorLeftCounit P)) _ ≪≫
+      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ F.mapDerivedCategoryFactorsh ≪≫
       (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight E.functor.mapDerivedCategoryFactorsh.symm _ ≪≫
-      Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft Qh (Functor.isoWhiskerLeft F
-        ((curriedTensor _).mapIso (E.functor.mapDerivedCategoryFactorsh.app P).symm))
-  exact ⟨(Localization.whiskeringLeftFunctor' Qh (HomotopyCategory.quasiIso C (.up ℤ))
-    (DerivedCategory D)).preimageIso e₁⟩
+      Functor.isoWhiskerRight
+        (asIso ((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app P)) Qh ≪≫
+      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (asIso (tensorLeftCounit _)).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight F.mapDerivedCategoryFactorsh.symm _ ≪≫
+      Functor.isoWhiskerLeft _
+        ((curriedTensor _).mapIso (F.mapDerivedCategoryFactorsh.app P).symm) ≪≫
+      Functor.associator _ _ _)
 
-/-- The derived functor of a monoidal equivalence `E` commutes with `K ⊗ᴸ -`:
-`D(E)(K ⊗ᴸ L) ≅ D(E)(K) ⊗ᴸ D(E)(L)`, naturally in `L`. -/
-lemma nonempty_tensorLeft_comp_mapDerivedCategory_iso (K : DerivedCategory C) :
-    Nonempty ((curriedTensor (DerivedCategory C)).obj K ⋙ E.functor.mapDerivedCategory ≅
-      E.functor.mapDerivedCategory ⋙ (curriedTensor (DerivedCategory D)).obj
-        (E.functor.mapDerivedCategory.obj K)) := by
-  obtain ⟨P, hP, ⟨e⟩⟩ := DerivedCategory.exists_kFlat_iso K
-  obtain ⟨τ⟩ := E.nonempty_tensorLeft_Qh_obj_comp_mapDerivedCategory_iso hP
-  exact ⟨Functor.isoWhiskerRight ((curriedTensor _).mapIso e.symm) _ ≪≫ τ ≪≫
-    Functor.isoWhiskerLeft _ ((curriedTensor _).mapIso (E.functor.mapDerivedCategory.mapIso e))⟩
+omit [HasDerivedCategory C₂] [Abelian.HasFunctorialFlatResolution C₂] in
+/-- Every object `N` of `D(C₁)` is isomorphic to `Qh P` for a complex `P` such that both `P`
+and `F(P)` are K-flat: a functorial flat resolution of a representative of `N`. -/
+lemma exists_kFlat_iso_of_isEquivalence (N : DerivedCategory C₁) :
+    ∃ P : HomotopyCategory C₁ (.up ℤ), (HomotopyCategory.quasiIso C₁ (.up ℤ)).kFlat P ∧
+      (HomotopyCategory.quasiIso C₂ (.up ℤ)).kFlat ((F.mapHomotopyCategory (.up ℤ)).obj P) ∧
+      Nonempty (Qh.obj P ≅ N) := by
+  let Λ : Abelian.LeftResolution (ObjectProperty.flat.ι : _ ⥤ C₁) := Classical.arbitrary _
+  have := F.preservesFlat_of_isEquivalence
+  let K := Q.objPreimage N
+  refine ⟨(HomotopyCategory.quotient _ _).obj (Λ.reduced.resolutionFunctor.obj K),
+    (HomotopyCategory.kFlat_quotient_obj_iff _).2
+      (Λ.reduced.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K),
+    ObjectProperty.prop_of_iso _ ((F.mapHomotopyCategoryFactors (.up ℤ)).app _).symm
+      ((HomotopyCategory.kFlat_quotient_obj_iff _).2
+        (F.kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj Λ.reduced
+          ObjectProperty.flat.essImage_ι_le K)),
+    ⟨(quotientCompQhIso C₁).app _ ≪≫ asIso (Q.map (Λ.reduced.resolutionNatTrans.app K)) ≪≫
+      Q.objObjPreimageIso N⟩⟩
 
-/-- The derived functor of a monoidal equivalence `E` preserves the monoidal unit. -/
-noncomputable def mapDerivedCategoryObjUnitIso :
-    E.functor.mapDerivedCategory.obj (𝟙_ (DerivedCategory C)) ≅ 𝟙_ (DerivedCategory D) :=
-  E.functor.mapDerivedCategory.mapIso (DerivedCategory.singleFunctorObjUnitIso C).symm ≪≫
-    (E.functor.mapDerivedCategorySingleFunctor 0).app (𝟙_ C) ≪≫
-    (DerivedCategory.singleFunctor D 0).mapIso (Functor.Monoidal.εIso E.functor).symm ≪≫
-    DerivedCategory.singleFunctorObjUnitIso D
+/-- The functor `D(F)` commutes with tensoring on the left:
+`D(F)(N ⊗ᴸ M) ≅ D(F) N ⊗ᴸ D(F) M`, naturally in `M`. -/
+noncomputable def tensorLeftCompMapDerivedCategoryIso (N : DerivedCategory C₁) :
+    (curriedTensor _).obj N ⋙ F.mapDerivedCategory ≅
+      F.mapDerivedCategory ⋙ (curriedTensor _).obj (F.mapDerivedCategory.obj N) :=
+  have h := exists_kFlat_iso_of_isEquivalence F N
+  Functor.isoWhiskerRight ((curriedTensor _).mapIso h.choose_spec.2.2.some.symm) _ ≪≫
+    tensorLeftCompMapDerivedCategoryIsoOfKFlat F _ h.choose_spec.1 h.choose_spec.2.1 ≪≫
+    Functor.isoWhiskerLeft _ ((curriedTensor _).mapIso
+      (F.mapDerivedCategory.mapIso h.choose_spec.2.2.some))
 
-/-- The derived functor of a monoidal equivalence `E` commutes with duals:
-`D(E)(RHom(K, 𝟙)) ≅ RHom(D(E)(K), 𝟙)`. -/
-theorem nonempty_mapDerivedCategory_obj_ihom_obj_unit_iso (K : DerivedCategory C) :
-    Nonempty (E.functor.mapDerivedCategory.obj ((ihom K).obj (𝟙_ _)) ≅
-      (ihom (E.functor.mapDerivedCategory.obj K)).obj (𝟙_ _)) := by
-  let 𝔼 := E.mapDerivedCategory
-  obtain ⟨τ⟩ := E.nonempty_tensorLeft_comp_mapDerivedCategory_iso K
-  let adj := 𝔼.symm.toAdjunction.comp ((ihom.adjunction K).comp 𝔼.toAdjunction)
-  let iso : 𝔼.inverse ⋙ (tensorLeft K ⋙ 𝔼.functor) ≅
-      tensorLeft (E.functor.mapDerivedCategory.obj K) :=
-    Functor.isoWhiskerLeft _ τ ≪≫ (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight 𝔼.counitIso _ ≪≫ Functor.leftUnitor _
-  let u : 𝔼.inverse.obj (𝟙_ (DerivedCategory D)) ≅ 𝟙_ (DerivedCategory C) :=
-    𝔼.inverse.mapIso (E.mapDerivedCategoryObjUnitIso).symm ≪≫ 𝔼.unitIso.symm.app _
-  exact ⟨E.functor.mapDerivedCategory.mapIso ((ihom K).mapIso u.symm) ≪≫
-    (((ihom.adjunction _).rightAdjointUniq (adj.ofNatIsoLeft iso)).app _).symm⟩
+/-- The functor `D(F⁻¹)` commutes with the derived internal homs:
+`D(F⁻¹)(RHom(X, Y)) ≅ RHom(D(F⁻¹) X, D(F⁻¹) Y)`, naturally in `Y`. It is the conjugate of
+`D(F)((D(F⁻¹) X) ⊗ᴸ M) ≅ X ⊗ᴸ D(F) M` under the adjunctions
+`D(F) ⋙ (X ⊗ᴸ -) ⊣ RHom(X, -) ⋙ D(F⁻¹)` and
+`((D(F⁻¹) X) ⊗ᴸ -) ⋙ D(F) ⊣ D(F⁻¹) ⋙ RHom(D(F⁻¹) X, -)`. -/
+noncomputable def ihomCompMapDerivedCategoryInvIso (X : DerivedCategory C₂) :
+    ihom X ⋙ F.inv.mapDerivedCategory ≅
+      F.inv.mapDerivedCategory ⋙ ihom (F.inv.mapDerivedCategory.obj X) :=
+  conjugateIsoEquiv (F.asEquivalence.mapDerivedCategory.toAdjunction.comp (ihom.adjunction X))
+    ((ihom.adjunction (F.inv.mapDerivedCategory.obj X)).comp
+      F.asEquivalence.mapDerivedCategory.toAdjunction)
+    (tensorLeftCompMapDerivedCategoryIso F _ ≪≫ Functor.isoWhiskerLeft _
+      ((curriedTensor _).mapIso (F.asEquivalence.mapDerivedCategory.counitIso.app X)))
 
-end CategoryTheory.Equivalence
+/-- The functor `D(F)` preserves the unit: `D(F)(𝟙) ≅ 𝟙`, the unit of `D(Cᵢ)` being the image
+of the unit of `Cᵢ` placed in degree `0`. -/
+noncomputable def mapDerivedCategoryUnitIso : F.mapDerivedCategory.obj (𝟙_ _) ≅ 𝟙_ _ :=
+  F.mapDerivedCategoryFactors.app _ ≪≫
+    Q.mapIso ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).app _ ≪≫
+      (HomologicalComplex.single _ (.up ℤ) 0).mapIso (Functor.Monoidal.εIso F).symm)
 
-end
+/-- The functor `D(F⁻¹)` preserves the unit: `D(F⁻¹)(𝟙) ≅ 𝟙`. -/
+noncomputable def mapDerivedCategoryInvUnitIso : F.inv.mapDerivedCategory.obj (𝟙_ _) ≅ 𝟙_ _ :=
+  (F.inv.mapDerivedCategory.mapIso (mapDerivedCategoryUnitIso F)).symm ≪≫
+    (F.asEquivalence.mapDerivedCategory.unitIso.app (𝟙_ _)).symm
+
+/-- The functor `D(F⁻¹)` carries the dual `RHom(X, 𝟙)` of an object of `D(C₂)` to the dual of
+its image: `D(F⁻¹)(RHom(X, 𝟙)) ≅ RHom(D(F⁻¹) X, 𝟙)`. -/
+noncomputable def mapDerivedCategoryInvIhomUnitIso (X : DerivedCategory C₂) :
+    F.inv.mapDerivedCategory.obj ((ihom X).obj (𝟙_ _)) ≅
+      (ihom (F.inv.mapDerivedCategory.obj X)).obj (𝟙_ _) :=
+  (ihomCompMapDerivedCategoryInvIso F X).app (𝟙_ _) ≪≫
+    (ihom _).mapIso (mapDerivedCategoryInvUnitIso F)
+
+end DerivedCategory

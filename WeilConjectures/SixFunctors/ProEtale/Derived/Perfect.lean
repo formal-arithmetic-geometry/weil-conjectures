@@ -664,8 +664,7 @@ theorem constructibleFiniteTor_derivedDual {k : Type u} [Field k] {p : ℕ} [Fac
   refine ⟨?_, -b, -a, DerivedCategory.torAmplitudeIn_derivedDual hKt hKd⟩
   -- `K'` has Tor amplitude in `[a, b]` on the étale site
   have hKt' : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K' :=
-    DerivedCategory.torAmplitudeIn_of_mapDerivedCategory Λ hK'.1.1
-      (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj hK')
+    DerivedCategory.torAmplitudeIn_of_mapDerivedCategory Λ
       ((DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso e.symm hKt)
   -- the unit `Λ_{X_ét}` is bounded constructible of Tor amplitude `[0, 0]`
   have hU : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X (𝟙_ _) :=
