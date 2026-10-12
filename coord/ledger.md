@@ -8836,3 +8836,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:39 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed (stage 3; reviewer PASS; first push; landing 20261012T173920-L-3310815 (interface); batch 20261012T173801; modules 4; new nodes 4)
 - 17:39 L: merged deliver/Y3/Sheaf.CategoryTheory.ColimitSiteCechColimit (stage 3; reviewer PASS; first push; landing 20261012T173920-L-3311069 (interface); batch 20261012T173801; modules 3; new nodes 2)
 - 17:39 L: merged deliver/Y3/Sheaf.RingTheory.FiniteOverCompleteRing (stage 3; reviewer PASS; first push; landing 20261012T173921-L-3311185 (proof); batch 20261012T173801; modules 1; new nodes 0)
+- 17:39 L: returned deliver/S2/Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroCompatibility (reviewer RETURN: (reviewer X-f5d52, head f5d52275c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fo)
