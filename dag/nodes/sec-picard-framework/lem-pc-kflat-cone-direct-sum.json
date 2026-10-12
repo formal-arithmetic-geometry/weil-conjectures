@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "For any acyclic complex A, tensoring commutes with the countable coproduct: Tot(A tensor (direct sum of K_n)) is the direct sum of Tot(A tensor K_n). The category of sheaves of O-modules is Grothendieck abelian (after replacing an essentially small site by an equivalent small one), so countable coproducts are exact: write the coproduct as the filtered colimit of its finite partial coproducts and use exactness of filtered colimits. Each summand is acyclic by K-flatness, hence the coproduct is acyclic. Since this holds for every acyclic A, the countable direct sum is K-flat by [def-pc-kflat-complex].",
+   "text": "For every acyclic test complex A, install the monoidal closed structure from [lem-pc-sheaf-modules-tensor-closed] and the Grothendieck abelian structure from [prop-pur-kinjective-resolutions-exist]. The proved source-library BifunctorColimits instances show that the functor Tot(A tensor -) preserves countable coproducts, giving PreservesCoproduct.iso. Each Tot(A tensor K_n) is acyclic by [def-pc-kflat-complex]. The proved private Lean helper acyclic_coproduct_nat applies exactness of coproducts (AB4, obtained from the Grothendieck property by filtered colimits of finite sums): each zero-to-summand map is a quasi-isomorphism by quasiIsoAt_iff_exactAt, the coproduct map is a quasi-isomorphism by HomologicalComplex.isStableUnderCoproducts_quasiIso, and its source is zero by the coproduct universal property. Thus the sum of the tensor complexes is acyclic. Transfer ExactAt in each degree along the inverse tensor/coproduct comparison. This proves K-flatness of the countable sum.",
    "uses": [
     "def-pc-kflat-complex",
     "prop-pur-kinjective-resolutions-exist",
@@ -35,7 +35,7 @@
    }
   },
   {
-   "text": "For a morphism f from K1 to K2 and its mapping cone K3, the tensor construction is additive and carries the cone triangle to the cone triangle of the tensor of f. If K1 and K2 are K-flat, then the first two tensor complexes are acyclic for every acyclic A; the tensor-triangle two-out-of-three statement [lem-pc-kflat-tensor-cone-two-out-of-three] makes the third tensor complex acyclic. Therefore the mapping cone is K-flat by [def-pc-kflat-complex].",
+   "text": "For a map f of K-flat complexes, unfold [def-pc-kflat-complex] and test against an arbitrary acyclic complex A. The two hypotheses make Tot(A tensor K1) and Tot(A tensor K2) acyclic. Apply the first two-to-third implication in SheafOfModules.tensor_mappingCone_two_out_of_three [lem-pc-kflat-tensor-cone-two-out-of-three] to conclude that Tot(A tensor mappingCone(f)) is acyclic; the mapping cone is the existing cone construction [def-weil-abstract-derived-category]. This is precisely IsKFlat of the mapping cone.",
    "uses": [
     "def-pc-kflat-complex",
     "def-weil-abstract-derived-category",
@@ -160,5 +160,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T095913-L-320838",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
