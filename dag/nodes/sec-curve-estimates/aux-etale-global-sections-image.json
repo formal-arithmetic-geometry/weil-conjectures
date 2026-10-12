@@ -15,7 +15,24 @@
  },
  "proof": [
   {
-   "text": "A terminal section has the same germ after any change of lift, because\nthere is only one lift to a terminal object. Extend each Galois automorphism to\nOmega and apply the action compatibility hypothesis to obtain invariance.\nConversely, represent an invariant germ on a finite separable extension inside\nKs: shrink an etale neighbourhood to the finite connected component containing\nthe geometric point. Enlarge to a finite Galois extension L/K. Restriction on\nconnected pointed neighbourhoods is injective by sheaf separatedness, since a\nfurther nonempty etale neighbourhood covers the connected field spectrum.\nThus invariance of the germ implies that its representative over L is fixed\nby Gal(L/K). The sheaf equalizer for the finite Galois cover Spec L of Spec K\nthen descends that representative to a terminal section. Its germ is the given\none. This argument only uses finite separable subextensions, so it also applies\nwhen Omega contains transcendental elements.",
+   "text": "The terminal etale object T has an inverse to its structural map to Spec K: form the unique map j from the identity etale object and use terminality to prove T.hom followed by j.left is the identity. Since Spec K has one point, T.left is a subsingleton, and its supplied geometric lift x exhibits nonemptiness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Forget F to its underlying sheaf of sets Fset. The forgetful functor on AddCommGrpCat preserves filtered colimits, including the smaller universe of the geometric point; Mathlib preservesFilteredColimitsOfSize_shrink and Point.sheafFiberCompIso give the canonical equivalence e between the Type-valued and abelian stalks. Point.toPresheafFiber_presheafFiberCompIso_hom_app proves that e preserves each germ. Transport the supplied representation action through i.hom, i.inv and e to a function rho on the underlying stalk. The hypothesis hi and the germ comparison give the change-of-lift formula for rho.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an invariant vector v, the constant family of underlying stalk elements e.inverse(i.hom(v)) is covariant under rho, by the invariant equality and the inverse identities for i and e. Apply [lem-exc-field-equivariant-germs-one-point-selected-lift] to Fset, the nonempty one-point T, its supplied lift x, rho and this constant family. It provides a section z whose underlying germ is e.inverse(i.hom(v)). The germ comparison and the inverse identities transport its abelian germ through i.inv to v. The cited theorem treats arbitrary algebraically closed Omega, reducing internally to its relative algebraic closure while preserving germ formulas.",
+   "uses": [
+    "lem-exc-field-equivariant-germs-one-point-selected-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely, extend g in Gal(Ks/K) to tau on Omega by [lem-exc-galois-automorphism-extension]. The extension fixes the geometric base map because it is a K-algebra automorphism. The inverse j.left to the terminal structural map expresses the lift x.left as the base map followed by j.left, so changing x by Spec tau leaves it unchanged. Apply hi to the terminal section and that same lift. Injectivity of i.hom and its inverse identities yield rho(g) fixing the terminal germ transported through i.inv. This proves invariance for every g.",
    "uses": [
     "lem-exc-galois-automorphism-extension"
    ],
@@ -23,12 +40,13 @@
   }
  ],
  "proof_deps": [
+  "lem-exc-field-equivariant-germs-one-point-selected-lift",
   "lem-exc-galois-automorphism-extension"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04JM direct proof, checked at https://stacks.math.columbia.edu/tag/04JM"
+  "document": "https://stacks.math.columbia.edu/tag/04JM",
+  "place": "Lemma 59.56.5: F1 uses existing selected-lift reconstruction for the converse, the canonical forgetful stalk comparison and the direct terminal-lift invariance argument; no new reconstruction obligation"
  },
  "mathlib_searches": [
   {
@@ -101,10 +119,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T210407-L-969302",
-  "kind": "interface",
+  "landing": "20261012T225307-L-1803993",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
