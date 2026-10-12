@@ -33,77 +33,39 @@
  ],
  "proof": [
   {
-   "text": "Put $A=R/\\mathfrak m^2$, $\\mathfrak n=\\mathfrak m/\\mathfrak m^2\\subset A$, and let $q:A\\to\\kappa$ be the residue map. Then $\\mathfrak n^2=0$ and $A/\\mathfrak n=\\kappa$. By [lem-weil-pbc-kahler-differentials-mod-power-ideal] with $S=R$, $I=\\mathfrak m$, and $n=1$, the quotient $R\\to A$ induces an isomorphism $\\Omega_{R/k}\\otimes_R\\kappa\\xrightarrow{\\sim}\\Omega_{A/k}\\otimes_A\\kappa$ taking $\\mathrm da\\otimes1$ to $\\mathrm d\\bar a\\otimes1$. The quotient map $\\mathfrak m/\\mathfrak m^2\\to\\mathfrak n$ is the identity on residue classes. Thus it suffices to prove injectivity of $\\mathfrak n\\to\\Omega_{A/k}\\otimes_A\\kappa$, $u\\mapsto\\mathrm du\\otimes1$.",
-   "uses": [
-    "lem-weil-pbc-kahler-differentials-mod-power-ideal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TU (lemma-computation-differential), lines 38702-38704; differential comparison is Lemma Tag 02HQ (lemma-differential-mod-power-ideal) with n=1"
-   }
-  },
-  {
-   "text": "Since $\\kappa/k$ is finitely generated and separable [def-weil-pbc-separable-field-extension], choose a separating transcendence basis $\\bar x_1,\\ldots,\\bar x_r$ [def-weil-pbc-transcendence-basis]. It is finite: if $\\kappa=k(a_1,\\ldots,a_N)$, algebraic independence forces $r\\le N$, and $\\kappa$ is algebraic and generated as a field by the finitely many $a_j$ over $F=k(\\bar x_1,\\ldots,\\bar x_r)$, hence finite over $F$. This finite algebraic extension is separable by the choice of basis [def-weil-pbc-separable-algebraic-extension]. By [lem-weil-pbc-finite-separable-extension-primitive-element], choose $\\bar y\\in\\kappa$ with $\\kappa=F(\\bar y)$. Its monic minimal polynomial $P\\in F[T]$ is separable, so $P(\\bar y)=0$ and $P'(\\bar y)\\ne0$.",
+   "text": "Apply separability to the finitely generated top intermediate field. Unpack its separating transcendence basis s. Mathlib Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable shows that this top intermediate field is formally smooth over k; transport along IntermediateField.topEquiv to obtain formal smoothness of the residue field κ.",
    "uses": [
     "def-weil-pbc-separable-field-extension",
     "def-weil-pbc-transcendence-basis",
-    "def-weil-pbc-separable-algebraic-extension",
-    "lem-weil-pbc-finite-separable-extension-primitive-element"
+    "def-weil-pbc-separable-algebraic-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TU (lemma-computation-differential), lines 38704-38714; finite separable primitive element is Fields Lemma Tag 030N"
-   }
+   "elementary": false
   },
   {
-   "text": "Lift each $\\bar x_i$ to $x_i\\in A$. Algebraic independence says that every nonzero polynomial $f\\in k[T_1,\\ldots,T_r]$ has $f(\\bar x_1,\\ldots,\\bar x_r)\\ne0$ in $\\kappa$. Hence $f(x_1,\\ldots,x_r)$ lies outside the maximal ideal $\\mathfrak n$ of the local ring $A$ and is a unit: if it were a nonunit, its principal ideal would lie in a maximal ideal, necessarily $\\mathfrak n$. The evaluation map $k[T_1,\\ldots,T_r]\\to A$ therefore extends uniquely by fractions to a $k$-algebra homomorphism $\\varphi:F=k(\\bar x_1,\\ldots,\\bar x_r)\\to A$ whose composite with $q$ is the inclusion $F\\hookrightarrow\\kappa$.",
+   "text": "Let f : R → κ be the surjective residue algebra map and q = f.kerSquareLift : R/(ker f)^2 → κ. Its kernel is the cotangent ideal, whose square is zero (AlgHom.ker_kerSquareLift and Ideal.cotangentIdeal_square). Formal smoothness of κ/k lifts the identity of κ through q, giving a k-algebra section σ, by Algebra.FormallySmooth.liftOfSurjective and comp_liftOfSurjective. This packages the transcendence-basis lifting and simple-root adjustment of the source.",
    "uses": [
-    "def-weil-pbc-transcendence-basis"
+    "def-weil-pbc-separable-field-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TU (lemma-computation-differential), lines 38714-38721 (the displayed commutative triangle)"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose any $y_0\\in A$ with $q(y_0)=\\bar y$ and evaluate the polynomial $P^\\varphi\\in A[T]$ obtained by applying $\\varphi$ to its coefficients. Since $P(\\bar y)=0$, $c=P^\\varphi(y_0)$ lies in $\\mathfrak n$. Since $P'(\\bar y)\\ne0$, $u=(P')^\\varphi(y_0)$ has nonzero residue and is a unit of $A$ by the local-ring argument of step 3. Put $\\delta=-u^{-1}c\\in\\mathfrak n$ and $y=y_0+\\delta$. As $\\mathfrak n^2=0$, polynomial expansion gives $P^\\varphi(y)=P^\\varphi(y_0)+(P')^\\varphi(y_0)\\delta=c-u u^{-1}c=0$. Thus evaluation $T\\mapsto y$ defines an $F$-algebra homomorphism $F[T]/(P)\\to A$. The natural $F$-algebra isomorphism $F[T]/(P)\\cong F(\\bar y)=\\kappa$ makes this a $k$-algebra section $\\sigma:\\kappa\\to A$ of $q$: on $F$ its residue is the inclusion by step 3, and it sends $\\bar y$ to $y$ with residue $\\bar y$.",
+   "text": "Mathlib retractionKerCotangentToTensorEquivSection converts σ to an R-linear left inverse l of KaehlerDifferential.kerCotangentToTensor k R κ. This equivalence packages the square-zero conormal retraction and the differential comparison with R/(ker f)^2. Hence the cotangent map is injective by Function.LeftInverse.injective. Compose with Ideal.Cotangent.equivOfEq for ker(residue)=maximalIdeal to obtain precisely the stated injection.",
    "uses": [
-    "lem-weil-pbc-finite-separable-extension-primitive-element"
+    "lem-weil-pbc-square-zero-section-conormal-retraction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TU (lemma-computation-differential), lines 38721-38734 (simple-root adjustment in the square-zero ideal)"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-square-zero-section-conormal-retraction] to the surjective $k$-algebra map $q:A\\to\\kappa$, its square-zero kernel $\\mathfrak n$, and the section $\\sigma$ of step 4. It gives a left inverse to $\\mathfrak n\\to\\kappa\\otimes_A\\Omega_{A/k}$, $u\\mapsto1\\otimes\\mathrm du$, hence this map is injective. The symmetry of the tensor product identifies this map with $u\\mapsto\\mathrm du\\otimes1$ in step 1, and step 1's differential isomorphism identifies that map with the map $\\mathfrak m/\\mathfrak m^2\\to\\Omega_{R/k}\\otimes_R\\kappa$ in the statement. Therefore the latter is injective.",
-   "uses": [
-    "lem-weil-pbc-square-zero-section-conormal-retraction",
-    "lem-weil-pbc-kahler-differentials-mod-power-ideal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TU (lemma-computation-differential), lines 38734-38737, citing Lemma Tag 02HP (lemma-differential-seq-split)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-kahler-differentials-mod-power-ideal",
   "def-weil-pbc-separable-field-extension",
   "def-weil-pbc-transcendence-basis",
   "def-weil-pbc-separable-algebraic-extension",
-  "lem-weil-pbc-finite-separable-extension-primitive-element",
   "lem-weil-pbc-square-zero-section-conormal-retraction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 00TU (lemma-computation-differential), lines 38702-38737, with the cited Lemmas 02HQ, 030N and 02HP made explicit"
+  "place": "Algebra, Tag 00TU (lemma-computation-differential), proof lines 38702–38737; same square-zero section and conormal splitting argument, packaged using Mathlib.RingTheory.Smooth.Field and Mathlib.RingTheory.Smooth.Kaehler rather than a separate primitive-element construction and unproved differential-comparison theorem."
  },
  "mathlib_searches": [
   {
@@ -192,5 +154,15 @@
   "group": "G1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T194131-L-461647",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
