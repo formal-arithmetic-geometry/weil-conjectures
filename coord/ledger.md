@@ -8588,3 +8588,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: merged deliver/X2/Sheaf.AlgebraicGeometry.FieldFibreHomology (stage 3; reviewer PASS; first push; landing 20261012T163624-L-2788903 (proof); batch 20261012T163610; modules 1; new nodes 0)
 - 16:36 L: merged deliver/X2/Sheaf.Paper.StrictHenselianStalkSectionsComparison (stage 3; reviewer PASS; first push; landing 20261012T163624-L-2789001 (interface); batch 20261012T163610; modules 3; new nodes 2)
 - 16:36 L: merged deliver/X3/Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful (stage 3; reviewer PASS; first push; landing 20261012T163624-L-2789102 (proof); batch 20261012T163610; modules 1; new nodes 0)
+- 16:36 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.AffineModuleTensorUnitLift (stage 3; reviewer PASS; first push; landing 20261012T163625-L-2789199 (proof); batch 20261012T163610; modules 1; new nodes 0)

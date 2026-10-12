@@ -16,34 +16,36 @@
  ],
  "proof": [
   {
-   "text": "The pullback adjoint is the pullback unit followed by pushforward of gamma. The hP tensor-unit formula identifies its section after kappa inverse with the sheafification of 1 tensor eta(g), and hH identifies the subsequent extension along epsilon.",
+   "text": "Apply the change-of-rings adjunction along epsilon to the transported identity of H(G). This constructs a B-linear map z from P(G) to Res_epsilon H(G). Its section formula and hH show z(p)=gamma(kappa(p)). Apply the change-of-rings adjunction along t to the composite of the inverse pobj transport and z, obtaining an IA-linear map q from I(G) to Res_t Res_epsilon H(G). The adjunction section formula, hP, cancellation of pobj transports and kappa inverse/hom, and the pullback hom-equivalence unit formula show that the original pullback adjunct d satisfies d_V(g)=q_(f^-1 V)(eta_ab,V(g)).",
    "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "def-pur-sheaf-tensor-product"
+    "lem-pc-module-change-of-rings-adjunction",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "For a in A(V), inverse-image linearity gives eta(a g)=eta(a) eta(g). Move eta(a) first to the B factor along t by the balanced relation and then through epsilon in the second tensor product. The identity t epsilon=e and the ring adjunction triangle evaluate this scalar to a in R(HG). Thus the adjoint is A-linear, with its existing additivity and restriction compatibility. This defines a_G with exactly the required restricted map. Zero rings and empty opens satisfy the same calculation.",
+   "text": "The inverse-image module unit is semilinear over the inverse-image ring unit. Apply this formula to d_V(a g), then use IA-linearity of q. The resulting scalar acting on H(G) is epsilon(t(eta_A(a))). Since t epsilon=e, applying the ring adjunction Hom equivalence to e=(Hom equivalence)^-1(identity) gives eta_A followed by pushforward(e)=identity. Thus epsilon(t(eta_A(a)))=a, proving A-linearity of every component of d. This argument does not require hpush or hb and includes zero rings and empty opens.",
    "uses": [
-    "lem-pc-module-inverse-image-adjunction",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-pc-topological-inverse-image-module"
    ],
    "elementary": false
+  },
+  {
+   "text": "Keep the underlying additive presheaf morphism of d and use its proved componentwise A-linearity with Mathlib PresheafOfModules.homMk to construct a:G to R(H(G)). The underlying presheaves and restriction maps are definitionally unchanged. Componentwise extensionality gives S.map(a)=d by reflexivity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-module-change-of-rings-adjunction",
   "lem-pc-module-pullback-adjunction",
-  "def-pur-sheaf-tensor-product",
-  "lem-pc-module-inverse-image-adjunction",
-  "def-weil-presheaf-modules-sheafification"
+  "def-pc-topological-inverse-image-module"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "N1 worker",
-  "date": "2026-10-12",
-  "note": "Details of the tensor construction and elucidation of Stacks 01SB, read online at https://stacks.math.columbia.edu/tag/01SB."
+  "agent": "Y2 stage-3 worker",
+  "date": "2026-10-13",
+  "note": "Lean proof of the Stacks 01SB tensor construction and elucidation, using the proved change-of-rings adjunction of Stacks 008A and semilinearity of the inverse-image unit. Sources read at https://stacks.math.columbia.edu/tag/01SB and https://stacks.math.columbia.edu/tag/008A. No change to the statement or the unit route."
  },
  "mathlib_searches": [
   {
@@ -147,10 +149,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T150953-L-2231029",
-  "kind": "interface",
+  "landing": "20261012T163625-L-2789199",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
