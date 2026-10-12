@@ -9640,3 +9640,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:38 L: merged deliver/R1/Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineRestrictionVanishing (stage 3; reviewer PASS; first push; landing 20261012T213853-L-1209537 (interface); batch 20261012T213845; modules 2; new nodes 1)
 - 21:38 L: merged deliver/R2/Sheaf.AlgebraicGeometry.Modules.ComplementaryBlockVanishes (stage 3; reviewer PASS; first push; landing 20261012T213853-L-1209730 (interface); batch 20261012T213845; modules 3; new nodes 2)
 - 21:38 L: merged deliver/S3/Sheaf.AlgebraicGeometry.GenericFiniteNoetherianSchemeSplitting (stage 3; reviewer PASS; first push; landing 20261012T213853-L-1209848 (interface); batch 20261012T213845; modules 2; new nodes 1)
+- 21:38 L: merged deliver/S3/Sheaf.AlgebraicGeometry.ThickeningSystemHomTransportCore (stage 3; reviewer PASS; first push; landing 20261012T213854-L-1210072 (proof); batch 20261012T213845; modules 1; new nodes 0)
