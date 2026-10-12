@@ -8256,3 +8256,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:42 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.ModuleCechLiftSquares (stage 3; reviewer PASS; first push; landing 20261012T144203-L-2113655 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:42 L: merged deliver/Y3/Sheaf.RingTheory.EssentiallySmoothComp (stage 3; reviewer PASS; first push; landing 20261012T144203-L-2113794 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:42 L: merged deliver/Y3/Sheaf.RingTheory.FlatOverRegular (stage 3; reviewer PASS; first push; landing 20261012T144203-L-2113915 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:47 L: returned deliver/G3/Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore (reviewer RETURN: (reviewer X-1f91b, head 1f91bc1e4) D1/D2: CompatibleStrictHenselizationResidueLift.lean:42–66 moves the corrected item's)
