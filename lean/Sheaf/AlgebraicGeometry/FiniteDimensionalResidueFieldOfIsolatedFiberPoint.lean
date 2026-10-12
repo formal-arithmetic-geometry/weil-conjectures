@@ -7,8 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Sheaf.AlgebraicGeometry.FibreProductPointResidueField
-import Sheaf.AlgebraicGeometry.LftOverFieldIsolatedPointResidueFinite
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 /-!
 # Residue fields at isolated points of fibres
@@ -52,6 +51,15 @@ theorem finiteDimensional_residueField_of_isOpen_singleton_asFiber
     (hx : IsOpen ({f.asFiber x} : Set (f.fiber (f x)))) :
     letI := (f.residueFieldMap x).hom.toAlgebra
     FiniteDimensional (S.residueField (f x)) (X.residueField x) := by
-  sorry
+  let := (f.residueFieldMap x).hom.toAlgebra
+  have hq : (f.stalkMap x).hom.QuasiFinite :=
+    (f.quasiFiniteAt_iff_isOpen_singleton_asFiber).mpr hx
+  have hr : (X.residue x).hom.QuasiFinite :=
+    RingHom.QuasiFinite.of_finite (RingHom.Finite.of_surjective _ (X.residue_surjective x))
+  have hc := hr.comp hq
+  rw [← CommRingCat.hom_comp, ← residue_residueFieldMap] at hc
+  have hi := RingHom.QuasiFinite.of_comp hc
+  let : Algebra.QuasiFinite (S.residueField (f x)) (X.residueField x) := hi
+  exact Module.Finite.of_quasiFinite
 
 end AlgebraicGeometry.Scheme.Hom
