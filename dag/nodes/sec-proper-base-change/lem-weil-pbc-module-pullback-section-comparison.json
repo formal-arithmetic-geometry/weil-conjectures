@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-module-pullback-section-comparison",
+ "kind": "statement",
+ "title": "Underlying sets of module pullback section comparisons",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\Lambda$ a commutative ring and $G$ an etale sheaf of $\\Lambda$-modules on $X$ [def-weil-pbc-etale-sheaves]. Let $G_{\\rm set}$ be its underlying sheaf of sets. For each morphism $f:Y\\to X$ and etale object $U\\to X$ [def-weil-pbc-etale-site], put $S_f(U)=(f_*f^{-1}G)(U)$ using [def-weil-pbc-direct-image], [def-weil-pbc-inverse-image], and $A_f(U)=(f^{-1}G_{\\rm set})(U\\times_XY)$ using [lem-weil-pbc-etale-inverse-image-algebraic-structures]. There are simultaneous bijections $e_{f,U}:S_f(U)\\to A_f(U)$ with the following compatibility. For $h:Z\\to Y$, $k:Z\\to X$ and $hf=k$, let $m_{h,f,k}:S_f(U)\\to S_k(U)$ be evaluation at $U$ of $f_*(\\eta_h(f^{-1}G))$, followed by the direct-image composition isomorphism $f_*h_*\\cong k_*$ and then $k_*$ of the inverse-image composition isomorphism $h^{-1}f^{-1}G\\cong k^{-1}G$ [lem-weil-pbc-inverse-image-composition]. For every $s\\in S_f(U)$,\n$$e_{k,U}(m_{h,f,k}(s))=r_{h,f,k}(e_{f,U}(s)),$$\nwhere $r_{h,f,k}$ is the canonical set section comparison [def-weil-pbc-sets-section-comparison], including restriction along the fibre-product pasting isomorphism. No limiting diagram, colimit, affineness, quasi-compactness, or finiteness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV (proposition-functoriality-algebraic-structures-topoi), clause (6), fixed-ring modules, and Proposition 00X6; canonical composition comparisons in Sites 03CB/03CC. Read https://stacks.math.columbia.edu/tag/00YV and /00X6; the comparison with the recorded ModuleCat adjunction and its section formula is written by the agent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-weil-pbc-sets-section-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Take the abelian inverse image and its unit-compatible underlying-set comparison. Transport the module structure by applying abelian inverse image to every scalar endomorphism λ_r. Additivity and functoriality preserve addition, multiplication, identity and zero relations among these maps. Naturality of the unit and counit makes them commute with every scalar. The hom-set adjunction is natural in both variables, so a map is Λ-linear if and only if its adjoint is Λ-linear. This gives an adjunction on the transported module sheaves to the recorded sectionwise module direct image.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the transported module inverse image with the recorded upperStar of ModuleCat by uniqueness of left adjoints, preserving the unit. Combine this with the abelian-to-set comparison. Evaluation at the base change of U gives e_(f,U); choose these for all f and U.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a commuting triangle, direct-image composition before and after forgetting is restriction along the same pullback-pasting isomorphism. The composition inverse-image isomorphisms are their mates, so the unit equation and uniqueness of mates identify them after forgetting. Evaluate at U and use naturality to move the coefficient comparisons across the unit and the restriction map. The three remaining factors are exactly etaleSetSectionComparison. Equality transport along hk is shared by both formulas.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-sets-section-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, clause (6); module adjunction transport and composition/unit identification are spelled out by M3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "forgetting module coefficients in etale inverse image commutes with canonical adjunction unit and composition comparison on sections",
+   "results": "StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv, StandardEtalePair.homEquiv_apply_coe, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, RingHom.etale_algebraMap, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.Scheme.Etale.forget",
+   "date": "2026-10-12",
+   "verdict": "No exact triangle comparison. Sheafification unit compatibility is an ingredient; the ModuleCat-to-set comparison requires adjunction transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafComposeNatTrans_fac",
+   "results": "CategoryTheory.sheafComposeNatTrans_fac",
+   "date": "2026-10-12",
+   "verdict": "No exact triangle comparison. Sheafification unit compatibility is an ingredient; the ModuleCat-to-set comparison requires adjunction transport."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafComposeNatTrans_fac|lanComp.*unit|unit.*lanComp",
+   "results": "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean, Mathlib/CategoryTheory/Sites/PreservesSheafification.lean, Mathlib/CategoryTheory/Sites/PreservesSheafification.lean, Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact triangle comparison. Sheafification unit compatibility is an ingredient; the ModuleCat-to-set comparison requires adjunction transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The underlying set sheaf of the inverse image of a module sheaf is the inverse image of its underlying set sheaf, compatibly with adjunction units and composition.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PullbackSectionsIsColimit",
+  "date": "2026-10-12",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "step 4 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, third paragraph, 'By Lemma 09Z7 (lemma-constructible-maps-into-constant-general) and the remarks above we may assume F is of the form f_*M where M is a finite Z/lZ-module and f: Y -> X is a finite morphism of finite presentation'); the fixed-module/set coefficient comparison needed for canonical pullback section continuity",
+   "via": [
+    "lem-weil-pbc-pullback-sections-is-colimit",
+    "lem-weil-pbc-limit-pullback-sections-colimit",
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "lem-weil-pbc-constructible-module-noetherian-descent",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModulePullbackSectionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackSectionComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_modulePullbackSectionComparison",
+  "statement": "theorem exists_modulePullbackSectionComparison\n    (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})\n    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    ∃ e : ∀ (Y : Scheme.{u}) (f : Y ⟶ X) (U : X.Etale),\n      (((lowerStar (ModuleCat.{u + 1} Λ) f).obj\n        ((upperStar (ModuleCat.{u + 1} Λ) f).obj G)).obj.obj (op U)) ≃\n      (((Scheme.etaleSetPullback f).obj\n        ((sheafForget X.smallEtaleTopology).obj G)).obj.obj\n          (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U))),\n      ∀ (Y Z : Scheme.{u}) (h : Z ⟶ Y) (f : Y ⟶ X) (k : Z ⟶ X)\n        (hk : h ≫ f = k) (U : X.Etale)\n        (s : ((lowerStar (ModuleCat.{u + 1} Λ) f).obj\n          ((upperStar (ModuleCat.{u + 1} Λ) f).obj G)).obj.obj (op U)),\n        e Z k U\n          ((((lowerStar (ModuleCat.{u + 1} Λ) f).map\n            ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).unit.app\n              ((upperStar (ModuleCat.{u + 1} Λ) f).obj G)) ≫\n            (lowerStarComp (ModuleCat.{u + 1} Λ) h f k hk.symm).hom.app _ ≫\n            (lowerStar (ModuleCat.{u + 1} Λ) k).map\n              ((upperStarComp (ModuleCat.{u + 1} Λ) h f k hk.symm).inv.app G)).hom.app\n                (op U)) s) =\n          etaleSetSectionComparison h f k hk\n            ((sheafForget X.smallEtaleTopology).obj G) U (e Y f U s)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-sets-section-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T085306-L-26107",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T085306-L-26107",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

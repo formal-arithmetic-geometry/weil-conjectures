@@ -25,116 +25,48 @@
  ],
  "proof": [
   {
-   "text": "*The system of etale objects and its limit.* Let $s:V_0\\to X_0$ be the given etale morphism and, for $i\\ge0$, $p_i:V_i=V_0\\times_{X_0}X_i\\to X_i$ and $t_{i0}:V_i\\to V_0$ the projections, $p:V=V_0\\times_{X_0}X\\to X$ and $t_0:V\\to V_0$ likewise. Base changes of etale morphisms are etale [lem-weil-pbc-etale-base-change-finite-limits] (1), so $p_i$, $p$ are etale. The transition morphisms $f_{i0}$ and the projection $f_0$ are affine ([lem-weil-pbc-limit-affine-transition]), so their base changes $t_{i0}$, $t_0$ are affine and, $V_0$ being affine, $V_i$ and $V$ are affine [lem-weil-pbc-affine-morphism-permanence] (1),(2); affine schemes are quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. By [lem-weil-pbc-scheme-over-limit] (with $T=V_0$, $S_i=X_i$), $(V_i,t_{i'i}=\\mathrm{id}_{V_0}\\times f_{i'i})_{i\\in I_{\\ge0}}$ is an inverse system over the directed set $I_{\\ge0}$ with affine transition morphisms and limit $V$, with projections $t_i=\\mathrm{id}_{V_0}\\times f_i:V\\to V_i$. From the definition of the fibre products [def-pc-fibre-product]: $p_i\\circ t_{i'i}=f_{i'i}\\circ p_{i'}$ and $p_i\\circ t_i=f_i\\circ p$, and the morphisms $\\iota_{i'i}=(t_{i'i},p_{i'}):V_{i'}\\to V_i\\times_{X_i}X_{i'}$ and $\\iota_i=(t_i,p):V\\to V_i\\times_{X_i}X$ are the canonical isomorphisms of iterated fibre products used in the statement, so these squares are cartesian. Put $w_i=f_{i0}\\circ p_i=s\\circ t_{i0}:V_i\\to X_0$ and $w=f_0\\circ p=s\\circ t_0:V\\to X_0$; then $w_i\\circ t_{i'i}=w_{i'}$ and $w_i\\circ t_i=w$ (equalities of morphisms, as $t_{i0}\\circ t_{i'i}=t_{i'0}$, $t_{i0}\\circ t_i=t_0$), and $f_{i0}\\circ f_{i'i}=f_{i'0}$, $f_{i0}\\circ f_i=f_0$.",
+   "text": "Use the underlying-set section comparison for fixed module coefficients to obtain equivalences q_f on every stage and the limit, commuting with the canonical triangle maps μ and τ. These equivalences require no scheme limit or colimit hypotheses.",
    "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-scheme-over-limit",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-module-pullback-section-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09YU, proof, 'Fully faithful' ($U=X\\times_{X_0}U_0$, $U_i=X_i\\times_{X_0}U_0$); literature/stacks-project/limits.tex Lemma 01YZ (lemma-scheme-over-limit) for $V=\\lim V_i$"
-   }
+   "elementary": false
   },
   {
-   "text": "*Reduction to abelian sheaves; $\\Lambda$-linearity.* By [prop-weil-pbc-inverse-image-modules-exact] (2),(3), for a morphism $u$ the module inverse image $u^{-1}$ has as underlying abelian sheaf the abelian inverse image of the underlying abelian sheaf, and the unit of the module adjunction $u^{-1}\\dashv u_*$ is the unit of the abelian one; in particular the units occurring in $\\rho_{i'i}$, $\\rho_i$ are $\\Lambda$-linear. The composition isomorphism $c_{u,v,G}$ of [lem-weil-pbc-inverse-image-composition] is $\\Lambda$-linear: on $\\Mod(-,\\Lambda)$ both $v^{-1}u^{-1}$ (with the composite unit) and $(u\\circ v)^{-1}$ are left adjoint to $u_*v_*\\cong(u\\circ v)_*$ (through $d_{u,v}$, which is made of restriction maps, hence $\\Lambda$-linear), so [lem-weil-pbc-conjugate-iso-unit-equation] gives an isomorphism $c'$ of module-valued functors satisfying the unit equation of [lem-weil-pbc-inverse-image-composition] (2); since the module units are the abelian ones, the underlying abelian map of $c'_G$ satisfies that equation too, so it equals $c_{u,v,G}$ by the uniqueness there. Restriction maps of sheaves of $\\Lambda$-modules are $\\Lambda$-linear. Hence $\\rho_{i'i}$ and $\\rho_i$ are $\\Lambda$-linear, and every assertion of the statement concerns only the underlying maps of abelian groups; from now on $\\mathcal G$ is regarded as an abelian sheaf, $\\mathcal G_i$, $\\mathcal G_\\infty$ as its abelian inverse images, and $c$, $\\eta$ as those of abelian sheaves [def-weil-pbc-inverse-image].",
+   "text": "Affine V₀ is compact and quasi-separated; the qcqs target makes its structure morphism quasi-compact, and quasi-separatedness of the source makes it quasi-separated. Apply the existing set section lift on the upper tail, convert its Over-index to an element i≥i₀, and pull its representative back through q_i. Comparison compatibility gives a module section mapping to the prescribed limit section.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-pbc-inverse-image"
+    "lem-weil-pbc-sets-section-lift",
+    "def-weil-pbc-scheme-conventions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09YU (lemma-category-is-colimit), proof, paragraph 'Fully faithful': '... This is a special case of Theorem 09YQ (theorem-colimit)'; the reduction to the theorem is written out by the agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*The system of sheaves on the $V_i$ and its colimit.* Put $\\mathcal F_i=w_i^{-1}\\mathcal G$ on $(V_i)_{\\Et}$ and, for $i'\\ge i\\ge0$, $\\varphi_{i'i}=c_{w_i,t_{i'i},\\mathcal G}:t_{i'i}^{-1}\\mathcal F_i\\xrightarrow{\\sim}(w_i\\circ t_{i'i})^{-1}\\mathcal G=\\mathcal F_{i'}$ ([lem-weil-pbc-inverse-image-composition] (2)). The associativity of $c$ ([lem-weil-pbc-direct-image-composition-coherence] and the mate unit equation of [lem-weil-pbc-conjugate-iso-unit-equation], with $(u,v,w)=(w_i,t_{i'i},t_{i''i'})$) is the cocycle condition $\\varphi_{i''i}\\circ c_{t_{i'i},t_{i''i'},\\mathcal F_i}=\\varphi_{i''i'}\\circ t_{i''i'}^{-1}\\varphi_{i'i}$, and its unit law gives $\\varphi_{ii}=c_{w_i,\\mathrm{id}}=e_{V_i,\\mathcal F_i}$, the identification $\\mathrm{id}^{-1}=\\mathrm{id}$; so $(\\mathcal F_i,\\varphi_{i'i})$ is a system of abelian sheaves on $(V_i,t_{i'i})$ as in [lem-weil-pbc-etale-cohomology-limit-of-schemes]. Its transition maps on $V$ are $\\psi_{i'i}=t_{i'}^{-1}\\varphi_{i'i}\\circ c_{t_{i'i},t_{i'},\\mathcal F_i}^{-1}:t_i^{-1}\\mathcal F_i\\to t_{i'}^{-1}\\mathcal F_{i'}$ (step 1 of that node). Let $\\gamma_i=c_{w_i,t_i,\\mathcal G}:t_i^{-1}\\mathcal F_i\\xrightarrow{\\sim}w^{-1}\\mathcal G$. Associativity of $c$ with $(u,v,w)=(w_i,t_{i'i},t_{i'})$ gives $\\gamma_{i'}\\circ t_{i'}^{-1}\\varphi_{i'i}=\\gamma_i\\circ c_{t_{i'i},t_{i'},\\mathcal F_i}$, i.e. $\\gamma_{i'}\\circ\\psi_{i'i}=\\gamma_i$. So the isomorphisms $\\gamma_i$ identify the system $(t_i^{-1}\\mathcal F_i,\\psi)$ with the constant system of value $w^{-1}\\mathcal G$ and identity transition maps; as $I_{\\ge0}$ is directed, hence connected, the constant cocone is a colimit [lem-weil-pbc-colimit-constant-connected-diagram], and therefore $(w^{-1}\\mathcal G,(\\gamma_i)_i)$ is a colimit of $(t_i^{-1}\\mathcal F_i,\\psi)$ [def-weil-pbc-category-colimit]. We take $\\mathcal F=w^{-1}\\mathcal G$ with coprojections $\\gamma_i$.",
+   "text": "Compare a stage section with zero. Their images on the limit agree. Apply set section eventual equality to q_i(s) and q_i(0). The two arrows in the resulting Over-category are equal because the original index is a preorder. Translate the common target to the upper tail and use q_j injectivity and linearity μ(0)=0 to obtain eventual zero in the module system. No zero-preservation property of q itself is assumed or needed.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-direct-image-composition-coherence",
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-weil-pbc-sets-section-eventual-equality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem 09YQ (theorem-colimit), applied as in the proof of Lemma 09YU, 'Fully faithful'; the constant system is written out by the agent as in lem-weil-pbc-etale-cohomology-limit-of-schemes, step 9"
-   }
+   "elementary": false
   },
   {
-   "text": "*Theorem 09YQ in degree $0$.* By step 1 the $V_i$ ($i\\ge0$) are quasi-compact and quasi-separated with affine transition morphisms and limit $V$, so [lem-weil-pbc-etale-cohomology-limit-of-schemes] with $p=0$, applied to the system of step 3 and the colimit $(w^{-1}\\mathcal G,\\gamma_i)$, shows that the maps $\\theta_i=H^0(\\gamma_i)\\circ t_i^*$ induce a bijection $\\varinjlim_{i\\ge0}H^0((V_i)_{\\Et},\\mathcal F_i)\\to H^0(V_{\\Et},w^{-1}\\mathcal G)$, the colimit being over the transition maps $H^0(\\varphi_{i'i})\\circ t_{i'i}^*$, which form a directed system by [lem-weil-pbc-cohomology-pullback-functorial] (3),(4) and the cocycle condition of step 3. Translate to sections with [lem-weil-pbc-cohomology-pullback-degree-zero]: the isomorphisms $\\epsilon:\\Gamma(T,-)\\xrightarrow{\\sim}H^0(T_{\\Et},-)$ of (1) are natural in the sheaf, and by (2) $t^*\\circ\\epsilon=\\epsilon\\circ\\eta_t(\\text{global sections})$ ([def-weil-pbc-cohomology-pullback], [def-weil-pbc-etale-cohomology]). Hence, with $\\sigma_{i'i}=\\varphi_{i'i}(V_{i'})\\circ\\eta_{t_{i'i},\\mathcal F_i}(V_i):\\mathcal F_i(V_i)\\to\\mathcal F_{i'}(V_{i'})$ and $\\sigma_i=\\gamma_i(V)\\circ\\eta_{t_i,\\mathcal F_i}(V_i):\\mathcal F_i(V_i)\\to(w^{-1}\\mathcal G)(V)$ (units on global sections, $(t_*H)(V_i)=H(V_{i'})$, resp. $H(V)$, as in [def-weil-pbc-cohomology-pullback]): $\\sigma_{i''i'}\\circ\\sigma_{i'i}=\\sigma_{i''i}$, $\\sigma_{i'}\\circ\\sigma_{i'i}=\\sigma_i$, and the induced map $\\varinjlim_{i\\ge0}\\mathcal F_i(V_i)\\to(w^{-1}\\mathcal G)(V)$ is bijective.",
+   "text": "Transport lift and eventual zero through the supplied isomorphisms e_i and eB. Every element of the chosen filtered module colimit has a representative. Lifting proves surjectivity of colimit.desc F B. For injectivity, use the kernel criterion for an additive map: if a colimit class has zero image under desc, choose a stage representative; its image under the cocone leg is zero. Eventual zero supplies a later transition where this representative vanishes. The colimit cocone equation then makes the original class zero. The bijective linear desc is an isomorphism; use its induced cocone isomorphism to transport the chosen colimit universal property to B.",
    "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-cohomology-pullback-degree-zero",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-etale-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09YU, proof, 'Fully faithful': '$f_0^{-1}\\mathcal G(U)=\\colim_{i\\ge0}f_{i0}^{-1}\\mathcal G(U_i)$ ... This is a special case of Theorem 09YQ' (degree 0)"
-   }
-  },
-  {
-   "text": "*Comparison of the two systems.* Let $\\rho^{\\mathrm{res}}$ denote the isomorphisms of [lem-weil-pbc-etale-inverse-image-restriction] (1) for the etale $p_i$, $p$ (natural in the sheaf), and define the bijections $\\alpha_i=c_{f_{i0},p_i,\\mathcal G}(V_i)\\circ\\rho^{\\mathrm{res}}_{\\mathcal G_i}(V_i)^{-1}:\\mathcal G_i(V_i)\\to\\Gamma(V_i,p_i^{-1}\\mathcal G_i)\\to\\mathcal F_i(V_i)$ and $\\alpha=c_{f_0,p,\\mathcal G}(V)\\circ\\rho^{\\mathrm{res}}_{\\mathcal G_\\infty}(V)^{-1}:\\mathcal G_\\infty(V)\\to(w^{-1}\\mathcal G)(V)$ ([lem-weil-pbc-inverse-image-composition], $w_i=f_{i0}p_i$, $w=f_0p$). Claim: $\\alpha_{i'}\\circ\\rho_{i'i}=\\sigma_{i'i}\\circ\\alpha_i$ and $\\alpha\\circ\\rho_i=\\sigma_i\\circ\\alpha_i$. For the first, let $b\\in\\mathcal G_i(V_i)$, $a=\\rho^{\\mathrm{res}}_{\\mathcal G_i}(V_i)^{-1}(b)$, $t=t_{i'i}$. [lem-weil-pbc-etale-restriction-pullback-unit] for the cartesian square $(g,p,g',p')=(f_{i'i},p_i,t,p_{i'})$ of step 1 and $F=\\mathcal G_i$ gives $(f_{i'i}^{-1}\\mathcal G_i)(\\iota_{i'i})(\\eta_{f_{i'i},\\mathcal G_i}(V_i)(b))=\\rho^{\\mathrm{res}}(V_{i'})(\\kappa(V_{i'})(\\eta_{t}(V_i)(a)))$ with $\\kappa=c_{f_{i'i},p_{i'}}^{-1}\\circ c_{p_i,t}$ at $\\mathcal G_i$. Apply $c_{f_{i0},f_{i'i},\\mathcal G}(V_{i'})$: it commutes with the restriction along $\\iota_{i'i}$ (a morphism of sheaves), so the left side becomes $\\rho_{i'i}(b)$ by the definition of $\\rho_{i'i}$; on the right, naturality of $\\rho^{\\mathrm{res}}$ moves it inside as $p_{i'}^{-1}(c_{f_{i0},f_{i'i}})$. Hence $\\alpha_{i'}(\\rho_{i'i}(b))=\\bigl[c_{f_{i'0},p_{i'}}\\circ p_{i'}^{-1}c_{f_{i0},f_{i'i}}\\circ c_{f_{i'i},p_{i'}}^{-1}f_{i0}^{-1}\\circ c_{p_i,t}f_{i0}^{-1}\\bigr](V_{i'})(\\eta_t(V_i)(a))$, which by associativity of $c$ ([lem-weil-pbc-direct-image-composition-coherence] and the mate unit equation of [lem-weil-pbc-conjugate-iso-unit-equation], $(u,v,w)=(f_{i0},f_{i'i},p_{i'})$) equals $[c_{f_{i0},f_{i'i}p_{i'}}\\circ c_{p_i,t}f_{i0}^{-1}](V_{i'})(\\eta_t(V_i)(a))$. On the other side, naturality of the unit $\\eta_t$ [def-weil-pbc-inverse-image] along the morphism $c_{f_{i0},p_i,\\mathcal G}$ gives $\\sigma_{i'i}(\\alpha_i(b))=[c_{w_i,t}\\circ t^{-1}c_{f_{i0},p_i}](V_{i'})(\\eta_t(V_i)(a))$, and associativity with $(u,v,w)=(f_{i0},p_i,t)$ turns this into $[c_{f_{i0},p_it}\\circ c_{p_i,t}f_{i0}^{-1}](V_{i'})(\\eta_t(V_i)(a))$. Since $p_i\\circ t=f_{i'i}\\circ p_{i'}$ (step 1) the two agree. The second identity is the same computation for the cartesian square $(f_i,p_i,t_i,p)$, with $\\iota_i$, $f_{i0}\\circ f_i=f_0$ and $p_i\\circ t_i=f_i\\circ p$.",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-etale-restriction-pullback-unit",
-    "lem-weil-pbc-direct-image-composition-coherence",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "not in the source (the identification of the maps of Theorem 09YQ in degree 0 with the maps $\\rho$ of the statement); written by the agent"
-   }
-  },
-  {
-   "text": "Transport the section-group colimit through the supplied stage and target isomorphisms. The compatibility equations identify all arrows and cocone legs. Filtered colimits of Lambda-modules are formed on underlying abelian groups with the scalar action induced stagewise, so the underlying group colimit is also the asserted module colimit. No elementwise criterion is used here.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-module-pullback-section-comparison",
+  "lem-weil-pbc-sets-section-lift",
   "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-scheme-over-limit",
-  "def-pc-fibre-product",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-direct-image-composition-coherence",
-  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-cohomology-pullback-degree-zero",
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-restriction-pullback-unit"
+  "lem-weil-pbc-sets-section-eventual-equality",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Theorem 09YQ (theorem-colimit), degree zero, as applied in Lemma 09YU (lemma-category-is-colimit), proof, Fully faithful; steps 1-5 of the parent node; grouping and module-encoding glue by A3; second reader replaces the derived-coherence citation with sheaf-level direct-image coherence and the mate unit equation."
+  "place": "Degree-zero continuity in Theorem 09YQ as used in Lemma 09YU, Fully faithful; M3 uses the existing set-section lift and eventual-equality statements, then a real filtered-module colimit argument. The only new unresolved statement is the coefficient/triangle comparison from Sites 00YV(6)."
  },
  "mathlib_searches": [
   {
@@ -229,9 +161,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T063504-L-3152358",
+  "landing": "20261012T085306-L-26107",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
