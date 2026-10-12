@@ -12,17 +12,22 @@
  },
  "proof": [
   {
-   "text": "Choose finitely many B-generators and enlarge them to their finitely many homogeneous components. Their B-span contains the original generators and hence is all of the direct sum. Let c0 bound their degrees, with c0=0 for the empty set.",
+   "text": "Install the supplied Rees-module and finite-module structures. Extract a finite spanning set T using Module.Finite.fg_top. Let c0 be the supremum of the finite union of supports of T. Every component of every generator then has degree at most c whenever c0<=c. The case k=0 follows from hzero at coefficient 1.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "For nonzero a, convolution on a*t^k and a single homogeneous vector identifies L(k,n,a) with the homogeneous action. Zero monomials act by zero and are omitted; no condition on L(k,n,0) is needed since its additional images only enlarge the spanning set. Module associativity and the degree-zero formula give multiplication of coefficients and the given A-action. Project a finite expression in the homogeneous generators to degree c+k. A generator of degree d<=c contributes only coefficients in I^(c+k-d).",
+   "text": "Define actual Rees monomials by Polynomial.monomial and reesAlgebra.monomial_mem. For nonzero coefficients the convolution formula on a homogeneous vector is its single homogeneous action L. Prove monomial zero, addition, and multiplication identities by subtype extensionality and the corresponding polynomial identities.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Factor I^(c+k-d)=I^k * I^(c-d). Write each coefficient as a finite sum of products a*b with a in I^k and b in I^(c-d). Associativity moves b onto the degree-d generator, making a degree-c vector; a then acts by L(k,c,a). Thus these images span M_(c+k); the other containment is automatic. This also treats zero modules, I=0 or A, and k=0.",
+   "text": "For d<=c factor I^(k+(c-d))=I^k*I^(c-d). Submodule.smul_induction_on' expresses coefficient membership through products and sums. Monomial multiplication and module associativity move the I^(c-d) factor to degree c; the I^k factor has its degree c+k component in the requested A-span. Handle zero factors by zero_smul without assuming L(k,d,0)=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand convolution for a vector supported in degrees at most c and project to c+k. Off-degree terms vanish; matching terms have r=k+(c-d), so the coefficient factorization applies. Use Submodule.span_induction with predicate that every Rees scalar multiple has its c+k component in the desired span. For generators use the support bound; use smul_add and smul_smul for closure. Apply to an arbitrary degree c+k vector with scalar 1 to obtain equality with the top submodule.",
    "uses": [],
    "elementary": true
   }
@@ -31,7 +36,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 02OA, proof of (1), expanded into the abstract graded-module argument"
+  "place": "Lemma 02OA, proof of (1); read at https://stacks.math.columbia.edu/tag/02OA. Formalized using bounded supports and span induction instead of explicitly enlarging the generating set."
  },
  "mathlib_searches": [
   {
@@ -96,7 +101,7 @@
   "declaration": "AlgebraicGeometry.finite_rees_module_single_degree_generation",
   "statement": "theorem finite_rees_module_single_degree_generation\n    (A : Type v) [CommRing A] (I : Ideal A)\n    (M : ℕ → Type v) [∀ n, AddCommGroup (M n)] [∀ n, Module A (M n)]\n    (L : ∀ (k n : ℕ) (a : A), a ∈ I ^ k → M n →ₗ[A] M (n + k))\n    (hzero : ∀ (n : ℕ) (a : A) (ha : a ∈ I ^ 0) (x : M n),\n      L 0 n a ha x = a • x)\n    (mod : Module (reesAlgebra I) (⨁ n, M n))\n    (hfin : @Module.Finite (reesAlgebra I) (⨁ n, M n) _ _ mod)\n    (hact : ∀ (b : reesAlgebra I) (x : ⨁ n, M n),\n      @SMul.smul _ _ mod.toSMul b x =\n        ∑ k ∈ b.val.support, ∑ n ∈ x.support,\n          DirectSum.of M (n + k) (L k n (b.val.coeff k) (b.property k) (x n))) :\n    ∃ c0 : ℕ, ∀ c : ℕ, c0 ≤ c → ∀ k : ℕ,\n      Submodule.span A (Set.range (fun p : (↥(I ^ k)) × M c ↦ L k c p.1 p.1.property p.2)) =\n        (⊤ : Submodule A (M (c + k)))",
   "branch": "sheaf-dag",
-  "by": "G3",
+  "by": "E1",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -113,9 +118,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T173828-L-3296476",
-  "kind": "interface"
+  "landing": "20261012T184249-L-3999776",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
