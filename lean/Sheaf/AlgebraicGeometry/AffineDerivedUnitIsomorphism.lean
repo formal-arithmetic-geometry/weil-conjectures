@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
 import Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
+import Sheaf.AlgebraicGeometry.AffineDerivedUnitHomologyIsIso
 
 /-! # The derived affine unit
 
@@ -68,6 +69,8 @@ theorem affineDerivedUnit_isIso (A : Type u) [CommRing A]
         (RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙
           ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom).rightDerivedFunctor))
     (M : DerivedCategory (ModuleCat.{u} A)) : IsIso (adj.unit.app M) := by
-  sorry
+  apply (DerivedCategory.isIso_iff _ _).2
+  intro n
+  exact affineDerivedUnit_homology_isIso A F G adj hF hG M n
 
 end AlgebraicGeometry
