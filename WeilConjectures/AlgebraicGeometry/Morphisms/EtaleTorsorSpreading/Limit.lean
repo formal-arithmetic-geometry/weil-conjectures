@@ -41,6 +41,22 @@ The generic fibre `C_η` is the limit of the `C_{i, η_i}`, so `Z` with its `G`-
 rational point over `σ(η)` descend to a Galois cover `Z_i` of `C_{i, η_i}`. The Noetherian case
 gives a finite étale extension `Y_i` of `Z_i` over `C_i`, and `Y_i ×_{C_i} C` extends `Z`.
 
+Plan (local version). By `exists_isFinite_etale_isPullback_of_forall_etaleOver` it suffices
+that the normalization is étale over every `s ∈ S`, which is local at `s` (normalization commutes
+with the flat base change `Spec 𝒪_{S,s} ⟶ S`). The local ring `A = 𝒪_{S,s}` is a filtered union
+of Noetherian normal local subrings `P` dominated by `A`: for a finitely generated subring
+`R₀ ⊆ A`, the localized integral closure of `R₀` in `Frac R₀` is finite over `R₀` in equal
+characteristic (Noether's finiteness theorem `Algebra.FiniteType.finite_integralClosure` over
+`ℚ` or `𝔽_p`), and in mixed characteristic `(0, p)` one uses a system of parameters `x` of the
+closed fibre, Zariski's main theorem (`Algebra.ZariskisMainProperty.of_finiteType`) for
+`ℤ_(p)[x] ⟶ R₀` and `IsIntegralClosure.finite`. The smooth affine `C` with its section, the
+Galois cover with its action and rational point, and `|G|⁻¹` descend to some `P`.
+The remaining obstacle is that the descended family must have geometrically connected fibres
+over *all* points of `Spec P`, while `Spec A ⟶ Spec P` is not surjective in general (e.g. a
+blow-up chart, or a valuation ring of rank `≥ 2`); this needs either [Stacks 055R] (openness of
+the union of the fibre components through the section) or the constructibility of the locus of
+geometrically irreducible fibres (EGA IV 9.7.7), neither of which is available.
+
 Status: this step is left open. The base cannot be taken Noetherian in the application: the
 vanishing theorem (`AlgebraicGeometry.Etale.exists_etaleTorsor_cohomologyMap_eq_zero`) applies it
 to the base of a curve-test datum, which is the spectrum of the integral closure of an arbitrary
