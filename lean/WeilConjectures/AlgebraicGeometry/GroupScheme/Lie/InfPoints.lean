@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
+import Sheaf.AlgebraicGeometry.DualNumbersDiagonal
 
 /-!
 # Infinitesimal points of a group scheme
@@ -63,7 +64,22 @@ instance : (infPoints G).Normal :=
 /-- The infinitesimal points form a commutative group: their group law is the addition of tangent
 vectors. -/
 theorem isMulCommutative_infPoints : IsMulCommutative (infPoints G) := by
-  sorry
+  apply isMulCommutative_iff.mpr
+  intro v w
+  apply Subtype.ext
+  open MonoidalCategory CartesianMonoidalCategory in
+  have h := Scheme.dualNumbers_diagonal_comp_eq_of_axes S G
+    (lift (fst _ _ ≫ v.1) (snd _ _ ≫ w.1) ≫ μ[G])
+    (lift (snd _ _ ≫ w.1) (fst _ _ ≫ v.1) ≫ μ[G])
+    (by
+      simp only [← Category.assoc, comp_lift, lift_fst, lift_snd]
+      simp only [Category.assoc, (mem_infPoints G).mp w.2]
+      simp [← Hom.mul_def, MonObj.comp_one])
+    (by
+      simp only [← Category.assoc, comp_lift, lift_fst, lift_snd]
+      simp only [Category.assoc, (mem_infPoints G).mp v.2]
+      simp [← Hom.mul_def, MonObj.comp_one])
+  simpa [← Category.assoc, comp_lift, ← Hom.mul_def] using h
 
 /-- The identity point, as a morphism of schemes, is the identity section. -/
 theorem one_left : (1 : Over.mk (𝟙 S) ⟶ G).left = unitSection G := by

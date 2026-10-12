@@ -1,0 +1,136 @@
+{
+ "id": "lem-ag-inf-points-commutative",
+ "kind": "statement",
+ "title": "Infinitesimal points of a group scheme commute",
+ "statement": "Let $S$ be any scheme and $G$ a group scheme over $S$ [def-sc-group-scheme]. Let $D=S[\\varepsilon]$ be its dual-number thickening [def-sc-dual-numbers]. The kernel of restriction $G(D)\\to G(S)$ along $\\varepsilon=0$ is a commutative group with its inherited pointwise group law.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0B2B",
+  "place": "Lemma 33.16.2 proof: square-zero pushout and epsilon_i mapping to epsilon; local arbitrary-ring form and group-unit-law application written out here"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Let D=S[epsilon] over S, and take infinitesimal points v,w, so their restrictions along S to D are the group identity. On D times_S D consider F=(v after first projection)*(w after second projection) and H=(w after second projection)*(v after first projection). Their restrictions to the first axis are v*1 and 1*v, equal by the unit laws; their restrictions to the second axis are 1*w and w*1, likewise equal.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-ag-dual-numbers-diagonal to F and H. Their restrictions to the diagonal are v*w and w*v, respectively, by the naturality of the product and group multiplication. Subtype extensionality gives commutativity in the kernel subgroup.",
+   "uses": [
+    "lem-ag-dual-numbers-diagonal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-ag-dual-numbers-diagonal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0B2B",
+  "place": "Local arbitrary-base extension of the square-zero calculation; group-unit-law deduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a square zero thickening agree along the diagonal if they agree on both coordinate axes",
+   "results": "Service unavailable: Internal Server Error; no search results obtained.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of reduction of group scheme points over dual numbers is commutative, first order multiplication is addition",
+   "results": "Algebra.Extension and cotangent-ideal results, no geometric diagonal or group-scheme commutativity result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TrivSqZeroExt, RingHom",
+   "results": "Canonical inclusion and algebraMap results only.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualNumbers.*diagonal|square.zero.*pushout|infinitesimal.*commut; blueprint search dual number; local source search first-order multiplication",
+   "results": "No Mathlib match. Existing Sheaf.DualNumberSchemePushout and TangentVectorsVectorSpace are restricted to fields; InfPointsEquiv imports the item. No duplicate of the geometric arbitrary-base statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme morphisms determined by restriction to closed subschemes whose defining ideals have zero intersection",
+   "results": "Scheme.hom_ext_of_forall supplies open-local extensionality; ideal-sheaf and pointsPi lemmas do not give dual-number diagonal restriction. No exact match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TrivSqZeroExt\", \"ext\"",
+   "results": "Twelve hits: the type and canonical projections, inclusions, and algebraic instances; no scheme diagonal restriction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "infPoints|diagonal_comp_eq|IsMulCommutative|commutator|jointly|inf.*ker|ker.*inf in lean/WeilConjectures/AlgebraicGeometry/GroupScheme; TrivSqZeroExt|squareZero|SquareZero in Mathlib/AlgebraicGeometry; read DualNumberSchemePushout and DualNumbers",
+   "results": "lieEquiv_mul is downstream of InfPoints and cannot be imported without a cycle. Existing scheme pushout lemma assumes a field. No arbitrary-base diagonal lemma found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-lie-algebra-derivation",
+   "place": "Lie algebra paragraph: tangent points 1+epsilon X and the additive first-order group law",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-tangent",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/InfPoints.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.isMulCommutative_infPoints",
+  "statement": "theorem isMulCommutative_infPoints : IsMulCommutative (infPoints G)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T042409-L-1815968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T042409-L-1815968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

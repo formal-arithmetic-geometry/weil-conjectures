@@ -1,0 +1,137 @@
+{
+ "id": "lem-ag-dual-numbers-diagonal",
+ "kind": "statement",
+ "title": "First-order diagonal restriction is determined by the two axes",
+ "statement": "Let $S$ be any scheme [def-pc-scheme] and let $D=S[\\varepsilon]$ be its dual-number thickening [def-sc-dual-numbers] over $S$. Let $X$ be any scheme over $S$ and $f,g:D\\times_S D\\to X$ be $S$-morphisms. Let $z:D\\to D$ be the projection to $S$ followed by the zero section $S\\to D$. If $f\\circ(\\mathrm{id},z)=g\\circ(\\mathrm{id},z)$ and $f\\circ(z,\\mathrm{id})=g\\circ(z,\\mathrm{id})$, then $f\\circ(\\mathrm{id},\\mathrm{id})=g\\circ(\\mathrm{id},\\mathrm{id})$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0B2B",
+  "place": "Lemma 33.16.2 proof: square-zero pushout and epsilon_i mapping to epsilon; local arbitrary-ring form and group-unit-law application written out here"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Locally on an affine open Spec R of the base, the product of dual-number thickenings is Spec A for A=R[epsilon,delta]/(epsilon^2,delta^2). Its underlying space and those of both axes and the diagonal identify with Spec R, since the nilpotent ideals lie in every prime. Equality on either axis therefore identifies the underlying maps of f and g. Around every image point restrict to an affine target open, and shrink the affine base open inside its inverse image.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The two ring maps now agree modulo (delta) and modulo (epsilon). For each element of the target coordinate ring their difference lies in the intersection of these ideals. The unique expansion a+b epsilon+c delta+d epsilon delta shows that this intersection is exactly (epsilon delta), even if R is nonreduced or has zero divisors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The diagonal ring map sends epsilon and delta to the same square-zero variable, so annihilates (epsilon delta). The diagonal comorphisms therefore agree. Scheme morphisms glue uniquely over an open cover of the source; hence the diagonal scheme maps, and thus the slice morphisms over S, agree globally.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0B2B",
+  "place": "Local arbitrary-base extension of the square-zero calculation; group-unit-law deduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a square zero thickening agree along the diagonal if they agree on both coordinate axes",
+   "results": "Service unavailable: Internal Server Error; no search results obtained.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of reduction of group scheme points over dual numbers is commutative, first order multiplication is addition",
+   "results": "Algebra.Extension and cotangent-ideal results, no geometric diagonal or group-scheme commutativity result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TrivSqZeroExt, RingHom",
+   "results": "Canonical inclusion and algebraMap results only.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualNumbers.*diagonal|square.zero.*pushout|infinitesimal.*commut; blueprint search dual number; local source search first-order multiplication",
+   "results": "No Mathlib match. Existing Sheaf.DualNumberSchemePushout and TangentVectorsVectorSpace are restricted to fields; InfPointsEquiv imports the item. No duplicate of the geometric arbitrary-base statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme morphisms determined by restriction to closed subschemes whose defining ideals have zero intersection",
+   "results": "Scheme.hom_ext_of_forall supplies open-local extensionality; ideal-sheaf and pointsPi lemmas do not give dual-number diagonal restriction. No exact match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TrivSqZeroExt\", \"ext\"",
+   "results": "Twelve hits: the type and canonical projections, inclusions, and algebraic instances; no scheme diagonal restriction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "infPoints|diagonal_comp_eq|IsMulCommutative|commutator|jointly|inf.*ker|ker.*inf in lean/WeilConjectures/AlgebraicGeometry/GroupScheme; TrivSqZeroExt|squareZero|SquareZero in Mathlib/AlgebraicGeometry; read DualNumberSchemePushout and DualNumbers",
+   "results": "lieEquiv_mul is downstream of InfPoints and cannot be imported without a cycle. Existing scheme pushout lemma assumes a field. No arbitrary-base diagonal lemma found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-lie-algebra-derivation",
+   "place": "Lie algebra paragraph: tangent points 1+epsilon X and the additive first-order group law",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-tangent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DualNumbersDiagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/DualNumbersDiagonal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.dualNumbers_diagonal_comp_eq_of_axes",
+  "statement": "theorem dualNumbers_diagonal_comp_eq_of_axes (S : Scheme.{u}) (X : Over S) (f g : dualNumbersOver S ⊗ dualNumbersOver S ⟶ X) (h₁ : lift (𝟙 (dualNumbersOver S)) (toUnit (dualNumbersOver S) ≫ dualNumbersιOver S) ≫ f = lift (𝟙 (dualNumbersOver S)) (toUnit (dualNumbersOver S) ≫ dualNumbersιOver S) ≫ g) (h₂ : lift (toUnit (dualNumbersOver S) ≫ dualNumbersιOver S) (𝟙 (dualNumbersOver S)) ≫ f = lift (toUnit (dualNumbersOver S) ≫ dualNumbersιOver S) (𝟙 (dualNumbersOver S)) ≫ g) : lift (𝟙 (dualNumbersOver S)) (𝟙 (dualNumbersOver S)) ≫ f = lift (𝟙 (dualNumbersOver S)) (𝟙 (dualNumbersOver S)) ≫ g",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T042409-L-1815968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T042409-L-1815968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
