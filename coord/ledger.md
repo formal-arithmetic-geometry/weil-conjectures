@@ -9956,3 +9956,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/T1/Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalWholeToOpen (stage 3; reviewer PASS; first push; landing 20261012T225330-L-1813003 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/T1/Sheaf.CategoryTheory.ThirdValueConstruction (stage 3; reviewer PASS; first push; landing 20261012T225330-L-1813101 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:53 L: merged deliver/T2/Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwist (stage 3; reviewer PASS; first push; landing 20261012T225330-L-1813231 (interface); batch 20261012T225253; modules 3; new nodes 2)
+- 22:53 L: merged deliver/T3/Sheaf.AlgebraicGeometry.PicardPullbackLocalRanks (stage 3; reviewer PASS; first push; landing 20261012T225331-L-1813330 (proof); batch 20261012T225253; modules 1; new nodes 0)
