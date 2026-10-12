@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
 public import Sheaf.Topology.AbelianOpenExtensionByZero
+import all Sheaf.Topology.ConstantSubsheafStalkBound
 import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
 import Sheaf.Topology.AbelianOpenExtensionIntegerGermCoordinates
 
@@ -25,6 +26,7 @@ universe u
 
 namespace TopCat.Sheaf
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Cohomology, Lemma 0A38, final paragraph.
 Proof: At x outside the lower-label union, every active summand has label b+1.
 The stalk of the constant integer sheaf is the integers, with the sheafification
@@ -71,6 +73,126 @@ theorem constantSubsheaf_quotient_germ_coordinates
     (i : Fin n) (hxi : x ∈ A i) :
     ∀ t : ↑(TopCat.Presheaf.stalk (C := AddCommGrpCat.{u}) (cokernel l).obj x),
       ∃! z : ℤ, z • (TopCat.Presheaf.germ (cokernel l).obj (A i) x hxi
-        ((cokernel.π l).hom.app (op (A i)) (s i))) = t := by sorry
+        ((cokernel.π l).hom.app (op (A i)) (s i))) = t := by
+  classical
+  let Z := AddCommGrpCat.of (ULift.{u} ℤ)
+  let F := (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj Z
+  let G (j : Fin n) :=
+    (constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A j)))
+      AddCommGrpCat.{u}).obj Z
+  let E (j : Fin n) := (abelianOpenExtensionByZero (A j)).obj (G j)
+  let sf := forget AddCommGrpCat.{u} X ⋙
+    TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x
+  obtain ⟨eZ, heZ⟩ := constantSubsheaf_canonical_stalks X Z
+  let j : sf.obj K ⟶ Z := sf.map (ι ≫ isoC.hom) ≫ (eZ x).hom
+  have hj : Function.Injective j := by
+    apply (AddCommGrpCat.mono_iff_injective _).mp
+    dsimp [j]
+    infer_instance
+  have hlabel (k : Fin n) (hxk : x ∈ A k) : c k = b + 1 := by
+    have hnot : ¬ c k ≤ b := by
+      intro hk
+      apply hxV
+      exact (le_iSup (fun k : Fin n ↦ if c k ≤ b then A k else ⊥) k)
+        (by simpa [hk] using hxk)
+    have := (hc k).2
+    omega
+  let v (k : Fin n) (hxk : x ∈ A k) :=
+    TopCat.Presheaf.germ K.obj (A k) x hxk (s k)
+  have hjv (k : Fin n) (hxk : x ∈ A k) : j (v k hxk) = ULift.up ((b : ℤ) + 1) := by
+    change (eZ x).hom
+      ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map (ι ≫ isoC.hom).hom
+        (TopCat.Presheaf.germ K.obj (A k) x hxk (s k))) = _
+    rw [TopCat.Presheaf.stalkFunctor_map_germ_apply, hvalue k]
+    have hh := congrArg (fun f ↦ (ConcreteCategory.hom f) (ULift.up (c k : ℤ)))
+      (heZ x (A k) hxk)
+    change (eZ x).hom (TopCat.Presheaf.germ F.obj (A k) x hxk
+      ((toSheafify (Opens.grothendieckTopology X)
+        ((Functor.const (Opens X)ᵒᵖ).obj Z)).app (op (A k)) (ULift.up (c k : ℤ)))) =
+      ULift.up (c k : ℤ) at hh
+    simpa only [hlabel k hxk, Nat.cast_add, Nat.cast_one] using hh
+  have hv (k : Fin n) (hxk : x ∈ A k) : v k hxk = v i hxi := by
+    apply hj
+    rw [hjv, hjv]
+  let q : Z ⟶ sf.obj K := AddCommGrpCat.ofHom
+    { toFun := fun z ↦ z.down • v i hxi
+      map_zero' := by simp
+      map_add' := by intro a b; simp [add_zsmul] }
+  have hq (z : ℤ) : q (ULift.up z) = z • v i hxi := rfl
+  have hqepi : Epi q := by
+    apply Abelian.epi_of_cokernel_π_eq_zero
+    have hgzero : sf.map g ≫ cokernel.π q = 0 := by
+      apply (isColimitOfHasCoproductOfPreservesColimit sf E).hom_ext
+      intro k
+      let a := k.as
+      change sf.map (Sigma.ι E a) ≫ (sf.map g ≫ cokernel.π q) =
+        sf.map (Sigma.ι E a) ≫ 0
+      simp only [comp_zero]
+      by_cases hxa : x ∈ A a
+      · apply AddCommGrpCat.hom_ext
+        apply AddMonoidHom.ext
+        intro t
+        obtain ⟨z, hz, _⟩ :=
+          abelianOpenExtension_integer_germ_coordinates X (A a) (A a) le_rfl x hxa t
+        let unit := abelianOpenExtensionSection (A a) (G a) (A a) le_rfl
+          ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A a)))
+            ((Functor.const (Opens ((Opens.toTopCat X).obj (A a)))ᵒᵖ).obj Z)).app
+            (op ((Opens.map (A a).inclusion').obj (A a))) (ULift.up 1))
+        have hun : sf.map (Sigma.ι E a ≫ g)
+            (TopCat.Presheaf.germ (E a).obj (A a) x hxa unit) = v a hxa := by
+          change (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map
+            (Sigma.ι E a ≫ g).hom _ = _
+          rw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
+          exact congrArg (TopCat.Presheaf.germ K.obj (A a) x hxa) (hsection a)
+        change (cokernel.π q) (sf.map g (sf.map (Sigma.ι E a) t)) = 0
+        have htmap : sf.map g (sf.map (Sigma.ι E a) t) =
+            sf.map (Sigma.ι E a ≫ g) t := by
+          exact congrArg (fun f ↦ (ConcreteCategory.hom f) t)
+            (sf.map_comp (Sigma.ι E a) g).symm
+        rw [htmap]
+        change (cokernel.π q) (sf.map (Sigma.ι E a ≫ g) t) = 0
+        erw [← hz, map_zsmul (sf.map (Sigma.ι E a ≫ g)).hom, hun, hv a hxa, ← hq]
+        exact congrArg (fun f ↦ (ConcreteCategory.hom f) (ULift.up z))
+          (cokernel.condition q)
+      · obtain ⟨_, _, _, hout, _⟩ := abelianOpenExtensionByZero_stalks X (A a)
+        exact (hout (G a) x hxa).eq_of_src _ _
+    apply (cancel_epi (sf.map g)).mp
+    simpa using hgzero
+  have hqinj : Function.Injective q := by
+    intro a d had
+    have hh := congrArg (fun t ↦ (j t).down) had
+    change (j (a.down • v i hxi)).down = (j (d.down • v i hxi)).down at hh
+    erw [map_zsmul j.hom, map_zsmul j.hom, hjv] at hh
+    have hh' : a.down * ((b : ℤ) + 1) = d.down * ((b : ℤ) + 1) := by
+      change a.down • ((b : ℤ) + 1) = d.down • ((b : ℤ) + 1) at hh
+      simpa only [Int.zsmul_eq_mul] using hh
+    apply ULift.ext
+    exact mul_right_cancel₀ (by omega : (b : ℤ) + 1 ≠ 0) hh'
+  let p := sf.map (cokernel.π l)
+  have hpiso : IsIso p := by
+    have hlzero : sf.map l = 0 := hxL.eq_of_src _ _
+    exact CokernelCofork.IsColimit.isIso_π _
+      ((CokernelCofork.ofπ (cokernel.π l) (cokernel.condition l)).mapIsColimit
+        (cokernelIsCokernel l) sf) hlzero
+  have hpbij := ConcreteCategory.bijective_of_isIso p
+  have hqsurj := (AddCommGrpCat.epi_iff_surjective q).mp hqepi
+  intro t
+  obtain ⟨k, hk⟩ := hpbij.surjective t
+  obtain ⟨z, hz⟩ := hqsurj k
+  have hpgerm : p (v i hxi) =
+      TopCat.Presheaf.germ (cokernel l).obj (A i) x hxi
+        ((cokernel.π l).hom.app (op (A i)) (s i)) := by
+    exact TopCat.Presheaf.stalkFunctor_map_germ_apply (A i) x hxi _ _
+  refine ⟨z.down, ?_, ?_⟩
+  · change z.down • _ = t
+    rw [← hpgerm]
+    erw [← map_zsmul p.hom]
+    change p (q z) = t
+    rw [hz, hk]
+  · intro w hw
+    have hh : p (q (ULift.up w)) = p (q z) := by
+      change p (w • v i hxi) = p (q z)
+      erw [map_zsmul p.hom, hpgerm, hw, hz, hk]
+    exact congrArg ULift.down (hqinj (hpbij.injective hh))
 
 end TopCat.Sheaf
