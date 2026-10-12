@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-closed-cover-frame-transitions",
+ "kind": "statement",
+ "title": "Point-indexed component frames with ambient transition units",
+ "statement": "Let Y be a reduced scheme [def-pc-scheme, def-pc-reduced-scheme] with a finite closed cover i_a: Z_a → Y [def-weil-closed-immersion], discrete pairwise intersections, and invertible modules M_a [def-sc-invertible-module]. Write T for the union of intersections of distinct component images. There are opens U_p indexed by points p of Y, units g_pq on U_p ∩ U_q, and free generators f_ap of M_a on i_a^{-1}(U_p) [def-sc-local-free-generator], such that the U_p cover Y, g_pp=1, distinct U_p and U_q overlap only outside T, and f_ap on an overlap equals the image of g_pq times f_aq. The conclusion contains no ambient module and asserts no cocycle identities.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NE, direct existence proof, local trivializations and overlap transition functions, before gluing the ambient line bundle"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-invertible-module",
+  "def-sc-local-free-generator"
+ ],
+ "proof": [
+  {
+   "text": "The union T of pairwise component intersections is a finite union of closed discrete sets. Closedness comes from the closed immersions. Use Mathlib isClosed_iUnion_of_finite and IsDiscrete.iUnion (including the proof-indexed unions) to prove closedness and discreteness of T.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At a point y and for each component a, if y is in its image choose its unique preimage and a local free generator, using the proved invertibility bridge and exists_isFreeGenerator. The inducing topology of the closed immersion lifts this trivializing open to an ambient open containing y. If y is outside the component image, use its open complement; the inverse image is empty and zero is a free generator, as proved from the empty-cover sheaf axiom. Finitely intersect these ambient opens with an initial neighborhood D and restrict the frames.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-pc-invertible-sheaf-instance",
+    "def-sc-local-free-generator",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For y in T choose D whose intersection with T is {y}, using Mathlib isDiscrete_iff_forall_mem_exists_isOpen. For y outside T take D to be the complement of T. Apply the simultaneous trivialization from the preceding step and choose U_y with all the component frames. Each point is in U_y, so these opens cover. If x belongs to T and to both U_p and U_q, the two isolating properties give x=p and x=q; therefore distinct opens overlap off T.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On a diagonal overlap take the unit 1. On an overlap of distinct opens, restrict both component frames and use the proved IsFreeGenerator.exists_unit_smul_eq to obtain their unique frame-change unit c_a. The reduced-cover section bijection lifts the tuple of values c_a and the tuple of inverse values to ambient sections s and t. Since the component ring maps send s*t to one, injectivity gives s*t=1. Commutativity gives t*s=1, so (s,t) defines the desired ambient unit. Its images are the component coefficients, which proves every frame relation. Choose these units and return the cover and frames. No data is chosen from a merely existential unproved theorem: the only holed input used for lifting is a bijection, which determines each lifted section uniquely.",
+   "uses": [
+    "def-sc-local-free-generator",
+    "lem-sc-glue-component-reduced-cover-sections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-sc-invertible-module",
+  "lem-pc-invertible-sheaf-instance",
+  "def-sc-local-free-generator",
+  "lem-sc-glue-component-reduced-cover-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NE checked in the Stacks web edition https://stacks.math.columbia.edu/tag/09NE; point-indexed refinement, empty-open argument and lifted inverse construction by A3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local trivializations of line bundles on a finite closed cover with discrete intersections admit common ambient transition units",
+   "results": "HTTP Internal Server Error; no results.",
+   "date": "2026-10-12",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local free generators on a finite closed cover and transition units on pairwise ambient open intersections",
+   "results": "Eight hits concerning SheafOfModules.LocalGeneratorsData, quasicoherent generators and Scheme.zero_of_zero_cover; none gives component frames and ambient transition units.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFreeGenerator",
+   "results": "Unknown identifier IsFreeGenerator.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*(frame|transition)|component.*[Ff]ree[Gg]enerator",
+   "results": "Three unrelated Mathlib matches in fun_prop, manifold groupoids and coframes. Library and whole-blueprint searches find the existing full gluing theorem and its reduced-section and cocycle dependencies, but no duplicate of this cover/frame construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExistsGluedInvertible",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proof first sentence establishing projectivity, via Lemma 09NX and Lemma 09NE: choose local component trivializations and lift their overlap transitions before gluing an invertible module",
+   "via": [
+    "lem-sc-exists-glued-invertible",
+    "lem-sc-glue-component-line-bundles",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedCoverFrameTransitions",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedCoverFrameTransitions.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_closedCover_frame_transitions",
+  "statement": "theorem exists_closedCover_frame_transitions\n    {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]\n    (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]\n    (hcover : (⋃ a : ι, Set.range (i a)) = Set.univ)\n    (hdiscrete : ∀ a b : ι, a ≠ b →\n      DiscreteTopology ↥(Set.range (i a) ∩ Set.range (i b)))\n    (M : ∀ a : ι, (Z a).Modules) [∀ a : ι, (M a).IsInvertible] :\n    let T : Set Y := ⋃ a : ι, ⋃ b : ι, ⋃ (_ : b ≠ a),\n      Set.range (i a) ∩ Set.range (i b)\n    ∃ (U : Y → Y.Opens) (g : ∀ p q : Y, Γ(Y, U p ⊓ U q)ˣ)\n      (f : ∀ (a : ι) (p : Y), Γ(M a, (i a) ⁻¹ᵁ U p)),\n      (⨆ p, U p = ⊤) ∧\n      (∀ p, g p p = 1) ∧\n      (∀ p q : Y, p ≠ q → (U p ⊓ U q : Set Y) ⊆ Tᶜ) ∧\n      (∀ a p, IsFreeGenerator (f a p)) ∧\n      (∀ a p q,\n        (M a).presheaf.map (homOfLE ((i a).preimage_mono inf_le_left)).op (f a p) =\n          (i a).app (U p ⊓ U q) (g p q).val •\n            (M a).presheaf.map (homOfLE ((i a).preimage_mono inf_le_right)).op\n              (f a q))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T135215-L-1654883",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T135215-L-1654883",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
