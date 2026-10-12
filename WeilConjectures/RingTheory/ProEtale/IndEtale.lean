@@ -41,7 +41,8 @@ instance : (MorphismProperty.ind.{u} CommRingCat.etale.{u}).IsStableUnderComposi
   .ind_of_le_isFinitelyPresentable CommRingCat.etale_le_isFinitelyPresentable.{u}
 
 /-- An algebra is ind-étale if it can be written as the filtered colimit of étale
-algebras. -/
+algebras. Blueprint `def-weil-pbc-ind-etale-algebra` (ind-étale part; weakly étale algebras are
+`Algebra.WeaklyEtale`, ind-Zariski algebras are `Algebra.IndZariski`). -/
 @[mk_iff]
 class Algebra.IndEtale (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] : Prop where
   exists_colimitPresentation : ∃ (ι : Type u) (_ : SmallCategory ι) (_ : IsFiltered ι)

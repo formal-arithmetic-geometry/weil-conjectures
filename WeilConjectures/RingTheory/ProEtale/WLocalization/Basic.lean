@@ -646,7 +646,9 @@ noncomputable def colimitPresentation : ColimitPresentation (Finset A) (commAlgC
 
 end WLocalization
 
-/-- The w-localization of a ring. -/
+/-- The w-localization `A^w` of a ring `A`: the filtered colimit, over finite subsets `E ⊆ A`, of
+the products of the localizations of `A` along the constructible strata cut out by `E`.
+Blueprint `def-weil-pbc-w-localization`. -/
 def WLocalization (A : Type u) [CommRing A] : Type _ :=
   WLocalization.commAlgCat A
 

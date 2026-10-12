@@ -191,12 +191,55 @@ attribute [local instance] Algebra.TensorProduct.rightAlgebra
 variable (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
 
 open WStrictLocalization in
-/-- **Stacks 097Z** (blueprint `thm:weakly-etale-ind-etale`): if `S` is a weakly étale
-`R`-algebra, there exists a faithfully flat, ind-étale `S`-algebra `T` such that `T` is an
-ind-étale `R`-algebra. -/
-theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
-    ∃ (T : Type u) (_ : CommRing T) (_ : Algebra R T) (_ : Algebra S T) (_ : IsScalarTower R S T),
-      Algebra.IndEtale S T ∧ Module.FaithfullyFlat S T ∧ Algebra.IndEtale R T := by
+/-- The ind-étale refinement `B'` of a weakly étale `R`-algebra `S` (Stacks 097Z): with
+`C = WStrictLocalization R` the strict w-local cover of `R` and `J` the ideal of its closed points,
+this is the retained localization of `D₀ = C ⊗[R] S` along `V(J D₀)`.
+Blueprint `def-weil-pbc-weak-etale-refinement` (there `D₀ = B ⊗_A C`, which is `C ⊗[R] S` up to
+the symmetry of the tensor product). -/
+def Algebra.WeaklyEtale.Refinement : Type u :=
+  (((closedIdeal R).map (algebraMap (WLocalization R) (WStrictLocalization R))).map
+    (algebraMap (WStrictLocalization R) (WStrictLocalization R ⊗[R] S))).WLocalization
+
+namespace Algebra.WeaklyEtale.Refinement
+
+open WStrictLocalization
+
+noncomputable instance : CommRing (Refinement R S) :=
+  inferInstanceAs <| CommRing (Ideal.WLocalization _)
+
+noncomputable instance algebraTensor : Algebra (WStrictLocalization R ⊗[R] S) (Refinement R S) :=
+  inferInstanceAs <| Algebra _ (Ideal.WLocalization _)
+
+noncomputable instance algebraCover : Algebra (WStrictLocalization R) (Refinement R S) :=
+  inferInstanceAs <| Algebra (WStrictLocalization R)
+    ((((closedIdeal R).map (algebraMap (WLocalization R) (WStrictLocalization R))).map
+      (algebraMap (WStrictLocalization R) (WStrictLocalization R ⊗[R] S))).WLocalization)
+
+noncomputable instance algebraBase : Algebra R (Refinement R S) :=
+  Algebra.compHom _ (algebraMap R (WStrictLocalization R))
+
+noncomputable instance algebraLeft : Algebra S (Refinement R S) :=
+  Algebra.compHom _ (algebraMap S (WStrictLocalization R ⊗[R] S))
+
+instance isScalarTower : IsScalarTower R S (Refinement R S) :=
+  IsScalarTower.of_algebraMap_eq fun r ↦ by
+    change algebraMap (WStrictLocalization R ⊗[R] S) (Refinement R S)
+        (algebraMap (WStrictLocalization R) (WStrictLocalization R ⊗[R] S)
+          (algebraMap R (WStrictLocalization R) r)) =
+      algebraMap (WStrictLocalization R ⊗[R] S) (Refinement R S)
+        (algebraMap S (WStrictLocalization R ⊗[R] S) (algebraMap R S r))
+    rw [← IsScalarTower.algebraMap_apply R (WStrictLocalization R) (WStrictLocalization R ⊗[R] S),
+      ← IsScalarTower.algebraMap_apply R S (WStrictLocalization R ⊗[R] S)]
+
+end Algebra.WeaklyEtale.Refinement
+
+open WStrictLocalization in
+/-- **Stacks 097Z** for the explicit refinement: if `S` is a weakly étale `R`-algebra, then
+`Refinement R S` is a faithfully flat, ind-étale `S`-algebra which is ind-étale over `R`.
+Blueprint `thm-weil-pbc-weak-etale-refinement`. -/
+theorem Algebra.WeaklyEtale.refinement_spec [Algebra.WeaklyEtale R S] :
+    Algebra.IndEtale S (Refinement R S) ∧ Module.FaithfullyFlat S (Refinement R S) ∧
+      Algebra.IndEtale R (Refinement R S) := by
   classical
   -- Step 1: the w-strictly local cover `C` of `R` and the ideal `J` of closed points.
   set C := WStrictLocalization R with hC
@@ -331,8 +374,16 @@ theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
     refine ⟨P, ?_⟩
     rw [IsScalarTower.algebraMap_eq S D' D, PrimeSpectrum.comap_comp_apply, hP, hQq]
   have : Module.FaithfullyFlat S D := Module.FaithfullyFlat.of_comap_surjective hsurj
-  exact ⟨D, inferInstance, inferInstance, inferInstance, inferInstance,
-    inferInstance, inferInstance, inferInstance⟩
+  exact ⟨‹Algebra.IndEtale S D›, ‹Module.FaithfullyFlat S D›, ‹Algebra.IndEtale R D›⟩
+
+/-- **Stacks 097Z** (blueprint `thm:weakly-etale-ind-etale`): if `S` is a weakly étale
+`R`-algebra, there exists a faithfully flat, ind-étale `S`-algebra `T` such that `T` is an
+ind-étale `R`-algebra. -/
+theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
+    ∃ (T : Type u) (_ : CommRing T) (_ : Algebra R T) (_ : Algebra S T) (_ : IsScalarTower R S T),
+      Algebra.IndEtale S T ∧ Module.FaithfullyFlat S T ∧ Algebra.IndEtale R T :=
+  ⟨Refinement R S, inferInstance, inferInstance, inferInstance, inferInstance,
+    refinement_spec R S⟩
 
 end Main
 
