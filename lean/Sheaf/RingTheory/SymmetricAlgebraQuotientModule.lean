@@ -7,6 +7,7 @@ module
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.LinearAlgebra.SymmetricAlgebra.DegreeExact
+import Sheaf.RingTheory.SymmetricAlgebraQuotientModuleKernel
 
 /-!
 # Symmetric algebra of a quotient module
@@ -61,4 +62,18 @@ theorem symmetricAlgebra_quotient_module
         e.toAlgHom.comp (Ideal.Quotient.mkₐ R
           (Ideal.span (SymmetricAlgebra.ι R N '' (LinearMap.ker p : Set N)))) =
           SymmetricAlgebra.lift ((SymmetricAlgebra.ι R M).comp p) := by
-  sorry
+  let f : SymmetricAlgebra R N →ₐ[R] SymmetricAlgebra R M :=
+    SymmetricAlgebra.lift ((SymmetricAlgebra.ι R M).comp p)
+  have h := symmetricAlgebra_quotient_module_kernel R N M p hp
+  have hsurj : Function.Surjective f := h.1
+  have hker : RingHom.ker f.toRingHom =
+      Ideal.span (SymmetricAlgebra.ι R N '' (LinearMap.ker p : Set N)) := h.2
+  let e₀ := Ideal.quotientKerAlgEquivOfSurjective hsurj
+  let e := (Ideal.quotientEquivAlgOfEq R hker.symm).trans e₀
+  refine ⟨hsurj, hker, e, ?_⟩
+  ext x
+  change e (Ideal.Quotient.mk _ (SymmetricAlgebra.ι R N x)) = f (SymmetricAlgebra.ι R N x)
+  change ((Ideal.quotientEquivAlgOfEq R hker.symm).trans e₀)
+      (Ideal.Quotient.mk _ (SymmetricAlgebra.ι R N x)) = _
+  rw [AlgEquiv.trans_apply, Ideal.quotientEquivAlgOfEq_mk]
+  exact Ideal.quotientKerAlgEquivOfSurjective_mk hsurj _
