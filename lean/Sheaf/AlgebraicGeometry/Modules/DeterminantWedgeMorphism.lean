@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismLocal
 
 /-!
 # The wedge morphism associated to a short exact sequence
@@ -60,6 +61,7 @@ theorem determinant_wedgeMorphism_exists {X : Scheme.{v}} (S : ShortComplex X.Mo
             (exteriorSheafSection S.X₃ r₃ U b)) =
           exteriorSheafSection S.X₂ r₂ U
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
-  sorry
+  apply determinant_wedgeMorphism_of_local_data S hS r₁ r₂ r₃ hr
+  exact determinant_wedgeMorphism_local_data S hS r₁ r₂ r₃ hr
 
 end AlgebraicGeometry.Scheme.Modules

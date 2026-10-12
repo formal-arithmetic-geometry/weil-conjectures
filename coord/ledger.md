@@ -8606,3 +8606,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/B2/Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonFinite (stage 3; reviewer PASS; first push; landing 20261012T165504-L-2930686 (interface); batch 20261012T165503; modules 4; new nodes 3)
 - 16:55 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ArtinianLiftingFromEtaleInfinitesimal (stage 3; reviewer PASS; first push; landing 20261012T165504-L-2930854 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/B3/Sheaf.AlgebraicGeometry.ClosedSubsetProperUniversallyClosedImage (stage 3; reviewer PASS; first push; landing 20261012T165505-L-2930999 (proof); batch 20261012T165503; modules 1; new nodes 0)
+- 16:55 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphism (stage 3; reviewer PASS; first push; landing 20261012T165505-L-2931120 (interface); batch 20261012T165503; modules 2; new nodes 2)
