@@ -103,22 +103,51 @@ theorem existsUnique_hom_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] 
   ext
   exact hu _ hψ₀.symm
 
-/-- The point `qV ∘ a` of `V₀` over `Y` induced by a point `a` of `V` over `f`, for a projection
-`qV : V ⟶ V₀` exhibiting `V` as the base change of `V₀` along `p`. -/
-abbrev descendPoint {V : Over X} {V₀ : Over Y} {qV : V.left ⟶ V₀.left}
-    (hqV : IsPullback qV V.hom V₀.hom p) {T : Scheme.{u}} {f : T ⟶ X} (a : Over.mk f ⟶ V) :
-    Over.mk (f ≫ p) ⟶ V₀ :=
-  Over.homMk (a.left ≫ qV) (by
-    simp only [Over.mk_hom, Category.assoc, hqV.w]
-    rw [← Category.assoc, Over.w a]
-    rfl)
-
 /-- **The descended scheme is a group scheme.** Let `p : X ⟶ Y` be faithfully flat and
 quasi-compact, let `V` be a scheme over `X` with an effective descent datum `D`, with descended
-scheme `V₀` and projection `qV`, and let `V` carry a commutative group scheme structure whose
-multiplication and unit are compatible with `D`. Then `V₀` carries a commutative group scheme
-structure over `Y` whose base change is the given one: `qV` maps products of points of `V` to
-products of points of `V₀`. Such a structure is unique, by the same token.
+scheme `V₀` and projection `qV`, and let `V` carry a group scheme structure whose multiplication
+and unit are compatible with `D`. Then `V₀` carries a unique group scheme structure over `Y`
+whose base change is the given one, in the sense that `qV` maps products of points of `V` to
+products of points of `V₀`.
+
+Existence comes from the Yoneda lemma applied to the invariant points of `V`; uniqueness from
+the injectivity of base change on morphisms (`liftPoint_injective`).
+
+(blueprint: `lem-pd-group-scheme-descent`) -/
+theorem existsUnique_grpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] {V : Over X}
+    [GrpObj V] (D : Over.DescentDatum p V) {V₀ : Over Y} (qV : V.left ⟶ V₀.left)
+    (hqV : IsPullback qV V.hom V₀.hom p)
+    (hDV : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
+      (D.transport f₁ f₂ h a).left ≫ qV = a.left ≫ qV)
+    (hμ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a b : Over.mk f₁ ⟶ V),
+      D.transport f₁ f₂ h (lift a b ≫ μ[V]) =
+        lift (D.transport f₁ f₂ h a) (D.transport f₁ f₂ h b) ≫ μ[V])
+    (hη : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p),
+      D.transport f₁ f₂ h (toUnit _ ≫ η[V]) = toUnit _ ≫ η[V]) :
+    ∃! _ : GrpObj V₀, ∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V),
+      descendPoint hqV (lift a b ≫ μ[V]) =
+        lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] := by
+  let G := GrpObj.ofRepresentableBy V₀ (D.descendedPresheaf hqV hDV hμ hη)
+    (D.descendedRepresentableBy hqV hDV hμ hη)
+  have hG {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V) :
+      descendPoint hqV (lift a b ≫ μ[V]) =
+        lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] := by
+    have hmul (x y : Over.mk (f ≫ p) ⟶ V₀) :
+        lift x y ≫ μ[V₀] = (D.homGroup hqV hDV hμ hη _).mul x y :=
+      (((D.descendedPresheaf hqV hDV hμ hη).map (lift x y).op).hom.map_mul
+        (fst V₀ V₀) (snd V₀ V₀)).trans
+        (congrArg₂ (D.homGroup hqV hDV hμ hη _).mul (lift_fst x y) (lift_snd x y))
+    exact (D.descendPoint_mul hqV hDV hμ hη a b).trans (hmul _ _).symm
+  exact ⟨G, hG, fun G' hG' ↦ GrpObj.ext_of_mul_eq
+    (mul_eq_of_descendPoint_mul hqV G'.toMonObj G.toMonObj hG' hG)⟩
+
+/-- **The descended scheme is a commutative group scheme.** Let `p : X ⟶ Y` be faithfully flat
+and quasi-compact, let `V` be a scheme over `X` with an effective descent datum `D`, with
+descended scheme `V₀` and projection `qV`, and let `V` carry a commutative group scheme structure
+whose multiplication and unit are compatible with `D`. Then `V₀` carries a commutative group
+scheme structure over `Y` whose base change is the given one: `qV` maps products of points of `V`
+to products of points of `V₀`. Such a structure is unique by
+`existsUnique_grpObj_of_isPullback`.
 
 (blueprint: `lem-pd-group-scheme-descent`) -/
 theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] {V : Over X}
@@ -134,15 +163,12 @@ theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p]
     ∃ _ : CommGrpObj V₀, ∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V),
       descendPoint hqV (lift a b ≫ μ[V]) =
         lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] := by
-  let := CommGrpObj.ofRepresentableBy V₀ (D.descendedPresheaf hqV hDV hμ hη)
-    (D.descendedRepresentableBy hqV hDV hμ hη)
-  refine ⟨this, fun f a b ↦ ?_⟩
-  have hmul (x y : Over.mk (f ≫ p) ⟶ V₀) :
-      lift x y ≫ μ[V₀] = (D.homCommGroup hqV hDV hμ hη _).mul x y :=
-    (((D.descendedPresheaf hqV hDV hμ hη).map (lift x y).op).hom.map_mul
-      (fst V₀ V₀) (snd V₀ V₀)).trans
-      (congrArg₂ (D.homCommGroup hqV hDV hμ hη _).mul (lift_fst x y) (lift_snd x y))
-  exact (D.descendPoint'_mul hqV hDV hμ hη a b).trans (hmul _ _).symm
+  obtain ⟨G, hG, -⟩ := D.existsUnique_grpObj_of_isPullback qV hqV hDV hμ hη
+  have : IsCommMonObj V₀ := (isCommMonObj_iff_isMulCommutative V₀).2 fun T ↦
+    ⟨⟨fun x y ↦ liftPoint_injective hqV (by
+      rw [liftPoint_mul_of_descendPoint_mul hqV hG, liftPoint_mul_of_descendPoint_mul hqV hG,
+        mul_comm])⟩⟩
+  exact ⟨{ }, hG⟩
 
 end CategoryTheory.Over.DescentDatum
 
