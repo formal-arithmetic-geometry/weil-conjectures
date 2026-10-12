@@ -1,0 +1,127 @@
+{
+ "id": "lem-sbc-affine-section-noetherian-descent",
+ "kind": "statement",
+ "title": "Affine noetherian descent with a compatible section",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] with $S$ affine. Assume $f$ is locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated, and let $\\sigma:S\\to X$ be a section. There exist noetherian schemes $X_0,S_0$, a locally finitely presented, quasi-compact and quasi-separated $f_0:X_0\\to S_0$, a section $\\sigma_0:S_0\\to X_0$, and maps $a:X\\to X_0$, $b:S\\to S_0$ forming a cartesian square [def-pc-fibre-product], with $a\\circ\\sigma=\\sigma_0\\circ b$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055P, more-morphisms.tex, lemma-connected-along-section-locally-constructible, first reduction; Tag 01ZA; Tag 01ZM, limits.tex, lemma-descend-finite-presentation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use Scheme.NoetherianApproximation.ofIsAffine to express S as the limit of noetherian schemes with affine transition maps. Descend f to a finite-presentation q:Y→S_i with cartesian comparison a:X→Y.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lemma-nagata-finite-presentation-descends"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the approximation to the over category of i. Descend σ≫a as a morphism over S_i by the morphism clause of 01ZM, in its Mathlib factorization form Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation. It gives a later stage S_j and τ:S_j→Y with τ≫q equal to the transition and π_j≫τ=σ≫a.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set X_0=Y×_{S_i}S_j, f_0=the second projection, σ_0=the lift of τ and the identity. Set a_0 to be the lift of a and f≫π_j. Pullback projection identities prove the section identity and σ≫a_0=π_j≫σ_0; IsPullback.of_right proves the comparison is cartesian. Finite presentation and qcqs are stable under base change. The base stage is noetherian; the existing locally-finite-type noetherian instance and quasi-compactness give IsNoetherian X_0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lemma-nagata-finite-presentation-descends",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 055P, more-morphisms.tex, lemma-connected-along-section-locally-constructible, first reduction; Tag 01ZA; Tag 01ZM, limits.tex, lemma-descend-finite-presentation",
+  "note": "R3: complete Lean proof using existing proved library/Mathlib declarations; no postponed theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented morphism with a section over an affine scheme descends to noetherian schemes",
+   "digest": "4f53cda18c2baa0c",
+   "results": "LeanSearch returned Internal Server Error; unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNoetherian\", \"IsPullback\"",
+   "digest": "4f53cda18c2baa0c",
+   "results": "Loogle returned zero hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "noetherian.*section|section.*noetherian|connectedComponentIn.*pullback",
+   "digest": "d121c8a89e0f9184",
+   "results": "Mathlib grep returned nineteen unrelated noetherian/section lines; no combined descent or component theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionComponentNoetherianModel",
+  "date": "2026-10-12",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: Tag 055P first reduction descends a finitely presented morphism and its section to a noetherian stage.",
+   "via": [
+    "lem-sbc-section-component-noetherian-model",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionNoetherianDescent",
+  "declaration": "AlgebraicGeometry.exists_noetherian_model_with_section",
+  "statement": "theorem exists_noetherian_model_with_section {X S : Scheme.{u}} [IsAffine S] (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) : ∃ (X₀ S₀ : Scheme.{u}) (f₀ : X₀ ⟶ S₀) (σ₀ : S₀ ⟶ X₀) (a : X ⟶ X₀) (b : S ⟶ S₀), IsNoetherian X₀ ∧ IsNoetherian S₀ ∧ LocallyOfFinitePresentation f₀ ∧ QuasiCompact f₀ ∧ QuasiSeparated f₀ ∧ σ₀ ≫ f₀ = 𝟙 S₀ ∧ IsPullback a f f₀ b ∧ σ ≫ a = b ≫ σ₀",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionNoetherianDescent.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T144142-L-2106237",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T144142-L-2106237",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

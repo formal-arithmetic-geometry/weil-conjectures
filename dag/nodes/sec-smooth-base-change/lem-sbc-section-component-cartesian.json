@@ -1,0 +1,116 @@
+{
+ "id": "lem-sbc-section-component-cartesian",
+ "kind": "statement",
+ "title": "Section-component loci in a cartesian square",
+ "statement": "Let $f:X\\to Y$ be locally of finite type [def-weil-finite-type-morphism] with a section $\\sigma:Y\\to X$. Let $a:X\\prime\\to X$, $f\\prime:X\\prime\\to Y\\prime$, $b:Y\\prime\\to Y$ form a cartesian square [def-pc-fibre-product], and let $\\sigma\\prime:Y\\prime\\to X\\prime$ be a section of $f\\prime$ with $a\\circ\\sigma\\prime=\\sigma\\circ b$. Define $C(f,\\sigma)=\\{x\\in X\\mid x\\text{ lies in the connected component of }\\sigma(f(x))\\text{ in }f^{-1}(f(x))\\}$. Then $a^{-1}C(f,\\sigma)=C(f\\prime,\\sigma\\prime)$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055M, more-morphisms.tex, lemma-base-change-connected-along-section"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Work directly in the given cartesian square. Fix x′ and put y′=f′(x′), p=σ′(y′). Commutativity and section compatibility give f(a(x′))=b(y′), a(p)=σ(b(y′)), and f′(p)=y′. In the locally noetherian old fibre, its section component is open; choose an ambient open U representing it. Its section point gives a residue-field section of U→Y. Restrict the given cartesian square to W=a⁻¹(U). The fibre of U→Y is connected and has that rational point. Apply [lem-sbc-connected-rational-point-geometrically-connected] and isPullback_fiberToSpecResidueField_of_isPullback to obtain connectedness of the fibre of W→Y′. Its image in X′ is preconnected, contains p, and lies in the new fibre. Maximality of connectedComponentIn gives the forward inclusion.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the reverse inclusion, the continuous image under a of the new component is preconnected. It contains σ(b(y′)) by the compatible section and is contained in the old fibre by square commutativity. IsPreconnected.subset_connectedComponentIn gives membership of a(x′) in the old component. Set extensionality combines the inclusions. No canonical pullback reduction or transport homeomorphism is needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 055M, more-morphisms.tex, lemma-base-change-connected-along-section",
+  "note": "R3 repair: direct arbitrary-square generalization of the Tag 055M argument; all four duplicate private helpers removed. Importing SlicingFlat is cyclic, so the proof uses only the cycle-free fibre and geometric-connectedness API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented morphism with a section over an affine scheme descends to noetherian schemes",
+   "digest": "4f53cda18c2baa0c",
+   "results": "LeanSearch returned Internal Server Error; unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative connected component through a section commutes with base change of schemes in a cartesian square",
+   "digest": "428d50e32aecbb2f",
+   "results": "LeanFinder returned eight pullback-carrier facts, including image_preimage_eq_of_isPullback; none states the component theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "section.*component|component.*section",
+   "digest": "4b5593521c186f23",
+   "results": "Mathlib grep returned nineteen unrelated graph/topology/category section/component references. Local library search found the canonical theorem in SlicingFlat, but importing it creates a cycle; the new theorem is for an arbitrary cartesian square and uses a cycle-free adaptation of that proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionComponentNoetherianModel",
+  "date": "2026-10-12",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: the section component in a base change; Tag 055P first reduction uses its compatibility with base change.",
+   "via": [
+    "lem-sbc-section-component-noetherian-model",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionComponentPullback",
+  "declaration": "AlgebraicGeometry.section_component_preimage_of_isPullback",
+  "statement": "theorem section_component_preimage_of_isPullback {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y) (a : X' ⟶ X) (f' : X' ⟶ Y') (b : Y' ⟶ Y) (h : IsPullback a f' f b) (σ' : Y' ⟶ X') (hσ' : σ' ≫ f' = 𝟙 Y') (hcompat : σ' ≫ a = b ≫ σ) : a ⁻¹' {x : X | x ∈ connectedComponentIn (f ⁻¹' {f x}) (σ (f x))} = {x' : X' | x' ∈ connectedComponentIn (f' ⁻¹' {f' x'}) (σ' (f' x'))}",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionComponentPullback.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T144142-L-2106237",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T144142-L-2106237",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

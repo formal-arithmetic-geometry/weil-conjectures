@@ -6,6 +6,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.SectionComponentPullback
+import Sheaf.AlgebraicGeometry.SectionNoetherianDescent
 
 /-!
 # Local noetherian models for the component selected by a section
@@ -49,6 +51,22 @@ theorem exists_section_component_noetherian_model {P T : Scheme.{u}} (g : P ⟶ 
       QuasiCompact g₀ ∧ QuasiSeparated g₀ ∧ σ₀ ≫ g₀ = 𝟙 T₀ ∧
       U.ι ⁻¹' {q : P | q ∈ connectedComponentIn (g ⁻¹' {g q}) (σ (g q))} =
         ρ ⁻¹' {q : P₀ | q ∈ connectedComponentIn (g₀ ⁻¹' {g₀ q}) (σ₀ (g₀ q))} := by
-  sorry
+  obtain ⟨_, ⟨V, hV, rfl⟩, hpV, _⟩ :=
+    T.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (g p)) isOpen_univ
+  let V : T.Opens := V
+  let : IsAffine V.toScheme := hV
+  let U := g ⁻¹ᵁ V
+  let f := g ∣_ V
+  have H : IsPullback U.ι f g V.ι := (isPullback_morphismRestrict g V).flip
+  let σV : V.toScheme ⟶ U.toScheme := H.lift (V.ι ≫ σ) (𝟙 V.toScheme) (by
+    simp [hσ])
+  have hσV : σV ≫ f = 𝟙 V.toScheme := H.lift_snd _ _ _
+  have hcompat : σV ≫ U.ι = V.ι ≫ σ := H.lift_fst _ _ _
+  obtain ⟨P₀, T₀, g₀, σ₀, ρ, b, hP₀, hT₀, hg₀, hqc₀, hqs₀, hσ₀, H₀, hcompat₀⟩ :=
+    exists_noetherian_model_with_section f σV hσV
+  let : LocallyOfFinitePresentation g₀ := hg₀
+  refine ⟨U, hpV, P₀, T₀, g₀, σ₀, ρ, hP₀, hT₀, hg₀, hqc₀, hqs₀, hσ₀, ?_⟩
+  exact (section_component_preimage_of_isPullback g σ hσ U.ι f V.ι H σV hσV hcompat).trans
+    (section_component_preimage_of_isPullback g₀ σ₀ hσ₀ ρ f b H₀ σV hσV hcompat₀).symm
 
 end AlgebraicGeometry
