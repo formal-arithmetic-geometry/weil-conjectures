@@ -16,36 +16,39 @@
  ],
  "proof": [
   {
-   "text": "Use canonical lower truncation to represent the cohomologically bounded-below K_i and S by bounded-below complexes. Apply the natural truncation hypercohomology theorem with common lower bound a. Its natural second-page identifications give the R^p F H^r terms and the maps induced by u_i. Derived morphisms can be represented using K-injectives, so these maps give maps of truncation exact couples.",
+   "text": "Obtain the natural source coproduct and target truncation couples and their morphism from lem-pc-coproduct-truncation-couple. At negative first indices both E terms are zero. At nonnegative first indices the natural E comparison equation and hE2 make T_E an isomorphism, since it is conjugate to the canonical second-page comparison by the supplied isomorphisms.",
    "uses": [
-    "thm-sp-truncation-e2"
+    "lem-pc-coproduct-truncation-couple"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove directly that T_D is invertible at every bidegree. It is invertible below the common lower bound, as a morphism between zero objects. Induct on the nonnegative distance of the second index from a-1. The exact-couple axioms give the exact row E^{p-1,r} -> D^{p+1,r-1} -> D^{p,r} -> E^{p,r} -> D^{p+2,r-1}. T gives a commuting five-term diagram. Both E components are invertible by the preceding step and the two D components of second index r-1 are invertible by induction. Mathlib Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono gives invertibility of the middle component. Transport arithmetic indices explicitly in the Lean proof. The supplied canonical D comparison equation conjugates T_D^{0,q} into the required Sigma.desc, which is therefore an isomorphism.",
+   "uses": [
+    "def-sp-exact-couple",
+    "lem-pc-coproduct-truncation-couple"
    ],
    "elementary": false
   },
   {
-   "text": "Take the degreewise coproduct of the summands exact couples. Exact coproducts in B preserve the defining exact sequences. Naturality yields a map to the target couple. The hypothesis identifies its second-page maps as isomorphisms. Successive derived pages are kernel/image quotients, preserved by exact sums; thus induction propagates the isomorphisms to all pages. Common quadrant bounds imply a common stabilization bound for each position in total degree q.",
+   "text": "For any object take the one-step filtration, full for p<=0 and zero for p>0, finite with bounds 0 and 1. Any morphism has a filtered lift between these two matching filtrations: at a full step use the invertible top inclusions, and at a zero step use the zero map. For an underlying isomorphism, every restriction is an isomorphism: cancel the invertible top inclusion in the full case, and use that both bottom-step objects are zero in the other case. The defining equation of exists_gradedMap and the cokernel universal property identify gradedMap with cokernel.map of the two successive restrictions. Mathlib cokernel.map is invertible when these restrictions are invertible. Use these actual, matching one-step filtrations for the canonical abutment isomorphism and introduce all requested witnesses. This works also for q<a and for an empty family.",
    "uses": [
-    "lem-sp-couple-morphism"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The hypercohomology theorem supplies uniformly finite abutment filtrations, full at p <= 0 and zero at p >= q-a+1. For q >= a, form FS by summing the subobject inclusions; these remain monic, and exactness identifies the successive quotients with sums of the individual graded pieces. FT is the target abutment filtration. Sum the natural filtered abutment maps to get phi. Naturality of the abutment identifications makes its underlying map the displayed Sigma.desc, and stable-page/graded compatibility makes each gradedMap an isomorphism. For q < a all abutments vanish and use zero filtrations, which are finite with bounds 0 and 1. An empty family gives zero source filtration; the same page comparison applies.",
-   "uses": [
-    "thm-sp-truncation-e2",
-    "lem-sp-couple-morphism"
+    "lem-sp-finite-filtration-induction",
+    "def-sp-filtration"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-sp-truncation-e2",
-  "lem-sp-couple-morphism"
+  "def-sp-exact-couple",
+  "def-sp-filtration",
+  "lem-pc-coproduct-truncation-couple",
+  "lem-sp-finite-filtration-induction"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project",
-  "place": "Tag 015J finite convergence and Tag 08DZ; agent-written exact-couple and coproduct glue"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Natural truncation construction followed by direct five-lemma induction and a proved one-step filtration construction, R1"
  },
  "mathlib_searches": [
   {
@@ -119,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S3",
+  "reviewer": "X-6f8cf",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T153650-L-2395687",
+  "landing": "20261012T184336-L-4017367",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, source claims, change record and report; compiled both modules and the unchanged direct importer; checked axioms."
  }
 }

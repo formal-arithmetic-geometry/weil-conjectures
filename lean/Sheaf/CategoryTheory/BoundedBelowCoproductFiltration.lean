@@ -5,14 +5,14 @@ Authors: SHEAF group S3
 -/
 module
 
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.CategoryTheory.ExactCoupleMorphism
-import Sheaf.CategoryTheory.TruncationHypercohomology
+
+import Sheaf.CategoryTheory.CoproductTruncationCouple
+import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 
 /-! # Finite filtered comparison from a bounded-below second-page coproduct comparison
 
@@ -27,6 +27,163 @@ universe v uA uB wA wB
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
+
+private theorem couple_row_exact
+    {C : Type uB} [Category.{v} C] [Abelian C] (X : BigradedExactCouple C 0) (p q : ℤ) :
+    (ComposableArrows.mk₄ (X.f p q) (X.alpha (p + 2) (q - 1))
+      (X.g (p + 2 - 1) (q - 1 + 1))
+      (X.f (p + 2 - 1 + 0) (q - 1 + 1 - 0))).Exact := by
+  refine ComposableArrows.exact_of_δ₀ ?_ (ComposableArrows.exact_of_δ₀ ?_ ?_)
+  · exact ComposableArrows.exact₂_mk _ (X.alpha_f_zero p q)
+      ((ShortComplex.exact_iff_image_eq_kernel _).mpr (X.exact_alpha p q))
+  · exact ComposableArrows.exact₂_mk _ (X.g_alpha_zero (p + 2) (q - 1))
+      ((ShortComplex.exact_iff_image_eq_kernel _).mpr (X.exact_g (p + 2) (q - 1)))
+  · exact ComposableArrows.exact₂_mk _ (X.f_g_zero (p + 2 - 1) (q - 1 + 1))
+      ((ShortComplex.exact_iff_image_eq_kernel _).mpr
+        (X.exact_f (p + 2 - 1) (q - 1 + 1)))
+
+private theorem couple_comparison_step
+    {C : Type uB} [Category.{v} C] [Abelian C] (X Y : BigradedExactCouple C 0)
+    (T : BigradedExactCouple.CoupleMorphism X Y) (p q : ℤ)
+    (hE : ∀ p q : ℤ, IsIso (T.tE p q))
+    (hD : ∀ p : ℤ, IsIso (T.tD p (q - 1))) : IsIso (T.tD p q) := by
+  let R (Z : BigradedExactCouple C 0) :=
+    ComposableArrows.mk₄ (Z.f (p - 1) q) (Z.alpha (p - 1 + 2) (q - 1))
+      (Z.g (p - 1 + 2 - 1) (q - 1 + 1))
+      (Z.f (p - 1 + 2 - 1 + 0) (q - 1 + 1 - 0))
+  let t : R X ⟶ R Y := ComposableArrows.homMk₄
+    (T.tE (p - 1) q) (T.tD (p - 1 + 2) (q - 1))
+    (T.tD (p - 1 + 2 - 1) (q - 1 + 1))
+    (T.tE (p - 1 + 2 - 1 + 0) (q - 1 + 1 - 0))
+    (T.tD (p - 1 + 2 - 1 + 0 + 2) (q - 1 + 1 - 0 - 1))
+    (T.f_comm (p - 1) q).symm (T.alpha_comm (p - 1 + 2) (q - 1)).symm
+    (T.g_comm (p - 1 + 2 - 1) (q - 1 + 1)).symm
+    (T.f_comm (p - 1 + 2 - 1 + 0) (q - 1 + 1 - 0)).symm
+  have ht : IsIso (ComposableArrows.app' t 2) := by
+    apply Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono
+      (couple_row_exact X (p - 1) q) (couple_row_exact Y (p - 1) q) t
+    · have := hE (p - 1) q
+      dsimp [t]
+      infer_instance
+    · exact hD (p - 1 + 2)
+    · exact hE _ _
+    · have : IsIso (T.tD (p - 1 + 2 - 1 + 0 + 2) (q - 1 + 1 - 0 - 1)) := by
+        convert hD (p + 2) using 1 <;> congr 1 <;> omega
+      dsimp [t]
+      infer_instance
+  convert ht using 1 <;> dsimp [t] <;> congr 1 <;> omega
+
+private theorem couple_comparison_isIso
+    {C : Type uB} [Category.{v} C] [Abelian C] (X Y : BigradedExactCouple C 0)
+    (T : BigradedExactCouple.CoupleMorphism X Y) (a : ℤ)
+    (hX : ∀ p q : ℤ, q < a → IsZero (X.D p q))
+    (hY : ∀ p q : ℤ, q < a → IsZero (Y.D p q))
+    (hE : ∀ p q : ℤ, IsIso (T.tE p q)) (p q : ℤ) : IsIso (T.tD p q) := by
+  have hb (p q : ℤ) (hq : q < a) : IsIso (T.tD p q) :=
+    (hX p q hq).isIso (hY p q hq) _
+  have hn (n : ℕ) : ∀ p : ℤ, IsIso (T.tD p (a - 1 + n)) := by
+    induction n with
+    | zero =>
+      intro p
+      exact hb p _ (by omega)
+    | succ n ih =>
+      intro p
+      apply couple_comparison_step X Y T p _ hE
+      intro p'
+      convert ih p' using 1 <;> congr 1 <;> omega
+  by_cases hq : q < a
+  · exact hb p q hq
+  · have heq : a - 1 + ((q - (a - 1)).toNat : ℤ) = q := by omega
+    have hh := hn (q - (a - 1)).toNat p
+    rw [heq] at hh
+    exact hh
+
+private noncomputable def oneStep
+    {C : Type uB} [Category.{v} C] [Abelian C] (X : C) : DecreasingFiltration X where
+  step p := if p ≤ 0 then ⊤ else ⊥
+  antitone_step := by
+    intro p r hpr
+    dsimp
+    split_ifs <;> first | exact le_rfl | exact bot_le | exact le_top | omega
+
+private theorem oneStep_top
+    {C : Type uB} [Category.{v} C] [Abelian C] (X : C) (p : ℤ) (hp : p ≤ 0) :
+    (oneStep X).step p = ⊤ := if_pos hp
+
+private theorem oneStep_bot
+    {C : Type uB} [Category.{v} C] [Abelian C] (X : C) (p : ℤ) (hp : ¬p ≤ 0) :
+    (oneStep X).step p = ⊥ := if_neg hp
+
+private theorem oneStep_finite
+    {C : Type uB} [Category.{v} C] [Abelian C] (X : C) : (oneStep X).IsFinite := by
+  exact ⟨0, 1, by simp [oneStep], by simp [oneStep]⟩
+
+private noncomputable def oneStepHom
+    {C : Type uB} [Category.{v} C] [Abelian C] {X Y : C} (f : X ⟶ Y) :
+    FilteredObject.Hom ⟨X, oneStep X⟩ ⟨Y, oneStep Y⟩ where
+  hom := f
+  preserves p := by
+    change ∃ lift : (((oneStep X).step p) : C) ⟶ (((oneStep Y).step p) : C),
+      lift ≫ ((oneStep Y).step p).arrow = ((oneStep X).step p).arrow ≫ f
+    by_cases hp : p ≤ 0
+    · rw [oneStep_top X p hp, oneStep_top Y p hp]
+      exact ⟨(⊤ : Subobject X).arrow ≫ f ≫ inv (⊤ : Subobject Y).arrow, by simp⟩
+    · rw [oneStep_bot X p hp, oneStep_bot Y p hp]
+      exact ⟨0, by simp⟩
+
+private theorem oneStep_restriction_isIso
+    {C : Type uB} [Category.{v} C] [Abelian C] {X Y : C} (f : X ⟶ Y) [IsIso f] (p : ℤ) :
+    IsIso (FilteredObject.restriction (oneStepHom f) p) := by
+  have hr : FilteredObject.restriction (oneStepHom f) p ≫
+      ((oneStep Y).step p).arrow = ((oneStep X).step p).arrow ≫ f :=
+    Classical.choose_spec ((oneStepHom f).preserves p)
+  by_cases hp : p ≤ 0
+  · have hX : IsIso ((oneStep X).step p).arrow := by
+      rw [oneStep_top _ p hp]
+      infer_instance
+    have hY : IsIso ((oneStep Y).step p).arrow := by
+      rw [oneStep_top _ p hp]
+      infer_instance
+    have : IsIso (FilteredObject.restriction (oneStepHom f) p ≫
+        ((oneStep Y).step p).arrow) := by rw [hr]; infer_instance
+    exact IsIso.of_isIso_comp_right (FilteredObject.restriction (oneStepHom f) p)
+      ((oneStep Y).step p).arrow
+  · have hX : IsZero (((oneStep X).step p) : C) := by
+      rw [oneStep_bot _ p hp]
+      exact (isZero_zero C).of_iso Subobject.botCoeIsoZero
+    have hY : IsZero (((oneStep Y).step p) : C) := by
+      rw [oneStep_bot _ p hp]
+      exact (isZero_zero C).of_iso Subobject.botCoeIsoZero
+    exact hX.isIso hY _
+
+private theorem oneStep_graded_isIso
+    {C : Type uB} [Category.{v} C] [Abelian C] {X Y : C} (f : X ⟶ Y) [IsIso f] (p : ℤ) :
+    IsIso (FilteredObject.gradedMap (oneStepHom f) p) := by
+  let phi := oneStepHom f
+  let iX := Subobject.ofLE ((oneStep X).step (p + 1)) ((oneStep X).step p)
+    ((oneStep X).antitone_step (by omega))
+  let iY := Subobject.ofLE ((oneStep Y).step (p + 1)) ((oneStep Y).step p)
+    ((oneStep Y).antitone_step (by omega))
+  have hcomm : iX ≫ FilteredObject.restriction phi p =
+      FilteredObject.restriction phi (p + 1) ≫ iY := by
+    apply (cancel_mono ((oneStep Y).step p).arrow).1
+    have h (r : ℤ) : FilteredObject.restriction phi r ≫
+        ((oneStep Y).step r).arrow = ((oneStep X).step r).arrow ≫ f :=
+      Classical.choose_spec (phi.preserves r)
+    dsimp [iX, iY]
+    simp only [Category.assoc, Subobject.ofLE_arrow, h]
+    rw [← Category.assoc, Subobject.ofLE_arrow]
+  have hmap : FilteredObject.gradedMap phi p =
+      cokernel.map iX iY (FilteredObject.restriction phi (p + 1))
+        (FilteredObject.restriction phi p) hcomm := by
+    apply (cancel_epi (cokernel.π iX)).1
+    exact (Classical.choose_spec (FilteredObject.exists_gradedMap _ _ phi p)).trans
+      (cokernel.π_desc _ _ _).symm
+  have := oneStep_restriction_isIso f p
+  have := oneStep_restriction_isIso f (p + 1)
+  rw [hmap]
+  infer_instance
+
 
 /-- Second-page coproduct isomorphisms give a finite filtered comparison with isomorphic
 associated graded maps. This is the spectral-sequence part of the coproduct argument;
@@ -80,6 +237,30 @@ theorem exists_boundedBelow_coproduct_filtration
       FS.IsFinite ∧ FT.IsFinite ∧
         phi.hom = Sigma.desc (fun i ↦
           (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).map (u i)) ∧
-        ∀ p : ℤ, IsIso (FilteredObject.gradedMap phi p) := by sorry
+        ∀ p : ℤ, IsIso (FilteredObject.gradedMap phi p) := by
+  obtain ⟨X, Y, T, hDX, hDY, hEX, hEY, eX, eY, hD, hE⟩ :=
+    exists_coproduct_truncation_couple F I K S u a hK hS
+  have hT (p r : ℤ) : IsIso (T.tE p r) := by
+    by_cases hp : p < 0
+    · exact (hEX p r hp).isIso (hEY p r hp) _
+    · have hp' : (p.toNat : ℤ) = p := by omega
+      have hex := hE p.toNat r
+      rw [hp'] at hex
+      obtain ⟨s, t, ht⟩ := hex
+      have hcan := hE2 p.toNat r
+      rw [hp'] at hcan
+      rw [ht]
+      infer_instance
+  have : IsIso (T.tD 0 q) := couple_comparison_isIso X Y T a hDX hDY hT 0 q
+  let f := Sigma.desc (fun i ↦
+    (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).map (u i))
+  have : IsIso f := by
+    change IsIso (Sigma.desc (fun i ↦
+      (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q).map (u i)))
+    rw [hD q]
+    infer_instance
+  refine ⟨oneStep _, oneStep _, oneStepHom f, oneStep_finite _, oneStep_finite _, rfl, ?_⟩
+  intro p
+  exact oneStep_graded_isIso f p
 
 end CategoryTheory

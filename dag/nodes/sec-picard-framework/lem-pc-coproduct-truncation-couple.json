@@ -1,0 +1,157 @@
+{
+ "id": "lem-pc-coproduct-truncation-couple",
+ "kind": "statement",
+ "title": "Natural coproduct truncation exact-couple comparison",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories [def-sp-grothendieck-abelian] admitting derived categories and K-injective right derived functors [def-sp-kinjective-bridge]. Let $F:\\mathcal A\\to\\mathcal B$ be left exact and additive [def-sp-left-exact-additive]. Let $I$ be a small set, $K_i,S\\in D(\\mathcal A)$ and $u_i:K_i\\to S$ such that $H^r(K_i)=H^r(S)=0$ for $r<a$, for a common integer $a$. Put $G_n=H^n RF$ and $P_{p,r}(L)=H^p(RF(H^r(L)[0]))$, with maps induced functorially. There exist type-zero bigraded exact couples $X,Y$ [def-sp-exact-couple] in $\\mathcal B$ and a couple morphism $T:X\\to Y$ [lem-sp-derived-couple-functoriality] with: $X.D^{p,r}=Y.D^{p,r}=0$ for $r<a$; $X.E^{p,r}=Y.E^{p,r}=0$ for $p<0$; for every integer $n$, isomorphisms $e_X^n:X.D^{0,n}\\cong\\bigoplus_iG_n(K_i)$ and $e_Y^n:Y.D^{0,n}\\cong G_n(S)$ under which the canonical map $\\bigoplus_iG_n(K_i)\\to G_n(S)$ is $(e_X^n)^{-1}$ followed by $T_D^{0,n}$ followed by $e_Y^n$; and for every $p\\ge0,r\\in\\mathbf Z$, isomorphisms $s:X.E^{p,r}\\cong\\bigoplus_iP_{p,r}(K_i)$ and $t:Y.E^{p,r}\\cong P_{p,r}(S)$ such that $T_E^{p,r}$ is $s$ followed by the canonical map $\\bigoplus_iP_{p,r}(K_i)\\to P_{p,r}(S)$ followed by $t^{-1}$. No hypothesis that these canonical maps are isomorphisms is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Tag 015J hypercohomology second page and abutment; Tag 05TC derived lower bounds and truncation comparison; Tag 08DZ direct-sum spectral-sequence reduction; parent construction steps 1 and 2"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-kinjective-bridge",
+  "def-sp-left-exact-additive",
+  "def-sp-exact-couple",
+  "lem-sp-derived-couple-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Represent the cohomologically bounded-below objects by bounded-below complexes of injectives; lift each derived morphism into the target injective representative. Apply the truncation hypercohomology construction to each representative. Its exactness and canonical structure-map descriptions identify the resulting triangle maps. Naturality of canonical truncation triangles, followed by the triangulated right derived functor and homology, gives commuting alpha, f and g squares for the maps induced by u_i, including the connecting maps. These naturality squares depend only on the derived morphisms.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-sp-truncation-raw-exact",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each bidegree take the coproduct of the individual D and E terms. The direct-sum functor in a Grothendieck abelian category is exact: express the sum as the filtered colimit of finite sums and use AB5. Hence it preserves the three defining exact sequences and makes X an exact couple. Let Y be the target couple. Define T_D and T_E by coproduct descent. Every couple-morphism square reduces, after precomposition with a coproduct inclusion, to the corresponding individual naturality square. D vanishes when the truncation index is below a, since that truncated derived object is zero; exact sums preserve zero. E vanishes at negative first indices by connectivity of RF on degree-zero objects and the natural shift identifications.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-sp-exact-couple",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "lem-sp-shift-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each n the canonical map from the n-th lower truncation to K_i induces an isomorphism on derived homology in degree n: its cone has lower bound n+1, and the derived functor preserves this lower bound. The individual canonical D-to-abutment isomorphisms, summed over i, give eX; the target gives eY. The truncation inclusion is natural, so each individual square commutes. Check the displayed coproduct-descent equality by precomposing with every inclusion, then cancel eX. This proves the required equation at every n, without assuming the abutment comparison is invertible.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-truncation-iso",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each nonnegative p and integer r, compose the single-functor shift comparison, the shift comparison for RF, and the homology shift comparison to identify E^{p,r} with H^p RF(H^r(-)[0]). These are natural isomorphisms. Sum their components for the source to obtain s, and use the target component for t. Naturality makes the individual E squares commute. Check the displayed E equation on each coproduct inclusion and apply the coproduct universal property. Empty families give the zero source couple and satisfy the same formulas.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-sp-shift-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple",
+  "def-sp-grothendieck-abelian",
+  "lem-sp-shift-identification",
+  "lem-sp-truncation-raw-exact",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "thm-sp-truncation-e2"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Natural truncation and exact-coproduct glue in parent steps 1 and 2; agent-written assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Construct the coproduct of truncation exact couples with natural E2 and abutment comparison isomorphisms",
+   "results": "HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc, HomologicalComplex.shortComplexTruncLE_shortExact, HomologicalComplex.shortComplexTruncLEX₃ToTruncGE, HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE, HomologicalComplex.stupidTruncMap_stupidTruncXIso_hom_assoc, CochainComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc, CochainComplex.shortComplexTruncLE_shortExact, CochainComplex.g_shortComplexTruncLEX₃ToTruncGE",
+   "date": "2026-10-12",
+   "verdict": "No exact match; truncation short exact sequences alone do not assemble this couple comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "truncation.*couple|couple.*truncation",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No exact match; truncation short exact sequences alone do not assemble this couple comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial truncation exact couple for bounded below derived objects and coproducts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BoundedBelowCoproductFiltration",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent steps 1 and 2: construct natural truncation couples and their degreewise coproduct; retain the canonical D and E comparison equations",
+   "via": [
+    "lem-pc-bounded-below-coproduct-filtration",
+    "lem-pc-truncated-direct-image-sheaf-coproduct-epi",
+    "lem-pc-truncated-direct-image-affine-finite-support",
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CoproductTruncationCouple",
+  "file": "lean/Sheaf/CategoryTheory/CoproductTruncationCouple.lean",
+  "declaration": "CategoryTheory.exists_coproduct_truncation_couple",
+  "statement": "theorem exists_coproduct_truncation_couple\n    {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]\n    [HasDerivedCategory.{wA} A]\n    {B : Type uB} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B]\n    [HasDerivedCategory.{wB} B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]\n    (I : Type v) (K : I → DerivedCategory A) (S : DerivedCategory A)\n    (u : ∀ i, K i ⟶ S) (a : ℤ)\n    (hK : ∀ (i : I) (r : ℤ), r < a →\n      IsZero ((DerivedCategory.homologyFunctor A r).obj (K i)))\n    (hS : ∀ r : ℤ, r < a → IsZero ((DerivedCategory.homologyFunctor A r).obj S)) :\n    ∃ (X Y : BigradedExactCouple B 0) (T : BigradedExactCouple.CoupleMorphism X Y),\n      (∀ p r : ℤ, r < a → IsZero (X.D p r)) ∧\n      (∀ p r : ℤ, r < a → IsZero (Y.D p r)) ∧\n      (∀ p r : ℤ, p < 0 → IsZero (X.E p r)) ∧\n      (∀ p r : ℤ, p < 0 → IsZero (Y.E p r)) ∧\n      ∃ (eX : ∀ n : ℤ, X.D 0 n ≅\n          ∐ (fun i ↦ (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).obj\n            (K i)))\n        (eY : ∀ n : ℤ, Y.D 0 n ≅\n          (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).obj S),\n        (∀ n : ℤ, Sigma.desc (fun i ↦\n          (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).map (u i)) =\n            (eX n).inv ≫ T.tD 0 n ≫ (eY n).hom) ∧\n        ∀ (p : ℕ) (r : ℤ),\n          ∃ (s : X.E p r ≅ ∐ (fun i ↦\n              (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙\n                DerivedCategory.homologyFunctor B (p : ℤ)).obj\n                  ((DerivedCategory.homologyFunctor A r).obj (K i))))\n            (t : Y.E p r ≅\n              (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙\n                DerivedCategory.homologyFunctor B (p : ℤ)).obj\n                  ((DerivedCategory.homologyFunctor A r).obj S)),\n            T.tE p r = s.hom ≫ Sigma.desc (fun i ↦\n              (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙\n                DerivedCategory.homologyFunctor B (p : ℤ)).map\n                  ((DerivedCategory.homologyFunctor A r).map (u i))) ≫ t.inv",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6f8cf",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T184336-L-4017367",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6f8cf",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T184336-L-4017367",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, source claims, change record and report; compiled both modules and the unchanged direct importer; checked axioms."
+ }
+}
