@@ -17,30 +17,35 @@
  ],
  "proof": [
   {
-   "text": "The affine sheaf-Hom adjunction computes an ambient scalar right adjoint by Hom(A,I(K)) with its natural A-action. Exactness of scalar restriction identifies its derived restriction functor with rho. The construction of derivedRHomAlgebraModule computes this same A-valued Hom on a K-injective resolution. The canonical localization comparisons identify these functors; uniqueness of right adjoints then gives an isomorphism of this value with the value of the specified rhoR.",
+   "text": "Construct the direct-image algebra B as Under.mk f.c. To meet the local-derived-category assumption of finite_pushforward_derivedHom_qcoherent in the existing morphism universe wY, prove that module pushforward from Over U is faithful: any V over U is isomorphic to (Over.star U).obj V.left, since V is contained in U. Equality of pushed-forward maps thus gives equality on V by naturality. Compose this faithful functor with DerivedCategory.singleFunctor at zero. Mathlib locallySmall_of_faithful gives local smallness in wY, and HasDerivedCategory.ofHasKInjectiveResolutions constructs the required local derived categories, using SheafOfModules.isGrothendieckAbelian for the over site.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply finite_pushforward_derivedHom_qcoherent to B with rfl and the given K and lower bound. Obtain hB, quasi-coherence of the constructed algebra-valued derived Hom after scalar restriction in every cohomology degree, and the other unused membership conclusions. Apply sheafAlgebraDerivedHom_adjunction to this same B and hB, and use Adjunction.rightAdjointUniq with adjA to obtain an isomorphism from rhoR(K) to the constructed derived Hom value.",
    "uses": [
-    "lem-sc-finite-sheafhom-affine-adjoint",
-    "def-pc-derived-rhom-algebra-module"
+    "lem-sc-finite-pushforward-derived-hom-qcoherent",
+    "lem-sc-sheaf-algebra-derived-hom-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "For the finite Noetherian morphism and bounded-below K, finite_pushforward_derivedHom_qcoherent gives quasi-coherent cohomology of the A-valued derived Hom. Its algebra B is Under.mk f.c, not merely an isomorphic underlying module, so its property is the direct-image-algebra property by the definitions. Transport each cohomology module through the isomorphism from Step 1; quasi-coherence is closed under module isomorphism. This proves the required membership. Zero objects, arbitrary shifts with shifted bounds, and identity finite morphisms satisfy the same calculation; no choice of an isomorphism changes the property.",
+   "text": "For each integer n, apply quasiCoherent_iff_restrictScalars to the nth cohomology module using hB, obtaining quasi-coherence over B from the underlying O_Y-module property. Map the inverse of the right-adjoint isomorphism through the nth homology functor and transport quasi-coherence using ObjectProperty.prop_of_iso. The underlying B ring sheaf equals moduleRings (directImageAlgebraSpace f) definitionally; the quasi-coherence predicates require the cited scalar-restriction equivalence, not merely definitional unfolding.",
    "uses": [
-    "lem-sc-finite-pushforward-derived-hom-qcoherent"
+    "lem-weil-pbc-quasi-coherence-scalar-restriction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-rhom-algebra-module",
   "lem-sc-finite-pushforward-derived-hom-qcoherent",
-  "lem-sc-finite-sheafhom-affine-adjoint"
+  "lem-sc-sheaf-algebra-derived-hom-adjunction",
+  "lem-weil-pbc-quasi-coherence-scalar-restriction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AX2, first assertion, with Tag 0BV0 scalar adjunction"
+  "place": "Tag 0AX2 with Tags 0BV0 and 0BV1; universe glue and explicit scalar-restriction conversion formalized by H2"
  },
  "mathlib_searches": [
   {
@@ -118,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T085340-L-39895",
+  "landing": "20261012T095906-L-317948",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
