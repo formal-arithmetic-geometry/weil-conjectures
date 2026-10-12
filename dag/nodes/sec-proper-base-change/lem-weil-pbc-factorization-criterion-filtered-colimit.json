@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the category of finitely presented algebras over $\\Lambda$).* Let $\\mathcal P_0$ be the set of all $R$-algebras $R[x_1,\\dots,x_n]/I$ with $n\\ge0$ and $I\\subset R[x_1,\\dots,x_n]$ a finitely generated ideal, and $\\mathcal P=\\mathcal P_0\\cup\\mathcal E$. This is a set of $R$-algebras of finite presentation, and every $R$-algebra of finite presentation is isomorphic to a member of $\\mathcal P_0\\subset\\mathcal P$ (by definition it is isomorphic to some $R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$). Let $\\mathcal I$ be the category of pairs $(A,\\alpha)$, $A\\in\\mathcal P$, $\\alpha:A\\to\\Lambda$ a homomorphism of $R$-algebras, with morphisms $\\varphi:(A,\\alpha)\\to(A',\\alpha')$ the $R$-algebra maps $\\varphi:A\\to A'$ with $\\alpha'\\varphi=\\alpha$, and let $D:\\mathcal I\\to$ (commutative $R$-algebras) be $(A,\\alpha)\\mapsto A$. By [lem-weil-pbc-algebra-colimit-fp-algebras-over-it], $\\mathcal I$ is a small filtered category and $(\\Lambda,(\\alpha)_{(A,\\alpha)\\in\\mathcal I})$ is a colimit of $D$ [def-weil-pbc-category-colimit].",
+   "text": "Step 1 (small representatives). Mathlib proves that the category of finitely generated R-algebras is essentially u-small (CommAlgCat/FiniteType.lean). Its inclusion has essentially small essential image, so the finite-type object property is essentially small. Finite presentation implies finite type; therefore the finite-presentation property FP and the membership property E are essentially small. ObjectProperty.EssentiallySmall.exists_small_le chooses small properties P₀ ≤ FP and E₀ ≤ E with FP ≤ P₀.isoClosure and E ≤ E₀.isoClosure. Set P = P₀ ⊔ E₀. Every member of P is finitely presented and every finitely presented algebra is isomorphic to a member of P. Apply [lem-weil-pbc-algebra-colimit-fp-algebras-over-it] to obtain small filtered I = CostructuredArrow P.ι Λ and its canonical colimit cocone c with vertex Λ [def-weil-pbc-category-colimit].",
    "uses": [
     "lem-weil-pbc-algebra-colimit-fp-algebras-over-it",
     "def-weil-pbc-category-colimit"
@@ -38,7 +38,7 @@
    }
   },
   {
-   "text": "*Step 2 (the subcategory of members of $\\mathcal E$, and the factorization).* Let $\\mathcal J\\subset\\mathcal I$ be the full subcategory on the objects $(B,\\beta)$ with $B\\in\\mathcal E$; it is small, as a full subcategory of the small category $\\mathcal I$. Let $(A,\\alpha)$ be an object of $\\mathcal I$. Then $A$ is an $R$-algebra of finite presentation and $\\alpha:A\\to\\Lambda$ a homomorphism of $R$-algebras, so by the hypothesis there are $B\\in\\mathcal E$ and $R$-algebra maps $\\beta:A\\to B$, $\\gamma:B\\to\\Lambda$ with $\\gamma\\circ\\beta=\\alpha$. Then $(B,\\gamma)$ is an object of $\\mathcal J$ (as $B\\in\\mathcal E\\subset\\mathcal P$) and $\\beta$ is a morphism $(A,\\alpha)\\to(B,\\gamma)$ of $\\mathcal I$ (as $\\gamma\\beta=\\alpha$). So every object of $\\mathcal I$ has a morphism to an object of $\\mathcal J$.",
+   "text": "Step 2 (factorization into the full subcategory). Let Q(i) mean E₀(i.left.obj), and let F : Q.FullSubcategory → I be the full inclusion. For i = (A, α), apply hfactor to obtain B ∈ E and β : A → B, γ : B → Λ with β ≫ γ = α. Since E ≤ E₀.isoClosure, choose B′ ∈ E₀ and e : B ≅ B′. The object j = (B′, e.inv ≫ γ) belongs to Q, and β ≫ e.hom defines a morphism i → F(j): its commuting triangle follows from e.hom ≫ e.inv = id and β ≫ γ = α. Thus every object of I maps to an object of Q.FullSubcategory.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -47,7 +47,7 @@
    }
   },
   {
-   "text": "*Step 3 (cofinality, Categories 0BUC and 04E7).* The opposite category $\\mathcal I^{\\mathrm{op}}$ is cofiltered, because the three conditions of filteredness of $\\mathcal I$ (Step 1) are, read in $\\mathcal I^{\\mathrm{op}}$, the three conditions of cofilteredness; $\\mathcal J^{\\mathrm{op}}$ is a full subcategory of $\\mathcal I^{\\mathrm{op}}$, and by Step 2 every object of $\\mathcal I^{\\mathrm{op}}$ receives a morphism from an object of $\\mathcal J^{\\mathrm{op}}$. Apply part (1) of [lem-weil-pbc-colimit-initial-full-subcategory] to the cofiltered category $\\mathcal I^{\\mathrm{op}}$, its full subcategory $\\mathcal J^{\\mathrm{op}}$, the category of commutative $R$-algebras, and the functor $D:(\\mathcal I^{\\mathrm{op}})^{\\mathrm{op}}=\\mathcal I\\to$ (commutative $R$-algebras) of Step 1, whose colimit exists by Step 1. It gives: $\\mathcal J^{\\mathrm{op}}$ is cofiltered, i.e. $\\mathcal J$ is filtered (in particular nonempty); the restriction $D|_{\\mathcal J}$ has a colimit $(L,(\\lambda_{(B,\\beta)})_{(B,\\beta)\\in\\mathcal J})$ [def-weil-pbc-category-colimit]; and the canonical map $u:L\\to\\Lambda$, the unique $R$-algebra map with $u\\circ\\lambda_{(B,\\beta)}=\\beta$ for all $(B,\\beta)\\in\\mathcal J$ (the coprojection of $D$ at $(B,\\beta)$ being $\\beta$ by Step 1), is an isomorphism.",
+   "text": "Step 3 (filteredness and restriction). Use the filtered duals of [lem-weil-pbc-colimit-initial-full-subcategory]: IsFiltered.of_exists_of_isFiltered_of_fullyFaithful makes Q.FullSubcategory filtered, and Functor.final_of_exists_of_isFiltered_of_fullyFaithful makes F final. Functor.Final.isColimitWhiskerEquiv transports hc to IsColimit (c.whisker F), keeping the vertex Λ and its canonical coprojections [def-weil-pbc-category-colimit].",
    "uses": [
     "lem-weil-pbc-colimit-initial-full-subcategory",
     "def-weil-pbc-category-colimit"
@@ -59,8 +59,9 @@
    }
   },
   {
-   "text": "*Step 4 (conclusion).* Since $u$ is an isomorphism with $u\\circ\\lambda_{(B,\\beta)}=\\beta$, the cocone $(\\Lambda,(\\beta)_{(B,\\beta)\\in\\mathcal J})$ is a colimit of $D|_{\\mathcal J}$: for a cocone $(M,(\\mu_{(B,\\beta)}))$ on $D|_{\\mathcal J}$ let $v:L\\to M$ be the unique map with $v\\lambda_{(B,\\beta)}=\\mu_{(B,\\beta)}$; then $w=v u^{-1}$ satisfies $w\\beta=v\\lambda_{(B,\\beta)}=\\mu_{(B,\\beta)}$, and any $w'$ with $w'\\beta=\\mu_{(B,\\beta)}$ for all $(B,\\beta)$ has $w'u\\lambda_{(B,\\beta)}=\\mu_{(B,\\beta)}$, so $w'u=v$ and $w'=w$. Thus $J:=\\mathcal J$ is a small filtered category, $(B,\\beta)\\mapsto B_{(B,\\beta)}:=B$ is a functor from $J$ to commutative $R$-algebras with every $B_{(B,\\beta)}\\in\\mathcal E$, and the coprojections $\\iota_{(B,\\beta)}:=\\beta$ are homomorphisms of $R$-algebras with $(\\Lambda,(\\iota_j)_{j\\in J})$ a colimit of this diagram, which is the assertion.",
+   "text": "Step 4 (small index and conclusion). The object projection Q.FullSubcategory → I is injective, so this full subcategory is small. Let e = Shrink.equivalence into J = Shrink Q.FullSubcategory in Type (max u v). Transfer filteredness by IsFiltered.of_equivalence and whisker c.whisker F with e.inverse; its colimit property transfers by Functor.Final.isColimitWhiskerEquiv since an equivalence is final [lem-weil-pbc-colimit-initial-full-subcategory]. The vertex is still Λ, the diagram object at j is the underlying algebra of F(e.inverse.obj j), and it lies in E because E₀ ≤ E. This gives the requested diagram, natural transformation, membership proof and IsColimit witness [def-weil-pbc-category-colimit].",
    "uses": [
+    "lem-weil-pbc-colimit-initial-full-subcategory",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
@@ -78,7 +79,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 07C3 (lemma-when-colimit, line 31952), proof of (2) implies (1), with Lemma Tag 0BUF and Categories, Lemmas Tag 0BUC and 04E7"
+  "place": "Algebra, Lemma Tag 07C3 (lemma-when-colimit, line 31952), proof of (2) implies (1), with Lemma Tag 0BUF and Categories, Lemmas Tag 0BUC and 04E7; implemented by A3 using small representatives from Mathlib FGAlgCat and final whiskering equivalences"
  },
  "mathlib_searches": [
   {
@@ -162,5 +163,15 @@
   "group": "J1",
   "result": "fix",
   "note": "R CommRing; Λ, E in CommAlgCat.{max u v} R; hfp FinitePresentation on E; hfactor ∀ fp A, α ∃ B∈E β γ, β≫γ=α; ∃ small (Type (max u v), fixed from +1) filtered J, D with D.obj j ∈ E, ι, IsColimit (Cocone.mk Λ ι)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T095851-L-311928",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

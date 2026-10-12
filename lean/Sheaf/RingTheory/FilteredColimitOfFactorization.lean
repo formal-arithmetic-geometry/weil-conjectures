@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.FinitePresentation
 import Sheaf.RingTheory.ColimitFinitelyPresentedAlgebras
+import Mathlib.Algebra.Category.CommAlgCat.FiniteType
+import Mathlib.CategoryTheory.Filtered.Final
 
 /-!
 # Filtered colimits from a factorization criterion
@@ -66,6 +68,72 @@ theorem exists_filtered_colimit_of_factorization
     ∃ (J : Type (max u v)) (_ : SmallCategory J) (_ : IsFiltered J)
       (D : J ⥤ CommAlgCat.{max u v} R) (ι : D ⟶ (Functor.const J).obj Λ),
       (∀ j : J, D.obj j ∈ E) ∧ Nonempty (IsColimit (Cocone.mk Λ ι)) := by
-  sorry
+  classical
+  let FP : ObjectProperty (CommAlgCat.{max u v} R) :=
+    fun A ↦ Algebra.FinitePresentation R A
+  let FT : ObjectProperty (CommAlgCat.{max u v} R) := fun A ↦ Algebra.FiniteType R A
+  have hFT : ObjectProperty.EssentiallySmall.{max u v} FT := by
+    have : EssentiallySmall.{u} FT.FullSubcategory := inferInstance
+    have : ObjectProperty.EssentiallySmall.{u} FT.ι.essImage := inferInstance
+    have : ObjectProperty.EssentiallySmall.{max u v} FT.ι.essImage := by
+      obtain ⟨Q, hQ, hrep⟩ :=
+        ObjectProperty.EssentiallySmall.exists_small_le'.{u} FT.ι.essImage
+      exact ⟨Q, small_lift.{_, v, u} (Subtype Q), hrep⟩
+    exact ObjectProperty.EssentiallySmall.of_le (Q := FT.ι.essImage)
+      (fun A hA ↦ ⟨⟨A, hA⟩, ⟨Iso.refl A⟩⟩)
+  have hFPFT : FP ≤ FT := fun A hA ↦ @Algebra.FiniteType.of_finitePresentation
+    R A _ _ _ hA
+  have : ObjectProperty.EssentiallySmall.{max u v} FP :=
+    ObjectProperty.EssentiallySmall.of_le hFPFT
+  let EP : ObjectProperty (CommAlgCat.{max u v} R) := fun A ↦ A ∈ E
+  have : ObjectProperty.EssentiallySmall.{max u v} EP :=
+    ObjectProperty.EssentiallySmall.of_le (Q := FP) hfp
+  obtain ⟨P₀, hP₀small, hP₀fp, hP₀rep⟩ :=
+    ObjectProperty.EssentiallySmall.exists_small_le FP
+  obtain ⟨E₀, hE₀small, hE₀E, hE₀rep⟩ :=
+    ObjectProperty.EssentiallySmall.exists_small_le EP
+  let P := P₀ ⊔ E₀
+  have hPfp : ∀ A, P A → Algebra.FinitePresentation R A := by
+    intro A hA
+    rcases hA with hA | hA
+    · exact hP₀fp A hA
+    · exact hfp A (hE₀E A hA)
+  have hPrep : ∀ A : CommAlgCat.{max u v} R, Algebra.FinitePresentation R A →
+      ∃ B : P.FullSubcategory, Nonempty (A ≅ B.obj) := by
+    intro A hA
+    obtain ⟨B, hB, he⟩ := hP₀rep A hA
+    exact ⟨⟨B, Or.inl hB⟩, he⟩
+  obtain ⟨hIsmall, hIfiltered, ⟨hc⟩⟩ :=
+    isFiltered_and_isColimit_finitelyPresentedAlgebras R Λ P hPfp hPrep
+  let I := CostructuredArrow P.ι Λ
+  let Q : ObjectProperty I := fun i ↦ E₀ i.left.obj
+  let F := Q.ι
+  have hreach : ∀ i : I, ∃ j : Q.FullSubcategory, Nonempty (i ⟶ F.obj j) := by
+    intro i
+    obtain ⟨B, hBE, β, γ, hβγ⟩ := hfactor i.left.obj (hPfp _ i.left.property) i.hom
+    obtain ⟨B', hB', ⟨e⟩⟩ := hE₀rep B hBE
+    let b : P.FullSubcategory := ⟨B', Or.inr hB'⟩
+    let j : I := CostructuredArrow.mk (Y := b) (e.inv ≫ γ)
+    refine ⟨⟨j, hB'⟩, ⟨CostructuredArrow.homMk
+      (ObjectProperty.homMk (β ≫ e.hom)) ?_⟩⟩
+    change (β ≫ e.hom) ≫ (e.inv ≫ γ) = i.hom
+    simpa [Category.assoc] using hβγ
+  have : IsFiltered Q.FullSubcategory :=
+    IsFiltered.of_exists_of_isFiltered_of_fullyFaithful F hreach
+  have : F.Final := Functor.final_of_exists_of_isFiltered_of_fullyFaithful F hreach
+  let c := Cocone.fromCostructuredArrow P.ι (𝟭 I)
+  have hc' : IsColimit (c.whisker F) :=
+    (Functor.Final.isColimitWhiskerEquiv F c).symm hc
+  have : Small.{max u v} Q.FullSubcategory := by
+    exact small_of_injective (f := fun j : Q.FullSubcategory ↦ j.obj)
+      (fun a b h ↦ by cases a; cases b; cases h; rfl)
+  let e := Shrink.equivalence.{max u v} Q.FullSubcategory
+  have : IsFiltered (Shrink.{max u v} Q.FullSubcategory) := IsFiltered.of_equivalence e
+  let c' := (c.whisker F).whisker e.inverse
+  refine ⟨Shrink.{max u v} Q.FullSubcategory, inferInstance, inferInstance,
+    _, c'.ι, ?_, ?_⟩
+  · intro j
+    exact hE₀E _ (e.inverse.obj j).property
+  · exact ⟨(Functor.Final.isColimitWhiskerEquiv e.inverse (c.whisker F)).symm hc'⟩
 
 end CommAlgCat
