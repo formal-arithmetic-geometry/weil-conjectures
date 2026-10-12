@@ -9380,3 +9380,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/K3/Sheaf.RingTheory.RegularLocalQuotientKernelParameters (stage 3; reviewer PASS; first push; landing 20261012T202243-L-705729 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/M1/Sheaf.CategoryTheory.CartanEilenbergRowsExists (stage 3; reviewer PASS; first push; landing 20261012T202243-L-705834 (interface); batch 20261012T202227; modules 3; new nodes 2)
 - 20:22 L: merged deliver/M2/Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalenceCompletion (stage 3; reviewer PASS; first push; landing 20261012T202244-L-705934 (proof); batch 20261012T202227; modules 1; new nodes 0)
+- 20:22 L: merged deliver/M2/Sheaf.AlgebraicGeometry.EtaleSystemConeFunctor (stage 3; reviewer PASS; first push; landing 20261012T202244-L-706079 (proof); batch 20261012T202227; modules 1; new nodes 0)
