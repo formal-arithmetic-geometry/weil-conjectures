@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-colimit-site-abelian-section-eventual-equality",
+ "kind": "statement",
+ "title": "Eventual equality of abelian inverse-image sections",
+ "statement": "Let $J$ be a small filtered category and $F:J\\to\\mathrm{Cat}$ a diagram of small categories [def-weil-pbc-category-colimit]. For each $j$, let $P_j$ be a precoverage on $F(j)$ [def-weil-pbc-sites-and-cohomology] with isomorphism covers, finite indexed composition and base-change stability [def-weil-pbc-finite-precoverage], and covering pullbacks. Assume every covering presieve has finitely many arrows. Each transition functor $F(a)$ maps covering presieves to covering presieves, preserves pullbacks of a covering arrow along any arrow, and is continuous for the generated topologies. Let $V$ be a cocone of $F$ whose object and arrow set cocones are colimits [def-weil-pbc-category-colimit, def-weil-pbc-arrows-functor]. Let $Q$ be a precoverage on $V.pt$ with the same finite closure, isomorphism and covering-pullback properties. Its covers are precisely transported images along the $V_j$ of stage covers. Assume each $V_j$ is continuous and preserves covering pullbacks. Fix $i\\in J$, an abelian sheaf $G$ on $P_i$, and $U\\in F(i)$. For each $t\\in\\mathrm{Under}(i)$ put $W_t=F(t.hom)(U)$ and let $A_t$ be the sections at $W_t$ of the inverse image of $G$ along $F(t.hom)$. Supply sheaf maps $\\alpha_t$ from that inverse image to restriction along $V_{t.right}$ of the inverse image along $V_i$, satisfying the unit equations: for every $X\\in F(i)$ the stage adjunction unit followed by $\\alpha_t$ at $F(t.hom)(X)$ equals the $V_i$ adjunction unit at $X$ in the arrow category, including endpoints [lem-weil-pbc-colimit-site-abelian-section-diagram]. Additionally, for every $b:t\\to t'$ supply a sheaf map $\\theta_b$ from the inverse image along $F(t.hom)$ to restriction along $F(b.right)$ of the inverse image along $F(t'.hom)$. For every $X\\in F(i)$, the stage unit followed by $\\theta_b$ at $F(t.hom)(X)$ equals the $t'$ unit at $X$ in the arrow category [lem-weil-pbc-colimit-site-abelian-section-diagram]. For any fixed $t$ and any $x,y\\in A_t$ with $\\alpha_t(W_t)(x)=\\alpha_t(W_t)(y)$, there are $t'\\in\\mathrm{Under}(i)$ and $b:t\\to t'$ such that $\\theta_b(W_t)(x)=\\theta_b(W_t)(y)$. Both latter images lie in the same section group at $F(b.right)(W_t)$, so their equality needs no endpoint transport. No existence of representatives for arbitrary limit sections is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), presentation and adjunction paragraphs; abelian extension via sites-modules.tex Tag 03CO (lemma-limits-colimits-abelian-sheaves)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-finite-precoverage",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor",
+  "lem-weil-pbc-colimit-site-abelian-section-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Form presentations of a limit object Y by stages reached from i, including arrows from i and stage objects with image Y. Joint surjectivity of the object and arrow colimit legs supplies representatives. Filteredness moves any finite set of representatives to a common stage. Eventual equality in these same two supplied colimit cocones gives equality of endpoints and composites after further refinement, and equalizes parallel refinements. Thus the presentation category is filtered. The category above a fixed presentation is final by the common-refinement and equalizer criterion.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-arrows-functor",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the filtered colimit of the inverse-image sections on presentations. Lift a restriction arrow to a common stage; eventual equality and naturality of the uniquely unit-characterized transition maps prove independence of the lift and the identity and composition restriction laws. These are a presheaf of abelian groups. Every Q cover lifts by hQ to a finite stage cover, and hVpullback preserves its covering pullbacks. Its sheaf equalizer is the filtered colimit of the finite stage equalizers. Filtered abelian group colimits commute with finite products and equalizers, so the presheaf is a sheaf; the empty-cover condition gives the zero group.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-finite-precoverage",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A map from this constructed sheaf to a sheaf H is a compatible family of stage sheaf maps. Apply each stage adjunction to identify this family with one map from G to restriction of H along V_i. The identity presentation and the unit define the reverse assignment. Adjunct uniqueness and the colimit universal property show the assignments are mutually inverse and natural in H. Uniqueness of the left adjoint therefore identifies the constructed sheaf with the canonical sheafPullback, compatibly with units.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At Y = V i U the presentations carrying U forward are final, by common refinement and eventual object and arrow equality. Adjunct uniqueness identifies their coprojections with alpha and refinement maps with theta. Equality of alpha-t(x) and alpha-t(y) is equality of the two same-stage representatives in this filtered colimit of underlying sets. The same-stage equality criterion yields b : t to t-prime equating their theta images. Both images are evaluated at F(b.right)(W-t), so endpoint transport is unnecessary in this last equation.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-cofiltered-criterion",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-precoverage",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-initial-functor-cofiltered-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), presentation and adjunction paragraphs; abelian extension via sites-modules.tex Tag 03CO (lemma-limits-colimits-abelian-sheaves); elementwise extraction of the same-stage equality clause"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of inverse image abelian sheaf on filtered colimit of sites are represented at finite stage and equality holds at later stage",
+   "results": "service unavailable: ",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "section of pullback abelian sheaf to filtered colimit of sites represented at a stage, equal sections equal after transition",
+   "results": "CategoryTheory.Presieve.firstMap_eq_secondMap, CategoryTheory.Functor.IsCoverDense.sheaf_eq_amalgamation, TopCat.Presheaf.section_ext, CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_apply, CategoryTheory.PresheafHom.IsSheafFor.app_cond, CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext, CategoryTheory.PresheafHom.IsSheafFor.exists_app",
+   "date": "2026-10-12",
+   "verdict": "Supporting declarations only; no colimit-site abelian representative or eventual-equality statement."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*colimit|colimit.*sheaf",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean",
+   "date": "2026-10-12",
+   "verdict": "Supporting declarations only; no colimit-site abelian representative or eventual-equality statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteAbelianSectionUniversality",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0A35: section formula, same-stage equality after refinement",
+   "via": [
+    "lem-weil-pbc-colimit-site-abelian-section-universality",
+    "lem-weil-pbc-colimit-site-abelian-inverse-image",
+    "lem-weil-pbc-colimit-of-sites-reduced"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteAbelianSectionEventualEquality",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteAbelianSectionEventualEquality.lean",
+  "declaration": "CategoryTheory.colimit_site_abelian_section_eventual_equality",
+  "statement": "theorem colimit_site_abelian_section_eventual_equality\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderFiniteComposition]\n    [∀ j, (P j).IsStableUnderFiniteBaseChange] [∀ j, (P j).HasPullbacks]\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),\n      R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (F.map a).toFunctor)\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    [Q.HasIsos] [Q.IsStableUnderFiniteComposition]\n    [Q.IsStableUnderFiniteBaseChange] [Q.HasPullbacks]\n    (hQ : (∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n          ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),\n            S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R))\n    (hVpullback : (∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X →\n            ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n              PreservesLimit (cospan f g) (V.ι.app j).toFunctor))\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    (i : J) (G : Sheaf (P i).toGrothendieck AddCommGrpCat.{u})\n    (α : ∀ t : Under i,\n      (sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck (P\n        t.right).toGrothendieck).obj G ⟶\n      ((V.ι.app t.right).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (P\n        t.right).toGrothendieck Q.toGrothendieck).obj\n        ((sheafPullback (V.ι.app i).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck\n          Q.toGrothendieck).obj G))\n    (θ : ∀ (t t' : Under i) (b : t ⟶ t'),\n      (sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck (P\n        t.right).toGrothendieck).obj G ⟶\n      ((F.map b.right).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (P\n        t.right).toGrothendieck (P t'.right).toGrothendieck).obj\n        ((sheafPullback (F.map t'.hom).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck (P\n          t'.right).toGrothendieck).obj G))\n    (hα : ∀ (t : Under i) (X : F.obj i),\n      Arrow.mk (((sheafAdjunctionContinuous (F.map t.hom).toFunctor AddCommGrpCat.{u} (P\n        i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app (op X) ≫ (α t).hom.app\n        (op ((F.map t.hom).toFunctor.obj X))) =\n      Arrow.mk (((sheafAdjunctionContinuous (V.ι.app i).toFunctor AddCommGrpCat.{u} (P\n        i).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X)))\n    (hθ : ∀ (t t' : Under i) (b : t ⟶ t') (X : F.obj i),\n      Arrow.mk (((sheafAdjunctionContinuous (F.map t.hom).toFunctor AddCommGrpCat.{u} (P\n        i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app (op X) ≫\n        (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj X))) =\n      Arrow.mk (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor AddCommGrpCat.{u} (P\n        i).toGrothendieck (P t'.right).toGrothendieck).unit.app G).hom.app (op X)))\n    (U : F.obj i) (t : Under i)\n    (x y : ((sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u}\n      (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj.obj\n        (op ((F.map t.hom).toFunctor.obj U)))\n    (hxy : (α t).hom.app (op ((F.map t.hom).toFunctor.obj U)) x =\n      (α t).hom.app (op ((F.map t.hom).toFunctor.obj U)) y) :\n    ∃ (t' : Under i) (b : t ⟶ t'),\n      (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U)) x =\n        (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U)) y",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T173843-L-3300402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T173843-L-3300402",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

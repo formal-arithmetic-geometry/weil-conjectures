@@ -13,6 +13,9 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.CategoryTheory.Comma.Over.Basic
+import Mathlib.CategoryTheory.Filtered.Final
+import Sheaf.CategoryTheory.ColimitSiteAbelianSectionRepresentatives
+import Sheaf.CategoryTheory.ColimitSiteAbelianSectionEventualEquality
 
 /-! # Universality of the abelian stage-section cocone
 
@@ -25,6 +28,20 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
+
+private theorem arrow_apply_heq
+    {A B C : AddCommGrpCat.{u}} {f : A ⟶ B} {g : A ⟶ C}
+    (h : Arrow.mk f = Arrow.mk g) (x : A) : HEq (f x) (g x) := by
+  have hc : B = C := congrArg Arrow.right h
+  subst C
+  rw [(Arrow.mk_inj _ _).mp h]
+
+private theorem arrow_kernel_iff
+    {A B C : AddCommGrpCat.{u}} {f : A ⟶ B} {g : A ⟶ C}
+    (h : Arrow.mk f = Arrow.mk g) (x y : A) : f x = f y ↔ g x = g y := by
+  have hc : B = C := congrArg Arrow.right h
+  subst C
+  rw [(Arrow.mk_inj _ _).mp h]
 
 /-- Source: Stacks Project, Sites, Tag 0A35, the presentation, sheaf equalizer,
 and adjunction paragraphs; abelian-group extension via Modules on Sites, Tag 03CO.
@@ -119,6 +136,43 @@ theorem colimit_site_abelian_section_universality
       Arrow.mk ((E t).hom ≫ (α t).hom.app (op ((F.map t.hom).toFunctor.obj U))))
     (hD : ∀ (t t' : Under i) (b : t ⟶ t'),
       Arrow.mk ((E t).hom ≫ (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U))) =
-      Arrow.mk (D.map b ≫ (E t').hom)) : Nonempty (IsColimit K) := by sorry
+      Arrow.mk (D.map b ≫ (E t').hom)) : Nonempty (IsColimit K) := by
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.defeqAttrib.useBackward true in
+  classical
+  let T := forget AddCommGrpCat.{u}
+  have : ReflectsColimit D T := reflectsColimit_of_reflectsIsomorphisms D T
+  apply Nonempty.intro
+  apply isColimitOfReflects T
+  apply Types.FilteredColimit.isColimitOf' (D ⋙ T) (T.mapCocone K)
+  · intro x
+    obtain ⟨t, y, hy⟩ := colimit_site_abelian_section_representatives
+      J F P hfinite hcover hpullback V hobjects harrows Q hQ hVpullback i G α hα U
+      (e.hom x)
+    let z := (E t).inv y
+    have hz : HEq (e.hom (K.ι.app t z))
+        ((α t).hom.app (op ((F.map t.hom).toFunctor.obj U)) y) := by
+      have hz := arrow_apply_heq (hK t) z
+      change HEq (e.hom (K.ι.app t z))
+        ((α t).hom.app (op ((F.map t.hom).toFunctor.obj U)) ((E t).hom z)) at hz
+      have hEz : (E t).hom z = y := Iso.inv_hom_id_apply (E t) y
+      rw [hEz] at hz
+      exact hz
+    have hzx : K.ι.app t z = x := by
+      apply (ConcreteCategory.bijective_of_isIso e.hom).1
+      exact eq_of_heq (hz.trans hy)
+    exact ⟨t, z, hzx.symm⟩
+  · intro t x y hxy
+    have hαxy : (α t).hom.app (op ((F.map t.hom).toFunctor.obj U)) ((E t).hom x) =
+        (α t).hom.app (op ((F.map t.hom).toFunctor.obj U)) ((E t).hom y) := by
+      apply (arrow_kernel_iff (hK t) x y).mp
+      change e.hom (K.ι.app t x) = e.hom (K.ι.app t y)
+      exact congrArg e.hom hxy
+    obtain ⟨t', b, hb⟩ := colimit_site_abelian_section_eventual_equality
+      J F P hfinite hcover hpullback V hobjects harrows Q hQ hVpullback i G
+      α θ hα hθ U t ((E t).hom x) ((E t).hom y) hαxy
+    refine ⟨t', b, ?_⟩
+    apply (ConcreteCategory.bijective_of_isIso (E t').hom).1
+    exact (arrow_kernel_iff (hD t t' b) x y).mp hb
 
 end CategoryTheory
