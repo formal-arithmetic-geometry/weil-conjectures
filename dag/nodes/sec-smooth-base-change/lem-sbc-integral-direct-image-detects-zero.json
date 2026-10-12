@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-integral-direct-image-detects-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-integral-base",
+   "place": "Proof, conservativity paragraph: the stalk at a geometric point above the base is a quotient of the stalk of the integral pushforward",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral direct image detects zero module sheaves",
+ "statement": "Let \\Lambda be a commutative ring, f:X\\to Y an integral morphism of schemes [def-weil-pbc-scheme-conventions], and G a sheaf of \\Lambda-modules on the small etale site of X (a functor from the opposite of the small etale site [def-weil-pbc-etale-site] to modules over \\Lambda satisfying the sheaf condition). If the direct image f_*G [def-weil-pbc-direct-image] is a zero object, then G is a zero object.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-universal-datum/sbc-lem-bc-integral-base.md",
+  "place": "Proof, integral algebra over the strict henselisation and conservativity"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Represent any germ of G at a geometric point t of X by a section a on a pointed etale neighbourhood (V,v). Apply the pointed clopen refinement. On P restrict a along the resulting map to V, and on Q take zero. Their overlaps are empty, so the sheaf condition glues them to a section b on the whole base-changed neighbourhood. Its germ at the image of t restricts to the original germ at t, by the two point-preservation equalities and functoriality of the stalk coprojections. Thus the canonical stalk restriction map is surjective. This is the private helper surjective_stalkRestrict_of_isIntegralHom in the delivered module.",
+   "uses": [
+    "lem-sbc-integral-pointed-clopen-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A zero pushforward has zero stalk at the image of every geometric point of X. Its surjection onto the source stalk makes that stalk zero. Transport to the universe-lifted geometric stalks and use their jointly conservative family: the zero map from the zero sheaf to G is an isomorphism on every stalk, hence is an isomorphism. Therefore G is zero. The source is allowed to be empty and f need not be surjective.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-integral-pointed-clopen-refinement",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-universal-datum/sbc-lem-bc-integral-base.md",
+  "place": "Conservativity argument made explicit via pointed clopen refinement and extension by zero"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An integral morphism pushforward of etale module sheaves detects the zero object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral morphism pushforward of etale module sheaves detects the zero object",
+   "results": "AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; Algebra.etaleLocus_eq_compl_support; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.etaleLocus_eq_univ_iff; RingHom.formallyEtale_algebraMap; AlgebraicGeometry.FormallyUnramified; Algebra.Etale.formallyEtale",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_of_isZero_lowerStar|sheafFiber.*lowerStar|lowerStar.*sheafFiber",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Integral.Exact",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.Integral.Exact",
+  "file": "lean/WeilConjectures/SixFunctors/Integral/Exact.lean",
+  "declaration": "AlgebraicGeometry.Etale.isZero_of_isZero_lowerStar_obj",
+  "statement": "theorem Etale.isZero_of_isZero_lowerStar_obj {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T042424-L-1823156",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T042424-L-1823156",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

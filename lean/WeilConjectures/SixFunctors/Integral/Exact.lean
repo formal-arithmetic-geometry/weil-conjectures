@@ -8,6 +8,7 @@ module
 public import Mathlib
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
 public import WeilConjectures.SixFunctors.Finite.Exact
+import Sheaf.AlgebraicGeometry.IntegralPointedClopenRefinement
 
 /-!
 # Exactness of the direct image along an integral morphism
@@ -173,6 +174,64 @@ theorem Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom :
     Functor.preservesHomology_of_preservesEpis_and_kernels _
   Functor.preservesFiniteColimits_of_preservesHomology _
 
+/-- Extend a germ from the pointed clopen piece, putting zero on its complement. -/
+private lemma surjective_stalkRestrict_of_isIntegralHom {Ω : Type u} [Field Ω]
+    [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) (t : Scheme.Hom.GeometricFiber f y)
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Function.Surjective (Etale.stalkRestrict (ModuleCat.{u + 1} Λ) f y t G) := by
+  classical
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  intro z
+  obtain ⟨V, v, a, rfl⟩ := (pointSmallEtale t.1).toPresheafFiber_jointly_surjective
+    (P := G.obj) z
+  obtain ⟨c, P, Q, hPQ, hsup, p, α, hα, hp⟩ :=
+    Scheme.Hom.Nbhd.exists_pointed_clopen_refinement f y t V v
+  let R : Bool → (pullback c.1.hom f).Opens := fun i ↦ if i then P else Q
+  let π (i : Bool) := Scheme.Hom.Nbhd.openIncl f c (R i)
+  have hsup' : (⨆ i, R i) = ⊤ := by
+    simpa [R, iSup_bool_eq, sup_comm] using hsup
+  have hcov : Sieve.ofArrows _ π ∈ X.smallEtaleTopology _ := by
+    rw [ofArrows_mem_smallEtaleTopology_iff, Set.eq_univ_iff_forall]
+    intro w
+    have : w ∈ (⨆ i, R i) := hsup' ▸ trivial
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp this
+    refine Set.mem_iUnion.mpr ⟨i, ?_⟩
+    change w ∈ Set.range (R i).ι
+    rw [Scheme.Opens.range_ι]
+    exact hi
+  have hdisj : ∀ i j, i ≠ j → Disjoint (R i) (R j) := by
+    intro i j hij
+    cases i <;> cases j <;> simp_all [R, disjoint_comm]
+  have hdisj' : ∀ i j, i ≠ j →
+      Disjoint (Set.range (π i).left.base) (Set.range (π j).left.base) := by
+    intro i j hij
+    change Disjoint (Set.range (R i).ι.base) (Set.range (R j).ι.base)
+    simp only [Scheme.Opens.range_ι]
+    rw [Set.disjoint_iff_inter_eq_empty, ← TopologicalSpace.Opens.coe_inf,
+      (hdisj i j hij).eq_bot, TopologicalSpace.Opens.coe_bot]
+  let F := (sheafCompose X.smallEtaleTopology
+    (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj G
+  let s : ∀ i : Bool, G.obj.obj (.op (Scheme.Hom.Nbhd.openObj f c (R i))) := fun i ↦
+    match i with
+    | false => 0
+    | true => G.obj.map α.op a
+  obtain ⟨b, hb, -⟩ := F.property.existsUnique_amalgamation_ofArrows π hcov (E := PUnit)
+    (fun i ↦ TypeCat.ofHom fun _ ↦ s i) (Etale.comp_map_eq_of_disjoint F _ π hdisj' _)
+  have hbP : G.obj.map (Scheme.Hom.Nbhd.openIncl f c P).op (b PUnit.unit) =
+      G.obj.map α.op a := by
+    exact congrArg (fun h ↦ h PUnit.unit) (hb true)
+  refine ⟨(pointSmallEtale y).toPresheafFiber c.1 c.2
+    ((f)_*[ModuleCat.{u + 1} Λ].obj G).obj (b PUnit.unit), ?_⟩
+  have hr := congrArg (fun h ↦ h (b PUnit.unit))
+    (Etale.toPresheafFiber_stalkRestrict (ModuleCat.{u + 1} Λ) f y t G c)
+  simp only [ConcreteCategory.comp_apply] at hr
+  erw [hr]
+  rw [← hp]
+  erw [← (pointSmallEtale t.1).toPresheafFiber_w_apply
+    (Scheme.Hom.Nbhd.openIncl f c P) p G.obj, hbP]
+  erw [(pointSmallEtale t.1).toPresheafFiber_w_apply α p G.obj, hα]
+
 /-- The direct image along an integral morphism detects the zero sheaf: if `f_* G = 0` then
 `G = 0`. This is the conservativity step of the proof of blueprint `sbc-lem-bc-integral-base`.
 For a geometric point `x` of `X` over the geometric point `y` of `Y`, the stalk `G_x` is a
@@ -180,8 +239,33 @@ colimit of factors of the sections of `G` over the integral base change of the s
 henselisation at `y`, which is the stalk `(f_* G)_y`; so `G_x` is a quotient of `(f_* G)_y`. -/
 theorem Etale.isZero_of_isZero_lowerStar_obj
     {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G :=
-  sorry
+    (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G := by
+  refine (Scheme.jointlyReflectIsomorphisms_ulift_pointSmallEtale X
+    (ModuleCat.{u + 1} Λ)).isZero_iff.mpr ?_
+  rintro ⟨-, ⟨x⟩⟩
+  let s := X.algClosurePoint x
+  let t : Scheme.Hom.GeometricFiber f (s ≫ f) := ⟨s, rfl⟩
+  let ρ : ((pointSmallEtale (s ≫ f)).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
+      ((f)_*[ModuleCat.{u + 1} Λ].obj G) ⟶
+      ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj G :=
+    Etale.stalkRestrict (ModuleCat.{u + 1} Λ) f (s ≫ f) t G
+  have : Epi ρ := (ModuleCat.epi_iff_surjective ρ).mpr
+    (surjective_stalkRestrict_of_isIntegralHom Λ f (s ≫ f) t G)
+  have hsource : IsZero (((pointSmallEtale (s ≫ f)).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).obj ((f)_*[ModuleCat.{u + 1} Λ].obj G)) :=
+    (Functor.map_isZero (((pointSmallEtale (s ≫ f)).ulift.{u + 1}).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)) hG).of_iso
+        (((pointSmallEtale (s ≫ f)).uliftSheafFiberIso (ModuleCat.{u + 1} Λ)).app
+          ((f)_*[ModuleCat.{u + 1} Λ].obj G)).symm
+  have h : IsZero (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj G) :=
+    by
+      apply IsZero.of_epi ρ
+      exact hsource
+  let e : (((pointSmallEtale s).ulift.{u + 1}).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).obj G ≅
+      ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj G :=
+    ((pointSmallEtale s).uliftSheafFiberIso (ModuleCat.{u + 1} Λ)).app G
+  exact h.of_iso e
 
 /-- The direct image along an integral morphism is conservative: being exact by
 `AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`, it sends the
