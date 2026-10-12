@@ -5,7 +5,9 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Triangulated.Functor
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedAdjunctionConstruction
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedAdjunctionUnitCounit
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedTildeTriangulated
 
 @[expose] public section
 
@@ -35,6 +37,11 @@ theorem exists_affineQCohDerivedEquivalence_core (A : Type u) [CommRing A]
           ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom).rightDerivedFunctor) ∧
       (∃ (_h : (e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).CommShift ℤ),
         (e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).IsTriangulated) := by
-  sorry
+  obtain ⟨F, G, ⟨adj⟩, hF, hG⟩ := affineQCohDerivedAdjunction_construction A
+  obtain ⟨hunit, hcounit⟩ := affineQCohDerivedAdjunction_unit_counit A F G adj hF hG
+  let : ∀ M, IsIso (adj.unit.app M) := hunit
+  let : ∀ K, IsIso (adj.counit.app K) := hcounit
+  obtain ⟨hs, ht⟩ := affineQCohDerivedEquivalence_core_triangulated A F hF
+  exact ⟨adj.toEquivalence, hF, hG, ⟨hs, ht⟩⟩
 
 end AlgebraicGeometry

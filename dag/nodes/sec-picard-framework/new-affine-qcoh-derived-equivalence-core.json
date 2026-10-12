@@ -10,22 +10,36 @@
  ],
  "proof": [
   {
-   "text": "Construct the derived tilde/global-sections equivalence by exactness, affine acyclicity, and the unit and counit quasi-isomorphisms described in Tag 06Z0.",
+   "text": "Obtain the derived affine adjunction and its two comparison isomorphisms.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-pc-affine-vanishing"
+    "new-affine-qcoh-derived-adjunction-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Install pointwise invertibility of its unit and counit and apply Mathlib CategoryTheory.Adjunction.toEquivalence.",
+   "uses": [
+    "new-affine-qcoh-derived-adjunction-unit-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equip the equivalence functor followed by inclusion with the integer-shift and triangulated structures supplied by the termwise tilde comparison.",
+   "uses": [
+    "new-affine-qcoh-derived-tilde-triangulated"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-pc-affine-vanishing"
+  "new-affine-qcoh-derived-adjunction-construction",
+  "new-affine-qcoh-derived-adjunction-unit-counit",
+  "new-affine-qcoh-derived-tilde-triangulated"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 06Z0"
+  "place": "Tag 06Z0; assemble its adjunction, unit/counit, and triangulated steps with Mathlib Adjunction.toEquivalence"
  },
  "mathlib_searches": [
   {
@@ -95,9 +109,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T053937-L-2637556",
+  "landing": "20261012T070527-L-3466278",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,107 @@
+{
+ "id": "new-affine-qcoh-derived-adjunction-unit-counit",
+ "kind": "statement",
+ "title": "Affine derived adjunction unit and counit are isomorphisms",
+ "statement": "For any commutative ring A and derived-category universe choices, let F : D(A) → D_QCoh(Spec A) and G : D_QCoh(Spec A) → D(A) be functors with an adjunction adj : F ⊣ G. Suppose Q followed by F and inclusion is naturally isomorphic to termwise tilde followed by Q, and G is naturally isomorphic to derived global sections with scalars transported by ΓSpecIso. Then every component of the unit and counit of adj is an isomorphism.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section 36.3, Lemma 36.3.5, proof"
+ },
+ "proof": [
+  {
+   "text": "Use affine vanishing and truncation to identify derived cohomology with ordinary affine sections, then apply the ordinary unit and counit isomorphisms in every degree.",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-vanishing",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-affine-qcoh-derived-equivalence-core",
+   "place": "Tag 06Z0, the affine derived adjunction unit and counit are isomorphisms",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineQCohDerivedAdjunctionUnitCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineQCohDerivedAdjunctionUnitCounit.lean",
+  "declaration": "AlgebraicGeometry.affineQCohDerivedAdjunction_unit_counit",
+  "statement": "theorem affineQCohDerivedAdjunction_unit_counit (A : Type u) [CommRing A]\n    [HasDerivedCategory.{wA} (ModuleCat.{u} A)]\n    [HasDerivedCategory.{wY}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    (F : DerivedCategory (ModuleCat.{u} A) ⥤ schemeDerivedQCohCategory (Spec (.of A)))\n    (G : schemeDerivedQCohCategory (Spec (.of A)) ⥤ DerivedCategory (ModuleCat.{u} A))\n    (adj : F ⊣ G)\n    (hF : Nonempty (DerivedCategory.Q ⋙ F ⋙\n        (schemeDerivedQCohProperty (Spec (.of A))).ι ≅\n        @Functor.mapHomologicalComplex _ _ _ _ _ _ _\n          (@id (ModuleCat.{u} A ⥤\n            SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n            (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ) ⋙\n          DerivedCategory.Q))\n    (hG : Nonempty (G ≅ (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙\n        (RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙\n          ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom).rightDerivedFunctor)) :\n    (∀ M, IsIso (adj.unit.app M)) ∧ (∀ K, IsIso (adj.counit.app K))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section 36.3, Lemma 36.3.5, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived associated sheaf and derived global sections are adjoint and have invertible unit and counit on an affine scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between abelian categories induces a triangulated functor on the unbounded derived categories with a natural isomorphism after localization",
+   "results": "CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated; CategoryTheory.Functor.map_distinguished_exact; CategoryTheory.Functor.mapDerivedCategory; DerivedCategory.instIsTriangulated; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Triangulated.Localization.isTriangulated_functor",
+   "date": "2026-10-12",
+   "verdict": "Partial generic tools only; no theorem with this affine derived statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|isTriangulated_of_precomp|tilde.*exact|tilde.*preserves",
+   "results": "Mathlib/CategoryTheory/Triangulated/Functor.lean; Mathlib/CategoryTheory/Triangulated/Functor.lean; Mathlib/CategoryTheory/Triangulated/Functor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-12",
+   "verdict": "Partial generic tools only; no theorem with this affine derived statement."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T070527-L-3466278",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T070527-L-3466278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
