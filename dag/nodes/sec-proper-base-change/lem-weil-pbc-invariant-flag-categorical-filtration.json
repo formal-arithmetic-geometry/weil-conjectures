@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-invariant-flag-categorical-filtration",
+ "kind": "statement",
+ "title": "Categorical realization of an invariant rank-one flag",
+ "statement": "Let ℓ be prime, P any group, and M a finite-dimensional representation over ℤ/ℓℤ. Let F_i be vector subspaces, n=dim M, F_0=0, F_n=M, all F_i stable for i≤n, and for each i<n assume F_i⊆F_(i+1), dim F_(i+1)=i+1, and g*x-x∈F_i for g∈P and x∈F_(i+1). Then there are representations W_i and morphisms ι_i:W_i→W_(i+1), with W_0 zero, W_n≅M and, for i<n, ι_i monic and its cokernel isomorphic to the trivial representation ULift(ℤ/ℓℤ). A representation is a vector space with a linear group action; morphisms are equivariant linear maps. All indices range over natural numbers; the quotient conditions stop at n. This statement contains no scheme or cover.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Set n=dim M and B_i=F_min(i,n), and equip each B_i with its restricted representation W_i. For i<n use the given inclusions and thereafter the identity on F_n. They are equivariant and injective, hence monic by Rep.mono_iff_injective. W_0 is zero by Rep.isZero_iff since F_0=0. The subtype map W_n→M is injective and surjective since F_n=M, so is an isomorphism in the abelian category Rep.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
+   }
+  },
+  {
+   "text": "For stable A⊆B put K=A.comap(B.subtype). The inclusion A→B followed by B→B/K is exact after forgetting to modules: an element mapped to zero lies in K and therefore comes from A. The second map is surjective. The faithful exact forgetful functor reflects exactness by ShortComplex.exact_map_iff_of_faithful. Exact.gIsCokernel gives the quotient cokernel, which is isomorphic to the chosen categorical cokernel. This is the proved private helper cokernel_inclusion_iso_quotient.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
+   }
+  },
+  {
+   "text": "For i<n the ranks satisfy dim B_i=i (use F_0=0 at zero and the preceding step otherwise), and dim B_(i+1)=i+1. Submodule.comapSubtypeEquivOfLe identifies K with B_i; Submodule.finrank_quotient_add_finrank gives dimension one for B_(i+1)/K. For any g, the condition g*x-x∈F_i makes the quotient action trivial. A linear equivalence to ULift(ZMod ℓ) exists by FiniteDimensional.nonempty_linearEquiv_of_finrank_eq and finrank_ulift. Its trivial action makes the equivalence equivariant; Rep.mkIso and the quotient/cokernel isomorphism give the required cokernel identification. Every step is proved in Lean from Mathlib, without sorry.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)",
+  "note": "Detailed realization of the corresponding step of the cited Stacks proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invariant flag of vector spaces gives monomorphisms of representations with cokernels the trivial one dimensional representation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The categorical cokernel of inclusion of invariant subspaces is the quotient representation and a trivial one dimensional quotient is isomorphic to the trivial rank one representation",
+   "results": "8 hits: Rep.resOfQuotientIso, Representation.FiniteCyclicGroup.coinvariantsEquiv, Representation.instIsTrivialSubtypeMemSubgroupCoinvariantsCompLinearMapIdSubtypeToCoinvariants, Rep.quotientToCoinvariantsFunctor_obj_V, Representation.Coinvariants, Representation.ofQuotient, Rep.ofQuotient, Representation.Coinvariants.mk",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related Mathlib tools support parts of the argument."
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel|quotient|subrepresentation",
+   "results": "8 hits: Mathlib/RepresentationTheory/Rep/Res.lean, Mathlib/RepresentationTheory/Rep/Res.lean, Mathlib/RepresentationTheory/Rep/Res.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match; related Mathlib tools support parts of the argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.LocallyConstantCoverFiltration",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "split-locally-constant-cover-filtration",
+   "place": "Categorical realization of an invariant rank-one flag",
+   "via": [
+    "split-locally-constant-cover-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.InvariantFlagCategoricalFiltration",
+  "file": "lean/Sheaf/RepresentationTheory/InvariantFlagCategoricalFiltration.lean",
+  "declaration": "Rep.exists_categorical_filtration_of_invariant_flag",
+  "statement": "theorem exists_categorical_filtration_of_invariant_flag\n    (ℓ : ℕ) [Fact ℓ.Prime] (P : Type u) [Group P]\n    (M : Rep.{v} (ZMod ℓ) P) [FiniteDimensional (ZMod ℓ) M.V]\n    (F : ℕ → Submodule (ZMod ℓ) M.V)\n    (h0 : F 0 = ⊥) (hn : F (Module.finrank (ZMod ℓ) M.V) = ⊤)\n    (hstable : ∀ i ≤ Module.finrank (ZMod ℓ) M.V, ∀ g, F i ≤ (F i).comap (M.ρ g))\n    (hstep : ∀ i < Module.finrank (ZMod ℓ) M.V,\n      F i ≤ F (i + 1) ∧ Module.finrank (ZMod ℓ) (F (i + 1)) = i + 1 ∧\n        ∀ g, ∀ x ∈ F (i + 1), M.ρ g x - x ∈ F i) :\n    ∃ (n : ℕ) (W : ℕ → Rep.{v} (ZMod ℓ) P) (ι : ∀ i, W i ⟶ W (i + 1)),\n      IsZero (W 0) ∧ Nonempty (W n ≅ M) ∧\n      ∀ i < n, Mono (ι i) ∧\n        Nonempty (cokernel (ι i) ≅ Rep.trivial (ZMod ℓ) P (ULift.{v} (ZMod ℓ)))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T034934-L-1564424",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T034934-L-1564424",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

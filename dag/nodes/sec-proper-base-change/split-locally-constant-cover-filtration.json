@@ -24,17 +24,9 @@
  ],
  "proof": [
   {
-   "text": "Use the finite-monodromy representation of G at a geometric point of the connected scheme U. Its finite image has an ℓ-Sylow subgroup P; the inverse image of P gives a connected finite étale cover v whose index d is prime to ℓ and whose geometric fibres all have cardinality d. To justify the fibre cardinality independently of the trace formula: finite étale is finite locally free [def-pc-finite-locally-free]. By [lem-weil-pbc-finite-locally-free-degree-locally-constant], its fibre dimension is locally constant, hence constant on connected U. By [lem-weil-pbc-fibre-degree-base-change] that dimension is unchanged after extension to the field of a geometric point. By [lem-galois-geometric-fibre] the resulting finite étale algebra over a separably closed field is a product of copies of that field. The number of copies equals its dimension and the number of geometric lifts. At the chosen point that number is the coset index d, so it is d at every geometric point.",
+   "text": "Obtain the connected finite étale Sylow cover, its prime-to-ℓ geometric-fibre degree, a finite ℓ-group P, its representation M, and the exact additive associated-sheaf functor T. This is the geometric part and asserts no filtration.",
    "uses": [
-    "cor-galois-lisse-representations",
-    "lem-weil-pbc-sylow-subgroup-prime-index",
-    "thm-galois-fundamental",
-    "def-galois-categories",
-    "def-weil-connected-scheme",
-    "def-pc-finite-locally-free",
-    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-    "lem-weil-pbc-fibre-degree-base-change",
-    "lem-galois-geometric-fibre"
+    "lem-weil-pbc-sylow-cover-associated-sheaf"
    ],
    "elementary": false,
    "source": {
@@ -43,13 +35,10 @@
    }
   },
   {
-   "text": "After pulling G back to V, the monodromy factors through the finite ℓ-group P. The finite-dimensional F_ℓ[P]-module underlying the geometric stalk therefore has a P-stable filtration with one-dimensional trivial successive quotients.",
+   "text": "Apply the already proved ℓ-group representation filtration theorem to M. Its invariant flag satisfies the hypotheses of the categorical realization lemma; obtain representations W_i and monomorphisms with trivial rank-one cokernels.",
    "uses": [
-    "thm-galois-fundamental",
-    "thm-galois-lc-etale",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "cor-galois-lisse-representations",
-    "lemma-weil-pbc-finite-l-group-filtration"
+    "lemma-weil-pbc-finite-l-group-filtration",
+    "lem-weil-pbc-invariant-flag-categorical-filtration"
    ],
    "elementary": false,
    "source": {
@@ -58,11 +47,9 @@
    }
   },
   {
-   "text": "Transport that filtration through the exact equivalence between finite locally constant module sheaves on connected V and finite continuous representations. Full faithfulness and exactness turn the invariant subspaces into monomorphisms of sheaves and identify each quotient with the constant F_ℓ-sheaf.",
-   "uses": [
-    "cor-galois-lisse-representations"
-   ],
-   "elementary": false,
+   "text": "Map W_i and the inclusions through T. Additivity preserves the zero object. Finite-limit preservation preserves monomorphisms and finite-colimit preservation gives PreservesCokernel.iso. Compose the final isomorphisms T(W_n)≅T(M)≅v*G and the cokernel isomorphisms cokernel(T(ι_i))≅T(cokernel(ι_i))≅T(trivial)≅constant. Return this filtration with the geometric cover witnesses.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
     "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
@@ -70,23 +57,15 @@
   }
  ],
  "proof_deps": [
-  "cor-galois-lisse-representations",
-  "def-galois-categories",
-  "def-pc-finite-locally-free",
-  "def-weil-connected-scheme",
-  "lem-galois-geometric-fibre",
-  "lem-weil-pbc-fibre-degree-base-change",
-  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-sylow-subgroup-prime-index",
-  "lemma-weil-pbc-finite-l-group-filtration",
-  "thm-galois-fundamental",
-  "thm-galois-lc-etale"
+  "lem-weil-pbc-invariant-flag-categorical-filtration",
+  "lem-weil-pbc-sylow-cover-associated-sheaf",
+  "lemma-weil-pbc-finite-l-group-filtration"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
+  "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)",
+  "note": "Lean realization of the Sylow-cover, invariant-flag, and exact-functor transport steps."
  },
  "status": "split",
  "blueprint_kind": "lemma",
@@ -187,9 +166,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T031106-L-1325090",
+  "landing": "20261012T034934-L-1564424",
   "kind": "interface",
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
