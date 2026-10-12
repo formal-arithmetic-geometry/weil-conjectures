@@ -439,6 +439,62 @@ lemma exact_smul_towerFunctor_obj (a b : ℕ) :
         rw [Sheaf.restrictScalars_map_smul, CategoryTheory.Functor.map_id]
         rfl)
 
+include hψ₀ in
+lemma quasiIso_cokernelDesc_towerFunctor_self (n : ℕ) :
+    QuasiIso (cokernel.desc (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op n)))
+      ((towerFunctor φ ψ hψ L t).map (homOfLE (le_refl n)).op) (by
+        rw [smul_id_towerFunctor_obj φ ψ hψ hψ₀ L t, zero_comp])) := by
+  have hπ : cokernel.π (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op n))) ≫
+      cokernel.desc _ ((towerFunctor φ ψ hψ L t).map (homOfLE (le_refl n)).op) (by
+        rw [smul_id_towerFunctor_obj φ ψ hψ hψ₀ L t, zero_comp]) = 𝟙 _ := by
+    rw [cokernel.π_desc]
+    exact (towerFunctor φ ψ hψ L t).map_id _
+  have : IsIso (cokernel.desc (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op n)))
+      ((towerFunctor φ ψ hψ L t).map (homOfLE (le_refl n)).op) (by
+        rw [smul_id_towerFunctor_obj φ ψ hψ hψ₀ L t, zero_comp])) :=
+    ⟨cokernel.π _, by rw [← cancel_epi (cokernel.π _), reassoc_of% hπ, Category.comp_id], hπ⟩
+  infer_instance
+
+include hφ hψ₀ hsurj hker ht in
+lemma quasiIso_cokernelDesc_towerFunctor (n k : ℕ) :
+    QuasiIso (cokernel.desc (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op (n + k + 1))))
+      ((towerFunctor φ ψ hψ L t).map (homOfLE (Nat.le_add_right n (k + 1))).op) (by
+        rw [Linear.smul_comp, Category.id_comp, ← Category.comp_id
+          ((towerFunctor φ ψ hψ L t).map _), ← Linear.comp_smul,
+          smul_id_towerFunctor_obj φ ψ hψ hψ₀ L t, Limits.comp_zero])) := by
+  set h := Nat.le_add_right n (k + 1)
+  let M := towerModel (φ := fun n ↦ φ n.le_succ) L t
+  let D := Sheaf.reductionDatum J (φ h) (hsurj h) (ψ (n + k + 1) (ϖ ^ n)) (hker h)
+  have := Sheaf.restrictScalars_full J (φ h) (hsurj h)
+  obtain ⟨g, hg, -⟩ := D.existsUnique_complexMap_comp (towerModelComp φ L t hφ n k)
+  have hη₁ : Sheaf.IsDerivedBaseChange (Q.map (D.complexMap (M (n + k + 1)).P) ≫
+      (Sheaf.restrictScalars J (φ h)).mapDerivedCategoryFactors.inv.app
+        ((D.Φ.mapHomologicalComplex (.up ℤ)).obj (M (n + k + 1)).P)) :=
+    fun N ↦ D.bijective_comp_map _ (M (n + k + 1)).isKFlat N
+  have hη₂ := isDerivedBaseChange_towerModelComp φ L t hφ ht n k
+  have : IsIso (Q.map g) := hη₁.isIso hη₂ _ (by
+    rw [Category.assoc, ← Functor.mapDerivedCategoryFactors_inv_naturality, ← Category.assoc,
+      ← Functor.map_comp, hg])
+  have hg' : QuasiIso g := (isIso_Q_map_iff_quasiIso (φ := g)).1 this
+  let ρ := ((Sheaf.restrictScalars J (ψ (n + k + 1))).mapHomologicalComplex (.up ℤ)).map
+    (D.complexMap (M (n + k + 1)).P)
+  have hzero : ϖ ^ n • 𝟙 (((Sheaf.restrictScalars J (ψ (n + k + 1))).mapHomologicalComplex
+      (.up ℤ)).obj (((Sheaf.restrictScalars J (φ h)).mapHomologicalComplex (.up ℤ)).obj
+        ((D.Φ.mapHomologicalComplex (.up ℤ)).obj (M (n + k + 1)).P))) = 0 := by
+    ext i : 1
+    dsimp
+    change ϖ ^ n • 𝟙 ((Sheaf.restrictScalars J (ψ (n + k + 1))).obj
+      ((Sheaf.restrictScalars J (φ h)).obj (D.Φ.obj ((M (n + k + 1)).P.X i)))) = 0
+    rw [← CategoryTheory.Functor.map_id, ← Sheaf.restrictScalars_map_smul,
+      Sheaf.smul_id_restrictScalars_obj (J := J) (φ h)
+        (by
+          change ((φ h).comp (ψ (n + k + 1))) (ϖ ^ n) = 0
+          rw [show (φ h).comp (ψ (n + k + 1)) = ψ n from hψ h, hψ₀]), Functor.map_zero]
+  have hρ : (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op (n + k + 1)))) ≫ ρ = 0 := by
+    rw [Linear.smul_comp, Category.id_comp, ← Category.comp_id ρ, ← Linear.comp_smul, hzero,
+      Limits.comp_zero]
+  sorry
+
 end Normalized
 
 end DerivedCategory
