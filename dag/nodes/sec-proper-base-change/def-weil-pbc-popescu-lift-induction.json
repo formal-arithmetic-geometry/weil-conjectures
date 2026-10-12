@@ -1,0 +1,117 @@
+{
+ "id": "def-weil-pbc-popescu-lift-induction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity approximation step, via Lemma 07F8; The universally quantified induction assertion for lifting Popescu resolutions.",
+   "via": [
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The universally quantified induction assertion for lifting Popescu resolutions.",
+ "statement": "For each natural number $r$, let $P(r)$ be the universally quantified assertion below, without the restriction $r \\ge 1$. Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $A$ an $R$-algebra of finite presentation, $A\\to\\Lambda$ a homomorphism of $R$-algebras and $\\mathfrak q\\subset\\Lambda$ a prime ideal (the situation of [def-weil-pbc-popescu-resolution]). Let $r\\ge1$ and $\\pi_1,\\dots,\\pi_r\\in R$ with images in $\\mathfrak q$. For an $R$-module $M$ and $x\\in R$ write $\\operatorname{Ann}_M(x)=\\{m\\in M:xm=0\\}$. Assume (1) for $i=1,\\dots,r$: $\\operatorname{Ann}_{R/(\\pi_1^8,\\dots,\\pi_{i-1}^8)R}(\\pi_i)=\\operatorname{Ann}_{R/(\\pi_1^8,\\dots,\\pi_{i-1}^8)R}(\\pi_i^2)$ and $\\operatorname{Ann}_{\\Lambda/(\\pi_1^8,\\dots,\\pi_{i-1}^8)\\Lambda}(\\pi_i)=\\operatorname{Ann}_{\\Lambda/(\\pi_1^8,\\dots,\\pi_{i-1}^8)\\Lambda}(\\pi_i^2)$; (2) for $i=1,\\dots,r$ the image of $\\pi_i$ in $A$ is strictly standard in $A$ over $R$ [def-weil-pbc-strictly-standard-element]. Put $\\bar R=R/(\\pi_1^8,\\dots,\\pi_r^8)R$, $\\bar A=A/(\\pi_1^8,\\dots,\\pi_r^8)A$, $\\bar\\Lambda=\\Lambda/(\\pi_1^8,\\dots,\\pi_r^8)\\Lambda$ and $\\bar{\\mathfrak q}=\\mathfrak q/(\\pi_1^8,\\dots,\\pi_r^8)\\Lambda$. If $\\bar R\\to\\bar A\\to\\bar\\Lambda\\supset\\bar{\\mathfrak q}$ can be resolved [def-weil-pbc-popescu-resolution], then $R\\to A\\to\\Lambda\\supset\\mathfrak q$ can be resolved. The auxiliary predicate $Q(r,\\pi,\\alpha,q)$ means the reduced situation in this assertion admits a resolution; in Lean it includes the finite-presentation instance, the reduced algebra map compatible with the quotient maps, and a prime whose pullback is $q$. These predicates merely express assertions, and select no data.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07F8, proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-pbc-strictly-standard-element"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07F8 (lemma-lift-solution, line 2097) and its proof; the r = 1 verification written out from the statement of Lemma Tag 07F0 (lemma-desingularize-lifting-apply, line 1862) and Definition Tag 07C5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Popescu|eighth|StrictlyStandard",
+   "results": "Mathlib/NumberTheory/GaussSum.lean, Mathlib/NumberTheory/GaussSum.lean, Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean, Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean, Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean, Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean, Mathlib/LinearAlgebra/RootSystem/WeylGroup.lean, Mathlib/LinearAlgebra/RootSystem/Hom.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Popescu resolution lifts modulo eighth powers by induction on a finite list of strictly standard elements",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Popescu desingularization lifting resolution modulo one eighth power and induction by quotienting by the first element",
+   "results": "PreTilt.mk_comp_untilt_eq_coeff_zero, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, PreTilt.untiltFun, Ideal.quotientToQuotientRangePowQuotSuccAux_mk, PreTilt.exists_smodEq_untiltAux, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.mk_lift, Algebra.FormallySmooth.exists_lift",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuLiftSolution",
+  "date": "2026-10-12",
+  "group": "X3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuLiftInduction",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftInduction.lean",
+  "declaration": "Algebra.PopescuEighthPowerLifting",
+  "statement": "def PopescuEighthPowerLifting (r : ℕ) : Prop",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-12",
+  "declarations": [
+   "Algebra.PopescuEighthPowerQuotientResolved",
+   "Algebra.PopescuEighthPowerLifting"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T135337-L-1701633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T135337-L-1701633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

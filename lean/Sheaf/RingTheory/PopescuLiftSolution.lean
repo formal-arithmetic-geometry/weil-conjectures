@@ -7,9 +7,9 @@ module
 
 public import Sheaf.RingTheory.PopescuResolution
 public import Sheaf.RingTheory.StrictlyStandardElement
-import Sheaf.RingTheory.PopescuDesingularizeLiftingApply
-import Sheaf.RingTheory.SingularIdeal
-import Sheaf.RingTheory.StrictlyStandardBaseChange
+import Sheaf.RingTheory.PopescuLiftInduction
+import Sheaf.RingTheory.PopescuLiftOne
+import Sheaf.RingTheory.PopescuLiftSuccessor
 
 /-!
 # Lifting a Popescu resolution modulo eighth powers
@@ -23,6 +23,19 @@ Source: Stacks Project, Smoothing Ring Maps, Lemma 07F8, in Situation 07F7
 universe u v w
 
 namespace Algebra
+
+private theorem quotient_ann_transport {R : Type*} [CommRing R]
+    {S : Type*} [CommRing S] [Algebra R S]
+    {I K : Ideal S} (he : I = K) (a : R)
+    (h : ∀ x : S ⧸ K, a • x = 0 ↔ a ^ 2 • x = 0) :
+    ∀ x : S ⧸ I, a • x = 0 ↔ a ^ 2 • x = 0 := by
+  let e := (Ideal.quotientEquivAlgOfEq R he).toLinearEquiv
+  intro x
+  have hax := h (e x)
+  have heq (b : R) : b • e x = 0 ↔ b • x = 0 := by
+    rw [← e.map_smul, ← e.map_zero]
+    exact e.injective.eq_iff
+  exact (heq a).symm.trans (hax.trans (heq (a ^ 2)))
 
 variable {R : Type u} {A : Type v} {Λ : Type w}
 variable [CommRing R] [CommRing A] [CommRing Λ]
@@ -90,6 +103,28 @@ theorem canBePopescuResolved_of_quotient_eighth_powers
         PrimeSpectrum.comap (Ideal.Quotient.mk J_Λ) q₀ = q ∧
         CanBePopescuResolved α₀ q₀) :
     CanBePopescuResolved α q := by
-  sorry
+  have lift : ∀ n, 1 ≤ n → PopescuEighthPowerLifting.{u, v, w} n := by
+    intro n hn
+    induction n, hn using Nat.le_induction with
+    | base => exact popescuEighthPowerLifting_one
+    | succ n hn ih =>
+      intro R A Λ _ _ _ _ _ _ _ π α q hπ hR hΛ hstandard hresolved
+      have hfirst := popescuEighthPowerLifting_tail n hn ih R A Λ π α q
+        hπ hR hΛ hstandard hresolved
+      apply popescuEighthPowerLifting_one R A Λ (fun _ ↦ π 0) α q
+      · exact fun _ ↦ hπ 0
+      · intro i
+        apply quotient_ann_transport (R := R) _ (π 0) (hR 0)
+        congr 1
+        ext y
+        simp
+      · intro i
+        apply quotient_ann_transport (R := R) _ (π 0) (hΛ 0)
+        congr 1
+        ext y
+        simp
+      · exact fun _ ↦ hstandard 0
+      · exact hfirst
+  exact lift r hr R A Λ π α q hπ hR hΛ hstandard hresolved
 
 end Algebra
