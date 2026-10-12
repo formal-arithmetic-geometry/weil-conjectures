@@ -8,17 +8,12 @@ module
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.Paper.EtaleRestrictionPullbackUnit
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.GlobalSectionsLimitComparison
+import Sheaf.AlgebraicGeometry.PullbackSectionsComparison
+import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Connected
+import Mathlib.CategoryTheory.Filtered.Connected
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Continuity of sections of étale sheaves at inverse limits
@@ -35,7 +30,8 @@ transition maps and limit `X`, the comparison maps exhibit the sections of the p
 over `W ×_R X` as the colimit of the sections over the `W ×_R Dⱼ`, for `W` quasi-compact and
 quasi-separated (`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`). This is
 blueprint `lem-weil-pbc-etale-section-continuity`, which belongs to the subsection
-`sk-prop-h2`; its proof is not formalised here.
+`sk-prop-h2`. The proof below reduces it to global-section continuity and naturality
+under cartesian pullback.
 -/
 
 @[expose] public section
@@ -82,6 +78,10 @@ variable {J : Type u} [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u})
   (π : D ⟶ (Functor.const J).obj R) (c : Cone D) (P : c.pt ⟶ R)
   (hP : ∀ j, P = c.π.app j ≫ π.app j)
 
+set_option maxRecDepth 2048 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
 /-- **Continuity of sections at an inverse limit.** Let `(Dⱼ)` be a cofiltered system of
 quasi-compact quasi-separated schemes over `R` with affine transition maps, with limit `X`, let
 `G` be an abelian étale sheaf on `R` and `W` a quasi-compact quasi-separated étale `R`-scheme,
@@ -109,8 +109,69 @@ theorem unitComparison_app_isColimit_of_isLimit [∀ j, CompactSpace (D.obj j)]
         ((π.app j)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W)),
       (unitComparison (c.π.app j) (π.app j) P (hP j) G).hom.app (op W) s = 0 →
         ∃ (j' : J) (f : j' ⟶ j), (unitComparison (D.map f) (π.app j) (π.app j')
-          (by simp) G).hom.app (op W) s = 0 :=
-  sorry
+          (by simp) G).hom.app (op W) s = 0 := by
+  classical
+  let : IsConnected J := IsCofiltered.isConnected J
+  let : QuasiSeparated W.hom := @QuasiSeparated.of_quasiSeparatedSpace W.left R W.hom inferInstance
+  let E : J ⥤ Scheme.{u} :=
+    { obj := fun j ↦ pullback W.hom (π.app j)
+      map := fun {j k} f ↦ pullback.map _ _ _ _ (𝟙 W.left) (D.map f) (𝟙 R)
+        (by simp) (by simp)
+      map_id := fun j ↦ by apply pullback.hom_ext <;> simp
+      map_comp := fun f g ↦ by apply pullback.hom_ext <;> simp }
+  let d : Cone E :=
+    { pt := pullback W.hom P
+      π :=
+        { app := fun j ↦ pullback.map _ _ _ _ (𝟙 W.left) (c.π.app j) (𝟙 R)
+            (by simp) (by simpa using hP j)
+          naturality := fun j k f ↦ by
+            apply pullback.hom_ext <;> simp [E] } }
+  let β : E ⟶ D :=
+    { app := fun j ↦ pullback.snd W.hom (π.app j)
+      naturality := fun j k f ↦ by simp [E] }
+  have hd : IsLimit d :=
+    isLimitOfIsPullbackOfIsConnected β d c
+      { hom := pullback.snd W.hom P
+        w := fun j ↦ by simp [d, β] }
+      (fun j ↦ isPullback_pullback_map W.hom P (π.app j) (c.π.app j) (hP j).symm) hc
+  let σ : E ⟶ (Functor.const J).obj R :=
+    { app := fun j ↦ pullback.fst W.hom (π.app j) ≫ W.hom
+      naturality := fun j k f ↦ by simp [E] }
+  let Q : d.pt ⟶ R := pullback.fst W.hom P ≫ W.hom
+  have hQ : ∀ j, Q = d.π.app j ≫ σ.app j := by
+    intro j
+    simp [Q, d, σ]
+  let : ∀ j, CompactSpace (E.obj j) := fun j ↦ by dsimp [E]; infer_instance
+  let : ∀ j, QuasiSeparatedSpace (E.obj j) := fun j ↦
+    quasiSeparatedSpace_of_quasiSeparated (pullback.snd W.hom (π.app j))
+  let : ∀ {j k : J} (f : j ⟶ k), IsAffineHom (E.map f) := fun {j k} f ↦
+    MorphismProperty.of_isPullback (P := @IsAffineHom)
+      (isPullback_pullback_map W.hom (π.app j) (π.app k) (D.map f)
+        (by simp)).flip inferInstance
+  let e := fun {X : Scheme.{u}} (f : X ⟶ R) ↦ pullbackSectionsEquiv G W f
+  have he := fun {X Y : Scheme.{u}} ↦ @pullbackSections_comparison R G W X Y
+  obtain ⟨hsurj, hzero⟩ := globalSections_limit_comparison E σ d Q hQ hd G
+  constructor
+  · intro t
+    obtain ⟨j, s, hs⟩ := hsurj (e P t)
+    refine ⟨j, (e (π.app j)).symm s, ?_⟩
+    apply (e P).injective
+    simp only [unitComparison]
+    exact (he (c.π.app j) (π.app j) P (hP j) (d.π.app j)
+      (by simp [d]) (by simp [d]) ((e (π.app j)).symm s)).trans
+      (by simpa only [e, AddEquiv.apply_symm_apply, Q, σ, d, Functor.const_obj_obj] using hs)
+  · intro j s hs
+    have hz := congrArg (e P) hs
+    simp only [unitComparison] at hz
+    have hz' := (he (c.π.app j) (π.app j) P (hP j) (d.π.app j)
+      (by simp [d]) (by simp [d]) s).symm.trans hz
+    simp only [map_zero] at hz'
+    obtain ⟨j', f, hf⟩ := hzero j (e (π.app j) s) hz'
+    refine ⟨j', f, ?_⟩
+    apply (e (π.app j')).injective
+    simp only [unitComparison]
+    exact (he (D.map f) (π.app j) (π.app j') (by simp) (E.map f)
+      (by simp [E]) (by simp [E]) s).trans (by simpa only [map_zero] using hf)
 
 /-- **Continuity of sections at an inverse limit, surjectivity**: the first half of
 `AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`. -/

@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-global-sections-limit-comparison",
+ "kind": "statement",
+ "title": "Global sections of a fixed pullback sheaf at cofiltered limits",
+ "statement": "Let $J$ be a small nonempty cofiltered category, $D:J\\to\\mathrm{Sch}$ a diagram of quasi-compact quasi-separated schemes with affine transition morphisms [def-pc-scheme, def-weil-pbc-scheme-conventions, pqf-def-affine-morphism]. Let $c$ be a limit cone of $D$, let $R$ be any scheme, $\\pi:D\\to\\mathrm{const}(R)$ a natural transformation, and $P:c.\\mathrm{pt}\\to R$ with $P=c_j\\pi_j$ for every $j$. Let $G$ be an abelian sheaf on $R_{\\mathrm{Et}}$ [def-weil-pbc-abelian-etale-sheaves]. Put $F_j=\\pi_j^{-1}G$ and $F=P^{-1}G$ [def-weil-pbc-inverse-image]. For $a:k\\to j$ let $\\tau_a:\\Gamma(D_j,F_j)\\to\\Gamma(D_k,F_k)$ be pullback of global sections along $D(a)$ followed by the composition isomorphism of inverse images [lem-weil-pbc-inverse-image-composition]; define $\\tau_j:\\Gamma(D_j,F_j)\\to\\Gamma(c.\\mathrm{pt},F)$ similarly along $c_j$. These maps are the maps denoted by globalSectionsUpperStarMap followed by global sections of upperStarComp.inv in Lean. Every $t\\in\\Gamma(c.\\mathrm{pt},F)$ equals $\\tau_j(s)$ for some $j,s$. If $\\tau_j(s)=0$, there is an arrow $a:k\\to j$ with $\\tau_a(s)=0$. No separation hypothesis on $R$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 09YQ (theorem-colimit), degree p = 0; cofiltered reindexing by Categories Tag 0032 (lemma-directed-category-system)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Choose a coinitial functor from the opposite of a nonempty directed partial order into J. Whisker the limit cone and all the structure maps along it; the same apex remains a limit. Every chosen stage and transition inherits the qcqs and affine hypotheses.",
+   "uses": [
+    "lem-weil-pbc-cofiltered-limit-directed-reindex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the directed system set F_i = pi_i inverse image of G and use the inverse-image composition isomorphisms as the transition maps. Their unit and cocycle laws follow from inverse-image coherence. The analogous composition isomorphisms on the limit identify every pulled-back F_i with P inverse image of G and every transition with the identity. Connectedness therefore identifies this sheaf with the colimit of the pulled-back sheaves.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the cohomology-limit theorem at degree zero to this system and its constant colimit on the limit site. Naturality of the degree-zero/global-sections identification and its compatibility with pullback identify the maps with globalSectionsUpperStarMap followed by Gamma of the inverse composition isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+    "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The elementwise filtered-colimit criterion gives representatives and eventual vanishing in the directed diagram. A representative is already a representative at its image in J. For a given stage j and a section killed on the limit, choose a coinitial object mapping to j, pull the section there, apply eventual vanishing, and compose its witnessing arrow with the arrow to j. Functoriality of the pullback maps makes the resulting composite kill the original section.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 09YQ (theorem-colimit), degree p = 0; cofiltered reindexing by Categories Tag 0032 (lemma-directed-category-system).; specialization and comparison to the existing Lean interfaces by P1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of pullbacks of an abelian etale sheaf commute with cofiltered limits of quasi compact quasi separated schemes with affine transitions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.IsLimit",
+   "results": "CategoryTheory.Sheaf.isSheaf_of_isLimit, CategoryTheory.Sheaf.isLimitMultiforkOfIsLimit, CategoryTheory.GrothendieckTopology.OneHypercover.isLimitMultifork, CategoryTheory.GrothendieckTopology.CoversTop.ext, CategoryTheory.Functor.OneHypercoverDenseData.essSurj.presheafObjIsLimit, CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, CategoryTheory.coherentTopology.epi_π_app_zero_of_epi, CategoryTheory.Sheaf.isLimitConeΓ",
+   "date": "2026-10-12",
+   "verdict": "No exact match; the returned declarations do not concern this comparison of etale inverse images."
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*[Ll]imit|[Ll]imit.*globalSections",
+   "results": "Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match; the returned declarations do not concern this comparison of etale inverse images."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-section-continuity",
+   "place": "proof, paragraphs defining the sheaf on the limit site and identifying its sections; DAG steps 2-3 and the global case, without the relative etale-object comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GlobalSectionsLimitComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalSectionsLimitComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.globalSections_limit_comparison",
+  "statement": "theorem globalSections_limit_comparison {R : Scheme.{u}} {J : Type u}\n    [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u})\n    (π : D ⟶ (Functor.const J).obj R) (c : Cone D) (P : c.pt ⟶ R)\n    (hP : ∀ j, P = c.π.app j ≫ π.app j)\n    [∀ j, CompactSpace (D.obj j)] [∀ j, QuasiSeparatedSpace (D.obj j)]\n    [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)] (hc : IsLimit c)\n    (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    let A := AddCommGrpCat.{u + 1}\n    let Γ := fun X : Scheme.{u} ↦ Sheaf.Γ X.smallEtaleTopology A\n    let F := fun {X : Scheme.{u}} (f : X ⟶ R) ↦ (upperStar A f).obj G\n    let ρ := fun {X Y : Scheme.{u}} (h : X ⟶ Y) (f : Y ⟶ R) (g : X ⟶ R)\n      (w : g = h ≫ f) ↦ globalSectionsUpperStarMap A h (F f) ≫\n        (Γ X).map ((upperStarComp A h f g w).inv.app G)\n    (∀ t : (Γ c.pt).obj (F P), ∃ (j : J) (s : (Γ (D.obj j)).obj (F (π.app j))),\n      ρ (c.π.app j) (π.app j) P (hP j) s = t) ∧\n    ∀ (j : J) (s : (Γ (D.obj j)).obj (F (π.app j))),\n      ρ (c.π.app j) (π.app j) P (hP j) s = 0 →\n        ∃ (j' : J) (f : j' ⟶ j), ρ (D.map f) (π.app j) (π.app j') (by simp) s = 0",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T044750-L-2038147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T044750-L-2038147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
