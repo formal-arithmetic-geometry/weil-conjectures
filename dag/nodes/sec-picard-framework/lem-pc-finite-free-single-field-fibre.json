@@ -16,25 +16,28 @@
  ],
  "proof": [
   {
-   "text": "Strictly nonnegative support makes the negative cohomology zero. Together with the given nonnegative vanishing this leaves exactly H^i(P). The standard truncation maps identify P in the derived category with H^i(P) in degree i. Since H^i(P) is locally free it is flat. Compute derived pullback on both bounded flat complexes termwise: the fibre is a single ordinary fibre of H^i(P), of rank r.",
+   "text": "Use single_field_fibre_homology to compute the nonnegative homology of the pullback complex, with vanishing off i and rank r in degree i.",
    "uses": [
-    "lem-pc-flat-complex-derived-pullback"
+    "new-field-fibre-homology"
    ],
    "elementary": false
   },
   {
-   "text": "Sheaves of modules on Spec R for a field R are equivalent to R-vector spaces, by moduleSpecΓFunctor. In each degree split the inclusion of boundaries into cycles and cycles into the term by choosing vector-space complements. The differential gives an isomorphism from each complement of cycles to the next boundaries. Its inverse defines the contraction on these two-term summands. The remaining summands are the cohomology vector spaces; only degree i remains, and a basis identifies it with R^r. Transport the resulting homotopy equivalence back to module sheaves.",
-   "uses": [],
-   "elementary": false
+   "text": "The termwise additive pullback preserves strictly nonnegative support, hence negative homology vanishes. Apply the repaired homotopyEquiv_of_single_field_homology with this vanishing and the computed rank and natural-degree vanishing.",
+   "uses": [
+    "new-field-complex-homotopy-normal-form"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-flat-complex-derived-pullback"
+  "new-field-fibre-homology",
+  "new-field-complex-homotopy-normal-form"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Proof step 4, as recorded in the assigned criterion node and Lean docstring; explicit local normal form and fibre calculation."
+  "place": "Proof step 4; N2 records the actual field-homology calculation followed by nonnegative support and the repaired normal form."
  },
  "mathlib_searches": [
   {
@@ -119,15 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H3",
+  "reviewer": "X-e8b9d",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T154244-L-2434890",
+  "landing": "20261012T184323-L-4011726",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.nonempty_homotopyEquiv_single_field_fibre"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Lean signatures match all three delivered nodes; recorded interface repair is justified; all delivered modules and direct importers compile; original caller fails exactly as reported; adaptation is minimal; axiom checks agree with the single recorded remaining sorry."
  }
 }

@@ -3,6 +3,7 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Homology.Homotopy
 
+import Sheaf.AlgebraicGeometry.FieldComplexSingleCohomology
 import Mathlib.Algebra.Homology.SingleHomology
 import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 @[expose] public section
@@ -57,19 +58,57 @@ private theorem counterexample_to_single_field_homology {R : CommRingCat.{u}} (h
     exact Module.finrank_zero_of_subsingleton
   · exact no_equiv_negative_single A _ hAnonzero 0
 
-/- STATEMENT-DISPUTED: hzero constrains only natural degrees, not negative homology.
-The private counterexample above takes the rank-one free sheaf in degree -1, with i = r = 0.
-All hypotheses hold, but a homotopy equivalence would kill its nonzero degree -1 homology. -/
+private theorem nonempty_iso_free_of_field_rank
+    {R : CommRingCat.{u}} (hR : IsField R) (M : (Spec R).Modules) (r : ℕ)
+    (hrank : M.IsFiniteLocallyFreeOfRank r) :
+    Nonempty (M ≅ SheafOfModules.free (R := (Spec R).ringCatSheaf)
+      (ULift.{u} (Fin r))) := by
+  let := hR.toField
+  let := hrank
+  obtain ⟨ι, U, hU, e⟩ := IsFiniteLocallyFreeOfRank.exists_restrict_iso_free M (r := r)
+  obtain ⟨x⟩ : Nonempty (Spec R) := inferInstance
+  obtain ⟨j, hj⟩ := TopologicalSpace.Opens.mem_iSup.1
+    (hU.ge (Set.mem_univ x) : x ∈ ⨆ j, U j)
+  have : Subsingleton (Spec (.of R)) := inferInstance
+  have htop : U j = ⊤ := by
+    refine eq_top_iff.2 fun y _ ↦ ?_
+    rwa [Subsingleton.elim y x]
+  have ej := e j
+  rw [htop] at ej
+  have : IsIso (⊤ : (Spec R).Opens).ι :=
+    inferInstanceAs (IsIso (Spec R).topIso.hom)
+  exact ⟨isoFreeOfRestrictIso M _ ej.some⟩
+
 /-- Field-complex splitting into the sole finite locally free cohomology.
 Source: blueprint lem-pc-perfect-locus, proof step 4.
-(blueprint: new-field-complex-homotopy-normal-form). -/
+(blueprint: new-field-complex-homotopy-normal-form).
+
+Proof: Combine negative and nonnegative vanishing to obtain vanishing in all
+integer degrees other than i. Contract the complex onto H^i(P) using
+homotopyEquiv_single_cohomology_of_field. The rank-r locally free trivializing
+cover of H^i(P) has a member containing the unique point of Spec R. That open is
+top, so its inclusion is an isomorphism; isoFreeOfRestrictIso identifies H^i(P)
+with the free sheaf of rank r. Apply the single functor to this isomorphism and
+compose its homotopy equivalence with the contraction. The negative-degree
+hypothesis is essential, as the retained counterexample to the old signature
+shows; neither boundedness nor a positive rank is needed. -/
 theorem homotopyEquiv_of_single_field_homology
     {R : CommRingCat.{u}} (hR : IsField R)
     (P : CochainComplex (Spec R).Modules ℤ)
     (i r : ℕ) (hzero : ∀ q : ℕ, q ≠ i → IsZero (P.homology q))
+    (hnegative : ∀ q : ℤ, q < 0 → IsZero (P.homology q))
     (hrank : (P.homology i).IsFiniteLocallyFreeOfRank r) :
     Nonempty (HomotopyEquiv P
       ((CochainComplex.singleFunctor (Spec R).Modules (i : ℤ)).obj
         (SheafOfModules.free (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin r))))) := by
-  sorry
+  have hzeroInt : ∀ q : ℤ, q ≠ (i : ℤ) → IsZero (P.homology q) := by
+    intro q hq
+    by_cases hn : q < 0
+    · exact hnegative q hn
+    · obtain ⟨n, rfl⟩ := Int.eq_ofNat_of_zero_le (by omega : 0 ≤ q)
+      exact hzero n (by exact_mod_cast hq)
+  obtain ⟨e⟩ := homotopyEquiv_single_cohomology_of_field hR P (i : ℤ) hzeroInt
+  obtain ⟨eH⟩ := nonempty_iso_free_of_field_rank hR (P.homology i) r hrank
+  exact ⟨e.trans (HomotopyEquiv.ofIso
+    ((CochainComplex.singleFunctor (Spec R).Modules (i : ℤ)).mapIso eH))⟩
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,128 @@
+{
+ "id": "new-field-complex-single-cohomology",
+ "kind": "statement",
+ "title": "Contraction of a field complex onto its single cohomology",
+ "statement": "Let R be a field and P an integer-indexed cochain complex of module sheaves on Spec R [def-pc-scheme, def-pc-derived-category]. For an integer j, suppose H^q(P) is zero for every integer q different from j. Then P is homotopy equivalent to the single complex on its actual homology sheaf H^j(P) in degree j. No boundedness, local freeness, rank or basis is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof step 4; vector-space splitting spelled out in lem-pc-finite-free-single-field-fibre proof step 2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply moduleSpecΓFunctor, an additive equivalence from module sheaves on a field spectrum to R-vector spaces. It preserves homology. Write V_n for the term, Z_n for cycles and B_n for boundaries. Choose vector-space complements H_n of B_n inside Z_n and C_n of Z_n inside V_n. Then V_n=B_n⊕H_n⊕C_n; projection Z_n→H_n identifies H_n with the homology in degree n.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The differential restricts to an isomorphism C_n→B_(n+1). Define the homotopy V_n→V_(n-1) to be its inverse on B_n, and zero on H_n and C_n. Projection onto H_n and inclusion of H_n are chain maps. On B_n, d h is the identity and h d is zero; on C_n, h d is the identity and d h is zero; on H_n both are zero. Thus d h+h d=id-inclusion∘projection, whereas projection∘inclusion=id.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The assumed homology vanishing for all integer degrees other than j forces the corresponding H_n summands to be zero. Identify H_j with the actual homology, giving a homotopy equivalence to its single complex in degree j. Transport maps and the two homotopies along the inverse global-sections equivalence and its unit isomorphism. Naturality of the unit and preservation of compositions and sums establish the same identities for sheaves. This argument is degreewise and applies to unbounded or acyclic complexes too.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Expanded vector-space contraction from lem-pc-finite-free-single-field-fibre proof step 2; the formulas are recorded in the module docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cochain complex of vector spaces with only one nonzero homology group is homotopy equivalent to that homology in a single degree",
+   "results": "Service unavailable: Internal Server Error. Other kinds of search performed.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of vector spaces is homotopy equivalent to its homology with zero differential",
+   "results": "HomotopyCategory.isZero_quotient_obj_iff and HomotopyEquiv.refl; no vector-space splitting theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv.ofIso",
+   "results": "HomotopyEquiv.ofIso converts a complex isomorphism into a homotopy equivalence; it does not construct a contraction onto homology.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_homotopy|homotopyEquiv.*[Ss]plit|[Ss]plit.*homotopyEquiv",
+   "results": "KInjective/KProjective null-homotopy interfaces; no contraction of an arbitrary vector-space complex onto its homology. The blueprint_refs search for complex cohomology splitting returned no duplicates.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FieldComplexHomotopyNormalForm",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-free-single-field-fibre",
+   "place": "Proof step 4: contraction of boundary/complement pairs before choosing a basis for cohomology.",
+   "via": [
+    "new-field-complex-homotopy-normal-form",
+    "lem-pc-finite-free-single-field-fibre"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FieldComplexSingleCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldComplexSingleCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.homotopyEquiv_single_cohomology_of_field",
+  "statement": "theorem homotopyEquiv_single_cohomology_of_field {R : CommRingCat.{u}} (hR : IsField R) (P : CochainComplex (Spec R).Modules ℤ) (j : ℤ) (hzero : ∀ q : ℤ, q ≠ j → IsZero (P.homology q)) : Nonempty (HomotopyEquiv P ((CochainComplex.singleFunctor (Spec R).Modules j).obj (P.homology j)))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e8b9d",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T184323-L-4011726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e8b9d",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T184323-L-4011726",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures match all three delivered nodes; recorded interface repair is justified; all delivered modules and direct importers compile; original caller fails exactly as reported; adaptation is minimal; axiom checks agree with the single recorded remaining sorry."
+ }
+}

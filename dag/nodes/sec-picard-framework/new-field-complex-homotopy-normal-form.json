@@ -2,7 +2,7 @@
  "id": "new-field-complex-homotopy-normal-form",
  "kind": "statement",
  "title": "Field complex homotopy normal form",
- "statement": "theorem homotopyEquiv_of_single_field_homology {R : CommRingCat.{u}} (hR : IsField R) (P : CochainComplex (Spec R).Modules ℤ) (i r : ℕ) (hzero : ∀ q : ℕ, q ≠ i → IsZero (P.homology q)) (hrank : (P.homology i).IsFiniteLocallyFreeOfRank r) : Nonempty (HomotopyEquiv P ((CochainComplex.singleFunctor (Spec R).Modules (i : ℤ)).obj (SheafOfModules.free (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin r)))))",
+ "statement": "theorem homotopyEquiv_of_single_field_homology {R : CommRingCat.{u}} (hR : IsField R) (P : CochainComplex (Spec R).Modules ℤ) (i r : ℕ) (hzero : ∀ q : ℕ, q ≠ i → IsZero (P.homology q)) (hnegative : ∀ q : ℤ, q < 0 → IsZero (P.homology q)) (hrank : (P.homology i).IsFiniteLocallyFreeOfRank r) : Nonempty (HomotopyEquiv P ((CochainComplex.singleFunctor (Spec R).Modules (i : ℤ)).obj (SheafOfModules.free (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin r)))))",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
   "place": "Proof steps 1--4, recorded verbatim in dag/nodes/sec-picard-framework/lem-pc-perfect-locus.json"
@@ -16,16 +16,30 @@
  ],
  "proof": [
   {
-   "text": "Construct the stated homotopy equivalence by splitting the bounded complex into contractible boundary summands and its sole cohomology summand over a field.",
+   "text": "Combine the assumed vanishing in negative degrees with the natural-degree vanishing. For an integer q>=0, write q as the cast of its natural representative; this yields vanishing in every integer degree other than i.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply new-field-complex-single-cohomology to obtain a homotopy equivalence from P to the single complex on H^i(P). This step involves no choice of a basis and does not require finite rank.",
+   "uses": [
+    "new-field-complex-single-cohomology"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Use the rank-r locally free trivializing open cover of H^i(P). Choose the open containing the unique point of Spec R. This open is top, so restriction is along an isomorphism and isoFreeOfRestrictIso gives H^i(P) isomorphic to the rank-r free sheaf. Map this isomorphism through the single functor, regard it as a homotopy equivalence, and compose with the contraction.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-field-complex-single-cohomology"
+ ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Proof step 4"
+  "place": "Field-complex splitting in lem-pc-finite-free-single-field-fibre proof step 2; N2 separates contraction and basis identification."
  },
  "mathlib_searches": [
   {
@@ -92,10 +106,10 @@
   "module": "Sheaf.AlgebraicGeometry.FieldComplexHomotopyNormalForm",
   "file": "lean/Sheaf/AlgebraicGeometry/FieldComplexHomotopyNormalForm.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.homotopyEquiv_of_single_field_homology",
-  "statement": "theorem homotopyEquiv_of_single_field_homology {R : CommRingCat.{u}} (hR : IsField R) (P : CochainComplex (Spec R).Modules ℤ) (i r : ℕ) (hzero : ∀ q : ℕ, q ≠ i → IsZero (P.homology q)) (hrank : (P.homology i).IsFiniteLocallyFreeOfRank r) : Nonempty (HomotopyEquiv P ((CochainComplex.singleFunctor (Spec R).Modules (i : ℤ)).obj (SheafOfModules.free (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin r)))))",
+  "statement": "theorem homotopyEquiv_of_single_field_homology {R : CommRingCat.{u}} (hR : IsField R) (P : CochainComplex (Spec R).Modules ℤ) (i r : ℕ) (hzero : ∀ q : ℕ, q ≠ i → IsZero (P.homology q)) (hnegative : ∀ q : ℤ, q < 0 → IsZero (P.homology q)) (hrank : (P.homology i).IsFiniteLocallyFreeOfRank r) : Nonempty (HomotopyEquiv P ((CochainComplex.singleFunctor (Spec R).Modules (i : ℤ)).obj (SheafOfModules.free (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin r)))))",
   "branch": "sheaf-dag",
-  "by": "H3",
-  "date": "2026-10-12"
+  "by": "N2",
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -110,17 +124,30 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-e909a",
-  "group": "M1",
+  "reviewer": "X-e8b9d",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T161502-L-2648183",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module compiles cleanly; target theorem is unchanged and its certified private counterexample proves the STATEMENT-DISPUTED report.",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.homotopyEquiv_of_single_field_homology"
+  "landing": "20261012T184323-L-4011726",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures match all three delivered nodes; recorded interface repair is justified; all delivered modules and direct importers compile; original caller fails exactly as reported; adaptation is minimal; axiom checks agree with the single recorded remaining sorry."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "N2 stage 2",
+  "old_statement": "theorem homotopyEquiv_of_single_field_homology {R : CommRingCat.{u}} (hR : IsField R) (P : CochainComplex (Spec R).Modules ℤ) (i r : ℕ) (hzero : ∀ q : ℕ, q ≠ i → IsZero (P.homology q)) (hrank : (P.homology i).IsFiniteLocallyFreeOfRank r) : Nonempty (HomotopyEquiv P ((CochainComplex.singleFunctor (Spec R).Modules (i : ℤ)).obj (SheafOfModules.free (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin r)))))",
+  "what": "The old theorem is false: a rank-one free sheaf in degree -1 satisfies the natural-degree rank-zero hypotheses. Add vanishing of negative homology. The single caller supplies it from strictly nonnegative support; all target and caller signatures stay unchanged.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+   "place": "Proof steps 1--4, recorded verbatim in dag/nodes/sec-picard-framework/lem-pc-perfect-locus.json"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Construct the stated homotopy equivalence by splitting the bounded complex into contractible boundary summands and its sole cohomology summand over a field.",
+    "uses": [],
+    "elementary": false
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.Modules.homotopyEquiv_of_single_field_homology"
-  ]
+  "old_proof_deps": []
  }
 }

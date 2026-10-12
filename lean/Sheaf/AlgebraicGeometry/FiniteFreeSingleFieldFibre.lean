@@ -55,6 +55,11 @@ theorem nonempty_homotopyEquiv_single_field_fibre
       ((CochainComplex.singleFunctor (Spec R).Modules (i : ℤ)).obj
         (SheafOfModules.free (R := (Spec R).ringCatSheaf) (ULift.{u} (Fin r))))) := by
   have h := single_field_fibre_homology P d hge hle hfree i r hzero hrank hR f
-  exact homotopyEquiv_of_single_field_homology hR _ i r h.1 h.2
+  let := hge
+  have : CochainComplex.IsStrictlyGE
+      (((Modules.pullback f).mapHomologicalComplex _).obj P) 0 :=
+    inferInstance
+  exact homotopyEquiv_of_single_field_homology hR _ i r h.1
+    (fun q hq ↦ CochainComplex.isZero_of_isGE _ 0 q hq) h.2
 
 end AlgebraicGeometry.Scheme.Modules
