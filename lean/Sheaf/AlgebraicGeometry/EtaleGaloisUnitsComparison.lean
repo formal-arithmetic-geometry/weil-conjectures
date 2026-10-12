@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+import Sheaf.FieldTheory.GaloisUnitsHomogeneousComparison
+import Sheaf.AlgebraicGeometry.EtaleUnitsTwoCocycleComparison
 
 /-!
 # Degree-two comparison for the multiplicative sheaf over a field
@@ -48,6 +49,9 @@ The source's geometric point uses an algebraic closure; its multiplicative stalk
 still separable-closure units even when the base field is imperfect.
 (blueprint: lem-sc-etale-galois-units-comparison). -/
 theorem nonempty_equiv_galoisUnitsH2_cohomologicalBrauerGroup (K : Type u) [Field K] :
-    Nonempty (Field.GaloisUnitsH2 K ≃ (Spec (.of K)).CohomologicalBrauerGroup) := by sorry
+    Nonempty (Field.GaloisUnitsH2 K ≃ (Spec (.of K)).CohomologicalBrauerGroup) := by
+  obtain ⟨eCochains⟩ := Field.nonempty_equiv_galoisUnitsH2_twoCocycleClasses K
+  obtain ⟨eEtale⟩ := nonempty_equiv_twoCocycleClasses_cohomologicalBrauerGroup K
+  exact ⟨eCochains.trans eEtale⟩
 
 end AlgebraicGeometry.Scheme
