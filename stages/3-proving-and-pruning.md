@@ -15,7 +15,7 @@ An item of this stage is a module that a target reaches, that contains `sorry`, 
 
 - The proof in the DAG is a plan. Below the unit level an item may be proved by any route, and the shortest is the best: a special case, a Mathlib lemma, a simpler argument. Pruning and shorter routes are allowed only below the unit level (`SETUP.md`, the three levels): the statement of a unit and the steps of its proof, as realized in `dag/units/`, stay; a route that would bypass a unit the chapter's route passes through is not taken.
 - A `sorry` that a new route leaves behind has a source and meets `AGENTS.md` §5. An idea without a source that would leave `sorry`s goes into the report, not into the library.
-- Once a proof compiles, remove the imports it does not use. A module that no target reaches any more leaves the queue and is never proved; its node records why.
+- The imports of a module are the plan for its proof: the modules of the stated proof dependencies of its node (`stages/2-statements.md` §3). The lemmas stated there are used first; a new lemma is written only for what none of them says. Once a proof compiles, remove the imports it does not use, and report them as no longer needed. A module that no target reaches any more leaves the queue and is never proved; its node records why.
 - A result the proof needs and the DAG lacks becomes a node, under the rules of stage 1.
 
 ## 3. Changing a definition or a statement
