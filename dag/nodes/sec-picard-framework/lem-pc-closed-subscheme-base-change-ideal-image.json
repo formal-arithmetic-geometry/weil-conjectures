@@ -27,24 +27,42 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pc-closed-imm-base-change] to the closed immersion i:Z\\to S and the morphism g:Y\\to S. Its projection and ideal-sheaf image conclusion specialize exactly to q:Z\\times_SY\\to Y and the displayed composite g^*\\mathcal I\\to\\mathcal O_Y.",
+   "text": "The projection pullback.snd i g is a closed immersion by the Mathlib base-change instance [lem-weil-pbc-closed-immersion-base-change]. Pullback symmetry, invariance of the kernel ideal under an isomorphism on the source, and IdealSheafData.ker_fst_of_isClosedImmersion identify its kernel ideal with i.ker.comap g.",
    "uses": [
-    "lem-pc-closed-imm-base-change"
+    "lem-weil-pbc-closed-immersion-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01JU (lemma-fibre-product-immersion), part (1)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Let T be tensor pullback, adj the adjunction selected in the statement, and epsilon the adjoint structure-sheaf map. Comparing adj with the canonical tensor adjunction by leftAdjointUniq expresses epsilon as an isomorphism followed by tensorPullbackObjUnitToUnit. Thus epsilon is an isomorphism by [lem-weil-pbc-module-pullback-structure-sheaf].",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-module-pullback-ideal-product-image] with J=i.ker and G=O_S, which is quasi-coherent. Multiplication J tensor O_S -> O_S is the ideal inclusion precomposed with the right unitor. Its image inclusion is the product inclusion. Tensor pullback is a left adjoint, hence preserves the epimorphism from the multiplication source to its image; precomposition with this epimorphism, or with a unitor isomorphism, leaves the image unchanged. Therefore image(T(j) followed by epsilon) equals image(T(J O_S inclusion) followed by epsilon). Transport the cited image equality along epsilon using Subobject.exists; image pushforward commutes with composition by the epi-image factorization.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-ideal-product-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any monic ideal inclusion k:I -> O_Y and any isomorphism epsilon:M -> O_Y, naturality of the left unitor and whisker exchange express multiplication I tensor M -> M followed by epsilon as I tensor epsilon followed by multiplication I tensor O_Y -> O_Y. The latter is the right unitor followed by k. Both preceding maps are isomorphisms, so this composite has image Subobject.mk k. The image inclusion defining I M has the same image after epsilon, since the corestriction to an image is epi. Apply this elementary calculation with I=(i.ker.comap g).toModules and M=T(O_S), then substitute the kernel-ideal equality from step 1. This is exactly the stated image equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-closed-imm-base-change"
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-module-pullback-ideal-product-image"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "M3 worker",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 01JU (lemma-fibre-product-immersion), part (1)"
+  "place": "Tag 01JU (1), realized through the unit-module specialization of the existing ideal-product image theorem and categorical image/unitor calculations."
  },
  "mathlib_searches": [
   {
@@ -144,5 +162,15 @@
   "group": "H1",
   "result": "pass",
   "note": "S,Z,Y arbitrary Scheme.{u}; i closed immersion = [IsClosedImmersion i]; I = i.ker.toModules (kernel of O_S -> subschemeι_* O, iso to i_*O_Z); q = pullback.snd i g; conj1 IsClosedImmersion q; conj2 Subobject of O_Y of q.ker.toModulesι = imageSubobject(tensorPullback g (I->O_S) ≫ adjoint of unitToPushforwardObjUnit g); adjunction by Classical.choice of dependency's Nonempty, image invariant under change of adjunction; Mathlib IdealSheafData.comap is defined as ker of base change (ker_fst_of_isClosedImmersion), so no Mathlib statement of the image form: existing false correct"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T184319-L-4010339",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
