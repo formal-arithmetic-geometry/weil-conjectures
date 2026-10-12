@@ -271,6 +271,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.DifferentialsSections
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.Endomorphism
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
+public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.FaithfullyFlatDescent
 public import WeilConjectures.AlgebraicGeometry.Modules.FieldBaseChange
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
@@ -1035,6 +1036,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.EpiMono
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.ExteriorPower
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback
@@ -1408,6 +1410,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Dual.Lemmas
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Basis
+public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Top
 public import WeilConjectures.Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 public import WeilConjectures.Mathlib.LinearAlgebra.Lagrange
 public import WeilConjectures.Mathlib.LinearAlgebra.LinearIndependent.BaseChange
