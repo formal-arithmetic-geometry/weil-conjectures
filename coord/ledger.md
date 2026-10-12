@@ -8772,3 +8772,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/M1/Sheaf.AlgebraicGeometry.RefinementLocalizationGeometry (stage 3; reviewer PASS; first push; landing 20261012T173840-L-3299661 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/M1/Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberForward (stage 3; reviewer PASS; first push; landing 20261012T173841-L-3299828 (interface); batch 20261012T173801; modules 2; new nodes 1)
 - 17:38 L: merged deliver/M2/Sheaf.AlgebraicGeometry.FormalFunctionsLocalDictionary (stage 3; reviewer PASS; first push; landing 20261012T173841-L-3299965 (interface); batch 20261012T173801; modules 3; new nodes 3)
+- 17:38 L: merged deliver/M2/Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor (stage 3; reviewer PASS; first push; landing 20261012T173842-L-3300211 (interface); batch 20261012T173801; modules 2; new nodes 1)

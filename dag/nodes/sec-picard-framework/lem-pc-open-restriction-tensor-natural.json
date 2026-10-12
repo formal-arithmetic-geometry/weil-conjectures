@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-open-restriction-tensor-natural",
+ "kind": "statement",
+ "title": "Naturality of canonical open restriction tensor comparison",
+ "statement": "Let X be a scheme [def-pc-scheme] and U any open. Let R be over-site restriction followed by the canonical over equivalence [lem-weil-pbc-module-restriction-open-immersion-colimits] on sheaves of modules [def-weil-sheaf-of-modules-category]. For the sheaf tensor [def-pur-sheaf-tensor-product], there exist isomorphisms e(F,G): R(F \\otimes G) \\cong R(F) \\otimes R(G), simultaneously natural in both module arguments: for maps f:F \\to Fprime and g:G \\to Gprime, R(f \\otimes g) followed by e(Fprime,Gprime) equals e(F,G) followed by R(f) \\otimes R(g). No quasi-coherence, flatness or nonempty-open hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01CD",
+  "place": "Lemma 17.16.4, functoriality; used in the locality step of Tag 08DX, proof of (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply exists_restriction_tensor_comparison to U.ι for each pair of modules. Its inverse is characterized by local pure tensors. Both naturality composites send a local pure tensor s tensor t to f(s) tensor g(t), so they agree by the sectionwise tensor universal property and sheafification. Conjugating with the comparisons gives naturality of the forward maps.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Scheme.Modules.overFunctorEquiv U naturally identifies the canonical over-site composite with restriction along U.ι. Transport the tensor comparisons through its components and the common SheafOfModules carrier of Scheme.Modules. Its naturality transports both module-map squares to the stated square. The empty open has the zero module category and introduces no exception.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-restriction-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01CD",
+  "place": "Expanded the functorial pullback tensor comparison; transport uses Mathlib Scheme.Modules.overFunctorEquiv."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural tensor comparison for restriction of sheaves of modules lifted to bicomplexes",
+   "results": "Found PresheafOfModules.Monoidal.tensorObjMap and tensorObj_map_tmul, and sheaf restriction-of-scalars definitions; no natural tensor comparison for the canonical overFunctor/overEquiv composite.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorHomologicalComplex\"",
+   "results": "Found bicomplex construction and component formulas; no tensor comparison for open restriction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapTotalIso|overFunctorEquiv|restriction_tensor|tensorBicomplex in lean/Sheaf, lean/WeilConjectures and Mathlib",
+   "results": "Found proved upstream HomologicalComplex₂.mapTotalIso, Mathlib Scheme.Modules.overFunctorEquiv, and the existing exists_restriction_tensor_comparison (without explicit naturality). The mixed tensor and restriction-extension comparisons concern coefficient rings, not sheaves on an open. No duplicate natural comparison for this canonical restriction.",
+   "date": "2026-10-13",
+   "verdict": "existing ingredients, no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open restriction of sheaves of modules commutes with tensor products naturally in both variables",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict obtained.",
+   "date": "2026-10-13",
+   "status": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-pullback-tensor-qcoh",
+   "place": "Open restriction tensor calculation, module-level naturality before forming complexes",
+   "via": [
+    "lem-pc-open-restriction-total-tensor",
+    "lem-pc-derived-tensor-open-restriction-universes",
+    "lem-pc-derived-tensor-qcoh-component"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionTensorNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionTensorNaturality.lean",
+  "declaration": "AlgebraicGeometry.exists_openRestriction_tensor_natural",
+  "statement": "theorem exists_openRestriction_tensor_natural (X : Scheme.{u}) (U : X.Opens) :\n    let R :=\n      SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙\n        Equivalence.functor\n          (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n          (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n          (Scheme.Modules.overEquiv U)\n    ∃ e : ∀ (F G : SheafOfModules.{u} (moduleRings X.toRingedSpace)),\n      R.obj (F ⊗ G) ≅ R.obj F ⊗ R.obj G,\n      ∀ (F F' G G' : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n        (f : F ⟶ F') (g : G ⟶ G'),\n        R.map (f ⊗ₘ g) ≫ (e F' G').hom =\n          (e F G).hom ≫ (R.map f ⊗ₘ R.map g)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T173842-L-3300211",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T173842-L-3300211",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

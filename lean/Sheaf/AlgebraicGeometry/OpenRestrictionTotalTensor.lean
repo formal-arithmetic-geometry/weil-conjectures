@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
+import Sheaf.AlgebraicGeometry.OpenRestrictionTensorNaturality
+import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-! # Open restriction of total tensor complexes
 
@@ -65,6 +66,41 @@ theorem openRestriction_totalTensor_iso (X : Scheme.{u}) (U : X.Opens)
           ((R.mapHomologicalComplex (.up ℤ)).obj N)
           (curriedTensor (SheafOfModules.{u}
             (moduleRings U.toScheme.toRingedSpace)))) := by
-  sorry
+  let R :=
+    SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv U)
+  have : PreservesColimitsOfSize.{0, 0} R := by
+    dsimp [R, SheafOfModules.overFunctor]
+    infer_instance
+  let K := (((curriedTensor
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))).mapBifunctorHomologicalComplex
+      (.up ℤ) (.up ℤ)).obj P).obj N
+  have : R.PreservesTotalComplex K (.up ℤ) := fun _ => inferInstance
+  let e₁ := (HomologicalComplex₂.mapTotalIso R K (.up ℤ)).symm
+  obtain ⟨e, he⟩ := exists_openRestriction_tensor_natural X U
+  let e₂ :
+      (((R.mapHomologicalComplex (.up ℤ)).mapHomologicalComplex (.up ℤ)).obj K) ≅
+        (((curriedTensor (SheafOfModules.{u}
+          (moduleRings U.toScheme.toRingedSpace))).mapBifunctorHomologicalComplex
+            (.up ℤ) (.up ℤ)).obj ((R.mapHomologicalComplex (.up ℤ)).obj P)).obj
+              ((R.mapHomologicalComplex (.up ℤ)).obj N) :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun p ↦ HomologicalComplex.Hom.isoOfComponents (fun q ↦ e (P.X p) (N.X q))
+        (by
+          intro q q' hq
+          change (e (P.X p) (N.X q)).hom ≫ R.obj (P.X p) ◁ R.map (N.d q q') =
+            R.map (P.X p ◁ N.d q q') ≫ (e (P.X p) (N.X q')).hom
+          simpa [R] using (he (P.X p) (P.X p) (N.X q) (N.X q') (𝟙 _) (N.d q q')).symm))
+      (by
+        intro p p' hp
+        apply HomologicalComplex.Hom.ext
+        funext q
+        change (e (P.X p) (N.X q)).hom ≫ R.map (P.d p p') ▷ R.obj (N.X q) =
+          R.map (P.d p p' ▷ N.X q) ≫ (e (P.X p') (N.X q)).hom
+        simpa [R] using (he (P.X p) (P.X p') (N.X q) (N.X q) (P.d p p') (𝟙 _)).symm)
+  exact ⟨e₁ ≪≫ HomologicalComplex₂.total.mapIso e₂ (.up ℤ)⟩
 
 end AlgebraicGeometry
