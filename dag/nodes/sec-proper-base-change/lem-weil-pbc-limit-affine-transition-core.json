@@ -19,12 +19,22 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The full relative-spectrum construction and its universal property are the Stacks Limits Lemma 01YX argument; this intermediate theorem records that construction as the core existence step.",
+   "text": "Choose a stage i0 and the upper-tail preorder J = {j | i0 ≤ j}. J is directed and nonempty. Its inclusion into I is final: every i has a common upper bound with i0, and parallel arrows agree because I is a preorder. Equivalently its opposite inclusion is initial. Lift the restricted diagram to schemes affine over S = D(i0), with structure maps the transitions to i0. Functoriality follows from D.map_comp and uniqueness of preorder arrows.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply affine_morphism_relative_spec S to obtain the anti-equivalence E. Send the lifted diagram F to the directed algebra diagram F.rightOp ⋙ E.functor. Apply quasiCoherentAlgebra_colimit to its underlying algebra-sheaf diagram. Its quasi-coherent colimit vertex creates a colimit in the full quasi-coherent subcategory (Mathlib createsColimitFullSubcategoryInclusion'). Transfer the colimit through E, then take opposites, obtaining HasLimit F. This is the proved private helper hasLimit_affineOver.",
    "uses": [
     "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-quasi-coherent-algebra-colimit",
-    "lem-weil-pbc-spec-colimit-limit",
-    "lem-weil-pbc-scheme-morphism-gluing"
+    "lem-weil-pbc-quasi-coherent-algebra-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the limit cone of F. Apply isLimit_affineOver_inclusion to obtain its limit property in Over S. The index category is cofiltered and thus connected, so Mathlib Over.forget S preserves this limit. The resulting diagram is definitionally the upper-tail restriction of D. Mathlib Functor.Initial.hasLimit_of_comp transfers existence along the initial inclusion. Choose the resulting cone and its limit proof.",
+   "uses": [
+    "lem-weil-pbc-affine-over-limit-inclusion"
    ],
    "elementary": false
   }
@@ -32,10 +42,13 @@
  "proof_deps": [
   "lem-weil-pbc-affine-morphism-relative-spec",
   "lem-weil-pbc-quasi-coherent-algebra-colimit",
-  "lem-weil-pbc-spec-colimit-limit",
-  "lem-weil-pbc-scheme-morphism-gluing"
+  "lem-weil-pbc-affine-over-limit-inclusion"
  ],
- "proof_origin": "written from the Stacks Project proof",
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/LimitAffineTransition.lean",
+  "place": "hasLimit_affineOver and exists_limit_affine_transition_core; explicit fixed-base construction and upper-tail cofinal transfer"
+ },
  "status": "split",
  "created": {
   "by": "worker",
@@ -92,17 +105,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T060759-L-2918593",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.exists_limit_affine_transition_core",
-   "AlgebraicGeometry.limit_affine_transition_affine_comparison"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.exists_limit_affine_transition_core"
-  ]
+  "landing": "20261012T070542-L-3473369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

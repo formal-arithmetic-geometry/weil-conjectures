@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-affine-over-limit-inclusion",
+ "kind": "statement",
+ "title": "Affine-over-base inclusion preserves directed inverse limits",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $J$ a nonempty directed preorder. Let $F:J^{\\mathrm{op}}\\to\\mathrm{Aff}/S$ be a diagram in the full subcategory of schemes over $S$ [def-weil-scheme-over-base] whose structure morphisms are affine [def-weil-pbc-scheme-conventions]. If $c$ is a limiting cone in this full subcategory, then its image under the inclusion $\\mathrm{Aff}/S\\to\\mathrm{Sch}/S$ is a limiting cone in all schemes over $S$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01YX (lemma-directed-inverse-system-has-limit), local universal-property argument in its proof, with Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Use the relative-spectrum anti-equivalence to send the limiting cone to a colimit of quasi-coherent algebras. Apply the algebra-colimit theorem in all algebra sheaves; its vertex is quasi-coherent, so full-subcategory reflection gives a colimit in quasi-coherent algebras. Uniqueness of colimits identifies it with the image of the given cone, compatibly with every leg. Sections over an affine open U of S are consequently the colimit of the stage section rings.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-quasi-coherent-algebra-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The relative-spectrum charts and their morphism compatibility identify the restricted cone over every affine U with the spectrum of that ring colimit. The spectrum-colimit theorem gives its universal property for arbitrary test schemes, including tests not affine over U.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any cone in schemes over S with vertex T, restrict along its S-map to inverse images of affine base opens U. The local spectrum limits give unique factorizations. Choose any index j: the factorization followed by its j-th projection and structure map to U equals the given test-scheme map to U. Hence it is over U and restricts to inverse images of smaller base opens; nonemptiness supplies j. For two affine base opens U and V, cover their intersection by affine opens W; both factorizations restrict over W to the unique factorization. Thus they agree on the overlap, without assuming the intersection itself affine. Glue the local maps to a morphism T to the given vertex. The map is over S and has the required projection composites, since both identities hold on the cover. A second factorization agrees on every open by local uniqueness, hence globally by the gluing uniqueness theorem.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/AffineOverLimitInclusion.lean",
+  "place": "Docstring argument expanding the universal-property step of Stacks 01YX; second reader checked https://stacks.math.columbia.edu/tag/01YX and https://stacks.math.columbia.edu/tag/01YW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the inclusion of schemes affine over a fixed scheme preserves directed inverse limits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the inclusion of schemes affine over a fixed scheme preserves directed inverse limits",
+   "results": "AlgebraicGeometry.AffineScheme.hasColimits, AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover, AlgebraicGeometry.Scheme.isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit",
+   "date": "2026-10-12",
+   "verdict": "no exact match: results do not preserve limits of schemes affine over an arbitrary base"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit, CategoryTheory.ObjectProperty.ι",
+   "results": "CategoryTheory.Limits.createsLimitFullSubcategoryInclusion', CategoryTheory.Functor.representableByCompYonedaObjOfIsLimit, TopCat.Presheaf.IsSheaf.isSheafOpensLeCover, TopCat.Presheaf.isLimitOpensLeEquivGenerate₁, TopCat.Presheaf.isLimitOpensLeEquivGenerate₂, TopCat.Presheaf.isLimitOpensLeCoverEquivPairwise, Alexandrov.isLimit",
+   "date": "2026-10-12",
+   "verdict": "no exact match: results do not preserve limits of schemes affine over an arbitrary base"
+  },
+  {
+   "tool": "grep",
+   "query": "isLimit.*[Aa]ffineOver|preserves.*[Aa]ffine|affine.*preserves",
+   "results": "Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match: results do not preserve limits of schemes affine over an arbitrary base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine schemes over a base inclusion functor preserves cofiltered limits universal property",
+   "results": "AffineScheme.forgetToScheme_preservesLimits and createsLimitsForgetToScheme concern globally affine schemes; isAffineHom_π_app assumes an ambient limiting cone.",
+   "date": "2026-10-12",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineHom\", \"IsLimit\"",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeSpec.*[Ll]imit|[Ll]imit.*relativeSpec|[Pp]reserves.*[Aa]ffine",
+   "results": "13 unrelated Mathlib hits. Project search found isLimitApproxOpensCone and isLimitApproxCone in FiniteApproximation, restricted to a special approximation system and a qcqs base.",
+   "date": "2026-10-12",
+   "verdict": "second reading: no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LimitAffineTransition",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Step 5: the cohomology comparison with the inverse limit of affine neighbourhoods; the local universal-property part of the scheme-limit existence argument",
+   "via": [
+    "lem-weil-pbc-limit-affine-transition-core",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineOverLimitInclusion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOverLimitInclusion.lean",
+  "declaration": "AlgebraicGeometry.isLimit_affineOver_inclusion",
+  "statement": "theorem isLimit_affineOver_inclusion {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J] (S : Scheme.{u}) (F : Jᵒᵖ ⥤ ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom)) (c : Cone F) (hc : IsLimit c) : Nonempty (IsLimit ((ObjectProperty.ι (fun Y : Over S ↦ IsAffineHom Y.hom)).mapCone c))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T070542-L-3473369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T070542-L-3473369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
