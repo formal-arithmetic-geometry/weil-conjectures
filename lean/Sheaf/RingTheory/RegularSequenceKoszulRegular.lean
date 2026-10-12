@@ -63,7 +63,7 @@ is not needed for that implication. -/
 theorem IsRegular.isKoszulRegularOn {R : Type u} [CommRing R]
     {M : Type v} [AddCommGroup M] [Module R M] {r : ℕ} {f : Fin r → R}
     (h : IsRegular M (List.ofFn f)) : IsKoszulRegularOn M f := by
-  sorry
+  exact isKoszulRegularOn_of_isWeaklyRegular M f h.toIsWeaklyRegular
 
 /-- Every regular sequence in a commutative ring is Koszul-regular.
 Source: Stacks Project, Tag 062F
@@ -76,6 +76,22 @@ vanishing. These are exactly the two regularity predicates from
 `def-weil-pbc-regular-sequence` and `def-weil-pbc-koszul-regular-sequence`. -/
 theorem IsRegular.isKoszulRegular {R : Type u} [CommRing R]
     {r : ℕ} {f : Fin r → R} (h : IsRegular R (List.ofFn f)) : IsKoszulRegular f := by
-  sorry
+  let e : ExteriorAlgebra.koszulComplexTensor R r f R ≅
+      ExteriorAlgebra.koszulComplex R r f :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun n ↦ (TensorProduct.rid R (⋀[R]^n (Fin r →₀ R))).toModuleIso)
+      (by
+        intro i j hij
+        have he : i = j + 1 := by simpa using hij.symm
+        subst i
+        simp only [ExteriorAlgebra.koszulComplexTensor, ExteriorAlgebra.koszulComplex,
+          ChainComplex.of_d]
+        ext1
+        apply TensorProduct.ext
+        ext x
+        simp)
+  intro n hn
+  exact (isKoszulRegularOn_of_isWeaklyRegular R f h.toIsWeaklyRegular n hn).of_iso
+    ((HomologicalComplex.homologyFunctor _ _ n).mapIso e.symm)
 
 end RingTheory.Sequence
