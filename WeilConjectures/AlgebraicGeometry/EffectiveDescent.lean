@@ -36,10 +36,12 @@ finite separable extension of the base field.
 - `CategoryTheory.Over.DescentDatum.existsUnique_hom_of_isPullback`: compatible morphisms descend
   (blueprint `lem-pd-morphisms-descend`).
 - `CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback`: compatible group scheme
-  structures descend (blueprint `lem-pd-group-scheme-descent`).
+  structures descend (blueprint `lem-pd-group-scheme-descent`), uniquely
+  (`CategoryTheory.Over.DescentDatum.grpObj_ext_of_isPullback`).
 - `AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback`:
   properness, smoothness of relative dimension `n` and geometric integrality descend along a field
-  extension (blueprint `thm-pd-fpqc-local-properties`).
+  extension (blueprint `thm-pd-fpqc-local-properties`), and so does connectedness
+  (`AlgebraicGeometry.connectedSpace_of_isPullback`).
 -/
 
 @[expose] public section
@@ -118,7 +120,8 @@ quasi-compact, let `V` be a scheme over `X` with an effective descent datum `D`,
 scheme `V₀` and projection `qV`, and let `V` carry a commutative group scheme structure whose
 multiplication and unit are compatible with `D`. Then `V₀` carries a commutative group scheme
 structure over `Y` whose base change is the given one: `qV` maps products of points of `V` to
-products of points of `V₀`. Such a structure is unique, by the same token.
+products of points of `V₀`. Such a structure is unique
+(`CategoryTheory.Over.DescentDatum.grpObj_ext_of_isPullback`).
 
 (blueprint: `lem-pd-group-scheme-descent`) -/
 theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] {V : Over X}
@@ -143,6 +146,42 @@ theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p]
       (fst V₀ V₀) (snd V₀ V₀)).trans
       (congrArg₂ (D.homCommGroup hqV hDV hμ hη _).mul (lift_fst x y) (lift_snd x y))
   exact (D.descendPoint'_mul hqV hDV hμ hη a b).trans (hmul _ _).symm
+
+/-- **The descended group scheme structure is unique.** Let `p : X ⟶ Y` be flat and surjective,
+let `V` be a monoid scheme over `X` and let `qV : V ⟶ V₀` exhibit `V` as the base change of `V₀`
+along `p`. Then there is at most one group scheme structure on `V₀` over `Y` whose base change is
+the given one, in the sense that `qV` maps products of points of `V` to products of points of
+`V₀` (as for the structure of `CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback`):
+base change along the faithfully flat `p` is injective on morphisms.
+
+(blueprint: `lem-pd-group-scheme-descent`, the uniqueness clause) -/
+theorem grpObj_ext_of_isPullback [Flat p] [Surjective p] {V : Over X} [MonObj V] {V₀ : Over Y}
+    {qV : V.left ⟶ V₀.left} (hqV : IsPullback qV V.hom V₀.hom p) (G₁ G₂ : GrpObj V₀)
+    (h₁ : ∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V),
+      descendPoint hqV (lift a b ≫ μ[V]) =
+        lift (descendPoint hqV a) (descendPoint hqV b) ≫ G₁.mul)
+    (h₂ : ∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V),
+      descendPoint hqV (lift a b ≫ μ[V]) =
+        lift (descendPoint hqV a) (descendPoint hqV b) ≫ G₂.mul) :
+    G₁ = G₂ := by
+  -- the points of `V` over `V₀ ×_Y V₀ ×_Y X` lifting the two projections
+  let π := pullback.fst (V₀ ⊗ V₀).hom p
+  have hπ (c : V₀ ⊗ V₀ ⟶ V₀) :
+      (π ≫ c.left) ≫ V₀.hom = pullback.snd (V₀ ⊗ V₀).hom p ≫ p := by
+    rw [Category.assoc, Over.w c, pullback.condition]
+  let a (c : V₀ ⊗ V₀ ⟶ V₀) : Over.mk (pullback.snd (V₀ ⊗ V₀).hom p) ⟶ V :=
+    Over.homMk (hqV.lift (π ≫ c.left) _ (hπ c)) (hqV.lift_snd _ _ _)
+  have key : lift (descendPoint hqV (a (fst V₀ V₀))) (descendPoint hqV (a (snd V₀ V₀))) =
+      Over.homMk π pullback.condition := by
+    refine CartesianMonoidalCategory.hom_ext _ _ ?_ ?_ <;>
+    · ext
+      simp [a, π]
+  have hμ : π ≫ G₁.mul.left = π ≫ G₂.mul.left := by
+    have := (h₁ _ (a (fst V₀ V₀)) (a (snd V₀ V₀))).symm.trans (h₂ _ _ _)
+    rw [key] at this
+    exact congrArg (·.left) this
+  have := Flat.epi_of_flat_of_surjective π
+  exact GrpObj.ext _ _ (MonObj.ext _ _ (Over.OverMorphism.ext ((cancel_epi π).1 hμ)))
 
 end CategoryTheory.Over.DescentDatum
 
@@ -170,5 +209,23 @@ theorem isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback {
     [IsProper z'] [SmoothOfRelativeDimension n z'] [GeometricallyIntegral z'] :
     IsProper z ∧ SmoothOfRelativeDimension n z ∧ GeometricallyIntegral z :=
   isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux z z' q h n
+
+/-- **Connectedness descends along a field extension.** Let `k ⊆ K` be a field extension and let
+`Z` be a scheme over `k` whose base change `Z_K` is connected. Then `Z` is connected, being the
+image of `Z_K` under the surjective projection `Z_K ⟶ Z`.
+
+Together with
+`AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback`
+this gives the connectedness clause of the blueprint statement.
+
+(blueprint: `thm-pd-fpqc-local-properties`, the connectedness clause) -/
+theorem connectedSpace_of_isPullback {k K : Type u} [Field k] [Field K] [Algebra k K]
+    {Z Z' : Scheme.{u}} (z : Z ⟶ Spec (.of k)) (z' : Z' ⟶ Spec (.of K)) (q : Z' ⟶ Z)
+    (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+    [ConnectedSpace Z'] : ConnectedSpace Z := by
+  have : Surjective (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+    ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
+  have : Surjective q := MorphismProperty.of_isPullback h.flip this
+  exact q.surjective.connectedSpace q.continuous
 
 end AlgebraicGeometry
