@@ -59,6 +59,8 @@ open Scheme
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ] (Y : Scheme.{u})
+  [HasInvertibleExponent Λ Y] {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
+  [LocallyOfFiniteType aY]
 
 /-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
 
@@ -80,40 +82,42 @@ noncomputable def affineLineOrientation :
   supportedClassMap Λ _ (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
     (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))))
 
+include aY in
 /-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
 
-For a normalized rank-one datum the orientation `pur_s : Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` of the zero
-section is an isomorphism: the map `Λ ⟶ H⁰(Rs^! Λ(1)[2])`, `1 ↦ ∂κ(t)`, is an isomorphism of
-sheaves and `Rs^! Λ(1)[2]` is concentrated in degree zero. This is the rank-one normalisation
+For a normalized rank-one datum and `Y` separated and locally of finite type over a field, the
+orientation `pur_s : Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` of the zero section is an isomorphism: the map
+`Λ ⟶ H⁰(Rs^! Λ(1)[2])`, `1 ↦ ∂κ(t)`, is an isomorphism of sheaves and `Rs^! Λ(1)[2]` is
+concentrated in degree zero. This is the rank-one normalisation
 `AlgebraicGeometry.Etale.HasKummerClass.IsNormalized`; the blueprint derives it from the long
 exact sequence of `Rp_*` applied to the localization triangle of the closed–open pair
 `(s, j)`. -/
-theorem isIso_affineLineOrientation [HasKummerClass.IsNormalized Λ]
-    [HasInvertibleExponent Λ Y] :
+theorem isIso_affineLineOrientation [HasKummerClass.IsNormalized Λ] :
     IsIso (affineLineOrientation Λ Y) :=
-  HasKummerClass.IsNormalized.isIso_supportedClassMap_kummerBoundary_coord Y
+  HasKummerClass.IsNormalized.isIso_supportedClassMap_kummerBoundary_coord Y aY
 
+include aY in
 /-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
 
 The orientation `pur_s` induces an isomorphism `Λ ≅ H⁰(Rs^! Λ(1)[2])` of cohomology sheaves,
 `1 ↦ ∂κ(t)`. -/
-theorem isIso_homology_zero_map_affineLineOrientation [HasKummerClass.IsNormalized Λ]
-    [HasInvertibleExponent Λ Y] :
+theorem isIso_homology_zero_map_affineLineOrientation [HasKummerClass.IsNormalized Λ] :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map (affineLineOrientation Λ Y)) := by
-  have := isIso_affineLineOrientation Λ Y
+  have := isIso_affineLineOrientation Λ Y aY
   infer_instance
 
+include aY in
 /-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
 
 `Rs^! Λ(1)[2]` is concentrated in degree zero: its cohomology sheaves vanish in every degree
 `n ≠ 0`, since it is isomorphic to `Λ_{V(t)}` through the orientation. -/
 theorem isZero_homology_rightDerivedUpperShriek_affineLineZeroLocus
-    [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ Y] (n : ℤ) (hn : n ≠ 0) :
+    [HasKummerClass.IsNormalized Λ] (n : ℤ) (hn : n ≠ 0) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
       ((R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
           {AffineSpace.coord Y (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧))) := by
-  have := isIso_affineLineOrientation Λ Y
+  have := isIso_affineLineOrientation Λ Y aY
   refine IsZero.of_iso ?_ ((_root_.DerivedCategory.homologyFunctor _ n).mapIso
     ((asIso (affineLineOrientation Λ Y)).symm ≪≫
       constantComplexIsoSingleFunctor Λ _))
@@ -125,6 +129,7 @@ theorem isZero_homology_rightDerivedUpperShriek_affineLineZeroLocus
 set_option maxHeartbeats 3000000 in
 -- the instance arguments of the derived pullbacks along geometric points of the zero locus are
 -- expensive to unify
+include aY in
 /-- Blueprint `prop-pur-affine-line-orientation-uniqueness`: Uniqueness of the global
 orientation
 
@@ -136,7 +141,7 @@ is a section of a sheaf, which is determined by its stalks
 (`AlgebraicGeometry.Etale.constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq`).
 Consequently two such morphisms with the same pullbacks to all geometric points are equal. -/
 theorem eq_zero_of_leftDerivedUpperStar_map_eq_zero_affineLineZeroLocus
-    [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ Y]
+    [HasKummerClass.IsNormalized Λ]
     (φ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
@@ -147,7 +152,7 @@ theorem eq_zero_of_leftDerivedUpperStar_map_eq_zero_affineLineZeroLocus
         {AffineSpace.coord Y (ULift.up 0)}),
       (L((x)^*[ModuleCat.{u + 1} Λ])).map φ = 0) :
     φ = 0 := by
-  have := isIso_affineLineOrientation Λ Y
+  have := isIso_affineLineOrientation Λ Y aY
   exact constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq
     (asIso (affineLineOrientation Λ Y)).symm fun Ω _ _ x ↦ by
       rw [h Ω x, Functor.map_zero]
@@ -155,6 +160,7 @@ theorem eq_zero_of_leftDerivedUpperStar_map_eq_zero_affineLineZeroLocus
 set_option maxHeartbeats 3000000 in
 -- the instance arguments of the derived pullbacks along geometric points of the zero locus are
 -- expensive to unify
+include aY in
 /-- Blueprint `prop-pur-affine-line-orientation-uniqueness`: Uniqueness of the global
 orientation
 
@@ -163,7 +169,6 @@ Two morphisms `φ ψ : Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` whose pullbacks along every 
 blueprint, see
 `AlgebraicGeometry.Etale.affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom`. -/
 theorem affineLineOrientation_hom_ext [HasKummerClass.IsNormalized Λ]
-    [HasInvertibleExponent Λ Y]
     {φ ψ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
@@ -175,7 +180,7 @@ theorem affineLineOrientation_hom_ext [HasKummerClass.IsNormalized Λ]
       (L((x)^*[ModuleCat.{u + 1} Λ])).map φ = (L((x)^*[ModuleCat.{u + 1} Λ])).map ψ) :
     φ = ψ := by
   rw [← sub_eq_zero]
-  exact eq_zero_of_leftDerivedUpperStar_map_eq_zero_affineLineZeroLocus Λ Y _ fun Ω _ _ x ↦ by
+  exact eq_zero_of_leftDerivedUpperStar_map_eq_zero_affineLineZeroLocus Λ Y aY _ fun Ω _ _ x ↦ by
     rw [Functor.map_sub, h Ω x, sub_self]
 
 variable {Y} {Y' : Scheme.{u}}
@@ -224,7 +229,8 @@ The blueprint deduces this from the uniqueness of the orientation and the comput
 sides at the geometric points; here it is proved directly: the Kummer class is compatible with
 pullback, and so is the boundary of the supported localization triangle
 (`AlgebraicGeometry.Etale.kummerBoundary_baseChange`). -/
-theorem supportedClassMap_restrictSupportedClass_affineLineOrientation (v : Y' ⟶ Y) :
+theorem supportedClassMap_restrictSupportedClass_affineLineOrientation
+    [HasInvertibleExponent Λ Y'] (v : Y' ⟶ Y) :
     supportedClassMap Λ _
         (restrictSupportedClass (ModuleCat.{u + 1} Λ) (AffineSpace.map (ULift.{u} (Fin 1)) v) _ _
           _ (isPullback_zeroLocusSubschemeι_coord v)
@@ -257,6 +263,7 @@ noncomputable def restrictAffineLineZeroLocusHom (v : Y' ⟶ Y)
       (R(𝔸(ULift.{u} (Fin 1); Y').zeroLocusSubschemeι
           {AffineSpace.coord Y' (ULift.up 0)})^![ModuleCat.{u + 1} Λ]).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y') 1)⟦(2 : ℤ)⟧) :=
+  haveI : HasInvertibleExponent Λ Y' := .of_hom v
   restrictSupportedHom Λ (AffineSpace.map (ULift.{u} (Fin 1)) v) _ _ _
     (isPullback_zeroLocusSubschemeι_coord v)
     (((L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).commShiftIso
@@ -272,7 +279,8 @@ of `𝔸¹_Y` along `𝔸¹_v` (`AlgebraicGeometry.Etale.restrictAffineLineZeroL
 orientation `pur_{s'}` of the zero section of `𝔸¹_{Y'}`. This is
 `AlgebraicGeometry.Etale.supportedClassMap_restrictSupportedClass_affineLineOrientation`, read
 on morphisms instead of classes with supports. -/
-theorem restrictAffineLineZeroLocusHom_affineLineOrientation (v : Y' ⟶ Y) :
+theorem restrictAffineLineZeroLocusHom_affineLineOrientation [HasInvertibleExponent Λ Y']
+    (v : Y' ⟶ Y) :
     restrictAffineLineZeroLocusHom Λ v (affineLineOrientation Λ Y) =
       affineLineOrientation Λ Y' := by
   have h : (supportedClassMapEquiv Λ _ _).symm (affineLineOrientation Λ Y) =
@@ -287,6 +295,7 @@ variable (Y)
 set_option maxHeartbeats 3000000 in
 -- the instance arguments of the derived pullbacks along geometric points of the zero locus are
 -- expensive to unify
+include aY in
 /-- Blueprint `prop-pur-affine-line-orientation-uniqueness`: Uniqueness of the global
 orientation
 
@@ -301,7 +310,7 @@ Through the orientation (`AlgebraicGeometry.Etale.isIso_affineLineOrientation`),
 equality of the pullbacks of the two endomorphisms of `Λ_{V(t)}` to every geometric point of
 `V(t) ≅ Y`, and endomorphisms of a constant sheaf are determined at the geometric points. -/
 theorem affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom
-    [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ Y]
+    [HasKummerClass.IsNormalized Λ]
     {φ ψ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
@@ -310,7 +319,7 @@ theorem affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom
     (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (v : Spec (.of Ω) ⟶ Y),
       restrictAffineLineZeroLocusHom Λ v φ = restrictAffineLineZeroLocusHom Λ v ψ) :
     φ = ψ := by
-  have := isIso_affineLineOrientation Λ Y
+  have := isIso_affineLineOrientation Λ Y aY
   have key : ∀ φ' : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
@@ -334,7 +343,7 @@ theorem affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom
   let e' := AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) (Spec (.of Ω))
     (s := {AffineSpace.coord (Spec (.of Ω)) (ULift.up 0)}) Set.range_unique
   have : HasInvertibleExponent Λ (Spec (.of Ω)) := HasInvertibleExponent.of_hom (x ≫ e.inv)
-  have := isIso_affineLineOrientation Λ (Spec (.of Ω))
+  have := isIso_affineLineOrientation Λ (Spec (.of Ω)) (𝟙 _)
   have hv := h Ω (x ≫ e.inv)
   rw [restrictAffineLineZeroLocusHom, restrictAffineLineZeroLocusHom,
     restrictSupportedHom_constantComplexEndPullback_comp,
@@ -353,6 +362,7 @@ theorem affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom
     ← constantComplexEndPullback_constantComplexEndPullback _ _ _ rfl,
     ← constantComplexEndPullback_constantComplexEndPullback _ _ _ rfl, hv]
 
+include aY in
 /-- Blueprint `prop-pur-affine-line-orientation-uniqueness`: Uniqueness of the global
 orientation
 
@@ -362,7 +372,7 @@ For a normalized rank-one datum, the orientation `pur_s` is the unique morphism
 its base change (`AlgebraicGeometry.Etale.restrictAffineLineZeroLocusHom_affineLineOrientation`),
 and it is the only one by the injectivity of the restriction to the geometric points
 (`AlgebraicGeometry.Etale.affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom`). -/
-theorem eq_affineLineOrientation_iff [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ Y]
+theorem eq_affineLineOrientation_iff [HasKummerClass.IsNormalized Λ]
     (φ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶
       (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
@@ -370,12 +380,15 @@ theorem eq_affineLineOrientation_iff [HasKummerClass.IsNormalized Λ] [HasInvert
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦(2 : ℤ)⟧)) :
     φ = affineLineOrientation Λ Y ↔
       ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (v : Spec (.of Ω) ⟶ Y),
+        haveI : HasInvertibleExponent Λ (Spec (.of Ω)) := .of_hom v
         restrictAffineLineZeroLocusHom Λ v φ = affineLineOrientation Λ (Spec (.of Ω)) := by
-  refine ⟨?_, fun h ↦ affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom Λ Y
+  refine ⟨?_, fun h ↦ affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom Λ Y aY
     fun Ω _ _ v ↦ ?_⟩
   · rintro rfl Ω _ _ v
+    have : HasInvertibleExponent Λ (Spec (.of Ω)) := .of_hom v
     exact restrictAffineLineZeroLocusHom_affineLineOrientation Λ v
-  · rw [h Ω v, restrictAffineLineZeroLocusHom_affineLineOrientation]
+  · have : HasInvertibleExponent Λ (Spec (.of Ω)) := .of_hom v
+    rw [h Ω v, restrictAffineLineZeroLocusHom_affineLineOrientation]
 
 end Etale
 

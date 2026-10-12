@@ -30,7 +30,7 @@ compatibility of the Tate twist datum with pullback.
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory
 
@@ -41,6 +41,37 @@ namespace AlgebraicGeometry
 open Scheme
 
 namespace Etale
+
+section Unitor
+
+open Functor.OplaxMonoidal
+
+variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+/-- A morphism of `D(X_ét)` is determined by its tensor product with the unit. -/
+lemma derivedTensor_map_app_unit_injective {X : Scheme.{u}}
+    {K K' : DerivedCategory (Sheaf X.smallEtaleTopology A)} {f f' : K ⟶ K'}
+    (h : ((derivedTensor A X).map f).app (𝟙_ _) = ((derivedTensor A X).map f').app (𝟙_ _)) :
+    f = f' := by
+  rw [derivedTensor_map_app, derivedTensor_map_app] at h
+  rw [← cancel_epi (ρ_ K).hom, ← rightUnitor_naturality, h, rightUnitor_naturality]
+
+/-- The left unitality of the oplax monoidal derived pullback
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarOplaxMonoidal`), stated with the left unitor of the
+derived tensor product. -/
+lemma leftDerivedUpperStar_map_derivedTensorLeftUnitor_hom {Y Z : Scheme.{u}} (g : Z ⟶ Y)
+    [(g)^*[A].PreservesFlat] (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    letI := leftDerivedUpperStarOplaxMonoidal A g
+    (L((g)^*[A])).map (derivedTensorLeftUnitor A Y K).hom =
+      (leftDerivedUpperStarTensorIso A g _ K).hom ≫
+        ((derivedTensor A Z).map (η L((g)^*[A]))).app _ ≫
+          (derivedTensorLeftUnitor A Z _).hom := by
+  let := leftDerivedUpperStarOplaxMonoidal A g
+  exact (left_unitality_hom L((g)^*[A]) K).symm
+
+end Unitor
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {U U' : Scheme.{u}}
 
@@ -67,7 +98,7 @@ private lemma eqToHom_comp_shift_map {X X' Y : DerivedCategory (Sheaf U'.smallEt
 
 section Twist
 
-variable [HasTateTwist Λ]
+variable [HasTateTwist Λ] [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ U']
 
 /-- **The Tate twist identifications are compatible with pullback**:
 `Le^* (Λ(m)[2m] ⊗ Λ(m')[2m'] ≅ Λ(m + m')[2(m + m')])` is the corresponding identification
@@ -122,8 +153,79 @@ lemma leftDerivedUpperStar_map_eqToHom_twistObject (e : U' ⟶ U) {m m' : ℤ} (
   subst h
   simp
 
+open Functor.OplaxMonoidal in
+/-- The identification `Le^* Λ_U ≅ Λ_{U'}` of the constant complexes (the counit of the oplax
+monoidal derived pullback) is the one given by the Tate twist datum,
+`Le^* Λ_U ≅ Le^* Λ_U(0) ≅ Λ_{U'}(0) ≅ Λ_{U'}`. Both are compatible with the products of twisting
+objects, and an automorphism of the unit compatible with products is the identity. -/
+lemma leftDerivedUpperStarConstantComplexIso_eq (e : U' ⟶ U) :
+    leftDerivedUpperStarConstantComplexIso Λ e =
+      (L((e)^*[ModuleCat.{u + 1} Λ])).mapIso (HasTateTwist.twistObjectZeroIso (Λ := Λ) U).symm ≪≫
+        HasTateTwist.leftDerivedUpperStarTwistObjectIso e 0 ≪≫
+          HasTateTwist.twistObjectZeroIso U' := by
+  let := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) e
+  have := isIso_leftDerivedUpperStarOplaxMonoidal_η (ModuleCat.{u + 1} Λ) e
+  -- `Le^* Λ_U(0) ⟶ Λ_{U'}` through the counit, and through the twist datum
+  suffices hab : (L((e)^*[ModuleCat.{u + 1} Λ])).map (HasTateTwist.twistObjectZeroIso U).hom ≫
+      η L((e)^*[ModuleCat.{u + 1} Λ]) = (HasTateTwist.leftDerivedUpperStarTwistObjectIso e 0).hom ≫
+        (HasTateTwist.twistObjectZeroIso (Λ := Λ) U').hom by
+    ext
+    simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, ← hab,
+      ← Functor.map_comp_assoc, Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp]
+    rfl
+  set a := (L((e)^*[ModuleCat.{u + 1} Λ])).map (HasTateTwist.twistObjectZeroIso (Λ := Λ) U).hom ≫
+    η L((e)^*[ModuleCat.{u + 1} Λ]) with ha
+  set b := (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) e 0).hom ≫
+    (HasTateTwist.twistObjectZeroIso (Λ := Λ) U').hom with hb
+  have hI : IsIso a := by rw [ha]; infer_instance
+  -- `a` and `b` agree after tensoring with `Le^* Λ_U(0)`
+  have h₁ : (L((e)^*[ModuleCat.{u + 1} Λ])).map (HasTateTwist.twistObjectAddIso U 0 0).hom ≫
+      (L((e)^*[ModuleCat.{u + 1} Λ])).map (eqToHom (by rw [add_zero])) ≫
+        (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) e 0).hom =
+        (leftDerivedUpperStarTensorIso _ e _ _).hom ≫
+          ((derivedTensor _ U').map a).app _ ≫ (derivedTensorLeftUnitor _ U' _).hom ≫
+            (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) e 0).hom := by
+    rw [← Functor.map_comp_assoc, ← HasTateTwist.twistObjectAddIso_zero_left, Functor.map_comp,
+      leftDerivedUpperStar_map_derivedTensorLeftUnitor_hom]
+    have hn := leftDerivedUpperStarTensorIso_hom_naturality (ModuleCat.{u + 1} Λ) e
+      (HasTateTwist.twistObjectZeroIso (Λ := Λ) U).hom (𝟙 (HasTateTwist.twistObject U 0))
+    simp only [derivedTensorHom, CategoryTheory.Functor.map_id, Category.comp_id] at hn
+    simp only [Category.assoc]
+    erw [reassoc_of% hn]
+    simp only [ha, Functor.map_comp, NatTrans.comp_app, Category.assoc]
+  have h₂ : (L((e)^*[ModuleCat.{u + 1} Λ])).map (HasTateTwist.twistObjectAddIso U 0 0).hom ≫
+      (HasTateTwist.leftDerivedUpperStarTwistObjectIso e (0 + 0)).hom ≫
+        eqToHom (by rw [add_zero]) =
+        (leftDerivedUpperStarTensorIso _ e _ _).hom ≫
+          ((derivedTensor _ U').map b).app _ ≫ (derivedTensorLeftUnitor _ U' _).hom ≫
+            (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) e 0).hom := by
+    rw [reassoc_of% HasTateTwist.leftDerivedUpperStar_map_twistObjectAddIso,
+      ← HasTateTwist.twistObjectAddIso_zero_left]
+    have hn := ((derivedTensor (ModuleCat.{u + 1} Λ) U').map
+      (HasTateTwist.twistObjectZeroIso (Λ := Λ) U').hom).naturality
+        (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) e 0).hom
+    have hl := (derivedTensorLeftUnitorNatIso (ModuleCat.{u + 1} Λ) U').hom.naturality
+      (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) e 0).hom
+    simp only [derivedTensorLeftUnitorNatIso, NatIso.ofComponents_hom_app,
+      Functor.id_map] at hl
+    simp only [hb, Functor.map_comp, NatTrans.comp_app, Category.assoc]
+    erw [reassoc_of% hn, hl]
+  have h₃ : ((derivedTensor _ U').map a).app ((L((e)^*[ModuleCat.{u + 1} Λ])).obj
+      (HasTateTwist.twistObject U 0)) = ((derivedTensor _ U').map b).app _ := by
+    rw [← cancel_epi (leftDerivedUpperStarTensorIso _ e _ _).hom,
+      ← cancel_mono ((derivedTensorLeftUnitor _ U' _).hom ≫
+        (HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) e 0).hom), Category.assoc,
+      Category.assoc,
+      ← h₁, ← h₂, leftDerivedUpperStar_map_eqToHom_twistObject Λ e (add_zero 0)]
+  -- tensoring with `Le^* Λ_U(0) ≅ Λ_{U'}` is faithful
+  apply derivedTensor_map_app_unit_injective
+  rw [← cancel_epi (((derivedTensor _ U').obj _).map a), ((derivedTensor _ U').map a).naturality,
+    ((derivedTensor _ U').map b).naturality, h₃]
+  rfl
+
 /-- The identifications `Le^* (Λ(m)[2m]) ≅ Λ(m)[2m]` are compatible with composition. -/
-lemma leftDerivedUpperStarTateShiftIso_comp {U₂ : Scheme.{u}} (e₁ : U₂ ⟶ U') (e : U' ⟶ U)
+lemma leftDerivedUpperStarTateShiftIso_comp {U₂ : Scheme.{u}} [HasInvertibleExponent Λ U₂]
+    (e₁ : U₂ ⟶ U') (e : U' ⟶ U)
     (e' : U₂ ⟶ U) (he : e' = e₁ ≫ e) (m : ℤ) :
     leftDerivedUpperStarTateShiftIso Λ e' m =
       (leftDerivedUpperStarComp _ e₁ e e' he).app _ ≪≫
@@ -144,7 +246,7 @@ end Twist
 
 section Kummer
 
-variable [Finite Λ] [HasKummerClass Λ]
+variable [Finite Λ] [HasKummerClass Λ] [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ U']
 
 omit [Finite Λ] in
 /-- The diagonal `Λ_U ⟶ Λ_U ⊗ Λ_U` along which classes are multiplied
@@ -156,11 +258,11 @@ lemma constantComplexDiagonal_comp_derivedTensorHom (e : U' ⟶ U) :
       (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
         (L((e)^*[ModuleCat.{u + 1} Λ])).map (constantComplexDiagonal Λ U) ≫
           (leftDerivedUpperStarTensorIso _ e _ _).hom := by
-  have hdiag : ∀ X : Scheme.{u}, constantComplexDiagonal Λ X =
+  have hdiag : ∀ (X : Scheme.{u}) [HasInvertibleExponent Λ X], constantComplexDiagonal Λ X =
       (HasTateTwist.twistObjectZeroIso (Λ := Λ) X).inv ≫ eqToHom (by rw [add_zero]) ≫
         (HasTateTwist.twistObjectAddIso X 0 0).inv ≫
           derivedTensorHom _ (HasTateTwist.twistObjectZeroIso X).hom
-            (HasTateTwist.twistObjectZeroIso X).hom := fun X ↦ by
+            (HasTateTwist.twistObjectZeroIso X).hom := fun X _ ↦ by
     simp [constantComplexDiagonal, derivedTensorHom]
   set p := HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) e 0
   have hc : (L((e)^*[ModuleCat.{u + 1} Λ])).map (HasTateTwist.twistObjectAddIso U 0 0).hom ≫
@@ -185,7 +287,7 @@ lemma constantComplexDiagonal_comp_derivedTensorHom (e : U' ⟶ U) :
     rw [this, reassoc_of% h₁, ← Functor.map_comp_assoc, Iso.inv_hom_id,
       CategoryTheory.Functor.map_id, Category.id_comp]
   rw [hdiag, hdiag]
-  simp only [leftDerivedUpperStarConstantComplexIso, Iso.trans_inv, Functor.mapIso_inv,
+  simp only [leftDerivedUpperStarConstantComplexIso_eq, Iso.trans_inv, Functor.mapIso_inv,
     Iso.symm_inv, Category.assoc, Functor.map_comp]
   rw [derivedTensorHom_comp, Iso.hom_inv_id_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
     CategoryTheory.Functor.map_id, Category.id_comp, leftDerivedUpperStarTensorIso_hom_naturality,
@@ -220,7 +322,7 @@ lemma leftDerivedUpperStarConstantComplexIso_inv_comp_map_twistObjectZeroIso_inv
       (HasTateTwist.twistObjectZeroIso U').inv ≫ (shiftFunctorZero' _ a ha).inv.app _ := by
   subst ha
   simp only [shiftFunctorZero', eqToIso_refl, Iso.refl_trans]
-  simp only [leftDerivedUpperStarConstantComplexIso, Functor.commShiftIso_zero, Iso.trans_inv,
+  simp only [leftDerivedUpperStarConstantComplexIso_eq, Functor.commShiftIso_zero, Iso.trans_inv,
     Functor.mapIso_inv, Iso.symm_inv, Category.assoc, Functor.CommShift.isoZero_hom_app,
     Functor.map_comp, Functor.comp_obj]
   rw [← Functor.map_comp_assoc _ (HasTateTwist.twistObjectZeroIso U).hom, Iso.hom_inv_id,

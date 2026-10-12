@@ -352,6 +352,13 @@ section FundamentalClass
 
 variable [Finite Λ] {c : ℕ} {i : Z ⟶ X}
 
+/-- The exponent of `Λ` stays invertible on the domain of an étale frame. -/
+instance _root_.AlgebraicGeometry.Scheme.Hom.EtaleFrame.hasInvertibleExponent
+    [HasInvertibleExponent Λ X] (F : i.EtaleFrame c) : HasInvertibleExponent Λ F.U :=
+  .of_hom F.e
+
+attribute [local instance] HasInvertibleExponent.opens
+
 /-- The *class of a frame* `(e : U ⟶ X, f₁, …, f_c)` of `Z`:
 
 `cl(f) = ∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c) ∈ H^{2c}_{Z_U}(U, Λ(c)) = Hom(Λ_U, Ri_{U!} Ri_U^! (Λ_U(c)[2c]))`,
@@ -364,7 +371,6 @@ noncomputable def frameClass [HasKummerClass Λ] [HasInvertibleExponent Λ X] (F
       (R(F.U.zeroLocusSubschemeι (Set.range F.f))_![ModuleCat.{u + 1} Λ]).obj
         ((R(F.U.zeroLocusSubschemeι (Set.range F.f))^![ModuleCat.{u + 1} Λ]).obj
           ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
-  haveI : HasInvertibleExponent Λ F.U := .of_hom F.e
   kummerBoundaryProduct Λ F.f
 
 /-- The restriction of a class `γ ∈ H^{2c}_Z(X, Λ(c))` to a frame `(e : U ⟶ X, f)`, a class in
@@ -379,7 +385,6 @@ noncomputable def frameRestriction [HasTateTwist Λ] [IsClosedImmersion i]
       (R(F.U.zeroLocusSubschemeι (Set.range F.f))_![ModuleCat.{u + 1} Λ]).obj
         ((R(F.U.zeroLocusSubschemeι (Set.range F.f))^![ModuleCat.{u + 1} Λ]).obj
           ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
-  haveI : HasInvertibleExponent Λ F.U := .of_hom F.e
   restrictSupportedClass (ModuleCat.{u + 1} Λ) F.e i _ F.toZ F.isPullback
     (leftDerivedUpperStarConstantComplexIso Λ F.e).inv (leftDerivedUpperStarTateShiftIso Λ F.e c) γ
 
@@ -387,8 +392,9 @@ noncomputable def frameRestriction [HasTateTwist Λ] [IsClosedImmersion i]
 lemma frameRestriction_kummerBoundaryProduct [HasKummerClass Λ] {U W : Scheme.{u}}
     [HasInvertibleExponent Λ U] (f : Fin c → Γ(U, ⊤)) (j : W ⟶ U) [AlgebraicGeometry.Etale j] :
     frameRestriction Λ (Scheme.Hom.EtaleFrame.ofFunctions f j) (kummerBoundaryProduct Λ f) =
-      frameClass Λ (Scheme.Hom.EtaleFrame.ofFunctions f j) :=
-  restrictSupportedClass_kummerBoundaryProduct Λ j f _ (fun _ ↦ rfl) _ _
+      frameClass Λ (Scheme.Hom.EtaleFrame.ofFunctions f j) := by
+  have : HasInvertibleExponent Λ W := .of_hom j
+  exact restrictSupportedClass_kummerBoundaryProduct Λ j f _ (fun _ ↦ rfl) _ _
 
 /-- Restriction of classes with supports along a composite `e' = e₁ ≫ e`, with the standard
 identifications of the constant and Tate complexes: restricting `γ` along `e'` is restricting it
@@ -402,6 +408,7 @@ along `e` and then along `e₁`.
 ```
 -/
 lemma restrictSupportedClass_comp_tateShift [HasKummerClass Λ] {U U' U₂ Z Z' Z₂ : Scheme.{u}}
+    [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ U'] [HasInvertibleExponent Λ U₂]
     (e₁ : U₂ ⟶ U') (e : U' ⟶ U)
     (e' : U₂ ⟶ U) (he : e' = e₁ ≫ e)
     (i : Z ⟶ U) (i' : Z' ⟶ U') (i₂ : Z₂ ⟶ U₂) [IsClosedImmersion i] [IsClosedImmersion i']
@@ -435,7 +442,8 @@ supports on `U` restricts along `a : W ⟶ U` to the restriction of `β`:
 -/
 lemma constantComplexIso_inv_comp_leftDerivedUpperStarComp_map_supportedRestriction
     [HasKummerClass Λ]
-    {U W X Z Z₁ Z' : Scheme.{u}} (e : U ⟶ X) (a : W ⟶ U) (w : W ⟶ X) (hw : w = a ≫ e)
+    {U W X Z Z₁ Z' : Scheme.{u}} [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ W]
+    [HasInvertibleExponent Λ X] (e : U ⟶ X) (a : W ⟶ U) (w : W ⟶ X) (hw : w = a ≫ e)
     (i : Z ⟶ X) (i₁ : Z₁ ⟶ U) (i' : Z' ⟶ W) [IsClosedImmersion i] [IsClosedImmersion i₁]
     [IsClosedImmersion i'] (g₁ : Z₁ ⟶ Z) (hg₁ : IsPullback g₁ i₁ i e) (g₂ : Z' ⟶ Z₁)
     (hg₂ : IsPullback g₂ i' i₁ a) (g' : Z' ⟶ Z) (hg' : IsPullback g' i' i w)
@@ -632,8 +640,9 @@ regular sequence on an affine scheme, have the same restriction to any `W` étal
 theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) (F₁ F₂ : i.EtaleFrame c)
     [IsAffine F₁.U] (hreg : RingTheory.Sequence.IsWeaklyRegular Γ(F₁.U, ⊤) (List.ofFn F₁.f))
-    {W Z' : Scheme.{u}} (a : W ⟶ F₁.U) (b : W ⟶ F₂.U) [AlgebraicGeometry.Etale a]
-    [AlgebraicGeometry.Etale b] (hab : a ≫ F₁.e = b ≫ F₂.e) (i' : Z' ⟶ W) [IsClosedImmersion i']
+    {W Z' : Scheme.{u}} [HasInvertibleExponent Λ W] (a : W ⟶ F₁.U) (b : W ⟶ F₂.U)
+    [AlgebraicGeometry.Etale a] [AlgebraicGeometry.Etale b] (hab : a ≫ F₁.e = b ≫ F₂.e)
+    (i' : Z' ⟶ W) [IsClosedImmersion i']
     (g₁ : Z' ⟶ _) (hg₁ : IsPullback g₁ i' (F₁.U.zeroLocusSubschemeι (Set.range F₁.f)) a)
     (g₂ : Z' ⟶ _) (hg₂ : IsPullback g₂ i' (F₂.U.zeroLocusSubschemeι (Set.range F₂.f)) b) :
     restrictSupportedClass (ModuleCat.{u + 1} Λ) a _ i' g₁ hg₁
@@ -644,7 +653,6 @@ theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth a
         (frameClass Λ F₂) := by
   have hw := hg₁.paste_horiz F₁.isPullback
   have := IsRegularImmersion.of_isPullback c hw
-  have : HasInvertibleExponent Λ W := .of_hom (a ≫ F₁.e)
   have : AlgebraicGeometry.Etale (g₁ ≫ F₁.toZ) :=
     MorphismProperty.of_isPullback (P := @AlgebraicGeometry.Etale) hw.flip inferInstance
   refine eq_of_forall_exists_frameRestriction_eq Λ c i' ((a ≫ F₁.e) ≫ aX)
@@ -835,6 +843,7 @@ theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
       change W ⟶ (F z).U at a
       change W ⟶ (F z').U at b
       change a ≫ (F z).e = b ≫ (F z').e at h
+      have : HasInvertibleExponent Λ W := .of_hom a
       obtain ⟨g₁, hg₁⟩ : ∃ g, IsPullback g _ _ _ :=
         ⟨_, isPullback_zeroLocusSubschemeι a (Set.range (F z).f)
           (Set.range fun t ↦ a.appTop ((F z).f t)) (by rw [← Set.range_comp]; rfl)⟩

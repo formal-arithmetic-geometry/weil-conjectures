@@ -214,6 +214,11 @@ lemma exists_isPreconnected_glOne (x : (generalLinearOpen c S).toScheme) :
 
 namespace Etale
 
+/-- The exponent of `Λ` stays invertible on `GL_{c,S}`. -/
+instance hasInvertibleExponent_generalLinearOpen {Λ : Type (u + 1)} [CommRing Λ]
+    [HasInvertibleExponent Λ S] : HasInvertibleExponent Λ (generalLinearOpen c S).toScheme :=
+  .of_hom (generalLinearOpen.toBase c S)
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
 
 variable [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ S]
@@ -236,8 +241,6 @@ theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix
         (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c)
         (kummerBoundaryProduct Λ ((glMatrix c S).mulVec (glCoord c S))) =
       kummerBoundaryProduct Λ (glCoord c S) := by
-  have : HasInvertibleExponent Λ (generalLinearOpen c S).toScheme :=
-    .of_hom (generalLinearOpen.toBase c S)
   set ι := (glAffine c S).zeroLocusSubschemeι (Set.range (glCoord c S))
   set ιS := 𝔸(ULift.{u} (Fin c); S).zeroLocusSubschemeι
     (Set.range fun a : Fin c ↦ AffineSpace.coord S (ULift.up a))
