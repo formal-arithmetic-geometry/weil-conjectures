@@ -6,6 +6,8 @@ public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Ring
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Ring.Limits
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresRingCore
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresRingMorphism
 
 @[expose] public section
 
@@ -55,6 +57,8 @@ theorem sheavesAlgebraicStructuresRing
               ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) =
             ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ≫
               AddGrpObj.neg (X := (F.obj B).X))) := by
-  sorry
+  obtain ⟨F, G, hF, h₁, h₂, h₃, hops⟩ := sheavesAlgebraicStructuresRing_core J
+  refine ⟨F, G, hF, h₁, h₂, h₃, hops, ?_⟩
+  exact sheavesAlgebraicStructuresRing_morphism J F G hF h₁ h₂ h₃
 
 end CategoryTheory

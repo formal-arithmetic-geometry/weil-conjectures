@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-sheaf-algebraic-structures-ring-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sheaf-algebraic-structures-ring-component",
+   "place": "stage-3 reduction",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Ring sectionwise construction and operation compatibility",
+ "statement": "    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :\n    (∃ (F : Sheaf J CommRingCat.{max u v w} ⥤ CommRingObjCat (Sheaf J (Type (max u v w))))\n        (G : CommRingObjCat (Sheaf J (Type (max u v w))) ⥤ Sheaf J CommRingCat.{max u v w})\n        (hF : F ⋙ CommRingObjCat.forget _ = sheafCompose J (forget CommRingCat.{max u v w})),\n      G ⋙ sheafCompose J (forget CommRingCat.{max u v w}) = CommRingObjCat.forget _ ∧\n      F ⋙ G = 𝟭 (Sheaf J CommRingCat.{max u v w}) ∧\n      G ⋙ F = 𝟭 (CommRingObjCat (Sheaf J (Type (max u v w)))) ∧\n      (∀ (A : Sheaf J CommRingCat.{max u v w}) (U : Cᵒᵖ),\n        (∀ a b : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((AddMonObj.add (X := (F.obj A).X)).hom.app U (a, b)) =\n            (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a) +\n              (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U b)) ∧\n        (∀ t : (𝟙_ (Sheaf J (Type (max u v w)))).obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((AddMonObj.zero (X := (F.obj A).X)).hom.app U t) =\n            (0 : A.obj.obj U)) ∧\n        (∀ a : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((AddGrpObj.neg (X := (F.obj A).X)).hom.app U a) =\n            -(show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a)) ∧\n        (∀ a b : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.mul (X := (F.obj A).X)).hom.app U (a, b)) =\n            (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a) *\n              (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U b)) ∧\n        (∀ t : (𝟙_ (Sheaf J (Type (max u v w)))).obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.one (X := (F.obj A).X)).hom.app U t) =\n            (1 : A.obj.obj U))))",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR and Proposition 00YV"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Proof in words:\n1. Keep the underlying sheaf of sets of a ring sheaf. Define addition and\n   multiplication on the sectionwise product by the existing section operations;\n   define zero and one on the singleton sheaf, and negation sectionwise.\n   Restrictions preserve each operation. Ring identities on sections give all\n   ring-object diagrams, including commutativity and distributivity. Send a\n   ring-sheaf morphism to its underlying natural transformation.\n2. Conversely, on each section set of an internal commutative ring object,\n   evaluate its five operation maps (using the unique singleton section for\n   constants). Evaluation of its diagrams gives the commutative ring axioms.\n   Naturality makes restrictions ring homomorphisms. The underlying set presheaf\n   is the original sheaf, so Presheaf.isSheaf_iff_isSheaf_forget makes this a ring\n   sheaf. Evaluate ring-object morphisms to obtain natural ring homomorphisms.\n3. Both constructions keep section sets and underlying maps. Each round trip\n   recovers every operation pointwise; extensionality identifies the operation\n   maps and the structures, while proof irrelevance identifies axiom and sheaf\n   witnesses. Functor extensionality yields the four asserted strict equalities.\n   The chosen equality hF transports the unchanged underlying sets, giving all\n   five displayed operation formulas.",
+   "uses": [
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R1",
+  "date": "2026-10-12",
+  "note": "Sectionwise construction from 00YR/00YV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "equivalence between sheaves of commutative rings and internal ring objects",
+   "results": "8 hits about structure sheaves and SheafOfModules; no ring-object/sheaf equivalence",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingObjCat",
+   "results": "0 hits; unknown identifier 'CommRingObjCat'",
+   "date": "2026-10-12",
+   "verdict": "unavailable for this identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "sheavesAlgebraicStructures",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf commutative ring object equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SheavesAlgebraicStructuresRing",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SheavesAlgebraicStructuresRingCore",
+  "file": "lean/Sheaf/CategoryTheory/SheavesAlgebraicStructuresRingCore.lean",
+  "declaration": "CategoryTheory.sheavesAlgebraicStructuresRing_core",
+  "statement": "theorem sheavesAlgebraicStructuresRing_core\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :\n    (∃ (F : Sheaf J CommRingCat.{max u v w} ⥤ CommRingObjCat (Sheaf J (Type (max u v w))))\n        (G : CommRingObjCat (Sheaf J (Type (max u v w))) ⥤ Sheaf J CommRingCat.{max u v w})\n        (hF : F ⋙ CommRingObjCat.forget _ = sheafCompose J (forget CommRingCat.{max u v w})),\n      G ⋙ sheafCompose J (forget CommRingCat.{max u v w}) = CommRingObjCat.forget _ ∧\n      F ⋙ G = 𝟭 (Sheaf J CommRingCat.{max u v w}) ∧\n      G ⋙ F = 𝟭 (CommRingObjCat (Sheaf J (Type (max u v w)))) ∧\n      (∀ (A : Sheaf J CommRingCat.{max u v w}) (U : Cᵒᵖ),\n        (∀ a b : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((AddMonObj.add (X := (F.obj A).X)).hom.app U (a, b)) =\n            (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a) +\n              (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U b)) ∧\n        (∀ t : (𝟙_ (Sheaf J (Type (max u v w)))).obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((AddMonObj.zero (X := (F.obj A).X)).hom.app U t) =\n            (0 : A.obj.obj U)) ∧\n        (∀ a : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((AddGrpObj.neg (X := (F.obj A).X)).hom.app U a) =\n            -(show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a)) ∧\n        (∀ a b : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.mul (X := (F.obj A).X)).hom.app U (a, b)) =\n            (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a) *\n              (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U b)) ∧\n        (∀ t : (𝟙_ (Sheaf J (Type (max u v w)))).obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.one (X := (F.obj A).X)).hom.app U t) =\n            (1 : A.obj.obj U))))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914403",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

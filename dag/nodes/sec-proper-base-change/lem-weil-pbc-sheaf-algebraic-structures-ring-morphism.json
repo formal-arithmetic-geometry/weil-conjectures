@@ -1,0 +1,104 @@
+{
+ "id": "lem-weil-pbc-sheaf-algebraic-structures-ring-morphism",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sheaf-algebraic-structures-ring-component",
+   "place": "stage-3 reduction",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Ring sheaf morphism criterion",
+ "statement": "    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (F : Sheaf J CommRingCat.{max u v w} ⥤\n      CommRingObjCat (Sheaf J (Type (max u v w))))\n    (G : CommRingObjCat (Sheaf J (Type (max u v w))) ⥤\n      Sheaf J CommRingCat.{max u v w})\n    (hF : F ⋙ CommRingObjCat.forget _ =\n      sheafCompose J (forget CommRingCat.{max u v w}))\n    (_h₁ : G ⋙ sheafCompose J (forget CommRingCat.{max u v w}) =\n      CommRingObjCat.forget _)\n    (h₂ : F ⋙ G = 𝟭 (Sheaf J CommRingCat.{max u v w}))\n    (h₃ : G ⋙ F = 𝟭 (CommRingObjCat (Sheaf J (Type (max u v w))))) :\n    ∀ (A B : Sheaf J CommRingCat.{max u v w})\n      (α : (sheafCompose J (forget CommRingCat.{max u v w})).obj A ⟶\n        (sheafCompose J (forget CommRingCat.{max u v w})).obj B),\n      (∃ f : A ⟶ B, (sheafCompose J (forget CommRingCat.{max u v w})).map f = α) ↔\n        IsRingHom (show (F.obj A).X ⟶ (F.obj B).X from\n          (eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ∧\n        AddGrpObj.neg (X := (F.obj A).X) ≫\n            ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) =\n          ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ≫\n            AddGrpObj.neg (X := (F.obj B).X)",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR and Proposition 00YV"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "G is faithful by Functor.Faithful.of_comp_eq h₃, and F is full by Functor.Full.of_comp_faithful and h₂. Naturality of eqToIso hF relates the underlying map of F.map f to the conjugated map. In the forward direction use the ring-hom instance of F.map f and AddGrpObj.neg_comp. In the reverse direction package the IsRingHom as a CommRingObjCat.Hom and apply F.preimage; map_preimage and conjugation give the underlying-map equality.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R1",
+  "date": "2026-10-12",
+  "note": "Formal categorical proof using Mathlib fullness and AddGrpObj.neg_comp."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "equivalence between sheaves of commutative rings and internal ring objects",
+   "results": "8 hits about structure sheaves and SheafOfModules; no ring-object/sheaf equivalence",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingObjCat",
+   "results": "0 hits; unknown identifier 'CommRingObjCat'",
+   "date": "2026-10-12",
+   "verdict": "unavailable for this identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "sheavesAlgebraicStructures",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf commutative ring object equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SheavesAlgebraicStructuresRing",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SheavesAlgebraicStructuresRingMorphism",
+  "file": "lean/Sheaf/CategoryTheory/SheavesAlgebraicStructuresRingMorphism.lean",
+  "declaration": "CategoryTheory.sheavesAlgebraicStructuresRing_morphism",
+  "statement": "theorem sheavesAlgebraicStructuresRing_morphism\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (F : Sheaf J CommRingCat.{max u v w} ⥤\n      CommRingObjCat (Sheaf J (Type (max u v w))))\n    (G : CommRingObjCat (Sheaf J (Type (max u v w))) ⥤\n      Sheaf J CommRingCat.{max u v w})\n    (hF : F ⋙ CommRingObjCat.forget _ =\n      sheafCompose J (forget CommRingCat.{max u v w}))\n    (_h₁ : G ⋙ sheafCompose J (forget CommRingCat.{max u v w}) =\n      CommRingObjCat.forget _)\n    (h₂ : F ⋙ G = 𝟭 (Sheaf J CommRingCat.{max u v w}))\n    (h₃ : G ⋙ F = 𝟭 (CommRingObjCat (Sheaf J (Type (max u v w))))) :\n    ∀ (A B : Sheaf J CommRingCat.{max u v w})\n      (α : (sheafCompose J (forget CommRingCat.{max u v w})).obj A ⟶\n        (sheafCompose J (forget CommRingCat.{max u v w})).obj B),\n      (∃ f : A ⟶ B, (sheafCompose J (forget CommRingCat.{max u v w})).map f = α) ↔\n        IsRingHom (show (F.obj A).X ⟶ (F.obj B).X from\n          (eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ∧\n        AddGrpObj.neg (X := (F.obj A).X) ≫\n            ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) =\n          ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ≫\n            AddGrpObj.neg (X := (F.obj B).X)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914403",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
