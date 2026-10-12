@@ -36,26 +36,35 @@ noncomputable def presheafFreeNerveComplex
   (AlgebraicTopology.alternatingFaceMapComplex _).obj
     (f.cechNerve ⋙ PresheafOfModules.free R)
 
-/-- The free module presheaf nerve is exact in positive degrees, for every map.
-Source: Stacks Project, Cohomology on Sites, Tags 03F5 and 03AT; Hypercoverings, 01GC.
-(blueprint: lem-sc-presheaf-free-nerve-exact)
+/-- Objectwise exactness of a complex of presheaf modules implies exactness.
+Source: Mathlib categorical exactness of jointly conservative evaluations.
+(blueprint: lem-sc-presheaf-free-nerve-exact-eval-glue)
+Proof: kernels and cokernels in presheaf module categories are computed objectwise,
+so the family of evaluation functors jointly reflects the zero homology condition. -/
+theorem exactAt_of_presheaf_evaluations
+    {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v})
+    (K : ChainComplex (PresheafOfModules.{v} R) ℕ) (a : ℕ)
+    (h : ∀ X : Cᵒᵖ, (((PresheafOfModules.evaluation R X).mapHomologicalComplex
+      (ComplexShape.down ℕ)).obj K).ExactAt a) : K.ExactAt a := by
+  sorry
 
-Proof: evaluate at any object X. Finite limits in the presheaf category are
-objectwise, so a basis element in degree n is an (n+1)-tuple of elements of
-P(X) with common image under f(X). Partition these tuples by that image.
-Replace the target of f(X) by its range, which leaves all these tuples and
-their deletion maps unchanged. The induced map to the range is surjective.
-Apply setCechNerve_free_resolution over R(X); its last conjunct gives exactness
-in every positive degree. Equivalently each nonempty fibre contracts by prefixing
-a chosen vertex; an empty fibre contributes the zero module. The identification
-commutes with the alternating deletion boundaries. Evaluation jointly reflects
-exactness in module presheaves (kernels and cokernels are computed objectwise),
-so the presheaf chain complex is exact in degree n+1. No natural choice of a
-vertex across X is needed, and all free modules have values in universe v. -/
+/-- Objectwise exactness of the evaluated free nerve.
+Source: Stacks Project, Tags 03F5 and 03AT.
+The evaluated complex is identified with the set Cech free resolution.
+(blueprint: lem-sc-presheaf-free-nerve-exact-eval)
+-/
+theorem presheafFreeNerveComplex_exactAt_eval
+    {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v})
+    (f : Arrow (Cᵒᵖ ⥤ Type v)) (n : ℕ) (X : Cᵒᵖ) :
+    (((PresheafOfModules.evaluation R X).mapHomologicalComplex
+      (ComplexShape.down ℕ)).obj (presheafFreeNerveComplex R f)).ExactAt (n + 1) := by
+  sorry
+
 theorem presheafFreeNerveComplex_exactAt
     {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v})
     (f : Arrow (Cᵒᵖ ⥤ Type v)) (n : ℕ) :
     (presheafFreeNerveComplex R f).ExactAt (n + 1) := by
-  sorry
+  apply exactAt_of_presheaf_evaluations R
+  exact presheafFreeNerveComplex_exactAt_eval R f n
 
 end CategoryTheory

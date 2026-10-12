@@ -1,0 +1,100 @@
+{
+ "id": "lem-sc-presheaf-free-nerve-exact-eval",
+ "kind": "statement",
+ "title": "Evaluated free nerve exactness",
+ "statement": "For every object X, evaluation of the free module presheaf nerve is exact in positive degrees.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03F5 and 03AT"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Identify the evaluated nerve with the set Cech nerve free resolution and apply its contraction theorem.",
+   "uses": [
+    "lem-weil-pbc-set-cech-nerve-free-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-set-cech-nerve-free-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03F5 and 03AT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "JointlyReflectIsomorphisms exactAt_iff",
+   "results": "Mathlib CategoryTheory.Functor.ReflectsIso.Exact",
+   "date": "2026-10-13",
+   "verdict": "categorical glue available but application remains open"
+  },
+  {
+   "tool": "leansearch",
+   "query": "JointlyReflectIsomorphisms.exactAt_iff",
+   "results": "exactAt_iff",
+   "date": "2026-10-13",
+   "verdict": "matches objectwise reflection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "objectwise exactness presheaf module complex",
+   "results": "no direct theorem",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.PresheafFreeNerveExact",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-presheaf-free-nerve-exact",
+   "place": "proof steps 1-2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.PresheafFreeNerveExact",
+  "file": "lean/Sheaf/CategoryTheory/Sites/PresheafFreeNerveExact.lean",
+  "declaration": "CategoryTheory.presheafFreeNerveComplex_exactAt_eval",
+  "statement": "theorem presheafFreeNerveComplex_exactAt_eval {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v}) (f : Arrow (Cᵒᵖ ⥤ Type v)) (n : ℕ) (X : Cᵒᵖ) : (((PresheafOfModules.evaluation R X).mapHomologicalComplex (ComplexShape.down ℕ)).obj (presheafFreeNerveComplex R f)).ExactAt (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T184322-L-4011232",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T184322-L-4011232",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
