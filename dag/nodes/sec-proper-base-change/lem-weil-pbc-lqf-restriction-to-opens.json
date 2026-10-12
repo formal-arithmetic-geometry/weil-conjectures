@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "*$f$ is locally of finite type.* Since $f$ is locally quasi-finite [pqf-def-quasifinite], it is locally of finite type by [lem-weil-pbc-lqf-locally-finite-type].",
+   "text": "Apply locallyOfFiniteType_of_isLocallyQuasiFinite to f and hf. The Mathlib instance instLocallyOfFiniteTypeResLE supplies LocallyOfFiniteType (f.resLE V U e).",
    "uses": [
     "pqf-def-quasifinite",
     "lem-weil-pbc-lqf-locally-finite-type"
@@ -38,78 +38,75 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, remark after Definition Tag 01TD, line 3558"
+    "place": "Remark following Definition Tag 01TD; finite type is local on source and target."
    }
   },
   {
-   "text": "*A small affine pair around a point.* Let $u\\in U$ and $s=f(u)$; then $s\\in V$ since $f(U)\\subseteq V$. By [lem-weil-pbc-affine-opens-basis] applied to $S$, the open $V$ and the point $s$, there is an open $V'\\subseteq S$ with $s\\in V'\\subseteq V$ whose open subscheme is affine, $V'\\cong\\operatorname{Spec}R'$ with $R'=\\mathcal O_S(V')$. The set $U\\cap f^{-1}(V')$ is open in $X$ ($f$ is continuous) and contains $u$; by [lem-weil-pbc-affine-opens-basis] applied to $X$ there is an open $U'\\subseteq X$ with $u\\in U'\\subseteq U\\cap f^{-1}(V')$ whose open subscheme is affine, $U'\\cong\\operatorname{Spec}A'$ with $A'=\\mathcal O_X(U')$ [def-weil-affine-spectrum]. Then $u\\in U'\\subseteq U$, $V'\\subseteq V$ and $f(U')\\subseteq V'$.",
-   "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "def-weil-affine-spectrum",
-    "def-pc-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01IT (lemma-basis-affine-opens), line 1952"
-   }
-  },
-  {
-   "text": "*$f$ is quasi-finite at $u$ on the pair $(U',V')$.* By [pqf-def-quasifinite] (2), $f$ is quasi-finite at $u$, and $f$ is locally of finite type (step 1). Let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the fibre of $f$ at $s$ with first projection $p$ [def-pc-scheme-fibre]. By [lem-weil-pbc-quasi-finite-at-point-isolated] (Stacks 01TH, (1) implies (2)) the unique point $\\xi\\in X_s$ with $p(\\xi)=u$ is isolated in $X_s$. Apply [lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs] (Stacks 01TH, (2) implies (4)) to $f$, the point $u$ and the affine opens $U'\\ni u$, $V'$ of step 2 with $f(U')\\subseteq V'$: the ring map $\\varphi':R'=\\mathcal O_S(V')\\to A'=\\mathcal O_X(U')$ induced by $f$ is of finite type and quasi-finite at the prime $\\mathfrak q'\\subset A'$ corresponding to $u$ [def-weil-pbc-ring-map-quasi-finite-at-prime].",
+   "text": "For x in the open subscheme U, apply quasiFiniteAtPoint_isolated_in_fiber to f at U.ι x using hf (U.ι x). Its first component is isolation in the scheme-theoretic fibre. Apply Mathlib Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber.mpr to obtain f.QuasiFiniteAt (U.ι x). The finite-type instance from step 1 is required here.",
    "uses": [
     "pqf-def-quasifinite",
     "def-pc-scheme-fibre",
-    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-weil-pbc-quasi-finite-at-point-isolated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 01TH, (1) implies (2)."
+   }
+  },
+  {
+   "text": "The restriction square resLE_comp_ι says f.resLE V U e ≫ V.ι = U.ι ≫ f. Rewriting with Mathlib Scheme.Hom.quasiFiniteAt_comp_iff (g := V.ι) and quasiFiniteAt_comp_iff_of_isOpenImmersion transfers f.QuasiFiniteAt (U.ι x) to (f.resLE V U e).QuasiFiniteAt x. Apply quasiFiniteAt_iff_isOpen_singleton_asFiber.mp for the restricted locally finite type morphism to recover isolation in its fibre. Both inclusions are open immersions; the target inclusion is therefore Mathlib LocallyQuasiFinite.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 01TH: isolation is unchanged by restriction to open subschemes; implemented by the cited proved Mathlib stalk-map criteria."
+   }
+  },
+  {
+   "text": "Inside the target open subscheme V choose an affine open V′ containing (f.resLE V U e) x by Mathlib exists_isAffineOpen_mem_and_subset applied to the top open. Inside the source open subscheme U choose an affine open U′ containing x and contained in the inverse image of V′ by a second application. Apply isQuasiFiniteAtPrime_of_isOpen_singleton_asFiber to f.resLE V U e, its isolated fibre point from step 3, and U′, V′. The output is the finite-type witness together with Algebra.IsQuasiFiniteAtPrime for its induced map on sections.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-affine-opens-basis",
     "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
     "def-weil-pbc-ring-map-quasi-finite-at-prime"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664: proof of (1) implies (2), lines 3684-3690, and of (2) implies (4), lines 3723-3726"
+    "place": "Lemma Tag 01TH, (2) implies (4); Schemes Tag 01IT for the affine neighbourhoods."
    }
   },
   {
-   "text": "*The same pair for $f|_U$.* The open subscheme structure of $U$ is $\\mathcal O_U=\\mathcal O_X|_U$ and that of $V$ is $\\mathcal O_V=\\mathcal O_S|_V$, and the inclusions $\\iota_U,\\iota_V$ are open immersions [def-weil-open-immersion] inducing the identity on sections over opens contained in $U$, resp. $V$. Hence $U'$, an open subset of $U$, has the same open subscheme $(U',\\mathcal O_X|_{U'})$ whether regarded in $U$ or in $X$, so it is an affine open of $U$ with $\\mathcal O_U(U')=A'$ and $u\\in U'$; likewise $V'$ is an affine open of $V$ with $\\mathcal O_V(V')=R'$ [def-weil-affine-spectrum]. As $\\iota_V\\circ f|_U=f\\circ\\iota_U$, the map $f|_U$ agrees with $f$ on underlying points, so $f|_U(U')=f(U')\\subseteq V'$, and the ring map $\\mathcal O_V(V')\\to\\mathcal O_U(U')$ induced by $f|_U$ equals the map $\\varphi':\\mathcal O_S(V')\\to\\mathcal O_X(U')$ induced by $f$ (compose with the identity maps on sections induced by $\\iota_U$, $\\iota_V$); the prime of $A'$ corresponding to $u$ is $\\mathfrak q'$ in both cases. By step 3, $\\varphi'$ is of finite type and quasi-finite at $\\mathfrak q'$, so the pair $(U',V')$ witnesses that $f|_U:U\\to V$ is quasi-finite at $u$ [pqf-def-quasifinite] (1).",
-   "uses": [
-    "def-weil-open-immersion",
-    "def-weil-affine-spectrum",
-    "pqf-def-quasifinite"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Definition Tag 01TD (definition-quasi-finite) (1), line 3538"
-   }
-  },
-  {
-   "text": "*Conclusion.* Since $u\\in U$ was arbitrary, $f|_U$ is quasi-finite at every point of $U$ (step 4), i.e. locally quasi-finite [pqf-def-quasifinite] (2).",
+   "text": "The opens U′ and V′, their affine proofs, membership of x, the containment U′ ≤ (f.resLE V U e)⁻¹(V′), and the ring-theoretic witness of step 4 are precisely the existential fields of IsQuasiFiniteAtPoint (f.resLE V U e) x. Abstract over arbitrary x to obtain IsLocallyQuasiFinite (f.resLE V U e).",
    "uses": [
     "pqf-def-quasifinite"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Definition Tag 01TD (definition-quasi-finite) (2), line 3538"
+    "place": "Definition Tag 01TD, parts (1) and (2)."
    }
   }
  ],
  "proof_deps": [
   "pqf-def-quasifinite",
   "lem-weil-pbc-lqf-locally-finite-type",
-  "lem-weil-pbc-affine-opens-basis",
-  "def-weil-affine-spectrum",
-  "def-pc-scheme",
   "def-pc-scheme-fibre",
   "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "def-weil-open-immersion",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-opens-basis",
   "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
-  "def-weil-pbc-ring-map-quasi-finite-at-prime",
-  "def-weil-open-immersion"
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, the chain (1) implies (2) implies (4) of its proof (lines 3684-3690, 3723-3726), applied to a pair of affine opens inside U and V; Definition Tag 01TD, line 3538, with the remark on line 3558; Schemes, Lemma Tag 01IT for the choice of the affine pair. Stacks has no separate lemma for the restriction; the assembly of these steps is written by the worker"
+  "place": "Tags 01TD and 01TH, (1) implies (2) implies (4), with Schemes Tag 01IT. C2 assembles the existing project lemmas using proved Mathlib pointwise stalk-map criteria to transport isolation across the restriction square, and applies the affine-pair theorem directly to the restricted morphism. Read online at https://stacks.math.columbia.edu/tag/01TH and https://stacks.math.columbia.edu/tag/01TD because the literature source files are absent on this machine."
  },
  "mathlib_searches": [
   {
@@ -192,5 +189,15 @@
   "group": "F1",
   "result": "pass",
   "note": "X S Scheme.{u}, f : X ⟶ S, hf = recorded Scheme.Hom.IsLocallyQuasiFinite (def, #check-resolved, not Mathlib LocallyQuasiFinite), U : X.Opens, V : S.Opens, f(U)⊆V as e : U ≤ f ⁻¹ᵁ V, f|_U = f.resLE V U e (resLE_comp_ι square, unique as V.ι mono), conclusion same predicate; no extra hypotheses"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T085219-L-5653",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -6763,3 +6763,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/C2/Sheaf.AlgebraicGeometry.AffineEtaleRestrictionLargeSets (stage 3; reviewer PASS; first push; landing 20261012T085218-L-5279 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/C2/Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality (stage 3; reviewer PASS; first push; landing 20261012T085219-L-5404 (interface); batch 20261012T085205; modules 4; new nodes 3)
 - 08:52 L: merged deliver/C2/Sheaf.AlgebraicGeometry.EtaleSetSectionLift (stage 3; reviewer PASS; first push; landing 20261012T085219-L-5531 (interface); batch 20261012T085205; modules 3; new nodes 2)
+- 08:52 L: merged deliver/C2/Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE (stage 3; reviewer PASS; first push; landing 20261012T085219-L-5653 (proof); batch 20261012T085205; modules 1; new nodes 0)

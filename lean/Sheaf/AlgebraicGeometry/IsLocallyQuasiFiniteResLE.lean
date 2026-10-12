@@ -6,10 +6,10 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
 import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
-import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Restriction of locally quasi-finite morphisms to open subschemes
@@ -35,20 +35,42 @@ The open immersions are `U.ι` and `V.ι`. The canonical restriction `f.resLE V 
 `f.resLE V U e ≫ V.ι = U.ι ≫ f` by `resLE_comp_ι`; uniqueness follows since `V.ι` is mono.
 
 Proof:
-1. By `lem-weil-pbc-lqf-locally-finite-type`, local quasi-finiteness implies that `f` is
-   locally of finite type (the remark following Stacks 01TD).
-2. For a point `x` of `U`, choose affine opens `V'` around `f x` inside `V`, and `U'` around
-   `x` inside `U ∩ f⁻¹(V')`, using `lem-weil-pbc-affine-opens-basis` (Stacks 01IT).
-3. By `lem-weil-pbc-quasi-finite-at-point-isolated`, `x` is isolated in its fibre. Apply
-   `lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs` to this affine pair to get
-   a finite-type ring map quasi-finite at the prime corresponding to `x` (Stacks 01TH).
-4. Open subschemes have the restricted structure sheaf, so the same affine pair has the
-   same rings of sections, induced ring map, and prime for `f.resLE V U e`. It therefore
-   witnesses `IsQuasiFiniteAtPoint (f.resLE V U e) x` by `pqf-def-quasifinite` (Stacks 01TD).
-5. Since `x` was arbitrary, `pqf-def-quasifinite` gives local quasi-finiteness. -/
+1. By `locallyOfFiniteType_of_isLocallyQuasiFinite`, `f` is locally of finite type;
+   Mathlib's restriction instance supplies the same property for `f.resLE V U e`.
+2. For a point `x` of `U`, `quasiFiniteAtPoint_isolated_in_fiber` gives isolation of
+   `U.ι x` in its fibre under `f`. Mathlib's `quasiFiniteAt_iff_isOpen_singleton_asFiber`
+   turns this into the stalk-map predicate `f.QuasiFiniteAt (U.ι x)`.
+3. Transfer this predicate across the two open immersions using
+   `quasiFiniteAt_comp_iff`, `resLE_comp_ι`, and
+   `quasiFiniteAt_comp_iff_of_isOpenImmersion`. The same fibre-isolation criterion,
+   now for the restricted locally finite type morphism, gives isolation at `x`.
+4. Choose an affine target neighbourhood of the image of `x` and an affine source
+   neighbourhood of `x` inside its inverse image using the affine-open basis (01IT).
+   Apply `isQuasiFiniteAtPrime_of_isOpen_singleton_asFiber` to the restricted morphism
+   and these opens. Its finite-type and quasi-finiteness witnesses give exactly
+   `IsQuasiFiniteAtPoint (f.resLE V U e) x` by Definition 01TD.
+5. Since `x` was arbitrary, Definition 01TD gives local quasi-finiteness. -/
 theorem isLocallyQuasiFinite_resLE {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S)
     (hf : IsLocallyQuasiFinite f) (U : X.Opens) (V : S.Opens) (e : U ≤ f ⁻¹ᵁ V) :
     IsLocallyQuasiFinite (f.resLE V U e) := by
-  sorry
+  have : AlgebraicGeometry.LocallyOfFiniteType f :=
+    locallyOfFiniteType_of_isLocallyQuasiFinite f hf
+  intro x
+  have hx : f.QuasiFiniteAt (U.ι x) :=
+    quasiFiniteAt_iff_isOpen_singleton_asFiber.mpr
+      (quasiFiniteAtPoint_isolated_in_fiber f (U.ι x) (hf (U.ι x))).1
+  have hx' : (f.resLE V U e).QuasiFiniteAt x := by
+    rwa [← quasiFiniteAt_comp_iff (g := V.ι), resLE_comp_ι,
+      quasiFiniteAt_comp_iff_of_isOpenImmersion]
+  have hisolated : IsOpen ({(f.resLE V U e).asFiber x} :
+      Set ((f.resLE V U e).fiber ((f.resLE V U e) x))) :=
+    quasiFiniteAt_iff_isOpen_singleton_asFiber.mp hx'
+  obtain ⟨V', hV', hyV', _⟩ := AlgebraicGeometry.exists_isAffineOpen_mem_and_subset
+    (X := V) (x := (f.resLE V U e) x) (U := ⊤) (by trivial)
+  obtain ⟨U', hU', hxU', hUV'⟩ := AlgebraicGeometry.exists_isAffineOpen_mem_and_subset
+    (X := U) (x := x) (U := (f.resLE V U e) ⁻¹ᵁ V') hyV'
+  exact ⟨U', hxU', hU', V', hV', hUV',
+    isQuasiFiniteAtPrime_of_isOpen_singleton_asFiber (f.resLE V U e) x hisolated
+      U' V' hU' hV' hxU' hUV'⟩
 
 end AlgebraicGeometry.Scheme.Hom
