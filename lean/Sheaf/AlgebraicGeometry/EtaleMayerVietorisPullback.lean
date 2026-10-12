@@ -7,14 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Restrict
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleCohomologyOpenRestrictionNaturality
+import Sheaf.AlgebraicGeometry.EtaleMayerVietorisConnectingPullback
 
 /-!
 # Pullback compatibility of the étale Mayer–Vietoris sequence
@@ -186,6 +180,28 @@ theorem etale_mayerVietoris_pullback
         pI q (rXIU q x.1 - rXIV q x.2)) ∧
     (∀ q : ℕ, ∀ x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} ((U ⊓ V).ι)).obj G) q,
       δY q (pI q x) = cohomologyMap g G (q + 1) (δX q x)) := by
-  sorry
+  obtain ⟨δX, δY, hX0, hX, hY0, hY, hδ⟩ :=
+    etale_mayerVietoris_connecting_pullback g U V hcover G
+  refine ⟨cohomologyMap U.ι G, cohomologyMap V.ι G,
+    openCohomologyRestriction (inf_le_left : U ⊓ V ≤ U) G,
+    openCohomologyRestriction (inf_le_right : U ⊓ V ≤ V) G,
+    cohomologyMap (g ⁻¹ᵁ U).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G),
+    cohomologyMap (g ⁻¹ᵁ V).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G),
+    openCohomologyRestriction (g.preimage_mono (inf_le_left : U ⊓ V ≤ U))
+      ((upperStar AddCommGrpCat.{u + 1} g).obj G),
+    openCohomologyRestriction (g.preimage_mono (inf_le_right : U ⊓ V ≤ V))
+      ((upperStar AddCommGrpCat.{u + 1} g).obj G),
+    openCohomologyPullback g U G, openCohomologyPullback g V G,
+    openCohomologyPullback g (U ⊓ V) G, δX, δY, ?_⟩
+  refine ⟨fun _ ↦ rfl, fun _ ↦ rfl, fun _ ↦ rfl, fun _ ↦ rfl,
+    fun _ ↦ rfl, fun _ ↦ rfl, fun _ ↦ rfl, fun _ ↦ rfl,
+    fun _ ↦ rfl, fun _ ↦ rfl, fun _ ↦ rfl, hX0, hX, hY0, hY, ?_, ?_, hδ⟩
+  · intro q x
+    exact ⟨openCohomologyPullback_restrict g U G q x,
+      openCohomologyPullback_restrict g V G q x⟩
+  · intro q x
+    rw [openCohomologyPullback_restriction g (inf_le_left : U ⊓ V ≤ U),
+      openCohomologyPullback_restriction g (inf_le_right : U ⊓ V ≤ V)]
+    exact (openCohomologyPullback g (U ⊓ V) G q).map_sub _ _ |>.symm
 
 end AlgebraicGeometry.Etale

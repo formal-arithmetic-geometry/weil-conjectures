@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-open-cohomology-restriction-naturality",
+ "kind": "statement",
+ "title": "Pullback commutes with cohomology restriction between nested opens",
+ "statement": "Let g:Y→X be a scheme morphism [def-pc-scheme], A≤B opens of X, G an abelian etale sheaf [def-weil-pbc-abelian-etale-sheaves], and q≥0. Write R_AB for cohomology pullback along A→B followed by the inverse composition comparison to G restricted to A [def-weil-pbc-cohomology-pullback, lem-weil-pbc-inverse-image-composition]; let R_AprimeBprime be the same map for g^{-1}A≤g^{-1}B and g^{-1}G. Write P_A and P_B for restricted pullback along g followed by the coefficient composition identifications. Then R_AprimeBprime(P_B(x))=P_A(R_AB(x)) for every x in H^q(B,G restricted to B), with no covering assumption.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01F7; agent-written nested-open consequence of pullback composition, using inverse-image comparison coherence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Write i:A→B, i_prime:g^{-1}A→g^{-1}B, a=g_A, b=g_B and c=i_prime ≫ b. Cancellation of the monomorphism B.ι, followed by the morphismRestrict_ι and homOfLE_ι identities, proves c=a ≫ i and (g^{-1}A).ι ≫ g=c ≫ B.ι.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any a,b,c with c=a≫b and coefficient maps l and k, cohomologyMap_map and composition functoriality identify H(k)∘a^*∘H(l)∘b^* with H(upperStarComp(a,b).hom ≫ a^*(l) ≫ k)∘c^*. The private helper writes this as four equalities using Sheaf.H.map_comp_apply.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use upperStarComp_hom_app_map_upperStarComp_inv_app for i_prime,b,B.ι, then map_upperStarComp_hom_app_upperStarComp_inv_app for i_prime,(g^{-1}B).ι,g. The composite coefficient map on the left reduces to upperStarComp(c,B.ι)^{-1} followed by upperStarComp((g^{-1}A).ι,g). For the right use upperStarComp_hom_app_map_upperStarComp_inv_app for a,i,B.ι and cancel upperStarComp(a,A.ι) with its inverse. The resulting coefficient maps coincide. These laws are the mate of associativity of the direct-image comparisons; their concrete Lean statements are proved in WeilConjectures.SixFunctors.BaseChange.Pasting.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-direct-image-composition-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the transported-composition helper to the two factorizations of c and rewrite their coefficient maps by the preceding equality. This is the claimed equality. The proof handles all degrees uniformly and adds no condition on A,B or g.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-direct-image-composition-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01F7; agent-written nested-open consequence of pullback composition, using inverse-image comparison coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback in etale sheaf cohomology commutes with restriction to nested opens; Mayer Vietoris connecting maps natural under morphisms of sites",
+   "results": "UNAVAILABLE: service returned Internal Server Error. Other kinds of search were used.",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of etale cohomology commutes with restriction between nested opens using upperStarComp; exact Mayer Vietoris sequences with connecting homomorphisms natural for pullback",
+   "results": "Scheme.Hom.resLE_map, Scheme.Hom.appLE_map; MayerVietorisSquare.shortComplex_exact, shortComplex_shortExact, shortComplex_f and shortComplex_g. These concern scheme structure sheaves or a single site, not the stated etale cohomology maps.",
+   "date": "2026-10-12",
+   "verdict": "No match for scheme pullback with the explicit coefficient-composition identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map_comp_apply",
+   "results": "Sheaf.H.map_comp_apply in Mathlib.CategoryTheory.Sites.SheafCohomology.Basic.",
+   "date": "2026-10-12",
+   "verdict": "Composition of coefficient maps only; an ingredient, not restriction/pullback compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "rg cohomology.*restriction|restriction.*cohomology|upperStarComp|mapFunctor in Mathlib/CategoryTheory/Sites/SheafCohomology and Mathlib/AlgebraicGeometry/Sites; rg theorem|lemma|def|naturality in SheafCohomology/MayerVietoris.lean; blueprint_refs.py search Mayer-Vietoris and restriction pullback",
+   "results": "MayerVietorisSquare.toBiprod, fromBiprod, delta and sequence_exact concern one square on one site. No naturality across schemes. No matching blueprint node (0 results for both searches). The source library has cohomologyMap_map and upperStarComp coherence, and the project has cohomologyPullbackFunctorial.",
+   "date": "2026-10-12",
+   "verdict": "Use the existing functoriality and coherence for ordinary squares; the connecting-map construction still needs its own bridge."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Mayer-Vietoris pullback compatibility used in step 5 of the injective restriction acyclicity proof; Pullback commutes with cohomology restriction between nested opens",
+   "via": [
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCohomologyOpenRestrictionNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCohomologyOpenRestrictionNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.openCohomologyPullback_restriction",
+  "statement": "theorem openCohomologyPullback_restriction {X Y : Scheme.{u}} (g : Y ⟶ X) {A B : X.Opens} (h : A ≤ B) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} B.ι).obj G) q) : openCohomologyRestriction (g.preimage_mono h) ((upperStar AddCommGrpCat.{u + 1} g).obj G) q (openCohomologyPullback g B G q x) = openCohomologyPullback g A G q (openCohomologyRestriction h G q x)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T053924-L-2632008",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T053924-L-2632008",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,183 @@
+{
+ "id": "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+ "kind": "statement",
+ "title": "Exact Mayer-Vietoris sequences with pullback-compatible connecting maps",
+ "statement": "Let g:Y→X be a scheme morphism [def-pc-scheme], U,V opens of X with U∪V=X, and G an abelian etale sheaf [def-weil-pbc-abelian-etale-sheaves]. Use cohomology pullback [def-weil-pbc-cohomology-pullback] with the coefficient composition comparisons [lem-weil-pbc-inverse-image-composition] for all restriction maps and for P_I on I=U∩V. There exist connecting homomorphisms delta_X^q:H^q(I,G restricted to I)→H^{q+1}(X,G) and delta_Y^q:H^q(g^{-1}I,(g^{-1}G) restricted to g^{-1}I)→H^{q+1}(Y,g^{-1}G) for all q≥0. On X and Y the restriction-to-two-opens map is injective in degree zero; restriction to the pair, difference of intersection restrictions, delta, and next-degree restriction are exact at each adjacent pair. Moreover delta_Y^q(P_I(x))=g^*(delta_X^q(x)). No ordinary restriction square is part of this statement. The intersection on Y is g^{-1}(U∩V), identified with g^{-1}U∩g^{-1}V.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof, short exact complexes of sections. Pullback compatibility is agent-written. Read at https://stacks.math.columbia.edu/tag/0A50 because the literature checkout is absent locally."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-open-cohomology-whole-restriction-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Choose nonnegative injective resolutions I of G and J of g^{-1}G. Enough injectives comes from the existing Grothendieck-abelian sheaf instance and the Mathlib enough-injectives theorem, not the module-sheaf enough-injectives statement. The source upperStar has proved PreservesFiniteLimits, PreservesFiniteColimits and Additive instances, hence carries the augmentation to a quasi-isomorphism. K-injectivity of J lifts the augmentation to beta:g^{-1}I→J. Any augmentation homotopy is zero since J^{-1}=0; thus beta respects the augmentations exactly.",
+   "uses": [
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the degreewise section sequences in the construction of Tag 0A50 for I on X and J on Y. For W=X,U,V,U∩V define phi_W=beta(g^{-1}W) after the unit on sections. The inverse-image opens are the fibre products; inverse image preserves U∪V=X and U∩V. Naturality of the unit and beta makes phi commute with both restriction maps, hence with their difference. This gives a morphism of short exact complexes with the same sign convention on both sides.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take homology of these short exact complexes. Their long exact sequences give all three exactness assertions and the initial degree-zero injections. HomologicalComplex.HomologySequence.delta_naturality gives compatibility of their connecting homomorphisms with H(phi_I) and H(phi_X).",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the Ext/global-sections comparison on these same injective resolutions: Hom from the constant integer sheaf identifies with sections by evaluation at 1. Under this identification a coefficient morphism acts by the lifted chain map. An Ext class represented as a cocycle is sent by the exact inverse-image functor to its inverse-image cocycle; precomposition with the constant-sheaf comparison is the adjunction unit on its representing section. Composing with beta identifies this with phi_X. On W, use the restricted injective resolutions and the identity lift of the coefficient comparison. The open-restriction pullback-unit identity identifies the section map with phi_W, so H(phi_W) is exactly restricted cohomologyMap followed by the coefficient composition comparison. This verifies the pullback compatibility of the Ext/derived-sections comparison, rather than assuming that bare existence of a natural isomorphism provides it.",
+   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-open-restriction-pullback-unit",
+    "lem-weil-pbc-inverse-image-composition",
+    "prop-weil-pbc-cohomology-resolution-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the exact sequences and delta_naturality along those additive identifications. The horizontal maps become precisely the prescribed restriction maps and their difference, and the vertical maps become g^* and P_I. Resolution independence eliminates all choices. When an open is empty or both are all of X these are split sequences with zero connecting maps; for identity g the same resolution can be used on both sides.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "prop-weil-pbc-cohomology-resolution-independent"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-open-restriction-pullback-unit",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-cohomology-resolution-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof, short exact complexes of sections. Pullback compatibility is agent-written. Read at https://stacks.math.columbia.edu/tag/0A50 because the literature checkout is absent locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback in etale sheaf cohomology commutes with restriction to nested opens; Mayer Vietoris connecting maps natural under morphisms of sites",
+   "results": "UNAVAILABLE: service returned Internal Server Error. Other kinds of search were used.",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of etale cohomology commutes with restriction between nested opens using upperStarComp; exact Mayer Vietoris sequences with connecting homomorphisms natural for pullback",
+   "results": "Scheme.Hom.resLE_map, Scheme.Hom.appLE_map; MayerVietorisSquare.shortComplex_exact, shortComplex_shortExact, shortComplex_f and shortComplex_g. These concern scheme structure sheaves or a single site, not the stated etale cohomology maps.",
+   "date": "2026-10-12",
+   "verdict": "No match for scheme pullback with the explicit coefficient-composition identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map_comp_apply",
+   "results": "Sheaf.H.map_comp_apply in Mathlib.CategoryTheory.Sites.SheafCohomology.Basic.",
+   "date": "2026-10-12",
+   "verdict": "Composition of coefficient maps only; an ingredient, not restriction/pullback compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "rg cohomology.*restriction|restriction.*cohomology|upperStarComp|mapFunctor in Mathlib/CategoryTheory/Sites/SheafCohomology and Mathlib/AlgebraicGeometry/Sites; rg theorem|lemma|def|naturality in SheafCohomology/MayerVietoris.lean; blueprint_refs.py search Mayer-Vietoris and restriction pullback",
+   "results": "MayerVietorisSquare.toBiprod, fromBiprod, delta and sequence_exact concern one square on one site. No naturality across schemes. No matching blueprint node (0 results for both searches). The source library has cohomologyMap_map and upperStarComp coherence, and the project has cohomologyPullbackFunctorial.",
+   "date": "2026-10-12",
+   "verdict": "Use the existing functoriality and coherence for ordinary squares; the connecting-map construction still needs its own bridge."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Mayer-Vietoris pullback compatibility used in step 5 of the injective restriction acyclicity proof; Exact Mayer-Vietoris sequences with pullback-compatible connecting maps",
+   "via": [
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisConnectingPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleMayerVietorisConnectingPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_mayerVietoris_connecting_pullback",
+  "statement": "theorem etale_mayerVietoris_connecting_pullback {X Y : Scheme.{u}} (g : Y ⟶ X) (U V : X.Opens) (hcover : U ⊔ V = ⊤) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : ∃ δX : ∀ q : ℕ, Sheaf.H ((upperStar AddCommGrpCat.{u + 1} ((U ⊓ V).ι)).obj G) q →+ Sheaf.H G (q + 1), ∃ δY : ∀ q : ℕ, Sheaf.H ((upperStar AddCommGrpCat.{u + 1} ((g ⁻¹ᵁ (U ⊓ V)).ι)).obj ((upperStar AddCommGrpCat.{u + 1} (g)).obj G)) q →+ Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (g)).obj G) (q + 1), Function.Injective (fun x : Sheaf.H G 0 => ((cohomologyMap U.ι G) 0 x, (cohomologyMap V.ι G) 0 x)) ∧ (∀ q : ℕ, Function.Exact (fun x : Sheaf.H G q => ((cohomologyMap U.ι G) q x, (cohomologyMap V.ι G) q x)) (fun x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (U.ι)).obj G) q × Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (V.ι)).obj G) q => (openCohomologyRestriction (inf_le_left : U ⊓ V ≤ U) G) q x.1 - (openCohomologyRestriction (inf_le_right : U ⊓ V ≤ V) G) q x.2) ∧ Function.Exact (fun x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (U.ι)).obj G) q × Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (V.ι)).obj G) q => (openCohomologyRestriction (inf_le_left : U ⊓ V ≤ U) G) q x.1 - (openCohomologyRestriction (inf_le_right : U ⊓ V ≤ V) G) q x.2) (δX q) ∧ Function.Exact (δX q) (fun x => ((cohomologyMap U.ι G) (q + 1) x, (cohomologyMap V.ι G) (q + 1) x))) ∧ Function.Injective (fun x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (g)).obj G) 0 => ((cohomologyMap (g ⁻¹ᵁ U).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G)) 0 x, (cohomologyMap (g ⁻¹ᵁ V).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G)) 0 x)) ∧ (∀ q : ℕ, Function.Exact (fun x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (g)).obj G) q => ((cohomologyMap (g ⁻¹ᵁ U).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q x, (cohomologyMap (g ⁻¹ᵁ V).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q x)) (fun x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} ((g ⁻¹ᵁ U).ι)).obj ((upperStar AddCommGrpCat.{u + 1} (g)).obj G)) q × Sheaf.H ((upperStar AddCommGrpCat.{u + 1} ((g ⁻¹ᵁ V).ι)).obj ((upperStar AddCommGrpCat.{u + 1} (g)).obj G)) q => (openCohomologyRestriction (g.preimage_mono (inf_le_left : U ⊓ V ≤ U)) ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q x.1 - (openCohomologyRestriction (g.preimage_mono (inf_le_right : U ⊓ V ≤ V)) ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q x.2) ∧ Function.Exact (fun x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} ((g ⁻¹ᵁ U).ι)).obj ((upperStar AddCommGrpCat.{u + 1} (g)).obj G)) q × Sheaf.H ((upperStar AddCommGrpCat.{u + 1} ((g ⁻¹ᵁ V).ι)).obj ((upperStar AddCommGrpCat.{u + 1} (g)).obj G)) q => (openCohomologyRestriction (g.preimage_mono (inf_le_left : U ⊓ V ≤ U)) ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q x.1 - (openCohomologyRestriction (g.preimage_mono (inf_le_right : U ⊓ V ≤ V)) ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q x.2) (δY q) ∧ Function.Exact (δY q) (fun x => ((cohomologyMap (g ⁻¹ᵁ U).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G)) (q + 1) x, (cohomologyMap (g ⁻¹ᵁ V).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G)) (q + 1) x))) ∧ (∀ q : ℕ, ∀ x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} ((U ⊓ V).ι)).obj G) q, δY q ((openCohomologyPullback g (U ⊓ V) G) q x) = cohomologyMap g G (q + 1) (δX q x))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T053924-L-2632008",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T053924-L-2632008",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
