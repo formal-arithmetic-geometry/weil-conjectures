@@ -17,16 +17,30 @@
  },
  "proof": [
   {
-   "text": "Send op i to the presentation T₀ of F i, and f.op to its pullback map M.\nThe identities and composition laws for M, transported through the displayed\ncanonical inverse-image isomorphisms, give the functor laws. The maps induced by\n(c.π.app i, (eG i).inv followed by the cocone leg) form a compatible cocone: use\nhG and the cocone equation, and then the composition law. Reindex every page\ncomplex through the coordinate-swap equivalence (x,y) ↦ (y,x); the differential\nvector becomes (1-r,r). Transport the successive homology isomorphisms through\nthis equivalence. Evaluation in a swapped bidegree gives pageIso and pageIsoLimit,\nand transport of page morphisms gives their two naturality equations. The global\nfirst-page equation hfirst supplies the ordinary cohomology dictionaries and their\nnaturality; the presentation's negative-degree vanishing supplies the two negative\nresolution-degree statements. No stabilization or filtration comparison is used.",
+   "text": "Apply the supplied page-map coherence lemma for identity, composition and cocone laws. Construct the unswapped functor R explicitly from T0 and M, using these laws.",
+   "uses": [
+    "lem-weil-pbc-etale-page-map-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the coordinate swap embedding of up(1-r,r) into up(r,1-r). Restrict every page and page morphism. Use Mathlib restrictionHomologyIso and prove its naturality by cancelling homology pi and cycle inclusions. These constructions give a spectral-sequence swap functor. Compose R with it, and restrict the explicit vertex sequence and comparison maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The restricted page objects and page-map components are definitionally the original objects and components in the swapped bidegree. Use the supplied firstPageIso and hfirst for both first-page equations, the presentation negative field for vanishing, and identity isomorphisms for pageIso and pageIsoLimit. The two page naturality equations reduce to identity composition and reflexivity.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-etale-page-map-coherence"
+ ],
  "proof_origin": {
-  "by": "worker P3",
-  "document": "Stacks Project, Tags 015J and 0EZM",
-  "place": "Detailed decomposition of the existing uniform-pages plan"
+  "by": "worker P1",
+  "document": "Stacks Project, Tags 015J, 015K and 0EZM",
+  "place": "Explicit coordinate-swap restriction construction; scheme coherence split off separately."
  },
  "mathlib_searches": [
   {
@@ -108,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P3",
+  "reviewer": "X-744c5",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T184329-L-4014370",
+  "landing": "20261012T220523-L-1394619",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered modules and direct importer compile; target signature, DAG, proof, imports, and documented residual sorry satisfy the review brief."
  }
 }

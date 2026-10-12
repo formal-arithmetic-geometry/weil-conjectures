@@ -5,12 +5,9 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-public import Mathlib.Algebra.Homology.SpectralSequence.Basic
-public import Mathlib.Algebra.Category.Grp.Abelian
-public import Mathlib.Algebra.Category.Grp.Colimits
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
+import Mathlib.Algebra.Homology.Embedding.RestrictionHomology
+import Sheaf.AlgebraicGeometry.EtalePageMapCoherence
 /-! # Coordinate-swapped diagram of functorial hypercohomology pages
 
 Source: Stacks Project, Tags 015J and 0EZM.
@@ -24,6 +21,86 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
+
+/-- Swapping bidegrees interchanges the differential vectors. -/
+private def swapEmbedding (r : ℤ) :
+    (ComplexShape.up' ((1 - r, r) : ℤ × ℤ)).Embedding
+      (ComplexShape.up' ((r, 1 - r) : ℤ × ℤ)) :=
+  ComplexShape.Embedding.mk' _ _ Prod.swap Prod.swap_injective (by
+    intro i j
+    change i + (1 - r, r) = j ↔ i.swap + (r, 1 - r) = j.swap
+    constructor <;> intro h
+    · simpa using congrArg Prod.swap h
+    · simpa using congrArg Prod.swap h)
+
+private instance (r : ℤ) : (swapEmbedding r).IsRelIff := by
+  unfold swapEmbedding
+  infer_instance
+
+/-- The restriction homology isomorphism for the coordinate swap. -/
+private noncomputable def swapHomologyIso
+    (r : ℤ) (K : HomologicalComplex AddCommGrpCat.{u + 1}
+      (ComplexShape.up' ((r, 1 - r) : ℤ × ℤ))) (j : ℤ × ℤ) :
+    (K.restriction (swapEmbedding r)).homology j ≅ K.homology j.swap :=
+  K.restrictionHomologyIso (swapEmbedding r)
+    (j - (1 - r, r)) j (j + (1 - r, r))
+    (ComplexShape.prev_eq' _ (by simp [ComplexShape.up', sub_add_cancel]))
+    (ComplexShape.next_eq' _ rfl) rfl rfl rfl
+    (ComplexShape.prev_eq' _ (by ext <;> simp [ComplexShape.up', swapEmbedding,
+      ComplexShape.Embedding.mk']))
+    (ComplexShape.next_eq' _ (by rfl))
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem swapHomologyIso_naturality
+    (r : ℤ) (K L : HomologicalComplex AddCommGrpCat.{u + 1}
+      (ComplexShape.up' ((r, 1 - r) : ℤ × ℤ))) (f : K ⟶ L) (j : ℤ × ℤ) :
+    HomologicalComplex.homologyMap (HomologicalComplex.restrictionMap f
+      (swapEmbedding r)) j ≫ (swapHomologyIso r L j).hom =
+      (swapHomologyIso r K j).hom ≫ HomologicalComplex.homologyMap f j.swap := by
+  rw [← cancel_epi ((K.restriction (swapEmbedding r)).homologyπ j)]
+  simp only [HomologicalComplex.homologyπ_naturality_assoc,
+    swapHomologyIso, HomologicalComplex.homologyπ_restrictionHomologyIso_hom,
+    HomologicalComplex.homologyπ_restrictionHomologyIso_hom_assoc]
+  erw [HomologicalComplex.homologyπ_naturality f j.swap]
+  simp only [← Category.assoc]
+  apply congrArg (fun t => t ≫ L.homologyπ j.swap)
+  rw [← cancel_mono (L.iCycles j.swap)]
+  simp only [Category.assoc]
+  erw [HomologicalComplex.restrictionCyclesIso_hom_iCycles,
+    HomologicalComplex.cyclesMap_i]
+  erw [HomologicalComplex.cyclesMap_i f j.swap,
+    HomologicalComplex.restrictionCyclesIso_hom_iCycles_assoc]
+  simp only [HomologicalComplex.restrictionXIso, HomologicalComplex.restrictionMap_f,
+    eqToIso_refl, Iso.refl_hom, Category.id_comp]
+  rfl
+
+/-- Reindex every page, and transport the successive homology isomorphisms. -/
+private noncomputable def swapSequence
+    (E : CohomologicalSpectralSequence AddCommGrpCat.{u + 1} 1) :
+    SpectralSequence AddCommGrpCat.{u + 1}
+      (fun r ↦ ComplexShape.up' ((1 - r, r) : ℤ × ℤ)) 1 where
+  page r hr := (E.page r hr).restriction (swapEmbedding r)
+  iso r r' j h hr := swapHomologyIso r (E.page r hr) j ≪≫ E.iso r r' j.swap h hr
+
+/-- Restrict page maps along the coordinate swap. -/
+private noncomputable def swapSequenceMap
+    {E E' : CohomologicalSpectralSequence AddCommGrpCat.{u + 1} 1} (f : E ⟶ E') :
+    swapSequence E ⟶ swapSequence E' where
+  hom r hr := HomologicalComplex.restrictionMap (f.hom r hr) (swapEmbedding r)
+  comm r r' j h hr := by
+    dsimp [swapSequence]
+    rw [← Category.assoc, swapHomologyIso_naturality, Category.assoc, f.comm r r' j.swap h hr]
+    rfl
+
+/-- The coordinate swap is functorial on spectral sequences. -/
+private noncomputable def swapSequenceFunctor :
+    CohomologicalSpectralSequence AddCommGrpCat.{u + 1} 1 ⥤
+      SpectralSequence AddCommGrpCat.{u + 1}
+        (fun r ↦ ComplexShape.up' ((1 - r, r) : ℤ × ℤ)) 1 where
+  obj := swapSequence
+  map := swapSequenceMap
+  map_id E := by apply SpectralSequence.hom_ext; intros; rfl
+  map_comp f g := by apply SpectralSequence.hom_ext; intros; rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 1000000 in
@@ -158,6 +235,43 @@ theorem exists_etaleComplex_page_diagram
         ((v (op i)).hom r hr).f ⟨p - q, q⟩ ≫ (pageIsoLimit r hr).hom =
           (pageIso i r hr).hom ≫
             ((M (c.π.app i) ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩
-              ((eG i).inv ≫ L.ι.app (op i))).hom r hr).f ⟨q, p - q⟩) := by sorry
+              ((eG i).inv ≫ L.ι.app (op i))).hom r hr).f ⟨q, p - q⟩) := by
+  obtain ⟨hmid, hmcomp, hmcone⟩ := etale_page_map_coherence D c F φ hidentity
+    hcomposition G eG hG L hFK hLK T₀ M hid hcomp
+  let R : Iᵒᵖ ⥤ CohomologicalSpectralSequence AddCommGrpCat.{u + 1} 1 :=
+    { obj i := (T₀ (D.obj i.unop) ⟨F i.unop, hFK i.unop⟩).sequence
+      map {i j} f := M (D.map f.unop) ⟨F i.unop, hFK i.unop⟩
+        ⟨F j.unop, hFK j.unop⟩ (φ f.unop)
+      map_id i := hmid i.unop
+      map_comp {i j k} f g := hmcomp i.unop j.unop k.unop f.unop g.unop }
+  let E := R ⋙ swapSequenceFunctor
+  let E' := swapSequence (T₀ c.pt ⟨L.pt, hLK⟩).sequence
+  let v : ∀ i : Iᵒᵖ, E.obj i ⟶ E' := fun i =>
+    swapSequenceMap (M (c.π.app i.unop) ⟨F i.unop, hFK i.unop⟩ ⟨L.pt, hLK⟩
+      ((eG i.unop).inv ≫ L.ι.app i))
+  refine ⟨E, E', v, ?_,
+    (fun i r s => (T₀ (D.obj i) ⟨F i, hFK i⟩).firstPageIso r s),
+    (fun r s => (T₀ c.pt ⟨L.pt, hLK⟩).firstPageIso r s),
+    ?_, ?_, ?_, ?_,
+    (fun i r hr => Iso.refl _), (fun r hr => Iso.refl _), ?_, ?_⟩
+  · intro i j f
+    change swapSequenceMap _ ≫ swapSequenceMap _ = swapSequenceMap _
+    have hh := congrArg swapSequenceMap (hmcone i.unop j.unop f.unop)
+    exact hh
+  · intro i j f r s
+    exact hfirst (D.map f) ⟨F i, hFK i⟩ ⟨F j, hFK j⟩ (φ f) r s
+  · intro i r s
+    exact hfirst (c.π.app i) ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩
+      ((eG i).inv ≫ L.ι.app (op i)) r s
+  · intro i r s hr
+    exact (T₀ (D.obj i.unop) ⟨F i.unop, hFK i.unop⟩).negative s r hr
+  · intro r s hr
+    exact (T₀ c.pt ⟨L.pt, hLK⟩).negative s r hr
+  · intro i j f r hr
+    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+    rfl
+  · intro i r hr
+    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+    rfl
 
 end AlgebraicGeometry.Etale
