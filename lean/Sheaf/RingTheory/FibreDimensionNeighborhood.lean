@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
 import Sheaf.Topology.DimensionSupremumLocalDimensions
+import Sheaf.RingTheory.FibreDimensionLocalizedBound
 
 /-!
 # A principal neighbourhood bounding all fibre dimensions
@@ -64,6 +65,14 @@ theorem exists_away_fibre_dimension_le
           Nontrivial (p'.asIdeal.Fiber (Localization.Away g)) →
             topologicalKrullDim (PrimeSpectrum (p'.asIdeal.Fiber (Localization.Away g))) ≤
               (d : WithBot ℕ∞) := by
-  sorry
+  dsimp
+  intro hd
+  obtain ⟨V, hVopen, hqV, hdim⟩ := fibre_dimension_bounded_open_upstairs q d hd
+  obtain ⟨b, ⟨g, rfl⟩, hqg, hgV⟩ :=
+    PrimeSpectrum.isTopologicalBasis_basic_opens.exists_subset_of_mem_open hqV hVopen
+  refine ⟨g, ?_, ?_⟩
+  · simpa [PrimeSpectrum.mem_basicOpen] using hqg
+  · exact localized_fibre_dimension_le_of_basicOpen g d (fun q' hq' ↦
+      hdim q' (hgV hq'))
 
 end Algebra

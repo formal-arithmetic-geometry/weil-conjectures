@@ -33,71 +33,36 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-fibre-dimension-bounded-open-upstairs] to $R\\to S$, $\\mathfrak q$ and $d$. Its definition of relative dimension is precisely the dimension of $\\operatorname{Spec}(S\\otimes_R\\kappa(\\mathfrak p))$ at the kernel specified in our statement. It gives an open neighbourhood $V$ of $\\mathfrak q$ such that every $\\mathfrak q'\\in V$ has fibre dimension at most $d$. By part (i) of [lem-weil-pbc-spec-localization-away-basic-open], choose $g\\in S$ with $\\mathfrak q\\in D(g)\\subseteq V$. Thus $g\\notin\\mathfrak q$.",
+   "text": "Apply the bounded-open fibre-dimension theorem to obtain an open neighbourhood V of q on which every local fibre dimension is at most d. Use the basic-open topological basis to choose g with q in D(g) contained in V, hence g is not in q.",
    "uses": [
-    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
-    "lem-weil-pbc-spec-localization-away-basic-open"
+    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs); the principal-open choice in Tag 00ST (lemma-localize-relative-complete-intersection), proof (3)"
+    "place": "Tag 00QH and Tag 00ST, proof (3)"
    }
   },
   {
-   "text": "Fix any prime $\\mathfrak p'\\subset R$. Set $F'=S\\otimes_R\\kappa(\\mathfrak p')$, $\\bar g=g\\otimes1$ and $H=S_g\\otimes_R\\kappa(\\mathfrak p')$. By [lem-weil-pbc-algebra-localization-away-base-change], $H\\cong F'_{\\bar g}$, compatibly with $s\\otimes a\\mapsto (s/1)\\otimes a$. By part (ii) of [lem-weil-pbc-spec-localization-away-basic-open], $\\operatorname{Spec}H$ is therefore homeomorphic to the open subspace $O=D(\\bar g)\\subseteq\\operatorname{Spec}F'$. A ring isomorphism induces inverse continuous spectrum maps by [def-weil-affine-spectrum].",
+   "text": "Apply the localized fibre comparison theorem to g and d; its hypothesis follows from the bound on V and D(g) subset V, yielding the required bound for every nonempty localized fibre.",
    "uses": [
-    "lem-weil-pbc-algebra-localization-away-base-change",
-    "lem-weil-pbc-spec-localization-away-basic-open",
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-fibre-dimension-neighborhood-localized-bound"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Tags 00DK (lemma-tensor-localization), 00DL (lemma-tensor-product-localization) and 00E4 (lemma-standard-open), spelling out the fibres of the principal localization in 00ST (3)"
-   }
-  },
-  {
-   "text": "For any $\\mathfrak Q'\\in O$, [lem-weil-pbc-fibre-ring-primes-bijection] identifies its inverse image $\\mathfrak q'\\subset S$ as a prime lying over $\\mathfrak p'$, with $\\mathfrak Q'$ equal to the kernel of $F'\\to\\kappa(\\mathfrak q')$. As $\\bar g\\notin\\mathfrak Q'$, one has $g\\notin\\mathfrak q'$, so $\\mathfrak q'\\in D(g)\\subseteq V$. Step 1 gives $\\dim_{\\mathfrak Q'}\\operatorname{Spec}F'\\le d$. By [lem-weil-pbc-dimension-at-point-open-subspace], $\\dim_{\\mathfrak Q'}O=\\dim_{\\mathfrak Q'}\\operatorname{Spec}F'\\le d$.",
-   "uses": [
-    "lem-weil-pbc-fibre-ring-primes-bijection",
-    "lem-weil-pbc-dimension-at-point-open-subspace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Tag 00E6 (remark-fundamental-diagram); Topology Definition 0055 (definition-Krull) and its following remark"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-dimension-supremum-local-dimensions] to $O$. Step 3 bounds every term of the supremum by $d$, hence $\\dim O\\le d$. The homeomorphism of Step 2 preserves Krull dimension: it takes irreducible closed subsets to irreducible closed subsets and its inverse does the same, preserving strict inclusions and hence the lengths of all chains in [def-kun-topological-krull-dimension]. Therefore $\\dim\\operatorname{Spec}H=\\dim O\\le d$. This proves the requested bound whenever $H\\ne0$. If $O$ is empty, its dimension and the supremum over its points are both $-\\infty$, so no nonemptiness assumption was needed for the inequality.",
-   "uses": [
-    "lem-weil-pbc-dimension-supremum-local-dimensions",
-    "def-kun-topological-krull-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Tag 0B7I (lemma-dimension-supremum-local-dimensions) and Definition 0055 (definition-Krull)"
+    "place": "Tags 00DK, 00DL and 00E4, used in Tag 00ST proof (3)"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
-  "lem-weil-pbc-spec-localization-away-basic-open",
-  "lem-weil-pbc-algebra-localization-away-base-change",
-  "def-weil-affine-spectrum",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-fibre-ring-primes-bijection",
-  "lem-weil-pbc-dimension-at-point-open-subspace",
-  "lem-weil-pbc-dimension-supremum-local-dimensions",
-  "def-kun-topological-krull-dimension"
+  "lem-weil-pbc-fibre-dimension-neighborhood-localized-bound"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00ST (lemma-localize-relative-complete-intersection), proof (3), with 00QH and explicit principal-open/localized-fibre/supremum details from Topology 0B7I"
+  "place": "Tag 00ST (3), using Tag 00QH and the localized-fibre comparison in Tags 00DK, 00DL and 00E4"
  },
  "mathlib_searches": [
   {
@@ -203,5 +168,15 @@
   "group": "F1",
   "result": "pass",
   "note": "R,S CommRing+Algebra (indep universes), [Algebra.FiniteType R S], q:PrimeSpectrum S, p=comap, Q=preimageEquivFiber R S p <q,rfl> (ring-level, kernel of kappa(p)⊗S→kappa(q), tensor swap of node's F), topologicalKrullDimAt Q = d (d:N), ∃ g∉q, ∀ p', Nontrivial (p'.Fiber (Away g)) → topologicalKrullDim Spec ≤ d; #check confirmed names; matches landed consumer EquationCountFibreDimensionFlat"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T194150-L-468048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
