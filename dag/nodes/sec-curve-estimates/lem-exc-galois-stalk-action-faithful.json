@@ -1,0 +1,114 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QT and 04JM, theorem-equivalence-sheaves-point and direct proof of lemma-global-sections-point"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "lem-exc-galois-stalk-action-faithful",
+ "title": "Faithfulness of the geometric stalk functor over a field",
+ "statement": "For any field K and algebraically closed K-extension Omega, the geometric stalk functor on Type max(u+1,v)-valued etale sheaves is faithful.",
+ "proof": [
+  {
+   "text": "For each point of an etale object lift it to Omega with exists_fac_of_etale_of_isSepClosed. Equality of stalk maps gives equal germs. Point.toPresheafFiber_eq_iff' supplies a pointed refinement with equal restricted sections. Factor that refinement through an arrow of the equalizer sieve written as ofArrows. Its image contains the original point, so ofArrows_mem_smallEtaleTopology_iff makes this sieve covering. Sheaf.isSeparated gives equality of the section values; hom extensionality proves equality of morphisms.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QT and 04JM, theorem-equivalence-sheaves-point and direct proof of lemma-global-sections-point"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "geometric stalk functor on etale sheaves over a field is faithful and equivariant stalk maps reconstruct sheaf morphisms",
+   "results": "['AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec', 'smoothSheafCommRing.ι_forgetStalk_hom', 'smoothSheafCommRing.ι_forgetStalk_hom_apply', 'AlgebraicGeometry.stalkMap_toStalk_apply', 'AlgebraicGeometry.stalkMap_toStalk', 'AlgebraicGeometry.LocallyRingedSpace.stalkMap_germ_apply', 'AlgebraicGeometry.Scheme.stalkMap_germ_apply', 'AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply']",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext",
+   "results": "['CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext']",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*Faithful|germ.*[Ii]njective|stalk.*fully.*faithful",
+   "results": "['Mathlib/AlgebraicGeometry/FunctionField.lean', 'Mathlib/AlgebraicGeometry/FunctionField.lean', 'Mathlib/AlgebraicGeometry/FunctionField.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean']",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale sheaves over a field geometric stalk functor is faithful",
+   "results": "[]",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisStalkActionFullyFaithful",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, reconstruction and uniqueness of morphisms from invariant sections",
+   "via": [
+    "lem-exc-galois-stalk-action-fully-faithful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GaloisStalkActionFaithful",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisStalkActionFaithful.lean",
+  "declaration": "AlgebraicGeometry.Scheme.field_sheafFiber_faithful",
+  "statement": "theorem field_sheafFiber_faithful (K Ω : Type u) [Field K] [Field Ω]\n    [Algebra K Ω] [IsAlgClosed Ω] :\n    ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber\n      (A := Type (max (u + 1) v))).Faithful",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T095857-L-314664",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T095857-L-314664",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

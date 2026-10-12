@@ -1,0 +1,116 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QT and 04JM, theorem-equivalence-sheaves-point and direct proof of lemma-global-sections-point"
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "lem-exc-galois-stalk-action-functor"
+ ],
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "lem-exc-galois-stalk-action-full",
+ "title": "Full of canonical Galois stalk functor",
+ "statement": "Let $K,K_s,\\Omega$ be fields in $\\mathrm{Type}\\,u$, with compatible algebra structures $K\\to K_s\\to\\Omega$, $K_s$ a separable closure of $K$ [def-pd-separable-closure], and $\\Omega$ algebraically closed. Let $J$ be the small etale topology on $\\operatorname{Spec}K$ [def-weil-pbc-etale-sheaves], let $p$ be the point defined by $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$, and let $p^*$ be its set-valued geometric stalk functor [def-weil-pbc-geometric-stalks]. Put $G=\\operatorname{Gal}(K_s/K)$ with the Krull topology and $w=\\max(u+1,v)$. Let $U$ be the forgetful functor from discrete continuous $G$-sets in $\\mathrm{Type}\\,w$ to sets. Let $T:\\operatorname{Sh}(J,\\mathrm{Type}\\,w)\\to\\operatorname{DiscreteContAction}(\\mathrm{Type}\\,w,G)$ be a functor, and $j:T\\circ U\\cong p^*$ a natural isomorphism satisfying the canonical germ formula. The canonical germ formula is: for a sheaf $F$, $g\\in G$, a $K$-automorphism $\\tau$ of $\\Omega$ with $\\tau\\circ i=i\\circ g$ for the embedding $i:K_s\\to\\Omega$, an etale $K$-scheme $X$, lifts $x,x^{\\prime}:\\operatorname{Spec}\\Omega\\to X$ over $K$ with $x^{\\prime}=x\\circ\\operatorname{Spec}\\tau$, and $z\\in F(X)$, $j_F(g\\cdot j_F^{-1}(\\operatorname{germ}_x z))=\\operatorname{germ}_{x^{\\prime}}z$. Then $T$ is full.",
+ "proof": [
+  {
+   "text": "Let A be the subfield of Omega algebraic over K. It is algebraically closed and every pointed etale neighbourhood factors uniquely through Spec A by finite separability of its residue field. The resulting natural identifications of germs transport the invariant-section bijections to Omega. The canonical germ formula identifies the action transported by j with this action. Over every finite separable intermediate field, an equivariant map restricts to a map of invariant sets, hence to a map of sections. Embedding compatibility makes these maps natural. Every etale scheme is a disjoint union of finite separable components; the sheaf condition extends these maps uniquely to the product of their section sets. These section maps constitute a sheaf morphism. Every germ has a representative on a component, so the stalk map is the specified equivariant map. Naturality of j then identifies its T image with that map, giving fullness. Empty schemes use the empty product.",
+   "uses": [
+    "lem-exc-field-sections-stalk-invariants",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-field-sections-stalk-invariants",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QT and 04JM, theorem-equivalence-sheaves-point and direct proof of lemma-global-sections-point"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "geometric stalk functor on etale sheaves over a field is faithful and equivariant stalk maps reconstruct sheaf morphisms",
+   "results": "['AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec', 'smoothSheafCommRing.ι_forgetStalk_hom', 'smoothSheafCommRing.ι_forgetStalk_hom_apply', 'AlgebraicGeometry.stalkMap_toStalk_apply', 'AlgebraicGeometry.stalkMap_toStalk', 'AlgebraicGeometry.LocallyRingedSpace.stalkMap_germ_apply', 'AlgebraicGeometry.Scheme.stalkMap_germ_apply', 'AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply']",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext",
+   "results": "['CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext']",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*Faithful|germ.*[Ii]njective|stalk.*fully.*faithful",
+   "results": "['Mathlib/AlgebraicGeometry/FunctionField.lean', 'Mathlib/AlgebraicGeometry/FunctionField.lean', 'Mathlib/AlgebraicGeometry/FunctionField.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean']",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale sheaves over a field geometric stalk functor is faithful",
+   "results": "[]",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisStalkActionFullyFaithful",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, reconstruction and uniqueness of morphisms from invariant sections",
+   "via": [
+    "lem-exc-galois-stalk-action-fully-faithful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GaloisStalkActionFull",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisStalkActionFull.lean",
+  "declaration": "AlgebraicGeometry.Scheme.galoisStalkActionFunctor_full",
+  "statement": "theorem galoisStalkActionFunctor_full\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω] :\n    let S := Spec (.of K); let J := S.smallEtaleTopology\n    let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω)); let p := pointSmallEtale s\n    let G := Gal(Ks/K); let V := ObjectProperty.ι (ContAction.IsDiscrete\n      (V := Type (max (u + 1) v)) (G := G)) ⋙ ObjectProperty.ι (Action.IsContinuous\n      (V := Type (max (u + 1) v)) (G := G))\n    ∀ (T : Sheaf J (Type (max (u + 1) v)) ⥤ DiscreteContAction (Type (max (u + 1) v)) G)\n      (j : T ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber),\n      (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G) (τ : Ω ≃ₐ[K] Ω)\n          (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω))\n          (X : S.Etale) (x x' : p.fiber.obj X)\n          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n          (z : F.obj.obj (op X)),\n        (j.hom.app F) ((T.obj F).obj.obj.ρ g ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) =\n          p.toPresheafFiber X x' F.obj z) → T.Full",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T095857-L-314664",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T095857-L-314664",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

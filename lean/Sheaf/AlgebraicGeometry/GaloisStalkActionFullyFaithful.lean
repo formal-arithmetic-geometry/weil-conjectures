@@ -7,8 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
-import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
-import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
+import Sheaf.AlgebraicGeometry.GaloisStalkActionFull
+import Sheaf.AlgebraicGeometry.GaloisStalkActionFaithful
 
 /-!
 # Full faithfulness of the canonical Galois stalk functor
@@ -24,6 +24,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Tags 03QT and 04JM, theorem-equivalence-sheaves-point
 and the direct proof of lemma-global-sections-point.
 (blueprint: lem-exc-galois-stalk-action-fully-faithful).
@@ -79,6 +80,12 @@ theorem galoisStalkActionFunctor_full_faithful
         (j.hom.app F) ((T.obj F).obj.obj.ρ g
           ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) =
             p.toPresheafFiber X x' F.obj z) →
-      T.Full ∧ T.Faithful := by sorry
+      T.Full ∧ T.Faithful := by
+  dsimp only
+  intro T j hj
+  refine ⟨galoisStalkActionFunctor_full.{u, v} K Ks Ω T j hj, ?_⟩
+  let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
+  have : p.sheafFiber.Faithful := field_sheafFiber_faithful.{u, v} K Ω
+  exact Functor.Faithful.of_comp_iso j
 
 end AlgebraicGeometry.Scheme

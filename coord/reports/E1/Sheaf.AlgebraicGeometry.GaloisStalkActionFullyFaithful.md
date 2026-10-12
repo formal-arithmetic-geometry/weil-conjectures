@@ -1,0 +1,25 @@
+## What changed
+The target is proved by separately applying fullness reconstruction and faithfulness from stalk separation. Its statement is unchanged. Two strict subclaims are exposed in new modules.
+
+## Proved and sorry left
+Closed `AlgebraicGeometry.Scheme.galoisStalkActionFunctor_full_faithful`, one of one original holes. Added one hole: `AlgebraicGeometry.Scheme.galoisStalkActionFunctor_full` (lem-exc-galois-stalk-action-full). Proved `AlgebraicGeometry.Scheme.field_sheafFiber_faithful` without sorry. This is a decomposition, with one remaining reconstruction hole: one original hole closed, one added, net zero. The combined theorem still depends on sorryAx and is not an axiom-free completed target.
+
+## No longer needed
+Removed direct target imports Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints and Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants; these remain required by the fullness subclaim. Old target proof dependencies no longer used directly: `def-weil-pbc-etale-sheaf-of-sets`, `def-weil-pbc-geometric-stalks`, `lem-exc-field-sections-stalk-invariants`, and `lem-weil-pbc-etale-fibre-discrete-separable-points`; they remain dependencies of the strict subclaims. Removed redundant `Mathlib.CategoryTheory.Action.Continuous` import from the fullness module (already public through `EtaleFieldGsets`). No node or module is globally pruned.
+
+## Where the brief, the DAG or earlier work was wrong
+No statement error found. Edge cases checked: empty etale schemes use the empty product or separatedness for the empty cover, and a separably closed base has trivial action. The fullness subclaim retains the original assumptions; the proved faithfulness lemma needs only K, Omega, and the algebraically closed extension, at the original coefficient universe. The unit route is unchanged.
+
+## New nodes
+lem-exc-galois-stalk-action-full records existence by invariant-section reconstruction. lem-exc-galois-stalk-action-faithful records uniqueness by stalk separation. Both are strict parts of the argument and have source proofs in their docstrings.
+
+## Second reading by E1
+1. Compared the delivered original module with its repository version: the existing theorem signature is byte for byte unchanged. Only its proof, proof imports and local linter setting change; no definitions or target interfaces change. New statements are in separate modules. PASS.
+2. Compiled all three modules in import order with lcompile.py without errors or warnings. The only literal sorry is the named fullness theorem, with its node and source proof. No forbidden declarations or hollow definitions occur. `#print axioms field_sheafFiber_faithful` reports only propext, Classical.choice and Quot.sound. The fullness and combined declarations report those three plus sorryAx, as expected. PASS with the explicitly remaining fullness hole.
+3. Read both new statements and their proofs. Fullness is the surjectivity half, strictly weaker than full faithfulness; stalk faithfulness supplies the independent injectivity half and is actually proved. Empty objects are handled by the empty cover/product; over a separably closed field the action is trivial, and arbitrary algebraically closed extensions are handled by their algebraic subfield. The reconstruction requires each automorphism of Ks to extend to the algebraic closure and then to Omega (fix a transcendence basis); the germ formula determines the action because germs have representatives. Read the upstream invariant-section and etale-fibre declarations, and checked Stacks 03QT and the direct proof of 04JM online, since this machine lacks the cited tex file. Independent leanfinder, loogle and grep queries plus source rg searches found no existing reconstruction theorem; Mathlib Galois.Full concerns finite Galois categories rather than arbitrary sheaves. PASS as a decomposition, not a net hole reduction.
+4. Replaced the hand-written naturality cancellation proof by Mathlib Functor.Faithful.of_comp_iso, retaining the proved geometric separation argument. Removed a redundant import. The No longer needed section now names every old proof dependency removed from the original node. The unit sk-prop-h2 has empty realized statement/steps arrays, and this below-unit split changes none of its route. PASS.
+5. Checked all three node records against declarations, assumptions and proof steps; proof_deps match their uses and proof_origin identifies the source/reduction. New nodes have source, searches, creation, blueprint provenance, chapter, unit and lean records. Replaced flattened new Lean signature records by the verbatim signatures; clarified the faithfulness node title and removed irrelevant statement dependencies. PASS.
+
+Second reading changes: shorter faithfulness transfer using Mathlib; redundant fullness import removed; complete direct-dependency pruning report; precise new-node signatures and faithfulness statement dependencies; explicit axiom and decomposition accounting. No mathematical statements changed.
+
+Sources checked: [Stacks 03QT](https://stacks.math.columbia.edu/tag/03QT) and [Stacks 04JM](https://stacks.math.columbia.edu/tag/04JM).
