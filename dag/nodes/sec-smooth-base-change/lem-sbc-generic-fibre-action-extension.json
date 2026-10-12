@@ -15,28 +15,37 @@
  ],
  "proof": [
   {
-   "text": "Smoothness over the integral normal base makes C normal. Its geometrically connected\nsmooth fibres are geometrically integral, so C is integral and its generic fibre contains\nits generic point. Every connected component of a finite étale C-scheme is normal and\nis determined by its generic fibre. Normality identifies it with the integral closure of\nC in its generic finite étale algebra. Thus restriction to the generic fibre is fully\nfaithful (0BQM); an inverse of a restricted isomorphism extends too, so isomorphisms are\nreflected. More explicitly, first extend a map from the generic point of C by 0BQM.\nIts restriction to Cη equals the original map, since finite étale maps over the normal\nintegral Cη are determined by their restriction to its generic point. This proves full\nfaithfulness for restriction to Cη, rather than only to the generic point of C.",
-   "uses": [],
+   "text": "Extend each Z.smul(g) uniquely by finiteEtale_genericFibre_hom_extension and choose the resulting maps a_g. The extension property gives a_g;π=π and Z.smul(g);ψ=ψ;a_g.",
+   "uses": [
+    "lem-sbc-finite-etale-generic-fibre-hom-extension"
+   ],
    "elementary": false
   },
   {
-   "text": "Extend each automorphism of Z uniquely to P. Extend its inverse to show it is an\nautomorphism. Faithfulness gives the unit and multiplication laws, while the extensions\nare over C and agree with the given action through the cartesian comparison ψ.",
-   "uses": [],
-   "elementary": false
+   "text": "Apply uniqueness of the extension of Z.smul(1) to id_P to obtain a_1=id_P. Apply uniqueness for Z.smul(gh) to a_h;a_g. Its over-C property follows from those of a_h and a_g; its restriction equals Z.smul(h);Z.smul(g)=Z.smul(gh) using the two compatibility equations and associativity.",
+   "uses": [
+    "lem-sbc-finite-etale-generic-fibre-hom-extension"
+   ],
+   "elementary": true
   },
   {
-   "text": "Both the finite coproduct of P indexed by G and P ×_C P are finite étale over C.\nThe canonical map from the coproduct restricts to Z's torsor isomorphism. Extend its\ninverse by full faithfulness; faithfulness gives both inverse identities. Hence the\ncanonical map is an isomorphism, the required simply transitive action.\nNo connectedness of P is used: integral-closure extension is applied componentwise.",
-   "uses": [],
-   "elementary": false
+   "text": "Apply isIso_sigmaDesc_of_genericFibre to the compatible family a. It shows directly that the canonical map coproduct_g P → P ×_C P is an isomorphism, completing the conjunction.",
+   "uses": [
+    "lem-sbc-generic-fibre-torsor-identity"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-finite-etale-generic-fibre-hom-extension",
+  "lem-sbc-generic-fibre-torsor-identity"
+ ],
  "proof_origin": {
   "kind": "written-by-agent",
-  "by": "A3",
+  "by": "G3",
   "document": "Stacks Project",
-  "place": "Tag 0BQM; Tag 0EYJ, proof: extension of the group action to the finite cover, and the torsor identity",
-  "note": "Grouped intermediate input for stage 3; proof in words follows the cited argument. The disconnected-torsor component reduction is made explicit."
+  "place": "Tag 0BQM, proof; Tag 0EYJ, proof",
+  "note": "Formalized action-law assembly and torsor inverse extension. Only generic-fibre full faithfulness remains as a named theorem."
  },
  "mathlib_searches": [
   {
@@ -145,10 +154,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T035347-L-1583710",
+  "landing": "20261012T085243-L-16570",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

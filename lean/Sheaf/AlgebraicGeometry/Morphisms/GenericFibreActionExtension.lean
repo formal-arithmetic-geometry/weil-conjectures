@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreHomExtension
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreTorsorIdentity
 
 /-!
 # Extending the action on a finite étale generic-fibre torsor
@@ -64,6 +66,24 @@ theorem GaloisCover.exists_action_on_finiteEtale_extension {S C : Scheme.{u}}
       (∀ g : G, Z.smul g ≫ ψ = ψ ≫ a g) ∧
       IsIso (Sigma.desc fun g : G ↦
         pullback.lift (f := π) (g := π) (a g) (𝟙 P) (by simp [ha])) := by
-  sorry
+  classical
+  have hex (g : G) := finiteEtale_genericFibre_hom_extension hS c q j hCη
+    π π Z.π Z.π ψ ψ hψ hψ (Z.smul g) (Z.smul_π g)
+  choose a ha using hex
+  have hover (g : G) : a g ≫ π = π := (ha g).1.1
+  have hcompat (g : G) : Z.smul g ≫ ψ = ψ ≫ a g := (ha g).1.2.symm
+  refine ⟨a, hover, ?_, ?_, hcompat, ?_⟩
+  · exact ((ha 1).2 (𝟙 P) ⟨by simp, by simp [Z.one_smul]⟩).symm
+  · intro g h
+    apply ((ha (g * h)).2 (a h ≫ a g) _).symm
+    constructor
+    · simp [hover]
+    · calc
+        ψ ≫ (a h ≫ a g) = (ψ ≫ a h) ≫ a g := by simp
+        _ = (Z.smul h ≫ ψ) ≫ a g := by rw [hcompat]
+        _ = Z.smul h ≫ (Z.smul g ≫ ψ) := by rw [Category.assoc, ← hcompat]
+        _ = Z.smul (g * h) ≫ ψ := by rw [Z.mul_smul, Category.assoc]
+  · exact GaloisCover.isIso_sigmaDesc_of_genericFibre hS c G q j hCη Z π ψ hψ
+      a hover hcompat
 
 end AlgebraicGeometry.Scheme
