@@ -45,7 +45,14 @@ theorem towerProductShift_eq_iff {C : Type u} [Category.{v} C] {K : ℕ → C}
     [HasProduct K] (f : ∀ n, K (n + 1) ⟶ K n) (s : ∏ᶜ K ⟶ ∏ᶜ K) :
     s = towerProductShift f ↔
       ∀ n, s ≫ Pi.π K n = Pi.π K (n + 1) ≫ f n := by
-  sorry
+  constructor
+  · intro h n
+    subst s
+    exact Pi.lift_π _ _
+  · intro h
+    apply Pi.hom_ext
+    intro n
+    simpa [towerProductShift] using h n
 
 /-- The projection equations uniquely characterize `1 - s`: compose the defining
 difference with each projection, then use product extensionality. Stacks, Tag 08TC
@@ -55,11 +62,48 @@ theorem towerTransitionEndomorphism_eq_iff {C : Type u} [Category.{v} C]
     (f : ∀ n, K (n + 1) ⟶ K n) (t : ∏ᶜ K ⟶ ∏ᶜ K) :
     t = towerTransitionEndomorphism f ↔
       ∀ n, t ≫ Pi.π K n = Pi.π K n - Pi.π K (n + 1) ≫ f n := by
-  sorry
+  constructor
+  · intro h n
+    subst t
+    simp [towerTransitionEndomorphism, towerProductShift]
+  · intro h
+    apply Pi.hom_ext
+    intro n
+    simpa [towerTransitionEndomorphism, towerProductShift] using h n
+
+theorem towerTransitionEndomorphism_natural_forward {C : Type u} [Category.{v} C]
+    [Preadditive C] {K K' : ℕ → C} [HasProduct K] [HasProduct K']
+    (f : ∀ n, K (n + 1) ⟶ K n) (f' : ∀ n, K' (n + 1) ⟶ K' n)
+    (φ : ∀ n, K n ⟶ K' n)
+    (h : Limits.Pi.map φ ≫ towerTransitionEndomorphism f' =
+      towerTransitionEndomorphism f ≫ Limits.Pi.map φ) :
+    ∀ n, φ (n + 1) ≫ f' n = f n ≫ φ n := by
+  intro n
+  have hn := congrArg (fun q => q ≫ Pi.π K' n) h
+  have hn' : Pi.π K n ≫ φ n - Pi.π K (n + 1) ≫ φ (n + 1) ≫ f' n =
+      Pi.π K n ≫ φ n - Pi.π K (n + 1) ≫ f n ≫ φ n := by
+    simpa [towerTransitionEndomorphism, towerProductShift, Category.assoc,
+      Pi.map_π] using hn
+  have hn'' : Pi.π K (n + 1) ≫ φ (n + 1) ≫ f' n =
+      Pi.π K (n + 1) ≫ f n ≫ φ n := (sub_right_inj.mp hn')
+  exact (cancel_epi (Pi.π K (n + 1))).mp hn''
+
+theorem towerTransitionEndomorphism_natural_backward {C : Type u} [Category.{v} C]
+    [Preadditive C] {K K' : ℕ → C} [HasProduct K] [HasProduct K']
+    (f : ∀ n, K (n + 1) ⟶ K n) (f' : ∀ n, K' (n + 1) ⟶ K' n)
+    (φ : ∀ n, K n ⟶ K' n)
+    (h : ∀ n, φ (n + 1) ≫ f' n = f n ≫ φ n) :
+    Limits.Pi.map φ ≫ towerTransitionEndomorphism f' =
+      towerTransitionEndomorphism f ≫ Limits.Pi.map φ := by
+  apply Pi.hom_ext
+  intro n
+  simp [towerTransitionEndomorphism, towerProductShift, Pi.map_π,
+    Category.assoc, h n]
+
 
 /-- A componentwise map of towers commutes with `1 - s` precisely when its components
-commute with the transition maps. After composing the product-map equality with the
-`n`-th projection, cancel the common term; conversely use product extensionality.
+commute with the transition maps. Product projections are epimorphisms in a
+preadditive category, so the forward implication follows by cancellation.
 Stacks, Tag 08TC (blueprint: def-weil-tower-transition-endomorphism). -/
 theorem towerTransitionEndomorphism_natural_iff {C : Type u} [Category.{v} C]
     [Preadditive C] {K K' : ℕ → C} [HasProduct K] [HasProduct K']
@@ -68,6 +112,11 @@ theorem towerTransitionEndomorphism_natural_iff {C : Type u} [Category.{v} C]
     Limits.Pi.map φ ≫ towerTransitionEndomorphism f' =
         towerTransitionEndomorphism f ≫ Limits.Pi.map φ ↔
       ∀ n, φ (n + 1) ≫ f' n = f n ≫ φ n := by
-  sorry
+  constructor
+  · intro h
+    exact towerTransitionEndomorphism_natural_forward f f' φ h
+  · intro h
+    exact towerTransitionEndomorphism_natural_backward f f' φ h
+
 
 end CategoryTheory
