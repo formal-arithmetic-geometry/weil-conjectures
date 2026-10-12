@@ -1,6 +1,7 @@
 module
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Localization.FractionRing
+import Sheaf.RingTheory.FractionFieldGeometricRegularityTransport
 @[expose] public section
 universe u
 /-- Geometric regularity of a generic formal fibre is invariant under replacing the
@@ -22,4 +23,6 @@ theorem genericFormalFiber_geometricallyRegular_of_fractionField_transport
     let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P))
       (Localization.AtPrime P)
     Algebra.IsGeometricallyRegular K (TensorProduct A K C) := by
-  sorry
+  let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P))
+    (Localization.AtPrime P)
+  exact fractionField_geometricallyRegular_tensorProduct_transport A K C h
