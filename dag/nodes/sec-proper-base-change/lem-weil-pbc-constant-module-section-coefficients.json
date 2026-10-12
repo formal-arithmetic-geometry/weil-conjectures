@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-constant-module-section-coefficients",
+ "kind": "statement",
+ "title": "The canonical coefficient equivalence intertwines constant-module transitions",
+ "statement": "Fix a universe $u$, a commutative ring $\\Lambda$ and a module $M$ in universe $u+1$ [def-weil-pbc-etale-sheaves], a scheme $X$ and an etale object $U\\to X$ [def-weil-pbc-etale-site]. Put $A=\\mathrm{Ab}$, let $V:\\Lambda\\text{-Mod}\\to A$ forget scalars, and put $C_X=(VM)_X$ [def-weil-pbc-constant-sheaf]. For a morphism $f:Z\\to X$, define a sheaf isomorphism $j_f:V(M_Z)\\to f^{-1}C_X$ to be the canonical constantCommuteCompose comparison $V(M_Z)\\to(VM)_Z$, followed by the inverse of the canonical constant-sheaf pullback comparison $f^{-1}C_X\\to(VM)_Z$. Evaluating $j_f$ at $U\\times_X Z$ gives an additive equivalence $c_f:(f_*M_Z)(U)\\to(f_*f^{-1}C_X)(U)$; forgetting scalars commutes definitionally with direct image [def-weil-pbc-direct-image]. Let $g:W\\to Z$, $h:W\\to X$ and $g f=h$. Let $T_M:(f_*M_Z)(U)\\to(h_*M_W)(U)$ be constantModulePushforwardMap [lem-weil-pbc-constant-module-pushforward-functoriality]. Let $T_A:(f_*f^{-1}C_X)(U)\\to(h_*h^{-1}C_X)(U)$ be evaluation at $U$ of the composite of $f_*(\\eta_g)$, the direct-image composition comparison, and $h_*$ of the inverse-image composition comparison [lem-weil-pbc-inverse-image-composition]. Then $c_h(T_M z)=T_A(c_f z)$ for every $z\\in(f_*M_Z)(U)$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DB and 03CO: coefficient forgetting and sheafification; Tag 09Z1: canonical transitions. Original comparison node, steps 1 and 3 (coefficient and unit square)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-constant-module-pushforward-functoriality",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Construct j_f as the two indicated natural isomorphisms. Coefficient forgetting is left adjoint: restrict scalars along the integer cast and compose with the integer-module/abelian-group equivalence. Sheafification commutes with this left adjoint, so Mathlib constantCommuteCompose supplies the first isomorphism. The second is the inverse of upperStarConstantSheafIso. Evaluate to construct c_f; no arbitrary existence witness is used.",
+   "uses": [
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constantCommuteCompose comparison preserves sheafification generators. The constant pullback comparison is the uniqueness isomorphism of left adjoints to terminal evaluation, so its unit equation identifies its adjoint on each generator. Naturality of the unit moves j_f past the g-adjunction unit; the unit equation for inverse-image composition identifies the resulting composite with j_h. Apply lowerStar and the canonical direct-image composition comparison, then evaluate at U. This is precisely c_h T_M = T_A c_f. The construction also covers zero coefficients and empty schemes.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-constant-module-pushforward-functoriality",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-module-pushforward-functoriality",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DB and 03CO: coefficient forgetting and sheafification; Tag 09Z1: canonical transitions. Original comparison node, steps 1 and 3 (coefficient and unit square).",
+  "by": "worker",
+  "note": "Extracted from the original comparison proof plan; the explicit Lean construction fixes the equivalences."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant sheaf coefficient forgetting commutes with canonical inverse image unit and composition",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantCommuteCompose\"",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.constantCommuteCompose, CategoryTheory.constantCommuteCompose_hom_app_hom",
+   "verdict": "partial matches; no exact statement"
+  },
+  {
+   "tool": "grep",
+   "query": "constantCommuteCompose|pullbackSections_comparison|upperStarComp_assoc",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "verdict": "partial matches; no exact statement"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantModulePullbackSectionComparison",
+  "date": "2026-10-12",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Tag 09Z6 finite approximation paragraph: identify the degree-zero Tag 09Z1 transition on each affine etale test object with constant-module pullback of sections; the coefficient/section comparison before applying continuity; Tags 03DB and 03CO: coefficient forgetting and sheafification; Tag 09Z1: canonical transitions. Original comparison node, steps 1 and 3 (coefficient and unit square).",
+   "via": [
+    "lem-weil-pbc-constant-module-pullback-section-comparison",
+    "lem-weil-pbc-constant-module-limit-affine-section-descent",
+    "lem-weil-pbc-constant-module-limit-fiber-descent",
+    "lem-weil-pbc-constant-module-pushforward-limit-surjectivity",
+    "lem-weil-pbc-constant-module-pushforward-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantModuleSectionCoefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantModuleSectionCoefficients.lean",
+  "declaration": "AlgebraicGeometry.Etale.constantModuleSectionCoefficientEquiv_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Etale.constantModuleSectionCoefficientSheafIso",
+   "AlgebraicGeometry.Etale.constantModuleSectionCoefficientEquiv",
+   "AlgebraicGeometry.Etale.constantModuleSectionCoefficientEquiv_naturality"
+  ],
+  "statement": "theorem constantModuleSectionCoefficientEquiv_naturality\n    (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)\n    {X : Scheme.{u}} (U : X.Etale)\n    {Z W : Scheme.{u}} (g : W ⟶ Z) (f : Z ⟶ X) (h : W ⟶ X)\n    (w : g ≫ f = h)\n    (z : ((lowerStar (ModuleCat.{u + 1} Λ) f).obj\n      ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)).obj.obj\n        (op U)) :\n    let A := AddCommGrpCat.{u + 1}\n    let G := (constantSheaf X.smallEtaleTopology A).obj\n      ((forget₂ (ModuleCat.{u + 1} Λ) A).obj M)\n    constantModuleSectionCoefficientEquiv Λ M U h\n        ((constantModulePushforwardMap Λ M f h g w).hom.app (op U) z) =\n      ((lowerStar A f).map\n          ((upperStarLowerStarAdjunction A g).unit.app ((upperStar A f).obj G)) ≫\n        (lowerStarComp A g f h w.symm).hom.app _ ≫\n        (lowerStar A h).map ((upperStarComp A g f h w.symm).inv.app G)).hom.app\n          (op U) (constantModuleSectionCoefficientEquiv Λ M U f z)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T144132-L-2102944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T144132-L-2102944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

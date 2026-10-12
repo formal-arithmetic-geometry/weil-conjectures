@@ -7,10 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
-import Sheaf.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
+import Sheaf.AlgebraicGeometry.ConstantModuleSectionCoefficients
+import Sheaf.AlgebraicGeometry.PullbackSectionTransport
 import Sheaf.AlgebraicGeometry.PullbackSectionsComparison
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Constant-module section comparisons on a cartesian square
 
@@ -28,6 +27,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+set_option maxHeartbeats 1200000 in
+-- Nested coefficient and pullback comparisons require additional reduction heartbeats.
+set_option maxRecDepth 4096 in
 /-- Constant-module direct-image sections identify with abelian global sections
 on the etale pullback, compatibly with a cartesian morphism of total spaces.
 There is no inverse system, limit cone, stalk, or finiteness hypothesis here.
@@ -81,6 +83,30 @@ theorem exists_constantModule_pullback_section_comparison
             (Sheaf.Γ (pullback U.hom h).smallEtaleTopology A).map
               ((upperStarComp A m (pullback.fst U.hom f) (pullback.fst U.hom h)
                 hm.symm).inv.app G)) (e Z f z) := by
-  sorry
+  dsimp
+  let A := AddCommGrpCat.{u + 1}
+  let N := (forget₂ (ModuleCat.{u + 1} Λ) A).obj M
+  let C := (constantSheaf X.smallEtaleTopology A).obj N
+  let G := (constantSheaf U.left.smallEtaleTopology A).obj N
+  let i : (upperStar A U.hom).obj C ≅ G :=
+    (Scheme.upperStarConstantSheafIso A U.hom).app N
+  let t := fun (Z : Scheme.{u}) (f : Z ⟶ X) ↦
+    pullbackSectionTransportEquiv (pullback.fst U.hom f) U.hom C G i
+  let e := fun (Z : Scheme.{u}) (f : Z ⟶ X) ↦
+    (constantModuleSectionCoefficientEquiv Λ M U f).trans
+      ((pullbackSectionsEquiv C U f).trans (t Z f))
+  refine ⟨e, ?_⟩
+  intro Z W g f h w m hm hm' z
+  change t W h (pullbackSectionsEquiv C U h
+      (constantModuleSectionCoefficientEquiv Λ M U h
+        ((constantModulePushforwardMap Λ M f h g w).hom.app (op U) z))) = _
+  have hc := constantModuleSectionCoefficientEquiv_naturality Λ M U g f h w z
+  have hp := pullbackSections_comparison X C U g f h w.symm m hm hm'
+    (constantModuleSectionCoefficientEquiv Λ M U f z)
+  have ht := pullbackSectionTransportEquiv_naturality
+    (pullback.fst U.hom f) (pullback.fst U.hom h) U.hom m hm C G i
+    (pullbackSectionsEquiv C U f (constantModuleSectionCoefficientEquiv Λ M U f z))
+  exact (congrArg (fun s ↦ t W h (pullbackSectionsEquiv C U h s)) hc).trans
+    ((congrArg (t W h) hp).trans ht)
 
 end AlgebraicGeometry.Etale
