@@ -19,60 +19,33 @@
  ],
  "proof": [
   {
-   "text": "Pass to the cofinal tail above a common upper bound of the chosen class stage i and the union stage i0. Transport U,V to that stage using its supplied isomorphism, and restrict the cone to their inverse images. The limit-affine-transition theorem gives the restricted limits, transferred to the given cone by uniqueness of limits, and affine transitions. Opens inherit quasi-separatedness, affine inverse images of compact opens are compact, and the intersection is compact because the union stage is quasi-separated. Inverse image restricts the coefficients and preserves the sheaf colimit; its composition comparisons give the transition coherence. Pullback functoriality identifies the new comparison legs. Apply C(U), C(V) and C(U intersection V) in all degrees.",
+   "text": "Choose the supplied union-stage isomorphism from hi and apply the geometric exact comparison ladder theorem. Its last bottom group is the actual cohomology of the inverse-image opens and its last arrow is the actual restriction after eB. This provides the three neighboring comparisons, exact pairs and all three commuting squares, for every degree including zero.",
    "uses": [
-    "def-weil-pbc-etale-cohomology-stage-continuity",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-etale-limit-binary-comparison-ladder"
    ],
    "elementary": false
   },
   {
-   "text": "Form the Mayer-Vietoris sequences on stages and on the limit. Naturality in coefficients and scheme pullback yields their comparison ladder. Filtered abelian-group colimits preserve exactness and finite products. In positive degree p=q+1 the five terms are H^q(U) times H^q(V), H^q(U intersection V), H^p(U union V), H^p(U) times H^p(V), H^p(U intersection V). The comparisons of the first, second and fourth terms are isomorphisms by step 1. In degree zero use the initial injective restriction followed by the difference of the restrictions.",
-   "uses": [
-    "lem-weil-pbc-etale-mayer-vietoris",
-    "lem-weil-pbc-etale-mayer-vietoris-pullback",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The middle comparison is injective: if z maps to zero, injectivity of the fourth comparison makes its right restriction zero. Exactness lifts z to a class a in the second top term. Its bottom image maps to zero in the middle bottom term, so is the image of a first bottom term class b. Surjectivity of the first comparison lifts b to bprime. The difference a minus the image of bprime has zero second-term comparison image; injectivity of that comparison makes the difference zero. The composite of the first two top arrows is zero by exactness, hence z=0. At degree zero injectivity of the first restriction and of the comparison on U times V gives the conclusion directly.",
+   "text": "Apply Mathlib AddMonoidHom.injective_of_surjective_of_injective_of_injective to the additive homomorphisms of the ladder. Extensionality converts its three pointwise commuting squares to equalities of composites. Exactness of the two top pairs and first bottom pair, surjectivity of v1, and injectivity of v2 and v4 give injectivity of the middle map colimit.desc H B. Its zero kernel follows since it preserves zero. This is the injective four-lemma, requiring no exactness at the third bottom term.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The image of the given stage element x in the filtered group colimit maps to zero because the comparison legs are precisely b_i. Step 3 makes that colimit element zero. The elementwise equality criterion for filtered colimits of abelian groups, equivalently integer modules, gives a later stage j and f:i to j with H(f)(x)=H(f)(0)=0. Cofinality of the chosen tail returns this witness to I. Transport through the supplied object and cocone isomorphisms has preserved the zero equations throughout.",
+   "text": "For the given stage class x, the colimit coprojection followed by colimit.desc H B equals B.ι.app i, so its image z has m(z)=0. The chase gives z=0. Apply Concrete.colimit_rep_eq_iff_exists to x and zero at the same stage, using preservation of filtered colimits by the abelian-group forgetful functor. The resulting equality H(f)(x)=H(g)(0) gives H(f)(x)=0 since group homomorphisms preserve zero.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-colimit-initial-full-subcategory"
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-cohomology-stage-continuity",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-mayer-vietoris",
-  "lem-weil-pbc-etale-mayer-vietoris-pullback",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-limit-affine-transition"
+  "lem-weil-pbc-etale-limit-binary-comparison-ladder",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Kernel half of the original binary-gluing node steps 1--3; Mayer-Vietoris of Tag 0A50 and the comparison asserted in Tag 09YQ."
+  "place": "Tags 09YQ and 0A50: geometric ladder assembly split off; the injective group chase and finite-stage colimit equality detection are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -157,9 +130,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T135333-L-1699843",
+  "landing": "20261012T154244-L-2435043",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

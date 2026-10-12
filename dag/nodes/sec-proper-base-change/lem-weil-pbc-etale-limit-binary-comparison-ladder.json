@@ -1,0 +1,165 @@
+{
+ "id": "lem-weil-pbc-etale-limit-binary-comparison-ladder",
+ "kind": "statement",
+ "title": "Geometric exact comparison ladder for two-open etale continuity",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $U,V\\subseteq X$ quasi-compact opens [def-weil-pbc-scheme-conventions]. Assume the stage-continuity property $C(U)$, $C(V)$ and $C(U\\cap V)$ of [def-weil-pbc-etale-cohomology-stage-continuity]. Let $I$ be a nonempty directed preordered set and let $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ be an inverse diagram of quasi-compact quasi-separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition morphisms. Let $(T,(f_i))$ be a limit cone [def-weil-pbc-category-colimit]. For each $i$, let $F_i$ be an abelian sheaf on $(D_i)_{\\acute{e}t}$ [def-weil-pbc-abelian-etale-sheaves], with maps $\\varphi_f:D(f^{\\mathrm{op}})^{-1}F_i\\to F_j$ for $f:i\\to j$ [def-weil-pbc-inverse-image] satisfying the canonical inverse-image identity and composition laws. Let $G:I\\to\\operatorname{Ab}(T_{\\acute{e}t})$ be identified objectwise with $f_i^{-1}F_i$ by isomorphisms, its arrows being inverse-image composition followed by pullback of $\\varphi_f$. Let $L$ be a colimit cocone on $G$, with coprojections $\\iota_i$. Fix $p\\ge0$. Let $H:I\\to\\operatorname{Ab}$ have specified object isomorphisms $e_i:H_i\\cong H^p(D_i,F_i)$ [def-weil-pbc-etale-cohomology] and arrows conjugate to $H^p(\\varphi_f)\\circ D(f^{\\mathrm{op}})^*$ [def-weil-pbc-cohomology-pullback]. Let $B$ be a cocone on $H$ with an isomorphism $e:B_{\\mathrm{pt}}\\cong H^p(T,L_{\\mathrm{pt}})$ such that, for every $i$, its leg $b_i$ satisfies $e\\circ b_i=H^p(\\iota_i)\\circ f_i^*\\circ e_i$, including the specified identification $G_i\\cong f_i^{-1}F_i$. Fix an index $i_0\\in I$ and an isomorphism $\\epsilon:D_{i_0}\\cong (U\\cup V)$. Put $g=f_{i_0}$ followed by $\\epsilon$ and the inclusion $U\\cup V\\to X$, and let $W_U=g^{-1}(U)$ and $W_V=g^{-1}(V)$. Put $Q=\\varinjlim_I H_i$, with its canonical comparison $m:Q\\to B_{\\mathrm{pt}}$ induced by the cocone $B$ [def-weil-pbc-category-colimit]. Put $B_4=H^p(W_U,L|_{W_U})\\times H^p(W_V,L|_{W_V})$ [def-weil-pbc-etale-cohomology, def-weil-pbc-inverse-image] and let $r':B_{\\mathrm{pt}}\\to B_4$ be the pair of canonical restriction maps after $e:B_{\\mathrm{pt}}\\cong H^p(T,L_{\\mathrm{pt}})$. There exist abelian groups $A_1,A_2,A_4,B_1,B_2$ and additive homomorphisms $a:A_1\\to A_2$, $b:A_2\\to Q$, $r:Q\\to A_4$, $a':B_1\\to B_2$, $b':B_2\\to B_{\\mathrm{pt}}$, $v_1:A_1\\to B_1$, $v_2:A_2\\to B_2$, $v_4:A_4\\to B_4$ such that $\\operatorname{im}a=\\ker b$, $\\operatorname{im}b=\\ker r$, $\\operatorname{im}a'=\\ker b'$, $v_1$ is surjective, $v_2$ and $v_4$ are injective, and $v_2a=a'v_1$, $mb=b'v_2$, $v_4r=r'm$. This statement supplies the geometric ladder and its neighboring comparisons; it does not assert the middle comparison is injective or any finite-stage zero witness.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09YQ (theorem-colimit) and 0A50 (lemma-mayer-vietoris); geometric restriction and exact-ladder steps 1--2 of lem-weil-pbc-etale-limit-binary-eventual-zero, before its group chase."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-cohomology-stage-continuity"
+ ],
+ "proof": [
+  {
+   "text": "Pass to the directed cofinal tail above the union stage i0. Transport U,V to that stage using its supplied isomorphism, and restrict the cone to their inverse images. Apply Mathlib isLimitOpensCone directly to the supplied limiting cone and the transported opens. Mathlib isAffineHom_π_app gives affine projections, and the opensDiagram affine-transition instance gives affine restricted transitions. No construction of a new ambient scheme limit is needed. Opens inherit quasi-separatedness, affine inverse images of compact opens are compact, and the intersection is compact because the union stage is quasi-separated. Inverse image restricts the coefficients and preserves the sheaf colimit; its composition comparisons give the transition coherence. Pullback functoriality identifies the new comparison legs. Apply C(U), C(V) and C(U intersection V) in all degrees.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology-stage-continuity",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In positive degree p=q+1, form the stage and limit Mayer--Vietoris sequences, using the supplied isomorphism to transfer the two-open cover. Naturality in scheme pullback and in coefficients makes their filtered-colimit comparison a commuting ladder with the actual bottom restriction r'. Take A1,A2,A4 to be the colimits of H^q(U) times H^q(V), H^q(U intersection V), H^p(U) times H^p(V); B1,B2 are the corresponding limit groups, while B4 and r' are exactly those fixed in the statement. Filtered abelian-group colimits preserve exactness and finite products. Thus Exact a b, Exact b r and Exact a' b' hold. The continuity statements from step 1 give surjectivity of v1 and injectivity of v2,v4. The three squares commute by the pullback and coefficient naturality of Mayer--Vietoris and the supplied comparison-leg equation hB. Finality transfers the top middle term from the tail colimit to Q.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For p=0 take A1,A2,B1,B2 to be zero groups and a,b,a',b',v1,v2 to be zero maps. Take A4 to be the filtered colimit of the degree-zero stage product groups, and r to be the induced restriction. Initial injectivity in Mayer--Vietoris, preserved by filtered exactness, makes r injective, which is precisely Exact b r. Exact a b and Exact a' b' and the first two squares are automatic. Continuity on the two opens makes v4 an isomorphism, hence injective, and restriction naturality gives v4 r=r' m. This uses neither negative degree nor eventual-zero detection. Empty and coincident opens use the same restriction and difference maps.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-cohomology-stage-continuity",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "lem-weil-pbc-etale-mayer-vietoris-pullback",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-limit-cone-affine-projections-opens"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09YQ (theorem-colimit) and 0A50 (lemma-mayer-vietoris); geometric restriction and exact-ladder steps 1--2 of lem-weil-pbc-etale-limit-binary-eventual-zero, before its group chase."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris comparison ladder for filtered colimits of etale cohomology with isomorphic comparison maps on the opens and intersection",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris comparison ladder for filtered colimits of etale cohomology with isomorphic comparison maps on the opens and intersection",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext, CategoryTheory.GrothendieckTopology.MayerVietorisSquare",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric ladder theorem. The MayerVietorisSquare API gives sheaf-cohomology sequences but not the restricted inverse system, coefficient transports, or the continuity comparisons required here."
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|PreservesHomologyFunctorAddCommGrpCatColim",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric ladder theorem. The MayerVietorisSquare API gives sheaf-cohomology sequences but not the restricted inverse system, coefficient transports, or the continuity comparisons required here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitBinaryEventualZero",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Continuity invocation in the proof of Tag 0A51: assembling the restricted two-open Mayer--Vietoris comparison, before the injective group chase; steps 1--2 of lem-weil-pbc-etale-limit-binary-eventual-zero.",
+   "via": [
+    "lem-weil-pbc-etale-limit-binary-eventual-zero",
+    "lem-weil-pbc-etale-limit-cohomology-binary-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitBinaryComparisonLadder",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitBinaryComparisonLadder.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_binary_comparison_ladder",
+  "statement": "theorem etale_limit_binary_comparison_ladder (X : Scheme.{u}) (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hCU : EtaleCohomologyStageContinuity U.toScheme) (hCV : EtaleCohomologyStageContinuity V.toScheme) (hCI : EtaleCohomologyStageContinuity (U ⊓ V).toScheme) {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)] (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j) (hidentity : ∀ i : I, φ (𝟙 i) = (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i)) (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k), φ (f ≫ g) = (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op) (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g) (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (eG : ∀ i : I, G.obj i ≅ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i)) (hG : ∀ (i j : I) (f : i ⟶ j), G.map f = (eG i).hom ≫ (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op) (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv) (L : Cocone G) (hL : IsColimit L) (p : ℕ) (H : I ⥤ AddCommGrpCat.{u + 1}) (eH : ∀ i : I, H.obj i ≅ AddCommGrpCat.of (Sheaf.H (F i) p)) (hH : ∀ (i j : I) (f : i ⟶ j), H.map f = (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (F i) p) ≫ AddCommGrpCat.ofHom (Sheaf.H.map (φ f) p) ≫ (eH j).inv) (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H L.pt p)) (hB : ∀ i : I, B.ι.app i ≫ eB.hom = (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫ AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)) (i₀ : I) (e : D.obj (op i₀) ≅ (U ⊔ V).toScheme) : let WU := (c.π.app (op i₀) ≫ e.hom ≫ (U ⊔ V).ι) ⁻¹ᵁ U let WV := (c.π.app (op i₀) ≫ e.hom ≫ (U ⊔ V).ι) ⁻¹ᵁ V let B₄ := AddCommGrpCat.of (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} WU.ι).obj L.pt) p × Sheaf.H ((upperStar AddCommGrpCat.{u + 1} WV.ι).obj L.pt) p) let r' : B.pt ⟶ B₄ := AddCommGrpCat.ofHom (((cohomologyMap WU.ι L.pt p).prod (cohomologyMap WV.ι L.pt p)).comp eB.hom.hom) ∃ (A₁ A₂ A₄ B₁ B₂ : AddCommGrpCat.{u + 1}) (a : A₁ ⟶ A₂) (b : A₂ ⟶ colimit H) (r : colimit H ⟶ A₄) (a' : B₁ ⟶ B₂) (b' : B₂ ⟶ B.pt) (v₁ : A₁ ⟶ B₁) (v₂ : A₂ ⟶ B₂) (v₄ : A₄ ⟶ B₄), Function.Exact a b ∧ Function.Exact b r ∧ Function.Exact a' b' ∧ Function.Surjective v₁ ∧ Function.Injective v₂ ∧ Function.Injective v₄ ∧ (∀ x, v₂ (a x) = a' (v₁ x)) ∧ (∀ x, (colimit.desc H B) (b x) = b' (v₂ x)) ∧ (∀ x, v₄ (r x) = r' ((colimit.desc H B) x))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T154244-L-2435043",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T154244-L-2435043",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
