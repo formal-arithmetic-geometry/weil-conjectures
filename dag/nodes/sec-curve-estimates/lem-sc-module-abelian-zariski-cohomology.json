@@ -26,63 +26,27 @@
  ],
  "proof": [
   {
-   "text": "Set T = SheafOfModules.toSheaf (moduleRings X.toRingedSpace), Gamma = abelian evaluation at the top open, G = module global sections and V = module-to-abelian-group forgetful. T preserves finite limits by Mathlib and finite colimits by the proved source instance SheafOfModules.preservesFiniteColimits_toSheaf. Thus T preserves homology and quasi-isomorphisms. This realizes the exactness assertion of lem-weil-pbc-module-sheaves-colimits-forgetful without importing its larger packaging theorem.",
+   "text": "Obtain the component isomorphisms and their naturality equation from the split componentwise comparison theorem.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "new-zariski-module-abelian-cohomology-components"
    ],
    "elementary": false
   },
   {
-   "text": "Prove the private topCohomologyEquiv: the representable presheaf of the top open has a unique element in every degree. FreeAbelianGroup.uniqueEquiv followed by the inverse lift equivalence identifies its free abelian presheaf with constant lifted integers. FreeAbelianGroup.lift_ext proves naturality on generators. Apply presheafToSheaf.mapIso and Ext.precompAddEquiv to identify Sheaf.H' F q top with Sheaf.H F q. Prove topCohomologyIsoDerived by composing this with H.equiv₀ and rightDerivedZeroIsoSelf in degree zero, and cohomology_nonempty_addEquiv_rightDerived_evaluation_succ in positive degrees. These are fully proved private glue declarations, not new unresolved statements.",
+   "text": "Apply NatIso.ofComponents to assemble the component isomorphisms into the required natural isomorphism.",
    "uses": [
-    "def-sc-zariski-cohomology",
-    "new-sheaf-cohomology-derived-evaluation"
+    "new-zariski-module-abelian-cohomology-components"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Install enough injectives for module sheaves from the proved moduleSheaves_abelian_enoughInjectives theorem for X.toRingedSpace; abelian-sheaf enough injectives is the unchanged explicit assumption hE. For every injective module I and n : Nat, injective_module_abelian_acyclic at the top open gives Subsingleton (Sheaf.H' (T.obj I) (n+1) top). The preceding Ext/derived-evaluation isomorphism and AddCommGrpCat.isZero_of_subsingleton give Gamma.rightAcyclic (T.obj I).",
-   "uses": [
-    "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "new-sheaf-cohomology-derived-evaluation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose I = injectiveResolution F. Compose the inverse component of HomologicalComplex.singleMapHomologicalComplex T with T.mapHomologicalComplex.map I.iota to obtain a resolution iota of T.obj F by T(I). Exactness from step 1 makes the mapped augmentation a quasi-isomorphism; composing with the single-complex isomorphism preserves this. Its terms are Gamma-acyclic by step 3. The proved source Gamma.rightDerivedObjIsoOfResolution iota gives R^q Gamma(TF) isomorphic to the homology of Gamma(T(I)).",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "lemma-weil-pbc-leray-acyclicity"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "I.isoRightDerivedObj G q computes moduleCohomology as the homology of G(I). The exact functor V commutes with this homology by ShortComplex.mapHomologyIso. The section functors G composed with V and T composed with Gamma are definitionally equal; mapHomologicalComplexCompIso packages their identical section complexes and the association with Gamma(T(I)). Compose these complex homology isomorphisms with the inverse acyclic-resolution isomorphism from step 4 and the inverse Ext/derived-evaluation isomorphism of step 2. This is the unchanged Nonempty isomorphism in every natural degree q.",
-   "uses": [
-    "def-sc-ringed-space-module-cohomology",
-    "lemma-weil-pbc-leray-acyclicity",
-    "new-sheaf-cohomology-derived-evaluation",
-    "def-sc-zariski-cohomology"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "def-sc-zariski-cohomology",
-  "new-sheaf-cohomology-derived-evaluation",
-  "lem-sc-ringed-space-module-sheaves-enough-injectives",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
-  "lemma-weil-pbc-leray-acyclicity",
-  "def-sc-ringed-space-module-cohomology"
+  "new-zariski-module-abelian-cohomology-components"
  ],
  "proof_origin": {
-  "by": "F3 stage 3 worker",
+  "by": "U3 stage 3 second reading",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03FD, injective-module acyclic-resolution argument; implemented using the proved source Leray acyclic-resolution comparison and the existing Ext/derived-evaluation bridge."
+  "place": "Lemma Tag 03FD; componentwise injective-resolution comparison followed by NatIso.ofComponents"
  },
  "mathlib_searches": [
   {
@@ -194,10 +158,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y3",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T095934-L-328686",
-  "kind": "interface",
+  "landing": "20261012T112852-L-772501",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,123 @@
+{
+ "id": "new-zariski-module-abelian-cohomology-components",
+ "kind": "statement",
+ "title": "Componentwise comparison and naturality for module and abelian cohomology",
+ "statement": "For every scheme X and degree q, writing F for module cohomology followed by forgetting and G for abelian sheaf cohomology evaluated at the top open, there is a family of component isomorphisms e_M : F(M) ≅ G(M), natural in every module morphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD, injective-resolution comparison and its naturality"
+ },
+ "stmt_deps": [
+  "def-sc-zariski-site",
+  "pqf-def-cohomology",
+  "def-sc-zariski-cohomology",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose injective resolutions of module sheaves. Exactness of forgetting modules to abelian sheaves identifies the resulting global-sections complexes, and the acyclic-resolution comparison gives an isomorphism on each homology object.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A lift of a module morphism to the chosen resolutions induces the corresponding chain map after forgetting. Independence of lifts up to homotopy gives the displayed naturality equation.",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "U3 stage 3 worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03FD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "componentwise natural isomorphism between two cohomology functors",
+   "results": "No exact result available",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural family of isomorphisms NatIso.ofComponents",
+   "results": "NatIso.ofComponents found; no cohomology comparison",
+   "date": "2026-10-12",
+   "verdict": "interface only"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso.ofComponents",
+   "results": "NatIso.ofComponents",
+   "date": "2026-10-12",
+   "verdict": "constructor used"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology module sheaf underlying abelian sheaf",
+   "results": "No existing comparison declaration found",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-module-abelian-zariski-cohomology",
+   "place": "injective-resolution comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural",
+  "file": "lean/Sheaf/Paper/ZariskiModuleAbelianCohomologyNatural.lean",
+  "declaration": "AlgebraicGeometry.zariskiModuleAbelianCohomologyNatural_components",
+  "statement": "theorem zariskiModuleAbelianCohomologyNatural_components (X : Scheme.{u}) (q : ℕ) :\n    let F := RingedSpace.moduleCohomology X.toRingedSpace q ⋙\n      forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))\n        AddCommGrpCat.{u}\n    let G := SheafOfModules.toSheaf (moduleRings X.toRingedSpace) ⋙\n      @CategoryTheory.Sheaf.cohomologyPresheafFunctor.{u, u, u}\n        (Opens X.carrier) inferInstance (Opens.grothendieckTopology X.carrier)\n        inferInstance\n        (@hasExt_of_enoughInjectives _ _ _ inferInstance\n          (@IsGrothendieckAbelian.enoughInjectives _ _ _\n            (Sheaf.isGrothendieckAbelian_of_essentiallySmall'.{u}\n              (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}))) q ⋙\n      (evaluation (Opens X.carrier)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)\n    ∃ e : ∀ M, F.obj M ≅ G.obj M,\n      ∀ {M N} (f : M ⟶ N), F.map f ≫ (e N).hom = (e M).hom ≫ G.map f",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T112852-L-772501",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T112852-L-772501",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

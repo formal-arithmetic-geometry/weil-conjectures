@@ -35,7 +35,7 @@ namespace AlgebraicGeometry
 /-- Module cohomology and abelian sheaf cohomology are naturally isomorphic.
 
 Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD.
-(blueprint: lem-sc-module-abelian-zariski-cohomology)
+(blueprint: new-zariski-module-abelian-cohomology-components)
 
 Proof: Choose an injective resolution of each module sheaf. Forgetting to abelian sheaves
 is exact, and every forgotten injective module is acyclic for global sections. Thus the
@@ -45,6 +45,31 @@ the induced map on the common complex computes both cohomology maps. Independenc
 lift up to homotopy proves the naturality squares. Assemble these component isomorphisms
 into a natural isomorphism. The componentwise comparison comes from the common resolution
 complex. No degree-zero normalization is asserted here. -/
+theorem zariskiModuleAbelianCohomologyNatural_components (X : Scheme.{u}) (q : ℕ) :
+    let F := RingedSpace.moduleCohomology X.toRingedSpace q ⋙
+      forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
+        AddCommGrpCat.{u}
+    let G := SheafOfModules.toSheaf (moduleRings X.toRingedSpace) ⋙
+      @CategoryTheory.Sheaf.cohomologyPresheafFunctor.{u, u, u}
+        (Opens X.carrier) inferInstance (Opens.grothendieckTopology X.carrier)
+        inferInstance
+        (@hasExt_of_enoughInjectives _ _ _ inferInstance
+          (@IsGrothendieckAbelian.enoughInjectives _ _ _
+            (Sheaf.isGrothendieckAbelian_of_essentiallySmall'.{u}
+              (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}))) q ⋙
+      (evaluation (Opens X.carrier)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
+    ∃ e : ∀ M, F.obj M ≅ G.obj M,
+      ∀ {M N} (f : M ⟶ N), F.map f ≫ (e N).hom = (e M).hom ≫ G.map f := by
+  sorry
+
+/-- Module cohomology and abelian sheaf cohomology are naturally isomorphic.
+
+Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD.
+(blueprint: lem-sc-module-abelian-zariski-cohomology)
+
+The componentwise comparison and its naturality are provided by
+`zariskiModuleAbelianCohomologyNatural_components`; `NatIso.ofComponents`
+assembles them into the required natural isomorphism. -/
 theorem zariskiModuleAbelianCohomologyNatural (X : Scheme.{u}) (q : ℕ) :
     Nonempty ((RingedSpace.moduleCohomology X.toRingedSpace q ⋙
         forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
@@ -58,6 +83,20 @@ theorem zariskiModuleAbelianCohomologyNatural (X : Scheme.{u}) (q : ℕ) :
               (Sheaf.isGrothendieckAbelian_of_essentiallySmall'.{u}
                 (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}))) q ⋙
         (evaluation (Opens X.carrier)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤))) := by
-  sorry
+  classical
+  let F := RingedSpace.moduleCohomology X.toRingedSpace q ⋙
+    forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
+      AddCommGrpCat.{u}
+  let G := SheafOfModules.toSheaf (moduleRings X.toRingedSpace) ⋙
+    @CategoryTheory.Sheaf.cohomologyPresheafFunctor.{u, u, u}
+      (Opens X.carrier) inferInstance (Opens.grothendieckTopology X.carrier)
+      inferInstance
+      (@hasExt_of_enoughInjectives _ _ _ inferInstance
+        (@IsGrothendieckAbelian.enoughInjectives _ _ _
+          (Sheaf.isGrothendieckAbelian_of_essentiallySmall'.{u}
+            (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}))) q ⋙
+    (evaluation (Opens X.carrier)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
+  obtain ⟨e, h⟩ := zariskiModuleAbelianCohomologyNatural_components X q
+  exact ⟨NatIso.ofComponents e h⟩
 
 end AlgebraicGeometry
