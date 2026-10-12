@@ -225,7 +225,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.DescendFinite` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DescendSurjective` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleAlgebraFilteredColimitDescent` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoods` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction` | 6 | 1 | proof |
@@ -241,6 +240,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange` | 6 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk` | 6 | 1 | proof |
@@ -292,6 +292,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.CategoryTheory.SpectralSequenceComparison` | 6 | 1 | proof |
 | `Sheaf.Paper.AlgebraizeFiniteOverProper` | 6 | 1 | proof |
 | `Sheaf.Paper.ColimitSitesInjectiveSystem` | 6 | 1 | proof |
+| `Sheaf.Paper.DirectImageSplitCoverProduct` | 6 | 1 | proof |
 | `Sheaf.Paper.EtaleFiniteDataDescent` | 6 | 1 | proof |
 | `Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial` | 6 | 1 | proof |
 | `Sheaf.Paper.EtaleHypercoverProduct` | 6 | 1 | proof |
@@ -356,6 +357,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.EtaleAffineQcoherent` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleDirectedColimitDescent` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints` | 7 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleInjectiveColimitAcyclic` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePoints` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension` | 7 | 1 | proof |
@@ -452,7 +454,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.NumberTheory.Padics.AdicLimitFiniteModules` | 7 | 4 | proof |
 | `Sheaf.NumberTheory.Padics.FiniteCoefficientFields` | 7 | 1 | proof |
 | `Sheaf.Paper.CechNerveFreeHomology` | 7 | 1 | proof |
-| `Sheaf.Paper.DirectImageSplitCoverProduct` | 7 | 1 | proof |
 | `Sheaf.Paper.DirectedColimitBaseChangeElementwise` | 7 | 1 | proof |
 | `Sheaf.Paper.InverseImageFreeEtaleModule` | 7 | 1 | proof |
 | `Sheaf.Paper.LisseAdicFiberFunctors` | 7 | 7 | proof |
@@ -559,7 +560,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.FiniteClopenOpenCoverSection` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteDimensionalResidueFieldOfIsolatedFiberPoint` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom` | 8 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteLocallyFreeDerivedHom` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType` | 8 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree` | 8 | 1 | proof |
@@ -744,7 +744,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.Topology.TopologicalFilteredCohomology` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.EffectiveDescent` | 8 | 3 | proof |
 | `WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology` | 8 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.Morphisms.Slicing` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup` | 8 | 1 | proof |
 | `WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech` | 8 | 2 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension` | 8 | 1 | proof |
@@ -878,6 +877,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SmoothDiagonalKoszulRegular` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SmoothSectionComponentOpen` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism` | 9 | 4 | proof |
 | `Sheaf.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SpecSurjectiveBaseChange` | 9 | 1 | proof |
