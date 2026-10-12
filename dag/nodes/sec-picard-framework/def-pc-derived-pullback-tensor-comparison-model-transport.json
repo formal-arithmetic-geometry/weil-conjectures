@@ -1,0 +1,125 @@
+{
+ "id": "def-pc-derived-pullback-tensor-comparison-model-transport",
+ "kind": "definition",
+ "title": "Transport from a derived pullback monoidal model",
+ "statement": "For a morphism g and a derived pullback core monoidal model m satisfying IsDerivedPullbackMonoidalModel g m, there exists a family τ satisfying IsCanonicalPullbackTensorComparison g τ.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079U, K-flat descent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-derived-pullback-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the K-flat descent construction to the counit and tensorator supplied by the model; transport along K-flat resolutions and verify naturality.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback-tensor-comparison"
+ ],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical tensor comparison for derived inverse image of module sheaves",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image tensor of unbounded quasi coherent complexes canonical comparison",
+   "results": "8 generic sheaf and homological-complex tensor hits; no scheme derived pullback tensor comparison definition.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.μ",
+   "results": "Unknown identifier on public index; local upstream localization lax monoidal map found and reused.",
+   "date": "2026-10-12",
+   "verdict": "generic localization map reused"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*pullback.*tensor|pullback.*tensor.*derived; canonicalPullbackTensorComparison; IsCanonicalPullbackTensorComparison; pullbackTensorModelMap in DAG, Mathlib, WeilConjectures and lean/Sheaf",
+   "results": "Existing derivedPullback_tensorProduct is an existential K-flat-coordinate theorem, not a named comparison on the shared derived monoidal tensor. Generic upstream DerivedCategory.laxMonoidalQ reused. No canonical global comparison definition found; no name collisions.",
+   "date": "2026-10-12",
+   "verdict": "no exact definition; existing components reused"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": null,
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalPullbackTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_canonical_from_model",
+  "statement": "theorem exists_canonical_from_model {T X : Scheme.{uTC}} (g : T ⟶ X) (m : (derivedPullback g).CoreMonoidal) (hm : IsDerivedPullbackMonoidalModel g m) : ∃ τ : ∀ E K : schemeDerivedCategory X, (derivedPullback g).obj (E ⊗ K) ⟶ (derivedPullback g).obj E ⊗ (derivedPullback g).obj K, IsCanonicalPullbackTensorComparison g τ",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T223419-L-1641887",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bsc",
+  "group": "R1",
+  "result": "fix"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T223419-L-1641887",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

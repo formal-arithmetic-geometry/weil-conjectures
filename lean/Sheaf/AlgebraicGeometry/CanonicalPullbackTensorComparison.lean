@@ -5,6 +5,7 @@ Authors: SHEAF group R1
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
@@ -125,6 +126,20 @@ def IsCanonicalPullbackTensorComparison {T X : Scheme.{uTC}} (g : T ⟶ X)
       (derivedPullback g).map (a ⊗ₘ b) ≫ τ E' K' =
         τ E K ≫ ((derivedPullback g).map a ⊗ₘ (derivedPullback g).map b)
 
+/-- Transport a verified core-monoidal model to the canonical comparison predicate.
+The model supplies the counit and K-flat coordinate equations; the transport is the
+standard descent argument through K-flat resolutions.
+Source: Stacks, 079U; perfect.tex, 0DJA(1)
+(blueprint: def-pc-derived-pullback-tensor-comparison-model-transport). -/
+theorem exists_canonical_from_model {T X : Scheme.{uTC}} (g : T ⟶ X)
+    (m : (derivedPullback g).CoreMonoidal)
+    (hm : IsDerivedPullbackMonoidalModel g m) :
+    ∃ τ : ∀ E K : schemeDerivedCategory X,
+      (derivedPullback g).obj (E ⊗ K) ⟶
+        (derivedPullback g).obj E ⊗ (derivedPullback g).obj K,
+      IsCanonicalPullbackTensorComparison g τ := by
+  sorry
+
 /-- Existence of the canonical derived tensor comparison.
 Proof: choose K-flat representatives of both inputs (lem-pc-kflat-resolution).
 Their tensor and pullbacks are K-flat (lem-pc-kflat-tensor-product and
@@ -142,7 +157,8 @@ theorem exists_canonicalPullbackTensorComparison {T X : Scheme.{uTC}} (g : T ⟶
       (derivedPullback g).obj (E ⊗ K) ⟶
         (derivedPullback g).obj E ⊗ (derivedPullback g).obj K,
       IsCanonicalPullbackTensorComparison g τ := by
-  sorry
+  obtain ⟨m, hm⟩ := exists_derivedPullbackMonoidalModel g
+  exact exists_canonical_from_model g m hm
 
 /-- The canonical derived tensor comparison is unique: two families satisfying the
 characterising predicate agree.
