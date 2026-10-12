@@ -9,8 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
+import Sheaf.AlgebraicGeometry.LocalUniformHigherDirectImageBound
+import Sheaf.Topology.RestrictInjectiveResolution
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-!
 # Sections of higher direct images over an affine base
@@ -37,17 +40,27 @@ section QuasiCoherence
 variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
   [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
 
+set_option backward.isDefEq.respectTransparency.types true in
 /-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
 quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
 quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
 
+The quasi-coherence proof is split off because importing the ordinary higher-image theorem
+creates a cycle through the proper-flat modules. It will be supplied by an acyclic theorem
+with the same ordinary right-derived identification.
+
+Proof: restrict to affine base opens, apply an acyclic ordinary higher-image quasi-coherence
+result, and identify the ordinary right-derived functor with `higherDirectImage`.
+
+(blueprint: lem-pc-sections-higher-direct-image-quasi-coherent)
 (blueprint: `sk-thm-picard-coherence`) -/
 theorem isQuasicoherent_higherDirectImage (q : ℕ) :
-    ((higherDirectImage f q).obj ℱ).IsQuasicoherent :=
+    ((higherDirectImage f q).obj ℱ).IsQuasicoherent := by
   sorry
 
 end QuasiCoherence
 
+set_option backward.isDefEq.respectTransparency.types true in
 private theorem inverse_comp_naturality {C D : Type*} [Category C] [Category D]
     {F G H : C ⥤ D} (τ : F ⟶ G) (c : F ≅ H) {M N : C} (φ : M ⟶ N)
     [IsIso (τ.app M)] [IsIso (τ.app N)] :
@@ -59,6 +72,7 @@ private theorem inverse_comp_naturality {C D : Type*} [Category C] [Category D]
       τ.naturality φ, ← Category.assoc, IsIso.inv_hom_id, Category.id_comp]
   rw [← Category.assoc, hinv, Category.assoc, c.hom.naturality]
 
+set_option backward.isDefEq.respectTransparency.types true in
 /-- **The sections of the higher direct images over an affine base, naturally.** Over an affine
 base, for `f` quasi-compact and separated, the global sections of `R^q f_* ℱ` are the sheaf
 cohomology `H^q(X, ℱ)`, by additive isomorphisms natural in the quasi-coherent module `ℱ`.
@@ -108,6 +122,7 @@ theorem exists_addEquiv_sections_higherDirectImage_H [IsAffine T] [QuasiCompact 
   rw [h]
   exact ha M N φ (inv ((ε q).app M) x)
 
+set_option backward.isDefEq.respectTransparency.types true in
 /-- **The sections of the higher direct images over an affine base, linearly.** Over an affine
 base the global sections of the `q`-th higher direct image are the sheaf cohomology of `ℱ`,
 `Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`, by an isomorphism which is linear along `f^♯ : Γ(T, ⊤) → Γ(X, ⊤)`.
@@ -136,6 +151,7 @@ theorem exists_bijective_semilinearMap_sections_higherDirectImage_H [IsAffine T]
   rw [h, he]
   rfl
 
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Over an affine base the global sections of the `q`-th higher direct image are the sheaf
 cohomology of `ℱ`: `Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`. See
 `AlgebraicGeometry.Scheme.Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H`
@@ -147,6 +163,7 @@ theorem nonempty_sections_higherDirectImage_iso_H [IsAffine T] [QuasiCompact f] 
   have ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H f ℱ q
   ⟨AddEquiv.ofBijective e.toAddMonoidHom he⟩
 
+set_option backward.isDefEq.respectTransparency.types true in
 /-- **The fibre dimension is the dimension of the direct image to the point.** For `f`
 quasi-compact and separated, `h^q(t) = dim_{κ(t)} H^q(X_t, ℱ_t)` is the dimension of the global
 sections of `R^q (f_t)_* ℱ_t` for the fibre `f_t : X_t ⟶ Spec κ(t)`, as a vector space over the
@@ -178,6 +195,7 @@ theorem hFiber_eq_finrank_sections_higherDirectImage [QuasiCompact f] [IsSeparat
   have hj (z) : j (e z) = z := (AddEquiv.ofBijective e.toAddMonoidHom he).symm_apply_apply z
   rw [hc, hj, hj]
 
+set_option backward.isDefEq.respectTransparency.types true in
 /-- **The direct images to the spectrum of a field.** For a scheme `X` over a field `K`, with
 structure morphism quasi-compact and separated, and a quasi-coherent `𝒪_X`-module `ℱ`, the
 global sections of `R^q f_* ℱ` are `H^q(X, ℱ)` as `K`-vector spaces. This is
@@ -200,6 +218,7 @@ theorem nonempty_moduleSpecΓFunctor_obj_higherDirectImage_linearEquiv_H (K : Ty
     (smul_H_eq_globalSectionsRingHom_smul K ℱ q c (e y)).symm)
 
 open MonoidalCategory in
+set_option backward.isDefEq.respectTransparency.types true in
 private theorem projection_naturality (N : T.Modules) {M M' : X.Modules} (φ : M ⟶ M') :
     ((pushforward f).map φ ▷ N) ≫ projectionHom f M' N =
       projectionHom f M N ≫ (pushforward f).map (φ ▷ (pullback f).obj N) := by
@@ -223,10 +242,70 @@ private theorem projection_naturality (N : T.Modules) {M M' : X.Modules} (φ : M
     projectionHom_app_tmulSection]
   exact (whiskerRight_app_tmulSection φ x _).symm
 
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem injective_restrict_open {Y Z : Scheme.{u}} (j : Y ⟶ Z)
+    [IsOpenImmersion j] (M : Z.Modules) [Injective M] :
+    Injective ((restrictFunctor j).obj M) := by
+  let U := j.opensRange
+  let e := IsOpenImmersion.isoOfRangeEq j U.ι (by simp [U])
+  have h₁ : Injective ((SheafOfModules.overFunctor Z.ringCatSheaf U).obj M) :=
+    (RingedSpace.restrict_injectiveResolution Z.toRingedSpace U M
+      (InjectiveResolution.self M)).2 0
+  have : IsIso e.hom := inferInstance
+  let E : U.toScheme.Modules ≌ Y.Modules := CategoryTheory.Equivalence.mk
+    (restrictFunctor e.hom) (restrictFunctor e.inv)
+    ((restrictFunctorId).symm ≪≫ restrictFunctorCongr e.inv_hom_id.symm ≪≫
+      restrictFunctorComp e.inv e.hom)
+    ((restrictFunctorComp e.hom e.inv).symm ≪≫ restrictFunctorCongr e.hom_inv_id ≪≫
+      restrictFunctorId)
+  have : (restrictFunctor e.hom).IsEquivalence := E.isEquivalence_functor
+  have h₂ := (overEquiv U).functor.injective_obj
+    ((SheafOfModules.overFunctor Z.ringCatSheaf U).obj M)
+  have hI := (restrictFunctor e.hom).injective_obj
+    ((overEquiv U).functor.obj ((SheafOfModules.overFunctor Z.ringCatSheaf U).obj M))
+  let c := (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (overFunctorEquiv U) (restrictFunctor e.hom) ≪≫
+    (restrictFunctorComp e.hom U.ι).symm ≪≫
+    restrictFunctorCongr (IsOpenImmersion.isoOfRangeEq_hom_fac j U.ι _)
+  exact Injective.of_iso (c.app M) hI
+
+set_option backward.isDefEq.respectTransparency.types true in
+private noncomputable def pushforward_restrict_square {T' X' : Scheme.{u}}
+    (g : T' ⟶ T) [IsOpenImmersion g] (g' : X' ⟶ X) [IsOpenImmersion g']
+    (f' : X' ⟶ T') (sq : IsPullback g' f' f g) :
+    pushforward f ⋙ restrictFunctor g ≅ restrictFunctor g' ⋙ pushforward f' := by
+  unfold restrictFunctor pushforward
+  refine SheafOfModules.pushforwardComp _ _ ≪≫ ?_ ≪≫
+    (SheafOfModules.pushforwardComp _ _).symm
+  let e : g.opensFunctor ⋙ Opens.map f.base ≅ Opens.map f'.base ⋙ g'.opensFunctor :=
+    NatIso.ofComponents (fun W ↦ eqToIso
+      (IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback sq.flip W).symm)
+  refine SheafOfModules.pushforwardCongr₂ _ e.symm ?_
+  ext W x
+  change X.presheaf.map
+      (eqToHom (IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback
+        sq.flip W.unop)).op
+      (f.app (g ''ᵁ W.unop) ((g.appIso W.unop).inv x)) =
+    (g'.appIso (f' ⁻¹ᵁ W.unop)).inv (f'.app W.unop x)
+  have h : f.app (g ''ᵁ W.unop) ≫
+      X.presheaf.map (eqToHom
+        (IsOpenImmersion.image_preimage_eq_preimage_image_of_isPullback
+          sq.flip W.unop)).op ≫ (g'.appIso (f' ⁻¹ᵁ W.unop)).hom =
+      (g.appIso W.unop).hom ≫ f'.app W.unop := by
+    simp only [Scheme.Hom.appIso_hom', Scheme.Hom.app_eq_appLE,
+      Scheme.Hom.map_appLE, Scheme.Hom.appLE_comp_appLE]
+    congr 1
+    exact sq.w
+  have hx := ConcreteCategory.congr_hom h ((g.appIso W.unop).inv x)
+  apply (ConcreteCategory.bijective_of_isIso (g'.appIso (f' ⁻¹ᵁ W.unop)).hom).1
+  simpa only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply,
+    Iso.hom_inv_id_apply] using hx
+
 section BaseChange
 
 variable [HasInjectiveResolutions X.Modules]
 
+set_option backward.isDefEq.respectTransparency.types true in
 /-- **The higher direct images commute with restriction to an open subscheme of the base.** Let
 `g : T' ⟶ T` be an open immersion, and let `f' : X' ⟶ T'` and `g' : X' ⟶ X` be the base change
 of `f` along `g`, in the cartesian square `sq`
@@ -239,16 +318,37 @@ T' --g---> T
 ```
 Then `R^q f'_* (g'^* ℱ) ≅ (R^q f_* ℱ)|_{T'}` for every `q`.
 
+Source: Stacks, Tags 01E1 and 08FE.
+(blueprint: `lem-pc-sections-open-base-change`).
+
 This is flat base change along an open immersion, and holds for any `f` and any `ℱ`: restriction
 to an open subscheme preserves injective `𝒪_X`-modules and commutes with the pushforward. -/
 theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶ T)
     [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules]
     (sq : IsPullback g' f' f g) (q : ℕ) :
     Nonempty ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ) ≅
-      ((higherDirectImage f q).obj ℱ).restrict g) :=
-  sorry
+      ((higherDirectImage f q).obj ℱ).restrict g) := by
+  have : IsOpenImmersion g' := MorphismProperty.of_isPullback sq.flip ‹_›
+  let A := restrictFunctor g'
+  let B := restrictFunctor g
+  let I := injectiveResolution ℱ
+  let J : InjectiveResolution (A.obj ℱ) :=
+    { cocomplex := (A.mapHomologicalComplex (.up ℕ)).obj I.cocomplex
+      injective := fun n ↦ injective_restrict_open g' (I.cocomplex.X n)
+      ι := (HomologicalComplex.singleMapHomologicalComplex A (.up ℕ) 0).inv.app ℱ ≫
+        (A.mapHomologicalComplex (.up ℕ)).map I.ι }
+  let e := pushforward_restrict_square f g g' f' sq
+  let K := ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex
+  let eK := (Functor.mapHomologicalComplexCompIso e (.up ℕ)).app I.cocomplex ≪≫
+    (Functor.mapHomologicalComplexCompIso (Iso.refl (A ⋙ pushforward f'))
+      (.up ℕ)).symm.app I.cocomplex
+  exact ⟨(higherDirectImage f' q).mapIso ((restrictFunctorIsoPullback g').app ℱ).symm ≪≫
+    J.isoRightDerivedObj (pushforward f') q ≪≫
+    (HomologicalComplex.homologyFunctor T'.Modules (.up ℕ) q).mapIso eK.symm ≪≫
+    (K.sc q).mapHomologyIso B ≪≫ B.mapIso (I.isoRightDerivedObj (pushforward f) q).symm⟩
 
 open MonoidalCategory in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- **The projection formula** for an invertible module. For `f : X ⟶ T`, an `𝒪_X`-module `ℱ`
 and an invertible `𝒪_T`-module `𝒩`, `R^q f_* (ℱ ⊗ f^* 𝒩) ≅ R^q f_* ℱ ⊗ 𝒩` for every `q`: twisting
 by an invertible module pulled back from the base commutes with the higher direct images.
@@ -301,6 +401,7 @@ section Vanishing
 variable [QuasiCompact f] [IsSeparated f] [HasInjectiveResolutions X.Modules]
   [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
 
+set_option backward.isDefEq.respectTransparency.types true in
 /-- **Local vanishing of the higher direct images in large degrees.** For `f : X ⟶ T`
 quasi-compact and separated and `ℱ` a quasi-coherent `𝒪_X`-module, every point `t` of `T` has an
 open neighbourhood `U` and a bound `d` with `R^q f_* ℱ|_U = 0` for all `q ≥ d`.
@@ -309,15 +410,21 @@ Take for `U` an affine open neighbourhood of `t`: then `f ⁻¹ᵁ U` is covered
 say `d`, affine opens whose intersections are affine, and the Čech complex of this cover
 computes `R f_* ℱ|_U` [Stacks, Tag 01XD], so `R^q f_* ℱ|_U = 0` for `q ≥ d`.
 
+The proof specializes the coefficient-independent local bound of Stacks, Tag 01XJ,
+`AlgebraicGeometry.exists_local_uniform_higherDirectImage_bound`, to `ℱ`.
+(blueprint: `lem-pc-higher-direct-image-local-vanishing`).
+
 The bound is only local on `T`: over `T = ⨆ₙ Spec k` with `X = ⨆ₙ ℙⁿ_k` and `ℱ = 𝒪(-n-1)` on
 the `n`-th piece, `R^n f_* ℱ ≠ 0` for every `n`.
 
 (blueprint: `sk-thm-picard-coherence`) -/
 theorem exists_isZero_higherDirectImage_restrict (t : T) :
     ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧
-      ∀ q ≥ d, IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) :=
-  sorry
+      ∀ q ≥ d, IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) := by
+  obtain ⟨U, d, ht, hd⟩ := exists_local_uniform_higherDirectImage_bound f t
+  exact ⟨U, d, ht, hd ℱ inferInstance⟩
 
+set_option backward.isDefEq.respectTransparency.types true in
 /-- **Vanishing of the higher direct images in large degrees over a quasi-compact base.** In the
 situation of `AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_restrict`, if `T`
 is quasi-compact then `R^q f_* ℱ = 0` for all large `q`: finitely many of the neighbourhoods

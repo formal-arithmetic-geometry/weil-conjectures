@@ -1,0 +1,105 @@
+{
+ "id": "lem-pc-sections-higher-direct-image-quasi-coherent",
+ "kind": "statement",
+ "title": "Quasi-coherence of higher direct images",
+ "statement": "Let $f:X\\to T$ be quasi-compact and quasi-separated and let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module. For every $q\\in\\mathbf N$, the higher direct image $R^q f_*\\mathcal F$ is quasi-coherent on $T$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01XJ",
+  "place": "Tag 01XJ (1), quasi-coherence of higher direct images"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to affine opens of the base and apply the ordinary higher-image quasi-coherence theorem for quasi-compact quasi-separated morphisms; transport the resulting ordinary right-derived statement to Scheme.Modules.higherDirectImage by definitional identification of the module direct image and its right derived functor.",
+   "uses": [
+    "lem-pc-ordinary-higher-image-quasi-coherent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ordinary-higher-image-quasi-coherent"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01XJ",
+  "place": "Tag 01XJ (1), specialized to Scheme.Modules.higherDirectImage; proof remains to be supplied after cycle repair"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image restriction to open immersion and injective sheaf modules",
+   "results": "HTTP 500 from the search service; unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of sheaf modules along an open immersion preserves injective objects",
+   "results": "Eight hits about local injectivity and faithful underived pushforward; no injective preservation or higher direct image comparison. Loogle Functor.rightDerived returned unknown identifier.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|PreservesInjectiveObjects|image_preimage_eq_preimage_image_of_isPullback",
+   "results": "Mathlib has the open-image pullback equality and generic injective-preservation APIs, but no higher direct image theorem. Local repository supplies restrict_injectiveResolution and exists_local_uniform_higherDirectImage_bound.",
+   "date": "2026-10-13",
+   "verdict": "use existing generic APIs and local statements"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ordinary-higher-image-quasi-coherent",
+   "place": "Quasi-coherence theorem used by the original implementation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage/Sections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
+  "statement": "theorem isQuasicoherent_higherDirectImage (q : ℕ) :\n    ((higherDirectImage f q).obj ℱ).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T232904-L-2043237",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T232904-L-2043237",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-sections-open-base-change",
+ "kind": "statement",
+ "title": "Higher direct image restriction along an arbitrary open immersion",
+ "statement": "Let $f:X\\to T$ be a morphism of schemes [def-pc-scheme, def-pc-morphism-conventions], and $\\mathcal F$ an $\\mathcal O_X$-module [pqf-def-cohomology]. For an open immersion $g:T\\prime\\to T$ and its cartesian base change square with $g\\prime:X\\prime\\to X$ and $f\\prime:X\\prime\\to T\\prime$, for every $q\\ge0$ there is an isomorphism $R^q f\\prime_* (g\\prime{}^*\\mathcal F)\\cong (R^q f_*\\mathcal F)|_{T\\prime}$. No quasi-coherence or finiteness assumption is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08FE",
+  "place": "Tag 08FE, together with Tag 01E1(1), bounded-below injective-resolution case; ordinary module pushforward and exact restriction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Factor an open immersion j through its open image. Restriction to that image sends an injective module to an injective module, by applying the existing restricted-resolution theorem to the trivial resolution of the injective module. The over-site equivalence and the explicit restriction equivalence associated with the isomorphism onto the image preserve injectives. Transport through overFunctorEquiv and restriction-composition isomorphisms. Exactness of open restriction follows from the existing preservesLimitsOfSize_restrictFunctor and its left-adjoint colimit preservation.",
+   "uses": [
+    "lem-sc-ringed-space-restrict-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pullback square makes gprime an open immersion. On an open W of Tprime the identity gprime image fprime inverse W = f inverse g image W is the Mathlib image_preimage_eq_preimage_image_of_isPullback theorem. Compose the module pushforward functors, then use pushforwardCongr2 with that equality. To check the scalar maps, compose with the invertible gprime.appIso.hom. Rewrite appIso_homprime and appLE_comp_appLE: both maps are the appLE of the two equal composite scheme morphisms in the square. Thus pushforward followed by restriction is naturally isomorphic to restriction followed by pushforward.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict an injective resolution I of F termwise to Xprime, with the augmentation given by singleMapHomologicalComplex and the restriction of I. Exactness and injective preservation give a resolution J. Apply the underived comparison termwise. Take homology, commute it with exact restriction on T, and compose the two isoRightDerivedObj comparisons. Finally use restrictFunctorIsoPullback on F to obtain the stated domain. This includes degree zero and the empty open, with the same argument.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-restrict-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08FE",
+  "place": "Tag 08FE, together with Tag 01E1(1), bounded-below injective-resolution case; ordinary module pushforward and exact restriction; implemented by Q1 using the recorded library APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image restriction to open immersion and injective sheaf modules",
+   "results": "HTTP 500 from the search service; unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of sheaf modules along an open immersion preserves injective objects",
+   "results": "Eight hits about local injectivity and faithful underived pushforward; no injective preservation or higher direct image comparison. Loogle Functor.rightDerived returned unknown identifier.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|PreservesInjectiveObjects|image_preimage_eq_preimage_image_of_isPullback",
+   "results": "Mathlib has the open-image pullback equality and generic injective-preservation APIs, but no higher direct image theorem. Local repository supplies restrict_injectiveResolution and exists_local_uniform_higherDirectImage_bound.",
+   "date": "2026-10-13",
+   "verdict": "use existing generic APIs and local statements"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-support-hi",
+   "place": "Clause (1), affine-local reduction: arbitrary cartesian base change along an open immersion, including an isomorphic presentation of its image.",
+   "via": []
+  },
+  "same_as": [
+   "lem-pc-higher-direct-image-open-restriction"
+  ]
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage/Sections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict",
+  "statement": "theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶ T)\n    [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules]\n    (sq : IsPullback g' f' f g) (q : ℕ) :\n    Nonempty ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ) ≅\n      ((higherDirectImage f q).obj ℱ).restrict g)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T232904-L-2043237",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T232904-L-2043237",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

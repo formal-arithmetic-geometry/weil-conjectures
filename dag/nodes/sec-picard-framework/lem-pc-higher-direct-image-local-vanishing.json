@@ -1,0 +1,105 @@
+{
+ "id": "lem-pc-higher-direct-image-local-vanishing",
+ "kind": "statement",
+ "title": "Local eventual vanishing of higher direct images",
+ "statement": "Let $f:X\\to T$ be a quasi-compact separated morphism of schemes [def-pc-scheme, def-pc-morphism-conventions], and let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. For every point $t\\in T$ there are an open neighbourhood $U$ of $t$ and $d\\in\\mathbf N$ such that $(R^q f_*\\mathcal F)|_U=0$ for every $q\\ge d$ [pqf-def-cohomology]. No quasi-compactness of T is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01XJ",
+  "place": "Tag 01XJ, finite affine neighbourhood bound, specializing the coefficient-independent local statement"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "pqf-def-cohomology",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Separatedness implies quasi-separatedness. Apply the existing coefficient-independent local bound for qcqs morphisms to f and t. It gives U,d, membership of t, and vanishing for every quasi-coherent coefficient in degrees at least d. Specialize its coefficient to F and supply the given quasi-coherence instance. Scheme.Modules.higherDirectImage is definitionally the ordinary rightDerived of the same RingedSpace.moduleDirectImage, so the returned vanishing is exactly the goal.",
+   "uses": [
+    "lem-pc-local-uniform-higher-direct-image-bound"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-local-uniform-higher-direct-image-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01XJ",
+  "place": "Tag 01XJ, finite affine neighbourhood bound, specializing the coefficient-independent local statement; implemented by Q1 using the recorded library APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image restriction to open immersion and injective sheaf modules",
+   "results": "HTTP 500 from the search service; unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of sheaf modules along an open immersion preserves injective objects",
+   "results": "Eight hits about local injectivity and faithful underived pushforward; no injective preservation or higher direct image comparison. Loogle Functor.rightDerived returned unknown identifier.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|PreservesInjectiveObjects|image_preimage_eq_preimage_image_of_isPullback",
+   "results": "Mathlib has the open-image pullback equality and generic injective-preservation APIs, but no higher direct image theorem. Local repository supplies restrict_injectiveResolution and exists_local_uniform_higherDirectImage_bound.",
+   "date": "2026-10-13",
+   "verdict": "use existing generic APIs and local statements"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-support-hi",
+   "place": "Locality of higher direct images and the local bound used by its proof and the source Sections module.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage/Sections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_restrict",
+  "statement": "theorem exists_isZero_higherDirectImage_restrict (t : T) :\n    ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧\n      ∀ q ≥ d, IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T232904-L-2043237",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T232904-L-2043237",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
