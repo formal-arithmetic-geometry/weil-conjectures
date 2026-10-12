@@ -1,0 +1,102 @@
+{
+ "id": "lem-pc-affine-flat-module-stalk-flat",
+ "kind": "statement",
+ "title": "Affine-flat sections give flat stalks",
+ "statement": "For a scheme Y, module sheaf G, affine-local flatness IsFlatOver G (𝟙 Y), and point x : Y, the stalk G_x is flat over the stalk ring O_{Y,x}.",
+ "stmt_deps": [
+  "def-pc-scheme-module-flat-over",
+  "def-pc-module-stalk-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma flat-stalks-flat, using Algebra Lemma colimit-flat and localization flatness"
+ },
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood V of x. Affine neighbourhoods U contained in V form a filtered basis, and the stalk is their filtered colimit as an O(V)-module. The hypothesis makes each G(U) flat over O(V), so the filtered colimit is flat. The stalk ring is the localization of O(V) at x, and localization flatness equivalence transfers flatness to O_{Y,x}.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-flat-modules",
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-flat-over-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "lemma-flat-stalks-flat"
+ },
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-picard-coherence",
+   "place": "flatness step for affine-local module tensor flatness"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFlatModuleStalkFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFlatModuleStalkFlat.lean",
+  "declaration": "AlgebraicGeometry.flat_stalk_of_affineFlatOver_identity",
+  "statement": "theorem flat_stalk_of_affineFlatOver_identity {Y : Scheme.{u}} (G : Y.Modules) (hflat : Scheme.Modules.IsFlatOver G (𝟙 Y)) (x : Y) : Module.Flat (Y.toRingedSpace.presheaf.stalk x) ((RingedSpace.moduleStalkFunctor Y.toRingedSpace x).obj G)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf with flat sections on affine subopens has flat stalks",
+   "results": "Search returned scheme morphism flatness and Module.flat_of_localized_span; no theorem for arbitrary module sheaves.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module.Flat",
+   "results": "Flat module criteria and basic flatness instances; no affine-basis stalk theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*stalk|stalk.*flat in Mathlib and both library roots",
+   "results": "FlatSheafStalk proves the converse direction. IntrinsicFlatModuleTensorFlat assumes quasi-coherence. No exact match.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T184253-L-4001209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T184253-L-4001209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
