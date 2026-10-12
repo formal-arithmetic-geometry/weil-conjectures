@@ -29,18 +29,12 @@
  ],
  "proof": [
   {
-   "text": "If $f$ is a unit then $R/fR=0$, which is regular vacuously. Otherwise let $\\bar{\\mathfrak q}$ be any prime of $R/fR$ and let $\\mathfrak p$ be its inverse image in $R$. By [lem-weil-pbc-localization-at-prime-of-quotient], $(R/fR)_{\\bar{\\mathfrak q}}$ is $R_{\\mathfrak p}/fR_{\\mathfrak p}$. Thus it suffices, for every such $\\mathfrak p$, to prove that this quotient is a regular local ring.",
-   "uses": [
-    "lem-weil-pbc-localization-at-prime-of-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Proposition Tag 00CT (proposition-localize-quotient), applied in the reduction in More on Algebra, Lemma Tag 07PF"
-   }
+   "text": "The quotient R/(f) is Noetherian. For every prime q of it let p be its inverse image in R. Then f belongs to p since its image in R/(f) is zero, and D(f) does not belong to p since its quotient image is a unit and q is proper. Thus f/1 belongs to the maximal ideal of R_p, while D(f)/1 is a unit there. If f is a unit, there are no q and the argument is vacuous.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Fix such a prime $\\mathfrak p$. The derivation $D$ extends to $R_{\\mathfrak p}$ by [lem-weil-pbc-derivation-extends]. The hypothesis that $D(f)$ is a unit modulo $f$ remains true after this localization: an inverse relation $aD(f)+bf=1$ localizes. If $f\\notin\\mathfrak p$, the displayed quotient is zero; otherwise $f\\in\\mathfrak pR_{\\mathfrak p}$ and $D_{\\mathfrak p}(f)$ is a unit modulo $f$. If $f$ belonged to $(\\mathfrak pR_{\\mathfrak p})^2$, the Leibniz rule would put $D_{\\mathfrak p}(f)$ in $\\mathfrak pR_{\\mathfrak p}$, contradicting its unit image. Hence $f\\notin(\\mathfrak pR_{\\mathfrak p})^2$, and [lem-weil-pbc-regular-local-hypersurface-criterion] gives that $R_{\\mathfrak p}/fR_{\\mathfrak p}$ is regular local.",
+   "text": "Extend D to R_p using lem-weil-pbc-derivation-extends. Its value at f/1 is D(f)/1 and hence is a unit. By induction on sums of products of elements of the maximal ideal, additivity and Leibniz show that the derivative of every element of its square belongs to the maximal ideal: each product derivative is a sum of two terms each containing a factor in that ideal. Consequently f/1 is outside its square. Apply lem-weil-pbc-regular-local-hypersurface-criterion to conclude R_p/(f/1) is regular local.",
    "uses": [
     "lem-weil-pbc-derivation-extends",
     "lem-weil-pbc-regular-local-hypersurface-criterion"
@@ -48,18 +42,19 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PF (lemma-quotient-regular), proof: reduction to a regular local ring, the Leibniz-rule contradiction for $f\\in\\mathfrak m^2$, and use of Algebra Lemma Tag 00NQ"
+    "place": "More on Algebra, Lemma Tag 07PF (lemma-quotient-regular, line 11798) and its proof (reduction to R local; f not in m^2 by the Leibniz rule; Algebra Lemma Tag 00NQ lemma-regular-ring-CM)"
    }
   },
   {
-   "text": "Since every localization of $R/fR$ at a prime is regular local by Steps 1 and 2, and $R/fR$ is Noetherian as a quotient of the Noetherian ring $R$, the regular-ring local criterion [lem-weil-pbc-regular-ring-local-criterion] shows that $R/fR$ is regular.",
+   "text": "The extended ideal (f)R_p is the singleton span of f/1 by Ideal.map_span. Mathlib's quotient-localization instance identifies R_p/((f)R_p) as a localization of R/(f) at the image of p.primeCompl. Surjectivity of the quotient map identifies that submonoid with q.primeCompl. IsLocalization.algEquiv then identifies this regular local ring with Localization.AtPrime q. Transport regular localness along the ring equivalence and apply isRegularRing_iff.",
    "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient",
     "lem-weil-pbc-regular-ring-local-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PF (lemma-quotient-regular), proof and Algebra, Definition Tag 00OD (definition-regular)"
+    "place": "More on Algebra, Lemma Tag 07PF (lemma-quotient-regular, line 11798) and its proof (reduction to R local; f not in m^2 by the Leibniz rule; Algebra Lemma Tag 00NQ lemma-regular-ring-CM)"
    }
   }
  ],
@@ -72,7 +67,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07PF (lemma-quotient-regular)"
+  "place": "More on Algebra, Lemma Tag 07PF; Lean glue by Q1, using the prime inverse image to detect the unit before localization"
  },
  "mathlib_searches": [
   {
@@ -149,5 +144,15 @@
   "group": "H1",
   "result": "pass",
   "note": "R CommRing Type u; [IsRegularRing R] = Noetherian + every Localization.AtPrime IsRegularLocalRing (Mathlib class read); f : R unrestricted; D : Derivation ℤ R R = absolute additive Leibniz derivation; hunit IsUnit of Ideal.Quotient.mk (span {f}) (D f) (non-hollow: false for f=0 over ℚ); conclusion IsRegularRing (R ⧸ span {f}); unit-f zero quotient admitted; name #checked, no collision"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T144137-L-2104748",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
