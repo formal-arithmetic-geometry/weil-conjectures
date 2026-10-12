@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-etale-limit-replacement-exact-systems",
+ "kind": "statement",
+ "title": "EtaleLimitReplacementExactSystems",
+ "statement": "Let $I$ be a nonempty directed preordered set and let $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ be an inverse diagram of quasi-compact quasi-separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition morphisms. Let $(X,(f_i))$ be a limit cone [def-weil-pbc-category-colimit]. For each $i$, let $F_i$ be an abelian sheaf on $(D_i)_{\\acute{e}t}$ [def-weil-pbc-abelian-etale-sheaves], with maps $\\varphi_f:D(f^{\\mathrm{op}})^{-1}F_i\\to F_j$ for $f:i\\to j$ [def-weil-pbc-inverse-image] satisfying the canonical inverse-image identity and composition laws. Let $G:I\\to\\operatorname{Ab}(X_{\\acute{e}t})$ be identified objectwise with $f_i^{-1}F_i$ by isomorphisms, its arrows being inverse-image composition followed by pullback of $\\varphi_f$. Let $L$ be a colimit cocone on $G$, with coprojections $\\iota_i$.  There exist a compatible injective coefficient system $A_i$ and a compatible cokernel system $R_i$, both with the canonical inverse-image identity and composition laws. Their pulled-back systems $G_A,G_R$ on $X$ have specified objectwise isomorphisms and canonical transition equations and colimit cocones $L_A,L_R$. There are stage short exact sequences $0\\to F_i\\xrightarrow{a_i} A_i\\xrightarrow{b_i}R_i\\to0$ and a short exact sequence $0\\to L\\xrightarrow a L_A\\xrightarrow b L_R\\to0$. For every $i$ there is a morphism from the inverse image of its stage short complex to the limit short complex whose first component is $e_{G,i}^{-1}\\iota_i$ and third component is $e_{G_R,i}^{-1}\\iota_{R,i}$. Every $A_i$ is injective. No cohomology, connecting maps or acyclicity is asserted. Here an object A is injective if every map into A extends across every monomorphism. A short exact sequence means its first arrow is monic, its second is epic, and the first image equals the second kernel [def-weil-pbc-exact-sequence]. The morphism of short complexes consists of three coefficient maps commuting with their two differentials.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EXZ",
+  "place": "Steps 1 and 2 of the parent acyclic-replacement plan: injective system, stage cokernels and filtered-colimit short exact sequence, with its canonical short-complex morphisms. Tags 09YN and 09YQ identify the scheme-site realization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Choose injective embeddings F_k -> A_k. Define E_i as the product of direct images of A_k over arrows i -> k. Adjunction transposes the maps F_i -> E_i and gives their compatibility. The identity component proves they are monomorphisms. Exact inverse image implies direct image preserves injectives; products of injectives are injective. Take the stage cokernels R_i and cancel their epimorphisms to prove the unit and cocycle laws.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites-injective-system",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull these systems to the limit and take filtered sheaf colimits. Exactness gives 0 -> L -> LE -> LR -> 0 with its canonical coprojection maps.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compatible embedding and quotient maps pull back to morphisms of systems. Their filtered-colimit maps give a short complex. Exact filtered colimits prove its short exactness. Each triple of canonical coprojections defines a morphism from the stage pulled-back short complex, and the first and third components have the asserted formulas by construction.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-of-sites-injective-system",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0EXZ, 09YP, 09YN and 09YQ",
+  "place": "Steps 1 and 2 of the parent acyclic-replacement plan: injective system, stage cokernels and filtered-colimit short exact sequence, with its canonical short-complex morphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible injective etale sheaf systems and acyclic filtered colimits on inverse limits of schemes",
+   "date": "2026-10-12",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit of quasi compact quasi separated schemes compatible injective etale sheaves filtered colimit acyclic",
+   "date": "2026-10-12",
+   "results": "Eight affine-transition-limit results on global structure-sheaf sections and spreading out, none asserting injective abelian sheaf systems or their colimit vanishing."
+  },
+  {
+   "tool": "grep",
+   "query": "δSucc.*natur|extClass_natur",
+   "date": "2026-10-12",
+   "results": "ExtClass.extClass_naturality supplies extension-class naturality, not the injective-system construction or its acyclic colimit. Repository rg for acyclic_replacement also found generic ColimitSitesAcyclicReplacement; its site strictification, sheaf equivalence and H-prime interfaces require scheme translation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitAcyclicReplacement",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Steps 1 and 2 of the parent acyclic-replacement plan: injective system, stage cokernels and filtered-colimit short exact sequence, with its canonical short-complex morphisms.",
+   "via": [
+    "lem-weil-pbc-etale-limit-acyclic-replacement",
+    "lem-weil-pbc-etale-limit-cohomology-connecting-ladder",
+    "lem-weil-pbc-etale-limit-cohomology-class-descent",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitReplacementExactSystems",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitReplacementExactSystems.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_replacement_exact_systems",
+  "statement": "theorem etale_limit_replacement_exact_systems\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : IsColimit L) :\n    ∃ (FR : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φR : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FR i) ⟶ FR j)\n    (hidentityR : ∀ i : I, φR (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (FR i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FR i))\n    (hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φR (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FR i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φR f) ≫ φR g)\n    (GR : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eGR : ∀ i : I, GR.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (FR i))\n    (hGR : ∀ (i j : I) (f : i ⟶ j), GR.map f =\n      (eGR i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (FR i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φR f) ≫ (eGR j).inv)\n    (LR : Cocone GR) (hLR : IsColimit LR)\n    (FI : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (ψ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FI i) ⟶ FI j)\n    (hidentityI : ∀ i : I, ψ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (FI i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FI i))\n    (hcompositionI : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      ψ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FI i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (ψ f) ≫ ψ g)\n    (GI : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eGI : ∀ i : I, GI.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (FI i))\n    (hGI : ∀ (i j : I) (f : i ⟶ j), GI.map f =\n      (eGI i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (FI i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (ψ f) ≫ (eGI j).inv)\n    (LI : Cocone GI) (hLI : IsColimit LI)\n    (a : L.pt ⟶ LI.pt) (b : LI.pt ⟶ LR.pt) (w : a ≫ b = 0)\n    (hE : (ShortComplex.mk a b w).ShortExact)\n    (ai : ∀ i : I, F i ⟶ FI i) (bi : ∀ i : I, FI i ⟶ FR i)\n    (wi : ∀ i : I, ai i ≫ bi i = 0)\n    (hi : ∀ i : I, (ShortComplex.mk (ai i) (bi i) (wi i)).ShortExact)\n    (t : ∀ i : I,\n      (ShortComplex.mk (ai i) (bi i) (wi i)).map\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))) ⟶ ShortComplex.mk a b w),\n      (∀ i : I, Injective (FI i)) ∧\n      (∀ i : I, (t i).τ₁ = (eG i).inv ≫ L.ι.app i) ∧\n      (∀ i : I, (t i).τ₃ = (eGR i).inv ≫ LR.ι.app i)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-74905",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T135320-L-1694208",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-74905",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T135320-L-1694208",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures, proof, node records, source arguments, pruning and report match the stage-3 brief; all delivered modules and the sole direct importer compile cleanly; axioms are standard plus expected sorryAx."
+ }
+}

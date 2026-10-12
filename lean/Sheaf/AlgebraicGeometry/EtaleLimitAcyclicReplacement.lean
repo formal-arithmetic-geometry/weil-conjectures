@@ -8,18 +8,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
-import Sheaf.Paper.ColimitSitesInjectiveSystem
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
-import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
-import Sheaf.CategoryTheory.SiteCechVanishingCriterion
-import Sheaf.CategoryTheory.ColimitSiteSections
+import Sheaf.AlgebraicGeometry.EtaleLimitReplacementExactSystems
+import Sheaf.AlgebraicGeometry.EtaleLimitInjectiveColimitAcyclic
 import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Acyclic replacement of an inverse system of etale sheaves
 
@@ -34,6 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
 /-- Compatible injective embeddings give a short exact limit sequence with acyclic middle term.
 
 Source: Stacks Project, Tag 09YP, injective-system step 0EXZ and dimension shifting 0739;
@@ -119,6 +111,38 @@ theorem etale_limit_acyclic_replacement
             AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) (n + 1)) =
           AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (FR i) n) ≫
             AddCommGrpCat.ofHom (Sheaf.H.map ((eGR i).inv ≫ LR.ι.app i) n) ≫ d
-    := by sorry
+    := by
+  classical
+  obtain ⟨FR, φR, hidentityR, hcompositionR, GR, eGR, hGR, LR, hLR,
+      FI, ψ, hidentityI, hcompositionI, GI, eGI, hGI, LI, hLI, a, b, w, hE,
+      ai, bi, wi, hi, t, hinj, ht1, ht3⟩ :=
+    etale_limit_replacement_exact_systems
+      D c hc F φ hidentity hcomposition G eG hG L hL
+  have hacyclic := etale_limit_injective_colimit_acyclic
+    D c hc FI ψ hidentityI hcompositionI GI eGI hGI LI hLI hinj n
+  let d := AddCommGrpCat.ofHom (Sheaf.H.δSucc hE n)
+  let beta (i : I) := AddCommGrpCat.ofHom (Sheaf.H.δSucc (hi i) n)
+  refine ⟨FR, φR, hidentityR, hcompositionR, GR, eGR, hGR, LR, hLR,
+    LI.pt, a, b, w, hE, d, ?_, hacyclic, beta, ?_⟩
+  · intro x
+    rfl
+  · intro i
+    obtain ⟨hY, δX, δY, hδX, hδY, _, _, _, _, _, _, hδ⟩ :=
+      pullbackCohomology_longExact_ladder (c.π.app (op i))
+        (ShortComplex.mk (ai i) (bi i) (wi i)) (hi i)
+    ext x
+    change Sheaf.H.map ((eG i).inv ≫ L.ι.app i) (n + 1)
+        (cohomologyMap (c.π.app (op i)) (F i) (n + 1)
+          (Sheaf.H.δSucc (hi i) n x)) =
+      Sheaf.H.δSucc hE n (Sheaf.H.map ((eGR i).inv ≫ LR.ι.app i) n
+        (cohomologyMap (c.π.app (op i)) (FR i) n x))
+    have hp : cohomologyMap (c.π.app (op i)) (F i) (n + 1)
+        (Sheaf.H.δSucc (hi i) n x) =
+      Sheaf.H.δSucc hY n (cohomologyMap (c.π.app (op i)) (FR i) n x) := by
+      rw [Sheaf.H.δSucc_apply, Sheaf.H.δSucc_apply]
+      simpa only [hδX n x, hδY] using hδ n x
+    rw [hp, ← ht1 i, ← ht3 i]
+    exact Sheaf.H.map_δSucc hY hE (t i) n _
+
 
 end AlgebraicGeometry.Etale

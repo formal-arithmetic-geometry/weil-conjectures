@@ -18,40 +18,21 @@
  ],
  "proof": [
   {
-   "text": "Choose injective embeddings F_k -> A_k. Define E_i as the product of direct images of A_k over arrows i -> k. Adjunction transposes the maps F_i -> E_i and gives their compatibility. The identity component proves they are monomorphisms. Exact inverse image implies direct image preserves injectives; products of injectives are injective. Take the stage cokernels R_i and cancel their epimorphisms to prove the unit and cocycle laws.",
+   "text": "Construct compatible injective and cokernel systems, stage short exact sequences, their exact limit sequence and the canonical morphisms from the pulled-back stage sequences. This step has no cohomology or vanishing claim.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites-injective-system",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-site-pullback-abelian-exact"
+    "lem-weil-pbc-etale-limit-replacement-exact-systems"
    ],
    "elementary": false
   },
   {
-   "text": "Pull these systems to the limit and take filtered sheaf colimits. Exactness gives 0 -> L -> LE -> LR -> 0 with its canonical coprojection maps.",
+   "text": "Apply positive-cohomology vanishing for the compatible injective system to its actual limit cocone in degree n+1.",
    "uses": [
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-site-pullback-abelian-exact"
+    "lem-weil-pbc-etale-limit-injective-colimit-acyclic"
    ],
    "elementary": false
   },
   {
-   "text": "Use the qcqs etale basis on the limit. Descend each finite affine covering and its object to a stage using the affine-site colimit presentation. On a cofinal tail all its iterated covering fibre products are qcqs systems. Apply the full degree-zero section comparison from 09YN (including its equality criterion) on each, with the same prescribed units; finite products give the Cech-complex colimit. The stage injective Cech complexes are positively acyclic, exact filtered group colimits preserve this, and cofinal finite qcqs coverings permit the Cech criterion. Thus LE has zero positive object cohomology at every qcqs object, including the terminal object. This step uses no higher-degree continuity.",
-   "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-    "lem-weil-pbc-site-injective-cech-acyclic",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-site-cech-vanishing-criterion",
-    "lem-weil-pbc-colimit-of-sites-sections",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "lem-weil-pbc-pretopology-sheaf-condition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Define d as postcomposition with the extension class of the limit short exact sequence. Define beta_i as the stage connecting map. Exact inverse image takes the stage short exact sequence to one on X. The coefficient maps from this pulled-back sequence to the limit sequence form a morphism of short complexes. Naturality of extension classes for that morphism and compatibility of cohomology pullback with extension-class composition identify beta_i followed by the original comparison with the cokernel comparison followed by d. This is the displayed hbeta equation before any comparison-group isomorphisms are introduced.",
+   "text": "Define d and beta_i by Sheaf.H.deltaSucc for the limit and stage short exact sequences. Their values are Yoneda postcomposition by definition. The existing pullback long-exact ladder identifies pullback of the stage boundary with the boundary of the pulled-back short exact sequence. Naturality Sheaf.H.map_deltaSucc for its canonical morphism to the limit sequence gives the required square after substituting the prescribed first and third components.",
    "uses": [
     "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
     "lem-weil-pbc-sheaf-ext-cohomology-long-exact"
@@ -60,27 +41,15 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-colimit-of-sites-injective-system",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-  "lem-weil-pbc-site-injective-cech-acyclic",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-site-cech-vanishing-criterion",
-  "lem-weil-pbc-colimit-of-sites-sections",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-pretopology-sheaf-condition",
+  "lem-weil-pbc-etale-limit-replacement-exact-systems",
+  "lem-weil-pbc-etale-limit-injective-colimit-acyclic",
   "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
   "lem-weil-pbc-sheaf-ext-cohomology-long-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 09YP, 0EXZ, 0739, 09YQ and 01F7",
-  "place": "Steps 1-3 and the untransported naturality square in step 4 of the parent node; Tags 0EXZ, 09YP and 0739 via 09YQ."
+  "document": "Stacks Project, Tags 0EXZ, 09YP, 09YN, 09YQ; Mathlib extension-class naturality",
+  "place": "Construction and Cech vanishing split into independent statements; the boundary construction and its comparison square are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -150,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-9abe6",
-  "group": "E3",
+  "reviewer": "X-74905",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T112835-L-766146",
+  "landing": "20261012T135320-L-1694208",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, node metadata, statements, proofs, report, full compilation, and direct importer reader-gate check matched the stage-3 brief."
+  "note": "independent Codex review: Lean signatures, proof, node records, source arguments, pruning and report match the stage-3 brief; all delivered modules and the sole direct importer compile cleanly; axioms are standard plus expected sorryAx."
  }
 }
