@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-proj-graded-chart-comparison",
+ "kind": "statement",
+ "title": "A graded linear equivalence compares Proj sheaves supplied by fraction charts",
+ "statement": "Let k be a field, S=k[x₀,x₁], and P=Proj S [def-nagata-affine-proj]. Let M,N be S-modules and let G_n⊆M,H_n⊆N be arbitrary sets indexed by n≥0. Let e:M≃_S N be a linear equivalence such that y∈G_n iff e(y)∈H_n. Let F,G be O_P-module sheaves. On every D₊(f) for homogeneous f of positive degree, assume additive injections alpha_f:F(D₊(f))→M_f and beta_f:G(D₊(f))→N_f whose images are the equal-degree fractions [def-sc-degree-zero-module-fractions] with numerators in G_n and H_n respectively. Both chart maps respect scalars via awayToSection and algebraMap to S_f. Both obey the restriction formula y/f^m↦a^m y/g^(e m) for every homogeneous relation g^e=af, e>0, and inclusion D₊(g)⊆D₊(f). Then F and G are isomorphic. No internal grading, finite basis, twists or stalk maps are assumed.",
+ "source": {
+  "document": "Stacks Project; coordinate and chart argument of lem-sc-p1-homogeneous-basis-proj-coproduct",
+  "place": "Constructions, Tags 01M6, 01M7 and 01MN; Sheaves on Spaces, Tag 009U",
+  "url": "https://stacks.math.columbia.edu/tag/01M7"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "Localize the given linear equivalence with IsLocalizedModule.mapEquiv. Its fraction formula is LocalizedModule.map_mk. The numerator-degree hypothesis identifies the two chart ranges. Invert the injective beta chart onto its range and compose with the localized equivalence and alpha to obtain additive section maps. Prove them bijective using the inverse localized equivalence and the range equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Proj.basicOpenIsoAway makes awayToSection surjective. Apply injectivity of beta to the scalar equation for the section map; the supplied scalar equations and linearity of the localized equivalence prove it. Thus obtain linear equivalences of section modules.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a standard-open inclusion obtain a homogeneous relation g^e=af using standardOpenProperties. Every alpha-image has a fraction representative with denominator a power of f by its range equality. Apply both supplied restriction formulas and e(a^m • y)=a^m • e(y) to prove restriction compatibility of the linear equivalences.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The same standardOpenProperties gives the positive homogeneous standard-open basis, intersections via multiplication, and finite refinements. Restrict F to this basis. Its finite gluing follows from TopCat.Sheaf.existsUnique_gluing'. Apply exists_sheafOfModules_from_basis and its uniqueness clause twice: once with the identity chart identifications for F, once with the inverse local equivalences for G. Compose the resulting isomorphisms E≅F and E≅G to obtain F≅G.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-sheaf-of-modules-from-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-of-modules-from-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and Mathlib",
+  "place": "Lean expansion of the numbered coordinate and chart steps of lem-sc-p1-homogeneous-basis-proj-coproduct"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A degree preserving linear equivalence induces an isomorphism between module sheaves supplied by degree zero fraction charts on Proj",
+   "results": "HTTP 500 Internal Server Error; unavailable.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear equivalence preserving numerator degrees induces an isomorphism of sheaves on Proj from their degree zero localization charts",
+   "results": "Found Proj.basicOpenIsoAway and basicOpenIsoAway_hom; use the former to obtain surjectivity of the chart ring map. No sheaf comparison from these supplied fraction charts.",
+   "verdict": "No exact match; chart ring primitive used.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "degreeZeroFractions|Nonempty.*≅|equiv.*[Gg]rad; mapEquiv; existsUnique_gluing; sheaf.*basis",
+   "results": "Read ProjTildeFunctorial (requires stalk maps and internal gradings unavailable for the shifted coordinate sets). Found Mathlib IsLocalizedModule.mapEquiv, LocalizedModule.map_mk, TopCat.Sheaf.existsUnique_gluing', and the existing SheafOfModulesFromBasis universal property, all used. No existing chart-only comparison.",
+   "verdict": "No exact match; use localization and basis-extension primitives.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisProjCoproduct",
+  "date": "2026-10-12",
+  "group": "J3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-homogeneous-basis-proj-coproduct",
+   "place": "Proof steps 1–3"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedChartComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/GradedChartComparison.lean",
+  "declaration": "AlgebraicGeometry.Proj.graded_chart_comparison",
+  "statement": "theorem graded_chart_comparison (k : Type u) [Field k]\n    (M N : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (𝓜 : ℕ → Set M) (𝓝 : ℕ → Set N)\n    (e : M ≃ₗ[MvPolynomial (Fin 2) k] N)\n    (hdegree : ∀ (n : ℕ) (y : M), y ∈ 𝓜 n ↔ e y ∈ 𝓝 n)\n    (F G : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)\n    (alpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ),\n      0 < d → f ∈ homogeneousSubmodule (Fin 2) k d →\n      F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n        LocalizedModule.Away f M)\n    (halpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d),\n        Function.Injective (alpha f d hd hf) ∧\n        Set.range (alpha f d hd hf) = degreeZeroFractions\n          (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n          (fun n : ℕ ↦ 𝓜 n) (Submonoid.powers f))\n    (hscalar : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n        (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n        alpha f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =\n          algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n            (Localization.Away f) r • alpha f d hd hf s)\n    (hres : ∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (hg : g ∈ homogeneousSubmodule (Fin 2) k b)\n        (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤\n          basicOpen (homogeneousSubmodule (Fin 2) k) f)\n        (e c : ℕ) (a : MvPolynomial (Fin 2) k),\n        0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →\n        ∀ (m : ℕ) (y : M)\n          (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n          alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n          alpha g b hb hg (F.val.map (homOfLE inc).op s) =\n            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))\n    (beta : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ),\n      0 < d → f ∈ homogeneousSubmodule (Fin 2) k d →\n      G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n        LocalizedModule.Away f N)\n    (hbeta : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d),\n        Function.Injective (beta f d hd hf) ∧\n        Set.range (beta f d hd hf) = degreeZeroFractions\n          (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n          (fun n : ℕ ↦ 𝓝 n) (Submonoid.powers f))\n    (hbetaScalar : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n        (s : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n        beta f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =\n          algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n            (Localization.Away f) r • beta f d hd hf s)\n    (hbetaRes : ∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (hg : g ∈ homogeneousSubmodule (Fin 2) k b)\n        (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤\n          basicOpen (homogeneousSubmodule (Fin 2) k) f)\n        (e c : ℕ) (a : MvPolynomial (Fin 2) k),\n        0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →\n        ∀ (m : ℕ) (y : N)\n          (s : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n          beta f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n          beta g b hb hg (G.val.map (homOfLE inc).op s) =\n            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))\n    : Nonempty (F ≅ G)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T085254-L-21201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T085254-L-21201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

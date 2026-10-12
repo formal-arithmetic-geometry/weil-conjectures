@@ -10,9 +10,9 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
-import Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist
-import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
-import Sheaf.Topology.SheafOfModulesFromBasis
+import Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisCoordinates
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedChartComparison
 
 /-!
 # Associated sheaves of homogeneous bases on polynomial Proj
@@ -93,6 +93,34 @@ theorem homogeneous_basis_proj_coproduct (k : Type u) [Field k]
     (b : Module.Basis (Fin r) (MvPolynomial (Fin 2) k) M)
     (hb : ∀ a : Fin r, b a ∈ 𝓜 (-(d a))) :
     Nonempty (F ≅ ∐ (fun a ↦ twist (homogeneousSubmodule (Fin 2) k) (d a))) := by
-  sorry
+  classical
+  obtain ⟨beta, hbeta, hbetaScalar, hbetaRes⟩ :=
+    finite_twist_coproduct_fractions (homogeneousSubmodule (Fin 2) k) r d
+  have hdegree (n : ℕ) (y : M) : y ∈ 𝓜 n ↔
+      ∀ a, if 0 ≤ d a + n then
+        b.equivFun y a ∈ homogeneousSubmodule (Fin 2) k (d a + n).toNat
+      else b.equivFun y a = 0 := by
+    constructor
+    · exact homogeneous_basis_coordinates k M 𝓜 h𝓜 hsmul r d b hb n y
+    · intro hy
+      rw [← b.sum_equivFun y]
+      apply (𝓜 n).sum_mem
+      intro a _
+      by_cases ha : 0 ≤ d a + n
+      · have hc := hsmul (d a + n).toNat (-(d a)) (b.equivFun y a) (b a)
+          (by simpa [ha] using hy a) (hb a)
+        have hn : ((d a + n).toNat : ℤ) + -(d a) = n := by
+          rw [Int.toNat_of_nonneg ha]
+          omega
+        simpa only [hn] using hc
+      · have hzero : b.equivFun y a = 0 := by simpa [ha] using hy a
+        rw [hzero, zero_smul]
+        exact (𝓜 n).zero_mem
+  exact graded_chart_comparison k M
+    (ModuleCat.of (MvPolynomial (Fin 2) k) (Fin r → MvPolynomial (Fin 2) k))
+    (fun n ↦ (𝓜 n : Set M))
+    (fun n ↦ {y | ∀ a, if 0 ≤ d a + n then
+      y a ∈ homogeneousSubmodule (Fin 2) k (d a + n).toNat else y a = 0})
+    b.equivFun hdegree F _ alpha halpha hscalar hres beta hbeta hbetaScalar hbetaRes
 
 end AlgebraicGeometry.Proj

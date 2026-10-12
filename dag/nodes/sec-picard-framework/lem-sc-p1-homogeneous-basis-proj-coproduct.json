@@ -14,35 +14,36 @@
  ],
  "proof": [
   {
-   "text": "Use the coordinate equivalence of the finite basis. Decompose every coordinate polynomial into homogeneous parts. Its degree-n part times b_a lies in M_(n-d_a). Uniqueness of the internal direct-sum decomposition shows that the inverse coordinate map sends M_j exactly to the tuples with coordinate a in S_(d_a+j), with zero coordinate for negative d_a+j. The forward implication follows by decomposing the finite sum and comparing distinct degrees; the reverse implication follows directly from scalar compatibility. This also covers the empty basis.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Apply the finite-coproduct clause of proj_shifted_free_is_twist to the degree family d. Its chart maps identify the coproduct of Proj twists with the degree-zero fractions of the shifted coordinate module. Localize the coordinate equivalence from the previous step and restrict to degree zero. Compose with alpha_f and the inverse canonical chart maps to get mutually inverse linear maps on each positive homogeneous standard open.",
+   "text": "Apply homogeneous_basis_coordinates to a vector in M_n to obtain the forward coordinate grading implication. Conversely expand the vector using Basis.sum_equivFun, and use scalar compatibility and the homogeneous basis degrees to show every coordinate term is in M_n. For negative d_a+n the coordinate is zero. This proves that b.equivFun identifies the nonnegative numerator degree sets in both directions.",
    "uses": [
-    "lem-sc-p1-proj-shifted-free-twist"
+    "lem-sc-p1-homogeneous-basis-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "For any inclusion D_+(g) subset D_+(f), standardOpenProperties supplies e>0 and homogeneous a with g^e=af. The restriction formulas for both associated sheaves send y/f^m to a^my/g^(em). The coordinate equivalence is S-linear, so the local maps commute with these restrictions. The standard opens are a basis, closed under intersections, with finite refinements. Apply the uniqueness clause of exists_sheafOfModules_from_basis to the two extensions of this common basis presheaf to obtain the isomorphism.",
+   "text": "Apply finite_twist_coproduct_fractions directly to the polynomial grading and degree family d, extracting the coproduct chart injections, image equalities, scalar and restriction formulas. No projective-line chart isomorphism or transported glued twist is used.",
    "uses": [
-    "lem-weil-pbc-proj-standard-open-inclusion",
-    "lem-weil-pbc-sheaf-of-modules-from-basis"
+    "lem-sc-proj-finite-twist-coproduct-fractions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply graded_chart_comparison to the linear equivalence b.equivFun, the just-proved equivalence of numerator degree sets, the supplied charts of F, and the extracted charts of the coproduct. This gives the required isomorphism without choosing stalk maps.",
+   "uses": [
+    "lem-sc-proj-graded-chart-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-p1-proj-shifted-free-twist",
-  "lem-weil-pbc-proj-standard-open-inclusion",
-  "lem-weil-pbc-sheaf-of-modules-from-basis"
+  "lem-sc-p1-homogeneous-basis-coordinates",
+  "lem-sc-proj-finite-twist-coproduct-fractions",
+  "lem-sc-proj-graded-chart-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Constructions of Schemes",
-  "place": "Basis and chart-generator argument expanding the shifted-free clause of lem-sc-p1-graded-resolution"
+  "document": "Stacks Project, Constructions and Sheaves on Spaces; Mathlib",
+  "place": "J3: basis projection proof and localized chart comparison, using the existing finite_twist_coproduct_fractions directly; Tags 01M7 and 009U"
  },
  "mathlib_searches": [
   {
@@ -123,9 +124,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T060800-L-2918698",
+  "landing": "20261012T085254-L-21201",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
