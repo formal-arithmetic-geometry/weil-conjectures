@@ -10,7 +10,10 @@ public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLiftExactSource
+import Sheaf.CategoryTheory.CartanEilenbergAugmentedComparison
+import Sheaf.CategoryTheory.DoubleComplexBoundedBelowTotal
+import Sheaf.CategoryTheory.DoubleComplexFirstFiltrationDifferential
+import Sheaf.CategoryTheory.DoubleComplexFirstFiltrationMap
 
 /-!
 # Comparison maps of Cartan–Eilenberg resolutions
@@ -134,6 +137,52 @@ theorem cartanEilenberg_lift
               ((FIZ.firstFiltration n).step r).arrow ≫
                 (HomologicalComplex₂.total.map (show FIZ ⟶ JZ from E.map φ)
                   (ComplexShape.up ℤ)).f n)) := by
-  sorry
+  classical
+  have _ := hK
+  have _ := hL
+  have _ := hIinj
+  have _ := hIinj'
+  let FI := ((F.mapHomologicalComplex (ComplexShape.up ℕ)).mapHomologicalComplex
+    (ComplexShape.up ℤ)).obj I
+  let E := (ComplexShape.embeddingUpNat.extendFunctor B).mapHomologicalComplex
+    (ComplexShape.up ℤ)
+  let FIZ := E.obj FI
+  let JZ := E.obj J
+  obtain ⟨a, ha⟩ := hIbelow
+  obtain ⟨b, hb⟩ := hJbelow
+  have hFI : ∀ p q : ℤ, p < a → IsZero ((FIZ.X p).X q) := by
+    intro p q hp
+    exact (HomologicalComplex.eval B (ComplexShape.up ℤ) q).map_isZero
+      ((ComplexShape.embeddingUpNat.extendFunctor B).map_isZero
+        ((F.mapHomologicalComplex (ComplexShape.up ℕ)).map_isZero (ha p hp)))
+  have hJ : ∀ p q : ℤ, p < b → IsZero ((JZ.X p).X q) := by
+    intro p q hp
+    exact (HomologicalComplex.eval B (ComplexShape.up ℤ) q).map_isZero
+      ((ComplexShape.embeddingUpNat.extendFunctor B).map_isZero (hb p hp))
+  have hFneg : ∀ p q : ℤ, q < 0 → IsZero ((FIZ.X p).X q) := by
+    intro p q hq
+    exact (FI.X p).isZero_extend_X ComplexShape.embeddingUpNat q (by
+      intro k
+      change (k : ℤ) ≠ q
+      omega)
+  have hJneg : ∀ p q : ℤ, q < 0 → IsZero ((JZ.X p).X q) := by
+    intro p q hq
+    exact (J.X p).isZero_extend_X ComplexShape.embeddingUpNat q (by
+      intro k
+      change (k : ℤ) ≠ q
+      omega)
+  let tI := HomologicalComplex₂.hasTotal_of_boundedBelow FIZ a hFI hFneg
+  let tJ := HomologicalComplex₂.hasTotal_of_boundedBelow JZ b hJ hJneg
+  refine ⟨tI, tJ, ?_⟩
+  let _ := tI
+  let _ := tJ
+  obtain ⟨φ, hφ⟩ := exists_cartanEilenberg_augmented_comparison F K L u
+    I eI ⟨a, ha⟩ hIcol hIres
+    J eJ ⟨b, hb⟩ hJcol hJinj hJinj' hJres
+  refine ⟨φ, hφ, ?_⟩
+  intro r n
+  exact ⟨HomologicalComplex₂.firstFiltration_differential FIZ r n,
+    HomologicalComplex₂.firstFiltration_differential JZ r n,
+    HomologicalComplex₂.firstFiltration_map FIZ JZ (E.map φ) r n⟩
 
 end CategoryTheory

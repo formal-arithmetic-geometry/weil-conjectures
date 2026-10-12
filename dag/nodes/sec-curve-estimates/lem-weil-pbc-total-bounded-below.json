@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-total-bounded-below",
+ "kind": "statement",
+ "title": "Total existence from a lower first-degree bound and nonnegative second degree",
+ "statement": "Let C be an abelian category [def-sp-abelian], K a Z×Z bicomplex [def-sp-double-complex-total], and a an integer. Assume K^{p,q} is a zero object whenever p<a or q<0. Then the diagonal coproducts required for K.HasTotal(up Z) exist.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section Double complexes and associated total complexes, definition-associated-simple-complex; finite-diagonal clause, also Definition 015H(1)-(2)"
+ },
+ "proof": [
+  {
+   "text": "For fixed n take the subtype of diagonal indices p+q=n with a≤p and 0≤q. Projection to p injects it into the finite interval [a,n]. Form the finite coproduct of these terms. Its cofan on the full diagonal has the canonical inclusion on this subtype and zero maps elsewhere. Every omitted term is zero by one of the two bounds. Any cofan descends uniquely by the finite coproduct universal property, and the omitted terms satisfy its equations by their zero-object property. Thus the full diagonal coproduct exists, for every n, which is HasTotal. This includes n<a, where the subtype is empty.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section Double complexes and associated total complexes, definition-associated-simple-complex; finite-diagonal clause, also Definition 015H(1)-(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartan Eilenberg comparison of augmented resolutions and finite diagonals of total complexes",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total complex exists for a bounded below bicomplex with second index nonnegative and finite coproducts",
+   "results": "LeanFinder and Loogle return HasTotal, total, and hasTotal_of_iso, but no bounded-support existence theorem. Grep found only generic coproduct constructors. The source CoreHasTotal API also constructs finite diagonals; the delivered proof uses Mathlib coproduct universal properties directly.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.total.map; HomologicalComplex₂.HasTotal",
+   "results": "LeanFinder and Loogle return HasTotal, total, and hasTotal_of_iso, but no bounded-support existence theorem. Grep found only generic coproduct constructors. The source CoreHasTotal API also constructs finite diagonals; the delivered proof uses Mathlib coproduct universal properties directly.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan.Eilenberg|cartan.*eilenberg|firstFiltration; HasTotal and Subobject factorization APIs",
+   "results": "LeanFinder and Loogle return HasTotal, total, and hasTotal_of_iso, but no bounded-support existence theorem. Grep found only generic coproduct constructors. The source CoreHasTotal API also constructs finite diagonals; the delivered proof uses Mathlib coproduct universal properties directly. Searched the entire blueprint for Cartan Eilenberg, total complex, 015K and 012Z: no duplicate statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergFunctorial",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "the naturality of the complex-continuity input to the sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'; finite totalization and filtration, Step 4",
+   "via": [
+    "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DoubleComplexBoundedBelowTotal",
+  "file": "lean/Sheaf/CategoryTheory/DoubleComplexBoundedBelowTotal.lean",
+  "declaration": "HomologicalComplex₂.hasTotal_of_boundedBelow",
+  "statement": "theorem hasTotal_of_boundedBelow {C : Type u} [Category.{v} C] [Abelian C] (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ)) (a : ℤ) (hbelow : ∀ p q : ℤ, p < a → IsZero ((K.X p).X q)) (hneg : ∀ p q : ℤ, q < 0 → IsZero ((K.X p).X q)) : K.HasTotal (ComplexShape.up ℤ)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085337-L-38717",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085337-L-38717",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

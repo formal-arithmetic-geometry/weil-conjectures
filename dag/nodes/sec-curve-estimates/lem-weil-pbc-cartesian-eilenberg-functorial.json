@@ -27,58 +27,40 @@
  ],
  "proof": [
   {
-   "text": "For every degree $q$, decompose the bounded-below complex into the exact sequences $0\\to Z^q\\to K^q\\to B^{q+1}\\to0$ and $0\\to B^q\\to Z^q\\to H^q(K)\\to0$, and make the same decompositions for $L$. Exactness of $F$ carries these sequences and the exact augmented rows of $I_K$ to exact sequences and exact augmented rows of $F(I_K)$. The six Cartan--Eilenberg conditions stated in the item give the required injective-resolution rows for $J_L$, and for its $Z$, $B$, and $H_{II}$ pieces.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definition Tag 015H, clauses (3)--(6), and Lemma Tag 015I"
-   }
-  },
-  {
-   "text": "We construct the row maps by induction on $q$, along the sequence $0\\to B^q\\to Z^q\\to H^q\\to0$, $0\\to Z^q\\to K^q\\to B^{q+1}\\to0$ of Step 1. The induction claim at $q$ is that a map $\\varphi_B^q$ from the row $F(\\operatorname{Im}(d_{II}:I_K^{\\bullet,q-1}\\to I_K^{\\bullet,q}))$ to the corresponding row of $J_L$ has been constructed, compatible with the augmentations (through $u$). Below the lowest nonzero degree all rows are zero, and in the lowest degree $B^q=0$, so $\\varphi_B^q=0$ starts the induction. Given $\\varphi_B^q$: (a) the $H^q$ row map $\\varphi_H^q$ is obtained from [lem-weil-pbc-lift-along-injective-quasi-iso], applied to the augmentation $F(H^q(K))[0]\\to F(H^q_{II}(I_K))$, which is a monomorphic quasi-isomorphism because $0\\to F(H^q(K))\\to F(H^q_{II}(I_K)^{0})\\to F(H^q_{II}(I_K)^{1})\\to\\cdots$ is exact, and to the map $F(H^q(K))\\to H^q(L)\\to H^q_{II}(J_L)^{0}$ into the bounded-below injective complex $H^q_{II}(J_L)$; (b) the $Z^q$ row map $\\varphi_Z^q$ is the middle map $\\varphi_B$ given by [lem-weil-pbc-horseshoe-morphism-lift-exact-source] for the short exact sequence of exact augmented complexes $0\\to F(B^q\\text{-row})\\to F(Z^q\\text{-row})\\to F(H^q\\text{-row})\\to0$ over $0\\to F(B^q)\\to F(Z^q)\\to F(H^q(K))\\to0$, the target horseshoe $0\\to B^q\\text{-row}\\to Z^q\\text{-row}\\to H^q_{II}\\text{-row}$ of $J_L$ (injective resolutions by (4)--(6), degreewise exact, zero for $p<0$ by (2)) and the endpoint maps $\\varphi_B^q,\\varphi_H^q$; (c) the $B^{q+1}$ row map $\\varphi_B^{q+1}$ is obtained from [lem-weil-pbc-lift-along-injective-quasi-iso] exactly as in (a), for the row $F(\\operatorname{Im}(d_{II}:I_K^{\\bullet,q}\\to I_K^{\\bullet,q+1}))$ augmented by $F(B^{q+1})$; (d) the $K^q$ row map $\\phi^{\\bullet,q}$ is the middle map $\\varphi_B$ given by [lem-weil-pbc-horseshoe-morphism-lift-exact-source] for $0\\to F(Z^q\\text{-row})\\to F(I_K^{\\bullet,q})\\to F(B^{q+1}\\text{-row})\\to0$ over $0\\to F(Z^q)\\to F(K^q)\\to F(B^{q+1})\\to0$, the target horseshoe given by (3)--(5), and the endpoint maps $\\varphi_Z^q,\\varphi_B^{q+1}$. Each row map is chosen exactly once: $\\varphi_B$ and $\\varphi_H$ by the quasi-isomorphism lift, $\\varphi_Z$ and $\\phi^{\\bullet,q}$ as horseshoe middle maps, so the three-term compatibilities of (b) and (d) hold for the maps actually used, and $\\varphi_B^{q+1}$ continues the induction.",
+   "text": "Obtain the augmented bicomplex comparison using [lem-weil-pbc-ce-augmented-comparison]. Only target injectivity and augmented exactness are needed here; the stronger source injectivity and original-complex bounds in the unchanged statement are redundant.",
    "uses": [
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
+    "lem-weil-pbc-ce-augmented-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 015I, comparison morphism construction, written degree-by-degree using its cycle, boundary, and cohomology rows"
-   }
+   "elementary": false
   },
   {
-   "text": "The resulting row maps commute with $d_I$ by construction. They commute with $d_{II}$ because on the $q$-th row the vertical differential factors as $I^{\\bullet,q}\\to J_B^{\\bullet,q+1}\\to J_Z^{\\bullet,q+1}\\to I^{\\bullet,q+1}$ through the boundary and cycle rows, and every factor commutes by the induction claim, including the three-term compatibilities supplied by the exact-source horseshoe lifts. Thus the row maps assemble to a morphism of double complexes $\\phi:F(I_K)\\to J_L$, and the degree-zero augmentation identity is $\\phi\\circ F(\\epsilon_K)=\\epsilon_L\\circ u$.",
+   "text": "Extend the natural resolution degree by zero. Map the common lower complex-degree bounds through the additive functor and the extension functor, then evaluate them degreewise using map_isZero. The extended columns vanish in negative resolution degree by HomologicalComplex.isZero_extend_X. Apply [lem-weil-pbc-total-bounded-below] separately to F(I) and J to obtain both HasTotal witnesses, without requiring the lower bound to be zero.",
    "uses": [
-    "lem-weil-pbc-horseshoe-morphism-lift-exact-source"
+    "lem-weil-pbc-total-bounded-below"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 015I, proof that the comparison maps commute with the vertical differential (the composite through boundaries and cycles)"
-   }
+   "elementary": false
   },
   {
-   "text": "Take the direct sum of the bidegree-preserving components $\\phi^{p,q}$ in each total degree. The total differential and the decreasing filtration by the second degree are those of [def-sp-double-complex-total] and [def-sp-filtration]. Since $\\phi$ commutes with both double-complex differentials and preserves bidegrees, its total map is a filtered chain map; the sums are finite by the bounded-below and nonnegative-degree conditions.",
+   "text": "Install the two HasTotal witnesses. Apply [lem-weil-pbc-total-first-filtration-differential] to each total complex and [lem-weil-pbc-total-first-filtration-map] to the extended comparison map. Combine these three factorization conclusions, for each r,n, with the augmented comparison identity. The declarations and firstFiltration definitions are those of [def-sp-double-complex-total].",
    "uses": [
+    "lem-weil-pbc-total-first-filtration-differential",
+    "lem-weil-pbc-total-first-filtration-map",
     "def-sp-double-complex-total"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Remark Tag 015K (remark-functorial-ss)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-lift-along-injective-quasi-iso",
-  "lem-weil-pbc-horseshoe-morphism-lift-exact-source",
-  "def-sp-double-complex-total"
+  "def-sp-double-complex-total",
+  "lem-weil-pbc-ce-augmented-comparison",
+  "lem-weil-pbc-total-bounded-below",
+  "lem-weil-pbc-total-first-filtration-differential",
+  "lem-weil-pbc-total-first-filtration-map"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma Tag 015I and Remark Tag 015K"
+  "place": "Tags 015H, 015I, 015K; comparison construction isolated, finite diagonal and filtration arguments implemented in Lean"
  },
  "mathlib_searches": [
   {
@@ -174,5 +156,15 @@
   "group": "K1",
   "result": "fix",
   "note": "F exact additive (Additive+PreservesFiniteLimits/Colimits); K,L bounded below; u:F(K)->L; I,J restated in E1 CE form (up Z x up N, single0 bicomplex augmentation, CE (1) bound, (3) QuasiIso+injective, (4)-(6) cyclesMap/image.map/homologyMap QuasiIso + injective terms); phi:F(I)->J with augmentation identity on degree-0 components; totals of N->Z extensions, firstFiltration (complex degree) subcomplex + preserved; new CE def node dropped (H12); dropped duplicate new node(s) def-weil-pbc-cartan-eilenberg-resolution (--drop-nodes; not merged, the item points at the landed declaration)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085337-L-38717",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

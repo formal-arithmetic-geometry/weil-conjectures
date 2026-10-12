@@ -7042,3 +7042,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/S3/Sheaf.AlgebraicGeometry.EtaleSubsheafSupportOpen (stage 3; reviewer PASS; first push; landing 20261012T085336-L-38375 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/S3/Sheaf.CategoryTheory.Adjunction.RingAdjunctPreservesOperations (stage 3; reviewer PASS; first push; landing 20261012T085337-L-38472 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/S3/Sheaf.CategoryTheory.Adjunction.RingCoadjunctPreservesOperations (stage 3; reviewer PASS; first push; landing 20261012T085337-L-38613 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/S3/Sheaf.CategoryTheory.CartanEilenbergFunctorial (stage 3; reviewer PASS; first push; landing 20261012T085337-L-38717 (interface); batch 20261012T085205; modules 5; new nodes 4)

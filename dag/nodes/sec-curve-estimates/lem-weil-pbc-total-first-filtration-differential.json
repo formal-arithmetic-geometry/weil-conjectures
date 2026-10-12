@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-total-first-filtration-differential",
+ "kind": "statement",
+ "title": "The finite first-degree image-sum filtration is a subcomplex",
+ "statement": "Let C be abelian [def-sp-abelian] and K a Z×Z bicomplex with a total complex [def-sp-double-complex-total]. Define its first finite image-sum filtration [def-sp-filtration] in degree n by the supremum over r≤p≤n of the images of the inclusions K^{p,n-p}→Tot(K)^n. For every r,n the total differential Tot(K)^n→Tot(K)^{n+1} restricts to a morphism between these r-th steps. No quadrant hypothesis is required.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-filtration"
+ ],
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section Spectral sequences: double complexes, section-double-complex, paragraph defining F_I and F_II before lemma-ss-double-complex"
+ },
+ "proof": [
+  {
+   "text": "On the summand (p,n-p), the total differential is the signed sum of the horizontal component into (p+1,n-p) and the vertical component into (p,n-p+1). If r≤p≤n, both target first degrees lie in [r,n+1]. Each component factors through the corresponding target image and thus the target finite supremum. Scalar signs and addition preserve factorization through a subobject. Pull back this target subobject along the total differential. Each source diagonal inclusion factors through the pullback, so its image lies in the pullback. Their finite supremum lies there by Finset.sup_le. The pullback factorization gives the required restriction and its commuting equation.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section Spectral sequences: double complexes, section-double-complex, paragraph defining F_I and F_II before lemma-ss-double-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartan Eilenberg comparison of augmented resolutions and finite diagonals of total complexes",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bicomplex total map preserves filtration by sums of images of diagonal inclusions and total differential preserves it",
+   "results": "LeanFinder returned ιMapObj_D₁ and ιMapObj_D₂. Loogle total.map results and grep of Subobject found factorization, pullback, imageSubobject_le and finite supremum APIs, but no theorem on this library filtration. The proof uses those APIs and the Mathlib signed differential equations.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.total.map; HomologicalComplex₂.HasTotal",
+   "results": "LeanFinder returned ιMapObj_D₁ and ιMapObj_D₂. Loogle total.map results and grep of Subobject found factorization, pullback, imageSubobject_le and finite supremum APIs, but no theorem on this library filtration. The proof uses those APIs and the Mathlib signed differential equations.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan.Eilenberg|cartan.*eilenberg|firstFiltration; HasTotal and Subobject factorization APIs",
+   "results": "LeanFinder returned ιMapObj_D₁ and ιMapObj_D₂. Loogle total.map results and grep of Subobject found factorization, pullback, imageSubobject_le and finite supremum APIs, but no theorem on this library filtration. The proof uses those APIs and the Mathlib signed differential equations. Searched the entire blueprint for Cartan Eilenberg, total complex, 015K and 012Z: no duplicate statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergFunctorial",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "the naturality of the complex-continuity input to the sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'; finite totalization and filtration, Step 4",
+   "via": [
+    "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DoubleComplexFirstFiltrationDifferential",
+  "file": "lean/Sheaf/CategoryTheory/DoubleComplexFirstFiltrationDifferential.lean",
+  "declaration": "HomologicalComplex₂.firstFiltration_differential",
+  "statement": "theorem firstFiltration_differential {C : Type u} [Category.{v} C] [Abelian C] (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ)) [K.HasTotal (ComplexShape.up ℤ)] (r n : ℤ) : ∃ f : ((K.firstFiltration n).step r : C) ⟶ ((K.firstFiltration (n + 1)).step r : C), f ≫ ((K.firstFiltration (n + 1)).step r).arrow = ((K.firstFiltration n).step r).arrow ≫ (K.total (ComplexShape.up ℤ)).d n (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085337-L-38717",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085337-L-38717",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
