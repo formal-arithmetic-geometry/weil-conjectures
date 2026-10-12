@@ -1,0 +1,170 @@
+{
+ "id": "lem-weil-pbc-smooth-quotient-fibre-differential-rank",
+ "kind": "statement",
+ "title": "Differential rank at points of fibres of a smooth polynomial quotient",
+ "statement": "Let $R$ be a commutative ring, $n,c\\geq0$, $f_1,\\ldots,f_c\\in R[x_1,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring], $J=(f_1,\\ldots,f_c)$ and $Q=R[x_1,\\ldots,x_n]/J$. Assume $Q$ is smooth over $R$ [def-weil-pbc-smooth-ring-map] and $J/J^2$ has a $Q$-basis indexed by $\\{1,\\ldots,c\\}$ [def-weil-pbc-free-module]. Let $\\mathfrak p$ be a prime of $R$, $T=\\kappa(\\mathfrak p)\\otimes_R Q$ and $\\mathfrak q$ a prime of $T$, with $K=\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime]. Then $c\\leq n$ and $\\dim_K(K\\otimes_T\\Omega_{T/\\kappa(\\mathfrak p)})=n-c$, where differentials are [def-weil-pbc-kahler-differentials] and dimension is [def-weil-vector-space-dimension]. The chosen basis need not be the equation classes.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tag 07CG (lemma-syntomic-complete-intersection), fibre-dimension sentence; Lemma Tag 07CH (lemma-smooth-standard-smooth), split conormal sequence in the opening of the proof. Read at https://stacks.math.columbia.edu/tag/07CG and https://stacks.math.columbia.edu/tag/07CH."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-vector-space-dimension",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put J=(f_1,...,f_c), Q=R[x_1,...,x_n]/J. The polynomial generators and the given equations give a finite presentation of Q [def-weil-pbc-finitely-presented-algebra]; its extension cotangent module identifies with J/J², including its Q-module action. Apply [lem-weil-pbc-presentation-localized-conormal-split] at a=1, and identify Q_1 with Q. Localizing at a unit is an isomorphism, so the tensor-localized conormal module is J/J² and the differentials are Ω[Q/R]. Obtain (J/J²) × Ω[Q/R] ≅ Q^n.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-presentation-localized-conormal-split",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let p be a prime of R, T=κ(p) tensor_R Q, q a prime of T and K=κ(q). Tensor the equivalence of step 1 with K over Q. Tensor products commute with finite products, and the given basis of J/J² base-changes to a basis of cardinality c over K. The coordinate basis of Q^n similarly gives cardinality n. Thus (K tensor_Q J/J²) × (K tensor_Q Ω[Q/R]) ≅ K^n. This is scalar extension of an equivalence, not an appeal to flatness of K.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Differential base change [lem-weil-pbc-kahler-differentials-base-change] gives Ω[T/κ(p)] ≅ T tensor_Q Ω[Q/R]. Tensor associativity and cancellation give K tensor_T Ω[T/κ(p)] ≅ K tensor_Q Ω[Q/R]. No conormal flat base-change assertion is used.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The right side K^n is finite-dimensional, hence so are the two summands. The dimension formula for a product and invariance under linear equivalence give c + dim_K(K tensor_T Ω[T/κ(p)]) = n. Natural-number arithmetic yields c ≤ n and dimension n-c. If T=0, there is no q and the assertion has no instance to check.",
+   "uses": [
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-vector-space-dimension",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-presentation-localized-conormal-split"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tag 07CG (lemma-syntomic-complete-intersection), fibre-dimension sentence; Lemma Tag 07CH (lemma-smooth-standard-smooth), split conormal sequence in the opening of the proof. Read at https://stacks.math.columbia.edu/tag/07CG and https://stacks.math.columbia.edu/tag/07CH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "the residue field fibre of Kahler differentials of a smooth polynomial quotient with conormal rank c has dimension n minus c",
+   "results": "Standard-smooth rank formulas (Algebra.SubmersivePresentation.rank_kaehlerDifferential and Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential); not the arbitrary smooth quotient statement.",
+   "date": "2026-10-13",
+   "verdict": "components only; no one-line match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.finrank",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*[Cc]otangent|finrank.*[Kk]aehler|[Cc]otangent.*splitSurjectiveEquiv",
+   "results": "Cotangent-space finrank formulas for local rings and fields; localized conormal splitting equivalences; Huber presentation. No fibre-rank statement for a general smooth polynomial quotient.",
+   "date": "2026-10-13",
+   "verdict": "components only; no one-line match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the residue field fibre of Kahler differentials of a smooth polynomial quotient with free conormal rank c has dimension n minus c",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothRetractRelativeGlobalCompleteIntersection",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Steps 4 and 5 of lem-weil-pbc-smooth-retract-relative-global-complete-intersection: the split conormal sequence and differential base change give rank n-c at a point of a fibre.",
+   "via": [
+    "lem-weil-pbc-smooth-retract-relative-global-complete-intersection",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SmoothQuotientFibreDifferentialRank",
+  "file": "lean/Sheaf/RingTheory/SmoothQuotientFibreDifferentialRank.lean",
+  "declaration": "Algebra.smooth_quotient_fibre_differential_rank",
+  "statement": "theorem smooth_quotient_fibre_differential_rank\n    {R : Type u} [CommRing R] {n c : ℕ} (f : Fin c → MvPolynomial (Fin n) R)\n    [Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]\n    (b : Module.Basis (Fin c)\n      (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))\n      (Ideal.span (Set.range f)).Cotangent)\n    (p : Ideal R) [p.IsPrime]\n    (q : PrimeSpectrum (p.Fiber (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))) :\n    c ≤ n ∧ Module.finrank q.asIdeal.ResidueField\n      (q.asIdeal.ResidueField ⊗[p.Fiber\n        (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]\n          KaehlerDifferential p.ResidueField\n            (p.Fiber (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))) = n - c",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T204510-L-869863",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T204510-L-869863",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
