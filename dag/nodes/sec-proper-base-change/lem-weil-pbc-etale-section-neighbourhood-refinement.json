@@ -1,0 +1,159 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A02, paragraph verifying condition (2) of Tag 09XI"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A02, paragraph verifying condition (2) of Tag 09XI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale algebra section modulo ideal gives localization with unchanged quotient",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale algebra section modulo ideal localization neighborhood quotient isomorphism",
+   "results": "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.exists_etale_of_isEtaleAt, StandardEtalePair.instFormallyEtaleRing, Algebra.IsEtaleAt, Algebra.basicOpen_subset_etaleLocus_iff, StandardEtalePair.lift, StandardEtalePresentation.toPresentation_σ', Algebra.mem_etaleLocus_iff",
+   "date": "2026-10-12",
+   "verdict": "No exact theorem for this neighbourhood construction; related declarations used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientMap",
+   "results": "Ideal.quotientMap, Ideal.quotientMap_comp_mk, Ideal.quotientMap_surjective, Ideal.quotientMap_injective', Ideal.quotientMap_mk, Ideal.quotientMap_algebraMap, Ideal.quotientMap_injective, Ideal.quotientEquiv_apply",
+   "date": "2026-10-12",
+   "verdict": "No exact theorem for this neighbourhood construction; related declarations used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*neigh|section.*localiz",
+   "results": "Mathlib/Algebra/Module/LocalizedModule/IsLocalization.lean, Mathlib/Algebra/Module/LocalizedModule/Basic.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact theorem for this neighbourhood construction; related declarations used in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale algebra section over a quotient ring lifts at a filtered colimit of etale neighborhoods",
+   "results": "StandardEtalePair.lift; square-zero quotient lifting; Algebra.exists_etale_of_isEtaleAt",
+   "date": "2026-10-12",
+   "verdict": "Independent second reading: no replacement for arbitrary ideal and cocone neighbourhood evaluation."
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*section|section.*hensel|idempotent.*splitting in Mathlib/RingTheory, Sheaf/RingTheory and WeilConjectures",
+   "results": "Existing splitting theorem and HenselizationStageMap, PairHenselizationColimit, and section-lifting declarations. StageMap assumes a henselian target; Colimit uses the parent theorem. No duplicate refinement or arbitrary-cocone evaluation.",
+   "date": "2026-10-12",
+   "verdict": "No shorter independent route found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PairHenselizationSections",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-weil-pbc-etale-section-neighbourhood-refinement",
+ "title": "Refining a quotient section to an etale pair neighbourhood",
+ "statement": "Let $B$ be a commutative ring, $J$ an ideal, and $i=(B\\to C)$ an etale neighbourhood of the pair: its structure map is etale [def-weil-etale-morphism] and $B/J\\to C/JC$ is bijective. Let $g:C\\to D$ be an etale ring map and $s:D\\to B/J$ a ring map whose composite with $B\\to C\\to D$ is the quotient map. Then there is another neighbourhood $N$ of the pair, a morphism $j:i\\to N$ in the full category under $B$ [def-weil-pbc-category-colimit], and maps $k:D\\to N$ and $r:N\\to B/J$ such that $k g=j$, $r$ fixes $B$, and $r k=s$.",
+ "proof": [
+  {
+   "text": "Compose the etale maps B to C and C to D. The section s to B/J fixes B by hypothesis. It kills JD: the kernel ideal contains every image of J and hence the ideal they generate. Factor through D/JD and extend scalars along B to B/J. The quotient is etale by the tensor-quotient equivalence and base change.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-quotient-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply idempotent splitting to the section on D/JD, choose an idempotent e mapping to 1 and an equivalence of its localization with B/J. Lift e to a in D. Set L=D[1/a]. Localization and composition make L etale over B. The section extends to r:L to B/J because s(a)=1.",
+   "uses": [
+    "lem-weil-pbc-etale-section-idempotent-splitting",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient localization instance identifies L/(JD)L as a localization of D/JD away from e. The identity (JD)L=JL and the splitting equivalence yield L/JL isomorphic to B/J as a B/J-algebra. Thus the canonical quotient map is bijective (the inverse of this algebra equivalence fixes the base). Take L as N, the localization map as k, and the composite C to L as j. Scalar-tower identities show k g=j and r fixes B; the localization lift equation shows r k=s.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-quotient-base-change",
+  "lem-weil-pbc-etale-section-idempotent-splitting",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-localization-quotient-commute"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0A02, verification of condition (2), construction of B prime localized at g",
+   "via": [
+    "lem-weil-pbc-pair-henselization-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleSectionNeighbourhoodRefinement",
+  "file": "lean/Sheaf/RingTheory/EtaleSectionNeighbourhoodRefinement.lean",
+  "declaration": "RingTheory.etale_section_neighbourhood_refinement",
+  "statement": "theorem etale_section_neighbourhood_refinement (B : Type u) [CommRing B] (J : Ideal B)\n    (i : ObjectProperty.FullSubcategory (fun C : Under (CommRingCat.of B) ↦\n        AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧\n          Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom\n            Ideal.le_comap_map)))\n    (D : Type u) [CommRing D] (g : i.obj.right →+* D)\n    (hd : let : Algebra i.obj.right D := g.toAlgebra\n      Algebra.Etale i.obj.right D)\n    (s : D →+* B ⧸ J)\n    (hs : (s.comp g).comp i.obj.hom.hom = Ideal.Quotient.mk J) :\n    ∃ (N : ObjectProperty.FullSubcategory (fun C : Under (CommRingCat.of B) ↦\n        AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧\n          Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom\n            Ideal.le_comap_map)))\n      (j : i ⟶ N) (k : D →+* N.obj.right) (r : N.obj.right →+* B ⧸ J),\n      k.comp g = j.hom.right.hom ∧\n        r.comp N.obj.hom.hom = Ideal.Quotient.mk J ∧ r.comp k = s",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T085358-L-47057",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T085358-L-47057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
