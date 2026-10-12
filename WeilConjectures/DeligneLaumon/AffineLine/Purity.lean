@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.ConstantTwist
 public import WeilConjectures.DeligneLaumon.AffineLine.DenseOpen
+public import WeilConjectures.DeligneLaumon.AffineLine.DualNonexceptional
 public import WeilConjectures.DeligneLaumon.AffineLine.RealPushforward
 public import WeilConjectures.DeligneLaumon.AffineLine.RealifiedKernel
 public import WeilConjectures.WeilSheaf.DenseOpen
@@ -292,3 +293,49 @@ theorem IsFourierPartner.isPunctuallyPureOfWeight (h' : D.IsFourierPartner ψ D'
   exact D'.lisse.isPunctuallyPureOfWeight_of_upperStar O.ι hO'
 
 end AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen
+
+namespace AlgebraicGeometry
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+variable (ψ : AddChar k₀ (PadicAlgCl l))
+
+open WeilSheaf WeilSheaf.LisseOnDenseOpen in
+/-- **The generic Fourier sheaf is pure, in weight `0`.** For an irreducible nonexceptional `M`
+punctually `ι`-pure of weight `0` and a nontrivial `ψ`, the lisse sheaf `M'` of a Fourier
+partner is punctually `ι`-pure of some real weight. The realified kernel is formed with `b = 1`.
+(blueprint: `thm-fd-generic-fourier-sheaf-pure`) -/
+theorem exists_isPunctuallyPureOfWeight_of_isFourierPartner_weight_zero (ι : PadicAlgCl l →+* ℂ)
+    (hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
+    (hne : D.sheaf.IsNonexceptional ψ D.j) (hw : D.sheaf.IsPunctuallyPureOfWeight ι 0)
+    (hFT : D.IsFourierPartner ψ D') :
+    ∃ v : ℝ, D'.sheaf.IsPunctuallyPureOfWeight ι v := by
+  obtain ⟨D'', hD'', hFT''⟩ := exists_middleExtension_fourierTransform ψ hψ D hD hne
+  obtain ⟨c⟩ := nonempty_fourierCorrection ψ hψ D D'' hD hne hFT''
+  have hψ' : ψ⁻¹ ≠ 1 := inv_ne_one.2 hψ
+  have hDd : (D.twistedDual 1).sheaf.IsIrreducibleLisse :=
+    D.isIrreducibleLisse_twistedDual hD 1
+  have hned : (D.twistedDual 1).sheaf.IsNonexceptional ψ⁻¹ (D.twistedDual 1).j :=
+    D.isNonexceptional_twistedDual hne 1
+  obtain ⟨E', -, hE'⟩ := exists_middleExtension_fourierTransform ψ⁻¹ hψ' _ hDd hned
+  obtain ⟨c'⟩ := nonempty_fourierCorrection ψ⁻¹ hψ' _ E' hDd hned hE'
+  have hreal := isReal_realifiedKernel ψ ι D hw (b := 1) (by simp)
+  obtain ⟨v, hv⟩ := exists_isPunctuallyPureOfWeight_of_correction c c' hreal hD''
+  exact ⟨v, hFT.isPunctuallyPureOfWeight hFT'' hv⟩
+
+/-- For an irreducible nonexceptional `M` pure of weight `w` and a nontrivial `ψ`, the
+irreducible lisse sheaf `M'` of its Fourier partner is punctually `ι`-pure of some real weight
+`v`. By a constant twist we may assume `w = 0`
+(`AlgebraicGeometry.exists_isPunctuallyPureOfWeight_of_isFourierPartner_of_weight_zero`).
+(blueprint: `sk-p-dl-a1-some-weight`) -/
+theorem exists_isPunctuallyPureOfWeight_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ)
+    (hψ : ψ ≠ 1) (D D' : WeilSheaf.LisseOnDenseOpen k₀ l)
+    (hD : D.sheaf.IsIrreducibleLisse)
+    (hne : D.sheaf.IsNonexceptional ψ D.j) {w : ℝ}
+    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (hFT : D.IsFourierPartner ψ D') :
+    ∃ v : ℝ, D'.sheaf.IsPunctuallyPureOfWeight ι v :=
+  exists_isPunctuallyPureOfWeight_of_isFourierPartner_of_weight_zero
+    (fun D D' hD hne hw hFT ↦
+      exists_isPunctuallyPureOfWeight_of_isFourierPartner_weight_zero ψ ι hψ D D' hD hne hw hFT)
+    D D' hD hne hw hFT
+
+end AlgebraicGeometry

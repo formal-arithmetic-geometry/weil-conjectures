@@ -57,17 +57,6 @@ instance affineLine.irreducibleSpace_geometricFiber :
 
 namespace WeilSheaf.LisseOnDenseOpen
 
-/-- The geometric fiber of the dense open `U₀` of the affine line is irreducible. -/
-instance irreducibleSpace_geometricFiber (D : LisseOnDenseOpen k₀ l) :
-    IrreducibleSpace (D.U ↘ Spec (.of k₀)).geometricFiber := by
-  have : UniversallyOpen (D.U ↘ Spec (.of k₀)) := by
-    have := SmoothOfRelativeDimension.smooth 1 (D.U ↘ Spec (.of k₀))
-    infer_instance
-  have : IrreducibleSpace (Scheme.specAlgebraicClosure k₀).left :=
-    inferInstanceAs (IrreducibleSpace (Spec (.of (AlgebraicClosure k₀))))
-  exact inferInstanceAs (IrreducibleSpace ↥(pullback (C := Scheme.{u})
-    (D.U ↘ Spec (.of k₀)) (Scheme.specAlgebraicClosure k₀).hom))
-
 /-- If the lisse sheaf `M` of `D` is nonexceptional for `ψ`, its dual `M^∨` is nonexceptional
 for `ψ⁻¹`: a geometric constituent `ℒ_{ψ⁻¹(a x)}|_U` of `M^∨` would dualise to the geometric
 constituent `ℒ_{ψ(a x)}|_U` of `M`. (blueprint: `lem-fd-constituent-nonexceptional-concentration`,
