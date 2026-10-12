@@ -31,239 +31,57 @@
  ],
  "proof": [
   {
-   "text": "*Setup.* $\\Lambda_{\\mathfrak q}$ is a local ring with maximal ideal $\\mathfrak q\\Lambda_{\\mathfrak q}$ and residue field $K=\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime], Noetherian as a localization of the Noetherian ring $\\Lambda$ [lem-weil-pbc-localization-noetherian], and $\\mathfrak q\\Lambda_{\\mathfrak q}\\cap\\Lambda=\\mathfrak q$. It is geometrically regular over $k$ [def-weil-pbc-g-ring]: for a finite purely inseparable $k'/k$, $k'\\otimes_k\\Lambda_{\\mathfrak q}$ is the localization of the regular ring $k'\\otimes_k\\Lambda$ at the image of $\\Lambda\\setminus\\mathfrak q$ (tensor products commute with localization), hence regular [lem-weil-pbc-localization-of-regular-ring]. Set $\\bar\\Lambda=\\Lambda_{\\mathfrak q}/\\mathfrak q^n\\Lambda_{\\mathfrak q}$ (Stacks' notation); it is an Artinian local $k$-algebra with maximal ideal $\\bar{\\mathfrak m}=\\mathfrak q\\bar\\Lambda$, $\\bar{\\mathfrak m}^n=0$, and residue field $K$ [lem-weil-pbc-noetherian-local-quotient-artinian-local].",
+   "text": "Apply [lem-weil-pbc-popescu-flat-coordinates] to choose the admissible $A$ containing $E$, coordinates $\\varphi$, their localized flat map $\\psi$, the extended-ideal equality, and coordinate residues spanning $\\Omega_{F/k}$.",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-g-ring",
-    "lem-weil-pbc-localization-of-regular-ring",
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+    "lem-weil-pbc-popescu-flat-coordinates"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Set Lambda-bar = Lambda_q/q^n Lambda_q'"
+    "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
    }
   },
   {
-   "text": "*$\\dim_KH_1(L_{K/k})<\\infty$.* By [lem-weil-pbc-geometrically-regular-h1-injective] applied to the Noetherian local $k$-algebra $\\Lambda_{\\mathfrak q}$, geometrically regular over $k$ (step 1), the canonical map $H_1(L_{K/k})\\to\\mathfrak q\\Lambda_{\\mathfrak q}/\\mathfrak q^2\\Lambda_{\\mathfrak q}$ [def-weil-pbc-smooth-ring-map] is injective. The target is a finite dimensional $K$-vector space, since the ideal $\\mathfrak q\\Lambda_{\\mathfrak q}$ of the Noetherian ring $\\Lambda_{\\mathfrak q}$ is finitely generated. Hence $H_1(L_{K/k})$ is finite dimensional.",
+   "text": "The quotients of $P$ and $L$ by the nth powers of their maximal ideals are local Artinian by [lem-weil-pbc-noetherian-local-quotient-artinian-local]. In Lean this is proved from Mathlib: the power is proper for $n\\ge1$, so the quotient is nontrivial and local by quotient surjectivity; its radical is the maximal ideal, which is its unique minimal prime, so the Noetherian quotient is Artinian. Apply [lem-weil-pbc-popescu-etale-quotient-map] to the fixed coordinates and subalgebra to obtain the local étale map $f$ into $A$ and the compatibility equation.",
    "uses": [
-    "lem-weil-pbc-geometrically-regular-h1-injective",
-    "def-weil-pbc-smooth-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Note that dim H_1(L_{kappa(q)/k}) < infinity by More on Algebra, Proposition 07E5'"
-   }
-  },
-  {
-   "text": "*A first subring $A_0\\supseteq E$.* By [lem-weil-pbc-popescu-artinian-flat-subalgebras] (Stacks 07FG) applied to the Artinian local $k$-algebra $\\bar\\Lambda$ with residue field $K$ (steps 1, 2), $\\bar\\Lambda$ is a filtered colimit of Artinian local $k$-algebras $A_i$, essentially of finite type over $k$, with flat maps $A_i\\to\\bar\\Lambda$ and $\\mathfrak m_{A_i}\\bar\\Lambda=\\bar{\\mathfrak m}$. Each $A_i\\to\\bar\\Lambda$ maps $\\mathfrak m_{A_i}$ into $\\bar{\\mathfrak m}$, so it is a flat local homomorphism, hence faithfully flat [lem-weil-pbc-flat-local-hom-faithfully-flat] and injective [lem-weil-pbc-faithfully-flat-ideal-contraction] ($I=0$); identify $A_i$ with its image, a $k$-subalgebra of $\\bar\\Lambda$, flat over $A_i$ [def-weil-pbc-flat-ring-map]. Every element of $\\bar\\Lambda$ lies in some $A_i$ and the system is filtered, so the finite set $E$ lies in one of them, $A_0$. In the terminology of [lem-weil-pbc-popescu-solution-modulo-choose], $A_0$ is admissible.",
-   "uses": [
-    "lem-weil-pbc-popescu-artinian-flat-subalgebras",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-popescu-solution-modulo-choose"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Pick A in Lambda-bar containing E such that A is local Artinian, essentially of finite type over k, the map A -> Lambda-bar is flat, and m_A generates the maximal ideal of Lambda-bar, see Lemma 07FG'"
-   }
-  },
-  {
-   "text": "*The subring $A$ and the elements $\\lambda$.* By [lem-weil-pbc-popescu-solution-modulo-choose] applied to $A_0$ there are an admissible $A\\subseteq\\bar\\Lambda$ with $E\\subseteq A_0\\subseteq A$, residue field $F=A/\\mathfrak m_A$ with $k\\subseteq F\\subseteq K$, elements $\\lambda_1,\\dots,\\lambda_t\\in\\Lambda$ whose images in $\\bar\\Lambda$ lie in $A$ and whose residues $\\bar\\lambda_j\\in F$ have differentials $\\mathrm d\\bar\\lambda_1,\\dots,\\mathrm d\\bar\\lambda_t$ forming a basis of $\\Omega_{F/k}$ [def-weil-pbc-kahler-differentials], and elements $\\lambda'_1,\\dots,\\lambda'_r\\in\\mathfrak q$ with images in $A$ which generate $\\mathfrak q\\Lambda_{\\mathfrak q}$. Since $A$ is essentially of finite type over $k$, so is its quotient field $F$, which is therefore a finitely generated field extension of $k$ (generated by the images of finitely many algebra generators). (Stacks picks the $\\lambda_j$ for the subring of step 3 directly; as recorded in [lem-weil-pbc-popescu-solution-modulo-choose], that is not possible for every such subring, which is why $A_0$ is enlarged.)",
-   "uses": [
-    "lem-weil-pbc-popescu-solution-modulo-choose",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Denote F = A/m_A the residue field so that k in F in K. Pick lambda_1,...,lambda_t in Lambda which map to elements of A in Lambda-bar such that moreover the images of d lambda_1,...,d lambda_t form a basis of Omega_{F/k}'"
-   }
-  },
-  {
-   "text": "*Flatness of the first part.* Let $\\varphi':k[y_1,\\dots,y_t]\\to\\Lambda$ [def-weil-pbc-mv-polynomial-ring] send $y_j\\mapsto\\lambda_j$ and $\\mathfrak p'=(\\varphi')^{-1}(\\mathfrak q)$; since $\\mathfrak q\\Lambda_{\\mathfrak q}\\cap\\Lambda=\\mathfrak q$, $\\mathfrak p'$ is also the inverse image of the maximal ideal under $k[y_1,\\dots,y_t]\\to\\Lambda_{\\mathfrak q}$. Apply [lem-weil-pbc-geometrically-regular-over-field-flat] (Stacks 07E6) to the Noetherian local $k$-algebra $\\Lambda_{\\mathfrak q}$, geometrically regular over $k$ (step 1), the finitely generated subextension $k\\subseteq F\\subseteq K$ and this map (the image of $y_j$ in $K$ is $\\bar\\lambda_j\\in F$, and the $\\mathrm d\\bar\\lambda_j$ form a basis of $\\Omega_{F/k}$, step 4): $P'=k[y_1,\\dots,y_t]_{\\mathfrak p'}\\to\\Lambda_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] is flat [def-weil-pbc-flat-ring-map] and $S:=\\Lambda_{\\mathfrak q}/\\mathfrak p'\\Lambda_{\\mathfrak q}$ is a regular local ring [def-weil-regular-scheme], with maximal ideal $\\mathfrak qS$ and residue field $K$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-geometrically-regular-over-field-flat",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-regular-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Consider the map phi': k[y_1..y_t] -> Lambda ... By More on Algebra, Lemma 07E6 the ring map k[y_1..y_t]_{p'} -> Lambda_q is flat and Lambda_q/p'Lambda_q is regular'"
-   }
-  },
-  {
-   "text": "*A regular system of parameters of $S$ from the $\\lambda'_i$.* The images of $\\lambda'_1,\\dots,\\lambda'_r$ generate $\\mathfrak q\\Lambda_{\\mathfrak q}$ (step 4), hence the maximal ideal $\\mathfrak qS$ of $S$, hence span the $K$-vector space $\\mathfrak qS/\\mathfrak q^2S$. Choose among them $e$ elements whose images form a basis of $\\mathfrak qS/\\mathfrak q^2S$ and call them $\\lambda_{t+1},\\dots,\\lambda_m$ ($m=t+e$). By Nakayama [lem-weil-pbc-nakayama-local-generators] their images generate $\\mathfrak qS$, and no proper subset does, so they form a minimal set of generators of the maximal ideal of the regular local ring $S$, i.e. a regular system of parameters, and $e=\\dim S$ [def-weil-regular-scheme] [lem-weil-pbc-regular-local-generators-regular-sequence]. By [lem-weil-pbc-regular-local-generators-regular-sequence] their images form a regular sequence in $S$ [def-weil-pbc-regular-sequence], and $S/(\\lambda_{t+1},\\dots,\\lambda_m)S=S/\\mathfrak qS=K\\ne0$. Each $\\lambda_{t+i}$ lies in $\\mathfrak q$ and its image in $\\bar\\Lambda$ lies in $A$.",
-   "uses": [
-    "lem-weil-pbc-nakayama-local-generators",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "def-weil-pbc-regular-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Thus we can choose further elements lambda_{t+1},...,lambda_m in Lambda which map into A in Lambda-bar and which map to a regular system of parameters of Lambda_q/p'Lambda_q'"
-   }
-  },
-  {
-   "text": "*The map $\\varphi$ and $\\mathfrak p\\Lambda_{\\mathfrak q}=\\mathfrak q\\Lambda_{\\mathfrak q}$.* Let $\\varphi:k[y_1,\\dots,y_m]\\to\\Lambda$, $y_j\\mapsto\\lambda_j$, extend $\\varphi'$, $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ and $P=k[y_1,\\dots,y_m]_{\\mathfrak p}$. Then $\\mathfrak p\\cap k[y_1,\\dots,y_t]=\\mathfrak p'$ and $y_{t+1},\\dots,y_m\\in\\mathfrak p$ (as $\\lambda_{t+i}\\in\\mathfrak q$). Since $\\varphi(\\mathfrak p)\\subseteq\\mathfrak q$, $\\mathfrak p\\Lambda_{\\mathfrak q}\\subseteq\\mathfrak q\\Lambda_{\\mathfrak q}$; conversely $\\mathfrak p\\Lambda_{\\mathfrak q}\\supseteq\\mathfrak p'\\Lambda_{\\mathfrak q}+(\\lambda_{t+1},\\dots,\\lambda_m)\\Lambda_{\\mathfrak q}$, which is all of $\\mathfrak q\\Lambda_{\\mathfrak q}$ because the images of $\\lambda_{t+1},\\dots,\\lambda_m$ generate $\\mathfrak qS=\\mathfrak q\\Lambda_{\\mathfrak q}/\\mathfrak p'\\Lambda_{\\mathfrak q}$ (step 6). So $\\mathfrak q\\Lambda_{\\mathfrak q}=\\mathfrak p\\Lambda_{\\mathfrak q}$, the first half of (1).",
-   "uses": [
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'We obtain phi: k[y_1..y_m] -> Lambda having property (1)'"
-   }
-  },
-  {
-   "text": "*The closed fibre $P/\\mathfrak p'P$.* Elements of $k[y_1,\\dots,y_t]\\setminus\\mathfrak p'$ are not in $\\mathfrak p$, so they are units of $P$; hence $P/\\mathfrak p'P$ is the localization of $\\kappa(\\mathfrak p')[y_{t+1},\\dots,y_m]$ ($\\kappa(\\mathfrak p')$ the fraction field of $k[y_1,\\dots,y_t]/\\mathfrak p'$) at the image $\\bar{\\mathfrak p}$ of $\\mathfrak p$. As $\\bar{\\mathfrak p}$ contains the maximal ideal $(y_{t+1},\\dots,y_m)$ (step 7) and is proper, it equals it. By [lem-weil-pbc-polynomial-ring-origin-regular-local] over the field $\\kappa(\\mathfrak p')$, $P/\\mathfrak p'P$ is a regular local ring of dimension $e=m-t$ whose maximal ideal is generated by $y_{t+1},\\dots,y_m$. $P'$, $P$ are Noetherian local rings (localizations [lem-weil-pbc-localization-noetherian] of polynomial rings over a field [lem-weil-pbc-finite-type-algebra-noetherian]), and $P'\\to P$ (localization of the inclusion, $\\mathfrak p\\cap k[y_1,\\dots,y_t]=\\mathfrak p'$) and $P\\to\\Lambda_{\\mathfrak q}$ are local homomorphisms, with $\\mathfrak m_{P'}P=\\mathfrak p'P$.",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-origin-regular-local",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623) (the flatness in property (1), left implicit by Stacks; it repeats the end of the proof of More on Algebra, Lemma 07E6)"
-   }
-  },
-  {
-   "text": "*$P\\to\\Lambda_{\\mathfrak q}$ is flat.* The induced local homomorphism $P/\\mathfrak p'P\\to S=\\Lambda_{\\mathfrak q}/\\mathfrak p'\\Lambda_{\\mathfrak q}$ of Noetherian local rings sends the regular system of parameters $y_{t+1},\\dots,y_m$ of the regular local ring $P/\\mathfrak p'P$ (step 8) to $\\lambda_{t+1},\\dots,\\lambda_m$, a regular sequence in $S$ with nonzero quotient (step 6); so it is flat by [lem-weil-pbc-flat-over-regular] (Algebra 07DY). Now apply [lem-weil-pbc-criterion-flatness-fibre-noetherian] (Algebra 00MP) to $P'\\to P\\to\\Lambda_{\\mathfrak q}$ and $M=\\Lambda_{\\mathfrak q}$: these are Noetherian local rings and local homomorphisms (steps 1, 8); $M$ is generated by $1$ and nonzero; $M/\\mathfrak m_{P'}M=S$ is flat over $P/\\mathfrak m_{P'}P=P/\\mathfrak p'P$ (just shown); $M$ is flat over $P'$ (step 5). Hence $\\Lambda_{\\mathfrak q}$ is flat over $P$ [def-weil-pbc-flat-ring-map]. With step 7 this proves (1).",
-   "uses": [
-    "lem-weil-pbc-flat-over-regular",
-    "lem-weil-pbc-criterion-flatness-fibre-noetherian",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'We obtain phi having property (1)'; More on Algebra, proof of Lemma 07E6 (line 8885: 'We win by Algebra, Lemmas 00R4 and 00NQ')"
-   }
-  },
-  {
-   "text": "*The factorization through $A$.* Write $\\bar P=P/\\mathfrak p^nP$, an Artinian local ring with maximal ideal $\\mathfrak p\\bar P$ and residue field $\\kappa(\\mathfrak p)$ [lem-weil-pbc-noetherian-local-quotient-artinian-local]. The images of $y_1,\\dots,y_m$ in $\\bar\\Lambda$ lie in $A$ (steps 4, 6), so $k[y_1,\\dots,y_m]\\to\\bar\\Lambda$ takes values in $A$. An element $g\\notin\\mathfrak p$ maps to an element of $A$ outside $\\bar{\\mathfrak m}$, i.e. outside $\\mathfrak m_A=A\\cap\\bar{\\mathfrak m}$, hence to a unit of the local ring $A$; by the universal property of localization [def-weil-pbc-localization-at-prime] $k[y]\\to A$ extends to $P\\to A$, which composed with $A\\subseteq\\bar\\Lambda$ is $P\\to\\Lambda_{\\mathfrak q}\\to\\bar\\Lambda$. The latter kills $\\mathfrak p^nP$ (it maps into $\\mathfrak q^n\\bar\\Lambda=0$) and $A\\subseteq\\bar\\Lambda$ is injective, so we get $\\bar P\\to A\\to\\bar\\Lambda$, local homomorphisms of local Artinian rings ($\\mathfrak p$ maps into $\\mathfrak m_A$). Put $D=A$. Then $D\\to\\bar\\Lambda$ is flat ($A$ admissible) and $E\\subseteq A_0\\subseteq D$, which is (3).",
-   "uses": [
+    "lem-weil-pbc-popescu-etale-quotient-map",
     "lem-weil-pbc-noetherian-local-quotient-artinian-local",
     "def-weil-pbc-localization-at-prime"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'such that k[y_1..y_m]_p/p^n k[y_1..y_m]_p -> Lambda-bar factors through A'"
+    "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
    }
   },
   {
-   "text": "*$\\bar P\\to A$ is flat.* Since $\\mathfrak q^n\\Lambda_{\\mathfrak q}=\\mathfrak p^n\\Lambda_{\\mathfrak q}$ (step 7), $\\bar\\Lambda=\\Lambda_{\\mathfrak q}\\otimes_P\\bar P$, which is flat over $\\bar P$ by base change of the flat $P$-module $\\Lambda_{\\mathfrak q}$ (step 9) [lem-weil-pbc-flat-module-base-change]. The flat local homomorphism $A\\to\\bar\\Lambda$ is faithfully flat [lem-weil-pbc-flat-local-hom-faithfully-flat]. So the $A$-module $\\bar\\Lambda$ is flat over $\\bar P$ and faithfully flat over $A$, and $\\bar P\\to A$ is flat by [lem-weil-pbc-flat-permanence] (Stacks cites Algebra 0584 (2) with $S=A$, $S'=\\bar\\Lambda$, $M=A$, which is this instance).",
+   "text": "Construct $D=\\operatorname{ULift}(A)$ and transport $f$, localness, Artinianity and étaleness along the explicit ring/algebra equivalence. The inclusion $A\\to B$ is flat by admissibility [def-weil-pbc-popescu-admissible-subalgebra]. Its localness follows from contraction of the maximal ideal and the image-of-maximal-ideal identity for the quotient. Compose this inclusion with the equivalence $D\\to A$ to obtain the local flat $g$. An étale algebra is smooth; for [def-weil-pbc-essentially-smooth-ring-map], choose the smooth model $D$ and its localization at the submonoid $\\{1\\}$, with the canonical algebra equivalence. The compatibility equation for $gf$ is unchanged under the equivalence. For each $e\\in E$, its explicit witness is the lift of the subtype element $(e,h_E)$ of $A$. This proves all clauses.",
    "uses": [
-    "lem-weil-pbc-flat-module-base-change",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-flat-permanence"
+    "def-weil-pbc-popescu-admissible-subalgebra",
+    "def-weil-pbc-essentially-smooth-ring-map",
+    "def-weil-pbc-flat-ring-map"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Thus k[y]_p/p^n -> A is flat by Algebra, Lemma 0584'"
-   }
-  },
-  {
-   "text": "*$\\mathfrak m_A=\\mathfrak pA$.* By step 7, $(\\mathfrak pA)\\bar\\Lambda=\\mathfrak p\\bar\\Lambda=\\mathfrak q\\bar\\Lambda=\\bar{\\mathfrak m}=\\mathfrak m_A\\bar\\Lambda$. Since $A\\to\\bar\\Lambda$ is faithfully flat (step 11), [lem-weil-pbc-faithfully-flat-ideal-contraction] gives $\\mathfrak m_A\\subseteq\\mathfrak m_A\\bar\\Lambda\\cap A=(\\mathfrak pA)\\bar\\Lambda\\cap A=\\mathfrak pA\\subseteq\\mathfrak m_A$. So the maximal ideal of $\\bar P$ generates the maximal ideal of $A$ (needed for the étaleness criterion below; Stacks leaves it implicit).",
-   "uses": [
-    "lem-weil-pbc-faithfully-flat-ideal-contraction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623) (condition (3) of Algebra, Lemma 00U6, left implicit)"
-   }
-  },
-  {
-   "text": "*$F/\\kappa(\\mathfrak p)$ is finite separable.* The local map $\\bar P\\to A$ induces $\\kappa(\\mathfrak p)\\to F$, and $F$ is finitely generated over $k$ (step 4), hence over $\\kappa(\\mathfrak p)$. The universal derivation $F\\to\\Omega_{F/\\kappa(\\mathfrak p)}$ is a $k$-derivation, so by the universal property [def-weil-pbc-kahler-differentials] there is an $F$-linear map $\\Omega_{F/k}\\to\\Omega_{F/\\kappa(\\mathfrak p)}$, $\\mathrm df\\mapsto\\mathrm df$, which is surjective (the $\\mathrm df$ generate). It kills $\\mathrm d\\bar\\lambda_j$ for $j\\le t$, since $\\bar\\lambda_j$ is the image of $y_j\\in\\kappa(\\mathfrak p)$ and $\\mathrm d$ vanishes on $\\kappa(\\mathfrak p)$; these span $\\Omega_{F/k}$ (step 4). Hence $\\Omega_{F/\\kappa(\\mathfrak p)}=0$, and by [lem-weil-pbc-fg-field-zero-differentials-separable] $F/\\kappa(\\mathfrak p)$ is finite and separable algebraic [def-weil-pbc-separable-algebraic-extension].",
-   "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-fg-field-zero-differentials-separable",
-    "def-weil-pbc-separable-algebraic-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'By construction the residue field extension F/kappa(p) is finitely generated and Omega_{F/kappa(p)} = 0. Hence it is finite separable by More on Algebra, Lemma 07E1' (the separability is Algebra, Lemma 090W (2)=>(1))"
-   }
-  },
-  {
-   "text": "*$\\bar P\\to A$ is finite and finitely presented.* $A$ is Artinian with Jacobson radical $\\mathfrak m_A$ and $A/\\mathfrak m_A=F$ is a finite $\\bar P$-module (finite over $\\kappa(\\mathfrak p)$, step 13, and $\\bar P\\to\\kappa(\\mathfrak p)$ is surjective); so $A$ is a finite $\\bar P$-module [lem-weil-pbc-artinian-finite-over-residue-finite], in particular a $\\bar P$-algebra of finite type. $\\bar P$ is Noetherian (a quotient of the Noetherian ring $P$), so $A$ is finitely presented over $\\bar P$ [lem-weil-pbc-finite-type-noetherian-finite-presentation].",
-   "uses": [
-    "lem-weil-pbc-artinian-finite-over-residue-finite",
-    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Thus k[y]_p/p^n -> A is finite by Algebra, Lemma 07DT'"
-   }
-  },
-  {
-   "text": "*$\\bar P\\to D=A$ is étale, hence essentially smooth.* By [lem-weil-pbc-local-flat-unramified-etale] (Algebra 00U6, local case) applied to the local homomorphism $\\bar P\\to A$: finitely presented (step 14), flat (step 11), $\\mathfrak m_{\\bar P}A=\\mathfrak m_A$ (step 12), residue extension finite separable (step 13); so $\\bar P\\to A$ is étale in the sense of Algebra 00U1, equivalently $\\operatorname{Spec}A\\to\\operatorname{Spec}\\bar P$ is étale [lem-weil-pbc-etale-ring-map-iff-etale-affine]. By remark (a) of [def-weil-pbc-essentially-smooth-ring-map] an étale ring map is essentially smooth. Together with step 10 this is (2).",
-   "uses": [
-    "lem-weil-pbc-local-flat-unramified-etale",
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-    "def-weil-pbc-essentially-smooth-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo, lines 2575-2623): 'Finally, we conclude that it is etale by Algebra, Lemma 00U6. Since an etale ring map is certainly essentially smooth we win.'"
+    "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-localization-noetherian",
-  "def-weil-pbc-g-ring",
-  "lem-weil-pbc-localization-of-regular-ring",
-  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
-  "lem-weil-pbc-geometrically-regular-h1-injective",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-popescu-artinian-flat-subalgebras",
-  "lem-weil-pbc-flat-local-hom-faithfully-flat",
-  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "def-weil-pbc-essentially-smooth-ring-map",
   "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-popescu-solution-modulo-choose",
-  "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-geometrically-regular-over-field-flat",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "def-weil-pbc-regular-sequence",
-  "lem-weil-pbc-polynomial-ring-origin-regular-local",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-flat-over-regular",
-  "lem-weil-pbc-criterion-flatness-fibre-noetherian",
-  "lem-weil-pbc-flat-module-base-change",
-  "lem-weil-pbc-flat-permanence",
-  "lem-weil-pbc-fg-field-zero-differentials-separable",
-  "def-weil-pbc-separable-algebraic-extension",
-  "lem-weil-pbc-artinian-finite-over-residue-finite",
-  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-weil-pbc-local-flat-unramified-etale",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-  "def-weil-pbc-essentially-smooth-ring-map"
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-popescu-admissible-subalgebra",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-popescu-etale-quotient-map",
+  "lem-weil-pbc-popescu-flat-coordinates"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, Lemma Tag 07FH (lemma-solution-modulo, line 2552) and its proof (lines 2575-2623); the choice of A and of the lambda's, which Stacks asserts without argument and which fails for some A, is moved to lem-weil-pbc-popescu-solution-modulo-choose; the flatness in (1) and m_A = pA, left implicit, are written out after More on Algebra 07E6 and Algebra 05CK"
+  "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH",
+  "note": "Two strict parts of the original 07FH argument, combined by a complete Lean proof with explicit universe lift and localization at units."
  },
  "mathlib_searches": [
   {
@@ -340,5 +158,15 @@
   "group": "J1",
   "result": "fix",
   "note": "k field char p>0 as [CharP k p] (0<p) like 07FG/07FI; Λ Noetherian + IsGeometricallyRegular (GRing, not IsGRing); q prime; n≥1; E Finset of Λ_q/(qΛ_q)^n; ∃ m, φ k-alg map; ψ tied to the localization map; (1) qΛ_q = pΛ_q, ψ.Flat; (2) Q, B local Artinian, D local Artinian in max u v, local algebraMap Q D EssentiallySmooth, g local flat, factorization through Ideal.Quotient.mk; (3) E ⊆ range g; lets/letI removed"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T184324-L-4012255",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

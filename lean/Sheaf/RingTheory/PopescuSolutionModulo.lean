@@ -10,16 +10,9 @@ public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.LocalRing.Defs
-import Sheaf.RingTheory.ArtinianFlatSubalgebras
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
-import Sheaf.RingTheory.FlatOverRegular
-import Sheaf.RingTheory.FlatPermanence
-import Sheaf.RingTheory.GeometricallyRegularH1Injective
-import Sheaf.RingTheory.GeometricallyRegularOverFieldFlat
-import Sheaf.RingTheory.LocalizationOfRegularRing
-import Sheaf.RingTheory.PolynomialOriginRegularLocal
-import Sheaf.RingTheory.PopescuSolutionModuloChoose
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.PopescuFlatCoordinates
+import Sheaf.RingTheory.PopescuEtaleQuotientMap
+import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Solving modulo a prime power through an essentially smooth Artinian algebra
@@ -35,6 +28,25 @@ set_option autoImplicit false
 universe u v
 
 namespace Algebra
+
+private theorem local_artinian_prime_pow
+    (R : Type*) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
+    (n : ℕ) (hn : 1 ≤ n) :
+    IsLocalRing (R ⧸ IsLocalRing.maximalIdeal R ^ n) ∧
+      IsArtinianRing (R ⧸ IsLocalRing.maximalIdeal R ^ n) := by
+  have hn0 : n ≠ 0 := Nat.ne_zero_of_lt hn
+  have hproper : IsLocalRing.maximalIdeal R ^ n ≠ ⊤ := by
+    exact ne_top_of_le_ne_top (IsLocalRing.maximalIdeal.isMaximal R).ne_top
+      (Ideal.pow_le_self hn0)
+  have : Nontrivial (R ⧸ IsLocalRing.maximalIdeal R ^ n) :=
+    Ideal.Quotient.nontrivial_iff.mpr hproper
+  refine ⟨IsLocalRing.of_surjective' _ Ideal.Quotient.mk_surjective, ?_⟩
+  apply IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing
+  rw [← Ideal.radical_minimalPrimes, Ideal.radical_pow _ hn0,
+    Ideal.IsPrime.radical (IsLocalRing.maximalIdeal.isMaximal R).isPrime,
+    Ideal.minimalPrimes_eq_subsingleton_self]
+  exact Set.mem_singleton _
+
 
 /-- A finite subset of a prime-power quotient of a geometrically regular algebra lies in an
 Artinian factorization of a polynomial localization, essentially smooth on the first leg
@@ -255,6 +267,67 @@ theorem exists_essentiallySmooth_artinian_factorization_mod_prime_pow
           (Ideal.Quotient.mk
             ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)).comp ψ ∧
         ∀ e ∈ E, e ∈ Set.range g := by
-  sorry
+  obtain ⟨A, hlocal, hA, hAm, hE, m, φ, ψ, hψ, hideal, hflat, a, ha, hspan⟩ :=
+    exists_popescu_flat_coordinates k Λ p hp hreg q n hn E
+  let : IsLocalRing A := hlocal
+  let P := Localization.AtPrime (q.comap φ.toRingHom)
+  let I : Ideal P := (q.comap φ.toRingHom).map (algebraMap (MvPolynomial (Fin m) k) P)
+  let B := Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n
+  let Q := P ⧸ I ^ n
+  have hP : I = IsLocalRing.maximalIdeal P := Localization.AtPrime.map_eq_maximalIdeal
+  have hQ : IsLocalRing Q ∧ IsArtinianRing Q := by
+    dsimp [Q]
+    rw [hP]
+    exact local_artinian_prime_pow P n hn
+  have hB : IsLocalRing B ∧ IsArtinianRing B := by
+    dsimp [B]
+    rw [Localization.AtPrime.map_eq_maximalIdeal]
+    exact local_artinian_prime_pow (Localization.AtPrime q) n hn
+  have : IsLocalRing Q := hQ.1
+  have : IsArtinianRing Q := hQ.2
+  have : IsLocalRing B := hB.1
+  obtain ⟨f, hfLocal, hfEtale, hfcomm⟩ :=
+    exists_etale_popescu_quotient_map k Λ q n hn A hA hAm m φ ψ hψ hideal hflat a ha hspan
+  let : Algebra Q A := f.toAlgebra
+  have : Etale Q A := hfEtale
+  have : IsLocalHom f := hfLocal
+  have : IsArtinianRing A := hA.1
+  let D := ULift.{u} A
+  let e : D ≃ₐ[Q] A := ULift.algEquiv
+  have : IsLocalRing D := e.toRingEquiv.symm.isLocalRing
+  have : IsArtinianRing D := e.toRingEquiv.symm.isArtinianRing
+  have : Etale Q D := Etale.of_equiv e.symm
+  let g : D →+* B := A.val.toRingHom.comp e.toRingHom
+  have hvalLocal : IsLocalHom A.val.toRingHom := by
+    apply (IsLocalRing.local_hom_TFAE A.val.toRingHom).out 4 0 |>.mp
+    change (IsLocalRing.maximalIdeal B).comap A.val.toRingHom = _
+    rw [← IsLocalRing.map_maximalIdeal_of_surjective
+      (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n))
+      Ideal.Quotient.mk_surjective, ← Localization.AtPrime.map_eq_maximalIdeal]
+    exact hAm.symm
+  have : IsLocalHom A.val.toRingHom := hvalLocal
+  have : IsLocalHom e.toRingHom := IsLocalHom.of_surjective _ e.surjective
+  have hgLocal : IsLocalHom g := RingHom.isLocalHom_comp _ _
+  have hgFlat : g.Flat :=
+    (RingHom.Flat.of_bijective e.bijective).comp hA.2.2.choose_spec.1
+  have hsmooth : EssentiallySmooth Q D := by
+    refine ⟨D, inferInstance, inferInstance, inferInstance, ⊥, ?_⟩
+    exact ⟨(IsLocalization.atUnits D (⊥ : Submonoid D)
+      (S := Localization (⊥ : Submonoid D)) bot_le).restrictScalars Q⟩
+  refine ⟨m, φ, ψ, hψ, hideal, hflat, hQ.1, hQ.2, hB.1, hB.2,
+    D, inferInstance, inferInstance, g, inferInstance, inferInstance,
+    ?_, hgLocal, hsmooth, hgFlat, ?_, ?_⟩
+  · change IsLocalHom (e.symm.toRingHom.comp f)
+    have : IsLocalHom e.symm.toRingHom := IsLocalHom.of_surjective _ e.symm.surjective
+    exact RingHom.isLocalHom_comp _ _
+  · change (g.comp (algebraMap Q D)).comp (Ideal.Quotient.mk (I ^ n)) = _
+    have hgf : g.comp (algebraMap Q D) = A.val.toRingHom.comp f := by
+      ext x
+      rfl
+    rw [hgf]
+    exact hfcomm
+  · intro x hx
+    refine ⟨e.symm ⟨x, hE x hx⟩, ?_⟩
+    exact congrArg (fun y : A ↦ (y : B)) (e.apply_symm_apply _)
 
 end Algebra

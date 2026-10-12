@@ -1,0 +1,215 @@
+{
+ "id": "lem-weil-pbc-popescu-etale-quotient-map",
+ "kind": "statement",
+ "title": "Étale prime-power quotient map into an adapted admissible subalgebra",
+ "statement": "Let $k$ be a field, $\\Lambda$ a Noetherian $k$-algebra [def-weil-pbc-noetherian-ring], $q\\subset\\Lambda$ a prime, $n\\ge1$, $L=\\Lambda_q$ [def-weil-pbc-localization-at-prime], $J=qL$, $B=L/J^n$, and $\\pi:L\\to B$ the quotient map. Let $A\\subset B$ be a local $k$-subalgebra with maximal ideal $\\mathfrak m_A$, admissible [def-weil-pbc-popescu-admissible-subalgebra] for $JB$, and assume $\\mathfrak m_A=A\\cap JB$. Fix $m\\ge0$ and $\\varphi:k[y_1,\\ldots,y_m]\\to\\Lambda$ [def-weil-pbc-mv-polynomial-ring], put $p=\\varphi^{-1}(q)$ and $P=k[y]_p$, and fix a flat [def-weil-pbc-flat-ring-map] ring map $\\psi:P\\to L$ extending $\\Lambda\\to L$ composed with $\\varphi$. Assume $qL=pL$. Suppose $a_j\\in A$ map to $\\pi(\\varphi(y_j))$ and their residue differentials span $\\Omega_{F/k}$ over $F=A/\\mathfrak m_A$ [def-weil-pbc-kahler-differentials]. Then there is a ring map $f:P/(pP)^n\\to A$ sending the maximal ideal into $\\mathfrak m_A$, étale (finitely presented, formally smooth [def-weil-pbc-smooth-ring-map], with zero relative Kähler differentials), whose composite with $A\\hookrightarrow B$ and $P\\to P/(pP)^n$ equals $\\pi\\circ\\psi$. No coordinates are chosen, and neither characteristic nor geometric regularity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-popescu-admissible-subalgebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "The polynomial evaluation factors through $A$ because its variable and coefficient images lie in $A$. Elements outside $p$ map outside $JB$, hence outside $\\mathfrak m_A$ by contraction, hence to units of $A$. Extend to $P\\to A$ by [def-weil-pbc-localization-at-prime]. Its composite with inclusion equals $\\pi\\psi$ by localization uniqueness. Since $qL=pL$, this composite kills $(pP)^n$. Inclusion is injective, so quotient universality gives $f:P/(pP)^n\\to A$ and its compatibility equation. It is local because $p$ maps into the contracted maximal ideal.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-popescu-admissible-subalgebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
+   }
+  },
+  {
+   "text": "The map $P/(pP)^n\\to B$ is the base change of $\\psi$ since $pL=qL$, so it is flat by [lem-weil-pbc-flat-module-base-change]. The admissible inclusion $A\\to B$ is flat and local, hence faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat]. Apply [lem-weil-pbc-flat-permanence] to obtain flatness of $f$.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-flat-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
+   }
+  },
+  {
+   "text": "The extensions to $B$ of $pA$ and $\\mathfrak m_A$ both equal $JB$: for the former use $pL=qL$, and for the latter use admissibility. Faithfully flat contraction [lem-weil-pbc-faithfully-flat-ideal-contraction] gives $pA=\\mathfrak m_A$. This is also the image of the maximal ideal of $P/(pP)^n$; the base and target are Artinian local [lem-weil-pbc-noetherian-local-quotient-artinian-local] and admissibility.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "def-weil-pbc-popescu-admissible-subalgebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
+   }
+  },
+  {
+   "text": "The residue field $F$ of $A$ is finitely generated over $k$, since $A$ is essentially of finite type, and hence over $\\kappa(p)$. The surjection $\\Omega_{F/k}\\to\\Omega_{F/\\kappa(p)}$ [def-weil-pbc-kahler-differentials] kills the differentials of all coordinate residues. These span by hypothesis, so $\\Omega_{F/\\kappa(p)}=0$. The extension is finite separable by [lem-weil-pbc-fg-field-zero-differentials-separable].",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-fg-field-zero-differentials-separable",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
+   }
+  },
+  {
+   "text": "The Artinian ring $A$ has residue field finite over $P/(pP)^n$. By [lem-weil-pbc-artinian-finite-over-residue-finite], it is finite over that base, hence finite type. The base is Noetherian (polynomial localization followed by quotient), so [lem-weil-pbc-finite-type-noetherian-finite-presentation] gives finite presentation.",
+   "uses": [
+    "lem-weil-pbc-artinian-finite-over-residue-finite",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-local-flat-unramified-etale] to the finitely presented flat local map $f$, using $pA=\\mathfrak m_A$ and the finite separable residue field extension. This gives algebraic étaleness at the unique prime of the Artinian local target, hence everywhere; no comparison to an affine scheme is needed.",
+   "uses": [
+    "lem-weil-pbc-local-flat-unramified-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-popescu-admissible-subalgebra",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-artinian-finite-over-residue-finite",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-fg-field-zero-differentials-separable",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-permanence",
+  "lem-weil-pbc-local-flat-unramified-etale",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a flat polynomial localization induces an etale map into an Artinian subalgebra containing its coordinates",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no absence verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat local Artinian subalgebra containing polynomial coordinates with spanning residue differentials is etale over the polynomial prime power quotient",
+   "results": "StandardEtalePair instances and standard-smooth polynomial presentations; none states the adapted Artinian quotient map.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, KaehlerDifferential",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Etale.*quotient|etale.*subalgebra|Flat.*IsLocalHom",
+   "results": "Faithfully flat local-hom and standard-étale presentation lemmas; no combined quotient map.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuSolutionModulo",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); quotient factorization and étaleness (steps 10–15 of 07FH)",
+   "via": [
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuEtaleQuotientMap",
+  "file": "lean/Sheaf/RingTheory/PopescuEtaleQuotientMap.lean",
+  "declaration": "Algebra.exists_etale_popescu_quotient_map",
+  "statement": "theorem exists_etale_popescu_quotient_map (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ] [IsNoetherianRing Λ] (q : Ideal Λ) [q.IsPrime] (n : ℕ) (hn : 1 ≤ n) (A : Subalgebra k (Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)) [IsLocalRing A] (hA : A.IsPopescuAdmissible ((q.map (algebraMap Λ (Localization.AtPrime q))).map (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)))) (hAm : IsLocalRing.maximalIdeal A = Ideal.comap A.val.toRingHom ((q.map (algebraMap Λ (Localization.AtPrime q))).map (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)))) (m : ℕ) (φ : MvPolynomial (Fin m) k →ₐ[k] Λ) (ψ : Localization.AtPrime (q.comap φ.toRingHom) →+* Localization.AtPrime q) (hψ : ψ.comp (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom))) = (algebraMap Λ (Localization.AtPrime q)).comp φ.toRingHom) (hideal : q.map (algebraMap Λ (Localization.AtPrime q)) = (q.comap φ.toRingHom).map ((algebraMap Λ (Localization.AtPrime q)).comp φ.toRingHom)) (hflat : ψ.Flat) (a : Fin m → A) (ha : ∀ j, (a j : Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) = Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) (algebraMap Λ (Localization.AtPrime q) (φ (MvPolynomial.X j)))) (hspan : Submodule.span (IsLocalRing.ResidueField A) (Set.range (fun j ↦ KaehlerDifferential.D k (IsLocalRing.ResidueField A) (IsLocalRing.residue A (a j)))) = ⊤) : ∃ f : (Localization.AtPrime (q.comap φ.toRingHom) ⧸ ((q.comap φ.toRingHom).map (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom)))) ^ n) →+* A, IsLocalHom f ∧ (letI := f.toAlgebra Etale (Localization.AtPrime (q.comap φ.toRingHom) ⧸ ((q.comap φ.toRingHom).map (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom)))) ^ n) A) ∧ (A.val.toRingHom.comp f).comp (Ideal.Quotient.mk ((q.comap φ.toRingHom).map (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime (q.comap φ.toRingHom))) ^ n)) = (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)).comp ψ",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T184324-L-4012255",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T184324-L-4012255",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
