@@ -8676,3 +8676,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/U3/Sheaf.AlgebraicGeometry.EtaleLimitCohomologyAffineStage (stage 3; reviewer PASS; after a return; landing 20261012T165536-L-2941242 (interface); batch 20261012T165503; modules 3; new nodes 2)
 - 16:55 L: merged deliver/U3/Sheaf.AlgebraicGeometry.FiniteExactHomDegreeZeroLift (stage 3; reviewer PASS; first push; landing 20261012T165536-L-2941407 (interface); batch 20261012T165503; modules 3; new nodes 2)
 - 16:55 L: merged deliver/U3/Sheaf.AlgebraicGeometry.IdealTensorImageComparison (stage 3; reviewer PASS; first push; landing 20261012T165537-L-2941516 (proof); batch 20261012T165503; modules 1; new nodes 0)
+- 16:55 L: merged deliver/V1/Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseFiltrationCore (stage 3; reviewer PASS; first push; landing 20261012T165537-L-2941628 (interface); batch 20261012T165503; modules 2; new nodes 1)

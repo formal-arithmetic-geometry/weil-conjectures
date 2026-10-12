@@ -1,0 +1,152 @@
+{
+ "id": "lem-sc-primary-module-filtration-sheaf-transport",
+ "kind": "statement",
+ "title": "Transport an invariant primary module chain to etale sheaf short exact sequences",
+ "statement": "Let $K,K^s,\\Omega$ be fields, with $K^s$ a separable closure of $K$ [def-pd-separable-closure] and $\\Omega$ an algebraically closed extension containing $K^s$ over $K$. Put $G=\\operatorname{Gal}(K^s/K)$ with the Krull topology. Let $M$ be an abelian etale sheaf on $\\operatorname{Spec}K$ [def-weil-pbc-abelian-etale-sheaves], and $R$ a finite discrete continuous integer representation of $G$ [def-exc-discrete-modules-category]. Suppose an additive isomorphism $i:R\\simeq M_{\\bar s}$ to its geometric stalk [def-weil-pbc-geometric-stalks] identifies the action on $R$ with the action on germs: for each $g\\in G$, each extension $\\tau\\in\\operatorname{Aut}_K(\\Omega)$ of $g$, and each section $z$ represented at a pointed etale lift $x$, applying $g$ to its image in $R$ corresponds to the same section at $\\tau\\circ x$. Let $\\ell$ be prime, $H\\subset G$ open, and $L=(K^s)^H$ finite over $K$. Suppose $A_0\\subseteq\\cdots\\subseteq A_n$ are additive subgroups of $R$, invariant under $H$, with $A_0=0$, $A_n=R$, $\\ell A_{a+1}\\subseteq A_a$, and $gx-x\\in A_a$ for $g\\in H$, $x\\in A_{a+1}$. For every scheme $T$ and isomorphism $e:\\operatorname{Spec}L\\simeq T$, there are abelian etale sheaves $F(a)$ on $T$, indexed by $a\\in\\mathbb N$, with $F(0)=0$, short exact sequences $0\\to F(a)\\to F(a+1)\\to (\\underline{\\mathbb Z/\\ell})^{\\oplus d_a}\\to0$ for $a<n$ and some $d_a\\geq0$ [def-sc-constant-sheaves], and $F(n)\\simeq q^{-1}M$ [def-weil-pbc-inverse-image], where $q=e^{-1}\\circ\\operatorname{Spec}(K\\hookrightarrow L)$. No curve, normalization, construction of H, or degree assertion is part of this statement.",
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pd-separable-closure",
+  "def-exc-discrete-modules-category",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraphs 1--2: convert the restricted primary-module chain to constant-quotient etale sheaves"
+ },
+ "proof": [
+  {
+   "text": "For each a, make A(a) an integer submodule of R and restrict its action to H. Stability gives actions on the submodules and on A(a+1)/A(a); their stabilizers are open because each contains the open stabilizer of a representative. Monotonicity gives equivariant inclusions and the quotient maps, forming short exact sequences of discrete H-modules. The bottom and top equalities identify their endpoints with zero and R restricted to H.",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a successor quotient Q, the hypothesis ell*x in A(a) says ell*Q=0, so Q has its canonical Z/ell-module structure. The second successor condition says every element of H acts trivially on Q. Since R is finite, Q is finite. As ell is prime, a maximal linearly independent subset of the finite set Q is a finite basis: if its span were proper, adjoining a vector outside the span would contradict maximality. The coordinate maps therefore identify Q with a finite direct sum of copies of Z/ell. If Q=0 the basis is empty and the sum is the zero object.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Let L=(Ks)^H. The fixed-field correspondence identifies its fixing subgroup with H and Ks is a separable closure of L. On the sites of etale schemes, composing Spec L -> Spec K identifies the pointed fibres with their same geometric points, with Galois action restricted to H; the point/G-set classification describes these actions by precomposition. The stalk of inverse image is thus the same abelian group with restricted action. The supplied action-on-germs equality makes i an equivariant identification of that stalk with R restricted to H. Applying the abelian sheaf/module equivalence over L therefore identifies the inverse image of M with this restricted module.",
+   "uses": [
+    "lem-exc-etale-open-subgroup-fixed-field",
+    "lem-exc-etale-field-gsets",
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse abelian equivalence over L to the supplied submodule chain and its short exact sequences. Equivalences preserve zero objects, kernels and cokernels, so the sequences stay short exact. The trivial-action module Z/ell corresponds to the constant Z/ell sheaf, by computing its stalk and action. The finite direct-sum identifications from step 2 become the stated iterated binary biproducts. Pull the chain across e:Spec L ~= T. The inverse image along an isomorphism is an equivalence, so it again preserves these properties and carries constant sheaves to constant sheaves. Composition of inverse images gives the terminal identification for e.inv followed by Spec(algebraMap K L). Extend the chain from Fin(n+1) to the natural numbers by taking A(min(a,n)), so all indices a<n and both endpoints agree; when n=0 the given bottom/top equalities force R=0.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "def-weil-pbc-inverse-image",
+    "def-sc-constant-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-modules-category",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-etale-field-gsets",
+  "lem-exc-etale-open-subgroup-fixed-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraphs 1--2: convert the restricted primary-module chain to constant-quotient etale sheaves"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheaf.*filtration|filtration.*sheaf|fixedField.*sheaf",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "No exact chain-to-sheaf transport theorem; use the field/sheaf equivalence and elementary quotient constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transport invariant subgroup filtration along equivalence abelian etale sheaves discrete Galois modules restriction fixed field",
+   "results": "InfiniteGalois.mk_toAlgEquivAux; InfiniteGalois.toAlgEquivAux_eq_proj_of_mem; InfiniteGalois.asProfiniteGaloisGroupFunctor; InfiniteGalois.algEquivToLimit; InfiniteGalois.limitToAlgEquiv_apply; InfiniteGalois.limitToAlgEquiv; InfiniteGalois.toAlgEquivAux_eq_liftNormal; IsGaloisGroup.map_mulEquivAlgEquiv_fixingSubgroup",
+   "date": "2026-10-12",
+   "verdict": "No exact chain-to-sheaf transport theorem; use the field/sheaf equivalence and elementary quotient constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invariant filtration of a finite discrete Galois module with trivial quotients killed by a prime corresponds to a filtration of etale sheaves on the fixed field with constant ZMod quotients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseFiltrationCore",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-generic-second",
+   "place": "proof paragraphs 1--2: the restricted primary Galois-module filtration gives constant-quotient sheaves over the fixed field",
+   "via": [
+    "lem-sc-generic-primary-coarse-filtration-core",
+    "lem-sc-generic-primary-coarse-filtration-data",
+    "lem-sc-generic-primary-coarse-trace-retraction",
+    "lem-sc-generic-finite-coarse-trace-filtration-data",
+    "lem-sc-affine-generic-finite-second-retraction",
+    "lem-sc-affine-generic-finite-second"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PrimaryModuleFiltrationSheafTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_sheaf_filtration_of_invariant_primary_chain",
+  "statement": "theorem exists_sheaf_filtration_of_invariant_primary_chain\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (M : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (R : Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K)))\n    (i : AddCommGrpCat.of R.obj.V ≅\n      ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber\n        (A := AddCommGrpCat.{u + 1})).obj M)\n    (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n      (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω))\n      (X : (Spec (.of K)).Etale)\n      (x x' : (pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X)\n      (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n      (z : M.obj.obj (op X)),\n      i.hom (R.obj.ρ g (i.inv ((pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x M.obj z))) =\n      (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber\n        X x' M.obj z)\n    (ℓ : ℕ) (hℓ : ℓ.Prime) [Finite R.obj.V]\n    (H : OpenSubgroup (Gal(Ks/K)))\n    [FiniteDimensional K (IntermediateField.fixedField H.toSubgroup)]\n    (n : ℕ) (A : Fin (n + 1) → AddSubgroup R.obj.V)\n    (hmono : Monotone A) (hzero : A 0 = ⊥) (htop : A (Fin.last n) = ⊤)\n    (hstable : ∀ (a : Fin (n + 1)) (g : H) (x : R.obj.V),\n      x ∈ A a → R.obj.ρ (g : Gal(Ks/K)) x ∈ A a)\n    (hstep : ∀ (a : Fin n) (x : R.obj.V), x ∈ A a.succ →\n      ℓ • x ∈ A a.castSucc ∧ ∀ g : H, R.obj.ρ (g : Gal(Ks/K)) x - x ∈ A a.castSucc)\n    (T : Scheme.{u}) (e : Spec (.of (IntermediateField.fixedField H.toSubgroup)) ≅ T) :\n    ∃ F : ℕ → Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1},\n      IsZero (F 0) ∧\n      (∀ a : ℕ, a < n →\n        ∃ (S : ShortComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) (d : ℕ),\n          S.ShortExact ∧ Nonempty (S.X₁ ≅ F a) ∧ Nonempty (S.X₂ ≅ F (a + 1)) ∧\n          Nonempty (S.X₃ ≅ Nat.rec (0 : _)\n            (fun _ B ↦ B ⊞ T.constantZMod ℓ) d)) ∧\n      Nonempty ((Etale.upperStar AddCommGrpCat.{u + 1}\n        (e.inv ≫ Spec.map (CommRingCat.ofHom\n          (algebraMap K (IntermediateField.fixedField H.toSubgroup))))).obj M ≅ F n)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T165537-L-2941628",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T165537-L-2941628",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

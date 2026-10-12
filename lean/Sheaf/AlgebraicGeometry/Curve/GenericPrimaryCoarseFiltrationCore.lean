@@ -10,7 +10,10 @@ public import Mathlib.GroupTheory.PGroup
 
 import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 import Sheaf.RepresentationTheory.SylowModuleFiltration
+import Mathlib.FieldTheory.Galois.Profinite
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import Sheaf.FieldTheory.OpenSubgroupFixedField
+import Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport
 
 @[expose] public section
 set_option autoImplicit false
@@ -63,6 +66,71 @@ theorem exists_generic_primary_coarse_filtration_core
           Etale q ∧
           ∃ (d : ℕ), q.IsFiniteLocallyFreeOfDegree d ∧ d.Coprime ℓ ∧
           Nonempty ((Etale.upperStar AddCommGrpCat.{u + 1} q).obj M ≅ F n) := by
-  sorry
+  classical
+  let K : Type u := C.functionField
+  let Ω := AlgebraicClosure K
+  let Ks := separableClosure K Ω
+  obtain ⟨E, Eset, i, j, _, haction, _⟩ :=
+    Scheme.abelianSheaves_equiv_discreteGModules.{u, u + 1} K Ks Ω
+  let R := E.functor.obj M
+  let iM : AddCommGrpCat.of R.obj.V ≅
+      ((Scheme.pointSmallEtale (Spec.map (CommRingCat.ofHom
+        (algebraMap K Ω)))).sheafFiber (A := AddCommGrpCat.{u + 1})).obj M := i.app M
+  let : Finite R.obj.V := Finite.of_equiv _ iM.addCommGroupIsoToAddEquiv.toEquiv.symm
+  have hR : IsPGroup ℓ (Multiplicative R.obj.V) :=
+    hprimary.of_injective iM.hom.hom.toMultiplicative
+      iM.addCommGroupIsoToAddEquiv.injective
+  obtain ⟨H, hindex, n, A, hmono, hzero, htop, hstable, hstep⟩ :=
+    Rep.exists_openSubgroup_primary_module_filtration (Gal(Ks/K)) ℓ hℓ R hR
+  obtain ⟨hfd, hsep, hfix, _, _, _⟩ :=
+    (openSubgroup_fixedField_finite_separable.{u, u, u} K Ks).1 H.toSubgroup H.isOpen
+  let L := IntermediateField.fixedField H.toSubgroup
+  let : FiniteDimensional K L := hfd
+  let : Algebra.IsSeparable K L := hsep
+  obtain ⟨hfin, haff, hcurve, hsmooth, e, he⟩ := hmodel L
+  let D := C.normalizationIn L
+  let π := C.fromNormalizationIn L
+  let : IsIntegral D := inferInstance
+  let q : Spec D.functionField ⟶ Spec C.functionField :=
+    e.inv ≫ Spec.map (CommRingCat.ofHom (algebraMap K L))
+  obtain ⟨F, hFzero, hFstep, hFtop⟩ :=
+    Scheme.exists_sheaf_filtration_of_invariant_primary_chain K Ks Ω M R iM
+      (haction M) ℓ hℓ H n A hmono hzero htop hstable hstep
+      (Spec D.functionField) e
+  have hq : q ≫ C.fromSpecFunctionField = D.fromSpecFunctionField ≫ π := by
+    change e.inv ≫ (Spec.map (CommRingCat.ofHom (algebraMap K L)) ≫
+      C.fromSpecFunctionField) = D.fromSpecFunctionField ≫ π
+    change e.inv ≫ C.fromSpecOfAlgebraFunctionField L = D.fromSpecFunctionField ≫ π
+    calc
+      e.inv ≫ C.fromSpecOfAlgebraFunctionField L =
+          e.inv ≫ ((C.fromSpecOfAlgebraFunctionField L).toNormalization ≫ π) :=
+        congrArg (fun g ↦ e.inv ≫ g)
+          (Scheme.Hom.toNormalization_fromNormalization
+            (C.fromSpecOfAlgebraFunctionField L)).symm
+      _ = e.inv ≫ (e.hom ≫ D.fromSpecFunctionField) ≫ π := by rw [he]
+      _ = D.fromSpecFunctionField ≫ π := by simp
+  have hrEtale : Etale (Spec.map (CommRingCat.ofHom (algebraMap K L))) := by
+    apply (HasRingHomProperty.Spec_iff (P := @Etale)).mpr
+    exact RingHom.etale_algebraMap.mpr .of_finite_of_isSeparable
+  let := hrEtale
+  have hrFinite : IsFinite (Spec.map (CommRingCat.ofHom (algebraMap K L))) := by
+    apply (IsFinite.SpecMap_iff _).mpr
+    exact RingHom.finite_algebraMap.mpr inferInstance
+  let := hrFinite
+  have hqEtale : Etale q := by dsimp [q]; infer_instance
+  have hdegree : q.IsFiniteLocallyFreeOfDegree (Module.finrank K L) := by
+    refine { toIsFiniteLocallyFree := ?_, fiberDegree_eq := ?_ }
+    · exact { toIsFinite := by dsimp only [q]; infer_instance,
+              toFlat := by dsimp only [q]; infer_instance,
+              toLocallyOfFinitePresentation := by dsimp only [q]; infer_instance }
+    · intro x
+      change (e.inv ≫ Spec.map (CommRingCat.ofHom (algebraMap K L))).fiberDegree x = _
+      rw [Scheme.Hom.fiberDegree_comp_left_of_isIso, fiberDegree_eq_finrankΓ]
+      exact Scheme.Hom.finrankΓ_SpecMap K L
+  have hcoprime : (Module.finrank K L).Coprime ℓ := by
+    rw [IntermediateField.finrank_eq_fixingSubgroup_index, hfix]
+    exact hindex
+  exact ⟨D, π, hfin, hcurve, hsmooth, haff, inferInstance, n, F, hFzero, hFstep,
+    q, hq, hqEtale, Module.finrank K L, hdegree, hcoprime, hFtop⟩
 
 end AlgebraicGeometry.IsConnectedCurve
