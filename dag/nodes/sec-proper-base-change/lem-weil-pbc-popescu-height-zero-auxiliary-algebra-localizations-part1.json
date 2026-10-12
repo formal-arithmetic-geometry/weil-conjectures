@@ -1,0 +1,174 @@
+{
+ "id": "lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations-part1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-popescu-delocalize-height-zero",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "First localization package",
+ "statement": "Let B, C and the target localization be the rings defined in the parent node. The first conjunct asserts the existence of an A-algebra map phi : B → C[t_{ij}, z]_z sending x_k to the class of x_k in C, every y_i to 0, z to z, and t_{ij} to t_{ij}; it also asserts an A-algebra equivalence e : B_z ≃ C[t_{ij}, z]_z satisfying e(algebraMap(B,B_z,b)) = phi b for every b. This is exactly the first localization assertion of Stacks Project Tag 07FA, with the Stacks misprint corrected from C[y_i,z,z⁻¹] to C[t_{ij},z,z⁻¹].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FA (lemma-delocalize-height-zero), lines 2266-2275 (the claims 'B_z is isomorphic to C[y_1,...,y_r,z,z^{-1}]' and 'B_{y_l} = A[x_i,y_i,y_l^{-1},t_ij, i != l]'); Stacks' C[y_1,...,y_r,z,z^{-1}] is a misprint for C[t_ij,z,z^{-1}] (the y_i die in B_z since z y_i = 0)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-ring-localization-away"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of quotient of polynomial ring away from a variable is isomorphic to polynomial ring with variable eliminated",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv (MvPolynomial.Localization: R[X]/(rX-1) = R_r), Localization.awayEquivAdjoin, IsLocalization.adjoin_inv (Localization.Away.AdjoinRoot), Polynomial.quotientSpanXSubCAlgEquiv (Polynomial.Quotient): only the presentation of R_r and the quotient by X - c, not this elimination",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization.Away of MvPolynomial quotient by relation z * y = 0 isomorphic to quotient with y = 0, eliminate variable solving linear relation after inverting coefficient",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv(_apply), Algebra.Generators.compLocalizationAwayAlgHom_X_inl / _relation_eq_zero (Extension.Cotangent.LocalizationAway), Algebra.Generators.toAlgHom_ofComp_localizationAway, Algebra.Presentation.relation_comp_localizationAway_inl: presentations of localizations, not this isomorphism",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, MvPolynomial, HasQuotient.Quotient",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv, IsLocalization.Away.mvPolynomialQuotientEquiv_apply, Algebra.Generators.compLocalizationAwayAlgHom_relation_eq_zero",
+   "date": "2026-10-10",
+   "verdict": "no match (the building block R[X]/(rX-1) = R_r is there; the isomorphisms of the node must be assembled from it, from Ideal.quotientEquiv-type lemmas and IsLocalization.Away API)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'quotientSpan.*Away\\|away.*quotient.*X' Mathlib/RingTheory/MvPolynomial/Localization.lean and grep -rln 'Ideal.span {.*X .* \\* .*X' Mathlib/RingTheory",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "localization away from y of polynomial ring quotient by y*t - f is isomorphic to localization of polynomial ring without t",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv(_apply) (Mathlib.RingTheory.MvPolynomial.Localization), Localization.awayEquivAdjoin, IsLocalization.adjoin_inv (Mathlib.RingTheory.Localization.Away.AdjoinRoot), Algebra.Generators.compLocalizationAwayAlgHom, IsLocalization.ringEquivOfRingEquiv_mk', IsLocalization.Away.map: presentations of R_r and functoriality, not this elimination",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, MvPolynomial, Ideal.span",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv(_apply), Algebra.Generators.ker_localizationAway, Algebra.Generators.comp_localizationAway_ker: only the presentation R[X]/(rX-1) of R_r",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|def ' Mathlib/RingTheory/MvPolynomial/Localization.lean; grep -rln 'Away.*Quotient\\|Quotient.*Away' Mathlib/RingTheory",
+   "results": "Localization.lean: auxHom, auxInv, mvPolynomialQuotientEquiv only; files RingTheory/Etale/StandardEtale.lean, Extension/Presentation/Basic.lean, Extension/Cotangent/LocalizationAway.lean, Jacobson/Ring.lean, Spectrum/Prime/ConstructibleSet.lean: standard etale and presentation API, none states these isomorphisms",
+   "date": "2026-10-10",
+   "verdict": "no match (ad hoc algebra; assembled from MvPolynomial.aeval/algHom_ext, Ideal.Quotient.liftₐ, IsLocalization.Away.lift)"
+  }
+ ],
+ "proof": [
+  {
+   "text": "Construct the asserted homomorphisms and equivalence using the universal properties of multivariate polynomial rings, ideal quotients, and localization away from one element; verify the displayed generator formulas and use extensionality on polynomial generators and localization.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FA, lines 2266-2275"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FA (lemma-delocalize-height-zero), lines 2266-2275: Stacks asserts the two isomorphisms without proof; the verification is written by an agent"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizations",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations",
+  "worker": "stage1",
+  "summary": "Proof written in 7 elementary steps, by agent (Stacks 07FA lines 2266-2275 asserts both isomorphisms without proof): step 1 records the universal properties of polynomial rings, quotients and localization at one element, the last two derived in the step from the cited definition nodes (def-weil-pbc-algebra-hom-quotient: quotient map surjective with kernel J; def-weil-ring-localization-away: fractions d/g^n), since no node states the factorization properties; steps 2-4 build B_z -> C[t,z]_z (relations go to 0 since y_i -> 0 and f_j -> 0 in C), the inverse C[t,z]_z -> B_z (in B_z, y_i = zy_i z^{-1} = 0, hence f_j = sum y_i t_ij = 0, so P -> B_z factors through C), and check both composites on generators; steps 5-7 build (Q_l)_{y_l} -> B_{y_l}, the inverse B -> (Q_l)_{y_l} (z -> 0, t_lj -> y_l^{-1}(f_j - sum_{i!=l} y_i t_ij), relations checked) and both composites (in B_{y_l}: z = 0 and t_lj = y_l^{-1}(f_j - sum_{i!=l} y_i t_ij)). Statement unchanged; checked correct, including the recorded misprint (Stacks' C[y_1..y_r,z,z^{-1}] should be C[t_ij,z,z^{-1}]). stmt_deps gained def-weil-pbc-algebra-hom-quotient (quotient rings B, C) and def-weil-ring-localization-away (B_g). Mathlib re-searched with LeanSearch, Loogle and grep: absent (only R[X]/(rX-1) = R_r). No new nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T144057-L-2090249",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizationsPart1",
+  "declaration": "Algebra.popescu_auxiliaryAlgebra_localizations_part1",
+  "file": "lean/Sheaf/RingTheory/PopescuAuxiliaryAlgebraLocalizationsPart1.lean",
+  "statement": "theorem popescu_auxiliaryAlgebra_localizations_part1\n    (A : Type u) [CommRing A] (n m r : ℕ) (hr : 1 ≤ r)\n    (f : Fin m → MvPolynomial (Fin n) A) :\n    (∃ phi : (MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A ⧸\n          (Ideal.span\n            (Set.range (fun j : Fin m =>\n                aeval (fun k : Fin n =>\n                  (X (Sum.inl k) :\n                    MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) (f j) -\n                  ∑ i : Fin r,\n                    (X (Sum.inr (Sum.inl i)) :\n                      MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                    X (Sum.inr (Sum.inr (Sum.inr (i, j))))) ∪\n              Set.range (fun i : Fin r =>\n                (X (Sum.inr (Sum.inr (Sum.inl ()))) :\n                  MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                  X (Sum.inr (Sum.inl i)))))) →ₐ[A]\n        Localization.Away (X (Sum.inr ()) :\n          MvPolynomial ((Fin r × Fin m) ⊕ Unit)\n            (MvPolynomial (Fin n) A ⧸ (Ideal.span (Set.range f)))),\n      (∀ k : Fin n,\n        phi (Ideal.Quotient.mkₐ A\n          (Ideal.span\n            (Set.range (fun j : Fin m =>\n                aeval (fun k : Fin n =>\n                  (X (Sum.inl k) :\n                    MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) (f j) -\n                  ∑ i : Fin r,\n                    (X (Sum.inr (Sum.inl i)) :\n                      MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                    X (Sum.inr (Sum.inr (Sum.inr (i, j))))) ∪\n              Set.range (fun i : Fin r =>\n                (X (Sum.inr (Sum.inr (Sum.inl ()))) :\n                  MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                  X (Sum.inr (Sum.inl i)))))\n          (X (Sum.inl k) :\n            MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) =\n          algebraMap (MvPolynomial ((Fin r × Fin m) ⊕ Unit)\n              (MvPolynomial (Fin n) A ⧸ (Ideal.span (Set.range f)))) _\n            (MvPolynomial.C (Ideal.Quotient.mkₐ A (Ideal.span (Set.range f)) (X k)))) ∧\n      (∀ i : Fin r,\n        phi (Ideal.Quotient.mkₐ A\n          (Ideal.span\n            (Set.range (fun j : Fin m =>\n                aeval (fun k : Fin n =>\n                  (X (Sum.inl k) :\n                    MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) (f j) -\n                  ∑ i : Fin r,\n                    (X (Sum.inr (Sum.inl i)) :\n                      MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                    X (Sum.inr (Sum.inr (Sum.inr (i, j))))) ∪\n              Set.range (fun i : Fin r =>\n                (X (Sum.inr (Sum.inr (Sum.inl ()))) :\n                  MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                  X (Sum.inr (Sum.inl i)))))\n          (X (Sum.inr (Sum.inl i)) :\n            MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) = 0) ∧\n      phi (Ideal.Quotient.mkₐ A\n        (Ideal.span\n          (Set.range (fun j : Fin m =>\n              aeval (fun k : Fin n =>\n                (X (Sum.inl k) :\n                  MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) (f j) -\n                ∑ i : Fin r,\n                  (X (Sum.inr (Sum.inl i)) :\n                    MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                  X (Sum.inr (Sum.inr (Sum.inr (i, j))))) ∪\n            Set.range (fun i : Fin r =>\n              (X (Sum.inr (Sum.inr (Sum.inl ()))) :\n                MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                X (Sum.inr (Sum.inl i)))))\n        (X (Sum.inr (Sum.inr (Sum.inl ()))) :\n          MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) =\n        algebraMap (MvPolynomial ((Fin r × Fin m) ⊕ Unit)\n            (MvPolynomial (Fin n) A ⧸ (Ideal.span (Set.range f)))) _\n          (X (Sum.inr ())) ∧\n      (∀ ij : Fin r × Fin m,\n        phi (Ideal.Quotient.mkₐ A\n          (Ideal.span\n            (Set.range (fun j : Fin m =>\n                aeval (fun k : Fin n =>\n                  (X (Sum.inl k) :\n                    MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) (f j) -\n                  ∑ i : Fin r,\n                    (X (Sum.inr (Sum.inl i)) :\n                      MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                    X (Sum.inr (Sum.inr (Sum.inr (i, j))))) ∪\n              Set.range (fun i : Fin r =>\n                (X (Sum.inr (Sum.inr (Sum.inl ()))) :\n                  MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                  X (Sum.inr (Sum.inl i)))))\n          (X (Sum.inr (Sum.inr (Sum.inr ij))) :\n            MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) =\n          algebraMap (MvPolynomial ((Fin r × Fin m) ⊕ Unit)\n              (MvPolynomial (Fin n) A ⧸ (Ideal.span (Set.range f)))) _\n            (X (Sum.inl ij))) ∧\n      ∃ e : Localization.Away (Ideal.Quotient.mkₐ A\n          (Ideal.span\n            (Set.range (fun j : Fin m =>\n                aeval (fun k : Fin n =>\n                  (X (Sum.inl k) :\n                    MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) (f j) -\n                  ∑ i : Fin r,\n                    (X (Sum.inr (Sum.inl i)) :\n                      MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                    X (Sum.inr (Sum.inr (Sum.inr (i, j))))) ∪\n              Set.range (fun i : Fin r =>\n                (X (Sum.inr (Sum.inr (Sum.inl ()))) :\n                  MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                  X (Sum.inr (Sum.inl i)))))\n          (X (Sum.inr (Sum.inr (Sum.inl ()))) :\n            MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) ≃ₐ[A]\n          Localization.Away (X (Sum.inr ()) :\n            MvPolynomial ((Fin r × Fin m) ⊕ Unit)\n              (MvPolynomial (Fin n) A ⧸ (Ideal.span (Set.range f)))),\n        ∀ b : MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A ⧸\n            (Ideal.span\n              (Set.range (fun j : Fin m =>\n                  aeval (fun k : Fin n =>\n                    (X (Sum.inl k) :\n                      MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A)) (f j) -\n                    ∑ i : Fin r,\n                      (X (Sum.inr (Sum.inl i)) :\n                        MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                      X (Sum.inr (Sum.inr (Sum.inr (i, j))))) ∪\n                Set.range (fun i : Fin r =>\n                  (X (Sum.inr (Sum.inr (Sum.inl ()))) :\n                    MvPolynomial (Fin n ⊕ (Fin r ⊕ (Unit ⊕ (Fin r × Fin m)))) A) *\n                    X (Sum.inr (Sum.inl i))))),\n          e (algebraMap _ _ b) = phi b)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pha1253",
+  "group": "F1",
+  "result": "fix",
+  "note": "A comm ring, n m r with hr : 1 ≤ r, f : Fin m → A[x]; B = S/(f_j - Σ y_i t_ij, z y_i), C = P/(f); (1) phi : B →ₐ[A] C[t,z]_z with x↦C(x̄), y↦0, z↦z, t↦t, tied iso e : B_z ≃ₐ[A] C[t,z]_z with e∘λ = phi; (2) ∀ l, e : (Q_l)_{y_l} ≃ₐ[A] B_{y_l} tied by e∘ν = μ∘α, e⁻¹(z)=0, e⁻¹(t_lj)=y_l⁻¹(f_j - Σ_{i≠l} y_i t_ij); FIX: 28 let binders + match inlined (Sum.elim), statement otherwise unchanged"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T144057-L-2090249",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

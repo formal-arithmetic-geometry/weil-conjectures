@@ -9,6 +9,8 @@ public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Localization.Algebra
+import Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizationsPart1
+import Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizationsPart2
 
 /-!
 # Localizations of the auxiliary algebra in height-zero delocalization
@@ -307,6 +309,7 @@ theorem popescu_auxiliaryAlgebra_localizations
                     (X (Sum.inr (Sum.inl i.val)) :
                       MvPolynomial (Fin n ⊕ (Fin r ⊕ ({i : Fin r // i ≠ l} × Fin m))) A) *
                       X (Sum.inr (Sum.inr (i, j))))) := by
-  sorry
+  exact ⟨popescu_auxiliaryAlgebra_localizations_part1 A n m r hr f,
+    popescu_auxiliaryAlgebra_localizations_part2 A n m r hr f⟩
 
 end Algebra

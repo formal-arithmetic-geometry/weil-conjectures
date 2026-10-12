@@ -8048,3 +8048,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:40 L: merged deliver/C2/Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCoherence (stage 3; reviewer PASS; first push; landing 20261012T144056-L-2089948 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:40 L: merged deliver/C2/Sheaf.AlgebraicGeometry.FiniteAffinePushforwardIdealDevissage (stage 3; reviewer PASS; first push; landing 20261012T144056-L-2090047 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:40 L: merged deliver/C2/Sheaf.FieldTheory.SeparableSmoothColimit (stage 3; reviewer PASS; first push; landing 20261012T144057-L-2090152 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:40 L: merged deliver/C2/Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizations (stage 3; reviewer PASS; first push; landing 20261012T144057-L-2090249 (interface); batch 20261012T144049; modules 3; new nodes 2)
