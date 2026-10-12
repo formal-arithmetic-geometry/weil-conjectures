@@ -29,72 +29,40 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (restriction to an affine open).* Let $U\\subseteq X$ be an affine open and $R=\\mathcal O_X(U)$. Since $U$ is an affine scheme [def-pc-scheme] and $\\Gamma(\\operatorname{Spec}R,\\mathcal O)=R$ [def-weil-affine-spectrum], there is an isomorphism $\\operatorname{Spec}R\\cong U$ inducing the identity on global sections; composed with the inclusion it is an open immersion $g:Y=\\operatorname{Spec}R\\to X$ with image $U$. Apply [lem-weil-pbc-module-restriction-open-immersion-colimits] with $f=g$: (a) by its clause (1), $(\\mathcal F|_Y,(c_i|_Y))$ is a colimit of the system $(\\mathcal F_i|_Y,\\varphi_{i'i}|_Y)$ in $\\Mod(\\mathcal O_Y)$; (b) by its clause (2) every $\\mathcal F_i|_Y$ is quasi-coherent; (c) by the definition of the restriction, $\\Gamma(Y,\\mathcal F_i|_Y)=\\mathcal F_i(U)=:M_i$ and $\\Gamma(Y,\\mathcal F|_Y)=\\mathcal F(U)$ as $R$-modules, with $\\Gamma(Y,\\varphi_{i'i}|_Y)=\\varphi_{i'i,U}$ and $\\Gamma(Y,c_i|_Y)=c_{i,U}$. By [lem-weil-pbc-affine-tilde-gamma-adjunction](3) the counits $\\varepsilon_i:=\\varepsilon_{\\mathcal F_i|_Y}:\\widetilde{M_i}\\to\\mathcal F_i|_Y$ are isomorphisms, and by naturality of the counit (clause (1)) $(\\varphi_{i'i}|_Y)\\circ\\varepsilon_i=\\varepsilon_{i'}\\circ\\widetilde{\\varphi_{i'i,U}}$; so $(\\varepsilon_i)$ is an isomorphism from the diagram $(\\widetilde{M_i},\\widetilde{\\varphi_{i'i,U}})$ to the diagram $(\\mathcal F_i|_Y,\\varphi_{i'i}|_Y)$.",
+   "text": "Realize the colimit as the cokernel of the difference of the two maps from the coproduct over arrows to the coproduct over objects. Both coproducts are quasi-coherent by coproduct closure, and their difference has quasi-coherent cokernel by cokernel closure. Mathlib buildColimit/buildIsColimit makes this a colimit of F. The unique cocone point isomorphism transports quasi-coherence to c.pt.",
    "uses": [
-    "def-pc-scheme",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01ID (lemma-colimit-quasi-coherent, line 1435: 'By Lemma lemma-equivalence-quasi-coherent above we can write F_i = M_i~'), via Lemma 01IE (lemma-equivalence-quasi-coherent) and Section 26.24 (section-quasi-coherent, line 4717, item (1): restriction to an affine open)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 ($\\mathcal F|_Y\\cong\\widetilde M$).* Let $(M,(d_i))$ be the colimit of the $R$-modules $M_i$ along the $R$-linear maps $\\varphi_{i'i,U}$ [def-weil-pbc-category-colimit]. By [lem-weil-pbc-affine-tilde-gamma-adjunction](4), $(\\widetilde M,(\\widetilde{d_i}))$ is a colimit of $(\\widetilde{M_i},\\widetilde{\\varphi_{i'i,U}})$ in $\\Mod(\\mathcal O_Y)$. By Step 1 the family $((c_i|_Y)\\circ\\varepsilon_i)_i$ is a cocone on $(\\widetilde{M_i})$ ($(c_{i'}|_Y)\\varepsilon_{i'}\\widetilde{\\varphi_{i'i,U}}=(c_{i'}|_Y)(\\varphi_{i'i}|_Y)\\varepsilon_i=(c_i|_Y)\\varepsilon_i$) and it is a colimit cocone: a cocone $(\\mu_i)$ on $(\\widetilde{M_i})$ is the same as the cocone $(\\mu_i\\varepsilon_i^{-1})$ on $(\\mathcal F_i|_Y)$, which factors uniquely through $(\\mathcal F|_Y,(c_i|_Y))$ by Step 1(a). By uniqueness of colimits up to unique isomorphism [def-weil-pbc-category-colimit] there is a unique isomorphism of $\\mathcal O_Y$-modules $\\psi:\\widetilde M\\to\\mathcal F|_Y$ with $\\psi\\circ\\widetilde{d_i}=(c_i|_Y)\\circ\\varepsilon_i$ for all $i$.",
+   "text": "For every affine open U, apply affine evaluation of colimits, using the quasi-coherence of c.pt just proved. This supplies an IsColimit proof for the evaluated cocone.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-quasi-coherent-module-colimit-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01ID (lemma-colimit-quasi-coherent: 'the quasi-coherent O_X-module M~ is the direct sum of the sheaves F_i ... A similar argument works for general colimits'); here the colimit is moved through M -> M~ by its adjunction, Lemma 01I7 (lemma-compare-constructions)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (sections over $U$; the elementwise description).* Let $\\tau_M:M\\to\\Gamma(Y,\\widetilde M)$ and $\\tau_{M_i}$ be the units, and set $\\lambda=\\Gamma(Y,\\psi)\\circ\\tau_M:M\\to\\Gamma(Y,\\mathcal F|_Y)=\\mathcal F(U)$. It is bijective: $\\tau_M$ is an isomorphism by [lem-weil-pbc-affine-tilde-gamma-adjunction](2) and $\\Gamma(Y,\\psi)$ is one since $\\psi$ is. For $m\\in M_i$: $\\Gamma(\\widetilde{d_i})\\circ\\tau_{M_i}=\\tau_M\\circ d_i$ (definition of $\\widetilde{d_i}$, clause (1)), so $\\lambda d_i=\\Gamma(\\psi)\\Gamma(\\widetilde{d_i})\\tau_{M_i}=\\Gamma(c_i|_Y)\\,\\Gamma(\\varepsilon_i)\\,\\tau_{M_i}=c_{i,U}$, using Step 2 and the triangle identity $\\Gamma(Y,\\varepsilon_{\\mathcal G})\\circ\\tau_{\\Gamma(Y,\\mathcal G)}=\\mathrm{id}$ of the adjunction of clause (1) (for $\\mathcal G=\\mathcal F_i|_Y$; equivalently, $\\varepsilon_{\\mathcal G}$ is the map corresponding to $\\mathrm{id}_{\\Gamma(Y,\\mathcal G)}$ under $\\alpha\\mapsto\\alpha_Y\\circ\\tau$) and Step 1(c). Since $(M,(d_i))$ is the directed colimit $\\varinjlim_i\\mathcal F_i(U)$ of $\\mathcal O_X(U)$-modules, $\\lambda$ is the canonical map induced by the $c_{i,U}$ (the unique map with $\\lambda d_i=c_{i,U}$, [def-weil-pbc-category-colimit]); so the canonical map is bijective. The elementwise clauses follow by [lem-weil-pbc-filtered-colimit-modules-elementwise] for $(M,(d_i))$ (a directed set is a filtered category): (1) every element of $M$ is $d_i(x)$ with $x\\in M_i$, so every element of $\\mathcal F(U)$ is $\\lambda(d_i(x))=c_{i,U}(x)$; (2) as $\\lambda$ is injective, $c_{i,U}(x)=0$ iff $d_i(x)=0$ iff $\\varphi_{i'i,U}(x)=0$ for some $i'\\ge i$.",
+   "text": "Apply Concrete.isColimit_exists_rep to represent each section. Apply Concrete.isColimit_exists_of_rep_eq to x and zero at the same stage; linearity makes the latter representative zero, and leOfHom turns its arrow into an inequality. Conversely, the cocone identity maps an eventual zero to zero at the colimit.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-weil-pbc-category-colimit",
     "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01HV (lemma-spec-sheaves (2): Gamma(Spec R, M~) = M) and Lemma 01ID; Algebra, Lemmas 00D6 and 00D7 (algebra.tex lines 778, 811) for the elementwise description of a directed colimit of modules"
-   }
-  },
-  {
-   "text": "*Step 4 (quasi-coherence).* Every point of $X$ has an affine open neighbourhood $U$ [def-pc-scheme]. By Step 2, transported along the isomorphism $\\operatorname{Spec}R\\cong U$ of Step 1, $\\mathcal F|_U$ is isomorphic to the module $\\widetilde M$ on $\\operatorname{Spec}R$ of [lem-weil-pbc-spec-module-tilde-sections] (with $M=\\varinjlim_i\\mathcal F_i(U)$). This is exactly the condition of the definition of quasi-coherence [pqf-def-coherent] (every point has an affine neighbourhood $\\operatorname{Spec}A=U$ with $\\mathcal F|_U\\cong\\widetilde M$ for an $A$-module $M$), so $\\mathcal F$ is quasi-coherent.",
-   "uses": [
-    "def-pc-scheme",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "pqf-def-coherent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Section 26.24 (section-quasi-coherent, line 4717), items (1) and (4): 'Any colimit of quasi-coherent sheaves is quasi-coherent', the property being local"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "pqf-def-coherent"
+  "lem-weil-pbc-quasi-coherent-module-colimit-evaluation",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 01ID (lemma-colimit-quasi-coherent, line 1435) and Section 26.24 (section-quasi-coherent) item (4); Lemma 01I7 (mapping property of M~), Lemma 01HV (2); Algebra, Lemmas 00D6/00D7. Stacks proves the affine case on standard opens D(f) and calls general colimits 'a similar argument'; here the colimit is moved through M -> M~ by its adjunction and the sections are computed by the unit, written by the agent following Steps 1-4 of lem-weil-pbc-quasi-coherent-algebra-colimit"
+  "place": "01ID and 01LA: quasi-coherence via proved source coproduct and cokernel closure plus the standard categorical colimit presentation; affine sections via the new strict evaluation step and Mathlib concrete filtered colimits."
  },
  "mathlib_searches": [
   {
@@ -206,5 +174,15 @@
   "group": "K1",
   "result": "fix",
   "note": "X Scheme.{u}; I Type u directed (Preorder+IsDirected) + added [Nonempty I] (Stacks 00D3; empty I makes surjectivity clause false); F : I ⥤ X.Modules, c/hc colimit cocone (no hollow HasColimit); hF IsQuasicoherent; concl c.pt.IsQuasicoherent; affine U: surjectivity via c.ι.app i on sections, zero iff eventually zero via F.map (homOfLE h) — node's stated equivalent elementwise form"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T063513-L-3156566",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
