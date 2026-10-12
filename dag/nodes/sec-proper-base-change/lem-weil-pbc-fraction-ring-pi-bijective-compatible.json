@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-fraction-ring-pi-bijective-compatible",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The compatible map from the total fraction ring to minimal-prime localizations is bijective",
+ "statement": "Let R be a reduced Noetherian commutative ring, let t be a natural number, let q : Fin t ≃ {p : PrimeSpectrum R // p.asIdeal ∈ minimalPrimes R}, and let φ_i : FractionRing R →+* R_{q_i} be ring maps compatible with R. Then the induced map FractionRing R →+* Π_i R_{q_i} is bijective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 02LX, final product decomposition step"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the localization prime correspondence to identify the primes of the total fraction ring with the extended minimal primes, show these are all maximal, apply the finite product decomposition of a ring with discrete finite spectrum, and identify each factor with the corresponding minimal-prime localization.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-product-of-localizations-at-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 02LX, final two paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-product-of-localizations-at-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 02LX, final product decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "total ring of fractions of a reduced Noetherian ring is a finite product of fields (localizations at minimal primes)",
+   "results": "PrimeSpectrum.PiLocalization, MaximalSpectrum.PiLocalization (Mathlib.RingTheory.Spectrum.Maximal.Localization), minimalPrimes.finite_of_isNoetherianRing, Ideal.finite_minimalPrimes_of_isNoetherianRing, IsArtinianRing.isField_of_isReduced_of_isLocalRing (Mathlib.RingTheory.Artinian.Ring), instIsFractionRingAtPrimeFractionRing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the localization of a reduced Noetherian ring at its non-zero-divisors is isomorphic to the product of the residue fields at its minimal primes",
+   "results": "PrimeSpectrum.piLocalizationToMaximalEquiv, PrimeSpectrum.piLocalizationToMaximal_bijective, MaximalSpectrum.toPiLocalizationEquiv (Mathlib.RingTheory.Spectrum.Prime.Topology: R iso to product of localizations when Spec R is discrete), instIsFractionRingQuotientIdealResidueField, quotMapEquivQuotMapMaximalIdealOfIsLocalization: ingredients (with IsArtinianRing.equivPi) but no statement for the total ring of fractions",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization (nonZeroDivisors _) _, IsReduced _, minimalPrimes",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'minimalPrimes' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory | grep -iE 'reduced|isField|nonZeroDiv|zeroDiv'; grep -rnE 'IsLocalization \\(nonZeroDivisors|FractionRing.*IsReduced|totalRingOfFractions'",
+   "results": "Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes, notMem_nonZeroDivisors_of_mem_mem_minimalPrimes (RingTheory/Ideal/MinimalPrime/Localization.lean lines 91, 98: S avoids every minimal prime, part of (2)), isStronglyTranscendental_mk_of_mem_minimalPrimes; IsArtinianRing.equivPi (RingTheory/Artinian/Module.lean: reduced Artinian ring is a product of fields); RingTheory/Ideal/AssociatedPrime/Finiteness.lean line 179 (Noetherian total ring of fractions is semilocal); no isomorphism Q(R) = product of R_{q_i}",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ReducedNoetherianTotalRingFractions",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 02LX, 00EW(3), 00EU; stmt_deps kept). Proof written in five steps following the proof of 02LX: (1) from 00EU; S avoids every q_i and the maps Q(R) -> R_{q_i} from 00EW(3); Spec Q(R) = {q_i Q(R)} by the localization prime correspondence (00E3, existing node) and prime avoidance (00DS); Q(R) = product of its localizations at the maximal ideals q_i Q(R) via the existing Mathlib-leaf node lem-weil-pbc-product-of-localizations-at-maximal (Stacks 00JA form of 02LX's use of 00EM: Jacobson radical = nilradical since all primes are maximal); factors identified with R_{q_i} by 00E3 part (2) and uniqueness of maps out of a localization. Three new Mathlib-leaf nodes: 00EU (Ring.KrullDimLE.of_isLocalization + isField_of_isReduced), 00EW(3) (Ideal.iUnion_minimalPrimes at I = bot), 00DS (Ideal.subset_union_prime). Noetherianity enters only through finiteness of the minimal primes (statement). The item itself has no single Mathlib declaration (searches recorded at creation)."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T184243-L-3996516",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ReducedNoetherianTotalRingFractions",
+  "file": "lean/Sheaf/RingTheory/ReducedNoetherianTotalRingFractions.lean",
+  "declaration": "fractionRing_pi_bijective_of_compatible",
+  "statement": "theorem fractionRing_pi_bijective_of_compatible\n    {R : Type u} [CommRing R] [IsNoetherianRing R] [IsReduced R]\n    {t : ℕ} {q : Fin t ≃ {p : PrimeSpectrum R // p.asIdeal ∈ minimalPrimes R}}\n    (φ : ∀ i : Fin t, FractionRing R →+* Localization.AtPrime (q i).val.asIdeal)\n    (hφ : ∀ i : Fin t, (φ i).comp (algebraMap R (FractionRing R)) =\n      algebraMap R (Localization.AtPrime (q i).val.asIdeal)) :\n    Function.Bijective (RingHom.pi φ)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rnt",
+  "group": "J1",
+  "result": "fix",
+  "note": "R CommRing+Noetherian+reduced; Fin t ≃ minimalPrimes subtype; IsField R_qi; qi R_qi = ⊥; R_qi ≅ κ(qi); S avoids qi; ∃! compatible FractionRing R → R_qi; induced RingHom.pi bijective"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T184243-L-3996516",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

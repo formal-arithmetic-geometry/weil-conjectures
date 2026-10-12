@@ -8889,3 +8889,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/B2/Sheaf.RingTheory.PowerSeriesPolynomialFormalFiberGeometricComponent (stage 3; reviewer PASS; first push; landing 20261012T184242-L-3995945 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/B3/Sheaf.AlgebraicGeometry.CoherentFormalShortExactLevels (stage 3; reviewer PASS; first push; landing 20261012T184242-L-3996165 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/B3/Sheaf.RingTheory.H1CotangentFiniteSubfields (stage 3; reviewer PASS; first push; landing 20261012T184243-L-3996343 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:42 L: merged deliver/B3/Sheaf.RingTheory.ReducedNoetherianTotalRingFractions (stage 3; reviewer PASS; first push; landing 20261012T184243-L-3996516 (proof); batch 20261012T184234; modules 1; new nodes 1)
