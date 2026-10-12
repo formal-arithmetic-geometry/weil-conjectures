@@ -5844,3 +5844,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:30 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent (stage 3; reviewer PASS; first push; landing 20261012T022914-L-1083815 (interface); modules 3; new nodes 2)
 - 02:30 L: returned deliver/P1/Sheaf.Paper.InverseImageStalkGerm (reviewer RETURN: (reviewer X-18a29, head 18a295c18) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.InverseImageSt)
 - 02:30 L: returned deliver/T1/Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer (reviewer RETURN: (reviewer X-6afac, head 6afac6afe) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Cu)
+- 02:30 L: returned deliver/U1/Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions (reviewer RETURN: (reviewer X-a0009, head a0009b451) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Cu)
