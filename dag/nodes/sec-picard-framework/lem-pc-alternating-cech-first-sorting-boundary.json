@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-alternating-cech-first-sorting-boundary",
+ "kind": "statement",
+ "title": "Uncancelled junction terms of the first Cech sorting homotopy",
+ "statement": "Let X be a scheme, I a linearly ordered type, U : I -> Opens(X), F an abelian-group presheaf, and S a SiteCechComplex for U over the terminal open [def-pc-scheme, def-sc-zariski-site, def-weil-pbc-site-cech-complex]. Use the explicit first sorting homotopies and stable filter [def-pc-alternating-cech-sorting-operators]. For p >= 0, a (p+1)-cochain s, and a tuple t of length p+2, define B_a(s)(t) to be the sum over permutations sigma,tau of Fin(p+2) of sign(tau) times F(indexMap(t,tau))(s(t composed tau)), filtered by stableSort(t,sigma), tau(k)=sigma(k) for k<a, and tau(i)<tau(j) when a<=i<j. Then H_(p+1)(d^(p+1)(s))(t)+d^p(H_p(s))(t) equals the sum over a=0,...,p+1 of B_a(s)(t)-B_(a+1)(s)(t). No endpoint identification or telescoping is asserted.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, verification of equation 20.23.6.1, before telescoping; https://stacks.math.columbia.edu/tag/01FM"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex",
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof": [
+  {
+   "text": "Label each entry by its original position, including equal values. The stable sort filter has exactly one solution, as in `Tuple.eq_sort_iff`. At each prefix length, the partial sort filter also has exactly one solution: fix the prefix and list the unused labels increasingly. Expand both differentials and distribute through the finite sums and integer multiples. In the outgoing expansion, pair a deletion of a label different from the repeated junction label with the incoming term for the same deleted original position. Deleting in the prefix reduces its length by one; deleting in the tail preserves it. The remaining sorting permutations are those of the corresponding face, since deleting a labelled entry preserves lexicographic order. Deleting position r with value label j changes the permutation sign by (-1)^(r+j): move that position and value to the end and restrict the permutation. Together with the differential and junction signs, this gives opposite coefficients for each paired term. Index maps have identical composites with all projections, so their transports agree by the product universal property. The two unpaired occurrences of the junction label have the signed partial permutation with prefix length a and the negative of that with prefix length a+1. Summing these gives the displayed sum. The last two partial stages are identical, so the terminal summand is zero. No telescoping or identification of the first and final stages is needed. This argument uses labels rather than distinct values and thus includes tuples with repetitions. If the index type is empty there is no tuple to evaluate.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T1",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, verification of 20.23.6.1 omitted in the source; labelled-deletion pairing written out by T1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech first sorting homotopy cancellation of nonjunction terms leaves differences of signed partial sorting permutations",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cochains signed stable sorting homotopy identity minus sorting",
+   "results": "DoldKan hσ, hσ'_eq, homotopyPToId, homotopyPInftyToId_hom and Homotopy.mkCoinductiveAux lemmas; none computes this explicit sorting junction sum.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy.nullHomotopicMap",
+   "results": "Generic homotopy component formulas only; used to unpack the parent but not a cancellation formula for the finite permutation sum.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*sort|sort.*cech|eq_sort_iff; sorting.*boundary|sorting.*telescop",
+   "results": "Tuple.eq_sort_iff gives stable sorting uniqueness (used in the proved endpoints). No Cech sorting cancellation in Mathlib or either library root. Blueprint search sorting returned zero imported blueprint nodes.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingIdentity",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "Ordered Cech contraction: verification of the first sorting identity, nonjunction deletion cancellation before the partial stages telescope",
+   "via": [
+    "lem-pc-alternating-cech-first-sorting-identity",
+    "lem-pc-alternating-cech-kernel-null-homotopic",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechFirstSortingBoundary.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechFirstSortingBoundary",
+  "statement": "theorem cechFirstSortingBoundary (X : Scheme.{u}) {I : Type v} [LinearOrder I]\n    (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})\n    (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))\n    (p : ℕ) (s : S.cochains F (p + 1)) (t : Fin (p + 2) → I) :\n    let B : ℕ → S.cochains F (p + 1) := fun a t ↦\n      ∑ σ : Equiv.Perm (Fin (p + 2)), ∑ τ : Equiv.Perm (Fin (p + 2)),\n        if cechStableSort t σ ∧\n            (∀ k, k.val < a → τ k = σ k) ∧\n            (∀ i j, a ≤ i.val → i < j → τ i < τ j) then\n          (Equiv.Perm.sign τ : ℤ) • F.map (S.indexMap t τ).op (s (t ∘ τ)) else 0\n    (cechFirstSortingHom X U F S (p + 1) (S.differential F (p + 1) s)) t +\n      (S.differential F p (cechFirstSortingHom X U F S p s)) t =\n        ∑ a : Fin (p + 2), (B a.val t - B (a.val + 1) t)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T165533-L-2940252",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T165533-L-2940252",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

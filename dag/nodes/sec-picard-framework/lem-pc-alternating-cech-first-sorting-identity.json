@@ -15,22 +15,44 @@
  ],
  "proof": [
   {
-   "text": "The filter selects the unique permutation sorting the pairs (t(k), k)\nlexicographically. For each a, its partial-sort filter selects the unique permutation\nwith the specified prefix and increasing unused original positions. Thus the finite\nsum is exactly the junction formula of 20.23.6.1, with no multiplicities.\nExpand the two differentials at an arbitrary tuple t. Label every occurrence by its\noriginal position, even when values coincide. Deleting a label j from a sorted tuple\nremoves that label from its stable sorting permutation and renumbers labels above j.\nDo the same in each partial permutation. For a permutation π, deletion of its r-th\nposition changes its sign by (-1)^(r+π(r)). This follows by moving that position and\nits value to the last positions and then restricting the permutation.\nPair a deletion of a nonjunction label in the junction sum with the term in the\njunction sum for the corresponding face of t. If the deleted label is in the sorted\nprefix the junction number drops by one; if it is in the remaining tail it stays the\nsame. The deletion-sign formula gives opposite coefficients in the two expansions.\nBoth transports have the same composites with every projection, hence are equal by\nS.universal. The two deletions of the junction label compare consecutive partial\npermutations; their terms telescope as a ranges from zero to p. The initial partial\npermutation is identity, giving the original cochain with coefficient 1; the final\none is the stable sorting permutation, giving minus its signed pullback. This proves\nthe identity coordinatewise. In degree zero the incoming differential is zero and\nstable sorting is identity. If I is empty every cochain group is a zero object.",
+   "text": "Define the signed partial sorting stage B_a by the finite sum over stable sigma and permutations tau that agree with sigma before a and increase afterwards. At a=0 the partial filter is equivalent to tau=identity: a strictly increasing permutation of Fin(p+1) is identity (Equiv.Perm.monotone_iff). Tuple.eq_sort_iff identifies the stable filter with sigma=Tuple.sort(t), so its sum has multiplicity one. The identity index map is identity (arrows of scheme opens are subsingleton), and its presheaf restriction is identity. Hence B_0(s)=s. At a=p+1 the partial filter is tau=sigma; the tail condition is vacuous, and the finite sum is exactly the stable sorting map. These endpoint calculations are proved in Lean.",
    "uses": [
     "def-pc-alternating-cech-sorting-operators",
     "def-weil-pbc-site-cech-complex"
    ],
+   "elementary": true
+  },
+  {
+   "text": "In degree zero, unpack the null homotopic map using Homotopy.nullHomotopicMap'_f_of_not_rel_right. The incoming differential is absent. The first homotopy evaluates on the duplicated singleton tuple. Its differential has two terms, which are opposite restrictions of the same section: the two face tuples are definitionally identical after replacing the junction map by the constant map to Fin 1, and both restriction arrows are equal since opens form a preorder. Stable sorting in degree zero is identity. This case is proved directly in Lean.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In positive degree p+1, unpack Homotopy.nullHomotopicMap'_f into the two ordinary differential composites. Evaluate on a cochain and tuple. Apply the uncancelled-junction boundary lemma to identify their sum with sum over a in Fin(p+2) of B_a(s)(t)-B_(a+1)(s)(t). This is the sole remaining dependency with sorry.",
+   "uses": [
+    "lem-pc-alternating-cech-first-sorting-boundary"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Use Fin.sum_univ_eq_sum_range and Finset.sum_range_sub' to telescope the differences of consecutive partial stages: sum over a in Fin n of f(a)-f(a+1) is f(0)-f(n). Apply this to the partial stages at the tuple. Rewrite the proved endpoints B_0=id and B_(p+2)=stable sorting in degree p+1. Equality of homomorphisms follows by AddCommGrpCat.ext and function extensionality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-alternating-cech-sorting-operators",
-  "def-weil-pbc-site-cech-complex"
+  "def-weil-pbc-site-cech-complex",
+  "lem-pc-alternating-cech-first-sorting-boundary"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "T1",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tag 01FM; finite-sum implementation of its operators"
+  "place": "Tag 01FM, equation 20.23.6.1; Lean reduction separates nonjunction cancellation from proved telescoping and endpoint calculations"
  },
  "mathlib_searches": [
   {
@@ -115,9 +137,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T135303-L-1685962",
+  "landing": "20261012T165533-L-2940252",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
