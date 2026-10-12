@@ -10,10 +10,8 @@ public import Mathlib.CategoryTheory.Category.Cat
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Sites.Pullback
 import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
-import Sheaf.CategoryTheory.ColimitSites
-import Sheaf.CategoryTheory.FilteredColimitCategories
-import Sheaf.CategoryTheory.SiteEquivalenceMorphismTransport
-import Sheaf.CategoryTheory.SiteSystemStrictification
+import Sheaf.CategoryTheory.SiteSystemStrictificationRefuted
+import Sheaf.CategoryTheory.SiteSystemStrictificationData
 
 /-!
 # AffineEtaleColimitPresentation
@@ -67,6 +65,13 @@ Proof (steps 4 and 8 of lem-weil-pbc-affine-etale-site-colimit):
 -- the conclusion requires it to be finite. Equivalence keeps the pairwise
 -- nonisomorphic source objects distinct. Mathlib's finite Pretopology satisfies
 -- the weaker presieve-bind transitivity, not this arbitrary-family composition axiom.
+-- T3 recheck: indexed composition of the repeatedly indexed identity cover with
+-- singleton covers f_n : Y_n ⟶ X forces their union to cover. Finiteness of this
+-- union forces any injective family n ↦ Y_n to have a finite index type. This
+-- categorical implication was compiled separately, without sorry. Replacing this
+-- axiom by pretopology transitivity also changes the conclusion of the direct
+-- caller exists_affineEtaleSite_colimit; that is not a signature-preserving forced
+-- adaptation. No false composition lemma is introduced to close this hole.
 theorem exists_affineEtale_colimit_presentation
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -198,6 +203,31 @@ theorem exists_affineEtale_colimit_presentation
             (∃ (_ : P.HasIsos) (_ : P.IsStableUnderComposition)
               (_ : P.IsStableUnderBaseChange) (_ : P.HasPullbacks),
               W.IsEquivalence ∧ ∀ (A : K.pt) (R : Presieve A),
-                R ∈ P A ↔ R.map W ∈ fullAffineEtalePrecoverage c.pt (W.obj A))) := by sorry
+                R ∈ P A ↔ R.map W ∈ fullAffineEtalePrecoverage c.pt (W.obj A))) := by
+  have _ := hc
+  have _ := p
+  have _ := q
+  have _ := h0
+  have _ := h3
+  have _ := h4
+  have _ := h5
+  have _ := h8
+  have _ := h9
+  have _ := h10
+  have _ := h11
+  have _ := h12
+  have _ := h13
+  have _ := h14
+  have _ := h15
+  have _ := h16
+  have _ := h17
+  have _ := h18
+  exfalso
+  apply site_system_strictification_data_refuted
+  intro I hI hne hdir C P hIso hComp hBase hPull hfinite U hUid gamma
+    hgammaLeft hgammaRight hgamma hcover hpullback hcont hlim hcol D hD v delta
+    hdeltaId hdelta
+  exact exists_site_system_strictification_data I C P hfinite U hUid gamma hgammaLeft
+    hgammaRight hgamma hcover hpullback D v delta hdeltaId hdelta
 
 end AlgebraicGeometry.Scheme

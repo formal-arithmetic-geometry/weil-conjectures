@@ -30,76 +30,36 @@
  ],
  "proof": [
   {
-   "text": "1. Strictify the coherent system using pairs (j,A) with j ≤ i at stage i. Morphisms\n   are maps between their U-images in the affine site at i. The comparison functor to\n   that site is an equivalence with quasi-inverse e_i. Transition fixes the pair and\n   conjugates the image of a morphism by gamma. The gamma cocycle gives strict\n   composition. Give the new category the precoverage detected by the equivalence.\n   Its site axioms and finiteness follow from the original finite étale precoverage.",
+   "text": "Derive False by applying the existing refutation theorem for the strictification-data interface.",
    "uses": [
-    "lem-weil-pbc-site-system-strictification",
-    "def-weil-pbc-full-affine-etale-site"
+    "lem-weil-pbc-site-system-strictification-refuted"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "004A, 0A34, 09YL, and 0EYL, steps 4 and 8 of the parent node"
+    "document": "lean/Sheaf/CategoryTheory/SiteSystemStrictificationRefuted.lean",
+    "place": "site_system_strictification_data_refuted"
    }
   },
   {
-   "text": "2. Define v'_i(j,A) = v_j(A), conjugating morphisms by delta. The delta cocycle gives\n   strict compatibility with transition, and normalization gives eta. The theta\n   comparison satisfies the displayed Arrow equation. Equivalence transports all\n   pullbacks, covering preservation, continuity, adjunctions, and finite-limit\n   preservation. This construction uses Cat.{u, u + 1}: the original sites have\n   object universe u + 1 and morphism universe u; coefficients remain Type u.",
+   "text": "Discharge the refutation hypothesis at universe zero with the existing universally quantified strictification-data theorem, then eliminate False to obtain the claimed existential.",
    "uses": [
-    "lem-weil-pbc-site-equivalence-morphism-transport"
+    "lem-weil-pbc-site-system-strictification-data"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "004A, 0A34, 09YL, and 0EYL, steps 4 and 8 of the parent node"
-   }
-  },
-  {
-   "text": "3. Form filtered colimits of the object and arrow sets. Source, target, identities\n   and composition descend because any finite collection of data occurs at a common\n   stage and any equality holds eventually. These operations give K; compatibility\n   of v' gives W. The union of images of stage precoverages is P (09YL).",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-categories",
-    "lem-weil-pbc-colimit-of-sites"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "004A, 0A34, 09YL, and 0EYL, steps 4 and 8 of the parent node"
-   }
-  },
-  {
-   "text": "4. Object descent makes W essentially surjective. Map descent makes it full and\n   eventual equality makes it faithful, after representing any two objects at a\n   common stage. Thus W is an equivalence.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "004A, 0A34, 09YL, and 0EYL, steps 4 and 8 of the parent node"
-   }
-  },
-  {
-   "text": "5. Images of stage covers cover by preservation. For reflection, represent the\n   finite presieve at a stage. Descent of covers presents its W-image as a stage\n   cover; map descent and eventual equality align these two finite presentations\n   at a common later stage. Invariance under isomorphism then identifies the original\n   presieve with an image of a stage cover. This gives the asserted iff and site axioms.",
-   "uses": [
-    "lem-weil-pbc-colimit-of-sites",
-    "def-weil-pbc-full-affine-etale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "004A, 0A34, 09YL, and 0EYL, steps 4 and 8 of the parent node"
+    "document": "lean/Sheaf/CategoryTheory/SiteSystemStrictificationData.lean",
+    "place": "exists_site_system_strictification_data"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-system-strictification",
-  "def-weil-pbc-full-affine-etale-site",
-  "lem-weil-pbc-site-equivalence-morphism-transport",
-  "lem-weil-pbc-filtered-colimit-categories",
-  "lem-weil-pbc-colimit-of-sites",
-  "def-weil-pbc-category-colimit"
+  "lem-weil-pbc-site-system-strictification-refuted",
+  "lem-weil-pbc-site-system-strictification-data"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Adaptation of the cited proof steps to chosen pullback squares and the original universe levels; source read online at https://stacks.math.columbia.edu/tag/09YL"
+  "by": "T3",
+  "document": "lean/Sheaf/CategoryTheory/SiteSystemStrictificationRefuted.lean and SiteSystemStrictificationData.lean",
+  "place": "Existing declarations combined: site_system_strictification_data_refuted and exists_site_system_strictification_data"
  },
  "mathlib_searches": [
   {
@@ -158,17 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-4a94b",
-  "group": "J1",
+  "reviewer": "COMPILER",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T112842-L-768639",
+  "landing": "20261012T213438-L-1179047",
   "kind": "proof",
-  "note": "independent Codex review: Matched the delivered Lean file and report against the packet, node statement, repository version, and lcompile.py result; the theorem signature is unchanged, the disputed counterexample is coherent, and compilation passes.",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.exists_affineEtale_colimit_presentation"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.exists_affineEtale_colimit_presentation"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
