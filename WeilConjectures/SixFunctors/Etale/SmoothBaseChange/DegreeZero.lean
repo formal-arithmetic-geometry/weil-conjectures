@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConnectedFibres
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomologyZero
 public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
@@ -27,7 +28,9 @@ The proof is étale-local on `X`: by `AlgebraicGeometry.exists_etaleCover_factor
 may assume `p` factors as `U ⟶ V ⟶ S` with `V ⟶ S` étale and `U ⟶ V` quasi-compact flat
 with geometrically connected fibres, and then both sides evaluate to `F(V ×_S T)` because for
 such a morphism the global sections of an inverse image agree with the global sections
-downstairs [Stacks 0A3H].
+downstairs [Stacks 0A3H]; the latter is
+`AlgebraicGeometry.Etale.isIso_upperStarSectionsMap` in
+`WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConnectedFibres`.
 
 The argument is carried out for the underived base-change map
 `AlgebraicGeometry.Etale.baseChangeMap`, whose adjoint under `p^* ⊣ p_*` is
@@ -37,16 +40,8 @@ the degree-zero homology of the derived base-change map of
 `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs` by
 `AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_zero`.
 
-## Main definitions
-
-- `AlgebraicGeometry.Etale.upperStarSectionsMap`: the map `G(V) ⟶ (p^* G)(W)` attached to an
-  étale chart `W ⟶ V ×_S X`.
-
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isIso_upperStarSectionsMap`: the map `G(V) ⟶ (p^* G)(W)` is
-  bijective when `W ⟶ V` is flat, quasi-compact with geometrically connected fibres
-  [Stacks 0A3H].
 - `AlgebraicGeometry.Etale.isIso_baseChangeMap_app_of_flat`: the underived base-change map
   is an isomorphism for `p` flat, locally of finite presentation with geometrically reduced
   fibres (blueprint `sbc-lem-degree-zero-flat-base-change`).
@@ -99,20 +94,6 @@ lemma Etale.squareLowerStarIso_eq (sq : CommSq e h g p) :
     subst hd
     rfl
   exact key _ _ sq.w _ _ _ _
-
-variable (p) in
-/-- For a sheaf `G` on `S_ét`, an étale `S`-scheme `V`, an étale `X`-scheme `W` and a morphism
-`φ : W ⟶ V ×_S X` of étale `X`-schemes, the map `G(V) ⟶ (p^* G)(W)`: the unit of
-`p^* ⊣ p_*` at `V`, landing in `(p_* p^* G)(V) = (p^* G)(V ×_S X)`, followed by the restriction
-along `φ`.
-
-When `W ⟶ V` is flat, quasi-compact and has geometrically connected fibres, this map is
-bijective, see `AlgebraicGeometry.Etale.isIso_upperStarSectionsMap`. -/
-noncomputable def Etale.upperStarSectionsMap (G : Sheaf S.smallEtaleTopology A) {V : S.Etale}
-    {W : X.Etale} (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V) :
-    G.obj.obj (op V) ⟶ ((p)^*[A].obj G).obj.obj (op W) :=
-  ((Etale.upperStarLowerStarAdjunction A p).unit.app G).hom.app (op V) ≫
-    ((p)^*[A].obj G).obj.map φ.op
 
 /-- The base-change map is compatible with the maps `Etale.upperStarSectionsMap` on both sides
 of the square: for `φ : W ⟶ V ×_S X` and the induced morphism
@@ -215,27 +196,6 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 section DegreeZero
 
 variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
-
-variable (p) in
-/-- Let `φ : W ⟶ V ×_S X` be a morphism of étale `X`-schemes such that the induced morphism
-`q : W ⟶ V` is flat, quasi-compact and has geometrically connected fibres. Then for every
-sheaf `G` of `Λ`-modules on `S_ét` the map `G(V) ⟶ (p^* G)(W)` of
-`AlgebraicGeometry.Etale.upperStarSectionsMap` is bijective.
-
-Writing `j : W ⟶ X` and `r : V ⟶ S` for the structure morphisms, `j ≫ p = q ≫ r` and `r` is
-étale, so `(p^* G)(W) = Γ(W, q^* (G|_V))`; and for a flat quasi-compact `q` with geometrically
-connected fibres the global sections of an inverse image agree with the global sections
-downstairs [Stacks 0A3H]: a section of `q^* G'` is constant on the connected geometric fibres,
-hence descends along the fpqc covering `q`. This is Step 2 of the blueprint proof of
-`sk-prop-deg0`. -/
-@[stacks 0A3H]
-theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    {V : S.Etale} {W : X.Etale} (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
-    [Flat (φ.left ≫ pullback.fst V.hom p)]
-    [QuasiCompact (φ.left ≫ pullback.fst V.hom p)]
-    [GeometricallyConnected (φ.left ≫ pullback.fst V.hom p)] :
-    IsIso (Etale.upperStarSectionsMap _ p G φ) :=
-  sorry
 
 /-- Blueprint `sbc-lem-degree-zero-flat-base-change`: degree-zero flat base change.
 
