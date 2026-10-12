@@ -5917,3 +5917,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:45 L: merged deliver/T1/WeilConjectures.AlgebraicGeometry.EffectiveDescent (stage 3; reviewer PASS; first push; landing 20261012T034515-L-1528473 (interface); modules 1; new nodes 0; change records: coord/changes/effective-descent-proof-imports.md)
 - 03:51 L: merged deliver/A2/Sheaf.ConstructibleSheaf.LocallyConstantCoverFiltration (stage 3; reviewer PASS; first push; landing 20261012T034934-L-1564424 (interface); modules 3; new nodes 2)
 - 03:52 L: merged deliver/U2/Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor (stage 3; reviewer PASS; first push; landing 20261012T035209-L-1575695 (interface); modules 1; new nodes 0; change records: coord/changes/HorseshoeDeltaFunctorHelpers.md)
+- 03:53 L: merged deliver/A2/Sheaf.Topology.IrreducibleConstantSections (stage 3; reviewer PASS; first push; landing 20261012T035258-L-1579790 (interface); modules 2; new nodes 1)

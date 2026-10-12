@@ -3,7 +3,7 @@ module
 public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.Grp.Basic
-import Sheaf.Topology.LocallyConstantMapsSheaf
+import Sheaf.Topology.ConstantSheafLocallyConstantComparison
 
 @[expose] public section
 
@@ -46,6 +46,29 @@ theorem irreducible_constant_sections
       ∀ (U V : Opens X) (hVU : V ≤ U) (hV : (V : Set X).Nonempty),
         e V hV ∘ ((constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{v}).obj
           (AddCommGrpCat.of A)).1.map (homOfLE hVU).op = e U (Set.Nonempty.mono hVU hV) := by
-  sorry
+  classical
+  obtain ⟨c, hc⟩ := constantSheaf_locallyConstant_comparison X A
+  let point (U : Opens X) (hU : (U : Set X).Nonempty) : U := ⟨hU.choose, hU.choose_spec⟩
+  have preconnected (U : Opens X) : PreconnectedSpace U := by
+    let : PreirreducibleSpace U := U.isOpenEmbedding'.preirreducibleSpace
+    infer_instance
+  let eval (U : Opens X) (hU : (U : Set X).Nonempty) : LocallyConstant U A ≃+ A :=
+    { toFun := fun f ↦ f (point U hU)
+      invFun := LocallyConstant.const U
+      left_inv := by
+        intro f
+        let := preconnected U
+        exact (f.eq_const (point U hU)).symm
+      right_inv := by intro a; rfl
+      map_add' := by intro f g; rfl }
+  refine ⟨fun U hU ↦ (c U).trans (eval U hU), ?_⟩
+  intro U V hVU hV
+  funext s
+  change c V (((constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{v}).obj
+    (AddCommGrpCat.of A)).1.map (homOfLE hVU).op s) (point V hV) =
+      c U s (point U (Set.Nonempty.mono hVU hV))
+  rw [hc]
+  let := preconnected U
+  exact (c U s).apply_eq_of_preconnectedSpace _ _
 
 end TopCat
