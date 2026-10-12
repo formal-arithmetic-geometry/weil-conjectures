@@ -9419,3 +9419,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/W3/Sheaf.AlgebraicGeometry.FormalModuleSupportSucc (stage 3; reviewer PASS; first push; landing 20261012T202257-L-710417 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/X2/Sheaf.AlgebraicGeometry.AffineFlatModuleStalkFlat (stage 3; reviewer PASS; first push; landing 20261012T202258-L-710588 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/X2/Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants (stage 3; reviewer PASS; first push; landing 20261012T202258-L-710694 (interface); batch 20261012T202227; modules 2; new nodes 1)
+- 20:22 L: merged deliver/X3/Sheaf.AlgebraicGeometry.EtaleLimitCompatibleExactSystems (stage 3; reviewer PASS; first push; landing 20261012T202258-L-710815 (proof); batch 20261012T202227; modules 1; new nodes 0)

@@ -17,31 +17,51 @@
  ],
  "proof": [
   {
-   "text": "Construct FI_i as the product, over arrows i to k, of direct images of Injective.under(F_k). Adjunction transposes phi followed by the canonical embeddings into the product factors. The identity factor is monic. Exact inverse image makes direct images preserve injectives; products of injectives are injective. Reindexing defines psi and proves its unit and composition laws and compatibility with the embeddings. The scheme pullbacks already have canonical coherent composition and identity comparisons; no affine-site colimit is needed.",
+   "text": "Apply etale_coefficient_injective_cokernel_system to obtain the coherent injective and cokernel coefficient systems, stage short exact sequences, injectivity, and the two transition squares. Define r with components phi, psi and phiR; the squares are exactly its commutation fields.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites-injective-system",
-    "lem-weil-pbc-site-pullback-abelian-exact"
+    "lem-weil-pbc-etale-coefficient-injective-cokernel-system"
    ],
    "elementary": false
   },
   {
-   "text": "Take the actual stage cokernels FR_i. Exact inverse image preserves these cokernels. The universal property supplies phiR; cancelling the quotient epis proves the unit and composition equations. Compatibility of embeddings and quotients gives the morphisms r with the stated components. Pull the short exact systems to c.pt and take filtered colimits. Their exactness gives the limit short exact sequence, transported to the supplied colimit L for the first system. Coprojections define t and all three of its components; objectwise naturality proves the two commutative squares.",
+   "text": "Apply etale_system_cone_functor to each of the two new coefficient systems, obtaining GI, GR and their coherent object isomorphisms. Define alpha and beta by conjugating the pulled-back stage maps through eG, eGI and eGR. Their naturality follows by the supplied diagram arrow equations, the stage squares, and naturality of upperStarComp. Their composite is zero objectwise.",
    "uses": [
-    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-etale-system-cone-functor",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define s from each pulled-back stage short complex to the component short complex using all three inverse object identifications. Each component of s is invertible. Exact inverse image transports the stage short exact sequence, so the component sequence is short exact by this isomorphism. Evaluations jointly reflect isomorphisms; JointlyReflectIsomorphisms.shortExact_iff proves the functor-category short complex ShortComplex.mk alpha beta w is short exact.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the actual colimit cocones LI and LR. Identify colimit G with the supplied colimit L by its unique colimit isomorphism e. Set a=e.inv followed by colim.map alpha, and b=colim.map beta. Functoriality gives a followed by b zero. Apply the exact filtered colimit functor to the diagram short complex, then transport short exactness across ShortComplex.isoMk e (Iso.refl _) (Iso.refl _). Exactness is supplied by Mathlib Sheaf.hasExactColimitsOfShape with AB5OfSize at the smaller index universe.",
+   "uses": [
     "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
    ],
    "elementary": false
+  },
+  {
+   "text": "Construct q from the component short complex to the limit short complex using the supplied L coprojection and the actual GI and GR colimit coprojections. The first square follows from the colimit-point isomorphism coprojection equation and colimit.iota_map; the second is colimit.iota_map. Put t_i=s_i followed by q_i. All three components of t and all three components of r have the required values definitionally. Supply these witnesses and injectivity to the continuation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-colimit-of-sites-injective-system",
+  "lem-weil-pbc-etale-coefficient-injective-cokernel-system",
+  "lem-weil-pbc-etale-system-cone-functor",
+  "lem-weil-pbc-inverse-image-composition",
   "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "lem-weil-pbc-site-pullback-abelian-exact"
+  "prop-weil-pbc-inverse-image-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0EXZ",
-  "place": "Product-of-direct-images construction; cokernels and exact filtered colimits in the dimension-shifting argument of 09YP"
+  "place": "X3, 2026-10-13: scheme-specific coefficient construction and cone functor; explicit functor-category assembly and exact filtered colimits as in 09YP. Assembly follows the proved EtaleReplacementStageDiagram and EtaleLimitReplacementExactSystems, retaining all three comparison components and stage morphisms."
  },
  "mathlib_searches": [
   {
@@ -108,10 +128,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T184251-L-4000461",
-  "kind": "interface",
+  "landing": "20261012T202258-L-710815",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
