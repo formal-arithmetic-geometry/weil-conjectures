@@ -1,0 +1,107 @@
+{
+ "id": "lem-sc-etale-units-h2-forward-embedding",
+ "kind": "lemma",
+ "title": "Galois unit H2 embeds into etale unit H2",
+ "statement": "For every field K, there is an embedding Field.GaloisUnitsH2 K ↪ (Spec (.of K)).CohomologicalBrauerGroup. This asserts injectivity in one direction only.",
+ "stmt_deps": [
+  "def-sc-galois-units-cohomology",
+  "def-br"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JQ and 03QU, Example 03QV (2), Section 0DVG"
+ },
+ "proof": [
+  {
+   "text": "Choose an algebraic closure of the separable closure as geometric residue field.\nThe abelian geometric stalk equivalence identifies the stalk of the units sheaf with\nseparable-closure units, with their natural Galois action: every germ is represented over\nsome finite separable extension, and the action on germs is induced by the automorphism\nof that extension. Under this equivalence global sections are invariants. Transport\nan injective resolution across the exact equivalence; injectives remain injective.\nContinuous cochains compute derived invariants: lifting the finite image of a continuous\ncochain on compact powers gives exactness, and embedding into locally constant coinduced\nfunctions effaces positive degrees by the insertion homotopy. More explicitly, embed\nm by the orbit function x ↦ x • m and act on functions by right translation. Such\nfunctions have open stabilizers: compactness makes their locally constant partitions\nfinite and allows a common open subgroup. On cochains with these coefficients use\nh_n(F)(g1,...,g(n-1))(x) = F(x,g1,...,g(n-1))(1). The alternating differential terms\ncancel in d h + h d = 1 for positive degrees. Continuity into the discrete function\nmodule follows from the same finite-partition and common-open-subgroup argument.\nHence the embedding kills positive cohomology.\nThe cochain delta-functor is therefore universal. Its degree-zero identification\nwith invariants extends uniquely to mutually inverse morphisms of delta-functors,\nso it computes derived invariants in every degree. For the homogeneous model used in\nGaloisUnitsH2, the compact-open exponential law on compact Hausdorff finite powers\nidentifies iterated continuous maps with jointly continuous maps. Evaluate a homogeneous\nn-cochain at (1, g1, g1*g2, ..., g1*...*gn); the inverse sends c to\n(g0, ..., gn) ↦ g0 • c(g0⁻¹*g1, ..., g(n-1)⁻¹*gn). Equivariance makes these inverse,\nand alternating omission becomes the inhomogeneous differential. Thus these maps induce\ninverse maps on degree-two cohomology. Canonical lift/down is additive and equivariant\nand removes the coefficient universe lift. Composing gives inverse maps on classes.\nUse the forward comparison on degree-two classes. If two images agree, apply the\ninverse map on classes to this equality. Its composite with the forward map is the\nidentity, so the original classes were equal. This proves only injectivity in this direction.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "def-sc-galois-units-cohomology",
+    "def-br"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-abelian-sheaves-gmodules",
+  "def-sc-galois-units-cohomology",
+  "def-br"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JQ and 03QU, Example 03QV (2), Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous group cohomology is quotient of inhomogeneous cocycles by coboundaries",
+   "results": "Service unavailable: Internal Server Error; no search verdict possible.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology field multiplicative sheaf continuous Galois cohomology comparison",
+   "results": "Hilbert 90 degree-one statements and profinite Galois group results; no degree-two comparison. Loogle continuousCohomology returns its definition, functoriality and degree-zero comparison only.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneousCochains|GaloisUnitsTwoCocycle|CohomologicalBrauerGroup; blueprint_refs continuous cocycle, cochains, Galois",
+   "results": "Mathlib homogeneousCochains defines the continuous model; LowDegree proves degree zero only. Its TODO includes continuous finite-power cochain descriptions. The library has no explicit continuous two-cocycle quotient. Existing discreteContinuousCohomologyFunctor requires a finite coefficient ring, excluding integers. The algebraic Brauer comparison depends on the item, so cannot be imported. No blueprint node matches this explicit quotient or either comparison separately.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleUnitsTwoCocycleComparison",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-units-two-cocycle-comparison",
+   "place": "directional injectivity in the stalk and derived-invariants comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleUnitsH2ForwardEmbedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleUnitsH2ForwardEmbedding.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_embedding_galoisUnitsH2_cohomologicalBrauerGroup",
+  "statement": "theorem nonempty_embedding_galoisUnitsH2_cohomologicalBrauerGroup (K : Type u) [Field K] :     Nonempty (Field.GaloisUnitsH2 K ↪ (Spec (.of K)).CohomologicalBrauerGroup)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T135234-L-1665902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T135234-L-1665902",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
