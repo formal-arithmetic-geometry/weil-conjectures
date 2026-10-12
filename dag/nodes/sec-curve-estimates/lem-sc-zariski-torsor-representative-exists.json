@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-zariski-torsor-representative-exists",
+ "kind": "statement",
+ "title": "A same-universe representative extension of a Zariski torsor",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $G$ be an abelian sheaf on its small Zariski site [def-sc-zariski-site], and let $T$ be a $G$-torsor [def-sc-gm-torsor]. There exists a short exact sequence $0\\to G\\xrightarrow{\\iota}E\\xrightarrow{p}\\mathbf Z_X\\to0$ of abelian sheaves [def-sc-topological-abelian-cohomology] such that $T$ is isomorphic, equivariantly for the $G$ action, to the sheaf of local lifts of the global section $1$ through $p$. Here $X$, the values of $G$, and the values of $E$ are in the same universe $u$. No cohomology-class identity is asserted.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02FQ (cohomology-lemma-torsors-h1), first construction by pushout of the free abelian sheaf; read at https://stacks.math.columbia.edu/tag/02FQ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-sc-gm-torsor",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Form the free abelian sheaf Z[T] by sheafifying sectionwise finite integer sums. Its augmentation sends every generator to 1 in the constant integer sheaf. It is locally surjective since T has local sections. If t0 is a local section of T, the augmentation kernel sends sum n_i[t_i], with sum n_i = 0, to sum n_i(t_i - t0) in G. Changing t0 does not change this value because the sum of coefficients is zero. This defines a natural additive map a from the kernel to G.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "def-sc-zariski-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Push out the augmentation kernel inclusion along a. Concretely E is the sheaf quotient of G direct-sum Z[T] by the image of k mapped to (-a(k),k). In the abelian sheaf category this gives a short exact sequence 0 -> G -> E -> Z_X -> 0. Locally at t0, the quotient is G direct-sum Z with [t] represented by (t - t0,1); in particular the inclusion is injective, the augmentation is surjective, and its kernel is precisely G. Exactness is local and hence holds globally.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural map t mapped to [t] takes values in the fibre over one and satisfies [g + t]=[t]+g. On any open where t0 exists, each fibre section is uniquely [t0]+g, so this map is a bijection on the fibre there. These local equivariant bijections glue to an isomorphism of T with the torsor of lifts of one. All sectionwise free groups, direct sums and quotients have coefficient universe u; sheafification on a topological space preserves that universe. This also applies when X is empty or G is zero.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "def-sc-zariski-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-torsor",
+  "def-sc-topological-abelian-cohomology",
+  "def-sc-zariski-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02FQ (cohomology-lemma-torsors-h1), first construction by pushout of the free abelian sheaf; read at https://stacks.math.columbia.edu/tag/02FQ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every sheaf torsor is the fibre over one of an extension by the constant integer sheaf",
+   "date": "2026-10-12",
+   "results": "Search returns free sheaf and sheaf-of-modules adjunctions, but no torsor extension existence theorem: SheafOfModules.unitHomEquiv, PresheafOfModules.homEquivOfIsLocallyBijective, SheafOfModules.freeHomEquiv, PresheafOfModules.homEquivOfIsLocallyBijective_apply, PresheafOfModules.Sheafify.instSubsingletonSMulCandidate, SheafOfModules.free, SheafOfModules.GeneratingSections, SheafOfModules.generatorsOfIsCokernelFree_I",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "classH1_lifts|exists_equiv_lifts|ContractedPowerExtension",
+   "date": "2026-10-12",
+   "results": "No matches.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every torsor for a sheaf of abelian groups is the fibre over one of an extension by the constant sheaf of integers",
+   "date": "2026-10-12",
+   "results": "Unavailable: service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.TorsorH1BoundaryRepresentative",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "final step: construct the representative extension whose fibre over one is the torsor, before the cohomology-class and naturality arguments",
+   "via": [
+    "lem-sc-torsor-h1-boundary-representative",
+    "lem-sc-torsor-h1-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ZariskiTorsorRepresentativeExists",
+  "declaration": "CategoryTheory.Sheaf.zariski_torsor_representative_exists",
+  "file": "lean/Sheaf/CategoryTheory/Sites/ZariskiTorsorRepresentativeExists.lean",
+  "statement": "theorem zariski_torsor_representative_exists (X : Scheme.{u}) (G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (T : G.Torsor) : ∃ (E : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (ι : G ⟶ E) (p : E ⟶ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u, 0} ℤ))) (hzero : ι ≫ p = 0) (hS : (ShortComplex.mk ι p hzero).ShortExact), Nonempty (Torsor.Iso T (Torsor.lifts (IsTerminal.ofUnique (⊤ : Opens X)) hS ((toSheafify (Opens.grothendieckTopology X) ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u, 0} ℤ)))).app (op ⊤) ⟨1⟩)))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T144126-L-2101088",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T144126-L-2101088",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

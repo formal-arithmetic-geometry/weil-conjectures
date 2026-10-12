@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
-import Sheaf.CategoryTheory.Sites.ZariskiExtTorsor
+import Sheaf.CategoryTheory.Sites.ZariskiTorsorRepresentativeExists
 
 /-!
 # Torsor classes as boundaries of the representative extension
@@ -82,6 +82,12 @@ theorem torsor_h1_boundary_representative (X : Scheme.{u})
             ((toSheafify (Opens.grothendieckTopology X)
               ((Functor.const (Opens X)ᵒᵖ).obj
                 (AddCommGrpCat.of (ULift.{u, 0} ℤ)))).app (op ⊤) ⟨1⟩) := by
-  sorry
+  constructor
+  · obtain ⟨E, ι, p, hzero, hS, hT⟩ := zariski_torsor_representative_exists X G T
+    refine ⟨E, ι, p, hzero, hS, hT, ?_⟩
+    rw [_root_.Quotient.sound hT]
+    exact Torsor.classH1_lifts (IsTerminal.ofUnique (⊤ : Opens X)) hS _
+  · intro E ι p hzero hS
+    exact Torsor.classH1_lifts (IsTerminal.ofUnique (⊤ : Opens X)) hS _
 
 end CategoryTheory.Sheaf

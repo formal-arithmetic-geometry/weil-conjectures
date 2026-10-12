@@ -27,50 +27,35 @@
  ],
  "proof": [
   {
-   "text": "Starting with a G-torsor T, form E as the coproduct over $n\\in\\mathbf Z$ of the contracted powers $T^{\\otimes n}$, with $T^{\\otimes 0}=G$ and negative powers formed from the inverse torsor. Concatenation gives E an abelian-sheaf structure, the exponent map $p:E\\to\\mathbf Z_X$ is a surjection, and its kernel is G; hence $0\\to G\\to E\\to\\mathbf Z_X\\to0$ is exact. The fibre over 1 is T by construction.",
+   "text": "Apply zariski_torsor_representative_exists to obtain E, the two arrows, short exactness, and a torsor isomorphism from T to the fibre over one. This is only the extension existence step, with no class identity.",
    "uses": [
-    "lem-sc-zariski-ext-torsor"
+    "lem-sc-zariski-torsor-representative-exists"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 02FQ, construction of the extension by contracted powers of a torsor"
-   }
+   "elementary": false
   },
   {
-   "text": "The long exact sequence of the short exact sequence of Step 1 [def-sc-topological-abelian-cohomology] gives the connecting map $\\delta_E:H^0(X_{\\mathrm{Zar}},\\mathbf Z_X)\\to H^1(X_{\\mathrm{Zar}},G)$. By [lem-sc-torsor-h1-zariski-boundary-class], applied to this sequence, the bijection of [lem-sc-torsor-h1] (Zariski case) sends the class of its fibre over $1$ to $\\delta_E(1)$. That fibre is isomorphic to $T$ by Step 1, so $[T]\\mapsto\\delta_E(1)$.",
+   "text": "The nonempty torsor isomorphism is the equivalence relation of Torsor.setoid, so Quotient.sound identifies their isomorphism classes. Rewrite classH1 by this equality and apply classH1_lifts to the constructed short exact sequence and the global section one. This supplies the missing class identity in the existential clause.",
    "uses": [
-    "lem-sc-torsor-h1-zariski-boundary-class",
-    "def-sc-topological-abelian-cohomology"
+    "lem-sc-torsor-h1-zariski-boundary-class"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 02FQ, boundary of 1 in the long exact cohomology sequence"
-   }
+   "elementary": true
   },
   {
-   "text": "Conversely, let $0\\to G\\to E\\to\\mathbf Z_X\\to0$ be any short exact sequence of abelian sheaves on $X_{\\mathrm{Zar}}$. By [lem-sc-torsor-h1-zariski-boundary-class] its fibre over $1$ is a $G$-torsor and the bijection of [lem-sc-torsor-h1] (Zariski case) sends its class to $\\delta_E(1)$, the boundary of $1$ in the long exact sequence [def-sc-topological-abelian-cohomology]. This is the converse clause.",
+   "text": "For any short exact sequence in the converse clause, apply classH1_lifts directly to its global section one. Its lifts object is already a G-torsor by definition. Combine this universal assertion with the existential clause by conjunction introduction.",
    "uses": [
-    "lem-sc-torsor-h1-zariski-boundary-class",
-    "def-sc-topological-abelian-cohomology"
+    "lem-sc-torsor-h1-zariski-boundary-class"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 02FQ, converse from an extension to the fibre torsor"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-zariski-ext-torsor",
-  "lem-sc-torsor-h1-zariski-boundary-class",
-  "def-sc-topological-abelian-cohomology"
+  "lem-sc-zariski-torsor-representative-exists",
+  "lem-sc-torsor-h1-zariski-boundary-class"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 02FQ (cohomology-lemma-torsors-h1)"
+  "place": "Lemma 02FQ (cohomology-lemma-torsors-h1), first construction by pushout of the free abelian sheaf; read at https://stacks.math.columbia.edu/tag/02FQ"
  },
  "mathlib_searches": [
   {
@@ -149,5 +134,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T144126-L-2101088",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
