@@ -142,26 +142,9 @@ end Sections
 
 section FreeSheaf
 
-/-! ### Naturality of `freeSheafHomEquiv`
+/-! ### Additivity of `freeSheafHomEquiv`
 
 These are facts about the free sheaves `R[V]` of `FreeResolution.lean`. -/
-
-variable (J R) in
-/-- `freeSheafHomEquiv` is natural in the object: precomposition with `R[f]` corresponds to
-restriction of sections along `f`. -/
-lemma freeSheafHomEquiv_map_comp {V W : C} (f : V ⟶ W) (F : Sheaf J (ModuleCat.{max u v} R))
-    (φ : (freeSheaf J R).obj W ⟶ F) :
-    freeSheafHomEquiv J R V F ((freeSheaf J R).map f ≫ φ) =
-      (F.obj.map f.op).hom (freeSheafHomEquiv J R W F φ) :=
-  sorry
-
-variable (J R) in
-/-- `freeSheafHomEquiv` is natural in the sheaf: postcomposition with `ψ` corresponds to applying
-`ψ` to sections. -/
-lemma freeSheafHomEquiv_comp (V : C) {F G : Sheaf J (ModuleCat.{max u v} R)}
-    (φ : (freeSheaf J R).obj V ⟶ F) (ψ : F ⟶ G) :
-    freeSheafHomEquiv J R V G (φ ≫ ψ) = (ψ.hom.app (op V)).hom (freeSheafHomEquiv J R V F φ) :=
-  sorry
 
 variable (J R) in
 /-- `freeSheafHomEquiv` is additive. -/
@@ -187,12 +170,6 @@ lemma freeSheafHomAddEquiv_apply (V : C) (F : Sheaf J (ModuleCat.{max u v} R))
     freeSheafHomAddEquiv J R V F φ = freeSheafHomEquiv J R V F φ :=
   rfl
 
-/-- The differential of the free complex is the alternating sum of the face maps. -/
-lemma freeComplex_d (U : SemiSimplicialObject C) (n : ℕ) :
-    (U.freeComplex J R).d (n + 1) n =
-      ∑ i : Fin (n + 2), ((-1 : ℤ) ^ (i : ℕ)) • (freeSheaf J R).map (U.δ n i) := by
-  simp [freeComplex]
-
 variable (J R) in
 /-- Under `freeSheafHomEquiv`, precomposition with the differential of the free complex
 corresponds to the differential of the cochain complex. -/
@@ -215,15 +192,6 @@ noncomputable def freeComplexMap {U V : SemiSimplicialObject C} (f : V ⟶ U) :
     refine Finset.sum_congr rfl fun i _ ↦ ?_
     rw [Preadditive.zsmul_comp, Preadditive.comp_zsmul, ← Functor.map_comp, ← Functor.map_comp,
       Hom.app_δ])
-
-/-- The augmentations to the constant presheaf are compatible with the maps of free presheaves. -/
-lemma freeYoneda_map_comp_freeYonedaToConst {X Y : C} (g : X ⟶ Y) :
-    (freeYoneda R).map g ≫ freeYonedaToConst R Y = freeYonedaToConst R X := by
-  ext W : 2
-  apply ModuleCat.hom_ext
-  apply Finsupp.lhom_ext
-  intro a r
-  simp [freeYonedaToConst, ModuleCat.free]
 
 /-- The morphism of free complexes induced by `f : V ⟶ U` is compatible with the
 augmentations. -/

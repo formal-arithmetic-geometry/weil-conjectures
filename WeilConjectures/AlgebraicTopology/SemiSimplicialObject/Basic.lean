@@ -200,6 +200,14 @@ lemma cochainDifferential_comp (U : SemiSimplicialObject C) (F : Cᵒᵖ ⥤ A) 
       conv_lhs => rw [hj]
       rw [← U.δ_comp_δ n (by simpa [S, Fin.le_def] using! hij)]
 
+/-- The square of the alternating sum of the face maps vanishes, for a covariant functor. -/
+lemma sum_map_δ_comp_sum_map_δ (U : SemiSimplicialObject C) (G : C ⥤ A) (n : ℕ) :
+    (∑ i : Fin (n + 3), ((-1 : ℤ) ^ (i : ℕ)) • G.map (U.δ (n + 1) i)) ≫
+      (∑ i : Fin (n + 2), ((-1 : ℤ) ^ (i : ℕ)) • G.map (U.δ n i)) = 0 := by
+  have := U.cochainDifferential_comp G.op n
+  apply Quiver.Hom.op_inj
+  simpa [cochainDifferential, op_sum] using this
+
 /-- The cochain complex `C^•(U, F)` of a presheaf `F` on a semi-simplicial object `U`: in degree
 `n` it is `F(U.obj n)`, and the differential is the alternating sum of the face maps. -/
 noncomputable def cochainComplex (U : SemiSimplicialObject C) (F : Cᵒᵖ ⥤ A) :

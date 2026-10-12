@@ -69,7 +69,28 @@ noncomputable abbrev freeSheaf : C ⥤ Sheaf J (ModuleCat.{max u v} R) :=
 adjunction and the sheafification adjunction). -/
 noncomputable def freeSheafHomEquiv (V : C) (F : Sheaf J (ModuleCat.{max u v} R)) :
     ((freeSheaf J R).obj V ⟶ F) ≃ F.obj.obj (op V) :=
-  sorry
+  ((sheafificationAdjunction J _).homEquiv _ _).trans <|
+    (((ModuleCat.adj R).whiskerRight Cᵒᵖ).homEquiv _ _).trans uliftYonedaEquiv
+
+/-- `freeSheafHomEquiv` is natural in the sheaf: postcomposition with `ψ` corresponds to applying
+`ψ` to sections. -/
+lemma freeSheafHomEquiv_comp (V : C) {F G : Sheaf J (ModuleCat.{max u v} R)}
+    (φ : (freeSheaf J R).obj V ⟶ F) (ψ : F ⟶ G) :
+    freeSheafHomEquiv J R V G (φ ≫ ψ) = (ψ.hom.app (op V)).hom (freeSheafHomEquiv J R V F φ) := by
+  simp only [freeSheafHomEquiv, Equiv.trans_apply]
+  rfl
+
+/-- `freeSheafHomEquiv` is natural in the object: precomposition with `R[f]` corresponds to
+restriction of sections along `f`. -/
+lemma freeSheafHomEquiv_map_comp {V W : C} (f : V ⟶ W) (F : Sheaf J (ModuleCat.{max u v} R))
+    (φ : (freeSheaf J R).obj W ⟶ F) :
+    freeSheafHomEquiv J R V F ((freeSheaf J R).map f ≫ φ) =
+      (F.obj.map f.op).hom (freeSheafHomEquiv J R W F φ) := by
+  simp only [freeSheafHomEquiv, Equiv.trans_apply]
+  rw [Functor.comp_map]
+  erw [(sheafificationAdjunction J _).homEquiv_naturality_left,
+    Adjunction.homEquiv_naturality_left]
+  exact (uliftYonedaEquiv_naturality _ f.op).symm
 
 /-- The free complex `⋯ ⟶ R[U₂] ⟶ R[U₁] ⟶ R[U₀]` of a semi-simplicial object, with the
 alternating sums of the face maps as differentials. -/
@@ -77,17 +98,39 @@ noncomputable def freeComplex (U : SemiSimplicialObject C) :
     ChainComplex (Sheaf J (ModuleCat.{max u v} R)) ℕ :=
   ChainComplex.of (fun n ↦ (freeSheaf J R).obj (U.obj n))
     (fun n ↦ ∑ i : Fin (n + 2), ((-1 : ℤ) ^ (i : ℕ)) • (freeSheaf J R).map (U.δ n i))
-    (by sorry)
+    (fun n ↦ U.sum_map_δ_comp_sum_map_δ (freeSheaf J R) n)
 
 @[simp]
 lemma freeComplex_X (U : SemiSimplicialObject C) (n : ℕ) :
     (U.freeComplex J R).X n = (freeSheaf J R).obj (U.obj n) := rfl
 
+variable {J R} in
+/-- The differential of the free complex is the alternating sum of the face maps. -/
+lemma freeComplex_d (U : SemiSimplicialObject C) (n : ℕ) :
+    (U.freeComplex J R).d (n + 1) n =
+      ∑ i : Fin (n + 2), ((-1 : ℤ) ^ (i : ℕ)) • (freeSheaf J R).map (U.δ n i) := by
+  simp [freeComplex]
+
 /-- The map of presheaves `R^{(Hom(W, V))} ⟶ R` summing the coefficients. -/
 noncomputable def freeYonedaToConst (V : C) :
     (freeYoneda R).obj V ⟶ (Functor.const Cᵒᵖ).obj (ModuleCat.of R R) where
   app _ := ModuleCat.ofHom (Finsupp.linearCombination R (fun _ ↦ (1 : R)))
-  naturality _ _ _ := by sorry
+  naturality _ _ _ := by
+    apply ModuleCat.hom_ext
+    apply Finsupp.lhom_ext
+    intro a r
+    simp [ModuleCat.free]
+
+variable {R} in
+/-- The augmentations to the constant presheaf are compatible with the maps of free presheaves. -/
+@[reassoc]
+lemma freeYoneda_map_comp_freeYonedaToConst {X Y : C} (g : X ⟶ Y) :
+    (freeYoneda R).map g ≫ freeYonedaToConst R Y = freeYonedaToConst R X := by
+  ext W : 2
+  apply ModuleCat.hom_ext
+  apply Finsupp.lhom_ext
+  intro a r
+  simp [freeYonedaToConst, ModuleCat.free]
 
 /-- The augmentation `R[U₀] ⟶ R` to the constant sheaf, induced by the maps of presheaves
 `R^{(Hom(W, U₀))} ⟶ R` summing the coefficients. -/
@@ -96,7 +139,21 @@ noncomputable def freeAugmentation (U : SemiSimplicialObject C) :
   (presheafToSheaf J _).map (freeYonedaToConst R (U.obj 0))
 
 lemma freeComplex_d_freeAugmentation (U : SemiSimplicialObject C) :
-    (U.freeComplex J R).d 1 0 ≫ U.freeAugmentation J R = 0 := sorry
+    (U.freeComplex J R).d 1 0 ≫ U.freeAugmentation J R = 0 := by
+  have h (i : Fin 2) : (freeSheaf J R).map (U.δ 0 i) ≫
+      (presheafToSheaf J _).map (freeYonedaToConst R (U.obj 0)) =
+      (presheafToSheaf J _).map (freeYonedaToConst R (U.obj (0 + 1))) := by
+    have := congrArg (presheafToSheaf J _).map
+      (freeYoneda_map_comp_freeYonedaToConst (R := R) (U.δ 0 i))
+    rw [Functor.map_comp] at this
+    exact this
+  have h' : (∑ i : Fin 2, ((-1 : ℤ) ^ (i : ℕ)) • (freeSheaf J R).map (U.δ 0 i)) ≫
+      (presheafToSheaf J _).map (freeYonedaToConst R (U.obj 0)) = 0 := by
+    rw [Preadditive.sum_comp, Fin.sum_univ_two, Preadditive.zsmul_comp,
+      Preadditive.zsmul_comp, h, h]
+    simp
+  rw [freeComplex_d]
+  exact h'
 
 namespace IsHypercover
 
