@@ -3,6 +3,7 @@ module
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Sites.Precoverage
+import Sheaf.CategoryTheory.ColimitPresieveIndexedPresentation
 
 @[expose] public section
 universe u
@@ -51,6 +52,45 @@ theorem colimit_site_covering_families_at_stage
       (a : ∀ i t, A i t ⟶ (F.map e).toFunctor.obj (T₀ i)),
       (∀ i, Presieve.ofArrows (A i) (a i) ∈ P j ((F.map e).toFunctor.obj (T₀ i))) ∧
       (∀ i t, Arrow.mk ((V.ι.app j).toFunctor.map (a i t)) = Arrow.mk (f i t)) := by
-  sorry
+  classical
+  have hi (i : κ) :
+      ∃ (j : J) (e : j₀ ⟶ j) (A : τ i → F.obj j)
+        (a : ∀ t, A t ⟶ (F.map e).toFunctor.obj (T₀ i)),
+        Presieve.ofArrows A a ∈ P j ((F.map e).toFunctor.obj (T₀ i)) ∧
+        ∀ t, Arrow.mk ((V.ι.app j).toFunctor.map (a t)) = Arrow.mk (f i t) := by
+    obtain ⟨k, U, R, hU, hcov, hR⟩ := (hQ (S i) _).mp (hf i)
+    have : Finite R.uncurry := hfinite k U R hcov
+    obtain ⟨j, e, d, h, A, a, heq, himage⟩ :=
+      colimit_presieve_indexed_presentation J F V hobjects harrows j₀ k (T₀ i) U R
+        (hT₀ i) hU (f i) hR
+    refine ⟨j, e, A, a, ?_, himage⟩
+    rw [heq]
+    exact Eq.rec (motive := fun Z h => (h ▸ R.map (F.map d).toFunctor) ∈ P j Z)
+      (hcover k j d U R hcov) h
+  choose ji ei Ai ai hcov himage using hi
+  obtain ⟨j, e, d, hd⟩ := IsFiltered.wideSpan ei
+  have hj (i : κ) :
+      ∃ (A : τ i → F.obj j) (a : ∀ t, A t ⟶ (F.map e).toFunctor.obj (T₀ i)),
+        Presieve.ofArrows A a ∈ P j ((F.map e).toFunctor.obj (T₀ i)) ∧
+        ∀ t, Arrow.mk ((V.ι.app j).toFunctor.map (a t)) = Arrow.mk (f i t) := by
+    rw [← hd i]
+    have ht : (F.map (ei i ≫ d i)).toFunctor.obj (T₀ i) =
+        (F.map (d i)).toFunctor.obj ((F.map (ei i)).toFunctor.obj (T₀ i)) :=
+      congrArg (fun H : F.obj j₀ ⟶ F.obj j => H.toFunctor.obj (T₀ i))
+        (F.map_comp (ei i) (d i))
+    rw [ht]
+    refine ⟨fun t => (F.map (d i)).toFunctor.obj (Ai i t),
+      fun t => (F.map (d i)).toFunctor.map (ai i t), ?_, ?_⟩
+    · simpa only [Presieve.map_ofArrows] using
+        hcover (ji i) j (d i) _ _ (hcov i)
+    · intro t
+      calc
+        Arrow.mk ((V.ι.app j).toFunctor.map ((F.map (d i)).toFunctor.map (ai i t))) =
+            Arrow.mk ((V.ι.app (ji i)).toFunctor.map (ai i t)) :=
+          congrArg (fun H : F.obj (ji i) ⟶ V.pt =>
+            Arrow.mk (H.toFunctor.map (ai i t))) (V.w (d i))
+        _ = Arrow.mk (f i t) := himage i t
+  choose A a hcov himage using hj
+  exact ⟨j, e, A, a, hcov, himage⟩
 
 end CategoryTheory

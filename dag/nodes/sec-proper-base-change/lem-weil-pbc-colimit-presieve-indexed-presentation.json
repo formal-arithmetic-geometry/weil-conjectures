@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-colimit-presieve-indexed-presentation",
+ "kind": "statement",
+ "title": "Finite presieve reindexing over a fixed stage target",
+ "statement": "Let J be a small filtered category and F : J → Cat a diagram [def-weil-pbc-category-colimit]. Let V be a cocone such that its object and arrow cocones [def-weil-pbc-arrows-functor] are colimits of sets. Fix stages j₀ and k₀, objects T₀ in F(j₀) and U₀ in F(k₀), and a presieve R₀ on U₀ with finite uncurried arrow set. Suppose the cocone images of T₀ and U₀ equal an object S of V.pt. Let f_t : X_t → S be a family indexed by a finite type τ whose generated presieve is the equality-transported cocone image of R₀. Then there are a common stage j, transitions e : j₀ → j and d : k₀ → j, a target equality h : F(d)(U₀) = F(e)(T₀), and arrows a_t : A_t → F(e)(T₀), such that their generated presieve is h-transport of R₀.map F(d), and the cocone image of every a_t equals f_t as an object of the arrow category. No precoverage or covering assumption is made.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, finite-diagram observation and verification of axiom (2); https://stacks.math.columbia.edu/tag/09YL"
+ },
+ "proof": [
+  {
+   "text": "Choose for every requested index a member of the stage presieve with the same image arrow, and for every stage member an index with that image. Presieve.map_iff and Presieve.ofArrows_surj give these comparisons, including source equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Each stage member and the representative selected for its chosen index have equal colimit images. Apply eventual arrow equality to each of these finitely many pairs, then IsFiltered.wideSpan to obtain a single transition on which every comparison holds. Equality of arrow objects implies membership in the same presieve, giving equality of the transition presieve and the selected indexed presieve.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use eventual object equality to align the transitioned presieve target with the prescribed initial stage target. Map the selected arrows to that common successor and postcompose with eqToHom of the target equality. Transport of ofArrows gives equality with the transported original presieve. Cocone naturality and Arrow.arrow_mk_comp_eqToHom give each prescribed image equality.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL finite-diagram observation; S3 formalized finite comparisons and endpoint transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite presieve whose image in a filtered colimit is an indexed family can be reindexed by this family at a later stage",
+   "results": "IsFiltered.sup_exists, sup_objs_exists, sup, toSup, toSup_commutes; no exact presieve reindexing theorem",
+   "date": "2026-10-13",
+   "verdict": "Finite successor tools only; prove the presieve comparison from eventual equality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_ofArrows\"",
+   "results": "CategoryTheory.Presieve.map_ofArrows",
+   "date": "2026-10-13",
+   "verdict": "Used for mapping indexed presieves; does not supply reindexing."
+  },
+  {
+   "tool": "grep",
+   "query": "presieve.*(reindex|stage)|wideSpan|isColimit_eq_iff",
+   "results": "Types.FilteredColimit.isColimit_eq_iff and isColimit_eq_iff'; IsFiltered.wideSpan; no exact reindexing result. Local rg also found finite_stage_eq in FilteredColimitCategoryListEquality, a private lemma on Fin n.",
+   "date": "2026-10-13",
+   "verdict": "Use the Mathlib equality criteria and wideSpan directly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite presieve in a filtered colimit of categories can be reindexed at a later stage by any indexing of its image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteCoveringFamiliesAtStage",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-covering-families-at-stage",
+   "place": "Finite-presieve comparison part of proof step 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitPresieveIndexedPresentation",
+  "file": "lean/Sheaf/CategoryTheory/ColimitPresieveIndexedPresentation.lean",
+  "declaration": "CategoryTheory.colimit_presieve_indexed_presentation",
+  "statement": "theorem colimit_presieve_indexed_presentation\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (j₀ k₀ : J) (T₀ : F.obj j₀) (U₀ : F.obj k₀) (R₀ : Presieve U₀)\n    [Finite R₀.uncurry] {S : V.pt}\n    (hT : (V.ι.app j₀).toFunctor.obj T₀ = S)\n    (hU : (V.ι.app k₀).toFunctor.obj U₀ = S)\n    {τ : Type u} [Finite τ] {X : τ → V.pt} (f : ∀ t, X t ⟶ S)\n    (hR : hU ▸ R₀.map (V.ι.app k₀).toFunctor = Presieve.ofArrows X f) :\n    ∃ (j : J) (e : j₀ ⟶ j) (d : k₀ ⟶ j)\n      (h : (F.map d).toFunctor.obj U₀ = (F.map e).toFunctor.obj T₀)\n      (A : τ → F.obj j) (a : ∀ t, A t ⟶ (F.map e).toFunctor.obj T₀),\n      Presieve.ofArrows A a = h ▸ R₀.map (F.map d).toFunctor ∧\n      ∀ t, Arrow.mk ((V.ι.app j).toFunctor.map (a t)) = Arrow.mk (f t)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T223417-L-1641224",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T223417-L-1641224",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
