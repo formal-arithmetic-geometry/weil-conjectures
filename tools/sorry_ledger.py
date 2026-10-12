@@ -18,6 +18,11 @@ This is source evidence, not elaborated dependency information or a proof verdic
 History is first-parent, recomputed every run. Claims come from the input git tree.
 report --post-build scans the last green build commit, then commits changed outputs
 under the merge lock (generation never holds a lock). No build is invoked.
+Undetermined data: source applications of choice to holed declarations, excluding
+class-1 declaration names recorded in coord/hollow-definitions.md in the scanned
+git tree. This is a separate census from literal holes in definitions, not a new
+hole or a change to proof-progress accounting. Namespace/import resolution and
+receiver notation are approximations; macros and elaboration are not inspected.
 """
 from __future__ import annotations
 import argparse
@@ -37,6 +42,7 @@ BASELINES=[('889327369','Queue at the start of stage 3'),
            ('660345513','Application of proof-dependency imports')]
 HOLE=re.compile(r"(?<![\w'«])(?:sorry|admit|sorryAx)(?![\w'»])")
 DEFECT={'def','instance','structure field'}
+HOLLOW_JUDGMENTS='coord/hollow-definitions.md'
 
 
 def git(*args):
@@ -133,6 +139,9 @@ def scan_text(text):
             warnings.append('duplicate source declaration: '+name)
             name+=f'::<{duplicates[name]}>'
         kind=d['kw'] if d['kw'] in ('theorem','lemma','def','instance') else ('def' if d['kw'] in ('abbrev','opaque') else 'other')
+        short=d['short'] or ''
+        namespace=name[:-len(short)].rstrip('.') if short and name.endswith(short) else ''
+        context=dict(namespace=namespace,opens=s2.opens(code[:a]))
         fields=[]
         if d['kw'] in ('structure','class'):
             fs=list(re.finditer(r'^([ \t]+)(«[^»]+»|[\w\'.]+)\s*(?=[:(])',code[d['sig_end']:b],re.M))
@@ -145,15 +154,17 @@ def scan_text(text):
             if True:  # Retain proved fields for closed-versus-deleted accounting.
                 rows.append(dict(name=name+'.'+field,kind='structure field',
                                  signature=s2.normalize(code[start:end].split(':=',1)[0]),
-                                 proof=tokens[start:end],markers=sorted({m[0] for m in ms}),
-                                 line=text.count('\n',0,start)+1))
+                                 proof=code[start:end].partition(':=')[2],
+                                 markers=sorted({m[0] for m in ms}),
+                                 line=text.count('\n',0,start)+1,**context))
         ms=[m for m in HOLE.finditer(tokens,a,b) if m.start() not in occupied]
         occupied.update(m.start() for m in ms)
         markers={m[0] for m in ms}
         if d['kw']=='axiom': markers.add('axiom')
         if markers and not d['name']: warnings.append('anonymous holed declaration: '+name)
         rows.append(dict(name=name,kind=kind,signature=s2.normalize(code[a:d['sig_end']]),
-                         proof=tokens[d['sig_end']:b],markers=sorted(markers),line=text.count('\n',0,a)+1))
+                         proof=code[d['sig_end']:b],markers=sorted(markers),
+                         line=text.count('\n',0,a)+1,**context))
     for m in HOLE.finditer(tokens):
         if m.start() not in occupied:
             line=text.count('\n',0,m.start())+1
@@ -214,7 +225,7 @@ def missing_gate(old, new):
 
 
 def relevant(p):
-    return (p.startswith(('lean/Sheaf/','lean/WeilConjectures/')) and p.endswith('.lean')) or p in (
+    return p==HOLLOW_JUDGMENTS or (p.startswith(('lean/Sheaf/','lean/WeilConjectures/')) and p.endswith('.lean')) or p in (
         'lean/Sheaf.lean','lean/WeilConjectures.lean','lean/TargetsCheck.lean','lean/Challenge.lean')
 
 
@@ -234,12 +245,12 @@ def snapshot(files, previous=None, changed=None):
         imports=previous['imports'].copy(); decls=previous['decls'].copy()
         errors=previous['errors'].copy()
         changed=set(changed)
-        mods={p[5:-5].replace('/','.') for p in changed}
+        mods={p[5:-5].replace('/','.') for p in changed if p.startswith('lean/')}
         decls={k:r for k,r in decls.items() if k[0] not in mods}
         for mod in mods:
             imports.pop(mod,None); errors.pop(mod,None)
     for p in sorted(changed):
-        if p not in files: continue
+        if p not in files or p==HOLLOW_JUDGMENTS: continue
         mod=p[5:-5].replace('/','.')
         try: rows,imps,errs=blob(files[p])
         except UnicodeError as e:
@@ -258,8 +269,116 @@ def snapshot(files, previous=None, changed=None):
             if n in imports and n not in dist: dist[n]=dist[m]+1; q.append(n)
             elif n.startswith(('Sheaf.','WeilConjectures.')) and n not in imports:
                 warnings.append(m+': missing import '+n)
+    exceptions=class_one_names(read_blob(files[HOLLOW_JUDGMENTS]).decode('utf-8')) if HOLLOW_JUDGMENTS in files else set()
     return dict(decls=decls,imports=imports,dist=dist,warnings=sorted(set(warnings)),errors=errors,
+                determined_definitions=exceptions,
                 holes={k:r for k,r in decls.items() if r['markers']})
+
+
+def class_one_names(text):
+    """Read judgment tables by header, never prose or hard-coded exemptions.
+
+    Names are declaration names (Lean namespaces, without the module prefix).
+    The repaired-module table may use the same columns as the untouched table.
+    """
+    out=set(); columns=None
+    for line in text.splitlines():
+        if not line.strip().startswith('|'):
+            columns=None; continue
+        cells=[c.strip().strip('`').strip() for c in line.strip().strip('|').split('|')]
+        if 'Declaration' in cells and 'Class' in cells:
+            columns=(cells.index('Declaration'),cells.index('Class')); continue
+        if columns and len(cells)>max(columns) and cells[columns[1]]=='1':
+            out.add(cells[columns[0]])
+    return out
+
+
+_NAME_PART=r"(?:«[^»]+»|[^\W\d][\w']*)"
+_CHOICE_TOKEN=re.compile(_NAME_PART+r"(?:\.(?:"+_NAME_PART+r"|\d+))*|\.(?:"+_NAME_PART+r"|\d+)|[^\s]",re.UNICODE)
+_CHOICE_PREFIX={'Classical.choose','Exists.choose','Nonempty.some',
+                'Classical.indefiniteDescription','Classical.choice'}
+
+
+def choice_arguments(proof):
+    """Return source receiver/argument spans of actual choice applications.
+
+    Balanced brackets retain nested choose_spec/projection chains. Merely having
+    both a choice and a holed theorem somewhere in a body is not evidence.
+    """
+    tokens=[m[0] for m in _CHOICE_TOKEN.finditer(proof)]
+    pairs={}; stack=[]
+    for i,t in enumerate(tokens):
+        if t in ('(','[','{','⟨','⦃'): stack.append(i)
+        elif t in (')',']','}','⟩','⦄') and stack:
+            a=stack.pop(); pairs[a]=i; pairs[i]=a
+    def after(i):
+        return pairs[i]+1 if i in pairs and pairs[i]>i else i+1
+    def before(i):
+        if i<0: return 0
+        if tokens[i].startswith('.'):
+            return before(i-1)
+        if tokens[i]=='>' and i and tokens[i-1]=='|':
+            return before(i-2)
+        return pairs[i] if i in pairs and pairs[i]<i else i
+    spans=[]
+    for i,t in enumerate(tokens):
+        if t in _CHOICE_PREFIX:
+            a=i+1
+            if t=='Classical.indefiniteDescription' and a<len(tokens): a=after(a)
+            if a<len(tokens): spans.append(tokens[a:after(a)])
+        elif t.endswith(('.choose','.some')):
+            receiver=t.rsplit('.',1)[0]
+            if receiver: spans.append([receiver])
+            elif i: spans.append(tokens[before(i-1):i])
+    return spans
+
+
+def undetermined_data(s,closure=False):
+    """One row per data declaration choosing from a known holed declaration.
+
+    Resolve full/relative names before unique terminal-name method notation.
+    Only declarations in the defining module's import closure are candidates.
+    Local binders shadow global names; ambiguous terminals are not guessed.
+    """
+    byname=collections.defaultdict(list)
+    terminal=collections.defaultdict(set)
+    for k in s['decls']:
+        byname[k[1]].append(k); terminal[k[1].split('.')[-1]].add(k[1])
+    out={}; exceptions=s.get('determined_definitions',set())
+    for k,r in sorted(s['decls'].items()):
+        if r['kind'] not in DEFECT or r['name'] in exceptions: continue
+        if closure and k[0] not in s['dist']: continue
+        spans=choice_arguments(r['proof'])
+        if not spans: continue
+        reachable=li.closure(k[0],s['imports'],{})|{k[0]}
+        local=set(re.findall(r"(?:letI?|haveI?)\s+("+_NAME_PART+r")",r['proof']))
+        for binder in re.findall(r"\bfun\s+([^↦=\n]+)(?:↦|=>)",r['proof']):
+            local.update(re.findall(_NAME_PART,binder.split(':',1)[0]))
+        for binder in re.findall(r"[({⦃]\s*([^:(){}⦃⦄]+)\s*:",r['signature']):
+            local.update(re.findall(_NAME_PART,binder))
+        ns=r.get('namespace',r['name'].rsplit('.',1)[0] if '.' in r['name'] else '')
+        prefixes=[ns.rsplit('.',i)[0] for i in range(ns.count('.')+1)] if ns else []
+        sources=set()
+        for span in spans:
+            for token in span:
+                if not re.match(_NAME_PART,token): continue
+                token=re.sub(r"(?:\.(?:choose_spec|choose|some|\d+))+$",'',token)
+                if token in local: continue
+                rooted=token.startswith('_root_.'); token=token.removeprefix('_root_.')
+                candidates=[token] if rooted else [p+'.'+token for p in prefixes]+[token]+[
+                    p+'.'+token for p in r.get('opens',())]
+                resolved=[]
+                for name in candidates:
+                    found=[n for n in byname.get(name,()) if n[0] in reachable]
+                    if found:
+                        resolved=found; break
+                if not resolved and not rooted:
+                    names=terminal.get(token.split('.')[-1],())
+                    found=[n for name in names for n in byname[name] if n[0] in reachable]
+                    if len(found)==1: resolved=found
+                sources.update(n[1] for n in resolved if s['decls'][n]['markers'])
+        if sources: out[k]=dict(r,module=k[0],chosen_from=sorted(sources))
+    return out
 
 
 def holes(s,closure=False):
@@ -322,8 +441,12 @@ def history(since,head):
 
 def census(s):
     h,c=holes(s),holes(s,True)
+    undetermined=undetermined_data(s)
     return dict(unit='one per holed declaration; deleted is not proved',library=len(h),closure=len(c),
                 definitions=sum(r['kind'] in DEFECT for r in h.values()),
+                undetermined_definitions=len(undetermined),
+                undetermined_closure=sum(k[0] in s['dist'] for k in undetermined),
+                undetermined_rows=list(undetermined.values()),
                 roots={root:dict(library=sum(k[0].split('.')[0]==root for k in h),
                                  closure=sum(k[0].split('.')[0]==root for k in c)) for root in ('Sheaf','WeilConjectures')},
                 rows=sorted(h.values(),key=lambda r:(r['kind'] not in DEFECT,r['module'],r['name'])),warnings=s['warnings'])
@@ -349,11 +472,15 @@ def report(head, output=None):
     lines=['# Sorry ledger','','Source scan; one hole per declaration, regardless of token count. Deleted declarations are not proofs.',
            'Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.',
            'Progress = closed − added in the closure, with pruning reported separately.','',
-           f"Holes now: library **{now['library']}**, closure **{now['closure']}**, in definitions **{now['definitions']}**.",'',
+           f"Holes now: library **{now['library']}**, closure **{now['closure']}**, holes in definitions **{now['definitions']}**, definitions with undetermined data **{now['undetermined_definitions']}** (closure **{now['undetermined_closure']}**).",'',
            '| root | library | closure |','|---|---:|---:|']
     defects=[f"- `{r['module']}::{r['name']}` ({r['kind']}, line {r['line']})" for r in now['rows'] if r['kind'] in DEFECT]
     at=lines.index('| root | library | closure |')
     lines[at:at]=['Definitions with holes (def/instance/structure field):','']+(defects or ['None.'])+['']
+    at=lines.index('| root | library | closure |')
+    choices=[f"- `{r['module']}::{r['name']}` (line {r['line']}), chosen from "+
+             ', '.join('`'+n+'`' for n in r['chosen_from']) for r in now['undetermined_rows']]
+    lines[at:at]=['Definitions with undetermined data (class-1 exceptions in `coord/hollow-definitions.md`):','']+(choices or ['None.'])+['']
     for root,r in now['roots'].items(): lines.append(f"| {root} | {r['library']} | {r['closure']} |")
     lines+=['','| baseline | scope | closed | added | net | deleted | changed holed statements |','|---|---|---:|---:|---:|---:|---:|']
     for r in baselines:
@@ -388,6 +515,9 @@ def report(head, output=None):
     def add(*cols): machine.append('\t'.join(str(c).replace('\t',' ').replace('\n',' ') for c in cols))
     for r in now['rows']:
         add('hole','closure' if r['module'] in s['dist'] else 'library',r['module'],r['name'],r['kind'],1,','.join(r['markers']))
+    for r in now['undetermined_rows']:
+        add('undetermined_data','closure' if r['module'] in s['dist'] else 'library',
+            r['module'],r['name'],r['kind'],1,','.join(r['chosen_from']))
     for r in baselines:
         for scope in ('library','closure'):
             if scope in r:
@@ -398,7 +528,7 @@ def report(head, output=None):
     for w in sorted(set(now['warnings'])): add('diagnostic','','','','','',w)
     (output/'sorry-ledger.tsv').write_text('\n'.join(machine)+'\n')
     (output/'sorry-ledger.md').write_text('\n'.join(lines)+'\n')
-    return dict(now={k:v for k,v in now.items() if k!='rows'},baselines=baselines,classes=dict(sorted(classes.items())),groups=groups)
+    return dict(now={k:v for k,v in now.items() if k not in ('rows','undetermined_rows')},baselines=baselines,classes=dict(sorted(classes.items())),groups=groups)
 
 
 def post_build():
