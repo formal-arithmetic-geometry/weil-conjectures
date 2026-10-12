@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
+public import WeilConjectures.AlgebraicGeometry.Sites.FilteredColimitSections
 public import WeilConjectures.CategoryTheory.Sites.CechComplexModule
 public import WeilConjectures.CategoryTheory.Sites.CechCriterionExt
 
@@ -45,23 +46,11 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-variable {Λ : Type (u + 1)} [Ring Λ]
+variable {Λ : Type (u + 1)} [CommRing Λ]
 variable {X : Scheme.{u}} {J : Type u} [SmallCategory J] [IsFiltered J]
   {D : J ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} {c : Cocone D}
 
 section Sections
-
-/-- A jointly surjective family of morphisms of étale `X`-schemes is a covering family for
-every étale sheaf of `Λ`-modules. -/
-lemma isSheafFor_ofArrows_moduleCat (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    {W : X.Etale} {κ : Type*} {U : κ → X.Etale} (g : ∀ a, U a ⟶ W)
-    (hg : ⋃ a, Set.range (g a).left = Set.univ) :
-    Presieve.IsSheafFor (F.obj ⋙ CategoryTheory.forget _) (Presieve.ofArrows U g) := by
-  have := (isSheaf_iff_isSheaf_of_type _ _).mp (Presheaf.isSheaf_comp_of_isSheaf _ F.obj
-    (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) F.property)
-  rw [Presieve.isSheafFor_iff_generate]
-  exact this _ ((ofArrows_mem_smallEtaleTopology_iff g).2 hg)
-
 
 omit [IsFiltered J] in
 /-- The legs of a cocone of sheaves of `Λ`-modules are compatible with the transition maps, on

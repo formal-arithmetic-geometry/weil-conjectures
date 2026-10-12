@@ -135,7 +135,14 @@ genus `g` over an algebraically closed field `k` and let `n ≥ 1` be prime to `
 
 `H⁰(C, ℤ/n) ≅ ℤ/n`, `H¹(C, ℤ/n) ≅ (ℤ/n)^{2g}`, `H²(C, ℤ/n) ≅ ℤ/n`, `H^q(C, ℤ/n) = 0` for
 `q > 2`.
-(blueprint: `thm-sc-proper-cohomology`, `sk-thm-curveestimate`) -/
+
+The proof is the one of the remark closing the curve estimates: degree zero is `μₙ(k) = ℤ/n`,
+degree one is `Pic(C)[n] = J(C)[n]`, degree two is `Pic(C)/n = ℤ/n` via the Kummer sequence and
+`H²(C, μₙ) ≅ Pic(C)/n` (blueprint `sk-prop-h2`), and the vanishing above two is the bound on the
+cohomological dimension (blueprint `sk-prop-cd`).
+(blueprint: `thm-sc-proper-cohomology`, `sk-thm-curveestimate`,
+`sk-the-final-theorem-the-curve-estimate--remark-1`,
+`the-final-theorem-the-curve-estimate--remark-1`) -/
 theorem IsConnectedCurve.sheafH_constantZMod_of_isProper (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 0 ≃+ ZMod n) ∧

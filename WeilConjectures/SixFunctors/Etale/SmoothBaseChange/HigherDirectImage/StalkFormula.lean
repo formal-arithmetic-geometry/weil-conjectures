@@ -81,7 +81,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- For an étale `t`, the identification `t^* G ≅ j_t^* G` of the pullback with the restriction
 along `T_ét ⥤ X_ét` sends the pullback `φ^* g` of a section `g` of `G` over `U` along
 `φ : V ⟶ U` to the restriction of `g` along `φ`, viewed as a morphism of étale `X`-schemes. -/
-lemma upperStarIsoLocalizationRestriction_hom_app_pullSection {V : T.Etale} {U : X.Etale}
+lemma upperStarIsoLocalizationRestriction_hom_app_pullSection_moduleCat {V : T.Etale} {U : X.Etale}
     (φ : V.left ⟶ U.left) (hφ : φ ≫ U.hom = V.hom ≫ t) (g : G.obj.obj (op U)) :
     ((Etale.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) t h).hom.app G).hom.app
         (op V) (ModuleSheaf.pullSection t G φ hφ g) =
@@ -108,7 +108,7 @@ include h in
 /-- **Sections of the pullback along an étale morphism.** For an étale `t : T ⟶ X`, an étale
 `T`-scheme `V`, an étale `X`-scheme `U` and an isomorphism `φ : V ⟶ U` over `X`, the pullback
 of sections `F(U) ⟶ (t^* F)(V)` is bijective. -/
-lemma bijective_pullSection_of_etale {V : T.Etale} {U : X.Etale} (φ : V.left ⟶ U.left)
+lemma bijective_pullSection_of_etale_moduleCat {V : T.Etale} {U : X.Etale} (φ : V.left ⟶ U.left)
     [IsIso φ] (hφ : φ ≫ U.hom = V.hom ≫ t) :
     Function.Bijective (ModuleSheaf.pullSection t G φ hφ) := by
   let ψ : (MorphismProperty.Over.map ⊤ h).obj V ⟶ U := MorphismProperty.Over.homMk φ hφ
@@ -124,7 +124,7 @@ lemma bijective_pullSection_of_etale {V : T.Etale} {U : X.Etale} (φ : V.left �
       ((Etale.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) t h).hom.app G))
   have h₃ : (((Etale.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) t h).hom.app
       G).hom.app (op V)) ∘ ModuleSheaf.pullSection t G φ hφ = G.obj.map ψ.op :=
-    funext fun g ↦ upperStarIsoLocalizationRestriction_hom_app_pullSection Λ t h G φ hφ g
+    funext fun g ↦ upperStarIsoLocalizationRestriction_hom_app_pullSection_moduleCat Λ t h G φ hφ g
   rw [← h₂.of_comp_iff', h₃]
   exact h₁
 
@@ -133,18 +133,6 @@ end EtalePullback
 section Restrict
 
 variable {X S : Scheme.{u}} (f : X ⟶ S)
-
-/-- The generating section of the free sheaf `Λ[V]` over `V`. -/
-noncomputable def freeSheafGenerator (V : S.Etale) : ((Etale.freeSheaf Λ S).obj V).obj.obj (op V) :=
-  Etale.freeSheafHomEquiv Λ V _ (𝟙 _)
-
-/-- The generator is natural: `Λ[a]` maps the generator of `Λ[V']` to the restriction of the
-generator of `Λ[V]` along `a : V' ⟶ V`. -/
-lemma freeSheaf_map_freeSheafGenerator {V V' : S.Etale} (a : V' ⟶ V) :
-    ((Etale.freeSheaf Λ S).map a).hom.app (op V') (freeSheafGenerator Λ V') =
-      ((Etale.freeSheaf Λ S).obj V).obj.map a.op (freeSheafGenerator Λ V) := by
-  rw [freeSheafGenerator, freeSheafGenerator, ← Etale.freeSheafHomEquiv_comp,
-    ← Etale.freeSheafHomEquiv_map, Category.id_comp, Category.comp_id]
 
 /-- The canonical global section of `t^* f^* Λ[V]` attached to a `T`-point `b` of `V` over `f`
 (with `t : T ⟶ X`): the generator of `Λ[V]`, pulled back along `f`, and then pulled back along
@@ -350,7 +338,7 @@ lemma bijective_cohomologyPresheafRestrict (V : S.Etale) :
       rw [hg]
       rfl
     rw [← (constSheafHomEquiv Λ _).bijective.of_comp_iff', e]
-    exact (bijective_pullSection_of_etale Λ t inferInstance B _ hψ).comp
+    exact (bijective_pullSection_of_etale_moduleCat Λ t inferInstance B _ hψ).comp
       ((Etale.freeSheafHomEquiv Λ V _).bijective.comp (Equiv.bijective _))
   exact (Functor.mapExtPrecomp_bijective _ _
     (fun I _ ↦ Etale.injective_upperStar_obj_of_etale Λ t I) hu F q).comp
@@ -449,7 +437,7 @@ lemma cohomologyPresheafRestrict_stalkPoint_map {V V' : S.Etale} (a : V ⟶ V')
 
 /-- The comparison map from the fibre at `s` of the cohomology presheaf `V ↦ Hᵠ(V ×_S X, F|)`
 to the cohomology `Hᵠ(S_(s) ×_S X, F|)`: restriction along the points `S_(s) ×_S X ⟶ V`. -/
-noncomputable def stalkComparison :
+noncomputable def higherDirectImageStalkComparison :
     ((Scheme.pointSmallEtale s).presheafFiber (A := AddCommGrpCat.{u + 1})).obj
       (Etale.higherDirectImagePresheaf Λ f q ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ⟶
       AddCommGrpCat.of (Ext (SemiSimplicialObject.constSheaf
@@ -465,7 +453,7 @@ noncomputable def stalkComparison :
 lemma toPresheafFiber_stalkComparison (V : S.Etale) (v : (Scheme.pointSmallEtale s).fiber.obj V)
     (p : (Etale.higherDirectImagePresheaf Λ f q
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).obj (op V)) :
-    stalkComparison Λ f s F q ((Scheme.pointSmallEtale s).toPresheafFiber V v
+    higherDirectImageStalkComparison Λ f s F q ((Scheme.pointSmallEtale s).toPresheafFiber V v
       (Etale.higherDirectImagePresheaf Λ f q ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) p) =
       cohomologyPresheafRestrict Λ f F q _ V (stalkPoint f s ⟨V, v⟩) (stalkPoint_w f s ⟨V, v⟩) p :=
   ConcreteCategory.congr_hom
@@ -492,7 +480,7 @@ theorem nonempty_geometricStalk_higherDirectImage_addEquiv {X S : Scheme.{u}} (f
     preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
   have : LocallySmall.{u} S.Etale := locallySmall_self _
   let P := Etale.higherDirectImagePresheaf Λ f q ((DerivedCategory.Plus.singleFunctor _ 0).obj F)
-  let Θ := stalkComparison Λ f s F q
+  let Θ := higherDirectImageStalkComparison Λ f s F q
   suffices hΘ : Function.Bijective Θ from
     ⟨(presheafFiberHigherDirectImagePresheafAddEquiv Λ f s (q : ℤ)
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).symm.trans

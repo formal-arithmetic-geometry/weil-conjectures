@@ -31,26 +31,27 @@ The argument follows [Stacks 0739]:
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.exists_app_eq_of_isColimit`: every section of a filtered colimit of
-  abelian étale sheaves over a qcqs étale `X`-scheme comes from some stage.
+- `AlgebraicGeometry.Scheme.exists_app_eq_of_isColimit_addCommGrpCat`: every section of a
+  filtered colimit of abelian étale sheaves over a qcqs étale `X`-scheme comes from some stage.
 - `AlgebraicGeometry.Scheme.exists_map_app_eq_zero_of_isColimit`: a section of some stage
   which vanishes in the colimit, over an étale `X`-scheme with quasi-compact underlying space,
   vanishes at a later stage.
 - `AlgebraicGeometry.Scheme.subsingleton_H_succ_of_isColimit_of_injective`: on a qcqs scheme, a
   filtered colimit of injective abelian sheaves has no higher cohomology.
-- `AlgebraicGeometry.Scheme.H_bijective_of_isColimit_of_isFiltered`: étale cohomology of a qcqs
-  scheme commutes with filtered colimits.
+- `AlgebraicGeometry.Scheme.H_map_bijective_of_isColimit_of_isFiltered`: étale cohomology of a
+  qcqs scheme commutes with filtered colimits; for essentially `(u + 1)`-small index categories
+  of any size, see `AlgebraicGeometry.Scheme.H_map_bijective_of_isColimit_of_essentiallySmall`.
 -/
 
 @[expose] public section
 
-universe u
+universe w w' u
 
 open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-variable {X : Scheme.{u}} {J : Type u} [SmallCategory J] [IsFiltered J]
+variable {X : Scheme.{u}} {J : Type (u + 1)} [Category.{u + 1} J] [IsFiltered J]
   {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
 
 section Sections
@@ -79,8 +80,6 @@ lemma exists_colimit_ι_app_eq (V : X.Etaleᵒᵖ)
     (t : (colimit (D ⋙ sheafToPresheaf _ _)).obj V) :
     ∃ (j : J) (x : (D.obj j).obj.obj V),
       (colimit.ι (D ⋙ sheafToPresheaf _ _) j).app V x = t := by
-  have := preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
-    (CategoryTheory.forget AddCommGrpCat.{u + 1})
   exact Concrete.isColimit_exists_rep _
     (isColimitOfPreserves ((CategoryTheory.evaluation _ _).obj V) (colimit.isColimit _)) t
 
@@ -90,8 +89,6 @@ objectwise colimit of the underlying presheaves vanishes at a later stage. -/
 lemma exists_map_app_eq_zero_of_colimit_ι_app_eq_zero (V : X.Etaleᵒᵖ) {j : J}
     (x : (D.obj j).obj.obj V) (hx : (colimit.ι (D ⋙ sheafToPresheaf _ _) j).app V x = 0) :
     ∃ (k : J) (φ : j ⟶ k), (D.map φ).hom.app V x = 0 := by
-  have := preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
-    (CategoryTheory.forget AddCommGrpCat.{u + 1})
   obtain ⟨k, φ, ψ, h⟩ := Concrete.isColimit_exists_of_rep_eq _
     (isColimitOfPreserves ((CategoryTheory.evaluation _ _).obj V)
       (colimit.isColimit (D ⋙ sheafToPresheaf _ _))) x 0 (by erw [hx, map_zero])
@@ -191,8 +188,8 @@ lemma exists_map_app_eq_zero_of_isColimit (hc : IsColimit c) {W : X.Etale}
 colimit of a filtered diagram `D` of abelian étale sheaves on `X`, and `W` an étale `X`-scheme
 with quasi-compact quasi-separated underlying scheme. Every section of `c.pt` over `W` comes
 from some `D_j`. -/
-lemma exists_app_eq_of_isColimit (hc : IsColimit c) {W : X.Etale} [CompactSpace W.left]
-    [QuasiSeparatedSpace W.left] (s : c.pt.obj.obj (op W)) :
+lemma exists_app_eq_of_isColimit_addCommGrpCat (hc : IsColimit c) {W : X.Etale}
+    [CompactSpace W.left] [QuasiSeparatedSpace W.left] (s : c.pt.obj.obj (op W)) :
     ∃ (j : J) (x : (D.obj j).obj.obj (op W)), (c.ι.app j).hom.app (op W) x = s := by
   classical
   obtain ⟨R, hR, hloc⟩ := exists_mem_forall_exists_of_isColimit hc s
@@ -257,7 +254,7 @@ lemma exactAt_cechComplex_of_isColimit_of_injective [∀ j, Injective (D.obj j)]
   choose j w hw using fun y : Fin (q + 2) → Fin n ↦
     have := (hU (q + 1) y).1
     have := (hU (q + 1) y).2
-    exists_app_eq_of_isColimit hc (W := (cechNerveObj U y).left) (z y)
+    exists_app_eq_of_isColimit_addCommGrpCat hc (W := (cechNerveObj U y).left) (z y)
   obtain ⟨k, hk⟩ := IsFiltered.exists_forall_nonempty_hom j
   let w' : ((cechComplex U).obj (D.obj k).obj).X (q + 1) := fun y ↦
     (D.map (hk y).some).hom.app _ (w y)
@@ -329,7 +326,8 @@ lemma commutesWithColimit_zero [CompactSpace X] [QuasiSeparatedSpace X] (hc : Is
   have : CompactSpace T.left := ‹CompactSpace X›
   have : QuasiSeparatedSpace T.left := ‹QuasiSeparatedSpace X›
   refine ⟨fun x ↦ ?_, fun j y hy ↦ ?_⟩
-  · obtain ⟨j, y, hy⟩ := exists_app_eq_of_isColimit hc (Sheaf.H.equiv₀ c.pt hT x)
+  · obtain ⟨j, y, hy⟩ :=
+      exists_app_eq_of_isColimit_addCommGrpCat hc (Sheaf.H.equiv₀ c.pt hT x)
     refine ⟨j, (Sheaf.H.equiv₀ _ hT).symm y, (Sheaf.H.equiv₀ c.pt hT).injective ?_⟩
     refine (Sheaf.H.equiv₀_naturality hT (c.ι.app j) _).symm.trans ?_
     rw [AddEquiv.apply_symm_apply, hy]
@@ -359,5 +357,35 @@ theorem H_map_bijective_of_isColimit_of_isFiltered [CompactSpace X] [QuasiSepara
   exact Abelian.Ext.commutesWithColimit_of_isFiltered _
     (fun _ _ hc ↦ commutesWithColimit_zero hc)
     (fun _ _ hc _ q x ↦ (subsingleton_H_succ_of_isColimit_of_injective X hc q).elim _ _) q D c hc
+
+variable (X) in
+/-- **Étale cohomology commutes with essentially small filtered colimits on a qcqs scheme.**
+The version of `AlgebraicGeometry.Scheme.H_map_bijective_of_isColimit_of_isFiltered` for a
+filtered index category `K` of any size which is essentially `(u + 1)`-small, for instance a
+`u`-small category or a preorder in `Type (u + 1)`.
+(blueprint: `lem-weil-pbc-cohomology-filtered-colimit`) -/
+@[stacks 03Q6]
+theorem H_map_bijective_of_isColimit_of_essentiallySmall [CompactSpace X] [QuasiSeparatedSpace X]
+    {K : Type w} [Category.{w'} K] [IsFiltered K] [EssentiallySmall.{u + 1} K]
+    {E : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {d : Cocone E} (hd : IsColimit d)
+    (q : ℕ) :
+    (∀ x : Sheaf.H d.pt q, ∃ (k : K) (y : Sheaf.H (E.obj k) q),
+      Sheaf.H.map (d.ι.app k) q y = x) ∧
+    ∀ (k : K) (y : Sheaf.H (E.obj k) q), Sheaf.H.map (d.ι.app k) q y = 0 →
+      ∃ (k' : K) (φ : k ⟶ k'), Sheaf.H.map (E.map φ) q y = 0 := by
+  let e := equivSmallModel.{u + 1} K
+  have : IsFiltered (SmallModel.{u + 1} K) := IsFiltered.of_equivalence e
+  have h := H_map_bijective_of_isColimit_of_isFiltered X
+    ((IsColimit.whiskerEquivalenceEquiv e.symm).1 hd) q
+  refine ⟨fun x ↦ ?_, fun k y hy ↦ ?_⟩
+  · obtain ⟨j, y, hy⟩ := h.1 x
+    exact ⟨_, y, hy⟩
+  · obtain ⟨j, φ, hφ⟩ := h.2 (e.functor.obj k) (Sheaf.H.map (E.map (e.unit.app k)) q y) (by
+      change Sheaf.H.map (d.ι.app _) q (Sheaf.H.map (E.map (e.unit.app k)) q y) = 0
+      rw [← Sheaf.H.map_comp_apply, d.w]
+      exact hy)
+    refine ⟨_, e.unit.app k ≫ e.inverse.map φ, ?_⟩
+    rw [E.map_comp, Sheaf.H.map_comp_apply]
+    exact hφ
 
 end AlgebraicGeometry.Scheme

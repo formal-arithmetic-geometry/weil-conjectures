@@ -58,19 +58,6 @@ section Comparison
 
 variable {X S : Scheme.{u}} (f : X ⟶ S)
 
-/-- The canonical section of the free sheaf `Λ[V]` over `V`, corresponding to `𝟙 Λ[V]`. -/
-noncomputable def Etale.freeSheafGenerator {T : Scheme.{u}} (V : T.Etale) :
-    ((Etale.freeSheaf Λ T).obj V).obj.obj (op V) :=
-  Etale.freeSheafHomEquiv Λ V _ (𝟙 _)
-
-/-- The free sheaf generator is natural: its restriction along `a : V' ⟶ V` is the image of the
-generator of `Λ[V']` under `Λ[a]`. -/
-lemma Etale.freeSheaf_map_freeSheafGenerator {T : Scheme.{u}} {V V' : T.Etale} (a : V' ⟶ V) :
-    ((Etale.freeSheaf Λ T).map a).hom.app (op V') (Etale.freeSheafGenerator Λ V') =
-      ((Etale.freeSheaf Λ T).obj V).obj.map a.op (Etale.freeSheafGenerator Λ V) := by
-  rw [Etale.freeSheafGenerator, Etale.freeSheafGenerator, ← Etale.freeSheafHomEquiv_comp,
-    ← Etale.freeSheafHomEquiv_map, Category.id_comp, Category.comp_id]
-
 variable {Z : CategoryTheory.Over S}
 
 /-- The étale `X`-scheme `X ×_S V`, for an étale `S`-scheme `V`. -/

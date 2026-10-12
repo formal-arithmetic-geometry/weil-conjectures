@@ -227,7 +227,9 @@ theorem subsingleton_H_of_genericVanishing
           (U.1.isOpen.isClosed_singleton_of_mem_compl hdim hne hx)
         infer_instance) _ hz' i
   refine subsingleton_of_forall_eq 0 fun x ↦ ?_
-  obtain ⟨U, y, rfl⟩ := ((Scheme.H_map_isColimit_of_isFiltered C hcG (i + 1)).1 x)
+  have := essentiallySmallSelf.{u + 1} C.NonemptyAffineOpensᵒᵖ
+  obtain ⟨U, y, rfl⟩ :=
+    (Scheme.H_map_bijective_of_isColimit_of_essentiallySmall C hcG (i + 1)).1 x
   have := hK U.unop
   rw [Subsingleton.elim y 0, map_zero]
 
