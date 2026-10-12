@@ -25,39 +25,27 @@
  ],
  "proof": [
   {
-   "text": "Because $E/L$ is finite separable, $\\pi:\\operatorname{Spec}E\\to\\operatorname{Spec}L$ is etale by [lem-weil-pbc-finite-separable-extension-etale]. It is surjective because both spectra have one point, hence $\\{\\pi\\}$ is a covering in the small etale site of $\\operatorname{Spec}L$ [def-weil-pbc-etale-sheaf-of-sets]. Its self-intersection $W=\\operatorname{Spec}E\\times_{\\operatorname{Spec}L}\\operatorname{Spec}E$ is described by [lem-exc-finite-galois-tensor-decomposition]: (1) $E\\otimes_LE\\cong\\prod_{q\\in Q}E$, and (2) there is a bijection $\\beta:F(W)\\to\\prod_{q\\in Q}F(\\operatorname{Spec}E)$ carrying restriction along the first projection $p_1$ to $s\\mapsto(s)_q$ and restriction along the second projection $p_2$ to $s\\mapsto((\\operatorname{Spec}q)^*s)_q$.",
+   "text": "The finite separable extension is etale by [lem-weil-pbc-finite-separable-extension-etale]. Its spectrum map is a singleton cover because both field spectra have one point. The sheaf condition [def-weil-pbc-etale-sheaf-of-sets], via Mathlib Presieve.isSheafFor_singleton and isSeparatedFor_singleton, supplies unique descent of compatible sections and injectivity.",
    "uses": [
     "lem-weil-pbc-finite-separable-extension-etale",
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-exc-finite-galois-tensor-decomposition"
+    "def-weil-pbc-etale-sheaf-of-sets"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 03SF, finite etale objects under a finite Galois extension"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the sheaf equalizer condition in [def-weil-pbc-etale-sheaf-of-sets] to the one-member covering $\\{\\pi\\}$ of step 1. It identifies $F(\\operatorname{Spec}L)$, via $s\\mapsto s|_\\pi$, with the equalizer of $s\\mapsto s|_{p_1}$ and $s\\mapsto s|_{p_2}$ from $F(\\operatorname{Spec}E)$ to $F(W)$. Since $\\beta$ of [lem-exc-finite-galois-tensor-decomposition] (2) is a bijection, $s|_{p_1}=s|_{p_2}$ iff $\\beta(s|_{p_1})=\\beta(s|_{p_2})$, i.e. iff $(\\operatorname{Spec}q)^*s=s$ for every $q\\in Q$. The automorphisms of $\\operatorname{Spec}E$ over $\\operatorname{Spec}L$ are exactly the $\\operatorname{Spec}q$, $q\\in Q$ (morphisms of affine schemes over $\\operatorname{Spec}L$ correspond to $L$-algebra maps [def-weil-affine-spectrum]), so the equalizer is exactly the set of $Q$-invariant sections.",
+   "text": "Functoriality of pullback and the fact that every L-algebra automorphism fixes the structure map show that pullback of every downstairs section is invariant. The maps are the affine spectrum maps [def-weil-affine-spectrum], composed by etaleSpecMap_comp.",
    "uses": [
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-exc-finite-galois-tensor-decomposition",
     "def-weil-affine-spectrum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JM, Lemma lemma-global-sections-point, finite Galois descent argument"
-   }
+   "elementary": true
   },
   {
-   "text": "The equalizer inclusion is the pullback map along $\\operatorname{Spec}E\\to\\operatorname{Spec}L$, so it is injective, and step 2 shows that every $Q$-invariant section is its pullback. Therefore pullback identifies $F(\\operatorname{Spec}L)$ bijectively with the $Q$-invariant subset of $F(\\operatorname{Spec}E)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JM, Lemma lemma-global-sections-point, conclusion of the finite Galois descent argument"
-   }
+   "text": "Use the section bijection and projection formulas of [lem-exc-finite-galois-tensor-decomposition]. For an invariant section s these formulas show beta(p1* s)=beta(p2* s), hence p1* s=p2* s by injectivity of beta. Any pair of maps from an etale object Z to Spec E over Spec L factors through the scheme self-pullback, and so the two restrictions of s to Z coincide. Apply singleton-cover unique gluing to descend s. Combine invariance, injectivity and descent into Set.BijOn.",
+   "uses": [
+    "lem-exc-finite-galois-tensor-decomposition",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -69,7 +57,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04JM, Lemma lemma-global-sections-point, finite Galois descent argument"
+  "place": "Tag 04JM, direct finite Galois descent argument; Lean singleton-cover gluing and tensor-decomposition reduction checked by T4 second reader"
  },
  "mathlib_searches": [
   {
@@ -150,5 +138,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261012T232906-L-2043917",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
