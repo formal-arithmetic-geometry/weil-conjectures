@@ -16,46 +16,45 @@
  ],
  "proof": [
   {
-   "text": "Forget modules in the supplied colimit cocone; the forgetful functor preserves colimits.",
+   "text": "Apply module inverse image to the supplied colimit cocone: upperStarLowerStarAdjunction makes this inverse image a left adjoint, so [lem-weil-pbc-left-adjoint-preserves-colimits] proves its image is colimiting. Apply [lem-weil-pbc-constant-module-sheaves-forget-colimits] on X₀ to obtain a colimit cocone c of underlying abelian restrictions. This order avoids any compatibility comparison between module and abelian inverse images.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-constant-module-sheaves-forget-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "Apply abelian inverse image, which preserves colimits. The natural compatibility with module inverse image identifies the resulting cocone, including each leg, with the underlying abelian restrictions of ι_a.",
+   "text": "Use [lem-weil-pbc-filtered-category-exists-directed-final] (Mathlib IsFiltered.exists_directed) to choose a nonempty directed partial order I of universe u+1 and a final functor T:I→A. Mathlib Functor.Final.isColimitWhiskerEquiv T c transports the colimit property of c to c.whisker T.",
    "uses": [
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose a final directed reindexing by [lem-weil-pbc-filtered-category-exists-directed-final], realized by Mathlib IsFiltered.exists_directed; clause (1) of [lem-weil-pbc-filtered-category-directed-cofinal] describes the reindexed colimit cocone. Retain universe u+1. The proof of [lem-weil-pbc-cohomology-filtered-colimit] works at that size: finite qcqs covers make sections commute with filtered colimits, giving degree zero. Embed the diagram functorially into injectives and take its cokernel diagram. Filtered colimits are exact. The finite-cover Cech complex of the colimit of injectives is the filtered colimit of their exact augmented Cech complexes. The Cech vanishing criterion makes this colimit acyclic on every qcqs object. Comparing the two long exact sequences gives degree one as a cokernel of sections, and each higher degree by dimension shifting to the preceding degree of the cokernel diagram; induction applies simultaneously to all diagrams. Only finite upper bounds are used, not a bound of u on the index. For the final functor F, clause (1) of [lem-weil-pbc-initial-functor-cofiltered-criterion], applied to F.op, identifies the canonical colimits; Mathlib Functor.Final.isColimitWhiskerEquiv reflects colimithood of the directed image cocone to A. The natural [lem-weil-pbc-sheafH-ext-derived-comparison] identifies the functor and every leg with Sheaf.functorH and Sheaf.H.map. No element representative is selected.",
-   "uses": [
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "lem-weil-pbc-sheafH-ext-derived-comparison",
-    "lem-weil-pbc-filtered-category-directed-cofinal",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion",
     "lem-weil-pbc-filtered-category-exists-directed-final"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-directed-cohomology-colimit] to this directed abelian cocone, giving the colimit property after derived cohomology. Use the natural isomorphism of [lem-weil-pbc-sheafH-ext-derived-comparison] and Mathlib IsColimit.mapCoconeEquiv to transfer it to Sheaf.functorH.",
+   "uses": [
+    "lem-weil-pbc-etale-directed-cohomology-colimit",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image under Sheaf.functorH of c.whisker T is definitionally the whiskering by T of the image of c. Mathlib Functor.Final.isColimitWhiskerEquiv T (E.mapCocone c) reflects its colimit property to the original A-cocone. The iterated mapCocone is definitionally the cocone in the goal, including every leg.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-inverse-image-preserves-colimits",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lem-weil-pbc-sheafH-ext-derived-comparison",
-  "lem-weil-pbc-filtered-category-directed-cofinal",
-  "lem-weil-pbc-initial-functor-cofiltered-criterion",
-  "lem-weil-pbc-filtered-category-exists-directed-final"
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-constant-module-sheaves-forget-colimits",
+  "lem-weil-pbc-filtered-category-exists-directed-final",
+  "lem-weil-pbc-etale-directed-cohomology-colimit",
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q5 with Tags 03CO and 03D6; second reader G1 isolates the canonical comparison (steps 1–3), not the element-surjectivity conclusion."
+  "place": "Tag 03Q5 (lemma-colimit); U1 formal reduction: restrict modules first, forget coefficients using a proved left-adjoint argument, directed final reindexing, derived comparison, and final reflection."
  },
  "mathlib_searches": [
   {
@@ -141,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-ed24f",
-  "group": "G1",
+  "reviewer": "COMPILER",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T014629-L-887723",
+  "landing": "20261012T030757-L-1309776",
   "kind": "interface",
-  "note": "independent Codex review: Matched both Lean signatures with their nodes, the representative proof with Mathlib, and the repaired comparison argument with its sources; both modules compile cleanly and axiom checks match the declared remaining sorry."
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

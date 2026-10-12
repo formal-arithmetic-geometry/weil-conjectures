@@ -1,0 +1,240 @@
+{
+ "id": "lem-weil-pbc-etale-directed-cohomology-colimit",
+ "kind": "statement",
+ "title": "Directed etale cohomology colimits at coefficient size",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme of universe $u$ [def-weil-pbc-scheme-conventions]. Let $I$ be a nonempty directed partial order of universe $u+1$, considered as a category with an arrow $i\\to j$ when $i\\le j$. Let $D:I\\to\\mathrm{Sheaf}(X_{\\mathrm{et}},\\mathrm{Ab})$ be a diagram of abelian sheaves whose section groups lie in universe $u+1$ [def-weil-pbc-abelian-etale-sheaves], and $c$ a colimit cocone [def-weil-pbc-category-colimit]. For each $q\\ge0$, the functor $F\\mapsto H^q(R\\Gamma(X,F[0]))$ [def-weil-pbc-etale-cohomology] maps $c$ to a colimit cocone of abelian groups, with precisely the images of its original coprojections as legs. There is no torsion assumption.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q5 (lemma-colimit), direct proof, with sites-cohomology.tex Tag 0739 (lemma-colim-works-over-collection), proof. Directed indices have universe u+1, the coefficient size; only finite upper bounds enter the proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Let X be a qcqs scheme of universe u, and I a nonempty directed partial order of universe u+1. Let D be an I-diagram of abelian sheaves with groups in universe u+1. *Notation; the derived functors over an object.* Put $\\mathcal A=\\Ab(Y_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. It is a Grothendieck abelian category [lem-weil-pbc-abelian-etale-sheaves-grothendieck], so it has functorial injective embeddings $j:\\mathrm{id}\\to J$ [lem-weil-pbc-grothendieck-functorial-injective-embedding]; in particular it has enough injectives. For an object $U$ of $Y_{\\Et}$ the functor $\\mathcal A\\to\\mathrm{Ab}$, $G\\mapsto G(U)$, is additive and left exact (kernels in $\\mathcal A$ are computed sectionwise), and $H^p(U,-)$ denotes its $p$-th right derived functor computed by injective resolutions [def-sp-left-exact-additive]. For a filtered diagram $i\\mapsto\\mathcal F_i$, $\\mathcal I\\to\\mathcal A$ ($\\mathcal I$ a small filtered category), with colimit $(\\varinjlim_i\\mathcal F_i,(c_i)_i)$ in $\\mathcal A$ [def-weil-pbc-category-colimit], the *canonical map* $\\kappa^p_U:\\varinjlim_iH^p(U,\\mathcal F_i)\\to H^p(U,\\varinjlim_i\\mathcal F_i)$ is the unique homomorphism whose composite with the coprojection of $H^p(U,\\mathcal F_i)$ is $H^p(U,c_i)$ (the $H^p(U,c_i)$ form a cocone because $H^p(U,-)$ is a functor).",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "def-sp-left-exact-additive",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section Tag 0737 (label section-limits), first paragraph: the canonical map; Cohomology on Sites, Lemma Tag 0739 (label lemma-colim-works-over-collection) and its proof, second paragraph (functorial injective embeddings, Injectives Theorem Tag 01DP)"
+   }
+  },
+  {
+   "text": "*The set $\\mathcal B$ and the coverings $\\mathrm{Cov}$.* Let $\\mathcal B$ be the set of objects $U\\to X$ of $Y_{\\Et}$ [def-weil-pbc-etale-site] whose scheme $U$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], and $\\mathrm{Cov}$ the set of coverings $\\{U_t\\to U\\}_{t\\in T}$ of $Y_{\\Et}$ with $T$ finite and $U,U_t\\in\\mathcal B$. (a) $X\\in\\mathcal B$: $\\mathrm{id}_Y$ is an open immersion, hence etale [lem-weil-pbc-etale-composition-cancellation] (1), and $X$ is quasi-compact and quasi-separated by hypothesis. (b) For $\\{U_t\\to U\\}_{t\\in T}\\in\\mathrm{Cov}$ every $U_{t_0}\\times_U\\cdots\\times_UU_{t_p}$ ($p\\ge0$) lies in $\\mathcal B$. These fibre products in $Y_{\\Et}$ are the scheme-theoretic ones [def-weil-pbc-etale-site]. Induction on $p$, the case $p=0$ being $U_{t_0}\\in\\mathcal B$. For $p\\ge1$ put $W=U_{t_0}\\times_U\\cdots\\times_UU_{t_{p-1}}\\in\\mathcal B$. The morphism $U_{t_p}\\to U$ is quasi-compact ($U_{t_p}$ quasi-compact, $U$ quasi-separated) and quasi-separated ($U_{t_p}$ quasi-separated) by [lem-weil-pbc-qcqs-morphism-permanence] (1). So its base change $W\\times_UU_{t_p}\\to W$ is quasi-compact and quasi-separated by (3) of the same node. As $W$ is quasi-compact and quasi-separated, so is $W\\times_UU_{t_p}$, by (2). (c) For $U\\in\\mathcal B$ the coverings of $U$ in $\\mathrm{Cov}$ are cofinal among all coverings of $U$ in $Y_{\\Et}$. Let $\\{T_a\\to U\\}_{a\\in A}$ be a covering (jointly surjective, the $T_a\\to U$ etale by [lem-weil-pbc-etale-composition-cancellation] (3)). By [lem-weil-pbc-etale-qcqs-cofinal-finite-coverings] there are a finite set $B$, affine schemes $V_b$ and etale maps $V_b\\to U$ factoring through $T_{a(b)}\\to U$, jointly surjective. Each $V_b\\to U\\to X$ is etale (composite of etale morphisms, [lem-weil-pbc-etale-composition-cancellation] (2)), so $V_b$ is an object of $Y_{\\Et}$. $V_b$ is affine, hence quasi-compact and quasi-separated [lem-weil-pbc-affine-scheme-qcqs], so $V_b\\in\\mathcal B$. Hence $\\{V_b\\to U\\}_{b\\in B}\\in\\mathrm{Cov}$, and it refines $\\{T_a\\to U\\}$. Thus $(\\mathcal B,\\mathrm{Cov})$ satisfies hypotheses (1) and (2) of Stacks 0739 (and of [lem-weil-pbc-cech-vanishing-criterion]), with all coverings in $\\mathrm{Cov}$ finite.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Cohomology of Spaces, Lemma Tag 073E (label lemma-colimits), proof: the choice of $\\mathcal B$ as the quasi-compact quasi-separated objects, cofinality of finite coverings, and the qcqs permanence (there Morphisms of Spaces 03KS; for schemes Schemes 03GI, 01KV, 01K5, 01KU)"
+   }
+  },
+  {
+   "text": "*Degree $0$.* For $U\\in\\mathcal B$ and every filtered diagram $(\\mathcal F_i)$ in $\\mathcal A$, the canonical map $\\varinjlim_i\\mathcal F_i(U)\\to(\\varinjlim_i\\mathcal F_i)(U)$ is bijective. This is [lem-weil-pbc-etale-qcqs-sections-filtered-colimit] with $\\Lambda=\\mathbf Z$: a sheaf of $\\mathbf Z_Y$-modules is the same as an abelian sheaf, and $\\Mod(Y_{\\Et},\\mathbf Z)=\\mathcal A$ with the same colimits. Composing with the natural isomorphism $R^0v\\cong v$ for the left exact functor $v=(-)(U)$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (2), $\\kappa^0_U$ is an isomorphism for all $U\\in\\mathcal B$ and all filtered diagrams.",
+   "uses": [
+    "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma Tag 0739 (label lemma-colim-works-over-collection) and its proof, first paragraph (the case $p=0$ via Sites, Lemma Tag 0738 (4))"
+   }
+  },
+  {
+   "text": "*The injective diagram and its colimit.* Let $(\\mathcal F_i)_{i\\in\\mathcal I}$ be a filtered diagram in $\\mathcal A$. Put $\\mathcal I_i=J(\\mathcal F_i)$ and $\\mathcal Q_i=\\operatorname{Coker}(j_{\\mathcal F_i})$, with the maps induced by functoriality. By [lem-weil-pbc-grothendieck-functorial-injective-embedding] the $j_{\\mathcal F_i}$ form a morphism of diagrams $(\\mathcal F_i)\\to(\\mathcal I_i)$. Each $j_{\\mathcal F_i}$ is a monomorphism and each $\\mathcal I_i$ is injective. Cokernels are functorial, so $(\\mathcal Q_i)$ is a filtered diagram and $0\\to\\mathcal F_i\\to\\mathcal I_i\\to\\mathcal Q_i\\to0$ is a diagram of short exact sequences. Filtered colimits in $\\mathcal A$ exist and are exact [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact], so $0\\to\\varinjlim\\mathcal F_i\\to\\varinjlim\\mathcal I_i\\to\\varinjlim\\mathcal Q_i\\to0$ is short exact. The coprojections form a morphism of short exact sequences from each $0\\to\\mathcal F_i\\to\\mathcal I_i\\to\\mathcal Q_i\\to0$ to it.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma Tag 0739 (label lemma-colim-works-over-collection) and its proof, second paragraph"
+   }
+  },
+  {
+   "text": "*Claim: $H^q(U,\\varinjlim_i\\mathcal I_i)=0$ for all $U\\in\\mathcal B$ and $q\\ge1$.* Put $\\mathcal G=\\varinjlim_i\\mathcal I_i$. We check hypothesis (3) of [lem-weil-pbc-cech-vanishing-criterion] for $(\\mathcal B,\\mathrm{Cov})$; (1) and (2) hold by step 2. Let $\\mathcal U=\\{U_t\\to U\\}_{t\\in T}\\in\\mathrm{Cov}$. In degree $p$ the Cech complex [def-weil-pbc-cech-complex] is $\\check{\\mathcal C}^p(\\mathcal U,\\mathcal G)=\\prod_{(t_0,\\ldots,t_p)\\in T^{p+1}}\\mathcal G(U_{t_0}\\times_U\\cdots\\times_UU_{t_p})$, a finite product since $T$ is finite. Each fibre product lies in $\\mathcal B$ (step 2 (b)), so by step 3 each factor is $\\varinjlim_i\\mathcal I_i(U_{t_0\\cdots t_p})$, compatibly with restriction maps. A finite product of abelian groups is a finite direct sum, and colimits commute with direct sums. Hence $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)=\\varinjlim_i\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I_i)$ as complexes, the differentials being alternating sums of restriction maps. Each $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I_i)$ is exact in degrees $\\ge1$, since $\\mathcal I_i$ is injective in $\\mathcal A$ [lem-weil-pbc-injective-sheaf-cech-acyclic]. A filtered colimit of complexes of abelian groups exact at a degree is exact there [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. So $\\check H^p(\\mathcal U,\\mathcal G)=0$ for $p>0$. Then [lem-weil-pbc-cech-vanishing-criterion] gives $H^q(U,\\mathcal G)=0$ for $q>0$ and all $U\\in\\mathcal B$.",
+   "uses": [
+    "lem-weil-pbc-cech-vanishing-criterion",
+    "def-weil-pbc-cech-complex",
+    "lem-weil-pbc-injective-sheaf-cech-acyclic",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma Tag 0739 (label lemma-colim-works-over-collection) and its proof, last paragraph (the claim, via Lemma Tag 03F9 (lemma-cech-vanish-collection) and Lemma Tag 03AW (lemma-injective-trivial-cech))"
+   }
+  },
+  {
+   "text": "*Induction on $p$: $\\kappa^p_U$ is an isomorphism for all $p\\ge0$, all $U\\in\\mathcal B$ and all filtered diagrams.* The case $p=0$ is step 3. Assume it for $p$ (all $U\\in\\mathcal B$, all filtered diagrams), fix $U\\in\\mathcal B$ and $(\\mathcal F_i)$, and use steps 4 and 5. The derived functors $H^n(U,-)$ form a $\\delta$-functor whose long exact sequences have connecting maps $\\delta_S$ natural in the short exact sequence $S$ [lem-weil-pbc-horseshoe-delta-functor] (1), (2) (the exactness is also [lem-weil-pbc-derived-functor-long-exact]). Also $H^n(U,\\mathcal I_i)=0$ for $n>0$ [lem-weil-pbc-derived-functor-injective-vanishing]. This gives, for each $i$, an exact sequence $H^p(U,\\mathcal I_i)\\to H^p(U,\\mathcal Q_i)\\to H^{p+1}(U,\\mathcal F_i)\\to0$. These sequences are compatible with the transition maps by naturality of $\\delta$. Their filtered colimit $\\varinjlim H^p(U,\\mathcal I_i)\\to\\varinjlim H^p(U,\\mathcal Q_i)\\to\\varinjlim H^{p+1}(U,\\mathcal F_i)\\to0$ is exact [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. For the colimit sequence of step 4 one gets the exact sequence $H^p(U,\\varinjlim\\mathcal I_i)\\to H^p(U,\\varinjlim\\mathcal Q_i)\\to H^{p+1}(U,\\varinjlim\\mathcal F_i)\\to H^{p+1}(U,\\varinjlim\\mathcal I_i)=0$, the last group being $0$ by step 5. The vertical maps $\\kappa^p_U$ (for $(\\mathcal I_i)$ and $(\\mathcal Q_i)$) and $\\kappa^{p+1}_U$ (for $(\\mathcal F_i)$) make the two rows commute. To see this, check on each coprojection from $H^\\ast(U,-_i)$. There the first square is functoriality of $H^p(U,-)$. The second square is the naturality of $\\delta^p$ for the morphism of short exact sequences given by the coprojections (step 4) [lem-weil-pbc-horseshoe-delta-functor] (1). By the induction hypothesis the first two vertical maps are isomorphisms. A diagram chase (the five lemma with zeros on the right) then shows that the third map $\\kappa^{p+1}_U$ is an isomorphism [lem-weil-pbc-five-lemma]. Explicitly, surjectivity: lift a class through $H^p(U,\\varinjlim\\mathcal Q_i)$. Injectivity: a class mapping to $0$ comes from $\\varinjlim H^p(U,\\mathcal Q_i)$; its image in $H^p(U,\\varinjlim\\mathcal Q_i)$ comes from $H^p(U,\\varinjlim\\mathcal I_i)$, hence from $\\varinjlim H^p(U,\\mathcal I_i)$.",
+   "uses": [
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma Tag 0739 (label lemma-colim-works-over-collection) and its proof, second paragraph (the commutative diagram and the snake lemma)"
+   }
+  },
+  {
+   "text": "*Identification with the cohomology of the statement.* Take $U=X\\in\\mathcal B$ (step 2 (a)). $X$ is the final object of $Y_{\\Et}$, so $G\\mapsto G(X)$ is the global sections functor $\\Gamma(X,-)$ on $\\mathcal A$. By [def-weil-pbc-etale-cohomology], $H^q(Y_{\\Et},F)=\\mathcal H^q(\\Gamma(X,I^\\bullet))$ for a K-injective resolution $F\\to I^\\bullet$ [def-weil-pbc-kinjective-resolutions], independent of the choice [prop-weil-pbc-cohomology-resolution-independent]. This is $\\mathcal H^q(R\\Gamma(X,F[0]))$. A morphism $\\varphi$ induces $H^q(\\varphi)$ through a lift to the resolutions [lem-weil-pbc-cohomology-pullback-functorial]. By [lem-sp-derived-functor-single-identification] (with $v=\\Gamma(X,-)$, $\\mathcal A$ Grothendieck abelian) there is an isomorphism $\\theta^q_F:H^q(Y_{\\Et},F)\\xrightarrow{\\sim}H^q(X,F)=R^q\\Gamma(X,F)$. It is natural in $F$, both sides being functorial through lifts of $\\varphi$ to resolutions, unique up to homotopy. By naturality, $\\theta^q$ carries the maps $H^q(Y_{\\Et},c_a)$ to $H^q(X,c_a)$. So it carries the canonical map $\\varinjlim_aH^q(Y_{\\Et},F_a)\\to H^q(Y_{\\Et},\\varinjlim_aF_a)$ of the statement (induced by the $H^q(c_a)$) to $\\kappa^q_Y$, up to the isomorphisms $\\varinjlim_a\\theta^q_{F_a}$ and $\\theta^q_{\\varinjlim F_a}$. By step 6 it is bijective for every $q\\ge0$. No torsion hypothesis was used. All constructions use filtered colimits in abelian groups and sheaves at universe u+1, and only finite upper bounds in I; no shrinking of I to universe u is needed. The resulting comparison sends each coprojection to its derived cohomology map, so it proves the IsColimit assertion for the supplied cocone.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-kinjective-resolutions",
+    "prop-weil-pbc-cohomology-resolution-independent",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Cohomology of Spaces, Lemma Tag 073E (label lemma-colimits), proof, last sentence ('Since $X\\in\\mathcal B$ we win'); the identification of $H^q(Y_{\\Et},-)$ with the derived functors of $\\Gamma(Y,-)$ is not in the source and is written out here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-cech-vanishing-criterion",
+  "def-weil-pbc-cech-complex",
+  "lem-weil-pbc-injective-sheaf-cech-acyclic",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-five-lemma",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-kinjective-resolutions",
+  "prop-weil-pbc-cohomology-resolution-independent",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-sp-derived-functor-single-identification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q5 (lemma-colimit), direct proof, with sites-cohomology.tex Tag 0739 (lemma-colim-works-over-collection), proof. Directed indices have universe u+1, the coefficient size; only finite upper bounds enter the proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of abelian sheaves preserves filtered colimits on a quasi compact quasi separated scheme",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived global sections of etale abelian sheaves commute with directed colimits on qcqs schemes",
+   "date": "2026-10-12",
+   "results": "8 hits: AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "verdict": "No exact coefficient-size directed cohomology preservation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "functorH|rightDerived.*[Cc]olimit|[Cc]olimit.*rightDerived",
+   "date": "2026-10-12",
+   "results": "9 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean, Mathlib/CategoryTheory/Sites/IsSheafFor.lean",
+   "sub": "CategoryTheory/Sites",
+   "verdict": "No exact coefficient-size directed cohomology preservation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedCohomologyColimit",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Original proof Steps 2–3: canonical comparison for the restricted constructible presentation; Directed etale cohomology colimits at coefficient size.",
+   "via": [
+    "lem-weil-pbc-restricted-cohomology-colimit",
+    "lem-weil-pbc-constructible-restriction-class-core",
+    "lem-weil-pbc-constructible-restriction-class"
+   ]
+  },
+  "same_as": [
+   "lem-weil-pbc-cohomology-filtered-colimit"
+  ]
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDirectedCohomologyColimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleCohomology_isColimit_of_isDirected",
+  "statement": "theorem etaleCohomology_isColimit_of_isDirected (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] {I : Type (u + 1)} [PartialOrder I] [IsDirected I (· ≤ ·)] [Nonempty I] {D : I ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D} (hc : IsColimit c) (q : ℕ) : Nonempty (IsColimit ((DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙ Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ)).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12",
+  "note": "Same mathematics as the abelian clause of lem-weil-pbc-cohomology-filtered-colimit, restricted to directed orders but with an index of universe u+1. Its current Lean theorem fixes the index to universe u and cannot be applied here. No module inverse image or module coefficients occur in this auxiliary statement."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T030757-L-1309776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T030757-L-1309776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-constant-module-sheaves-forget-colimits",
+ "kind": "statement",
+ "title": "Constant-module sheaves forget coefficients preserving colimits",
+ "statement": "Let $X$ be a scheme in universe $u$ [def-weil-pbc-scheme-conventions], and let $\\Lambda$ be a commutative ring with underlying type in universe $u+1$. Let $V:\\mathrm{Sheaf}(X_{\\mathrm{et}},\\mathrm{Mod}_\\Lambda)\\to\\mathrm{Sheaf}(X_{\\mathrm{et}},\\mathrm{Ab})$ [def-weil-pbc-etale-sheaves], [def-weil-pbc-abelian-etale-sheaves] send a module-valued sheaf to its underlying abelian-group-valued sheaf. For every category with objects and arrows in universe $u+1$, $V$ maps every colimit cocone [def-weil-pbc-category-colimit] to a colimit cocone. No quasi-compactness or finiteness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DB (lemma-limits-colimits), colimit clause; Tag 03CO (lemma-limits-colimits-abelian-sheaves). Formal adjunction route: Mathlib ModuleCat.restrictCoextendScalarsAdj and the equivalence of Z-modules with abelian groups."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "For a commutative ring Λ, restriction of scalars along ℤ → Λ is left adjoint to coextension (Mathlib ModuleCat.restrictCoextendScalarsAdj). The forgetful functor from ℤ-modules to abelian groups is an equivalence (ModuleCat.forget₂AddCommGroupIsEquivalence). Their composite is definitionally the coefficient forgetful functor, so it is a left adjoint. This step is fully proved in Lean, including the coefficient universes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Sheaf.composeAndSheafify of that coefficient functor is a left adjoint by Mathlib Sheaf.adjunction. Forgetting module coefficients preserves the sheaf condition, and sheafificationNatIso therefore identifies composeAndSheafify with sheafCompose. Transport the left adjoint across this natural isomorphism and apply [lem-weil-pbc-left-adjoint-preserves-colimits]. This proves preservation of all colimits of size u+1, with their canonical legs.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DB (lemma-limits-colimits), colimit clause; Tag 03CO (lemma-limits-colimits-abelian-sheaves). Formal adjunction route: Mathlib ModuleCat.restrictCoextendScalarsAdj and the equivalence of Z-modules with abelian groups."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "forgetting constant ring module structure on sheaves preserves colimits",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forgetful functor from sheaves of modules to abelian sheaves preserves colimits",
+   "date": "2026-10-12",
+   "results": "8 hits: SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, PresheafOfModules.toPresheaf_preservesColimitsOfShape, PresheafOfModules.toPresheaf_preservesColimitsOfSize, instHasColimitsCondensedMod, PresheafOfModules.toPresheaf_preservesColimit, AlgebraicGeometry.Scheme.Modules.instHasColimits, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits",
+   "verdict": "No exact sheaf-colimit preservation theorem; relevant adjunction tools inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCompose.*[Pp]reserves|[Pp]reserves.*sheafCompose",
+   "date": "2026-10-12",
+   "results": "10 hits: Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean, Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean, Mathlib/CategoryTheory/Sites/PreservesSheafification.lean, Mathlib/CategoryTheory/Sites/PreservesSheafification.lean, Mathlib/CategoryTheory/Sites/PreservesSheafification.lean, Mathlib/CategoryTheory/Sites/PreservesSheafification.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/Whiskering.lean",
+   "verdict": "Relevant sheafCompose and sheafification transfer tools; the coefficient forgetful adjunction is assembled in Lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictCoextendScalarsAdj",
+   "date": "2026-10-12",
+   "results": "1 hits: ModuleCat.restrictCoextendScalarsAdj",
+   "verdict": "Exact restriction/coextension adjunction used in the proved coefficient forgetful argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RestrictedCohomologyColimit",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Original proof Steps 2–3: canonical comparison for the restricted constructible presentation; Constant-module sheaves forget coefficients preserving colimits.",
+   "via": [
+    "lem-weil-pbc-restricted-cohomology-colimit",
+    "lem-weil-pbc-constructible-restriction-class-core",
+    "lem-weil-pbc-constructible-restriction-class"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantModuleSheavesForgetColimits",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantModuleSheavesForgetColimits.lean",
+  "declaration": "AlgebraicGeometry.Etale.constantModuleSheaves_forget_preservesColimits",
+  "statement": "theorem constantModuleSheaves_forget_preservesColimits (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] : PreservesColimitsOfSize.{u + 1, u + 1} (sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T030757-L-1309776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T030757-L-1309776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
