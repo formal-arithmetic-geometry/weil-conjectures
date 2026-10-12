@@ -6326,3 +6326,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: returned deliver/B2/Sheaf.AlgebraicGeometry.GabberH0FiniteLift (reviewer RETURN: (the landing tools, head 48956e20d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 06:07 L: returned deliver/Q1/Sheaf.AlgebraicGeometry.Curve.FinitePushforwardCoefficientControl (reviewer RETURN: (the landing tools, head 063ceda2d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 06:07 L: returned deliver/S1/Sheaf.AlgebraicGeometry.DerivedDirectImageUniformTruncationBound (reviewer RETURN: (the landing tools, head 32e310a8d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 06:07 L: merged deliver/A2/Sheaf.AlgebraicGeometry.DimensionBaseChange (stage 3; reviewer PASS; first push; landing 20261012T060729-L-2903137 (interface); batch 20261012T060728; modules 2; new nodes 1)

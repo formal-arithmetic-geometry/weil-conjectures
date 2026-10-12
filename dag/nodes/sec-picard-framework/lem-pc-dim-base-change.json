@@ -30,60 +30,41 @@
  ],
  "proof": [
   {
-   "text": "*Affine statement.* By [lem-weil-pbc-dimension-preserved-field-extension] (Algebra, Lemma 00P3, applied to $S=A$), the topological spaces $\\operatorname{Spec}(K\\otimes_kA)$ and $\\operatorname{Spec}A$ have the same Krull dimension. By [def-weil-pbc-krull-dimension-ring] the Krull dimension of a ring is the Krull dimension of its spectrum, so $\\dim(K\\otimes_kA)=\\dim A$. Finally $A\\otimes_kK\\cong K\\otimes_kA$ as rings by $a\\otimes c\\mapsto c\\otimes a$, and isomorphic rings have the same Krull dimension (prime ideals correspond, preserving inclusions). Hence $\\dim(A\\otimes_kK)=\\dim A$.",
+   "text": "For the affine conjunct, use topologicalKrullDim_spec_tensorProduct_of_field_extension and rewrite affine topological dimensions as ringKrullDim; TensorProduct.comm identifies the two tensor orders.",
    "uses": [
     "lem-weil-pbc-dimension-preserved-field-extension",
-    "def-weil-pbc-krull-dimension-ring"
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00P3 (lemma-dimension-preserved-field-extension, line 28290)"
+    "place": "Algebra, Lemma 00P3"
    }
   },
   {
-   "text": "*An affine cover of $X$ and of $X_K$.* Let $X$ be a curve over $k$ [def-pc-curve]: an integral (in particular nonempty) scheme whose structure morphism $f:X\\to\\operatorname{Spec}k$ is separated and of finite type, with $\\dim X=1$. Since $f$ is of finite type and $\\operatorname{Spec}k$ is affine with $f^{-1}(\\operatorname{Spec}k)=X$, by [def-weil-finite-type-morphism] $X$ has a finite affine open cover $X=U_1\\cup\\dots\\cup U_m$, $U_i\\cong\\operatorname{Spec}A_i$ with each $A_i$ a finitely generated, i.e. finite type [def-weil-pbc-finite-type-algebra], $k$-algebra. Let $p:X_K\\to X$ and $q:X_K\\to\\operatorname{Spec}K$ be the projections of $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-base-change]. By [lem-weil-pbc-open-fibre-product] (with $S=U=\\operatorname{Spec}k$, $V=U_i$, $W=Y=\\operatorname{Spec}K$) the open subscheme $p^{-1}(U_i)\\subseteq X_K$ is identified with $U_i\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$, which by [lem-weil-pbc-fibre-product-affine-spectra] is $\\cong\\operatorname{Spec}(A_i\\otimes_kK)$. As the $U_i$ cover $X$, the $p^{-1}(U_i)$ cover $X_K$; and $X_K$ is nonempty, since $X$ is nonempty, so some $A_i\\neq0$, and then $\\dim(A_i\\otimes_kK)=\\dim A_i\\ge0$ by step 1, so $A_i\\otimes_kK\\ne0$ and $p^{-1}(U_i)\\neq\\emptyset$.",
+   "text": "Choose matching affine covers and nonemptiness from exists_field_baseChange_affine_covers. Apply dim_eq_iSup_ringKrullDim_of_affineOpenCover to both schemes, replace each tensor-product dimension by its original ring dimension, and use the curve dimension field.",
    "uses": [
+    "lem-pc-dim-base-change-affine-covers",
+    "lem-pc-dimension-affine-open-cover",
     "def-pc-curve",
-    "def-weil-finite-type-morphism",
-    "def-weil-pbc-finite-type-algebra",
-    "def-pc-base-change",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra"
+    "lem-weil-pbc-dimension-preserved-field-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01JR (schemes-lemma-open-fibre-product) and Lemma 01JQ (schemes-lemma-fibre-product-affines); Morphisms, Section 01T0 (finite type)"
-   }
-  },
-  {
-   "text": "*Conclusion.* By [lem-pc-dimension-affine-open-cover] applied to the nonempty scheme $X$ with the cover $(U_i)$, $1=\\dim X=\\max_i\\dim A_i$; applied to the nonempty scheme $X_K$ with the cover $(p^{-1}(U_i))$, and with step 1 for each $A_i$ (a finite type $k$-algebra), $\\dim X_K=\\max_i\\dim(A_i\\otimes_kK)=\\max_i\\dim A_i=1$.",
-   "uses": [
-    "lem-pc-dimension-affine-open-cover"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 04MU (properties-lemma-dimension); Algebra, Lemma 00P3"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-dimension-preserved-field-extension",
-  "def-weil-pbc-krull-dimension-ring",
+  "lem-pc-dim-base-change-affine-covers",
+  "lem-pc-dimension-affine-open-cover",
   "def-pc-curve",
-  "def-weil-finite-type-morphism",
-  "def-weil-pbc-finite-type-algebra",
-  "def-pc-base-change",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-pc-dimension-affine-open-cover"
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 00P3 (lemma-dimension-preserved-field-extension, line 28290) for the affine statement; the curve clause follows the blueprint's last paragraph with Properties, Lemma 04MU (properties.tex line 1233)"
+  "place": "Algebra Lemma 00P3 for affine equality; Schemes 01JR and 01JQ for matching covers; Properties 04MU for the supremum calculation"
  },
  "mathlib_searches": [
   {
@@ -171,5 +152,15 @@
   "group": "H1",
   "result": "pass",
   "note": "field k; A comm k-algebra with Algebra.FiniteType (n=0, zero ring allowed); K/k as [Field K][Algebra k K]; ringKrullDim (A ⊗[k] K) = ringKrullDim A; curve as explicit f with [f.IsCurveOverField] (integral, separated, LOFT+QC, X.dim=1); X_K = Limits.pullback f (Spec.map (ofHom (algebraMap k K))); Scheme.dim = 1; conjuncts independently quantified; #check resolves all names, clean compile"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T060729-L-2903137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
