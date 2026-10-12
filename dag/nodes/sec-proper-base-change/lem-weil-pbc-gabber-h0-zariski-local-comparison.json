@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-gabber-h0-zariski-local-comparison",
+ "kind": "statement",
+ "title": "Local representative calculation before global target transport",
+ "statement": "Let $i:Z\\to X$ and $h:X'\\to X$ be arbitrary scheme morphisms, $q:U\\to X$ etale, $F$ an etale sheaf of sets, and $t$ a global section of $i^*F$ in its identity-pullback presentation. Let $s\\in F(U)$ satisfy that its unit image under $i$ is the restriction of $t$ along the base change of $q:U\\to X$. Put $Z'=Z\\times_X X'$, $j:Z'\\to X'$ and $p:Z'\\to Z$, and $k=h\\circ j$. For one open $W\\subset X'$ and $\\phi:W\\to U$ with $q\\circ\\phi=h\\circ W.\\iota$, use the local representative and preimage-open isomorphism of [def-weil-pbc-gabber-h0-zariski-constructions]. Apply the unit for $j$ to the local representative, restrict through the preimage-open isomorphism, and apply the component of the chosen composition comparison [lem-weil-pbc-sets-etale-inverse-image-composition-units] at $j^{-1}W$. The resulting section equals the section comparison of $t$ along $p$ from [def-weil-pbc-sets-section-comparison], restricted first along the canonical top-open-to-identity-pullback isomorphism for $k$ and then to $j^{-1}W$. No global target section $t_H$, Zariski comparison $\\beta$, covering or closed-immersion hypothesis is used. The scheme fibre product, etale sheaf and etale morphism notions are those of [def-pc-fibre-product, def-weil-pbc-etale-sheaf-of-sets, def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph; the preceding paragraph states pullback functoriality"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-gabber-h0-zariski-constructions",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-sets-section-comparison",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Move the restriction defining the local representative through the unit for j by unit naturality, and through the chosen composition comparison by its naturality. Its unit equation gives the unit for k restricted along the preimage-open map, the base change of the representative map and inverse pasting.",
+   "uses": [
+    "def-weil-pbc-gabber-h0-zariski-constructions",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The composition-unit equation along p and i identifies this unit with section comparison applied to the unit for i. Substitute the representative compatibility assumption. Restriction naturality of section comparison moves the base change of U to X outside this comparison.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-section-comparison-naturality",
+    "def-weil-pbc-sets-section-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The resulting map into the identity pullback equals the restriction-to-top followed by the canonical top-pullback isomorphism. Both are over Z-prime, and the second projection of the identity pullback is an isomorphism; cancel it. Presheaf functoriality gives the two successive restrictions. Empty opens obey the same formal computation.",
+   "uses": [
+    "def-weil-pbc-gabber-h0-zariski-constructions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-gabber-h0-zariski-constructions",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-section-comparison-naturality",
+  "def-weil-pbc-sets-section-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, third and fourth proof paragraphs; explicit naturality calculation by T3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of inverse image composition comparison on sheaf sections and canonical pullback maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of inverse image composition comparison on sheaf sections and canonical pullback maps",
+   "results": [
+    "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality",
+    "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+    "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc",
+    "AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality",
+    "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality",
+    "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality_assoc",
+    "AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality_assoc",
+    "TopCat.Sheaf.pullbackIso"
+   ],
+   "date": "2026-10-12",
+   "verdict": "Generic naturality and inverse identities exist; no exact match for the constructed Gabber section comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapIso.*naturality|eqToHom_app|inv_hom_id_apply",
+   "results": [
+    "Mathlib/CategoryTheory/GradedObject.lean",
+    "Mathlib/CategoryTheory/Subfunctor/Basic.lean",
+    "Mathlib/CategoryTheory/Types/Basic.lean",
+    "Mathlib/CategoryTheory/FintypeCat.lean",
+    "Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean",
+    "Mathlib/CategoryTheory/Category/Cat.lean",
+    "Mathlib/CategoryTheory/Grothendieck.lean",
+    "Mathlib/CategoryTheory/Grothendieck.lean"
+   ],
+   "date": "2026-10-12",
+   "verdict": "Generic naturality and inverse identities exist; no exact match for the constructed Gabber section comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberH0ZariskiRepresentativeEquation",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph; the preceding paragraph states pullback functoriality",
+   "via": [
+    "lem-weil-pbc-gabber-h0-zariski-representative-equation",
+    "lem-weil-pbc-gabber-h0-zariski-local-data",
+    "lem-weil-pbc-gabber-h0-zariski-gluing",
+    "lem-weil-pbc-gabber-h0-finite-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GabberH0ZariskiLocalComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberH0ZariskiLocalComparison.lean",
+  "declaration": "AlgebraicGeometry.gabberZariskiLocalComparison",
+  "statement": "theorem gabberZariskiLocalComparison {X Z U X' : Scheme.{u}} (i : Z ⟶ X) (q : U ⟶ X) [Etale q] (h : X' ⟶ X) (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (t : ((Scheme.etaleSetPullback i).obj F).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj (Scheme.Etale.mk (𝟙 X))))) (s : F.obj.obj (op (Scheme.Etale.mk q))) (hs : etaleSetDescentUnit i F (Scheme.Etale.mk q) s = ((Scheme.etaleSetPullback i).obj F).obj.map ((MorphismProperty.Over.pullback @Etale ⊤ i).map (MorphismProperty.Over.homMk q (Category.comp_id q) : Scheme.Etale.mk q ⟶ Scheme.Etale.mk (𝟙 X))).op t) (W : X'.Opens) (phi : W.toScheme ⟶ U) (hphi : phi ≫ q = W.ι ≫ h) : ((((Classical.choose etaleSetInverseImageCompositionUnits.2.2) X X' (pullback i h) h (pullback.snd i h)).hom.app F).hom.app (op (Scheme.Etale.mk ((pullback.snd i h) ⁻¹ᵁ W).ι))) (((Scheme.etaleSetPullback (pullback.snd i h)).obj ((Scheme.etaleSetPullback h).obj F)).obj.map (gabberPreimageEtaleIso (pullback.snd i h) W).hom.op (etaleSetDescentUnit (pullback.snd i h) ((Scheme.etaleSetPullback h).obj F) (Scheme.Etale.mk W.ι) (gabberLocalRepresentative q h F s W phi hphi))) = ((Scheme.etaleSetPullback (pullback.snd i h ≫ h)).obj F).obj.map ((gabberOpenEtale (pullback i h)).map (homOfLE le_top)).op (((Scheme.etaleSetPullback (pullback.snd i h ≫ h)).obj F).obj.map (gabberTopPullbackIso (pullback.snd i h ≫ h)).hom.op (etaleSetSectionComparison (pullback.fst i h) i (pullback.snd i h ≫ h) pullback.condition F (Scheme.Etale.mk (𝟙 X)) t))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T163621-L-2788036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T163621-L-2788036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

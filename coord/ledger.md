@@ -8577,3 +8577,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: merged deliver/T1/Sheaf.RingTheory.PairHenselizationRegularFibers (stage 3; reviewer PASS; first push; landing 20261012T163620-L-2787694 (interface); batch 20261012T163610; modules 2; new nodes 1)
 - 16:36 L: merged deliver/T2/Sheaf.AlgebraicGeometry.Curve.GenericPrimaryAnnihilator (stage 3; reviewer PASS; first push; landing 20261012T163621-L-2787839 (proof); batch 20261012T163610; modules 1; new nodes 0)
 - 16:36 L: merged deliver/T3/Sheaf.AlgebraicGeometry.DisjointComponentsLocallyConstantImage (stage 3; reviewer PASS; first push; landing 20261012T163621-L-2787936 (proof); batch 20261012T163610; modules 1; new nodes 0)
+- 16:36 L: merged deliver/T3/Sheaf.AlgebraicGeometry.GabberH0ZariskiRepresentativeEquation (stage 3; reviewer PASS; first push; landing 20261012T163621-L-2788036 (interface); batch 20261012T163610; modules 3; new nodes 2)
