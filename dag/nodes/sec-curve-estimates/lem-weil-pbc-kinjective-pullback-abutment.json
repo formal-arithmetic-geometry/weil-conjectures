@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-kinjective-pullback-abutment",
+ "kind": "statement",
+ "title": "K-injective representative of the unit--Leray abutment map",
+ "statement": "Let $f:Y\\to X$ be a scheme morphism, $K,L$ arbitrary complexes of abelian étale sheaves on $X,Y$ [def-weil-pbc-etale-sheaves], and $v:f^{-1}K\\to L$ a chain map [def-weil-pbc-inverse-image]. Let $\\rho:K\\to I$ and $\\sigma:L\\to J$ be K-injective resolutions [def-weil-pbc-kinjective-resolutions]. Suppose $j:f^{-1}I\\to J$ satisfies $j\\circ f^{-1}(\\rho)\\simeq\\sigma\\circ v$, and let $w:\\Gamma(X,I)\\to\\Gamma(Y,J)$ have components the sectionwise inverse-image unit followed by $\\Gamma(j)$. For every integer $n$, the map $e_\\rho^{-1}H^n(w)e_\\sigma$, using the canonical resolution comparisons [def-weil-pbc-termwise-hypercohomology-presentation], equals $H^n(R\\Gamma_X(\\eta_f);\\lambda_f;R\\Gamma_Y(v))$ [def-weil-pbc-etale-cohomology]. Here $\\eta_f$ is the unit of the derived inverse-image/direct-image adjunction and $\\lambda_f$ is the canonical Leray isomorphism. This statement involves no filtration or spectral sequence.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I (lemma-K-injective) and 08BJ (lemma-adjoint-preserves-K-injectives); cohomology.tex Tags 01F8/01F9/01FA; sites-cohomology.tex Tag 08J6; derived.tex Tag 015J"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Adjoint the comparison j to I→f_*J. Exactness of inverse image implies f_* preserves K-injective complexes. The compatibility hj gives the adjoint map over the augmentation in the derived category.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-sp-kinjective-comparison-principle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K-injective representatives the right-derived units are invertible. Expand the derived-adjunction unit factorization and the defining units of the unbounded Leray comparison. Naturality of these units identifies RΓ of the adjoint comparison with the localized degreewise map w. This is the unbounded computation of the same recipe expressed on D+ by lem-weil-pbc-cohomology-pullback-derived-unit; the resolution choices here need not themselves be bounded below.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the homology functor and its factorization through Q. The canonical identifications attached to ρ and σ are resolutionEtaleCohomologyIso, so the equality becomes exactly inv(eρ) ≫ H(w) ≫ hom(eσ) equal to H of the unit--Leray--v map. Homotopic comparisons give equal maps by localization.",
+   "uses": [
+    "def-weil-pbc-termwise-hypercohomology-presentation",
+    "lem-sp-kinjective-comparison-principle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-termwise-hypercohomology-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I (lemma-K-injective) and 08BJ (lemma-adjoint-preserves-K-injectives); cohomology.tex Tags 01F8/01F9/01FA; sites-cohomology.tex Tag 08J6; derived.tex Tag 015J"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the hypercohomology spectral sequence for an exact inverse image functor and comparison on derived global sections",
+   "results": "8 hits: HomologicalComplex.HomologySequence.δ_naturality_assoc, HomologicalComplex.HomologySequence.δ_naturality, CategoryTheory.Functor.homologySequenceδ_naturality_assoc, CategoryTheory.Functor.homologySequenceδ_naturality, CochainComplex.isoHomologyπ₀_inv_naturality_assoc, CategoryTheory.Functor.comp_homologySequenceδ, CochainComplex.mappingCone.homologySequenceδ_triangleh, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence.Hom",
+   "results": "9 hits: CategoryTheory.SpectralSequence.Hom, CategoryTheory.SpectralSequence.Hom.hom, CategoryTheory.SpectralSequence.Hom.ext, CategoryTheory.SpectralSequence.Hom.ext_iff, CategoryTheory.SpectralSequence.comp_hom, CategoryTheory.SpectralSequence.comp_hom_assoc, CategoryTheory.SpectralSequence.Hom.comm, CategoryTheory.SpectralSequence.Hom.mk",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorObjQIso.*naturality|hypercohomology.*pullback",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-injective resolution comparison computes the pullback on hypercohomology and its canonical derived adjunction unit Leray map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleHypercohomologyPullbackMaps",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "the naturality of the complex-continuity input to the sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'; split of pullback-maps derived-abutment identification in step 3",
+   "via": [
+    "lem-weil-pbc-hypercohomology-pullback-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleKInjectivePullbackAbutment",
+  "file": "lean/Sheaf/Paper/EtaleKInjectivePullbackAbutment.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleKInjective_pullback_abutment",
+  "statement": "theorem etaleKInjective_pullback_abutment {X Y : Scheme.{uNatural}} (f : Y ⟶ X) (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ) (L : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ) (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ L) (ρ : CochainComplex.KInjectiveResolutionChoice K) (σ : CochainComplex.KInjectiveResolutionChoice L) (j : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj ρ.complex ⟶ σ.complex) (hj : Nonempty (Homotopy (((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).map ρ.map ≫ j) (v ≫ σ.map))) (w : ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex (ComplexShape.up ℤ)).obj ρ.complex ⟶ ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex (ComplexShape.up ℤ)).obj σ.complex) (hw : ∀ i : ℤ, w.f i = globalSectionsUpperStarMap AddCommGrpCat.{uNatural + 1} f (ρ.complex.X i) ≫ (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).map (j.f i)) (n : ℤ) : (@resolutionEtaleCohomologyIso.{uNatural} X K ρ.complex ρ.map ρ.quasiIso ρ.isKInjective n).inv ≫ HomologicalComplex.homologyMap w n ≫ (@resolutionEtaleCohomologyIso.{uNatural} Y L σ.complex σ.map σ.quasiIso σ.isKInjective n).hom = (DerivedCategory.homologyFunctor AddCommGrpCat.{uNatural + 1} n).map ((rightDerivedGlobalSections AddCommGrpCat.{uNatural + 1} X).map ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{uNatural + 1} f).unit.app (DerivedCategory.Q.obj K)) ≫ (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{uNatural + 1} f).hom.app ((upperStar AddCommGrpCat.{uNatural + 1} f).mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ≫ (rightDerivedGlobalSections AddCommGrpCat.{uNatural + 1} Y).map ((upperStar AddCommGrpCat.{uNatural + 1} f).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map v))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T095852-L-312448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T095852-L-312448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
