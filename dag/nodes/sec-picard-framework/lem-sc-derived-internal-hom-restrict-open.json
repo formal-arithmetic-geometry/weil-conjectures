@@ -26,64 +26,43 @@
  ],
  "proof": [
   {
-   "text": "Represent $L$ by a complex $\\mathcal L^\\bullet$ and choose a functorial K-injective resolution $\\mathcal L^\\bullet\\to I^\\bullet$ in the category of $\\mathcal O_X$-modules. By the definition of derived internal Hom, $R\\mathcal Hom_{\\mathcal O_X}(K,L)$ is represented by the sheaf Hom complex $\\mathcal Hom^\\bullet(K^\\bullet,I^\\bullet)$ for any representative $K^\\bullet$ of $K$.",
+   "text": "Choose complex representatives Kc and Lc using essential surjectivity of DerivedCategory.Q. The source-library SheafOfModules.isGrothendieckAbelian supplies the instance already used by derivedInternalHom [def-pur-derived-internal-hom]. Apply the existing functorial K-injective construction [lem-weil-pbc-kinjective-functorial-existence] to Lc, obtaining Ic and the quasi-isomorphism eta. Invert Q(eta) and compose with the representative isomorphism of L to get Q(Ic) ≅ L. Apply derivedInternalHom_obj_iso [def-pur-derived-internal-hom] to identify derived Hom on X with Q(homComplex Kc Ic).",
    "uses": [
     "def-pur-derived-internal-hom",
-    "prop-pur-kinjective-resolutions-exist"
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "def-pur-hom-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section 08J7 and Lemma 08DL"
-   }
+   "elementary": false
   },
   {
-   "text": "By the open-restriction K-injective lemma [lem-sc-derived-k-injective-restrict-open], $j^{-1}I^\\bullet$ is K-injective on $U$. Restriction to an open is exact (the cohomology sheaves of $j^{-1}$ of a complex are the restrictions of its cohomology sheaves, as sections and stalks over opens of $U$ are unchanged), so $j^{-1}\\mathcal L^\\bullet\\to j^{-1}I^\\bullet$ is still a quasi-isomorphism and hence a K-injective resolution of $L|_U$. It therefore represents the restriction $L|_U$ and, by the definition of derived internal Hom, computes $R\\mathcal Hom_{\\mathcal O_U}(K|_U,L|_U)$.",
+   "text": "Let F be open restriction and Fc its termwise complex functor. By kInjective_of_restrict_open [lem-sc-derived-k-injective-restrict-open], Fc(Ic) is K-injective. The exact-functor comparison F.mapDerivedCategoryFactors identifies Q(Fc(Kc)) and Q(Fc(Ic)) with the derived restrictions of K and L. Apply derivedInternalHom_obj_iso [def-pur-derived-internal-hom] on the localized site to compute the local derived Hom by Q(homComplex(Fc(Kc),Fc(Ic))).",
    "uses": [
     "lem-sc-derived-k-injective-restrict-open",
     "def-pur-derived-internal-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 08BS used in Lemma 08DL"
-   }
+   "elementary": false
   },
   {
-   "text": "For each open $V\\subseteq U$, the definition of sheaf Hom gives $\\mathcal Hom_{\\mathcal O_X}(A,B)(V)=\\operatorname{Hom}_{\\mathcal O_V}(A|_V,B|_V)=\\mathcal Hom_{\\mathcal O_U}(A|_U,B|_U)(V)$. These equalities commute with restriction maps. In degree $n$, the Hom complex is the product over $p\\in\\mathbf Z$ of these Hom sheaves; products of sheaves of modules are computed sectionwise, so restriction identifies that product with the product on $U$. The differential $d(f)^p=d_I^{p+n}\\circ f^p-(-1)^n f^{p+1}\\circ d_K^p$ is unchanged on $V$. Thus $j^{-1}\\mathcal Hom^\\bullet(K^\\bullet,I^\\bullet)\\cong\\mathcal Hom^\\bullet(j^{-1}K^\\bullet,j^{-1}I^\\bullet)$ as complexes.",
+   "text": "Apply the ordinary complex isomorphism homComplex_restrict_open [lem-sc-hom-complex-restrict-open] to Kc and Ic. Map it with the localization functor Q on the localized site. Compose with the inverse of F.mapDerivedCategoryFactors on homComplex Kc Ic, and then with the inverse of F.mapDerivedCategory.mapIso applied to the global derived-Hom computation from Step 1. Prepend the local computation from Step 2. This explicit composition has precisely the source and target of the theorem.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma lemma-restriction-RHom-to-U (Tag 08DL), construction of the Hom complex"
-   }
-  },
-  {
-   "text": "The complex isomorphism of Step 3 gives an isomorphism in $D(\\mathcal O_U)$. By Steps 1 and 2, its source and target represent $R\\mathcal Hom_{\\mathcal O_X}(K,L)|_U$ and $R\\mathcal Hom_{\\mathcal O_U}(K|_U,L|_U)$ respectively. Each component is restriction of a local module map; hence it is natural in both arguments and in successive open inclusions. Independence of the chosen representatives and K-injective resolution follows from the canonical independence clause of the derived internal Hom definition.",
-   "uses": [
+    "lem-sc-hom-complex-restrict-open",
+    "def-pur-hom-complex",
     "def-pur-derived-internal-hom"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma lemma-restriction-RHom-to-U (Tag 08DL), conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-derived-internal-hom",
-  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-hom-complex",
   "lem-sc-derived-k-injective-restrict-open",
-  "def-pur-sheaf-hom",
-  "def-pur-hom-complex"
+  "lem-sc-hom-complex-restrict-open",
+  "lem-weil-pbc-kinjective-functorial-existence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma lemma-restriction-RHom-to-U (Tag 08DL), using Lemma lemma-restrict-K-injective-to-open (Tag 08BS)"
+  "place": "Lemma 08DL, using Lemma 08BS; Lean assembly by S1 from the existing arbitrary K-injective comparison, the source functorial resolution, and the ordinary Hom-complex restriction sublemma"
  },
  "mathlib_searches": [
   {
@@ -178,5 +157,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T202251-L-708469",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -7,10 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Paper.DerivedHomMayerVietoris
-import Sheaf.Algebra.Homology.HomComplex
 import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.Algebra.Homology.HomComplexRestrictOpen
 
 /-!
 # Derived internal Hom commutes with restriction to opens
@@ -61,6 +59,37 @@ theorem derivedInternalHom_restrict_open
       ((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory.obj
         ((derivedInternalHom.{u, w} (Opens.grothendieckTopology X) X.sheaf).obj
           (op K, L)))) := by
-  sorry
+  let A := SheafOfModules.{u} (moduleRings X)
+  let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let F := SheafOfModules.overFunctor.{u} (moduleRings X) U
+  let Fc := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let Kc := (DerivedCategory.Q (C := A)).objPreimage K
+  let Lc := (DerivedCategory.Q (C := A)).objPreimage L
+  let eK := (DerivedCategory.Q (C := A)).objObjPreimageIso K
+  let eL := (DerivedCategory.Q (C := A)).objObjPreimageIso L
+  let Ic := (CochainComplex.kInjectiveResolutionFunctor.{u} A).obj Lc
+  let η := (CochainComplex.toKInjectiveResolution.{u} A).app Lc
+  have : QuasiIso η :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A Lc).2
+  have : Ic.IsKInjective :=
+    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A Lc
+  let eI : DerivedCategory.Q.obj Ic ≅ L :=
+    (asIso (DerivedCategory.Q.map η)).symm ≪≫ eL
+  have : CochainComplex.IsKInjective (Fc.obj Ic) := kInjective_of_restrict_open X U Ic
+  let eKU : DerivedCategory.Q.obj (Fc.obj Kc) ≅ F.mapDerivedCategory.obj K :=
+    (F.mapDerivedCategoryFactors.app Kc).symm ≪≫ F.mapDerivedCategory.mapIso eK
+  let eIU : DerivedCategory.Q.obj (Fc.obj Ic) ≅ F.mapDerivedCategory.obj L :=
+    (F.mapDerivedCategoryFactors.app Ic).symm ≪≫ F.mapDerivedCategory.mapIso eI
+  obtain ⟨eX⟩ := derivedInternalHom_obj_iso.{u, w}
+    (Opens.grothendieckTopology X) X.sheaf K L Kc Ic eK eI
+  obtain ⟨eU⟩ := @derivedInternalHom_obj_iso.{u, w} (Over U) _
+    ((Opens.grothendieckTopology X).over U) (X.sheaf.over U) hU
+    (F.mapDerivedCategory.obj K) (F.mapDerivedCategory.obj L)
+    (Fc.obj Kc) (Fc.obj Ic) inferInstance eKU eIU
+  obtain ⟨eC⟩ := homComplex_restrict_open X U Kc Ic
+  let QU := DerivedCategory.Q (C := SheafOfModules.{u} ((moduleRings X).over U))
+  exact ⟨eU ≪≫ QU.mapIso eC ≪≫
+    (F.mapDerivedCategoryFactors.app (homComplex (R := X.sheaf) Kc Ic)).symm ≪≫
+    (F.mapDerivedCategory.mapIso eX).symm⟩
 
 end CategoryTheory
