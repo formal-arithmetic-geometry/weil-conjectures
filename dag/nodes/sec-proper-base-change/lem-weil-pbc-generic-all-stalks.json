@@ -15,39 +15,47 @@
  ],
  "proof": [
   {
-   "text": "Fix a stalk element with nonzero image. Lift to a member of an etale cover trivializing G, and identify the image with a nonzero element m of the constant value module. Stalks commute with this restriction.",
+   "text": "First show that an image section on an etale W with a point w over eta vanishes after a nonempty etale refinement. Compose the algebraic-closure point of W at w with W to X. The stalk map is zero by the hypothesis. Naturality of the germ maps makes the germ of the image section zero; equality in the filtered colimit gives a pointed refinement W prime where that section is zero. The retained geometric point makes W prime nonempty. The Lean proof uses Scheme.algClosurePoint, Point.toPresheafFiber_naturality and Point.toPresheafFiber_eq_iff'.",
    "uses": [
-    "def-constructible-locally-constant",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A constant element n whose associated section is zero on a nonempty etale W is zero. Local injectivity of sheafification says that the equalizer sieve of n and zero covers W. If n differs from zero that sieve is empty, whereas a covering sieve on a nonempty W has a member through each point. In Lean these are W_toSheafify.isLocallyInjective, Presheaf.equalizerSieve_mem and mem_smallEtaleTopology_iff. This step is proved directly inside the theorem.",
+   "uses": [
     "def-constructible-constant",
-    "def-weil-pbc-geometric-stalks",
     "def-weil-pbc-etale-site"
    ],
    "elementary": false
   },
   {
-   "text": "Represent the source germ on a pointed etale neighbourhood and refine until the image section equals the constant section m, using equality in the filtered colimit defining the stalk. The refined neighbourhood is nonempty.",
+   "text": "For any section a of F on V and any ordinary point v of V, choose a trivializing cover member Ui of G through the image of v. The scheme pullback V times_X Ui has a point w1 over v. The isomorphism G.over Ui with a constant sheaf, compared with the restriction of the constant sheaf on X by constantSheafOverIso, sends the pulled-back image b = phi(a) to a section c of N_X. Local surjectivity of sheafification gives a further etale neighbourhood W2 of w1 on which c is the constant section of some n in N. This uses Presheaf.imageSieve_mem and mem_smallEtaleTopology_iff, and requires no finite generation.",
    "uses": [
+    "def-constructible-locally-constant",
+    "def-constructible-constant",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "W2 is nonempty and etale over X, hence has nonempty open image. The generic-point lemma IsGenericPoint.mem_open_set_iff puts eta in this image. At a point w of W2 over eta, apply the first step to the restriction of a. On the resulting nonempty W3 the image section is zero. Naturality of the constant-sheaf isomorphism and of sheafification implies that the constant section of n is zero on W3. The second step gives n = 0. Consequently the image section b is already zero on W2, since the trivializing isomorphism is injective on sections.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "def-sc-generic-point",
     "def-weil-pbc-geometric-stalks",
     "def-constructible-constant"
    ],
    "elementary": false
   },
   {
-   "text": "Its composite to X is etale and hence flat and locally of finite presentation, so its image is a nonempty open containing eta. Choose a point in the fibre over eta and an algebraic closure of its residue field to obtain a geometric point over eta.",
+   "text": "The sieve of restrictions of b that vanish is thus covering: the preceding construction supplies a member over every v of V. Sheaf separatedness gives b = 0. Extensionality on sections proves phi = 0, and additivity of each geometric stalk functor gives its map equal to zero. This proves the stated conclusion without stalk conservativity or the constant-sheaf stalk formula.",
    "uses": [
-    "lem-weil-pbc-flat-lfp-open",
-    "def-sc-generic-point",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The section has image germ m at this geometric generic point by the constant-sheaf stalk formula, contradicting the assumed vanishing. Every element at every geometric stalk therefore maps to zero, so the module homomorphism is zero.",
-   "uses": [
-    "def-constructible-constant",
+    "def-weil-pbc-etale-site",
     "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -60,8 +68,8 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project",
-  "place": "Tag 09BG (3), with etale-local persistence as in Tag 09BH (3); adapted to stalk maps by C2"
+  "document": "Stacks Project Tags 09BG (3), 09BH (3); WeilConjectures/ConstructibleSheaf/Restriction.lean",
+  "place": "Adapted the proved dense-open detection argument upperStar_map_injective_of_isLocallyConstantSheaf: replaced dense-open vanishing by generic geometric-stalk vanishing and a pointed refinement; all steps proved in Lean by H1."
  },
  "mathlib_searches": [
   {
@@ -136,10 +144,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T053923-L-2631406",
-  "kind": "interface",
+  "landing": "20261012T063510-L-3155241",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
