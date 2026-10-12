@@ -15,31 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Use the affine tilde/global-sections equivalence and the affine finite-presentation sections criterion to identify every section module of B as finitely presented; the terms are flat by the identity-IsFlatOver specialization, so Module.Flat.projective_of_finitePresentation makes them finite projective. Residue pullback is tensor with the residue field.",
+   "text": "Induct on the natural upper support bound b, generalizing B. If b ≤ d, use B itself, monotonicity of IsStrictlyLE, and HomotopyEquiv.refl. In the successor case b+1 > d, pull B back to each residue field. The resulting complex is still strictly ≤ b+1. The vanishing hypothesis makes it exact at b+1, and its outgoing differential has zero target, so ShortComplex.Exact.epi_f makes the incoming differential epic. Apply the affine residue-epimorphism splitting criterion to B.d b (b+1).",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-finitely-presented-flat-module-projective"
+    "lem-pc-affine-residue-epi-splitting"
    ],
    "elementary": false
   },
   {
-   "text": "At a top degree m>d the cokernel of the preceding differential is finite with zero fibres. Local Nakayama (Mathlib.RingTheory.Nakayama) makes each localization zero, and Module.eq_zero_of_localization_maximal detects that the finite module itself is zero. The surjection onto the finite projective top term splits by Projective.factorThru (equivalently Finite.exists_comp_eq_id_of_projective). Its kernel is a finite projective direct summand, using Retract.projective and finite generation. The removed identity pair is contractible, giving a homotopy equivalence. Descending induction stops at d; m-1 ≥ 0 preserves the lower bound. Transport the resulting complex and homotopies back by associated sheaves. The b≤d and zero-ring cases give identity and zero models.",
+   "text": "Apply the one-step split-top cancellation statement to obtain B′ supported in [0,b], with the same termwise flatness, quasi-coherence and finite presentation and an equivalence e:B′≃B. For each residue-field pullback, mapHomotopyEquiv(e).toHomologyIso identifies its homology with that of B. IsZero.of_iso transfers the vanishing hypothesis to B′. Apply the induction hypothesis to B′, then compose its equivalence with e using HomotopyEquiv.trans. Natural induction terminates and covers d=0, zero top terms and the empty affine scheme.",
    "uses": [
-    "lem-weil-pbc-finitely-presented-flat-module-projective"
+    "lem-pc-split-top-differential-cancellation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-finitely-presented-flat-module-projective"
+  "lem-pc-affine-residue-epi-splitting",
+  "lem-pc-split-top-differential-cancellation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 068V and 08EB; bounded finite-projective specialization with explicit split cancellation; detailed argument checked and written by second reader Q3"
+  "place": "Tags 068V, 068U, 00NX and 00MT; explicit finite-projective split cancellation argument, expanded by F2"
  },
  "mathlib_searches": [
   {
@@ -124,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T214712-L-1272031",
+  "landing": "20261012T225307-L-1804315",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

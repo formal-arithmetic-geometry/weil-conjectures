@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-split-top-differential-cancellation",
+ "kind": "statement",
+ "title": "Cancellation of one split top differential",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $B$ be an integer-indexed cochain complex of $\\mathcal O_S$-modules [def-pc-cochain-complex-modules] supported in $[0,m+1]$ for $m\\in\\mathbf N$. Suppose its terms are quasi-coherent [pqf-def-coherent], of finite presentation [lem-weil-pbc-quasi-coherent-finite-type-affine], and flat over $\\mathrm{id}_S$ [def-pc-scheme-module-flat-over]. If $B^m\\to B^{m+1}$ has a right inverse, there is a cochain complex $D$ supported in $[0,m]$, with all three termwise properties, and a chain homotopy equivalence $D\\simeq B$ (chain maps inverse up to degree-minus-one homotopies).",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 068V, 068U, 00NX and 00MT; explicit finite-projective split cancellation argument, expanded by F2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-pc-scheme-module-flat-over",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Write δ = B.d m (m+1) and choose σ with δ ∘ σ = id. Construct D with ker δ in degree m, B.X j in degrees j < m, and zero above m. Factor the incoming differential into ker δ by the consecutive-differential equation. This gives a complex with support in [0,m]. Define inclusion i:D→B by kernel inclusion in degree m and identities below; define r:B→D using the factorization of id - σ ∘ δ into ker δ in degree m, identities below, and zero above.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check i and r commute with each differential. At degree m-1 the equality follows from δ ∘ d = 0; at degree m it follows from the defining kernel equation and δ ∘ σ = id. All other equations are identities or maps involving zero objects. The composite r ∘ i is id_D. The degree-minus-one map equal to σ from degree m+1 to m and zero elsewhere has boundary id_B - i ∘ r: at degree m this is σ ∘ δ, at degree m+1 it is δ ∘ σ = id, and elsewhere it is zero. This gives a chain homotopy equivalence D→B, with inverse r.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The changed term ker δ is quasi-coherent by the quasi-coherent kernel theorem. On each affine open its sections are a retract of the sections of B.X m, since id - σ ∘ δ factors through the kernel. Sections of B.X m are finite projective by the affine finite-presentation criterion and flatness over the identity. Retracts remain finite projective, hence finitely presented. The affine criterion gives finite presentation of the kernel sheaf. For flatness over id_S, evaluate the same retraction on every affine pair U⊆V in its defining condition and use Module.Flat.of_retract over Γ(S,V). The unchanged and zero terms have all three properties. Natural m ensures no negative-degree term is introduced, including m = 0.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 068V, 068U, 00NX and 00MT; explicit finite-projective split cancellation argument, expanded by F2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cancel a split epimorphism in the top differential of a bounded cochain complex preserving homotopy equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a bounded above cochain complex whose top differential is a split epimorphism is homotopy equivalent to a shorter complex with the kernel in the previous degree",
+   "results": "8 hits: CochainComplex.cm5b.homotopyEquiv, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, HomologicalComplex.homotopyCofiber.descEquiv, CochainComplex.mappingConeHomOfDegreewiseSplitXIso, CochainComplex.mappingCone.triangleRotateShortComplexSplitting, CochainComplex.IsKProjective.homotopyZero, CochainComplex.IsKProjective.nonempty_homotopy_zero, HomologicalComplex.homotopyCofiber.XIso",
+   "date": "2026-10-13",
+   "verdict": "partial: ingredients only; no exact statement"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsFinitePresentation|Flat).*retract|retract.*(IsFinitePresentation|Flat)|projective_of_finitePresentation|eq_zero_of_localization_maximal|Exact.epi_f",
+   "results": "11 hits: Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/Flat/EquationalCriterion.lean, Mathlib/RingTheory/LocalProperties/Basic.lean, Mathlib/RingTheory/LocalProperties/Submodule.lean, Mathlib/RingTheory/Smooth/Flat.lean",
+   "date": "2026-10-13",
+   "verdict": "partial: ingredients only; no exact statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatShorteningConstruction",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence proof part (a): top cohomology commutes with base change, so Nakayama permits shortening the bounded affine flat model degree by degree.",
+   "via": [
+    "lem-pc-affine-finite-presentation-flat-shortening-construction",
+    "lem-pc-affine-finite-presentation-flat-shortening",
+    "lem-pc-proper-flat-cohomology-model-properties",
+    "lem-pc-proper-flat-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SplitTopDifferentialCancellation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTopDifferentialCancellation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_split_top_differential_cancellation",
+  "statement": "theorem exists_split_top_differential_cancellation (S : Scheme.{u})\n    (B : CochainComplex S.Modules ℤ) (m : ℕ)\n    (hBge : B.IsStrictlyGE 0) (hBle : B.IsStrictlyLE (m + 1 : ℕ))\n    (hBflat : ∀ n : ℤ, (B.X n).IsFlatOver (𝟙 S))\n    (hBqc : ∀ n : ℤ, (B.X n).IsQuasicoherent)\n    (hBfp : ∀ n : ℤ, (B.X n).IsFinitePresentation)\n    (hsplit : IsSplitEpi (B.d (m : ℤ) (m + 1 : ℕ))) :\n    ∃ D : CochainComplex S.Modules ℤ,\n      D.IsStrictlyGE 0 ∧ D.IsStrictlyLE m ∧\n      (∀ n : ℤ, (D.X n).IsFlatOver (𝟙 S)) ∧\n      (∀ n : ℤ, (D.X n).IsQuasicoherent) ∧\n      (∀ n : ℤ, (D.X n).IsFinitePresentation) ∧\n      Nonempty (HomotopyEquiv D B)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T225307-L-1804315",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T225307-L-1804315",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
