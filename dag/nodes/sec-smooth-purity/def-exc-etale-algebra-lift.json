@@ -15,9 +15,29 @@
  "stmt_deps": [
   "def-exc-jacobian-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For liftIdeal_vanish, it suffices by Ideal.span_le to send each lifted relation and the inverse-Jacobian relation to zero. Evaluate a renamed relation, commute evaluation with coefficient reduction, use map_relation and Presentation.aeval_val_relation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Coefficient reduction commutes with determinants (RingHom.map_det) and partial derivatives (MvPolynomial.pderiv_map). The resulting matrix is the transpose of the square presentation Jacobian by jacobiMatrix_apply and map_eq_id; det_transpose, jacobian_eq_jacobiMatrix_det and algebraMap_apply identify its evaluation with P.jacobian.",
+   "uses": [
+    "def-exc-jacobian-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inverse-Jacobian relation evaluates to the inverse Jacobian times the Jacobian minus one, zero by IsUnit.unit.inv_val. Thus reduction is the explicit evaluation map descended along the ideal quotient; no existence witness is chosen.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-exc-jacobian-presentation"
+ ],
+ "proof_origin": "Written by B2 from the existing liftIdeal_vanish docstring and the blueprint construction; second reading closes the derivative/determinant calculation directly using Mathlib.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -113,5 +133,15 @@
   "group": "G1",
   "result": "pass",
   "note": "A CommRing, I : Ideal A, B̄ = cited Algebra.SquareJacobianPresentation (A⧸I) B (Fin m) (map_eq_id pairs f_i with x_i); chosen lifts = structure CoefficientLift (map_relation: coefficientwise reduction = P.relation i, real constraint); Δ = det(pderiv j f_i); LiftRing = MvPolynomial (Option (Fin m)) A ⧸ span(rename some f_i, X none * Δ - 1), Type u, Algebra A instance via quotient; reduction = Quotient.lift of eval₂Hom (A→A/I→B, x_i↦P.val i, t↦jacobian unit inverse), checked by simp that t ↦ Δ̄⁻¹; no sorry in data (only liftIdeal_vanish); no Mathlib/landed duplicate (SubmersivePresentation.ofHasCoeffs descends, StandardEtalePair univariate); citer lem-exc-etale-algebra-lift can form B^lift/IB^lift → B̄ from reduction; one algebra instance, nothing untied; blueprint tags present"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T194059-L-451370",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

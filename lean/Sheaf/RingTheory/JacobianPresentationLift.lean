@@ -75,7 +75,61 @@ of `t * Δ - 1` is therefore the inverse Jacobian times the Jacobian minus one, 
 The kernel is an ideal containing every generator, so it contains their ideal span. -/
 theorem liftIdeal_vanish :
     ∀ q ∈ L.liftIdeal, L.polynomialReduction q = 0 := by
-  sorry
+  classical
+  intro q hq
+  have hle : L.liftIdeal ≤ RingHom.ker L.polynomialReduction := Ideal.span_le.2 ?_
+  · exact hle hq
+  rintro q (⟨i, rfl⟩ | hq)
+  · change MvPolynomial.eval₂Hom
+      ((algebraMap (A ⧸ I) B).comp (Ideal.Quotient.mk I))
+      (fun x ↦ match x with
+      | none => (↑(P.jacobian_isUnit.unit⁻¹) : B)
+      | some i => P.val i) (MvPolynomial.rename some (L.relation i)) = 0
+    rw [MvPolynomial.eval₂Hom_rename]
+    change MvPolynomial.eval₂Hom
+      ((algebraMap (A ⧸ I) B).comp (Ideal.Quotient.mk I)) P.val (L.relation i) = 0
+    rw [← MvPolynomial.eval₂Hom_map_hom]
+    rw [L.map_relation]
+    exact P.aeval_val_relation i
+  · rw [Set.mem_singleton_iff] at hq
+    subst q
+    change MvPolynomial.eval₂Hom
+      ((algebraMap (A ⧸ I) B).comp (Ideal.Quotient.mk I))
+      (fun x ↦ match x with
+      | none => (↑(P.jacobian_isUnit.unit⁻¹) : B)
+      | some i => P.val i)
+      (MvPolynomial.X none * MvPolynomial.rename some L.jacobianPolynomial - 1) = 0
+    rw [map_sub, map_mul, MvPolynomial.eval₂Hom_X']
+    have hdet :
+      MvPolynomial.eval₂Hom
+        ((algebraMap (A ⧸ I) B).comp (Ideal.Quotient.mk I))
+        (fun x ↦ match x with
+        | none => (↑(P.jacobian_isUnit.unit⁻¹) : B)
+        | some i => P.val i)
+        (MvPolynomial.rename some L.jacobianPolynomial) = P.jacobian := by
+      rw [MvPolynomial.eval₂Hom_rename]
+      change MvPolynomial.eval₂Hom
+        ((algebraMap (A ⧸ I) B).comp (Ideal.Quotient.mk I)) P.val
+        L.jacobianPolynomial = P.jacobian
+      rw [← MvPolynomial.eval₂Hom_map_hom]
+      unfold jacobianPolynomial
+      rw [RingHom.map_det]
+      have hmatrix :
+          (MvPolynomial.map (Ideal.Quotient.mk I)).mapMatrix
+            (fun i j ↦ MvPolynomial.pderiv j (L.relation i)) = P.jacobiMatrix.transpose := by
+        ext i j : 1
+        simp only [RingHom.mapMatrix_apply, Matrix.map_apply, Matrix.transpose_apply,
+          P.jacobiMatrix_apply, P.map_eq_id, id_eq]
+        rw [← MvPolynomial.pderiv_map, L.map_relation]
+      rw [hmatrix, Matrix.det_transpose, P.jacobian_eq_jacobiMatrix_det]
+      exact (P.algebraMap_apply _).symm
+    calc
+      _ = (↑(P.jacobian_isUnit.unit⁻¹) : B) * P.jacobian - 1 := by
+        convert congrArg (fun z : B ↦ (↑(P.jacobian_isUnit.unit⁻¹) : B) * z - 1) hdet using 1
+        simp only [map_one]
+        rfl
+      _ = 0 := by
+        exact sub_eq_zero.mpr (P.jacobian_isUnit.unit.inv_val)
 
 /-- The canonical map from the lifted quotient to the specified algebra `B`, sending `t`
 to the inverse Jacobian. Source: blueprint node `def-exc-etale-algebra-lift`
