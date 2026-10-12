@@ -6697,3 +6697,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:46 L: returned deliver/H2/Sheaf.AlgebraicGeometry.StrictHenselization (reviewer RETURN: (reviewer X-9280d, head 9280dc9aa) F (brief point 2): In coord/changes/strictHenselization-proof-imports.md, before line)
 - 07:46 L: returned deliver/C2/Sheaf.CategoryTheory.SiteInjectiveCechAcyclic (reviewer RETURN: (reviewer X-34ea1, head 34ea14282) B9: In dag/nodes/sec-proper-base-change/lem-weil-pbc-site-cech-cofree-exact.json, rep)
 - 07:46 L: returned deliver/A2/WeilConjectures.AlgebraicGeometry.Curve.Reductions (reviewer RETURN: (reviewer X-4e23d, head 4e23d6ef3) E1 (review point 4): In lean/WeilConjectures/AlgebraicGeometry/Curve/Reductions.lean:)
+- 07:50 L: returned deliver/F2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (reviewer RETURN: (reviewer X-5880a, head 5880a1c29) E5 / G1 (brief point 4): The earlier E5 return is unrepaired. The three docstrings an)
