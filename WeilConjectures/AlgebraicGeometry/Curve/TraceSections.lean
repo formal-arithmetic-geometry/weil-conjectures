@@ -238,8 +238,22 @@ lemma free_finite_chartBasicOpen :
         Γ(X, f ⁻¹ᵁ chartBasicOpen k i g)) ∧
     (letI := (f.app (chartBasicOpen k i g)).hom.toAlgebra;
       Module.Finite Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i g)
-        Γ(X, f ⁻¹ᵁ chartBasicOpen k i g)) :=
-  sorry
+        Γ(X, f ⁻¹ᵁ chartBasicOpen k i g)) := by
+  let := (polyToChartBasicOpen k i g).toAlgebra
+  have := isLocalization_chartBasicOpen k i g
+  refine ⟨?_, f.finite_app _ (isAffineOpen_chartBasicOpen k i g)⟩
+  let := (f.app (chartBasicOpen k i g)).hom.toAlgebra
+  by_cases hg : g = 0
+  · subst hg
+    have := IsLocalization.uniqueOfZeroMem (M := Submonoid.powers (0 : k[X]))
+      (S := Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i 0)) ⟨1, pow_one _⟩
+    exact .of_subsingleton' _ _
+  have := IsLocalization.isDomain_of_le_nonZeroDivisors
+    Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i g)
+    (powers_le_nonZeroDivisors_of_noZeroDivisors hg)
+  have := IsLocalization.isPrincipalIdealRing (Submonoid.powers g)
+    (S := Γ(ProjectiveLine (Spec (.of k)), chartBasicOpen k i g))
+  exact f.free_app (isAffineOpen_chartBasicOpen k i g)
 
 include hf hg in
 /-- **Duality over a basic open of a chart, injectivity.** If `Tr(b ω) = 0` for all
