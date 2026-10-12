@@ -95,6 +95,64 @@ theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, �
     Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) :=
   sorry
 
+end Coherence
+
+/-- **Coherence of the higher direct images from finiteness over affine opens.** Let
+`f : X ⟶ T` be quasi-compact and quasi-separated, `T` locally Noetherian and `ℱ` a coherent
+`𝒪_X`-module. If for every base change `f' : X' ⟶ T'` of `f` along an open immersion
+`g : T' ⟶ T` with `T'` affine with Noetherian ring of global sections, the global sections
+`Γ(T', R^q f'_* ℱ')` form a finite `Γ(T', ⊤)`-module, then `R^q f_* ℱ` is coherent: over each
+affine open `V = Spec A` of `T`, `R^q f_* ℱ|_V = R^q f'_* ℱ'` is quasi-coherent with finite module
+of global sections. -/
+theorem isFinitePresentation_higherDirectImage_of_finite_sections [QuasiCompact f]
+    [QuasiSeparated f] [HasInjectiveResolutions X.Modules] [IsLocallyNoetherian T]
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] [ℱ.IsFinitePresentation] (q : ℕ)
+    (hfin : ∀ {T' X' : Scheme.{u}} [IsAffine T'] [IsNoetherianRing Γ(T', ⊤)] (g : T' ⟶ T)
+      [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules],
+      IsPullback g' f' f g →
+      ∀ [SheafOfModules.IsQuasicoherent (R := X'.ringCatSheaf) ((Modules.pullback g').obj ℱ)]
+        [((Modules.pullback g').obj ℱ).IsFinitePresentation],
+        Module.Finite Γ(T', ⊤) Γ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ), ⊤)) :
+    ((higherDirectImage f q).obj ℱ).IsFinitePresentation := by
+  have hP (V : T.Opens) (hV : IsAffineOpen V) :
+      ∃ P : (((higherDirectImage f q).obj ℱ).restrict hV.fromSpec).Presentation, P.IsFinite := by
+    have := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
+    have : IsNoetherianRing Γ(Spec Γ(T, V), ⊤) :=
+      isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso Γ(T, V)).commRingCatIsoToRingEquiv.symm
+    have := isGrothendieckAbelian (Limits.pullback f hV.fromSpec)
+    obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ hV.fromSpec _ _
+      (IsPullback.of_hasPullback f hV.fromSpec) q
+    have : ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ).IsFinitePresentation :=
+      (SheafOfModules.isFinitePresentation (Limits.pullback f hV.fromSpec).ringCatSheaf).prop_of_iso
+        ((restrictFunctorIsoPullback _).app ℱ) (isFinitePresentation_restrictFunctor _ ℱ)
+    have : ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ).IsQuasicoherent :=
+      (SheafOfModules.isQuasicoherent (Limits.pullback f hV.fromSpec).ringCatSheaf).prop_of_iso
+        ((restrictFunctorIsoPullback _).app ℱ) (isQuasicoherent_restrictFunctor _ ℱ)
+    have := hfin hV.fromSpec (pullback.fst f hV.fromSpec) (pullback.snd f hV.fromSpec)
+      (IsPullback.of_hasPullback f hV.fromSpec)
+    let φ : Γ((higherDirectImage (pullback.snd f hV.fromSpec) q).obj
+        ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ), ⊤) →ₗ[Γ(Spec Γ(T, V), ⊤)]
+        Γ(((higherDirectImage f q).obj ℱ).restrict hV.fromSpec, ⊤) :=
+      { toFun := e.hom.app ⊤, map_add' := map_add _, map_smul' := Hom.app_smul e.hom }
+    have : Module.Finite Γ(Spec Γ(T, V), ⊤)
+        Γ(((higherDirectImage f q).obj ℱ).restrict hV.fromSpec, ⊤) :=
+      Module.Finite.of_surjective φ (ConcreteCategory.bijective_of_isIso (e.hom.app ⊤)).2
+    have := finite_sections_top_of_finite
+      (((higherDirectImage f q).obj ℱ).restrict hV.fromSpec)
+    have := isQuasicoherent_higherDirectImage f ℱ q
+    exact exists_presentation_isFinite _
+  have (V : T.affineOpens) : IsOpenImmersion (IsAffineOpen.fromSpec (U := V.1) V.2) :=
+    IsAffineOpen.isOpenImmersion_fromSpec V.2
+  choose P _ using fun V : T.affineOpens ↦ hP V.1 V.2
+  refine isFinitePresentation_of_iSup_opensRange_eq_top _ _ ?_ P
+  exact (iSup_congr fun V ↦ IsAffineOpen.opensRange_fromSpec V.2).trans
+    (iSup_affineOpens_eq_top T)
+
+section Coherence
+
+variable [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
+  [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
+
 /-- **Coherence of the higher direct images over a locally Noetherian base.** With
 `f : X ⟶ T` proper, `T` locally Noetherian and `ℱ` a coherent `𝒪_X`-module, the higher direct
 image `R^q f_* ℱ` is a coherent `𝒪_T`-module for every `q` [EGA III₁, 3.2.1],
@@ -114,40 +172,12 @@ killed by `V` and infinite-dimensional over `k`, hence not of finite type over `
 (blueprint: `sk-thm-picard-coherence`) -/
 theorem isFinitePresentation_higherDirectImage [IsLocallyNoetherian T]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    ((higherDirectImage f q).obj ℱ).IsFinitePresentation := by
-  have hP (V : T.Opens) (hV : IsAffineOpen V) :
-      ∃ P : (((higherDirectImage f q).obj ℱ).restrict hV.fromSpec).Presentation, P.IsFinite := by
-    have := IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
-    have : IsNoetherianRing Γ(Spec Γ(T, V), ⊤) :=
-      isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso Γ(T, V)).commRingCatIsoToRingEquiv.symm
-    have := isGrothendieckAbelian (Limits.pullback f hV.fromSpec)
-    obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ hV.fromSpec _ _
-      (IsPullback.of_hasPullback f hV.fromSpec) q
-    have : ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ).IsFinitePresentation :=
-      (SheafOfModules.isFinitePresentation (Limits.pullback f hV.fromSpec).ringCatSheaf).prop_of_iso
-        ((restrictFunctorIsoPullback _).app ℱ) (isFinitePresentation_restrictFunctor _ ℱ)
-    have : ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ).IsQuasicoherent :=
-      (SheafOfModules.isQuasicoherent (Limits.pullback f hV.fromSpec).ringCatSheaf).prop_of_iso
-        ((restrictFunctorIsoPullback _).app ℱ) (isQuasicoherent_restrictFunctor _ ℱ)
-    have := finite_sections_higherDirectImage (pullback.snd f hV.fromSpec)
-      ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ) q
-    let φ : Γ((higherDirectImage (pullback.snd f hV.fromSpec) q).obj
-        ((Modules.pullback (pullback.fst f hV.fromSpec)).obj ℱ), ⊤) →ₗ[Γ(Spec Γ(T, V), ⊤)]
-        Γ(((higherDirectImage f q).obj ℱ).restrict hV.fromSpec, ⊤) :=
-      { toFun := e.hom.app ⊤, map_add' := map_add _, map_smul' := Hom.app_smul e.hom }
-    have : Module.Finite Γ(Spec Γ(T, V), ⊤)
-        Γ(((higherDirectImage f q).obj ℱ).restrict hV.fromSpec, ⊤) :=
-      Module.Finite.of_surjective φ (ConcreteCategory.bijective_of_isIso (e.hom.app ⊤)).2
-    have := finite_sections_top_of_finite
-      (((higherDirectImage f q).obj ℱ).restrict hV.fromSpec)
-    have := isQuasicoherent_higherDirectImage f ℱ q
-    exact exists_presentation_isFinite _
-  have (V : T.affineOpens) : IsOpenImmersion (IsAffineOpen.fromSpec (U := V.1) V.2) :=
-    IsAffineOpen.isOpenImmersion_fromSpec V.2
-  choose P _ using fun V : T.affineOpens ↦ hP V.1 V.2
-  refine isFinitePresentation_of_iSup_opensRange_eq_top _ _ ?_ P
-  exact (iSup_congr fun V ↦ IsAffineOpen.opensRange_fromSpec V.2).trans
-    (iSup_affineOpens_eq_top T)
+    ((higherDirectImage f q).obj ℱ).IsFinitePresentation :=
+  isFinitePresentation_higherDirectImage_of_finite_sections f ℱ q
+    fun {_ _} _ _ _ _ _ f' _ sq _ _ ↦
+      have : IsProper f' := MorphismProperty.of_isPullback sq inferInstance
+      have : LocallyOfFinitePresentation f' := MorphismProperty.of_isPullback sq inferInstance
+      finite_sections_higherDirectImage f' _ q
 
 end Coherence
 

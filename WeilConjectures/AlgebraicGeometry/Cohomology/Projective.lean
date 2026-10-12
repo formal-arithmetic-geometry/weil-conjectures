@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechBaseChange
@@ -177,6 +178,23 @@ theorem Scheme.Modules.subsingleton_H_of_isClosedImmersion (A : Type u) [CommRin
   · rw [Finset.card_univ, ← Nat.card_eq_fintype_card, hn]
     omega
 
+omit [Finite n] in
+/-- **Base change of a projective morphism.** If `f = i ≫ π` for a closed immersion
+`i : X ⟶ ℙⁿ_S` and `f' : X' ⟶ T'` is the base change of `f` along `g : T' ⟶ S`, then
+`f' = i' ≫ π'` for a closed immersion `i' : X' ⟶ ℙⁿ_{T'}`, the base change of `i` along
+`ℙⁿ_{T'} ⟶ ℙⁿ_S`. -/
+lemma ProjectiveSpace.exists_isClosedImmersion_of_isPullback {S T' X' : Scheme.{u}}
+    {i : X ⟶ ℙ(n; S)} [IsClosedImmersion i] {g : T' ⟶ S} {g' : X' ⟶ X} {f' : X' ⟶ T'}
+    (sq : IsPullback g' f' (i ≫ ℙ(n; S) ↘ S) g) :
+    ∃ i' : X' ⟶ ℙ(n; T'), IsClosedImmersion i' ∧ i' ≫ ℙ(n; T') ↘ T' = f' := by
+  let i' := (ProjectiveSpace.isPullback_map n g).lift (g' ≫ i) f'
+    ((Category.assoc _ _ _).trans sq.w)
+  have h₁ : i' ≫ ProjectiveSpace.map n g = g' ≫ i := IsPullback.lift_fst _ _ _ _
+  have h₂ : i' ≫ ℙ(n; T') ↘ T' = f' := IsPullback.lift_snd _ _ _ _
+  have H : IsPullback g' i' i (ProjectiveSpace.map n g) :=
+    IsPullback.of_bot (h₂ ▸ sq) h₁.symm (ProjectiveSpace.isPullback_map n g)
+  exact ⟨i', MorphismProperty.of_isPullback H ‹_›, h₂⟩
+
 namespace Scheme.Modules
 
 variable {S : Scheme.{u}} (f : X ⟶ S) (i : X ⟶ ℙ(n; S)) [IsClosedImmersion i]
@@ -188,20 +206,22 @@ include hi in
 noetherian, `f : X ⟶ S` projective, i.e. `f = π ∘ i` for a closed immersion `i : X ⟶ ℙⁿ_S`,
 and `ℱ` a coherent `𝒪_X`-module. Then every `R^q f_* ℱ` is coherent.
 
-A projective morphism is proper, so this is a case of
-`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`. (The blueprint proves
-it directly, as the input of the proper case: over an affine open `Spec A` of `S`, the Čech
-complex of a finite affine cover of `f⁻¹(Spec A)` localises, so `R^q f_* ℱ` is the sheaf
-associated with the finite `A`-module `H^q(f⁻¹(Spec A), ℱ)`.)
+Over an affine open `Spec A` of `S`, with `A` noetherian, the base change of `f` is again
+projective (`AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_of_isPullback`), so the
+sections of its higher direct images, `H^q(f⁻¹(Spec A), ℱ)`, form a finite `A`-module
+(`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage_of_isClosedImmersion`);
+this gives coherence by
+`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage_of_finite_sections`.
 
 (blueprint: `lem-pc-projective-coherent-higher-images`) -/
 theorem isFinitePresentation_higherDirectImage_of_isClosedImmersion [IsLocallyNoetherian S]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsFinitePresentation := by
   subst hi
-  have : LocallyOfFinitePresentation (i ≫ ℙ(n; S) ↘ S) :=
-    (LocallyOfFinitePresentation.iff_locallyOfFiniteType).mpr inferInstance
-  exact isFinitePresentation_higherDirectImage _ ℱ q
+  refine isFinitePresentation_higherDirectImage_of_finite_sections _ ℱ q
+    fun {_ _} _ _ _ _ _ f' _ sq _ _ ↦ ?_
+  obtain ⟨i', _, hi'⟩ := ProjectiveSpace.exists_isClosedImmersion_of_isPullback sq
+  exact finite_sections_higherDirectImage_of_isClosedImmersion f' i' hi' _ q
 
 include hi in
 /-- **Vanishing of the higher direct images of a projective morphism.** In the situation of
