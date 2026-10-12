@@ -9,14 +9,8 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 
 @[expose] public section
 
@@ -44,6 +38,26 @@ theorem closedImmersion_coherentFormal_equivalence_completion {Z X : Scheme.{u}}
           (θ.hom.app G).app (op n) =
         (Scheme.Modules.pushforward i).map
           (formalModuleQuotientπ (I.comap i) (n + 1) G.obj) := by
-  sorry
+  classical
+  have : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType i
+  have hqc (G : CoherentModules Z) : G.obj.IsQuasicoherent :=
+    (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType Z G.obj).mp
+      G.property |>.1
+  let (G : CoherentModules Z) : G.obj.IsQuasicoherent := hqc G
+  obtain ⟨_, _, _, ρ, hπ, hnat, hlevel⟩ :=
+    Scheme.closedImmersion_pushforward_idealPowers i I
+  let e (G : CoherentModules Z) :
+      formalCompletionSystem I ((Scheme.Modules.pushforward i).obj G.obj) ≅
+        formalCompletionSystem (I.comap i) G.obj ⋙ Scheme.Modules.pushforward i :=
+    NatIso.ofComponents (fun n ↦ ρ G.obj (n.unop + 1) (Nat.le_add_left 1 n.unop))
+      (fun {m n} f ↦ by
+        exact hlevel G.obj (m.unop + 1) (n.unop + 1)
+          (Nat.add_le_add_right (leOfHom f.unop) 1) (Nat.le_add_left 1 n.unop))
+  refine ⟨NatIso.ofComponents e (fun {G H} f ↦ ?_), ?_⟩
+  · apply NatTrans.ext
+    funext n
+    exact hnat G.obj H.obj f.hom (n.unop + 1) (Nat.le_add_left 1 n.unop)
+  · intro G n
+    exact hπ G.obj (n + 1) (Nat.le_add_left 1 n)
 
 end AlgebraicGeometry
