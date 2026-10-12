@@ -10,13 +10,34 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Descend the finitely many coefficients and the simple root data to a pointed etale residue triple, then use the standard etale algebra adjoining a root and the induced residue embedding to obtain the required stage element.",
-   "uses": [],
+   "text": "Obtain filteredness from etaleResidueTriples_filtered_colimit. Prove joint surjectivity directly: the union of the cocone-leg images is a subring, since any two representatives have a common successor. Restrict the cocone to this subring. By the colimit universal property its inclusion admits a right inverse, hence every colimit element is in a stage image. Lift the finite set of coefficients to a common successor, and apply Polynomial.lifts_and_natDegree_eq_and_monic to obtain a monic polynomial g over that stage whose image is f. All these descent steps are proved in the private helpers stage_range_subset, stage_jointly_surjective, and stage_monic_polynomial, without a smallness assumption on the indexing category.",
+   "uses": [
+    "lem-weil-pbc-etale-triples-filtered-colimit"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Use hψ, Polynomial.eval₂_map, and Polynomial.derivative_map to transfer the prescribed simple-root conditions to g evaluated under the stage map to K. Form the StandardEtalePair with f=g and second polynomial g.derivative; the Bezout certificate is (1,0,1). Its universal algebra is etale over the stage, and StandardEtalePair.lift gives evaluation γ at a₀. Let q be ker γ. Lift γ to the ideal residue field and compose with Spec.residueFieldIso to obtain the scheme residue embedding. Spec.algebraMap_residueFieldIso_inv and Ideal.ResidueField.lift_algebraMap show that its composite with the canonical ring-to-residue map is γ. The old ring-to-K map has kernel the old prime because both residue-field maps are injective, so q lies over that prime. Composition of etale morphisms, the old compatibility equation, and γ.commutes produce a new triple and a morphism from the old triple. These calculations are proved in triple_map_eq_zero and triple_simple_root_extension.",
+   "uses": [
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-spec-residue-field-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the universal element P.X in the new triple. StandardEtalePair.hasMap_X proves its polynomial equation and StandardEtalePair.lift_X gives its image a₀. Cocone naturality identifies the two images of g in c.pt. Polynomial.map_map, Polynomial.eval_map and Polynomial.eval₂_at_apply transport the root equation to f. Finally hψ transfers its value in K to ψ applied to the cocone image.",
+   "uses": [
+    "lem-weil-pbc-standard-etale-monic-derivative"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
- "proof_origin": "Stacks Project Tags 04GN and 04GP; split from the finite-stage construction in the parent proof.",
+ "proof_deps": [
+  "lem-weil-pbc-etale-triples-filtered-colimit",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-standard-etale-monic-derivative"
+ ],
+ "proof_origin": "Stacks Project algebra.tex, lemma-henselization (Tag 04GN), final proof paragraph, and lemma-strict-henselization (Tag 04GP); full finite-stage construction formalized by M1. Coefficient descent is proved directly from filteredness and the colimit universal property; standard etale and residue-field calculations use the existing Mathlib leaves.",
  "status": "split",
  "created": {
   "by": "worker",
@@ -83,11 +104,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E2",
+  "reviewer": "X-9f005",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T053927-L-2633420",
+  "landing": "20261012T070543-L-3474052",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Lean theorem matches the node and original signature byte for byte; proof and dependencies agree, compilation is clean, axioms are allowed with reported dependency sorryAx, and import removal preserves downstream API."
  }
 }
