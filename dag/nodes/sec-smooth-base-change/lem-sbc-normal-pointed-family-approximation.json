@@ -1,0 +1,132 @@
+{
+ "id": "lem-sbc-normal-pointed-family-approximation",
+ "kind": "statement",
+ "title": "Normal Noetherian approximation of a pointed smooth family",
+ "statement": "Let $S$ be a quasi-compact quasi-separated integral scheme with integrally closed stalks\n[def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois]. Let $c:C\\to S$ be\nquasi-compact, quasi-separated, smooth [def-sbc-smooth-morphisms], and geometrically connected.\nLet $\\sigma:S\\to C$ satisfy $\\sigma c=1_S$, and let $n\\in\\mathbf N$ be invertible in\n$\\Gamma(S,\\mathcal O_S)$. There exist a small cofiltered category $I$, diagrams\n$X,Y:I\\to\\mathrm{Scheme}$, limiting cones $\\alpha:S\\to X$ and $\\gamma:C\\to Y$, and\nnatural transformations $p:Y\\to X$ and $\\tau:X\\to Y$. Every $X_i$ is integral,\nNoetherian, quasi-separated, and has integrally closed stalks. The transition maps of $X$\nare affine and every $\\alpha_i$ is dominant. Every square $(c,\\gamma_i,\\alpha_i,p_i)$\nis a pullback [def-pc-fibre-product], and for every arrow $f:i\\to j$ the square\n$(Y(f),p_i,p_j,X(f))$ is a pullback. The equalities\n$\\sigma\\gamma_i=\\alpha_i\\tau_i$ and $\\tau_i p_i=1_{X_i}$ hold. Every $p_i$ is\nquasi-compact, quasi-separated, smooth and geometrically connected, and $n$ is invertible\nin $\\Gamma(X_i,\\mathcal O_{X_i})$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, proof of Lemma 58.31.9, normal approximation through descent of the section and the invertible order"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Apply absolute Noetherian approximation to S. Replace every stage by the normalization of its integral scheme-theoretic image in its own fraction field. Finiteness of normalization over the integers gives Noetherian normal integral stages. Normality of S factors its projections through these stages; uniqueness supplies transition maps, and dominance follows from the image construction. The affine chart rings embed in the rings of S, contain the old image rings, and their union is the ring of S, so the new affine transition system still has limit S.",
+   "uses": [
+    "prop-nagata-noetherian-inverse-system",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the finitely presented smooth family and its section, including its section equation, to one stage; smoothness descends by Tag 0C0C. Restrict to the open component through the section. On every geometric fibre the original connected fibre meets this component and therefore maps into it; hence its pullback is all of C. This open model is quasi-compact since it is an open of a Noetherian family. Descend the inverse of n on a finite affine cover, and agreement on affine covers of overlaps. Pass to a cofiltered tail and take all later families and sections by base change. Their transition squares and comparison squares are cartesian; base change preserves smoothness and geometric connectedness and preserves the unit n. Base change of the fixed family gives its limit cone and the section compatibility.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-sbc-smooth-section-component-geometrically-irreducible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-smooth-section-component-geometrically-irreducible",
+  "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+  "prop-nagata-noetherian-inverse-system",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "F2",
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, proof of Lemma 58.31.9, normal approximation through descent of the section and the invertible order",
+  "note": "The categorical steps in CartesianFamilyGenericLimit are proved in Lean; the geometric existence steps are separated with their full source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a cofiltered system of integral schemes with affine transition maps and dominant projections the function field of the inverse limit is the filtered colimit of the stage function fields",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "functionField.*(limit|Limit)|normal.*[Aa]pprox|[Aa]pprox.*normal",
+   "results": "0 hits: ; no exact combined approximation or function-field limit theorem.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal integral quasi compact quasi separated scheme is a cofiltered limit of normal integral Noetherian schemes and a smooth family with section descends",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; no exact combined approximation or function-field limit theorem.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism of finite presentation with a section over an integrally closed scheme admits a model over a normal scheme of finite type over the integers",
+   "results": "AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc; AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom; AlgebraicGeometry.Scheme.Hom.normalizationDesc; AlgebraicGeometry.Scheme.Hom.toNormalization; AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization; AlgebraicGeometry.Scheme.Hom.normalization. No exact residual interface.",
+   "verdict": "no exact match",
+   "date": "2026-10-12",
+   "digest": "ed5a536ea7484a29"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NormalFamilyGenericLimit",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Limit reduction: normal Noetherian models and the assertion that their generic fibres have the given generic fibre as limit",
+   "via": [
+    "lem-sbc-normal-family-generic-limit",
+    "lem-sbc-noetherian-spreading-data",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.NormalPointedFamilyApproximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/NormalPointedFamilyApproximation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_normal_pointed_family_approximation",
+  "statement": "theorem exists_normal_pointed_family_approximation {S C : Scheme.{u}} [CompactSpace S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]\n    (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S) (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤))) :\n    ∃ (I : Type u) (hcat : SmallCategory I),\n      letI : SmallCategory I := hcat\n      ∃ (hco : IsCofiltered I) (X Y : I ⥤ Scheme.{u})\n        (α : (Functor.const I).obj S ⟶ X) (γ : (Functor.const I).obj C ⟶ Y)\n        (hα : IsLimit (Cone.mk S α)) (hγ : IsLimit (Cone.mk C γ))\n        (p : Y ⟶ X) (τ : X ⟶ Y) (hI : ∀ i, IsIntegral (X.obj i)),\n        (∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f)) ∧\n        (∀ i, IsDominant (α.app i)) ∧\n        (∀ i, IsPullback c (γ.app i) (α.app i) (p.app i)) ∧\n        (∀ {i j : I} (f : i ⟶ j),\n          IsPullback (Y.map f) (p.app i) (p.app j) (X.map f)) ∧\n        (∀ i, σ ≫ γ.app i = α.app i ≫ τ.app i) ∧\n        (∀ i, IsNoetherian (X.obj i) ∧ QuasiSeparatedSpace (X.obj i) ∧\n          (∀ x : X.obj i, IsIntegrallyClosed ((X.obj i).presheaf.stalk x)) ∧\n          QuasiCompact (p.app i) ∧ QuasiSeparated (p.app i) ∧ Smooth (p.app i) ∧\n          GeometricallyConnected (p.app i) ∧ τ.app i ≫ p.app i = 𝟙 (X.obj i) ∧\n          IsUnit (n : Γ(X.obj i, ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-af525",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T135233-L-1665220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-af525",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T135233-L-1665220",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet statements and compiled successfully, including direct importer NoetherianSpreadingData; interface, proof, DAG, residual-sorry, report, and reader-gate checks passed."
+ }
+}

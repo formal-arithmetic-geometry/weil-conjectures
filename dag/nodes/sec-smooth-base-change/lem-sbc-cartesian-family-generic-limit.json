@@ -1,0 +1,126 @@
+{
+ "id": "lem-sbc-cartesian-family-generic-limit",
+ "kind": "statement",
+ "title": "Generic fibres of a cartesian family system",
+ "statement": "Let $I$ be a small cofiltered category, $S$ an integral scheme, and $C$ a scheme.\nLet $X,Y:I\\to\\mathrm{Scheme}$, with $X_i$ integral quasi-compact quasi-separated and\nall transitions of $X$ affine [def-weil-pbc-scheme-conventions]. Let $\\alpha:S\\to X$\nand $\\gamma:C\\to Y$ be limiting cones, $c:C\\to S$, and $p:Y\\to X$ a natural\ntransformation whose components are quasi-compact and quasi-separated. Assume every\n$\\alpha_i$ is dominant, every square $(c,\\gamma_i,\\alpha_i,p_i)$ is cartesian, and\nfor every arrow $f:i\\to j$ the square $(Y(f),p_i,p_j,X(f))$ is cartesian\n[def-pc-fibre-product]. Let $q:C_\\eta\\to\\operatorname{Spec}k(S)$ and $j:C_\\eta\\to C$\nform the generic-fibre pullback with $\\iota:\\operatorname{Spec}k(S)\\to S$ and $c$.\nThen there exist diagrams $D,K:I\\to\\mathrm{Scheme}$, limiting cones\n$\\kappa:C_\\eta\\to D$ and $b:\\operatorname{Spec}k(S)\\to K$, natural transformations\n$r:D\\to K$, $\\delta:D\\to Y$, $t:K\\to X$, and isomorphisms\n$e_i:K_i\\cong\\operatorname{Spec}k(X_i)$. Both $D$ and $K$ have qcqs objects and\naffine transition maps. For every i the square $(r_i,\\delta_i,t_i,p_i)$ is a pullback,\n$e_i^{-1}t_i=\\iota_i$, $\\kappa_i r_i=q b_i$, $\\kappa_i\\delta_i=j\\gamma_i$, and\n$b_i t_i=\\iota\\alpha_i$, where $\\iota_i$ is the generic point inclusion of $X_i$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, proof of Lemma 58.31.9, generic-fibre limit assertion and its pullback construction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the dominant function-field limit theorem to X and its limit cone α, obtaining K, b, t, e and its qcqs and affine properties.",
+   "uses": [
+    "lem-sbc-dominant-function-field-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the actual pointwise pullbacks D_i=K_i×_{X_i}Y_i and combine their cones into a functor using PullbackCone.combine. The two projections give r and δ. Lift q b_i and j γ_i into the pullbacks; their compatibility follows from the original generic-fibre square and the comparison square at i. Pullback hom_ext and cone naturality prove that these lifts give the cone κ and both projection equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any cone z over D, its composites with r and δ lift uniquely along b and γ. The resulting maps into Spec k(S) and C commute over S: test this with the limiting cone α and use each stage pullback square. Lift them into the supplied generic-fibre pullback Cη. The two projection equations prove the factorization equations at every stage. For uniqueness, test with q and j, then use the uniqueness of the lifts along b and γ. This is the explicit IsLimit construction in the Lean proof.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The projections D_i→K_i are base changes of the qcqs maps p_i, so their domains are qcqs. Paste the stage pullback square with the cartesian Y transition square, then cancel the stage pullback square at the destination. This proves that D(f) is the base change of K(f). Hence it is affine. Retain the constructed pullbacks and all projection equalities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-dominant-function-field-limit"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "F2",
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, proof of Lemma 58.31.9, generic-fibre limit assertion and its pullback construction",
+  "note": "The categorical steps in CartesianFamilyGenericLimit are proved in Lean; the geometric existence steps are separated with their full source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a cofiltered system of integral schemes with affine transition maps and dominant projections the function field of the inverse limit is the filtered colimit of the stage function fields",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "functionField.*(limit|Limit)|normal.*[Aa]pprox|[Aa]pprox.*normal",
+   "results": "0 hits: ; no exact combined approximation or function-field limit theorem.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal integral quasi compact quasi separated scheme is a cofiltered limit of normal integral Noetherian schemes and a smooth family with section descends",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; no exact combined approximation or function-field limit theorem.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NormalFamilyGenericLimit",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Limit reduction: normal Noetherian models and the assertion that their generic fibres have the given generic fibre as limit",
+   "via": [
+    "lem-sbc-normal-family-generic-limit",
+    "lem-sbc-noetherian-spreading-data",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.CartesianFamilyGenericLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/CartesianFamilyGenericLimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_cartesian_family_generic_limit",
+  "statement": "theorem exists_cartesian_family_generic_limit {I : Type u} [SmallCategory I]\n    [IsCofiltered I] {S C : Scheme.{u}} [IsIntegral S]\n    (X Y : I ⥤ Scheme.{u}) [∀ i, IsIntegral (X.obj i)]\n    (hXqc : ∀ i, CompactSpace (X.obj i)) (hXqs : ∀ i, QuasiSeparatedSpace (X.obj i))\n    (hXa : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f))\n    (α : (Functor.const I).obj S ⟶ X) (γ : (Functor.const I).obj C ⟶ Y)\n    (hα : IsLimit (Cone.mk S α)) (hγ : IsLimit (Cone.mk C γ))\n    (c : C ⟶ S) (p : Y ⟶ X)\n    (hpqc : ∀ i, QuasiCompact (p.app i)) (hpqs : ∀ i, QuasiSeparated (p.app i))\n    (hdom : ∀ i, IsDominant (α.app i))\n    (hcart : ∀ i, IsPullback c (γ.app i) (α.app i) (p.app i))\n    (htrans : ∀ {i j : I} (f : i ⟶ j),\n      IsPullback (Y.map f) (p.app i) (p.app j) (X.map f))\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c) :\n    ∃ (D K : I ⥤ Scheme.{u}) (κ : (Functor.const I).obj Cη ⟶ D)\n      (b : (Functor.const I).obj (Spec S.functionField) ⟶ K)\n      (r : D ⟶ K) (δ : D ⟶ Y) (t : K ⟶ X)\n      (e : ∀ i, K.obj i ≅ Spec (X.obj i).functionField)\n      (_hκ : IsLimit (Cone.mk Cη κ)) (_hb : IsLimit (Cone.mk (Spec S.functionField) b)),\n      (∀ i, CompactSpace (D.obj i)) ∧ (∀ i, QuasiSeparatedSpace (D.obj i)) ∧\n      (∀ i, CompactSpace (K.obj i)) ∧ (∀ i, QuasiSeparatedSpace (K.obj i)) ∧\n      (∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)) ∧\n      (∀ {i j : I} (f : i ⟶ j), IsAffineHom (K.map f)) ∧\n      (∀ i, IsPullback (r.app i) (δ.app i) (t.app i) (p.app i)) ∧\n      (∀ i, (e i).inv ≫ t.app i = (X.obj i).fromSpecStalk (genericPoint (X.obj i))) ∧\n      (∀ i, κ.app i ≫ r.app i = q ≫ b.app i) ∧\n      (∀ i, κ.app i ≫ δ.app i = j ≫ γ.app i) ∧\n      (∀ i, b.app i ≫ t.app i = S.fromSpecStalk (genericPoint S) ≫ α.app i)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-af525",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T135233-L-1665220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-af525",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T135233-L-1665220",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet statements and compiled successfully, including direct importer NoetherianSpreadingData; interface, proof, DAG, residual-sorry, report, and reader-gate checks passed."
+ }
+}

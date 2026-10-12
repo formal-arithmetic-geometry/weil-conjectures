@@ -1,0 +1,120 @@
+{
+ "id": "lem-sbc-dominant-function-field-limit",
+ "kind": "statement",
+ "title": "Function-field spectra in a dominant affine transition limit",
+ "statement": "Let $I$ be a small cofiltered category and $X:I\\to\\mathrm{Scheme}$ a diagram of\nintegral quasi-compact quasi-separated schemes with affine transition maps\n[def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois]. Let $S$ be integral\nand let $\\alpha:S\\to X$ be a limiting cone with every projection $\\alpha_i$ dominant.\nThere exist $K:I\\to\\mathrm{Scheme}$, a limiting cone\n$b:\\operatorname{Spec}k(S)\\to K$, a natural transformation $t:K\\to X$, and\nisomorphisms $e_i:K_i\\cong\\operatorname{Spec}k(X_i)$. All $K_i$ are quasi-compact and\nquasi-separated, and the transition maps of $K$ are affine. Writing $\\iota$ and\n$\\iota_i$ for the canonical maps from the spectra of the function fields to $S$ and\n$X_i$, respectively, one has $e_i^{-1}t_i=\\iota_i$ and $b_i t_i=\\iota\\alpha_i$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, proof of Lemma 58.31.9, function-field calculation underlying the assertion that the generic fibre is a limit"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Dominance sends generic points to generic points. The stalk maps therefore give embeddings of stage function fields into k(S). Each transition is dominant since its composite with a dominant limit projection is dominant. Its generic stalk map gives the corresponding embedding of function fields. Functoriality of stalk maps gives the spectrum diagram K and the natural maps b and t; take e_i to be the identity on the actual spectrum of the stage field.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose a nonempty affine open U_j at one stage, and pass to the cofiltered slice over j. The inverse images U_i are affine nonempty integral opens, as is their limit U in S. The affine limit identifies its ring with the filtered colimit of the stage coordinate rings. Their maps are injective by dominance. A fraction in the limit ring has numerator and nonzero denominator in a common stage, so k(S) is the filtered colimit of the stage fraction fields; injectivity follows from the field embeddings. Cofinality of the slice proves the assertion over I. Applying Spec gives the limit cone b. The generic stalk maps give both stated comparison identities. Spectra of fields are qcqs and every morphism between affine schemes is affine.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "F2",
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, proof of Lemma 58.31.9, function-field calculation underlying the assertion that the generic fibre is a limit",
+  "note": "The categorical steps in CartesianFamilyGenericLimit are proved in Lean; the geometric existence steps are separated with their full source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a cofiltered system of integral schemes with affine transition maps and dominant projections the function field of the inverse limit is the filtered colimit of the stage function fields",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "functionField.*(limit|Limit)|normal.*[Aa]pprox|[Aa]pprox.*normal",
+   "results": "0 hits: ; no exact combined approximation or function-field limit theorem.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal integral quasi compact quasi separated scheme is a cofiltered limit of normal integral Noetherian schemes and a smooth family with section descends",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization; no exact combined approximation or function-field limit theorem.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic point residue field of an inverse limit of integral schemes with affine transition maps and dominant projections is the direct limit of their generic point residue fields",
+   "results": "AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField; AlgebraicGeometry.Scheme.residue_descResidueField; AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField; AlgebraicGeometry.Scheme.descResidueField; AlgebraicGeometry.Scheme.instFieldCarrierResidueField; AlgebraicGeometry.Scheme.residue_descResidueField_assoc; AlgebraicGeometry.Scheme.SpecToEquivOfField; AlgebraicGeometry.Scheme.over_def. No exact residual interface.",
+   "verdict": "no exact match",
+   "date": "2026-10-12",
+   "digest": "d28fcce176363f9b"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NormalFamilyGenericLimit",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Limit reduction: normal Noetherian models and the assertion that their generic fibres have the given generic fibre as limit",
+   "via": [
+    "lem-sbc-normal-family-generic-limit",
+    "lem-sbc-noetherian-spreading-data",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DominantFunctionFieldLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DominantFunctionFieldLimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_dominant_function_field_limit",
+  "statement": "theorem exists_dominant_function_field_limit {I : Type u} [SmallCategory I]\n    [IsCofiltered I] {S : Scheme.{u}} [IsIntegral S]\n    (X : I ⥤ Scheme.{u}) [∀ i, IsIntegral (X.obj i)]\n    (hXqc : ∀ i, CompactSpace (X.obj i)) (hXqs : ∀ i, QuasiSeparatedSpace (X.obj i))\n    (hXa : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f))\n    (α : (Functor.const I).obj S ⟶ X) (hα : IsLimit (Cone.mk S α))\n    (hdom : ∀ i, IsDominant (α.app i)) :\n    ∃ (K : I ⥤ Scheme.{u}) (b : (Functor.const I).obj (Spec S.functionField) ⟶ K)\n      (t : K ⟶ X) (e : ∀ i, K.obj i ≅ Spec (X.obj i).functionField)\n      (hb : IsLimit (Cone.mk (Spec S.functionField) b)),\n      (∀ i, CompactSpace (K.obj i)) ∧ (∀ i, QuasiSeparatedSpace (K.obj i)) ∧\n      (∀ {i j : I} (f : i ⟶ j), IsAffineHom (K.map f)) ∧\n      (∀ i, (e i).inv ≫ t.app i = (X.obj i).fromSpecStalk (genericPoint (X.obj i))) ∧\n      (∀ i, b.app i ≫ t.app i = S.fromSpecStalk (genericPoint S) ≫ α.app i)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-af525",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T135233-L-1665220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-af525",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T135233-L-1665220",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet statements and compiled successfully, including direct importer NoetherianSpreadingData; interface, proof, DAG, residual-sorry, report, and reader-gate checks passed."
+ }
+}

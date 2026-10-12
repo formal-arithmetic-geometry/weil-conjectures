@@ -15,44 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Apply absolute Noetherian approximation to S. Replace each stage by the normalization\n   of its integral scheme-theoretic image in that image's own fraction field, embedded\n   in the function field of S. This normalization is finite because the image is\n   excellent and of finite type over the integers.\n   Normality of S factors the projection through this normalization. The resulting\n   stages are normal integral finite type integer schemes, the projections are dominant,\n   and transition maps exist by the universal property of normalization. They are affine:\n   their composites with the finite normalization maps are affine, and an S-morphism\n   between affine S-schemes is affine. On affine charts the new coordinate rings lie in\n   the corresponding rings of S, contain the old images, and their union is that ring.\n   Thus the new system still has limit S.",
+   "text": "Apply exists_normal_pointed_family_approximation to obtain a normal Noetherian cartesian system of families, their limiting cones, compatible sections, and stagewise invertibility of n. Use Noetherian compactness for the base objects.",
    "uses": [
-    "prop-nagata-noetherian-inverse-system",
-    "lem-weil-pbc-finite-type-z-domain-normalization-finite"
+    "lem-sbc-normal-pointed-family-approximation"
    ],
    "elementary": false
   },
   {
-   "text": "Descend the finitely presented smooth family and its section to a stage. Smoothness\n   holds after increasing the stage. Restrict to the open relative component through\n   the descended section, whose fibres are geometrically irreducible. The section lies\n   in this open. The projection from C factors through it: each geometric fibre of C\n   is connected and meets that component at the section point, so its image lies in\n   the component. Thus the pullback is all of C. Pass to the cofiltered tail of this\n   stage. Descend the inverse of n in the\n   global section rings (on a finite affine cover, including agreement on overlaps).\n   Every later family is its base change, so the section, smoothness, geometric\n   connectedness, and invertibility persist.",
+   "text": "Apply exists_cartesian_family_generic_limit to this system and to the supplied generic-fibre square. It provides generic-fibre and generic-base diagrams with limits, actual pullback projections, and the generic-point identifications.",
    "uses": [
-    "thm-pd-spreading-out",
-    "lem-sbc-smooth-section-component-geometrically-irreducible"
+    "lem-sbc-cartesian-family-generic-limit"
    ],
    "elementary": false
   },
   {
-   "text": "Dominance embeds each stage function field into the function field of S. On affine\n   charts each fraction in the latter uses two elements from a common stage and a\n   nonzero denominator. Hence these function fields have filtered colimit S.functionField.\n   Their spectra form the inverse system K with the stated limit cone b. Form D from\n   the generic fibres of the descended families; cartesian base change commutes with\n   limits, so Cη is its limit, using the supplied generic-fibre pullback square.",
+   "text": "At every stage lift the identity on K_i and t_i τ_i into its generic-fibre pullback. The section equation τ_i p_i=1 makes this lift well-defined. Pullback hom_ext and naturality of t, τ, r and δ show these lifts form s:K→D. Test the given generic section compatibility with r_i and δ_i; the supplied equations sη q=1, sη j=ι σ and the two comparison cone equations prove both tests. Thus sη κ_i=b_i s_i.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Let e identify K at each stage with the spectrum of the stage function field. Base\n   change the descended sections to obtain the natural transformation s. The universal\n   properties of these pullbacks give both section equalities and the compatibility\n   of the given generic section with the two limit cones. The family projections give\n   a, and the generic-fibre projections give κ; their composites with j₀ and j agree.\n   Generic fibres are qcqs, being base changes of finitely presented families to fields;\n   their transition maps are affine base changes. The spectra of fields are qcqs and\n   have affine transition maps. Retain these data as existential witnesses.",
+   "text": "Set S₀(i)=X_i, C₀(i)=Y_i, c₀(i)=p_i, σ₀(i)=τ_i, q₀(i)=r_i e_i, j₀(i)=δ_i, and a(i)=γ_i. Transport each generic-fibre pullback along e_i using IsPullback.of_iso. The two section equations follow from the lift projection equations and e_i^{-1}e_i=1. All family properties come directly from the descended system, and κ_i j₀(i)=j a(i) is the generic comparison equation. Assemble these witnesses.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-smooth-section-component-geometrically-irreducible",
-  "lem-weil-pbc-finite-type-z-domain-normalization-finite",
-  "prop-nagata-noetherian-inverse-system",
-  "thm-pd-spreading-out"
+  "lem-sbc-normal-pointed-family-approximation",
+  "lem-sbc-cartesian-family-generic-limit"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "N2",
+  "by": "F2",
   "document": "Stacks Project",
-  "place": "Tag 0EZJ, proof of Lemma 58.31.9, normal approximation and smooth family descent, through the generic-fibre limit assertion",
-  "note": "Residual step of the limit reduction, with the omitted compatibility and point-descent details written out; no extension theorem is used."
+  "place": "Tag 0EZJ, normal approximation and generic-fibre limit reduction",
+  "note": "Split the geometric existence into a descended pointed family system and a dominant function-field limit. Generic-fibre pullback assembly and every pointed compatibility equation are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -123,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N2",
+  "reviewer": "X-af525",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T110313-L-619622",
+  "landing": "20261012T135233-L-1665220",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet statements and compiled successfully, including direct importer NoetherianSpreadingData; interface, proof, DAG, residual-sorry, report, and reader-gate checks passed."
  }
 }
