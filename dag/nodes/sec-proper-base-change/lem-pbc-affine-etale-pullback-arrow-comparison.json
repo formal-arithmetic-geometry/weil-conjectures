@@ -1,0 +1,113 @@
+{
+ "id": "lem-pbc-affine-etale-pullback-arrow-comparison",
+ "kind": "statement",
+ "title": "Arrow comparisons for fixed affine étale pullbacks",
+ "statement": "Let f:T→S be affine, p:L→T and r:L→S with p followed by f equal to r. Let vS and vT be functors from the full affine étale categories over S and T to that over L, with underlying natural transformations qS and qT whose squares are pullbacks over r and p. Fix A, a finite family B_a over S, and arrows g_a:vS(B_a)→vS(A). Suppose scheme morphisms ψj_a:B_a ×_S T→A respect the structure maps and, on further pullback to L, equal the composite of the inverse qS-pullback comparison, g_a and qS at A. There are arrows fi_a between the canonical affine étale pullbacks over T, and isomorphisms from their vT-images to the vS-images, such that vT(fi_a) followed by the target comparison equals the source comparison followed by g_a.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Étale Cohomology 0EYL; Limits 01ZM(2)"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-pbc-full-affine-etale-site",
+  "lem-weil-pbc-affine-etale-site-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Define fi by pullback.lift of ψj and the second projection and lift it through Over.homMk and ObjectProperty.homMk. Paste the qT-square with the canonical base-change square and rewrite p followed by f as r. Both this pasted square and the qS-square are pullbacks over r; composing their isoPullback isomorphisms yields scheme isomorphisms over L, hence full affine étale isomorphisms. To prove the arrow equality apply the two faithful forgetful layers and hom_ext for the qS target square. The first projection equality follows from qT naturality, the lift first-projection formula, and the assumed descent equality, using pullback.hom_ext to identify the canonical map. The second projection equality follows because every arrow is over L. This includes the empty family and f an identity.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-etale-site-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-etale-site-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Étale Cohomology 0EYL; Limits 01ZM(2); source read online 2026-10-12; S2 complete Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between finitely presented schemes descend from an inverse limit to a finite stage",
+   "results": "LeanFinder returned 8 hits, including Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType and Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType. Direct reading found the proved Scheme.exists_pullback_hom_of_isLimit wrapper.",
+   "date": "2026-10-12",
+   "verdict": "use existing single-arrow descent; prove finite wrapper"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPullback.isoPullback",
+   "results": "Loogle returned no hits: unknown identifier IsPullback.isoPullback. Direct reading of Mathlib confirms the fully qualified API.",
+   "date": "2026-10-12",
+   "verdict": "use pullback uniqueness"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*pullback.*hom|affineEtale.*comparison",
+   "results": "4 hits concerning affineCover.pullbackHom; no exact wrapper. Direct rg confirms pullback paste_horiz, hom_ext and Over.isoMk.",
+   "date": "2026-10-12",
+   "verdict": "no exact wrapper; prove from existing APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of morphisms between finitely presented schemes descends over an inverse limit to a common stage",
+   "results": "Service unavailable: Internal Server Error; no absence verdict.",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramArrows",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-affine-etale-model-arrows",
+   "place": "fixed-stage pullback comparison of arrows",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineEtalePullbackArrowComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtalePullbackArrowComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineEtale_pullback_arrow_comparison",
+  "statement": "theorem affineEtale_pullback_arrow_comparison\n    {S T L : Scheme.{u}} (f : T ⟶ S) [IsAffineHom f]\n    (p : L ⟶ T) (r : L ⟶ S) (hr : p ≫ f = r)\n    (vS : S.FullAffineEtale ⥤ L.FullAffineEtale)\n    (vT : T.FullAffineEtale ⥤ L.FullAffineEtale)\n    (qS : vS ⋙ fullAffineEtaleInclusion L ⋙ Etale.forget L ⋙ Over.forget L ⟶\n      fullAffineEtaleInclusion S ⋙ Etale.forget S ⋙ Over.forget S)\n    (qT : vT ⋙ fullAffineEtaleInclusion L ⋙ Etale.forget L ⋙ Over.forget L ⟶\n      fullAffineEtaleInclusion T ⋙ Etale.forget T ⋙ Over.forget T)\n    (hS : ∀ A : S.FullAffineEtale,\n      IsPullback (qS.app A) (vS.obj A).obj.hom A.obj.hom r)\n    (hT : ∀ A : T.FullAffineEtale,\n      IsPullback (qT.app A) (vT.obj A).obj.hom A.obj.hom p)\n    (n : ℕ) (A : S.FullAffineEtale) (B : Fin n → S.FullAffineEtale)\n    (g : ∀ a, vS.obj (B a) ⟶ vS.obj A)\n    (ψj : ∀ a, pullback (B a).obj.hom f ⟶ A.obj.left)\n    (hψj : ∀ a, ψj a ≫ A.obj.hom = pullback.fst (B a).obj.hom f ≫ (B a).obj.hom)\n    (hdesc : ∀ a,\n      pullback.map (B a).obj.hom r (B a).obj.hom f\n        (𝟙 _) p (𝟙 _) (by simp) (by simpa using hr.symm) ≫ ψj a =\n        (hS (B a)).isoPullback.inv ≫ (g a).hom.left ≫ qS.app A) :\n    ∃ (fi : ∀ a, (affineEtaleBaseChange f).obj (B a) ⟶\n        (affineEtaleBaseChange f).obj A)\n      (t : vT.obj ((affineEtaleBaseChange f).obj A) ≅ vS.obj A)\n      (s : ∀ a, vT.obj ((affineEtaleBaseChange f).obj (B a)) ≅ vS.obj (B a)),\n      ∀ a, vT.map (fi a) ≫ t.hom = (s a).hom ≫ g a",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T135314-L-1691477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T135314-L-1691477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

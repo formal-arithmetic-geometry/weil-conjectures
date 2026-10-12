@@ -6,8 +6,9 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteBaseChange
+import Sheaf.AlgebraicGeometry.FinitePullbackHomDescent
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.AffineEtalePullbackArrowComparison
 
 /-!
 # Eventual lifting of arrows between affine étale models
@@ -64,6 +65,47 @@ theorem affineEtale_model_arrows
         IsPullback (rB a) (Bj a).obj.hom (Bi a).obj.hom (D.map (homOfLE h).op)) ∧
       ∃ (t : (v j).obj Aj ≅ (v i).obj Ai)
         (s : ∀ a : Fin n, (v j).obj (Bj a) ≅ (v i).obj (Bi a)),
-        ∀ a : Fin n, (v j).map (fi a) ≫ t.hom = (s a).hom ≫ g a  := by sorry
+        ∀ a : Fin n, (v j).map (fi a) ≫ t.hom = (s a).hom ≫ g a  := by
+  let : IsAffine Ai.obj.left := Ai.property
+  let : ∀ a, IsAffine (Bi a).obj.left := fun a ↦ (Bi a).property
+  let : Etale Ai.obj.hom := Ai.obj.prop
+  let : ∀ a, Etale (Bi a).obj.hom := fun a ↦ (Bi a).obj.prop
+  let : ∀ a, LocallyOfFinitePresentation (Bi a).obj.hom := fun a ↦ by
+    let : IsAffine (Bi a).obj.left := (Bi a).property
+    let : Etale (Bi a).obj.hom := (Bi a).obj.prop
+    have : CompactSpace (Bi a).obj.left := inferInstance
+    have : QuasiSeparatedSpace (Bi a).obj.left := inferInstance
+    infer_instance
+  let : ∀ a, QuasiCompact (Bi a).obj.hom := fun a ↦ by
+    let : IsAffine (Bi a).obj.left := (Bi a).property
+    exact @quasiCompact_of_compactSpace (Bi a).obj.left (D.obj (op i))
+      (Bi a).obj.hom inferInstance inferInstance
+  let : ∀ a, QuasiSeparated (Bi a).obj.hom := fun a ↦ by
+    let : IsAffine (Bi a).obj.left := (Bi a).property
+    exact @QuasiSeparated.of_quasiSeparatedSpace (Bi a).obj.left (D.obj (op i))
+      (Bi a).obj.hom inferInstance
+  let ψ : ∀ a, pullback (Bi a).obj.hom (c.π.app (op i)) ⟶ Ai.obj.left :=
+    fun a ↦ (h2 i (Bi a)).isoPullback.inv ≫ (g a).hom.left ≫ (q i).app Ai
+  have hψ (a : Fin n) : ψ a ≫ Ai.obj.hom =
+      pullback.fst (Bi a).obj.hom (c.π.app (op i)) ≫ (Bi a).obj.hom := by
+    dsimp [ψ]
+    rw [Category.assoc, Category.assoc, (h2 i Ai).w]
+    rw [← Category.assoc ((g a).hom.left), MorphismProperty.Over.w]
+    rw [← Category.assoc, (h2 i (Bi a)).isoPullback_inv_snd]
+    exact (pullback.condition (f := (Bi a).obj.hom) (g := c.π.app (op i))).symm
+  obtain ⟨j, h, ψj, hψj, hdesc⟩ := finite_pullback_hom_descent D c hc i n
+    (fun a ↦ (Bi a).obj.left) Ai.obj.left (fun a ↦ (Bi a).obj.hom) Ai.obj.hom ψ hψ
+  let f := D.map (homOfLE h).op
+  obtain ⟨fi, t, s, heq⟩ := affineEtale_pullback_arrow_comparison f
+    (c.π.app (op j)) (c.π.app (op i)) (c.w (homOfLE h).op)
+    (v i) (v j) (q i) (q j) (h2 i) (h2 j) n Ai Bi g ψj hψj hdesc
+  refine ⟨j, h, (affineEtaleBaseChange f).obj Ai,
+    (fun a ↦ (affineEtaleBaseChange f).obj (Bi a)), fi,
+    pullback.fst Ai.obj.hom f, (fun a ↦ pullback.fst (Bi a).obj.hom f), ?_, ?_,
+    t, s, heq⟩
+  · exact IsPullback.of_hasPullback Ai.obj.hom f
+  · intro a
+    exact IsPullback.of_hasPullback (Bi a).obj.hom f
+
 
 end AlgebraicGeometry.Scheme

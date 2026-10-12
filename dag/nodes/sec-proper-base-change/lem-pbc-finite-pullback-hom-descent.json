@@ -1,0 +1,111 @@
+{
+ "id": "lem-pbc-finite-pullback-hom-descent",
+ "kind": "statement",
+ "title": "Finite family descent of pullback morphisms",
+ "statement": "Let D be a directed inverse system of qcqs schemes with affine transition maps and c a limiting cone. Fix i, a finite family V_a and a target W, all finitely presented over D_i, and morphisms ψ_a from V_a ×_{D_i} c.pt to W respecting the structure maps. There is j ≥ i and morphisms ψj_a from V_a ×_{D_i} D_j to W respecting structure maps, whose compositions with the canonical limit-to-stage pullback maps equal ψ_a. The family can be empty.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits 01ZM(2)"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply exists_pullback_hom_of_isLimit separately to each member. Choose an upper bound of the finite range of resulting stages and i by Finite.bddAbove_range and exists_ge_ge. Compose each descended arrow with the canonical pullback map to its own stage. Pullback projection equations prove the structure-map equation; pullback.hom_ext and cone naturality identify the composite limit-to-stage maps, giving the required equality. For the empty family the finite range has an upper bound by nonemptiness; all equations are vacuous.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits 01ZM(2); source read online 2026-10-12; S2 complete Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between finitely presented schemes descend from an inverse limit to a finite stage",
+   "results": "LeanFinder returned 8 hits, including Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType and Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType. Direct reading found the proved Scheme.exists_pullback_hom_of_isLimit wrapper.",
+   "date": "2026-10-12",
+   "verdict": "use existing single-arrow descent; prove finite wrapper"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPullback.isoPullback",
+   "results": "Loogle returned no hits: unknown identifier IsPullback.isoPullback. Direct reading of Mathlib confirms the fully qualified API.",
+   "date": "2026-10-12",
+   "verdict": "use pullback uniqueness"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*pullback.*hom|affineEtale.*comparison",
+   "results": "4 hits concerning affineCover.pullbackHom; no exact wrapper. Direct rg confirms pullback paste_horiz, hom_ext and Over.isoMk.",
+   "date": "2026-10-12",
+   "verdict": "no exact wrapper; prove from existing APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of morphisms between finitely presented schemes descends over an inverse limit to a common stage",
+   "results": "Service unavailable: Internal Server Error; no absence verdict.",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramArrows",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-affine-etale-model-arrows",
+   "place": "finite simultaneous morphism descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePullbackHomDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePullbackHomDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_pullback_hom_descent",
+  "statement": "theorem finite_pullback_hom_descent\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ (i : Iᵒᵖ), CompactSpace (D.obj i)]\n    [∀ (i : Iᵒᵖ), QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i : I) (n : ℕ)\n    (V : Fin n → Scheme.{u}) (W : Scheme.{u})\n    (pV : ∀ a, V a ⟶ D.obj (op i)) (pW : W ⟶ D.obj (op i))\n    [∀ a, LocallyOfFinitePresentation (pV a)] [∀ a, QuasiCompact (pV a)]\n    [∀ a, QuasiSeparated (pV a)]\n    [LocallyOfFinitePresentation pW] [QuasiCompact pW] [QuasiSeparated pW]\n    (ψ : ∀ a, pullback (pV a) (c.π.app (op i)) ⟶ W)\n    (hψ : ∀ a, ψ a ≫ pW = pullback.fst (pV a) (c.π.app (op i)) ≫ pV a) :\n    ∃ (j : I) (h : i ≤ j)\n      (ψj : ∀ a, pullback (pV a) (D.map (homOfLE h).op) ⟶ W),\n      (∀ a, ψj a ≫ pW = pullback.fst (pV a) (D.map (homOfLE h).op) ≫ pV a) ∧\n      ∀ a,\n        pullback.map (pV a) (c.π.app (op i)) (pV a) (D.map (homOfLE h).op)\n          (𝟙 _) (c.π.app (op j)) (𝟙 _) (by simp) (by simp) ≫ ψj a = ψ a",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T135314-L-1691477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T135314-L-1691477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
