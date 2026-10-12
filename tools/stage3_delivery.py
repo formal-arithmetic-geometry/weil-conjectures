@@ -502,6 +502,66 @@ def probe_fails(D: dict, results: list[dict]) -> list[tuple[str, str]]:
 # CODEX: it changes a statement, a definition, an import other modules see, or adds nodes; an independent Codex
 # reviewer on another machine reads it, and a script executes the verdict (merge_delivery.py ... --stage 3 or return).
 
+def reader_risks(old: str | None, new: str) -> list[str]:
+    """Existing-module effects that a compile of the module cannot validate for importers.
+
+    Uses the existing Lean lexer to mask comments/strings. Explicit local instances and
+    registrations scoped with `attribute [local instance]` are excluded.
+    """
+    if old is None:
+        return []
+    a, b = li.commands(old), li.commands(new)
+    before = {(c["kind"], c["name"] or c["statement"]) for c in a if c["kind"] != "other"}
+    risks = []
+    masked = s2.mask(new)
+    # Track section/namespace scopes so a local registration cannot suppress a global
+    # instance outside that scope. Registrations may follow the instance declaration.
+    scopes, stack, locals_by_scope, scope_at = [0], [], {}, {}
+    next_scope = 0
+    for line in masked.splitlines():
+        if re.match(r"\s*(?:namespace|(?:noncomputable\s+)?section)\b", line):
+            next_scope += 1; stack.append(next_scope)
+        scope = tuple(stack)
+        m = re.match(r"\s*attribute\s+\[local\s+instance\]\s+(.+)", line)
+        if m:
+            locals_by_scope.setdefault(scope, set()).update(m.group(1).split())
+        m = re.match(r"\s*(?:(?:noncomputable|public|private|protected)\s+)*instance\s+([^\s:([{]+)", line)
+        if m:
+            scope_at[m.group(1)] = scope
+        if re.match(r"\s*end\b", line) and stack:
+            stack.pop()
+    for c in b:
+        if c['kind'] != 'instance' or (c['kind'], c['name'] or c['statement']) in before:
+            continue
+        name = c['name']; short = name.split('.')[-1]
+        scope = scope_at.get(name, scope_at.get(short, ()))
+        local_names = locals_by_scope.get(scope, set()) if scope else set()
+        if 'local' not in c['head'].split() and name not in local_names and short not in local_names:
+            risks.append('adds a global instance ' + (name or c['statement']))
+    existing = {c['name'] for c in a if c['name']}
+    attrs = re.compile(r"(?:instance|simp|ext|reducible|expose)\b")
+    ah = {c['name']: c['head'] for c in a if c['name']}
+    for c in b:
+        if c['name'] in existing and c['head'] != ah[c['name']] and (attrs.search(c['head']) or attrs.search(ah[c['name']])):
+            risks.append('changes an elaboration attribute on ' + c['name'])
+    def registrations(text):
+        return {line.strip() for line in s2.mask(text).splitlines()
+                if re.match(r"\s*attribute\s+\[[-+]?(?:instance|simp|ext|reducible)\b", line)}
+    for line in registrations(old) ^ registrations(new):
+        names = line.split(']', 1)[-1].split()
+        if any(n in existing or any(x.endswith('.' + n) for x in existing) for n in names):
+            risks.append('changes an elaboration attribute: ' + line)
+    removed = set(s2.public_imports(old)) - set(s2.public_imports(new))
+    if removed:
+        risks.append('removes or privatizes public import ' + ', '.join(sorted(removed)))
+    def options(text):
+        return {line.strip() for line in s2.mask(text).splitlines()
+                if re.match(r"^set_option\b.*\bin(?:\s|$)", line)}
+    if options(new) - options(old):
+        risks.append('adds file-level set_option … in')
+    return list(dict.fromkeys(risks))
+
+
 def classify(D: dict, group: str, item: str) -> list[str]:
     """The reasons for a reader (CODEX; empty: AUTO) from the static reading; the compile and the probe are the
     merge's AUTO gate."""
@@ -520,6 +580,7 @@ def classify(D: dict, group: str, item: str) -> list[str]:
     routes = None
     for m in D["modules"]:
         d = m["diff"]
+        why.extend("reader required: " + r + " in " + m["module"] for r in reader_risks(m.get("old"), m["text"] or ""))
         if d["interface"]:
             why.append(f"changes what other modules see in {m['module']}: {', '.join(d['interface'][:3])}")
         if d["statement_changed"]:

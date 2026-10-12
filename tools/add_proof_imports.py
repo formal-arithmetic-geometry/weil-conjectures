@@ -37,7 +37,7 @@ names of D reach no other file, a later removal by the worker who proves M is a 
 AUTO), and a change in D recompiles M and nothing above M.
 """
 from __future__ import annotations
-import collections, json, pathlib, re, sys
+import collections, hashlib, json, pathlib, re, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import leanindex as li  # noqa: E402
@@ -203,6 +203,8 @@ def plan():
 
 
 def write(added, public: bool) -> int:
+    from pipeline_guard import proof_imports_guard
+    proof_imports_guard(li.ROOT, {m for m, _, _, _ in added})
     by = collections.defaultdict(list)
     for m, dm, _, _ in added:
         by[m].append(dm)
@@ -252,8 +254,23 @@ def main() -> int:
     args = sys.argv[1:]
     check, public, every = "--check" in args, "--public" in args, "--all" in args
     jf = args[args.index("--json") + 1] if "--json" in args else None
-    if set(args) - {"--check", "--public", "--all", "--json", jf}:
+    af = args[args.index('--apply-plan') + 1] if '--apply-plan' in args else None
+    if set(args) - {"--check", "--public", "--all", "--json", jf, '--apply-plan', af}:
         print(__doc__); return 2
+    from pipeline_guard import proof_imports_guard
+    try:
+        proof_imports_guard(li.ROOT)
+    except RuntimeError as e:
+        print(e); return 4
+    if af:
+        saved = json.loads(pathlib.Path(af).read_text())
+        proof_imports_guard(li.ROOT, {m for m, _, _, _ in saved.get('added', [])})
+        for m, sha in saved.get('source_hashes', {}).items():
+            if hashlib.sha256(li.file_of(m).read_bytes()).hexdigest() != sha:
+                print('proof imports refused: source changed after plan: ' + m); return 4
+        n = write(saved.get('added', []), public)
+        print(f"wrote {len(saved.get('added', []))} imports into {n} files")
+        return 0
     rep, g = plan()
     c = rep.pop("#counts")
     print(f"proof-dependency edges between stated modules (node level): {c.get('edges between stated modules (node level)', 0)}; "
@@ -270,7 +287,10 @@ def main() -> int:
     up = sorted({m for m, _, _, _ in added if m.startswith("WeilConjectures.")})
     print(f"modules of the source library that get imports: {len(up)}" + (": " + " ".join(up) if up else ""))
     if jf:
-        pathlib.Path(jf).write_text(json.dumps({k: [list(x) for x in v] for k, v in rep.items()}, indent=1))
+        saved = {k: [list(x) for x in v] for k, v in rep.items()}
+        saved['source_hashes'] = {m: hashlib.sha256(li.file_of(m).read_bytes()).hexdigest()
+                                  for m in g if li.file_of(m).is_file()}
+        pathlib.Path(jf).write_text(json.dumps(saved, indent=1))
     if check:
         return 1 if added else 0
     # no cycle may exist after the edges are added: tested once more on the whole graph before anything is written

@@ -60,7 +60,7 @@ def classify(g: str, item: str, D=None):
         # the human, 2026-10-12: in stage 3 a proof that compiles is checked by the compiler, not by a reader. A reader
         # is kept only where the compiler cannot see the harm: an existing statement or interface changed, a declaration
         # removed, a unit-route import removed, a disputed statement, a forbidden keyword, failed static checks.
-        KEEP = ("the static checks fail", "statement changed", "removes declarations", "removes the import of unit-route",
+        KEEP = ("reader required:", "the static checks fail", "statement changed", "removes declarations", "removes the import of unit-route",
                 "new ", "STATEMENT-DISPUTED", "changes what other modules see")
         allwhy = why
         why = [w for w in why if w.startswith(KEEP) and not w.endswith(": (new module)")]

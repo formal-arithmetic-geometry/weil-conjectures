@@ -296,6 +296,12 @@ def main_stage3(g, item) -> int:
             w("")
     for m in D["modules"]:
         d = m["diff"]
+        risks = s3.reader_risks(m.get('old'), m['text'] or '')
+        if risks:
+            direct = sorted(x for x, deps in s3.scan_imports().items() if m['module'] in deps)
+            w('Reader required: ' + '; '.join(risks))
+            w('Direct importers to compile individually with lcompile.py before PASS: ' + (', '.join(direct) or '(none)'))
+            w('Copy these importer sources into FILESDIR/lean, preserving module paths. Compile the delivered modules into FILESDIR/.lbuild first, then each importer separately so it sees the new module.')
         w(f"## 3. Module {m['file']} ({m['role']})\n")
         w(f"- imports added: {d['added_imports'] or '-'}; removed: {d['removed_imports'] or '-'}; importers: "
           f"{len(s3.importers(m['module']))}")
