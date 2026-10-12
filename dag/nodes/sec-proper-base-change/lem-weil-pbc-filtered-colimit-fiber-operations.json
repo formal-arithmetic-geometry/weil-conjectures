@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-fiber-operations",
+ "kind": "statement",
+ "title": "Identity and composition on filtered arrow fibers",
+ "statement": "For a small filtered J and F : J → Cat, using the fibers Hom(X,Y) of [def-weil-pbc-filtered-colimit-hom-fibers], there exist identity elements i(X) and a binary composition c : Hom(X,Y) × Hom(Y,Z) → Hom(X,Z) that send each stage identity to the identity fiber element and each stage composite to the composition of its fiber representatives.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proof of Lemma Tag 09YL, first paragraph (https://stacks.math.columbia.edu/tag/09YL); equality of representatives: Categories Section Tag 04AX (https://stacks.math.columbia.edu/tag/04AX). Online sources read because the literature files are absent on this machine."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-filtered-colimit-hom-fibers"
+ ],
+ "proof": [
+  {
+   "text": "Represent an object in the object colimit by a stage object and send its\nidentity to the arrow colimit. Represent two composable fiber elements by stage\narrows. Move the representatives to a common stage. Their middle endpoints agree\nin the object colimit, so the filtered-colimit equality criterion makes them equal\nat a further stage. Transport along this equality and compose at that stage.\nIndependence of all choices follows by moving two choices to a common stage and\nusing eventual equality for their arrows and endpoints; transition functors preserve\nidentities and composition. The resulting arrow has the required endpoints, so lies\nin the required fiber. The formulas for stage identities and composites follow by\nchoosing the stage itself for the representatives. Empty stage categories give no\nobjects requiring identities; otherwise each object has a representative.",
+   "uses": [
+    "def-weil-pbc-filtered-colimit-hom-fibers",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-filtered-colimit-hom-fibers",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Detailed expansion of the inherited operations and category axioms in the first paragraph of Tag 09YL, using Tag 04AX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The category structure on a filtered colimit of categories is given by fibers of source and target on the colimit of arrows",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity and composition on source target fibers of the filtered colimit of arrows",
+   "date": "2026-10-12",
+   "results": "IsFiltered.toSup_commutes; Functor.ιColimitType_eq_iff_of_isFiltered; IsFiltered.sup_exists; IsFiltered.coeq_condition. None constructs operations or their laws on the colimit arrow fibers.",
+   "verdict": "No direct match; the equality criterion is recorded on the existing elementwise node."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff; equality criterion only.",
+   "verdict": "No direct match for fibers, operations, or category laws."
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredColimitHom|filteredColimit_fiber|filteredColimitArrowSource in lean and Mathlib/CategoryTheory",
+   "date": "2026-10-12",
+   "results": "No matches. Blueprint search for filtered colimit found no imported node for these component constructions.",
+   "verdict": "No existing definition or component theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredColimitCategoryStructure",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "First paragraph of the proof of Tag 09YL: inherited source, target, composition and the resulting category; component of lem-weil-pbc-filtered-colimit-category-structure.",
+   "via": [
+    "lem-weil-pbc-filtered-colimit-category-structure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredColimitFiberOperations",
+  "file": "lean/Sheaf/CategoryTheory/FilteredColimitFiberOperations.lean",
+  "declaration": "CategoryTheory.filteredColimit_fiber_operations",
+  "statement": "theorem filteredColimit_fiber_operations\n    (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :\n    let O := colimit (F ⋙ Cat.objects)\n    ∃ (i : ∀ X : O, FilteredColimitHom F X X)\n      (c : ∀ {X Y Z : O}, FilteredColimitHom F X Y →\n        FilteredColimitHom F Y Z → FilteredColimitHom F X Z),\n      (∀ (j : J) (X : F.obj j),\n        i (colimit.ι (F ⋙ Cat.objects) j X) = filteredColimitHomι F j (𝟙 X)) ∧\n      (∀ (j : J) (X Y Z : F.obj j) (f : X ⟶ Y) (g : Y ⟶ Z),\n        c (filteredColimitHomι F j f) (filteredColimitHomι F j g) =\n          filteredColimitHomι F j (f ≫ g))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T070534-L-3469991",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T070534-L-3469991",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
