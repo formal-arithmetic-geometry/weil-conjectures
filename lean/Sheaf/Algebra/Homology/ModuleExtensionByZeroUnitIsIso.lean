@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitMono
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitEpi
 import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 
 /-! # Invertibility of the open extension unit
@@ -14,6 +16,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 universe u
 noncomputable section
 namespace AlgebraicGeometry
+set_option linter.style.haveILetI false
 /-- The unit of the chosen extension-by-zero/restriction adjunction is an isomorphism.
 Source: Stacks Project, Sheaves Lemma 00A7 (4), label lemma-j-shriek-modules;
 Modules on Sites Lemma 03DI, label lemma-extension-by-zero.
@@ -30,6 +33,10 @@ W empty (the category of module sheaves is then trivial) and W equal to X. -/
 theorem moduleExtensionByZero_unit_isIso (X : RingedSpace.{u}) (W : Opens X)
     (G : SheafOfModules.{u} ((moduleRings X).over W)) :
     IsIso ((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).unit.app G)
-    := by sorry
+    := by
+  let f := (Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).unit.app G
+  haveI : Mono f := moduleExtensionByZero_unit_mono X W G
+  haveI : Epi f := moduleExtensionByZero_unit_epi X W G
+  exact isIso_of_mono_of_epi f
 
 end AlgebraicGeometry

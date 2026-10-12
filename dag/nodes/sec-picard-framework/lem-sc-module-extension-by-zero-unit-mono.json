@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-module-extension-by-zero-unit-mono",
+ "kind": "statement",
+ "title": "The chosen open-extension adjunction unit is monic",
+ "statement": "For every ringed space X, open W and module sheaf G on W, the chosen extension-by-zero/restriction adjunction unit component at G is a monomorphism.",
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves Tag 00A7 (lemma-j-shriek-modules), (4); Modules on Sites Tag 03DI (lemma-extension-by-zero)"
+ },
+ "proof": [
+  {
+   "text": "Prove the corresponding monomorphism/epimorphism by the direct-sum extension-by-zero construction and the restriction universal property.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves Tag 00A7 (lemma-j-shriek-modules), (4); Modules on Sites Tag 03DI (lemma-extension-by-zero)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the restriction of a sheaf of modules to an open subset is naturally linearly isomorphic to its original stalk",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, ModuleCat.Tilde.stalkIso_hom, AlgebraicGeometry.Scheme.Opens.stalkIso, AlgebraicGeometry.morphismRestrictStalkMap, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, ModuleCat.Tilde.stalkIso",
+   "verdict": "no full match; restriction-stalk comparison available only for abelian groups or schemes",
+   "digest": "3492cfbcba26764f"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.PresheafedSpace.restrictStalkIso",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.PresheafedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ_assoc, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ_assoc, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ_apply, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ_apply",
+   "verdict": "no full match; restriction-stalk comparison available only for abelian groups or schemes",
+   "digest": "975ac75ca187b7cf"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|extensionByZero.*unit|unit.*extensionByZero",
+   "date": "2026-10-12",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "verdict": "no full match; restriction-stalk comparison available only for abelian groups or schemes",
+   "digest": "ada769008021fbd2"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For extension by zero of module sheaves on an open subset, the adjunction unit is an isomorphism and induces a linear map on stalks",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|extensionByZero.*FullyFaithful|fullyFaithful.*extension",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "verdict": "No independent full match: fully faithful left-adjoint criterion needs full faithfulness of this extension functor, not yet available without the current stalk theorem.",
+   "digest": "930af28c2275bb7f"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves of modules is fully faithful and the adjunction unit with restriction is invertible",
+   "date": "2026-10-12",
+   "results": "PresheafOfModules.sheafificationAdjunction, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app, LightCondensed.freeForgetAdjunction, PresheafOfModules.sheafifyHomEquiv', CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.LocallyConstant.fullyFaithfulFunctor, PresheafOfModules.sheafificationCompToSheaf",
+   "verdict": "No independent full match: fully faithful left-adjoint criterion needs full faithfulness of this extension functor, not yet available without the current stalk theorem.",
+   "digest": "fce974d534365988"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful, CategoryTheory.Adjunction.Triple.rightToLeft_eq_units",
+   "verdict": "No independent full match: fully faithful left-adjoint criterion needs full faithfulness of this extension functor, not yet available without the current stalk theorem.",
+   "digest": "551a44756a048dfa"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitIsIso",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-module-extension-by-zero-unit-isiso",
+   "place": "decomposition of unit invertibility into mono and epi",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitMono",
+  "file": "lean/Sheaf/Algebra/Homology/ModuleExtensionByZeroUnitMono.lean",
+  "declaration": "AlgebraicGeometry.moduleExtensionByZero_unit_mono",
+  "statement": "theorem moduleExtensionByZero_unit_mono (X : RingedSpace.{u}) (W : Opens X)\n    (G : SheafOfModules.{u} ((moduleRings X).over W)) :\n    Mono ((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).unit.app G)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-49d88",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T194137-L-463981",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-49d88",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T194137-L-463981",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files against packet, DAG metadata, target signatures, axioms, and direct importer; all compile cleanly."
+ }
+}

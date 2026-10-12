@@ -9260,3 +9260,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/R2/Sheaf.CategoryTheory.CompactHomHocolim (stage 3; reviewer PASS; first push; landing 20261012T194136-L-463509 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/R3/Sheaf.AlgebraicGeometry.AffinePushoutFirstTensorSections (stage 3; reviewer PASS; first push; landing 20261012T194137-L-463608 (interface); batch 20261012T194054; modules 3; new nodes 2)
 - 19:41 L: merged deliver/R3/Sheaf.RingTheory.ResidueFieldProjectiveDimension (stage 3; reviewer PASS; first push; landing 20261012T194137-L-463738 (interface); batch 20261012T194054; modules 2; new nodes 1)
+- 19:41 L: merged deliver/S1/Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitIsIso (stage 3; reviewer PASS; first push; landing 20261012T194137-L-463981 (interface); batch 20261012T194054; modules 3; new nodes 2; change records: coord/changes/moduleExtensionByZero_unit_isIso.md)
