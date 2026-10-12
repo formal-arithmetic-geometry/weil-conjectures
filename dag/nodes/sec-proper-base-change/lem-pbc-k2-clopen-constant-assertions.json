@@ -1,0 +1,139 @@
+{
+ "id": "lem-pbc-k2-clopen-constant-assertions",
+ "kind": "statement",
+ "title": "Constant curve assertions assemble over a finite clopen partition",
+ "statement": "Let Λ be an arbitrary commutative coefficient ring, k an algebraically closed field, f : X → Spec k a separated finite-type scheme of dimension at most one [def-sc-curves], and M a Λ-module. Suppose a finite family of pairwise disjoint clopen opens U_i covers X. If the constant M sheaf on each U_i satisfies the eight assertions [def-weil-pbc-eight-curve-assertions] relative to U_i → X → Spec k, then the constant M sheaf on X satisfies all eight assertions. No smoothness, connectedness, finiteness or prime-annihilation hypothesis on M is imposed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-smooth-curve-kummer-localization.md",
+  "place": "Proof, first paragraph: finite disjoint unions commute with every map under consideration"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "A finite disjoint clopen cover realizes X as the coproduct of the pieces: morphisms from X glue uniquely from the disjoint opens, with no overlap compatibility. The existing clopen sheaf product theorem identifies abelian sheaves and global sections with the componentwise product. Constant sheaves restrict to the same constant module by upperStarConstantSheafIso, and forgetting coefficients preserves these isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-etale-sheaf-clopen-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing finiteCoproductCohomologyAssembly to the underlying abelian sheaf and the clopen coproduct cofan. It identifies its cohomology with the product of the inverse-image cohomology on the pieces. Normalize those restrictions by the constant-sheaf isomorphisms. Equivalently, exact finite direct image along the clopen inclusions gives the same identification by the edge maps.",
+   "uses": [
+    "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+    "lem-weil-pbc-finite-pushforward-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affineness and properness restrict to closed components. Constructibility restricts to open subschemes. The geometric-stalk formula for inverse image restricts primary and invertible-order torsion. Apply the supplied component assertions to obtain C1-C5.",
+   "uses": [
+    "def-weil-pbc-eight-curve-assertions",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull a field-extension square or an open immersion back to every clopen piece. Finite base change and naturality identify each cohomology comparison with the finite product of the component comparisons. Products of bijective maps are bijective and finite products of surjective maps are surjective. This yields C6-C8. An empty index forces X to be empty and gives zero cohomology; a singleton is the identity case.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "def-weil-pbc-eight-curve-assertions",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-smooth-curve-kummer-localization.md",
+  "place": "Proof, first paragraph: finite disjoint unions commute with every map under consideration"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology on a finite disjoint union of connected components is the product of their cohomology",
+   "results": "8 hits on singular homology, formal etale product algebras and categorical coproducts; no etale curve assertion assembly.",
+   "date": "2026-10-13",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.H",
+   "results": "Loogle returned no hits because Sheaf.H was unknown to its index. This is not evidence of nonexistence; the local library search supplies the available clopen vanishing and finite edge comparison declarations.",
+   "date": "2026-10-13",
+   "verdict": "Use the existing finite edge comparison and naturality; the assembly statement is new."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*assertions|assertions.*clopen|finite disjoint unions",
+   "results": "Blueprint first paragraph states this reduction in words. Library contains clopen sheaf-product equivalence, finiteCoproductCohomologyAssembly, clopen vanishing, finite pushforward transfer and prime biproduct assertions. These supply the component cohomology identifications, but none packages the eight conditional constant-module assertions over a given finite clopen partition. Blueprint clopen search found four unrelated imported nodes.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of finite clopen disjoint union preserves vanishing finiteness and base change maps",
+   "results": "Service unavailable: Internal Server Error; no hits and no mathematical verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": null
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-kummer-localization",
+   "place": "Proof, first paragraph: finite disjoint unions commute with every map under consideration",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertions",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ClopenConstantAssertions.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.assertions_constant_of_isClopen",
+  "statement": "theorem assertions_constant_of_isClopen (Λ : Type (u + 1)) [CommRing Λ]\n    {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsCurve f] (M : ModuleCat.{u + 1} Λ)\n    {ι : Type u} [Finite ι] (U : ι → X.Opens)\n    (hU : ∀ i, IsClosed (U i : Set X))\n    (hdisj : Pairwise (fun i j ↦ Disjoint (U i : Set X) (U j)))\n    (hcov : ∀ x : X, ∃ i, x ∈ U i)\n    (H : ∀ i, Assertions Λ ((U i).ι ≫ f)\n      ((constantSheaf (U i).toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :\n    Assertions Λ f ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T212208-L-1097599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T212208-L-1097599",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

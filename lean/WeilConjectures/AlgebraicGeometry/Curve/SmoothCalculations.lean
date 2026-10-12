@@ -22,16 +22,15 @@ import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierProperDegreeZero
 import Sheaf.AlgebraicGeometry.Curve.ProperConstantBaseChangeZero
 import Sheaf.AlgebraicGeometry.Curve.ProperConstantBaseChangeOne
 import Sheaf.AlgebraicGeometry.Curve.ProperConstantBaseChangeHigher
-import Sheaf.AlgebraicGeometry.Curve.ProperConstantBaseChangeZero
-import Sheaf.AlgebraicGeometry.Curve.ProperConstantBaseChangeOne
-import Sheaf.AlgebraicGeometry.Curve.ProperConstantBaseChangeHigher
 import Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyScalarModel
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.AlgebraicGeometry.PrimeInjectiveCohomologyComparison
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.CohomologyRestrictionSquareTransport
-import WeilConjectures.AlgebraicGeometry.Sites.Gm
+import Sheaf.AlgebraicGeometry.Curve.ClopenConstantAssertions
+import Sheaf.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
+import Sheaf.AlgebraicGeometry.Curve.PrimeTorsionNonunitCohomology
 
 /-!
 # The curve assertions for constant coefficients on smooth curves
@@ -679,6 +678,82 @@ theorem constantModSheaf_curveCalculations [IsCurve f] [Smooth f] [ConnectedSpac
 
 /-! ### The eight assertions on smooth curves -/
 
+private theorem assertions_constantModSheaf_connected [IsCurve f] [Smooth f]
+    [ConnectedSpace C] (r : ℕ) [Fact r.Prime]
+    [Finite (Λ ⧸ (Ideal.span {(r : Λ)} : Ideal Λ))] :
+    Assertions Λ f (Etale.constantModSheaf Λ C r) := by
+  let F := Etale.constantModSheaf Λ C r
+  let T := sheafCompose C.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  have : T.Additive := ⟨by intros; rfl⟩
+  have hnonunit (hr : (r : k) = 0) : ¬ IsUnit (r : Γ(Spec (.of k), ⊤)) := by
+    intro hu
+    have hu' : IsUnit (r : k) := by
+      simpa using hu.map
+        (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.toMonoidHom
+    exact hu'.ne_zero hr
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · exact subsingleton_sheafH_constantModSheaf_of_two_lt Λ f r
+  · intro _
+    exact subsingleton_sheafH_constantModSheaf_of_one_lt_of_isAffine Λ f r
+  · intro p _ _ hF q hq
+    by_cases hrp : r = p
+    · subst p
+      exact subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP Λ f r q hq
+    · have hz := (Scheme.prime_annihilated_primary_cases Λ r F
+        (Etale.nsmul_id_constantModSheaf Λ C r)).2 p hrp hF
+      exact Sheaf.subsingleton_H_of_isZero (T.map_isZero hz) q
+  · intro _ _ q
+    by_cases hr : (r : k) ≠ 0
+    · exact finite_sheafH_constantModSheaf_of_ne_zero Λ f r hr q
+    · have := (prime_torsion_nonunit_cohomology Λ (k := k) (𝟙 C) r F
+        (Etale.nsmul_id_constantModSheaf Λ C r) (hnonunit (not_ne_iff.mp hr)) q).1
+      infer_instance
+  · intro _ _
+    exact finite_sheafH_constantModSheaf_of_isProper Λ f r
+  · intro _ k' _ _ C' ι f' ι' h q
+    by_cases hr : (r : k) ≠ 0
+    · exact bijective_cohomologyMap_constantModSheaf_of_ne_zero Λ f r hr k' h q
+    · obtain ⟨hs, ht⟩ := prime_torsion_nonunit_cohomology Λ (k := k) ι' r F
+        (Etale.nsmul_id_constantModSheaf Λ C r) (hnonunit (not_ne_iff.mp hr)) q
+      have := hs
+      have := ht
+      exact ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun y ↦ ⟨0, Subsingleton.elim _ _⟩⟩
+  · intro _ k' _ _ C' ι f' ι' h q
+    exact bijective_cohomologyMap_constantModSheaf_of_isProper Λ f r k' h q
+  · intro W a _
+    exact surjective_cohomologyMap_constantModSheaf_two Λ f r a
+
+private theorem assertions_constantModSheaf_smooth [IsCurve f] [Smooth f]
+    (r : ℕ) [Fact r.Prime] [Finite (Λ ⧸ (Ideal.span {(r : Λ)} : Ideal Λ))] :
+    Assertions Λ f (Etale.constantModSheaf Λ C r) := by
+  classical
+  have : IsNoetherian C := isNoetherian_of_locallyOfFiniteType f
+  choose x hx using ConnectedComponents.surjective_coe (α := C)
+  let U (c : _root_.ConnectedComponents C) : C.Opens :=
+    ⟨connectedComponent (x c), TopologicalSpace.NoetherianSpace.isOpen_connectedComponent _⟩
+  have hcov (y : C) : ∃ c, y ∈ U c := by
+    refine ⟨y, ?_⟩
+    change y ∈ connectedComponent (x y)
+    rw [ConnectedComponents.coe_eq_coe.mp (hx y)]
+    exact mem_connectedComponent
+  have hdisj : Pairwise (fun c d ↦ Disjoint (U c : Set C) (U d)) := by
+    intro c d hcd
+    refine Set.disjoint_left.mpr fun y (hyc : y ∈ connectedComponent (x c))
+      (hyd : y ∈ connectedComponent (x d)) ↦ hcd ?_
+    rw [← hx c, ← hx d, ConnectedComponents.coe_eq_coe,
+      connectedComponent_eq hyc, connectedComponent_eq hyd]
+  apply assertions_constant_of_isClopen Λ f
+    (ModuleCat.of Λ (Λ ⧸ (Ideal.span {(r : Λ)} : Ideal Λ))) U
+    (fun _ ↦ isClosed_connectedComponent) hdisj hcov
+  intro c
+  have : ConnectedSpace (U c) :=
+    isConnected_iff_connectedSpace.mp isConnected_connectedComponent
+  have : IsCurve ((U c).ι ≫ f) :=
+    { krullDim_le_one := (topologicalKrullDim_subspace_le C (U c)).trans
+        (IsCurve.krullDim_le_one (f := f)) }
+  exact assertions_constantModSheaf_connected Λ ((U c).ι ≫ f) r
+
 /-- **The eight assertions for `𝐅_ℓ`, `ℓ ≠ char k`, on a smooth curve.** Let `k` be
 algebraically closed, `C` a smooth separated `k`-scheme of finite type of dimension at most
 one (not necessarily connected) and `ℓ` a prime different from `char k`. Then the constant sheaf
@@ -690,7 +765,9 @@ compactification of `C` and purity for the boundary points.
 theorem assertions_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f] (ℓ : ℕ) [Fact ℓ.Prime]
     (hℓ : (ℓ : k) ≠ 0) [Finite (Λ ⧸ (Ideal.span {(ℓ : Λ)} : Ideal Λ))] :
     IsCurve.Assertions Λ f (Etale.constantModSheaf Λ C ℓ) :=
-  sorry
+  by
+    have _ := hℓ
+    exact assertions_constantModSheaf_smooth Λ f ℓ
 
 /-- **The eight assertions for `𝐅_p`, `p = char k`, on a smooth curve.** Let `k` be
 algebraically closed of characteristic `p > 0` and `C` a smooth separated `k`-scheme of finite
@@ -705,7 +782,7 @@ not stated).
 theorem assertions_constantModSheaf_of_charP [IsCurve f] [Smooth f] (p : ℕ) [Fact p.Prime]
     [CharP k p] [Finite (Λ ⧸ (Ideal.span {(p : Λ)} : Ideal Λ))] :
     IsCurve.Assertions Λ f (Etale.constantModSheaf Λ C p) :=
-  sorry
+  assertions_constantModSheaf_smooth Λ f p
 
 end IsCurve
 
