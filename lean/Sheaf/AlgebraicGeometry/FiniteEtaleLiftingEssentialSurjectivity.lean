@@ -11,9 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation
-import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingComplete
+
 import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingLimitDescent
+import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation
 
 /-!
 # Essential surjectivity of finite étale lifting over a henselian pair
@@ -64,6 +64,8 @@ theorem Scheme.essSurj_pullback_finiteEtale_of_henselianRing
         (Over.mk (pullback.snd U.hom
           (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) ≅
           Over.mk V.hom) := by
-  sorry
+  apply Scheme.exists_finiteEtale_lift_of_henselianPair_of_gRing_lifting
+    (fun B _ hB J _ Z g _ W ↦
+      Scheme.exists_finiteEtale_lift_of_henselianPair_of_isGRing hB J g W) I f V
 
 end AlgebraicGeometry

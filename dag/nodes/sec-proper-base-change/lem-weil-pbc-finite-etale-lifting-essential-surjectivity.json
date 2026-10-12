@@ -24,61 +24,36 @@
  ],
  "proof": [
   {
-   "text": "First assume that A is Noetherian and I-adically complete. Formal etaleness and invariance of the etale site under nilpotent thickenings lift V uniquely to a compatible system of finite etale covers V_r of Y_r=Y\\times_A Spec(A/I^{r+1}). Finiteness is preserved because it can be checked on a finite affine cover and lifted generators remain finite by Nakayama. Grothendieck existence for finite morphisms over a proper scheme algebraizes the compatible system to a finite morphism U\\to Y with closed fibre V. Its etale locus is open and contains V; since U is proper over the local base, every nonempty closed complement meets the closed fibre, so the locus is all of U. Thus U is finite etale.",
-   "uses": [
-    "lem-weil-pbc-finite-etale-lifting-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, Lemma 0GS2, complete Noetherian case"
-   }
-  },
-  {
-   "text": "If A is a Noetherian henselian G-ring, complete it. The preceding construction gives a finite etale cover after completion. A finite affine cover of Y, finite generators and relations for the cover algebras, overlap maps, and cocycle equations form finite presentation data. Descend this data to a finite type A-algebra inside the completion; after enlarging the stage the descended morphism is finite etale. Henselian G-ring approximation supplies a solution in A congruent modulo I to the completed solution, and hence a finite etale Y-scheme whose closed fibre is V.",
+   "text": "For every ring B in universe u with IsGRing B, every henselian ideal J, every proper g : Z -> Spec B, and every finite etale cover W of its closed fibre, apply lem-weil-pbc-finite-etale-lifting-approximation to obtain a finite etale lift over Z with the prescribed closed-fibre isomorphism. Abstract all these data to obtain the universal hypothesis H of lem-weil-pbc-finite-etale-lifting-limit-descent. The Noetherian complete case is used within the approximation theorem, not separately at this node.",
    "uses": [
     "lem-weil-pbc-finite-etale-lifting-approximation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, Lemma 0GS2, Noetherian G-ring case"
+    "place": "Fundamental Groups, Lemma 0GS2, Noetherian G-ring essential-surjectivity paragraph"
    }
   },
   {
-   "text": "For a general henselian pair, write A as a filtered colimit of henselian localizations of finite type Noetherian G-ring models. Properness and finite presentation descend to a model Y_j. The finite etale cover V, its affine generators and relations, and all overlap and cocycle equations descend to one common index; finite-presentation descent also identifies the closed-fibre cover after base change. Applying the Noetherian G-ring case at that index and base-changing back to A produces a finite etale lift of V.",
+   "text": "Apply lem-weil-pbc-finite-etale-lifting-limit-descent with the universal G-ring lifting hypothesis H from the preceding step, the given henselian pair (A,I), proper morphism f, and finite etale closed-fibre cover V. Its conclusion is exactly the required existential lift and nonempty isomorphism in the over category of the closed fibre; no conversion of categories or fibre products is needed.",
    "uses": [
-    "lem-weil-pbc-finite-etale-lifting-limit-descent",
-    "lem-weil-pbc-finite-etale-lifting-approximation"
+    "lem-weil-pbc-finite-etale-lifting-limit-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, Lemma 0GS2, general henselian-pair case"
-   }
-  },
-  {
-   "text": "The construction is functorial under base change to Y_0, so the resulting finite etale U comes with the required Y_0-isomorphism U\\times_YY_0\\cong V. This is precisely essential surjectivity of the restriction functor.",
-   "uses": [
-    "def-weil-pbc-finite-etale-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, Lemma 0GS2, conclusion"
+    "place": "Fundamental Groups, Lemma 0GS2, General case essential surjectivity"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-etale-lifting-complete",
   "lem-weil-pbc-finite-etale-lifting-approximation",
-  "lem-weil-pbc-finite-etale-lifting-limit-descent",
-  "def-weil-pbc-finite-etale-category"
+  "lem-weil-pbc-finite-etale-lifting-limit-descent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Fundamental Groups, Lemma 0GS2"
+  "place": "Fundamental Groups, Lemma 0GS2, Noetherian G-ring and General case essential-surjectivity paragraphs; Lean assembly by J1"
  },
  "mathlib_searches": [
   {
@@ -163,5 +138,15 @@
   "group": "E1",
   "result": "fix",
   "note": "HenselianRing A I; IsProper f; Y0 = pullback f (Spec.map Quotient.mk I) with pullback.fst as in K1 bf4691187; FEt as (IsFinite ⊓ Etale).Over ⊤; ∀V ∃U iso in Over Y0 of pullback.snd U.hom (pullback.fst f _); no extra hypotheses, single universe u"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T042410-L-1816182",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
