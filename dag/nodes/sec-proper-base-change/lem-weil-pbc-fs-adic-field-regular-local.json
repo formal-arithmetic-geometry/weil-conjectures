@@ -33,102 +33,48 @@
  ],
  "proof": [
   {
-   "text": "Let $k_0$ be the prime subfield of $k$. In characteristic zero, $k_0=\\mathbf Q$ and [lem-weil-pbc-char-zero-field-extension-formally-smooth] gives the square-zero lifting property for $k_0\\to k$; in characteristic $p>0$, $k_0=\\mathbf F_p$ and [lem-weil-pbc-field-char-p-nilpotent-lifting] gives it with $N=2$. Apply these lifts to the $k_0$-algebra map $k\\to D/J$ induced by any $k_0$-algebra map $g:A\\to D/J$ that kills some $\\mathfrak m^q$, where $J^2=0$: obtain a compatible map $k\\to D$. Regard $D$ as a $k$-algebra through this lift and apply the given $\\mathfrak m$-adic formal smoothness of $k\\to A$ [def-weil-pbc-formally-smooth-adic] to lift $g$ to $A\\to D$. The result is a $k_0$-algebra lift. Thus $k_0\\to A$ has the same adic lifting property. This spells out the composition argument in the source, including the continuity condition $g(\\mathfrak m^q)=0$; a lift kills $\\mathfrak m^{2q}$ since $J^2=0$.",
+   "text": "Pass to the maximal-ideal-adic completion; Noetherianity and formal smoothness pass to it, and regularity descends by the completion criterion.",
    "uses": [
-    "lem-weil-pbc-char-zero-field-extension-formally-smooth",
-    "lem-weil-pbc-field-char-p-nilpotent-lifting",
-    "def-weil-pbc-formally-smooth-adic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07EI (lemma-fs-implies-regular), lines 9542-9547; Algebra Lemma Tag 0320 (lemma-formally-smooth-extensions-easy), part (3), and More on Algebra Lemmas Tag 07EC (lemma-formally-smooth), part (1), and Tag 07EF (lemma-compose-formally-smooth)"
-   }
-  },
-  {
-   "text": "Let $\\widehat A=\\varprojlim_r A/\\mathfrak m^r$ [def-weil-pbc-adic-completion]. It is a Noetherian local ring with maximal ideal $\\mathfrak m\\widehat A$ [lem-weil-pbc-adic-completion-noetherian]. By [lem-weil-pbc-fs-adic-completion], the adic formal smoothness of $k_0\\to A$ from Step 1 passes to $k_0\\to\\widehat A$. If $\\widehat A$ is regular local, so is $A$ by [lem-weil-pbc-completion-regular-local]. Hence replace $A$ by $\\widehat A$ and assume it is complete. Its residue field $K=A/\\mathfrak m$ has the same characteristic as $k_0$.",
-   "uses": [
+    "def-weil-pbc-formally-smooth-adic",
     "def-weil-pbc-adic-completion",
     "lem-weil-pbc-adic-completion-noetherian",
     "lem-weil-pbc-fs-adic-completion",
     "lem-weil-pbc-completion-regular-local"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07EI (lemma-fs-implies-regular), lines 9549-9557; Lemma Tag 07ED (lemma-formally-smooth-completion)"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-cohen-coefficient-ring-exists], $A$ contains a coefficient field mapping isomorphically to $K$: its coefficient ring $\\Lambda$ has maximal ideal $p\\Lambda=0$ because $A$ has equal characteristic $0$ or $p$. Identify this field with $K$. The maps $k_0\\to K\\to A$ and $k_0\\to A$ agree, since a map from the prime field is unique. Choose $x_1,\\ldots,x_n\\in\\mathfrak m$ whose classes form a $K$-basis of $\\mathfrak m/\\mathfrak m^2$; such a finite basis exists because $A$ is Noetherian. Put $T=K[[X_1,\\ldots,X_n]]$ [def-weil-pbc-multivariate-power-series]. By [lem-weil-pbc-power-series-field-cohen-regular-complete], $T$ is complete regular local with maximal ideal $\\mathfrak n=(X_1,\\ldots,X_n)$ and $\\dim T=n$. Since $K\\subset A$ maps isomorphically onto $A/\\mathfrak m$ and $\\mathfrak m^2=0$ in $A/\\mathfrak m^2$, every class there is uniquely a constant from $K$ plus a $K$-linear combination of the classes of the $x_i$; products of two latter terms vanish. The same holds for $T/\\mathfrak n^2$ with the $X_i$. Thus $x_i\\mapsto X_i$ and the identity on $K$ give a local $K$-algebra isomorphism $A/\\mathfrak m^2\\cong T/\\mathfrak n^2$. Compose with $A\\to A/\\mathfrak m^2$ to obtain $f_1:A\\to T/\\mathfrak n^2$.",
+   "text": "The comparison-map lemma gives a map from the complete ring to a finite-variable power-series ring over its residue field, mapping the maximal ideal onto the variables ideal and inducing a surjection on the quotient. The power-series ring is regular local of the indicated dimension.",
    "uses": [
-    "lem-weil-pbc-cohen-coefficient-ring-exists",
-    "def-weil-pbc-multivariate-power-series",
-    "lem-weil-pbc-power-series-field-cohen-regular-complete"
+    "lem-weil-pbc-fs-adic-power-series-comparison-map",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "def-weil-pbc-multivariate-power-series"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07EI (lemma-fs-implies-regular), lines 9557-9574; Algebra Theorem Tag 032A (theorem-cohen-structure-theorem), part (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "For $r\\ge1$, the quotient $T/\\mathfrak n^{r+2}\\to T/\\mathfrak n^{r+1}$ has square-zero kernel $\\mathfrak n^{r+1}/\\mathfrak n^{r+2}$: its square lies in $\\mathfrak n^{2r+2}\\subseteq\\mathfrak n^{r+2}$. Starting with $f_1$, use the adic lifting property of $k_0\\to A$ [def-weil-pbc-formally-smooth-adic] successively to obtain compatible $k_0$-algebra maps $f_r:A\\to T/\\mathfrak n^{r+1}$. Indeed, $f_1(\\mathfrak m^2)=0$, and any lift of $f_r$ sends $\\mathfrak m^{2q}$ to zero when $f_r(\\mathfrak m^q)=0$; hence every $f_r$ is continuous for the $\\mathfrak m$-adic topology and qualifies for the next lift. Compatibility and $T=\\varprojlim_rT/\\mathfrak n^r$ [lem-weil-pbc-power-series-field-cohen-regular-complete] give a $k_0$-algebra map $f:A\\to T$ reducing to $f_1$ modulo $\\mathfrak n^2$. It is local, induces the identity on residue field $K$, and sends $x_i$ to $X_i$ modulo $\\mathfrak n^2$. The maps $f_r$ need not be $K$-linear; only their reductions modulo $\\mathfrak n^2$ were prescribed as $K$-linear.",
+   "text": "Apply Mathlib surjective_of_mk_map_comp_surjective using completeness of the source and separatedness for the image ideal of the target. Mathlib ringKrullDim_le_of_surjective then gives spanFinrank(m) = dim(T) ≤ dim(B). The Mathlib regular-local criterion IsRegularLocalRing.of_spanFinrank_maximalIdeal_le supplies regularity (its converse dimension bound is built into that criterion).",
    "uses": [
-    "def-weil-pbc-formally-smooth-adic",
-    "lem-weil-pbc-power-series-field-cohen-regular-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07EI (lemma-fs-implies-regular), lines 9574-9584"
-   }
-  },
-  {
-   "text": "The elements $f(x_i)$ form a basis of $\\mathfrak n/\\mathfrak n^2$, so they generate $\\mathfrak n$ by [lem-weil-pbc-nakayama-local-generators]. To show $f$ is surjective, fix $t\\in T$. Since $A/\\mathfrak m\\cong T/\\mathfrak n=K$, choose $a_0\\in A$ with $t-f(a_0)\\in\\mathfrak n$. Inductively, if $t-f(a_0+\\cdots+a_{r-1})\\in\\mathfrak n^r$, write its class modulo $\\mathfrak n^{r+1}$ as a sum of degree-$r$ monomials in the $f(x_i)$ with coefficients in $K$; lift each coefficient to an element of $A$, and take their corresponding polynomial in the $x_i$ as $a_r\\in\\mathfrak m^r$. Then $t-f(a_0+\\cdots+a_r)\\in\\mathfrak n^{r+1}$. The partial sums are Cauchy in the $\\mathfrak m$-adic topology; completeness of $A$ gives $a=\\sum_{r\\ge0}a_r\\in A$. For every $r$, $f(a)$ and $t$ agree modulo $\\mathfrak n^{r+1}$; the $\\mathfrak n$-adic separatedness of $T$ [lem-weil-pbc-power-series-field-cohen-regular-complete] implies $f(a)=t$. Thus $f$ is surjective.",
-   "uses": [
-    "lem-weil-pbc-nakayama-local-generators",
-    "lem-weil-pbc-power-series-field-cohen-regular-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07EI (lemma-fs-implies-regular), lines 9581-9588; the source says the surjectivity follows from completeness, with the successive approximation written out here"
-   }
-  },
-  {
-   "text": "A surjection $f:A\\to T$ gives $\\dim A\\ge\\dim T=n$: a strict chain of prime ideals of $T$ pulls back to a strict chain in $A$. By [lem-weil-pbc-nakayama-local-generators], the chosen $x_1,\\ldots,x_n$ generate $\\mathfrak m$, so [lem-weil-pbc-noetherian-local-dimension-le-generators] gives $\\dim A\\le n$. Hence $\\dim A=n$ and $\\mathfrak m$ is generated by $\\dim A$ elements. The definition [def-weil-regular-scheme] makes $A$ regular local; by Step 2 the original local ring is regular local as well.",
-   "uses": [
-    "lem-weil-pbc-nakayama-local-generators",
-    "lem-weil-pbc-noetherian-local-dimension-le-generators",
     "def-weil-regular-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07EI (lemma-fs-implies-regular), lines 9585-9589"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-char-zero-field-extension-formally-smooth",
-  "lem-weil-pbc-field-char-p-nilpotent-lifting",
   "def-weil-pbc-formally-smooth-adic",
   "def-weil-pbc-adic-completion",
   "lem-weil-pbc-adic-completion-noetherian",
   "lem-weil-pbc-fs-adic-completion",
   "lem-weil-pbc-completion-regular-local",
-  "lem-weil-pbc-cohen-coefficient-ring-exists",
-  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-fs-adic-power-series-comparison-map",
   "lem-weil-pbc-power-series-field-cohen-regular-complete",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-noetherian-local-dimension-le-generators",
+  "def-weil-pbc-multivariate-power-series",
   "def-weil-regular-scheme"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07EI (lemma-fs-implies-regular), proof, lines 9542-9589"
+  "place": "More on Algebra, Lemma Tag 07EI, proof"
  },
  "mathlib_searches": [
   {
@@ -206,5 +152,15 @@
   "group": "J1",
   "result": "pass",
   "note": "field k [Field k]; k-algebra A CommRing+Algebra k A; Noetherian IsNoetherianRing; local IsLocalRing with m = maximalIdeal; k->A fs for m-adic = recorded Algebra.FormallySmoothAdic (D : Type (max u v)); conclusion IsRegularLocalRing (Mathlib 00KU, spanFinrank m = ringKrullDim); no extra char/completeness/finiteness hypotheses; #check and axioms verified"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T110308-L-617512",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
