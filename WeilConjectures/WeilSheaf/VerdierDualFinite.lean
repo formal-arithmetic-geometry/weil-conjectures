@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFiberFiniteEtale
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.WeilSheaf.FiniteEtale
+public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 
@@ -65,6 +66,27 @@ theorem etale_of_isFinite_of_isReduced {K : Type u} [Field K] [PerfectField K] {
     exact RingHom.etale_algebraMap.mpr inferInstance
   rw [hf]
   infer_instance
+
+namespace WeilSheaf
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- The Tate twist of the dual of a lisse Weil sheaf, `P^∨ ⊗ (ℚ̄_ℓ(m) ⊗ ℚ̄_ℓ)`, as it comes out
+of `𝔻_X P ≅ (P^∨ ⊗ ω)` with `ω ≅ ℚ̄_ℓ(m)[2m]`, is the constant twist `P^∨ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}`. -/
+theorem nonempty_dual_tensorObj_tateTwistSheaf_iso (P : WeilSheaf k₀ l X) (hP : P.IsLisse)
+    (m : ℤ) :
+    Nonempty ((P.dual hP).tensorObj ((tateTwistSheaf k₀ l X m).tensorObj
+        (adicConstant k₀ l X) (isLisse_tateTwistSheaf k₀ l X m)) hP.dual ≅
+      (P.dual hP).constantTwist (cyclotomicUnit k₀ l ^ m)) := by
+  obtain ⟨e⟩ := nonempty_iso_dual_dual P hP
+  exact ⟨ObjectProperty.isoMk _
+    (ProEtaleWeilSheaf.ihomMapIsoRight _ ((ProEtaleWeilSheaf.ihomFunctorTateTwistIso m).app _) ≪≫
+      ProEtaleWeilSheaf.ihomMapIsoLeft ((objectProperty k₀ l X).ι.mapIso e) _ ≪≫
+      ProEtaleWeilSheaf.ihomConstantTwistRightIso _ _ _ ≪≫
+      ((P.dual hP).constantTwistObjIso _).symm)⟩
+
+end WeilSheaf
 
 namespace WeilComplex
 
