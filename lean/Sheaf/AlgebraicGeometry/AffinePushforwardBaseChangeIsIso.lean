@@ -3,6 +3,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
+import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIsoOnAffine
 
 @[expose] public section
 
@@ -22,7 +24,8 @@ theorem affinePushforward_baseChange_isIso {X S X' S' : Scheme.{u}}
     (sq : IsPullback g' f' f g) [IsAffineHom f]
     (F : X.Modules) [F.IsQuasicoherent] :
     IsIso (moduleBaseChangeMap f f' g g' sq.w F) := by
-  sorry
+  apply isIso_of_bijective_app_of_isAffineOpen
+  exact affinePushforward_baseChange_app_bijective f f' g g' sq F
 
 end
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,97 @@
+{
+ "id": "lem-weil-pbc-affine-pushforward-base-change-app-bijective",
+ "kind": "statement",
+ "title": "Affine pushforward base change is bijective on affine sections",
+ "statement": "For an affine morphism f and a quasi-coherent module F, the base-change map is bijective on sections over every affine open of S'.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 02KG"
+ },
+ "proof": [
+  {
+   "text": "Identify affine charts with spectra and compute the canonical tensor-product map.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 02KG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bijective base change map affine open sections",
+   "results": "no direct match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Bijective ((moduleBaseChangeMap _ _ _ _ _ _).app _)",
+   "results": "no direct match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*Bijective",
+   "results": "no direct declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-pushforward-base-change-isIso",
+   "place": "affine computation"
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIsoOnAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePushforwardBaseChangeIsIsoOnAffine.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affinePushforward_baseChange_app_bijective",
+  "statement": "theorem affinePushforward_baseChange_app_bijective {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [IsAffineHom f]\n    (F : X.Modules) [F.IsQuasicoherent] :\n    ∀ V : S'.Opens, IsAffineOpen V →\n      Function.Bijective ((moduleBaseChangeMap f f' g g' sq.w F).app V)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T144102-L-2091963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T144102-L-2091963",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

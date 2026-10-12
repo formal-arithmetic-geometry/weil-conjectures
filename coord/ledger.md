@@ -8065,3 +8065,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ProperGeometricPointExchange (stage 3; reviewer PASS; first push; landing 20261012T144101-L-2091642 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/E1/Sheaf.FieldTheory.BrauerScalarDefectCocycle (stage 3; reviewer PASS; first push; landing 20261012T144102-L-2091747 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/E2/Sheaf.AlgebraicGeometry.AffineOverLimitInclusion (stage 3; reviewer PASS; after a return; landing 20261012T144102-L-2091864 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/E2/Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso (stage 3; reviewer PASS; first push; landing 20261012T144102-L-2091963 (interface); batch 20261012T144049; modules 2; new nodes 1)
