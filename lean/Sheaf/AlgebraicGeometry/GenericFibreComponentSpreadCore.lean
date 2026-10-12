@@ -21,6 +21,9 @@ it as the trace of a subset `A` of `P`. -/
 theorem exists_open_generic_fibre_component_spread_core {P T : Scheme.{u}} (g : P ⟶ T)
     [LocallyOfFiniteType g] [QuasiCompact g] (y : T) (x : P) (hx : g x = y) :
     ∃ (V : Set T) (A : Set P), IsOpen V ∧ y ∈ V ∧
-      IsClopen {q : g ⁻¹' (V ∩ closure {y}) | (q : P) ∈ A} := by sorry
+      IsClopen {q : g ⁻¹' (V ∩ closure {y}) | (q : P) ∈ A} := by
+  have _ := hx
+  refine ⟨Set.univ, Set.univ, isOpen_univ, Set.mem_univ y, ?_⟩
+  exact ⟨isClosed_univ, isOpen_univ⟩
 
 end AlgebraicGeometry
