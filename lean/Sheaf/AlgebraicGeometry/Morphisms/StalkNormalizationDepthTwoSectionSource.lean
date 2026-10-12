@@ -15,10 +15,9 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.RingTheory.KrullDimension.Basic
 
-import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
-import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlat
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFlatEtale
 import Sheaf.RingTheory.NormalLocalDepthTwo
-import Sheaf.RingTheory.FlatLocalDepthFormula
 
 /-!
 # Source etaleness over the local section in dimension at least two
@@ -89,6 +88,32 @@ theorem GaloisCover.stalk_normalization_depth_two_section_source {S C : Scheme.{
       (pullback.fst c a) : Scheme.{u}),
       n x = τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) →
       ∃ V : (pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
-        (pullback.fst c a)).Opens, x ∈ V ∧ Etale (V.ι ≫ n) := by sorry
+        (pullback.fst c a)).Opens, x ∈ V ∧ Etale (V.ι ≫ n) := by
+  have _horder := hG
+  let : IsIntegrallyClosed (S.presheaf.stalk s) := hS s
+  have hdepth := IsLocalRing.depth_two_of_normal (S.presheaf.stalk s) hdim
+  dsimp only
+  intro hn x hx
+  obtain ⟨W, hW, hflat⟩ := GaloisCover.stalk_normalization_depth_two_section_flat
+    hS c σ hσ G q j hCη sη hsq hsj Z hZ U hηU jU PA ψ hjU hψ
+    s hs hmin hdepth hn
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization
+    (pullback.fst c (S.fromSpecStalk s))
+  let V := n ⁻¹ᵁ W
+  have hxV : x ∈ V := by
+    change n x ∈ W
+    rw [hx]
+    exact hW
+  have hflatV : Flat (V.ι ≫ n) := by
+    rw [← morphismRestrict_ι n W]
+    let : Flat (n ∣_ W) := hflat
+    infer_instance
+  refine ⟨V, hxV, ?_⟩
+  exact finiteEtale_stalk_normalization_etale_of_flat hS c U hηU PA s hs hmin
+    hdepth hn V hflatV
 
 end AlgebraicGeometry.Scheme

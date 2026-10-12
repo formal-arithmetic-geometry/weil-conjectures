@@ -15,27 +15,43 @@
  ],
  "proof": [
   {
-   "text": "Localize at s; minimality identifies the inverse image of U with the\npunctured spectrum of the normal Noetherian local domain A. Normality and\nthe dimension bound give depth(A) at least two. Smoothness gives flatness,\nand the flat local depth formula gives depth at least two along the closed\nfibre. The normal finite algebra n is therefore the unique depth-two\nextension of the punctured finite etale algebra (Tag 0EY6). Extend the\nG-action by normal generic full faithfulness. The rational generic section\npoint and its translates split the generic section fibre; the same full\nfaithfulness splits the fibre on the punctured section. Take a smooth affine\nchart B around the closed section point. Its section-ideal completion is\nA[[x₁,...,x_d]], flat over B. If d is positive, Tag 0EY9 extends the splitting\nfrom the punctured section to the punctured completion. If d is zero the\nsection is the completed chart itself. Uniqueness and flat base change of\nthe depth-two extension make the completed finite algebra split. Completion\nis faithfully flat at the section point, so etaleness descends to every\npoint of n above it. Openness of the etale locus gives the required source\nopens. Componentwise the stabilizers have order dividing |G|; an empty\nfibre gives a vacuous assertion.",
+   "text": "Install integral closedness of the base stalk from hS. Apply the normal local depth-two theorem to hdim to obtain depth(O(S,s)) at least two.",
    "uses": [
-    "lem-sbc-normal-integral-generic-hom-full",
-    "lem-sbc-generic-fibre-action-extension",
-    "lem-weil-pbc-normal-local-depth-two",
-    "lem-weil-pbc-flat-local-depth-formula"
+    "lem-weil-pbc-normal-local-depth-two"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The formal section flatness theorem supplies a target open W containing the closed section point, with flat normalization restricted over W.",
+   "uses": [
+    "lem-sbc-stalk-normalization-depth-two-section-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x above the closed section point, set V = n^{-1}(W). The fibre equation puts x in V. The restriction identity V.ι followed by n equals n restricted to W followed by W.ι and flatness of the open immersion W.ι give flatness of V to L.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the flat-to-etale criterion for the finite local depth-two normalization to V, obtaining the desired etale source neighbourhood.",
+   "uses": [
+    "lem-sbc-stalk-normalization-flat-etale"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-normal-integral-generic-hom-full",
-  "lem-sbc-generic-fibre-action-extension",
   "lem-weil-pbc-normal-local-depth-two",
-  "lem-weil-pbc-flat-local-depth-formula"
+  "lem-sbc-stalk-normalization-depth-two-section-flat",
+  "lem-sbc-stalk-normalization-flat-etale"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "N1",
+  "by": "R3",
   "document": "Stacks Project",
-  "place": "Tag 0EYJ (pione-lemma-extend-covering), final local computation; Tags 0EY6 and 0EY9"
+  "place": "Tag 0EYJ, final local calculation; Tag 0EY6(3)",
+  "note": "Lean assembly: normal depth bound, formal flat target neighbourhood, source restriction, purity. Two strictly smaller source-backed statements remain sorry; this is a decomposition."
  },
  "mathlib_searches": [
   {
@@ -123,9 +139,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T214711-L-1271624",
+  "landing": "20261012T225327-L-1812050",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,122 @@
+{
+ "id": "lem-sbc-stalk-normalization-depth-two-section-flat",
+ "kind": "statement",
+ "title": "Target flat neighbourhood of the local section in depth at least two",
+ "statement": "Let $S$ be a normal integral Noetherian quasi-separated scheme, $c:C\\to S$ a quasi-compact quasi-separated smooth morphism with geometrically connected fibres, $\\sigma:S\\to C$ a section, and $G$ a finite group [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois, def-sbc-smooth-morphisms]. Let $q:C_\\eta\\to\\operatorname{Spec}k(S)$ and $j:C_\\eta\\to C$ exhibit the generic fibre [def-pc-fibre-product], with a section $s_\\eta$ satisfying $q s_\\eta=1$ and $j s_\\eta=\\sigma a_\\eta$. Let $Z\\to C_\\eta$ be a finite etale $G$-torsor with a rational point above $s_\\eta$. Let $U\\subset S$ contain $\\eta$, let $P\\to C_U$ be finite etale, and let $j_U:C_\\eta\\to C_U$ and $\\psi:Z\\to P$ exhibit its generic restriction, with $i_Uj_U=j$. Let $s\\notin U$ be such that every $t\\notin U$ specializing to $s$ equals $s$. Put $a:\\operatorname{Spec}\\mathcal O_{S,s}\\to S$, $L=C\\times_S\\operatorname{Spec}\\mathcal O_{S,s}$, $l:L\\to C$, and let $N\\to C$ be the concrete relative normalization of $P\\to C_U\\to C$. Let $\\tau=(a\\sigma,1):\\operatorname{Spec}\\mathcal O_{S,s}\\to L$ be the induced section. Assume $\\operatorname{depth}(\\mathcal O_{S,s})\\geq 2$ [def-weil-pbc-depth] and that $n:N\\times_C L\\to L$ is finite. There is an open $W\\subset L$ containing $\\tau(\\mathfrak m_{S,s})$ such that the restriction $n^{-1}(W)\\to W$ is flat.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, proof of the local claim, formal section calculation; Tags 0EY6(2),(a) and 0EY9"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [
+  {
+   "text": "Put A = O(S,s). The inverse image of U in Spec A is its punctured\nspectrum: a point maps to a generalization of s, and minimality excludes\nall missing points other than s. The local normalization is normal, since\nnormalization in the normal punctured finite etale algebra is normal and\nlocalization preserves normality. Its finite algebra is the depth-two\nextension of the punctured finite etale algebra: smoothness and the flat\nlocal depth formula give depth at least two on the missing fibre, and\nnormality gives the corresponding depth condition on the normalization.\nThe uniqueness assertion of Tag 0EY6 identifies these two extensions.\n\nExtend the action to the punctured cover using generic-fibre full\nfaithfulness. A rational point and its G-translates trivialize the generic\nsection fibre. Normal generic full faithfulness extends this trivialization\nover the punctured section (extend the inverse as well). Choose a smooth\naffine chart Spec B containing the closed section point. The section factors\nthrough this chart, since any open of a local scheme containing its closed\npoint is the entire scheme. Complete B in the section ideal. Smoothness\nidentifies the completion with A[[x_1,...,x_d]], and Noetherian completion is\nflat over B. For d > 0, Tag 0EY9 extends the section trivialization to the\npunctured completion; for d = 0 it is already the same trivialization.\nFlat base change and uniqueness in Tag 0EY6 then identify the completed\nfinite algebra with the product of copies of the completed chart.\n\nThe completion map is faithfully flat after localization at the closed\nsection point, since the section ideal lies in its maximal ideal. Freeness\nof the split algebra therefore implies flatness at every source point\nabove that point, by faithfully flat descent of flatness. The finite\nnormalization is of finite presentation over the Noetherian local total\nspace. Its flat locus is open. The complement is closed, and its image in the\nlocal total space is closed because n is finite. Remove this image to\nobtain a target open W containing the closed section point. The entire\nrestriction of n over W is flat.\nThis conclusion asserts only flatness, not purity or etaleness. The empty\nsource is vacuous, and d = 0 is included explicitly above.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-normal-local-depth-two",
+    "lem-sbc-generic-fibre-action-extension",
+    "lem-sbc-normal-integral-generic-hom-full"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-normal-local-depth-two",
+  "lem-sbc-generic-fibre-action-extension",
+  "lem-sbc-normal-integral-generic-hom-full"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "R3",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, proof of the local claim, formal section calculation; Tags 0EY6(2),(a) and 0EY9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The finite normalization of a smooth family is flat near a section when a punctured finite etale cover has split generic section fibre and the local base has depth at least two",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite normalization of a smooth family is flat near a section when a punctured finite etale cover has split generic section fibre and the local base has depth at least two",
+   "results": "8 hits: Algebra.Smooth.flat, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, Algebra.Smooth.flat_of_isNoetherianRing, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.IsSmoothAt.exists_notMem_smooth",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(flat|completion)|completion.*(split|section)",
+   "results": "1 hits: Mathlib/Topology/Algebra/Valued/ValuedField.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionSource",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYJ, proof of the local claim, formal section calculation; Tags 0EY6(2),(a) and 0EY9",
+   "via": [
+    "lem-sbc-stalk-normalization-depth-two-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDepthTwoSectionFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationDepthTwoSectionFlat.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.stalk_normalization_depth_two_section_flat",
+  "statement": "theorem GaloisCover.stalk_normalization_depth_two_section_flat {S C : Scheme.{u}}\n    [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]\n    (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)\n    (G : Type (u + 1)) [Group G] [Finite G]\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)\n    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)\n    (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)\n    (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη)\n    (U : S.Opens) (hηU : genericPoint S ∈ U)\n    (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)\n    (hψ : IsPullback ψ Z.π PA.obj.hom jU)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth\n      (R := S.presheaf.stalk s) (S.presheaf.stalk s)) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a :=\n      pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])\n    IsFinite n → ∃ W : (pullback c a).Opens,\n      τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) ∈ W ∧ Flat (n ∣_ W)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T225327-L-1812050",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T225327-L-1812050",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
