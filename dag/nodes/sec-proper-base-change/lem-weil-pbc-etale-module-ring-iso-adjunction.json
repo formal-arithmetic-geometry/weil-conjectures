@@ -14,23 +14,24 @@
  ],
  "proof": [
   {
-   "text": "Construct LM as L0 followed by restriction along c.inv. Restriction along c.hom and c.inv are inverse functors up to natural identity-on-section comparisons: their composite scalar actions agree with the original action by the inverse-ring identities. They induce t and e.",
+   "text": "Use hlin in both directions to construct a hom equivalence between L0(G) -> F and G -> R0(F), where R0 is module pushforward along the ring unit. Faithfulness of the two toSheaf functors proves that the chosen lifts are unique, and that the two assignments are inverse. Naturality follows by applying those faithful functors and using naturality of e0 and of the abelian hom equivalence. Adjunction.mkOfHomEquiv gives a0 and its underlying hom formula.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-direct-image"
+    "def-weil-pbc-direct-image",
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the assumed linearity criterion to the same underlying map with the target restricted along c.hom. The adjunct identity gives gamma = ar.unit.app RV followed by direct image of c.hom. Thus restricting direct image along the ring unit is direct image along gamma. Linear maps and their underlying hom equivalence agree under these identifications.",
+   "text": "Set P and Q to module pushforward on the identity site functor along c.inv and c.hom. Mathlib SheafOfModules.pushforwardComp, pushforwardCongr, and pushforwardId give the unit and counit isomorphisms from the inverse-ring identities. Their section maps are identities, so the triangle identity follows sectionwise. Define LM = L0 followed by P, t from the unit inverse, and e from the identity-on-abelian-sheaves comparison followed by e0. The comparison equation follows sectionwise by reflexivity.",
    "uses": [
-    "def-weil-pbc-direct-image"
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false
   },
   {
-   "text": "The faithful forgetful functors make the linear lifts unique. Restrict the abelian hom equivalence to the two sets of linear maps. Its naturality gives am; its formula is the required hom comparison. The identity-on-sections comparison gives the equation relating t, e0, and e.",
+   "text": "The adjunct equation hc and Adjunction.homEquiv_unit identify gamma with the ring unit followed by ring pushforward of c.hom. Use pushforwardComp and pushforwardCongr to identify Q followed by R0 with module pushforward along gamma. Compose a0 with the scalar equivalence adjunction and transport the right functor through this comparison. Expand homEquiv_ofNatIsoRight_apply and comp_homEquiv; the right comparison acts as the identity on underlying sections. The a0 hom formula then reduces the final equality to the identity-on-sections scalar equivalence unit, discharged by definitional equality.",
    "uses": [
+    "def-weil-pbc-direct-image",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false
@@ -44,7 +45,7 @@
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tags 03D3 and 03D7, invertible ring-map specialization; parent proof step 2",
-  "note": "Explicit specialization and compatibility argument written by F1 from the cited Stacks construction."
+  "note": "E1 implemented the existing transport route in Lean, using Mathlib scalar pushforward comparisons and faithful uniqueness; no new intermediate statements. All existential choices of morphisms are uniquely determined by their underlying maps."
  },
  "mathlib_searches": [
   {
@@ -114,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-fac99",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T085234-L-12629",
+  "landing": "20261012T112834-L-765800",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node, report, change record, and direct importer matched against the packet and compiled successfully; theorem signature unchanged and proof axioms acceptable."
  }
 }
