@@ -31,75 +31,50 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (a set of standard smooth algebras).* Let $\\mathcal E$ be the set of all $R$-algebras $R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ with $n\\ge c\\ge0$ and $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ such that the class of $\\det(\\partial f_j/\\partial x_i)_{1\\le i,j\\le c}$ is a unit of $R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ (a set: it is indexed by the tuples $(n,c,f_1,\\dots,f_c)$). Every member of $\\mathcal E$ is standard smooth over $R$ [def-weil-pbc-standard-smooth-algebra] (the identity is a standard smooth presentation) and of finite presentation over $R$ [def-weil-pbc-finitely-presented-algebra] (the same quotient is a presentation). Conversely, if $C$ is a standard smooth $R$-algebra with standard smooth presentation $\\alpha:R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)\\xrightarrow{\\sim}C$, then the image of $g=\\det(\\partial f_j/\\partial x_i)_{i,j\\le c}$ in $C$ is a unit, hence (applying the ring isomorphism $\\alpha^{-1}$) so is the class of $g$ in $R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$; so $E:=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)\\in\\mathcal E$ and $\\alpha:E\\to C$ is an isomorphism of $R$-algebras. Thus every standard smooth $R$-algebra is isomorphic as an $R$-algebra to a member of $\\mathcal E$.",
+   "text": "Let E be the set of all standard smooth R-algebras in universe max u v. Each member is finitely presented, by Algebra.IsStandardSmooth.finitePresentation. The factorization criterion already handles the small representatives needed for this set, so literal polynomial representatives need not be constructed again here.",
    "uses": [
     "def-weil-pbc-standard-smooth-algebra",
     "def-weil-pbc-finitely-presented-algebra"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CI (lemma-colimit-standard-smooth, lines 681-691): 'we have to factor this map through a standard smooth algebra' (Algebra 07C3 needs a set of finitely presented algebras; the set is made explicit here)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 2 (factoring through a smooth stage).* By hypothesis [def-weil-pbc-filtered-colimit-smooth-algebras] there are a small filtered category $J$, a functor $j\\mapsto B_j$ from $J$ to commutative $R$-algebras with every $B_j$ a smooth $R$-algebra [def-weil-pbc-smooth-ring-map], and $R$-algebra maps $\\iota_j:B_j\\to\\Lambda$ such that $(\\Lambda,(\\iota_j)_j)$ is a colimit in commutative $R$-algebras [def-weil-pbc-category-colimit]. By [lem-weil-pbc-filtered-colimit-algebras-elementwise] (1), $(\\Lambda,(\\iota_j)_j)$ is also a colimit of the underlying diagram of commutative rings. Now let $A$ be an $R$-algebra of finite presentation and $\\alpha:A\\to\\Lambda$ a homomorphism of $R$-algebras. Choose a presentation, an $R$-algebra isomorphism $\\varphi:C_0:=R[y_1,\\dots,y_p]/(h_1,\\dots,h_q)\\xrightarrow{\\sim}A$ [def-weil-pbc-finitely-presented-algebra]. By [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] (Algebra 00QO, the direction (1)$\\Rightarrow$(2) of 07C3) applied to the diagram $j\\mapsto B_j$, the colimit $(\\Lambda,(\\iota_j)_j)$, $C_0$ and $g=\\alpha\\circ\\varphi$, there are $j\\in J$ and an $R$-algebra map $g':C_0\\to B_j$ with $\\iota_j\\circ g'=\\alpha\\circ\\varphi$. Put $\\beta:=g'\\circ\\varphi^{-1}:A\\to B_j$; then $\\iota_j\\circ\\beta=\\alpha$, a factorization $A\\xrightarrow{\\beta}B_j\\xrightarrow{\\iota_j}\\Lambda$ of $\\alpha$ by $R$-algebra maps with $B_j$ smooth over $R$.",
+   "text": "For any finitely presented R-algebra A and algebra map alpha:A→Λ, apply Algebra.exists_smooth_factorization_of_ind_smooth to obtain a smooth R-algebra B and maps beta:A→B and delta:B→Λ with delta.comp beta = alpha. This proved helper includes the underlying-ring colimit and finite-presentation factorization steps, with the required universes.",
    "uses": [
-    "def-weil-pbc-filtered-colimit-smooth-algebras",
-    "def-weil-pbc-smooth-ring-map",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "def-weil-pbc-finitely-presented-algebra",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+    "lem-weil-pbc-ind-smooth-finite-presentation-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CI (lemma-colimit-standard-smooth, lines 681-691): 'we know we can factor it as A -> B -> Lambda with B smooth over R' (Algebra 07C3 (1)=>(2), i.e. 00QO)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (factoring through a member of $\\mathcal E$).* With $A,\\alpha,j,\\beta$ as in Step 2: $B_j$ is a smooth $R$-algebra, so by [lem-weil-pbc-smooth-retract-standard-smooth] (Smoothing 07CH) there are a standard smooth $R$-algebra $C$ [def-weil-pbc-standard-smooth-algebra] and $R$-algebra maps $\\sigma:B_j\\to C$, $\\rho:C\\to B_j$ with $\\rho\\circ\\sigma=\\mathrm{id}_{B_j}$ (the further assertion of that node, that $C$ is smooth over $B_j$, is not used). By Step 1 choose $E\\in\\mathcal E$ and an $R$-algebra isomorphism $\\theta:E\\xrightarrow{\\sim}C$. Put $\\beta':=\\theta^{-1}\\circ\\sigma\\circ\\beta:A\\to E$ and $\\gamma:=\\iota_j\\circ\\rho\\circ\\theta:E\\to\\Lambda$, homomorphisms of $R$-algebras. Then $\\gamma\\circ\\beta'=\\iota_j\\circ\\rho\\circ\\sigma\\circ\\beta=\\iota_j\\circ\\beta=\\alpha$. So every $R$-algebra map $\\alpha:A\\to\\Lambda$ with $A$ of finite presentation over $R$ factors as $A\\xrightarrow{\\beta'}E\\xrightarrow{\\gamma}\\Lambda$ with $E\\in\\mathcal E$.",
+   "text": "Apply Algebra.Smooth.exists_standardSmooth_retract to B, obtaining C standard smooth and maps iota:B→C and rho:C→B with rho.comp iota = id. Take beta′ = iota.comp beta and gamma = delta.comp rho. Associativity of AlgHom.comp and the retraction identity give gamma.comp beta′ = delta.comp beta = alpha. Bundle C and these algebra maps in CommAlgCat.",
    "uses": [
-    "lem-weil-pbc-smooth-retract-standard-smooth",
-    "def-weil-pbc-smooth-ring-map",
-    "def-weil-pbc-standard-smooth-algebra"
+    "lem-weil-pbc-smooth-retract-standard-smooth"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CI (lemma-colimit-standard-smooth, lines 681-691): 'Choose an R-algebra map B -> C with a retraction C -> B such that C is standard smooth over R, see Lemma 07CH. Then the desired factorization is A -> B -> C -> B -> Lambda'"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 4 (conclusion by the criterion 07C3).* $\\mathcal E$ is a set of commutative $R$-algebras each of finite presentation over $R$ (Step 1), and by Step 3 every homomorphism of $R$-algebras $A\\to\\Lambda$ with $A$ of finite presentation factors through a member of $\\mathcal E$ by $R$-algebra maps. By [lem-weil-pbc-factorization-criterion-filtered-colimit] (Algebra 07C3, (2)$\\Rightarrow$(1)) there are a small filtered category $\\mathcal K$ (filtered as in [def-weil-pbc-category-colimit]: nonempty, any two objects map to a common object, parallel arrows are equalized), a functor $k\\mapsto C_k$ from $\\mathcal K$ to commutative $R$-algebras with every $C_k\\in\\mathcal E$, and $R$-algebra maps $\\iota_k:C_k\\to\\Lambda$ such that $(\\Lambda,(\\iota_k)_{k\\in\\mathcal K})$ is a colimit of this diagram in commutative $R$-algebras [def-weil-pbc-category-colimit]. Every $C_k\\in\\mathcal E$ is standard smooth over $R$ (Step 1) [def-weil-pbc-standard-smooth-algebra]. This is the assertion.",
+   "text": "Apply CommAlgCat.exists_filtered_colimit_of_factorization to E, the finite-presentation proof from step 1, and the factorizations from steps 2–3. Package its small filtered diagram, compatible maps, and colimit witness as a ColimitPresentation. Every stage belongs to E, hence is standard smooth, so this is ObjectProperty.ind of standard smoothness at Λ.",
    "uses": [
     "lem-weil-pbc-factorization-criterion-filtered-colimit",
     "def-weil-pbc-category-colimit",
-    "def-weil-pbc-standard-smooth-algebra"
+    "def-weil-pbc-filtered-colimit-smooth-algebras"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CI (lemma-colimit-standard-smooth, lines 681-691): 'According to Algebra, Lemma 07C3 (lemma-when-colimit) we have to factor this map through a standard smooth algebra'"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-standard-smooth-algebra",
   "def-weil-pbc-finitely-presented-algebra",
-  "def-weil-pbc-filtered-colimit-smooth-algebras",
-  "def-weil-pbc-smooth-ring-map",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-ind-smooth-finite-presentation-factorization",
   "lem-weil-pbc-smooth-retract-standard-smooth",
-  "lem-weil-pbc-factorization-criterion-filtered-colimit"
+  "lem-weil-pbc-factorization-criterion-filtered-colimit",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-filtered-colimit-smooth-algebras"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, Lemma Tag 07CI (lemma-colimit-standard-smooth, line 675), proof lines 681-691; with Algebra, Lemma Tag 07C3 (lemma-when-colimit, algebra.tex line 31952) both directions and Smoothing, Lemma Tag 07CH (lemma-smooth-standard-smooth, line 590)"
+  "place": "Tag 07CI, lemma-colimit-standard-smooth, proof: factor A→B→Λ, choose standard smooth retract B→C→B, and apply Algebra 07C3. The Lean proof reuses the proved universe-compatible smooth-stage factorization helper; the existing 07C3 theorem handles representatives."
  },
  "mathlib_searches": [
   {
@@ -224,5 +199,15 @@
   "group": "K1",
   "result": "fix",
   "note": "R CommRing; Λ commutative R-algebra; hypothesis = dep mathlib_match ObjectProperty.ind (CommAlgCat R, Algebra.Smooth); conclusion same ind with Algebra.IsStandardSmooth (small filtered index, diagram, every stage standard smooth, IsColimit cocone at Λ); universes moved to max u v as in fae943c31"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T194134-L-462746",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
