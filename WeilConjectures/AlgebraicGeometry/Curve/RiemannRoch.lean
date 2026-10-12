@@ -980,6 +980,24 @@ theorem exists_serreDuality_zero_iso_trace [SmoothOfRelativeDimension 0 (X ↘ S
     exact congr(Modules.Hom.app $h ⊤ (Modules.H.zeroLinearEquiv 𝒢.unop.obj m))
   · exact he ℱ.unop x m
 
+/-- **Serre duality in dimension `0`, positive degrees.** Let `X` be smooth and proper of
+relative dimension `0` over `k`, so `X` is affine (finite étale over `k`). Then for every finite
+locally free `ℱ` and every `q > 0`, both sides of Serre duality vanish:
+`H^q(X, ℱ) = 0` and `H^q(X, ℱᵛ) = 0` (here `ω_X = 𝒪_X`, so `ℱᵛ ⊗ ω_X ≅ ℱᵛ`).
+
+(blueprint: `sk-thm-picard-duality`, case `n = 0`) -/
+theorem subsingleton_H_and_dual_of_smoothOfRelativeDimension_zero
+    [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    (ℱ : X.Modules) [ℱ.IsFiniteLocallyFree] {q : ℕ} (hq : 0 < q) :
+    Subsingleton (ℱ.H q) ∧ Subsingleton (ℱᵛ.H q) := by
+  have : Etale (X ↘ Spec (.of k)) := (Etale.iff_smoothOfRelativeDimension_zero _).2 ‹_›
+  have : IsFinite (X ↘ Spec (.of k)) := IsFinite.of_isProper_of_locallyQuasiFinite _
+  have : IsAffine X := isAffine_of_isAffineHom (X ↘ Spec (.of k))
+  have : ℱᵛ.IsFiniteLocallyFree := Modules.IsFiniteLocallyFree.dual ℱ
+  obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hq.ne'
+  exact ⟨Modules.subsingleton_H_succ_of_isAffine ℱ q,
+    Modules.subsingleton_H_succ_of_isAffine ℱᵛ q⟩
+
 /-- **`h⁰(Ω¹) = h¹(𝒪_X)`.** On a smooth proper curve over `k`,
 `dim_k H⁰(X, Ω¹_{X/k}) = dim_k H¹(X, 𝒪_X)`. -/
 theorem finrankH_relativeDifferentials_zero_eq_arithmeticGenus

@@ -171,4 +171,64 @@ lemma cechComplexHomologyLinearEquivH_map {ι : Type u} (U : ι → X.Opens)
     (ObjectProperty.homMk ((SheafOfModules.toSheaf X.ringCatSheaf).map φ) :
       toCechAcyclicOnAffines ℱ ⟶ toCechAcyclicOnAffines 𝒢)) (cechComplexHomologyAddEquiv U ℱ q x)
 
+/-- **Leray's theorem, linearly over a ring mapping to the global sections.** For a ring
+homomorphism `φ : A →+* Γ(X, ⊤)` (e.g. `Γ(S, 𝒪_S) → Γ(X, 𝒪_X)` for `X` over `S = Spec A`),
+`cechComplexHomologyLinearEquivH` is `A`-linear after restricting scalars along `φ`.
+
+(blueprint: `sk-lem-picard-cech-computes`, `lem-pc-cech-computes`) -/
+noncomputable def cechComplexHomologyRestrictScalarsLinearEquivH {A : Type u} [CommRing A]
+    (φ : A →+* Γ(X, ⊤)) {ι : Type u} (U : ι → X.Opens)
+    (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)
+    (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    (ModuleCat.restrictScalars φ).obj
+        (((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q) ≃ₗ[A]
+      (ModuleCat.restrictScalars φ).obj (ModuleCat.of Γ(X, ⊤) (ℱ.H q)) :=
+  { (cechComplexHomologyLinearEquivH U hU hU' ℱ q).toAddEquiv with
+    map_smul' a x := (cechComplexHomologyLinearEquivH U hU hU' ℱ q).map_smul (φ a) x }
+
+lemma cechComplexHomologyRestrictScalarsLinearEquivH_apply {A : Type u} [CommRing A]
+    (φ : A →+* Γ(X, ⊤)) {ι : Type u} (U : ι → X.Opens)
+    (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)
+    (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ)
+    (x : ((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q) :
+    cechComplexHomologyRestrictScalarsLinearEquivH φ U hU hU' ℱ q x =
+      cechComplexHomologyLinearEquivH U hU hU' ℱ q x :=
+  rfl
+
+/-- **Čech cohomology computes sheaf cohomology over an affine base, `A`-linearly.** Let `X` be
+separated over `S = Spec A` and let `𝔘 = (U i)` be a covering of `X` by open affines. Then for
+every quasi-coherent `𝒪_X`-module `ℱ` and every `q`, `Ȟ^q(𝔘, ℱ) ≅ H^q(X, ℱ)` as `A`-modules,
+both sides being `A`-modules by restriction of scalars along
+`A ≅ Γ(Spec A, ⊤) → Γ(X, ⊤)`.
+
+(blueprint: `sk-lem-picard-cech-computes`, `lem-pc-cech-computes`) -/
+theorem nonempty_cechComplex_restrictScalars_linearEquiv_H_of_isSeparated {A : Type u}
+    [CommRing A] (f : X ⟶ Spec (.of A)) [IsSeparated f] {ι : Type u} (U : ι → X.Opens)
+    (hU : ∀ i, IsAffineOpen (U i)) (hU' : iSup U = ⊤) (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    Nonempty ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom).obj
+        (((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q) ≃ₗ[A]
+      (ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom).obj
+        (ModuleCat.of Γ(X, ⊤) (ℱ.H q))) :=
+  haveI : IsSeparated (terminal.from X) := by
+    rw [← terminal.comp_from f]
+    infer_instance
+  ⟨cechComplexHomologyRestrictScalarsLinearEquivH _ U
+    (fun s hs ↦ IsAffineOpen.biInf (s : Set ι) s.finite_toSet hs (fun i _ ↦ hU i)) hU' ℱ q⟩
+
+/-- **Čech cohomology computes sheaf cohomology over a field, `k`-linearly.** For a scheme `X`
+separated over `Spec k` and a covering `𝔘 = (U i)` of `X` by open affines,
+`Ȟ^q(𝔘, ℱ) ≅ H^q(X, ℱ)` as `k`-vector spaces for every quasi-coherent `ℱ`.
+
+(blueprint: `sk-lem-picard-cech-computes`, `lem-pc-cech-computes`) -/
+theorem nonempty_cechComplex_linearEquiv_H_of_isSeparated_field (k : Type u) [Field k]
+    [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] {ι : Type u} (U : ι → X.Opens)
+    (hU : ∀ i, IsAffineOpen (U i)) (hU' : iSup U = ⊤) (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    Nonempty ((ModuleCat.restrictScalars (globalSectionsRingHom k (X := X))).obj
+        (((cechComplexFunctor U).obj ℱ.presheafModuleCat).homology q) ≃ₗ[k] ℱ.H q) := by
+  obtain ⟨e⟩ := nonempty_cechComplex_restrictScalars_linearEquiv_H_of_isSeparated
+    (X ↘ Spec (.of k)) U hU hU' ℱ q
+  exact ⟨{ e.toAddEquiv with map_smul' := e.map_smul }⟩
+
 end AlgebraicGeometry.Scheme.Modules
