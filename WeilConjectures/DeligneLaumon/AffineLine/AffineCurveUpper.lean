@@ -15,6 +15,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.LowerStarId
+public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.UpperStarPointwise
 
 /-!
@@ -363,6 +364,86 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology (D : LisseOnDenseOpen 
     · exact_mod_cast (hw.isPureOfWeightOver_compactlySupportedCohomology_two D.lisse).hasWeightsAtMostOver
 
 end LisseOnDenseOpen
+
+/-- Purity of a pullback along a factorisation: if `χ^* F` is punctually `ι`-pure of weight `w`
+and `φ = ψ ≫ χ`, then `φ^* F` is punctually `ι`-pure of weight `w`, purity of a pullback at a
+point only depending on the stalk at the image point. -/
+theorem IsPunctuallyPureOfWeight.upperStar_of_comp_eq {X Y Z : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    [Z.Over (Spec (CommRingCat.of k₀))] (ψ : X ⟶ Y) (χ : Y ⟶ Z) (φ : X ⟶ Z)
+    [ψ.IsOver (Spec (CommRingCat.of k₀))] [χ.IsOver (Spec (CommRingCat.of k₀))]
+    [φ.IsOver (Spec (CommRingCat.of k₀))] (h : ψ ≫ χ = φ) {F : WeilSheaf k₀ l Z} {w : ℝ}
+    (hF : ((WeilSheaf.upperStar χ).obj F).IsPunctuallyPureOfWeight ι w) :
+    ((WeilSheaf.upperStar φ).obj F).IsPunctuallyPureOfWeight ι w := by
+  intro z
+  rw [isPureOfWeight_stalk_upperStar_iff]
+  have hz := (isPureOfWeight_stalk_upperStar_iff χ F
+    ⟨ψ.base z.1, Scheme.Hom.map_mem_finitePoints ψ z.2⟩).1 (hF _)
+  subst h
+  exact hz
+
+/-- **Lisse purity of the transported sheaf.** Let `j : C ⟶ C'` be a quasi-compact open immersion,
+`g : C' ⟶ Y` a finite morphism of separated `k₀`-schemes of finite type, and `W ⊆ Y` an open over
+which `g` is étale and whose preimage lies in `C`. If `𝓕` is lisse on `C` and punctually `ι`-pure
+of weight `w`, then the restriction of `𝓚 = g_* j_! 𝓕` to `W` is lisse and punctually `ι`-pure of
+weight `w`: by base change it is the finite étale direct image `(g|_W)_*(𝓕|_{g⁻¹W})`.
+(blueprint: `lem-a1-reduction-lisse-pure`) -/
+theorem isLisse_and_isPunctuallyPureOfWeight_upperStar_lowerStar_extensionByZero
+    {C C' Y : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [C'.Over (Spec (CommRingCat.of k₀))]
+    [Y.Over (Spec (CommRingCat.of k₀))]
+    [IsSeparated (C' ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (C' ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (C' ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    (j : C ⟶ C') [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
+    (g : C' ⟶ Y) [IsFinite g] [g.IsOver (Spec (CommRingCat.of k₀))]
+    (W : Y.Opens) [Etale (g ∣_ W)] (hW : ((g ⁻¹ᵁ W : C'.Opens) : Set C') ⊆ Set.range j)
+    {F : WeilSheaf k₀ l C} (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
+    ((upperStar W.ι).obj ((lowerStar g).obj ((extensionByZero j).obj F))).IsLisse ∧
+      ((upperStar W.ι).obj ((lowerStar g).obj
+        ((extensionByZero j).obj F))).IsPunctuallyPureOfWeight ι w := by
+  have : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over j]
+    infer_instance
+  have : (g ∣_ W).IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    rw [← comp_over W.ι, morphismRestrict_ι_assoc, comp_over g, comp_over (g ⁻¹ᵁ W).ι]⟩
+  -- `j_! F` restricted to `g⁻¹W ⊆ C` is `F` restricted
+  have hr : Set.range (g ⁻¹ᵁ W).ι ⊆ Set.range j := by
+    rw [Scheme.Opens.range_ι]
+    exact hW
+  let v : (g ⁻¹ᵁ W).toScheme ⟶ C := IsOpenImmersion.lift j (g ⁻¹ᵁ W).ι hr
+  have hv : v ≫ j = (g ⁻¹ᵁ W).ι := IsOpenImmersion.lift_fac _ _ _
+  have : v.IsOver (Spec (CommRingCat.of k₀)) := IsOpenImmersion.isOver_lift _ _ hr
+  obtain ⟨e₀⟩ := nonempty_upperStar_extensionByZero_iso j F
+  have hGl : ((upperStar (g ⁻¹ᵁ W).ι).obj ((extensionByZero j).obj F)).IsLisse :=
+    (isLisse_upperStar_congr (k₀ := k₀) (l := l) hv _).1 ((isLisse_upperStar_comp_iff v j _).2
+      ((hF.of_iso e₀.symm).upperStar v))
+  have hGw : ((upperStar (g ⁻¹ᵁ W).ι).obj ((extensionByZero j).obj F)).IsPunctuallyPureOfWeight
+      ι w :=
+    IsPunctuallyPureOfWeight.upperStar_of_comp_eq v j _ hv (hw.of_mono e₀.hom)
+  -- base change to `W`
+  have := W.isSeparated (k₀ := k₀)
+  have := W.locallyOfFiniteType (k₀ := k₀)
+  have := (g ⁻¹ᵁ W).isSeparated (k₀ := k₀)
+  have := (g ⁻¹ᵁ W).locallyOfFiniteType (k₀ := k₀)
+  have := isNoetherian_of_locallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))
+  have := isNoetherian_of_locallyOfFiniteType (C' ↘ Spec (CommRingCat.of k₀))
+  have : QuasiCompact (W.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over W.ι]
+    infer_instance
+  have : QuasiCompact ((g ⁻¹ᵁ W).toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over (g ⁻¹ᵁ W).ι]
+    infer_instance
+  obtain ⟨e⟩ := nonempty_upperStar_higherLowerShriek_zero_iso
+    (isPullback_morphismRestrict g W).flip ((extensionByZero j).obj F)
+  let E : (upperStar W.ι).obj ((lowerStar g).obj ((extensionByZero j).obj F)) ≅
+      (lowerStar (g ∣_ W)).obj ((upperStar (g ⁻¹ᵁ W).ι).obj ((extensionByZero j).obj F)) :=
+    (upperStar W.ι).mapIso (higherLowerShriekZeroObjIsoLowerStar g _).symm ≪≫ e ≪≫
+      higherLowerShriekZeroObjIsoLowerStar (g ∣_ W) _
+  exact ⟨(hGl.lowerStar_of_finite_etale (g ∣_ W)).of_iso E.symm,
+    (hGw.lowerStar_of_isFinite (g ∣_ W)).of_mono E.hom⟩
 
 /-- **Exceptional rank-one constituents.** Let `j : U₀ ⟶ 𝔸¹` be a dense open immersion and `𝓔` a
 Weil sheaf on `U₀` which is either a constant twist `ℚ̄_ℓ(b)` of the constant sheaf or the

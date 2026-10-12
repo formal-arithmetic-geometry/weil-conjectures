@@ -51,23 +51,6 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (ι : PadicAlgCl l →+* ℂ)
 
-/-- Purity of a pullback along a factorisation: if `χ^* F` is punctually `ι`-pure of weight `w`
-and `φ = ψ ≫ χ`, then `φ^* F` is punctually `ι`-pure of weight `w`, purity of a pullback at a
-point only depending on the stalk at the image point. -/
-theorem WeilSheaf.IsPunctuallyPureOfWeight.upperStar_of_comp_eq {X Y Z : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
-    [Z.Over (Spec (CommRingCat.of k₀))] (ψ : X ⟶ Y) (χ : Y ⟶ Z) (φ : X ⟶ Z)
-    [ψ.IsOver (Spec (CommRingCat.of k₀))] [χ.IsOver (Spec (CommRingCat.of k₀))]
-    [φ.IsOver (Spec (CommRingCat.of k₀))] (h : ψ ≫ χ = φ) {F : WeilSheaf k₀ l Z} {w : ℝ}
-    (hF : ((WeilSheaf.upperStar χ).obj F).IsPunctuallyPureOfWeight ι w) :
-    ((WeilSheaf.upperStar φ).obj F).IsPunctuallyPureOfWeight ι w := by
-  intro z
-  rw [WeilSheaf.isPureOfWeight_stalk_upperStar_iff]
-  have hz := (WeilSheaf.isPureOfWeight_stalk_upperStar_iff χ F
-    ⟨ψ.base z.1, Scheme.Hom.map_mem_finitePoints ψ z.2⟩).1 (hF _)
-  subst h
-  exact hz
-
 /-- **Compact-support upper bound for a middle extension on a curve** (blueprint:
 `prop-a1-middle-extension-curve-upper`): let `j : U ⟶ C` be a dense open immersion of smooth
 geometrically connected curves over `k₀` and let `F` be a lisse Weil sheaf on `U`, punctually
@@ -147,7 +130,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_directImage_of_isCurve
     have : v.IsOver (Spec (CommRingCat.of k₀)) := IsOpenImmersion.isOver_lift _ _ hr
     have hVK : ((WeilSheaf.upperStar V.ι).obj ((WeilSheaf.directImage j).obj F)).IsPunctuallyPureOfWeight
         ι w :=
-      WeilSheaf.IsPunctuallyPureOfWeight.upperStar_of_comp_eq ι v j V.ι hv hjK
+      WeilSheaf.IsPunctuallyPureOfWeight.upperStar_of_comp_eq v j V.ι hv hjK
     have hVe := hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine ι
       (ringKrullDim_le_of_smoothOfRelativeDimension (V.toScheme ↘ Spec (CommRingCat.of k₀)) 1) _
       hVK n
