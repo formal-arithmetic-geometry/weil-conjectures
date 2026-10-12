@@ -1,0 +1,97 @@
+{
+ "id": "finite-local-models-transport-naturality",
+ "kind": "statement",
+ "title": "Naturality of transport maps",
+ "statement": "theorem finiteLocalModels_transport_naturality\n    (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))\n    (U : T.Etale) (Q : U.left.FiniteEtale)\n    (e : (E.over U).obj ≅ (Etale.overToEtale U).op ⋙\n      uliftYoneda.{u + 1}.obj Q.obj)\n    (transport : ∀ {W : Scheme.{u}} (a b : W ⟶ U.left),\n      a ≫ U.hom = b ≫ U.hom →\n      (Over.mk a ⟶ Over.mk Q.obj.hom) →\n      (Over.mk b ⟶ Over.mk Q.obj.hom)) :\n    ∀ {W W' : Scheme.{u}} (g : W' ⟶ W) (a b : W ⟶ U.left)\n      (h : a ≫ U.hom = b ≫ U.hom) (x : Over.mk a ⟶ Over.mk Q.obj.hom),\n      transport (g ≫ a) (g ≫ b) (by rw [Category.assoc, Category.assoc, h])\n        ((Over.homMk g : Over.mk (g ≫ a) ⟶ Over.mk a) ≫ x) =\n      (Over.homMk g : Over.mk (g ≫ b) ⟶ Over.mk b) ≫ transport a b h x := by sorry",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03RV and 02W5"
+ },
+ "proof": [
+  {
+   "text": "The construction is obtained by the fiber-product Yoneda comparison and pullback functoriality described in the parent node.",
+   "uses": [
+    "lem-weil-pbc-finite-local-model-compatible-transport-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-local-model-compatible-transport-datum"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03RV and 02W5"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityDatum",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-local-model-compatible-transport-datum",
+   "place": "decomposition of construction"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityDatum",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocalModelsDescentDatumCompatibilityDatum.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteLocalModels_transport_naturality",
+  "statement": "theorem finiteLocalModels_transport_naturality\n    (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))\n    (U : T.Etale) (Q : U.left.FiniteEtale)\n    (e : (E.over U).obj ≅ (Etale.overToEtale U).op ⋙\n      uliftYoneda.{u + 1}.obj Q.obj)\n    (transport : ∀ {W : Scheme.{u}} (a b : W ⟶ U.left),\n      a ≫ U.hom = b ≫ U.hom →\n      (Over.mk a ⟶ Over.mk Q.obj.hom) →\n      (Over.mk b ⟶ Over.mk Q.obj.hom)) :\n    ∀ {W W' : Scheme.{u}} (g : W' ⟶ W) (a b : W ⟶ U.left)\n      (h : a ≫ U.hom = b ≫ U.hom) (x : Over.mk a ⟶ Over.mk Q.obj.hom),\n      transport (g ≫ a) (g ≫ b) (by rw [Category.assoc, Category.assoc, h])\n        ((Over.homMk g : Over.mk (g ≫ a) ⟶ Over.mk a) ≫ x) =\n      (Over.homMk g : Over.mk (g ≫ b) ⟶ Over.mk b) ≫ transport a b h x",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Yoneda comparison transport maps for etale sheaf",
+   "results": "No exact match; construction-specific theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteLocalModelCompatibleTransport",
+   "results": "No match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "transport_naturality compatibility",
+   "results": "No existing declaration.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T112834-L-765701",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T112834-L-765701",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

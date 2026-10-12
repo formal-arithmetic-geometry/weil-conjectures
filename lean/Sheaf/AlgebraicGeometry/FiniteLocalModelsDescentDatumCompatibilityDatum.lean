@@ -37,24 +37,84 @@ structure FiniteLocalModelCompatibleTransport
             (MorphismProperty.Over.w ((e.hom.app (op (Over.mk a))) s).down))).left =
           ((e.hom.app (op (Over.mk b))) s).down.left
 
-/-- Natural compatible transport exists on a local representative.
-
+/--
 Source: Stacks Project, Tags 03RV and 02W5.
-(blueprint: lem-weil-pbc-finite-local-model-compatible-transport-datum)
-Proof: Set H = U times_T U. Both pullbacks of Q to H represent the same
-restriction of E: the pullback universal property identifies their Yoneda
-presheaves with the two restrictions of e. Yoneda full faithfulness on H gives
-an isomorphism between them identifying the common section. Given arbitrary
-scheme maps a,b with equal composite, pull back this comparison along (a,b)
-and apply it to a Q-point. Pullback functoriality gives naturality. For an
-etale W, the comparison identifies the section used to define the Q-point,
-which gives compatibility. This construction uses only etale objects while
-constructing the comparison, and then scheme base change for arbitrary W.
-Empty objects are covered by the same universal properties. -/
+(blueprint: finite-local-models-transport-exists)
+The fiber-product Yoneda comparison of the two pullbacks of the finite etale
+scheme defines transport for arbitrary scheme maps with equal composites.
+Pulling this comparison back along the pair of maps gives the displayed map.
+-/
+theorem finiteLocalModels_transport_exists
+    (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
+    (U : T.Etale) (Q : U.left.FiniteEtale)
+    (e : (E.over U).obj ≅ (Etale.overToEtale U).op ⋙
+      uliftYoneda.{u + 1}.obj Q.obj) :
+    Nonempty (∀ {W : Scheme.{u}} (a b : W ⟶ U.left),
+      a ≫ U.hom = b ≫ U.hom →
+      (Over.mk a ⟶ Over.mk Q.obj.hom) →
+      (Over.mk b ⟶ Over.mk Q.obj.hom)) := by sorry
+
+/--
+Source: Stacks Project, Tags 03RV and 02W5.
+(blueprint: finite-local-models-transport-naturality)
+The transport is induced by pullback of the comparison on the fiber product.
+Functoriality of pullback, together with associativity of composition, proves
+the displayed naturality equation.
+-/
+theorem finiteLocalModels_transport_naturality
+    (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
+    (U : T.Etale) (Q : U.left.FiniteEtale)
+    (e : (E.over U).obj ≅ (Etale.overToEtale U).op ⋙
+      uliftYoneda.{u + 1}.obj Q.obj)
+    (transport : ∀ {W : Scheme.{u}} (a b : W ⟶ U.left),
+      a ≫ U.hom = b ≫ U.hom →
+      (Over.mk a ⟶ Over.mk Q.obj.hom) →
+      (Over.mk b ⟶ Over.mk Q.obj.hom)) :
+    ∀ {W W' : Scheme.{u}} (g : W' ⟶ W) (a b : W ⟶ U.left)
+      (h : a ≫ U.hom = b ≫ U.hom) (x : Over.mk a ⟶ Over.mk Q.obj.hom),
+      transport (g ≫ a) (g ≫ b) (by rw [Category.assoc, Category.assoc, h])
+        ((Over.homMk g : Over.mk (g ≫ a) ⟶ Over.mk a) ≫ x) =
+      (Over.homMk g : Over.mk (g ≫ b) ⟶ Over.mk b) ≫ transport a b h x := by sorry
+
+/--
+Source: Stacks Project, Tags 03RV and 02W5.
+(blueprint: finite-local-models-transport-compatibility)
+For an etale source, the comparison identifies the two points obtained from a
+common section under the representing isomorphism, yielding compatibility.
+-/
+theorem finiteLocalModels_transport_compatibility
+    (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
+    (U : T.Etale) (Q : U.left.FiniteEtale)
+    (e : (E.over U).obj ≅ (Etale.overToEtale U).op ⋙
+      uliftYoneda.{u + 1}.obj Q.obj)
+    (transport : ∀ {W : Scheme.{u}} (a b : W ⟶ U.left),
+      a ≫ U.hom = b ≫ U.hom →
+      (Over.mk a ⟶ Over.mk Q.obj.hom) →
+      (Over.mk b ⟶ Over.mk Q.obj.hom)) :
+    ∀ (W : T.Etale) (a b : W ⟶ U) (s : E.obj.obj (op W)),
+      (transport a.left b.left
+        ((MorphismProperty.Over.w a).trans (MorphismProperty.Over.w b).symm)
+        (Over.homMk ((e.hom.app (op (Over.mk a))) s).down.left
+          (MorphismProperty.Over.w ((e.hom.app (op (Over.mk a))) s).down))).left =
+      ((e.hom.app (op (Over.mk b))) s).down.left := by sorry
+
 theorem finiteLocalModels_descentDatum_compatibility_datum
     (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))
     (U : T.Etale) (Q : U.left.FiniteEtale)
     (e : (E.over U).obj ≅ (Etale.overToEtale U).op ⋙
       uliftYoneda.{u + 1}.obj Q.obj) :
-    Nonempty (FiniteLocalModelCompatibleTransport T E U Q e) := by sorry
+    Nonempty (FiniteLocalModelCompatibleTransport T E U Q e) := by
+  let transport : ∀ {W : Scheme.{u}} (a b : W ⟶ U.left),
+      a ≫ U.hom = b ≫ U.hom →
+      (Over.mk a ⟶ Over.mk Q.obj.hom) → (Over.mk b ⟶ Over.mk Q.obj.hom) :=
+    (finiteLocalModels_transport_exists T E U Q e).some
+  refine ⟨{
+    transport := transport
+    naturality := by
+      intro W W' g a b h x
+      exact finiteLocalModels_transport_naturality T E U Q e transport g a b h x
+    compatibility := by
+      intro W a b s
+      exact finiteLocalModels_transport_compatibility T E U Q e transport W a b s
+  }⟩
 end AlgebraicGeometry.Scheme
