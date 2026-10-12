@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-coherent-map-torsion-completion-ext",
+ "kind": "statement",
+ "title": "Maps detected by completion and a comparison with power-torsion kernel",
+ "statement": "Let X be Noetherian, K a quasi-coherent ideal, P,Q,R coherent O_X-modules [def-weil-pbc-coherent-formal-module], and b:Q -> R. Assume K^t ker(b)=0 for some t >= 1. If f,g:P -> Q satisfy b composed with f = b composed with g and their canonical K-completions are equal as morphisms in Coh(X,K), then f=g. No cokernel bound for b is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open, d=f-g factors through the finite module T=ker(b). Equality of completions and injectivity of the completed inclusion T -> Q show that the completed map P -> T vanishes.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-completion-exact-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
+   }
+  },
+  {
+   "text": "As K^t T=0, T/K^eT=T once e>=t; the completion of T is naturally T. Hence d=0 on every affine open.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
+   }
+  },
+  {
+   "text": "A sheaf morphism is determined on an affine basis: restrict sections to affine neighbourhoods and use separation of the target sheaf. Thus f=g globally.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness",
+  "note": "Source argument expanded into an explicit sheaf interface; no new mathematical assumption."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For coherent sheaves on a Noetherian scheme, kernel and cokernel ideal power torsion survives reduction modulo another ideal, and maps are detected by completion together with comparison",
+   "results": "HTTP Internal Server Error; service unavailable. No mathematical verdict inferred from the failed search.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent modules torsion controlled algebraization uniqueness and maps determined by completion and comparison",
+   "results": "Eight ring-level hits including IsAdicComplete.algHom_ext and AdicCompletion.map_ext; none states the sheaf comparison or torsion bound. A second query on commuting ideal-power quotients found factorPow, transitionMap and ring quotient equivalences, no sheaf statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "Functor.mapIso and eleven related categorical transport lemmas; useful for forgetting coherent level isomorphisms, no sheaf torsion or double-quotient interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*injective|torsionTriple|quotient.*interchange",
+   "results": "msearch returned AdicCompletion.map_injective and unrelated completion coercions. Local rg over both roots found no quotient-interchange, reduction-torsion or torsion-completion-ext statement; Mathlib AdicCompletion.Exactness supplies injectivity/exactness for the affine proof. Blueprint searches quotient interchange, torsion completion and reduction torsion found zero matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckDevissageRecoverLevels",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7, complete Noetherian essential surjectivity via Grothendieck existence; Tag 088A final paragraph: Maps detected by completion and a comparison with power-torsion kernel",
+   "via": [
+    "lem-weil-pbc-devissage-recover-levels",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentMapTorsionCompletionExt",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentMapTorsionCompletionExt.lean",
+  "declaration": "AlgebraicGeometry.coherentMap_torsion_completion_ext",
+  "statement": "theorem coherentMap_torsion_completion_ext\n    {X : Scheme.{u}} [IsNoetherian X] (K : X.IdealSheafData)\n    (P Q R : CoherentModules X) (b : Q ⟶ R)\n    (hker : ∃ t : ℕ, 1 ≤ t ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2\n        (kernel b.hom)))\n    (f g : P ⟶ Q) (hcomp : f ≫ b = g ≫ b)\n    (hcompletion : (completion X K).map f = (completion X K).map g) : f = g",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T214706-L-1269692",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T214706-L-1269692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

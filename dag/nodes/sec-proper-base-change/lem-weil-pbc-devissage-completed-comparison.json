@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-devissage-completed-comparison",
+ "kind": "statement",
+ "title": "Compatible comparison after completing original levels in the second ideal",
+ "statement": "Let X be Noetherian, I,K quasi-coherent ideals and M in Coh(X,I), N in Coh(X,K), F,H coherent [def-weil-pbc-coherent-formal-module]. Let alpha:M -> completion_I H and delta:N -> completion_K H. Suppose sigma is an isomorphism of double diagrams N_e/I^(n+1)N_e -> M_n/K^(e+1)M_n, natural in e,n. Suppose theta:(H/K^(e+1)H)/I^(n+1) -> (H/I^(n+1)H)/K^(e+1) is natural and carries the composite projection from H to the composite projection in the other order. Assume sigma followed by reduction of alpha_n equals reduction of delta_e followed by theta. Let a:F -> H, beta:N isomorphic to completion_K F with delta=beta.hom followed by completion_K(a). Then there is an isomorphism Xi, natural in n, between the K-completion of the I-reductions of F and the K-completion of the levels M_n. For every n its forward map followed by completion_K(alpha_n) equals completion_K(a modulo I^(n+1)). No torsion or algebraization hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A (lemma-existence-tricky), final paragraph, reduction of beta modulo I^n"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "For any module, iterated quotients by the two ideal powers represent the quotient by their sum. Construct maps in both directions from their cokernel universal properties. Cancelling the composite quotient epimorphisms proves inverse identities and naturality in the module and both indices.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
+   }
+  },
+  {
+   "text": "Interchange the quotients on F; compose the reduction of beta inverse with sigma and transpose the indices to produce Xi natural in the I-index.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
+   }
+  },
+  {
+   "text": "Apply the comparison square and delta=beta.hom followed by completed a. Naturality of interchange for a identifies the target interchange with theta, because htheta characterizes it after an epimorphic projection from H. This proves the map equality at every pair of indices.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A (lemma-existence-tricky), final paragraph, reduction of beta modulo I^n",
+  "note": "Source argument expanded into an explicit sheaf interface; no new mathematical assumption."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For coherent sheaves on a Noetherian scheme, kernel and cokernel ideal power torsion survives reduction modulo another ideal, and maps are detected by completion together with comparison",
+   "results": "HTTP Internal Server Error; service unavailable. No mathematical verdict inferred from the failed search.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent modules torsion controlled algebraization uniqueness and maps determined by completion and comparison",
+   "results": "Eight ring-level hits including IsAdicComplete.algHom_ext and AdicCompletion.map_ext; none states the sheaf comparison or torsion bound. A second query on commuting ideal-power quotients found factorPow, transitionMap and ring quotient equivalences, no sheaf statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "Functor.mapIso and eleven related categorical transport lemmas; useful for forgetting coherent level isomorphisms, no sheaf torsion or double-quotient interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*injective|torsionTriple|quotient.*interchange",
+   "results": "msearch returned AdicCompletion.map_injective and unrelated completion coercions. Local rg over both roots found no quotient-interchange, reduction-torsion or torsion-completion-ext statement; Mathlib AdicCompletion.Exactness supplies injectivity/exactness for the affine proof. Blueprint searches quotient interchange, torsion completion and reduction torsion found zero matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckDevissageRecoverLevels",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7, complete Noetherian essential surjectivity via Grothendieck existence; Tag 088A final paragraph: Compatible comparison after completing original levels in the second ideal",
+   "via": [
+    "lem-weil-pbc-devissage-recover-levels",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckDevissageCompletedComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckDevissageCompletedComparison.lean",
+  "declaration": "AlgebraicGeometry.grothendieckDevissage_completedComparison",
+  "statement": "theorem grothendieckDevissage_completedComparison\n    {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)\n    (M : CoherentFormalModule X I) (H : CoherentModules X)\n    (α : M ⟶ (completion X I).obj H)\n    (N : CoherentFormalModule X K) (δ : N ⟶ (completion X K).obj H)\n    (σ : N.obj ⋙ formalCompletionFunctor I ≅ (M.obj ⋙ formalCompletionFunctor K).flip)\n    (θ : formalCompletionSystem K H.obj ⋙ formalCompletionFunctor I ≅\n      (formalCompletionSystem I H.obj ⋙ formalCompletionFunctor K).flip)\n    (hθ : ∀ e n : ℕ,\n      formalModuleQuotientπ K (e + 1) H.obj ≫\n        formalModuleQuotientπ I (n + 1) (formalModuleQuotient K (e + 1) H.obj) ≫\n        (θ.hom.app (op e)).app (op n) =\n      formalModuleQuotientπ I (n + 1) H.obj ≫\n        formalModuleQuotientπ K (e + 1) (formalModuleQuotient I (n + 1) H.obj))\n    (hsquare : ∀ e n : ℕ,\n      (σ.hom.app (op e)).app (op n) ≫\n        formalModuleQuotientMap K (α.hom.app (op n)) (Nat.le_refl (e + 1)) =\n      formalModuleQuotientMap I (δ.hom.app (op e)) (Nat.le_refl (n + 1)) ≫\n        (θ.hom.app (op e)).app (op n))\n    (F : CoherentModules X) (a : F ⟶ H) (β : N ≅ (completion X K).obj F)\n    (hβ : δ = β.hom ≫ (completion X K).map a) :\n    ∃ Ξ : ((completion X I).obj F).obj ⋙ formalCompletionFunctor K ≅\n        M.obj ⋙ formalCompletionFunctor K,\n      ∀ n : ℕᵒᵖ,\n        Ξ.hom.app n ≫ formalCompletionMap K (α.hom.app n) =\n          formalCompletionMap K (((completion X I).map a).hom.app n)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T214706-L-1269692",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T214706-L-1269692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -14,52 +14,55 @@
  ],
  "proof": [
   {
-   "text": "For each positive n, evaluate the doubly indexed comparison in the I-index. Reduce beta modulo I^n and commute the two quotients using their cokernel universal properties. The projection equation for theta and the square identify the completed map with the K-completion of alpha_n.",
+   "text": "Construct Xi, the natural completed comparison of the original I-levels, by commuting the two quotient operations and using sigma, theta, beta and the comparison square.",
    "uses": [
+    "lem-weil-pbc-devissage-completed-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
+   }
+  },
+  {
+   "text": "At each I-level, the reduced map a has K^(2s)-torsion kernel and cokernel. Completing alpha_n gives uniform K^(2t)-torsion components. Apply the existing torsion-triple theorem to this completed map, and compare its selected triple with both supplied coherent triples. Compose the inverse of the first comparison isomorphism with the second to get phi_n; cancel the two comparison isomorphisms to prove that phi_n respects both the map to H/I^nH and Xi.",
+   "uses": [
+    "lem-weil-pbc-coherent-map-reduction-torsion",
+    "lem-weil-pbc-easy-algebraization-torsion-triple",
     "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 088A, final paragraph"
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
    }
   },
   {
-   "text": "Remark 0888 bounds the kernel and cokernel of a modulo I^n by K^(2s). Thus F/I^n F with its reduced map and M_n with alpha_n are torsion-controlled triples for the same K-completed map. The torsion-controlled uniqueness statement gives a canonical isomorphism between their coherent sources.",
+   "text": "For any transition, the composites have equal maps to H/I^mH by naturality of alpha and reduced a, and equal completions by naturality of Xi. The target comparison alpha_m has a power-torsion kernel, so completion together with that comparison detects the composites. Forget the coherent subcategory to obtain the required natural family of ambient module isomorphisms.",
    "uses": [
-    "lem-weil-pbc-formal-systems-annihilated-by-power",
-    "lem-weil-pbc-easy-algebraization-torsion-triple"
+    "lem-weil-pbc-coherent-map-torsion-completion-ext"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 088A, final paragraph; Tag 0889(1)"
-   }
-  },
-  {
-   "text": "For a transition, the two composites agree after K-completion by the naturality of sigma and beta. Away from V(K), the torsion-controlled comparison maps to the corresponding quotient of H are invertible, so the composites agree there as well. On an affine open, injectivity in the formal gluing complex makes maps agreeing on the completion and those localizations equal. Local equality then gives global equality, proving transition compatibility.",
-   "uses": [
-    "lem-weil-pbc-formal-glueing-complex-exact",
-    "lem-weil-pbc-glue-sheaves-of-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 088A, final paragraph; Tag 0889 uniqueness argument; Tag 05EK"
+    "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-easy-algebraization-torsion-triple",
-  "lem-weil-pbc-formal-glueing-complex-exact",
-  "lem-weil-pbc-formal-systems-annihilated-by-power",
-  "lem-weil-pbc-glue-sheaves-of-modules"
+  "lem-weil-pbc-coherent-map-reduction-torsion",
+  "lem-weil-pbc-coherent-map-torsion-completion-ext",
+  "lem-weil-pbc-devissage-completed-comparison",
+  "lem-weil-pbc-easy-algebraization-torsion-triple"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "E3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tags 088A and 0889; source proof expressed as a stage-3 interface by C1"
+  "place": "Tag 088A (lemma-existence-tricky), final paragraph; Tag 0889 (lemma-existence-easy), uniqueness",
+  "note": "Lean reduction through completed comparison, coherent reduction torsion, existing torsion-triple uniqueness, and torsion-kernel map detection."
  },
  "mathlib_searches": [
   {
@@ -146,11 +149,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-a4305",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T194102-L-451972",
+  "landing": "20261012T214706-L-1269692",
   "kind": "interface",
-  "note": "independent Codex review: Matched all four Lean signatures with their node records and the decomposition with Stacks 088A/0889; all modules compile cleanly, with only standard axioms and expected sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
