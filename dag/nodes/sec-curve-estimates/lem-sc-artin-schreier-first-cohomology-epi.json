@@ -1,0 +1,170 @@
+{
+ "id": "lem-sc-artin-schreier-first-cohomology-epi",
+ "kind": "statement",
+ "title": "Epimorphy of Frobenius minus identity on first additive cohomology",
+ "statement": "Let f:C -> Spec(k) be a smooth connected curve over an algebraically closed field k of prime characteristic p (def-sc-curves). Let G be an abelian etale sheaf with natural additive section equivalences a_U:G(U) -> Gamma(U,O_U) (def-sc-etale-qcoherent-module). Let wp:G -> G satisfy a_U(wp(x))=a_U(x)^p-a_U(x) on every etale object. Then the map on derived first etale cohomology of G (def-weil-pbc-etale-cohomology) induced by wp is epi.",
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-etale-qcoherent-module",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension.md",
+  "place": "steps 3--7: the proper/affine argument and first-cohomology Frobenius map"
+ },
+ "proof": [
+  {
+   "text": "Compactification and affineness of a proper curve minus a nonempty finite set show that C is either proper or affine.",
+   "uses": [
+    "lem-sc-compactification",
+    "lem-sc-affine-open-proper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the affine case first additive cohomology is zero, hence any endomorphism is epi.",
+   "uses": [
+    "lem-sc-etale-affine-qcoherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the proper case natural section equivalences transport scalar multiplication and Frobenius to G. Additivity of cohomology yields a k-vector space V=H^1(C,G), a p-semilinear F, and H^1(wp)=F-id.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural etale/Zariski comparison identifies V linearly with H^1(C,O_C), finite dimensional by proper coherent cohomology.",
+   "uses": [
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "lem-pc-coherent-hi",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lang-Steinberg gives surjectivity of F-id. Compare the map with derived global sections using injective resolutions. For the coefficient universes use finite affine etale hypercover cochains, which identify cocycles, coboundaries and the wp map. A surjective additive-group map is epi.",
+   "uses": [
+    "lem-sc-lang-steinberg",
+    "lem-sp-kinjective-computes",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-compactification",
+  "lem-sc-affine-open-proper",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-pc-coherent-hi",
+  "pqf-def-cohomology",
+  "lem-sc-lang-steinberg",
+  "lem-sp-kinjective-computes",
+  "lem-sp-derived-functor-single-identification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension.md",
+  "place": "steps 3--7: the proper/affine argument and first-cohomology Frobenius map; the derived-encoding glue is made explicit by second reader B2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius minus identity surjective first cohomology additive structure sheaf smooth proper curve",
+   "date": "2026-10-12",
+   "results": "Algebra.SubmersivePresentation.cotangentComplexAux_surjective; Algebra.Extension.toKaehler_surjective; Algebra.Extension.Cotangent.mk_surjective; Algebra.Generators.CotangentSpace.map_ofComp_surjective; KaehlerDifferential.map_surjective; Algebra.Generators.Cotangent.surjective_map_ofComp; KaehlerDifferential.map_surjective_of_surjective; PerfectClosure.mk_surjective",
+   "digest": "702c45a2b640f4d9",
+   "verdict": "No match for either new curve-specific statement; homologySequence hits are used in the target reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologySequence\"",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Functor.homologySequenceComposableArrows₅; CategoryTheory.Functor.homologySequenceδ; CategoryTheory.Functor.homologySequenceComposableArrows₅_exact; CategoryTheory.Functor.homologySequence_exact₁; CategoryTheory.Functor.homologySequence_exact₂; CategoryTheory.Functor.homologySequence_exact₃; CategoryTheory.Functor.homologySequenceδ_naturality; CategoryTheory.Functor.homologySequence_epi_shift_map_mor₂_iff",
+   "digest": "2f142cf0f6de31b8",
+   "verdict": "No match for either new curve-specific statement; homologySequence hits are used in the target reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "etale_ga|cohomology.*single|epi.*Frobenius",
+   "date": "2026-10-12",
+   "results": "Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+   "digest": "c7136dec8f1ac562",
+   "verdict": "No match for either new curve-specific statement; homologySequence hits are used in the target reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of the additive structure sheaf vanishes above the dimension of a curve",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"surjective\"",
+   "date": "2026-10-12",
+   "results": "surjective_frobenius",
+   "digest": "b7ee2a51eab90401",
+   "verdict": "No match for either new curve-specific statement; homologySequence hits are used in the target reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of a quasi coherent sheaf on a Noetherian scheme vanishes above its dimension",
+   "date": "2026-10-12",
+   "results": "DerivedCategory.isZero_of_isGE; DerivedCategory.isZero_of_isLE; CochainComplex.isZero_of_isGE; DerivedCategory.isGE_iff; DerivedCategory.isLE_iff; CochainComplex.isZero_of_isLE; CategoryTheory.hasInjectiveDimensionLT_iff; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "digest": "0eefe218022922b0",
+   "verdict": "No match for either new curve-specific statement; homologySequence hits are used in the target reduction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "steps 3--7: the proper/affine argument and first-cohomology Frobenius map",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierCohomologyEpi",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ArtinSchreierCohomologyEpi.lean",
+  "declaration": "AlgebraicGeometry.epi_etaleCohomology_artinSchreier_one",
+  "statement": "theorem epi_etaleCohomology_artinSchreier_one\n    {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}\n    (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]\n    (p : ℕ) [Fact p.Prime] [CharP k p]\n    (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n    (wp : G ⟶ G)\n    (ha : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U),\n      a V (G.obj.map g x) = g.unop.left.appTop (a U x))\n    (hwp : ∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U),\n      a U (wp.hom.app U x) = (a U x) ^ p - a U x) :\n    Epi ((Etale.cohomology AddCommGrpCat.{u + 1} C (1 : ℤ)).map\n      ((DerivedCategory.singleFunctor\n        (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).map wp))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T053918-L-2629101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T053918-L-2629101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,17 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Sheaf.AlgebraicGeometry.ArtinSchreierSequence
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
-import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
-import Sheaf.AlgebraicGeometry.EtaleZariskiCohomology
-import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
-import Sheaf.CategoryTheory.KInjectiveComputes
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.Paper.PQFCohomology
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
-import WeilConjectures.AlgebraicGeometry.Curve.Compactification
-import WeilConjectures.LinearAlgebra.SemilinearFrobenius
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
+import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierAdditiveVanishing
+import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierCohomologyEpi
+import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-!
 # Artin–Schreier vanishing on a smooth connected curve
@@ -67,6 +60,25 @@ theorem isZero_etaleCohomology_constantZMod_of_one_lt_of_charP
     IsZero ((Etale.cohomology AddCommGrpCat.{u + 1} C (q : ℤ)).obj
       ((DerivedCategory.singleFunctor (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj
         (C.constantZMod p))) := by
-  sorry
+  obtain ⟨G, e, a, wp, iota, hzero, ha, hwp, _, hS⟩ :=
+    artinSchreier_shortExact f p (Nat.Prime.pos (Fact.out : p.Prime))
+  let R := (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctor
+  let T := R.mapTriangle.obj hS.singleTriangle
+  have hT : T ∈ distTriang _ :=
+    R.map_distinguished _ hS.singleTriangle_distinguished
+  have hstep : ((q - 1 : ℕ) : ℤ) + 1 = (q : ℤ) := by omega
+  have hepi : Epi ((DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1}
+      ((q - 1 : ℕ) : ℤ)).map T.mor₂) := by
+    by_cases hq2 : q = 2
+    · subst q
+      exact epi_etaleCohomology_artinSchreier_one f p G a wp ha hwp
+    · have hG := isZero_etaleCohomology_additive_of_two_le f G e (q - 1) (by omega)
+      exact hG.epi _
+  have hδ := (DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff
+    T hT ((q - 1 : ℕ) : ℤ) (q : ℤ) hstep).mp hepi
+  have hG := isZero_etaleCohomology_additive_of_two_le f G e q (by omega)
+  exact (DerivedCategory.HomologySequence.exact₁
+    T hT ((q - 1 : ℕ) : ℤ) (q : ℤ) hstep).isZero_of_both_zeros
+      hδ (hG.eq_zero_of_tgt _)
 
 end AlgebraicGeometry

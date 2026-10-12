@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-artin-schreier-additive-derived-vanishing",
+ "kind": "statement",
+ "title": "Vanishing of derived additive cohomology above degree one",
+ "statement": "Let f:C -> Spec(k) be a smooth connected curve over an algebraically closed field (def-sc-curves). Let G be an abelian etale sheaf isomorphic to the universe lift of the associated etale structure-module sheaf (def-sc-etale-qcoherent-module). For every natural q >= 2, derived etale cohomology H^q(C,G), with G placed in degree zero (def-weil-pbc-etale-cohomology), is a zero object.",
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-etale-qcoherent-module",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension.md",
+  "place": "step 2: additive cohomology vanishing, including the coefficient-universe and derived-encoding comparisons"
+ },
+ "proof": [
+  {
+   "text": "Use the natural injective-resolution comparison of derived global sections on a sheaf placed in degree zero with ordinary sheaf cohomology.",
+   "uses": [
+    "lem-sp-kinjective-computes",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the change of coefficient universe using finite affine etale hypercovers: quasi-compactness supplies finite refinements in each relevant degree. Universe lift identifies finite products, cocycles, and coboundaries, without an assumption that it preserves injective sheaves.",
+   "uses": [
+    "lem-sc-ga-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive etale structure sheaf has zero cohomology in degree at least two, by its Zariski comparison and the Noetherian dimension-one bound. Transport vanishing through the previous comparisons and the given sheaf isomorphism.",
+   "uses": [
+    "lem-sc-ga-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-kinjective-computes",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sc-ga-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension.md",
+  "place": "step 2: additive cohomology vanishing, including the coefficient-universe and derived-encoding comparisons; the derived-encoding glue is made explicit by second reader B2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius minus identity surjective first cohomology additive structure sheaf smooth proper curve",
+   "date": "2026-10-12",
+   "results": "Algebra.SubmersivePresentation.cotangentComplexAux_surjective; Algebra.Extension.toKaehler_surjective; Algebra.Extension.Cotangent.mk_surjective; Algebra.Generators.CotangentSpace.map_ofComp_surjective; KaehlerDifferential.map_surjective; Algebra.Generators.Cotangent.surjective_map_ofComp; KaehlerDifferential.map_surjective_of_surjective; PerfectClosure.mk_surjective",
+   "digest": "702c45a2b640f4d9",
+   "verdict": "No match for either new curve-specific statement; homologySequence hits are used in the target reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologySequence\"",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Functor.homologySequenceComposableArrows₅; CategoryTheory.Functor.homologySequenceδ; CategoryTheory.Functor.homologySequenceComposableArrows₅_exact; CategoryTheory.Functor.homologySequence_exact₁; CategoryTheory.Functor.homologySequence_exact₂; CategoryTheory.Functor.homologySequence_exact₃; CategoryTheory.Functor.homologySequenceδ_naturality; CategoryTheory.Functor.homologySequence_epi_shift_map_mor₂_iff",
+   "digest": "2f142cf0f6de31b8",
+   "verdict": "No match for either new curve-specific statement; homologySequence hits are used in the target reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "etale_ga|cohomology.*single|epi.*Frobenius",
+   "date": "2026-10-12",
+   "results": "Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+   "digest": "c7136dec8f1ac562",
+   "verdict": "No match for either new curve-specific statement; homologySequence hits are used in the target reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of the additive structure sheaf vanishes above the dimension of a curve",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"surjective\"",
+   "date": "2026-10-12",
+   "results": "surjective_frobenius",
+   "digest": "b7ee2a51eab90401",
+   "verdict": "No match for either new curve-specific statement; homologySequence hits are used in the target reduction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of a quasi coherent sheaf on a Noetherian scheme vanishes above its dimension",
+   "date": "2026-10-12",
+   "results": "DerivedCategory.isZero_of_isGE; DerivedCategory.isZero_of_isLE; CochainComplex.isZero_of_isGE; DerivedCategory.isGE_iff; DerivedCategory.isLE_iff; CochainComplex.isZero_of_isLE; CategoryTheory.hasInjectiveDimensionLT_iff; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "digest": "0eefe218022922b0",
+   "verdict": "No match for either new curve-specific statement; homologySequence hits are used in the target reduction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "step 2: additive cohomology vanishing, including the coefficient-universe and derived-encoding comparisons",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierAdditiveVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ArtinSchreierAdditiveVanishing.lean",
+  "declaration": "AlgebraicGeometry.isZero_etaleCohomology_additive_of_two_le",
+  "statement": "theorem isZero_etaleCohomology_additive_of_two_le\n    {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}\n    (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]\n    (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (e : G ≅ (sheafCompose C.smallEtaleTopology\n      AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n        (Scheme.Modules.etaleTensorSectionsSheaf (Scheme.Modules.unitObj C)))\n    (q : ℕ) (hq : 2 ≤ q) :\n    IsZero ((Etale.cohomology AddCommGrpCat.{u + 1} C (q : ℤ)).obj\n      ((DerivedCategory.singleFunctor (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj\n        G))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T053918-L-2629101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T053918-L-2629101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
