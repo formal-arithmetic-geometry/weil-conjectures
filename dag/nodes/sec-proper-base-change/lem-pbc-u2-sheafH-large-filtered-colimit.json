@@ -1,0 +1,118 @@
+{
+ "id": "lem-pbc-u2-sheafH-large-filtered-colimit",
+ "kind": "statement",
+ "title": "Large filtered-colimit continuity of Ext sheaf cohomology",
+ "statement": "Let X be a qcqs scheme [def-weil-pbc-scheme-conventions], A a small filtered category with objects and morphisms in Type(u+1), D a diagram of abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves], c a colimit cocone [def-weil-pbc-category-colimit], and q a natural number. Then the image of c under the existing functor Sheaf.functorH X.smallEtaleTopology q, whose values are Ext from the constant integer sheaf [def-weil-pbc-etale-cohomology], is a colimit cocone. No torsion assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "03Q5 and 0739; comparison with Ext, 015A and 05TI; read at https://stacks.math.columbia.edu/tag/03Q5"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Repeat the proof of filtered-colimit continuity of derived etale cohomology at the coefficient universe u+1: the qcqs finite-cover argument and exactness of filtered colimits apply to diagrams in this universe as well. Index size must be treated explicitly; the smaller-index existing theorem cannot simply be specialized. Use functorial injective diagrams, Cech acyclicity of their colimit, and induction with long exact sequences, as described in the declaration docstring.",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the natural Ext-to-derived-global-sections isomorphism, computed using the same injective resolutions, to transfer the derived image cocone colimit to the image cocone under Sheaf.functorH. Naturality identifies all the cocone legs.",
+   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "03Q5 and 0739; comparison with Ext, 015A and 05TI; read at https://stacks.math.columbia.edu/tag/03Q5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale sheaf cohomology commutes with filtered colimits",
+   "results": "Service unavailable: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology pullback bijective filtered colimit constructible sheaves",
+   "results": "Eight hits, about Mayer-Vietoris sheaf conditions and generic site functors; no direct matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafCompose\"",
+   "results": "Twelve hits: sheaf composition, faithfulness and preservation of sheaf conditions. No colimit preservation theorem for module-valued sheaves.",
+   "date": "2026-10-12",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCompose.*colimit|functorH.*filtered",
+   "results": "Service returned zero hits. Local rg located ModuleCat.forget₂PreservesColimitsOfSize, sheafifyCompIso and the smaller-index etaleCohomology_isColimit_of_isFiltered, plus the completed naturality argument in PullbackIsoTorsionColimit. The former module-sheaf forgetful node uses SheafOfModules, a different encoding.",
+   "date": "2026-10-12",
+   "verdict": "Available generic tools do not directly supply these bridge statements."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.PrimeConstructiblePullback",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-q1-prime-constructible-pullback",
+   "place": "proof steps 2 and 3, constant-coefficient colimit transport and larger indexing universe",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleSheafHLargeFilteredColimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sheafH_isColimit_large_filtered",
+  "statement": "theorem sheafH_isColimit_large_filtered\n    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]\n    {A : Type (u + 1)} [SmallCategory A] [IsFiltered A]\n    {D : A ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    {c : Cocone D} (hc : IsColimit c) (q : ℕ) :\n    Nonempty (IsColimit ((Sheaf.functorH X.smallEtaleTopology q).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T042422-L-1822451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T042422-L-1822451",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

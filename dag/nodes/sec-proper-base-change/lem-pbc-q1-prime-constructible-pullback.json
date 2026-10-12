@@ -14,44 +14,34 @@
  ],
  "proof": [
   {
-   "text": "An abelian sheaf G killed by r has a canonical lift M to ULift(ZMod r)-module sheaves, with an isomorphism from its underlying abelian sheaf to G. Construct M sectionwise using the canonical residue-class action; restrictions are linear since they are additive.",
+   "text": "Use the canonical cyclic coefficient lift to obtain M and an underlying abelian sheaf isomorphism to G. Obtain the existing filtered constructible presentation of M.",
    "uses": [
-    "lem-weil-pbc-killed-sheaf-module-lift"
+    "lem-weil-pbc-killed-sheaf-module-lift",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
    ],
    "elementary": false
   },
   {
-   "text": "Present M as a filtered colimit of constructible module sheaves by Stacks 03SA(3). Over the finite ring ULift(ZMod r), finite module values and finite-generation geometric stalks agree on the same strata and trivializing covers, so these stages satisfy Scheme.IsConstructibleSheaf. Forgetting modules and inverse image preserve this presentation. The presentation may be indexed in Type(u+1), as the existing colimit node states; handling its size and the constructibility encoding is part of this intermediate theorem, not silently claimed solved by the smaller-index continuity theorem.",
+   "text": "Apply moduleSheaf_underlying_isColimit to the presentation. Cohomology on X and Y preserves these large filtered cocones by sheafH_isColimit_large_filtered; inverse image preservation is supplied by its existing left adjoint instance. Form the natural transformation whose components are cohomologyMap. The constructibility comparison supplies each Scheme.IsConstructibleSheaf instance. H makes every component of the whiskered transformation an isomorphism. The categorical colimit lemma makes the component on the cocone vertex an isomorphism. Finally transport bijectivity across the two cohomology isomorphisms induced by the underlying sheaf isomorphism, using cohomologyMap_map.",
    "uses": [
-    "lem-weil-pbc-module-sheaf-colimit-constructible",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "def-weil-pbc-etale-constructible-sheaf"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On each qcqs scheme cohomology commutes with the filtered presentation by Stacks 03Q5. Naturality makes the pullback comparison a morphism of the two cohomology diagrams. Each component is bijective by H; the inverse components commute with transitions by cancelling naturality squares, so the colimit map is bijective. Its identification with cohomologyMap, and transport across the underlying abelian isomorphism, prove the result for G. This includes degree zero, empty schemes and zero sheaves.",
-   "uses": [
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-pbc-u2-module-sheaf-underlying-colimit",
+    "lem-pbc-u2-sheafH-large-filtered-colimit",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-inverse-image-preserves-colimits",
   "lem-weil-pbc-killed-sheaf-module-lift",
   "lem-weil-pbc-module-sheaf-colimit-constructible",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+  "lem-pbc-u2-module-sheaf-underlying-colimit",
+  "lem-pbc-u2-sheafH-large-filtered-colimit",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "03SA(3) and 03Q5; coefficient and diagram-size details written out by Q1"
+  "place": "03SA(3) and 03Q5; U2 implements the naturality and isomorphism transport in Lean, with separate underlying-colimit and large-continuity bridges"
  },
  "mathlib_searches": [
   {
@@ -139,10 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T025731-L-1257477",
+  "landing": "20261012T042422-L-1822451",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
