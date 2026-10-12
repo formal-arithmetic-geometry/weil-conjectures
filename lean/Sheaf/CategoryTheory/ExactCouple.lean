@@ -56,13 +56,14 @@ def d (X : BigradedExactCouple C s) (p q : ℤ) :
 Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
 theorem d_comp_d (X : BigradedExactCouple C s) (p q : ℤ) :
     X.d p q ≫ X.d (p + 2 + s) (q - 1 - s) = 0 := by
-  sorry
+  simp only [d, Category.assoc, ← Category.assoc (X.g (p + 2) (q - 1)),
+    X.f_g_zero, zero_comp, comp_zero]
 
 /-- The image of `g` lies in the cycles, since `g ≫ f = 0`.
 Source: Stacks Project, Tag 0AMJ (blueprint: def-sp-exact-couple). -/
 theorem g_comp_d (X : BigradedExactCouple C s) (p q : ℤ) :
     X.g p q ≫ X.d (p + s) (q - s) = 0 := by
-  sorry
+  simp only [d, ← Category.assoc, X.f_g_zero, zero_comp]
 
 /-- The derived `D`-term is the image of the incoming `alpha`.
 Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
@@ -82,7 +83,12 @@ which vanishes by `d_comp_d`.
 Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
 theorem dInto_comp_d (X : BigradedExactCouple C s) (p q : ℤ) :
     X.dInto p q ≫ X.d p q = 0 := by
-  sorry
+  have transport (a b p' q' : ℤ) (hp : a + 2 + s = p') (hq : b - 1 - s = q') :
+      (X.d a b ≫ eqToHom (congrArg₂ X.E hp hq)) ≫ X.d p' q' = 0 := by
+    subst p'
+    subst q'
+    simpa using X.d_comp_d a b
+  exact transport (p - s - 2) (q + s + 1) p q (by omega) (by omega)
 
 /-- The derived `E`-term is cycles modulo boundaries, represented by the
 cokernel of the incoming differential lifted into the kernel of the outgoing one.
