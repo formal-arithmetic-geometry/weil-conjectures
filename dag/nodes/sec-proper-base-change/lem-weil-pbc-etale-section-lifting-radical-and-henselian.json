@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-etale-section-lifting-radical-and-henselian",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 3 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'Let A^h be the filtered colimit of étale A-algebras B such that A/I → B/IB is an isomorphism. Then (A^h, IA^h) is a henselian pair and A/I = A^h/IA^h'; more-algebra.tex Lemma Tag 0A02)",
+   "via": [
+    "lem-weil-pbc-pair-henselization"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Radical and root-lifting consequences of etale section lifting",
+ "statement": "For a commutative ring A and ideal I satisfying the etale section lifting hypothesis, I is contained in the Jacobson radical and HenselianRing A I holds.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair), implications (2)$\\Rightarrow$(4)$\\Rightarrow$(3) and their proof (first paragraph: $I\\subseteq\\operatorname{rad}A$ via $A\\to A_f$; $IB$ in the radical of an integral $B$ by going up, Algebra Lemmas Tag 00GU (lemma-integral-going-up) and Tag 00HZ (lemma-going-up-closed); injectivity by Lemma Tag 09XF (lemma-idempotents-determined-modulo-radical); existence by Lemma Tag 07M4 (lemma-lift-idempotent-upstairs)); (4)$\\Rightarrow$(3) trivial since finite algebras are integral"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "The Jacobson radical assertion follows by localizing at a nonunit congruent to one modulo I and applying the section hypothesis. The root-lifting assertion is the corresponding implication in Stacks Tag 09XI.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair), proof of (2)$\\Rightarrow$(4) and (4)$\\Rightarrow$(3); the descent step after Lemma 07M4 and the choice of $f$ in step 1 written out by the agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "henselian pair if every etale algebra section modulo I lifts; idempotents of finite algebra lift modulo I",
+   "results": "HenselianRing, HenselianRing.casesOn, HenselianLocalRing, HenselianLocalRing.TFAE, IsAdicComplete.henselianRing, HenselianRing.is_henselian (all Mathlib.RingTheory.Henselian)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "idempotent of B/IB lifts to idempotent of B for integral A-algebra B and henselian pair (A,I)",
+   "results": "exists_isIdempotentElem_eq_of_ker_isNilpotent, CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker, OrthogonalIdempotents.lift_of_isNilpotent_ker, existsUnique_isIdempotentElem_eq_of_ker_isNilpotent (Mathlib.RingTheory.Idempotents: lifting along nilpotent kernels only)",
+   "date": "2026-10-09",
+   "verdict": "no match (nilpotent case only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pair (A, I) henselian iff for every étale A-algebra A' every A-algebra map A' → A/I lifts to A' → A",
+   "results": "HenselianLocalRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, HenselianRing, StandardEtalePair.instFormallyEtaleRing, HenselianLocalRing.TFAE, HenselianRing.is_henselian, StandardEtalePair.lift",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if every étale algebra section mod I lifts then for every finite (integral) A-algebra B, idempotents of B/IB lift uniquely to B",
+   "results": "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.FormallyEtale.iff_comp_bijective, Algebra.FormallyEtale.iff_of_surjective",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'henselian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'exists_isIdempotentElem\\|IsIdempotentElem.*jacobson' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only RingTheory/Henselian.lean (HenselianRing: $I\\le$ jacobson and simple roots of monic polynomials mod $I$ lift; HenselianLocalRing; HenselianLocalRing.TFAE; IsAdicComplete.henselianRing); idempotent lifting only along nilpotent kernels (RingTheory/Idempotents.lean:249,374)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no etale-section or idempotent characterization of HenselianRing"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing",
+   "results": "HenselianRing (R) [CommRing R] (I : Ideal R) : Prop, HenselianRing.mk (jac : I <= jacobson bot) (is_henselian: simple roots of monic polynomials mod I lift), HenselianRing.jac, HenselianRing.is_henselian, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing (Mathlib.RingTheory.Henselian): no producer from etale sections or idempotents",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's HenselianRing is the root-lifting definition; no etale-section or idempotent characterization (confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'HenselianRing\\|of_exists_algHom\\|HenselianPair' ~/weil-conjectures-slopmaster2/WeilConjectures --include=*.lean (source repository, not Mathlib)",
+   "results": "WeilConjectures/Mathlib/RingTheory/Henselian.lean: HenselianRing.bot, HenselianLocalRing.of_exists_algHom_comap_maximalIdeal_eq, IsLocalRing.isSepClosed_residueField_of_exists_algHom_comap_maximalIdeal_eq, IsLocalRing.exists_isRoot_algebraMap_eq_of_exists_algHom_comap_maximalIdeal_eq (all sorry-free per the slopmaster2 sorry map); Etale/QuasiFinite.lean HenselianLocalRing.of_isSepClosed_fractionRing (sorry-free): local rings only, sections through primes over the closed point; no pair version, nothing on idempotents of B/IB",
+   "date": "2026-10-10",
+   "verdict": "no match (local-ring analogue only; not this node)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.HenselianOfEtaleSectionLifting",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-section-lifting-henselian-pair",
+  "worker": "stage1",
+  "summary": "Split along Stacks 09XI, proof of (2)=>(4)=>(3), read in literature/stacks-project/more-algebra.tex: (1) I in rad A via A -> A_f (new Mathlib leaf lem-weil-pbc-principal-localization-open-immersion, with the reviewed leaf lem-weil-pbc-etale-composition-cancellation (1)); (2) IB in rad B for finite B (new leaves lem-weil-pbc-finite-algebra-is-integral, lem-weil-pbc-integral-algebra-ideal-in-radical, the latter the general form of the reviewed local leaf lem-weil-pbc-finite-algebra-local-radical); (3) uniqueness by 09XF (new unsplit node lem-weil-pbc-idempotents-determined-modulo-radical; Mathlib has only the nilpotent case); (4) existence by 07M4 (new unsplit node lem-weil-pbc-lift-idempotent-upstairs, 'lifting' made precise via the isomorphism A/I = A'/IA') followed by the descent of the idempotent along the section A' -> A given by the hypothesis, which Stacks leaves implicit and is written out; (5) conclusion against def-weil-pbc-henselian-terminology. Statement unchanged; stmt_deps unchanged. Mathlib (HenselianRing = root lifting) and the source repository (local-ring producers only) have no pair version."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T053929-L-2634024",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.HenselianOfEtaleSectionLifting",
+  "file": "lean/Sheaf/RingTheory/HenselianOfEtaleSectionLifting.lean",
+  "declaration": "etale_section_lifting_radical_and_henselian",
+  "statement": "theorem etale_section_lifting_radical_and_henselian (A : Type u) [CommRing A] (I : Ideal A) (h : ∀ (A' : Type (max u v)) [CommRing A'] [Algebra A A'] [Algebra.Etale A A'] (σ : A' →ₐ[A] A ⧸ I), ∃ τ : A' →ₐ[A] A, (Ideal.Quotient.mkₐ A I).comp τ = σ) : I ≤ Ideal.jacobson ⊥ ∧ HenselianRing A I",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-esl0959",
+  "group": "J1",
+  "result": "pass",
+  "note": "A:Type u CommRing, I:Ideal A; h over all A' with Algebra A A', Algebra.Etale (brief ETALE RING MAPS), σ:A'→ₐ[A]A⧸I, ∃τ:A'→ₐ[A]A with mkₐ∘τ=σ; I ≤ jacobson ⊥; pair = recorded HenselianRing A I plus inline idempotent clause per dep lean.note; Module.Finite B, B⧸I.map algebraMap, ∃! idempotent lift; universes max u v ok (étale = fin. pres.), I=⊤/zero rings unaffected"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T053929-L-2634024",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
