@@ -8,15 +8,18 @@ module
 public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkOpenImmersion
-public import WeilConjectures.WeilSheaf.UpperStarExact
+public import WeilConjectures.WeilSheaf.StalkExtensionByZero
 
 /-!
-# Extension by zero of Weil sheaves: exactness and weights
+# Extension by zero of Weil sheaves: local Frobenius and upper weight bounds
 
-The extension by zero `j₀!` of Weil sheaves along a quasi-compact open immersion `j : U ⟶ X` is
-exact, and it preserves punctual purity and upper weight bounds: its geometric stalk at a closed
-point of `U` is the stalk of the sheaf, with the same local Frobenius and the same residue field,
-and its stalks at the closed points outside `U` vanish.
+Let `j : U ⟶ X` be a quasi-compact open immersion. At a closed point of `U` the local Frobenius
+of the extension by zero `j₀!F` has the characteristic polynomial of the local Frobenius of `F`
+(`AlgebraicGeometry.WeilSheaf.charpoly_frobeniusEnd_stalk_extensionByZero`): the residue fields
+agree, and through the comparison `j₀!F ⟶ j₀*F` and the counit of `j̄^* ⊣ j̄_*` so do the
+geometric stalks with their Frobenius. Together with the vanishing of the stalks outside `U`
+(`AlgebraicGeometry.WeilSheaf.subsingleton_stalk_extensionByZero`), `j₀!` preserves upper weight
+bounds (`AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.extensionByZero`).
 -/
 
 @[expose] public section
@@ -33,29 +36,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 namespace WeilSheaf
 
-/-- The extension by zero of Weil sheaves is the extension by zero of pro-étale Weil sheaves. -/
-noncomputable def extensionByZeroCompιIso :
-    extensionByZero (l := l) j ⋙ (WeilSheaf.objectProperty k₀ l X).ι ≅
-      (WeilSheaf.objectProperty k₀ l U).ι ⋙ ProEtaleWeilSheaf.extensionByZero k₀ l j := by
-  unfold extensionByZero
-  exact ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
-
 variable [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-
-instance : PreservesFiniteLimits (extensionByZero (k₀ := k₀) (l := l) j) := by
-  have : PreservesFiniteLimits (extensionByZero (k₀ := k₀) (l := l) j ⋙
-      (WeilSheaf.objectProperty k₀ l X).ι) :=
-    preservesFiniteLimits_of_natIso (WeilSheaf.extensionByZeroCompιIso j).symm
-  have : ReflectsFiniteLimits (WeilSheaf.objectProperty k₀ l X).ι := ⟨fun _ _ _ ↦ inferInstance⟩
-  exact preservesFiniteLimits_of_reflects_of_preserves _ (WeilSheaf.objectProperty k₀ l X).ι
-
-instance : PreservesFiniteColimits (extensionByZero (k₀ := k₀) (l := l) j) := by
-  have : PreservesFiniteColimits (extensionByZero (k₀ := k₀) (l := l) j ⋙
-      (WeilSheaf.objectProperty k₀ l X).ι) :=
-    preservesFiniteColimits_of_natIso (WeilSheaf.extensionByZeroCompιIso j).symm
-  have : ReflectsFiniteColimits (WeilSheaf.objectProperty k₀ l X).ι := {}
-  exact preservesFiniteColimits_of_reflects_of_preserves _ (WeilSheaf.objectProperty k₀ l X).ι
 
 set_option hygiene false in
 local notation "j̄" => Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀)))
@@ -205,35 +187,6 @@ theorem charpoly_frobeniusEnd_stalk_extensionByZero (F : WeilSheaf k₀ l U) (z 
   rw [hr, pow_one] at hc'
   exact hc'.symm.trans e₁.charpoly_frobeniusEnd.symm
 
-omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
-/-- At a closed point outside the image of `U`, the geometric stalk of `j₀! F` vanishes: the
-pullback of `j̄_! F` to a geometric point missing the range of `j̄` is zero. -/
-theorem subsingleton_stalk_extensionByZero (F : WeilSheaf k₀ l U) (x : X.finitePoints)
-    (hx : x.1 ∉ Set.range j.base) :
-    Subsingleton (((extensionByZero j).obj F).stalk x).carrier := by
-  have hdisj : Set.range (j̄).base ∩
-      Set.range ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x).base = ∅ := by
-    refine Set.eq_empty_of_forall_notMem fun p ⟨⟨u, hu⟩, ⟨t, ht⟩⟩ ↦
-      hx ⟨(U ↘ Spec (CommRingCat.of k₀)).geometricFiberProj.base u, ?_⟩
-    have h₁ := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base
-      (X ↘ Spec (CommRingCat.of k₀)) x
-    have h₂ := congrArg (fun g : (U ↘ Spec (CommRingCat.of k₀)).geometricFiber ⟶ X ↦ g.base u)
-      (Scheme.Hom.geometricFiberMap_comp_geometricFiberProj j
-        (comp_over j (Spec (CommRingCat.of k₀))))
-    have ht' : t = IsLocalRing.closedPoint (AlgebraicClosure k₀) := Subsingleton.elim _ _
-    subst ht'
-    simp only [Scheme.Hom.comp_base, TopCat.comp_app] at h₁ h₂
-    rw [← h₁, ht, ← hu, h₂]
-  have hz := ProEtale.isZero_adicUpperStar_adicOpenImmersionLowerShriek (j̄) _ hdisj
-    F.obj.carrier
-  have hz' : IsZero ((WeilCoefficients.toModuleCat l).obj
-      (((extensionByZero j).obj F).stalkObj
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x))) :=
-    (WeilCoefficients.toModuleCat l).map_isZero ((Sheaf.Γ _ _).map_isZero
-      ((ProEtale.AdicSheaf.forget _).map_isZero hz))
-  exact ModuleCat.subsingleton_of_isZero hz'
-
 omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
 /-- The eigenvalues of the local Frobenius of `j₀! F` at a closed point `x` are those of `F` at
 the corresponding point of `U`, and there are none if `x` lies outside `U`. -/
@@ -263,17 +216,6 @@ theorem exists_hasEigenvalue_of_hasEigenvalue_stalk_extensionByZero (F : WeilShe
     exact absurd (Subsingleton.elim v 0) hv.2
 
 variable {ι : PadicAlgCl l →+* ℂ} {w : ℝ} {F : WeilSheaf k₀ l U}
-
-omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
-/-- Extension by zero along a quasi-compact open immersion preserves punctual purity: at a
-closed point of `U` the geometric stalk of `j₀!F` is that of `F`, with the same local Frobenius
-and the same residue field, and at a closed point outside `U` it vanishes. -/
-theorem IsPunctuallyPureOfWeight.extensionByZero (hF : F.IsPunctuallyPureOfWeight ι w) :
-    ((WeilSheaf.extensionByZero j).obj F).IsPunctuallyPureOfWeight ι w := by
-  intro x α hα
-  obtain ⟨z, -, hz, hq⟩ := exists_hasEigenvalue_of_hasEigenvalue_stalk_extensionByZero j F x hα
-  rw [hq]
-  exact hF z α hz
 
 omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
 /-- Extension by zero along a quasi-compact open immersion preserves upper weight bounds: at a

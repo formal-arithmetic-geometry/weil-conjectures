@@ -413,26 +413,26 @@ theorem stalkAt_isPureOfWeight_of_epi {ι : PadicAlgCl l →+* ℂ} {q : ℕ} {w
   FrobeniusModule.IsPureOfWeight.of_surjective _ (stalkAtMap_frobenius s m hs f)
     (surjective_stalkAtMap s m hs f) h
 
-/-- Isomorphic Weil sheaves have equivalent stalks, with their Frobenius. -/
-theorem nonempty_stalkAt_equiv_of_iso (e : F ≅ G) :
-    Nonempty ((F.stalkAt s m hs).Equiv (G.stalkAt s m hs)) :=
-  ⟨{ toLinearEquiv := LinearEquiv.ofBijective (stalkAtMap s m hs e.hom)
-      ⟨injective_stalkAtMap s m hs e.hom, surjective_stalkAtMap s m hs e.hom⟩
-     map_frobenius x := (LinearEquiv.ofBijective_apply _ _).trans
-      ((stalkAtMap_frobenius s m hs e.hom x).trans
-        (congrArg (G.stalkAt s m hs).frobenius (LinearEquiv.ofBijective_apply _ _).symm)) }⟩
-
 end StalkAt
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
-/-- The stalks of a zero Weil sheaf vanish. -/
-theorem subsingleton_stalk_of_isZero (hF : IsZero F) (x : X.finitePoints) :
-    Subsingleton (F.stalk x).carrier := by
-  have hz (s) : IsZero ((WeilCoefficients.toModuleCat l).obj (F.stalkObj s)) :=
-    (WeilCoefficients.toModuleCat l).map_isZero ((Sheaf.Γ _ _).map_isZero
-      ((s)^*[WeilCoefficients.{u} l].map_isZero
-        ((ProEtale.AdicSheaf.forget _).map_isZero (isZero_iff_isZero_carrier.mp hF))))
-  exact ModuleCat.subsingleton_of_isZero (hz _)
+/-- An isomorphism of Weil sheaves induces an isomorphism of the geometric stalks, compatible
+with the Frobenius. -/
+theorem nonempty_equiv_stalkAt_of_iso (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    Nonempty ((F.stalkAt s m hs).Equiv (G.stalkAt s m hs)) :=
+  ⟨⟨LinearEquiv.ofLinearMap (stalkAtMap s m hs e.hom) (stalkAtMap s m hs e.inv)
+    (LinearMap.ext fun v ↦ by
+      change stalkAtMap s m hs e.hom (stalkAtMap s m hs e.inv v) = v
+      rw [← stalkAtMap_comp, e.inv_hom_id, stalkAtMap_id])
+    (LinearMap.ext fun v ↦ by
+      change stalkAtMap s m hs e.inv (stalkAtMap s m hs e.hom v) = v
+      rw [← stalkAtMap_comp, e.hom_inv_id, stalkAtMap_id]),
+    fun v ↦ (congrFun (LinearEquiv.coe_ofLinearMap _ _ _ _) _).trans
+      ((stalkAtMap_frobenius s m hs e.hom v).trans
+        (congrArg _ (congrFun (LinearEquiv.coe_ofLinearMap _ _ _ _) _).symm))⟩⟩
 
 /-- A subobject of a punctually `ι`-pure Weil sheaf of weight `w` is punctually `ι`-pure of
 weight `w`: its stalks are Frobenius-stable subspaces. -/
@@ -445,20 +445,6 @@ weight `w`: its stalks are Frobenius-equivariant quotients. -/
 theorem IsPunctuallyPureOfWeight.of_epi {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (f : F ⟶ G) [Epi f]
     (h : F.IsPunctuallyPureOfWeight ι w) : G.IsPunctuallyPureOfWeight ι w := fun x ↦
   stalkAt_isPureOfWeight_of_epi _ _ _ f (h x)
-
-/-- A subobject of a Weil sheaf with weights at most `w` has weights at most `w`: its stalks are
-Frobenius-stable subspaces. -/
-theorem HasWeightsAtMost.of_mono {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (f : F ⟶ G) [Mono f]
-    (h : G.HasWeightsAtMost ι w) : F.HasWeightsAtMost ι w := fun x α hα ↦
-  h x α (FrobeniusModule.hasEigenvalue_of_injective _ (stalkAtMap_frobenius _ _ _ f)
-    (injective_stalkAtMap _ _ _ f) hα)
-
-/-- A quotient of a Weil sheaf with weights at most `w` has weights at most `w`: its stalks are
-Frobenius-equivariant quotients. -/
-theorem HasWeightsAtMost.of_epi {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (f : F ⟶ G) [Epi f]
-    (h : F.HasWeightsAtMost ι w) : G.HasWeightsAtMost ι w := fun x α hα ↦
-  h x α (FrobeniusModule.hasEigenvalue_of_surjective _ (stalkAtMap_frobenius _ _ _ f)
-    (surjective_stalkAtMap _ _ _ f) hα)
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The stalk of a direct sum is the direct sum of the stalks, with the diagonal Frobenius. -/

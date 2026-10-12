@@ -437,6 +437,23 @@ theorem IsConstructibleSheaf.cokernel
     (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
     (PreservesCokernel.iso (Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)) φ).symm
 
+/-- **A retract of a constructible sheaf of modules over a noetherian ring is constructible**:
+it is the kernel of the complementary idempotent. -/
+theorem IsConstructibleSheaf.of_retract [IsNoetherianRing Λ] {S : Sheaf X.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)} (e : Retract S F)
+    [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F] :
+    IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S := by
+  have h : e.i ≫ (𝟙 F - e.r ≫ e.i) = 0 := by simp
+  have := IsConstructibleSheaf.kernel (𝟙 F - e.r ≫ e.i)
+  refine IsConstructibleSheaf.of_iso (F' := S)
+    ⟨Limits.kernel.ι _ ≫ e.r, Limits.kernel.lift _ e.i h, (cancel_mono (Limits.kernel.ι _)).1 ?_,
+      by simp⟩
+  have := Limits.kernel.condition (𝟙 F - e.r ≫ e.i)
+  rw [Preadditive.comp_sub, Category.comp_id, sub_eq_zero] at this
+  simpa using this.symm
+
 variable (F G) in
 /-- **The direct sum of two constructible sheaves of modules is constructible**: on the common
 refinement of witnessing stratifications, the pullback of `F ⊞ G` to a stratum is the direct sum

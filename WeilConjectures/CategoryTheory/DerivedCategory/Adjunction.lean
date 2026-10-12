@@ -274,6 +274,69 @@ noncomputable def Adjunction.mapDerivedCategoryPlusAdjunction {f : C ⥤ D} {g :
     f.mapDerivedCategoryPlusCompatibility.symm
     g.mapDerivedCategoryPlusCompatibility.symm
 
+/-- The unit of the levelwise derived adjunction `Adjunction.mapDerivedCategoryAdjunction` is,
+on the image of a complex `K` and modulo the factorizations `Functor.mapDerivedCategoryFactorsh`,
+the levelwise unit of `adj`. -/
+theorem Adjunction.mapDerivedCategoryAdjunction_unit_app_fac {f : C ⥤ D} {g : D ⥤ C}
+    (adj : f ⊣ g) [f.Additive] [g.Additive]
+    [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [PreservesFiniteLimits g] [PreservesFiniteColimits g]
+    (K : HomotopyCategory C (ComplexShape.up ℤ)) :
+    adj.mapDerivedCategoryAdjunction.unit.app (DerivedCategory.Qh.obj K) ≫
+        g.mapDerivedCategory.map (f.mapDerivedCategoryFactorsh.hom.app K) ≫
+        g.mapDerivedCategoryFactorsh.hom.app ((f.mapHomotopyCategory _).obj K) =
+      DerivedCategory.Qh.map ((adj.mapHomotopyCategory (ComplexShape.up ℤ)).unit.app K) := by
+  have h₁ := adj.mapHomotopyCategory (ComplexShape.up ℤ) |>.derivedη_fac_app
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) f.leftDerivedFunctorCounit
+    g.rightDerivedFunctorUnit K
+  have h₂ := NatTrans.congr_app f.leftDerivedFunctorIsoMapDerivedCategory_hom_fac K
+  have h₃ := NatTrans.congr_app g.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
+    ((f.mapHomotopyCategory _).obj K)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h₂ h₃
+  have h₄ := g.rightDerivedFunctorIsoMapDerivedCategory.hom.naturality
+    (f.mapDerivedCategoryFactorsh.hom.app K)
+  simp only [Adjunction.mapDerivedCategoryAdjunction, Adjunction.derivedAdjunction,
+    Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc]
+  erw [← reassoc_of% h₄]
+  rw [← Functor.map_comp_assoc, h₂]
+  erw [reassoc_of% h₁]
+  rw [reassoc_of% h₃, Iso.inv_hom_id_app]
+  exact Category.comp_id _
+
+/-- The unit of the bounded below levelwise derived adjunction
+`Adjunction.mapDerivedCategoryPlusAdjunction` is, on the image of a bounded below complex `K` and
+modulo the factorizations `Functor.mapDerivedCategoryPlusFactorsh`, the levelwise unit of `adj`.
+-/
+theorem Adjunction.mapDerivedCategoryPlusAdjunction_unit_app_fac {f : C ⥤ D} {g : D ⥤ C}
+    (adj : f ⊣ g) [f.Additive] [g.Additive]
+    [PreservesFiniteLimits f] [PreservesFiniteColimits f]
+    [PreservesFiniteLimits g] [PreservesFiniteColimits g]
+    (K : HomotopyCategory.Plus C) :
+    adj.mapDerivedCategoryPlusAdjunction.unit.app (DerivedCategory.Plus.Qh.obj K) ≫
+        g.mapDerivedCategoryPlus.map (f.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
+        g.mapDerivedCategoryPlusFactorsh.hom.app (f.mapHomotopyCategoryPlus.obj K) =
+      DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app K) := by
+  apply DerivedCategory.Plus.ι.map_injective
+  have h := adj.mapDerivedCategoryAdjunction_unit_app_fac K.obj
+  rw [Functor.map_comp, Functor.map_comp, Adjunction.mapDerivedCategoryPlusAdjunction,
+    Adjunction.map_restrictFullyFaithful_unit_app]
+  erw [Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app]
+  dsimp only [Functor.mapDerivedCategoryPlusCompatibility, Iso.symm_hom, Iso.refl_inv,
+    NatTrans.id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  have e : DerivedCategory.Plus.ι.map
+      (g.mapDerivedCategoryPlus.map (f.mapDerivedCategoryPlusFactorsh.hom.app K)) =
+      g.mapDerivedCategory.map
+        (DerivedCategory.Plus.ι.map (f.mapDerivedCategoryPlusFactorsh.hom.app K)) := rfl
+  have e₂ : DerivedCategory.Plus.ι.map
+      (DerivedCategory.Plus.Qh.map (adj.mapHomotopyCategoryPlus.unit.app K)) =
+      DerivedCategory.Qh.map ((HomotopyCategory.Plus.ι C).map
+        (adj.mapHomotopyCategoryPlus.unit.app K)) := rfl
+  rw [e, Functor.ι_map_mapDerivedCategoryPlusFactorsh_hom_app, e₂,
+    Adjunction.ι_map_mapHomotopyCategoryPlus_unit_app, ← h]
+  rfl
+
 /-- The unit of the bounded below derived adjunction `Adjunction.derivedAdjunctionPlus` is
 computed on the image of a bounded below complex `K` by the unit of `adj` followed by the unit of
 the right derived functor, as for `Adjunction.derivedPlus` (`Adjunction.derivedPlus_unit_app_fac`).

@@ -9,7 +9,6 @@ public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.WeilSheaf.CohomologyShift
-public import WeilConjectures.WeilSheaf.UpperStarExact
 
 /-!
 # The degree-one estimate for an irreducible factor
@@ -180,20 +179,18 @@ theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (Padi
     (WeilComplex.homologySheaf (-1)).mapIso e ≪≫
       WeilComplex.homologySheafShiftIso _ 1 (-1) 0 (by norm_num) ≪≫
       WeilSheaf.toComplexCompHomologySheafIso.app _
-  have : (((WeilSheaf.objectProperty k₀ l (affineLine k₀)).ι ⋙
-      DerivedCategory.singleFunctor (ProEtaleWeilSheaf k₀ l (affineLine k₀)) 0).obj
-        D'.directImage).IsLE 0 :=
-    inferInstanceAs (((DerivedCategory.singleFunctor _ 0).obj D'.directImage.obj).IsLE 0)
-  have : (WeilSheaf.toComplex.obj D'.directImage).obj.IsLE 0 :=
-    DerivedCategory.TStructure.t.isLE_of_iso (WeilSheaf.toComplexCompιIso.app _).symm 0
   have hz : Limits.IsZero ((WeilComplex.homologySheaf 0).obj
       ((fourierTransform ψ).obj D.middleExtension)) :=
-    (WeilComplex.isZero_homologySheaf_obj (DerivedCategory.isZero_of_isLE _ 0 1 one_pos)).of_iso
+    (WeilComplex.isZero_homologySheaf_singleComplex (one_ne_zero) D'.directImage).of_iso
       ((WeilComplex.homologySheaf 0).mapIso e ≪≫
         WeilComplex.homologySheafShiftIso _ 1 0 1 (by norm_num))
-  obtain ⟨eA⟩ := WeilSheaf.nonempty_stalkAt_equiv_of_iso _ _ _ A
+  obtain ⟨eA⟩ := WeilSheaf.nonempty_equiv_stalkAt_of_iso A _ _ _
   refine ⟨⟨e₁.symm.trans eA⟩, ?_⟩
-  have := WeilSheaf.subsingleton_stalk_of_isZero hz (affineLine.origin k₀)
+  have : affineLine.origin k₀ ∉ ((WeilComplex.homologySheaf 0).obj
+      ((fourierTransform ψ).obj D.middleExtension)).support := by
+    rw [WeilSheaf.support_eq_empty_of_isZero hz]
+    exact id
+  have := not_nontrivial_iff_subsingleton.1 this
   exact e₂.symm.toLinearEquiv.toEquiv.subsingleton
 
 end WeilSheaf.LisseOnDenseOpen

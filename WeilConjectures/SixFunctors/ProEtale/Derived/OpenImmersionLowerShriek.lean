@@ -61,8 +61,9 @@ derived functor of `j_!` available. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
-/-- The derived adjunction `j_! ⊣ j^*` along an open immersion `j : U ⟶ X` on the
-unbounded derived categories of pro-étale sheaves: since both `j_!` and `j^*` are exact,
+/-- Blueprint `prop-exc-open-adjoint`: the derived adjunction `j_! ⊣ j^*` along an open
+immersion `j : U ⟶ X` on the unbounded derived categories of pro-étale sheaves, with no
+constructibility or finite Tor hypothesis: since both `j_!` and `j^*` are exact,
 their total derived functors are the levelwise functors, and the adjunction between the
 total left derived functor of `j_!` and the total right derived functor of `j^*` becomes
 an adjunction between the levelwise functors. -/

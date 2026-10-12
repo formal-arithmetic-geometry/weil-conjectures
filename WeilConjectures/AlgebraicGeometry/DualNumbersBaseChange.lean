@@ -77,25 +77,25 @@ private lemma hom_ext_appLE {f g : X ⟶ Y} (hb : f.base = g.base)
   rw [← Hom.appLE_eq_app, Hom.appLE_map]
   exact (h U _ _ le_rfl).trans (Hom.appLE_eq_app g)
 
-private lemma appLE_comp_apply' {Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens)
+private lemma appLE_comp_appLE_apply {Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens)
     (W : Y.Opens) (V : X.Opens) (e₁ : W ≤ g ⁻¹ᵁ U) (e₂ : V ≤ f ⁻¹ᵁ W)
     (e : V ≤ (f ≫ g) ⁻¹ᵁ U) (a : Γ(Z, U)) :
     (f ≫ g).appLE U V e a = f.appLE W V e₂ (g.appLE U W e₁ a) := by
   rw [← Hom.appLE_comp_appLE f g U W V e₁ e₂]
   rfl
 
-private lemma appLE_map_apply' (f : X ⟶ Y) {U : Y.Opens} {V V' : X.Opens} (e : V ≤ f ⁻¹ᵁ U)
+private lemma appLE_map_apply (f : X ⟶ Y) {U : Y.Opens} {V V' : X.Opens} (e : V ≤ f ⁻¹ᵁ U)
     (i : op V ⟶ op V') (a : Γ(Y, U)) :
     X.presheaf.map i (f.appLE U V e a) = f.appLE U V' (i.unop.le.trans e) a := by
   rw [← CommRingCat.comp_apply, Hom.appLE_map]
 
-private lemma map_appLE_apply' (f : X ⟶ Y) {U U' : Y.Opens} {V : X.Opens} (e : V ≤ f ⁻¹ᵁ U)
+private lemma map_appLE_apply (f : X ⟶ Y) {U U' : Y.Opens} {V : X.Opens} (e : V ≤ f ⁻¹ᵁ U)
     (i : op U' ⟶ op U) (a : Γ(Y, U')) :
     f.appLE U V e (Y.presheaf.map i a) =
       f.appLE U' V (e.trans ((Opens.map f.base).map i.unop).le) a := by
   rw [← CommRingCat.comp_apply, Hom.map_appLE]
 
-private lemma dualNumbersProj_appLE' (U : X.Opens) (V : X.Opens)
+private lemma dualNumbersProj_appLE (U : X.Opens) (V : X.Opens)
     (e : V ≤ X.dualNumbersProj ⁻¹ᵁ U) (a : Γ(X, U)) :
     X.dualNumbersProj.appLE U V e a = inl (X.presheaf.map (homOfLE e).op a) := by
   change DualNumber.mapRingHom (X.presheaf.map (homOfLE e).op).hom (inl a) = _
@@ -103,7 +103,7 @@ private lemma dualNumbersProj_appLE' (U : X.Opens) (V : X.Opens)
   · exact DualNumber.fst_mapRingHom _ _
   · exact (DualNumber.snd_mapRingHom _ _).trans (map_zero _)
 
-private lemma dualNumbers_appLE' (f : X ⟶ Y) (U : Y.Opens) (V : X.Opens)
+private lemma dualNumbers_appLE (f : X ⟶ Y) (U : Y.Opens) (V : X.Opens)
     (e : V ≤ f.dualNumbers ⁻¹ᵁ U) (x : Γ(Y.dualNumbers, U)) :
     f.dualNumbers.appLE U V e x = DualNumber.mapRingHom (f.appLE U V e).hom x := by
   change DualNumber.mapRingHom (X.presheaf.map (homOfLE e).op).hom
@@ -165,8 +165,8 @@ private lemma liftSqZero_comp_proj (t : Γ(X, ⊤)) (ht : t * t = 0) :
     X.liftSqZero t ht ≫ X.dualNumbersProj = 𝟙 X := by
   refine hom_ext_appLE rfl fun U V e₁ e₂ ↦ ?_
   ext a
-  rw [appLE_comp_apply' (X.liftSqZero t ht) X.dualNumbersProj U U V le_rfl e₁]
-  erw [dualNumbersProj_appLE', liftSqZero_appLE]
+  rw [appLE_comp_appLE_apply (X.liftSqZero t ht) X.dualNumbersProj U U V le_rfl e₁]
+  erw [dualNumbersProj_appLE, liftSqZero_appLE]
   change X.presheaf.map _ (X.presheaf.map _ a) + restrictTop' t V * X.presheaf.map _ 0 =
     X.presheaf.map (homOfLE e₂).op a
   rw [map_zero, mul_zero, add_zero, ← CommRingCat.comp_apply]

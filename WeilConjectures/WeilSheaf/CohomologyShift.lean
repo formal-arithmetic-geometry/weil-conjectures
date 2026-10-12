@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.Cohomology
-public import WeilConjectures.WeilSheaf.HomologySequence
+public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 
 /-!

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
@@ -44,6 +45,10 @@ adjunction is the restriction of any ambient one.
   restriction to `Dctf`.
 - `HasAmbientExceptionalRightAdjoint.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv` (in the
   namespace `AlgebraicGeometry.ProEtale`): clause (a), the ambient form.
+- `HasAmbientExceptionalRightAdjoint.compIso`: clause (a), the isomorphism of ambient functors
+  `Rg^× ⋙ Rf^× ≅ R(f ≫ g)^×` mate to an ambient composition isomorphism, with its unit and counit
+  lemmas; `HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_iff`: it exists exactly when the
+  ambient composition law does.
 - `HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_yoneda_comp_whiskeringLeft`: clause (a)
   with the composition law of `sk-thm-sf-comp-composition`.
 - `AlgebraicGeometry.ProEtale.exists_bijective_comp_and_homEquiv_symm_comp_eq`: under the ambient
@@ -55,6 +60,17 @@ The composition law of the pro-étale `Rf_!` is only available through the étal
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`, which asserts that *some*
 isomorphism exists; this is why the mate statements are existential in the isomorphism of left
 adjoints. Being formal, they hold for every such isomorphism.
+
+Clause (a) of `sk-lem-sf-mate` takes the mate of "the composition isomorphism
+`R(gf)_! ≅ Rg_! Rf_!` of `sk-thm-sf-comp-composition`" on the *ambient* functors, but that node
+only gives the composition law on bounded below objects of étale origin. So clause (a) is stated
+for a given ambient composition isomorphism (`HasAmbientExceptionalRightAdjoint.compIso`), and
+`HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_iff` records that the ambient isomorphism
+`R(f ≫ g)^× ≅ Rg^× ⋙ Rf^×` exists exactly when the ambient composition law does. The ambient
+composition law on all of `D(X_proét)` is not stated. Comparing the chosen compactifications
+needs proper base change at the boundary for arbitrary unbounded pro-étale sheaves, which is not
+known. The datum `FullCD` does not help: it bounds only the proper parts of the three chosen
+compactifications, not those of the auxiliary compactifications used in the comparison.
 -/
 
 @[expose] public section
@@ -119,6 +135,7 @@ section Composition
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y)
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+  [QuasiCompact (f ≫ g)]
 
 /-- Blueprint `sk-thm-sf-comp-composition`, on the pro-étale site: the composition law
 `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the pro-étale derived lower shriek, as functors on the objects of
@@ -248,6 +265,7 @@ section BoundedBelow
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y)
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+  [QuasiCompact (f ≫ g)]
 
 /-- Blueprint `sk-lem-sf-mate`, clause (b), constructible form: the mate of the composition
 isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the bounded below objects of étale origin, under the
@@ -356,6 +374,65 @@ theorem HasAmbientExceptionalRightAdjoint.ofNatIsoLeft_ofNatIsoRight_conjugateIs
       hf.adjunction.comp hg.adjunction :=
   Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ e
 
+/-- Blueprint `sk-lem-sf-mate`, clause (a): the isomorphism of ambient functors
+`Rg^× ⋙ Rf^× ≅ R(f ≫ g)^× : D(Z_proét) ⥤ D(X_proét)`. If `f`, `g` and `f ≫ g` carry the ambient
+exceptional right adjoint datum, it is the mate of a composition isomorphism
+`e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the ambient functors under the ambient adjunctions
+`R(f ≫ g)_! ⊣ R(f ≫ g)^×` and `Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`. The second adjunction is the composite
+one, whose unit and counit are the pasted ones. -/
+noncomputable def HasAmbientExceptionalRightAdjoint.compIso {f : X ⟶ Y} {g : Y ⟶ Z}
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (hf : HasAmbientExceptionalRightAdjoint A f) (hg : HasAmbientExceptionalRightAdjoint A g)
+    (hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g))
+    (e : R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A]) :
+    @Functor.rightAdjoint _ _ _ _ (R(g)_![A]) hg.isLeftAdjoint ⋙
+        @Functor.rightAdjoint _ _ _ _ (R(f)_![A]) hf.isLeftAdjoint ≅
+      @Functor.rightAdjoint _ _ _ _ (R(f ≫ g)_![A]) hfg.isLeftAdjoint :=
+  conjugateIsoEquiv (hf.adjunction.comp hg.adjunction) hfg.adjunction e
+
+/-- Blueprint `sk-lem-sf-mate`, clause (a), units: under the isomorphism
+`HasAmbientExceptionalRightAdjoint.compIso`, the pasted unit `K ⟶ Rf^× Rg^× Rg_! Rf_! K` of
+`Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×` corresponds to the unit of `R(f ≫ g)_! ⊣ R(f ≫ g)^×`. -/
+lemma HasAmbientExceptionalRightAdjoint.unit_comp_compIso_hom_app {f : X ⟶ Y} {g : Y ⟶ Z}
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (hf : HasAmbientExceptionalRightAdjoint A f) (hg : HasAmbientExceptionalRightAdjoint A g)
+    (hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g))
+    (e : R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A])
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
+    (hf.adjunction.comp hg.adjunction).unit.app K ≫ (hf.compIso hg hfg e).hom.app _ =
+      hfg.adjunction.unit.app K ≫
+        (@Functor.rightAdjoint _ _ _ _ (R(f ≫ g)_![A]) hfg.isLeftAdjoint).map (e.hom.app K) :=
+  unit_conjugateEquiv _ _ e.hom K
+
+/-- Blueprint `sk-lem-sf-mate`, clause (a), counits: under the isomorphism
+`HasAmbientExceptionalRightAdjoint.compIso`, the counit of `R(f ≫ g)_! ⊣ R(f ≫ g)^×` corresponds
+to the pasted counit `Rg_! Rf_! Rf^× Rg^× L ⟶ L` of `Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`. -/
+lemma HasAmbientExceptionalRightAdjoint.map_compIso_hom_app_counit {f : X ⟶ Y} {g : Y ⟶ Z}
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (hf : HasAmbientExceptionalRightAdjoint A f) (hg : HasAmbientExceptionalRightAdjoint A g)
+    (hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g))
+    (e : R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A])
+    (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) :
+    (R(f ≫ g)_![A]).map ((hf.compIso hg hfg e).hom.app L) ≫ hfg.adjunction.counit.app L =
+      e.hom.app _ ≫ (hf.adjunction.comp hg.adjunction).counit.app L :=
+  conjugateEquiv_counit _ _ e.hom L
+
+/-- Blueprint `sk-lem-sf-mate`, clause (a): if `f`, `g` and `f ≫ g` carry the ambient exceptional
+right adjoint datum, the ambient right adjoints satisfy `R(f ≫ g)^× ≅ Rg^× ⋙ Rf^×` exactly when the
+ambient left adjoints satisfy the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`. The forward
+direction is `HasAmbientExceptionalRightAdjoint.compIso`, the mate of the composition
+isomorphism. -/
+theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_iff {f : X ⟶ Y} {g : Y ⟶ Z}
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (hf : HasAmbientExceptionalRightAdjoint A f) (hg : HasAmbientExceptionalRightAdjoint A g)
+    (hfg : HasAmbientExceptionalRightAdjoint A (f ≫ g)) :
+    Nonempty (R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A]) ↔
+      Nonempty (@Functor.rightAdjoint _ _ _ _ (R(f ≫ g)_![A]) hfg.isLeftAdjoint ≅
+        @Functor.rightAdjoint _ _ _ _ (R(g)_![A]) hg.isLeftAdjoint ⋙
+          @Functor.rightAdjoint _ _ _ _ (R(f)_![A]) hf.isLeftAdjoint) :=
+  ⟨fun ⟨e⟩ ↦ ⟨(hf.compIso hg hfg e).symm⟩,
+    fun ⟨r⟩ ↦ ⟨(conjugateIsoEquiv (hf.adjunction.comp hg.adjunction) hfg.adjunction).symm r.symm⟩⟩
+
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
@@ -408,6 +485,7 @@ pasted adjunction `Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`. -/
 theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_yoneda_comp_whiskeringLeft
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)]
     (hf : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) f)
     (hg : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) g)
     (hfg : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) (f ≫ g)) :

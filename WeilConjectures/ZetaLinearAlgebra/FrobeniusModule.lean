@@ -8,6 +8,7 @@ module
 public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.LinearAlgebra.Eigenspace.Charpoly
+public import Mathlib.LinearAlgebra.Trace
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 
 /-!
@@ -150,6 +151,19 @@ theorem Equiv.frobeniusEnd_eq_conj {M N : FrobeniusModule.{u, v} K} (e : M.Equiv
 theorem Equiv.charpoly_frobeniusEnd {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
     N.frobeniusEnd.charpoly = M.frobeniusEnd.charpoly := by
   rw [e.frobeniusEnd_eq_conj, LinearEquiv.charpoly_conj]
+
+/-- Isomorphic Frobenius modules have the same traces of the powers of the Frobenius. -/
+theorem Equiv.trace_frobeniusEnd_pow {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) (m : ℕ) :
+    LinearMap.trace K _ (N.frobeniusEnd ^ m) = LinearMap.trace K _ (M.frobeniusEnd ^ m) := by
+  have hpow : ∀ k : ℕ, e.toLinearEquiv.conj M.frobeniusEnd ^ k =
+      e.toLinearEquiv.conj (M.frobeniusEnd ^ k) := by
+    intro k
+    induction k with
+    | zero => simp only [pow_zero, Module.End.one_eq_id, LinearEquiv.conj_id]
+    | succ k ih =>
+      rw [pow_succ, pow_succ, ih, Module.End.mul_eq_comp, Module.End.mul_eq_comp,
+        LinearEquiv.conj_comp]
+  rw [e.frobeniusEnd_eq_conj, hpow, LinearMap.trace_conj']
 
 /-- A Frobenius module isomorphic to one with weights at most `w` has weights at most `w`. -/
 theorem HasWeightsAtMost.of_equiv {ι : K →+* ℂ} {q : ℕ} {M N : FrobeniusModule.{u, v} K}
