@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-affine-closed-injective-acyclic",
+ "kind": "statement",
+ "title": "Affine closed restriction of an injective is acyclic",
+ "statement": "Let $X$ be an affine scheme and $i:Z\\to X$ a closed immersion [def-weil-pbc-scheme-conventions]. Let $\\Lambda$ be a commutative ring and $J$ an injective sheaf of $\\Lambda$-modules on $X_{et}$ [def-weil-pbc-etale-sheaves], whose underlying abelian sheaf is torsion [def-weil-pbc-torsion-etale-sheaf]. For every $q>0$, the abelian cohomology [def-weil-pbc-etale-cohomology] of $i^{-1}J$ [def-weil-pbc-inverse-image] in degree $q$ is zero. Neither a henselian structure nor a finite-type hypothesis on $X$ is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A51",
+  "place": "Proof, affine case n = 0 (steps 3--5 of the parent node)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Write X = Spec B and Z = Spec B/K. Form the pair henselization B^h, a filtered colimit of etale B-algebras C with unchanged quotient B/K. Its closed fibre is Z.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Gabber comparison to the torsion pullback of the underlying abelian sheaf on Spec B^h. It identifies the desired cohomology with that on Spec B^h. Inverse-image composition and forgetting coefficients identify the two restrictions.",
+   "uses": [
+    "prop-weil-pbc-gabber-pair-comparison",
+    "lem-weil-pbc-inverse-image-torsion",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cohomology on Spec B^h is the filtered colimit of cohomology on Spec C. Etale restriction preserves injective module sheaves, whose underlying abelian sheaves are acyclic, so each positive-degree group is zero. Hence the filtered colimit is zero. The module-sheaf comparison of 03FD uses Cech acyclicity, not injectivity after forgetting coefficients.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-injective-module-abelian-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "prop-weil-pbc-gabber-pair-comparison",
+  "lem-weil-pbc-inverse-image-torsion",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-injective-module-abelian-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 0A51",
+  "place": "Proof, affine case n = 0 (steps 3--5 of the parent node); specialized to constant coefficients and the library Sheaf.H encoding"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher etale cohomology of the restriction of an injective torsion sheaf to a closed subscheme of an affine scheme vanishes",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology pullback bijective from acyclicity of restricted injectives and degree zero comparison",
+   "results": "8 hits, including GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj; no etale injective restriction or acyclic-resolution comparison matching these statements.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Basic H, functorH, map, subsingleton_H_of_isZero, injective abelian-sheaf vanishing; no restriction acyclicity or prime-module comparison.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H.*(affine|closed)|acyclic.*closed.*injective; bijective.*(injective|acyclic); affine.*cover in Mathlib and lean/Sheaf and lean/WeilConjectures",
+   "results": "No affine closed restriction acyclicity theorem. EtaleMayerVietoris is formulated for derived global sections, not Sheaf.H. PullbackIsoPrimeTorsionDevissage supplies the torsion step but not the prime-module acyclic-resolution criterion.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Proof, affine case n = 0 (steps 3--5 of the parent node)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineClosedInjectiveAcyclic.lean",
+  "declaration": "AlgebraicGeometry.Etale.subsingleton_H_affine_closed_of_injective",
+  "statement": "theorem Etale.subsingleton_H_affine_closed_of_injective (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) [IsClosedImmersion i] (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] [IsTorsionSheaf J] (q : ℕ) (hq : 0 < q) : Subsingleton (Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj J)) q)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3709",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T003530-L-597800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3709",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T003530-L-597800",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target and existing declarations are unchanged in signature, proofs and DAG metadata align, new sorry statements are documented and represented by nodes, and axiom checks show only permitted axioms plus recorded sorryAx dependencies."
+ }
+}

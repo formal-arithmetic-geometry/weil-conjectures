@@ -30,98 +30,40 @@
  ],
  "proof": [
   {
-   "text": "*Hypotheses inherited by open subschemes.* Since $f$ is separated, for affine opens $U,V\\subseteq Y$ the intersection $U\\cap V$ is affine [lem-weil-pbc-separated-affine-open-intersection] (this is the 'affine diagonal' of the source). For an open subscheme $W\\subseteq Y$ the restriction $f|_W$ is again separated and locally of finite type (an open immersion is separated and locally of finite type, and both properties are stable under composition [def-weil-pbc-scheme-conventions]); its closed fibre is $W_0=W\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)=i^{-1}(W)$, an open subscheme of $Y_0$, with closed immersion $i_W:W_0\\to W$ satisfying $j_W\\circ i_W=i\\circ j_{W_0}$, where $j_W:W\\to Y$ and $j_{W_0}:W_0\\to Y_0$ are the open immersions.",
+   "text": "The quotient Spec(A/I) -> Spec A is a closed immersion; pullback stability gives that i is a closed immersion.",
    "uses": [
-    "lem-weil-pbc-separated-affine-open-intersection",
     "def-weil-pbc-scheme-conventions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'using that the diagonal of X is affine, we see that U ∩ V is the union of n affine opens'"
-   }
+   "elementary": false
   },
   {
-   "text": "*Restriction of $\\mathcal J$ along an etale map.* Let $v:W\\to Y$ be etale (e.g. an open immersion, or $\\operatorname{Spec}C\\to Y$ for an etale $B$-algebra $C$ when $Y=\\operatorname{Spec}B$). Then $v^{-1}\\mathcal J$ is injective in $\\Mod(W_{\\Et},\\Lambda)$ [lem-weil-pbc-etale-restriction-injectives] (its left adjoint $v_!$ is exact); since for etale $v$ the inverse image is the restriction $T\\mapsto\\mathcal J(T)$ [lem-weil-pbc-etale-inverse-image-restriction], the underlying abelian sheaf of $v^{-1}\\mathcal J$ is $v^{-1}\\mathcal J_{ab}$, which is torsion [lem-weil-pbc-inverse-image-torsion]. Hence $H^q(W_{\\Et},v^{-1}\\mathcal J_{ab})=0$ for $q>0$ [lem-weil-pbc-injective-module-abelian-acyclic]. In particular the data $(W\\to\\operatorname{Spec}A,\\ v^{-1}\\mathcal J)$ for an open $W\\subseteq Y$ again satisfy the hypotheses of the statement (with step 1), and $(i^{-1}\\mathcal J_{ab})|_{W_0}\\cong i_W^{-1}(\\mathcal J_{ab}|_W)$, both being isomorphic to $(i\\circ j_{W_0})^{-1}\\mathcal J_{ab}=(j_W\\circ i_W)^{-1}\\mathcal J_{ab}$ [lem-weil-pbc-inverse-image-composition].",
+   "text": "For any affine open W of Y, etale restriction W -> Y preserves the injectivity of J, and inverse image preserves torsion. Its pullback closed fibre embeds into affine W by a closed immersion. Apply the affine closed restriction acyclicity theorem to obtain the local vanishing hypothesis.",
    "uses": [
     "lem-weil-pbc-etale-restriction-injectives",
-    "lem-weil-pbc-etale-inverse-image-restriction",
     "lem-weil-pbc-inverse-image-torsion",
-    "lem-weil-pbc-injective-module-abelian-acyclic",
-    "lem-weil-pbc-inverse-image-composition"
+    "lem-weil-pbc-affine-closed-injective-acyclic"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'the restriction I|_Spec(B) is an injective sheaf of A|_Spec(B)-modules (Cohomology on Sites, Lemma 03F3). Thus the cohomology groups on the right are zero'; sites-cohomology.tex Lemma Tag 03F3 (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Case $n=0$: the henselization.* Here $Y=U_0=\\operatorname{Spec}B$ is affine, and $Y_0=\\operatorname{Spec}(B\\otimes_AA/I)=\\operatorname{Spec}(B/J)$ with $J=IB$. Let $\\mathcal C$ be the category of etale $B$-algebras $C$ with $B/J\\xrightarrow{\\sim}C/JC$; it is directed, $B^h=\\varinjlim_{\\mathcal C}C$ with $J^h=JB^h$ is a henselian pair, and $B/J\\xrightarrow{\\sim}B^h/J^h$ [lem-weil-pbc-pair-henselization]. Put $X^h=\\operatorname{Spec}B^h$, $g:X^h\\to Y$ the canonical map, $Z=\\operatorname{Spec}(B^h/J^h)$ with closed immersion $z:Z\\to X^h$; by (3) of that lemma $Z\\cong Y_0$ and under this identification $g\\circ z=i$. (The pair $(B,J)$ itself need not be henselian although $(A,I)$ is, which is why the henselization is needed.)",
+   "text": "Apply the finite affine-cover bound to this local acyclicity, the given separated structure map and the supplied cover to obtain vanishing for q>n.",
    "uses": [
-    "lem-weil-pbc-pair-henselization"
+    "lem-weil-pbc-finite-affine-cover-restriction-bound"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'Let A^h be the filtered colimit of étale A-algebras B such that A/I → B/IB is an isomorphism. Then (A^h, IA^h) is a henselian pair and A/I = A^h/IA^h'; more-algebra.tex Lemma Tag 0A02"
-   }
-  },
-  {
-   "text": "*Case $n=0$: Gabber's theorem.* $g^{-1}\\mathcal J_{ab}$ is a torsion abelian sheaf on $X^h_{\\Et}$ [lem-weil-pbc-inverse-image-torsion], so by Gabber's theorem for the henselian pair $(B^h,J^h)$ [prop-weil-pbc-gabber-pair-comparison] $z^*:H^q(X^h_{\\Et},g^{-1}\\mathcal J_{ab})\\xrightarrow{\\sim}H^q(Z_{\\Et},z^{-1}g^{-1}\\mathcal J_{ab})$, and $z^{-1}g^{-1}\\mathcal J_{ab}\\cong(g\\circ z)^{-1}\\mathcal J_{ab}=i^{-1}\\mathcal J_{ab}$ [lem-weil-pbc-inverse-image-composition]. Hence $H^q(Y_{0,\\Et},i^{-1}\\mathcal J_{ab})\\cong H^q(X^h_{\\Et},g^{-1}\\mathcal J_{ab})$ for all $q$.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-torsion",
-    "prop-weil-pbc-gabber-pair-comparison",
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09ZI we see that H^q(Z, I|_Z) = H^q(X^h, I|_{X^h})'"
-   }
-  },
-  {
-   "text": "*Case $n=0$: passage to the limit.* $X^h=\\operatorname{Spec}(\\varinjlim_{\\mathcal C}C)=\\varprojlim_{\\mathcal C}\\operatorname{Spec}C$, a directed limit of affine (so quasi-compact and quasi-separated) schemes with affine transition maps; with $v_C:\\operatorname{Spec}C\\to Y$ the etale structure maps (so $v_C\\circ(\\text{projection})=g$), the limit theorem [lem-weil-pbc-etale-cohomology-limit-of-schemes] gives $H^q(X^h_{\\Et},g^{-1}\\mathcal J_{ab})\\cong\\varinjlim_{\\mathcal C}H^q((\\operatorname{Spec}C)_{\\Et},v_C^{-1}\\mathcal J_{ab})$ (the system $\\mathcal F_C=v_C^{-1}\\mathcal J_{ab}$ has $\\varinjlim f_C^{-1}\\mathcal F_C\\cong g^{-1}\\mathcal J_{ab}$ by [lem-weil-pbc-inverse-image-composition], the transition maps being isomorphisms). Each term vanishes for $q>0$ by step 2 ($v_C$ is etale). With step 4, $H^q(Y_{0,\\Et},i^{-1}\\mathcal J_{ab})=0$ for $q>0$: the statement for $n=0$.",
-   "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero'"
-   }
-  },
-  {
-   "text": "*Induction step.* Let $n\\ge1$ and assume the statement for $n-1$ (for all $Y$, covers, $\\Lambda$ and $\\mathcal J$ as in the statement). Put $U=U_0$ and $V=U_1\\cup\\cdots\\cup U_n$, so $Y=U\\cup V$; $V$ is covered by the $n$ affine opens $U_1,\\dots,U_n$, and $U\\cap V=\\bigcup_{j\\ge1}(U_0\\cap U_j)$ by the $n$ affine opens $U_0\\cap U_j$ (step 1). By steps 1 and 2 the statement for $n-1$ applies to $(V,\\mathcal J|_V)$ and to $(U\\cap V,\\mathcal J|_{U\\cap V})$, and the case $n=0$ to $(U,\\mathcal J|_U)$, with closed fibres $V_0,(U\\cap V)_0=U_0'\\cap V_0,U_0'$ (writing $U_0'=i^{-1}(U)$), and with $(i^{-1}\\mathcal J_{ab})|_{W_0}\\cong i_W^{-1}(\\mathcal J_{ab}|_W)$ for $W\\in\\{U,V,U\\cap V\\}$ (step 2). So for $q>n$: $H^q(U'_{0,\\Et},-)=0$ ($q>0$), $H^q(V_{0,\\Et},-)=0$ ($q>n-1$) and $H^{q-1}((U\\cap V)_{0,\\Et},-)=0$ ($q-1>n-1$), all for the restrictions of $G=i^{-1}\\mathcal J_{ab}$. The Mayer--Vietoris sequence for the open cover $Y_0=U_0'\\cup V_0$ and the abelian sheaf $G$ [lem-weil-pbc-etale-mayer-vietoris] contains the exact piece $H^{q-1}((U_0'\\cap V_0)_{\\Et},G|)\\to H^q(Y_{0,\\Et},G)\\to H^q(U'_{0,\\Et},G|)\\oplus H^q(V_{0,\\Et},G|)$, whose outer terms vanish; hence $H^q(Y_{0,\\Et},i^{-1}\\mathcal J_{ab})=0$ for $q>n$. By induction on $n$ the statement holds for all $n$.",
-   "uses": [
-    "lem-weil-pbc-separated-affine-open-intersection",
-    "lem-weil-pbc-etale-mayer-vietoris"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'Induction step. ... Mayer-Vietoris gives an exact sequence H^{q-1}(U∩V∩Z) → H^q(Z) → H^q(U∩Z) ⊕ H^q(V∩Z) and by our induction hypothesis we obtain vanishing for q > n'; Lemma Tag 0A50"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-separated-affine-open-intersection",
   "def-weil-pbc-scheme-conventions",
   "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-etale-inverse-image-restriction",
   "lem-weil-pbc-inverse-image-torsion",
-  "lem-weil-pbc-injective-module-abelian-acyclic",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-pair-henselization",
-  "prop-weil-pbc-gabber-pair-comparison",
-  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-  "lem-weil-pbc-etale-mayer-vietoris"
+  "lem-weil-pbc-affine-closed-injective-acyclic",
+  "lem-weil-pbc-finite-affine-cover-restriction-bound"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof (Section 59.91, section-gabber-affine-proper); the source states it for an injective sheaf of $\\mathcal A$-modules, $\\mathcal A$ a torsion sheaf of rings, on any scheme with affine diagonal and any closed subscheme $Z$"
+  "by": "agent",
+  "document": "Stacks 0A51, affine case plus Mayer-Vietoris induction",
+  "place": "C1 stage-3 Lean reduction, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -230,23 +172,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-7aadf",
-  "group": "R1",
+  "reviewer": "X-a3709",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T000248-L-482311",
+  "landing": "20261012T003530-L-597800",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered proofs and helper signatures with their DAG nodes and cited Stacks arguments; existing signatures unchanged, all three modules compile cleanly, and axiom checks show only standard axioms plus sorryAx from recorded open dependencies.",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField",
-   "AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal",
-   "AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine",
-   "AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective",
-   "AlgebraicGeometry.Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField",
-   "AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal",
-   "AlgebraicGeometry.Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top"
-  ]
+  "note": "independent Codex review: Delivered files compile cleanly; target and existing declarations are unchanged in signature, proofs and DAG metadata align, new sorry statements are documented and represented by nodes, and axiom checks show only permitted axioms plus recorded sorryAx dependencies."
  }
 }

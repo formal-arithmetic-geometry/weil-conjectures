@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-prime-injective-cohomology-comparison",
+ "kind": "statement",
+ "title": "Prime-module acyclic-resolution comparison criterion",
+ "statement": "Let $i:Y\\to X$ be a morphism of schemes [def-weil-pbc-scheme-conventions] and $r$ a prime. Suppose restriction on global sections is an isomorphism for every sheaf of $\\mathbf F_r$-modules on $X_{et}$ [def-weil-pbc-etale-sheaves], and the inverse image of every injective such module sheaf has zero positive underlying abelian cohomology [def-weil-pbc-inverse-image], [def-weil-pbc-etale-cohomology]. Then for every abelian etale sheaf $G$ [def-weil-pbc-abelian-etale-sheaves] killed by $r$, and every $q\\geq0$, the canonical pullback $H^q(X,G)\\to H^q(Y,i^{-1}G)$ [def-weil-pbc-cohomology-pullback] is bijective.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/095T",
+  "place": "Proof, second paragraph: injective-module resolution argument; parent node steps (c)--(d)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The equation r times id G = 0 makes each section group a canonical Z/r-module. Restrictions are linear, so this is a module sheaf, with underlying abelian sheaf canonically G. ULift changes only the universe of the coefficient ring.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an injective resolution in prime-module sheaves. Forgetting to abelian sheaves is exact and its terms are cohomologically acyclic by 03FD. Inverse image is exact; the assumed restriction acyclicity makes the restricted resolution acyclic on Y as well. Leray computes both abelian cohomologies from section complexes.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "prop-weil-pbc-inverse-image-exact",
+    "lemma-weil-pbc-leray-acyclicity",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The assumed global-sections restriction isomorphisms give a termwise isomorphism of these complexes, hence bijections on homology in all degrees. Compare into abelian injective resolutions on X and Y. Naturality of restriction gives the commuting square; homotopy uniqueness makes the induced comparison independent of lifts. Thus these homology maps are the canonical cohomologyMap, rather than unspecified bijections.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-injective-module-abelian-acyclic",
+  "prop-weil-pbc-inverse-image-exact",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "prop-weil-pbc-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 095T",
+  "place": "Proof, second paragraph: injective-module resolution argument; parent node steps (c)--(d); specialized to constant coefficients and the library Sheaf.H encoding"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher etale cohomology of the restriction of an injective torsion sheaf to a closed subscheme of an affine scheme vanishes",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology pullback bijective from acyclicity of restricted injectives and degree zero comparison",
+   "results": "8 hits, including GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj; no etale injective restriction or acyclic-resolution comparison matching these statements.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Basic H, functorH, map, subsingleton_H_of_isZero, injective abelian-sheaf vanishing; no restriction acyclicity or prime-module comparison.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H.*(affine|closed)|acyclic.*closed.*injective; bijective.*(injective|acyclic); affine.*cover in Mathlib and lean/Sheaf and lean/WeilConjectures",
+   "results": "No affine closed restriction acyclicity theorem. EtaleMayerVietoris is formulated for derived global sections, not Sheaf.H. PullbackIsoPrimeTorsionDevissage supplies the torsion step but not the prime-module acyclic-resolution criterion.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-p1-strict-henselian-comparison",
+   "place": "Proof, second paragraph: injective-module resolution argument; parent node steps (c)--(d)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrimeInjectiveCohomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeInjectiveCohomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_prime_injective_acyclic",
+  "statement": "theorem Etale.bijective_cohomologyMap_of_prime_injective_acyclic {X Y : Scheme.{u}} (i : Y ⟶ X) (r : ℕ) [Fact r.Prime] (hzero : ∀ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))), IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) i G)) (hacyclic : ∀ (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) [Injective J] (q : ℕ), 0 < q → Subsingleton (Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))].obj J)) q)) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : r • 𝟙 G = 0) (q : ℕ) : Function.Bijective (Etale.cohomologyMap i G q)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3709",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T003530-L-597800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3709",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T003530-L-597800",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target and existing declarations are unchanged in signature, proofs and DAG metadata align, new sorry statements are documented and represented by nodes, and axiom checks show only permitted axioms plus recorded sorryAx dependencies."
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-finite-affine-cover-restriction-bound",
+ "kind": "statement",
+ "title": "Finite affine cover bound from affine-local restriction acyclicity",
+ "statement": "Let $f:X\\to\\operatorname{Spec} A$ be separated, with $A$ commutative, and let $i:Z\\to X$ be any morphism [def-weil-pbc-scheme-conventions]. Let $J$ be a sheaf of $\\Lambda$-modules on $X_{et}$ [def-weil-pbc-etale-sheaves]. Assume that for every affine open $W\\subseteq X$ and every $k>0$, $H^k(W\\times_X Z,(J|_W)|_{W\\times_X Z})=0$, using inverse image [def-weil-pbc-inverse-image] and underlying abelian cohomology [def-weil-pbc-etale-cohomology]. If $X$ has an affine open cover indexed by $\\operatorname{Fin}(n+1)$, then $H^q(Z,i^{-1}J)=0$ for every $q>n$. No injectivity, torsion, or closed-immersion assumption is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A51",
+  "place": "Proof, Mayer-Vietoris induction (step 6 of the parent node)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For n=0 the single affine member is all of X. Apply the local hypothesis through the identity pullback and inverse-image comparisons.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For n+1 split the cover into an affine U and the union V of n+1 other affine opens. Since X is separated over an affine scheme, each intersection U with an affine member is affine, giving n+1 affine opens covering U intersect V.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-open-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine-local hypothesis descends to the restrictions on V and U intersect V by composition of inverse images and associativity of pullbacks. Induction gives bounds n on both; U has bound zero.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back U,V to a cover of Z. The Mayer-Vietoris exact segment has degree q-1 on the intersection on its left and degree q on each open on its right. For q>n+1 these outer groups vanish, so its middle group is zero. Transport the derived-global-sections computation to the canonical abelian cohomology groups.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 0A51",
+  "place": "Proof, Mayer-Vietoris induction (step 6 of the parent node); specialized to constant coefficients and the library Sheaf.H encoding"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher etale cohomology of the restriction of an injective torsion sheaf to a closed subscheme of an affine scheme vanishes",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology pullback bijective from acyclicity of restricted injectives and degree zero comparison",
+   "results": "8 hits, including GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj; no etale injective restriction or acyclic-resolution comparison matching these statements.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Basic H, functorH, map, subsingleton_H_of_isZero, injective abelian-sheaf vanishing; no restriction acyclicity or prime-module comparison.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H.*(affine|closed)|acyclic.*closed.*injective; bijective.*(injective|acyclic); affine.*cover in Mathlib and lean/Sheaf and lean/WeilConjectures",
+   "results": "No affine closed restriction acyclicity theorem. EtaleMayerVietoris is formulated for derived global sections, not Sheaf.H. PullbackIsoPrimeTorsionDevissage supplies the torsion step but not the prime-module acyclic-resolution criterion.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Proof, Mayer-Vietoris induction (step 6 of the parent node)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineCoverRestrictionBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineCoverRestrictionBound.lean",
+  "declaration": "AlgebraicGeometry.Etale.subsingleton_H_of_affine_local_acyclic",
+  "statement": "theorem Etale.subsingleton_H_of_affine_local_acyclic (Λ : Type (u + 1)) [CommRing Λ] {A : Type u} [CommRing A] {X Z : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsSeparated f] (i : Z ⟶ X) (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hlocal : ∀ (W : X.Opens), IsAffineOpen W → ∀ (q : ℕ), 0 < q → Subsingleton (Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((pullback.fst W.ι i)^*[ModuleCat.{u + 1} Λ].obj ((W.ι)^*[ModuleCat.{u + 1} Λ].obj J))) q)) (n : ℕ) (U : Fin (n + 1) → X.Opens) (hU : ∀ j, IsAffineOpen (U j)) (hcov : ⨆ j, U j = ⊤) (q : ℕ) (hq : n < q) : Subsingleton (Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj J)) q)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3709",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T003530-L-597800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3709",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T003530-L-597800",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target and existing declarations are unchanged in signature, proofs and DAG metadata align, new sorry statements are documented and represented by nodes, and axiom checks show only permitted axioms plus recorded sorryAx dependencies."
+ }
+}

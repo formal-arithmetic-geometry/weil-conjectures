@@ -12,6 +12,13 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.FiniteAffineCoverRestrictionBound
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
+import Sheaf.AlgebraicGeometry.PrimeInjectiveCohomologyComparison
+import Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage
+import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
 import Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image
 import Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding
@@ -90,8 +97,18 @@ theorem Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top
     (q : ℕ) (hq : n < q) :
     Subsingleton (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        ((i)^*[ModuleCat.{u + 1} Λ].obj J)) q) :=
-  sorry
+      ((i)^*[ModuleCat.{u + 1} Λ].obj J)) q) := by
+  have : IsClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) :=
+    IsClosedImmersion.spec_of_surjective _ (Ideal.Quotient.mk_surjective)
+  have : IsClosedImmersion i :=
+    MorphismProperty.of_isPullback (P := @IsClosedImmersion) h.flip inferInstance
+  apply Etale.subsingleton_H_of_affine_local_acyclic Λ f i J _ n U hU hcov q hq
+  intro W hW k hk
+  let : IsAffine W.toScheme := hW
+  let : Injective ((W.ι)^*[ModuleCat.{u + 1} Λ].obj J) :=
+    Etale.injective_upperStar_obj_of_etale Λ W.ι J
+  exact Etale.subsingleton_H_affine_closed_of_injective Λ (pullback.fst W.ι i)
+    ((W.ι)^*[ModuleCat.{u + 1} Λ].obj J) k hk
 
 section StrictlyHenselian
 
@@ -248,8 +265,37 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField
     [IsTorsionSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap
       (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
-  sorry
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
+  have : CompactSpace (ProjectiveLine (Spec (.of A))) :=
+    QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+  have : QuasiSeparatedSpace (ProjectiveLine (Spec (.of A))) :=
+    quasiSeparatedSpace_of_quasiSeparated (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+  have : CompactSpace (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A)))) :=
+    QuasiCompact.compactSpace_of_compactSpace
+      (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘
+        Spec (.of (IsLocalRing.ResidueField A)))
+  have : QuasiSeparatedSpace (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A)))) :=
+    quasiSeparatedSpace_of_quasiSeparated
+      (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘
+        Spec (.of (IsLocalRing.ResidueField A)))
+  let i := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
+  apply Etale.pullback_cohomology_bijective_of_prime_torsion_devissage i ?_ _ ?_ q
+  · intro r hr G hG k
+    let : Fact r.Prime := ⟨hr⟩
+    apply Etale.bijective_cohomologyMap_of_prime_injective_acyclic i r ?_ ?_ G hG k
+    · intro J
+      exact Etale.isIso_globalSectionsUpperStarMap_of_henselianRing
+        (ULift.{u + 1} (ZMod r)) (IsLocalRing.maximalIdeal A)
+        (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A)) i
+        (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘
+          Spec (.of (IsLocalRing.ResidueField A)))
+        (ProjectiveSpace.isPullback_map _
+          (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))) J
+    · intro J _ k hk
+      exact Etale.subsingleton_H_projectiveLine_closedFibre_of_injective A r J k hk
+  · exact Scheme.isTorsionAbelianSheaf_of_isTorsion _
+      ((Scheme.isTorsionSheaf_iff_isTorsion F).mp inferInstance)
 
 end StrictlyHenselian
 
