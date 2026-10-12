@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-descend-finite-affine-base-piece",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity proof: descend finiteness of the finite-presentation approximation; the local affine calculation of Limits 01ZO. Affine calculation on one common affine base open.",
+   "via": [
+    "lem-weil-pbc-descend-finite-affine-open",
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "One finite stage for an affine piece over a common affine base open",
+ "statement": "Let $I$ be a directed preorder, $D:I^{\\mathrm{op}}\\to\\mathrm{Scheme}$ an inverse system of schemes [def-pc-scheme] with affine transitions [pqf-def-affine-morphism], and $c$ a limiting cone [lem-weil-pbc-limit-affine-transition]. Let $i_0\\le k$. Let $X_0,Y_0$ be schemes over $D(i_0)$ and $f_0:X_0\\to Y_0$ a morphism over that base [def-pc-fibre-product], locally of finite type [def-weil-finite-type-morphism]. Assume its base change $f_k$ to $D(k)$ is affine. Let $V\\subseteq Y_0$ and $W\\subseteq D(i_0)$ be affine opens [lem-weil-pbc-affine-open-spec-points] with $V\\subseteq(Y_0\\to D(i_0))^{-1}(W)$. Denote the base changes by $f_i,f$ and their first target projections by $p_{i0},p_0$. If $f|_{p_0^{-1}(V)}$ is finite [def-weil-finite-integral-morphism], there exist $j\\ge k$ for which $f_j|_{p_{j0}^{-1}(V)}$ is finite. Only one stage is asserted here; persistence at later stages is proved separately by base change.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the tensor-product presentation of this affine piece to obtain F,B,C,phi, a finite type algebra map, and the arrow isomorphisms at the limit and at every upper-tail stage.",
+   "uses": [
+    "lem-weil-pbc-affine-base-piece-tensor-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "Transport finiteness of the limit restriction across its arrow isomorphism. The finite-Spec criterion gives finiteness of id tensor phi over colim F. The upper tail is directed: a common upper bound of two indices is still above k. Apply the finite-ring-map colimit descent lemma at its least element to get one stage with finite id tensor phi. The finite-Spec criterion and the corresponding stage arrow isomorphism give the required finite restriction.",
+   "uses": [
+    "lem-weil-pbc-colimit-finite-ring-map",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-base-piece-tensor-presentation",
+  "lem-weil-pbc-colimit-finite-ring-map",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Proof of Tag 01ZO, affine reduction; Tags 01YX and 01YW; Algebra Tag 07RG. The compatibility and upper-tail details are made explicit here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An affine finite type morphism over one affine base open that is finite over an inverse limit is finite at some stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type affine morphism becomes finite at some stage of an inverse limit of schemes with affine transition maps",
+   "results": "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.isAffineHom_π_app",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ff]inite.*(baseChange|[Ll]imit)|07RG|01ZO",
+   "results": "Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Topology/Category/Profinite/CofilteredLimit.lean, Mathlib/ModelTheory/DirectLimit.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DescendFiniteAffineOpen",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DescendFiniteAffineBasePiece",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendFiniteAffineBasePiece.lean",
+  "declaration": "AlgebraicGeometry.exists_isFinite_morphismRestrict_baseChange_affine_base_piece",
+  "statement": "theorem exists_isFinite_morphismRestrict_baseChange_affine_base_piece\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (g : i ⟶ j), IsAffineHom (D.map g)]\n    (c : Cone D) (hc : IsLimit c) (i₀ k : I) (hk : i₀ ≤ k)\n    (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀)\n    [LocallyOfFiniteType f₀.left]\n    (haffine : IsAffineHom (((Over.pullback (D.map (homOfLE hk).op)).map f₀).left))\n    (V : Y₀.left.Opens) (hV : IsAffineOpen V)\n    (W : (D.obj (op i₀)).Opens) (hW : IsAffineOpen W)\n    (hVW : V ≤ Y₀.hom ⁻¹ᵁ W)\n    (hfinite : IsFinite\n      ((((Over.pullback (c.π.app (op i₀))).map f₀).left) ∣_\n        ((pullback.fst Y₀.hom (c.π.app (op i₀))) ⁻¹ᵁ V))) :\n    ∃ (j : I) (hkj : k ≤ j),\n      IsFinite\n        ((((Over.pullback (D.map (homOfLE (hk.trans hkj)).op)).map f₀).left)\n          ∣_ ((pullback.fst Y₀.hom (D.map (homOfLE (hk.trans hkj)).op)) ⁻¹ᵁ V))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T070554-L-3478715",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T070554-L-3478715",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

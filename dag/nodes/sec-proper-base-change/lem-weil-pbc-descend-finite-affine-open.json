@@ -31,61 +31,36 @@
  ],
  "proof": [
   {
-   "text": "Put $V_k=p_{k0}^{-1}(V)$, where $p_{k0}:Y_k\\to Y_0$ is the first pullback projection. It is affine because $p_{k0}$ is a base change of the affine transition $S_k\\to S_0$. The preimage $U_k=f_k^{-1}(V_k)$ is affine by the assumed affineness of $f_k$. Cartesian-square pasting identifies, for every $i\\ge k$ and for the limit, the restrictions over the preimage of $V$ with base changes of $U_k\\to V_k$. The latter map is locally of finite type by base-change stability and restriction.",
+   "text": "For each point of V choose an affine base neighbourhood W of its image and then an affine neighbourhood U contained in V intersect the inverse image of W. Since V is affine it is quasi-compact; extract a finite subcover of these U.",
    "uses": [
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "For each member U of this finite cover, restrict the finite limit morphism to the smaller open. Double restriction is canonically isomorphic to restriction to U. Apply one-stage finiteness descent for the affine piece U over its associated affine base open W to get j_U greater than or equal to k.",
+   "uses": [
+    "lem-weil-pbc-finite-local-on-target",
+    "lem-weil-pbc-descend-finite-affine-base-piece"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "Finiteness persists after any further transition. Explicitly, construct the comparison maps between the two original pullbacks by their first projections and second projections composed with the transition. The base-change squares are cartesian by pullback pasting; cancel the original square to see the comparison square is cartesian. Restrict it to the inverse images of U using the resLE pullback lemma. Finiteness is stable under this base change. Functoriality of D identifies the composite base map with the original map to the initial index.",
+   "uses": [
     "lem-weil-pbc-cartesian-square-pasting",
     "def-pc-fibre-product",
-    "lem-weil-pbc-lft-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
-   }
-  },
-  {
-   "text": "For each point $v\\in V$ choose an affine open $W_b\\subset S_0$ around its image and an affine open $V_b\\subset V\\cap (Y_0\\to S_0)^{-1}(W_b)$ containing $v$. The affine-open basis allows this choice, and $V$ is affine and hence quasi-compact, so finitely many $V_b$ cover $V$. Pull these opens back to $k$. The base opens $W_{b,k}$ are affine; open fibre-product pasting identifies $V_{b,k}$ with $V_b\\times_{W_b}W_{b,k}$, hence it is affine. Its inverse image $U_{b,k}$ under $f_k$ is affine. Put $A_{b,k}=\\Gamma(W_{b,k})$, $B_{b,k}=\\Gamma(V_{b,k})$ and $C_{b,k}=\\Gamma(U_{b,k})$. Their structure morphisms are Spec of the induced ring maps and $\\varphi_{b,k}:B_{b,k}\\to C_{b,k}$ is of finite type.",
-   "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "def-weil-pbc-scheme-conventions",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "lem-weil-pbc-lft-affine-pairs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
-   }
-  },
-  {
-   "text": "For fixed $b$, use the directed upper tail $I_{\\ge k}$. The opens $W_{b,i}=f_{ik}^{-1}(W_{b,k})$ are affine and form an inverse system with affine transitions. Affine-transition limits identify their limit with $W_{b,S}=p_k^{-1}(W_{b,k})$. Write $A_b=\\mathop{\\rm colim}_{i\\ge k}\\Gamma(W_{b,i})$. The Spec adjunction identifies $W_{b,S}$ with $\\operatorname{Spec} A_b$, compatibly with all projections: Spec of the colimit is a limit, and the isomorphism is the unique limit isomorphism. Transfer from the chosen limit of the cited theorem to the given cone using uniqueness of limits.",
-   "uses": [
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-spec-colimit-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
-   }
-  },
-  {
-   "text": "Open pullback pasting and the affine-spectrum fibre-product isomorphism identify the later pieces with $\\operatorname{Spec}(A_{b,i}\\otimes_{A_{b,k}}B_{b,k})$ and $\\operatorname{Spec}(A_{b,i}\\otimes_{A_{b,k}}C_{b,k})$, and similarly at the limit with $A_b$. The map is Spec of $\\mathrm{id}\\otimes\\varphi_{b,k}$: both descriptions have the same two pullback components, so they agree by the pullback universal property. Restrict the local finite-limit hypothesis to $V_{b,S}$. The resulting coordinate ring map is finite; conjugating by the ring isomorphisms preserves this, by transporting a finite set of module generators and its spanning equations.",
-   "uses": [
-    "lem-weil-pbc-cartesian-square-pasting",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-morphism-into-affine-scheme",
     "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-finite-local-on-target"
+    "lem-weil-pbc-finite-morphism-permanence"
    ],
    "elementary": false,
    "source": {
@@ -94,20 +69,7 @@
    }
   },
   {
-   "text": "Apply the finite-ring-map colimit descent lemma to $\\varphi_{b,k}$ to get $j_b\\ge k$ where the tensor-product map is finite. This persists above $j_b$. Explicitly, if $x_1,\\ldots,x_n$ generate $A_{b,j_b}\\otimes C_{b,k}$ over $A_{b,j_b}\\otimes B_{b,k}$, write each $1\\otimes c$ as $\\sum_l\\varphi_{b,j_b}(\\beta_l)x_l$. After applying the transition ring maps this identity holds at $i\\ge j_b$. Multiplying it by $a\\otimes1$ expresses each $a\\otimes c$ in the span of the images of $x_l$ over $A_{b,i}\\otimes B_{b,k}$. Pure tensors generate additively, hence those images span the entire target. Thus the corresponding restricted scheme morphism is finite at every $i\\ge j_b$.",
-   "uses": [
-    "lem-weil-pbc-colimit-finite-ring-map",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-finite-local-on-target"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
-   }
-  },
-  {
-   "text": "Directedness gives an upper bound $j$ of the finite set of $j_b$ together with $k$. For every $i\\ge j$ the inverse images of $V_b$ cover the inverse image of $V$ in $Y_i$ and every restriction is finite by the preceding calculation. Finiteness local on the target yields finiteness of the restriction over the inverse image of $V$. If $V$ is empty, take $j=k$; finiteness follows from the empty open cover. No quasi-compactness or quasi-separatedness hypothesis on $S_0,X_0,Y_0$ is used: only the affine open $V$ must be quasi-compact.",
+   "text": "Take an upper bound l of the finitely many j_U, and then a common upper bound j of l and k. At every i greater than or equal to j all cover restrictions are finite by persistence. Pulling the finite cover back covers the inverse image of V; the local-on-target finite criterion glues the restrictions to finiteness there. The empty cover is included by the same criterion and the upper-bound argument, using k to ensure the index preorder is nonempty.",
    "uses": [
     "lem-weil-pbc-finite-local-on-target"
    ],
@@ -119,28 +81,19 @@
   }
  ],
  "proof_deps": [
-  "pqf-def-affine-morphism",
-  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-descend-finite-affine-base-piece",
   "lem-weil-pbc-cartesian-square-pasting",
   "def-pc-fibre-product",
-  "lem-weil-pbc-lft-base-change",
-  "lem-weil-pbc-affine-open-spec-points",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-morphism-into-affine-scheme",
-  "lem-weil-pbc-lft-affine-pairs",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-spec-colimit-limit",
   "def-weil-finite-integral-morphism",
-  "lem-weil-pbc-finite-local-on-target",
-  "lem-weil-pbc-colimit-finite-ring-map"
+  "lem-weil-pbc-finite-morphism-permanence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+  "place": "Proof of Tag 01ZO: finite affine cover, affine algebra calculation, and gluing. The Lean proof splits off the tensor-product presentation, applies existing Algebra Tag 07RG, and proves persistence by cartesian-square pasting."
  },
  "mathlib_searches": [
   {
@@ -199,11 +152,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-f8b58",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T053929-L-2634410",
+  "landing": "20261012T070554-L-3478715",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; target and existing signatures are unchanged; proofs, sorry node, DAG, imports, change record, and report satisfy all review points."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

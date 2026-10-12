@@ -1,0 +1,184 @@
+{
+ "id": "lem-weil-pbc-affine-base-piece-tensor-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity proof: descend finiteness of the finite-presentation approximation; the local affine calculation of Limits 01ZO. Affine calculation on one common affine base open.",
+   "via": [
+    "lem-weil-pbc-descend-finite-affine-open",
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor-product presentation of an affine piece at all stages and the limit",
+ "statement": "Let $I$ be a directed preorder, $D:I^{\\mathrm{op}}\\to\\mathrm{Scheme}$ an inverse system of schemes [def-pc-scheme] with affine transitions [pqf-def-affine-morphism], and $c$ a limiting cone [lem-weil-pbc-limit-affine-transition]. Let $i_0\\le k$. Let $X_0,Y_0$ be schemes over $D(i_0)$ and $f_0:X_0\\to Y_0$ a morphism over that base [def-pc-fibre-product], locally of finite type [def-weil-finite-type-morphism]. Assume its base change $f_k$ to $D(k)$ is affine. Let $V\\subseteq Y_0$ and $W\\subseteq D(i_0)$ be affine opens [lem-weil-pbc-affine-open-spec-points] with $V\\subseteq(Y_0\\to D(i_0))^{-1}(W)$. Denote the base changes by $f_i,f$ and their first target projections by $p_{i0},p_0$. Put $J=\\{i\\in I:k\\le i\\}$ and $j_*=k\\in J$. There exist a diagram $F:J\\to\\mathrm{CommRing}$, two commutative $F(j_*)$-algebras $B,C$, and a finite type algebra map $\\varphi:B\\to C$ [lem-weil-pbc-lft-affine-pairs], such that the arrow $f|_{p_0^{-1}(V)}$ is isomorphic to $\\operatorname{Spec}(\\mathrm{id}_{\\operatorname{colim}F}\\otimes\\varphi)$ and, for every $j\\in J$, the arrow $f_j|_{p_{j0}^{-1}(V)}$ is isomorphic to $\\operatorname{Spec}(\\mathrm{id}_{F(j)}\\otimes\\varphi)$. The algebra structures on $F(j)$ and $\\operatorname{colim}F$ are induced by the transition $F(j_*)\\to F(j)$ and the colimit inclusion [def-weil-pbc-category-colimit]. Tensor products and Spec have their usual affine fibre-product meaning [lem-weil-pbc-fibre-product-affine-spectra, def-weil-affine-spectrum]. No finiteness assumption on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Proof of Tag 01ZO (lemma-descend-finite-finite-presentation), affine reduction; Tags 01YX and 01YW, restriction of limits to opens and Spec of the coordinate-ring colimit. Read also at https://stacks.math.columbia.edu/tag/01ZO, /01YX, /01YW."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof": [
+  {
+   "text": "On the upper tail J pull W back to every stage. Each resulting base open is affine by affineness of the transitions. Define F to be the diagram of their coordinate rings, with maps given by pullback of sections.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "Restriction to the upper tail leaves the limit unchanged. Restrict the cone to W using the open-limit assertion of the affine-transition limit theorem, and transfer from its chosen cone to c by uniqueness. Spec of the colimit of F is this limit, compatibly with the projection to the k-th base open, by the Spec adjunction.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-spec-colimit-limit",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "The inverse image V_k of V is affine, since its projection to V is the base change of an affine transition. Its inverse image U_k under f_k is affine. Set B=Gamma(V_k), C=Gamma(U_k); their maps from Gamma(W_k)=F(j_*) are induced by the structure morphisms. The restricted map defines an F(j_*)-algebra map phi:B to C. Base change and restriction preserve local finite type, so phi is finite type by the affine-pairs criterion.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "For every j in J, paste the open and base-change pullback squares to identify f_j over the inverse image of V with the base change of U_k to V_k along W_j to W_k. The affine-spectrum pullback isomorphism identifies the source with Spec(F(j) tensor C) and the target with Spec(F(j) tensor B). The induced map is Spec(id tensor phi), since both descriptions have the same two pullback projections. Compose the source and target identifications to obtain the arrow isomorphism. Repeat with the compatible Spec-colimit description of the limit base open for the limit arrow. Zero rings include the empty-open cases.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-spec-colimit-limit",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Proof of Tag 01ZO, affine reduction; Tags 01YX and 01YW; Algebra Tag 07RG. The compatibility and upper-tail details are made explicit here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Present an affine morphism over a directed inverse limit and every finite stage as Spec of a tensor product map over the coordinate ring colimit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Present base changes of a finite type affine scheme morphism along an inverse limit as spectra of tensor product algebra maps",
+   "results": "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, RingHom.finitePresentation_isStableUnderBaseChange, AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.isAffineHom_π_app, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*presentation|pullbackSpecIso|limit.*Spec|Spec.*colimit",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DescendFiniteAffineOpen",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBasePieceTensorPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBasePieceTensorPresentation.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_base_piece_tensor_presentation",
+  "statement": "theorem exists_affine_base_piece_tensor_presentation\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (g : i ⟶ j), IsAffineHom (D.map g)]\n    (c : Cone D) (hc : IsLimit c) (i₀ k : I) (hk : i₀ ≤ k)\n    (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀)\n    [LocallyOfFiniteType f₀.left]\n    (haffine : IsAffineHom (((Over.pullback (D.map (homOfLE hk).op)).map f₀).left))\n    (V : Y₀.left.Opens) (hV : IsAffineOpen V)\n    (W : (D.obj (op i₀)).Opens) (hW : IsAffineOpen W)\n    (hVW : V ≤ Y₀.hom ⁻¹ᵁ W)\n    : ∃ (F : {i : I // k ≤ i} ⥤ CommRingCat.{u})\n      (B C : CommRingCat.{u})\n      (aB : F.obj ⟨k, le_rfl⟩ →+* B) (aC : F.obj ⟨k, le_rfl⟩ →+* C),\n      letI : Algebra (F.obj ⟨k, le_rfl⟩) B := aB.toAlgebra\n      letI : Algebra (F.obj ⟨k, le_rfl⟩) C := aC.toAlgebra\n      ∃ φ : B →ₐ[F.obj ⟨k, le_rfl⟩] C, φ.FiniteType ∧\n        (letI : Algebra (F.obj ⟨k, le_rfl⟩) (colimit F : CommRingCat.{u}) :=\n          (CommRingCat.Hom.hom (colimit.ι F ⟨k, le_rfl⟩)).toAlgebra\n        Nonempty\n          (Arrow.mk\n            ((((Over.pullback (c.π.app (op i₀))).map f₀).left) ∣_\n              ((pullback.fst Y₀.hom (c.π.app (op i₀))) ⁻¹ᵁ V)) ≅\n            Arrow.mk (Spec.map (CommRingCat.ofHom\n              (Algebra.TensorProduct.map\n                (AlgHom.id (F.obj ⟨k, le_rfl⟩) (colimit F : CommRingCat.{u})) φ).toRingHom)))) ∧\n        (∀ j : {i : I // k ≤ i},\n          letI : Algebra (F.obj ⟨k, le_rfl⟩) (F.obj j) :=\n            (CommRingCat.Hom.hom (F.map (homOfLE j.property))).toAlgebra\n          Nonempty\n            (Arrow.mk\n              ((((Over.pullback (D.map (homOfLE (hk.trans j.property)).op)).map f₀).left)\n                ∣_ ((pullback.fst Y₀.hom\n                  (D.map (homOfLE (hk.trans j.property)).op)) ⁻¹ᵁ V)) ≅\n              Arrow.mk (Spec.map (CommRingCat.ofHom\n                (Algebra.TensorProduct.map\n                  (AlgHom.id (F.obj ⟨k, le_rfl⟩) (F.obj j)) φ).toRingHom))))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T070554-L-3478715",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T070554-L-3478715",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
