@@ -6557,3 +6557,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:51 L: returned deliver/F2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (reviewer RETURN: (reviewer X-2abac, head 2abac3c04) E5 (brief point 4): The three remaining obligations lack the required complete writte)
 
 - 2026-10-12: source sorry ledger distinguishes proof, decomposition, movement and pruning; supplements the batch static gate. Regenerated and committed from the pinned green snapshot by proof-imports-cycle.sh, without a build or a lock during scanning.
+- 07:05 L: returned deliver/G2/Sheaf.AlgebraicGeometry.Curve.DenseOpenBaseChangeComparison (reviewer RETURN: (the landing tools, head 58cbf46a9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
