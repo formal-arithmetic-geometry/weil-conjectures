@@ -7601,3 +7601,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:56 L: returned deliver/E3/Sheaf.AlgebraicGeometry.StrictLocalMateProjectionFormulas (reviewer RETURN: (reviewer X-7e155, head 7e155f4f0) F (brief points 5 and 7): In coord/reports/E3/Sheaf.AlgebraicGeometry.StrictLocalMate)
 - 11:56 L: returned deliver/N1/Sheaf.ConstructibleSheaf.TorsorAssociatedModuleFull (reviewer RETURN: (reviewer X-84d9e, head 84d9e38d6) E4: In lean/Sheaf/ConstructibleSheaf/TorsorEquivariantModuleDiagonalEvaluation.lean, )
 - 11:56 L: returned deliver/N3/Sheaf.AlgebraicGeometry.EtaleFreeSheafDerivedSections (reviewer RETURN: (reviewer X-8f30d, head 8f30d9b30) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Et)
+- 11:57 L: returned deliver/J3/Sheaf.AlgebraicGeometry.EtaleSetTerminalCone (reviewer RETURN: (reviewer X-ca520, head ca520e4ed) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Et)
