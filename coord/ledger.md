@@ -7455,3 +7455,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:20 L: returned deliver/J1/Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated (reviewer RETURN: (reviewer X-dd007, head dd0079fe1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ex)
 
 - 19:24 L: import cycle: the delivery made ConstantModuleDual import ConstantFiniteDual, which imports ConstantModuleDual
+- 11:24 L: returned deliver/G1/Sheaf.ConstructibleSheaf.ConstantModuleDual (reviewer RETURN: (the maintainer) Your delivery was taken out: it made Sheaf.ConstructibleSheaf.ConstantModuleDual import Sheaf.Construct)
