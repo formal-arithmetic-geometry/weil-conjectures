@@ -9,19 +9,34 @@
  },
  "proof": [
   {
-   "text": "Evaluate the internal operations on sections, reconstruct the abelian sheaf, and use the operation formulas and extensionality to obtain the asserted object equality.",
+   "text": "On each section type of R.X, define addition by the component of the internal multiplication, zero by the component of the unit applied to PUnit.unit, and negation by the component of the inverse. Evaluate MonObj.mul_assoc, MonObj.one_mul, MonObj.mul_one, GrpObj.left_inv, and IsCommMonObj.mul_comm to prove the additive commutative group laws. Define natural and integer scalar multiplication by nsmulRec and zsmulRec. This is the explicit private construction sectionGroup.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use the existing underlying restriction functions. Naturality of the internal unit and multiplication proves that they preserve zero and addition. The underlying functor identities prove the bundled additive-homomorphism functor identities by extensionality, giving reconstructPresheaf. Apply Mathlib Presheaf.isSheaf_iff_isSheaf_comp to the forgetful functor to obtain reconstructSheaf from the original sheaf condition. Forgetting the reconstructed sheaf gives R.X definitionally.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take A to be reconstructSheaf R. Functor.congr_obj applied to hF gives the equality hX between (F.obj A).X and R.X. The multiplication conjunct of hsections A U identifies multiplication on every pair of sections after transport along hX; eqToHom_app identifies that transport with the component of eqToIso hF. Extensionality gives the equality of multiplication morphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For commutative group objects with equal underlying objects and equal transported multiplication, eliminate the underlying-object equality, apply Mathlib MonObj.ext and GrpObj.ext, and use proof irrelevance for IsCommMonObj. This proves F.obj A = R, so A witnesses surjectivity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "R1",
+  "group": "P2",
   "date": "2026-10-12",
   "document": "literature/stacks-project/sites.tex",
   "place": "Section 00YR (section-sheaves-algebraic-structures), quadruple (D1)-(D4), (A1)-(A3) before Proposition 00YV (proposition-functoriality-algebraic-structures-topoi)",
-  "note": "Strict decomposition of the sectionwise reconstruction argument."
+  "note": "Complete Lean proof by explicit sectionwise reconstruction and multiplication extensionality; no intermediate sorry or choice of arbitrary witnesses."
  },
  "mathlib_searches": [
   {
@@ -97,9 +112,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T130938-L-1329085",
-  "kind": "interface"
+  "landing": "20261012T154833-L-2473702",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
