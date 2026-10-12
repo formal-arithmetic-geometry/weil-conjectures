@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-picard-kunneth-qcoh-functoriality",
+ "kind": "statement",
+ "title": "Pullback compatibility of the quasi-coherent external cup product",
+ "statement": "Let k be a field [def-weil-field], X and Y schemes over k [def-pc-scheme], quasi-compact with affine diagonals, and F and G quasi-coherent modules [pqf-def-coherent]. Let X' and Y' be arbitrary schemes over k with k-morphisms u:X'->X and v:Y'->Y, and let w:X' x_k Y' -> X x_k Y commute with the two projections [def-pc-fibre-product]. For all p,q in N and a in H^p(X,F), b in H^q(Y,G), pullback along w of the external cup product a cup b equals the external cup product u^*a cup v^*b, after the canonical composition and tensor-pullback coefficient isomorphism [def-pc-module-pullback], [def-sc-field-linear-module-cohomology-operations]. This asserts compatibility of the canonical operation only; it asserts no Kunneth equivalence.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma varieties-lemma-kunneth (the Kunneth lemma used in Tag 0BED)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "proof": [
+  {
+   "text": "Functoriality. Let u:X'\\to X and v:Y'\\to Y be morphisms of schemes over k and w = u x_k v : X' x_k Y' \\to X x_k Y, so that pr_1 o w = u o pr_1' and pr_2 o w = v o pr_2' (def-pc-fibre-product); identify w^*(pr_1^*F tensor pr_2^*G) with pr_1'^*u^*F tensor pr_2'^*v^*G by lem-pc-module-pullback-identity-composition and lem-weil-pbc-module-pullback-tensor. The claim is w^*(pr_1^*a cup pr_2^*b) = pr_1'^*u^*a cup pr_2'^*v^*b for a in H^p(X,F), b in H^q(Y,G). With U, V, W as in Step 1, a = c_U(alpha) and b = c_V(beta) for Cech cocycles alpha, beta (lem-sc-cech-comparison-map-iso-affine). Use the covers u^{-1}U, v^{-1}V and W' = w^{-1}W, which refines pr_1'^{-1}u^{-1}U and pr_2'^{-1}v^{-1}V by (i,j) \\mapsto i, j since w^{-1}(U_i x V_j) is contained in w^{-1}pr_1^{-1}U_i = pr_1'^{-1}u^{-1}U_i. By lem-sc-picard-cech-cup-pullback-compat (a), each pullback in the claim is computed by the refinement cochain map, whose components are pullbacks of sections; by lem-pc-module-pullback-identity-composition the cochains obtained from alpha along w after pr_1 and along pr_1' after u coincide (both are pullback of the components along pr_1 o w = u o pr_1'), and likewise for beta. By lem-weil-pbc-module-pullback-tensor (w^*(s tensor t) = w^*s tensor w^*t) the refinement cochain map along w sends the signed Cech cup product of two cochains to the cup product of their images. By lem-sc-picard-cech-cup-pullback-compat (b) the Cech cup products induce the sheaf cup products on X x_k Y and on X' x_k Y'. Hence both sides of the claim are c_{W'} of the same cochain, which proves the functoriality clause. The scalar Ext comparison transports the normalized sectionwise pullback unit and tensor coefficient map to scalarCohomologyPullback and scalarCohomologyCup; evaluate on injective-resolution representatives to identify these operations with the Cech formulas. No Cech comparison isomorphism is needed on the arbitrary schemes X' or Y': the pullback comparison square for the inverse-image covers suffices.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-sc-cech-comparison-map-iso-affine",
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma varieties-lemma-kunneth, definition of the map through pullback and cup product (Tags 01FD, 07MB)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-cech-comparison-map-iso-affine",
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-sc-picard-cech-cup-pullback-compat",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma varieties-lemma-kunneth (Lemma Kunneth)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kunneth isomorphism quasi coherent sheaf cohomology and pullback naturality",
+   "results": "UNAVAILABLE: service returned Internal Server Error on 2026-10-13; no absence verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kunneth formula quasi coherent cohomology over a field external cup product",
+   "results": "8 hits, including Sheaf.H, groupCohomologyIsoExt and Rep.torIso; none states this quasi-coherent scheme comparison.",
+   "date": "2026-10-13",
+   "verdict": "no matching theorem among returned hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "externalCup",
+   "results": "0 hits; externalCup is not a Mathlib identifier.",
+   "date": "2026-10-13",
+   "verdict": "no matching identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|externalCup in lean/Sheaf, lean/WeilConjectures and Mathlib/Algebra/Homology; lemma-kunneth in Mathlib/AlgebraicGeometry",
+   "results": "Sheaf.TensorKunneth is the algebraic total-complex step, not the geometric comparison. The existing quasi-coherent geometric theorem is this parent module. Upstream Kunneth results concern etale/pro-etale cohomology. No Mathlib algebraic-geometry lemma-kunneth match.",
+   "date": "2026-10-13",
+   "verdict": "no existing theorem with the required signature"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardKunnethQcoh",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof of Tag 0BF3: invoke Varieties Lemma varieties-lemma-kunneth on the special fibre; pullback clause, Step 8",
+   "via": [
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardKunnethQcohFunctoriality",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picard_kunneth_functoriality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picard_kunneth_functoriality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardKunnethQcohFunctoriality.lean",
+  "statement": "theorem picard_kunneth_functoriality (k : Type w) [Field k] (X Y : Scheme.{w}) (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) [CompactSpace X] [CompactSpace Y] [IsAffineHom (Limits.pullback.diagonal f)] [IsAffineHom (Limits.pullback.diagonal g)] (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] : ∀ (X' Y' : Scheme.{w}) (f' : X' ⟶ Spec (CommRingCat.of k)) (g' : Y' ⟶ Spec (CommRingCat.of k)) (u : X' ⟶ X) (v : Y' ⟶ Y) (hu : u ≫ f = f') (hv : v ≫ g = g') (w : Limits.pullback f' g' ⟶ Limits.pullback f g) (h₁ : w ≫ Limits.pullback.fst f g = Limits.pullback.fst f' g' ≫ u) (h₂ : w ≫ Limits.pullback.snd f g = Limits.pullback.snd f' g' ≫ v) (p q : ℕ) (a : scalarCohomology f F p) (b : scalarCohomology g G q), scalarCohomologyMap (Limits.pullback.fst f' g' ≫ f') (externalCupPullbackIso f g f' g' u v w h₁ h₂ F G).hom (p + q) (scalarCohomologyPullback (Limits.pullback.fst f g ≫ f) (Limits.pullback.fst f' g' ≫ f') w (by rw [← Category.assoc, h₁, Category.assoc, hu]) (externalCupCoefficients f g F G) (p + q) (externalCup f g F G p q a b)) = externalCup f' g' ((tensorPullback u).obj F) ((tensorPullback v).obj G) p q (scalarCohomologyPullback f f' u hu F p a) (scalarCohomologyPullback g g' v hv G q b)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T194157-L-470577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T194157-L-470577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

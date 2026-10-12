@@ -28,151 +28,28 @@
  ],
  "proof": [
   {
-   "text": "Choose finite affine covers U of X and V of Y. Their product cover W by U_i x_{Spec(k)} V_j is finite and affine: products of affine opens are affine by lem-weil-pbc-fibre-product-affine-spectra. By lem-sc-picard-affine-diagonal-intersections the intersection of two affine opens of X (resp. Y) is affine, so by induction on the number of members every finite intersection U_{i_0..i_p} (resp. V_{j_0..j_p}) is affine, and W_{(i_0j_0)..(i_pj_p)} = U_{i_0..i_p} x_k V_{j_0..j_p} is affine. Refinement pullbacks (W refines pr_1^{-1}U and pr_2^{-1}V) and the signed Cech cup construction give the map Tot(Cech(U,F) tensor_k Cech(V,G)) \\to Cech(W,pr_1^*F tensor pr_2^*G).",
+   "text": "Apply the isomorphism-clause theorem to k, X, Y, f, g, F and G to prove the first conjunct. Its generator equation fixes the canonical comparison.",
    "uses": [
-    "def-pc-scheme",
-    "pqf-def-coherent",
-    "def-pc-module-pullback",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-sc-picard-affine-diagonal-intersections",
-    "lem-sc-picard-cech-cup-pullback-compat"
+    "lem-sc-picard-kunneth-qcoh-iso-exists"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma varieties-lemma-kunneth, proof before equation equation-kunneth-on-cech"
-   }
+   "elementary": false
   },
   {
-   "text": "The field-linear algebra Kunneth lemma lem-sc-qcoh-cech-total-tensor-iso identifies the direct sum of tensor products of the two Cech cohomologies with the cohomology of the total tensor complex, by the map [a] tensor [b] \\mapsto [a tensor b].",
+   "text": "Apply the external-cup pullback theorem to the same data to prove the second conjunct. Conjunction introduction assembles the unchanged statement.",
    "uses": [
-    "lem-sc-qcoh-cech-total-tensor-iso"
+    "lem-sc-picard-kunneth-qcoh-functoriality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma varieties-lemma-kunneth, equation equation-kunneth-on-cech"
-   }
-  },
-  {
-   "text": "The Cech comparison theorem lem-sc-cech-comparison-map-iso-affine, together with its naturality, identifies those Cech cohomology groups with H^p(X,F), H^q(Y,G), and H^n(X x_k Y,pr_1^*F tensor pr_2^*G). The Cech cup compatibility lemma identifies the resulting map with pullback along the projections followed by the sheaf cup product.",
-   "uses": [
-    "lem-sc-cech-comparison-map-iso-affine",
-    "lem-sc-cech-comparison-map-naturality",
-    "lem-sc-cech-comparison-natural",
-    "lem-sc-picard-cech-cup-pullback-compat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma varieties-lemma-kunneth, proof after equation equation-kunneth-on-cech"
-   }
-  },
-  {
-   "text": "For a short exact sequence 0 \\to F \\to F' \\to F'' \\to 0 of quasi-coherent modules, sections on every affine intersection U_{i_0..i_p} are exact by pqf-lem-affine-vanishing (Tag 01XB), and tensoring the resulting short exact sequence of k-vector spaces with any k-vector space is exact (k is a field). On the affine W_{(i_0j_0)..(i_pj_p)} = U_{i_0..i_p} x_k V_{j_0..j_p} the sections of pr_1^*F tensor pr_2^*G are F(U_{i_0..i_p}) tensor_k G(V_{j_0..j_p}), naturally in F and G, by lem-weil-pbc-module-pullback-affine-sections (sections of a pullback on affines are the base change of the sections), lem-weil-pbc-fibre-product-affine-spectra and lem-weil-pbc-quasi-coherent-tensor-product-affine-sections. Thus the Cech complexes and their tensor-total complexes form short exact sequences of complexes, and the map of Step 1 is a map of short exact sequences. The long exact cohomology sequences and the five lemma give a 2-out-of-3 principle: if the map of Step 1 is a quasi-isomorphism for two of F, F', F'' (with G fixed), it is one for the third; by Steps 2 and 3 this is the Kunneth assertion. The same holds in the variable G.",
-   "uses": [
-    "pqf-lem-affine-vanishing",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-sc-cech-comparison-map-naturality",
-    "lem-sc-picard-cech-cup-pullback-compat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma varieties-lemma-kunneth, paragraph beginning Consider a short exact"
-   }
-  },
-  {
-   "text": "Finite cohomological dimension on X and the universal-delta-functor embedding lemma give an induction on d(F)=max{d | H^d(X,F) != 0}: embed F into F' with higher cohomology zero, let F'' be the cokernel, and use the 2-out-of-3 principle because d(F'')<d(F). Repeating in Y reduces to the case where F and G have cohomology only in degree zero.",
-   "uses": [
-    "lem-sc-picard-qcoh-finite-cd",
-    "lem-sc-picard-qcoh-universal-delta-embedding"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Tags 01XI and 0BDY, as invoked in Tag 0BED Varieties Lemma varieties-lemma-kunneth"
-   }
-  },
-  {
-   "text": "Degree-zero case: H^p(X,F)=0 and H^q(Y,G)=0 for p,q>0. Put H = pr_1^*F tensor pr_2^*G. For every affine open V of Y, pr_2^{-1}(V) = X x_k V, and the cover U_V = (U_i x_k V) of X x_k V has affine finite intersections U_{i_0..i_p} x_k V by Step 1 and lem-weil-pbc-fibre-product-affine-spectra. By lem-sc-cech-comparison-map-iso-affine, H^q(X x_k V, H) is the cohomology of Cech(U_V,H), and as in Step 4 (lem-weil-pbc-module-pullback-affine-sections, lem-weil-pbc-quasi-coherent-tensor-product-affine-sections) Cech(U_V,H) = Cech(U,F) tensor_k G(V); tensoring over the field k is exact, so H^q(X x_k V,H) = H^q(Cech(U,F)) tensor_k G(V) = H^q(X,F) tensor_k G(V) (lem-sc-cech-comparison-map-iso-affine on X), which is 0 for q>0 and Gamma(X,F) tensor_k G(V) for q=0. By lem-weil-pbc-higher-direct-image-presheaf, R^q pr_{2,*}H is the sheaf associated to V \\mapsto H^q(X x_k V,H), with stalks the colimits of these groups over neighbourhoods of a point; the affine opens are cofinal among these, so R^q pr_{2,*}H = 0 for q>0. For q=0, choose a k-basis (e_s) of Gamma(X,F); the map from the direct sum of copies of G indexed by s to pr_{2,*}H, sending t in G(V) at index s to pr_1^*e_s tensor pr_2^*t, is on every affine V the map from the direct sum of the G(V) (lem-weil-pbc-qcqs-cohomology-direct-sum with p=0 on the affine, hence quasi-compact and quasi-separated, V) to Gamma(X,F) tensor_k G(V), an isomorphism; isomorphisms on a basis of opens give isomorphisms on stalks, so pr_{2,*}H = Gamma(X,F) tensor_k G.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-sc-picard-affine-diagonal-intersections",
-    "lem-sc-cech-comparison-map-iso-affine",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "lem-weil-pbc-qcqs-cohomology-direct-sum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma varieties-lemma-kunneth, degree-zero case after the induction"
-   }
-  },
-  {
-   "text": "The diagonal of Y is affine, hence quasi-compact, so Y is quasi-compact and quasi-separated; by lem-weil-pbc-qcqs-cohomology-direct-sum, H^p(Y, Gamma(X,F) tensor_k G) is the direct sum of copies of H^p(Y,G), which is 0 for p>0, and its global sections are Gamma(X,F) tensor_k Gamma(Y,G). With Step 6, H^p(Y,R^q pr_{2,*}H) = 0 for all q >= 0 and p > 0, so by lem-pc-leray-degenerate-sections (2) the edge map H^q(X x_k Y,H) \\to Gamma(Y,R^q pr_{2,*}H) is an isomorphism for every q: the product cohomology is zero above degree zero and in degree zero is Gamma(X,F) tensor_k Gamma(Y,G). Both sides of the Kunneth map are thus concentrated in degree zero, where the canonical map is s tensor t \\mapsto pr_1^*s . pr_2^*t (lem-sc-picard-cech-cup-pullback-compat in degree 0), which is the isomorphism just obtained. With Steps 4 and 5 this proves the Kunneth isomorphism.",
-   "uses": [
-    "lem-weil-pbc-qcqs-cohomology-direct-sum",
-    "lem-pc-leray-degenerate-sections",
-    "lem-sc-picard-cech-cup-pullback-compat",
-    "lem-sc-cech-comparison-map-naturality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BED, final degree-zero paragraph and omitted cup-product verification"
-   }
-  },
-  {
-   "text": "Functoriality. Let u:X'\\to X and v:Y'\\to Y be morphisms of schemes over k and w = u x_k v : X' x_k Y' \\to X x_k Y, so that pr_1 o w = u o pr_1' and pr_2 o w = v o pr_2' (def-pc-fibre-product); identify w^*(pr_1^*F tensor pr_2^*G) with pr_1'^*u^*F tensor pr_2'^*v^*G by lem-pc-module-pullback-identity-composition and lem-weil-pbc-module-pullback-tensor. The claim is w^*(pr_1^*a cup pr_2^*b) = pr_1'^*u^*a cup pr_2'^*v^*b for a in H^p(X,F), b in H^q(Y,G). With U, V, W as in Step 1, a = c_U(alpha) and b = c_V(beta) for Cech cocycles alpha, beta (lem-sc-cech-comparison-map-iso-affine). Use the covers u^{-1}U, v^{-1}V and W' = w^{-1}W, which refines pr_1'^{-1}u^{-1}U and pr_2'^{-1}v^{-1}V by (i,j) \\mapsto i, j since w^{-1}(U_i x V_j) is contained in w^{-1}pr_1^{-1}U_i = pr_1'^{-1}u^{-1}U_i. By lem-sc-picard-cech-cup-pullback-compat (a), each pullback in the claim is computed by the refinement cochain map, whose components are pullbacks of sections; by lem-pc-module-pullback-identity-composition the cochains obtained from alpha along w after pr_1 and along pr_1' after u coincide (both are pullback of the components along pr_1 o w = u o pr_1'), and likewise for beta. By lem-weil-pbc-module-pullback-tensor (w^*(s tensor t) = w^*s tensor w^*t) the refinement cochain map along w sends the signed Cech cup product of two cochains to the cup product of their images. By lem-sc-picard-cech-cup-pullback-compat (b) the Cech cup products induce the sheaf cup products on X x_k Y and on X' x_k Y'. Hence both sides of the claim are c_{W'} of the same cochain, which proves the functoriality clause.",
-   "uses": [
-    "def-pc-fibre-product",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-weil-pbc-module-pullback-tensor",
-    "lem-sc-cech-comparison-map-iso-affine",
-    "lem-sc-picard-affine-diagonal-intersections",
-    "lem-sc-picard-cech-cup-pullback-compat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma varieties-lemma-kunneth, definition of the map through pullback and cup product (Tags 01FD, 07MB)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "pqf-def-coherent",
-  "def-pc-module-pullback",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-sc-picard-affine-diagonal-intersections",
-  "lem-sc-picard-cech-cup-pullback-compat",
-  "lem-sc-qcoh-cech-total-tensor-iso",
-  "lem-sc-cech-comparison-map-iso-affine",
-  "lem-sc-cech-comparison-map-naturality",
-  "lem-sc-cech-comparison-natural",
-  "pqf-lem-affine-vanishing",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-  "lem-sc-picard-qcoh-finite-cd",
-  "lem-sc-picard-qcoh-universal-delta-embedding",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-qcqs-cohomology-direct-sum",
-  "lem-pc-leray-degenerate-sections",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-weil-pbc-module-pullback-tensor"
+  "lem-sc-picard-kunneth-qcoh-iso-exists",
+  "lem-sc-picard-kunneth-qcoh-functoriality"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties, Lemma varieties-lemma-kunneth (Lemma Kunneth)"
+  "place": "Tag 0BED; X3 stage-3 separation of isomorphism and pullback compatibility"
  },
  "mathlib_searches": [
   {
@@ -323,5 +200,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T194157-L-470577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

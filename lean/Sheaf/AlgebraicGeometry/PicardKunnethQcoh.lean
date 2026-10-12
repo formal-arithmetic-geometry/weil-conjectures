@@ -9,21 +9,9 @@ public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.DirectSum.Module
-import Sheaf.Algebra.Homology.TensorKunneth
-import Sheaf.AlgebraicGeometry.AffineModuleCechComparisonNatural
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import Sheaf.AlgebraicGeometry.QuasicoherentAcyclicEmbedding
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteCohomologicalDimension
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Paper.CechComparisonMapNaturality
-import Sheaf.Paper.CechCupPullbackCompat
-import Sheaf.Paper.HigherDirectImagePresheaf
+
+import Sheaf.AlgebraicGeometry.PicardKunnethQcohIso
+import Sheaf.AlgebraicGeometry.PicardKunnethQcohFunctoriality
 
 /-! # Kunneth for quasi-coherent cohomology over a field
 
@@ -167,7 +155,9 @@ theorem picard_kunneth_qcoh (k : Type w) [Field k] (X Y : Scheme.{w})
         externalCup f' g' ((tensorPullback u).obj F) ((tensorPullback v).obj G) p q
           (scalarCohomologyPullback f f' u hu F p a)
           (scalarCohomologyPullback g g' v hv G q b)) := by
-  sorry
+  constructor
+  · exact picard_kunneth_iso_exists k X Y f g F G
+  · exact picard_kunneth_functoriality k X Y f g F G
 
 end
 end AlgebraicGeometry.Scheme.Modules
