@@ -3,6 +3,7 @@ module
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import Sheaf.CategoryTheory.Sites.OverPullbackAdjunctionMono
 
 @[expose] public section
 
@@ -33,6 +34,8 @@ theorem overPullback_preservesInjectiveObjects
     [HasSheafify J AddCommGrpCat.{u}]
     (W : C) [HasSheafify (J.over W) AddCommGrpCat.{u}] :
     (J.overPullback AddCommGrpCat.{u} W).PreservesInjectiveObjects := by
-  sorry
+  obtain ⟨L, ⟨hL⟩, hmono⟩ := overPullback_extensionByZero J W
+  let _ : L.PreservesMonomorphisms := hmono
+  exact Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms hL
 
 end CategoryTheory

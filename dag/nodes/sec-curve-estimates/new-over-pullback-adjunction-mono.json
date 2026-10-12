@@ -1,0 +1,96 @@
+{
+ "id": "new-over-pullback-adjunction-mono",
+ "kind": "statement",
+ "title": "Extension by zero adjunction preserving monomorphisms",
+ "statement": "For a category C, a Grothendieck topology J on C, and W : C, assuming HasSheafify J AddCommGrpCat and HasSheafify (J.over W) AddCommGrpCat, there exists a functor L : Sheaf (J.over W) AddCommGrpCat ⥤ Sheaf J AddCommGrpCat with Nonempty (L ⊣ J.overPullback AddCommGrpCat W) and L.PreservesMonomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemmas 03DI--03DJ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct extension by zero on presheaves by direct sums over arrows into W, sheafify, and use the sheafification adjunction to obtain the left adjunction. Sectionwise injectivity of direct sums and exactness of abelian-group sheafification show preservation of monomorphisms.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemmas 03DI--03DJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero overPullback PreservesMonomorphisms",
+   "results": "no declaration with this statement in lean/ or Mathlib",
+   "date": "2026-10-13",
+   "verdict": "not found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left adjoint to GrothendieckTopology.overPullback preserving monomorphisms",
+   "results": "no exact match; available results require precoverage and pullbacks",
+   "date": "2026-10-13",
+   "verdict": "not applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "PreservesMonomorphisms (L ⊣ J.overPullback)",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "not found"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.OverPullbackPreservesInjectives",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-over-pullback-preserves-injectives",
+   "place": "first two proof steps",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.OverPullbackAdjunctionMono",
+  "file": "lean/Sheaf/CategoryTheory/Sites/OverPullbackAdjunctionMono.lean",
+  "declaration": "CategoryTheory.overPullback_extensionByZero",
+  "statement": "theorem overPullback_extensionByZero\n    {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{u}]\n    (W : C) [HasSheafify (J.over W) AddCommGrpCat.{u}] :\n    ∃ (L : Sheaf (J.over W) AddCommGrpCat.{u} ⥤ Sheaf J AddCommGrpCat.{u}),\n      Nonempty (L ⊣ J.overPullback AddCommGrpCat.{u} W) ∧ L.PreservesMonomorphisms",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T173850-L-3302144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T173850-L-3302144",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
