@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.GlobalOperator
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
 
@@ -65,18 +66,6 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
-
-namespace CategoryTheory.MonoidalCategory
-
-variable {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C]
-
-/-- **Conjugacy invariance of the trace** (item (1) of blueprint `prop-trf-trace-formal-laws`):
-for an isomorphism `e : X ≅ Y` of dualizable objects, `tr(e⁻¹ ≫ f ≫ e) = tr(f)`. -/
-lemma trace_conj {X Y : C} [HasRightDual X] [HasRightDual Y] (e : X ≅ Y) (f : Y ⟶ Y) :
-    trace (e.hom ≫ f ≫ e.inv) = trace f :=
-  sorry
-
-end CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
 

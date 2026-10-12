@@ -5,10 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormula
 
 /-!
 # Derived scalar extension commutes with `Rf_!`
@@ -55,47 +54,6 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme
 
 variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S]
-
-section OpenImmersion
-
-variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-
-/-- Derived scalar extension commutes with the extension by zero along an open immersion `j`:
-`Ψ (j_! K) ≅ j_! (Ψ K)`. -/
-noncomputable def openImmersionLowerShriekExtendScalarsIso :
-    D((j)_!open[ModuleCat.{u + 1} R]) ⋙ L(sheafExtendScalars (algebraMap R S) X) ≅
-      L(sheafExtendScalars (algebraMap R S) U) ⋙ D((j)_!open[ModuleCat.{u + 1} S]) :=
-  sorry
-
-end OpenImmersion
-
-section LowerStar
-
-variable [IsNoetherianRing R] {Y Z : Scheme.{u}} (g : Z ⟶ Y)
-
-/-- The base change map `Ψ (Rg_* M) ⟶ Rg_* (Ψ M)` of derived scalar extension along the derived
-direct image: the mate of the commutation `Lg^* ∘ Ψ ≅ Ψ ∘ Lg^*`
-(`AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso`). -/
-noncomputable def rightDerivedLowerStarExtendScalarsMap :
-    R((g)_*[ModuleCat.{u + 1} R]) ⋙ L(sheafExtendScalars (algebraMap R S) Y) ⟶
-      L(sheafExtendScalars (algebraMap R S) Z) ⋙ R((g)_*[ModuleCat.{u + 1} S]) :=
-  mateEquiv (derivedUpperStarLowerStarAdjunction _ g) (derivedUpperStarLowerStarAdjunction _ g)
-    (leftDerivedUpperStarExtendScalarsIso R S g).hom
-
-/-- **Derived scalar extension commutes with `Rg_*` for proper `g`.** Let `R` be a finite ring
-and `g : Z ⟶ Y` proper. For a complex `K` on an open subscheme `j : U ⟶ Z` that is bounded
-constructible of finite Tor amplitude, the base change map `Ψ (Rg_* j_! K) ⟶ Rg_* Ψ (j_! K)` is an
-isomorphism. Restricted to `R`, it is the projection map `Rg_* (j_! K) ⊗ᴸ S_Y ⟶ Rg_* (j_! K ⊗ᴸ S_Z)`
-for the constant sheaf `S_Y`. -/
-theorem isIso_rightDerivedLowerStarExtendScalarsMap_app [Finite R] [IsProper g] {U : Scheme.{u}}
-    (j : U ⟶ Z) [IsOpenImmersion j]
-    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} R))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) U K) :
-    IsIso ((rightDerivedLowerStarExtendScalarsMap R S g).app
-      (D((j)_!open[ModuleCat.{u + 1} R]).obj K)) :=
-  sorry
-
-end LowerStar
 
 section LowerShriek
 

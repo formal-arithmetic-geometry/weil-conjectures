@@ -2006,6 +2006,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.OpenImmersion
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.Derived.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom

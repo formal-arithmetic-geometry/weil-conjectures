@@ -103,6 +103,18 @@ lemma trace_eq_of_exactPairing {X : C} [HasRightDual X] (Y : C) [ExactPairing X 
     BraidedCategory.braiding_naturality_left_assoc,
     BraidedCategory.braiding_naturality_right_assoc, whisker_exchange_assoc]
 
+/-- **Conjugacy invariance of the trace**: for an isomorphism `e : X ≅ Y` of dualizable objects
+and an endomorphism `f` of `Y`, `tr(e ≫ f ≫ e⁻¹) = tr(f)`. -/
+lemma trace_conj {X Y : C} [HasRightDual X] [HasRightDual Y] (e : X ≅ Y) (f : Y ⟶ Y) :
+    trace (e.hom ≫ f ≫ e.inv) = trace f := by
+  let : ExactPairing X Yᘁ := exactPairingCongrLeft e
+  rw [trace_eq_of_exactPairing Yᘁ, trace]
+  change (η_ Y Yᘁ ≫ e.inv ▷ Yᘁ) ≫ (e.hom ≫ f ≫ e.inv) ▷ Yᘁ ≫ (β_ X Yᘁ).hom ≫
+    Yᘁ ◁ e.hom ≫ ε_ Y Yᘁ = _
+  rw [← BraidedCategory.braiding_naturality_left_assoc]
+  simp only [← comp_whiskerRight_assoc, Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
+    Category.comp_id]
+
 section
 
 variable {D : Type*} [Category D] [MonoidalCategory D] [BraidedCategory D]
