@@ -1,0 +1,95 @@
+{
+ "id": "def-weil-pbc-sets-section-comparison",
+ "kind": "definition",
+ "title": "Canonical etale section comparison",
+ "statement": "For a commuting triangle of schemes $T\\xrightarrow{h}S\\xrightarrow{f}R$ with $k=hf$, a sheaf of sets $G$ on $R_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaf-of-sets], and an etale object $U$ over $R$, define the section map from $(f^{-1}G)(U\\times_R S)$ to $(k^{-1}G)(U\\times_R T)$ by the adjunction unit for $h$, followed by the chosen unit-compatible inverse-image composition isomorphism [lem-weil-pbc-sets-etale-inverse-image-composition-units], equality transport to $k$, and restriction along the canonical iterated-fibre-product pasting isomorphism. This is the existing map named etaleSetSectionComparison; the definition is relocated without changing its data or type.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 09YQ (theorem-colimit), degree zero for sheaves of sets; proof via Tags 0EYL, 04HR, 09YN and the finite affine-cover reduction for qcqs schemes"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 09YQ (theorem-colimit), degree zero for sheaves of sets; proof via Tags 0EYL, 04HR, 09YN and the finite affine-cover reduction for qcqs schemes; concrete section formulation and finite-cover argument written by T1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every section of an inverse image etale sheaf of sets over an inverse limit lifts to a finite stage; identity and composition of inverse-image unit comparisons",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict claimed; other search services and source grep used.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of an etale sheaf of sets on an inverse limit of qcqs schemes are the filtered colimit of stage sections; equality holds at a later stage",
+   "results": "Returned structure-sheaf limit results and sheaf section extensionality. Checked source: neither states the set-valued etale inverse-image comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg etaleSetSection|unitComparison.*(comp|id)|sections.*(lift|equal) lean/Sheaf lean/WeilConjectures Mathlib/AlgebraicGeometry/Sites; blueprint_refs.py search 09YQ and section continuity",
+   "results": "The assigned module defines the comparison and states the full continuity theorem; source SectionContinuity handles abelian sheaves only. No separate set-valued lifting, eventual-equality, or concrete comparison-coherence declaration was found.",
+   "date": "2026-10-12",
+   "verdict": "no separate match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "degree-zero continuity invocation: EtaleSetSectionComparison",
+   "via": [
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSectionComparison.lean",
+  "declaration": "AlgebraicGeometry.etaleSetSectionComparison",
+  "statement": "def etaleSetSectionComparison {R S T : Scheme.{u}} (h : T ⟶ S) (f : S ⟶ R) (k : T ⟶ R) (hk : h ≫ f = k) (G : Sheaf R.smallEtaleTopology (Type (u + 1))) (U : R.Etale) : ((Scheme.etaleSetPullback f).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U)) ⟶ ((Scheme.etaleSetPullback k).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj U))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fcc6f",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T053955-L-2646381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fcc6f",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T053955-L-2646381",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, Lean declarations, DAG nodes, report, relocation record, and clean compilation match the stage-3 review requirements."
+ }
+}

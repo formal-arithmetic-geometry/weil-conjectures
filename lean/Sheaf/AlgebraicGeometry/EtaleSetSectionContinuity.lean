@@ -6,14 +6,13 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
-import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
+import Sheaf.AlgebraicGeometry.EtaleSetSectionLift
+import Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.CategoryTheory.ColimitSiteSections
 
 /-!
 # Continuity of sections of étale sheaves of sets
@@ -30,36 +29,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
-
-/-- The section comparison for a commuting triangle `T ⟶ S ⟶ R`: first use the
-inverse-image unit, then the composition isomorphism from
-`etaleSetInverseImageCompositionUnits`, and finally restrict along the canonical
-iterated-fibre-product isomorphism. This defines the transition maps and limit legs
-in the continuity statement.
-
-Source: Stacks Project, Étale Cohomology, Tag 09YQ, degree-zero section comparison;
-Sites, Tags 03CB and 03CC
-(blueprint: lem-weil-pbc-sets-etale-section-continuity). -/
-noncomputable def etaleSetSectionComparison
-    {R S T : Scheme.{u}} (h : T ⟶ S) (f : S ⟶ R) (k : T ⟶ R) (hk : h ≫ f = k)
-    (G : Sheaf R.smallEtaleTopology (Type (u + 1))) (U : R.Etale) :
-    ((Scheme.etaleSetPullback f).obj G).obj.obj
-        (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U)) ⟶
-      ((Scheme.etaleSetPullback k).obj G).obj.obj
-        (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj U)) :=
-  ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-      (MorphismProperty.Over.pullback @Etale ⊤ h) (Type (u + 1))
-      (S.smallGrothendieckTopology @Etale) (T.smallGrothendieckTopology @Etale)).unit.app
-        ((Scheme.etaleSetPullback f).obj G)).hom.app
-          (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U)) ≫
-    ((Classical.choose etaleSetInverseImageCompositionUnits.2.2 R S T f h).hom.app G).hom.app
-      (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj
-        ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U))) ≫
-    (eqToHom (congrArg (fun a : T ⟶ R ↦ (Scheme.etaleSetPullback a).obj G) hk)).hom.app
-      (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj
-        ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U))) ≫
-    ((Scheme.etaleSetPullback k).obj G).obj.map
-      ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) h f k hk.symm).hom.app U).op
 
 /-- For an étale object `V → X`, the unit followed by restriction along its diagonal
 maps `F(V)` to the global sections of the inverse image on `V`. Its inverse is the
@@ -81,6 +50,53 @@ noncomputable def etaleSetRestrictionUnit
       (MorphismProperty.Over.homMk
         (B := (MorphismProperty.Over.pullback @Etale ⊤ V.hom).obj V)
         (pullback.diagonal V.hom) (pullback.diagonal_snd V.hom)).op
+
+private theorem etaleSetRestrictionUnit_bijective {X : Scheme.{u}} (V : X.Etale)
+    (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
+    Function.Bijective (etaleSetRestrictionUnit V F) := by
+  let := Etale.isContinuous_overPullback (Y := X) (Z := V.left) V.hom
+  obtain ⟨ρ, hρ⟩ := etaleSetInverseImageRestriction V.hom
+  let A := Scheme.Etale.mk (𝟙 V.left)
+  let δ : A ⟶ (MorphismProperty.Over.pullback @Etale ⊤ V.hom).obj V :=
+    MorphismProperty.Over.homMk (pullback.diagonal V.hom)
+      (pullback.diagonal_snd V.hom)
+  let α := (ρ.hom.app F).hom.app (op A)
+  have hcomp : etaleSetRestrictionUnit V F ≫ α = 𝟙 _ := by
+    ext s
+    have hn := NatTrans.naturality ((ρ.hom.app F).hom) δ.op
+    have hv := hρ F V s
+    change (etaleSetRestrictionUnit V F ≫ α) s = s
+    change (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (MorphismProperty.Over.pullback @Etale ⊤ V.hom) (Type (u + 1))
+      (X.smallGrothendieckTopology @Etale)
+      (V.left.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op V) ≫
+        ((Scheme.etaleSetPullback V.hom).obj F).obj.map δ.op ≫ α) s = s
+    rw [hn]
+    simp only [ConcreteCategory.comp_apply]
+    dsimp only [Functor.fromPUnit, Functor.id_obj] at hv
+    erw [hv]
+    change F.obj.map ((MorphismProperty.Over.map ⊤ (inferInstance : Etale V.hom)).map
+      δ).op (F.obj.map
+        ((MorphismProperty.Over.mapPullbackAdj @Etale ⊤ V.hom
+          inferInstance trivial).counit.app V).op s) = s
+    erw [← ConcreteCategory.comp_apply, ← F.obj.map_comp, ← op_comp]
+    have hid : (MorphismProperty.Over.map ⊤
+        (inferInstance : Etale V.hom)).map δ ≫
+        (MorphismProperty.Over.mapPullbackAdj @Etale ⊤ V.hom
+          inferInstance trivial).counit.app V = 𝟙 V := by
+      ext
+      simp [δ, MorphismProperty.Over.mapPullbackAdj]
+      rfl
+    erw [hid]
+    change (F.obj.map (𝟙 (op V))) s = s
+    erw [F.obj.map_id]
+    rfl
+  have : IsIso (etaleSetRestrictionUnit V F ≫ α) := by
+    rw [hcomp]
+    infer_instance
+  have : IsIso (etaleSetRestrictionUnit V F) :=
+    (isIso_comp_right_iff (etaleSetRestrictionUnit V F) α).mp inferInstance
+  exact (asIso (etaleSetRestrictionUnit V F)).toEquiv.bijective
 
 /-- Continuity for a sheaf of sets pulled back from a chosen stage `i₀`. The category
 `Over (op i₀)` indexes the inverse system on the upper tail `i ≥ i₀`, so its opposite
@@ -151,6 +167,54 @@ theorem etaleSetSectionContinuity
         (etaleSetRestrictionUnit
           ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj W₀)
           ((Scheme.etaleSetPullback (D.map j.hom)).obj G))) := by
-  sorry
+  let A (j : Over (op i₀)) : Type (u + 1) :=
+    ((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.obj
+      (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj W₀))
+  let r {j k : Over (op i₀)} (a : k ⟶ j) : A j ⟶ A k :=
+    etaleSetSectionComparison (D.map a.left) (D.map j.hom) (D.map k.hom)
+      ((D.map_comp a.left j.hom).symm.trans
+        (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) a.w)) G W₀
+  let L : Type (u + 1) :=
+    ((Scheme.etaleSetPullback (c.π.app (op i₀))).obj G).obj.obj
+      (op ((MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj W₀))
+  let q (j : Over (op i₀)) : A j ⟶ L :=
+    etaleSetSectionComparison (c.π.app j.left) (D.map j.hom)
+      (c.π.app (op i₀)) (c.w j.hom) G W₀
+  have hlaws : (∀ j : Over (op i₀), r (𝟙 j) = 𝟙 (A j)) ∧
+      (∀ (j k l : Over (op i₀)) (a : k ⟶ j) (b : l ⟶ k),
+        r a ≫ r b = r (b ≫ a)) ∧
+      (∀ (j k : Over (op i₀)) (a : k ⟶ j), r a ≫ q k = q j) :=
+    etaleSetSectionComparisonLaws D c i₀ G W₀
+  let E : (Over (op i₀))ᵒᵖ ⥤ Type (u + 1) :=
+    { obj j := A j.unop
+      map a := r a.unop
+      map_id j := hlaws.1 j.unop
+      map_comp a b := (hlaws.2.1 _ _ _ a.unop b.unop).symm }
+  let ν : E ⟶ (Functor.const (Over (op i₀))ᵒᵖ).obj L :=
+    { app j := q j.unop
+      naturality j k a := by
+        change r a.unop ≫ q k.unop = q j.unop ≫ 𝟙 L
+        rw [Category.comp_id]
+        exact hlaws.2.2 _ _ a.unop }
+  refine ⟨E, (fun j ↦ Iso.refl (A j)), ν, ?_, ?_, ?_, ?_⟩
+  · intro j k a
+    exact Category.id_comp _ |>.trans (Category.comp_id _)
+  · intro j
+    exact Category.id_comp _
+  · constructor
+    · intro x y h
+      obtain ⟨j, s, rfl⟩ := Types.jointly_surjective' (F := E) x
+      obtain ⟨k, t, rfl⟩ := Types.jointly_surjective' (F := E) y
+      have hst : q j.unop s = q k.unop t := by
+        simpa only [colimit.ι_desc_apply] using h
+      obtain ⟨l, a, b, hab⟩ :=
+        etaleSetSectionEventualEquality D c _hc i₀ G W₀ j.unop k.unop s t hst
+      exact Types.colimit_sound' (F := E) a.op b.op hab
+    · intro t
+      obtain ⟨j, s, hs⟩ := etaleSetSectionLift D c _hc i₀ G W₀ t
+      refine ⟨colimit.ι E (op j) s, ?_⟩
+      simpa only [colimit.ι_desc_apply] using hs
+  · intro j
+    exact etaleSetRestrictionUnit_bijective _ _
 
 end AlgebraicGeometry

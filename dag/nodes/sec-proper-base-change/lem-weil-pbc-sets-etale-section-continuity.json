@@ -25,85 +25,38 @@
  ],
  "proof": [
   {
-   "text": "First treat the case that $W_0$ is affine (the $X_i$ remain arbitrary quasi-compact and quasi-separated). The transition morphisms $f_{i'i}$, including $f_{i0}$, are affine by hypothesis, and the projections $f_i$, including $f_0$, are affine by [lem-weil-pbc-limit-affine-transition]; hence every application of the affine inverse-image comparison below has an affine morphism. The affine etale-site colimit theorem [lem-weil-pbc-affine-etale-site-colimit] supplies the cofiltered system of affine etale sites, its strictification $\\mathcal C_i$, and the colimit description of the affine etale site at the limit. Restrict the sheaves $F_i=(f_{i0}^{-1}G)|_{aff}$ and their unit-induced maps along the equivalences $e_i$ using [lem-weil-pbc-site-equivalence-sheaf-transport]. The comparison [lem-weil-pbc-sets-affine-etale-inverse-image-comparison] identifies these transported inverse images and units with the restrictions of the full-site inverse images, compatibly with the composition isomorphisms $c$ of [lem-weil-pbc-sets-etale-inverse-image-composition-units]. Since all transition maps in this system are isomorphisms satisfying the cocycle condition, [lem-weil-pbc-colimit-constant-connected-diagram] identifies $\\varinjlim_i g_i^{-1}F_i$ with $(f_0^{-1}G)|_{aff}$.",
+   "text": "Apply comparison coherence to obtain the identity, transition-composition and cone-leg equations. Define E with exactly the stage section sets as objects and exactly these comparisons as maps. The first two equations give its functor laws; the third makes the cone comparisons a natural transformation to the constant limit-section functor. Choose identity isomorphisms e.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
-    "lem-weil-pbc-site-equivalence-sheaf-transport",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-colimit-constant-connected-diagram"
+    "lem-weil-pbc-sets-section-comparison-laws"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem Tag 09YQ (theorem-colimit), proof, affine reduction via Lemma Tag 0EYL and the sets comparison inside the proof via Topologies Tag 04HR"
-   }
+   "elementary": false
   },
   {
-   "text": "For an affine etale object $W_i$ descended from $W_0$, apply [lem-weil-pbc-colimit-of-sites-sections] to the transported system from step 1. It gives a bijection from the filtered colimit of the stage sections to the section over the colimit object. Under the comparison of step 1, the component for $a:i'\\to i$ is obtained from the unit of $g_a^{-1}\\dashv g_{a*}$ by the unit clause of [lem-weil-pbc-sets-affine-etale-inverse-image-comparison], and then from clause (0) and clause (1) of [lem-weil-pbc-sets-etale-inverse-image-composition-units] together with the canonical iterated-fibre-product identification. Thus the component is exactly the transition map $\\rho_{i'i}$ in the statement.",
+   "text": "Every element of the Type colimit is represented by a stage section (Mathlib Limits.Types.jointly_surjective'). If two representatives have the same image, eventual equality supplies arrows to a common later stage on which their comparisons agree. Mathlib Limits.Types.colimit_sound' identifies the colimit representatives. Conversely a limit section lifts to a stage, and colimit.ι_desc_apply identifies its colimit representative's image with the given section. Thus the canonical colimit.desc is bijective.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites-sections",
-    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-site-equivalence-sheaf-transport"
+    "lem-weil-pbc-sets-section-eventual-equality",
+    "lem-weil-pbc-sets-section-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem Tag 09YQ (theorem-colimit), proof, application of Lemma Tag 09YN to an affine etale object"
-   }
+   "elementary": false
   },
   {
-   "text": "For general $X_i$ and $W_0$, choose a finite affine etale covering $\\{V_b\\to W_0\\}_{b\\in B}$ with quasi-compact pairwise fibre products by [lem-weil-pbc-etale-qcqs-cofinal-finite-coverings]. For every pair $b,b'$, choose a finite affine etale covering $\\{V_{bb'c}\\to V_b\\times_{W_0}V_{b'}\\}_c$ of the quasi-compact overlap. Base change along each affine $X_i\\to X_0$ gives affine objects $V_{b,i}$ and $V_{bb'c,i}$ which still form coverings at every stage and at the limit. By the sheaf condition [lem-weil-pbc-pretopology-sheaf-condition], sections over $W_i$ are the equalizer of $\\prod_bF_i(V_{b,i})\\rightrightarrows\\prod_{b,b',c}F_i(V_{bb'c,i})$; the same equalizer description holds for sections over $W$, using the cover $\\{V_b\\}$ and, for injectivity, the refinements $\\{V_{bb'c}\\}$. The affine comparison of steps 1--2 applies to every $V_b$ and $V_{bb'c}$, and the $\\rho$ maps commute with restrictions by clause (0) of [lem-weil-pbc-sets-etale-inverse-image-composition-units]. Finally [lem-weil-pbc-filtered-colimits-commute-finite-limits] commutes the filtered colimit with these finite products and equalizers, yielding the required bijection.",
+   "text": "For an arbitrary etale object V and sheaf F, take the inverse-image restriction isomorphism rho. Naturality at the diagonal moves rho through diagonal restriction. The unit equation identifies the resulting composite with restriction along diagonal followed by the first projection, which is the identity. The evaluated rho is an isomorphism, so the unit-diagonal section map is an isomorphism and therefore bijective. Apply this to every stage base change of W0.",
    "uses": [
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-    "lem-weil-pbc-pretopology-sheaf-condition",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-site-equivalence-sheaf-transport",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem Tag 09YQ (theorem-colimit), proof, finite-cover descent from the affine case; Sites Lemma Tag 0738 for finite-cover section equalizers"
-   }
-  },
-  {
-   "text": "The identity and composition laws for the maps $\\rho$ follow from the unit and associativity clauses of [lem-weil-pbc-sets-etale-inverse-image-composition-units] and the associativity of the canonical iterated-fibre-product identifications. Thus the maps form the asserted directed system, and the bijection of step 3 is the canonical map in the statement. For the etale projection $W_i\\to X_i$, [lem-weil-pbc-sets-etale-inverse-image-restriction] identifies inverse-image sections with ordinary sections on $W_i$, giving the final assertion.",
-   "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
     "lem-weil-pbc-sets-etale-inverse-image-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem Tag 09YQ and Lemma Tag 03S2, with the transition maps defined by the units and pullback composition"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-colimit-of-sites-sections",
-  "lem-weil-pbc-site-equivalence-sheaf-transport",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-  "lem-weil-pbc-pretopology-sheaf-condition",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-sets-section-comparison-laws",
+  "lem-weil-pbc-sets-section-eventual-equality",
+  "lem-weil-pbc-sets-section-lift",
   "lem-weil-pbc-sets-etale-inverse-image-restriction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Theorem Tag 09YQ (theorem-colimit), degree-zero section argument, with Tags 0EYL, 09YN and 0738"
+  "place": "Tag 09YQ, degree-zero section argument factored into coherence, lifting and eventual equality; Tag 03S2 for restriction. The categorical combination and diagonal calculation are Lean proofs by T1."
  },
  "mathlib_searches": [
   {
@@ -190,7 +143,6 @@
   "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity",
   "declaration": "AlgebraicGeometry.etaleSetSectionContinuity",
   "declarations": [
-   "AlgebraicGeometry.etaleSetSectionComparison",
    "AlgebraicGeometry.etaleSetRestrictionUnit",
    "AlgebraicGeometry.etaleSetSectionContinuity"
   ],
@@ -200,7 +152,7 @@
   "by": "F1",
   "date": "2026-10-11",
   "existing": false,
-  "note": "The comparison and restriction-unit definitions are the maps explicitly introduced by this node, using the dependency inverse-image functor and its chosen composition isomorphism. The section system is encoded by a functor with specified section-set identifications; its functor laws state the identity and composition laws. The canonical colimit.desc is bijective."
+  "note": "The unchanged section-comparison definition is relocated to Sheaf.AlgebraicGeometry.EtaleSetSectionComparison and recorded by def-weil-pbc-sets-section-comparison; this module publicly imports it. The main theorem's signature and the restriction-unit definition are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -239,5 +191,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fcc6f",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T053955-L-2646381",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, Lean declarations, DAG nodes, report, relocation record, and clean compilation match the stage-3 review requirements."
  }
 }

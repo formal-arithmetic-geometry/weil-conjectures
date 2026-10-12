@@ -1,0 +1,104 @@
+{
+ "id": "lem-weil-pbc-sets-section-comparison-laws",
+ "kind": "statement",
+ "title": "Coherence of canonical etale section comparisons",
+ "statement": "Let $I$ be a preordered set, $D:I^{\\mathrm{op}}\\to\\mathrm{Scheme}$ a diagram of schemes, $c$ any cone, $i_0\\in I$, $G$ a sheaf of sets at $i_0$, and $W_0$ etale over $D(i_0)$. For objects $j,k,l$ of $\\mathrm{Over}(i_0^{\\mathrm{op}})$ and arrows $a:k\\to j$, $b:l\\to k$, let $r_a$ be the canonical section comparison [def-weil-pbc-sets-section-comparison] for $D(a)$, and $q_j$ the comparison for the cone projection at $j$. Then $r_{1_j}=1$, $r_a r_b=r_{ba}$ (categorical order), and $r_a q_k=q_j$. No directedness, qcqs, affineness or limiting hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB and 03CC, units of composite inverse-image adjunctions; applied to the comparisons in Etale Cohomology Tag 09YQ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sets-section-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Expand the section comparison into unit, composition comparison, equality transport and restriction along pullback pasting. Unit naturality moves restrictions through units. The unit-compatible composition comparison is unique, and its associativity clause identifies the two routes for a triple composite. For an identity transition, compare with the identity-base-change adjunction; the unit equation and uniqueness make the composite act as the identity. Pullback pasting morphisms agree by their projections. For cone legs use the same composite calculation and cone naturality. This gives the identity, transition-composition and cone-leg equations, without a limit or qcqs assumptions.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 09YQ (theorem-colimit), degree zero for sheaves of sets; proof via Tags 0EYL, 04HR, 09YN and the finite affine-cover reduction for qcqs schemes; concrete section formulation and finite-cover argument written by T1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every section of an inverse image etale sheaf of sets over an inverse limit lifts to a finite stage; identity and composition of inverse-image unit comparisons",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict claimed; other search services and source grep used.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of an etale sheaf of sets on an inverse limit of qcqs schemes are the filtered colimit of stage sections; equality holds at a later stage",
+   "results": "Returned structure-sheaf limit results and sheaf section extensionality. Checked source: neither states the set-valued etale inverse-image comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg etaleSetSection|unitComparison.*(comp|id)|sections.*(lift|equal) lean/Sheaf lean/WeilConjectures Mathlib/AlgebraicGeometry/Sites; blueprint_refs.py search 09YQ and section continuity",
+   "results": "The assigned module defines the comparison and states the full continuity theorem; source SectionContinuity handles abelian sheaves only. No separate set-valued lifting, eventual-equality, or concrete comparison-coherence declaration was found.",
+   "date": "2026-10-12",
+   "verdict": "no separate match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "degree-zero continuity invocation: EtaleSetSectionComparisonLaws",
+   "via": [
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSectionComparisonLaws.lean",
+  "declaration": "AlgebraicGeometry.etaleSetSectionComparisonLaws",
+  "statement": "theorem etaleSetSectionComparisonLaws {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (i₀ : I) (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1))) (W₀ : (D.obj (op i₀)).Etale) : (∀ j : Over (op i₀), etaleSetSectionComparison (D.map (𝟙 j : j ⟶ j).left) (D.map j.hom) (D.map j.hom) ((D.map_comp (𝟙 j : j ⟶ j).left j.hom).symm.trans (congrArg (fun t : j.left ⟶ op i₀ ↦ D.map t) (𝟙 j : j ⟶ j).w)) G W₀ = 𝟙 _) ∧ (∀ (j k l : Over (op i₀)) (a : k ⟶ j) (b : l ⟶ k), (etaleSetSectionComparison (D.map a.left) (D.map j.hom) (D.map k.hom) ((D.map_comp a.left j.hom).symm.trans (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) a.w)) G W₀) ≫ (etaleSetSectionComparison (D.map b.left) (D.map k.hom) (D.map l.hom) ((D.map_comp b.left k.hom).symm.trans (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) b.w)) G W₀) = (etaleSetSectionComparison (D.map (b ≫ a).left) (D.map j.hom) (D.map l.hom) ((D.map_comp (b ≫ a).left j.hom).symm.trans (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) (b ≫ a).w)) G W₀)) ∧ (∀ (j k : Over (op i₀)) (a : k ⟶ j), (etaleSetSectionComparison (D.map a.left) (D.map j.hom) (D.map k.hom) ((D.map_comp a.left j.hom).symm.trans (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) a.w)) G W₀) ≫ (etaleSetSectionComparison (c.π.app k.left) (D.map k.hom) (c.π.app (op i₀)) (c.w k.hom) G W₀) = (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom) G W₀))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fcc6f",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T053955-L-2646381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fcc6f",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T053955-L-2646381",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, Lean declarations, DAG nodes, report, relocation record, and clean compilation match the stage-3 review requirements."
+ }
+}

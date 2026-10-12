@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-sets-section-eventual-equality",
+ "kind": "statement",
+ "title": "Eventual equality of etale inverse-image sections",
+ "statement": "Let $I$ be nonempty and directed, $D:I^{\\mathrm{op}}\\to\\mathrm{Scheme}$ a system of qcqs schemes with affine transition morphisms, and $c$ a limit cone [lem-weil-pbc-limit-affine-transition]. Choose $i_0\\in I$, a sheaf of sets $G$ on $D(i_0)$ and a quasi-compact quasi-separated etale object $W_0$ over $D(i_0)$. Let $j,k$ be objects of $\\mathrm{Over}(i_0^{\\mathrm{op}})$, and $s,t$ sections of the stage inverse images on the base changes of $W_0$. If their images under the canonical cone section comparisons [def-weil-pbc-sets-section-comparison] are equal, there are a common later object $l$ and arrows $a:l\\to j$, $b:l\\to k$ such that the transition comparisons map $s$ and $t$ to equal sections at $l$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 09YQ (theorem-colimit), degree zero for sheaves of sets; proof via Tags 0EYL, 04HR, 09YN and the finite affine-cover reduction for qcqs schemes"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sets-section-comparison",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof": [
+  {
+   "text": "Pass to the cofinal upper tail. Transition maps are affine by hypothesis and limit projections are affine by the limit-affine theorem (transport from its chosen limit to c). Use the affine-etale site colimit and restriction equivalences. The unit-compatible affine inverse-image comparison transports the sheaves and their transition isomorphisms to this site presentation. Composition identifies the inverse-image sheaves at the limit with a constant system, whose colimit is that inverse image by connectedness. The colimit-of-sites sections theorem therefore identifies the filtered colimit of affine stage sections with the limit sections, with the displayed unit/composition maps.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+    "lem-weil-pbc-colimit-of-sites-sections",
+    "lem-weil-pbc-site-equivalence-sheaf-transport",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-weil-pbc-sets-section-comparison-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Move the two original stages to a common stage using directedness. For an affine descended object, equality of limit sections becomes equality in the filtered colimit furnished by the affine comparison. Two representatives equal in a filtered colimit agree after two arrows to a common later stage. For a general qcqs etale object choose a finite affine cover, apply this to each restricted pair, then move all finitely many equalities to one common stage. Naturality of the comparisons commutes with restriction. Separatedness of the sheaf gives equality over the whole object. Coherence supplies arrows back to the original stages and their displayed comparisons. The empty-object case uses the empty covering and uniqueness.",
+   "uses": [
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-weil-pbc-pretopology-sheaf-condition",
+    "lem-weil-pbc-sets-section-comparison-laws"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-colimit-of-sites-sections",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-pretopology-sheaf-condition",
+  "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+  "lem-weil-pbc-sets-section-comparison-laws",
+  "lem-weil-pbc-site-equivalence-sheaf-transport"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 09YQ (theorem-colimit), degree zero for sheaves of sets; proof via Tags 0EYL, 04HR, 09YN and the finite affine-cover reduction for qcqs schemes; concrete section formulation and finite-cover argument written by T1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every section of an inverse image etale sheaf of sets over an inverse limit lifts to a finite stage; identity and composition of inverse-image unit comparisons",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict claimed; other search services and source grep used.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of an etale sheaf of sets on an inverse limit of qcqs schemes are the filtered colimit of stage sections; equality holds at a later stage",
+   "results": "Returned structure-sheaf limit results and sheaf section extensionality. Checked source: neither states the set-valued etale inverse-image comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg etaleSetSection|unitComparison.*(comp|id)|sections.*(lift|equal) lean/Sheaf lean/WeilConjectures Mathlib/AlgebraicGeometry/Sites; blueprint_refs.py search 09YQ and section continuity",
+   "results": "The assigned module defines the comparison and states the full continuity theorem; source SectionContinuity handles abelian sheaves only. No separate set-valued lifting, eventual-equality, or concrete comparison-coherence declaration was found.",
+   "date": "2026-10-12",
+   "verdict": "no separate match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "degree-zero continuity invocation: EtaleSetSectionEventualEquality",
+   "via": [
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSectionEventualEquality.lean",
+  "declaration": "AlgebraicGeometry.etaleSetSectionEventualEquality",
+  "statement": "theorem etaleSetSectionEventualEquality {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1))) (W₀ : (D.obj (op i₀)).Etale) [QuasiCompact W₀.hom] [QuasiSeparated W₀.hom] (j k : Over (op i₀)) (s : ((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj W₀))) (t : ((Scheme.etaleSetPullback (D.map k.hom)).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map k.hom)).obj W₀))) : (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom) G W₀) s = (etaleSetSectionComparison (c.π.app k.left) (D.map k.hom) (c.π.app (op i₀)) (c.w k.hom) G W₀) t → ∃ (l : Over (op i₀)) (a : l ⟶ j) (b : l ⟶ k), (etaleSetSectionComparison (D.map a.left) (D.map j.hom) (D.map l.hom) ((D.map_comp a.left j.hom).symm.trans (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) a.w)) G W₀) s = (etaleSetSectionComparison (D.map b.left) (D.map k.hom) (D.map l.hom) ((D.map_comp b.left k.hom).symm.trans (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) b.w)) G W₀) t",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fcc6f",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T053955-L-2646381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fcc6f",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T053955-L-2646381",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, Lean declarations, DAG nodes, report, relocation record, and clean compilation match the stage-3 review requirements."
+ }
+}
