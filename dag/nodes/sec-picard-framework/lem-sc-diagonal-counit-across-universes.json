@@ -18,20 +18,42 @@
  ],
  "proof": [
   {
-   "text": "Use base change of properness and finite type over a Noetherian scheme to obtain Noetherian P. The Noetherian direct-image theorem gives preservation on the standard localizations. Derived pullback preserves quasi-coherent cohomology; the same is true after the explicit localization equivalences, since homology functors commute with them by uniqueness of their factorization through Qh.",
+   "text": "Compare each specified localization with its standard localization using schemeDerivedStandardEquivalence. Precompose with Qh and use Localization.compUniqFunctor and homologyFunctorFactorsh to identify the homology functors. Full faithfulness of precomposition with Qh lifts the identification. Therefore the equivalence preserves and reflects quasi-coherent cohomology, and congrFullSubcategory restricts it to D_QCoh. The same comparison evaluated on the single homotopy complex identifies degree-zero single objects. Quasi-coherent singles are proved from their degree-zero homology and the vanishing of all other homology.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-proper-base-change",
-    "lem-pc-noetherian-derived-direct-image-right-adjoint",
-    "lem-pc-derived-pullback-tensor-qcoh",
+    "def-pc-derived-pullback-across-universes",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any scheme morphism, use derivedModuleDirectImageFactorization in both localization choices. Both factorizations use the same functorial K-injective resolution and the same termwise module direct image. The localization comparison commutes with Q, obtained by composing quotientCompQhIso with compUniqFunctor. Consequently the resolved functors commute with the target comparison. Full faithfulness of precomposition with Q lifts these isomorphisms to a comparison of derived direct images. Apply this to f and its diagonal.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
     "def-pc-derived-pullback-across-universes"
    ],
    "elementary": false
   },
   {
-   "text": "The comparison with Qh identifies single objects under the localization equivalences. Uniqueness of right derived functors identifies the transported Rf* and RDelta* with the standard ones. Restrict the equivalences to quasi-coherent full subcategories using the homology comparison. Conjugate adj and adjC by these equivalences and transfer adj along comparison. Apply diagonal_counit_identity in the standard universe at the standard structure single objects. Map hO through a, transport the counit isomorphism back and invert it. The object transported from the standard pullback is exactly the explicit mixed-universe pullback, by its definition.",
+   "text": "The first projection of P=X times_S X is proper by base change. LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace make P Noetherian. In the standard localization obtain quasi-coherent preservation witnesses for f and the diagonal from noetherian_schemeDerivedDirectImage_has_rightAdjoint. Obtain first-projection pullback preservation from derivedPullback_tensor_preserve_QCoh.",
    "uses": [
-    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the given comparison R to the standard D_QCoh subcategories using full faithfulness of their inclusions and the direct-image comparisons. Conjugate the given adjunctions by the restricted equivalences, and transfer their left adjoints along these lifted isomorphisms. Apply diagonal_counit_identity to the canonical standard structure single objects, the transported a and c, and these transported adjunctions.",
+   "uses": [
+    "def-pc-derived-category",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map hO through the localization equivalence and lift it to D_QCoh. The unit of the restricted equivalence then identifies transported a applied to the standard structure object with the comparison of a(O). Construct hK as the property of the inverse-equivalence image of the standard quasi-coherent pullback object; its ambient object is definitionally derivedPullbackAcrossUniverses applied to a(O). The counit identifies the comparison of K with the standard pullback. Apply transported c to these isomorphisms and compose with the inverse of the standard diagonal counit identity. Full faithfulness of the ambient equivalence transports the resulting isomorphism back, using standard_single to identify its target with the specified structure single on X.",
+   "uses": [
     "def-pc-derived-pullback-across-universes",
     "def-pc-derived-category"
    ],
@@ -41,6 +63,7 @@
  "proof_deps": [
   "def-pc-derived-category",
   "def-pc-derived-pullback-across-universes",
+  "def-pc-ringed-spaces-derived-direct-image",
   "lem-pc-derived-pullback-tensor-qcoh",
   "lem-pc-noetherian-derived-direct-image-right-adjoint",
   "lem-sc-smooth-proper-diagonal-pushforward-structure",
@@ -48,9 +71,9 @@
   "lem-weil-pbc-proper-base-change"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tags 0E2Q and 0A9U, and Tag 05RU localization uniqueness; source text read online because local Stacks source is absent. Universe-transport details written by Q2."
+  "by": "agent Q2",
+  "document": "literature/stacks-project/duality.tex; literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 0E2Q, 079V, 05RU (read at https://stacks.math.columbia.edu/tag/0E2Q, https://stacks.math.columbia.edu/tag/079V, https://stacks.math.columbia.edu/tag/05RU because the local source files are absent). Localization transport proved in Lean using Mathlib uniqueness and the existing K-injective factorization, rather than a separate Kan-extension transport lemma."
  },
  "mathlib_searches": [
   {
@@ -123,11 +146,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-327c5",
   "group": "Q2",
   "result": "pass",
-  "landing": "20261012T110315-L-620416",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T135304-L-1686761",
+  "kind": "proof",
+  "note": "independent Codex review: Unchanged theorem signature and supplied adjoints match the node; proof dependencies match the Lean construction; delivered module and sole direct importer PerfectDiagonalDualizingEvaluation compile cleanly; axioms match existing upstream obligations."
  }
 }
