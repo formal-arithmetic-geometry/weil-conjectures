@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-cocycle-monomial-coefficients",
+ "kind": "statement",
+ "title": "Regular monomial coefficients for a continuous Galois cocycle",
+ "statement": "For a field K and a prescribed continuous homogeneous degree-two Galois units cocycle z [def-sc-galois-units-cohomology], there are a nonzero n, a permutation homomorphism p:G to Perm(Fin n), and unit coefficients w:G times Fin n to Ksep units. The map g to (p(g),w(g)) is locally constant, and w(g,p(h)j) g(w(h,j)) = c(g,h) w(gh,j), with c the prescribed evaluation [def-sc-brauer-scalar-defect].",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Theorem 03R7 surjectivity and Section 0DVG; explicit regular coefficients and finite Galois descent expanded from the parent construction"
+ },
+ "stmt_deps": [
+  "def-sc-brauer-scalar-defect",
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Obtain n, the transported finite quotient group, q,d, local constancy, factorization, and the twisted equation from [lem-sc-finite-galois-cocycle-data].",
+   "uses": [
+    "lem-sc-finite-galois-cocycle-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the regular permutation homomorphism explicitly using MulAction.toPermHom with the quotient group structure and its own regular action, then compose with q. Define w(g,j)=d(q(g),j). The paired function (p,w) is a postcomposition of q, hence locally constant.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On each j, the regular action sends j to q(h)j for the transported group multiplication. Substitute this into the finite twisted equation, and substitute c(g,h)=d(q(g),q(h)). This proves the coefficient identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-galois-cocycle-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Theorem 03R7 surjectivity and Section 0DVG; explicit regular coefficients and finite Galois descent expanded from the parent construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally constant semilinear Galois action on a matrix algebra descends to a central simple algebra; a continuous cocycle factors through a finite quotient",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous two cocycle of a profinite group with discrete coefficients factors through a finite quotient; semilinear matrix algebra descent",
+   "results": "Discrete group cohomology H2 induction and Hilbert90 for degree one; FixedPoints.toAlgHomEquiv and IsGaloisGroup concern fields, not semilinear matrix algebra descent. No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "crossed.product|semilinear.*descent|monomial.*cocycle; finite cocycle quotient; blueprint search finite Galois cocycle and Galois descent",
+   "results": "No implementation of these constructions in Mathlib or WeilConjectures. ContCohomology.LowDegree only covers degree zero. Existing Sheaf realization modules depend on the present item and cannot be used circularly. No matching blueprint node. Matrix.GeneralLinearGroup and MulAction.toPermHom provide the elementary construction tools.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyConstant, MonoidHom",
+   "results": "Second reading: 0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.CrossedProductForCocycle",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-scalar-defect-surjective-crossed-product-realization",
+   "place": "regular coefficient construction, original step 2",
+   "via": [
+    "new-crossed-product-for-cocycle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.CocycleMonomialCoefficients",
+  "file": "lean/Sheaf/FieldTheory/CocycleMonomialCoefficients.lean",
+  "declaration": "Field.exists_cocycle_monomial_coefficients",
+  "statement": "theorem exists_cocycle_monomial_coefficients (K : Type u) [Field K] (z : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2) : ∃ (n : ℕ) (_ : n ≠ 0) (p : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →* Equiv.Perm (Fin n)) (w : (SeparableClosure K ≃ₐ[K] SeparableClosure K) → Fin n → (SeparableClosure K)ˣ), IsLocallyConstant (fun g ↦ (p g, w g)) ∧ ∀ g h j, w g (p h j) * Units.map g.toRingHom (w h j) = galoisUnitsCocycleValue K z g h * w (g * h) j",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T184352-L-4022983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T184352-L-4022983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

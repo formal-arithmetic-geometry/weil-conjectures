@@ -13,31 +13,38 @@
  ],
  "proof": [
   {
-   "text": "Uncurry the homogeneous continuous cycle on the profinite Galois group and evaluate at (1,g,gh). Equivariance and the cycle equation give c(g,h)c(gh,j)=g(c(h,j))c(g,hj). Compactness and discreteness give finite image and a finite clopen coset refinement. Choose an open normal N on whose cosets c is constant, shrinking N to fix its values. Put L=(Ksep)^N and Gamma=Gal(L/K). Then c factors through Gamma squared with values in L-units.",
+   "text": "Use [lem-sc-cocycle-monomial-coefficients] to obtain n nonzero, a permutation homomorphism p, and unit weights w with a locally constant paired map and the prescribed twisted coefficient identity. Its proof constructs the regular representation from finite quotient data.",
+   "uses": [
+    "lem-sc-cocycle-monomial-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct b(g) as the monomial matrix with (i,j) entry w(g,j) when i=p(g)j and zero otherwise. Its inverse has (i,j) entry w(g,i) inverse when p(g)i=j and zero otherwise. In each inverse product, the finite sum has a single possible nonzero summand, which is a unit times its inverse. Local constancy follows by postcomposing the paired map. Compute b(g) g(b(h)) columnwise: the only nonzero summand is at p(h)j and its coefficient is w(g,p(h)j)g(w(h,j)). The coefficient identity and p(gh)=p(g)p(h) give the scalar-defect equation.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Construct B(g) on the Gamma-indexed L-basis by B(g)e_j=c(g,j)e_(gj). These are invertible monomial matrices. Evaluating products on a basis vector gives B(g)g(B(h))=c(g,h)B(gh). The cocycle identity also makes B(1)=c(1,1)I, so conjugation by B followed by entrywise Galois action is a genuine semilinear matrix-algebra action T.",
+   "text": "At g=h=1, the defect equation gives b(1)b(1)=scalar(c(1,1))b(1); cancel b(1) to obtain a scalar identity matrix. Thus conjugation is the identity at 1. Entrywise mapping preserves matrix products. For general g,h, compose conjugations, combine b(g)g(b(h)) and its inverse, substitute the scalar defect, and commute and cancel the scalar. This proves T_g T_h=T_(gh) by a real matrix calculation, without normalization.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Construct A as the invariant K-subalgebra. Galois descent follows by averaging: sums over g of g(a)T_g(v) are invariant. An L-linear functional killing every such sum kills every v by independence of distinct field automorphisms, so invariant vectors span the matrix algebra. An invariant L-basis is a K-basis of A, since invariant linear combinations have fixed coefficients. Hence L tensor_K A is the full matrix algebra. Nonzero ideals extend to the whole matrix algebra, and dimension forces simplicity of A. Central elements extend to scalars, and invariance forces these scalars into K. This proves A is finite dimensional central simple.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Extend the splitting to Ksep, choose Fin n indexing of Gamma with n=card Gamma>0, and inflate B to the absolute Galois group. Its finite quotient dependence proves local constancy. The monomial identity gives the exact prescribed defect, even for unnormalized cocycles. T-invariance gives g(e(1 tensor a))=B(g)^(-1)e(1 tensor a)B(g), with precisely the required orientation.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply [lem-sc-projective-matrix-descent] to the explicitly constructed b and the proved local constancy and action laws. It supplies A and the splitting e with the required descent equation for this same b. Combine that equation with the already proved scalar defect and nonzero n to give the original witnesses.",
+   "uses": [
+    "lem-sc-projective-matrix-descent"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-cocycle-monomial-coefficients",
+  "lem-sc-projective-matrix-descent"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Etale Cohomology",
-  "place": "Theorem 03R7 surjectivity sketch and Section 0DVG; explicit monomial-matrix construction and descent expanded by the second reader"
+  "place": "Theorem 03R7 and Section 0DVG; regular monomial matrices, invertibility, prescribed scalar defect, and cancellation to a genuine action proved in Lean by V1; finite quotient and invariant-algebra descent separated"
  },
  "mathlib_searches": [
   {
@@ -111,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-b0050",
-  "group": "W2",
+  "reviewer": "COMPILER",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T150959-L-2232820",
+  "landing": "20261012T184352-L-4022983",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, node metadata, report, and direct importer matched against the packet and repository; all compiled successfully."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
