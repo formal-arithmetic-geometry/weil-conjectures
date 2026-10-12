@@ -21,21 +21,58 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Construct the inverse-image sheaf and its counit; finite stalk formula makes the counit stalkwise surjective.",
-   "uses": [],
+   "text": "Set G = f_*F, Fmid = f⁻¹G and beta equal to the adjunction counit. Convert G to local-section torsion, use Etale.isTorsion_upperStar, and convert back to IsTorsionAbelianSheaf. Apply isConstructibleEtaleSheafOfSets_upperStar to the underlying set sheaf; this preserves actual finite stalks, not just finite generation.",
+   "uses": [
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "lem-weil-pbc-inverse-image-torsion",
+    "lem-weil-pbc-constructible-etale-set-pullback"
+   ],
    "elementary": false
   },
   {
-   "text": "Use exactness and torsion characterizations to obtain the kernel short exact sequence and constructibility of the middle term.",
-   "uses": [],
+   "text": "For every algebraically closed geometric point s upstairs, Pi.lift_π identifies stalk restriction with the finite-stalk isomorphism followed by projection onto the s factor. This is epi. The counit-stalk restriction equation then proves the counit stalk map epi by cancelling its preceding inverse-image stalk isomorphism.",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-weil-pbc-finite-stalk-formula-restriction",
+    "lem-weil-pbc-counit-stalk-germ-restriction"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Use the conservative family of universe-lifted algebraic-closure points to reflect epimorphisms. Naturality of uliftSheafFiberIso transports the previous stalk epi to each lifted point, so beta is epi.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let K = kernel beta. Stalk preservation of finite limits makes the kernel inclusion injective. For an element x of its stalk, torsion of the stalk of Fmid gives a positive n killing its image; injectivity and preservation of nsmul and zero show n kills x. Apply the torsion characterization to K.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use ShortComplex.exact_kernel beta together with the canonical mono kernel inclusion and the epi beta to construct ShortComplex.ShortExact.mk'. Package Fmid, K, their torsion proofs, middle-term constructibility and the kernel arrows as the required existential witnesses.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-etale-set-pullback",
+  "lem-weil-pbc-counit-stalk-germ-restriction",
+  "lem-weil-pbc-finite-stalk-formula-restriction",
+  "lem-weil-pbc-inverse-image-torsion",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "The composition is not in Stacks (the converse of Lemma 095R, lemma-finite-pushforward-constructible); it combines Proposition 03QP (1) (finite stalk formula), Lemma 095G (pullback of constructible), Theorem 03PU (exactness on stalks) and Proposition 09BH (2) (quotients of constructible sheaves on Noetherian schemes); the identification of the counit on stalks is written out by the agent."
+  "place": "Composition of Tags 03QP (1), 095G, 03PU and 09BH (2); N2 formalization using the finite counit stalk formula, conservative lifted geometric points, finite-stalk set constructibility pullback and the kernel sequence."
  },
  "mathlib_searches": [
   {
@@ -120,9 +157,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T044749-L-2037705",
+  "landing": "20261012T063516-L-3158083",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

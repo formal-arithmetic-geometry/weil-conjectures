@@ -27,123 +27,28 @@
  ],
  "proof": [
   {
-   "text": "*Notation; $X$ and $Y$ are Noetherian.* Write $G=f_*F$ [def-weil-pbc-direct-image], a torsion sheaf on $Y_{\\Et}$ by hypothesis, and $F'=f^{-1}G=f^{-1}f_*F$ [def-weil-pbc-inverse-image], with counit $\\varepsilon=\\varepsilon_{f,F}:F'\\to F$ of the adjunction $f^{-1}\\dashv f_*$. $X$ and $Y$ are of finite type over the field $k$, hence Noetherian schemes, and their underlying spaces are Noetherian topological spaces; so every locally closed subset of $X$ is constructible [def-weil-constructible-subset] (Stacks Topology 005L, recorded there). Since $X$ is separated of finite type over the algebraically closed $k$ with $\\dim X\\le1$, a torsion abelian sheaf on $X_{\\Et}$ makes a curve coefficient pair with $X$ [def-weil-pbc-curve-setting].",
+   "text": "Apply CurveCoefficientPair.finite_pushforward_data to obtain Fmid and K, their torsion proofs, constructibility of Fmid and a short exact sequence K → Fmid → P.F.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image",
-    "def-weil-constructible-subset",
-    "def-weil-pbc-curve-setting"
+    "lem-weil-pbc-finite-pushforward-data"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Section 'Constructible sheaves on Noetherian schemes' (section-noetherian-constructible), first paragraph: on a Noetherian scheme locally closed strata are automatically constructible."
-   }
+   "elementary": false
   },
   {
-   "text": "*The counit is surjective on every geometric stalk.* Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point [def-weil-geometric-point] and $\\bar y=f\\circ\\bar x$. By [lem-weil-pbc-counit-stalk-germ-restriction], $\\varepsilon_{\\bar x}=r_{f,\\bar x,F}\\circ c_{f,\\bar x,G}$, where $c_{f,\\bar x,G}:F'_{\\bar x}\\to G_{\\bar y}$ is the isomorphism of [lem-weil-pbc-inverse-image-stalk-germ] and $r_{f,\\bar x,F}:G_{\\bar y}=(f_*F)_{\\bar y}\\to F_{\\bar x}$ is the restriction of germs. As $f$ is finite, $\\bar x$ belongs to the finite set $P(\\bar y)$ of geometric points of $X$ over $\\bar y$ with field $\\Omega$, and by [lem-weil-pbc-finite-stalk-formula-restriction] the map $(r_{f,\\bar x',F})_{\\bar x'\\in P(\\bar y)}:(f_*F)_{\\bar y}\\to\\prod_{\\bar x'\\in P(\\bar y)}F_{\\bar x'}$ is an isomorphism (the finite stalk formula [lemma-weil-pbc-finite-stalk-formula] with its components named). So $r_{f,\\bar x,F}$ is this isomorphism followed by the projection onto the factor $\\bar x$, which is surjective; composed with the isomorphism $c_{f,\\bar x,G}$, $\\varepsilon_{\\bar x}$ is surjective.",
+   "text": "Form the curve coefficient pair Q on the same curve with sheaf Fmid. Apply CurveCoefficientPair.constructible_sub_quotient Q to this short exact sequence and take its quotient clause. Definitionally the resulting quotient pair is P, so P.IsConstructible follows.",
    "uses": [
-    "def-weil-geometric-point",
-    "lem-weil-pbc-counit-stalk-germ-restriction",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-finite-stalk-formula-restriction",
-    "lemma-weil-pbc-finite-stalk-formula"
+    "lem-weil-pbc-curve-constructible-sub-quotient"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Proposition 03QP (proposition-finite-higher-direct-image-zero) (1) and its proof, with Lemma 03Q1 (lemma-stalk-pullback); the identification of the counit on stalks with the projection is the agent's (cf. the proof of Lemma 0959, lemma-finite-pushforward-commutes-with-base-change, which computes a pullback map on stalks the same way)."
-   }
-  },
-  {
-   "text": "*The counit is an epimorphism.* Let $Q=\\operatorname{Coker}\\varepsilon$ in $\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. For every point $x\\in X$ choose a geometric point $\\bar x$ over it (Spec of an algebraic closure of $\\kappa(x)$ [def-weil-geometric-point]); these geometric points cover $X$. Stalk functors are exact [prop-weil-pbc-geometric-stalks-exact], so $Q_{\\bar x}=\\operatorname{Coker}(\\varepsilon_{\\bar x})=0$ by step 2. Hence the morphism $Q\\to0$ is injective on the stalks of a covering family of geometric points, so it is a monomorphism [lem-weil-pbc-geometric-stalks-detect-mono], i.e. $Q=0$; in the abelian category $\\Ab(X_{\\Et})$ a morphism with zero cokernel is an epimorphism. With $K=\\operatorname{Ker}\\varepsilon\\subseteq F'$ and $\\kappa:K\\to F'$ the inclusion, $0\\to K\\xrightarrow{\\kappa}F'\\xrightarrow{\\varepsilon}F\\to0$ is a short exact sequence in $\\Ab(X_{\\Et})$.",
-   "uses": [
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-geometric-point",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-weil-pbc-geometric-stalks-detect-mono"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem 03PU (theorem-exactness-stalks): exactness is checked on stalks at geometric points; here via the covering-family form of the reviewed sibling lem-weil-pbc-curve-constructible-sub-quotient, step 1(d)."
-   }
-  },
-  {
-   "text": "*$F'=f^{-1}f_*F$ is constructible (Stacks 095G for abelian sheaves).* By [def-weil-pbc-constructible-torsion] for the curve coefficient pair $(Y,G)$ there are a finite partition $Y=\\coprod_{i=1}^rY_i$ into locally closed constructible subsets and immersions $u_i:Z_i\\to Y$ with image $Y_i$ such that $u_i^{-1}G$ [def-weil-pbc-inverse-image] is locally constant [def-constructible-locally-constant] with finite geometric stalks. Let $Z_i'=Z_i\\times_YX$ with projections $u_i':Z_i'\\to X$ and $f_i:Z_i'\\to Z_i$, so $f\\circ u_i'=u_i\\circ f_i$. (a) *The strata.* By [lemma-constructible-pullback-stratification] the $u_i'$ are immersions forming a stratification of $X$ [def-constructible-stratification] with strata $X_i=f^{-1}(Y_i)$: pairwise disjoint locally closed subsets covering $X$. Each $X_i$ is constructible, $X$ being Noetherian (step 1). So $(u_i':Z_i'\\to X)_i$ is a finite partition of $X$ into locally closed constructible subschemes. (b) *Local constancy.* By [lem-weil-pbc-inverse-image-composition] (2), applied to $(f,u_i')$ and to $(u_i,f_i)$, there are isomorphisms $u_i'^{-1}F'=u_i'^{-1}f^{-1}G\\cong(f\\circ u_i')^{-1}G=(u_i\\circ f_i)^{-1}G\\cong f_i^{-1}(u_i^{-1}G)$. The sheaf $f_i^{-1}(u_i^{-1}G)$ is locally constant by [lemma-constructible-pullback-locally-constant] (coefficients: abelian groups), hence so is $u_i'^{-1}F'$ by [lemma-constructible-iso-invariance]. (c) *Finite stalks.* For a geometric point $\\bar z$ of $Z_i'$, $(u_i'^{-1}F')_{\\bar z}\\cong(f_i^{-1}u_i^{-1}G)_{\\bar z}\\cong(u_i^{-1}G)_{f_i\\circ\\bar z}$ [lemma-openclosed-stalk-upperstar], a stalk of $u_i^{-1}G$ at the geometric point $f_i\\circ\\bar z$ of $Z_i$ (same algebraically closed field), which is finite. (d) $F'$ is torsion: for every geometric point $\\bar x$ of $X$, $F'_{\\bar x}\\cong G_{f\\circ\\bar x}$ [lemma-openclosed-stalk-upperstar] is a torsion group since $G$ is torsion ((1)$\\Rightarrow$(3) of [lem-weil-pbc-torsion-sheaf-characterizations]), so $F'$ is torsion by (3)$\\Rightarrow$(1),(2) there, and $(X,F')$ is a curve coefficient pair [def-weil-pbc-curve-setting]. By (a)-(c), $F'$ is constructible in the sense of [def-weil-pbc-constructible-torsion].",
-   "uses": [
-    "def-weil-pbc-constructible-torsion",
-    "def-weil-pbc-inverse-image",
-    "def-constructible-locally-constant",
-    "lemma-constructible-pullback-stratification",
-    "def-constructible-stratification",
-    "lem-weil-pbc-inverse-image-composition",
-    "lemma-constructible-pullback-locally-constant",
-    "lemma-constructible-iso-invariance",
-    "lemma-openclosed-stalk-upperstar",
-    "lem-weil-pbc-torsion-sheaf-characterizations",
-    "def-weil-pbc-curve-setting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 095G (lemma-pullback-constructible) and its proof: 'we just pull back the partition of Y adapted to F and use Lemma 095A (lemma-pullback-locally-constant)'; the reduction to affines there (Lemmas 09BE, 095E) is not needed for the global partition form on the Noetherian X."
-   }
-  },
-  {
-   "text": "*$K$ is torsion.* $\\kappa$ is a monomorphism, so for every geometric point $\\bar x$ of $X$ the map $\\kappa_{\\bar x}:K_{\\bar x}\\to F'_{\\bar x}$ is injective [prop-weil-pbc-geometric-stalks-exact]; $F'_{\\bar x}$ is torsion (step 4 (d)), hence so is its subgroup $K_{\\bar x}$, and $K$ is torsion by (3)$\\Rightarrow$(1),(2) of [lem-weil-pbc-torsion-sheaf-characterizations]. So $(X,K)$, $(X,F')$, $(X,F)$ are curve coefficient pairs [def-weil-pbc-curve-setting] ($F$ is torsion by hypothesis).",
-   "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-weil-pbc-torsion-sheaf-characterizations",
-    "def-weil-pbc-curve-setting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Section 0DDB (section-torsion, 'Torsion sheaves'): a subsheaf of a torsion sheaf is torsion; written out here (agent)."
-   }
-  },
-  {
-   "text": "*Conclusion.* Apply [lem-weil-pbc-curve-constructible-sub-quotient] on $C=X$ to the short exact sequence $0\\to K\\to F'\\to F\\to0$ of step 3, whose three terms are torsion (step 5) and whose middle term $F'$ is constructible in the sense of [def-weil-pbc-constructible-torsion] (step 4): the quotient $F$ is constructible in the same sense.",
-   "uses": [
-    "lem-weil-pbc-curve-constructible-sub-quotient",
-    "def-weil-pbc-constructible-torsion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Proposition 09BH (proposition-constructible-over-noetherian) (2): a quotient of a constructible abelian sheaf on a Noetherian scheme is constructible."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "def-weil-constructible-subset",
-  "def-weil-pbc-curve-setting",
-  "def-weil-geometric-point",
-  "lem-weil-pbc-counit-stalk-germ-restriction",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-finite-stalk-formula-restriction",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-weil-pbc-geometric-stalks-detect-mono",
-  "def-weil-pbc-constructible-torsion",
-  "def-constructible-locally-constant",
-  "lemma-constructible-pullback-stratification",
-  "def-constructible-stratification",
-  "lem-weil-pbc-inverse-image-composition",
-  "lemma-constructible-pullback-locally-constant",
-  "lemma-constructible-iso-invariance",
-  "lemma-openclosed-stalk-upperstar",
-  "lem-weil-pbc-torsion-sheaf-characterizations",
-  "lem-weil-pbc-curve-constructible-sub-quotient"
+  "lem-weil-pbc-curve-constructible-sub-quotient",
+  "lem-weil-pbc-finite-pushforward-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "The composition is not in Stacks (the converse of Lemma 095R, lemma-finite-pushforward-constructible); it combines Proposition 03QP (1) (finite stalk formula), Lemma 095G (pullback of constructible), Theorem 03PU (exactness on stalks) and Proposition 09BH (2) (quotients of constructible sheaves on Noetherian schemes); the identification of the counit on stalks is written out by the agent."
+  "place": "Composition of Tags 03QP (1), 095G, 03PU and 09BH (2); N2 formalization using the finite counit stalk formula, conservative lifted geometric points, finite-stalk set constructibility pullback and the kernel sequence."
  },
  "mathlib_searches": [
   {
@@ -231,16 +136,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T044749-L-2037705",
+  "landing": "20261012T063516-L-3158083",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.CurveCoefficientPair.isConstructible_of_finite_pushforward"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.CurveCoefficientPair.finite_pushforward_data"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
