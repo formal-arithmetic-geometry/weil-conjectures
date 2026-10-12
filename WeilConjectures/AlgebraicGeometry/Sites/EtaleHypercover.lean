@@ -229,7 +229,8 @@ theorem exists_cohomologyClass_eq_of_isQcqsHypercover [CompactSpace X] [QuasiSep
     (x : Ext (SemiSimplicialObject.constSheaf X.smallEtaleTopology Λ) F q) :
     ∃ (U : SemiSimplicialObject X.Etale) (hU : IsQcqsHypercover U) (z : F.obj.obj (op (U.obj q)))
       (hz : U.IsCocycle F q z), hU.isHypercover.cohomologyClass F q z hz = x :=
-  sorry
+  SemiSimplicialObject.exists_cohomologyClass_eq IsQcqsHypercover (fun _ hU ↦ hU.isHypercover)
+    exists_isQcqsHypercover (fun _ hU p _ _ φ _ w ↦ hU.exists_refinement_lift Λ p φ w) F q x
 
 /-- **A hypercover cocycle with vanishing class is a coboundary after refinement** within qcqs
 hypercovers. (blueprint `thm-weil-pbc-hypercover-cohomology`) -/
@@ -239,7 +240,9 @@ theorem exists_isCoboundary_of_isQcqsHypercover [CompactSpace X] [QuasiSeparated
     (hz : U.IsCocycle F q z) (h : hU.isHypercover.cohomologyClass F q z hz = 0) :
     ∃ (V : SemiSimplicialObject X.Etale) (_ : IsQcqsHypercover V) (f : V ⟶ U),
       V.IsCoboundary F q ((F.obj.map (f.app q).op).hom z) :=
-  sorry
+  SemiSimplicialObject.exists_isCoboundary_of_cohomologyClass_eq_zero IsQcqsHypercover
+    (fun _ hU ↦ hU.isHypercover) (fun _ hU p _ _ φ _ w ↦ hU.exists_refinement_lift Λ p φ w)
+    F q U hU z hz h
 
 section BaseChange
 
