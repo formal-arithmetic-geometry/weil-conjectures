@@ -12,16 +12,43 @@
  },
  "proof": [
   {
-   "text": "Write the affine neighbourhood A as Spec R and the point as a prime p.\nThe principal opens D(f), f outside p, form a directed system with coordinate-ring\ncolimit R_p. Restrict F to the small etale site of A. Apply degree-zero continuity\nin Tag 03Q6 to the identity of A and the system R_f: this identity is quasi-compact\nand quasi-separated. Restriction along an open immersion identifies sections of\nthe inverse image with F evaluated on that open. The continuity comparison sends\nour section to its pullback on Spec R_p. Since this pullback is zero, the section\nis zero at some principal-open stage. That principal open contains x and is the\nrequired smaller neighbourhood. The identification Spec R_p = Spec(O_X,x) respects\nthe maps into A and X. For the arbitrary supplied left adjoint H, uniqueness of\nleft adjoints gives an isomorphism to the usual inverse image commuting with units;\ntherefore vanishing under the displayed cocone is precisely the vanishing used by\ncontinuity. The zero section itself needs no shrinking, and an empty affine open\ncannot be a neighbourhood of x.",
-   "uses": [],
+   "text": "Let N be the full subcategory of open neighbourhoods of x whose underlying opens are affine. Every neighbourhood contains an affine neighbourhood, so the fully faithful inclusion j:N -> OpenNhds(x) has a smaller object over every neighbourhood. The Mathlib cofilteredness criterion gives IsCofiltered N. Restrict the supplied functor i along j to obtain D:N -> X.Etale.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+   ],
    "elementary": false
+  },
+  {
+   "text": "The equality i followed by forget = X.restrictFunctor gives over-X isomorphisms from the objects D(U) to the canonical open subschemes. These isomorphisms show each D(U) is affine and its structural map is an open immersion. The canonical LocalStalkSections.lift maps form a cone c with point Spec O_X,x, by lift_naturality. Compose its projections with the over-X isomorphisms and cancel the open inclusions to identify them with fromSpecStalkOfMem. Transport the unique-factorization property of fromSpecStalk_limit_affine_neighbourhoods through these isomorphisms to prove IsLimit c.",
+   "uses": [
+    "new-local-stalk-sections-comparison-map",
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the given LocalStalkSections.cocone by j.op. Its legs are definitionally the adjunction-unit maps followed by the terminal-to-base-change sections in affineOpenSections_cocone_isColimit. Apply that continuity theorem to D, c, X.fromSpecStalk x, lift_fac, and the supplied adjunction. This proves that the whiskered cocone B is a colimit.",
+   "uses": [
+    "new-local-stalk-sections-comparison-map",
+    "new-local-stalk-sections-cocone-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Regard A as the object a of N using hA. The assumption hs and additivity of the cocone leg give B_a(s)=B_a(0). Mathlib Concrete.isColimit_exists_of_rep_eq produces an object W and arrows f,g:op(a)->W with D.op(F)(f)(s)=D.op(F)(g)(0). The second side is zero because the map is an abelian-group homomorphism. Apply j.op to W and f; unfolding the restricted diagram gives the required neighbourhood, arrow, and vanishing.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "new-local-stalk-sections-comparison-map",
+  "new-local-stalk-sections-cocone-colimit"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/03Q6",
-  "place": "Lemma 59.51.5, degree zero, restricted to principal opens of an affine neighbourhood"
+  "place": "Lemma 59.51.5, degree zero: instantiate existing affine-open section continuity on the affine neighbourhood system; use the concrete filtered-colimit equality criterion."
  },
  "mathlib_searches": [
   {
@@ -108,10 +135,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T202259-L-710948",
-  "kind": "interface",
+  "landing": "20261012T214710-L-1271312",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
