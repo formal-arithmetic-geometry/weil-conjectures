@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-cohomology-pullback-degree-zero-iso-factor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-field-extension",
+   "place": "step 3 of its split: identify degree-zero cohomology with global sections",
+   "via": [
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Isomorphism of the degree-zero cycle factor",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $G$ an abelian sheaf on its small étale site [def-weil-pbc-abelian-etale-sheaves], and $s:G[0]\\to I^\\bullet$ a quasi-isomorphism with $I^\\bullet$ K-injective [def-weil-pbc-kinjective-resolutions]. Write $\\Gamma(T,-)$ for global sections and $Z^0$ for the kernel of the degree-zero differential. If $z:\\Gamma(T,G)\\to Z^0(\\Gamma(T,I^\\bullet))$ satisfies $i\\circ z=\\Gamma(T,s^0)$, where $i$ is the inclusion of cycles, then $\\pi\\circ z:\\Gamma(T,G)\\to H^0(\\Gamma(T,I^\\bullet))$ is an isomorphism, where $\\pi$ is the homology projection [def-weil-pbc-etale-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 05TD, proof of (3), with a nonnegative injective resolution (Tag 013K) and transport by a homotopy equivalence to the given K-injective resolution."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-kinjective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded-below injective resolution of G and use the left-exact degree-zero comparison to identify its sections with degree-zero homology.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use resolution independence and homotopy naturality to transport the isomorphism to the given K-injective resolution; the equality hz identifies the transported augmentation with z ≫ homologyπ.",
+   "uses": [
+    "prop-weil-pbc-cohomology-resolution-independent",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-cohomology-resolution-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TD (3), with transport to arbitrary K-injective resolutions via homotopy equivalence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsKInjective.*homology|homology.*IsKInjective|isIso.*cycles",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match for arbitrary integer-indexed K-injective resolutions. RightDerived handles the nonnegative injective-resolution case; homologyπ lemmas alone do not show the augmentation induces an isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmentation from an object concentrated in degree zero to an unbounded K-injective complex induces an isomorphism on zeroth homology after a left exact additive functor",
+   "results": "CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self, CategoryTheory.instIsIsoToRightDerivedZero', CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, DerivedCategory.singleFunctorCompHomologyFunctorIso, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.InjectiveResolution.quasiIso",
+   "date": "2026-10-12",
+   "verdict": "No exact match for arbitrary integer-indexed K-injective resolutions. RightDerived handles the nonnegative injective-resolution case; homologyπ lemmas alone do not show the augmentation induces an isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ",
+   "results": "HomologicalComplex.homologyπ, HomologicalComplex.instEpiHomologyπ, HomologicalComplex.natTransHomologyπ_app, HomologicalComplex.homology_π_ι, CochainComplex.isIso_homologyπ₀, HomologicalComplex.isIso_homologyπ, HomologicalComplex.toCycles_comp_homologyπ, HomologicalComplex.homology_π_ι_assoc",
+   "date": "2026-10-12",
+   "verdict": "No exact match for arbitrary integer-indexed K-injective resolutions. RightDerived handles the nonnegative injective-resolution case; homologyπ lemmas alone do not show the augmentation induces an isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "H^0 of a left exact functor applied to a K-injective resolution of an object is the functor applied to the object",
+   "results": "Functor.rightDerivedZeroIsoSelf, CategoryTheory.instIsIsoToRightDerivedZero', InjectiveResolution.toRightDerivedZero'",
+   "date": "2026-10-09",
+   "verdict": "Earlier search by the first worker; partial match only for nonnegative injective resolutions. Transport to the arbitrary integer-indexed K-injective resolution remains necessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux",
+  "declaration": "AlgebraicGeometry.Etale.isIso_degreeZeroCohomology_cycles_factor",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCohomologyPullbackDegreeZeroAux.lean",
+  "statement": "theorem isIso_degreeZeroCohomology_cycles_factor (T : Scheme.{u}) (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (s : (CochainComplex.singleFunctor _ 0).obj G ⟶ I) [QuasiIso s] [I.IsKInjective] (z : (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj G ⟶ (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex (ComplexShape.up ℤ)).obj I).cycles 0) (hz : z ≫ (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex (ComplexShape.up ℤ)).obj I).iCycles 0 = (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).map ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0)) : IsIso (z ≫ (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex (ComplexShape.up ℤ)).obj I).homologyπ 0)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-40f69",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T015708-L-934080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-40f69",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T015708-L-934080",
+  "kind": "interface",
+  "note": "independent Codex review: The delivered files compile cleanly; the target statement and existing declarations are unchanged, the cycle-factor proof and new auxiliary node agree, the sole remaining named sorry has a matching node and proof docstring, imports are used, and the report documents pruning and second reading."
+ }
+}

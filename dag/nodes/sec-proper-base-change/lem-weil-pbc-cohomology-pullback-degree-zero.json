@@ -55,34 +55,11 @@
    }
   },
   {
-   "text": "*A bounded below injective resolution, for which $\\epsilon$ is bijective.* The category $\\Ab(T_{\\Et})$ is abelian [def-weil-pbc-abelian-etale-sheaves] with enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]. The functor $\\Gamma(T,-):\\Ab(T_{\\Et})\\to\\Ab$, $F\\mapsto F(T)$, is additive (the group structure of $\\Hom$ of sheaves is sectionwise) and preserves kernels, because the kernel of a morphism of abelian sheaves is computed sectionwise, $(\\ker\\psi)(T)=\\ker(\\psi_T)$ [def-pur-abelian-sheaf-kernel]; so it is left exact additive [def-sp-left-exact-additive]. By [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1), $G$ has an injective resolution $s_0:G\\to I_0^\\bullet$ with $I_0^q=0$ for $q<0$ [def-sp-injective-resolutions]; it is a quasi-isomorphism $G[0]\\to I_0^\\bullet$ to a bounded below complex of injective objects, which is K-injective [lem-weil-pbc-dplus-injective-representative] (2), so $s_0$ is a K-injective resolution [def-weil-pbc-kinjective-resolutions] and computes $H^0(T_{\\Et},G)=\\mathcal H^0(\\Gamma(T,I_0^\\bullet))$. By [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (2) for $v=\\Gamma(T,-)$, the morphism $G(T)\\to Z^0(\\Gamma(T,I_0^\\bullet))=\\mathcal H^0(\\Gamma(T,I_0^\\bullet))$ induced by $s^0_{0,T}$ (the equality because $\\Gamma(T,I_0^{-1})=0$) is an isomorphism; this morphism is $\\epsilon_{s_0}$ of step 1. (Concretely: $s_0$ identifies $G$ with the subsheaf $\\ker(d^0:I_0^0\\to I_0^1)$, and taking sections over $T$, $G(T)\\cong\\{a\\in I_0^0(T):d^0a=0\\}$, which is $\\mathcal H^0$ because there are no degree-$0$ coboundaries.)",
+   "text": "For the cycle factor z constructed in step 1, apply lem-weil-pbc-cohomology-pullback-degree-zero-iso-factor with the factorization equality hz. This proves that z followed by the degree-zero homology projection is an isomorphism for the given K-injective resolution, including resolutions with negative terms.",
    "uses": [
-    "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "def-pur-abelian-sheaf-kernel",
-    "def-sp-left-exact-additive",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-dplus-injective-representative",
-    "def-weil-pbc-kinjective-resolutions"
+    "lem-weil-pbc-cohomology-pullback-degree-zero-iso-factor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 013K (1) (existence of injective resolutions) and Lemma Tag 05TD (3) ($F\\to R^0F$ is an isomorphism for left exact $F$)"
-   }
-  },
-  {
-   "text": "*$\\epsilon$ is bijective for every K-injective resolution.* Let $s:G\\to I^\\bullet$ be any K-injective resolution, possibly unbounded with $I^q\\neq0$ for some $q<0$ (for such a complex $\\mathcal H^0(\\Gamma(T,I^\\bullet))$ is not visibly $\\Gamma(T,\\ker d^0)$, since degree-$0$ coboundaries from $\\Gamma(T,I^{-1})$ may occur; this is why we transport). By step 2 with $\\varphi=\\mathrm{id}_G$ and the resolutions $s_0$ (step 3) and $s$: $\\epsilon_s=H^0(\\mathrm{id}_G)\\circ\\epsilon_{s_0}$. The identification $H^0(\\mathrm{id}_G)$ is bijective: if $\\tilde\\iota:I_0^\\bullet\\to I^\\bullet$ and $\\tilde\\iota':I^\\bullet\\to I_0^\\bullet$ are lifts of $\\mathrm{id}_G$ in the two directions, $\\tilde\\iota'\\tilde\\iota$ and $\\tilde\\iota\\tilde\\iota'$ are lifts of $\\mathrm{id}_G$, as are the identities, so $H^0(\\mathrm{id})\\circ H^0(\\mathrm{id})=H^0(\\mathrm{id})=\\mathrm{id}$ in both orders ([lem-weil-pbc-cohomology-pullback-functorial] step 1(b); these are the mutually inverse isomorphisms of [prop-weil-pbc-cohomology-resolution-independent]). Since $\\epsilon_{s_0}$ is bijective (step 3), so is $\\epsilon_s$. With steps 1 and 2 this proves clause (1).",
-   "uses": [
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "prop-weil-pbc-cohomology-resolution-independent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05TD, proof of (3) (the value of $R^0F$ does not depend on the quasi-isomorphism $A[0]\\to K^\\bullet$); the transport along the comparison of K-injective resolutions is the agent's"
-   }
+   "elementary": false
   },
   {
    "text": "*Clause (2): the degree-zero pullback map.* Let $s:G\\to I^\\bullet$ and $r:u^{-1}I^\\bullet\\to J^\\bullet$ be the K-injective resolutions defining $u^*$ [def-weil-pbc-cohomology-pullback], so that $H^0(X_{\\Et},G)$ is computed from $s$ and $H^0(Y_{\\Et},u^{-1}G)$ from the K-injective resolution $t=r\\circ u^{-1}(s):u^{-1}G\\to J^\\bullet$ (as that definition says), and in degree $0$, $u^*$ sends the class of a cycle $a\\in I^0(X)$ to the class of $r^0_Y(\\eta_{u,I^0}(X)(a))\\in J^0(Y)$, with $\\eta_{u,I^0}(X)(a)\\in(u_*u^{-1}I^0)(X)=(u^{-1}I^0)(Y)$. Take $\\epsilon_{X,G}=\\epsilon_s$ and $\\epsilon_{Y,u^{-1}G}=\\epsilon_t$ (for other choices both sides change by the identifications, by step 2 and clause 1 of [lem-weil-pbc-cohomology-pullback-functorial]). The unit $\\eta_u:\\mathrm{id}\\to u_*u^{-1}$ is a natural transformation [def-weil-pbc-inverse-image]; for the morphism $s^0:G\\to I^0$ this says $\\eta_{u,I^0}\\circ s^0=u_*u^{-1}(s^0)\\circ\\eta_{u,G}$. Evaluate at the object $X$ of $X_{\\Et}$: since $(u_*\\alpha)_X=\\alpha_{X\\times_XY}=\\alpha_Y$ for a morphism $\\alpha$ of sheaves on $Y_{\\Et}$ [def-weil-pbc-direct-image], for $g\\in G(X)$ we get $\\eta_{u,I^0}(X)(s^0_X(g))=(u^{-1}s^0)_Y(\\eta_{u,G}(X)(g))$. Applying $r^0_Y$: $u^*(\\epsilon_{X,G}(g))$ is the class of $r^0_Y(\\eta_{u,I^0}(X)(s^0_X(g)))=(r^0\\circ u^{-1}(s^0))_Y(\\eta_{u,G}(X)(g))=t^0_Y(\\eta_{u,G}(X)(g))$, which is $\\epsilon_t(\\eta_{u,G}(X)(g))$ (step 1). Hence $u^*\\circ\\epsilon_{X,G}=\\epsilon_{Y,u^{-1}G}\\circ\\eta_{u,G}(X)$.\nLean implementation: package the unit and the pushforward/global-sections identification as a natural transformation eta : Gamma_X -> upperStar composed with Gamma_Y. Its component at G is globalSectionsUpperStarMap, by naturality of GammaNatIsoSheafSections and the definition of lowerStarCompGlobalSectionsIso. Rewrite homologyπ_naturality and cancel the target iCycles to reduce the resolution formula to eta.naturality at singleObjXSelf.inv composed with s.f(0), followed by Gamma_Y(r.f(0)). For the Ext encoding, unfold H.equiv₀, mapExactFunctor_mk₀, and mk₀_comp_mk₀. The constant-sheaf comparison is leftAdjointUniq between the composite constant-sheaf/pullback adjunction (transported on the right by the terminal-sections isomorphism) and the target constant-sheaf adjunction. homEquiv_leftAdjointUniq_hom_app identifies precomposition by its inverse with the composite adjunction homEquiv. Unit naturality identifies this with the unit on sections. The naturality of the equivalence Hom(ULift Z,-) with underlying elements and cancellation of GammaNatIsoSheafSections finish the pointwise formula.",
@@ -100,25 +77,19 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "prop-weil-pbc-cohomology-resolution-independent",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "def-pur-abelian-sheaf-kernel",
-  "def-sp-left-exact-additive",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-dplus-injective-representative",
   "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-cohomology-pullback-degree-zero-iso-factor",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "prop-weil-pbc-cohomology-resolution-independent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemmas Tag 05TD (3) and Tag 013K (1) for the bounded below injective case; literature/stacks-project/cohomology.tex Tag 01FA for clause 2; the transport to arbitrary K-injective resolutions (step 2, step 4) is written by the agent; K1 stage-3 implementation: naturality via Mathlib Homotopy.homologyMap_eq, resolution pullback via natural transformation naturality, Ext degree-zero pullback via uniqueness of left adjoints. The augmentation-isomorphism proof remains the original bounded-below/transport plan."
+  "place": "Lemmas Tag 05TD (3) and Tag 013K (1) for the bounded-below injective case; literature.stacks-project/cohomology.tex Tag 01FA for clause 2; the implemented cycle construction and application of the auxiliary isomorphism factor lemma transport the result to arbitrary K-injective resolutions, including negative terms."
  },
  "mathlib_searches": [
   {
@@ -237,11 +208,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-f2847",
-  "group": "K1",
+  "reviewer": "X-40f69",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T004403-L-637054",
-  "kind": "proof",
-  "note": "independent Codex review: Matched all four existing theorem signatures and the three completed proofs against the node; verified permitted metadata changes, retained imports and unit route, documented remaining sorry, clean compilation, and standard axioms only for all three completed proofs."
+  "landing": "20261012T015708-L-934080",
+  "kind": "interface",
+  "note": "independent Codex review: The delivered files compile cleanly; the target statement and existing declarations are unchanged, the cycle-factor proof and new auxiliary node agree, the sole remaining named sorry has a matching node and proof docstring, imports are used, and the report documents pruning and second reading."
  }
 }

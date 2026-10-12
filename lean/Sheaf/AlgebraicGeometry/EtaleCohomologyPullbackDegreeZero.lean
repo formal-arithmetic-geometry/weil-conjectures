@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import Mathlib.Algebra.Homology.Single
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux
 
 /-!
 # Degree-zero étale cohomology and pullback
@@ -53,7 +54,21 @@ theorem exists_degreeZeroCohomology_cycles_iso (T : Scheme.{u})
           ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0) ∧
       IsIso (z ≫ (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj I).homologyπ 0) := by
-  sorry
+  let F := Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let M := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let K := M.obj ((CochainComplex.singleFunctor _ 0).obj G)
+  let k := F.map (singleObjXSelf (ComplexShape.up ℤ) 0 G).inv
+  have hk : k ≫ K.d 0 1 = 0 := by
+    dsimp [k, K, M]
+    simp
+  let w := K.liftCycles k 1 (by simp) hk
+  let z := w ≫ cyclesMap (M.map s) 0
+  have hz : z ≫ (M.obj I).iCycles 0 =
+      F.map ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0) := by
+    dsimp only [z]
+    rw [Category.assoc, cyclesMap_i, ← Category.assoc, liftCycles_i]
+    exact (F.map_comp _ _).symm
+  exact ⟨z, hz, isIso_degreeZeroCohomology_cycles_factor T G I s z hz⟩
 
 /-- Naturality of the augmentation-to-cohomology map for arbitrary K-injective resolutions.
 Taking `G' = G` and `φ = 𝟙 G` gives compatibility with resolution identifications.
