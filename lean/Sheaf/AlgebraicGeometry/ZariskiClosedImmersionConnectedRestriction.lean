@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 import Sheaf.Topology.SpectralClosedRestriction
+import Sheaf.Topology.ClosedEmbeddingRestrictionTransport
 
 /-!
 # Zariski restriction along a closed immersion with connected point closures
@@ -49,7 +50,44 @@ theorem zariski_restriction_universe_transport
           (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)) (Type (u + 1))
           (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app G).hom.app
             (op (⊤ : X.Opens))) := by
-  sorry
+  classical
+  let : T0Space X.toTopCat := (inferInstance : T0Space X)
+  let : CompactSpace X.toTopCat := (inferInstance : CompactSpace X)
+  let : QuasiSober X.toTopCat := (inferInstance : QuasiSober X)
+  let : PrespectralSpace X.toTopCat := (inferInstance : PrespectralSpace X)
+  let : QuasiSeparatedSpace X.toTopCat := (inferInstance : QuasiSeparatedSpace X)
+  let Y := TopCat.of (ULift.{u + 1} X)
+  let e : Y ≃ₜ X.toTopCat := Homeomorph.ulift
+  let : CompactSpace Y := e.symm.compactSpace
+  let : T0Space Y := e.isEmbedding.t0Space
+  let : QuasiSober Y := e.isClosedEmbedding.quasiSober
+  let : PrespectralSpace Y := PrespectralSpace.of_isClosedEmbedding e e.isClosedEmbedding
+  let : QuasiSeparatedSpace Y := e.isOpenEmbedding.quasiSeparatedSpace
+  let : SpectralSpace Y := {}
+  let D : Set Y := e ⁻¹' Set.range i.base
+  have hD : IsClosed D := (Scheme.Hom.isClosedEmbedding i).isClosed_range.preimage e.continuous
+  have hc (y : Y) : ConnectedSpace (↥(D ∩ closure ({y} : Set Y))) := by
+    apply isConnected_iff_connectedSpace.mp
+    have h := e.isConnected_preimage.mpr (hconn (e y))
+    have he : e ⁻¹' ({e y} : Set X.toTopCat) = {y} := by
+      ext z
+      simp only [Set.mem_preimage, Set.mem_singleton_iff, e.injective.eq_iff]
+    rw [Set.preimage_inter, e.preimage_closure, he, Set.inter_comm] at h
+    exact h
+  intro G
+  obtain ⟨F, a, b, hsquare⟩ := TopCat.closed_embedding_restriction_transport_square
+    i.base (Scheme.Hom.isClosedEmbedding i).isEmbedding Y e G
+  have hb := TopCat.spectral_closed_restriction Y D hD hc F
+  constructor
+  · intro s t h
+    apply a.injective
+    apply hb.1
+    exact (hsquare s).symm.trans ((congrArg b h).trans (hsquare t))
+  · intro t
+    obtain ⟨s, hs⟩ := hb.2 (b t)
+    refine ⟨a.symm s, b.injective ?_⟩
+    exact (hsquare (a.symm s)).trans
+      ((congrArg _ (a.apply_symm_apply s)).trans hs)
 
 
 /-- Zariski sections restrict bijectively if every point closure meets the closed
@@ -93,26 +131,6 @@ theorem zariski_closed_immersion_connected_restriction
           (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)) (Type (u + 1))
           (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app G).hom.app
             (op (⊤ : X.Opens))) := by
-  classical
-  let : T0Space X.toTopCat := by
-    constructor
-    intro x y h
-    exact (inferInstance : T0Space X).t0 h
-  let : CompactSpace X.toTopCat := by
-    constructor
-    change IsCompact (Set.univ : Set X)
-    exact isCompact_univ
-  let : QuasiSober X.toTopCat := (inferInstance : QuasiSober X)
-  let : QuasiSeparatedSpace X.toTopCat := (inferInstance : QuasiSeparatedSpace X)
-  let : PrespectralSpace X.toTopCat := (inferInstance : PrespectralSpace X)
-  let : SpectralSpace X.toTopCat := {}
-  let D : Set X := Set.range i.base
-  have hD : IsClosed D := by
-    exact (Scheme.Hom.isClosedEmbedding i).isClosed_range
-  have hc (x : X) : ConnectedSpace (↥(D ∩ closure ({x} : Set X))) := by
-    apply isConnected_iff_connectedSpace.mp
-    simpa [D, Set.inter_comm] using hconn x
-  intro G
-  exact zariski_restriction_universe_transport i hconn G
+  exact zariski_restriction_universe_transport i hconn
 
 end AlgebraicGeometry

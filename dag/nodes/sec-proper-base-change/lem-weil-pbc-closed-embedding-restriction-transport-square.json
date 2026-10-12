@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-closed-embedding-restriction-transport-square",
+ "kind": "statement",
+ "title": "Commuting square for restriction units under an embedding and change of universe",
+ "statement": "Let $X,Z$ be topological spaces in universe $u$, let $i:Z\\to X$ be a continuous embedding (injective with the topology on $Z$ induced from $X$), let $Y$ be a topological space in universe $u+1$, and let $e:Y\\xrightarrow{\\sim}X$ be a homeomorphism. Put $D=e^{-1}(\\operatorname{range}(i))$ with its subspace topology and let $j:D\\hookrightarrow Y$ be the inclusion. For every sheaf $G$ of $\\mathrm{Type}(u+1)$ on $X$, there exist a sheaf $F$ of $\\mathrm{Type}(u+1)$ on $Y$ and bijections $a:\\Gamma(X,G)\\xrightarrow{\\sim}\\Gamma(Y,F)$ and $b:\\Gamma(Z,i^{-1}G)\\xrightarrow{\\sim}\\Gamma(D,j^{-1}F)$ such that $b\\circ r_i=r_j\\circ a$. Here $r_i,r_j$ are the inverse-image adjunction units evaluated at the top open and inverse image is left Kan extension followed by sheafification [def-weil-pbc-topological-inverse-image]. No compactness, spectrality, closedness or connectedness is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZG, closed-image and universe-transport step of lem-weil-pbc-zariski-closed-immersion-connected-restriction; the unit comparison is Mathlib Adjunction.unit_leftAdjointUniq_hom_app"
+ },
+ "proof": [
+  {
+   "text": "Precompose the sheaf with the opposite functor of the open-set order isomorphism induced by e. Open covers, matching families and unique gluings correspond, giving a sheaf F and the equivalence a on global sections.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "An embedding identifies Z homeomorphically with its range. Restrict e to the inverse image D of this range and combine the two homeomorphisms. The induced equivalences of sheaf categories identify the pushforward functors.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Transport the inverse-image adjunction along these equivalences and compare left adjoints of the identified pushforward functor. The unique comparison isomorphism preserves the units. Evaluation at the top open gives the equivalence b and the equation of the commuting square.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U2",
+  "date": "2026-10-12",
+  "note": "Explicit open-set/sheaf/adjunction transport argument for the universe-transport step supplied in the assigned node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport inverse image sheaf adjunction unit along homeomorphisms of different universes yields conjugate restriction maps on global sections",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An embedding and a homeomorphism to a larger universe identify sheaf inverse image restriction units up to equivalences of global sections",
+   "results": "Scheme.restrictFunctorΓ, SheafedSpace.ofRestrict_hom_c_app, IsOpenImmersion.ΓIso and related open-immersion statements; no cross-universe closed-image comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "opensCongr|unit_leftAdjointUniq_hom_app|sheafCongr",
+   "results": "Homeomorph.opensCongr, Equivalence.sheafCongr and Adjunction.unit_leftAdjointUniq_hom_app provide the components but no theorem states the entire commuting square.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zariski-closed-immersion-connected-restriction",
+   "place": "Step 4: transport along open-set order isomorphisms and the closed-image homeomorphism, preserving adjunction units",
+   "via": [
+    "lem-weil-pbc-zariski-restriction-universe-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ClosedEmbeddingRestrictionTransport",
+  "file": "lean/Sheaf/Topology/ClosedEmbeddingRestrictionTransport.lean",
+  "declaration": "TopCat.closed_embedding_restriction_transport_square",
+  "statement": "theorem closed_embedding_restriction_transport_square\n    {X Z : TopCat.{u}} (i : Z ⟶ X) (hi : Topology.IsEmbedding i)\n    (Y : TopCat.{u + 1}) (e : Y ≃ₜ X) :\n    letI : ∀ P : (Opens X)ᵒᵖ ⥤ Type (u + 1),\n        (Opens.map i).op.HasPointwiseLeftKanExtension P :=\n      fun P U ↦ @Types.hasColimit.{u, u + 1, u}\n        (CostructuredArrow.{u, u, u, u} (Opens.map i).op U)\n        inferInstance (small_succ.{u} _) (CostructuredArrow.proj _ U ⋙ P)\n    let A := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n      (Opens.map i) (Type (u + 1))\n      (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)\n    let D : Set Y := e ⁻¹' Set.range i\n    let j : TopCat.of D ⟶ Y := TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩\n    let B := Sheaf.pullbackPushforwardAdjunction (Type (u + 1)) j\n    ∀ G : X.Sheaf (Type (u + 1)),\n      ∃ (F : Y.Sheaf (Type (u + 1)))\n        (a : G.1.obj (op ⊤) ≃ F.1.obj (op ⊤))\n        (b : ((Functor.sheafPullbackConstruction.sheafPullback (Opens.map i)\n          (Type (u + 1)) (Opens.grothendieckTopology X)\n          (Opens.grothendieckTopology Z)).obj G).1.obj (op ((Opens.map i).obj ⊤)) ≃\n          ((Sheaf.pullback (Type (u + 1)) j).obj F).1.obj (op ((Opens.map j).obj ⊤))),\n        ∀ s, b ((A.unit.app G).hom.app (op ⊤) s) =\n          (B.unit.app F).hom.app (op ⊤) (a s)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T060758-L-2917728",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T060758-L-2917728",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
