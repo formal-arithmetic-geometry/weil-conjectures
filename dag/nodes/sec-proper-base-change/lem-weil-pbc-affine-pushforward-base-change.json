@@ -81,12 +81,13 @@
    }
   },
   {
-   "text": "*Step 4 (the affine computation, part (1)).* In the square of Step 3 let $M=\\Gamma(\\operatorname{Spec}B,\\mathcal F)$. Since $\\mathcal F$ is quasi-coherent, the counit $\\widetilde M\\to\\mathcal F$ is an isomorphism [lem-weil-pbc-affine-tilde-gamma-adjunction](3), so by naturality of $\\beta$ we may assume $\\mathcal F=\\widetilde M$. Put $P=(R'\\otimes_RB)\\otimes_BM$, an $R'$-module through $r'\\mapsto r'\\otimes1$. We have isomorphisms: $\\pi:f_*\\widetilde M\\cong\\widetilde{M_R}$ with $\\pi(\\tau_B(m))=\\tau_R(m)$ and $\\pi':f'_*\\widetilde P\\cong\\widetilde{P_{R'}}$ with $\\pi'(\\tau(p))=\\tau(p)$ [lem-weil-pbc-pushforward-tilde-spec]; $\\theta:g^*\\widetilde{M_R}\\cong\\widetilde{R'\\otimes_RM}$ with $\\theta(\\eta_g(\\tau_R(m)))=\\tau(1\\otimes m)$ and $\\theta':g'^*\\widetilde M\\cong\\widetilde P$ with $\\theta'(\\eta_{g'}(\\tau_B(m)))=\\tau((1\\otimes1)\\otimes m)$ [lem-weil-pbc-tilde-pullback-base-change]. Let $\\tilde\\beta=\\pi'\\circ f'_*(\\theta')\\circ\\beta_{\\widetilde M}\\circ g^*(\\pi)^{-1}\\circ\\theta^{-1}:\\widetilde{R'\\otimes_RM}\\to\\widetilde{P_{R'}}$. By [lem-weil-pbc-affine-tilde-gamma-adjunction](1),(2) ($\\tau$ is an isomorphism on global sections and $\\alpha\\mapsto\\alpha_X\\circ\\tau$ is bijective) $\\tilde\\beta=\\widetilde u$ for the $R'$-linear map $u:R'\\otimes_RM\\to P$ determined by $\\tilde\\beta(\\tau(x))=\\tau(u(x))$. Compute $u(1\\otimes m)$: $\\tau(1\\otimes m)=\\theta(\\eta_g(\\tau_R(m)))=\\theta(g^*(\\pi)(\\eta_g(s)))$ with $s=\\tau_B(m)\\in\\Gamma(\\operatorname{Spec}R,f_*\\widetilde M)$, by naturality of the unit $\\eta_g$. By the definition of $\\beta$ as the adjoint of $f_*(\\eta_{g'})$, $g_*(\\beta)\\circ\\eta_{g,f_*\\widetilde M}=f_*(\\eta_{g',\\widetilde M})$, i.e. $\\beta(\\eta_g(s))=\\eta_{g'}(\\tau_B(m))\\in\\Gamma(X',g'^*\\widetilde M)=\\Gamma(S',f'_*g'^*\\widetilde M)$. Hence $\\tilde\\beta(\\tau(1\\otimes m))=\\pi'(\\theta'(\\eta_{g'}(\\tau_B(m))))=\\tau((1\\otimes1)\\otimes m)$, so $u(1\\otimes m)=(1\\otimes1)\\otimes m$ and, by $R'$-linearity, $u(r'\\otimes m)=(r'\\otimes1)\\otimes m$. This $u$ is the canonical isomorphism $R'\\otimes_RM\\cong(R'\\otimes_RB)\\otimes_BM$, with inverse $(r'\\otimes b)\\otimes m\\mapsto r'\\otimes bm$ (well defined: $(r'\\otimes b)\\mapsto(m\\mapsto r'\\otimes bm)$ is $R$-balanced in $(r',b)$ and the result is $B$-balanced; the two composites are the identity on generators). So $\\tilde\\beta=\\widetilde u$ is an isomorphism (a functor preserves isomorphisms), hence so is $\\beta_{\\widetilde M}$. With Step 2 this proves (1), and identifies $\\beta$ over $\\operatorname{Spec}R'\\subseteq S'$ above $\\operatorname{Spec}R\\subseteq S$ with $R'\\otimes_RM=(R'\\otimes_RB)\\otimes_BM$.",
+   "text": "Affine formula realized in Lean: obtain the two unit-normalized tensor coordinate equivalences from lem-weil-pbc-affine-base-change-tensor-comparisons. Prove square commutativity by tensor balancing. Apply the defining adjunction Hom equivalence to prove beta(eta_g(m)) = eta_g-prime(m) on global sections. Normalize with the two unit equations and extend from 1 tensor m to r tensor m by R-prime linearity. The local-to-global isomorphism argument remains unproved.",
    "uses": [
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
     "lem-weil-pbc-pushforward-tilde-spec",
     "lem-weil-pbc-tilde-pullback-base-change",
-    "def-pc-module-pullback"
+    "def-pc-module-pullback",
+    "lem-weil-pbc-affine-base-change-tensor-comparisons"
    ],
    "elementary": false,
    "source": {
@@ -138,14 +139,15 @@
   "def-pc-module-pullback",
   "lem-weil-pbc-module-pullback-structure-sheaf",
   "lem-weil-pbc-module-base-change-map-algebra",
-  "lem-weil-pbc-module-base-change-map-pasting"
+  "lem-weil-pbc-module-base-change-map-pasting",
+  "lem-weil-pbc-affine-base-change-tensor-comparisons"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "D2",
+  "group": "H3",
   "date": "2026-10-12",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Steps 1–4 retain the planned proof of Lemma 02KG and remain unproved in Lean. Steps 5–6 are realized by reductions to moduleBaseChangeMap_algebra and moduleBaseChangeMap_pasting, respectively, with clause (1) and tensorPullbackObjUnitToUnit_isIso supplying invertibility in Step 5. Second reading corrected the dependency record."
+  "place": "Stage-3 reduction: algebra and composition use existing declarations; affine formula is reduced to the new tensor-coordinate statement and the adjunction unit calculation."
  },
  "mathlib_searches": [
   {
@@ -247,10 +249,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T085223-L-7454",
-  "kind": "proof",
+  "landing": "20261012T110305-L-616655",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-affine-base-change-tensor-comparisons",
+ "kind": "statement",
+ "title": "Tensor coordinates for affine base change",
+ "statement": "For commutative rings R, B, R' with algebras R → B and R → R' and a B-module M, the two global-section modules in the affine base-change square admit R'-linear equivalences to R' ⊗[R] M and (R' ⊗[R] B) ⊗[B] M, respectively, carrying canonical generators to pullback-unit sections.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma 01I9 (1),(2), used in Cohomology Lemma 02KG affine computation"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-pushforward-tilde-spec"
+ ],
+ "proof": [
+  {
+   "text": "Construct the first comparison from the pullback-tilde isomorphism and the tilde global-sections adjunction. Construct the second similarly after replacing B by R' ⊗[R] B. The unit formulas give the generator equations; the balancing relation gives the displayed tensor generators.",
+   "uses": [
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-pushforward-tilde-spec"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-pushforward-tilde-spec"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma 01I9 (1),(2), affine computation in Lemma 02KG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections tensor pullback tilde unit affine module comparison",
+   "results": "unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct LinearEquiv",
+   "results": "no direct match; tensor equivalences are constructed in the module",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tildePullbackIso pushforwardSpecMapCompΓIso",
+   "results": "lean/WeilConjectures/AlgebraicGeometry/Modules/PullbackTilde.lean:34-131",
+   "date": "2026-10-12",
+   "verdict": "no direct exact theorem"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of split; affine computation dependency",
+   "via": [
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineBaseChangeTensorComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBaseChangeTensorComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affineBaseChange_tensorComparisons",
+  "statement": "theorem exists_affineBaseChange_tensorComparisons\n    (R B R' : Type u) [CommRing R] [CommRing B] [CommRing R']\n    [Algebra R B] [Algebra R R'] (M : ModuleCat.{u} B) :\n    letI : Module R M := Module.compHom M (algebraMap R B)\n    letI : Algebra B (R' ⊗[R] B) := Algebra.TensorProduct.rightAlgebra\n    ∃ (a : ((moduleSpecΓFunctor (R := .of R')).obj\n        ((tensorPullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).obj\n          ((pushforward (Spec.map (CommRingCat.ofHom (algebraMap R B)))).obj\n            (tilde (R := .of B) M)))) ≃ₗ[R'] R' ⊗[R] M)\n      (b : ((moduleSpecΓFunctor (R := .of R')).obj\n        ((pushforward (Spec.map (CommRingCat.ofHom (algebraMap R' (R' ⊗[R] B))))).obj\n          ((tensorPullback (Spec.map (CommRingCat.ofHom (algebraMap B (R' ⊗[R] B))))).obj\n            (tilde (R := .of B) M)))) ≃ₗ[R'] (R' ⊗[R] B) ⊗[B] M),\n      (∀ m : M, a.symm ((1 : R') ⊗ₜ[R] m) =\n        (((Classical.choose (exists_tensorPullbackAdjunction\n            (Spec.map (CommRingCat.ofHom (algebraMap R R'))))).unit.app\n          ((pushforward (Spec.map (CommRingCat.ofHom (algebraMap R B)))).obj\n            (tilde (R := .of B) M))).val.app (op ⊤)\n            (tilde.toOpen (R := .of B) M ⊤ m) :\n          (moduleSpecΓFunctor (R := .of R')).obj\n            ((tensorPullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).obj\n              ((pushforward (Spec.map (CommRingCat.ofHom (algebraMap R B)))).obj\n                (tilde (R := .of B) M))))) ∧\n      (∀ (z : B) (m : M), b.symm (((1 : R') ⊗ₜ[R] z) ⊗ₜ[B] m) =\n        (((Classical.choose (exists_tensorPullbackAdjunction\n            (Spec.map (CommRingCat.ofHom (algebraMap B (R' ⊗[R] B)))))).unit.app\n          (tilde (R := .of B) M)).val.app (op ⊤)\n            (tilde.toOpen (R := .of B) M ⊤ (z • m)) :\n          (moduleSpecΓFunctor (R := .of R')).obj\n            ((pushforward (Spec.map (CommRingCat.ofHom (algebraMap R' (R' ⊗[R] B))))).obj\n              ((tensorPullback (Spec.map (CommRingCat.ofHom (algebraMap B (R' ⊗[R] B))))).obj\n                (tilde (R := .of B) M)))))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T110305-L-616655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T110305-L-616655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

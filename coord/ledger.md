@@ -7365,3 +7365,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/H2/Sheaf.AlgebraicGeometry.FiniteEtaleTraceSplitComponent (stage 3; reviewer PASS; first push; landing 20261012T110305-L-616253 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:03 L: merged deliver/H2/Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransport (stage 3; reviewer PASS; first push; landing 20261012T110305-L-616379 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:03 L: merged deliver/H3/Sheaf.Algebra.Homology.DoubleComplexVerticalWindowHomology (stage 3; reviewer PASS; first push; landing 20261012T110305-L-616523 (interface); batch 20261012T110249; modules 3; new nodes 2)
+- 11:03 L: merged deliver/H3/Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange (stage 3; reviewer PASS; first push; landing 20261012T110305-L-616655 (interface); batch 20261012T110249; modules 2; new nodes 1)

@@ -18,6 +18,7 @@ import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+import Sheaf.AlgebraicGeometry.AffineBaseChangeTensorComparisons
 import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Affine pushforward and arbitrary base change
@@ -36,6 +37,25 @@ noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+
+private theorem baseChange_unit_top {X S X' S' : Scheme.{u}}
+    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
+    (w : g' ≫ f = f' ≫ g) (F : X.Modules) (m : Γ(F, ⊤)) :
+    (moduleBaseChangeMap f f' g g' w F).app ⊤
+      (((Classical.choose (exists_tensorPullbackAdjunction g)).unit.app
+        ((pushforward f).obj F)).app ⊤ m) =
+      ((Classical.choose (exists_tensorPullbackAdjunction g')).unit.app F).app ⊤ m := by
+  let adj := Classical.choose (exists_tensorPullbackAdjunction g)
+  have h := (adj.homEquiv _ _).apply_symm_apply
+    ((pushforward f).map
+      ((Classical.choose (exists_tensorPullbackAdjunction g')).unit.app F) ≫
+      (pushforwardComp g' f).hom.app ((tensorPullback g').obj F) ≫
+      (pushforwardCongr w).hom.app ((tensorPullback g').obj F) ≫
+      (pushforwardComp f' g).inv.app ((tensorPullback g').obj F))
+  rw [Adjunction.homEquiv_unit] at h
+  have ht := congr($(h).app ⊤ m)
+  simpa [moduleBaseChangeMap, adj, Hom.comp_app, pushforward_map_app,
+    pushforwardCongr_hom_app_app] using ht
 
 /-- Affine pushforward preserves quasi-coherence and its canonical base change map is invertible.
 Source: Stacks Project, Lemma 02KG
@@ -108,7 +128,42 @@ theorem affinePushforward_baseChange_affine_formula
             (Spec.map (CommRingCat.ofHom (algebraMap B (R' ⊗[R] B)))) w
             (tilde (R := .of B) M)).app ⊤ (a.symm (r ⊗ₜ[R] m))) =
           (r ⊗ₜ[R] (1 : B)) ⊗ₜ[B] m) := by
-  sorry
+  let : Module R M := Module.compHom M (algebraMap R B)
+  let : Algebra B (R' ⊗[R] B) := Algebra.TensorProduct.rightAlgebra
+  obtain ⟨a, b, ha, hb⟩ := exists_affineBaseChange_tensorComparisons R B R' M
+  have w : Spec.map (CommRingCat.ofHom (algebraMap B (R' ⊗[R] B))) ≫
+        Spec.map (CommRingCat.ofHom (algebraMap R B)) =
+      Spec.map (CommRingCat.ofHom (algebraMap R' (R' ⊗[R] B))) ≫
+        Spec.map (CommRingCat.ofHom (algebraMap R R')) := by
+    rw [← Spec.map_comp, ← Spec.map_comp]
+    congr 1
+    ext r
+    change (1 : R') ⊗ₜ[R] algebraMap R B r = algebraMap R R' r ⊗ₜ[R] (1 : B)
+    simpa only [Algebra.smul_def, mul_one] using
+      (TensorProduct.smul_tmul (R := R) r (1 : R') (1 : B)).symm
+  refine ⟨w, a, b, ha, hb, ?_⟩
+  intro r m
+  let beta := moduleBaseChangeMap (Spec.map (CommRingCat.ofHom (algebraMap R B)))
+    (Spec.map (CommRingCat.ofHom (algebraMap R' (R' ⊗[R] B))))
+    (Spec.map (CommRingCat.ofHom (algebraMap R R')))
+    (Spec.map (CommRingCat.ofHom (algebraMap B (R' ⊗[R] B)))) w (tilde (R := .of B) M)
+  have hunit : beta.app ⊤ (a.symm ((1 : R') ⊗ₜ[R] m)) =
+      b.symm (((1 : R') ⊗ₜ[R] (1 : B)) ⊗ₜ[B] m) := by
+    rw [ha, hb]
+    simp only [one_smul]
+    with_unfolding_all
+      exact baseChange_unit_top _ _ _ _ w (tilde (R := .of B) M)
+        (tilde.toOpen (R := .of B) M ⊤ m)
+  let betaL := ((moduleSpecΓFunctor (R := .of R')).map beta).hom
+  change b (betaL (a.symm (r ⊗ₜ[R] m))) = (r ⊗ₜ[R] (1 : B)) ⊗ₜ[B] m
+  have hr : r ⊗ₜ[R] m = r • ((1 : R') ⊗ₜ[R] m) := by
+    simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+  rw [hr, a.symm.map_smul, betaL.map_smul, b.map_smul]
+  have hu : betaL (a.symm ((1 : R') ⊗ₜ[R] m)) =
+      b.symm (((1 : R') ⊗ₜ[R] (1 : B)) ⊗ₜ[B] m) := hunit
+  rw [hu, b.apply_symm_apply]
+  simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+
 
 /-- For the structure sheaf the base change isomorphism respects multiplication and unit.
 Multiplications are specified on all tensor sections, so they are the canonical sheaf
