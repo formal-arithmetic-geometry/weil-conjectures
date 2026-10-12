@@ -8,7 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.RestrictOpen
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Flasque
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+public import WeilConjectures.AlgebraicGeometry.Modules.RestrictPushforward
 
 /-!
 # Sections of higher direct images over an affine base
@@ -156,8 +159,10 @@ T' --g---> T
 ```
 Then `R^q f'_* (g'^* ℱ) ≅ (R^q f_* ℱ)|_{T'}` for every `q`.
 
-This is flat base change along an open immersion, and holds for any `f` and any `ℱ`: restriction
-to an open subscheme preserves injective `𝒪_X`-modules and commutes with the pushforward. -/
+This is flat base change along an open immersion, and holds for any `f` and any `ℱ`: for an
+injective resolution `ℱ → I^•`, the restriction `I^•|_{X'}` is a resolution of `ℱ|_{X'}` by
+flasque, hence `f'_*`-acyclic, modules (restriction is exact), and
+`f'_* (I^•|_{X'}) ≅ (f_* I^•)|_{T'}` (`AlgebraicGeometry.Scheme.Modules.pushforwardRestrictIso`). -/
 theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶ T)
     [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules]
     (sq : IsPullback g' f' f g) (q : ℕ) :

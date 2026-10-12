@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 
 /-!
 # The Čech-to-derived spectral sequence
@@ -32,10 +33,6 @@ restriction of `P` to `Over X`.
 - `CategoryTheory.Sheaf.exists_cechDoubleComplex`: when abelian sheaves have enough injectives,
   the double complex `C^p(𝔘, I^q)` attached to an injective resolution `F → I^•`, through its
   column cohomology and the cohomology of its total complex.
-- `CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence_of_enoughInjectives`: the
-  Čech-to-derived spectral sequence when abelian sheaves have enough injectives and all
-  universes agree, as the first spectral sequence `HomologicalComplex₂.exists_spectralSequence`
-  of that double complex.
 
 ## Implementation notes
 
@@ -43,7 +40,9 @@ The general statement `exists_cechToDerivedSpectralSequence` allows a large site
 indexed by `ι : Type w` and cohomology computed in `AddCommGrpCat.{w}`. The proof through the
 double complex `C^p(𝔘, I^q)` needs an injective resolution of `F`, and the groups `I^q(V)` are
 only `v`-small, so it is carried out under `EnoughInjectives (Sheaf J AddCommGrpCat.{v})` with
-`w = v`.
+`w = v`; the resulting spectral sequence is
+`CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence_of_enoughInjectives`, in
+`WeilConjectures.CategoryTheory.Sites.CechSpectralSequence`.
 -/
 
 @[expose] public section
@@ -108,27 +107,5 @@ theorem Sheaf.exists_cechDoubleComplex [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
           ((Over.forget X).op ⋙ F.cohomologyPresheaf q))) ∧
       ∀ n : ℕ, Nonempty ((D.total (ComplexShape.up ℕ)).homology n ≅ F.H' n X) :=
   sorry
-
-/-- **The Čech-to-derived spectral sequence, with enough injectives.** The special case of
-`Sheaf.exists_cechToDerivedSpectralSequence` where abelian sheaves on `C` have enough injectives,
-the covering is indexed by `ι : Type v` and cohomology is computed in `AddCommGrpCat.{v}`.
-
-It is the first spectral sequence of the double complex `Sheaf.exists_cechDoubleComplex`.
-
-(blueprint: `sk-thm-picard-cech`, `lem-sc-cech-spectral`) -/
-theorem Sheaf.exists_cechToDerivedSpectralSequence_of_enoughInjectives
-    [HasExt.{v} (Sheaf J AddCommGrpCat.{v})] [EnoughInjectives (Sheaf J AddCommGrpCat.{v})]
-    (F : Sheaf J AddCommGrpCat.{v}) (X : C)
-    {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
-    ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{v},
-      (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅
-        ((cechComplexFunctor fun i ↦ Over.mk (π i)).obj
-          ((Over.forget X).op ⋙ F.cohomologyPresheaf q)).homology p)) ∧
-      E.AbutsTo fun n ↦ F.H' n X := by
-  obtain ⟨D, hcol, htot⟩ := F.exists_cechDoubleComplex X π hπ
-  obtain ⟨E, hE₂, hE⟩ := D.exists_spectralSequence
-  refine ⟨E, fun p q ↦ ?_, hE.of_iso fun n ↦ (htot n).some⟩
-  obtain ⟨e⟩ := hE₂ p q
-  exact ⟨e ≪≫ (HomologicalComplex.homologyFunctor _ _ p).mapIso (hcol q).some⟩
 
 end CategoryTheory

@@ -68,7 +68,7 @@ variable {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.
 objects are pairs `(V, v)` of an étale `S`-scheme `V` and a morphism `v : Spec Ω ⟶ V` over `S`,
 and its morphisms `(V, v) ⟶ (W, w)` are the `S`-morphisms `V ⟶ W` carrying `v` to `w`. This is
 the category of elements of the fibre functor of the point `pointSmallEtale s` of the small
-étale site.
+étale site, the same category as `AlgebraicGeometry.Scheme.Hom.Nbhd s`.
 
 (blueprint: `def-weil-pbc-pointed-etale-neighbourhoods`) -/
 abbrev PointedEtaleNeighborhood : Type (u + 1) :=

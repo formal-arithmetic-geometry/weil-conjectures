@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Sites.LocallyInjective
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!

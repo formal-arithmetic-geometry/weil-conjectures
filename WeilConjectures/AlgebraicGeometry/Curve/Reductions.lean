@@ -54,7 +54,7 @@ the hypotheses of the reduction statements) a sheaf of modules over `ULift (ZMod
 
 @[expose] public section
 
-universe u
+universe w w' u
 
 open CategoryTheory Limits
 
@@ -73,11 +73,12 @@ abelian étale sheaves on `X`. Then for every `q` the canonical map
 every class on the colimit comes from some `D_λ`, and a class on `D_λ` which dies on the colimit
 already dies on some `D_μ`, `λ ⟶ μ`. The compatibility with the pullback along a field
 extension is the naturality `AlgebraicGeometry.Etale.cohomologyMap_map` of the pullback maps.
-The statement holds for arbitrary (not only torsion) abelian sheaves.
+The statement holds for arbitrary (not only torsion) abelian sheaves and filtered
+categories of any size.
 (blueprint: `lemma-weil-pbc-curve-filtered-cohomology`) -/
 @[stacks 03Q6]
 theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
-    [QuasiSeparatedSpace X] {J : Type u} [SmallCategory J] [IsFiltered J]
+    [QuasiSeparatedSpace X] {J : Type w} [Category.{w'} J] [IsFiltered J]
     {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
     (hc : IsColimit c) (q : ℕ) :
     (∀ x : Sheaf.H c.pt q, ∃ (j : J) (y : Sheaf.H (D.obj j) q),
@@ -126,7 +127,7 @@ theorem IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero {k k' : T
     (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)
     {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
     (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionSheaf F] (q : ℕ) :
+    [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
   sorry
@@ -159,7 +160,7 @@ theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field 
     {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f] (k' : Type u)
     [Field k'] [IsAlgClosed k'] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')}
     {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι)
-    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] (q : ℕ) :
+    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
   sorry
@@ -184,7 +185,7 @@ theorem IsCurve.Assertions.of_forall_isReduced [Finite Λ] {k : Type u} [Field k
       (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
       [Scheme.IsConstructibleSheaf G], IsCurve.Assertions (ULift.{u + 1} (ZMod ℓ)) g G)
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
-    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] :
+    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] :
     IsCurve.Assertions Λ f F :=
   sorry
 

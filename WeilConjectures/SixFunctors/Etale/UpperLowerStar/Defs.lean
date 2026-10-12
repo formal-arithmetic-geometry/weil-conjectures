@@ -320,6 +320,16 @@ noncomputable def Etale.lowerStarComp (h₁₂ : T ⟶ R := h₁ ≫ h₂)
     (R.smallGrothendieckTopology @Etale) (S.smallGrothendieckTopology @Etale)
     (T.smallGrothendieckTopology @Etale)
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The components of the composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁₂)_*` of étale
+pushforwards are the restriction maps along the pullback pasting isomorphisms. -/
+lemma Etale.lowerStarComp_hom_app_hom_app (h₁₂ : T ⟶ R) (hh₁₂ : h₁₂ = h₁ ≫ h₂)
+    (G : Sheaf T.smallEtaleTopology A) (V : R.Etaleᵒᵖ) :
+    ((Etale.lowerStarComp A h₁ h₂ h₁₂ hh₁₂).hom.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂ h₁₂ hh₁₂).hom.app V.unop).op := by
+  simp only [Etale.lowerStarComp, Functor.sheafPushforwardContinuousComp']
+  exact Category.id_comp _
+
 section UpperStar
 
 /-- The composition isomorphism `(h₁ ≫ h₂)^* ≅ (h₂)^* ⋙ (h₁)^*` of pullbacks on étale

@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Continuity of étale cohomology at inverse limits
@@ -68,6 +69,30 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}
       ((Etale.upperStar A (D.obj i).hom).obj F))) :
     IsZero (((sectionsFunctor A c.pt.left).rightDerived q).obj
       ((Etale.upperStar A c.pt.hom).obj F)) :=
+  sorry
+
+/-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity, in the
+form of an elementwise colimit statement for the pullback maps.
+
+Let `(Dᵢ)` be a cofiltered system of quasi-compact quasi-separated schemes over `S` with affine
+transition maps, with limit `X = c.pt`, and let `F` be an abelian étale sheaf on `S`. Then
+`Hᵠ(X, F|_X) = colimᵢ Hᵠ(Dᵢ, F|_{Dᵢ})` along the pullback maps
+`AlgebraicGeometry.Etale.cohomologyMap`: every class on `X` comes from some `Dᵢ` (up to the
+canonical identification `F|_X ≅ (F|_{Dᵢ})|_X` of `AlgebraicGeometry.Etale.upperStarComp`), and a
+class on `Dᵢ` which vanishes on `X` already vanishes on some `Dⱼ`, `j ⟶ i`. -/
+theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
+    (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) {I : Type u} [SmallCategory I]
+    [IsCofiltered I] (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]
+    [∀ i, QuasiSeparatedSpace (D.obj i).left] [∀ {i j} (g : i ⟶ j), IsAffineHom (D.map g).left]
+    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) (q : ℕ) :
+    (∀ x : Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} c.pt.hom).obj F) q,
+      ∃ (i : I) (y : Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F) q),
+        Etale.cohomologyMap (c.π.app i).left _ q y =
+          Sheaf.H.map ((Etale.upperStarComp AddCommGrpCat.{u + 1} (c.π.app i).left (D.obj i).hom
+            c.pt.hom (Over.w (c.π.app i)).symm).hom.app F) q x) ∧
+    ∀ (i : I) (y : Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F) q),
+      Etale.cohomologyMap (c.π.app i).left _ q y = 0 →
+        ∃ (j : I) (g : j ⟶ i), Etale.cohomologyMap (D.map g).left _ q y = 0 :=
   sorry
 
 end AlgebraicGeometry.Etale
