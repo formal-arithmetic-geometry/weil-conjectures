@@ -31,26 +31,10 @@
  ],
  "proof": [
   {
-   "text": "*A geometric point over the closed point.* Let $\\mathfrak m$ be the maximal ideal of $R$, $\\kappa=R/\\mathfrak m$ its residue field and $s\\in S$ the closed point $\\mathfrak m$, so $\\kappa(s)=\\kappa$ [def-weil-affine-spectrum]. Choose an algebraic closure $\\iota:\\kappa\\to\\Omega$ [def-weil-algebraic-closure] (it exists by that node). By [def-weil-geometric-point] the pair consisting of the point $s$ and the field homomorphism $\\iota:\\kappa(s)\\to\\Omega$ is a morphism $\\bar s:\\operatorname{Spec}\\Omega\\to S$, a geometric point of $S$ lying over $s$, with $\\Omega$ algebraically closed and a map $\\kappa\\to\\Omega$, as [lem-weil-pbc-strictly-henselian-sections-stalk] requires.",
+   "text": "Install the strictly henselian instance from hR. The already proved source-library instance Scheme.preservesEpimorphisms_sheafSections_of_isStrictlyHenselianLocalRing (WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian, Stacks 03QO) says that sections at the identity etale object preserve epimorphisms. Its proof constructs sections of etale neighbourhoods over the closed point, so every covering sieve there contains the identity. Transport this property to global sections by Sheaf.ΓNatIsoSheafSections and Functor.PreservesEpimorphisms.of_iso. Global sections are additive and preserve finite limits as a right adjoint. Functor.preservesHomology_of_preservesEpis_and_kernels then gives preservation of kernels and cokernels, and Functor.preservesFiniteColimits_of_preservesHomology gives finite colimits. Conclude exactFunctor_iff.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "def-weil-algebraic-closure",
-    "def-weil-geometric-point"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), statement ('let sbar be its closed point')"
-   }
-  },
-  {
-   "text": "*$\\Gamma(S,-)$ is exact.* By [lem-weil-pbc-strictly-henselian-sections-stalk] (applied to $R$ strictly henselian [def-weil-pbc-henselian-terminology] and $\\bar s$ of step 1) the germ maps $\\gamma_{\\mathcal F}:\\Gamma(S,\\mathcal F)=\\mathcal F(S)\\to\\mathcal F_{\\bar s}$ are isomorphisms of abelian groups, natural in $\\mathcal F\\in\\Ab(S_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]: $\\gamma$ is a natural isomorphism $\\Gamma(S,-)\\cong(-)_{\\bar s}$ of functors $\\Ab(S_{\\Et})\\to\\textit{Ab}$. By [prop-weil-pbc-geometric-stalks-exact] the stalk functor $\\mathcal F\\mapsto\\mathcal F_{\\bar s}$ is exact. Transfer along $\\gamma$: (a) $\\Gamma(S,-)$ is additive, since for morphisms $\\varphi,\\psi:\\mathcal F\\to\\mathcal G$ one has $(\\varphi+\\psi)_S=\\varphi_S+\\psi_S$ (morphisms of abelian sheaves are added sectionwise); (b) if $0\\to\\mathcal F'\\xrightarrow{a}\\mathcal F\\xrightarrow{b}\\mathcal F''\\to0$ is short exact in $\\Ab(S_{\\Et})$, then by naturality $\\gamma_{\\mathcal F}\\circ a_S=a_{\\bar s}\\circ\\gamma_{\\mathcal F'}$ and $\\gamma_{\\mathcal F''}\\circ b_S=b_{\\bar s}\\circ\\gamma_{\\mathcal F}$, so the sequence $0\\to\\mathcal F'(S)\\to\\mathcal F(S)\\to\\mathcal F''(S)\\to0$ is carried by the isomorphisms $\\gamma_{\\mathcal F'},\\gamma_{\\mathcal F},\\gamma_{\\mathcal F''}$ onto the short exact sequence $0\\to\\mathcal F'_{\\bar s}\\to\\mathcal F_{\\bar s}\\to\\mathcal F''_{\\bar s}\\to0$; kernels and images correspond under these isomorphisms, so it is short exact. Hence $\\Gamma(S,-)$ is an additive functor carrying short exact sequences to short exact sequences, i.e. exact, and by the equivalence recorded in [lem-sp-exact-functor-preserves-homology] (Stacks Tag 010N) it commutes with finite limits and finite colimits. This is the first assertion of the statement.",
-   "uses": [
-    "lem-weil-pbc-strictly-henselian-sections-stalk",
     "def-weil-pbc-henselian-terminology",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-sp-exact-functor-preserves-homology"
+    "def-weil-pbc-abelian-etale-sheaves"
    ],
    "elementary": false,
    "source": {
@@ -59,12 +43,10 @@
    }
   },
   {
-   "text": "*Vanishing in positive degrees (the higher derived functors of an exact functor are zero, Stacks Derived Categories Lemma Tag 015F (lemma-right-derived-exact-functor) (5), whose proof is that an exact functor carries quasi-isomorphisms to quasi-isomorphisms; written out here for the definition of etale cohomology).* Let $\\mathcal F\\in\\Ab(S_{\\Et})$ and $p\\ge1$. By [def-weil-pbc-etale-cohomology], $H^p(S_{\\Et},\\mathcal F)=H^p(\\Gamma(S,I^\\bullet))$ where $\\mathcal F\\to I^\\bullet$ is a K-injective resolution [def-weil-pbc-kinjective-resolutions], i.e. a quasi-isomorphism from the complex $\\mathcal F[0]$ ($\\mathcal F$ in degree $0$, zero elsewhere) to a K-injective complex $I^\\bullet$ of abelian sheaves, and $\\Gamma(S,I^\\bullet)$ is the complex obtained by applying $\\Gamma(S,-)$ termwise. A quasi-isomorphism induces isomorphisms on all cohomology objects [def-weil-abstract-derived-category], so $H^p(I^\\bullet)\\cong H^p(\\mathcal F[0])$, and $H^p(\\mathcal F[0])=\\ker(0\\to0)/\\operatorname{im}(\\mathcal F[0]^{p-1}\\to0)=0$ because $\\mathcal F[0]^p=0$ for $p\\ne0$. By step 2, $\\Gamma(S,-):\\Ab(S_{\\Et})\\to\\textit{Ab}$ is an additive functor between abelian categories [def-weil-pbc-abelian-etale-sheaves] preserving finite limits and finite colimits, so [lem-weil-pbc-exact-functor-complex-cohomology] gives an isomorphism $H^p(\\Gamma(S,I^\\bullet))\\cong\\Gamma(S,H^p(I^\\bullet))$. Since $H^p(I^\\bullet)$ is a zero object and an additive functor carries zero objects to zero objects ($\\mathrm{id}_0=0$ gives $\\mathrm{id}_{\\Gamma(S,0)}=\\Gamma(S,0_{0,0})=0$), $\\Gamma(S,H^p(I^\\bullet))=0$. Hence $H^p(S_{\\Et},\\mathcal F)=0$ for all $p\\ge1$.",
+   "text": "For an exact additive functor G, the proved source-library natural isomorphism G.rightDerivedFunctorHomologyFunctorIso p identifies G applied to H^p(K) with H^p(RG(K)). It is built from the exact-functor complex-cohomology comparison [lem-weil-pbc-exact-functor-complex-cohomology], descent to the derived category, and uniqueness of right derived functors (Functor.rightDerivedFunctorIsoMapDerivedCategory in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory). Take K = F[0]. It is concentrated in degree zero, so DerivedCategory.isZero_of_isLE gives H^p(K) = 0 for p >= 1. The additive functor G preserves zero objects. Transfer this zero object through the comparison isomorphism to H^p(RG(F[0])), which is the etale cohomology object by definition.",
    "uses": [
     "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-kinjective-resolutions",
     "def-weil-abstract-derived-category",
-    "def-weil-pbc-abelian-etale-sheaves",
     "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": false,
@@ -75,23 +57,16 @@
   }
  ],
  "proof_deps": [
-  "def-weil-affine-spectrum",
-  "def-weil-algebraic-closure",
-  "def-weil-geometric-point",
-  "lem-weil-pbc-strictly-henselian-sections-stalk",
   "def-weil-pbc-henselian-terminology",
   "def-weil-pbc-abelian-etale-sheaves",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-sp-exact-functor-preserves-homology",
   "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-kinjective-resolutions",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-exact-functor-complex-cohomology"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), proof: first sentence (exactness from Gamma(S,F) = F_sbar and the exactness of the stalk functor) and last sentence (higher derived functors of an exact functor vanish), with literature/stacks-project/derived.tex Lemma Tag 015F (lemma-right-derived-exact-functor) (5) and its proof"
+  "place": "Stacks Tag 03QO, via the proved source-library sections-of-etale-neighbourhoods argument in WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian; final vanishing as in derived.tex Tag 015F (5), implemented by the proved total-derived-functor homology comparison."
  },
  "mathlib_searches": [
   {
@@ -200,5 +175,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T070550-L-3476748",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
