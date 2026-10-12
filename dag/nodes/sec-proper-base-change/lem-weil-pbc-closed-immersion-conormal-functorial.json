@@ -34,77 +34,53 @@
  ],
  "proof": [
   {
-   "text": "*(1) The pulled-back ideal is contained in the ideal of $Z$.* A section of $\\mathcal I'$ maps to zero in $i'_*\\mathcal O_{Z'}$ by the kernel definition. Pulling this equality around the commutative square $g\\circ i=i'\\circ f$ shows that its image under $g^\\sharp$ restricts to zero on $Z$: on stalks at $z\\in Z$, the composite $\\mathcal I'_{g(i(z))}\\to\\mathcal O_{X',g(i(z))}\\to\\mathcal O_{Z,z}$ equals the map through $\\mathcal O_{Z',f(z)}$ and is zero. Hence the image $\\mathcal I'\\mathcal O_X$ of $g^*\\mathcal I'\\to\\mathcal O_X$ [def-nagata-extended-ideal] lies in $\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)=\\mathcal I$. Corestricting that map gives the $\\mathcal O_X$-linear $\\gamma:g^*\\mathcal I'\\to\\mathcal I$.",
+   "text": "Use IdealSheafData.le_map_iff_comap_le and map_ker to rewrite ideal containment as i′.ker ≤ (i ≫ g).ker. Rewrite by the square equality and apply Hom.le_ker_comp to f and i′. This uses only the ideal-sheaf Galois connection and the kernel of a composite.",
    "uses": [
-    "def-weil-closed-immersion",
+    "def-nagata-extended-ideal",
     "def-sbc-closed-immersion-ideal-sheaf",
-    "def-pc-scheme",
-    "def-nagata-extended-ideal"
+    "def-pc-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01R4 (morphisms-lemma-conormal-functorial), second paragraph; Schemes, Lemma 01HP (schemes-lemma-characterize-closed-subspace), easy direction"
-   }
+   "elementary": true
   },
   {
-   "text": "*(2) Passage to the conormal sheaves.* Pull $\\gamma:g^*\\mathcal I'\\to\\mathcal I$ from Step (1) back along $i$ to obtain $i^*g^*\\mathcal I'\\to i^*\\mathcal I$. The pullback-composition isomorphism in [def-pc-module-pullback], together with $g\\circ i=i'\\circ f$, identifies its source with $f^*i'^*\\mathcal I'=f^*\\mathcal C_{Z'/X'}$ and its target with $i^*\\mathcal I=\\mathcal C_{Z/X}$. This is the canonical map $c$. Since $g^\\sharp$ is multiplicative and Step (1) sends $\\mathcal I'$ into $\\mathcal I$, it also sends $(\\mathcal I')^2$ into $\\mathcal I^2$; equivalently the same map is obtained from the conormal quotients $\\mathcal I'/(\\mathcal I')^2$ and $\\mathcal I/\\mathcal I^2$, as in Stacks 01R4.",
+   "text": "The existing source-library map IdealSheafData.pullbackToModulesι g J has zero composite with the quotient by J.comap g (pullbackToModulesι_comp_toPushforwardSubscheme). Kernel.lift therefore factors it through (J.comap g).toModules. The containment from step 1 and inclusion_subschemeι show that the inclusion of this ideal has zero composite with i.ker.toPushforwardSubscheme; a second kernel lift corestricts into i.ker.toModules. Compare tensorPullback g with Mathlib pullback g using Adjunction.leftAdjointUniq. Its unit_leftAdjointUniq_hom_app equation, together with pullbackToModulesι_app_unit, proves the required formula for γ on every open.",
+   "uses": [
+    "def-nagata-extended-ideal",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the chosen tensor-pullback adjunctions along i′ and f. Transport their composite right adjoint through pushforwardComp f i′ and pushforwardCongr h.symm. Apply the inverse Hom equivalence of this adjunction to the morphism obtained from γ and the units along g and i. Adjunction.comp_homEquiv, homEquiv_ofNatIsoRight_apply and homEquiv_unit give precisely the adjoint equality in the statement. Injectivity of that Hom equivalence proves uniqueness from this equality alone.",
    "uses": [
     "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For U ⊆ g⁻¹(U′), take s to be the restriction to U of γ applied to the g-pullback unit of s′. Naturality of i.ker.toModulesι and the section formula from step 2 give i.ker.toModulesι(s) = g.appLE(s′). Evaluate the adjoint equality from step 3 on s′; pushforwardComp acts as the identity on sections. Naturality of the i-pullback unit under restriction gives the final affine equation. This argument works on arbitrary opens and does not need affine quotient calculations or tensor generators. No unit-level realization is bypassed: this node is not among sk-thm-p1.realized.",
+   "uses": [
     "def-sbc-closed-immersion-ideal-sheaf",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01R4 (morphisms-lemma-conormal-functorial), second paragraph of the proof; Definition 01R2 (morphisms-definition-conormal-sheaf)"
-   }
-  },
-  {
-   "text": "*(3) Affine description of the induced map.* Choose affine opens $U=\\operatorname{Spec}R\\subset X$ and $U'=\\operatorname{Spec}R'\\subset X'$ with $g(U)\\subset U'$. The closed-immersion affine description [lem-weil-pbc-closed-immersion-affine-cover-criterion] identifies $Z\\cap U$ and $Z'\\cap U'$ with $\\operatorname{Spec}(R/I)$ and $\\operatorname{Spec}(R'/I')$, where $I$ and $I'$ are the kernels of the corresponding structure-ring maps. The induced map on affine opens is the ring homomorphism $g^\\sharp:R'\\to R$ [def-weil-affine-spectrum], and Step (1) gives $g^\\sharp(I')\\subseteq I$: an element of $I'$ maps to a section whose restriction to $Z$ is zero. Thus $g^\\sharp$ induces the well-defined map $I'/I'^2\\to I/I^2$, $a+I'^2\\mapsto g^\\sharp(a)+I^2$, since $g^\\sharp(I'^2)\\subseteq I^2$.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-    "def-sbc-closed-immersion-ideal-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01R3 (morphisms-lemma-affine-conormal), Lemma 01R4 (morphisms-lemma-conormal-functorial), and Definition 01R2"
-   }
-  },
-  {
-   "text": "*(4) Identification with sections and characterization.* The affine conormal calculation [lem-weil-pbc-affine-conormal-sections] identifies the sections on $Z'\\cap U'$ and $Z\\cap U$ with $I'/I'^2$ and $I/I^2$. Pullback of a section represented by $a\\in I'$ followed by $i^*\\gamma$ takes it to the class of $g^\\sharp(a)$; Step (3) shows this does not depend on the representative. Thus $c$ has the asserted affine description. This description determines $c$: for each $z\\in Z$, choose an affine neighbourhood $U'$ of $g(i(z))$ in $X'$, then an affine neighbourhood $U$ of $i(z)$ inside the open $g^{-1}(U')$; the closed immersions make $Z\\cap U$ and $Z'\\cap U'$ affine by [lem-weil-pbc-closed-immersion-affine-cover-criterion]. These $Z\\cap U$ cover $Z$. Since $\\mathcal C_{Z'/X'}$ is quasi-coherent by [lem-weil-pbc-affine-conormal-sections], [lem-weil-pbc-module-pullback-affine-sections] gives the sections of its pullback on $Z\\cap U$ as $(I'/I'^2)\\otimes_{R'/I'}(R/I)$; the elements $a\\otimes1$ generate this module. Therefore a sheaf map on $Z\\cap U$ is determined by its values on the classes $a\\in I'/I'^2$, which the affine description fixes, and these local determinations agree on overlaps.",
-   "uses": [
-    "def-weil-affine-spectrum",
     "def-pc-module-pullback",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "lem-weil-pbc-affine-conormal-sections",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-    "lem-weil-pbc-module-pullback-affine-sections"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01R3 (morphisms-lemma-affine-conormal), final assertion, and Lemma 01R4 (morphisms-lemma-conormal-functorial), third paragraph of the proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-closed-immersion",
+  "def-nagata-extended-ideal",
   "def-sbc-closed-immersion-ideal-sheaf",
   "def-pc-scheme",
-  "def-nagata-extended-ideal",
-  "lem-weil-pbc-affine-conormal-sections",
   "def-pc-module-pullback",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-  "lem-weil-pbc-module-pullback-affine-sections"
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemmas 01R2, 01R3, and 01R4; the affine ideal-containment verification is the closed-immersion specialization of the proof of 01R4"
+  "place": "Morphisms, Lemma 01R4, closed immersion case, second and third proof paragraphs; C1 implements the induced map via kernel lifts and composite adjunctions. Source-library lemmas in WeilConjectures.AlgebraicGeometry.EffectiveCartier provide the extended-ideal pullback factorization. Read the source at https://stacks.math.columbia.edu/tag/01R4 because the local literature checkout contains only its index."
  },
  "mathlib_searches": [
   {
@@ -181,5 +157,15 @@
   "group": "J1",
   "result": "pass",
   "note": "four schemes one universe; IsClosedImmersion i,i'; I,I' = i.ker/i'.ker.toModules with toModulesι; C = (tensorPullback i).obj i.ker.toModules as landed affine_conormal_sections; h : i≫g=f≫i'; (1) i'.ker.comap g ≤ i.ker (recorded extended ideal); gamma tied by toModulesι∘γ∘unit_g = g.app∘toModulesι' (unique since ι mono); c ∃! via adjoint equality with pushforwardComp/pushforwardCongr h.symm = adjoint of i*γ; affine U⊆g⁻¹U' clause: appLE sends I' into I and unit class s' ↦ unit class of g♯ s' (a mod I'² ↦ g♯a mod I²); names #check'd in Scheme.Modules namespace"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d8b51",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T215152-L-1303331",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, DAG fields, change record, report, proof axioms, and all three direct importers matched the stated stage-3 requirements and compiled cleanly."
  }
 }
