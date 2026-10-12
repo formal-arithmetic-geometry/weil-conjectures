@@ -4,11 +4,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.RingTheory.MinimalComponentDimensionMaximumData
 
 @[expose] public section
 
@@ -50,6 +46,14 @@ theorem minimal_component_dimension_maximum
     (∃ q : Ideal S, q.IsPrime ∧ q ≤ p ∧
       (∀ t : Ideal S, t.IsPrime → t ≤ q → t = q) ∧
       ringKrullDim (S ⧸ q) = ((d + r : ℕ) : WithBot ℕ∞)) := by
-  sorry
+  obtain ⟨qs, hqs, hne, hbound, hattain⟩ :=
+    minimal_component_dimension_maximum_data (k := k) p d r hd hr
+  constructor
+  · intro q hq hqp hmin
+    have hqmem : q ∈ qs := (hqs q).mpr ⟨hq, hqp, hmin⟩
+    exact hbound q hqmem
+  · obtain ⟨q, hq, hqeq⟩ := hattain
+    obtain ⟨hprime, hbelow, hminimal⟩ := (hqs q).mp hq
+    exact ⟨q, hprime, hbelow, hminimal, hqeq⟩
 
 end AlgebraicGeometry
