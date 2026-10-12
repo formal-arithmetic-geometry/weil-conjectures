@@ -4,10 +4,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.ExistsIsSeparatedOverPullbackMap
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.AlgebraicGeometry.NagataFinitePresentationEnvelope
 import WeilConjectures.AlgebraicGeometry.ChowLemma
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceFiniteCoordinates
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
@@ -48,6 +46,40 @@ theorem exists_chow_finite_type {S X : Scheme.{u}} (f : X ⟶ S)
       (j : X' ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) S),
       IsProper π ∧ Surjective π ∧ IsImmersion j ∧
         j ≫ ProjectiveSpace (ULift.{u} (Fin (n + 1))) S ↘ S = π ≫ f := by
-  sorry
+  classical
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
+  obtain ⟨Y, i, g, hi, hgfp, hgqc, hgsep, hif⟩ :=
+    f.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation
+  obtain ⟨A⟩ := S.nonempty_noetherianApproximation
+  obtain ⟨a, Y₀, g₀, hg₀fp, hg₀qc, hg₀sep, h, H⟩ :=
+    Scheme.exists_isPullback_of_finitePresentation_of_isSeparated A.isLimit g
+  let π₀ := ChowModification.modificationMap g₀
+  let j₀ := ChowModification.toProjectiveSpace g₀
+  have H' : IsPullback (pullback.fst π₀ h) (pullback.snd π₀ h ≫ g)
+      (j₀ ≫ ℙ(ChowModification.index g₀; A.D.obj a) ↘ A.D.obj a) (A.π.app a) := by
+    rw [ChowModification.toProjectiveSpace_over]
+    exact (IsPullback.of_hasPullback π₀ h).paste_vert H
+  have hw : (pullback.snd π₀ h ≫ g) ≫ A.π.app a =
+      (pullback.fst π₀ h ≫ j₀) ≫
+        ℙ(ChowModification.index g₀; A.D.obj a) ↘ A.D.obj a :=
+    H'.w.symm.trans (by simp)
+  let jY := ProjectiveSpace.liftBaseChange _ _ hw
+  have : IsImmersion jY :=
+    MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_liftBaseChange _ H' hw)
+      inferInstance
+  let π := pullback.snd (pullback.snd π₀ h) i
+  let j := pullback.fst (pullback.snd π₀ h) i ≫ jY
+  have hj : IsImmersion j := inferInstance
+  have hπ : IsProper π := inferInstance
+  have hπs : Surjective π := inferInstance
+  have hjover : j ≫ ℙ(ChowModification.index g₀; S) ↘ S = π ≫ f := by
+    simp only [j, π, jY, Category.assoc, ProjectiveSpace.liftBaseChange_over]
+    rw [pullback.condition_assoc, hif]
+  obtain ⟨n, k, hk, hkover⟩ :=
+    ProjectiveSpace.exists_isClosedImmersion_finite_coordinates (ChowModification.index g₀) S
+  refine ⟨n, pullback (pullback.snd π₀ h) i, π, j ≫ k,
+    hπ, hπs, inferInstance, ?_⟩
+  rw [Category.assoc, hkover, hjover]
 
 end AlgebraicGeometry

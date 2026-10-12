@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-projective-space-finite-coordinates",
+ "kind": "statement",
+ "title": "Finite homogeneous coordinates embed in standard projective space",
+ "statement": "Let $N$ be any finite set, possibly empty, and $S$ any scheme. Write $\\mathbf P(N;S)=S\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Proj}(\\mathbf Z[X_i]_{i\\in N})$ [def-nagata-projective-space-base-change]. There exist $n\\geq0$ and a closed immersion $k:\\mathbf P(N;S)\\to\\mathbf P^n_S$ [def-weil-closed-immersion] whose composite with the projection $\\mathbf P^n_S\\to S$ is the projection $\\mathbf P(N;S)\\to S$. One can take $n=|N|$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01N0",
+  "place": "Lemma 27.11.3(2), specialized to the polynomial-ring quotient setting an extra variable to zero; Tag 01ND, Section 27.13, definition of projective space by base change"
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Fintype on N and put n = card N. Enumerate Option N by ULift(Fin(n+1)). Define the polynomial-ring map by sending the variable corresponding to none to zero and the variable corresponding to some i to X_i. The map preserves homogeneous degrees since zero and each X_i are homogeneous of degree one. Renaming along i -> some i gives a right inverse on all polynomials and on each homogeneous degree. Thus the map is surjective and the target irrelevant ideal is contained in the image of the source irrelevant ideal. These statements are proved directly with MvPolynomial.IsHomogeneous.eval₂, rename_isHomogeneous, eval₂Hom_rename, and HomogeneousIdeal.irrelevant_le.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the surjective-graded-map closed-immersion assertion (3) of prop-nagata-relative-proj-functoriality, in its proved affine form Proj.isClosedImmersion_map from WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor. This gives a closed immersion of the integral polynomial-ring Proj schemes, including when N is empty.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change the integral closed immersion to S using the pullback definition of projective space (def-nagata-projective-space-base-change). MorphismProperty.pullbackMap for IsClosedImmersion proves closedness; the pullback.map_fst identity proves compatibility with the projection to S. This is the closed-immersion base-change assertion of lem-weil-pbc-closed-immersion-base-change.",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-nagata-relative-proj-functoriality",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01N0",
+  "place": "Lemma 27.11.3(2), specialized to the polynomial-ring quotient setting an extra variable to zero; Tag 01ND, Section 27.13, definition of projective space by base change",
+  "note": "The explicit enumeration and polynomial-ring right inverse are written and proved by G1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A projective space indexed by a finite type embeds as a closed linear subspace into standard finite dimensional projective space",
+   "results": "Service returned Internal Server Error, no search result available.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj.isClosedImmersion_map\"",
+   "results": "0 hits (the needed theorem is in the source library, not Mathlib).",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*finite.*coordinates|finite.*coordinates.*projective",
+   "results": "0 hits. Direct source search found Proj.isClosedImmersion_map in WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor, which supplies the integral closed immersion but not the finite coordinate enumeration or its base change.",
+   "date": "2026-10-12",
+   "verdict": "partial source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowFiniteType",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "The Chow lemma used in step 7 (essential surjectivity, Stacks 0GS2): numerical homogeneous coordinates for the projective immersion in lem-weil-pbc-chow-finite-type, step 6.",
+   "via": [
+    "lem-weil-pbc-chow-finite-type"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceFiniteCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceFiniteCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_finite_coordinates",
+  "statement": "theorem ProjectiveSpace.exists_isClosedImmersion_finite_coordinates (N : Type u) [Finite N]\n    (S : Scheme.{u}) :\n    ∃ (n : ℕ) (k : ℙ(N; S) ⟶ ℙ(ULift.{u} (Fin (n + 1)); S)),\n      IsClosedImmersion k ∧ k ≫ ℙ(ULift.{u} (Fin (n + 1)); S) ↘ S = ℙ(N; S) ↘ S",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T060737-L-2906956",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T060737-L-2906956",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
