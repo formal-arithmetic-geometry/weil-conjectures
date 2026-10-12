@@ -8945,3 +8945,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/G3/Sheaf.AlgebraicGeometry.AffineProjectiveLocalStrictModel (stage 3; reviewer PASS; first push; landing 20261012T184301-L-4003663 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/G3/Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso (stage 3; reviewer PASS; first push; landing 20261012T184301-L-4003760 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/G3/Sheaf.AlgebraicGeometry.MLSetsTowerLimitNonempty (stage 3; reviewer PASS; first push; landing 20261012T184301-L-4003872 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/G3/Sheaf.AlgebraicGeometry.ProperFlatCohomologyProperties (stage 3; reviewer PASS; first push; landing 20261012T184302-L-4004112 (interface); batch 20261012T184234; modules 3; new nodes 2)
