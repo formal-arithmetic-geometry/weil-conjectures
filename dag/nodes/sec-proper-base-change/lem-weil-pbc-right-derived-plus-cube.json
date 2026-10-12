@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-right-derived-plus-cube",
+ "kind": "statement",
+ "title": "Commuting exact coefficient cubes lift to bounded below derived comparisons",
+ "statement": "Let B,C,B′,C′,B₀,C₀,B₀′,C₀′ be abelian categories with derived categories, and assume enough injectives in B,B′,B₀,B₀′. Let G:B→C, H:B′→C′, G₀:B₀→C₀, H₀:B₀′→C₀′ be additive. Let P:B→B′, Q:C→C′, P₀:B₀→B₀′, Q₀:C₀→C₀′, U:B→B₀, V:C→C₀, U′:B′→B₀′ and V′:C′→C₀′ be exact additive functors. Suppose e:G⋙Q→P⋙H, e₀:G₀⋙Q₀→P₀⋙H₀, a:G⋙V→U⋙G₀, b:H⋙V′→U′⋙H₀, c:V⋙Q₀≅Q⋙V′ and d:U⋙P₀≅P⋙U′ satisfy V′(e_F);b_{PF};H₀(d_F⁻¹)=c_{GF}⁻¹;Q₀(a_F);e₀_{UF} for every F. Write R(e),R(e₀),R(a),R(b) for the canonical rightDerivedFunctorPlusBaseChange comparisons, and Dc,Dd for the exact derived lifts using composition isomorphisms. Then for every K, DV′(R(e)_K);R(b)_{DP(K)};RH₀(Dd_K⁻¹)=Dc_{RG(K)}⁻¹;DQ₀(R(a)_K);R(e₀)_{DU(K)}. This is a formal lifting statement conditional on underived cube commutativity, with no geometric or coefficient assumptions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0736 construction and homotopy uniqueness; formal cube expansion using Mathlib rightDerived_ext and source PlusBaseChange factorization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Form the two natural transformations from RG⋙DQ⋙DV′ to DU⋙DP₀⋙RH₀. Precompose with the RG unit whiskered by DQ and DV′. Use rightDerivedFunctorPlusBaseChange_fac for each of the four faces, and mapDerivedCategoryPlusCompIso_hom_app_factorsh plus mapDerivedCategoryPlusNatIso_hom_app_factorsh for c and d. Naturality of the RH₀ unit moves the exact comparisons to the termwise maps. The assumed equation, applied termwise to bounded below complexes and then mapped through Qh, makes these composites equal.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "RG followed by the arbitrary functor DQ⋙DV′ is an absolute right derived functor, by isRightDerivedFunctor_rightDerivedFunctorPlus_comp_right. Apply rightDerived_ext to the equality after its unit, and evaluate at K. No coefficient functor is assumed to preserve injectives.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "worker B3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0736 construction and homotopy uniqueness; formal cube expansion using Mathlib rightDerived_ext and source PlusBaseChange factorization.",
+  "note": "Formal expansion of the parent node steps; Stacks tags read online. Underived node has a complete Lean proof; cube node is the remaining formal lifting step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A commuting cube of exact functors induces a commuting cube of bounded below right derived base change comparisons",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict assigned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition and naturality of right derived functor base change for a commuting cube of exact coefficient functors",
+   "date": "2026-10-12",
+   "results": "General LocalizerMorphism rightDerivedFunctorComparison_fac and classical NatTrans.rightDerived_comp; no matching bounded below cube coherence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "date": "2026-10-12",
+   "results": "General rightDerivedDesc, rightDerived_fac and rightDerived_ext API; no bounded below cube coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(vcomp|hcomp)|BaseChange.*cube; moduleAbelianUpperStarComparison and unit_map_baseChangeMap_app",
+   "date": "2026-10-12",
+   "results": "No general cube declaration. Square.lean supplies the pushforward unit formula and squareLowerStarIso naturality. PlusBaseChange.lean supplies rightDerivedFunctorPlusBaseChange_fac."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+   "place": "steps 2 and 3 of the coefficient derived exchange compatibility proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedPlusCube",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedPlusCube.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedFunctorPlusBaseChange_cube",
+  "statement": "theorem rightDerivedFunctorPlusBaseChange_cube\n    (e : G ⋙ Q ⟶ P ⋙ H) (e₀ : G₀ ⋙ Q₀ ⟶ P₀ ⋙ H₀)\n    (a : G ⋙ V ⟶ U ⋙ G₀) (b : H ⋙ V' ⟶ U' ⋙ H₀)\n    (c : V ⋙ Q₀ ≅ Q ⋙ V') (d : U ⋙ P₀ ≅ P ⋙ U')\n    (h : ∀ F : B, V'.map (e.app F) ≫ b.app (P.obj F) ≫ H₀.map (d.inv.app F) =\n      c.inv.app (G.obj F) ≫ Q₀.map (a.app F) ≫ e₀.app (U.obj F))\n    (K : DerivedCategory.Plus B) :\n    D+(V').map ((rightDerivedFunctorPlusBaseChange e).app K) ≫\n        (rightDerivedFunctorPlusBaseChange b).app (D+(P).obj K) ≫\n        R+(H₀).map (((mapDerivedCategoryPlusCompIso U P₀).symm ≪≫\n          mapDerivedCategoryPlusNatIso d ≪≫ mapDerivedCategoryPlusCompIso P U').inv.app K) =\n      ((mapDerivedCategoryPlusCompIso V Q₀).symm ≪≫\n        mapDerivedCategoryPlusNatIso c ≪≫ mapDerivedCategoryPlusCompIso Q V').inv.app\n          (R+(G).obj K) ≫\n        D+(Q₀).map ((rightDerivedFunctorPlusBaseChange a).app K) ≫\n        (rightDerivedFunctorPlusBaseChange e₀).app (D+(U).obj K)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T110254-L-611948",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T110254-L-611948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

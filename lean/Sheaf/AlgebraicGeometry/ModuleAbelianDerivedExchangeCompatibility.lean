@@ -6,9 +6,8 @@ Authors: SHEAF group R2
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
-import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
-import WeilConjectures.SixFunctors.BaseChange.Derived
-import WeilConjectures.SixFunctors.BaseChange.Square
+import Sheaf.AlgebraicGeometry.ModuleAbelianUnderivedExchange
+import Sheaf.CategoryTheory.RightDerivedPlusCube
 
 /-! # Compatibility of canonical coefficient comparisons with derived exchange
 
@@ -24,6 +23,22 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
+
+private theorem derivedBaseChange_module_eq
+    (Λ : Type (u + 1)) [CommRing Λ] {X X' Y Y' : Scheme.{u}}
+    {f : X ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y}
+    (sq : CommSq g' f' f g) :
+    derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq =
+      Functor.rightDerivedFunctorPlusBaseChange (baseChangeMap (ModuleCat.{u + 1} Λ) sq) := by
+  rfl
+
+private theorem derivedBaseChange_abelian_eq
+    {X X' Y Y' : Scheme.{u}}
+    {f : X ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y}
+    (sq : CommSq g' f' f g) :
+    derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq =
+      Functor.rightDerivedFunctorPlusBaseChange (baseChangeMap AddCommGrpCat.{u + 1} sq) := by
+  rfl
 
 /-- Forgetting the source of derived exchange, using the canonical edge comparisons. -/
 noncomputable def moduleAbelianDerivedExchangeSourceIso
@@ -88,6 +103,22 @@ theorem moduleAbelianDerivedExchange_compatibility
         (moduleAbelianDerivedExchangeTargetIso Λ g' f' K).hom =
       (moduleAbelianDerivedExchangeSourceIso Λ f g K).hom ≫
         (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq).app
-          (D+(moduleAbelianForget Λ X).obj K) := by sorry
+          (D+(moduleAbelianForget Λ X).obj K) := by
+  have h := Functor.rightDerivedFunctorPlusBaseChange_cube
+    ((f)_*[ModuleCat.{u + 1} Λ]) ((f')_*[ModuleCat.{u + 1} Λ])
+    ((f)_*[AddCommGrpCat.{u + 1}]) ((f')_*[AddCommGrpCat.{u + 1}])
+    ((g')^*[ModuleCat.{u + 1} Λ]) ((g)^*[ModuleCat.{u + 1} Λ])
+    ((g')^*[AddCommGrpCat.{u + 1}]) ((g)^*[AddCommGrpCat.{u + 1}])
+    (moduleAbelianForget Λ X) (moduleAbelianForget Λ Y)
+    (moduleAbelianForget Λ X') (moduleAbelianForget Λ Y')
+    (baseChangeMap (ModuleCat.{u + 1} Λ) sq) (baseChangeMap AddCommGrpCat.{u + 1} sq)
+    (moduleAbelianLowerStarIso Λ f).hom (moduleAbelianLowerStarIso Λ f').hom
+    (moduleAbelianUpperStarIso Λ g) (moduleAbelianUpperStarIso Λ g')
+    (moduleAbelianUnderivedExchange_compatibility Λ sq) K
+  simpa only [moduleAbelianDerivedExchangeSourceIso, moduleAbelianDerivedExchangeTargetIso,
+    moduleAbelianDerivedLowerStarIso, moduleAbelianDerivedLowerStarComparison,
+    moduleAbelianDerivedUpperStarIso, Iso.symm_hom, Iso.trans_hom, Iso.app_hom, asIso_hom,
+    derivedBaseChange_module_eq, derivedBaseChange_abelian_eq,
+    Functor.mapIso_hom, Category.assoc] using h
 
 end AlgebraicGeometry.Etale

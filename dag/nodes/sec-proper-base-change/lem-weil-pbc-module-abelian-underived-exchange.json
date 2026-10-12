@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-module-abelian-underived-exchange",
+ "kind": "statement",
+ "title": "Coefficient forgetting respects underived exchange",
+ "statement": "For any commutative square of schemes and any module-valued etale sheaf F, the underlying abelian map of module baseChangeMap followed by the direct-image evaluation identity and the inverse g′ coefficient mate equals the inverse g coefficient mate followed by g inverse image of the f evaluation identity and abelian baseChangeMap. The maps are the fixed moduleAbelianLowerStarIso and moduleAbelianUpperStarIso from lem-weil-pbc-module-abelian-derived-direct-image-comparison; no cartesianness is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Remark 07A7, adjunction-mate construction; Tags 03D2 and 03D3 for coefficient inverse image."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the g abelian adjunction bijection to forward compatibility. The coefficient mate identity identifies its unit composite with the forgotten module unit. Apply unit_map_baseChangeMap_app for both coefficient categories. Pushforward square isomorphisms commute definitionally with forgetting. Naturality of squareLowerStarIso and the g′ mate unit identity identify the adjoints. Injectivity proves forward compatibility.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose with the inverse g and g′ coefficient comparisons; cancel their hom/inv composites and map the latter through f′ direct image. Insert the identity direct-image comparisons.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker B3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Remark 07A7, adjunction-mate construction; Tags 03D2 and 03D3 for coefficient inverse image.",
+  "note": "Formal expansion of the parent node steps; Stacks tags read online. Underived node has a complete Lean proof; cube node is the remaining formal lifting step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A commuting cube of exact functors induces a commuting cube of bounded below right derived base change comparisons",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict assigned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition and naturality of right derived functor base change for a commuting cube of exact coefficient functors",
+   "date": "2026-10-12",
+   "results": "General LocalizerMorphism rightDerivedFunctorComparison_fac and classical NatTrans.rightDerived_comp; no matching bounded below cube coherence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "date": "2026-10-12",
+   "results": "General rightDerivedDesc, rightDerived_fac and rightDerived_ext API; no bounded below cube coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(vcomp|hcomp)|BaseChange.*cube; moduleAbelianUpperStarComparison and unit_map_baseChangeMap_app",
+   "date": "2026-10-12",
+   "results": "No general cube declaration. Square.lean supplies the pushforward unit formula and squareLowerStarIso naturality. PlusBaseChange.lean supplies rightDerivedFunctorPlusBaseChange_fac."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleAbelian.*[Ee]xchange|unit_map_baseChangeMap_app|squareLowerStarIso; independent second reading local rg on lean/",
+   "date": "2026-10-12",
+   "results": "Only the parent derived exchange compatibility and its stalk user exist for module/abelian exchange. Square.lean provides the adjunction unit formula; ModuleAbelianDerivedDirectImageComparison provides fixed mates. No underived module/abelian exchange compatibility theorem exists."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-abelian-derived-exchange-compatibility",
+   "place": "steps 2 and 3 of the coefficient derived exchange compatibility proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleAbelianUnderivedExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleAbelianUnderivedExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.moduleAbelianUnderivedExchange_compatibility",
+  "statement": "theorem moduleAbelianUnderivedExchange_compatibility\n    (Λ : Type (u + 1)) [CommRing Λ]\n    {X X' Y Y' : Scheme.{u}}\n    {f : X ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} {g : Y' ⟶ Y}\n    (sq : CommSq g' f' f g)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    (moduleAbelianForget Λ Y').map ((baseChangeMap (ModuleCat.{u + 1} Λ) sq).app F) ≫\n        (moduleAbelianLowerStarIso Λ f').hom.app ((g')^*[ModuleCat.{u + 1} Λ].obj F) ≫\n        ((f')_*[AddCommGrpCat.{u + 1}]).map ((moduleAbelianUpperStarIso Λ g').inv.app F) =\n      (moduleAbelianUpperStarIso Λ g).inv.app ((f)_*[ModuleCat.{u + 1} Λ].obj F) ≫\n        ((g)^*[AddCommGrpCat.{u + 1}]).map ((moduleAbelianLowerStarIso Λ f).hom.app F) ≫\n        (baseChangeMap AddCommGrpCat.{u + 1} sq).app ((moduleAbelianForget Λ X).obj F)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T110254-L-611948",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T110254-L-611948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
