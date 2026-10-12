@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Write the last $m$ values as fractions in $\\Lambda_{\\mathfrak q}$. Choose $w$ to be the product of their denominators and multiply each numerator by the other denominators. Thus all these values have denominator $w\\notin\\mathfrak q$.",
+   "text": "Apply Mathlib IsLocalization.exist_integer_multiples_of_finite to the finite family y. This gives a common denominator w in the prime complement and numerators z_i with image w*y_i. Define b_i=a_i when i<n, and b_i=z_i otherwise. The prescribed first-coordinate hypothesis gives image(b_i)=y_i*w^(if n≤i then 1 else 0). Clearing the whole family rather than only its last m entries changes no required conclusion.",
    "uses": [
     "def-weil-pbc-localization-at-prime"
    ],
@@ -24,7 +24,7 @@
    }
   },
   {
-   "text": "For each $j$, choose $d_j$ as the maximum extra-variable degree of the finite support, zero if the support is empty. Define $F_j$ by the indicated finite monomial sum, with original indices shifted by one to leave room for $x_0$. Assign the first $n$ values to $a_i$, the extra values to the adjusted numerators, and the last to $w$.",
+   "text": "Define d_j as Finset.sup of the extra degrees of the support; Finset.le_sup proves every degree bound, including empty support. Define F_j by the displayed monomial sum. Define the coordinate family with Fin.cases and Fin.lastCases, reserving coordinate zero for the later annihilator, inserting b in the middle, and w at the last coordinate.",
    "uses": [
     "def-weil-pbc-mv-polynomial-ring"
    ],
@@ -35,7 +35,7 @@
    }
   },
   {
-   "text": "In the localization, every monomial of $F_j$ evaluates to $w^{d_j}$ times the corresponding monomial of $f_j(y)$: the extra denominators cancel against $w^{E(e)}$, with $E(e)\\le d_j$. Summing gives zero by the hypothesis on $f_j$.",
+   "text": "The proved private helper partial_homogenization_eval expands aeval as the finite support sum using MvPolynomial.eval₂_eq'. Factor the product of scaled variable powers using Finset.prod_mul_distrib and Finset.prod_pow_eq_pow_sum. Combine w^E with w^(d_j-E) using E≤d_j to get w^d_j for each monomial. MvPolynomial.comp_aeval_apply identifies evaluation followed by localization with evaluation of the localized coordinates. Consequently the localized evaluation of F_j is w^d_j*f_j(y)=0.",
    "uses": [
     "def-weil-pbc-mv-polynomial-ring"
    ],
@@ -46,7 +46,7 @@
    }
   },
   {
-   "text": "The localization zero criterion supplies one annihilator outside $\\mathfrak q$ for each unlocalized evaluated $F_j$. Let $l_0$ be their product, or $1$ for an empty family. Primality keeps it outside $\\mathfrak q$, and it annihilates every evaluated $F_j$. The displayed equations follow. Empty extra-variable families likewise use denominator $1$.",
+   "text": "Apply IsLocalization.map_eq_zero_iff to each evaluation of F_j with coordinate zero set to one, obtaining an annihilator u_j in the prime complement. Form U as the product in that submonoid, so U remains outside q, also for an empty equation family. Finset.prod_erase_mul and u_j*F_j(b,w)=0 show U annihilates each evaluation. Expanding the displayed sum shows F_j is independent of coordinate zero, so replacing that coordinate by U preserves its evaluation. Multiplicativity of aeval then proves every X_0*F_j evaluates to zero.",
    "uses": [
     "def-weil-pbc-localization-at-prime"
    ],
@@ -149,10 +149,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T165529-L-2938819",
-  "kind": "interface",
+  "landing": "20261012T184242-L-3995802",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
