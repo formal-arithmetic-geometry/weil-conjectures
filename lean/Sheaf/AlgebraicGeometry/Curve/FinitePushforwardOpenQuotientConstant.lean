@@ -8,8 +8,13 @@ module
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
+
 import WeilConjectures.ConstructibleSheaf.OpenClosed
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
+import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteStalkModule
 
 /-!
 # Constructibility of finite pushforward of open quotient constants
@@ -24,6 +29,62 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
+
+private theorem constantModule_constructible (Y : Scheme.{u})
+    (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
+    Scheme.IsConstructibleSheaf ((constantSheaf Y.smallEtaleTopology
+      (ModuleCat.{u + 1} Λ)).obj M) := by
+  let : LocallySmall.{u + 1} Y.Etale := locallySmall_max.{u + 1, u, u + 1}
+  let F := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M
+  have hconst : F.IsConstant Y.smallEtaleTopology := by
+    exact Sheaf.isConstant_of_iso _ (Iso.refl _)
+  let : Scheme.IsLocallyConstantSheaf F := by
+    have : Scheme.etalePrecoverage.{u}.HasIsos :=
+      inferInstanceAs (Scheme.precoverage @Etale).HasIsos
+    refine ⟨⟨⟨.singleton (𝟙 Y) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ ?_⟩⟩⟩
+    rw [Scheme.isConstant_over_iff_upperStar]
+    have := hconst
+    exact Sheaf.IsConstant.upperStar (ModuleCat.{u + 1} Λ) (𝟙 Y) F
+  let : Scheme.IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F := ⟨fun Ω _ _ s ↦ by
+    let Φ := (Scheme.pointSmallEtale s).ulift.{u + 1}
+    let e : (Scheme.pointSmallEtale s).sheafFiber.obj F ≅ M :=
+      (((Scheme.pointSmallEtale s).uliftSheafFiberIso.{u + 1}
+        (ModuleCat.{u + 1} Λ)).app F).symm ≪≫ Φ.sheafFiberConstantSheafIso M
+    exact ((ModuleCat.isFinitelyGenerated_iff M).mpr inferInstance).of_iso e.symm⟩
+  let : Scheme.IsFiniteLocallyConstantSheaf F := {}
+  refine ⟨Scheme.Stratification.trivial Y, fun i ↦ ?_⟩
+  exact Scheme.IsFiniteLocallyConstantSheaf.upperStar (𝟙 Y) F
+
+private theorem finite_open_constantModule_stalk {X U : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j]
+    (M : ModuleCat.{u + 1} Λ) [Finite M] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (s : Spec (.of Ω) ⟶ X) :
+    Finite ((((Scheme.pointSmallEtale s).ulift.{u + 1}).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).obj
+      ((j)_!open[ModuleCat.{u + 1} Λ].obj
+        ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))) := by
+  classical
+  let : LocallySmall.{u + 1} U.Etale := locallySmall_max.{u + 1, u, u + 1}
+  by_cases hs : s.base (IsLocalRing.closedPoint Ω) ∈ Set.range j.base
+  · have hrange : Set.range s.base ⊆ Set.range j.base := by
+      rintro _ ⟨y, rfl⟩
+      simpa only [Subsingleton.elim y (IsLocalRing.closedPoint Ω)] using hs
+    let t := IsOpenImmersion.lift j s hrange
+    have hts : t ≫ j = s := IsOpenImmersion.lift_fac j s hrange
+    let e : ((Scheme.pointSmallEtale (t ≫ j)).ulift.{u + 1}).sheafFiber.obj
+        ((j)_!open[ModuleCat.{u + 1} Λ].obj
+          ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) ≅ M :=
+      (Etale.openImmersionLowerShriekCompUliftSheafFiberIso (ModuleCat.{u + 1} Λ)
+        j t).app ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) ≪≫
+      ((Scheme.pointSmallEtale t).ulift.{u + 1}).sheafFiberConstantSheafIso M
+    rw [← hts]
+    exact Finite.of_equiv M e.toLinearEquiv.toEquiv.symm
+  · have hz := Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj
+      (ModuleCat.{u + 1} Λ) j s hs
+      ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)
+    have := ModuleCat.isZero_iff_subsingleton.mp hz
+    infer_instance
 
 /-- Finite pushforward of an extension-by-zero finite quotient constant is constructible.
 
@@ -49,5 +110,14 @@ theorem finite_pushforward_open_constantModSheaf_constructible
     [Finite (Λ ⧸ Ideal.span {(ℓ : Λ)})] :
     Scheme.IsConstructibleSheaf ((ν)_*[ModuleCat.{u + 1} Λ].obj
       ((j)_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U ℓ))) := by
-  sorry
+  let : IsNoetherian Y := isNoetherian_of_locallyOfFiniteType ν
+  let F := (j)_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U ℓ)
+  let M := ModuleCat.of Λ (Λ ⧸ (Ideal.span {(ℓ : Λ)} : Ideal Λ))
+  let : Scheme.IsConstructibleSheaf (Etale.constantModSheaf Λ U ℓ) :=
+    constantModule_constructible Λ U M
+  have hF : Scheme.IsConstructibleSheaf F :=
+    Scheme.IsConstructibleSheaf.openImmersionLowerShriek j
+      j.closedComplement j.range_closedComplement _
+  exact Scheme.isConstructibleSheaf_lowerStar_of_finite_stalks Λ ν F hF
+    (fun Ω _ _ s ↦ finite_open_constantModule_stalk Λ j M s)
 end AlgebraicGeometry
