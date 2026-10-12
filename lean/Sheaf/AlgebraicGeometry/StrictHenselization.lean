@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
+import Mathlib.CategoryTheory.Filtered.Final
 
 /-!
 # Strict henselization from affine pointed neighbourhoods
@@ -62,7 +63,43 @@ theorem strictHenselizationAffineInclusion_isEquivalence
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
     (strictHenselizationAffineInclusion s).IsEquivalence := by
-  sorry
+  classical
+  let F := AffineEtale.Spec S
+  let G := (pointSmallEtale s).fiber
+  have : (Functor.Elements.precomp F G).Faithful := ⟨by
+    intro X Y f g h
+    apply Subtype.ext
+    exact F.map_injective (congrArg Subtype.val h)⟩
+  have : (Functor.Elements.precomp F G).Full := ⟨fun {X Y} f ↦
+    ⟨⟨F.preimage f.val, by
+      change G.map (F.map (F.preimage f.val)) X.snd = Y.snd
+      rw [F.map_preimage]
+      exact f.property⟩, by
+      apply Subtype.ext
+      exact F.map_preimage f.val⟩⟩
+  have : (strictHenselizationAffineInclusion s).Faithful := by
+    unfold strictHenselizationAffineInclusion
+    infer_instance
+  have : (strictHenselizationAffineInclusion s).Full := by
+    unfold strictHenselizationAffineInclusion
+    infer_instance
+  have : (strictHenselizationAffineInclusion s).EssSurj := by
+    refine ⟨fun X ↦ ?_⟩
+    let V := X.obj.fst
+    have : IsAffine V.left := X.property
+    let e := V.left.isoSpec
+    let A : AffineEtale S := AffineEtale.mk (e.inv ≫ V.hom)
+    let y : G.obj (F.obj A) := Over.homMk (X.obj.snd.left ≫ e.hom) (by
+      change (X.obj.snd.left ≫ e.hom) ≫ (e.inv ≫ V.hom) = s
+      simpa using Over.w X.obj.snd)
+    refine ⟨(F ⋙ G).elementsMk A y, ⟨?_⟩⟩
+    apply ObjectProperty.isoMk
+    let i : F.obj A ≅ V := MorphismProperty.Over.isoMk e.symm rfl
+    refine CategoryOfElements.isoMk _ _ i ?_
+    apply Over.OverMorphism.ext
+    change (X.obj.snd.left ≫ e.hom) ≫ e.inv = X.obj.snd.left
+    simp
+  exact { }
 
 /-- The coordinate-ring diagram on all affine pointed neighbourhoods, contravariantly
 sending a pointed map to its map on global sections.
@@ -138,7 +175,20 @@ theorem strictHenselization_properties
         (fun n : (pointSmallEtale s).fiber.Elements => IsAffine n.1.left)) ∧
       IsCofiltered (SmallModel.{u} (strictHenselizationNeighbourhoods s)) ∧
       Nonempty (IsLimit (strictHenselizationCone s)) := by
-  sorry
+  classical
+  have := strictHenselizationAffineInclusion_isEquivalence s
+  have := (affinePointedNeighbourhoods_initial_and_final_op s).1
+  let F := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse ⋙
+    strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
+      (fun n : (pointSmallEtale s).fiber.Elements => IsAffine n.1.left)
+  have : F.Initial := by dsimp [F]; infer_instance
+  refine ⟨this, ?_, ?_⟩
+  · apply IsCofiltered.of_exists_of_isCofiltered_of_fullyFaithful F
+    intro X
+    obtain ⟨Y⟩ := (inferInstance : Nonempty (CostructuredArrow F X))
+    exact ⟨Y.left, ⟨Y.hom⟩⟩
+  · exact ⟨isLimitOfPreserves Scheme.Spec
+      (colimit.isColimit (strictHenselizationDiagram s)).op⟩
 
 /-- Independence of the representative category, via the canonical colimit map.
 Here `e` describes a replacement of the chosen representative category and `w`

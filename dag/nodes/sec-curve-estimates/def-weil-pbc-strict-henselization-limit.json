@@ -25,9 +25,41 @@
   "lem-weil-pbc-commutative-algebras-colimits-exist",
   "lem-weil-pbc-spec-small-colimit-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The precomposition functor on elements is faithful because AffineEtale.Spec is faithful. Given a pointed morphism between its images, take the preimage of the underlying etale morphism under the full AffineEtale.Spec functor; its map-preimage identity preserves the point equation. ObjectProperty.lift to the affine full subcategory remains full and faithful. For an affine pointed neighbourhood (V,v), use e = V.isoSpec, put A = AffineEtale.mk (e.inv composed with V.hom), and put y = v composed with e.hom. The equation y composed with A.hom = s follows from the inverse identities for e and v being over S. The iso e.inv over S induces a pointed category-of-elements isomorphism from the image of (A,y) to (V,v). Thus strictHenselizationAffineInclusion is essentially surjective and is an equivalence.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": null
+  },
+  {
+   "text": "The inverse of equivSmallModel and strictHenselizationAffineInclusion are equivalences, hence initial. The inclusion of all affine pointed neighbourhoods is initial by affinePointedNeighbourhoods_initial_and_final_op. Their composite F is initial and fully faithful. For every pointed neighbourhood X, its costructured-arrow category for F is connected, hence nonempty, providing an arrow F(Y) to X. Since the ambient pointed category is cofiltered, IsCofiltered.of_exists_of_isCofiltered_of_fullyFaithful proves cofilteredness of the small representative category.",
+   "uses": [
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": null
+  },
+  {
+   "text": "The opposite of colimit.isColimit (strictHenselizationDiagram s) is a limit cone in opposite commutative rings. The right-adjoint Scheme.Spec preserves this limit: isLimitOfPreserves Scheme.Spec gives exactly IsLimit (strictHenselizationCone s), whose legs are defined to be Spec of the colimit coprojections. The representative-independence comparison remains HasColimit.isoOfEquivalence e w.",
+   "uses": [
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-affine-neighbourhood-cofinal"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "K2",
+  "date": "2026-10-12",
+  "note": "Lean proof of both existing holes, using Mathlib category-of-elements, affine spectrum isomorphism, initial/full cofiltered transfer, and preservation of limits by Scheme.Spec. The direct proof uses the existing affine-neighbourhood initial/final theorem; no new intermediate statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -131,5 +163,15 @@
   "group": "G1",
   "result": "fix",
   "note": "No H7 (node diff adds lean only). Not a third spelling: IsStrictHenselization is a Prop on a local A-algebra, strictHenselization_triples an existential cocone at Spec R/p; citers (stalk-formula, unrestricted-stalk, functoriality, dvr) need the named ring O^sh_{S,sbar} for a scheme and geometric point with canonical maps; no Mathlib/upstream declaration. Matched S, (Omega alg closed, s), pointed etale category (pointSmallEtale fiber Elements), affine full subcategory (AffineEtale.Spec elements, equivalence theorem), small J (SmallModel, choice from Mathlib EssentiallySmall), I=J^op, D=Gamma contravariant, colimit in CommRingCat, Spec, cone = Spec.mapCone of colimit cocone + IsLimit, independence via HasColimit.isoOfEquivalence. FIX: removed strictHenselizationRepresentativeEquivalence (asEquivalence = Classical choice from the sorried isEquivalence theorem, data on sorry); the Initial clause now uses (equivSmallModel _).inverse ⋙ strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι _ (same functor, sorry-free)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T110309-L-617717",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
