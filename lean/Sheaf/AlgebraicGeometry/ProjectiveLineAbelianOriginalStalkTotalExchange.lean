@@ -10,10 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
-import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.AlgebraicGeometry.StrictHenselizationAbelianStalkExchangeLocalization
+import Sheaf.AlgebraicGeometry.StrictLocalAbelianTotalExchange
 
 /-! # Original abelian stalk exchange on total strict-local projective lines
 
@@ -39,26 +37,19 @@ Source: Stacks Project, Tag 03Q9 and the final stalk calculation of Tag 095T.
 (blueprint: lem-weil-pbc-p1-abelian-original-stalk-total-exchange).
 
 Proof:
-1. The projective-line projection is proper, hence qcqs; its base change f' is qcqs.
-The inverse-image stalk comparison identifies the source stalk with the stalk at σ.
-Extension from the separably closed fields k and k' to Ω induces equivalences of the
-pointed neighbourhood systems: finite separable residue extensions already split.
-2. The unrestricted abelian strict-henselization stalk formula (03Q9) identifies these
-higher-direct-image stalks with cohomology over S_(νισ) and T_(ντ). Transport along eA
-and eB and the unique isomorphisms of pullback squares identifies their total spaces
-with P¹_A and P¹_B. Inverse images compose, so the coefficients become G₀ and φ^*G₀.
-3. Resolve G by a bounded below injective abelian complex I, and replace g'^*I by a
-K-injective complex J. The termwise mate is pullback of sections along the base-changed
-projection followed by I -> J. In every pointed neighbourhood its restriction to the
-total strict-local space commutes with Spec φ: the structural square and residue square
-specify the same pointed étale lift, which is unique over a strict henselian local ring.
-Thus the two section-complex maps agree. Exact filtered colimits commute with homology,
-so the equality holds in degree q. The restriction-complex maps induce the same Ext
-pullback as cohomologyMap by the derived adjunction and constant-sheaf comparison.
-4. For a nonstandard pullback X', conjugate the calculation by the unique pullback
-isomorphism. All comparisons are natural, so the equality persists. The argument uses
-03Q9 for arbitrary abelian sheaves and therefore requires no torsion assumption. It
-also applies to q = 0, the zero sheaf, and purely inseparable extensions.
+1. The projective-line projection is qcqs by properness. Its base change to Spec A
+is the projective line over A, by ProjectiveSpace.isPullback_map; the same theorem
+gives the local square over the local homomorphism φ.
+2. Apply exists_addEquiv_strictHenselization_abelian_stalkExchange to these squares.
+It identifies the two original stalks with the two closed-B-point stalks of the local
+exchange, and carries the original exchange map to that local exchange map.
+This is the restriction-complex portion of Tags 03Q9 and 095T.
+3. Apply exists_addEquiv_strictLocal_abelian_total_exchange to the local square and G₀.
+It identifies these local stalks with the two Ext cohomology groups and the local
+exchange with cohomologyMap. Compose the source and target additive equivalences.
+For each x, rewrite using the localization equation, then apply the strict-local
+cohomology equation at the localized source element. No torsion or closed-fibre
+comparison enters this proof, and all original hypotheses remain unchanged.
 -/
 theorem Etale.projectiveLine_abelian_originalStalk_totalExchange
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
@@ -105,6 +96,29 @@ theorem Etale.projectiveLine_abelian_originalStalk_totalExchange
         Sheaf.H ((ProjectiveSpace.map _ g₀)^*[AddCommGrpCat.{u + 1}].obj G₀) q),
       ∀ x, a₂ ((((pointSmallEtale τ).sheafFiber
           (A := AddCommGrpCat.{u + 1})).map e).hom x) =
-        Etale.cohomologyMap (ProjectiveSpace.map _ g₀) G₀ q (a₁ x) := by sorry
+        Etale.cohomologyMap (ProjectiveSpace.map _ g₀) G₀ q (a₁ x) := by
+  let jA := eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)
+  let g₀ := Spec.map (CommRingCat.ofHom φ)
+  let G₀ := (ProjectiveSpace.map _ jA)^*[AddCommGrpCat.{u + 1}].obj G
+  obtain ⟨c₁, c₂, hc⟩ :=
+    Etale.exists_addEquiv_strictHenselization_abelian_stalkExchange
+      sq σ τ ι hι ν eA eB φ ρA ρB hφ hρA hρB hρ
+      (ProjectiveSpace.map _ jA)
+      (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+      (ProjectiveSpace.isPullback_map _ jA)
+      (ProjectiveSpace.map _ g₀)
+      (ProjectiveLine (Spec (.of B)) ↘ Spec (.of B))
+      (ProjectiveSpace.isPullback_map _ g₀) G q
+  obtain ⟨b₁, b₂, hb⟩ :=
+    Etale.exists_addEquiv_strictLocal_abelian_total_exchange φ
+      (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+      (ProjectiveLine (Spec (.of B)) ↘ Spec (.of B))
+      (ProjectiveSpace.map _ g₀) (ProjectiveSpace.isPullback_map _ g₀) G₀ q
+  refine ⟨c₁.trans b₁, c₂.trans b₂, ?_⟩
+  intro x
+  change b₂ (c₂ _) = Etale.cohomologyMap (ProjectiveSpace.map _ g₀) G₀ q (b₁ (c₁ x))
+  rw [hc]
+  exact hb (c₁ x)
+
 
 end AlgebraicGeometry
