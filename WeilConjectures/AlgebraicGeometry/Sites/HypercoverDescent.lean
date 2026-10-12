@@ -778,4 +778,133 @@ end Existence
 
 end Descent
 
+section Hom
+
+variable {I : Type u} [SmallCategory I] {D : I ⥤ Scheme.{u}} {c : Cone D}
+
+open SemiSimplicialObject
+
+namespace TruncatedDescent
+
+variable {U : SemiSimplicialObject c.pt.Etale} {N : ℕ} {k : I} (d : TruncatedDescent c U N k)
+
+/-- A *descent of a morphism* `f : U ⟶ W ×_{Dₖ} X` along a descent datum `d` of the truncation
+of `U`: morphisms `T_n ⟶ W_n` of étale `Dₖ`-schemes, `n ≤ N`, whose base changes to the limit
+`X` are the components of `f`. They are not required to commute with the face maps
+(`AlgebraicGeometry.TruncatedDescent.Hom.IsCompatible`). -/
+structure Hom (W : SemiSimplicialObject (D.obj k).Etale) (f : U ⟶ W.baseChange (c.π.app k)) where
+  /-- The components. -/
+  ψ (n : ℕ) (h : n ≤ N) : d.T.obj n h ⟶ W.obj n
+  /-- The base change of `ψ` to the limit is `f`. -/
+  m_ψ (n : ℕ) (h : n ≤ N) : d.m n h ≫ (ψ n h).left = Etale.baseChangeProj (c.π.app k) f n
+
+variable {d} {W : SemiSimplicialObject (D.obj k).Etale} {f : U ⟶ W.baseChange (c.π.app k)}
+
+/-- The components of a descended morphism commute with the face maps. -/
+def Hom.IsCompatible (Ψ : d.Hom W f) : Prop :=
+  ∀ (n : ℕ) (h : n < N) (i : Fin (n + 2)), Ψ.ψ (n + 1) h ≫ W.δ n i = d.T.δ n h i ≫ Ψ.ψ n h.le
+
+variable [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] in
+/-- Moving a descended morphism to a later stage, by base change. -/
+noncomputable def Hom.baseChange (Ψ : d.Hom W f) {k' : I} (g : k' ⟶ k) :
+    (d.baseChange g).Hom (W.baseChange (D.map g))
+      (Etale.baseChangeLift (c.π.app k) f (c.π.app k') (D.map g) (c.w g)) where
+  ψ n h := (MorphismProperty.Over.pullback @Etale ⊤ (D.map g)).map (Ψ.ψ n h)
+  m_ψ n h := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, Etale.baseChangeProj_baseChangeLift, ← Ψ.m_ψ n h]
+      change pullback.lift _ _ _ ≫ pullback.lift _ _ _ ≫ pullback.fst _ _ = _
+      rw [pullback.lift_fst, pullback.lift_fst_assoc]
+    · rw [Category.assoc, show Etale.baseChangeProj (c.π.app k') (Etale.baseChangeLift
+          (c.π.app k) f (c.π.app k') (D.map g) (c.w g)) n ≫ pullback.snd _ _ = _ from
+        Etale.baseChangeProj_w _ _ n]
+      change pullback.lift _ _ _ ≫ pullback.lift _ _ _ ≫ pullback.snd _ _ = _
+      rw [pullback.lift_snd, pullback.lift_snd]
+
+variable [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] in
+lemma Hom.IsCompatible.baseChange {Ψ : d.Hom W f} (hΨ : Ψ.IsCompatible) {k' : I} (g : k' ⟶ k) :
+    (Ψ.baseChange g).IsCompatible := fun n h i ↦
+  ((MorphismProperty.Over.pullback @Etale ⊤ (D.map g)).map_comp _ _).symm.trans
+    ((congrArg _ (hΨ n h i)).trans
+      ((MorphismProperty.Over.pullback @Etale ⊤ (D.map g)).map_comp _ _))
+
+/-- A compatible descended morphism into a semi-simplicial object with lifts above degree `N`
+extends to a morphism from the coskeletal extension of the descended truncation. -/
+noncomputable def Hom.toCosk (Ψ : d.Hom W f) (hΨ : Ψ.IsCompatible)
+    (hW : ∀ n, N ≤ n → W.HasLifts n) : d.T.cosk ⟶ W :=
+  extendHom N hW (fun n h ↦ (d.T.coskIso n h).hom ≫ Ψ.ψ n h) (fun n h i ↦ by
+    rw [d.T.cosk_δ n h, Category.assoc, Category.assoc, Category.assoc, Iso.inv_hom_id_assoc,
+      hΨ n h i])
+
+lemma Hom.toCosk_app (Ψ : d.Hom W f) (hΨ : Ψ.IsCompatible) (hW : ∀ n, N ≤ n → W.HasLifts n)
+    (n : ℕ) (h : n ≤ N) : (Ψ.toCosk hΨ hW).app n = (d.T.coskIso n h).hom ≫ Ψ.ψ n h :=
+  extendHom_app _ _ _ _ n h
+
+/-- In degrees `≤ N`, the base change of `Ψ.toCosk` to the limit, composed with the comparison
+`U ⟶ (cosk T) ×_{Dₖ} X`, is `f`. -/
+lemma Hom.baseChangeProj_toCosk (Ψ : d.Hom W f) (hΨ : Ψ.IsCompatible)
+    (hW : ∀ n, N ≤ n → W.HasLifts n) (n : ℕ) (h : n ≤ N) :
+    Etale.baseChangeProj (c.π.app k) d.toCosk n ≫ ((Ψ.toCosk hΨ hW).app n).left =
+      Etale.baseChangeProj (c.π.app k) f n := by
+  rw [Ψ.toCosk_app hΨ hW n h, MorphismProperty.Comma.comp_left, Etale.baseChangeProj_eq,
+    ← Ψ.m_ψ n h]
+  calc _ = ((d.toCosk.app n).left ≫ pullback.fst _ _) ≫ (d.T.coskIso n h).hom.left ≫
+        (Ψ.ψ n h).left := by simp only [Category.assoc]
+    _ = _ := by
+      rw [d.toCosk_app_left_fst n h, Category.assoc, ← Category.assoc (d.T.coskIso n h).inv.left,
+        Scheme.Etale.inv_hom_id_left, Category.id_comp]
+
+variable [IsCofiltered I] [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]
+  [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)]
+
+include d in
+/-- **Morphisms descend along a descent datum** (blueprint
+`lemma-weil-pbc-finite-hypercover-descent`): at a late enough stage, every morphism
+`f : U ⟶ W ×_{Dₖ} X` has a descent along the base change of `d`. -/
+theorem exists_hom (hc : IsLimit c) (W : SemiSimplicialObject (D.obj k).Etale)
+    (f : U ⟶ W.baseChange (c.π.app k)) :
+    ∃ (k' : I) (g : k' ⟶ k), Nonempty ((d.baseChange g).Hom (W.baseChange (D.map g))
+      (Etale.baseChangeLift (c.π.app k) f (c.π.app k') (D.map g) (c.w g))) := by
+  classical
+  have key (n : Fin (N + 1)) := by
+    obtain ⟨_, _⟩ := d.qcqs n (Nat.lt_succ_iff.1 n.2)
+    exact exists_hom_descent_stage hc (d.isPullback n (Nat.lt_succ_iff.1 n.2))
+      (Etale.baseChangeProj (c.π.app k) f n) (Etale.baseChangeProj_w _ f n)
+  choose kn gn hn using key
+  obtain ⟨K, h, b, hb⟩ := IsCofiltered.exists_comp_eq_of_finite kn gn
+  have key' (n : Fin (N + 1)) := hn n K (b n) h (hb n)
+  choose ψ hψ using key'
+  refine ⟨K, h, ⟨fun n hn ↦ ψ ⟨n, Nat.lt_succ_of_le hn⟩, fun n hn ↦ ?_⟩⟩
+  apply pullback.hom_ext
+  · rw [Category.assoc, Etale.baseChangeProj_baseChangeLift]
+    exact hψ ⟨n, Nat.lt_succ_of_le hn⟩
+  · rw [Category.assoc, show (ψ ⟨n, Nat.lt_succ_of_le hn⟩).left ≫ pullback.snd _ _ = _ from
+      MorphismProperty.Over.w (ψ ⟨n, Nat.lt_succ_of_le hn⟩),
+      show Etale.baseChangeProj (c.π.app K) (Etale.baseChangeLift (c.π.app k) f (c.π.app K)
+        (D.map h) (c.w h)) n ≫ pullback.snd _ _ = _ from Etale.baseChangeProj_w _ _ n]
+    exact pullback.lift_snd _ _ _
+
+/-- **Compatibility with the face maps descends**: a descended morphism becomes compatible
+with the face maps at a late enough stage. -/
+theorem Hom.exists_isCompatible (hc : IsLimit c) (Ψ : d.Hom W f) :
+    ∃ (k' : I) (g : k' ⟶ k), (Ψ.baseChange g).IsCompatible := by
+  classical
+  have key (p : Σ n : Fin N, Fin (n + 2)) := by
+    obtain ⟨_, _⟩ := d.qcqs (p.1 + 1) p.1.2
+    refine exists_eq_descent_stage hc (d.isPullback (p.1 + 1) p.1.2)
+      (Ψ.ψ (p.1 + 1) p.1.2 ≫ W.δ p.1 p.2) (d.T.δ p.1 p.1.2 p.2 ≫ Ψ.ψ p.1 p.1.2.le) ?_
+    rw [MorphismProperty.Comma.comp_left, MorphismProperty.Comma.comp_left, ← Category.assoc,
+      Ψ.m_ψ, ← Category.assoc, d.m_δ, Category.assoc, Ψ.m_ψ, Etale.baseChangeProj_δ]
+  choose kI gI hI using key
+  obtain ⟨K, h, b, hb⟩ := IsCofiltered.exists_comp_eq_of_finite kI gI
+  refine ⟨K, h, fun n hn i ↦ ?_⟩
+  have H := hI ⟨⟨n, hn⟩, i⟩ K (b _)
+  rw [hb] at H
+  exact ((MorphismProperty.Over.pullback @Etale ⊤ (D.map h)).map_comp _ _).symm.trans
+    (H.trans ((MorphismProperty.Over.pullback @Etale ⊤ (D.map h)).map_comp _ _))
+
+end TruncatedDescent
+
+end Hom
+
 end AlgebraicGeometry
