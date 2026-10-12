@@ -1460,6 +1460,7 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
 public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
+public import WeilConjectures.Mathlib.RingTheory.AdjoinRoot
 public import WeilConjectures.Mathlib.RingTheory.Artinian.Ring
 public import WeilConjectures.Mathlib.RingTheory.DedekindDomain.IntegralClosure
 public import WeilConjectures.Mathlib.RingTheory.Derivation.Basic
@@ -1519,6 +1520,7 @@ public import WeilConjectures.Mathlib.RingTheory.LaurentSeries
 public import WeilConjectures.Mathlib.RingTheory.LocalProperties.ProjectiveDimension
 public import WeilConjectures.Mathlib.RingTheory.LocalProperties.Reduced
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.Basic
+public import WeilConjectures.Mathlib.RingTheory.LocalRing.Module
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import WeilConjectures.Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Idempotent
@@ -1620,6 +1622,7 @@ public import WeilConjectures.RingTheory.Derivation.Localization
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
+public import WeilConjectures.RingTheory.Etale.JacobianLift
 public import WeilConjectures.RingTheory.Etale.SectionSplitting
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.FaithfullyFlat.FamilyDescent

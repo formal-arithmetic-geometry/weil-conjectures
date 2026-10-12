@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 public import WeilConjectures.AlgebraicGeometry.IdempotentBasicOpen
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Section
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RepresentableLocallyConstant
@@ -450,6 +451,32 @@ theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianLocalRing
   Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing (IsLocalRing.maximalIdeal A) f i
     f₀ h
 
+/-- **Injectivity of the `H¹` comparison for a finite constant sheaf over a henselian pair.**
+Let `(A, I)` be a henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre.
+For every finite abelian group `M`, restriction `H¹(Y, M) ⟶ H¹(Y₀, M)` is injective: a class `ξ`
+is represented by an `M`-torsor `t` over `Y`
+(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_forall_cohomologyMap_eq_zero_iff`); if `ξ` dies on
+`Y₀` then `t` has a section over `Y₀`, which lifts to a section of `t` over `Y`
+(`AlgebraicGeometry.Scheme.exists_section_of_henselianRing`), so that `ξ = 0`. -/
+theorem Etale.injective_cohomologyMap_one_constantSheaf_of_henselianRing
+    {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]
+    {Y Y₀ : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (i : Y₀ ⟶ Y)
+    (f₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
+    (M : Type (u + 1)) [AddCommGroup M] [Finite M] :
+    Function.Injective (Etale.cohomologyMap i
+      ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) 1) := by
+  rw [injective_iff_map_eq_zero]
+  intro ξ hξ
+  obtain ⟨t, ht⟩ := Scheme.EtaleTorsor.exists_forall_cohomologyMap_eq_zero_iff M ξ
+  obtain ⟨s₀, hs₀⟩ := (ht i).1 hξ
+  have := t.isFinite
+  have := t.etale
+  obtain ⟨s, hs, -⟩ := Scheme.exists_section_of_henselianRing I f i f₀ h t.π
+    (pullback.lift s₀ (𝟙 Y₀) (by simp [hs₀])) (by simp)
+  exact (Etale.cohomologyMap_bijective (𝟙 Y) _ 1).1
+    (((ht (𝟙 Y)).2 ⟨s, hs⟩).trans (map_zero _).symm)
+
 /-- **The `H¹` comparison for a finite constant sheaf over a henselian pair.** Let `(A, I)` be
 a henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.
 For every finite abelian group `M`, restriction `H¹(Y, M) ⟶ H¹(Y₀, M)` along `i` is
@@ -466,6 +493,8 @@ theorem Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing
     (M : Type (u + 1)) [AddCommGroup M] [Finite M] :
     Function.Bijective (Etale.cohomologyMap i
       ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) 1) :=
-  sorry
+  -- surjectivity: lift the torsor of a class on `Y₀` to `Y` by finite étale lifting, and use the
+  -- naturality of the classification of torsors by `H¹` (neither is available yet)
+  ⟨Etale.injective_cohomologyMap_one_constantSheaf_of_henselianRing I f i f₀ h M, sorry⟩
 
 end AlgebraicGeometry
