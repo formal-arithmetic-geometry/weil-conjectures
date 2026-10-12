@@ -24,34 +24,35 @@
    "elementary": true
   },
   {
-   "text": "Choose the extension of the constant integer sheaf by the units sheaf representing Q using [lem-sc-torsor-h1-boundary-representative]. Its class is the boundary of one. Exact closed direct image followed by pullback along restriction of constant integer sections gives the extension whose fibre above one is the constructed direct-image torsor [lem-sc-torsor-h1-ext-pushforward]. The identification is sectionwise, is natural under restriction and respects translation. The boundary representative description on X therefore gives its class as the boundary of one for this extension.",
+   "text": "Choose an extension and an equivariant isomorphism of Q with its fibre over one using torsor_h1_boundary_representative. Obtain the pulled-back direct-image extension and its fibre sheaf isomorphism using closedImmersion_extension_fibre_pushforward. Compose that isomorphism with direct image of the inverse representative isomorphism. The translation identity in the direct-image lemma and equivariance of the representative isomorphism prove this composite is an isomorphism of torsors to the explicit unitsTorsorClosedPushforward. Quotient.sound and classH1_lifts identify its class with the boundary of one.",
    "uses": [
     "lem-sc-torsor-h1-boundary-representative",
-    "lem-sc-torsor-h1-ext-pushforward"
+    "lem-sc-torsor-h1-ext-pushforward",
+    "lem-sc-torsor-h1"
    ],
    "elementary": false
   },
   {
-   "text": "The closed-immersion comparison commutes with boundaries and is the extension of the global-section identification [lem-sc-closed-pushforward-boundary-naturality]. Identify its inverse with the exact-inverse-image, constant-sheaf-isomorphism and counit map of [def-sc-zariski-units-restriction]: applying exact inverse image to the image extension and composing with the counit recovers the original extension by the adjunction triangle identities; the constant comparison carries one to one. It consequently carries the boundary of one of the image extension to that of the original extension, proving the equality.",
+   "text": "Apply units_extension_pullback_boundary_comparison to the extension, its sectionwise restriction map and the pulled-back kernel. It carries the boundary just obtained to the original boundary. The boundary equality from torsor_h1_boundary_representative identifies the latter with the class of Q. This directly uses the concrete Ext/inverse-image/counit comparison, without passing through the abstract delta-functor comparison.",
    "uses": [
-    "lem-sc-closed-pushforward-boundary-naturality",
-    "def-sc-zariski-units-restriction"
+    "lem-sc-units-extension-pullback-boundary-comparison",
+    "lem-sc-torsor-h1-boundary-representative"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-gm-torsor",
-  "def-sc-zariski-units-restriction",
   "def-weil-closed-immersion",
-  "lem-sc-closed-pushforward-boundary-naturality",
+  "lem-sc-torsor-h1",
   "lem-sc-torsor-h1-boundary-representative",
-  "lem-sc-torsor-h1-ext-pushforward"
+  "lem-sc-torsor-h1-ext-pushforward",
+  "lem-sc-units-extension-pullback-boundary-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 02FQ (lemma-torsors-h1), boundary-of-one construction, and Lemma 02UV (lemma-cohomology-and-closed-immersions); used in Varieties Lemma 09NY, final sentence"
+  "place": "Tags 02FQ and 02UV, direct Ext/counit implementation of the three original steps"
  },
  "mathlib_searches": [
   {
@@ -125,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-c0d54",
-  "group": "A3",
+  "reviewer": "COMPILER",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T112829-L-763981",
+  "landing": "20261012T144143-L-2106676",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean modules, DAG statements/dependencies, report, and compilation match the reviewed packet and stage-3 requirements."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 import Sheaf.CategoryTheory.Sites.TorsorExtensionPushforward
 import Sheaf.CategoryTheory.Sites.TorsorH1BoundaryRepresentative
-import Sheaf.Topology.ClosedPushforwardBoundaryNaturality
+import Sheaf.AlgebraicGeometry.UnitsTorsorClosedRestrictionBoundary
 
 /-!
 # Closed restriction of classes of units torsors
@@ -101,6 +101,36 @@ theorem unitsTorsor_closed_restriction_class {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (Q : Sheaf.Torsor Z.unitsSheaf) :
     unitsPushforwardCohomologyComparison i 1
       (Sheaf.Torsor.classH1 _ isTerminalTop ⟦unitsTorsorClosedPushforward i Q⟧) =
-      Sheaf.Torsor.classH1 Z.unitsSheaf isTerminalTop ⟦Q⟧ := by sorry
+      Sheaf.Torsor.classH1 Z.unitsSheaf isTerminalTop ⟦Q⟧ := by
+  obtain ⟨⟨E, a, p, w, hS, hQ, hclass⟩, _⟩ :=
+    CategoryTheory.Sheaf.torsor_h1_boundary_representative Z Z.unitsSheaf Q
+  obtain ⟨_, r, hr, k, hkfst, hk, hP, e, _, hequiv⟩ :=
+    Sheaf.Torsor.closedImmersion_extension_fibre_pushforward
+      Z X i Z.unitsSheaf E a p w hS
+  obtain ⟨q⟩ := hQ
+  let eQ := (TopCat.Sheaf.pushforward (Type u) i.base).mapIso q.iso.symm
+  let t : Sheaf.Torsor.Iso
+      (Sheaf.Torsor.lifts isTerminalTop hP
+        ((toSheafify (Opens.grothendieckTopology X)
+          ((Functor.const (Opens X)ᵒᵖ).obj
+            (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩))
+      (unitsTorsorClosedPushforward i Q) :=
+    { iso := e ≪≫ eQ
+      map_vadd := by
+        intro U g s
+        change q.iso.inv.hom.app ((Opens.map i.base).op.obj U)
+          (e.hom.hom.app U (_)) = _
+        exact (congrArg
+          (q.iso.inv.hom.app ((Opens.map i.base).op.obj U))
+          (hequiv U.unop g s)).trans
+            (q.symm.map_vadd ((Opens.map i.base).op.obj U) g
+              (e.hom.hom.app U s)) }
+  have ht := @_root_.Quotient.sound _
+    (Sheaf.Torsor.setoid
+      (G := (TopCat.Sheaf.pushforward AddCommGrpCat.{u} i.base).obj Z.unitsSheaf))
+    _ _ ⟨t⟩
+  rw [← ht, Sheaf.Torsor.classH1_lifts]
+  exact (units_extension_pullback_boundary_comparison i E a p w hS
+    r hr k hkfst hk hP).trans hclass.symm
 
 end AlgebraicGeometry.Scheme

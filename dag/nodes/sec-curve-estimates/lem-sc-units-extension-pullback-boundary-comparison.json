@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-units-extension-pullback-boundary-comparison",
+ "kind": "statement",
+ "title": "Boundary of a pulled-back direct-image units extension",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion], and write $R=i_*$ for direct image on Zariski abelian sheaves [def-sc-zariski-site, def-sc-topological-abelian-cohomology]. Let $0\\to O_Z^*\\xrightarrow{a}E\\xrightarrow{p}\\mathbf Z_Z\\to0$ be short exact. Let $r:\\mathbf Z_X\\to R\\mathbf Z_Z$ carry every constant integer section on every open $U$ to the same integer on $i^{-1}U$. Let $k:R O_Z^*\\to P=R E\\times_{R\\mathbf Z_Z}\\mathbf Z_X$ satisfy $\\mathrm{fst}\\circ k=R(a)$ and $\\mathrm{snd}\\circ k=0$, and suppose $0\\to R O_Z^*\\xrightarrow{k}P\\xrightarrow{\\mathrm{snd}}\\mathbf Z_X\\to0$ is short exact. The specific inverse-image/constant-comparison/counit homomorphism $c_i$ of [def-sc-zariski-units-restriction] satisfies $c_i(\\delta_P(1))=\\delta_E(1)$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02FQ (boundary of one) and 02UV (closed immersion comparison); read at https://stacks.math.columbia.edu/tag/02FQ and https://stacks.math.columbia.edu/tag/02UV because the local source is absent"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-sc-zariski-site",
+  "def-sc-topological-abelian-cohomology",
+  "def-sc-zariski-units-restriction"
+ ],
+ "proof": [
+  {
+   "text": "The degree-zero Ext class corresponding to the constant section one is the identity of the constant integer sheaf: the constant-sheaf adjunction sends its identity to its unit, whose evaluation at one is the sheafification section one. Hence the boundaries of one for both extensions are their Ext extension classes.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write L for exact inverse image, R for direct image, and epsilon for their counit. Let S be the original extension and P the pullback extension. Form a morphism L(P) -> S with components epsilon on units, L(fst) followed by epsilon on E, and L(r) followed by epsilon on the constant integer sheaf. The first square commutes by k followed by fst = R(a), and counit naturality. The second square commutes by the pullback identity fst followed by R(p) = snd followed by r, and counit naturality. Exact functoriality and naturality of the Ext extension class, specifically Abelian.Ext.mapExactFunctor_extClass and ShortComplex.ShortExact.extClass_naturality, identify the mapped class followed by the kernel counit with the original extension class precomposed with the quotient component.",
+   "uses": [
+    "def-sc-zariski-units-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the quotient component with the inverse of the constant-sheaf pullback isomorphism. Apply the composite of the constant-sheaf adjunction on X and the inverse-image/direct-image adjunction. Under this hom equivalence the quotient component is r. Its further image under the constant-sheaf adjunction is the unit on Z, by the stipulated sectionwise restriction identity for every integer. The same is true for the constant-sheaf comparison, by homEquiv_leftAdjointUniq_hom_app and its definition via uniqueness of left adjoints. Injectivity of the hom equivalence gives the desired equality. Thus precomposition with the inverse constant comparison cancels the quotient component. Unfolding unitsPushforwardCohomologyComparison and associativity of Ext composition finish the proof.",
+   "uses": [
+    "def-sc-zariski-units-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-sc-zariski-units-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Ext/counit implementation of the boundary comparison used with Tags 02UV and 02FQ; checked against online source"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of sheaf cohomology connecting homomorphisms for exact inverse image followed by the counit of pushforward",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image and counit map on sheaf cohomology carries the boundary of a pulled back direct image short exact sequence to the original boundary",
+   "results": "Eight hits: module-sheaf pullback conjugateEquiv and group cohomology boundary computations; none states this sheaf Ext/counit comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"extClass\"",
+   "results": "Ext.mapExactFunctor_extClass and ShortComplex.ShortExact.extClass_naturality provide algebraic ingredients, not the constant-sheaf adjunction identification.",
+   "date": "2026-10-12",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor_comp_extClass_comp_mk₀|homEquiv_leftAdjointUniq_hom_app",
+   "results": "Mathlib contains homEquiv_leftAdjointUniq_hom_app; the adopted WeilConjectures Ext.MapBijective module contains mapExactFunctor_comp_extClass_comp_mk₀. The delivered proof uses the first and the more basic Mathlib mapExactFunctor_extClass and extClass_naturality, rather than the combined upstream theorem. No exact combined sheaf comparison theorem was found.",
+   "date": "2026-10-12",
+   "verdict": "partial matches"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnitsTorsorClosedRestriction",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "final sentence: closed-immersion comparison of the boundary representing a units torsor",
+   "via": [
+    "lem-sc-units-torsor-closed-restriction-class",
+    "lem-sc-picard-h1-restriction-compatibility",
+    "lem-sc-pic-lift-closed-immersion-dim-le-one"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnitsTorsorClosedRestrictionBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitsTorsorClosedRestrictionBoundary.lean",
+  "declaration": "AlgebraicGeometry.Scheme.units_extension_pullback_boundary_comparison",
+  "statement": "theorem units_extension_pullback_boundary_comparison {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (E : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}) (a : Z.unitsSheaf ⟶ E) (p : E ⟶ (constantSheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (w : a ≫ p = 0) (hS : (ShortComplex.mk a p w).ShortExact) (r : (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)) ⟶ ((Opens.map i.base).sheafPushforwardContinuous AddCommGrpCat.{u} (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).obj ((constantSheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) (hr : ∀ (U : Opens X) (n : ℤ), r.hom.app (op U) ((toSheafify (Opens.grothendieckTopology X) ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op U) ⟨n⟩) = (toSheafify (Opens.grothendieckTopology Z) ((Functor.const (Opens Z)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ((Opens.map i.base).obj U)) ⟨n⟩) (k : ((Opens.map i.base).sheafPushforwardContinuous AddCommGrpCat.{u} (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).obj Z.unitsSheaf ⟶ pullback (((Opens.map i.base).sheafPushforwardContinuous AddCommGrpCat.{u} (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).map p) r) (hkfst : k ≫ pullback.fst _ _ = ((Opens.map i.base).sheafPushforwardContinuous AddCommGrpCat.{u} (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).map a) (hk : k ≫ pullback.snd _ _ = 0) (hP : (ShortComplex.mk k (pullback.snd _ _) hk).ShortExact) : unitsPushforwardCohomologyComparison i 1 (Sheaf.H.δ hP isTerminalTop ((toSheafify (Opens.grothendieckTopology X) ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩)) = Sheaf.H.δ hS isTerminalTop ((toSheafify (Opens.grothendieckTopology Z) ((Functor.const (Opens Z)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T144143-L-2106676",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T144143-L-2106676",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
