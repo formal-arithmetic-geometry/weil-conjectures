@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraUnit
 public import WeilConjectures.WeilSheaf.LowerStarComp
+public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
 
 /-!
@@ -176,6 +177,11 @@ noncomputable def lowerStarCompιIso :
     WeilSheaf.lowerStar φ ⋙ (WeilSheaf.objectProperty k₀ l Y).ι ≅
       (WeilSheaf.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.lowerStar k₀ l φ :=
   ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
+
+/-- The pushforward of Weil sheaves is left exact. -/
+instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    PreservesFiniteLimits (WeilSheaf.lowerStar (k₀ := k₀) (l := l) φ) :=
+  preservesFiniteLimits_of_comp_ι _ (ProEtaleWeilSheaf.lowerStar k₀ l φ) (lowerStarCompιIso φ)
 
 /-- **The adjunction `φ^* ⊣ φ_*` of Weil sheaves**, restricted from the adjunction of pro-étale
 Weil sheaves. -/
