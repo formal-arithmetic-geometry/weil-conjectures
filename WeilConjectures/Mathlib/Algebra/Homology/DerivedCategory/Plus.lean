@@ -175,3 +175,26 @@ lemma singleFunctor_hom_ext_of_isGE_of_isLE {W : Plus C} (q : ℤ) [W.IsGE q] [W
   simp [h]
 
 end DerivedCategory.Plus
+
+namespace CochainComplex.IsKInjective
+
+open CategoryTheory
+
+/-- **Morphisms into a K-injective complex are computed in the homotopy category.** For a
+K-injective complex `I`, the localization functor `Qh : K(C) ⥤ D(C)` induces bijections
+`Hom_K(N, I) ≃ Hom_D(N, I)` for every complex `N`; the same holds in the bounded below derived
+category for bounded below `N` and `I`; and a quasi-isomorphism between K-injective complexes is
+a homotopy equivalence. (blueprint: `lem-weil-pbc-kinjective-hom-derived`) -/
+theorem Qh_map_bijective_and_plus {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C] :
+    (∀ (N : HomotopyCategory C (ComplexShape.up ℤ)) (I : CochainComplex C ℤ) [I.IsKInjective],
+      Function.Bijective (DerivedCategory.Qh.map :
+        (N ⟶ (HomotopyCategory.quotient _ _).obj I) → _)) ∧
+    (∀ (N I : HomotopyCategory.Plus C), CochainComplex.IsKInjective I.1.as →
+      Function.Bijective (DerivedCategory.Plus.Qh.map : (N ⟶ I) → _)) ∧
+    (∀ {K L : CochainComplex C ℤ} [K.IsKInjective] [L.IsKInjective] (f : K ⟶ L),
+      QuasiIso f ↔ HomologicalComplex.homotopyEquivalences C (.up ℤ) f) :=
+  ⟨fun N I _ ↦ Qh_map_bijective N I,
+    fun N I hI ↦ DerivedCategory.Plus.Qh_map_bijective_of_isKInjective N I hI,
+    fun f ↦ quasiIso_iff f⟩
+
+end CochainComplex.IsKInjective

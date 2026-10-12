@@ -225,3 +225,36 @@ end Adjunction
 end Pretriangulated
 
 end CategoryTheory
+
+namespace CategoryTheory.Pretriangulated
+
+open Limits
+
+variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
+  [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+
+/-- **Pre-triangulated categories.** A pre-triangulated category (`Pretriangulated C`) is an
+additive category with a shift `[1]` and a class of distinguished triangles satisfying (TR1)
+distinguished triangles are closed under isomorphism, `X ⟶ X ⟶ 0 ⟶ X[1]` is distinguished and
+every morphism is the first arrow of a distinguished triangle; (TR2) a triangle is distinguished
+iff its rotation is; (TR3) a commutative square between the bases of two distinguished
+triangles extends to a morphism of triangles. A triangulated category
+(`CategoryTheory.IsTriangulated`) satisfies moreover the octahedral axiom, and an exact functor
+is a functor commuting with the shift and preserving distinguished triangles
+(`CategoryTheory.Functor.IsTriangulated`, see `Functor.isTriangulated_iff_map_distinguished`).
+(blueprint: `def-weil-triangulated-category`) -/
+theorem tr1_tr2_tr3 :
+    (∀ T₁ T₂ : Triangle C, (T₁ ≅ T₂) → T₂ ∈ distTriang C → T₁ ∈ distTriang C) ∧
+    (∀ X : C, contractibleTriangle X ∈ distTriang C) ∧
+    (∀ {X Y : C} (u : X ⟶ Y), ∃ (Z : C) (v : Y ⟶ Z) (w : Z ⟶ X⟦(1 : ℤ)⟧),
+      Triangle.mk u v w ∈ distTriang C) ∧
+    (∀ T : Triangle C, T ∈ distTriang C ↔ T.rotate ∈ distTriang C) ∧
+    (∀ T₁ T₂ : Triangle C, T₁ ∈ distTriang C → T₂ ∈ distTriang C →
+      ∀ (a : T₁.obj₁ ⟶ T₂.obj₁) (b : T₁.obj₂ ⟶ T₂.obj₂), T₁.mor₁ ≫ b = a ≫ T₂.mor₁ →
+        ∃ c : T₁.obj₃ ⟶ T₂.obj₃, T₁.mor₂ ≫ c = b ≫ T₂.mor₂ ∧
+          T₁.mor₃ ≫ a⟦(1 : ℤ)⟧' = c ≫ T₂.mor₃) :=
+  ⟨fun _ _ e h ↦ isomorphic_distinguished _ h _ e, contractible_distinguished,
+    fun u ↦ distinguished_cocone_triangle u, rotate_distinguished_triangle,
+    fun _ _ h₁ h₂ a b w ↦ complete_distinguished_triangle_morphism _ _ h₁ h₂ a b w⟩
+
+end CategoryTheory.Pretriangulated

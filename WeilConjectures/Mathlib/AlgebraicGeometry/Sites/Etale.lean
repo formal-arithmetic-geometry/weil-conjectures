@@ -265,3 +265,40 @@ end Sheafify
 end Scheme
 
 end AlgebraicGeometry
+
+namespace AlgebraicGeometry.Scheme
+
+/-- **Sheaves of sets on the small étale site.** A presheaf of sets `P` on the small étale site
+`X.Etale` is a sheaf (an object of `Sheaf X.smallEtaleTopology (Type w)`) if and only if for
+every étale `U` over `X` and every family `gᵢ : Vᵢ ⟶ U` of étale `X`-morphisms that is jointly
+surjective, the diagram `P(U) → ∏ᵢ P(Vᵢ) ⇉ ∏ᵢⱼ P(Vᵢ ×_U Vⱼ)` is an equalizer: every family of
+sections agreeing on the fibre products `Vᵢ ×_U Vⱼ` glues to a unique section on `U`.
+(blueprint: `def-weil-pbc-etale-sheaf-of-sets`) -/
+theorem isSheaf_smallEtaleTopology_iff {X : Scheme.{u}} (P : X.Etaleᵒᵖ ⥤ Type v) :
+    Presheaf.IsSheaf X.smallEtaleTopology P ↔
+      ∀ (U : X.Etale) (ι : Type (u + 1)) (V : ι → X.Etale) (g : ∀ i, V i ⟶ U),
+        ⋃ i, Set.range (g i).left = Set.univ →
+        ∀ x : ∀ i, P.obj (op (V i)),
+          (∀ i j, P.map (pullback.fst (g i) (g j)).op (x i) =
+            P.map (pullback.snd (g i) (g j)).op (x j)) →
+          ∃! s : P.obj (op U), ∀ i, P.map (g i).op s = x i := by
+  rw [isSheaf_iff_isSheaf_of_type]
+  constructor
+  · intro h U ι V g hg x hx
+    have hS := (ofArrows_mem_smallEtaleTopology_iff g).2 hg
+    exact (Presieve.isSheafFor_arrows_iff_pullbacks _ _).1
+      ((Presieve.isSheafFor_iff_generate _).2 (h _ hS)) x hx
+  · intro h U S hS
+    let ι := Σ V : X.Etale, { g : V ⟶ U // S g }
+    have hS' : Sieve.ofArrows (fun i : ι ↦ i.1) (fun i ↦ i.2.1) = S := by
+      apply le_antisymm
+      · rw [Sieve.ofArrows, Sieve.generate_le_iff]
+        rintro V g ⟨i⟩
+        exact i.2.2
+      · intro V g hg
+        exact ⟨V, 𝟙 V, g, Presieve.ofArrows.mk (⟨V, g, hg⟩ : ι), by simp⟩
+    rw [← hS'] at hS ⊢
+    rw [← Presieve.isSheafFor_iff_generate, Presieve.isSheafFor_arrows_iff_pullbacks]
+    exact h U ι _ _ ((ofArrows_mem_smallEtaleTopology_iff _).1 hS)
+
+end AlgebraicGeometry.Scheme
