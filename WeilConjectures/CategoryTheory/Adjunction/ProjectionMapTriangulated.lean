@@ -20,7 +20,8 @@ for a fixed `M`, the objects `L` at which `π` is an isomorphism.
 * If `L` is a retract of an object `Y` at which `π` is an isomorphism, so is `π` at `L`, with
   the explicit inverse `G (M ⊗ F L) ⟶ G (M ⊗ F Y) ⟶ G M ⊗ Y ⟶ G M ⊗ L`
   (`CategoryTheory.Adjunction.rightAdjointProjectionMapInvOfRetract`), which therefore does not
-  depend on the retraction. This is blueprint `lemma-weil-pbc-projection-formula-projective-summand`.
+  depend on the retraction. This is blueprint
+  `lemma-weil-pbc-projection-formula-projective-summand`.
 * If `C` and `D` are pretriangulated, `F`, `G`, the adjunction, the tensor products and `φ`
   commute with the shifts and all functors are triangulated, these objects form a thick
   triangulated subcategory (`CategoryTheory.Adjunction.isTriangulated_isoLocus_projectionMap`).

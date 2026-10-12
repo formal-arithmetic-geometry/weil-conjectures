@@ -54,11 +54,8 @@ noncomputable def inclTransIso {k m : ι} (h : k ≤ m) :
     rw [homMk_comp_homMk]
     congr 1
     simp only [trHom, Functor.map_comp, assoc]
-    rw [F.transitionComp_id_left_assoc F le_rfl h A, F.transitionComp_id_left_inv F le_rfl h B]
-    simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.hom_inv_id_app, Functor.id_obj,
-      comp_id, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
-    rw [Functor.map_id, id_comp, ← NatTrans.naturality]
-    rfl)
+    rw [transitionComp_id_left F le_rfl h A, transitionComp_id_left_inv F le_rfl h B]
+    simp [← Functor.map_comp_assoc, ← Functor.map_comp])
 
 lemma inclTransIso_hom_app {k m : ι} (h : k ≤ m) (A : F.obj ⟨k⟩) :
     (inclTransIso F h).hom.app A = (isoToStage ((incl F k).obj A) h).hom :=
@@ -104,7 +101,7 @@ lemma incl_map_eq_incl_map_iff {k : ι} {A B : F.obj ⟨k⟩} (u v : A ⟶ B) :
     rw [← cancel_mono ((F.transitionComp le_rfl h h).hom.app B),
       transitionComp_hom_naturality, transitionComp_hom_naturality, e]
   · simp only [trHom]
-    rw [← transitionComp_inv_naturality, ← transitionComp_inv_naturality, e]
+    rw [← transitionComp_hom_naturality_assoc, ← transitionComp_hom_naturality_assoc, e]
 
 section Shift
 
@@ -118,24 +115,27 @@ instance inclTransIso_commShift {k m : ι} (h : k ≤ m) :
   shift_comm a := by
     ext K
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-      Functor.commShiftIso_comp_hom_app, incl_commShiftIso_hom_app, id_comp, comp_id,
+      Functor.commShiftIso_comp_hom_app, incl_commShiftIso_hom_app, id_comp,
       inclTransIso_hom_app, isoToStage]
-    erw [id_comp, comp_id]
+    erw [comp_id]
     rw [shiftFunctor_map_homMk]
-    change _ = homMk (X := (⟨k, (shiftFunctor _ a).obj K⟩ : PairCategory F))
-      (Y := ⟨m, _⟩) h le_rfl _ ≫ homMk (X := (⟨m, _⟩ : PairCategory F)) (Y := ⟨m, _⟩) le_rfl
-        le_rfl _
+    dsimp only [incl]
     rw [homMk_comp_homMk]
     congr 1
     have e := NatTrans.shift_app_comm (F.transitionId m le_rfl).hom a
       ((F.transition h).obj K)
     rw [Functor.commShiftIso_id_hom_app] at e
     erw [comp_id] at e
-    simp only [Iso.inv_hom_id_app_assoc, assoc]
+    have e' : ((F.transitionId m le_rfl).inv.app ((F.transition h).obj K))⟦a⟧' ≫
+        ((F.transition (le_refl m)).commShiftIso a).inv.app ((F.transition h).obj K) =
+          (F.transitionId m le_rfl).inv.app (((F.transition h).obj K)⟦a⟧) := by
+      symm
+      apply Iso.inv_ext (f := (F.transitionId m le_rfl).app
+        (((F.transition h).obj K)⟦a⟧))
+      rw [Iso.app_hom, ← e]
+      simp [← Functor.map_comp_assoc]
+    simp only [Iso.inv_hom_id_app_assoc]
     congr 1
-    rw [← cancel_epi ((F.transitionId m le_rfl).hom.app _), Iso.hom_inv_id_app_assoc,
-      ← reassoc_of% e, ← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, id_comp,
-      Iso.hom_inv_id_app]
 
 end Shift
 

@@ -31,7 +31,7 @@ constructible étale sheaf `F'` (`AlgebraicGeometry.ProEtale.constructibleSheaf`
   to a triangulated functor `Dᵇc_proét(S, Λ) ⥤ Dᵇc_proét(T, Λ)`, sending complexes with
   cohomology in `[a, b]` to complexes with cohomology in `[a, b + c]`.
 - `AlgebraicGeometry.ProEtale.boundedConstructible_leftDerivedUpperStar` and the functor
-  `AlgebraicGeometry.ProEtale.leftDerivedUpperStarBoundedConstructible` (blueprint
+  `AlgebraicGeometry.ProEtale.upperStarBoundedConstructible` (blueprint
   `lem-weil-pbc-pullback-preserves-bounded-constructible`): `Lg^*` restricts to a triangulated
   functor `Dᵇc_proét(V, Λ) ⥤ Dᵇc_proét(V', Λ)` preserving the cohomological interval.
 
@@ -149,7 +149,7 @@ noncomputable def leftDerivedUpperStarMapDerivedCategoryObjIso
     (L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) g)).obj (D(ν^*(V)[ModuleCat.{u + 1} Λ]).obj K') ≅
       D(ν^*(V')[ModuleCat.{u + 1} Λ]).obj
         ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategory.obj K') :=
-  ((leftDerivedUpperStarComparisonIso Λ g).app ⟨K', hK'⟩).symm ≪≫
+  ((leftDerivedUpperStarComparisonIso g Λ).app ⟨K', hK'⟩).symm ≪≫
     D(ν^*(V')[ModuleCat.{u + 1} Λ]).mapIso
       (((Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusCompatibility).app
         ⟨K', hK'⟩)
@@ -193,19 +193,22 @@ theorem homologyConcentratedIn_leftDerivedUpperStar {a b : ℤ}
 /-- Blueprint `lem-weil-pbc-pullback-preserves-bounded-constructible`: Pullback preserves
 bounded constructibility.
 
-The derived pullback `Lg^*` restricts to a functor `Dᵇc_proét(V, Λ) ⥤ Dᵇc_proét(V', Λ)`; it is
-triangulated (the instances on `CategoryTheory.ObjectProperty.lift`), and preserves the
-cohomological interval (`AlgebraicGeometry.ProEtale.homologyConcentratedIn_leftDerivedUpperStar`).
--/
-noncomputable abbrev leftDerivedUpperStarBoundedConstructible :
+The pullback `Lg^* = g^{-1}`, realised as the derived functor `D(g^*)` of the exact functor `g^*`
+(isomorphic to `Lg^*`, `AlgebraicGeometry.ProEtale.leftDerivedUpperStarIsoMapDerivedCategory`),
+restricts to a functor `Dᵇc_proét(V, Λ) ⥤ Dᵇc_proét(V', Λ)`; it is triangulated (the instances
+on `CategoryTheory.ObjectProperty.lift`), and preserves the cohomological interval
+(`AlgebraicGeometry.ProEtale.homologyConcentratedIn_leftDerivedUpperStar`). -/
+noncomputable abbrev upperStarBoundedConstructible :
     (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V).FullSubcategory ⥤
       (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V').FullSubcategory :=
   (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V').lift
     ((DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V).ι ⋙
-      L(ProEtale.upperStar (ModuleCat.{u + 1} Λ) g))
-    fun K ↦ boundedConstructible_leftDerivedUpperStar g K.2
+      D(ProEtale.upperStar (ModuleCat.{u + 1} Λ) g))
+    fun K ↦ (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) V').prop_of_iso
+      ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) g).app K.1)
+      (boundedConstructible_leftDerivedUpperStar g K.2)
 
-example : (leftDerivedUpperStarBoundedConstructible (Λ := Λ) g).IsTriangulated := inferInstance
+example : (upperStarBoundedConstructible (Λ := Λ) g).IsTriangulated := inferInstance
 
 end Pullback
 

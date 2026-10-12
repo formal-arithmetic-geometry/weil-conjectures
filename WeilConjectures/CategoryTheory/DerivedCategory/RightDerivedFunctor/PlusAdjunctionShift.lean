@@ -68,7 +68,7 @@ instance commShift_mapHomotopyCategoryPlus_unit :
       ObjectProperty.ι_map, NatTrans.comp_app, Functor.leftUnitor_hom_app,
       Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Functor.associator_inv_app,
       ObjectProperty.lift_obj_obj, Functor.associator_hom_app, comp_id, id_comp,
-      ObjectProperty.liftCompιIso]
+      ObjectProperty.liftCompιIso, Iso.refl_inv, NatTrans.id_app, Functor.map_id]
     exact (adj.ι_map_mapHomotopyCategoryPlus_unit_app K).trans (comp_id _).symm
   have : NatTrans.CommShift (Functor.whiskerRight adj.mapHomotopyCategoryPlus.unit
       (HomotopyCategory.Plus.ι C)) ℤ := by

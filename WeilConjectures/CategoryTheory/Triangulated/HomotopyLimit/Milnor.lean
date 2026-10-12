@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
+public import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-!
 # Existence of derived limits and the Milnor exact sequence
@@ -88,16 +89,16 @@ lemma milnor_surjective {X : C} (y : ∀ n : ℕ, X ⟶ (F.obj (op n))⟦(1 : �
   let f : X ⟶ P.pt⟦(1 : ℤ)⟧ := Fan.IsLimit.lift hP₁ y
   have hf (n : ℕ) : f ≫ (P.proj n)⟦(1 : ℤ)⟧' = y n := Fan.IsLimit.fac hP₁ y n
   have hf₀ : f ≫ (𝟙 P.pt - towerShift hP)⟦(1 : ℤ)⟧' = 0 := Fan.IsLimit.hom_ext hP₁ _ _ fun n ↦ by
-    simp only [fan_mk_proj, Category.assoc, zero_comp, ← Functor.map_comp, Preadditive.sub_comp,
-      Category.id_comp, towerShift, Fan.IsLimit.fac, Functor.map_sub, Preadditive.comp_sub, hf,
-      Functor.map_comp, reassoc_of% hf, hy, sub_self]
+    simp only [fan_mk_proj, zero_comp, Category.assoc]
+    rw [← Functor.map_comp, Preadditive.sub_comp, Category.id_comp, towerShift_proj,
+      Functor.map_sub, Preadditive.comp_sub, Functor.map_comp, hf, reassoc_of% hf, hy, sub_self]
   obtain ⟨g, hg⟩ := Triangle.coyoneda_exact₁ _ (rot_of_distTriang _ hT) f hf₀
   refine ⟨-g, fun n ↦ ?_⟩
   have := hg =≫ (P.proj n)⟦(1 : ℤ)⟧'
-  simp only [Triangle.rotate_obj₁, Triangle.mk_obj₁, Triangle.rotate_mor₃, Triangle.mk_mor₁,
+  simp only [Triangle.rotate_mor₃, Triangle.mk_mor₁,
     Preadditive.comp_neg, Category.assoc, Preadditive.neg_comp, hf] at this
   rw [← Functor.map_comp, Fan.IsLimit.fac] at this
-  rw [Preadditive.neg_comp, this, neg_neg]
+  rw [Preadditive.neg_comp, this]
 
 /-- **Blueprint `prop-weil-pbc-roos-triangle`** (Milnor sequence, exactness in the middle). A map
 `X ⟶ L⟦1⟧` whose composites with all the shifted legs `L⟦1⟧ ⟶ Fₙ⟦1⟧` vanish factors through
@@ -108,11 +109,11 @@ lemma milnor_exact_middle {X : C} (g : X ⟶ c.pt⟦(1 : ℤ)⟧) :
   constructor
   · intro hg
     refine Triangle.coyoneda_exact₁ _ hT g (Fan.IsLimit.hom_ext hP₁ _ _ fun n ↦ ?_)
-    simp only [Triangle.mk_obj₁, Triangle.mk_mor₁, fan_mk_proj, Category.assoc, zero_comp,
+    simp only [Triangle.mk_mor₁, fan_mk_proj, Category.assoc, zero_comp,
       ← Functor.map_comp, Fan.IsLimit.fac, hg]
   · rintro ⟨x, rfl⟩ n
     have h₃ := comp_distTriang_mor_zero₃₁ _ hT
-    simp only [Triangle.mk_obj₁, Triangle.mk_mor₃, Triangle.mk_mor₁] at h₃
+    simp only [Triangle.mk_mor₃, Triangle.mk_mor₁] at h₃
     rw [Category.assoc, ← Fan.IsLimit.fac hP (fun n ↦ c.π.app (op n)) n, Functor.map_comp,
       reassoc_of% h₃, zero_comp, comp_zero]
 

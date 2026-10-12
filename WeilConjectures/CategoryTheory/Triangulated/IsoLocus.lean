@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Triangulated.Functor
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 
 /-!
@@ -20,8 +20,6 @@ it. Being stable under retracts, it is then a *thick* triangulated subcategory.
 
 ## Main definitions and results
 
-- `CategoryTheory.NatTrans.mapTriangle τ`: the morphism of functors
-  `F₁.mapTriangle ⟶ F₂.mapTriangle` induced by `τ`, if `τ` commutes with the shifts.
 - `CategoryTheory.NatTrans.isoLocus τ`: the objects `X` such that `τ.app X` is an isomorphism.
 - `CategoryTheory.NatTrans.isTriangulated_isoLocus`: it is a triangulated subcategory.
 -/
@@ -68,19 +66,6 @@ variable {C D : Type*} [Category* C] [Category* D] [HasZeroObject C] [HasZeroObj
   [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive]
   {F₁ F₂ : C ⥤ D} [F₁.CommShift ℤ] [F₂.CommShift ℤ] (τ : F₁ ⟶ F₂) [NatTrans.CommShift τ ℤ]
 
-/-- The morphism of functors `F₁.mapTriangle ⟶ F₂.mapTriangle` induced by a natural
-transformation `τ : F₁ ⟶ F₂` which commutes with the shifts. -/
-@[simps!]
-def mapTriangle : F₁.mapTriangle ⟶ F₂.mapTriangle where
-  app T := Triangle.homMk _ _ (τ.app T.obj₁) (τ.app T.obj₂) (τ.app T.obj₃)
-    (τ.naturality T.mor₁) (τ.naturality T.mor₂) (by
-      change (F₁.map T.mor₃ ≫ (F₁.commShiftIso (1 : ℤ)).hom.app T.obj₁) ≫ (τ.app T.obj₁)⟦(1 : ℤ)⟧' =
-        τ.app T.obj₃ ≫ F₂.map T.mor₃ ≫ (F₂.commShiftIso (1 : ℤ)).hom.app T.obj₁
-      rw [assoc]
-      rw [NatTrans.shift_app_comm τ (1 : ℤ) T.obj₁, τ.naturality_assoc])
-  naturality _ _ f := by
-    apply Triangle.hom_ext <;> simp [Triangle.homMk] <;> exact τ.naturality _
-
 instance [Pretriangulated C] [Pretriangulated D] [F₁.IsTriangulated] [F₂.IsTriangulated] :
     (isoLocus τ).IsTriangulated where
   exists_zero := ⟨0, isZero_zero C, by
@@ -93,9 +78,8 @@ instance [Pretriangulated C] [Pretriangulated D] [F₁.IsTriangulated] [F₂.IsT
     infer_instance⟩
   toIsTriangulatedClosed₂ := .mk' fun T hT (_ : IsIso (τ.app T.obj₁))
       (_ : IsIso (τ.app T.obj₃)) ↦
-    show IsIso (τ.app T.obj₂) from isIso₂_of_isIso₁₃ ((NatTrans.mapTriangle τ).app T) (F₁.map_distinguished T hT)
-      (F₂.map_distinguished T hT) (by change IsIso (τ.app T.obj₁); infer_instance)
-      (by change IsIso (τ.app T.obj₃); infer_instance)
+    show IsIso (τ.app T.obj₂) from
+      NatTrans.isIso_app_obj₂_of_isIso_app_obj₁₃ τ hT inferInstance inferInstance
 
 /-- If `τ : F₁ ⟶ F₂` is a natural transformation between triangulated functors which commutes
 with the shifts, the objects at which `τ` is an isomorphism form a triangulated subcategory. -/

@@ -111,7 +111,7 @@ instance : (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X).IsTri
         e₃.inv ≫ F.map f ≫ (F.commShiftIso (1 : ℤ)).hom.app K₁ := by
       rw [show F.map f = _ from hf]
       simp only [Category.assoc, Iso.inv_hom_id_app, Iso.inv_hom_id_assoc]
-      exact (Category.comp_id (T.mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧')).symm
+      erw [Category.comp_id]
     obtain ⟨c, hc₁, hc₂⟩ := complete_distinguished_triangle_morphism₂ _ _ hT hFT e₁.inv e₃.inv hc
     have : IsIso c := isIso₂_of_isIso₁₃ (Triangle.homMk _ _ e₁.inv c e₃.inv hc₁ hc₂ hc) hT hFT
       (inferInstanceAs (IsIso e₁.inv)) (inferInstanceAs (IsIso e₃.inv))

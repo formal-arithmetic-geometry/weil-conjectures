@@ -121,10 +121,10 @@ lemma truncationCoupleMap_hD_comp_abutmentMap (p q : ℤ) :
     τ.naturality]
   rfl
 
-/-- The map `H^n(τ_K)` on abutments sends the `q`-th step of the filtration of `H^n(F₁ K)` into
-the `q`-th step of the filtration of `H^n(F₂ K)`. -/
 omit [F₁.CommShift ℤ] [F₁.IsTriangulated] [F₂.CommShift ℤ] [F₂.IsTriangulated]
   [NatTrans.CommShift τ ℤ] in
+/-- The map `H^n(τ_K)` on abutments sends the `q`-th step of the filtration of `H^n(F₁ K)` into
+the `q`-th step of the filtration of `H^n(F₂ K)`. -/
 lemma imageSubobject_truncationCoupleFiltration_le (n q : ℤ) :
     imageSubobject (((homologyFunctor D 0).shift n).map (F₁.map ((truncLEι C q).app K)) ≫
       ((homologyFunctor D 0).shift n).map (τ.app K)) ≤ truncationCoupleFiltration F₂ K n q := by

@@ -246,6 +246,99 @@ noncomputable def iterEIsoEInfty (p q : ℤ) (k : ℕ) (hk : p ≤ k + 1) (hk' :
 
 end IsHalfPlane
 
+
+namespace IsHalfPlane
+
+variable {X : ExactCouple C 0} {a : ℤ} (h : X.IsHalfPlane a)
+include h
+
+/-- The filtration of the abutment vanishes in degrees `p > n - a`. -/
+lemma abutmentFiltration_F_eq_bot (n p : ℤ) (hp : n - a < p) (hp0 : 0 ≤ p) :
+    (X.abutmentFiltration n).F p = ⊥ := by
+  rw [X.abutmentFiltration_F_of_nonneg n p hp0 p.toNat (by lia),
+    (h.isZero_D p (n - p) (by lia)).eq_of_src (X.αPow _ _ _ _ _ _ _) 0, imageSubobject_zero]
+
+/-- The filtration of the abutment `Aⁿ` of a half-plane exact couple is finite: it is `Aⁿ` in
+degrees `p ≤ 0` and `0` in degrees `p > n - a` (`thm-sp-half-plane-convergence`). -/
+lemma abutmentFiltration_isFinite (n : ℤ) : (X.abutmentFiltration n).IsFinite :=
+  ⟨⟨0, fun p hp ↦ X.abutmentFiltration_F_of_nonpos n p hp⟩,
+    ⟨max (n - a + 1) 0, fun p hp ↦ h.abutmentFiltration_F_eq_bot n p
+      (by have := le_of_max_le_left hp; lia) (le_of_max_le_right hp)⟩⟩
+
+lemma isIso_abutmentStepToIter (n j : ℤ) (k : ℕ) (u v : ℤ) (hj : 0 ≤ j) (hu : u + k = j)
+    (hv : n - j + k = v) (hu0 : u ≤ 0) :
+    IsIso (X.abutmentStepToIter n j k u v hj hu hv hu0) := by
+  have := X.epi_abutmentStepToIter n j k u v hj hu hv hu0
+  have := h.isIso_αPow (-u).toNat 0 n u v (by lia) (by lia) le_rfl
+  have : Mono (X.abutmentStepToIter n j k u v hj hu hv hu0 ≫ X.ιIter k u v) := by
+    rw [X.abutmentStepToIter_ιIter]
+    infer_instance
+  have : Mono (X.abutmentStepToIter n j k u v hj hu hv hu0) :=
+    mono_of_mono _ (X.ιIter k u v)
+  exact isIso_of_mono_of_epi _
+
+/-- The isomorphism `Fʲ Aⁿ ≅ D_{k+2}^{u,v}` (`u + k = j ≥ 0`, `u ≤ 0`) induced by
+`α^{-u} : Aⁿ ⟶ D^{u,v}`. -/
+noncomputable def abutmentStepIsoIter (n j : ℤ) (k : ℕ) (u v : ℤ) (hj : 0 ≤ j) (hu : u + k = j)
+    (hv : n - j + k = v) (hu0 : u ≤ 0) :
+    ((X.abutmentFiltration n).F j : C) ≅ (X.iter k).D u v :=
+  have := h.isIso_abutmentStepToIter n j k u v hj hu hv hu0
+  asIso (X.abutmentStepToIter n j k u v hj hu hv hu0)
+
+/-- The short complex `D_{k+2}^{p-k+1,q+k-1} ⟶ D_{k+2}^{p-k,q+k} ⟶ E_{k+2}^{p,q}` given by
+`α_{k+2}` and `g_{k+2}`. -/
+omit h in
+noncomputable abbrev αgSc (X : ExactCouple C 0) (k : ℕ) (p q : ℤ) : ShortComplex C :=
+  ShortComplex.mk _ _ ((X.iter k).α_g (p - k + 1) (q + k - 1) (p - k) (q + k) p q)
+
+omit h in
+lemma αgSc_exact (k : ℕ) (p q : ℤ) : (αgSc X k p q).Exact :=
+  (X.iter k).exact_α_g (p - k + 1) (q + k - 1) (p - k) (q + k) p q
+
+lemma epi_αgSc_g (k : ℕ) (p q : ℤ) (hk' : q - a ≤ k) : Epi (αgSc X k p q).g :=
+  ((X.iter k).exact_g_f (p - k) (q + k) p q (p + 2) (q - 1)).epi_f
+    ((h.isZero_iter_D k (p + 2) (q - 1) (by lia)).eq_of_tgt _ _)
+
+/-- For `k ≥ p + 1`, `k ≥ q - a` (i.e. `r = k + 2 ≥ max (p + 3) (q - a + 2)`) and `p ≥ 0`, the
+isomorphism `ψ_r : grᵖ A^{p+q} ≅ E_r^{p,q}` induced by `g_r : D_r^{p-k,q+k} ⟶ E_r^{p,q}`
+through `D_r^{p-k,q+k} ≅ Fᵖ A^{p+q}` and `α_r (D_r^{p-k+1,q+k-1}) ≅ Fᵖ⁺¹ A^{p+q}`
+(`thm-sp-half-plane-convergence`, Step 2; the `ψ_r` of `lem-sp-exact-functor-couple`). -/
+noncomputable def grIsoIterE (k : ℕ) (p q n : ℤ) (hn : p + q = n) (hp : 0 ≤ p)
+    (hk : p + 1 ≤ k) (hk' : q - a ≤ k) :
+    (X.abutmentFiltration n).gr p ≅ (X.iter k).E p q :=
+  have := h.epi_αgSc_g k p q hk'
+  cokernel.mapIso _ _
+      (h.abutmentStepIsoIter n (p + 1) k (p - k + 1) (q + k - 1) (by lia) (by lia) (by lia)
+        (by lia))
+      (h.abutmentStepIsoIter n p k (p - k) (q + k) hp (by lia) (by lia) (by lia))
+      (X.abutmentFiltration_incl_stepToIter n p k (p - k) (q + k) hp (by lia) (by lia)
+        (by lia)) ≪≫
+    IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel _) (h.αgSc_exact k p q).gIsCokernel
+
+@[reassoc]
+lemma grπ_grIsoIterE_hom (k : ℕ) (p q n : ℤ) (hn : p + q = n) (hp : 0 ≤ p)
+    (hk : p + 1 ≤ k) (hk' : q - a ≤ k) :
+    (X.abutmentFiltration n).grπ p ≫ (h.grIsoIterE k p q n hn hp hk hk').hom =
+      X.abutmentStepToIter n p k (p - k) (q + k) hp (by lia) (by lia) (by lia) ≫
+        (X.iter k).g (p - k) (q + k) p q := by
+  have := h.epi_αgSc_g k p q hk'
+  simp only [grIsoIterE, Iso.trans_hom, DecreasingFiltration.grπ, cokernel.mapIso_hom,
+    cokernel.π_desc_assoc, abutmentStepIsoIter, asIso_hom, assoc]
+  exact congrArg (_ ≫ ·)
+    (IsColimit.comp_coconePointUniqueUpToIso_hom (cokernelIsCokernel _) _ WalkingParallelPair.one)
+
+/-- Convergence of a half-plane exact couple (`thm-sp-half-plane-convergence`): for `p ≥ 0`,
+`E_∞^{p,q} ≅ grᵖ A^{p+q}` for the image filtration `Fᵖ Aⁿ = im (αᵖ : D^{p,n-p} ⟶ D^{0,n})` of
+the abutment (`CategoryTheory.ExactCouple.abutmentFiltration`, finite by
+`CategoryTheory.ExactCouple.IsHalfPlane.abutmentFiltration_isFinite`). -/
+noncomputable def grIsoEInfty (p q n : ℤ) (hn : p + q = n) (hp : 0 ≤ p) :
+    (X.abutmentFiltration n).gr p ≅ X.EInfty a p q :=
+  h.grIsoIterE (stableIndex a p q) p q n hn hp (by simp only [stableIndex]; lia)
+    (by simp only [stableIndex]; lia) ≪≫
+  h.iterEIsoEInfty p q _ (by simp only [stableIndex]; lia) (by simp only [stableIndex]; lia)
+
+end IsHalfPlane
+
 end ExactCouple
 
 end CategoryTheory

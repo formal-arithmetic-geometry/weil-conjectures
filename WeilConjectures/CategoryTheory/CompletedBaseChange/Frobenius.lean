@@ -59,6 +59,27 @@ open CategoryTheory CategoryTheory.Functor CategoryTheory.TwoSquare
 
 namespace CategoryTheory
 
+section MateWhiskerTop
+
+variable {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄}
+  [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} C] [Category.{v₄} D]
+  {G G' : A ⥤ C} {H : B ⥤ D} {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
+
+/-- Whiskering the top of a 2-square corresponds to whiskering the right of its mate. -/
+lemma mateEquiv_whiskerTop (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : TwoSquare G L₁ L₂ H)
+    (σ : G' ⟶ G) :
+    mateEquiv adj₁ adj₂ (α.whiskerTop σ) = (mateEquiv adj₁ adj₂ α).whiskerRight σ := by
+  have h := mateEquiv_whiskerTop_whiskerBottom adj₁ adj₂ α σ (𝟙 H)
+  have e₁ : (α.whiskerTop σ).whiskerBottom (𝟙 H) = α.whiskerTop σ := by
+    ext; simp [TwoSquare.whiskerBottom]
+  have e₂ : ((mateEquiv adj₁ adj₂ α).whiskerRight σ).whiskerLeft (𝟙 H) =
+      (mateEquiv adj₁ adj₂ α).whiskerRight σ := by
+    ext; simp [TwoSquare.whiskerLeft]
+  rw [e₁, e₂] at h
+  exact h
+
+end MateWhiskerTop
+
 namespace Endofunctor.IsoAlgebra
 
 variable {C : Type u₁} [Category.{v₁} C] {F : C ⥤ C}
@@ -174,14 +195,14 @@ lemma exchange_comm :
     whiskerRight 𝔗.exchange.natTrans 𝔉.ΦY' ≫ (IsoAlgebra.compCommIso 𝔉.κG' 𝔉.βF').hom =
       (IsoAlgebra.compCommIso 𝔉.βF 𝔉.κG).hom ≫ whiskerLeft 𝔉.ΦX 𝔗.exchange.natTrans := by
   have h := congr_arg (fun α ↦ (mateEquiv 𝔗.adjF 𝔗.adjF' α).natTrans) 𝔉.cube
-  rw [mateEquiv_whiskerTop_whiskerBottom, mateEquiv_whiskerTop_whiskerBottom,
+  rw [mateEquiv_whiskerTop, mateEquiv_whiskerBottom,
     mateEquiv_vcomp 𝔗.adjF 𝔗.adjF 𝔗.adjF', mateEquiv_vcomp 𝔗.adjF 𝔗.adjF' 𝔗.adjF'] at h
   ext K
   have hK := congr_app h K
   simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
     NatTrans.comp_app] at hK
-  simp only [NatTrans.comp_app, whiskerRight_app, IsoAlgebra.compCommIso_hom_app,
-    whiskerLeft_app]
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, IsoAlgebra.compCommIso_hom_app,
+    Functor.whiskerLeft_app]
   simpa [βF, βF', exchange] using hK.symm
 
 /-- **The exchange map is a Weil morphism** `ξ : (B, Θ_B) ⟶ (D, Θ_D)` (Blueprint
