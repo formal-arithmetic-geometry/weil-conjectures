@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-finite-free-stalk-homotopy-q-inside",
+ "kind": "statement",
+ "title": "Q homotopy shrinking inside an open",
+ "statement": "Let Y be a scheme [def-pc-scheme], i an integer, r≥0, and Q the single complex [def-pc-derived-category] with the free rank-r O_Y-module [def-weil-pbc-free-module] in degree i. Fix y∈V and endomorphisms c,e of Q restricted to V. Suppose their termwise pullbacks [def-pc-derived-pullback] along V.fromSpecStalkOfMem y hyV are homotopic. For any U≤V containing y, there is W≤U containing y on which the direct restrictions of c,e from V are homotopic.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation; finite matrix homotopy identities after shrinking"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "All differentials of Q and its restriction and pullback vanish. The homotopy equations therefore give equality of the pulled-back maps. Only degree i can contribute because the other terms are zero. In the standard finite basis, the difference of the degree-i maps is a finite r by r matrix.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback along V.fromSpecStalkOfMem evaluates the matrix entries at their germs in O_{Y,y}. Each entry therefore has zero germ. The stalk equality criterion supplies an open containing y where it vanishes; intersect the finitely many opens with U.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the resulting W all matrix entries vanish, so the maps agree in degree i and in every other degree, whose terms are zero. Homotopy.ofEq supplies the homotopy. For r=0 the intersection is empty and W=U suffices; the argument is independent of the integer i.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Explicit finite matrix argument split from lem-pc-finite-free-stalk-homotopy-pair-shrink, steps 1--3; this half is independent of the other map pair."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homotopies of bounded finite free sheaf complexes spread from a stalk to an open neighborhood",
+   "results": "Eight hits, including ComplexShape.QFactorsThroughHomotopy_of_exists_prev and CochainComplex.IsKInjective/IsKProjective.nonempty_homotopy_zero; none concerns local spreading of a prescribed homotopy.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy, AlgebraicGeometry.Scheme.fromSpecStalk",
+   "results": "0 hits. Separate query CategoryTheory.Functor.mapHomotopy finds the additive-functor transport used to prove restriction, but not spreading.",
+   "date": "2026-10-13",
+   "verdict": "no match for spreading"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopy.*(stalk|shrink)|stalk.*homotopy; rg Homotopy in lean/WeilConjectures and lean/Sheaf; rg germ/freeMatrix in Modules/Sheaf.lean",
+   "results": "msearch grep: 0 hits. Local searches find the parent pair-shrinking hole, its downstream HomotopySpread theorem, and the freeMatrix_pullback API. No existing theorem supplies either shrinking conclusion without the parent.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A stalk homotopy between fixed maps of bounded finite free sheaf complexes extends on an open neighborhood",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict is inferred from this failure.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyPairShrink",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-free-stalk-homotopy-pair-shrink",
+   "place": "Finite calculation on a neighbourhood, this map pair only"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyQShrink",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkHomotopyQShrink.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_shrink_homotopy_Q_inside_of_stalk",
+  "statement": "theorem exists_shrink_homotopy_Q_inside_of_stalk\n    {Y : Scheme.{u}}\n    (i : ℤ) (r : ℕ) (y : Y) (V : Y.Opens) (hyV : y ∈ V)\n    (c e : (((restrictFunctor V.ι).mapHomologicalComplex _).obj\n      ((CochainComplex.singleFunctor Y.Modules i).obj\n      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))) ⟶\n      (((restrictFunctor V.ι).mapHomologicalComplex _).obj\n      ((CochainComplex.singleFunctor Y.Modules i).obj\n      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))))\n    (hQ : Nonempty (Homotopy\n      (((Modules.pullback (V.fromSpecStalkOfMem y hyV)).mapHomologicalComplex _).map c)\n      (((Modules.pullback (V.fromSpecStalkOfMem y hyV)).mapHomologicalComplex _).map e)))\n    (U : Y.Opens) (hUV : U ≤ V) (hyU : y ∈ U) :\n    ∃ (W : Y.Opens) (hWU : W ≤ U), y ∈ W ∧\n      Nonempty (Homotopy\n        (((restrictFunctor (Y.homOfLE (hWU.trans hUV))).mapHomologicalComplex _).map c)\n        (((restrictFunctor (Y.homOfLE (hWU.trans hUV))).mapHomologicalComplex _).map e))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T184304-L-4004820",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T184304-L-4004820",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

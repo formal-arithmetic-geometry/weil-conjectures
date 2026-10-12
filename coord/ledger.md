@@ -8952,3 +8952,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/H1/Sheaf.RingTheory.CompleteLocalDomainResidueParameterMap (stage 3; reviewer PASS; first push; landing 20261012T184303-L-4004519 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/H1/Sheaf.RingTheory.RegularSequencePolynomialVariables (stage 3; reviewer PASS; first push; landing 20261012T184303-L-4004619 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/H1/Sheaf.RingTheory.RegularSequencePowers (stage 3; reviewer PASS; first push; landing 20261012T184304-L-4004722 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/H2/Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyPairShrink (stage 3; reviewer PASS; first push; landing 20261012T184304-L-4004820 (interface); batch 20261012T184234; modules 3; new nodes 2)
