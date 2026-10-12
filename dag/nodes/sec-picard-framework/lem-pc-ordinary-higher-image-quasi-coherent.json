@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-ordinary-higher-image-quasi-coherent",
+ "kind": "statement",
+ "title": "Ordinary higher direct images are quasi-coherent",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme, def-pc-morphism-conventions]. For every quasi-coherent $\\mathcal O_X$-module $M$ [pqf-def-coherent] and every $p\\in\\mathbf N$, the ordinary higher direct image $R^pf_*M$ is quasi-coherent. Here the ordinary higher image is the $p$-th right derived functor of module direct image [def-pc-ringed-spaces-derived-direct-image], not the higher image of an arbitrary derived object.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01XJ",
+  "place": "Lemma 30.4.5 (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "pqf-def-coherent",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "To prove (1), restrict the derived direct image to an affine open $V\\subseteq S$ using [lem-pc-restrict-derived-direct-image-open]. On the affine base $S$, apply [lem-sc-invert-s-cohomology-induction] to the property that every $R^if_*\\mathcal G$ is quasi-coherent for every quasi-coherent $\\mathcal G$ on a quasi-compact open. On an affine open $U$, [lem-pc-affine-morphism-hi] gives the assertion in degree zero and the cited cohomology-presheaf statement together with [lem-pc-affine-vanishing] gives vanishing in positive degrees. For $U\\cup V$ (with $U$ quasi-compact, $V$ affine, $a,b,c,g$ the restrictions of $f$ to $U,V,U\\cap V,U\\cup V$ and $\\mathcal G$ quasi-coherent on $U\\cup V$), apply [lem-sc-mayer-vietoris-open-cover] to the cover of $g^{-1}(T)$ by $a^{-1}(T)$ and $b^{-1}(T)$ for every open $T\\subseteq S$; by its naturality in inclusions of open covers these long exact sequences form a long exact sequence of presheaves of $\\mathcal O_S$-modules $T\\mapsto H^p(g^{-1}(T),\\mathcal G)$, etc. Sheafification is exact [lem-weil-pbc-module-presheaf-sheafification-exact] and by [lem-weil-pbc-higher-direct-image-presheaf] it turns these presheaves into $R^pg_*\\mathcal G$, $R^pa_*(\\mathcal G|_U)\\oplus R^pb_*(\\mathcal G|_V)$, $R^pc_*(\\mathcal G|_{U\\cap V})$, giving the relative Mayer--Vietoris long exact sequence, which expresses each cohomology sheaf as an extension of kernels and cokernels of maps between the corresponding quasi-coherent sheaves; kernels and cokernels are checked on affine opens, and [lem-pc-quasi-coherent-extension] gives quasi-coherence of the extensions. This proves (1) locally on $S$ and hence globally. The cited qcqs-open induction is the two-stage principle of Tag 08DR: first handle separated quasi-compact opens using affine intersections and induction on an affine cover, then handle general quasi-compact opens using that the overlap with the last affine open is a quasi-compact separated open. No induction hypothesis on the size of an arbitrary overlap cover is assumed.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-sc-invert-s-cohomology-induction",
+    "lem-pc-affine-morphism-hi",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-pc-affine-vanishing",
+    "lem-sc-mayer-vietoris-open-cover",
+    "lem-weil-pbc-module-presheaf-sheafification-exact",
+    "lem-pc-quasi-coherent-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 30.4.5, Tag 01XJ (1), using Lemma 08DR and Lemma 01EB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-pc-affine-morphism-hi",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-pc-affine-vanishing",
+  "lem-sc-mayer-vietoris-open-cover",
+  "lem-weil-pbc-module-presheaf-sheafification-exact",
+  "lem-pc-quasi-coherent-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/01XJ",
+  "place": "proof of part (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*[Qq]uasicoherent|rightDerived.*[Qq]uasicoherent",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of quasi coherent modules along a quasi compact quasi separated morphism are quasi coherent",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent",
+   "results": "Hits: SheafOfModules.IsQuasicoherent, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.isQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.instIsQuasicoherentObjIsQuasicoherent, SheafOfModules.Presentation.isQuasicoherent, SheafOfModules.isQuasicoherent_over",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TruncatedHigherImageQuasiCoherent",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "bounded-below quasi-coherence argument: quasi-coherence of ordinary higher images (Tag 01XJ (1))",
+   "via": [
+    "lem-pc-truncated-higher-image-quasi-coherent",
+    "lem-pc-truncated-higher-images-affine-coproduct",
+    "lem-pc-truncated-direct-image-affine-finite-support",
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": [
+   "lem-pc-finite-support-hi"
+  ]
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryHigherImageQuasiCoherent.lean",
+  "declaration": "AlgebraicGeometry.ordinaryHigherImage_isQuasicoherent",
+  "statement": "theorem ordinaryHigherImage_isQuasicoherent\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hM : M.IsQuasicoherent)\n    (p : ℕ) :\n    SheafOfModules.IsQuasicoherent.{u}\n      (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj M)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13",
+  "note": "Extracts only clause (1) of lem-pc-finite-support-hi into an acyclic interface. The existing ordinary theorem in DirectImage.Sections cannot be imported here: its proof-only imports reach TruncatedHigherImageQuasiCoherent."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T194057-L-450908",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T194057-L-450908",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
