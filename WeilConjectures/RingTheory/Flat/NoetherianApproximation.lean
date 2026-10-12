@@ -415,8 +415,8 @@ variable {R₀ S₀ M₀ : Type u} [CommRing R₀] [CommRing S₀] [Algebra R₀
 /-- **Noetherian approximation of flatness at a prime** (Stacks, Tag 00R6), module version of
 `Module.exists_fg_flat_localization_tensor`. Let `R₀` be noetherian, `S₀` a finite type
 `R₀`-algebra, `M₀` a finite `S₀`-module and `A` an `R₀`-algebra such that `(A ⊗[R₀] S₀) ⊗[S₀] M₀`
-is flat over `A`. For a prime `q` of `A ⊗[R₀] S₀` there is a finitely generated subalgebra `R₁` of `A`
-such that `(R₁ ⊗[R₀] S₀) ⊗[S₀] M₀` is flat over `R₁` at the prime below `q`. -/
+is flat over `A`. For a prime `q` of `A ⊗[R₀] S₀` there is a finitely generated subalgebra `R₁` of
+`A` such that `(R₁ ⊗[R₀] S₀) ⊗[S₀] M₀` is flat over `R₁` at the prime below `q`. -/
 theorem exists_fg_flat_localizedModule_baseChange {A : Type u} [CommRing A] [Algebra R₀ A]
     [IsNoetherianRing R₀] [Algebra.FiniteType R₀ S₀] [Module.Finite S₀ M₀]
     (hA : Flat A ((A ⊗[R₀] S₀) ⊗[S₀] M₀)) (q : Ideal (A ⊗[R₀] S₀)) [q.IsPrime] :
@@ -541,6 +541,7 @@ theorem flat_of_forall_flat_localizedModule {R S N : Type*} [CommRing R] [CommRi
   exact ht (hle (LinearMap.mem_ker.2 hty))
 
 /-- **Openness of the flat locus of a base change** (Stacks, Tag 00RC). -/
+omit [Module R₀ M₀] [IsScalarTower R₀ S₀ M₀] in
 theorem isOpen_setOf_flat_localizedModule_baseChange [Algebra.FiniteType R₀ S₀]
     [Module.Finite S₀ M₀] (R : Type u) [CommRing R] [Algebra R₀ R] [IsNoetherianRing R] :
     IsOpen {Q : PrimeSpectrum (R ⊗[R₀] S₀) |
@@ -601,6 +602,8 @@ lemma map_val_eq_rTensor {A : Type u} [CommRing A] [Algebra R₀ A] {R : Subalge
   | add a b ha hb => simp only [map_add, ha, hb]
   | tmul a s => rfl
 
+-- The proof is long and elaborates many tensor product instances.
+set_option maxHeartbeats 1000000 in
 /-- **Flatness descends to a finitely generated subalgebra** (Stacks, Tag 02JO; EGA IV₃, 11.2.6).
 Let `R₀` be noetherian, `S₀` a finite type `R₀`-algebra, `M₀` a finite `S₀`-module and `A` an
 `R₀`-algebra such that `(A ⊗[R₀] S₀) ⊗[S₀] M₀` is flat over `A`. Then there is a finitely
@@ -664,7 +667,7 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
     obtain ⟨m, hm, hle⟩ := Ideal.exists_le_maximal _ hne
     have hmZ := hZ (PrimeSpectrum.comap φ₁.toRingHom ⟨m, hm.isPrime⟩)
       (Ideal.map_le_iff_le_comap.mp hle)
-    exact hmZ (hK (Set.mem_univ ⟨m, hm.isPrime⟩))
+    exact hmZ (hK (Set.mem_univ (⟨m, hm.isPrime⟩ : PrimeSpectrum (A ⊗[R₀] S₀))))
   -- `1 = ∑ cᵢ φ₁(fᵢ)` with `fᵢ ∈ I`.
   have h1 : (1 : A ⊗[R₀] S₀) ∈ Submodule.span (A ⊗[R₀] S₀) (φ₁ '' I) := by
     change (1 : A ⊗[R₀] S₀) ∈ I.map φ₁

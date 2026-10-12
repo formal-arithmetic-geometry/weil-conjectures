@@ -187,6 +187,7 @@ lemma extendRestrict_smul (A V : Z.Opens) (r : Γ(Z, V))
         (show Γ(M, A.ι ''ᵁ A.ι ⁻¹ᵁ V) from m) := by
   change (A.ι.appIso (A.ι ⁻¹ᵁ V)).inv (A.ι.app V r) • (show Γ(M, A.ι ''ᵁ A.ι ⁻¹ᵁ V) from m) = _
   rw [← ConcreteCategory.comp_apply, Scheme.Hom.app_appIso_inv]
+  rfl
 
 variable {ι : Type u} (U : ι → Z.Opens)
 
@@ -197,7 +198,15 @@ lemma sectionsCechResolutionIso_hom_f_apply (V : Z.Opens) (k : ℕ)
       M.presheaf.map (homOfLE (ι_image_preimage_mono (TopCat.Presheaf.iInf_le_piObj U y) V)).op
         ((Pi.π (fun y : Fin (k + 1) → ι ↦ (cechPresheaf M).obj (op (∏ᶜ fun l ↦ U (y l)))) y).app
           V x) := by
-  sorry
+  change cechComplexFunctorXAddEquiv U (cechPresheaf M ⋙ sectionsModuleFunctor V) k
+    ((cechComplexFunctorMapIso U (sectionsModuleFunctor V) (cechPresheaf M)).hom.f k x) y = _
+  rw [cechComplexFunctorXAddEquiv_apply, cechComplexFunctorMapIso_hom_f, cechComplexFunctorπ]
+  have h := ConcreteCategory.congr_hom (piComparison_comp_π (sectionsModuleFunctor V)
+    (fun y : Fin (k + 1) → ι ↦ (cechPresheaf M).obj (op (∏ᶜ fun l ↦ U (y l)))) y) x
+  rw [ConcreteCategory.comp_apply] at h
+  refine (congrArg _ h).trans ?_
+  exact ConcreteCategory.congr_hom
+    (cechPresheaf_map_app M (homOfLE (TopCat.Presheaf.iInf_le_piObj U y)).op V) _
 
 end Sections
 

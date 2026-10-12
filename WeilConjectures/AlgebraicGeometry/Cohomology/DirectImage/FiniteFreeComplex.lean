@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProperFinite
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
 
 /-!
@@ -92,8 +93,13 @@ properties of the higher direct images.
 (blueprint: `lem-pc-coherent-hi`) -/
 theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) :=
-  sorry
+    Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) := by
+  let p : X ⟶ Spec (.of Γ(T, ⊤)) := f ≫ T.isoSpec.hom
+  have h := hasFiniteH_of_isProper p ℱ q
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H f ℱ q
+  exact Module.Finite.of_bijective_semilinearMap e he
+    ((Scheme.ΓSpecIso (.of Γ(T, ⊤))).inv ≫ T.isoSpec.hom.appTop).hom
+    (ConcreteCategory.bijective_of_isIso _).2 h
 
 /-- **Coherence of the higher direct images over a locally Noetherian base.** With
 `f : X ⟶ T` proper, `T` locally Noetherian and `ℱ` a coherent `𝒪_X`-module, the higher direct

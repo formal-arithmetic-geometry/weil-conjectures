@@ -225,6 +225,95 @@ lemma exists_adapted_frame (hS : S.ShortExact) {r : ℕ} [S.X₁.IsFiniteLocally
   simp_rw [ht]
   exact hw.restrict _
 
+/-- **Transition functions of adapted frames.** For adapted frames `(l, t)` over `U` and
+`(l', t')` over `U'` of a short exact sequence `0 → L → E → E' → 0`, the generators
+`l' ∧ t'₁ ∧ ⋯ ∧ t'_r` of `⋀^{r+1} E` and `l' ⊗ (t̄'₁ ∧ ⋯ ∧ t̄'_r)` of `L ⊗ ⋀ʳ E'` are, on every
+open `W ⊆ U ∩ U'`, the same multiple of the corresponding generators built from `(l, t)`. -/
+lemma exists_transition_adapted (hS : S.ShortExact) {r : ℕ} {U U' W : X.Opens} (hW : W ≤ U)
+    (hW' : W ≤ U') {l : Fin 1 → Γ(S.X₁, U)} {t : Fin r → Γ(S.X₂, U)} (hl : IsLocalFrame l)
+    (ht : IsLocalFrame fun k ↦ S.g.app U (t k)) (l' : Fin 1 → Γ(S.X₁, U'))
+    (t' : Fin r → Γ(S.X₂, U')) :
+    ∃ c : Γ(X, W),
+      (S.X₂.exteriorPower (r + 1)).presheaf.map (homOfLE hW').op
+          (wedge (Fin.cons (S.f.app U' (l' 0)) t')) =
+        c • (S.X₂.exteriorPower (r + 1)).presheaf.map (homOfLE hW).op
+          (wedge (Fin.cons (S.f.app U (l 0)) t)) ∧
+      (S.X₁ ⊗ S.X₃.exteriorPower r).presheaf.map (homOfLE hW').op
+          (tmulSection (l' 0) (wedge fun k ↦ S.g.app U' (t' k))) =
+        c • (S.X₁ ⊗ S.X₃.exteriorPower r).presheaf.map (homOfLE hW).op
+          (tmulSection (l 0) (wedge fun k ↦ S.g.app U (t k))) := by
+  have := hS.mono_f
+  obtain ⟨b₁, hb₁⟩ := hl W hW
+  obtain ⟨b₃, hb₃⟩ := ht W hW
+  obtain ⟨b, hb⟩ := (IsLocalFrame.cons_of_shortExact hS hl ht) W hW
+  set ρ₁ := S.X₁.presheaf.map (homOfLE hW').op
+  set ρ₂ := S.X₂.presheaf.map (homOfLE hW').op
+  set l₀ := ρ₁ (l' 0)
+  set u : Fin r → Γ(S.X₂, W) := fun k ↦ ρ₂ (t' k)
+  have hb' : ⇑b = Fin.cons (Hom.appₗ S.f W (b₁ 0))
+      (fun k ↦ S.X₂.presheaf.map (homOfLE hW).op (t k)) := by
+    funext k
+    rw [hb k]
+    refine Fin.cases ?_ (fun k ↦ ?_) k
+    · simp only [Fin.cons_zero, Hom.appₗ_apply, hb₁, Hom.app_presheaf_map]
+    · simp only [Fin.cons_succ]
+  have hgt : ∀ k, Hom.appₗ S.g W (S.X₂.presheaf.map (homOfLE hW).op (t k)) = b₃ k := fun k ↦ by
+    rw [Hom.appₗ_apply, Hom.app_presheaf_map, hb₃]
+  refine ⟨b₁.repr l₀ 0 * b₃.det (Hom.appₗ S.g W ∘ u), ?_, ?_⟩
+  · rw [wedge_map, wedge_map]
+    have h1 : (fun k ↦ S.X₂.presheaf.map (homOfLE hW').op
+        ((Fin.cons (S.f.app U' (l' 0)) t' : Fin (r + 1) → Γ(S.X₂, U')) k)) =
+        Fin.cons (Hom.appₗ S.f W l₀) u := by
+      funext k
+      refine Fin.cases ?_ (fun k ↦ ?_) k
+      · simp only [Fin.cons_zero, Hom.appₗ_apply, l₀, ρ₁, Hom.app_presheaf_map]
+      · simp only [Fin.cons_succ, u, ρ₂]
+    have h2 : (fun k ↦ S.X₂.presheaf.map (homOfLE hW).op
+        ((Fin.cons (S.f.app U (l 0)) t : Fin (r + 1) → Γ(S.X₂, U)) k)) = ⇑b :=
+      funext fun k ↦ (hb k).symm
+    rw [h1, h2, wedge_eq_det_smul b,
+      Module.Basis.det_cons_of_exact (exact_appₗ hS W) b₁ b₃ hgt b hb']
+  · rw [tmulSection_map, tmulSection_map, wedge_map, wedge_map]
+    have h1 : (fun k ↦ S.X₃.presheaf.map (homOfLE hW').op (S.g.app U' (t' k))) =
+        Hom.appₗ S.g W ∘ u := by
+      funext k
+      simp only [Function.comp_apply, Hom.appₗ_apply, u, ρ₂, Hom.app_presheaf_map]
+    have h2 : (fun k ↦ S.X₃.presheaf.map (homOfLE hW).op (S.g.app U (t k))) = ⇑b₃ :=
+      funext fun k ↦ (hb₃ k).symm
+    have h3 : S.X₁.presheaf.map (homOfLE hW).op (l 0) = b₁ 0 := (hb₁ 0).symm
+    have h4 : l₀ = b₁.repr l₀ 0 • b₁ 0 := by
+      conv_lhs => rw [← b₁.sum_repr l₀]
+      simp
+    rw [h1, h2, h3, wedge_eq_det_smul b₃ (Hom.appₗ S.g W ∘ u)]
+    change tmulSection l₀ _ = _
+    rw [h4, smul_tmulSection, tmulSection_smul, smul_smul, ← h4]
+
+/-- **Determinants are multiplicative in short exact sequences.** For a short exact sequence
+`0 → L → E → E' → 0` of `𝒪_X`-modules with `L` invertible (finite locally free of rank one) and
+`E'` finite locally free of rank `r`, `⋀^{r+1} E ≅ L ⊗ ⋀ʳ E'`.
+
+Both sides are invertible, with free generators `l ∧ t₁ ∧ ⋯ ∧ t_r` and `l ⊗ (t̄₁ ∧ ⋯ ∧ t̄_r)` on
+the opens of adapted frames (`AlgebraicGeometry.Scheme.Modules.exists_adapted_frame`), and these
+have the same transition functions
+(`AlgebraicGeometry.Scheme.Modules.exists_transition_adapted`).
+
+(blueprint: `lem-sc-riemann-roch`) -/
+theorem nonempty_exteriorPower_iso_tensorObj (hS : S.ShortExact) {r : ℕ}
+    [S.X₁.IsFiniteLocallyFreeOfRank 1] [S.X₃.IsFiniteLocallyFreeOfRank r] :
+    Nonempty (S.X₂.exteriorPower (r + 1) ≅ S.X₁ ⊗ S.X₃.exteriorPower r) := by
+  choose U l t hx hl ht using exists_adapted_frame (r := r) hS
+  have hU : ⨆ x, U x = ⊤ := eq_top_iff.mpr fun x _ ↦ Opens.mem_iSup.mpr ⟨x, hx x⟩
+  refine nonempty_iso_of_isFreeGenerator hU
+    (e := fun x ↦ wedge (Fin.cons (S.f.app (U x) (l x 0)) (t x)))
+    (f := fun x ↦ tmulSection (l x 0) (wedge fun k ↦ S.g.app (U x) (t x k)))
+    (fun x ↦ (IsLocalFrame.cons_of_shortExact hS (hl x) (ht x)).isFreeGenerator_wedge)
+    ?_ (fun x ↦ (hl x).isFreeGenerator.tmulSection (ht x).isFreeGenerator_wedge)
+  intro i j W hi hj a b hab
+  have he := ((IsLocalFrame.cons_of_shortExact hS (hl i) (ht i)).isFreeGenerator_wedge).map hi
+  obtain ⟨c, hc₁, hc₂⟩ := exists_transition_adapted hS hi hj (hl i) (ht i) (l j) (t j)
+  rw [hc₁, smul_smul] at hab
+  rw [hc₂, smul_smul, he.smul_left_injective hab]
+
 end ShortExact
 
 end AlgebraicGeometry.Scheme.Modules
