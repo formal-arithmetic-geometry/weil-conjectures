@@ -201,6 +201,7 @@ public import WeilConjectures.AlgebraicGeometry.Hilbert.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
+public import WeilConjectures.AlgebraicGeometry.IdempotentBasicOpen
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.RankOne
@@ -1862,6 +1863,7 @@ public import WeilConjectures.Topology.Sheaves.CechFlasque
 public import WeilConjectures.Topology.Sheaves.MayerVietorisVanishing
 public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import WeilConjectures.Topology.Sheaves.SpectralRestriction
+public import WeilConjectures.Topology.SpectralSpace.ClopenExtension
 public import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
 public import WeilConjectures.Topology.SpectralSpace.Constructible
 public import WeilConjectures.Topology.SpectralSpace.ConstructibleSeparation
