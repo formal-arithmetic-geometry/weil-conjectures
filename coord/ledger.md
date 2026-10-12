@@ -8747,3 +8747,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/G1/Sheaf.AlgebraicGeometry.AffineTensorUnitSectionPresentation (stage 3; reviewer PASS; first push; landing 20261012T173825-L-3295697 (interface); batch 20261012T173801; modules 2; new nodes 1)
 - 17:38 L: merged deliver/G1/Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection (stage 3; reviewer PASS; first push; landing 20261012T173826-L-3295829 (interface); batch 20261012T173801; modules 2; new nodes 1)
 - 17:38 L: merged deliver/G2/Sheaf.AlgebraicGeometry.AffineCapSectionOpenDictionary (stage 3; reviewer PASS; first push; landing 20261012T173826-L-3296017 (proof); batch 20261012T173801; modules 1; new nodes 1)
+- 17:38 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleConstructibleReflection (stage 3; reviewer PASS; after a return; landing 20261012T173827-L-3296147 (interface); batch 20261012T173801; modules 2; new nodes 1)

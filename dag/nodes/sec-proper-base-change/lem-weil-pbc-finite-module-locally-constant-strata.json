@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-finite-module-locally-constant-strata",
+ "kind": "statement",
+ "title": "Locally constant source strata for finite direct image of modules",
+ "statement": "Let $k$ be an algebraically closed field, $\\Lambda$ a commutative ring, $g:Y\\to\\operatorname{Spec}k$ a separated finite-type curve of dimension at most one [def-weil-pbc-curve-setting], $f:X\\to Y$ finite, and $F$ an etale sheaf of $\\Lambda$-modules. If $f_*F$ is module-constructible [def-weil-pbc-etale-constructible-sheaf], there exists a finite constructible stratification $S$ of $X$ [def-constructible-stratification] such that the pullback of $F$ to each stratum is locally constant [def-constructible-locally-constant]. No finiteness assertion about these pullbacks is included, and no Noetherian or torsion hypothesis on $\\Lambda$ is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-constructible-stratification",
+  "def-constructible-locally-constant"
+ ],
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tags 095K (finite stratification), 0959 (finite exchange), 04DZ (topological invariance), and 0A5D; direct-factor refinement for arbitrary module coefficients"
+ },
+ "proof": [
+  {
+   "text": "Reduce the target without changing its etale sheaves. Generic constancy of the constructible direct image permits choosing pairwise disjoint affine integral dense opens of the positive-dimensional components on which it is finite locally constant. The excluded set is a finite set of closed points; zero-dimensional components are included in that excluded set. Write the finite inverse image of each chosen Spec A as Spec B and apply generic finite-algebra splitting after a further principal shrinking.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "prop-constructible-generic-constancy",
+    "lem-weil-pbc-generic-finite-algebra-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The surjective finite etale base change supplied by splitting makes the reduced inverse image a finite disjoint union of universal-homeomorphism components over U. Finite exchange and pullback stability identify its direct image with a finite locally constant sheaf on U. The component sheaves, transported through topological invariance, are direct summands of that sheaf.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lemma-constructible-pullback-locally-constant",
+    "lemma-constructible-pullback-finite",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Trivialize the ambient finite locally constant module sheaf as M_U for a finitely generated module M. The summand projector is etale-locally induced by a constant endomorphism e, because the images of a finite generating set are simultaneously locally constant. On nonempty cover members evaluation at a geometric point gives e squared equals e. The image sheaf is the constant sheaf at the image of e, by exactness of the constant sheaf functor. Thus each summand is locally constant. Transport through the component universal homeomorphisms and compose the etale trivializing covers to descend local constancy to the inverse image of each chosen target open.",
+   "uses": [
+    "lemma-constructible-hom-constant-locally",
+    "lemma-constructible-universal-homeomorphism-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an omitted closed target point, its finite inverse image is artinian with residue fields k. Its reduction is a finite disjoint union of Spec k, whose etale topoi are points. Any module sheaf there is constant; no finite generation assertion is needed. The reduced point immersions and the open inverse images from the preceding step give a finite partition of X into constructible locally closed subsets, since X is Noetherian. Their immersions define S, and their pullbacks are locally constant. Empty fibres contribute no strata, and the empty source uses n = 0.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-generic-finite-algebra-splitting",
+  "lemma-constructible-hom-constant-locally",
+  "lemma-constructible-pullback-finite",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-constructible-universal-homeomorphism-invariance",
+  "lemma-weil-pbc-finite-exchange",
+  "prop-constructible-generic-constancy",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Local constancy portion of the finite-stratification and direct-factor refinement of Tags 095K and 0A5D; uses generic finite-algebra splitting and leaves stalk finiteness to the parent theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isFiniteSheaf.*lowerStar|IsFiniteSheaf.*lowerStar|isConstructibleSheaf_of_finite",
+   "results": "No matches",
+   "verdict": "No theorem of locally constant source stratification for arbitrary module coefficients.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If finite direct image of a module sheaf on a curve is constructible there is a finite stratification of the source on which the sheaf is locally constant",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module sheaf on a curve with constructible finite direct image has a finite stratification with locally constant restrictions",
+   "results": "SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.IsFiniteType; SheafOfModules.GeneratingSections.IsFiniteType.finite; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; SheafOfModules.GeneratingSections.IsFiniteType; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.localGeneratorsDataOfIsFiniteType; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation",
+   "verdict": "No theorem of locally constant source stratification for arbitrary module coefficients.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleConstructibleReflection",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-normalization-constant",
+   "place": "finite direct image and normalization comparison, C4 and C5: local constancy part of constructibility reflection",
+   "via": [
+    "p2-finite-pushforward-module-constructible-reflection",
+    "b3-finite-pushforward-module-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleLocallyConstantStrata",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FinitePushforwardModuleLocallyConstantStrata.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_locallyConstant_stratification_of_finite_lowerStar_module",
+  "statement": "theorem Scheme.exists_locallyConstant_stratification_of_finite_lowerStar_module\n    {k : Type u} [Field k] [IsAlgClosed k] {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (g : Y ⟶ Spec (.of k)) [IsCurve g] [IsFinite f]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (h : Scheme.IsConstructibleSheaf\n      ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F)) :\n    ∃ S : Scheme.Stratification X, ∀ i : Fin S.n,\n      Scheme.IsLocallyConstantSheaf\n        ((Etale.upperStar (ModuleCat.{u + 1} Λ) (S.immersion i)).obj F)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T173827-L-3296147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T173827-L-3296147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
