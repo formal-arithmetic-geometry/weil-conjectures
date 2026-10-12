@@ -8673,3 +8673,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/U1/Sheaf.AlgebraicGeometry.AffineGaloisBaseChangeFiberTransitivity (stage 3; reviewer PASS; first push; landing 20261012T165534-L-2940719 (interface); batch 20261012T165503; modules 2; new nodes 1)
 - 16:55 L: merged deliver/U2/Sheaf.Algebra.Module.GradedModuleAwayClearingModule (stage 3; reviewer PASS; first push; landing 20261012T165535-L-2940965 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/U2/Sheaf.RingTheory.KoszulRegularSequenceDualComplex (stage 3; reviewer PASS; first push; landing 20261012T165535-L-2941126 (interface); batch 20261012T165503; modules 2; new nodes 1)
+- 16:55 L: merged deliver/U3/Sheaf.AlgebraicGeometry.EtaleLimitCohomologyAffineStage (stage 3; reviewer PASS; after a return; landing 20261012T165536-L-2941242 (interface); batch 20261012T165503; modules 3; new nodes 2)
