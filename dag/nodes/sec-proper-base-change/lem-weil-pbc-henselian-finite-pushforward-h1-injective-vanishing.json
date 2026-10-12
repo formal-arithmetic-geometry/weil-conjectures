@@ -1,0 +1,105 @@
+{
+ "id": "lem-weil-pbc-henselian-finite-pushforward-h1-injective-vanishing",
+ "kind": "lemma",
+ "title": "Injective module H1 vanishing",
+ "statement": "For a scheme Y and commutative ring Λ, an injective sheaf J of Λ-modules on the small etale site [def-weil-pbc-etale-sheaves] has subsingleton degree-one cohomology of its underlying abelian sheaf, where H¹ is Ext out of the constant integer sheaf [def-weil-pbc-etale-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03FD"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "View J as a module over the constant ring sheaf Λ; this equivalence preserves injectivity and the underlying abelian sheaf. Apply Stacks 03FD (the injective-module abelian acyclicity argument) at the terminal etale object Y, then identify derived section cohomology with Ext from the constant integer sheaf. The existing node states this with small-universe coefficients, SheafOfModules and rightDerived evaluation, so the constant-ring module equivalence, arbitrary coefficient universe and Ext comparison are still needed here.",
+   "uses": [
+    "lem-weil-pbc-injective-module-abelian-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-injective-module-abelian-acyclic"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03FD"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-p1-acyclicity",
+   "place": "proof step (ii), strict henselian base: injective acyclicity",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1",
+  "file": "lean/Sheaf/AlgebraicGeometry/InjectiveModuleSheafH1.lean",
+  "declaration": "AlgebraicGeometry.Etale.subsingleton_H_one_of_injective_module_sheaf",
+  "statement": "theorem subsingleton_H_one_of_injective_module_sheaf (Y : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] : Subsingleton (Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj J) 1)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Underlying abelian sheaf of an injective sheaf of modules has vanishing first cohomology",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.H, groupCohomology.instMonoModuleCatFShortComplexH0, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex, CategoryTheory.injective_iff_subsingleton_ext_one, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero. No matching injective-module underlying-abelian H1 vanishing theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.sheafCompose",
+   "results": "0 hits: . No matching injective-module underlying-abelian H1 vanishing theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "Injective|subsingleton_H",
+   "results": "7 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean. No matching injective-module underlying-abelian H1 vanishing theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective sheaf of modules is acyclic for cohomology of its underlying abelian sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0e535",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T011430-L-757597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0e535",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T011430-L-757597",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures and the delivered proof with their DAG nodes, dependency statements, source arguments, report, and earlier return; existing interfaces and unit route are preserved."
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-henselian-finite-pushforward-h1-lift",
+ "kind": "lemma",
+ "title": "Finite constant pushforward H1 lifting and naturality",
+ "statement": "Let A be a henselian local ring [def-weil-pbc-henselian-terminology], f:Y→Spec A proper, and i:Y₀→Y its cartesian closed residue fibre [def-weil-pbc-cartesian-square]. Let Λ be a commutative ring, J any sheaf of Λ-modules on Y [def-weil-pbc-etale-sheaves], h:V→Y finite and locally of finite presentation, M a finite Λ-module, and ψ:h_*underline M→J. For every x in H¹(Y₀,i⁻¹(h_*underline M)) [def-weil-pbc-etale-cohomology], there exists z in H¹(Y,h_*underline M) such that H¹(i⁻¹ψ)(x) is the restriction of H¹(ψ)(z), using the canonical comparison between module inverse image [def-weil-pbc-inverse-image] and underlying abelian inverse image. Injectivity of J is not assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A5H finite-pushforward lifting argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Finite base change and henselian H1 comparison lift x to z. Naturality of cohomology identifies the restricted image of x with the restriction of H¹(ψ)(z), using the canonical comparison between module and underlying abelian inverse images.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lemma-weil-pbc-finite-exchange",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-finite-pushforward-cohomology",
+    "lem-weil-pbc-edge-map-base-change",
+    "thm-weil-pbc-finite-etale-lifting",
+    "lemma-weil-pbc-h1-torsor-comparison",
+    "lem-weil-pbc-constant-module-sheaf-underlying",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lemma-weil-pbc-finite-exchange",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-weil-pbc-edge-map-base-change",
+  "thm-weil-pbc-finite-etale-lifting",
+  "lemma-weil-pbc-h1-torsor-comparison",
+  "lem-weil-pbc-constant-module-sheaf-underlying",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A5H"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-p1-acyclicity",
+   "place": "proof step (ii), strict henselian base: finite-pushforward lifting",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/HenselianFinitePushforwardH1Lift.lean",
+  "declaration": "AlgebraicGeometry.Etale.finite_pushforward_H_one_lift_of_henselianLocalRing",
+  "statement": "theorem finite_pushforward_H_one_lift_of_henselianLocalRing {A : Type u} [CommRing A] [HenselianLocalRing A] {Y Y₀ : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (i : Y₀ ⟶ Y) (f₀ : Y₀ ⟶ Spec (.of (IsLocalRing.ResidueField A))) (sq : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))) (Λ : Type (u + 1)) [CommRing Λ] (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {V : Scheme.{u}} (h : V ⟶ Y) [IsFinite h] [LocallyOfFinitePresentation h] (M : ModuleCat.{u + 1} Λ) [Finite M] (ψ : (h)_*[ModuleCat.{u + 1} Λ].obj ((constantSheaf V.smallEtaleTopology _).obj M) ⟶ J) (x : Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj ((h)_*[ModuleCat.{u + 1} Λ].obj ((constantSheaf V.smallEtaleTopology _).obj M)))) 1) : ∃ z : Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((h)_*[ModuleCat.{u + 1} Λ].obj ((constantSheaf V.smallEtaleTopology _).obj M))) 1, Sheaf.H.map ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map ((i)^*[ModuleCat.{u + 1} Λ].map ψ)) 1 x = Sheaf.H.map (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).homEquiv _ _).symm ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app J))) 1 (cohomologyMap i _ 1 (Sheaf.H.map ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map ψ) 1 z))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of first etale cohomology restriction of a finite constant sheaf over a proper henselian local base",
+   "results": "8 hits: AlgebraicGeometry.pointsPi_surjective, LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite, Algebra.SubmersivePresentation.cotangentComplexAux_surjective, Algebra.IsStandardEtale.of_surjective, LightProfinite.surjective_transitionMap, TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, CategoryTheory.PreGaloisCategory.AutGalois.π_surjective. No matching module-valued lifting theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Injective",
+   "results": "1 hits: CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat. No matching module-valued lifting theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*cohomology|cohomology.*henselian",
+   "results": "0 hits: . No matching module-valued lifting theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "H1 of a finite constant etale pushforward restricts surjectively to the closed fibre over a henselian local ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0e535",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T011430-L-757597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0e535",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T011430-L-757597",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures and the delivered proof with their DAG nodes, dependency statements, source arguments, report, and earlier return; existing interfaces and unit route are preserved."
+ }
+}

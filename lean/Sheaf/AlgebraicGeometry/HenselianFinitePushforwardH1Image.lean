@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
+import Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift
+import Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1
 
 /-!
 # Images of finite constant pushforwards in restricted injectives
@@ -61,6 +63,11 @@ theorem finite_pushforward_H_one_image_eq_zero_of_henselianLocalRing
           ((constantSheaf V.smallEtaleTopology _).obj M)))) 1) :
     Sheaf.H.map ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)
       AddCommGrpCat.{u + 1})).map ((i)^*[ModuleCat.{u + 1} Λ].map ψ)) 1 x = 0 := by
-  sorry
+  obtain ⟨z, hz⟩ := finite_pushforward_H_one_lift_of_henselianLocalRing f i f₀ sq Λ J h M ψ x
+  have hzero : Sheaf.H.map ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)
+      AddCommGrpCat.{u + 1})).map ψ) 1 z = 0 :=
+    @Subsingleton.elim _ (subsingleton_H_one_of_injective_module_sheaf Y Λ J) _ _
+  rw [hz, hzero, map_zero]
+  simp
 
 end AlgebraicGeometry.Etale
