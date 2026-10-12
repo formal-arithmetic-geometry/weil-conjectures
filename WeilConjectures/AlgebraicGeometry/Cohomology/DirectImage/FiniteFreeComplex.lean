@@ -12,12 +12,14 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.ProperFinite
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
 
 /-!
-# Higher direct images are computed by finite free complexes
+# Coherence of the higher direct images
 
-For a proper morphism of finite presentation and a coherent sheaf flat over the base, the higher
-direct images are locally computed by bounded complexes of finite free modules
-(`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`); in
-particular they are coherent.
+For a proper morphism over a locally Noetherian base and a coherent sheaf, the higher direct
+images are coherent (`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`).
+That they are locally computed by bounded complexes of finite free modules, for a sheaf flat over
+an arbitrary base, is
+`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`, in
+`WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange`.
 -/
 
 @[expose] public section
@@ -35,49 +37,6 @@ section Coherence
 
 variable [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
   [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
-
-/-- **Perfectness of the higher direct images, with base change.** With `f : X ⟶ T` proper of
-finite presentation and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, every
-point `t` of `T` has an open neighbourhood `U` over which `R f_* ℱ` is represented by a bounded
-complex `P` of finite free `𝒪_U`-modules whose formation commutes with every base change: for
-every `g : T' ⟶ U`, with `f' : X' ⟶ T'` the base change of `f` along `g ≫ U.ι` in the cartesian
-square `sq`
-```
-X' ------g'-------> X
-|                   |
-f'                  f
-v                   v
-T' --g--> U --U.ι--> T
-```
-and `ℱ'` the pullback of `ℱ` to `X'`, the cohomology of the pullback `g^* P` is `R^q f'_* ℱ'`.
-
-Taking `g = 𝟙 U` and for `sq` the square `(isPullback_morphismRestrict f U).flip`, and
-combining with `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_restrict`, the
-cohomology of `P` itself is `R^q f_* ℱ|_U`.
-
-The isomorphisms are only required to exist for each `g` and `q` separately: they are not
-asserted to be the canonical base-change maps, nor to be compatible with composition of the
-`g`. This suffices for semicontinuity of the fibre dimension and for the perfect locus, but not
-for the clause of Grauert's theorem saying that the canonical maps
-`R^q f_* ℱ ⊗ κ(t) → H^q(X_t, ℱ_t)` are isomorphisms; stating that needs the base-change map of
-higher direct images, which is not available.
-
-The proof needs, over a Noetherian affine base, Mumford's complex, obtained from the Čech complex
-of a finite affine cover, which is a bounded complex of flat modules by the flatness of `ℱ`,
-together with `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`; the
-general case reduces to this by Noetherian approximation of `(f, ℱ)` [EGA IV₃, §8 and §11.2].
-Alternatively, it follows from Kiehl's theorem that `R f_* ℱ` is pseudo-coherent, and finite
-Tor-amplitude coming from flatness [Stacks, Tags 0B91 and 0A1H].
-
-(blueprint: `sk-thm-picard-coherence`) -/
-theorem exists_isFiniteFreeComplex_higherDirectImage (hℱ : ℱ.IsFlatOver f) (t : T) :
-    ∃ (U : T.Opens) (P : CochainComplex U.toScheme.Modules ℤ) (d : ℕ), t ∈ U ∧
-      IsFiniteFreeComplex P d ∧
-      ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
-        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
-        Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
-          (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) :=
-  sorry
 
 /-- **Finiteness of the cohomology of a proper morphism over a Noetherian affine base.** With
 `f : X ⟶ T` proper, `T` affine with Noetherian ring of global sections `Γ(T, ⊤)` and `ℱ` a coherent

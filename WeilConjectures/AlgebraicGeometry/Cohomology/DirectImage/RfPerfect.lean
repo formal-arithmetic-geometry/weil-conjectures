@@ -35,7 +35,9 @@ blueprint's `lem-pc-cech-resolution`).
   any `T = Spec B ⟶ S` is perfect and is `Rf_{T*} ℱ_T`.
 - `AlgebraicGeometry.Scheme.Modules.perfect_and_baseChange_cechModuleComplex_of_isProper`
   (`lem-pc-rf-perfect-base-change`): the same for `f` proper of finite presentation and `ℱ` of
-  finite presentation and flat over `S`.
+  finite presentation and flat over `S`; it is stated in
+  `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectBaseChange`, downstream of the
+  construction of Mumford's complex.
 -/
 
 @[expose] public section
@@ -255,52 +257,6 @@ theorem isPerfect_Q_cechModuleComplex_baseChange_of_isClosedImmersion [IsLocally
   exact ⟨isIso_cechModuleComplexBaseChangeComparison f ℱ U hU hU' hℱ H hg,
     isPerfect_Q_cechModuleComplex_baseChange f ℱ U hU hU' hℱ
       (isPerfect_Q_cechModuleComplex_of_isClosedImmersion f ℱ U hU hU' i hi hℱ) H hg⟩
-
-
-include hU hU' in
-/-- **Perfectness of `Rf_* ℱ` and base change.** Let `f : X ⟶ S` be proper of finite
-presentation with `S = Spec A` affine, and `ℱ` an `𝒪_X`-module of finite presentation, flat over
-`S`. Then `Rf_* ℱ` is perfect and its formation commutes with arbitrary base change:
-
-* locally on `S`, `Rf_* ℱ` is represented by a bounded complex of finite free modules whose
-  pullback along every `g : T' ⟶ S` computes the higher direct images of `ℱ_{T'}`; this is the
-  classical input `exists_isFiniteFreeComplex_higherDirectImage` of `sk-thm-picard-coherence`
-  [Stacks, Tag 0B91];
-* over the affine base, `Rf_* ℱ` is represented by the bounded complex `K` of flat `A`-modules
-  of `AlgebraicGeometry.Scheme.Modules.isIso_cechModuleComplexBaseChangeComparison`, and for every
-  cartesian square with `T = Spec B` affine, `Lg^* Rf_* ℱ = B ⊗[A] K ≅ Rf_{T*} ℱ_T` in `D(B)`
-  (`lem-pc-rf-base-change-flat-module`; proper morphisms are quasi-compact and separated);
-* if `A` is noetherian, `Rf_* ℱ` is a perfect object of `D(A)`, and so are all its base changes
-  `Rf_{T*} ℱ_T` in `D(B)`
-  (`AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isNoetherianRing`,
-  `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_baseChange`).
-
-Perfectness in `D(A)` over a non-noetherian base is the classical input of the first item; it is
-not deduced here from it, as the comparison of the two representatives of `Rf_* ℱ` would need
-the finite free complexes to be quasi-isomorphic to the Čech complex.
-
-(blueprint: `lem-pc-rf-perfect-base-change`) -/
-theorem perfect_and_baseChange_cechModuleComplex_of_isProper [IsProper f]
-    [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] [Fintype ι]
-    [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) :
-    (∀ t : S, ∃ (V : S.Opens) (P : CochainComplex V.toScheme.Modules ℤ) (d : ℕ), t ∈ V ∧
-      IsFiniteFreeComplex P d ∧
-      ∀ {T' X' : Scheme.{u}} (g : T' ⟶ V.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
-        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ V.ι) → ∀ q : ℕ,
-        Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
-          (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ))) ∧
-    (∀ {T Y : Scheme.{u}} {g : T ⟶ S} {g' : Y ⟶ X} {f' : Y ⟶ T} (H : IsPullback g' f' f g)
-      [IsAffine T] [Algebra Γ(S, ⊤) Γ(T, ⊤)] (hg : algebraMap Γ(S, ⊤) Γ(T, ⊤) = g.appTop.hom),
-      IsIso (cechModuleComplexBaseChangeComparison f ℱ U hU H hg)) ∧
-    (IsNoetherianRing Γ(S, ⊤) → (Q.obj (cechModuleComplex f ℱ U)).IsPerfect ∧
-      ∀ {T Y : Scheme.{u}} {g : T ⟶ S} {g' : Y ⟶ X} {f' : Y ⟶ T} (_ : IsPullback g' f' f g)
-        [IsAffine T] [Algebra Γ(S, ⊤) Γ(T, ⊤)] (_ : algebraMap Γ(S, ⊤) Γ(T, ⊤) = g.appTop.hom),
-        (Q.obj (cechModuleComplex f' ((pullback g').obj ℱ) (fun i ↦ g' ⁻¹ᵁ U i))).IsPerfect) := by
-  refine ⟨fun t ↦ exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t,
-    fun H _ _ hg ↦ isIso_cechModuleComplexBaseChangeComparison f ℱ U hU hU' hℱ H hg,
-    fun _ ↦ ?_⟩
-  have hP := isPerfect_Q_cechModuleComplex_of_isNoetherianRing f ℱ U hU hU' hℱ
-  exact ⟨hP, fun H _ _ hg ↦ (isPerfect_Q_cechModuleComplex_baseChange f ℱ U hU hU' hℱ hP H hg).2⟩
 
 end Perfect
 
