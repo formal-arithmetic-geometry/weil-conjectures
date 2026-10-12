@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
 import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality
 
 /-! # Comparison of target stalks with fixed-coefficient higher images
 
@@ -55,6 +55,13 @@ theorem baseChange_target_stalk_higher_image_comparison
       ∀ (U V : Over T) (φ : U ⟶ V),
         baseChangeTargetStalkMap Λ p g q F x φ ≫ (E U).hom =
           (E V).hom ≫ (X.uliftPointSmallEtale x).sheafFiber.map
-            (higherDirectImageOverMap Λ (pullback.snd g p) G q (B.map φ)) := by sorry
+            (higherDirectImageOverMap Λ (pullback.snd g p) G q (B.map φ)) := by
+  dsimp only
+  refine ⟨fun U ↦ (X.uliftPointSmallEtale x).sheafFiber.mapIso
+    (baseChangeTargetSheafComparison p g Λ q F U), ?_⟩
+  intro U V φ
+  have h := congrArg ((X.uliftPointSmallEtale x).sheafFiber.map)
+    (baseChangeTargetSheafComparison_naturality p g Λ q F φ)
+  simpa only [Functor.map_comp, Functor.mapIso_hom, baseChangeTargetStalkMap] using h
 
 end AlgebraicGeometry.Etale

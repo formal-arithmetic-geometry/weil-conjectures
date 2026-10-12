@@ -7419,3 +7419,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/U1/Sheaf.AlgebraicGeometry.GaloisPointAction (stage 3; reviewer PASS; first push; landing 20261012T110321-L-622579 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:03 L: merged deliver/U2/Sheaf.AlgebraicGeometry.GluedEffectiveModelCharts (stage 3; reviewer PASS; first push; landing 20261012T110321-L-622709 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:03 L: merged deliver/U2/Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension (stage 3; reviewer PASS; first push; landing 20261012T110321-L-622806 (interface); batch 20261012T110249; modules 2; new nodes 1)
+- 11:03 L: merged deliver/U3/Sheaf.AlgebraicGeometry.BaseChangeTargetStalkHigherImageComparison (stage 3; reviewer PASS; first push; landing 20261012T110321-L-622914 (interface); batch 20261012T110249; modules 2; new nodes 1)

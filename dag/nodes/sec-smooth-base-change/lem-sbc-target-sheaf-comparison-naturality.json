@@ -1,0 +1,124 @@
+{
+ "id": "lem-sbc-target-sheaf-comparison-naturality",
+ "kind": "statement",
+ "title": "Restriction coherence of the explicit target sheaf comparison",
+ "statement": "Let Λ be a commutative ring, p:X→S and g:T→S arbitrary scheme morphisms, q an integer, and F an étale Λ-module sheaf on T. For U over T, construct the canonical comparison C_U from the base-change target sheaf for U×_S X to the higher image of the fixed sheaf G=pr_T^*F on U×_T(T×_S X). Specifically C_U is baseChangeTargetFunctorIso followed by higherDirectImageTransition along the explicit pullback-associativity isomorphism, followed by the higher-image map of the upperStarComp coefficient isomorphism. For any φ:U→V over T, the baseChangeTargetTransition for φ followed by its coefficient identification and C_U equals C_V followed by higherDirectImageOverMap for Over.pullback(pr_T)(φ). The transitions are those of [def-sbc-canonical-base-change-stalk-transitions] and [def-sbc-module-higher-image-transitions], and the coefficient inverse images are [def-weil-pbc-inverse-image]. This is a sheaf morphism equality; it contains neither a stalk functor nor an existential assertion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0F07 (lemma-go-down-to-field), restriction square and coefficient identification preceding condition (2); Tag 09Z1, canonical restriction maps."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-canonical-base-change-stalk-transitions",
+  "def-sbc-module-higher-image-transitions",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The explicit pullback comparison maps commute with a morphism over T: compose with the projections to U and X, use Over.w and pullback.lift_fst/lift_snd, then apply pullback.hom_ext. The coefficient comparison is the stated upperStarComp composite.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the two restriction transitions before homology. Move coefficient maps past lowerStarPlusTransition using naturality of the derived unit and counit. Apply composition of the lower-star transitions to both routes through the pullback comparison; the geometric commutation identifies the resulting composite transition maps. The pullback-comparison composition identity, including its final inverse sheaf comparison, identifies their coefficient suffixes. Exact pullback-single comparisons and their naturality identify the baseChangeTargetFunctorIso prefixes. Cancel inverse composition comparisons, then apply integer-degree homology. Negative degrees require no additional hypothesis.",
+   "uses": [
+    "lem-sbc-lower-star-plus-transition-comp",
+    "lem-sbc-pullback-comparison-comp",
+    "def-sbc-canonical-base-change-stalk-transitions",
+    "def-sbc-module-higher-image-transitions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-inverse-image",
+  "lem-sbc-lower-star-plus-transition-comp",
+  "lem-sbc-pullback-comparison-comp",
+  "def-sbc-canonical-base-change-stalk-transitions",
+  "def-sbc-module-higher-image-transitions"
+ ],
+ "proof_origin": {
+  "by": "worker U3 stage 3",
+  "document": "Stacks Project",
+  "place": "Tags 0F07 and 09Z1; explicit derived-adjunction expansion of the canonical restriction square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image canonical comparison iterated pullback coefficients natural transition",
+   "results": "Top matches: CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, PresheafOfModules.pullbackComp",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the single complex comparison for exact inverse image and derived higher direct image transitions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeTargetFunctorIso|mapDerivedCategoryPlusSingleFunctor",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeTargetStalkHigherImageComparison",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof condition (2): limits, canonical target restriction maps with fixed pulled-back coefficients",
+   "via": [
+    "lem-sbc-target-stalk-higher-image-comparison",
+    "lem-sbc-target-limit-zero-detection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeTargetSheafComparisonNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeTargetSheafComparisonNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChangeTargetSheafComparison_naturality",
+  "statement": "theorem baseChangeTargetSheafComparison_naturality {U V : Over T} (φ : U ⟶ V) : (baseChangeTargetTransition Λ (pullback.fst (V.hom ≫ g) p) (pullback.snd (V.hom ≫ g) p) q φ.left (pullback.lift (pullback.fst (U.hom ≫ g) p ≫ φ.left) (pullback.snd (U.hom ≫ g) p) (by rw [Category.assoc, ← Category.assoc φ.left, Over.w] exact pullback.condition)) (pullback.fst (U.hom ≫ g) p) (pullback.snd (U.hom ≫ g) p) (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _) (((V.hom)^*[ModuleCat.{u + 1} Λ]).obj F) ≫ (baseChangeTargetFunctor Λ (pullback.fst (U.hom ≫ g) p) (pullback.snd (U.hom ≫ g) p) q).map ((upperStarComp (ModuleCat.{u + 1} Λ) φ.left V.hom U.hom (Over.w φ).symm).inv.app F)) ≫ (baseChangeTargetSheafComparison p g Λ q F U).hom = (baseChangeTargetSheafComparison p g Λ q F V).hom ≫ higherDirectImageOverMap Λ (pullback.snd g p) (((pullback.fst g p)^*[ModuleCat.{u + 1} Λ]).obj F) q ((Over.pullback (pullback.fst g p)).map φ)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T110321-L-622914",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T110321-L-622914",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
