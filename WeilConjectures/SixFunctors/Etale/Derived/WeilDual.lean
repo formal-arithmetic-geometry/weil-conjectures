@@ -28,7 +28,10 @@ open scoped CategoryTheory.Functor
 namespace CategoryTheory.Functor.LaxMonoidal
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C] (F : C ⥤ C)
-  [F.LaxMonoidal]
+
+section Lax
+
+variable [F.LaxMonoidal]
 
 /-- The transpose of the *contragredient* `F [K, 𝟙] ⟶ [F K, F 𝟙] ⟶ [F K, 𝟙] ⟶ [K, 𝟙]` of a
 lax monoidal endofunctor `F`, an isomorphism `φ : F K ≅ K` and a map `u : F 𝟙 ⟶ 𝟙`: it is
@@ -42,6 +45,8 @@ lemma whiskerLeft_ihomComparison_comp_pre_comp_ev {K : C} (φ : F.obj K ≅ K)
     id_tensor_pre_app_comp_ev, whisker_exchange_assoc, whisker_exchange_assoc,
     ihom.ev_naturality, ihomComparison_ev_assoc]
   rfl
+
+end Lax
 
 section Monoidal
 
@@ -66,7 +71,7 @@ lemma isIso_ihomComparison_comp_pre {Y K : C} [ExactPairing Y K] (φ : F.obj K �
       (pre φ.inv).app (𝟙_ C)) := by
   have e : (ihomComparison F K).natTrans.app (𝟙_ C) ≫ (ihom (F.obj K)).map u ≫
       (pre φ.inv).app (𝟙_ C) =
-        curry (φ.inv ▷ _ ≫ μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u) := by
+        MonoidalClosed.curry (φ.inv ▷ _ ≫ μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u) := by
     rw [eq_comm, curry_eq_iff, uncurry_eq, whiskerLeft_ihomComparison_comp_pre_comp_ev]
   have := isIso_ihomUnitTensorToIhom Y K K
   letI := exactPairingOfIsIso K
@@ -87,9 +92,9 @@ identification `𝟙 ≅ [𝟙, 𝟙]` intertwines `φ` and its contragredient. 
 lemma map_curry_leftUnitor_comp_ihomComparison_comp_pre (φ : F.obj (𝟙_ C) ≅ 𝟙_ C)
     (hφ : OplaxMonoidal.δ F (𝟙_ C) (𝟙_ C) ≫ φ.hom ▷ F.obj (𝟙_ C) ≫ (λ_ (F.obj (𝟙_ C))).hom =
       F.map (λ_ (𝟙_ C)).hom) :
-    F.map (curry (λ_ (𝟙_ C)).hom) ≫ (ihomComparison F (𝟙_ C)).natTrans.app (𝟙_ C) ≫
+    F.map (MonoidalClosed.curry (λ_ (𝟙_ C)).hom) ≫ (ihomComparison F (𝟙_ C)).natTrans.app (𝟙_ C) ≫
         (ihom (F.obj (𝟙_ C))).map φ.hom ≫ (pre φ.inv).app (𝟙_ C) =
-      φ.hom ≫ curry (λ_ (𝟙_ C)).hom := by
+      φ.hom ≫ MonoidalClosed.curry (λ_ (𝟙_ C)).hom := by
   apply uncurry_injective
   rw [uncurry_eq, uncurry_eq, MonoidalCategory.whiskerLeft_comp_assoc,
     whiskerLeft_ihomComparison_comp_pre_comp_ev, MonoidalCategory.whiskerLeft_comp_assoc,
