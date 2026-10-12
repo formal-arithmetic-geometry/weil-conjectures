@@ -14,43 +14,38 @@
  ],
  "proof": [
   {
-   "text": "Refine U by opens trivializing A and C and restrict e. Sections of finite direct sums of the structure sheaf are free on the displayed generators over every subopen. The splitting identifies sections of B with the product and identifies f and g with inclusion and projection.",
+   "text": "The inverse splitting composed with the second inclusion is a right inverse to the restricted quotient. Evaluate its right-inverse identity on every open of U, then use U.image(U.preimage(W))=W for W contained in U. This proves sectionwise surjectivity of g on every W contained in U. The fully proved private helper split_quotient_section_surjective implements the argument. Set l_W=Function.surjInv of this proved surjectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply determinant_split_comparison_exists with these lifts. At each point of U obtain a neighborhood V and linear equivalences d_W on every subopen W of V, natural under restriction and satisfying the concatenated-wedge formula. This is only the local construction portion of the argument.",
    "uses": [
-    "def-amb-finite-locally-free-module"
+    "lem-sc-determinant-split-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The wedge formula of phi and that of d_W give equality on tensors of pure wedges, since g(l_W(b))=b. Extend first in the second exterior factor and then in the first using exteriorPower.ιMulti_span, linearity, local surjectivity of the exterior sheafification unit, and separatedness. Extend to arbitrary tensor sheaf sections by local surjectivity of the tensor sheafification unit and TensorProduct.induction_on. Naturality of d_W and phi verifies local closure. This is the fully proved private helper bijective_of_comparison, using exterior_section_induction, tensor_section_induction and local_comparison_eq. Thus phi is bijective on every subopen of each neighborhood V.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
    ],
    "elementary": true
   },
   {
-   "text": "On each chart apply existsUnique_topDirectSum to the bases and transport the inverse along e and the rank equality. Its formula uses lifts from the second summand. The comparison commutes with restriction: standard basis vectors restrict to the standard basis vectors, and on every tensor of basis wedges both composites are the concatenated wedge. Thus it induces an isomorphism of the sheafified exterior powers and their tensor product on this chart.",
-   "uses": [
-    "lem-sc-exterior-top-direct-sum",
-    "def-sc-sheaf-exterior-power"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The wedge formula identifies phi with this local inverse. Apply exteriorTensor_lift_hom_ext on the chart, where g is split epic: agreement on tensors of wedges with second-summand lifts gives equality as sheaf morphisms. This includes sections that only locally have exterior-presheaf or tensor-presheaf representatives.",
-   "uses": [
-    "lem-sc-exterior-tensor-lift-hom-ext"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The refined charts cover every W contained in U. Equal-image sections agree locally by the local isomorphisms and globally by separatedness. A target section has local preimages, agreeing on overlaps by this injectivity; the sheaf property glues them to a preimage. This proves bijectivity on W. Empty wedges cover rank zero, and the sheaf axiom covers the empty open and empty scheme.",
+   "text": "For arbitrary W contained in U, equal-image sections become equal on W intersected with each comparison neighborhood, by its local injectivity. Separatedness proves global injectivity. Form the covering sieve of subopens on all of whose subopens phi is bijective. For a target section choose its preimage on every member of this sieve using the proved local surjectivity. Naturality and the global injectivity just proved imply compatibility of these preimages under all overlap maps. Amalgamate the family by the source sheaf axiom; naturality and separatedness of the target show its image is the desired section. This is bijective_of_locally_bijective. It also treats the empty open by the empty-cover sheaf axiom.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-amb-finite-locally-free-module",
-  "lem-sc-exterior-top-direct-sum",
-  "def-sc-sheaf-exterior-power",
-  "lem-sc-exterior-tensor-lift-hom-ext"
+  "lem-sc-determinant-split-comparison",
+  "def-sc-sheaf-exterior-power"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph: lift independence, local splitting and gluing; details written by T2 from preserved blueprint proof text"
+  "place": "Proof of (*), determinant paragraph: local comparison construction split off; local-generation identification, section lifting and sheaf gluing formally proved by F3"
  },
  "mathlib_searches": [
   {
@@ -121,9 +116,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T135318-L-1693515",
+  "landing": "20261012T194111-L-454992",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

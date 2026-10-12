@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-determinant-split-comparison",
+ "kind": "statement",
+ "title": "Local construction of the split determinant comparison",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $A\\xrightarrow{f}B\\xrightarrow{g}C$ be a short complex of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Let $r_2=r_1+r_3$ with $A,C$ finite locally free of ranks $r_1,r_3$ [def-amb-finite-locally-free-module]. Let $U\\subseteq X$ and $e:B|_U\\simeq A|_U\\oplus C|_U$ satisfy $e f|_U=\\mathrm{inl}$ and $\\mathrm{pr}_2 e=g|_U$. For every $W\\subseteq U$ suppose a function $l_W:C(W)\\to B(W)$ is supplied with $g_W l_W=\\mathrm{id}$; it need not be additive or commute with restriction. Then each $x\\in U$ has a neighborhood $V\\subseteq U$ and, for every $W\\subseteq V$, an $\\mathcal O_X(W)$-linear equivalence $d_W:(\\bigwedge^{r_1}A\\otimes\\bigwedge^{r_3}C)(W)\\simeq(\\bigwedge^{r_2}B)(W)$, where exterior powers are the sheafifications of [def-sc-sheaf-exterior-power]. For every pair of tuples $a\\in A(W)^{r_1}$ and $b\\in C(W)^{r_3}$, $d_W((\\bigwedge a_i)\\otimes(\\bigwedge b_j))=\\bigwedge(f(a_i),l_W(b_j))$, in this order, reindexed by $r_2=r_1+r_3$. The equivalences commute with restriction from $W$ to every $Z\\subseteq W$. No proposed morphism $\\varphi$ is part of this statement, and it asserts no comparison with such a morphism and no gluing between different neighborhoods V.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: local direct-sum exterior comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-amb-finite-locally-free-module",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "At a point x of U choose neighborhoods trivializing A and C from their constant-rank local freeness. Intersect these neighborhoods with U and call the intersection V. Restrict the splitting e to V. On every W contained in V the free-sheaf trivializations give bases of A(W) and C(W) over O_X(W), compatible with restriction. The splitting identifies B(W) with A(W) times C(W), f with the first inclusion and g with the second projection.",
+   "uses": [
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exteriorPower.existsUnique_topDirectSum to the two section bases on W. Compose its inverse with the top exterior power of the inverse splitting and reindex the factors using r2=r1+r3. This gives an isomorphism from the tensor of sectionwise top exterior powers to the sectionwise top exterior power of B, sending a tensor of wedges to the wedge of f(a) followed by the canonical second-summand lifts. For W smaller than W′, restriction of the displayed basis vectors is the corresponding basis vector. The two composites of the comparison and restriction agree on all tensors of pure wedges by the same concatenated-wedge formula. Pure wedges span exterior powers and pure tensors span tensors, so the composites agree as semilinear maps.",
+   "uses": [
+    "lem-sc-exterior-top-direct-sum",
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafify this presheaf isomorphism on V. Use the monoidal comparison for sheafification to identify the sheafification of the tensor presheaf with the tensor of the exterior sheaves. Open restriction identifies the original sheafifications on W with the sheafifications formed on V: covers and their refinements on a subopen W are the same in V and X, so the sheafification universal properties identify both objects, compatibly with the units. Evaluation of the resulting isomorphism gives linear equivalences d_W on every W contained in V. Naturality gives the required restriction equation. The sheafification units take sectionwise pure wedges and their tensors to exteriorSheafSection and tmulSection, so the formula holds for the canonical lifts.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each b_i, the prescribed lift l_W(b_i) and the canonical second-summand lift have the same image under g. Under e their difference has second coordinate zero and hence is f(a_i′). Expand the change in the concatenated wedge by multilinearity. Every nonconstant term has the original r1 first-summand factors and at least one additional first-summand factor. Expand all these in the displayed r1-element basis. Each summand repeats a basis vector and vanishes by alternation. Thus d_W has the claimed formula for the supplied lifts without requiring l_W to be linear or natural. Empty wedges and empty determinants establish the same argument at either zero rank. The pointwise assertion is vacuous for empty U, and all basis and alternation arguments hold over the zero ring.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "lem-sc-exterior-top-direct-sum",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: local direct-sum exterior comparison; explicit construction steps from the preserved blueprint proof_text in lem-sc-riemann-roch and the existing split-bijectivity node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphism top exterior powers of a split sum of finite locally free sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "top exterior power of a split exact sequence of locally free sheaves determinant isomorphism",
+   "results": "ModuleCat.exteriorPower.iso₁; Submodule.mulExact_unitsToPic_mapAlgebra; LinearMap.det_eq_det_mul_det; exteriorPower.oneEquiv_naturality; ModuleCat.exteriorPower.natIso₁; exteriorPower.pairingDual_ιMulti_ιMulti; ModuleCat.exteriorPower.iso₀; ModuleCat.exteriorPower.iso₁_hom_naturality",
+   "date": "2026-10-12",
+   "verdict": "Inspected related module exterior-power and determinant infrastructure; no sheaf-level split comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorPower.*(prod|sum)|topDirectSum|exterior.*split",
+   "results": "Two hits concern basis wedges and exterior products, not a split sheaf comparison. Also searched lean/Sheaf and lean/WeilConjectures: ExteriorSheafTrivialTopIso gives only a free top-presheaf isomorphism, ExteriorSheafRestrictIso has no section formula, and ExteriorTopDirectSum is sectionwise.",
+   "date": "2026-10-12",
+   "verdict": "No matching construction theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismSplit",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph: local direct-sum comparison, before identification of the given morphism and gluing",
+   "via": [
+    "lem-sc-determinant-wedge-morphism-split",
+    "lem-sc-determinant-short-exact-exists",
+    "lem-sc-determinant-short-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantSplitComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_split_comparison_exists",
+  "statement": "theorem determinant_split_comparison_exists {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g)\n    (l : ∀ (W : X.Opens), W ≤ U → S.X₃.val.obj (op W) → S.X₂.val.obj (op W))\n    (hl : ∀ W hW b, S.g.val.app (op W) (l W hW b) = b) :\n    ∀ x ∈ U, ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧\n      ∃ (d : ∀ (W : X.Opens), W ≤ V →\n        (exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.obj (op W)\n          ≃ₗ[X.presheaf.obj (op W)] (exteriorSheaf S.X₂ r₂).val.obj (op W)),\n      (∀ W hW (a : Fin r₁ → S.X₁.val.obj (op W))\n        (b : Fin r₃ → S.X₃.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection S.X₁ r₁ W a)\n          (exteriorSheafSection S.X₃ r₃ W b)) =\n        exteriorSheafSection S.X₂ r₂ W\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op W) (a j))\n            (fun j ↦ l W (hW.trans hVU) (b j)) (Fin.cast hr i))) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ V) (hZW : Z ≤ W) y,\n        (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW)\n            ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map\n              (homOfLE hZW).op y))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T194111-L-454992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T194111-L-454992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
