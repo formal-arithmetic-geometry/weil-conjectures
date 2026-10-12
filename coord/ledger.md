@@ -8524,3 +8524,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:15 L: merged deliver/N1/Sheaf.AlgebraicGeometry.AmpleProjOpen (stage 3; reviewer PASS; first push; landing 20261012T161503-L-2648491 (proof); batch 20261012T161459; modules 1; new nodes 0)
 - 16:15 L: merged deliver/N2/Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineClassRep (stage 3; reviewer PASS; first push; landing 20261012T161503-L-2648602 (interface); batch 20261012T161459; modules 2; new nodes 1)
 - 16:15 L: merged deliver/P2/Sheaf.Algebra.Homology.ZigzagModule (stage 3; reviewer PASS; first push; landing 20261012T161503-L-2648702 (proof); batch 20261012T161459; modules 1; new nodes 0)
+- 16:15 L: merged deliver/P3/Sheaf.AlgebraicGeometry.AffineBoundaryUnitDivisorDescent (stage 3; reviewer PASS; first push; landing 20261012T161504-L-2648806 (interface); batch 20261012T161459; modules 2; new nodes 1)

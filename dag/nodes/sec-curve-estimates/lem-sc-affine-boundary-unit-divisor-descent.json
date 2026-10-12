@@ -16,35 +16,49 @@
  },
  "proof": [
   {
-   "text": "Germ compatibility determines both canonical restriction maps on the nonempty image opens. A unit on C prime has zero order there, so extending its boundary divisor by zero is its full principal divisor D prime. Use e inverse to form D. Because he ties e to the unique rational fibres, flat pullback of point ideals (and their duals and products) identifies O(D) pullback with O(D prime). All points are rational, so the coefficient sum, hence degree, is preserved. Principal divisors have degree zero [lem-sc-deg-principal-zero]; their associated Picard class is trivial [lem-sc-divisor-class-curve].",
+   "text": "Use baseChange_curve to obtain the connected smooth curve instances after extension; obtain smooth relative dimension one from dimension one. Invoke boundary_divisor_pic_kernel on each curve to identify the boundary unit-divisor ranges with kernels of Divisor.toPic on extended boundary divisors.",
    "uses": [
-    "def-sc-divisor",
-    "lem-sc-deg-principal-zero",
-    "lem-sc-divisor-class-curve"
+    "lem-sc-base-change-curve",
+    "lem-sc-boundary-divisor-pic-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict the actual Picard pullback to the degree-zero Picard subgroups, using degree preservation. Its injectivity is exactly the first conclusion of [lem-sc-piczero-torsion-base-change] at n=1: the natural Jacobian comparison identifies it with extension of J points, and Spec k prime to Spec k is an epimorphism. Thus O(D) is trivial. By [lem-sc-divisor-class-curve] D is a principal divisor of a nonzero rational f. Its orders on C are zero, so the divisor exact sequence [lem-sc-divisor-sequence-general] gives a unit on C with this rational image. Germ compatibility then proves the required range membership. Empty and singleton boundaries reduce to the zero divisor.",
+   "text": "Preservation of line-bundle degree under field extension (degree_pullback_of_isPullback, the degree-base-change statement) restricts Picard pullback to the kernels G and G prime of picDegreeHom. Apply picZero_torsion_base_change at n=1 to prove this restricted map injective. If a Picard class pulls back to 1, degree preservation places it in G, so restricted injectivity makes it 1.",
    "uses": [
-    "lem-sc-piczero-torsion-base-change",
-    "lem-sc-divisor-class-curve",
-    "lem-sc-divisor-sequence-general"
+    "lem-pc-degree-base-change",
+    "lem-sc-piczero-torsion-base-change"
    ],
    "elementary": false
+  },
+  {
+   "text": "For a supplied boundary point P construct its rational point x and its scalar extension y. The first clause of he and baseChangeFieldPoint_eq_of_fst_eq identify y with e(P). The cartesian rational-point square identifies the pullback point ideal I.comap π with the point ideal J, using ker_of_isPullback. Use nonempty_pullback_dual_toModules_iso (lem-pc-recd-pullback) to identify the duals and hence the Picard point classes. No assertion about an unspecified existential boundary equivalence is substituted for the supplied e.",
+   "uses": [
+    "lem-pc-recd-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the finitely supported boundary divisor, using toPic_single, additivity, integer powers, and the point-class equality to prove p(toPic(embDomain D)) = toPic(embDomain(domCongr e D)). For a boundary divisor D in the extended unit range, set E=domCongr e.symm D. The kernel equality gives that the class of D is 1; transport and Picard injectivity give that the class of E is 1. The original kernel equality then puts E in the original unit range, and domCongr e sends it back to D.",
+   "uses": [
+    "def-sc-divisor",
+    "lem-sc-boundary-divisor-pic-kernel"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-divisor",
-  "lem-sc-deg-principal-zero",
-  "lem-sc-divisor-class-curve",
+  "lem-sc-base-change-curve",
+  "lem-sc-boundary-divisor-pic-kernel",
+  "lem-pc-degree-base-change",
   "lem-sc-piczero-torsion-base-change",
-  "lem-sc-divisor-sequence-general"
+  "lem-pc-recd-pullback",
+  "def-sc-divisor"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "P3 second reader",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-  "place": "Affine-case proof, unit quotient paragraph"
+  "place": "Affine-case unit quotient paragraph, implemented via single-curve Picard kernel and explicit Picard/point-ideal pullback"
  },
  "mathlib_searches": [
   {
@@ -163,10 +177,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-18226",
-  "group": "N2",
+  "reviewer": "COMPILER",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T150954-L-2231133",
-  "kind": "interface"
+  "landing": "20261012T161504-L-2648806",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
