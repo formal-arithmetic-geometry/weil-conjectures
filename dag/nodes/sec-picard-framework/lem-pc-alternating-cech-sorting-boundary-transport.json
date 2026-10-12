@@ -17,9 +17,10 @@
   "lem-pc-alternating-cech-first-sorting-identity"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "R3",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tag 01FM, equation 20.23.6.2"
+  "place": "Tag 01FM, equations 20.23.6.1 and 20.23.6.2; direct Lean proof of output-sorting invariance and its preservation under the homotopy boundary"
  },
  "mathlib_searches": [
   {
@@ -84,13 +85,37 @@
  "statement": "Let X be a scheme, I a linearly ordered type, U : I → Opens(X), F an abelian-group presheaf, and S the chosen Čech product complex over the terminal open. Let p ≥ 0, s be a degree-p cochain, and t a tuple of p+1 indices. The second sorting boundary is the signed stable-sorting transport of the sorted contraction boundary.",
  "proof": [
   {
-   "text": "Write kappa for signed stable sorting. The first sorting identity and\nsquare-zero of the differential imply d kappa = kappa d. Stable sorting is\nidempotent: sorting a sorted tuple is identity, including its equal-label order.\nThe repeated-tuple homotopy is the sorted contraction precomposed with kappa:\nits formula sorts t and duplicates its first repeat, with the sorting sign.\nDuplicating a nondecreasing tuple leaves it nondecreasing. Hence pulling the\nsorted contraction back once more by kappa leaves this formula unchanged.\nCommute d through kappa in each of the two boundary terms. Both become signed\npullbacks of the boundary at the sorted tuple. The stable-sort filter has one\npermutation, characterized by ordering the pairs (t(k), k). Restriction maps\ncompose by the universal property of the chosen products, so the transports in\nthese two expansions coincide. Summing over the filter gives the stated formula.\nDegree zero has zero contraction. With empty I there are no coordinates.",
+   "text": "Write kappa_p for cechStableSortingMap and H_p for cechSecondSortingHom. The null-homotopic chain map of the first sorting family commutes with the differential. Rewrite both components using the first sorting identity, obtaining (id-kappa_p)d_p = d_p(id-kappa_(p+1)). Distribute and cancel d_p in the abelian group of morphisms. Thus kappa_p d_p = d_p kappa_(p+1). This is sorting_comm in Lean.",
+   "uses": [
+    "lem-pc-alternating-cech-first-sorting-identity",
+    "def-pc-alternating-cech-sorting-operators",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tuple.eq_sort_iff identifies cechStableSort(t,sigma) with sigma=Tuple.sort(t). Collapse the finite sorting sum in kappa and the outer sorting sum in H to that unique permutation. These are sorting_apply and second_apply. Tuple.monotone_sort and Tuple.sort_eq_refl_iff_monotone show that sorting the already sorted tuple uses the identity permutation, including equal labels.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove H_p followed by kappa_p equals H_p by evaluating on s and t. Expand kappa by sorting_apply and each H by second_apply. Sorting the sorted tuple is identity. Distribute restriction and the integer sorting sign across the first-repeat sum. For each a the identity cechJunction(rho,rho,a)=rho composed with cechJunction(id,id,a), where rho=Tuple.sort(t), follows directly by the two cases in cechJunction. Hence the evaluated input tuples coincide. The composed index map and direct index map are parallel arrows in the preorder of opens, so are equal by Subsingleton.elim. Functoriality gives equality of their restrictions. Multiplication of integer scalars gives the same coefficient. This is second_sorted, proved without requiring the tuple duplicated by the junction to be sorted.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let B be the null-homotopic map of the second sorting family. In degree zero, Homotopy.nullHomotopicMap'_f_of_not_rel_right gives B_0=d_0 H_0, and H_0 kappa_0=H_0 proves B_0 kappa_0=B_0. In degree p+1, Homotopy.nullHomotopicMap'_f gives B_(p+1)=d_(p+1) H_(p+1)+H_p d_p. Compose on the right with kappa_(p+1), distribute, use H_(p+1) kappa_(p+1)=H_(p+1) on the first term, commute d_p with kappa on the second term, and use H_p kappa_p=H_p. Thus B_(p+1) kappa_(p+1)=B_(p+1). Evaluate this morphism equality at s and t and unfold kappa to obtain the stated finite sum. No nonempty assumption on I is used.",
    "uses": [
     "def-pc-alternating-cech-sorting-operators",
     "def-weil-pbc-site-cech-complex",
     "lem-pc-alternating-cech-first-sorting-identity"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "lean": {
@@ -117,10 +142,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T163617-L-2786246",
-  "kind": "interface",
+  "landing": "20261012T184339-L-4018466",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
