@@ -1,0 +1,162 @@
+{
+ "id": "lem-pc-natural-bounded-below-truncation-couples",
+ "kind": "statement",
+ "title": "Individual bounded-below truncation couples with natural comparisons",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories [def-sp-grothendieck-abelian] admitting derived categories and K-injective resolutions [def-sp-kinjective-bridge], and let $F:\\mathcal A\\to\\mathcal B$ be additive and left exact [def-sp-left-exact-additive]. Fix $a\\in\\mathbf Z$ and let $\\mathcal L_a$ be the set of derived objects $M$ with $H^r(M)=0$ for $r<a$. One can choose for every $M\\in\\mathcal L_a$ a type-zero bigraded exact couple $Z_M$ [def-sp-exact-couple], isomorphisms $e_D(M,n):Z_M.D^{0,n}\\cong H^n(RF(M))$ and $e_E(M,p,r):Z_M.E^{p,r}\\cong H^p(RF(H^r(M)[0]))$ for $p\\ge0$, with $Z_M.D^{p,r}=0$ for $r<a$ and $Z_M.E^{p,r}=0$ for $p<0$. For every morphism $c:M\\to N$ there is a couple morphism $T:Z_M\\to Z_N$ [lem-sp-derived-couple-functoriality] such that $T_D^{0,n};e_D(N,n)=e_D(M,n);H^n(RF(c))$ and $T_E^{p,r};e_E(N,p,r)=e_E(M,p,r);H^p(RF(H^r(c)[0]))$. No identity or composition law for the chosen maps is asserted and no coproduct is formed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08J5",
+  "place": "Canonical truncation triangles; Tags 015J and 05TC for the hypercohomology terms and truncation-to-abutment comparison. Steps 1, 3 and 4 of lem-pc-coproduct-truncation-couple, restricted to individual objects and morphisms."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-kinjective-bridge",
+  "def-sp-left-exact-additive",
+  "def-sp-exact-couple",
+  "lem-sp-derived-couple-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Represent each derived object with cohomology zero below a by its canonical lower truncation at a and a bounded-below injective resolution. Transport along its derived isomorphism. Apply exists_truncationHypercohomology to each representative and retain only the exact couple and the D and E vanishing clauses; no convergence or filtration data is used. The bounded-below injective replacement is CochainComplex.Plus.exists_quasiIso_injective, recorded on lem-sc-bounded-below-injective-resolution-existence.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "def-sp-kinjective-bridge",
+    "lem-sc-bounded-below-injective-resolution-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical truncation inclusion in degree n to identify the D term at (0,n) with H^n RF of the representative. It is invertible by the canonical truncation corollary isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι. Transport through the Plus/unbounded derived-functor comparison and the chosen representative isomorphism to obtain eD.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-truncation-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The single-functor shift identification, followed by RF shift commutation and the homology shift comparison, gives eE from the raw E object to H^p RF(H^r(M)[0]). Use the first part of the shift identification, omitting its final comparison to ordinary right derived functors. All factors are natural isomorphisms.",
+   "uses": [
+    "lem-sp-shift-identification",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given a morphism between two objects, lift it between their injective representatives. The functorial canonical truncation triangles provide the three squares, including the boundary square. Apply the triangulated RF and homology and transport by the bridge isomorphisms to obtain the couple morphism. Naturality of the truncation inclusion yields the eD square; naturality of the three shift factors yields the eE square. Choose the couples and comparisons once for every object; maps may be chosen separately, since no identity or composition law is asserted.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sp-shift-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-kinjective-bridge",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-sp-shift-identification",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-derived-functor-truncation-iso",
+  "lem-weil-pbc-truncation-triangle",
+  "thm-sp-truncation-e2"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08J5",
+  "place": "Agent-written assembly of individual canonical truncation triangles, using Tags 015J and 05TC; no coproduct step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural exact couple of canonical truncations of bounded below derived objects",
+   "results": "8 hits: CochainComplex.shortComplexTruncLE_shortExact, HomologicalComplex.shortComplexTruncLE_shortExact, HomologicalComplex.shortComplexTruncLE_shortExact_δ_eq_zero, DerivedCategory.HomologySequence.exact₁, CategoryTheory.Functor.homologySequence_exact₁, CategoryTheory.Functor.homologySequence_exact₂, CategoryTheory.Functor.homologySequence_exact₃, DerivedCategory.HomologySequence.exact₃.",
+   "date": "2026-10-13",
+   "verdict": "No exact match: these provide short exact sequences and exact triangle homology, not simultaneous natural couple comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BigradedExactCouple",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.BigradedExactCouple'",
+   "date": "2026-10-13",
+   "verdict": "No Mathlib declaration for the project exact-couple structure."
+  },
+  {
+   "tool": "grep",
+   "query": "truncation.*couple|couple.*truncation",
+   "results": "0 hits in the search service; local rg of lean/Sheaf/CategoryTheory and lean/WeilConjectures/CategoryTheory found the parent construction and the existing complex-level hypercohomology statement but no individual derived-object naturality package.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial exact couple of canonical truncations in the bounded below derived category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CoproductTruncationCouple",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent steps 1 and 2: construct natural truncation couples and their degreewise coproduct; retain the canonical D and E comparison equations; individual truncation and naturality subargument only",
+   "via": [
+    "lem-pc-coproduct-truncation-couple",
+    "lem-pc-bounded-below-coproduct-filtration",
+    "lem-pc-truncated-direct-image-sheaf-coproduct-epi",
+    "lem-pc-truncated-direct-image-affine-finite-support",
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NaturalTruncationCouple",
+  "file": "lean/Sheaf/CategoryTheory/NaturalTruncationCouple.lean",
+  "declaration": "CategoryTheory.exists_natural_boundedBelow_truncation_couples",
+  "statement": "theorem exists_natural_boundedBelow_truncation_couples\n    {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]\n    [HasDerivedCategory.{wA} A]\n    {B : Type uB} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B]\n    [HasDerivedCategory.{wB} B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (a : ℤ) :\n    let L := {M : DerivedCategory A // ∀ r : ℤ, r < a →\n      IsZero ((DerivedCategory.homologyFunctor A r).obj M)}\n    ∃ (Z : L → BigradedExactCouple B 0)\n      (eD : ∀ (M : L) (n : ℤ), (Z M).D 0 n ≅\n        (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).obj M.val)\n      (eE : ∀ (M : L) (p : ℕ) (r : ℤ), (Z M).E p r ≅\n        (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙\n          DerivedCategory.homologyFunctor B (p : ℤ)).obj\n            ((DerivedCategory.homologyFunctor A r).obj M.val)),\n      (∀ (M : L) (p r : ℤ), r < a → IsZero ((Z M).D p r)) ∧\n      (∀ (M : L) (p r : ℤ), p < 0 → IsZero ((Z M).E p r)) ∧\n      ∀ (M N : L) (c : M.val ⟶ N.val),\n        ∃ T : BigradedExactCouple.CoupleMorphism (Z M) (Z N),\n          (∀ n : ℤ, T.tD 0 n ≫ (eD N n).hom = (eD M n).hom ≫\n            (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).map c) ∧\n          (∀ (p : ℕ) (r : ℤ), T.tE p r ≫ (eE N p r).hom = (eE M p r).hom ≫\n            (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙\n              DerivedCategory.homologyFunctor B (p : ℤ)).map\n                ((DerivedCategory.homologyFunctor A r).map c))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T202249-L-707616",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T202249-L-707616",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

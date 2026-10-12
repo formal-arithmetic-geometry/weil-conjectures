@@ -10,12 +10,8 @@ public import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 
-import Sheaf.CategoryTheory.TruncationHypercohomology
-import Sheaf.CategoryTheory.TruncationRawExact
-import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
-import Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification
-import Sheaf.CategoryTheory.ExactCouple
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.CategoryTheory.NaturalTruncationCouple
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 
 /-! # A coproduct comparison of truncation exact couples
 
@@ -31,6 +27,50 @@ universe v uA uB wA wB
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
+
+/-- Exact coproducts preserve a family of exact pairs. -/
+private theorem exact_sigma
+    {B : Type uB} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B]
+    {I : Type v} {U V W : I → B}
+    (f : ∀ i, U i ⟶ V i) (g : ∀ i, V i ⟶ W i)
+    (h : ∀ i, f i ≫ g i = 0)
+    (he : ∀ i, (ShortComplex.mk (f i) (g i) (h i)).Exact) :
+    ∃ w : Limits.Sigma.map (f := U) (g := V) f ≫
+        Limits.Sigma.map (f := V) (g := W) g = 0,
+      (ShortComplex.mk (Limits.Sigma.map (f := U) (g := V) f)
+        (Limits.Sigma.map (f := V) (g := W) g) w).Exact := by
+  let f' : Discrete.functor U ⟶ Discrete.functor V :=
+    Discrete.natTrans (fun i ↦ f i.as)
+  let g' : Discrete.functor V ⟶ Discrete.functor W :=
+    Discrete.natTrans (fun i ↦ g i.as)
+  let S : ShortComplex (Discrete I ⥤ B) :=
+    ShortComplex.mk f' g' (by ext i; simpa [f', g'] using h i.as)
+  have hS : S.Exact := by
+    rw [ShortComplex.exact_iff_isZero_homology, IsZero.iff_id_eq_zero]
+    ext i
+    have hi : (S.map ((evaluation (Discrete I) B).obj i)).Exact := he i.as
+    exact (IsZero.of_iso
+      (ShortComplex.exact_iff_isZero_homology _ |>.mp hi)
+      (S.mapHomologyIso ((evaluation (Discrete I) B).obj i)).symm).eq_of_src _ _
+  have w : Limits.Sigma.map (f := U) (g := V) f ≫ Limits.Sigma.map (f := V) (g := W) g = 0 := by
+    apply Sigma.hom_ext
+    intro i
+    rw [Sigma.ι_map_assoc, Sigma.ι_map, ← Category.assoc, h i, zero_comp, comp_zero]
+  refine ⟨w, ?_⟩
+  exact colim.exact_mapShortComplex (S := S) hS (colimit.isColimit _)
+    (colimit.isColimit _) (colimit.isColimit _)
+    (Limits.Sigma.map (f := U) (g := V) f)
+    (Limits.Sigma.map (f := V) (g := W) g) (fun i ↦ Sigma.ι_map f i.as)
+    (fun i ↦ Sigma.ι_map g i.as)
+
+/-- A coproduct of zero objects is zero, including an empty coproduct. -/
+private theorem isZero_sigma
+    {B : Type uB} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B]
+    {I : Type v} (U : I → B) (h : ∀ i, IsZero (U i)) : IsZero (∐ U) := by
+  rw [IsZero.iff_id_eq_zero]
+  apply Sigma.hom_ext
+  intro i
+  exact (h i).eq_of_src _ _
 
 /-- A family of bounded-below derived morphisms gives a morphism from the coproduct
 of its truncation couples to the target truncation couple, with natural comparisons
@@ -108,6 +148,83 @@ theorem exists_coproduct_truncation_couple
             T.tE p r = s.hom ≫ Sigma.desc (fun i ↦
               (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙
                 DerivedCategory.homologyFunctor B (p : ℤ)).map
-                  ((DerivedCategory.homologyFunctor A r).map (u i))) ≫ t.inv := by sorry
+                  ((DerivedCategory.homologyFunctor A r).map (u i))) ≫ t.inv := by
+  classical
+  obtain ⟨Z, eD, eE, hD, hE, hm⟩ :=
+    exists_natural_boundedBelow_truncation_couples F a
+  let L := fun i ↦ (⟨K i, hK i⟩ : {M : DerivedCategory A //
+    ∀ r : ℤ, r < a → IsZero ((DerivedCategory.homologyFunctor A r).obj M)})
+  let N := (⟨S, hS⟩ : {M : DerivedCategory A //
+    ∀ r : ℤ, r < a → IsZero ((DerivedCategory.homologyFunctor A r).obj M)})
+  let V := fun i ↦ Z (L i)
+  let Y := Z N
+  choose t htD htE using fun i ↦ hm (L i) N (u i)
+  have ha := fun p r ↦ exact_sigma (fun i ↦ (V i).f p r)
+    (fun i ↦ (V i).alpha (p + 2) (r - 1))
+    (fun i ↦ (V i).alpha_f_zero p r)
+    (fun i ↦ (ShortComplex.exact_iff_image_eq_kernel _).mpr ((V i).exact_alpha p r))
+  have hf := fun p r ↦ exact_sigma (fun i ↦ (V i).g p r)
+    (fun i ↦ (V i).f (p + (0 : ℕ)) (r - (0 : ℕ)))
+    (fun i ↦ (V i).f_g_zero p r)
+    (fun i ↦ (ShortComplex.exact_iff_image_eq_kernel _).mpr ((V i).exact_f p r))
+  have hg := fun p r ↦ exact_sigma (fun i ↦ (V i).alpha p r)
+    (fun i ↦ (V i).g (p - 1) (r + 1))
+    (fun i ↦ (V i).g_alpha_zero p r)
+    (fun i ↦ (ShortComplex.exact_iff_image_eq_kernel _).mpr ((V i).exact_g p r))
+  let X : BigradedExactCouple B 0 :=
+    { D := fun p r ↦ ∐ (fun i ↦ (V i).D p r)
+      E := fun p r ↦ ∐ (fun i ↦ (V i).E p r)
+      alpha := fun p r ↦ Limits.Sigma.map (fun i ↦ (V i).alpha p r)
+      f := fun p r ↦ Limits.Sigma.map (fun i ↦ (V i).f p r)
+      g := fun p r ↦ Limits.Sigma.map (fun i ↦ (V i).g p r)
+      alpha_f_zero := fun p r ↦ (ha p r).choose
+      f_g_zero := fun p r ↦ (hf p r).choose
+      g_alpha_zero := fun p r ↦ (hg p r).choose
+      exact_alpha := fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+        (ha p r).choose_spec
+      exact_f := fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+        (hf p r).choose_spec
+      exact_g := fun p r ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+        (hg p r).choose_spec }
+  let T : BigradedExactCouple.CoupleMorphism X Y :=
+    { tD := fun p r ↦ Sigma.desc (fun i ↦ (t i).tD p r)
+      tE := fun p r ↦ Sigma.desc (fun i ↦ (t i).tE p r)
+      alpha_comm := by
+        intro p r
+        apply Sigma.hom_ext
+        intro i
+        simpa [X, Category.assoc] using (t i).alpha_comm p r
+      f_comm := by
+        intro p r
+        apply Sigma.hom_ext
+        intro i
+        simpa [X, Category.assoc] using (t i).f_comm p r
+      g_comm := by
+        intro p r
+        apply Sigma.hom_ext
+        intro i
+        simpa [X, Category.assoc] using (t i).g_comm p r }
+  refine ⟨X, Y, T, ?_, hD N, ?_, hE N, ?_⟩
+  · intro p r hr
+    exact isZero_sigma _ (fun i ↦ hD (L i) p r hr)
+  · intro p r hp
+    exact isZero_sigma _ (fun i ↦ hE (L i) p r hp)
+  · refine ⟨fun n ↦ Sigma.mapIso (fun i ↦ eD (L i) n), eD N, ?_, ?_⟩
+    · intro n
+      apply Sigma.hom_ext
+      intro i
+      dsimp only [T]
+      simp only [Sigma.ι_desc, Sigma.ι_mapIso_inv_assoc, Sigma.ι_desc_assoc]
+      change _ = (eD (L i) n).inv ≫ (t i).tD 0 n ≫ (eD N n).hom
+      rw [htD i n, Iso.inv_hom_id_assoc]
+    · intro p r
+      refine ⟨Sigma.mapIso (fun i ↦ eE (L i) p r), eE N p r, ?_⟩
+      apply Sigma.hom_ext
+      intro i
+      dsimp only [T]
+      simp only [Sigma.ι_desc, Sigma.ι_mapIso_hom_assoc, Sigma.ι_desc_assoc]
+      change (t i).tE p r = (eE (L i) p r).hom ≫ _ ≫ (eE N p r).inv
+      rw [← Category.assoc, ← htE i p r, Category.assoc, Iso.hom_inv_id,
+        Category.comp_id]
 
 end CategoryTheory
