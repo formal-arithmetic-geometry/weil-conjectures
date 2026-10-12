@@ -6,7 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartPolynomial
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistGenerator
+public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.ChartTransition
 public import WeilConjectures.Mathlib.RingTheory.Kaehler.LocalizationPolynomial
 
 /-!
@@ -73,5 +76,194 @@ theorem exists_basis_relativeDifferentials_basicOpen (i : n)
   simp only [RingHom.algebraMap_toAlgebra, RingHom.comp_apply, RingEquiv.symm_symm,
     RingEquiv.toRingHom_eq_coe]
   erw [chartRingEquiv_X]
+
+/-! ### The ratios of homogeneous coordinates on the overlaps of the standard opens -/
+
+section Ratio
+
+open HomogeneousLocalization
+
+attribute [local instance] MvPolynomial.gradedAlgebra
+
+variable {n} {S : Scheme.{u}}
+
+lemma val_awayMap_awayXRatio {i k : n} {e : ℕ} {g : MvPolynomial n (ULift.{u} ℤ)}
+    (hg : g ∈ homogeneousSubmodule n (ULift.{u} ℤ) e) {x : MvPolynomial n (ULift.{u} ℤ)}
+    (hx : x = X i * g) :
+    (awayMap _ hg hx (awayXRatio (ULift.{u} ℤ) i k)).val =
+      Localization.mk (X k * g) ⟨x, Submonoid.mem_powers x⟩ := by
+  rw [awayXRatio, awayMap_mk, Away.val_mk]
+  simp
+
+/-- The restriction of `x_k / xᵢ` to an open contained in the preimage of `D₊(x)`, for a
+multiple `x = Tᵢ g` of `Tᵢ`, computed in the degree-zero part of `ℤ[T]ₓ`. -/
+lemma map_coordRatio {i k : n} {e : ℕ} {g : MvPolynomial n (ULift.{u} ℤ)}
+    (hg : g ∈ homogeneousSubmodule n (ULift.{u} ℤ) e) {x : MvPolynomial n (ULift.{u} ℤ)}
+    (hx : x = X i * g) {W : ℙ(n; S).Opens}
+    (hW : W ≤ toProjInt n S ⁻¹ᵁ Proj.basicOpen (homogeneousSubmodule n (ULift.{u} ℤ)) x)
+    (hW' : W ≤ standardOpen n S i) :
+    ℙ(n; S).presheaf.map (homOfLE hW').op (coordRatio n S i k) =
+      (Proj.awayToSection _ x ≫ (toProjInt n S).appLE _ W hW)
+        (awayMap _ hg hx (awayXRatio (ULift.{u} ℤ) i k)) := by
+  have key : Proj.awayToSection _ (X i) ≫ (toProjInt n S).app _ ≫
+      ℙ(n; S).presheaf.map (homOfLE hW').op =
+      CommRingCat.ofHom (awayMap _ hg hx) ≫ Proj.awayToSection _ x ≫
+        (toProjInt n S).appLE _ W hW := by
+    rw [Scheme.Hom.app_eq_appLE, Scheme.Hom.appLE_map, Proj.awayMap_awayToSection_assoc,
+      Scheme.Hom.map_appLE]
+  have := ConcreteCategory.congr_hom key (awayXRatio (ULift.{u} ℤ) i k)
+  simp only [CategoryTheory.comp_apply] at this ⊢
+  exact this
+
+@[simp]
+lemma coordRatio_self (i : n) : coordRatio n S i i = 1 := by
+  rw [coordRatio, awayXRatio_self, map_one, map_one]
+
+/-- **The change of affine coordinates** `x_k / xᵢ = (x_k / xⱼ) (xⱼ / xᵢ)` on an open contained
+in `Uᵢ ∩ Uⱼ`. -/
+lemma map_coordRatio_eq_mul {i j : n} {W : ℙ(n; S).Opens} (hi : W ≤ standardOpen n S i)
+    (hj : W ≤ standardOpen n S j) (k : n) :
+    ℙ(n; S).presheaf.map (homOfLE hi).op (coordRatio n S i k) =
+      ℙ(n; S).presheaf.map (homOfLE hj).op (coordRatio n S j k) *
+        ℙ(n; S).presheaf.map (homOfLE hi).op (coordRatio n S i j) := by
+  have hXi := X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) i
+  have hXj := X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) (σ := n) j
+  have hW := (le_inf hi hj).trans (standardOpen_inf_le (S := S) i j)
+  rw [map_coordRatio hXj (x := X i * X j) rfl hW,
+    map_coordRatio hXi (x := X i * X j) (by ring) hW,
+    map_coordRatio hXj (x := X i * X j) rfl hW, ← map_mul]
+  refine appLE_awayToSection_congr _ ?_
+  rw [val_mul, val_awayMap_awayXRatio, val_awayMap_awayXRatio, val_awayMap_awayXRatio,
+    Localization.mk_mul, Localization.mk_eq_mk_iff, Localization.r_iff_exists]
+  exact ⟨1, by simp; ring⟩
+
+/-- `(xⱼ / xᵢ) (xᵢ / xⱼ) = 1` on `Uᵢ ∩ Uⱼ`: the restriction of the coordinate `xⱼ / xᵢ` of `Uᵢ`
+is the inverse of the unit `ratioUnit n S i j = xᵢ / xⱼ`. -/
+lemma map_coordRatio_eq_ratioUnit_inv (i j : n) :
+    ℙ(n; S).presheaf.map (homOfLE (inf_le_left :
+        standardOpen n S i ⊓ standardOpen n S j ≤ _)).op (coordRatio n S i j) =
+      ((ratioUnit n S i j)⁻¹ : Γ(ℙ(n; S), standardOpen n S i ⊓ standardOpen n S j)ˣ) := by
+  refine Units.eq_inv_of_mul_eq_one_left ?_
+  have hXi := X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) i
+  have hXj := X_mem_homogeneousSubmodule_one (ULift.{u} ℤ) (σ := n) j
+  change ratio n S i j * _ = 1
+  rw [← (show ℙ(n; S).presheaf.map (homOfLE le_rfl).op (ratio n S i j) = ratio n S i j from
+      by simp),
+    map_coordRatio hXj (x := X i * X j) rfl (standardOpen_inf_le i j),
+    map_ratio hXi (x := X i * X j) (by ring) (standardOpen_inf_le i j), ← map_mul,
+    ← map_one (Proj.awayToSection _ (X i * X j) ≫
+      (toProjInt n S).appLE _ _ (standardOpen_inf_le i j)).hom]
+  refine appLE_awayToSection_congr _ ?_
+  rw [val_mul, val_awayMap_awayRatio, val_awayMap_awayXRatio, val_one, Localization.mk_mul,
+    ← Localization.mk_one, Localization.mk_eq_mk_iff, Localization.r_iff_exists]
+  exact ⟨1, by simp; ring⟩
+
+end Ratio
+
+/-! ### The canonical module and its local generators -/
+
+variable (S : Scheme.{u}) (d : ℕ)
+
+/-- **The canonical module of projective space**: `ω_ℙ = ⋀ᵈ Ω¹_{ℙ/S}` for `ℙ = ℙ(n; S)`, where
+`Nat.card n = d + 1`.
+
+(blueprint: `lem-pc-projective-space-canonical`) -/
+def canonicalModule : ℙ(n; S).Modules :=
+  (ℙ(n; S) ↘ S).relativeDifferentials.exteriorPower d
+
+variable {n S d} (e : n ≃ Fin (d + 1))
+
+/-- The increasing enumeration `Fin d ≃ {k // k ≠ i}` of the indices other than `i`, for the
+order on `n` transported from `Fin (d + 1)` along `e`. -/
+def chartIndexEquiv (i : n) : Fin d ≃ {k : n // k ≠ i} :=
+  (finSuccAboveEquiv (e i)).trans
+    (e.symm.subtypeEquiv fun x ↦ by rw [ne_eq, ne_eq, Equiv.symm_apply_eq])
+
+@[simp]
+lemma coe_chartIndexEquiv (i : n) (m : Fin d) :
+    (chartIndexEquiv e i m : n) = e.symm ((e i).succAbove m) := by
+  simp [chartIndexEquiv, finSuccAboveEquiv_apply]
+
+/-- **The local generator `ηᵢ` of the canonical module** on the standard open `Uᵢ = D₊(xᵢ)` of
+`ℙ(n; Spec A)`: `ηᵢ = (-1)ⁱ ⋀_{k ≠ i} d(x_k / xᵢ)`, the wedge product being taken in increasing
+order of `k`, for the order on `n` given by `e : n ≃ Fin (d + 1)` (and `i` read as `e i`).
+
+(blueprint: `lem-pc-projective-space-canonical`) -/
+def canonicalGenerator (i : n) : Γ(canonicalModule n (Spec (.of A)) d, standardOpen n _ i) :=
+  ((-1 : Γ(ℙ(n; Spec (.of A)), standardOpen n _ i)) ^ (e i : ℕ)) •
+    wedge fun m ↦ (ℙ(n; Spec (.of A)) ↘ Spec (.of A)).sectionsD _
+      (coordRatio n _ i (chartIndexEquiv e i m))
+
+/-- The wedge product `⋀_{k ≠ i} d(x_k / xᵢ)` is a free generator of `ω_ℙ` on `Uᵢ`, since the
+differentials `d(x_k / xᵢ)` form a basis of `Ω¹_{ℙ/A}` on the basic opens of `Uᵢ`. -/
+lemma isFreeGenerator_wedge_sectionsD_coordRatio (i : n) :
+    IsFreeGenerator (M := canonicalModule n (Spec (.of A)) d)
+      (wedge fun m ↦ (ℙ(n; Spec (.of A)) ↘ Spec (.of A)).sectionsD _
+        (coordRatio n _ i (chartIndexEquiv e i m))) := by
+  refine isFreeGenerator_wedge _ fun V hV x hx ↦ ?_
+  obtain ⟨f, hfV, hxf⟩ := (isAffineOpen_standardOpen n _ i).exists_basicOpen_le ⟨x, hx⟩ (hV hx)
+  obtain ⟨b, hb⟩ := exists_basis_relativeDifferentials_basicOpen n A i f
+  refine ⟨_, hfV, hxf, b.reindex (chartIndexEquiv e i).symm, fun k ↦ ?_⟩
+  rw [Basis.reindex_apply, Equiv.symm_symm, hb]
+
+/-- **`ηᵢ` is a free generator of `ω_ℙ` on `Uᵢ`**; in particular `ω_ℙ` is invertible.
+
+(blueprint: `lem-pc-projective-space-canonical`) -/
+lemma isFreeGenerator_canonicalGenerator (i : n) :
+    IsFreeGenerator (canonicalGenerator A e i) := by
+  have h := (isFreeGenerator_wedge_sectionsD_coordRatio A e i).units_smul ((-1) ^ (e i : ℕ))
+  rwa [Units.val_pow_eq_pow_val, Units.val_neg, Units.val_one] at h
+
+
+/-- **The transition rule for the local generators of `ω_ℙ`**: on the overlap `Uᵢ ∩ Uⱼ` of two
+distinct standard opens of `ℙ(n; Spec A)`, `ηᵢ = (xᵢ / xⱼ)^{-(d+1)} • ηⱼ`, where
+`(xᵢ / xⱼ)^{-(d+1)} = transitionUnit n _ (-d-1) i j`. This is the change of coordinates formula
+for top forms `exteriorPower.ιMulti_chart_transition`, applied to the universal derivation and
+the coordinates `x_k / xᵢ`, `x_k / xⱼ`.
+
+(blueprint: `lem-pc-projective-space-canonical`) -/
+theorem map_canonicalGenerator_eq_transitionUnit_smul {i j : n} (hij : i ≠ j) :
+    (canonicalModule n (Spec (.of A)) d).presheaf.map (homOfLE (inf_le_left :
+        standardOpen n _ i ⊓ standardOpen n _ j ≤ _)).op
+        (canonicalGenerator A e i) =
+      (transitionUnit n (Spec (.of A)) (-(d : ℤ) - 1) i j).1 •
+        (canonicalModule n (Spec (.of A)) d).presheaf.map (homOfLE inf_le_right).op
+          (canonicalGenerator A e j) := by
+  set X := ℙ(n; Spec (.of A))
+  set g := X ↘ Spec (.of A)
+  set V := standardOpen n (Spec (.of A)) i ⊓ standardOpen n (Spec (.of A)) j
+  have hi : V ≤ standardOpen n _ i := inf_le_left
+  have hj : V ≤ standardOpen n _ j := inf_le_right
+  let y (k : Fin (d + 1)) : Γ(X, V) := X.presheaf.map (homOfLE hi).op (coordRatio n _ i (e.symm k))
+  let z (k : Fin (d + 1)) : Γ(X, V) := X.presheaf.map (homOfLE hj).op (coordRatio n _ j (e.symm k))
+  have hy (k : Fin (d + 1)) (_ : k ≠ e i) (_ : k ≠ e j) : y k = z k * y (e j) := by
+    simp only [y, z, Equiv.symm_apply_apply]
+    exact map_coordRatio_eq_mul hi hj _
+  have hinv : z (e i) * y (e j) = 1 := by
+    have h := map_coordRatio_eq_mul hi hj i
+    rw [coordRatio_self, map_one] at h
+    simp only [y, z, Equiv.symm_apply_apply]
+    exact h.symm
+  have key := exteriorPower.ιMulti_chart_transition (g.sectionsD V) (g.sectionsD_mul V) y z
+    (e.injective.ne hij) hy hinv
+  have hyq : y (e j) ^ (d + 1) = (transitionUnit n _ (-(d : ℤ) - 1) i j).1 := by
+    have h : -(d : ℤ) - 1 = -((d + 1 : ℕ) : ℤ) := by push_cast; ring
+    simp only [y, Equiv.symm_apply_apply]
+    rw [map_coordRatio_eq_ratioUnit_inv, transitionUnit, h, zpow_neg, zpow_natCast, ← inv_pow,
+      Units.val_pow_eq_pow_val]
+  have hmap (k : n) (W : X.Opens) (hW : W ≤ standardOpen n _ k) :
+      (canonicalModule n (Spec (.of A)) d).presheaf.map (homOfLE hW).op
+          (canonicalGenerator A e k) =
+        (-1 : Γ(X, W)) ^ (e k : ℕ) • wedge fun m ↦ g.sectionsD W
+          (X.presheaf.map (homOfLE hW).op (coordRatio n _ k (e.symm ((e k).succAbove m)))) := by
+    rw [canonicalGenerator, Scheme.Modules.map_smul, map_pow, map_neg, map_one]
+    congr 1
+    erw [wedge_map]
+    congr 1
+    funext m
+    rw [g.sectionsD_map, coe_chartIndexEquiv]
+  rw [hmap, hmap, ← hyq, smul_smul, wedge, wedge, ← toSheafificationObj_app_smul,
+    ← toSheafificationObj_app_smul]
+  exact congrArg _ key
 
 end AlgebraicGeometry.ProjectiveSpace
