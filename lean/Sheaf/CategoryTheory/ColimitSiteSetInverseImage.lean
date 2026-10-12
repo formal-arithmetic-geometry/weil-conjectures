@@ -10,6 +10,10 @@ public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Comma.Over.Basic
+import Sheaf.CategoryTheory.ColimitSiteSetSectionPresentation
+import Sheaf.CategoryTheory.ColimitSiteSetEvaluationPresentation
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
+import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
 
 /-! # A step in the filtered colimit site construction.
 
@@ -24,6 +28,33 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
+
+private theorem exists_unit_transition
+    {C D E : Type u} [SmallCategory C] [SmallCategory D] [SmallCategory E]
+    (f : C ⥤ D) (g : D ⥤ E) (h : C ⥤ E)
+    (T : GrothendieckTopology C) (S : GrothendieckTopology D)
+    (R : GrothendieckTopology E)
+    [f.IsContinuous T S] [g.IsContinuous S R] [h.IsContinuous T R]
+    (eh : f ⋙ g = h) (G : Sheaf T (Type u)) :
+    ∃ α : (sheafPullback f (Type u) T S).obj G ⟶
+      (g.sheafPushforwardContinuous (Type u) S R).obj
+        ((sheafPullback h (Type u) T R).obj G),
+      ∀ X : C,
+        Arrow.mk (((sheafAdjunctionContinuous f (Type u) T S).unit.app G).hom.app
+          (op X) ≫ α.hom.app (op (f.obj X))) =
+        Arrow.mk (((sheafAdjunctionContinuous h (Type u) T R).unit.app G).hom.app
+          (op X)) := by
+  subst h
+  let A := sheafAdjunctionContinuous f (Type u) T S
+  let H := (sheafPullback (f ⋙ g) (Type u) T R).obj G
+  let η := (sheafAdjunctionContinuous (f ⋙ g) (Type u) T R).unit.app G
+  let β : G ⟶ (f.sheafPushforwardContinuous (Type u) T S).obj
+      ((g.sheafPushforwardContinuous (Type u) S R).obj H) := η
+  refine ⟨(A.homEquiv G _).symm β, ?_⟩
+  intro X
+  have he := (A.homEquiv G _).apply_symm_apply β
+  rw [A.homEquiv_unit] at he
+  exact congrArg (fun k ↦ Arrow.mk (k.hom.app (op X))) he
 
 /-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
 its section formula and final paragraph.
@@ -146,6 +177,49 @@ theorem colimit_site_set_inverse_image
                                 G).hom.app (op X))) ∧
                         Arrow.mk ((E t).hom ≫
                           θ.hom.app (op ((F.map t.hom).toFunctor.obj U))) =
-                        Arrow.mk (D.map b ≫ (E t').hom)) := by sorry
+                        Arrow.mk (D.map b ≫ (E t').hom)) := by
+  classical
+  constructor
+  · intro i
+    have hEval (Y : V.pt) := colimit_site_set_evaluation_presentation J F P
+      hfinite hcover hpullback V hobjects harrows Q hQ hVpullback i Y
+    have hPres : PreservesFiniteLimits
+        (sheafPullback (V.ι.app i).toFunctor (Type u)
+          (P i).toGrothendieck Q.toGrothendieck ⋙
+          sheafToPresheaf Q.toGrothendieck (Type u)) := by
+      apply preservesFiniteLimits_of_evaluation
+      intro Y
+      obtain ⟨A, c, hf, L, hL, ⟨e⟩⟩ := hEval Y.unop
+      let := c
+      let := hf
+      let := hL.some
+      let := comp_preservesFiniteLimits L (colim : (A ⥤ Type u) ⥤ Type u)
+      exact preservesFiniteLimits_of_natIso e.symm
+    let := hPres
+    exact ⟨⟨fun K _ _ ↦
+      preservesLimitsOfShape_of_reflects_of_preserves
+        (sheafPullback (V.ι.app i).toFunctor (Type u)
+          (P i).toGrothendieck Q.toGrothendieck)
+        (sheafToPresheaf Q.toGrothendieck (Type u))⟩⟩
+  · intro i G
+    have hα (t : Under i) := exists_unit_transition
+      (F.map t.hom).toFunctor (V.ι.app t.right).toFunctor (V.ι.app i).toFunctor
+      (P i).toGrothendieck (P t.right).toGrothendieck Q.toGrothendieck
+      (congrArg Cat.Hom.toFunctor (V.w t.hom)) G
+    choose α hα using hα
+    refine ⟨α, hα, ?_⟩
+    have hθ (t t' : Under i) (b : t ⟶ t') := exists_unit_transition
+      (F.map t.hom).toFunctor (F.map b.right).toFunctor (F.map t'.hom).toFunctor
+      (P i).toGrothendieck (P t.right).toGrothendieck (P t'.right).toGrothendieck
+      (by rw [← Cat.Hom.comp_toFunctor, ← F.map_comp, Under.w b]) G
+    choose θ hθ using hθ
+    intro U
+    obtain ⟨D, E, K, e, hK, hι, hm⟩ := colimit_site_set_section_presentation
+      J F P hfinite hcover hpullback V hobjects harrows Q hQ hVpullback i G
+      α hα θ hθ U
+    refine ⟨D, E, K, e, hK, hι, ?_⟩
+    intro t t' b
+    exact ⟨θ t t' b, hθ t t' b, hm t t' b⟩
+
 
 end CategoryTheory

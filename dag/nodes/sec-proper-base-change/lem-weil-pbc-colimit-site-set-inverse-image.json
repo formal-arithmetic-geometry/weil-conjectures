@@ -15,65 +15,47 @@
  ],
  "proof": [
   {
-   "text": "Define the stage transition morphisms as adjuncts of later-stage units, after the cocone composition identification. Injectivity of the adjunction hom equivalence proves identity and composition equations and naturality.",
+   "text": "For every limit object Y, use the general-object evaluation presentation: choose its small filtered category A and finite-limit-preserving stage-section diagram functor L, with its natural isomorphism to inverse-image evaluation. Mathlib filtered colim preserves finite limits; composition and transport along the natural isomorphism prove evaluation left exactness.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a general limit object form the category of its stage presentations above i. The representative and eventual equality criteria give common refinements and equalizers of parallel refinements. The under category of any presentation is final. Form the filtered colimit of inverse-image sections; lift restriction arrows and use eventual equality and naturality to prove independence and the presheaf laws.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-categories",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Lift a Q-cover to a finite stage cover. The assumed covering pullback preservation identifies its sheaf equalizer with the filtered colimit of stage equalizers. Commutation with finite products and equalizers proves that the constructed presheaf is a sheaf. This includes the empty-cover terminal/zero section condition.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-finite-precoverage",
+    "lem-weil-pbc-colimit-site-set-evaluation-presentation",
     "lem-weil-pbc-filtered-colimits-commute-finite-limits"
    ],
    "elementary": false
   },
   {
-   "text": "Maps from the constructed sheaf to H correspond to compatible stage maps. Stage adjunction identifies these with a single map from G to V_i restriction of H. The reverse map uses the identity presentation and the unit. Uniqueness of adjuncts and the colimit universal property prove the two constructions inverse. The unique unit-compatible left-adjoint isomorphism identifies the construction with sheafPullback, giving alpha and the stated unit equations. The final presentation functor at V_i U gives D, E, K, e and the transition/coprojection equations.",
+   "text": "Apply preservesFiniteLimits_of_evaluation to the composite inverse image followed by sheafToPresheaf. Since sheafToPresheaf reflects limits, apply preservesLimitsOfShape_of_reflects_of_preserves for every finite indexing category to prove preservation of finite limits by the inverse image itself.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "lem-weil-pbc-presheaf-finite-limits-objectwise"
    ],
    "elementary": false
   },
   {
-   "text": "The general-object section formula is natural in G. Each transition inverse image and section evaluation preserves finite limits, and filtered colimits commute with finite limits. Thus each evaluation of the canonical inverse image preserves finite limits. Limits of sheaves are computed as presheaf limits, so the inverse-image functor itself preserves finite limits. If the source category is empty, transition left exactness forces its inverse image terminal at later stages, and the same formula covers this case.",
+   "text": "For continuous f, g and h with f followed by g equal h, substitute this equality. The h-adjunction unit is a map G to f-pushforward of g-pushforward of h-pullback G. Its inverse under the f-adjunction homEquiv is the transition map. apply_symm_apply and homEquiv_unit give the unit equation, including the endpoints via Arrow.mk. Apply this once using cocone naturality to obtain alpha, and once using F.map_comp and Under.w to obtain theta.",
    "uses": [
-    "lem-weil-pbc-presheaf-finite-limits-objectwise",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+    "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply the section-presentation theorem to these alpha and theta and their proved unit equations. Keep its D, E, K, e, colimit and coprojection equations; for each under-category arrow choose the already constructed theta and pair its unit equation with the supplied diagram-transition equation.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-set-section-presentation"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-finite-precoverage",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-filtered-colimit-categories",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-colimit-site-set-evaluation-presentation",
+  "lem-weil-pbc-colimit-site-set-section-presentation",
   "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-initial-functor-cofiltered-criterion",
   "lem-weil-pbc-presheaf-finite-limits-objectwise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), presentation construction, adjunction paragraph and final left-exactness paragraph; explicit refinement, unit equations and abelian extension follow the expanded twelve-step proof of the parent node."
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), presentation construction, adjunction paragraph and final left-exactness paragraph",
+  "note": "F2: direct adjunction construction and reduction to general-object and specified-map section presentations; no change to the statement."
  },
  "mathlib_searches": [
   {
@@ -148,9 +130,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T152346-L-2312871",
+  "landing": "20261012T160134-L-2563395",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
