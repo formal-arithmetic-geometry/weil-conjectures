@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-strict-henselization-closed-fiber",
+ "kind": "statement",
+ "title": "The singleton distinguished fibre of a strict henselization",
+ "statement": "Let S be a scheme, Omega an algebraically closed field and s:Spec Omega to S a geometric point. Let A be a commutative local ring and e:Spec A isomorphic to S_(s). For every x in Spec A, the structural image rho_s(e(x)) equals s(closedPoint Omega) if and only if x=closedPoint A. Here S_(s) and rho_s are [def-weil-pbc-strict-henselization-limit] and [def-weil-pbc-strict-henselization-structural-map]. No henselianity or residue separable-closedness assumption on A is needed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GW and 04GP; Etale Cohomology Tag 04HX identifies the neighbourhood colimit"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine chart Spec R of the image p of s. Identify the coordinate-ring colimit over pointed affine neighbourhoods with the etale residue-triple colimit for R, p and the relative separable closure in Omega. Localizing a neighbourhood at its selected prime leaves the colimit unchanged, since elements outside the prime are inverted on smaller pointed opens. The small-model and affine-presentation comparisons preserve every coordinate-ring coprojection and the structural map.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The triple colimit is local, its maximal ideal is p extended to the colimit, and its quotient is the selected separable closure. Thus primes mapping to p are exactly the maximal ideal: they contain pC, which is maximal; conversely that maximal ideal contracts to p. This gives a singleton structural fibre, including its image equation.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport the singleton fibre through e. An isomorphism of spectra preserves closed points. A local ring has a unique closed point, so the transported maximal ideal is IsLocalRing.closedPoint A. The result is unchanged in the field case, where that closed point is zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "P1",
+  "date": "2026-10-12",
+  "note": "Lean reduction of the existing node proof; sources read at their official Stacks Project tag pages."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization schemes functoriality and the unique point above a geometric point",
+   "results": "UNAVAILABLE: service Internal Server Error; no verdict recorded.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes induces a local homomorphism between strict henselizations at compatible geometric points",
+   "results": "SpecToEquivOfLocalRing, stalkClosedPointTo, Spec_closedPoint and localness of stalk maps; no strict henselization functoriality or singleton-fibre theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalHom",
+   "results": "Unit reflection, local hom composition and equivalence lemmas. The source grep also finds IsLocalRing.isLocalHom_iff_comap_closedPoint; none constructs the strict henselization map or its fibre.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg strictHenselization|strictHensel|closedPoint Mathlib/AlgebraicGeometry Mathlib/RingTheory/Spectrum/Prime lean/WeilConjectures lean/Sheaf; tools/blueprint_refs.py search strict henselization",
+   "results": "No Mathlib strict henselization. The library has the coordinate-ring construction and etale-triple comparison. Paper.StrictHenselizationFunctoriality has stronger pointed residue data, but no singleton-fibre theorem or unpointed scheme map with just hst. Blueprint search finds the existing construction and P1 stalk-exchange ancestor; no duplicate standalone statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreCompletion",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Proof, compatible strict henselizations in the arbitrary-base geometric stalk comparison",
+   "via": [
+    "compatible-strict-henselization-core-completion",
+    "compatible-strict-henselization-core-data",
+    "compatible-strict-henselization-residues-core",
+    "lem-weil-pbc-p1-strict-local-model-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiber",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationClosedFiber.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap_fiber_eq_closedPoint",
+  "statement": "theorem strictHenselizationStructuralMap_fiber_eq_closedPoint\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω]\n    [CommRing A] [IsLocalRing A]\n    (s : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictHenselizationScheme s)\n    (x : Spec (.of A)) :\n    (e.hom ≫ strictHenselizationStructuralMap s) x = s (IsLocalRing.closedPoint Ω) ↔\n      x = IsLocalRing.closedPoint A",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e6557",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T153649-L-2395362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e6557",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T153649-L-2395362",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged item signature, both new declarations and their proofs with the DAG records and cited sources; all delivered modules and the direct importer compile cleanly; axioms are as reported."
+ }
+}

@@ -8373,3 +8373,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:36 L: merged deliver/D3/Sheaf.AlgebraicGeometry.ProjLineCoordinateShortExact (stage 3; reviewer PASS; first push; landing 20261012T153648-L-2394789 (interface); batch 20261012T153647; modules 3; new nodes 2)
 - 15:36 L: merged deliver/J3/Sheaf.AlgebraicGeometry.CohomologyPowersIdealReesFinite (stage 3; reviewer PASS; first push; landing 20261012T153648-L-2394931 (interface); batch 20261012T153647; modules 3; new nodes 2)
 - 15:36 L: merged deliver/N2/Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison (stage 3; reviewer PASS; first push; landing 20261012T153649-L-2395235 (interface); batch 20261012T153647; modules 2; new nodes 1)
+- 15:36 L: merged deliver/P1/Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreCompletion (stage 3; reviewer PASS; first push; landing 20261012T153649-L-2395362 (interface); batch 20261012T153647; modules 3; new nodes 2)

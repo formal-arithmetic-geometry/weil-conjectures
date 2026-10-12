@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-strict-henselization-scheme-functoriality",
+ "kind": "statement",
+ "title": "Functoriality of strict henselization schemes",
+ "statement": "For schemes S,T, a morphism g:T to S and geometric points s:Spec Omega to S and t:Spec Omega to T over the same algebraically closed field, suppose s=t composed with g. There exists f:T_(t) to S_(s) whose composite with the structural map to S equals the structural map to T followed by g. The schemes and structural maps are those of [def-weil-pbc-strict-henselization-limit] and [def-weil-pbc-strict-henselization-structural-map].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, affine pointed-neighbourhood inverse limit; functoriality as in Algebra Tag 04GU"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Reindex the canonical spectrum limit cone across the double-opposite equivalence. Postcompose by the inverse Gamma-Spec unit, whose components are isomorphisms on the affine neighbourhoods. The leg formula is Spec.map of GammaSpecIso.inv. Its composite with the neighbourhood map is the named structural map.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The representative functor into all pointed etale neighbourhoods is initial by strictHenselization_properties. Use Functor.Initial.extendCone and isLimitExtendConeEquiv to extend the preceding cone and its limit property. The arrow homToLift is over the base, so every extended leg still composes to the structural map.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pull back each neighbourhood along g, with point given by pullback.lift of its point and t, using hst. The pullback maps give a functor on pointed categories of elements; prove its naturality by the two projections. Compose the extended t-cone legs at these pullbacks with pullback.fst, and prove cone naturality from pullback.lift_fst.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Lift the resulting cone through the extended limit at s. Choose one pointed neighbourhood using cofiltered nonemptiness. The limit fac equation, the structural leg formula, pullback.condition and the t-structural leg formula give f composed with rho_s = rho_t composed with g.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "P1",
+  "date": "2026-10-12",
+  "note": "Lean reduction of the existing node proof; sources read at their official Stacks Project tag pages."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization schemes functoriality and the unique point above a geometric point",
+   "results": "UNAVAILABLE: service Internal Server Error; no verdict recorded.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes induces a local homomorphism between strict henselizations at compatible geometric points",
+   "results": "SpecToEquivOfLocalRing, stalkClosedPointTo, Spec_closedPoint and localness of stalk maps; no strict henselization functoriality or singleton-fibre theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalHom",
+   "results": "Unit reflection, local hom composition and equivalence lemmas. The source grep also finds IsLocalRing.isLocalHom_iff_comap_closedPoint; none constructs the strict henselization map or its fibre.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg strictHenselization|strictHensel|closedPoint Mathlib/AlgebraicGeometry Mathlib/RingTheory/Spectrum/Prime lean/WeilConjectures lean/Sheaf; tools/blueprint_refs.py search strict henselization",
+   "results": "No Mathlib strict henselization. The library has the coordinate-ring construction and etale-triple comparison. Paper.StrictHenselizationFunctoriality has stronger pointed residue data, but no singleton-fibre theorem or unpointed scheme map with just hst. Blueprint search finds the existing construction and P1 stalk-exchange ancestor; no duplicate standalone statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreCompletion",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Proof, compatible strict henselizations in the arbitrary-base geometric stalk comparison",
+   "via": [
+    "compatible-strict-henselization-core-completion",
+    "compatible-strict-henselization-core-data",
+    "compatible-strict-henselization-residues-core",
+    "lem-weil-pbc-p1-strict-local-model-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationSchemeFunctoriality",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationSchemeFunctoriality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_strictHenselizationSchemeMap",
+  "statement": "theorem exists_strictHenselizationSchemeMap\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {s : Spec (.of Ω) ⟶ S} {t : Spec (.of Ω) ⟶ T}\n    (hst : s = t ≫ g) :\n    ∃ f : strictHenselizationScheme t ⟶ strictHenselizationScheme s,\n      f ≫ strictHenselizationStructuralMap s =\n        strictHenselizationStructuralMap t ≫ g",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e6557",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T153649-L-2395362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e6557",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T153649-L-2395362",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged item signature, both new declarations and their proofs with the DAG records and cited sources; all delivered modules and the direct importer compile cleanly; axioms are as reported."
+ }
+}

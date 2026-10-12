@@ -10,22 +10,29 @@
  ],
  "proof": [
   {
-   "text": "Proof: the equality of geometric points gives the functor from pointed etale neighbourhoods of S to those of T by base change. Its maps to the two colimits induce the morphism from strictHenselizationScheme t to strictHenselizationScheme s over g. Transport through eA and eB, then use the fully faithful contravariant Spec functor to obtain the ring homomorphism. On closed points this sends the selected geometric point to the selected geometric point; the corresponding map of local rings is local. The colimit cone compatibility gives the structural equality. ",
+   "text": "Obtain f:T_(t) to S_(s) over g from the scheme functoriality theorem. Put F=eB.hom composed with f composed with eA.inv and phi=(Spec.preimage F).hom. Spec.map_preimage identifies Spec(phi) with F, and the inverse identities for eA give the requested structural square.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-strict-henselization-structural-map"
+    "lem-weil-pbc-strict-henselization-scheme-functoriality"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The singleton-fibre theorem at t shows that the B closed point maps to the image of t. Evaluate the structural square there, and use hst to show the image under Spec(phi) lies over s. Apply the singleton-fibre theorem at s to conclude Spec(phi) maps closedPoint B to closedPoint A. Mathlib IsLocalRing.isLocalHom_iff_comap_closedPoint yields IsLocalHom phi, and the two witnesses with the structural square finish the existential.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-closed-fiber"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-strict-henselization-structural-map"
+  "lem-weil-pbc-strict-henselization-scheme-functoriality",
+  "lem-weil-pbc-strict-henselization-closed-fiber"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04GU; second reader corrected decomposition"
+  "kind": "agent",
+  "by": "P1",
+  "date": "2026-10-12",
+  "note": "Lean reduction of the existing node proof; sources read at their official Stacks Project tag pages."
  },
  "mathlib_searches": [
   {
@@ -100,11 +107,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G3",
+  "reviewer": "X-e6557",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T135236-L-1666580",
+  "landing": "20261012T153649-L-2395362",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged item signature, both new declarations and their proofs with the DAG records and cited sources; all delivered modules and the direct importer compile cleanly; axioms are as reported."
  }
 }
