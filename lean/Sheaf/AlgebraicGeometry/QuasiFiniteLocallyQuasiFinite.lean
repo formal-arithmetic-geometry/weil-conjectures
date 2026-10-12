@@ -50,6 +50,23 @@ Proof:
 theorem isQuasiFinite_iff_isLocallyQuasiFinite_and_quasiCompact
     {X S : AlgebraicGeometry.Scheme.{v}} (f : X ⟶ S) :
     IsQuasiFinite f ↔ IsLocallyQuasiFinite f ∧ AlgebraicGeometry.QuasiCompact f := by
-  sorry
+  constructor
+  · rintro ⟨hlft, hqc, hisolated⟩
+    let := hlft
+    refine ⟨?_, hqc⟩
+    intro x
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, _⟩ :=
+      S.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f x)) isOpen_univ
+    obtain ⟨_, ⟨U, hU, rfl⟩, hxU, hUV⟩ :=
+      X.isBasis_affineOpens.exists_subset_of_mem_open hxV (f ⁻¹ᵁ V).isOpen
+    refine ⟨U, hxU, hU, V, hV, hUV, ?_⟩
+    exact f.isQuasiFiniteAtPrime_of_isOpen_singleton_asFiber x (hisolated x)
+      U V hU hV hxU hUV
+  · rintro ⟨hlqf, hqc⟩
+    have hlft := locallyOfFiniteType_of_isLocallyQuasiFinite f hlqf
+    let := hlft
+    refine ⟨hlft, hqc, ?_⟩
+    intro x
+    exact (quasiFiniteAtPoint_isolated_in_fiber f x (hlqf x)).1
 
 end AlgebraicGeometry.Scheme.Hom
