@@ -19,6 +19,43 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 
 namespace CategoryTheory
 
+private theorem exists_comparison
+    {C : Type*} [Category C] [Abelian C] {F : C} (J : InjectiveResolution F)
+    (K : CochainComplex C ℕ) [∀ n, Injective (K.X n)]
+    (b : F ⟶ K.X 0) (hb : b ≫ K.d 0 1 = 0) :
+    ∃ φ : J.cocomplex ⟶ K, J.ι.f 0 ≫ φ.f 0 = b := by
+  let g₀ := Injective.factorThru b (J.ι.f 0)
+  have hg₀ : J.ι.f 0 ≫ g₀ = b := Injective.comp_factorThru _ _
+  have h₀ : J.ι.f 0 ≫ (g₀ ≫ K.d 0 1) = 0 := by rw [← Category.assoc, hg₀, hb]
+  let g₁ := J.exact₀.descToInjective (g₀ ≫ K.d 0 1) h₀
+  have hg₁ : g₀ ≫ K.d 0 1 = J.cocomplex.d 0 1 ≫ g₁ :=
+    (J.exact₀.comp_descToInjective _ _).symm
+  let φ := CochainComplex.mkHom J.cocomplex K g₀ g₁ hg₁
+    (fun n ⟨g, g', w⟩ ↦
+      ⟨(J.exact_succ n).descToInjective (g' ≫ K.d (n + 1) (n + 2))
+          (by rw [← Category.assoc, ← w, Category.assoc]; simp),
+        ((J.exact_succ n).comp_descToInjective _ _).symm⟩)
+  exact ⟨φ, hg₀⟩
+
+private noncomputable def sectionEquiv
+    {C : Type*} [Category.{u} C] (T : GrothendieckTopology C)
+    [HasSheafify T AddCommGrpCat.{u}] (U : C) (M : Sheaf T AddCommGrpCat.{u}) :
+    ((presheafToSheaf T AddCommGrpCat.{u}).obj
+      (yoneda.obj U ⋙ AddCommGrpCat.free) ⟶ M) ≃ M.obj.obj (op U) :=
+  ((sheafificationAdjunction T AddCommGrpCat.{u}).homEquiv _ M).trans
+    (((AddCommGrpCat.adj.whiskerRight (C := Cᵒᵖ)).homEquiv (yoneda.obj U) M.obj).trans
+      yonedaEquiv)
+
+private lemma sectionEquiv_apply
+    {C : Type*} [Category.{u} C] (T : GrothendieckTopology C)
+    [HasSheafify T AddCommGrpCat.{u}] (U : C) (M : Sheaf T AddCommGrpCat.{u})
+    (z : (presheafToSheaf T AddCommGrpCat.{u}).obj
+      (yoneda.obj U ⋙ AddCommGrpCat.free) ⟶ M) :
+    sectionEquiv T U M z = z.hom.app (op U)
+      ((toSheafify T (yoneda.obj U ⋙ AddCommGrpCat.free)).app (op U)
+        (FreeAbelianGroup.of (𝟙 U))) := by
+  rfl
+
 /-- A cocycle on a resolution of f_*F can be compared with a resolution of F
 and lifted uniquely as a terminal-section cocycle on the latter.
 
@@ -77,6 +114,52 @@ theorem exists_topological_resolution_cocycle_lift
           (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶
             I.cocomplex.X p),
         z ≫ I.cocomplex.d p (p + 1) = 0 ∧
-        a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p := by sorry
+        a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p := by
+  let P := TopCat.Sheaf.pushforwardAb f
+  let K := (P.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+  have (n : ℕ) : Injective (K.X n) :=
+    TopCat.Sheaf.injective_pushforwardAb_obj f (I.cocomplex.X n)
+  obtain ⟨φ, hφ⟩ := exists_comparison J K (P.map (I.ι.f 0)) (by
+    change P.map (I.ι.f 0) ≫ P.map (I.cocomplex.d 0 1) = 0
+    rw [← P.map_comp, I.ι_f_zero_comp_complex_d, P.map_zero])
+  refine ⟨φ, hφ, ?_⟩
+  have hbij (M : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}) :
+      Function.Bijective (fun z : (presheafToSheaf (Opens.grothendieckTopology Z)
+          AddCommGrpCat.{u}).obj
+          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶ M ↦ a ≫ P.map z) := by
+    let eZ := sectionEquiv (Opens.grothendieckTopology Z) (⊤ : Opens Z) M
+    let eX := sectionEquiv (Opens.grothendieckTopology X) (⊤ : Opens X) (P.obj M)
+    let e := eqToHom (Opens.map_top f)
+    let r := (Iso.addCommGroupIsoToAddEquiv (M.obj.mapIso (asIso e.op))).toEquiv
+    have he (z : (presheafToSheaf (Opens.grothendieckTopology Z)
+          AddCommGrpCat.{u}).obj
+          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶ M) :
+        eX (a ≫ P.map z) = r (eZ z) := by
+      rw [sectionEquiv_apply]
+      change z.hom.app (op ((Opens.map f).obj ⊤))
+        (a.hom.app (op ⊤) _) = _
+      rw [ha ⊤ (𝟙 _)]
+      let t := toSheafify (Opens.grothendieckTopology Z)
+        (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ≫ z.hom
+      have ht := ConcreteCategory.congr_hom (t.naturality e.op)
+        (FreeAbelianGroup.of (𝟙 (⊤ : Opens Z)))
+      simp [t, e, r, eZ, sectionEquiv_apply] at ht ⊢
+    constructor
+    · intro z z' h
+      apply eZ.injective
+      exact r.injective ((he z).symm.trans ((congrArg eX h).trans (he z')))
+    · intro t
+      obtain ⟨z, hz⟩ := eZ.surjective (r.symm (eX t))
+      refine ⟨z, eX.injective ?_⟩
+      rw [he z, hz, r.apply_symm_apply]
+  obtain ⟨z, hz⟩ := (hbij (I.cocomplex.X p)).surjective (s ≫ φ.f p)
+  dsimp only at hz
+  refine ⟨z, ?_, hz⟩
+  apply (hbij (I.cocomplex.X (p + 1))).injective
+  change a ≫ P.map (z ≫ I.cocomplex.d p (p + 1)) = a ≫ P.map 0
+  rw [P.map_comp, ← Category.assoc, hz, Category.assoc]
+  change s ≫ φ.f p ≫ K.d p (p + 1) = a ≫ P.map 0
+  rw [φ.comm p (p + 1), ← Category.assoc, hs]
+  simp
 
 end CategoryTheory
