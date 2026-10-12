@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.TensorProduct.Maps
-import Sheaf.Paper.DirectedColimitBaseChangeElementwise
-import Sheaf.RingTheory.EtaleRingMapConormalCriterion
+import Sheaf.AlgebraicGeometry.EtaleBaseChangePolynomialCertificate
+import Sheaf.RingTheory.EtalePolynomialCertificateColimit
 
 /-!
 # Descent of etaleness along a directed colimit of rings
@@ -65,7 +65,16 @@ theorem Etale.exists_stage_of_directedColimit
     ∃ (i : I) (hi : i₀ ≤ i),
       letI : Algebra (F.obj i₀) (F.obj i) := (F.map (homOfLE hi)).hom.toAlgebra
       Etale (Spec.map (CommRingCat.ofHom
-        (Algebra.TensorProduct.map (AlgHom.id (F.obj i₀) (F.obj i)) φ₀).toRingHom)) :=
-  sorry
+        (Algebra.TensorProduct.map (AlgHom.id (F.obj i₀) (F.obj i)) φ₀).toRingHom)) := by
+  obtain ⟨n, m, f, hf⟩ := exists_etale_baseChange_polynomialCertificate B₀ C₀ φ₀ hfp
+  let : Algebra (F.obj i₀) (colimit F : CommRingCat.{u}) :=
+    (colimit.ι F i₀).hom.toAlgebra
+  intro h
+  have hc := (hf (colimit F : CommRingCat.{u})).mp h
+  obtain ⟨i, hi, hcᵢ⟩ :=
+    Algebra.exists_stage_etalePolynomialCertificate F i₀ B₀ n m f hc
+  refine ⟨i, hi, ?_⟩
+  let : Algebra (F.obj i₀) (F.obj i) := (F.map (homOfLE hi)).hom.toAlgebra
+  exact (hf (F.obj i)).mpr hcᵢ
 
 end AlgebraicGeometry

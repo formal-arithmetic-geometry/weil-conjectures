@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-etale-polynomial-certificate-colimit",
+ "kind": "statement",
+ "title": "Finite polynomial inverse certificates descend along tensor base change to a stage",
+ "statement": "Let $I$ be a directed preorder, $(A_i)_{i\\in I}$ a diagram of commutative rings with colimit $A$ [def-weil-pbc-category-colimit], $i_0\\in I$, and $B_0$ a commutative $A_{i_0}$-algebra. Fix $n,m\\geq0$ and $f_1,\\ldots,f_m\\in B_0[x_1,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring]. Regard $A$ and each $A_i$ for $i\\geq i_0$ as $A_{i_0}$-algebras via their coprojection and transition. Let $f_{j,A}$ and $f_{j,i}$ be the coefficient images under $b\\mapsto1\\otimes b$ into $(A\\otimes_{A_{i_0}}B_0)[x]$ and $(A_i\\otimes_{A_{i_0}}B_0)[x]$. If $f_{j,A}$ admit a polynomial inverse certificate [def-weil-pbc-etale-polynomial-certificate], then $f_{j,i}$ admit one at some $i\\geq i_0$. No finite-presentation hypothesis on $B_0$ is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 07RI (lemma-colimit-etale), proof, lines 47654-47662: lift inverse coefficients and eventually impose both finite inverse identities"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-etale-polynomial-certificate"
+ ],
+ "proof": [
+  {
+   "text": "Expand first memberships as sums e_klj f_j and second memberships as sums h_jab f_a f_b. Finite ideal generation gives these expressions, since products f_a f_b generate J². There are finitely many coefficient polynomials.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify each polynomial base change with A_i tensor P₀ (or A tensor P₀), where P₀=B₀[x]. Transitions are coefficientwise ring maps and hence commute with partial derivatives.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-polynomial-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift finite lists c,e,h by part (1) of elementwise tensor-colimit descent. Directedness moves them to one stage above i₀. The expanded equation differences vanish at the colimit, so part (2) and directedness kill all differences at one later stage. These equations give both certificate families there.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 07RI (lemma-colimit-etale), proof, lines 47654-47662: lift inverse coefficients and eventually impose both finite inverse identities"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite polynomial equations and ideal square membership witnesses descend along a directed colimit of base rings under tensor product base change",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite polynomial equations and ideal square membership witnesses descend along a directed colimit of base rings under tensor product base change",
+   "results": "Standard etale presentation and smooth algebra models or base-change lemmas, not this statement.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "pderiv_map|mem_ideal_span_range|algebraTensorAlgEquiv",
+   "results": "MvPolynomial.pderiv_map, Ideal.Cotangent, Finsupp.mem_ideal_span_range_iff_exists_finsupp and MvPolynomial.algebraTensorAlgEquiv are individual ingredients, not the certificate or its descent.",
+   "verdict": "ingredients only",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleDirectedColimitDescent",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 5 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero'); finite affine etale descent: Lemma Tag 07RI (lemma-colimit-etale), proof, lines 47654-47662: lift inverse coefficients and eventually impose both finite inverse identities",
+   "via": [
+    "lem-weil-pbc-colimit-etale-ring-map",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.EtalePolynomialCertificateColimit",
+  "file": "lean/Sheaf/RingTheory/EtalePolynomialCertificateColimit.lean",
+  "declaration": "Algebra.exists_stage_etalePolynomialCertificate",
+  "statement": "theorem exists_stage_etalePolynomialCertificate {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) [HasColimit F] (i₀ : I) (B₀ : Type v) [CommRing B₀] [Algebra (F.obj i₀) B₀] (n m : ℕ) (f : Fin m → MvPolynomial (Fin n) B₀) : letI : Algebra (F.obj i₀) (colimit F : CommRingCat.{u}) := (colimit.ι F i₀).hom.toAlgebra EtalePolynomialCertificate (fun j ↦ MvPolynomial.map (Algebra.TensorProduct.includeRight.toRingHom : B₀ →+* (colimit F : CommRingCat.{u}) ⊗[F.obj i₀] B₀) (f j)) → ∃ (i : I) (hi : i₀ ≤ i), letI : Algebra (F.obj i₀) (F.obj i) := (F.map (homOfLE hi)).hom.toAlgebra EtalePolynomialCertificate (fun j ↦ MvPolynomial.map (Algebra.TensorProduct.includeRight.toRingHom : B₀ →+* F.obj i ⊗[F.obj i₀] B₀) (f j))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T053927-L-2633221",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T053927-L-2633221",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
