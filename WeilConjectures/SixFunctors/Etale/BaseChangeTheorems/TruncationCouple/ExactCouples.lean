@@ -20,7 +20,8 @@ taking cohomology sheaves gives the two truncation exact couples
   D_Φ^{p,q} = H^{p+q}(g^* R f_* τ_{≤ q} K),   E_Φ^{p,q} = H^{p+q}(g^* R f_* (H^q(K)[-q])),
   D_Ψ^{p,q} = H^{p+q}(R f'_* g'^* τ_{≤ q} K),  E_Ψ^{p,q} = H^{p+q}(R f'_* g'^* (H^q(K)[-q]))
 ```
-(`AlgebraicGeometry.Etale.truncationCoupleSource`, `AlgebraicGeometry.Etale.truncationCoupleTarget`),
+(`AlgebraicGeometry.Etale.truncationCoupleSource`,
+`AlgebraicGeometry.Etale.truncationCoupleTarget`),
 and the derived exchange map `Ex : Φ ⟶ Ψ` induces a morphism of exact couples
 (`AlgebraicGeometry.Etale.truncationCoupleExchange`). This is blueprint
 `def-weil-pbc-truncation-exact-couples` and `lem-weil-pbc-truncation-couple-morphism`.

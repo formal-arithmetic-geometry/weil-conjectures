@@ -108,7 +108,7 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [HasDerivedCategory C] [HasDerivedCategory D]
   (G : C ⥤ D) [G.Additive] [EnoughInjectives C] [HasKInjectiveResolutions C]
 
-open DerivedCategory TStructure
+open DerivedCategory TStructure ZeroObject
 
 /-- The total right derived functor of an object `X` placed in degree `0`: if every classical
 derived functor `RᵠG X` satisfies a property `P` of objects of `D` containing zero and closed
@@ -122,13 +122,10 @@ lemma rightDerivedFunctor_obj_singleFunctor_homologyProperty (P : ObjectProperty
       homologyConcentratedIn 0 c (G.rightDerivedFunctor.obj ((singleFunctor C 0).obj X)) := by
   have hge := G.isGE_rightDerivedFunctor_obj_singleFunctor X
   refine ⟨fun n ↦ ?_, hge, ?_⟩
-  · obtain ⟨k, rfl⟩ | hn := Int.eq_nat_or_neg n
-    · exact P.prop_of_iso (G.homologyRightDerivedFunctorObjSingleFunctorIso X k).symm (h₁ k)
-    · by_cases hk : (k : ℤ) = 0
-      · obtain rfl : k = 0 := by exact_mod_cast hk
-        exact P.prop_of_iso (G.homologyRightDerivedFunctorObjSingleFunctorIso X 0).symm (h₁ 0)
-      · obtain ⟨k, rfl⟩ := hn
-        exact P.prop_of_isZero (isZero_of_isGE _ 0 _ (by lia))
+  · rcases lt_or_ge n 0 with hn | hn
+    · exact P.prop_of_isZero (isZero_of_isGE _ 0 _ hn)
+    · obtain ⟨k, rfl⟩ := Int.eq_ofNat_of_zero_le hn
+      exact P.prop_of_iso (G.homologyRightDerivedFunctorObjSingleFunctorIso X k).symm (h₁ k)
   · refine (isLE_iff _ c).2 fun n hn ↦ ?_
     obtain ⟨k, rfl⟩ : ∃ k : ℕ, n = k := ⟨n.toNat, by lia⟩
     exact (h₂ k (by exact_mod_cast hn)).of_iso

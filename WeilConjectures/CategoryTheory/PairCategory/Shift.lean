@@ -152,10 +152,16 @@ lemma shiftAddIso_inv_app (a b : A) (X : PairCategory F) :
     (shiftAddIso a b).inv.app X =
       (incl F X.idx).map ((shiftFunctorAdd (F.obj ⟨X.idx⟩) a b).inv.app X.obj) :=
   rfl
+/-- An `eqToHom` between two shifts of an object of the pair category is the image of the
+corresponding `eqToHom` of its stage. -/
+lemma eqToHom_shift (X : PairCategory F) {a b : A} (hab : a = b)
+    (h : (shiftFamily F a).descent.obj X = (shiftFamily F b).descent.obj X) :
+    eqToHom h = (incl F X.idx).map (eqToHom (by rw [hab]) :
+      (shiftFunctor (F.obj ⟨X.idx⟩) a).obj X.obj ⟶ (shiftFunctor _ b).obj X.obj) := by
+  subst hab
+  rw [eqToHom_refl, eqToHom_refl, Functor.map_id]
+  rfl
 
-variable (F A) in
-/-- The shift data of the pair category: `(i, K)[a] = (i, K[a])`. -/
-noncomputable def shiftMkCore : ShiftMkCore (PairCategory F) A where
 variable (F A) in
 /-- The shift data of the pair category: `(i, K)[a] = (i, K[a])`. -/
 noncomputable def shiftMkCore : ShiftMkCore (PairCategory F) A where
@@ -163,25 +169,125 @@ noncomputable def shiftMkCore : ShiftMkCore (PairCategory F) A where
   zero := shiftZeroIso F A
   add a b := shiftAddIso a b
   assoc_hom_app m₁ m₂ m₃ X := by
+    rw [eqToHom_shift X (add_assoc m₁ m₂ m₃)]
     simp only [shiftAddIso_hom_app, shiftFamily_descent_map_incl_map]
-    dsimp only [CompatibleFamily.descent_obj]
-    erw [incl_map_eqToHom X.idx (by rw [add_assoc])]
+    try dsimp only [CompatibleFamily.descent_obj]
     simp only [← Functor.map_comp]
     congr 1
-    simpa [shiftFunctorAdd'] using shiftFunctorAdd_assoc_hom_app (C := F.obj ⟨X.idx⟩) m₁ m₂ m₃
-      X.obj
+    rw [shiftFunctorAdd_assoc_hom_app (C := F.obj ⟨X.idx⟩) m₁ m₂ m₃ X.obj]
+    simp [shiftFunctorAdd']
+    rfl
   zero_add_hom_app n X := by
+    rw [eqToHom_shift X (zero_add n)]
     simp only [shiftAddIso_hom_app, shiftZeroIso_inv_app, shiftFamily_descent_map_incl_map]
-    erw [incl_map_eqToHom X.idx (by rw [zero_add])]
+    try dsimp only [CompatibleFamily.descent_obj]
     simp only [← Functor.map_comp]
     congr 1
     exact shiftFunctorAdd_zero_add_hom_app (C := F.obj ⟨X.idx⟩) n X.obj
   add_zero_hom_app n X := by
+    rw [eqToHom_shift X (add_zero n)]
     simp only [shiftAddIso_hom_app, shiftZeroIso_inv_app]
-    dsimp only [CompatibleFamily.descent_obj]
-    erw [incl_map_eqToHom X.idx (by rw [add_zero])]
+    try dsimp only [CompatibleFamily.descent_obj]
     simp only [← Functor.map_comp]
     congr 1
     exact shiftFunctorAdd_add_zero_hom_app (C := F.obj ⟨X.idx⟩) n X.obj
+
+variable (F A) in
+/-- Blueprint `prop-weil-pbc-common-stage-calculus`: the shift on the pair category,
+`(i, K)[a] = (i, K[a])`, a morphism represented by `u` being sent to the one represented by
+`σ⁻¹ ∘ u[a] ∘ σ`. -/
+noncomputable instance hasShift : HasShift (PairCategory F) A :=
+  hasShiftMk _ _ (shiftMkCore F A)
+
+lemma shiftFunctor_eq (a : A) : shiftFunctor (PairCategory F) a = (shiftFamily F a).descent :=
+  rfl
+
+@[simp]
+lemma shiftFunctor_obj (a : A) (X : PairCategory F) :
+    (shiftFunctor (PairCategory F) a).obj X = ⟨X.idx, (shiftFunctor _ a).obj X.obj⟩ :=
+  rfl
+
+/-- The value of the shift functor on a representative: `σ_{k/j} ∘ u[a] ∘ σ_{k/i}⁻¹`. -/
+lemma shiftFunctor_map_homMk (a : A) {X Y : PairCategory F} {k : ι} (hX : X.idx ≤ k)
+    (hY : Y.idx ≤ k) (u : X.at_ hX ⟶ Y.at_ hY) :
+    (shiftFunctor (PairCategory F) a).map (homMk hX hY u) =
+      homMk (X := ⟨X.idx, (shiftFunctor _ a).obj X.obj⟩)
+        (Y := ⟨Y.idx, (shiftFunctor _ a).obj Y.obj⟩) hX hY
+        (((F.transition hX).commShiftIso a).hom.app X.obj ≫ u⟦a⟧' ≫
+          ((F.transition hY).commShiftIso a).inv.app Y.obj) :=
+  rfl
+
+lemma shiftFunctorZero_hom_app (X : PairCategory F) :
+    (shiftFunctorZero (PairCategory F) A).hom.app X =
+      (incl F X.idx).map ((shiftFunctorZero (F.obj ⟨X.idx⟩) A).hom.app X.obj) :=
+  rfl
+
+lemma shiftFunctorZero_inv_app (X : PairCategory F) :
+    (shiftFunctorZero (PairCategory F) A).inv.app X =
+      (incl F X.idx).map ((shiftFunctorZero (F.obj ⟨X.idx⟩) A).inv.app X.obj) :=
+  rfl
+
+lemma shiftFunctorAdd_hom_app (a b : A) (X : PairCategory F) :
+    (shiftFunctorAdd (PairCategory F) a b).hom.app X =
+      (incl F X.idx).map ((shiftFunctorAdd (F.obj ⟨X.idx⟩) a b).hom.app X.obj) :=
+  rfl
+
+lemma shiftFunctorAdd_inv_app (a b : A) (X : PairCategory F) :
+    (shiftFunctorAdd (PairCategory F) a b).inv.app X =
+      (incl F X.idx).map ((shiftFunctorAdd (F.obj ⟨X.idx⟩) a b).inv.app X.obj) :=
+  rfl
+
+instance [∀ i : ι, Preadditive (F.obj ⟨i⟩)] [∀ ⦃i j : ι⦄ (h : i ≤ j), (F.transition h).Additive]
+    [∀ (i : ι) (a : A), (shiftFunctor (F.obj ⟨i⟩) a).Additive] (a : A) :
+    (shiftFunctor (PairCategory F) a).Additive :=
+  have : ∀ i, ((shiftFamily F a).functor i).Additive := fun i ↦
+    inferInstanceAs (shiftFunctor (F.obj ⟨i⟩) a).Additive
+  CompatibleFamily.descent_additive _
+
+variable (F) in
+/-- The isomorphisms `j_i(K[a]) ≅ j_i(K)[a]` (identities). -/
+noncomputable def inclShiftIso (i : ι) (a : A) :
+    shiftFunctor (F.obj ⟨i⟩) a ⋙ incl F i ≅ incl F i ⋙ shiftFunctor (PairCategory F) a :=
+  ((shiftFamily F a).inclCompDescentIso i).symm
+
+lemma inclShiftIso_hom_app (i : ι) (a : A) (K : F.obj ⟨i⟩) :
+    (inclShiftIso F i a).hom.app K = 𝟙 _ :=
+  rfl
+
+lemma inclShiftIso_inv_app (i : ι) (a : A) (K : F.obj ⟨i⟩) :
+    (inclShiftIso F i a).inv.app K = 𝟙 _ :=
+  rfl
+
+/-- Blueprint `prop-weil-pbc-common-stage-calculus`: the stage inclusions `j_i` commute with the
+shifts, through the identity comparisons `j_i(K[a]) = j_i(K)[a]`. -/
+noncomputable instance commShiftIncl (i : ι) : (incl F i).CommShift A where
+  commShiftIso a := inclShiftIso F i a
+  commShiftIso_zero := by
+    ext K
+    rw [Functor.CommShift.isoZero_hom_app, inclShiftIso_hom_app]
+    change 𝟙 ((incl F i).obj ((shiftFunctor (F.obj ⟨i⟩) (0 : A)).obj K)) =
+      (incl F i).map ((shiftFunctorZero (F.obj ⟨i⟩) A).hom.app K) ≫
+        (incl F i).map ((shiftFunctorZero (F.obj ⟨i⟩) A).inv.app K)
+    rw [← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id]
+  commShiftIso_add a b := by
+    ext K
+    rw [Functor.CommShift.isoAdd_hom_app, inclShiftIso_hom_app, inclShiftIso_hom_app,
+      inclShiftIso_hom_app]
+    change 𝟙 ((incl F i).obj ((shiftFunctor (F.obj ⟨i⟩) (a + b)).obj K)) =
+      (incl F i).map ((shiftFunctorAdd (F.obj ⟨i⟩) a b).hom.app K) ≫ 𝟙 _ ≫
+        (shiftFunctor (PairCategory F) b).map
+          (𝟙 ((incl F i).obj ((shiftFunctor (F.obj ⟨i⟩) a).obj K))) ≫
+        (incl F i).map ((shiftFunctorAdd (F.obj ⟨i⟩) a b).inv.app K)
+    rw [Functor.map_id, id_comp]
+    erw [id_comp]
+    rw [← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id]
+
+lemma incl_commShiftIso_hom_app (i : ι) (a : A) (K : F.obj ⟨i⟩) :
+    ((incl F i).commShiftIso a).hom.app K = 𝟙 _ :=
+  rfl
+
+lemma incl_commShiftIso_inv_app (i : ι) (a : A) (K : F.obj ⟨i⟩) :
+    ((incl F i).commShiftIso a).inv.app K = 𝟙 _ :=
+  rfl
 
 end CategoryTheory.PairCategory

@@ -64,7 +64,11 @@ instance commShift_mapHomotopyCategoryPlus_unit :
             R.mapHomotopyCategoryPlus ⋙ HomotopyCategory.Plus.ι C ≅ _).inv ≫
         (Functor.associator _ _ _).inv := by
     ext K
-    simp [ObjectProperty.liftCompιIso]
+    simp only [Functor.comp_obj, Functor.id_obj, ObjectProperty.ι_obj, Functor.whiskerRight_app,
+      ObjectProperty.ι_map, NatTrans.comp_app, Functor.leftUnitor_hom_app,
+      Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Functor.associator_inv_app,
+      ObjectProperty.lift_obj_obj, Functor.associator_hom_app, comp_id, id_comp,
+      ObjectProperty.liftCompιIso]
     exact (adj.ι_map_mapHomotopyCategoryPlus_unit_app K).trans (comp_id _).symm
   have : NatTrans.CommShift (Functor.whiskerRight adj.mapHomotopyCategoryPlus.unit
       (HomotopyCategory.Plus.ι C)) ℤ := by

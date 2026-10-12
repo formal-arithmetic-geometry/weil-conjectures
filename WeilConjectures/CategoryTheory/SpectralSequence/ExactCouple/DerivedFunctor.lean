@@ -38,8 +38,8 @@ def dScMap (p q : ℤ) : X.dSc p q ⟶ Y.dSc p q where
   τ₁ := φ.hE (p - s - 2) (q + s + 1)
   τ₂ := φ.hE p q
   τ₃ := φ.hE (p + s + 2) (q - s - 1)
-  comm₁₂ := φ.comm_d _ _ _ _
-  comm₂₃ := φ.comm_d _ _ _ _
+  comm₁₂ := (φ.comm_d (p - s - 2) (q + s + 1) p q).symm
+  comm₂₃ := (φ.comm_d p q (p + s + 2) (q - s - 1)).symm
 
 @[simp]
 lemma dScMap_id (X : ExactCouple C s) (p q : ℤ) : Hom.dScMap (𝟙 X) p q = 𝟙 _ := by
@@ -82,24 +82,40 @@ lemma gCycles_cyclesMap (p q p' q' : ℤ) (hp : p + s = p' := by lia)
   rw [← cancel_mono (Y.dSc p' q').iCycles, assoc, ShortComplex.cyclesMap_i, dScMap_τ₂,
     X.gCycles_i_assoc p q p' q', assoc, Y.gCycles_i p q p' q', φ.comm_g p q p' q']
 
+@[reassoc]
+lemma comm_α' (p q p' q' : ℤ) (hp : p' + 1 = p := by lia) (hq : q + 1 = q' := by lia) :
+    X.α' p q p' q' ≫ φ.hD' p' q' = φ.hD' p q ≫ Y.α' p q p' q' := by
+  rw [← cancel_mono (Y.ι' p' q'), assoc, assoc, hD'_ι', Y.α'_ι' p q p' q',
+    X.α'_ι'_assoc p q p' q', hD'_ι'_assoc, φ.comm_α p q p' q']
+
+@[reassoc]
+lemma comm_f' (p q p' q' : ℤ) (hp : p + 2 = p' := by lia) (hq : q' + 1 = q := by lia) :
+    X.f' p q p' q' ≫ φ.hD' p' q' = φ.hE' p q ≫ Y.f' p q p' q' := by
+  rw [← cancel_mono (Y.ι' p' q'), ← cancel_epi (X.dSc p q).homologyπ]
+  simp only [assoc]
+  rw [hD'_ι', X.π_f'_assoc p q p' q', X.fCycles_ι'_assoc p q p' q',
+    homologyπ_hE'_assoc, Y.π_f'_assoc p q p' q', Y.fCycles_ι' p q p' q',
+    ShortComplex.cyclesMap_i_assoc, dScMap_τ₂, φ.comm_f p q p' q']
+
+@[reassoc]
+lemma comm_g' (p q p' q' : ℤ) (hp : p + (s + 1 : ℕ) = p') (hq : q' + (s + 1 : ℕ) = q) :
+    X.g' p q p' q' hp hq ≫ φ.hE' p' q' = φ.hD' p q ≫ Y.g' p q p' q' hp hq := by
+  have hp' : p + 1 + s = p' := by push_cast at hp; lia
+  have hq' : q' + s = q - 1 := by push_cast at hq; lia
+  rw [← cancel_epi (X.αbar (p + 1) (q - 1) p q rfl (sub_add_cancel q 1)),
+    X.αbar_g'_assoc (p + 1) (q - 1) p q p' q' rfl (sub_add_cancel q 1) hp hq,
+    homologyπ_hE', φ.αbar_hD'_assoc (p + 1) (q - 1) p q rfl (sub_add_cancel q 1),
+    Y.αbar_g' (p + 1) (q - 1) p q p' q' rfl (sub_add_cancel q 1) hp hq,
+    φ.gCycles_cyclesMap_assoc (p + 1) (q - 1) p' q' hp' hq']
+
 /-- The morphism of derived couples induced by a morphism of exact couples. -/
 @[simps]
 noncomputable def derived : X.derived ⟶ Y.derived where
   hD := φ.hD'
   hE := φ.hE'
-  comm_α p q p' q' hp hq := by
-    rw [← cancel_mono (Y.ι' p' q')]
-    simp only [derived_α, assoc, hD'_ι', α'_ι', α'_ι'_assoc, hD'_ι'_assoc]
-    rw [φ.comm_α p q p' q']
-  comm_f p q p' q' hp hq := by
-    rw [← cancel_mono (Y.ι' p' q'), ← cancel_epi (X.dSc p q).homologyπ]
-    simp only [derived_f, assoc, hD'_ι', π_f'_assoc, homologyπ_hE'_assoc]
-    rw [φ.comm_f p q p' q']
-  comm_g p q p' q' hp hq := by
-    rw [← cancel_epi (X.αbar (p + 1) (q - 1) p q rfl (sub_add_cancel q 1))]
-    simp only [derived_g]
-    rw [X.αbar_g'_assoc (p + 1) (q - 1) p q p' q', homologyπ_hE', αbar_hD'_assoc,
-      Y.αbar_g' (p + 1) (q - 1) p q p' q', gCycles_cyclesMap_assoc]
+  comm_α p q p' q' hp hq := φ.comm_α' p q p' q' hp hq
+  comm_f p q p' q' hp hq := φ.comm_f' p q p' q' hp hq
+  comm_g p q p' q' hp hq := φ.comm_g' p q p' q' hp hq
 
 end Hom
 

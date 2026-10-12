@@ -78,7 +78,7 @@ instance : (constructibleSheaf Λ X).IsClosedUnderKernels where
       (kernel.mapIso _ _ eF.symm eG.symm (by simp [hf'])) ≪≫
         (PreservesKernel.iso (ν^*(X)[ModuleCat.{u + 1} Λ]) f').symm
     exact ⟨_, (Etale.constructibleSheaf _ X).prop_kernel f' hF hG,
-      ⟨e.symm ≪≫ IsLimit.conePointUniqueUpToIso (kernelIsKernel f) hk⟩⟩
+      ⟨e.symm ≪≫ IsLimit.conePointUniqueUpToIso (limit.isLimit _) hk⟩⟩
 
 /-- The cokernel of a morphism between constructible pro-étale sheaves is constructible. -/
 instance : (constructibleSheaf Λ X).IsClosedUnderCokernels where
@@ -89,7 +89,7 @@ instance : (constructibleSheaf Λ X).IsClosedUnderCokernels where
       (cokernel.mapIso _ _ eF.symm eG.symm (by simp [hf'])) ≪≫
         (PreservesCokernel.iso (ν^*(X)[ModuleCat.{u + 1} Λ]) f').symm
     exact ⟨_, (Etale.constructibleSheaf _ X).prop_cokernel f' hF hG,
-      ⟨e.symm ≪≫ IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel f) hk⟩⟩
+      ⟨e.symm ≪≫ IsColimit.coconePointUniqueUpToIso (colimit.isColimit _) hk⟩⟩
 
 /-- **`Dᵇc_proét(X, Λ)` is closed under extensions.** In a distinguished triangle
 `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` with `K₁ ≅ ν^* K₁'` and `K₃ ≅ ν^* K₃'` bounded constructible of étale
@@ -107,22 +107,20 @@ instance : (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X).IsTri
     have h₂ : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K₂ :=
       (Etale.DerivedCategory.boundedConstructible _ X).ext_of_isTriangulatedClosed₂ _ hT' h₁ h₃
     have hFT := F.map_distinguished _ hT'
-    obtain ⟨c, hc₁, hc₂⟩ := complete_distinguished_triangle_morphism₂ _ _ hT hFT e₁.inv e₃.inv
-      (by
-        dsimp
-        rw [hf]
-        simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app, Category.comp_id,
-          Iso.inv_hom_id_assoc])
-    have : IsIso c := isIso₂_of_isIso₁₃ (Triangle.homMk _ _ e₁.inv c e₃.inv hc₁ hc₂ (by
-        dsimp
-        rw [hf]
-        simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app, Category.comp_id,
-          Iso.inv_hom_id_assoc])) hT hFT (by dsimp; infer_instance) (by dsimp; infer_instance)
+    have hc : T.mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧' =
+        e₃.inv ≫ F.map f ≫ (F.commShiftIso (1 : ℤ)).hom.app K₁ := by
+      rw [show F.map f = _ from hf]
+      simp only [Category.assoc, Iso.inv_hom_id_app, Iso.inv_hom_id_assoc]
+      exact (Category.comp_id (T.mor₃ ≫ e₁.inv⟦(1 : ℤ)⟧')).symm
+    obtain ⟨c, hc₁, hc₂⟩ := complete_distinguished_triangle_morphism₂ _ _ hT hFT e₁.inv e₃.inv hc
+    have : IsIso c := isIso₂_of_isIso₁₃ (Triangle.homMk _ _ e₁.inv c e₃.inv hc₁ hc₂ hc) hT hFT
+      (inferInstanceAs (IsIso e₁.inv)) (inferInstanceAs (IsIso e₃.inv))
     exact ⟨K₂, h₂, ⟨(asIso c).symm⟩⟩
 
 instance : (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X).IsStableUnderShift ℤ :=
-  ⟨fun n ↦ ⟨fun K ⟨K', h, ⟨e⟩⟩ ↦ ⟨K'⟦n⟧, (Etale.DerivedCategory.boundedConstructible _ X).le_shift
-    n _ h, ⟨(D(ν^*(X)[ModuleCat.{u + 1} Λ]).commShiftIso n).app K' ≪≫ (shiftFunctor _ n).mapIso e⟩⟩⟩⟩
+  ⟨fun n ↦ ⟨fun _ ⟨K', h, ⟨e⟩⟩ ↦ ⟨K'⟦n⟧, (Etale.DerivedCategory.boundedConstructible _ X).le_shift
+    n _ h, ⟨(D(ν^*(X)[ModuleCat.{u + 1} Λ]).commShiftIso n).app K' ≪≫
+      (shiftFunctor _ n).mapIso e⟩⟩⟩⟩
 
 instance : (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X).ContainsZero where
   exists_zero := ⟨_, (D(ν^*(X)[ModuleCat.{u + 1} Λ])).map_isZero (isZero_zero _),
@@ -136,6 +134,7 @@ instance DerivedCategory.boundedConstructible_isTriangulated :
 
 variable {Λ X}
 
+omit [Finite Λ] in
 /-- The homology sheaves of a bounded constructible pro-étale complex are constructible:
 `Hⁿ(ν^* K') ≅ ν^* Hⁿ(K')`, `ν^*` being exact. -/
 lemma DerivedCategory.boundedConstructible.homologyProperty
@@ -189,7 +188,8 @@ instance : (constructibleSheaf Λ X).IsClosedUnderExtensions where
             (_root_.DerivedCategory.isZero_of_isGE _ 0 _ hn)
         · exact (constructibleSheaf Λ X).prop_of_isZero
             (_root_.DerivedCategory.isZero_of_isLE _ 0 _ hn)
-    have h₂ := (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X).ext_of_isTriangulatedClosed₂
+    have h₂ := (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ)
+      X).ext_of_isTriangulatedClosed₂
       _ hS.singleTriangle_distinguished (hQ _ h₁) (hQ _ h₃)
     exact (constructibleSheaf Λ X).prop_of_iso
       ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app S.X₂)

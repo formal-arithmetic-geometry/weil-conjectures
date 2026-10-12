@@ -53,12 +53,13 @@ variable (F : Plus C ⥤ Plus D) [F.CommShift ℤ] [F.IsTriangulated] (K : Plus 
 
 lemma isZero_truncationCouple_D_of_lt (a : ℤ) [K.IsGE a] (p q : ℤ) (hq : q < a) :
     IsZero ((truncationCouple F K).D p q) :=
-  Functor.map_isZero _ (F.map_isZero (isZero_truncLE_obj_of_isGE K a q hq))
+  Functor.map_isZero _
+    (Functor.map_isZero _ (F.map_isZero (isZero_truncLE_obj_of_isGE K a q hq)))
 
 lemma isZero_truncationCouple_E_of_lt (a : ℤ) [K.IsGE a] (p q : ℤ) (hq : q < a) :
     IsZero ((truncationCouple F K).E p q) :=
-  Functor.map_isZero _ (F.map_isZero (Functor.map_isZero (singleFunctor C q)
-    (isZero_homology_of_isGE K a q hq)))
+  Functor.map_isZero _ (Functor.map_isZero _ (F.map_isZero
+    (Functor.map_isZero (singleFunctor C q) (isZero_homology_of_isGE K a q hq))))
 
 /-- If `F` does not lower the cohomological degree, then `E^{p,q} = H^p(F(H^q(K))) = 0` for
 `p < 0`. -/
@@ -92,14 +93,14 @@ noncomputable def truncationCoupleFiltration (n q : ℤ) :
     Subobject (((homologyFunctor D 0).shift n).obj (F.obj K)) :=
   imageSubobject (((homologyFunctor D 0).shift n).map (F.map ((truncLEι C q).app K)))
 
+omit [F.CommShift ℤ] [F.IsTriangulated] in
 lemma truncationCoupleFiltration_mono (n q q' : ℤ) (h : q ≤ q') :
     truncationCoupleFiltration F K n q ≤ truncationCoupleFiltration F K n q' := by
-  dsimp only [truncationCoupleFiltration]
   have : (truncLEι C q).app K = (truncLEMapOfLE C q q' h).app K ≫ (truncLEι C q').app K := by
     apply ι.map_injective
     simp only [Functor.map_comp, ι_map_truncLEι_app, ι_map_truncLEMapOfLE_app]
-    exact (DerivedCategory.truncLEMapOfLE_comp_truncLEι C q q' h).symm
-  rw [this, Functor.map_comp, Functor.map_comp]
+    exact NatTrans.congr_app (DerivedCategory.truncLEMapOfLE_comp_truncLEι C q q' h).symm _
+  simp only [truncationCoupleFiltration, this, Functor.map_comp]
   exact imageSubobject_comp_le _ _
 
 end
@@ -118,13 +119,23 @@ lemma truncationCoupleMap_hD_comp_abutmentMap (p q : ℤ) :
         ((homologyFunctor D 0).shift (p + q)).map (τ.app K) := by
   simp only [truncationCoupleMap_hD, truncationCoupleAbutmentMap, ← Functor.map_comp,
     τ.naturality]
+  rfl
 
 /-- The map `H^n(τ_K)` on abutments sends the `q`-th step of the filtration of `H^n(F₁ K)` into
 the `q`-th step of the filtration of `H^n(F₂ K)`. -/
+omit [F₁.CommShift ℤ] [F₁.IsTriangulated] [F₂.CommShift ℤ] [F₂.IsTriangulated]
+  [NatTrans.CommShift τ ℤ] in
 lemma imageSubobject_truncationCoupleFiltration_le (n q : ℤ) :
     imageSubobject (((homologyFunctor D 0).shift n).map (F₁.map ((truncLEι C q).app K)) ≫
       ((homologyFunctor D 0).shift n).map (τ.app K)) ≤ truncationCoupleFiltration F₂ K n q := by
-  rw [← Functor.map_comp, ← τ.naturality, Functor.map_comp]
+  have e : ((homologyFunctor D 0).shift n).map (F₁.map ((truncLEι C q).app K)) ≫
+      ((homologyFunctor D 0).shift n).map (τ.app K) =
+      ((homologyFunctor D 0).shift n).map (τ.app ((truncLE C q).obj K)) ≫
+        ((homologyFunctor D 0).shift n).map (F₂.map ((truncLEι C q).app K)) := by
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    congr 1
+    exact τ.naturality _
+  rw [e]
   exact imageSubobject_comp_le _ _
 
 end

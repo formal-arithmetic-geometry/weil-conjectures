@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.Embedding.TruncLEHomology
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.Algebra.Homology.SingleHomology
 public import Mathlib.Algebra.Homology.QuasiIso
+public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplexTrunc
 
 /-!
 # One step of the canonical truncation of a cochain complex
@@ -67,33 +68,15 @@ end Cohomology
 section Inclusion
 
 variable (K L M : CochainComplex C ℤ) (φ : K ⟶ L) (ψ : L ⟶ M)
-
-instance (n : ℤ) : Mono (K.ιTruncLE n) := by
-  dsimp only [CochainComplex.ιTruncLE]
-  infer_instance
-
-/-- For `a ≤ b`, the inclusion `τ_{≤ a} K ⟶ τ_{≤ b} K` of canonical truncations. -/
-noncomputable def truncLEMapOfLE (a b : ℤ) (h : a ≤ b) : K.truncLE a ⟶ K.truncLE b :=
-  have : (K.truncLE a).IsStrictlyLE b := (K.truncLE a).isStrictlyLE_of_le a b h
-  inv ((K.truncLE a).ιTruncLE b) ≫ truncLEMap (K.ιTruncLE a) b
-
+/-- The inclusion `τ_{≤ a} K ⟶ τ_{≤ b} K` (`CochainComplex.truncLEMapOfLE`) commutes with the
+inclusions into `K`. -/
 @[reassoc (attr := simp)]
 lemma truncLEMapOfLE_ιTruncLE (a b : ℤ) (h : a ≤ b) :
-    K.truncLEMapOfLE a b h ≫ K.ιTruncLE b = K.ιTruncLE a := by
-  have : (K.truncLE a).IsStrictlyLE b := (K.truncLE a).isStrictlyLE_of_le a b h
-  simp only [truncLEMapOfLE, assoc]
-  rw [CochainComplex.ιTruncLE_naturality, IsIso.inv_hom_id_assoc]
+    K.truncLEMapOfLE a b h ≫ K.ιTruncLE b = K.ιTruncLE a :=
+  K.truncLEMapOfLE_ι a b h
 
 instance (a b : ℤ) (h : a ≤ b) : Mono (K.truncLEMapOfLE a b h) :=
   mono_of_mono_fac (K.truncLEMapOfLE_ιTruncLE a b h)
-
-variable {K L} in
-@[reassoc (attr := simp)]
-lemma truncLEMapOfLE_naturality (a b : ℤ) (h : a ≤ b) :
-    truncLEMap φ a ≫ L.truncLEMapOfLE a b h = K.truncLEMapOfLE a b h ≫ truncLEMap φ b := by
-  rw [← cancel_mono (L.ιTruncLE b), assoc, truncLEMapOfLE_ιTruncLE,
-    CochainComplex.ιTruncLE_naturality, assoc, CochainComplex.ιTruncLE_naturality,
-    truncLEMapOfLE_ιTruncLE_assoc]
 
 end Inclusion
 
