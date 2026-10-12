@@ -25,6 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- A point unramified in a locally finite type morphism is isolated in its fibre.
 
 Source: Stacks Project, Morphisms, Definition 02G4 and Lemma 02G7.
@@ -51,6 +52,33 @@ theorem unramified_fibre_point_isolated
     IsOpen ({f.asFiber x} : Set (f.fiber (f x))) ∧
       (∀ ξ : f.fiber (f x), f.fiberι (f x) ξ = x → ξ = f.asFiber x) ∧
       IsOpen ({⟨x, rfl⟩} : Set (f ⁻¹' {f x})) := by
-  sorry
+  obtain ⟨U, hxU, hU⟩ := h_unramified
+  let g := S.fromSpecResidueField (f x)
+  let f' := U.ι ≫ f
+  have hbase := unramified_baseChange_restrict_open f' hU g
+  have : LocallyOfFiniteType (pullback.snd f' g) := hbase.1
+  have : IsOpenImmersion (pullback.diagonal (pullback.snd f' g)) := hbase.2.1
+  have : DiscreteTopology (pullback f' g : Scheme.{u}) :=
+    discreteTopology_of_unramified_over_field (pullback.snd f' g)
+  let j : pullback f' g ⟶ f.fiber (f x) :=
+    pullback.map f' g f g U.ι (𝟙 _) (𝟙 S) (by simp [f']) (by simp)
+  have : IsOpenImmersion j := by dsimp [j]; infer_instance
+  have hxj : f.asFiber x ∈ Set.range j := by
+    change f.asFiber x ∈ Set.range
+      (pullback.map f' g f g U.ι (𝟙 _) (𝟙 S) (by simp [f']) (by simp))
+    rw [Scheme.Pullback.range_map]
+    constructor
+    · exact ⟨⟨x, hxU⟩, (f.fiberι_asFiber x).symm⟩
+    · exact ⟨_, rfl⟩
+  obtain ⟨ξ', hξ'⟩ := hxj
+  have hopen : IsOpen ({f.asFiber x} : Set (f.fiber (f x))) := by
+    simpa [Set.image_singleton, hξ'] using
+      j.isOpenEmbedding.isOpenMap {ξ'} (isOpen_discrete _)
+  refine ⟨hopen, ?_, ?_⟩
+  · intro ξ hξ
+    apply (f.fiberι (f x)).isEmbedding.injective
+    rw [hξ, f.fiberι_asFiber]
+  · rw [← (f.fiberHomeo (f x)).symm.isOpen_image]
+    simpa [Scheme.Hom.asFiber] using hopen
 
 end AlgebraicGeometry
