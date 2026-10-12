@@ -1,7 +1,7 @@
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import Sheaf.AlgebraicGeometry.Thickening
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 
 /-!
 # Base change and restriction of unramified morphisms
@@ -30,9 +30,8 @@ Proof steps from the DAG:
    lem-weil-pbc-lft-formally-unramified-unramified.
 4. The restriction is locally of finite type by lem-weil-pbc-lft-affine-pairs:
    affine opens of the open subschemes give the same section ring maps as in X and S.
-5. For a first-order thickening, two lifts into U give two lifts into X. They agree
-   by formal unramifiedness of f (def-weil-pbc-formally-unramified-morphism), and hence
-   agree in U since its inclusion is monic (lem-weil-pbc-open-immersion-monomorphism).
+5. Formal unramifiedness is local at source and target by its ring-map property.
+   Apply Mathlib's IsZariskiLocalAtSource.resLE to restrict f to U and V.
 6. Local finite type and formal unramifiedness again imply unramifiedness by
    lem-weil-pbc-lft-formally-unramified-unramified. -/
 theorem unramified_baseChange_restrict_open
@@ -44,6 +43,17 @@ theorem unramified_baseChange_restrict_open
       (∀ (U : X.Opens) (V : S.Opens) (hUV : U ≤ f ⁻¹ᵁ V),
         LocallyOfFiniteType (f.resLE V U hUV) ∧
           IsOpenImmersion (pullback.diagonal (f.resLE V U hUV))) := by
-  sorry
+  let : LocallyOfFiniteType f := hf.1
+  let : IsOpenImmersion (pullback.diagonal f) := hf.2
+  have hfu : FormallyUnramified f := inferInstance
+  let : LocallyOfFiniteType (pullback.snd f g) := inferInstance
+  let : FormallyUnramified (pullback.snd f g) :=
+    MorphismProperty.pullback_snd f g hfu
+  refine ⟨inferInstance, inferInstance, ?_⟩
+  intro U V hUV
+  let : LocallyOfFiniteType (f.resLE V U hUV) := inferInstance
+  let : FormallyUnramified (f.resLE V U hUV) :=
+    IsZariskiLocalAtSource.resLE hUV hfu
+  exact ⟨inferInstance, inferInstance⟩
 
 end AlgebraicGeometry

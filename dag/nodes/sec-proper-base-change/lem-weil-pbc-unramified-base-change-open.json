@@ -79,18 +79,16 @@
    }
   },
   {
-   "text": "*(2), formally unramified.* $f$ is formally unramified by [lem-weil-pbc-unramified-formally-unramified]. Let $T\\subset T'$ be a first order thickening of affine schemes over $V$ [def-sbc-first-order-thickening], with closed immersion $i:T\\to T'$ and structure morphism $b:T'\\to V$, let $a:T\\to U$ with $f|_U\\circ a=b\\circ i$, and let $a'_1,a'_2:T'\\to U$ with $f|_U\\circ a'_\\nu=b$ and $a'_\\nu\\circ i=a$ ($\\nu=1,2$). Via $k\\circ b:T'\\to S$ the same $T\\subset T'$ is a first order thickening of affine schemes over $S$; the morphism $j\\circ a:T\\to X$ is over $S$ ($f\\circ j\\circ a=k\\circ f|_U\\circ a=k\\circ b\\circ i$), and $j\\circ a'_1$, $j\\circ a'_2$ are morphisms $T'\\to X$ over $S$ ($f\\circ j\\circ a'_\\nu=k\\circ f|_U\\circ a'_\\nu=k\\circ b$) with $(j\\circ a'_\\nu)\\circ i=j\\circ a$. By the definition of formally unramified [def-weil-pbc-formally-unramified-morphism] applied to $f$, $j\\circ a'_1=j\\circ a'_2$, and since the open immersion $j$ is a monomorphism [lem-weil-pbc-open-immersion-monomorphism], $a'_1=a'_2$. So $f|_U:U\\to V$ is formally unramified [def-weil-pbc-formally-unramified-morphism].",
+   "text": "*(2), formally unramified.* The Mathlib instance HasRingHomProperty for FormallyUnramified expresses [def-weil-pbc-formally-unramified-morphism] by the local ring-map property. Apply IsZariskiLocalAtSource.resLE to the formally unramified morphism obtained from [lem-weil-pbc-unramified-formally-unramified]. This restricts at the target and then precomposes with the open inclusion at the source, and proves formal unramifiedness of the restriction. This is the locality argument for the open restriction clause; no infinitesimal thickening or monomorphism cancellation is needed.",
    "uses": [
-    "lem-weil-pbc-unramified-formally-unramified",
-    "def-sbc-first-order-thickening",
     "def-weil-pbc-formally-unramified-morphism",
-    "lem-weil-pbc-open-immersion-monomorphism",
+    "lem-weil-pbc-unramified-formally-unramified",
     "def-weil-open-immersion"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Definition 02H8 (definition-formally-unramified, line 798); argument written by the agent (Stacks proves the restriction clause of 02G6 through the locality of unramified ring maps instead)"
+    "document": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+    "place": "IsZariskiLocalAtSource.resLE (Basic.lean:314); HasRingHomProperty instance (FormallyUnramified.lean:66), providing source and target locality"
    }
   },
   {
@@ -114,14 +112,12 @@
   "lem-weil-pbc-formally-unramified-base-change",
   "lem-weil-pbc-lft-formally-unramified-unramified",
   "def-weil-open-immersion",
-  "lem-weil-pbc-lft-affine-pairs",
-  "def-sbc-first-order-thickening",
-  "lem-weil-pbc-open-immersion-monomorphism"
+  "lem-weil-pbc-lft-affine-pairs"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Written by the agent along More on Morphisms, Lemma 02HE (unramified = locally of finite type + formally unramified), Lemma 02HB and Definition 02H8, because the DAG defines unramified by the open-immersion diagonal (Morphisms 02GE); Stacks' own proofs of Morphisms 02GA and 02G6 (morphisms.tex lines 7691-7697, 7724-7730) go through the locality and base change of unramified ring maps (morphisms.tex lemma-locally-P, lemma-base-change-type-P and Algebra, lemma-unramified), which the DAG does not carry"
+  "by": "W2 stage 3",
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+  "place": "Mathlib implements the original locally-finite-type plus formally-unramified route; restrictions use IsZariskiLocalAtSource.resLE instead of the infinitesimal lifting argument. Base change uses MorphismProperty.pullback_snd, and isOpenImmersion_diagonal concludes both parts. The blueprint unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -204,5 +200,15 @@
   "group": "E1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fd46c",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T063525-L-3162425",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature to its node, proof to Mathlib and DAG dependencies, and documented import change to all four users; compilation is clean and axioms are only propext, Classical.choice, Quot.sound."
  }
 }
