@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-coherent-integral-generic-ideal-map-mono",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-integral-generic-ideal-map",
+   "place": "decomposition of proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Injectivity of the integral generic ideal map",
+ "statement": "For an integral Noetherian scheme Z, coherent module G, coherent ideal I, and a coherent finite coproduct of copies of I, every morphism χ from that coproduct to G whose generic stalk map is an isomorphism is a monomorphism.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Stacks Project Tag 01YE, integral case"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Take the coherent kernel of chi. Exactness of module stalks and the generic isomorphism show that its generic stalk is zero.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Embed the kernel into the finite coproduct of copies of I and project to each coordinate. Each coordinate image is a quasi-coherent ideal with zero generic stalk, hence vanishes on an integral scheme by the generic-stalk ideal criterion. Therefore every kernel section has all coordinates zero and the kernel is zero, so chi is mono.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent generic ideal map",
+   "date": "2026-10-13",
+   "results": "none",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso genericPoint Mono ideal sheaf",
+   "date": "2026-10-13",
+   "results": "none",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent ideal sum generic stalk isomorphism",
+   "date": "2026-10-13",
+   "results": "none",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealMap",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealMono",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentIntegralGenericIdealMono.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.mono_of_coherent_ideal_sum_generic_iso",
+  "statement": "theorem mono_of_coherent_ideal_sum_generic_iso (Z : Scheme.{w}) [IsNoetherian Z]\n    [IsIntegral Z] (G : Z.Modules) (hG : RingedSpace.IsCoherent Z.toRingedSpace G)\n    (r : ℕ) (I : Z.IdealSheafData)\n    (χ : (∐ fun _ : Fin r => I.toModules) ⟶ G)\n    (hI : RingedSpace.IsCoherent Z.toRingedSpace I.toModules)\n    (hSum : RingedSpace.IsCoherent Z.toRingedSpace (∐ fun _ : Fin r => I.toModules))\n    (hχ : IsIso ((RingedSpace.moduleStalkFunctor Z.toRingedSpace (genericPoint Z)).map χ)) :\n    Mono χ",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261012T225312-L-1806437",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261012T225312-L-1806437",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

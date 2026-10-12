@@ -21,6 +21,8 @@ import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealConstruction
+import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealMono
 
 /-! # An ideal-sum lattice in a coherent module on an integral scheme
 
@@ -67,6 +69,10 @@ theorem coherent_integral_generic_ideal_map (Z : Scheme.{w}) [IsNoetherian Z]
       RingedSpace.IsCoherent Z.toRingedSpace (∐ fun _ : Fin r => I.toModules) ∧
       ∃ (χ : (∐ fun _ : Fin r => I.toModules) ⟶ G), Mono χ ∧
         IsIso ((RingedSpace.moduleStalkFunctor Z.toRingedSpace (genericPoint Z)).map χ)
-    := by sorry
+    := by
+  obtain ⟨r, I, hI, hSum, χ, hχ⟩ :=
+    coherent_integral_generic_ideal_construction Z G hG
+  have hmono := mono_of_coherent_ideal_sum_generic_iso Z G hG r I χ hI hSum hχ
+  exact ⟨r, I, hI, hSum, χ, hmono, hχ⟩
 
 end AlgebraicGeometry.Scheme.Modules
