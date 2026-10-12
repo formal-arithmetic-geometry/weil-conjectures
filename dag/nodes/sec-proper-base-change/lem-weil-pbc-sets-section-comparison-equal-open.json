@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-sets-section-comparison-equal-open",
+ "kind": "statement",
+ "title": "Agreement open for canonical etale inverse-image section comparisons",
+ "statement": "Let R and S be schemes [def-pc-scheme], f:S\\to R a morphism, G a sheaf of sets on the small etale site of R [def-weil-pbc-etale-sheaf-of-sets], and V an etale R-scheme [def-weil-pbc-etale-site]. Let s,t be sections of f^{-1}G over V\\times_R S [def-pc-fibre-product]. There is an open U of V\\times_R S such that for every scheme T and commuting triangle h:T\\to S, k:T\\to R with h followed by f equal to k, the canonical comparisons [def-weil-pbc-sets-section-comparison] of s and t agree if and only if the inverse image of U under (id_V,h):V\\times_R T\\to V\\times_R S is the whole scheme. No compactness, affineness or limit hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites.tex",
+  "place": "Tag 09XM (lemma-sections-equal) and Tags 03CB, 03CC: agreement opens with inverse-image composition and units; read at https://stacks.math.columbia.edu/tag/09XM"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sets-section-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply existsUnique_etaleSections_equal_open to the sheaf f inverse image G on S and the etale object V times_R S, with the sections s and t. This uniquely specifies an open U of V times_R S by its universal factorization property for arbitrary scheme maps.",
+   "uses": [
+    "lem-weil-pbc-etale-sections-equal-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For h:T -> S with h followed by f equal to k, let P=V times_R T, Q=V times_R S, and p:P -> Q be the pullback map (id_V,h). Write q:Q -> S and qprime:P -> T for the etale second projections. Evaluation of f inverse image G on Q equals global sections of q inverse image (f inverse image G), because inverse image along an etale map is restriction. Similarly for P and qprime. The equation p followed by q = qprime followed by h, the naturality of units in etale objects, and the composition unit equation identify restriction of s,t along p with their images under etaleSetSectionComparison h f k hk G V, after these evaluation isomorphisms. This is the two paths around the cartesian square; the iterated fibre-product comparison is the one whose projections are id_V and h. Isomorphisms reflect as well as preserve equality. Thus their comparison images agree if and only if the sections in the universal factorization criterion of U agree.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the factorization criterion of U to p. A scheme map factors through an open immersion if and only if all its points lie in the open (use the open immersion lifting property). This is equivalent to p inverse image U = top. These statements hold for an empty domain as well.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-sections-equal-open",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A2",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites.tex",
+  "place": "Tag 09XM (lemma-sections-equal) and Tags 03CB, 03CC: agreement opens with inverse-image composition and units; read at https://stacks.math.columbia.edu/tag/09XM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The equality locus of two sections of an etale sheaf is an open subscheme, and pulls back under every scheme morphism",
+   "results": "Service unavailable: Internal Server Error. No verdict from this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where two sections of an etale sheaf agree is an open subscheme compatible with pullback",
+   "results": "8 hits: Algebra.basicOpen_subset_etaleLocus_iff, Algebra.isOpen_etaleLocus, Algebra.basicOpen_subset_etaleLocus_iff_etale, Scheme.Etale.forget, Scheme.instCategoryEtale, Scheme.etaleTopology, Algebra.mem_etaleLocus_iff, LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_open. None gives the section-comparison criterion.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "equal_open|equal.*locus|section.*comparison",
+   "results": "22 Mathlib hits concern algebraic equalizers, separated maps and generic limit comparisons. Repository search finds existsUnique_etaleSections_equal_open, which uses restrictions along arbitrary maps rather than the canonical commuting-triangle comparison. Its universal property is the starting point, not duplicated. PullbackSections_comparison is for abelian sheaves, not sets.",
+   "date": "2026-10-12",
+   "verdict": "Existing agreement-open theorem used in the proof plan; missing compatibility for these specified set-valued comparison maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineSectionSameStageEquality",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Degree-zero continuity: equality detection via the agreement open and eventual containment in an open.",
+   "via": [
+    "lem-weil-pbc-affine-section-same-stage-equality",
+    "lem-weil-pbc-affine-section-cocone-colimit",
+    "lem-weil-pbc-sets-section-affine-eventual-equality",
+    "lem-weil-pbc-sets-section-eventual-equality",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonEqualOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSectionComparisonEqualOpen.lean",
+  "declaration": "AlgebraicGeometry.etaleSetSectionComparison_equal_open",
+  "statement": "theorem etaleSetSectionComparison_equal_open\n    {R S : Scheme.{u}} (f : S ⟶ R)\n    (G : Sheaf R.smallEtaleTopology (Type (u + 1))) (V : R.Etale)\n    (s t : ((Scheme.etaleSetPullback f).obj G).obj.obj\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V))) :\n    ∃ U : (pullback V.hom f).Opens,\n      ∀ (T : Scheme.{u}) (h : T ⟶ S) (k : T ⟶ R) (hk : h ≫ f = k),\n        etaleSetSectionComparison h f k hk G V s =\n          etaleSetSectionComparison h f k hk G V t ↔\n        (pullback.map V.hom k V.hom f (𝟙 V.left) h (𝟙 R)\n          (by simp) (by simpa using hk.symm)) ⁻¹ᵁ U = ⊤",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T135214-L-1654209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T135214-L-1654209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -14,49 +14,38 @@
  ],
  "proof": [
   {
-   "text": "Restrict to the cofinal directed upper tail. Apply the affine etale limit-site presentation. Transport inverse-image sheaves along the restriction equivalences and unit-compatible comparisons. Composition identifies their limit inverse images with a constant connected system.",
+   "text": "Restrict the scheme diagram to Over(op i0); its forgetful functor is initial, so the whiskered cone remains limiting. Form E(j)=W0 times_{D(i0)} D(j), with pullback-map transitions, and its cone e with apex W0 times_{D(i0)} c.pt. The natural second projections to the whiskered diagram are cartesian; the connected-pullback limit theorem gives IsLimit e. Quasi-compactness of W0.hom makes every E(j) compact; pullback stability makes every E transition affine. These constructions and their coherence are proved explicitly in Lean from Mathlib and isPullback_pullback_map.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
-    "lem-weil-pbc-site-equivalence-sheaf-transport",
-    "lem-weil-pbc-colimit-constant-connected-diagram"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the varying-site section formula of Sites 09YN on the base changes of W_0. Its map compatibility identifies the images of s and t with their canonical limit comparisons. Equality of those images makes the representatives equal in the filtered colimit of sets. The current fixed-site ColimitSiteSections interface alone does not supply these varying-site identifications.",
-   "uses": [
-    "lem-weil-pbc-colimit-of-sites-sections",
-    "lem-weil-pbc-sets-section-comparison-laws"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The elementwise equality criterion gives a common later stage and two arrows out of j. Thinness of the opposite of Over of a preorder identifies the arrows. Thus their transition maps agree, giving the conclusion with one arrow. Empty affine objects have singleton sections, so the identity arrow handles this edge case.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "def-pc-fibre-product"
    ],
    "elementary": true
+  },
+  {
+   "text": "Apply the canonical comparison agreement-open theorem to f=D.map j.hom, G,W0,s,t, obtaining U in E(j). The limit cocone equality is exactly its criterion for h=c.pi.app j.left and k=c.pi.app i0; hence e.pi.app j inverse image U is top.",
+   "uses": [
+    "lem-weil-pbc-sets-section-comparison-equal-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_map_eq_top to E,e and its proved limit witness to obtain k and one arrow a:k -> j with E.map a inverse image U equal to top. The reverse direction of the same agreement-open criterion identifies this with equality under the canonical transition of etaleStageSectionDiagram. No elementwise filtered-colimit theorem is needed.",
+   "uses": [
+    "lem-weil-pbc-limit-image-contained-in-open",
+    "lem-weil-pbc-sets-section-comparison-equal-open"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-colimit-of-sites-sections",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
-  "lem-weil-pbc-sets-section-comparison-laws",
-  "lem-weil-pbc-site-equivalence-sheaf-transport"
+  "def-pc-fibre-product",
+  "lem-weil-pbc-limit-image-contained-in-open",
+  "lem-weil-pbc-sets-section-comparison-equal-open"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "N2",
-  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites.tex",
-  "place": "09YQ affine degree-zero argument and equality part of the 09YN section formula"
+  "group": "A2",
+  "document": "literature/stacks-project/etale-cohomology.tex; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+  "place": "Tag 09XM agreement-open alternative to the affine-site proof; exists_map_eq_top lines 180-198; connected pullback limits. The new remaining statement is a generic non-limit compatibility lemma."
  },
  "mathlib_searches": [
   {
@@ -130,9 +119,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T110313-L-619524",
+  "landing": "20261012T135214-L-1654209",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

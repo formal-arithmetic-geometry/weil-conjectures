@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-limit-image-contained-in-open",
+ "kind": "statement",
+ "title": "An open containing a limit image contains an eventual stage image",
+ "statement": "Let J be a small cofiltered category, D:J\\to Scheme a diagram [def-pc-scheme], c a limiting cone [def-weil-pbc-category-colimit], every D(j) quasi-compact and every transition affine [pqf-def-affine-morphism]. Fix j and an open U of D(j). If the inverse image of U along the projection c.pt\\to D(j) is the whole scheme, then there are k and a:k\\to j such that the inverse image of U along D(a) is the whole scheme. Quasi-separatedness of the stages and quasi-compactness of U are not required.",
+ "source": {
+  "document": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+  "place": "AlgebraicGeometry.exists_map_eq_top, lines 180-198; compact closed-complement argument using Stacks Tag 01Z3"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-category-colimit",
+  "pqf-def-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib AlgebraicGeometry.exists_map_eq_top to D,c,hc and U. It states exactly that a whole inverse image under a limit projection becomes whole under a single transition into the same stage. Its proof applies exists_mem_of_isClosed_of_nonempty to the compact closed complements of the inverse images, deriving a limit point outside U if all those complements are nonempty.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A2",
+  "document": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+  "place": "exists_map_eq_top, lines 180-198"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If the inverse image of an open under a projection of a cofiltered limit of compact schemes is whole, then some transition has whole inverse image",
+   "results": "Service unavailable: Internal Server Error. No verdict from this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.exists_map_eq_top",
+   "results": "1 hit, AlgebraicGeometry.exists_map_eq_top, Mathlib.AlgebraicGeometry.AffineTransitionLimit. Signature read: cofiltered index, compact stages, affine transitions, limiting cone, open U, whole inverse image.",
+   "date": "2026-10-12",
+   "verdict": "Exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma exists_map_eq_top",
+   "results": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:182. Read lines 180-198.",
+   "date": "2026-10-12",
+   "verdict": "Exact match."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.exists_map_eq_top",
+  "file": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+  "how": "Apply directly to the specified cone, open and inverse-image equality; no extra hypothesis."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineSectionSameStageEquality",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Degree-zero continuity: equality detection via the agreement open and eventual containment in an open.",
+   "via": [
+    "lem-weil-pbc-affine-section-same-stage-equality",
+    "lem-weil-pbc-affine-section-cocone-colimit",
+    "lem-weil-pbc-sets-section-affine-eventual-equality",
+    "lem-weil-pbc-sets-section-eventual-equality",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.AlgebraicGeometry.AffineTransitionLimit",
+  "declaration": "AlgebraicGeometry.exists_map_eq_top",
+  "statement": "lemma exists_map_eq_top\n    [IsCofiltered I]\n    [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)]\n    [∀ i, CompactSpace (D.obj i)]\n    {i : I} (U : (D.obj i).Opens) (hU : c.π.app i ⁻¹ᵁ U = ⊤) :\n    ∃ (j : I) (fji : j ⟶ i), D.map fji ⁻¹ᵁ U = ⊤",
+  "branch": "mathlib",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T135214-L-1654209",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T135214-L-1654209",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
