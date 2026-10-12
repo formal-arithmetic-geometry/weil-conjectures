@@ -7,16 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
-import Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.CategoryTheory.CohomologyColimitSites
-import Sheaf.CategoryTheory.ColimitSites
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
+import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyEventualVanishing
 import Sheaf.AlgebraicGeometry.CompatiblePullbackSheafSystem
 import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Filtered.Connected
@@ -106,7 +98,35 @@ theorem nonempty_isColimit_etale_cohomology_of_isLimit
       (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)) :
     Nonempty (IsColimit B) := by
-  sorry
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
+  have hlift := etale_limit_cohomology_class_descent
+    D c hc F φ hidentity hcomposition G eG hG L hL p H eH hH B eB hB
+  have hzero := etale_limit_cohomology_eventual_vanishing
+    D c hc F φ hidentity hcomposition G eG hG L hL p H eH hH B eB hB
+  have hiso : IsIso (colimit.desc H B) := by
+    apply (ConcreteCategory.isIso_iff_bijective (colimit.desc H B)).2
+    constructor
+    · apply (injective_iff_map_eq_zero (colimit.desc H B).hom).2
+      intro z hz
+      obtain ⟨i, x, rfl⟩ := Concrete.colimit_exists_rep H z
+      have hx : (B.ι.app i).hom x = 0 := by
+        change (colimit.ι H i ≫ colimit.desc H B).hom x = 0 at hz
+        rwa [colimit.ι_desc] at hz
+      obtain ⟨j, f, hf⟩ := hzero i x hx
+      calc
+        (colimit.ι H i).hom x = (colimit.ι H j).hom ((H.map f).hom x) :=
+          (colimit.w_apply H f x).symm
+        _ = 0 := by rw [hf, map_zero]
+    · intro y
+      obtain ⟨i, x, hx⟩ := hlift y
+      refine ⟨(colimit.ι H i).hom x, ?_⟩
+      change (colimit.ι H i ≫ colimit.desc H B).hom x = y
+      rw [colimit.ι_desc]
+      exact hx
+  have : IsIso ((colimit.isColimit H).desc B) := hiso
+  exact ⟨(colimit.isColimit H).ofPointIso⟩
+
 
 private theorem continuity_constant_pullback
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
