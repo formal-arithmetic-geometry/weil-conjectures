@@ -6,6 +6,7 @@ Authors: SHEAF worker M2
 module
 
 public import Sheaf.FieldTheory.BrauerScalarDefect
+import Sheaf.FieldTheory.TensorOppositeMatrixLifts
 
 /-!
 # Tensor lifts with the quotient scalar defect
@@ -57,6 +58,31 @@ theorem exists_tensor_opposite_scalarDefect_lifts (K : Type u) [Field K]
       (∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) =
         Matrix.GeneralLinearGroup.scalar (Fin n)
           (galoisUnitsCocycleValue K z g h / galoisUnitsCocycleValue K w g h) *
-            b (g * h)) := by sorry
+            b (g * h))  := by
+  obtain ⟨n, hn, eA, a, hla, z, hz, ha, hda⟩ := hx
+  obtain ⟨m, hm, eB, b, hlb, w, hw, hb, hdb⟩ := hy
+  obtain ⟨e, he⟩ := exists_tensor_opposite_matrix_conjugation K A B n m eA eB a b ha hb
+  refine ⟨n * m, Nat.mul_ne_zero hn hm, e,
+    fun g ↦ tensorOppositeMatrixLift (a g) (b g), z, w, ?_, hz, hw, he, ?_⟩
+  · exact hla.comp₂ hlb tensorOppositeMatrixLift
+  · intro g h
+    change tensorOppositeMatrixLift (a g) (b g) *
+      Matrix.GeneralLinearGroup.map g.toRingHom (tensorOppositeMatrixLift (a h) (b h)) = _
+    obtain ⟨hmap, hmul, hscalar⟩ :=
+      tensorOppositeMatrixLift_properties g.toRingHom (a h) (a h) (b h) (b h) 1 1
+    have hmul' := (tensorOppositeMatrixLift_properties (R := SeparableClosure K)
+      (S := SeparableClosure K)
+      (RingHom.id _) (a g) (Matrix.GeneralLinearGroup.map g.toRingHom (a h))
+        (b g) (Matrix.GeneralLinearGroup.map g.toRingHom (b h)) 1 1).2.1
+    rw [← hmap, ← hmul', hda, hdb]
+    obtain ⟨_, hmul2, hscalar2⟩ :=
+      tensorOppositeMatrixLift_properties (R := SeparableClosure K) (S := SeparableClosure K)
+        (RingHom.id _) (Matrix.GeneralLinearGroup.scalar (Fin n)
+          (galoisUnitsCocycleValue K z g h)) (a (g * h))
+        (Matrix.GeneralLinearGroup.scalar (Fin m)
+          (galoisUnitsCocycleValue K w g h)) (b (g * h))
+        (galoisUnitsCocycleValue K z g h) (galoisUnitsCocycleValue K w g h)
+    rw [hmul2, hscalar2]
+
 
 end Field

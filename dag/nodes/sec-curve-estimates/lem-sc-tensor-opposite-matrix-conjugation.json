@@ -1,0 +1,106 @@
+{
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7, tensor computation"
+ },
+ "stmt_deps": [
+  "def-sc-brauer-scalar-defect"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.BrauerScalarDefectTensorLifts",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-scalar-defect-tensor-lifts",
+   "place": "tensor lift construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor opposite matrix conjugation",
+   "results": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kronecker product invertible matrices",
+   "results": "Matrix.GeneralLinearGroup.kronecker",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor opposite matrix reindex",
+   "results": "Mathlib Matrix Kronecker and Reindex",
+   "date": "2026-10-13"
+  }
+ ],
+ "id": "lem-sc-tensor-opposite-matrix-conjugation",
+ "kind": "statement",
+ "title": "Tensor opposite matrix conjugation splitting",
+ "statement": "Given splittings of scalar extensions of central simple algebras A and B and their matrix conjugation lifts, the scalar extension of A tensor B opposite has a matrix splitting of size n*m whose conjugation lift is the Kronecker product with inverse transpose.",
+ "proof": [
+  {
+   "text": "Commute scalar extension and opposite algebra with the tensor product, apply the two splittings, transpose the opposite factor, and use the Kronecker algebra equivalence; verify on pure tensors and extend by bilinearity.",
+   "uses": [
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-brauer-scalar-defect"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.TensorOppositeMatrixLifts",
+  "file": "lean/Sheaf/FieldTheory/TensorOppositeMatrixLifts.lean",
+  "declaration": "Field.exists_tensor_opposite_matrix_conjugation",
+  "statement": "theorem exists_tensor_opposite_matrix_conjugation (K : Type u) [Field K] (A B : CSA.{u, u} K) (n m : ℕ) (eA : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K] Matrix (Fin n) (Fin n) (SeparableClosure K)) (eB : (SeparableClosure K ⊗[K] B) ≃ₐ[SeparableClosure K] Matrix (Fin m) (Fin m) (SeparableClosure K)) (a : Gal(SeparableClosure K/K) → Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K)) (b : Gal(SeparableClosure K/K) → Matrix.GeneralLinearGroup (Fin m) (SeparableClosure K)) (ha : ∀ (g : Gal(SeparableClosure K/K)) (v : A), (eA (1 ⊗ₜ[K] v)).map g = ((a g)⁻¹).val * eA (1 ⊗ₜ[K] v) * (a g).val) (hb : ∀ (g : Gal(SeparableClosure K/K)) (v : B), (eB (1 ⊗ₜ[K] v)).map g = ((b g)⁻¹).val * eB (1 ⊗ₜ[K] v) * (b g).val) : ∃ e : (SeparableClosure K ⊗[K] (A ⊗[K] Bᵐᵒᵖ)) ≃ₐ[SeparableClosure K] Matrix (Fin (n * m)) (Fin (n * m)) (SeparableClosure K), ∀ (g : Gal(SeparableClosure K/K)) (v : A ⊗[K] Bᵐᵒᵖ), (e (1 ⊗ₜ[K] v)).map g = ((tensorOppositeMatrixLift (a g) (b g))⁻¹).val * e (1 ⊗ₜ[K] v) * (tensorOppositeMatrixLift (a g) (b g)).val",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T220526-L-1395452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T220526-L-1395452",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

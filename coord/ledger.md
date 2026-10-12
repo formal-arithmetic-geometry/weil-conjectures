@@ -9733,3 +9733,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:05 L: merged deliver/R3/Sheaf.AlgebraicGeometry.ChowModificationData (stage 3; reviewer PASS; first push; landing 20261012T220525-L-1395049 (interface); batch 20261012T220515; modules 2; new nodes 1)
 - 22:05 L: merged deliver/S1/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (stage 3; reviewer PASS; first push; landing 20261012T220525-L-1395230 (interface); batch 20261012T220515; modules 2; new nodes 1)
 - 22:05 L: merged deliver/S2/Sheaf.AlgebraicGeometry.PicardPullbackBaseChange (stage 3; reviewer PASS; first push; landing 20261012T220525-L-1395345 (interface); batch 20261012T220515; modules 3; new nodes 2)
+- 22:05 L: merged deliver/S2/Sheaf.FieldTheory.BrauerScalarDefectTensorLifts (stage 3; reviewer PASS; first push; landing 20261012T220526-L-1395452 (interface); batch 20261012T220515; modules 2; new nodes 2)
