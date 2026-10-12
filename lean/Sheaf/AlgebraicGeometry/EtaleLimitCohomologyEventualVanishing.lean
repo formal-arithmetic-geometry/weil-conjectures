@@ -6,16 +6,10 @@ Authors: SHEAF group Y2
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
-import Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.CategoryTheory.CohomologyColimitSites
-import Sheaf.CategoryTheory.ColimitSites
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+
+import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyAffineComparison
+import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyQcqsGluing
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Finite-stage detection of a zero limit cohomology class
 
@@ -120,6 +114,15 @@ theorem etale_limit_cohomology_eventual_vanishing
       (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)) :
     ∀ (i : I) (x : H.obj i), (B.ι.app i).hom x = 0 →
-      ∃ (j : I) (f : i ⟶ j), (H.map f).hom x = 0 := by sorry
+      ∃ (j : I) (f : i ⟶ j), (H.map f).hom x = 0 := by
+  obtain ⟨hBcolim⟩ := etale_limit_cohomology_qcqs_gluing
+    @etale_limit_cohomology_affine_comparison
+    D c hc F φ hidentity hcomposition G eG hG L hL p H eH hH B eB hB
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
+  intro i x hx
+  obtain ⟨j, f, _, hf⟩ := Concrete.isColimit_exists_of_rep_eq H hBcolim
+    x (0 : H.obj i) (by simpa only [map_zero] using hx)
+  exact ⟨j, f, by simpa only [map_zero] using hf⟩
 
 end AlgebraicGeometry.Etale
