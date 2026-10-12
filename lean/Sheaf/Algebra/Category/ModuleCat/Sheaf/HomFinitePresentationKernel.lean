@@ -44,6 +44,32 @@ variable {X : Type u} [TopologicalSpace X]
   {R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
+/-- Kernel preservation sends opposite right exact sequences to left exact ones. -/
+private theorem leftExact {C : Type (u + 1)} [Category.{u} C] [Abelian C]
+    (F : Cᵒᵖ ⥤ C) [F.PreservesZeroMorphisms]
+    [PreservesLimitsOfShape WalkingParallelPair F]
+    {A B D : C} (a : A ⟶ B) (b : B ⟶ D)
+    (h : (ComposableArrows.mk₃ a b (0 : D ⟶ (0 : C))).Exact) :
+    (ComposableArrows.mk₃ (0 : (0 : C) ⟶ F.obj (op D))
+      (F.map b.op) (F.map a.op)).Exact := by
+  have : Epi b := (h.exact 1).epi_f rfl
+  have hab : a ≫ b = 0 := h.toIsComplex.zero 0
+  let S := ShortComplex.mk a b hab
+  have hs : S.Exact := h.exact 0
+  have : Mono S.op.f := by
+    change Mono b.op
+    infer_instance
+  have hm := hs.op.map_of_mono_of_preservesKernel F inferInstance inferInstance
+  have hk := KernelFork.mapIsLimit _ hs.op.fIsKernel F
+  have : Mono (F.map b.op) := Fork.IsLimit.mono hk
+  apply ComposableArrows.exact_of_δ₀
+  · apply ComposableArrows.exact₂_mk _ (by simp)
+    apply (ShortComplex.exact_iff_mono _ rfl).2
+    change Mono (F.map b.op)
+    infer_instance
+  · exact hm.exact_toComposableArrows
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Precomposition with a right exact sequence gives a left exact internal Hom sequence.
 Source: Stacks Project, Modules, Lemma 01CO (1)
 (blueprint: lem-weil-pbc-sheaf-hom-finite-presentation-kernel).
@@ -76,38 +102,89 @@ theorem homObj_precomposition_exact
   let := monoidalClosed (R := R)
   let F := (homFunctor R).flip.obj M
   let G := MonoidalClosed.internalHom.flip.obj M
-  let e : G ≅ F := NatIso.ofComponents (fun _ => Iso.refl _)
+  let e : G ≅ F := NatIso.ofComponents (fun E => Iso.refl (homObj (R := R) E.unop M))
     (fun f => by
       change (MonoidalClosed.pre f.unop).app M ≫ 𝟙 _ =
         𝟙 _ ≫ homObjMap (R := R) f.unop (𝟙 M)
-      simpa only [Category.comp_id, Category.id_comp] using (pre_app (R := R) f.unop M))
+      rw [Category.comp_id, Category.id_comp]
+      exact pre_app (R := R) f.unop M)
   have : PreservesLimitsOfShape WalkingParallelPair F :=
     preservesLimitsOfShape_of_natIso e
-  have leftExact {C : Type (u + 1)} [Category.{u} C] [Abelian C]
-      (F : Cᵒᵖ ⥤ C) [F.PreservesZeroMorphisms]
-      [PreservesLimitsOfShape WalkingParallelPair F]
-      {A B D : C} (a : A ⟶ B) (b : B ⟶ D)
-      (h : (ComposableArrows.mk₃ a b (0 : D ⟶ (0 : C))).Exact) :
-      (ComposableArrows.mk₃ (0 : (0 : C) ⟶ F.obj (op D))
-        (F.map b.op) (F.map a.op)).Exact := by
-    have : Epi b := (h.exact 1).epi_f rfl
-    have hab : a ≫ b = 0 := h.toIsComplex.zero 0
-    let S := ShortComplex.mk a b hab
-    have hs : S.Exact := h.exact 0
-    have : Mono S.op.f := by
-      change Mono b.op
-      infer_instance
-    have hm := hs.op.map_of_mono_of_preservesKernel F inferInstance inferInstance
-    have hk := KernelFork.mapIsLimit _ hs.op.fIsKernel F
-    have : Mono (F.map b.op) := Fork.IsLimit.mono hk
-    apply ComposableArrows.exact_of_δ₀
-    · apply ComposableArrows.exact₂_mk _ (by simp)
-      apply (ShortComplex.exact_iff_mono _ rfl).2
-      change Mono (F.map b.op)
-      infer_instance
-    · exact hm.exact_toComposableArrows
   exact leftExact F a b h
 
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The finite free Hom isomorphism, with the product indexed by `Fin n`. -/
+private noncomputable def coordIso (n : ℕ)
+    (M : SheafOfModules.{u}
+      ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)) :
+    homObj (R := R) (free (ULift.{u} (Fin n))) M ≅ ∏ᶜ (fun _ : Fin n => M) :=
+  homObjFreeIso M (ULift.{u} (Fin n)) ≪≫ biproduct.isoProduct _ ≪≫
+    Pi.reindex Equiv.ulift (fun _ : Fin n => M)
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The coordinate projections are precomposition by the free inclusions. -/
+private theorem coordIso_π (n : ℕ)
+    (M : SheafOfModules.{u}
+      ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)) (i : Fin n) :
+    (coordIso n M).hom ≫ Pi.π (fun _ : Fin n => M) i =
+      homObjMap (R := R) (ιFree (ULift.up i)) (𝟙 M) ≫ (homObjUnitIso M).hom := by
+  simp only [coordIso, Iso.trans_hom, Category.assoc]
+  rw [show i = Equiv.ulift (ULift.up i) from rfl, Pi.reindex_hom_π]
+  dsimp only [Function.comp_def]
+  simp [homObjFreeIso, Functor.opMapBiproductIso, biproduct.uniqueUpToIso,
+    Functor.opMapBicone, Category.assoc, ιFree]
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Each coordinate evaluates a local morphism on the corresponding basis section. -/
+private theorem coordIso_apply (n : ℕ)
+    (M : SheafOfModules.{u}
+      ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R))
+    (U : Opens X) (ψ : (homObj (R := R) (free (ULift.{u} (Fin n))) M).val.obj (op U))
+    (i : Fin n) :
+    (((coordIso n M).hom ≫ Pi.π (fun _ : Fin n => M) i).val.app (op U)).hom ψ =
+      (ψ.app (op (Over.mk (𝟙 U)))).hom ((freeSection (ULift.up i)).eval (op U)) := by
+  rw [coordIso_π]
+  rfl
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Restrict the coefficient identity, then apply a local linear morphism. -/
+private theorem coefficients_apply (m n : ℕ)
+    (a : free (R := (sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)
+        (ULift.{u} (Fin m)) ⟶ free (ULift.{u} (Fin n)))
+    (c : Fin n → Fin m → R.obj.obj (op (⊤ : Opens X)))
+    (hc : ∀ k : Fin m,
+      (a.val.app (op (⊤ : Opens X))).hom
+          ((freeSection (R := (sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)
+            (ULift.up k)).eval (op ⊤)) =
+        ∑ i : Fin n, c i k •
+          ((freeSection (R := (sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)
+            (ULift.up i)).eval (op ⊤)))
+    (M : SheafOfModules.{u}
+      ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R))
+    (U : Opens X)
+    (φ : (homObj (R := R) (free (ULift.{u} (Fin n))) M).val.obj (op U))
+    (k : Fin m) :
+    (φ.app (op (Over.mk (𝟙 U)))).hom
+      ((a.val.app (op U)).hom ((freeSection (ULift.up k)).eval (op U))) =
+        ∑ i : Fin n, R.obj.map (homOfLE (le_top : U ≤ ⊤)).op (c i k) •
+          (φ.app (op (Over.mk (𝟙 U)))).hom ((freeSection (ULift.up i)).eval (op U)) := by
+  have haU : (a.val.app (op U)).hom ((freeSection (ULift.up k)).eval (op U)) =
+      ∑ i : Fin n, R.obj.map (homOfLE (le_top : U ≤ ⊤)).op (c i k) •
+        ((freeSection (ULift.up i)).eval (op U)) := by
+    have hh := congrArg
+      ((free (R := (sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)
+        (ULift.{u} (Fin n))).val.restrictₛₗ
+          (homOfLE (le_top : U ≤ ⊤)).op) (hc k)
+    simp only [map_sum, map_smulₛₗ, PresheafOfModules.restrictₛₗ_apply,
+      ← PresheafOfModules.naturality_apply, PresheafOfModules.sections_property] at hh
+    change (a.val.app (op U)).hom ((freeSection (ULift.up k)).eval (op U)) =
+      ∑ i : Fin n, R.obj.map (homOfLE (le_top : U ≤ ⊤)).op (c i k) •
+        ((freeSection (ULift.up i)).eval (op U)) at hh
+    exact hh
+  rw [haU, map_sum]
+  simp only [map_smul]
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The coordinate kernel sequence attached to a finite free presentation.
 Source: Stacks Project, Modules, proofs of Lemmas 01CQ and 0GMV, using Lemma 01CO (1)
 (blueprint: lem-weil-pbc-sheaf-hom-finite-presentation-kernel).
@@ -164,6 +241,46 @@ theorem homObj_finitePresentation_kernel (m n : ℕ)
       (ComposableArrows.mk₃ (0 : (0 : SheafOfModules.{u}
         ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)) ⟶ homObj (R := R) H M)
         β α).Exact := by
-  sorry
+  let en := coordIso n M
+  let em := coordIso m M
+  let β := homObjMap (R := R) b (𝟙 M) ≫ en.hom
+  let α := en.inv ≫ homObjMap (R := R) a (𝟙 M) ≫ em.hom
+  refine ⟨β, α, ?_, ?_, ?_⟩
+  · intro U ψ i
+    change ((homObjMap (R := R) b (𝟙 M) ≫
+      ((coordIso n M).hom ≫ Pi.π (fun _ : Fin n => M) i)).val.app (op U)).hom ψ = _
+    change (((coordIso n M).hom ≫ Pi.π (fun _ : Fin n => M) i).val.app (op U)).hom
+      (((homObjMap (R := R) b (𝟙 M)).val.app (op U)).hom ψ) = _
+    rw [coordIso_apply]
+    rfl
+  · intro U x k
+    let φ := (en.inv.val.app (op U)).hom x
+    have hφ (i : Fin n) :
+        (φ.app (op (Over.mk (𝟙 U)))).hom ((freeSection (ULift.up i)).eval (op U)) =
+          ((Pi.π (fun _ : Fin n => M) i).val.app (op U)).hom x := by
+      have hi := coordIso_apply n M U φ i
+      have he : en.inv ≫ en.hom ≫ Pi.π (fun _ : Fin n => M) i =
+          Pi.π (fun _ : Fin n => M) i := by simp
+      have hei := congrArg (fun f => (f.val.app (op U)).hom x) he
+      exact hi.symm.trans hei
+    change ((en.inv ≫ homObjMap (R := R) a (𝟙 M) ≫
+      ((coordIso m M).hom ≫ Pi.π (fun _ : Fin m => M) k)).val.app (op U)).hom x = _
+    change (((coordIso m M).hom ≫ Pi.π (fun _ : Fin m => M) k).val.app (op U)).hom
+      (((homObjMap (R := R) a (𝟙 M)).val.app (op U)).hom φ) = _
+    have hcoord := coordIso_apply m M U
+      (((homObjMap (R := R) a (𝟙 M)).val.app (op U)).hom φ) k
+    refine hcoord.trans ?_
+    change (φ.app (op (Over.mk (𝟙 U)))).hom
+      ((a.val.app (op U)).hom ((freeSection (ULift.up k)).eval (op U))) = _
+    exact (coefficients_apply m n a c hc M U φ k).trans
+      (Finset.sum_congr rfl fun i _ => congrArg
+        (R.obj.map (homOfLE (le_top : U ≤ ⊤)).op (c i k) • ·) (hφ i))
+  · refine ComposableArrows.exact_of_iso ?_ (homObj_precomposition_exact a b h M)
+    refine ComposableArrows.isoMk₃ (Iso.refl _) (Iso.refl _) en em ?_ ?_ ?_
+    · simp
+    · change homObjMap (R := R) b (𝟙 M) ≫ en.hom = 𝟙 _ ≫ β
+      simp only [β, Category.id_comp]
+    · change homObjMap (R := R) a (𝟙 M) ≫ em.hom = en.hom ≫ α
+      simp only [α, Iso.hom_inv_id_assoc]
 
 end SheafOfModules

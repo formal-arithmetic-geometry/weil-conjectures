@@ -79,7 +79,7 @@
    }
   },
   {
-   "text": "*Step 5 ($\\mathcal Hom(\\mathcal O_X^{\\oplus n},\\mathcal M)\\cong\\mathcal M^{\\oplus n}$).* For an open $U$, $\\mathcal O_X^{\\oplus n}|_U$ is the free $\\mathcal O_U$-module $\\mathcal O_U^{\\oplus n}$ with basis sections $e_i|_U$, and by [def-weil-pbc-module-finite-type-presentation] (on the ringed space $(U,\\mathcal O_U)$) every $\\mathcal O_U$-linear $\\varphi:\\mathcal O_U^{\\oplus n}\\to\\mathcal M|_U$ is the map $e_i|_U\\mapsto s_i$ determined by sections $s_i\\in\\mathcal M(U)$, necessarily $s_i=\\varphi_U(e_i|_U)$, and every tuple $(s_i)$ occurs. Hence $\\theta^n_U:\\mathcal Hom_{\\mathcal O_X}(\\mathcal O_X^{\\oplus n},\\mathcal M)(U)\\to\\mathcal M(U)^{\\oplus n}$, $\\varphi\\mapsto(\\varphi_U(e_i|_U))_i$, is bijective. It is additive and $\\mathcal O_X(U)$-linear ($(f\\varphi)_U(e_i|_U)=f\\,\\varphi_U(e_i|_U)$, Step 1), and compatible with restriction to $V\\subseteq U$: $(\\varphi|_V)_V(e_i|_V)=\\varphi_V(e_i|_U|_V)=\\varphi_U(e_i|_U)|_V$ by naturality of $\\varphi$. So $\\theta^n:\\mathcal Hom_{\\mathcal O_X}(\\mathcal O_X^{\\oplus n},\\mathcal M)\\to\\mathcal M^{\\oplus n}$ is an isomorphism of $\\mathcal O_X$-modules (for $n=1$: $\\mathcal Hom_{\\mathcal O_X}(\\mathcal O_X,\\mathcal M)\\cong\\mathcal M$).",
+   "text": "Step 5: Use the existing proved SheafOfModules.homObjFreeIso M (ULift (Fin n)), followed by biproduct.isoProduct and Pi.reindex Equiv.ulift, to obtain a concrete coordinate isomorphism homObj (free (ULift (Fin n))) M ≅ product (Fin n) M. Unfolding the biproduct maps shows that its i-th projection is homObjMap (ιFree (ULift.up i)) (identity M), followed by homObjUnitIso M. The definition of homObjUnitIso evaluates at 1, and the definition of freeSection identifies the image of 1 under ιFree with the basis section. Thus the coordinate formula follows by reflexivity, including rank zero.",
    "uses": [
     "def-weil-pbc-module-finite-type-presentation",
     "def-pur-sheaf-hom"
@@ -91,7 +91,7 @@
    }
   },
   {
-   "text": "*Step 6 (the maps in coordinates).* Since $a$ is a morphism of sheaves, $a_U(e_k|_U)=a_X(e_k)|_U=\\sum_ia_{ik}|_U\\,e_i|_U$. For $\\varphi$ a section of $\\mathcal Hom(\\mathcal O_X^{\\oplus n},\\mathcal M)$ over $U$ with $\\theta^n_U(\\varphi)=(x_i)_i$, $\\mathcal O_U(U)$-linearity of $\\varphi_U$ gives $\\theta^m_U(a^*_U\\varphi)=\\bigl((\\varphi\\circ a|_U)_U(e_k|_U)\\bigr)_k=\\bigl(\\sum_ia_{ik}|_U\\,x_i\\bigr)_k=\\alpha_U(\\theta^n_U\\varphi)$, so $\\theta^m\\circ a^*=\\alpha\\circ\\theta^n$; and for $\\psi$ a section of $\\mathcal Hom(\\mathcal H,\\mathcal M)$ over $U$, $\\theta^n_U(b^*_U\\psi)=\\bigl(\\psi_U(b_U(e_i|_U))\\bigr)_i=\\beta_U(\\psi)$, so $\\theta^n\\circ b^*=\\beta$. In particular $\\alpha=\\theta^m a^*(\\theta^n)^{-1}$ and $\\beta=\\theta^nb^*$ are morphisms of $\\mathcal O_X$-modules (Steps 1, 5).",
+   "text": "Step 6: Define β = homObjMap b (identity M) followed by the n-coordinate isomorphism, and α = the inverse n-coordinate isomorphism followed by homObjMap a (identity M) and the m-coordinate isomorphism. The β formula follows from the coordinate projection formula and the definition of homObjMap. For α, apply the semilinear restriction map to hc k, use map_sum, map_smulₛₗ, naturality_apply for a.val, and sections_property for each basis section. This gives the coefficient identity on every open U. Applying the component of a local linear morphism φ gives the asserted finite sum. Take φ to be the inverse-coordinate image of x; the isomorphism inverse identity identifies its basis values with the projections of x.",
    "uses": [
     "def-pur-sheaf-hom",
     "def-weil-sheaf-of-modules-category"
@@ -103,7 +103,7 @@
    }
   },
   {
-   "text": "Step 7 (part (2), still open in this delivery): Apply homObj_precomposition_exact to the finite free presentation. With the coordinate isomorphisms of step 5 and the map identifications of step 6, transport categorical exactness by ComposableArrows.exact_of_iso. This proves the coordinate sequence including its initial zero; a second local-lifting argument is unnecessary.",
+   "text": "Step 7: Apply homObj_precomposition_exact to a,b,h,M. Construct ComposableArrows.isoMk₃ from this exact sequence to the coordinate sequence, with identity components on the initial zero and homObj H M, and the n- and m-coordinate isomorphisms on the remaining objects. The first square is zero, the second follows from the definition of β, and the third is the inverse-isomorphism cancellation in the definition of α. ComposableArrows.exact_of_iso proves the coordinate sequence exact. No new assumed lemma or local-lifting argument is used.",
    "uses": [
     "def-pur-sheaf-hom",
     "def-weil-pbc-exact-sequence"
@@ -125,7 +125,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Lemma 01CO (1); for part (1) G2 uses the existing monoidal closed tensor-Hom structure and Mathlib kernel preservation to implement left exactness. Steps 5-6 remain the original coordinate plan from 01CQ and 0GMV; step 7 transports the proved categorical sequence."
+  "place": "Lemma 01CO (1) for categorical precomposition exactness; proofs of Lemmas 01CQ and 0GMV for the finite free coordinate identification. H3 implements steps 5–7 using the existing homObjFreeIso, derives the section formulas by restriction and linearity, and transports the exact sequence along an explicit ComposableArrows.isoMk₃."
  },
  "mathlib_searches": [
   {
@@ -260,9 +260,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T214707-L-1270196",
+  "landing": "20261012T230757-L-1908638",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
