@@ -10114,3 +10114,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:29 L: merged deliver/V1/Sheaf.AlgebraicGeometry.AffineModuleTensorCounitSmul (stage 3; reviewer PASS; first push; landing 20261012T232907-L-2044148 (proof); batch 20261012T232855; modules 1; new nodes 0)
 - 23:29 L: merged deliver/W4/Sheaf.Algebra.Homology.OpenCoverMateModuleShortExact (stage 3; reviewer PASS; first push; landing 20261012T232907-L-2044246 (interface); batch 20261012T232855; modules 2; new nodes 2)
 - 23:29 L: merged deliver/Y3/Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImageLe (stage 3; reviewer PASS; first push; landing 20261012T232907-L-2044392 (interface); batch 20261012T232855; modules 2; new nodes 1)
+- 23:29 L: returned deliver/X3/Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionData (reviewer RETURN: (reviewer X-02382, head 02382b698) C5 (brief points 4–5): Use the existing, sorry-free AlgebraicGeometry.Scheme.Modules.)
