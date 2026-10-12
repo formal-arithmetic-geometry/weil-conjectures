@@ -6676,3 +6676,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/V1/Sheaf.CategoryTheory.DerivedModuleCellularFiltration (stage 3; reviewer PASS; first push; landing 20261012T070556-L-3479583 (interface); batch 20261012T070523; modules 3; new nodes 2)
 - 07:05 L: merged deliver/V2/Sheaf.Algebra.TorDimensionShifting (stage 3; reviewer PASS; first push; landing 20261012T070557-L-3479687 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/V2/Sheaf.AlgebraicGeometry.AffineChartDirectedRingModel (stage 3; reviewer PASS; first push; landing 20261012T070557-L-3479785 (interface); batch 20261012T070523; modules 3; new nodes 2)
+- 07:05 L: merged deliver/V2/Sheaf.RingTheory.FiniteTypeGRingAux (stage 3; reviewer PASS; first push; landing 20261012T070557-L-3479903 (interface); batch 20261012T070523; modules 3; new nodes 2)
