@@ -928,6 +928,30 @@ instance isIso_schemeFrobeniusMap (m : ℕ) {Φ : X ⟶ X}
   dsimp only [schemeFrobeniusMap]
   infer_instance
 
+/-- Blueprint `def-trf-weil-extension-zero`: the *Weil extension by zero* of a strict Weil
+complex `(K, φ)` on `X` along a morphism `j : X ⟶ Y` of geometric schemes (an open immersion in
+the blueprint) intertwining automorphisms `g_X`, `g_Y` (the Galois Frobenii in the blueprint):
+the strict Weil complex `(Rj_! K, φ̄)` on `Y` with
+
+```
+  φ̄ : Lg_Y^* Rj_! K ≃ Rj_! Lg_X^* K ──Rj_! φ──▶ Rj_! K,
+```
+
+whose first isomorphism is the `!`-base change of the package for the Cartesian square
+`g_X ≫ j = j ≫ g_Y` (Cartesian because `g_X`, `g_Y` are isomorphisms; for the scheme Frobenius
+see `isPullback_frobenius_pow_of_isOpenImmersion`). It is again a strict Weil complex. -/
+noncomputable def extensionByZero [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
+    (G : GeometricOperations A s) {Y : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} (j : X ⟶ Y)
+    (hj : j ≫ aY = aX) [IsGeometric aY] [IsGeometric aX] [HasCompactification j] {gY : Y ≅ Y}
+    (hg : g.hom ≫ j = j ≫ gY.hom) (hgX : IsGeometricHom s g.hom)
+    (hgY : IsGeometricHom s gY.hom) : StrictWeilComplex A gY where
+  obj := ⟨(rightDerivedLowerShriek A j).obj ((DerivedCategoryFiniteTor.ι A X).obj K.obj),
+    G.ctf_lowerShriek j (.mk hj) K.obj.property⟩
+  frobenius :=
+    (DerivedCategory.constructibleFiniteTor A Y).ι.mapIso
+        ((G.baseChange (IsPullback.of_horiz_isIso ⟨hg⟩) (.mk hj) hgY (.mk hj) hgX).app K.obj) ≪≫
+      (rightDerivedLowerShriek A j).mapIso K.frobenius
+
 end StrictWeilComplex
 
 end AlgebraicGeometry.ProEtale
