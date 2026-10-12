@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Affine evaluation of quasi-coherent module colimits
 
@@ -21,6 +22,54 @@ open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+/-- Global sections preserve a colimit whose stages and point are quasi-coherent on Spec R. -/
+private theorem specModuleColimitEvaluation
+    (R : CommRingCat.{u}) (I : Type u) [Category.{u} I]
+    (F : I ⥤ (Spec R).Modules) (c : Cocone F) (hc : IsColimit c)
+    (hF : ∀ i : I, (F.obj i).IsQuasicoherent) (hq : c.pt.IsQuasicoherent) :
+    Nonempty (IsColimit ((moduleSpecΓFunctor (R := R)).mapCocone c)) := by
+  let P := SheafOfModules.isQuasicoherent (Spec R).ringCatSheaf
+  let F' : I ⥤ P.FullSubcategory := P.lift F hF
+  let c' : Cocone F' :=
+    { pt := ⟨c.pt, hq⟩
+      ι := { app := fun i ↦ ObjectProperty.homMk (c.ι.app i)
+             naturality := fun i j f ↦ ObjectProperty.hom_ext _ (c.w f) } }
+  have hc' : IsColimit c' := isColimitOfReflects P.ι hc
+  exact ⟨isColimitOfPreserves (tildeEquiv (R := R)).inverse hc'⟩
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Restriction to the spectrum of an affine open computes evaluation on that open. -/
+private noncomputable def affineEvaluationIso
+    (X : Scheme.{u}) (U : X.Opens) (hU : IsAffineOpen U) :
+    restrictFunctor hU.fromSpec ⋙ moduleSpecΓFunctor (R := Γ(X, U)) ≅
+      SheafOfModules.evaluation X.ringCatSheaf (Opposite.op U) := by
+  have he : hU.fromSpec ''ᵁ ⊤ = U := by
+    rw [Scheme.Hom.image_top_eq_opensRange, hU.opensRange_fromSpec]
+  refine NatIso.ofComponents (fun M ↦ ?_) ?_
+  · let e := M.restrictAppIso hU.fromSpec ⊤ ≪≫
+      M.presheaf.mapIso (eqToIso he.symm).op
+    let l : (moduleSpecΓFunctor.obj (M.restrict hU.fromSpec)) ≃ₗ[Γ(X, U)]
+        (SheafOfModules.evaluation X.ringCatSheaf (Opposite.op U)).obj M :=
+      { toFun := e.hom
+        invFun := e.inv
+        left_inv := fun x ↦ Iso.hom_inv_id_apply e x
+        right_inv := fun x ↦ Iso.inv_hom_id_apply e x
+        map_add' := fun x y ↦ e.hom.hom.map_add x y
+        map_smul' := fun r x ↦ by
+          dsimp [e]
+          rw [restrictAppIso_fromSpec_smul]
+          change M.presheaf.map (eqToHom he.symm).op
+            (X.presheaf.map (homOfLE (hU.fromSpec_image_le ⊤)).op r • _) = _
+          rw [M.map_smul]
+          simp [← Functor.map_comp_apply] }
+    exact l.toModuleIso
+  · intro M N f
+    ext x
+    change N.presheaf.map (eqToHom he.symm).op (f.app _ x) =
+      f.app U (M.presheaf.map (eqToHom he.symm).op x)
+    exact (ConcreteCategory.congr_hom
+      (f.mapPresheaf.naturality (eqToHom he.symm).op) x).symm
 
 /-- Evaluation on an affine open sends a quasi-coherent module colimit cocone to
 an actual colimit cocone of modules. No filteredness is needed.
@@ -48,6 +97,11 @@ theorem quasiCoherentModuleColimitEvaluation
     (U : X.Opens) (hU : IsAffineOpen U) :
     Nonempty (IsColimit
       ((SheafOfModules.evaluation (R := X.ringCatSheaf) (Opposite.op U)).mapCocone c)) := by
-  sorry
+  obtain ⟨h⟩ := specModuleColimitEvaluation Γ(X, U) I
+    (F ⋙ restrictFunctor hU.fromSpec) ((restrictFunctor hU.fromSpec).mapCocone c)
+    (isColimitOfPreserves (restrictFunctor hU.fromSpec) hc)
+    (fun i ↦ @isQuasicoherent_restrictFunctor _ _ hU.fromSpec _ (F.obj i) (hF i))
+    (@isQuasicoherent_restrictFunctor _ _ hU.fromSpec _ c.pt hq)
+  exact ⟨IsColimit.mapCoconeEquiv (affineEvaluationIso X U hU) h⟩
 
 end AlgebraicGeometry.Scheme.Modules

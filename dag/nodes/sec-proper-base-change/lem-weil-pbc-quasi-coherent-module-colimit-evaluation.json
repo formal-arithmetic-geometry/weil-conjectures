@@ -23,7 +23,7 @@
    "elementary": false
   },
   {
-   "text": "The restricted objects, including the cocone point, are quasi-coherent. Lift the diagram and cocone into the full subcategory of quasi-coherent modules. Full faithfulness of the inclusion reflects its colimit property. The inverse of tildeEquiv is the global sections functor on this subcategory and preserves colimits. This proves the global-section cocone on Spec R is colimiting.",
+   "text": "The private helper specModuleColimitEvaluation lifts the restricted diagram and cocone to the full subcategory of quasi-coherent modules using ObjectProperty.lift and ObjectProperty.homMk. The fully faithful inclusion reflects the given colimit. Apply isColimitOfPreserves to the inverse of tildeEquiv, which is the inclusion followed by moduleSpecΓFunctor. Its mapped cocone is definitionally the global-section cocone.",
    "uses": [
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
     "def-weil-pbc-category-colimit"
@@ -31,7 +31,7 @@
    "elementary": false
   },
   {
-   "text": "For each module the restriction section isomorphism at top, followed by the restriction isomorphism along the equality image(top)=U, identifies the section modules. Linearity follows from fromSpec.appIso and ΓSpecIso, which carry r to the restriction of r. Naturality of restriction on module morphisms identifies each evaluated cocone leg. Transport the colimit across this natural isomorphism.",
+   "text": "Construct the private natural isomorphism affineEvaluationIso from restriction followed by moduleSpecΓFunctor to evaluation on U. On each module use restrictAppIso at top and the presheaf isomorphism for image(top)=U. Linearity is restrictAppIso_fromSpec_smul from WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde, followed by map_smul and functoriality of ring restrictions. Naturality is the naturality of the underlying presheaf map. Apply IsColimit.mapCoconeEquiv to transport the restricted global-section colimit to the evaluated cocone.",
    "uses": [
     "lem-weil-pbc-module-restriction-open-immersion-colimits",
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
@@ -49,7 +49,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Explication of Stacks 01ID and 01LA using the existing Lean tilde adjunction and affine cover."
+  "place": "Stacks 01ID and 01LA; existing three-step route implemented by M3 using Mathlib tildeEquiv and the source-library restrictAppIso_fromSpec_smul."
  },
  "mathlib_searches": [
   {
@@ -124,10 +124,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T063513-L-3156566",
-  "kind": "interface",
+  "landing": "20261012T085307-L-26490",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
