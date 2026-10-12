@@ -18,57 +18,36 @@
  ],
  "proof": [
   {
-   "text": "For every $m\\in M$, continuity for the discrete action means its stabilizer is open [def-exc-continuous-cohomology]. Since $M$ is finite, the intersection $K$ of all these stabilizers is open; it is the kernel of $G\\to\\operatorname{Aut}(M)$ and hence normal. Therefore $Q=G/K$ is finite (the open cosets cover the compact group $G$, so finitely many suffice), and the action factors through $Q$. This includes $M=0$, for which $Q$ is trivial.",
+   "text": "The action homomorphism to units in End_Z(M) has finite image Q, since M is finite. Its kernel is the finite intersection of the open stabilizers in [def-exc-discrete-modules-category].",
    "uses": [
-    "def-exc-continuous-cohomology"
+    "def-exc-discrete-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A3R (lemma-pullback-filtered), proof, image of the continuous monodromy action in Aut(V) is finite; the finite-module case is stated again in Lemma 0GJ0 (lemma-pullback-filtered-modules), proof"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-sylow-subgroup-prime-index] to the finite group $Q$ to obtain an $\\ell$-Sylow subgroup $P$. Let $H$ be the inverse image of $P$ under $G\\twoheadrightarrow Q$. It is open, since it is a union of cosets of the open kernel $K$, and $G/H\\cong Q/P$ as finite sets. Thus $[G:H]=[Q:P]$ is prime to $\\ell$; the restricted action of $H$ factors through the finite $\\ell$-group $P$.",
+   "text": "Choose an ℓ-Sylow subgroup P of Q via [lem-weil-pbc-sylow-subgroup-prime-index]. Its inverse image H contains the open action kernel, hence is open. Subgroup.index_comap_of_surjective identifies its index with that of P; Sylow.not_dvd_index and primality imply coprimality.",
    "uses": [
     "lem-weil-pbc-sylow-subgroup-prime-index"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A3R (lemma-pullback-filtered), proof, selection of the Sylow subgroup and prime-to-ell index"
-   }
+   "elementary": false
   },
   {
-   "text": "Since $M$ is finite and $\\ell$-primary, some $n\\geq0$ satisfies $\\ell^n M=0$ (take a maximum of the finitely many elementwise exponents; $n=0$ when $M=0$). Put $M_j=\\{m\\in M: \\ell^j m=0\\}$ for $0\\leq j\\leq n$. Then $0=M_0\\subseteq M_1\\subseteq\\cdots\\subseteq M_n=M$ is a finite $P$-stable filtration: $\\ell^j(pm)=p(\\ell^jm)=0$. Every $M_{j+1}/M_j$ is finite and killed by $\\ell$, because $\\ell m\\in M_j$ whenever $m\\in M_{j+1}$. It is therefore a finite-dimensional $\\mathbf F_\\ell[P]$-module. Zero quotients require no further filtration.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0GIZ (lemma-action-l-group), statement for modules killed by a power of ell; explicit exponent filtration supplies the needed finite abelian-group case"
-   }
-  },
-  {
-   "text": "For each nonzero quotient $V_j=M_{j+1}/M_j$, apply [lemma-weil-pbc-finite-l-group-filtration] to its $P$-action. This yields a finite chain of $P$-stable subspaces from $0$ to $V_j$ with trivial one-dimensional $\\mathbf F_\\ell$ quotients. Pull the subspaces back along $M_{j+1}\\twoheadrightarrow V_j$, obtaining a chain from $M_j$ to $M_{j+1}$; the quotient of consecutive inverse images is canonically the corresponding quotient of subspaces, because their common kernel is $M_j$. Concatenate these chains for $j=0,\\ldots,n-1$ and delete repeated terms. The result starts at $0$, ends at $M$, is $H$-stable because $H$ acts through $P$, and has exactly the claimed trivial $\\mathbf F_\\ell$ successive quotients. For $M=0$ it is the one-term chain $0=M$.",
+   "text": "The restricted representation of P on M satisfies [lem-sc-primary-pgroup-filtration]. Pull its stable chain and successor conditions back along H→P. Its action on M is definitionally the original action, giving all clauses of the theorem.",
    "uses": [
-    "lemma-weil-pbc-finite-l-group-filtration"
+    "lem-sc-primary-pgroup-filtration"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemmas 0A3R (lemma-pullback-filtered), representation-filtration paragraph, and 0GIZ (lemma-action-l-group), filtration conclusion; pullback through ell-power quotients expanded"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-exc-continuous-cohomology",
+  "def-exc-discrete-modules-category",
   "lem-weil-pbc-sylow-subgroup-prime-index",
-  "lemma-weil-pbc-finite-l-group-filtration"
+  "lem-sc-primary-pgroup-filtration"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemmas 0A3R and 0GIZ, adapted to finite ell-primary abelian groups by the explicit exponent filtration"
+  "place": "Tag 0GIZ filtration assertion (proof omitted with augmentation-ideal hint); Tag 0GJ0 proof, finite monodromy and Sylow reduction. Agent-written fixed-point/Cauchy proof of the finite primary module case."
  },
  "mathlib_searches": [
   {
@@ -156,5 +135,15 @@
   "group": "K1",
   "result": "pass",
   "note": "profinite G (compact T2 totally disconnected topological group), prime ell, M in landed Rep.DiscreteContinuousRep over Z, Finite carrier, ell-primary as IsPGroup on Multiplicative; OpenSubgroup H with index coprime to ell; Fin (n+1) chain of AddSubgroups 0..M, H-stable, consecutive quotients killed by ell with trivial H-action; M=0 n=0 case; #check: IsPGroup/OpenSubgroup resolve to Mathlib roots"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T085335-L-37987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

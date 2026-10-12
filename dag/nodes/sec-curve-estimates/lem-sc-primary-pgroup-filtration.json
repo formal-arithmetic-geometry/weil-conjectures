@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-primary-pgroup-filtration",
+ "kind": "statement",
+ "title": "Finite primary module filtration for a p-group action",
+ "statement": "Let ℓ be prime, Q an ℓ-group, and V a finite abelian group with ℤ-linear Q-action ρ and ℓ-primary underlying group. There exist n and a monotone chain F indexed by Fin(n+1) of additive subgroups, with F(0)=0 and F(n)=V, every F(i) Q-stable, and ℓ x and ρ(g)x-x in F(i) whenever x is in F(i+1).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GIZ filtration assertion (proof omitted with augmentation-ideal hint); Tag 0GJ0 proof, finite monodromy and Sylow reduction. Agent-written fixed-point/Cauchy proof of the finite primary module case."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Zero is attainable as the endpoint of a length-zero stable chain. The lattice of subgroups of finite V is finite, so Mathlib Finite.exists_le_maximal supplies a maximal attainable endpoint W.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If W is proper, apply [lem-sc-primary-invariant-extension] to get a strictly larger stable W′ with quotient trivial and killed by ℓ. Append W′ to the chain (using the old chain up to n and W′ thereafter). The new chain is monotone, stable, and satisfies the successor conditions, contradicting maximality.",
+   "uses": [
+    "lem-sc-primary-invariant-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Therefore the endpoint is V. Restrict the natural-number indexed chain to Fin(n+1); its successor conditions restrict to Fin(n). This includes V=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-primary-invariant-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GIZ filtration assertion (proof omitted with augmentation-ideal hint); Tag 0GJ0 proof, finite monodromy and Sylow reduction. Agent-written fixed-point/Cauchy proof of the finite primary module case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_fixed_point_of_prime_dvd_card_of_fixed_point|exists_prime_addOrderOf_dvd_card|exists_le_maximal",
+   "results": "Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean, Mathlib/Algebra/CharP/MixedCharZero.lean, Mathlib/Algebra/CharP/MixedCharZero.lean, Mathlib/Algebra/CharP/CharAndCard.lean, Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean, Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean, Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean, Mathlib/GroupTheory/PGroup.lean",
+   "date": "2026-10-12",
+   "verdict": "partial matches only; combined extension or filtration not found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "p-group acting on finite primary abelian group has nonzero invariant element killed by p",
+   "results": "IsPGroup.nonempty_fixed_point_of_prime_not_dvd_card, IsPGroup.exists_fixed_point_of_prime_dvd_card_of_fixed_point, IsPGroup.card_modEq_card_fixedPoints, IsPGroup.smul_mul_inv_trivial_or_surjective, IsPGroup.card_orbit, CommGroup.primaryComponent.isPGroup, ZModModule.isPGroup_multiplicative, Sylow.exists_subgroup_le_card_le",
+   "date": "2026-10-12",
+   "verdict": "partial matches only; combined extension or filtration not found"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPGroup.exists_fixed_point_of_prime_dvd_card_of_fixed_point",
+   "results": "IsPGroup.exists_fixed_point_of_prime_dvd_card_of_fixed_point",
+   "date": "2026-10-12",
+   "verdict": "partial matches only; combined extension or filtration not found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite primary abelian group with p-group action stable subgroup finite filtration killed by p trivial quotients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.SylowModuleFiltration",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-sylow-module-filtration",
+   "place": "proof, finite primary module filtration after the Sylow reduction (original split steps 3 and 4)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.PrimaryPGroupFiltration",
+  "file": "lean/Sheaf/RepresentationTheory/PrimaryPGroupFiltration.lean",
+  "declaration": "Representation.exists_primary_filtration_of_isPGroup",
+  "statement": "theorem exists_primary_filtration_of_isPGroup (Q : Type u) [Group Q] (ℓ : ℕ) (hℓ : ℓ.Prime) (hQ : IsPGroup ℓ Q) (V : Type v) [AddCommGroup V] [Module ℤ V] [Finite V] (ρ : Representation ℤ Q V) (hV : IsPGroup ℓ (Multiplicative V)) : ∃ (n : ℕ) (F : Fin (n + 1) → AddSubgroup V), Monotone F ∧ F 0 = ⊥ ∧ F (Fin.last n) = ⊤ ∧ (∀ (i : Fin (n + 1)) (g : Q) (x : V), x ∈ F i → ρ g x ∈ F i) ∧ (∀ (i : Fin n) (x : V), x ∈ F i.succ → ℓ • x ∈ F i.castSucc ∧ ∀ g : Q, ρ g x - x ∈ F i.castSucc)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T085335-L-37987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T085335-L-37987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
