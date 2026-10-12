@@ -6234,3 +6234,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/M2/Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction (stage 3; reviewer PASS; first push; landing 20261012T053942-L-2639579 (interface); batch 20261012T053916; modules 3; new nodes 2)
 - 05:39 L: merged deliver/M2/Sheaf.CategoryTheory.SiteCechVanishingCriterion (stage 3; reviewer PASS; first push; landing 20261012T053942-L-2639696 (interface); batch 20261012T053916; modules 2; new nodes 1)
 - 05:39 L: merged deliver/M2/Sheaf.RingTheory.IdempotentsDeterminedModuloRadical (stage 3; reviewer PASS; first push; landing 20261012T053942-L-2639794 (proof); batch 20261012T053916; modules 1; new nodes 0)
+- 05:39 L: merged deliver/M2/Sheaf.RingTheory.SmoothNormalRing (stage 3; reviewer PASS; first push; landing 20261012T053942-L-2639955 (interface); batch 20261012T053916; modules 2; new nodes 1)
