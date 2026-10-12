@@ -33,56 +33,36 @@
  ],
  "proof": [
   {
-   "text": "Work on an affine open $U=\\operatorname{Spec}(A)$ of $Y$. The component closed subschemes $Z_1$ and $Z=Z_2\\cup\\cdots\\cup Z_r$ are cut out on $U$ by ideals $J_1$ and $I$, and their underlying closed sets cover $U$; hence $V(I)\\cup V(J_1)=\\operatorname{Spec}(A)$. The ring $A$ is reduced because $Y$ is reduced.",
+   "text": "For an arbitrary open U and a section s in both kernel ideals, show that its basic open is empty. A point of the support of either ideal lifts through its subscheme immersion; pulling back the basic open gives the basic open of the zero section, since mem_idealOfOpens_iff kills s there. The component cover and hZ put every point in the range, hence the kernel support, of either i(a) or j. Thus the basic open is empty. Reducedness and Mathlib basicOpen_eq_bot_iff imply s=0. This is exactly the local avoid argument in Lean; no affine reduction is used.",
    "uses": [
     "def-pc-reduced-scheme",
     "def-weil-closed-immersion",
     "def-sbc-closed-immersion-ideal-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Remark 09NW, hypotheses $A$ reduced and $V(I)\\cup V(J)=\\operatorname{Spec}(A)$"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sc-reduced-ideals-zero-intersection] to $A,I,J_1$. It gives $I\\cap J_1=0$ and identifies $I$ with its image $I/(I\\cap J_1)$ in $A/J_1$. Since this calculation holds on every affine open, the sheaf intersection $\\mathcal I\\cap\\mathcal J_1$ is zero, and the restriction morphism of sheaves $\\rho:\\mathcal I\\to i_{1,*}\\mathcal I_1$ (on sections, $\\mathcal I(U)\\to\\mathcal I_1(U\\cap Z_1)$) is bijective on every affine open $U=\\operatorname{Spec}(A)$: there $\\mathcal I_1(U\\cap Z_1)$ is the image $(I+J_1)/J_1=I/(I\\cap J_1)$ of $I$ in $A/J_1$. A morphism of sheaves that is bijective on a basis of opens is an isomorphism of sheaves; hence $\\rho$ is bijective on $\\Gamma(U,-)$ for every open $U\\subseteq Y$ (its kernel there is $(\\mathcal I\\cap\\mathcal J_1)(U)=0$).",
+   "text": "Apply lem-sc-closed-immersion-disjoint-ideal-twist to the distinguished component immersion i(a), the ideal j.ker, and the zero-intersection equality just proved. Its multiplication images, chosen pullback adjunction, arbitrary tensor-power comparison e, and sectionwise bijectivity are definitionally the second conjunct of the item.",
    "uses": [
-    "lem-sc-reduced-ideals-zero-intersection",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-pc-reduced-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Remark 09NW and the displayed conductor equality in Lemma 09NX"
-   }
-  },
-  {
-   "text": "Let $V\\subseteq Y$ be an open on which $\\mathcal M$ is trivial, $\\mathcal M|_V\\cong\\mathcal O_V$ [def-sc-invertible-module]; such $V$ cover $Y$. Then $\\mathcal M^{\\otimes m}|_V\\cong\\mathcal O_V$ and $(\\mathcal M|_{Z_1})^{\\otimes m}|_{V\\cap Z_1}\\cong\\mathcal O_{V\\cap Z_1}$ by the pulled-back trivialization [def-pur-sheaf-tensor-product], and under these identifications the image sheaves $\\mathcal I\\mathcal M^{\\otimes m}|_V$ and $\\mathcal I_1(\\mathcal M|_{Z_1})^{\\otimes m}|_{V\\cap Z_1}$ become $\\mathcal I|_V$ and $\\mathcal I_1|_{V\\cap Z_1}$, compatibly with restriction to $Z_1$. So the restriction morphism $\\mathcal I\\mathcal M^{\\otimes m}\\to i_{1,*}(\\mathcal I_1(\\mathcal M|_{Z_1})^{\\otimes m})$ is, on each such $V$, the isomorphism $\\rho|_V$ of Step 2; being locally an isomorphism, it is an isomorphism of sheaves, and therefore $\\Gamma(U,\\mathcal I\\mathcal M^{\\otimes m})\\to\\Gamma(U\\cap Z_1,\\mathcal I_1(\\mathcal M|_{Z_1})^{\\otimes m})$ is bijective for every open $U$ and every $m\\ge0$ ($m=0$ being Step 2).",
-   "uses": [
+    "lem-sc-closed-immersion-disjoint-ideal-twist",
     "def-sc-invertible-module",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Remark 09NW, final sentence $IP=I(P/JP)$ for projective $P$, here for the locally free rank-one $\\mathcal M^{\\otimes m}$"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-reduced-scheme",
   "def-weil-closed-immersion",
   "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-sc-reduced-ideals-zero-intersection",
+  "lem-sc-closed-immersion-disjoint-ideal-twist",
   "def-sc-invertible-module",
   "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Remark 09NW and Lemma 09NX proof"
+  "place": "Remark 09NW; direct basic-open proof of zero intersection and the local restriction argument of Lemma 09NX"
  },
  "mathlib_searches": [
   {
@@ -149,5 +129,15 @@
   "group": "H1",
   "result": "fix",
   "note": "G1-form components (reduced closed immersions, irreducibleComponents, injective, cover), reduced complement j with hZ, I=j.ker, J1=(i a).ker, I1=image phi; clause 1 per open via idealOfOpens; clause 2 IM^m, I1 M1^m as images of multiplication, rho factoring unit+e, bijective on every open, m=0 included"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T173826-L-3295829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

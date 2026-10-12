@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Abelian.Images
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.RingTheory.ReducedIdealsZeroIntersection
+import Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwist
 
 /-!
 # Conductor ideal: zero intersection and restriction to a component
@@ -87,6 +86,46 @@ theorem conductorIdealZeroIntersection
         ρ ≫ (Modules.pushforward (i a)).map (image.ι μ₁) =
             image.ι μ ≫ adj.unit.app (M.tensorPow m) ≫ (Modules.pushforward (i a)).map e.hom ∧
           ∀ U : Y.Opens, Function.Bijective (ρ.app U) := by
-  sorry
+  classical
+  -- The support argument only needs the cover, but preserves the component interface.
+  have _ := hcomponents
+  have _ := hdistinct
+  dsimp only
+  have hzero : ∀ U : Y.Opens,
+      j.ker.idealOfOpens U ⊓ (i a).ker.idealOfOpens U = ⊥ := by
+    intro U
+    apply le_antisymm _ bot_le
+    intro s hs
+    rw [Ideal.mem_bot, ← basicOpen_eq_bot_iff]
+    apply le_antisymm _ bot_le
+    intro y hy
+    have avoid (K : Y.IdealSheafData) (hsK : s ∈ K.idealOfOpens U)
+        (hyK : y ∈ K.support) : False := by
+      have hyrange : y ∈ Set.range K.subschemeι := by
+        rw [K.range_subschemeι]
+        exact hyK
+      obtain ⟨z, hz⟩ := hyrange
+      have hm : K.subschemeι.app U s = 0 :=
+        K.mem_idealOfOpens_iff.mp hsK
+      have hb : K.subschemeι ⁻¹ᵁ Y.basicOpen s = ⊥ := by
+        rw [Scheme.preimage_basicOpen, hm, Scheme.basicOpen_zero]
+      have hzmem : z ∈ K.subschemeι ⁻¹ᵁ Y.basicOpen s := by
+        change K.subschemeι z ∈ Y.basicOpen s
+        rwa [hz]
+      rw [hb] at hzmem
+      exact hzmem
+    have hycover : y ∈ ⋃ b : ι, Set.range (i b) := by rw [hcover]; trivial
+    obtain ⟨b, hb⟩ := Set.mem_iUnion.mp hycover
+    by_cases hba : b = a
+    · subst b
+      exact avoid (i a).ker hs.2 ((i a).range_subset_ker_support hb)
+    · have hyZ : y ∈ Set.range j := by
+        rw [hZ]
+        exact Set.mem_iUnion.mpr ⟨b, Set.mem_iUnion.mpr ⟨hba, hb⟩⟩
+      exact avoid j.ker hs.1 (j.range_subset_ker_support hyZ)
+  refine ⟨hzero, ?_⟩
+  intro M _ m e
+  obtain ⟨ρ, hρ, hbij⟩ := Modules.closedImmersion_disjointIdeal_twist (i a) j.ker hzero M m e
+  exact ⟨ρ, hρ, hbij⟩
 
 end AlgebraicGeometry

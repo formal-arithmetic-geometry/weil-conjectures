@@ -1,0 +1,164 @@
+{
+ "id": "lem-sc-closed-immersion-disjoint-ideal-twist",
+ "kind": "statement",
+ "title": "Restriction of a disjoint ideal times an invertible module",
+ "statement": "Let $i:X\\hookrightarrow Y$ be a closed immersion of schemes [def-pc-scheme] [def-weil-closed-immersion], let $J=\\ker(i)$ and $I$ be ideal sheaves on $Y$ [def-sbc-closed-immersion-ideal-sheaf], and suppose $I(U)\\cap J(U)=0$ for every open $U\\subseteq Y$. Use module pullback and its adjunction with pushforward [def-pc-module-pullback]. Let $I_1$ be the image of the adjoint map $i^*I\\to\\mathcal O_X$ corresponding to the ideal inclusion followed by the structure-sheaf map. For every invertible module $M$ [def-sc-invertible-module], every $m\\ge0$, and every linear isomorphism $e:i^*(M^{\\otimes m})\\cong(i^*M)^{\\otimes m}$ [def-pur-sheaf-tensor-product], there exists a morphism $\\rho:IM^{\\otimes m}\\to i_*(I_1(i^*M)^{\\otimes m})$ whose composite with the target multiplication-image inclusion is the source image inclusion followed by the adjunction unit and $i_*e$, and whose section map on every open $U$ is bijective. Both ideal-module products denote the images of their multiplication maps.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Remark remark-conductor, final sentence, and the local trivialization argument used in Lemma lemma-dim-1-noetherian-reduced-separated-has-ample"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put N=M tensor-power m. On affine opens trivializing N, the closed immersion is A -> B=A/J and the ideal I has sections K. Multiplication K tensor A -> A has image K, and the adjoint ideal map B tensor K -> B has image KB. The map K -> KB is surjective with kernel K intersect J, hence bijective by the hypothesis. Outside the closed image J is the unit ideal, so K=0. No reducedness or component hypothesis is used.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-closed-immersion",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local corestrictions are induced by the ambient adjunction unit and agree on overlaps since the target image inclusion is mono, so the sheaf axiom glues them. They are locally isomorphisms, hence are isomorphisms of sheaves. A change of adjunction precomposes the adjoint ideal map by an isomorphism and preserves its image; transport the restriction morphism by the corresponding natural isomorphism on N. Any linear comparison e carries the product by that image ideal to the target product. This gives precisely the displayed factorization. Evaluating the inverse on any open proves sectionwise bijectivity.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Remark remark-conductor"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion restriction of an ideal times an invertible sheaf is an isomorphism onto its image if the ideal has zero intersection with the kernel ideal",
+   "results": "8 hits; no exact theorem, nearest closed-immersion kernel isomorphism declarations",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.support",
+   "results": "support and support_eq_top_iff declarations; no exact restriction theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "closedImmersion.*ideal|ideal.*restriction|ideal.*tensor.*image",
+   "results": "only closed-immersion kernel and ideal-sheaf infrastructure; no exact theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion with ideal J and an ideal I with I intersection J zero restriction of I times a locally free module to the closed subscheme is an isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ideal sheaf restriction closed subscheme tensor invertible module disjoint kernel",
+   "results": "8 hits; no exact restriction-and-twist theorem among results",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.toModulesι",
+   "results": "0 hits; loogle: unknown identifier 'AlgebraicGeometry.Scheme.IdealSheafData.toModulesι'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*comap|image.*ideal|ker.*idealOfOpens",
+   "results": "25 hits; no exact restriction-and-twist theorem among results",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-conductor-ideal-zero-intersection",
+   "place": "Step 3: local trivialization and transport through the tensor-power comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwist",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionDisjointIdealTwist.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_disjointIdeal_twist",
+  "statement": "theorem closedImmersion_disjointIdeal_twist {Y X : Scheme.{u}} (i : X ⟶ Y) [IsClosedImmersion i] (I : Y.IdealSheafData) (hzero : ∀ U : Y.Opens, I.idealOfOpens U ⊓ i.ker.idealOfOpens U = ⊥) (M : Y.Modules) [M.IsInvertible] (m : ℕ) (e : (tensorPullback i).obj (M.tensorPow m) ≅ ((tensorPullback i).obj M).tensorPow m) : let adj := Classical.choice (nonempty_tensorPullbackAdjunction i) let φ := (adj.homEquiv I.toModules (SheafOfModules.unit X.ringCatSheaf)).symm (I.toModulesι ≫ SheafOfModules.unitToPushforwardObjUnit i.toRingCatSheafHom) let μ := I.toModulesι ▷ M.tensorPow m ≫ (λ_ (M.tensorPow m)).hom let μ₁ := image.ι φ ▷ ((tensorPullback i).obj M).tensorPow m ≫ (λ_ (((tensorPullback i).obj M).tensorPow m)).hom ∃ ρ : image μ ⟶ (pushforward i).obj (image μ₁), ρ ≫ (pushforward i).map (image.ι μ₁) = image.ι μ ≫ adj.unit.app (M.tensorPow m) ≫ (pushforward i).map e.hom ∧ ∀ U : Y.Opens, Function.Bijective (ρ.app U)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T173826-L-3295829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T173826-L-3295829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
