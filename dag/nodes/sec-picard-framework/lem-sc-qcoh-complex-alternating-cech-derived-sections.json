@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Alternating Cech total complex of a quasi-coherent complex computes derived sections",
- "statement": "Let $U$ be a scheme [def-pc-scheme] with a finite open covering $\\mathcal U:U=\\bigcup_{i=1}^rU_i$ such that $U_{i_0\\ldots i_p}=U_{i_0}\\cap\\cdots\\cap U_{i_p}$ is affine for all $p\\ge0$ and all $i_0,\\ldots,i_p$. Let $\\mathcal F^\\bullet$ be a cochain complex of quasi-coherent $\\mathcal O_U$-modules [pqf-def-coherent], not assumed bounded in either direction. Let $\\operatorname{Tot}(\\check{\\mathcal C}^\\bullet_{\\mathrm{alt}}(\\mathcal U,\\mathcal F^\\bullet))$ be the total complex of the double complex with terms $\\check{\\mathcal C}^p_{\\mathrm{alt}}(\\mathcal U,\\mathcal F^q)=\\prod_{i_0<\\cdots<i_p}\\mathcal F^q(U_{i_0\\ldots i_p})$, the alternating Cech differential $d_1$ [def-weil-pbc-site-cech-complex] in the $p$-direction, the differential $d_2$ induced by $\\mathcal F^\\bullet$ in the $q$-direction, and total differential $d_1+(-1)^pd_2$ on the $(p,q)$ term. Then there is a canonical isomorphism $\\operatorname{Tot}(\\check{\\mathcal C}^\\bullet_{\\mathrm{alt}}(\\mathcal U,\\mathcal F^\\bullet))\\to R\\Gamma(U,\\mathcal F^\\bullet)$ in $D(\\Gamma(U,\\mathcal O_U))$ [def-pc-derived-category] [def-pc-derived-direct-image], functorial in $\\mathcal F^\\bullet$.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] with a finite open covering $X=\\bigcup_{i=1}^r U_i$, allowing $r=0$, such that every intersection $U_{i_0}\\cap\\cdots\\cap U_{i_p}$ indexed by a nonempty tuple (including repetitions and empty opens) is affine. Let $F^\\bullet$ be an unbounded cochain complex of quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent] viewed by localization in $D(\\mathcal O_X)$ [def-pc-derived-category]. Let $T_{\\mathcal U}(F^\\bullet)$ and $\\alpha$ be the alternating Cech total functor and its global-section augmentation of [def-sc-alternating-cech-total-complex], with Cech degree first and total differential $d_1+(-1)^p d_2$. Write $R\\Gamma$ for the unbounded right derived functor of the module-valued global sections functor [def-sc-ringed-space-module-cohomology]. Then (i) there exists a map $\\beta_F:QT_{\\mathcal U}(F^\\bullet)\\to R\\Gamma(QF^\\bullet)$ satisfying $\\operatorname{IsAlternatingCechDerivedComparison}(\\mathcal U,F^\\bullet,\\beta_F)$, the canonical-map equation through every K-injective resolution; (ii) every map satisfying that equation is an isomorphism in $D(\\Gamma(X,\\mathcal O_X))$; and (iii) for every morphism $g:F^\\bullet\\to G^\\bullet$ of complexes of quasi-coherent modules and comparisons $\\beta_F,\\beta_G$, one has $\\beta_G\\circ Q(T_{\\mathcal U}(g))=R\\Gamma(Qg)\\circ\\beta_F$. Thus the canonical map of Stacks lemma-alternating-cech-complex-complex is an isomorphism, functorial in $F^\\bullet$, without boundedness assumptions.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Cohomology, Lemma 08C2 (cohomology-lemma-alternating-cech-complex-complex-ss) with B the affine opens, hypothesis (3) by Cohomology of Schemes, Lemma 01XB; as used in Perfect, Lemma 08D2"
@@ -22,9 +22,9 @@
  "stmt_deps": [
   "def-pc-scheme",
   "pqf-def-coherent",
-  "def-weil-pbc-site-cech-complex",
+  "def-sc-alternating-cech-total-complex",
   "def-pc-derived-category",
-  "def-pc-derived-direct-image"
+  "def-sc-ringed-space-module-cohomology"
  ],
  "proof": [
   {
@@ -228,5 +228,50 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QCohComplexAlternatingCechDerivedSections",
+  "declaration": "AlgebraicGeometry.qcoh_complex_alternating_cech_derived_sections",
+  "declarations": [
+   "AlgebraicGeometry.qcoh_complex_alternating_cech_derived_sections"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QCohComplexAlternatingCechDerivedSections.lean",
+  "statement": "theorem qcoh_complex_alternating_cech_derived_sections (X : Scheme.{u}) (r : ℕ) (U : Fin r → X.Opens) (hU : iSup U = ⊤) (hAffine : ∀ (p : ℕ) (t : Fin (p + 1) → Fin r), IsAffineOpen (⨅ k, U (t k))) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{v} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] (F : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent) : (∃ β : DerivedCategory.Q.obj ((alternatingCechTotalFunctor U).obj F) ⟶ (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj (DerivedCategory.Q.obj F), IsAlternatingCechDerivedComparison U F β) ∧ (∀ β : DerivedCategory.Q.obj ((alternatingCechTotalFunctor U).obj F) ⟶ (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj (DerivedCategory.Q.obj F), IsAlternatingCechDerivedComparison U F β → IsIso β) ∧ (∀ (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (_hG : ∀ n : ℤ, (G.X n).IsQuasicoherent) (g : F ⟶ G) (βF : DerivedCategory.Q.obj ((alternatingCechTotalFunctor U).obj F) ⟶ (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj (DerivedCategory.Q.obj F)) (βG : DerivedCategory.Q.obj ((alternatingCechTotalFunctor U).obj G) ⟶ (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.obj (DerivedCategory.Q.obj G)), IsAlternatingCechDerivedComparison U F βF → IsAlternatingCechDerivedComparison U G βG → DerivedCategory.Q.map ((alternatingCechTotalFunctor U).map g) ≫ βG = βF ≫ (RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctor.map (DerivedCategory.Q.map g))",
+  "branch": "sheaf-dag",
+  "by": "Z2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "Z2-act",
+  "group": "Z2",
+  "result": "pass",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "Z2 stage 2",
+  "old_statement": "Let $U$ be a scheme [def-pc-scheme] with a finite open covering $\\mathcal U:U=\\bigcup_{i=1}^rU_i$ such that $U_{i_0\\ldots i_p}=U_{i_0}\\cap\\cdots\\cap U_{i_p}$ is affine for all $p\\ge0$ and all $i_0,\\ldots,i_p$. Let $\\mathcal F^\\bullet$ be a cochain complex of quasi-coherent $\\mathcal O_U$-modules [pqf-def-coherent], not assumed bounded in either direction. Let $\\operatorname{Tot}(\\check{\\mathcal C}^\\bullet_{\\mathrm{alt}}(\\mathcal U,\\mathcal F^\\bullet))$ be the total complex of the double complex with terms $\\check{\\mathcal C}^p_{\\mathrm{alt}}(\\mathcal U,\\mathcal F^q)=\\prod_{i_0<\\cdots<i_p}\\mathcal F^q(U_{i_0\\ldots i_p})$, the alternating Cech differential $d_1$ [def-weil-pbc-site-cech-complex] in the $p$-direction, the differential $d_2$ induced by $\\mathcal F^\\bullet$ in the $q$-direction, and total differential $d_1+(-1)^pd_2$ on the $(p,q)$ term. Then there is a canonical isomorphism $\\operatorname{Tot}(\\check{\\mathcal C}^\\bullet_{\\mathrm{alt}}(\\mathcal U,\\mathcal F^\\bullet))\\to R\\Gamma(U,\\mathcal F^\\bullet)$ in $D(\\Gamma(U,\\mathcal O_U))$ [def-pc-derived-category] [def-pc-derived-direct-image], functorial in $\\mathcal F^\\bullet$.",
+  "what": "The old statement described the total complex and canonical map informally, but no recorded dependency defined the alternating total functor for a general scheme or its canonical comparison. The full-site Cech complex is indexed by all tuples, and the principal-open construction is only a Spec A specialization. Quantifying over an arbitrary Tot unrelated to this construction would not express the source. The correction supplies an explicit construction and the equation through every K-injective resolution, then spells out existence, invertibility of every comparison, and functoriality; the mathematical hypotheses and result are unchanged.",
+  "source": {
+   "document": "literature/stacks-project/cohomology.tex",
+   "place": "Section Cech cohomology of unbounded complexes; equation-global-sections-to-alternating-cech; lemma-alternating-cech-complex-complex (canonical map), preceding Lemma 08C2"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-affine-koszul-cech-derived-comparison",
+    "holds": true,
+    "note": "Its principal-open application still has affine intersections and termwise quasi-coherence; the newly explicit total and canonical-map equation realize the same functorial comparison in step 2."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "pqf-def-coherent",
+   "def-weil-pbc-site-cech-complex",
+   "def-pc-derived-category",
+   "def-pc-derived-direct-image"
+  ]
  }
 }
