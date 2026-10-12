@@ -35,96 +35,87 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (transport to $\\operatorname{Spec}A$).* Let $\\iota=\\iota_U:\\operatorname{Spec}A\\to X$ be the open immersion with image $U$ and $\\iota(\\mathfrak p_x)=x$ for $x\\in U$ [lem-weil-pbc-affine-open-spec-points]. Restrict along $\\iota$ [lem-weil-pbc-module-restriction-open-immersion-colimits]: $\\mathcal K'=\\mathcal K|_{\\operatorname{Spec}A}$ has $\\mathcal K'(V)=\\mathcal K(\\iota(V))$, and $\\mathcal O_X|_{\\operatorname{Spec}A}$ has $\\mathcal O_X(\\iota(V))\\cong\\mathcal O_{\\operatorname{Spec}A}(V)$ by $\\iota^\\sharp$, so $\\mathcal O_X|_{\\operatorname{Spec}A}\\cong\\mathcal O_{\\operatorname{Spec}A}$ and the restriction $j'$ of the inclusion $j:\\mathcal K\\to\\mathcal O_X$ makes $\\mathcal K'$ a sub-$\\mathcal O_{\\operatorname{Spec}A}$-module of $\\mathcal O_{\\operatorname{Spec}A}$ (each $j'_V=j_{\\iota(V)}$ is an inclusion). By part (2) of that lemma $\\mathcal K'$ is quasi-coherent [pqf-def-coherent]. Its global sections are $\\mathcal K'(\\operatorname{Spec}A)=\\mathcal K(U)$, an ideal $I$ of $A=\\Gamma(\\operatorname{Spec}A,\\mathcal O)$ [def-weil-affine-spectrum] under the identification $\\iota^\\sharp:\\mathcal O_X(U)\\cong A$ of the statement. Stalks: for $x=\\iota(\\mathfrak p)$, the open neighbourhoods $\\iota(V)$ ($V\\ni\\mathfrak p$ open) of $x$ are cofinal among all open neighbourhoods $W$ of $x$ ($W\\supseteq W\\cap U=\\iota(\\iota^{-1}W)$), so the colimits defining the stalks [def-weil-pbc-module-stalk] agree: $\\mathcal K_x=\\mathcal K'_{\\mathfrak p}$, $\\mathcal O_{X,x}\\cong\\mathcal O_{\\operatorname{Spec}A,\\mathfrak p}$ (by $\\iota^\\sharp$ on germs), and $j_x$ corresponds to $j'_{\\mathfrak p}$. So it suffices to prove: for $\\mathcal K'\\subseteq\\mathcal O_{\\operatorname{Spec}A}$ a quasi-coherent sheaf of ideals with $\\mathcal K'(\\operatorname{Spec}A)=I$ and a prime $\\mathfrak p$, $j'_{\\mathfrak p}(\\mathcal K'_{\\mathfrak p})=\\mathcal O_{\\operatorname{Spec}A,\\mathfrak p}$ iff $I\\not\\subseteq\\mathfrak p$. Below write $Y=\\operatorname{Spec}A$, $\\mathcal K$ for $\\mathcal K'$ and $j$ for $j'$.",
+   "text": "The underlying map of RingedSpace.moduleStalkFunctor is the abelian-group stalk map. The section inclusions K.toModulesι.app U are injective (IdealSheafData.injective_toModulesι_app). Apply TopCat.Presheaf.stalkFunctor_map_injective_of_app_injective to obtain injectivity at every point.",
    "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "pqf-def-coherent",
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01IN (lemma-closed-subspace-scheme, line 1744): one works on an affine open U = Spec(R) of X; the transport is written by the agent"
-   }
-  },
-  {
-   "text": "*Step 2 ($\\mathcal K_{\\mathfrak p}$ is an ideal of $\\mathcal O_{Y,\\mathfrak p}$).* $j_V$ is injective for every open $V$, so the $\\mathcal O_{Y,\\mathfrak p}$-linear stalk map $j_{\\mathfrak p}:\\mathcal K_{\\mathfrak p}\\to\\mathcal O_{Y,\\mathfrak p}$ is injective [lem-weil-pbc-module-stalk-exact] (1), and its image is an ideal of the ring $\\mathcal O_{Y,\\mathfrak p}$ (an $\\mathcal O_{Y,\\mathfrak p}$-submodule of $\\mathcal O_{Y,\\mathfrak p}$, stalk maps being $\\mathcal O_{Y,\\mathfrak p}$-linear [def-weil-pbc-module-stalk]); this is the identification of $\\mathcal K_x$ with an ideal of $\\mathcal O_{X,x}$ made in the statement.",
-   "uses": [
-    "lem-weil-pbc-module-stalk-exact",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Example 01HM (example-closed-subspace, line 369): the stalk I_x is an ideal of O_{X,x} and O_{Z,z} = O_{X,x}/I_x"
-   }
-  },
-  {
-   "text": "*Step 3 (the image of $j_{\\mathfrak p}$ is $I\\,\\mathcal O_{Y,\\mathfrak p}$).* Let $\\rho:A\\to\\mathcal O_{Y,\\mathfrak p}$, $a\\mapsto a_{\\mathfrak p}$, be the germ map; it is a localization of $A$ at $S=A\\setminus\\mathfrak p$ [lem-weil-pbc-spec-domain-stalks-function-field] (1). Let $\\widetilde I$ and $\\tau_Y:I\\to\\widetilde I(Y)$ be as in [lem-weil-pbc-spec-module-tilde-sections]. Since $\\mathcal K$ is quasi-coherent (Step 1), the counit $\\varepsilon:\\widetilde{\\Gamma(Y,\\mathcal K)}=\\widetilde I\\to\\mathcal K$ is an isomorphism of $\\mathcal O_Y$-modules [lem-weil-pbc-affine-tilde-gamma-adjunction] (3); as it corresponds to $\\mathrm{id}_I$ under $\\alpha\\mapsto\\alpha_Y\\circ\\tau_Y$ (part (1)), $\\varepsilon_Y(\\tau_Y(a))=a\\in\\mathcal K(Y)=I$ for $a\\in I$. Its stalk $\\varepsilon_{\\mathfrak p}:\\widetilde I_{\\mathfrak p}\\to\\mathcal K_{\\mathfrak p}$ is an $\\mathcal O_{Y,\\mathfrak p}$-linear bijection (the stalk of the inverse is inverse to it, stalks being functorial [def-weil-pbc-module-stalk]). By [lem-weil-pbc-spec-tilde-stalk-localization], $\\lambda_I:I\\to\\widetilde I_{\\mathfrak p}$, $a\\mapsto\\tau_Y(a)_{\\mathfrak p}$, is a localization of $I$ at $S$, $\\widetilde I_{\\mathfrak p}$ being an $A$-module through $\\rho$; by its property (b) every element of $\\widetilde I_{\\mathfrak p}$ is $\\rho(s)^{-1}\\lambda_I(a)$ with $a\\in I$, $s\\in S$. Now $j_{\\mathfrak p}(\\varepsilon_{\\mathfrak p}(\\lambda_I(a)))=j_{\\mathfrak p}(\\varepsilon_Y(\\tau_Y(a))_{\\mathfrak p})=(j_Y(a))_{\\mathfrak p}=\\rho(a)$, since $j_Y$ is the inclusion $I\\subseteq A$. As $\\varepsilon_{\\mathfrak p}$ is surjective and $j_{\\mathfrak p}\\circ\\varepsilon_{\\mathfrak p}$ is $\\mathcal O_{Y,\\mathfrak p}$-linear, $j_{\\mathfrak p}(\\mathcal K_{\\mathfrak p})=\\{\\rho(s)^{-1}\\rho(a):a\\in I,\\ s\\in S\\}$.",
-   "uses": [
-    "lem-weil-pbc-spec-domain-stalks-function-field",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-tilde-stalk-localization",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01IN (lemma-closed-subspace-scheme, line 1744), clause (4): I|_U = I~, and Lemma 01IA (lemma-quasi-coherent-affine, line 1279); the stalk computation is written by the agent (not in Stacks)"
-   }
-  },
-  {
-   "text": "*Step 4 ($\\mathcal K_{\\mathfrak p}=\\mathcal O_{Y,\\mathfrak p}$ iff $I\\not\\subseteq\\mathfrak p$).* By Step 3, $\\mathcal K_{\\mathfrak p}=\\mathcal O_{Y,\\mathfrak p}$ iff $1=\\rho(s)^{-1}\\rho(a)$ for some $a\\in I$, $s\\in S$, i.e. $\\rho(a)=\\rho(s)$. If $a\\in I\\setminus\\mathfrak p$, then $a\\in S$ and $\\rho(a)$ is a unit (property (a) of the localization $\\rho$, [lem-weil-pbc-spec-domain-stalks-function-field] (1)), so $1=\\rho(a)^{-1}\\rho(a)$ with $s=a$. Conversely, if $\\rho(a)=\\rho(s)$ with $a\\in I$, $s\\in S$, property (c) gives $t\\in S$ with $ta=ts$; then $ta\\in I$ (an ideal) and $ta=ts\\notin\\mathfrak p$ ($\\mathfrak p$ prime, $t,s\\notin\\mathfrak p$), so $I\\not\\subseteq\\mathfrak p$. Through Step 1 ($x=\\iota(\\mathfrak p_x)$, $I=\\mathcal K(U)$): $\\mathcal K_x=\\mathcal O_{X,x}$ iff $\\mathcal K(U)\\not\\subseteq\\mathfrak p_x$, i.e. $V(\\mathcal K)\\cap U$ corresponds to $V(\\mathcal K(U))=\\{\\mathfrak p:\\mathcal K(U)\\subseteq\\mathfrak p\\}$.",
-   "uses": [
-    "lem-weil-pbc-spec-domain-stalks-function-field"
+    "def-pc-module-stalk-functor",
+    "def-sbc-closed-immersion-ideal-sheaf"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Example 01HM (example-closed-subspace, line 369): Z = Supp(O_X/I) = {x : I_x != O_{X,x}}; the computation on Spec R is written by the agent"
+    "place": "Schemes, Example 01HM (example-closed-subspace, line 369: the closed subspace associated to a sheaf of ideals I locally generated by sections has underlying set Z = Supp(O_X/I), i.e. the x with I_x != O_{X,x}, as in the proof of Lemma 01HP lemma-characterize-closed-subspace) with Lemma 01IN (lemma-closed-subspace-scheme, line 1744: on an affine open U = Spec R, i^{-1}(U) -> U is Spec(R/I) -> Spec R and I|_U = I~), so Z cap U = V(I(U)); the stalk computation (a in I(U) outside p_x is a unit near x; conversely 1 in K(D(f)) = K(U)_f forces f^m in K(U) subset p_x) is not written in Stacks"
    }
   },
   {
-   "text": "*Step 5 ($V(\\mathcal K)=i(Z)$, closed).* Let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion] with ideal sheaf $\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)=\\mathcal K$ [def-sbc-closed-immersion-ideal-sheaf]; one exists by [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme]. By [lem-weil-pbc-closed-immersion-image-zero-locus], $i(Z)$ is closed in $X$ and for every affine open $U$ of $X$, $i(Z)\\cap U=\\{x\\in U:\\mathcal K(U)\\subseteq\\mathfrak p_x\\}$, with $\\mathfrak p_x$ defined through the same open immersion $\\iota_U$ [lem-weil-pbc-affine-open-spec-points]; by Step 4 this is $V(\\mathcal K)\\cap U$. Every point of the scheme $X$ has an affine open neighbourhood [def-pc-scheme], so the affine opens cover $X$ and $V(\\mathcal K)=\\bigcup_U V(\\mathcal K)\\cap U=\\bigcup_U i(Z)\\cap U=i(Z)$, a closed subset of $X$.",
+   "text": "Suppose the stalk inclusion at x is surjective. Lift the germ of the global section 1, and represent its lift by a section a on U. By TopCat.Presheaf.germ_eq_of_isBasis for X.isBasis_affineOpens, shrink the equality of the two germs to an affine W containing x. Naturality makes the restricted a map to 1. IdealSheafData.range_toModulesι_app therefore gives 1 in K.ideal W. If x belonged to K.support, mem_support_iff_of_mem would put x in X.zeroLocus(K.ideal W), contradicting x in X.basicOpen(1)=W. Thus x is outside the support.",
    "uses": [
-    "def-weil-closed-immersion",
+    "def-pc-scheme",
+    "def-pc-module-stalk-functor",
     "def-sbc-closed-immersion-ideal-sheaf",
-    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
-    "lem-weil-pbc-closed-immersion-image-zero-locus",
-    "lem-weil-pbc-affine-open-spec-points",
-    "def-pc-scheme"
+    "lem-weil-pbc-closed-immersion-image-zero-locus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Example 01HM (example-closed-subspace, line 369), Lemma 01HP (lemma-characterize-closed-subspace, line 415) and Lemma 01IN (lemma-closed-subspace-scheme, line 1744) (3): i^{-1}(U) -> U is Spec(R/I) -> Spec(R)"
+    "place": "Schemes, Example 01HM (example-closed-subspace, line 369: the closed subspace associated to a sheaf of ideals I locally generated by sections has underlying set Z = Supp(O_X/I), i.e. the x with I_x != O_{X,x}, as in the proof of Lemma 01HP lemma-characterize-closed-subspace) with Lemma 01IN (lemma-closed-subspace-scheme, line 1744: on an affine open U = Spec R, i^{-1}(U) -> U is Spec(R/I) -> Spec R and I|_U = I~), so Z cap U = V(I(U)); the stalk computation (a in I(U) outside p_x is a unit near x; conversely 1 in K(D(f)) = K(U)_f forces f^m in K(U) subset p_x) is not written in Stacks"
+   }
+  },
+  {
+   "text": "Conversely let x be outside K.support, and represent any element of the structure-module stalk by b on V. Since K.support is closed and affine opens form a basis, choose affine W containing x inside V minus K.support. By lemma-nagata-ideal-unit-off-support, K.ideal W is the unit ideal. The section b restricted to W is in the range of K.toModulesι.app W by range_toModulesι_app. Choose a preimage section, whose germ maps to the original germ by stalkFunctor_map_germ_apply and germ_res_apply. This proves surjectivity. The chosen lift is only used inside a proof, not to define any data.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-module-stalk-functor",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lemma-nagata-ideal-unit-off-support",
+    "lem-weil-pbc-closed-immersion-image-zero-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Example 01HM (example-closed-subspace, line 369: the closed subspace associated to a sheaf of ideals I locally generated by sections has underlying set Z = Supp(O_X/I), i.e. the x with I_x != O_{X,x}, as in the proof of Lemma 01HP lemma-characterize-closed-subspace) with Lemma 01IN (lemma-closed-subspace-scheme, line 1744: on an affine open U = Spec R, i^{-1}(U) -> U is Spec(R/I) -> Spec R and I|_U = I~), so Z cap U = V(I(U)); the stalk computation (a in I(U) outside p_x is a unit near x; conversely 1 in K(D(f)) = K(U)_f forces f^m in K(U) subset p_x) is not written in Stacks"
+   }
+  },
+  {
+   "text": "The preceding equivalence identifies the set of nonsurjective stalk inclusions with K.support. On an affine U, mem_support_iff_of_mem and fromSpec_preimage_zeroLocus identify support membership with K.ideal U contained in the point prime; fromSpec_primeIdealOf identifies the point itself. Negating gives the surjectivity criterion. Rewrite coe_support_inter with fromSpec_image_zeroLocus for the asserted equality of sets. The support is closed by its existing Mathlib construction.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-closed-immersion-image-zero-locus",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Example 01HM (example-closed-subspace, line 369: the closed subspace associated to a sheaf of ideals I locally generated by sections has underlying set Z = Supp(O_X/I), i.e. the x with I_x != O_{X,x}, as in the proof of Lemma 01HP lemma-characterize-closed-subspace) with Lemma 01IN (lemma-closed-subspace-scheme, line 1744: on an affine open U = Spec R, i^{-1}(U) -> U is Spec(R/I) -> Spec R and I|_U = I~), so Z cap U = V(I(U)); the stalk computation (a in I(U) outside p_x is a unit near x; conversely 1 in K(D(f)) = K(U)_f forces f^m in K(U) subset p_x) is not written in Stacks"
+   }
+  },
+  {
+   "text": "For any closed immersion i with i.ker=K, Scheme.Hom.support_ker identifies K.support with the closure of Set.range i. The range is already closed by i.isClosedEmbedding.isClosed_range. Its closure is itself, proving the final equality.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-image-zero-locus",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Example 01HM (example-closed-subspace, line 369: the closed subspace associated to a sheaf of ideals I locally generated by sections has underlying set Z = Supp(O_X/I), i.e. the x with I_x != O_{X,x}, as in the proof of Lemma 01HP lemma-characterize-closed-subspace) with Lemma 01IN (lemma-closed-subspace-scheme, line 1744: on an affine open U = Spec R, i^{-1}(U) -> U is Spec(R/I) -> Spec R and I|_U = I~), so Z cap U = V(I(U)); the stalk computation (a in I(U) outside p_x is a unit near x; conversely 1 in K(D(f)) = K(U)_f forces f^m in K(U) subset p_x) is not written in Stacks"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "pqf-def-coherent",
-  "def-weil-affine-spectrum",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-spec-domain-stalks-function-field",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-tilde-stalk-localization",
-  "def-weil-closed-immersion",
+  "def-pc-module-stalk-functor",
   "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "def-pc-scheme",
   "lem-weil-pbc-closed-immersion-image-zero-locus",
-  "def-pc-scheme"
+  "lemma-nagata-ideal-unit-off-support",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Example 01HM (example-closed-subspace, line 369), Lemma 01HP (lemma-characterize-closed-subspace, line 415), Lemma 01IN (lemma-closed-subspace-scheme, line 1744); Stacks defines the underlying set of the closed subspace as Supp(O_X/I) = {x : I_x != O_{X,x}} and identifies it on an affine U = Spec R with Spec(R/I), but does not write the stalk computation I~_p = I_p, I R_p = R_p iff I not in p; those steps were written by the agent"
+  "place": "Schemes, Example 01HM and Lemmas 01HP and 01IN; D3 direct germ proof using the existing affine support API and ideal-unit-off-support lemma. Read the official tag pages because the local literature checkout is absent. No tilde transport or localization is needed."
  },
  "mathlib_searches": [
   {
@@ -207,5 +198,15 @@
   "group": "F1",
   "result": "pass",
   "note": "X:Scheme.{u}; K:X.IdealSheafData via K.toModulesι (as landed IntegralIdealGenericStalk); K_x ideal = injective moduleStalkFunctor map; K_x=O_x = surjective; U affineOpens, p_x = U.2.primeIdealOf x; V(K)∩U = fromSpec '' {p | K.ideal U ≤ p}; IsClosed; every closed immersion i with i.ker = K has range = V(K); no hollow hyps, no let, single universe"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T085226-L-8838",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
