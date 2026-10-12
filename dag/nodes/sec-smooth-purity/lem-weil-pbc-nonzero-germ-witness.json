@@ -1,0 +1,106 @@
+{
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-lisse-generic-kernel.md",
+  "place": "Proof step 1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "If every image section has zero germ, naturality and the universal property of the stalk colimit make every stalk map zero. Apply the already proved upstream declaration AlgebraicGeometry.Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint in WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint directly to obtain ψ=0, a contradiction. A marked lift supplies a point of U. No invocation of isIso_of_isIso_sheafFiber_map or of the conservativity DAG node occurs.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-lisse-generic-kernel.md",
+  "place": "Proof step 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of a locally constant etale sheaf with nonzero germ restricts to a nonempty neighbourhood with nonzero germs everywhere",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally constant etale sheaf section nonzero stalk refine neighbourhood all germs nonzero",
+   "results": "RingedSpace.exists_res_eq_zero_of_germ_eq_zero and TopCat.Presheaf.germ_exist; no etale refinement statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.IsConstant",
+   "results": "0 hits: unknown identifier 'Sheaf.IsConstant'",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstant|toPresheafFiber_eq_iff",
+   "results": "25 hits, mostly Condensed.Discrete constant objects; no etale section refinement theorem.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocallyConstantNonzeroGerms",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lisse-generic-kernel",
+   "place": "Proof step 1: find nonzero image germs locally",
+   "via": [
+    "lem-weil-pbc-locally-constant-nonzero-germs"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "id": "lem-weil-pbc-nonzero-germ-witness",
+ "kind": "statement",
+ "title": "Existence of a nonzero geometric germ",
+ "statement": "Let X be a scheme [def-weil-pbc-scheme-conventions], N,F abelian sheaves on its small etale site [def-weil-pbc-abelian-etale-sheaves], and ψ:N→F a nonzero morphism. There exist a nonempty etale X-scheme U, a section s of N on U, an algebraically closed field Ω, a geometric point t:Spec Ω→X and a lift v to U such that the germ of ψ(s) at v [def-weil-pbc-geometric-stalks] is nonzero.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NonzeroGermWitness",
+  "file": "lean/Sheaf/AlgebraicGeometry/NonzeroGermWitness.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_section_nonzero_at_some_germ",
+  "statement": "theorem exists_section_nonzero_at_some_germ (X : Scheme.{u})\n    (N F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (ψ : N ⟶ F) (hψ : ψ ≠ 0) :\n    ∃ (U : X.Etale) (_ : Nonempty U.left) (s : N.obj.obj (op U)),\n      ∃ (Ω : Type u), ∃ (_ : Field Ω) (_ : IsAlgClosed Ω)\n        (t : Spec (.of Ω) ⟶ X) (v : (pointSmallEtale t).fiber.obj U),\n        (pointSmallEtale t).toPresheafFiber U v F.obj\n          (ψ.hom.app (op U) s) ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T060732-L-2904468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T060732-L-2904468",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

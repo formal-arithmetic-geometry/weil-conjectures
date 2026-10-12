@@ -6,6 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.NonzeroGermWitness
+import Sheaf.AlgebraicGeometry.RefineNonzeroGerm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # A nonzero morphism into a locally constant sheaf has locally nonzero germs
@@ -58,6 +60,17 @@ theorem exists_section_everywhere_nonzero_germ (X : Scheme.{u})
     ∃ (U : X.Etale) (_ : Nonempty U.left) (s : N.obj.obj (op U)),
       ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X)
         (v : (pointSmallEtale t).fiber.obj U),
-        (pointSmallEtale t).toPresheafFiber U v F.obj (ψ.hom.app (op U) s) ≠ 0 := by sorry
+        (pointSmallEtale t).toPresheafFiber U v F.obj (ψ.hom.app (op U) s) ≠ 0 := by
+  obtain ⟨U, _, s, Ω, hΩ, hcl, t, v, hs⟩ :=
+    exists_section_nonzero_at_some_germ X N F ψ hψ
+  obtain ⟨V, r, hV, hr⟩ :=
+    refine_section_nonzero_germs X F hF U (ψ.hom.app (op U) s) Ω t v hs
+  refine ⟨V, hV, N.obj.map r.op s, ?_⟩
+  intro Ω' hΩ' hcl' t' v'
+  have hn := congrArg (fun f ↦ f s) (ψ.hom.naturality r.op)
+  change ψ.hom.app (op V) (N.obj.map r.op s) =
+    F.obj.map r.op (ψ.hom.app (op U) s) at hn
+  rw [hn]
+  exact hr Ω' t' v'
 
 end AlgebraicGeometry.Scheme

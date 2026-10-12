@@ -15,53 +15,26 @@
  ],
  "proof": [
   {
-   "text": "For a nonzero morphism ψ:N→F, geometric stalk exactness and conservativity imply joint faithfulness: if all stalk maps were zero, the image sheaf would have all stalks zero, hence would be zero, forcing ψ=0. Choose a stalk element with nonzero image and represent it by a section s on a pointed etale neighbourhood.",
+   "text": "Use the proved nonzero germ witness to obtain a section s on U with one nonzero image germ.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the covering of the underlying set sheaf of F to choose a trivializing member V containing the image of the marked point. The point lifts to V by Mathlib Scheme.pointSmallEtaleFiberObjToPreimage_surjective. Refine by the fibre product with V. Pointed neighbourhoods lying over V are cofinal (each neighbourhood is refined by its fibre product with V), so the stalk and its nonzero image germ are unchanged.",
-   "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-geometric-stalks"
+    "lem-weil-pbc-nonzero-germ-witness"
    ],
    "elementary": true
   },
   {
-   "text": "Identify the restriction of the underlying set sheaf with the constant set sheaf M. Its stalk is M: sheafification preserves geometric stalks of sets, and the constant presheaf has stalk M because the opposite category of pointed neighbourhoods is nonempty and connected. The image germ and the zero germ correspond to distinct m,z∈M. Equality of elements in a filtered colimit holds after a common refinement. Refine the section so that its image is the constant section m and the zero section is the constant section z.",
+   "text": "Apply the section refinement lemma to a=ψ(s), obtaining r:V→U and everywhere nonzero germs of F(r)(ψ(s)). Restrict s to V. Naturality of ψ identifies its image with F(r)(ψ(s)), proving the conclusion.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-sets-sheafification-geometric-stalk",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
-    "def-weil-pbc-geometric-stalks"
+    "lem-weil-pbc-refine-nonzero-germ"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Call the refined neighbourhood U. It is nonempty because it carries the retained marked point. At any geometric point t of X and lift v to U, cofinality identifies the germ with that on the trivializing member. The constant-sheaf stalk computation identifies image and zero with m and z, still distinct. Thus the image germ is nonzero for every Ω,t,v as asserted. No compatibility with group addition of the set-sheaf trivialization is needed.",
-   "uses": [
-    "lem-weil-pbc-sets-sheafification-geometric-stalk",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-sets-sheafification-geometric-stalk",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact"
+  "lem-weil-pbc-nonzero-germ-witness",
+  "lem-weil-pbc-refine-nonzero-germ"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker B3",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-lisse-generic-kernel.md",
   "place": "First proof step: nonzero germ, local trivialization, and refinement to distinct constant sections"
  },
@@ -143,9 +116,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T044759-L-2042909",
+  "landing": "20261012T060732-L-2904468",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
