@@ -6,7 +6,6 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.Paper.KoszulDifferential
-public import Sheaf.Paper.KoszulDifferentialSquareZero
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.LinearAlgebra.TensorProduct.Map
@@ -57,7 +56,21 @@ theorem koszul_contract_mem (f : Fin r → R) (n : ℕ) (x : ⋀[R]^(n + 1) (Fin
     CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R (Fin r →₀ R)))
       (Finsupp.linearCombination R f) (x : ExteriorAlgebra R (Fin r →₀ R)) ∈
         ⋀[R]^n (Fin r →₀ R) := by
-  sorry
+  obtain ⟨D, hD1, hrec, huniq, hgen, hzero, hdeg, hform, hleib, hderivuniq⟩ :=
+    koszul_differential R (Fin r →₀ R)
+      (Finsupp.linearCombination R f)
+  have hcontract : CliffordAlgebra.contractLeft
+      (Q := (0 : QuadraticForm R (Fin r →₀ R)))
+      (Finsupp.linearCombination R f) = D := by
+    apply huniq
+    · exact CliffordAlgebra.contractLeft_one
+        (0 : QuadraticForm R (Fin r →₀ R)) (Finsupp.linearCombination R f)
+    · intro v y
+      simpa only [Algebra.smul_def] using
+        CliffordAlgebra.contractLeft_ι_mul (Q := (0 : QuadraticForm R (Fin r →₀ R)))
+          (Finsupp.linearCombination R f) v y
+  rw [hcontract]
+  exact hdeg n (Submodule.mem_map_of_mem x.property)
 
 /-- The Koszul differential `d_{n+1} : ⋀^(n+1) E → ⋀^n E`, the restriction of
 contraction with `φ`, `φ(e_i) = f i`. Source: Stacks, Tags 0622/0623
@@ -74,11 +87,14 @@ noncomputable def koszulBoundary (f : Fin r → R) (n : ℕ) :
 
 Proof: the inclusions of the exterior powers into the exterior algebra are injective;
 after inclusion the composite is the square of contraction, which vanishes by
-`lem-weil-pbc-koszul-differential-square-zero`. -/
+Mathlib's `CliffordAlgebra.contractLeft_contractLeft`. -/
 theorem koszulBoundary_comp (f : Fin r → R) (n : ℕ) :
     ModuleCat.ofHom (koszulBoundary R r f (n + 1)) ≫
       ModuleCat.ofHom (koszulBoundary R r f n) = 0 := by
-  sorry
+  ext x
+  exact CliffordAlgebra.contractLeft_contractLeft
+    (Q := (0 : QuadraticForm R (Fin r →₀ R)))
+    (Finsupp.linearCombination R f) (x : ExteriorAlgebra R (Fin r →₀ R))
 
 /-- The Koszul complex `K_•(f_1, …, f_r)` of a finite sequence in a commutative ring:
 `K_n = ⋀^n_R (R^{⊕r})` with `E = Fin r →₀ R`, and differential the restriction of
@@ -100,7 +116,12 @@ theorem koszulBoundary_rTensor_comp (f : Fin r → R)
     (M : Type v) [AddCommGroup M] [Module R M] (n : ℕ) :
     ModuleCat.ofHom ((koszulBoundary R r f (n + 1)).rTensor M) ≫
       ModuleCat.ofHom ((koszulBoundary R r f n).rTensor M) = 0 := by
-  sorry
+  have h : (koszulBoundary R r f n).comp (koszulBoundary R r f (n + 1)) = 0 := by
+    exact congrArg ModuleCat.Hom.hom (koszulBoundary_comp R r f n)
+  apply ModuleCat.hom_ext
+  change ((koszulBoundary R r f n).rTensor M).comp
+    ((koszulBoundary R r f (n + 1)).rTensor M) = 0
+  rw [← LinearMap.rTensor_comp, h, LinearMap.rTensor_zero]
 
 /-- The degreewise tensor product `K_•(f) ⊗_R M`, terms `K_n ⊗_R M`, differentials
 `d_n ⊗ id_M`. Source: Stacks, Tag 0623 and the tensor convention of the node

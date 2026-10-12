@@ -37,12 +37,35 @@
   "def-weil-pbc-module-chain-complex-homology",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Identify contractLeft at the zero quadratic form with the unique differential of lem-weil-pbc-koszul-differential: Mathlib contractLeft_one and contractLeft_ι_mul supply its defining equations. Apply the degree clause via Submodule.mem_map_of_mem to obtain koszul_contract_mem.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After extensionality and inclusion of the exterior powers into the exterior algebra, koszulBoundary_comp is exactly Mathlib CliffordAlgebra.contractLeft_contractLeft. No separate square-zero theorem is required.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply ModuleCat.Hom.hom to koszulBoundary_comp. LinearMap.rTensor_comp and LinearMap.rTensor_zero give koszulBoundary_rTensor_comp. The two existing ChainComplex.of definitions then use these proved equations.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-koszul-differential",
+  "def-weil-pbc-module-tensor-product"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Definitions Tag 0622 and Tag 0623 (lines 6566-6603)"
+  "place": "Tags 0622 and 0623; implementation uses Mathlib contraction square-zero and tensor functoriality directly."
  },
  "mathlib_searches": [
   {
@@ -138,5 +161,15 @@
   "group": "G1",
   "result": "fix",
   "note": "R comm ring u, r:ℕ (r=0 ok), f:Fin r→R; E=Fin r→₀R, φ=linearCombination f (φ e_i=f_i); K_n=⋀[R]^n E over ℕ (neg. zero by convention); d=codRestrict of contractLeft(Q:=0) φ (sign D(v∧x)=φ(v)x−v∧Dx, d2(e_i∧e_j)=f_ie_j−f_je_i); d²=0 cites square-zero; K⊗M via rTensor; X/d rfl-checked"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f52ce",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T144122-L-2099717",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the three proofs with their unchanged signatures, node proof steps and dependencies; verified pruning, permitted axioms with inherited sorryAx, and clean compilation of the delivery and all 12 direct importers."
  }
 }

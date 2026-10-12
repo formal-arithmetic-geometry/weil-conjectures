@@ -8127,3 +8127,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/J2/Sheaf.RingTheory.FilteredColimitSmoothProduct (stage 3; reviewer PASS; first push; landing 20261012T144121-L-2099416 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/J2/Sheaf.RingTheory.QuasiFiniteAtPrimePermanence (stage 3; reviewer PASS; first push; landing 20261012T144121-L-2099519 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/J3/Sheaf.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransferAux (stage 3; reviewer PASS; first push; landing 20261012T144122-L-2099620 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/J3/Sheaf.Paper.KoszulComplex (stage 3; reviewer PASS; first push; landing 20261012T144122-L-2099717 (interface); batch 20261012T144049; modules 1; new nodes 0; change records: coord/changes/koszul-complex-square-zero-import.md)
