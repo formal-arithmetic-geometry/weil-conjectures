@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-etale-fpqc-agreement-sections-overlap",
+ "kind": "statement",
+ "title": "The two canonical equality predicates coincide on a double overlap",
+ "statement": "Let S and T_i be schemes [def-pc-scheme], g_i:T_i -> S morphisms, F a sheaf of sets on the small etale site of S [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets], and s_i global sections of g_i^(-1)F. Suppose the canonical pullbacks of s_i and s_j to every T_i times_S T_j agree under the chosen unit-compatible composition isomorphisms [lem-weil-pbc-sets-etale-inverse-image-composition-units]. Fix an etale object V/S and t in F(V). Put Q_i=V times_S T_i [def-pc-fibre-product], G_i=g_i^(-1)F, x_i=the unit image of t on Q_i, and y_i=the ordinary restriction of s_i to Q_i. For i,j, put D=Q_i times_V Q_j. For every scheme Z and map a:Z -> D, let p and q be its composites to Q_i and Q_j. Canonical restriction of x_i equals that of y_i along p if and only if canonical restriction of x_j equals that of y_j along q. Each canonical restriction is the inverse-image unit followed by the map (p,id_Z), respectively (q,id_Z); no equality of the two underlying section types is assumed without transport.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XN (lemma-describe-pullback), paragraph Let V; Sites Tags 03CB and 03CC"
+ },
+ "proof": [
+  {
+   "text": "For a map r:Z -> Q_i, the composition-unit equation followed by naturality of the composition isomorphism identifies the image of the canonical restriction of x_i with the canonical restriction of t along r -> Q_i -> V. The fibre-product maps agree by their projections. For y_i, naturality of the unit in the site object identifies canonical restriction with the global pullback of s_i along r -> Q_i -> T_i. The composition component is injective, so this gives an equivalence of equality predicates.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The overlap condition identifies the two maps to V and hence their composites to S. Apply matching-section propagation to the two maps to T_i and T_j. It identifies the pulled-back s_i and s_j with the exact equality transport to the common inverse-image sheaf.",
+   "uses": [
+    "lem-weil-pbc-etale-fpqc-matching-sections-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equality elimination transports the canonical restriction of t along the two equal maps to V. Rewrite both predicates by the two transported equalities. Equality transport is injective, so it preserves and reflects equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-fpqc-matching-sections-pullback",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XN (lemma-describe-pullback), paragraph Let V; Sites Tags 03CB and 03CC; detailed Lean glue by A3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The agreement locus of two sections of an etale sheaf is an open subscheme and is compatible with arbitrary pullback",
+   "results": "Service unavailable: Internal Server Error. No verdict from this unavailable service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open where two sections of an etale sheaf agree is characterized by the equality of their pullbacks along every scheme morphism",
+   "results": "Scheme.OpenCover.ext_elem; Scheme.hom_ext_of_forall; spread_out_unique_of_isGermInjective; TopCat.Presheaf.section_ext; TopCat.Presheaf.IsSheaf.section_ext. These concern other sheaves or other comparison maps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "equal.*open|agreement.*open|where.*sections.*equal in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Sites; searches of lean/Sheaf, lean/WeilConjectures and blueprint_refs for agreement open, sections agree, pullback sections",
+   "results": "Mathlib hits concern restrictions of equal opens or rational maps. The library supplies existsUnique_etaleSections_equal_open and exists_etaleSections_equal_open_etale_criterion, but no universal extension of an arbitrary prescribed ordinary criterion and no matching-section overlap propagation theorem. No matching blueprint node found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFpqcAgreementOpenCompatibility",
+  "group": "A3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Tag 09XN (lemma-describe-pullback), paragraph beginning Let V: because s_i and s_j agree their agreement opens pull back to the same open; Tag 09XM; The two canonical equality predicates coincide on a double overlap",
+   "via": [
+    "lem-weil-pbc-etale-fpqc-agreement-open-compatibility",
+    "lem-weil-pbc-etale-fpqc-representative-open",
+    "lem-weil-pbc-etale-fpqc-matching-family",
+    "lem-weil-pbc-etale-sections-fpqc-existence",
+    "lem-weil-pbc-etale-sections-fpqc-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFpqcAgreementSectionsOverlap",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFpqcAgreementSectionsOverlap.lean",
+  "declaration": "AlgebraicGeometry.etaleFpqcAgreementSections_overlap_eq_iff",
+  "statement": "theorem etaleFpqcAgreementSections_overlap_eq_iff\n    {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)\n    (F : Sheaf S.smallEtaleTopology (Type (u + 1)))\n    (s : ∀ i, ((Scheme.etaleSetPullback (g i)).obj F).obj.obj\n      (op (Scheme.Etale.mk (𝟙 (T i)))))\n    (hcompat : ∀ i j,\n      ((Classical.choose etaleSetInverseImageCompositionUnits.2.2\n          S (T i) (pullback (g i) (g j)) (g i) (pullback.fst (g i) (g j))).hom.app F).hom.app\n        (op (Scheme.Etale.mk (𝟙 (pullback (g i) (g j)))))\n        (((Scheme.etaleSetPullback (pullback.fst (g i) (g j))).obj\n            ((Scheme.etaleSetPullback (g i)).obj F)).obj.map\n          (MorphismProperty.Over.homMk\n            (pullback.lift (pullback.fst (g i) (g j)) (𝟙 (pullback (g i) (g j)))\n              ((Category.comp_id _).trans (Category.id_comp _).symm))\n            (by simp) :\n            Scheme.Etale.mk (𝟙 (pullback (g i) (g j))) ⟶\n              (MorphismProperty.Over.pullback @Etale ⊤ (pullback.fst (g i) (g j))).obj\n                (Scheme.Etale.mk (𝟙 (T i)))).op\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @Etale ⊤ (pullback.fst (g i) (g j))) _\n            ((T i).smallGrothendieckTopology @Etale)\n            ((pullback (g i) (g j)).smallGrothendieckTopology @Etale)).unit.app\n              ((Scheme.etaleSetPullback (g i)).obj F)).hom.app\n            (op (Scheme.Etale.mk (𝟙 (T i)))) (s i))) =\n        Eq.mp (congrArg (fun k : pullback (g i) (g j) ⟶ S ↦\n          ((Scheme.etaleSetPullback k).obj F).obj.obj\n            (op (Scheme.Etale.mk (𝟙 (pullback (g i) (g j))))))\n          (pullback.condition (f := g i) (g := g j)).symm)\n        (((Classical.choose etaleSetInverseImageCompositionUnits.2.2\n            S (T j) (pullback (g i) (g j)) (g j) (pullback.snd (g i) (g j))).hom.app F).hom.app\n          (op (Scheme.Etale.mk (𝟙 (pullback (g i) (g j)))))\n          (((Scheme.etaleSetPullback (pullback.snd (g i) (g j))).obj\n              ((Scheme.etaleSetPullback (g j)).obj F)).obj.map\n            (MorphismProperty.Over.homMk\n              (pullback.lift (pullback.snd (g i) (g j)) (𝟙 (pullback (g i) (g j)))\n                ((Category.comp_id _).trans (Category.id_comp _).symm))\n              (by simp) :\n              Scheme.Etale.mk (𝟙 (pullback (g i) (g j))) ⟶\n                (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd (g i) (g j))).obj\n                  (Scheme.Etale.mk (𝟙 (T j)))).op\n            (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n              (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd (g i) (g j))) _\n              ((T j).smallGrothendieckTopology @Etale)\n              ((pullback (g i) (g j)).smallGrothendieckTopology @Etale)).unit.app\n                ((Scheme.etaleSetPullback (g j)).obj F)).hom.app\n              (op (Scheme.Etale.mk (𝟙 (T j)))) (s j)))))\n    (V : S.Etale) (t : F.obj.obj (op V)) :\n    let Q (j : I) := (MorphismProperty.Over.pullback @Etale ⊤ (g j)).obj V\n    let G (j : I) := (Scheme.etaleSetPullback (g j)).obj F\n    let x (j : I) := ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n      (MorphismProperty.Over.pullback @Etale ⊤ (g j)) (Type (u + 1))\n      (S.smallGrothendieckTopology @Etale)\n      ((T j).smallGrothendieckTopology @Etale)).unit.app F).hom.app (op V) t\n    let y (j : I) := (G j).obj.map\n      (MorphismProperty.Over.homMk (pullback.snd V.hom (g j)) (Category.comp_id _) :\n        Q j ⟶ Scheme.Etale.mk (𝟙 (T j))).op (s j)\n    ∀ (j k : I) (Z : Scheme.{u})\n      (a : Z ⟶ pullback (pullback.fst V.hom (g j)) (pullback.fst V.hom (g k))),\n      let p := a ≫ pullback.fst (pullback.fst V.hom (g j)) (pullback.fst V.hom (g k))\n      let q := a ≫ pullback.snd (pullback.fst V.hom (g j)) (pullback.fst V.hom (g k))\n      let H := (Scheme.etaleSetPullback (p ≫ (Q j).hom)).obj (G j)\n      let K := (Scheme.etaleSetPullback (q ≫ (Q k).hom)).obj (G k)\n      let δp : Scheme.Etale.mk (𝟙 Z) ⟶\n          (MorphismProperty.Over.pullback @Etale ⊤ (p ≫ (Q j).hom)).obj (Q j) :=\n        MorphismProperty.Over.homMk\n          (pullback.lift p (𝟙 Z) (Category.id_comp (p ≫ (Q j).hom)).symm)\n          (pullback.lift_snd _ _ _)\n      let δq : Scheme.Etale.mk (𝟙 Z) ⟶\n          (MorphismProperty.Over.pullback @Etale ⊤ (q ≫ (Q k).hom)).obj (Q k) :=\n        MorphismProperty.Over.homMk\n          (pullback.lift q (𝟙 Z) (Category.id_comp (q ≫ (Q k).hom)).symm)\n          (pullback.lift_snd _ _ _)\n      let ηp := ((@Functor.sheafPullbackConstruction.sheafAdjunctionContinuous _ _ _ _\n        (MorphismProperty.Over.pullback @Etale ⊤ (p ≫ (Q j).hom)) (Type (u + 1)) _\n        ((T j).smallGrothendieckTopology @Etale)\n        (Z.smallGrothendieckTopology @Etale)\n        (Etale.isContinuous_overPullback (p ≫ (Q j).hom)) _ _).unit.app (G j)).hom.app (op (Q j))\n      let ηq := ((@Functor.sheafPullbackConstruction.sheafAdjunctionContinuous _ _ _ _\n        (MorphismProperty.Over.pullback @Etale ⊤ (q ≫ (Q k).hom)) (Type (u + 1)) _\n        ((T k).smallGrothendieckTopology @Etale)\n        (Z.smallGrothendieckTopology @Etale)\n        (Etale.isContinuous_overPullback (q ≫ (Q k).hom)) _ _).unit.app (G k)).hom.app (op (Q k))\n      (H.obj.map δp.op (ηp (x j)) = H.obj.map δp.op (ηp (y j))) ↔\n        (K.obj.map δq.op (ηq (x k)) = K.obj.map δq.op (ηq (y k)))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "state": "none"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T214704-L-1269142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T214704-L-1269142",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

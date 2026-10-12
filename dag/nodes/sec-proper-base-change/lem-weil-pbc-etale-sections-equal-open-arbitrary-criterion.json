@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-etale-sections-equal-open-arbitrary-criterion",
+ "kind": "statement",
+ "title": "An ordinary agreement-open criterion extends to arbitrary maps",
+ "statement": "Let S be a scheme [def-pc-scheme], F a sheaf of sets on its small etale site [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets], Q an etale object over S, s,t in F(Q), and E an open of Q. Suppose for every etale object A/S and map m:A -> Q over S that range(m) is contained in E if and only if F(m)(s)=F(m)(t). Then for every scheme T and arbitrary map a:T -> Q, range(a) is contained in E if and only if the canonical restrictions of s and t agree in (a composed with Q -> S)^(-1)F(T). Canonical restriction is the adjunction unit followed by restriction along (a,id_T) into the fibre product [def-pc-fibre-product, lem-weil-pbc-sets-etale-inverse-image-composition-units].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XM (lemma-where-sections-are-equal), applied over the etale object Q; Tag 03S2 for ordinary etale restriction"
+ },
+ "proof": [
+  {
+   "text": "Choose the canonical open W with its arbitrary-map factorization criterion.",
+   "uses": [
+    "lem-weil-pbc-etale-sections-equal-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each ordinary etale test m:A -> Q, compare canonical restriction with F(m) using the restriction isomorphism for A -> S. Its unit formula and naturality identify the sections after two injective isomorphism components, hence reflect equality. The restriction comparison accepts an explicit structural map w and a proof m.left composed with Q.hom equals w; equality elimination with w=A.hom handles transport within this comparison, so no separate canonicalSection_eq_iff theorem is required.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An arbitrary map factors through an open exactly when its range is contained in that open: use IsOpenImmersion.lift in one direction and evaluate the factorization on points in the other. Test the own open immersions of E and W in their common ordinary criterion to get both inclusions and E=W. Substitute into W's arbitrary-map criterion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-sections-equal-open",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XM (lemma-where-sections-are-equal), applied over the etale object Q; Tag 03S2 for ordinary etale restriction; detailed Lean glue by A3; returned duplicate transport helper removed and its role incorporated into the generalized local restriction comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The agreement locus of two sections of an etale sheaf is an open subscheme and is compatible with arbitrary pullback",
+   "results": "Service unavailable: Internal Server Error. No verdict from this unavailable service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open where two sections of an etale sheaf agree is characterized by the equality of their pullbacks along every scheme morphism",
+   "results": "Scheme.OpenCover.ext_elem; Scheme.hom_ext_of_forall; spread_out_unique_of_isGermInjective; TopCat.Presheaf.section_ext; TopCat.Presheaf.IsSheaf.section_ext. These concern other sheaves or other comparison maps.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "equal.*open|agreement.*open|where.*sections.*equal in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Sites; searches of lean/Sheaf, lean/WeilConjectures and blueprint_refs for agreement open, sections agree, pullback sections",
+   "results": "Mathlib hits concern restrictions of equal opens or rational maps. The library supplies existsUnique_etaleSections_equal_open and exists_etaleSections_equal_open_etale_criterion, but no universal extension of an arbitrary prescribed ordinary criterion and no matching-section overlap propagation theorem. No matching blueprint node found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFpqcAgreementOpenCompatibility",
+  "group": "A3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Tag 09XN (lemma-describe-pullback), paragraph beginning Let V: because s_i and s_j agree their agreement opens pull back to the same open; Tag 09XM; An ordinary agreement-open criterion extends to arbitrary maps",
+   "via": [
+    "lem-weil-pbc-etale-fpqc-agreement-open-compatibility",
+    "lem-weil-pbc-etale-fpqc-representative-open",
+    "lem-weil-pbc-etale-fpqc-matching-family",
+    "lem-weil-pbc-etale-sections-fpqc-existence",
+    "lem-weil-pbc-etale-sections-fpqc-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenArbitraryCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionsEqualOpenArbitraryCriterion.lean",
+  "declaration": "AlgebraicGeometry.etaleSections_equal_open_arbitrary_criterion",
+  "statement": "theorem etaleSections_equal_open_arbitrary_criterion\n    (S : Scheme.{u}) (F : Sheaf S.smallEtaleTopology (Type (u + 1)))\n    (Q : S.Etale) (s t : F.obj.obj (op Q)) (E : Q.left.Opens)\n    (hE : ∀ (A : S.Etale) (m : A ⟶ Q),\n      Set.range m.left ⊆ (E : Set Q.left) ↔ F.obj.map m.op s = F.obj.map m.op t) :\n    ∀ (T : Scheme.{u}) (a : T ⟶ Q.left),\n      let H := (Scheme.etaleSetPullback (a ≫ Q.hom)).obj F\n      let δ : Scheme.Etale.mk (𝟙 T) ⟶\n          (MorphismProperty.Over.pullback @Etale ⊤ (a ≫ Q.hom)).obj Q :=\n        MorphismProperty.Over.homMk\n          (pullback.lift a (𝟙 T) (Category.id_comp (a ≫ Q.hom)).symm)\n          (pullback.lift_snd _ _ _)\n      let η := ((@Functor.sheafPullbackConstruction.sheafAdjunctionContinuous _ _ _ _\n        (MorphismProperty.Over.pullback @Etale ⊤ (a ≫ Q.hom)) (Type (u + 1)) _\n        (S.smallGrothendieckTopology @Etale)\n        (T.smallGrothendieckTopology @Etale)\n        (Etale.isContinuous_overPullback (a ≫ Q.hom)) _ _).unit.app F).hom.app (op Q)\n      Set.range a ⊆ (E : Set Q.left) ↔ H.obj.map δ.op (η s) = H.obj.map δ.op (η t)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "state": "none"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T214704-L-1269142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T214704-L-1269142",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

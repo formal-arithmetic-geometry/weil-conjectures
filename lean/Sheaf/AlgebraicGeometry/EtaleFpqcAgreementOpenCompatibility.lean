@@ -6,9 +6,8 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen
-import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenEtaleCriterion
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
+import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenArbitraryCriterion
+import Sheaf.AlgebraicGeometry.EtaleFpqcAgreementSectionsOverlap
 
 /-! # Compatibility of agreement opens for a matching family
 Source: Stacks Project, Tag 09XN, agreement-open paragraph.
@@ -104,6 +103,49 @@ theorem etaleFpqcAgreementOpens_compatible
     ∀ j k,
       (pullback.fst (pullback.fst V.hom (g j)) (pullback.fst V.hom (g k))) ⁻¹ᵁ E j =
         (pullback.snd (pullback.fst V.hom (g j)) (pullback.fst V.hom (g k))) ⁻¹ᵁ E k := by
-  sorry
+  classical
+  let Q (j : I) := (MorphismProperty.Over.pullback @Etale ⊤ (g j)).obj V
+  let G (j : I) := (Scheme.etaleSetPullback (g j)).obj F
+  let x (j : I) := ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.pullback @Etale ⊤ (g j)) (Type (u + 1))
+    (S.smallGrothendieckTopology @Etale)
+    ((T j).smallGrothendieckTopology @Etale)).unit.app F).hom.app (op V) t
+  let y (j : I) := (G j).obj.map
+    (MorphismProperty.Over.homMk (pullback.snd V.hom (g j)) (Category.comp_id _) :
+      Q j ⟶ Scheme.Etale.mk (𝟙 (T j))).op (s j)
+  have htest (j : I) (A : (T j).Etale) (m : A ⟶ Q j) :
+      Set.range m.left ⊆ (E j : Set (pullback V.hom (g j) : Scheme.{u})) ↔
+        (G j).obj.map m.op (x j) = (G j).obj.map m.op (y j) := by
+    simpa only [y, op_comp, Functor.map_comp, comp_apply] using hE j A m
+  intro j k
+  let D := pullback (pullback.fst V.hom (g j)) (pullback.fst V.hom (g k))
+  let p : D ⟶ (Q j).left :=
+    pullback.fst (pullback.fst V.hom (g j)) (pullback.fst V.hom (g k))
+  let q : D ⟶ (Q k).left :=
+    pullback.snd (pullback.fst V.hom (g j)) (pullback.fst V.hom (g k))
+  have hall (Z : Scheme.{u}) (a : Z ⟶ D) :
+      Set.range (a ≫ p) ⊆ (E j : Set (pullback V.hom (g j) : Scheme.{u})) ↔
+        Set.range (a ≫ q) ⊆ (E k : Set (pullback V.hom (g k) : Scheme.{u})) :=
+    (etaleSections_equal_open_arbitrary_criterion (T j) (G j) (Q j)
+      (x j) (y j) (E j) (htest j) Z (a ≫ p)).trans
+      ((etaleFpqcAgreementSections_overlap_eq_iff T g F s hcompat V t j k Z a).trans
+        (etaleSections_equal_open_arbitrary_criterion (T k) (G k) (Q k)
+          (x k) (y k) (E k) (htest k) Z (a ≫ q)).symm)
+  change p ⁻¹ᵁ E j = q ⁻¹ᵁ E k
+  apply le_antisymm
+  · let U := p ⁻¹ᵁ E j
+    have hU : Set.range (U.ι ≫ p) ⊆ (E j : Set (pullback V.hom (g j) : Scheme.{u})) := by
+      rintro z ⟨w, rfl⟩
+      exact w.property
+    have hW := (hall U.toScheme U.ι).mp hU
+    intro z hz
+    exact hW ⟨⟨z, hz⟩, rfl⟩
+  · let U := q ⁻¹ᵁ E k
+    have hU : Set.range (U.ι ≫ q) ⊆ (E k : Set (pullback V.hom (g k) : Scheme.{u})) := by
+      rintro z ⟨w, rfl⟩
+      exact w.property
+    have hW := (hall U.toScheme U.ι).mpr hU
+    intro z hz
+    exact hW ⟨⟨z, hz⟩, rfl⟩
 
 end AlgebraicGeometry
