@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Comma.Over.Basic
+import Sheaf.CategoryTheory.StageSectionTransitionExistence
+import Sheaf.CategoryTheory.StageSectionFunctorFromTransitions
 
 
 /-! # Functorial stage section diagrams
@@ -82,6 +84,9 @@ theorem colimit_site_stage_section_diagram
         (t t' : Under i) (b : t ⟶ t'),
         Arrow.mk ((E t).hom.app G ≫ ((θ t t' b).app G).hom.app
           (op ((F.map t.hom).toFunctor.obj U))) =
-        Arrow.mk ((L.obj G).map b ≫ (E t').hom.app G) := by sorry
+        Arrow.mk ((L.obj G).map b ≫ (E t').hom.app G) := by
+  obtain ⟨θ, hθ⟩ := stage_section_transition_existence J F P i
+  obtain ⟨L, E, hmL⟩ := stage_section_functor_from_transitions J F P i U θ hθ
+  exact ⟨L, E, θ, hθ, hmL⟩
 
 end CategoryTheory

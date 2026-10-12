@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-stage-section-transition-existence",
+ "kind": "statement",
+ "title": "Existence of stage transition maps",
+ "statement": "Let J be a small category, F : J → Cat a diagram of small categories [def-weil-pbc-category-colimit], and P_j a precoverage on F(j), generating T_j [def-weil-pbc-sites-and-cohomology]. Assume each F(a) is continuous for T_j and T_k. Fix i in J. For t in Under(i), write f_t = F(t.hom), S_t = (f_t)_s, and R_t = (f_t)^s, with unit η_t of S_t ⊣ R_t [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. For b : t → t′ write R_b = F(b.right)^s; restrictions satisfy R_b followed by R_t = R_t′, up to the equality induced by F.map_comp and t.hom ≫ b.right = t′.hom. There exist natural transformations θ_b : S_t → S_t′ followed by R_b such that for every sheaf G on T_i and every X in F(i), η_t(G)_X followed by θ_b(G) at f_t(X) equals η_t′(G)_X as objects of the arrow category of sets (including transport of the codomain along the stated equality). No section diagram or coherence laws are part of this conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 adjunction paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Use Under.w and F.map_comp to identify f_t followed by F(b.right) with f_t′. Functor.sheafPushforwardContinuousComp′ for eqToIso of this equality identifies R_b followed by R_t with R_t′.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Whisker the inverse of this restriction isomorphism by S_t′ and compose with eta_t′. Transpose the resulting natural transformation through the whiskered adjunction (S_t adjoint to R_t) using Adjunction.whiskerRight and the inverse homEquiv. This constructs theta as a natural transformation in G.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The homEquiv inverse equation and homEquiv_unit give the unit equation. Evaluate at G and op X, unfold the restriction comparison, and rewrite eqToIso.hom, eqToHom_app, eqToHom_op, and eqToHom_map. Arrow.arrow_mk_comp_eqToHom shows that postcomposing with eqToHom preserves Arrow.mk, giving the exact required equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteStageSectionDiagram",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-stage-section-diagram",
+   "place": "decomposition",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.StageSectionTransitionExistence",
+  "file": "lean/Sheaf/CategoryTheory/StageSectionTransitionExistence.lean",
+  "declaration": "CategoryTheory.stage_section_transition_existence",
+  "statement": "theorem stage_section_transition_existence\n    (J : Type u) [SmallCategory J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (i : J) :\n    ∃ (θ : ∀ (t t' : Under i) (b : t ⟶ t'),\n        sheafPullback (F.map t.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t.right).toGrothendieck ⟶\n        sheafPullback (F.map t'.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t'.right).toGrothendieck ⋙\n          (F.map b.right).toFunctor.sheafPushforwardContinuous (Type u)\n            (P t.right).toGrothendieck (P t'.right).toGrothendieck),\n      ∀ (G : Sheaf (P i).toGrothendieck (Type u))\n        (t t' : Under i) (b : t ⟶ t') (X : F.obj i),\n        Arrow.mk (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app\n            (op X) ≫ ((θ t t' b).app G).hom.app\n              (op ((F.map t.hom).toFunctor.obj X))) =\n        Arrow.mk (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t'.right).toGrothendieck).unit.app G).hom.app\n            (op X))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuous_comp|sheafComposeNatTrans|homEquiv.*naturality",
+   "results": "25 hits: Mathlib/Order/Category/BddLat.lean, Mathlib/Order/Category/BddLat.lean, Mathlib/Order/Category/PartOrd.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Rep/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "supporting API only; no theorem with this complete stage-diagram statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-13",
+   "verdict": "supporting API only; no theorem with this complete stage-diagram statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation between inverse image sheaves via restriction equality transpose adjunction unit",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, CategoryTheory.Sheaf.ΓRes_map, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, TopCat.Sheaf.extend_hom_app, AlgebraicGeometry.Scheme.ofRestrict_app",
+   "date": "2026-10-13",
+   "verdict": "supporting API only; no theorem with this complete stage-diagram statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction constructs natural transformation from units along composable continuous functors of sites",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuousComp|sheafPushforwardContinuousIso|Adjunction.*whiskerRight",
+   "results": "17 hits: Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean, Mathlib/CategoryTheory/Sites/Point/Map.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean, Mathlib/CategoryTheory/Sites/Continuous.lean",
+   "date": "2026-10-13",
+   "verdict": "supporting API only; no theorem with this complete stage-diagram statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "package coherent natural transformations as functor to functor category evaluation isomorphism",
+   "results": "8 hits: CategoryTheory.compEvaluation, CategoryTheory.whiskeringLeftCompEvaluation, CategoryTheory.whiskeringRightCompEvaluation, CategoryTheory.compEvaluation_hom_app, CategoryTheory.Functor.constCompEvaluationObj, CategoryTheory.Endofunctor.Algebra.functorOfNatTransComp, CategoryTheory.Functor.natTransEquiv, CategoryTheory.compEvaluation_inv_app",
+   "date": "2026-10-13",
+   "verdict": "supporting API only; no theorem with this complete stage-diagram statement"
+  },
+  {
+   "tool": "grep",
+   "query": "section diagram, sheaf_unit_unique, sheaf_triangle_comp, sheaf_triangle_id; sheafPushforwardContinuousComp, whiskerRight homEquiv in lean/Sheaf and upstream WeilConjectures/CategoryTheory",
+   "results": "ColimitSiteAbelianSectionDiagram.lean has private adjunct uniqueness and triangle coherence proofs for AddCommGrpCat. Their argument applies to Type u; no directly applicable public theorem constructs the functor in the input sheaf. Upstream PushforwardMonoidal provides composition comparison but no such diagram. Mathlib Arrow.arrow_mk_comp_eqToHom provides the transport equality.",
+   "date": "2026-10-13",
+   "verdict": "reuse the proved argument for local coherence proofs, and the existing Mathlib transport lemma; add naturality in the input sheaf"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T194136-L-463403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T194136-L-463403",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
