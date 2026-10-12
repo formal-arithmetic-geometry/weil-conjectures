@@ -194,13 +194,6 @@ theorem hasWeightsAtMost_directImage_of_isSeparated {F : WeilSheaf k₀ l U} (hF
     (Scheme.Hom.mem_finitePoints_iff_of_isIso V.ι _).1 s.2
   exact norm_le_of_hasEigenvalue_stalk_directImage_of_isPullback j ι hpb hF hw ⟨_, hy⟩ s rfl hα
 
-/-- Isomorphisms of Frobenius modules can be inverted. -/
-private lemma _root_.FrobeniusModule.Equiv.nonempty_symm'' {K : Type*} [Field K]
-    {M N : FrobeniusModule K} (e : M.Equiv N) : Nonempty (N.Equiv M) :=
-  ⟨⟨e.toLinearEquiv.symm, fun y ↦ by
-    obtain ⟨x, rfl⟩ := e.toLinearEquiv.surjective y
-    rw [← e.map_frobenius, LinearEquiv.symm_apply_apply, LinearEquiv.symm_apply_apply]⟩⟩
-
 /-- Blueprint `cor-wf-unramified-boundary-purity` (second assertion; second assertion of
 `sk-p-real-semi`): *purity extends over the boundary for a lisse sheaf*.
 
@@ -232,10 +225,9 @@ theorem IsLisse.isPunctuallyPureOfWeight_of_upperStar {G : WeilSheaf k₀ l C} (
     obtain ⟨e₁⟩ := nonempty_equiv_stalk_upperStar j (G.dual hG) z x rfl hdeg
     obtain ⟨e₂⟩ := nonempty_equiv_stalk_dual hG x
     obtain ⟨e₃⟩ := nonempty_equiv_stalk_upperStar j G z x rfl hdeg
-    obtain ⟨e₄⟩ := e₃.nonempty_symm''
     have h₁ := FrobeniusModule.hasEigenvalue_inv_of_hasEigenvalue_dual
       (e₂.hasEigenvalue (e₁.hasEigenvalue hα))
-    have h₂ := hw z α⁻¹ (e₄.hasEigenvalue h₁)
+    have h₂ := hw z α⁻¹ (e₃.symm.hasEigenvalue h₁)
     rw [map_inv₀, norm_inv] at h₂
     rw [neg_div, Real.rpow_neg (Nat.cast_nonneg _), ← h₂, inv_inv]
   obtain ⟨eD⟩ := hD.nonempty_iso_directImage_upperStar j hj
@@ -244,9 +236,8 @@ theorem IsLisse.isPunctuallyPureOfWeight_of_upperStar {G : WeilSheaf k₀ l C} (
   intro x α hα
   have hle := hup x α ((stalkEquivOfIso e x).hasEigenvalue hα)
   obtain ⟨e₂⟩ := nonempty_equiv_stalk_dual hG x
-  obtain ⟨e₅⟩ := e₂.nonempty_symm''
   have hαD : ((G.dual hG).stalk x).frobeniusEnd.HasEigenvalue α⁻¹ :=
-    e₅.hasEigenvalue (FrobeniusModule.hasEigenvalue_dual_inv_of_hasEigenvalue hα)
+    e₂.symm.hasEigenvalue (FrobeniusModule.hasEigenvalue_dual_inv_of_hasEigenvalue hα)
   have hge := hdown x α⁻¹ ((stalkEquivOfIso eD x).hasEigenvalue hαD)
   rw [map_inv₀, norm_inv, neg_div, Real.rpow_neg (Nat.cast_nonneg _)] at hge
   have hpos : 0 < ‖ι α‖ :=

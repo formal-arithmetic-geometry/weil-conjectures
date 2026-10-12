@@ -34,20 +34,9 @@ open scoped ProEtale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- Isomorphisms of Frobenius modules compose. -/
-private lemma _root_.FrobeniusModule.Equiv.nonempty_trans {K : Type*} [Field K]
-    {M N P : FrobeniusModule K} (e : M.Equiv N) (e' : N.Equiv P) : Nonempty (M.Equiv P) :=
-  ⟨⟨e.toLinearEquiv.trans e'.toLinearEquiv, fun v ↦ by
-    rw [LinearEquiv.trans_apply, e.map_frobenius, e'.map_frobenius, LinearEquiv.trans_apply]⟩⟩
-
-/-- Every Frobenius module is isomorphic to itself. -/
-private lemma _root_.FrobeniusModule.Equiv.nonempty_refl {K : Type*} [Field K]
-    (M : FrobeniusModule K) : Nonempty (M.Equiv M) :=
-  ⟨⟨LinearEquiv.refl _ _, fun _ ↦ rfl⟩⟩
-
 /-- The stalk with its Frobenius relative to `𝔽_{qᵐ}` only depends on `m`, not on the proof of
 the fixed-point property. -/
-private lemma nonempty_equiv_stalkAt_of_eq {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+theorem nonempty_equiv_stalkAt_of_eq {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     (G : WeilSheaf k₀ l X)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     {m m' : ℕ} (h : m = m')
@@ -57,7 +46,7 @@ private lemma nonempty_equiv_stalkAt_of_eq {X : Scheme.{u}} [X.Over (Spec (CommR
       (specGeometricFrobenius k₀ ^ m').hom ≫ s) :
     Nonempty ((G.stalkAt s m hs).Equiv (G.stalkAt s m' hs')) := by
   subst h
-  exact FrobeniusModule.Equiv.nonempty_refl _
+  exact ⟨.refl _⟩
 
 /-- **The direct image along an open immersion does not change the stalks on the open.** For a
 quasi-compact open immersion `j : U₀ ⟶ X₀` of `k₀`-schemes locally of finite type, a Weil sheaf
@@ -119,8 +108,6 @@ theorem nonempty_equiv_stalk_directImage {U X : Scheme.{u}} [U.Over (Spec (CommR
     (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
       (X ↘ Spec (CommRingCat.of k₀)) x) ht''
   obtain ⟨e₄⟩ := ((lowerStar j).obj F).nonempty_equiv_stalkAt_of_eq _ hdeg.symm ht'' ht'
-  obtain ⟨e₅⟩ := e₃.nonempty_trans e₄
-  obtain ⟨e₆⟩ := e₅.nonempty_trans e₂
-  exact e₆.nonempty_trans (stalkEquivOfIso e y)
+  exact ⟨((e₃.trans e₄).trans e₂).trans (stalkEquivOfIso e y)⟩
 
 end AlgebraicGeometry.WeilSheaf

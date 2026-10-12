@@ -85,38 +85,6 @@ open scoped ProEtale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- Isomorphisms of Frobenius modules compose. -/
-private lemma _root_.FrobeniusModule.Equiv.nonempty_trans' {K : Type*} [Field K]
-    {M N P : FrobeniusModule K} (e : M.Equiv N) (e' : N.Equiv P) : Nonempty (M.Equiv P) :=
-  ⟨⟨e.toLinearEquiv.trans e'.toLinearEquiv, fun v ↦ by
-    rw [LinearEquiv.trans_apply, e.map_frobenius, e'.map_frobenius, LinearEquiv.trans_apply]⟩⟩
-
-/-- Isomorphisms of Frobenius modules can be inverted. -/
-private lemma _root_.FrobeniusModule.Equiv.nonempty_symm' {K : Type*} [Field K]
-    {M N : FrobeniusModule K} (e : M.Equiv N) : Nonempty (N.Equiv M) :=
-  ⟨⟨e.toLinearEquiv.symm, fun y ↦ by
-    obtain ⟨x, rfl⟩ := e.toLinearEquiv.surjective y
-    rw [← e.map_frobenius, LinearEquiv.symm_apply_apply, LinearEquiv.symm_apply_apply]⟩⟩
-
-/-- Every Frobenius module is isomorphic to itself. -/
-private lemma _root_.FrobeniusModule.Equiv.nonempty_refl' {K : Type*} [Field K]
-    (M : FrobeniusModule K) : Nonempty (M.Equiv M) :=
-  ⟨⟨LinearEquiv.refl _ _, fun _ ↦ rfl⟩⟩
-
-/-- The stalk with its Frobenius relative to `𝔽_{qᵐ}` only depends on `m`, not on the proof of
-the fixed-point property. -/
-private lemma nonempty_equiv_stalkAt_of_eq' {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-    (G : WeilSheaf k₀ l X)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    {m m' : ℕ} (h : m = m')
-    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
-    (hs' : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m').hom =
-      (specGeometricFrobenius k₀ ^ m').hom ≫ s) :
-    Nonempty ((G.stalkAt s m hs).Equiv (G.stalkAt s m' hs')) := by
-  subst h
-  exact FrobeniusModule.Equiv.nonempty_refl' _
-
 /-- **The stalk of a pullback.** For a morphism `φ : X ⟶ Y` of `k₀`-schemes, a Weil sheaf `G` on
 `Y` and a closed point `z` of `X` whose image `x = φ z` has the same degree over `k₀` (e.g. `φ`
 an open immersion), the stalk of `φ^* G` at `z` is the stalk of `G` at `x`, compatibly with the
@@ -165,10 +133,8 @@ theorem nonempty_equiv_stalk_upperStar {X Y : Scheme.{u}} [X.Over (Spec (CommRin
   obtain ⟨e₃⟩ := G.nonempty_equiv_stalkAt _ _ hss' (hx₁ ▸ x.2) _
     (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
       (Y ↘ Spec (CommRingCat.of k₀)) x) ht''
-  obtain ⟨e₄⟩ := nonempty_equiv_stalkAt_of_eq' G _ hdeg.symm ht'' ht'
-  obtain ⟨e₅⟩ := e₃.nonempty_trans' e₄
-  obtain ⟨e₆⟩ := e₅.nonempty_trans' e₂
-  exact e₆.nonempty_symm'
+  obtain ⟨e₄⟩ := G.nonempty_equiv_stalkAt_of_eq _ hdeg.symm ht'' ht'
+  exact ⟨((e₃.trans e₄).trans e₂).symm⟩
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- Pushforwards along equal morphisms agree. -/
@@ -290,11 +256,8 @@ theorem nonempty_equiv_stalk_directImage_of_isPullback (h : IsPullback j' ι' ι
   obtain ⟨i₄⟩ := nonempty_iso_lowerStar_lowerStar h.w ((upperStar ι').obj F)
   obtain ⟨e₅⟩ := nonempty_equiv_stalk_directImage ι ((lowerStar j').obj ((upperStar ι').obj F))
     y x hyx
-  obtain ⟨e₆⟩ := e₁.nonempty_symm'
-  obtain ⟨e₇⟩ := e₆.nonempty_trans' (stalkEquivOfIso i₂ y)
-  obtain ⟨e₈⟩ := e₇.nonempty_trans' e₃
-  obtain ⟨e₉⟩ := e₈.nonempty_trans' (stalkEquivOfIso i₄ x)
-  exact e₉.nonempty_trans' e₅
+  exact ⟨(((e₁.symm.trans (stalkEquivOfIso i₂ y)).trans e₃).trans (stalkEquivOfIso i₄ x)).trans
+    e₅⟩
 
 end Restriction
 
