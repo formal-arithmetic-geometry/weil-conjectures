@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-coherent-map-torsion-completion-ext-zero",
+ "kind": "statement",
+ "title": "Power-torsion kernel embeds in a deep ideal quotient",
+ "statement": "For a map b:Q -> R of coherent modules on a Noetherian scheme X and an ideal K, if K^t ker(b)=0 for some positive t, then for some n the composite ker(b) -> Q -> Q/K^(n+1)Q is a monomorphism.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YA (Artin-Rees), applied to the uniqueness argument of Tags 0889 and 088A"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "The kernel T of b is coherent by coherent kernel closure and hence quasi-coherent by the coherent/finite-type criterion. Apply the existing sheaf Artin-Rees inclusion to T -> Q: for e >= c, T intersect K^e Q is contained in K^(e-c) T. Set e=c+t, which is positive. The right side is zero by hker. The kernel of T -> Q/K^e Q is this intersection, so this map is monomorphic. Write e=n+1. This uses the uniform sheaf Artin-Rees theorem, whose finite-affine-cover argument is already recorded in its own node.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-artin-rees",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YA (Artin-Rees), applied to the uniqueness argument of Tags 0889 and 088A"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-artin-rees",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YA (Artin-Rees), applied to the uniqueness argument of Tags 0889 and 088A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A torsion submodule of a finite module embeds in a sufficiently deep ideal power quotient over a Noetherian ring",
+   "results": "Service unavailable: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "power torsion submodule embeds in sufficiently deep ideal quotient Artin Rees",
+   "results": "Ideal.exists_pow_inf_eq_pow_smul in Mathlib.RingTheory.Filtration provides affine Artin--Rees; no sheaf statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule, Ideal, IsNoetherian",
+   "results": "FractionalIdeal.isNoetherian_coeIdeal only; no sheaf statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "artin.?rees|Artin.?Rees",
+   "results": "Mathlib.RingTheory.Filtration contains Ideal.exists_pow_inf_eq_pow_smul; no sheaf-level statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "artin.?rees|kernel.*quotient.*mono (independent second reading)",
+   "results": "Sheaf.AlgebraicGeometry.CoherentArtinRees.coherent_artin_rees gives the uniform intersection inclusion, not this torsion-kernel quotient conclusion; use it as the shorter lower-level route. No exact duplicate in lean/Sheaf or lean/WeilConjectures. Independent LeanFinder and Loogle also confirm Ideal.exists_pow_inf_eq_pow_smul only at ring level.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentMapTorsionCompletionExt",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-map-torsion-completion-ext",
+   "place": "Uniqueness argument: detect the torsion kernel in a finite quotient"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentMapTorsionCompletionExtZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentMapTorsionCompletionExtZero.lean",
+  "declaration": "AlgebraicGeometry.coherentMap_torsion_completion_ext_zero",
+  "statement": "theorem coherentMap_torsion_completion_ext_zero\n    {X : Scheme.{u}} [IsNoetherian X] (K : X.IdealSheafData)\n    (Q R : CoherentModules X) (b : Q ⟶ R)\n    (hker : ∃ t : ℕ, 1 ≤ t ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2\n        (kernel b.hom))) :\n    ∃ n : ℕ, Mono (kernel.ι b.hom ≫ formalModuleQuotientπ K (n + 1) Q.obj)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T225305-L-1803282",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T225305-L-1803282",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9884,3 +9884,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/D4/Sheaf.Algebra.Homology.RestrictedComplementaryTruncationComparison (stage 3; reviewer PASS; first push; landing 20261012T225304-L-1802931 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/E2/Sheaf.Paper.ZariskiEtaleResolutionPullbackCocycle (stage 3; reviewer PASS; after a return; landing 20261012T225304-L-1803031 (interface); batch 20261012T225253; modules 3; new nodes 2)
 - 22:53 L: merged deliver/E2/Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRingLocalization (stage 3; reviewer PASS; after a return; landing 20261012T225304-L-1803178 (proof); batch 20261012T225253; modules 1; new nodes 0)
+- 22:53 L: merged deliver/E3/Sheaf.AlgebraicGeometry.CoherentMapTorsionCompletionExt (stage 3; reviewer PASS; first push; landing 20261012T225305-L-1803282 (interface); batch 20261012T225253; modules 2; new nodes 1)
