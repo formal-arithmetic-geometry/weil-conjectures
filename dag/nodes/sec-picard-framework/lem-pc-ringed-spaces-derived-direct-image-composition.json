@@ -26,48 +26,30 @@
  ],
  "proof": [
   {
-   "text": "The ringed-space derived adjunction statement [lem-pc-ringed-spaces-derived-adjoint-general] gives adjunctions $Lf^*\\dashv Rf_*$, $Lg^*\\dashv Rg_*$, and $L(g\\circ f)^*\\dashv R(g\\circ f)_*$ on the corresponding derived categories.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079W (cohomology-lemma-adjoint)"
-   }
+   "text": "Module direct image for f followed by g equals direct image for f ≫ g definitionally: on an open W both take sections on f^{-1}(g^{-1}(W)), and the scalar actions are the composite structure-sheaf map. The private Lean theorem moduleDirectImage_comp_eq checks this equality by rfl.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The derived pullback composition statement [lem-pc-ringed-spaces-derived-pullback-composition] supplies a canonical natural isomorphism $Lf^*\\circ Lg^*\\cong L(g\\circ f)^*$, so transporting the last adjunction across this isomorphism makes $R(g\\circ f)_*$ a right adjoint of $Lf^*\\circ Lg^*$.",
+   "text": "Use the pasted unit rightDerivedFunctorCompUnit. On a K-injective complex I its factors are the second unit at f_*I, which is invertible by the acyclicity lemma, and Rg_* of the first unit at I, which is invertible by the defining K-injective computation of right derived functors. The homotopy-category composition and associativity comparisons are isomorphisms.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-ringed-space-direct-image-kinjective-acyclic"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D5S (cohomology-lemma-derived-pullback-composition)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-cat-right-adjoint-composition] with $F=Lg^*$, $G=Lf^*$, $F^!=Rg_*$, $G^!=Rf_*$, and $(G\\circ F)^!=R(g\\circ f)_*$. It gives a canonical natural isomorphism $R(g\\circ f)_*\\cong Rg_*\\circ Rf_*$. Taking its inverse yields the required canonical isomorphism $Rg_*\\circ Rf_*\\cong R(g\\circ f)_*$, natural as an isomorphism of functors $D(\\mathcal O_X)\\to D(\\mathcal O_Z)$.",
-   "uses": [
-    "lem-cat-right-adjoint-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D5T (cohomology-lemma-derived-pushforward-composition)"
-   }
+   "text": "The source library K-injective derivability structure proves that the pasted unit exhibits Rf_* ⋙ Rg_* as a right derived functor: isRightDerivedFunctor_of_isIso applies to the preceding pointwise check. The right-derived universal property therefore makes the canonical desc map from R(f ≫ g)_* invertible. Take its inverse. rightDerived_fac_app proves its unit equation; the homotopy-category comparison for Iso.refl is the identity, checked on representatives of the quotient. These categorical steps are fully proved in the private helper derivedCompositionOfAcyclic.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-cat-right-adjoint-composition"
+  "lem-pc-ringed-space-direct-image-kinjective-acyclic"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0D5T, using Tags 079W and 0D5S"
+  "place": "Tags 079W, 0D5S and 0D5T; canonical comparison reduced to the unit on K-injective representatives, with the categorical universal-property argument proved in Lean by P1"
  },
  "mathlib_searches": [
   {
@@ -161,5 +143,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T070546-L-3475183",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
