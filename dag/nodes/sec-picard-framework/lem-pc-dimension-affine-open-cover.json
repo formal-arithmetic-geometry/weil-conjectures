@@ -24,67 +24,50 @@
  ],
  "proof": [
   {
-   "text": "(Set-up.) Fix $i$ and put $R_i=\\mathcal O_X(U_i)$. Since $U_i\\cong\\operatorname{Spec}A_i$ as schemes, $U_i$ is an affine open of $X$, and applying global sections to this isomorphism gives a ring isomorphism $R_i=\\Gamma(U_i,\\mathcal O_{U_i})\\cong\\Gamma(\\operatorname{Spec}A_i,\\mathcal O)=A_i$ [def-weil-affine-spectrum]. A ring isomorphism carries chains of prime ideals to chains of prime ideals of the same length, so $\\dim R_i=\\dim A_i$ [def-weil-pbc-krull-dimension-ring]. By [lem-weil-pbc-affine-open-spec-points] there is an open immersion $\\iota_i:\\operatorname{Spec}R_i\\to X$ with image $U_i$, and for $x\\in U_i$ the prime $\\mathfrak p_x\\subset R_i$ with $\\iota_i(\\mathfrak p_x)=x$ is unique ($\\iota_i$ is injective); conversely every prime $\\mathfrak p$ of $R_i$ is $\\mathfrak p_x$ for $x=\\iota_i(\\mathfrak p)\\in U_i$. So $x\\mapsto\\mathfrak p_x$ is a bijection from $U_i$ onto the set of primes of $R_i$.",
+   "text": "For each $i$, use the supplied isomorphism $U_i\\cong\\operatorname{Spec}A_i$ directly. Put $f_i:\\operatorname{Spec}A_i\\to X$ equal to its inverse followed by the open inclusion. This is an open immersion. For $x\\in U_i$, its image $p$ under the isomorphism satisfies $f_i(p)=x$ by the inverse identity. No passage through $\\mathcal O_X(U_i)$ is required [def-weil-affine-spectrum].",
    "uses": [
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-weil-pbc-affine-open-spec-points"
+    "def-weil-affine-spectrum"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01HV (schemes-lemma-spec-sheaves, schemes.tex line 692), parts (1) and (6)"
-   }
+   "elementary": true
   },
   {
-   "text": "(Local rings.) For $x\\in U_i$, [lem-weil-pbc-affine-open-stalk-localization] (c) gives a ring isomorphism $(R_i)_{\\mathfrak p_x}\\cong\\mathcal O_{X,x}$, so $\\dim\\mathcal O_{X,x}=\\dim(R_i)_{\\mathfrak p_x}$ (isomorphic rings have the same chains of primes). By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim(R_i)_{\\mathfrak p_x}=\\operatorname{ht}\\mathfrak p_x$, the supremum of the lengths $t$ of chains $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_t\\subseteq\\mathfrak p_x$ of primes of $R_i$. Hence $\\dim\\mathcal O_{X,x}=\\operatorname{ht}\\mathfrak p_x$ for every $x\\in U_i$.",
+   "text": "The stalk map of the open immersion $f_i$ is an isomorphism, using the open-immersion stalk-map declaration recorded in [lem-weil-pbc-affine-open-stalk-localization] (b). The stalk of $\\operatorname{Spec}A_i$ at $p$ is the localization of $A_i$ at $p$ by [lem-weil-pbc-spec-domain-stalks-function-field] (1). Isomorphic rings have equal Krull dimension, since their prime spectra are order-isomorphic [def-weil-pbc-krull-dimension-ring]. Thus [lem-weil-pbc-localization-dimension-chains-below-prime] gives $\\dim\\mathcal O_{X,f_i(p)}=\\operatorname{ht}p$.",
    "uses": [
     "lem-weil-pbc-affine-open-stalk-localization",
-    "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "def-weil-pbc-krull-dimension-ring"
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01HV (schemes-lemma-spec-sheaves, schemes.tex line 692), parts (1) and (6)"
-   }
+   "elementary": false
   },
   {
-   "text": "(Supremum over one chart.) By step 1, as $x$ runs over $U_i$ the prime $\\mathfrak p_x$ runs over all primes of $R_i$, each once. By step 2 and [lem-pc-ring-dimension-supremum-heights] applied to $R_i$, $\\sup_{x\\in U_i}\\dim\\mathcal O_{X,x}=\\sup_{\\mathfrak p\\subset R_i\\text{ prime}}\\operatorname{ht}\\mathfrak p=\\dim R_i=\\dim A_i$, in $\\{-\\infty,0,1,\\ldots,\\infty\\}$; for $U_i=\\emptyset$ both sides are $-\\infty$ ($R_i\\cong A_i$ has no prime).",
+   "text": "For each $i$, [lem-pc-ring-dimension-supremum-heights] gives $\\dim A_i=\\sup_{p\\in\\operatorname{Spec}A_i}\\operatorname{ht}p$. In Lean change the indexing type from points of the scheme to PrimeSpectrum before identifying ideal height with order height: the scheme specialization order is the opposite order. The supremum is in WithBot ENat; when the chart is empty both sides are bottom.",
    "uses": [
     "lem-pc-ring-dimension-supremum-heights"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Definition 00KF (definition-height, line 14347) and Lemma 00KG (algebra-lemma-dimension-height, line 14353)"
-   }
+   "elementary": false
   },
   {
-   "text": "(Conclusion.) Since $X=\\bigcup_iU_i$, the supremum over $x\\in X$ splits as a supremum of suprema: $\\dim X=\\sup_{x\\in X}\\dim\\mathcal O_{X,x}=\\sup_{i\\in I}\\sup_{x\\in U_i}\\dim\\mathcal O_{X,x}$ (every $x$ lies in some $U_i$, and every term on the right is a term on the left) [def-pc-dimension]; by step 3 this is $\\sup_{i\\in I}\\dim A_i$. ($X\\neq\\emptyset$ is only needed for $\\dim X$ to be defined by [def-pc-dimension]; then some $U_i$ is nonempty and the supremum is $\\ge0$.)",
+   "text": "Unfold $\\dim X=\\sup_{x\\in X}\\dim\\mathcal O_{X,x}$ [def-pc-dimension]. For the forward inequality, the cover gives an $i$ and $x\\in U_i$. Step 1 gives $p$ with $f_i(p)=x$; step 2 bounds the stalk dimension by the supremum of heights in that chart, which is $\\dim A_i$ by step 3 and is bounded by the supremum over $i$. Conversely, for each $i$ and $p$, step 2 identifies $\\operatorname{ht}p$ with a stalk dimension of $X$, bounded by $\\dim X$. Take the supremum over $p$ using step 3, and then over $i$. Antisymmetry gives the equality.",
    "uses": [
     "def-pc-dimension"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 04MU (properties-lemma-dimension, line 1233), equality (1)=(2) read with the definition of dim X as the supremum of the dimensions of the local rings"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-affine-spectrum",
-  "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-affine-open-spec-points",
   "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-weil-pbc-krull-dimension-ring",
   "lem-weil-pbc-localization-dimension-chains-below-prime",
   "lem-pc-ring-dimension-supremum-heights",
   "def-pc-dimension"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma 04MU (properties-lemma-dimension; dim X = sup of the dimensions of the local rings), with Schemes, Lemma 01HV (6) (schemes.tex: O_{Spec A,p} = A_p), Algebra, Definition 00KF and Lemma 00KG (algebra.tex: height of p = dim R_p; dim R = sup of heights); the regrouping of the supremum over the cover is written out by the worker"
+  "place": "V1 stage-3 Lean proof, 2026-10-12: direct chart isomorphisms and open-immersion stalk maps (Schemes 01HV), localization dimension (Algebra 00KF), supremum of prime heights (00KG), and the two cover inequalities for the stalk-supremum definition (Properties 04MU)."
  },
  "mathlib_searches": [
   {
@@ -157,5 +140,15 @@
   "group": "J1",
   "result": "pass",
   "note": "X : Scheme.{u} [Nonempty X] = nonempty scheme; U : I → X.Opens, I : Type v arbitrary (empty allowed), hcover ⨆ U i = ⊤ = cover; A : I → CommRingCat.{u}, hiso (U i : Scheme) ≅ Spec (A i) = affine charts (empty chart forces A i = 0, summand ⊥); X.dim = Scheme.dim of def-pc-dimension; conclusion = ⨆ i ringKrullDim (A i) in WithBot ℕ∞; H4: Mathlib/source have only topologicalKrullDim_le_of_iSup_eq_top (topological, one inequality), not exact"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T053959-L-2648230",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
