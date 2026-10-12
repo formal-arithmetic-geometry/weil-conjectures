@@ -1,0 +1,145 @@
+{
+ "id": "lem-sp-vertical-cutoff-column-quasiiso",
+ "kind": "statement",
+ "title": "Canonical nested-cutoff comparison on one column",
+ "statement": "Let C be abelian and L a nonnegative cochain complex. For integers a<=b, let g between the cutoffs be compatible with their inclusions into the reextended L. Every map q from cokernel(g) to the smart window whose composite with the cokernel projection equals the restricted b-1 upper truncation of the canonical lower projection at a is a quasi-isomorphism. The projection equation, rather than just the type of q, is essential. theorem verticalCutoff_column_quasiIso\n    (L : CochainComplex C ℕ) (a b : ℤ) (hab : a ≤ b)\n    (g : (verticalCutoff a).obj L ⟶ (verticalCutoff b).obj L)\n    (hg : g ≫ (verticalCutoffι b).app L = (verticalCutoffι a).app L)\n    (q : cokernel g ⟶ (verticalWindow a b).obj L)\n    (hq : cokernel.π g ≫ q = HomologicalComplex.restrictionMap\n      (CochainComplex.truncLEMap\n        (CochainComplex.πTruncGE (L.extend ComplexShape.embeddingUpNat) a) (b - 1))\n      ComplexShape.embeddingUpNat) : QuasiIso q",
+ "stmt_deps": [
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section Truncations, tag 0118, canonical cochain truncations; see also Mathlib Algebra/Homology/Embedding/AreComplementary.lean, shortComplexTruncLEX₃ToTruncGE. Nested-cutoff kernel argument written by C2."
+ },
+ "proof": [
+  {
+   "text": "Monicity determines the nested cutoff map. The projection equation determines q uniquely by the cokernel universal property. Identify its degreewise kernel with the two-term image complex at a-1,a. Its differential is the canonical image isomorphism, so the kernel is contractible, and the short exact homology sequence proves QuasiIso. If a=b or b<=0 both objects vanish; if a<0 the lower projection is an isomorphism; if a=0 the image in degree -1 is zero, so restriction retains the whole nonzero kernel.",
+   "uses": [
+    "def-sp-double-complex-vertical-window",
+    "lem-sp-double-complex-vertical-tower-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section Truncations, tag 0118, canonical cochain truncations; see also Mathlib Algebra/Homology/Embedding/AreComplementary.lean, shortComplexTruncLEX₃ToTruncGE. Nested-cutoff kernel argument written by C2."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T17:45:42Z",
+   "tool": "grep",
+   "query": "shortComplexTruncLE|restriction.*quasiIso|truncLEMap.*πTruncGE",
+   "sub": "Algebra/Homology",
+   "ok": true,
+   "n_hits": 19,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean"
+   ],
+   "digest": "0e8857d5c87f3563",
+   "date": "2026-10-13",
+   "results": "19 hits; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+   "verdict": "Related complementary-cutoff and homology APIs; no nested-cutoff interval comparison."
+  },
+  {
+   "t": "2026-10-12T17:45:42Z",
+   "tool": "loogle",
+   "query": "HomologicalComplex.shortComplexTruncLEX₃ToTruncGE",
+   "sub": "",
+   "ok": true,
+   "n_hits": 4,
+   "note": "",
+   "top": [
+    "HomologicalComplex.shortComplexTruncLEX₃ToTruncGE",
+    "HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE",
+    "HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE",
+    "HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc"
+   ],
+   "digest": "b8d68cf9efc71a21",
+   "date": "2026-10-13",
+   "results": "4 hits; HomologicalComplex.shortComplexTruncLEX₃ToTruncGE, HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE, HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE, HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc",
+   "verdict": "Related complementary-cutoff and homology APIs; no nested-cutoff interval comparison."
+  },
+  {
+   "t": "2026-10-12T17:45:42Z",
+   "tool": "leansearch",
+   "query": "A cokernel of nested upper truncations is quasi-isomorphic to the interval smart truncation via the induced lower projection",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.VerticalCutoffQuotientComparison",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-vertical-cutoff-quotient-comparison",
+   "place": "Column homology verification after explicit construction of the bicomplex cokernel comparison",
+   "via": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/VerticalCutoffColumnQuasiIso.lean",
+  "declaration": "HomologicalComplex₂.verticalCutoff_column_quasiIso",
+  "statement": "theorem verticalCutoff_column_quasiIso\n    (L : CochainComplex C ℕ) (a b : ℤ) (hab : a ≤ b)\n    (g : (verticalCutoff a).obj L ⟶ (verticalCutoff b).obj L)\n    (hg : g ≫ (verticalCutoffι b).app L = (verticalCutoffι a).app L)\n    (q : cokernel g ⟶ (verticalWindow a b).obj L)\n    (hq : cokernel.π g ≫ q = HomologicalComplex.restrictionMap\n      (CochainComplex.truncLEMap\n        (CochainComplex.πTruncGE (L.extend ComplexShape.embeddingUpNat) a) (b - 1))\n      ComplexShape.embeddingUpNat) : QuasiIso q",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T184244-L-3997273",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T184244-L-3997273",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
