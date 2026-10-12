@@ -20,57 +20,49 @@
  ],
  "proof": [
   {
-   "text": "Choose a geometric point of the nonempty connected irreducible scheme U. Under the finite monodromy correspondence G is a finite-dimensional ZMod ℓ-module. Its finite image Q acts faithfully. Choose an ℓ-Sylow subgroup P; its index d is prime to ℓ. Replace P by an isomorphic finite group in Type u if necessary. The connected Galois Q-cover Y determines the connected cover V=Y/P. Functoriality identifies the pulled-back sheaf with the restriction M of the representation to P.",
+   "text": "Apply exists_finite_monodromy_trivializing_torsor to G. It supplies a finite group Q, a connected finite Q-torsor c, a finite-dimensional coefficient module A, and a trivialization alpha of c*G.",
    "uses": [
-    "cor-galois-lisse-representations",
+    "lem-weil-pbc-finite-monodromy-trivializing-torsor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose H : Sylow l Q using Mathlib Sylow.nonempty. H.isPGroup' proves the l-group condition and H.not_dvd_index proves l does not divide H.index. Apply exists_connected_subgroup_quotient to c and H.toSubgroup, obtaining V, v, the geometric fibre cardinalities, and a connected subgroup torsor cH with an isomorphism e of total spaces satisfying e.hom followed by c.pi equals cH.pi followed by v.",
+   "uses": [
     "lem-weil-pbc-sylow-subgroup-prime-index",
-    "thm-galois-fundamental",
-    "thm-galois-lc-etale"
+    "lem-weil-pbc-connected-torsor-subgroup-quotient"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
-   }
+   "elementary": false
   },
   {
-   "text": "The cover is finite étale, hence finite locally free. Its degree is locally constant on connected U and invariant under residue-field extension. Over a separably closed geometric point its algebra splits into copies of the field, whose number is both its degree and the number of geometric lifts. At the chosen point this number is [Q:P]=d, hence all the geometric fibres have cardinality d.",
+   "text": "Write C = ModuleCat (ULift (ZMod l)). The inverse of (upperStarComp C cH.pi v).app G, followed by (upperStarComp C e.hom c.pi (cH.pi followed by v) he.symm).app G, identifies cH*(v*G) with e*(c*G). Map alpha through e* and compose with (Scheme.upperStarConstantSheafIso C e.hom).app A. This is the required trivialization of cH*(v*G) by A. These four isomorphisms are composed explicitly in Lean; no descent comparison is inferred from stalk ranks.",
    "uses": [
-    "def-pc-finite-locally-free",
-    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-    "lem-weil-pbc-fibre-degree-base-change",
-    "lem-galois-geometric-fibre"
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
-   }
+   "elementary": true
   },
   {
-   "text": "Descend the constant module sheaf on the finite P-torsor Y over V, transporting scalars through ZMod l ≃ ULift (ZMod l), to obtain an additive functor T on all P-representations. Each action is continuous because P is finite discrete. Equivariant linear maps descend and preserve addition. Choose a point of Y over each canonical algebraic-closure point of V. It identifies the torsor fibre with P, and thus identifies the stalk of T naturally in the representation with its underlying module, after restricting coefficients along the inverse ULift ring equivalence. The restricted monodromy representation M descends to v*G; the trivial rank-one representation has identity transition functions and descends to the constant coefficient sheaf. No preservation of global finite limits or colimits is asserted in this construction step.",
+   "text": "Apply exists_module_descent_stalk_functor on cH to the sheaf v*G, the module A, and the trivialization just constructed. It supplies M, T, additivity, the natural stalk comparison, and the two object isomorphisms. Assemble these with the finite etale quotient and the Mathlib Sylow facts. The existential witnesses and every conjunct match the original statement.",
    "uses": [
-    "cor-galois-lisse-representations",
-    "thm-galois-lc-etale"
+    "lem-weil-pbc-connected-torsor-module-descent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "cor-galois-lisse-representations",
-  "def-pc-finite-locally-free",
-  "lem-galois-geometric-fibre",
-  "lem-weil-pbc-fibre-degree-base-change",
-  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-  "lem-weil-pbc-sylow-subgroup-prime-index",
-  "thm-galois-fundamental",
-  "thm-galois-lc-etale"
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-connected-torsor-module-descent",
+  "lem-weil-pbc-connected-torsor-subgroup-quotient",
+  "lem-weil-pbc-finite-monodromy-trivializing-torsor",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-sylow-subgroup-prime-index"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)",
-  "note": "The Sylow-cover construction follows the cited proof; the natural stalk comparison spells out descent after choosing a point in each torsor fibre."
+  "note": "Three strict intermediate arguments: finite monodromy trivialization; a subgroup quotient retaining the connected torsor; module descent on that torsor. The Lean proof chooses the Sylow subgroup, composes the actual pullback and constant-sheaf isomorphisms, and assembles the witnesses. Finite locally free rank lemmas are bypassed by the coset-fibre description."
  },
  "mathlib_searches": [
   {
@@ -139,9 +131,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T044752-L-2039147",
+  "landing": "20261012T060732-L-2904764",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
