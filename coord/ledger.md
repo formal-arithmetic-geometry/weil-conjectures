@@ -5758,3 +5758,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:39 L: merged deliver/E1/WeilConjectures.AlgebraicGeometry.Curve.FieldExtension (stage 3; reviewer PASS; after a return; landing 20261012T003805-L-609832 (interface); modules 3; new nodes 2)
 - 00:39 L: returned deliver/Q1/Sheaf.Paper.ZeroDimensionalCohomology (reviewer RETURN: (reviewer X-0bfb8, head 0bfb8452a) B: In dag/nodes/sec-curve-estimates/zero-dimensional-etale-cohomology-rest.json, repl)
 - 00:43 L: merged deliver/G1/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct (stage 3; reviewer PASS; first push; landing 20261012T004254-L-631013 (proof); modules 1; new nodes 0)
+- 00:43 L: returned deliver/K1/Sheaf.AlgebraicGeometry.Curve.PrimeCoefficientCurveAssertions (reviewer RETURN: (reviewer X-1a26e, head 1a26ee8d4) D1: PrimeCoefficientCurveAssertionsFirstHalf and PrimeCoefficientCurveAssertionsSecon)
