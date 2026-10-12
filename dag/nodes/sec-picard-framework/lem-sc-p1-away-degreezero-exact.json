@@ -12,7 +12,7 @@
  },
  "proof": [
   {
-   "text": "Localize the sequence at the powers of f using [lem-sc-p1-localization-short-exact]. This gives injectivity, exactness and surjectivity on the ordinary localizations.",
+   "text": "Define the ordinary localized maps F and G at powers of f. Apply [lem-sc-p1-localization-short-exact] (IsLocalizedModule.map_injective, map_exact, map_surjective) to obtain their injectivity, exactness and surjectivity.",
    "uses": [
     "lem-sc-p1-localization-short-exact"
    ],
@@ -23,9 +23,18 @@
    }
   },
   {
-   "text": "For f=0 all localized modules and, by injectivity of α, all A_j are zero. Otherwise f^m is nonzero of degree md, so uniqueness of polynomial homogeneous degrees forces any degree n of this denominator to be md. In the localization define degree e fractions by y/f^m with y in degree e+md. Common denominators prove closure under addition; decomposing numerators proves spanning. A finite relation of distinct degrees, put over f^N and annihilated by f^L, gives a relation of distinct original degrees e+(N+L)d, hence each term vanishes by internality. This constructs an internal localized grading. Restricting the exact localized maps to degree zero is exact by the homogeneous-component lifting argument of [lem-sc-p1-graded-degree-component-exact]. These components equal [def-sc-degree-zero-module-fractions] by the denominator degree calculation.",
+   "text": "Every localized element has a fraction representative, and every denominator in the powers of f is f^m. The hypotheses hi and hq and the map_LocalizedModules formula therefore give F(alpha_0(s))=alpha_1(i(s)) and G(alpha_1(t))=alpha_2(q(t)) for all s and t.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma 01M7 (lemma-proj-sheaves), final functoriality paragraph; Algebra Section 00JM, homogeneous localization"
+   }
+  },
+  {
+   "text": "Injectivity of F and alpha_0 gives injectivity of i. If q(s)=0, ordinary localized exactness gives a preimage of alpha_1(s) under F. Apply [lem-sc-p1-away-degreezero-lift] to choose a preimage among the equal-degree fractions [def-sc-degree-zero-module-fractions]. The prescribed range of alpha_0 lifts this fraction to t in A_0, and injectivity of alpha_1 gives i(t)=s. Conversely G(F(x))=0 from ordinary exactness implies q(i(t))=0 by injectivity of alpha_2.",
    "uses": [
-    "lem-sc-p1-graded-degree-component-exact",
+    "lem-sc-p1-away-degreezero-lift",
     "def-sc-degree-zero-module-fractions"
    ],
    "elementary": false,
@@ -35,9 +44,11 @@
    }
   },
   {
-   "text": "Every powers-of-f fraction has a denominator f^m. The fraction formulas identify i and q with the restricted localized maps. The injective α_j with the specified images identify A_j with the degree-zero components as additive groups. Transport injectivity, exactness and surjectivity across these identifications.",
-   "uses": [],
-   "elementary": true,
+   "text": "Given s in A_2, surjectivity of G gives an ordinary localized preimage of alpha_2(s). Apply [lem-sc-p1-away-degreezero-lift] for psi to obtain an equal-degree preimage. The range of alpha_1 gives t in A_1; commutativity and injectivity of alpha_2 give q(t)=s.",
+   "uses": [
+    "lem-sc-p1-away-degreezero-lift"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
     "place": "Lemma 01M7 (lemma-proj-sheaves), final functoriality paragraph; Algebra Section 00JM, homogeneous localization"
@@ -45,14 +56,14 @@
   }
  ],
  "proof_deps": [
-  "lem-sc-p1-localization-short-exact",
-  "lem-sc-p1-graded-degree-component-exact",
-  "def-sc-degree-zero-module-fractions"
+  "def-sc-degree-zero-module-fractions",
+  "lem-sc-p1-away-degreezero-lift",
+  "lem-sc-p1-localization-short-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Lemma 01M7 (lemma-proj-sheaves), final functoriality paragraph; Algebra Section 00JM, homogeneous localization"
+  "place": "Lemma 01M7 (lemma-proj-sheaves), final functoriality paragraph; Algebra Section 00JM, homogeneous localization; X2 Lean proof via denominator clearing and original homogeneous projections, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -127,9 +138,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T063526-L-3162754",
+  "landing": "20261012T085401-L-48135",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

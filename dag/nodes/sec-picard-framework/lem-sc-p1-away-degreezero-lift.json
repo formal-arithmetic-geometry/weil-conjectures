@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-p1-away-degreezero-lift",
+ "kind": "statement",
+ "title": "Lifting equal-degree fractions through a graded localized map",
+ "statement": "Let k be a field and S=k[x_0,x_1] with its total-degree homogeneous submodules S_n. Let M and N be S-modules whose additive groups are internal direct sums of subgroups M_z and N_z for z in the integers. Assume S_n N_z is contained in N_(n+z) for every nonnegative n. Let g:M→N be S-linear and satisfy g(M_z)⊆N_z. Let f∈S_d for a nonnegative integer d. Localize at the powers T of f and let g_T:T^{-1}M→T^{-1}N be the induced map. If x∈T^{-1}N is an equal-degree fraction [def-sc-degree-zero-module-fractions] and lies in the range of g_T, then x has a preimage under g_T which is an equal-degree fraction in T^{-1}M. No injectivity, exactness, surjectivity, positive degree, or scalar compatibility of the source grading is assumed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01M7 (lemma-proj-sheaves), final functoriality paragraph; Algebra Section 00JM, homogeneous localization"
+ },
+ "stmt_deps": [
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "Choose decompositions of M and N from their internal direct sums. For an additive H:M→N with H(M_z)⊆N_(z+t), projection of H(a) onto degree z+t is H applied to the degree-z projection of a. To prove this, precompose both additive maps with the canonical source direct-sum map. On a generator in degree i=z both projections are the element itself; for i≠z both are zero, since i+t≠z+t. DirectSum.addHom_ext gives equality on the whole direct sum and its inverse gives the identity on M.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma 01M7 (lemma-proj-sheaves), final functoriality paragraph; Algebra Section 00JM, homogeneous localization"
+   }
+  },
+  {
+   "text": "If f=0, the localization of N is subsingleton because T contains zero. The zero fraction 0/1 is an equal-degree preimage. Otherwise write x=b/f^m with b in degree n. Since f^m is nonzero, its total degree equals both n and d*m, hence n=d*m. Write an ordinary preimage as a/f^r. The equality of fractions is equivalent to f^l f^m g(a)=f^l f^r b for some l, or f^(l+m)g(a)=f^(l+r)b.",
+   "uses": [
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma 01M7 (lemma-proj-sheaves), final functoriality paragraph; Algebra Section 00JM, homogeneous localization"
+   }
+  },
+  {
+   "text": "The additive map H(a)=f^(l+m)g(a) shifts degrees by d*(l+m), by the degree-preserving property of g and scalar compatibility in N. The right side f^(l+r)b lies in degree d*(l+r)+d*m=d*r+d*(l+m). Apply the projection identity in source degree d*r to get f^(l+m)g(a_(d*r))=f^(l+r)b. The fraction equality criterion with the same annihilating power f^l now proves g_T(a_(d*r)/f^r)=x. Its numerator and denominator both have degree d*r, so it is an equal-degree fraction.",
+   "uses": [
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Lemma 01M7 (lemma-proj-sheaves), final functoriality paragraph; Algebra Section 00JM, homogeneous localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01M7 (lemma-proj-sheaves), final functoriality paragraph; Algebra Section 00JM, homogeneous localization; explicit denominator-clearing projection argument, formalized by X2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degree zero fraction in the range of a graded localized linear map has a degree zero preimage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero fraction in the range of a graded localized linear map has a degree zero preimage",
+   "results": "Results: HomogeneousLocalization.Away.mk_surjective, HomogeneousLocalization.Away.isLocalizationElem, HomogeneousLocalization.Away.mk, HomogeneousLocalization.mk, HomogeneousLocalization.NumDenSameDeg.embedding, HomogeneousLocalization.num_mem_deg, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.num_mem_carrier_iff, HomogeneousLocalization.range_awayMapAux_subset. The homogeneous localization results concern ring fractions, not homogeneous lifting for a module map; Away.mk_surjective was read at lines 618-627.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule, Set.range",
+   "results": "No results.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*preimage|degreeZero.*lift",
+   "results": "No results.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Module.ProjAwayDegreeZeroExact",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, sheafifying the graded free resolution preserves exactness: homogeneous lifting on a standard chart",
+   "via": [
+    "lem-sc-p1-away-degreezero-exact",
+    "lem-sc-p1-proj-sheafification-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Module.AwayDegreeZeroLift",
+  "file": "lean/Sheaf/Algebra/Module/AwayDegreeZeroLift.lean",
+  "declaration": "LocalizedModule.away_degreeZero_lift",
+  "statement": "theorem away_degreeZero_lift\n    (k : Type u) [Field k]\n    (M : Type v) (N : Type w) [AddCommGroup M] [AddCommGroup N]\n    [Module (MvPolynomial (Fin 2) k) M] [Module (MvPolynomial (Fin 2) k) N]\n    (𝓜 : ℤ → AddSubgroup M) (𝓝 : ℤ → AddSubgroup N)\n    (h𝓜 : DirectSum.IsInternal 𝓜) (h𝓝 : DirectSum.IsInternal 𝓝)\n    (hsmulN : ∀ (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : N),\n      a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓝 z → a • y ∈ 𝓝 (n + z))\n    (f : MvPolynomial (Fin 2) k) (d : ℕ)\n    (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n    (g : M →ₗ[MvPolynomial (Fin 2) k] N)\n    (hg : ∀ (z : ℤ) (y : M), y ∈ 𝓜 z → g y ∈ 𝓝 z)\n    (x : LocalizedModule.Away f N)\n    (hx : x ∈ degreeZeroFractions\n      (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n      (fun n : ℕ ↦ (𝓝 n : Set N)) (Submonoid.powers f))\n    (himage : x ∈ Set.range (IsLocalizedModule.map (Submonoid.powers f)\n      (mkLinearMap (Submonoid.powers f) M) (mkLinearMap (Submonoid.powers f) N) g)) :\n    ∃ y ∈ degreeZeroFractions\n      (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n      (fun n : ℕ ↦ (𝓜 n : Set M)) (Submonoid.powers f),\n      IsLocalizedModule.map (Submonoid.powers f)\n        (mkLinearMap (Submonoid.powers f) M) (mkLinearMap (Submonoid.powers f) N) g y = x",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085401-L-48135",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085401-L-48135",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
