@@ -48,6 +48,63 @@ theorem exists_parameters_regularLocalQuotient
     ∃ (xs : List R) (c : ℕ), c ≤ d ∧
       IsLocalRing.IsRegularSystemOfParameters xs ∧
       I = Ideal.ofList (xs.take c) := by
-  sorry
+  classical
+  set m := maximalIdeal R
+  obtain ⟨s, hsfin, hsI, hs⟩ :=
+    IsRegularLocalRing.exists_span_eq_of_isRegularLocalRing_quotient I (le_maximalIdeal hI)
+  obtain ⟨b, -, hsb, hb_span, hb⟩ := exists_linearIndepOn_extension hs (Set.subset_univ s)
+  have hspan_b : Submodule.span (ResidueField R) (m.toCotangent '' b) = ⊤ := by
+    rw [eq_top_iff]
+    rintro v -
+    obtain ⟨x, rfl⟩ := m.toCotangent_surjective v
+    exact hb_span ⟨x, trivial, rfl⟩
+  have : Finite b := LinearIndependent.finite_of_isNoetherian hb
+  have hbfin : b.Finite := Set.toFinite b
+  have hn : m.spanFinrank = b.ncard :=
+    spanFinrank_maximalIdeal_eq_ncard hbfin hb hspan_b
+  have hcard : b.ncard = d := by
+    have heq := IsRegularLocalRing.spanFinrank_maximalIdeal (R := R)
+    rw [hn, hd] at heq
+    exact_mod_cast heq
+  have hm : Ideal.span (Subtype.val '' b) = m := by
+    have htop : Submodule.span R b = ⊤ :=
+      CotangentSpace.span_image_eq_top_iff.1 hspan_b
+    change Submodule.span R (m.subtype '' b) = m
+    rw [Submodule.span_image, htop, Submodule.map_top, Submodule.range_subtype]
+  let first : List R := hsfin.toFinset.toList.map Subtype.val
+  let rest : List R := (hbfin.sdiff (t := s)).toFinset.toList.map Subtype.val
+  have hfirst : {x | x ∈ first} = Subtype.val '' s := by
+    ext x
+    simp only [first, List.mem_map, Finset.mem_toList, Set.Finite.mem_toFinset,
+      Set.mem_ofPred_eq, Set.mem_image]
+  have hrest : {x | x ∈ rest} = Subtype.val '' (b \ s) := by
+    ext x
+    simp only [rest, List.mem_map, Finset.mem_toList, Set.Finite.mem_toFinset,
+      Set.mem_ofPred_eq, Set.mem_image]
+  have hmem : {x | x ∈ first ++ rest} = Subtype.val '' b := by
+    calc
+      {x | x ∈ first ++ rest} = {x | x ∈ first} ∪ {x | x ∈ rest} := by
+        ext x
+        simp only [Set.mem_ofPred_eq, List.mem_append, Set.mem_union]
+      _ = Subtype.val '' (s ∪ (b \ s)) := by rw [hfirst, hrest, Set.image_union]
+      _ = Subtype.val '' b := by
+        congr 1
+        ext x
+        simp only [Set.mem_union, Set.mem_sdiff]
+        exact ⟨fun h ↦ h.elim (fun hx ↦ hsb hx) And.left,
+          fun hx ↦ (em (x ∈ s)).elim Or.inl (fun hs ↦ Or.inr ⟨hx, hs⟩)⟩
+  have hlength : (first ++ rest).length = d := by
+    simp only [List.length_append, first, rest, List.length_map, Finset.length_toList]
+    rw [← Set.ncard_eq_toFinset_card s hsfin,
+      ← Set.ncard_eq_toFinset_card (b \ s) hbfin.sdiff]
+    rw [Nat.add_comm, Set.ncard_sdiff_add_ncard_of_subset hsb hbfin, hcard]
+  refine ⟨first ++ rest, first.length, ?_, ?_, ?_⟩
+  · rw [← hlength, List.length_append]
+    exact Nat.le_add_right _ _
+  · exact ⟨hmem ▸ hm, by rw [hlength, hd]⟩
+  · rw [List.take_left]
+    change I = Ideal.span {x | x ∈ first}
+    rw [hfirst]
+    exact hsI.symm
 
 end RingTheory
