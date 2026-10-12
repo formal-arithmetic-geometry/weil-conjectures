@@ -7,9 +7,7 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 
 /-! # Exact extension by zero and restriction on a ringed space
 
@@ -59,6 +57,34 @@ theorem open_restriction_adjunction_exact (X : RingedSpace.{u}) (U : Opens X) :
         (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) U ⋙
             PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj) ⊣
           SheafOfModules.overFunctor.{u} (moduleRings X) U) := by
-  sorry
+  -- Specialize the localized ringed-site theorem (Stacks, Tags 03DI and 03DJ).
+  -- The covering precoverage generates the original topology, so both module
+  -- categories and the extension-by-zero construction are the stated ones.
+  have hJ : (Opens.grothendieckTopology X).toPrecoverage.toGrothendieck =
+      Opens.grothendieckTopology X := by
+    apply le_antisymm
+    · exact GrothendieckTopology.toGrothendieck_toPrecoverage_le _
+    · intro V S hS
+      simpa only [Sieve.generate_sieve] using
+        Precoverage.generate_mem_toGrothendieck
+          ((GrothendieckTopology.arrows_mem_toPrecoverage_iff _ S).mpr hS)
+  let P (J : GrothendieckTopology (Opens X)) (O : Sheaf J CommRingCat.{u}) :=
+    let R := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O
+    PreservesFiniteLimits (SheafOfModules.overFunctor.{u} R U) ∧
+      PreservesFiniteColimits (SheafOfModules.overFunctor.{u} R U) ∧
+      PreservesFiniteLimits (SheafOfModules.extensionByZeroPresheaf.{u} R U ⋙
+        PresheafOfModules.sheafification.{u} (𝟙 R.obj)) ∧
+      PreservesFiniteColimits (SheafOfModules.extensionByZeroPresheaf.{u} R U ⋙
+        PresheafOfModules.sheafification.{u} (𝟙 R.obj)) ∧
+      Nonempty (SheafOfModules.extensionByZeroPresheaf.{u} R U ⋙
+        PresheafOfModules.sheafification.{u} (𝟙 R.obj) ⊣
+          SheafOfModules.overFunctor.{u} R U)
+  change P (Opens.grothendieckTopology X) X.sheaf
+  have h : ∀ O, P (Opens.grothendieckTopology X) O := by
+    rw [← hJ]
+    intro O
+    exact SheafOfModules.localizedModule_adjunction_exact
+      (Opens.grothendieckTopology X).toPrecoverage O U
+  exact h X.sheaf
 
 end AlgebraicGeometry
