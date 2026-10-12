@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-effacing-sequence-pushout",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-effaceable-delta-functor-universal",
+   "place": "stage-3 proof decomposition",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Pushout to an effacing sequence",
+ "statement": "Let F be a cohomological delta-functor [def-weil-pbc-delta-functor] between abelian categories [def-sp-abelian], effaceable in degree n+1. Every short exact sequence S admits a morphism to the cokernel sequence of an effacing monomorphism w:S.X₁→Y, whose left component is the identity.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 010T (lemma-efface-implies-universal), with its proof (induction on n through the cokernel description F^{n+1}(A)=Coker(F^n(B)->F^n(C)); the verification that t^{n+1} is a natural transformation is 'omitted' in Stacks and must be written out at the split)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-delta-functor",
+  "lem-weil-pbc-abelian-exact-epi-cokernel"
+ ],
+ "proof": [
+  {
+   "text": "Every short exact sequence maps to an effacing one fixing its left object.\n\nSource: Stacks Project, Homology, Lemma 010T, compatibility verification;\nthe pushout argument is step 8 of the parent node. Push out S.f along an\neffacing monomorphism u. The pushout inclusion of S.X₂ is monic, so its\ncomposite w with S.f is monic. The pushout equation factors w through u,\nhence F(w) = 0. Since S.g is a cokernel of S.f, the map from S.X₂ to the\ncokernel of w descends through S.g. Together with the identity on S.X₁\nand the pushout inclusion it gives the required morphism.",
+   "uses": [
+    "def-weil-pbc-delta-functor",
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "lem-weil-pbc-abelian-pushout-mono"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-delta-functor",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "lem-weil-pbc-abelian-pushout-mono"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma 010T, induction construction; the omitted independence, naturality and connecting-map compatibility verifications are supplied by J2 using the parent node direct-sum and pushout arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compare two embeddings using biproduct and cokernel sequence",
+   "results": "Service unavailable: Internal Server Error; no verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend natural transformation one degree via connecting cokernel effacement",
+   "results": "Ext functor and injective/projective resolution declarations; none states successor extension for an arbitrary CohomologicalDeltaFunctor.",
+   "date": "2026-10-12",
+   "verdict": "no matching successor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernelSequence\"; CategoryTheory.Mono (CategoryTheory.Limits.pushout.inl _ _)",
+   "results": "ShortComplex.cokernelSequence, cokernelSequence_exact, instEpiGCokernelSequence; Abelian.mono_pushout_of_mono_g. Used infrastructure, not the diagram comparison or pushout-effacement conclusions.",
+   "date": "2026-10-12",
+   "verdict": "infrastructure reused; no replacement for these intermediate statements"
+  },
+  {
+   "tool": "grep",
+   "query": "effacing|effaceable|CohomologicalDeltaFunctor; cokernelSequence|mono_pushout_of_mono_g|biprod.lift_eq",
+   "results": "Mathlib: no effacing/delta-functor declaration. Infrastructure: Exact.lean:866,882; Preadditive/Biproducts.lean:459; Abelian/Basic.lean:767. rg on project lean/Sheaf/CategoryTheory finds DeltaFunctor, parent theorem, and right-derived constructions, but no comparison or pushout-effacement theorem.",
+   "date": "2026-10-12",
+   "verdict": "no duplicate helper; primitive infrastructure reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EffacingSequencePushout",
+  "declaration": "CategoryTheory.effacingSequence_pushout",
+  "file": "lean/Sheaf/CategoryTheory/EffacingSequencePushout.lean",
+  "statement": "theorem effacingSequence_pushout {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A] [Category.{v₂} B] [Abelian B] (F : CohomologicalDeltaFunctor A B) (n : ℕ) (hF : ∀ (X : A), ∃ (Y : A) (u : X ⟶ Y), Mono u ∧ (F.F (n + 1)).map u = 0) (S : ShortComplex A) (hS : S.ShortExact) : ∃ (Y : A) (u : S.X₁ ⟶ Y), Mono u ∧ (F.F (n + 1)).map u = 0 ∧ ∃ p : S ⟶ ShortComplex.cokernelSequence u, p.τ₁ = 𝟙 S.X₁",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T063512-L-3156212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T063512-L-3156212",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

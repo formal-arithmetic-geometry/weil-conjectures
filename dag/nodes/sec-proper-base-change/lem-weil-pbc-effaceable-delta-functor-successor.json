@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-effaceable-delta-functor-successor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-effaceable-delta-functor-universal",
+   "place": "stage-3 proof decomposition",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Existence of successor transformation",
+ "statement": "For abelian categories [def-sp-abelian], effaceable cohomological delta-functor F [def-weil-pbc-delta-functor], any delta-functor G, degree n and natural transformation t:F^n→G^n, there exists a natural transformation t′:F^{n+1}→G^{n+1} commuting with connecting maps for every short exact sequence.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 010T (lemma-efface-implies-universal), with its proof (induction on n through the cokernel description F^{n+1}(A)=Coker(F^n(B)->F^n(C)); the verification that t^{n+1} is a natural transformation is 'omitted' in Stacks and must be written out at the split)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-delta-functor",
+  "lem-weil-pbc-abelian-exact-epi-cokernel"
+ ],
+ "proof": [
+  {
+   "text": "Construct each candidate by the cokernel property of the effacing connecting epimorphism. Compare candidates along morphisms using naturality and epi cancellation. Apply the comparison span to prove independence and naturality, and the pushout lemma to prove compatibility for every sequence. These are steps 1–9 of the parent proof, now implemented in Lean.",
+   "uses": [
+    "lem-weil-pbc-effacing-sequence-comparison",
+    "lem-weil-pbc-effacing-sequence-pushout",
+    "def-weil-pbc-delta-functor",
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-effacing-sequence-comparison",
+  "lem-weil-pbc-effacing-sequence-pushout",
+  "def-weil-pbc-delta-functor",
+  "lem-weil-pbc-abelian-exact-epi-cokernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma 010T, induction construction; the omitted independence, naturality and connecting-map compatibility verifications are supplied by J2 using the parent node direct-sum and pushout arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compare two embeddings using biproduct and cokernel sequence",
+   "results": "Service unavailable: Internal Server Error; no verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend natural transformation one degree via connecting cokernel effacement",
+   "results": "Ext functor and injective/projective resolution declarations; none states successor extension for an arbitrary CohomologicalDeltaFunctor.",
+   "date": "2026-10-12",
+   "verdict": "no matching successor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernelSequence\"; CategoryTheory.Mono (CategoryTheory.Limits.pushout.inl _ _)",
+   "results": "ShortComplex.cokernelSequence, cokernelSequence_exact, instEpiGCokernelSequence; Abelian.mono_pushout_of_mono_g. Used infrastructure, not the diagram comparison or pushout-effacement conclusions.",
+   "date": "2026-10-12",
+   "verdict": "infrastructure reused; no replacement for these intermediate statements"
+  },
+  {
+   "tool": "grep",
+   "query": "effacing|effaceable|CohomologicalDeltaFunctor; cokernelSequence|mono_pushout_of_mono_g|biprod.lift_eq",
+   "results": "Mathlib: no effacing/delta-functor declaration. Infrastructure: Exact.lean:866,882; Preadditive/Biproducts.lean:459; Abelian/Basic.lean:767. rg on project lean/Sheaf/CategoryTheory finds DeltaFunctor, parent theorem, and right-derived constructions, but no comparison or pushout-effacement theorem.",
+   "date": "2026-10-12",
+   "verdict": "no duplicate helper; primitive infrastructure reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EffaceableDeltaFunctorSuccessor",
+  "declaration": "CategoryTheory.effaceable_deltaFunctor_successor",
+  "file": "lean/Sheaf/CategoryTheory/EffaceableDeltaFunctorSuccessor.lean",
+  "statement": "theorem effaceable_deltaFunctor_successor {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A] [Category.{v₂} B] [Abelian B] (F : CohomologicalDeltaFunctor A B) (hF : ∀ (n : ℕ), 0 < n → ∀ (X : A), ∃ (Y : A) (u : X ⟶ Y), Mono u ∧ (F.F n).map u = 0) (G : CohomologicalDeltaFunctor A B) (n : ℕ) (t : F.F n ⟶ G.F n) : ∃ t' : F.F (n + 1) ⟶ G.F (n + 1), ∀ (S : ShortComplex A) (hS : S.ShortExact), F.delta S hS n ≫ t'.app S.X₁ = t.app S.X₃ ≫ G.delta S hS n",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T063512-L-3156212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T063512-L-3156212",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

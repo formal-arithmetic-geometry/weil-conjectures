@@ -26,154 +26,24 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (notation; effacing short exact sequences exist).** Fix a $\\delta$-functor $G=(G^n,\\delta_G)$ from $\\mathcal A$ to $\\mathcal B$ and a natural transformation $t:F^0\\to G^0$. For a short exact sequence $E:0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ [def-weil-pbc-exact-sequence] write $\\delta^n_{F,E}:F^n(C)\\to F^{n+1}(A)$ and $\\delta^n_{G,E}:G^n(C)\\to G^{n+1}(A)$ for the connecting morphisms of [def-weil-pbc-delta-functor]; call $A$ its left object. For $n\\ge0$ call $E$ *$(n+1)$-effacing* if $F^{n+1}(f)=0$. Claim: every object $A$ is the left object of an $(n+1)$-effacing short exact sequence. Indeed $n+1>0$, so the hypothesis gives a monomorphism $u:A\\to B$ with $F^{n+1}(u)=0$ (Stacks says 'injective morphism', which in an abelian category is a monomorphism, Stacks Lemma 010C (1)). Let $\\pi:B\\to C$ be a cokernel of $u$ (cokernels exist in $\\mathcal A$ [def-sp-abelian]); by [lem-weil-pbc-abelian-exact-epi-cokernel] (c), $E_u:0\\to A\\xrightarrow{u}B\\xrightarrow{\\pi}C\\to0$ is short exact, and it is $(n+1)$-effacing. (Stacks: 'choose an embedding $u:A\\to B$ such that $F^{n+1}(u)=0$. Let $C=B/u(A)$'.)",
+   "text": "Starting at t in degree zero, use the successor construction recursively (Nat.rec and Classical.choose). The successor compatibility packages these transformations as a morphism of delta-functors. For any other extension, induct on degree; choose an effacing embedding and its cokernel sequence. Exactness and vanishing imply that its connecting map is epi. Compatibility and equality in the preceding degree imply equality after precomposition with that epi, hence equality of components. Function extensionality and proof irrelevance give equality of morphisms.",
    "uses": [
-    "def-sp-abelian",
-    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-effaceable-delta-functor-successor",
     "def-weil-pbc-delta-functor",
     "lem-weil-pbc-abelian-exact-epi-cokernel"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 010T (lemma-efface-implies-universal), proof, first sentences of the second paragraph; Lemma 010C (lemma-characterize-injective)"
-   }
-  },
-  {
-   "text": "**Step 2 ($\\delta_F$ of an effacing sequence is an epimorphism and a cokernel of $F^n(g)$).** Let $E:0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ be $(n+1)$-effacing. Axiom (1) of the $\\delta$-functor $F$ [def-weil-pbc-delta-functor] says that $F^n(B)\\xrightarrow{F^n(g)}F^n(C)\\xrightarrow{\\delta^n_{F,E}}F^{n+1}(A)\\xrightarrow{F^{n+1}(f)}F^{n+1}(B)$ is a complex exact at $F^n(C)$ and at $F^{n+1}(A)$ [def-weil-pbc-exact-sequence]. Since $F^{n+1}(f)=0$, exactness at $F^{n+1}(A)$ and [lem-weil-pbc-abelian-exact-epi-cokernel] (b) give that $\\delta^n_{F,E}$ is an epimorphism. Then exactness at $F^n(C)$ and [lem-weil-pbc-abelian-exact-epi-cokernel] (a) (with $h=F^n(g)$, $e=\\delta^n_{F,E}$) give that $\\delta^n_{F,E}$ is a cokernel of $F^n(g)$. Hence: (i) $\\delta^n_{F,E}$ can be cancelled on the right ($x\\circ\\delta^n_{F,E}=y\\circ\\delta^n_{F,E}\\Rightarrow x=y$); (ii) every $\\varphi:F^n(C)\\to W$ with $\\varphi\\circ F^n(g)=0$ is $\\psi\\circ\\delta^n_{F,E}$ for a unique $\\psi:F^{n+1}(A)\\to W$. (Stacks: '$F^{n+1}(A)=\\mathrm{Coker}(F^n(B)\\to F^n(C))$ by our choice of $u$'.)",
-   "uses": [
-    "def-weil-pbc-delta-functor",
-    "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-abelian-exact-epi-cokernel"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 010T (lemma-efface-implies-universal), proof, 'The long exact cohomology sequence ... gives that F^{n+1}(A) = Coker(F^n(B) -> F^n(C)) by our choice of u'"
-   }
-  },
-  {
-   "text": "**Step 3 (the candidate $\\tau_E$).** Assume $t^n:F^n\\to G^n$ is a natural transformation, and let $E:0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ be $(n+1)$-effacing. Put $\\varphi=\\delta^n_{G,E}\\circ t^n_C:F^n(C)\\to G^{n+1}(A)$. By naturality of $t^n$ at $g$, $\\varphi\\circ F^n(g)=\\delta^n_{G,E}\\circ t^n_C\\circ F^n(g)=\\delta^n_{G,E}\\circ G^n(g)\\circ t^n_B$, and $\\delta^n_{G,E}\\circ G^n(g)=0$ because the long sequence of axiom (1) for $G$ [def-weil-pbc-delta-functor] is exact, hence a complex [def-weil-pbc-exact-sequence]. So $\\varphi\\circ F^n(g)=0$ and by Step 2 (ii) there is a unique $\\tau_E:F^{n+1}(A)\\to G^{n+1}(A)$ with\n$(\\spadesuit)\\quad\\tau_E\\circ\\delta^n_{F,E}=\\delta^n_{G,E}\\circ t^n_C$.\nMoreover any $\\psi:F^{n+1}(A)\\to G^{n+1}(A)$ with $\\psi\\circ\\delta^n_{F,E}=\\delta^n_{G,E}\\circ t^n_C$ equals $\\tau_E$ (Step 2 (i)). This is Stacks' definition of $t^{n+1}_A$ via the square with $\\delta_{F,A\\to B\\to C}$ and $\\delta_{G,A\\to B\\to C}$; Stacks writes the top arrow as the map $\\mathrm{Coker}(F^n(B)\\to F^n(C))\\to\\mathrm{Coker}(G^n(B)\\to G^n(C))$ induced by $t^n$, and composing with $\\delta_G$ (which kills the image of $G^n(B)$) is exactly $\\varphi$.",
-   "uses": [
-    "def-weil-pbc-delta-functor",
-    "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-abelian-exact-epi-cokernel"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 010T (lemma-efface-implies-universal), proof, the commutative square defining t^{n+1}_A"
-   }
-  },
-  {
-   "text": "**Step 4 (comparison along a morphism of effacing sequences).** Let $t^n$ be natural, let $E:0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ and $E':0\\to A'\\xrightarrow{f'}B'\\xrightarrow{g'}C'\\to0$ be $(n+1)$-effacing, and let $(a,b,c):E\\to E'$ be a morphism of short exact sequences ($bf=f'a$, $cg=g'b$). Then $\\tau_{E'}\\circ F^{n+1}(a)=G^{n+1}(a)\\circ\\tau_E$. Proof: $\\tau_{E'}\\circ F^{n+1}(a)\\circ\\delta^n_{F,E}=\\tau_{E'}\\circ\\delta^n_{F,E'}\\circ F^n(c)$ (axiom (2) for $F$ [def-weil-pbc-delta-functor]) $=\\delta^n_{G,E'}\\circ t^n_{C'}\\circ F^n(c)$ ($(\\spadesuit)$ for $E'$) $=\\delta^n_{G,E'}\\circ G^n(c)\\circ t^n_C$ (naturality of $t^n$ at $c$) $=G^{n+1}(a)\\circ\\delta^n_{G,E}\\circ t^n_C$ (axiom (2) for $G$) $=G^{n+1}(a)\\circ\\tau_E\\circ\\delta^n_{F,E}$ ($(\\spadesuit)$ for $E$); cancel the epimorphism $\\delta^n_{F,E}$ (Step 2 (i)). (Not in Stacks, which omits the verification; written out by the agent.)",
-   "uses": [
-    "def-weil-pbc-delta-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 010T (lemma-efface-implies-universal), proof: the verification omitted there ('We omit the verification that this defines a transformation of functors'; 'clearly uniquely determined'), written out by the agent"
-   }
-  },
-  {
-   "text": "**Step 5 (an effacing sequence mapping to two given ones).** Let $E:0\\to A\\xrightarrow{u}B\\xrightarrow{g}C\\to0$ and $E':0\\to A'\\xrightarrow{u'}B'\\xrightarrow{g'}C'\\to0$ be $(n+1)$-effacing and $a:A\\to A'$ a morphism. Let $B\\oplus B'$ be a biproduct with $i_1,i_2,p_1,p_2$, $p_1i_1=\\mathrm{id}$, $p_2i_2=\\mathrm{id}$, $p_1i_2=0$, $p_2i_1=0$, $i_1p_1+i_2p_2=\\mathrm{id}$ (an abelian category has finite biproducts [def-sp-abelian], with these identities [def-weil-additive-category]), and $w=i_1u+i_2u'a:A\\to B\\oplus B'$; composition being bilinear, $p_1w=u$ and $p_2w=u'a$. (i) $w$ is a monomorphism: $wx=wy$ gives $ux=p_1wx=p_1wy=uy$, so $x=y$. (ii) $F^{n+1}(w)=0$: $F^{n+1}$ is additive [def-weil-pbc-additive-functor], so $\\mathrm{id}=F^{n+1}(i_1p_1+i_2p_2)=F^{n+1}(i_1)F^{n+1}(p_1)+F^{n+1}(i_2)F^{n+1}(p_2)$ and $F^{n+1}(w)=F^{n+1}(i_1)F^{n+1}(u)+F^{n+1}(i_2)F^{n+1}(u')F^{n+1}(a)=0+0$. (iii) With $\\pi_w:B\\oplus B'\\to C_w$ a cokernel of $w$, $E_w:0\\to A\\xrightarrow{w}B\\oplus B'\\xrightarrow{\\pi_w}C_w\\to0$ is short exact [lem-weil-pbc-abelian-exact-epi-cokernel] (c) and $(n+1)$-effacing. (iv) $gp_1w=gu=0$ and $g'p_2w=g'u'a=0$ ($E,E'$ are complexes [def-weil-pbc-exact-sequence]), so by the universal property of the cokernel $\\pi_w$ there are unique $c_1:C_w\\to C$, $c_2:C_w\\to C'$ with $c_1\\pi_w=gp_1$, $c_2\\pi_w=g'p_2$. Then $(\\mathrm{id}_A,p_1,c_1):E_w\\to E$ and $(a,p_2,c_2):E_w\\to E'$ are morphisms of short exact sequences ($p_1w=u\\circ\\mathrm{id}_A$, $p_2w=u'\\circ a$). (Stacks omits this; the 'direct sum of two embeddings' device is the standard one, written out by the agent.)",
-   "uses": [
-    "def-sp-abelian",
-    "def-weil-additive-category",
-    "def-weil-pbc-additive-functor",
-    "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-abelian-exact-epi-cokernel"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 010T (lemma-efface-implies-universal), proof: the verification omitted there ('We omit the verification that this defines a transformation of functors'; 'clearly uniquely determined'), written out by the agent"
-   }
-  },
-  {
-   "text": "**Step 6 (independence of the choice; definition of $t^{n+1}$).** Let $t^n$ be natural and $E_1,E_2$ two $(n+1)$-effacing sequences with the same left object $A$. Step 5 with $E=E_1$, $E'=E_2$, $a=\\mathrm{id}_A$ gives an $(n+1)$-effacing $E_w$ and morphisms $(\\mathrm{id}_A,p_1,c_1):E_w\\to E_1$, $(\\mathrm{id}_A,p_2,c_2):E_w\\to E_2$; Step 4 applied to each, with $F^{n+1}(\\mathrm{id})=\\mathrm{id}$, $G^{n+1}(\\mathrm{id})=\\mathrm{id}$, gives $\\tau_{E_1}=\\tau_{E_w}=\\tau_{E_2}$. Define $t^{n+1}_A:=\\tau_E$ for any $(n+1)$-effacing $E$ with left object $A$ (one exists by Step 1); it does not depend on $E$, and by $(\\spadesuit)$, $t^{n+1}_A\\circ\\delta^n_{F,E}=\\delta^n_{G,E}\\circ t^n_C$ for every $(n+1)$-effacing $E$ with left object $A$. (Stacks: 'This is clearly uniquely determined'; the independence of $u$ is written out by the agent.)",
-   "uses": [
-    "def-weil-pbc-delta-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 010T (lemma-efface-implies-universal), proof: the verification omitted there ('We omit the verification that this defines a transformation of functors'; 'clearly uniquely determined'), written out by the agent"
-   }
-  },
-  {
-   "text": "**Step 7 ($t^{n+1}$ is a natural transformation).** Let $a:A\\to A'$. By Step 1 choose $(n+1)$-effacing $E$ with left object $A$ and $E'$ with left object $A'$. Step 5 gives an $(n+1)$-effacing $E_w$ with left object $A$ and a morphism $(a,p_2,c_2):E_w\\to E'$. Step 4 gives $\\tau_{E'}\\circ F^{n+1}(a)=G^{n+1}(a)\\circ\\tau_{E_w}$, i.e. by Step 6 $t^{n+1}_{A'}\\circ F^{n+1}(a)=G^{n+1}(a)\\circ t^{n+1}_A$. So $t^{n+1}:F^{n+1}\\to G^{n+1}$ is a natural transformation. (Omitted in Stacks; written out by the agent.)",
-   "uses": [
-    "def-weil-pbc-delta-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 010T (lemma-efface-implies-universal), proof: the verification omitted there ('We omit the verification that this defines a transformation of functors'; 'clearly uniquely determined'), written out by the agent"
-   }
-  },
-  {
-   "text": "**Step 8 (every short exact sequence maps to an effacing one with the same left object).** Let $E':0\\to A\\xrightarrow{f'}B'\\xrightarrow{g'}C'\\to0$ be any short exact sequence. By Step 1 there is a monomorphism $u:A\\to I$ with $F^{n+1}(u)=0$. Let $Q$ with $j:B'\\to Q$, $k:I\\to Q$, $jf'=ku$, be a pushout of $f'$ and $u$ [lem-weil-pbc-abelian-exact-epi-cokernel] (d). By [lem-weil-pbc-abelian-pushout-mono] (its $a:=u$, a monomorphism, its $b:=f'$, its $a':=j$), $j$ is a monomorphism, so $m:=jf'=ku:A\\to Q$ is a monomorphism (composite of monomorphisms), and $F^{n+1}(m)=F^{n+1}(k)\\circ F^{n+1}(u)=0$. With $\\pi:Q\\to C''$ a cokernel of $m$, $E'':0\\to A\\xrightarrow{m}Q\\xrightarrow{\\pi}C''\\to0$ is short exact [lem-weil-pbc-abelian-exact-epi-cokernel] (c) and $(n+1)$-effacing. Since $E'$ is exact at $B'$ and $g'$ is an epimorphism [def-weil-pbc-exact-sequence], $g'$ is a cokernel of $f'$ [lem-weil-pbc-abelian-exact-epi-cokernel] (a); as $\\pi jf'=\\pi m=0$ there is a unique $c:C'\\to C''$ with $cg'=\\pi j$. Thus $(\\mathrm{id}_A,j,c):E'\\to E''$ is a morphism of short exact sequences ($jf'=m\\circ\\mathrm{id}_A$, $cg'=\\pi j$). (Written out by the agent; Stacks only states the compatibility for the chosen sequences.)",
-   "uses": [
-    "def-sp-abelian",
-    "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-abelian-exact-epi-cokernel",
-    "lem-weil-pbc-abelian-pushout-mono"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 010T (lemma-efface-implies-universal), proof: the verification omitted there ('We omit the verification that this defines a transformation of functors'; 'clearly uniquely determined'), written out by the agent"
-   }
-  },
-  {
-   "text": "**Step 9 (compatibility with $\\delta$ for every short exact sequence).** Let $t^n$ be natural, $t^{n+1}$ as in Step 6, and $E':0\\to A\\xrightarrow{f'}B'\\xrightarrow{g'}C'\\to0$ any short exact sequence; take $E''$ and $(\\mathrm{id}_A,j,c):E'\\to E''$ from Step 8. Axiom (2) [def-weil-pbc-delta-functor] for this morphism gives $\\delta^n_{F,E'}=F^{n+1}(\\mathrm{id}_A)\\circ\\delta^n_{F,E'}=\\delta^n_{F,E''}\\circ F^n(c)$ and likewise $\\delta^n_{G,E'}=\\delta^n_{G,E''}\\circ G^n(c)$. Hence $t^{n+1}_A\\circ\\delta^n_{F,E'}=t^{n+1}_A\\circ\\delta^n_{F,E''}\\circ F^n(c)=\\delta^n_{G,E''}\\circ t^n_{C''}\\circ F^n(c)$ (Step 6, $E''$ effacing) $=\\delta^n_{G,E''}\\circ G^n(c)\\circ t^n_{C'}$ (naturality of $t^n$) $=\\delta^n_{G,E'}\\circ t^n_{C'}$. So the square of [def-weil-pbc-delta-functor] for morphisms of $\\delta$-functors commutes in degree $n$ for every short exact sequence, not only for the chosen ones. (Omitted in Stacks; written out by the agent.)",
-   "uses": [
-    "def-weil-pbc-delta-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 010T (lemma-efface-implies-universal), proof: the verification omitted there ('We omit the verification that this defines a transformation of functors'; 'clearly uniquely determined'), written out by the agent"
-   }
-  },
-  {
-   "text": "**Step 10 (existence).** Put $t^0=t$, a natural transformation. If $t^n$ is a natural transformation, Steps 3 and 6 define $t^{n+1}$ (independent of all choices), Step 7 shows it is a natural transformation and Step 9 that $t^{n+1}_A\\circ\\delta^n_{F,E}=\\delta^n_{G,E}\\circ t^n_C$ for every short exact sequence $E$. By induction on $n$ this defines natural transformations $t^n:F^n\\to G^n$ for all $n\\ge0$ with all these squares commuting, i.e. a morphism of $\\delta$-functors $(t^n)_{n\\ge0}:F\\to G$ with $t^0=t$ [def-weil-pbc-delta-functor]. (Stacks: 'We construct $t^n$ by induction on $n$. For $n=0$ we set $t^0=t$.')",
-   "uses": [
-    "def-weil-pbc-delta-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 010T (lemma-efface-implies-universal), proof, first paragraph (induction on n)"
-   }
-  },
-  {
-   "text": "**Step 11 (uniqueness).** Let $(s^n)_{n\\ge0}:F\\to G$ be any morphism of $\\delta$-functors with $s^0=t$ [def-weil-pbc-delta-functor]. We show $s^n=t^n$ by induction on $n$; $s^0=t=t^0$. If $s^n=t^n$, let $A$ be an object and $E$ an $(n+1)$-effacing sequence with left object $A$ and right object $C$ (Step 1). The compatibility of $s$ with $\\delta$ gives $s^{n+1}_A\\circ\\delta^n_{F,E}=\\delta^n_{G,E}\\circ s^n_C=\\delta^n_{G,E}\\circ t^n_C$, so $s^{n+1}_A=\\tau_E=t^{n+1}_A$ by the uniqueness in Step 3 (cancel the epimorphism $\\delta^n_{F,E}$, Step 2). Hence $s=t$, and $F$ is universal. (Stacks: 'This is clearly uniquely determined by the requirements imposed'.)",
-   "uses": [
-    "def-weil-pbc-delta-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 010T (lemma-efface-implies-universal), proof, 'This is clearly uniquely determined by the requirements imposed'"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-abelian",
-  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-effaceable-delta-functor-successor",
   "def-weil-pbc-delta-functor",
-  "lem-weil-pbc-abelian-exact-epi-cokernel",
-  "def-weil-additive-category",
-  "def-weil-pbc-additive-functor",
-  "lem-weil-pbc-abelian-pushout-mono"
+  "lem-weil-pbc-abelian-exact-epi-cokernel"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Lemma 010T (lemma-efface-implies-universal) and its proof (Steps 1-3, 10, 11); the verifications Stacks omits (independence of the effacing embedding, naturality of t^{n+1}, compatibility with delta for all short exact sequences: Steps 4-9) are written out by the agent, by the standard direct-sum and pushout arguments (Grothendieck, Tohoku II.2.2.1, not in literature/)"
+  "place": "Lemma 010T, proof; construction and uniqueness implemented by J2"
  },
  "mathlib_searches": [
   {
@@ -270,5 +140,15 @@
   "group": "M1",
   "result": "pass",
   "note": "A,B abelian = binders+[Abelian]; F = CohomologicalDeltaFunctor (def-weil-pbc-delta-functor); hF: n>0, all X, ∃ Y, mono u, (F.F n).map u = 0 matches the node's effacement; conclusion = recorded IsUniversal (∀ G, t : F⁰⟶G⁰, ∃! Hom with app 0 = t); no duplicate on sheaf-dag"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T063512-L-3156212",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
