@@ -7719,3 +7719,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:48 L: returned deliver/N3/Sheaf.Algebra.Homology.KInjectiveRestrictLocalized (reviewer RETURN: (reviewer X-35c09, head 35c097468) C1: In dag/nodes/sec-smooth-purity/lem-pur-kinjective-restrict-localized-adjunction.j)
 - 13:49 L: returned deliver/Y2/Sheaf.Paper.StrictHenselizationPointedMap (reviewer RETURN: (reviewer X-3bcd8, head 3bcd80179) E2/E3, reviewer brief §4: strictHenselizationPointedMap_factorization is false, altho)
 - 13:49 L: returned deliver/V3/Sheaf.RingTheory.PopescuCharPPreparation (reviewer RETURN: (reviewer X-f8f75, head f8f75acb7) B9: In both dag/nodes/sec-proper-base-change/popescu-char-p-preparation-core.json and)
+- 13:50 L: returned deliver/S3/Sheaf.AlgebraicGeometry.PerfectDescendMorphisms (reviewer RETURN: (reviewer X-edf25, head edf25bdd7) B2/B3/B4: In dag/nodes/sec-picard-framework/lem-pc-perfect-descend-{hom-surjective,si)
