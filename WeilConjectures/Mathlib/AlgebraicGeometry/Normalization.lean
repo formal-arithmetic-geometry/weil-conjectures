@@ -65,7 +65,7 @@ end OpenImmersion
 /-- The relative normalization of `Y` in an integral scheme `X` with integrally closed local
 rings has integrally closed local rings. Over an affine open `V` of `Y` it is the spectrum of
 the integral closure of `Γ(Y, V)` in the integrally closed domain `Γ(X, f⁻¹ V)`, which is
-again an integrally closed domain. -/
+again an integrally closed domain. (blueprint: `lem-weil-pbc-normalization-normal-stalks`) -/
 theorem isIntegrallyClosed_stalk_normalization [QuasiCompact f] [QuasiSeparated f]
     [IsIntegral X] (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x))
     (y : f.normalization) : IsIntegrallyClosed (f.normalization.presheaf.stalk y) := by

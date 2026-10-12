@@ -229,7 +229,8 @@ theorem flat_freeYoneda (W : X.Etale) :
 
 /-- **Base change of free sheaves.** For a morphism `g : Y ⟶ X` and an étale `X`-scheme `W`,
 the pullback `g^* Λ[W]` is the free sheaf `Λ[W ×_X Y]` on the base change of `W`: both
-corepresent `F ↦ F(W ×_X Y) = (g_* F)(W)`. -/
+corepresent `F ↦ F(W ×_X Y) = (g_* F)(W)`.
+(blueprint: `lem-weil-pbc-modulecat-upperstar-free-yoneda`) -/
 noncomputable def upperStarFreeYonedaIso {Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Etale) :
     (Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj
         (Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of Λ Λ)) ≅

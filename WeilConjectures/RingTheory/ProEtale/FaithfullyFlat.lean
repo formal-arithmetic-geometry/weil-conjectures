@@ -54,6 +54,8 @@ lemma faithfullyFlat_iff (M : ModuleCat R) : faithfullyFlat R M ↔ Module.Faith
 
 variable {R} in
 open MonoidalCategory in
+/-- A filtered colimit of flat modules is flat.
+(blueprint: `lem-weil-pbc-flat-colimit-presentation-same-universe`) -/
 lemma flat_of_colimitPresentation {M : ModuleCat.{u} R}
     {J : Type u} [SmallCategory J] [IsFiltered J] (pres : ColimitPresentation J M)
     (h : ∀ j, Module.Flat R (pres.diag.obj j)) :

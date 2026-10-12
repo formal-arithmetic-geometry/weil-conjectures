@@ -49,7 +49,8 @@ is `AlgebraicGeometry.Scheme.IdealSheafData.le_ker_iff_range_subset_support`, wh
 on the source is `IsReduced (Spec K)`; the field hypothesis is used beyond that only for
 `Subsingleton (Spec K)`, which upgrades "the closed point of `Spec K` lands in the range of
 `i`" to "the whole range of `s` lands in the range of `i`".
-(blueprint: `lemma:openclosed-point-factors`) -/
+(blueprint: `lemma:openclosed-point-factors`)
+(blueprint: `lem-weil-pbc-geometric-point-open-or-closed`) -/
 theorem existsUnique_fac_or_fac_of_range_eq_compl {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X)
     [IsOpenImmersion j] [IsClosedImmersion i]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
