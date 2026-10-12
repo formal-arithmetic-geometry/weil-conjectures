@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.GenericFormalFiberPurelyInseparableRegularAux
 public import Sheaf.RingTheory.CohenRing
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
@@ -12,6 +13,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 universe u
 
+set_option linter.style.haveILetI false in
 /-- Every finite purely inseparable base change of the generic formal fibre is regular.
 Source: Stacks Project, More on Algebra, Proposition 07PS, last two paragraphs.
 (blueprint: new-lem-weil-pbc-generic-formal-fibre-purely-inseparable-regular) -/
@@ -33,6 +35,18 @@ theorem isRegular_genericFormalFiber_after_finite_purelyInseparable
       [IsPurelyInseparable ((⊥ : Ideal A).ResidueField) k'],
       IsRegularRing
         (TensorProduct ((⊥ : Ideal A).ResidueField) k' ((⊥ : Ideal A).Fiber C)) := by
-  sorry
+  dsimp
+  intro k' instField instAlg instFinite instPI
+  letI := instField
+  letI := instAlg
+  letI := instFinite
+  letI := instPI
+  rcases hmodel with h | h
+  · rcases h with ⟨k, hk, d, e⟩
+    letI := hk
+    exact isRegular_genericFormalFiber_fieldModel A k d e P k'
+  · rcases h with ⟨Λ, hΛ, d, p, hc, e⟩
+    letI := hΛ
+    exact isRegular_genericFormalFiber_cohenModel A Λ d p hc e P k' 
 
 end
