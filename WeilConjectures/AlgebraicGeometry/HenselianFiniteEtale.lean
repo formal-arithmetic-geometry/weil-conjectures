@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RepresentableLocallyConstant
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
@@ -107,8 +108,22 @@ theorem Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso (T : Scheme.{u}) :
         IsFiniteLocallyConstantSheafOfTypes ⟨_, h⟩) ∧
     ∀ E : Sheaf T.smallEtaleTopology (Type (u + 1)), IsFiniteLocallyConstantSheafOfTypes E →
       ∃ (P : Scheme.{u}) (π : P ⟶ T) (_ : IsFinite π) (_ : Etale π),
-        Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)) :=
-  sorry
+        Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)) := by
+  refine ⟨fun P π _ _ ↦ ?_, fun E hE ↦ ?_⟩
+  · let X : T.Etale := Scheme.Etale.mk π
+    have : IsFinite X.hom := ‹IsFinite π›
+    refine ⟨(T.smallEtaleTopology.uliftYoneda.{u + 1}.obj X).property, ?_, ?_⟩
+    · choose U g hg S hS fst hy hpb using
+        fun y ↦ FiniteEtale.exists_etale_isPullback_sigma ⟨X, this⟩ y
+      let 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage T :=
+        Scheme.Cover.mkOfCovers T U g (fun y ↦ ⟨y, hy y⟩) hg
+      exact ⟨𝒰, fun y ↦ Etale.isConstant_over_uliftYoneda_of_isPullback (hpb y)⟩
+    · exact ⟨fun Ω _ _ s ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).2
+        (Etale.finite_sheafFiber_uliftYoneda X s)⟩
+  · obtain ⟨𝒰, h𝒰⟩ := hE.1
+    obtain ⟨X, hX, ⟨r⟩⟩ := Etale.exists_representableBy_of_isConstant E 𝒰 h𝒰 hE.2
+    exact ⟨X.left, X.hom, hX, X.prop,
+      ⟨((Functor.RepresentableBy.equivUliftYonedaIso _ _) r).symm⟩⟩
 
 section Henselian
 
