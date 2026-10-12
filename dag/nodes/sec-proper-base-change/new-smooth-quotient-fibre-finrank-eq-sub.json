@@ -1,0 +1,97 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tags 07CG and 07CH, split conormal sequence and fibre dimension sentence."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "new-smooth-quotient-fibre-finrank-eq-sub",
+ "title": "Differential fibre rank subtraction",
+ "statement": "Module.finrank ... = n - c",
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "This is the corresponding rank consequence of the split conormal sequence and tensor base change described in the source.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tags 07CG and 07CH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "rank additive consequence smooth quotient",
+   "results": "No exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finrank additive",
+   "results": "No exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank quotient fibre",
+   "results": "No exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothQuotientFibreFinrankAdd",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-smooth-quotient-fibre-finrank-add",
+   "place": "intermediate rank consequence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SmoothQuotientFibreFinrankEqSub",
+  "file": "lean/Sheaf/RingTheory/SmoothQuotientFibreFinrankEqSub.lean",
+  "declaration": "Algebra.smooth_quotient_fibre_finrank_eq_sub",
+  "statement": "theorem smooth_quotient_fibre_finrank_eq_sub\n    {R : Type u} [CommRing R] {n c : ℕ} (f : Fin c → MvPolynomial (Fin n) R)\n    [Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]\n    (b : Module.Basis (Fin c)\n      (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))\n      (Ideal.span (Set.range f)).Cotangent)\n    (p : Ideal R) [p.IsPrime]\n    (q : PrimeSpectrum (p.Fiber (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))) :\n    Module.finrank q.asIdeal.ResidueField\n      (q.asIdeal.ResidueField ⊗[p.Fiber\n        (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]\n          KaehlerDifferential p.ResidueField\n            (p.Fiber (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))) = n - c",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T225333-L-1814033",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T225333-L-1814033",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

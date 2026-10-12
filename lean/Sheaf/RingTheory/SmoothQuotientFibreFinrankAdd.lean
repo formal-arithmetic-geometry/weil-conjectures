@@ -5,7 +5,9 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
-import Sheaf.RingTheory.PresentationLocalizedConormalSplit
+
+import Sheaf.RingTheory.SmoothQuotientFibreFinrankAddLe
+import Sheaf.RingTheory.SmoothQuotientFibreFinrankEqSub
 
 @[expose] public section
 
@@ -40,6 +42,15 @@ theorem smooth_quotient_fibre_finrank_add
         (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]
           KaehlerDifferential p.ResidueField
             (p.Fiber (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))) = n := by
-  sorry
+  have hsub : c ≤ n := by
+    exact smooth_quotient_fibre_finrank_add_le f b p q
+  have hdim : Module.finrank q.asIdeal.ResidueField
+      (q.asIdeal.ResidueField ⊗[p.Fiber
+        (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]
+          KaehlerDifferential p.ResidueField
+            (p.Fiber (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))) = n - c := by
+    exact smooth_quotient_fibre_finrank_eq_sub f b p q
+  omega
+
 
 end Algebra
