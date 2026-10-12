@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.AlgebraicGeometry.Modules.TensorPowerSectionNonvanishingPullback
 
 /-! # Pullback of an ample invertible module
 
@@ -45,6 +46,15 @@ therefore satisfy the same ampleness criterion on `Y`.
 theorem isAmple_tensorPullback_of_isAffineHom {X Y : Scheme.{u}} (g : Y ⟶ X)
     [IsAffineHom g] (L : X.Modules) [L.IsInvertible] (hL : IsAmple X L) :
     @IsAmple Y ((tensorPullback g).obj L) ((invertible_pullback_tensor g).1 L).2 := by
-  sorry
+  have : CompactSpace X := hL.1
+  refine ⟨QuasiCompact.compactSpace_of_compactSpace g, ?_⟩
+  intro y
+  obtain ⟨n, hn, s, U, hy, hU, hUs⟩ := hL.2 (g y)
+  obtain ⟨t, ht⟩ := exists_tensorPow_section_nonvanishing_pullback g L n hn s
+  refine ⟨n, hn, t, g ⁻¹ᵁ U, hy, hU.preimage g, ?_⟩
+  intro z
+  change g z ∈ U ↔ z ∈ nonvanishingLocus _ t
+  rw [ht]
+  exact hUs (g z)
 
 end AlgebraicGeometry.Scheme.Modules

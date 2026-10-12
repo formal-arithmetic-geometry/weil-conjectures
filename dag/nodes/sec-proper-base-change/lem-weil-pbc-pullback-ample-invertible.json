@@ -32,41 +32,37 @@
  ],
  "proof": [
   {
-   "text": "For every $n\\ge1$, pullback and tensor product give $(g^*\\mathcal L)^{\\otimes n}\\cong g^*(\\mathcal L^{\\otimes n})$, and $g^*\\mathcal L$ is invertible [lem-weil-pbc-invertible-pullback-tensor]. If $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$ and $t=g^*s$, the fibre identification in that lemma gives $t(y)=s(g(y))\\otimes1$. Extension of a one-dimensional vector space from $\\kappa(g(y))$ to $\\kappa(y)$ preserves whether a vector is zero. Hence $Y_t=g^{-1}(X_s)$.",
-   "uses": [
-    "lem-weil-pbc-invertible-pullback-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), part (2), specialized to an affine morphism; nonvanishing equality follows from Modules Lemma Tag 01CT as recorded in lem-weil-pbc-invertible-pullback-tensor"
-   }
-  },
-  {
-   "text": "By ampleness of $\\mathcal L$ [def-weil-pbc-ample-invertible-module], $X$ is quasi-compact and the affine opens $X_s$, with $s$ ranging over global sections of positive tensor powers of $\\mathcal L$, cover $X$. Choose finitely many of them covering $X$. Their inverse images $g^{-1}(X_s)=Y_{g^*s}$ cover $Y$ by the previous step; each is affine because the restriction $g^{-1}(X_s)\\to X_s$ is affine by base change [lem-weil-pbc-affine-morphism-permanence, clause (1)] and an affine morphism over the affine $X_s$ has affine source [lem-weil-pbc-affine-morphism-permanence, clause (2)]. Thus $Y$ has a finite affine open cover; each affine scheme is quasi-compact [lem-weil-pbc-affine-scheme-qcqs], so $Y$, a finite union of quasi-compact opens, is quasi-compact, and every point lies in an affine nonvanishing locus of a positive power of $g^*\\mathcal L$. By the same ampleness definition, $g^*\\mathcal L$ is ample.",
+   "text": "From hL and [def-weil-pbc-ample-invertible-module], install CompactSpace X. An affine morphism is quasi-compact [lem-weil-pbc-affine-morphism-permanence, clause (3)]. Hence Y is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence, clause (2)], implemented by QuasiCompact.compactSpace_of_compactSpace g in Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:150.",
    "uses": [
     "def-weil-pbc-ample-invertible-module",
     "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "lem-weil-pbc-affine-scheme-qcqs"
+    "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma Tag 0892 (lemma-pullback-ample-tensor-relatively-ample), part (2), affine case; Properties Definition Tag 01PS gives the affine-nonvanishing-locus criterion"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For y in Y, apply hL at g(y) to obtain n>0, a global section s of L^{tensor n}, and its affine nonvanishing open U containing g(y). Obtain t with inverse-image nonvanishing locus from [lem-weil-pbc-tensor-power-section-nonvanishing-pullback]. The open g^{-1}(U) contains y and is affine, directly by IsAffineOpen.preimage (Mathlib/AlgebraicGeometry/Morphisms/Affine.lean:50), the definition [pqf-def-affine-morphism]. At every z, rewrite the nonvanishing locus of t to g^{-1}(X_s) and apply the given equivalence z in g^{-1}(U) iff s is nonvanishing at g(z). This supplies all witnesses of [def-weil-pbc-ample-invertible-module]. The explicit pulled-back invertibility instance in the unchanged signature is supplied by [lem-weil-pbc-invertible-pullback-tensor].",
+   "uses": [
+    "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+    "pqf-def-affine-morphism",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-invertible-pullback-tensor",
   "def-weil-pbc-ample-invertible-module",
   "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-affine-scheme-qcqs"
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-invertible-pullback-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Lemma Tag 0892, part (2), specialized to affine morphisms and proved directly from Properties Definition Tag 01PS"
+  "place": "Tag 0892(2), affine specialization; original section/locus step isolated, geometric ampleness criterion completed in Lean using Mathlib affine and quasi-compact morphism lemmas"
  },
  "mathlib_searches": [
   {
@@ -154,5 +150,15 @@
   "group": "F1",
   "result": "pass",
   "note": "g : Y ⟶ X with [IsAffineHom g] (#print: preimages of affine opens affine = pqf-def-affine-morphism); L : X.Modules [L.IsInvertible]; hL : IsAmple X L, which #check/rfl resolves to Scheme.Modules.IsAmple (absolute 01PS, not upstream AlgebraicGeometry.IsAmple as packet §5 says); conclusion IsAmple Y ((tensorPullback g).obj L) with the instance from invertible_pullback_tensor clause (1) (IsInvertible is a Prop class, no instance is found by infer_instance so the explicit @ is required and proof-irrelevant); single universe forced by the morphism; no let, no hollow hypothesis; only the lean record changed in the node"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T085246-L-17727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

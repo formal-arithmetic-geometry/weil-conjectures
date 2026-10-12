@@ -6858,3 +6858,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/H1/Sheaf.AlgebraicGeometry.EtaleAffineQcoherent (stage 3; reviewer PASS; first push; landing 20261012T085245-L-17401 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:52 L: merged deliver/H1/Sheaf.AlgebraicGeometry.GroupScheme.IdentityLocalDimension (stage 3; reviewer PASS; first push; landing 20261012T085245-L-17513 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:52 L: merged deliver/H1/WeilConjectures.ConstructibleSheaf.Monoidal (stage 3; reviewer PASS; first push; landing 20261012T085246-L-17622 (interface); batch 20261012T085205; modules 3; new nodes 3)
+- 08:52 L: merged deliver/H2/Sheaf.AlgebraicGeometry.AmplePullback (stage 3; reviewer PASS; first push; landing 20261012T085246-L-17727 (interface); batch 20261012T085205; modules 2; new nodes 1)
