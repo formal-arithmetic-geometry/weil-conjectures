@@ -6,6 +6,9 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeTensorUnit
+import Sheaf.AlgebraicGeometry.PicardPullbackLocalRanks
+import Sheaf.AlgebraicGeometry.PicardPullbackBaseChange
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
@@ -61,6 +64,33 @@ theorem picard_rankCondition_and_isIso_counit_of_pullback {X S T : Scheme.{u}}
       IsIso ((Classical.choose
         (Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).counit.app
           ((Modules.tensorPullback (pullback.fst f g)).obj E)) := by
-  sorry
+  obtain ⟨e⟩ := e
+  let p := pullback.snd f g
+  let L := Modules.tensorPullback p
+  let R := Modules.pushforward p
+  let adj := Classical.choose (Modules.exists_tensorPullbackAdjunction p)
+  have hη : IsIso (adj.unit.app N) :=
+    isIso_tensorPullback_unit_of_finiteLocallyFree p (hO g) N
+  let d : N ≅ R.obj ((Modules.tensorPullback (pullback.fst f g)).obj E) :=
+    asIso (adj.unit.app N) ≪≫ (R.mapIso e).symm
+  have hfree : (R.obj
+      ((Modules.tensorPullback (pullback.fst f g)).obj E)).IsFiniteLocallyFree :=
+    SheafOfModules.IsFiniteLocallyFree.of_iso.{u, u, u} d
+  have hε : IsIso (adj.counit.app (L.obj N)) := by
+    have : IsIso (L.map (adj.unit.app N) ≫ adj.counit.app (L.obj N)) := by
+      change IsIso ((Modules.tensorPullback p).map (adj.unit.app N) ≫
+        adj.counit.app ((Modules.tensorPullback p).obj N))
+      rw [adj.left_triangle_components N]
+      infer_instance
+    exact IsIso.of_isIso_comp_left (L.map (adj.unit.app N)) _
+  have hεE : IsIso (adj.counit.app
+      ((Modules.tensorPullback (pullback.fst f g)).obj E)) := by
+    have : IsIso (adj.counit.app
+        ((Modules.tensorPullback (pullback.fst f g)).obj E) ≫ e.hom) := by
+      rw [← adj.counit_naturality e.hom]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ e.hom
+  exact ⟨⟨hfree, picard_pullback_local_ranks f hO E g N ⟨e⟩,
+    picard_pullback_base_change f hO E g N ⟨e⟩⟩, hεE⟩
 
 end AlgebraicGeometry.Scheme

@@ -16,42 +16,41 @@
  ],
  "proof": [
   {
-   "text": "Locally where N is finite free, the adjunction unit at N is the finite direct sum of the unit at O_T; hence it is invertible. This is the ordinary finite-free projection formula. The triangle identity makes the counit at p*N invertible, and counit naturality transports it through the supplied isomorphism. Pushforward of that isomorphism followed by the inverse unit identifies the actual direct image of q*E with N, so it is finite locally free.",
+   "text": "Apply [lem-sc-finite-locally-free-tensor-unit] to p = pullback.snd f g and N using hO g. Its invertible unit gives N isomorphic to p_*q^*E by composing the unit isomorphism with the inverse pushforward of e. Transport finite local freeness along this isomorphism using [def-sc-finite-locally-free-sheaf]. The adjunction triangle identity [lem-pc-module-pullback-adjunction] expresses the counit at p^*N as the inverse of p^* applied to the unit. Counit naturality along e then proves the counit at q^*E invertible by cancelling e.",
    "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "def-sc-finite-locally-free-sheaf"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For every further base change, the pullback composition isomorphisms transport the supplied isomorphism to q-prime*E isomorphic to p-prime*h*N. For a finite locally free E, pullback commutes with its dual: in a finite local frame both are the dual coordinate module. The same unit calculation identifies both further direct images with h*N and its dual. A finite local frame of h*N near t gives one common rank r for the two direct images and for E on X_U.",
-   "uses": [
-    "lem-pc-module-pullback-identity-composition",
-    "def-amb-finite-locally-free-module"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The canonical base-change maps are defined as adjoints of the pullback units. Under the preceding unit/projection identifications these maps are the identity on h*N and on its dual, checked on a local finite frame. Thus both maps are invertible for every h. Combining this with the direct-image freeness and local rank assertions proves P and counit invertibility. Rank zero and empty schemes require no extra hypotheses.",
-   "uses": [
-    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-sc-finite-locally-free-tensor-unit",
+    "def-sc-finite-locally-free-sheaf",
     "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sc-picard-pullback-local-ranks] to the original pullback presentation. This gives exactly the universal pointwise common-rank conjunct of PicardDirectImageRankCondition.",
+   "uses": [
+    "lem-sc-picard-pullback-local-ranks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sc-picard-pullback-base-change] to the same presentation. This gives the two canonical base-change isomorphisms for every further base morphism. Pair these with the finite direct-image freeness and the common-rank conjunct, unfold the rank condition, and pair it with the counit isomorphism already proved.",
+   "uses": [
+    "lem-sc-picard-pullback-base-change"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-module-pullback-adjunction",
+  "lem-sc-finite-locally-free-tensor-unit",
   "def-sc-finite-locally-free-sheaf",
-  "lem-pc-module-pullback-identity-composition",
-  "def-amb-finite-locally-free-module",
-  "lem-weil-pbc-module-base-change-map-open-restriction"
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-picard-pullback-local-ranks",
+  "lem-sc-picard-pullback-base-change"
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "projection-formula paragraph of Tag 0BDP; local finite-free calculation from Tag 01E8",
-  "note": "A stage-3 reduction of the existing proof, retaining the unit route."
+  "place": "projection-formula paragraph, using Tag 01E8",
+  "note": "V1 stage-3 decomposition: the categorical triangle/naturality and finite-freeness transport are proved in Lean; three independent geometric calculations are named lower items."
  },
  "mathlib_searches": [
   {
@@ -122,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T173920-L-3310815",
+  "landing": "20261012T194150-L-467792",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
