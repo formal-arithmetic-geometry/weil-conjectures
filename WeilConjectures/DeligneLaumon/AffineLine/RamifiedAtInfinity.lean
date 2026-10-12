@@ -59,7 +59,7 @@ namespace AlgebraicGeometry
 
 open scoped ProEtale
 
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 local notation "K̄" => LaurentSeries (AlgebraicClosure k₀)
 
@@ -92,7 +92,7 @@ theorem not_epi_upperStar_laurentPoint_artinSchreierImage (hψ : ψ ≠ 1)
     (p : B ⟶ (laurentPoint k₀ a)^*ᵃ[l].obj (artinSchreierImage l ψ)) [Epi p] : False := by
   obtain ⟨c₀, hc₀⟩ : ∃ c₀, ψ c₀ ≠ 1 := by
     by_contra! h
-    exact hψ (AddChar.ext h)
+    exact hψ (DFunLike.ext _ _ fun x ↦ by rw [h x, AddChar.one_apply])
   obtain ⟨z', hz', hσ⟩ := exists_comp_geometricArtinSchreierMap_eq_laurentPoint k₀ ha
   obtain ⟨σ, hσπ, hσz⟩ := hσ (-c₀)
   exact ProEtale.not_epi_of_mono_biproduct_unit_of_twist hσπ
@@ -104,7 +104,7 @@ end affineLine
 
 namespace WeilSheaf
 
-variable [Fact (ringChar k₀ ≠ l)] {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
+variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 
 /-- **A sheaf unramified at infinity is constant on the punctured disc at `∞`.** If the lisse
 Weil sheaf `F` on `U₀ ⊆ 𝔸¹` extends to a lisse sheaf on a neighbourhood `W` of `∞`, its
@@ -134,8 +134,8 @@ theorem exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity {F : WeilS
       Category.assoc, ← Scheme.Hom.geometricFiberMap_comp, ← Scheme.Hom.geometricFiberMap_comp]
     exact congrArg _ (Scheme.Hom.geometricFiberMap_congr hj' _ _)
   -- `G` is constant on `Spec k̄⟦t⟧`
-  obtain ⟨n, ⟨eW⟩⟩ := (ProEtale.IsAdicLisseSheaf.upperStar zW hG).
-    exists_iso_biproduct_unit_of_isStrictlyHenselian
+  obtain ⟨n, ⟨eW⟩⟩ := ProEtale.IsAdicLisseSheaf.exists_iso_biproduct_unit_of_isStrictlyHenselian
+    (ProEtale.IsAdicLisseSheaf.upperStar zW hG)
   refine ⟨n, ⟨(zU)^*ᵃ[l].mapIso
       ((ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _).mapIso e).symm ≪≫
     ProEtale.adicUpperStarCompObjIso hsq _ ≪≫
@@ -144,7 +144,7 @@ theorem exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity {F : WeilS
 
 end WeilSheaf
 
-variable [Fact (ringChar k₀ ≠ l)] (ψ : AddChar k₀ (PadicAlgCl l))
+variable (ψ : AddChar k₀ (PadicAlgCl l))
 
 /-- **Linear Artin–Schreier sheaves are ramified at infinity.** For a nontrivial additive
 character `ψ` and `a ≠ 0`, the Artin–Schreier sheaf `ℒ_{ψ(a x)}` on `𝔸¹_{k₀}` does not extend
@@ -159,7 +159,7 @@ theorem not_isUnramifiedAtInfinity_artinSchreier (hψ : ψ ≠ 1) {a : k₀} (ha
     (laurentPoint k₀ 1) (by
       rw [Scheme.Hom.geometricFiberMap_id, Category.comp_id])
   have hb : algebraMap k₀ (AlgebraicClosure k₀) a * 1 ≠ 0 := by simpa using ha
-  exact affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage ψ hψ hb e.inv
+  exact affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage ψ hψ hb e.hom
     ((ProEtale.adicUpperStarCompObjIso (laurentPoint_comp_geometricFiberMap_smul k₀ a 1) _).hom ≫
       (laurentPoint k₀ _)^*ᵃ[l].map (affineLine.artinSchreierCarrierIso ψ).hom)
 
@@ -178,7 +178,8 @@ theorem not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity' (hψ : 
     ¬ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by
   rintro ⟨B, i, p, -, hi, hp⟩
   have : Nonempty (affineLine k₀) :=
-    ⟨(affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj (Classical.arbitrary _)⟩
+    ⟨(laurentPoint k₀ 1 ≫ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj)
+      (IsLocalRing.closedPoint K̄)⟩
   have : Nonempty D.U := D.j.denseRange.nonempty
   obtain ⟨zU, hzU⟩ := exists_comp_geometricFiberMap_eq_laurentPoint k₀ D.j
   obtain ⟨n, ⟨e⟩⟩ :=
