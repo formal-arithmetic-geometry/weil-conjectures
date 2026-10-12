@@ -17,51 +17,30 @@
  ],
  "proof": [
   {
-   "text": "Let $(F_i)_{i\\in I}$ be a small diagram of abelian sheaves on $T_{\\Et}$. Regard abelian groups as $\\mathbf Z$-modules. In the presheaf functor category, arbitrary colimits are computed objectwise (the coprojections and the universal map are defined section by section, and naturality follows from the restriction maps). Thus the presheaf colimit is $U\\mapsto\\operatorname{colim}_{i\\in I}F_i(U)$. By [lem-weil-pbc-site-r-module-presheaf-sheafification-exact], sheafification is a left adjoint and commutes with all colimits, so the colimit sheaf is the sheafification of this presheaf.",
-   "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-commute-colimits.md",
-    "place": "Proof"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-sheafification-geometric-stalk], taking the stalk at $\\bar t$ does not change this sheafification. Using [def-weil-pbc-geometric-stalks], the stalk of the colimit is therefore $\\varinjlim_{(U,\\bar u)}\\operatorname{colim}_{i\\in I}F_i(U)$, where the first colimit ranges over pointed etale neighbourhoods of $\\bar t$.",
-   "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-sheafification-geometric-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-commute-colimits.md",
-    "place": "Proof"
-   }
-  },
-  {
-   "text": "The displayed iterated colimit is canonically isomorphic to $\\operatorname{colim}_{i\\in I}\\varinjlim_{(U,\\bar u)}F_i(U)$: both satisfy the same cocone universal property, since a cocone from the product indexing data is equivalently a compatible family of cocones in either order. The latter expression is $\\operatorname{colim}_{i\\in I}(F_i)_{\\bar t}$ by [def-weil-pbc-geometric-stalks]. Hence the stalk functor preserves arbitrary colimits. Applying this argument in each degree gives the asserted preservation of colimits of complexes computed termwise.",
+   "text": "Specialize the Mathlib point stalk functor of [def-weil-pbc-geometric-stalks] to pointSmallEtale s and ModuleCat.{u} Z. The skyscraperSheafAdjunction makes this functor a left adjoint, so Mathlib gives PreservesColimits directly.",
    "uses": [
     "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-commute-colimits.md",
-    "place": "Proof"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For integer modules in universe u, factor the forgetful functor as forget2 to AddCommGrpCat.{u} followed by its forgetful functor to Type u. The first factor preserves all colimits (ModuleCat.forget2PreservesColimitsOfSize), and the second preserves filtered colimits. Limits.comp_preservesFilteredColimits provides the local instance needed by Mathlib affine etale sheafification and hence existence of colimits of sheaves. This avoids the ring/module universe restriction of ModuleCat.FilteredColimits.forget_preservesFilteredColimits.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Introduce an arbitrary small diagram category J. Apply the mapHomologicalComplex colimit-preservation instance of Mathlib.Algebra.Homology.HomologicalComplexAbelian: evaluation preserves source colimits and its composition with the stalk functor preserves colimits. HomologicalComplex.preservesColimitsOfShape_of_eval then gives preservation on complexes. Pair this with the stalk instance to prove the unchanged conjunction.",
+   "uses": [],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-  "lem-weil-pbc-sheafification-geometric-stalk"
+  "def-weil-pbc-geometric-stalks"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-commute-colimits.md",
-  "place": "## Proof"
+  "document": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean",
+  "place": "Point.skyscraperSheafAdjunction and IsLeftAdjoint instance; CategoryTheory mapHomologicalComplex PreservesColimitsOfShape instance; local universe glue by S2"
  },
  "mathlib_searches": [
   {
@@ -168,5 +147,15 @@
   "group": "J1",
   "result": "fix",
   "note": "T : Scheme.{u}, geometric point s : Spec Ω ⟶ T with Ω sep. closed field (H12, recorded mathlib_match pointSmallEtale/sheafFiber of def-weil-pbc-geometric-stalks); arbitrary colimits = PreservesColimits of sheafFiber on Sheaf (smallEtale) (ModuleCat ℤ) (abelian, as proof and citers); complexes termwise = PreservesColimits of mapHomologicalComplex (up ℤ); conj. 1 is Mathlib inferInstance (IsLeftAdjoint) but no declaration states the node, existing false; report fixed (stale set-valued clause)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b7abe",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T041234-L-1711133",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged stalk-and-complex colimit theorem with its node and Mathlib adjunction/degreewise instances; delivery and direct importer compile without warnings, axioms are only propext, Classical.choice, Quot.sound, and import pruning is documented."
  }
 }
