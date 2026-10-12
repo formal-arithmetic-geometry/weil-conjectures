@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonShift
+import Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonTriangle
 
 /-! # Shift and triangle diagrams for the pinned tensor comparison
 
@@ -114,6 +116,9 @@ theorem rightAdjointTensorComparison_diagrams
           (ec₃ : T₂.obj₃ ≅ (c.obj C).obj),
           m.hom₁ = eF₁.hom ≫ (τ.app A).hom ≫ ec₁.inv ∧
           m.hom₂ = eF₂.hom ≫ (τ.app B).hom ≫ ec₂.inv ∧
-          m.hom₃ = eF₃.hom ≫ (τ.app C).hom ≫ ec₃.inv) := by sorry
+          m.hom₃ = eF₃.hom ≫ (τ.app C).hom ≫ ec₃.inv) := by
+  constructor
+  · exact rightAdjointTensorComparison_shift f hRf hO hTensor a c adj τ hτ
+  · exact rightAdjointTensorComparison_triangle f hRf hO hTensor a c adj τ hτ
 
 end AlgebraicGeometry

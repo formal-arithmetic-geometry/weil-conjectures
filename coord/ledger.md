@@ -10085,3 +10085,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:25 L: returned deliver/N1/Sheaf.AlgebraicGeometry.HigherDirectImageRawComplexPresentation (reviewer RETURN: (reviewer X-688a5, head 688a5b16b) d: In coord/changes/EtaleComplexCohomologyPresentation-coefficient-packaging.md repla)
 - 23:28 L: returned deliver/H1/Sheaf.CategoryTheory.ColimitSiteFiniteSectionColimitPresentation (reviewer RETURN: (the landing tools, head e27365806) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 23:28 L: merged deliver/D4/Sheaf.Algebra.Homology.KernelShiftedMappingCone (stage 3; reviewer PASS; first push; landing 20261012T232857-L-2041067 (proof); batch 20261012T232855; modules 1; new nodes 0)
+- 23:28 L: merged deliver/E3/Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonDiagrams (stage 3; reviewer PASS; first push; landing 20261012T232857-L-2041164 (interface); batch 20261012T232855; modules 3; new nodes 2)
