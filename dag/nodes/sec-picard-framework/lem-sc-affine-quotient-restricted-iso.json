@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-affine-quotient-restricted-iso",
+ "kind": "statement",
+ "title": "Associated quotient sheaf and restricted structure-sheaf pushforward",
+ "statement": "Let i:Z\\to Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], U an affine open, A=\\Gamma(Y,U), and I an ideal of A. Let e:i^{-1}(U)\\simeq\\operatorname{Spec}(A/I) be an isomorphism such that i|_U followed by U\\to\\operatorname{Spec}A equals e followed by the quotient-spectrum morphism. Then the associated sheaf of the A-module A/I [lem-weil-pbc-spec-module-tilde-sections], restricted along U\\simeq\\operatorname{Spec}A, is isomorphic as an O_U-module to the restriction to U of i_*O_Z [def-weil-sheaf-of-modules-category, def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma 26.7.3(2), Tag 01I9 (lemma-widetilde-pullback); specialize to the quotient morphism and transport along the affine chart. This supplies the identification implicit in More on Morphisms, Tag 068C."
+ },
+ "proof": [
+  {
+   "text": "Use the compatibility of the quotient presentation to identify the morphism over the affine chart with Spec(A/I) → Spec A. For each basic open D(g), its inverse image is D(g mod I). The associated structure sheaf on the quotient has sections (A/I)[1/g], with A[1/g] acting by the localized quotient homomorphism. The associated sheaf of the A-module A/I has the same localized sections and action. This is precisely the pushforward comparison for a spectrum map applied to the A/I-module A/I.",
+   "uses": [
+    "lem-weil-pbc-pushforward-tilde-spec"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These identifications commute with the localization restriction maps. Glue over the basic-open basis and transport along the chart isomorphism. Restricting i_*O_Z to U evaluates on an open V of U as O_Z(i^{-1}V), so it agrees with the pushforward from i^{-1}U. The resulting module-sheaf isomorphism has the claimed source and target.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pushforward-tilde-spec",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma 26.7.3(2), Tag 01I9 (lemma-widetilde-pullback); specialize to the quotient morphism and transport along the affine chart. This supplies the identification implicit in More on Morphisms, Tag 068C."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The pushforward of the structure sheaf along a quotient spectrum morphism is the sheaf associated to the quotient module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quotient ring A/I, the pushforward of the structure sheaf of Spec(A/I) to Spec A is the associated sheaf of the A-module A/I",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.specTargetImage, AlgebraicGeometry.specTargetImageRingHom, AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, localCohomology.ringModIdeals, AlgebraicGeometry.Scheme.IdealSheafData.map_ideal'",
+   "date": "2026-10-12",
+   "verdict": "no exact match for the affine-chart restriction comparison; component tools recorded"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*tilde|tilde.*pushforward|quotient.*pushforward",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match for the affine-chart restriction comparison; component tools recorded"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, diagonal step: a Koszul-regular immersion is perfect; Sheafification of an affine quotient resolution; quotient-sheaf comparison on the affine chart",
+   "via": [
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-sc-smooth-proper-diagonal-koszul-regular",
+    "lem-sc-koszul-regular-closed-immersion-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineQuotientRestrictedIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineQuotientRestrictedIso.lean",
+  "declaration": "AlgebraicGeometry.affine_quotient_restricted_iso",
+  "statement": "theorem affine_quotient_restricted_iso {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [IsClosedImmersion i] (U : Y.Opens) (hU : IsAffineOpen U) (I : Ideal (Γ(Y, U)))\n    (e : Scheme.Opens.toScheme (i ⁻¹ᵁ U) ≅\n      Spec (CommRingCat.of ((Γ(Y, U) : Type u) ⧸ I)))\n    (he : i ∣_ U ≫ U.toSpecΓ =\n      e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) :\n    Nonempty (((tilde.functor Γ(Y, U) ⋙\n      Scheme.Modules.restrictFunctor hU.isoSpec.hom).obj\n        (ModuleCat.of (Γ(Y, U) : Type u) ((Γ(Y, U) : Type u) ⧸ I))) ≅\n      ((Scheme.Modules.restrictFunctor U.ι).obj\n        ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T144100-L-2091136",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T144100-L-2091136",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,7 +8,8 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Single
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.AffineQuotientRestrictedIso
 
 /-!
 # Sheafifying an affine quotient resolution
@@ -58,6 +59,74 @@ theorem exists_affine_quotient_sheafified_resolution {Z Y : Scheme.{u}} (i : Z �
         (ChainComplex.single₀ U.toScheme.Modules).obj
           ((Scheme.Modules.restrictFunctor U.ι).obj
             ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))),
-      QuasiIso q := by sorry
+      QuasiIso q := by
+  obtain ⟨eiso⟩ := affine_quotient_restricted_iso i U hU I e he
+  let F := tilde.functor Γ(Y, U) ⋙ Scheme.Modules.restrictFunctor hU.isoSpec.hom
+  let a := ((F.mapHomologicalComplex (ComplexShape.down ℕ)).map ε)
+  let s := HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.down ℕ) 0
+  let q₁ := a ≫ (s.hom.app (ModuleCat.of (Γ(Y, U) : Type u)
+    ((Γ(Y, U) : Type u) ⧸ I)))
+  let q₂ := q₁ ≫ (ChainComplex.single₀ _).map eiso.hom
+  let tilde_preservesKernel : ∀ (R : CommRingCat.{u})
+      {M N : ModuleCat.{u} R} (f : M ⟶ N),
+      PreservesLimit (parallelPair f 0) (tilde.functor R) := by
+    intro R M N f
+    let T := tilde.functor R
+    let ff : T.FullyFaithful := tilde.fullyFaithfulFunctor (R := R)
+    let : T.Full := ff.full
+    let : T.Faithful := ff.faithful
+    let : T.IsLeftAdjoint := (tilde.adjunction (R := R)).isLeftAdjoint
+    let := preservesBinaryBiproducts_of_preservesBinaryCoproducts T
+    let : T.Additive := Functor.additive_of_preservesBinaryBiproducts T
+    have : (T.obj M).IsQuasicoherent := by
+      change (tilde.{u} (R := R) M).IsQuasicoherent
+      infer_instance
+    have : (T.obj N).IsQuasicoherent := by
+      change (tilde.{u} (R := R) N).IsQuasicoherent
+      infer_instance
+    let k := Limits.kernel (T.map f)
+    have hk : k.IsQuasicoherent := Scheme.Modules.isQuasicoherent_kernel (T.map f)
+    have : IsIso (Scheme.Modules.fromTildeΓ (R := R) k) :=
+      Scheme.Modules.isIso_fromTildeΓ_of_isQuasicoherent (R := R) k
+    let e : T.obj ((moduleSpecΓFunctor (R := R)).obj k) ≅ k :=
+      asIso (Scheme.Modules.fromTildeΓ (R := R) k)
+    let t := T.preimage (e.hom ≫ Limits.kernel.ι (T.map f))
+    have ht : t ≫ f = 0 := by
+      apply T.map_injective
+      simp only [Functor.map_comp, Functor.map_preimage, Functor.map_zero,
+        Category.assoc, Limits.kernel.condition, Limits.comp_zero, t]
+    let c := Limits.KernelFork.ofι t ht
+    have hc : Limits.IsLimit (c.map T) := by
+      apply Limits.IsLimit.ofIsoLimit (Limits.kernelIsKernel (T.map f))
+      exact Limits.Fork.ext e.symm (by simp [c, t, Limits.KernelFork.map])
+    have hc' : Limits.IsLimit c :=
+      Limits.isLimitOfReflects T ((c.isLimitMapConeEquiv T).symm hc)
+    exact Limits.preservesLimit_of_preserves_limit_cone hc'
+      ((c.isLimitMapConeEquiv T).symm hc)
+  let T := tilde.functor Γ(Y, U)
+  let : ∀ {M N : ModuleCat.{u} (Γ(Y, U) : Type u)} (f : M ⟶ N),
+      PreservesLimit (parallelPair f 0) T :=
+    fun {_ _} f ↦ tilde_preservesKernel (Γ(Y, U)) f
+  let : PreservesFiniteLimits T := Functor.preservesFiniteLimits_of_preservesKernels T
+  let : PreservesFiniteLimits (Scheme.Modules.restrictFunctor hU.isoSpec.hom) := by
+    infer_instance
+  let : PreservesFiniteColimits (Scheme.Modules.restrictFunctor hU.isoSpec.hom) := by
+    infer_instance
+  let : F.Additive := by
+    change (tilde.functor Γ(Y, U) ⋙
+      Scheme.Modules.restrictFunctor hU.isoSpec.hom).Additive
+    infer_instance
+  let : PreservesFiniteLimits F := by
+    change PreservesFiniteLimits (tilde.functor Γ(Y, U) ⋙
+      Scheme.Modules.restrictFunctor hU.isoSpec.hom)
+    exact comp_preservesFiniteLimits _ _
+  let : PreservesFiniteColimits F := by
+    change PreservesFiniteColimits (tilde.functor Γ(Y, U) ⋙
+      Scheme.Modules.restrictFunctor hU.isoSpec.hom)
+    exact comp_preservesFiniteColimits _ _
+  have : QuasiIso a := by infer_instance
+  refine ⟨q₂, ?_⟩
+  dsimp [q₂, q₁, a, s]
+  infer_instance
 
 end AlgebraicGeometry
