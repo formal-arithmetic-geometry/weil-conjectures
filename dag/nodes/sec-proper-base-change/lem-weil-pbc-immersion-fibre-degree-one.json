@@ -32,58 +32,37 @@
  ],
  "proof": [
   {
-   "text": "*The fibre is an immersion into the spectrum of a field.* Let $x\\in X$, let $c_x:\\operatorname{Spec}\\kappa(x)\\to X$ be the canonical morphism, and let $Z_x=Z\\times_X\\operatorname{Spec}\\kappa(x)$ be the fibre of $j$ at $x$ [def-pc-scheme-fibre], a fibre product [def-pc-fibre-product] with projections $p:Z_x\\to Z$ and $q:Z_x\\to\\operatorname{Spec}\\kappa(x)$. The morphism $q$ is the projection $Z\\times_X\\operatorname{Spec}\\kappa(x)\\to\\operatorname{Spec}\\kappa(x)$ of the base change of the immersion $j$ along $c_x$, hence an immersion [lem-weil-pbc-immersion-base-change-lft] (1) (Stacks Schemes 01JY): $q=o\\circ c$ with $c:Z_x\\to U$ a closed immersion and $o:U\\to\\operatorname{Spec}\\kappa(x)$ an open immersion [def-weil-closed-immersion].",
+   "text": "Base change j to Spec kappa(x). The fibre projection q is a preimmersion because j is an immersion and preimmersions are stable under base change. Spec of a field is a discrete one-point space, so the range of q is closed. Thus q is a closed immersion, by IsClosedImmersion.of_isPreimmersion; this avoids factoring the immersion into open and closed parts.",
    "uses": [
     "def-pc-scheme-fibre",
     "def-pc-fibre-product",
     "lem-weil-pbc-immersion-base-change-lft",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01JY (lemma-base-change-immersion), used for the fibre in the proof of Morphisms Lemma 03J9"
-   }
-  },
-  {
-   "text": "*The open part.* The field $\\kappa=\\kappa(x)$ has exactly one prime ideal, $(0)$, so $\\operatorname{Spec}\\kappa$ [def-weil-affine-spectrum] has exactly one point, and its only open subsets are $\\emptyset$ and $\\operatorname{Spec}\\kappa$. The open immersion $o$ is a homeomorphism of $U$ onto an open subset of $\\operatorname{Spec}\\kappa$ [def-weil-open-immersion]. If that subset is $\\emptyset$, then $U=\\emptyset$, hence $Z_x=\\emptyset$ since $c$ maps $Z_x$ into $U$. Otherwise it is all of $\\operatorname{Spec}\\kappa$, and $o$ is an isomorphism of $U$ with the open subscheme $(\\operatorname{Spec}\\kappa,\\mathcal O_{\\operatorname{Spec}\\kappa})$, i.e. $o$ is an isomorphism of schemes [def-weil-open-immersion].",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "def-weil-open-immersion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J9 (lemma-immersion-universally-bounded), line 15459 ('The integer n = 1 works in the definition'); the steps the source leaves out written out"
-   }
-  },
-  {
-   "text": "*The closed part.* Suppose $o$ is an isomorphism. Then $q=o\\circ c$ is a closed immersion: composing with the isomorphism $o$ keeps $q$ a homeomorphism onto a closed subset and keeps $\\mathcal O_{\\operatorname{Spec}\\kappa}\\to q_*\\mathcal O_{Z_x}$ surjective (it is the surjection $\\mathcal O_U\\to c_*\\mathcal O_{Z_x}$ transported along $o$) [def-weil-closed-immersion]. By the affine form of the definition [def-weil-closed-immersion] (Stacks 01QO) applied to the affine open $\\operatorname{Spec}\\kappa$ itself, there is an ideal $I\\subseteq\\kappa$ with $Z_x\\cong\\operatorname{Spec}(\\kappa/I)$ over $\\operatorname{Spec}\\kappa$ [def-weil-affine-spectrum]. As $\\kappa$ is a field, $I=\\kappa$ or $I=0$. If $I=\\kappa$, then $\\kappa/I=0$ has no prime ideal and $Z_x=\\emptyset$. If $I=0$, then $q$ is the composite of an isomorphism $Z_x\\cong\\operatorname{Spec}\\kappa$ with $\\operatorname{Spec}(\\mathrm{id}_\\kappa)$, so $q$ is an isomorphism. Together with step 2: either $Z_x=\\emptyset$ or $q:Z_x\\to\\operatorname{Spec}\\kappa(x)$ is an isomorphism.",
-   "uses": [
     "def-weil-closed-immersion",
     "def-weil-affine-spectrum"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J9 (lemma-immersion-universally-bounded), line 15459 ('The integer n = 1 works in the definition'); the steps the source leaves out written out"
+    "place": "Morphisms, Lemma Tag 03J9 (lemma-immersion-universally-bounded), line 15459, and its proof ('The integer n = 1 works')"
    }
   },
   {
-   "text": "*Which case occurs.* The first projection $p$ is a homeomorphism of $Z_x$ onto $j^{-1}(x)$ [def-pc-scheme-fibre]. So $Z_x=\\emptyset$ exactly when $j^{-1}(x)=\\emptyset$, i.e. when $x\\notin j(Z)$; by step 3, for $x\\in j(Z)$ the morphism $q$ is an isomorphism $Z_x\\cong\\operatorname{Spec}\\kappa(x)$ over $\\kappa(x)$.",
+   "text": "Use j.fiberHomeo x to identify the fibre with the inverse image of x. Outside the range, a point of the fibre would give a point mapping to x, a contradiction. On the range, a point z mapping to x gives a fibre point w via the inverse homeomorphism. As Spec kappa(x) has one point, q is then surjective. A surjective closed immersion into this reduced scheme is an isomorphism, by Mathlib isIso_of_isClosedImmersion_of_surjective. Algebraically, its defining ideal in the field is proper, hence zero, so the quotient map is an isomorphism.",
    "uses": [
-    "def-pc-scheme-fibre"
+    "def-pc-scheme-fibre",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J9 (lemma-immersion-universally-bounded), line 15459 ('The integer n = 1 works in the definition'); the steps the source leaves out written out"
+    "place": "Morphisms, Lemma Tag 03J9 (lemma-immersion-universally-bounded), line 15459, and its proof ('The integer n = 1 works')"
    }
   },
   {
-   "text": "*Degree at most one.* If $Z_x=\\emptyset$: the inverse image under $q$ of any affine open of $\\operatorname{Spec}\\kappa(x)$ is $\\emptyset=\\operatorname{Spec}(0)$, which is affine, so $q$ is affine [pqf-def-affine-morphism], and the ring maps $\\Gamma(V,\\mathcal O)\\to0$ are finite, so $q$ is finite [def-weil-finite-integral-morphism], with $\\dim_{\\kappa(x)}\\Gamma(Z_x,\\mathcal O_{Z_x})=\\dim 0=0$. If $q$ is an isomorphism: the inverse image of an affine open $V$ is isomorphic to $V$ through $q$, hence affine, and the ring map $\\Gamma(V,\\mathcal O)\\to\\Gamma(q^{-1}V,\\mathcal O)$ is an isomorphism, hence finite, so $q$ is finite [def-weil-finite-integral-morphism], and $\\Gamma(Z_x,\\mathcal O_{Z_x})\\cong\\Gamma(\\operatorname{Spec}\\kappa(x),\\mathcal O)=\\kappa(x)$ [def-weil-affine-spectrum] as $\\kappa(x)$-algebras, of dimension $1$. In both cases $Z_x$ is finite over $\\kappa(x)$ of degree $\\le1$; as $x$ was arbitrary, $1$ bounds the degrees of the fibres of $j$ and the fibres of $j$ are universally bounded [def-weil-pbc-fibre-degree-bound].",
+   "text": "The closed immersion q is finite by the Mathlib closed-immersion instance. In the nonempty case, finrankΓ_eq_of_iso transports its dimension to the identity of Spec kappa(x), and finrankΓ_id gives dimension one. In the empty case the global sections are subsingleton and Module.finrank_zero_of_subsingleton gives dimension zero. Therefore every fibre is finite and has degree at most one.",
    "uses": [
-    "pqf-def-affine-morphism",
+    "def-weil-closed-immersion",
     "def-weil-finite-integral-morphism",
     "def-weil-affine-spectrum",
     "def-weil-pbc-fibre-degree-bound"
@@ -91,7 +70,18 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma Tag 03J9 (lemma-immersion-universally-bounded), line 15459 ('The integer n = 1 works in the definition'); the steps the source leaves out written out"
+    "place": "Morphisms, Lemma Tag 03J9 (lemma-immersion-universally-bounded), line 15459, and its proof ('The integer n = 1 works')"
+   }
+  },
+  {
+   "text": "Combine the degree bound and the two cases, and use the integer one as the witness of HasUniversallyBoundedFibers.",
+   "uses": [
+    "def-weil-pbc-fibre-degree-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 03J9 (lemma-immersion-universally-bounded), line 15459, and its proof ('The integer n = 1 works')"
    }
   }
  ],
@@ -101,15 +91,13 @@
   "lem-weil-pbc-immersion-base-change-lft",
   "def-weil-closed-immersion",
   "def-weil-affine-spectrum",
-  "def-weil-open-immersion",
-  "pqf-def-affine-morphism",
   "def-weil-finite-integral-morphism",
   "def-weil-pbc-fibre-degree-bound"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma Tag 03J9 (lemma-immersion-universally-bounded), line 15459, and its proof ('The integer n = 1 works in the definition'); the omitted verification written out with Schemes Lemma 01JY and Morphisms Lemma 01QO"
+  "place": "Morphisms, Lemma Tag 03J9 (lemma-immersion-universally-bounded), line 15459, and its proof ('The integer n = 1 works'); M1 stage-3 implementation: directly make the fibre projection a closed immersion using the discrete field spectrum, then apply the proved Mathlib surjective-closed-immersion theorem and the source-library global-section dimension lemmas."
  },
  "mathlib_searches": [
   {
@@ -227,5 +215,15 @@
   "group": "E1",
   "result": "pass",
   "note": "Z X : Scheme.{u}, j, [IsImmersion j] = closed-then-open (isImmersion_iff_exists); BoundsFiberDegrees j 1 = finite + finrankΓ<=1 for each x via fiberToSpecResidueField (fiber = pullback j (fromSpecResidueField x), rfl checked); x∉range -> IsEmpty fiber; x∈range -> IsIso of projection (Spec κ(x) over κ(x)); HasUniversallyBoundedFibers; no extra hypotheses, node unchanged"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T085304-L-25160",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
