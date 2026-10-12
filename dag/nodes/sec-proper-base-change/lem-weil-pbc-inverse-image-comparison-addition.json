@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-inverse-image-comparison-addition",
+ "kind": "statement",
+ "title": "Addition transport for supplied compatible comparisons",
+ "statement": "Let U and V be schemes [def-pc-scheme], f : U → V, O a commutative ring sheaf on V’s small etale site [def-weil-pbc-etale-site], and G an O-module sheaf [def-weil-sheaf-of-modules-category]. Let L be set inverse image, La the fixed abelian inverse image, and Lr any left adjoint to the sectionwise ring direct image. Assume L preserves finite limits and er : Lr ⋙ FrU ≅ FrV ⋙ L and ea : La ⋙ FaU ≅ FaV ⋙ L satisfy the hom-equivalence compatibility equations of [lem-weil-pbc-etale-inverse-image-algebraic-structures]. Write X=FrV(O), Y=FaV(FV(G)), X'=FrU(Lr(O)), Y'=FaU(La(FV(G))), with Fr and Fa the underlying-set functors and FV the underlying abelian sheaf. For each site let e(P,Q) be the canonical categorical-product-to-sectionwise-product isomorphism. There exist addition morphisms axV : X⊗X→X, ayV : Y⊗Y→Y, ax : X'⊗X'→X', ay : Y'⊗Y'→Y', whose section values on pairs are the ordinary sums. Set cx=eU(X',X')⁻¹ ≫ prod.map(erO,erO) ≫ (prodComparison L X X)⁻¹ ≫ L(eV(X,X)), and define cy similarly using ea and Y. Then cx ≫ L(axV) ≫ erO⁻¹=ax and cy ≫ L(ayV) ≫ eaFV(G)⁻¹=ay. No scalar action or distributivity law is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 00YV; lemma-pullback-module, comparison of transported addition"
+ },
+ "proof": [
+  {
+   "text": "Obtain canonical lifts and addition transport equations, then identify supplied comparisons using the hom-equivalence hypotheses, injectivity of the set hom equivalence, and uniqueness of left adjoints.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose addition with the tensor-to-product isomorphism. Its projection identities give sectionwise sums. Substitute the canonical operation equations and cancel the comparison isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 00YV; lemma-pullback-module, comparison of transported addition; diagram calculation expanded by C3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Left adjoint underlying set comparisons compatible with hom equivalences preserve addition on sheaves of rings and abelian groups",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Underlying set comparisons of left adjoints compatible with hom equivalences transport addition on sheaves of rings and abelian groups",
+   "results": "8 hits: SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf, SheafOfModules.instAdditivePresheafOfModulesValRingCatForget, CategoryTheory.presheafToSheaf_additive, SheafOfModules.instPreadditive, SheafOfModules.add_val, SheafOfModules.instAdditiveRestrictScalars, CategoryTheory.instAddHomSheaf, CategoryTheory.instPreadditiveSheaf",
+   "date": "2026-10-12",
+   "verdict": "No exact transport lemma; product comparison lemmas are tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.prodComparison",
+   "results": "12 hits: CategoryTheory.Limits.prodComparison, CategoryTheory.Limits.prodComparison_fst, CategoryTheory.Limits.prodComparison_snd, CategoryTheory.Limits.prodComparisonNatTrans_app, CategoryTheory.Limits.prodComparisonNatIso, CategoryTheory.Limits.prodComparison_fst_assoc, CategoryTheory.Limits.prodComparison_snd_assoc, CategoryTheory.Limits.inv_prodComparison_map_fst",
+   "date": "2026-10-12",
+   "verdict": "No exact transport lemma; product comparison lemmas are tools."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*add|add.*homEquiv",
+   "results": "25 hits: Mathlib/Algebra/DirectSum/AddChar.lean, Mathlib/Algebra/DirectSum/AddChar.lean, Mathlib/Algebra/Category/Grp/Preadditive.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions/Preadditive.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions/Preadditive.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact transport lemma; product comparison lemmas are tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageScalarDistributivityRight",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-inverse-image-scalar-distributivity-right",
+   "place": "Scalar-additivity proof, Tag 03D2",
+   "via": [
+    "lem-weil-pbc-inverse-image-scalar-distributivity-right",
+    "lem-weil-pbc-inverse-image-module-action-laws",
+    "lem-weil-pbc-inverse-image-module-object",
+    "lem-weil-pbc-inverse-image-module-construction",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageComparisonAddition",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageComparisonAddition.lean",
+  "declaration": "AlgebraicGeometry.etaleInverseImageComparisonAddition",
+  "statement": "theorem etaleInverseImageComparisonAddition (U V : Scheme.{u}) (f : U ⟶ V) (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) [PreservesFiniteLimits (Scheme.etaleSetPullback f)] : let L := Scheme.etaleSetPullback f let La := Etale.upperStar AddCommGrpCat.{u + 1} f let a := Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f let FaU := sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology let FaV := sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology let FrU := sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology let FrV := sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology let b := MorphismProperty.Over.pullback @Etale ⊤ f let aS := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b (Type (u + 1)) (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale) let Rr := b.sheafPushforwardContinuous CommRingCat.{u + 1} (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale) ∀ (Lr : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤ Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (ar : Lr ⊣ Rr) (er : Lr ⋙ FrU ≅ FrV ⋙ L), let OR := (sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj O) let OV := (sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O let FV := SheafOfModules.toSheaf.{u + 1} OV ∀ (ea : La ⋙ FaU ≅ FaV ⋙ L), (∀ (G : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) (F : Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (h : Lr.obj G ⟶ F), FrV.map (ar.homEquiv G F h) = aS.homEquiv (FrV.obj G) (FrU.obj F) (er.inv.app G ≫ FrU.map h)) ∧ (∀ (G : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}) (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (h : La.obj G ⟶ F), FaV.map (a.homEquiv G F h) = aS.homEquiv (FaV.obj G) (FaU.obj F) (ea.inv.app G ≫ FaU.map h)) → ∀ G : SheafOfModules.{u + 1} OV, let X := FrV.obj O let Y := FaV.obj (FV.obj G) let X' := FrU.obj (Lr.obj O) let Y' := FaU.obj (La.obj (FV.obj G)) let eV := fun (P Q : Sheaf V.smallEtaleTopology (Type (u + 1))) ↦ (limit.isLimit (pair P Q)).conePointUniqueUpToIso (CartesianMonoidalCategory.tensorProductIsBinaryProduct P Q) let eU := fun (P Q : Sheaf U.smallEtaleTopology (Type (u + 1))) ↦ (limit.isLimit (pair P Q)).conePointUniqueUpToIso (CartesianMonoidalCategory.tensorProductIsBinaryProduct P Q) ∃ (axV : X ⊗ X ⟶ X) (ayV : Y ⊗ Y ⟶ Y) (ax : X' ⊗ X' ⟶ X') (ay : Y' ⊗ Y' ⟶ Y'), (∀ (W : V.Etaleᵒᵖ) (r s : O.obj.obj W), axV.hom.app W (r, s) = r + s) ∧ (∀ (W : V.Etaleᵒᵖ) (x y : G.val.obj W), ayV.hom.app W (x, y) = x + y) ∧ (∀ (W : U.Etaleᵒᵖ) (r s : OR.obj.obj W), ax.hom.app W (r, s) = r + s) ∧ (∀ (W : U.Etaleᵒᵖ) (x y : (La.obj (FV.obj G)).obj.obj W), ay.hom.app W (x, y) = x + y) ∧ ((eU X' X').inv ≫ prod.map (er.hom.app O) (er.hom.app O) ≫ inv (prodComparison L X X) ≫ L.map (eV X X).hom) ≫ L.map axV ≫ er.inv.app O = ax ∧ ((eU Y' Y').inv ≫ prod.map (ea.hom.app (FV.obj G)) (ea.hom.app (FV.obj G)) ≫ inv (prodComparison L Y Y) ≫ L.map (eV Y Y).hom) ≫ L.map ayV ≫ ea.inv.app (FV.obj G) = ay",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T135222-L-1657797",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T135222-L-1657797",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

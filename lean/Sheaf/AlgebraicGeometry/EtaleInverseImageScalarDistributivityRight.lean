@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Sheaf.AlgebraicGeometry.EtaleInverseImageComparisonAddition
+import Sheaf.CategoryTheory.CartesianScalarDistributivityTransport
 
 /-! # Distributivity of the transported scalar action
 
@@ -25,6 +27,24 @@ namespace AlgebraicGeometry
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+
+private theorem pairIso_inv_fst
+    {C : Type*} [Category C] (J : GrothendieckTopology C)
+    (X Y : Sheaf J (Type (u + 1))) :
+    ((limit.isLimit (pair X Y)).conePointUniqueUpToIso
+      (CartesianMonoidalCategory.tensorProductIsBinaryProduct X Y)).inv ≫ prod.fst =
+        CartesianMonoidalCategory.fst X Y := by
+  exact (limit.isLimit (pair X Y)).conePointUniqueUpToIso_inv_comp
+    (CartesianMonoidalCategory.tensorProductIsBinaryProduct X Y) ⟨WalkingPair.left⟩
+
+private theorem pairIso_inv_snd
+    {C : Type*} [Category C] (J : GrothendieckTopology C)
+    (X Y : Sheaf J (Type (u + 1))) :
+    ((limit.isLimit (pair X Y)).conePointUniqueUpToIso
+      (CartesianMonoidalCategory.tensorProductIsBinaryProduct X Y)).inv ≫ prod.snd =
+        CartesianMonoidalCategory.snd X Y := by
+  exact (limit.isLimit (pair X Y)).conePointUniqueUpToIso_inv_comp
+    (CartesianMonoidalCategory.tensorProductIsBinaryProduct X Y) ⟨WalkingPair.right⟩
 
 /-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
 (blueprint: lem-weil-pbc-inverse-image-scalar-distributivity-right).
@@ -106,6 +126,44 @@ theorem etaleInverseImageScalarDistributivity_right (U V : Scheme.{u}) (f : U �
     ∀ W : U.Etaleᵒᵖ,
       (∀ (r s : OR.obj.obj W) (x : A.obj.obj W),
         act W (r + s) x = act W r x + act W s x)
-    := by sorry
+    := by
+  dsimp only
+  intro Lr ar er ea hcompat G muV hmu
+  obtain ⟨axV, ayV, ax, ay, haxV, hayV, hax, hay, hx, hy⟩ :=
+    etaleInverseImageComparisonAddition U V f O Lr ar er ea hcompat G
+  let X := (sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology).obj O
+  let Y := (sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology).obj
+    ((SheafOfModules.toSheaf.{u + 1}
+      ((sheafCompose V.smallEtaleTopology
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O)).obj G)
+  let eV := (limit.isLimit (pair X Y)).conePointUniqueUpToIso
+    (CartesianMonoidalCategory.tensorProductIsBinaryProduct X Y)
+  have hnu (W : V.Etaleᵒᵖ) (r : O.obj.obj W) (x : G.val.obj W) :
+      (eV.inv ≫ muV).hom.app W (r, x) =
+        @SMul.smul (O.obj.obj W) (G.val.obj W) (G.val.obj W).isModule.toSMul r x := by
+    change muV.hom.app W (eV.inv.hom.app W (r, x)) = _
+    rw [hmu]
+    have hf := congrArg (fun k : X ⊗ Y ⟶ X ↦ k.hom.app W (r, x))
+      (pairIso_inv_fst V.smallEtaleTopology X Y)
+    have hs := congrArg (fun k : X ⊗ Y ⟶ Y ↦ k.hom.app W (r, x))
+      (pairIso_inv_snd V.smallEtaleTopology X Y)
+    change (prod.fst : X ⨯ Y ⟶ X).hom.app W (eV.inv.hom.app W (r, x)) = r at hf
+    change (prod.snd : X ⨯ Y ⟶ Y).hom.app W (eV.inv.hom.app W (r, x)) = x at hs
+    rw [hf, hs]
+  have hsource : ∀ (W : V.Etaleᵒᵖ) (r s : X.obj.obj W) (x : Y.obj.obj W),
+      (eV.inv ≫ muV).hom.app W (axV.hom.app W (r, s), x) =
+        ayV.hom.app W
+          ((eV.inv ≫ muV).hom.app W (r, x), (eV.inv ≫ muV).hom.app W (s, x)) := by
+    intro W r s x
+    rw [haxV, hnu, hnu, hnu, hayV]
+    exact @add_smul (O.obj.obj W) (G.val.obj W) _ _ (G.val.obj W).isModule r s x
+  have ht := cartesianScalarDistributivityTransport V.smallEtaleTopology
+    U.smallEtaleTopology (Scheme.etaleSetPullback f) X Y _ _
+    (er.app O) (ea.app _) axV ayV ax ay muV hx hy hsource
+  intro W r s x
+  have htW := ht W r s x
+  simp only [Functor.comp_obj] at htW
+  simp only [hax W r s, hay] at htW
+  exact htW
 
 end AlgebraicGeometry
