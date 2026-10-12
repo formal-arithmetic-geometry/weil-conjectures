@@ -9,6 +9,7 @@ public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.Topology.LocallyConstant.Algebra
+import Sheaf.Topology.LocallyConstantMapsSheaf
 
 /-!
 # The locally constant description of the constant abelian sheaf
