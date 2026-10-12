@@ -26,50 +26,36 @@
  ],
  "proof": [
   {
-   "text": "For sheaves of $\\mathcal O$-modules, restriction to $\\mathcal C/U$ and extension by zero are obtained from the corresponding abelian-sheaf functors by carrying the $\\mathcal O$-action along restriction and extension. The adjunction and exactness therefore hold in the module categories by [lem-pur-site-restriction-module-adjunction-exact]. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with restriction as the right adjoint and extension by zero as the exact left adjoint. Therefore $\\mathcal I^\\bullet|_U$ is K-injective on $\\mathcal C/U$.",
+   "text": "Restriction preserves zero morphisms by extensionality on sections. Apply [lem-pur-kinjective-restrict-localized] to obtain K-injectivity of the restricted target.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "lem-pur-kinjective-restrict-localized"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0A94, reduction to the localized site and K-injective target"
-   }
+   "elementary": false
   },
   {
-   "text": "By the definition of the sheaf-valued Hom complex [def-pur-hom-complex], a degree-$0$ global cocycle is exactly a chain map $f:\\mathcal L^\\bullet|_U\\to\\mathcal I^\\bullet|_U$, and a degree-$0$ coboundary is exactly a null-homotopy. Hence $H^0(\\Gamma(U,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet)))$ is canonically $\\operatorname{Hom}_{K(\\mathcal O_U)}(\\mathcal L^\\bullet|_U,\\mathcal I^\\bullet|_U)$.",
+   "text": "Apply [lem-pur-localized-hom-complex-homotopy] to obtain the pinned cocycle equivalence and the equivalence from section-complex homology to localized homotopy morphisms, compatible on representatives.",
    "uses": [
-    "def-pur-hom-complex"
+    "lem-pur-localized-hom-complex-homotopy"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0A94, identification of degree-zero Hom-complex cohomology"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-kinjective-hom-derived] in the abelian category of $\\mathcal O_U$-modules to the complex $\\mathcal L^\\bullet|_U$ and the K-injective target $\\mathcal I^\\bullet|_U$ from Step 1. It gives a bijection from the homotopy-category morphisms to $\\operatorname{Hom}_{D(\\mathcal O_U)}(Q_U(\\mathcal L^\\bullet|_U),Q_U(\\mathcal I^\\bullet|_U))$, induced by $f\\mapsto Q_U(f)$. Combining this with Step 2 proves that the displayed map is well defined and bijective.",
+   "text": "Apply [lem-weil-pbc-kinjective-hom-derived] (Mathlib Qh_map_bijective), compose its equivalence with the homology equivalence and transport source and target using quotientCompQhIso. Naturality of quotientCompQhIso proves the required formula on every cocycle. Equivalence composition proves bijectivity.",
    "uses": [
     "lem-weil-pbc-kinjective-hom-derived"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0A94, final bijection"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-pur-site-restriction-module-adjunction-exact"
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-localized-hom-complex-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 0A94; source text is not present in this checkout, so the argument is reconstructed from the cited localized-site and K-injective comparison lemmas"
+  "place": "Lemma 0A94, its two equalities, checked in the online source; formal equivalence composition by S2"
  },
  "mathlib_searches": [
   {
@@ -178,5 +164,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T095922-L-324295",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

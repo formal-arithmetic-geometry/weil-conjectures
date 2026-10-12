@@ -14,8 +14,9 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.LocallyBijective
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.Algebra.Homology.LocalizedHomComplexHomotopy
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-!
 # Localized derived morphisms into a K-injective complex
@@ -37,6 +38,7 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
+
 /-- Restriction of module sheaves preserves zero morphisms.
 Source: Stacks Project, Lemma 21.20.1, as used in Tag 0A94
 (blueprint: lem-pur-rhom-into-kinjective-local).
@@ -47,8 +49,13 @@ theorem module_overFunctor_preservesZero
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) (U : C) :
     (SheafOfModules.overFunctor.{w} R U).PreservesZeroMorphisms := by
-  sorry
+  constructor
+  intro M N
+  ext W x
+  rfl
 
+set_option maxHeartbeats 400000 in
+-- Explicit Hom-complex instances make the comparison require extra elaboration heartbeats.
 /-- Degree-zero cocycles of the sections of the sheaf Hom complex are precisely localized
 chain maps. The induced map on degree-zero cohomology sends a chain map to its image under
 localization and is bijective.
@@ -93,6 +100,43 @@ theorem rhom_into_kinjective_local
         Q.obj (res.obj I)),
         (∀ z : S.cycles 0, φ (S.homologyπ 0 z) = Q.map (e z)) ∧
         Function.Bijective φ := by
-  sorry
+  classical
+  let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R
+  let hzero := module_overFunctor_preservesZero.{u, v, max u v, max u v} R₀ U
+  let := hzero
+  let res := (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex
+    (ComplexShape.up ℤ)
+  let q := HomotopyCategory.quotient (SheafOfModules.{max u v} (R₀.over U))
+    (ComplexShape.up ℤ)
+  have : CochainComplex.IsKInjective (res.obj I) :=
+    isKInjective_restrict_localized R₀ U hzero I
+  have h := localizedHomComplex_homotopy (C := C) J R U L I hzero
+  rcases h with ⟨e, he, a, ha⟩
+  let b : (q.obj (res.obj L) ⟶ q.obj (res.obj I)) ≃
+      (DerivedCategory.Qh.{t}.obj (q.obj (res.obj L)) ⟶
+        DerivedCategory.Qh.{t}.obj (q.obj (res.obj I))) := Equiv.ofBijective
+    (DerivedCategory.Qh.{t}.map : (q.obj (res.obj L) ⟶ q.obj (res.obj I)) → _)
+    (CochainComplex.IsKInjective.Qh_map_bijective (q.obj (res.obj L)) (res.obj I))
+  let c : (DerivedCategory.Qh.{t}.obj (q.obj (res.obj L)) ⟶
+      DerivedCategory.Qh.{t}.obj (q.obj (res.obj I))) ≃
+      (DerivedCategory.Q.{t}.obj (res.obj L) ⟶ DerivedCategory.Q.{t}.obj (res.obj I)) :=
+    Iso.homCongr
+    ((DerivedCategory.quotientCompQhIso.{t}
+      (SheafOfModules.{max u v} (R₀.over U))).app (res.obj L))
+    ((DerivedCategory.quotientCompQhIso.{t}
+      (SheafOfModules.{max u v} (R₀.over U))).app (res.obj I))
+  refine ⟨e, he, (a.trans (b.trans c)), ?_, (a.trans (b.trans c)).bijective⟩
+  intro z
+  change c (b (a (_))) = _
+  rw [ha]
+  change (DerivedCategory.quotientCompQhIso.{t}
+    (SheafOfModules.{max u v} (R₀.over U))).inv.app (res.obj L) ≫
+      DerivedCategory.Qh.{t}.map (q.map (e z)) ≫
+        (DerivedCategory.quotientCompQhIso.{t}
+          (SheafOfModules.{max u v} (R₀.over U))).hom.app (res.obj I) = _
+  rw [DerivedCategory.quotientCompQhIso_hom_naturality (e z)]
+  exact Iso.inv_hom_id_app_assoc
+    (DerivedCategory.quotientCompQhIso.{t} (SheafOfModules.{max u v} (R₀.over U)))
+    (res.obj L) (DerivedCategory.Q.{t}.map (e z))
 
 end CategoryTheory

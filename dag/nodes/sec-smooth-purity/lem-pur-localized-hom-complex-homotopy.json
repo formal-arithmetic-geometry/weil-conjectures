@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-localized-hom-complex-homotopy",
+ "kind": "statement",
+ "title": "Degree-zero sections of the sheaf Hom complex compute homotopy classes",
+ "statement": "Let $\\mathcal C$ be a category with Grothendieck topology $J$, $\\mathcal R$ a sheaf of commutative rings, $U\\in\\mathcal C$, and $L,I$ arbitrary cochain complexes of $\\mathcal R$-modules. Put $S=\\Gamma(U,\\mathcal Hom^\\bullet(L,I))$ using [def-pur-hom-complex], with its specified projections $\\pi$. Let $\\mathrm{res}$ be termwise restriction to $\\mathcal C/U$ and $q$ the quotient to the homotopy category [def-weil-abstract-derived-category]. There exist equivalences $e:Z^0(S)\\simeq\\operatorname{Hom}_{\\mathrm{Ch}(\\mathcal R_U)}(L|_U,I|_U)$ and $a:H^0(S)\\simeq\\operatorname{Hom}_{K(\\mathcal R_U)}(q(L|_U),q(I|_U))$ such that the components of $e(z)$ are exactly the evaluations of $\\pi$ on the included cocycle $z$, and $a([z])=q(e(z))$. No K-injectivity, boundedness, or derived-category hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Equation 0A8Y (sites-cohomology-equation-cohomology-hom-complex), degree zero"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The product projections of [def-pur-hom-complex] identify sections in degree $n$ with families of localized maps $L^p|_U\\to I^{p+n}|_U$. Evaluation preserves products and the internal sheaf Hom represents maps on the slice. In degree zero the differential $d_I f-f d_L$ vanishes precisely for chain maps. This proves the cocycle equivalence and its projection formula.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree minus one the differential formula of [def-pur-hom-complex] is $d_I h+h d_L$, exactly the null-homotopy formula. Consequently equality of homology classes is equivalent to homotopy of the associated chain maps. Both quotients are surjected onto by their representatives; the cocycle equivalence therefore descends to a bijection of the quotients, giving $a$ and $a([z])=q(e(z))$.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Equation 0A8Y (sites-cohomology-equation-cohomology-hom-complex), degree zero; checked against the Stacks Project online source"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degree zero cohomology of sections sheaf Hom complex is morphisms in homotopy category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of sheaf Hom complex degree zero cohomology homotopy category morphisms",
+   "results": "Actual search hits: CochainComplex.HomComplex.CohomologyClass.toHom_mk, CochainComplex.HomComplex.CohomologyClass.toHom, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CochainComplex.HomComplex.CohomologyClass, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom, CochainComplex.HomComplex.CohomologyClass.homAddEquiv. No exact sheaf-valued localized statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex|CohomologyClass.homAddEquiv",
+   "results": "Actual search hits: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean. No exact sheaf-valued localized statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Localized derived internal Hom comparison: sections of Hom-complex cohomology equal localized homotopy morphisms (Tag 0A94, first equality)",
+   "via": [
+    "lem-pur-rhom-into-kinjective-local"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedHomComplexHomotopy",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedHomComplexHomotopy.lean",
+  "declaration": "CategoryTheory.localizedHomComplex_homotopy",
+  "statement": "theorem localizedHomComplex_homotopy\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    (L I : CochainComplex (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ)\n    (hzero : Functor.PreservesZeroMorphisms\n      (SheafOfModules.overFunctor.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U)) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let H := homComplex (R := R) L I\n    let π := Classical.choose (Classical.choose_spec\n      (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))\n    let S := ((SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n      forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj H\n    letI := hzero\n    let res : CochainComplex (SheafOfModules.{max u v} R₀) ℤ ⥤\n        CochainComplex (SheafOfModules.{max u v} (R₀.over U)) ℤ :=\n      (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex (ComplexShape.up ℤ)\n    let q := HomotopyCategory.quotient\n      (SheafOfModules.{max u v} (R₀.over U)) (ComplexShape.up ℤ)\n    ∃ e : S.cycles 0 ≃ (res.obj L ⟶ res.obj I),\n      (∀ (z : S.cycles 0) (p : ℤ) (W : (Over U)ᵒᵖ),\n        ((e z).f p).val.app W =\n          (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W) ∧\n      ∃ a : S.homology 0 ≃ (q.obj (res.obj L) ⟶ q.obj (res.obj I)),\n        ∀ z : S.cycles 0, a (S.homologyπ 0 z) = q.map (e z)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T095922-L-324295",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T095922-L-324295",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
