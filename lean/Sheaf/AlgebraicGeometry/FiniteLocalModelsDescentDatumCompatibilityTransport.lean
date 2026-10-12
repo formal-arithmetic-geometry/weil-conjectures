@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 public import Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityDatum
+import Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransportDiagonal
+import Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransportCocycle
 /-! # Identity and cocycle of compatible natural transport -/
 
 @[expose] public section
@@ -38,5 +40,8 @@ theorem finiteLocalModels_descentDatum_compatibility_transport
       (hab : a ≫ U.hom = b ≫ U.hom) (hbc : b ≫ U.hom = c ≫ U.hom)
       (x : Over.mk a ⟶ Over.mk Q.obj.hom),
       t.transport b c hbc (t.transport a b hab x) =
-        t.transport a c (hab.trans hbc) x) := by sorry
+        t.transport a c (hab.trans hbc) x) := by
+  constructor
+  · exact finiteLocalModels_descentDatum_compatibility_transport_diagonal T E U Q e t
+  · exact finiteLocalModels_descentDatum_compatibility_transport_cocycle T E U Q e t
 end AlgebraicGeometry.Scheme
