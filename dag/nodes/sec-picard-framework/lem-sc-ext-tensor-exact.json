@@ -24,49 +24,38 @@
  ],
  "proof": [
   {
-   "text": "Fix $x\\in X$ and choose $V_a$ containing $x$ with $\\mathcal P|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d_a}$. Taking germs of the $d_a$ basis sections and their inverse coordinate maps gives $\\mathcal P_x\\cong\\mathcal O_{X,x}^{\\oplus d_a}$ as $\\mathcal O_{X,x}$-modules [def-weil-pbc-module-stalk]. The integer may vary with $x$; only this one neighbourhood is used.",
+   "text": "The dual P^vee is finite locally free, and the canonical bidual map P to P^{vee vee} is an isomorphism. On every trivializing open with rank d, dualization takes the finite free module O^d to O^d and biduality is the standard evaluation isomorphism, including d = 0 and varying local ranks. Reuse the already proved source declarations AlgebraicGeometry.Scheme.Modules.IsFiniteLocallyFree.dual and SheafOfModules.isIso_bidual, rather than reproving these local calculations.",
    "uses": [
-    "def-weil-pbc-module-stalk"
+    "def-sc-finite-locally-free-sheaf",
+    "def-pur-sheaf-hom"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Definition 17.14.1 (finite locally free), and Lemma 17.17.2 (Tag 05NE), proof of the forward local-free case"
-   }
+   "elementary": true
   },
   {
-   "text": "For any $\\mathcal O_X$-module $\\mathcal G$, naturality of the stalk-tensor isomorphism [lem-weil-pbc-module-stalk-tensor] identifies $(\\mathcal P\\otimes\\mathcal G)_x$ with $\\mathcal P_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x$ and the stalk of a tensor map with $1_{\\mathcal P_x}\\otimes g_x$. Under the basis of step 1, the map $\\mathcal O_{X,x}^{\\oplus d_a}\\otimes\\mathcal G_x\\to\\mathcal G_x^{\\oplus d_a}$ sends $e_i\\otimes m$ to the tuple with $m$ in coordinate $i$ and zero elsewhere; its inverse sends $(m_i)_i$ to $\\sum_i e_i\\otimes m_i$. Thus tensoring on the stalk is the finite direct-sum functor $\\mathcal G_x\\mapsto\\mathcal G_x^{\\oplus d_a}$, including $d_a=0$.",
+   "text": "Apply [lem-sc-ext-evaluation] to P^vee and its naturality in the second argument. Compose tensoring by the biduality isomorphism with its natural evaluation isomorphism to obtain a natural isomorphism tensorLeft P to ihom P^vee. In Lean this uses the already proved source instance isIso_dualTensorHom_of_isFiniteLocallyFree and lemma dualTensorHom_naturality_right in WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree; no still-unproved evaluation declaration is needed.",
    "uses": [
-    "lem-weil-pbc-module-stalk-tensor"
+    "lem-sc-ext-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 17.16.1 (Tag 01CB, lemma-stalk-tensor-product) and Lemma 17.17.2 (Tag 05NE)"
-   }
+   "elementary": true
   },
   {
-   "text": "Take a short exact sequence $0\\to\\mathcal G_1\\xrightarrow{u}\\mathcal G_2\\xrightarrow{v}\\mathcal G_3\\to0$. By [lem-weil-pbc-module-stalk-exact] its sequence of stalks is exact at each $x$ (including injectivity and surjectivity). Under step 2, tensoring its stalk sequence with $\\mathcal P_x$ is the direct sum of $d_a$ copies of that sequence. Kernels, images, and surjectivity of maps between finite tuples are computed coordinatewise, so this direct sum is short exact, also when $d_a=0$. By [lem-weil-pbc-module-stalk-exact] in the reverse direction, $0\\to\\mathcal P\\otimes\\mathcal G_1\\to\\mathcal P\\otimes\\mathcal G_2\\to\\mathcal P\\otimes\\mathcal G_3\\to0$ is exact as a sequence of sheaves. The identifications in step 2 are natural, so these are the actual tensor maps.",
+   "text": "By the tensor-Hom adjunction [lem-weil-pbc-module-tensor-hom-adjunction], internal Hom from P^vee is a right adjoint, so preserves limits. Transport finite-limit preservation across the natural isomorphism of step 2 using Mathlib preservesFiniteLimits_of_natIso. Tensoring by P is itself the left adjoint in the tensor-Hom adjunction, so preserves colimits and in particular finite colimits. Lean uses ihom.adjunction and Adjunction.leftAdjoint_preservesColimits, with the small-colimit universe specialized to 0.",
    "uses": [
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-module-stalk-tensor"
+    "lem-weil-pbc-module-tensor-hom-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 17.17.2 (Tag 05NE, lemma-flat-stalks-flat), first implication, using Lemma 17.16.1 (Tag 01CB); Modules, Lemma 17.3.1 (Tag 01AG)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-module-stalk-tensor",
-  "lem-weil-pbc-module-stalk-exact"
+  "def-sc-finite-locally-free-sheaf",
+  "def-pur-sheaf-hom",
+  "lem-sc-ext-evaluation",
+  "lem-weil-pbc-module-tensor-hom-adjunction"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/modules.tex",
-  "place": "Lemmas Tags 01CB, 05NE, 01AG, specialized to locally free stalks"
+  "by": "agent",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/Ext.lean",
+  "place": "Proof of nonempty_ext_addEquiv_H, finite-limit argument via biduality and tensorLeftDualIsoIhom; specialized directly using HomTensor.LocallyFree without importing Ext.lean. F3, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -160,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T085238-L-14120",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -9,9 +9,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree
 
 /-!
 # Exactness of tensoring by a finite locally free module
@@ -51,6 +49,15 @@ Proof:
 theorem finiteLocallyFree_tensorLeft_exact {X : Scheme.{u}} (P : X.Modules)
     [P.IsFiniteLocallyFree] :
     PreservesFiniteLimits (tensorLeft P) ∧ PreservesFiniteColimits (tensorLeft P) := by
-  sorry
+  -- Finite locally free biduality identifies tensoring by P with internal Hom from its dual.
+  have := IsFiniteLocallyFree.dual P
+  have := SheafOfModules.isIso_bidual (R := X.sheaf) P
+  let e : tensorLeft P ≅ ihom (dual P) :=
+    (tensoringLeft X.Modules).mapIso (asIso (SheafOfModules.bidual (R := X.sheaf) P)) ≪≫
+      NatIso.ofComponents (fun N ↦ asIso (dualTensorHom (dual P) N)) fun g ↦
+        dualTensorHom_naturality_right (dual P) g
+  have : PreservesColimitsOfSize.{0, 0} (tensorLeft P) :=
+    (ihom.adjunction P).leftAdjoint_preservesColimits
+  exact ⟨preservesFiniteLimits_of_natIso e.symm, inferInstance⟩
 
 end AlgebraicGeometry.Scheme.Modules
