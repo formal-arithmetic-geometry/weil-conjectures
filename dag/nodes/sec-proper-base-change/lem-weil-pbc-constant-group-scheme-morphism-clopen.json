@@ -30,97 +30,17 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the components of $T_E$).* By [def-weil-pbc-constant-group-scheme] and [lem-weil-pbc-scheme-coproduct-family], $T_E=\\coprod_{e\\in E}T$ with coprojections $\\iota_e$ that are open immersions [def-weil-open-immersion]; the sets $V_e=\\iota_e(T)$ are open, pairwise disjoint and cover $T_E$, so each $V_e$ is also closed (its complement $\\bigcup_{e'\\ne e}V_{e'}$ is open). The structure morphism satisfies $\\pi\\circ\\iota_e=\\mathrm{id}_T$. Since $\\iota_e$ is an open immersion, it is an isomorphism $\\iota_e':T\\xrightarrow{\\sim}V_e$ onto the open subscheme $V_e$ followed by the inclusion $j_e:V_e\\hookrightarrow T_E$.",
+   "text": "Apply coproductCopiesMorphismsClopen to obtain the decomposition and locally constant equivalences. The restriction formula, compact finite range and coproduct universal property give all decomposition clauses. Mathlib proves open fibres are clopen. Transfer the pointwise abelian group structure across the locally constant equivalence. Component-addition compatibility identifies transported addition with the scheme-theoretic sum; canonical points are constants and hence give an additive homomorphism.",
    "uses": [
-    "def-weil-pbc-constant-group-scheme",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "def-weil-open-immersion"
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "lem-weil-pbc-constant-group-scheme-point-add-component"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 26.14.1 (Tag 01JB, lemma-glue) with $U_{ij}=\\varnothing$ for $i\\ne j$: $X=\\bigcup U_i$, $U_i\\cap U_j=\\varphi_i(U_{ij})=\\varnothing$"
-   }
-  },
-  {
-   "text": "*Step 2 (from a morphism to a clopen decomposition).* Let $f:U\\to T_E$ be a $T$-morphism, i.e. $\\pi\\circ f=s$. Put $U_e=f^{-1}(V_e)$. Since $f$ is continuous and the $V_e$ are open (Step 1), each $U_e$ is open; since the $V_e$ are pairwise disjoint and cover $T_E$, the $U_e$ are pairwise disjoint and cover $U$; hence $U\\setminus U_e=\\bigcup_{e'\\ne e}U_{e'}$ is open and $U_e$ is open and closed. We regard $U_e$ as an open subscheme of $U$.",
-   "uses": [
-    "def-pc-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 26.14.1 (Tag 01JB, lemma-glue), second mapping property, $g\\mapsto V_i=g^{-1}(U_i)$, with $V_i\\cap V_j=g^{-1}(U_{ij})=\\varnothing$"
-   }
-  },
-  {
-   "text": "*Step 3 (the restriction of $f$ to $U_e$ is forced).* With $f$ and $U_e$ as in Step 2, $f(U_e)\\subseteq V_e$, so by [lem-weil-pbc-morphism-factors-through-open-subscheme] there is a unique morphism $f_e:U_e\\to V_e$ with $j_e\\circ f_e=f|_{U_e}$; put $h_e=(\\iota_e')^{-1}\\circ f_e:U_e\\to T$, so $\\iota_e\\circ h_e=f|_{U_e}$. Applying $\\pi$ and using $\\pi\\circ\\iota_e=\\mathrm{id}_T$ (Step 1) and $\\pi\\circ f=s$ gives $h_e=\\pi\\circ\\iota_e\\circ h_e=\\pi\\circ f|_{U_e}=s|_{U_e}$. Hence $f|_{U_e}=\\iota_e\\circ s|_{U_e}$ for every $e\\in E$: a $T$-morphism $U\\to T_E$ is determined by the decomposition $(U_e)$ (the only $T$-morphism $U_e\\to T$ is $s|_{U_e}$).",
-   "uses": [
-    "lem-weil-pbc-morphism-factors-through-open-subscheme",
-    "def-weil-pbc-constant-group-scheme",
-    "def-weil-open-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 26.14.1 (Tag 01JB, lemma-glue), second mapping property: $g_i=\\varphi_i^{-1}\\circ g|_{V_i}$; Schemes, Lemma (Tag 01HI, lemma-restrict-map-to-opens) for the factorization"
-   }
-  },
-  {
-   "text": "*Step 4 (from a clopen decomposition to a morphism; the bijection).* Conversely let $(U_e)_{e\\in E}$ be pairwise disjoint open-and-closed subschemes covering $U$. The morphisms $\\iota_e\\circ s|_{U_e}:U_e\\to T_E$ agree on the overlaps $U_e\\cap U_{e'}$, which are empty for $e\\ne e'$; so by [lem-weil-pbc-scheme-morphism-gluing] there is a unique morphism $f:U\\to T_E$ with $f|_{U_e}=\\iota_e\\circ s|_{U_e}$ for all $e$. It is a $T$-morphism: $(\\pi\\circ f)|_{U_e}=\\pi\\circ\\iota_e\\circ s|_{U_e}=s|_{U_e}$ for every $e$, so $\\pi\\circ f=s$ by the uniqueness part of [lem-weil-pbc-scheme-morphism-gluing]. Moreover $f^{-1}(V_e)=U_e$: $f(U_e)\\subseteq\\iota_e(T)=V_e$, and $f(U_{e'})\\subseteq V_{e'}$ is disjoint from $V_e$ for $e'\\ne e$, while the $U_{e'}$ cover $U$. Thus the composite (decomposition $\\mapsto$ morphism $\\mapsto$ decomposition) is the identity; and the composite (morphism $f\\mapsto (f^{-1}(V_e))\\mapsto$ glued morphism $f'$) is the identity because $f$ and $f'$ both restrict to $\\iota_e\\circ s|_{U_e}$ on every $U_e$ (Step 3), so $f=f'$ by the uniqueness in [lem-weil-pbc-scheme-morphism-gluing]. This is the asserted bijection between $\\operatorname{Mor}_T(U,T_E)$ and the clopen decompositions of $U$ indexed by $E$. Nothing here uses that $s$ is etale.",
-   "uses": [
-    "lem-weil-pbc-scheme-morphism-gluing",
-    "def-weil-pbc-constant-group-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 26.14.1 (Tag 01JB, lemma-glue), second mapping property $\\Mor(Y,X)$ for the glueing data with $U_{ij}=\\varnothing$ ($i\\ne j$), whose proof the source omits; written out here"
-   }
-  },
-  {
-   "text": "*Step 5 (maps with clopen fibres; finiteness).* A family $(U_e)_{e\\in E}$ of pairwise disjoint subsets covering $U$ is the same as a map $\\varphi:|U|\\to E$, via $U_e=\\varphi^{-1}(e)$ and $\\varphi(x)=$ the unique $e$ with $x\\in U_e$; the $U_e$ are open and closed iff the fibres of $\\varphi$ are. If all fibres are open they are also closed, since $U\\setminus\\varphi^{-1}(e)=\\bigcup_{e'\\ne e}\\varphi^{-1}(e')$. For $f$ as in Step 2 the map is $\\varphi_f(x)=e\\iff f(x)\\in V_e$. If $U$ is quasi-compact, the open cover $(U_e)_{e\\in E}$ has a finite subcover $U_{e_1},\\dots,U_{e_n}$; a nonempty $U_e$ with $e\\notin\\{e_1,\\dots,e_n\\}$ would be disjoint from all $U_{e_k}$ and hence not covered, so only $U_{e_1},\\dots,U_{e_n}$ can be nonempty.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Remark 59.23.2 (Tag 03P5): sections are the Zariski locally constant maps $U\\to G$"
-   }
-  },
-  {
-   "text": "*Step 6 (the canonical map).* For $e\\in E$ the canonical map gives $c_e=\\iota_e\\circ s$ [def-weil-pbc-constant-group-scheme]. Then $c_e(U)\\subseteq V_e$, so $c_e^{-1}(V_e)=U$ and $c_e^{-1}(V_{e'})=\\varnothing$ for $e'\\ne e$ (the $V$'s are disjoint); thus the decomposition of $c_e$ is $U_e=U$, $U_{e'}=\\varnothing$, and $\\varphi_{c_e}$ is the constant map with value $e$.",
-   "uses": [
-    "def-weil-pbc-constant-group-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Groupoids, Example 39.5.6 (Tag 03YW), with Etale Cohomology, Remark 59.23.2 (Tag 03P5)"
-   }
-  },
-  {
-   "text": "*Step 7 (the group law is pointwise addition).* Let $f,g:U\\to T_E$ be $T$-morphisms, $P=T_E\\times_TT_E$ with projections $p,q$, and $(f,g):U\\to P$ the morphism with $p\\circ(f,g)=f$, $q\\circ(f,g)=g$ [def-pc-fibre-product]; it is a $T$-morphism and $f+g=m\\circ(f,g)$ [def-weil-pbc-constant-group-scheme]. For the components $W_{e,e'}=p^{-1}(V_e)\\cap q^{-1}(V_{e'})$ of $P$ we get $(f,g)^{-1}(W_{e,e'})=f^{-1}(V_e)\\cap g^{-1}(V_{e'})=\\{x:\\varphi_f(x)=e,\\ \\varphi_g(x)=e'\\}$. By the definition of $m$ [lem-weil-pbc-constant-group-scheme-multiplication] (b), (c), $m(W_{e,e'})\\subseteq V_{e+e'}$; since the $W_{e,e'}$ cover $P$ and the $V$'s are disjoint, $m^{-1}(V_d)=\\bigcup_{e+e'=d}W_{e,e'}$. Hence $(f+g)^{-1}(V_d)=\\bigcup_{e+e'=d}\\{x:\\varphi_f(x)=e,\\varphi_g(x)=e'\\}=\\{x:\\varphi_f(x)+\\varphi_g(x)=d\\}$, i.e. $\\varphi_{f+g}=\\varphi_f+\\varphi_g$. The maps $|U|\\to E$ with open fibres form an abelian group under pointwise addition (the fibre of $\\varphi+\\psi$ over $d$ is the union of the open sets $\\varphi^{-1}(e)\\cap\\psi^{-1}(d-e)$; the fibres of $-\\varphi$ are those of $\\varphi$; constants have open fibres). Since $f\\mapsto\\varphi_f$ is a bijection (Steps 4, 5) carrying $+$ to pointwise addition, $\\operatorname{Mor}_T(U,T_E)$ with $+$ is an abelian group and $f\\mapsto\\varphi_f$ is a group isomorphism; by Step 6, $e\\mapsto c_e$ corresponds to $e\\mapsto$ (constant map $e$), which is additive.",
-   "uses": [
-    "def-pc-fibre-product",
-    "def-weil-pbc-constant-group-scheme",
-    "lem-weil-pbc-constant-group-scheme-multiplication"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Groupoids, Example 39.5.6 (Tag 03YW), with Etale Cohomology, Remark 59.23.2 (Tag 03P5)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-pc-scheme",
-  "def-weil-open-immersion",
-  "def-weil-pbc-constant-group-scheme",
-  "lem-weil-pbc-constant-group-scheme-multiplication",
-  "lem-weil-pbc-morphism-factors-through-open-subscheme",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-scheme-morphism-gluing"
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-constant-group-scheme-point-add-component"
  ],
  "proof_origin": {
   "by": "agent",
@@ -209,5 +129,15 @@
   "group": "K1",
   "result": "pass",
   "note": "T,U schemes + s:U->T (node's every-T-scheme clause), E AddCommGroup Small.{u} per recorded constantGroupScheme; b: points ≃ IsClopenDecomposition with forward f⁻¹(V_e), inverse restriction ι_e∘s, ∃! uniqueness, IsClopen pieces, quasi-compact finiteness; open↔clopen fibres; canonical point ↦ ⊤/⊥ and const; ∃ AddCommGroup with + = constantGroupSchemePointAdd, Φ ≃+ LocallyConstant tied by φ_f(x)=e ↔ f x ∈ V_e, pointwise sum, c : E →+ canonical map"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T095910-L-319393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

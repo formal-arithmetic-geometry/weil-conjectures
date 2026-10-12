@@ -7226,3 +7226,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/J2/Sheaf.AlgebraicGeometry.HigherDirectImageLimitAffineClassRep (stage 3; reviewer PASS; first push; landing 20261012T095909-L-319072 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:59 L: merged deliver/J2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (stage 3; reviewer PASS; first push; landing 20261012T095909-L-319169 (proof); batch 20261012T095846; modules 1; new nodes 0)
 - 09:59 L: merged deliver/J2/WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival (stage 3; reviewer PASS; first push; landing 20261012T095909-L-319265 (interface); batch 20261012T095846; modules 4; new nodes 3)
+- 09:59 L: merged deliver/J3/Sheaf.AlgebraicGeometry.ConstantGroupSchemeMorphismsClopen (stage 3; reviewer PASS; first push; landing 20261012T095910-L-319393 (interface); batch 20261012T095846; modules 2; new nodes 1)
