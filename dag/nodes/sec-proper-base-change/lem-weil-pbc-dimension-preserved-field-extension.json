@@ -38,50 +38,26 @@
  ],
  "proof": [
   {
-   "text": "Put $S_K=S\\otimes_kK$ and let $\\tau:S_K\\xrightarrow{\\sim}K\\otimes_kS$ be the canonical symmetry isomorphism of tensor products. By [lem-weil-pbc-field-extension-base-change-faithfully-flat], the map $S\\to S_K$, $s\\mapsto s\\otimes1$, is faithfully flat. Transporting this map along $\\tau$ gives the map $j:S\\to K\\otimes_kS$, $s\\mapsto1\\otimes s$, and faithful flatness is unchanged by the target ring isomorphism $\\tau$.",
-   "uses": [
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00P3 (lemma-dimension-preserved-field-extension, line 28290), together with the field-extension flatness input used in its proof; tensor-factor symmetry is the canonical swap"
-   }
+   "text": "The tensor swap S_K = S ⊗_k K ≅ K ⊗_k S induces a homeomorphism of prime spectra. By Mathlib IsHomeomorph.topologicalKrullDim_eq, their global topological Krull dimensions agree. It therefore suffices to prove dim Spec(S_K) = dim Spec(S).",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "By [lem-weil-pbc-faithfully-flat-surjective-spectrum], the faithfully flat map $j$ induces a surjection $\\operatorname{Spec}(K\\otimes_kS)\\to\\operatorname{Spec}S$. Thus every prime of $S$ is the contraction of at least one prime of $K\\otimes_kS$.",
+   "text": "The field K is a nontrivial free k-module, hence faithfully flat. By [lem-weil-pbc-field-extension-base-change-faithfully-flat], S_K is faithfully flat over S for its left-factor algebra structure. By [lem-weil-pbc-faithfully-flat-surjective-spectrum], contraction along S → S_K is surjective on prime spectra. Mathlib instances and PrimeSpectrum.comap_surjective_of_faithfullyFlat give these facts directly.",
    "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
     "lem-weil-pbc-faithfully-flat-surjective-spectrum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00P3 (lemma-dimension-preserved-field-extension, line 28290), with the standard faithfully-flat lying-over consequence for the scalar-extension map"
-   }
+   "elementary": false
   },
   {
-   "text": "For a prime $\\mathfrak q_K\\subset K\\otimes_kS$ let $\\mathfrak q=j^{-1}(\\mathfrak q_K)$. Apply [lem-weil-pbc-dimension-at-point-field-extension] to $S$ and $K/k$, whose tensor factor order is changed by the same symmetry $\\tau$. The induced homeomorphism of affine spectra carries $\\mathfrak q_K$ to the corresponding point in the $S\\otimes_kK$ presentation, so the local-dimension equality from that lemma reads $\\dim_{\\mathfrak q_K}\\operatorname{Spec}(K\\otimes_kS)=\\dim_{\\mathfrak q}\\operatorname{Spec}S$.",
-   "uses": [
-    "lem-weil-pbc-dimension-at-point-field-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00P4 (lemma-dimension-at-a-point-preserved-field-extension, line 28307), applied to the primes over the scalar-extension map; the swap $S\\otimes_kK\\cong K\\otimes_kS$ preserves prime chains and local dimensions"
-   }
-  },
-  {
-   "text": "Use [lem-weil-pbc-dimension-supremum-local-dimensions] for each affine spectrum. It gives $\\dim\\operatorname{Spec}(K\\otimes_kS)=\\sup_{\\mathfrak q_K}\\dim_{\\mathfrak q_K}\\operatorname{Spec}(K\\otimes_kS)$ and $\\dim\\operatorname{Spec}S=\\sup_{\\mathfrak q}\\dim_{\\mathfrak q}\\operatorname{Spec}S$, with the empty-spectrum supremum equal to $-\\infty$. By step 2, contraction $\\mathfrak q_K\\mapsto\\mathfrak q$ has image all primes of $S$, and by step 3 the corresponding local dimensions are equal. Therefore the two suprema, and hence the two Krull dimensions, are equal.",
+   "text": "Apply [lem-weil-pbc-dimension-supremum-local-dimensions] to Spec(S_K) and Spec(S). For every prime q_K of S_K, [lem-weil-pbc-dimension-at-point-field-extension] identifies its local dimension with the local dimension of its contraction. Replace each summand in the first supremum by this equal local dimension using iSup_congr. Surjectivity of contraction identifies the resulting supremum with the supremum over all points of Spec(S), by Function.Surjective.iSup_comp. This proves equality, also for the zero algebra because the empty supremum is bottom.",
    "uses": [
     "lem-weil-pbc-dimension-supremum-local-dimensions",
-    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-    "lem-weil-pbc-dimension-at-point-field-extension"
+    "lem-weil-pbc-dimension-at-point-field-extension",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00P3 (lemma-dimension-preserved-field-extension, line 28290), concluded using Lemma Tag 00P4; the supremum-over-local-dimensions passage is Topology, Lemma Tag 0B7I (line 1428)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -91,9 +67,9 @@
   "lem-weil-pbc-dimension-supremum-local-dimensions"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00P3 (line 28290), with the local-dimension strengthening Lemma Tag 00P4 (line 28307); the global supremum step is Topology, Lemma Tag 0B7I (line 1428)"
+  "place": "Tags 00P3 and 00P4, together with Topology Tag 0B7I; G1 implements the existing local-dimension/supremum route, applying tensor symmetry only to the global dimension."
  },
  "mathlib_searches": [
   {
@@ -172,5 +148,15 @@
   "group": "J1",
   "result": "pass",
   "note": "field k, field K with Algebra k K (any extension, no finiteness/separability), CommRing S with Algebra.FiniteType k S (zero algebra allowed), K ⊗[k] S in node's factor order, Spec via AlgebraicGeometry.Spec, topologicalKrullDim (def-kun-topological-krull-dimension) in WithBot ℕ∞, equality; separate universes; proof steps in docstring"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T085240-L-14884",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
