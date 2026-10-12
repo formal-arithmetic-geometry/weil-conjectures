@@ -8,7 +8,6 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
 
 /-!
 # Exactness of inverse image on abelian étale sheaves
@@ -56,6 +55,10 @@ theorem upperStar_abelian_exact {U V : Scheme.{u}} (f : U ⟶ V) :
       PreservesColimit (parallelPair φ 0) (upperStar AddCommGrpCat.{u + 1} f)) ∧
     (∀ (S : ShortComplex (Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1})),
       S.ShortExact → (S.map (upperStar AddCommGrpCat.{u + 1} f)).ShortExact) := by
-  sorry
+  refine ⟨inferInstance, inferInstance, inferInstance, ?_, ?_⟩
+  · intro G H φ
+    exact ⟨inferInstance, inferInstance⟩
+  · intro S hS
+    exact hS.map_of_exact (upperStar AddCommGrpCat.{u + 1} f)
 
 end AlgebraicGeometry.Etale

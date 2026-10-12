@@ -5981,3 +5981,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/N2/Sheaf.AlgebraicGeometry.TensorPullbackTilde (stage 3; reviewer PASS; first push; landing 20261012T042414-L-1818464 (proof); batch 20261012T042402; modules 1; new nodes 1)
 - 04:24 L: merged deliver/N2/WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme (stage 3; reviewer PASS; first push; landing 20261012T042414-L-1818601 (interface); batch 20261012T042402; modules 2; new nodes 1)
 - 04:24 L: merged deliver/P2/Sheaf.AlgebraicGeometry.ConstantRingModuleSheafEquivalence (stage 3; reviewer PASS; first push; landing 20261012T042414-L-1818747 (proof); batch 20261012T042402; modules 1; new nodes 0)
+- 04:24 L: merged deliver/P2/Sheaf.AlgebraicGeometry.EtaleInverseImageExact (stage 3; reviewer PASS; first push; landing 20261012T042414-L-1818884 (proof); batch 20261012T042402; modules 1; new nodes 0)
