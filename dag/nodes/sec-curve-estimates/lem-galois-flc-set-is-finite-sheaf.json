@@ -18,16 +18,47 @@
  },
  "proof": [
   {
-   "text": "Lift every geometric point to a member of the etale cover. Reindex pointed etale neighbourhoods along the fibre product to obtain a surjection from the restricted stalk onto the original stalk. Transport across the local isomorphism and use that the stalk of a constant sheaf is a quotient of its finite constant value. This gives a finitely generated (indeed finite) stalk at every geometric point, hence IsFiniteSheaf.",
-   "uses": [],
+   "text": "Unpack the finite constant-value cover. For each separably closed geometric point s, choose a cover member over its image and lift s to that member using Cover.exists_eq and exists_fac_of_etale_of_isSepClosed. This supplies a in the fiber of U at s.",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Represent an arbitrary stalk element z by a section t on a pointed neighbourhood (V,b), using Point.toPresheafFiber_jointly_surjective. Choose a common pointed refinement W of (V,b) and (U,a), by IsCofilteredOrEmpty.cone_objs. The section restricts to a section t′ over the object W -> U of the localized site.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let eta be the constant-presheaf sheafification map and pi the inverse of the supplied local constant-sheaf isomorphism. The map pi is an epimorphism, hence locally surjective. The map eta is locally surjective by the Mathlib instance Presheaf.IsLocallySurjective J (toSheafify J P); composition preserves local surjectivity. Apply the over-point (pointSmallEtale s).over a to the covering image sieve of t′. It supplies a further pointed refinement R and m in the constant value with (eta >> pi)(m) equal to the restriction of t′. These are direct applications of Sheaf.isLocallySurjective_iff_epi, the sheafification instance, and Point.jointly_surjective; no auxiliary unproved theorem is introduced.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of eta >> pi and Point.toPresheafFiber_w along R -> U, R -> W, and W -> V to show that the germ of m at (U,a) is z. Thus the finite constant value surjects onto the original stalk. Finite.of_surjective makes that stalk finite, and ConcreteCategory.isFinitelyGenerated_iff_finite supplies the field of IsFiniteSheaf. The empty constant value case follows from the same surjection, and no nonemptiness of Y is assumed.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-constant-sheaf"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03RU, 03Q1, 03P5"
+  "place": "Tags 03RU (4), 03Q1 (3), 03PR and 03PQ; explicit germ argument adapted from the proved private germ_constant_epi_surjective in Sheaf.AlgebraicGeometry.FiniteTypeEtaleModuleStalk, using Mathlib sites APIs."
  },
  "status": "split",
  "created": {
@@ -93,10 +124,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T053917-L-2628302",
-  "kind": "interface",
+  "landing": "20261012T063509-L-3154923",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
