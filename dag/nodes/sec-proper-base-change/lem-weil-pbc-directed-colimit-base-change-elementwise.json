@@ -26,61 +26,46 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the systems over $I_0$).* Let $I_0=\\{i\\in I:i\\ge0\\}$. It is a directed set: it contains $0$, and for $i,j\\in I_0$ an upper bound $k\\in I$ of $i,j$ (which exists as $I$ is directed) satisfies $k\\ge i\\ge0$, so $k\\in I_0$. For $i\\in I_0$ the $A_0$-module structure of $A_i$ is $c\\cdot b=\\alpha_{i0}(c)b$, and that of $A$ is $c\\cdot a=\\alpha_0(c)a$. Since $\\alpha_{i'i}\\circ\\alpha_{i0}=\\alpha_{i'0}$ and $\\alpha_i\\circ\\alpha_{i0}=\\alpha_0$ and the $\\alpha$'s are ring maps, $\\alpha_{i'i}(c\\cdot b)=\\alpha_{i'0}(c)\\alpha_{i'i}(b)=c\\cdot\\alpha_{i'i}(b)$ and likewise $\\alpha_i(c\\cdot b)=c\\cdot\\alpha_i(b)$: the maps $\\alpha_{i'i}$ ($0\\le i\\le i'$) and $\\alpha_i$ ($i\\ge0$) are $A_0$-linear. Hence $\\mu_{i'i}=\\alpha_{i'i}\\otimes\\mathrm{id}$ and $\\mu_i=\\alpha_i\\otimes\\mathrm{id}$ are well defined $A_0$-linear maps, and from $\\alpha_{ii}=\\mathrm{id}$, $\\alpha_{i''i'}\\alpha_{i'i}=\\alpha_{i''i}$, $\\alpha_{i'}\\alpha_{i'i}=\\alpha_i$ and $(f\\otimes\\mathrm{id})(g\\otimes\\mathrm{id})=fg\\otimes\\mathrm{id}$ (checked on the generators $b\\otimes m$) one gets $\\mu_{ii}=\\mathrm{id}$, $\\mu_{i''i'}\\mu_{i'i}=\\mu_{i''i}$, $\\mu_{i'}\\mu_{i'i}=\\mu_i$: $(A_i,\\alpha_{i'i})_{i\\in I_0}$ and $(M_i,\\mu_{i'i})_{i\\in I_0}$ are directed systems of $A_0$-modules (Stacks, Algebra, Definition Tag 00D4, definition-directed-system) with cocones $(A,\\alpha_i)$ and $(M,\\mu_i)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Definition Tag 00D4 (definition-directed-system, line 715); the A_0-module structures and the restriction to i >= 0 are the conventions of Lemma Tag 07RI (lemma-colimit-etale, line 47654), written out by the agent"
-   }
+   "text": "Restrict to the nonempty directed upper tail J = {i : I | i₀ ≤ i}. Equip A i = F.obj i with its F.obj i₀-algebra structure. Functoriality gives S-linear transition maps f and coprojections α, satisfying directed-system and cocone compatibility laws.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
   },
   {
-   "text": "*Step 2 ($A$ is the colimit of the $A_i$ as $A_0$-modules).* We show that $(A,(\\alpha_i)_{i\\in I_0})$ is a colimit of $(A_i,\\alpha_{i'i})_{i\\in I_0}$ in the category of $A_0$-modules [def-weil-pbc-category-colimit]. Two facts on the ring colimit, $I$ being a nonempty directed set and hence a filtered category [def-weil-pbc-category-colimit]: (a) every $a\\in A$ is $\\alpha_j(b)$ for some $j\\in I$, $b\\in A_j$, by part (2) of [lem-weil-pbc-filtered-colimit-algebras-elementwise] with $R=\\mathbf Z$ (commutative $\\mathbf Z$-algebras are exactly commutative rings, every ring map being $\\mathbf Z$-linear, so the colimit $A$ in commutative rings is the colimit in commutative $\\mathbf Z$-algebras); choosing $i\\in I$ with $i\\ge j$, $i\\ge0$ gives $a=\\alpha_i(\\alpha_{ij}(b))$ with $i\\in I_0$; (b) for $i,i'\\in I$, $b\\in A_i$, $b'\\in A_{i'}$ one has $\\alpha_i(b)=\\alpha_{i'}(b')$ iff $\\alpha_{ki}(b)=\\alpha_{ki'}(b')$ for some $k\\ge i,i'$, by [lem-weil-pbc-filtered-colimit-rings-zero] (morphisms $i\\to k$ of the category $I$ are the relations $i\\le k$). Now let $(f_i:A_i\\to P)_{i\\in I_0}$ be $A_0$-linear maps with $f_{i'}\\alpha_{i'i}=f_i$ for $0\\le i\\le i'$. Define $f:A\\to P$ by $f(\\alpha_i(b))=f_i(b)$ ($i\\in I_0$, $b\\in A_i$): every $a$ has this form by (a), and if $\\alpha_i(b)=\\alpha_{i'}(b')$ then by (b) there is $k\\ge i,i'$ (so $k\\in I_0$) with $\\alpha_{ki}(b)=\\alpha_{ki'}(b')$, whence $f_i(b)=f_k(\\alpha_{ki}(b))=f_k(\\alpha_{ki'}(b'))=f_{i'}(b')$; so $f$ is well defined. It is $A_0$-linear: given $a=\\alpha_i(b)$, $a'=\\alpha_{i'}(b')$ and $c\\in A_0$, move both to a common $k\\in I_0$, $k\\ge i,i'$, so $a=\\alpha_k(\\beta)$, $a'=\\alpha_k(\\beta')$; then $a+a'=\\alpha_k(\\beta+\\beta')$ and $c\\cdot a=\\alpha_k(c\\cdot\\beta)$ ($\\alpha_k$ is additive and $A_0$-linear, step 1), so $f(a+a')=f_k(\\beta)+f_k(\\beta')$ and $f(c\\cdot a)=c\\,f_k(\\beta)$. By construction $f\\circ\\alpha_i=f_i$, and $f$ is the only map with this property because the images of the $\\alpha_i$, $i\\in I_0$, cover $A$ by (a).",
+   "text": "Define g : Module.DirectLimit A f →ₗ[S] colimit F using Module.DirectLimit.lift and compatibility. Concrete.colimit_exists_rep for CommRingCat gives a ring representative; move it above i₀ to prove g surjective. Concrete.colimit_exists_of_rep_eq gives a common later stage for equal ring representatives; Module.DirectLimit.of_f then proves g injective. This identifies the upper-tail module direct limit with the ring colimit.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
     "lem-weil-pbc-filtered-colimit-rings-zero"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00D6 (lemma-directed-colimit, line 778: the directed colimit as the disjoint union modulo the relation, sums and scalar products computed at a common later index), applied to the underlying modules of a directed colimit of rings; written out by the agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (tensor products commute with the colimit).* By [lem-weil-pbc-tensor-commutes-with-colimits] with $R=A_0$, the directed set $I_0$, the diagram $(A_i,\\alpha_{i'i})_{i\\in I_0}$ with its colimit $(A,(\\alpha_i))$ in $A_0$-modules from step 2, and $N=M_0$: $M=A\\otimes_{A_0}M_0$ with the maps $\\mu_i=\\alpha_i\\otimes\\mathrm{id}$ is a colimit of the directed system $(M_i=A_i\\otimes_{A_0}M_0,\\ \\mu_{i'i}=\\alpha_{i'i}\\otimes\\mathrm{id})_{i\\in I_0}$ in the category of $A_0$-modules. This is the parenthetical 'equivalently' form of the statement.",
+   "text": "Let E = LinearEquiv.ofBijective g. Compose (TensorProduct.directLimitLeft f M₀).symm with E.rTensor M₀ to obtain e from the direct limit of the stage tensors to R ⊗[S] M₀. Tensor induction, directLimitLeft_symm_of_tmul and Module.DirectLimit.lift_of show e of a stage tensor is α.rTensor M₀ of that tensor.",
    "uses": [
     "lem-weil-pbc-tensor-commutes-with-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00DD (lemma-tensor-products-commute-with-limits, line 1934)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 4 (elements and zero elements come from a stage).* Apply [lem-weil-pbc-filtered-colimit-modules-elementwise] with $R=A_0$, the nonempty directed set $I_0$ (a filtered category) and the colimit $(M,(\\mu_i)_{i\\in I_0})$ of step 3. Its part (1) says that every element of $M$ is $\\mu_i(t)$ for some $i\\in I_0$, i.e. $i\\ge0$, and some $t\\in M_i$: this is (1). Its 'in particular' says, for $i\\ge0$ and $t\\in M_i$ with $\\mu_i(t)=0$, that $\\mu_{i'i}(t)=0$ for some $i'\\in I_0$ with $i'\\ge i$: this is (2).",
+   "text": "Apply Module.DirectLimit.exists_of to e.symm x for the representative clause. For eventual vanishing, injectivity of e identifies the stage tensor class with zero; Module.DirectLimit.of.zero_exact then supplies a later upper-tail stage. Directed-system identities of the tensor transitions are checked on pure tensors.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00D6 (lemma-directed-colimit, line 778) and Lemma Tag 00D7 (lemma-zero-directed-limit, line 811)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
   "lem-weil-pbc-filtered-colimit-rings-zero",
   "lem-weil-pbc-tensor-commutes-with-colimits",
   "lem-weil-pbc-filtered-colimit-modules-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "S1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "no single place: the combination of Algebra, Lemmas Tag 00D6 (line 778), Tag 00D7 (line 811) and Tag 00DD (line 1934) that the proof of Lemma Tag 07RI (lemma-colimit-etale, line 47654) uses implicitly ('Thus for sufficiently large i we can find elements ...', 'on increasing i if necessary ... since this is true in the limit'); the passage from the ring colimit to the colimit of A_0-modules (step 2) is written out by the agent"
+  "place": "Tags 00D6, 00D7 and 00DD; implementation by Mathlib concrete ring colimit lemmas, Module.DirectLimit and TensorProduct.directLimitLeft."
  },
  "mathlib_searches": [
   {
@@ -172,5 +157,15 @@
   "group": "G1",
   "result": "fix",
   "note": "directed preorder I, F : I ⥤ CommRingCat + HasColimit (A = colimit F, α_i = colimit.ι), base i₀ arbitrary, M₀ any A₀-module (universe w), A_i/A as A₀-algebras via F.map(homOfLE)/colimit.ι F i₀, M_i/M actual tensors, μ = rTensor of α_i/α_{i'i}; (1) every x lifts to some i ≥ i₀, (2) μ_i t = 0 ⇒ μ_{i'i} t = 0 for some i' ≥ i"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T060753-L-2915125",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
