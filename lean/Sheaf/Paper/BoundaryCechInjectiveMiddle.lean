@@ -9,6 +9,13 @@ public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.Paper.CechComparisonMapNaturality
+import Sheaf.Paper.PQFCohomology
 
 /-!
 # Injective middle term: the Čech local-lift cocycle is the connecting class
