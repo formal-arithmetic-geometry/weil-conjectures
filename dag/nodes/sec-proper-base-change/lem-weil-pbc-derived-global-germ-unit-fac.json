@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-derived-global-germ-unit-fac",
+ "kind": "statement",
+ "title": "Target-side derived unit germ factorization",
+ "statement": "For a commutative square g′≫f=f′≫g of schemes and separably closed geometric point t of Y′, put F′=f′_*, G′=g′^*, R=g′_*, H=Γ_X and S=stalk_t. Let b:H→G′⋙F′⋙S be the global-sections image of the underived g′ adjunction unit followed by Γ/Leray for g′, inverse Γ/Leray for f′ and the target globalGerm(t). Let c on a bounded below homotopy complex M be the inverse S localization factorization at F′(G′M), followed by D(S) of the F′ right-derived unit at G′M and D(S) of R(F′) applied to the inverse G′ localization factorization at M. Then the Γ_X right-derived unit at M followed by RΓ_X of the derived g′ adjunction unit, derived Leray for g′ and derivedGlobalGerm(f′,t) equals Qh(mapHomotopyCategoryPlus(b).app M) followed by c. These are the canonical constructions of [def-weil-pbc-derived-global-germ], [prop-weil-pbc-derived-inverse-image-adjunction] and [def-weil-pbc-derived-categories].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 095T, 01EZ, 01F8, 08J6; categorical expansion for the library canonical comparisons"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-global-germ",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Use `derivedCohomologyPullback_eq_derivedUnit` to replace Γ of the derived\nadjunction unit followed by Leray by the derived pullback of sections. Its defining\nright-derived descent formula, precomposed with Γ_X's unit, is the localized section\nunit, followed by Γ_X' on the homotopy category and the inverse g'^* factorization.\nMove that inverse across the target germ by naturality. Expand the target derived\ngerm: the Leray unit compatibility and the right-derived natural-transformation unit\ncompatibility turn Γ_X' followed by its germ into the localized inverse terminal\nsection identification and underived germ. The exact stalk comparison contributes the\ninverse stalk factorization followed by the stalk image of the f'_* unit.\nCombine localized maps using functoriality; the underived map is precisely b and the\nremaining three comparisons, in their order, are c.",
+   "uses": [
+    "def-weil-pbc-derived-global-germ",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-global-germ",
+  "lem-weil-pbc-cohomology-pullback-derived-unit"
+ ],
+ "proof_origin": {
+  "by": "T3 stage-3 worker, repaired by independent second reader",
+  "document": "Stacks Project and the library derived-functor unit formulas",
+  "place": "Categorical expansion of the canonical comparisons; full proof in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of derived global sections germ with Leray and right derived functor units.",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray comparison and natural transformations commute with the unit of a right derived functor",
+   "date": "2026-10-12",
+   "results": "8 hits: CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.Functor.rightDerived_fac_app, CategoryTheory.Functor.rightDerivedNatTrans_fac, CategoryTheory.Functor.rightDerived_fac_app_assoc",
+   "verdict": "Related generic formulas only; none states this composite for the canonical small-etale global germs. The generic formulas are used in the proof in words."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedNatTrans_fac",
+   "date": "2026-10-12",
+   "results": "1 hits: CategoryTheory.Functor.rightDerivedNatTrans_fac",
+   "verdict": "Related generic formulas only; none states this composite for the canonical small-etale global germs. The generic formulas are used in the proof in words."
+  },
+  {
+   "tool": "grep",
+   "query": "germ.*(unit|baseChange)|rightDerived.*fac",
+   "date": "2026-10-12",
+   "results": "13 hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "verdict": "Related generic formulas only; none states this composite for the canonical small-etale global germs. The generic formulas are used in the proof in words."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedGlobalGermExchange",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-derived-global-germ-exchange",
+   "place": "Termwise germ equality and derived unit transport",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedGlobalGermUnitFac",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedGlobalGermUnitFac.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedGlobalGerm_unit_fac",
+  "statement": "theorem derivedGlobalGerm_unit_fac\n    {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')\n    (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : CommSq g' f' f g)\n    {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Y')\n    (M : HomotopyCategory.Plus\n      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :\n    let B := AddCommGrpCat.{u + 1}\n    let F := lowerStar B f\n    let F' := lowerStar B f'\n    let G := upperStar B g\n    let G' := upperStar B g'\n    let R := lowerStar B g'\n    let H := Sheaf.Γ X.smallEtaleTopology B\n    let S := (pointSmallEtale t).sheafFiber\n    let b : H ⟶ G' ⋙ F' ⋙ S :=\n      (Functor.leftUnitor H).inv ≫\n        Functor.whiskerRight (upperStarLowerStarAdjunction B g').unit H ≫\n        (Functor.associator G' R H).hom ≫\n        Functor.whiskerLeft G' (lowerStarCompGlobalSectionsIso B g').hom ≫\n        Functor.whiskerLeft G' (lowerStarCompGlobalSectionsIso B f').inv ≫\n        Functor.whiskerLeft G' (Functor.whiskerLeft F' (globalGerm t))\n    let c := S.mapDerivedCategoryPlusFactorsh.inv.app\n        (F'.mapHomotopyCategoryPlus.obj (G'.mapHomotopyCategoryPlus.obj M)) ≫\n      S.mapDerivedCategoryPlus.map\n        (F'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj M)) ≫\n      S.mapDerivedCategoryPlus.map (F'.rightDerivedFunctorPlus.map\n        (G'.mapDerivedCategoryPlusFactorsh.inv.app M))\n    H.rightDerivedFunctorPlusUnit.app M ≫\n        (H.rightDerivedFunctorPlus.map\n          ((upperStarLowerStarAdjunction B g').derivedPlus.unit.app\n            (DerivedCategory.Plus.Qh.obj M)) ≫\n          (@Functor.rightDerivedFunctorPlusCompIso' _ _ _ _ _ _ _ _ _ _ _ _ _ _\n            R H _ _ _ _\n            (Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\n              (upperStarLowerStarAdjunction B g'))\n            (lowerStarCompGlobalSectionsIso B g')).hom.app\n              (G'.mapDerivedCategoryPlus.obj (DerivedCategory.Plus.Qh.obj M))) ≫\n        (derivedGlobalGerm f' t).app\n          (G'.mapDerivedCategoryPlus.obj (DerivedCategory.Plus.Qh.obj M)) =\n      DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus b).app M) ≫ c",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T132339-L-1432371",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T132339-L-1432371",
+  "kind": "interface"
+ }
+}

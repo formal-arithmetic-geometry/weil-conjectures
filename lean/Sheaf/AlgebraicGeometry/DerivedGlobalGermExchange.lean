@@ -8,8 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedGlobalGerm
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
-import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
+import Sheaf.AlgebraicGeometry.UnderivedGlobalGermExchange
+import Sheaf.AlgebraicGeometry.DerivedPulledGlobalGermFac
+import Sheaf.AlgebraicGeometry.DerivedGlobalGermUnitFac
 
 /-! # Derived exchange and the canonical global germ
 
@@ -63,6 +64,43 @@ theorem derivedGlobalGerm_exchange
           (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g')).hom.app
             (((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlus.obj K)) ≫
       (derivedGlobalGerm f' t).app
-        (((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlus.obj K) := by sorry
+        (((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlus.obj K) := by
+  let B := AddCommGrpCat.{u + 1}
+  let H := Sheaf.Γ X.smallEtaleTopology B
+  let L := (g')^*[B].mapDerivedCategoryPlus
+  let R := lowerStar B g'
+  have : (lowerStar (AddCommGrpCat.{u + 1}) g').PreservesInjectiveObjects :=
+    Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+      (upperStarLowerStarAdjunction (AddCommGrpCat.{u + 1}) g')
+  let HR := H.rightDerivedFunctorPlus
+  let S := (pointSmallEtale t).sheafFiber (A := B)
+  let SR := S.mapDerivedCategoryPlus
+  let e := Functor.rightDerivedFunctorPlusCompIso' R H
+    (lowerStarCompGlobalSectionsIso B g')
+  let δ := derivedPulledGlobalGerm f g t ≫
+      Functor.whiskerRight (derivedBaseChangeMapPlus B sq.toCommSq) SR ≫
+      (Functor.associator L (f')_*[B].rightDerivedFunctorPlus SR).hom
+  let ε := (Functor.leftUnitor HR).inv ≫
+      Functor.whiskerRight (upperStarLowerStarAdjunction B g').derivedPlus.unit HR ≫
+      (Functor.associator L R.rightDerivedFunctorPlus HR).hom ≫
+      Functor.whiskerLeft L e.hom ≫ Functor.whiskerLeft L (derivedGlobalGerm f' t)
+  have h : δ = ε := by
+    apply Functor.rightDerived_ext HR H.rightDerivedFunctorPlusUnit
+      (HomotopyCategory.Plus.quasiIso _) _ δ ε
+    ext M : 2
+    have ha := derivedPulledGlobalGerm_fac f f' g g' sq.toCommSq t M
+    have hb := derivedGlobalGerm_unit_fac f f' g g' sq.toCommSq t M
+    have hab := underivedGlobalGerm_exchange f f' g g' sq.toCommSq t
+    dsimp only at ha hb hab
+    rw [hab] at ha
+    simpa only [δ, ε, e, H, L, R, HR, SR, B, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
+      Functor.leftUnitor_inv_app, Category.comp_id, Category.id_comp, Category.assoc]
+      using ha.trans hb.symm
+  have hk := NatTrans.congr_app h K
+  simpa only [δ, ε, e, H, L, R, HR, SR, B, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
+    Functor.leftUnitor_inv_app, Category.comp_id, Category.id_comp, Category.assoc] using hk
+
 
 end AlgebraicGeometry.Etale
