@@ -9,9 +9,8 @@ public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 
-import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
-import Sheaf.Paper.ConstantSheafSectionsLocallyConstant
-import WeilConjectures.ConstructibleSheaf.Defs
+import Sheaf.AlgebraicGeometry.SchemeTorsorPullbackEquivariantHom
+import Sheaf.AlgebraicGeometry.SchemeTorsorPullbackEquivariantHomIsIso
 
 /-!
 # Compatibility of an equivariant representative with inverse image
@@ -80,6 +79,9 @@ theorem scheme_torsor_pullback_compatible
             (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (u + 1))
             (Y.smallGrothendieckTopology @Etale)
             (Y₀.smallGrothendieckTopology @Etale)).unit.app t.toSheafTorsor.sheaf).hom.app
-              (op W) x))) := by sorry
+              (op W) x))) := by
+  obtain ⟨f, hf⟩ := scheme_torsor_pullback_equivariant_hom i M t t₀ e he hact R hrepr
+  have := scheme_torsor_pullback_equivariant_hom_isIso i M t R f hf
+  exact ⟨asIso f, hf⟩
 
 end AlgebraicGeometry.Etale
