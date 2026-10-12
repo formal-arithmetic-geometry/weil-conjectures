@@ -9,13 +9,8 @@ public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import Sheaf.Paper.WeilPbcNormalizationInResidueFieldExtension
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.ConstructibleSheaf.FinitePushforward
-import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.NormalizedGenericDataCore
+import Sheaf.AlgebraicGeometry.NormalizedGenericDataLifts
 
 /-!
 # Normalized generic trivialization data
@@ -75,6 +70,9 @@ theorem exists_constructible_module_normalized_generic_data
         ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X),
           ((Scheme.SpecToEquivOfField Ω X) s).1 = x →
             ∃ w : Spec (.of Ω) ⟶ Spec (.of K), w ≫ g ≫ ν = s := by
-  sorry
+  obtain ⟨Y, ν, hν, K, hK, g, M, hM, hu, he⟩ :=
+    exists_constructible_module_normalized_generic_data_core Λ F hF x
+  refine ⟨Y, ν, hν, K, hK, g, M, hM, hu, he, ?_⟩
+  exact normalized_generic_data_lifts Λ F hF x Y ν hν K hK g M hM hu he
 
 end AlgebraicGeometry.Etale
