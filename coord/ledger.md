@@ -8666,3 +8666,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/S2/Sheaf.AlgebraicGeometry.DeterminantDualLocalFrames (stage 3; reviewer PASS; first push; landing 20261012T165531-L-2939565 (interface); batch 20261012T165503; modules 3; new nodes 2)
 - 16:55 L: merged deliver/S2/Sheaf.AlgebraicGeometry.FlatSheafStalk (stage 3; reviewer PASS; first push; landing 20261012T165532-L-2939710 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/S2/Sheaf.AlgebraicGeometry.GenericPointedClopenFibres (stage 3; reviewer PASS; first push; landing 20261012T165532-L-2939875 (interface); batch 20261012T165503; modules 2; new nodes 1)
+- 16:55 L: merged deliver/S3/Sheaf.Algebra.Homology.ChangeOfRingsTensorAcyclic (stage 3; reviewer PASS; first push; landing 20261012T165532-L-2940047 (interface); batch 20261012T165503; modules 2; new nodes 1)

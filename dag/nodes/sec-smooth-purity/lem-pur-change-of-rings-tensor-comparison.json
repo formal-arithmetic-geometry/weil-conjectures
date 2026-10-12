@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-change-of-rings-tensor-comparison",
+ "kind": "statement",
+ "title": "Natural comparison of restricted scalar extension and sheaf tensor",
+ "statement": "Let (C,J) be a site with C and its morphisms in universe u and the sheafification hypotheses of [def-pur-sheaf-tensor-product]. Let phi:O -> Oprime be a morphism of commutative ring sheaves. Write U for restriction of scalars [def-pc-sheaf-restrict-scalars], S=U(Oprime) for the restricted unit module and changeOfRings for the sheafified sectionwise scalar extension [def-pur-sheaf-tensor-product]. There are O-module isomorphisms e_M:U(changeOfRings(phi,M)) -> S tensor_O M for all sheaves of O-modules M. They are natural: for a:M -> N, U(changeOfRingsHom(phi,M,a)) followed by e_N equals e_M followed by id_S tensor a. No flatness assumption is required.",
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, sheafified sectionwise tensor and change of rings; Tag 06YY, scalar tensor identification"
+ },
+ "proof": [
+  {
+   "text": "Before sheafification, the identity on pure tensors identifies the restricted sectionwise extension Oprime(V) tensor over O(V) M(V) with the presheaf tensor of S and M. Both restrict by restricting each factor, so the identities commute with restrictions. For a module morphism a they both send s tensor m to s tensor a(m). Thus the identifications are natural in M.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of scalars commutes with module sheafification: both have the same abelian sheafification of the same underlying abelian presheaf. To compare the actions, represent a sheaf section locally by a presheaf section; multiplication by an O-section is on both sides induced by multiplication by its image in Oprime. The locally surjective sheafification unit and separatedness imply equality of these actions. The identity on the associated abelian sheaf therefore gives a module isomorphism. It is natural since the induced maps of abelian sheafifications are the same.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafify the presheaf identifications of step 1 and compose with the restriction/sheafification isomorphisms of step 2. The tensorObjIsoSheafification comparison identifies sheafification of S.val tensor M.val with S tensor M. Its naturality follows from the natural counit of module sheafification and the monoidal tensorator. Compose these natural identifications to obtain e_M and the stated equation. Identity maps on pure tensors also cover zero rings and zero modules.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, sheafified sectionwise tensor and change of rings; Tag 06YY, scalar tensor identification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalar extension of sheaves of modules is naturally tensoring with the restricted target ring",
+   "results": "SheafOfModules.restrictScalars_obj_val, restrictScalars_map_val and restrictScalars; PresheafOfModules.restrictScalarsCompToPresheaf. No tensor comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "restrictScalars, instAdditiveRestrictScalars, restrictScalars_obj_val and restrictScalars_map_val only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with sheafification and identifies extension of scalars with tensor product of sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*tensor|tensor.*restrictScalars|tensorObjIsoSheafification; restrictScalars.*sheafification|sheafification.*restrictScalars in Mathlib and the project",
+   "results": "Ring/module tensor results only in Mathlib; source tensorObjIsoSheafification identifies the sheaf tensor with sheafified presheaf tensor. No changeOfRings comparison or duplicate DAG node found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ChangeOfRingsTensorAcyclic",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-complete-integral-detailed",
+   "place": "Tensor-invariance clause; lem-pur-change-of-rings-tensor-acyclic, Natural comparison of restricted scalar extension and sheaf tensor",
+   "via": [
+    "lem-pur-change-of-rings-tensor-acyclic",
+    "lem-pur-change-of-rings-acyclic-kflat",
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-integral-derived-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison",
+  "file": "lean/Sheaf/Algebra/Homology/ChangeOfRingsTensorComparison.lean",
+  "declaration": "SheafOfModules.exists_changeOfRings_tensor_comparison",
+  "statement": "theorem exists_changeOfRings_tensor_comparison {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] {O O' : Sheaf J CommRingCat.{u}} (φ : O ⟶ O') : letI := monoidalCategory O let U := restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map φ) let S := U.obj (unit (𝓡 O')) ∃ e : ∀ M : SheafOfModules.{u} (𝓡 O), U.obj (changeOfRings φ M) ≅ S ⊗ M, ∀ {M N : SheafOfModules.{u} (𝓡 O)} (a : M ⟶ N), U.map (changeOfRingsHom φ M a) ≫ (e N).hom = (e M).hom ≫ S ◁ a",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T165532-L-2940047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T165532-L-2940047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
