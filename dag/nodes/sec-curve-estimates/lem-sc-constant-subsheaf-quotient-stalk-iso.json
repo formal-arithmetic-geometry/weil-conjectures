@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-constant-subsheaf-quotient-stalk-iso",
+ "kind": "statement",
+ "title": "Constant subsheaf quotient stalk isomorphism",
+ "statement": "Let X be a topological space and iota:K -> C a monomorphism of abelian sheaves, where C is isomorphic to the constant integer sheaf [def-weil-pbc-constant-sheaf]. Fix n,b in N, opens A_i (i in Fin n), labels 0 < c_i <= b+1, and an epimorphism g from the finite coproduct of j_{A_i!}Z [def-sc-abelian-open-extension-by-zero] to K. Suppose its i-th component sends the canonical unit section to s_i in K(A_i), and iota(s_i) is the constant c_i under the given isomorphism of C. Let f have component g_i for c_i <= b and zero otherwise, L=image(f), l:L -> K the image inclusion, U=union_i A_i and V=union_{c_i<=b} A_i. Assume L has zero stalks [def-weil-pbc-module-stalk] outside V. For any q:j_{U!}Z -> cokernel(l) whose unit section on each top-labelled A_i maps to the image of s_i under the cokernel projection, the stalk map q_x is an isomorphism at every x in U outside V. The lemma assumes q and its section values and asserts no existence of q.",
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-module-stalk"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 0A38, final filtration paragraph; https://stacks.math.columbia.edu/tag/0A38"
+ },
+ "proof": [
+  {
+   "text": "Fix x in U outside V. There is at least one active index i with x in A_i. For every active index j the inequality c_j <= b would put x in V; thus all active c_j equal b+1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use abelianOpenExtensionByZero_stalks to identify active source summands with the stalk of the constant integer sheaf and inactive ones with zero, preserving the displayed unit germs. Sheafification preserves stalks and a constant presheaf has its constant value as stalk (its neighborhood category is filtered and nonempty), giving canonical integer coordinates.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-sc-abelian-open-extension-by-zero",
+    "lem-sc-topological-extension-by-zero-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf stalk functor is exact and preserves coproducts. The epimorphism g therefore makes the germs of the active s_j generate K_x. The monomorphism into C remains injective on stalks. Each active s_j has the same image b+1 in the canonical integer coordinates, hence all these germs equal a single generator t of K_x. It has infinite order since (b+1) is nonzero in Z.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the vanishing hypothesis L_x=0. Exactness of stalks makes the map K_x -> cokernel(l)_x an isomorphism. The compatibility of q with one active unit germ says q_x sends 1 to the image of t. Every element of its target is a multiple of this image, so q_x is surjective; infinite order of t makes it injective. A bijective AddCommGrpCat morphism is an isomorphism. There are no such x if U is empty.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-sc-abelian-open-extension-by-zero",
+    "lem-sc-topological-extension-by-zero-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-module-stalk",
+  "lem-sc-topological-extension-by-zero-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A38",
+  "place": "Expanded gluing and generator argument in the final filtration paragraph; source read online because the local cohomology.tex is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheaf gluing quotient section constant integer stalk isomorphism",
+   "date": "2026-10-12",
+   "results": "No exact match; TopCat.Sheaf.existsUnique_gluing found for the gluing component.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.existsUnique_gluing",
+   "date": "2026-10-12",
+   "results": "TopCat.Sheaf.existsUnique_gluing; it supplies only abstract compatible-section gluing.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*section|constant.*stalk.*isomorphism",
+   "date": "2026-10-12",
+   "results": "No exact theorem in Mathlib.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "glue compatible sections of an abelian sheaf and extend a map from the constant integer sheaf by zero",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error (retried during repair).",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ConstantSubsheafQuotientSection",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the finite filtration of a finitely generated subsheaf of the constant sheaf in the proof of Lemma 02UX: Lemma 0A38 (cohomology-lemma-subsheaf-of-constant-sheaf), first paragraph and filtration/final paragraphs; quotient-section gluing; stalk-iso step",
+   "via": [
+    "lem-sc-constant-subsheaf-quotient-section",
+    "lem-sc-constant-subsheaf-lower-layer-generator",
+    "lem-sc-constant-subsheaf-peel-layer",
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-constant-subsheaf-finite-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ConstantSubsheafQuotientStalkIso",
+  "file": "lean/Sheaf/Topology/ConstantSubsheafQuotientStalkIso.lean",
+  "declaration": "TopCat.Sheaf.constantSubsheaf_quotient_stalk_iso",
+  "statement": "theorem constantSubsheaf_quotient_stalk_iso (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι] (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (n : ℕ) (A : Fin n → Opens X) (c : Fin n → ℕ) (g : (∐ fun i => (abelianOpenExtensionByZero (A i)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K) [Epi g] (s : ∀ i, K.obj.obj (op (A i))) (hsection : ∀ i, (Sigma.ι (fun j => (abelianOpenExtensionByZero (A j)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A j))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) i ≫ g).hom.app (op (A i)) (abelianOpenExtensionSection (A i) ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (A i) le_rfl ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) ((Functor.const (Opens ((Opens.toTopCat X).obj (A i)))ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ((Opens.map (A i).inclusion').obj (A i))) (ULift.up 1))) = s i) (hvalue : ∀ i, (ι ≫ isoC.hom).hom.app (op (A i)) (s i) = (toSheafify (Opens.grothendieckTopology X) ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op (A i)) (ULift.up (c i : ℤ))) (b : ℕ) (hc : ∀ i, 0 < c i ∧ c i ≤ b + 1) : let D := fun i => (abelianOpenExtensionByZero (A i)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) let f : (∐ D) ⟶ K := Sigma.desc (fun i ↦ if c i ≤ b then Sigma.ι D i ≫ g else 0) let L := image f let l : L ⟶ K := image.ι f let U := iSup A let V := ⨆ i : Fin n, if c i ≤ b then A i else ⊥ (∀ x : X, x ∉ V → IsZero (TopCat.Presheaf.stalk L.obj x)) → ∀ q : (abelianOpenExtensionByZero (iSup A)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) ⟶ cokernel l, (∀ i, c i = b + 1 → q.hom.app (op (A i)) (abelianOpenExtensionSection (iSup A) ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (A i) (le_iSup A i) ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A))) ((Functor.const (Opens ((Opens.toTopCat X).obj (iSup A)))ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ((Opens.map (iSup A).inclusion').obj (A i))) (ULift.up 1))) = (cokernel.π l).hom.app (op (A i)) (s i)) → ∀ x : X, x ∈ U → x ∉ V → IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map q.hom)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T110303-L-615444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T110303-L-615444",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

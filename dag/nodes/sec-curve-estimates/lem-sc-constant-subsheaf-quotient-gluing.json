@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-constant-subsheaf-quotient-gluing",
+ "kind": "statement",
+ "title": "Constant subsheaf quotient gluing",
+ "statement": "Let X be a topological space, K and C abelian sheaves, and let a monomorphism K -> C identify C with the constant integer sheaf [def-weil-pbc-constant-sheaf]. Fix a finite family of opens A_i, natural labels 0 < c_i <= b+1, and sections s_i in K(A_i) mapping to the constant c_i in C(A_i). Let Q be any abelian sheaf and pi:K -> Q any morphism. Put U=union_i A_i and V=union_{c_i <= b} A_i. Suppose all stalks [def-weil-pbc-module-stalk] of Q on V are zero. Then there exists q:j_{U!}Z -> Q [def-sc-abelian-open-extension-by-zero] such that on every A_i with c_i=b+1 its canonical unit section maps to pi(s_i). No generating presentation of K or cokernel description of Q is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-module-stalk"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 0A38, final filtration paragraph; https://stacks.math.columbia.edu/tag/0A38"
+ },
+ "proof": [
+  {
+   "text": "Put W=union_{c_i=b+1} A_i. The bound on the labels gives U=W union V. For two top-labelled indices the images of their sections in C agree on the intersection by naturality of the constant-sheaf unit. The component of a sheaf monomorphism is injective, so their restrictions in K agree as well. Their images under pi form a compatible family.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Mathlib TopCat.Sheaf.existsUnique_gluing to glue these images to t_W in Q(W). The restriction of Q to V has all stalks zero, so Mathlib TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero makes it zero. In particular t_W restricts to zero on W intersect V. Glue t_W with zero on V to a section t in Q(U).",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the open subspace U send the integer generator to t, using the constant-sheaf adjunction (the presheaf map sends an integer m to m times the restriction of t, and factors through sheafification). To extend it by zero, send each summand of abelianOpenExtensionPresheaf U to the corresponding restriction of t and use sheafifyLift. Naturality of restrictions ensures this is a presheaf map. The sheafification unit equation gives the displayed value of q on every top-labelled unit section. Empty families are handled by the empty-cover gluing axiom.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-sc-abelian-open-extension-by-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A38",
+  "place": "Expanded gluing and generator argument in the final filtration paragraph; source read online because the local cohomology.tex is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheaf gluing quotient section constant integer stalk isomorphism",
+   "date": "2026-10-12",
+   "results": "No exact match; TopCat.Sheaf.existsUnique_gluing found for the gluing component.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.existsUnique_gluing",
+   "date": "2026-10-12",
+   "results": "TopCat.Sheaf.existsUnique_gluing; it supplies only abstract compatible-section gluing.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*section|constant.*stalk.*isomorphism",
+   "date": "2026-10-12",
+   "results": "No exact theorem in Mathlib.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "glue compatible sections of an abelian sheaf and extend a map from the constant integer sheaf by zero",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error (retried during repair).",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ConstantSubsheafQuotientSection",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the finite filtration of a finitely generated subsheaf of the constant sheaf in the proof of Lemma 02UX: Lemma 0A38 (cohomology-lemma-subsheaf-of-constant-sheaf), first paragraph and filtration/final paragraphs; quotient-section gluing; gluing step",
+   "via": [
+    "lem-sc-constant-subsheaf-quotient-section",
+    "lem-sc-constant-subsheaf-lower-layer-generator",
+    "lem-sc-constant-subsheaf-peel-layer",
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-constant-subsheaf-finite-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ConstantSubsheafQuotientGluing",
+  "file": "lean/Sheaf/Topology/ConstantSubsheafQuotientGluing.lean",
+  "declaration": "TopCat.Sheaf.constantSubsheaf_quotient_gluing",
+  "statement": "theorem constantSubsheaf_quotient_gluing (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι] (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (n : ℕ) (A : Fin n → Opens X) (c : Fin n → ℕ) (s : ∀ i, K.obj.obj (op (A i))) (hvalue : ∀ i, (ι ≫ isoC.hom).hom.app (op (A i)) (s i) = (toSheafify (Opens.grothendieckTopology X) ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op (A i)) (ULift.up (c i : ℤ))) (b : ℕ) (hc : ∀ i, 0 < c i ∧ c i ≤ b + 1) (Q : Sheaf AddCommGrpCat X) (π : K ⟶ Q) (hzero : ∀ x : X, x ∈ (⨆ i : Fin n, if c i ≤ b then A i else ⊥) → IsZero (TopCat.Presheaf.stalk Q.obj x)) : ∃ q : (abelianOpenExtensionByZero (iSup A)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) ⟶ Q, ∀ i, c i = b + 1 → q.hom.app (op (A i)) (abelianOpenExtensionSection (iSup A) ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (A i) (le_iSup A i) ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (iSup A))) ((Functor.const (Opens ((Opens.toTopCat X).obj (iSup A)))ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ((Opens.map (iSup A).inclusion').obj (A i))) (ULift.up 1))) = π.hom.app (op (A i)) (s i)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T110303-L-615444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T110303-L-615444",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,8 +8,8 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
 public import Sheaf.Topology.AbelianOpenExtensionByZero
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.Topology.ConstantSubsheafQuotientGluing
+import Sheaf.Topology.ConstantSubsheafQuotientStalkIso
 
 /-! # ConstantSubsheafQuotientSection
 
@@ -81,6 +81,13 @@ theorem constantSubsheaf_quotient_section
         AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) ⟶ cokernel l,
       ∀ x : X, x ∈ U → x ∉ V →
         IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map q.hom) := by
-  sorry
+  classical
+  dsimp only
+  intro hzero hLzero
+  obtain ⟨q, hq⟩ := constantSubsheaf_quotient_gluing X K C ι isoC n A c s hvalue b hc
+    _ (cokernel.π _) hzero
+  refine ⟨q, ?_⟩
+  exact constantSubsheaf_quotient_stalk_iso X K C ι isoC n A c g s hsection hvalue b hc
+    hLzero q hq
 
 end TopCat.Sheaf
