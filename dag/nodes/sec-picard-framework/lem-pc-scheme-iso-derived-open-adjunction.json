@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-scheme-iso-derived-open-adjunction",
+ "kind": "statement",
+ "title": "Derived open adjunction and unit transport under an isomorphism",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "statement": "Let s:X≅Y be a scheme isomorphism [def-pc-scheme], with chosen derived categories [def-pc-derived-category] on both schemes and all localized open sites in a fixed morphism universe. Let e:D(O_X)≌D(O_Y) be identified after localization with termwise pushforward along s.hom. For every open U of Y, derived exact restriction to s.hom inverse-image U and to U has right adjoints RX and RY, with adjunctions adjX and adjY such that for every K in D(O_Y), adjX.unit at e.inverse.obj K is invertible if and only if adjY.unit at K is invertible. No assertion about geometric properties of e is included.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/079W; WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Adjunction.lean",
+  "place": "Lemma 20.28.1, and mapDerivedCategoryRightDerivedAdjunction (exact-left-adjoint specialization); the unit computation of step 2 of lem-pc-affine-derived-open-transport"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the derived restriction square to obtain eU and its natural comparison.",
+   "uses": [
+    "lem-pc-scheme-iso-derived-restriction-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The underived overFunctor on Y is exact and a left adjoint. Its right adjoint R is additive. Apply the small ringed-site K-injective resolution theorem on the localized site to install the Grothendieck structure and hence K-injective resolutions. The proved source-library mapDerivedCategoryRightDerivedAdjunction, the exact-left-adjoint specialization of the derived adjunction theorem, supplies adjY:overFunctor.mapDerivedCategory⊣R.rightDerivedFunctor.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-derived-adjunction-from-underived",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose e.toAdjunction, adjY, and eU.symm.toAdjunction. The restriction square, associators and eU.unitIso identify the left composite with restriction on X; transport the adjunction along this natural isomorphism. Expand the composite unit with Adjunction.comp_unit_app and the changed-left-adjoint unit with ofNatIsoLeft_unit. Cancel all equivalence units and the image of the left comparison, then use that e.inverse reflects isomorphisms. Naturality of adjY.unit along e.counitIso.app K identifies invertibility at e.functor.obj(e.inverse.obj K) with invertibility at K.",
+   "uses": [
+    "lem-pc-scheme-iso-derived-restriction-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-pc-scheme-iso-derived-restriction-square",
+  "lem-sc-derived-adjunction-from-underived",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/079W; WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Adjunction.lean",
+  "place": "Lemma 20.28.1, and mapDerivedCategoryRightDerivedAdjunction (exact-left-adjoint specialization); the unit computation of step 2 of lem-pc-affine-derived-open-transport",
+  "group": "T3",
+  "date": "2026-10-12",
+  "note": "Complete Lean proof implementing the indicated part of the original transport argument; universal properties and natural-isomorphism comparisons are explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction to corresponding opens of isomorphic schemes has adjoint units invertible at corresponding objects",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction to corresponding opens of isomorphic schemes has adjoint units invertible at corresponding objects",
+   "results": "Found restrictAdjunction counit invertibility, restrictFunctorIsoPullback, preimageIso and restrictFunctorAdjCounitIso; no exact derived unit transport theorem.",
+   "date": "2026-10-12",
+   "verdict": "generic ingredients found and used"
+  },
+  {
+   "tool": "grep",
+   "query": "HasLocalization|of_equivalence_source|restrictFunctorComp|overFunctorEquiv|mapDerivedCategoryRightDerivedAdjunction in Mathlib and the source library",
+   "results": "Found Functor.IsLocalization.of_equivalence_source, Scheme.Modules.overEquiv, restrictFunctorComp, overFunctorEquiv, and the source exact-left derived adjunction theorem. Used directly in the proofs. No exact scheme-level transport theorem.",
+   "date": "2026-10-12",
+   "verdict": "generic ingredients found and used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineDerivedOpenTransport",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Scheme-isomorphism transport in the supported perfect detector argument; Derived open adjunction and unit transport under an isomorphism",
+   "via": [
+    "lem-pc-affine-derived-open-transport",
+    "lem-pc-supported-perfect-detector-affine-construction",
+    "lem-pc-supported-perfect-detector-affine",
+    "lem-pc-supported-perfect-generator",
+    "lem-sc-right-adjoint-open-support-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeIsoDerivedOpenAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoDerivedOpenAdjunction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_scheme_iso_derived_open_adjunction",
+  "statement": "theorem exists_scheme_iso_derived_open_adjunction {X Y : Scheme.{u}} (s : X ≅ Y) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ V : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (e : schemeDerivedCategory X ≌ schemeDerivedCategory Y) (he : DerivedCategory.Q ⋙ e.functor ≅ (@Functor.mapHomologicalComplex ℤ (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) _ _ _ _ (SheafOfModules.pushforward s.hom.toRingCatSheafHom) ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q) (U : Y.Opens) : ∃ (RX : DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (s.hom ⁻¹ᵁ U))) ⥤ schemeDerivedCategory X) (RY : DerivedCategory (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U)) ⥤ schemeDerivedCategory Y) (adjX : (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (s.hom ⁻¹ᵁ U)).mapDerivedCategory ⊣ RX) (adjY : (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) U).mapDerivedCategory ⊣ RY), ∀ K, IsIso (adjX.unit.app (e.inverse.obj K)) ↔ IsIso (adjY.unit.app K)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T173906-L-3306506",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T173906-L-3306506",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,22 +15,26 @@
  ],
  "proof": [
   {
-   "text": "Restriction along a^{-1} and a gives mutually inverse exact equivalences on module sheaves. Their termwise action preserves quasi-isomorphisms. Transport the supplied chosen localizations through these equivalences, also for corresponding opens, retaining the same morphism universe. Localize to obtain F and its specified natural comparison with termwise restriction along a^{-1}. This identifies the functor up to natural isomorphism and is not a choice of an arbitrary derived object. The comparison of sections on corresponding opens identifies the two restriction functors.",
+   "text": "Use lem-pc-scheme-iso-derived-localizations to supply the spectrum and all localized open-site localizations in the requested universe. Construct the module pushforward equivalence of a from the composition and identity comparisons and localize it by Equivalence.mapDerivedCategory. Its localization factorization is mapDerivedCategoryFactors. Identify forward pushforward with restriction along a.inv using leftAdjointUniq; map this natural isomorphism degreewise and whisker by Q to obtain the required explicit restriction factorization.",
    "uses": [
+    "lem-pc-scheme-iso-derived-localizations",
     "def-pc-derived-category"
    ],
    "elementary": false
   },
   {
-   "text": "Open restriction is exact. Its right adjoint is derived direct image computed on K-injective resolutions. Specialize the ringed-space derived adjunction to the open immersion and identify exact derived pullback with the localization of restriction, transported between the localized site and the open subscheme. Conjugate the resulting adjunction by the equivalences from step 1. The conjugated unit is the image of the original unit composed with invertible comparison morphisms. Equivalences reflect isomorphisms, so the two unit components are invertible simultaneously, for every K.",
+   "text": "Apply lem-pc-scheme-iso-derived-open-adjunction to the constructed derived equivalence and its pushforward localization comparison. This supplies both right adjoints, both adjunctions, and the pointwise unit-invertibility equivalence. The proof uses exact open restriction and K-injective resolutions, with no tensor pullback or K-flat left-derived construction.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general"
+    "lem-pc-scheme-iso-derived-open-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "The exact equivalence from step 1 commutes with homology and shifts, and identifies stalks at corresponding points via the isomorphism of local rings. Thus it preserves quasi-coherence in both directions and transfers stalk vanishing on the corresponding opens. Transfer each strictly perfect local representative, its finite free terms and retractions, to obtain perfection. The termwise functors commute with integer cochain shifts, and their shift comparisons descend through localization with the zero and addition coherence identities. This supplies CommShift, from which the consuming proof derives the Hom equivalence using F.toAdjunction.homEquiv. Empty schemes and empty or full opens require no nonemptiness assumptions.",
+   "text": "Apply scheme_iso_derived_inverse_preserves_qcoh to a and to a.symm with the two explicit localization comparisons. Apply scheme_iso_derived_inverse_preserves_perfect to a.symm and the symmetric derived equivalence. For support, use mapDerivedCategoryHomologyFunctorIso, the pushforward/restriction comparison, and restrictStalkNatIso a.inv to identify each target homology stalk with the source stalk at a.inv x. Transfer Subsingleton using the injectivity of the stalk isomorphism. The mapDerivedCategory CommShift instance supplies shift coherence.",
    "uses": [
+    "lem-pc-scheme-iso-derived-qcoh",
+    "lem-pc-scheme-iso-perfect-transport",
+    "def-pc-derived-category",
     "def-pc-perfect-complex"
    ],
    "elementary": false
@@ -39,12 +43,18 @@
  "proof_deps": [
   "def-pc-derived-category",
   "def-pc-perfect-complex",
-  "lem-pc-ringed-spaces-derived-adjoint-general"
+  "lem-pc-scheme-iso-derived-localizations",
+  "lem-pc-scheme-iso-derived-open-adjunction",
+  "lem-pc-scheme-iso-derived-qcoh",
+  "lem-pc-scheme-iso-perfect-transport"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex",
-  "place": "Tag 079W, derived adjunction specialized to open restriction; Tag 09IR, affine presentation transport"
+  "place": "Tag 079W, derived adjunction specialized to open restriction; Tag 09IR, affine presentation transport",
+  "group": "T3",
+  "date": "2026-10-12",
+  "note": "Complete Lean transport proof from three proved new infrastructure theorems and the existing quasi-coherence and perfection transport lemmas. Exact-left derived adjunction replaces the general tensor-pullback route."
  },
  "mathlib_searches": [
   {
@@ -96,7 +106,7 @@
   "module": "Sheaf.AlgebraicGeometry.AffineDerivedOpenTransport",
   "file": "lean/Sheaf/AlgebraicGeometry/AffineDerivedOpenTransport.lean",
   "declaration": "AlgebraicGeometry.affine_derived_open_transport",
-  "statement": "theorem affine_derived_open_transport\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (A : Type u) [CommRing A] (a : Spec (.of A) ≅ X) (U : X.Opens) :\n    ∃ hD : HasDerivedCategory.{w}\n        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)),\n    letI := hD\n    ∃ hO : ∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V)),\n    letI := hO\n    ∃ (F : schemeDerivedCategory (Spec (.of A)) ≌ schemeDerivedCategory X)\n      (RS : DerivedCategory\n        (SheafOfModules.{u}\n          ((moduleRings (Spec (.of A)).toRingedSpace).over (a.hom ⁻¹ᵁ U))) ⥤\n        schemeDerivedCategory (Spec (.of A)))\n      (RX : DerivedCategory\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤\n        schemeDerivedCategory X)\n      (adjS : (SheafOfModules.overFunctor.{u}\n        (moduleRings (Spec (.of A)).toRingedSpace) (a.hom ⁻¹ᵁ U)).mapDerivedCategory ⊣ RS)\n      (adjX : (SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ RX),\n      Nonempty (DerivedCategory.Q ⋙ F.functor ≅\n        (@Functor.mapHomologicalComplex ℤ\n          (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _ _ _ _\n          (Scheme.Modules.restrictFunctor a.inv)\n          ⟨fun M N ↦ (Scheme.Modules.restrictFunctor a.inv).map_zero M N⟩\n          (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q) ∧\n      (∀ Q, schemeDerivedQCohProperty (Spec (.of A)) Q →\n        schemeDerivedQCohProperty X (F.functor.obj Q)) ∧\n      (∀ K, schemeDerivedQCohProperty X K →\n        schemeDerivedQCohProperty (Spec (.of A)) (F.inverse.obj K)) ∧\n      (∀ Q, Scheme.IsPerfect (Spec (.of A)) Q →\n        Scheme.IsPerfect X (F.functor.obj Q)) ∧\n      (∀ Q, (∀ (n : ℤ) (x : Spec (.of A)), x ∈ a.hom ⁻¹ᵁ U →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) n).obj\n            Q).val.presheaf x))) →\n        ∀ (n : ℤ) (x : X), x ∈ U →\n          Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj\n              (F.functor.obj Q)).val.presheaf x))) ∧\n      Nonempty (F.functor.CommShift ℤ) ∧\n      (∀ K, IsIso (adjS.unit.app (F.inverse.obj K)) ↔ IsIso (adjX.unit.app K))",
+  "statement": "theorem affine_derived_open_transport (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (A : Type u) [CommRing A] (a : Spec (.of A) ≅ X) (U : X.Opens) : ∃ hD : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)), letI := hD ∃ hO : ∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V)), letI := hO ∃ (F : schemeDerivedCategory (Spec (.of A)) ≌ schemeDerivedCategory X) (RS : DerivedCategory (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over (a.hom ⁻¹ᵁ U))) ⥤ schemeDerivedCategory (Spec (.of A))) (RX : DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤ schemeDerivedCategory X) (adjS : (SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) (a.hom ⁻¹ᵁ U)).mapDerivedCategory ⊣ RS) (adjX : (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ RX), Nonempty (DerivedCategory.Q ⋙ F.functor ≅ (@Functor.mapHomologicalComplex ℤ (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (SheafOfModules.{u} (moduleRings X.toRingedSpace)) _ _ _ _ (Scheme.Modules.restrictFunctor a.inv) ⟨fun M N ↦ (Scheme.Modules.restrictFunctor a.inv).map_zero M N⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q) ∧ (∀ Q, schemeDerivedQCohProperty (Spec (.of A)) Q → schemeDerivedQCohProperty X (F.functor.obj Q)) ∧ (∀ K, schemeDerivedQCohProperty X K → schemeDerivedQCohProperty (Spec (.of A)) (F.inverse.obj K)) ∧ (∀ Q, Scheme.IsPerfect (Spec (.of A)) Q → Scheme.IsPerfect X (F.functor.obj Q)) ∧ (∀ Q, (∀ (n : ℤ) (x : Spec (.of A)), x ∈ a.hom ⁻¹ᵁ U → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) n).obj Q).val.presheaf x))) → ∀ (n : ℤ) (x : X), x ∈ U → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj (F.functor.obj Q)).val.presheaf x))) ∧ Nonempty (F.functor.CommShift ℤ) ∧ (∀ K, IsIso (adjS.unit.app (F.inverse.obj K)) ↔ IsIso (adjX.unit.app K))",
   "branch": "sheaf-dag",
   "by": "X2",
   "date": "2026-10-12"
@@ -115,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T144159-L-2112257",
+  "landing": "20261012T173906-L-3306506",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

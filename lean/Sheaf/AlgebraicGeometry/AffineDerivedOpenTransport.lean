@@ -7,8 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
-import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedOpenAdjunction
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
+import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Transport of derived open restriction along an affine presentation
 Source: Stacks Project, Tags 079W and 09IR.
@@ -20,6 +24,18 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def moduleIsoEquivalence {S T : Scheme.{u}} (s : S ≅ T) :
+    SheafOfModules.{u} (moduleRings S.toRingedSpace) ≌
+      SheafOfModules.{u} (moduleRings T.toRingedSpace) :=
+  CategoryTheory.Equivalence.mk (SheafOfModules.pushforward s.hom.toRingCatSheafHom)
+    (SheafOfModules.pushforward s.inv.toRingCatSheafHom)
+    ((Scheme.Modules.pushforwardComp s.hom s.inv ≪≫
+      Scheme.Modules.pushforwardCongr s.hom_inv_id ≪≫ Scheme.Modules.pushforwardId S).symm)
+    (Scheme.Modules.pushforwardComp s.inv s.hom ≪≫
+      Scheme.Modules.pushforwardCongr s.inv_hom_id ≪≫ Scheme.Modules.pushforwardId T)
+
+set_option backward.isDefEq.respectTransparency false in
 /-- An isomorphism with a spectrum transports derived restriction, its right adjoint,
 quasi-coherence, perfection, support, and the shift structure. No detector assertion is
 part of this statement: it holds for every derived object on the spectrum.
@@ -92,6 +108,49 @@ theorem affine_derived_open_transport
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj
               (F.functor.obj Q)).val.presheaf x))) ∧
       Nonempty (F.functor.CommShift ℤ) ∧
-      (∀ K, IsIso (adjS.unit.app (F.inverse.obj K)) ↔ IsIso (adjX.unit.app K)) := by sorry
+      (∀ K, IsIso (adjS.unit.app (F.inverse.obj K)) ↔ IsIso (adjX.unit.app K)) := by
+  obtain ⟨hD, ⟨hO⟩⟩ := Scheme.exists_scheme_iso_derived_localizations a
+  let := hD
+  let := hO
+  let e₀ := moduleIsoEquivalence a
+  have : e₀.functor.Additive := Functor.additive_of_preserves_binary_products _
+  have : e₀.inverse.Additive := Functor.additive_of_preserves_binary_products _
+  let e := e₀.mapDerivedCategory
+  have hf : e.functor = e₀.functor.mapDerivedCategory := rfl
+  let he := e₀.functor.mapDerivedCategoryFactors
+  let hi := e₀.inverse.mapDerivedCategoryFactors
+  let c : e₀.functor ≅ Scheme.Modules.restrictFunctor a.inv :=
+    Adjunction.leftAdjointUniq e₀.toAdjunction (Scheme.Modules.restrictAdjunction a.inv)
+  let : (Scheme.Modules.restrictFunctor a.inv).PreservesZeroMorphisms :=
+    ⟨fun M N ↦ (Scheme.Modules.restrictFunctor a.inv).map_zero M N⟩
+  let hc := he ≪≫ Functor.isoWhiskerRight (NatIso.mapHomologicalComplex c (ComplexShape.up ℤ))
+    DerivedCategory.Q
+  obtain ⟨RS, RX, adjS, adjX, hu⟩ :=
+    Scheme.exists_scheme_iso_derived_open_adjunction a e he U
+  refine ⟨hD, hO, e, RS, RX, adjS, adjX, ⟨hc⟩, ?_, ?_, ?_, ?_, ?_, hu⟩
+  · intro Q hQ
+    exact Scheme.scheme_iso_derived_inverse_preserves_qcoh a.symm e.symm hi ⟨Q, hQ⟩
+  · intro K hK
+    exact Scheme.scheme_iso_derived_inverse_preserves_qcoh a e he ⟨K, hK⟩
+  · intro Q hQ
+    exact Scheme.scheme_iso_derived_inverse_preserves_perfect a.symm e.symm hi Q hQ
+  · intro Q hQ n x hx
+    rw [hf]
+    let H := (DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) n).obj Q
+    let h := (e₀.functor.mapDerivedCategoryHomologyFunctorIso n).app Q
+    let T := Scheme.Modules.toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} x
+    let st := (T.mapIso h).symm ≪≫ T.mapIso (c.app H) ≪≫
+      (Scheme.Modules.restrictStalkNatIso a.inv x).app H
+    have hs := hQ n (a.inv x) (by simpa using hx)
+    have : Subsingleton ↑((Scheme.Modules.toPresheaf (Spec (.of A)) ⋙
+        TopCat.Presheaf.stalkFunctor Ab.{u} (a.inv x)).obj H) := by
+      simpa only [H, Functor.comp_obj, Scheme.Modules.presheaf, Scheme.Modules.toPresheaf_obj,
+        TopCat.Presheaf.stalkFunctor_obj] using hs
+    simpa only [T, Functor.comp_obj, Scheme.Modules.presheaf, Scheme.Modules.toPresheaf_obj,
+      TopCat.Presheaf.stalkFunctor_obj] using
+      Function.Injective.subsingleton (ConcreteCategory.bijective_of_isIso st.hom).1
+  · change Nonempty (e₀.functor.mapDerivedCategory.CommShift ℤ)
+    exact ⟨inferInstance⟩
 
 end AlgebraicGeometry

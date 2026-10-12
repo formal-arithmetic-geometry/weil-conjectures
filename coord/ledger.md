@@ -8811,3 +8811,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:39 L: merged deliver/T1/Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCase (stage 3; reviewer PASS; first push; landing 20261012T173904-L-3306047 (interface); batch 20261012T173801; modules 3; new nodes 2)
 - 17:39 L: merged deliver/T1/Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeTargetStalkIso (stage 3; reviewer PASS; after a return; landing 20261012T173905-L-3306160 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:39 L: merged deliver/T2/Sheaf.AlgebraicGeometry.AffineModuleTensorAlgebraQuasiCoherent (stage 3; reviewer PASS; first push; landing 20261012T173905-L-3306292 (proof); batch 20261012T173801; modules 1; new nodes 0)
+- 17:39 L: merged deliver/T3/Sheaf.AlgebraicGeometry.AffineDerivedOpenTransport (stage 3; reviewer PASS; first push; landing 20261012T173906-L-3306506 (interface); batch 20261012T173801; modules 4; new nodes 3)
