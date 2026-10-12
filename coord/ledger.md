@@ -7678,3 +7678,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:03 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition (reviewer RETURN: (reviewer X-6a6d7, head 6a6d7c095) Forced adaptations: the original SingleComplexAffineBaseChange, SingleComplexBaseChan)
 - 13:04 L: merged deliver/P2/Sheaf.AlgebraicGeometry.EtaleFieldPointFunctor (stage 3; reviewer PASS; first push; landing 20261012T130429-L-1295874 (interface); batch 20261012T120425; modules 3; new nodes 2)
 - 13:04 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal (reviewer RETURN: (reviewer X-9daf5, head 9daf5f262) A2 / forced adaptations: `AffineKoszulCechDerivedComparison` changes the existing dec)
+- 13:04 L: returned deliver/J3/Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData (reviewer RETURN: (reviewer X-0cb5e, head 0cb5ebc6e) F1–F4 (review point 7): In coord/reports/J3/Sheaf.AlgebraicGeometry.ProjectiveSpace.G)
