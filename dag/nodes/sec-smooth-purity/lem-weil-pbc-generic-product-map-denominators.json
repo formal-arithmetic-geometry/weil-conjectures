@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-generic-product-map-denominators",
+ "kind": "statement",
+ "title": "Construction and coordinate denominator clearing for a reduced generic map",
+ "statement": "Let A and B be commutative rings with B an A-algebra. Let K be a field with an A-algebra structure, K' a field with compatible K- and A-algebra structures, r a natural number, and L_j fields with K'-algebra structures for j in Fin(r). Fix a K'-algebra equivalence e from the quotient of (K tensor_A B) tensor_K K' by its nilradical onto the product of the L_j. Here the nilradical is the ideal of nilpotent elements. For every commutative A-algebra R with compatible map R to K' making K' a fraction field of R, and for all R-algebra structures on L_j compatible with R to K' to L_j, there exists an R-algebra homomorphism f from the quotient of B tensor_A R by its nilradical to the product of the L_j. Call f compatible when for every b in B its value on the class of b tensor 1 is e of the class of (1 tensor b) tensor 1. This f is compatible and for every j and z in L_j there exist a nonzero a in R and an element x of the source with algebraMap(R,L_j)(a) times z = f(x)_j. No module-finiteness or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof steps 4--9"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Tensor associativity and commutation identify B tensor_A K' with (K tensor_A B) tensor_K K'. The map B tensor_A R to this generic algebra followed by the quotient and e kills every nilpotent, because a product of fields is reduced. Thus it factors through the source reduction, giving f and the pure-tensor identity. For z in L_j, apply e inverse to the vector supported at j with value z. Every element of B tensor_A K' is a finite sum of pure tensors. Write their K' coefficients as fractions over R, multiply the finitely many nonzero denominators, and lift the resulting numerator to B tensor_A R. Passing to the quotient gives a*z = f(x)_j. The product denominator is nonzero: R embeds in its fraction field K'. Empty sums use denominator 1. If r is zero the coordinate assertion is vacuous.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof steps 4--9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists.*(smul|multiple)|ker.*(localiz|torsion)",
+   "results": "19 hits: Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Algebra.lean, Mathlib/RingTheory/Localization/Algebra.lean, Mathlib/RingTheory/Localization/Algebra.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent localization lemmas only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite module over a noetherian domain kernel of generic fibre killed by one nonzero scalar and finite set of generic elements lifts after principal localization",
+   "results": "8 hits: RingHom.ker_fg_of_localizationSpan, Module.Finite.of_localizationSpan_finite, Module.Finite.of_localizationSpan, Submodule.fg_of_isLocalized_maximal, Module.Finite.of_localizationSpan_finite', Module.Finite.of_localizationSpan', Module.Finite.of_localized_maximal, Submodule.fg_of_localized_maximal",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent localization lemmas only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule, \"surj\"",
+   "results": "6 hits: IsLocalizedModule.mk'_surjective, IsLocalizedModule.fromLocalizedModule.surj, IsLocalizedModule.surj, IsLocalizedModule.map_surjective, IsLocalizedModule.map_surjective_iff_localizedModuleMap_surjective, Module.exists_localizedMap_surjective_of_surjective",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent localization lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite algebra over a noetherian domain whose reduced generic fibre is a finite product of fields, invert one nonzero base element so the reduced algebra injects into that product and contains its coordinate idempotents.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericProductLocalization",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-generic-constructible",
+   "place": "proof steps 4--9: map denominators",
+   "via": [
+    "lem-weil-pbc-spread-generic-product-embedding",
+    "lem-weil-pbc-generic-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericProductMapDenominators",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericProductMapDenominators.lean",
+  "declaration": "exists_generic_product_map_denominators",
+  "statement": "theorem exists_generic_product_map_denominators\n    (A : Type u) [CommRing A]\n    (B : Type v) [CommRing B] [Algebra A B]\n    (K : Type u) [Field K] [Algebra A K]\n    (K' : Type (max u v)) [Field K'] [Algebra K K'] [Algebra A K']\n    [IsScalarTower A K K']\n    (r : ℕ) (L : Fin r → Type (max u v)) [∀ j, Field (L j)]\n    [∀ j, Algebra K' (L j)]\n    (e :\n      letI := Algebra.TensorProduct.rightAlgebra (R := K) (A := K ⊗[A] B) (B := K')\n      (((K ⊗[A] B) ⊗[K] K') ⧸\n        nilradical ((K ⊗[A] B) ⊗[K] K')) ≃ₐ[K'] (∀ j, L j))\n    (R : Type u) [CommRing R] [Algebra A R] [Algebra R K']\n    [IsScalarTower A R K'] [IsFractionRing R K']\n    [∀ j, Algebra R (L j)] [∀ j, IsScalarTower R K' (L j)] :\n    letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := R)\n    ∃ f : ((B ⊗[A] R) ⧸ nilradical (B ⊗[A] R)) →ₐ[R] (∀ j, L j),\n            (∀ b : B, f (Ideal.Quotient.mk _ (b ⊗ₜ[A] (1 : R))) =\n              e (Ideal.Quotient.mk _ (((1 : K) ⊗ₜ[A] b) ⊗ₜ[K] (1 : K')))) ∧\n            (∀ j (z : L j), ∃ a : R, a ≠ 0 ∧\n              ∃ x, algebraMap R (L j) a * z = f x j)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T173806-L-3289958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T173806-L-3289958",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

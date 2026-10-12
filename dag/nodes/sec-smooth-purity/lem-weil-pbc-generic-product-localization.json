@@ -13,21 +13,24 @@
  ],
  "proof": [
   {
-   "text": "Form C = (B tensor_A R0)_red, a finite module over the Noetherian domain R0. Tensor associativity and localization of the nilradical identify its generic fibre over K prime with the specified product of fields. Its torsion kernel is finitely generated. Choose a nonzero annihilator for each generator and multiply them; localization at this product kills the kernel.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Represent the finitely many coordinate idempotents as fractions in C with nonzero R0 denominators. Multiply these denominators with the annihilator product to obtain nonzero t. If t divides s, localization at s inverts each factor of t, retains injectivity and contains the coordinate idempotents. Reduction commutes with localization, identifying the source with (B tensor_A R)_red. Generic surjectivity expresses any coordinate field element as a numerator over a nonzero base denominator; its image in R stays nonzero because R has fraction field K prime. If r = 0, the kernel is all of C and localization kills it; the coordinate assertions are vacuous.",
-   "uses": [],
+   "text": "Apply the kernel bound and idempotent bound to a common multiple of their nonzero localization elements, then apply the generic denominator map theorem.",
+   "uses": [
+    "lem-weil-pbc-generic-product-kernel-bound",
+    "lem-weil-pbc-generic-product-idempotent-bound",
+    "lem-weil-pbc-generic-product-map-denominators"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-generic-product-kernel-bound",
+  "lem-weil-pbc-generic-product-idempotent-bound",
+  "lem-weil-pbc-generic-product-map-denominators"
+ ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "proof steps 4--9: torsion killing, spreading coordinate idempotents, and descending their denominators; extracted from the existing embedding node and its docstring"
+  "place": "denominator, kernel, and idempotent localization steps"
  },
  "mathlib_searches": [
   {
@@ -109,7 +112,8 @@
   "statement": "theorem exists_generic_product_localization\n    (A : Type u) [CommRing A]\n    (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B]\n    (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K]\n    (K' : Type (max u v)) [Field K'] [Algebra K K'] [Algebra A K']\n    [IsScalarTower A K K']\n    (R0 : Type (max u v)) [CommRing R0] [IsNoetherianRing R0] [IsDomain R0]\n    [Algebra A R0] [Algebra R0 K'] [IsScalarTower A R0 K'] [IsFractionRing R0 K']\n    (r : ℕ) (L : Fin r → Type (max u v)) [∀ j, Field (L j)]\n    [∀ j, Algebra K' (L j)]\n    (hsplit :\n      letI := Algebra.TensorProduct.rightAlgebra (R := K) (A := K ⊗[A] B) (B := K')\n      Nonempty ((((K ⊗[A] B) ⊗[K] K') ⧸\n        nilradical ((K ⊗[A] B) ⊗[K] K')) ≃ₐ[K'] (∀ j, L j))) :\n    ∃ t : R0, t ≠ 0 ∧ ∀ (s : R0), t ∣ s →\n      ∀ (R : Type u) [CommRing R] [Algebra R0 R] [IsLocalization.Away s R]\n        [Algebra A R] [IsScalarTower A R0 R] [Algebra R K']\n        [IsScalarTower R0 R K'] [IsFractionRing R K'],\n        ∃ (_ : ∀ j, Algebra R (L j)) (_ : ∀ j, IsScalarTower R K' (L j)),\n          letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := R)\n          ∃ f : ((B ⊗[A] R) ⧸ nilradical (B ⊗[A] R)) →ₐ[R] (∀ j, L j),\n            Function.Injective f ∧\n            (∀ j, ∃ e, ∀ i, f e i = if i = j then 1 else 0) ∧\n            (∀ j (z : L j), ∃ a : R, a ≠ 0 ∧\n              ∃ x, algebraMap R (L j) a * z = f x j)",
   "branch": "sheaf-dag",
   "by": "B3",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "proof_deps": []
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -125,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T160132-L-2562639",
+  "landing": "20261012T173806-L-3289958",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

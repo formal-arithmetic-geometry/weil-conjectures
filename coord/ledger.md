@@ -8715,3 +8715,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/A2/Sheaf.CategoryTheory.ColimitSiteSetEvaluationPresentation (stage 3; reviewer PASS; first push; landing 20261012T173804-L-3289375 (interface); batch 20261012T173801; modules 2; new nodes 1)
 - 17:38 L: merged deliver/A2/Sheaf.RingTheory.FractionFieldGeometricRegularityTransport (stage 3; reviewer PASS; first push; landing 20261012T173805-L-3289615 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/A3/Sheaf.AlgebraicGeometry.FullAffineEtaleTopos (stage 3; reviewer PASS; first push; landing 20261012T173805-L-3289774 (proof); batch 20261012T173801; modules 1; new nodes 0)
+- 17:38 L: merged deliver/A3/Sheaf.AlgebraicGeometry.GenericProductLocalization (stage 3; reviewer PASS; first push; landing 20261012T173806-L-3289958 (interface); batch 20261012T173801; modules 4; new nodes 3)

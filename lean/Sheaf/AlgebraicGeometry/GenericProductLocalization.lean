@@ -13,6 +13,10 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Nilpotent.Lemmas
 
+import Sheaf.AlgebraicGeometry.GenericProductMapDenominators
+import Sheaf.AlgebraicGeometry.GenericProductKernelBound
+import Sheaf.AlgebraicGeometry.GenericProductIdempotentBound
+
 /-!
 # GenericProductLocalization
 
@@ -77,4 +81,21 @@ theorem exists_generic_product_localization
             Function.Injective f ∧
             (∀ j, ∃ e, ∀ i, f e i = if i = j then 1 else 0) ∧
             (∀ j (z : L j), ∃ a : R, a ≠ 0 ∧
-              ∃ x, algebraMap R (L j) a * z = f x j) := by sorry
+              ∃ x, algebraMap R (L j) a * z = f x j) := by
+  classical
+  let := Algebra.TensorProduct.rightAlgebra (R := K) (A := K ⊗[A] B) (B := K')
+  obtain ⟨e⟩ := hsplit
+  obtain ⟨tk, htk, hk⟩ := exists_generic_product_kernel_bound A B K K' R0 r L e
+  obtain ⟨ti, hti, hi⟩ := exists_generic_product_idempotent_bound A B K K' R0 r L e
+  refine ⟨tk * ti, mul_ne_zero htk hti, ?_⟩
+  intro s hs R _ _ _ _ _ _ _ _
+  let factors : ∀ j, Algebra R (L j) :=
+    fun j ↦ Algebra.compHom (L j) (algebraMap R K')
+  let towers : ∀ j, IsScalarTower R K' (L j) :=
+    fun j ↦ IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  let : IsScalarTower A R K' := IsScalarTower.to₁₃₄ A R0 R K'
+  let := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := R)
+  obtain ⟨f, hcompat, hden⟩ := exists_generic_product_map_denominators A B K K' r L e R
+  have hks : tk ∣ s := (dvd_mul_right tk ti).trans hs
+  have his : ti ∣ s := (dvd_mul_left ti tk).trans hs
+  exact ⟨factors, towers, f, hk s hks R f hcompat, hi s his R f hcompat, hden⟩

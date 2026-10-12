@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-generic-product-kernel-bound",
+ "kind": "statement",
+ "title": "A uniform principal localization kills the generic torsion kernel",
+ "statement": "Let A and B be commutative rings with B an A-algebra. Let K be a field with an A-algebra structure, K' a field with compatible K- and A-algebra structures, r a natural number, and L_j fields with K'-algebra structures for j in Fin(r). Fix a K'-algebra equivalence e from the quotient of (K tensor_A B) tensor_K K' by its nilradical onto the product of the L_j. Here the nilradical is the ideal of nilpotent elements. Assume B is a finite A-module [pqf-lem-finite-integral-lft] and K a fraction field of A. Let R0 be a Noetherian domain with compatible maps A to R0 to K' making K' a fraction field of R0. There exists nonzero t in R0 such that, for every s divisible by t and every principal localization R=R0[1/s] in the universe of A, with compatible maps A to R0 to R to K' and K' a fraction field of R, and every compatible R-algebra structure on the L_j, every R-algebra homomorphism f from (B tensor_A R) modulo its nilradical to the product of the L_j is injective if it is compatible. Call f compatible when for every b in B its value on the class of b tensor 1 is e of the class of (1 tensor b) tensor 1. ",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof steps 4--9"
+ },
+ "stmt_deps": [
+  "pqf-lem-finite-integral-lft"
+ ],
+ "proof": [
+  {
+   "text": "Put C = (B tensor_A R0)_red. It is a finite R0-module. Tensor associativity identifies its generic localization with the source of e: reduction commutes with localization, since a fraction is nilpotent if and only if a denominator multiple of its numerator is nilpotent. The kernel of the map from C to its generic localization is torsion and finitely generated, since R0 is Noetherian. Choose a nonzero annihilator for each generator and take their product t (1 for no generators). Localizing at any s divisible by t kills the kernel. Localization is exact, so the induced map from the localized C to the generic product is injective. Reduction commutes with this principal localization and identifies its source with (B tensor_A R)_red. The pure-tensor compatibility determines the map f uniquely: R-linearity determines all pure tensors and additivity determines their sums; the quotient map is surjective. Thus f is the injective induced map. When the generic product is zero, the kernel is all of C and the same torsion argument kills C.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof steps 4--9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists.*(smul|multiple)|ker.*(localiz|torsion)",
+   "results": "19 hits: Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Algebra.lean, Mathlib/RingTheory/Localization/Algebra.lean, Mathlib/RingTheory/Localization/Algebra.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent localization lemmas only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite module over a noetherian domain kernel of generic fibre killed by one nonzero scalar and finite set of generic elements lifts after principal localization",
+   "results": "8 hits: RingHom.ker_fg_of_localizationSpan, Module.Finite.of_localizationSpan_finite, Module.Finite.of_localizationSpan, Submodule.fg_of_isLocalized_maximal, Module.Finite.of_localizationSpan_finite', Module.Finite.of_localizationSpan', Module.Finite.of_localized_maximal, Submodule.fg_of_localized_maximal",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent localization lemmas only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule, \"surj\"",
+   "results": "6 hits: IsLocalizedModule.mk'_surjective, IsLocalizedModule.fromLocalizedModule.surj, IsLocalizedModule.surj, IsLocalizedModule.map_surjective, IsLocalizedModule.map_surjective_iff_localizedModuleMap_surjective, Module.exists_localizedMap_surjective_of_surjective",
+   "date": "2026-10-13",
+   "verdict": "no exact match; constituent localization lemmas only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite algebra over a noetherian domain whose reduced generic fibre is a finite product of fields, invert one nonzero base element so the reduced algebra injects into that product and contains its coordinate idempotents.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericProductLocalization",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-generic-constructible",
+   "place": "proof steps 4--9: kernel bound",
+   "via": [
+    "lem-weil-pbc-spread-generic-product-embedding",
+    "lem-weil-pbc-generic-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericProductKernelBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericProductKernelBound.lean",
+  "declaration": "exists_generic_product_kernel_bound",
+  "statement": "theorem exists_generic_product_kernel_bound\n    (A : Type u) [CommRing A]\n    (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B]\n    (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K]\n    (K' : Type (max u v)) [Field K'] [Algebra K K'] [Algebra A K']\n    [IsScalarTower A K K']\n    (R0 : Type (max u v)) [CommRing R0] [IsNoetherianRing R0]\n    [IsDomain R0]\n    [Algebra A R0] [Algebra R0 K'] [IsScalarTower A R0 K']\n    [IsFractionRing R0 K']\n    (r : ℕ) (L : Fin r → Type (max u v)) [∀ j, Field (L j)]\n    [∀ j, Algebra K' (L j)]\n    (e :\n      letI := Algebra.TensorProduct.rightAlgebra (R := K) (A := K ⊗[A] B) (B := K')\n      (((K ⊗[A] B) ⊗[K] K') ⧸\n        nilradical ((K ⊗[A] B) ⊗[K] K')) ≃ₐ[K'] (∀ j, L j))\n    : ∃ t : R0, t ≠ 0 ∧ ∀ s : R0, t ∣ s →\n      ∀ (R : Type u) [CommRing R] [Algebra R0 R] [IsLocalization.Away s R]\n        [Algebra A R] [IsScalarTower A R0 R] [Algebra R K']\n        [IsScalarTower R0 R K'] [IsFractionRing R K']\n        [∀ j, Algebra R (L j)] [∀ j, IsScalarTower R K' (L j)],\n        letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := R)\n        ∀ f : ((B ⊗[A] R) ⧸ nilradical (B ⊗[A] R)) →ₐ[R] (∀ j, L j),\n            (∀ b : B, f (Ideal.Quotient.mk _ (b ⊗ₜ[A] (1 : R))) =\n              e (Ideal.Quotient.mk _ (((1 : K) ⊗ₜ[A] b) ⊗ₜ[K] (1 : K')))) →\n          Function.Injective f",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T173806-L-3289958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T173806-L-3289958",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
