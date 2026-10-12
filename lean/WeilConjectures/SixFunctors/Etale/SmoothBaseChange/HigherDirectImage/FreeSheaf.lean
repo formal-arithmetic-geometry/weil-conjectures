@@ -5,9 +5,15 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import
+  WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+
+import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import Sheaf.AlgebraicGeometry.EtaleFreeSheafDerivedSections
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
+import Mathlib.Algebra.Category.ModuleCat.Colimits
 
 /-!
 # Free sheaves under extension by zero and pullback, and cohomology
@@ -36,7 +42,7 @@ quasi-compact quasi-separated scheme commutes with filtered colimits.
 
 @[expose] public section
 
-universe u
+universe u w
 
 open CategoryTheory Limits Opposite
 
@@ -118,46 +124,87 @@ noncomputable abbrev Etale.shiftedHomFunctor {Z : Scheme.{u}}
   DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q ⋙
     preadditiveCoyoneda.obj (op ((DerivedCategory.Plus.singleFunctor _ 0).obj A))
 
+/-- An exact functor commutes with degree-zero single objects and shifts.
+This is the composition of its single-object and shift comparison isomorphisms. -/
+noncomputable def Etale.exactSingleShiftIso
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (q : ℤ) :
+    DerivedCategory.Plus.singleFunctor C 0 ⋙ shiftFunctor _ q ⋙ F.mapDerivedCategoryPlus ≅
+      F ⋙ DerivedCategory.Plus.singleFunctor D 0 ⋙ shiftFunctor _ q :=
+  Functor.isoWhiskerLeft _ (F.mapDerivedCategoryPlus.commShiftIso q) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (F.mapDerivedCategoryPlusSingleFunctor 0) (shiftFunctor _ q) ≪≫
+    Functor.associator _ _ _
+
+/-- A named copy of pullback used to share its derived-shift comparison instances. -/
+noncomputable def Etale.upperStarForShift :
+    Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤
+      Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  (v)^*[ModuleCat.{u + 1} Λ]
+
+instance Etale.additive_upperStarForShift : (Etale.upperStarForShift Λ v).Additive := by
+  dsimp [Etale.upperStarForShift]
+  infer_instance
+
+/-- Pullback, in its named presentation, preserves finite limits. -/
+theorem Etale.preservesFiniteLimits_upperStarForShift :
+    PreservesFiniteLimits (Etale.upperStarForShift Λ v) := by
+  dsimp [Etale.upperStarForShift]
+  infer_instance
+
+instance Etale.preservesFiniteColimits_upperStarForShift :
+    PreservesFiniteColimits (Etale.upperStarForShift Λ v) := by
+  dsimp [Etale.upperStarForShift]
+  infer_instance
+
 /-- `v^*` commutes with `N ↦ N[0]⟦q⟧`. -/
 noncomputable def Etale.upperStarSingleShiftIso (q : ℤ) :
     DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q ⋙
         ((v)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ≅
-      (v)^*[ModuleCat.{u + 1} Λ] ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q :=
-  Functor.isoWhiskerLeft _ (((v)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.commShiftIso q) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (((v)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0)
-      (shiftFunctor _ q) ≪≫ Functor.associator _ _ _
+      (v)^*[ModuleCat.{u + 1} Λ] ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q := by
+  letI := Etale.preservesFiniteLimits_upperStarForShift Λ v
+  exact Etale.exactSingleShiftIso (Etale.upperStarForShift Λ v) q
 
-/-- The derived adjunction `v_! ⊣ v^*` on shifted maps out of a sheaf placed in degree `0`:
-`Hom((v_! M)[0], N[0]⟦q⟧) ≃ Hom(M[0], (v^* N)[0]⟦q⟧)`. -/
-noncomputable def Etale.etaleLowerShriekShiftedHomEquiv
-    (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
-    (N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    ((Etale.shiftedHomFunctor Λ ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).obj M) q).obj
-      N) ≃+ ((Etale.shiftedHomFunctor Λ M q).obj ((v)^*[ModuleCat.{u + 1} Λ].obj N)) :=
-  let i₁ := ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).mapDerivedCategoryPlusSingleFunctor
-    0).app M
-  let i₂ := (Etale.upperStarSingleShiftIso Λ v hv q).app N
-  let adj := Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus Λ v hv
+/-- Transport the additive Hom equivalence of an adjunction across two isomorphisms. -/
+noncomputable def Etale.adjunctionHomAddEquivOfIso
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] (adj : L ⊣ R)
+    {M : C} {N A : D} {B : C} (i₁ : L.obj M ≅ A) (i₂ : R.obj N ≅ B) :
+    (A ⟶ N) ≃+ (M ⟶ B) :=
   AddEquiv.mk'
     { toFun f := adj.homEquiv _ _ (i₁.hom ≫ f) ≫ i₂.hom
       invFun g := i₁.inv ≫ (adj.homEquiv _ _).symm (g ≫ i₂.inv)
       left_inv f := by simp
       right_inv g := by simp }
-    (fun a b ↦ by
-      simp only [Equiv.coe_fn_mk, Adjunction.homEquiv_unit]
-      erw [Preadditive.comp_add, Functor.map_add, Preadditive.comp_add, Preadditive.add_comp])
+    (fun f g ↦ by simp)
 
-lemma Etale.etaleLowerShriekShiftedHomEquiv_apply
-    (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
-    (N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (f : (Etale.shiftedHomFunctor Λ ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).obj M)
-      q).obj N) :
-    Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N f =
-      (Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus Λ v hv).homEquiv _ _
-        ((((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).mapDerivedCategoryPlusSingleFunctor
-          0).app M).hom ≫ f) ≫ ((Etale.upperStarSingleShiftIso Λ v hv q).app N).hom :=
-  rfl
+lemma Etale.adjunctionHomAddEquivOfIso_apply
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] (adj : L ⊣ R)
+    {M : C} {N A : D} {B : C} (i₁ : L.obj M ≅ A) (i₂ : R.obj N ≅ B) (f : A ⟶ N) :
+    Etale.adjunctionHomAddEquivOfIso adj i₁ i₂ f =
+      adj.homEquiv _ _ (i₁.hom ≫ f) ≫ i₂.hom := rfl
+
+/-- The transported additive Hom equivalence is natural in its target argument. -/
+noncomputable def Etale.adjunctionHomNatIso
+    {C D E : Type*} [Category.{w} C] [Category.{w} D] [Category E]
+    [Preadditive C] [Preadditive D]
+    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] (adj : L ⊣ R)
+    {M : C} {A : D} (i₁ : L.obj M ≅ A) (S : E ⥤ D) (T : E ⥤ C)
+    (e : S ⋙ R ≅ T) :
+    S ⋙ preadditiveCoyoneda.obj (op A) ≅ T ⋙ preadditiveCoyoneda.obj (op M) :=
+  NatIso.ofComponents
+    (fun N ↦ (Etale.adjunctionHomAddEquivOfIso adj i₁ (e.app N)).toAddCommGrpIso)
+    (fun {N N'} g ↦ by
+      ext f
+      change Etale.adjunctionHomAddEquivOfIso adj i₁ (e.app N') (f ≫ S.map g) =
+        Etale.adjunctionHomAddEquivOfIso adj i₁ (e.app N) f ≫ T.map g
+      rw [Etale.adjunctionHomAddEquivOfIso_apply, Etale.adjunctionHomAddEquivOfIso_apply,
+        ← Category.assoc, Adjunction.homEquiv_naturality_right, Category.assoc, Category.assoc]
+      congr 1
+      exact e.hom.naturality g)
 
 /-- The derived adjunction `v_! ⊣ v^*` on shifted maps out of a sheaf placed in degree `0`,
 naturally in the target. -/
@@ -165,18 +212,17 @@ noncomputable def Etale.etaleLowerShriekShiftedHomIso
     (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
     Etale.shiftedHomFunctor Λ ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).obj M) q ≅
       (v)^*[ModuleCat.{u + 1} Λ] ⋙ Etale.shiftedHomFunctor Λ M q :=
-  NatIso.ofComponents
-    (fun N ↦ (Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N).toAddCommGrpIso)
-    (fun {N N'} g ↦ by
-      ext f
-      change Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N'
-          (f ≫ (shiftFunctor _ q).map ((DerivedCategory.Plus.singleFunctor _ 0).map g)) =
-        Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N f ≫ (shiftFunctor _ q).map
-          ((DerivedCategory.Plus.singleFunctor _ 0).map ((v)^*[ModuleCat.{u + 1} Λ].map g))
-      rw [Etale.etaleLowerShriekShiftedHomEquiv_apply, Etale.etaleLowerShriekShiftedHomEquiv_apply,
-        ← Category.assoc, Adjunction.homEquiv_naturality_right, Category.assoc, Category.assoc]
-      congr 1
-      exact (Etale.upperStarSingleShiftIso Λ v hv q).hom.naturality g)
+  let adj := Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus Λ v hv
+  let i₁ := ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).mapDerivedCategoryPlusSingleFunctor
+    0).app M
+  let S := DerivedCategory.Plus.singleFunctor
+    (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙ shiftFunctor _ q
+  let T := (v)^*[ModuleCat.{u + 1} Λ] ⋙ DerivedCategory.Plus.singleFunctor
+    (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙ shiftFunctor _ q
+  let e := Functor.associator _ _ _ ≪≫ Etale.upperStarSingleShiftIso Λ v hv q
+  (Functor.associator _ _ _).symm ≪≫ Etale.adjunctionHomNatIso adj i₁ S T e ≪≫
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft ((v)^*[ModuleCat.{u + 1} Λ]) (Functor.associator _ _ _)
 
 end Restriction
 
@@ -196,8 +242,46 @@ theorem Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject (
     [CompactSpace Z] [QuasiSeparatedSpace Z] (q : ℤ) (J : Type u) [SmallCategory J]
     [IsFiltered J] :
     PreservesColimitsOfShape J
-      (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) q) :=
-  sorry
+      (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) q) := by
+  classical
+  by_cases hq : 0 ≤ q
+  · obtain ⟨n, rfl⟩ := Int.eq_ofNat_of_zero_le hq
+    let R := DerivedCategory.singleFunctor
+      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
+        Etale.cohomology (ModuleCat.{u + 1} Λ) Z (n : ℤ)
+    have : PreservesColimitsOfShape J R :=
+      ⟨fun {D} ↦ preservesColimit_of_preserves_colimit_cocone (colimit.isColimit D)
+        (Scheme.etaleModuleCohomology_isColimit_of_isFiltered Z Λ
+          (colimit.isColimit D) n).some⟩
+    let e := (Scheme.nonempty_freeSheafDerivedSectionsIso Z Λ n).some
+    have : PreservesColimitsOfShape J
+        (R ⋙ forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) := inferInstance
+    exact preservesColimitsOfShape_of_natIso
+      (Functor.associator
+        (DerivedCategory.singleFunctor (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0)
+        (Etale.cohomology (ModuleCat.{u + 1} Λ) Z (n : ℤ))
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) ≪≫ e.symm)
+  · have hq : q < 0 := lt_of_not_ge hq
+    let F := Etale.shiftedHomFunctor Λ
+      ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) q
+    apply F.preservesColimitsOfShape_of_isZero _ J
+    rw [Functor.isZero_iff]
+    intro N
+    apply AddCommGrpCat.isZero_iff_subsingleton.mpr
+    change Subsingleton
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj
+        ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) ⟶
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj N)⟦q⟧)
+    refine ⟨fun f g ↦ ?_⟩
+    have hz (f : (DerivedCategory.Plus.singleFunctor _ 0).obj
+        ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) ⟶
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj N)⟦q⟧) : f = 0 := by
+      let t := DerivedCategory.Plus.TStructure.t
+        (C := Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      have ht := t.isGE_shift ((DerivedCategory.Plus.singleFunctor _ 0).obj N)
+        0 q (-q) (by omega)
+      exact t.zero f 0 (-q) (by omega)
+    exact (hz f).trans (hz g).symm
 
 /-- An isomorphism `A ≅ A'` identifies the functors `N ↦ Hom(A[0], N[0]⟦q⟧)` and
 `N ↦ Hom(A'[0], N[0]⟦q⟧)`. -/

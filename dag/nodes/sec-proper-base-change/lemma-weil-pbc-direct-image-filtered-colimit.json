@@ -31,10 +31,11 @@
    }
   },
   {
-   "text": "Every etale $W\\to V$ has a covering by affine etale objects; on such a quasi-compact quasi-separated $W$, the fibre product $W\\times_VU$ is quasi-compact and quasi-separated. The filtered-colimit cohomology theorem [lem-weil-pbc-cohomology-filtered-colimit] therefore gives a canonical isomorphism $\\varinjlim_i H^q(W\\times_VU,F_i|)\\cong H^q(W\\times_VU,\\varinjlim_iF_i|)$. The same statement holds on finite fibre products of the affine basis objects, so these isomorphisms form an isomorphism of the associated presheaves after restricting to that basis.",
+   "text": "Every etale $W\\to V$ has a covering by affine etale objects; on such a quasi-compact quasi-separated $W$, the fibre product $W\\times_VU$ is quasi-compact and quasi-separated. The filtered-colimit cohomology theorem [lem-weil-pbc-cohomology-filtered-colimit] therefore gives a canonical isomorphism $\\varinjlim_i H^q(W\\times_VU,F_i|)\\cong H^q(W\\times_VU,\\varinjlim_iF_i|)$. The same statement holds on finite fibre products of the affine basis objects, so these isomorphisms form an isomorphism of the associated presheaves after restricting to that basis. In the source-library realization, maps from the degree-zero free sheaf on the terminal object shifted by $q\\geq0$ identify naturally with underlying module derived cohomology by [lem-weil-pbc-free-sheaf-derived-sections]. Apply the module clause of [lem-weil-pbc-cohomology-filtered-colimit], then forget module structure (which preserves colimits) and transport along this natural isomorphism. For the additional Lean case $q<0$, maps between degree-zero sheaves with this shift vanish by t-structure orthogonality; the resulting zero functor preserves all colimits.",
    "uses": [
     "lem-weil-pbc-cohomology-filtered-colimit",
-    "lem-weil-pbc-qcqs-morphism-permanence"
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-free-sheaf-derived-sections"
    ],
    "elementary": false,
    "source": {
@@ -72,12 +73,13 @@
   "lem-weil-pbc-cohomology-filtered-colimit",
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-inverse-image-preserves-colimits",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-free-sheaf-derived-sections"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 09Z1 (lemma-relative-colimit), proof; Tag 03Q5 (lemma-colimit)"
+  "by": "agent",
+  "document": "Stacks Project, Tag 09Z1 and lem-weil-pbc-cohomology-filtered-colimit",
+  "place": "original four-step route, with the source-library shifted-Hom comparison in step 2 made explicit by J1"
  },
  "mathlib_searches": [
   {
@@ -196,5 +198,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); Lean refresh 7d675a26 (L): moved from WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage:307"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d47e7",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T060741-L-2909403",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean statements and proof route match the nodes; documented refactors preserve retained interfaces and components; both modules compile without warnings, and axiom checks show only permitted axioms plus sorryAx from named open dependencies."
  }
 }

@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-free-sheaf-derived-sections",
+ "kind": "statement",
+ "title": "Free sheaf shifted Hom computes derived module global sections",
+ "statement": "Let $Z$ be any scheme and $\\Lambda$ any commutative ring. Let $\\Lambda_Z$ be the sheafification of the free $\\Lambda$-module presheaf on the representable of the terminal object $\\mathrm{id}_Z$ of the small etale site [def-weil-pbc-etale-site], equivalently the constant rank-one module sheaf [def-weil-pbc-constant-sheaf]. For every integer $q\\geq 0$ there is a natural isomorphism of functors on sheaves of $\\Lambda$-modules [def-weil-pbc-etale-sheaves] to abelian groups, $F\\mapsto \\operatorname{Hom}_{D^+(Z_{\\mathrm{Et}},\\Lambda)}(\\Lambda_Z[0],F[0][q])\\cong F\\mapsto U(H^q(R\\Gamma(Z,F[0])))$, where $U$ forgets the module structure and cohomology and derived categories are as in [def-weil-pbc-etale-cohomology] and [def-weil-pbc-bounded-derived-subcategories]. No compactness, separation, or torsion condition is imposed.",
+ "source": {
+  "document": "Stacks Project, derived.tex and sites-modules.tex",
+  "place": "Tags 015A (definition-higher-derived-functors), 05TI (lemma-enough-injectives-right-derived), 070I (lemma-K-injective), and the equation after 03DI (equation-map-lower-shriek-OU-into-module); terminal object specialization and natural comparison written by J1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof": [
+  {
+   "text": "Choose an injective resolution $F\\to I^\\bullet$ in the category of sheaves of $\\Lambda$-modules, using [lem-weil-pbc-module-sheaves-enough-injectives]. Its bounded-below injective complex is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Maps from $\\Lambda_Z[0]$ to $F[0][q]$ are therefore degree-$q$ cohomology of the Hom complex from $\\Lambda_Z[0]$ to $I^\\bullet$, by [lem-weil-pbc-kinjective-hom-derived]. The full inclusion of the bounded-below derived category preserves these Hom sets.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The free-sheaf sections equivalence, concretely Etale.freeSheafHomEquiv, identifies each term $\\operatorname{Hom}(\\Lambda_Z,I^n)$ with the underlying abelian group of $I^n(Z)$. This is the sheafified free-Yoneda adjunction [lem-weil-pbc-sheaf-free-separator]. Naturality in $I^n$ identifies composition with its differential with the sections differential. Since $Z$ is terminal, evaluation is module global sections. The exact forgetful functor from modules to abelian groups preserves kernels, cokernels and homology, hence the Hom-complex cohomology is the underlying abelian group of $H^q(\\Gamma(I^\\bullet))$.",
+   "uses": [
+    "lem-weil-pbc-sheaf-free-separator"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By [lem-sp-derived-functor-single-identification], the complex $\\Gamma(I^\\bullet)$ computes the module derived global sections of $F[0]$. A map of sheaves lifts to its injective resolutions. The termwise sections equivalence commutes with this lift by freeSheafHomEquiv_comp, so the induced comparison commutes with cohomology maps. Lifts are unique up to homotopy; homotopic maps induce the same cohomology maps by [lem-weil-pbc-homotopic-maps-equal-cohomology]. Package the additive component isomorphisms as a natural isomorphism. This argument requires no compactness, separation or torsion.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-sheaf-free-separator",
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 015A, 05TI, 070I, 03DI",
+  "place": "injective-resolution comparison, written by J1 from these sources"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"preadditiveCoyoneda\", \"homology\"",
+   "results": "CategoryTheory.Pretriangulated.preadditiveCoyoneda_homologySequenceδ_apply; CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply; CategoryTheory.preservesHomology_preadditiveCoyonedaObj_of_projective",
+   "date": "2026-10-12",
+   "verdict": "no exact comparison; ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "freeSheaf|homologyRightDerivedFunctorObjSingleFunctorIso|extAddEquivCohomologyClass",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Projective/Ext.lean; Mathlib/CategoryTheory/Abelian/Projective/Ext.lean; Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact comparison; ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a free sheaf in a derived category compute sheaf cohomology naturally",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-direct-image-filtered-colimit",
+   "place": "proof step 2: identification of shifted free-sheaf Hom with module cohomology before applying cohomology filtered colimits",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFreeSheafDerivedSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFreeSheafDerivedSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_freeSheafDerivedSectionsIso",
+  "statement": "theorem nonempty_freeSheafDerivedSectionsIso (Z : Scheme.{u})\n    (Λ : Type (u + 1)) [CommRing Λ] (q : ℕ) :\n    Nonempty\n      ((DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ (q : ℤ) ⋙\n        preadditiveCoyoneda.obj\n          (op ((DerivedCategory.Plus.singleFunctor _ 0).obj\n            ((Etale.freeSheaf Λ Z).obj\n              (MorphismProperty.Over.mk ⊤ (𝟙 Z) (inferInstance : Etale (𝟙 Z))))))) ≅\n        (DerivedCategory.singleFunctor (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙\n          Etale.cohomology (ModuleCat.{u + 1} Λ) Z (q : ℤ) ⋙\n          forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d47e7",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T060741-L-2909403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d47e7",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T060741-L-2909403",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean statements and proof route match the nodes; documented refactors preserve retained interfaces and components; both modules compile without warnings, and axiom checks show only permitted axioms plus sorryAx from named open dependencies."
+ }
+}
