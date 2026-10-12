@@ -172,4 +172,66 @@ lemma maximalIdeal_colim_eq_map :
     RingHom.ext fun r ↦ (ι R p K (t.away u hu')).commutes r
   rwa [Ideal.map_map, h2] at this
 
+/-- A monic polynomial over the colimit `C` is the image of a monic polynomial over the algebra of
+some étale triple. -/
+lemma exists_monic_map_eq (P : (colim R p K)[X]) (hP : P.Monic) :
+    ∃ (t : EtaleTriple R p K) (Q : t.S[X]), Q.Monic ∧ Q.map (ι R p K t).toRingHom = P := by
+  classical
+  choose t s hs using fun i : Fin P.natDegree ↦ exists_ι_eq R p K (P.coeff i)
+  let c := IsFiltered.cocone (Discrete.functor t)
+  let Q : c.pt.S[X] :=
+    X ^ P.natDegree + ∑ i : Fin P.natDegree, C ((c.ι.app ⟨i⟩).β (s i)) * X ^ (i : ℕ)
+  refine ⟨c.pt, Q, monic_X_pow_add (degree_sum_fin_lt _), ?_⟩
+  conv_rhs => rw [hP.as_sum]
+  simp only [Q, Polynomial.map_add, Polynomial.map_pow, map_X, Polynomial.map_sum,
+    Polynomial.map_mul]
+  congr 1
+  rw [Finset.sum_range (fun i ↦ C (P.coeff i) * X ^ i)]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  erw [Polynomial.map_C]
+  rw [← hs i]
+  congr 2
+  exact congr($(ι_comp_β R p K (c.ι.app ⟨i⟩)) (s i))
+
+/-- **Simple roots in `K` lift to the colimit.** If `P` is a monic polynomial over `C` whose image
+under `ψ : C → K` has a simple root `a₀ ∈ K`, then `P` has a root `a ∈ C` with `ψ(a) = a₀`: the
+root `X` of the standard étale algebra `S[X][1/Q']/(Q)` of a lift `Q` of `P`.
+
+(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+theorem exists_isRoot_and_eval_eq (P : (colim R p K)[X]) (hP : P.Monic) (a₀ : K)
+    (h₁ : P.eval₂ (eval R p K).toRingHom a₀ = 0)
+    (h₂ : (derivative P).eval₂ (eval R p K).toRingHom a₀ ≠ 0) :
+    ∃ a, P.IsRoot a ∧ eval R p K a = a₀ := by
+  obtain ⟨t, Q, hQ, rfl⟩ := exists_monic_map_eq P hP
+  have hev : (eval R p K).toRingHom.comp (ι R p K t).toRingHom = t.toAlgHom.toRingHom :=
+    RingHom.ext fun s ↦ eval_ι R p K t s
+  rw [eval₂_map, hev] at h₁
+  rw [derivative_map, eval₂_map, hev] at h₂
+  let SP : StandardEtalePair t.S := ⟨Q, hQ, derivative Q, ⟨1, 0, 1, by ring⟩⟩
+  let : Algebra R SP.Ring := ((algebraMap t.S SP.Ring).comp (algebraMap R t.S)).toAlgebra
+  have : IsScalarTower R t.S SP.Ring := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : Algebra.Etale R SP.Ring := Algebra.Etale.comp R t.S SP.Ring
+  let : Algebra t.S K := t.toAlgHom.toRingHom.toAlgebra
+  have : IsScalarTower R t.S K :=
+    IsScalarTower.of_algebraMap_eq fun r ↦ (t.toAlgHom.commutes r).symm
+  have hmap : SP.HasMap a₀ := ⟨h₁, isUnit_iff_ne_zero.mpr h₂⟩
+  let χ : SP.Ring →ₐ[t.S] K := SP.lift a₀ hmap
+  let t' := ofAlgHom (ker_algebraMap R p K) SP.Ring (χ.restrictScalars R)
+  let f : t ⟶ t' := homMk (t' := t') (IsScalarTower.toAlgHom R t.S SP.Ring) <| by
+    rw [toAlgHom_ofAlgHom]
+    ext s
+    exact χ.commutes s
+  have key : (ι R p K t).toRingHom =
+      (ι R p K t').toRingHom.comp (algebraMap t.S SP.Ring) :=
+    RingHom.ext fun s ↦ congr($(ι_comp_β R p K f) s).symm
+  refine ⟨ι R p K t' SP.X, ?_, ?_⟩
+  · rw [IsRoot, eval_map, key]
+    change eval₂ ((ι R p K t').toRingHom.comp (algebraMap t.S SP.Ring))
+      ((ι R p K t').toRingHom SP.X) Q = 0
+    rw [← hom_eval₂]
+    change (ι R p K t').toRingHom (aeval SP.X SP.f) = 0
+    rw [SP.hasMap_X.1, map_zero]
+  · rw [eval_ι, toAlgHom_ofAlgHom]
+    exact SP.lift_X a₀ hmap
+
 end EtaleTriple
