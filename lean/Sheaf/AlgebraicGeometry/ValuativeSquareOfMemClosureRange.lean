@@ -45,6 +45,8 @@ theorem exists_valuativeCommSq_of_mem_closure_range
     {Z S : Scheme.{u}} (j : Z ⟶ S) [QuasiCompact j] [IsImmersion j]
     {s : S} (hs : s ∈ closure (Set.range j)) :
     ∃ sq : ValuativeCommSq j, sq.i₂ (IsLocalRing.closedPoint sq.R) = s := by
-  sorry
+  obtain ⟨z, hz⟩ := exists_specializes_of_mem_closure_range j hs
+  let sq := ValuativeCommSqWithPt.ofSpecializes j hz
+  exact ⟨sq.toValuativeCommSq, sq.closedPoint_eq⟩
 
 end AlgebraicGeometry
