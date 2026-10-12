@@ -46,6 +46,23 @@ property makes P a colimit in sheaves, by def-weil-pbc-category-colimit.
 4. The unique colimit comparison isomorphism from P to c.pt has component at U equal
 to the canonical map: both have the prescribed composites with all coprojections.
 Its component is bijective, by def-weil-pbc-category-colimit. -/
+/- The sectionwise map admits a two-sided inverse.
+(blueprint: aux-site-filtered-colimit-sections-inverse) -/
+theorem siteFilteredColimit_sections_inverse
+    {C : Type u} [SmallCategory C] (J : Precoverage C)
+    [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]
+    (hfinite : J ≤ Precoverage.finite C)
+    {Λ : Type u} [SmallCategory Λ] [IsFiltered Λ]
+    (D : Λ ⥤ Sheaf J.toGrothendieck (Type u))
+    (c : Cocone D) (hc : IsColimit c) (U : C) :
+    ∃ g, Function.LeftInverse g
+      (colimit.desc (D ⋙ (sheafSections J.toGrothendieck (Type u)).obj (op U))
+        (((sheafSections J.toGrothendieck (Type u)).obj (op U)).mapCocone c)) ∧
+      Function.RightInverse g
+      (colimit.desc (D ⋙ (sheafSections J.toGrothendieck (Type u)).obj (op U))
+        (((sheafSections J.toGrothendieck (Type u)).obj (op U)).mapCocone c)) := by
+  sorry
+
 theorem siteFilteredColimit_sections_bijective
     {C : Type u} [SmallCategory C] (J : Precoverage C)
     [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]
@@ -56,7 +73,9 @@ theorem siteFilteredColimit_sections_bijective
     Function.Bijective
       (colimit.desc (D ⋙ (sheafSections J.toGrothendieck (Type u)).obj (op U))
         (((sheafSections J.toGrothendieck (Type u)).obj (op U)).mapCocone c)) := by
-  sorry
+  apply Function.bijective_iff_has_inverse.mpr
+  obtain ⟨g, hg₁, hg₂⟩ := siteFilteredColimit_sections_inverse J hfinite D c hc U
+  exact ⟨g, hg₁, hg₂⟩
 
 /-- For abelian sheaves on a site with finite coverings, the canonical map from the
 filtered colimit of section groups to the sections of a given sheaf colimit is an isomorphism.
