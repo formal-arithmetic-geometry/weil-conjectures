@@ -51,6 +51,44 @@ theorem moduleCechLiftSquares {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
       (CategoryTheory.cechComplexFunctor U).map
         ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
           φ.val) ≫ moduleCechBeta U J := by
-  sorry
+  dsimp only
+  constructor
+  · apply HomologicalComplex.Hom.ext
+    funext n
+    dsimp only [HomologicalComplex.comp_f, moduleCechAlpha,
+      moduleCechAlphaComponent]
+    rw [Category.assoc, HomologicalComplex₂.ιTotal_map]
+    rw [← Category.assoc, ← Category.assoc]
+    congr 1
+    dsimp [moduleCechZero]
+    apply Pi.hom_ext
+    intro y
+    simp only [CategoryTheory.cechComplexFunctor,
+      FormalCoproduct.cochainComplexFunctor_map_f, Functor.rightOp_obj, homOfLE_leOfHom,
+      Functor.mapHomologicalComplex_map_f, Functor.comp_map, SheafOfModules.forget_map,
+      PresheafOfModules.forgetToPresheafModuleCat_map, Category.assoc, Pi.map_π]
+    change _ ≫ (Pi.lift fun z : Fin 1 → ι =>
+      (I.cocomplex.X n).presheafModuleCat.map (homOfLE (le_top (a := ∏ᶜ fun l => U (z l)))).op) ≫
+        Pi.π _ y ≫ _ =
+      _ ≫ _ ≫ (Pi.lift fun z : Fin 1 → ι =>
+        (J.cocomplex.X n).presheafModuleCat.map
+          (homOfLE (le_top (a := ∏ᶜ fun l => U (z l)))).op) ≫ Pi.π _ y
+    simp only [Pi.lift_π_assoc, Pi.lift_π]
+    ext x
+    exact PresheafOfModules.naturality_apply (ψ.f n).val
+      (homOfLE (le_top (a := ∏ᶜ fun l => U (y l)))).op x
+  · apply HomologicalComplex.Hom.ext
+    funext n
+    dsimp only [HomologicalComplex.comp_f, moduleCechBeta,
+      moduleCechBetaComponent]
+    rw [Category.assoc, HomologicalComplex₂.ιTotal_map]
+    let C := SheafOfModules.forget X.ringCatSheaf ⋙
+      PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op ⋙
+        CategoryTheory.cechComplexFunctor U
+    change (C.map (I.ι.f 0)).f n ≫ (C.map (ψ.f 0)).f n ≫ _ =
+      (C.map φ).f n ≫ (C.map (J.ι.f 0)).f n ≫ _
+    rw [← Category.assoc, ← Category.assoc, ← HomologicalComplex.comp_f,
+      ← HomologicalComplex.comp_f, ← C.map_comp, ← C.map_comp, hψ]
+    rfl
 
 end AlgebraicGeometry.Scheme.Modules
