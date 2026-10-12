@@ -18,24 +18,24 @@
  ],
  "proof": [
   {
-   "text": "Use the functorial Cartan--Eilenberg presentations of\n`exists_etaleHypercohomology_pullback_functorial`. Give each F_i its bounded-below\nstructure with bound a. Inverse image is exact, and colimits of complexes are degreewise,\nso L.pt has the same lower bound. The identity and composition equations for φ make\nits page maps a functor; the equations for G and the cocone make the limit maps compatible.\nSwap the two bidegree coordinates to put the resolution degree first. The first-page\nidentifications and their two naturality equations are the corresponding equations of\nthe pullback presentations. Their negative resolution degrees vanish. In bidegree\n(p-q,q), incoming and outgoing differentials vanish once the page exceeds both the\nresolution degree and the distance q-a to the bottom row. This bound depends only on\np,q,a, and therefore works simultaneously for all stages and the limit. Functorial\nconvergence identifies this page with the q-th graded piece of each presentation's\ncanonical image filtration. The filtered total maps restrict to all filtration steps;\ntheir inclusion equations identify the abutment maps with P followed by the coefficient\nmap. Monicity gives the square for successive steps. Naturality of the stable-page\nidentification gives precisely cokernel.map on the associated graded pieces.",
+   "text": "Prove lower boundedness of the colimit degreewise, and package the stages and vertex as Plus complexes. Define canonical derived cohomology pullback in every degree and identify its degree-p component with P followed by the coefficient map using hP and functoriality. Obtain global functorial presentations with their quantitative thresholds; assemble their coordinate-swapped diagram. Choose N=max(1,max(q-a+2,p-q+2)), bound every threshold by N, and compose the page-swap isomorphisms with eInf. For each transition and cocone leg use filtered naturality from the global presentation. Compose its stable-page square with the page-swap naturality square; associativity yields exactly the target cokernel equation.",
    "uses": [
-    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
-    "thm-sp-if-e1",
-    "thm-sp-spectral-object-yields"
+    "lem-weil-pbc-etale-complex-colimit-below",
+    "lem-weil-pbc-etale-complex-page-diagram",
+    "lem-weil-pbc-hypercohomology-uniform-bound"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
-  "thm-sp-if-e1",
-  "thm-sp-spectral-object-yields"
+  "lem-weil-pbc-etale-complex-colimit-below",
+  "lem-weil-pbc-etale-complex-page-diagram",
+  "lem-weil-pbc-hypercohomology-uniform-bound"
  ],
  "proof_origin": {
-  "by": "worker E2",
+  "by": "worker P3",
   "document": "Stacks Project, Tags 015J and 0EZM",
-  "place": "Details of the page/filtration argument separated from the representative algebra"
+  "place": "Lean assembly from separate lower-bound, quantitative-convergence and diagram-transport statements"
  },
  "mathlib_searches": [
   {
@@ -153,11 +153,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-8c782",
-  "group": "E2",
+  "reviewer": "COMPILER",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T150951-L-2230001",
+  "landing": "20261012T184329-L-4014370",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, node records, report, compilation, importer checks, and axiom checks match the stage-3 brief."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

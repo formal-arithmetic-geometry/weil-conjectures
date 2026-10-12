@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-hypercohomology-uniform-bound",
+ "kind": "lemma",
+ "title": "Quantitative stabilization for functorial hypercohomology",
+ "statement": "For canonical derived pullback maps P on bounded-below complexes of abelian etale sheaves [def-weil-pbc-etale-sheaves], specified by the adjunction unit and derived global sections [def-weil-pbc-etale-cohomology], there exist global Cartan-Eilenberg presentations T, page maps M, thresholds R(X,K,q,n), and stable-page-to-graded-piece isomorphisms eInf, with all first-page, filtered abutment, identity and composition equations of [lem-weil-pbc-hypercohomology-e1-pullback-functorial]. Moreover, for every lower bound a with K^s=0 for s<a, R(X,K,q,n) <= max(1,max(q-a+2,n-q+2)). The global presentations and maps are those of [def-weil-pbc-termwise-hypercohomology-presentation]. No diagram, colimit, or coordinate reindexing is involved.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Lemma 13.21.3; Tag 0EZM, proof of Lemma 59.52.1"
+ },
+ "proof": [
+  {
+   "text": "Choose the Cartan--Eilenberg resolutions and comparison maps as in\n`exists_etaleHypercohomology_pullback_functorial`. For a complex zero below a, choose\nits resolution zero in these rows. On the first page the support is q >= a and the\nresolution degree is nonnegative. In bidegree (q,n-q), an outgoing differential has\nnegative resolution degree once r > n-q+1; an incoming differential originates\nbelow row a once r > q-a. Consequently both differentials vanish at and after\nmax 1 (max (q-a+2) (n-q+2)). The finite filtered total-complex construction identifies\nthis stationary term with its canonical abutment graded piece. Define R to be the\nleast stabilization threshold at least 1, and use the canonical stationary identifications.\nThe support estimate bounds R for every valid a. Filtered comparison maps commute\nwith all these identifications, giving the first-page, abutment, identity and\ncomposition equations of the functorial presentation theorem unchanged.",
+   "uses": [
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+    "thm-sp-if-e1",
+    "thm-sp-spectral-object-yields"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+  "thm-sp-if-e1",
+  "thm-sp-spectral-object-yields"
+ ],
+ "proof_origin": {
+  "by": "worker P3",
+  "document": "Stacks Project, Tags 015J and 0EZM",
+  "place": "Detailed decomposition of the existing uniform-pages plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A uniformly bounded below family of complexes has a common stable hypercohomology spectral sequence page",
+   "results": "UNAVAILABLE: Internal Server Error; local source grep and LeanFinder used instead.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lower bounded complex has uniform stable hypercohomology spectral sequence pages natural for pullback",
+   "results": "DerivedCategory.isZero_of_isGE; CochainComplex.cm5b; CochainComplex.isZero_of_isLE. These are support and resolution lemmas, not the functorial page package.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralSequence",
+   "results": "unknown identifier 'SpectralSequence'; read Mathlib.Algebra.Homology.SpectralSequence.Basic directly instead.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSequence.*(swap|reindex)|uniform.*(page|bound); isZero.*colimit; gradedPiece|firstPageIso",
+   "results": "Mathlib SpectralSequence.Basic has page functors and hom_ext but no coordinate-swap functor. IsColimit.isZero_pt and isColimitOfPreserves prove the colimit bound. Existing pullback presentations have object-dependent thresholds without a uniform estimate.",
+   "verdict": "tools only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first hypercohomology spectral sequence of a complex zero below a stabilizes at bidegree (q,n-q) once r exceeds both q-a and n-q+1",
+   "results": "Independent second reader: CochainComplex.isZero_of_isGE/isLE and derived analogues are vanishing tools only. HypercohomologyConvergence uses truncation couples, not the supplied termwise presentations. FilteredResolutionMaps has thresholds without the quantitative estimate; no exact match.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleComplexUniformPages",
+  "group": "P3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-complex-uniform-pages",
+   "place": "proof decomposition",
+   "via": [
+    "lem-weil-pbc-etale-complex-uniform-pages"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleHypercohomologyUniformBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleHypercohomologyUniformBound.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etaleHypercohomology_uniform_bound",
+  "statement": "theorem exists_etaleHypercohomology_uniform_bound (P : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X) (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (L : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (_ : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ L) (n : ℤ), (cohomology AddCommGrpCat.{u + 1} X n).obj (DerivedCategory.Q.obj K) ⟶ (cohomology AddCommGrpCat.{u + 1} Y n).obj (DerivedCategory.Q.obj L)) (hP : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X) (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (L : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ L) (n : ℤ), P f K L v n = (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} n).map ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app (DerivedCategory.Q.obj K)) ≫ (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} f).hom.app ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ≫ (rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map v))) : ∃ (D : ∀ (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})), EtaleTermwiseHypercohomology X K) (M : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj), (D X K).sequence ⟶ (D Y L).sequence) (R : ∀ (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (q n : ℤ), ℤ) (eInf : ∀ (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (q n r : ℤ) (hr : 1 ≤ r) (hR : R X K q n ≤ r), ((D X K).sequence.page r hr).X (q, n - q) ≅ ((D X K).H n).gradedPiece q), ( (∀ {X Y : Scheme.{u}} (f : Y ⟶ X) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj) (p : ℕ) (q : ℤ), ((M f K L v).hom 1).f (q, (p : ℤ)) ≫ ((D Y L).firstPageIso p q).hom = ((D X K).firstPageIso p q).hom ≫ AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp (cohomologyMap f (K.obj.X q) p))) ∧ (∀ {X Y : Scheme.{u}} (f : Y ⟶ X) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj) (n : ℤ), ∃ (t : ∀ q : ℤ, (((D X K).H n).step q : AddCommGrpCat.{u + 1}) ⟶ (((D Y L).H n).step q : AddCommGrpCat.{u + 1})) (ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow = (((D X K).H n).step q).arrow ≫ P f K.obj L.obj v n) (hc : ∀ q : ℤ, Subobject.ofLE (((D X K).H n).step (q + 1)) (((D X K).H n).step q) (((D X K).H n).antitone_step (Int.le_add_one (le_refl q))) ≫ t q = t (q + 1) ≫ Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q) (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q)))), ∀ (q r : ℤ) (hr : 1 ≤ r) (hX : R X K q n ≤ r) (hY : R Y L q n ≤ r), ((M f K L v).hom r hr).f (q, n - q) ≫ (eInf Y L q n r hr hY).hom = (eInf X K q n r hr hX).hom ≫ cokernel.map (Subobject.ofLE (((D X K).H n).step (q + 1)) (((D X K).H n).step q) (((D X K).H n).antitone_step (Int.le_add_one (le_refl q)))) (Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q) (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q)))) (t (q + 1)) (t q) (hc q)) ∧ (∀ (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})), M (𝟙 X) K K ((NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} X) (ComplexShape.up ℤ) ≪≫ Functor.mapHomologicalComplexIdIso (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (ComplexShape.up ℤ)).hom.app K.obj) = 𝟙 (D X K).sequence ∧ ∀ n : ℤ, P (𝟙 X) K.obj K.obj ((NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} X) (ComplexShape.up ℤ) ≪≫ Functor.mapHomologicalComplexIdIso (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (ComplexShape.up ℤ)).hom.app K.obj) n = 𝟙 _) ∧ (∀ {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) (N : CochainComplex.Plus (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1})) (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj) (w : ((upperStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (ComplexShape.up ℤ)).obj L.obj ⟶ N.obj), M (g ≫ f) K N ((Functor.mapHomologicalComplexCompIso (upperStarComp AddCommGrpCat.{u + 1} g f).symm (ComplexShape.up ℤ)).inv.app K.obj ≫ ((upperStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (ComplexShape.up ℤ)).map v ≫ w) = M f K L v ≫ M g L N w ∧ ∀ n : ℤ, P (g ≫ f) K.obj N.obj ((Functor.mapHomologicalComplexCompIso (upperStarComp AddCommGrpCat.{u + 1} g f).symm (ComplexShape.up ℤ)).inv.app K.obj ≫ ((upperStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (ComplexShape.up ℤ)).map v ≫ w) n = P f K.obj L.obj v n ≫ P g L.obj N.obj w n)) ∧ (∀ (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (a q n : ℤ), (∀ s : ℤ, s < a → IsZero (K.obj.X s)) → R X K q n ≤ max 1 (max (q - a + 2) (n - q + 2)))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T184329-L-4014370",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T184329-L-4014370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

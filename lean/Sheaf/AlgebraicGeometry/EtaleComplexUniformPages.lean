@@ -12,10 +12,9 @@ public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
-import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
+import Sheaf.AlgebraicGeometry.EtaleHypercohomologyUniformBound
+import Sheaf.AlgebraicGeometry.EtaleComplexPageDiagram
+import Sheaf.AlgebraicGeometry.EtaleComplexColimitBelow
 /-! # Uniform stable pages for a diagram of étale complexes
 
 Source: Stacks Project, Tags 015J and 0EZM.
@@ -179,6 +178,97 @@ theorem exists_etaleComplex_uniform_pages
                 Subobject.ofLE ((T'.H p).step (z + 1)) ((T'.H p).step z)
                   ((T'.H p).antitone_step (Int.le_add_one (le_refl _)))),
           ((v (op i)).hom N one_le).f ⟨p - q, q⟩ ≫ e'.hom =
-            (e i).hom ≫ cokernel.map _ _ (t (q + 1)) (t q) (hc q)) := by sorry
+            (e i).hom ≫ cokernel.map _ _ (t (q + 1)) (t q) (hc q)) := by
+  classical
+  have hlimit := etaleComplex_colimit_below D c F a hbelow G eG L hL
+  have hFK : ∀ i : I, CochainComplex.plus
+      (Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) (F i) := by
+    intro i
+    exact ⟨a, (CochainComplex.isStrictlyGE_iff _ _).mpr (hbelow i)⟩
+  have hLK : CochainComplex.plus
+      (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) L.pt := by
+    exact ⟨a, (CochainComplex.isStrictlyGE_iff _ _).mpr hlimit⟩
+  let P₀ := fun {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+    (J : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+    (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj K ⟶ J) (n : ℤ) ↦
+    (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} n).map
+      ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map
+        ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app
+          (DerivedCategory.Q.obj K)) ≫
+      (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+        AddCommGrpCat.{u + 1} f).hom.app
+          ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj
+            (DerivedCategory.Q.obj K)) ≫
+      (rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map
+        ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app K ≫
+          DerivedCategory.Q.map v))
+  have hP₀ : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
+      (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+      (J : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+      (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj K ⟶ J),
+      P₀ f K J v p = P f K ≫
+        (cohomology AddCommGrpCat.{u + 1} Y p).map (DerivedCategory.Q.map v) := by
+    intro X Y f K J v
+    rw [hP]
+    simp only [P₀, Functor.map_comp, Category.assoc]
+    rfl
+  obtain ⟨T₀, M, R, eInf, ⟨hfirst, hfiltered, hid, hcomp⟩, hbound⟩ :=
+    exists_etaleHypercohomology_uniform_bound P₀ (by intros; rfl)
+  obtain ⟨E, E', v, compatible, firstIso, firstIsoLimit, first_transition,
+    first_comparison, negative, negativeLimit, pageIso, pageIsoLimit, hpage, hpageLimit⟩ :=
+    exists_etaleComplex_page_diagram D c F φ hidentity hcomposition G eG hG L
+      hFK hLK p q T₀ M hfirst (fun X K ↦ (hid X K).1)
+        (fun f g K J V t w ↦ (hcomp f g K J V t w).1)
+  let N := max 1 (max (q - a + 2) (p - q + 2))
+  have one_le : 1 ≤ N := le_max_left _ _
+  have hR : ∀ i : I, R (D.obj i) ⟨F i, hFK i⟩ q p ≤ N := by
+    intro i
+    exact hbound (D.obj i) ⟨F i, hFK i⟩ a q p (hbelow i)
+  have hR' : R c.pt ⟨L.pt, hLK⟩ q p ≤ N :=
+    hbound c.pt ⟨L.pt, hLK⟩ a q p hlimit
+  let e := fun i ↦ pageIso i N one_le ≪≫
+    eInf (D.obj i) ⟨F i, hFK i⟩ q p N one_le (hR i)
+  let e' := pageIsoLimit N one_le ≪≫ eInf c.pt ⟨L.pt, hLK⟩ q p N one_le hR'
+  refine ⟨E, E', v, compatible, firstIso, firstIsoLimit, first_transition,
+    first_comparison, negative, negativeLimit, hFK, hLK,
+    (fun i ↦ T₀ (D.obj i) ⟨F i, hFK i⟩), T₀ c.pt ⟨L.pt, hLK⟩,
+    N, one_le, e, e', ?_, ?_⟩
+  · intro i j f
+    obtain ⟨t, ht, hc, hs⟩ := hfiltered (D.map f) ⟨F i, hFK i⟩ ⟨F j, hFK j⟩ (φ f) p
+    refine ⟨t, ?_, hc, ?_⟩
+    · intro z
+      simpa only [hP₀, Category.assoc] using ht z
+    · dsimp only [e, Iso.trans_hom]
+      calc
+        _ = (pageIso i N one_le).hom ≫
+            ((M (D.map f) ⟨F i, hFK i⟩ ⟨F j, hFK j⟩ (φ f)).hom N one_le).f
+              ⟨q, p - q⟩ ≫ (eInf (D.obj j) ⟨F j, hFK j⟩ q p N one_le (hR j)).hom := by
+          rw [← Category.assoc, hpage i j f N one_le, Category.assoc]
+        _ = _ := by
+          have hh := congrArg ((pageIso i N one_le).hom ≫ ·)
+            (hs q N one_le (hR i) (hR j))
+          simpa only [Category.assoc] using hh
+  · intro i
+    obtain ⟨t, ht, hc, hs⟩ := hfiltered (X := D.obj i) (Y := c.pt) (c.π.app i)
+      ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩
+      ((eG i).inv ≫ L.ι.app (op i)) p
+    refine ⟨t, ?_, hc, ?_⟩
+    · intro z
+      simpa only [hP₀, Category.assoc] using ht z
+    · dsimp only [e, e', Iso.trans_hom]
+      calc
+        _ = (pageIso i N one_le).hom ≫
+            ((M (c.π.app i) ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩
+              ((eG i).inv ≫ L.ι.app (op i))).hom N one_le).f
+                ⟨q, p - q⟩ ≫ (eInf c.pt ⟨L.pt, hLK⟩ q p N one_le hR').hom := by
+          rw [← Category.assoc, hpageLimit i N one_le, Category.assoc]
+        _ = _ := by
+          have hh := congrArg ((pageIso i N one_le).hom ≫ ·)
+            (hs q N one_le (hR i) hR')
+          simpa only [Category.assoc] using hh
+
 
 end AlgebraicGeometry.Etale
