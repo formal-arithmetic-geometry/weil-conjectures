@@ -9130,3 +9130,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:50 L: returned deliver/W3/Sheaf.AlgebraicGeometry.ChowPullbackAlgebraization (reviewer RETURN: (reviewer X-85771, head 85771db81) E1/D1: The split loses the projective data needed by its stated proof. In ChowPullbac)
 - 18:57 L: returned deliver/T2/Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroHomFormula (reviewer RETURN: (reviewer X-3410d, head 3410d7079) C4 (review brief point 6): dag/nodes/sec-proper-base-change/lem-weil-pbc-module-exten)
 - 18:57 L: returned deliver/S2/Sheaf.Paper.QuasiCompactH1Zero (reviewer RETURN: (reviewer X-bf3b3, head bf3b32a1b) H9/G1 (review point 5; earlier return unrepaired): In lean/Sheaf/Paper/H1ClosedPointA)
+- 19:00 L: returned deliver/Q2/Sheaf.CategoryTheory.CartanEilenbergConeFiltration (reviewer RETURN: (reviewer X-7c220, head 7c2209ccf) B2: In both new node JSON files, replace statement = "A strict substatement of lem-sp)
