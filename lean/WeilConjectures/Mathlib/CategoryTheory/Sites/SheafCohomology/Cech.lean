@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneral
 import Sheaf.CategoryTheory.CechResolutionColumns
 import Sheaf.CategoryTheory.CechResolutionTotal
 import Sheaf.CategoryTheory.CechResolutionDoubleComplex
@@ -79,8 +80,12 @@ theorem Sheaf.exists_cechToDerivedSpectralSequence [HasExt.{w} (Sheaf J AddCommG
       (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅
         ((cechComplexFunctor fun i ↦ Over.mk (π i)).obj
           ((Over.forget X).op ⋙ F.cohomologyPresheaf q)).homology p)) ∧
-      E.AbutsTo fun n ↦ F.H' n X :=
-  sorry
+      E.AbutsTo fun n ↦ F.H' n X := by
+  obtain ⟨D, hcol, htot⟩ := F.exists_cechDoubleComplex_general X π hπ
+  obtain ⟨E, hE₂, hE⟩ := D.exists_spectralSequence
+  refine ⟨E, fun p q ↦ ?_, hE.of_iso fun n ↦ (htot n).some⟩
+  obtain ⟨e⟩ := hE₂ p q
+  exact ⟨e ≪≫ (HomologicalComplex.homologyFunctor _ _ p).mapIso (hcol q).some⟩
 
 /-- **The Čech double complex of a covering.** Let `𝔘 = {π i : U i ⟶ X}` generate a covering
 sieve of `X` and let `F` be an abelian sheaf, on a site whose abelian sheaves have enough
