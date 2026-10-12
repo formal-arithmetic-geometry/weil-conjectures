@@ -9,8 +9,10 @@ public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.ClosedImmersionAlgebraDirectImageExact
+import Sheaf.AlgebraicGeometry.ClopenRankStrataFormality
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # Reconstruction from cohomology on finitely many rank strata
 
@@ -72,6 +74,23 @@ theorem closedImmersion_rankedCohomology_reconstruction
           (Scheme.Modules.locallyRankedExteriorTerm M r n))) :
     Nonempty ((RingedSpace.derivedModuleDirectImage
       (toDirectImageAlgebraSpace i)).obj (DerivedCategory.Q.obj
-        (Scheme.Modules.locallyRankedExteriorComplex M r)) ≅ K) := by sorry
+        (Scheme.Modules.locallyRankedExteriorComplex M r)) ≅ K) := by
+  let F := RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)
+  let : PreservesFiniteLimits F := by
+    unfold F RingedSpace.moduleDirectImage
+    infer_instance
+  let : PreservesFiniteColimits F :=
+    closedImmersion_algebraDirectImage_preservesFiniteColimits i
+  let C := Scheme.Modules.locallyRankedExteriorComplex M r
+  let e : (RingedSpace.derivedModuleDirectImage
+      (toDirectImageAlgebraSpace i)).obj (DerivedCategory.Q.obj C) ≅
+      DerivedCategory.Q.obj ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj C) :=
+    F.rightDerivedFunctorIsoMapDerivedCategory.app (DerivedCategory.Q.obj C) ≪≫
+      F.mapDerivedCategoryFactors.app C
+  let E (n : ℕ) := Scheme.Modules.exteriorSheaf
+    ((Scheme.Modules.restrictFunctor (Scheme.Modules.exteriorRankOpen r n).ι).obj M) n
+  obtain ⟨eK⟩ := clopenRankStrata_formality i r hfinite E
+    (Scheme.Modules.locallyRankedExteriorTerm M r) (fun _ => rfl) K hK
+  exact ⟨e ≪≫ eK⟩
 
 end AlgebraicGeometry

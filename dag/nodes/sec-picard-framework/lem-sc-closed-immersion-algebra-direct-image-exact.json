@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-closed-immersion-algebra-direct-image-exact",
+ "kind": "statement",
+ "title": "Finite colimits under closed-immersion algebra direct image",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme], [def-weil-closed-immersion]. Let $g:(Z,\\mathcal O_Z)\\to(Y,i_*\\mathcal O_Z)$ be the canonical ringed-space map [def-sc-direct-image-algebra-derived-category]. Then the functor $g_*$ on all module sheaves [def-pc-ringed-spaces-derived-direct-image] preserves finite colimits. No quasi-coherence, complex, rank function or derived-category hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project, Sheaves on Spaces and Sheaves of Modules",
+  "place": "Tags 00AE (Lemma 6.32.1) and 01AX (Lemma 17.6.1); direct-image-algebra map of Tag 0AVW; parent reconstruction proof step 1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "On the closed image, cofinal inverse-image neighborhoods identify direct-image stalks with source stalks. On its open complement direct-image stalks vanish. Since g has the identity map on its pushed-forward ring sheaf, these are identifications of the corresponding modules, not merely of sets.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-direct-image-algebra-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Short exact sequences of module sheaves are detected on stalks, so g_* is exact. It is additive and hence, as an exact functor between abelian categories, preserves finite colimits. The empty source gives the zero functor and causes no exception.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "K2",
+  "based_on": {
+   "document": "Stacks Project, Sheaves on Spaces and Sheaves of Modules",
+   "place": "Tags 00AE (Lemma 6.32.1) and 01AX (Lemma 17.6.1); direct-image-algebra map of Tag 0AVW; parent reconstruction proof step 1"
+  },
+  "note": "Strict component of the existing reconstruction argument; no target signature changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pushforward of sheaves of modules along a closed embedding is an exact functor",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of sheaves of modules along a closed embedding is exact, since its stalks are source stalks on the image and zero off the image",
+   "results": "8 hits; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.bijective_pushforwardSections, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, CategoryTheory.Sheaf.hasExactColimitsOfShape, SheafOfModules.pushforward; no exact match; pushforward is a right adjoint, but finite colimit preservation along a closed embedding is missing",
+   "date": "2026-10-12",
+   "verdict": "no exact match; pushforward is a right adjoint, but finite colimit preservation along a closed embedding is missing"
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent|clopen|IsClosedEmbedding",
+   "results": "0 hits; ; no matches in Mathlib module-sheaf files; source and Sheaf searches likewise have no closed-embedding exactness theorem",
+   "date": "2026-10-12",
+   "verdict": "no matches in Mathlib module-sheaf files; source and Sheaf searches likewise have no closed-embedding exactness theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionRankedCohomologyReconstruction",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite colimits under closed-immersion algebra direct image in the rank-stratum assembly",
+   "via": [
+    "lem-sc-closed-immersion-ranked-cohomology-reconstruction",
+    "lem-sc-koszul-regular-immersion-algebra-dual",
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionAlgebraDirectImageExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionAlgebraDirectImageExact.lean",
+  "declaration": "AlgebraicGeometry.closedImmersion_algebraDirectImage_preservesFiniteColimits",
+  "statement": "theorem closedImmersion_algebraDirectImage_preservesFiniteColimits\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :\n    PreservesFiniteColimits\n      (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T165518-L-2935012",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T165518-L-2935012",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

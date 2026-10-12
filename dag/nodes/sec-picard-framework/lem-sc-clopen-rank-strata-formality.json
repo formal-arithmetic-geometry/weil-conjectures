@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-clopen-rank-strata-formality",
+ "kind": "statement",
+ "title": "Formality of arbitrary module families on finite clopen rank strata",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme], [def-weil-closed-immersion], and let $g:(Z,\\mathcal O_Z)\\to(Y,i_*\\mathcal O_Z)$ be [def-sc-direct-image-algebra-derived-category]. Choose a derived category over $i_*\\mathcal O_Z$ [def-pc-derived-category]. Let $r:Z\\to\\mathbb N$ be locally constant with finite image, and $U_m=\\{r=m\\}$ be [def-sc-locally-ranked-exterior-complex]. For each $m\\geq0$ let $E_m$ be an arbitrary module sheaf on $U_m$. Let $T^n=j_{n,*}E_n$ for $n\\geq0$, and $T^n=0$ for $n<0$. Let $C$ be the zero-differential complex with terms $T^n$. If $K\\in D(i_*\\mathcal O_Z)$ has module-sheaf isomorphisms $H^n(K)\\cong g_*T^n$ for all $n$, then $Q(g_*C)\\cong K$, where $g_*$ is applied termwise [def-pc-ringed-spaces-derived-direct-image]. No derived direct image or exterior power is involved.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Parent reconstruction proof steps 2--4: finite rank-idempotent splitting and single-degree truncation; Tag 0BQZ, with the direct-image-algebra setup of Tag 0AVW"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-derived-category",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Glue 1 on a clopen fiber U_m and 0 on its complement. Push these sections to i_*O_Z. Their multiplication endomorphisms are orthogonal idempotents with finite sum 1. They split every representative complex termwise into image subcomplexes, preserving differentials, homology and quasi-isomorphisms.",
+   "uses": [
+    "def-sc-direct-image-algebra-derived-category",
+    "def-sc-locally-ranked-exterior-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The direct image of E_m is supported on the rank-m summand. The algebra-linear homology isomorphisms commute with multiplication by the characteristic idempotents. Each summand of K therefore has homology in its assigned single degree only. Canonical truncations identify it with that homology sheaf placed in that degree. Perform the same truncation on the termwise pushed-forward zero-differential complex.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sum the finitely many single-degree isomorphisms and compose with the termwise splitting isomorphisms. Off the closed image the algebra is zero, so all its module sheaves vanish. The empty source gives zero on both sides; rank zero gives degree zero. The argument never requires the rank strata to be clopen in Y.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-direct-image-algebra-derived-category",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-pc-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "K2",
+  "based_on": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Parent reconstruction proof steps 2--4: finite rank-idempotent splitting and single-degree truncation; Tag 0BQZ, with the direct-image-algebra setup of Tag 0AVW"
+  },
+  "note": "Strict component of the existing reconstruction argument; no target signature changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complex whose cohomology is supported in different degrees on disjoint clopen strata is isomorphic in the derived category to the zero differential complex of its cohomology",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complex of module sheaves over a ring sheaf with a finite clopen partition and cohomology in a single assigned degree on each part is formal",
+   "results": "8 hits; CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, CategoryTheory.Sheaf.instAddCommGroupH; no exact match; hits concern site cohomology and Mayer--Vietoris rather than finite rank-idempotent formality",
+   "date": "2026-10-12",
+   "verdict": "no exact match; hits concern site cohomology and Mayer--Vietoris rather than finite rank-idempotent formality"
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent|clopen|IsClosedEmbedding",
+   "results": "0 hits; ; no matches in Mathlib module-sheaf files; source clopen-idempotent declaration is for the pro-etale site, not ringed-space module sheaves",
+   "date": "2026-10-12",
+   "verdict": "no matches in Mathlib module-sheaf files; source clopen-idempotent declaration is for the pro-etale site, not ringed-space module sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionRankedCohomologyReconstruction",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Formality of arbitrary module families on finite clopen rank strata in the rank-stratum assembly",
+   "via": [
+    "lem-sc-closed-immersion-ranked-cohomology-reconstruction",
+    "lem-sc-koszul-regular-immersion-algebra-dual",
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClopenRankStrataFormality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenRankStrataFormality.lean",
+  "declaration": "AlgebraicGeometry.clopenRankStrata_formality",
+  "statement": "theorem clopenRankStrata_formality\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{wA} (SheafOfModules.{u}\n      (moduleRings (directImageAlgebraSpace i)))]\n    (r : LocallyConstant Z ℕ) (hfinite : (Set.range r).Finite)\n    (E : ∀ n : ℕ, (Scheme.Modules.exteriorRankOpen r n).toScheme.Modules)\n    (T : ℤ → Z.Modules)\n    (hT : ∀ n : ℤ, T n = if 0 ≤ n then\n      (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj\n        (E n.toNat) else 0)\n    (K : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))))\n    (hK : ∀ n : ℤ, Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K ≅\n        (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T n))) :\n    Nonempty (DerivedCategory.Q.obj\n      (((RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj\n          (CochainComplex.of T (fun _ => 0) (fun _ => zero_comp))) ≅ K)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T165518-L-2935012",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T165518-L-2935012",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
