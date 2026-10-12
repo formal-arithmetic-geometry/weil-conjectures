@@ -16,7 +16,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
-  "place": "Proof, paragraph 4"
+  "place": "Proof, paragraph 4: finite stable subgroups; categorical assembly from Mathlib subobjects in Grothendieck abelian categories"
  },
  "mathlib_searches": [
   {
@@ -67,12 +67,31 @@
  "statement": "finite-stalk cocone",
  "proof": [
   {
-   "text": "The assertion is the corresponding finite-stalk construction/cohomology comparison described in the parent node.",
+   "text": "Index by the subobjects of M with finite geometric stalk. Bottom has zero, hence finite, stalk. If S and T have finite stalk, the epimorphism Subobject.supDesc S T from their biproduct to their supremum remains epic under the exact stalk functor. The stalk of the biproduct is the product of the two finite groups, so the stalk of S sup T is finite. Thus this nonempty poset is directed and its category is filtered. These facts are proved by the private finite_fiber_sup helper and the hbot argument.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The subobject poset is small in universe u+1 by well-poweredness of the Grothendieck abelian sheaf category. Apply orderIsoShrink and its categorical equivalence to obtain a SmallCategory I in that universe. Compose its inverse, the monotone inclusion into Subobject M, Subobject.representative, and the forgetful functors to form F. The inclusions give a cocone at the identity object in Over M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sc-field-torsion-finite-stalk-subobjects-cover] with K = X.functionField. The supremum of the finite-stalk subobjects is top; reindex this equality along the shrinking equivalence. Mathlib IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup then proves the displayed cocone is colimiting in sheaves.",
+   "uses": [
+    "lem-sc-field-torsion-finite-stalk-subobjects-cover"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Every diagram object is a subobject of M. The proved private torsion_of_mono helper pulls a locally torsion section through the inclusion: monicity gives injectivity on sections, naturality identifies restricted images, and injectivity reflects the local nsmul equality. Each object is torsion. Its finite stalk is its defining subtype property. These facts and the preceding colimit proof give the requested existential witnesses.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-field-torsion-finite-stalk-subobjects-cover"
+ ],
  "created": {
   "by": "worker",
   "item": "Sheaf.AlgebraicGeometry.Curve.GenericTorsionColimit",
@@ -105,7 +124,7 @@
   "reviewer": "COMPILER",
   "group": "N1",
   "result": "pass",
-  "landing": "20261012T053943-L-2640180",
+  "landing": "20261012T085309-L-27615",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
