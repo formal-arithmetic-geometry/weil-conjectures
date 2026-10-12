@@ -96,7 +96,7 @@ def inventory(upstream):
                       nodes=[dict(id=n['id'], module=(n.get('lean') or {}).get('module'),
                                   declaration=(n.get('lean') or {}).get('declaration'),
                                   existing=(n.get('lean') or {}).get('existing', False),
-                                  upstream=n.get('lean_audit', {}).get('slopmaster2', {})) for n in ns],
+                                  upstream=(n.get('lean_audit') or {}).get('slopmaster2', {}) if isinstance(n.get('lean_audit'), dict) else n.get('lean_audit')) for n in ns],
                       modules=ms, declarations=len(rows), proved=sum(not r['markers'] and r['kind'] != 'structure field' for r in rows),
                       fields=sum(r['kind'] == 'structure field' for r in rows),
                       holes=sum(bool(r['markers']) for r in rows),
