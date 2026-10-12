@@ -36,6 +36,9 @@ theorem etale_sigmaDesc_spec_of_finite_separable
     [∀ i, Module.Finite K (L i)] [∀ i, Algebra.IsSeparable K (L i)] :
     Etale (Sigma.desc (fun i : I =>
       Spec.map (CommRingCat.ofHom (algebraMap K (L i))))) := by
-  sorry
+  apply IsZariskiLocalAtSource.sigmaDesc (P := @Etale)
+  intro i
+  rw [HasRingHomProperty.Spec_iff (P := @Etale)]
+  exact RingHom.etale_algebraMap.mpr Algebra.Etale.of_finite_of_isSeparable
 
 end AlgebraicGeometry
