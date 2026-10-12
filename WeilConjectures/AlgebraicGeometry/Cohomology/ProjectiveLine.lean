@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CurveProjection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferentials
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Laurent
 
@@ -276,10 +277,13 @@ dimension one, smooth over `k`, with a closed immersion `i` into some `ℙⁿ_k`
 a coherent `𝒪_X`-module. Then `H⁰(X, ℱ)` and `H¹(X, ℱ)` are finite-dimensional over `k`, and
 `H^q(X, ℱ) = 0` for `q ≥ 2`.
 
-Choose a finite morphism `u : X ⟶ ℙ¹_k`; then `u_* ℱ` is coherent, `R^q u_* ℱ = 0` for `q > 0`
-since `u` is affine, so `H^q(X, ℱ) ≅ H^q(ℙ¹_k, u_* ℱ)`, and
-`AlgebraicGeometry.ProjectiveLine.finiteDimensional_H` and
-`AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le` apply.
+The finiteness holds since `X` is proper over `k`
+(`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`). For the vanishing, choose
+a finite morphism `u : X ⟶ ℙ¹_k` (`AlgebraicGeometry.exists_isFinite_toProjectiveLine`). Since
+`u` is affine, the preimages of the two standard affine opens `U₀`, `U₁` of `ℙ¹_k` are affine
+opens covering `X`, and `X` is separated, so the quasi-coherent cohomology of `X` vanishes in
+degrees `≥ 2` (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_card_le`), as on `ℙ¹_k`
+(`AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le`).
 
 (blueprint: `lem-pc-curve-coherent-finiteness`) -/
 theorem finiteDimensional_H_of_isCurve {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
@@ -291,13 +295,21 @@ theorem finiteDimensional_H_of_isCurve {k : Type u} [Field k] [IsAlgClosed k] {X
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] :
     FiniteDimensional k (ℱ.H 0) ∧ FiniteDimensional k (ℱ.H 1) ∧
       ∀ q, 2 ≤ q → Subsingleton (ℱ.H q) := by
+  classical
   have : IsProper (X ↘ Spec (.of k)) := hi ▸ inferInstance
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
-  have : IsNoetherian X := { __ := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k)) }
+  have : i.IsOver (Spec (.of k)) := ⟨hi⟩
   refine ⟨Scheme.Modules.finiteDimensional_H_of_isProper ℱ 0,
-    Scheme.Modules.finiteDimensional_H_of_isProper ℱ 1, fun q hq ↦
-      Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt ℱ ?_⟩
-  rw [hX]
-  exact_mod_cast hq
+    Scheme.Modules.finiteDimensional_H_of_isProper ℱ 1, fun q hq ↦ ?_⟩
+  obtain ⟨π, hπ, -⟩ := exists_isFinite_toProjectiveLine X i hX
+  have : IsSeparated (Limits.terminal.from X) := by
+    rw [← Limits.terminal.comp_from (X ↘ Spec (.of k))]
+    infer_instance
+  have hcard : (Finset.univ : Finset (ULift.{u} (Fin 2))).card = 2 := by simp
+  exact Scheme.Modules.subsingleton_H_of_card_le Finset.univ Finset.univ_nonempty
+    (fun j ↦ π ⁻¹ᵁ ProjectiveSpace.standardOpen _ (Spec (.of k)) j)
+    (fun j _ ↦ (ProjectiveSpace.isAffineOpen_standardOpen _ _ j).preimage π)
+    (by rw [Finset.sup_univ_eq_iSup, ← Scheme.Hom.preimage_iSup,
+      ProjectiveSpace.iSup_standardOpen, Scheme.Hom.preimage_top])
+    _ (Scheme.Modules.cechAcyclicOnAffines_of_isQuasicoherent ℱ) (hcard ▸ hq)
 
 end AlgebraicGeometry
