@@ -23,76 +23,54 @@
  ],
  "proof": [
   {
-   "text": "Write $T^q(M)=H^q(C^\\bullet(G,M))$. The displayed differentials are natural in equivariant $A$-linear maps. For every short exact sequence of discrete $G$-modules, [lem-exc-continuous-cochains-short-exact] gives a short exact sequence of these complexes. Apply the long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] and its compatibility with morphisms of short exact sequences [lem-weil-pbc-complex-ses-long-exact-naturality]. Thus $(T^q)$ is a cohomological $\\delta$-functor [def-weil-pbc-delta-functor]. At degree zero, $\\ker(d^0)$ consists exactly of elements fixed by every $g\\in G$, and $T^0(M)=M^G$ naturally. The same kernel description and exactness in [lem-exc-discrete-modules-abelian] show that invariants are left exact and additive.",
+   "text": "The new cochain delta-functor node supplies the complex functor, its differential, exactness and naturality. The short exact cochain theorem and homology long exact sequence give the delta-functor structure.",
    "uses": [
-    "lem-exc-continuous-cochains-short-exact",
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "def-weil-pbc-delta-functor",
+    "lem-exc-continuous-cochains-delta-functor",
     "lem-exc-discrete-modules-abelian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, label section-continuous-group-cohomology, paragraphs defining the cochain complex and asserting a cohomological delta-functor"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $M$, [lem-exc-coinduced-discrete-embedding] supplies a monomorphism $\\iota_M:M\\to D(M)=\\operatorname{Cont}(G,M)$ in this abelian category, with the right-translation action. For every $q>0$, [lem-exc-coinduced-continuous-acyclic] gives $T^q(D(M))=0$. Hence $T^q(\\iota_M):T^q(M)\\to T^q(D(M))$ is the zero map, so $T$ is effaceable in every positive degree.",
+   "text": "The new degree-zero node identifies the zeroth cochain homology with the invariant functor and proves preservation of finite limits.",
+   "uses": [
+    "lem-exc-continuous-cochains-invariants-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coinduced embedding and acyclicity give a monomorphism effacing every positive degree, so the effaceable delta-functor theorem gives universality.",
    "uses": [
     "lem-exc-coinduced-discrete-embedding",
-    "lem-exc-coinduced-continuous-acyclic"
+    "lem-exc-coinduced-continuous-acyclic",
+    "lem-weil-pbc-effaceable-delta-functor-universal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison asserted without a proof; agent-written effacement argument"
-   }
+   "elementary": false
   },
   {
-   "text": "By Step 1, $T$ is a cohomological $\\delta$-functor; by Step 2 it satisfies the monomorphism-and-zero-map hypothesis of [lem-weil-pbc-effaceable-delta-functor-universal], so $T$ is universal. The category has enough injectives by [lem-exc-discrete-modules-abelian], and invariants are left exact by Step 1. Thus [lem-weil-pbc-right-derived-universal-delta-functor] applies to invariants: its derived functors $R^q(M\\mapsto M^G)$ form a universal $\\delta$-functor with $R^0\\cong(M\\mapsto M^G)$.",
-   "uses": [
-    "lem-weil-pbc-effaceable-delta-functor-universal",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "lem-exc-discrete-modules-abelian",
-    "def-sp-left-exact-additive"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, label section-continuous-group-cohomology, paragraph constructing canonical maps from derived invariants to continuous cohomology; source's missing profinite justification supplied through Stacks Homology Tag 010T and Derived Categories Tag 015B as cited nodes"
-   }
-  },
-  {
-   "text": "Identify $R^0$ and $T^0$ with the invariant functor by Step 1 and [lem-weil-pbc-right-derived-universal-delta-functor]. Universality of $R^\\bullet$ gives a unique morphism $R^\\bullet\\to T^\\bullet$ extending the identity on invariants; universality of $T^\\bullet$ gives one in the reverse direction. Each composite extends the identity in degree zero, so uniqueness makes both composites identities. The first morphism is therefore a natural isomorphism in every degree.",
+   "text": "The right-derived universal delta-functor theorem gives a second universal delta-functor. Uniqueness in both directions makes the two degreewise functors naturally isomorphic.",
    "uses": [
     "lem-weil-pbc-right-derived-universal-delta-functor",
-    "lem-weil-pbc-effaceable-delta-functor-universal",
+    "def-sp-left-exact-additive",
     "def-weil-pbc-delta-functor"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, label section-continuous-group-cohomology, final paragraph asserting the canonical maps are isomorphisms for profinite G; uniqueness argument using Stacks Homology Tag 010T"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-exc-continuous-cochains-short-exact",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-complex-ses-long-exact-naturality",
-  "def-weil-pbc-delta-functor",
+  "lem-exc-continuous-cochains-delta-functor",
   "lem-exc-discrete-modules-abelian",
+  "lem-exc-continuous-cochains-invariants-zero",
   "lem-exc-coinduced-discrete-embedding",
   "lem-exc-coinduced-continuous-acyclic",
   "lem-weil-pbc-effaceable-delta-functor-universal",
   "lem-weil-pbc-right-derived-universal-delta-functor",
-  "def-sp-left-exact-additive"
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-delta-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison asserted without proof; effacement via discrete coinduction and universality as in Stacks Tags 010T and 015B"
+  "place": "Tag 0DVG; E2 stage-3 reduction of assembly and degree-zero steps, with coinduced effacement and universal delta-functor comparison proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -195,5 +173,15 @@
   "group": "C1",
   "result": "fix",
   "note": "profinite G (Group/Top/IsTopologicalGroup/Compact/T2/TotDisc), finite ring A (Ring+Finite, no comm), M over landed Rep.DiscreteContinuousRep in universe max u w, abelian+EnoughInjectives from discreteModules_abelian (M1), invariants V pinned by t : V.obj M ≃ₗ ⨅ ker(ρ g - id) natural in f, H^q = Functor.rightDerived V q, discrete topology ⊥, C^n via e : ≃ₗ[A] C(Fin n → G, V) natural in f, d^n via Fin.contractNth checked n=0 (gm-m), n=1, last term omits g_{n+1}, ∀ q, natural iso of functors. FIX: plain ≃ + pointwise add/smul equations -> ≃ₗ[A] with discrete/ContinuousConstSMul instances, and hand-written merge tuple + separate last term -> Fin.contractNth sum over Fin (n+1), as in sibling 27af3287d"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085230-L-10693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,116 @@
+{
+ "id": "lem-exc-continuous-cochains-invariants-zero",
+ "kind": "statement",
+ "title": "Degree-zero cochains are invariants",
+ "statement": "Let $G$ be a compact Hausdorff totally disconnected topological group, $A$ a finite ring, and $\\mathcal C$ the abelian category of left $A$-modules with $A$-linear $G$-action and open stabilizers [lem-exc-discrete-modules-abelian]. Let $F:\\mathcal C\\to\\operatorname{CochainComplex}(A\\text{-Mod},\\mathbb N)$ have termwise linear equivalences $F(M)^n\\simeq\\operatorname{Cont}(G^n,M)$, natural by postcomposition, and differentials $d^0m(g)=gm-m$ and $d^nf(g_1,\\ldots,g_{n+1})=g_1f(g_2,\\ldots,g_{n+1})+\\sum_{j=1}^n(-1)^jf(g_1,\\ldots,g_jg_{j+1},\\ldots,g_{n+1})+(-1)^{n+1}f(g_1,\\ldots,g_n)$. There exists an additive functor $V:\\mathcal C\\to A\\text{-Mod}$ preserving finite limits, with natural linear equivalences $V(M)\\simeq\\bigcap_{g\\in G}\\ker(\\rho_M(g)-1)$ whose maps are restrictions of the coefficient maps. The degree-zero homology functor of $F$ is naturally isomorphic to $V$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, degree-zero differential and invariants"
+ },
+ "stmt_deps": [
+  "lem-exc-discrete-modules-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Define V(M) as the intersection of kernels of rho(g)-id. Restrict an equivariant map to this submodule. Identities, composition and addition hold pointwise. This is an explicit construction rather than choice of an arbitrary witness.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Identify the continuous maps from G^0, a singleton, with the coefficient module by evaluation. The displayed degree-zero differential vanishes precisely on the invariant submodule. Degree-zero cohomology has no incoming boundaries, hence equals this kernel; the evaluation identifications commute with every coefficient map and give a natural isomorphism. Kernels and finite products of representations are computed on underlying modules. Invariant elements commute with both these constructions, so V preserves finite limits.",
+   "uses": [
+    "lem-exc-discrete-modules-abelian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-discrete-modules-abelian"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, degree-zero differential and invariants"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "continuous cochains of profinite groups compute right derived invariants for discrete modules",
+   "date": "2026-10-12",
+   "results": "continuousCohomology; ContinuousCohomology.homogeneousCochains; ContinuousCohomology.continuousCohomologyZeroIso; ContinuousCohomology.invariants; ContinuousCohomology.MultiInd.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; ContinuousCohomology.MultiInd.complex; ContinuousCohomology.instLinearActionTopModuleCatInvariants",
+   "verdict": "No exact match: the returned continuous cohomology is in topological modules; abstract-group invariants require a different category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous cochain cohomology is an effaceable cohomological delta functor on discrete profinite group modules",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\"",
+   "date": "2026-10-12",
+   "results": "continuousCohomology; ContinuousCohomology.cocycles; ContinuousCohomology.π; ContinuousCohomology.cocyclesMap_id; ContinuousCohomology.map_id; ContinuousCohomology.cocyclesMap; ContinuousCohomology.map; ContinuousCohomology.resolutionMap_id",
+   "verdict": "No exact match: the returned continuous cohomology is in topological modules; abstract-group invariants require a different category."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCohomology|cohomolog.*invariants",
+   "date": "2026-10-12",
+   "results": "Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+   "verdict": "No exact match: the returned continuous cohomology is in topological modules; abstract-group invariants require a different category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.ContinuousCochainsDerivedInvariants",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-exc-continuous-cohomology",
+   "place": "Tag 0DVG, degree-zero differential and invariants",
+   "via": [
+    "lem-exc-cochains-derived-invariants"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ContinuousCochainsInvariantsZero",
+  "declaration": "Rep.continuousCochains_invariants_zero",
+  "file": "lean/Sheaf/RepresentationTheory/ContinuousCochainsInvariantsZero.lean",
+  "statement": "theorem continuousCochains_invariants_zero (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] : let h := Classical.choose (discreteModules_abelian.{u, v, max u w} G A) letI := h letI : Preadditive (DiscreteContinuousRep.{v, u, max u w} A G) := h.toPreadditive letI : Preadditive (ModuleCat.{max u w} A) := (inferInstance : Abelian (ModuleCat.{max u w} A)).toPreadditive letI := (Classical.choose_spec (discreteModules_abelian.{u, v, max u w} G A)).choose_spec.1 letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, TopologicalSpace M.obj.V := fun _ ↦ ⊥ letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, DiscreteTopology M.obj.V := fun _ ↦ ⟨rfl⟩ letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, ContinuousConstSMul A M.obj.V := fun _ ↦ ⟨fun _ ↦ continuous_of_discreteTopology⟩ let S := fun M : DiscreteContinuousRep.{v, u, max u w} A G => ⨅ g : G, LinearMap.ker (M.obj.ρ g - LinearMap.id) ∀ F : DiscreteContinuousRep.{v, u, max u w} A G ⥤ CochainComplex (ModuleCat.{max u w} A) ℕ, ∀ e : ∀ (M : DiscreteContinuousRep.{v, u, max u w} A G) (n : ℕ), (F.obj M).X n ≃ₗ[A] C(Fin n → G, M.obj.V), (∀ (M N : DiscreteContinuousRep.{v, u, max u w} A G) (f : M ⟶ N) (n : ℕ) (x : (F.obj M).X n) (g : Fin n → G), e N n (((F.map f).f n).hom x) g = f.hom.hom (e M n x g)) → (∀ (M : DiscreteContinuousRep.{v, u, max u w} A G) (n : ℕ) (x : (F.obj M).X n) (g : Fin (n + 1) → G), e M (n + 1) (((F.obj M).d n (n + 1)).hom x) g = M.obj.ρ (g 0) (e M n x (fun k ↦ g k.succ)) + ∑ k : Fin (n + 1), (-1 : ℤ) ^ (k.val + 1) • e M n x (Fin.contractNth k (· * ·) g)) → ∃ V : DiscreteContinuousRep.{v, u, max u w} A G ⥤ ModuleCat.{max u w} A, ∃ a : V.Additive, letI instAdditive : V.Additive := a ∃ t : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, V.obj M ≃ₗ[A] S M, (∀ (M N : DiscreteContinuousRep.{v, u, max u w} A G) (f : M ⟶ N) (x : V.obj M), (t N ((V.map f).hom x)).val = f.hom.hom (t M x).val) ∧ PreservesFiniteLimits V ∧ Nonempty ((F ⋙ HomologicalComplex.homologyFunctor (ModuleCat.{max u w} A) (ComplexShape.up ℕ) 0) ≅ V)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085230-L-10693",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085230-L-10693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -14,7 +14,8 @@ import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.RepresentationTheory.CoinducedContinuousAcyclic
 import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
-import Sheaf.RepresentationTheory.ContinuousCochainsShortExact
+import Sheaf.RepresentationTheory.ContinuousCochainsDeltaFunctor
+import Sheaf.RepresentationTheory.ContinuousCochainsInvariantsZero
 
 /-!
 # Continuous inhomogeneous cochains compute derived invariants
@@ -31,6 +32,53 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace Rep
 
+private def continuousLocallyConstantEquiv
+    (A X Y : Type*) [Ring A] [TopologicalSpace X] [TopologicalSpace Y]
+    [AddCommGroup Y] [Module A Y] [DiscreteTopology Y] [ContinuousConstSMul A Y] :
+    C(X, Y) ≃ₗ[A] LocallyConstant X Y where
+  toFun f := ⟨f, (IsLocallyConstant.iff_continuous f).mpr f.continuous⟩
+  invFun f := ⟨f, f.isLocallyConstant.continuous⟩
+  left_inv f := by ext; rfl
+  right_inv f := by ext; rfl
+  map_add' f g := by ext; rfl
+  map_smul' a f := by ext; rfl
+
+private theorem universalDeltaFunctor_iso
+    {C D : Type*} [Category C] [Abelian C] [Category D] [Abelian D]
+    (T R : CohomologicalDeltaFunctor C D) (hT : T.IsUniversal) (hR : R.IsUniversal)
+    (e : T.F 0 ≅ R.F 0) (q : ℕ) : Nonempty (T.F q ≅ R.F q) := by
+  obtain ⟨α, hα, _⟩ := hT R e.hom
+  obtain ⟨β, hβ, _⟩ := hR T e.inv
+  let idT : CohomologicalDeltaFunctor.Hom T T :=
+    ⟨fun n ↦ 𝟙 (T.F n), by intros; simp⟩
+  let idR : CohomologicalDeltaFunctor.Hom R R :=
+    ⟨fun n ↦ 𝟙 (R.F n), by intros; simp⟩
+  let αβ : CohomologicalDeltaFunctor.Hom T T :=
+    ⟨fun n ↦ α.app n ≫ β.app n, by
+      intro S hS n
+      simp only [NatTrans.comp_app, ← Category.assoc]
+      rw [α.naturality S hS n]
+      simp only [Category.assoc]
+      rw [β.naturality S hS n]⟩
+  let βα : CohomologicalDeltaFunctor.Hom R R :=
+    ⟨fun n ↦ β.app n ≫ α.app n, by
+      intro S hS n
+      simp only [NatTrans.comp_app, ← Category.assoc]
+      rw [β.naturality S hS n]
+      simp only [Category.assoc]
+      rw [α.naturality S hS n]⟩
+  have hαβ : αβ = idT := (hT T (𝟙 (T.F 0))).unique
+    (by change α.app 0 ≫ β.app 0 = _; rw [hα, hβ]; exact e.hom_inv_id)
+    rfl
+  have hβα : βα = idR := (hR R (𝟙 (R.F 0))).unique
+    (by change β.app 0 ≫ α.app 0 = _; rw [hβ, hα]; exact e.inv_hom_id)
+    rfl
+  refine ⟨⟨α.app q, β.app q, ?_, ?_⟩⟩
+  · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom T T ↦ f.app q) hαβ
+  · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom R R ↦ f.app q) hβα
+
+set_option linter.style.haveILetI false in
+set_option linter.unusedVariables false in
 /-- Continuous inhomogeneous cochains compute the right derived functors of invariants.
 The existential complex is specified by linear equivalences of its terms with continuous
 maps from `G^n` to the discrete module, its maps on coefficients, and its inhomogeneous
@@ -99,6 +147,63 @@ theorem continuousCochains_derived_invariants
               ∀ q : ℕ, Nonempty ((@Functor.rightDerived _ _ _ _ h _ _ V a q) ≅
                 F ⋙ HomologicalComplex.homologyFunctor (ModuleCat.{max u w} A)
                   (ComplexShape.up ℕ) q) := by
-  sorry
+  classical
+  dsimp only
+  let h := Classical.choose (discreteModules_abelian.{u, v, max u w} G A)
+  letI := h
+  letI : Preadditive (DiscreteContinuousRep.{v, u, max u w} A G) := h.toPreadditive
+  letI : Preadditive (ModuleCat.{max u w} A) :=
+    (inferInstance : Abelian (ModuleCat.{max u w} A)).toPreadditive
+  letI := (Classical.choose_spec
+    (discreteModules_abelian.{u, v, max u w} G A)).choose_spec.1
+  letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, TopologicalSpace M.obj.V :=
+    fun _ ↦ ⊥
+  letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, DiscreteTopology M.obj.V :=
+    fun _ ↦ ⟨rfl⟩
+  letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G,
+      ContinuousConstSMul A M.obj.V :=
+    fun _ ↦ ⟨fun _ ↦ continuous_of_discreteTopology⟩
+  obtain ⟨F, e, hmap, hd, T, hTF⟩ :=
+    continuousCochains_deltaFunctor.{u, v, w} G A
+  obtain ⟨V, a, t, ht, hlim, ⟨hzero⟩⟩ :=
+    continuousCochains_invariants_zero.{u, v, w} G A F e hmap hd
+  letI : V.Additive := a
+  letI : PreservesFiniteLimits V := hlim
+  obtain ⟨R, hRF, hR, ⟨hRzero⟩⟩ := V.exists_universal_rightDerived_deltaFunctor
+  have hTuniv : T.IsUniversal := by
+    apply effaceable_deltaFunctor_isUniversal
+    intro q hq M
+    obtain ⟨D, eD, ι, hD, _, _, hinj⟩ :=
+      exists_coinduced_discrete_embedding.{u, v, w} G A
+    have hm : Mono (ι.app M) := by
+      constructor
+      intro Z f g hfg
+      apply ObjectProperty.hom_ext
+      apply Rep.hom_ext
+      apply Representation.IntertwiningMap.ext
+      apply LinearMap.ext
+      intro x
+      apply hinj M
+      exact congrArg (fun k ↦ k.hom.hom x) hfg
+    refine ⟨D.obj M, ι.app M, hm, ?_⟩
+    have hz := coinducedContinuousCochains_isZero.{u, v, max u w} G A M (D.obj M)
+      (eD M) (hD M) (F.obj (D.obj M))
+      (fun n ↦ (e (D.obj M) n).trans
+        (continuousLocallyConstantEquiv A (Fin n → G) (D.obj M).obj.V))
+      (hd (D.obj M)) q hq
+    rw [hTF]
+    exact hz.eq_of_tgt _ _
+  have hTzero : T.F 0 ≅ V := by
+    rw [hTF]
+    exact hzero
+  have hRzero' : R.F 0 ≅ V := by
+    rw [hRF]
+    exact hRzero
+  refine ⟨V, a, t, ht, F, e, hmap, hd, ?_⟩
+  intro q
+  obtain ⟨eqiso⟩ := universalDeltaFunctor_iso T R hTuniv hR
+    (hTzero ≪≫ hRzero'.symm) q
+  rw [hTF, hRF] at eqiso
+  exact ⟨eqiso.symm⟩
 
 end Rep

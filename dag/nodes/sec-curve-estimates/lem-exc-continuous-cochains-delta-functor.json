@@ -1,0 +1,123 @@
+{
+ "id": "lem-exc-continuous-cochains-delta-functor",
+ "kind": "statement",
+ "title": "Continuous cochains form a delta-functor",
+ "statement": "Let $G$ be a compact Hausdorff totally disconnected topological group and $A$ a finite ring. Let $\\mathcal C$ be the abelian category of left $A$-modules with $A$-linear $G$-action and open stabilizers [lem-exc-discrete-modules-abelian]. There is a functor $F:\\mathcal C\\to\\operatorname{CochainComplex}(A\\text{-Mod},\\mathbb N)$ whose degree-$n$ term is naturally linearly equivalent to $\\operatorname{Cont}(G^n,M)$, with $M$ discrete. Its coefficient maps are postcomposition by equivariant linear maps. Its differential is $d^0m(g)=gm-m$ and $d^nf(g_1,\\ldots,g_{n+1})=g_1f(g_2,\\ldots,g_{n+1})+\\sum_{j=1}^n(-1)^jf(g_1,\\ldots,g_jg_{j+1},\\ldots,g_{n+1})+(-1)^{n+1}f(g_1,\\ldots,g_n)$. There is a cohomological delta-functor $T$ [def-weil-pbc-delta-functor] with $T^q=F\\circ H^q$ in every degree. No effaceability or derived-invariants comparison is asserted.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, displayed differential and the paragraph asserting a cohomological delta-functor"
+ },
+ "stmt_deps": [
+  "lem-exc-discrete-modules-abelian",
+  "def-weil-pbc-delta-functor"
+ ],
+ "proof": [
+  {
+   "text": "Construct continuous cochain terms and differentials explicitly. Continuity of the action follows from open stabilizers; finite sums preserve continuity. The bar differential squares to zero by pairwise cancellation. Postcomposition commutes with the differential. Linearity implies additivity of the resulting functors.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply continuousCochains_shortExact to each short exact coefficient sequence. Its term equivalences give cochain isomorphisms to the constructed complexes, since both differentials have the specified formula. These isomorphisms identify the induced arrows by postcomposition and transfer short exactness. The homology sequence supplies connecting maps and exactness at each position, and homology sequence naturality supplies the connecting-map axiom. In degree zero there are no incoming boundaries, so an injective cochain map induces an injective homology map. These maps and additive homology functors give the asserted delta-functor.",
+   "uses": [
+    "lem-exc-continuous-cochains-short-exact",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "def-weil-pbc-delta-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-continuous-cochains-short-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "def-weil-pbc-delta-functor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, displayed differential and the paragraph asserting a cohomological delta-functor"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "continuous cochains of profinite groups compute right derived invariants for discrete modules",
+   "date": "2026-10-12",
+   "results": "continuousCohomology; ContinuousCohomology.homogeneousCochains; ContinuousCohomology.continuousCohomologyZeroIso; ContinuousCohomology.invariants; ContinuousCohomology.MultiInd.functor; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; ContinuousCohomology.MultiInd.complex; ContinuousCohomology.instLinearActionTopModuleCatInvariants",
+   "verdict": "No exact match: the returned continuous cohomology is in topological modules; abstract-group invariants require a different category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous cochain cohomology is an effaceable cohomological delta functor on discrete profinite group modules",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\"",
+   "date": "2026-10-12",
+   "results": "continuousCohomology; ContinuousCohomology.cocycles; ContinuousCohomology.π; ContinuousCohomology.cocyclesMap_id; ContinuousCohomology.map_id; ContinuousCohomology.cocyclesMap; ContinuousCohomology.map; ContinuousCohomology.resolutionMap_id",
+   "verdict": "No exact match: the returned continuous cohomology is in topological modules; abstract-group invariants require a different category."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCohomology|cohomolog.*invariants",
+   "date": "2026-10-12",
+   "results": "Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+   "verdict": "No exact match: the returned continuous cohomology is in topological modules; abstract-group invariants require a different category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.ContinuousCochainsDerivedInvariants",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-exc-continuous-cohomology",
+   "place": "Tag 0DVG, displayed differential and the paragraph asserting a cohomological delta-functor",
+   "via": [
+    "lem-exc-cochains-derived-invariants"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ContinuousCochainsDeltaFunctor",
+  "declaration": "Rep.continuousCochains_deltaFunctor",
+  "file": "lean/Sheaf/RepresentationTheory/ContinuousCochainsDeltaFunctor.lean",
+  "statement": "theorem continuousCochains_deltaFunctor (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] : let h := Classical.choose (discreteModules_abelian.{u, v, max u w} G A) letI := h letI : Preadditive (DiscreteContinuousRep.{v, u, max u w} A G) := h.toPreadditive letI : Preadditive (ModuleCat.{max u w} A) := (inferInstance : Abelian (ModuleCat.{max u w} A)).toPreadditive letI := (Classical.choose_spec (discreteModules_abelian.{u, v, max u w} G A)).choose_spec.1 letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, TopologicalSpace M.obj.V := fun _ ↦ ⊥ letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, DiscreteTopology M.obj.V := fun _ ↦ ⟨rfl⟩ letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, ContinuousConstSMul A M.obj.V := fun _ ↦ ⟨fun _ ↦ continuous_of_discreteTopology⟩ ∃ F : DiscreteContinuousRep.{v, u, max u w} A G ⥤ CochainComplex (ModuleCat.{max u w} A) ℕ, ∃ e : ∀ (M : DiscreteContinuousRep.{v, u, max u w} A G) (n : ℕ), (F.obj M).X n ≃ₗ[A] C(Fin n → G, M.obj.V), (∀ (M N : DiscreteContinuousRep.{v, u, max u w} A G) (f : M ⟶ N) (n : ℕ) (x : (F.obj M).X n) (g : Fin n → G), e N n (((F.map f).f n).hom x) g = f.hom.hom (e M n x g)) ∧ (∀ (M : DiscreteContinuousRep.{v, u, max u w} A G) (n : ℕ) (x : (F.obj M).X n) (g : Fin (n + 1) → G), e M (n + 1) (((F.obj M).d n (n + 1)).hom x) g = M.obj.ρ (g 0) (e M n x (fun k ↦ g k.succ)) + ∑ k : Fin (n + 1), (-1 : ℤ) ^ (k.val + 1) • e M n x (Fin.contractNth k (· * ·) g)) ∧ ∃ T : CohomologicalDeltaFunctor (DiscreteContinuousRep.{v, u, max u w} A G) (ModuleCat.{max u w} A), T.F = (fun q ↦ F ⋙ HomologicalComplex.homologyFunctor (ModuleCat.{max u w} A) (ComplexShape.up ℕ) q)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085230-L-10693",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085230-L-10693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
