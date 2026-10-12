@@ -12,16 +12,34 @@
  ],
  "proof": [
   {
-   "text": "Form the termwise sum S_0 of F_n, its shift map induced by s_n, and p:S_0→L induced by i_n. The sequence 0→S_0 --(1-shift)→S_0 --p→L→0 is degreewise exact. Injectivity follows recursively from the component at zero. Exhaustion gives surjectivity. A finite tuple in ker p is congruent modulo im(1-shift) to one component at a common later filtration stage; monicity of that stage inclusion makes this component zero.",
+   "text": "Index the complex coproduct by ULift ℕ from the outset. Define a on its n-th summand as the coprojection minus step n followed by the next coprojection, and define b as the sum of the inclusions into L. Coproduct extensionality and compatibility prove a followed by b is zero.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Remark 15.60.11 (Tag 09PB)"
+    "place": "Remark 09PB (remark-P-resolution), displayed telescope triangle"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to the short exact sequence. Use [lem-pc-derived-module-direct-sums] to identify Q(S_0) with a derived coproduct; reindex along ULift ℕ≃ℕ.",
+   "text": "The fully proved private helper telescope_injective computes the zero-th and successor components of a on finitely supported tuples. If a x is zero, induction on the component number shows every component of x is zero. The fully proved private helper telescope_kernel passes to the quotient by the image of a. A single component can be moved to any later stage without changing its quotient class or its image in L. Induction on finitely supported tuples, moving the two terms to the maximum of their stages, represents any class by one component. A tuple in the kernel of b therefore has a representative whose inclusion into L is zero; injectivity of that inclusion kills it, proving membership in the image of a.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Remark 09PB (remark-P-resolution), displayed telescope triangle"
+   }
+  },
+  {
+   "text": "The fully proved private helper filtration_telescope_shortExact identifies the evaluated categorical coproduct with the concrete direct sum using their colimit universal properties. It identifies the evaluated maps a and b with the linear maps used by telescope_injective and telescope_kernel. Evaluation preserves monomorphisms, so each inclusion is injective. Exhaustiveness supplies a preimage of every element under b. Thus every degree is short exact; HomologicalComplex.shortExact_of_degreewise_shortExact proves the complex sequence short exact.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Remark 09PB (remark-P-resolution), displayed telescope triangle"
+   }
+  },
+  {
+   "text": "Apply DerivedCategory.triangleOfSESδ and DerivedCategory.triangleOfSES_distinguished [lem-weil-pbc-complex-ses-triangle] to the short exact sequence. Use derivedModuleDirectSums [lem-pc-derived-module-direct-sums] directly with the index ULift ℕ to exhibit Q of the complex coproduct as the required derived coproduct. These are the object S, its coprojections j, and the three arrows in the conclusion; no separate reindexing is needed.",
    "uses": [
     "lem-weil-pbc-complex-ses-triangle",
     "lem-pc-derived-module-direct-sums"
@@ -29,7 +47,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Remark 15.60.11 (Tag 09PB)"
+    "place": "Remark 09PB (remark-P-resolution), displayed telescope triangle"
    }
   }
  ],
@@ -38,9 +56,9 @@
   "lem-pc-derived-module-direct-sums"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "V1 stage-3 worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Remark 15.60.11 (Tag 09PB)"
+  "place": "Remark 09PB (remark-P-resolution), displayed telescope triangle; the omitted degreewise algebra is expanded by the worker and fully proved in Lean using private helpers."
  },
  "mathlib_searches": [
   {
@@ -109,10 +127,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T053941-L-2639183",
-  "kind": "interface",
+  "landing": "20261012T085352-L-44694",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
