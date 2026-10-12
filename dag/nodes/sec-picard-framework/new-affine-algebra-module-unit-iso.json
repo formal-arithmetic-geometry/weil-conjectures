@@ -16,24 +16,29 @@
  ],
  "proof": [
   {
-   "text": "Identify the canonical left adjoint with tensor pullback for g by its Hom adjunction. Associativity identifies this pullback with the two tensor operations in the affine module correspondence. Its unit is beta: both are adjoint to the tensor unit s mapped to s tensor 1. The correspondence proves beta invertible on quasi-coherent algebra modules. Transport the unit across the unique adjunction-compatible isomorphism of left adjoints; its image under G is invertible too. The same tensor calculation covers zero rings and modules.",
+   "text": "Obtain the two tensor functors, pinned comparison maps and β from affine_module_correspondence. Apply the tensor Hom-bijection theorem to these witnesses.",
+   "uses": [
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-sc-affine-module-tensor-hom-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form each Hom equivalence with Equiv.ofBijective applied to a↦β_M followed by R(a). Left naturality follows from β.naturality and functoriality of R; right naturality follows from associativity and R.map_comp. Adjunction.mkOfHomEquiv gives an adjunction with unit β, since the image of id is β. The affine correspondence makes this unit invertible at each quasi-coherent M. Finally use unit_leftAdjointUniq_hom_app to express the canonical unit as β followed by R of the unique left-adjoint comparison isomorphism. Functors preserve isomorphisms and compositions of isomorphisms are isomorphisms.",
    "uses": [
     "lem-weil-pbc-affine-module-correspondence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-module-correspondence"
+  "lem-weil-pbc-affine-module-correspondence",
+  "lem-sc-affine-module-tensor-hom-bijective"
  ],
  "proof_origin": {
-  "by": "R2 stage 3",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW proof; Tag 01SB (read online)"
+  "place": "Tag 0AVW proof, ordinary unit step; tensor Hom-bijection refinement of Tag 01SB elucidation"
  },
  "mathlib_searches": [
   {
@@ -120,9 +125,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T131310-L-1354875",
-  "kind": "interface"
+  "landing": "20261012T163618-L-2786843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

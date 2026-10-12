@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-affine-module-tensor-hom-bijective",
+ "kind": "statement",
+ "title": "Hom bijection for the two affine-module tensor operations",
+ "statement": "Let f:U→X be a morphism of schemes [def-pc-scheme], put A=f_*O_U, and let R be direct image to A-modules and S restriction of A-modules to O_X-modules [def-weil-sheaf-of-modules-category]. Use the canonical inverse-image modules and ring adjunction unit [def-weil-pbc-topological-inverse-image]. Let B be a sheaf of commutative rings on U, b:O_U→B, t:f⁻¹A→B and ε:B→O_U, with tε equal to the ring adjunct of id_A. Let P and H be functors on module sheaves with object equalities pobj:P(G)=B⊗_(f⁻¹A) f⁻¹G and hobj:H(G)=O_U⊗_B P(G), using sheafified sectionwise scalar extension [def-pur-sheaf-tensor-product]. Let κ:P followed by restriction along b ≅ S followed by tensorPullback(f), and γ:S followed by tensorPullback(f)→H. Use the canonical tensor-pullback adjunction [lem-pc-module-pullback-adjunction] and its unit u. Require that, for all G,V,g, pobj(κ⁻¹(u_(SG)(g)))=θ_t(1⊗η_G(g)), and for all G,W,p, hobj(γ_G(κ_G(p)))=θ_ε(1⊗p), where θ denotes the module sheafification unit. Let β:id→H followed by R be a natural transformation whose image under S is the ordinary tensor-pullback adjunct of γ_G. Then for every A-module sheaf G and O_U-module sheaf F, the function Hom(HG,F)→Hom(G,RF), a↦β_G followed by R(a), is bijective. No affineness or quasi-coherence is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SB, morphisms-lemma-affine-equivalence-modules, elucidation; Tags 008A and 008Y for its Hom adjunction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-topological-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "For each algebra module G and structure-sheaf module F, transport Hom(HG,F) along hobj and apply the scalar-extension Hom bijection for ε, obtaining Hom(PG,Res_ε F). Transport along pobj and apply the scalar-extension Hom bijection for t to obtain Hom(f⁻¹G,Res_t Res_ε F).",
+   "uses": [
+    "lem-pc-module-change-of-rings-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse-image module Hom bijection to identify the last Hom set with Hom(G,f_*(Res_t Res_ε F)). The scalar map is η_A followed by f_*(t ε). Since t ε is the inverse ring adjunct of the identity of A, the ring Hom equivalence identity identifies this scalar map with the identity of A. Hence the final module is RF.",
+   "uses": [
+    "lem-pc-module-inverse-image-adjunction",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section formula for the composite Hom bijection is a evaluated on θ_ε(1⊗θ_t(1⊗η_G(g))). The hP formula expresses the inner section as pobj applied to κ inverse applied to the ordinary tensor-pullback unit. The hH formula expresses the outer section as hobj applied to γκ on that section. Cancel both equality transports and κκ inverse; this is a evaluated on γ applied to the ordinary pullback unit. By hβ and the ordinary adjunction Hom formula it is β_G followed by R(a). Thus the indicated function is the composite of the bijections in the preceding steps and is bijective.",
+   "uses": [
+    "lem-pc-module-change-of-rings-adjunction",
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "lem-pc-module-change-of-rings-adjunction",
+  "lem-pc-module-inverse-image-adjunction",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SB, morphisms-lemma-affine-equivalence-modules, elucidation; Tags 008A and 008Y for its Hom adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hom bijection for tensor extension of scalars and inverse image of sheaf modules",
+   "results": "Service unavailable: Internal Server Error. No verdict about matching lemmas.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compose sheaf extension of scalars adjunctions with inverse image to identify unit of affine direct image algebra adjunction",
+   "results": "Generic pushforward and pullback unit formulas, including SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app and pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; none identifies these two concrete tensor operations with β.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine_module_tensor_hom_bijective|changeOfRings.*homEquiv|moduleInverseImageAdjunction",
+   "results": "No Mathlib match. Additional rg of project modules found the component change-of-rings and inverse-image Hom adjunctions, but no composite β Hom bijection.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionUnitIso",
+  "date": "2026-10-12",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine restriction-of-scalars/sheaf adjunction in the first proof paragraph; ordinary affine algebra adjunction underlying its derived-equivalence refinement.",
+   "via": [
+    "new-affine-algebra-module-unit-iso",
+    "lem-sc-affine-algebra-module-adjunction-isos",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModuleTensorHomBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModuleTensorHomBijective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_module_tensor_hom_bijective",
+  "statement": "theorem affine_module_tensor_hom_bijective (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf) (ht : t ≫ ε = e₀) (P : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B)) (pobj : ∀ G, P.obj G = SheafOfModules.changeOfRings.{u, u, u} t (I G)) (κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f) (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (hobj : ∀ G, H.obj G = SheafOfModules.changeOfRings.{u, u, u} ε (P.obj G)) (γ : S ⋙ tensorPullback f ⟶ H) (hP : (∀ (G : SheafOfModules.{u} (𝓡 A)) (V : (Opens X)ᵒᵖ) (g : G.val.obj V), ((eqToHom (pobj G)).val.app ((Opens.map f.base).op.obj V)) ((κ.inv.app G).val.app ((Opens.map f.base).op.obj V) (((adj₀).unit.app ((S).obj G)).val.app V g)) = ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t (I G))).app ((Opens.map f.base).op.obj V) ((1 : B.obj.obj ((Opens.map f.base).op.obj V)) ⊗ₜ[(IA).obj.obj ((Opens.map f.base).op.obj V),(t.hom.app ((Opens.map f.base).op.obj V)).hom] (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g)))) (hH : (∀ (G : SheafOfModules.{u} (𝓡 A)) (W : (Opens U)ᵒᵖ) (p : (P.obj G).val.obj W), ((eqToHom (hobj G)).val.app W) ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) = ((PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app (SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε (P.obj G))).app W ((1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W,(ε.hom.app W).hom] p))) (β : 𝟭 (SheafOfModules.{u} (𝓡 A)) ⟶ H ⋙ R) (hβ : ∀ G : SheafOfModules.{u} (𝓡 A), (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) : ∀ (G : SheafOfModules.{u} (𝓡 A)) (F : U.Modules), Function.Bijective (fun a : H.obj G ⟶ F ↦ β.app G ≫ (R).map a)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T163618-L-2786843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T163618-L-2786843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
