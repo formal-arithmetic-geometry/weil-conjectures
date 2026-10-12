@@ -5922,3 +5922,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:54 L: merged deliver/A3/WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading (stage 3; reviewer PASS; first push; landing 20261012T035347-L-1583710 (interface); modules 3; new nodes 2)
 - 03:55 L: merged deliver/Z2/def-nagata-final-descended-model (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataFinalDescendedModel AlgebraicGeometry.nagataFinalDescendedComparison; statement corrected (4 citers))
 - 03:56 L: merged deliver/B2/Sheaf.ConstructibleSheaf.LocallyConstantRetraction (stage 3; reviewer PASS; first push; landing 20261012T035539-L-1594250 (interface); modules 2; new nodes 1)
+- 03:56 L: returned deliver/H1/WeilConjectures.AlgebraicGeometry.Curve.Affine (reviewer RETURN: (reviewer X-3e0c3, head 3e0c31309) H9 (import contract; stages/2-statements.md §3.7 and review point 5): the two new sor)
