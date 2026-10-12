@@ -3,6 +3,7 @@ module
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Over
 import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalizationAddEquiv
 import Sheaf.Paper.SiteRestrictionInjectives
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
@@ -34,6 +35,6 @@ theorem cohomology_over_object_localization
       (Sheaf.H' F q W ≅
         Sheaf.H' ((GrothendieckTopology.overPullback J AddCommGrpCat.{u₁} W).obj F) q
           (Over.mk (𝟙 W))) := by
-  sorry
+  exact ⟨(cohomology_over_object_localization_addEquiv F W q).some.toAddCommGrpIso⟩
 
 end CategoryTheory

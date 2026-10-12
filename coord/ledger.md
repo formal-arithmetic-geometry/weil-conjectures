@@ -7535,3 +7535,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/Q1/Sheaf.RingTheory.CompletionDimension (stage 3; reviewer PASS; first push; landing 20261012T112847-L-770754 (interface); batch 20261012T112824; modules 2; new nodes 1)
 - 11:28 L: merged deliver/Q2/Sheaf.CategoryTheory.InjectiveSplitTower (stage 3; reviewer PASS; first push; landing 20261012T112848-L-770851 (interface); batch 20261012T112824; modules 2; new nodes 1)
 - 11:28 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute (stage 3; reviewer PASS; first push; landing 20261012T112848-L-770947 (interface); batch 20261012T112824; modules 2; new nodes 2)
+- 11:28 L: merged deliver/Q3/Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization (stage 3; reviewer PASS; first push; landing 20261012T112848-L-771046 (interface); batch 20261012T112824; modules 2; new nodes 1)
