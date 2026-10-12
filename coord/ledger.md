@@ -10058,3 +10058,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:16 L: merged deliver/R2/Sheaf.AlgebraicGeometry.AffineConormalSectionsExistence (stage 3; reviewer PASS; first push; landing 20261012T231639-L-1963396 (interface); batch 20261012T231631; modules 2; new nodes 1)
 - 23:16 L: merged deliver/R2/Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineReconstruction (stage 3; reviewer PASS; first push; landing 20261012T231639-L-1963494 (interface); batch 20261012T231631; modules 3; new nodes 2)
 - 23:16 L: merged deliver/R2/Sheaf.AlgebraicGeometry.SectionRingCoefficientHom (stage 3; reviewer PASS; first push; landing 20261012T231640-L-1963593 (interface); batch 20261012T231631; modules 2; new nodes 1)
+- 23:16 L: merged deliver/R3/Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundarySquareNaturality (stage 3; reviewer PASS; first push; landing 20261012T231640-L-1963691 (proof); batch 20261012T231631; modules 1; new nodes 0)
