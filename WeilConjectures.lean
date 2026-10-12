@@ -104,6 +104,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
+public import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.AlgebraicGeometry.DensePoints
 public import WeilConjectures.AlgebraicGeometry.Descent
@@ -364,6 +365,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.Rees
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.Universal
 public import WeilConjectures.AlgebraicGeometry.SeparatedEnvelope
 public import WeilConjectures.AlgebraicGeometry.Sites.AffineRefinement
+public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
 public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension
@@ -395,6 +397,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Reduction
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Section
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
+public import WeilConjectures.AlgebraicGeometry.Sites.FieldCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.GmGenericPoint
@@ -412,6 +415,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
+public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimensionLimit
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
@@ -1516,6 +1520,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
