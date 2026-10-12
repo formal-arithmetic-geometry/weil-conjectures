@@ -30,7 +30,7 @@
    "elementary": false
   },
   {
-   "text": "Identify the scheme residue field κ(p) with p.asIdeal.ResidueField using [lem-weil-pbc-spec-residue-field-identification]; the identification commutes with π. By [def-weil-pbc-localization-at-prime] this field is R_p / pR_p. Every element lifts to R_p under the quotient map and is represented by r/s with s outside p. Its image under χ is χ(π(r)) / χ(π(s)). Here π(s) is nonzero: s/1 is a unit in R_p, so its class is a unit in the nonzero residue field; χ is an injective homomorphism of fields. Step 2 puts numerator and denominator in F, and Step 1 puts the inverse denominator in F. Their product belongs to F. Consequently every χ(b), b in κ(p), belongs to im(ψ), which is exactly the coefficient-preimage assertion needed below. This also treats nonmaximal primes; surjectivity of R -> κ(p) is not asserted.",
+   "text": "Identify the scheme residue field κ(p) with p.asIdeal.ResidueField using [lem-weil-pbc-spec-residue-field-identification], with the canonical map compatibility Spec.algebraMap_residueFieldIso_inv. The ideal residue field of [def-weil-pbc-localization-at-prime] is also a fraction field of R/p: use its Mathlib IsFractionRing instance and IsFractionRing.div_surjective to write any element as a/b with a,b in R/p. Lift a and b to R by Ideal.Quotient.mk_surjective. Ideal.algebraMap_quotient_residueField_mk identifies their images with the canonical images already in F by Step 2. Mapping the fraction under the field homomorphism η commutes with division (map_div₀); multiplication and inverse closure from Step 1 then put its image in F. Transport back through Spec.residueFieldIso to obtain χ(k) in F for every k in κ(p). This covers nonmaximal primes without asserting surjectivity of R -> κ(p).",
    "uses": [
     "lem-weil-pbc-spec-residue-field-identification",
     "def-weil-pbc-localization-at-prime"
@@ -53,7 +53,7 @@
    "elementary": false
   },
   {
-   "text": "By [def-pc-separable-polynomial], separability of g means there are U,V in k[X] with Ug + Vg' = 1. Evaluate this identity in K via χ at a0. Since g evaluates to zero, V.eval₂ χ a0 times g.derivative.eval₂ χ a0 equals 1, hence g.derivative.eval₂ χ a0 != 0. Finally derivative commutes with coefficient maps: each coefficient i*c maps to i*χ(c) because χ and ψ preserve natural-number multiples. The coefficient identity in Step 5 therefore gives f.derivative.eval₂ ψ a0 = g.derivative.eval₂ χ a0 != 0. Together with Step 5 this is the required monic polynomial and both evaluation conditions.",
+   "text": "By [def-pc-separable-polynomial], separability of g means there are U,V in k[X] with Ug + Vg' = 1. Evaluate this identity in K via χ at a0. Since g evaluates to zero, V.eval₂ χ a0 times g.derivative.eval₂ χ a0 equals 1, hence g.derivative.eval₂ χ a0 != 0. Finally derivative commutes with coefficient maps: each coefficient i*c maps to i*χ(c) because χ and ψ preserve natural-number multiples. The coefficient identity in Step 5 therefore gives f.derivative.eval₂ ψ a0 = g.derivative.eval₂ χ a0 != 0. Together with Step 5 this is the required monic polynomial and both evaluation conditions. The Lean proof uses the existing Mathlib theorem Polynomial.Separable.eval₂_derivative_ne_zero for this evaluated Bezout argument, then Polynomial.derivative_map and Polynomial.eval_map.",
    "uses": [
     "def-pc-separable-polynomial"
    ],
@@ -71,7 +71,7 @@
   "def-weil-polynomial-ring",
   "def-pc-separable-polynomial"
  ],
- "proof_origin": "Split by worker F2 from the surjectivity proof; repaired for reviewer X-1f505 C1 and C2 with explicit image-field, residue-containment, separability, coefficient-lifting, and derivative steps citing existing nodes. Second reader F2 checked the source and added the existing Mathlib monic-lifting route for step 5.",
+ "proof_origin": "Split by worker F2 from the surjectivity proof; repaired for reviewer X-1f505 C1 and C2 with explicit image-field, residue-containment, separability, coefficient-lifting, and derivative steps citing existing nodes. Second reader F2 checked the source and added the existing Mathlib monic-lifting route for step 5. Stage-3 proof by K2 uses the existing Mathlib fraction-field instance of the ideal residue field, monic coefficient lifting, and separable derivative evaluation. Second reading by K2 aligned Steps 3 and 6 with those exact APIs; all original node dependencies and the unit route are retained.",
  "status": "split",
  "created": {
   "by": "worker",
@@ -136,11 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-c0e7f",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T070536-L-3470601",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, dependency statements, report, and import-change record; both modules compile cleanly, and axioms are standard plus sorryAx from the documented polynomial-lifting theorem."
+  "landing": "20261012T085300-L-23600",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
