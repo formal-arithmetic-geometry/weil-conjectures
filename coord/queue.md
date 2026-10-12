@@ -64,7 +64,6 @@ Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelection` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralStalkEmbedding` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange` | 5 | 2 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleExactSegment` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk` | 5 | 1 | proof |
 | `Sheaf.RingTheory.StrictlyHenselianOfDimensionZero` | 5 | 1 | proof |
@@ -73,6 +72,7 @@ Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IntegralConstantModulePushforwardColimit` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology` | 6 | 1 | proof |
