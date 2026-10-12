@@ -30,10 +30,9 @@
  ],
  "proof": [
   {
-   "text": "Write $\\bar R=R/I$ and let $\\pi:R\\to\\bar R$ be the quotient map. Since $I\\subseteq\\mathfrak m$, [lem-weil-pbc-quotient-local-structure] makes $\\bar R$ local with maximal ideal $\\bar{\\mathfrak m}=\\pi(\\mathfrak m)$, and [lem-weil-pbc-surjective-image-noetherian] makes it Noetherian. If $m_1,\\ldots,m_t$ generate $M$ over $R$ [def-weil-finitely-generated-module], they generate it over $\\bar R$ too: $r m_j=\\pi(r)m_j$ because $IM=0$. Thus both depths in the statement are defined for the same finite module.",
+   "text": "Give R/I its nontrivial local ring structure using Ideal.Quotient.nontrivial_iff and IsLocalRing.of_surjective' as in [lem-weil-pbc-quotient-local-structure]. Give M the canonical quotient module structure from hIM.module and obtain Module.Finite over R/I by Module.Finite.of_restrictScalars_finite, using [def-weil-finitely-generated-module]. No Noetherian permanence theorem is needed: depth is defined for finite modules over any commutative ring.",
    "uses": [
     "lem-weil-pbc-quotient-local-structure",
-    "lem-weil-pbc-surjective-image-noetherian",
     "def-weil-finitely-generated-module"
    ],
    "elementary": true,
@@ -43,7 +42,7 @@
    }
   },
   {
-   "text": "For any list $f_1,\\ldots,f_r\\in\\mathfrak m$, put $\\bar f_j=\\pi(f_j)\\in\\bar{\\mathfrak m}$. For every $i$, the submodule $(f_1,\\ldots,f_i)M$ equals $(\\bar f_1,\\ldots,\\bar f_i)M$, because each $f_j$ and $\\bar f_j$ act identically on $M$. On the common quotient, multiplication by $f_{i+1}$ is the same endomorphism as multiplication by $\\bar f_{i+1}$. Their injectivity conditions and the condition that the final quotient is nonzero therefore agree. By [def-weil-pbc-regular-sequence], $(f_1,\\ldots,f_r)$ is $M$-regular over $R$ if and only if $(\\bar f_1,\\ldots,\\bar f_r)$ is $M$-regular over $\\bar R$. Conversely every sequence in $\\bar{\\mathfrak m}=\\pi(\\mathfrak m)$ has lifts in $\\mathfrak m$, so the two collections of possible regular-sequence lengths coincide.",
+   "text": "For any surjective algebra map between local rings with compatible actions on M, use AddEquiv.isRegular_congr for the identity additive equivalence and algebraMap_smul to transfer regular sequences [def-weil-pbc-regular-sequence]. Surjectivity lifts every list by Function.Surjective.list_map. IsLocalHom.of_surjective and maximalIdeal_comap show that each lifted element belongs to the source maximal ideal exactly when its image belongs to the target maximal ideal; map_maximalIdeal_of_surjective gives the forward inclusion [lem-weil-pbc-quotient-local-structure]. List.length_map shows equality of the sets of regular-sequence lengths.",
    "uses": [
     "def-weil-pbc-regular-sequence",
     "lem-weil-pbc-quotient-local-structure"
@@ -55,9 +54,10 @@
    }
   },
   {
-   "text": "The submodules $\\mathfrak mM$ and $\\bar{\\mathfrak m}M$ also coincide. If this common submodule is $M$, both depths are $\\infty$ by clause (2) of [def-weil-pbc-depth], including $M=0$. Otherwise clause (1) of that definition expresses each depth as the supremum of the regular-sequence lengths in its maximal ideal; these sets of lengths agree by Step 2. Hence $\\operatorname{depth}_{\\mathfrak m}(M)=\\operatorname{depth}_{\\bar{\\mathfrak m}}(M)$. For $M=R/I$, the $R$-action is the quotient action and the depth of the local ring $\\bar R$ is, by the same definition, the depth of $\\bar R$ as its own module. This gives the final assertion.",
+   "text": "In the same surjective scalar-change situation, map_maximalIdeal_of_surjective followed by Ideal.smul_restrictScalars shows that the target maximal ideal times M restricts to the source maximal ideal times M. Injectivity of restriction of scalars identifies the two conditions that this submodule is top. Unfold [def-weil-pbc-depth]: in the top case both depths are infinity, including the zero module; otherwise equality of the sets of lengths gives equality of their suprema. The proved private helper depth_eq_of_surjective packages these steps. Apply it twice to the quotient map, once to M with hIM.module, once to R/I with its canonical actions. Combine the two equalities by And.intro.",
    "uses": [
-    "def-weil-pbc-depth"
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-quotient-local-structure"
    ],
    "elementary": true,
    "source": {
@@ -68,7 +68,6 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-quotient-local-structure",
-  "lem-weil-pbc-surjective-image-noetherian",
   "def-weil-finitely-generated-module",
   "def-weil-pbc-regular-sequence",
   "def-weil-pbc-depth"
@@ -76,7 +75,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0AUK (lemma-depth-goes-down-finite) gives the conclusion for finite maps; the direct proof for quotient maps is written from Definitions Tags 00LF and 00LI"
+  "place": "Direct quotient-map proof from Definitions 00LF and 00LI, giving the quotient case of Lemma 0AUK. Formalised by R2 using Mathlib AddEquiv.isRegular_congr and Ideal.smul_restrictScalars; source read in the local Stacks mirror algebra.tex at lines 16594, 17766 and 18048."
  },
  "mathlib_searches": [
   {
@@ -182,5 +181,15 @@
   "group": "C1",
   "result": "fix",
   "note": "Noetherian local R; I ≤ m; finite R-module M; IM=0 as IsTorsionBySet; R/I-action = hIM.module, finite over R/I derived; R/I local from I≠⊤; depth_{R/I} M = depth_R M and the M=R/I case, via IsLocalRing.depth"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085329-L-35814",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
