@@ -9,14 +9,8 @@ public import Sheaf.CategoryTheory.GrothendieckComposablePair
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-import Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Sheaf.CategoryTheory.CartanEilenbergFunctorial
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.FirstQuadrantRowCollapse
-import Sheaf.Paper.CartanEilenbergLeftExactCohomology
-import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import Sheaf.CategoryTheory.CartanEilenbergPageRealization
+import Sheaf.CategoryTheory.CartanEilenbergAcyclicAbutment
 
 /-! # The Cartan--Eilenberg construction of the Grothendieck spectral sequence
 
@@ -184,6 +178,88 @@ theorem exists_grothendieck_spectralSequence_cartanEilenberg
             G.rightDerivedZeroIsoSelf.hom.app ((F.rightDerived n).obj X)) ∧
         (∀ n : ℕ, bottom n = F.grothendieckBottomEdgeMap G hFG n) ∧
         (∀ n : ℕ, left n = F.grothendieckLeftEdgeMap G hFG n)) := by
-  sorry
+  classical
+  change F.IsAcyclicComposablePair G at hFG
+  obtain ⟨M, E, L, s, e, c, k, degree, enat, smap, ek⟩ :=
+    exists_cartanEilenberg_page_realization F G
+  obtain ⟨h, HF, hnat, aug, image, stable, fnat, trunc⟩ :=
+    exists_cartanEilenberg_acyclic_abutment F G hFG E L c degree
+  have presents : ∀ X : A, ∃ P : CartanEilenbergPresentation F, P.X = X := by
+    intro X
+    let J := injectiveResolution X
+    let K := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+      (J.cocomplex.extend ComplexShape.embeddingUpNat)
+    have neg (p : ℤ) (hp : p < 0) : IsZero (K.X p) := by
+      apply F.map_isZero
+      exact J.cocomplex.isZero_extend_X ComplexShape.embeddingUpNat p (by
+        intro n hn
+        change (n : ℤ) = p at hn
+        omega)
+    obtain ⟨I, a, iz, cq, ti, hi, hq⟩ := exists_cartanEilenberg_resolution B K neg
+    exact ⟨⟨X, J, I, a, iz, cq, ti, hi, hq⟩, rfl⟩
+  refine ⟨M, E, L, s, e, h, HF, c, k, presents, ?_, degree, enat, smap,
+    hnat, aug, image, ?_, stable, fnat, ek, trunc, ?_⟩
+  · intro X r hr p q hpq
+    let Y := F.grothendieckSpectralObject G X
+    let i := (HomologicalComplex.eval C _ (p, q)).mapIso
+      ((SpectralSequence.pageFunctor C _ 2 r hr).mapIso (c X))
+    apply i.isZero_iff.mpr
+    rcases hpq with hp | hq
+    · exact Y.isZero_spectralSequence_page_X_of_isZero_H'
+        Abelian.SpectralObject.coreE₂Cohomological r hr (p, q)
+        (Y.isZero₂_of_isFirstQuadrant _ _ _ _ (by simp; omega))
+    · exact Y.isZero_spectralSequence_page_X_of_isZero_H'
+        Abelian.SpectralObject.coreE₂Cohomological r hr (p, q)
+        (Y.isZero₁_of_isFirstQuadrant _ _ _ (by simp; omega) _)
+  · intro X n
+    obtain ⟨P, hP⟩ := presents X
+    subst X
+    constructor
+    · have hz := trunc P n 0
+      simp only [Nat.cast_zero, sub_zero] at hz
+      rw [hz]
+      rw [(F.grothendieckSpectralObject G P.X).imageFiltration_eq_top _ _ (by omega)]
+      rw [Subobject.exists_iso_map, Subobject.map_top, Subobject.mk_eq_top_of_isIso]
+    · have hn : (n : ℤ) + 1 = ((n + 1 : ℕ) : ℤ) := by simp
+      rw [hn, trunc P n (n + 1)]
+      rw [(F.grothendieckSpectralObject G P.X).imageFiltration_eq_bot _ _ (by omega)]
+      rw [Subobject.exists_iso_map, Subobject.map_bot]
+  · refine ⟨F.grothendieckBottomEdgeMap G hFG, F.grothendieckLeftEdgeMap G hFG,
+      (fun X n ↦ (k X n 0).hom ≫ (F.grothendieckBottomEdge G n).app X ≫
+        (F.grothendieckSpectralObjectHBotTopIso G hFG n).hom.app X),
+      (fun X n ↦ (F.grothendieckSpectralObjectHBotTopIso G hFG n).inv.app X ≫
+        (F.grothendieckLeftEdge G n).app X ≫ eqToHom (by simp) ≫ (k X 0 n).inv),
+      ?_, (fun _ ↦ rfl), (fun _ ↦ rfl)⟩
+    intro X n
+    refine ⟨rfl, rfl, ?_, ?_⟩
+    · have ei : e X n 0 = k X n 0 ≪≫
+          (F.grothendieckSpectralObjectHIso G n 0 (n + 0 : ℕ) 0 (0 + 1)
+            (by push_cast; rfl) rfl rfl).app X := Iso.ext (ek X n 0).2
+      rw [ei]
+      simp [Functor.grothendieckBottomEdgeMap, Functor.grothendieckBottomEdgeSourceIso]
+    · rw [(ek X 0 n).2]
+      have hi (m : ℤ) (hm : m = (n : ℤ)) :
+          eqToHom (show
+            ((F.grothendieckSpectralObject G X).H (n : ℤ)).obj
+                (ComposableArrows.mk₁ (homOfLE
+                  (by simp : ((n : ℤ) : EInt) ≤ ((n + 1 : ℤ) : EInt)))) =
+              ((F.grothendieckSpectralObject G X).H m).obj
+                (ComposableArrows.mk₁ (homOfLE
+                  (by simp : ((n : ℤ) : EInt) ≤ ((n + 1 : ℤ) : EInt)))) by rw [hm]) ≫
+            (F.grothendieckSpectralObjectHIso G 0 n m n (n + 1)
+              (by omega) rfl rfl).hom.app X =
+            (F.grothendieckSpectralObjectHIso G 0 n n n (n + 1)
+              (by omega) rfl rfl).hom.app X := by
+        subst m
+        simp only [eqToHom_refl, Category.id_comp]
+      simp only [Functor.grothendieckLeftEdgeMap, NatTrans.comp_app,
+        Functor.grothendieckLeftEdgeTargetIso, Iso.trans_hom,
+        Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Category.assoc,
+        Iso.inv_hom_id_assoc]
+      simpa only [Category.assoc] using (congrArg (fun z ↦
+        (F.grothendieckSpectralObjectHBotTopIso G hFG n).inv.app X ≫
+          (F.grothendieckLeftEdge G n).app X ≫ z ≫
+            G.rightDerivedZeroIsoSelf.hom.app ((F.rightDerived n).obj X))
+        (hi (0 + n : ℕ) (by simp))).symm
 
 end CategoryTheory

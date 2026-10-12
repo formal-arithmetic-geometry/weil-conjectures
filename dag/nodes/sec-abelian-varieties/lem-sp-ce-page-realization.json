@@ -1,0 +1,142 @@
+{
+ "id": "lem-sp-ce-page-realization",
+ "kind": "statement",
+ "title": "Functorial Cartan--Eilenberg page realization without acyclicity",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal C$ be Grothendieck abelian categories with derived categories, and let $F:\\mathcal A\\to\\mathcal B$, $G:\\mathcal B\\to\\mathcal C$ be additive left exact functors [def-sp-left-exact-additive]. For the presentations $P$ of [def-sp-cartan-eilenberg-presentation], there exist a filtered page-two model $M$ [def-sp-filtered-page-two-model], a functor $E:\\mathcal A\\to E_2\\mathrm{SpectralSequence}(\\mathcal C)$, and filtrations $L_P$ on $\\operatorname{Tot}G(P.I)$ equal degreewise to the second degree filtration [def-sp-double-complex-total]. There are isomorphisms $s_P:E(P.X)\\cong M.S(\\operatorname{Tot}G(P.I),L_P)$ commuting with every presentation comparison: the filtered comparison has underlying map $\\operatorname{Tot}G(c.\\alpha)$ and $E(c.f)s_Q=s_PM.S(t)$. The page-two isomorphisms $e_X^{p,q}:E_2^{p,q}(X)\\cong R^pG(R^qF(X))$ are natural in $X$. There are isomorphisms $c_X$ of $E(X)$ with the truncation spectral sequence of $RG(RF(X))$, and first-page comparisons $k_X^{p,q}$ with $H^{p+q}(RG(\\tau_{\\ge q}\\tau_{<q+1}RF(X)))$. The map $k$ is the component of $c$ followed by the canonical spectral-object first-page isomorphism; $e$ is $k$ followed by the canonical derived single-degree truncation isomorphism. No assumption that $F$ sends injectives to $G$-acyclics is imposed.",
+ "source": {
+  "document": "Stacks Project, Derived Categories",
+  "place": "Tags 015J, 015K, 015N and 015X; CE computation, functoriality and filtered comparison"
+ },
+ "stmt_deps": [
+  "def-sp-left-exact-additive",
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtered-page-two-model",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "Construct the resolution-degree subcomplex filtration, and construct its quotient-image spectral sequence functor on filtered complexes. This construction is local in the three adjacent degrees needed for each homology object, so it works without a uniform filtration bound on the entire complex.",
+   "uses": [
+    "def-sp-filtered-page-two-model",
+    "def-sp-double-complex-total",
+    "lem-sp-filtered-complex-ZB-description"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an injective and CE presentation of each object. Lift maps through the injective resolutions and the CE resolutions, and use independence of comparison maps to enforce identity, composition, and comparison with every presentation, defining E and s.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-exists",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "lem-sp-cartan-eilenberg-comparison-independence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The horizontal cycles and boundaries are injective, so their short exact sequences split. G preserves the splittings and identifies horizontal cohomology with G of that cohomology. These cohomology complexes resolve R^qF(X). Normalize the resolution differential sign by multiplying the term of degree j by (-1)^(qj), then compute R^pG and its naturality.",
+   "uses": [
+    "lem-sp-cart-eilenberg-left-exact-cohomology",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Dec(V)^a Tot(I)^n = {x in V^(a+n) : dx in V^(a+n+1)}. The augmentation of tau_{<=q} F(J) lies in Dec(V)^(-q). The CE resolutions of cycles, boundaries and homology make the graded comparison a quasi-isomorphism. The degreewise Dec filtration has injective graded terms and split steps, by the injectivity of the horizontal cycles and boundaries, so it is a filtered injective resolution of the canonical truncation filtration. Compare filtered injective computations before applying G; G preserves comparison homotopies by additivity. Tag 015X identifies the result with the truncation construction. The Dec cycle/boundary equations identify its first page with the original second page; connecting maps use the same differential. Define k using this comparison and e using the derived single-degree truncation natural isomorphism, obtaining both displayed equations and naturality.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-page-two-model",
+  "def-sp-double-complex-total",
+  "lem-sp-filtered-complex-ZB-description",
+  "lem-sp-cartan-eilenberg-exists",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-cartesian-eilenberg-functorial",
+  "lem-sp-cartan-eilenberg-comparison-independence",
+  "lem-sp-cart-eilenberg-left-exact-cohomology",
+  "lem-sp-derived-well-defined",
+  "def-sp-cartan-eilenberg-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories",
+  "place": "Tags 015J, 015K, 015N and 015X; expanded comparison and sign details by S2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck spectral sequence Cartan Eilenberg resolution comparison with truncation spectral object",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, DerivedCategory.triangleOfSESδ, HomotopyCategory.spectralObjectMappingCone_ω₁",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "GrothendieckSpectral|CartanEilenberg",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartan Eilenberg filtered total complex comparison truncation Grothendieck spectral sequence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.GrothendieckSpectralSequence",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Proof, second spectral sequence and functoriality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergPageRealization",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergPageRealization.lean",
+  "declaration": "CategoryTheory.exists_cartanEilenberg_page_realization",
+  "statement": "theorem exists_cartanEilenberg_page_realization {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B] {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C] [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C] (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteLimits G] : ∃ (M : FilteredPageTwoModel C) (E : A ⥤ E₂CohomologicalSpectralSequence C) (L : ∀ P : CartanEilenbergPresentation F, DecreasingFiltration (P.total G)) (s : ∀ P : CartanEilenbergPresentation F, E.obj P.X ≅ M.S.obj (⟨P.total G, L P⟩ : FilteredObject (CochainComplex C ℤ))) (e : ∀ (X : A) (p q : ℕ), ((E.obj X).page 2).X ((p : ℤ), (q : ℤ)) ≅ (G.rightDerived p).obj ((F.rightDerived q).obj X)) (c : ∀ X : A, E.obj X ≅ (F.grothendieckSpectralObject G X).E₂SpectralSequence) (k : ∀ (X : A) (p q : ℕ), ((E.obj X).page 2).X ((p : ℤ), (q : ℤ)) ≅ ((F.grothendieckSpectralObject G X).H (p + q : ℕ)).obj (ComposableArrows.mk₁ (homOfLE (by simp : ((q : ℤ) : EInt) ≤ ((q + 1 : ℤ) : EInt))))), (∀ (P : CartanEilenbergPresentation F) (p n : ℤ), (L P).complexStep p n = ((((CartanEilenbergPresentation.mappedFunctor G).obj P.I).secondFiltration n).step p)) ∧ (∀ (X Y : A) (f : X ⟶ Y) (p q : ℕ), ((E.map f).hom 2).f ((p : ℤ), (q : ℤ)) ≫ (e Y p q).hom = (e X p q).hom ≫ (F.rightDerived q ⋙ G.rightDerived p).map f) ∧ (∀ (P Q : CartanEilenbergPresentation F) (c : P.Comparison Q), ∃ t : (⟨P.total G, L P⟩ : FilteredObject (CochainComplex C ℤ)) ⟶ (⟨Q.total G, L Q⟩ : FilteredObject (CochainComplex C ℤ)), t.hom = HomologicalComplex₂.total.map ((CartanEilenbergPresentation.mappedFunctor G).map c.α) (ComplexShape.up ℤ) ∧ E.map c.f ≫ (s Q).hom = (s P).hom ≫ M.S.map t) ∧ (∀ (X : A) (p q : ℕ), (k X p q).hom = ((c X).hom.hom 2).f ((p : ℤ), (q : ℤ)) ≫ ((F.grothendieckSpectralObject G X).spectralSequenceFirstPageXIso Abelian.SpectralObject.coreE₂Cohomological ((p : ℤ), (q : ℤ)) _ _ rfl rfl (p + q : ℕ) (by push_cast; rfl)).hom ∧ (e X p q).hom = (k X p q).hom ≫ (F.grothendieckSpectralObjectHIso G p q (p + q : ℕ) q (q + 1) (by push_cast; rfl) rfl rfl).hom.app X)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T063520-L-3159660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T063520-L-3159660",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
