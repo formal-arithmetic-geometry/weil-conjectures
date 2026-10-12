@@ -97,7 +97,7 @@ lemma mateEquiv_restrictCoextendScalarsAdj_lowerStarCompRestrictScalarsIso :
   refine NatTrans.ext (funext fun M ↦ ?_)
   simp only [mateEquiv_apply, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, Category.id_comp, Category.comp_id,
+    Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, Category.id_comp,
     lowerStarCompRestrictScalarsIso, lowerStarCompCoextendScalarsIso, Iso.refl_hom, Iso.refl_inv,
     NatTrans.id_app, CategoryTheory.Functor.map_id]
   exact (Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ).right_triangle_components
@@ -112,7 +112,8 @@ instance isIso_upperStarRestrictScalars : IsIso (upperStarRestrictScalars φ f).
   have : IsIso (conjugateEquiv ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f).comp
       (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ))
       ((Sheaf.restrictCoextendScalarsAdj Y.smallEtaleTopology φ).comp
-        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)) (upperStarRestrictScalars φ f)) := by
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f))
+        (upperStarRestrictScalars φ f)) := by
     rw [← h]
     infer_instance
   exact conjugateEquiv_of_iso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') f).comp
@@ -259,7 +260,8 @@ lemma baseChangeMap_restrictScalars (sq : CommSq e h g p)
   dsimp only [baseChangeMap, Functor.comp_obj] at hc hc' hnh ⊢
   rw [reassoc_of% hc, reassoc_of% hθ, ← CategoryTheory.Functor.map_comp_assoc, ← hg,
     CategoryTheory.Functor.map_comp, Category.assoc, hne, hsq, ← hh,
-    reassoc_of% hnh, ← CategoryTheory.Functor.map_comp, hc', CategoryTheory.Functor.map_comp]
+    reassoc_of% hnh, ← CategoryTheory.Functor.map_comp, ← CategoryTheory.Functor.map_comp]
+  exact congrArg (_ ≫ _ ≫ (Sheaf.restrictScalars Y.smallEtaleTopology φ).map ·) hc'.symm
 
 end Comp
 

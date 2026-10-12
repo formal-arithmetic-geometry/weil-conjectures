@@ -8,7 +8,7 @@ module
 public import Mathlib
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChangeComp
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.RestrictScalars
 
 /-!
@@ -186,7 +186,8 @@ lemma Etale.isIso_homologyMap_baseChange_restrictScalars (sq : IsPullback e h g 
   have h₁ : IsIso (H.map ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.map
       ((Functor.rightDerivedFunctorPlusBaseChange
         (Etale.baseChangeMap (ModuleCat.{u + 1} Λ') sq.toCommSq)).app K))) := by
-    have w := ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlusHomologyFunctorIso
+    have w := ((Sheaf.restrictScalars X.smallEtaleTopology φ)
+      |>.mapDerivedCategoryPlusHomologyFunctorIso
       q).hom.naturality ((Functor.rightDerivedFunctorPlusBaseChange
         (Etale.baseChangeMap (ModuleCat.{u + 1} Λ') sq.toCommSq)).app K)
     have : IsIso (((DerivedCategory.Plus.homologyFunctor _ q) ⋙
@@ -210,7 +211,8 @@ lemma Etale.isIso_homologyMap_baseChange_restrictScalars (sq : IsPullback e h g 
             (Sheaf.restrictScalars Y.smallEtaleTopology φ)).hom.app K))) := by
       rw [h₂]
       infer_instance
-    exact IsIso.of_isIso_comp_right _ (H.map (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.map
+    exact IsIso.of_isIso_comp_right _
+      (H.map (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.map
           ((Functor.mapDerivedCategoryPlusCompIso ((e)^*[ModuleCat.{u + 1} Λ'])
             (Sheaf.restrictScalars Y.smallEtaleTopology φ)).hom.app K)))
   -- transport along the naturality square
@@ -227,7 +229,10 @@ lemma Etale.isIso_homologyMap_baseChange_restrictScalars (sq : IsPullback e h g 
             (asIso (Etale.upperStarRestrictScalars φ e).natTrans)).hom.app K))) := by
       rw [h₃]
       infer_instance
-    exact IsIso.of_isIso_comp_right _ _
+    exact IsIso.of_isIso_comp_right _
+      (H.map (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.map
+          ((Functor.mapDerivedCategoryPlusNatIso
+            (asIso (Etale.upperStarRestrictScalars φ e).natTrans)).hom.app K)))
   -- the homology of the base change morphism of the first pasting
   have h₄ := congr_arg H.map hA
   simp only [CategoryTheory.Functor.map_comp] at h₄
@@ -242,8 +247,21 @@ lemma Etale.isIso_homologyMap_baseChange_restrictScalars (sq : IsPullback e h g 
           ((Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategoryPlus.obj K))) := by
     rw [← h₄]
     infer_instance
-  have := IsIso.of_isIso_comp_left _ _ (self := this)
-  exact IsIso.of_isIso_comp_left _ _
+  have : IsIso (H.map (((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
+        ((Functor.rightDerivedFunctorPlusBaseChange
+          (Etale.lowerStarCompRestrictScalarsIso φ g).hom).app K)) ≫
+      H.map ((Functor.rightDerivedFunctorPlusBaseChange
+        (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq)).app
+          ((Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategoryPlus.obj K))) :=
+    IsIso.of_isIso_comp_left (H.map ((Functor.mapDerivedCategoryPlusCompIso
+      (Sheaf.restrictScalars S.smallEtaleTopology φ) ((p)^*[ModuleCat.{u + 1} Λ])).hom.app
+        ((((g)_*[ModuleCat.{u + 1} Λ']).rightDerivedFunctorPlus).obj K))) _
+  have : IsIso ((Functor.rightDerivedFunctorPlusBaseChange
+      (Etale.lowerStarCompRestrictScalarsIso φ g).hom).app K) :=
+    inferInstanceAs (IsIso ((Etale.rightDerivedLowerStarRestrictScalars φ g).app K))
+  exact IsIso.of_isIso_comp_left (H.map (((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
+        ((Functor.rightDerivedFunctorPlusBaseChange
+          (Etale.lowerStarCompRestrictScalarsIso φ g).hom).app K))) _
 
 end ChangeOfRings
 
@@ -268,9 +286,10 @@ theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero (sq : IsPullback e h 
   have : IsIso ((Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology φ).counit.app F) :=
     Etale.isIso_restrictCoextendScalarsAdj_counit_app (n : Λ) F
       (Etale.natCast_smul_eq_zero_of_nsmul_eq_zero hF)
-  suffices IsIso (Etale.baseChangeHomologyMap Λ sq q (rT.obj F')) from
-    Etale.isIso_of_comm _ _ (Etale.baseChangeHomologyMap_naturality Λ sq q
-      ((Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology φ).counit.app F)).symm
+  suffices hF' : IsIso (Etale.baseChangeHomologyMap Λ sq q (rT.obj F')) from
+    @Etale.isIso_of_comm _ _ _ _ _ _ _ _ _ _ _ _
+      (Etale.baseChangeHomologyMap_naturality Λ sq q
+        ((Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology φ).counit.app F)).symm hF'
   -- the base-change map of `F'` over `Λ/nΛ` is an isomorphism, hence so is the one of `res F'`
   have key := Etale.isIso_homologyMap_baseChange_restrictScalars φ sq q
     ((DerivedCategory.Plus.singleFunctor _ 0).obj F') (hp g e h sq F')
@@ -281,7 +300,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero (sq : IsPullback e h 
     ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).naturality
       ((rT.mapDerivedCategoryPlusSingleFunctor 0).hom.app F'))
   simp only [CategoryTheory.Functor.map_comp] at w
-  exact Etale.isIso_of_comm _ _ w
+  exact @Etale.isIso_of_comm _ _ _ _ _ _ _ _ _ _ _ _ w key
 
 /-- *Filtered torsion*: to prove that the base-change map is an isomorphism at a sheaf which is
 torsion of orders invertible on `S`, it suffices to do so at the sheaves killed by a single
