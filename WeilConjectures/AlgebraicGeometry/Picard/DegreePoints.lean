@@ -122,11 +122,15 @@ which is the disjoint union of open and closed subschemes `P^d`, `d ∈ ℤ`, su
   geometrically integral over `k` (a `g`-dimensional smooth proper `k`-variety);
 * the `k`-points of `P^d` are the invertible modules of degree `d` on `X`, via the class of their
   pullback to `X ×_k k`;
+* `P^d` represents `Pic^d_{X/k}` through `e d`, compatibly with the inclusion `j d : P^d ⟶ P`
+  and the inclusion `Pic^d_{X/k} ⊆ Pic_{X/k}`: the point of `P^d` classifying a class `ℒ` of
+  fibrewise degree `d` is mapped by `j d` to the point of `P` classifying `ℒ`;
 * `P^0` is a commutative group scheme representing `Pic^0_{X/k}` compatibly with the group laws,
   and the open and closed immersion `P^0 ⟶ P` is a morphism of group schemes.
 
 This bundles `AlgebraicGeometry.isRepresentable_picardFunctor`,
-`AlgebraicGeometry.exists_decomposition_picardFunctor_isMonHom`,
+`AlgebraicGeometry.exists_decomposition_picardFunctor_representableBy`,
+`AlgebraicGeometry.isMonHom_of_isPicardMul`,
 `AlgebraicGeometry.isProper_of_representableBy_picardFunctorDegree`,
 `AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctorDegree`,
 `AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree` and
@@ -146,6 +150,11 @@ theorem theorem_of_the_base [IsSepClosed k]
       (∀ d, IsClopen (Set.range (j d).left.base)) ∧
       (∀ d d', d ≠ d' → Disjoint (Set.range (j d).left.base) (Set.range (j d').left.base)) ∧
       (⋃ d, Set.range (j d).left.base) = Set.univ ∧
+      (∀ d {T : Over (Spec (.of k))} (L : (picardPresheaf (X ↘ Spec (.of k))).obj (.op T))
+        (hL : L ∈ (picardSubfunctorDegree (X ↘ Spec (.of k)) d).obj (.op T)),
+        (e d).homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+            (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor).app (.op T) ⟨L, hL⟩) ≫
+          j d = hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app (.op T) L)) ∧
       (∀ d, IsProper (Pd d).hom ∧ SmoothOfRelativeDimension (arithmeticGenus k X) (Pd d).hom ∧
         GeometricallyIntegral (Pd d).hom) ∧
       ∀ d, ∃ Φ : {L : X.Pic // picDegreeHom k X L = .ofAdd d} ≃
@@ -155,9 +164,14 @@ theorem theorem_of_the_base [IsSepClosed k]
             ⟨Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) L.1,
               h⟩ := by
   obtain ⟨P, -, hP, -⟩ := isRepresentable_picardFunctor (X ↘ Spec (.of k))
-  obtain ⟨_, Pd, j, e, _, hPm, he, hj₀, h₁, h₂, h₃, h₄⟩ :=
-    exists_decomposition_picardFunctor_isMonHom P hP
-  refine ⟨P, hP, inferInstance, Pd, j, e, inferInstance, hPm, he, hj₀, h₁, h₂, h₃, h₄,
+  obtain ⟨Pd, j, e, h₁, -, h₂, h₃, h₄, hj⟩ :=
+    exists_decomposition_picardFunctor_representableBy P hP
+  obtain ⟨_, hPm⟩ := exists_commGrpObj_isPicardMul (X ↘ Spec (.of k)) hP
+  obtain ⟨_, he⟩ := exists_commGrpObj_isPicardZeroMul (X ↘ Spec (.of k)) (e 0)
+  have hj₀ : IsMonHom (j 0) :=
+    isMonHom_of_isPicardMul _ hP hPm (e 0) he (fun L M hL hM ↦ by
+      simpa using mul_mem_picardSubfunctorDegree (X ↘ Spec (.of k)) hL hM) (j 0) (hj 0)
+  refine ⟨P, hP, inferInstance, Pd, j, e, inferInstance, hPm, he, hj₀, h₁, h₂, h₃, h₄, hj,
     fun d ↦ ⟨isProper_of_representableBy_picardFunctorDegree d _ (e d),
       smoothOfRelativeDimension_of_representableBy_picardFunctorDegree d _ (e d),
       geometricallyIntegral_of_representableBy_picardFunctorDegree d _ (e d)⟩, fun d ↦ ?_⟩

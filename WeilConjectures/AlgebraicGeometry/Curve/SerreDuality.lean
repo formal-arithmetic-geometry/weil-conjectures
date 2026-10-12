@@ -653,6 +653,10 @@ trace identification `exists_isIso_pushforwardHomObjComparison_unit`; the genera
 since `ℳ` is a direct summand of a free module of finite rank over the affine opens `f⁻¹V`
 (`Modules.isIso_pushforwardHomObjComparison_of_isIso_unit`).
 
+The hypothesis `hf` (`f` generically unramified, i.e. `k(X)/k(t)` separable) is not in the
+blueprint statement; it is needed since the trace of differentials vanishes for inseparable `f`,
+see `exists_isIso_pushforwardHomObjComparison_unit`.
+
 (blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
 theorem exists_isIso_pushforwardHomObjComparison (f : X ⟶ ProjectiveLine (Spec (.of k)))
     [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
@@ -668,7 +672,8 @@ theorem exists_isIso_pushforwardHomObjComparison (f : X ⟶ ProjectiveLine (Spec
 over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. Then
 `Hom_{𝒪_{ℙ¹}}(f_* ℳ, Ω¹_{ℙ¹_k/k}) ≅ f_* Hom_{𝒪_X}(ℳ, Ω¹_{X/k})` as sheaves of modules on `ℙ¹_k`,
 naturally in finite locally free `ℳ`: the isomorphism `φ ↦ τ ∘ f_* φ` of
-`exists_isIso_pushforwardHomObjComparison`.
+`exists_isIso_pushforwardHomObjComparison`. The hypothesis `hf` (`f` generically unramified)
+is not in the blueprint statement; see `exists_isIso_pushforwardHomObjComparison_unit`.
 
 (blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
 theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ ProjectiveLine (Spec (.of k)))
@@ -699,6 +704,12 @@ theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ Projective
 `Hom(f_* ℳ, Ω¹_{ℙ¹}) ≅ H⁰(ℙ¹, f_* Hom(ℳ, Ω¹_{X/k})) = H⁰(X, Hom(ℳ, Ω¹_{X/k}))`
 (`Modules.pushforwardCompCohomologyFunctorZeroIso`), and `Hom(ℳ, Ω¹_{X/k}) ≅ ℳᵛ ⊗ Ω¹_{X/k}`
 since `Ω¹_{X/k}` is invertible (`Modules.dualTensorHomIso`).
+
+The hypothesis `hf` (`f` generically unramified, i.e. `k(X)/k(t)` separable) is not in the
+blueprint statement; it is needed since the isomorphism is induced by the trace of differentials,
+which vanishes for inseparable `f` (see `exists_isIso_pushforwardHomObjComparison_unit`). The
+blueprint's proof uses this separability too, and downstream a separable `f` is always chosen
+(`exists_isFinite_flat_hom_projectiveLine`).
 
 (blueprint: `lem-sc-finite-duality`) -/
 theorem nonempty_homObj_pushforward_iso (f : X ⟶ ProjectiveLine (Spec (.of k)))

@@ -99,6 +99,14 @@ over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`, unramified at 
 Grothendieck duality `f^! Ω¹_{ℙ¹} ≅ Ω¹_{X/k}` for `f`; `τ` is glued from the traces of
 differentials `c da ↦ Tr(C · dA)` over the basic opens of the standard charts of `ℙ¹_k`.
 
+The hypothesis `hf` (`f` unramified at the generic points, i.e. `k(X)/k(t)` separable) is not
+in the blueprint statement, but the blueprint's own proof uses it: the generic-point step is the
+perfect trace pairing of the separable extension `k(X) ⊇ k(t)` together with left exactness of
+the Kähler sequence. It cannot be dropped: the isomorphism is induced by the trace of
+differentials, which vanishes identically when `f` is inseparable (e.g. a Frobenius-type map),
+so for such `f` the comparison is the zero map. Downstream (`nonempty_dual_H_one_iso`) `f` is
+chosen by `exists_isFinite_flat_hom_projectiveLine`, which provides a separable `f` and `hf`.
+
 (blueprint: `lem-sc-finite-duality`, the trace identification) -/
 theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine (Spec (.of k)))
     [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
