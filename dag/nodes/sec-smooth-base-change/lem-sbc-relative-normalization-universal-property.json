@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 035I (lemma-characterize-normalization), universal property; uniqueness for affine targets from the integral-closure construction."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof_deps": [],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext",
+  "file": "Mathlib/AlgebraicGeometry/Normalization.lean",
+  "how": "Normalization.lean:377-443: normalizationDesc, toNormalization_normalizationDesc (:403), normalizationDesc_comp (:418), normalization.hom_ext (:441), one existing declaration per clause."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Extension of the generic-fibre group action: full faithfulness of generic restriction via relative normalization.",
+   "via": [
+    "lem-sbc-normal-integral-generic-hom-full",
+    "lem-sbc-finite-etale-generic-fibre-hom-extension-existence",
+    "lem-sbc-finite-etale-generic-fibre-hom-extension",
+    "lem-sbc-generic-fibre-action-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-sbc-relative-normalization-universal-property",
+ "title": "Universal property of relative normalization",
+ "statement": "Let $f:U\\to S$ be a quasi-compact quasi-separated morphism of schemes and let $U\\xrightarrow{i}N\\xrightarrow{n}S$ be its relative normalization [lem-weil-pbc-relative-normalization]. If $a:U\\to T$ and an integral morphism $q:T\\to S$ satisfy $f=q\\circ a$, there exists $d:N\\to T$ with $d\\circ i=a$ and $q\\circ d=n$. Moreover, for any affine morphism $q:T\\to S$, two morphisms $d_1,d_2:N\\to T$ with $q\\circ d_1=q\\circ d_2=n$ and $d_1\\circ i=d_2\\circ i$ are equal.",
+ "proof": [
+  {
+   "text": "Use f.normalizationDesc a q H for the morphism. The two compatibility equations are toNormalization_normalizationDesc and normalizationDesc_comp. For two morphisms into an affine target, apply normalization.hom_ext with their common structural map and their equal restrictions. These are the three conclusions of the existing Mathlib universal property; no new proof obligation is introduced.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "Y2",
+  "document": "Mathlib/AlgebraicGeometry/Normalization.lean",
+  "place": "Normalization.lean:377-443: normalizationDesc, toNormalization_normalizationDesc (:403), normalizationDesc_comp (:418), normalization.hom_ext (:441), one existing declaration per clause."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The universal property of relative normalization of a scheme morphism",
+   "results": "Service returned Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "results": "normalizationDesc and both compatibility equations, plus normalization.hom_ext (read locally).",
+   "verdict": "match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationDesc|normalization.hom_ext",
+   "results": "Read Mathlib/AlgebraicGeometry/Normalization.lean; normalizationDesc and both compatibility equations, plus normalization.hom_ext (read locally).",
+   "verdict": "match",
+   "date": "2026-10-12"
+  }
+ ],
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.AlgebraicGeometry.Normalization",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc",
+   "AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp",
+   "AlgebraicGeometry.Scheme.Hom.normalization.hom_ext"
+  ],
+  "statement": "noncomputable def normalizationDesc {X Y : Scheme} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] {T : Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y) [IsIntegralHom f₂] (H : f = f₁ ≫ f₂) : f.normalization ⟶ T",
+  "branch": "mathlib",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T135337-L-1701801",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T135337-L-1701801",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

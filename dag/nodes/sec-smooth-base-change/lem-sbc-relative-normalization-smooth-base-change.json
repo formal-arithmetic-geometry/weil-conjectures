@@ -1,0 +1,124 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03GV (lemma-normalization-smooth-base-change), normalization commutes with smooth base change."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof_deps": [],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth, AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd",
+  "file": "Mathlib/AlgebraicGeometry/Normalization.lean",
+  "how": "Normalization.lean:588-611: normalizationPullback (:588), normalizationPullback_snd (:595), and the smooth-base-change IsIso instance (:611)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Extension of the generic-fibre group action: full faithfulness of generic restriction via relative normalization.",
+   "via": [
+    "lem-sbc-normal-integral-generic-hom-full",
+    "lem-sbc-finite-etale-generic-fibre-hom-extension-existence",
+    "lem-sbc-finite-etale-generic-fibre-hom-extension",
+    "lem-sbc-generic-fibre-action-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-sbc-relative-normalization-smooth-base-change",
+ "title": "Relative normalization commutes with smooth base change",
+ "statement": "Let $f:U\\to S$ be a quasi-compact quasi-separated morphism of schemes, $g:X\\to S$ a smooth morphism, and $U\\xrightarrow{i}N\\xrightarrow{n}S$ the relative normalization [lem-weil-pbc-relative-normalization]. Let $k:U\\times_S X\\to X$ be the second projection and $N_k\\to X$ its relative normalization. The canonical comparison $c:N_k\\to N\\times_S X$ is an isomorphism, and its composite with the second projection $N\\times_S X\\to X$ equals the normalization morphism $N_k\\to X$.",
+ "proof": [
+  {
+   "text": "The canonical comparison is f.normalizationPullback g. Its being an isomorphism is the instance instIsIsoNormalizationPullbackOfSmooth. Its equation over X is normalizationPullback_snd. Apply these two existing Mathlib declarations, with no additional assumption on U or S.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "kind": "from-source",
+  "by": "Y2",
+  "document": "Mathlib/AlgebraicGeometry/Normalization.lean",
+  "place": "Normalization.lean:588-611: normalizationPullback (:588), normalizationPullback_snd (:595), and the smooth-base-change IsIso instance (:611)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalization commutes with smooth base change",
+   "results": "Service returned Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalizationPullback",
+   "results": "instIsIsoNormalizationPullbackOfSmooth and normalizationPullback_snd.",
+   "verdict": "match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPullback|Normalization commutes",
+   "results": "Read Mathlib/AlgebraicGeometry/Normalization.lean; instIsIsoNormalizationPullbackOfSmooth and normalizationPullback_snd.",
+   "verdict": "match",
+   "date": "2026-10-12"
+  }
+ ],
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.AlgebraicGeometry.Normalization",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth",
+   "AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd"
+  ],
+  "statement": "instance {X S Y : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [QuasiCompact f] [QuasiSeparated f] [Smooth g] : IsIso (f.normalizationPullback g)",
+  "branch": "mathlib",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T135337-L-1701801",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T135337-L-1701801",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
