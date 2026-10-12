@@ -24,69 +24,43 @@
  ],
  "proof": [
   {
-   "text": "Put I=ker ε. Since ε(algebraMap(c))=c, A/I is k. Induct on r using the spanning congruence and the product definition of I^r to represent every element of I^r/I^(r+1) by a homogeneous polynomial of degree r. The independence assumption makes these maps injective. They respect multiplication, giving gr_I A ≃ k[X_i].",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-    "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion"
-   }
-  },
-  {
-   "text": "Localize at I. Each I^r/I^(r+1) is annihilated by I, so every element outside I acts by the nonzero scalar ε(s); localization preserves the graded pieces. The local ring R=A_I is Noetherian, with polynomial associated graded ring and residue field k. Its dimension is the height of I.",
+   "text": "Apply AlgHom.homogeneous_independence_localization to R=A_I. It gives residue surjectivity from k, generation of the maximal ideal by the images of x_i, and the same homogeneous independence after localization.",
    "uses": [
-    "lem-weil-pbc-localization-dimension-chains-below-prime"
+    "lem-wf-homogeneous-independence-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-    "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion"
-   }
+   "elementary": false
   },
   {
-   "text": "Nakayama shows that the chosen lifts generate the maximal ideal m of R. Krull intersection shows that R is m-adically separated: apply the localization intersection lemma at m; its element f outside m is a unit, so the intersection itself is zero. When the index set is empty, Nakayama gives m=0, hence R is a field of dimension zero.",
-   "uses": [
-    "lem-weil-pbc-nakayama-local-generators",
-    "lem-weil-pbc-krull-intersection-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-    "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion"
-   }
-  },
-  {
-   "text": "For a nonempty index set choose x_1. A nonzero y has finite m-adic order. Its initial form times X_1 is nonzero in the polynomial graded ring, so x_1 y has order ord(y)+1. Thus x_1 is a nonzerodivisor, and (x_1)∩m^r=x_1 m^(r-1) for r≥1. The kernel in each degree of gr R→gr(R/(x_1)) is therefore the degree-r part of (X_1). Thus the quotient has polynomial graded ring on one fewer variable.",
+   "text": "Choose an equivalence of the finite index set with Fin n; renaming polynomials preserves homogeneity, evaluation and independence. Prove the local dimension equals n by induction. For n=0 the generated maximal ideal is zero, so the local ring is a field and has dimension zero.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-    "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion"
-   }
+   "elementary": true
   },
   {
-   "text": "Induct on the number of variables, using the preceding strictness for each successive quotient. The dimension of R/(x_1) is n-1. A nonzerodivisor in the maximal ideal of a Noetherian local ring drops dimension by exactly one, hence dim R=n. Substituting dim R=ht I proves the assertion, including n=0.",
+   "text": "For n+1 variables, homogeneous_independence_quotient makes x_0 a nonzerodivisor and gives homogeneous independence in A_I/(x_0). Surjectivity of the quotient map carries the maximal ideal to the maximal ideal. Its generating family is exactly the images of x_1,...,x_n, and residue representatives from k descend to the quotient.",
+   "uses": [
+    "lem-wf-homogeneous-independence-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the induction hypothesis to the quotient, whose dimension is n. The nonzerodivisor dimension-drop theorem gives dim A_I = n+1. Finally IsLocalization.AtPrime.ringKrullDim_eq_height identifies dim A_I with height I; cancel the WithBot coercion.",
    "uses": [
     "lem-weil-pbc-dimension-quotient-nonzerodivisor",
     "lem-weil-pbc-localization-dimension-chains-below-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-    "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
   "lem-weil-pbc-localization-dimension-chains-below-prime",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-krull-intersection-localization",
-  "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+  "lem-wf-homogeneous-independence-localization",
+  "lem-wf-homogeneous-independence-quotient"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-  "place": "Proof, Dimension paragraph; ring-theoretic details supplied for the Cartier module"
+  "document": "dag/nodes/sec-algebraic-groups-lie-algebras/lem-wf-height-of-homogeneous-independence.json",
+  "place": "Y2 fully formalized the recorded steps by finite-variable induction; local Krull intersection uses the Mathlib Jacobson specialization instead of the localization-intersection module."
  },
  "mathlib_searches": [
   {
@@ -158,9 +132,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T044755-L-2040876",
+  "landing": "20261012T152348-L-2313677",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

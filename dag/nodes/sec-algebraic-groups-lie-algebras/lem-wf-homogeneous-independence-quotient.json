@@ -1,0 +1,127 @@
+{
+ "id": "lem-wf-homogeneous-independence-quotient",
+ "kind": "statement",
+ "title": "A homogeneous independent local generating family remains independent after killing one variable",
+ "statement": "Let $k$ be a field and $A$ a Noetherian commutative local $k$-algebra [def-weil-pbc-noetherian-ring, def-weil-pbc-algebra-hom-quotient], with maximal ideal $m$. Assume every residue class modulo $m$ is represented by an element of $k$. For $n\\geq0$ let $x: \\{0,\\ldots,n\\}\\to A$ generate $m$. Suppose for every $r\\geq0$ and homogeneous polynomial $f\\in k[X_0,\\ldots,X_n]$ of degree $r$ [def-weil-pbc-mv-polynomial-ring], $f(x)\\in m^{r+1}$ implies $f=0$. Then $x_0$ is a nonzerodivisor. If $q:A\\to A/(x_0)$ is the quotient map, then for every degree-$r$ homogeneous polynomial $f\\in k[X_1,\\ldots,X_n]$, $f(q(x_1),\\ldots,q(x_n))\\in (q(m))^{r+1}$ implies $f=0$.",
+ "source": {
+  "document": "dag/nodes/sec-algebraic-groups-lie-algebras/lem-wf-height-of-homogeneous-independence.json",
+  "place": "Proof steps 1–4: the expanded local dimension argument from lem-wf-same-lie-closed-subgroup, clause (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Using the finite generating family, expand any b∈m as Σ a_i x_i. Choose c_i∈k with a_i-C(c_i)∈m. Then b-ΣC(c_i)x_i∈m². Degree zero representatives follow from residue surjectivity. Induct on d using product-ideal induction on m^(d+1)=m^d m: approximate each factor by a degree-d form and a degree-one form. The error terms lie in m^(d+2). Addition preserves the representatives. Thus every a∈m^d has a homogeneous representative g of degree d with a-g(x)∈m^(d+1).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If a∈m^d but a∉m^(d+1), its representative g is nonzero. If x_0 a∈m^(d+2), subtract x_0(a-g(x))∈m^(d+2). Independence gives X_0 g=0, contradicting that the polynomial ring over a field is a domain. Thus multiplication by x_0 raises finite order by exactly one.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If x_0 a∈m^(r+1) but a∉m^r, choose its last membership degree d using Ideal.exists_mem_pow_notMem_pow_succ_of_notMem_iInf. Then d<r, contradicting the preceding order calculation. Hence x_0 a∈m^(r+1) implies a∈m^r. Krull intersection gives intersection m^r=0. If x_0 a=0, strictness puts a in every power, so a=0. The local specialization of the Jacobson-intersection lemma is Mathlib Ideal.iInf_pow_eq_bot_of_isLocalRing.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rename a degree-r form in the remaining variables into a form F not involving X_0. Lift its quotient membership: F(x)-z=x_0 b with z∈m^(r+1). For r=0, both z and (x_0) lie in m, so original independence gives F=0. For r=d+1, F(x)-z∈m^(d+1), so strictness gives b∈m^d. Represent b by a degree-d form g. Then (F-X_0 g)(x)=z+x_0(b-g(x))∈m^(d+2); independence gives F-X_0 g=0. Substitute X_0=0 and X_(i+1)=X_i to obtain f=0. This includes n=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "dag/nodes/sec-algebraic-groups-lie-algebras/lem-wf-height-of-homogeneous-independence.json",
+  "place": "Proof steps 1–4: the expanded local dimension argument from lem-wf-same-lie-closed-subgroup, clause (2); fully formalized by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A polynomial associated graded local ring quotient by one generator has homogeneous independent remaining generators",
+   "results": "Internal Server Error: service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian local algebra with polynomial associated graded: quotient by one generator preserves polynomial associated graded and generator is nonzero divisor",
+   "results": [
+    "instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing",
+    "GradedRing.GradeZero.isNoetherianRing",
+    "HomogeneousLocalization.Away.finiteType"
+   ],
+   "date": "2026-10-12",
+   "verdict": "no exact match; constituent lemmas used"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*quotient|quotient.*homogeneous|associatedGraded.*[Dd]im",
+   "results": [
+    "7 hits about homogeneous localization quotients in Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf and Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization; none states the local independence quotient lemma"
+   ],
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.HeightOfHomogeneousIndependence",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-same-lie-closed-subgroup",
+   "place": "Dimension paragraph, via lem-wf-height-of-homogeneous-independence, steps 3–4",
+   "via": [
+    "lem-wf-height-of-homogeneous-independence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-i-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.HomogeneousIndependenceQuotient",
+  "file": "lean/Sheaf/RingTheory/HomogeneousIndependenceQuotient.lean",
+  "declaration": "IsLocalRing.homogeneous_independence_quotient",
+  "statement": "theorem homogeneous_independence_quotient\n    {k A : Type*} [Field k] [CommRing A] [Algebra k A] [IsNoetherianRing A]\n    [IsLocalRing A] {n : ℕ} (x : Fin (n + 1) → A)\n    (hres : ∀ a : A, ∃ c : k, a - algebraMap k A c ∈ maximalIdeal A)\n    (hgen : maximalIdeal A = Ideal.span (Set.range x))\n    (hind : ∀ (r : ℕ) (f : MvPolynomial (Fin (n + 1)) k), f.IsHomogeneous r →\n      aeval x f ∈ maximalIdeal A ^ (r + 1) → f = 0) :\n    x 0 ∈ nonZeroDivisors A ∧\n      ∀ (r : ℕ) (f : MvPolynomial (Fin n) k), f.IsHomogeneous r →\n        aeval (fun i ↦ Ideal.Quotient.mk (Ideal.span {x 0}) (x i.succ)) f ∈\n          (Ideal.map (Ideal.Quotient.mk (Ideal.span {x 0})) (maximalIdeal A)) ^ (r + 1) →\n        f = 0",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T152348-L-2313677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T152348-L-2313677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
