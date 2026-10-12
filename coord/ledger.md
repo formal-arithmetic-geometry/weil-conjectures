@@ -6104,3 +6104,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:47 L: merged deliver/S2/Sheaf.Topology.SpectralClosedClopenDecompositionLift (stage 3; reviewer PASS; first push; landing 20261012T044754-L-2040265 (proof); batch 20261012T044734; modules 1; new nodes 0)
 - 04:47 L: merged deliver/T1/Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible (stage 3; reviewer PASS; first push; landing 20261012T044754-L-2040429 (proof); batch 20261012T044734; modules 1; new nodes 1)
 - 04:47 L: merged deliver/T1/Sheaf.Paper.FiniteHypercoverDescent (stage 3; reviewer PASS; first push; landing 20261012T044755-L-2040630 (interface); batch 20261012T044734; modules 2; new nodes 3)
+- 04:47 L: merged deliver/T2/Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres (stage 3; reviewer PASS; first push; landing 20261012T044755-L-2040744 (proof); batch 20261012T044734; modules 1; new nodes 0)

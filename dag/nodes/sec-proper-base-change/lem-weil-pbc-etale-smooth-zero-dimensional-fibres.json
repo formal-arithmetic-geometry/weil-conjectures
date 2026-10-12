@@ -29,21 +29,19 @@
  ],
  "proof": [
   {
-   "text": "*$f$ is smooth.* By [def-weil-etale-morphism] the morphism $f$ is locally of finite presentation, flat and unramified. Since $f$ is flat and unramified, [lem-weil-pbc-flat-unramified-formally-etale] shows that for every first order thickening $T\\subset T'$ of affine schemes over $S$ and every $S$-morphism $T\\to X$ there is a (unique) $S$-morphism $T'\\to X$ extending it; in particular $f$ is formally smooth [def-sbc-formally-smooth]. Being locally of finite presentation and formally smooth, $f$ is smooth by the definition [def-sbc-smooth-morphisms].",
+   "text": "Mathlib already realizes the smoothness and relative-dimension-zero clauses for an etale morphism: use its Etale instances for Smooth f and SmoothOfRelativeDimension 0 f. This uses the recorded Mathlib notions of [def-weil-etale-morphism] and [def-sbc-smooth-morphisms], without the formal-lifting detour.",
    "uses": [
     "def-weil-etale-morphism",
-    "lem-weil-pbc-flat-unramified-formally-etale",
-    "def-sbc-formally-smooth",
     "def-sbc-smooth-morphisms"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 02HM (lemma-etale-formally-etale), proof of (1)=>(2): 'An etale morphism is locally of finite presentation, flat and unramified ... Hence f is locally of finite presentation and formally etale, see Lemma 04FF'; a formally etale morphism is formally smooth by comparing Definitions 02HG and 02H0 (exactly one dotted arrow vs. at least one)"
+    "document": "Mathlib.AlgebraicGeometry.Morphisms.Etale",
+    "place": "Etale.iff_smoothOfRelativeDimension_zero and the instances SmoothOfRelativeDimension 0 f and Smooth f; Stacks Morphisms, remark after Definition 02GI"
    }
   },
   {
-   "text": "*The point is isolated in its fibre.* Let $x\\in X$, $s=f(x)$, and let $x'\\in X_s$ be the point of the fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-base-change] corresponding to $x$. Since $f$ is etale, [lem-weil-pbc-etale-fibre-discrete-separable-points] says that the underlying space of $X_s$ is discrete; in particular $\\{x'\\}$ is an open subset of $X_s$ (and the open subscheme on it is $\\operatorname{Spec}\\kappa(x')$, the spectrum of a field).",
+   "text": "For each x in X, install DiscreteTopology on the scheme-theoretic fibre f.fiber (f x) [def-pc-base-change] using the first conjunct of [lem-weil-pbc-etale-fibre-discrete-separable-points].",
    "uses": [
     "lem-weil-pbc-etale-fibre-discrete-separable-points",
     "def-pc-base-change"
@@ -51,36 +49,23 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 02GL (lemma-etale-over-field), part (2): the fibre X_s is a disjoint union of spectra of finite separable field extensions of kappa(s)"
+    "place": "Lemma 02GL(2)"
    }
   },
   {
-   "text": "*The dimension at $x'$ is $0$.* By [def-kun-dimension], $\\dim_{x'}X_s=\\min\\{\\dim U: x'\\in U\\subseteq X_s\\text{ open}\\}$. Every open $U\\ni x'$ is nonempty, so the closure of $\\{x'\\}$ in $U$ is a nonempty irreducible closed subset and gives a chain of length $0$; hence $\\dim U\\ge0$. For $U=\\{x'\\}$, open by the previous step, the only nonempty irreducible closed subset of the one-point space $U$ is $U$ itself, so every strict chain has length $0$ and $\\dim U=0$. Therefore $\\dim_{x'}X_s=0$.",
+   "text": "Let U be any open neighbourhood of f.asFiber x. The dimension of U is at most that of the ambient discrete fibre, hence at most zero, by Mathlib topologicalKrullDim_subspace_le and topologicalKrullDim_zero_of_discreteTopology. The closure in U of the singleton containing f.asFiber x is nonempty, irreducible and closed, so IrreducibleCloseds U is nonempty and Order.krullDim_nonneg_iff gives dimension at least zero. Thus every such U has dimension exactly zero. Apply topologicalKrullDimAt_eq_of_forall to the infimum in [def-kun-dimension], and assemble the three conjuncts.",
    "uses": [
     "def-kun-dimension"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, remark after Definition 02GI (line 8079: 'A morphism is etale if and only if it is smooth of relative dimension 0'), the dimension computation written out from the definition of dim_x"
-   }
-  },
-  {
-   "text": "*Conclusion.* By the first step $f$ is smooth, and by the second and third steps $\\dim_x\\bigl(X_{f(x)}\\bigr)=0$ for every $x\\in X$; this is exactly the statement that $f$ is smooth of relative dimension $0$ in the sense of [def-sbc-smooth-morphisms].",
-   "uses": [
-    "def-sbc-smooth-morphisms"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, remark after Definition 02GI (line 8079); Definition 02G2 (definition-smooth-relative-dimension)"
+    "place": "Remark after Definition 02GI; dimension calculation from the definition of local topological Krull dimension"
    }
   }
  ],
  "proof_deps": [
   "def-weil-etale-morphism",
-  "lem-weil-pbc-flat-unramified-formally-etale",
-  "def-sbc-formally-smooth",
   "def-sbc-smooth-morphisms",
   "lem-weil-pbc-etale-fibre-discrete-separable-points",
   "def-pc-base-change",
@@ -88,8 +73,8 @@
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemmas 02HM and 04FF with Definitions 02HG, 02H0 (smoothness); Morphisms (literature/stacks-project/morphisms.tex), Lemma 02GL (2) and the remark after Definition 02GI (relative dimension 0)"
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Remark after Definition 02GI and Lemma 02GL(2); the recorded Mathlib Etale instances provide smoothness and relative dimension zero, and the local dimension computation uses Mathlib subspace/discrete dimension bounds and a singleton closure."
  },
  "mathlib_searches": [
   {
@@ -174,5 +159,15 @@
   "group": "F1",
   "result": "fix",
   "note": "arbitrary f : X ⟶ S with [Etale f] (def-weil-etale-morphism); Smooth f; ∀ x, topologicalKrullDimAt (f.asFiber x) = 0 on f.fiber (f x) = X ×_S Spec κ(f x); SmoothOfRelativeDimension 0 f for the in-other-words clause; empty X vacuous"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T044755-L-2040744",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

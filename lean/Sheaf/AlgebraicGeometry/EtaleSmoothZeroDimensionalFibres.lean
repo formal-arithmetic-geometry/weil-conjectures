@@ -9,8 +9,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
-import Sheaf.AlgebraicGeometry.FlatUnramifiedFormallyEtale
-import Sheaf.AlgebraicGeometry.FormallySmooth
 
 /-!
 # An étale morphism is smooth with zero-dimensional fibres
@@ -47,6 +45,17 @@ theorem smooth_and_fibre_dimension_zero_of_etale
     {X S : Scheme.{u}} (f : X ⟶ S) [Etale f] :
     Smooth f ∧ (∀ x : X, topologicalKrullDimAt (f.asFiber x) = 0) ∧
       SmoothOfRelativeDimension 0 f := by
-  sorry
+  refine ⟨inferInstance, ?_, inferInstance⟩
+  intro x
+  have : DiscreteTopology (f.fiber (f x)) :=
+    (f.etale_fibre_discrete_separable_points (f x)).1
+  apply topologicalKrullDimAt_eq_of_forall (x := f.asFiber x)
+  intro U hU
+  refine le_antisymm ?_ ?_
+  · exact (topologicalKrullDim_subspace_le (f.fiber (f x)) U).trans
+      (topologicalKrullDim_zero_of_discreteTopology (f.fiber (f x)))
+  · exact Order.krullDim_nonneg_iff.mpr
+      ⟨⟨closure {(⟨f.asFiber x, hU⟩ : U)}, isIrreducible_singleton.closure,
+        isClosed_closure⟩⟩
 
 end AlgebraicGeometry
