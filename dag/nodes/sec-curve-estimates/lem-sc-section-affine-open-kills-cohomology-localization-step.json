@@ -23,33 +23,46 @@
  ],
  "proof": [
   {
-   "text": "Forget scalars on global module cohomology and identify it naturally with open module cohomology at the top open, using exactness of scalar forgetting on the complex of sections of an injective module resolution [def-sc-ringed-space-module-cohomology]. Apply the inverse right unitor to regard xi as a degree-zero numerator eta.",
+   "text": "Use nonempty_moduleCohomology_top_iso to identify scalar-forgotten global module cohomology naturally with open module cohomology at top. Map xi through the comparison and then through the inverse right unitor to a numerator eta in degree zero.",
    "uses": [
+    "lem-weil-pbc-module-cohomology-top-comparison",
     "def-sc-ringed-space-module-cohomology"
    ],
    "elementary": true
   },
   {
-   "text": "The presentation of [def-sc-cohomology-fraction-presentation] is the additive direct limit of the twisted cohomology groups with transition maps mulTensorPowSection. Section-power multiplication and tensor coherence give the directed-system identities. Since the presentation is a subsingleton, the class [0,eta] is zero. Express its relation as a finite sum of defining relations and push it to a common degree e: all relation terms cancel, so the transition sends eta to zero. This is the zero criterion for an additive direct limit (Mathlib AddCommGroup.DirectLimit.of.zero_exact).",
+   "text": "Prove the zero and associativity identities for tensorPowAddIso by induction on the first exponent and monoidal coherence (reusing the proved private helper arguments in InvertibleSectionRing). The existing tensorPowAddIso_inv_app_tmulSection proves the product identity for section powers via unitHomEquiv. These identities give the identity and composition laws for mulTensorPowSection. Include the cast from i + (j - i) to j to obtain transition maps indexed by i <= j; applying open module cohomology gives a DirectedSystem.",
+   "uses": [
+    "def-sc-cohomology-fraction-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "DirectSum.toAddMonoid maps each summand to AddCommGroup.DirectLimit.of. By of_f it kills every defining fraction relation, hence also their AddSubgroup.closure. QuotientAddGroup.lift therefore descends it to the fraction presentation. Subsingletonness makes the class [0, eta] zero and applying the descended homomorphism makes its direct-limit class zero. Apply AddCommGroup.DirectLimit.of.zero_exact to obtain a transition that kills eta. Only a map from the quotient to the direct limit is needed, not an isomorphism of presentations.",
    "uses": [
     "def-sc-cohomology-fraction-presentation"
    ],
    "elementary": true
   },
   {
-   "text": "Tensor coherence identifies the transition from degree zero composed with the inverse right unitor with the morphism f -> f tensor s^e. Naturality of the comparison in step 1 transfers the vanishing to global module cohomology.",
-   "uses": [],
+   "text": "The existing rightUnitor_inv_app and mulTensorPowSection_app_tmulSection identify the degree-zero transition composed with the inverse right unitor with F -> F tensor L^n, f -> f tensor s^n. A cast lemma proved by equality elimination handles 0 + n = n. Apply functoriality and the naturality of the comparison from step 1; its component is injective because it is an isomorphism. The desired global module cohomology class is therefore zero.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-top-comparison",
+    "def-sc-cohomology-fraction-presentation"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-module-cohomology-top-comparison",
   "def-sc-ringed-space-module-cohomology",
   "def-sc-cohomology-fraction-presentation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 01XR, denominator-clearing consequence of the fraction presentation in Lemma 09MR"
+  "place": "Cohomology of Schemes, Lemma 01XR, denominator-clearing consequence of the fraction presentation in Lemma 09MR",
+  "note": "M3: complete Lean denominator-clearing argument via a quotient-to-direct-limit map and Mathlib zero_exact. Tensor-power coherence helper proofs reused from Sheaf.AlgebraicGeometry.InvertibleSectionRing; no invertibility assumption needed."
  },
  "mathlib_searches": [
   {
@@ -115,10 +128,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y3",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T184403-L-4026619",
-  "kind": "interface",
+  "landing": "20261012T211616-L-1057678",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
