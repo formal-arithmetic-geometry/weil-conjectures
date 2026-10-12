@@ -13,7 +13,7 @@
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
-  "place": "Tags 0BQ5 and 0EY3, proofs; relative base change and finite-presentation descent"
+  "place": "Tags 0BQ5, proof (affine-neighbourhood and overlap limits), and 01ZM(2),(3); implemented by H2 with explicit initial restriction and cartesian-cone proofs on 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -93,31 +93,33 @@
  "statement": "Let S be a Noetherian quasi-separated scheme and c:C\\to S a qcqs morphism locally of finite presentation [def-weil-pbc-scheme-conventions, def-sbc-locally-finite-presentation]. Let U,W\\subseteq S be open, s\\in W, and let P and R be finite etale covers of C_U=c^{-1}(U) and C_W=c^{-1}(W) respectively [def-sbc-normal-dominant-galois]. Put L=C\\times_S Spec O_{S,s}, with projection j:L\\to C [def-pc-fibre-product], and suppose l:L\\to C_W satisfies l\\circ i_W=j (composition read as l followed by i_W). Suppose the pullbacks of P and l^*R are isomorphic over C_U\\times_C L. Then there exists an open V with s\\in V\\subseteq W such that P and R|_{C_V} have isomorphic restrictions to C_U\\cap C_V. Here R|_{C_V} is the actual pullback of R along the inclusion C_V\\to C_W; no new cover is constructed.",
  "proof": [
   {
-   "text": "Restrict the affine neighbourhood system of s to neighbourhoods V contained in W. Noetherianity makes U retrocompact. Thus U intersect V is qcqs; its base change by the qcqs morphism c is qcqs. The affine transitions base change to affine transitions, and the limit is C_U times_C L. The equation l followed by the inclusion equals j identifies the restriction of R to this limit with the iterated pullback in the hypothesis.",
+   "text": "Construct the affine-open neighbourhood diagram of s and its stalk cone. The universal property in lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods proves that cone limiting. Affine neighbourhoods inside W are nonempty and cofiltered by the affine-open basis; their inclusion in all affine neighbourhoods is initial. Whiskering therefore gives the same stalk limit for this restricted system. All definitions and cofinality proofs are actual Lean constructions in nhdsDiagram, nhdsCone, within_cofiltered and within_initial.",
    "uses": [
-    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
-    "lem-kun-fibre-product-limits",
-    "lem-weil-pbc-open-fibre-product"
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
    ],
    "elementary": false
   },
   {
-   "text": "The fixed models restrict to finite etale, hence finitely presented covers on the overlap stages. Apply the morphism part of finite-presentation descent to the comparison and its inverse. At a common later stage the equality part descends the two equations that their composites are identities. The descended maps therefore give an isomorphism. This argument also applies when the local overlap is empty.",
+   "text": "Construct overlapDiagram with stages C_U intersect C_V and inclusion transitions, and overlapCone with point C_U times_C (C times_S Spec O_S,s). Its projections are pullback lifts. The open fibre-product identification lem-weil-pbc-open-fibre-product is implemented by Mathlib isPullback_opens_inf. Paste with isPullback_morphismRestrict and the local fibre-product square to prove the cartesian cone-leg squares. Apply Mathlib isLimitOfIsPullbackOfIsConnected to the limiting neighbourhood cone. The same pasting and cancellation proves that overlap transitions are base changes of inclusions between affine neighbourhoods, hence affine. The proofs are in overlap_stage_square, overlapCone_limit and overlap_transition_affine. C is locally Noetherian by local finite type and compact by quasi-compactness of c over the Noetherian S; consequently C is Noetherian and all overlap opens are qcqs.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pullback associativity converts the given iterated pullback of R to its pullback along the composite local-overlap projection followed by l. The equation hl identifies this composite with every cone projection followed by overlapRight; overlapCone_left gives the analogous compatibility for PA. Both finite etale covers have finitely presented structure maps and qcqs total spaces at any stage. The proved theorem AlgebraicGeometry.exists_iso_of_isPullback in the module of thm-pd-spreading-out descends the comparison and inverse equations by Tag 01ZM(2),(3). The helper finiteEtale_stageIso applies it to the two cartesian models, then lifts the resulting structure-compatible scheme isomorphism to the category of finite etale covers.",
    "uses": [
     "thm-pd-spreading-out"
    ],
    "elementary": false
   },
   {
-   "text": "Pullback pasting identifies the second overlap cover with the restriction to C_U intersect C_V of R pulled back along C.homOfLE (c.preimage_mono hVW). The first is P pulled back along the left inclusion. Return V, its containment in W and membership of s, and the resulting isomorphism.",
-   "uses": [
-    "lem-weil-pbc-open-fibre-product"
-   ],
-   "elementary": false
+   "text": "Return the resulting affine neighbourhood V, its recorded containment in W, and membership of s. The proved helper finiteEtaleCompIso identifies pullback along overlapRight with the iterated pullback along C.homOfLE inf_le_right and C.homOfLE (c.preimage_mono hVW), giving exactly the original conclusion. Empty overlaps cause no exception: all constructions use universal properties and finite-presentation descent with no nonemptiness assumption on the overlap.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-kun-fibre-product-limits",
   "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
   "lem-weil-pbc-open-fibre-product",
   "thm-pd-spreading-out"
@@ -161,10 +163,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T173908-L-3307011",
-  "kind": "interface",
+  "landing": "20261012T202240-L-704582",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
