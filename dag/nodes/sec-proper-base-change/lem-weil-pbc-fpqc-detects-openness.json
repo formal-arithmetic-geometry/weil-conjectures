@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-fpqc-detects-openness",
+ "kind": "statement",
+ "title": "Fpqc coverings detect openness of subsets",
+ "statement": "Let S be a scheme [def-pc-scheme], I any index type, and g_i : T_i → S an fpqc covering [def-weil-pbc-fpqc-covering]. Let V be a subset of the underlying topological space of S. If g_i^{-1}(V) is open in T_i for every i, then V is open in S.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Lemma Tag 03N0 proof, affine reduction and openness argument; https://stacks.math.columbia.edu/tag/03N0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to each affine open of S and base-change the fpqc family. The preimage of the restricted subset in every covering member remains open by continuity. Openness is local on the base, so it suffices to work over Spec R.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-affine-standard-refinement] to the restricted family to choose finitely many affine opens V_j of its members whose coordinate-ring product is faithfully flat over R. The spectrum map for each factor identifies with V_j mapping to Spec R, so the subset has open inverse image along each factor map.",
+   "uses": [
+    "lem-weil-pbc-fpqc-affine-standard-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-standard-fpqc-quotient-topology] with these finite coordinate rings and their induced R-algebra structures. Faithful flatness of the product gives the required faithfully flat module structure, so the subset is open over Spec R. The affine opens cover S, so the original subset is open.",
+   "uses": [
+    "lem-weil-pbc-standard-fpqc-quotient-topology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-affine-standard-refinement",
+  "lem-weil-pbc-standard-fpqc-quotient-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Lemma Tag 03N0 proof after the set construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc family detects whether a subset of the base scheme is open",
+   "results": "Zariski topology, QuasiCompactCover.of_isOpenMap, reduce_to_affine_global; no fpqc family openness criterion.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsOpen, AlgebraicGeometry.Scheme",
+   "results": "Scheme.GlueData.isOpen_iff and quasi-compact/open-immersion results; no fpqc family openness criterion.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isOpen.*fpqc|fpqc.*isOpen; quotient.*topology|isQuotientMap_of_surjective",
+   "results": "Flat.isQuotientMap_of_surjective for a single quasi-compact flat surjection, and the existing StandardFpqcQuotientTopology theorem for finite affine families; neither states the general-family criterion. Project-wide source search found no existing general fpqc openness detection theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a subset of the base scheme is open if its preimage along each morphism in an fpqc covering is open",
+   "results": "Service unavailable: Internal Server Error (msearch.py recorded the failed query in searches.jsonl).",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Tag 09XN proof: equal opens on T_i\\times_S T_j\\times_S V descend to an open of V by Tag 03N0",
+   "via": [
+    "lem-weil-pbc-etale-open-fpqc-descent",
+    "lem-weil-pbc-etale-sections-fpqc-descent"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FpqcDetectsOpenness",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcDetectsOpenness.lean",
+  "declaration": "AlgebraicGeometry.isOpen_of_fpqc_preimages",
+  "statement": "theorem isOpen_of_fpqc_preimages\n    {S : Scheme.{u}} {I : Type v} {T : I → Scheme.{u}}\n    (g : ∀ i, T i ⟶ S)\n    (hg : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)\n    (V : Set S) (hV : ∀ i, IsOpen (g i ⁻¹' V)) : IsOpen V",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053953-L-2645729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053953-L-2645729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

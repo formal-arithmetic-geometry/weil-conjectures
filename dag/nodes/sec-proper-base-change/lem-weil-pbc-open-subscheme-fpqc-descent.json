@@ -28,70 +28,36 @@
  ],
  "proof": [
   {
-   "text": "By the fibre-product point description [lem-weil-pbc-fibre-product-points], the compatibility equalities imply that the union $W=$\\bigcup_i g_i(W_i)$ is a well-defined subset of $S$ and that $g_i^{-1}(W)=W_i$ for every $i$; uniqueness of such a subset follows from the fpqc family being jointly surjective.",
+   "text": "Construct V = {s | there exist i and x in W_i with g_i(x)=s}. For x in T_i over a point of V, choose its witness y in W_j. The fibre-product point existence lemma [lem-weil-pbc-fibre-product-points], as realized by Mathlib Scheme.Pullback.exists_preimage_pullback, gives z over x and y. Compatibility of the projection inverse images then forces x in W_i. The reverse inclusion is immediate using x itself, proving g_i^{-1}(V)=W_i.",
    "uses": [
-    "lem-weil-pbc-fibre-product-points",
-    "def-weil-pbc-fpqc-covering"
+    "lem-weil-pbc-fibre-product-points"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 03N0 proof, first paragraph, using Descent Lemma Tag 02KI"
-   }
+   "elementary": false
   },
   {
-   "text": "Openness of $W$ is local on the target, so fix an affine open $U$ and replace the family and the opens by their restrictions over $U$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 03N0 proof, second paragraph: work Zariski locally on the base"
-   }
-  },
-  {
-   "text": "The affine fpqc refinement statement [lem-weil-pbc-fpqc-affine-standard-refinement] supplies a finite standard fpqc family refining the restricted family. Pulling back the equality $g_i^{-1}(W)=W_i$ along the refinement gives an open inverse image in each refinement member.",
+   "text": "The inverse images of V are the given open W_i. Apply [lem-weil-pbc-fpqc-detects-openness] to make V an open subset and package it as S.Opens.",
    "uses": [
-    "lem-weil-pbc-fpqc-affine-standard-refinement"
+    "lem-weil-pbc-fpqc-detects-openness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 03N0 proof, affine reduction and choice of a standard fpqc covering refining the given family"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the standard-fpqc quotient-topology statement [lem-weil-pbc-standard-fpqc-quotient-topology] to conclude that $W$ is open on the affine neighborhood $U$. Since this holds on every affine open $U$, $W$ is open in $S$ and hence defines an open subscheme.",
-   "uses": [
-    "lem-weil-pbc-standard-fpqc-quotient-topology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 03N0 proof, final paragraph, applying Morphisms Lemma Tag 02JY"
-   }
-  },
-  {
-   "text": "The descended open subscheme is unique because its underlying open subset is uniquely determined by the equalities $g_i^{-1}(W)=W_i$, and an open subscheme is determined by its open subset with the restricted structure sheaf.",
+   "text": "For uniqueness, use joint surjectivity [def-weil-pbc-fpqc-covering], via the flat jointly-surjective precoverage underlying the fpqc precoverage, to lift any s to a point x of one T_i. The preimage equalities show that s belongs to any candidate descended open exactly when x belongs to W_i. Extensionality of opens proves equality.",
    "uses": [
     "def-weil-pbc-fpqc-covering"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 03N0 statement and first proof paragraph"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-fibre-product-points",
-  "def-weil-pbc-fpqc-covering",
-  "lem-weil-pbc-fpqc-affine-standard-refinement",
-  "lem-weil-pbc-standard-fpqc-quotient-topology"
+  "lem-weil-pbc-fpqc-detects-openness",
+  "def-weil-pbc-fpqc-covering"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Lemma Tag 03N0 (descent-lemma-open-fpqc-covering), proof"
+  "place": "Lemma Tag 03N0: set construction and uniqueness formalized directly; affine-local openness isolated in lem-weil-pbc-fpqc-detects-openness."
  },
  "mathlib_searches": [
   {
@@ -175,5 +141,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053953-L-2645729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

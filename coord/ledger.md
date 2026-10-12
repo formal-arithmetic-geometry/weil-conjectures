@@ -6275,3 +6275,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/S1/Sheaf.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction (stage 3; reviewer PASS; first push; landing 20261012T053953-L-2645347 (proof); batch 20261012T053916; modules 1; new nodes 1)
 - 05:39 L: merged deliver/S1/Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites (stage 3; reviewer PASS; first push; landing 20261012T053953-L-2645445 (interface); batch 20261012T053916; modules 3; new nodes 2)
 - 05:39 L: merged deliver/S2/Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen (stage 3; reviewer PASS; first push; landing 20261012T053953-L-2645611 (interface); batch 20261012T053916; modules 2; new nodes 1)
+- 05:39 L: merged deliver/S2/Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent (stage 3; reviewer PASS; first push; landing 20261012T053953-L-2645729 (interface); batch 20261012T053916; modules 2; new nodes 1)

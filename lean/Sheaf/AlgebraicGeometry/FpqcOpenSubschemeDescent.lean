@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.AlgebraicGeometry.FpqcAffineStandardRefinement
-import Sheaf.AlgebraicGeometry.StandardFpqcQuotientTopology
+import Mathlib.AlgebraicGeometry.PullbackCarrier
+import Sheaf.AlgebraicGeometry.FpqcDetectsOpenness
 
 /-!
 # Fpqc descent of compatible open subschemes
@@ -56,6 +56,40 @@ theorem openSubscheme_existsUnique_of_fpqc
       (pullback.fst (g i) (g j) ⁻¹ᵁ W i) =
         (pullback.snd (g i) (g j) ⁻¹ᵁ W j)) :
     ∃! V : S.Opens, ∀ i, (g i ⁻¹ᵁ V) = W i := by
-  sorry
+  let V : Set S := {s | ∃ i, ∃ x ∈ W i, g i x = s}
+  have hpre (i : I) : g i ⁻¹' V = (W i : Set (T i)) := by
+    ext x
+    constructor
+    · rintro ⟨j, y, hy, hxy⟩
+      obtain ⟨z, hz₁, hz₂⟩ :=
+        Scheme.Pullback.exists_preimage_pullback (f := g i) (g := g j) x y hxy.symm
+      have hz : z ∈ pullback.snd (g i) (g j) ⁻¹ᵁ W j := by
+        change pullback.snd (g i) (g j) z ∈ W j
+        rwa [hz₂]
+      rw [← hW i j] at hz
+      change pullback.fst (g i) (g j) z ∈ W i at hz
+      rwa [hz₁] at hz
+    · intro hx
+      exact ⟨i, x, hx, rfl⟩
+  have hV : IsOpen V := isOpen_of_fpqc_preimages g hg V fun i => by
+    rw [hpre i]
+    exact (W i).isOpen
+  let U : S.Opens := ⟨V, hV⟩
+  refine ⟨U, ?_, ?_⟩
+  · intro i
+    apply SetLike.ext'
+    exact hpre i
+  · intro U' hU'
+    apply SetLike.ext
+    intro s
+    obtain ⟨Y, f, hf, x, hx⟩ := Scheme.JointlySurjective.exists_eq
+      (K := Scheme.precoverage @Flat) (Presieve.ofArrows T g) hg.2 s
+    obtain ⟨i⟩ := hf
+    have hi : g i ⁻¹ᵁ U = W i := by
+      apply SetLike.ext'
+      exact hpre i
+    rw [← hx]
+    change x ∈ g i ⁻¹ᵁ U' ↔ x ∈ g i ⁻¹ᵁ U
+    rw [hU' i, hi]
 
 end AlgebraicGeometry
