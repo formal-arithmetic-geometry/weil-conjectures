@@ -25,83 +25,50 @@
  ],
  "proof": [
   {
-   "text": "The universally closed, quasi-separated morphism $f$ is quasi-compact by the quasi-compactness permanence result [lem-weil-pbc-qcqs-morphism-permanence]. Hence the normalization of $\\operatorname{Spec}A$ in $X$ is defined. The relative-normalization description [lem-weil-pbc-relative-normalization] identifies the intermediate scheme locally with the spectrum of the integral closure of $A$ in $B=H^0(X,\\mathcal O_X)$, while [lem-weil-pbc-universally-closed-global-sections-integral] says that this closure is all of $B$. Thus the intermediate scheme is $\\operatorname{Spec}B$, the second map $s$ is integral, and the factorization is the relative spectrum of $f_*\\mathcal O_X$ [def-weil-pbc-stein-factorization].",
+   "text": "Use Scheme.toSpecΓ_steinFactorizationBase to identify the composite with f. The second map is a Spec map and hence affine and separated. UniversallyClosed.of_comp_of_isSeparated gives universal closedness of q. QuasiCompact.compactSpace_of_compactSpace f and quasiSeparatedSpace_of_quasiSeparated f give compactness and quasi-separatedness of X; the standard toSpecΓ instances give quasi-compactness and quasi-separatedness of q.",
    "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-relative-normalization",
-    "lem-weil-pbc-universally-closed-global-sections-integral",
-    "def-weil-pbc-stein-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), proof using Morphisms Lemmas 03GI, 035H and 03GV"
-   }
-  },
-  {
-   "text": "The factor map $q$ is universally closed by the image-of-a-universally-closed-morphism lemma [lem-weil-pbc-image-universally-closed], applied to the factorization after the image argument of the source. It is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence], since $s$ is affine and hence quasi-separated and $s\\circ q=f$ is quasi-compact; it is quasi-separated by the same composition-permanence result because $s\\circ q=f$ is quasi-separated. This gives all three morphism properties required for the subsequent pushforward argument.",
-   "uses": [
-    "lem-weil-pbc-image-universally-closed",
+    "def-weil-pbc-stein-factorization",
     "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), proof using Morphisms Lemma 03GN and Schemes Lemmas 03GI, 01KV"
-   }
+   "elementary": false
   },
   {
-   "text": "Since $q$ is quasi-compact and quasi-separated, [pqf-lem-pushforward-qcoh] makes $q_*\\mathcal O_X$ quasi-coherent. On the affine target $\\operatorname{Spec}B$, the global sections of this sheaf are $H^0(X,\\mathcal O_X)=B$. The affine tilde/global-sections equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies a quasi-coherent sheaf on $\\operatorname{Spec}B$ with the tilde of its global sections, so $q_*\\mathcal O_X=\\mathcal O_{\\operatorname{Spec}B}$.",
+   "text": "Mathlib Morphisms/ClosedImmersion.lean:256 gives IsDominant X.toSpecΓ for compact X (its appTop is the canonical ΓSpec isomorphism). Universally closed q has closed range, so surjective_of_isDominant_of_isClosed_range (Morphisms/UnderlyingMap.lean:252) gives surjectivity. Apply UniversallyClosed.of_comp_surjective to q followed by s to obtain universal closedness of s. The equivalence IsIntegralHom.iff_universallyClosed_and_isAffineHom makes s integral.",
    "uses": [
-    "pqf-lem-pushforward-qcoh",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-image-universally-closed"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), proof of clause (3), using Schemes Lemmas 01LC and 01IA"
-   }
+   "elementary": false
   },
   {
-   "text": "The image of $q$ is closed because $q$ is universally closed. Write it as $V(I)\\subseteq\\operatorname{Spec}B$. For $h\\in I$, the pullback of $h$ is a global section of $\\mathcal O_X$ whose image in every residue field $\\kappa(x)$ vanishes (for $x\\in X$ the point $q(x)$ lies in $V(I)$, so $h\\in I$ maps into $\\mathfrak m_{q(x)}$ and the germ of $q^\\sharp(h)$ at $x$ lies in $\\mathfrak m_x$), hence is nilpotent by [lem-weil-pbc-qc-scheme-vanishing-section-nilpotent]. Since the pullback identifies $B$ with $H^0(X,\\mathcal O_X)$, $h$ itself is nilpotent. Thus $I$ is nil and $V(I)=\\operatorname{Spec}B$, proving that $q$ is surjective.",
+   "text": "On each basic open D(a) of Spec Γ(X), the qcqs localization computation is Mathlib isIso_ΓSpec_adjunction_unit_app_basicOpen (Morphisms/QuasiSeparated.lean:450-465). Equivalently this is degree-zero flat base change along the affine localization Spec Γ(X)[1/a] -> Spec Γ(X), with the canonical global-section isomorphism. Apply TopCat.Sheaf.isIso_iff_isIso_basis to conclude that the canonical sheaf map is invertible. Forgetting gives IsIso q.c, and pushing forward gives the required canonical algebra identification along s.",
    "uses": [
-    "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent"
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), surjectivity paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "For a flat base change of $\\operatorname{Spec}A$, degree-zero flat base change for proper global sections is the same calculation supplied by [lem-weil-pbc-stein-flat-base-change-global-sections]. The relative-spectrum construction then commutes with this base change by [lem-weil-pbc-relative-spec-base-change], so the displayed Stein factorization commutes with every flat base change.",
+   "text": "For the two Cartesian squares, flatness of b is MorphismProperty.of_isPullback applied to the flipped first square and Flat g. For each affine open W of B-prime, apply isIso_pushoutSection_of_isQuasiSeparated_of_flat_right to the second square with U_S=top, U_X=top, U_T=W, U_Y=q-prime inverse W. This is the affine-open version of degree-zero flat base change. The map q.appLE top top is q.appTop, hence ΓSpecIso.hom and invertible. Therefore pushout.inr is invertible. Its composite with pushoutSection is q-prime.app W by pushout.inr_desc and appLE_eq_app. The canonical sharp map is consequently invertible on the affine basis. Apply isIso_iff_isIso_basis and then functorial preservation of isomorphisms by pushforward along s-prime.",
    "uses": [
-    "lem-weil-pbc-stein-flat-base-change-global-sections",
-    "lem-weil-pbc-relative-spec-base-change"
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), final paragraph using Cohomology Lemma 30.5.2 (Tag 02KH) and Constructions Lemma 01LX"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-relative-normalization",
-  "lem-weil-pbc-universally-closed-global-sections-integral",
   "def-weil-pbc-stein-factorization",
+  "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-image-universally-closed",
-  "pqf-lem-pushforward-qcoh",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
-  "lem-weil-pbc-stein-flat-base-change-global-sections",
-  "lem-weil-pbc-relative-spec-base-change"
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 37.53.4 (Tag 03GY), clauses (1)--(5) and proof"
+  "place": "Tag 03GY, lemma-stein-universally-closed; direct Mathlib implementation of clauses (1)--(4) and the final flat-base-change paragraph, using coherent.tex Tag 02KH in degree zero. Full Lean proof, no remaining intermediate obligations."
  },
  "mathlib_searches": [
   {
@@ -183,5 +150,15 @@
   "group": "R1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T144107-L-2093527",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
