@@ -1,0 +1,158 @@
+{
+ "id": "lem-sc-etale-tensor-sections-evaluation-naturality",
+ "kind": "statement",
+ "title": "Restriction compatibility of tensor-sections evaluation",
+ "statement": "Let X be a scheme [def-pc-scheme], F an O_X-module sheaf [def-weil-sheaf-of-modules-category], and g:V→U an arrow of its small etale category [def-weil-pbc-etale-site]. For u:U→X let e_u:tensorPullback(u)≅pullback(u) be the comparison selected by uniqueness of left adjoints from the canonical tensor adjunction [lem-pc-module-pullback-adjunction] and the abstract pullback adjunction [def-pc-module-pullback]. Define E_U(φ) as the value at 1 of pullbackObjUnitIso(u).inv followed by φ followed by e_u.inv(F). Then E_V(etaleHom(unitObj X,F).map(g.op)(φ)) equals etaleTensorSectionsRestriction(F,g)(E_U(φ)) [lem-sc-etale-qcoherent-presheaf-functorial]. Equivalently the maps E_U form a natural transformation from the etale Hom presheaf to the underlying set presheaf of tensor-pullback sections. This asserts only naturality, not bijectivity, and requires no quasi-coherence.",
+ "source": {
+  "document": "Stacks Project, Descent",
+  "place": "Tag 03DT, proof of Lemma 35.8.1: reinterpretation of sections as maps from the pulled-back structure sheaf; Tag 03DR, equation (35.8.0.1)",
+  "url": "https://stacks.math.columbia.edu/tag/03DT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "def-pc-module-pullback",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Let e_f denote the unit-normalized left-adjoint comparison. Apply conjugateEquiv to compare e_(a≫b).inv followed by tensorSectionsComp(a,b).inv with pullbackComp(a,b).inv followed by whiskerLeft(pullback b,e_a.inv) and whiskerRight(e_b.inv,tensorPullback a). Conjugation takes each e_f.inv to the identity, both inverse composition comparisons to pushforwardComp(a,b).hom, and respects composition and whiskering. Injectivity proves the equality; invert it to obtain the forward equation.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The equation unit_leftAdjointUniq_hom_app identifies e_a.hom on tensorSectionsUnit with pullbackSection. Naturality of the adjunction unit moves any module map through tensorSectionsUnit. Applying the forward comparison equation on sections thus intertwines the tensor and abstract restriction maps.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By pullbackSection_one_eq evaluation E_U is e_u.inv applied to homSection u. The existing homSection_comp equation intertwines homSection with abstract pullback restriction. Substitute the equality g.left≫U.hom=V.hom before simplifying section-map composition, which gives the identical equality transport on both sides. The etaleHom restriction is pullHom by presheafHom_map_eq_pullHom. Combining these equalities gives the component naturality identity, and function extensionality gives the displayed equality of morphisms of types. This includes identity arrows and empty schemes, since no section needs to be chosen.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "N2",
+  "based_on": {
+   "document": "Stacks Project, Descent",
+   "place": "Tag 03DT, proof of Lemma 35.8.1: reinterpretation of sections as maps from the pulled-back structure sheaf; Tag 03DR, equation (35.8.0.1)",
+   "url": "https://stacks.math.columbia.edu/tag/03DT"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality of evaluation at one of module maps from the structure sheaf under pullback",
+   "results": "Service unavailable: Internal Server Error. No verdict.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections of a sheaf of modules are equivalent to morphisms from the structure sheaf, compatible with pullback",
+   "results": "Found unitHomEquiv and naturality under module morphisms, not comparison of the two scheme-pullback restriction maps.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "Found unitHomEquiv and unitHomEquiv_comp_apply, not restriction compatibility of tensor and abstract pullback.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homOfGlobalSection|homSection_comp|leftAdjointUniq; tensor.*evaluation.*naturality; blueprint_refs.py search sections pullback structure",
+   "results": "Found upstream homSection_comp and the uniqueness and conjugation interfaces. No tensor evaluation naturality declaration or duplicate blueprint node.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluation of pullback morphisms at the unit section commutes with restriction between schemes",
+   "results": "Independent second reading: scheme pullback-restriction isomorphisms only; no module evaluation comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unitHomEquiv\", \"naturality\"",
+   "results": "Independent second reading: zero hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardSections_unitHomEquiv|unitHomEquiv_comp_apply|conjugateEquiv_leftAdjointUniq_inv|homSection_comp",
+   "results": "Independent second reading: Mathlib pushforwardSections_unitHomEquiv and unitHomEquiv_comp_apply; repository HomSection.lean supplies homSection_comp and Adjunction/Unique.lean supplies conjugation. None states tensor evaluation restriction compatibility.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsHomComparison",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-h2",
+   "place": "Auxiliary etale descent comparison, step 3 of lem-sc-etale-tensor-sections-hom-comparison: component bijections commute with restriction.",
+   "via": [
+    "lem-sc-etale-qcoherent-descent",
+    "lem-sc-etale-tensor-sections-hom-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorHomEvaluationNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorHomEvaluationNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleTensorHomEvaluation_naturality",
+  "statement": "theorem etaleTensorHomEvaluation_naturality {X : Scheme.{u}} (F : X.Modules)\n    {U V : X.Etaleᵒᵖ} (g : U ⟶ V) :\n    (etaleHom (unitObj X) F).map g ≫\n        TypeCat.ofHom (etaleTensorHomEvaluation F V.unop) =\n      TypeCat.ofHom (etaleTensorHomEvaluation F U.unop) ≫\n        (etaleTensorSectionsPresheaf F ⋙ CategoryTheory.forget AddCommGrpCat).map g",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T085311-L-28503",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T085311-L-28503",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

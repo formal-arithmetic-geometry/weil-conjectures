@@ -17,34 +17,34 @@
  ],
  "proof": [
   {
-   "text": "For every u:U→X, compare the tensor-formula pullback with Mathlib's abstract pullback by Adjunction.leftAdjointUniq applied to their adjunctions with the same pushforward. The unit equation unit_leftAdjointUniq_hom_app pins the comparison to the canonical section pullback.",
+   "text": "Use tensorSectionsPullbackComparison, the unit-normalized left-adjoint comparison, and pullbackObjUnitIso to identify pulled-back module maps with maps from O_U to tensorPullback(u)F. Evaluation at one is injective by unit_hom_ext and cancellation of the two isomorphisms. It is surjective: the inverse sends s to pullbackObjUnitIso(u).hom followed by homOfGlobalSection(s), followed by the forward comparison. homOfGlobalSection_app_one and the isomorphism identities prove the inverse equation.",
    "uses": [
     "lem-pc-module-pullback-adjunction"
    ],
    "elementary": true
   },
   {
-   "text": "Use the existing upstream Scheme.Modules.pullbackObjUnitIso u for the abstract pullback of O_X, not the separate tensorPullbackObjUnitToUnit_isIso statement. Evaluation at 1 identifies Hom(O_U,u^*F) with global sections: the inverse sends s to a↦a·s|_V on each open V. Naturality of restriction makes this a module-sheaf map, and linearity plus restriction from the terminal open show the two operations are inverse. Equivalently, apply SheafOfModules.unitHomEquiv and identify a compatible section family with its value at the terminal open. Transport the target along the comparison of step 1 and the source along pullbackObjUnitIso u. These are direct applications of existing library interfaces and the definition of a module morphism.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "For g:V→U over X, pullback sends multiplication by s to multiplication by its pulled-back section. The two composites of left-adjoint comparisons intertwine the same composite units, hence agree by uniqueness of conjugates. The definition of tensorSectionsComp is precisely this unit-normalized comparison. The equality g≫u=v gives the same equality transport in both presheaves. Thus the component bijections commute with etaleTensorSectionsRestriction and etaleHom.map. Assemble the component bijections into a natural isomorphism. No quasi-coherence or topology assertion is used.",
+   "text": "The evaluation maps commute with etale restriction by lem-sc-etale-tensor-sections-evaluation-naturality. Convert the proved pointwise bijections to equivalences with Equiv.ofBijective and their Type-valued isomorphisms with Equiv.toIso. NatIso.ofComponents assembles these components using the cited naturality equation. Take the inverse of this natural isomorphism to obtain the required orientation.",
    "uses": [
-    "lem-pc-module-pullback-adjunction",
+    "lem-sc-etale-tensor-sections-evaluation-naturality",
     "lem-sc-etale-qcoherent-presheaf-functorial"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-module-pullback-adjunction",
+  "lem-sc-etale-tensor-sections-evaluation-naturality",
   "lem-sc-etale-qcoherent-presheaf-functorial"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "Stacks Project, Descent",
-  "place": "Tag 03DT, proof of Lemma 35.8.1: reinterpretation of sections as maps from the pulled-back structure sheaf; Tag 03DR, equation (35.8.0.1)"
+  "by": "agent",
+  "agent": "N2",
+  "based_on": {
+   "document": "Stacks Project, Descent",
+   "place": "Tag 03DT, proof of Lemma 35.8.1: reinterpretation of sections as maps from the pulled-back structure sheaf; Tag 03DR, equation (35.8.0.1)",
+   "url": "https://stacks.math.columbia.edu/tag/03DT"
+  }
  },
  "mathlib_searches": [
   {
@@ -119,9 +119,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T063508-L-3154549",
+  "landing": "20261012T085311-L-28503",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
