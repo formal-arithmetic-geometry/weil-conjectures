@@ -41,45 +41,32 @@
    }
   },
   {
-   "text": "*Step 2 (sections of $h_{U_E}$ are locally constant: Zariski-local description).* Let $(W,s)$ be an object of $U_{\\Et}$ and $f\\in h_{U_E}(W,s)$. By [lem-galois-coproduct-copies-morphisms-clopen] (a), the sets $W_e=f^{-1}(\\iota_e(U))$, $e\\in E$, form an $E$-indexed clopen decomposition of $W$, and with $j_e:W_e\\to W$ the inclusion of the open subscheme, $f\\circ j_e=\\iota_e\\circ s\\circ j_e=c_{(W_e,s\\circ j_e)}(e)$. Each $j_e$ is an open immersion, hence etale, and $s\\circ j_e$ is etale as a composite of etale morphisms [lem-weil-pbc-etale-composition-cancellation]; so $(W_e,s\\circ j_e)$ is an object of $U_{\\Et}$ and, the $W_e$ covering $W$, $\\mathcal W_f=\\{j_e:W_e\\to W\\}_{e\\in E}$ is a covering of $(W,s)$ in $U_{\\Et}$ [def-weil-pbc-etale-site] on whose members $f$ restricts to the image of a constant: $f|_{W_e}=c_{W_e}(e)$. Two facts about this covering: (i) for $e\\ne e'$ the fibre product $Z=W_e\\times_WW_{e'}$ (computed in schemes, [def-weil-pbc-etale-site]) is empty, since every point of $Z$ maps to a point of $W_e\\cap W_{e'}=\\varnothing$; (ii) for every sheaf of sets $\\mathcal G$ on $U_{\\Et}$ and every empty object $Z$, $\\mathcal G(Z)$ has exactly one element, because the empty family is a covering of $Z$ and the sheaf condition [def-weil-pbc-etale-sheaf-of-sets] makes $\\mathcal G(Z)$ the equalizer of two maps between empty products, i.e. a one-point set. Finally, for $f=c_{(W,s)}(e_0)$ part (c) of [lem-galois-coproduct-copies-morphisms-clopen] gives $W_{e_0}=W$ and $W_e=\\varnothing$ for $e\\ne e_0$; and for a morphism $g:(W',s')\\to(W,s)$ the decomposition of $f\\circ g$ is $((f\\circ g)^{-1}(\\iota_e(U)))_e=(g^{-1}(W_e))_e$.",
+   "text": "Local injectivity of c. For constant elements a and b with equal represented images over W, if a=b use the maximal sieve. Otherwise use part (c) of [lem-galois-coproduct-copies-morphisms-clopen]: the preimage of the a-component for c(a) is all of W, while that for c(b) is empty. Equality of the morphisms gives top=bottom in W.Opens, so W has no points. The empty family is then an etale covering by [def-weil-pbc-etale-site], and makes the constants locally equal.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Local surjectivity of c. For a represented section f over W, part (a) of [lem-galois-coproduct-copies-morphisms-clopen] gives the open pieces V_e=f^{-1}(iota_e(U)) covering W and the identity V_e.ι ≫ f = (V_e.ι ≫ W.hom) ≫ iota_e. Open immersions are etale, and their composites with W.hom are etale by [lem-weil-pbc-etale-composition-cancellation] and [def-weil-open-immersion]. Thus Z_e=(V_e→U) are objects of the small etale site. The inclusions Z_e→W form a covering by [def-weil-pbc-etale-site], since their ranges cover W. The displayed identity says each inclusion belongs to the image sieve of f under c, so this image sieve covers. This includes an empty index set.",
    "uses": [
     "lem-galois-coproduct-copies-morphisms-clopen",
     "lem-weil-pbc-etale-composition-cancellation",
     "def-weil-open-immersion",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-etale-sheaf-of-sets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Groupoids, Example Tag 03YW: $G_S(T)=\\{f:T\\to G\\text{ locally constant}\\}$; Etale Cohomology, Remark Tag 03P5: 'This Zariski sheaf is representable by the group scheme $G_S$'"
-   }
-  },
-  {
-   "text": "*Step 3 ($(h_{U_E},c)$ has the universal property of the sheafification of the constant presheaf $P_E:W\\mapsto E$).* Let $\\mathcal G$ be a sheaf of sets on $U_{\\Et}$ and $\\alpha:P_E\\to\\mathcal G$ a morphism of presheaves, so $\\alpha_W(e)|_{W'}=\\alpha_{W'}(e)$ for every morphism $W'\\to W$. Existence: for $f\\in h_{U_E}(W)$ take the covering $\\{W_e\\to W\\}_e$ of Step 2 and the sections $t_e=\\alpha_{W_e}(e)\\in\\mathcal G(W_e)$. They agree on overlaps: on $Z=W_e\\times_WW_e$ both pullbacks of $t_e$ equal $\\alpha_Z(e)$ by naturality of $\\alpha$; on $W_e\\times_WW_{e'}$, $e\\ne e'$, which is empty, $\\mathcal G$ has one element (Step 2 (i), (ii)). By the sheaf condition [def-weil-pbc-etale-sheaf-of-sets] there is a unique $\\beta_W(f)\\in\\mathcal G(W)$ with $\\beta_W(f)|_{W_e}=\\alpha_{W_e}(e)$ for all $e$. Naturality of $\\beta$: for $g:W'\\to W$, the decomposition of $f\\circ g$ is $W'_e=g^{-1}(W_e)$ (Step 2), and on $W'_e$ both $\\beta_W(f)|_{W'}$ and $\\beta_{W'}(f\\circ g)$ restrict to $\\alpha_{W'_e}(e)$ (the first because $W'_e\\to W'\\to W$ factors through $W_e$ and $\\alpha_{W_e}(e)|_{W'_e}=\\alpha_{W'_e}(e)$); as $\\{W'_e\\to W'\\}$ is a covering, they are equal by the uniqueness half of the sheaf condition. $\\beta\\circ c=\\alpha$: for $f=c_W(e_0)$ the decomposition is $W_{e_0}=W$, $W_e=\\varnothing$ otherwise (Step 2), so $\\beta_W(c_W(e_0))=\\beta_W(c_W(e_0))|_W=\\alpha_W(e_0)$. Uniqueness: if $\\beta':h_{U_E}\\to\\mathcal G$ satisfies $\\beta'\\circ c=\\alpha$, then for $f\\in h_{U_E}(W)$, using $f|_{W_e}=c_{W_e}(e)$ (Step 2) and naturality of $\\beta'$, $\\beta'_W(f)|_{W_e}=\\beta'_{W_e}(c_{W_e}(e))=\\alpha_{W_e}(e)=\\beta_W(f)|_{W_e}$ for all $e$, so $\\beta'_W(f)=\\beta_W(f)$ by the sheaf condition. Thus every morphism from $P_E$ to a sheaf factors uniquely through $c$, which is the defining property of a sheafification [def-weil-pbc-sheafification] (the Zariski covering $\\{W_e\\to W\\}$ already suffices, as in the source).",
-   "uses": [
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "def-weil-pbc-sheafification",
     "def-weil-pbc-etale-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Remark Tag 03P5: 'the sheafification $\\underline G$ of the constant presheaf associated to $G$ in the Zariski topology of the site already gives $\\Gamma(U,\\underline G)=\\{$Zariski locally constant maps $U\\to G\\}$ ... hence we conclude that the Zariski sheafification $\\underline G$ above is also the $\\tau$-sheafification' (the argument written out for sets; the group structure plays no role)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 4 (the factorization $\\varphi$ and its invertibility).* By [def-weil-pbc-constant-sheaf] $\\underline E$ with $\\eta:P_E\\to\\underline E$ is the sheafification of $P_E$ [def-weil-pbc-sheafification]; since $h_{U_E}$ is a sheaf (Step 1), $c$ factors as $c=\\varphi\\circ\\eta$ for a unique $\\varphi:\\underline E\\to h_{U_E}$ (morphisms of sheaves being morphisms of presheaves, [def-weil-pbc-etale-sheaf-of-sets]). By Step 3 applied to $\\mathcal G=\\underline E$ and $\\alpha=\\eta$ there is $\\psi:h_{U_E}\\to\\underline E$ with $\\psi\\circ c=\\eta$. Then $(\\psi\\circ\\varphi)\\circ\\eta=\\psi\\circ c=\\eta=\\mathrm{id}\\circ\\eta$, so $\\psi\\circ\\varphi=\\mathrm{id}_{\\underline E}$ by the uniqueness in the universal property of $\\eta$; and $(\\varphi\\circ\\psi)\\circ c=\\varphi\\circ\\eta=c=\\mathrm{id}\\circ c$, so $\\varphi\\circ\\psi=\\mathrm{id}_{h_{U_E}}$ by the uniqueness in Step 3 (with $\\mathcal G=h_{U_E}$, $\\alpha=c$). Hence $\\varphi$ is an isomorphism. For $E=\\varnothing$ nothing changes: $U_\\varnothing$ is the empty scheme and all steps apply verbatim (the decompositions are empty families, existing only over empty $W$).",
+   "text": "Construct phi using Mathlib sheafifyLift for c and the sheaf property from Step 1. Mathlib toSheafify_sheafifyLift gives eta ≫ phi.hom = c; the domain is the constant sheaf by [def-weil-pbc-constant-sheaf] and [def-weil-pbc-sheafification]. The sheafification unit eta is locally injective and locally surjective (Mathlib Presheaf.isLocallyInjective_toSheafify\\' and isLocallySurjective_toSheafify\\'). Apply Mathlib comp_isLocallyInjective_iff and comp_isLocallySurjective_iff to eta and phi.hom, and substitute the factorization: Steps 2 and 3 show phi is locally bijective. Apply [lem-galois-set-sheaf-local-bijection-isomorphism] (Mathlib Sheaf.isLocallyBijective_iff_isIso) to obtain IsIso phi. For any psi with the same factorization, sheafifyLift_unique and Sheaf.hom_ext give psi=phi. These are the standard sheafification comparison and uniqueness; the explicit second universal property and inverse construction in the old plan are unnecessary.",
    "uses": [
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-sheafification",
-    "def-weil-pbc-etale-sheaf-of-sets"
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-galois-set-sheaf-local-bijection-isomorphism"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Remark Tag 03P5, last sentence: the Zariski sheafification, being representable, is the $\\tau$-sheafification"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -90,13 +77,14 @@
   "lem-galois-coproduct-copies-morphisms-clopen",
   "lem-weil-pbc-etale-composition-cancellation",
   "def-weil-open-immersion",
+  "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-constant-sheaf"
+  "lem-galois-set-sheaf-local-bijection-isomorphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Remark Tag 03P5 (remark-constant-locally-constant-maps, lines 2437-2456), with Groupoids, Example Tag 03YW (literature/stacks-project/groupoids.tex, lines 535-561) and Lemma Tag 03O3 (lemma-representable-sheaf-fpqc, lines 1067-1075); the source's 'hence we conclude' (that the Zariski sheafification is the etale one) is written out in Steps 2-4"
+  "place": "Tags 03P5 and 03O3 with Groupoids Tag 03YW. The same local comparison is implemented using Mathlib local-bijection criteria, following the analogous abelian-group proof in WeilConjectures/Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean:93-150. Checked online at https://stacks.math.columbia.edu/tag/03P5, /03YW and /03O3 because the local literature checkout is absent."
  },
  "mathlib_searches": [
   {
@@ -182,5 +170,15 @@
   "group": "H1",
   "result": "pass",
   "note": "U scheme, E : Type u (empty allowed), U_E = ∐ copies via Mathlib Sigma, codiagonal Sigma.desc 𝟙 as Over.mk, h_{U_E} = yoneda on Over U along Etale.forget (ulift), smallEtaleTopology, constantSheaf/toSheafify = eta, hH IsSheaf, c spec iota_e∘s, unique φ with c = φ∘eta, IsIso φ; imports needed (LeftExact gives HasSheafify Type)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T042406-L-1814333",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

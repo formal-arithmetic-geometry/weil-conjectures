@@ -1,0 +1,113 @@
+{
+ "id": "lem-galois-set-sheaf-local-bijection-isomorphism",
+ "kind": "statement",
+ "title": "A locally bijective morphism of sheaves of sets is an isomorphism",
+ "statement": "Let $(\\mathcal C,J)$ be a site [def-weil-pbc-sites-and-cohomology] and let $f:F\\to G$ be a morphism of sheaves of sets on it. Say that $f$ is locally injective when for every $U$ and $s,t\\in F(U)$ with $f(s)=f(t)$, some covering of $U$ makes the restrictions of $s$ and $t$ equal. Say that $f$ is locally surjective when every $t\\in G(U)$ lifts to $F$ on some covering of $U$. Then $f$ is an isomorphism if and only if it is locally injective and locally surjective.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Sites/LocallyBijective.lean",
+  "place": "Sheaf.isLocallyBijective_iff_isIso, lines 84-93, and its type-valued proof, lines 43-74"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Local injectivity implies componentwise injectivity: two sections with equal images agree on a covering, hence agree by separatedness of F. For any section of G choose local lifts by local surjectivity. Their images agree on overlaps by naturality, so injectivity makes the lifts compatible. The sheaf property of F glues them; separatedness of G shows that the glued section maps to the original one. Thus every component of f is bijective, and their inverses are natural, giving an inverse of f.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "An isomorphism is componentwise bijective; use the identity covering for local injectivity and local surjectivity. Mathlib packages both directions as Sheaf.isLocallyBijective_iff_isIso (specialized to Type).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Mathlib/CategoryTheory/Sites/LocallyBijective.lean",
+  "place": "Sheaf.isLocallyBijective_iff_isIso and its type-valued proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism of sheaves of sets is an isomorphism if and only if locally injective and locally surjective",
+   "results": "Unavailable: service returned Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isLocallyBijective_iff_isIso",
+   "results": "Exact public criterion for concrete categories, specializing to sheaves of sets",
+   "date": "2026-10-12",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyBijective_iff_isIso",
+   "results": "Sites/LocallyBijective.lean:84 public criterion; lines 43-74 give the type-valued proof",
+   "date": "2026-10-12",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Sheaf.isLocallyBijective_iff_isIso",
+  "file": "Mathlib/CategoryTheory/Sites/LocallyBijective.lean",
+  "line": 84,
+  "how": "Specialize A to Type (u + 1). The Type forgetful functor reflects isomorphisms and preserves sheaves, so the stated criterion is exactly local injectivity and local surjectivity of a sheaf morphism iff IsIso."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-lc-etale",
+   "place": "constant-sheaf identification used in Steps 1 and 3; categorical comparison after the clopen covering argument",
+   "via": [
+    "lem-galois-flc-representable",
+    "lem-galois-constant-sheaf-sets-representable"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.CategoryTheory.Sites.LocallyBijective",
+  "declaration": "CategoryTheory.Sheaf.isLocallyBijective_iff_isIso",
+  "statement": "lemma isLocallyBijective_iff_isIso : IsLocallyInjective f ∧ IsLocallySurjective f ↔ IsIso f",
+  "branch": "mathlib",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T042406-L-1814333",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T042406-L-1814333",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
