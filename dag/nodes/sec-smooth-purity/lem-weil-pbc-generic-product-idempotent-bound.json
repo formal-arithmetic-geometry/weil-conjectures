@@ -10,7 +10,22 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Put C = (B tensor_A R0)_red. Tensor associativity and localization of the nilradical identify its generic localization with the given product via e. For each of the finitely many coordinate idempotents, choose a numerator in C and a nonzero R0 denominator. Take t to be the product of these denominators. It is nonzero because R0 is a domain. If t divides s, every denominator divides s, hence is a unit in R0[1/s]. Map the chosen numerator to (B tensor_A R)_red and multiply it by the inverse of the image of its denominator. Its image in the generic product is exactly the desired coordinate idempotent. Compatibility on pure tensors, together with R-linearity and surjectivity of the quotient, identifies any specified f with this canonical map, so the construction works for every such f. For r = 0 choose t = 1; there is no coordinate to lift. Neither injectivity nor Noetherianity is used.",
+   "text": "The images g(b) of the pure tensors ((1 tensor b) tensor 1) span the product over K'. To check this, lift an arbitrary vector through e inverse and Ideal.Quotient.mk_surjective. Induct on the outer tensor and then on its inner tensor. For a pure tensor ((k tensor b) tensor c), its image is (c times the image of k) times g(b); zero and addition preserve span membership.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For any subset S in a K'-vector space and any vector in its K'-span, find a nonzero R0 scalar that moves it into the R0-span. Prove this by Submodule.span_induction: generators and zero use denominator 1; sums use the product of the two denominators; for scalar multiplication write the scalar as n/q using IsFractionRing.div_surjective and multiply the previous denominator by q. Apply this to each coordinate vector z_j and choose its denominator d_j.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Take t to be the finite product of d_j. The product is nonzero by Finset.prod_ne_zero_iff. If t divides s, then d_j divides s by Finset.dvd_prod_of_mem; IsLocalization.Away.isUnit_of_dvd makes its image in R a unit. This also covers r=0, when the product is 1 and there is no coordinate assertion.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For any compatible f, restrict its linear map to R0. Compatibility puts each g(b) in its range, so Submodule.span_le puts the entire R0-span of these generators in its range. Thus d_j times z_j equals f(x) for some x. Choose the unit u in R representing d_j and multiply x by u inverse. R-linearity and the scalar-tower identities give f(u inverse times x)=z_j. Evaluating at each coordinate proves the assertion.",
    "uses": [],
    "elementary": false
   }
@@ -19,7 +34,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "proof steps 4--9"
+  "place": "proof steps 4--9; direct span-induction denominator proof in Lean by V1"
  },
  "mathlib_searches": [
   {
@@ -97,10 +112,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T173806-L-3289958",
-  "kind": "interface",
+  "landing": "20261012T184351-L-4022635",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
