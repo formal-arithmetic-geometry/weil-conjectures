@@ -24,54 +24,31 @@
  ],
  "proof": [
   {
-   "text": "Fix $p\\geq0$, $q\\geq a$, $n=p+q$, and choose $r>\\max(q-a+1,p)$ so large that $u:=p-r+2\\leq0$; put $v:=q+r-2$, so $u+v=n$. By [thm-sp-half-plane-convergence] the entry has stabilized from page $r$ on, so $E_r^{p,q}=E_\\infty^{p,q}$. By item 4 of [lem-sp-derived-couple-exact], $C_r$ is an exact couple of type $r-2$ with $D_r^{u,v}=\\operatorname{im}(\\alpha^{r-2}:D^{p,q}\\to D^{u,v})$ and $D_r^{p+2,q-1}=\\operatorname{im}(\\alpha^{r-2}:D^{p+r,q-r+1}\\to D^{p+2,q-1})=0$, since $q-r+1<a$. Exactness of $C_r$ at $E_r^{p,q}$ and at $D_r^{u,v}$ gives the exact sequence $D_r^{u+1,v-1}\\xrightarrow{\\alpha_r}D_r^{u,v}\\xrightarrow{g_r}E_r^{p,q}\\to0$. For $k\\leq0$, $\\alpha:D^{k,m}\\to D^{k-1,m+1}$ is an isomorphism by exactness of [def-sp-exact-couple], since $E_2^{k-2,m+1}=0$ and $E_2^{k-1,m+1}=0$ (negative first index); hence $\\alpha^{-u}:D^{0,n}=A^n\\to D^{u,v}$ is an isomorphism carrying $G_qA^n=\\operatorname{im}(\\alpha^p)$ onto $D_r^{u,v}$ and $G_{q-1}A^n=\\operatorname{im}(\\alpha^{p+1})$ onto $\\alpha_r(D_r^{u+1,v-1})$. So the sequence identifies $E_\\infty^{p,q}$ with $G_qA^n/G_{q-1}A^n=F^pA^n/F^{p+1}A^n$.",
+   "text": "Apply halfPlaneConvergence to the unchanged half-plane hypotheses to obtain L, A, the equalities A^n = D^{0,n}, and hConv : X.ConvergesTo L A. Its definition gives weak convergence as hConv.2.1.1; at each bidegree this supplies both epimorphisms and equality of their kernels.",
    "uses": [
     "thm-sp-half-plane-convergence",
-    "def-sp-exact-couple",
-    "lem-sp-derived-couple-exact"
+    "def-sp-convergence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-couple-morphism.md",
-    "place": "## Proof: the identification of E_infinity with the associated graded pieces used to compare the graded map with the E_infinity map"
-   }
+   "elementary": true
   },
   {
-   "text": "Under the identification of Step 1 the map $\\gamma:D^{p,q}\\to E_\\infty^{p,q}$ is induced by $g$: iterating the defining property $g'\\circ\\bar\\alpha=\\pi\\circ\\hat g$ of item 2 of [lem-sp-derived-couple-exact] gives $g_r(\\alpha^{r-2}y)=\\overline{g(y)}$ for $y\\in D^{p,q}$, and $g$ factors through $\\ker d$ on each page, so $g(y)$ is a cycle on every page and lies in $Z_\\infty^{p,q}$ [def-sp-convergence]. The map $\\varphi$ is $\\alpha^p:D^{p,q}\\to D^{0,n}=A^n$ followed by $F^pA^n\\to F^pA^n/F^{p+1}A^n$. By Step 1, both are the composite of $D^{p,q}\\twoheadrightarrow G_qA^n$ with the quotient $G_qA^n\\to G_qA^n/G_{q-1}A^n$, transported by the isomorphism $\\alpha^{-u}$; hence both are epimorphisms with the same kernel.",
+   "text": "Use g_factors_limitCycles for the factorization of initial g through L.Z. Apply weakConvergence_comparison to the extracted weak convergence to obtain the unique comparison isomorphism commuting with the canonical maps. Combine these with the witnesses and convergence from the first step. The result holds at every bidegree, hence at the requested p >= 0 and q >= a.",
    "uses": [
-    "lem-sp-derived-couple-exact",
-    "def-sp-convergence",
-    "thm-sp-half-plane-convergence"
+    "def-sp-convergence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 12.21.4 (Tag 011T) and Lemma 12.23.5 (Tag 012F)"
-   }
-  },
-  {
-   "text": "Two epimorphisms out of $D^{p,q}$ with the same kernel induce a unique isomorphism $E_\\infty^{p,q}\\cong F^pA^n/F^{p+1}A^n$ carrying $\\gamma$ to $\\varphi$, i.e. $\\overline{g(y)}\\mapsto\\overline{\\alpha^p(y)}$; this is the canonical isomorphism of weak convergence in [def-sp-convergence] (here $A^n=D^{0,n}$ is the stable value of the colimit, as $\\alpha$ is an isomorphism in first degree $\\leq0$, and $F^pA^n=\\operatorname{im}\\alpha^p$). The isomorphism $E_\\infty^{p,q}\\cong F^pA^{p+q}/F^{p+1}A^{p+q}$ of [thm-sp-half-plane-convergence] is not specified further in that statement; the present lemma fixes it to be this canonical isomorphism, which by Step 2 exists and carries $\\gamma$ to $\\varphi$.",
-   "uses": [
-    "def-sp-convergence",
-    "thm-sp-half-plane-convergence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 12.23.5 (Tag 012F)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "thm-sp-half-plane-convergence",
-  "def-sp-exact-couple",
-  "lem-sp-derived-couple-exact",
   "def-sp-convergence"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "J1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Lemmas 12.21.4 (Tag 011T) and 12.23.5 (Tag 012F), with the stabilized-page calculation in the blueprint proof"
+  "place": "Tags 011T and 012F; simplified Lean argument extracting weak convergence from the existing halfPlaneConvergence statement and applying the canonical comparison of def-sp-convergence."
  },
  "mathlib_searches": [
   {
@@ -171,5 +148,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T085251-L-19880",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
