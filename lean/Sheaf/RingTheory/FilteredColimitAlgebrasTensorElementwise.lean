@@ -48,12 +48,12 @@ Proof:
 theorem filteredColimit_tensorProduct_elementwise
     (R : Type uR) [CommRing R]
     {I : Type uI} [SmallCategory I] [IsFiltered I]
-    (F : I ⥤ CommAlgCat.{vA, uR} R) [HasColimit F]
+    (F : I ⥤ CommAlgCat.{uI, uR} R) [HasColimit F]
     (N : Type uN) [AddCommGroup N] [Module R N] :
     (∀ (x : (colimit F : CommAlgCat R) ⊗[R] N),
-      ∃ (i : I) (t : (F.obj i : Type vA) ⊗[R] N),
+      ∃ (i : I) (t : (F.obj i : Type uI) ⊗[R] N),
         LinearMap.rTensor N (colimit.ι F i).hom.toLinearMap t = x) ∧
-    (∀ (i : I) (t : (F.obj i : Type vA) ⊗[R] N),
+    (∀ (i : I) (t : (F.obj i : Type uI) ⊗[R] N),
       LinearMap.rTensor N (colimit.ι F i).hom.toLinearMap t = 0 →
         ∃ (j : I) (u : i ⟶ j),
           LinearMap.rTensor N (F.map u).hom.toLinearMap t = 0) := by
@@ -71,15 +71,37 @@ using `def-weil-pbc-category-colimit`: compatibility gives a unique factorizatio
 theorem filteredColimit_tensorProduct_universal
     (R : Type uR) [CommRing R]
     {I : Type uI} [SmallCategory I] [IsFiltered I]
-    (F : I ⥤ CommAlgCat.{vA, uR} R) [HasColimit F]
+    (F : I ⥤ CommAlgCat.{uI, uR} R) [HasColimit F]
     (N : Type uN) [AddCommGroup N] [Module R N]
     (M : Type uM) [AddCommGroup M] [Module R M]
-    (μ : ∀ i : I, (F.obj i : Type vA) ⊗[R] N →ₗ[R] M)
+    (μ : ∀ i : I, (F.obj i : Type uI) ⊗[R] N →ₗ[R] M)
     (hμ : ∀ (i j : I) (u : i ⟶ j),
       (μ j).comp (LinearMap.rTensor N (F.map u).hom.toLinearMap) = μ i) :
     ∃! l : (colimit F : CommAlgCat R) ⊗[R] N →ₗ[R] M,
       ∀ i : I, l.comp (LinearMap.rTensor N (colimit.ι F i).hom.toLinearMap) = μ i := by
-  sorry
+  classical
+  let f (i : I) := TensorProduct.curry (μ i)
+  have hf (i j : I) (u : i ⟶ j) :
+      (f j).comp (F.map u).hom.toLinearMap = f i := by
+    ext a n
+    exact DFunLike.congr_fun (hμ i j u) (a ⊗ₜ[R] n)
+  obtain ⟨g, hg, huniq⟩ :=
+    filtered_colimit_algebras_underlying_module F (N →ₗ[R] M) f hf
+  refine ⟨TensorProduct.lift g, ?_, ?_⟩
+  · intro i
+    apply TensorProduct.ext
+    ext a n
+    exact DFunLike.congr_fun (DFunLike.congr_fun (hg i) a) n
+  · intro l hl
+    have hc : TensorProduct.curry l = g := by
+      apply huniq
+      intro i
+      ext a n
+      exact DFunLike.congr_fun (hl i) (a ⊗ₜ[R] n)
+    apply TensorProduct.curry_injective
+    rw [hc]
+    ext a n
+    rfl
 
 /-- When the tensor factor is a commutative algebra, the tensor coprojections and
 transition maps are underlying maps of ring homomorphisms.
