@@ -15,30 +15,37 @@
  ],
  "proof": [
   {
-   "text": "Apply the ringed-space module Mayer--Vietoris construction to the cover of X and the inverse-image cover of the cartesian base change. Naturality with respect to multiplication by base scalars makes all maps R-linear upstairs and S-linear downstairs. Cartesian open-subscheme isomorphisms and the composition isomorphisms for module pullback identify the lower terms with the cohomology of each base-changed open. Both rows are exact and begin with an injection.",
+   "text": "Obtain the geometric Ext presentations and coefficient identifications from the new presentation lemma. Construct the six horizontal linear maps by transporting precomposition with mk₀(K.g), mk₀(K.f), and the Ext class of the short exact sequence (and its exact inverse image). Scalar compatibility of the presentations and associativity of Ext composition prove their linearity.",
    "uses": [
-    "lem-sc-mayer-vietoris-ringed-space",
+    "lem-pc-cohomology-mayer-vietoris-ext-presentation",
     "def-pc-flat-cohomology-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Use the exact abelian-sheaf inverse image invImage of the comparison definition. On the free abelian sheaf represented by an open W, its inverse image is the free abelian sheaf represented by the inverse-image open: both represent sections of the pushforward on W, by the inverse-image adjunction and the free-sheaf universal property. These identifications commute with inclusions. Thus inverse image transports the Mayer--Vietoris free-sheaf short exact sequence to the one for the inverse-image cover. Apply Ext contravariantly to that sequence and covariantly to the adjoint coefficient map. The constant-sheaf isomorphism identifies the union term, while the cartesian open identifications identify the open terms. These are precisely the maps H.baseChangeLinear. Functoriality gives the restriction and difference squares. The boundary is Yoneda composition with the sequence class, so preservation of that class and of Yoneda composition by exact inverse image gives the connecting square. This requires no tensor product, flatness or quasi-coherence.",
+   "text": "Apply Mathlib Ext.precomp_mk₀_injective_of_epi and Ext.contravariant_sequence_exact₂′, exact₁′ and exact₃′ to K and K.map G, then transport through the additive equivalences. This gives both initial injections and all three exact pairs in every degree.",
    "uses": [
-    "def-pc-flat-cohomology-comparison",
-    "lem-sc-mayer-vietoris-ringed-space"
+    "lem-pc-cohomology-mayer-vietoris-ext-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the lower additive equivalence to each proposed square. Substitute the vertical identities of the geometric presentation. For the restriction and difference squares, use Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀ and associativity. For the boundary square, additionally use Ext.mapExactFunctor_extClass. These identities give the three squares directly; no tensor extension or flatness enters.",
+   "uses": [
+    "lem-pc-cohomology-mayer-vietoris-ext-presentation",
+    "def-pc-flat-cohomology-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-mayer-vietoris-ringed-space",
+  "lem-pc-cohomology-mayer-vietoris-ext-presentation",
   "def-pc-flat-cohomology-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01EB",
-  "place": "Tag 01EB, cohomology-lemma-mayer-vietoris; Tag 02KH, coherent-lemma-flat-base-change-cohomology, Mayer--Vietoris alternative. Inverse-image compatibility is the agent-expanded naturality step required by this alternative."
+  "place": "Ext construction of the Mayer--Vietoris sequence, Mathlib Ext exact-sequence and exact-functor lemmas; geometric identifications split into lem-pc-cohomology-mayer-vietoris-ext-presentation."
  },
  "mathlib_searches": [
   {
@@ -118,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T063508-L-3154216",
+  "landing": "20261012T085309-L-27334",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

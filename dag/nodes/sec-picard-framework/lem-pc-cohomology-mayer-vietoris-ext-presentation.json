@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-cohomology-mayer-vietoris-ext-presentation",
+ "kind": "statement",
+ "title": "Geometric Ext presentations for the Mayer--Vietoris base-change comparison",
+ "statement": "Let R and S be commutative rings with an R-algebra structure on S, f:X→Spec R a morphism of schemes [def-pc-scheme], M an O_X-module, and U,V opens with U union V=X. Use [def-pc-flat-cohomology-comparison] for F (the underlying abelian sheaf of M), G (exact abelian inverse image along the cartesian projection X_S→X), N (the underlying abelian sheaf of the pulled-back module), φ:G(F)→N (the adjoint coefficient map), and the scalar representations ρ:R→End(F), τ:S→End(N). Put A_X(n)=HOver f M n, A(W,n)=HOver (W.ι≫f) (pullback W.ι M) n and B_X(n),B(W,n) the corresponding base-changed groups. There exists a short exact short complex K of abelian sheaves on X and additive equivalences e_X:A_X(n)≃Ext(K.X₃,F,n), e_P:A(U,n)×A(V,n)≃Ext(K.X₂,F,n), e_I:A(U intersection V,n)≃Ext(K.X₁,F,n). There are likewise additive equivalences e'_X,e'_P,e'_I from the corresponding B groups to Ext((G K).X₃,N,n), Ext((G K).X₂,N,n), Ext((G K).X₁,N,n). For e_X,e_P,e_I, e(a x)=e(x) composed with mk₀(ρ(a)), and for e'_X,e'_P,e'_I, e'(s x)=e'(x) composed with mk₀(τ(s)). If b_X and b_W are exactly H.baseChangeLinear, then e'_X(b_X x)=G(e_X x) composed with mk₀(φ), e'_P(b_U x,b_V y)=G(e_P(x,y)) composed with mk₀(φ), and e'_I(b_{U intersection V} z)=G(e_I z) composed with mk₀(φ). No horizontal maps, exactness of the cohomology rows, or compatibility of boundaries is assumed or concluded.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EB",
+  "place": "Tag 01EB, free-sheaf realization of the two-open sequence; Section 01F7, pullback of cohomology; Tag 02KH, Mayer--Vietoris alternative. Ext and free-sheaf identifications expanded by the worker."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-flat-cohomology-comparison",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct the short exact sequence of free abelian sheaves on the intersection, the two opens and X. Its maps are (inclusion, minus inclusion) and the sum of inclusions. Exactness is checked on stalks. The restriction/extension-by-zero adjunction gives the three Ext presentations, and their naturality in the coefficient gives scalar compatibility. The full argument is recorded in the Lean docstring.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse image carries each free abelian sheaf on an open to the free sheaf on its preimage: use the inverse-image adjunction and the representing property for sections. The identifications commute with inclusions and finite sums. Cartesian open-subscheme and module-pullback composition isomorphisms give the lower Ext presentations. Adjunction naturality identifies each H.baseChangeLinear with exact-functor action on Ext followed by the adjoint coefficient map, giving the three vertical identities. These identities assert no boundary or row exactness.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01EB",
+  "place": "Free-sheaf/Ext expansion of 01EB and the 02KH Mayer--Vietoris argument, using 01F7 comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris long exact sequence of sheaf cohomology natural under inverse image of sheaves",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue",
+   "date": "2026-10-12",
+   "verdict": "No existing geometric Ext presentation matching all scalar and pullback identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mono_f₁₃, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex",
+   "date": "2026-10-12",
+   "verdict": "No existing geometric Ext presentation matching all scalar and pullback identifications."
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietorisSquare|HOver.*restrict",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean",
+   "date": "2026-10-12",
+   "verdict": "No existing geometric Ext presentation matching all scalar and pullback identifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology on open subsets as Ext from free abelian sheaves and pullback naturality",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CohomologyMayerVietorisInverseImage",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "proof, quasi-separated-case paragraph: Mayer--Vietoris and induction on the number of affine opens; free-sheaf Ext presentations and their inverse-image identifications",
+   "via": [
+    "lem-pc-cohomology-mayer-vietoris-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.CohomologyMayerVietorisExtPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CohomologyMayerVietorisExtPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.H.exists_mayerVietoris_extPresentation",
+  "statement": "theorem H.exists_mayerVietoris_extPresentation\n    (f : X ⟶ Spec (.of R)) (M : X.Modules)\n    (U V : X.Opens) (hcover : U ⊔ V = ⊤) :\n    let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj M\n    let G := invImage (baseChangeFst (S := S) f)\n    let N := (SheafOfModules.toSheaf (baseChangedScheme (S := S) f).ringCatSheaf).obj\n      (baseChangedModule (S := S) f M)\n    let φ := coeff (baseChangeFst (S := S) f) (baseChangeUnit (S := S) f M)\n    let ρ := (scalarRep M).comp (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom)\n    let τ := (scalarRep (baseChangedModule (S := S) f M)).comp\n      (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom)\n    let A := fun (W : X.Opens) (n : ℕ) ↦\n      HOver (W.ι ≫ f) ((pullback W.ι).obj M) n\n    let B := fun (W : X.Opens) (n : ℕ) ↦\n      HOver (baseChangeSnd (S := S) (W.ι ≫ f))\n        (baseChangedModule (S := S) (W.ι ≫ f) ((pullback W.ι).obj M)) n\n    let AX := fun n : ℕ ↦ HOver f M n\n    let BX := fun n : ℕ ↦\n      HOver (baseChangeSnd (S := S) f) (baseChangedModule (S := S) f M) n\n    ∃ (K : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))\n      (_hK : K.ShortExact)\n      (E : H.ExtRowPresentation R K F ρ AX\n        (fun n ↦ A U n × A V n) (fun n ↦ A (U ⊓ V) n))\n      (E' : H.ExtRowPresentation S (K.map G) N τ BX\n        (fun n ↦ B U n × B V n) (fun n ↦ B (U ⊓ V) n)),\n      (∀ n x, E'.eX n (H.baseChangeLinear (S := S) f M n x) =\n        ((E.eX n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n)) ∧\n      (∀ n (x : A U n × A V n), E'.eP n\n        (H.baseChangeLinear (S := S) (U.ι ≫ f) ((pullback U.ι).obj M) n x.1,\n         H.baseChangeLinear (S := S) (V.ι ≫ f) ((pullback V.ι).obj M) n x.2) =\n        ((E.eP n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n)) ∧\n      (∀ n x, E'.eI n\n        (H.baseChangeLinear (S := S) ((U ⊓ V).ι ≫ f) ((pullback (U ⊓ V).ι).obj M) n x) =\n        ((E.eI n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.H.ExtRowPresentation",
+   "AlgebraicGeometry.Scheme.Modules.H.exists_mayerVietoris_extPresentation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T085309-L-27334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T085309-L-27334",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
