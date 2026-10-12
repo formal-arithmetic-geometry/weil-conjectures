@@ -9,19 +9,29 @@
  },
  "proof": [
   {
-   "text": "Evaluate the internal operations on sections, reconstruct the abelian sheaf, and use the operation formulas and extensionality to obtain the asserted object equality.",
+   "text": "Apply Functor.congr_obj to hF for A and B and project F.obj A = F.obj B to the underlying sheaves. The components of eqToIso hF on sections are casts along these underlying type equalities (section_cast, proved by equality induction).",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Transport the sectionwise multiplication along F.obj A = F.obj B (section_mul_cast, proved by equality induction). The multiplication clause of hsections for A and B then identifies their addition operations on the common section type. Mathlib AddCommGroup.ext identifies their entire additive commutative group structures, giving equality of the bundled section objects (sectionGroup_eq). No construction of a reconstructed sheaf is required for injectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each restriction map apply the injectivity on morphisms of forget AddCommGrpCat. The underlying set-valued presheaves are equal by hF and the projected equality of F objects; Functor.congr_hom and eqToHom_map therefore identify the restriction maps. Functor.ext gives equality of the additive presheaves. Equality of the sheaf objects follows by destructing their records and proof irrelevance of the sheaf witnesses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "R1",
+  "group": "S2",
   "date": "2026-10-12",
   "document": "literature/stacks-project/sites.tex",
   "place": "Section 00YR (section-sheaves-algebraic-structures), quadruple (D1)-(D4), (A1)-(A3) before Proposition 00YV (proposition-functoriality-algebraic-structures-topoi)",
-  "note": "Strict decomposition of the sectionwise reconstruction argument."
+  "note": "Complete Lean proof of the injectivity portion of the sectionwise reconstruction argument. Mathlib AddCommGroup.ext reduces structure equality to addition equality; all transport and functor glue is proved locally."
  },
  "mathlib_searches": [
   {
@@ -97,9 +107,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T130938-L-1329085",
-  "kind": "interface"
+  "landing": "20261012T144144-L-2107220",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
