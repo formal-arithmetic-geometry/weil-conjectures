@@ -30,11 +30,12 @@
    "elementary": false
   },
   {
-   "text": "Restrict the exterior sheafification unit to Over U. The unit is locally bijective, and open restriction preserves local bijectivity. Its target is the restriction of exteriorSheaf M n. Maps from its source into the restricted structure sheaf therefore extend uniquely across it by module sheafification. The extension is q. The formula follows by precomposition with the unit; pure wedges span before sheafification, giving uniqueness. Empty tuples and zero rings use the same construction.",
+   "text": "Restrict the exterior sheafification unit to Over U. Its underlying abelian-presheaf map is toSheafify, hence locally bijective; restriction preserves local injectivity and local surjectivity because Over.forget is cocontinuous. The restricted structure sheaf is a sheaf because Over.forget is continuous. Apply PresheafOfModules.homEquivOfIsLocallyBijective to extend the determinant presheaf morphism. Evaluation of the inverse law on pure wedges gives the determinant formula. Uniqueness follows from exteriorSheaf_dual_ext applied to the two determinant formulas. The same argument covers n = 0, empty opens and zero rings.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface",
     "def-sc-sheaf-exterior-power",
-    "def-pur-sheaf-hom"
+    "def-pur-sheaf-hom",
+    "lem-sc-exterior-sheaf-dual-ext"
    ],
    "elementary": false
   }
@@ -43,12 +44,13 @@
   "def-pur-sheaf-hom",
   "def-sc-sheaf-exterior-power",
   "lem-pc-sites-module-sheafification-interface",
-  "lem-sc-exterior-power-dual-pairing"
+  "lem-sc-exterior-power-dual-pairing",
+  "lem-sc-exterior-sheaf-dual-ext"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/duality.tex; Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean",
-  "place": "Tags 03CY and 0BRT (determinant inversion); pairingDual and pairingDual_ιMulti_ιMulti. Expanded local argument written by N1; Stacks pages read at https://stacks.math.columbia.edu/tag/03CY and https://stacks.math.columbia.edu/tag/0BRT."
+  "place": "Tags 03CY and 0BRT; implemented by U1 using the canonical sectionwise determinant pairing, restriction of locally bijective maps and the module Hom equivalence."
  },
  "mathlib_searches": [
   {
@@ -124,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T144129-L-2102153",
-  "kind": "interface",
+  "landing": "20261012T194145-L-466282",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
