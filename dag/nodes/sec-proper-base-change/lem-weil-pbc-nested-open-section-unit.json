@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-nested-open-section-unit",
+ "kind": "statement",
+ "title": "Nested open section unit compatibility",
+ "statement": "Let X be a scheme [def-pc-scheme], V ≤ U opens [def-weil-open-immersion], i : V → U their inclusion, and F an abelian sheaf on the small etale site of X [def-weil-pbc-etale-site, def-weil-pbc-abelian-etale-sheaves]. Put bW = (W,id), vW = (W,jW), f : vV → vU the inclusion, and t : bV → i.Etale(bU) the map (i,id). Let η_i be the inverse-image unit [def-weil-pbc-inverse-image], c : jV^*F ≅ i^*jU^*F the canonical composition comparison [lem-weil-pbc-inverse-image-composition], and ρW : jW^*F ≅ F restricted to W the localization comparison [lem-weil-pbc-etale-inverse-image-restriction]. Then η_i(jU^*F)(bU) followed by (i^*jU^*F)(t), c inverse at bV, and ρV at bV equals ρU at bU followed by F(f). This is an equality of homomorphisms (jU^*F)(bU) → F(vV), including empty and equal opens.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Lemma 21.7.1 gives localization background; the explicit adjunction calculation is agent-written in lean/Sheaf/AlgebraicGeometry/NestedOpenSectionUnit.lean"
+ },
+ "proof": [
+  {
+   "text": "Work first with arbitrary coefficient category A, with Category.{u+1}, Abelian, IsGrothendieckAbelian.{u+1}, and HasSmallSiteSheafify instances. The private helper restriction_unit_coefficients proves the pointwise localization-unit formula for A, and the private helper composition_unit_coefficients proves the pointwise composition-unit formula for A. Specialize these to AddCommGrpCat.{u+1}. The generic pointwise localization-unit formula follows from Adjunction.unit_leftAdjointUniq_hom_app and naturality: η_j(b) followed by j^*F(ψ) and ρ_j(c) is F applied to the site adjunct of ψ. Apply it to δ = (id,id) : bU → U ×_X U. The site adjunct is id_vU by its first projection, so η_U(vU) followed by jU^*F(δ) is ρU inverse. Apply it to ψ = (i,id) : bV → U ×_X V; its site adjunct is f, giving η_V(vU) followed by jV^*F(ψ) and ρV = F(f).",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check by the outer and inner pullback projections that the site pullback composition comparison carries ψ to t followed by i.Etale(δ). This uses i followed by jU = jV and identity composition only.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the composition-unit equation at vU and restrict along ψ. Substitute the preceding site-map identity, then move δ through the i unit by naturality. Replace the U unit followed by δ by ρU inverse. Thus η_V(vU) followed by jV^*F(ψ) and c equals ρU inverse followed by η_i(bU) and i^*jU^*F(t).",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose with c inverse, precompose with ρU and postcompose with ρV. Cancel the inverse pairs and use the formula for ψ to obtain the stated equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/NestedOpenSectionUnit.lean",
+  "place": "Explicit adjunction calculation, independently read and completed by P2, 2026-10-13. Repair of the duplicate private helper statements: generalized both helpers to arbitrary coefficient categories, 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf adjunction inverse image unit and localization restriction composition",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "Found generic adjunction comparison unit equation, used in restriction_unit; no specialized etale terminal-object identity.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unit of composite left adjoints evaluated after restriction to an open subscheme",
+   "results": "Found Zariski Scheme.Modules restriction-unit formulas; these do not identify the specified small-etale inverse images.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*homEquiv|unit_leftAdjointUniq",
+   "results": "Found Mathlib adjunction uniqueness equations in CategoryTheory/Adjunction/Unique.lean, used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "partial"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOpenSectionPullback",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Identity-generator coherence, proof step 2: general section calculation for nested opens.; nested-open restriction and composition unit calculation",
+   "via": [
+    "lem-weil-pbc-etale-open-section-pullback",
+    "lem-weil-pbc-etale-open-free-sheaf-unit-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NestedOpenSectionUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/NestedOpenSectionUnit.lean",
+  "declaration": "AlgebraicGeometry.nestedOpenSection_unit",
+  "declarations": [
+   "AlgebraicGeometry.nestedOpenSection_unit"
+  ],
+  "statement": "theorem nestedOpenSection_unit {X : Scheme.{u}} (U V : X.Opens) (h : V ≤ U)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    let bU := Scheme.Etale.mk (𝟙 U.toScheme)\n    let bV := Scheme.Etale.mk (𝟙 V.toScheme)\n    let vU : X.Etale := (MorphismProperty.Over.map ⊤ (inferInstance : Etale U.ι)).obj bU\n    let vV : X.Etale := (MorphismProperty.Over.map ⊤ (inferInstance : Etale V.ι)).obj bV\n    let f : vV ⟶ vU := MorphismProperty.Over.homMk (X.homOfLE h)\n      (by\n        change X.homOfLE h ≫ (𝟙 U.toScheme ≫ U.ι) = 𝟙 V.toScheme ≫ V.ι\n        simpa only [Category.id_comp] using X.homOfLE_ι h) trivial\n    let t : bV ⟶ (MorphismProperty.Over.pullback @Etale ⊤ (X.homOfLE h)).obj bU :=\n      MorphismProperty.Over.homMk (pullback.lift (X.homOfLE h) (𝟙 V.toScheme)\n        ((Category.comp_id _).trans (Category.id_comp _).symm)) (by simp [bU, bV])\n    ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}\n      (X.homOfLE h)).unit.app ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj F)).hom.app\n        (op bU) ≫\n      ((Etale.upperStar AddCommGrpCat.{u + 1} (X.homOfLE h)).obj\n        ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj F)).obj.map t.op ≫\n      ((Etale.upperStarComp AddCommGrpCat.{u + 1} (X.homOfLE h) U.ι V.ι\n        (X.homOfLE_ι h).symm).inv.app F).hom.app (op bV) ≫\n      ((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} V.ι\n        inferInstance).hom.app F).hom.app (op bV) =\n      ((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} U.ι\n        inferInstance).hom.app F).hom.app (op bU) ≫ F.obj.map f.op",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T202247-L-707237",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T202247-L-707237",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

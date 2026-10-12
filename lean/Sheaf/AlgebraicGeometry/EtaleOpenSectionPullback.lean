@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.ConstantSectionAdjunctPullback
+import Sheaf.AlgebraicGeometry.NestedOpenSectionUnit
 
 /-! # Restriction of sections classified by a constant sheaf map
 
@@ -74,6 +74,28 @@ theorem etaleOpenSection_pullback {X : Scheme.{u}}
                   (fun a f ↦ by
                     apply MorphismProperty.Over.Hom.ext
                     exact (Category.comp_id _).symm.trans
-                      (MorphismProperty.Over.w f)))).homEquiv _ _ m)))) := by sorry
+                      (MorphismProperty.Over.w f)))).homEquiv _ _ m)))) := by
+  dsimp only
+  simp only [← Category.assoc]
+  rw [Adjunction.homEquiv_naturality_right]
+  rw [constantSection_adjunct_pullback]
+  have hz {B C : AddCommGrpCat.{u + 1}}
+      (f : AddCommGrpCat.of (ULift.{u + 1} ℤ) ⟶ B) (g : B ⟶ C) :
+      AddCommGrpCat.uliftZMultiplesAddEquiv C (f ≫ g) =
+        g (AddCommGrpCat.uliftZMultiplesAddEquiv B f) := by rfl
+  rw [hz, hz]
+  have hn := nestedOpenSection_unit U V h F
+  dsimp only at hn
+  let e := Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} V.ι
+    (inferInstance : Etale V.ι)
+  have hinv : (e.hom.app F).hom.app (op (Scheme.Etale.mk (𝟙 V.toScheme))) ≫
+      (e.inv.app F).hom.app (op (Scheme.Etale.mk (𝟙 V.toScheme))) = 𝟙 _ := by
+    exact (((sheafSections V.toScheme.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (op (Scheme.Etale.mk (𝟙 V.toScheme)))).mapIso (e.app F)).hom_inv_id
+  have hn' := congrArg
+    (fun q ↦ q ≫ (e.inv.app F).hom.app (op (Scheme.Etale.mk (𝟙 V.toScheme)))) hn
+  dsimp only [e] at hinv hn'
+  simp only [Category.assoc, hinv, Category.comp_id] at hn'
+  exact ConcreteCategory.congr_hom hn' _
 
 end AlgebraicGeometry
