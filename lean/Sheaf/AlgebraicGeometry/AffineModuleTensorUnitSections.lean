@@ -9,10 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings
-import Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction
-import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import Sheaf.AlgebraicGeometry.AffineTensorUnitSectionPresentation
 
 /-! # Affine tensor unit on sections
 
@@ -72,6 +69,54 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
+
+private theorem scalar_relation_unit_bijective
+    {D C N T : Type u} [CommRing D] [CommRing C] [Algebra D C]
+    [AddCommGroup N] [Module D N] [Module C N] [IsScalarTower D C N]
+    [AddCommGroup T] [Module D T]
+    (q : (TensorProduct D C N) →ₗ[D] T) (hq : Function.Surjective q)
+    (hk : LinearMap.ker q = Submodule.span D
+      {z | ∃ (c : C) (n : N),
+        z = TensorProduct.tmul D c n - TensorProduct.tmul D (1 : C) (c • n)}) :
+    Function.Bijective (fun n : N ↦ q (TensorProduct.tmul D (1 : C) n)) := by
+  let a : (TensorProduct D C N) →ₗ[D] N :=
+    TensorProduct.lift (Algebra.lsmul D D N).toLinearMap
+  have ha (c : C) (n : N) : a (TensorProduct.tmul D c n) = c • n := by
+    rfl
+  have hu (n : N) : a (TensorProduct.tmul D (1 : C) n) = n := by
+    rw [ha, one_smul]
+  have hka : LinearMap.ker q ≤ LinearMap.ker a := by
+    rw [hk]
+    apply Submodule.span_le.mpr
+    rintro z ⟨c, n, rfl⟩
+    change a (_ - _) = 0
+    rw [map_sub, ha, hu, sub_self]
+  have hrel (c : C) (n : N) :
+      q (TensorProduct.tmul D c n) = q (TensorProduct.tmul D (1 : C) (c • n)) := by
+    have hmem : TensorProduct.tmul D c n - TensorProduct.tmul D (1 : C) (c • n) ∈
+        LinearMap.ker q := by
+      rw [hk]
+      exact Submodule.subset_span ⟨c, n, rfl⟩
+    have hz : q (TensorProduct.tmul D c n - TensorProduct.tmul D (1 : C) (c • n)) = 0 := hmem
+    rw [map_sub, sub_eq_zero] at hz
+    exact hz
+  have hnormal (z : TensorProduct D C N) : q z = q (TensorProduct.tmul D (1 : C) (a z)) := by
+    induction z using TensorProduct.induction_on with
+    | zero => simp
+    | tmul c n => rw [ha]; exact hrel c n
+    | add x y hx hy => simp only [map_add, TensorProduct.tmul_add, hx, hy]
+  constructor
+  · intro n m h
+    change q (TensorProduct.tmul D (1 : C) n) = q (TensorProduct.tmul D (1 : C) m) at h
+    have hz : TensorProduct.tmul D (1 : C) n - TensorProduct.tmul D (1 : C) m ∈
+        LinearMap.ker q := by
+      change q (_ - _) = 0
+      rw [map_sub, h, sub_self]
+    have hz' : a (TensorProduct.tmul D (1 : C) n - TensorProduct.tmul D (1 : C) m) = 0 := hka hz
+    simpa only [map_sub, hu, sub_eq_zero] using hz'
+  · intro y
+    obtain ⟨z, rfl⟩ := hq y
+    exact ⟨a z, (hnormal z).symm⟩
 
 /-- The tensor unit comparison is bijective on the indicated affine sections.
 Source: Stacks Project, Morphisms, Lemma 01SB, last two paragraphs.
@@ -138,7 +183,30 @@ theorem affine_module_tensor_unit_sections_bijective [IsAffineHom f]
     (G : SheafOfModules.{u} (𝓡 A)) (hG : G.IsQuasicoherent)
     (V : X.Opens) (hV : IsAffineOpen V) :
     Function.Bijective ((β.app G).val.app (op V)) := by
-  sorry
+  classical
+  obtain ⟨q, hq, hk, hu⟩ := affine_tensor_unit_section_presentation f B b t ε hring
+    P pobj κ hP H hobj γ hH G hG V hV
+  let : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
+  let : Module Γ(X, V) Γ(H.obj G, f ⁻¹ᵁ V) :=
+    Module.compHom _ (f.app V).hom
+  let : Module Γ(X, V) (G.val.obj (op V)) := Module.compHom _ (f.app V).hom
+  let : IsScalarTower Γ(X, V) Γ(U, f ⁻¹ᵁ V) (G.val.obj (op V)) :=
+    ⟨fun r c n ↦ by
+      change ((f.app V).hom r * c) • n = (f.app V).hom r • (c • n)
+      exact mul_smul _ _ _⟩
+  have hbij := scalar_relation_unit_bijective q hq hk
+  have hb (n : G.val.obj (op V)) :
+      ((β.app G).val.app (op V)) n = q (TensorProduct.tmul Γ(X, V) (1 : Γ(U, f ⁻¹ᵁ V)) n) := by
+    have he := hcomp G
+    rw [Adjunction.homEquiv_unit] at he
+    exact (congrArg (fun a ↦ a.val.app (op V) n) he).trans (hu n).symm
+  constructor
+  · intro n m h
+    apply hbij.1
+    exact (hb n).symm.trans (h.trans (hb m))
+  · intro y
+    obtain ⟨n, hn⟩ := hbij.2 y
+    exact ⟨n, (hb n).trans hn⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-affine-tensor-unit-section-presentation",
+ "kind": "statement",
+ "title": "Affine tensor unit section presentation by diagonal-action relations",
+ "statement": "Let $f:U\\to X$ be an affine morphism of schemes [pqf-def-affine-morphism, def-pc-scheme]. Write $\\mathcal A=f_*\\mathcal O_U$, let $\\rho:\\mathcal O_X\\to\\mathcal A$ be the structure map, and let $r_0:f^{-1}\\mathcal O_X\\to\\mathcal O_U$, $t_0=f^{-1}\\rho$, and $e:f^{-1}\\mathcal A\\to\\mathcal O_U$ be the structure map, inverse-image map, and ring inverse-image/direct-image counit. Write $R$ for pushforward as an $\\mathcal A$-module, and $S$ for restriction to $\\mathcal O_X$ [def-weil-sheaf-of-modules-category]. Tensor pullback and change of rings are those of [def-pc-module-pullback, def-pur-sheaf-tensor-product], and the adjunction is the canonical one of [lem-pc-module-pullback-adjunction]. Let $B$ be a commutative ring sheaf on $U$, with $b:\\mathcal O_U\\to B$, $t:f^{-1}\\mathcal A\\to B$, and $\\epsilon:B\\to\\mathcal O_U$, where the square $(r_0,t_0,b,t)$ is a pushout, $b\\epsilon=1$, and $t\\epsilon=e$. Let $P:\\operatorname{Mod}(\\mathcal A)\\to\\operatorname{Mod}(B)$ be change of rings along $t$ after inverse image on objects and morphisms. Let $\\kappa:P\\operatorname{res}_b\\simeq Sf^*$ carry the pullback unit, after inversion and the object equality, to $1\\otimes\\eta(n)$. Let $H:\\operatorname{Mod}(\\mathcal A)\\to\\operatorname{Mod}(\\mathcal O_U)$ be change of rings along $\\epsilon$ after $P$, on objects and morphisms, and let $\\gamma:Sf^*\\to H$ satisfy the section formula $\\gamma\\kappa(p)=1\\otimes p$ after the object equality and sheafification; assume $H$ preserves quasi-coherence. For every quasi-coherent $\\mathcal A$-module $G$ and affine open $V\\subseteq X$, put $D=\\mathcal O_X(V)$, $C=\\mathcal O_U(f^{-1}V)$, and $N=G(V)$, with its given $C=\\mathcal A(V)$-action and restricted $D$-action. There exists a surjective $D$-linear map $q:C\\otimes_D N\\to H(G)(f^{-1}V)$ whose kernel is the $D$-span of $c\\otimes n-1\\otimes(cn)$ for $c\\in C,n\\in N$, and such that $q(1\\otimes n)=\\gamma_{G,f^{-1}V}(\\mathrm{unit}_{SG,V}(n))$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SB, lemma-affine-equivalence-modules, last two paragraphs and key algebra observation; expanded canonical unit calculation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "For an affine open V let W=f^{-1}V, D=O_X(V), C=O_U(W), and N=G(V). W is affine. Push forward the structure-sheaf unit along the affine, hence qcqs, morphism. This gives the quasi-coherent O_X-algebra A=f_*O_U. Apply quasi-coherence under scalar restriction and the canonical affine pullback section formula to obtain C tensor_D N, carrying 1 tensor n to the pullback adjunction unit.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherence-scalar-restriction",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pushout B is O_U tensor_{f^{-1}O_X} f^{-1}A. Its underlying O_U-module is the pullback of A and hence quasi-coherent. The affine formula identifies B(W) with C tensor_D C, with b the first factor and t followed by the inverse-image unit the second. The two counit equations make epsilon multiplication. Kappa identifies the underlying P(G) with the quasi-coherent pullback of SG. Apply quasi-coherent algebra change of rings to epsilon between B and O_U; its affine sheafification map is bijective. Transport with hobj to identify H(G)(W) with C tensor_{C tensor_D C}(C tensor_D N).",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-algebra-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map c tensor n to 1 tensor (c tensor n) in the double tensor product to define q. Outer scalars move inward by balancing with a tensor 1, so q is surjective. Balancing with 1 tensor c gives the relation c tensor n - 1 tensor (cn). To see these are all relations, send a tensor (c tensor n) to the class of ac tensor n modulo their D-span. For an element x tensor y of C tensor_D C, balancing compares axcy tensor n with acx tensor yn; their difference is a consequence of the displayed relations. D-balancing and additivity give a well-defined inverse quotient map, and pure-tensor induction proves the two composites are identities. Hence ker q is exactly the stated span.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The formula for kappa inverse on the pullback unit, followed by the section formula for gamma in hH, shows that q(1 tensor n)=gamma(unit(n)). This uses no beta and no equation identifying its adjoint. All constructions and relations are valid for zero rings, zero modules, and empty affine opens.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherence-scalar-restriction",
+  "lem-weil-pbc-quasi-coherent-algebra-change-of-rings",
+  "pqf-def-affine-morphism",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 01SB",
+  "place": "Construction of h and key algebra observation; details omitted in the source expanded into a kernel presentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor product module over A tensor R A cancelling multiplication map to A",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For affine morphism f and quasicoherent module N over f star O, sections of tensor pullback followed by multiplication base change are quotient of C tensor D N by c tensor n minus 1 tensor cn",
+   "results": "Eight results: KaehlerDifferential.tensorKaehlerEquivBase_tmul, KaehlerDifferential.tensorKaehlerEquiv_tmul and related differential base change; PresheafOfModules.Monoidal.tensorObjMap and tensorObj; Algebra.FormallyUnramified.sec. None states this affine section kernel presentation.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*tensor.*(kernel|presentation)|tensor.*(kernel|relation)",
+   "results": "Seventeen hits: module tensor presentations, monoidal cokernels, tensor right-exactness, symmetric and Clifford algebra relations. None identifies this affine sheaf tensor presentation. Blueprint searches for tensor unit and 01SB found no matching node.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModuleTensorUnitSections",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); affine module correspondence steps 4–7: affine tensor computation and invertibility; canonical unit map on an affine base open (01SB key algebra observation); affine tensor unit section calculation: affine identifications and diagonal balancing-relation quotient, before proving bijectivity",
+   "via": [
+    "lem-weil-pbc-affine-module-tensor-unit-sections",
+    "lem-weil-pbc-affine-module-tensor-comparison-isIso",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTensorUnitSectionPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTensorUnitSectionPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_tensor_unit_section_presentation",
+  "statement": "theorem affine_tensor_unit_section_presentation [IsAffineHom f] (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf) (hring : IsPushout r₀ t₀ b t ∧ b ≫ ε = 𝟙 U.sheaf ∧ t ≫ ε = e₀) (P : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B)) (pobj : ∀ G, P.obj G = SheafOfModules.changeOfRings.{u, u, u} t (I G)) (κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f) (hP : (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'), P.map a = eqToHom (pobj G) ≫ SheafOfModules.changeOfRingsHom.{u, u, u} t (I G) (TopCat.Sheaf.inverseImageModuleMap f.base A G a) ≫ eqToHom (pobj G').symm) ∧ (∀ (G : SheafOfModules.{u} (𝓡 A)) (V : (Opens X)ᵒᵖ) (g : G.val.obj V), ((eqToHom (pobj G)).val.app (fV V)) ((κ.inv.app G).val.app (fV V) (((adj₀).unit.app ((S).obj G)).val.app V g)) = ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t (I G))).app (fV V) ((1 : B.obj.obj (fV V)) ⊗ₜ[(IA).obj.obj (fV V),(t.hom.app (fV V)).hom] (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g)))) (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (hobj : ∀ G, H.obj G = SheafOfModules.changeOfRings.{u, u, u} ε (P.obj G)) (γ : S ⋙ tensorPullback f ⟶ H) (hH : (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'), H.map a = eqToHom (hobj G) ≫ SheafOfModules.changeOfRingsHom.{u, u, u} ε (P.obj G) (P.map a) ≫ eqToHom (hobj G').symm) ∧ (∀ (G : SheafOfModules.{u} (𝓡 A)) (W : (Opens U)ᵒᵖ) (p : (P.obj G).val.obj W), ((eqToHom (hobj G)).val.app W) ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) = ((PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app (SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε (P.obj G))).app W ((1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W,(ε.hom.app W).hom] p)) ∧ (∀ G : SheafOfModules.{u} (𝓡 A), G.IsQuasicoherent → (H.obj G).IsQuasicoherent)) (G : SheafOfModules.{u} (𝓡 A)) (hG : G.IsQuasicoherent) (V : X.Opens) (hV : IsAffineOpen V) : letI : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra letI : Module Γ(X, V) (G.val.obj (op V)) := Module.compHom _ (f.app V).hom letI : Module Γ(X, V) Γ(H.obj G, f ⁻¹ᵁ V) := Module.compHom _ (f.app V).hom ∃ q : (Γ(U, f ⁻¹ᵁ V) ⊗[Γ(X, V)] (G.val.obj (op V))) →ₗ[Γ(X, V)] Γ(H.obj G, f ⁻¹ᵁ V), Function.Surjective q ∧ LinearMap.ker q = Submodule.span Γ(X, V) {z | ∃ (c : Γ(U, f ⁻¹ᵁ V)) (n : G.val.obj (op V)), z = c ⊗ₜ[Γ(X, V)] n - (1 : Γ(U, f ⁻¹ᵁ V)) ⊗ₜ[Γ(X, V)] (c • n)} ∧ ∀ n : G.val.obj (op V), q ((1 : Γ(U, f ⁻¹ᵁ V)) ⊗ₜ[Γ(X, V)] n) = (γ.app G).val.app (fV (op V)) (((adj₀).unit.app ((S).obj G)).val.app (op V) n)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T154827-L-2471868",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T154827-L-2471868",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
