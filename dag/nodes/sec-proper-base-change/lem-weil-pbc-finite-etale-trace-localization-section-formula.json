@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-finite-etale-trace-localization-section-formula",
+ "kind": "statement",
+ "title": "Transported finite étale trace section formula",
+ "statement": "Let f:Y→X and g:X′→X be étale morphisms, F an abelian sheaf on X, and τ:f_*f⁻¹F→F satisfy the local sum predicate [def-weil-pbc-finite-etale-trace-local-sums]. Set f′:Y×_XX′→X′ and F′=g⁻¹F. Write ρ for the inverse-image restriction isomorphism [lem-weil-pbc-etale-inverse-image-restriction]. For any W in X′_Et and any pasting isomorphism κ_W:B_f′W≅B_fW over X with the specified projections to W and Y [lem-weil-pbc-cartesian-square-pasting], transport the τ component to F′(W) using ρ at B_f′W, F(κ_W⁻¹), and ρ_W⁻¹. For each input s∈F′(B_f′W), each h:T→W, and each finite clopen splitting i_j:V_j→B_f′T with inverse t_j to the projection to T, restriction along h of this transported section equals the sum over j of restriction along t_j≫i_j of F′(B_f′h)(s). The index set may be empty. No finiteness of f and no trace on X′ are assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH, paragraph after Definition 03SE; SGA 4, Exposé IX, 5.1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-etale-trace-local-sums",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-cartesian-square-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Use naturality of the restriction isomorphism and of τ to reduce the formula on a split object to the local sum formula for τ after transporting the splitting across the canonical pullback pasting isomorphism. The projection identities of the supplied pasting isomorphism show that the transported sections are over X and satisfy both inverse equations; isomorphisms preserve the finite clopen coproduct. Apply the local sum predicate and evaluate the resulting finite sum on the input section.",
+   "uses": [
+    "def-weil-pbc-finite-etale-trace-local-sums",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH, paragraph after Definition 03SE; SGA 4, Exposé IX, 5.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-etale-trace-local-sums",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-cartesian-square-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH, paragraph after Definition 03SE; SGA 4, Exposé IX, 5.1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local sum trace etale sheaf restriction pullback pasting compatibility",
+   "results": "service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of the sum of restrictions for an etale sheaf along pullback pasting and inverse image restriction",
+   "results": "No relevant declaration; unrelated gluing results",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackLeftPullbackSndIso|FiniteEtaleTraceLocalSums in Mathlib",
+   "results": "pullbackLeftPullbackSndIso declarations only; no trace local-sum declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of summation of restrictions along finite coproduct sections for sheaves under localization",
+   "results": "Eight general sheaf results, none stating the transported trace formula.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Naturality and pullback cone primitives only; these do not supply the splitting transport argument.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*(localiz|restrict)|sum.*naturality",
+   "results": "Ring and linear algebra trace localization and general sum/naturality lemmas; no étale sheaf trace statement. Local source search also found no independent upstream proof; trace-family results in Sheaf depend on this item.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalization",
+  "date": "2026-10-12",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-etale-trace-localization",
+   "place": "The proof step transporting each splitting across the pullback pasting isomorphism and applying the local sum hypotheses",
+   "via": [
+    "lem-weil-pbc-finite-etale-trace-localization-section-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalizationSectionFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceLocalizationSectionFormula.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteEtaleTrace_localization_section_formula",
+  "statement": "theorem finiteEtaleTrace_localization_section_formula {X Y X' : Scheme.{u}} (f : Y ⟶ X) (hf : Etale f) (g : X' ⟶ X) (hg : Etale g) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : let A := AddCommGrpCat.{u + 1} let B := fun {S Z : Scheme.{u}} (q : Z ⟶ S) (hq : Etale q) (W : S.Etale) ↦ (MorphismProperty.Over.map ⊤ hq).obj ((MorphismProperty.Over.pullback @Etale ⊤ q).obj W) letI := hf let f' := pullback.snd f g let hf' : Etale f' := inferInstance let F' := (upperStar A g).obj F ∀ (τ : (lowerStar A f).obj ((upperStar A f).obj F) ⟶ F), FiniteEtaleTraceLocalSums f hf F τ → ∀ (W : X'.Etale) (κ : (MorphismProperty.Over.map ⊤ hg).obj (B f' hf' W) ≅ B f hf ((MorphismProperty.Over.map ⊤ hg).obj W)), κ.hom.left ≫ pullback.fst (W.hom ≫ g) f = pullback.fst W.hom f' → κ.hom.left ≫ pullback.snd (W.hom ≫ g) f = pullback.snd W.hom f' ≫ pullback.fst f g → ∀ (s : F'.obj.obj (op (B f' hf' W))) (T : X'.Etale) (h : T ⟶ W) (J : Type u) [Fintype J] (V : J → Scheme.{u}) (i : ∀ j, V j ⟶ pullback T.hom f') (t : ∀ j, T.left ⟶ V j) (_ : IsColimit (Cofan.mk (pullback T.hom f') i)) (hinv₁ : ∀ j, t j ≫ i j ≫ pullback.fst T.hom f' = 𝟙 T.left) (_ : ∀ j, i j ≫ pullback.fst T.hom f' ≫ t j = 𝟙 (V j)) (_ : ∀ j, IsOpenImmersion (i j)) (_ : ∀ j, IsClosedImmersion (i j)), F'.obj.map h.op ((((upperStarIsoLocalizationRestriction A g hg).app F).hom.hom.app (op (B f' hf' W)) ≫ F.obj.map κ.inv.op ≫ (((upperStarIsoLocalizationRestriction A f hf).app F).inv.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj ((MorphismProperty.Over.map ⊤ hg).obj W)))) ≫ τ.hom.app (op ((MorphismProperty.Over.map ⊤ hg).obj W)) ≫ ((upperStarIsoLocalizationRestriction A g hg).app F).inv.hom.app (op W)) s) = ∑ j, F'.obj.map (MorphismProperty.Over.homMk (A := T) (B := B f' hf' T) (t j ≫ i j) (by change (t j ≫ i j) ≫ pullback.snd T.hom f' ≫ f' = T.hom rw [← pullback.condition] simpa [← Category.assoc] using congrArg (fun k ↦ k ≫ T.hom) (hinv₁ j))).op (F'.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ f' ⋙ MorphismProperty.Over.map ⊤ hf').map h).op s)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0620e",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T135258-L-1681013",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0620e",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T135258-L-1681013",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged item signature and delivered proof with its node, new transport lemma with its node and source, and repaired metadata with the actual dependencies; both delivered modules and sole direct importer compile cleanly, with expected axioms."
+ }
+}

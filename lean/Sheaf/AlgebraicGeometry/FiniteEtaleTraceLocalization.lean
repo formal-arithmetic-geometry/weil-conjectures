@@ -6,8 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalSums
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceSectionDescent
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalizationSectionFormula
 
 /-!
 # Local sum characterization of finite étale traces
@@ -25,6 +25,58 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+private theorem localSum_section_formula {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (hf : Etale f) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (τ : (lowerStar AddCommGrpCat.{u + 1} f).obj
+      ((upperStar AddCommGrpCat.{u + 1} f).obj F) ⟶ F)
+    (hτ : FiniteEtaleTraceLocalSums f hf F τ) :
+    let B := MorphismProperty.Over.pullback @Etale ⊤ f ⋙ MorphismProperty.Over.map ⊤ hf
+    ∀ (W : X.Etale) (s : F.obj.obj (op (B.obj W)))
+      (T : X.Etale) (h : T ⟶ W) (J : Type u) [Fintype J]
+      (V : J → Scheme.{u}) (i : ∀ j, V j ⟶ pullback T.hom f)
+      (t : ∀ j, T.left ⟶ V j) (_ : IsColimit (Cofan.mk (pullback T.hom f) i))
+      (hinv₁ : ∀ j, t j ≫ i j ≫ pullback.fst T.hom f = 𝟙 T.left)
+      (_ : ∀ j, i j ≫ pullback.fst T.hom f ≫ t j = 𝟙 (V j))
+      (_ : ∀ j, IsOpenImmersion (i j)) (_ : ∀ j, IsClosedImmersion (i j)),
+      F.obj.map h.op
+        ((((upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} f hf).app F).inv.hom.app
+          (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W)) ≫
+            τ.hom.app (op W)) s) =
+        ∑ j, F.obj.map (MorphismProperty.Over.homMk
+          (A := T) (B := B.obj T) (t j ≫ i j)
+          (by
+            change (t j ≫ i j) ≫ pullback.snd T.hom f ≫ f = T.hom
+            rw [← pullback.condition]
+            simpa [← Category.assoc] using
+              congrArg (fun k ↦ k ≫ T.hom) (hinv₁ j))).op
+                (F.obj.map (B.map h).op s) := by
+  classical
+  dsimp only
+  intro W s T h J hJ V i t hc hinv₁ hinv₂ hopen hclosed
+  let β := (lowerStar AddCommGrpCat.{u + 1} f).map
+    ((upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} f hf).app F).inv ≫ τ
+  have hn := congrArg (fun k ↦ k s) (β.hom.naturality h.op).symm
+  change F.obj.map h.op
+    ((((upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} f hf).app F).inv.hom.app
+      (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W)) ≫
+        τ.hom.app (op W)) s) = _ at hn
+  rw [hn]
+  have hs := hτ T J V i t hc hinv₁ hinv₂ hopen hclosed
+  change _ = _ at hs
+  change ((((upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} f hf).app F).inv.hom.app
+    (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj T)) ≫
+      τ.hom.app (op T)) _) = _
+  rw [hs]
+  have heval {M N : AddCommGrpCat.{u + 1}} (v : J → (M ⟶ N)) (x : M) :
+      (∑ j, v j) x = ∑ j, v j x := by
+    change ((∑ j, v j).hom) x = _
+    have hv := map_sum (AddCommGrpCat.homAddEquiv (M := M) (N := N)) v Finset.univ
+    change (∑ j, v j).hom = ∑ j, (v j).hom at hv
+    rw [hv]
+    exact AddMonoidHom.finsetSum_apply _ _ _
+  exact heval _ _
+
+set_option maxRecDepth 2048 in
 /-- Local sum characterizations identify two trace morphisms under étale localization.
 No compatibility between the choices of the two morphisms is assumed.
 Source: Stacks Project, Section 03SH, after Definition 03SE, localization property;
@@ -80,6 +132,48 @@ theorem finiteEtaleTrace_localization_of_localSums
           (((upperStarIsoLocalizationRestriction A f hf).app F).inv.hom.app
             (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj
               ((MorphismProperty.Over.map ⊤ hg).obj W)))) ≫
-            τ.hom.app (op ((MorphismProperty.Over.map ⊤ hg).obj W)) := by sorry
+            τ.hom.app (op ((MorphismProperty.Over.map ⊤ hg).obj W)) := by
+  dsimp only
+  intro τ τ' hτ hτ' W κ hκ₁ hκ₂
+  let A := AddCommGrpCat.{u + 1}
+  let := hfin
+  let := hf
+  let f' := pullback.snd f g
+  let hf' : Etale f' := inferInstance
+  let F' := (upperStar A g).obj F
+  let B' := MorphismProperty.Over.pullback @Etale ⊤ f' ⋙
+    MorphismProperty.Over.map ⊤ hf'
+  let ρ := (upperStarIsoLocalizationRestriction A g hg).app F
+  let L := ((upperStarIsoLocalizationRestriction A f' hf').app F').inv.hom.app
+    (op ((MorphismProperty.Over.pullback @Etale ⊤ f').obj W)) ≫ τ'.hom.app (op W)
+  let R := ρ.hom.hom.app (op (B'.obj W)) ≫ F.obj.map κ.inv.op ≫
+    ((upperStarIsoLocalizationRestriction A f hf).app F).inv.hom.app
+      (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj
+        ((MorphismProperty.Over.map ⊤ hg).obj W))) ≫
+    τ.hom.app (op ((MorphismProperty.Over.map ⊤ hg).obj W))
+  change L ≫ ρ.hom.hom.app (op W) = R
+  apply ConcreteCategory.hom_ext
+  intro s
+  obtain ⟨z, hz, huniq⟩ :=
+    finiteEtaleTrace_section_descent f' (inferInstance) hf' F' W s
+  have hL := localSum_section_formula f' hf' F' τ' hτ' W s
+  have hR := finiteEtaleTrace_localization_section_formula f hf g hg F τ hτ
+    W κ hκ₁ hκ₂ s
+  have he : L s = (R ≫ ρ.inv.hom.app (op W)) s :=
+    (huniq _ hL).trans (huniq _ hR).symm
+  have hcancel : ρ.inv.hom.app (op W) ≫ ρ.hom.hom.app (op W) =
+      𝟙 (F.obj.obj (op ((MorphismProperty.Over.map ⊤ hg).obj W))) := by
+    rw [← NatTrans.comp_app, ← ObjectProperty.FullSubcategory.comp_hom]
+    simp only [Iso.inv_hom_id, ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app]
+    rfl
+  have hs := congrArg (fun x ↦ ρ.hom.hom.app (op W) x) he
+  change (L ≫ ρ.hom.hom.app (op W)) s =
+    ((R ≫ ρ.inv.hom.app (op W)) ≫ ρ.hom.hom.app (op W)) s at hs
+  have hRcancel : (R ≫ ρ.inv.hom.app (op W)) ≫ ρ.hom.hom.app (op W) = R := by
+    calc
+      _ = R ≫ (ρ.inv.hom.app (op W) ≫ ρ.hom.hom.app (op W)) := Category.assoc _ _ _
+      _ = R ≫ 𝟙 _ := congrArg (fun k ↦ R ≫ k) hcancel
+      _ = R := Category.comp_id R
+  exact hs.trans (congrArg (fun k ↦ k s) hRcancel)
 
 end AlgebraicGeometry.Etale
