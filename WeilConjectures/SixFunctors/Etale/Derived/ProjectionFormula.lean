@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionProper
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
@@ -293,6 +294,21 @@ theorem isIso_projectionMap_of_finite [Finite Λ] (f : X ⟶ Y) [HasCompactifica
     NatIso.isIso_of_isIso_app _
   NatIso.isIso_of_isIso_app _
 
+/-- The projection formula at finite coefficients, for an arbitrary compactification: for a
+finite coefficient ring `Λ` and any compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, the
+projection map `PF_c` is an isomorphism at all `K` and `L`. It is the projection map of `Rg_*`
+followed by isomorphisms (`AlgebraicGeometry.Etale.projectionMapOfCompactification_app_app`),
+and the former is invertible by the proper projection formula
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`. -/
+theorem hasProjectionFormulaOfCompactification_of_finite [Finite Λ] {f : X ⟶ Y}
+    (c : Compactification f)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L := by
+  have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
+  rw [HasProjectionFormulaOfCompactification, projectionMapOfCompactification_app_app]
+  infer_instance
+
 /-- The projection formula at finite coefficients, objectwise: for a finite coefficient ring
 `Λ`, the projection formula holds for `f` at all `K` and `L`.
 
@@ -329,7 +345,7 @@ The identity case: the projection formula holds for `f = 𝟙 X`. -/
 theorem hasProjectionFormula_id (X : Scheme.{u})
     (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     HasProjectionFormula A (𝟙 X) K L :=
-  sorry
+  isIso_projectionMapOfCompactification_id_app_app A _ K L
 
 end Coherence
 
@@ -370,7 +386,8 @@ theorem hasProjectionFormulaOfCompactification_iff [Finite Λ] {f : X ⟶ Y}
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L ↔
       HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
-  sorry
+  ⟨fun _ ↦ hasProjectionFormula_of_finite Λ f K L,
+    fun _ ↦ hasProjectionFormulaOfCompactification_of_finite Λ c K L⟩
 
 end TorsionCoherence
 

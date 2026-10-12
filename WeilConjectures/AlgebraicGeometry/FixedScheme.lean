@@ -106,14 +106,17 @@ def fixedSchemeIsoEqualizer : fixedScheme aX c₁ c₂ h ≅ equalizer c₁ c₂
 @[reassoc (attr := simp)]
 lemma fixedSchemeIsoEqualizer_hom_ι :
     (fixedSchemeIsoEqualizer aX c₁ c₂ h).hom ≫ equalizer.ι c₁ c₂ = fixedSchemeι aX c₁ c₂ h :=
-  IsPullback.isoIsPullback_hom_fst _ _ _
+  IsPullback.isoIsPullback_hom_fst _ _ _ _
 
 /-- The fixed scheme `Fix(c)`, with `i_F : Fix(c) ⟶ C`, is the scheme-theoretic equalizer of
 `c₁` and `c₂`. -/
 def fixedSchemeIsLimit :
     IsLimit (Fork.ofι (fixedSchemeι aX c₁ c₂ h) (fixedSchemeι_condition aX c₁ c₂ h)) :=
   IsLimit.ofIsoLimit (equalizerIsEqualizer c₁ c₂)
-    (Fork.ext (fixedSchemeIsoEqualizer aX c₁ c₂ h).symm (by simp))
+    (Fork.ext (fixedSchemeIsoEqualizer aX c₁ c₂ h).symm
+      (by
+        rw [Iso.symm_hom, Iso.inv_comp_eq]
+        simp))
 
 instance : Mono (fixedSchemeι aX c₁ c₂ h) :=
   Fork.IsLimit.mono (fixedSchemeIsLimit aX c₁ c₂ h)

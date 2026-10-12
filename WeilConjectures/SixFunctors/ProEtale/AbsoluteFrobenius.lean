@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.AbsoluteFrobenius
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.IsoId
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 
 /-!
@@ -44,10 +45,13 @@ universe u' u
 
 open CategoryTheory Limits MorphismProperty
 
+open scoped CategoryTheory.Functor
+
 namespace AlgebraicGeometry
 
 open Scheme
 
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {X : Scheme.{u}} {p : ℕ} (hp : p.Prime) (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ)
 
 namespace Scheme.ProEt
@@ -70,7 +74,7 @@ noncomputable def overPullbackIterateFrobeniusIso :
   (NatIso.ofComponents (relativeIterateFrobeniusIso hp hX n) fun {V W} g ↦ by
     ext : 1
     apply pullback.hom_ext
-    · simp [iterateFrobenius_naturality hp n g.left]
+    · simpa using iterateFrobenius_naturality hp n g.left _ _
     · simp).symm
 
 @[simp]
@@ -80,5 +84,45 @@ lemma overPullbackIterateFrobeniusIso_inv_app_left (V : X.ProEt) :
   rfl
 
 end Scheme.ProEt
+
+namespace ProEtale
+
+
+/-- The pushforward `F_{X*}` along the absolute Frobenius on pro-étale sheaves is isomorphic to
+the identity: `(F_{X*} G)(V) = G(V ×_{X, F_X} X) ≅ G(V)` through the relative Frobenius maps. -/
+noncomputable def lowerStarIterateFrobeniusIso : (X.iterateFrobenius hp hX n)_*[A] ≅ 𝟭 _ :=
+  Functor.sheafPushforwardContinuousId' (Scheme.ProEt.overPullbackIterateFrobeniusIso hp hX n) A
+    (Scheme.ProEt.topology X)
+
+/-- The pullback `F_X^*` along the absolute Frobenius on pro-étale sheaves is isomorphic to the
+identity, by uniqueness of left adjoints: both are left adjoint to `F_{X*} ≅ 𝟭`. -/
+noncomputable def upperStarIterateFrobeniusIso : (X.iterateFrobenius hp hX n)^*[A] ≅ 𝟭 _ :=
+  (conjugateIsoEquiv Adjunction.id (upperStarLowerStarAdjunction A _)).symm
+    (lowerStarIterateFrobeniusIso A hp hX n).symm
+
+lemma conjugateIsoEquiv_upperStarIterateFrobeniusIso :
+    conjugateIsoEquiv Adjunction.id (upperStarLowerStarAdjunction A _)
+        (upperStarIterateFrobeniusIso A hp hX n) = (lowerStarIterateFrobeniusIso A hp hX n).symm :=
+  Equiv.apply_symm_apply _ _
+
+variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+/-- Blueprint `lem-trf-absolute-frobenius-site`: Canonical trivialization of absolute Frobenius
+pullback.
+
+Let `X` be a scheme in which the prime `p` vanishes. On the small pro-étale site of `X`, the
+derived pullback along the `p ^ n`-power absolute Frobenius `F_X` has a canonical
+trivialization `LF_X^* ≅ 𝟭`: the derived functor of the trivialization `F_X^* ≅ 𝟭` of the
+(exact) pullback, which comes from the relative Frobenius isomorphisms
+`r_V : V ≅ V ×_{X, F_X} X`. Its compatibility with the iterates is
+`AlgebraicGeometry.ProEtale.leftDerivedUpperStarIterateFrobeniusIso_add`, and with restriction
+along any morphism (e.g. an open immersion) is
+`AlgebraicGeometry.ProEtale.leftDerivedUpperStarIterateFrobeniusIso_restrict`. -/
+noncomputable def leftDerivedUpperStarIterateFrobeniusIso :
+    L((X.iterateFrobenius hp hX n)^*[A]) ≅ 𝟭 _ :=
+  Functor.leftDerivedFunctorIsoId _ (upperStarIterateFrobeniusIso A hp hX n)
+
+end ProEtale
 
 end AlgebraicGeometry

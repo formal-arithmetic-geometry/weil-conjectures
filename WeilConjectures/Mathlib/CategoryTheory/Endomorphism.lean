@@ -27,4 +27,8 @@ variable {X}
 lemma inv_hom (f : Aut X) : f⁻¹.hom = f.inv :=
   rfl
 
+@[simp]
+lemma mul_hom (f g : Aut X) : (f * g).hom = g.hom ≫ f.hom :=
+  rfl
+
 end CategoryTheory.Aut

@@ -123,8 +123,13 @@ imports; downstream files may import this module or just the pieces they need.
   `AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor` (`thm-asd-smooth-tensor`)
   instead of smooth purity: only the shape of `ω_f`, a locally constant free rank-one sheaf in
   degree `-2d`, matters, and this needs neither a base field nor a Tate twist.
+* The whole of `thm-sf-ctf-stability` (`sk-thm-sf-ctf-stability`), clauses (i)–(vii), is bundled
+  in `AlgebraicGeometry.Etale.constructibleFiniteTor_stability` and
+  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability` of
+  `WeilConjectures.SixFunctors.Etale.Derived.Stability.CtfStability`, which cannot be imported
+  here (it depends on modules importing this one).
 * Clause (vi) of `sk-thm-sf-ctf-stability` — that `𝔻_X` preserves `Dctf(X, A)` and is an
-  anti-equivalence of it — is **not restated here**: it is
+  anti-equivalence of it — is
   `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual` and
   `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual` of
   `WeilConjectures.SixFunctors.Etale.Derived.Dualizing`. Only the descended functor
@@ -136,12 +141,10 @@ imports; downstream files may import this module or just the pieces they need.
   proof represents a complex of Tor amplitude in `[a, b]` by a complex of flat sheaves in
   degrees `[a, b]` (`DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn`) and pulls it
   back termwise.
-* Clause (vii) of `sk-thm-sf-ctf-stability` — compatibility of each of (i)–(vi) with finite
-  reduction, with scalar extension and with the pro-étale realization — is **not stated**. It
-  quantifies over the coefficient stages `A_{E,n} ⇝ 𝒪_E ⇝ E ⇝ ℚ̄_ℓ` and over the étale/pro-étale
-  comparison `ν^*`, neither of which is available: the coefficient stages are modelled here by
-  *choosing* a coefficient category `A := ModuleCat R`, so a statement relating two choices needs
-  a change-of-coefficients functor that the library does not yet have.
+* Clause (vii) of `sk-thm-sf-ctf-stability` is stated in
+  `WeilConjectures.SixFunctors.Etale.Derived.Stability.CtfStability` for the finite and integral
+  stages, coefficient reduction being `AlgebraicGeometry.Etale.reductionModIdeal`; the field
+  stages `E`, `ℚ̄_ℓ` are not available as coefficient categories.
 * The internal-Hom half of clause (ii) of `sk-thm-sf-ctf-stability` is not restated: it *is*
   `torAmplitudeIn_derivedHom` below, with the same shifts.
 * `sk-lem-sf-ctf-generation` is stated for `A = ModuleCat Λ` with `Λ` finite, because its proof

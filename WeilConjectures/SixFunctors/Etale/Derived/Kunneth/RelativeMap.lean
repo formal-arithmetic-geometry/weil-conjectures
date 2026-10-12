@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 /-!
@@ -266,6 +266,64 @@ section Kunneth
 
 variable {B X Y P : Scheme.{u}}
 
+section Inner
+
+variable {p : P ⟶ X} {q : P ⟶ Y} {f : X ⟶ B} {g : Y ⟶ B} (sq : IsPullback p q f g)
+  [HasCompactification f] [HasCompactification q] [QuasiCompact q]
+
+/-- The middle three arrows of the relative Künneth isomorphism, for a cartesian square
+`p ≫ f = q ≫ g`:
+
+```
+Rq_!(Lp^*K ⊗ᴸ Lq^*L) ≅ Rq_! Lp^*K ⊗ᴸ L       (PF_{q, Lp^*K, L}⁻¹)
+                     ≅ Lg^* Rf_! K ⊗ᴸ L      (Ex_!⁻¹ ⊗ 1)
+                     ≅ L ⊗ᴸ Lg^* Rf_! K      (σ)
+``` -/
+noncomputable def relativeKunnethInnerIso
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (R(q)_![ModuleCat.{u + 1} Λ]).obj (((-⊗ᴸ-(P)[ModuleCat.{u + 1} Λ]).obj
+        ((L((p)^*[ModuleCat.{u + 1} Λ])).obj K)).obj ((L((q)^*[ModuleCat.{u + 1} Λ])).obj L)) ≅
+      ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj L).obj
+        ((L((g)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) :=
+  (projectionIso Λ q ((L((p)^*[ModuleCat.{u + 1} Λ])).obj K) L).symm ≪≫
+    ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).mapIso (rightDerivedLowerShriekBaseChangeIso Λ sq K).symm).app
+      L ≪≫
+    derivedTensorBraidingIso (ModuleCat.{u + 1} Λ) Y _ L
+
+@[reassoc]
+lemma relativeKunnethInnerIso_hom_naturality_left
+    {K K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (φ : K ⟶ K')
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (R(q)_![ModuleCat.{u + 1} Λ]).map (((-⊗ᴸ-(P)[ModuleCat.{u + 1} Λ]).map
+        ((L((p)^*[ModuleCat.{u + 1} Λ])).map φ)).app ((L((q)^*[ModuleCat.{u + 1} Λ])).obj L)) ≫
+      (relativeKunnethInnerIso Λ sq K' L).hom =
+    (relativeKunnethInnerIso Λ sq K L).hom ≫ ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj L).map
+      ((L((g)^*[ModuleCat.{u + 1} Λ])).map ((R(f)_![ModuleCat.{u + 1} Λ]).map φ)) := by
+  simp only [relativeKunnethInnerIso, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
+    Functor.mapIso_hom, Category.assoc]
+  rw [projectionIso_inv_naturality_left_assoc, ← NatTrans.comp_app_assoc, ← Functor.map_comp,
+    rightDerivedLowerShriekBaseChangeIso_inv_naturality, Functor.map_comp,
+    NatTrans.comp_app_assoc, derivedTensorBraidingIso_hom_naturality_left]
+
+@[reassoc]
+lemma relativeKunnethInnerIso_hom_naturality_right
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    {L L' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (ψ : L ⟶ L') :
+    (R(q)_![ModuleCat.{u + 1} Λ]).map (((-⊗ᴸ-(P)[ModuleCat.{u + 1} Λ]).obj
+        ((L((p)^*[ModuleCat.{u + 1} Λ])).obj K)).map ((L((q)^*[ModuleCat.{u + 1} Λ])).map ψ)) ≫
+      (relativeKunnethInnerIso Λ sq K L').hom =
+    (relativeKunnethInnerIso Λ sq K L).hom ≫ ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).map ψ).app
+      ((L((g)^*[ModuleCat.{u + 1} Λ])).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) := by
+  simp only [relativeKunnethInnerIso, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
+    Functor.mapIso_hom, Category.assoc]
+  rw [projectionIso_inv_naturality_right_assoc, NatTrans.naturality_assoc,
+    derivedTensorBraidingIso_hom_naturality_right]
+
+end Inner
+
 /-- The relative Künneth isomorphism for an arbitrary cartesian square
 
 ```
@@ -302,11 +360,7 @@ noncomputable def relativeKunnethIsoOfIsPullback {p : P ⟶ X} {q : P ⟶ Y} {f 
       ((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj
         ((R(g)_![ModuleCat.{u + 1} Λ]).obj L) :=
   rightDerivedLowerShriekCompIsoApp Λ q g h w _ ≪≫
-    (R(g)_![ModuleCat.{u + 1} Λ]).mapIso
-      ((projectionIso Λ q ((L((p)^*[ModuleCat.{u + 1} Λ])).obj K) L).symm ≪≫
-        ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).mapIso
-          (rightDerivedLowerShriekBaseChangeIso Λ sq K).symm).app L ≪≫
-        derivedTensorBraidingIso (ModuleCat.{u + 1} Λ) Y _ L) ≪≫
+    (R(g)_![ModuleCat.{u + 1} Λ]).mapIso (relativeKunnethInnerIso Λ sq K L) ≪≫
     (projectionIso Λ g L ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).symm ≪≫
     derivedTensorBraidingIso (ModuleCat.{u + 1} Λ) B _ _
 
@@ -330,16 +384,9 @@ theorem relativeKunnethIsoOfIsPullback_hom_naturality_left
       ((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).map ((R(f)_![ModuleCat.{u + 1} Λ]).map φ)).app
         ((R(g)_![ModuleCat.{u + 1} Λ]).obj L) := by
   simp only [relativeKunnethIsoOfIsPullback, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-    Iso.app_hom, Functor.map_comp, Category.assoc]
+    Category.assoc]
   rw [rightDerivedLowerShriekCompIsoApp_hom_naturality_assoc, ← Functor.map_comp_assoc,
-    projectionIso_inv_naturality_left, Functor.map_comp_assoc]
-  congr 1
-  congr 1
-  rw [← Functor.map_comp_assoc, ← NatTrans.comp_app, ← Functor.map_comp,
-    rightDerivedLowerShriekBaseChangeIso_inv_naturality, Functor.map_comp, NatTrans.comp_app,
-    Functor.map_comp_assoc]
-  congr 1
-  rw [← Functor.map_comp_assoc, derivedTensorBraidingIso_hom_naturality_left, Functor.map_comp_assoc,
+    relativeKunnethInnerIso_hom_naturality_left, Functor.map_comp_assoc,
     projectionIso_inv_naturality_right_assoc, derivedTensorBraidingIso_hom_naturality_right]
 
 /-- Blueprint `sk-thm-sf-kunneth-relative`: the relative Künneth isomorphism is natural in the
@@ -356,18 +403,54 @@ theorem relativeKunnethIsoOfIsPullback_hom_naturality_right
       ((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).map
         ((R(g)_![ModuleCat.{u + 1} Λ]).map ψ) := by
   simp only [relativeKunnethIsoOfIsPullback, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-    Iso.app_hom, Functor.map_comp, Category.assoc]
+    Category.assoc]
   rw [rightDerivedLowerShriekCompIsoApp_hom_naturality_assoc, ← Functor.map_comp_assoc,
-    projectionIso_inv_naturality_right, Functor.map_comp_assoc]
-  congr 1
-  congr 1
-  rw [← Functor.map_comp_assoc, NatTrans.naturality, Functor.map_comp_assoc]
-  congr 1
-  rw [← Functor.map_comp_assoc, derivedTensorBraidingIso_hom_naturality_right,
-    Functor.map_comp_assoc, projectionIso_inv_naturality_left_assoc,
-    derivedTensorBraidingIso_hom_naturality_left]
+    relativeKunnethInnerIso_hom_naturality_right, Functor.map_comp_assoc,
+    projectionIso_inv_naturality_left_assoc, derivedTensorBraidingIso_hom_naturality_left]
+
+/-- Blueprint `sk-thm-sf-kunneth-relative`: the relative Künneth isomorphism
+`Rh_!(Lp^*K ⊗ᴸ Lq^*L) ≅ Rf_! K ⊗ᴸ Rg_! L` as a natural isomorphism of bifunctors
+`D(X_ét) ⥤ D(Y_ét) ⥤ D(B_ét)`, with components
+`AlgebraicGeometry.Etale.relativeKunnethIsoOfIsPullback`. -/
+noncomputable def relativeKunnethNatIsoOfIsPullback :
+    L((p)^*[ModuleCat.{u + 1} Λ]) ⋙ -⊗ᴸ-(P)[ModuleCat.{u + 1} Λ] ⋙
+        (Functor.whiskeringLeft _ _ _).obj L((q)^*[ModuleCat.{u + 1} Λ]) ⋙
+          (Functor.whiskeringRight _ _ _).obj R(h)_![ModuleCat.{u + 1} Λ] ≅
+      R(f)_![ModuleCat.{u + 1} Λ] ⋙ -⊗ᴸ-(B)[ModuleCat.{u + 1} Λ] ⋙
+        (Functor.whiskeringLeft _ _ _).obj R(g)_![ModuleCat.{u + 1} Λ] :=
+  NatIso.ofComponents
+    (fun K ↦ NatIso.ofComponents (fun L ↦ relativeKunnethIsoOfIsPullback Λ sq h w K L)
+      (fun ψ ↦ relativeKunnethIsoOfIsPullback_hom_naturality_right Λ sq h w K ψ))
+    (fun φ ↦ by
+      ext L
+      exact relativeKunnethIsoOfIsPullback_hom_naturality_left Λ sq h w φ L)
+
+lemma relativeKunnethNatIsoOfIsPullback_app_app
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ((relativeKunnethNatIsoOfIsPullback Λ sq h w).app K).app L =
+      relativeKunnethIsoOfIsPullback Λ sq h w K L :=
+  rfl
 
 end Naturality
+
+section FibreProduct
+
+variable (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [HasCompactification g]
+  [QuasiCompact f] [QuasiCompact g] [HasCompactification (pullback.toBase f g)]
+
+omit [HasCompactification f] [HasCompactification g] [QuasiCompact g]
+  [HasCompactification (pullback.toBase f g)] in
+lemma quasiCompact_pullback_snd : QuasiCompact (pullback.snd f g) :=
+  MorphismProperty.of_isPullback (P := @QuasiCompact) (IsPullback.of_hasPullback f g)
+    inferInstance
+
+omit [HasCompactification f] [HasCompactification g]
+  [HasCompactification (pullback.toBase f g)] in
+lemma quasiCompact_pullback_toBase : QuasiCompact (pullback.toBase f g) := by
+  have := quasiCompact_pullback_snd f g
+  rw [← pullback.snd_comp_eq_toBase]
+  infer_instance
 
 /-- Blueprint `sk-thm-sf-kunneth-relative` (detailed: `thm-sf-kunneth-relative`): **the relative
 Künneth isomorphism**. For `f : X ⟶ B`, `g : Y ⟶ B` admitting compactifications, with `p`, `q`
@@ -382,22 +465,39 @@ projection map of `q` at `(Lp^* K, L)`, the inverse of compact-support base chan
 (`AlgebraicGeometry.Etale.relativeKunnethIsoOfIsPullback` for the fibre product square). Every
 arrow is an isomorphism for all `K` and `L`; the blueprint's `Dctf` hypotheses are not needed
 for a finite coefficient ring. -/
-noncomputable def relativeKunnethIso (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f]
-    [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
-    [HasCompactification (pullback.toBase f g)]
+noncomputable def relativeKunnethIso
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).obj
         (externalProduct (ModuleCat.{u + 1} Λ) f g K L) ≅
       ((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj
         ((R(g)_![ModuleCat.{u + 1} Λ]).obj L) :=
-  haveI : QuasiCompact (pullback.snd f g) := MorphismProperty.of_isPullback
-    (P := @QuasiCompact) (IsPullback.of_hasPullback f g) inferInstance
-  haveI : QuasiCompact (pullback.toBase f g) := by
-    rw [← pullback.snd_comp_eq_toBase]
-    infer_instance
+  haveI := quasiCompact_pullback_snd f g
+  haveI := quasiCompact_pullback_toBase f g
   relativeKunnethIsoOfIsPullback Λ (IsPullback.of_hasPullback f g) _
     (pullback.snd_comp_eq_toBase f g) K L
+
+/-- Blueprint `sk-thm-sf-kunneth-relative`: the relative Künneth isomorphism
+`R(f ×_B g)_! (K ⊠ L) ≅ Rf_! K ⊗ᴸ Rg_! L` as a natural isomorphism of bifunctors
+`D(X_ét) ⥤ D(Y_ét) ⥤ D(B_ét)`, with components `AlgebraicGeometry.Etale.relativeKunnethIso`. -/
+noncomputable def relativeKunnethNatIso :
+    L((pullback.fst f g)^*[ModuleCat.{u + 1} Λ]) ⋙ -⊗ᴸ-(pullback f g)[ModuleCat.{u + 1} Λ] ⋙
+        (Functor.whiskeringLeft _ _ _).obj L((pullback.snd f g)^*[ModuleCat.{u + 1} Λ]) ⋙
+          (Functor.whiskeringRight _ _ _).obj R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ] ≅
+      R(f)_![ModuleCat.{u + 1} Λ] ⋙ -⊗ᴸ-(B)[ModuleCat.{u + 1} Λ] ⋙
+        (Functor.whiskeringLeft _ _ _).obj R(g)_![ModuleCat.{u + 1} Λ] :=
+  haveI := quasiCompact_pullback_snd f g
+  haveI := quasiCompact_pullback_toBase f g
+  relativeKunnethNatIsoOfIsPullback Λ (IsPullback.of_hasPullback f g) _
+    (pullback.snd_comp_eq_toBase f g)
+
+lemma relativeKunnethNatIso_app_app
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ((relativeKunnethNatIso Λ f g).app K).app L = relativeKunnethIso Λ f g K L :=
+  rfl
+
+end FibreProduct
 
 end Kunneth
 

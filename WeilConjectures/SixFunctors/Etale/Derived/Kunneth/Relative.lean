@@ -19,6 +19,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.RelativeMap
 
 /-!
 
@@ -260,7 +261,7 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (Λ : Type (u + 1))
         (externalProduct (ModuleCat.{u + 1} Λ) f g K M) ≅
       ((-⊗ᴸ-(B)[ModuleCat.{u + 1} Λ]).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj
         ((R(g)_![ModuleCat.{u + 1} Λ]).obj M)) :=
-  nonempty_iso_rightDerivedLowerShriek_externalProduct_of_finite Λ f g K M
+  ⟨relativeKunnethIso Λ f g K M⟩
 
 omit [HasSmallSiteSheafify A] in
 /-- The external product is compatible with pullback: for morphisms `i : Z ⟶ X`, `j : W ⟶ Y`

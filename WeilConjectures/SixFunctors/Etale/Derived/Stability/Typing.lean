@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Matrix
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
 
 /-!
 # The typing rule: the operations on `Dctf` are restrictions of the ambient ones
@@ -22,23 +22,23 @@ ambient ones, and that the restriction exists is a theorem (blueprint `rem-sf-ty
   it, and the restriction is unique up to isomorphism
   (`CategoryTheory.ObjectProperty.exists_comp_ι_iso_iff`,
   `CategoryTheory.ObjectProperty.isoLiftOfCompιIso`);
-* constructs the two restricted bifunctors of clause (ii) of `sk-thm-sf-ctf-stability`, the
-  derived tensor product `Dctf × Dctf ⥤ Dctf` and the internal hom `Dctfᵒᵖ × Dctf ⥤ Dctf`
-  (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.derivedTensor`,
-  `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.derivedHom`);
+* restricts the tensor-hom adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` to `Dctf(X, Λ)`
+  (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.tensorHomAdjunction`), the restricted
+  bifunctors of clause (ii) of `sk-thm-sf-ctf-stability` being
+  `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.derivedTensor` and
+  `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.derivedHom`;
 * proves the part of clause (vi) of `sk-thm-sf-ctf-stability` that concerns the restricted
-  functor: `𝔻_X 𝔻_X K ≅ K` in `Dctf(X, Λ)` and `𝔻_X : Dctf(X, Λ)ᵒᵖ ⥤ Dctf(X, Λ)` is
-  essentially surjective;
+  functor: `𝔻_X 𝔻_X K ≅ K` in `Dctf(X, Λ)`, and `𝔻_X : Dctf(X, Λ)ᵒᵖ ⥤ Dctf(X, Λ)` is an
+  equivalence;
 * states the typing rule: each restricted functor, followed by the inclusion, is the inclusion
   followed by the ambient operation (`AlgebraicGeometry.Etale.typingRule`).
 
 ## Implementation notes
 
-The biduality isomorphism `K ≅ 𝔻_X 𝔻_X K` of
-`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual` is only asserted to exist,
-objectwise; it is not stated to be the natural double-dual map. Hence the restricted Verdier
-dual is shown here to be essentially surjective with `𝔻_X 𝔻_X K ≅ K` for every `K`, which is
-what the objectwise statement gives.
+The comparison isomorphisms are all built from `CategoryTheory.ObjectProperty.liftCompιIso` and
+`CategoryTheory.ObjectProperty.liftFullSubcategoryCompιIso`, which are identities on the nose;
+no `rfl` through the derived tensor product or internal hom is needed, which would make the
+kernel unfold them.
 -/
 
 @[expose] public section
@@ -80,106 +80,20 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-! ### Clause (ii): the restricted bifunctors -/
+/-! ### Clause (ii): the restricted tensor-hom adjunction -/
 
 section Bifunctors
 
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (ii): the restriction
-`- ⊗ᴸ - : Dctf(X, Λ) × Dctf(X, Λ) ⥤ Dctf(X, Λ)` of the derived tensor product to the small
-categories, written in curried form, for a finite coefficient ring `Λ`. -/
-noncomputable def DerivedCategoryFiniteTor.derivedTensorUncurried (X : Scheme.{u}) :
-    DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ×
-        DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
-      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
-  ObjectProperty.lift _
-    ((DerivedCategoryFiniteTor.ι _ X).prod (DerivedCategoryFiniteTor.ι _ X) ⋙
-      Functor.uncurry.obj (-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]))
-    fun K ↦ constructibleFiniteTor_tensor Λ X K.1.property K.2.property
-
-@[inherit_doc DerivedCategoryFiniteTor.derivedTensorUncurried]
-noncomputable def DerivedCategoryFiniteTor.derivedTensor (X : Scheme.{u}) :
-    DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
-      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
-        DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
-  Functor.curry.obj (DerivedCategoryFiniteTor.derivedTensorUncurried Λ X)
-
-/-- The restricted derived tensor product, followed by the inclusion, is the derived tensor
-product of the inclusions. -/
-noncomputable def DerivedCategoryFiniteTor.derivedTensorCompιIso (X : Scheme.{u}) :
-    Functor.uncurry.obj (DerivedCategoryFiniteTor.derivedTensor Λ X) ⋙
-        DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ≅
-      (DerivedCategoryFiniteTor.ι _ X).prod (DerivedCategoryFiniteTor.ι _ X) ⋙
-        Functor.uncurry.obj (-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]) :=
-  Functor.isoWhiskerRight (Functor.currying.counitIso.app
-      (DerivedCategoryFiniteTor.derivedTensorUncurried Λ X)) _ ≪≫
-    ObjectProperty.liftCompιIso _ _ _
-
-/-- The internal hom of two objects of `Dctf(X, Λ)`, computed in the ambient derived category
-`D(X_ét, Λ)`: the composite of the inclusions with `RHom(-, -)`. -/
-noncomputable def DerivedCategoryFiniteTor.ambientDerivedHom (X : Scheme.{u}) :
-    (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ×
-        DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
-      _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  (DerivedCategoryFiniteTor.ι _ X).op.prod (DerivedCategoryFiniteTor.ι _ X) ⋙
-    Functor.uncurry.obj (RHom(X)[ModuleCat.{u + 1} Λ])
-
 variable {k : Type u} [Field k] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent Λ X]
-
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (ii): the restriction
-`RHom(-, -) : Dctf(X, Λ)ᵒᵖ × Dctf(X, Λ) ⥤ Dctf(X, Λ)` of the internal hom to the small
-categories, written in curried form, for `X` of finite type over a field `k` and a finite `Λ`
-whose exponent is invertible on `X`. Both variables are arbitrary objects of `Dctf(X, Λ)`
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom`). -/
-noncomputable def DerivedCategoryFiniteTor.derivedHomUncurried :
-    (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ×
-        DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
-      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
-  ObjectProperty.lift _ (DerivedCategoryFiniteTor.ambientDerivedHom Λ X)
-    fun K ↦ constructibleFiniteTor_derivedHom Λ aX K.1.unop.property K.2.property
-
-@[inherit_doc DerivedCategoryFiniteTor.derivedHomUncurried]
-noncomputable def DerivedCategoryFiniteTor.derivedHom :
-    (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ⥤
-      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
-        DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
-  Functor.curry.obj (DerivedCategoryFiniteTor.derivedHomUncurried Λ aX)
-
-/-- The restricted internal hom, followed by the inclusion, is the internal hom of the
-inclusions. -/
-noncomputable def DerivedCategoryFiniteTor.derivedHomCompιIso :
-    Functor.uncurry.obj (DerivedCategoryFiniteTor.derivedHom Λ aX) ⋙
-        DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ≅
-      (DerivedCategoryFiniteTor.ι _ X).op.prod (DerivedCategoryFiniteTor.ι _ X) ⋙
-        Functor.uncurry.obj (RHom(X)[ModuleCat.{u + 1} Λ]) :=
-  Functor.isoWhiskerRight (Functor.currying.counitIso.app
-      (DerivedCategoryFiniteTor.derivedHomUncurried Λ aX)) _ ≪≫
-    ObjectProperty.liftCompιIso _ _ _ ≪≫ Iso.refl _
-
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (ii): for `K ∈ Dctf(X, Λ)`, the restriction
-`K ⊗ᴸ - : Dctf(X, Λ) ⥤ Dctf(X, Λ)` of the derived tensor product with `K`. -/
-noncomputable def DerivedCategoryFiniteTor.tensorLeft
-    (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
-    DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
-      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
-  ObjectProperty.liftFullSubcategory _ _ ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K.obj)
-    fun _ hM ↦ constructibleFiniteTor_tensor Λ X K.property hM
-
-/-- Blueprint `sk-thm-sf-ctf-stability`, clause (ii): for `K ∈ Dctf(X, Λ)`, the restriction
-`RHom(K, -) : Dctf(X, Λ) ⥤ Dctf(X, Λ)` of the internal hom out of `K`. -/
-noncomputable def DerivedCategoryFiniteTor.homLeft
-    (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
-    DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X ⥤
-      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
-  ObjectProperty.liftFullSubcategory _ _ ((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K.obj))
-    fun _ hM ↦ constructibleFiniteTor_derivedHom Λ aX K.property hM
 
 /-- The tensor-hom adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` restricts to the small category
 `Dctf(X, Λ)`, with the unit and counit of
 `AlgebraicGeometry.Etale.derivedTensorHomAdjunction`. -/
 noncomputable def DerivedCategoryFiniteTor.tensorHomAdjunction
     (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
-    DerivedCategoryFiniteTor.tensorLeft Λ K ⊣ DerivedCategoryFiniteTor.homLeft Λ aX K :=
+    (DerivedCategoryFiniteTor.derivedTensor Λ X).obj K ⊣
+      (DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K) :=
   (derivedTensorHomAdjunction _ K.obj).restrictFullyFaithful
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _).symm
@@ -209,13 +123,20 @@ theorem DerivedCategoryFiniteTor.nonempty_iso_verdierDual_verdierDual
   ⟨(ObjectProperty.fullyFaithfulι _).preimageIso
     (Etale.nonempty_iso_verdierDual_verdierDual Λ aX K.property).some⟩
 
+/-- The anti-equivalence `AlgebraicGeometry.Etale.verdierDualEquivalence` has the restricted
+Verdier dual `DerivedCategoryFiniteTor.verdierDual` as its functor. -/
+noncomputable def DerivedCategoryFiniteTor.verdierDualEquivalenceFunctorIso :
+    (verdierDualEquivalence Λ aX).functor ≅ DerivedCategoryFiniteTor.verdierDual _ aX
+      fun _ hK ↦ constructibleFiniteTor_verdierDual Λ aX hK :=
+  ObjectProperty.isoLiftOfCompιIso _ _ _ (ObjectProperty.liftCompιIso _ _ _)
+
 /-- Blueprint `sk-thm-sf-ctf-stability`, clause (vi): the restricted Verdier dual
-`𝔻_X : Dctf(X, Λ)ᵒᵖ ⥤ Dctf(X, Λ)` is essentially surjective, every `K` being the dual of
-`𝔻_X K`. -/
-theorem DerivedCategoryFiniteTor.essSurj_verdierDual :
+`𝔻_X : Dctf(X, Λ)ᵒᵖ ⥤ Dctf(X, Λ)` is an equivalence, i.e. `𝔻_X` is a contravariant
+anti-equivalence of `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.verdierDualEquivalence`). -/
+theorem DerivedCategoryFiniteTor.isEquivalence_verdierDual :
     (DerivedCategoryFiniteTor.verdierDual (ModuleCat.{u + 1} Λ) aX
-      fun _ hK ↦ constructibleFiniteTor_verdierDual Λ aX hK).EssSurj :=
-  ⟨fun K ↦ ⟨_, ⟨(DerivedCategoryFiniteTor.nonempty_iso_verdierDual_verdierDual Λ aX K).some.symm⟩⟩⟩
+      fun _ hK ↦ constructibleFiniteTor_verdierDual Λ aX hK).IsEquivalence :=
+  Functor.isEquivalence_of_iso (DerivedCategoryFiniteTor.verdierDualEquivalenceFunctorIso Λ aX)
 
 end VerdierDual
 
@@ -234,13 +155,14 @@ Every operation is defined on the ambient derived categories `D(-_ét, Λ)`, and
 the small categories `Dctf(-, Λ)` is its restriction: for a finite `Λ` whose exponent is
 invertible on `k` and a separated morphism `f : X ⟶ Y` of schemes of finite type over `k`,
 with `X` separated over `k`, each of the functors `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!`, `𝔻_X`,
-`- ⊗ᴸ -` and `RHom(-, -)` between the small categories, followed by the inclusion, is
-isomorphic to the inclusion followed by the ambient operation. By
+`K ⊗ᴸ -` and `RHom(K, -)` (for `K ∈ Dctf(X, Λ)`) between the small categories, followed by the
+inclusion, is isomorphic to the inclusion followed by the ambient operation. By
 `CategoryTheory.ObjectProperty.isoLiftOfCompιIso` a functor between the small categories with
 this property is unique up to isomorphism, and by
 `CategoryTheory.ObjectProperty.exists_comp_ι_iso_iff` its existence is equivalent to the
-preservation statements of `sk-thm-sf-ctf-stability`. -/
-theorem typingRule :
+preservation statements of `thm-sf-ctf-stability`
+(`AlgebraicGeometry.Etale.constructibleFiniteTor_stability`). -/
+theorem typingRule (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
     Nonempty (DerivedCategoryFiniteTor.leftDerivedUpperStar (ModuleCat.{u + 1} Λ) f ⋙
         DerivedCategoryFiniteTor.ι _ X ≅
       DerivedCategoryFiniteTor.ι _ Y ⋙ L((f)^*[ModuleCat.{u + 1} Λ])) ∧
@@ -257,18 +179,16 @@ theorem typingRule :
           (fun _ hK ↦ constructibleFiniteTor_verdierDual Λ aX hK) ⋙
         DerivedCategoryFiniteTor.ι _ X ≅
       (DerivedCategoryFiniteTor.ι _ X).op ⋙ verdierDual (ModuleCat.{u + 1} Λ) aX) ∧
-    Nonempty (Functor.uncurry.obj (DerivedCategoryFiniteTor.derivedTensor Λ X) ⋙
+    Nonempty ((DerivedCategoryFiniteTor.derivedTensor Λ X).obj K ⋙
         DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ≅
-      (DerivedCategoryFiniteTor.ι _ X).prod (DerivedCategoryFiniteTor.ι _ X) ⋙
-        Functor.uncurry.obj (-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ])) ∧
-    Nonempty (Functor.uncurry.obj (DerivedCategoryFiniteTor.derivedHom Λ aX) ⋙
+      DerivedCategoryFiniteTor.ι _ X ⋙ (-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K.obj) ∧
+    Nonempty ((DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K) ⋙
         DerivedCategoryFiniteTor.ι (ModuleCat.{u + 1} Λ) X ≅
-      (DerivedCategoryFiniteTor.ι _ X).op.prod (DerivedCategoryFiniteTor.ι _ X) ⋙
-        Functor.uncurry.obj (RHom(X)[ModuleCat.{u + 1} Λ])) :=
+      DerivedCategoryFiniteTor.ι _ X ⋙ (RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K.obj)) :=
   ⟨⟨ObjectProperty.liftCompιIso _ _ _⟩, ⟨ObjectProperty.liftCompιIso _ _ _⟩,
     ⟨ObjectProperty.liftCompιIso _ _ _⟩, ⟨ObjectProperty.liftCompιIso _ _ _⟩,
-    ⟨ObjectProperty.liftCompιIso _ _ _⟩, ⟨DerivedCategoryFiniteTor.derivedTensorCompιIso Λ X⟩,
-    ⟨DerivedCategoryFiniteTor.derivedHomCompιIso Λ aX⟩⟩
+    ⟨ObjectProperty.liftCompιIso _ _ _⟩, ⟨ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _⟩,
+    ⟨ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _⟩⟩
 
 end Etale
 

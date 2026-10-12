@@ -8,10 +8,13 @@ module
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
 public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Triangulated.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
 
 /-!
-# The derived internal hom is triangulated in its first variable
+# The derived internal hom is triangulated in each variable
 
 Let `C` be a monoidal closed Grothendieck abelian category as in
 `WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed`, so that `D(C)` is monoidal
@@ -139,36 +142,65 @@ lemma lift_internalHomπ {Z : C} {Q : CochainComplex C ℤ} {n : ℤ}
     Pi.lift φ ≫ internalHomπ Q Y n p q h = φ ⟨p, q, h⟩ :=
   Pi.lift_π _ _
 
+omit [HasZeroObject C] [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+/-- Precomposition with a morphism `u : Q.X p ⟶ Q'.X p` in each degree `p`, as a map
+`iHom(Q', Y).X n ⟶ iHom(Q, Y).X n`. It need not commute with the differentials. -/
+noncomputable def internalHomPreX {Q Q' : CochainComplex C ℤ} (u : ∀ p, Q.X p ⟶ Q'.X p)
+    (n : ℤ) : (internalHomObj Q' Y).X n ⟶ (internalHomObj Q Y).X n :=
+  Pi.lift fun T ↦ internalHomπ Q' Y n T.p T.q T.hpq ≫ (pre (u T.p)).app (Y.X T.q)
+
+omit [HasZeroObject C] [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
+@[reassoc (attr := simp)]
+lemma internalHomPreX_π {Q Q' : CochainComplex C ℤ} (u : ∀ p, Q.X p ⟶ Q'.X p)
+    (n p q : ℤ) (h : p + n = q) :
+    internalHomPreX Y u n ≫ internalHomπ Q Y n p q h =
+      internalHomπ Q' Y n p q h ≫ (pre (u p)).app (Y.X q) :=
+  Pi.lift_π _ _
+
+/-- The degreewise splitting of `iHom(S.X₃, Y) ⟶ iHom(S.X₂, Y) ⟶ iHom(S.X₁, Y)` induced by
+degreewise sections `s` of `S.g` and retractions `r` of `S.f` with `r ≫ S.f + S.g ≫ s = 𝟙`. -/
+noncomputable def internalHomShortComplexSplittingOfSplit (S : ShortComplex (CochainComplex C ℤ))
+    (r : ∀ p, S.X₂.X p ⟶ S.X₁.X p) (s : ∀ p, S.X₃.X p ⟶ S.X₂.X p)
+    (hfr : ∀ p, S.f.f p ≫ r p = 𝟙 _) (hsg : ∀ p, s p ≫ S.g.f p = 𝟙 _)
+    (hid : ∀ p, r p ≫ S.f.f p + S.g.f p ≫ s p = 𝟙 _) (n : ℤ) :
+    ((internalHomShortComplex Y S).map (HomologicalComplex.eval C _ n)).Splitting where
+  r := internalHomPreX Y s n
+  s := internalHomPreX Y r n
+  f_r := by
+    have H : (internalHomPre S.g Y).f n ≫ internalHomPreX Y s n = 𝟙 _ := by
+      refine internalHomObj_hom_ext fun p q h ↦ ?_
+      rw [assoc, internalHomPreX_π, internalHomPre_f_π_assoc, ← NatTrans.comp_app, ← pre_map,
+        hsg, pre_id, NatTrans.id_app, comp_id, id_comp]
+    exact H
+  s_g := by
+    have H : internalHomPreX Y r n ≫ (internalHomPre S.f Y).f n = 𝟙 _ := by
+      refine internalHomObj_hom_ext fun p q h ↦ ?_
+      rw [assoc, internalHomPre_f_π, internalHomPreX_π_assoc, ← NatTrans.comp_app, ← pre_map,
+        hfr, pre_id, NatTrans.id_app, comp_id, id_comp]
+    exact H
+  id := by
+    have H : internalHomPreX Y s n ≫ (internalHomPre S.g Y).f n +
+        (internalHomPre S.f Y).f n ≫ internalHomPreX Y r n = 𝟙 _ := by
+      refine internalHomObj_hom_ext fun p q h ↦ ?_
+      rw [Preadditive.add_comp, assoc, assoc, internalHomPre_f_π, internalHomPreX_π_assoc,
+        internalHomPreX_π, internalHomPre_f_π_assoc, ← NatTrans.comp_app, ← NatTrans.comp_app,
+        ← pre_map, ← pre_map, ← Preadditive.comp_add, ← pre_add_app, add_comm, hid, pre_id,
+        NatTrans.id_app, comp_id, id_comp]
+    exact H
+
 /-- A degreewise splitting of `S` induces a degreewise splitting of
 `iHom(S.X₃, Y) ⟶ iHom(S.X₂, Y) ⟶ iHom(S.X₁, Y)`. -/
-@[simps]
 noncomputable def internalHomShortComplexSplitting (S : ShortComplex (CochainComplex C ℤ))
     (σ : ∀ n, (S.map (HomologicalComplex.eval C _ n)).Splitting) (n : ℤ) :
-    ((internalHomShortComplex Y S).map (HomologicalComplex.eval C _ n)).Splitting where
-  r := Pi.lift fun T ↦ internalHomπ S.X₂ Y n T.p T.q T.hpq ≫ (pre (σ T.p).s).app (Y.X T.q)
-  s := Pi.lift fun T ↦ internalHomπ S.X₁ Y n T.p T.q T.hpq ≫ (pre (σ T.p).r).app (Y.X T.q)
-  f_r := by
-    refine internalHomObj_hom_ext fun p q h ↦ ?_
-    have : (σ p).s ≫ S.g.f p = 𝟙 _ := (σ p).s_g
-    dsimp
-    rw [assoc, lift_internalHomπ, internalHomPre_f_π_assoc, ← NatTrans.comp_app, ← pre_map,
-      this]
-    simp
-  s_g := by
-    refine internalHomObj_hom_ext fun p q h ↦ ?_
-    have : S.f.f p ≫ (σ p).r = 𝟙 _ := (σ p).f_r
-    dsimp
-    rw [assoc, internalHomPre_f_π, lift_internalHomπ_assoc, assoc, ← NatTrans.comp_app,
-      ← pre_map, this]
-    simp
-  id := by
-    refine internalHomObj_hom_ext fun p q h ↦ ?_
-    have : (σ p).r ≫ S.f.f p + S.g.f p ≫ (σ p).s = 𝟙 _ := (σ p).id
-    dsimp
-    rw [Preadditive.add_comp, assoc, assoc, internalHomPre_f_π, lift_internalHomπ_assoc, assoc,
-      lift_internalHomπ, internalHomPre_f_π_assoc, ← NatTrans.comp_app, ← NatTrans.comp_app,
-      ← pre_map, ← pre_map, ← Preadditive.comp_add, ← pre_add_app, add_comm, this]
-    simp
+    ((internalHomShortComplex Y S).map (HomologicalComplex.eval C _ n)).Splitting :=
+  internalHomShortComplexSplittingOfSplit Y S (fun p ↦ (σ p).r) (fun p ↦ (σ p).s)
+    (fun p ↦ (σ p).f_r) (fun p ↦ (σ p).s_g) (fun p ↦ (σ p).id) n
 
 end Pre
 
@@ -210,11 +242,12 @@ lemma qhInternalHomToIhom_naturality {P P' : CochainComplex C ℤ} (f : P ⟶ P'
   rw [uncurry_natural_left, uncurry_pre_app, qhInternalHomToIhom, qhInternalHomToIhom,
     uncurry_curry, uncurry_curry, Functor.LaxMonoidal.μ_natural_right_assoc,
     Functor.LaxMonoidal.μ_natural_left_assoc, ← Qh.map_comp, ← Qh.map_comp]
-  congr 1
   have := (quotient C (ComplexShape.up ℤ)).congr_map
     (CochainComplex.whiskerLeft_internalHomPre_comp_counit f I)
-  simp only [Functor.map_comp] at this
-  exact this
+  rw [Functor.map_comp, Functor.map_comp,
+    HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft',
+    HomotopyCategory.MonoidalCategory.quotient_map_whiskerRight'] at this
+  rw [this]
 
 open HomotopyCategory in
 /-- `qhInternalHomToIhom P I` is an isomorphism when `I` is K-injective. -/
@@ -274,12 +307,17 @@ lemma exists_distinguished_ihom_pre_of_degreewiseSplit
       (qhInternalHomToIhom S.X₃ I)⟦(1 : ℤ)⟧', isomorphic_distinguished _ hT' _
     (Triangle.isoMk _ _ (asIso (qhInternalHomToIhom S.X₃ I)).symm
       (asIso (qhInternalHomToIhom S.X₂ I)).symm (asIso (qhInternalHomToIhom S.X₁ I)).symm
-      ((IsIso.comp_inv_eq _).2 ((IsIso.eq_inv_comp _).2 (by rw [← assoc]; exact H₁.symm)))
-      ((IsIso.comp_inv_eq _).2 ((IsIso.eq_inv_comp _).2 (by rw [← assoc]; exact H₂.symm)))
+      (by
+        rw [Iso.symm_hom, Iso.symm_hom, asIso_inv, asIso_inv, IsIso.eq_inv_comp, ← assoc,
+        Triangle.mk_mor₁, ← H₁, assoc, IsIso.hom_inv_id, comp_id]
+        rfl)
+      (by
+        rw [Iso.symm_hom, Iso.symm_hom, asIso_inv, asIso_inv, IsIso.eq_inv_comp, ← assoc,
+        Triangle.mk_mor₂, ← H₂, assoc, IsIso.hom_inv_id, comp_id]
+        rfl)
       ?_)⟩
-  simp only [Triangle.mk_mor₃, Iso.symm_hom, asIso_inv, assoc, ← Functor.map_comp,
-    IsIso.hom_inv_id, Functor.map_id, comp_id]
-  rfl
+  simp only [Triangle.mk_mor₃, Iso.symm_hom, asIso_inv, assoc, ← CategoryTheory.Functor.map_comp,
+    IsIso.hom_inv_id, CategoryTheory.Functor.map_id, comp_id]
 
 /-- The first-variable exactness of the internal hom is invariant under isomorphisms of
 triangles and of the second variable. -/
@@ -306,7 +344,8 @@ lemma exists_distinguished_ihom_pre_of_iso {T T' : Triangle (DerivedCategory C)}
     rw [hφ, hφ, assoc, NatTrans.naturality, ← NatTrans.comp_app_assoc,
       ← NatTrans.comp_app_assoc, ← pre_map, ← pre_map, c₁]
   · change ((φ e₁).hom ≫ h' ≫ (φ e₃).inv⟦(1 : ℤ)⟧') ≫ (φ e₃).hom⟦(1 : ℤ)⟧' = (φ e₁).hom ≫ h'
-    simp only [assoc, ← Functor.map_comp, Iso.inv_hom_id, Functor.map_id, comp_id]
+    simp only [assoc, ← CategoryTheory.Functor.map_comp, Iso.inv_hom_id,
+      CategoryTheory.Functor.map_id, comp_id]
 
 /-- Blueprint `lem-sf-hom-triangulated`: Exactness of the internal Hom in each variable, first
 variable.
@@ -329,5 +368,24 @@ theorem exists_distinguished_ihom_pre (T : Triangle (DerivedCategory C))
   obtain ⟨I, _, rfl⟩ := X.mk_surjective
   exact exists_distinguished_ihom_pre_of_iso (e ≪≫ Qh.mapTriangle.mapIso e') eM.symm
     (exists_distinguished_ihom_pre_of_degreewiseSplit S σ I)
+
+
+/-- Blueprint `lem-sf-hom-triangulated`: Exactness of the internal Hom in each variable, second
+variable.
+
+For a distinguished triangle `M' ⟶ M ⟶ M'' ⟶ M'[1]` of `D(C)` and any `K`, the maps
+`RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'')` induced by the first two maps extend to a
+distinguished triangle `RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'') ⟶ RHom(K, M')[1]`: the functor
+`RHom(K, -)` is triangulated, being right adjoint to the triangulated functor `K ⊗ᴸ -`, with the
+shift structure induced by the adjunction. The first variable is
+`DerivedCategory.exists_distinguished_ihom_pre`. -/
+theorem exists_distinguished_ihom_map (K : DerivedCategory C) (T : Triangle (DerivedCategory C))
+    (hT : T ∈ distTriang _) :
+    ∃ h, Triangle.mk ((ihom K).map T.mor₁) ((ihom K).map T.mor₂) h ∈ distTriang _ := by
+  let adj : (curriedTensor (DerivedCategory C)).obj K ⊣ ihom K := ihom.adjunction K
+  let _ := adj.rightAdjointCommShift ℤ
+  have := adj.commShift_of_leftAdjoint ℤ
+  have := adj.isTriangulated_rightAdjoint
+  exact ⟨_, (ihom K).map_distinguished T hT⟩
 
 end DerivedCategory
