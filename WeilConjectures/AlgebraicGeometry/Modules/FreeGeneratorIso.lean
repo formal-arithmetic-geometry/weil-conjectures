@@ -103,7 +103,7 @@ variable {L₁ L₂ L₃ : X.Modules} {e₁ : ∀ i, Γ(L₁, U i)} {e₂ : ∀ 
 `L₁`, `L₂`, `L₃` on `U i`. If on every open `W ⊆ U i ⊓ U j` the transition function of `e₃` is
 the product of those of `e₁` and `e₂`, then the families `e₁ i ⊗ e₂ i` of `L₁ ⊗ L₂` and `e₃ i`
 of `L₃` have the same transition functions, as required by `isoOfIsFreeGenerator`. -/
-lemma tmulSection_transition (he₁ : ∀ i, IsFreeGenerator (e₁ i))
+lemma tmulSection_transition_of_isFreeGenerator (he₁ : ∀ i, IsFreeGenerator (e₁ i))
     (he₂ : ∀ i, IsFreeGenerator (e₂ i))
     (h : ∀ i j (W : X.Opens) (hi : W ≤ U i) (hj : W ≤ U j), ∃ c d : Γ(X, W),
       c • L₁.presheaf.map (homOfLE hj).op (e₁ j) = L₁.presheaf.map (homOfLE hi).op (e₁ i) ∧

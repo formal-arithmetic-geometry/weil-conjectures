@@ -118,7 +118,7 @@ def twistTensorIso (a b : ℤ) : twist n S a ⊗ twist n S b ≅ twist n S (a + 
     (fun i ↦ (isFreeGenerator_twistGenerator n S a i).tmulSection
       (isFreeGenerator_twistGenerator n S b i))
     (isFreeGenerator_twistGenerator n S (a + b))
-    (tmulSection_transition (isFreeGenerator_twistGenerator n S a)
+    (tmulSection_transition_of_isFreeGenerator (isFreeGenerator_twistGenerator n S a)
       (isFreeGenerator_twistGenerator n S b) (exists_twistGenerator_transition n S a b))
 
 /-- **Local basis property of `twistTensorIso`**: on the standard open `D₊(xᵢ)`, the canonical

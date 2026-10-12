@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
@@ -47,28 +48,6 @@ namespace AlgebraicGeometry.Scheme
 variable {X Y : Scheme.{u}}
 
 section Degree
-
-/-- For a finite flat morphism, the rank at a point `y` of the target is the degree of the fibre
-over `y`. -/
-theorem Hom.finrank_eq_fiberDegree (f : X ⟶ Y) [Flat f] [IsFinite f] (y : Y) :
-    f.finrank y = f.fiberDegree y := by
-  obtain ⟨R, g, _, y, rfl⟩ := Y.exists_Spec_apply_eq y
-  rw [← Scheme.Hom.finrank_pullback_snd,
-    ← Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback f g)]
-  have : IsAffine (pullback f g) := isAffine_of_isAffineHom (pullback.snd f g)
-  obtain ⟨φ, hφ⟩ := Spec.map_surjective ((pullback f g).isoSpec.inv ≫ pullback.snd f g)
-  have hsnd : pullback.snd f g = (pullback f g).isoSpec.hom ≫ Spec.map φ := by
-    rw [hφ, Iso.hom_inv_id_assoc]
-  have : IsFinite (Spec.map φ) := hφ ▸ inferInstance
-  have : Flat (Spec.map φ) := hφ ▸ inferInstance
-  rw [hsnd, Scheme.Hom.finrank_comp_left_of_isIso, Scheme.Hom.fiberDegree_comp_left_of_isIso]
-  have hfl : φ.hom.Flat := Flat.SpecMap_iff.mp ‹_›
-  have hfi : φ.hom.Finite := (IsFinite.SpecMap_iff φ).mp ‹_›
-  algebraize [φ.hom]
-  have e : φ = CommRingCat.ofHom (algebraMap R _) := rfl
-  rw [e, Scheme.Hom.finrank_SpecMap_algebraMap, Scheme.Hom.fiberDegree_SpecMap,
-    Module.rankAtStalk_eq]
-  rfl
 
 /-- A flat morphism of integral schemes maps the generic point to the generic point: the generic
 point of the target generalizes the image of the generic point of the source, and generizations
