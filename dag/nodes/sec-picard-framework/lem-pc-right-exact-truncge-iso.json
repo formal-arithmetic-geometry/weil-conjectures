@@ -1,0 +1,144 @@
+{
+ "id": "lem-pc-right-exact-truncge-iso",
+ "kind": "statement",
+ "title": "Right exact additive functors commute with canonical lower truncation",
+ "statement": "Let A and B be abelian categories [def-sp-abelian], F:A -> B an additive functor [def-weil-pbc-additive-functor] preserving finite colimits [def-weil-pbc-category-colimit], K a cochain complex in A indexed by the integers, and n an integer. Canonical lower truncation sets terms below n to zero and replaces K^n by coker(d^(n-1)), with the induced outgoing differential [def-pc-cochain-complex-modules]. There is an isomorphism of complexes F(K.truncGE n) ≅ (F K).truncGE n. No boundedness or vanishing assumption is needed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0118, Section 12.15, cochain canonical lower truncation, item (4), and Tag 0654; https://stacks.math.columbia.edu/tag/0118 and https://stacks.math.columbia.edu/tag/0654"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor",
+  "def-weil-pbc-category-colimit",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "At degree n the canonical truncation projection is the opcycles quotient followed by the inverse of truncGEXIsoOpcycles. Its cofork is a cokernel cofork, by opcyclesIsCokernel and transport along this isomorphism. In degrees i>n the projection is an isomorphism, as its restrictionToTruncGE component is an isomorphism away from the boundary. These are explicit computations of the canonical truncation in Mathlib.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each i<n, both truncated terms are zero and the mapped source term is zero because F is additive. Use their zero-object isomorphism. For i=n, map the cokernel cofork by F and use preservation of its colimit; uniqueness of the two cokernels gives a component isomorphism commuting with the projections. For i>n compose the inverse mapped projection with the target projection. Thus for every i the component e_i satisfies F(pi_i) followed by e_i = pi′_i.",
+   "uses": [
+    "def-weil-pbc-additive-functor",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every pi_i is epi, and F preserves epis because it preserves cokernels in abelian categories. Precompose the desired differential square for e_i and e_j with F(pi_i). Replace F(pi_i)e_i and F(pi_j)e_j by pi′_i and pi′_j. The two truncation projections commute with their differentials, while F preserves composition, so the square commutes. Cancel the epi F(pi_i). HomologicalComplex.Hom.isoOfComponents assembles the component isomorphisms into the required complex isomorphism.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0118, Section 12.15, cochain canonical lower truncation, item (4), and Tag 0654; https://stacks.math.columbia.edu/tag/0118 and https://stacks.math.columbia.edu/tag/0654; the specialized argument was written by U2 after reading these sources online"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Right exact functors commute with lower truncation of cochain complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive right exact functor commutes with good lower truncation of a cochain complex",
+   "results": "CochainComplex.shortComplexTruncLE_shortExact and t-structure truncation additivity; no functor-truncation commutation theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map\", \"truncGE\"",
+   "results": "HomologicalComplex.truncGEMap and truncGEMap_comp; these map complex morphisms rather than applying right exact coefficient functors",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "map_truncGE|truncGE.*map|truncGE.*right.exact in Mathlib/Algebra/Homology",
+   "results": "Only truncation functor maps and quasi-isomorphism criteria; no right exact coefficient-functor commutation isomorphism",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFlatConnectiveTruncation",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a): Right exact additive functors commute with canonical lower truncation",
+   "via": [
+    "lem-pc-affine-flat-connective-truncation",
+    "lem-pc-proper-flat-finite-presentation-model",
+    "lem-pc-proper-flat-cohomology-model-properties",
+    "lem-pc-proper-flat-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RightExactTruncGEIso",
+  "file": "lean/Sheaf/Algebra/Homology/RightExactTruncGEIso.lean",
+  "declaration": "CochainComplex.nonempty_map_truncGE_iso",
+  "statement": "theorem nonempty_map_truncGE_iso\n    {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]\n    [Abelian A] [Abelian B] (F : A ⥤ B) [F.Additive] [PreservesFiniteColimits F]\n    (K : CochainComplex A ℤ) (n : ℤ) :\n    Nonempty ((F.mapHomologicalComplex (.up ℤ)).obj (K.truncGE n) ≅\n      CochainComplex.truncGE ((F.mapHomologicalComplex (.up ℤ)).obj K) n)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T223421-L-1642388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T223421-L-1642388",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
