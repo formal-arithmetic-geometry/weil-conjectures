@@ -1,6 +1,6 @@
 # Work queue
 
-108 items; claim with `tools/claim.py next <group> [--stage N]`.
+112 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (8)
 
@@ -23,7 +23,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 1 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (99)
+## Stage 3: modules to prove (103)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -68,12 +68,16 @@ Not open yet: 42 nodes that wait for stage 1, 1 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk` | 5 | 1 | proof |
 | `Sheaf.RingTheory.StrictlyHenselianOfDimensionZero` | 5 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
-| `WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale` | 5 | 4 | proof |
+| `WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale` | 5 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FiniteEtaleLiftingEssentialSurjectivity` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FiniteEtaleRestrictionFullyFaithful` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.HenselianClopenRestriction` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IntegralConstantModulePushforwardColimit` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SchemeClopenIdempotent` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.PresheafChangeOfRingsAdjunction` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteCechMathlibComparison` | 6 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
