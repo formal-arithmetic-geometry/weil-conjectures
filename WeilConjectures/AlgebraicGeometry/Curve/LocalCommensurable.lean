@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Finiteness.Finsupp
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 public import Mathlib.Algebra.Algebra.Subalgebra.Pointwise
+public import Mathlib.RingTheory.Trace.Basic
 
 /-!
 # Commensurability of a discrete valuation ring with its multiples
@@ -250,5 +251,87 @@ theorem finiteDimensional_sup_quotient_inf {f : K} (hf : f ≠ 0) :
   · intro x hx
     refine (Submodule.mem_smul_pointwise_iff_exists _ _ _).2 ⟨(b : K) * x, O.mul_mem b.2 hx, ?_⟩
     rw [smul_eq_mul, ← mul_assoc, inv_mul_cancel₀ hb0, one_mul]
+
+omit [IsFractionRing O K] in
+/-- The residue map identifies `O ⧸ ϖ O` with the residue field of `O`, `k`-linearly. -/
+noncomputable def quotientUniformizerEquiv {ϖ : O} (hϖ : Irreducible ϖ) :
+    (↥(toSubmodule O) ⧸ ((ϖ : K) • toSubmodule O).comap (toSubmodule O).subtype) ≃ₗ[k]
+      IsLocalRing.ResidueField O := by
+  let ρ : ↥(toSubmodule O) →ₗ[k] IsLocalRing.ResidueField O :=
+    (IsScalarTower.toAlgHom k O (IsLocalRing.ResidueField O)).toLinearMap ∘ₗ
+      { toFun a := ⟨a.1, a.2⟩
+        map_add' _ _ := rfl
+        map_smul' _ _ := rfl }
+  have hker : LinearMap.ker ρ = ((ϖ : K) • toSubmodule O).comap (toSubmodule O).subtype := by
+    ext ⟨a, ha⟩
+    simp only [LinearMap.mem_ker, Submodule.mem_comap, Submodule.subtype_apply]
+    change IsLocalRing.residue O ⟨a, ha⟩ = 0 ↔ _
+    rw [IsLocalRing.residue_eq_zero_iff, hϖ.maximalIdeal_eq, Ideal.mem_span_singleton]
+    constructor
+    · rintro ⟨b, hb⟩
+      refine (Submodule.mem_smul_pointwise_iff_exists _ _ _).2 ⟨b, b.2, ?_⟩
+      exact (congr_arg Subtype.val hb).symm
+    · intro h
+      obtain ⟨b, hb, rfl⟩ := (Submodule.mem_smul_pointwise_iff_exists _ _ _).1 h
+      exact ⟨⟨b, hb⟩, rfl⟩
+  have hsurj : Function.Surjective ρ := fun r ↦ by
+    obtain ⟨o, rfl⟩ := IsLocalRing.residue_surjective r
+    exact ⟨⟨o.1, o.2⟩, rfl⟩
+  exact (Submodule.quotEquivOfEq _ _ hker).symm.trans (ρ.quotKerEquivOfSurjective hsurj)
+
+omit [IsFractionRing O K] [Module.Finite k (IsLocalRing.ResidueField O)] in
+@[simp]
+lemma quotientUniformizerEquiv_mk {ϖ : O} (hϖ : Irreducible ϖ) (a : ↥(toSubmodule O)) :
+    quotientUniformizerEquiv O hϖ (Submodule.Quotient.mk a) = IsLocalRing.residue O ⟨a.1, a.2⟩ :=
+  rfl
+
+/-- Multiplication by `u ∈ O` on `O`, as a `k`-linear map. -/
+noncomputable def mulToSubmodule (u : O) : ↥(toSubmodule O) →ₗ[k] ↥(toSubmodule O) where
+  toFun a := ⟨(u : K) * a, O.mul_mem u.2 a.2⟩
+  map_add' _ _ := Subtype.ext (mul_add _ _ _)
+  map_smul' c _ := Subtype.ext (mul_smul_comm c _ _)
+
+omit [IsDiscreteValuationRing O] [Module.Finite k (IsLocalRing.ResidueField O)]
+  [IsFractionRing O K] in
+lemma mulToSubmodule_le_comap (u : O) (c : K) :
+    (c • toSubmodule O).comap (toSubmodule O).subtype ≤
+      ((c • toSubmodule O).comap (toSubmodule O).subtype).comap (mulToSubmodule O u) := by
+  rintro ⟨a, ha⟩ h
+  rw [Submodule.mem_comap, Submodule.subtype_apply] at h
+  obtain ⟨b, hb, rfl⟩ := (Submodule.mem_smul_pointwise_iff_exists _ _ _).1 h
+  refine (Submodule.mem_smul_pointwise_iff_exists _ _ _).2 ⟨(u : K) * b, O.mul_mem u.2 hb, ?_⟩
+  change c * ((u : K) * b) = (u : K) * (c * b)
+  ring
+
+omit [IsFractionRing O K] in
+/-- The trace of multiplication by `u ∈ O` on `O ⧸ ϖ O` is the trace `Tr_{κ/k}` of the residue
+of `u`. -/
+theorem trace_mapQ_mulToSubmodule {ϖ : O} (hϖ : Irreducible ϖ) (u : O) :
+    LinearMap.trace k _ (Submodule.mapQ _ _ (mulToSubmodule O u)
+      (mulToSubmodule_le_comap O u (ϖ : K))) =
+      Algebra.trace k (IsLocalRing.ResidueField O) (IsLocalRing.residue O u) := by
+  have := finiteDimensional_quotient_uniformizer O hϖ
+  rw [Algebra.trace_apply, ← LinearMap.trace_conj' _ (quotientUniformizerEquiv O hϖ)]
+  congr 1
+  refine LinearMap.ext fun r ↦ ?_
+  obtain ⟨q, rfl⟩ := (quotientUniformizerEquiv O hϖ).surjective r
+  obtain ⟨a, rfl⟩ := Submodule.mkQ_surjective _ q
+  rw [LinearEquiv.conj_apply_apply, LinearEquiv.symm_apply_apply, Submodule.mkQ_apply,
+    Submodule.mapQ_apply, quotientUniformizerEquiv_mk, quotientUniformizerEquiv_mk]
+  change _ = IsLocalRing.residue O u * IsLocalRing.residue O ⟨a.1, a.2⟩
+  rw [← map_mul]
+  rfl
+
+omit [IsFractionRing O K] in
+/-- If the residue field of `O` is separable over `k`, then some `u ∈ O` has residue of nonzero
+trace. -/
+theorem exists_trace_residue_ne_zero [Algebra.IsSeparable k (IsLocalRing.ResidueField O)] :
+    ∃ u : O, Algebra.trace k (IsLocalRing.ResidueField O) (IsLocalRing.residue O u) ≠ 0 := by
+  by_contra! H
+  have h := (traceForm_nondegenerate k (IsLocalRing.ResidueField O)).1 1 fun r ↦ by
+    obtain ⟨u, rfl⟩ := IsLocalRing.residue_surjective r
+    rw [Algebra.traceForm_apply, one_mul]
+    exact H u
+  exact one_ne_zero h
 
 end Subalgebra
