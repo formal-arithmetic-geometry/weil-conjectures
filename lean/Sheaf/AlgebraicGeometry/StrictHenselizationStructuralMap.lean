@@ -48,7 +48,39 @@ theorem exists_strictHenselizationStructuralMap
               (((equivSmallModel.{u}
                 (strictHenselizationNeighbourhoods s)).inverse.obj j).1)).hom =
           ρ := by
-  sorry
+  classical
+  let := (strictHenselization_properties s).2.1
+  let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse
+  let F : SmallModel.{u} (strictHenselizationNeighbourhoods s) →
+      (strictHenselizationScheme s ⟶ S) := fun j ↦
+    (strictHenselizationCone s).π.app (Opposite.op (Opposite.op j)) ≫
+      Spec.map (ΓSpecIso (N.obj j).1.left.unop).inv ≫
+      ((AffineEtale.Spec S).obj (N.obj j).1).hom
+  have hF {i j : SmallModel.{u} (strictHenselizationNeighbourhoods s)} (f : i ⟶ j) :
+      F i = F j := by
+    have h := (strictHenselizationCone s).w (f.op.op)
+    dsimp [F]
+    let g := (N.map f).1.left.unop
+    change (strictHenselizationCone s).π.app (Opposite.op (Opposite.op i)) ≫
+      Spec.map (Spec.map g).appTop = _ at h
+    have hg := congrArg Spec.map (ΓSpecIso_inv_naturality g)
+    simp only [Spec.map_comp] at hg
+    have hw : Spec.map g ≫ ((AffineEtale.Spec S).obj (N.obj j).1).hom =
+        ((AffineEtale.Spec S).obj (N.obj i).1).hom :=
+      (N.map f).1.w
+    have hg' := congrArg
+      (fun t ↦ (strictHenselizationCone s).π.app (Opposite.op (Opposite.op i)) ≫
+        t ≫ ((AffineEtale.Spec S).obj (N.obj j).1).hom) hg
+    have hh := congrArg (fun t ↦ t ≫ Spec.map (ΓSpecIso (N.obj j).1.left.unop).inv ≫
+      ((AffineEtale.Spec S).obj (N.obj j).1).hom) h
+    simp only [Category.assoc, hw] at hg'
+    simp only [Category.assoc] at hh
+    exact hg'.trans hh
+  let j₀ := Classical.choice (IsCofiltered.nonempty (C :=
+    SmallModel.{u} (strictHenselizationNeighbourhoods s)))
+  refine ⟨F j₀, fun j ↦ ?_⟩
+  exact (hF (IsCofiltered.minToLeft j j₀)).symm.trans
+    (hF (IsCofiltered.minToRight j j₀))
 
 /-- The structural morphism `S_(s) ⟶ S` of the strict henselization at a geometric point:
 the common composite of the limit legs with the neighbourhood structure morphisms,
