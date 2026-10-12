@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-affine-artin-schreier-vanishing",
+ "kind": "statement",
+ "title": "Affine characteristic-p constant cohomology vanishes above degree one",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme], $p$ a prime, and suppose $p\\cdot1=0$ in $\\Gamma(X,\\mathcal O_X)$. For every integer $q\\geq2$, $H^q(X_{\\mathrm{et}},\\underline{\\mathbf Z/p\\mathbf Z})=0$, with cohomology [def-weil-pbc-etale-cohomology] and constant sheaf [def-sc-constant-sheaves]. This includes the empty scheme.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-cohomology",
+  "def-sc-constant-sheaves"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A3K",
+  "place": "Lemma lemma-vanishing-affine-char-p-p, part (1), and its proof from the Artin-Schreier sequence and affine structure-sheaf acyclicity."
+ },
+ "proof": [
+  {
+   "text": "For $G$ the lifted associated structure-module sheaf, take the short exact complex $S=(\\underline{\\mathbf F_p}\\to G\\to G)$ from [lem-sc-artin-schreier-sequence-scheme].",
+   "uses": [
+    "lem-sc-artin-schreier-sequence-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write $q=(n+1)+1$ with $n\\geq0$. The structure module is quasi-coherent, so [lem-sc-etale-affine-qcoherent] gives $H^{n+1}(X,G)=0$ and $H^{n+2}(X,G)=0$. The latter vanishing makes the connecting map $H^{n+1}(X,G)\\to H^{n+2}(X,\\underline{\\mathbf F_p})$ surjective by the long exact Ext cohomology sequence [lem-weil-pbc-sheaf-ext-cohomology-long-exact], concretely the proved source lemma Sheaf.H.δSucc_surjective. Its source is a subsingleton by the former vanishing, so its target is a subsingleton. Arithmetic identifies this degree with $q$. This is exactly the compiled Lean proof, using Function.Surjective.subsingleton. The boundary case q=2 uses H¹(G)=H²(G)=0, not H⁰(G)=0.",
+   "uses": [
+    "lem-sc-etale-affine-qcoherent",
+    "lem-weil-pbc-sheaf-ext-cohomology-long-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-artin-schreier-sequence-scheme",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-weil-pbc-sheaf-ext-cohomology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A3K",
+  "place": "Lemma lemma-vanishing-affine-char-p-p, part (1), and its proof from the Artin-Schreier sequence and affine structure-sheaf acyclicity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher etale cohomology of constant ZMod p on affine characteristic p scheme vanishes above degree one",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher etale cohomology of constant ZMod p on an affine scheme of characteristic p vanishes in degrees at least two",
+   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent; Algebra.formallyEtale_iff; Algebra.etaleLocus_eq_compl_support; Algebra.IsStandardSmooth.subsingleton_h1Cotangent; Algebra.FormallySmooth.subsingleton_h1Cotangent; Algebra.Extension.cotangentComplex_injective_iff; Algebra.FormallySmooth.iff_subsingleton_and_projective; Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-12",
+   "verdict": "No matching theorem; generic search results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.subsingleton_H_of_isZero; CategoryTheory.Sheaf.functorH_obj_coe; CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat; CategoryTheory.Sheaf.H.map; CategoryTheory.Sheaf.H.equiv₀; CategoryTheory.Sheaf.functorH_map; CategoryTheory.Sheaf.H.map_id_apply",
+   "date": "2026-10-12",
+   "verdict": "No matching theorem; generic search results only."
+  },
+  {
+   "tool": "grep",
+   "query": "ArtinSchreier|artinSchreier",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No matching theorem; generic search results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "Proof, affine case: 'In the affine case, lem-sc-etale-affine-qcoherent gives H^q(C,G_a)=0 for q>0, so the Artin-Schreier long exact sequence gives H^q(C,F_p)=0 for q>1'.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Sites/ArtinSchreier.lean",
+  "declaration": "AlgebraicGeometry.Scheme.subsingleton_sheafH_constantZMod_of_isAffine",
+  "statement": "theorem subsingleton_sheafH_constantZMod_of_isAffine (X : Scheme.{u}) [IsAffine X] (p : ℕ) [Fact p.Prime] (hp : (p : Γ(X, ⊤)) = 0) (q : ℕ) (hq : 2 ≤ q) : Subsingleton (Sheaf.H (X.constantZMod p) q)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T042413-L-1818099",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T042413-L-1818099",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
