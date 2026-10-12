@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.StalkCharpoly
 
 /-!
@@ -78,24 +79,21 @@ operator from the embedding.
 
 For a point `g : Spec K ⟶ X` with values in a field `K` with `qᵐ` elements and two embeddings
 `ι, ι' : K ↪ k̄` over `k₀`, the local Frobenius operators `F_x^{(m)}` on the stalks of a Weil
-sheaf at the two attached geometric points are conjugate. The two embeddings differ by a power
-`σʲ` of the Frobenius of `k̄`, so the two geometric points differ by the reparametrisation `σʲ`;
-the stalks at a geometric point and at its reparametrisation are identified
-(`AlgebraicGeometry.WeilSheaf.stalkObjSpecFrobeniusPowIso`), and this identification
-intertwines the iterated Weil structures. -/
+sheaf at the two attached geometric points are conjugate. Both geometric points lie over the
+image point of `g`, whose residue field embeds into the finite field `K`, so this is an instance
+of `AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalkAt`. -/
 theorem nonempty_equiv_stalkAtGeometricFiberPoint {K : Type u} [Field K] [Algebra k₀ K]
     [Finite K] (ι ι' : K →ₐ[k₀] AlgebraicClosure k₀) (g : Spec (.of K) ⟶ X)
     (hg : g ≫ (X ↘ Spec (CommRingCat.of k₀)) = Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))
     (m : ℕ) (hK : Nat.card K = Nat.card k₀ ^ m) :
     Nonempty ((F.stalkAtGeometricFiberPoint ι g hg m hK).Equiv
       (F.stalkAtGeometricFiberPoint ι' g hg m hK)) := by
-  set f := X ↘ Spec (CommRingCat.of k₀)
-  have h := f.geometricFiberPoint_comp_geometricFiberProj_base ι g hg
+  have h := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPoint_comp_geometricFiberProj_base ι g hg
   refine F.nonempty_equiv_stalkAt _ _
-    (h.trans (f.geometricFiberPoint_comp_geometricFiberProj_base ι' g hg).symm) ?_ m _ _
-  rw [h, Scheme.mem_finitePoints]
-  obtain ⟨φ, -⟩ := Scheme.exists_eq_spec_map_comp_fromSpecResidueField g _ rfl
-  exact Finite.of_injective _ φ.hom.injective
+    (h.trans ((X ↘ Spec (CommRingCat.of k₀)).geometricFiberPoint_comp_geometricFiberProj_base
+      ι' g hg).symm) (h ▸ X.mem_finitePoints.mpr ?_) m _ _
+  exact Finite.of_injective _
+    (X.descResidueField (Scheme.stalkClosedPointTo g)).hom.injective
 
 end WeilSheaf
 

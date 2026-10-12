@@ -30,6 +30,10 @@ product `A × ℤ`, and the map to matrices is `(a, m) ↦ a cᵐ` with `c = χ(
 
 ## Main declarations
 
+* `AlgebraicGeometry.Monodromy.DegreeDatum.semidirectProductMulEquiv`: a degree datum is the split
+  cyclic extension `P ⋊_α ℤ` of its degree-zero subgroup by conjugation with `γ`.
+* `AlgebraicGeometry.Monodromy.DegreeDatum.ofSemidirectProduct`: conversely, the degree datum
+  `(P ⋊_α ℤ, deg, (1, 1))` of a split cyclic extension.
 * `AlgebraicGeometry.Monodromy.DegreeDatum.finitePart`: the finite part of a character.
 * `AlgebraicGeometry.Monodromy.DegreeDatum.ofWeilGroup`: the degree datum of a Weil group with a
   lift of the Frobenius.
@@ -41,6 +45,9 @@ product `A × ℤ`, and the map to matrices is `(a, m) ↦ a cᵐ` with `c = χ(
 
 ## Blueprint
 
+`DegreeDatum.semidirectProductMulEquiv`, `DegreeDatum.existsUnique_mul_zpow` and
+`DegreeDatum.ofSemidirectProduct` implement the split cyclic extension of `d-ab-rankone`, whose
+characters `χ_z` and `χ_fin` are `DegreeDatum.degreeCharacter` and `DegreeDatum.finitePart`.
 `AlgebraicGeometry.Monodromy.DegreeDatum.finitePart_ofWeilGroup` implements
 `cor-wf-rank-one-degree-factorization-curve`;
 `RepresentedDegreeDatum.arithmeticMonodromyExtensionEquivProd`, with the formula `j(a, m) = a cᵐ`
@@ -117,6 +124,81 @@ theorem range_finitePart : Set.range (D.finitePart χ) = χ '' D.deg.ker := by
   · rintro ⟨u, hu, rfl⟩
     exact ⟨u, D.finitePart_of_mem_ker χ hu⟩
 
+section SplitExtension
+
+/-- Conjugation by the element `γ` of degree one, as an action of `ℤ` on the degree-zero subgroup
+`P = ker deg`: `n` acts by `u ↦ γⁿ u γ⁻ⁿ`. (blueprint: `d-ab-rankone`) -/
+def conjAction : Multiplicative ℤ →* MulAut D.deg.ker :=
+  MulAut.conjNormal.comp (zpowersHom W D.degreeOneElement)
+
+theorem coe_conjAction_apply (n : Multiplicative ℤ) (u : D.deg.ker) :
+    ((D.conjAction n u : D.deg.ker) : W) =
+      D.degreeOneElement ^ n.toAdd * u * (D.degreeOneElement ^ n.toAdd)⁻¹ :=
+  rfl
+
+/-- The map `P ⋊_α ℤ → W`, `(u, n) ↦ u γⁿ`, from the split cyclic extension of the degree-zero
+subgroup by conjugation with `γ`. -/
+def semidirectProductHom : D.deg.ker ⋊[D.conjAction] Multiplicative ℤ →* W :=
+  SemidirectProduct.lift D.deg.ker.subtype (zpowersHom W D.degreeOneElement) fun n ↦ by
+    ext u
+    rfl
+
+@[simp]
+theorem semidirectProductHom_apply (x : D.deg.ker ⋊[D.conjAction] Multiplicative ℤ) :
+    D.semidirectProductHom x = x.left * D.degreeOneElement ^ x.right.toAdd :=
+  rfl
+
+theorem deg_zpow_degreeOneElement (n : ℤ) :
+    D.deg (D.degreeOneElement ^ n) = Multiplicative.ofAdd n := by
+  rw [map_zpow, D.deg_degreeOneElement, ← ofAdd_zsmul, smul_eq_mul, mul_one]
+
+theorem mul_inv_zpow_deg_mem_ker (w : W) :
+    w * (D.degreeOneElement ^ (D.deg w).toAdd)⁻¹ ∈ D.deg.ker := by
+  rw [MonoidHom.mem_ker, map_mul, map_inv, deg_zpow_degreeOneElement, ofAdd_toAdd,
+    mul_inv_cancel]
+
+theorem semidirectProductHom_bijective : Function.Bijective D.semidirectProductHom := by
+  refine ⟨(injective_iff_map_eq_one _).2 fun x hx ↦ ?_, fun w ↦ ?_⟩
+  · rw [semidirectProductHom_apply] at hx
+    have hdeg := congrArg D.deg hx
+    rw [map_mul, MonoidHom.mem_ker.1 x.left.2, one_mul, deg_zpow_degreeOneElement, ofAdd_toAdd,
+      map_one] at hdeg
+    rw [hdeg, toAdd_one, zpow_zero, mul_one] at hx
+    exact SemidirectProduct.ext (Subtype.ext hx) hdeg
+  · exact ⟨⟨⟨_, D.mul_inv_zpow_deg_mem_ker w⟩, D.deg w⟩, by simp⟩
+
+/-- A degree datum `(W, deg, γ)` is the split cyclic extension `P ⋊_α ℤ` of its degree-zero
+subgroup `P` by the conjugation `α` with `γ`: `(u, n) ↦ u γⁿ`. Every element of `W` thus has a
+unique form `u γⁿ` with `u ∈ P`, and then `n = deg (u γⁿ)` (`deg_semidirectProductMulEquiv`).
+(blueprint: `d-ab-rankone`) -/
+noncomputable def semidirectProductMulEquiv : D.deg.ker ⋊[D.conjAction] Multiplicative ℤ ≃* W :=
+  MulEquiv.ofBijective _ D.semidirectProductHom_bijective
+
+@[simp]
+theorem semidirectProductMulEquiv_apply (x : D.deg.ker ⋊[D.conjAction] Multiplicative ℤ) :
+    D.semidirectProductMulEquiv x = x.left * D.degreeOneElement ^ x.right.toAdd :=
+  rfl
+
+/-- Under `semidirectProductMulEquiv`, the degree map is the projection to `ℤ`. -/
+theorem deg_semidirectProductMulEquiv (x : D.deg.ker ⋊[D.conjAction] Multiplicative ℤ) :
+    D.deg (D.semidirectProductMulEquiv x) = x.right := by
+  rw [semidirectProductMulEquiv_apply, map_mul, MonoidHom.mem_ker.1 x.left.2, one_mul,
+    deg_zpow_degreeOneElement, ofAdd_toAdd]
+
+/-- Every element of a degree datum has a unique form `u γⁿ` with `u` of degree zero.
+(blueprint: `d-ab-rankone`) -/
+theorem existsUnique_mul_zpow (w : W) :
+    ∃! p : D.deg.ker × ℤ, (p.1 : W) * D.degreeOneElement ^ p.2 = w := by
+  obtain ⟨x, rfl⟩ := D.semidirectProductMulEquiv.surjective w
+  refine ⟨(x.left, x.right.toAdd), rfl, fun p hp ↦ ?_⟩
+  have := D.semidirectProductMulEquiv.injective
+    (a₁ := ⟨p.1, Multiplicative.ofAdd p.2⟩) (a₂ := x) hp
+  rw [← this]
+  rfl
+
+end SplitExtension
+
+
 section WeilGroup
 
 variable {G Γ : Type*} [Group G] [Group Γ] (π : G →* Γ) (Φ : Γ)
@@ -155,6 +237,21 @@ theorem finitePart_ofWeilGroup (hπ : Φ ∈ π.range) (hΦ : ¬IsOfFinOrder Φ)
     MonoidHom.isOfFinOrder_of_finite_range (hrange ▸ hχ)⟩
 
 end WeilGroup
+
+/-- The degree datum `(P ⋊_α ℤ, deg, (1, 1))` of the split cyclic extension of a group `P` by an
+action `α` of `ℤ`: the degree map is the projection to `ℤ` (`SemidirectProduct.rightHom`), whose
+kernel is `P × {0}` (`ker_deg_ofSemidirectProduct`). (blueprint: `d-ab-rankone`) -/
+def ofSemidirectProduct {N : Type*} [Group N] (φ : Multiplicative ℤ →* MulAut N) :
+    DegreeDatum (N ⋊[φ] Multiplicative ℤ) where
+  deg := SemidirectProduct.rightHom
+  surjective_deg := SemidirectProduct.rightHom_surjective
+  degreeOneElement := SemidirectProduct.inr (Multiplicative.ofAdd 1)
+  deg_degreeOneElement := rfl
+
+theorem ker_deg_ofSemidirectProduct {N : Type*} [Group N] (φ : Multiplicative ℤ →* MulAut N) :
+    (ofSemidirectProduct φ).deg.ker = SemidirectProduct.inl.range :=
+  (SemidirectProduct.range_inl_eq_ker_rightHom (φ := φ)).symm
+
 
 end DegreeDatum
 

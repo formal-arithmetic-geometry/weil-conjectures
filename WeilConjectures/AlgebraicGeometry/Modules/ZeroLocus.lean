@@ -645,10 +645,12 @@ lemma Hom.app_mem_ideal_zeroLocus {L : X.Modules} [SheafOfModules.IsInvertible.{
 /-- **An invertible module mapping to `𝒪_X` along an effective Cartier divisor.** If
 `ψ : L ⟶ 𝒪_X` is a morphism from an invertible module whose zero scheme `D = Z(ψ)` is an
 effective Cartier divisor, then `ψ` identifies `L` with the ideal sheaf `𝒪_X(-D)`: locally `ψ`
-sends a free generator of `L` to a non-zerodivisor generating the ideal of `D`. -/
-theorem Hom.nonempty_iso_toModules_zeroLocus {L : X.Modules}
+sends a free generator of `L` to a non-zerodivisor generating the ideal of `D`. The isomorphism
+factors `ψ` through the inclusion `𝒪_X(-D) ⟶ 𝒪_X`. -/
+theorem Hom.exists_iso_toModules_zeroLocus {L : X.Modules}
     [SheafOfModules.IsInvertible.{u, u, u} L] (ψ : L ⟶ Modules.unit X)
-    (hψ : ψ.zeroLocus.IsInvertible) : Nonempty (L ≅ ψ.zeroLocus.toModules) := by
+    (hψ : ψ.zeroLocus.IsInvertible) :
+    ∃ κ : L ≅ ψ.zeroLocus.toModules, κ.hom ≫ ψ.zeroLocus.toModulesι = ψ := by
   have : SheafOfModules.IsInvertible.{u, u, u} (Modules.unit X) :=
     IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
   have hzero : ψ ≫ ψ.zeroLocus.toPushforwardSubscheme = 0 := by
@@ -674,13 +676,21 @@ theorem Hom.nonempty_iso_toModules_zeroLocus {L : X.Modules}
   let κ : L ⟶ ψ.zeroLocus.toModules := kernel.lift _ ψ hzero
   have hκ (U : X.Opens) (m : Γ(L, U)) : ψ.zeroLocus.toModulesι.app U (κ.app U m) = ψ.app U m :=
     congrArg (fun f : L ⟶ Modules.unit X ↦ f.app U m) (kernel.lift_ι _ ψ hzero)
-  refine ⟨@asIso _ _ _ _ κ (isIso_of_isFreeGenerator κ fun x ↦ ?_)⟩
+  refine ⟨@asIso _ _ _ _ κ (isIso_of_isFreeGenerator κ fun x ↦ ?_), kernel.lift_ι _ ψ hzero⟩
   obtain ⟨U, hxU, -, e, he⟩ := exists_isFreeGenerator L (TopologicalSpace.Opens.mem_top x)
   refine ⟨U.1, e, hxU, he, hψ.isFreeGenerator _ fun V h ↦ ?_⟩
   rw [hκ]
   refine Hom.ideal_zeroLocus ψ V (he.map h) (isFreeGenerator_one V.1) ?_
   exact (Hom.app_presheaf_map ψ (homOfLE h) e).trans
     (mul_one (X.presheaf.map (homOfLE h).op (ψ.app U.1 e))).symm
+
+/-- **An invertible module mapping to `𝒪_X` along an effective Cartier divisor.** If
+`ψ : L ⟶ 𝒪_X` is a morphism from an invertible module whose zero scheme `D = Z(ψ)` is an
+effective Cartier divisor, then `L` is isomorphic to the ideal sheaf `𝒪_X(-D)`. -/
+theorem Hom.nonempty_iso_toModules_zeroLocus {L : X.Modules}
+    [SheafOfModules.IsInvertible.{u, u, u} L] (ψ : L ⟶ Modules.unit X)
+    (hψ : ψ.zeroLocus.IsInvertible) : Nonempty (L ≅ ψ.zeroLocus.toModules) :=
+  ⟨(ψ.exists_iso_toModules_zeroLocus hψ).choose⟩
 
 /-- **A morphism of invertible modules vanishing exactly along a divisor.** If the zero scheme
 `D = Z(φ)` of `φ : M ⟶ N` is an effective Cartier divisor, then `φ` identifies `M` with
@@ -710,6 +720,12 @@ theorem Hom.nonempty_iso_dual_toModules_tensorObj (φ : M ⟶ N) (hφ : φ.zeroL
   exact ⟨(λ_ N).symm ≪≫ whiskerRightIso ((β_ _ _) ≪≫ dJ).symm N ≪≫ α_ _ _ _ ≪≫
     whiskerLeftIso _ (whiskerRightIso e.symm N ≪≫ α_ _ _ _ ≪≫
       whiskerLeftIso M ((β_ _ _) ≪≫ dN) ≪≫ ρ_ M)⟩
+
+/-- The zero scheme of a nonzero morphism of invertible modules on an integral scheme is an
+effective Cartier divisor. -/
+theorem Hom.isInvertible_zeroLocus [IsIntegral X] {φ : M ⟶ N} (hφ : φ ≠ 0) :
+    φ.zeroLocus.IsInvertible :=
+  (Hom.isLocallyPrincipal_zeroLocus φ).isInvertible fun h ↦ hφ ((Hom.zeroLocus_eq_bot_iff φ).mp h)
 
 end Properties
 

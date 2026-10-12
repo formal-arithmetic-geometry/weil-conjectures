@@ -556,7 +556,9 @@ theorem IsPerfect.isDualizable {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.I
 /-- Blueprint `prop-pod-biduality-at-the-point`: biduality at the point.
 
 For a perfect point complex `C` and any braiding of `D(R)`, the canonical biduality map
-`C ⟶ C^∨∨`, where `C^∨ = RHom_R(C, R)`, is an isomorphism. -/
+`C ⟶ C^∨∨`, where `C^∨ = RHom_R(C, R)`, is an isomorphism. This is also clause (3) of blueprint
+`lem-weil-coefficient-frobenius`: derived evaluation into the coefficient double dual is an
+isomorphism for every perfect complex over any ring. -/
 theorem IsPerfect.isIso_toIhomIhomUnit [BraidedCategory (DerivedCategory (ModuleCat.{u} R))]
     {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
     IsIso (MonoidalClosed.toIhomIhomUnit C) := by
