@@ -24,44 +24,37 @@
  ],
  "proof": [
   {
-   "text": "For each point of $X$, apply the local-section statement to the quotient map $q$ and shrink to an open neighbourhood $U_a$ carrying a section $s_a:\\mathcal E_3|_{U_a}\\to\\mathcal E_2|_{U_a}$ with $q\\circ s_a=\\mathrm{id}$.",
-   "uses": [
-    "lem-sc-local-section-quotient-finite-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "Proof of (*), determinant paragraph: local splitting"
-   }
-  },
-  {
-   "text": "On such a $U_a$, define $\\Phi_a:(\\mathcal E_1|_{U_a})\\oplus(\\mathcal E_3|_{U_a})\\to\\mathcal E_2|_{U_a}$ by $\\Phi_a(e_1,e_3)=u(e_1)+s_a(e_3)$. Define $\\Psi_a:\\mathcal E_2|_{U_a}\\to(\\mathcal E_1|_{U_a})\\oplus(\\mathcal E_3|_{U_a})$ by $\\Psi_a(e)=(e-s_a(q(e)),q(e))$. Exactness gives $q(e-s_a(q(e)))=0$, hence a unique first component in the image of $u$; injectivity of $u$ makes this formula well-defined, and direct substitution using $q\\circ s_a=\\mathrm{id}$ shows $\\Psi_a\\Phi_a=\\mathrm{id}$ and $\\Phi_a\\Psi_a=\\mathrm{id}$. Thus the sequence over $U_a$ is isomorphic to the split sequence.",
-   "uses": [
-    "lem-sc-local-section-quotient-finite-free"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "Proof of (*), determinant paragraph: local splitting"
-   }
-  },
-  {
-   "text": "The opens $U_a$ cover $X$ by construction, so the local isomorphisms establish the asserted open-cover local splitting.",
+   "text": "Use all affine opens U of X as the index type (in the same universe as X). Mathlib iSup_affineOpens_eq_top proves they cover X. Restrict S to U and then along IsAffineOpen.isoSpec.inv to Spec Gamma(X,U). The proved source preservesLimitsOfSize_restrictFunctor and the left adjoint restriction instance preserve finite limits and colimits, so ShortExact.map_of_exact preserves short exactness. Restriction preserves finite locally free rank; the kernel is quasi-coherent because it is locally free.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "Proof of (*), determinant paragraph: local splitting"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-pc-affine-extension-section-surjectivity to obtain an epimorphism on global sections. The affine finite locally free section criterion gives finitely presented projective quotient sections. Lean uses rankAtStalk_eq_of_isFiniteLocallyFreeOfRank (proved from finitePresentation_projective_sections with the canonical ring-isomorphism transport), followed by Module.Flat.projective_of_finitePresentation and ModuleCat.projective_of_categoryTheory_projective. Projective.factorThru lifts the identity of the quotient section module to a map s with s followed by Gamma(q) equal to the identity.",
+   "uses": [
+    "lem-pc-affine-extension-section-surjectivity",
+    "lem-pc-finite-flat-affine-sections-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient is quasi-coherent, so its tilde-Gamma counit is invertible. Compose its inverse, tilde(s), and the counit of the middle term. Naturality of fromTildeGammaNatTrans and the identity s;Gamma(q)=id prove that this composite followed by q is the identity of the quotient. No invertibility or quasi-coherence of the middle-term counit is needed. This is the fully proved private helper exists_section_spec, not a new postponed lemma.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib ShortComplex.Splitting.ofExactOfSection with this section, exactness, and monicity of the injection. Map the splitting back along IsAffineOpen.isoSpec.hom. The natural isomorphism from restrictFunctorComp, restrictFunctorCongr and restrictFunctorId identifies the double restriction with the original sequence on U; Splitting.ofIso transports the splitting. Splitting.isoBinaryBiproduct is the required middle-term isomorphism. Biproduct extensionality, f;r=id, f;q=0, and biprod.lift_snd give exactly f;e.hom=inl and e.hom;snd=q. Empty schemes and zero ranks are included without any additional hypothesis.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-local-section-quotient-finite-free"
+  "lem-pc-affine-extension-section-surjectivity",
+  "lem-pc-finite-flat-affine-sections-projective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph: local splitting"
+  "place": "Proof of (*), determinant paragraph: local splitting. N2 realizes the local-section step on the affine cover using Stacks Tag 01IE and existing proved affine projectivity; the categorical splitting and cover steps are fully proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -140,5 +133,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-20cd6",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T202246-L-706704",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module and node proof fields matched against the packet, repository version, dependency declarations, report, clean compilation, importer compilation, and axioms."
  }
 }
