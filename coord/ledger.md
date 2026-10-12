@@ -7183,3 +7183,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:58 L: merged deliver/D3/Sheaf.RingTheory.RegularComposition (stage 3; reviewer PASS; first push; landing 20261012T095857-L-314450 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:58 L: merged deliver/E1/Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsCofan (stage 3; reviewer PASS; after a return; landing 20261012T095857-L-314569 (proof); batch 20261012T095846; modules 1; new nodes 0)
 - 09:58 L: merged deliver/E1/Sheaf.AlgebraicGeometry.GaloisStalkActionFullyFaithful (stage 3; reviewer PASS; first push; landing 20261012T095857-L-314664 (interface); batch 20261012T095846; modules 3; new nodes 2)
+- 09:58 L: merged deliver/E1/Sheaf.AlgebraicGeometry.GaloisStalkActionFunctor (stage 3; reviewer PASS; first push; landing 20261012T095857-L-314763 (interface); batch 20261012T095846; modules 2; new nodes 1)
