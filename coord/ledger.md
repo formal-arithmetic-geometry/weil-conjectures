@@ -7148,3 +7148,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:54 L: merged deliver/Y3/Sheaf.Paper.SiteCoveringIsomorphicFamily (stage 3; reviewer PASS; first push; landing 20261012T085406-L-50260 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 09:58 L: returned deliver/A3/Sheaf.RingTheory.EtaleResidueTripleUnitRefinement (reviewer RETURN: (the landing tools, head 8b7deaa29) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 09:58 L: returned deliver/E3/Sheaf.AlgebraicGeometry.EtaleLimitCohomologyDegreeZeroDescent (reviewer RETURN: (the landing tools, head c0b8ca2ae) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 09:58 L: returned deliver/J3/Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData (reviewer RETURN: (the landing tools, head 8d8044c5b) the delivery did not land: (d) Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists i)
