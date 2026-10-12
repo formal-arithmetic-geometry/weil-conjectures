@@ -1990,6 +1990,7 @@ public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 public import WeilConjectures.ZetaLinearAlgebra.Fatou
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map
+public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Tensor
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TraceSeries
 public import WeilConjectures.ZetaLinearAlgebra.FunctionalEquation
 public import WeilConjectures.ZetaLinearAlgebra.Hankel
