@@ -15,36 +15,36 @@
  },
  "proof": [
   {
-   "text": "Closed coherent pushforward is the termwise equivalence onto systems supported on the closed subscheme. On each Noetherian affine the formal-module equivalence identifies it with restriction of scalars from the quotient of the completed ring. The inverse limits and their actions agree, and restriction of scalars preserves kernels of finite modules. Thus the pushed formal kernel is the categorical formal kernel on this affine.",
+   "text": "Use the termwise closed-immersion formal equivalence E and its specified underlying-system isomorphism theta. Compose E.functor with the inclusion of the supported full subcategory to obtain R into Coh(X,Q). Its underlying inverse system is naturally the termwise closed pushforward.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "lem-weil-pbc-closed-immersion-coherent-formal-equivalence-termwise"
    ],
    "elementary": false
   },
   {
-   "text": "The canonical affine kernel identifications commute with restriction. Local exactness identifies the pushed fork as a limiting kernel fork globally.",
+   "text": "Use the termwise formal pullback functor P of Tag 0887 and its equality after the formal-system inclusion. Whisker the tensor-pullback/pushforward adjunction with the inverse-system index. Restrict this adjunction along the fully faithful inclusions of coherent formal systems, using the equality for P and theta for R (Mathlib Adjunction.whiskerRight and Adjunction.restrictFullyFaithful). Thus P is left adjoint to R. R preserves limits, so it sends the given limiting kernel fork k to a limiting kernel fork of R.map alpha.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-local-exactness"
+    "lem-weil-pbc-formal-systems-pullback",
+    "def-pc-module-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Transport this fork by e and d using the commuting square. Uniqueness of limiting kernel forks identifies its underlying system with that of kernel(a), for the chosen Abelian structure.",
+   "text": "Compose e and d with the inverse components of theta and lift these isomorphisms through the full-subcategory inclusion. Cancel theta.hom at D and use its naturality at alpha to prove a commuting square between a and R.map alpha. KernelFork.mapIsoOfIsLimit compares the canonical kernel fork of a with k.map R along the resulting arrow isomorphism. Apply the formal-system inclusion to this point isomorphism and compose with theta at k.pt. This gives exactly the required underlying inverse-system isomorphism, independently of which Abelian structure provides kernel(a).",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-coherent-formal-modules-local-exactness"
+  "lem-weil-pbc-closed-immersion-coherent-formal-equivalence-termwise",
+  "lem-weil-pbc-formal-systems-pullback",
+  "def-pc-module-pullback"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "E2",
+  "group": "P3",
   "date": "2026-10-13",
-  "note": "Second reading: genuine kernel comparison / sectionwise annihilation reduction."
+  "note": "Categorical route using the termwise closed-pushforward equivalence (Stacks 087T, 088A) and formal pullback (Stacks 0887). Restrict the whiskered module adjunction to coherent formal systems; right-adjoint limit preservation replaces the affine kernel and local-exactness route."
  },
  "mathlib_searches": [
   {
@@ -112,10 +112,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T213847-L-1207694",
-  "kind": "interface",
+  "landing": "20261012T223411-L-1638698",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
