@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-stalk-normalization-trait-section-source",
+ "kind": "statement",
+ "title": "Source etaleness above the local section in dimension less than two",
+ "statement": "Let $S$ be a normal integral Noetherian quasi-separated scheme, $c:C\\to S$ a quasi-compact quasi-separated smooth morphism with geometrically connected fibres, $\\sigma:S\\to C$ a section, and $G$ a finite group with order invertible in $\\Gamma(S,\\mathcal O_S)$ [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois, def-sbc-smooth-morphisms]. Let $q:C_\\eta\\to\\operatorname{Spec}k(S)$ and $j:C_\\eta\\to C$ exhibit the generic fibre [def-pc-fibre-product], with a section $s_\\eta$ satisfying $q s_\\eta=1$ and $j s_\\eta=\\sigma a_\\eta$. Let $Z\\to C_\\eta$ be a finite etale $G$-torsor with a rational point above $s_\\eta$. Let $U\\subset S$ contain $\\eta$, let $P\\to C_U$ be finite etale, and let $j_U:C_\\eta\\to C_U$ and $\\psi:Z\\to P$ exhibit its generic restriction, with $i_Uj_U=j$. Let $s\\notin U$ be such that every $t\\notin U$ specializing to $s$ equals $s$. Put $a:\\operatorname{Spec}\\mathcal O_{S,s}\\to S$, $L=C\\times_S\\operatorname{Spec}\\mathcal O_{S,s}$, $l:L\\to C$, and let $N\\to C$ be the concrete relative normalization of $P\\to C_U\\to C$. Let $\\tau=(a\\sigma,1):\\operatorname{Spec}\\mathcal O_{S,s}\\to L$ be the induced section. The dimension of a ring means the supremum of the lengths of strict chains of prime ideals. Assume $\\dim\\mathcal O_{S,s}<2$ and that $n:N\\times_C L\\to L$ is finite. For every point $x\\in N\\times_C L$ with $n(x)=\\tau(\\mathfrak m_{S,s})$, where $\\mathfrak m_{S,s}$ is the closed point of $\\operatorname{Spec}\\mathcal O_{S,s}$, there is an open source neighbourhood $V\\subset N\\times_C L$ of $x$ for which the composite $V\\hookrightarrow N\\times_C L\\xrightarrow{n}L$ is etale.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), first paragraph; Tags 0EYG, 0EYH and 0EYI(2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Minimality of s makes the inverse image of U the punctured local\nspectrum. Its normal Noetherian local domain A has positive dimension:\na zero-dimensional local domain is a field, in which case s is the generic\npoint, contradicting hs and hηU. The dimension bound therefore makes A a\nDVR. Smoothness makes the total space regular, and its closed fibre a\nregular Cartier divisor. Extend the G-action to the punctured cover by\nnormal generic full faithfulness. A rational point and its G-translates\nsplit the entire generic section fibre. Stabilizer ramification indices\ndivide |G| and are invertible, so tame normalization has the standard\nforms of Tags 0EYG and 0EYH. Pulling these forms back along the section\nsends the divisor equation to a uniformizer. The split generic section\nfibre forces every ramification exponent to be one, by Tag 0EYI(2).\nThus the finite normalization is etale at every point above the closed\nsection point. Integral closure commutes with localization, identifying\nthis normalization with n. For each such point restrict to a source open\nwhere n is etale. Disconnected covers use their stabilizers componentwise;\nan empty fibre makes the conclusion vacuous.",
+   "uses": [
+    "lem-sbc-normal-integral-generic-hom-full",
+    "lem-sbc-generic-fibre-action-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-normal-integral-generic-hom-full",
+  "lem-sbc-generic-fibre-action-extension"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "N1",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), first paragraph; Tags 0EYG, 0EYH and 0EYI(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tame normalization over a discrete valuation ring with a completely split generic section fibre is etale at every point over the closed section point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tame normalization over a discrete valuation ring with a completely split generic section fibre is etale at every point over the closed section point",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, Algebra.instEtaleOfIsStandardEtale, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, Algebra.Etale.of_isLocalization_Away, Algebra.Etale.of_isLocalizationAway, StandardEtalePair.instEtaleRing, Algebra.IsEtaleAt",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(tame|completion)|tame.*(section|normalization)|powerSeries.*(etale|split)",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationSectionNeighbourhood",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYJ (pione-lemma-extend-covering), first paragraph; Tags 0EYG, 0EYH and 0EYI(2)",
+   "via": [
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionSource",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationTraitSectionSource.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.stalk_normalization_trait_section_source",
+  "statement": "theorem GaloisCover.stalk_normalization_trait_section_source {S C : Scheme.{u}}\n    [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]\n    (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)\n    (G : Type (u + 1)) [Group G] [Finite G]\n    (hG : IsUnit (Nat.card G : Γ(S, ⊤)))\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)\n    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)\n    (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)\n    (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη)\n    (U : S.Opens) (hηU : genericPoint S ∈ U)\n    (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)\n    (hψ : IsPullback ψ Z.π PA.obj.hom jU)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdim : ringKrullDim (S.presheaf.stalk s) < (2 : WithBot ℕ∞)) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a :=\n      pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])\n    IsFinite n → ∀ x : (pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n      (pullback.fst c a) : Scheme.{u}),\n      n x = τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) →\n      ∃ V : (pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n        (pullback.fst c a)).Opens, x ∈ V ∧ Etale (V.ι ≫ n)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T214711-L-1271624",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T214711-L-1271624",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

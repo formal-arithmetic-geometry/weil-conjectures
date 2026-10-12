@@ -15,38 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Localize at s; minimality identifies U with the punctured local spectrum. Extend the G-action and the generically split section fibre by normal generic full faithfulness.",
+   "text": "Split by whether the Krull dimension of the local base is at least two. In the high-dimensional case the depth-two section-source lemma supplies a source etale neighbourhood of every point above the closed section point. Otherwise the dimension is less than two, and the trait section-source lemma supplies those neighbourhoods.",
    "uses": [
-    "lem-sbc-normal-integral-generic-hom-full",
-    "lem-sbc-generic-fibre-action-extension"
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-depth-two-section-source"
    ],
    "elementary": false
   },
   {
-   "text": "For a one-dimensional local base, use the tame normalization forms and the split-section trait test to obtain etaleness near the local section. The finite model is the normalization by uniqueness of integral closure.",
+   "text": "Let E be the union of all source opens V with V -> L etale. Every point over the closed section point lies in E. The finite morphism n is closed, so W = L minus n((N times_C L) minus E) is open and contains that section point. The inverse image of W lies in E. Intersect the source etale opens with this inverse image; their maps to L remain etale under open restriction. Cancel the open immersion W -> L using Etale.of_comp. These opens cover the inverse image of W, so source locality (IsZariskiLocalAtSource.of_iSup_eq_top) proves that n restricted to W is etale. This is the proved private helper etale_shrink_of_fibre_source_opens; it also handles empty fibres without choosing a point.",
    "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "In dimension at least two normality and the flat depth formula give depth at least two along the missing fibre. The finite normal algebra is the unique depth-two extension. Complete a smooth affine chart at the section ideal. The resulting power series cover is split on the punctured section and hence split on the punctured completion by full faithfulness; in relative dimension zero this is immediate. Flat base change and uniqueness split the completed finite model. Faithfully flat descent at the section gives etaleness there. Finiteness makes the image of the non-etale locus closed, whose complement gives W.",
-   "uses": [
-    "lem-weil-pbc-normal-local-depth-two",
-    "lem-weil-pbc-flat-local-depth-formula"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-normal-integral-generic-hom-full",
-  "lem-sbc-generic-fibre-action-extension",
-  "lem-weil-pbc-normal-local-depth-two",
-  "lem-weil-pbc-flat-local-depth-formula"
+  "lem-sbc-stalk-normalization-trait-section-source",
+  "lem-sbc-stalk-normalization-depth-two-section-source"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "E2",
+  "by": "N1",
   "document": "Stacks Project",
-  "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of local claim: etaleness near the section; Tags 0EYI, 0EY6, 0EY9"
+  "place": "Tag 0EYJ, trait and depth-two cases; target neighbourhood extracted by the closed-image argument in the proved private Lean helper"
  },
  "mathlib_searches": [
   {
@@ -132,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-8bc48",
-  "group": "E2",
+  "reviewer": "COMPILER",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T205628-L-931505",
+  "landing": "20261012T214711-L-1271624",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the packet declarations and DAG nodes; all modules and the direct importer compile without errors or warnings, with only the two documented sorry theorem statements remaining."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
