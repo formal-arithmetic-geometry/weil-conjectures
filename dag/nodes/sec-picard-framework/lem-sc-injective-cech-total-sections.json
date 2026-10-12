@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-injective-cech-total-sections",
+ "kind": "statement",
+ "title": "Row augmentation for a nonnegative complex of injective sheaves",
+ "statement": "Let C have v-small Hom sets and finite wide pullbacks, and let J admit sheafification for v-small abelian groups. Let K be any Nat-indexed cochain complex of abelian sheaves with every K.X q injective. Let pi_i : U_i -> X be a family indexed by a type in universe v whose generated sieve covers X. Apply the Mathlib Cech functor to K degreewise, with the Cech index first, and totalize by finite coproducts. For every n in Nat, its degree-n homology is isomorphic to degree n of the integer extension by zero of K evaluated at X. No resolution of F, Ext groups, or sheaf cohomology occur in this assertion.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+  "place": "Step 3; Row augmentation for a nonnegative complex of injective sheaves"
+ },
+ "stmt_deps": [
+  "def-sc-cech-resolution-double-complex",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Pass from J to its precoverage and choose the covering fibre products. Apply injective Cech acyclicity in the aligned universe v. The chosen-product comparison transports this result to the Mathlib Cech complex. Thus augmenting a row by K^q(X) gives an exact row: degree-zero cohomology is sections and positive cohomology vanishes.",
+   "uses": [
+    "lem-weil-pbc-site-injective-cech-acyclic",
+    "lem-weil-pbc-site-cech-mathlib-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction into the (0,q) summand of the total complex defines the augmentation. Its Cech differential vanishes, restriction commutes with K differential, and the vertical sign is one. The mapping cone, with augmented Cech degrees starting at -1, is bounded below; its row filtration is finite in every total degree.",
+   "uses": [
+    "def-sc-cech-resolution-double-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The row spectral sequence of this cone has zero first page, hence zero abutment by finite convergence. The cone is acyclic and the augmentation is a quasi-isomorphism. Invert its homology isomorphism and use extension-by-zero homology comparison in nonnegative degrees. Degree zero has zero incoming differential. For an empty covering, the sheaf condition forces all sections on X to be zero, so the argument still applies.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cech-resolution-double-complex",
+  "lem-weil-pbc-site-cech-mathlib-comparison",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+  "place": "Step 3, row augmentation and injective-resolution computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The total complex of the Cech double complex of an injective resolution computes sheaf cohomology",
+   "results": "CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex, CochainComplex.cm5b.I, CochainComplex.isKInjective_of_injective_aux, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex",
+   "verdict": "No direct match; useful primitives only.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\", \"homology\"",
+   "results": "CategoryTheory.InjectiveResolution.hasHomology, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extLinearEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_neg",
+   "verdict": "No direct match; useful primitives only.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "cechResolutionDoubleComplex_total|extAddEquivCohomologyClass",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "verdict": "No direct match; useful primitives only.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomology of the complex of sections of a specified injective sheaf resolution computes Ext from a free abelian representable sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of the total Cech complex of a nonnegative complex of injective sheaves is the cohomology of its section complex",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CochainComplex.isKInjective_of_injective_aux, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.Sheaf.H, CochainComplex.cm5b.I, CategoryTheory.Sheaf.instAddCommGroupH, CochainComplex.isKInjective_of_injective",
+   "verdict": "No direct match; useful primitives only.",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CechResolutionTotal",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-resolution-total",
+   "place": "Steps 1--2"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-cech",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InjectiveCechTotalSections",
+  "file": "lean/Sheaf/CategoryTheory/InjectiveCechTotalSections.lean",
+  "declaration": "CategoryTheory.injective_cech_total_sections",
+  "statement": "theorem injective_cech_total_sections\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasFiniteWidePullbacks C] [HasSheafify J AddCommGrpCat.{v}]\n    (K : CochainComplex (Sheaf J AddCommGrpCat.{v}) ℕ)\n    (hK : ∀ q : ℕ, Injective (K.X q)) (X : C)\n    {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X)\n    (hπ : Sieve.ofArrows U π ∈ J X) (n : ℕ) :\n    Nonempty\n      (((HomologicalComplex₂.flip\n        (((sheafToPresheaf J AddCommGrpCat.{v} ⋙\n          (Functor.whiskeringLeft _ _ AddCommGrpCat.{v}).obj (Over.forget X).op ⋙\n          cechComplexFunctor (fun i ↦ Over.mk (π i))).mapHomologicalComplex\n            (.up ℕ)).obj K)).total (.up ℕ)).homology n ≅\n        (((sheafToPresheaf J AddCommGrpCat.{v} ⋙\n          (evaluation Cᵒᵖ AddCommGrpCat.{v}).obj (op X)).mapHomologicalComplex\n            (.up ℤ)).obj (K.extend ComplexShape.embeddingUpNat)).homology (n : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T110304-L-616080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T110304-L-616080",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

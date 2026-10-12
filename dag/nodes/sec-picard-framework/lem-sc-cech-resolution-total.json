@@ -14,43 +14,32 @@
  ],
  "proof": [
   {
-   "text": "Augment each Cech row by I^q(X) using restriction maps. Degree-zero Cech cohomology is I^q(X) by the sheaf condition, and positive degrees vanish by injective Cech acyclicity (Stacks Tags 03AW and 03F6). The Hom-set and group-value universes agree here, so the free representables in this argument are v-small. Apply SiteCechComplex.mathlib_complex_iso_exists to transport this row calculation from chosen fibre products to the Mathlib Cech complex; its product comparisons commute with the alternating differential.",
+   "text": "Apply injective_cech_total_sections to I.cocomplex, whose terms are injective by the injective-resolution instance. This identifies total homology with homology of the integer section complex. The double complex in its statement unfolds to Sheaf.cechResolutionDoubleComplex I X pi.",
    "uses": [
-    "lem-weil-pbc-site-injective-cech-acyclic",
+    "lem-sc-injective-cech-total-sections",
     "def-sc-cech-resolution-double-complex",
-    "lem-weil-pbc-site-cech-mathlib-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Restriction commutes with the resolution differential, so these augmentations define a chain map I(X) → Tot D. Filter its cone by resolution degree. The row cohomology is zero by the augmented-row calculation. The complex is bounded below (the augmentation can occupy Cech degree -1) and each diagonal has finitely many terms. Therefore the finite filtration spectral sequence has zero abutment, the cone is acyclic, and the chain map is a quasi-isomorphism.",
-   "uses": [
-    "thm-sp-double-complex-spectral-sequences",
-    "def-sc-cech-resolution-double-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Computing Ext from the free abelian sheaf on X with the injective resolution I identifies H^n(I(X)) with H^n(X,F). Compose with the inverse of the augmentation homology isomorphism.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
     "def-sp-injective-resolutions"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved resolution_section_cohomology to I and X. It identifies the section-complex homology with F.H' n X by the free-abelian sheafification/Yoneda adjunction and Mathlib computation of Ext. Compose the two isomorphisms in Lean.",
+   "uses": [
+    "lem-sc-resolution-section-cohomology"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-injective-cech-acyclic",
   "def-sc-cech-resolution-double-complex",
-  "thm-sp-double-complex-spectral-sequences",
-  "def-weil-pbc-sites-and-cohomology",
   "def-sp-injective-resolutions",
-  "lem-weil-pbc-site-cech-mathlib-comparison"
+  "lem-sc-injective-cech-total-sections",
+  "lem-sc-resolution-section-cohomology"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
-  "place": "Step 3: injective Cech acyclicity and the abutment; lem-sc-cech-spectral Step 2."
+  "place": "Step 3; row augmentation split from the completely proved Ext-to-sections comparison"
  },
  "mathlib_searches": [
   {
@@ -151,9 +140,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T085346-L-42442",
+  "landing": "20261012T110304-L-616080",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

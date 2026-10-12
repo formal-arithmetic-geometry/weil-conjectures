@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-resolution-section-cohomology",
+ "kind": "statement",
+ "title": "Sections of a specified injective resolution compute object cohomology",
+ "statement": "Let C have v-small Hom sets, J be a Grothendieck topology admitting sheafification for v-small abelian groups, and assume HasExt in universe v for abelian sheaves. For an abelian sheaf F, any specified injective resolution I of F [def-sp-injective-resolutions], any object X, and every n in Nat, the degree-n homology of the integer-indexed section complex I(X) is isomorphic to F.H' n X [def-weil-pbc-sites-and-cohomology]. Here I(X) is obtained by extending I.cocomplex by zero from Nat to Int and applying sheaf-to-presheaf followed by evaluation at X. No covering, fibre products, terminal object, or enough-injectives assumption is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+  "place": "Step 3; Sections of a specified injective resolution compute object cohomology"
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Compose sheafification adjunction, the pointwise free-abelian/forgetful adjunction, and Yoneda. This gives a natural additive equivalence Hom(freeSheaf(X),A) = A(X). Additivity and naturality are checked by unfolding the adjunction maps.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply this equivalence degreewise to the integer extension of I. Cochain.fromSingleEquiv identifies each term of the Hom complex with Hom from freeSheaf(X). The naturality identity identifies the differentials. Lift section values to the Hom universe using ULift; this yields sectionComplexIso, with differential compatibility proved in Lean.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib InjectiveResolution.extAddEquivCohomologyClass computes Ext via I. HomComplex.leftHomologyData identifies cohomology classes with Hom-complex homology. Map the complex isomorphism through homology, apply the ULift functor homology comparison, and unlift using AddEquiv.ulift. Invert the resulting additive equivalence and convert it to an AddCommGrpCat isomorphism. All composites are written in Lean.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+  "place": "Step 3, row augmentation and injective-resolution computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The total complex of the Cech double complex of an injective resolution computes sheaf cohomology",
+   "results": "CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex, CochainComplex.cm5b.I, CochainComplex.isKInjective_of_injective_aux, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex",
+   "verdict": "No direct match; useful primitives only.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\", \"homology\"",
+   "results": "CategoryTheory.InjectiveResolution.hasHomology, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extLinearEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_neg",
+   "verdict": "No direct match; useful primitives only.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "cechResolutionDoubleComplex_total|extAddEquivCohomologyClass",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "verdict": "No direct match; useful primitives only.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomology of the complex of sections of a specified injective sheaf resolution computes Ext from a free abelian representable sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of the total Cech complex of a nonnegative complex of injective sheaves is the cohomology of its section complex",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CochainComplex.isKInjective_of_injective_aux, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.Sheaf.H, CochainComplex.cm5b.I, CategoryTheory.Sheaf.instAddCommGroupH, CochainComplex.isKInjective_of_injective",
+   "verdict": "No direct match; useful primitives only.",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CechResolutionTotal",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-resolution-total",
+   "place": "Step 3"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-cech",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ResolutionSectionCohomology",
+  "file": "lean/Sheaf/CategoryTheory/ResolutionSectionCohomology.lean",
+  "declaration": "CategoryTheory.Sheaf.resolution_section_cohomology",
+  "statement": "theorem resolution_section_cohomology\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasSheafify J AddCommGrpCat.{v}] [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]\n    {F : Sheaf J AddCommGrpCat.{v}} (I : InjectiveResolution F) (X : C) (n : ℕ) :\n    Nonempty ((((sheafToPresheaf J AddCommGrpCat.{v} ⋙\n      (evaluation Cᵒᵖ AddCommGrpCat.{v}).obj (op X)).mapHomologicalComplex\n        (.up ℤ)).obj I.cochainComplex).homology (n : ℤ) ≅ F.H' n X)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T110304-L-616080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T110304-L-616080",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
