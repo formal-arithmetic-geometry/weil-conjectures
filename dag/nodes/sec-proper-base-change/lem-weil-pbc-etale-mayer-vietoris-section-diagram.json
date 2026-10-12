@@ -16,76 +16,49 @@
  ],
  "proof": [
   {
-   "text": "Choose nonnegative injective resolutions I of G and J of g inverse-image G using the Grothendieck abelian sheaf instance and enough injectives. Exact inverse image preserves the augmentation quasi-isomorphism; K-injectivity of J gives a comparison beta over the augmentations. A homotopy from a degree-zero complex has values in degree -1 of J and is zero, so the comparison respects the augmentations exactly.",
+   "text": "Choose injectiveResolution G and injectiveResolution(g inverse-image G). Define S_X and S_Y explicitly by etaleSectionShortComplex applied to their cocomplexes.",
    "uses": [
     "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
     "lem-weil-pbc-site-sheaves-enough-injectives",
     "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-pbc-inverse-image"
+    "def-weil-pbc-etale-mayer-vietoris-section-complex"
    ],
    "elementary": false
   },
   {
-   "text": "Form the restriction-pair and difference-of-restrictions section complexes of I on X,U,V,U intersection V and of J on Y and the inverse-image opens. The sheaf condition gives injection and middle exactness degreewise. The Cech cocycle (0,gamma,-gamma,0) is a boundary for an injective sheaf; its boundary supplies two sections whose restriction difference is gamma. Thus both sequences are degreewise short exact. The inverse-image opens cover Y and their intersection is the inverse image of U intersection V.",
+   "text": "For every degree apply injective section exactness to the corresponding injective resolution term. HomologicalComplex.shortExact_of_degreewise_shortExact gives short exactness on X. Preimage preserves sup and top, so the two inverse-image opens cover Y; the same degreewise theorem gives short exactness on Y.",
    "uses": [
-    "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-injective-sheaf-cech-acyclic",
-    "def-weil-pbc-cech-complex",
-    "lem-weil-pbc-open-fibre-product"
+    "lem-weil-pbc-etale-mayer-vietoris-injective-sections-exact"
    ],
    "elementary": false
   },
   {
-   "text": "The unit on sections followed by beta commutes with both restrictions, by naturality of the adjunction unit and of beta. Additivity preserves their difference. This gives phi, a morphism of short exact complexes, without taking any connecting homomorphism.",
+   "text": "Apply the fixed-resolution comparison theorem to these same I and J. It supplies the morphism phi, six additive equivalences, and all six prescribed homology identities.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image"
+    "lem-weil-pbc-etale-mayer-vietoris-section-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Hom from the constant integer sheaf is sections by the adjunction, evaluated at 1. Its complex on I computes Ext, and hence Sheaf.H. Restriction preserves injectives by the exact extension-by-zero left adjoint, so the restricted resolutions compute all open groups. Homology preserves the finite product, giving the middle identifications. The coefficient composition comparison identifies the four horizontal maps with the prescribed restrictions and difference.",
-   "uses": [
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-cohomology-pullback"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Represent an Ext class as a Hom cocycle into I. Exact inverse image sends this to its inverse-image cocycle. Precomposition with the constant-sheaf comparison used in cohomologyMap is the adjunction unit on the representing section, by evaluation at 1. Composing with beta is therefore the global vertical section map. For the intersection, use the restricted resolutions and the identity lift of the coefficient comparison; the pullback-unit identity gives the same calculation for openCohomologyPullback. This gives the two vertical identities simultaneously with the four horizontal ones. Empty opens yield zero section complexes, and identity pullback can use the same resolution.",
-   "uses": [
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-open-restriction-pullback-unit",
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false
+   "text": "Package the explicit complexes, their short exactness, phi, the equivalences, and the six map identities into the asserted existential conjunction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
   "lem-weil-pbc-site-sheaves-enough-injectives",
   "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-injective-sheaf-cech-acyclic",
-  "def-weil-pbc-cech-complex",
-  "lem-weil-pbc-open-fibre-product",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-inverse-image-composition",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-open-restriction-pullback-unit"
+  "def-weil-pbc-etale-mayer-vietoris-section-complex",
+  "lem-weil-pbc-etale-mayer-vietoris-injective-sections-exact",
+  "lem-weil-pbc-etale-mayer-vietoris-section-comparison"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "Y2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0A50, proof, short exact complexes of sections; agent-written pullback and Ext comparison in steps 1, 2 and 4 of lem-weil-pbc-etale-mayer-vietoris-connecting-pullback. Read at https://stacks.math.columbia.edu/tag/0A50 (literature checkout absent locally)."
+  "place": "Tag 0A50, proof, explicit section-complex construction; split degreewise exactness and fixed-resolution Ext comparison; assemble via Mathlib shortExact_of_degreewise_shortExact."
  },
  "mathlib_searches": [
   {
@@ -166,9 +139,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T070526-L-3465805",
+  "landing": "20261012T085405-L-49818",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

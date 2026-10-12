@@ -1,0 +1,166 @@
+{
+ "id": "lem-weil-pbc-etale-mayer-vietoris-section-comparison",
+ "kind": "statement",
+ "title": "Simultaneous Ext comparison on fixed resolution section complexes",
+ "statement": "Let g:Y to X be a scheme morphism, U,V arbitrary opens of X (no covering condition), and G an abelian etale sheaf. For any specified injective resolutions I of G and J of g inverse-image G [def-sp-injective-resolutions], set S_X=etaleSectionShortComplex(U,V,I) and S_Y=etaleSectionShortComplex(g inverse-image U,g inverse-image V,J) [def-weil-pbc-etale-mayer-vietoris-section-complex]. There exists a morphism phi:S_X to S_Y and six degreewise additive homology identifications with H^q(X,G), the product of the U and V cohomology groups, the intersection cohomology group, and the corresponding three groups on Y [def-weil-pbc-cohomology-pullback]. These identifications carry the two horizontal homology maps on each scheme to the prescribed restriction pair and restriction difference [lem-weil-pbc-open-cohomology-whole-restriction-naturality]. They carry the first and third components of phi to cohomologyMap g and openCohomologyPullback g at U intersection V, respectively, simultaneously. Short exactness of S_X or S_Y is not asserted. The six map identities are exactly those written in the Lean signature.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof, short exact complexes of sections; agent-written pullback and Ext comparison in steps 1, 2 and 4 of lem-weil-pbc-etale-mayer-vietoris-connecting-pullback. Read at https://stacks.math.columbia.edu/tag/0A50 (literature checkout absent locally)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-mayer-vietoris-section-complex",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-open-cohomology-whole-restriction-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Use the given nonnegative injective resolutions I of G and J of g inverse-image G. Exact inverse image preserves the augmentation quasi-isomorphism; K-injectivity of J gives a comparison beta over the augmentations. A homotopy from a degree-zero complex has values in degree -1 of J and is zero, so the comparison respects the augmentations exactly.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the explicitly defined section short complexes of I and J, The unit on sections followed by beta commutes with both restrictions, by naturality of the adjunction unit and of beta. Additivity preserves their difference. This gives phi, a morphism of short exact complexes, without taking any connecting homomorphism. This step requires no cover or short exactness. Their intersection opens agree with g inverse-image of U intersection V because preimage preserves infima.",
+   "uses": [
+    "def-weil-pbc-etale-mayer-vietoris-section-complex",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Hom from the constant integer sheaf is sections by the adjunction, evaluated at 1. Its complex on I computes Ext, and hence Sheaf.H. Restriction preserves injectives by the exact extension-by-zero left adjoint, so the restricted resolutions compute all open groups. Homology preserves the finite product, giving the middle identifications. The coefficient composition comparison identifies the four horizontal maps with the prescribed restrictions and difference.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent an Ext class as a Hom cocycle into I. Exact inverse image sends this to its inverse-image cocycle. Precomposition with the constant-sheaf comparison used in cohomologyMap is the adjunction unit on the representing section, by evaluation at 1. Composing with beta is therefore the global vertical section map. For the intersection, use the restricted resolutions and the identity lift of the coefficient comparison; the pullback-unit identity gives the same calculation for openCohomologyPullback. This gives the two vertical identities simultaneously with the four horizontal ones. Empty opens yield zero section complexes, and identity pullback can use the same resolution.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-open-restriction-pullback-unit",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-mayer-vietoris-section-complex",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-open-restriction-pullback-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof; fixed-complex implementation of steps 1-5 of lem-weil-pbc-etale-mayer-vietoris-section-diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact section complexes on a two-open cover evaluated on injective sheaves",
+   "results": "UNAVAILABLE: Internal Server Error from the search service.",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "short exact complexes of sections of injective sheaves on two opens Mayer Vietoris",
+   "results": "MayerVietorisSquare.shortComplex_shortExact and shortComplex_exact concern the free abelian sheaves of a site square, rather than the complexes obtained by evaluating a sheaf resolution. No simultaneous cross-scheme Ext comparison found.",
+   "date": "2026-10-12",
+   "verdict": "No direct specialization providing the fixed section complex or its simultaneous comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex",
+   "results": "Unknown identifier in the remote index. Local source search finds Functor.mapHomologicalComplex and NatTrans.mapHomologicalComplex; they construct the section complexes and restriction maps, not their short exactness or Ext comparison.",
+   "date": "2026-10-12",
+   "verdict": "Use mapping functors in the explicit definition; no matching comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietorisSquare|etaleSectionShortComplex|etale_mayerVietoris_section; rg on lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search Mayer-Vietoris; rg 0A50 dag/nodes",
+   "results": "Mathlib Sites/MayerVietorisSquare and SheafCohomology/MayerVietoris give a sheaf-level square and its Ext sequence. Topology/Sheaves/MayerVietoris is for the open topology. The existing EtaleMayerVietorisExact states derived evaluation exactness; EtaleMayerVietorisComparisons gives existence of derived functor isomorphisms, not simultaneous Ext map identities. Blueprint search has no matching imported node. No prior node defines the explicit section short complex or states exactness of its individual injective degrees.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate of the three new nodes; generic Mathlib components used in the definition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionDiagram",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Mayer-Vietoris section construction and simultaneous pullback comparison in lem-weil-pbc-etale-mayer-vietoris-section-diagram.",
+   "via": [
+    "lem-weil-pbc-etale-mayer-vietoris-section-diagram",
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleMayerVietorisSectionComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleSectionShortComplex_pullback_comparison",
+  "statement": "theorem etaleSectionShortComplex_pullback_comparison\n    {X Y : Scheme.{u}} (g : Y ⟶ X) (U V : X.Opens)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (I : InjectiveResolution G)\n    (J : InjectiveResolution ((upperStar AddCommGrpCat.{u + 1} g).obj G)) :\n    let SX := etaleSectionShortComplex U V I.cocomplex\n    let SY := etaleSectionShortComplex (g ⁻¹ᵁ U) (g ⁻¹ᵁ V) J.cocomplex\n    ∃ φ : SX ⟶ SY,\n    ∃ eAX : ∀ q : ℕ, SX.X₁.homology q ≃+ Sheaf.H G q,\n    ∃ eBX : ∀ q : ℕ, SX.X₂.homology q ≃+\n      (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} U.ι).obj G) q ×\n        Sheaf.H ((upperStar AddCommGrpCat.{u + 1} V.ι).obj G) q),\n    ∃ eCX : ∀ q : ℕ, SX.X₃.homology q ≃+\n      Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (U ⊓ V).ι).obj G) q,\n    ∃ eAY : ∀ q : ℕ, SY.X₁.homology q ≃+\n      Sheaf.H ((upperStar AddCommGrpCat.{u + 1} g).obj G) q,\n    ∃ eBY : ∀ q : ℕ, SY.X₂.homology q ≃+\n      (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (g ⁻¹ᵁ U).ι).obj\n        ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q ×\n       Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (g ⁻¹ᵁ V).ι).obj\n        ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q),\n    ∃ eCY : ∀ q : ℕ, SY.X₃.homology q ≃+\n      Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (g ⁻¹ᵁ (U ⊓ V)).ι).obj\n        ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q,\n    (∀ q x, eBX q (HomologicalComplex.homologyMap SX.f q x) =\n      (cohomologyMap U.ι G q (eAX q x), cohomologyMap V.ι G q (eAX q x))) ∧\n    (∀ q x, eCX q (HomologicalComplex.homologyMap SX.g q x) =\n      openCohomologyRestriction (inf_le_left : U ⊓ V ≤ U) G q (eBX q x).1 -\n        openCohomologyRestriction (inf_le_right : U ⊓ V ≤ V) G q (eBX q x).2) ∧\n    (∀ q x, eBY q (HomologicalComplex.homologyMap SY.f q x) =\n      (cohomologyMap (g ⁻¹ᵁ U).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G) q (eAY q x),\n       cohomologyMap (g ⁻¹ᵁ V).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G) q (eAY q x))) ∧\n    (∀ q x, eCY q (HomologicalComplex.homologyMap SY.g q x) =\n      openCohomologyRestriction (g.preimage_mono (inf_le_left : U ⊓ V ≤ U))\n        ((upperStar AddCommGrpCat.{u + 1} g).obj G) q (eBY q x).1 -\n      openCohomologyRestriction (g.preimage_mono (inf_le_right : U ⊓ V ≤ V))\n        ((upperStar AddCommGrpCat.{u + 1} g).obj G) q (eBY q x).2) ∧\n    (∀ q x, eAY q (HomologicalComplex.homologyMap φ.τ₁ q x) =\n      cohomologyMap g G q (eAX q x)) ∧\n    (∀ q x, eCY q (HomologicalComplex.homologyMap φ.τ₃ q x) =\n      openCohomologyPullback g (U ⊓ V) G q (eCX q x))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T085405-L-49818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T085405-L-49818",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

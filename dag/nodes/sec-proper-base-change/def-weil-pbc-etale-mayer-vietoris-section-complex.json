@@ -1,0 +1,115 @@
+{
+ "id": "def-weil-pbc-etale-mayer-vietoris-section-complex",
+ "kind": "definition",
+ "title": "The explicit two-open section short complex",
+ "statement": "For a scheme X [def-pc-scheme], opens U,V of X, and a nonnegative cochain complex I of abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves], define Sec(I,W) by applying evaluation at the etale object W degreewise. Define etaleSectionShortComplex(U,V,I) [def-weil-pbc-exact-sequence] to have objects Sec(I,X), Sec(I,U) direct-sum Sec(I,V), Sec(I,U intersection V), first arrow the restriction pair and second arrow the difference of restrictions. Restriction maps commute with differentials by naturality. The composite is zero because both composites are restriction from X to the intersection. The auxiliary etaleSectionFunctor and etaleSectionMap are the evaluation functor and its induced map on complexes.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof, short exact complexes of sections; agent-written pullback and Ext comparison in steps 1, 2 and 4 of lem-weil-pbc-etale-mayer-vietoris-connecting-pullback. Read at https://stacks.math.columbia.edu/tag/0A50 (literature checkout absent locally)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof; fixed-complex implementation of steps 1-5 of lem-weil-pbc-etale-mayer-vietoris-section-diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact section complexes on a two-open cover evaluated on injective sheaves",
+   "results": "UNAVAILABLE: Internal Server Error from the search service.",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "short exact complexes of sections of injective sheaves on two opens Mayer Vietoris",
+   "results": "MayerVietorisSquare.shortComplex_shortExact and shortComplex_exact concern the free abelian sheaves of a site square, rather than the complexes obtained by evaluating a sheaf resolution. No simultaneous cross-scheme Ext comparison found.",
+   "date": "2026-10-12",
+   "verdict": "No direct specialization providing the fixed section complex or its simultaneous comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex",
+   "results": "Unknown identifier in the remote index. Local source search finds Functor.mapHomologicalComplex and NatTrans.mapHomologicalComplex; they construct the section complexes and restriction maps, not their short exactness or Ext comparison.",
+   "date": "2026-10-12",
+   "verdict": "Use mapping functors in the explicit definition; no matching comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietorisSquare|etaleSectionShortComplex|etale_mayerVietoris_section; rg on lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search Mayer-Vietoris; rg 0A50 dag/nodes",
+   "results": "Mathlib Sites/MayerVietorisSquare and SheafCohomology/MayerVietoris give a sheaf-level square and its Ext sequence. Topology/Sheaves/MayerVietoris is for the open topology. The existing EtaleMayerVietorisExact states derived evaluation exactness; EtaleMayerVietorisComparisons gives existence of derived functor isomorphisms, not simultaneous Ext map identities. Blueprint search has no matching imported node. No prior node defines the explicit section short complex or states exactness of its individual injective degrees.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate of the three new nodes; generic Mathlib components used in the definition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionDiagram",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Mayer-Vietoris section construction and simultaneous pullback comparison in lem-weil-pbc-etale-mayer-vietoris-section-diagram.",
+   "via": [
+    "lem-weil-pbc-etale-mayer-vietoris-section-diagram",
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionComplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleMayerVietorisSectionComplex.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleSectionShortComplex",
+  "statement": "def etaleSectionShortComplex {X : Scheme.{u}} (U V : X.Opens)\n    (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) :\n    ShortComplex (CochainComplex AddCommGrpCat.{u + 1} ℕ)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T085405-L-49818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T085405-L-49818",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

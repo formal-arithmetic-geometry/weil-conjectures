@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-etale-mayer-vietoris-injective-sections-exact",
+ "kind": "statement",
+ "title": "The injective degree of the two-open section complex is short exact",
+ "statement": "Let X be a scheme, U,V opens with U union V = X, I a nonnegative cochain complex of abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves], and q a natural number. If I^q is injective [def-sp-injective-resolutions], then evaluation in degree q of etaleSectionShortComplex(U,V,I) [def-weil-pbc-etale-mayer-vietoris-section-complex] is short exact [def-weil-pbc-exact-sequence]. No condition is imposed on other degrees or on the augmentation of I.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof, short exact complexes of sections; agent-written pullback and Ext comparison in steps 1, 2 and 4 of lem-weil-pbc-etale-mayer-vietoris-connecting-pullback. Read at https://stacks.math.columbia.edu/tag/0A50 (literature checkout absent locally)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-mayer-vietoris-section-complex",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Define the square of the etale objects U intersection V, U, V, and X. Scheme.isPullback_opens_inf identifies the intersection pullback after forgetting to schemes; reflect that pullback to the etale category. Scheme.ofArrows_mem_smallEtaleTopology_iff and the open-cover hypothesis show the two arrows generate a covering sieve.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Forget an abelian sheaf to sets, preserving its sheaf condition. Construct a pullback cone using amalgamateOfArrows on the two-open covering. For mixed pairs use the intersection pullback to verify compatibility; for equal pairs use monicity of the inclusion. The restriction and uniqueness equations of amalgamation verify the cone universal property. Reflect the resulting pullback of sets to abelian groups. Square.IsPullback.isLimitKernelFork and exact_and_mono_f_iff_f_is_kernel give middle exactness and monicity of the pair.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any monomorphism f:A to B of etale objects, the map from the free abelian sheaf of uliftYoneda(A) to that of uliftYoneda(B) is mono, by preservation of monos by lifted Yoneda, the free abelian group functor and sheafification. The sheafification adjunction, whiskered free-forgetful adjunction and uliftYonedaEquiv give an equivalence between maps from this free sheaf to I^q and sections on A. Their three naturality identities identify precomposition with restriction. Injective.factorThru extends the map for any section on A across this mono; Injective.comp_factorThru proves the resulting section on B restricts to it. Apply this to U intersection V to U. A section on U with zero second component then proves surjectivity of the difference.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Functor.mapBiprod for evaluation gives an isomorphism between the degree q evaluation of the explicit section short complex and this section-group short complex. biprod.map_lift_mapBiprod identifies the first arrow; map_neg and biprod.mapBiprod_hom_desc identify the second. Transport short exactness using ShortComplex.shortExact_iff_of_iso. All steps have been implemented in Lean with no sorry.",
+   "uses": [
+    "def-weil-pbc-etale-mayer-vietoris-section-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-mayer-vietoris-section-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof, first route via injective restriction surjectivity; complete Lean implementation using free lifted Yoneda sheaves, injective extension, and sheaf amalgamation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact section complexes on a two-open cover evaluated on injective sheaves",
+   "results": "UNAVAILABLE: Internal Server Error from the search service.",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "short exact complexes of sections of injective sheaves on two opens Mayer Vietoris",
+   "results": "MayerVietorisSquare.shortComplex_shortExact and shortComplex_exact concern the free abelian sheaves of a site square, rather than the complexes obtained by evaluating a sheaf resolution. No simultaneous cross-scheme Ext comparison found.",
+   "date": "2026-10-12",
+   "verdict": "No direct specialization providing the fixed section complex or its simultaneous comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex",
+   "results": "Unknown identifier in the remote index. Local source search finds Functor.mapHomologicalComplex and NatTrans.mapHomologicalComplex; they construct the section complexes and restriction maps, not their short exactness or Ext comparison.",
+   "date": "2026-10-12",
+   "verdict": "Use mapping functors in the explicit definition; no matching comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietorisSquare|etaleSectionShortComplex|etale_mayerVietoris_section; rg on lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search Mayer-Vietoris; rg 0A50 dag/nodes",
+   "results": "Mathlib Sites/MayerVietorisSquare and SheafCohomology/MayerVietoris give a sheaf-level square and its Ext sequence. Topology/Sheaves/MayerVietoris is for the open topology. The existing EtaleMayerVietorisExact states derived evaluation exactness; EtaleMayerVietorisComparisons gives existence of derived functor isomorphisms, not simultaneous Ext map identities. Blueprint search has no matching imported node. No prior node defines the explicit section short complex or states exactness of its individual injective degrees.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate of the three new nodes; generic Mathlib components used in the definition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionDiagram",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Mayer-Vietoris section construction and simultaneous pullback comparison in lem-weil-pbc-etale-mayer-vietoris-section-diagram.",
+   "via": [
+    "lem-weil-pbc-etale-mayer-vietoris-section-diagram",
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisInjectiveSectionsExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleMayerVietorisInjectiveSectionsExact.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleSectionShortComplex_degreewise_shortExact",
+  "statement": "theorem etaleSectionShortComplex_degreewise_shortExact\n    {X : Scheme.{u}} (U V : X.Opens) (hcover : U ⊔ V = ⊤)\n    (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)\n    (q : ℕ) [Injective (I.X q)] :\n    ((etaleSectionShortComplex U V I).map\n      (HomologicalComplex.eval AddCommGrpCat.{u + 1} (.up ℕ) q)).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T085405-L-49818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T085405-L-49818",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

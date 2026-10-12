@@ -6,11 +6,9 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyMaps
-import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
-import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleMayerVietorisInjectiveSectionsExact
+import Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionComparison
+import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 
 /-!
 # A section-complex diagram computing étale Mayer–Vietoris pullback
@@ -98,6 +96,24 @@ theorem etale_mayerVietoris_section_diagram
       cohomologyMap g G q (eAX q x)) ∧
     (∀ q x, eCY q (HomologicalComplex.homologyMap φ.τ₃ q x) =
       openCohomologyPullback g (U ⊓ V) G q (eCX q x)) := by
-  sorry
+  let I := injectiveResolution G
+  let J := injectiveResolution ((upperStar AddCommGrpCat.{u + 1} g).obj G)
+  let SX := etaleSectionShortComplex U V I.cocomplex
+  let SY := etaleSectionShortComplex (g ⁻¹ᵁ U) (g ⁻¹ᵁ V) J.cocomplex
+  have hSX : SX.ShortExact := by
+    apply HomologicalComplex.shortExact_of_degreewise_shortExact
+    intro q
+    exact etaleSectionShortComplex_degreewise_shortExact U V hcover I.cocomplex q
+  have hcY : (g ⁻¹ᵁ U) ⊔ (g ⁻¹ᵁ V) = ⊤ := by
+    rw [← g.preimage_sup, hcover, g.preimage_top]
+  have hSY : SY.ShortExact := by
+    apply HomologicalComplex.shortExact_of_degreewise_shortExact
+    intro q
+    exact etaleSectionShortComplex_degreewise_shortExact
+      (g ⁻¹ᵁ U) (g ⁻¹ᵁ V) hcY J.cocomplex q
+  obtain ⟨φ, eAX, eBX, eCX, eAY, eBY, eCY, hrX, hdX, hrY, hdY, hpA, hpC⟩ :=
+    etaleSectionShortComplex_pullback_comparison g U V G I J
+  exact ⟨SX, SY, φ, hSX, hSY, eAX, eBX, eCX, eAY, eBY, eCY,
+    hrX, hdX, hrY, hdY, hpA, hpC⟩
 
 end AlgebraicGeometry.Etale

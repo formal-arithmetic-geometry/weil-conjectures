@@ -7141,3 +7141,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:54 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.AffineEtaleSiteBaseChange (stage 3; reviewer PASS; first push; landing 20261012T085404-L-49531 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:54 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.AffineFlatDescent (stage 3; reviewer PASS; first push; landing 20261012T085404-L-49626 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:54 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.DerivedQCohCompactGenerationCore (stage 3; reviewer PASS; first push; landing 20261012T085404-L-49723 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:54 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionDiagram (stage 3; reviewer PASS; first push; landing 20261012T085405-L-49818 (interface); batch 20261012T085205; modules 4; new nodes 3)
