@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-regular-sequence-subsequences-polynomial-proof",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-regular-sequence-polynomial-variables",
+   "place": "decomposition of the parent proof",
+   "via": [
+    "lem-weil-pbc-regular-sequence-polynomial-variables"
+   ]
+  }
+ },
+ "kind": "statement",
+ "title": "Subsequences and polynomial-variable regularity",
+ "statement": "Let $R$ be a commutative ring and $f_1,\\dots,f_r$ elements which do not generate the unit ideal. Every order-preserving subsequence is regular iff the elements $f_iX_i$ form a regular sequence in the multivariate polynomial ring.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "the coefficientwise ideal computation in Stacks Algebra Tag 07DW"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "This intermediate result is the corresponding part of the proof of Lemma 10.68.10, obtained by the induction (respectively coefficientwise ideal) argument described in the parent node.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "the coefficientwise ideal computation in Stacks Algebra Tag 07DW"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "the coefficientwise ideal computation in Stacks Algebra Tag 07DW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular sequence permutation subsequence equivalence",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegular List.Perm Sublist",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "regular sequence polynomial variables",
+   "results": "no exact match in Mathlib",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RegularSequencePolynomialVariables",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "RingTheory.Sequence.IsWeaklyRegular.prototype_perm",
+  "file": "Mathlib/RingTheory/Regular/RegularSequence.lean",
+  "how": "lines 594-623 read 2026-10-10: from IsWeaklyRegular M rs, rs ~ rs' and, for every a :: b :: rs'' subperm of rs, (K = a • K -> K = ⊥) for K = torsionBy R (M ⧸ ofList rs'' • ⊤) b, it gives IsWeaklyRegular M rs'. For rs = [a,b], rs' = [b,a], M = R the side condition reduces (rs'' = [], M ⧸ ⊥ ≅ M) to torsionBy R R b = ⊥ and torsionBy R R a = ⊥, i.e. b and a regular on R (isSMulRegular_iff_torsionBy_eq_bot, IsSMulRegular.lean:132); the top_ne_smul part of IsRegular (line 146) transfers since Ideal.ofList [b,a] = Ideal.ofList [a,b]. Not a one-line specialization (a case analysis over the subperms and the quotient by ⊥), so not a leaf. The closer private lemma IsWeaklyRegular.swap (line 576: IsWeaklyRegular M [a,b] and (torsionBy R M b = a • torsionBy R M b -> torsionBy R M b = ⊥) give IsWeaklyRegular M [b,a]) is not accessible outside its file."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-regular-sequence-swap-two",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 07DW (proof, case r=2) and against [def-weil-pbc-regular-sequence]: the definition's nonvanishing condition R/(a,b) != 0 is symmetric in a,b, so the swapped sequence inherits it and the statement is correct as written (it also needs a to be a nonzerodivisor on R, which is the first condition of a,b regular). Proof in two steps, both from the definition only: unwinding the conditions (b regular on R by hypothesis, R/(b,a) = R/(a,b) != 0), then the source's kernel comparison written out as the injectivity argument (ax = by gives y in (a), then x in (b) using that a is a nonzerodivisor). No new nodes. Mathlib: no public exact match; IsWeaklyRegular.prototype_perm (RegularSequence.lean:594) specializes with a few lines of side conditions and the private IsWeaklyRegular.swap (line 576) is not accessible, so the node is split and the candidate is recorded in mathlib_candidate. The citer lem-weil-pbc-regular-sequence-polynomial-variables uses the statement as stated (step 3: a = f_s, b = f_r in R/a, with f_r a nonzerodivisor), consistent."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T184303-L-4004619",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularSequenceSubsequencesPolynomial",
+  "declaration": "RingTheory.Sequence.isRegular_subsequences_iff_polynomial_variables",
+  "file": "lean/Sheaf/RingTheory/RegularSequenceSubsequencesPolynomial.lean",
+  "statement": "theorem isRegular_subsequences_iff_polynomial_variables {R : Type u} [CommRing R] (r : ℕ) (f : Fin r → R) (hproper : Ideal.ofList (List.ofFn f) ≠ ⊤) : (∀ l : List R, l.Sublist (List.ofFn f) → IsRegular R l) ↔ IsRegular (MvPolynomial (Fin r) R) (List.ofFn (fun i : Fin r ↦ MvPolynomial.C (f i) * MvPolynomial.X i))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sst",
+  "group": "E1",
+  "result": "pass",
+  "note": "R comm ring any universe; a,b; hab = RingTheory.Sequence.IsRegular R [a,b] (#check: sequence notion, not root IsRegular); hb = IsSMulRegular R b (defeq injective b*); conclusion IsRegular R [b,a]; zero ring/unit/equal cases excluded by hab"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T184303-L-4004619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

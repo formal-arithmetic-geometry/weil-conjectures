@@ -8,8 +8,8 @@ module
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.Data.List.OfFn
-import Sheaf.Paper.PolynomialIdealCoefficientsMonomial
-import Sheaf.RingTheory.RegularSequenceSwapTwo
+import Sheaf.RingTheory.RegularSequencePermutationsSubsequences
+import Sheaf.RingTheory.RegularSequenceSubsequencesPolynomial
 
 /-!
 # Regular sequences multiplied by polynomial variables
@@ -62,6 +62,7 @@ theorem isRegular_permutations_subsequences_polynomial_iff
     ((∀ l : List R, l.Sublist (List.ofFn f) → IsRegular R l) ↔
       IsRegular (MvPolynomial (Fin r) R)
         (List.ofFn (fun i : Fin r ↦ MvPolynomial.C (f i) * MvPolynomial.X i))) := by
-  sorry
+  exact ⟨isRegular_permutations_iff_subsequences r f hproper,
+    isRegular_subsequences_iff_polynomial_variables r f hproper⟩
 
 end RingTheory.Sequence
