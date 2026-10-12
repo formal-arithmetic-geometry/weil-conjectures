@@ -9,10 +9,8 @@ public import Sheaf.Topology.OpenModuleCohomology
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
-import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
-import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
-import Sheaf.Topology.DerivedLimitStalkInjective
-import Sheaf.Topology.RingedSpaceRGammaDerivedLimit
+import Sheaf.Topology.PointwiseTruncationLimitExists
+import Sheaf.Topology.PointwiseTruncationLimitIsIso
 
 /-! # Pointwise bounds and the derived limit of lower truncations
 
@@ -78,6 +76,8 @@ theorem pointwise_truncation_limit (X : RingedSpace.{u})
       c ≫ π ≫ Pi.π (fun n : ℕ =>
         (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E) n =
           (DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app E) → IsIso c) := by
-  sorry
+  constructor
+  · exact pointwise_truncation_limit_exists X E hlocal K π δ hK
+  · exact pointwise_truncation_limit_isIso X E hlocal K π δ hK
 
 end AlgebraicGeometry.RingedSpace

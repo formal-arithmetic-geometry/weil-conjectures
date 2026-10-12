@@ -1,0 +1,115 @@
+{
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D62, proof split into existence and uniqueness"
+ },
+ "stmt_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Apply the corresponding part of the Roos triangle lifting and pointwise stabilization argument of Tag 0D62.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-derived-limit",
+    "lem-pc-derived-lower-truncation-step-triangle",
+    "lem-pc-ringed-space-derived-limit-stalk-injective",
+    "lem-pc-ringed-space-rgamma-derived-limit",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-derived-limit",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-pc-ringed-space-derived-limit-stalk-injective",
+  "lem-pc-ringed-space-rgamma-derived-limit",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-pc-derived-limit-roos-abelian-groups"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D62"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pointwise truncation limit existence in derived category",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pointwise truncation limit derived category isomorphism",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncGE pointwise derived limit",
+   "results": "No hits in Mathlib",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.PointwiseTruncationLimit",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ringed-space-pointwise-truncation-limit",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-pc-ringed-space-pointwise-truncation-limit-exists",
+ "title": "Existence in the pointwise truncation limit argument",
+ "statement": "The hypotheses and data of lem-pc-ringed-space-pointwise-truncation-limit imply existence of a compatible morphism c : E ⟶ K.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.PointwiseTruncationLimitExists",
+  "file": "lean/Sheaf/Topology/PointwiseTruncationLimitExists.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.pointwise_truncation_limit_exists",
+  "statement": "theorem pointwise_truncation_limit_exists (X : RingedSpace.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))] (E : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (hlocal : ∀ x : X, ∃ (b : ℤ → ℤ) (B : Set (Opens X)), (∀ U ∈ B, x ∈ U) ∧ (∀ V : Opens X, x ∈ V → ∃ U ∈ B, U ≤ V) ∧ (∀ (m : ℤ) (p : ℕ) (U : Opens X), U ∈ B → b m < (p : ℤ) → IsZero ((openModuleCohomology X p U).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X)) (m - (p : ℤ))).obj E)))) [HasProduct (fun n : ℕ => (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E)] (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (π : K ⟶ ∏ᶜ (fun n : ℕ => (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E)) (δ : (∏ᶜ (fun n : ℕ => (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E)) ⟶ K⟦(1 : ℤ)⟧) (hK : IsDerivedLimitTriangle (fun n : ℕ => (DerivedCategory.TStructure.t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E) K π δ) : (∃ c : E ⟶ K, ∀ n : ℕ, c ≫ π ≫ Pi.π (fun n : ℕ => (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E) n = (DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app E)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T115316-L-889074",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T115316-L-889074",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

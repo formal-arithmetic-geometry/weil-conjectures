@@ -7595,3 +7595,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:52 L: merged deliver/S3/Sheaf.AlgebraicGeometry.AffineInternalHomEvaluationBijective (stage 3; reviewer PASS; first push; landing 20261012T115228-L-886557 (interface); batch 20261012T114925; modules 2; new nodes 1)
 - 11:52 L: merged deliver/U3/Sheaf.Algebra.Homology.ZigzagToRowCokernel (stage 3; reviewer PASS; first push; landing 20261012T115244-L-887395 (proof); batch 20261012T114925; modules 1; new nodes 0)
 - 11:53 L: merged deliver/W3/Sheaf.RingTheory.ColimitFinitelyPresentedAlgebras (stage 3; reviewer PASS; first push; landing 20261012T115300-L-888052 (proof); batch 20261012T114925; modules 1; new nodes 0)
+- 11:53 L: merged deliver/X2/Sheaf.Topology.PointwiseTruncationLimit (stage 3; reviewer PASS; first push; landing 20261012T115316-L-889074 (interface); batch 20261012T114925; modules 3; new nodes 2)
