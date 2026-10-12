@@ -17,11 +17,20 @@
  },
  "proof": [
   {
-   "text": "The pullback of the structure module along each étale U → X is canonically\nits structure module. The tensor-pullback units and composition isomorphisms identify\nrestrictions with pullback of functions. Taking global sections and removing ULift\ntherefore gives natural additive equivalences a. The image of hp under U → X makes\np vanish in each section ring. The characteristic-p binomial identity makes\nx ↦ x^p - x additive, and ring maps commute with it. Conjugating by a defines a\nnatural presheaf endomorphism, hence a sheaf morphism wp. The maps c ↦ c.val • 1\nfrom ZMod p are additive (p = 0), commute with restrictions, and extend uniquely\nfrom the constant presheaf through sheafification to iota. Their values satisfy\nc^p = c, so the composite is zero on the sheafification unit. The universal\nproperty of sheafification implies iota ≫ wp = 0. These constructions give all\nthree displayed formulas. No assertion about kernels or local preimages is used.",
+   "text": "Use artinSchreier_construction for X, then transport its additive section equivalences through the inverse sheaf isomorphism. Naturality of that inverse and the supplied restriction formula give the section equivalences for the fixed lifted tensor-section sheaf.",
    "uses": [
-    "lem-weil-pbc-module-pullback-structure-sheaf",
-    "lem-sc-etale-qcoherent-presheaf-functorial",
-    "def-sc-etale-qcoherent-module",
+    "lem-sc-as-sequence-construction-helper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull hp back to every etale object. For nontrivial section rings install characteristic p using primality; for trivial rings use subsingleton elimination. Thus p-th powers are additive. Conjugate x^p-x by the additive section equivalences; preservation of powers and subtraction by restriction ring maps proves naturality and gives wp.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The characteristic ringChar of each section ring divides p because p vanishes. The ZMod castHom therefore supplies its prime-field ring map, including trivial section rings. Compose this map with ULift.down and the inverse section equivalence, then use sheafifyLift to construct iota. The sheafification unit identity proves the constant formula. Fermat via ZMod.pow_card makes the composite zero on the constant presheaf; sheafify_hom_ext gives iota followed by wp equal to zero.",
+   "uses": [
     "def-sc-constant-sheaves",
     "def-weil-pbc-sheafification"
    ],
@@ -29,16 +38,14 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-pullback-structure-sheaf",
-  "lem-sc-etale-qcoherent-presheaf-functorial",
-  "def-sc-etale-qcoherent-module",
+  "lem-sc-as-sequence-construction-helper",
   "def-sc-constant-sheaves",
   "def-weil-pbc-sheafification"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "C1",
   "document": "https://stacks.math.columbia.edu/tag/0A3J",
-  "place": "Construction and exactness argument for the opening sequence; local surjectivity by Tag 03PL."
+  "place": "Opening sequence: natural structure-module section identifications reused from artinSchreier_construction; maps and zero composite constructed using characteristic-p algebra and sheafification."
  },
  "mathlib_searches": [
   {
@@ -115,8 +122,8 @@
   "reviewer": "COMPILER",
   "group": "C1",
   "result": "pass",
-  "landing": "20261012T060732-L-2904579",
-  "kind": "interface",
+  "landing": "20261012T085217-L-4528",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
