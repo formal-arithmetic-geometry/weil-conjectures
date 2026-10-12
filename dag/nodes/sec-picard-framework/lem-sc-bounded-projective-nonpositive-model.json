@@ -1,0 +1,111 @@
+{
+ "id": "lem-sc-bounded-projective-nonpositive-model",
+ "kind": "statement",
+ "title": "Removing the positive tail of a bounded projective complex",
+ "statement": "Let $\\mathcal C$ be an abelian category and $L$ a cochain complex indexed by $\\mathbb Z$. Assume there are integers $a,b$ with $L^j=0$ for $j<a$ or $b<j$, every $L^j$ is projective, and $H^j(L)=0$ for $j>0$. There exist a cochain complex $Q$ and an integer $a_0$ such that $Q^j=0$ for $j<a_0$, every $Q^j$ is projective, $Q^j=0$ for $j>0$, and for every integer $j$ there is an isomorphism $H^j(Q)\\cong H^j(L)$. All categorical notions are those of Mathlib; no scheme or specified degree-zero module is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066Q, bounded-projective-model to finite-resolution direction; expanded positive-tail splitting in original stalk-resolution node step 3"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The proved private helper projective_cycles uses induction on a natural-number distance to an upper bound. For j at least zero, the base case identifies cycles in degree j with L.X j because L.X (j+1) is zero. At the inductive step use positive homology vanishing in degree j+1 and Mathlib ShortComplex.Exact.epi_toCycles to make L.X j to cycles(j+1) epic. Split this map by Projective.factorThru. The endomorphism 1-fs factors through cycles(j) by liftCycles, and its composite with the cycle inclusion is the identity. Hence cycles(j) is a retract of L.X j and is projective by Retract.projective. Instantiate at j=0 and n=b.toNat.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Construct Q as the good truncation L.truncLE along ComplexShape.embeddingUpIntLE 0. In negative degrees its terms are isomorphic to those of L; the boundary term at zero is isomorphic to cycles(0); terms in positive degrees are zero. These Mathlib comparison isomorphisms and the first step prove termwise projectivity. The same negative-degree term comparison transports the lower bound min(a,0).",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Positive homology vanishing gives L.IsSupported for the embedding. Mathlib quasiIso_ιTruncLE_iff_isSupported proves that the truncation inclusion is a quasi-isomorphism. Use isoOfQuasiIsoAt in each integer degree for the final homology isomorphisms. All steps, including descending induction and construction of the retractions and Q, are proved in the delivered Lean module.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent T3, stage 3",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066Q and the existing explicit positive-tail splitting plan; use descending split epimorphisms to prove projective cycles, then Mathlib good truncation. Entire proof written and checked in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded projective cochain complex with vanishing positive homology admits a bounded projective model with zero positive terms and unchanged homology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded projective cochain complex with vanishing positive homology admits a bounded projective model with zero positive terms and unchanged homology",
+   "results": "CochainComplex.isKProjective_of_projective, IsKProjective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, and ProjectiveResolution extension instances; none removes the positive tail.",
+   "date": "2026-10-13",
+   "verdict": "component results only; no matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "nonpositive.*[Pp]rojective|[Pp]rojective.*nonpositive",
+   "results": "No matching declaration in Mathlib, lean/WeilConjectures or lean/Sheaf; blueprint_refs.py search also found no matching imported blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkResolution",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Hypothesis translation in the smooth proper diagonal tensor formula: a local strictly perfect model of the closed pushforward gives a bounded projective stalk resolution before computing Tor; Removing the positive tail of a bounded projective complex",
+   "via": [
+    "lem-sc-strict-perfect-closed-pushforward-stalk-resolution",
+    "lem-sc-perfect-immersion-stalkwise-tor-bounds",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BoundedProjectiveNonpositiveModel",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedProjectiveNonpositiveModel.lean",
+  "declaration": "CochainComplex.boundedProjective_nonpositiveModel",
+  "statement": "theorem boundedProjective_nonpositiveModel\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (L : CochainComplex C ℤ)\n    (hbound : ∃ a b : ℤ, ∀ j : ℤ, j < a ∨ b < j → IsZero (L.X j))\n    (hproj : ∀ j : ℤ, Projective (L.X j))\n    (hexact : ∀ j : ℤ, 0 < j → IsZero (L.homology j)) :\n    ∃ Q : CochainComplex C ℤ, ∃ a : ℤ,\n      (∀ j : ℤ, j < a → IsZero (Q.X j)) ∧\n      (∀ j : ℤ, Projective (Q.X j)) ∧\n      (∀ j : ℤ, 0 < j → IsZero (Q.X j)) ∧\n      (∀ j : ℤ, Nonempty (Q.homology j ≅ L.homology j))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T202254-L-709422",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T202254-L-709422",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

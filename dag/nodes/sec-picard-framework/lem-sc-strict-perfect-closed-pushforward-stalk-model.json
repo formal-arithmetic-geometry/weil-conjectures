@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-strict-perfect-closed-pushforward-stalk-model",
+ "kind": "statement",
+ "title": "A local strictly perfect closed-pushforward model gives a bounded projective stalk complex",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme, def-sbc-closed-immersion-ideal-sheaf], $x\\in Z$, and $U$ an open neighbourhood of $i(x)$. Let $K$ be a strictly perfect complex over $U$ [def-pc-perfect-complex], and assume that in the derived category [def-pc-derived-category] it is isomorphic to the restriction of the ordinary pushforward $(i_*\\mathcal O_Z)[0]$ [def-pc-module-pullback]. Put $A=\\mathcal O_{Y,i(x)}$ and let $B=\\mathcal O_{Z,x}$ be an $A$-module through $i^\\sharp_x$. There is a cochain complex $L$ of $A$-modules indexed by $\\mathbb Z$ such that (i) there exist integers $a,b$ with $L^j=0$ for $j<a$ or $b<j$; (ii) each $L^j$ is projective; (iii) $H^0(L)\\cong B$ as $A$-modules; (iv) $H^j(L)=0$ for $j\\ne0$. No nonpositive truncation or projective resolution is part of the conclusion.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08C4 and 08CM; Modules 01AG and Sheaves 00AE; original stalk-resolution node steps 1-2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Take the termwise stalk complex on the localized open-subspace site. Neighbourhoods contained in U are cofinal at i(x), so this stalk is over A and restriction to U does not change it. The bounds of K give bounds of its stalk complex L.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Stalks preserve finite coproducts and take the unit sheaf to the regular module over the stalk ring. Apply the stalk functor to the two finite-free retraction maps of each term. The stalk term is then a retract of a finite free A-module and is projective.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness of the stalk functor makes it preserve quasi-isomorphisms and descend to the derived localization. Apply it to the specified derived isomorphism e. The stalk of the restricted single sheaf has homology only in degree zero.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply closedImmersion_pushforward_stalks to the unit sheaf. Its bijective germ map is linear through the stalk ring map and identifies the pushforward stalk with B. Compose it with the degree-zero homology identification to get H^0(L) isomorphic to B.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08C4 and 08CM; Modules 01AG and Sheaves 00AE; original stalk-resolution node steps 1-2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A local strictly perfect model of a sheaf in degree zero gives a bounded projective complex on its stalk with homology concentrated in degree zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local strictly perfect model of a sheaf in degree zero gives a bounded projective complex on its stalk with homology concentrated in degree zero",
+   "results": "CochainComplex.isKProjective_of_projective and ProjectiveResolution extension instances; none constructs the geometric stalk model.",
+   "date": "2026-10-13",
+   "verdict": "component results only; no matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Pp]rojective|[Pp]erfect.*stalk",
+   "results": "No matching declaration in Mathlib, lean/WeilConjectures or lean/Sheaf; blueprint_refs.py search also found no matching imported blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkResolution",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Hypothesis translation in the smooth proper diagonal tensor formula: a local strictly perfect model of the closed pushforward gives a bounded projective stalk resolution before computing Tor; A local strictly perfect closed-pushforward model gives a bounded projective stalk complex",
+   "via": [
+    "lem-sc-strict-perfect-closed-pushforward-stalk-resolution",
+    "lem-sc-perfect-immersion-stalkwise-tor-bounds",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictPerfectClosedPushforwardStalkModel.lean",
+  "declaration": "AlgebraicGeometry.strictPerfectClosedPushforward_stalkModel",
+  "statement": "theorem strictPerfectClosedPushforward_stalkModel\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (x : Z) (U : Y.Opens) (hx : i x ∈ U)\n    (K : CochainComplex\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U)) ℤ)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (hK : Y.IsStrictlyPerfect U K)\n    (e : (SheafOfModules.overFunctor.{u}\n      (moduleRings Y.toRingedSpace) U).mapDerivedCategory.obj\n        ((DerivedCategory.singleFunctor _ 0).obj\n          ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))) ≅\n      DerivedCategory.Q.obj K) :\n    ∃ L : CochainComplex (ModuleCat.{u} (Y.presheaf.stalk (i x))) ℤ,\n      (∃ a b : ℤ, ∀ j : ℤ, j < a ∨ b < j → IsZero (L.X j)) ∧\n      (∀ j : ℤ, Projective (L.X j)) ∧\n      Nonempty (L.homology 0 ≅\n        ((ModuleCat.restrictScalars (i.stalkMap x).hom).obj\n          (ModuleCat.of (Z.presheaf.stalk x) (Z.presheaf.stalk x)))) ∧\n      (∀ j : ℤ, j ≠ 0 → IsZero (L.homology j))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T202254-L-709422",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T202254-L-709422",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

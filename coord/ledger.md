@@ -9407,3 +9407,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/T2/Sheaf.CategoryTheory.TriangleMorphismCategory (stage 3; reviewer PASS; first push; landing 20261012T202253-L-709028 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/T2/Sheaf.RingTheory.FsAdicLiftOverFiniteCoefficientMap (stage 3; reviewer PASS; first push; landing 20261012T202253-L-709125 (interface); batch 20261012T202227; modules 4; new nodes 4)
 - 20:22 L: merged deliver/T2/Sheaf.RingTheory.ResidueFieldFiniteProjectiveDimensionOfGlobalDimension (stage 3; reviewer PASS; first push; landing 20261012T202254-L-709277 (proof); batch 20261012T202227; modules 1; new nodes 1)
+- 20:22 L: merged deliver/T3/Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkResolution (stage 3; reviewer PASS; first push; landing 20261012T202254-L-709422 (interface); batch 20261012T202227; modules 3; new nodes 2)
