@@ -9691,7 +9691,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:51 L: merged deliver/H1/Sheaf.AlgebraicGeometry.AffineOpenHigherDirectImageSectionsIso (stage 3; reviewer PASS; first push; landing 20261012T215154-L-1303845 (interface); batch 20261012T215151; modules 3; new nodes 2)
 - 21:51 L: merged deliver/H2/Sheaf.RingTheory.PopescuStandardReductionFactor (stage 3; reviewer PASS; after a return; landing 20261012T215154-L-1304038 (interface); batch 20261012T215151; modules 3; new nodes 2)
 - 21:51 L: merged deliver/J1/Sheaf.CategoryTheory.ColimitSiteRawSectionSheaf (stage 3; reviewer PASS; after a return; landing 20261012T215155-L-1304148 (interface); batch 20261012T215151; modules 3; new nodes 2)
-- 21:51 L: merged deliver/K2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (stage 3; reviewer PASS; first push; landing 20261012T215155-L-1304357 (proof); batch 20261012T215151; modules 1; new nodes 0)
 - 21:51 L: merged deliver/M2/Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalOpenToOpen (stage 3; reviewer PASS; first push; landing 20261012T215155-L-1304481 (interface); batch 20261012T215151; modules 2; new nodes 1)
 - 21:51 L: merged deliver/P3/Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonC0 (stage 3; reviewer PASS; first push; landing 20261012T215156-L-1304635 (proof); batch 20261012T215151; modules 1; new nodes 0)
 - 21:51 L: merged deliver/R1/Sheaf.RingTheory.FsAdicClosedFiberModel (stage 3; reviewer PASS; first push; landing 20261012T215156-L-1304785 (interface); batch 20261012T215151; modules 3; new nodes 2)
@@ -9702,3 +9701,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:51 L: merged deliver/W3/Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationAdicReduction (stage 3; reviewer PASS; after a return; landing 20261012T215158-L-1305361 (proof); batch 20261012T215151; modules 1; new nodes 0)
 - 21:51 L: merged deliver/X3/Sheaf.RingTheory.CompletionAtQuasiFinitePrimeSplit (stage 3; reviewer PASS; first push; landing 20261012T215158-L-1305460 (interface); batch 20261012T215151; modules 2; new nodes 1)
 - 21:51 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus (stage 3; reviewer PASS; first push; landing 20261012T215158-L-1305559 (interface); batch 20261012T215151; modules 4; new nodes 3)
+
+- 05:57 L: batch 20261012T215151 dependency take-out

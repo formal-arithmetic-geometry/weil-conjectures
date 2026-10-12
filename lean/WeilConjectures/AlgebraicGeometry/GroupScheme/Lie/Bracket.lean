@@ -86,12 +86,6 @@ theorem commutator_mem_mixedPoints (v w : infPoints G) :
 noncomputable def infBracket (v w : infPoints G) : infPoints G :=
   (mixedEquiv G).symm ⟨_, commutator_mem_mixedPoints G v w⟩
 
-private theorem toMixed_infBracket (v w : infPoints G) :
-    toMixed G (infBracket G v w) =
-      ⟨toε G v * toδ G w * (toε G v)⁻¹ * (toδ G w)⁻¹,
-        commutator_mem_mixedPoints G v w⟩ := by
-  exact (mixedEquiv G).apply_symm_apply _
-
 /-- The Lie bracket on `Lie(G)`, transported from the infinitesimal points. -/
 noncomputable instance : Bracket (Lie G) (Lie G) where
   bracket x y := lieEquiv G (infBracket G ((lieEquiv G).symm x) ((lieEquiv G).symm y))
@@ -179,14 +173,7 @@ theorem coe_infPointsMap_apply (f : G ⟶ H) [IsMonHom f] (v : infPoints G) :
 group commutators and commutes with `η ↦ εδ`. -/
 theorem infPointsMap_infBracket (f : G ⟶ H) [IsMonHom f] (v w : infPoints G) :
     infPointsMap f (infBracket G v w) = infBracket H (infPointsMap f v) (infPointsMap f w) := by
-  apply (toMixed_bijective H).injective
-  apply Subtype.ext
-  change Scheme.dualNumbersMulOver S ≫ ((infBracket G v w).val ≫ f) = _
-  rw [← Category.assoc, ← coe_toMixed, toMixed_infBracket]
-  rw [toMixed_infBracket]
-  change (IsMonHom.monoidHom f _) (_ * _ * _⁻¹ * _⁻¹) = _
-  simp only [map_mul, map_inv]
-  rfl
+  sorry
 
 /-- Let `f : G ⟶ H` be a monomorphism of group schemes, a subgroup scheme of `H`. If the
 commutators of the points of `H` over `S[ε][δ]` factor through `G`, then the bracket of two
