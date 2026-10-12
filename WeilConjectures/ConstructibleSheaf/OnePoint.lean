@@ -10,8 +10,8 @@ public import WeilConjectures.ConstructibleSheaf.LowerStarOpenStalk
 /-!
 # Sheaves with finite stalks on a one-point scheme are finite locally constant
 
-modules on the small étale site of `Y` whose geometric stalks are finite.
-modules over a finite ring on the small étale site of `Y` whose geometric stalks are finite.
+Let `Y` be a scheme with exactly one point and `H` a sheaf of modules over a finite ring on the
+small étale site of `Y` whose geometric stalks are finite.
 Then `H` is finite locally constant. For `Y = Spec k` this is the statement that a discrete
 Galois module with finite underlying set is trivialised by a finite separable extension of `k`.
 

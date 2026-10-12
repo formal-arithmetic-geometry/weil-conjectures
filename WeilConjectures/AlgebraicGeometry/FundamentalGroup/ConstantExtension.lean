@@ -83,15 +83,6 @@ noncomputable def includeRight [Algebra k₀ L] (A : FiniteEtaleAlgebra k₀) :
 
 end FiniteEtaleAlgebra
 
-/-- A finite field extension of a finite field has `q ^ [L : K]` elements. -/
-lemma natCard_eq_pow_finrank (K L : Type*) [Field K] [Field L] [Algebra K L] [Finite K]
-    [Module.Finite K L] : Nat.card L = Nat.card K ^ Module.finrank K L := by
-  have := Fintype.ofFinite K
-  have : Finite L := Module.finite_of_finite K
-  have := Fintype.ofFinite L
-  simp only [Nat.card_eq_fintype_card]
-  exact Module.card_eq_pow_finrank
-
 section Frobenius
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ : Scheme.{u}} (p : X₀ ⟶ Spec (.of k₀))
@@ -121,7 +112,7 @@ lemma geometricFrobenius_pow_finrank_apply (L : Type u) [Field L] [Algebra k₀ 
     refine Subtype.ext (RingHom.ext fun x ↦ ?_)
     have := Fintype.ofFinite L
     rw [fiberConstantCoverEquiv_geometricFrobenius_inv_pow, ← map_pow,
-      ← natCard_eq_pow_finrank k₀ L,
+      ← Module.natCard_eq_pow_finrank (K := k₀) (V := L),
       Nat.card_eq_fintype_card, FiniteField.pow_card x]
   rw [inv_pow] at h
   exact (Equiv.Perm.inv_eq_iff_eq.1 h).symm
@@ -286,7 +277,8 @@ lemma constantExtensionFiberMap_geometricFrobenius_inv
   rw [fiberConstantCoverEquiv_geometricFrobenius_inv_pow,
     fiberConstantCoverEquiv_constantExtensionFiberMap,
     fiberConstantCoverEquiv_constantExtensionFiberMap, RingHom.comp_apply, RingHom.comp_apply,
-    fiberConstantCoverEquiv_geometricFrobenius_inv, natCard_eq_pow_finrank K L, map_pow]
+    fiberConstantCoverEquiv_geometricFrobenius_inv, Module.natCard_eq_pow_finrank (K := K) (V := L),
+    map_pow]
 
 /-- The integral powers of the geometric Frobenius: `Φ_B ^ n` corresponds to `Φ_A ^ (m n)`. -/
 lemma constantExtensionFiberMap_geometricFrobenius_zpow (n : ℤ)
@@ -554,7 +546,7 @@ lemma FiniteSubfield.exists_lt_finrank (N : ℕ) :
     change S.card ≤ Nat.card (L.1 : Set (AlgebraicClosure K))
     rw [← Set.ncard_coe_finset, Nat.card_coe_set_eq]
     exact Set.ncard_le_ncard (fun x hx ↦ hL x hx) (Set.toFinite _)
-  rw [hS, natCard_eq_pow_finrank K L.1] at hcard
+  rw [hS, Module.natCard_eq_pow_finrank (K := K) (V := L.1)] at hcard
   exact (Nat.pow_lt_pow_iff_right Finite.one_lt_card).1 (Nat.lt_of_succ_le hcard)
 
 /-- The geometric Frobenius has infinite order: on the geometric fibre of the constant cover

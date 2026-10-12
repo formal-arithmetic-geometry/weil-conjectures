@@ -13,17 +13,25 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
-# The top cohomology of `μ_m` on a smooth proper curve
+# The cohomology of `μ_m` on a smooth proper curve
 
 Let `X` be a smooth proper connected curve over an algebraically closed field `k` and `m` an
-integer prime to the characteristic. The Kummer sequence identifies `H²(X, μ_m)` with
-`Pic(X)/m`, and the degree identifies `Pic(X)/m` with `ℤ/m`, since `Pic⁰(X)` is the group of
-points of the Jacobian, a divisible group. In particular `H²(X, μ_m)` has exactly `m` elements
-(`AlgebraicGeometry.Scheme.card_sheafH_two_rootsOfUnitySheaf`).
+integer prime to the characteristic. The Kummer sequence identifies `H¹(X, μ_m)` with the
+`m`-torsion `Pic(X)[m]` and `H²(X, μ_m)` with `Pic(X)/m`. The degree modulo `m` defines a trace
+`H²(X, μ_m) ⟶ ℤ/m`, which is bijective since `Pic⁰(X)` is the group of points of the Jacobian, a
+divisible group. In particular `H²(X, μ_m)` has exactly `m` elements.
+
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.kummerTorsionEquiv`: the Kummer identification
+  `H¹(X, μ_m) ≅ Pic(X)[m]`.
+- `AlgebraicGeometry.Scheme.picToSheafHTwo`: the Kummer map `Pic(X) ⟶ H²(X, μ_m)`.
+- `AlgebraicGeometry.Scheme.sheafHTwoTrace`: the trace `H²(X, μ_m) ⟶ ℤ/m`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.surjective_pow_picardZero`: `Pic⁰(X)` is divisible.
+- `AlgebraicGeometry.Scheme.bijective_sheafHTwoTrace`: the trace is bijective.
 - `AlgebraicGeometry.Scheme.card_sheafH_two_rootsOfUnitySheaf`: `#H²(X, μ_m) = m`.
 -/
 

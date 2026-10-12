@@ -46,8 +46,7 @@ extension preserves the Krull dimension, `s` is the dimension of the algebra.
 ## Blueprint
 
 - `sk-i-real-normalization`: Noether normalization.
-- `lem-zl-noether-normalization-field`:
-  `Algebra.FiniteType.exists_finite_inj_algHom_mvPolynomial`.
+- `lem-zl-noether-normalization-field`: Mathlib's `exists_finite_inj_algHom_of_fg`.
 - `lem-zl-noether-normalization-dimension`: `ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial`.
 - `sk-i-geometry`: dimension drop.
 - `lem-zl-spread-normalization`: `Algebra.FiniteType.exists_finite_aeval_away`.
@@ -58,16 +57,6 @@ extension preserves the Krull dimension, `s` is the dimension of the algebra.
 universe u
 
 open MvPolynomial TensorProduct
-
-/-- Blueprint `lem-zl-noether-normalization-field`: Noether normalization over a field.
-
-A nonzero finitely generated commutative algebra `B` over a field `K` admits, for some `d`, an
-injective `K`-algebra map `K[T₁, …, T_d] → B` over which `B` is a finite module. This is
-Mathlib's `exists_finite_inj_algHom_of_fg`. -/
-theorem Algebra.FiniteType.exists_finite_inj_algHom_mvPolynomial (K B : Type*) [Field K]
-    [CommRing B] [Nontrivial B] [Algebra K B] [Algebra.FiniteType K B] :
-    ∃ (d : ℕ) (g : MvPolynomial (Fin d) K →ₐ[K] B), Function.Injective g ∧ g.Finite :=
-  exists_finite_inj_algHom_of_fg K B
 
 /-- Blueprint `lem-zl-noether-normalization-dimension`: the number of Noether coordinates is the
 Krull dimension.
