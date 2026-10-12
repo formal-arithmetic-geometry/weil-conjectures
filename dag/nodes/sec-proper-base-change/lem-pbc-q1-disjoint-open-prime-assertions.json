@@ -1,0 +1,129 @@
+{
+ "id": "lem-pbc-q1-disjoint-open-prime-assertions",
+ "kind": "statement",
+ "title": "Assertions for extension from a finite disjoint union of opens",
+ "statement": "Let k be algebraically closed and f:X → Spec k a reduced curve [def-weil-pbc-curve-setting]. Let Λ be a finite commutative coefficient ring, r prime, and F a constructible module-valued etale sheaf [def-weil-pbc-etale-constructible-sheaf] killed by r. For n pairwise disjoint opens U_a, put W = union U_a. The eight conditional assertions [def-weil-pbc-eight-curve-assertions] for extension by zero of F restricted to W are equivalent to all eight assertions for each extension by zero of F restricted to U_a [def-weil-pbc-extension-by-zero]. Neither density nor irreducibility is assumed; n = 0 is allowed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC, proof, fourth paragraph; Lemma 0A5C"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-extension-by-zero"
+ ],
+ "proof": [
+  {
+   "text": "Let W be the union of the given finitely many pairwise disjoint opens. The extension-by-zero counits give a morphism from the finite direct sum of the j_a! restrictions to j_! of the restriction to W. At a geometric point inside W, the unique nonzero summand maps identically to F at that point; outside W both sides are zero. Conservative geometric stalks make this an isomorphism. Each summand is constructible on the open-closed stratification and killed by r.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cohomology and inverse image are additive and comparison maps are natural in the sheaf. Thus each cohomology group and each field-extension or open-restriction map for the finite sum is the finite direct sum of those for the summands. A finite sum is zero or finite exactly when every summand is, and a finite sum of maps is bijective or surjective exactly when each summand map is. Apply these facts to C1-C8. The affine and proper conditions are shared by all the summands. For the conditional coefficient requirements use that r-primary coefficients are either all invertible away from r, all primary at r, or zero when an exceptional condition applies. When n = 0 the sheaf is zero and the universal statement on Fin 0 is vacuous.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-pbc-eight-curve-assertions",
+    "def-weil-pbc-primary-torsion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-primary-torsion",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "03SC, 0GJA; elementary details and ModuleCat coefficient transport written out by Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dense open finite disjoint irreducible components noetherian scheme",
+   "results": "Service unavailable: Internal Server Error; no verdict inferred from unavailability.",
+   "date": "2026-10-12",
+   "verdict": "Unavailable; semantic, type-pattern, and local source searches used instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology dense open extension by zero finite direct sum",
+   "results": "Eight hits about Profinite, locally constant functions and etale loci; no cohomology transfer assertion.",
+   "date": "2026-10-12",
+   "verdict": "No matching etale cohomology assertion transfer."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"irreducibleComponents\"",
+   "results": "Found finite-component closure tools, in particular closure_sUnion_irreducibleComponents_sdiff_singleton; no bundled curve refinement and cohomology transfer.",
+   "date": "2026-10-12",
+   "verdict": "Useful tools for the completed geometric proof, no matching module-coefficient assertion equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*irreducible|irreducible.*dense; local rg: connectedComponentIn, IsPreconnected.subset_left_of_subset_union, cohomology and direct sums",
+   "results": "Mathlib provides irreducible-space open density and finite-component closure lemmas. Local source library provides the dimension-drop theorem. DenseOpenAssertions uses CurveCoefficientPair and ULift Z, with no direct theorem for arbitrary ModuleCat Λ; no disjoint-open module-coefficient package was found.",
+   "date": "2026-10-12",
+   "verdict": "No direct matching module-coefficient assertion statement; the geometric clause is proved from the located tools."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-curve-dense-open-localization",
+   "place": "proof, sixth and seventh steps: direct-sum decomposition and assertion-by-assertion comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DisjointOpenPrimeAssertions.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.assertions_iff_disjoint_open_prime",
+  "statement": "theorem assertions_iff_disjoint_open_prime (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]\n    (r : ℕ) [Fact r.Prime] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    [Scheme.IsConstructibleSheaf F] (hF : r • 𝟙 F = 0)\n    (n : ℕ) (U : Fin n → X.Opens)\n    (hU : Pairwise (fun a b ↦ Disjoint (U a : Set X) (U b))) :\n    IsCurve.Assertions Λ f\n      (((⨆ a, U a).ι)_!open[ModuleCat.{u + 1} Λ].obj\n        (((⨆ a, U a).ι)^*[ModuleCat.{u + 1} Λ].obj F)) ↔\n      ∀ a, IsCurve.Assertions Λ f\n        (((U a).ι)_!open[ModuleCat.{u + 1} Λ].obj\n          (((U a).ι)^*[ModuleCat.{u + 1} Λ].obj F))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025731-L-1257477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025731-L-1257477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

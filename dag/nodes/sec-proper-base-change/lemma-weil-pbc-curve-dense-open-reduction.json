@@ -15,51 +15,35 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The partition witnessing constructibility of $F$ is a stratification in the\nsense of [def-constructible-stratification] with finite locally constant\npullbacks, so $F$ is constructible in the sense of\n[def-constructible-constructible], and [prop-constructible-generic-constancy]\ngives a dense open $U'\\subseteq X$ with $F|_{U'}$ finite locally constant.\nRemove from $U'$ all intersections of distinct irreducible components (a\nfinite set of closed points). The resulting dense open $U=\\coprod_aU_a$ meets\nevery component, each $U_a$ is irreducible, and $G=j^{-1}F$ is finite locally\nconstant.",
+   "text": "Apply the existing generic-constancy theorem to obtain a dense open V on which F is finite locally constant. Shrink V by the proved dense irreducible-opens theorem. This yields finitely many disjoint irreducible opens U_a, their dense union W, zero-dimensional complement, and irreducible connected components in W. Finite local constancy of each restriction and of the restriction to W follows from upperStar_of_range_subset because U_a and W lie inside V.",
    "uses": [
-    "def-constructible-stratification",
-    "def-constructible-constructible",
-    "prop-constructible-generic-constancy"
+    "prop-constructible-generic-constancy",
+    "lem-pbc-q1-dense-irreducible-opens"
    ],
    "elementary": false
   },
   {
-   "text": "Let $\\epsilon:j_!G\\to F$ be extension by zero of the identity of $G$, and\nlet $\\rho:F\\to i_*i^{-1}F$ be restriction to $Z$. At a geometric point of\n$U$, the stalks of $(\\epsilon,\\rho)$ are\n$G_{\\bar x}\\xrightarrow{\\mathrm{id}}F_{\\bar x}\\to0$; at a geometric point\nof $Z$ they are $0\\to F_{\\bar z}\\xrightarrow{\\mathrm{id}}F_{\\bar z}$.\nGeometric stalks are exact and conservative, so\n\n$$\n0\\longrightarrow j_!G\\xrightarrow{\\epsilon}F\n\\xrightarrow{\\rho}i_*i^{-1}F\\longrightarrow0\n$$\n\nis exact with the displayed maps.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply the dense-open prime-coefficient assertion equivalence to W to identify assertions for F with those for extension by zero of its restriction to W.",
+   "uses": [
+    "lem-pbc-q1-dense-open-prime-assertions"
+   ],
+   "elementary": false
   },
   {
-   "text": "The reduced zero-dimensional scheme $Z$ is a finite disjoint union of\n$k$-points. Exact finite direct image and Leray give\n\n$$\nH^q(X,i_*i^{-1}F)=H^q(Z,i^{-1}F)=0\\quad(q>0),\\qquad\nH^0(Z,i^{-1}F)=\\bigoplus_{\\bar z\\in Z}F_{\\bar z}.\n$$",
+   "text": "Choose W as the existential witness, using irreducibility of its connected components and finite local constancy established above.",
    "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "The last group is finite. The long exact sequence is therefore\n\n$$\n\\begin{split}\n0&\\to H^0(X,j_!G)\\to H^0(X,F)\\to\n\\bigoplus_{\\bar z\\in Z}F_{\\bar z}\\\\\n&\\to H^1(X,j_!G)\\to H^1(X,F)\\to0,\n\\end{split}\n$$\n\nand restriction induces $H^q(X,j_!G)\\cong H^q(X,F)$ for $q>1$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "These maps separate the eight assertions as follows. Assertions (1)–(3)\nand (8) use the isomorphisms in degrees at least two, also after replacing\n$X$ by an open $W$ and $U$ by $W\\cap U$. Assertions (4) and (5) use the\ndisplayed five-term sequence and finiteness of the boundary-stalk sum.\nFor (6) and (7), base change preserves $Z$, its stalk groups, $\\epsilon$,\n$\\rho$, and the boundary map; the two five-term sequences form a commuting\ndiagram, and the five lemma handles degrees $0,1$, while the higher-degree\nmaps are already identified. Thus the eight assertions hold for $F$ if\nand only if they hold for $j_!G$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Finally $j_!G=\\bigoplus_a j_{a,!}(G|_{U_a})$. The inclusions and projections\nsplit this finite sum, and repeated split exact sequences\n$0\\to E_1\\to E_1\\oplus E_2\\to E_2\\to0$ together with short-exact devissage\nreduce to the individual irreducible components.",
-   "uses": [],
-   "elementary": null
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-constructible-stratification",
-  "def-constructible-constructible",
-  "prop-constructible-generic-constancy",
-  "lemma-weil-pbc-curve-constructible-primary-reduction",
-  "lemma-weil-pbc-eight-curve-devissage"
+  "lem-pbc-q1-dense-irreducible-opens",
+  "lem-pbc-q1-dense-open-prime-assertions",
+  "prop-constructible-generic-constancy"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-dense-open-reduction.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC, proof, third and fourth paragraphs; Lemma 0GJA; module-valued glue proved by Q1"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -125,28 +109,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-539af",
-  "group": "G1",
+  "reviewer": "COMPILER",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T014114-L-867356",
+  "landing": "20261012T025731-L-1257477",
   "kind": "interface",
-  "note": "independent Codex review: Required compilation, delivered Lean files, node metadata, report, and repository declarations matched the stage-3 review brief.",
-  "sorry_before": [
-   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite",
-   "AlgebraicGeometry.IsCurve.Assertions.of_forall_isReduced",
-   "AlgebraicGeometry.IsCurve.Assertions.of_shortExact",
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
-   "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek",
-   "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek",
-   "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite",
-   "AlgebraicGeometry.IsCurve.Assertions.of_forall_isReduced",
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
-   "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek",
-   "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek",
-   "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar"
-  ]
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

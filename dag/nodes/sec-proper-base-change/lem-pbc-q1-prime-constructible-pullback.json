@@ -1,0 +1,148 @@
+{
+ "id": "lem-pbc-q1-prime-constructible-pullback",
+ "kind": "statement",
+ "title": "Constructible approximation for prime-torsion pullback cohomology",
+ "statement": "Let a:Y → X be a morphism of quasi-compact quasi-separated schemes, let r be prime, and suppose pullback is bijective in every nonnegative degree for every constructible sheaf of ULift(ZMod r)-modules [def-weil-pbc-etale-constructible-sheaf]. Then pullback is bijective in every degree for every abelian etale sheaf G [def-weil-pbc-abelian-etale-sheaves] with r times its identity zero. The comparison is the existing cohomologyMap [def-weil-pbc-cohomology-pullback]. No curve, properness, reducedness or field-extension square is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "03SA(3), 03Q5; Theorem 03SC, proof, first paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "An abelian sheaf G killed by r has a canonical lift M to ULift(ZMod r)-module sheaves, with an isomorphism from its underlying abelian sheaf to G. Construct M sectionwise using the canonical residue-class action; restrictions are linear since they are additive.",
+   "uses": [
+    "lem-weil-pbc-killed-sheaf-module-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Present M as a filtered colimit of constructible module sheaves by Stacks 03SA(3). Over the finite ring ULift(ZMod r), finite module values and finite-generation geometric stalks agree on the same strata and trivializing covers, so these stages satisfy Scheme.IsConstructibleSheaf. Forgetting modules and inverse image preserve this presentation. The presentation may be indexed in Type(u+1), as the existing colimit node states; handling its size and the constructibility encoding is part of this intermediate theorem, not silently claimed solved by the smaller-index continuity theorem.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each qcqs scheme cohomology commutes with the filtered presentation by Stacks 03Q5. Naturality makes the pullback comparison a morphism of the two cohomology diagrams. Each component is bijective by H; the inverse components commute with transitions by cancelling naturality squares, so the colimit map is bijective. Its identification with cohomologyMap, and transport across the underlying abelian isomorphism, prove the result for G. This includes degree zero, empty schemes and zero sheaves.",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-killed-sheaf-module-lift",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "03SA(3) and 03Q5; coefficient and diagram-size details written out by Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dense open finite disjoint irreducible components noetherian scheme",
+   "results": "Service unavailable: Internal Server Error; no verdict inferred from unavailability.",
+   "date": "2026-10-12",
+   "verdict": "Unavailable; semantic, type-pattern, and local source searches used instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology dense open extension by zero finite direct sum",
+   "results": "Eight hits about Profinite, locally constant functions and etale loci; no cohomology transfer assertion.",
+   "date": "2026-10-12",
+   "verdict": "No matching etale cohomology assertion transfer."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"irreducibleComponents\"",
+   "results": "Found finite-component closure tools, in particular closure_sUnion_irreducibleComponents_sdiff_singleton; no bundled curve refinement and cohomology transfer.",
+   "date": "2026-10-12",
+   "verdict": "Useful tools for the completed geometric proof, no matching module-coefficient assertion equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*irreducible|irreducible.*dense; local rg: connectedComponentIn, IsPreconnected.subset_left_of_subset_union, cohomology and direct sums",
+   "results": "Mathlib provides irreducible-space open density and finite-component closure lemmas. Local source library provides the dimension-drop theorem. DenseOpenAssertions uses CurveCoefficientPair and ULift Z, with no direct theorem for arbitrary ModuleCat Λ; no disjoint-open module-coefficient package was found.",
+   "date": "2026-10-12",
+   "verdict": "No direct matching module-coefficient assertion statement; the geometric clause is proved from the located tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology filtered colimit constructible module sheaves",
+   "results": "Eight hits about local cohomology and condensed module categories; no etale prime-constructible pullback result.",
+   "date": "2026-10-12",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Sheaf.*[Hh].*colimit|cohomology.*colimit; rg on local Sheaf/AlgebraicGeometry",
+   "results": "Located KilledSheafModuleLift, ConstructibleModuleSheafColimit and ConstructibleRestrictionClass; the last uses IsConstructibleEtaleModuleSheaf and only approximates a class, rather than proving injectivity and surjectivity from the original Scheme.IsConstructibleSheaf hypothesis.",
+   "date": "2026-10-12",
+   "verdict": "These are parts of the remaining construction, not a directly applicable proof of the whole bridge."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-curve-constructible-reduction",
+   "place": "proof, fourth and fifth steps: filtered-colimit passage from constructible to arbitrary sheaves, restricted to a fixed prime",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PrimeConstructiblePullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PrimeConstructiblePullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.bijective_cohomologyMap_of_constructible_prime",
+  "statement": "theorem bijective_cohomologyMap_of_constructible_prime\n    {X Y : Scheme.{u}} (a : Y ⟶ X)\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace Y] [QuasiSeparatedSpace Y]\n    (r : ℕ) [Fact r.Prime]\n    (H : ∀ (M : Sheaf X.smallEtaleTopology\n        (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) [Scheme.IsConstructibleSheaf M],\n      ∀ q : ℕ, Function.Bijective (cohomologyMap a\n        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))\n          AddCommGrpCat.{u + 1})).obj M) q))\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : r • 𝟙 G = 0) (q : ℕ) :\n    Function.Bijective (cohomologyMap a G q)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025731-L-1257477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025731-L-1257477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

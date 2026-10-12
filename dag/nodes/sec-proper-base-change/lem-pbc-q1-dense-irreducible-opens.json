@@ -1,0 +1,124 @@
+{
+ "id": "lem-pbc-q1-dense-irreducible-opens",
+ "kind": "statement",
+ "title": "Dense disjoint irreducible opens inside a prescribed dense open",
+ "statement": "Let k be a field, f:X → Spec k a separated finite-type curve of dimension at most one [def-weil-pbc-curve-setting], and V a dense open. There are n and pairwise disjoint nonempty irreducible opens U_a inside V, indexed by Fin n, with dense union W, topological Krull dimension of X minus W at most zero [def-kun-topological-krull-dimension], and every connected component in W of a point of W is irreducible. This includes X empty and n = 0.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC, proof, third paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the field and quasi-compactness make X Noetherian. Index its finitely many irreducible components by I. For each component C_a let O_a be the complement of the union of all other components. This is open, and its closure is C_a; these are NoetherianSpace.finite_irreducibleComponents and closure_sUnion_irreducibleComponents_sdiff_singleton. Set T_a = V intersect O_a. Density of V makes T_a nonempty. It is an open subset of C_a, hence irreducible, and closure T_a = C_a. The sets T_a are pairwise disjoint.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every point lies in some component C_a = closure T_a, so the union of the T_a is dense. Every point w of the closed complement specializes from the generic point z of a component containing w. Choose y in T_a. Since z specializes to y and T_a is open, z lies in T_a and outside the complement. Apply the proved source-library theorem topologicalKrullDim_lt_of_forall_exists_specializes to the complement inside X with d = 1 and dim X < 2. The result dim complement < 1 is dim complement at most zero by ENat.WithBot.lt_add_one_iff. This implements the dimension argument in Stacks 03SC without an additional postponed lemma.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For x in T_a, the connected component of x in the union is contained in T_a: T_a and the union of the other opens are disjoint open parts, and a connected subset meeting T_a stays in it. Conversely, irreducibility makes T_a connected, so it lies in that component. Their equality proves irreducibility of each connected component. Reindex I by Fin(card I). The empty case has no components and n = 0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "03SC, 0GJA; elementary details and ModuleCat coefficient transport written out by Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dense open finite disjoint irreducible components noetherian scheme",
+   "results": "Service unavailable: Internal Server Error; no verdict inferred from unavailability.",
+   "date": "2026-10-12",
+   "verdict": "Unavailable; semantic, type-pattern, and local source searches used instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology dense open extension by zero finite direct sum",
+   "results": "Eight hits about Profinite, locally constant functions and etale loci; no cohomology transfer assertion.",
+   "date": "2026-10-12",
+   "verdict": "No matching etale cohomology assertion transfer."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"irreducibleComponents\"",
+   "results": "Found finite-component closure tools, in particular closure_sUnion_irreducibleComponents_sdiff_singleton; no bundled curve refinement and cohomology transfer.",
+   "date": "2026-10-12",
+   "verdict": "Useful tools for the completed geometric proof, no matching module-coefficient assertion equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*irreducible|irreducible.*dense; local rg: connectedComponentIn, IsPreconnected.subset_left_of_subset_union, cohomology and direct sums",
+   "results": "Mathlib provides irreducible-space open density and finite-component closure lemmas. Local source library provides the dimension-drop theorem. DenseOpenAssertions uses CurveCoefficientPair and ULift Z, with no direct theorem for arbitrary ModuleCat Λ; no disjoint-open module-coefficient package was found.",
+   "date": "2026-10-12",
+   "verdict": "No direct matching module-coefficient assertion statement; the geometric clause is proved from the located tools."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-dense-open-reduction",
+   "place": "proof, first paragraph: shrink the finite-locally-constant dense open by removing intersections of components",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.DenseIrreducibleOpens",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DenseIrreducibleOpens.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.exists_dense_irreducible_opens",
+  "statement": "theorem exists_dense_irreducible_opens {k : Type u} [Field k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsCurve f] (V : X.Opens) (hV : Dense (V : Set X)) :\n    ∃ (n : ℕ) (U : Fin n → X.Opens),\n      (∀ a, U a ≤ V) ∧ Dense (⋃ a, (U a : Set X)) ∧\n      Pairwise (fun a b ↦ Disjoint (U a : Set X) (U b)) ∧\n      (∀ a, IsIrreducible (U a : Set X)) ∧\n      topologicalKrullDim ↥(⋃ a, (U a : Set X))ᶜ ≤ 0 ∧\n      (∀ x ∈ (⋃ a, (U a : Set X)),\n        IsIrreducible (connectedComponentIn (⋃ a, (U a : Set X)) x))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025731-L-1257477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025731-L-1257477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,6 +9,16 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
+import WeilConjectures.ConstructibleSheaf.GenericConstancy
+import Sheaf.AlgebraicGeometry.Curve.DenseIrreducibleOpens
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions
+import Sheaf.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions
+import Sheaf.AlgebraicGeometry.Curve.PrimeConstructiblePullback
+import Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage
+import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
+import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
 import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections
@@ -465,7 +475,76 @@ theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field 
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
-  sorry
+  by
+    let A := (sheafCompose C.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F
+    obtain ⟨hred, hclosed, hsurj, -⟩ :=
+      reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism C
+    let C₀ := C.nilradical.subscheme
+    let i : C₀ ⟶ C := C.nilradical.subschemeι
+    have : IsReduced C₀ := hred
+    have : IsClosedImmersion i := hclosed
+    have : Surjective i := hsurj
+    have : IsUniversalHomeomorphism i := inferInstance
+    have : IsCurve (i ≫ f) :=
+      { toIsSeparated := inferInstance
+        toLocallyOfFiniteType := inferInstance
+        toQuasiCompact := inferInstance
+        krullDim_le_one := by
+          rw [IsHomeomorph.topologicalKrullDim_eq i i.isHomeomorph]
+          exact IsCurve.krullDim_le_one (f := f) }
+    let P := pullback ι' i
+    let j : P ⟶ C' := pullback.fst ι' i
+    let a : P ⟶ C₀ := pullback.snd ι' i
+    have h₀ : IsPullback a (j ≫ f') (i ≫ f) ι :=
+      (IsPullback.of_hasPullback ι' i).flip.paste_vert h
+    have : IsProper (i ≫ f) := inferInstance
+    have : IsProper (j ≫ f') := MorphismProperty.of_isPullback h₀ inferInstance
+    have : CompactSpace C₀ := (quasiCompact_iff_compactSpace (i ≫ f)).mp inferInstance
+    have : QuasiSeparatedSpace C₀ := quasiSeparatedSpace_of_quasiSeparated (i ≫ f)
+    have : CompactSpace P := (quasiCompact_iff_compactSpace (j ≫ f')).mp inferInstance
+    have : QuasiSeparatedSpace P := quasiSeparatedSpace_of_quasiSeparated (j ≫ f')
+    let A₀ := ((i)^*[AddCommGrpCat.{u + 1}]).obj A
+    have ht : A.IsTorsion := (Scheme.isTorsionSheaf_iff_isTorsion F).mp inferInstance
+    have ht₀ : Scheme.IsTorsionAbelianSheaf A₀ :=
+      (Scheme.isTorsionAbelianSheaf_characterizations A₀).1.mpr (Etale.isTorsion_upperStar i ht)
+    have ha : Function.Bijective (Etale.cohomologyMap a A₀ q) := by
+      apply Etale.pullback_cohomology_bijective_of_prime_torsion_devissage a ?_ A₀ ht₀ q
+      intro r hr G hG q
+      have : Fact r.Prime := ⟨hr⟩
+      apply Etale.bijective_cohomologyMap_of_constructible_prime a r ?_ G hG q
+      intro M _ q
+      exact H (i ≫ f) k' h₀ r M q
+    have hi : Function.Bijective (Etale.cohomologyMap i A q) :=
+      Etale.cohomologyMap_bijective i A q
+    let e := (Sheaf.functorH P.smallEtaleTopology q).mapIso
+      ((Etale.upperStarComp AddCommGrpCat.{u + 1} a i).app A)
+    have he : Function.Bijective (Sheaf.H.map
+        ((Etale.upperStarComp AddCommGrpCat.{u + 1} a i).hom.app A) q) :=
+      e.addCommGroupIsoToAddEquiv.bijective
+    have hcomp : Etale.cohomologyMap a A₀ q ∘ Etale.cohomologyMap i A q =
+        Sheaf.H.map ((Etale.upperStarComp AddCommGrpCat.{u + 1} a i).hom.app A) q ∘
+          Etale.cohomologyMap (a ≫ i) A q :=
+      funext (Etale.cohomologyPullbackFunctorial a i A q).2.1
+    have hai : Function.Bijective (Etale.cohomologyMap (a ≫ i) A q) :=
+      (he.of_comp_iff' _).mp (hcomp ▸ ha.comp hi)
+    have hw : a ≫ i = j ≫ ι' := (pullback.condition (f := ι') (g := i)).symm
+    rw [hw] at hai
+    have hj : Function.Bijective
+        (Etale.cohomologyMap j (((ι')^*[AddCommGrpCat.{u + 1}]).obj A) q) :=
+      Etale.cohomologyMap_bijective j _ q
+    let e' := (Sheaf.functorH P.smallEtaleTopology q).mapIso
+      ((Etale.upperStarComp AddCommGrpCat.{u + 1} j ι').app A)
+    have he' : Function.Bijective (Sheaf.H.map
+        ((Etale.upperStarComp AddCommGrpCat.{u + 1} j ι').hom.app A) q) :=
+      e'.addCommGroupIsoToAddEquiv.bijective
+    have hcomp' :
+        Etale.cohomologyMap j (((ι')^*[AddCommGrpCat.{u + 1}]).obj A) q ∘
+          Etale.cohomologyMap ι' A q =
+        Sheaf.H.map ((Etale.upperStarComp AddCommGrpCat.{u + 1} j ι').hom.app A) q ∘
+          Etale.cohomologyMap (j ≫ ι') A q :=
+      funext (Etale.cohomologyPullbackFunctorial j ι' A q).2.1
+    exact (hj.of_comp_iff' _).mp (hcomp'.symm ▸ he'.comp hai)
 
 /-- **Constructible and primary reduction of the eight assertions.** Let `k` be algebraically
 closed. Suppose that the eight assertions `C(X, G)` hold for every reduced curve `X` over `k`,
@@ -511,7 +590,22 @@ theorem IsCurve.exists_dense_assertions_iff_lowerShriek [Finite Λ] {k : Type u}
       Scheme.IsFiniteLocallyConstantSheaf ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F) ∧
       (IsCurve.Assertions Λ f F ↔ IsCurve.Assertions Λ f
         ((U.ι)_!open[ModuleCat.{u + 1} Λ].obj ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F))) :=
-  sorry
+  by
+    obtain ⟨V, hV, hFV⟩ := Scheme.IsConstructibleSheaf.exists_dense_open F
+    obtain ⟨n, U, hUV, hU, -, -, -, hcomp⟩ :=
+      IsCurve.exists_dense_irreducible_opens f V hV
+    let W : X.Opens := ⨆ a, U a
+    have hW : Dense (W : Set X) := by
+      simpa only [W, TopologicalSpace.Opens.coe_iSup] using hU
+    have hWV : W ≤ V := iSup_le hUV
+    have hFW : Scheme.IsFiniteLocallyConstantSheaf
+        ((W.ι)^*[ModuleCat.{u + 1} Λ].obj F) := by
+      have := hFV
+      apply Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset W.ι V.ι
+      simpa only [Scheme.Opens.range_ι] using (show (W : Set X) ⊆ V from hWV)
+    refine ⟨W, hW, ?_, hFW, ?_⟩
+    · simpa only [W, TopologicalSpace.Opens.coe_iSup] using hcomp
+    · exact IsCurve.assertions_iff_dense_open_prime Λ f r F hF W hW
 
 /-- **Dense-open localisation, componentwise.** Let `C` be a reduced curve over an
 algebraically closed field `k` and `F` a constructible sheaf of `Λ`-modules killed by a prime
@@ -533,7 +627,20 @@ theorem IsCurve.exists_dense_assertions_iff_forall_lowerShriek [Finite Λ] {k : 
       (∀ a, Scheme.IsFiniteLocallyConstantSheaf (((U a).ι)^*[ModuleCat.{u + 1} Λ].obj F)) ∧
       (IsCurve.Assertions Λ f F ↔ ∀ a, IsCurve.Assertions Λ f
         (((U a).ι)_!open[ModuleCat.{u + 1} Λ].obj (((U a).ι)^*[ModuleCat.{u + 1} Λ].obj F))) :=
-  sorry
+  by
+    obtain ⟨V, hV, hFV⟩ := Scheme.IsConstructibleSheaf.exists_dense_open F
+    obtain ⟨n, U, hUV, hU, hdisj, hirr, hdim, -⟩ :=
+      IsCurve.exists_dense_irreducible_opens f V hV
+    have hW : Dense ((⨆ a, U a : C.Opens) : Set C) := by
+      simpa only [TopologicalSpace.Opens.coe_iSup] using hU
+    refine ⟨n, U, hU, hdisj, hirr, hdim, ?_, ?_⟩
+    · intro a
+      have := hFV
+      apply Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset (U a).ι V.ι
+      simpa only [Scheme.Opens.range_ι] using
+        (show (U a : Set C) ⊆ V from hUV a)
+    · exact (IsCurve.assertions_iff_dense_open_prime Λ f r F hF (⨆ a, U a) hW).trans
+        (IsCurve.assertions_iff_disjoint_open_prime Λ f r F hF n U hdisj)
 
 /-! ### Normalisation -/
 
