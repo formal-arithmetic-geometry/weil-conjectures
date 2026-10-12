@@ -1638,6 +1638,39 @@ theorem isReduced_baseChange [GeometricallyReduced (X ↘ Spec (.of k))] :
   GeometricallyReduced.geometrically_isReduced (f := X ↘ Spec (.of k)) _ _ _
     (IsPullback.of_hasPullback _ _)
 
+/-- **Smooth morphisms with geometrically connected fibres are geometrically integral**: their
+base changes to fields are smooth over a field, hence regular, so they are reduced and, being
+connected, irreducible.
+
+(blueprint: `prop-pc-xk-integral`, part (2)) -/
+theorem _root_.AlgebraicGeometry.GeometricallyIntegral.of_smooth_of_geometricallyConnected
+    {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] [GeometricallyConnected f] :
+    GeometricallyIntegral f :=
+  have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected f
+  have := GeometricallyReduced.of_smooth f
+  .of_geometricallyReduced_of_geometricallyIrreducible f
+
+/-- **Geometric integrality.** A smooth connected scheme `X` over a separably closed field `k`,
+e.g. a smooth projective curve, is geometrically integral over `k`: it is geometrically
+connected (`AlgebraicGeometry.GeometricallyConnected.of_isSepClosed`) and smooth.
+
+(blueprint: `prop-pc-xk-integral`, part (2)) -/
+theorem _root_.AlgebraicGeometry.GeometricallyIntegral.of_isSepClosed [IsSepClosed k]
+    [Smooth (X ↘ Spec (.of k))] [ConnectedSpace X] : GeometricallyIntegral (X ↘ Spec (.of k)) :=
+  have := GeometricallyConnected.of_isSepClosed (k := k) X
+  .of_smooth_of_geometricallyConnected _
+
+/-- **Base change of a smooth curve is integral.** For a smooth connected scheme `X` over a
+separably closed field `k`, e.g. a smooth projective curve, and a field extension `K/k`, the base
+change `X_K = X ×_{Spec k} Spec K` is integral.
+
+(blueprint: `prop-pc-xk-integral`, part (2)) -/
+theorem isIntegral_baseChange [IsSepClosed k] [Smooth (X ↘ Spec (.of k))] [ConnectedSpace X] :
+    IsIntegral (Limits.pullback (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :=
+  (GeometricallyIntegral.of_isSepClosed (k := k) (X := X)).geometrically_isIntegral _ _ _
+    (IsPullback.of_hasPullback _ _)
+
 end FieldExtension
 
 section BaseChange
