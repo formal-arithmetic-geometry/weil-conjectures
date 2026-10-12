@@ -1,0 +1,102 @@
+{
+ "id": "def-weil-pbc-finite-local-model-comparison-point",
+ "kind": "definition",
+ "title": "Universal comparison point",
+ "statement": "Given a scheme T, an etale T-scheme U and a finite etale U-scheme Q [def-weil-pbc-finite-etale-category], and a representing isomorphism e for a sheaf E [def-weil-pbc-etale-sheaf-of-sets], define a Q-point over the second projection from R = Q times_T U. Regard the first projection R to Q as a point over R to Q to U, apply the inverse of e to get a section of E on R, and apply e for the second projection R to U to get the comparison point.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03RV and 02W5; universal-point form of the Yoneda comparison"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Representation of a sheaf on the small etale site defines natural transport of arbitrary scheme points between two lifts to the local model",
+   "results": "Etale.forget and Etale.forgetFullyFaithful only; no transport construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "NatTrans.naturality supplies the section naturality identity; pullback lemmas supply the extension to arbitrary sources.",
+   "date": "2026-10-12",
+   "verdict": "supporting lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.lift.*comp|NatTrans.naturality; finiteLocalModels_transport in WeilConjectures and Sheaf",
+   "results": "Pullback universal property and naturality available; no preexisting canonical small-site transport construction.",
+   "date": "2026-10-12",
+   "verdict": "supporting lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A representation on the localized small etale site gives natural transport of scheme points by evaluating the representation on a universal point",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityDatum",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-local-model-compatible-transport-datum",
+   "place": "Explicit universal comparison and pullback construction"
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityDatum",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocalModelsDescentDatumCompatibilityDatum.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteLocalModels_comparison",
+  "statement": "def finiteLocalModels_comparison (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1))) (U : T.Etale) (Q : U.left.FiniteEtale) (e : (E.over U).obj ≅ (Etale.overToEtale U).op ⋙ uliftYoneda.{u + 1}.obj Q.obj) : Over.mk (CategoryTheory.Limits.pullback.snd (Q.obj.hom ≫ U.hom) U.hom) ⟶ Over.mk Q.obj.hom",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-19b02",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T144105-L-2092909",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-19b02",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T144105-L-2092909",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, DAG records, change records, report, and direct importers match the stated interface changes and compile cleanly."
+ }
+}
