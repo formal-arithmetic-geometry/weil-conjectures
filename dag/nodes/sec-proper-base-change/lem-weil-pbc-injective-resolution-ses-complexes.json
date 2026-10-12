@@ -49,7 +49,7 @@
    }
   },
   {
-   "text": "**Step 3 ($v$ is a quasi-isomorphism).** Both rows $0\\to A^\\bullet\\to B^\\bullet\\to C^\\bullet\\to0$ and $0\\to I_1^\\bullet\\to E^\\bullet\\to C^\\bullet\\to0$ are short exact in each degree, so they have long exact cohomology sequences [lem-weil-pbc-complex-ses-homology-long-exact], and since $(\\varphi_1,v,\\mathrm{id}_C)$ commutes with the maps of the rows ($v f=\\iota\\varphi_1$, $p v=g$) the maps $H^n(\\varphi_1),H^n(v),H^n(\\mathrm{id}_C)$ form a morphism of long exact sequences [lem-weil-pbc-complex-ses-long-exact-naturality]. For each $n$ apply the five lemma [lem-weil-pbc-five-lemma] to the segment $H^{n-1}(C^\\bullet)\\to H^n(A^\\bullet)\\to H^n(B^\\bullet)\\to H^n(C^\\bullet)\\to H^{n+1}(A^\\bullet)$ mapping to $H^{n-1}(C^\\bullet)\\to H^n(I_1^\\bullet)\\to H^n(E^\\bullet)\\to H^n(C^\\bullet)\\to H^{n+1}(I_1^\\bullet)$: the outer vertical maps $\\mathrm{id}$, $H^n(\\varphi_1)$, $\\mathrm{id}$, $H^{n+1}(\\varphi_1)$ are isomorphisms ($\\varphi_1$ is a quasi-isomorphism), hence so is $H^n(v)$. Thus $v:B^\\bullet\\to E^\\bullet$ is a quasi-isomorphism.",
+   "text": "**Step 3 ($v$ is a quasi-isomorphism).** Both rows $0\\to A^\\bullet\\to B^\\bullet\\to C^\\bullet\\to0$ and $0\\to I_1^\\bullet\\to E^\\bullet\\to C^\\bullet\\to0$ are short exact in each degree, so they have long exact cohomology sequences [lem-weil-pbc-complex-ses-homology-long-exact], and since $(\\varphi_1,v,\\mathrm{id}_C)$ commutes with the maps of the rows ($v f=\\iota\\varphi_1$, $p v=g$) the maps $H^n(\\varphi_1),H^n(v),H^n(\\mathrm{id}_C)$ form a morphism of long exact sequences [lem-weil-pbc-complex-ses-long-exact-naturality]. For each $n$ apply the five lemma [lem-weil-pbc-five-lemma] to the segment $H^{n-1}(C^\\bullet)\\to H^n(A^\\bullet)\\to H^n(B^\\bullet)\\to H^n(C^\\bullet)\\to H^{n+1}(A^\\bullet)$ mapping to $H^{n-1}(C^\\bullet)\\to H^n(I_1^\\bullet)\\to H^n(E^\\bullet)\\to H^n(C^\\bullet)\\to H^{n+1}(I_1^\\bullet)$: the outer vertical maps $\\mathrm{id}$, $H^n(\\varphi_1)$, $\\mathrm{id}$, $H^{n+1}(\\varphi_1)$ are isomorphisms ($\\varphi_1$ is a quasi-isomorphism), hence so is $H^n(v)$. Thus $v:B^\\bullet\\to E^\\bullet$ is a quasi-isomorphism. Lean implementation: apply the proved upstream HomologicalComplex.HomologySequence.quasiIso_τ₂ from WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns. Its proof uses the natural long exact homology sequence and both four-lemma halves of the five lemma; thus the same mathematical dependencies and route are retained.",
    "uses": [
     "lem-weil-pbc-complex-ses-homology-long-exact",
     "lem-weil-pbc-complex-ses-long-exact-naturality",
@@ -95,7 +95,7 @@
    }
   },
   {
-   "text": "**Step 7 (lifting $\\delta$).** The complex $I_1^\\bullet$ already consists of injectives, so (as Stacks allows) we resolve it by itself, $f_1=\\mathrm{id}$. The complex $I_1[1]^\\bullet$ ($I_1[1]^n=I_1^{n+1}$, zero for $n<-1$) is bounded below with injective terms, $C^\\bullet$ and $I_3^\\bullet$ are bounded below, and $f_3$ is a degreewise monomorphic quasi-isomorphism. By [lem-weil-pbc-lift-along-injective-quasi-iso] with $\\alpha=f_3$, $\\gamma=\\delta$ there is a morphism of complexes $\\delta':I_3^\\bullet\\to I_1[1]^\\bullet$ with $\\delta'\\circ f_3=\\delta$; explicitly $\\delta'^n:I_3^n\\to I_1^{n+1}$ with $d_{I_1}^{n+1}\\delta'^n+\\delta'^{n+1}d_{I_3}^n=0$ and $\\delta'^nf_3^n=\\delta^n$.",
+   "text": "**Step 7 (lifting $\\delta$).** The complex $I_1^\\bullet$ already consists of injectives, so (as Stacks allows) we resolve it by itself, $f_1=\\mathrm{id}$. The complex $I_1[1]^\\bullet$ ($I_1[1]^n=I_1^{n+1}$, zero for $n<-1$) is bounded below with injective terms, $C^\\bullet$ and $I_3^\\bullet$ are bounded below, and $f_3$ is a degreewise monomorphic quasi-isomorphism. By [lem-weil-pbc-lift-along-injective-quasi-iso] with $\\alpha=f_3$, $\\gamma=\\delta$ there is a morphism of complexes $\\delta':I_3^\\bullet\\to I_1[1]^\\bullet$ with $\\delta'\\circ f_3=\\delta$; explicitly $\\delta'^n:I_3^n\\to I_1^{n+1}$ with $d_{I_1}^{n+1}\\delta'^n+\\delta'^{n+1}d_{I_3}^n=0$ and $\\delta'^nf_3^n=\\delta^n$. Lean implementation: exists_strict_lift packages D, I₃, and I₁[1] in CochainComplex.Plus, obtains IsStrictlyGE from isStrictlyGE_iff and isStrictlyGE_shift, and uses modelCategoryQuillen.isFibrant_iff and weakEquivalence_iff to lift the square with the terminal morphism on its right. CommSq.fac_left gives the strict equality.",
    "uses": [
     "lem-weil-pbc-lift-along-injective-quasi-iso"
    ],
@@ -106,7 +106,7 @@
    }
   },
   {
-   "text": "**Step 8 (the complex $I_2^\\bullet$).** Put $I_2^n=I_1^n\\oplus I_3^n$ with inclusions $j^n:I_1^n\\to I_2^n$, $\\epsilon^n:I_3^n\\to I_2^n$ and projections $\\mathrm{pr}^n:I_2^n\\to I_1^n$, $q^n:I_2^n\\to I_3^n$, and $d_{I_2}^n=\\begin{pmatrix}d_{I_1}^n&\\delta'^n\\\\0&d_{I_3}^n\\end{pmatrix}$, i.e. $d_{I_2}^n=j\\,d_{I_1}\\mathrm{pr}+j\\,\\delta'q+\\epsilon\\,d_{I_3}q$. Then $d_{I_2}^{n+1}d_{I_2}^n=\\begin{pmatrix}d_{I_1}d_{I_1}&d_{I_1}\\delta'+\\delta'd_{I_3}\\\\0&d_{I_3}d_{I_3}\\end{pmatrix}=0$ by Step 7, so $I_2^\\bullet$ is a complex; $I_2^n=0$ for $n<0$; $I_2^n$, a product of two injectives, is injective [lem-weil-pbc-product-injectives]. The first column and the second row of the matrix give $d_{I_2}j=j\\,d_{I_1}$ and $q\\,d_{I_2}=d_{I_3}q$, so $j:I_1^\\bullet\\to I_2^\\bullet$ and $q:I_2^\\bullet\\to I_3^\\bullet$ are morphisms of complexes, and $0\\to I_1^n\\xrightarrow{j^n}I_2^n\\xrightarrow{q^n}I_3^n\\to0$ is (split) short exact for every $n$.",
+   "text": "**Step 8 (the complex $I_2^\\bullet$).** Put $I_2^n=I_1^n\\oplus I_3^n$ with inclusions $j^n:I_1^n\\to I_2^n$, $\\epsilon^n:I_3^n\\to I_2^n$ and projections $\\mathrm{pr}^n:I_2^n\\to I_1^n$, $q^n:I_2^n\\to I_3^n$, and $d_{I_2}^n=\\begin{pmatrix}d_{I_1}^n&\\delta'^n\\\\0&d_{I_3}^n\\end{pmatrix}$, i.e. $d_{I_2}^n=j\\,d_{I_1}\\mathrm{pr}+j\\,\\delta'q+\\epsilon\\,d_{I_3}q$. Then $d_{I_2}^{n+1}d_{I_2}^n=\\begin{pmatrix}d_{I_1}d_{I_1}&d_{I_1}\\delta'+\\delta'd_{I_3}\\\\0&d_{I_3}d_{I_3}\\end{pmatrix}=0$ by Step 7, so $I_2^\\bullet$ is a complex; $I_2^n=0$ for $n<0$; $I_2^n$, a product of two injectives, is injective [lem-weil-pbc-product-injectives]. The first column and the second row of the matrix give $d_{I_2}j=j\\,d_{I_1}$ and $q\\,d_{I_2}=d_{I_3}q$, so $j:I_1^\\bullet\\to I_2^\\bullet$ and $q:I_2^\\bullet\\to I_3^\\bullet$ are morphisms of complexes, and $0\\to I_1^n\\xrightarrow{j^n}I_2^n\\xrightarrow{q^n}I_3^n\\to0$ is (split) short exact for every $n$. Lean implementation: CochainComplex.of constructs the complex from the displayed differentials and their square-zero proof. CochainComplex.ofHom constructs j and q. Splitting.ofHasBinaryBiproduct.shortExact supplies the degreewise row. The binary biproduct injectivity instance and biprod_isZero_iff give the termwise injectivity and zero bounds.",
    "uses": [
     "lem-weil-pbc-product-injectives",
     "def-sp-abelian"
@@ -118,7 +118,7 @@
    }
   },
   {
-   "text": "**Step 9 (the morphism $\\psi:E^\\bullet\\to I_2^\\bullet$).** Define $\\psi^n=j^n\\pi^n+\\epsilon^nf_3^np^n:E^n\\to I_2^n$ (the sum of $\\mathrm{id}_{I_1^n}$ and $f_3^n$ in the splitting $E^n=I_1^n\\oplus C^n$). By Step 5 and $\\pi\\iota=\\mathrm{id}$, $\\pi s=0$, $p\\iota=0$, $ps=\\mathrm{id}$: $\\psi^{n+1}d_E^n=j(d_{I_1}\\pi+\\delta p)+\\epsilon f_3d_Cp$, while $d_{I_2}\\psi^n=j(d_{I_1}\\pi+\\delta'f_3p)+\\epsilon d_{I_3}f_3p$; these agree since $\\delta'f_3=\\delta$ (Step 7) and $d_{I_3}f_3=f_3d_C$. So $\\psi$ is a morphism of complexes, with $\\psi\\circ\\iota=j$ and $q\\circ\\psi=f_3\\circ p$.",
+   "text": "**Step 9 (the morphism $\\psi:E^\\bullet\\to I_2^\\bullet$).** Define $\\psi^n=j^n\\pi^n+\\epsilon^nf_3^np^n:E^n\\to I_2^n$ (the sum of $\\mathrm{id}_{I_1^n}$ and $f_3^n$ in the splitting $E^n=I_1^n\\oplus C^n$). By Step 5 and $\\pi\\iota=\\mathrm{id}$, $\\pi s=0$, $p\\iota=0$, $ps=\\mathrm{id}$: $\\psi^{n+1}d_E^n=j(d_{I_1}\\pi+\\delta p)+\\epsilon f_3d_Cp$, while $d_{I_2}\\psi^n=j(d_{I_1}\\pi+\\delta'f_3p)+\\epsilon d_{I_3}f_3p$; these agree since $\\delta'f_3=\\delta$ (Step 7) and $d_{I_3}f_3=f_3d_C$. So $\\psi$ is a morphism of complexes, with $\\psi\\circ\\iota=j$ and $q\\circ\\psi=f_3\\circ p$. Lean implementation: expand the degree-n splitting identity before d_E and compose with the next retraction to obtain d_E r_next = r d_I₁ + p f₃ δ′. CochainComplex.ofHom constructs ψ from this equation and the chain-map equations of p and f₃. Extensionality and the splitting retraction identity give ψι = j and qψ = f₃p.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -127,7 +127,7 @@
    }
   },
   {
-   "text": "**Step 10 ($\\psi$ is a quasi-isomorphism).** $(\\mathrm{id}_{I_1},\\psi,f_3)$ is a morphism from the degreewise short exact sequence $0\\to I_1^\\bullet\\to E^\\bullet\\to C^\\bullet\\to0$ to $0\\to I_1^\\bullet\\xrightarrow{j}I_2^\\bullet\\xrightarrow{q}I_3^\\bullet\\to0$ (Step 9). Their long exact cohomology sequences [lem-weil-pbc-complex-ses-homology-long-exact] are related by the maps $H^n(\\mathrm{id}),H^n(\\psi),H^n(f_3)$ [lem-weil-pbc-complex-ses-long-exact-naturality], and the five lemma [lem-weil-pbc-five-lemma] on $H^{n-1}(C^\\bullet)\\to H^n(I_1^\\bullet)\\to H^n(E^\\bullet)\\to H^n(C^\\bullet)\\to H^{n+1}(I_1^\\bullet)$, with outer vertical maps $H^{n-1}(f_3)$, $\\mathrm{id}$, $H^n(f_3)$, $\\mathrm{id}$ isomorphisms, shows that $H^n(\\psi)$ is an isomorphism for every $n$.",
+   "text": "**Step 10 ($\\psi$ is a quasi-isomorphism).** $(\\mathrm{id}_{I_1},\\psi,f_3)$ is a morphism from the degreewise short exact sequence $0\\to I_1^\\bullet\\to E^\\bullet\\to C^\\bullet\\to0$ to $0\\to I_1^\\bullet\\xrightarrow{j}I_2^\\bullet\\xrightarrow{q}I_3^\\bullet\\to0$ (Step 9). Their long exact cohomology sequences [lem-weil-pbc-complex-ses-homology-long-exact] are related by the maps $H^n(\\mathrm{id}),H^n(\\psi),H^n(f_3)$ [lem-weil-pbc-complex-ses-long-exact-naturality], and the five lemma [lem-weil-pbc-five-lemma] on $H^{n-1}(C^\\bullet)\\to H^n(I_1^\\bullet)\\to H^n(E^\\bullet)\\to H^n(C^\\bullet)\\to H^{n+1}(I_1^\\bullet)$, with outer vertical maps $H^{n-1}(f_3)$, $\\mathrm{id}$, $H^n(f_3)$, $\\mathrm{id}$ isomorphisms, shows that $H^n(\\psi)$ is an isomorphism for every $n$. Lean implementation: apply the proved upstream HomologicalComplex.HomologySequence.quasiIso_τ₂ from WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns. Its proof uses the natural long exact homology sequence and both four-lemma halves of the five lemma; thus the same mathematical dependencies and route are retained.",
    "uses": [
     "lem-weil-pbc-complex-ses-homology-long-exact",
     "lem-weil-pbc-complex-ses-long-exact-naturality",
@@ -165,7 +165,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma Tag 013T (lemma-injective-resolution-ses, line 6571), proof Steps 1-2, with part (2) (complexes zero in negative degrees)"
+  "place": "Lemma Tag 013T (lemma-injective-resolution-ses, line 6571), proof Steps 1-2, with part (2) (complexes zero in negative degrees); Lean implementation by G2 of all eleven existing steps, using the proved upstream quasiIso_τ₂ (the two four-lemma halves) for the middle quasi-isomorphism and the bounded-below injective lifting instance for the connecting map"
  },
  "mathlib_searches": [
   {
@@ -249,5 +249,15 @@
   "group": "C1",
   "result": "fix",
   "note": "Abelian+EnoughInjectives (u,v free); A,B,D : CochainComplex C ℤ with IsZero for n<0 (node A^n=0, n<0; as landed sibling exists_mono_quasiIso_injective_boundedBelow); degreewise SES in the landed horseshoe-family form ∃ f≫g=0, ∀ n, (mk f g _).map (eval n) ShortExact (FIX, was per-degree ∃ h on components); I_k injective termwise, zero below 0; j,q degreewise SES (same form); QuasiIso φ1 φ2 φ3; f≫φ2=φ1≫j, g≫φ3=φ2≫q; #check Injective, QuasiIso"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-16161",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
