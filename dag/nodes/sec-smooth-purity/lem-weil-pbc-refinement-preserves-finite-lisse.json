@@ -13,10 +13,32 @@
  ],
  "proof": [
   {
-   "text": "For each image containment form the fibre product of the two immersed strata. Its projection to the refined stratum is a surjective immersion, hence a closed immersion and universal homeomorphism. Pull back the original finite locally constant sheaf along the other projection, using a pulled-back trivializing cover and stalk comparison. Identify the two composite inverse images. Descend the trivialization along the equivalence of small etale sites; geometric points lift through the closed immersion, so finite stalks descend too.",
+   "text": "Choose a containing original stratum for each refined stratum. Form their fibre product. The range-containment lemma proves that its first projection is surjective; base change gives an immersion, hence a closed immersion. The existing universal-homeomorphism instance applies. No factorization of one immersion through the other is asserted.",
    "uses": [
-    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The private constant_pullback helper applies the general constant-sheaf/inverse-image adjunction with coefficients Type (u+1), then transports from abstract to constructed inverse image. The private constant_over_iff helper uses the localized-site equivalence and the set-valued restriction comparison. The private etaleSetLocallyConstant_pullback helper pulls back a trivializing cover and uses the composition comparison and fibre-product equation to identify its constant restrictions.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For descent, the private constant_descend helper identifies constructed inverse image with the inverse of the known equivalence of sheaf categories, and uses full faithfulness and the unrestricted constant-sheaf comparison to lift a constant trivialization. The private etaleSetLocallyConstant_descend helper chooses preimages of each cover member in the equivalence of etale categories. Surjectivity proves the chosen members cover. Constancy descends along the base-changed universal homeomorphism, after identifying the restrictions by composition.",
+   "uses": [
     "prop-weil-pbc-universal-homeomorphism-topos",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply preservation to the second fibre-product projection and identify its inverse image with the first projection inverse image by the composition isomorphisms and pullback.condition. Transport the trivializing cover through this isomorphism and descend local constancy. For each geometric point of the refined stratum, lift through the surjective closed immersion using exists_comp_eq_of_surjective. The second-projection stalk comparison transfers finiteness from the original stratum, the sheaf isomorphism transfers it across the square, and the first-projection stalk comparison transfers it to the desired stalk. Finite.of_injective and Finite.of_surjective give the three finite instances.",
+   "uses": [
     "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
@@ -24,15 +46,16 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
-  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
   "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "prop-weil-pbc-universal-homeomorphism-topos"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "https://stacks.math.columbia.edu/tag/03SI",
-  "place": "topological invariance, together with Tags 095A and 03Q1 (3)"
+  "document": "https://stacks.math.columbia.edu/tag/095A; https://stacks.math.columbia.edu/tag/03SI; https://stacks.math.columbia.edu/tag/03Q1",
+  "place": "095A pullback preservation, 03SI equivalence of sites/topoi, 03Q1 (3) stalk comparison; Lean adaptation by P1 of the upstream abelian-coefficient refinement argument"
  },
  "mathlib_searches": [
   {
@@ -121,10 +144,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T060758-L-2918185",
-  "kind": "interface",
+  "landing": "20261012T070545-L-3475085",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
