@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-finite-projective-complex-free-model",
+ "kind": "statement",
+ "title": "Finite free replacement of bounded above finite projective complexes",
+ "statement": "Let R be a commutative ring and P a cochain complex of R-modules (the complex conventions of [def-weil-pbc-module-chain-complex-homology], with cochain grading). Suppose P is zero in degrees above an integer b and all its terms are finitely generated [def-weil-finitely-generated-module] and projective [def-weil-pbc-projective-module]. There exist a cochain complex F, zero above the same b with every term finite free [def-weil-pbc-free-module], and a chain map f:F\\to P inducing isomorphisms on homology in every degree. The modules and ring lie in the same universe. No lower bound is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "More on Algebra, Lemma 15.66.5, Tag 064U, proof of (3) implies (1); https://stacks.math.columbia.edu/tag/064U"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "For a finite projective module M use Module.Finite.exists_comp_eq_id_of_projective to obtain a split finite free surjection f with section g. Let K=ker(f) and k(v)=v-g(f(v)). The map k is a surjection onto K and retracts its inclusion, so K is finite (Finite.of_surjective) and projective (Projective.of_split). The explicit equivalence M x K -> R^r, (m,z) -> g(m)+z, with inverse v -> (f(v),k(v)), makes M x K free. This is the proved private exists_complement helper.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "First work in natural-number chain grading. Starting with C_0=0, recursively choose C_(n+1) as the finite-projective complement to P_n x C_n using the proved helper. Set F_n=(P_n x C_n) x C_(n+1), which is finite free. Set d((p,x),y)=((d_P(p),0),x). Verify d squared is zero from the equation for P. Projection f onto P and inclusion g are chain maps, and g followed by f is the identity on P. The maps h_n((p,x),y)=((0,y),0) give a homotopy from id_F to f followed by g. At degree zero use C_0=0; in positive degrees check the two complement components directly. Thus F and P are homotopy equivalent. This is the proved private nat_free_model helper. All choices here are from already proved existence statements.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For integer-graded P, use the embedding n -> b-n and its good truncation truncLE'. Since P is strictly bounded above by b, truncLE'ToRestriction is a termwise isomorphism, transferring finite projectivity to the natural-number chain complex. Apply the previous construction and extend its output by zero along the embedding. Its terms are finite free by extendXIso on the image, and by subsingleton instances outside the image. Extension preserves the quasi-isomorphism supplied by the homotopy equivalence. Compose with truncLEIso.inv and the isomorphism iotaTruncLE to get a quasi-isomorphism to P. Extension supplies the same strict upper bound. The argument covers zero rings, zero terms and arbitrarily negative b.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "More on Algebra, Lemma 15.66.5, Tag 064U, proof of (3) implies (1); https://stacks.math.columbia.edu/tag/064U"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex of finite projective modules is homotopy equivalent to a bounded above complex of finite free modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex of finite projective modules has a bounded above finite free representative in the derived category",
+   "results": "8 hits, including CochainComplex.isKProjective_of_projective and projective-resolution K-projectivity. No finite-free replacement theorem.",
+   "verdict": "No exact match; wrote the complement-pair argument from Stacks 064U.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite.exists_comp_eq_id_of_projective",
+   "results": "Exact split finite-free-surjection lemma in Mathlib.RingTheory.Finiteness.Projective.",
+   "verdict": "Used for the fully proved complement helper; not a match for the complex theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "finite[Pp]rojective.*[Ff]ree|finite_projective.*free|projective.*[Pp]seudo[Cc]oherent; exists_comp_eq_id_of_projective; quasiIso_extendMap_iff",
+   "results": "No complex replacement match. Read Mathlib/RingTheory/Finiteness/Projective.lean:30 (split finite-free surjection), and Embedding/ExtendHomology.lean:437-452 (extension preserves quasi-isomorphisms).",
+   "verdict": "Used these proved Mathlib tools and an explicit recursive construction and homotopy.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatPseudoCoherent",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Step 2 of lem-pc-affine-finite-presentation-flat-pseudo-coherent: the finite projective complement-pair construction",
+   "via": [
+    "lem-pc-affine-finite-presentation-flat-pseudo-coherent",
+    "lem-pc-affine-finite-presentation-flat-shortening",
+    "lem-pc-proper-flat-cohomology-model-properties",
+    "lem-pc-proper-flat-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteProjectiveComplexFreeModel",
+  "file": "lean/Sheaf/RingTheory/FiniteProjectiveComplexFreeModel.lean",
+  "declaration": "CochainComplex.exists_finiteFree_model_of_finite_projective",
+  "statement": "theorem exists_finiteFree_model_of_finite_projective (R : Type u) [CommRing R]\n    (P : CochainComplex (ModuleCat.{u} R) ℤ) (b : ℤ) (hb : P.IsStrictlyLE b)\n    (hfinite : ∀ n : ℤ, Module.Finite R (P.X n))\n    (hprojective : ∀ n : ℤ, Module.Projective R (P.X n)) :\n    ∃ F : CochainComplex (ModuleCat.{u} R) ℤ, F.IsStrictlyLE b ∧\n      (∀ n : ℤ, Module.Free R (F.X n) ∧ Module.Finite R (F.X n)) ∧\n      ∃ f : F ⟶ P, QuasiIso f",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T231633-L-1961523",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T231633-L-1961523",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
