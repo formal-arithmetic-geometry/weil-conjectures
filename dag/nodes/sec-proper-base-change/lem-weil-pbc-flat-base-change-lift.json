@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-flat-base-change-lift",
+ "kind": "statement",
+ "title": "Existence of an augmented flat-pushforward resolution lift",
+ "statement": "For f:X→S and g:S′→S with g′=pullback.snd g f flat, F an O_X-module and injective resolutions I of F and J of g′^*F, there exists a chain map t:I→g′_*J with I.ι⁰ t⁰ = η_F g′_*(J.ι⁰). [def-sp-injective-resolutions] [def-pc-module-pullback] [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective]",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7, 01FB, 01E4; parent node steps 1"
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+ ],
+ "proof": [
+  {
+   "text": "Pushforward along g′ preserves injectives by flatness. Extend the unit followed by g′_*(J.ι⁰) across the monomorphism I.ι⁰ into the injective object g′_*(J⁰), obtaining z. The composite z d vanishes on F because J.ι⁰ d=0. Use I.exact₀.descToInjective to extend z d across I.d⁰, obtaining degree one. Inductively I.exact_succ n extends each next composite across the next differential: the previous chain-map equation and d²=0 give the necessary vanishing. CochainComplex.mkHom assembles the components; mkHom_f_0 gives the prescribed augmentation.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7, 01FB, 01E4; the parent proof split, with degreewise lift construction using Mathlib InjectiveResolution.desc"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extend an augmented injective resolution to a cochain map into a complex of injectives",
+   "results": "Service unavailable (Internal Server Error), 2026-10-12; no verdict recorded."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective resolution extend morphism to complex of injectives",
+   "results": "InjectiveResolution.desc, descFZero, descFOne, descFSucc; desc requires a target resolution rather than a general injective complex. Its degreewise method is usable and is implemented in augmentedLift.",
+   "date": "2026-10-12",
+   "verdict": "Partial match: direct construction for the lift, no match for resolution independence or the section formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mkHom",
+   "results": "mkHom and mkHom_f_0 provide the constructor and its degree-zero equation.",
+   "date": "2026-10-12",
+   "verdict": "Used for the proved lift."
+  },
+  {
+   "tool": "grep",
+   "query": "flatBaseChange|baseChangeMap; rg flatBaseChangeMap_sections|FlatBaseChangeOpenChoices lean/WeilConjectures lean/Sheaf",
+   "results": "No existing proof of the section theorem; existing restricted choices and section classes are in FlatBaseChangeOpenChoices and the parent module.",
+   "date": "2026-10-12",
+   "verdict": "No shorter route for the remaining three parts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections",
+  "group": "R2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "lem-weil-pbc-flat-base-change-map-sections: Existence of an augmented flat-pushforward resolution lift",
+   "via": [
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "lem-weil-pbc-flat-base-change-map-sections"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeMapSectionsLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionLift",
+  "statement": "theorem flatBaseChangeResolutionLift {X S S' : Scheme.{uBC}}\n    (f : X ⟶ S) (g : S' ⟶ S) [Flat (pullback.snd g f)]\n    {F : X.Modules} (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)) :\n    ∃ t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj J.cocomplex,\n      I.ι.f 0 ≫ t.f 0 =\n        (Classical.choose (exists_tensorPullbackAdjunction (pullback.snd g f))).unit.app F ≫\n          (pushforward (pullback.snd g f)).map (J.ι.f 0)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7c799",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T160142-L-2566203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7c799",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T160142-L-2566203",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, unchanged construction bodies and public re-exports with the nodes and change record; all six modules compile cleanly, axioms checked, direct importers: none. Accepted as a decomposition with three documented holes."
+ }
+}

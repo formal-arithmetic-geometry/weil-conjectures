@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-flat-base-change-open-choices-exist",
+ "kind": "statement",
+ "title": "Existence of compatible open restriction choices",
+ "statement": "For f:X→S, g:S′→S with g and g′ flat, F an O_X-module, I an injective resolution of F, J an injective resolution of g′^*F, and every open V⊂S, FlatBaseChangeOpenChoices f g F I J V is inhabited. This requires the canonical restricted unit square, the augmentation-preserving resolution isomorphisms and the pinned section components in [def-weil-pbc-flat-base-change-open-choices], not arbitrary section isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7, 01FB, 01E4; parent node steps 2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "proof": [
+  {
+   "text": "Restrict I and J termwise to U = f⁻¹V and W = g'⁻¹U. Transport the exactness and injectivity of overFunctor across overFunctorEquiv (as in the existing proof of module_sections_acyclic_of_cohomology_vanishing). Thus restrictFunctor is exact and preserves injectives, so the restricted augmentations give resolutions of\n the restricted modules. Identify sections using restrictAppIso, evaluated at\n the top open, followed by the equality that the inclusion maps the top to U\n (respectively W). These identifications satisfy the specified components.\n Restrict the original pullback unit to U and transpose across restriction's\n adjunction to define psi. On an open T in U, the unit sends m to 1 tensor m;\n restricting the original unit gives the same map on h⁻¹T. With the canonical\n pushforward composition identifications this is exactly unit_square. Bundle\n these choices to obtain the required inhabitant.",
+   "uses": [
+    "lem-weil-pbc-module-open-restriction-injectives",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-open-restriction-injectives",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7, 01FB, 01E4; the parent proof split, with degreewise lift construction using Mathlib InjectiveResolution.desc"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extend an augmented injective resolution to a cochain map into a complex of injectives",
+   "results": "Service unavailable (Internal Server Error), 2026-10-12; no verdict recorded."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective resolution extend morphism to complex of injectives",
+   "results": "InjectiveResolution.desc, descFZero, descFOne, descFSucc; desc requires a target resolution rather than a general injective complex. Its degreewise method is usable and is implemented in augmentedLift.",
+   "date": "2026-10-12",
+   "verdict": "Partial match: direct construction for the lift, no match for resolution independence or the section formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mkHom",
+   "results": "mkHom and mkHom_f_0 provide the constructor and its degree-zero equation.",
+   "date": "2026-10-12",
+   "verdict": "Used for the proved lift."
+  },
+  {
+   "tool": "grep",
+   "query": "flatBaseChange|baseChangeMap; rg flatBaseChangeMap_sections|FlatBaseChangeOpenChoices lean/WeilConjectures lean/Sheaf",
+   "results": "No existing proof of the section theorem; existing restricted choices and section classes are in FlatBaseChangeOpenChoices and the parent module.",
+   "date": "2026-10-12",
+   "verdict": "No shorter route for the remaining three parts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction to open subscheme preserves injective resolutions of sheaves of modules",
+   "results": "Generic injective-resolution constructors and injectivity instances; no bundled restricted choices with the specified unit square and pinned sections.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: useful ingredients, no duplicate of this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictAppIso\"",
+   "results": "Found restrictAppIso and its naturality equations, which give the degreewise sections comparison.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: useful ingredients, no duplicate of this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctor.*Injective|Injective.*restrictFunctor; local rg on lean/Sheaf and lean/WeilConjectures",
+   "results": "ModuleSectionsAcyclicOfCohomologyVanishing contains a proved local construction of the restricted injective resolution and sections comparison using overFunctorEquiv; ModuleCechVanishingCriterion contains local restriction exactness/injectivity. Neither exports the complete FlatBaseChangeOpenChoices inhabitant or its unit square.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: useful ingredients, no duplicate of this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections",
+  "group": "R2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "lem-weil-pbc-flat-base-change-map-sections: Existence of compatible open restriction choices",
+   "via": [
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "lem-weil-pbc-flat-base-change-map-sections"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeOpenChoicesExist.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeMap_sections_choices",
+  "statement": "theorem flatBaseChangeMap_sections_choices {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S)\n    [Flat g] [Flat (pullback.snd g f)] (F : X.Modules) :\n    ∀ (I : InjectiveResolution F)\n      (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)) (V : S.Opens),\n      Nonempty (FlatBaseChangeOpenChoices f g F I J V)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7c799",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T160142-L-2566203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7c799",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T160142-L-2566203",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, unchanged construction bodies and public re-exports with the nodes and change record; all six modules compile cleanly, axioms checked, direct importers: none. Accepted as a decomposition with three documented holes."
+ }
+}

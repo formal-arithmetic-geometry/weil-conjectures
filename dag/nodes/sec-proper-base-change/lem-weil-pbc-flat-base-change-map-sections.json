@@ -35,95 +35,44 @@
  ],
  "proof": [
   {
-   "text": "Injective resolutions exist by [lem-weil-pbc-scheme-modules-enough-injectives]. By [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective], each $g'_*\\mathcal J^n$ is injective. Apply [lem-weil-pbc-lift-along-injective-quasi-iso] to the degreewise monic quasi-isomorphism $a:\\mathcal F[0]\\to\\mathcal I^\\bullet$ and the chain map $g'_*(b)\\eta_{\\mathcal F}$ to obtain $t$; the augmentation is monic by exactness of the resolution. [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] makes two choices homotopic. On an open $V\\subseteq S$, $(f_*g'_*\\mathcal J^n)(V)=\\mathcal J^n(g'{}^{-1}f^{-1}V)=\\mathcal J^n(f'{}^{-1}g^{-1}V)=(g_*f'_*\\mathcal J^n)(V)$; the equality respects restrictions and differentials. The adjunction of [def-pc-module-pullback] therefore defines $c$. It preserves homotopies termwise by [lem-weil-pbc-termwise-adjunction-homotopy]. Comparison lifts between two injective resolutions, and their composites, are homotopy inverse by the same lift and uniqueness nodes. Composing $t$ with these lifts gives the same augmented map up to homotopy, so the construction is also independent of resolutions.",
+   "text": "Take Mathlib injectiveResolution F and injectiveResolution(g′^*F), and obtain an augmented lift by lem-weil-pbc-flat-base-change-lift. Set beta to the actual flatBaseChangeResolutionBeta of these choices. Pairwise resolution independence proves its equality with the construction for every other valid lift.",
    "uses": [
     "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-    "def-pc-module-pullback",
-    "lem-weil-pbc-termwise-adjunction-homotopy"
+    "lem-weil-pbc-flat-base-change-lift",
+    "lem-weil-pbc-flat-base-change-resolution-independence",
+    "def-weil-pbc-flat-base-change-resolution-construction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "02N7, lemma-base-change-map-flat-case, cohomology.tex lines 2977-3031; 02N5, lemma-pushforward-injective-flat, line 1821; derived.tex lemma-morphisms-lift and lemma-morphisms-equal-up-to-homotopy (013P/013S)"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $U=f^{-1}V$, $W=g'{}^{-1}U=f'{}^{-1}g^{-1}V$ and $h=g'|_W:W\\to U$. Both restricted augmentations are injective resolutions by [lem-weil-pbc-module-open-restriction-injectives]. Restriction of $t$ is a chain map $t_U:\\mathcal I^\\bullet|_U\\to h_*(\\mathcal J^\\bullet|_W)$ with $t_Ua|_U=h_*(b|_W)\\eta_{\\mathcal F|_U}$. Indeed the unit on an open $T\\subseteq U$ sends $x\\in\\mathcal F(T)$ to $1\\otimes x$ in the pullback over $h^{-1}T$; restricting the original unit gives that same tensor. The identification $h^*(\\mathcal F|_U)=(g'{}^*\\mathcal F)|_W$ follows directly from the tensor/inverse-image definition [def-pc-module-pullback]: on $W$ the ring sheaves and inverse-image sheaves in both tensors coincide (the opens of $U$ are cofinal near each point mapping into $U$). Thus no unspecified transport of cohomology is being used.",
+   "text": "For every resolution pair and V use lem-weil-pbc-flat-base-change-open-choices-exist.",
    "uses": [
-    "lem-weil-pbc-module-open-restriction-injectives",
-    "def-pc-module-pullback"
+    "lem-weil-pbc-flat-base-change-open-choices-exist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "01FB, remark-explain-arrow, restriction of its augmented diagram to U and W; 01E4, lemma-describe-higher-direct-images; the tensor identification and restricted-unit calculation are written out by the agent"
-   }
+   "elementary": false
   },
   {
-   "text": "For every $V$ the chain map of sections is explicitly $q_V^n=t_U^n(U):\\mathcal I^n(U)\\to\\mathcal J^n(W)$. To compute the pullback $h^*$ in [def-weil-pbc-module-cohomology-fmap] (a), use these restricted resolutions and choose a quasi-isomorphism $\\lambda:h_*(\\mathcal J^\\bullet|_W)\\to L^\\bullet$ into injectives. It exists by [lem-weil-pbc-complex-injective-resolution-mono]. The comparison map in that definition can be chosen as $\\lambda t_U$, since its composite with $a|_U$ is precisely the prescribed augmented map. Write $\\mu=\\Gamma(U,\\lambda)$, identifying $\\Gamma(U,h_*\\mathcal J|_W)=\\Gamma(W,\\mathcal J|_W)$. By [lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso], $H^p(\\mu)$ is invertible. The defining formula is consequently $h^*=H^p(\\mu)^{-1}H^p(\\mu q_V)=H^p(q_V)$. In particular a cocycle $s\\in\\mathcal I^p(U)$ representing $\\xi$ maps to the cocycle $t_U^p(U)(s)\\in\\mathcal J^p(W)$.",
+   "text": "For a given I₁,J₁,V,D,xi obtain its own augmented lift t₁ by lem-weil-pbc-flat-base-change-lift. Apply the fixed-lift section formula. Rewrite its constructed beta to the originally selected beta by pairwise resolution independence. This proves the section formula even for resolutions different from those selecting beta.",
    "uses": [
-    "def-weil-pbc-module-cohomology-fmap",
-    "lem-weil-pbc-complex-injective-resolution-mono",
-    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
-    "lem-weil-pbc-module-open-restriction-injectives"
+    "lem-weil-pbc-flat-base-change-lift",
+    "lem-weil-pbc-flat-base-change-resolution-independence",
+    "lem-weil-pbc-flat-base-change-resolution-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "01FB, remark-explain-arrow, diagram equation-choice and definition of the cohomology arrow; 01EZ, lemma-before-Leray; applied here to the restricted resolutions from step 2"
-   }
-  },
-  {
-   "text": "If $V_0\\subseteq V$, put $U_0=f^{-1}V_0$ and $W_0=g'{}^{-1}U_0$. Since $t^n$ is a sheaf morphism, $\\operatorname{res}^{W}_{W_0}q_V^n=q_{V_0}^n\\operatorname{res}^{U}_{U_0}$ in each degree. Restrictions on cohomology are the maps of these section complexes: use the restricted resolutions and the identity comparison in [def-weil-pbc-module-cohomology-fmap] (b), justified by [lem-weil-pbc-module-open-restriction-injectives]. Thus the $H^p(q_V)$ form a presheaf map into $V\\mapsto(R^pf'_*\\mathcal F')(g^{-1}V)$ after the canonical maps $\\theta'$ of [lem-weil-pbc-higher-direct-image-presheaf]. This target is a sheaf by the direct-image definition. Sheafification [def-weil-pbc-sheafification] gives a unique sheaf morphism $m:R^pf_*\\mathcal F\\to g_*R^pf'_*\\mathcal F'$ with $m_V\\theta_V=\\theta'_{g^{-1}V}H^p(q_V)$.",
-   "uses": [
-    "def-weil-pbc-module-cohomology-fmap",
-    "lem-weil-pbc-module-open-restriction-injectives",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "def-weil-pbc-sheafification",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "01E4, lemma-describe-higher-direct-images, presheaf restriction maps and sheafification; 01FB, remark-explain-arrow; the degreewise restriction square is written out by the agent"
-   }
-  },
-  {
-   "text": "Finally $q=g_*c\\,\\eta_A$ by adjunction. Locally every section of $\\mathcal H^p(A)$ is represented by a cocycle $s$ of $A^p$, by [lem-weil-pbc-higher-direct-image-presheaf]. Exactness of $g^*$ identifies $g^*\\mathcal H^p(A)$ with $\\mathcal H^p(g^*A)$: kernels and images are preserved. On the corresponding local class the unit sends $[s]$ to the class of $\\eta_A(s)$, and $\\mathcal H^p(c)$ then sends it to $[c\\eta_A(s)]=[q(s)]$. Hence the adjoint $\\beta^\\flat$ satisfies $\\beta^\\flat_V\\theta_V(\\xi)=\\theta'_{g^{-1}V}H^p(q_V)(\\xi)$, the same formula defining $m$; uniqueness of sheafification gives $\\beta^\\flat=m$. Step 3 substitutes $H^p(q_V)=h^*$, proving the stated formula.",
-   "uses": [
-    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
-    "def-pc-module-pullback",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "02N7, lemma-base-change-map-flat-case, lines 3020-3031 (termwise adjunction); 01E4, lemma-describe-higher-direct-images (cocycle-to-sheafification map); the local cocycle comparison is written out by the agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "def-weil-pbc-module-cohomology-fmap",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-complex-injective-resolution-mono",
-  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-lift-along-injective-quasi-iso",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-  "lem-weil-pbc-module-open-restriction-injectives",
-  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
-  "lem-weil-pbc-scheme-modules-enough-injectives",
-  "lem-weil-pbc-termwise-adjunction-homotopy"
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "lem-weil-pbc-flat-base-change-lift",
+  "lem-weil-pbc-flat-base-change-open-choices-exist",
+  "lem-weil-pbc-flat-base-change-resolution-independence",
+  "lem-weil-pbc-flat-base-change-resolution-sections",
+  "lem-weil-pbc-scheme-modules-enough-injectives"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology of Sheaves, Lemma 02N7 (flat base-change map) and Lemma 01E4 (higher direct images on sections), with Remark 01FB"
+  "place": "Tags 02N7, 01FB, 01E4; reduction to pairwise resolution independence, canonical restricted choices and the fixed-lift section formula; augmented lift proved degreewise"
  },
  "mathlib_searches": [
   {
@@ -187,15 +136,6 @@
   "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections",
   "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeMap_sections",
   "declarations": [
-   "AlgebraicGeometry.Scheme.Modules.flatBaseChangePullbackLimits",
-   "AlgebraicGeometry.Scheme.Modules.flatBaseChangePullbackColimits",
-   "AlgebraicGeometry.Scheme.Modules.flatBaseChangePullbackAdditive",
-   "AlgebraicGeometry.Scheme.Modules.flatBaseChangePushforwardSquare",
-   "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionQ",
-   "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionC",
-   "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionBeta",
-   "AlgebraicGeometry.Scheme.Modules.FlatBaseChangeOpenChoices.sourceClass",
-   "AlgebraicGeometry.Scheme.Modules.FlatBaseChangeOpenChoices.targetClass",
    "AlgebraicGeometry.Scheme.Modules.flatBaseChangeMap_sections"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeMapSections.lean",
@@ -212,5 +152,15 @@
   "group": "R1",
   "result": "fix",
   "note": "f,g,[Flat g],[Flat g'] with X'=pullback g f; F'=tensorPullback g'; beta tied to H^p(c) for every I,J,t with t a = g'_*(b) eta; beta-flat via the exists_tensorPullbackAdjunction homEquiv; open choices pinned (psi by restriction-unit square, sections by restrictAppIso); section formula with moduleCohomologyFMap of g'.resLE and psi; theta moved into the new node's module, dependency record reverted; reverted the delivery's change of existing node(s) lem-weil-pbc-higher-direct-image-presheaf (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7c799",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T160142-L-2566203",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, unchanged construction bodies and public re-exports with the nodes and change record; all six modules compile cleanly, axioms checked, direct importers: none. Accepted as a decomposition with three documented holes."
  }
 }

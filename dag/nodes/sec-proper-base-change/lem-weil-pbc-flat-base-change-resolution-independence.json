@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-flat-base-change-resolution-independence",
+ "kind": "statement",
+ "title": "Pairwise independence of the resolution base-change maps",
+ "statement": "For f:X→S, g:S′→S with g and g′ flat, an O_X-module F and p≥0, any two injective-resolution pairs (I,J), (I₁,J₁), with augmented lifts t and t₁ of the unit of g′^*, give the same flatBaseChangeResolutionBeta. The construction is that of [def-weil-pbc-flat-base-change-resolution-construction]; resolutions and lifts have exactly the augmentation equation of [lem-weil-pbc-flat-base-change-lift].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7, 01FB, 01E4; parent node steps 1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "lem-weil-pbc-flat-base-change-lift"
+ ],
+ "proof": [
+  {
+   "text": "Compare I and I₁ by lifts of the identity of F, and J and J₁ by lifts of\n the identity of g'^*F. Their composites are homotopic to identities. Pushforward\n preserves injectives because g' is flat. The two augmented maps into the pushed\n target resolution are homotopic by uniqueness of lifts. Apply f_*, the square\n isomorphism, and the termwise adjunction; these preserve homotopies. Homology\n identifies the two resulting maps. Naturality of the exact pullback homology\n comparison and of isoRightDerivedObj cancels the resolution comparisons, giving\n the asserted equality on the fixed derived objects.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 02N7, 01FB, 01E4; the parent proof split, with degreewise lift construction using Mathlib InjectiveResolution.desc"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extend an augmented injective resolution to a cochain map into a complex of injectives",
+   "results": "Service unavailable (Internal Server Error), 2026-10-12; no verdict recorded."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective resolution extend morphism to complex of injectives",
+   "results": "InjectiveResolution.desc, descFZero, descFOne, descFSucc; desc requires a target resolution rather than a general injective complex. Its degreewise method is usable and is implemented in augmentedLift.",
+   "date": "2026-10-12",
+   "verdict": "Partial match: direct construction for the lift, no match for resolution independence or the section formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mkHom",
+   "results": "mkHom and mkHom_f_0 provide the constructor and its degree-zero equation.",
+   "date": "2026-10-12",
+   "verdict": "Used for the proved lift."
+  },
+  {
+   "tool": "grep",
+   "query": "flatBaseChange|baseChangeMap; rg flatBaseChangeMap_sections|FlatBaseChangeOpenChoices lean/WeilConjectures lean/Sheaf",
+   "results": "No existing proof of the section theorem; existing restricted choices and section classes are in FlatBaseChangeOpenChoices and the parent module.",
+   "date": "2026-10-12",
+   "verdict": "No shorter route for the remaining three parts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homotopy invariance comparison injective resolutions higher derived functor",
+   "results": "Found InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality and related comparisons; these provide resolution transport, not the equality for the two different derived functors in this lemma.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: useful ingredients, no duplicate of this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoRightDerivedObj\"",
+   "results": "Found isoRightDerivedObj_hom_naturality and isoRightDerivedObj_inv_naturality; useful for cancelling the source and target comparisons after constructing the homotopy.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: useful ingredients, no duplicate of this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionCohomologyTheta|resolutionSectionClass|ModuleCohomologyFMapData.*map; local rg on lean/Sheaf and lean/WeilConjectures",
+   "results": "No existing pairwise flatBaseChangeResolutionBeta comparison. ModuleBaseChangeMapOpenRestriction is underived, and DerivedModuleBaseChangeMap uses a different derived construction.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: useful ingredients, no duplicate of this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections",
+  "group": "R2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "lem-weil-pbc-flat-base-change-map-sections: Pairwise independence of the resolution base-change maps",
+   "via": [
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "lem-weil-pbc-flat-base-change-map-sections"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIndependence",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeResolutionIndependence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionBeta_independent",
+  "statement": "theorem flatBaseChangeResolutionBeta_independent {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S)\n    [Flat g] [Flat (pullback.snd g f)] {F : X.Modules}\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex)\n    (ht : I.ι.f 0 ≫ t.f 0 =\n      (Classical.choose (exists_tensorPullbackAdjunction (pullback.snd g f))).unit.app F ≫\n        (pushforward (pullback.snd g f)).map (J.ι.f 0))\n    (I₁ : InjectiveResolution F)\n    (J₁ : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (t₁ : I₁.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J₁.cocomplex)\n    (ht₁ : I₁.ι.f 0 ≫ t₁.f 0 =\n      (Classical.choose (exists_tensorPullbackAdjunction (pullback.snd g f))).unit.app F ≫\n        (pushforward (pullback.snd g f)).map (J₁.ι.f 0))\n    (p : ℕ) :\n    flatBaseChangeResolutionBeta f g I J t p =\n      flatBaseChangeResolutionBeta f g I₁ J₁ t₁ p",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7c799",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T160142-L-2566203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7c799",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T160142-L-2566203",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, unchanged construction bodies and public re-exports with the nodes and change record; all six modules compile cleanly, axioms checked, direct importers: none. Accepted as a decomposition with three documented holes."
+ }
+}
