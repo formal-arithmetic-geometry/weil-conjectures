@@ -5,7 +5,12 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import Sheaf.AlgebraicGeometry.FormalSystemsPushPullComparison
+import Sheaf.AlgebraicGeometry.FormalSystemsPushPullAffineAnnihilation
 
 @[expose] public section
 
@@ -14,6 +19,33 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
+
+private theorem formalPushforward_coherent {X Y : Scheme.{u}} [IsNoetherian Y]
+    (f : X ⟶ Y) [IsProper f] (F : CoherentModules X) :
+    RingedSpace.IsCoherent Y.toRingedSpace ((Scheme.Modules.pushforward f).obj F.obj) := by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have := Scheme.Modules.isGrothendieckAbelian X
+  have hcoh : F.obj.IsFinitePresentation := by
+    have hq :=
+      (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F.obj).mp F.property
+    have : F.obj.IsQuasicoherent := hq.1
+    have hs := (Scheme.Modules.isCoherent_pushforward_of_isFinite (𝟙 X) F.obj F.property).2
+    have hloc (U : X.affineOpens) : (F.obj.over U.1).IsFinitePresentation := by
+      have : IsNoetherianRing Γ(X, U.1) := IsLocallyNoetherian.component_noetherian U
+      have : Module.Finite Γ(X, U.1) Γ(F.obj, U.1) := hs U.1 U.2 |>.2
+      exact (((Scheme.Modules.quasicoherent_finite_type_affine.{u, u} X).2 F.obj inferInstance).1
+        U.1 U.2).2.mpr (Module.finitePresentation_of_finite Γ(X, U.1) Γ(F.obj, U.1))
+    exact SheafOfModules.IsFinitePresentation.of_coversTop F.obj (fun U : X.affineOpens ↦ U.1)
+      ((Opens.coversTop_iff X _).mpr
+        (TopologicalSpace.IsOpenCover.mk (iSup_affineOpens_eq_top X)))
+  have hq := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F.obj).mp F.property
+  have := hq.1
+  have hfp := Scheme.Modules.isFinitePresentation_higherDirectImage f F.obj 0
+  have hp : ((Scheme.Modules.pushforward f).obj F.obj).IsFinitePresentation :=
+    (SheafOfModules.isFinitePresentation Y.ringCatSheaf).prop_of_iso
+      ((Scheme.Modules.pushforward f).rightDerivedZeroIsoSelf.app F.obj) hfp
+  exact (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType Y _).mpr
+    ⟨inferInstance, inferInstance⟩
 
 /-- Core comparison and termwise annihilation needed for the formal push-pull theorem.
 Source: Stacks Project, Cohomology of Schemes, Lemma 088B and Remark 0888.
@@ -38,6 +70,12 @@ theorem exists_formalSystemsPushPull_core {X Y : Scheme.{u}} [IsNoetherian Y]
           IsZero (Scheme.idealModuleProduct
             (Scheme.idealSheafPower K.toModulesι t).2
             (cokernel (α.hom.app (op n)))) := by
-  sorry
+  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction f
+  have h := formalPushforward_coherent f F
+  obtain ⟨κ, α, hκ, hα⟩ := exists_formalSystemsPushPull_comparison J f adj G F _β h
+  refine ⟨h, α, ?_⟩
+  have ha := formalSystemsPushPull_affine_annihilation J K f _hV adj G F _β h κ α hκ hα
+  exact (List.TFAE.out (coherentFormalModule_annihilated_iff Y J K G
+    ((completion Y J).obj ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩) α) 1 0).mp ha
 
 end AlgebraicGeometry

@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-formal-systems-push-pull-comparison",
+ "kind": "statement",
+ "title": "Construction of the canonical formal push-pull comparison",
+ "statement": "Let Y be a Noetherian scheme, J a quasi-coherent ideal sheaf on Y, f:X\\to Y a proper morphism [def-weil-proper-morphism], G a coherent J-adic formal system on Y and F a coherent module on X [def-weil-pbc-coherent-formal-module, pqf-def-coherent]. Fix an adjunction a:f^*\\dashv f_* for tensor pullback [def-pc-module-pullback] and an isomorphism \\beta:(f^*G_n)_n\\simeq(F/(J\\mathcal O_X)^{n+1}F)_n. Assume H=f_*F is coherent, and write \\pi^J_n:H\\to H/J^{n+1}H and \\pi^I_n:F\\to F/(J\\mathcal O_X)^{n+1}F for the quotient projections. There exist a map of inverse systems \\kappa:H^\\wedge\\to(f_*(F/(J\\mathcal O_X)^{n+1}F))_n and a map \\alpha:G\\to H^\\wedge of coherent formal modules such that for every n\\ge0, \\pi^J_n\\kappa_n=f_*(\\pi^I_n) and \\alpha_n\\kappa_n=\\eta_{G_n}f_*(\\beta_n), where \\eta is the unit of a and juxtaposition denotes composition in diagrammatic order. No exceptional ideal or annihilation hypothesis is assumed.",
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 088B (lemma-inverse-systems-push-pull), https://stacks.math.columbia.edu/tag/088B; first half of the proof: construction and uniqueness of alpha, parent proof steps 3--5"
+ },
+ "proof": [
+  {
+   "text": "At each positive level the pushed quotient projection kills J^(n+1)H, using the pullback-ideal quotient identity. Factor it uniquely through the cokernel projection pi^J_n. Naturality and cancellation of these epimorphisms give the inverse-system map kappa; the unit of the given adjunction and beta similarly give gamma.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "def-pc-module-pullback",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict to an affine open. The degree-zero formal-functions comparison identifies lim kappa with an isomorphism. Compose its inverse with lim gamma. The affine equivalence carries this completed-module map to alpha; surjective limit projections and the affine tilde/sections equivalence give kappa_n alpha_n = gamma_n, and uniqueness.",
+   "uses": [
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All equations commute with open restriction. Uniqueness on smaller affine opens identifies the restrictions. Glue the component sheaf maps over the affine basis, checking transition compatibility and the two equations on the cover.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-ideal-quotient",
+  "def-pc-module-pullback",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-theorem-formal-functions",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-formal-systems-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 088B, first half of the proof: construction and uniqueness of alpha, parent proof steps 3--5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism of noetherian schemes pushes forward coherent modules; formal completion comparison has kernel and cokernel annihilated by a power of an ideal",
+   "results": "AdicCompletion.map_exact, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AdicCompletion.flat_of_isNoetherian, localCohomology, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AdicCompletion.map_injective, CondensedMod.IsSolid, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct the canonical comparison of a coherent formal system with the completion of a proper pushforward using formal functions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel and cokernel of the affine limit of a canonical formal pushforward comparison are annihilated by a power of the exceptional ideal",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, localCohomology.diagram, localCohomology, localCohomology.ofSelfLERadical, localCohomology.ofDiagram, localCohomology.isoSelfLERadical",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalCompletionSystem|formalSystemsPushPull|inverse.systems.push.pull",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalSystemsPushPullCore",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "proof, essential-surjectivity paragraphs via proper Grothendieck existence; first half of the proof: construction and uniqueness of alpha, parent proof steps 3--5",
+   "via": [
+    "lem-weil-pbc-formal-systems-push-pull-core",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalSystemsPushPullComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalSystemsPushPullComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_formalSystemsPushPull_comparison",
+  "statement": "theorem exists_formalSystemsPushPull_comparison {X Y : Scheme.{u}} [IsNoetherian Y]\n    (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]\n    (adj : Scheme.Modules.tensorPullback f ⊣ Scheme.Modules.pushforward f)\n    (G : CoherentFormalModule Y J) (F : CoherentModules X)\n    (β : G.obj ⋙ Scheme.Modules.tensorPullback f ≅\n      formalCompletionSystem (J.comap f) F.obj)\n    (h : RingedSpace.IsCoherent Y.toRingedSpace\n      ((Scheme.Modules.pushforward f).obj F.obj)) :\n    ∃ κ : formalCompletionSystem J ((Scheme.Modules.pushforward f).obj F.obj) ⟶\n          formalCompletionSystem (J.comap f) F.obj ⋙ Scheme.Modules.pushforward f,\n        ∃ α : G ⟶ (completion Y J).obj\n            ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩,\n          (∀ n : ℕ,\n            formalModuleQuotientπ J (n + 1) ((Scheme.Modules.pushforward f).obj F.obj) ≫\n              κ.app (op n) =\n            (Scheme.Modules.pushforward f).map\n              (formalModuleQuotientπ (J.comap f) (n + 1) F.obj)) ∧\n          (∀ n : ℕ, α.hom.app (op n) ≫ κ.app (op n) =\n            adj.unit.app (G.obj.obj (op n)) ≫\n              (Scheme.Modules.pushforward f).map (β.hom.app (op n)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T223412-L-1639275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T223412-L-1639275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
