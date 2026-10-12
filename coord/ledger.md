@@ -7157,3 +7157,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:58 L: merged deliver/A2/Sheaf.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionQCoh (stage 3; reviewer PASS; first push; landing 20261012T095850-L-311410 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:58 L: merged deliver/A2/Sheaf.AlgebraicGeometry.AffineDerivedCounitHomologyFactorization (stage 3; reviewer PASS; first push; landing 20261012T095850-L-311508 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:58 L: merged deliver/A3/Sheaf.CategoryTheory.Sites.EtaleContractedProductExists (stage 3; reviewer PASS; first push; landing 20261012T095850-L-311607 (interface); batch 20261012T095846; modules 3; new nodes 2)
+- 09:58 L: merged deliver/A3/Sheaf.CategoryTheory.Sites.EtaleInverseImageLiftingTorsor (stage 3; reviewer PASS; first push; landing 20261012T095850-L-311704 (interface); batch 20261012T095846; modules 2; new nodes 1)

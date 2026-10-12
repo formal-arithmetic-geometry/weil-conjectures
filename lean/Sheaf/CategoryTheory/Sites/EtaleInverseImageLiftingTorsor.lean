@@ -8,8 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.CategoryTheory.Sites.EtaleInverseImageLiftsFibre
 
 /-! # Inverse image of a lifting torsor
 
@@ -69,6 +68,44 @@ theorem etale_inverse_image_lifting_torsor
                 (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1))
                 (X.smallGrothendieckTopology @Etale)
                 (Y.smallGrothendieckTopology @Etale)).unit.app T.sheaf).hom.app (op W) t))) := by
-  sorry
+  dsimp only
+  let b := MorphismProperty.Over.pullback @Etale ⊤ f
+  let L := Scheme.etaleSetPullback f
+  let a := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b
+    (Type (u + 1)) (X.smallGrothendieckTopology @Etale)
+    (Y.smallGrothendieckTopology @Etale)
+  let aa := Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f
+  obtain ⟨e⟩ := he
+  obtain ⟨c, hc⟩ := etale_inverse_image_lifts_fibre X Y f S hS s
+  refine ⟨L.mapIso e.iso ≪≫ c, ?_⟩
+  intro W g t
+  have hn (x : T.sheaf.obj.obj (op W)) :
+      (L.map e.iso.hom).hom.app (op (b.obj W))
+          ((a.unit.app T.sheaf).hom.app (op W) x) =
+        (a.unit.app (lifts terminalIsTerminal hS s).sheaf).hom.app (op W)
+          (e.iso.hom.hom.app (op W) x) := by
+    exact (congrArg (fun k ↦ k.hom.app (op W) x) (a.unit.naturality e.iso.hom)).symm
+  change c.hom.hom.app (op (b.obj W))
+      ((L.map e.iso.hom).hom.app (op (b.obj W))
+        ((a.unit.app T.sheaf).hom.app (op W) (T.vadd (op W) g t))) = _
+  rw [hn, e.map_vadd]
+  apply Subtype.ext
+  rw [hc]
+  change ((aa.unit.app S.X₂).hom.app (op W))
+      ((show S.X₂.obj.obj (op W) from (e.iso.hom.hom.app (op W) t).val) +
+        S.f.hom.app (op W) g) =
+    _ + _
+  rw [map_add]
+  rw [show ((aa.unit.app S.X₂).hom.app (op W)) (S.f.hom.app (op W) g) =
+      ((S.map (Etale.upperStar AddCommGrpCat.{u + 1} f)).f.hom.app (op (b.obj W)))
+        (((aa.unit.app S.X₁).hom.app (op W)) g) from
+    congrArg (fun k ↦ k.hom.app (op W) g) (aa.unit.naturality S.f)]
+  congr 1
+  change ((aa.unit.app S.X₂).hom.app (op W)) (e.iso.hom.hom.app (op W) t).val =
+    (c.hom.hom.app (op (b.obj W))
+      ((L.map e.iso.hom).hom.app (op (b.obj W))
+        ((a.unit.app T.sheaf).hom.app (op W) t))).val
+  rw [hn]
+  exact (hc W (e.iso.hom.hom.app (op W) t)).symm
 
 end CategoryTheory.Sheaf.Torsor
