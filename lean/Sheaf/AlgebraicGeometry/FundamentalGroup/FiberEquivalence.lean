@@ -119,6 +119,25 @@ theorem fiber_equivalence_finiteEtale_baseChange
         (fiberMk (s ≫ f) ⟨Etale.mk f, inferInstanceAs (IsFinite f)⟩ s rfl)) : Set GY) ∧
       (MulAction.stabilizer GY
         (fiberMk (s ≫ f) ⟨Etale.mk f, inferInstanceAs (IsFinite f)⟩ s rfl)).FiniteIndex := by
-  sorry
+  let P : Y.FiniteEtale := ⟨Etale.mk f, inferInstanceAs (IsFinite f)⟩
+  let a : (fiber (s ≫ f)).obj P := fiberMk (s ≫ f) P s rfl
+  have hinj : Function.Injective (fundamentalGroupMap (pullbackFiberIso f s) GX GY) :=
+    fundamentalGroupMap_injective (pullbackFiberIso f s) GY GX
+  have hr := fundamentalGroupMap_range_eq_stabilizer (f := f) (s := s) GX GY
+  have hrange : (fundamentalGroupMap (pullbackFiberIso f s) GX GY).range =
+      MulAction.stabilizer GY a := by
+    simpa [P, a] using hr.1
+  have hopen : IsOpen (MulAction.stabilizer GY a : Set GY) := by
+    simpa [P, a] using hr.2.1
+  have hX : Nonempty X := by
+    obtain ⟨z⟩ := (inferInstance : Nonempty (Spec (.of Ω)))
+    exact ⟨s.base z⟩
+  have hindex : (MulAction.stabilizer GY a).index ≠ 0 := by
+    rw [hr.2.2]
+    exact (Nat.card_ne_zero.mpr ⟨nonempty_fiber_of_nonempty (s := s ≫ f) P hX,
+      finite_fiber (s := s ≫ f) P⟩)
+  have hfinite : (MulAction.stabilizer GY a).FiniteIndex :=
+    Subgroup.finiteIndex_iff.mpr hindex
+  exact ⟨hinj, hrange, hopen, hfinite⟩
 
 end AlgebraicGeometry.Scheme.FiniteEtale
