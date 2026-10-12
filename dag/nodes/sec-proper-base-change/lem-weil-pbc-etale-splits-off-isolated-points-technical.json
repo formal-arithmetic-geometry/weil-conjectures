@@ -37,7 +37,7 @@
  ],
  "proof": [
   {
-   "text": "For $n=0$, take $U=S$, $u=s$, $\\varphi=\\mathrm{id}_S$, and $W=X$; the identity is etale [def-weil-etale-morphism], its residue-field map is the identity [def-weil-residue-field], and all remaining assertions are vacuous. Assume henceforth $n>0$. Apply [lem-weil-pbc-etale-local-finite-multiple-points-elementary] (Stacks 02LL) to $f$, $s$, and $x_1,\\dots,x_n$. It gives an elementary etale neighbourhood $\\varphi:(U,u)\\to(S,s)$ and open subschemes $V_i\\subseteq X_U=U\\times_SX$ such that $V_i\\to U$ is finite, its fibre over $u$ is the singleton $\\{v_i\\}$, $p(v_i)=x_i$, and $\\kappa(x_i)\\to\\kappa(v_i)$ is an isomorphism.",
+   "text": "Apply [lem-weil-pbc-etale-local-finite-multiple-points-elementary] uniformly for every n, including n=0, to obtain the elementary etale neighbourhood and finite open pieces with marked unique fibre points and unchanged residue fields. Work initially in X times_S U, the orientation returned by that theorem.",
    "uses": [
     "def-weil-etale-morphism",
     "def-weil-residue-field",
@@ -50,13 +50,13 @@
    }
   },
   {
-   "text": "The projection $q:X_U\\to U$ is separated because it is the base change of the separated morphism $f$ [lem-weil-pbc-separated-base-change]. Each $V_i\\to U$ is finite, hence proper [lem-weil-pbc-finite-morphism-permanence] (c), and the inclusion $j_i:V_i\\hookrightarrow X_U$ satisfies $q\\circ j_i:V_i\\to U$ proper with $q$ separated. Thus $j_i$ is proper by [lem-weil-pbc-proper-over-separated]. Since $j_i$ is also an open immersion, hence an immersion [def-weil-open-immersion], it is a closed immersion by [lem-weil-pbc-proper-immersion-closed]. Consequently every $V_i$ is both open and closed in $X_U$.",
+   "text": "The projection q from X times_S U to U is separated by [lem-weil-pbc-separated-base-change]. Each V_i to U is finite, hence proper by [lem-weil-pbc-finite-morphism-permanence]. Its inclusion into X times_S U is proper by [lem-weil-pbc-proper-over-separated]. A proper map is closed by [def-weil-proper-morphism], so its range V_i is closed (Scheme.Hom.isClosedMap.isClosed_range and Scheme.Opens.range_ι). No closed-immersion upgrade is necessary.",
    "uses": [
     "lem-weil-pbc-separated-base-change",
     "lem-weil-pbc-finite-morphism-permanence",
     "lem-weil-pbc-proper-over-separated",
     "def-weil-open-immersion",
-    "lem-weil-pbc-proper-immersion-closed"
+    "def-weil-proper-morphism"
    ],
    "elementary": false,
    "source": {
@@ -65,7 +65,7 @@
    }
   },
   {
-   "text": "For $i\\ne j$, the intersection $V_i\\cap V_j$ is closed in $V_i$ by step 2. The finite morphism $V_i\\to U$ is proper [lem-weil-pbc-finite-morphism-permanence] (c), hence universally closed [def-weil-proper-morphism], so its image $C_{ij}\\subseteq U$ is closed. This image does not contain $u$: otherwise a point of $V_i\\cap V_j$ over $u$ would equal both unique fibre points $v_i$ and $v_j$; applying $p$ would give $x_i=x_j$, contrary to pairwise distinctness. Let $U'=U\\setminus\\bigcup_{i<j}C_{ij}$, an open neighbourhood of $u$, and replace $U$ by $U'$. The restricted opens $V_i'=V_i\\times_UU'$ retain finiteness, their unique points over $u$, their images $x_i$, and their residue-field isomorphisms by [lem-weil-pbc-elementary-etale-finite-piece-persistence]; the restricted map $U'\\to S$ remains etale because an open immersion is etale and etale morphisms compose [lem-weil-pbc-etale-composition-cancellation]. By construction $V_i'\\cap V_j'=\\emptyset$ for $i\\ne j$. Rename $U',V_i'$ as $U,V_i$.",
+   "text": "For $i\\ne j$, the intersection $V_i\\cap V_j$ is closed in $V_i$ by step 2. The finite morphism $V_i\\to U$ is proper [lem-weil-pbc-finite-morphism-permanence] (c), hence universally closed [def-weil-proper-morphism], so its image $C_{ij}\\subseteq U$ is closed. This image does not contain $u$: otherwise a point of $V_i\\cap V_j$ over $u$ would equal both unique fibre points $v_i$ and $v_j$; applying $p$ would give $x_i=x_j$, contrary to pairwise distinctness. Let $U'=U\\setminus\\bigcup_{i\\ne j}C_{ij}$, an open neighbourhood of $u$, and replace $U$ by $U'$. The restricted opens $V_i'=V_i\\times_UU'$ retain finiteness, their unique points over $u$, their images $x_i$, and their residue-field isomorphisms by [lem-weil-pbc-elementary-etale-finite-piece-persistence]; the restricted map $U'\\to S$ remains etale because an open immersion is etale and etale morphisms compose [lem-weil-pbc-etale-composition-cancellation]. By construction $V_i'\\cap V_j'=\\emptyset$ for $i\\ne j$. Rename $U',V_i'$ as $U,V_i$.",
    "uses": [
     "lem-weil-pbc-finite-morphism-permanence",
     "def-weil-proper-morphism",
@@ -80,7 +80,7 @@
    }
   },
   {
-   "text": "Put $V=V_1\\cup\\cdots\\cup V_n$ and $W=X_U\\setminus V$. Since the $V_i$ are pairwise disjoint and each is open and closed, $W,V_1,\\dots,V_n$ are pairwise disjoint open and closed subschemes covering $X_U$. Properties (i)--(iii) are those retained in step 3.",
+   "text": "The finite union of the retained closed opens V_i is closed (isClosed_iUnion_of_finite); construct W explicitly as its open complement. Pointwise membership proves Disjoint W V_i and W sup (iSup V_i) = top. This also handles n=0: the union is empty and W is the whole pullback.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -89,7 +89,7 @@
    }
   },
   {
-   "text": "It remains to verify (iv), which is implicit in the final sentence of Stacks. Suppose $w\\in W$ satisfies $q(w)=u$ and $p(w)=x_i$. By [lem-weil-pbc-fibre-product-points], points of $X_U=X\\times_SU$ mapping to $(x_i,u)$ correspond to primes of $\\kappa(x_i)\\otimes_{\\kappa(s)}\\kappa(u)$. Since the elementary neighbourhood gives an isomorphism $\\kappa(s)\\to\\kappa(u)$, this tensor product is isomorphic to the field $\\kappa(x_i)$ and has exactly one prime. Both $w$ and $v_i$ map to $(x_i,u)$, hence $w=v_i$. But $v_i\\in V_i$ whereas $w\\in W$, contradicting disjointness. Therefore no such $w$ exists.",
+   "text": "It remains to verify (iv), which is implicit in the final sentence of Stacks. Suppose $w\\in W$ satisfies $q(w)=u$ and $p(w)=x_i$. By [lem-weil-pbc-fibre-product-points], points of $X_U=X\\times_SU$ mapping to $(x_i,u)$ correspond to primes of $\\kappa(x_i)\\otimes_{\\kappa(s)}\\kappa(u)$. Since the elementary neighbourhood gives an isomorphism $\\kappa(s)\\to\\kappa(u)$, this tensor product is isomorphic to the field $\\kappa(x_i)$ and has exactly one prime. Both $w$ and $v_i$ map to $(x_i,u)$, hence $w=v_i$. But $v_i\\in V_i$ whereas $w\\in W$, contradicting disjointness. Therefore no such $w$ exists. In Lean, reuse AlgebraicGeometry.pullback_point_unique from Sheaf.AlgebraicGeometry.FinitePiecePersistence through a proof-only import all; this existing theorem proves the residue-field tensor-product uniqueness and is not duplicated locally. Finally use pullbackSymmetry and the preimageIso of each open to transport W and all V_i from X times_S U to U times_S X, preserving disjointness, the cover, finiteness, point uniqueness, residue-field maps, and avoidance.",
    "uses": [
     "lem-weil-pbc-fibre-product-points",
     "def-weil-residue-field"
@@ -109,7 +109,6 @@
   "lem-weil-pbc-finite-morphism-permanence",
   "lem-weil-pbc-proper-over-separated",
   "def-weil-open-immersion",
-  "lem-weil-pbc-proper-immersion-closed",
   "def-weil-proper-morphism",
   "lem-weil-pbc-elementary-etale-finite-piece-persistence",
   "lem-weil-pbc-etale-composition-cancellation",
@@ -118,7 +117,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma Tag 02LN, proof lines 12116-12131; the n=0 case and the point-uniqueness verification of clause (iv) are written out"
+  "place": "Stacks Tag 02LN, proof; formalized by R1 using the uniform n=0 specialization, closed ranges of proper inclusions rather than closed immersions, finite-piece persistence, residue-field pullback point uniqueness, and pullback symmetry. Repair of the duplicate-helper return: reuse the existing private pullback_point_unique theorem via import all FinitePiecePersistence; remove elementary_pullback_point_unique."
  },
  "mathlib_searches": [
   {
@@ -215,5 +214,15 @@
   "group": "H1",
   "result": "fix",
   "note": "f lft+separated; s,n, injective x over s; isolated as f.asFiber singleton open (sibling spelling, was ∃ξ fiberι); elementary etale nbhd Etale φ, φ t = s, IsIso residueFieldMap; X_U = U×_S X as pullback φ f, q=fst, p=snd; W,V_i opens pairwise disjoint covering (hence clopen); (i) IsFinite (V i).ι≫fst; (ii) unique v over t; (iii) p v = x i, IsIso residue map of composite; (iv) W points over t avoid all x i; n=0 vacuous"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T173858-L-3304164",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
