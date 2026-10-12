@@ -3,7 +3,6 @@ module
 public import Sheaf.CategoryTheory.SiteCechComplex
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
-import Sheaf.Paper.PowerSetComplexContractible
 
 @[expose] public section
 
@@ -106,23 +105,206 @@ noncomputable abbrev freeComplex (R : Cᵒᵖ ⥤ RingCat.{v}) :
   (AlgebraicTopology.alternatingFaceMapComplex _).obj
     (S.tupleSimplicial ⋙ PresheafOfModules.free R)
 
+private abbrev TupleBasis (p : ℕ) (X : Cᵒᵖ) :=
+  Σ t : Fin (p + 1) → T, X.unop ⟶ S.W p t
+
+private def tupleBase {p : ℕ} {X : Cᵒᵖ} (x : S.TupleBasis p X) : X.unop ⟶ U :=
+  x.2 ≫ S.pr p x.1 0 ≫ hom (x.1 0)
+
+private theorem tupleBase_eq {p : ℕ} {X : Cᵒᵖ} (x : S.TupleBasis p X)
+    (i : Fin (p + 1)) : x.2 ≫ S.pr p x.1 i ≫ hom (x.1 i) = S.tupleBase x := by
+  simp only [tupleBase, S.comm]
+
+private noncomputable def selectedLift (X : Cᵒᵖ) (φ : X.unop ⟶ U)
+    (h : ∃ l : Σ i : T, X.unop ⟶ f i, l.2 ≫ hom l.1 = φ) :
+    Σ i : T, X.unop ⟶ f i := Classical.choose h
+
+private theorem selectedLift_spec (X : Cᵒᵖ) (φ : X.unop ⟶ U)
+    (h : ∃ l : Σ i : T, X.unop ⟶ f i, l.2 ≫ hom l.1 = φ) :
+    (selectedLift X φ h).2 ≫ hom (selectedLift X φ h).1 = φ :=
+  Classical.choose_spec h
+
+private theorem tuple_has_lift {p : ℕ} {X : Cᵒᵖ} (x : S.TupleBasis p X) :
+    ∃ l : Σ i : T, X.unop ⟶ f i, l.2 ≫ hom l.1 = S.tupleBase x :=
+  ⟨⟨x.1 0, x.2 ≫ S.pr p x.1 0⟩, by rw [Category.assoc]; rfl⟩
+
+private noncomputable def tupleLift {p : ℕ} {X : Cᵒᵖ} (x : S.TupleBasis p X) :
+    Σ i : T, X.unop ⟶ f i :=
+  selectedLift X (S.tupleBase x) (S.tuple_has_lift x)
+
+private noncomputable def prefixIndices {p : ℕ} {X : Cᵒᵖ}
+    (x : S.TupleBasis p X) : Fin (p + 2) → T :=
+  Fin.cons (S.tupleLift x).1 x.1
+
+private noncomputable def prefixArrows {p : ℕ} {X : Cᵒᵖ}
+    (x : S.TupleBasis p X) : ∀ i, X.unop ⟶ f (S.prefixIndices x i) :=
+  Fin.cases (S.tupleLift x).2 (fun i ↦ x.2 ≫ S.pr p x.1 i)
+
+private theorem prefixArrows_comm {p : ℕ} {X : Cᵒᵖ}
+    (x : S.TupleBasis p X) (i : Fin (p + 2)) :
+    S.prefixArrows x i ≫ hom (S.prefixIndices x i) =
+      S.prefixArrows x 0 ≫ hom (S.prefixIndices x 0) := by
+  refine Fin.cases ?_ (fun i ↦ ?_) i
+  · rfl
+  · change (x.2 ≫ S.pr p x.1 i) ≫ hom (x.1 i) =
+      (S.tupleLift x).2 ≫ hom (S.tupleLift x).1
+    rw [show (S.tupleLift x).2 ≫ hom (S.tupleLift x).1 = S.tupleBase x from
+      selectedLift_spec X _ _]
+    rw [Category.assoc]
+    exact S.tupleBase_eq x i
+
+private noncomputable def tuplePrefix {p : ℕ} {X : Cᵒᵖ}
+    (x : S.TupleBasis p X) : S.TupleBasis (p + 1) X :=
+  ⟨S.prefixIndices x, (S.universal (p + 1) (S.prefixIndices x) X.unop
+    (S.prefixArrows x) (S.prefixArrows_comm x)).choose⟩
+
+private theorem tuplePrefix_pr {p : ℕ} {X : Cᵒᵖ}
+    (x : S.TupleBasis p X) (i : Fin (p + 2)) :
+    (S.tuplePrefix x).2 ≫ S.pr (p + 1) (S.tuplePrefix x).1 i =
+      S.prefixArrows x i :=
+  (S.universal (p + 1) (S.prefixIndices x) X.unop
+    (S.prefixArrows x) (S.prefixArrows_comm x)).choose_spec.1 i
+
+private def tupleFace {p : ℕ} {X : Cᵒᵖ} (i : Fin (p + 2))
+    (x : S.TupleBasis (p + 1) X) : S.TupleBasis p X :=
+  ⟨x.1 ∘ i.succAbove, x.2 ≫ S.indexMap x.1 i.succAbove⟩
+
+private theorem tuple_hom_ext {p : ℕ} {X : Cᵒᵖ} {t : Fin (p + 1) → T}
+    {a b : X.unop ⟶ S.W p t} (h : ∀ i, a ≫ S.pr p t i = b ≫ S.pr p t i) :
+    a = b := by
+  obtain ⟨c, _, hc⟩ := S.universal p t X.unop (fun i ↦ b ≫ S.pr p t i)
+    (fun i ↦ by simp only [Category.assoc, S.comm])
+  exact (hc a h).trans (hc b (fun _ ↦ rfl)).symm
+
+private theorem tupleFace_pr {p : ℕ} {X : Cᵒᵖ} (i : Fin (p + 2))
+    (x : S.TupleBasis (p + 1) X) (k : Fin (p + 1)) :
+    (S.tupleFace i x).2 ≫ S.pr p (S.tupleFace i x).1 k =
+      x.2 ≫ S.pr (p + 1) x.1 (i.succAbove k) := by
+  dsimp [tupleFace]
+  rw [Category.assoc, S.indexMap_pr]
+
+private theorem tupleFace_base {p : ℕ} {X : Cᵒᵖ} (i : Fin (p + 2))
+    (x : S.TupleBasis (p + 1) X) : S.tupleBase (S.tupleFace i x) = S.tupleBase x := by
+  unfold tupleBase
+  rw [← Category.assoc, S.tupleFace_pr, Category.assoc]
+  exact S.tupleBase_eq x _
+
+private theorem tuple_ext {p : ℕ} {X : Cᵒᵖ} {x y : S.TupleBasis p X}
+    (ht : x.1 = y.1)
+    (h : ∀ k, HEq (x.2 ≫ S.pr p x.1 k) (y.2 ≫ S.pr p y.1 k)) : x = y := by
+  obtain ⟨t, a⟩ := x
+  obtain ⟨t', b⟩ := y
+  dsimp at ht
+  subst t'
+  have hab : a = b := S.tuple_hom_ext (fun k ↦ eq_of_heq (h k))
+  cases hab
+  rfl
+
+private theorem tupleFace_prefix_zero {p : ℕ} {X : Cᵒᵖ} (x : S.TupleBasis p X) :
+    S.tupleFace 0 (S.tuplePrefix x) = x := by
+  apply S.tuple_ext
+  · funext i
+    simp [tupleFace, tuplePrefix, prefixIndices]
+  · intro i
+    rw [S.tupleFace_pr]
+    simp only [Fin.zero_succAbove]
+    rw [S.tuplePrefix_pr]
+    rfl
+
+private theorem tupleLift_face {p : ℕ} {X : Cᵒᵖ} (i : Fin (p + 2))
+    (x : S.TupleBasis (p + 1) X) : S.tupleLift (S.tupleFace i x) = S.tupleLift x := by
+  unfold tupleLift
+  congr 1
+  exact S.tupleFace_base i x
+
+private theorem tupleFace_prefix_succ {p : ℕ} {X : Cᵒᵖ}
+    (i : Fin (p + 2)) (x : S.TupleBasis (p + 1) X) :
+    S.tupleFace i.succ (S.tuplePrefix x) = S.tuplePrefix (S.tupleFace i x) := by
+  apply S.tuple_ext
+  · change (Fin.cons (S.tupleLift x).1 x.1) ∘ i.succ.succAbove =
+      Fin.cons (S.tupleLift (S.tupleFace i x)).1 (x.1 ∘ i.succAbove)
+    rw [S.tupleLift_face]
+    exact Fin.cons_comp_succ_succAbove _ _ _
+  · intro k
+    rw [S.tupleFace_pr, S.tuplePrefix_pr, S.tuplePrefix_pr]
+    refine Fin.cases ?_ (fun k ↦ ?_) k
+    · change HEq (S.prefixArrows x (i.succ.succAbove 0))
+        (S.tupleLift (S.tupleFace i x)).2
+      erw [Fin.succ_succAbove_zero]
+      change HEq (S.tupleLift x).2 (S.tupleLift (S.tupleFace i x)).2
+      exact (Sigma.ext_iff.mp (S.tupleLift_face i x).symm).2
+    · change HEq (S.prefixArrows x (i.succ.succAbove k.succ))
+        ((S.tupleFace i x).2 ≫ S.pr p (S.tupleFace i x).1 k)
+      erw [Fin.succ_succAbove_succ]
+      change HEq (x.2 ≫ S.pr (p + 1) x.1 (i.succAbove k))
+        ((S.tupleFace i x).2 ≫ S.pr p (S.tupleFace i x).1 k)
+      rw [S.tupleFace_pr]
+
+private noncomputable def freePrefix (R : Cᵒᵖ ⥤ RingCat.{v}) (p : ℕ) (X : Cᵒᵖ) :
+    ((S.freeComplex R).X p).obj X ⟶ ((S.freeComplex R).X (p + 1)).obj X :=
+  (ModuleCat.free (R.obj X)).map (↾fun x ↦ S.tuplePrefix x)
+
+private noncomputable def freeFace (R : Cᵒᵖ ⥤ RingCat.{v}) (p : ℕ) (X : Cᵒᵖ)
+    (i : Fin (p + 2)) :
+    ((S.freeComplex R).X (p + 1)).obj X ⟶ ((S.freeComplex R).X p).obj X :=
+  (ModuleCat.free (R.obj X)).map (↾fun x ↦ S.tupleFace i x)
+
+private theorem freePrefix_face_zero (R : Cᵒᵖ ⥤ RingCat.{v}) (p : ℕ) (X : Cᵒᵖ) :
+    S.freePrefix R p X ≫ S.freeFace R p X 0 = 𝟙 _ := by
+  change (ModuleCat.free (R.obj X)).map (↾fun x ↦ S.tuplePrefix x) ≫
+    (ModuleCat.free (R.obj X)).map (↾fun x ↦ S.tupleFace 0 x) = 𝟙 _
+  rw [← Functor.map_comp, ← Functor.map_id]
+  congr 1
+  apply ConcreteCategory.hom_ext
+  intro x
+  exact S.tupleFace_prefix_zero x
+
+private theorem freePrefix_face_succ (R : Cᵒᵖ ⥤ RingCat.{v}) (p : ℕ) (X : Cᵒᵖ)
+    (i : Fin (p + 2)) :
+    S.freePrefix R (p + 1) X ≫ S.freeFace R (p + 1) X i.succ =
+      S.freeFace R p X i ≫ S.freePrefix R p X := by
+  change (ModuleCat.free (R.obj X)).map (↾fun x ↦ S.tuplePrefix x) ≫
+      (ModuleCat.free (R.obj X)).map (↾fun x ↦ S.tupleFace i.succ x) =
+    (ModuleCat.free (R.obj X)).map (↾fun x ↦ S.tupleFace i x) ≫
+      (ModuleCat.free (R.obj X)).map (↾fun x ↦ S.tuplePrefix x)
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+  apply ConcreteCategory.hom_ext
+  intro x
+  exact S.tupleFace_prefix_succ i x
+
+open scoped BigOperators in
+private theorem freeComplex_d_app (R : Cᵒᵖ ⥤ RingCat.{v}) (p : ℕ) (X : Cᵒᵖ) :
+    ((S.freeComplex R).d (p + 1) p).app X =
+      ∑ i : Fin (p + 2), (-1 : ℤ) ^ (i : ℕ) • S.freeFace R p X i := by
+  simp only [freeComplex, AlgebraicTopology.alternatingFaceMapComplex_obj_d,
+    AlgebraicTopology.AlternatingFaceMapComplex.objD]
+  change (PresheafOfModules.evaluation R X).map
+    (∑ i : Fin (p + 2), (-1 : ℤ) ^ (i : ℕ) •
+      SimplicialObject.δ (S.tupleSimplicial ⋙ PresheafOfModules.free R) i) = _
+  rw [Functor.map_sum]
+  apply Finset.sum_congr rfl
+  intro i _
+  rw [Functor.map_zsmul]
+  congr 1
+
 /-- The evaluated free Čech complex has a contracting identity in each positive degree.
 Source: Stacks Project, Cohomology on Sites, Tags 03AT and 03F5.
 (blueprint: lem-weil-pbc-site-cech-free-complex-exact-fibrewise)
 
-Proof: Fix X. Partition a basis pair (t,a) by φ = a ≫ pr(0) ≫ hom(t(0)).
-For each φ let Lφ be the disjoint union of maps b:X→f(i) with b≫hom(i)=φ.
-The chosen product universal property identifies basis pairs in degree p with
-(p+1)-tuples in Lφ: project a to obtain the tuple; conversely take its unique
-product lift. These inverse identifications commute with deleting coordinates
-by indexMap_pr. Extend them R(X)-linearly to identify the evaluated complex
-with the direct sum, over φ:X→U, of the power-set complexes on Lφ.
-For each nonempty Lφ choose one element and prefix it to tuples. On an empty
-Lφ every positive-length tuple module is zero, and take the zero map.
-The power-set contracting identities say d h + h d = identity at degree n+1,
-also when n=0. Taking the direct sum of the prefix maps (finite support stays
-finite) and transporting through the basis identifications gives h and k.
-These are maps only at the fixed X; no naturality in X is asserted. -/
+Proof: Fix X. For each basis tuple x, its projections have a common composite
+φ:X→U. The zeroth projection proves that φ has a lift to one of the f(i).
+Choose a lift depending only on φ; proof irrelevance makes this independent
+of the existence proof. Prefix it to the projections of x, using the unique
+product lift to construct the resulting basis tuple. Deleting coordinate zero
+returns x. Deleting coordinate i+1 commutes with prefixing after deleting i,
+since deletion preserves φ and hence preserves the selected lift.
+Apply ModuleCat.free to extend these functions R(X)-linearly. Evaluation is
+additive, so the differential is the alternating sum of the free face maps.
+In h followed by d, the zeroth face gives the identity and each successor face
+cancels its opposite-signed term in d followed by k. This works also for n=0.
+If T is empty there are no basis tuples and no nonexistent lift is chosen.
+These maps are constructed only at the fixed X; no naturality is asserted. -/
 theorem freeComplex_evaluation_contracting (R : Cᵒᵖ ⥤ RingCat.{v})
     (n : ℕ) (X : Cᵒᵖ) :
     ∃ h : ((S.freeComplex R).X (n + 1)).obj X ⟶
@@ -130,6 +312,15 @@ theorem freeComplex_evaluation_contracting (R : Cᵒᵖ ⥤ RingCat.{v})
       ∃ k : ((S.freeComplex R).X n).obj X ⟶
           ((S.freeComplex R).X (n + 1)).obj X,
         h ≫ ((S.freeComplex R).d (n + 2) (n + 1)).app X +
-          ((S.freeComplex R).d (n + 1) n).app X ≫ k = 𝟙 _ := by sorry
+          ((S.freeComplex R).d (n + 1) n).app X ≫ k = 𝟙 _ := by
+  refine ⟨S.freePrefix R (n + 1) X, S.freePrefix R n X, ?_⟩
+  rw [S.freeComplex_d_app R (n + 1) X, S.freeComplex_d_app R n X]
+  rw [Preadditive.comp_sum, Fin.sum_univ_succ]
+  simp only [Preadditive.comp_zsmul, Fin.val_zero, pow_zero, one_smul,
+    S.freePrefix_face_zero, Fin.val_succ, pow_succ, mul_neg_one,
+    neg_smul, Preadditive.comp_neg, S.freePrefix_face_succ,
+    Preadditive.sum_comp, Preadditive.zsmul_comp]
+  rw [Finset.sum_neg_distrib]
+  simp
 
 end CategoryTheory.SiteCechComplex

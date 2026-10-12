@@ -13,28 +13,34 @@
  },
  "proof": [
   {
-   "text": "Partition the tuple basis at X by its composite φ to U. Product uniqueness identifies the φ-part with positive-length tuples in the lift set Lφ, compatibly with coordinate deletion by indexMap_pr. Extend this identification R(X)-linearly.",
+   "text": "For a basis tuple x=(t,a) at X, form its common composite φ:X→U. Its zeroth projection proves that φ has a lift to some f(i). Choose such a lift as a function of φ alone (proof irrelevance makes the choice independent of the existence proof). Prefix that lift to the projections of x, and use the chosen product universal property to construct the unique resulting basis tuple. No choice is required for composites with no lift, since they have no basis tuples.",
    "uses": [
     "def-weil-pbc-site-cech-complex"
    ],
    "elementary": true
   },
   {
-   "text": "In each nonempty lift set choose a lift and use prefixing; use zero maps in the empty case. The power-set contracting homotopy identity, transported through the basis identification and summed over φ, yields the stated two maps and identity at degree n+1. No naturality is needed.",
+   "text": "Product uniqueness and indexMap_pr show that deleting the first coordinate of the prefix returns x. Deleting coordinate i+1 commutes with prefixing after deleting coordinate i: deletion preserves the common composite φ and hence the selected lift. These identities include the case of degree-zero source tuples. The private helpers tupleFace_prefix_zero and tupleFace_prefix_succ prove both identities.",
    "uses": [
-    "lem-weil-pbc-power-set-complex-contractible"
+    "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib ModuleCat.free to the prefix and deletion functions at X. Functoriality preserves their composition identities. The additive evaluation functor expresses the differential as the sum of the free deletion maps with integer coefficients (-1)^i. Split the sum into the first face and successor faces using Fin.sum_univ_succ. The first term is the identity; the successor terms are the negatives of the second homotopy composite and cancel. This produces the required h and k without constructing or transporting through a direct-sum isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-site-cech-complex",
-  "lem-weil-pbc-power-set-complex-contractible"
+  "def-weil-pbc-site-cech-complex"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "H3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 03F5"
+  "place": "Tags 03AT and 03F5; direct prefix construction and alternating-sign cancellation on the chosen-product tuple basis"
  },
  "mathlib_searches": [
   {
@@ -105,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-c4150",
-  "group": "V3",
+  "reviewer": "COMPILER",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T173914-L-3309198",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered packet matched baseline signatures, recorded changes, forced adaptation, and all lcompile checks; original importer failed as reported and adapted importer compiled."
+  "landing": "20261012T184307-L-4005941",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
