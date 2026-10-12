@@ -8541,3 +8541,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:35 L: returned deliver/K1/Sheaf.Paper.FiniteStructureAlgebraOperationsLift (reviewer RETURN: (reviewer X-94a24, head 94a2483e9) E7: The `hc` hypothesis uses the unnormalized `(Classical.choice (Scheme.Modules.none)
 - 16:36 L: returned deliver/F2/Sheaf.AlgebraicGeometry.Curve.PrimeModuleFiniteOpenAssertionsTransfer (reviewer RETURN: (the landing tools, head 0d7d2ac8e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 16:36 L: returned deliver/R1/Sheaf.AlgebraicGeometry.AffineQuotientRestrictedIso (reviewer RETURN: (the landing tools, head 8532cc1b3) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 16:36 L: merged deliver/A2/Sheaf.Algebra.Homology.ZigzagBoundaryReduction (stage 3; reviewer PASS; after a return; landing 20261012T163610-L-2783757 (proof); batch 20261012T163610; modules 1; new nodes 0)
