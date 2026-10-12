@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-localized-module-restriction-quasi-iso",
+ "kind": "lemma",
+ "title": "Restriction to a localized site preserves quasi-isomorphisms",
+ "statement": "Let C be any category with Grothendieck topology J, R a sheaf of rings, and U an object of C [def-pur-localized-ringed-site]. Let t:L′→L be a quasi-isomorphism [def-pc-quasi-iso-modules] of unbounded cochain complexes of sheaves of R-modules [def-pc-cochain-complex-modules]. The termwise restriction functor to sheaves of R|U-modules sends t to a quasi-isomorphism. The explicit zero-morphism-preservation witness only supplies the map-on-complexes construction; it adds no mathematical restriction.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03DH, restriction j_U^*; exactness recalled in Lemma 18.19.4 (03DK)"
+ },
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pc-quasi-iso-modules",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Restriction retains section modules and their maps on objects (V,f) of C/U. Kernels are sectionwise. Covers of (V,f) correspond to covers of V with their forced maps to U, so local cokernel representatives and local equalities commute with restriction. Thus restriction preserves kernels and cokernels and is additive and exact.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact additive functors preserve homology. Apply Mathlib HomologicalComplex.quasiIso_map_of_preservesHomology: each restricted homology map is restriction of an invertible homology map under the natural comparison, and is therefore invertible.",
+   "uses": [
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03DH, restriction j_U^*; exactness recalled in Lemma 18.19.4 (03DK)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a complex of sheaves of modules to the slice site preserves quasi-isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "Candidates: SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv. No exact match: no sheaf-section comparison or arbitrary-site exactness instance.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; general tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor|PreservesHomology",
+   "results": "Candidates: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean. No exact match: no sheaf-section comparison or arbitrary-site exactness instance.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; general tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomComplexSectionsQuasiIso",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Restriction to a localized site preserves quasi-isomorphisms in the proof of sectionwise Hom invariance",
+   "via": [
+    "lem-pur-hom-complex-sections-quasi-iso",
+    "lem-pur-rhom-well-defined",
+    "def-pur-derived-internal-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedModuleRestrictionQuasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedModuleRestrictionQuasiIso.lean",
+  "declaration": "CategoryTheory.localizedModule_restriction_quasiIso",
+  "statement": "theorem localizedModule_restriction_quasiIso\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (R : Sheaf J RingCat.{max u v}) (U : C)\n    (hzero : (SheafOfModules.overFunctor.{max u v} R U).PreservesZeroMorphisms)\n    {L' L : CochainComplex (SheafOfModules.{max u v} R) ℤ}\n    (t : L' ⟶ L) [QuasiIso t] :\n    letI := hzero\n    QuasiIso (((SheafOfModules.overFunctor.{max u v} R U).mapHomologicalComplex\n      (ComplexShape.up ℤ)).map t)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135238-L-1667422",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135238-L-1667422",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
