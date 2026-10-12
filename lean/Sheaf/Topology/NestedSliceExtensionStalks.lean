@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
 public import Mathlib.Topology.Sheaves.Stalks
+import Sheaf.Topology.NestedSliceExtensionStalkIso
 
 /-! # Stalks of nested slice extensions
 
@@ -45,6 +46,8 @@ theorem nested_slice_extension_stalks {X : TopCat.{u}}
     ∃ g : (siteExtensionByZeroPresheaf V).obj (F.over V).obj ⟶
         (siteExtensionByZeroPresheaf U).obj (F.over U).obj,
       ∀ x : X, x ∈ V →
-        IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map g) := by sorry
+        IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map g) := by
+  refine ⟨nestedSliceExtensionMap F U V hVU, ?_⟩
+  exact nestedSliceExtensionMap_stalk_isIso F U V hVU
 
 end TopCat.Sheaf
