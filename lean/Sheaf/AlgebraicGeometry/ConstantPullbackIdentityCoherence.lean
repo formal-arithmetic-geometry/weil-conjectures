@@ -39,6 +39,33 @@ Taking its component at M gives the displayed equality of sheaf morphisms.
 theorem constantPullbackIdentityCoherence (Z : Scheme.{u}) (M : AddCommGrpCat.{u + 1}) :
     (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (𝟙 Z)).inv.app M ≫
         (upperStarId AddCommGrpCat.{u + 1} Z).hom.app
-          ((constantSheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}).obj M) = 𝟙 _ := by sorry
+          ((constantSheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}).obj M) = 𝟙 _ := by
+  let adj := constantSheafAdj Z.smallEtaleTopology AddCommGrpCat.{u + 1}
+    terminalIsTerminal
+  let adjId := upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (𝟙 Z)
+  let e := lowerStarCompSheafSectionsTerminalIso AddCommGrpCat.{u + 1} (𝟙 Z)
+  have h : (upperStarId AddCommGrpCat.{u + 1} Z).hom.app
+      ((constantSheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}).obj M) =
+      (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (𝟙 Z)).hom.app M := by
+    apply (((adj.comp adjId).ofNatIsoRight e).homEquiv M _).injective
+    change _ = (((adj.comp adjId).ofNatIsoRight e).homEquiv M _)
+      ((((adj.comp adjId).ofNatIsoRight e).leftAdjointUniq adj).hom.app M)
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    rw [Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv]
+    change adj.homEquiv M _ (adjId.homEquiv _ _
+      ((upperStarId AddCommGrpCat.{u + 1} Z).hom.app
+        ((constantSheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}).obj M))) ≫
+      e.hom.app _ = _
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+    dsimp only [adjId]
+    rw [upperStarId_hom_app_unit_app]
+    have ht : PreservesTerminal.iso (Scheme.Hom.Etale (𝟙 Z)) =
+        (MorphismProperty.Over.pullbackId @Etale ⊤ Z).app (⊤_ Z.Etale) := by
+      apply Iso.ext
+      exact terminalIsTerminal.hom_ext _ _
+    simp [e, lowerStarCompSheafSectionsTerminalIso, lowerStarId,
+      GrothendieckTopology.lowerStarId, ht, ← Functor.map_comp, ← op_comp]
+  rw [h]
+  exact (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (𝟙 Z)).inv_hom_id_app M
 
 end AlgebraicGeometry.Etale
