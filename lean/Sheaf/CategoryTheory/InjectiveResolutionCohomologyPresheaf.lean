@@ -6,6 +6,7 @@ module
 
 public import Sheaf.CategoryTheory.CechResolutionDoubleComplex
 public import Mathlib.Algebra.Homology.Functor
+import Sheaf.CategoryTheory.InjectiveResolutionCohomologyPresheafData
 
 /-!
 # The cohomology presheaf computed by an injective resolution
@@ -43,6 +44,7 @@ theorem Sheaf.injectiveResolution_cohomologyPresheaf
         (ComplexShape.up ℕ)).obj I.cocomplex).asFunctor ⋙
         HomologicalComplex.homologyFunctor _ (ComplexShape.up ℕ) q ≅
       F.cohomologyPresheaf q) := by
-  sorry
+  obtain ⟨e, he⟩ := Sheaf.injectiveResolution_cohomologyPresheaf_data I q
+  exact ⟨NatIso.ofComponents e he⟩
 
 end CategoryTheory
