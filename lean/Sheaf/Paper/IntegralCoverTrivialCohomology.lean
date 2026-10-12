@@ -45,6 +45,45 @@ theorem exists_integral_cover_trivial_cohomology (X : Scheme.{u}) [IsAffine X] :
               ((DerivedCategory.singleFunctor _ 0).obj
                 ((constantSheaf Z'.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
                   (AddCommGrpCat.of M)))) := by
-  sorry
+  let A := Γ(X, ⊤)
+  let P := MvPolynomial A ℤ
+  let K := FractionRing P
+  let L := AlgebraicClosure K
+  let R := integralClosure P L
+  let φ : CommRingCat.of P ⟶ A :=
+    CommRingCat.ofHom (MvPolynomial.eval₂Hom (Int.castRingHom A) id)
+  have hφ : Function.Surjective φ := by
+    intro a
+    exact ⟨MvPolynomial.X a, MvPolynomial.eval₂_X _ _ _⟩
+  let j : X ⟶ Spec (CommRingCat.of P) := X.isoSpec.hom ≫ Spec.map φ
+  let : IsClosedImmersion (Spec.map φ) := IsClosedImmersion.spec_of_surjective φ hφ
+  let : IsClosedImmersion j := inferInstance
+  let : Algebra.IsAlgebraic P L :=
+    IsFractionRing.comap_isAlgebraic_iff.mpr (inferInstance : Algebra.IsAlgebraic K L)
+  have hinj : Function.Injective (algebraMap P L) :=
+    (algebraMap K L).injective.comp (IsFractionRing.injective P K)
+  let : IsFractionRing R L :=
+    integralClosure.isFractionRing_of_algebraic (fun x hx ↦ hinj (by simpa using hx))
+  let : IsIntegrallyClosed R :=
+    (isIntegrallyClosed_iff_isIntegrallyClosedIn L).mpr inferInstance
+  let : IsAlgClosed (FractionRing R) :=
+    IsAlgClosed.of_ringEquiv L _
+      (IsLocalization.algEquiv (nonZeroDivisors R) L (FractionRing R)).toRingEquiv
+  let f : Spec (CommRingCat.of R) ⟶ Spec (CommRingCat.of P) :=
+    Spec.map (CommRingCat.ofHom (algebraMap P R))
+  let : IsIntegralHom f := IsIntegralHom.SpecMap_iff.mpr
+    (show (algebraMap P R).IsIntegral from Algebra.IsIntegral.isIntegral)
+  let : Surjective f := by
+    refine ⟨?_⟩
+    exact (show (algebraMap P R).IsIntegral from Algebra.IsIntegral.isIntegral).comap_surjective
+      (by
+        intro a b hab
+        apply hinj
+        simpa only [IsScalarTower.algebraMap_apply P R L] using
+          congrArg (algebraMap R L) hab)
+  refine ⟨pullback j f, pullback.fst j f, inferInstance, inferInstance, ?_⟩
+  intro Z i hi M hM hfinite q hq
+  exact gabber_absolutely_algebraically_closed R inferInstance Z
+    (i ≫ pullback.snd j f) M q hq
 
 end AlgebraicGeometry

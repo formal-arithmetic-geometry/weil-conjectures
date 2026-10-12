@@ -28,63 +28,65 @@
  ],
  "proof": [
   {
-   "text": "*Presentation and construction (Stacks: 'Write $X=\\operatorname{Spec}(A)$. Write $A=\\mathbf Z[x_i]/J$ ... Let $R$ be the integral closure ... Let $A'=R/JR$ and set $X'=\\operatorname{Spec}(A')$').* As $X$ is affine, $X\\cong\\operatorname{Spec}A$ with $A=\\Gamma(X,\\mathcal O_X)$ [def-weil-affine-spectrum]; we replace $X$ by $\\operatorname{Spec}A$. Let $P=\\mathbf Z[x_a]_{a\\in A}$ be the polynomial ring with one variable for each element of $A$; the ring map $P\\to A$, $x_a\\mapsto a$, is surjective, and with $J$ its kernel we get $A\\cong P/J$. $P$ is an integral domain [lem-weil-pbc-polynomial-ring-domain]; let $K$ be its field of fractions and $L$ an algebraic closure of $K$ [def-weil-algebraic-closure]. Let $R\\subseteq L$ be the integral closure of $P$ in $L$; by [lem-weil-pbc-integral-closure-algebraic-extension-normal] (applicable since $L/K$ is algebraic) $R$ is a subring of $L$ containing $P$, integral over $P$. Put $A'=R/JR$ and $X'=\\operatorname{Spec}A'$, and let $\\varphi:A=P/J\\to R/JR$ be the ring map induced by $P\\subseteq R$ (well defined since $J\\subseteq JR$); let $\\pi=\\operatorname{Spec}\\varphi:X'\\to X$ [def-weil-affine-spectrum].",
+   "text": "Let A = Γ(X,⊤), P = Z[x_a] indexed by a in A, K = FractionRing P, L = AlgebraicClosure K, and R = integralClosure P L. Evaluation sends X_a to a, so it is surjective (MvPolynomial.eval₂_X). The affine isomorphism X.isoSpec followed by Spec of this evaluation gives a closed immersion j : X → Spec P (IsClosedImmersion.spec_of_surjective).",
    "uses": [
     "def-weil-affine-spectrum",
     "lem-weil-pbc-polynomial-ring-domain",
     "def-weil-algebraic-closure",
-    "lem-weil-pbc-integral-closure-algebraic-extension-normal"
+    "lem-weil-pbc-spec-quotient-closed-immersion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof, first paragraph"
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), part (1), etale-cohomology.tex line 14467; proof, first paragraph (construction via the integral closure R of Z[x_i] in an algebraic closure of its fraction field, and Lemma 09ZC, label lemma-gabber-for-absolutely-algebraically-closed, line 14445, applied to the normal integral affine scheme Spec R with separably closed function field and its closed subschemes)"
    }
   },
   {
-   "text": "*$\\pi$ is integral (left implicit in Stacks).* Every element of $R/JR$ is the class $\\bar r$ of some $r\\in R$. As $r$ is integral over $P$ there are $p_0,\\dots,p_{n-1}\\in P$ with $r^n+p_{n-1}r^{n-1}+\\dots+p_0=0$ in $R$; reducing modulo $JR$ gives $\\bar r^n+\\varphi(\\bar p_{n-1})\\bar r^{n-1}+\\dots+\\varphi(\\bar p_0)=0$, with $\\bar p_k$ the class of $p_k$ in $A=P/J$. So $\\varphi$ is integral, and $\\pi=\\operatorname{Spec}\\varphi$ is an integral morphism by [lem-weil-pbc-spec-integral-ring-map-integral] [def-weil-finite-integral-morphism].",
+   "text": "The map P → L is injective, being the composite P → K → L. Algebraicity over K gives algebraicity over P via IsFractionRing.comap_isAlgebraic_iff. integralClosure.isFractionRing_of_algebraic makes L a fraction field of R; isIntegrallyClosed_iff_isIntegrallyClosedIn gives normality of R. Transfer algebraic closedness along IsLocalization.algEquiv R⁰ L (FractionRing R), so FractionRing R is separably closed.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+    "def-weil-pbc-normal-ring",
+    "def-pc-separably-closed",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), part (1), etale-cohomology.tex line 14467; proof, first paragraph (construction via the integral closure R of Z[x_i] in an algebraic closure of its fraction field, and Lemma 09ZC, label lemma-gabber-for-absolutely-algebraically-closed, line 14445, applied to the normal integral affine scheme Spec R with separably closed function field and its closed subschemes)"
+   }
+  },
+  {
+   "text": "The integral extension P → R induces an integral map f : Spec R → Spec P by IsIntegralHom.SpecMap_iff. Its injectivity follows by applying R → L and the injectivity of P → L. Lying over (RingHom.IsIntegral.comap_surjective) makes f surjective.",
    "uses": [
     "lem-weil-pbc-spec-integral-ring-map-integral",
-    "def-weil-finite-integral-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof, first paragraph ('This gives an example as in (1)': integrality of X'->X); literature/stacks-project/morphisms.tex Lemma 02K8"
-   }
-  },
-  {
-   "text": "*$\\pi$ is surjective (left implicit in Stacks; lying over, Stacks 00GQ).* The points of $X=\\operatorname{Spec}(P/J)$ are the primes $\\mathfrak p/J$ with $\\mathfrak p\\subseteq P$ a prime containing $J$, and $\\pi$ sends a prime $\\mathfrak Q$ of $R/JR$ to $\\varphi^{-1}(\\mathfrak Q)$ [def-weil-affine-spectrum]. The inclusion $P\\subseteq R$ is injective and integral, so by lying over [pqf-lem-lying-over] there is a prime $\\mathfrak q\\subseteq R$ with $\\mathfrak q\\cap P=\\mathfrak p$. Then $JR\\subseteq\\mathfrak pR\\subseteq\\mathfrak q$, so $\\mathfrak Q=\\mathfrak q/JR$ is a prime of $R/JR$, and $\\varphi^{-1}(\\mathfrak Q)=(\\mathfrak q\\cap P)/J=\\mathfrak p/J$. Hence $\\pi$ is surjective on underlying sets, i.e. surjective [def-weil-surjective-morphism].",
-   "uses": [
-    "def-weil-affine-spectrum",
     "pqf-lem-lying-over",
+    "def-weil-finite-integral-morphism",
     "def-weil-surjective-morphism"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 00GQ (label lemma-integral-overring-surjective), line 7735; used for literature/stacks-project/etale-cohomology.tex, Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof, first paragraph"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), part (1), etale-cohomology.tex line 14467; proof, first paragraph (construction via the integral closure R of Z[x_i] in an algebraic closure of its fraction field, and Lemma 09ZC, label lemma-gabber-for-absolutely-algebraically-closed, line 14445, applied to the normal integral affine scheme Spec R with separably closed function field and its closed subschemes)"
    }
   },
   {
-   "text": "*$R$ is a normal domain with separably closed fraction field.* By [lem-weil-pbc-integral-closure-algebraic-extension-normal] $R$ is an integral domain, $L$ is its field of fractions, and $R$ is integrally closed in $L$, i.e. $R$ is a normal domain [def-weil-pbc-normal-ring]. $L$ is algebraically closed [def-weil-algebraic-closure], so every nonconstant polynomial over $L$, in particular every nonconstant separable one, has a root in $L$: $L$ is separably closed [def-pc-separably-closed]. Thus $\\operatorname{Spec}R$ is a normal integral affine scheme with separably closed function field, the hypothesis of Stacks 09ZC.",
+   "text": "Take X′ = pullback j f and π = pullback.fst j f. Surjectivity is preserved by base change. Integrality is preserved by base change (Mathlib IsIntegralHom pullback.fst instance); equivalently use integral = affine + universally closed, affine base-change permanence, and the definition of universally closed. The other projection k = pullback.snd j f is a closed immersion by base change of j. This pullback is the same Spec(R/JR) construction as in 09ZD, with J the kernel of evaluation.",
    "uses": [
-    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
-    "def-weil-pbc-normal-ring",
-    "def-weil-algebraic-closure",
-    "def-pc-separably-closed"
+    "lem-weil-pbc-surjective-base-change",
+    "pqf-lem-integral-univclosed",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof, first paragraph (hypotheses of Lemma 09ZC, line 14445, for X=Spec R)"
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), part (1), etale-cohomology.tex line 14467; proof, first paragraph (construction via the integral closure R of Z[x_i] in an algebraic closure of its fraction field, and Lemma 09ZC, label lemma-gabber-for-absolutely-algebraically-closed, line 14445, applied to the normal integral affine scheme Spec R with separably closed function field and its closed subschemes)"
    }
   },
   {
-   "text": "*Vanishing on closed subschemes of $X'$ (Stacks: 'This gives an example as in (1) by Lemma 09ZC').* Let $Z'\\to X'$ be a closed immersion [def-weil-closed-immersion], $M$ a finite abelian group and $q\\ge1$. The morphism $X'=\\operatorname{Spec}(R/JR)\\to\\operatorname{Spec}R$ induced by $R\\to R/JR$ is a closed immersion [lem-weil-pbc-spec-quotient-closed-immersion], so the composite $Z'\\to X'\\to\\operatorname{Spec}R$ is a closed immersion [lem-weil-pbc-closed-immersion-comp], i.e. $Z'$ is a closed subscheme of $\\operatorname{Spec}R$. By step 4 and [lem-weil-pbc-gabber-absolutely-algebraically-closed] (Stacks 09ZC; its proof uses 09Z9 = [sbc-lem-etale-over-normal], Algebra 05WS, 09ZB, which uses 03AJ, 03RV and 09ZA, which uses Algebra 04D1 and 09Z9, and the criterion 0GY0, which uses 09AX) we get $H^q(Z'_{\\Et},\\underline M)=0$ [def-weil-pbc-constant-sheaf] [def-weil-pbc-etale-cohomology]. With steps 2 and 3, $\\pi:X'\\to X$ is integral, surjective, and has the required property.",
+   "text": "For any closed immersion i : Z′ → X′, the composite i ≫ k is a closed immersion into Spec R. Apply gabber_absolutely_algebraically_closed to R, its separably closed fraction field, Z′ and i ≫ k. This proves the asserted vanishing for every finite abelian M and q ≥ 1, with no transport of cohomology needed because Z′ itself is unchanged.",
    "uses": [
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-spec-quotient-closed-immersion",
     "lem-weil-pbc-closed-immersion-comp",
     "lem-weil-pbc-gabber-absolutely-algebraically-closed",
     "def-weil-pbc-constant-sheaf",
@@ -93,7 +95,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof, first paragraph, last sentence; Lemma 09ZC (label lemma-gabber-for-absolutely-algebraically-closed), line 14445"
+    "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), part (1), etale-cohomology.tex line 14467; proof, first paragraph (construction via the integral closure R of Z[x_i] in an algebraic closure of its fraction field, and Lemma 09ZC, label lemma-gabber-for-absolutely-algebraically-closed, line 14445, applied to the normal integral affine scheme Spec R with separably closed function field and its closed subschemes)"
    }
   }
  ],
@@ -101,24 +103,28 @@
   "def-weil-affine-spectrum",
   "lem-weil-pbc-polynomial-ring-domain",
   "def-weil-algebraic-closure",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
   "lem-weil-pbc-integral-closure-algebraic-extension-normal",
-  "lem-weil-pbc-spec-integral-ring-map-integral",
-  "def-weil-finite-integral-morphism",
-  "pqf-lem-lying-over",
-  "def-weil-surjective-morphism",
   "def-weil-pbc-normal-ring",
   "def-pc-separably-closed",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-spec-integral-ring-map-integral",
+  "pqf-lem-lying-over",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-surjective-base-change",
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
   "lem-weil-pbc-closed-immersion-comp",
   "lem-weil-pbc-gabber-absolutely-algebraically-closed",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-etale-cohomology"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 09ZD (label lemma-integral-cover-trivial-cohomology), line 14467, proof, first paragraph; integrality and surjectivity of X'->X, which Stacks leaves implicit, written out from Algebra Lemma 00GQ and Morphisms Lemma 02K8"
+  "place": "Stacks 09ZD(1), first proof paragraph; T2 implements the quotient construction as a pullback, using Mathlib base-change instances."
  },
  "mathlib_searches": [
   {
@@ -204,5 +210,15 @@
   "group": "M1",
   "result": "pass",
   "note": "IsAffine X; ∃ X' π tied, IsIntegralHom π ∧ Surjective π; ∀ closed immersion Z'→X', finite M : Type (u+1), q ≥ 1: IsZero of Etale.cohomology AddCommGrpCat.{u+1} Z' q on singleFunctor 0 of constantSheaf (landed form as EtaleCohomologicalDimension)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T042422-L-1822155",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
