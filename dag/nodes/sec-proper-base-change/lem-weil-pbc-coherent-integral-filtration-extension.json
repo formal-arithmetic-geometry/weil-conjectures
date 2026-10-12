@@ -1,0 +1,103 @@
+{
+ "id": "lem-weil-pbc-coherent-integral-filtration-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-filtration-integral-subschemes",
+   "place": "proof step 2 or 5",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Concatenating coherent integral-ideal filtrations",
+ "statement": "theorem coherentIntegralFiltration_of_shortExact (X : Scheme.{u}) [IsLocallyNoetherian X] (S : ShortComplex X.Modules) (hS : S.ShortExact) (h₁ : RingedSpace.IsCoherent X.toRingedSpace S.X₁) (h₂ : RingedSpace.IsCoherent X.toRingedSpace S.X₂) (h₃ : RingedSpace.IsCoherent X.toRingedSpace S.X₃) (hA : HasCoherentIntegralFiltration S.X₁) (hB : HasCoherentIntegralFiltration S.X₃) : HasCoherentIntegralFiltration S.X₂",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YF, proof"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The construction is the induced filtration / adic reduction / generic-point argument described in the declaration docstring.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YF proof"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 01YF proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent sheaf on Noetherian scheme has a filtration whose quotients are pushforwards of ideal sheaves of integral closed subschemes",
+   "results": "Ideal.Filtration, Ideal.stableFiltration_stable (Mathlib.RingTheory.Filtration); Scheme.IdealSheafData.subscheme (Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme); IdealSheafData.vanishingIdeal, IdealSheafData.support (Mathlib.AlgebraicGeometry.IdealSheaf.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every coherent module on a Noetherian scheme admits a finite filtration with successive quotients isomorphic to pushforwards of ideal sheaves on integral closed subschemes",
+   "results": "IsLocallyNoetherian, IsNoetherian, isNoetherian_iff_of_finite_iSup_eq_top, IsLocallyNoetherian.component_noetherian (Mathlib.AlgebraicGeometry.Noetherian); IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime (Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness: the ring-level devissage of a finite module over a Noetherian ring with quotients A/p, not a statement on schemes)",
+   "date": "2026-10-10",
+   "verdict": "no match (the ring-level analogue only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlni 'filtration' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rniE 'devissage|coherent.?filt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no file of AlgebraicGeometry mentions a filtration; devissage only in IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime (RingTheory/Ideal/AssociatedPrime/Finiteness.lean:119); Mathlib has no coherent sheaves on schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T184321-L-4010987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "tool_uses": [],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationExtension",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherentIntegralFiltration_of_shortExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentIntegralFiltrationExtension.lean",
+  "statement": "theorem coherentIntegralFiltration_of_shortExact\n    (X : Scheme.{u}) [IsLocallyNoetherian X] (S : ShortComplex X.Modules)\n    (hS : S.ShortExact)\n    (h₁ : RingedSpace.IsCoherent X.toRingedSpace S.X₁)\n    (h₂ : RingedSpace.IsCoherent X.toRingedSpace S.X₂)\n    (h₃ : RingedSpace.IsCoherent X.toRingedSpace S.X₃)\n    (hA : HasCoherentIntegralFiltration S.X₁)\n    (hB : HasCoherentIntegralFiltration S.X₃) :\n    HasCoherentIntegralFiltration S.X₂",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T184321-L-4010987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
