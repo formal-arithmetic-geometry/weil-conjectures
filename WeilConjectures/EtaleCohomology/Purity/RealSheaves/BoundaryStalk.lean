@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.InertiaNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representation
+public import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
 public import WeilConjectures.ConstructibleSheaf.LowerStarSpecialization
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryInertia
 
 /-!
 # Boundary stalks of direct images as inertia invariants
@@ -393,5 +395,74 @@ end Invariants
 end Surjective
 
 end Etale
+
+namespace WeilGroup.BoundaryChart
+
+open Etale
+
+open scoped Pointwise
+
+variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p]
+  [Smooth p] [IsIntegral C] {pU : U ⟶ Spec (.of K)} [IsCurve pU] [ConnectedSpace U]
+  {j : U ⟶ C} [IsOpenImmersion j] [Nonempty U] {z : C} (c : BoundaryChart p j z)
+
+local notation "Ω" => SeparableClosure (Scheme.functionField C)
+
+instance : Fact (IsAffineOpen c.W) := ⟨c.isAffineOpen⟩
+
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+  (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search through `SeparableClosure` and its integral closures is slow
+/-- Blueprint `lem-wf-boundary-stalk-invariants` (finite coefficient level): for a dense open
+`j : U₀ ⟶ C₀` of a smooth curve over a finite field, a boundary point `z` with an affine chart
+`c`, and a finite locally constant sheaf `F` of modules over a finite ring on `U₀`, the stalk of
+the middle extension `j_* F` at the geometric point `x̄` over `z` given by the point `Q` of `c`
+(the closed point of `Spec B_Q`) is the module of invariants under the inertia group
+`I_Q ⊆ Gal(Ω / k(C))` of the geometric generic stalk `F_η`, through the specialization map. -/
+noncomputable def boundaryStalkEquiv (hz : z ∉ Set.range j.base) :
+    ((pointSmallEtale (boundaryGeometricPoint c.point)).sheafFiber.obj
+        ((j)_*[ModuleCat.{u + 1} Λ].obj F) : ModuleCat.{u + 1} Λ) ≃ₗ[Λ]
+      inertiaInvariants j c.point F :=
+  have := c.isMaximal_ideal
+  have : Finite (C.residueField z) := boundary_subset_finitePoints (p := p) j hz
+  have := c.finite_quotient
+  have := isDedekindDomain_of_isAffineOpen p c.isAffineOpen
+  have := LocallyOfFiniteType.isLocallyNoetherian p
+  have := IsRegular.of_smooth p
+  boundaryStalkLinearEquiv j c.point c.ϖ (c.ϖ_ne_zero hz) (c.opensRange_inf hz) c.ideal F
+    (fun Y _ ↦
+      have : ConnectedSpace Y.obj.left := connectedSpace_of_isConnected Y
+      have : Etale Y.obj.hom := Y.obj.prop
+      let q : Y.obj.left ⟶ Spec (.of K) := Y.obj.hom ≫ j ≫ p
+      have : Smooth q := inferInstance
+      have := LocallyOfFiniteType.isLocallyNoetherian q
+      have := IsRegular.of_smooth q
+      IsRegular.isIntegral _)
+    (isDomain_stalk_left_of_isRegular)
+
+lemma boundaryStalkEquiv_apply (hz : z ∉ Set.range j.base)
+    (y : ((pointSmallEtale (boundaryGeometricPoint c.point)).sheafFiber.obj
+        ((j)_*[ModuleCat.{u + 1} Λ].obj F) : ModuleCat.{u + 1} Λ)) :
+    (c.boundaryStalkEquiv F hz y).1 = boundarySpecialization j c.point F y :=
+  rfl
+
+set_option synthInstance.maxHeartbeats 200000 in
+-- instance search through `SeparableClosure` and its integral closures is slow
+/-- Blueprint `lem-wf-boundary-stalk-invariants` (Frobenius equivariance): for `σ` in the
+decomposition group of `Q`, the identification `(j_* F)_x̄ ≃ F_η^I` intertwines the action of `σ`
+on `F_η^I` with the action on `(j_* F)_x̄` of the automorphism of the geometric point `x̄`
+induced by the residue automorphism of `σ`. For `σ` a residue Frobenius lift, this is the
+action of the geometric Frobenius of `κ(z)` on the boundary stalk. -/
+theorem boundaryStalkEquiv_boundaryStalkMap (hz : z ∉ Set.range j.base) {σ : Gal(Ω/C.functionField)}
+    (hσ : σ ∈ MulAction.stabilizer Gal(Ω/C.functionField) c.point)
+    (y : ((pointSmallEtale (boundaryGeometricPoint c.point)).sheafFiber.obj
+        ((j)_*[ModuleCat.{u + 1} Λ].obj F) : ModuleCat.{u + 1} Λ)) :
+    (c.boundaryStalkEquiv F hz (boundaryStalkMap c.point hσ F y)).1 =
+      galoisStalkMap F σ (c.boundaryStalkEquiv F hz y).1 :=
+  ConcreteCategory.congr_hom (boundaryStalkMap_comp_boundarySpecialization j c.point hσ F) y
+
+end WeilGroup.BoundaryChart
 
 end AlgebraicGeometry
