@@ -1,0 +1,206 @@
+{
+ "id": "lem-weil-pbc-inseparable-degree-drop",
+ "kind": "statement",
+ "title": "One purely inseparable coefficient-root construction decreases the inseparable degree",
+ "statement": "Let k and K be fields [def-pc-field-extension] in the same universe with K/k finitely generated. Let s be a finite transcendence basis [def-weil-pbc-transcendence-basis], assume K/k(s) is finite, and suppose its inseparable degree [K : K_s] is not one, where K_s is the relative separable closure [def-weil-pbc-relative-separable-closure] of k(s) in K. There exist fields l and L in that universe and a commuting square k → l → L, k → K → L, with l/k and L/K finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension], such that L/l is finitely generated and admits a finite transcendence basis t with L/l(t) finite and [L : L_s] < [K : K_s], where L_s is the relative separable closure of l(t) in L.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 04KM, the coefficient-root construction and strict degree decrease in the induction step; steps 4–9 of lem-weil-pbc-make-separably-generated"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "The finite extension K/k(s) has positive inseparable degree; degree different from one means it is not separable. Characteristic zero fields are perfect and algebraic extensions over them are separable, so only positive prime characteristic remains. Take its relative separable closure K_s and beta outside K_s with beta^p in K_s by the shortest Frobenius chain. Put alpha = beta^p. Its minimal polynomial P over E is separable, since alpha lies in K_s, and hence has distinct roots in an algebraic closure.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(The step marked 'details omitted': $k'$ and $E'$.) Fix an algebraic closure $\\Omega$ of $K$ [def-weil-algebraic-closure] and view $K\\subseteq\\Omega$. For $c\\in\\Omega$ the polynomial $T^p-c$ has a root in $\\Omega$, unique because the Frobenius $u\\mapsto u^p$ of $\\Omega$ is an injective ring homomorphism [def-weil-ring-frobenius]; write it $c^{1/p}$. Since $x_1,\\dots,x_r$ are algebraically independent over $k$ [def-weil-pbc-transcendence-basis], every element of $E_x$ is $f(x)/g(x)$ with $f,g\\in k[X_1,\\dots,X_r]$, $g(x)\\ne0$ (these quotients form a subfield of $K$ containing $k$ and the $x_i$, and lie in every such subfield). Write $c_j=f_j(x)/g_j(x)$ ($j=1,\\dots,m$) and $h_j=f_jg_j^{p-1}$, so $c_j=h_j(x)/g_j(x)^p$. Let $S\\subseteq k$ be the finite set of coefficients of $h_1,\\dots,h_m$, and put $k'=k(s^{1/p};s\\in S)\\subseteq\\Omega$ and $E'=k'(x_1^{1/p},\\dots,x_r^{1/p})\\subseteq\\Omega$. Then $E_x\\subseteq E'$ (as $k\\subseteq k'$ and $x_i=(x_i^{1/p})^p$). For $h_j=\\sum_I s_IX^I$ let $\\tilde h_j=\\sum_I s_I^{1/p}\\prod_i(x_i^{1/p})^{I_i}\\in E'$; since the Frobenius of $\\Omega$ is a ring homomorphism, $\\tilde h_j^p=\\sum_I s_Ix^I=h_j(x)$. Hence $c_j=(\\tilde h_j/g_j(x))^p$: every coefficient of $P$ is a $p$-th power in $E'$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-ring-frobenius",
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 04KM (lemma-make-separably-generated, line 9962), proof: 'Let k'/k be a finite purely inseparable extension obtained by adjoining pth roots such that each a_i is a pth power in k'(x_1^{1/p}, ..., x_r^{1/p}). Such an extension exists; details omitted.'"
+   }
+  },
+  {
+   "text": "(Adjoining $p$-th roots is finite purely inseparable.) Let $F\\subseteq\\Omega$ be a subfield and $\\beta_1,\\dots,\\beta_t\\in\\Omega$ with $\\beta_i^p\\in F$. The set $\\{\\gamma\\in\\Omega:\\gamma^p\\in F\\}$ is a subfield of $\\Omega$ (the Frobenius is a ring homomorphism [def-weil-ring-frobenius], and $(\\gamma^{-1})^p=(\\gamma^p)^{-1}$) containing $F$ and all $\\beta_i$, so every $\\gamma\\in F(\\beta_1,\\dots,\\beta_t)$ has $\\gamma^p\\in F$; each $\\beta_i$ is algebraic over $F$ [def-weil-algebraic-element] (a root of $T^p-\\beta_i^p$), so $F(\\beta_1,\\dots,\\beta_t)/F$ is finite by [lem-weil-pbc-algebraic-generators-finite-extension], hence finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]. With $F=k$ and the $s^{1/p}$: $k'/k$ is finite purely inseparable and $k'^p\\subseteq k$. Let $L\\subseteq\\Omega$ be the compositum of $K$ and $E'$ (the smallest subfield containing both); as $k\\subseteq K$, $L=K(s^{1/p},x_1^{1/p},\\dots,x_r^{1/p};s\\in S)$ with $s,x_i\\in K$, so with $F=K$: $L/K$ is finite purely inseparable. This is the diagram of the source with $L$ the compositum.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-algebraic-element",
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 04KM (lemma-make-separably-generated, line 9962), proof: 'k'/k be a finite purely inseparable extension obtained by adjoining pth roots ... Let L be a field fitting into the diagram ... We may and do assume L is the compositum of K and k'(x_1^{1/p}, ..., x_r^{1/p})'"
+   }
+  },
+  {
+   "text": "($x^{1/p}$ is a transcendence basis of $L/k'$.) (a) $K=k(a_1,\\dots,a_n)$ and $k\\subseteq k'$ give $L=k'(x_1^{1/p},\\dots,x_r^{1/p},a_1,\\dots,a_n)$: $L/k'$ is finitely generated. (b) By [lem-weil-pbc-compositum-degree-bound] with $F=E_x\\subseteq K$, $E_x\\subseteq M=E'$ (step 2) and $KE'=L$: $L/E'$ is finite with $[L:E']\\le[K:E_x]$; hence $L$ is algebraic over $E'$ [def-weil-algebraic-element] (for $\\lambda\\in L$ the powers $1,\\lambda,\\lambda^2,\\dots$ are linearly dependent over $E'$). (c) The $x_i^{1/p}$ are algebraically independent over $k'$ [def-kun-transcendence-degree]: if $G\\in k'[X_1,\\dots,X_r]$ is nonzero with $G(x^{1/p})=0$, let $G^{(p)}$ be $G$ with every coefficient raised to the $p$-th power; its coefficients lie in $k$ (step 3: $k'^p\\subseteq k$), it is nonzero (the Frobenius of $k'$ is injective), and $G^{(p)}(x)=G(x^{1/p})^p=0$ because the Frobenius of $\\Omega$ is a ring homomorphism [def-weil-ring-frobenius], contradicting the algebraic independence of $x$ over $k$. By (b) and (c), $x^{1/p}=(x_1^{1/p},\\dots,x_r^{1/p})$ is a finite transcendence basis of $L/k'$ [def-weil-pbc-transcendence-basis] with $k'(x^{1/p})=E'$, and $k'$ has characteristic $p$.",
+   "uses": [
+    "lem-weil-pbc-compositum-degree-bound",
+    "def-weil-algebraic-element",
+    "def-kun-transcendence-degree",
+    "def-weil-ring-frobenius",
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 04KM (lemma-make-separably-generated, line 9962), proof: implicit in 'By induction we can find k' ⊂ k'' and L ⊂ L' as in the lemma for the extension L/k'' (the induction is applied to L/k' with the transcendence basis x_1^{1/p}, ..., x_r^{1/p})"
+   }
+  },
+  {
+   "text": "($\\beta$ becomes separable.) Let $L_s\\subseteq L$ be the separable algebraic closure of $E'$ in $L$ [def-weil-pbc-relative-separable-closure]; by [lem-weil-pbc-separable-first-purely-inseparable] (step 4: $L/E'$ is algebraic) $L_s$ is a subfield containing $E'$ and $L_s/E'$ is separable algebraic. Every $\\kappa\\in K_s$ lies in $L_s$: its minimal polynomial $Q$ over $E_x$ is separable, the minimal polynomial $Q_1$ of $\\kappa$ over $E'\\supseteq E_x$ divides $Q$, and a divisor of a separable polynomial is separable [def-pc-separable-polynomial] (if $Q=Q_1R$ then $Q'=Q_1'R+Q_1R'$, so a common factor of $Q_1,Q_1'$ divides $Q$ and $Q'$). In particular $\\alpha\\in L_s$ and $K_s\\subseteq L_s$. Now $P\\in E_x[T]\\subseteq E'[T]$ has $P(\\alpha)=0$, pairwise distinct roots in an algebraic closure (step 1) and all coefficients $p$-th powers in $E'$ (step 2), so [lem-weil-pbc-separable-root-pth-power] applied to the separable algebraic extension $L_s/E'$ [def-weil-pbc-separable-algebraic-extension] gives $\\alpha'\\in L_s$ with $\\alpha'^p=\\alpha$. Then $(\\beta-\\alpha')^p=\\beta^p-\\alpha'^p=0$ in the field $L$ [def-weil-ring-frobenius], so $\\beta=\\alpha'\\in L_s$.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "def-pc-separable-polynomial",
+    "lem-weil-pbc-separable-root-pth-power",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 04KM (lemma-make-separably-generated, line 9962), proof: 'Let L/L_sep/k'(x_1^{1/p}, ..., x_r^{1/p}) be the subextension found in Fields, Lemma 030K. Then L_sep is the compositum of K_sep and k'(x_1^{1/p}, ..., x_r^{1/p}). The element α ∈ L_sep is a zero of the polynomial P ... By Fields, Lemma 031V we see that α = (α')^p for some α' ∈ L_sep. Clearly, this means that β maps to α' ∈ L_sep.'"
+   }
+  },
+  {
+   "text": "(The degree drops.) Put $K_1=K_s(\\beta)\\subseteq K$. By step 5, $K_1\\subseteq L_s$, and $E'\\subseteq L_s$. Apply [lem-weil-pbc-compositum-degree-bound] in $\\Omega$ with $F=K_1\\subseteq K$ ($K/K_1$ is finite, as $K/E_x$ is finite and $E_x\\subseteq K_1$) and $K_1\\subseteq M=L_s$: the compositum $KL_s$ is contained in $L$ and contains $K$ and $E'$, hence equals $L$, and $[L:L_s]\\le[K:K_1]$. By [lem-weil-pbc-field-degree-multiplicativity], $e=[K:K_s]=[K:K_1]\\,[K_1:K_s]$ with $[K_1:K_s]\\ge2$ because $\\beta\\notin K_s$. Hence $d(L,k',x^{1/p})=[L:L_s]\\le e/2<e$.",
+   "uses": [
+    "lem-weil-pbc-compositum-degree-bound",
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 04KM (lemma-make-separably-generated, line 9962), proof: 'In other words, we get the tower of fields ... Thus this construction leads to a new situation with [L : L_sep] < [K : K_sep].'"
+   }
+  },
+  {
+   "text": "The construction uses actual subfields of an algebraic closure of K, so both fields have the same universe as K. Their inclusion maps induce the required algebra structures and scalar towers. The rooted finite transcendence basis and finite L/k_1(t) established above give exactly the output of the one-step theorem; no induction or final separating basis is asserted.",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "def-pc-field-extension",
+  "def-pc-separable-polynomial",
+  "def-weil-algebraic-closure",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-ring-frobenius",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-weil-pbc-compositum-degree-bound",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-weil-pbc-separable-root-pth-power"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04KM, coefficient-root construction and degree-drop paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonseparable finite extension of a rational function field admits a finite purely inseparable extension of its base and total field with a strictly smaller inseparable degree relative to a new transcendence basis",
+   "results": "exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType, exists_isTranscendenceBasis_and_isSeparable_of_perfectField, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow', Field.finInsepDegree_top_le_finInsepDegree_of_isScalarTower, IntermediateField.sepDegree_adjoin_eq_of_isAlgebraic_of_isPurelyInseparable, Field.finInsepDegree_mul_finInsepDegree_of_isAlgebraic",
+   "date": "2026-10-12",
+   "verdict": "No strict degree-drop construction: results give the degree definition, monotonicity, or separating bases under stronger hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "finInsepDegree.*lt|lt.*finInsepDegree|separably.generated",
+   "results": "Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/SeparableClosure.lean, Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/FieldTheory/SeparablyGenerated.lean, Mathlib/FieldTheory/SeparablyGenerated.lean",
+   "date": "2026-10-12",
+   "verdict": "No strict degree-drop construction: results give the degree definition, monotonicity, or separating bases under stronger hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Field.finInsepDegree",
+   "results": "Field.finInsepDegree, Field.finInsepDegree_self, Algebra.IsSeparable.finInsepDegree_eq, Field.finInsepDegree_def', Field.instNeZeroFinInsepDegree, Field.finInsepDegree_eq_of_equiv, Field.finInsepDegree_top_le_finInsepDegree_of_isScalarTower, IntermediateField.finInsepDegree_le_of_left_le",
+   "date": "2026-10-12",
+   "verdict": "No strict degree-drop construction: results give the degree definition, monotonicity, or separating bases under stronger hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite purely inseparable change of fields strictly decreases the inseparable degree over a finite transcendence basis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.MakeSeparablyGenerated",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-make-separably-generated",
+   "place": "steps 4–9 of the induction on the inseparable degree",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.InseparableDegreeDrop",
+  "file": "lean/Sheaf/FieldTheory/InseparableDegreeDrop.lean",
+  "declaration": "FieldExtension.exists_inseparableDegree_drop",
+  "statement": "theorem exists_inseparableDegree_drop\n    (k K : Type w) [Field k] [Field K] [Algebra k K]\n    (hfg : (⊤ : IntermediateField k K).FG) (s : Finset K)\n    (hs : IsTranscendenceBasis k ((↑) : s → K))\n    [Module.Finite (IntermediateField.adjoin k (s : Set K)) K]\n    (hne : Field.finInsepDegree (IntermediateField.adjoin k (s : Set K)) K ≠ 1) :\n    ∃ (l : Type w) (hl : Field l) (akl : Algebra k l)\n      (L : Type w) (hL : Field L) (aKL : Algebra K L) (alL : Algebra l L)\n      (akL : Algebra k L) (htl : IsScalarTower k l L) (htK : IsScalarTower k K L),\n      Module.Finite k l ∧ IsPurelyInseparable k l ∧\n      Module.Finite K L ∧ IsPurelyInseparable K L ∧\n      (⊤ : IntermediateField l L).FG ∧\n      ∃ t : Finset L, IsTranscendenceBasis l ((↑) : t → L) ∧\n        Module.Finite (IntermediateField.adjoin l (t : Set L)) L ∧\n        Field.finInsepDegree (IntermediateField.adjoin l (t : Set L)) L <\n          Field.finInsepDegree (IntermediateField.adjoin k (s : Set K)) K",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T135244-L-1671750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T135244-L-1671750",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
