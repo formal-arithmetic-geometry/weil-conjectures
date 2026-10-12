@@ -12,9 +12,9 @@
  "mathlib_match": null,
  "proof_origin": {
   "by": "agent",
-  "group": "S3",
-  "date": "2026-10-12",
-  "note": "Source argument made explicit; localized-unit/counit compatibility supplies the categorical calculation."
+  "group": "H1",
+  "date": "2026-10-13",
+  "note": "Complete Lean proof by termwise transposes, localized-unit transport, exact-functor factorization compatibility, naturality, and isomorphism cancellation."
  },
  "id": "lem-sc-localization-nested-adjunction-mate",
  "title": "Exact localization preserves a nested adjunction mate",
@@ -24,21 +24,19 @@
  ],
  "proof": [
   {
-   "text": "Apply the termwise adjunction on complexes. Its unit and counit components are exactly the original unit and counit in each degree, so the componentwise assumption identifies f with the termwise nested mate by complex extensionality. Localize this identity at quasi-isomorphisms, which all five functors preserve by [lem-weil-pbc-exact-functor-derived-factorization].",
+   "text": "Use homological-complex extensionality and the degreewise hypothesis hf to identify the transpose of f: the termwise a2 unit followed by R2(f) equals cK.inv followed by T applied to the termwise a1 unit and cK.hom. This is hK in the Lean proof.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove the private derivedPresentation_unit formula: expand derivedPresentation, use unit_leftAdjointUniq_hom_app, the naturality of the localized unit, and localization_unit_app, then cancel the factorization isomorphisms. Prove derivedComparison_fac by composing mapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_fac; the composition comparison for the identity natural isomorphism is the identity on complexes. These identify the chosen units and comparison under the exact-localization factorization [lem-weil-pbc-exact-functor-derived-factorization].",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false
   },
   {
-   "text": "Expand the localized unit and counit on QK using Mathlib Adjunction.localization_unit_app and localization_counit_app (Mathlib/CategoryTheory/Localization/Adjunction.lean:118,127). Use the composition and natural-isomorphism factorization identities mapDerivedCategoryCompIso_fac and mapDerivedCategoryNatIso_fac to replace the localized comparison by cD. Cancel consecutive inverse factorization maps. This gives the asserted equation for E=QK and the localized adjunctions.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Naturality carries the equation along e:QK≅E. The chosen adjunctions are compared with the localized ones by leftAdjointUniq. Its unit and counit compatibility equations carry the mates to each other, yielding the asserted equation with the concrete p1,p2. All these transports are isomorphisms, so no fullness of Q on morphisms is required.",
+   "text": "Apply injectivity of d2.homEquiv to the required mate equality. Use derivedPresentation_unit for each adjunction, naturality of the R2 factorization and of cD, and hK. Postcompose with the invertible R2 factorization at M=L(RK), use derivedComparison_fac at M, and cancel the R factorization inside T. Naturality of the T factorization moves T of the localized unit to Q of its termwise image. Naturality of cD.inv moves e.inv to the common left prefix. Obtain the inverse comparison formula at K by cancelling Q(cK.hom) in derivedComparison_fac, and rewrite the remaining composites to identical expressions. No counit formula, resolution, or unproved intermediate theorem is needed.",
    "uses": [],
    "elementary": true
   }
@@ -130,10 +128,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T173903-L-3305888",
-  "kind": "interface",
+  "landing": "20261012T184302-L-4004214",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
