@@ -9,18 +9,6 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Smooth.Basic
-import Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct
-import Sheaf.RingTheory.ClosedPointDimensionLocalRing
-import Sheaf.RingTheory.Depth
-import Sheaf.RingTheory.FlatOfFlatClosedFiber
-import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
-import Sheaf.RingTheory.MiracleFlatness
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.SingularIdeal
-import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
-import Sheaf.RingTheory.SmoothFibreRegularLocal
-import Sheaf.RingTheory.SmoothLocalizationConormalSplit
-
 /-!
 # An étale polynomial chart along the zero section
 
@@ -235,6 +223,29 @@ properties give it directly, and the agreement with 00U1 is
 def-sbc-locally-finite-presentation, def-weil-flat-morphism, lem-weil-pbc-flat-local-ring-maps,
 def-weil-unramified-morphism, lem-weil-pbc-unramified-ring-map-iff-unramified-affine,
 def-weil-etale-morphism, lem-weil-pbc-etale-ring-map-iff-etale-affine. -/
+/- Core construction of the chart, retaining the canonical map on constants.
+
+The additional constant-map equation records the retraction part of the construction and is
+used to extract the statement below.
+(blueprint: lem-weil-pbc-smooth-conormal-basis-etale-polynomial-chart-core).
+-/
+theorem exists_etale_polynomial_chart_core
+    (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)
+    [Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]
+    (b : Module.Basis (Fin c)
+      (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))
+      (Ideal.span (Set.range f)).Cotangent)
+    (hb : ∀ j : Fin c,
+      b j = (Ideal.span (Set.range f)).toCotangent
+        ⟨f j, Ideal.subset_span (Set.mem_range_self j)⟩) :
+    ∃ g : MvPolynomial (Fin c) (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)),
+      MvPolynomial.constantCoeff g = 1 ∧
+      ∃ θ : MvPolynomial (Fin n) R →ₐ[R] Localization.Away g,
+        @Etale (MvPolynomial (Fin n) R) (Localization.Away g) _ _
+            θ.toRingHom.toAlgebra ∧
+          θ.toRingHom.comp MvPolynomial.C = Algebra.ofId R (Localization.Away g) := by
+  sorry
+
 theorem exists_etale_polynomial_chart_of_conormal_basis
     (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)
     [Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]
@@ -248,6 +259,9 @@ theorem exists_etale_polynomial_chart_of_conormal_basis
       MvPolynomial.constantCoeff g = 1 ∧
       ∃ θ : MvPolynomial (Fin n) R →ₐ[R] Localization.Away g,
         @Etale (MvPolynomial (Fin n) R) (Localization.Away g) _ _
-          θ.toRingHom.toAlgebra := by sorry
+          θ.toRingHom.toAlgebra := by
+  obtain ⟨g, hg, θ, hθ, _⟩ :=
+    exists_etale_polynomial_chart_core R n c f b hb
+  exact ⟨g, hg, θ, hθ⟩
 
 end Algebra
