@@ -10,10 +10,7 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.Algebra.Homology.FilteredComplexZBDescription
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.ExactCoupleMorphism
-import Sheaf.CategoryTheory.SpectralSequencePageInduction
+import Sheaf.CategoryTheory.BoundedFilteredComplexPageCore
 
 /-!
 # Pages for the canonical quotient transitions of a bounded filtered complex
@@ -29,6 +26,90 @@ universe u v
 open CategoryTheory.Limits
 
 namespace CategoryTheory
+
+private theorem page_zero_of_first {C : Type u} [Category.{v} C] [Abelian C]
+    (E : CohomologicalSpectralSequence C 1) (pq : ℤ × ℤ)
+    (h : IsZero ((E.page 1).X pq)) (r : ℤ) (hr : 1 ≤ r) :
+    IsZero ((E.page r hr).X pq) := by
+  have hn : ∀ n : ℕ, IsZero ((E.page (1 + n) (by omega)).X pq) := by
+    intro n
+    induction n with
+    | zero => simpa using h
+    | succ n ih =>
+      exact (E.iso (1 + n) (1 + (n + 1)) pq (by omega) (by omega)).isZero_iff.mp
+        ((E.page (1 + n) (by omega)).sc pq |>.isZero_homology_of_isZero_X₂ ih)
+  obtain ⟨n, hn'⟩ : ∃ n : ℕ, r = 1 + n := ⟨(r - 1).toNat, by omega⟩
+  subst r
+  exact hn n
+
+private theorem quadrant_differentials {C : Type u} [Category.{v} C] [Abelian C]
+    (E : CohomologicalSpectralSequence C 1)
+    (h : ∀ (p q r : ℤ) (hr : 1 ≤ r), (p < 0 ∨ q < 0) →
+      IsZero ((E.page r hr).X (p, q)))
+    (p q r : ℤ) (hr : 1 ≤ r) (hb : max p q + 1 < r) :
+    (E.page r hr).d (p, q) (p + r, q - r + 1) = 0 ∧
+      (E.page r hr).d (p - r, q + r - 1) (p, q) = 0 := by
+  constructor
+  · exact (h (p + r) (q - r + 1) r hr (Or.inr (by omega))).eq_of_tgt _ _
+  · exact (h (p - r) (q + r - 1) r hr (Or.inl (by omega))).eq_of_src _ _
+
+private theorem graded_zero {C : Type u} [Category.{v} C] [Abelian C]
+    {K : CochainComplex C ℤ} (F : DecreasingFiltration K)
+    (h : ∀ p : ℤ, p ≤ 0 → F.step p = ⊤) (p : ℤ) (hp : p < 0) (n : ℤ) :
+    IsZero ((F.gradedPiece p).homology n) := by
+  have hG : IsZero (F.gradedPiece p) := by
+    dsimp only [DecreasingFiltration.gradedPiece]
+    have hEpi : ∀ (A B : Subobject K) (hAB : A ≤ B), A = B →
+        Epi (Subobject.ofLE A B hAB) := by
+      intro A B hAB hEq
+      subst B
+      simp only [Subobject.ofLE_refl]
+      infer_instance
+    have := hEpi (F.step (p + 1)) (F.step p) (F.antitone_step (by omega))
+      ((h (p + 1) (by omega)).trans (h p (by omega)).symm)
+    exact isZero_cokernel_of_epi _
+  exact (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) n).map_isZero hG
+
+private theorem quadrant_later_iso {C : Type u} [Category.{v} C] [Abelian C]
+    (E : CohomologicalSpectralSequence C 1)
+    (h : ∀ (p q r : ℤ) (hr : 1 ≤ r), (p < 0 ∨ q < 0) →
+      IsZero ((E.page r hr).X (p, q)))
+    (p q r t : ℤ) (hr : 1 ≤ r) (ht : r ≤ t) (hb : max p q + 1 < r) :
+    Nonempty ((E.page r hr).X (p, q) ≅ (E.page t (by omega)).X (p, q)) := by
+  have hnext (s : ℤ) (hs : r ≤ s) :
+      Nonempty ((E.page s (by omega)).X (p, q) ≅
+        (E.page (s + 1) (by omega)).X (p, q)) := by
+    let K := E.page s (by omega)
+    have hd := quadrant_differentials E h p q s (by omega) (by omega)
+    have hprev : (ComplexShape.up' ((s, 1 - s) : ℤ × ℤ)).prev (p, q) =
+        (p - s, q + s - 1) := by
+      apply ComplexShape.prev_eq'
+      change (p - s, q + s - 1) + (s, 1 - s) = (p, q)
+      ext <;> dsimp <;> omega
+    have hnext : (ComplexShape.up' ((s, 1 - s) : ℤ × ℤ)).next (p, q) =
+        (p + s, q - s + 1) := by
+      apply ComplexShape.next_eq'
+      change (p, q) + (s, 1 - s) = (p + s, q - s + 1)
+      ext <;> dsimp
+      omega
+    let e := K.homologyIsoSc' (p - s, q + s - 1) (p, q)
+      (p + s, q - s + 1) hprev hnext
+    let e' := (ShortComplex.HomologyData.ofZeros
+      (K.sc' (p - s, q + s - 1) (p, q) (p + s, q - s + 1)) hd.2 hd.1).left.homologyIso
+    exact ⟨e'.symm ≪≫ e.symm ≪≫ E.iso s (s + 1) (p, q) rfl (by omega)⟩
+  have hn : ∀ n : ℕ, Nonempty ((E.page r hr).X (p, q) ≅
+      (E.page (r + n) (by omega)).X (p, q)) := by
+    intro n
+    induction n with
+    | zero => exact ⟨E.pageXIsoOfEq (p, q) r (r + 0) (by omega) hr⟩
+    | succ n ih =>
+      obtain ⟨e⟩ := ih
+      obtain ⟨e'⟩ := hnext (r + n) (by omega)
+      exact ⟨e ≪≫ e' ≪≫ E.pageXIsoOfEq (p, q) (r + n + 1)
+        (r + ((n + 1 : ℕ) : ℤ)) (by omega) (by omega)⟩
+  obtain ⟨n, hn'⟩ : ∃ n : ℕ, t = r + n := ⟨(t - r).toNat, by omega⟩
+  subst t
+  exact hn n
 
 /-- Construction of the pages and comparisons for supplied canonical quotient transitions.
 Source: Stacks Project, Homology, Section 12.24, Lemmas 12.24.2--12.24.4 and 12.24.11;
@@ -228,6 +309,25 @@ theorem boundedFilteredComplex_canonicalPages
             ((S.obj U).page r hr).d (p - r, q + r - 1) (p, q) = 0 ∧
             Nonempty (((S.obj U).page r hr).X (p, q) ≅
               ((S.obj U).page t (by omega)).X (p, q))) := by
-  sorry
+  obtain ⟨S, e₁, eI, h⟩ := boundedFilteredComplex_pageCore C φ hφ
+  refine ⟨S, e₁, eI, h.1, h.2.1, ?_⟩
+  intro U
+  obtain ⟨hδ, hZ, hconv, hstat⟩ := h.2.2 U
+  refine ⟨hδ, hZ, hconv, hstat, ?_⟩
+  intro htop hsupport
+  have hfirst (p q : ℤ) (hpq : p < 0 ∨ q < 0) :
+      IsZero (((S.obj U).page 1).X (p, q)) := by
+    apply (e₁ U p q).isZero_iff.mpr
+    rcases hpq with hp | hq
+    · exact graded_zero U.obj.filtration htop p hp (p + q)
+    · exact hsupport p (p + q) (Or.inl (by omega))
+  have hquadrant (p q r : ℤ) (hr : 1 ≤ r) (hpq : p < 0 ∨ q < 0) :
+      IsZero (((S.obj U).page r hr).X (p, q)) :=
+    page_zero_of_first (S.obj U) (p, q) (hfirst p q hpq) r hr
+  refine ⟨hquadrant, ?_⟩
+  intro p q r t hr ht hb
+  exact ⟨(quadrant_differentials (S.obj U) hquadrant p q r hr hb).1,
+    (quadrant_differentials (S.obj U) hquadrant p q r hr hb).2,
+    quadrant_later_iso (S.obj U) hquadrant p q r t hr ht hb⟩
 
 end CategoryTheory
