@@ -8689,3 +8689,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:15 L: returned deliver/E1/Sheaf.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth (reviewer RETURN: (reviewer X-253b0, head 253b03ea8) D2: In lean/Sheaf/AlgebraicGeometry/PopescuDelocalizeWeakLocalizationSmooth.lean:42–7)
 
 - 01:16 L: batch 20261012T165503 dependency take-out
+- 17:16 L: returned deliver/V1/Sheaf.AlgebraicGeometry.StalkImageRange (reviewer RETURN: (reviewer X-2d985, head 2d98548fb) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.St)
