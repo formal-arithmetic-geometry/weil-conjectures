@@ -33,70 +33,43 @@
  ],
  "proof": [
   {
-   "text": "Choose the stated injective resolution $X\\to I^\\bullet$. By [def-sp-injective-resolutions], [lem-sp-derived-well-defined], and the definition of right derived functors in [def-sp-left-exact-additive], applying $F$ and then $G$ to this resolution computes $R^n(G\\circ F)(X)$ as $H^n(G(F(I^\\bullet)))$, while $R^nF(X)$ is computed as $H^n(F(I^\\bullet))$. Thus a degree-$n$ class on the source of the left edge can be represented by a cocycle in $G(F(I^n))$.",
+   "text": "For each n put K=F(I) and T=GF(I). Functoriality and iCycles_d show G(iCycles_K) followed by d_T is zero. Define c by T.liftCycles with this zero-composite proof. Mathlib liftCycles_i gives its inclusion equation. Apply [lem-pc-grothendieck-cocycle-comparison] to this c and inclusion equation for the quotient equation. This constructs the witnesses rather than postulating them.",
    "uses": [
+    "lem-pc-grothendieck-cocycle-comparison",
     "def-sp-injective-resolutions",
-    "lem-sp-derived-well-defined",
     "def-sp-left-exact-additive"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof"
-   }
+   "elementary": true
   },
   {
-   "text": "Choose a Cartan--Eilenberg resolution $C^{\\bullet,\\bullet}$ of the bounded-below complex $F(I^\\bullet)$ as in [thm-sp-if-e1], and form $D^{p,q}=G(C^{p,q})$. By [lem-pc-grothendieck-ss-double-complex-model], the Grothendieck spectral sequence is the first filtration spectral sequence of this double complex, with abutment identified through $H^n(G(F(I^\\bullet)))$. In the filtration [thm-sp-double-complex-spectral-sequences], $F^0H^n=H^n(\\operatorname{Tot}D)$ and $F^1H^n$ is the first filtration step, so the edge is explicitly $H^n(\\operatorname{Tot}D)\\twoheadrightarrow F^0H^n/F^1H^n=E_\\infty^{0,n}\\hookrightarrow E_2^{0,n}=G(H^n(F(I^\\bullet)))$. On a cocycle represented by $s\\in G(F(I^n))$, the augmentation $G(F(I^q))\\to G(C^{\\bullet,q})$ is a quasi-isomorphism onto each row (the row $C^{\\bullet,q}$ is an injective resolution of $F(I^q)$ by [thm-sp-if-e1]) because $F(I^q)$ is $G$-acyclic; hence this comparison sends $[s]$ to the corresponding total-complex class. Writing $Z^n=\\ker(F(I^n)\\to F(I^{n+1}))$, the $p=0$ column identifies the quotient map with $G$ applied to $Z^n\\to H^n(F(I^\\bullet))$, since left exactness gives $\\ker(GF(I^n)\\to GF(I^{n+1}))=G(Z^n)$. The edge is the left edge by [lem-pc-grothendieck-ss-double-complex-model] (and its abstract direction is [lem-sp-grothendieck-edge-maps]); [lem-sp-derived-well-defined] gives independence of the resolution.",
+   "text": "Define HF(n).step(p) for every integer p by applying Subobject.exists of the canonical abutment isomorphism [lem-sp-grothendieck-edge-maps] to imageFiltration(n,n+1-p). Monotonicity imageFiltration_mono and functoriality on subobjects make this a [def-sp-filtration]. The proved upstream first-quadrant lemmas imageFiltration_eq_top and imageFiltration_eq_bot, and Subobject.map_top/map_bot, give step(0)=top and step(n+1)=bottom. These witnesses give IsFinite. A subobject containing all steps contains the zeroth top step, proving IsExhaustive; a subobject contained in all steps is contained in the (n+1)st bottom step, proving IsSeparated.",
    "uses": [
-    "def-sp-composite-acyclicity",
-    "thm-sp-if-e1",
-    "thm-sp-double-complex-spectral-sequences",
-    "lem-pc-grothendieck-ss-double-complex-model",
-    "def-sp-left-exact-additive",
-    "lem-sp-derived-well-defined",
-    "lem-sp-grothendieck-edge-maps"
+    "lem-sp-grothendieck-edge-maps",
+    "def-sp-filtration"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof"
-   }
+   "elementary": true
   },
   {
-   "text": "By [lem-pc-grothendieck-ss-double-complex-model], the Grothendieck spectral sequence is the first filtration spectral sequence of the double complex and has $E_2^{p,q}=R^pG(R^qF(X))$. Its filtration is the finite exhaustive separated filtration of $H^n(\\operatorname{Tot}D)$ supplied by [thm-sp-double-complex-spectral-sequences], and its bigraded exact couple is the one defined in [def-sp-exact-couple], with convergence as in [def-sp-convergence]. If $R^pG(R^qF(X))=0$ for every $p>0$ and $q$, all entries outside the $p=0$ column vanish already on $E_2$. Applying [lem-sp-edge-collapse] to this exact couple gives $E_\\infty=E_2$ and makes the edge map $H^n(\\operatorname{Tot}D)\\to E_2^{0,n}=G(R^nF(X))$ an isomorphism. The model node identifies this edge with the left edge of [lem-sp-grothendieck-edge-maps], and Step 2 identifies it with the displayed cocycle morphism.",
+   "text": "Use the proved upstream grothendieckSpectralObjectHIso to transfer the positive-derived-functor vanishing to H^{p+q}(q,q+1). For m=n and m=n+1, and q<n, choose p=m-q>0 to obtain H^m(q,q+1)=0. In the private proved helper interval_isZero, induction on a shows H^m(bot,a)=0 for a<=n: the base is the first-quadrant H^m(bot,0)=0, and the step applies SpectralObject.exact₂ and ShortComplex.Exact.isZero_of_both_isZero to bot<=a<=a+1. Consequently H^n(bot,n) and H^{n+1}(bot,n) are zero. Mathlib SpectralObject.isIso_H_map_twoδ₁Toδ₀' then makes H^n(bot,top)->H^n(n,top) an isomorphism. The proved upstream isIso_H_map_self_succ_top makes H^n(n,n+1)->H^n(n,top) an isomorphism. By the definition of leftEdge its composite with the inverse of this latter isomorphism is an isomorphism. Transport it through the abutment and target isomorphisms of grothendieckLeftEdgeMap. No new collapse axiom or exact-couple construction is used.",
    "uses": [
-    "thm-sp-grothendieck",
-    "thm-sp-double-complex-spectral-sequences",
-    "lem-pc-grothendieck-ss-double-complex-model",
-    "def-sp-convergence",
-    "lem-sp-edge-collapse",
-    "def-sp-exact-couple"
+    "lem-sp-grothendieck-edge-maps",
+    "def-sp-left-exact-additive"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-grothendieck-cocycle-comparison",
   "def-sp-injective-resolutions",
-  "lem-sp-derived-well-defined",
   "def-sp-left-exact-additive",
-  "lem-pc-grothendieck-ss-double-complex-model",
-  "def-sp-composite-acyclicity",
-  "thm-sp-grothendieck",
-  "thm-sp-if-e1",
-  "thm-sp-double-complex-spectral-sequences",
-  "def-sp-convergence",
-  "lem-sp-edge-collapse",
-  "def-sp-exact-couple",
-  "lem-sp-grothendieck-edge-maps"
+  "lem-sp-grothendieck-edge-maps",
+  "def-sp-filtration"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Derived Categories Lemma 015N (lemma-grothendieck-spectral-sequence), proof and construction of the two filtered double-complex spectral sequences"
+  "place": "Tag 015N; cocycle calculation reduced to the fixed-degree comparison, with filtration and collapse proved directly using the already proved truncation spectral-object API",
+  "note": "Lean proof written by N2. The finite-interval induction replaces the generic exact-couple collapse argument below the unit level; no unit statement or realized step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -203,5 +176,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b3b0d",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T070544-L-3474530",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and new comparison with their nodes, checked the proof, pruning, import users and report; both modules compile, and axiom probes show only standard axioms plus sorryAx for the named comparison."
  }
 }

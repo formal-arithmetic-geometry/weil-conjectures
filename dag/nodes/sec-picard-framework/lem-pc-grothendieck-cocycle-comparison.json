@@ -1,0 +1,164 @@
+{
+ "id": "lem-pc-grothendieck-cocycle-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "proof, first sentence: Leray degeneration and the cocycle description of the cohomology left edge; fixed-degree quotient equation",
+   "via": [
+    "lem-pc-grothendieck-edge-cocycle",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Fixed-degree comparison of the Grothendieck edge and the cocycle quotient",
+ "statement": "Let F: A -> B and G: B -> C be additive left exact functors between Grothendieck abelian categories [def-sp-composite-acyclicity], with derived categories, and assume F sends injectives to G-acyclics. Let X be an object of A, I an injective resolution of X [def-sp-injective-resolutions], and n a natural number. Put K=F(I) and T=(F composed with G)(I). Let c: G(Z^n(K)) -> Z^n(T) be any morphism satisfying c composed with iCycles_T = G(iCycles_K). Then c composed with the quotient Z^n(T) -> H^n(T), the inverse comparison H^n(T) -> R^n(F composed with G)(X), the canonical Grothendieck left edge [lem-sp-grothendieck-edge-maps], and G of the comparison R^nF(X) -> H^n(K), equals G of the quotient Z^n(K) -> H^n(K). The comparisons are those of [lem-sp-derived-well-defined]; the right derived functors and degree-zero identifications are those of [def-sp-left-exact-additive]. This is a fixed-degree equation for a supplied c; it asserts neither existence of c, filtration properties nor collapse.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015N and 015J: Cartan--Eilenberg construction of the second spectral sequence; expanded cocycle calculation of step 2 of lem-pc-grothendieck-edge-cocycle"
+ },
+ "stmt_deps": [
+  "def-sp-composite-acyclicity",
+  "def-sp-injective-resolutions",
+  "lem-sp-derived-well-defined",
+  "def-sp-left-exact-additive",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "proof": [
+  {
+   "text": "Let K=F(I). Extend K by zero to integer degrees and choose a Cartan--Eilenberg resolution with its shared augmentation by [lem-sp-cartan-eilenberg-exists]. Package it in a CartanEilenbergPresentation with the given X and I. Apply [lem-pc-grothendieck-ss-double-complex-model] to obtain the total augmentation a, its cohomology comparison h and the quotient/inclusion description of the abstract left edge. The equation for homologyMap a identifies h with the inverse of I.isoRightDerivedObj (F composed with G).",
+   "uses": [
+    "lem-sp-cartan-eilenberg-exists",
+    "lem-pc-grothendieck-ss-double-complex-model",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015N and 015J: Cartan--Eilenberg construction of the second spectral sequence; expanded cocycle calculation of step 2 of lem-pc-grothendieck-edge-cocycle"
+   }
+  },
+  {
+   "text": "Every F(I^q) is G-acyclic by [def-sp-composite-acyclicity] and the injectivity in [def-sp-injective-resolutions]. Applying G to the CE augmentation in each resolved column is a quasi-isomorphism. The injective horizontal cycles, boundaries and cohomology of [lem-sp-cartan-eilenberg-exists] give split short exact sequences, so G commutes with horizontal cohomology. The second filtration has E2^{0,n}=G(H^n(K)) through rightDerivedZeroIsoSelf, and the model fixes its canonical identification with G(R^nF(X)).",
+   "uses": [
+    "def-sp-composite-acyclicity",
+    "def-sp-injective-resolutions",
+    "lem-sp-cartan-eilenberg-exists",
+    "lem-pc-grothendieck-ss-double-complex-model",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015N and 015J: Cartan--Eilenberg construction of the second spectral sequence; expanded cocycle calculation of step 2 of lem-pc-grothendieck-edge-cocycle"
+   }
+  },
+  {
+   "text": "Precompose homologyMap a with c followed by the homology quotient of GF(I). The condition c composed with iCycles = G(iCycles) fixes its representative in the resolution-degree-zero total summand. The quotient by filtration step 1 discards positive resolution degrees. Under the split horizontal-cohomology computation, the degree-zero component is G applied to the quotient Z^n(K) -> H^n(K). The stable-page cycle inclusion into E2 preserves this component. Substitute the explicit augmentation and left-edge equations of [lem-pc-grothendieck-ss-double-complex-model], and compose the target with G of I.isoRightDerivedObj F n. This gives exactly the stated equation. The calculation applies to every c with the stated inclusion equation since iCycles is monic. More explicitly, if U is the horizontal row in resolution degree zero, a_Z: Z^n(K) -> Z^n(U) and b: H^n(K) -> H^n(U) are induced by the CE augmentation, then a_Z followed by the quotient of U equals the quotient of K followed by b, by homology-map naturality. Applying G and the split-horizontal-homology identification gives exactly the degree-zero representative of G(quotient_K) followed by G(b). The augmentation b lands in the kernel of the next resolution differential. The degree-zero comparison identifies this kernel with G(H^n(K)), and there is no incoming boundary from a negative resolution degree. The transpose sign is (-1)^(n*0)=1 on this representative.",
+   "uses": [
+    "lem-pc-grothendieck-ss-double-complex-model",
+    "lem-sp-derived-well-defined",
+    "lem-sp-grothendieck-edge-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015N and 015J: Cartan--Eilenberg construction of the second spectral sequence; expanded cocycle calculation of step 2 of lem-pc-grothendieck-edge-cocycle"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-cartan-eilenberg-exists",
+  "lem-pc-grothendieck-ss-double-complex-model",
+  "lem-sp-derived-well-defined",
+  "def-sp-composite-acyclicity",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015N and 015J: Cartan--Eilenberg construction of the second spectral sequence; expanded cocycle calculation of step 2 of lem-pc-grothendieck-edge-cocycle",
+  "note": "Expanded from the supplied step-2 argument, using the construction in Tags 015N and 015J; those tags do not themselves state the cocycle equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck spectral sequence edge map on cohomology agrees with applying a left exact functor to the cocycle quotient map",
+   "results": "HTTP 500: service unavailable, recorded by msearch.py; no search verdict available",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck spectral sequence left edge map induced by cycles to homology and isomorphism when higher derived functors vanish",
+   "results": "Eight hits, including InjectiveResolution.toRightDerivedZero'_comp_iCycles and DerivedCategory.homologyFunctorFactors. These compute degree-zero or derived cohomology identifications, not the higher-degree Grothendieck edge comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg grothendieckLeftEdgeMap|leftEdge.*homologyπ|homologyπ.*grothendieck|edge.*cocycle in Mathlib/Algebra/Homology, Mathlib/CategoryTheory/Abelian/RightDerived.lean, lean/Sheaf/CategoryTheory and lean/WeilConjectures/CategoryTheory/SpectralSequence",
+   "results": "The upstream Grothendieck module defines the abstract left edge, but has no cocycle equation. GrothendieckEdgeCocycle is the larger item being reduced; no separate fixed-degree comparison. Blueprint keyword search found no duplicate.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.GrothendieckEdgeCocycle",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GrothendieckCocycleComparison",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckCocycleComparison.lean",
+  "declaration": "CategoryTheory.grothendieck_cocycle_comparison",
+  "statement": "theorem grothendieck_cocycle_comparison {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B] {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C] [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C] (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteLimits G] (hFG : (⟨F, G⟩ : GrothendieckComposablePair A B C).SendsInjectivesToAcyclics) (X : A) (I : InjectiveResolution X) (n : ℕ) (c : G.obj (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).cycles n) ⟶ (((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).cycles n) (hc : c ≫ (((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).iCycles n = G.map (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).iCycles n)) : c ≫ (((F ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homologyπ n ≫ (I.isoRightDerivedObj (F ⋙ G) n).inv ≫ (F.grothendieckLeftEdgeMap G hFG n).app X ≫ G.map (I.isoRightDerivedObj F n).hom = G.map (((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homologyπ n)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b3b0d",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T070544-L-3474530",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b3b0d",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T070544-L-3474530",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and new comparison with their nodes, checked the proof, pruning, import users and report; both modules compile, and axiom probes show only standard axioms plus sorryAx for the named comparison."
+ }
+}
