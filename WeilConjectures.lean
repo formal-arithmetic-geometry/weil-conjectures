@@ -7,6 +7,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUni
 public import WeilConjectures.Algebra.Category.ModuleCat.QuotSMulTop
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalars
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
@@ -1981,6 +1982,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.ComparisonMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Derived.DualPerfect
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtendScalars.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.Derived.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
@@ -2029,6 +2033,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.CoefficientChange
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs
