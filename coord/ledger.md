@@ -8646,3 +8646,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/M3/Sheaf.AlgebraicGeometry.DerivedStructureSheafGlobalSectionsHom (stage 3; reviewer PASS; first push; landing 20261012T165522-L-2936514 (interface); batch 20261012T165503; modules 2; new nodes 1)
 - 16:55 L: merged deliver/M3/Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime (stage 3; reviewer PASS; first push; landing 20261012T165523-L-2936649 (interface); batch 20261012T165503; modules 2; new nodes 1)
 - 16:55 L: merged deliver/N1/Sheaf.AlgebraicGeometry.AmpleProjPreimage (stage 3; reviewer PASS; first push; landing 20261012T165523-L-2936827 (interface); batch 20261012T165503; modules 3; new nodes 2)
+- 16:55 L: merged deliver/N1/Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension (stage 3; reviewer PASS; first push; landing 20261012T165524-L-2936970 (proof); batch 20261012T165503; modules 1; new nodes 0)

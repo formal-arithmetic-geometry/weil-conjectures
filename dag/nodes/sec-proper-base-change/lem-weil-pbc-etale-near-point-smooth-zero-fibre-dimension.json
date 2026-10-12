@@ -30,70 +30,48 @@
  ],
  "proof": [
   {
-   "text": "(The fibre of $f|_U$ has dimension $0$ at $x$.) Let $p:X_s\\to X$, $q:X_s\\to\\operatorname{Spec}\\kappa(s)$ be the projections and $x'\\in X_s$ the point corresponding to $x$; since $p$ is a homeomorphism onto $f^{-1}(s)\\ni x$ [def-pc-scheme-fibre], $x'$ is the unique point of $X_s$ with $p(x')=x$. Likewise let $U_s=U\\times_S\\operatorname{Spec}\\kappa(s)$ be the fibre of $f|_U$ over $s$ [def-pc-base-change], with projections $p_U,q_U$, and $x'_U$ the unique point of $U_s$ with $p_U(x'_U)=x$. Apply [lem-weil-pbc-open-fibre-product] to $f$ and $\\operatorname{Spec}\\kappa(s)\\to S$ with the open subschemes $U\\subseteq X$, $\\operatorname{Spec}\\kappa(s)$ (all of it) and $S$ (all of it): the canonical morphism $j:U_s\\to X_s$ is an open immersion [def-weil-open-immersion] with image $p^{-1}(U)$, and $p\\circ j=p_U$ followed by the inclusion $U\\subseteq X$ [def-pc-fibre-product]. Hence $p(j(x'_U))=x$, so $j(x'_U)=x'$, and $j$ is a homeomorphism of $U_s$ onto the open subspace $p^{-1}(U)$ of $X_s$ sending $x'_U$ to $x'$. A homeomorphism carries open neighbourhoods to open neighbourhoods and chains of irreducible closed subsets to chains of the same length, so $\\dim_{x'_U}(U_s)=\\dim_{x'}(p^{-1}(U))$ [def-kun-dimension, def-kun-topological-dimension-at-point]. By [lem-weil-pbc-dimension-at-point-open-subspace] with $Y=X_s$, $O=p^{-1}(U)$, $y=x'$, this equals $\\dim_{x'}(X_s)$, which is $0$ by hypothesis. So $\\dim_{x'_U}(U_s)=0$.",
-   "uses": [
-    "def-pc-scheme-fibre",
-    "def-pc-base-change",
-    "lem-weil-pbc-open-fibre-product",
-    "def-weil-open-immersion",
-    "def-pc-fibre-product",
-    "def-kun-dimension",
-    "def-kun-topological-dimension-at-point",
-    "lem-weil-pbc-dimension-at-point-open-subspace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Definition 0055 (definition-Krull, line 1392) and the remark after it (line 1421: dimension at a point is computed on arbitrarily small open neighbourhoods); fibres of open subschemes as open subschemes of the fibre: schemes.tex, Lemma 01K1 (lemma-fibre-topological) for the points of the fibre"
-   }
-  },
-  {
-   "text": "(The differentials vanish near $x$.) The morphism $f|_U:U\\to S$ is smooth [def-sbc-smooth-morphisms] and $x\\in U$. By [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] applied to $f|_U$ and $x$ there are affine open subschemes $V\\subseteq S$ and $W\\subseteq U$ [def-weil-affine-spectrum] with $x\\in W$ and $f(W)\\subseteq V$ such that, with $R=\\mathcal O_S(V)$, $A=\\mathcal O_U(W)$ and $R\\to A$ the ring map of $f|_W:W\\to V$, the module $\\Omega_{A/R}$ [def-weil-pbc-kahler-differentials] is free of rank $\\dim_{x'_U}(U_s)$, which is $0$ by step 1. A free module of rank $0$ is the zero module, so $\\Omega_{A/R}=0$.",
+   "text": "Apply the already proved source-library theorem AlgebraicGeometry.Smooth.exists_smoothOfRelativeDimension_resLE (WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth) to g = U.ι ≫ f and xU = ⟨x,hx⟩. It gives affine opens A in S and B in U and a natural number d, with g.resLE A B smooth of relative dimension d. Compose with the open immersion A.ι, then transport through the isomorphism B ≅ U.ι image B. Thus V = U.ι image B is an open of X contained in U, contains x, and V.ι ≫ f is smooth of relative dimension d. These compositions add relative dimension zero, by Mathlib smoothOfRelativeDimension_comp.",
    "uses": [
     "def-sbc-smooth-morphisms",
-    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-kahler-differentials"
+    "def-weil-open-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 02G1 (lemma-smooth-omega-finite-locally-free, line 7214: Omega_{X/S} finite locally free of rank dim_x(X_{f(x)})), with Lemma 01UT (lemma-differentials-affine) on the affine open W"
-   }
+   "elementary": false
   },
   {
-   "text": "(Etale near $x$.) By [lem-weil-pbc-smooth-zero-differentials-affine-open-etale] applied to the smooth morphism $g=f|_U:U\\to S$ and the affine opens $V$, $W$ of step 2 (with $\\Omega_{A/R}=0$), the restriction $g|_W=f|_W:W\\to S$ is etale [def-weil-etale-morphism]. As $W$ is open in $U$ and $U$ is open in $X$, $U':=W$ is an open subscheme of $X$ with $x\\in U'\\subseteq U$ and $f|_{U'}$ etale.",
+   "text": "Let W = (f.fiberι (f x)) preimage V, an open of the original fibre containing f.asFiber x. The restriction pullback square is obtained by pasting isPullback_morphismRestrict with the defining fibre square. Base change stability of SmoothOfRelativeDimension gives relative dimension d for W.ι ≫ f.fiberToSpecResidueField (f x). Apply the already proved source-library theorem AlgebraicGeometry.topologicalKrullDimAt_eq_of_smoothOfRelativeDimension (WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth) to the point ⟨f.asFiber x,hxW⟩ in W. Its dimension is d. Open-subspace invariance identifies this dimension with that of f.asFiber x in the original fibre, which is zero by hypothesis. Injectivity of the natural-number cast gives d = 0.",
    "uses": [
-    "lem-weil-pbc-smooth-zero-differentials-affine-open-etale",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib Etale.iff_smoothOfRelativeDimension_zero converts the relative-dimension-zero instance for V.ι ≫ f into Etale. Return V, its inclusion V ≤ U, its membership x ∈ V and this Etale proof.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
     "def-weil-etale-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Section 02GH: sentence before Definition 02GI (line 8050: a ring map is etale if it is smooth with Omega_{A/R}=0), Definition 02GI (definition-etale, line 8058), and the remark after it ('A morphism is etale if and only if it is smooth of relative dimension 0')"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme-fibre",
-  "def-pc-base-change",
-  "lem-weil-pbc-open-fibre-product",
-  "def-weil-open-immersion",
-  "def-pc-fibre-product",
-  "def-kun-dimension",
-  "def-kun-topological-dimension-at-point",
-  "lem-weil-pbc-dimension-at-point-open-subspace",
   "def-sbc-smooth-morphisms",
-  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
-  "def-weil-affine-spectrum",
-  "def-weil-pbc-kahler-differentials",
-  "lem-weil-pbc-smooth-zero-differentials-affine-open-etale",
+  "def-weil-open-immersion",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "def-kun-topological-dimension-at-point",
   "def-weil-etale-morphism"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, remark after Definition 02GI (line 8079: 'A morphism is etale if and only if it is smooth of relative dimension 0', stated without proof; it is what more-morphisms.tex Lemma 0A43 uses in the last sentence of its proof); the proof here is written by the agent from Lemma 02G1, Lemma 01UT and the definition of an etale ring map (Algebra Definition 00U1, recalled at line 8050)"
+  "document": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth",
+  "place": "Existing sorry-free Smooth.exists_smoothOfRelativeDimension_resLE (line 371) and topologicalKrullDimAt_eq_of_smoothOfRelativeDimension (line 452); fibre-restriction argument as in Smooth.isLocallyConstant_topologicalKrullDimAt_asFiber (lines 474–498). This replaces the differential-module route below the unit level; Stacks 02G1, 02G2 and remark after 02GI."
  },
  "mathlib_searches": [
   {
@@ -176,5 +154,15 @@
   "group": "E1",
   "result": "pass",
   "note": "X S f arbitrary; x; U parameter with hx (U' ≤ U needs it); Smooth (U.ι ≫ f) = f|_U smooth; fibre X_s = f.fiber (f x) = pullback f (fromSpecResidueField) rfl, point f.asFiber x; topologicalKrullDimAt = inf over open nbhds = node dim_x, = 0; conclusion ∃ U' ≤ U, x ∈ U', Etale (U'.ι ≫ f); math true via Omega rank = fibre dim (02G1)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T165524-L-2936970",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
