@@ -8475,3 +8475,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:08 L: returned deliver/K3/Sheaf.AlgebraicGeometry.AbelianHigherDirectImageTransitionComp (reviewer RETURN: (the landing tools, head 8ab9fd958) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 16:08 L: merged deliver/A3/Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomology (stage 3; reviewer PASS; first push; landing 20261012T160823-L-2609539 (interface); batch 20261012T160822; modules 3; new nodes 2)
 - 16:08 L: merged deliver/A3/Sheaf.AlgebraicGeometry.RefineFiniteDomainSplitting (stage 3; reviewer PASS; first push; landing 20261012T160824-L-2609665 (interface); batch 20261012T160822; modules 3; new nodes 2)
+- 16:08 L: merged deliver/A3/Sheaf.RingTheory.TorKernelBoundaryExact (stage 3; reviewer PASS; first push; landing 20261012T160824-L-2609793 (proof); batch 20261012T160822; modules 1; new nodes 0)
