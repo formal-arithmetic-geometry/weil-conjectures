@@ -76,6 +76,72 @@ theorem freeCechTupleMap_single [DecidableEq (W ⟶ U₀)] (n : ℕ) (φ : W ⟶
             (freeCechTupleGenerator X ι U₀ U f O W n ψ)) φ (Finsupp.single x r)
     _ = _ := by simp [Finsupp.lift_apply]
 
+/-- Lifts with equal base maps, indices and underlying morphisms agree heterogeneously. -/
+private theorem lifts_heq {φ ψ : W ⟶ U₀} (h : φ = ψ)
+    {x : freeCechLifts X ι U₀ U f W φ} {y : freeCechLifts X ι U₀ U f W ψ}
+    (hi : x.1 = y.1) (hg : HEq x.2.1 y.2.1) : HEq x y := by
+  cases h
+  rcases x with ⟨i, gx, hx⟩
+  rcases y with ⟨j, gy, hy⟩
+  dsimp only at hi hg
+  subst j
+  have hg' : gx = gy := eq_of_heq hg
+  subst gy
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The basis-index bijection: lift tuples give product maps, and product maps give
+lift tuples by projection. Source: Stacks Project, Tags 03AT and 03F5. -/
+private noncomputable def tupleIndexEquiv (n : ℕ) :
+    (Σ φ : W ⟶ U₀, Fin (n + 1) → freeCechLifts X ι U₀ U f W φ) ≃
+      (Σ i : Fin (n + 1) → ι,
+        W ⟶ (∏ᶜ (fun a ↦ Over.mk (f (i a)))).left) where
+  toFun x := ⟨fun a ↦ (x.2 a).1,
+    (show Over.mk x.1 ⟶ ∏ᶜ (fun a ↦ Over.mk (f ((x.2 a).1))) from
+      Pi.lift (fun a ↦ Over.homMk (x.2 a).2.1 (x.2 a).2.2)).left⟩
+  invFun y := ⟨y.2 ≫ (∏ᶜ (fun a ↦ Over.mk (f (y.1 a)))).hom,
+    fun a ↦ ⟨y.1 a, ⟨y.2 ≫ (Pi.π (fun a ↦ Over.mk (f (y.1 a))) a).left,
+      by
+        rw [Category.assoc]
+        exact congrArg (y.2 ≫ ·) (Over.w (Pi.π (fun a ↦ Over.mk (f (y.1 a))) a))⟩⟩⟩
+  left_inv x := by
+    rcases x with ⟨φ, x⟩
+    let g : Over.mk φ ⟶ ∏ᶜ (fun a ↦ Over.mk (f ((x a).1))) :=
+      Pi.lift (fun a ↦ Over.homMk (x a).2.1 (x a).2.2)
+    have hφ : g.left ≫ (∏ᶜ (fun a ↦ Over.mk (f ((x a).1)))).hom = φ :=
+      Over.w g
+    dsimp only
+    apply Sigma.ext hφ
+    change HEq (fun a ↦ (⟨(x a).1,
+      ⟨g.left ≫ (Pi.π (fun a ↦ Over.mk (f ((x a).1))) a).left, _⟩⟩ :
+        freeCechLifts X ι U₀ U f W
+          (g.left ≫ (∏ᶜ (fun a ↦ Over.mk (f ((x a).1)))).hom))) x
+    apply Function.hfunext rfl
+    intro a b hab
+    cases hab
+    apply lifts_heq X ι U₀ U f W hφ rfl
+    apply heq_of_eq
+    change (g ≫ Pi.π (fun a ↦ Over.mk (f ((x a).1))) a).left = (x a).2.1
+    simp [g]
+  right_inv y := by
+    rcases y with ⟨i, g⟩
+    dsimp only
+    refine Sigma.ext ?_ ?_
+    · rfl
+    apply heq_of_eq
+    let h : Over.mk (g ≫ (∏ᶜ (fun a ↦ Over.mk (f (i a)))).hom) ⟶
+        ∏ᶜ (fun a ↦ Over.mk (f (i a))) := Over.homMk g
+    have hh : Pi.lift (fun a ↦ Over.homMk
+        (g ≫ (Pi.π (fun a ↦ Over.mk (f (i a))) a).left) (by
+          rw [Category.assoc]
+          exact congrArg (g ≫ ·) (Over.w (Pi.π (fun a ↦ Over.mk (f (i a))) a)))) = h := by
+      apply Pi.hom_ext
+      intro a
+      apply Over.OverMorphism.ext
+      simp [h]
+    exact congrArg Over.Hom.left hh
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The tuple-generator map is bijective in each degree.
 Source: Stacks Project, Tag 03AT, the decomposition preceding the homotopy;
 Tag 03F5, first proof, with coefficients in O(W).
@@ -91,6 +157,66 @@ This also handles an empty family, when both bases are empty, and the zero ring,
 when both modules are zero. No lift of an arbitrary φ is chosen.
 (blueprint: lem-weil-pbc-free-cech-tuple-basis) -/
 theorem freeCechTupleMap_bijective (n : ℕ) :
-    Function.Bijective (freeCechTupleMap X ι U₀ U f O W n) := by sorry
+    Function.Bijective (freeCechTupleMap X ι U₀ U f O W n) := by
+  classical
+  let R := O.obj (op W)
+  let D := Π₀ φ : W ⟶ U₀,
+    Algebra.powerSetComplexObject R (freeCechLifts X ι U₀ U f W φ) n
+  let F (i : Fin (n + 1) → ι) := (PresheafOfModules.free O).obj
+    (yoneda.obj ((∏ᶜ (fun a ↦ Over.mk (f (i a)))).left))
+  let M := ((freeCechModule X ι U₀ U f O).obj (op ⦋n⦌)).obj (op W)
+  let ev := PresheafOfModules.evaluation O (op W)
+  -- Evaluation preserves the coproduct of free representable presheaves.
+  let hc := (Cofan.isColimitMapCoconeEquiv ev F
+    (Cofan.mk _ (Sigma.ι F)))
+      (isColimitOfPreserves ev (coproductIsCoproduct F))
+  let e := tupleIndexEquiv X ι U₀ U f W n
+  let singleTuple (x : Σ φ : W ⟶ U₀,
+      Fin (n + 1) → freeCechLifts X ι U₀ U f W φ) : D :=
+    DFinsupp.single x.1 (Finsupp.single x.2 1)
+  let gen (y : Σ i : Fin (n + 1) → ι,
+      W ⟶ (∏ᶜ (fun a ↦ Over.mk (f (i a)))).left) : M :=
+    ((Sigma.ι F y.1).app (op W)) (ModuleCat.freeMk y.2)
+  -- Extend the inverse index bijection freely on each evaluated summand.
+  let components (i : Fin (n + 1) → ι) :
+      (F i).obj (op W) ⟶ ModuleCat.of R D :=
+    ModuleCat.freeDesc (↾fun g ↦ singleTuple (e.symm ⟨i, g⟩))
+  let d : M ⟶ ModuleCat.of R D := hc.desc (Cofan.mk _ components)
+  let b := freeCechTupleMap X ι U₀ U f O W n
+  have hd (y : Σ i : Fin (n + 1) → ι,
+      W ⟶ (∏ᶜ (fun a ↦ Over.mk (f (i a)))).left) :
+      d (gen y) = singleTuple (e.symm y) := by
+    have h := hc.fac (Cofan.mk _ components) (Discrete.mk y.1)
+    have h' := congrArg (fun k ↦ k (ModuleCat.freeMk y.2)) h
+    change d (gen y) = components y.1 (ModuleCat.freeMk y.2) at h'
+    exact h'.trans (ModuleCat.freeDesc_apply _ _)
+  -- Check the two inverse identities on the respective free generators.
+  have hleft : d.hom.comp b = LinearMap.id := by
+    apply DFinsupp.lhom_ext'
+    intro φ
+    apply Finsupp.lhom_ext'
+    intro x
+    apply LinearMap.ext_ring
+    change d (b (DFinsupp.single φ (Finsupp.single x 1))) =
+      DFinsupp.single φ (Finsupp.single x 1)
+    rw [freeCechTupleMap_single, one_smul]
+    change d (gen (e ⟨φ, x⟩)) = singleTuple ⟨φ, x⟩
+    rw [hd, e.symm_apply_apply]
+  have hright : d ≫ ModuleCat.ofHom b = 𝟙 M := by
+    apply hc.hom_ext
+    intro i
+    apply ModuleCat.free_hom_ext
+    intro g
+    change b (d (gen ⟨i.as, g⟩)) = gen ⟨i.as, g⟩
+    rw [hd]
+    change b (DFinsupp.single (e.symm ⟨i.as, g⟩).1
+      (Finsupp.single (e.symm ⟨i.as, g⟩).2 1)) = gen ⟨i.as, g⟩
+    rw [freeCechTupleMap_single, one_smul]
+    change gen (e (e.symm ⟨i.as, g⟩)) = gen ⟨i.as, g⟩
+    rw [e.apply_symm_apply]
+  exact ⟨(show Function.LeftInverse d b from
+    fun x ↦ LinearMap.congr_fun hleft x).injective,
+    (show Function.RightInverse d b from
+      fun x ↦ congrArg (fun k ↦ k x) hright).surjective⟩
 
 end AlgebraicGeometry
