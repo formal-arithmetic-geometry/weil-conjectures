@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-alternating-cech-first-sorting-prefix-cancellation",
+ "kind": "statement",
+ "title": "Prefix labelled-deletion cancellation in the first Cech sorting homotopy",
+ "statement": "Let $I$ be a linearly ordered type, $A$ an abelian group, $p\\ge0$, $n=p+2$,\n$t:\\operatorname{Fin}(n)\\to I$, and $f:(\\operatorname{Fin}(n)\\to\\operatorname{Fin}(n))\\to A$\nan arbitrary function. Use stable sorting, partial sorting, and junction maps\n[def-pc-alternating-cech-sorting-operators]. For $j\\in\\operatorname{Fin}(n)$ let\n$\\delta_j:\\operatorname{Fin}(n-1)\\to\\operatorname{Fin}(n)$ be the increasing map omitting $j$.\nFor $r\\in\\operatorname{Fin}(n+1)$, $\\delta_r$ similarly omits $r$.\nWrite $C_t(\\sigma,\\tau,a)$ for the conjunction that $\\sigma$ is the stable sort of $t$\nand $\\tau$ is its partial sort with prefix length $a$.\nFor $\\rho,\\eta\\in S_{n-1}$ and $b\\in\\operatorname{Fin}(n-1)$ put\n$k=\\delta_j(\\rho(b))$ and $B(j,\\rho,b):\\Leftrightarrow t(j)<t(k)\\ \\lor\\ (t(j)=t(k)\\land j<k)$.\nThen\n$$\n\\sum_{\\substack{\\sigma,\\tau\\in S_n,\\ a\\in\\operatorname{Fin}(n),\\ r\\in\\operatorname{Fin}(n+1)\\\\\n C_t(\\sigma,\\tau,a),\\ q_{\\sigma,\\tau,a}(r)\\ne\\sigma(a),\\ r<a}}\n (-1)^{a+r}\\operatorname{sign}(\\tau)\\,f(q_{\\sigma,\\tau,a}\\circ\\delta_r)\n +\n\\sum_{\\substack{j\\in\\operatorname{Fin}(n),\\ \\rho,\\eta\\in S_{n-1},\\ b\\in\\operatorname{Fin}(n-1)\\\\\n C_{t\\circ\\delta_j}(\\rho,\\eta,b),\\ B(j,\\rho,b)}}\n (-1)^{j+b}\\operatorname{sign}(\\eta)\\,f(\\delta_j\\circ q_{\\rho,\\eta,b})=0,\n$$\nwhere $q_{\\sigma,\\tau,a}=\\operatorname{cechJunction}(\\sigma,\\tau,a)$ and $S_m$ is the\npermutation group of $\\operatorname{Fin}(m)$. Integer coefficients act by repeated addition.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, cohomology-equation-first-homotopy (20.23.6.1), omitted verification; prefix labelled-deletion part; https://stacks.math.columbia.edu/tag/01FM"
+ },
+ "stmt_deps": [
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof": [
+  {
+   "text": "Order labels j by the pairs (t j, j), so all labels are distinct even if\nvalues repeat. The stable-sort filter has one permutation, and the partial-sort\nfilter has one permutation for each prefix length. For an outgoing term with\nr < a, remove j = σ r = τ r. Restrict σ and τ to the other labels and renumber\nthose labels increasingly. The restricted stable sort is the stable sort of\nthe face omitting j; the restricted partial sort has prefix length b = a - 1.\nThe removed label precedes the remaining junction label in the pair order.\nDeleting r from the outgoing junction gives exactly the incoming face junction,\nas a map to the original labels. Conversely, insert the incoming deleted label\nj at its stable rank r before the junction; set a = b + 1 and extend both\npermutations. This inverts restriction, including at b = 0 and b = p.\nIf τ' is the restricted permutation, then sign τ' = (-1)^(r+j) sign τ:\nmove position r and label j to the end, then restrict, counting the two moves.\nThus the incoming coefficient is (-1)^(j+a-1+r+j) sign τ, the negative of\n(-1)^(a+r) sign τ. Sum along this bijection. Each pair evaluates f on the\nsame map of labels and has opposite integer coefficients, so it cancels.\nFor a = 0 the outgoing prefix part is empty. Empty I has no input tuple.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E3",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation 20.23.6.1; explicit prefix labelled-deletion proof of the omitted computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cancellation of signed sums over stable sorting permutations by deleting labels in Cech homotopy",
+   "results": "8 hits: ComplexShape.σ_ε₁, ComplexShape.σ_ε₂, ContinuousAlternatingMap.neg_one_pow_smul_map_removeNth_add_eq_zero_of_eq, AlgebraicTopology.DoldKan.hσ'_eq, AlternatingMap.domCoprod.summand_add_swap_smul_eq_zero, AlgebraicTopology.DoldKan.hσ'_eq', AlternatingMap.neg_one_pow_smul_map_removeNth_add_eq_zero_of_eq, Fin.neg_partialSum_add_eq_contractNth; no matching stable-sort labelled-deletion cancellation.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sign.*(remove|succAbove|decompose)|cechJunction|cechPartialSort",
+   "results": "3 hits: Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean, Mathlib/GroupTheory/Perm/Fin.lean, Mathlib/GroupTheory/Perm/Option.lean; no matching stable-sort labelled-deletion cancellation.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Signed stable sorting permutation deletion cancellation prefix tail finite sum",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingNonjunctionCancellation",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "Ordered Cech contraction: prefix part of the nonjunction labelled-deletion cancellation in the first sorting homotopy",
+   "via": [
+    "lem-pc-alternating-cech-first-sorting-nonjunction-cancellation",
+    "lem-pc-alternating-cech-first-sorting-boundary",
+    "lem-pc-alternating-cech-first-sorting-identity",
+    "lem-pc-alternating-cech-kernel-null-homotopic",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingPrefixCancellation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechFirstSortingPrefixCancellation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechFirstSortingPrefixCancellation",
+  "statement": "theorem cechFirstSortingPrefixCancellation\n    {I : Type v} [LinearOrder I] {B : Type w} [AddCommGroup B]\n    (p : ℕ) (t : Fin (p + 2) → I) (f : (Fin (p + 2) → Fin (p + 2)) → B) :\n    let before := fun (j : Fin (p + 2)) (σ : Equiv.Perm (Fin (p + 1)))\n        (b : Fin (p + 1)) ↦\n      t j < t (j.succAbove (σ b)) ∨\n        (t j = t (j.succAbove (σ b)) ∧ j < j.succAbove (σ b))\n    (∑ σ : Equiv.Perm (Fin (p + 2)), ∑ a : Fin (p + 2),\n      ∑ τ : Equiv.Perm (Fin (p + 2)), ∑ r : Fin (p + 3),\n        if ((cechStableSort t σ ∧ cechPartialSort σ τ a) ∧\n            cechJunction σ τ a r ≠ σ a) ∧ r.val < a.val then\n          (((-1 : ℤ) ^ a.val * (Equiv.Perm.sign τ : ℤ)) * (-1 : ℤ) ^ r.val) •\n            f (cechJunction σ τ a ∘ r.succAbove) else 0) +\n      (∑ j : Fin (p + 2), ∑ σ : Equiv.Perm (Fin (p + 1)), ∑ b : Fin (p + 1),\n        ∑ τ : Equiv.Perm (Fin (p + 1)),\n          if (cechStableSort (t ∘ j.succAbove) σ ∧ cechPartialSort σ τ b) ∧\n              before j σ b then\n            ((-1 : ℤ) ^ j.val * ((-1 : ℤ) ^ b.val * (Equiv.Perm.sign τ : ℤ))) •\n              f (j.succAbove ∘ cechJunction σ τ b) else 0) = 0",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T230755-L-1907977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T230755-L-1907977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
