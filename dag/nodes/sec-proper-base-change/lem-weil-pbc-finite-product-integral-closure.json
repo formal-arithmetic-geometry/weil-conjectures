@@ -28,36 +28,36 @@
  ],
  "proof": [
   {
-   "text": "Let $s=(s_i)\\in S$ be integral over $R$. By [def-weil-pbc-integral-closure], a monic polynomial $P(T)\\in R[T]$ satisfies $P(s)=0$. Projecting each coefficient of $P$ to $R_i$ produces a monic polynomial $P_i(T)\\in R_i[T]$. Projection of the equality $P(s)=0$ gives $P_i(s_i)=0$, so every $s_i$ is integral over $R_i$.",
+   "text": "For an integral tuple, apply IsIntegral.map_of_comp_eq to each pair of evaluation ring homomorphisms to obtain coordinatewise integrality.",
    "uses": [
     "def-weil-pbc-integral-closure"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0CY8 (lemma-finite-product-integral, forward implication; proof omitted)"
+    "place": "Algebra, Lemma Tag 0CY8 (forward implication)"
    }
   },
   {
-   "text": "Conversely, suppose every $s_i$ is integral over $R_i$. For each $i$, choose a monic $P_i(T)\\in R_i[T]$ with $P_i(s_i)=0$ and degree $d_i$. Choose a common integer $D\\ge1$ with $D\\ge d_i$ for all $i$, and put $Q_i(T)=T^{D-d_i}P_i(T)$. Then $Q_i$ is monic of degree $D$ and $Q_i(s_i)=0$. At each degree $0,\\dots,D$, assemble the coefficients of the $Q_i$ into an element of $R=\\prod_iR_i$; the resulting $Q(T)\\in R[T]$ is monic and has $Q(s)=0$ coordinatewise. Hence $s$ is integral over $R$ by [def-weil-pbc-integral-closure]. For an empty product, $R$ and $S$ are zero rings and the same conclusion holds with $Q(T)=T$.",
+   "text": "Conversely choose component monic annihilating polynomials, take the finite supremum of their natural degrees, multiply each by the required power of X, and assemble the coefficients with Polynomial.piEquiv. The resulting polynomial is monic and annihilates the tuple coordinatewise; the construction also handles the empty product.",
    "uses": [
     "def-weil-pbc-integral-closure"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0CY8 (lemma-finite-product-integral, reverse implication; proof omitted)"
+    "place": "Algebra, Lemma Tag 0CY8 (reverse implication)"
    }
   },
   {
-   "text": "An element $s=(s_i)$ belongs to the integral closure of $R$ in $S$ exactly when every $s_i$ belongs to $S_i'$, by Steps 1 and 2 and [def-weil-pbc-integral-closure]. Equality of these subsets, hence of the subrings, follows. If all component maps are injective, their product is injective and identifies $R$ with $\\prod_iR_i\\subseteq S$. Under this identification the equality of integral closures says $R=\\prod_iS_i'$ exactly when $R_i=S_i'$ for every $i$, including the empty-product case.",
+   "text": "Use the coordinatewise criterion to prove the integral-closure subring equality by extensionality. Under injectivity, use isIntegrallyClosedIn_iff, single-coordinate tuples, and coordinatewise preimages to prove the equivalence of integral closedness.",
    "uses": [
     "def-weil-pbc-integral-closure"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0CY9 (lemma-finite-product-integral-closure), using Tag 0CY8"
+    "place": "Algebra, Lemma Tag 0CY9"
    }
   }
  ],
@@ -65,9 +65,9 @@
   "def-weil-pbc-integral-closure"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "M3 worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemmas Tags 0CY8 (proof omitted) and 0CY9"
+  "place": "Algebra, Lemmas Tags 0CY8 and 0CY9"
  },
  "mathlib_searches": [
   {
@@ -152,5 +152,15 @@
   "group": "C1",
   "result": "pass",
   "note": "Finite I + R,S : I → CommRing + φ via letI toAlgebra (Pi algebraMap = fun r i ↦ φ i (r i) by rfl); clause 1 = subring equality with ⨅ comap evalRingHom (probe: .1 extracts it, so ∧ is outside ⨅; membership ↔ ∀ i IsIntegral); clause 2 under component injectivity IsIntegrallyClosedIn iff; no Mathlib pi lemma; empty I ok"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T095915-L-321401",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
