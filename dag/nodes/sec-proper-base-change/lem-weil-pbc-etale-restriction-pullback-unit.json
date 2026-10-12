@@ -35,83 +35,28 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (notation; the comparison morphism $\\gamma$).** Put $h=p\\circ g'=g\\circ p':W'\\to X$. The schemes and maps used below are fibre products [def-pc-fibre-product] read off from $(u_*H)(T)=H(T\\times_{\\mathrm{target}}\\mathrm{source})$ [def-weil-pbc-direct-image], with $u_*$ acting on a morphism $f$ of the site by $H(f\\times\\mathrm{id})$ (the base-change functor $b_u$ of [lem-weil-pbc-etale-base-change-finite-limits] (1)): $P_0=W\\times_XW$ (fibre product of $p$ with $p$; object $b_p(W)$ of $W_{\\Et}$ via the second projection $\\mathrm{pr}_2$, and $\\mathrm{pr}_1:P_0\\to W$ the counit morphism of $X_{\\Et}$ of [lem-weil-pbc-etale-localization-functor-adjoint] (3)); $P_1=W\\times_XY$ (object of $Y_{\\Et}$ via $\\mathrm{pr}_2$); $Q=W\\times_XW'$ (fibre product of $p$ and $h$, object of $W'_{\\Et}$ via $\\mathrm{pr}_2$). Define morphisms of schemes by their components [def-pc-fibre-product]: the diagonal $\\delta=(\\mathrm{id}_W,\\mathrm{id}_W):W\\to P_0$; $\\theta=(g',\\mathrm{id}_{W'}):W'\\to W\\times_WW'$ (the isomorphism of $W'$-schemes through which the statement reads $\\Gamma(W,g'_*H)$ as $H(W')$); $\\tau=(\\delta\\circ g',\\mathrm{id}_{W'}):W'\\to P_0\\times_WW'$ (fibre product of $\\mathrm{pr}_2$ and $g'$; defined since $\\mathrm{pr}_2\\delta g'=g'$); $\\sigma=(\\iota,\\mathrm{id}_{W'}):W'\\to P_1\\times_YW'$ (fibre product of $\\mathrm{pr}_2$ and $p'$; defined since $\\mathrm{pr}_2\\circ\\iota=p'$); $\\gamma=(g',\\mathrm{id}_{W'}):W'\\to Q$ (defined since $p\\circ g'=h$). Each is a morphism over the relevant base, hence a morphism of the small etale site [def-weil-pbc-etale-site]: $\\delta:(W,\\mathrm{id})\\to(P_0,\\mathrm{pr}_2)$ in $W_{\\Et}$ (and, composing the structure maps with $p$, in $X_{\\Et}$ via the functor $\\iota_p$ of [lem-weil-pbc-etale-localization-functor-adjoint] (1)); $\\tau$, $\\sigma$, $\\gamma$ are morphisms of $W'_{\\Et}$ from $(W',\\mathrm{id})$; $\\sigma$ is also a morphism of $Y_{\\Et}$ via $\\iota_{p'}$. Let $\\phi:P_0\\times_WW'\\to Q$ and $\\phi':P_1\\times_YW'\\to Q$ be the canonical isomorphisms of [lem-weil-pbc-inverse-image-composition] (1) for $(u,v)=(p,g')$ and $(g,p')$ at the object $W$ of $X_{\\Et}$, given in components by $\\phi((t,w),w')=(t,w')$ and $\\phi'((t,y),w')=(t,w')$, i.e. $\\phi=(\\mathrm{pr}_1\\circ\\mathrm{pr}_1,\\mathrm{pr}_2)$ and $\\phi'=(\\mathrm{pr}_1\\circ\\mathrm{pr}_1,\\mathrm{pr}_2)$. Comparing components: $\\phi\\circ\\tau=(\\mathrm{pr}_1\\delta g',\\mathrm{id})=(g',\\mathrm{id})=\\gamma$ and $\\phi'\\circ\\sigma=(\\mathrm{pr}_1\\iota,\\mathrm{id})=(g',\\mathrm{id})=\\gamma$ (since $\\mathrm{pr}_1\\circ\\iota=g'$); also $\\tau=(\\delta\\times_WW')\\circ\\theta$, $\\mathrm{pr}_1\\circ\\delta=\\mathrm{id}_W$ and $\\mathrm{pr}_1\\circ\\sigma=\\iota$, where $\\mathrm{pr}_1:P_1\\times_YW'\\to P_1$. By [lem-weil-pbc-inverse-image-composition] (1), $d_{p,g',H}(W)=H(\\phi)$ and $d_{g,p',H}(W)=H(\\phi')$ for a sheaf $H$ on $W'_{\\Et}$.",
+   "text": "Construct an Etale structure on p' by transporting the Etale structure on pullback.snd p g across the isomorphism ι, using MorphismProperty.arrow_mk_iso_iff and the supplied commutative triangle.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-localization-functor-adjoint",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-inverse-image-composition"
+    "lem-weil-pbc-etale-base-change-finite-limits"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "not in the source (agent-written proof); the setting is that of Sites, Lemma Tag 03CF (lemma-localize-morphism) and Lemma Tag 03EF (lemma-localize-morphism-strong), whose identity $f'_*j_U^{-1}=j_V^{-1}f_*$ is the direct-image counterpart of this unit compatibility"
-   }
+   "elementary": true
   },
   {
-   "text": "**Step 2 (the unit of $p$ at $W$, restricted along the diagonal).** By [lem-weil-pbc-etale-inverse-image-restriction] (2) for $j=p$, $G=F$ and the object $(W,p)$ of $X_{\\Et}$: $\\rho_F(P_0)\\circ\\eta_{p,F}(W)=F(\\mathrm{pr}_1):F(W)\\to F(P_0)$. The isomorphism $\\rho_F:p^{-1}F\\to F|_W$ of [lem-weil-pbc-etale-inverse-image-restriction] (1) is a morphism of sheaves on $W_{\\Et}$, so it commutes with the restriction along $\\delta$: $\\rho_F(W)\\circ(p^{-1}F)(\\delta)=F|_W(\\delta)\\circ\\rho_F(P_0)=F(\\delta)\\circ\\rho_F(P_0)$. Hence $\\rho_F(W)\\circ(p^{-1}F)(\\delta)\\circ\\eta_{p,F}(W)=F(\\delta)\\circ F(\\mathrm{pr}_1)=F(\\mathrm{pr}_1\\circ\\delta)=F(\\mathrm{id}_W)=\\mathrm{id}$, and since $\\rho_F(W)$ is bijective: $(p^{-1}F)(\\delta)\\circ\\eta_{p,F}(W)=\\rho_F(W)^{-1}$ (E1). In the same way, by [lem-weil-pbc-etale-inverse-image-restriction] (2) for $j=p'$, $G=g^{-1}F$ and the object $(P_1,\\mathrm{pr}_2)$ of $Y_{\\Et}$: $\\rho_{g^{-1}F}(P_1\\times_YW')\\circ\\eta_{p',g^{-1}F}(P_1)=(g^{-1}F)(\\mathrm{pr}_1)$, and naturality of $\\rho_{g^{-1}F}$ along $\\sigma$ gives $\\rho_{g^{-1}F}(W')\\circ(p'^{-1}g^{-1}F)(\\sigma)\\circ\\eta_{p',g^{-1}F}(P_1)=(g^{-1}F)(\\sigma)\\circ(g^{-1}F)(\\mathrm{pr}_1)=(g^{-1}F)(\\mathrm{pr}_1\\circ\\sigma)=(g^{-1}F)(\\iota)$, i.e. $(p'^{-1}g^{-1}F)(\\sigma)\\circ\\eta_{p',g^{-1}F}(P_1)=\\rho_{g^{-1}F}(W')^{-1}\\circ(g^{-1}F)(\\iota)$ as maps $(g^{-1}F)(P_1)\\to\\Gamma(W',p'^{-1}g^{-1}F)$ (E2).",
+   "text": "Apply the fixed-structure equality theorem etale_restriction_pullback_unit_eq to this transported structure.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction"
+    "lem-weil-pbc-etale-restriction-pullback-unit-eq"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "not in the source (agent-written proof); the setting is that of Sites, Lemma Tag 03CF (lemma-localize-morphism) and Lemma Tag 03EF (lemma-localize-morphism-strong), whose identity $f'_*j_U^{-1}=j_V^{-1}f_*$ is the direct-image counterpart of this unit compatibility"
-   }
-  },
-  {
-   "text": "**Step 3 (the unit of $h$ through $h=p\\circ g'$).** Apply [lem-weil-pbc-inverse-image-composition] (2) with $u=p$, $v=g'$, $G=F$: $p_*g'_*(c_{p,g',F})\\circ p_*(\\eta_{g',p^{-1}F})\\circ\\eta_{p,F}=d_{p,g',h^{-1}F}\\circ\\eta_{h,F}$. Evaluate at the object $(W,p)$ of $X_{\\Et}$ (a direct image acts on a morphism of sheaves componentwise, $(u_*\\alpha)(T)=\\alpha(T\\times\\ldots)$ [def-weil-pbc-direct-image]; step 1 for $d$): $c_{p,g',F}(P_0\\times_WW')\\circ\\eta_{g',p^{-1}F}(P_0)\\circ\\eta_{p,F}(W)=(h^{-1}F)(\\phi)\\circ\\eta_{h,F}(W)$ as maps $F(W)\\to(h^{-1}F)(P_0\\times_WW')$. Compose on the left with the restriction $(h^{-1}F)(\\delta\\times_WW')$ and then with $(h^{-1}F)(\\theta)$, i.e. with $(h^{-1}F)(\\tau)$ (step 1). On the right side this gives $(h^{-1}F)(\\phi\\circ\\tau)\\circ\\eta_{h,F}(W)=(h^{-1}F)(\\gamma)\\circ\\eta_{h,F}(W)$. On the left side, with $K=g'^{-1}p^{-1}F$: $c_{p,g',F}$ is a morphism of sheaves on $W'_{\\Et}$, so it commutes with restriction along $\\tau$; and the unit $\\eta_{g'}:\\mathrm{id}\\to g'_*g'^{-1}$ [def-weil-pbc-inverse-image] is natural in the object, so along $\\delta:(W,\\mathrm{id})\\to(P_0,\\mathrm{pr}_2)$ of $W_{\\Et}$, on which $g'_*K$ acts by $K(\\delta\\times_WW')$: $K(\\delta\\times_WW')\\circ\\eta_{g',p^{-1}F}(P_0)=\\eta_{g',p^{-1}F}(W)\\circ(p^{-1}F)(\\delta)$. With (E1) the left side becomes $c_{p,g',F}(W')\\circ K(\\theta)\\circ\\eta_{g',p^{-1}F}(W)\\circ\\rho_F(W)^{-1}$, where $K(\\theta)\\circ\\eta_{g',p^{-1}F}(W)$ is $\\eta_{g',p^{-1}F}(W)$ read in $K(W')$ as in the statement; write $\\bar\\eta_{g'}(W)$ for it. Hence $c_{p,g',F}(W')\\circ\\bar\\eta_{g'}(W)\\circ\\rho_F(W)^{-1}=(h^{-1}F)(\\gamma)\\circ\\eta_{h,F}(W)$ as maps $F(W)\\to(h^{-1}F)(W')$ (E3).",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "not in the source (agent-written proof); the setting is that of Sites, Lemma Tag 03CF (lemma-localize-morphism) and Lemma Tag 03EF (lemma-localize-morphism-strong), whose identity $f'_*j_U^{-1}=j_V^{-1}f_*$ is the direct-image counterpart of this unit compatibility"
-   }
-  },
-  {
-   "text": "**Step 4 (the unit of $h$ through $h=g\\circ p'$).** Apply [lem-weil-pbc-inverse-image-composition] (2) with $u=g$, $v=p'$, $G=F$: $g_*p'_*(c_{g,p',F})\\circ g_*(\\eta_{p',g^{-1}F})\\circ\\eta_{g,F}=d_{g,p',h^{-1}F}\\circ\\eta_{h,F}$. At the object $(W,p)$ of $X_{\\Et}$, as in step 3: $c_{g,p',F}(P_1\\times_YW')\\circ\\eta_{p',g^{-1}F}(P_1)\\circ\\eta_{g,F}(W)=(h^{-1}F)(\\phi')\\circ\\eta_{h,F}(W)$, with $\\eta_{g,F}(W):F(W)\\to(g^{-1}F)(P_1)$. Compose on the left with the restriction $(h^{-1}F)(\\sigma)$. The right side becomes $(h^{-1}F)(\\phi'\\circ\\sigma)\\circ\\eta_{h,F}(W)=(h^{-1}F)(\\gamma)\\circ\\eta_{h,F}(W)$ (step 1). On the left, $c_{g,p',F}$ commutes with restriction along $\\sigma$ (a morphism of sheaves on $W'_{\\Et}$), and (E2) gives $c_{g,p',F}(W')\\circ(p'^{-1}g^{-1}F)(\\sigma)\\circ\\eta_{p',g^{-1}F}(P_1)\\circ\\eta_{g,F}(W)=c_{g,p',F}(W')\\circ\\rho_{g^{-1}F}(W')^{-1}\\circ(g^{-1}F)(\\iota)\\circ\\eta_{g,F}(W)$. Hence $c_{g,p',F}(W')\\circ\\rho_{g^{-1}F}(W')^{-1}\\circ(g^{-1}F)(\\iota)\\circ\\eta_{g,F}(W)=(h^{-1}F)(\\gamma)\\circ\\eta_{h,F}(W)$ as maps $F(W)\\to(h^{-1}F)(W')$ (E4).",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "not in the source (agent-written proof); the setting is that of Sites, Lemma Tag 03CF (lemma-localize-morphism) and Lemma Tag 03EF (lemma-localize-morphism-strong), whose identity $f'_*j_U^{-1}=j_V^{-1}f_*$ is the direct-image counterpart of this unit compatibility"
-   }
-  },
-  {
-   "text": "**Step 5 (conclusion).** By (E3) and (E4), $c_{p,g',F}(W')\\circ\\bar\\eta_{g'}(W)\\circ\\rho_F(W)^{-1}=c_{g,p',F}(W')\\circ\\rho_{g^{-1}F}(W')^{-1}\\circ(g^{-1}F)(\\iota)\\circ\\eta_{g,F}(W)$. Apply $c_{g,p',F}(W')^{-1}$ (the component of the inverse of the isomorphism $c_{g,p'}$ of [lem-weil-pbc-inverse-image-composition] (2)); by the definition $\\kappa_F=c_{g,p',F}^{-1}\\circ c_{p,g',F}$ this reads $\\kappa_F(W')\\circ\\bar\\eta_{g'}(W)\\circ\\rho_F(W)^{-1}=\\rho_{g^{-1}F}(W')^{-1}\\circ(g^{-1}F)(\\iota)\\circ\\eta_{g,F}(W)$. Composing with $\\rho_{g^{-1}F}(W')$ on the left and $\\rho_F(W)$ on the right gives $\\rho_{g^{-1}F}(W')\\circ\\kappa_F(W')\\circ\\bar\\eta_{g'}(W)=(g^{-1}F)(\\iota)\\circ\\eta_{g,F}(W)\\circ\\rho_F(W)$, which evaluated at $a\\in\\Gamma(W,p^{-1}F)$ is the assertion.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "not in the source (agent-written proof); the setting is that of Sites, Lemma Tag 03CF (lemma-localize-morphism) and Lemma Tag 03EF (lemma-localize-morphism-strong), whose identity $f'_*j_U^{-1}=j_V^{-1}f_*$ is the direct-image counterpart of this unit compatibility"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-weil-pbc-direct-image",
   "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-localization-functor-adjoint",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "def-weil-pbc-inverse-image"
+  "lem-weil-pbc-etale-restriction-pullback-unit-eq"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Lemma Tag 03CF (lemma-localize-morphism) and Lemma Tag 03EF (lemma-localize-morphism-strong) give only the direct-image identity $f'_*j_U^{-1}=j_V^{-1}f_*$; the unit compatibility and its proof are written by the agent, modelled on lem-weil-pbc-open-restriction-pullback-unit with the diagonal section $\\delta$ and the section $\\sigma=(\\iota,\\mathrm{id})$ replacing the monomorphism argument"
+  "by": "worker E1 second reading",
+  "document": "lean/Sheaf/Paper/EtaleRestrictionPullbackUnit.lean",
+  "place": "Lean proof: transport Etale across Arrow.isoMk, then apply fixed-structure equality theorem"
  },
  "mathlib_searches": [
   {
@@ -216,5 +161,15 @@
   "group": "M1",
   "result": "fix",
   "note": "schemes X,Y,W,W' and g,p,g',p'; hcomm; iota=(g',p') via hι₁/hι₂ + IsIso (cartesian); Etale p instance, Etale p' as ∃ conclusion; F : Sheaf X.smallEtaleTopology AddCommGrpCat; p^-1,g^-1,g'^-1 = Etale.upperStar; units = upperStarLowerStarAdjunction.unit at w=(W,id) and wx=(W,p); theta=(g',id) into Over.pullback g' w; kappa = (upperStarComp g' p).inv ≫ (upperStarComp p' g _ hcomm).hom = c_{g,p'}^-1 c_{p,g'}; rho = upperStarIsoLocalizationRestriction (Etale only, no Mono); restriction along iotaSite=homMk ι hι₂; equality of hom = for every a"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T053926-L-2632863",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

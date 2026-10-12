@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-etale-restriction-pullback-unit-eq",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-restriction-pullback-unit",
+   "place": "split intermediate equality",
+   "via": []
+  }
+ },
+ "kind": "statement",
+ "title": "Étale restriction pullback unit equality for fixed base-change étale structure",
+ "statement": "With the same hypotheses and notation as lem-weil-pbc-etale-restriction-pullback-unit, for a specified Etale p' structure hp', the displayed equality of homomorphisms in that theorem holds.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "agent split of the unit compatibility proof, isolating the equality after étaleness of p' is supplied"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The equality is the unit compatibility argument of the parent node, with hp' supplied. Expand the definitions of the restriction isomorphisms, composition comparison and adjunction units, then compare the two factorizations of h = p ≫ g' = p' ≫ g through the cartesian square.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "worker E1",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "split from parent unit proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale restriction pullback unit compatibility equality",
+   "results": "no direct match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image unit etale restriction base change",
+   "results": "no direct match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction_pullback_unit",
+   "results": "only parent module",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleRestrictionPullbackUnit",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-restriction-pullback-unit",
+  "worker": "stage1",
+  "summary": "Statement kept (checked: the two sides are maps Gamma(W,p^{-1}F) -> (g^{-1}F)(W'), with eta_{g'}(W) read in K(W') through theta=(g',id)). Wrote a 5-step agent proof following the scheme of lem-weil-pbc-open-restriction-pullback-unit: compute the unit eta_h(W) of h=pg'=gp' through both factorizations with lem-weil-pbc-inverse-image-composition (2), and pass to W' by restricting along the diagonal delta:W->W x_X W (giving (p^{-1}F)(delta) eta_p(W)=rho_F(W)^{-1} from lem-weil-pbc-etale-inverse-image-restriction (2)) and along sigma=(iota,id):W'->(W x_X Y) x_Y W'; both routes land at the graph gamma=(g',id):W'->W x_X W', which replaces the monomorphism argument of the open case. No new node needed: everything is carried by existing nodes. The intended adjunction argument of the source field (test after composing with eta_p) is not needed. Tags 03CF (sites-lemma-localize-morphism) and 03EF (sites-lemma-localize-morphism-strong) verified in tags/tags; they state only the direct-image identity f'_* j_U^{-1}=j_V^{-1} f_*, so the proof is agent-written. Mathlib re-searched (leansearch, leanfinder, grep incl. Sites/Over.lean overMapPullback and Sites/Localization.lean): no match."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleRestrictionPullbackUnitEq",
+  "declaration": "AlgebraicGeometry.etale_restriction_pullback_unit_eq",
+  "file": "lean/Sheaf/Paper/EtaleRestrictionPullbackUnitEq.lean",
+  "statement": "theorem etale_restriction_pullback_unit_eq {X Y W W' : Scheme.{u}} (g : Y ⟶ X) (p : W ⟶ X) (g' : W' ⟶ W) (p' : W' ⟶ Y) (hcomm : g' ≫ p = p' ≫ g) (ι : W' ⟶ pullback p g) (hι₁ : ι ≫ pullback.fst p g = g') (hι₂ : ι ≫ pullback.snd p g = p') [IsIso ι] [hp : Etale p] (hp' : Etale p') : let A := AddCommGrpCat.{u + 1} let w : W.Etale := Scheme.Etale.mk (𝟙 W) let w' : W'.Etale := Scheme.Etale.mk (𝟙 W') let wx : X.Etale := Scheme.Etale.mk p let wy' : Y.Etale := @Scheme.Etale.mk _ _ p' hp' let eW : (MorphismProperty.Over.map ⊤ hp).obj w ≅ wx := MorphismProperty.Over.isoMk (Iso.refl W) (by simp [wx, w]) let eW' : (MorphismProperty.Over.map ⊤ hp').obj w' ≅ wy' := MorphismProperty.Over.isoMk (Iso.refl W') (by simp [wy', w']) let theta : w' ⟶ (MorphismProperty.Over.pullback @Etale ⊤ g').obj w := MorphismProperty.Over.homMk (pullback.lift g' (𝟙 W') (by exact (Category.comp_id g').trans (Category.id_comp g').symm)) (by simp [w']) let iotaSite : wy' ⟶ (MorphismProperty.Over.pullback @Etale ⊤ g).obj wx := MorphismProperty.Over.homMk ι hι₂ ∀ F : Sheaf X.smallEtaleTopology A, let pF := (Etale.upperStar A p).obj F let gF := (Etale.upperStar A g).obj F let K := (Etale.upperStar A g').obj pF let rhoF := (Etale.upperStarIsoLocalizationRestriction A p hp).hom.app F let rhoG := (Etale.upperStarIsoLocalizationRestriction A p' hp').hom.app gF let kappa := (Etale.upperStarComp A g' p).inv.app F ≫ (Etale.upperStarComp A p' g (g' ≫ p) hcomm).hom.app F ((Etale.upperStarLowerStarAdjunction A g').unit.app pF).hom.app (op w) ≫ K.obj.map theta.op ≫ kappa.hom.app (op w') ≫ rhoG.hom.app (op w') ≫ gF.obj.map eW'.inv.op = rhoF.hom.app (op w) ≫ F.obj.map eW.inv.op ≫ ((Etale.upperStarLowerStarAdjunction A g).unit.app F).hom.app (op wx) ≫ gF.obj.map iotaSite.op",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T053926-L-2632863",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T053926-L-2632863",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

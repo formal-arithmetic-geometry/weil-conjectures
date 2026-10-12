@@ -7,7 +7,8 @@ module
 
 public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.Paper.EtaleRestrictionPullbackUnitEq
 
 /-!
 # Étale restriction and pullback units
@@ -91,6 +92,11 @@ theorem etale_restriction_pullback_unit
           rhoF.hom.app (op w) ≫ F.obj.map eW.inv.op ≫
             ((Etale.upperStarLowerStarAdjunction A g).unit.app F).hom.app (op wx) ≫
             gF.obj.map iotaSite.op := by
-  sorry
+  let hp' : Etale p' := by
+    have hs : Etale (pullback.snd p g) := inferInstance
+    have hh := (MorphismProperty.arrow_mk_iso_iff (P := @Etale) (Arrow.isoMk (asIso ι)
+      (Iso.refl Y) (by simpa using hι₂))).mpr hs
+    simpa using hh
+  exact ⟨hp', etale_restriction_pullback_unit_eq g p g' p' hcomm ι hι₁ hι₂ hp'⟩
 
 end AlgebraicGeometry
