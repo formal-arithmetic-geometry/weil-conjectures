@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
+public import WeilConjectures.SixFunctors.ClosedImmersionStages
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
@@ -268,6 +270,350 @@ theorem boundedConstructibleIntegral_rightDerivedLowerStar (f : X ⟶ Y) (hf : f
     fun n ↦ key n a₀ b₀ (h₀ n).1 (h₀ n).2⟩, fun a b hab n ↦ (key n a b (h₀ n).1 (hab n)).2⟩
 
 end Reductions
+
+/-! ### The ambient recollement data
+
+The facts behind the supported localization triangle on the whole of `D(X_ét, Λ)`
+(`AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization`), in the form used by
+`CategoryTheory.Pretriangulated.Recollement`. -/
+
+section Recollement
+
+variable {U Z X : Scheme.{u}}
+
+variable (Λ) in
+/-- For an open immersion `j`, the counit `Lj^* Rj_* ⟶ 𝟭` is an isomorphism: `Rj_*` is fully
+faithful. -/
+instance isIso_derivedUpperStarLowerStarAdjunction_counit (j : U ⟶ X) [IsOpenImmersion j] :
+    IsIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit := by
+  have : IsIso (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit :=
+    (Adjunction.Triple.mk
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)
+      (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)).isIso_unit_iff_isIso_counit.1
+      inferInstance
+  have hff := (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).fullyFaithfulROfIsIsoCounit
+  have := hff.full
+  have := hff.faithful
+  exact (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit_isIso_of_R_fully_faithful
+
+variable (Λ) in
+/-- The adjunction `Ri_* ⊣ Ri^!` for a closed immersion `i`: the exceptional adjunction
+`Ri_! ⊣ Ri^!` transported along `Ri_! ≅ Ri_*`. -/
+noncomputable def rightDerivedLowerStarUpperShriekAdjunction (i : Z ⟶ X) [IsClosedImmersion i]
+    [HasCompactification i] [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
+    R((i)_*[ModuleCat.{u + 1} Λ]) ⊣ R(i)^![ModuleCat.{u + 1} Λ] :=
+  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).ofNatIsoLeft
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i)
+
+/-- `j^* i_* = 0` for an open immersion `j` whose range is disjoint from that of the closed
+immersion `i` (`AlgebraicGeometry.Etale.isZero_upperStar_rightDerivedLowerShriek`). -/
+lemma isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj (i : Z ⟶ X)
+    [IsClosedImmersion i] [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
+    (hij : Disjoint (Set.range i.base) (Set.range j.base)) (M : 𝐃(Z, Λ)) :
+    IsZero ((L((j)^*[ModuleCat.{u + 1} Λ])).obj ((R((i)_*[ModuleCat.{u + 1} Λ])).obj M)) :=
+  (isZero_upperStar_rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) i j hij M).of_iso
+    ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).app _ ≪≫
+      D((j)^*[ModuleCat.{u + 1} Λ]).mapIso
+        ((rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i).app M).symm)
+
+/-- An object `K` of `D(X_ét, Λ)` with `j^* K = 0` has invertible unit `K ⟶ Ri_* i^* K`, by the
+open–closed triangle `j_! j^* K ⟶ K ⟶ Ri_* i^* K ⟶`
+(`AlgebraicGeometry.Etale.exists_distTriang_openClosed`). -/
+lemma isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_of_isZero (i : Z ⟶ X)
+    [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) {K : 𝐃(X, Λ)}
+    (hK : IsZero ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)) :
+    IsIso ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app K) := by
+  obtain ⟨w, hw⟩ := exists_distTriang_openClosed (ModuleCat.{u + 1} Λ) j i hij K
+  exact (Triangle.isZero₁_iff_isIso₂ _ hw).1 (D((j)_!open[ModuleCat.{u + 1} Λ]).map_isZero
+    (hK.of_iso ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).app K).symm))
+
+/-- An object `K` of `D(X_ét, Λ)` with `j^* K = 0` lies in the essential image of `Ri_*`. -/
+lemma rightDerivedLowerStar_essImage_of_isZero (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
+    [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ) {K : 𝐃(X, Λ)}
+    (hK : IsZero ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)) :
+    (R((i)_*[ModuleCat.{u + 1} Λ])).essImage K :=
+  have := isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_of_isZero i j hij hK
+  ⟨_, ⟨(asIso ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app
+    K)).symm⟩⟩
+
+end Recollement
+
+/-! ### The exceptional inverse image on `Dᵇc(-, Λ)` -/
+
+section UpperShriek
+
+variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
+  (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
+  {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))] {X Y : Scheme.{u}}
+
+include hϖ hI in
+/-- `Rf^!` carries `Dᵇc(Y, Λ)` into `Dᵇc(X, Λ)`, for a separated morphism `f` of separated
+schemes of finite type over `k`: the image of the derived completion cone of `L` under `Rf^!` is
+a homotopy limit of the tower `n ↦ Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`, whose point lies in `Dᵇc(X, Λ)` by the
+construction of the integral exceptional adjoint
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`, blueprint
+`prop-coef-integral-exceptional-adjoint`). -/
+theorem boundedConstructibleIntegral_rightDerivedUpperShriek
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
+    [HasCompactification aX] [HasCompactification aY]
+    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
+    (hL : DerivedCategory.boundedConstructibleIntegral I Y L) :
+    DerivedCategory.boundedConstructibleIntegral I X ((R(f)^![ModuleCat.{u + 1} Λ]).obj L) := by
+  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
+  have := adj.commShift_of_leftAdjoint ℤ
+  have : (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
+  have : (R(f)^![ModuleCat.{u + 1} Λ]).Additive := adj.right_adjoint_additive
+  exact (boundedConstructibleIntegral_exceptionalAdjoint I hϖ hI aX aY f hf hL
+    (hL.1.map (R(f)^![ModuleCat.{u + 1} Λ]))).1.1
+
+end UpperShriek
+
+/-! ### The closed-support triangle at the integral stage -/
+
+section Localization
+
+variable {U Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j]
+
+/-- The direct image `Ri_*` along a closed immersion is fully faithful on `D(Z_ét, Λ)`. -/
+noncomputable def fullyFaithfulRightDerivedLowerStarOfIsClosedImmersion :
+    (R((i)_*[ModuleCat.{u + 1} Λ])).FullyFaithful :=
+  .ofFullyFaithful _
+
+/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the integral stage `𝒪_E`, the
+vanishing: `Hom((Ri_* Q)[m], Rj_* G) = 0` for all `Q ∈ D(Z_ét, Λ)` and `G ∈ D(U_ét, Λ)`, in
+particular for `Q ∈ Dᵇc(Z, Λ)` and `G ∈ Dᵇc(U, Λ)`. -/
+lemma subsingleton_hom_shift_rightDerivedLowerStar_rightDerivedLowerStar [HasCompactification i]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) (Q : 𝐃(Z, Λ)) (G : 𝐃(U, Λ)) (m : ℤ) :
+    Subsingleton (((R((i)_*[ModuleCat.{u + 1} Λ])).obj Q)⟦m⟧ ⟶
+      (R((j)_*[ModuleCat.{u + 1} Λ])).obj G) :=
+  Recollement.subsingleton_hom_shift _ _ (derivedUpperStarLowerStarAdjunction _ j)
+    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj i j (hij ▸ disjoint_compl_left))
+    Q G m
+
+variable [HasCompactification i] [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+
+/-- The supported localization triangle `Ri_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (Ri_* Ri^! K)[1]` on
+`D(X_ét, Λ)`, with third map `w`. -/
+noncomputable abbrev closedSupportTriangle (K : 𝐃(X, Λ))
+    (w : (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K) ⟶
+      ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K))⟦(1 : ℤ)⟧) :
+    Triangle 𝐃(X, Λ) :=
+  Recollement.triangle (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)
+    (rightDerivedLowerStarUpperShriekAdjunction Λ i) K w
+
+/-- The supported localization triangle on `D(X_ét, Λ)` exists and has a unique third map
+(`CategoryTheory.Pretriangulated.Recollement.existsUnique_distTriang_counit_unit`). -/
+theorem existsUnique_distTriang_closedSupportTriangle
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) (K : 𝐃(X, Λ)) :
+    ∃! w, closedSupportTriangle i j K w ∈ distTriang _ :=
+  Recollement.existsUnique_distTriang_counit_unit _ _
+    (fullyFaithfulRightDerivedLowerStarOfIsClosedImmersion i)
+    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj i j (hij ▸ disjoint_compl_left))
+    (fun _ hK ↦ rightDerivedLowerStar_essImage_of_isZero i j hij hK) K
+
+/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the integral stage `𝒪_E`,
+functoriality: for `φ : K ⟶ K'` and distinguished closed-support triangles of `K` and `K'`, the
+triple `(Ri_* Ri^! φ, φ, Rj_* j^* φ)` is a morphism of triangles. -/
+theorem exists_triangleHom_closedSupportTriangle (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    {K K' : 𝐃(X, Λ)} (φ : K ⟶ K') {w w'} (hw : closedSupportTriangle i j K w ∈ distTriang _)
+    (hw' : closedSupportTriangle i j K' w' ∈ distTriang _) :
+    ∃ τ : closedSupportTriangle i j K w ⟶ closedSupportTriangle i j K' w',
+      τ.hom₁ = (R((i)_*[ModuleCat.{u + 1} Λ])).map ((R(i)^![ModuleCat.{u + 1} Λ]).map φ) ∧
+        τ.hom₂ = φ ∧
+        τ.hom₃ = (R((j)_*[ModuleCat.{u + 1} Λ])).map ((L((j)^*[ModuleCat.{u + 1} Λ])).map φ) :=
+  Recollement.exists_triangleHom _ _
+    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj i j (hij ▸ disjoint_compl_left))
+    φ hw hw'
+
+/-- Blueprint `prop-sf-localization-all-stages`, clause (3) at the integral stage `𝒪_E`,
+functoriality: a morphism of distinguished closed-support triangles is determined by its middle
+component. -/
+theorem closedSupportTriangle_hom_ext (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    {K K' : 𝐃(X, Λ)} {w w'} (hw : closedSupportTriangle i j K w ∈ distTriang _)
+    (hw' : closedSupportTriangle i j K' w' ∈ distTriang _)
+    {τ τ' : closedSupportTriangle i j K w ⟶ closedSupportTriangle i j K' w'}
+    (h : τ.hom₂ = τ'.hom₂) : τ = τ' :=
+  Recollement.triangleHom_ext _ _
+    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj i j (hij ▸ disjoint_compl_left))
+    hw hw' h
+
+/-- Blueprint `prop-sf-localization-all-stages`, clause (4) at the integral stage `𝒪_E`:
+`Ri^! Rj_* G = 0`, as `Hom(Q, Ri^! Rj_* G) = Hom(Ri_* Q, Rj_* G) = 0`. -/
+theorem isZero_rightDerivedUpperShriek_obj_rightDerivedLowerStar_obj
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) (G : 𝐃(U, Λ)) :
+    IsZero ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj G)) :=
+  Recollement.isZero_obj_obj (derivedUpperStarLowerStarAdjunction _ j)
+    (rightDerivedLowerStarUpperShriekAdjunction Λ i)
+    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj i j (hij ▸ disjoint_compl_left))
+    G
+
+/-- Blueprint `prop-sf-localization-all-stages`, clause (4) at the integral stage `𝒪_E`: the
+unit `Q ⟶ Ri^! Ri_* Q` is an isomorphism, `Ri_*` being fully faithful. -/
+instance isIso_rightDerivedLowerStarUpperShriekAdjunction_unit :
+    IsIso (rightDerivedLowerStarUpperShriekAdjunction Λ i).unit :=
+  (rightDerivedLowerStarUpperShriekAdjunction Λ i).unit_isIso_of_L_fully_faithful
+
+end Localization
+
+/-! ### `Dᵇc(-, 𝒪_E)` -/
+
+section BoundedConstructible
+
+variable {U Z X : Scheme.{u}} [IsNoetherianRing Λ] {k : Type u} [Field k]
+  [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+
+/-- Blueprint `prop-sf-localization-all-stages`, clauses (1) and (1') at the integral stage
+`𝒪_E`: for a quasi-compact open immersion `j : U ⟶ X` into a scheme of finite type over `k`
+with `dim U ≤ d`, `Rj_*` carries `Dᵇc(U, Λ)` into `Dᵇc(X, Λ)`, and Tor amplitude `[a, b]` of
+the reductions goes to `[a, b + 2d]`. -/
+theorem boundedConstructibleIntegral_rightDerivedLowerStar_of_isOpenImmersion
+    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    {G : 𝐃(U, Λ)} (hG : DerivedCategory.boundedConstructibleIntegral I U G) :
+    DerivedCategory.boundedConstructibleIntegral I X ((R((j)_*[ModuleCat.{u + 1} Λ])).obj G) ∧
+      ∀ d : ℕ, topologicalKrullDim U ≤ (d : WithBot ℕ∞) → ∀ a b : ℤ,
+        (∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) U a b
+          ((reductionModIdeal Λ U (I ^ (n + 1))).obj G)) →
+        ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a (b + 2 * (d : ℤ))
+          ((reductionModIdeal Λ X (I ^ (n + 1))).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj G)) :=
+  have ⟨d, hd⟩ := exists_topologicalKrullDim_le (j ≫ aX)
+  ⟨(boundedConstructibleIntegral_rightDerivedLowerStar hϖ hI (j ≫ aX) aX j rfl d hd hG).1,
+    fun d' hd' ↦ (boundedConstructibleIntegral_rightDerivedLowerStar hϖ hI (j ≫ aX) aX j rfl d'
+      hd' hG).2⟩
+
+/-- Blueprint `prop-sf-localization-all-stages`, clause (3') at the integral stage `𝒪_E`, for
+`i_*`: the direct image along a closed immersion `i : Z ⟶ X` of schemes of finite type over `k`
+carries `Dᵇc(Z, Λ)` into `Dᵇc(X, Λ)`. -/
+theorem boundedConstructibleIntegral_rightDerivedLowerStar_of_isClosedImmersion
+    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k))
+    (i : Z ⟶ X) [IsClosedImmersion i] [LocallyOfFiniteType aX] [QuasiCompact aX] {Q : 𝐃(Z, Λ)}
+    (hQ : DerivedCategory.boundedConstructibleIntegral I Z Q) :
+    DerivedCategory.boundedConstructibleIntegral I X ((R((i)_*[ModuleCat.{u + 1} Λ])).obj Q) :=
+  have ⟨d, hd⟩ := exists_topologicalKrullDim_le (i ≫ aX)
+  (boundedConstructibleIntegral_rightDerivedLowerStar hϖ hI (i ≫ aX) aX i rfl d hd hQ).1
+
+variable (I) in
+/-- The direct image `Rf_* : Dᵇc(X, Λ) ⥤ Dᵇc(Y, Λ)` along a closed immersion, the restriction of
+`Rf_*` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerStar`). -/
+noncomputable abbrev boundedConstructibleIntegralRightDerivedLowerStar
+    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] (i : Z ⟶ X) [IsClosedImmersion i] :
+    (DerivedCategory.boundedConstructibleIntegral I Z).FullSubcategory ⥤
+      (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory :=
+  ObjectProperty.liftFullSubcategory (DerivedCategory.boundedConstructibleIntegral I Z) _
+    (R((i)_*[ModuleCat.{u + 1} Λ])) fun _ hQ ↦
+      boundedConstructibleIntegral_rightDerivedLowerStar_of_isClosedImmersion hϖ hI aX i hQ
+
+variable (I) in
+/-- The exceptional inverse image `Ri^! : Dᵇc(X, Λ) ⥤ Dᵇc(Z, Λ)` along a closed immersion, the
+restriction of `Ri^!` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`).
+-/
+noncomputable abbrev boundedConstructibleIntegralRightDerivedUpperShriek [IsDomain Λ]
+    [IsAdicComplete I Λ] [Finite (Λ ⧸ I)] (hϖ : ϖ ∈ nonZeroDivisors Λ)
+    (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aZ] [QuasiCompact aZ]
+    [IsSeparated aX] [IsSeparated aZ] [HasCompactification aX] [HasCompactification aZ]
+    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aZ)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    (i : Z ⟶ X) (hi : i ≫ aX = aZ) [IsClosedImmersion i] [HasCompactification i]
+    [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
+    (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory ⥤
+      (DerivedCategory.boundedConstructibleIntegral I Z).FullSubcategory :=
+  ObjectProperty.liftFullSubcategory (DerivedCategory.boundedConstructibleIntegral I X) _
+    (R(i)^![ModuleCat.{u + 1} Λ]) fun _ hK ↦
+      boundedConstructibleIntegral_rightDerivedUpperShriek hϖ hI aZ aX i hi hK
+
+end BoundedConstructible
+
+section Triangle
+
+variable {U Z X : Scheme.{u}} [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ]
+  [Finite (Λ ⧸ I)] {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+  (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
+  (aX : X ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
+  [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aZ] [QuasiCompact aZ]
+  [IsSeparated aX] [IsSeparated aZ] [HasCompactification aX] [HasCompactification aZ]
+  [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aZ)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+  (i : Z ⟶ X) (hi : i ≫ aX = aZ) [IsClosedImmersion i] [HasCompactification i]
+  [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+
+/-- Blueprint `prop-sf-localization-all-stages`, clause (2) at the integral stage `𝒪_E`: the
+direct image `i_* : Dᵇc(Z, Λ) ⥤ Dᵇc(X, Λ)` along a closed immersion has the right adjoint `Ri^!`,
+the restriction of the exceptional inverse image (the derived limit `R lim_n Res_n Ri_n^! K_n` of
+blueprint `def-weil-exceptional-inverse-image`, by
+`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`). -/
+noncomputable def boundedConstructibleIntegralClosedUpperShriekAdjunction :
+    boundedConstructibleIntegralRightDerivedLowerStar I hϖ hI aX i ⊣
+      boundedConstructibleIntegralRightDerivedUpperShriek I hϖ hI aX aZ i hi :=
+  (rightDerivedLowerStarUpperShriekAdjunction Λ i).restrictFullyFaithful
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) (Iso.refl _) (Iso.refl _)
+
+include hϖ hI hi in
+/-- Blueprint `prop-sf-localization-all-stages`, clauses (3) and (3') at the integral stage
+`𝒪_E`: for `K ∈ Dᵇc(X, Λ)` the counit `Ri_* Ri^! K ⟶ K` and the unit `K ⟶ Rj_* j^* K` extend to a
+distinguished triangle `Ri_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (Ri_* Ri^! K)[1]` with a unique third
+arrow, and its three vertices lie in `Dᵇc(-, Λ)`. The vanishing of
+`Hom((Ri_* Q)[m], Rj_* G)` is
+`AlgebraicGeometry.Etale.subsingleton_hom_shift_rightDerivedLowerStar_rightDerivedLowerStar`,
+and the functoriality in `K` is
+`AlgebraicGeometry.Etale.exists_triangleHom_closedSupportTriangle` and
+`AlgebraicGeometry.Etale.closedSupportTriangle_hom_ext`. -/
+theorem boundedConstructibleIntegral_closedSupportTriangle (j : U ⟶ X) [IsOpenImmersion j]
+    [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ) {K : 𝐃(X, Λ)}
+    (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
+    DerivedCategory.boundedConstructibleIntegral I X
+        ((R((i)_*[ModuleCat.{u + 1} Λ])).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+      DerivedCategory.boundedConstructibleIntegral I X
+        ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧
+      ∃! w, closedSupportTriangle i j K w ∈ distTriang _ :=
+  ⟨boundedConstructibleIntegral_rightDerivedLowerStar_of_isClosedImmersion hϖ hI aX i
+      (boundedConstructibleIntegral_rightDerivedUpperShriek hϖ hI aZ aX i hi hK),
+    (boundedConstructibleIntegral_rightDerivedLowerStar_of_isOpenImmersion hϖ hI aX j
+      (boundedConstructibleIntegral_leftDerivedUpperStar hϖ hI j hK)).1,
+    existsUnique_distTriang_closedSupportTriangle i j hij K⟩
+
+include hϖ hI hi in
+/-- Blueprint `prop-sf-localization-all-stages`, clause (2') at the integral stage `𝒪_E`: if the
+reductions of `K ∈ Dᵇc(X, Λ)` have Tor amplitude in `[a, b]` and the open complement `U` has
+dimension `≤ d`, the reductions of `Ri^! K` have Tor amplitude in `[a, b + 2d + 1]`. The
+reductions of the closed-support triangle are distinguished, `Rj_* j^* K` has reductions of Tor
+amplitude in `[a, b + 2d]`, and `Ri^! K ≅ i^* Ri_* Ri^! K`. -/
+theorem torAmplitudeIn_reductionModIdeal_rightDerivedUpperShriek (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    {K : 𝐃(X, Λ)} (hK : DerivedCategory.boundedConstructibleIntegral I X K) (d : ℕ)
+    (hd : topologicalKrullDim U ≤ (d : WithBot ℕ∞)) (a b : ℤ)
+    (hab : ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+      ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)) (n : ℕ) :
+    DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + 2 * (d : ℤ) + 1)
+      ((reductionModIdeal Λ Z (I ^ (n + 1))).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) := by
+  obtain ⟨hM, -, w, hw, -⟩ := boundedConstructibleIntegral_closedSupportTriangle hϖ hI aX aZ i hi
+    j hij hK
+  have hbcK := hK.2.choose_spec.choose_spec n
+  have hjK := boundedConstructibleIntegral_leftDerivedUpperStar hϖ hI j hK
+  have hjab := fun m ↦
+    (boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ hI j m
+      ⟨(hK.2.choose_spec.choose_spec m).1, hab m⟩).2
+  have h₃ := (boundedConstructibleIntegral_rightDerivedLowerStar_of_isOpenImmersion hϖ hI aX j
+    hjK).2 d hd a b hjab n
+  have hT := (reductionModIdeal Λ X (I ^ (n + 1))).map_distinguished _ hw
+  have h₁ := DerivedCategory.torAmplitudeIn_obj₂ (ModuleCat.{u + 1} Λ)
+    (inv_rot_of_distTriang _ hT) (DerivedCategory.torAmplitudeIn.shift h₃ (-1)) (hab n)
+  have h₁' : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a (b + 2 * (d : ℤ) + 1)
+      ((reductionModIdeal Λ X (I ^ (n + 1))).obj ((R((i)_*[ModuleCat.{u + 1} Λ])).obj
+        ((R(i)^![ModuleCat.{u + 1} Λ]).obj K))) :=
+    h₁.mono (by omega) (by omega)
+  have : IsIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit :=
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit_isIso_of_R_fully_faithful
+  exact (DerivedCategory.torAmplitudeIn _ Z _ _).prop_of_iso
+    ((reductionModIdeal Λ Z (I ^ (n + 1))).mapIso
+      (asIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit.app _)))
+    (boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ hI i n
+      ⟨(hM.2.choose_spec.choose_spec n).1, h₁'⟩).2
+
+end Triangle
 
 end Etale
 
