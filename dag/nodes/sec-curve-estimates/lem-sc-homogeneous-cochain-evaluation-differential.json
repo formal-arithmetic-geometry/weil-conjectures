@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-homogeneous-cochain-evaluation-differential",
+ "kind": "statement",
+ "title": "Differential of cumulative-product cochain evaluation",
+ "statement": "Let $G$ be a compact Hausdorff topological group in universe $u$ and $N$ a topological integer representation in coefficient universe $\\max(u,s)$ with discrete coefficient topology. For the concrete additive evaluation maps $e_n$ of [def-sc-homogeneous-cochain-evaluation], every $n\\geq0$, $x\\in H^n$ and $g\\in G^{n+1}$ satisfy $e_{n+1}(dx)(g)=\\rho(g_0)e_n(x)(g_1,\\ldots,g_n)+\\sum_{k=0}^n(-1)^{k+1}e_n(x)(\\operatorname{contract}_k(g))$. Here contract multiplies adjacent coordinates when $k<n$ and drops the final coordinate when $k=n$. Neither open stabilizers nor bijectivity are required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+ },
+ "stmt_deps": [
+  "def-sc-homogeneous-cochain-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Induct on m to prove E_(m+1)(d_m f)(h) is the sum over i in Fin(m+1) of (-1)^i E_m(f)(h with coordinate i omitted). The base differential is constant insertion. At the next step, d is constant insertion minus the previous d applied pointwise. Split the sum into its first term and successor-index terms; evaluate the first term on the tail, and use the induction hypothesis on the remaining terms. Fin.succ_succAbove_succ identifies the omissions after taking the tail, and multiplying by -1 shifts their signs.",
+   "uses": [
+    "def-sc-homogeneous-cochain-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  },
+  {
+   "text": "Apply TopRep.homogeneousCochains.d_apply and the alternating-omission formula at Fin.partialProd g. Split off omission zero. Fin.partialProd_succ' identifies this tuple as g_0 times the cumulative products of the tail, and diagonal equivariance supplies the action term. For each remaining term, Fin.partialProd_contractNth identifies omission k+1 with the partial products of contract_k(g), with the same sign (-1)^(k+1). Sum these equalities. The base-degree formula is included in the induction.",
+   "uses": [
+    "def-sc-homogeneous-cochain-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-homogeneous-cochain-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Detailed homogeneous change-of-variables argument from the parent plan; Tag 0DVG differential checked at https://stacks.math.columbia.edu/tag/0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at cumulative products is a bijection between invariant homogeneous continuous cochains and locally constant inhomogeneous cochains and converts alternating omission to the usual differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluate iterated continuous homogeneous cochains at cumulative products; bijective coordinates and alternating omission differential",
+   "results": "ContinuousCohomology.MultiInd.d_succ, inhomogeneousCochains.d, inhomogeneousCochains.d_hom_apply, ContinuousCohomology.MultiInd.d, inhomogeneousCochains.d_eq, ContinuousCohomology.MultiInd.complex, AlgebraicTopology.AlternatingCofaceMapComplex.map, AlgebraicTopology.AlternatingCofaceMapComplex.obj",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Continuous-map currying and Fin.partialProd identities supply constituent tools; no coordinate map for the iterated TopRep complex."
+  },
+  {
+   "tool": "grep",
+   "query": "partialProd_contractNth|partialProd_left_inv|homogeneousCochains|continuous_of_continuous_uncurry",
+   "results": "Mathlib/NumberTheory/Padics/Measure/Basic.lean, Mathlib/NumberTheory/Padics/Measure/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Continuous-map currying and Fin.partialProd identities supply constituent tools; no coordinate map for the iterated TopRep complex."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "Parent comparison: homogeneous conversion, step 3, differential",
+   "via": [
+    "lem-sc-homogeneous-inhomogeneous-continuous-cohomology",
+    "lem-sc-discrete-resolution-continuous-cohomology",
+    "lem-sc-discrete-invariants-continuous-comparison",
+    "lem-sc-etale-units-h2-reverse-embedding",
+    "lem-sc-etale-units-two-cocycle-comparison",
+    "lem-sc-etale-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.HomogeneousCochainEvaluationDifferential",
+  "file": "lean/Sheaf/RepresentationTheory/HomogeneousCochainEvaluationDifferential.lean",
+  "declaration": "Rep.homogeneousCochainEvaluation_differential",
+  "statement": "theorem homogeneousCochainEvaluation_differential [CompactSpace G] [T2Space G]\n    (N : TopRep.{max u s} ℤ G) [DiscreteTopology N.V]\n    (n : ℕ) (x : (TopRep.homogeneousCochains N).X n) (g : Fin (n + 1) → G) :\n    homogeneousCochainEvaluation N (n + 1)\n        (((TopRep.homogeneousCochains N).d n (n + 1)).hom x) g =\n      N.ρ (g 0) (homogeneousCochainEvaluation N n x (fun k ↦ g k.succ)) +\n        ∑ k : Fin (n + 1),\n          (-1 : ℤ) ^ (k.val + 1) •\n            homogeneousCochainEvaluation N n x (Fin.contractNth k (· * ·) g)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T230802-L-1910506",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T230802-L-1910506",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

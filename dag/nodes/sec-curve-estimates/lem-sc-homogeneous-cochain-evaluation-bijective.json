@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-homogeneous-cochain-evaluation-bijective",
+ "kind": "statement",
+ "title": "Bijectivity of cumulative-product cochain evaluation",
+ "statement": "Let $G$ be a compact Hausdorff topological group in universe $u$ and $N$ a topological integer representation in coefficient universe $\\max(u,s)$ with discrete coefficient topology. Suppose $\\{g:\\rho(g)v=v\\}$ is open for every $v\\in N$. For each $n\\geq0$, the concrete additive evaluation map $e_n:H^n\\to\\operatorname{LC}(G^n,N)$ of [def-sc-homogeneous-cochain-evaluation] is bijective. This assertion contains no compatibility with differentials.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+ },
+ "stmt_deps": [
+  "def-sc-homogeneous-cochain-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Define an explicit continuous currying map recursively: in degree zero evaluate at the empty tuple; in the next degree precompose with (a,h) mapping to cons(a,h), curry, and postcompose with the previous currying map. Compact-open continuity gives continuity at every step. Induction shows uncurrying the constructed map recovers the given finite-variable continuous function.",
+   "uses": [
+    "def-sc-homogeneous-cochain-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  },
+  {
+   "text": "Uncurrying is injective by induction and extensionality, evaluating an equality on each tuple cons(a,h). For an invariant homogeneous cochain and arbitrary tuple h, use its diagonal equivariance and the identity h=h_0 times the partial products of successive ratios. Thus equality of cumulative-product coordinates implies equality everywhere, proving injectivity of e_n.",
+   "uses": [
+    "def-sc-homogeneous-cochain-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  },
+  {
+   "text": "Give N the group action induced by its representation. Mathlib continuousSMul_iff_stabilizer_isOpen makes this action jointly continuous. For a locally constant c, construct the continuous function f(h)=rho(h_0)c((h_i inverse)*h_(i+1)). Curry it explicitly. Cancellation of the common left factor in the ratios shows diagonal equivariance; injectivity of uncurrying makes the iterated map invariant. Fin.partialProd_right_inv shows its evaluation equals c, proving surjectivity. The empty tuple is handled by the degree-zero currying case.",
+   "uses": [
+    "def-sc-homogeneous-cochain-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-homogeneous-cochain-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Detailed homogeneous change-of-variables argument from the parent plan; Tag 0DVG differential checked at https://stacks.math.columbia.edu/tag/0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at cumulative products is a bijection between invariant homogeneous continuous cochains and locally constant inhomogeneous cochains and converts alternating omission to the usual differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluate iterated continuous homogeneous cochains at cumulative products; bijective coordinates and alternating omission differential",
+   "results": "ContinuousCohomology.MultiInd.d_succ, inhomogeneousCochains.d, inhomogeneousCochains.d_hom_apply, ContinuousCohomology.MultiInd.d, inhomogeneousCochains.d_eq, ContinuousCohomology.MultiInd.complex, AlgebraicTopology.AlternatingCofaceMapComplex.map, AlgebraicTopology.AlternatingCofaceMapComplex.obj",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Continuous-map currying and Fin.partialProd identities supply constituent tools; no coordinate map for the iterated TopRep complex."
+  },
+  {
+   "tool": "grep",
+   "query": "partialProd_contractNth|partialProd_left_inv|homogeneousCochains|continuous_of_continuous_uncurry",
+   "results": "Mathlib/NumberTheory/Padics/Measure/Basic.lean, Mathlib/NumberTheory/Padics/Measure/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Continuous-map currying and Fin.partialProd identities supply constituent tools; no coordinate map for the iterated TopRep complex."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "Parent comparison: homogeneous conversion, steps 1 and 2",
+   "via": [
+    "lem-sc-homogeneous-inhomogeneous-continuous-cohomology",
+    "lem-sc-discrete-resolution-continuous-cohomology",
+    "lem-sc-discrete-invariants-continuous-comparison",
+    "lem-sc-etale-units-h2-reverse-embedding",
+    "lem-sc-etale-units-two-cocycle-comparison",
+    "lem-sc-etale-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.HomogeneousCochainEvaluationBijective",
+  "file": "lean/Sheaf/RepresentationTheory/HomogeneousCochainEvaluationBijective.lean",
+  "declaration": "Rep.homogeneousCochainEvaluation_bijective",
+  "statement": "theorem homogeneousCochainEvaluation_bijective [CompactSpace G] [T2Space G]\n    (N : TopRep.{max u s} ℤ G) [DiscreteTopology N.V]\n    (hN : ∀ x : N.V, IsOpen {g : G | N.ρ g x = x}) (n : ℕ) :\n    Function.Bijective (homogeneousCochainEvaluation N n)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T230802-L-1910506",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T230802-L-1910506",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

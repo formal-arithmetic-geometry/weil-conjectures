@@ -7,6 +7,8 @@ module
 public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
+import Sheaf.RepresentationTheory.HomogeneousCochainEvaluationBijective
+import Sheaf.RepresentationTheory.HomogeneousCochainEvaluationDifferential
 
 /-!
 # Homogeneous and inhomogeneous continuous cochains
@@ -59,6 +61,11 @@ theorem exists_homogeneousCochains_inhomogeneous_coordinates
         t (n + 1) (((TopRep.homogeneousCochains N).d n (n + 1)).hom x) g =
           N.ρ (g 0) (t n x (fun k ↦ g k.succ)) +
             ∑ k : Fin (n + 1),
-              (-1 : ℤ) ^ (k.val + 1) • t n x (Fin.contractNth k (· * ·) g) := by sorry
+              (-1 : ℤ) ^ (k.val + 1) • t n x (Fin.contractNth k (· * ·) g) := by
+  let t (n : ℕ) := AddEquiv.ofBijective (homogeneousCochainEvaluation N n)
+    (homogeneousCochainEvaluation_bijective N hN n)
+  refine ⟨t, ?_⟩
+  intro n x g
+  exact homogeneousCochainEvaluation_differential N n x g
 
 end Rep
