@@ -7,11 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Mathlib.Algebra.Homology.ShortComplex.Abelian
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesRestrictionLimits
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel
-import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 /-! # Restriction and local exactness of coherent formal modules
 
@@ -27,6 +25,35 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private theorem hasHomology_of_nonempty_abelian
+    {C : Type*} [Category C] [HasZeroMorphisms C]
+    (h : Nonempty (Abelian C)) (S : ShortComplex C) : S.HasHomology := by
+  let z : HasZeroMorphisms C := inferInstance
+  let hh := @categoryWithHomology_of_abelian C _ h.some
+  have hh' : @CategoryWithHomology C _ z := by
+    convert hh using 1
+    exact Subsingleton.elim _ _
+  exact hh'.hasHomology S
+
+private theorem restriction_isZero_of_cover {X : Scheme.{u}} [IsNoetherian X]
+    (I : X.IdealSheafData) (hN : ∀ U : X.Opens, IsNoetherian U.toScheme)
+    {J : Type v} (U : J → X.Opens) (hU : iSup U = ⊤)
+    (F : CoherentFormalModule X I)
+    (hF : ∀ j, IsZero ((@coherentFormalModulesRestriction X _ I (U j) (hN (U j))).obj F)) :
+    IsZero F := by
+  have : Abelian (CoherentFormalModule X I) :=
+    (coherentFormalModule_abelian X I).1.some
+  apply (isIsoZero_iff_source_target_isZero F F).mp ?_ |>.1
+  apply (coherentFormalModule_isIso_of_isIso_restrict I U hU (0 : F ⟶ F) ?_).1
+  intro j n
+  let R := @coherentFormalModulesRestriction X _ I (U j) (hN (U j))
+  let E := (IsCoherentFormalModule (I.comap (U j).ι)).ι ⋙
+    (evaluation ℕᵒᵖ (U j).toScheme.Modules).obj (op n)
+  have hz : IsZero (E.obj (R.obj F)) := E.map_isZero (hF j)
+  have hi := (isIsoZero_iff_source_target_isZero (E.obj (R.obj F))
+    (E.obj (R.obj F))).mpr ⟨hz, hz⟩
+  simpa [E, R, coherentFormalModulesRestriction] using hi
+
 /-- Restriction is the additive functor whose underlying inverse systems and maps are
 termwise restrictions. It preserves short exact sequences, and exactness and short
 exactness are detected on every open covering. The auxiliary `hz` supplies the proof
@@ -37,22 +64,18 @@ Source: Stacks Project, Lemma 087X (2)--(3)
 (blueprint: lem-weil-pbc-coherent-formal-modules-local-exactness).
 
 Proof:
-1. Opens of a Noetherian scheme are Noetherian (pqf-def-locnoeth). Restriction preserves
-coherence, ideal powers and their quotient maps by module-restriction-open-immersion-colimits,
-coherent-module-local-on-open-cover and ideal-times-quasi-coherent-affine-sections.
-Thus restricting objects and compatible maps gives the indicated additive functors.
-2. Cokernels are termwise by coherent-formal-modules-abelian and commute with restriction.
-For kernels use coherent-formal-module-kernel: sectionwise kernels, locally generated
-images and ideal products commute with restriction, as do quotients. The stabilization
-bound on X works on every open; any alternative bound gives the same eventual system.
-3. Consequently restriction preserves kernel and cokernel universal properties, and
-therefore short exactness and exactness at the middle object (def-weil-pbc-exact-sequence).
-4. Conversely factor the first arrow through the kernel of the second. Local exactness
-makes these factors epi by abelian-exact-iff-epi-kernel-lift. Their cokernel restricts to
-zero everywhere, hence is zero by coherent-formal-modules-isomorphism-local. The factor
-is epi globally, giving exactness by the same abelian criterion.
-5. Apply locality also at the two ends of the five-term sequence, where exactness is
-respectively monicity and epicity, to obtain the short exactness equivalence. -/
+1. Construct the actual termwise restriction functor using the object-condition theorem
+   coherentFormalModules_restriction_objects. Its full-subcategory lift is additive and
+   has the stated equality after inclusion. Opens inherit Noetherianness by Mathlib.
+2. coherentFormalModules_restriction_limits supplies finite-limit and finite-colimit
+   preservation. Mathlib then gives preservation of short exact sequences and homology.
+3. If an object restricts to zero on a cover, its zero endomorphism restricts to an
+   isomorphism at every level. coherentFormalModule_isIso_of_isIso_restrict makes this
+   zero endomorphism globally invertible, so the object itself is zero.
+4. Apply this to the left homology of a short complex. Its restricted left homology
+   is zero exactly when the restricted complex is exact; hence exactness is local.
+5. Apply the same equivalence to complexes with a zero first or second arrow to detect
+   monomorphisms and epimorphisms. Combine these with middle exactness for short exactness. -/
 theorem coherentFormalModules_local_exactness (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) :
     ∃ (hN : ∀ U : X.Opens, IsNoetherian U.toScheme)
@@ -73,6 +96,68 @@ theorem coherentFormalModules_local_exactness (X : Scheme.{u}) [IsNoetherian X]
             (@ShortComplex.map _ _ _ _ _ _ S (ρ (U j)) (hz (U j))).Exact) ∧
           (S.ShortExact ↔ ∀ j : J,
             (@ShortComplex.map _ _ _ _ _ _ S (ρ (U j)) (hz (U j))).ShortExact)) := by
-  sorry
+  classical
+  let hN : ∀ U : X.Opens, IsNoetherian U.toScheme := fun U ↦ by
+    have : TopologicalSpace.NoetherianSpace U.toScheme :=
+      (Scheme.Hom.isOpenEmbedding U.ι).isInducing.noetherianSpace
+    exact {
+      toIsLocallyNoetherian := inferInstance
+      isCompact_univ := TopologicalSpace.NoetherianSpace.isCompact _ }
+  let R := fun U : X.Opens ↦ @coherentFormalModulesRestriction X _ I U (hN U)
+  have hAdd : ∀ U, (R U).Additive := fun U ↦ inferInstance
+  have hz : ∀ U, (R U).PreservesZeroMorphisms := fun U ↦ inferInstance
+  have hlim : ∀ U, PreservesFiniteLimits (R U) := fun U ↦
+    (@coherentFormalModules_restriction_limits X _ I U (hN U)).1
+  have hcolim : ∀ U, PreservesFiniteColimits (R U) := fun U ↦
+    (@coherentFormalModules_restriction_limits X _ I U (hN U)).2
+  have : HasZeroObject (CoherentFormalModule X I) := by
+    have : Abelian (CoherentFormalModule X I) :=
+      (coherentFormalModule_abelian X I).1.some
+    infer_instance
+  have hzero : ∀ U : X.Opens,
+      HasZeroObject (@CoherentFormalModule U.toScheme (hN U) (I.comap U.ι)) := fun U ↦ by
+    have : Abelian (@CoherentFormalModule U.toScheme (hN U) (I.comap U.ι)) :=
+      (@coherentFormalModule_abelian U.toScheme (hN U) (I.comap U.ι)).1.some
+    infer_instance
+  refine ⟨hN, R, hz, ?_, ?_⟩
+  · intro U
+    refine ⟨hAdd U, rfl, ?_⟩
+    intro S hS
+    exact hS.map_of_exact (R U)
+  · intro J U hU
+    have hex : ∀ S : ShortComplex (CoherentFormalModule X I),
+        S.Exact ↔ ∀ j : J, (S.map (R (U j))).Exact := by
+      intro S
+      have : S.HasHomology :=
+        hasHomology_of_nonempty_abelian (coherentFormalModule_abelian X I).1 S
+      constructor
+      · intro h j
+        exact h.map (R (U j))
+      · intro h
+        apply S.leftHomologyData.exact_iff.mpr
+        apply restriction_isZero_of_cover I hN U hU
+        intro j
+        exact (S.leftHomologyData.exact_map_iff (R (U j))).mp (h j)
+    intro S
+    refine ⟨hex S, ?_⟩
+    constructor
+    · intro h j
+      exact h.map_of_exact (R (U j))
+    · intro h
+      have hf : Mono S.f := by
+        let T := ShortComplex.mk (0 : S.X₁ ⟶ S.X₁) S.f (by simp)
+        apply (T.exact_iff_mono rfl).mp
+        apply (hex T).mpr
+        intro j
+        have := (h j).mono_f
+        exact ((T.map (R (U j))).exact_iff_mono (by simp [T])).mpr (by simpa [T] using (h j).mono_f)
+      have hg : Epi S.g := by
+        let T := ShortComplex.mk S.g (0 : S.X₃ ⟶ S.X₃) (by simp)
+        apply (T.exact_iff_epi rfl).mp
+        apply (hex T).mpr
+        intro j
+        have := (h j).epi_g
+        exact ((T.map (R (U j))).exact_iff_epi (by simp [T])).mpr (by simpa [T] using (h j).epi_g)
+      exact ShortComplex.ShortExact.mk' ((hex S).mpr (fun j ↦ (h j).exact)) hf hg
 
 end AlgebraicGeometry

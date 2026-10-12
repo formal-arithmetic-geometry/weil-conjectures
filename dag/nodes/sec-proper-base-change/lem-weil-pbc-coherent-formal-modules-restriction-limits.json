@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-coherent-formal-modules-restriction-limits",
+ "kind": "statement",
+ "title": "Restriction preserves finite limits and colimits of coherent formal modules",
+ "statement": "Let X be Noetherian, I a quasi-coherent ideal and U an open subscheme with its Noetherian instance. The explicit full-subcategory termwise restriction functor defined by [lem-weil-pbc-coherent-formal-modules-restriction-objects] preserves finite limits and finite colimits in Coh(X,I) and Coh(U,I|U), whose abelianness is [lem-weil-pbc-coherent-formal-modules-abelian]. This is a preservation statement only; it asserts no local reflection of exactness.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+  "lem-weil-pbc-coherent-formal-modules-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Cokernels are termwise by the abelian theorem, and ordinary module restriction preserves them as a left adjoint.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  },
+  {
+   "text": "For the stabilized kernel construction, restrict sectionwise kernels, locally defined images and ideal products. Restriction preserves the cokernel quotients. A global stabilization bound works locally; a common larger bound identifies constructions using different bounds, including their maps into the source. The restricted fork is therefore a kernel fork.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-module-kernel",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  },
+  {
+   "text": "Finite biproduct identities restrict termwise. In abelian categories finite products together with kernels give finite limits; finite coproducts together with cokernels give finite colimits. Apply these criteria to the explicit additive lift.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+    "lem-weil-pbc-coherent-formal-modules-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-coherent-formal-module-kernel",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coherent formal modules to an open subscheme preserves kernels cokernels and finite limits and finite colimits",
+   "results": "Found Scheme.Modules.restrictFunctor, Scheme.Modules.instAbelian and forgetful limit-preservation statements, but no restriction theorem for Coh(X,I).",
+   "date": "2026-10-13",
+   "verdict": "no matching formal-module theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "Generic finite-limit preservation predicates and criteria only.",
+   "date": "2026-10-13",
+   "verdict": "no matching formal-module theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "CoherentFormal.*estriction|coherentFormal.*restriction_limits",
+   "results": "No existing restriction preservation theorem in the library.",
+   "date": "2026-10-13",
+   "verdict": "no matching formal-module theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of coherent formal modules preserves finite limits and finite colimits",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error; no search verdict is asserted. LeanFinder, Loogle and source grep were completed.",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-formal-modules-local-exactness",
+   "place": "step 2"
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesRestrictionLimits",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesRestrictionLimits.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModules_restriction_limits",
+  "statement": "theorem coherentFormalModules_restriction_limits {X : Scheme.{u}}\n    [IsNoetherian X] (I : X.IdealSheafData) (U : X.Opens)\n    [IsNoetherian U.toScheme] :\n    PreservesFiniteLimits (coherentFormalModulesRestriction I U) ∧\n      PreservesFiniteColimits (coherentFormalModulesRestriction I U)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261012T225312-L-1806258",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261012T225312-L-1806258",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
