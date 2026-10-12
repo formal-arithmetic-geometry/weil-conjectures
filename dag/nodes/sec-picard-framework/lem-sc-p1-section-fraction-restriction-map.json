@@ -1,0 +1,100 @@
+{
+ "id": "lem-sc-p1-section-fraction-restriction-map",
+ "kind": "statement",
+ "title": "Restriction and division of section fractions",
+ "statement": "Let X be a scheme, L an invertible module, s a global section, F a module, and U an open on which s is a free generator. Then restriction followed by division by powers of s defines an additive map from the section-fraction presentation to Γ(U,F), compatible with scalar restriction and satisfying tmul(f(t/s^n),s^n)=t|U.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PW, canonical map in part (2)"
+ },
+ "stmt_deps": [
+  "def-sc-section-fraction-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For each n, tensoring sections with the n-th tensor power of the free generator is bijective. Use its inverse after restriction to define a linear map on each direct-sum summand. The tensor-power associativity identity shows the map kills every fraction relation, so it descends to the quotient. The inverse identity gives the displayed tensor formula, and linearity gives scalar compatibility.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PW, part (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "section fractions restriction division invertible sheaf",
+   "results": "no match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.Quotient.liftQ DirectSum.toModule",
+   "results": "DirectSum.toModule and Submodule.liftQ found; no complete fraction map",
+   "date": "2026-10-12",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionFraction restriction division",
+   "results": "none",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.AlgebraicGeometry.InvertibleSectionLocalization",
+  "by": "worker",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-invertible-section-localization",
+   "place": "injectivity and surjectivity canonical fraction map",
+   "via": [
+    "lem-sc-p1-invertible-section-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SectionFractionRestrictionMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionFractionRestrictionMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_sectionFraction_restriction_map",
+  "statement": "theorem exists_sectionFraction_restriction_map {X : Scheme.{u}} (L F : X.Modules) (s : Γ(L, ⊤)) (U : X.Opens) (hs : IsFreeGenerator ((homOfGlobalSection L s).app U (unitSectionsEquiv U 1))) : ∃ f : SectionFractionPresentation L F s →+ Γ(F, U), (∀ (r : Γ(X, ⊤)) (z : SectionFractionPresentation L F s), f (r • z) = (X.presheaf.map (homOfLE (show U ≤ ⊤ from le_top)).op r) • f z) ∧ (∀ (n : ℕ) (t : Γ(F ⊗ L.tensorPow n, ⊤)), tmulSection (f (sectionFraction L F s n t)) (tensorPowSectionOne (homOfGlobalSection L s) n U) = (F ⊗ L.tensorPow n).presheaf.map (homOfLE (show U ≤ ⊤ from le_top)).op t)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T110257-L-613146",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T110257-L-613146",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
