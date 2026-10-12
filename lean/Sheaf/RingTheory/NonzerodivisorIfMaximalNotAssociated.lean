@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.Algebra.Regular.SMul
+import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
+import Mathlib.RingTheory.Regular.IsSMulRegular
 
 /-!
 # A nonzerodivisor in the maximal ideal
@@ -42,4 +44,12 @@ theorem exists_mem_maximalIdeal_smul_injective
     [IsLocalRing R] [AddCommGroup M] [Module R M] [Module.Finite R M]
     (h : IsLocalRing.maximalIdeal R ∉ associatedPrimes R M) :
     ∃ x : R, x ∈ IsLocalRing.maximalIdeal R ∧ IsSMulRegular M x := by
-  sorry
+  classical
+  by_contra! hn
+  obtain ⟨p, hp, hmp⟩ :=
+    (Ideal.subset_union_prime_finite (associatedPrimes.finite R M) (f := id) ⊥ ⊥
+      (fun _ hp _ _ ↦ hp.isPrime)).mp (show
+        (IsLocalRing.maximalIdeal R : Set R) ⊆ ⋃ p ∈ associatedPrimes R M, (p : Set R) by
+      rw [biUnion_associatedPrimes_eq_compl_regular R M]
+      exact hn)
+  exact h ((IsLocalRing.maximalIdeal.isMaximal R).eq_of_le hp.isPrime.ne_top hmp ▸ hp)
