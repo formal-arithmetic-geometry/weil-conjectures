@@ -24,52 +24,63 @@
  ],
  "proof": [
   {
-   "text": "Place $F^{p+1}K^{p+1+q}$ in bidegree $(p,q)$. Because each $F^{p+1}K^\\bullet$ is a subcomplex, the differential $d$ maps this component to $F^{p+1}K^{p+2+q}$, so it defines a differential of bidegree $(0,1)$; the identity $d^2=0$ is inherited from the cochain complex.",
+   "text": "Construct the page-zero bigraded complex $P^{p,q}=(F.\\mathrm{gradedPiece}\\ p).X(p+q)$. For equal first coordinates use the differential of the graded complex, with the equality transport to its target; otherwise use zero. Its shape and square-zero identities follow from the corresponding identities of each graded complex. The component isomorphisms are identities and intertwine the differentials.",
    "uses": [
-    "def-sp-abelian",
     "def-sp-filtration"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Definition 12.18.1 and proof of Lemma 12.19.2, Tag 012K"
+    "place": "Tag 012K, lemma-spectral-sequence-filtered-complex, and remark-differential-object-selfmap"
    }
   },
   {
-   "text": "The inclusions $F^{p+1}K^{p+1+q}\\hookrightarrow F^pK^{p+1+q}$ define a morphism $\\alpha:A\\to A[-1,1]$ of differential bigraded objects: the filtration inclusions commute with $d$ because the filtration is by subcomplexes. They are monomorphisms because they are inclusions of subobjects. Applying the differential-object self-map construction of Definition 12.18.1 and Remark 12.18.2 therefore gives the associated spectral sequence.",
+   "text": "Choose the positive-page spectral sequence $E_1$ with its cycle/boundary quotient descriptions.",
    "uses": [
-    "def-sp-abelian",
-    "def-sp-filtration",
-    "def-sp-spectral-sequence"
+    "lem-sp-filtered-complex-positive-pages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, lemma-spectral-sequence-filtered-complex, and remark-differential-object-selfmap"
+   }
+  },
+  {
+   "text": "For each $(p,q)$, identify $H(P)^{p,q}$ with $Z_1^{p,q}/B_1^{p,q}$ using the page-zero homology lemma. Compose this isomorphism with the inverse of the chosen quotient identification of $(E_1.\\mathrm{page}\\ 1)^{p,q}$. The two inclusion proofs are proof-irrelevant, so the cokernel objects agree.",
+   "uses": [
+    "lem-sp-filtered-complex-graded-homology",
+    "lem-sp-filtered-complex-positive-pages"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Remark 12.18.2 and proof of Lemma 12.19.2, Tag 012K"
+    "place": "Tag 012K, lemma-spectral-sequence-filtered-complex, and remark-differential-object-selfmap"
    }
   },
   {
-   "text": "In bidegree $(p,q)$, the self-map construction uses the shift operators $S=[0,1]$ and $T=[1,-1]$, so $T^rS=[r,1-r]$ and the page-$r$ differential has bidegree $(r,1-r)$. At page zero its term is the cokernel of the shifted inclusion, hence $E_0^{p,q}=\\operatorname{Coker}(F^{p+1}K^{p+q}\\to F^pK^{p+q})=F^pK^{p+q}/F^{p+1}K^{p+q}=\\operatorname{gr}^pK^{p+q}$; the induced differential is the one induced by $d$.",
+   "text": "Define $E.\\mathrm{page}\\ 0=P$ and use the pages of $E_1$ at every $r\\ge1$. At $r=0$ use the preceding homology isomorphism; at $r\\ge1$ use the homology isomorphisms of $E_1$. Case analysis on $r=0$, using $r\\ge0$ and $r+1=r^{\\prime}$, checks the SpectralSequence fields. The identity page-zero identifications give the required differential equation, and the positive-page quotient descriptions are inherited from $E_1$.",
    "uses": [
-    "def-sp-filtration",
-    "def-sp-spectral-sequence"
+    "def-sp-spectral-sequence",
+    "lem-sp-filtered-complex-positive-pages",
+    "lem-sp-filtered-complex-graded-homology"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "proof of Lemma 12.19.2 after Remark 12.18.2, Tag 012K"
+    "place": "Tag 012K, lemma-spectral-sequence-filtered-complex, and remark-differential-object-selfmap"
    }
   }
  ],
  "proof_deps": [
-  "def-sp-abelian",
   "def-sp-filtration",
-  "def-sp-spectral-sequence"
+  "def-sp-spectral-sequence",
+  "lem-sp-filtered-complex-graded-homology",
+  "lem-sp-filtered-complex-positive-pages"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Definition 12.18.1, Remark 12.18.2, and proof of Lemma 12.19.2 (Tag 012K)"
+  "place": "Tag 012K, lemma-spectral-sequence-filtered-complex, and remark-differential-object-selfmap"
  },
  "mathlib_searches": [
   {
@@ -157,5 +168,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T085343-L-41272",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

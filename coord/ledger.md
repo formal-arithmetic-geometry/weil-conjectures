@@ -7064,3 +7064,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/T3/Sheaf.AlgebraicGeometry.FieldExtensionFpqcCover (stage 3; reviewer PASS; first push; landing 20261012T085342-L-40952 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/T3/Sheaf.CategoryTheory.BrownCohomologicalRepresentability (stage 3; reviewer PASS; first push; landing 20261012T085343-L-41048 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:53 L: merged deliver/T3/Sheaf.CategoryTheory.ExactCoupleMorphism (stage 3; reviewer PASS; first push; landing 20261012T085343-L-41177 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/T3/Sheaf.CategoryTheory.FilteredComplexSpectralSequence (stage 3; reviewer PASS; first push; landing 20261012T085343-L-41272 (interface); batch 20261012T085205; modules 3; new nodes 2)

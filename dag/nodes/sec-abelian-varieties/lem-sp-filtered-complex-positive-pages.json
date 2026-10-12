@@ -1,0 +1,148 @@
+{
+ "id": "lem-sp-filtered-complex-positive-pages",
+ "kind": "statement",
+ "title": "FilteredComplexPositivePages",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], $K^\\bullet$ a cochain complex and $F$ a decreasing filtration of $K^\\bullet$ by subcomplexes [def-sp-filtration]. There exists a cohomological spectral sequence $E$ [def-sp-spectral-sequence] starting at page $1$, with differentials of bidegree $(r,1-r)$, such that for all integers $p,q,r$ with $r\\ge1$, the subobjects $B_r^{p,q}=F.\\mathrm{complexBoundaries}(p,p+q,r)$ and $Z_r^{p,q}=F.\\mathrm{complexCycles}(p,p+q,r)$ [def-sp-filtered-complex-subquotients] satisfy $B_r^{p,q}\\le Z_r^{p,q}$ and $E_r^{p,q}\\cong\\operatorname{coker}(B_r^{p,q}\\hookrightarrow Z_r^{p,q})$. No finite-filtration hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, lemma-spectral-sequence-filtered-complex, and remark-differential-object-selfmap"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "In the abelian category of bigraded objects, put $A^{p,q}=F^{p+1}K^{p+1+q}$ and use the differential of $K$ on each component. The filtration inclusions give a monomorphism $\\alpha:A\\to A[-1,1]$ commuting with the differential. Componentwise short exact sequences and their homology sequences give the shifted exact couple of remark-differential-object-selfmap. This construction uses only finite kernels and cokernels in each component, not a countable coproduct in $\\mathcal C$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, lemma-spectral-sequence-filtered-complex, and remark-differential-object-selfmap"
+   }
+  },
+  {
+   "text": "Derive the exact couple repeatedly [def-sp-exact-couple], beginning with $E_1$, the homology of its graded cokernel. In the fixed-couple coordinates $(P,Q)=(2p+q,-p)$, its initial differential has degree $(2,-1)$, which becomes $(1,0)$ in $(p,q)$. After $s$ derivations it has degree $(s+2,-s-1)$, which becomes $(s+1,-s)$. With $r=s+1$ the degree is $(r,1-r)$. Derived-couple homology supplies the isomorphisms $H(E_r)^{p,q}\\cong E_{r+1}^{p,q}$.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, lemma-spectral-sequence-filtered-complex, and remark-differential-object-selfmap"
+   }
+  },
+  {
+   "text": "The self-map calculation in remark-differential-object-selfmap identifies the cycles as the projected inverse image under $d$ of the $r$-fold inclusion, and the boundaries as the projected inverse image of $dA$ under the $(r-1)$-fold inclusion. In component $(p,q)$ these are $F^pK^{p+q}\\cap d^{-1}(F^{p+r}K^{p+q+1})$ and $F^pK^{p+q}\\cap d(F^{p-r+1}K^{p+q-1})$, each with $F^{p+1}K^{p+q}$ added before quotienting. These are exactly the defined subobjects $Z_r$ and $B_r$. Since $d^2=0$, the unprojected boundaries lie in the cycles; addition, pullback and image preserve this containment. The exact-couple page calculation is their cokernel quotient.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-exact-couple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, lemma-spectral-sequence-filtered-complex, and remark-differential-object-selfmap"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-exact-couple",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, lemma-spectral-sequence-filtered-complex, and remark-differential-object-selfmap"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "positive page spectral sequence from filtered complex cycles and boundaries",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "positive pages of spectral sequence of filtered complex cycle boundary quotient",
+   "results": "Eight hits on HomologicalComplex truncations, support, and gradedHomologyFunctor. No filtered-complex construction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CohomologicalSpectralSequence",
+   "results": "Zero hits; unknown identifier CohomologicalSpectralSequence in the search service.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "complexCycles|complexBoundaries",
+   "results": "Zero hits in Mathlib. Local rg found FilteredComplexZBDescription, which requires a finite filtration and imports the present item, so cannot be used here.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexSpectralSequence",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Step 3: the Tag 012K filtered-complex cycle and boundary calculation; positive-page construction",
+   "via": [
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexPositivePages",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexPositivePages.lean",
+  "declaration": "CategoryTheory.filteredComplex_positive_spectralSequence",
+  "statement": "theorem filteredComplex_positive_spectralSequence\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) :\n    ∃ E : CohomologicalSpectralSequence C 1,\n      ∀ (p q r : ℤ) (hr : 1 ≤ r),\n        ∃ hBZ : F.complexBoundaries p (p + q) r ≤ F.complexCycles p (p + q) r,\n          Nonempty ((E.page r).X (p, q) ≅ cokernel (Subobject.ofLE _ _ hBZ))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T085343-L-41272",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T085343-L-41272",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
