@@ -56,6 +56,40 @@ theorem IsLisse.tensorPower (hρ : W.IsLisse l ρ) {n : ℕ} (hn : 1 ≤ n) :
   | base => exact IsLisse.of_equiv ρ.tensorPowerOneEquiv.symm hρ
   | succ n hn ih => exact IsLisse.of_equiv (ρ.tensorPowerSuccEquiv n).symm (ih.tprod hρ)
 
+
+/-- The power sums of the complex local eigenvalues of the tensor power `ρ^{⊗ k}`, `k ≥ 1`, are
+the `k`-th powers of those of `ρ`: the local eigenvalues of `ρ^{⊗ k}` are the `k`-fold products
+of local eigenvalues of `ρ` (`sk-p-linear-spectra`). -/
+theorem sum_map_pow_localEigenvalues_tensorPower (x : C.finitePoints) (n : ℕ) {k : ℕ}
+    (hk : 1 ≤ k) :
+    (((W.localEigenvalues l (ρ.tensorPower k) x).map ι).map (· ^ n)).sum =
+      (((W.localEigenvalues l ρ x).map ι).map (· ^ n)).sum ^ k := by
+  induction k, hk using Nat.le_induction with
+  | base =>
+    rw [pow_one, localEigenvalues, localEigenvalues, ρ.tensorPowerOneEquiv.charpoly_apply]
+  | succ k hk ih =>
+    rw [localEigenvalues, ← (ρ.tensorPowerSuccEquiv k).charpoly_apply, ← localEigenvalues,
+      localEigenvalues_tprod, Multiset.map_map_product_mul,
+      Multiset.sum_map_pow_map_product_mul, ih, pow_succ]
+
+/-- Blueprint `lem-rp-even-tensor-positivity`: Even tensor powers of a real sheaf are positive.
+
+If `ℱ` is `ι`-real and `k ≥ 1` is even, then every inverse local factor
+`ι P_x (ℱ^{⊗ k}, T ^ e_x)⁻¹` has nonnegative real coefficients (its constant term is `1` by
+`AlgebraicGeometry.WeilGroup.constantCoeff_eulerFactor`). Indeed the `n`-th power sum of the
+complex local eigenvalues of `ℱ^{⊗ k}` is `(ι Tr (F_x ^ n ∣ ℱ)) ^ k`
+(`AlgebraicGeometry.WeilGroup.sum_map_pow_localEigenvalues_tensorPower`), an even power of a
+real number since the eigenvalue multiset of `ℱ` is stable under complex conjugation, and
+nonnegative power sums give nonnegative coefficients
+(`AlgebraicGeometry.WeilGroup.hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg`). -/
+theorem IsReal.hasNonnegCoeffs_eulerFactor_tensorPower (hρ : W.IsReal l ρ ι)
+    (x : C.finitePoints) {k : ℕ} (hk : 1 ≤ k) (heven : Even k) :
+    (W.eulerFactor l (ρ.tensorPower k) ι x).HasNonnegCoeffs := by
+  refine hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg ι x fun n ↦ ?_
+  rw [sum_map_pow_localEigenvalues_tensorPower ι x n hk,
+    ← Complex.conj_eq_iff_re.1 (hρ.conj_sum_map_pow_localEigenvalues ι x n),
+    ← Complex.ofReal_pow]
+  exact Complex.zero_le_real.2 (heven.pow_nonneg _)
 variable [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
   [W.IsEtaleQuotient]
 

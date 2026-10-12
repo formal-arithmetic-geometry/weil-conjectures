@@ -122,8 +122,8 @@ theorem sq_mem_localEigenvalues_tprod_self {x : C.finitePoints} {α : PadicAlgCl
     (show (α, α) ∈ _ ×ˢ _ from Multiset.mem_product.2 ⟨hα, hα⟩)
 
 /-- Mapping the pairwise products of two multisets along a ring homomorphism. -/
-private theorem map_map_product_mul {R S : Type*} [CommRing R] [CommRing S] (f : R →+* S)
-    (s t : Multiset R) :
+theorem _root_.Multiset.map_map_product_mul {R S : Type*} [CommRing R] [CommRing S]
+    (f : R →+* S) (s t : Multiset R) :
     ((s ×ˢ t).map fun a ↦ a.1 * a.2).map f = ((s.map f) ×ˢ (t.map f)).map fun a ↦ a.1 * a.2 := by
   induction s using Multiset.induction_on with
   | empty => simp
@@ -137,7 +137,7 @@ local eigenvalues consists of the pairwise products of two conjugation-stable mu
 theorem IsReal.tprod (hρ : W.IsReal l ρ ι) (hσ : W.IsReal l σ ι) :
     W.IsReal l (ρ.tprod σ) ι := by
   refine isReal_of_map_conj_localEigenvalues ι fun x ↦ ?_
-  rw [localEigenvalues_tprod, map_map_product_mul, map_map_product_mul,
+  rw [localEigenvalues_tprod, Multiset.map_map_product_mul, Multiset.map_map_product_mul,
     hρ.map_conj_localEigenvalues, hσ.map_conj_localEigenvalues]
 
 /-- The tensor square `ℱ ⊗ ℱ` of a sheaf with weights at most `β` has weights at most `2 β`. -/
@@ -235,7 +235,8 @@ open scoped ComplexOrder
 
 /-- The power sums of the pairwise products of two multisets are the products of their power
 sums. -/
-private theorem sum_map_pow_map_product_mul {R : Type*} [CommRing R] (s t : Multiset R) (n : ℕ) :
+theorem _root_.Multiset.sum_map_pow_map_product_mul {R : Type*} [CommRing R] (s t : Multiset R)
+    (n : ℕ) :
     ((((s ×ˢ t).map fun a ↦ a.1 * a.2)).map (· ^ n)).sum =
       (s.map (· ^ n)).sum * (t.map (· ^ n)).sum := by
   induction s using Multiset.induction_on with
@@ -246,35 +247,26 @@ private theorem sum_map_pow_map_product_mul {R : Type*} [CommRing R] (s t : Mult
     congr 1
     simp [Multiset.map_map, mul_pow, Multiset.sum_map_mul_left]
 
-/-- Blueprint `lem-rp-even-tensor-positivity`: Even tensor powers of a real sheaf are positive.
-
-If `ℱ` is `ι`-real, then every inverse local factor `ι P_x (ℱ ⊗ ℱ, T ^ e_x)⁻¹` of the tensor
-square of `ℱ` has nonnegative real coefficients (and constant term `1`, by
-`AlgebraicGeometry.WeilGroup.constantCoeff_eulerFactor`); that `ℱ ⊗ ℱ` is again `ι`-real is
-`AlgebraicGeometry.WeilGroup.IsReal.tprod`. The blueprint states this for all even tensor
-powers; the Rankin–Selberg argument here only uses tensor squares, iterated.
-
-Indeed the `n`-th power sum of the complex local eigenvalues of `ℱ ⊗ ℱ` is
-`ι Tr (F_x ^ n ∣ ℱ ⊗ ℱ) = (ι Tr (F_x ^ n ∣ ℱ)) ^ 2`, the square of a real number since the
-eigenvalue multiset of `ℱ` is stable under complex conjugation, and the formal identity
-`det (1 - T M)⁻¹ = exp (∑ Tr (M ^ n) T ^ n / n)`
+/-- An inverse local factor `ι P_x (σ, T ^ e_x)⁻¹` has nonnegative real coefficients as soon as
+all power sums `∑ (ι α) ^ n` of the complex local eigenvalues of `σ` at `x` are nonnegative:
+the formal identity `det (1 - T M)⁻¹ = exp (∑ Tr (M ^ n) T ^ n / n)`
 (`PowerSeries.coeff_inv_prod_one_sub_C_mul_X_nonneg`) turns nonnegative power sums into
-nonnegative coefficients. Substituting `T ^ e_x` for `T` preserves nonnegativity. -/
-theorem IsReal.hasNonnegCoeffs_eulerFactor_tprod_self (hρ : W.IsReal l ρ ι)
-    (x : C.finitePoints) : (W.eulerFactor l (ρ.tprod ρ) ι x).HasNonnegCoeffs := by
+nonnegative coefficients, and substituting `T ^ e_x` for `T` preserves nonnegativity. -/
+theorem hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg (x : C.finitePoints)
+    (hsum : ∀ n : ℕ, 0 ≤ (((W.localEigenvalues l σ x).map ι).map (· ^ n)).sum) :
+    (W.eulerFactor l σ ι x).HasNonnegCoeffs := by
   set e := p.degreeOver x.1
   have he : e ≠ 0 := p.degreeOver_ne_zero x.2
-  set A := (W.localEigenvalues l ρ x).map ι
-  set M := (W.localEigenvalues l (ρ.tprod ρ) x).map ι
+  set M := (W.localEigenvalues l σ x).map ι
   set P : ℂ⟦X⟧ := (M.map fun c ↦ 1 - PowerSeries.C c * X).prod
   have hP : constantCoeff P = 1 := by
     simp only [P, map_multiset_prod, Multiset.map_map]
     exact Multiset.prod_eq_one fun a ha ↦ by
       obtain ⟨c, -, rfl⟩ := Multiset.mem_map.1 ha
       simp
-  have hcoe : (((W.localPolynomial l (ρ.tprod ρ) x).map ι).comp (Polynomial.X ^ e) : ℂ⟦X⟧) =
+  have hcoe : (((W.localPolynomial l σ x).map ι).comp (Polynomial.X ^ e) : ℂ⟦X⟧) =
       expand e he P := by
-    have hQ : (((W.localPolynomial l (ρ.tprod ρ) x).map ι : Polynomial ℂ) : ℂ⟦X⟧) = P := by
+    have hQ : (((W.localPolynomial l σ x).map ι : Polynomial ℂ) : ℂ⟦X⟧) = P := by
       rw [map_localPolynomial, ← Polynomial.coeToPowerSeries.ringHom_apply, map_multiset_prod,
         Multiset.map_map]
       exact congrArg _ (Multiset.map_congr rfl fun c _ ↦ by simp)
@@ -282,26 +274,48 @@ theorem IsReal.hasNonnegCoeffs_eulerFactor_tprod_self (hρ : W.IsReal l ρ ι)
     rw [Polynomial.coeff_coe, ← Polynomial.expand_eq_comp_X_pow,
       Polynomial.coeff_expand (Nat.pos_of_ne_zero he), PowerSeries.coeff_expand, ← hQ]
     split_ifs <;> simp [Polynomial.coeff_coe]
-  have hinv : W.eulerFactor l (ρ.tprod ρ) ι x = expand e he P⁻¹ := by
+  have hinv : W.eulerFactor l σ ι x = expand e he P⁻¹ := by
     rw [eulerFactor, hcoe]
     refine ((PowerSeries.eq_inv_iff_mul_eq_one (by simp [hP])).2 ?_).symm
     rw [← map_mul, PowerSeries.inv_mul_cancel _ (by simp [hP]), map_one]
-  -- the power sums of `M` are squares of real numbers
-  have hsum (n : ℕ) : 0 ≤ (M.map (· ^ n)).sum := by
-    have hM : M = (A ×ˢ A).map fun a ↦ a.1 * a.2 := by
-      simp only [M, A, localEigenvalues_tprod, map_map_product_mul]
-    have hA : A.map (starRingEnd ℂ) = A := hρ.map_conj_localEigenvalues ι x
-    have ht : (starRingEnd ℂ) (A.map (· ^ n)).sum = (A.map (· ^ n)).sum := by
-      conv_rhs => rw [← hA]
-      simp [map_multiset_sum, Multiset.map_map]
-    rw [hM, sum_map_pow_map_product_mul, ← Complex.conj_eq_iff_re.1 ht, ← Complex.ofReal_mul]
-    exact Complex.zero_le_real.2 (mul_self_nonneg _)
   rw [hinv, hasNonnegCoeffs_iff]
   intro n
   rw [PowerSeries.coeff_expand]
   split_ifs
   · exact coeff_inv_prod_one_sub_C_mul_X_nonneg M (fun n _ ↦ hsum n) _
   · exact le_rfl
+
+/-- The power sums of the complex local eigenvalues of an `ι`-real representation are real. -/
+theorem IsReal.conj_sum_map_pow_localEigenvalues (hρ : W.IsReal l ρ ι) (x : C.finitePoints)
+    (n : ℕ) : (starRingEnd ℂ) (((W.localEigenvalues l ρ x).map ι).map (· ^ n)).sum =
+      (((W.localEigenvalues l ρ x).map ι).map (· ^ n)).sum := by
+  have hA : ((W.localEigenvalues l ρ x).map ι).map (starRingEnd ℂ) =
+      (W.localEigenvalues l ρ x).map ι := hρ.map_conj_localEigenvalues ι x
+  conv_rhs => rw [← hA]
+  simp [map_multiset_sum, Multiset.map_map]
+
+/-- Blueprint `lem-rp-even-tensor-positivity`: Even tensor powers of a real sheaf are positive,
+for the tensor square.
+
+If `ℱ` is `ι`-real, then every inverse local factor `ι P_x (ℱ ⊗ ℱ, T ^ e_x)⁻¹` of the tensor
+square of `ℱ` has nonnegative real coefficients (and constant term `1`, by
+`AlgebraicGeometry.WeilGroup.constantCoeff_eulerFactor`); that `ℱ ⊗ ℱ` is again `ι`-real is
+`AlgebraicGeometry.WeilGroup.IsReal.tprod`. The case of all even tensor powers is
+`AlgebraicGeometry.WeilGroup.IsReal.hasNonnegCoeffs_eulerFactor_tensorPower`; the Rankin–Selberg
+argument here only uses tensor squares, iterated.
+
+Indeed the `n`-th power sum of the complex local eigenvalues of `ℱ ⊗ ℱ` is
+`ι Tr (F_x ^ n ∣ ℱ ⊗ ℱ) = (ι Tr (F_x ^ n ∣ ℱ)) ^ 2`, the square of a real number since the
+eigenvalue multiset of `ℱ` is stable under complex conjugation
+(`AlgebraicGeometry.WeilGroup.hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg`). -/
+theorem IsReal.hasNonnegCoeffs_eulerFactor_tprod_self (hρ : W.IsReal l ρ ι)
+    (x : C.finitePoints) : (W.eulerFactor l (ρ.tprod ρ) ι x).HasNonnegCoeffs := by
+  refine hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg ι x fun n ↦ ?_
+  rw [localEigenvalues_tprod, Multiset.map_map_product_mul,
+    Multiset.sum_map_pow_map_product_mul,
+    ← Complex.conj_eq_iff_re.1 (hρ.conj_sum_map_pow_localEigenvalues ι x n),
+    ← Complex.ofReal_mul]
+  exact Complex.zero_le_real.2 (mul_self_nonneg _)
 
 end Positivity
 
