@@ -16,28 +16,24 @@
  ],
  "proof": [
   {
-   "text": "Evaluation of the supplied injective resolution computes open module cohomology. Equivalently, restrict it by [lem-sc-ringed-space-restrict-injective-resolution] and evaluate sections. Positive cohomology is zero by the hypothesis, while left exactness identifies the degree-zero kernel with sections of F. Restriction of scalars does not change exactness.",
+   "text": "Fix n. The augmentation is a quasi-isomorphism in degree zero by [lem-sc-module-cech-resolution-column-zero]. For p>0, the source concentrated in degree zero has zero homology by Mathlib HomologicalComplex.isZero_single_obj_homology, while [lem-sc-module-cech-resolution-column-positive] makes the column homology zero using the relevant specialization of hvan. Every morphism between zero objects is invertible. Combine the degreewise results with Mathlib quasiIsoAt_iff_isIso_homologyMap and quasiIso_iff. The column and augmentation are those of [def-sc-module-cech-comparison].",
    "uses": [
-    "lem-sc-ringed-space-restrict-injective-resolution"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For fixed Cech degree n take products over all tuples. Kernels are coordinatewise and products of surjections are surjective by choosing coordinate preimages. The product augmentation is exactly the displayed Cech augmentation component. Its induced homology maps are isomorphisms in degree zero and between zero objects in positive degrees. The supplied proof ha makes the fromSingle augmentation a chain map.",
-   "uses": [
+    "lem-sc-module-cech-resolution-column-zero",
+    "lem-sc-module-cech-resolution-column-positive",
     "def-sc-module-cech-comparison"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-sc-module-cech-resolution-column-zero",
+  "lem-sc-module-cech-resolution-column-positive",
   "def-sc-module-cech-comparison"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01ET",
-  "place": "Intersection cohomology vanishing hypothesis, expanded using evaluation of injective resolutions as in Tag 01DZ and the beta construction of Tag 01EQ"
+  "place": "Degree-zero augmentation and positive column vanishing combined via the Mathlib degreewise quasi-isomorphism criterion"
  },
  "mathlib_searches": [
   {
@@ -128,9 +124,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T112844-L-769483",
+  "landing": "20261012T135228-L-1659916",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

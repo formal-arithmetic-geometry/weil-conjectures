@@ -5,7 +5,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 public import Sheaf.Topology.OpenModuleCohomology
-import Sheaf.Topology.RestrictInjectiveResolution
+import Sheaf.AlgebraicGeometry.ModuleCechResolutionColumnZero
+import Sheaf.AlgebraicGeometry.ModuleCechResolutionColumnPositive
 
 /-! # Acyclic intersections give quasi-isomorphisms on resolution columns
 
@@ -53,6 +54,17 @@ theorem moduleCech_resolution_columns {X : Scheme.{u}} {ι : Type u}
         ((CochainComplex.fromSingle₀Equiv ((moduleCechDouble U I).flip.X n)
           (A.X n)).symm
           ⟨a.f n, by simpa using congrArg (fun f ↦ f.f n) ha⟩) := by
-  sorry
+  dsimp
+  intro ha n
+  apply (quasiIso_iff _).2
+  intro p
+  cases p with
+  | zero => exact moduleCech_resolution_column_zero U F I ha n
+  | succ p =>
+    apply (quasiIsoAt_iff_isIso_homologyMap _ _).2
+    exact (HomologicalComplex.isZero_single_obj_homology
+      (ComplexShape.up ℕ) 0 _ (p + 1) (by simp)).isIso
+      (moduleCech_resolution_column_positive U F I n (p + 1) (Nat.zero_lt_succ p)
+        (fun y ↦ hvan n y (p + 1) (Nat.zero_lt_succ p))) _
 
 end AlgebraicGeometry.Scheme.Modules

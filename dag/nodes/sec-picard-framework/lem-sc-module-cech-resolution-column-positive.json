@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-module-cech-resolution-column-positive",
+ "kind": "statement",
+ "title": "Positive Cech column homology vanishes in an acyclic degree",
+ "statement": "Let X be a scheme [def-pc-scheme], U an arbitrary family of opens, F an O_X-module [def-weil-sheaf-of-modules-category], and I an injective resolution [def-sp-injective-resolutions]. Fix n ≥ 0 and p > 0. Suppose for every tuple y of length n+1 the degree-p open module cohomology [def-sc-open-module-cohomology] of F on the intersection of the U(y(l)) is zero. Then the degree-p homology object of the resolution column (moduleCechDouble U I).flip.X n [def-sc-module-cech-comparison] is zero. No augmentation hypothesis or vanishing in other degrees or at other tuple lengths is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01ET",
+  "place": "Vanishing hypothesis of Tag 01ET applied to the resolution double complex of Tag 01EQ; resolution computation in Tag 01DZ; coordinate product argument expanded by E2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sc-module-cech-comparison",
+  "def-sc-open-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sc-open-module-cohomology], open module cohomology is the right derived functor of open sections. Mathlib CategoryTheory.InjectiveResolution.isoRightDerivedObj identifies its value with the homology of sections of the prescribed resolution. Hence each tuple-intersection section complex has zero homology in degree p. Restriction of the resolution to an open is unnecessary for this direct definition.",
+   "uses": [
+    "def-sc-open-module-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In the column of [def-sc-module-cech-comparison], differentials are coordinatewise maps on the product over tuples. A degree-p cocycle is a tuple of coordinate cocycles; vanishing supplies preimages in degree p-1. Choose one preimage per tuple. Their tuple is a column preimage, proving exactness, hence zero homology. Restriction of scalars does not change underlying exactness. If there are no tuples the product is zero.",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-open-module-cohomology",
+  "def-sc-module-cech-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Resolution double complex of Tag 01EQ and the vanishing hypothesis of Tag 01ET; elementary coordinate product details expanded by E2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ii]sZero.*rightDerived|rightDerived.*[Ii]sZero|[Pp]roduct.*[Qq]uasi",
+   "results": "{\"t\": \"2026-10-12T12:21:18Z\", \"tool\": \"grep\", \"query\": \"[Ii]sZero.*rightDerived|rightDerived.*[Ii]sZero|[Pp]roduct.*[Qq]uasi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"Mathlib/Order/WellQuasiOrder.lean\", \"Mathlib/Order/WellFoundedSet.lean\", \"Mathlib/Order/WellFoundedSet.lean\"], \"digest\": \"785540338e1d370b\"}",
+   "date": "2026-10-12",
+   "verdict": "No exact module-valued Cech column statement; generic homology or resolution tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.isoRightDerivedObj",
+   "results": "{\"t\": \"2026-10-12T12:21:19Z\", \"tool\": \"loogle\", \"query\": \"InjectiveResolution.isoRightDerivedObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'InjectiveResolution.isoRightDerivedObj'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "No exact module-valued Cech column statement; generic homology or resolution tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher cohomology of a product of section complexes on acyclic opens vanishes",
+   "results": "{\"t\": \"2026-10-12T12:21:21Z\", \"tool\": \"leanfinder\", \"query\": \"Higher cohomology of a product of section complexes on acyclic opens vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instAddCommGroupH\", \"CochainComplex.isZero_of_isLE\", \"CochainComplex.isZero_of_isGE\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective_aux\", \"CategoryTheory.Sheaf.H\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\"], \"digest\": \"2253a1bcea08f147\"}",
+   "date": "2026-10-12",
+   "verdict": "No exact module-valued Cech column statement; generic homology or resolution tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Products of complexes of abelian groups have zero cohomology when all coordinate cohomology groups vanish",
+   "results": "{\"t\": \"2026-10-12T12:27:21Z\", \"tool\": \"leansearch\", \"query\": \"Products of complexes of abelian groups have zero cohomology when all coordinate cohomology groups vanish\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCechResolutionColumns",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "Proof Step 1: canonical affine-cover Cech identification, affine acyclicity of the beta augmentation: Positive Cech column homology vanishes in an acyclic degree",
+   "via": [
+    "lem-sc-module-cech-resolution-columns",
+    "lem-sc-module-cech-beta-affine-quasi-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCechResolutionColumnPositive",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCechResolutionColumnPositive.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCech_resolution_column_positive",
+  "statement": "theorem moduleCech_resolution_column_positive {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules) (I : InjectiveResolution F) (n p : ℕ) (hp : 0 < p) (hvan : ∀ y : Fin (n + 1) → ι, Subsingleton ((RingedSpace.openModuleCohomology X.toRingedSpace p (⨅ l, U (y l))).obj F)) : IsZero (((moduleCechDouble U I).flip.X n).homology p)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T135228-L-1659916",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T135228-L-1659916",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

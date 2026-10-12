@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-module-cech-resolution-column-zero",
+ "kind": "statement",
+ "title": "Degree-zero Cech column augmentation identifies homology",
+ "statement": "Let X be a scheme [def-pc-scheme], U an arbitrary family of opens, F an O_X-module [def-weil-sheaf-of-modules-category], and I an injective resolution [def-sp-injective-resolutions]. Let D = moduleCechDouble U I and A be the Cech complex of F [def-sc-module-cech-comparison]. The image a of the resolution augmentation is a morphism A → D.X 0. For any proof ha that a ≫ D.d 0 1 = 0 and any Cech degree n, the map from A.X n concentrated in degree zero to D.flip.X n induced by a.f n is a quasi-isomorphism in degree ZERO. No positive-cohomology vanishing hypothesis is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Beta augmentation and its zeroth column homology, expanded by left exactness in Tag 01DZ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sc-module-cech-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The augmentation F → I^0 is the kernel of I^0 → I^1 by [def-sp-injective-resolutions]. Evaluate on each tuple intersection: sections preserve kernels, so the evaluated augmentation remains a kernel. Restriction of scalars does not change the underlying kernel.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The column of [def-sc-module-cech-comparison] is the product over tuples. Kernels commute with products coordinatewise, so the augmentation identifies Cech n-cochains with the column kernel. Degree zero has no incoming boundaries, and the source is concentrated in degree zero. Thus the induced degree-zero homology map is invertible. Empty tuple-index products and empty opens give zero modules, and the identification still holds.",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-sc-module-cech-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Beta augmentation of Tag 01EQ; elementary left-exact kernel and product details expanded by E2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preserves.*[Hh]omology|[Hh]omology.*[Pp]roduct|[Pp]roduct.*[Ee]xact",
+   "results": "{\"t\": \"2026-10-12T12:21:18Z\", \"tool\": \"grep\", \"query\": \"preserves.*[Hh]omology|[Hh]omology.*[Pp]roduct|[Pp]roduct.*[Ee]xact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/QuasiIso.lean\", \"Mathlib/Algebra/Homology/QuasiIso.lean\", \"Mathlib/Algebra/Homology/QuasiIso.lean\"], \"digest\": \"c9fe6a3fa266ee68\"}",
+   "date": "2026-10-12",
+   "verdict": "No exact module-valued Cech column statement; generic homology or resolution tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The zeroth homology of sections of an injective sheaf resolution is sections of the sheaf, and products preserve this identification",
+   "results": "{\"t\": \"2026-10-12T12:21:18Z\", \"tool\": \"leanfinder\", \"query\": \"The zeroth homology of sections of an injective sheaf resolution is sections of the sheaf, and products preserve this identification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\", \"CategoryTheory.InjectiveResolution.injective\", \"CategoryTheory.InjectiveResolution.self_cocomplex\", \"CategoryTheory.InjectiveResolution.self\", \"CategoryTheory.InjectiveResolution.ι'_f_zero\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"CochainComplex.cm5b.instInjectiveXIntI\"], \"digest\": \"8c825478c89c9f8a\"}",
+   "date": "2026-10-12",
+   "verdict": "No exact module-valued Cech column statement; generic homology or resolution tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.fromSingle₀Equiv",
+   "results": "{\"t\": \"2026-10-12T12:21:18Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.fromSingle₀Equiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CochainComplex.fromSingle₀Equiv\", \"CochainComplex.fromSingle₀Equiv_apply_coe\", \"CochainComplex.fromSingle₀Equiv_symm_apply_f_zero\", \"CategoryTheory.InjectiveResolution.of_def\"], \"digest\": \"9dd84bebaa896edd\"}",
+   "date": "2026-10-12",
+   "verdict": "No exact module-valued Cech column statement; generic homology or resolution tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a sheaf preserve the degree zero kernel of an injective resolution and arbitrary products preserve kernels",
+   "results": "{\"t\": \"2026-10-12T12:27:21Z\", \"tool\": \"leansearch\", \"query\": \"Sections of a sheaf preserve the degree zero kernel of an injective resolution and arbitrary products preserve kernels\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCechResolutionColumns",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "Proof Step 1: canonical affine-cover Cech identification, affine acyclicity of the beta augmentation: Degree-zero Cech column augmentation identifies homology",
+   "via": [
+    "lem-sc-module-cech-resolution-columns",
+    "lem-sc-module-cech-beta-affine-quasi-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCechResolutionColumnZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCechResolutionColumnZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCech_resolution_column_zero",
+  "statement": "theorem moduleCech_resolution_column_zero {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules) (I : InjectiveResolution F) (ha : (CategoryTheory.cechComplexFunctor U).map ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map (I.ι.f 0).val) ≫ (moduleCechDouble U I).d 0 1 = 0) (n : ℕ) : let A := (CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat let a : A ⟶ (moduleCechDouble U I).X 0 := (CategoryTheory.cechComplexFunctor U).map ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map (I.ι.f 0).val) QuasiIsoAt ((CochainComplex.fromSingle₀Equiv ((moduleCechDouble U I).flip.X n) (A.X n)).symm ⟨a.f n, by simpa [a, A, moduleCechDouble] using congrArg (fun f ↦ f.f n) ha⟩) 0",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T135228-L-1659916",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T135228-L-1659916",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
