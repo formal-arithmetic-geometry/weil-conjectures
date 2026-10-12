@@ -402,6 +402,366 @@ noncomputable def lisseToModuleObject [Finite Λ] :
   map_comp f g := LambdaModuleObject.Hom.ext
     ((sheafForget Y.smallEtaleTopology).map_comp f.hom g.hom)
 
+private abbrev sectionFunctor (U : Y.Etaleᵒᵖ) :
+    Sheaf Y.smallEtaleTopology (Type (u + 1)) ⥤ Type (u + 1) :=
+  sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj U
+
+private noncomputable def sectionPair
+    (A B : Sheaf Y.smallEtaleTopology (Type (u + 1))) (U : Y.Etaleᵒᵖ)
+    (x : A.obj.obj U) (y : B.obj.obj U) : (A ⨯ B).obj.obj U :=
+  ((PreservesLimitPair.iso (sectionFunctor U) A B) ≪≫
+    Types.binaryProductIso _ _).inv (x, y)
+
+@[simp] private theorem sectionPair_fst
+    (A B : Sheaf Y.smallEtaleTopology (Type (u + 1))) (U : Y.Etaleᵒᵖ)
+    (x : A.obj.obj U) (y : B.obj.obj U) :
+    (prod.fst : A ⨯ B ⟶ A).hom.app U (sectionPair A B U x y) = x := by
+  have h := PreservesLimitPair.iso_inv_fst (sectionFunctor U) A B
+  have h' := congrArg (fun k ↦ (Types.binaryProductIso _ _).inv ≫ k) h
+  simp only [Types.binaryProductIso_inv_comp_fst] at h'
+  exact congrArg (fun k ↦ k (x, y)) h'
+
+@[simp] private theorem sectionPair_snd
+    (A B : Sheaf Y.smallEtaleTopology (Type (u + 1))) (U : Y.Etaleᵒᵖ)
+    (x : A.obj.obj U) (y : B.obj.obj U) :
+    (prod.snd : A ⨯ B ⟶ B).hom.app U (sectionPair A B U x y) = y := by
+  have h := PreservesLimitPair.iso_inv_snd (sectionFunctor U) A B
+  have h' := congrArg (fun k ↦ (Types.binaryProductIso _ _).inv ≫ k) h
+  simp only [Types.binaryProductIso_inv_comp_snd] at h'
+  exact congrArg (fun k ↦ k (x, y)) h'
+
+private theorem sectionPair_ext
+    {A B : Sheaf Y.smallEtaleTopology (Type (u + 1))} {U : Y.Etaleᵒᵖ}
+    {x y : (A ⨯ B).obj.obj U}
+    (hf : (prod.fst : A ⨯ B ⟶ A).hom.app U x =
+      (prod.fst : A ⨯ B ⟶ A).hom.app U y)
+    (hs : (prod.snd : A ⨯ B ⟶ B).hom.app U x =
+      (prod.snd : A ⨯ B ⟶ B).hom.app U y) : x = y := by
+  apply ((PreservesLimitPair.iso (sectionFunctor U) A B) ≪≫
+    Types.binaryProductIso _ _).toEquiv.injective
+  apply Prod.ext
+  · have h : ((PreservesLimitPair.iso (sectionFunctor U) A B) ≪≫
+        Types.binaryProductIso _ _).hom ≫ ↾Prod.fst =
+        (sectionFunctor U).map (prod.fst : A ⨯ B ⟶ A) := by
+      simp only [Iso.trans_hom, Category.assoc, Types.binaryProductIso_hom_comp_fst,
+        PreservesLimitPair.iso_hom]
+      exact prodComparison_fst _ _ _
+    exact (congrArg (fun k ↦ k x) h).trans (hf.trans (congrArg (fun k ↦ k y) h).symm)
+  · have h : ((PreservesLimitPair.iso (sectionFunctor U) A B) ≪≫
+        Types.binaryProductIso _ _).hom ≫ ↾Prod.snd =
+        (sectionFunctor U).map (prod.snd : A ⨯ B ⟶ B) := by
+      simp only [Iso.trans_hom, Category.assoc, Types.binaryProductIso_hom_comp_snd,
+        PreservesLimitPair.iso_hom]
+      exact prodComparison_snd _ _ _
+    exact (congrArg (fun k ↦ k x) h).trans (hs.trans (congrArg (fun k ↦ k y) h).symm)
+
+@[simp] private theorem sectionPair_eta
+    {A B : Sheaf Y.smallEtaleTopology (Type (u + 1))} {U : Y.Etaleᵒᵖ}
+    (x : (A ⨯ B).obj.obj U) :
+    sectionPair A B U ((prod.fst : A ⨯ B ⟶ A).hom.app U x)
+      ((prod.snd : A ⨯ B ⟶ B).hom.app U x) = x := by
+  apply sectionPair_ext <;> simp
+
+@[simp] private theorem sectionPair_map
+    {A B C D : Sheaf Y.smallEtaleTopology (Type (u + 1))}
+    (f : A ⟶ C) (g : B ⟶ D) (U : Y.Etaleᵒᵖ)
+    (x : A.obj.obj U) (y : B.obj.obj U) :
+    (prod.map f g).hom.app U (sectionPair A B U x y) =
+      sectionPair C D U (f.hom.app U x) (g.hom.app U y) := by
+  apply sectionPair_ext <;> simp
+
+@[simp] private theorem sectionPair_lift
+    {A B C : Sheaf Y.smallEtaleTopology (Type (u + 1))}
+    (f : A ⟶ B) (g : A ⟶ C) (U : Y.Etaleᵒᵖ) (x : A.obj.obj U) :
+    (prod.lift f g).hom.app U x =
+      sectionPair B C U (f.hom.app U x) (g.hom.app U x) := by
+  apply sectionPair_ext <;> simp
+
+@[simp] private theorem sectionPair_restrict
+    (A B : Sheaf Y.smallEtaleTopology (Type (u + 1)))
+    {U V : Y.Etaleᵒᵖ} (g : U ⟶ V) (x : A.obj.obj U) (y : B.obj.obj U) :
+    (A ⨯ B).obj.map g (sectionPair A B U x y) =
+      sectionPair A B V (A.obj.map g x) (B.obj.map g y) := by
+  apply sectionPair_ext
+  · have h := ConcreteCategory.congr_hom ((prod.fst : A ⨯ B ⟶ A).hom.naturality g)
+      (sectionPair A B U x y)
+    simpa only [types_comp_apply, sectionPair_fst] using h
+  · have h := ConcreteCategory.congr_hom ((prod.snd : A ⨯ B ⟶ B).hom.naturality g)
+      (sectionPair A B U x y)
+    simpa only [types_comp_apply, sectionPair_snd] using h
+
+private noncomputable def sectionPoint (U : Y.Etaleᵒᵖ) :
+    (⊤_ (Sheaf Y.smallEtaleTopology (Type (u + 1)))).obj.obj U :=
+  ((PreservesTerminal.iso (sectionFunctor U)) ≪≫ Types.terminalIso).inv PUnit.unit
+
+private theorem sectionPoint_unique (U : Y.Etaleᵒᵖ)
+    (x : (⊤_ (Sheaf Y.smallEtaleTopology (Type (u + 1)))).obj.obj U) :
+    x = sectionPoint U := by
+  apply ((PreservesTerminal.iso (sectionFunctor U)) ≪≫ Types.terminalIso).toEquiv.injective
+  exact Subsingleton.elim _ _
+
+@[simp] private theorem sectionPoint_from
+    (A : Sheaf Y.smallEtaleTopology (Type (u + 1))) (U : Y.Etaleᵒᵖ)
+    (x : A.obj.obj U) : (terminal.from A).hom.app U x = sectionPoint U :=
+  sectionPoint_unique _ _
+
+set_option backward.isDefEq.respectTransparency false in
+@[instance_reducible] private noncomputable def moduleSectionAddCommGroup
+    (A : Sheaf Y.smallEtaleTopology (Type (u + 1))) (S : ModuleObjectStruct Λ A)
+    (U : Y.Etaleᵒᵖ) : AddCommGroup (A.obj.obj U) := by
+  letI : Add (A.obj.obj U) := ⟨fun x y ↦ S.add.hom.app U (sectionPair A A U x y)⟩
+  letI : Zero (A.obj.obj U) := ⟨S.zero.hom.app U (sectionPoint U)⟩
+  letI : Neg (A.obj.obj U) := ⟨fun x ↦ S.neg.hom.app U x⟩
+  exact {
+    add := fun x y ↦ S.add.hom.app U (sectionPair A A U x y)
+    zero := S.zero.hom.app U (sectionPoint U)
+    neg := fun x ↦ S.neg.hom.app U x
+    nsmul := nsmulRec
+    zsmul := zsmulRec
+    add_assoc x y z := by
+      change S.add.hom.app U (sectionPair A A U
+        (S.add.hom.app U (sectionPair A A U x y)) z) =
+        S.add.hom.app U (sectionPair A A U x (S.add.hom.app U (sectionPair A A U y z)))
+      have h := sheafType_congr S.add_assoc U
+        (sectionPair (A ⨯ A) A U (sectionPair A A U x y) z)
+      simpa only [sheafType_comp_apply, sectionPair_map, sheafType_id_apply,
+        prod.associator_hom, sectionPair_lift, sectionPair_fst, sectionPair_snd] using h
+    add_comm x y := by
+      change S.add.hom.app U (sectionPair A A U x y) =
+        S.add.hom.app U (sectionPair A A U y x)
+      have h := sheafType_congr S.add_comm U (sectionPair A A U x y)
+      simpa only [sheafType_comp_apply, prod.braiding_hom, sectionPair_lift,
+        sectionPair_fst, sectionPair_snd] using h.symm
+    zero_add x := by
+      change S.add.hom.app U
+        (sectionPair A A U (S.zero.hom.app U (sectionPoint U)) x) = x
+      have h := sheafType_congr S.zero_add U x
+      simpa only [sheafType_comp_apply, sectionPair_lift, sectionPoint_from,
+        sheafType_id_apply] using h
+    add_zero x := by
+      have h := sheafType_congr S.zero_add U x
+      have hc := sheafType_congr S.add_comm U
+        (sectionPair A A U x (S.zero.hom.app U (sectionPoint U)))
+      simp only [sheafType_comp_apply, prod.braiding_hom, sectionPair_lift,
+        sectionPair_fst, sectionPair_snd] at hc
+      exact hc.symm.trans (by
+        simpa only [sheafType_comp_apply, sectionPair_lift, sectionPoint_from,
+          sheafType_id_apply] using h)
+    neg_add_cancel x := by
+      change S.add.hom.app U (sectionPair A A U (S.neg.hom.app U x) x) =
+        S.zero.hom.app U (sectionPoint U)
+      have h := sheafType_congr S.neg_add_cancel U x
+      simpa only [sheafType_comp_apply, sectionPair_lift, sectionPoint_from,
+        sheafType_id_apply] using h }
+
+set_option backward.isDefEq.respectTransparency false in
+@[instance_reducible] private noncomputable def moduleSectionModule
+    (A : Sheaf Y.smallEtaleTopology (Type (u + 1))) (S : ModuleObjectStruct Λ A)
+    (U : Y.Etaleᵒᵖ) :
+    letI := moduleSectionAddCommGroup A S U
+    Module Λ (A.obj.obj U) := by
+  letI := moduleSectionAddCommGroup A S U
+  letI : SMul Λ (A.obj.obj U) := ⟨fun r x ↦ (S.smul r).hom.app U x⟩
+  exact
+    { smul := fun r x ↦ (S.smul r).hom.app U x
+      one_smul := fun x ↦ sheafType_congr S.one_smul U x
+      mul_smul := fun r s x ↦ sheafType_congr (S.mul_smul r s) U x
+      smul_add := fun r x y ↦ by
+        change (S.smul r).hom.app U (S.add.hom.app U (sectionPair A A U x y)) =
+          S.add.hom.app U
+            (sectionPair A A U ((S.smul r).hom.app U x) ((S.smul r).hom.app U y))
+        have h := sheafType_congr (S.smul_add r) U (sectionPair A A U x y)
+        simpa only [sheafType_comp_apply, sectionPair_map] using h
+      add_smul := fun r s x ↦ by
+        change (S.smul (r + s)).hom.app U x = S.add.hom.app U
+          (sectionPair A A U ((S.smul r).hom.app U x) ((S.smul s).hom.app U x))
+        have h := sheafType_congr (S.add_smul r s) U x
+        simpa only [sheafType_comp_apply, sectionPair_lift] using h
+      smul_zero := fun r ↦ sheafType_congr (S.smul_zero r) U (sectionPoint U)
+      zero_smul := fun x ↦ by
+        change (S.smul 0).hom.app U x = S.zero.hom.app U (sectionPoint U)
+        have h := sheafType_congr S.zero_smul U x
+        simpa only [sheafType_comp_apply, sectionPoint_from] using h }
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def recoveredModulePresheaf
+    (A : Sheaf Y.smallEtaleTopology (Type (u + 1))) (S : ModuleObjectStruct Λ A) :
+    Y.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} Λ := by
+  letI (U : Y.Etaleᵒᵖ) := moduleSectionAddCommGroup A S U
+  letI (U : Y.Etaleᵒᵖ) := moduleSectionModule A S U
+  exact
+    { obj := fun U ↦ ModuleCat.of Λ (A.obj.obj U)
+      map := fun {U V} g ↦ ModuleCat.ofHom
+        { toFun := A.obj.map g
+          map_add' := fun x y ↦ by
+            change A.obj.map g (S.add.hom.app U (sectionPair A A U x y)) =
+              S.add.hom.app V (sectionPair A A V (A.obj.map g x) (A.obj.map g y))
+            have h := ConcreteCategory.congr_hom (S.add.hom.naturality g)
+              (sectionPair A A U x y)
+            simpa only [types_comp_apply, sectionPair_restrict] using h.symm
+          map_smul' := fun r x ↦ by
+            have h := ConcreteCategory.congr_hom ((S.smul r).hom.naturality g) x
+            exact h.symm }
+      map_id := fun U ↦ by
+        apply ConcreteCategory.hom_ext
+        intro x
+        exact ConcreteCategory.congr_hom (A.obj.map_id U) x
+      map_comp := fun g h ↦ by
+        apply ConcreteCategory.hom_ext
+        intro x
+        exact ConcreteCategory.congr_hom (A.obj.map_comp g h) x }
+
+private noncomputable def recoveredModuleSheaf
+    (A : Sheaf Y.smallEtaleTopology (Type (u + 1))) (S : ModuleObjectStruct Λ A) :
+    Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  ⟨recoveredModulePresheaf A S,
+    (Presheaf.isSheaf_iff_isSheaf_forget _ _
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).mpr A.property⟩
+
+private theorem recoveredModuleSheaf_str
+    (A : Sheaf Y.smallEtaleTopology (Type (u + 1))) (S : ModuleObjectStruct Λ A) :
+    underlyingModuleObjectStruct (recoveredModuleSheaf A S) = S := by
+  have hS : S.IsUnderlying (recoveredModuleSheaf A S) := by
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · intro U x
+      change S.add.hom.app U x = S.add.hom.app U
+        (sectionPair A A U ((prod.fst : A ⨯ A ⟶ A).hom.app U x)
+          ((prod.snd : A ⨯ A ⟶ A).hom.app U x))
+      rw [sectionPair_eta]
+    · intro U x
+      change S.zero.hom.app U x = S.zero.hom.app U (sectionPoint U)
+      rw [sectionPoint_unique U x]
+    · intro U x
+      rfl
+    · intro r U x
+      rfl
+  exact (existsUnique_moduleObjectStruct_isUnderlying (recoveredModuleSheaf A S)).unique
+    (existsUnique_moduleObjectStruct_isUnderlying (recoveredModuleSheaf A S)).exists.choose_spec hS
+
+private theorem lisseToModuleObject_surjective [Finite Λ] :
+    Function.Surjective (lisseToModuleObject Y Λ).obj := by
+  intro A
+  let F := recoveredModuleSheaf A.sheaf A.str
+  have hF : IsLisseModuleSheaf F :=
+    (lisseModuleSheaf_iff_underlying_finiteLocallyConstant F).mpr A.isFLC
+  refine ⟨⟨F, hF⟩, ?_⟩
+  have h := recoveredModuleSheaf_str A.sheaf A.str
+  cases A
+  dsimp only [lisseToModuleObject, F] at h ⊢
+  congr 1
+
+private theorem moduleCat_ext_operations {M N : ModuleCat.{u + 1} Λ}
+    (hc : (M : Type (u + 1)) = N)
+    (ha : HEq M.isAddCommGroup.add N.isAddCommGroup.add)
+    (hm : HEq M.isModule.smul N.isModule.smul) : M = N := by
+  cases M
+  cases N
+  rename_i M mA mM N nA nM
+  change M = N at hc
+  cases hc
+  have hA : mA = nA := AddCommGroup.ext (eq_of_heq ha)
+  cases hA
+  have hM : mM = nM := Module.ext' _ _
+    (fun r x ↦ congrFun (congrFun (eq_of_heq hm) r) x)
+  cases hM
+  rfl
+
+private theorem recoveredModuleSheaf_obj
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (U : Y.Etaleᵒᵖ) :
+    (recoveredModuleSheaf ((sheafForget _).obj F)
+      (underlyingModuleObjectStruct F)).obj.obj U = F.obj.obj U := by
+  have hF := (existsUnique_moduleObjectStruct_isUnderlying F).exists.choose_spec
+  change (underlyingModuleObjectStruct F).IsUnderlying F at hF
+  refine moduleCat_ext_operations
+    (M := (recoveredModuleSheaf ((sheafForget _).obj F)
+      (underlyingModuleObjectStruct F)).obj.obj U) (N := F.obj.obj U) rfl ?_ ?_
+  · change HEq (fun x y : F.obj.obj U ↦ (underlyingModuleObjectStruct F).add.hom.app U
+      (sectionPair ((sheafForget _).obj F) ((sheafForget _).obj F) U x y))
+      (fun x y : F.obj.obj U ↦ x + y)
+    apply heq_of_eq
+    funext x y
+    rw [hF.1, sectionPair_fst, sectionPair_snd]
+    rfl
+  · change HEq (fun r (x : F.obj.obj U) ↦
+      ((underlyingModuleObjectStruct F).smul r).hom.app U x)
+      (fun r (x : F.obj.obj U) ↦ r • x)
+    apply heq_of_eq
+    funext r x
+    exact hF.2.2.2 r U x
+
+private theorem moduleCat_hom_hext
+    {M N P Q : ModuleCat.{u + 1} Λ} (f : M ⟶ N) (g : P ⟶ Q)
+    (hM : M = P) (hN : N = Q)
+    (h : HEq (fun x ↦ f x) (fun x ↦ g x)) : HEq f g := by
+  cases hM
+  cases hN
+  apply heq_of_eq
+  apply ConcreteCategory.hom_ext
+  exact congrFun (eq_of_heq h)
+
+private theorem recoveredModuleSheaf_eq
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    recoveredModuleSheaf ((sheafForget _).obj F) (underlyingModuleObjectStruct F) = F := by
+  apply ObjectProperty.FullSubcategory.ext
+  apply CategoryTheory.Functor.hext
+  · exact recoveredModuleSheaf_obj F
+  · intro U V f
+    apply moduleCat_hom_hext _ _ (recoveredModuleSheaf_obj F U)
+      (recoveredModuleSheaf_obj F V)
+    rfl
+
+private theorem lisseToModuleObject_injective [Finite Λ] :
+    Function.Injective (lisseToModuleObject Y Λ).obj := by
+  intro F G h
+  apply ObjectProperty.FullSubcategory.ext
+  have hS := congrArg (fun A ↦ recoveredModuleSheaf A.sheaf A.str) h
+  simpa only [lisseToModuleObject, recoveredModuleSheaf_eq] using hS
+
+private theorem lisseToModuleObject_faithful [Finite Λ] :
+    (lisseToModuleObject Y Λ).Faithful where
+  map_injective := by
+    intro F G f g h
+    apply ObjectProperty.hom_ext
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    apply ConcreteCategory.hom_ext
+    intro x
+    exact congrArg (fun k ↦ k.hom.hom.app U x) h
+
+private theorem lisseToModuleObject_full [Finite Λ] :
+    (lisseToModuleObject Y Λ).Full where
+  map_surjective := by
+    intro F G f
+    have hF := (existsUnique_moduleObjectStruct_isUnderlying F.obj).exists.choose_spec
+    have hG := (existsUnique_moduleObjectStruct_isUnderlying G.obj).exists.choose_spec
+    change (underlyingModuleObjectStruct F.obj).IsUnderlying F.obj at hF
+    change (underlyingModuleObjectStruct G.obj).IsUnderlying G.obj at hG
+    let φ : F.obj ⟶ G.obj := ObjectProperty.homMk
+      { app := fun U ↦ ModuleCat.ofHom
+          { toFun := f.hom.hom.app U
+            map_add' := fun x y ↦ by
+              have h := sheafType_congr f.add U
+                (sectionPair ((sheafForget _).obj F.obj) ((sheafForget _).obj F.obj) U x y)
+              dsimp only [lisseToModuleObject] at h
+              simp only [sheafType_comp_apply, hF.1, hG.1,
+                sheafType_map_fst_apply, sheafType_map_snd_apply, sectionPair_fst,
+                sectionPair_snd] at h
+              exact h
+            map_smul' := fun r x ↦ by
+              have h := sheafType_congr (f.smul r) U x
+              dsimp only [lisseToModuleObject] at h
+              simp only [sheafType_comp_apply] at h
+              rw [hF.2.2.2, hG.2.2.2] at h
+              exact h }
+        naturality := fun U V g ↦ by
+          apply ConcreteCategory.hom_ext
+          intro x
+          exact ConcreteCategory.congr_hom (f.hom.hom.naturality g) x }
+    refine ⟨ObjectProperty.homMk φ, ?_⟩
+    apply LambdaModuleObject.Hom.ext
+    rfl
+
 /-- Clause (2): the functor sending a lisse sheaf of left `Λ`-modules to its underlying sheaf
 of sets with its addition, zero, negation and scalar multiplications is an isomorphism of
 categories (an equivalence that is bijective on objects) onto the `Λ`-module objects of
@@ -418,6 +778,12 @@ on morphisms: an isomorphism of categories, hence an equivalence. -/
 theorem lisseToModuleObject_isIso_of_categories [Finite Λ] :
     (lisseToModuleObject Y Λ).IsEquivalence ∧
       Function.Bijective (lisseToModuleObject Y Λ).obj := by
-  sorry
+  let : (lisseToModuleObject Y Λ).EssSurj := ⟨fun A ↦ by
+    obtain ⟨F, hF⟩ := lisseToModuleObject_surjective (Y := Y) (Λ := Λ) A
+    exact ⟨F, ⟨eqToIso hF⟩⟩⟩
+  let : (lisseToModuleObject Y Λ).Faithful := lisseToModuleObject_faithful
+  let : (lisseToModuleObject Y Λ).Full := lisseToModuleObject_full
+  exact ⟨Functor.IsEquivalence.mk, lisseToModuleObject_injective,
+    lisseToModuleObject_surjective⟩
 
 end AlgebraicGeometry.Scheme
