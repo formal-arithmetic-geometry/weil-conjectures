@@ -26,35 +26,20 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (elements of $f_p\\mathcal O(U)$ and $f_p\\mathcal G(U)$).* Fix an open $U\\subseteq X$ and let $I_U$ be the set of opens $V\\subseteq Y$ with $f(U)\\subseteq V$, ordered by reverse inclusion; it is nonempty ($Y\\in I_U$) and directed ($V,V'\\in I_U\\Rightarrow V\\cap V'\\in I_U$), so it is a small filtered category [def-weil-pbc-category-colimit], and by [def-weil-pbc-topological-inverse-image] (2) $f_p\\mathcal G(U)$ is the colimit of $V\\mapsto\\mathcal G(V)$ over $I_U$ in abelian groups and $f_p\\mathcal O(U)$ the colimit of $V\\mapsto\\mathcal O(V)$ in commutative rings, the transition maps being the restriction maps. Abelian groups are $\\mathbf Z$-modules, so [lem-weil-pbc-filtered-colimit-modules-elementwise] (with $R=\\mathbf Z$) applies to $f_p\\mathcal G(U)$, and [lem-pc-filtered-colimit-commrings-elementwise] applies to $f_p\\mathcal O(U)$; in the directed set $I_U$ a pair of morphisms $V\\to W\\leftarrow V'$ is $W\\subseteq V\\cap V'$ and the transition maps are restrictions, so they give: (a) every element of $f_p\\mathcal O(U)$ is $\\iota^U_V(a)$ for some $V\\in I_U$, $a\\in\\mathcal O(V)$, and every element of $f_p\\mathcal G(U)$ is $\\iota^U_V(g)$ for some $V\\in I_U$, $g\\in\\mathcal G(V)$; (b) $\\iota^U_V(x)=\\iota^U_{V'}(x')$ if and only if there is $W\\in I_U$ with $W\\subseteq V\\cap V'$ and $x|_W=x'|_W$ (for both $\\mathcal O$ and $\\mathcal G$). Since $\\iota^U_V=\\iota^U_W\\circ(-)|_W$ for $W\\subseteq V$ in $I_U$ (cocone condition), any finitely many elements of $f_p\\mathcal O(U)$ and of $f_p\\mathcal G(U)$ can be written as $\\iota^U_V(\\cdot)$ with one common $V\\in I_U$ (take the intersection of the indices of representatives given by (a)).",
+   "text": "Take the Mathlib abstract module pullback P and adjunction for iO. The abelian adjunct of its forgotten unit is an isomorphism by the comparison lemma. Naturality of the Hom equivalences and the module unit makes these maps a natural isomorphism. Take its inverse to obtain e.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-topological-inverse-image",
-    "lem-pc-filtered-colimit-commrings-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 008T (lemma-pullback-presheaf-module), proof: the identification of $f_p\\mathcal O(U)\\times f_p\\mathcal G(U)$ with $\\colim_V(\\mathcal O(V)\\times\\mathcal G(V))$, which the source takes from Categories 002W"
-   }
-  },
-  {
-   "text": "*Step 2 (the product of (1): existence and uniqueness).* For $x\\in f_p\\mathcal O(U)$, $y\\in f_p\\mathcal G(U)$ write $x=\\iota^U_V(a)$, $y=\\iota^U_V(g)$ with a common $V\\in I_U$ (step 1) and put $x\\cdot y=\\iota^U_V(ag)$, $ag$ the product of the $\\mathcal O(V)$-module $\\mathcal G(V)$ [def-weil-presheaf-modules-sheafification]. This does not depend on the choice: if also $x=\\iota^U_{V'}(a')$, $y=\\iota^U_{V'}(g')$, step 1 (b) gives $W_1,W_2\\in I_U$ inside $V\\cap V'$ with $a|_{W_1}=a'|_{W_1}$, $g|_{W_2}=g'|_{W_2}$; with $W=W_1\\cap W_2\\in I_U$, semilinearity of the restriction maps of $\\mathcal G$ gives $(ag)|_W=a|_W\\,g|_W=a'|_W\\,g'|_W=(a'g')|_W$, so $\\iota^U_V(ag)=\\iota^U_W((ag)|_W)=\\iota^U_W((a'g')|_W)=\\iota^U_{V'}(a'g')$. By construction $\\iota^U_V(a)\\cdot\\iota^U_V(g)=\\iota^U_V(ag)$ for all $V\\in I_U$, $a$, $g$; and any map with this property agrees with this one, since every pair $(x,y)$ is of the form $(\\iota^U_V(a),\\iota^U_V(g))$ by step 1.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-pc-topological-module-pullback-comparison",
     "def-weil-pbc-topological-inverse-image",
     "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 008T, proof: the map $\\colim_V(\\mathcal O(V)\\times\\mathcal G(V))\\to\\colim_V\\mathcal G(V)$ induced by the multiplications"
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
    }
   },
   {
-   "text": "*Step 3 (the module structure and functoriality of (1)).* Given finitely many elements, represent them at one common $V\\in I_U$ (step 1); since $\\iota^U_V:\\mathcal O(V)\\to f_p\\mathcal O(U)$ is a ring homomorphism (a coprojection in commutative rings) and $\\iota^U_V:\\mathcal G(V)\\to f_p\\mathcal G(U)$ is additive, each module axiom for $f_p\\mathcal G(U)$ over $f_p\\mathcal O(U)$ is the image under $\\iota^U_V$ of the same axiom in the $\\mathcal O(V)$-module $\\mathcal G(V)$, e.g. $(\\iota(a)+\\iota(a'))\\cdot\\iota(g)=\\iota((a+a')g)=\\iota(ag+a'g)=\\iota(a)\\iota(g)+\\iota(a')\\iota(g)$, $\\iota(a)(\\iota(g)+\\iota(g'))=\\iota(ag+ag')$, $(\\iota(a)\\iota(a'))\\iota(g)=\\iota((aa')g)=\\iota(a(a'g))=\\iota(a)(\\iota(a')\\iota(g))$, $1\\cdot\\iota(g)=\\iota(1)\\iota(g)=\\iota(g)$. For opens $U'\\subseteq U$ the restriction map $r$ of $f_p\\mathcal G$ and that of $f_p\\mathcal O$ send $\\iota^U_V$ to $\\iota^{U'}_V$ [def-weil-pbc-topological-inverse-image] (2), so $r(\\iota^U_V(a)\\iota^U_V(g))=\\iota^{U'}_V(ag)=\\iota^{U'}_V(a)\\,\\iota^{U'}_V(g)=r(\\iota^U_V(a))\\,r(\\iota^U_V(g))$: the restriction maps are semilinear, and $f_p\\mathcal G$ is a presheaf of $f_p\\mathcal O$-modules [def-weil-presheaf-modules-sheafification]. For an $\\mathcal O$-linear morphism $u:\\mathcal G\\to\\mathcal G'$, $(f_pu)_U\\circ\\iota^U_V=\\iota'^U_V\\circ u_V$ [def-weil-pbc-topological-inverse-image] (2) gives $(f_pu)_U(\\iota^U_V(a)\\iota^U_V(g))=\\iota'^U_V(u_V(ag))=\\iota'^U_V(a\\,u_V(g))=\\iota^U_V(a)\\cdot(f_pu)_U(\\iota^U_V(g))$, so $f_pu$ is $f_p\\mathcal O$-linear; $f_p$ preserves identities and composition already on presheaves of abelian groups. This is (1).",
+   "text": "The abelian Hom inverse identity gives the unit formula for e. Naturality expresses its inverse on a coprojection as restriction of the module unit. Linearity of the unit and semilinearity of restrictions yield the required coprojection scalar-action formula.",
    "uses": [
     "def-weil-pbc-topological-inverse-image",
     "def-weil-presheaf-modules-sheafification"
@@ -62,60 +47,22 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 008T, proof: 'We leave it to the reader to see this is compatible with restriction mappings and defines a structure of $f_p\\mathcal O$-module on $f_p\\mathcal G$', and 'functorial in $\\mathcal G$'"
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
    }
   },
   {
-   "text": "*Step 4 (the module structure of (2)).* For $V\\subseteq Y$ open, $i_{\\mathcal O,V}=\\iota^{f^{-1}V}_V:\\mathcal O(V)\\to f_p\\mathcal O(f^{-1}V)$ is a ring homomorphism (a coprojection in commutative rings) [def-weil-pbc-topological-inverse-image] (2), so the $f_p\\mathcal O(f^{-1}V)$-module $\\mathcal F(f^{-1}V)=f_*\\mathcal F(V)$ becomes an $\\mathcal O(V)$-module by $a\\cdot s=i_{\\mathcal O,V}(a)s$ (restriction of scalars). For $V'\\subseteq V$, $a\\in\\mathcal O(V)$, $s\\in\\mathcal F(f^{-1}V)$: $(i_{\\mathcal O,V}(a)s)|_{f^{-1}V'}=i_{\\mathcal O,V}(a)|_{f^{-1}V'}\\,s|_{f^{-1}V'}=i_{\\mathcal O,V'}(a|_{V'})\\,s|_{f^{-1}V'}$, by the semilinearity of the restriction maps of $\\mathcal F$ over $f_p\\mathcal O$ and because $i_{\\mathcal O}:\\mathcal O\\to f_*f_p\\mathcal O$ is a morphism of presheaves; so the restriction maps of $f_*\\mathcal F$ are semilinear and $f_*\\mathcal F$ is a presheaf of $\\mathcal O$-modules [def-weil-presheaf-modules-sheafification]. For an $f_p\\mathcal O$-linear $w:\\mathcal F\\to\\mathcal F'$, $(f_*w)_V=w_{f^{-1}V}$ is $f_p\\mathcal O(f^{-1}V)$-linear, hence $\\mathcal O(V)$-linear for the restricted scalars. This is (2). (The source, 008S, states the $f_*f_p\\mathcal O$-module structure; the $\\mathcal O$-structure of 008U is its restriction along $i_{\\mathcal O}$.)",
+   "text": "Transport the scalar action on P(G)(U) through e. The scalar-action formula and inverse identities give its coprojection formula. Any other such multiplication agrees everywhere, because common representatives express both inputs at one neighbourhood.",
    "uses": [
-    "def-weil-pbc-topological-inverse-image",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 008S (lemma-pushforward-presheaf-module), proof, with the restriction along $i_{\\mathcal O}$ stated in Tag 008U"
-   }
-  },
-  {
-   "text": "*Step 5 (the abelian bijection and its formula).* By [def-weil-pbc-topological-inverse-image] (2) with values in abelian groups, $f_p\\dashv f_*$ on presheaves of abelian groups with unit $i$; so the adjunction bijection is $\\operatorname{Hom}_{\\mathrm{PAb}(X)}(f_p\\mathcal G,\\mathcal F)\\to\\operatorname{Hom}_{\\mathrm{PAb}(Y)}(\\mathcal G,f_*\\mathcal F)$, $\\psi\\mapsto\\varphi=f_*\\psi\\circ i_{\\mathcal G}$, natural in $\\mathcal G$ and $\\mathcal F$; on sections $\\varphi_V=\\psi_{f^{-1}V}\\circ\\iota^{f^{-1}V}_V$. For $V\\in I_U$ (i.e. $U\\subseteq f^{-1}V$) the restriction $f_p\\mathcal G(f^{-1}V)\\to f_p\\mathcal G(U)$ sends $\\iota^{f^{-1}V}_V$ to $\\iota^U_V$ and $\\psi$ commutes with restrictions, hence $(\\ast)$ $\\psi_U\\circ\\iota^U_V=\\rho_{U}\\circ\\varphi_V$, where $\\rho_U:\\mathcal F(f^{-1}V)\\to\\mathcal F(U)$ is the restriction of $\\mathcal F$.",
-   "uses": [
-    "def-weil-pbc-topological-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 008U, proof: 'the correspondence is determined by the rule $\\psi\\mapsto f_*\\psi\\circ i_{\\mathcal G}$'"
-   }
-  },
-  {
-   "text": "*Step 6 (linear $\\psi$ gives linear $\\varphi$).* The unit $i_{\\mathcal G}:\\mathcal G\\to f_*f_p\\mathcal G$ is $\\mathcal O$-linear for the $\\mathcal O$-structure of step 4 on $f_*(f_p\\mathcal G)$ (with $f_p\\mathcal G$ the $f_p\\mathcal O$-module of step 3): $i_{\\mathcal G,V}(ag)=\\iota^{f^{-1}V}_V(ag)=\\iota^{f^{-1}V}_V(a)\\,\\iota^{f^{-1}V}_V(g)=i_{\\mathcal O,V}(a)\\cdot i_{\\mathcal G,V}(g)$ by the defining property of the product (step 2, with $U=f^{-1}V$). If $\\psi$ is $f_p\\mathcal O$-linear, $f_*\\psi$ is $\\mathcal O$-linear by step 4, so $\\varphi=f_*\\psi\\circ i_{\\mathcal G}$ is $\\mathcal O$-linear as a composite of $\\mathcal O$-linear maps of presheaves of modules [def-weil-presheaf-modules-sheafification].",
-   "uses": [
-    "def-weil-pbc-topological-inverse-image",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 008U, proof: 'it suffices to check that the maps $i_{\\mathcal G}$ ... are compatible with module structures, which we leave to the reader' (the $i_{\\mathcal G}$ half)"
-   }
-  },
-  {
-   "text": "*Step 7 (linear $\\varphi$ gives linear $\\psi$).* Let $\\varphi=f_*\\psi\\circ i_{\\mathcal G}$ be $\\mathcal O$-linear, $U\\subseteq X$ open, $x\\in f_p\\mathcal O(U)$, $y\\in f_p\\mathcal G(U)$. By step 1 (a) and the common-index remark there are $V\\in I_U$, $a\\in\\mathcal O(V)$, $g\\in\\mathcal G(V)$ with $x=\\iota^U_V(a)$, $y=\\iota^U_V(g)$ ([lem-weil-pbc-filtered-colimit-modules-elementwise], [lem-pc-filtered-colimit-commrings-elementwise]). Then, by step 2, $(\\ast)$ of step 5, the $\\mathcal O$-linearity of $\\varphi$ (step 4 structure), the semilinearity of the restriction $\\rho_U$ of $\\mathcal F$ over $f_p\\mathcal O$, and $\\iota^{f^{-1}V}_V(a)|_U=\\iota^U_V(a)$ [def-weil-pbc-topological-inverse-image] (2): $\\psi_U(xy)=\\psi_U(\\iota^U_V(ag))=\\rho_U(\\varphi_V(ag))=\\rho_U(i_{\\mathcal O,V}(a)\\,\\varphi_V(g))=\\iota^U_V(a)\\,\\rho_U(\\varphi_V(g))=x\\,\\psi_U(\\iota^U_V(g))=x\\,\\psi_U(y)$. With additivity, $\\psi_U$ is $f_p\\mathcal O(U)$-linear for every $U$, so $\\psi$ is $f_p\\mathcal O$-linear [def-weil-presheaf-modules-sheafification]. (The source checks instead that the counit $c_{\\mathcal F}:f_pf_*\\mathcal F\\to\\mathcal F$ is linear and uses $\\psi=c_{\\mathcal F}\\circ f_p\\varphi$; the counit is not stated in [def-weil-pbc-topological-inverse-image], and the computation above, which is that check composed with $f_p\\varphi$, uses only the unit.)",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-pc-filtered-colimit-commrings-elementwise",
-    "def-weil-pbc-topological-inverse-image",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-pc-topological-pullback-common-representatives"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 008U, proof: the $c_{\\mathcal F}$ half of 'compatible with module structures, which we leave to the reader', with the colimit formula of Tag 008T"
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
    }
   },
   {
-   "text": "*Step 8 (the restricted bijection; naturality).* By steps 6 and 7 the bijection of step 5 maps the set of $f_p\\mathcal O$-linear morphisms $f_p\\mathcal G\\to\\mathcal F$ onto the set of $\\mathcal O$-linear morphisms $\\mathcal G\\to f_*\\mathcal F$, so it restricts to a bijection $\\operatorname{Hom}_{\\mathrm{PMod}(f_p\\mathcal O)}(f_p\\mathcal G,\\mathcal F)\\cong\\operatorname{Hom}_{\\mathrm{PMod}(\\mathcal O)}(\\mathcal G,f_*\\mathcal F)$ (a bijection restricted to a subset $A$ with image exactly $B$ is a bijection $A\\to B$). Naturality: for $\\mathcal O$-linear $u:\\mathcal G'\\to\\mathcal G$ and $f_p\\mathcal O$-linear $w:\\mathcal F\\to\\mathcal F'$, $f_pu$ and $f_*w$ are linear by steps 3 and 4, and the naturality identities $f_*(w\\circ\\psi\\circ f_pu)\\circ i_{\\mathcal G'}=f_*w\\circ(f_*\\psi\\circ i_{\\mathcal G})\\circ u$ hold in presheaves of abelian groups by step 5; since morphisms of presheaves of modules are morphisms of presheaves of abelian groups with a property [def-weil-presheaf-modules-sheafification], they hold for the restricted bijection. This is (3).",
+   "text": "Use the existing Mathlib module adjunction. Expanding both Hom equivalences as composition with their units and using the unit formula proves the required equality after forgetting to abelian presheaves.",
    "uses": [
     "def-weil-pbc-topological-inverse-image",
     "def-weil-presheaf-modules-sheafification"
@@ -123,21 +70,20 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 008U, statement and proof: 'what we have to prove is that under this correspondence, the subsets of module maps correspond'"
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
+  "lem-pc-topological-module-pullback-comparison",
   "def-weil-pbc-topological-inverse-image",
-  "lem-pc-filtered-colimit-commrings-elementwise",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "def-weil-presheaf-modules-sheafification"
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-topological-pullback-common-representatives"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Tag 008T (lemma-pullback-presheaf-module, line 2727), Tag 008S (lemma-pushforward-presheaf-module, line 2693), Tag 008U (lemma-adjoint-push-pull-presheaves-modules, line 2782); the checks the source leaves to the reader (compatibility with restrictions and module axioms in 008T, linearity of $i_{\\mathcal G}$ and $c_{\\mathcal F}$ in 008U) are written out by the worker, the $c_{\\mathcal F}$ check replaced by the direct computation of step 7 through the unit and the colimit formula"
+  "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12. Mathlib supplies the abstract adjunction and the generic colimit module construction. The Lean proof carries out representative, linearity, inverse-map, naturality, uniqueness, and Hom-formula computations."
  },
  "mathlib_searches": [
   {
@@ -215,5 +161,15 @@
   "group": "G1",
   "result": "pass",
   "note": "f:X->Y TopCat, O CommRingCat presheaf; f_p via TopCat.Presheaf.pullback (Lan colimit), iota = unit then restriction; (1) P with e: underlying = pullback Ab, coprojection action formula + exists-unique sectionwise map; (2) pushforward iO = restrictScalars along ring unit; (3) adj P -| pushforward iO whose homEquiv lies over the abelian homEquiv (both directions of 'exactly onto' via bijectivity); Mathlib PresheafOfModules.pullback is abstract left adjoint without the f_p/coprojection content, so existing:false correct"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a0a11",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T014718-L-890962",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four node records, unchanged interfaces, pruning report, and Stacks 008T/008S/008U; all three modules compile cleanly and use only permitted axioms."
  }
 }

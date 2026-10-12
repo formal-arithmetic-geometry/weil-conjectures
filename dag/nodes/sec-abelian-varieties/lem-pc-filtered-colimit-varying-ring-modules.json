@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-filtered-colimit-varying-ring-modules",
+ "kind": "statement",
+ "title": "Module structure on colimits over varying rings",
+ "statement": "Let $I$ be a small filtered category [def-weil-pbc-category-colimit], let $R:I\\to\\mathrm{Ring}$ and $A:I\\to\\mathrm{Ab}$ be diagrams, and give each $A(i)$ an $R(i)$-module structure. Assume transition maps are semilinear along $R(f)$, as in [def-weil-presheaf-modules-sheafification]. For colimit cocones $(L_R,\\rho_i)$ and $(L_A,\\alpha_i)$, there is a specified $L_R$-module structure on $L_A$ with $\\alpha_i(r\\cdot a)=\\rho_i(r)\\cdot\\alpha_i(a)$ for all $i,r,a$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib IsColimit.module to the semilinear diagrams and colimit witnesses. IsColimit.ι_smul proves the formula for that structure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Mathlib/Algebra/Category/ModuleCat/Stalk.lean",
+  "place": "Lines 123-155, implementing the filtered-colimit action in Stacks Tag 008T."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of modules over varying rings carries a module structure over the colimit ring compatible with coprojections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "status": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit.module",
+   "results": [
+    "CategoryTheory.Limits.IsColimit.module",
+    "CategoryTheory.Limits.IsColimit.ι_smul"
+   ],
+   "date": "2026-10-12",
+   "verdict": "Exact match: IsColimit.module gives the structure and IsColimit.ι_smul gives its coprojection formula."
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit.module|IsColimit.ι_smul",
+   "results": [
+    "123",
+    "136",
+    "138",
+    "171",
+    "182"
+   ],
+   "date": "2026-10-12",
+   "verdict": "Exact declarations read at lines 123 and 136 of Mathlib.Algebra.Category.ModuleCat.Stalk."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.IsColimit.module, CategoryTheory.Limits.IsColimit.ι_smul",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Stalk.lean",
+  "line": 123,
+  "how": "One declaration per clause: IsColimit.module constructs the module, and IsColimit.ι_smul states its coprojection formula."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Presheaf.TopologicalPullback",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "Module base-change clause, via step 2 of the presheaf module inverse-image adjunction: action on simultaneous filtered colimits.",
+   "via": [
+    "lem-pc-presheaf-module-inverse-image-adjunction",
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.Algebra.Category.ModuleCat.Stalk",
+  "declaration": "CategoryTheory.Limits.IsColimit.ι_smul",
+  "declarations": [
+   "CategoryTheory.Limits.IsColimit.module",
+   "CategoryTheory.Limits.IsColimit.ι_smul"
+  ],
+  "statement": "lemma IsColimit.ι_smul {cR : Cocone R} (hcR : IsColimit cR) {cM : Cocone M} (hcM : IsColimit cM) (i : C) (r : R.obj i) (m : M.obj i) : letI := IsColimit.module R M H hcR hcM; cM.ι.app i (r • m) = HSMul.hSMul (α := cR.pt) (β := cM.pt) (cR.ι.app i r) (cM.ι.app i m)",
+  "branch": "mathlib",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a0a11",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T014718-L-890962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a0a11",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T014718-L-890962",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four node records, unchanged interfaces, pruning report, and Stacks 008T/008S/008U; all three modules compile cleanly and use only permitted axioms."
+ }
+}

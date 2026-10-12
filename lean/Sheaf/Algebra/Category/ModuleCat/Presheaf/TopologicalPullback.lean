@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Topology.Sheaves.Presheaf
 
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.TopologicalPullbackComparison
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.TopologicalPullbackRepresentatives
+
 /-!
 # Pullback of presheaves of modules along a continuous map
 
@@ -92,53 +95,129 @@ def topologicalPullbackAdjunctionSpec {X Y : TopCat.{u}} (f : X ⟶ Y)
 `topologicalPullbackAdjunctionSpec`.
 
 Source: Stacks Project, Sheaves, Tags 008T, 008S, 008U.
-Proof, following the eight steps of the node:
+Proof: Use Mathlib's abstract module pullback and its adjunction. Its forgotten unit
+has a canonical abelian adjunct. `topologicalModulePullbackComparison` proves that
+this comparison is an isomorphism. Naturality of the two Hom equivalences makes these
+comparisons natural in G; taking their inverses gives the required natural isomorphism e.
+The abelian adjunction identity gives the unit formula for e. Naturality then expresses
+the image of a coprojection under e⁻¹ as restriction of the module unit. Linearity of
+that unit and semilinearity of restriction prove the scalar-action formula.
 
-1. The opens containing `f(U)`, ordered by reverse inclusion, form a nonempty
-filtered category: the top open is an index and intersections give common later
-indices (`def-weil-pbc-category-colimit`). The pointwise colimit description of
-`def-weil-pbc-topological-inverse-image`, together with
-`lem-pc-filtered-colimit-commrings-elementwise` and
-`lem-weil-pbc-filtered-colimit-modules-elementwise` (over the integers), says every
-ring or group section has a representative, and two representatives agree exactly
-when their restrictions agree at a later index. Finite intersections therefore
-give a common index for any finite collection of ring and group sections.
-2. For representatives `a` and `g` at a common index define their product to be
-the image of `a • g`. For a second choice of representatives, intersect the two
-indices witnessing equality of the ring and group representatives. Semilinearity
-of restrictions (`def-weil-presheaf-modules-sheafification`) identifies the two
-products there. This proves well-definedness and the coprojection formula;
-every pair has common representatives, so that formula also proves uniqueness.
-3. Represent finitely many sections at one index. Each module law is the image
-of that law at the index, since ring coprojections preserve ring operations and
-group coprojections preserve addition. Restrictions preserve coprojections, so
-are semilinear. The pullback of a module morphism preserves coprojections too,
-and its linearity follows from linearity at the common index. This uses the two
-definition nodes just cited and gives the module pullback functor.
-4. Restrict scalars on `F(f⁻¹(V))` along the ring unit at `V`. Its naturality and
-the semilinear restrictions of `F` give semilinear restrictions on direct image.
-Direct image of a morphism is linear by restriction of scalars. This uses
-`def-weil-pbc-topological-inverse-image` and
-`def-weil-presheaf-modules-sheafification`.
-5. The abelian adjunction (`def-weil-pbc-topological-inverse-image`) sends `ψ`
-to `φ = f_*ψ ∘ i_G`. Naturality and restriction of coprojections give
-`ψ_U ∘ ι_V = restriction ∘ φ_V` whenever `U ⊆ f⁻¹(V)`.
-6. The coprojection formula at `f⁻¹(V)` makes `i_G` linear for the scalar
-restriction in step 4. Thus a linear `ψ` gives a linear `φ` by composition.
-7. Conversely, represent a ring section and a group section at a common `V`
-using the two elementwise colimit lemmas of step 1. The formula of step 5,
-linearity of `φ_V`, and semilinearity of restriction give
-`ψ_U(ι(a • g)) = ι(a) • ψ_U(ι(g))`. Every pair is represented this way,
-so `ψ` is linear. This is the direct unit computation replacing the source's
-counit check, using only the two definition nodes and the elementwise lemmas.
-8. Steps 6 and 7 identify exactly the linear subsets of the abelian Hom sets.
-Restricting that bijection gives the module adjunction. Its naturality follows
-from abelian naturality, since steps 3 and 4 preserve linear morphisms and the
-forgetful functor on module morphisms is faithful.
+Transport the existing action on P(G)(U) through e to obtain a multiplication on the
+abelian pullback. Its coprojection formula follows from the scalar-action formula and
+the inverse identities. `topologicalPullbackCommonRepresentatives` represents any scalar
+and section at one common neighbourhood, so that formula uniquely determines the action.
+Finally, expand both Hom equivalences as composition with their units. The established
+unit formula makes their underlying abelian maps equal. This proves the required Hom
+formula with the module adjunction already supplied by Mathlib.
 (blueprint: lem-pc-presheaf-module-inverse-image-adjunction) -/
 theorem topologicalPullbackAdjunction {X Y : TopCat.{u}} (f : X ⟶ Y)
     (O : Y.Presheaf CommRingCat.{u}) :
     topologicalPullbackAdjunctionSpec f O := by
-  sorry
+  classical
+  let R := O ⋙ forget₂ CommRingCat RingCat
+  let O' := (TopCat.Presheaf.pullback CommRingCat.{u} f).obj O
+  let R' := O' ⋙ forget₂ CommRingCat RingCat
+  let iO := Functor.whiskerRight
+    ((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat.{u} f).unit.app O)
+    (forget₂ CommRingCat RingCat)
+  let P := pullback.{u} (F := Opens.map f) (R := R') iO
+  let adj := pullbackPushforwardAdjunction.{u} (F := Opens.map f) (R := R') iO
+  let abAdj := TopCat.Presheaf.pullbackPushforwardAdjunction Ab.{u} f
+  let c : toPresheaf R ⋙ TopCat.Presheaf.pullback Ab.{u} f ⟶ P ⋙ toPresheaf R' :=
+    { app := fun G => (abAdj.homEquiv G.presheaf (P.obj G).presheaf).symm
+        ((toPresheaf R).map (adj.unit.app G))
+      naturality := fun {G H} v => by
+        dsimp only [Functor.comp_map]
+        have hn := congrArg ((toPresheaf R).map) (adj.unit.naturality v)
+        have hn' : (toPresheaf R).map v ≫ (toPresheaf R).map (adj.unit.app H) =
+            (toPresheaf R).map (adj.unit.app G) ≫
+              (TopCat.Presheaf.pushforward Ab.{u} f).map
+                ((toPresheaf R').map (P.map v)) := by
+          apply TopCat.Presheaf.ext
+          intro V
+          ext g
+          exact ConcreteCategory.congr_hom (NatTrans.congr_app hn (op V)) g
+        exact (abAdj.homEquiv_naturality_left_symm (Y := (P.obj H).presheaf)
+          ((toPresheaf R).map v)
+          ((toPresheaf R).map (adj.unit.app H))).symm.trans
+            ((congrArg (abAdj.homEquiv G.presheaf (P.obj H).presheaf).symm hn').trans
+              (abAdj.homEquiv_naturality_right_symm (X := G.presheaf)
+                (Y := (P.obj G).presheaf) (Y' := (P.obj H).presheaf)
+                ((toPresheaf R).map (adj.unit.app G)) ((toPresheaf R').map (P.map v)))) }
+  have : ∀ G, IsIso (c.app G) := topologicalModulePullbackComparison f O
+  have : IsIso c := NatIso.isIso_of_isIso_app c
+  let e := (asIso c).symm
+  have hunit (G : PresheafOfModules.{u} R) (V : Opens Y) (g : G.obj (op V)) :
+      ((e.app G).inv.app (op ((Opens.map f).obj V))).hom
+          (((abAdj.unit.app G.presheaf).app (op V)).hom g) =
+        ((adj.unit.app G).app (op V)).hom g := by
+    have hc := (abAdj.homEquiv G.presheaf (P.obj G).presheaf).apply_symm_apply
+      ((toPresheaf R).map (adj.unit.app G))
+    rw [abAdj.homEquiv_unit] at hc
+    exact ConcreteCategory.congr_hom (NatTrans.congr_app hc (op V)) g
+  have hι (G : PresheafOfModules.{u} R) (U : Opens X) (V : Opens Y)
+      (h : U ≤ (Opens.map f).obj V) (g : G.obj (op V)) :
+      ((e.app G).inv.app (op U)).hom
+          ((topologicalPullbackSectionMap f Ab.{u} G.presheaf U V h).hom g) =
+        ((P.obj G).map (homOfLE h).op).hom
+          (((adj.unit.app G).app (op V)).hom g) := by
+    have hn := ConcreteCategory.congr_hom
+      ((e.app G).inv.naturality (homOfLE h).op)
+      ((((TopCat.Presheaf.pullbackPushforwardAdjunction Ab.{u} f).unit.app
+        G.presheaf).app (op V)).hom g)
+    exact hn.trans (congrArg ((P.obj G).map (homOfLE h).op).hom (hunit G V g))
+  have haction (G : PresheafOfModules.{u} R) (U : Opens X) (V : Opens Y)
+      (h : U ≤ (Opens.map f).obj V) (a : O.obj (op V)) (g : G.obj (op V)) :
+      @SMul.smul (R'.obj (op U)) ((P.obj G).obj (op U))
+          ((P.obj G).obj (op U)).isModule.toSMul
+          ((topologicalPullbackSectionMap f CommRingCat.{u} O U V h).hom a)
+          (((e.app G).inv.app (op U)).hom
+            ((topologicalPullbackSectionMap f Ab.{u} G.presheaf U V h).hom g)) =
+        ((e.app G).inv.app (op U)).hom
+          ((topologicalPullbackSectionMap f Ab.{u} G.presheaf U V h).hom (a • g)) := by
+    have hlin := ((adj.unit.app G).app (op V)).hom.map_smul a g
+    have hres := (P.obj G).map_smul (homOfLE h).op
+      (((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat.{u} f).unit.app
+        O).app (op V) a) (((adj.unit.app G).app (op V)).hom g)
+    rw [hι G U V h g, hι G U V h (a • g)]
+    exact hres.symm.trans (congrArg ((P.obj G).map (homOfLE h).op).hom hlin.symm)
+  refine ⟨P, e, adj, haction, ?_, ?_⟩
+  · intro G U
+    let E := (e.app G).app (op U)
+    let μ := fun (a : O'.obj (op U))
+      (g : ((TopCat.Presheaf.pullback Ab.{u} f).obj G.presheaf).obj (op U)) =>
+        E.hom.hom (@SMul.smul (R'.obj (op U)) ((P.obj G).obj (op U))
+          ((P.obj G).obj (op U)).isModule.toSMul a (E.inv.hom g))
+    have hμ : ∀ (V : Opens Y) (h : U ≤ (Opens.map f).obj V)
+        (a : O.obj (op V)) (g : G.obj (op V)),
+        μ ((topologicalPullbackSectionMap f CommRingCat.{u} O U V h).hom a)
+          ((topologicalPullbackSectionMap f Ab.{u} G.presheaf U V h).hom g) =
+            (topologicalPullbackSectionMap f Ab.{u} G.presheaf U V h).hom (a • g) := by
+      intro V h a g
+      dsimp only [μ]
+      have hh := congrArg E.hom.hom (haction G U V h a g)
+      exact hh.trans (E.inv_hom_id_apply _)
+    refine ⟨μ, hμ, ?_⟩
+    intro ν hν
+    funext a g
+    obtain ⟨V, h, b, t, hb, ht⟩ :=
+      topologicalPullbackCommonRepresentatives f O G.presheaf U a g
+    change (topologicalPullbackSectionMap f CommRingCat.{u} O U V h).hom b = a at hb
+    change (topologicalPullbackSectionMap f Ab.{u} G.presheaf U V h).hom t = g at ht
+    rw [← hb, ← ht, hν V h b t, hμ V h b t]
+  · intro G F ψ
+    rw [adj.homEquiv_unit,
+      (TopCat.Presheaf.pullbackPushforwardAdjunction Ab.{u} f).homEquiv_unit]
+    apply TopCat.Presheaf.ext
+    intro V
+    ext g
+    change (ψ.app (op ((Opens.map f).obj V))).hom
+        (((adj.unit.app G).app (op V)).hom g) =
+      (ψ.app (op ((Opens.map f).obj V))).hom
+        (((e.app G).inv.app (op ((Opens.map f).obj V))).hom
+          ((((TopCat.Presheaf.pullbackPushforwardAdjunction Ab.{u} f).unit.app
+            G.presheaf).app (op V)).hom g))
+    exact congrArg (ψ.app (op ((Opens.map f).obj V))).hom (hunit G V g).symm
 
 end PresheafOfModules

@@ -1,0 +1,164 @@
+{
+ "id": "lem-pc-topological-module-pullback-comparison",
+ "kind": "statement",
+ "title": "Canonical comparison to module pullback is an isomorphism",
+ "statement": "Let $f:X\\to Y$ be continuous and let $\\mathcal O$ be a presheaf of commutative rings on $Y$. Let $R=\\mathcal O$ and $R'=f_p\\mathcal O$ as ring-valued presheaves, and let $i_R:R\\to f_*R'$ be the unit [def-weil-pbc-topological-inverse-image]. On presheaves of modules [def-weil-presheaf-modules-sheafification], let $P\\dashv Q$ be Mathlib's abstract module pullback/direct-image adjunction for $i_R$. For each $R$-module presheaf $G$, the abelian adjunct of the forgotten module unit $G\\to QP(G)$ is a canonical map $c_G:f_p(G_{\\rm ab})\\to(P(G))_{\\rm ab}$. This map is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "For every open U, the neighbourhood diagram is filtered. The pointwise Kan-extension cocones are colimits. Forgetting commutativity preserves the ring colimit. IsColimit.module and IsColimit.ι_smul give a sectionwise module and the coprojection scalar formula.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-topological-inverse-image",
+    "lem-pc-filtered-colimit-varying-ring-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+   }
+  },
+  {
+   "text": "Use common representatives for a scalar and a section. The coprojection formula and naturality show that restrictions are semilinear. Apply ofPresheaf to form M with underlying abelian pullback. The coprojection formula at the inverse image of V proves that the abelian unit defines a module map unitM.",
+   "uses": [
+    "lem-pc-topological-pullback-common-representatives",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+   }
+  },
+  {
+   "text": "Use Mathlib pullbackPushforwardAdjunction for the ring unit to obtain abstract P and its module adjunction. The canonical map c is the abelian adjunct of its forgotten module unit. On any coprojection it is restriction of that unit, by naturality. Unit linearity, semilinear restrictions and common representatives prove c is linear from M to P(G). Bundle this as cM.",
+   "uses": [
+    "lem-pc-topological-pullback-common-representatives",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+   }
+  },
+  {
+   "text": "Let dM be the module adjunct of unitM. The module Hom bijection proves dM followed by cM is identity, since unitM followed by the direct image of cM is the abstract unit. The abelian Hom bijection proves c followed by forget(dM) is identity, using the adjunct identity for dM. Forget the first inverse identity. The resulting inverse shows c is an isomorphism.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-pc-filtered-colimit-varying-ring-modules",
+  "lem-pc-topological-pullback-common-representatives",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Presheaf module pullback forget abelian group presheaf canonical comparison isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from the topological inverse image of the underlying abelian presheaf to the underlying presheaf of the module pullback is an isomorphism",
+   "results": [
+    "SheafOfModules.pullbackObjFreeIso",
+    "SheafOfModules.freeFunctorCompPullbackIso",
+    "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+    "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+    "SheafOfModules.pullbackIso",
+    "SheafOfModules.pullbackObjFreeIso_hom_naturality",
+    "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+    "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc"
+   ],
+   "date": "2026-10-12",
+   "verdict": "Returned sheaf and free-module results do not state this abelian presheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]oPresheaf|[Cc]omparison|pullback.*[Ff]orget",
+   "results": [],
+   "date": "2026-10-12",
+   "verdict": "No direct presheaf comparison found; the generic varying-ring colimit construction in the module stalk file is used."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Presheaf.TopologicalPullback",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "Module base-change clause of def-pc-base-change, via steps 1-3 and 5-8 of the presheaf module inverse-image adjunction: identification with the abstract left adjoint.",
+   "via": [
+    "lem-pc-presheaf-module-inverse-image-adjunction",
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Presheaf.TopologicalPullbackComparison",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Presheaf/TopologicalPullbackComparison.lean",
+  "declaration": "PresheafOfModules.topologicalModulePullbackComparison",
+  "statement": "theorem topologicalModulePullbackComparison {X Y : TopCat.{u}} (f : X ⟶ Y) (O : Y.Presheaf CommRingCat.{u}) : let R := O ⋙ forget₂ CommRingCat RingCat let O' := (TopCat.Presheaf.pullback CommRingCat.{u} f).obj O let R' := O' ⋙ forget₂ CommRingCat RingCat let iO := Functor.whiskerRight ((TopCat.Presheaf.pullbackPushforwardAdjunction CommRingCat.{u} f).unit.app O) (forget₂ CommRingCat RingCat) let P := pullback.{u} (F := Opens.map f) (R := R') iO let adj := pullbackPushforwardAdjunction.{u} (F := Opens.map f) (R := R') iO ∀ G : PresheafOfModules.{u} R, IsIso (((TopCat.Presheaf.pullbackPushforwardAdjunction Ab.{u} f).homEquiv G.presheaf (P.obj G).presheaf).symm ((toPresheaf R).map (adj.unit.app G)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a0a11",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T014718-L-890962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a0a11",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T014718-L-890962",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four node records, unchanged interfaces, pruning report, and Stacks 008T/008S/008U; all three modules compile cleanly and use only permitted axioms."
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "id": "lem-pc-topological-pullback-common-representatives",
+ "kind": "statement",
+ "title": "Common representatives in ring and abelian pullbacks",
+ "statement": "Let $f:X\\to Y$ be continuous, $\\mathcal O$ a presheaf of commutative rings and $\\mathcal A$ a presheaf of abelian groups on $Y$, with pullbacks and coprojections as in [def-weil-pbc-topological-inverse-image]. For every open $U\\subseteq X$, $a\\in f_p\\mathcal O(U)$ and $g\\in f_p\\mathcal A(U)$, there exist an open $V\\subseteq Y$, $h:U\\subseteq f^{-1}V$, $b\\in\\mathcal O(V)$ and $t\\in\\mathcal A(V)$ such that $\\iota^U_V(b)=a$ and $\\iota^U_V(t)=g$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The costructured-arrow neighbourhood category at U is filtered: top is an index, intersection gives a common receiving index, and parallel morphisms agree by thinness of Opens.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+   }
+  },
+  {
+   "text": "The pointwise Kan-extension unit supplies colimit cocones for O and A. Forgetful functors from CommRingCat and Ab preserve filtered colimits. Concrete.isColimit_exists_rep gives one representative for each section.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-topological-inverse-image",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+   }
+  },
+  {
+   "text": "Take IsFiltered.max of the two indices and restrict their sections along leftToMax and rightToMax. The two cocone identities preserve the representative images and give the required common open.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008T and 008U; read on the official Stacks website on 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two elements of filtered colimits admit representatives at a common index",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two elements of filtered colimits admit representatives at a common index",
+   "results": [
+    "CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'",
+    "CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered",
+    "CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff",
+    "CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff",
+    "CategoryTheory.Limits.Types.FilteredColimit.jointly_surjective_of_isColimit₂",
+    "CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff'",
+    "CategoryTheory.Limits.Types.FilteredColimit.Rel",
+    "CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff_aux"
+   ],
+   "date": "2026-10-12",
+   "verdict": "The Type-valued pair lemma treats one diagram. Apply Concrete.isColimit_exists_rep twice for the ring and abelian diagrams and take a common later index."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_exists_rep|leftKanExtensionUnit",
+   "results": [
+    "Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean",
+    "Mathlib/AlgebraicTopology/SimplicialSet/Subdivision.lean",
+    "Mathlib/AlgebraicTopology/SingularSet.lean",
+    "Mathlib/AlgebraicTopology/SingularSet.lean",
+    "Mathlib/Condensed/Discrete/Colimit.lean",
+    "Mathlib/Condensed/Discrete/Colimit.lean",
+    "Mathlib/Condensed/Discrete/Colimit.lean",
+    "Mathlib/Condensed/Discrete/Colimit.lean"
+   ],
+   "date": "2026-10-12",
+   "verdict": "The representative and pointwise-colimit lemmas match the two ingredients; filteredness and common-index glue are proved in Lean."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Presheaf.TopologicalPullback",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "Module base-change clause of def-pc-base-change, via step 1 of the presheaf module inverse-image adjunction: common neighbourhood representatives.",
+   "via": [
+    "lem-pc-presheaf-module-inverse-image-adjunction",
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Presheaf.TopologicalPullbackRepresentatives",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Presheaf/TopologicalPullbackRepresentatives.lean",
+  "declaration": "PresheafOfModules.topologicalPullbackCommonRepresentatives",
+  "statement": "theorem topologicalPullbackCommonRepresentatives {X Y : TopCat.{u}} (f : X ⟶ Y) (O : Y.Presheaf CommRingCat.{u}) (A : Y.Presheaf Ab.{u}) (U : Opens X) (x : ((TopCat.Presheaf.pullback CommRingCat.{u} f).obj O).obj (op U)) (y : ((TopCat.Presheaf.pullback Ab.{u} f).obj A).obj (op U)) : let ι := fun (C : Type (u + 1)) [Category.{u} C] [HasColimits C] (A : Y.Presheaf C) (U : Opens X) (V : Opens Y) (h : U ≤ (Opens.map f).obj V) => ((TopCat.Presheaf.pullbackPushforwardAdjunction C f).unit.app A).app (op V) ≫ ((TopCat.Presheaf.pullback C f).obj A).map (homOfLE h).op ∃ (V : Opens Y) (h : U ≤ (Opens.map f).obj V) (a : O.obj (op V)) (g : A.obj (op V)), (ι CommRingCat.{u} O U V h).hom a = x ∧ (ι Ab.{u} A U V h).hom g = y",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a0a11",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T014718-L-890962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a0a11",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T014718-L-890962",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four node records, unchanged interfaces, pruning report, and Stacks 008T/008S/008U; all three modules compile cleanly and use only permitted axioms."
+ }
+}
