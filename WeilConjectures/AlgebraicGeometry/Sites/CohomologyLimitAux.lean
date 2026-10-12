@@ -64,6 +64,19 @@ lemma restrictAlong_comp_fst {V : T.Etale} {V' : T'.Etale}
   rw [restrictAlong, ConcreteCategory.comp_apply, ← eq_homToPullback]
   rfl
 
+/-- Restriction of sections along a morphism `a : V' ⟶ V ×_T T'` is the pullback of sections followed
+by the composition isomorphism of inverse images and restriction along `a`. -/
+lemma restrictAlong_comp_fst_eq {V : T.Etale} {V' : T'.Etale}
+    (a : V' ⟶ (MorphismProperty.Over.pullback @Etale ⊤ f).obj V) (m : V'.left ⟶ V.left)
+    (hm : m ≫ V.hom = V'.hom ≫ f) (ha : a.left ≫ pullback.fst V.hom f = m)
+    (s : ((t)^*[(ModuleCat.{u + 1} Λ)].obj G).obj.obj (op V)) :
+    restrictAlong t G f t' ht' m hm s =
+      (((t')^*[(ModuleCat.{u + 1} Λ)].obj G).obj.map a.op).hom
+        (((upperStarComp (ModuleCat.{u + 1} Λ) f t t' ht').inv.app G).hom.app _
+          (Etale.pullbackSection Λ f _ V s)) := by
+  subst ha
+  exact restrictAlong_comp_fst t G f t' ht' a s
+
 /-- **Restriction of sections commutes with the differentials of cochain complexes**: for maps
 `μ₀ : A_q ⟶ B_q` and `μ₁ : A_{q + 1} ⟶ B_{q + 1}` over `f : T' ⟶ T` commuting with the face maps,
 the differential of the restriction along `μ₀` is the restriction along `μ₁` of the differential.

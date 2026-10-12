@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHypercover
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyLimitAux
 
 /-!
 # Continuity of étale cohomology at inverse limits
@@ -58,6 +58,49 @@ noncomputable def cohomologyRestrictOver {Y Z : Scheme.{u}} (pY : Y ⟶ S) (pZ :
         ((Etale.upperStar (ModuleCat.{u + 1} Λ) pY).obj F) q :=
   (Ext.mk₀ ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) f pZ pY hf.symm).inv.app F)).postcomp _
       (add_zero q) |>.comp (Etale.cohomologyRestrict Λ f _ q)
+
+/-- **Restriction of classes of hypercover cocycles.** Let `g : Y ⟶ Z` be a morphism over `S`,
+`s` a `q`-cocycle of `F|_Z` on a hypercover `H` of `Z`, and `U` a hypercover of `Y` with morphisms
+`μ_n : U_n ⟶ H_n` over `g` (`n ≤ q`) commuting with the face maps. Then the restriction to `Y` of
+the class of `s` is the class of the restriction of `s` along `μ_q`. -/
+theorem cohomologyRestrictOver_cohomologyClass {Y Z : Scheme.{u}} (pY : Y ⟶ S) (pZ : Z ⟶ S)
+    (g : Y ⟶ Z) (hg : g ≫ pZ = pY) (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (q : ℕ) {H : SemiSimplicialObject Z.Etale} (hH : H.IsHypercover Z.smallEtaleTopology)
+    (s : ((Etale.upperStar (ModuleCat.{u + 1} Λ) pZ).obj F).obj.obj (op (H.obj q)))
+    (hs : H.IsCocycle _ q s) {U : SemiSimplicialObject Y.Etale}
+    (hU : U.IsHypercover Y.smallEtaleTopology) (μ : ∀ n, n ≤ q → ((U.obj n).left ⟶ (H.obj n).left))
+    (hμ : ∀ n (h : n ≤ q), μ n h ≫ (H.obj n).hom = (U.obj n).hom ≫ g)
+    (hμδ : ∀ n (h : n < q) (i : Fin (n + 2)),
+      (U.δ n i).left ≫ μ n h.le = μ (n + 1) h ≫ (H.δ n i).left)
+    (hs' : U.IsCocycle _ q
+      (Etale.ModuleSheaf.restrictAlong pZ F g pY hg.symm (μ q le_rfl) (hμ q le_rfl) s)) :
+    cohomologyRestrictOver Λ pY pZ g hg F q (hH.cohomologyClass _ q s hs) =
+      hU.cohomologyClass _ q _ hs' := by
+  let f (n : ℕ) (h : n ≤ q) : U.obj n ⟶ (H.baseChange g).obj n :=
+    Etale.homToPullback g (μ n h) (hμ n h)
+  have hf (n : ℕ) (h : n < q) (i : Fin (n + 2)) :
+      f (n + 1) h ≫ (H.baseChange g).δ n i = U.δ n i ≫ f n h.le :=
+    Etale.hom_ext_pullback _ (by simpa [f] using (hμδ n h i).symm)
+  have key : Etale.ModuleSheaf.restrictAlong pZ F g pY hg.symm (μ q le_rfl) (hμ q le_rfl) s =
+      (((Etale.upperStar (ModuleCat.{u + 1} Λ) pY).obj F).obj.map (f q le_rfl).op).hom
+        (((Etale.upperStarComp (ModuleCat.{u + 1} Λ) g pZ pY hg.symm).inv.app F).hom.app _
+          (Etale.pullbackSection Λ g _ (H.obj q) s)) := by
+    exact Etale.ModuleSheaf.restrictAlong_comp_fst_eq pZ F g pY hg.symm (f q le_rfl) _ _
+      (Etale.homToPullback_left_fst g (μ q le_rfl) (hμ q le_rfl)) s
+  have hw : (H.baseChange g).IsCocycle ((Etale.upperStar (ModuleCat.{u + 1} Λ) pY).obj F) q
+      (((Etale.upperStarComp (ModuleCat.{u + 1} Λ) g pZ pY hg.symm).inv.app F).hom.app _
+        (Etale.pullbackSection Λ g _ (H.obj q) s)) :=
+    SemiSimplicialObject.IsCocycle.map _
+      (hs.map ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app _))
+  rw [hU.cohomologyClass_congr _ q key hs' (key ▸ hs'),
+    (hH.baseChange g).cohomologyClass_restrict_of_le hU q f hf _ _ hw]
+  refine Eq.trans ?_ ((hH.baseChange g).cohomologyClass_map
+    ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) g pZ pY hg.symm).inv.app F) q _
+    (hs.map ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app _))).symm
+  change (Etale.cohomologyRestrict Λ g _ q (hH.cohomologyClass _ q s hs)).comp (Ext.mk₀ _)
+    (add_zero q) = _
+  rw [Etale.cohomologyRestrict_cohomologyClass]
+  rfl
 
 variable {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)
   [∀ i, CompactSpace (D.obj i).left] [∀ i, QuasiSeparatedSpace (D.obj i).left]
