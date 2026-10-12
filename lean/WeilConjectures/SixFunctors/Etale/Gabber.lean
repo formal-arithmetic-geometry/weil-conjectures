@@ -10,6 +10,12 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
+import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import Sheaf.AlgebraicGeometry.EtaleAbelianH0FiniteConnectedCriterion
+import Sheaf.AlgebraicGeometry.CofilteredEtaleCohomologyCocone
 import Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass
 import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
@@ -138,8 +144,56 @@ sheaf `G` on `Spec A`, restriction `Γ(Spec A, G) ⟶ Γ(Spec (A ⧸ I), G|)` is
 theorem bijective_cohomologyMap_zero_of_henselianRing {A : Type u} [CommRing A] (I : Ideal A)
     [HenselianRing A I] (G : Sheaf (Spec (.of A)).smallEtaleTopology AddCommGrpCat.{u + 1}) :
     Function.Bijective
-      (cohomologyMap (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) G 0) :=
-  sorry
+      (cohomologyMap (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) G 0) := by
+  let i := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
+  have : IsClosedImmersion i :=
+    IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+  have hi : Set.range i = PrimeSpectrum.zeroLocus (I : Set A) := by
+    change Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk I)) = _
+    rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective, Ideal.mk_ker]
+  have : IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} i G) := by
+    apply isIso_abelian_globalSectionsUpperStarMap_of_finite_connected_closed_intersections i
+    intro X' p hp C hC hC'
+    rw [hi]
+    exact (p.spectralSpace_and_isClosed_and_isConnected_inter I).2.2 C hC hC'
+  let a := fun g : (Sheaf.Γ _ AddCommGrpCat.{u + 1}).obj G ↦
+    (Sheaf.H.equiv₀ G terminalIsTerminal).symm
+      ((Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app G g)
+  let G₀ := (i)^*[AddCommGrpCat.{u + 1}].obj G
+  let b := fun g : (Sheaf.Γ (Spec (.of (A ⧸ I))).smallEtaleTopology
+      AddCommGrpCat.{u + 1}).obj G₀ ↦
+    (Sheaf.H.equiv₀ G₀ terminalIsTerminal).symm
+      ((Sheaf.ΓNatIsoSheafSections _ AddCommGrpCat.{u + 1}
+        terminalIsTerminal).hom.app G₀ g)
+  have ha : Function.Bijective a :=
+    (Sheaf.H.equiv₀ G terminalIsTerminal).symm.bijective.comp
+      (ConcreteCategory.bijective_of_isIso
+        ((Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app G))
+  have hb : Function.Bijective b :=
+    (Sheaf.H.equiv₀ G₀ terminalIsTerminal).symm.bijective.comp
+      (ConcreteCategory.bijective_of_isIso
+        ((Sheaf.ΓNatIsoSheafSections _ AddCommGrpCat.{u + 1}
+          terminalIsTerminal).hom.app G₀))
+  have hres := ConcreteCategory.bijective_of_isIso
+    (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} i G)
+  have hab : ∀ g, cohomologyMap i G 0 (a g) =
+      b (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} i G g) :=
+    cohomologyMap_zero_eq_globalSectionsUpperStarMap i G
+  refine ⟨?_, ?_⟩
+  · intro x y hxy
+    obtain ⟨x, rfl⟩ := ha.2 x
+    obtain ⟨y, rfl⟩ := ha.2 y
+    apply congrArg a
+    apply hres.1
+    apply hb.1
+    change cohomologyMap i G 0 (a x) = cohomologyMap i G 0 (a y) at hxy
+    rw [hab, hab] at hxy
+    exact hxy
+  · intro y
+    obtain ⟨y, rfl⟩ := hb.2 y
+    obtain ⟨x, rfl⟩ := hres.2 y
+    exact ⟨a x, hab x⟩
+
 
 end Auxiliary
 
@@ -159,8 +213,22 @@ theorem exists_cohomologyMap_eq_zero_of_isLimit {J : Type u} [SmallCategory J] [
     [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c)
     (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) {q : ℕ} (x : Sheaf.H G q) (j₀ : J)
     (hx : cohomologyMap (c.π.app j₀ ≫ π.app j₀) G q x = 0) :
-    ∃ j, cohomologyMap (π.app j) G q x = 0 :=
-  sorry
+    ∃ j, cohomologyMap (π.app j) G q x = 0 := by
+  obtain ⟨H, eH, r, hr, heH, B, hB, e, he⟩ :=
+    exists_cofiltered_etale_cohomology_cocone D π c hc G q j₀
+  have hzero : B.ι.app (Opposite.op j₀) (r j₀ x) =
+      B.ι.app (Opposite.op j₀) (0 : H.obj (Opposite.op j₀)) := by
+    apply (ConcreteCategory.bijective_of_isIso e.hom).1
+    simpa only [map_zero] using (he j₀ x).trans hx
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
+  obtain ⟨j, f, hf⟩ := (hB.eq_iff' (r j₀ x) 0).mp hzero
+  refine ⟨j.unop, ?_⟩
+  have hj : r j.unop x = 0 := by
+    rw [← hr j.unop j₀ f.unop x]
+    simpa only [Quiver.Hom.op_unop, map_zero] using hf
+  rw [← heH j.unop x, hj, map_zero]
+
 
 /-- **Constructible approximation of a class.** Let `(A, I)` be a henselian pair, `Λ` finite
 and `F` a sheaf of `Λ`-modules on `Spec A`. Every class `c ∈ Hᵠ(Spec (A ⧸ I), F|)` comes from
