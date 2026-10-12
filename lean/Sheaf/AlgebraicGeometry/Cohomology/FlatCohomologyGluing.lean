@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.Topology.ModuleMayerVietoris
 
 /-! # Mayer--Vietoris gluing of the canonical flat base-change comparison
 

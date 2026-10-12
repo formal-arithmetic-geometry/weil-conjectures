@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 import Sheaf.Paper.EtaleRestrictionPullbackUnit
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Sections on an étale object as global sections on its base change
 

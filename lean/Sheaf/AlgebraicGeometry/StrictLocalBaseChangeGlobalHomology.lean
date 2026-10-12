@@ -6,6 +6,13 @@ Authors: SHEAF group W2
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
+import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
+import Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.StrictLocalGermRestrictionIso
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # The strict-local base-change mate on global cohomology
 

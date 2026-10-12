@@ -6,6 +6,12 @@ Authors: SHEAF contributors
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! The bounded below exchange comparison. -/
 

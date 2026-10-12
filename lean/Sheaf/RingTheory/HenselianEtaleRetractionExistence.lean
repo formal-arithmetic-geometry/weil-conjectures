@@ -3,6 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+import Sheaf.RingTheory.HenselianLocalRootLifting
 
 /-! Existence part of the henselian étale retraction theorem.
 

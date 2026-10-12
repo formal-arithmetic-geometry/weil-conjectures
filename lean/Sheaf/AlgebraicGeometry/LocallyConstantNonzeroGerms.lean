@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # A nonzero morphism into a locally constant sheaf has locally nonzero germs
 

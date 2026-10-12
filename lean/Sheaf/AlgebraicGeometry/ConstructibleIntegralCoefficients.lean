@@ -10,6 +10,11 @@ public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
+import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 
 /-!
 # Constructibility of torsion sheaves with integral coefficients

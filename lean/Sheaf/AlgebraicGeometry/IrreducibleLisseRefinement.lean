@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
 
 /-! Refinement of a finite lisse stratification by irreducible strata. -/
 

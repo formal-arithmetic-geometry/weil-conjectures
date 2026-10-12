@@ -2,6 +2,12 @@ module
 
 public import Sheaf.Paper.HypercoverCohomologyColimit
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
+import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.Paper.FiniteSplitHypercoverRefinement
+import Sheaf.Paper.HypercoverFreeResolution
+import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 
 @[expose] public section
 

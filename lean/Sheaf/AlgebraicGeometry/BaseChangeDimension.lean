@@ -9,6 +9,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 @[expose] public section
 universe u

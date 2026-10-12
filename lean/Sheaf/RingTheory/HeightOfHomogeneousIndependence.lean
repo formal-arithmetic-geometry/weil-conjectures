@@ -6,6 +6,7 @@ module
 
 public import Mathlib.RingTheory.Ideal.Height
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import Sheaf.RingTheory.KrullIntersectionLocalization
 
 /-!
 # Height from homogeneous independence at a rational point

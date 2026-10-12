@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+import Sheaf.Paper.FiniteHypercoverDescent
+import Sheaf.Paper.FiniteSplitHypercoverRefinement
+import Sheaf.Paper.HypercoverCohomology
+import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 
 /-!
 # Descent of an etale cohomology class to a finite stage

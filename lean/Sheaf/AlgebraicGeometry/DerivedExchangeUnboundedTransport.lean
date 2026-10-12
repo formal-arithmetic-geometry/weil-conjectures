@@ -6,6 +6,11 @@ Authors: SHEAF contributors
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
+import Sheaf.AlgebraicGeometry.DerivedExchangeBoundedComparison
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! Transport of the exchange formula to arbitrary K-injective representatives. -/
 

@@ -12,6 +12,7 @@ import Sheaf.CategoryTheory.ColimitSiteSections
 import Sheaf.CategoryTheory.SiteCechVanishingCriterion
 import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.Paper.ColimitSitesInjectiveSystem
+import Sheaf.CategoryTheory.SiteCechComplex
 
 /-! # Every cohomology class on the colimit site is the image of a stage class.
 

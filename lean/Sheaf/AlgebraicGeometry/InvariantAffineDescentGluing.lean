@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import Sheaf.AlgebraicGeometry.AffineFpqcDescent
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
+import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
 
 /-!
 # Gluing effective affine descents

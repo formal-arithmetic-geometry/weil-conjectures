@@ -12,6 +12,7 @@ import Sheaf.Paper.StrictHenselizationLocalStructure
 import Sheaf.Paper.StrictHenselizationPointedMap
 import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.MapIntoHenselianColimit
+import Sheaf.AlgebraicGeometry.StrictHenselization
 
 /-! # Existence of the local strict-henselization map
 

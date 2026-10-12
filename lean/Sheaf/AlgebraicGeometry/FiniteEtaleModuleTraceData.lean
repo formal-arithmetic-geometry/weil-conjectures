@@ -6,6 +6,7 @@ import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.Paper.DirectImageSplitCoverProduct
 import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists
 @[expose] public section
 set_option autoImplicit false
 universe u

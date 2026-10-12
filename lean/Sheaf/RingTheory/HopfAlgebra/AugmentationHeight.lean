@@ -7,6 +7,8 @@ module
 public import Mathlib.RingTheory.HopfAlgebra.Basic
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Ideal.Height
+import Sheaf.RingTheory.IntegralExtensionDimension
+import Sheaf.RingTheory.KrullDimension.GoingDown
 
 /-!
 # The augmentation ideal has the dimension of a finite type group

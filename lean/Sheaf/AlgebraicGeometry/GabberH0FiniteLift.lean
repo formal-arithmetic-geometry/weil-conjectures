@@ -16,6 +16,7 @@ import Sheaf.Paper.SiteSheafificationSectionsLocal
 import Sheaf.Topology.ClosedPushforwardConstantStalks
 import Sheaf.Paper.GabberZariskiEtaleRestrictionInjective
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # Finite lifts with descent data in Gabber's degree-zero argument
 

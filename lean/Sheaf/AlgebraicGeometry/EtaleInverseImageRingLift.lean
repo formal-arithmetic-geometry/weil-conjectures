@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # EtaleInverseImageRingLift

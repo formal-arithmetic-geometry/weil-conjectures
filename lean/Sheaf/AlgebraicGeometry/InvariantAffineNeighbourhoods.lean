@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Invariant affine neighbourhoods for finite locally free descent

@@ -15,6 +15,7 @@ import Mathlib.CategoryTheory.Presentable.Directed
 import Mathlib.CategoryTheory.Limits.Connected
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.WithAlgebraicStructures
 import Mathlib.Algebra.Category.Grp.FilteredColimits
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Global sections of pullbacks at cofiltered limits
 

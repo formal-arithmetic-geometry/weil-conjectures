@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 import Sheaf.AlgebraicGeometry.FiniteThickeningCartesian
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.Thickening
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 /-!
 # Compatible finite étale covers of the infinitesimal fibres

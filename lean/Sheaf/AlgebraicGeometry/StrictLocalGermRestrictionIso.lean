@@ -6,6 +6,11 @@ Authors: SHEAF group W2
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import Sheaf.Paper.InverseImageStalkGerm
+import Sheaf.RingTheory.StrictHenselizationTriples
 
 /-! # The strict-local germ restriction is an isomorphism
 

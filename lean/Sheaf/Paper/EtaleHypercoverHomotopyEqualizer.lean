@@ -6,6 +6,8 @@ module
 
 public import Sheaf.Paper.FiniteSplitEtaleHypercover
 public import Sheaf.Paper.EtaleHypercover
+import Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting
+import Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember
 
 /-! Intermediate construction for finite split hypercover refinement. -/
 

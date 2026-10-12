@@ -2,6 +2,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 @[expose] public section
 

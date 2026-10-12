@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleCohomologyTriangleLaws
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Continuity for a supplied fixed-base cohomology cocone
 

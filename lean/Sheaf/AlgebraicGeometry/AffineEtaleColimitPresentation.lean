@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Category.Cat
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Sites.Pullback
+import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+import Sheaf.CategoryTheory.ColimitSites
+import Sheaf.CategoryTheory.FilteredColimitCategories
+import Sheaf.CategoryTheory.SiteEquivalenceMorphismTransport
+import Sheaf.CategoryTheory.SiteSystemStrictification
 
 /-!
 # AffineEtaleColimitPresentation

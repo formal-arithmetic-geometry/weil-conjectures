@@ -12,6 +12,7 @@ import Sheaf.CategoryTheory.ColimitSiteSections
 import Sheaf.CategoryTheory.SiteCechVanishingCriterion
 import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.Paper.ColimitSitesInjectiveSystem
+import Sheaf.CategoryTheory.SiteCechComplex
 
 /-! # A stage cohomology class vanishing on the colimit site vanishes after a transition.
 

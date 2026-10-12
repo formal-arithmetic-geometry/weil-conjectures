@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Topology.Sheaves.Functors
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.Topology.Sheaves.Stalks
+import Sheaf.Paper.SiteSheafificationSectionsLocal
 
 /-! # Stalk injectivity of Gabber's comparison
 Source: Stacks Project, Tag 09ZF, first proof paragraph.

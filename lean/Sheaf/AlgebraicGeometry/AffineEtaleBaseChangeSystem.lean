@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Category.Cat
 public import Mathlib.CategoryTheory.Sites.Pullback
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # AffineEtaleBaseChangeSystem

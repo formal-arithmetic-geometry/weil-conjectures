@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.Paper.PowerSetComplexContractible
 
 /-!
 # The cocycle lifting step for injective module presheaves

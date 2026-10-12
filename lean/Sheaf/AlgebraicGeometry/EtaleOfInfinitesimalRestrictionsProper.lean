@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdicCompletion.Basic
 import Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoods
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Étaleness detected by infinitesimal restrictions with proper source
