@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-constructible-stalk-cardinality-bound",
+ "kind": "statement",
+ "title": "Uniform finite geometric stalk cardinality bound for constructible abelian sheaves",
+ "statement": "Let X be a Noetherian scheme [def-pc-scheme] and F an abelian sheaf on its small etale site [def-weil-pbc-etale-sheaves]. Assume its underlying sheaf of sets is constructible in the finite-stratification sense [def-weil-pbc-etale-sheaves]. There is a natural number N such that, for every point x of X, the stalk of F at the point Spec of the algebraic closure of the residue field of x [def-weil-pbc-geometric-stalks] is finite and has cardinality at most N. No curve, dimension, base field or torsion hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definition 03RW and Lemma 095E; finite trivializing subcover and constant-value cardinality argument in step 1 of lem-weil-pbc-curve-constructible-annihilator; online sources https://stacks.math.columbia.edu/tag/03RW and https://stacks.math.columbia.edu/tag/095E"
+ },
+ "proof": [
+  {
+   "text": "Unpack the finite constructible stratification. Each immersion identifies its domain with a subspace of the Noetherian space X. Every such subspace is Noetherian and quasi-compact. On each stratum choose its trivializing etale cover. The images are open and cover the stratum, so compactness gives a finite subcover. Delete empty members. This argument uses Mathlib IsCompact.elim_finite_subcover and the open-map property of etale maps.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a retained nonempty cover member choose an algebraic-closure residue-field point. Localize the site point at that lift. The restricted stalk equals the stratum stalk, by the initial over-category forgetful functor and its colimit isomorphism. The local constant-sheaf isomorphism identifies this stalk with the constant value. The general-site sheafFiberConstantSheafIso, valid for Type-valued sheaves too, proves this by sheafification and a connected constant colimit. Finiteness of the stratum stalk therefore makes the value finite. No group operation table or integral coefficient comparison is needed.",
+   "uses": [
+    "lem-weil-pbc-colimit-constant-connected-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the maximum of these finitely many cardinalities, using zero if there are no retained members. For any algebraic-closure residue-field point of X, choose the unique stratum containing its image. The point factors through the stratum immersion: the open part contains the image and the closed-part ideal vanishes in the field. Lift this point to a selected etale cover member using the geometric lift lemma. The constant-value stalk comparison gives a finite set of cardinality at most the maximum.",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bijective set-valued comparison etaleSetInverseImageStalkGerm identifies the stratum stalk with the original stalk. Forgetting abelian groups commutes with stalks because it preserves the filtered colimits over pointed neighbourhoods (Point.sheafFiberCompIso). Hence the same cardinality and finiteness hold for the abelian stalk. For the empty scheme all assertions are vacuous; for the zero sheaf the cardinality is one.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Finite bound part of original annihilator proof, excluding all finite-group annihilation and all morphism extensionality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a constructible sheaf of finite sets on a Noetherian scheme geometric stalk cardinalities have a uniform finite bound",
+   "results": "8 hits: AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.LocallyOfFiniteType.stalkMap, AlgebraicGeometry.Scheme.Hom.isConstructible_image, Module.isLocallyConstant_rankAtStalk_freeLocus, SheafOfModules.GeneratingSections.IsFiniteType.finite, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+   "date": "2026-10-12",
+   "verdict": "no matching uniform geometric-stalk cardinality bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, Nat.card",
+   "results": "2 hits: AlgebraicGeometry.AffineSpace.smoothOfRelativeDimension, AlgebraicGeometry.AffineSpace.smoothOfRelativeDimension_of_card_eq",
+   "date": "2026-10-12",
+   "verdict": "no matching uniform geometric-stalk cardinality bound"
+  },
+  {
+   "tool": "grep",
+   "query": "(stalk|sheafFiber).*(card|bound)|(card|bound).*(stalk|sheafFiber)",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Stalk.lean",
+   "date": "2026-10-12",
+   "verdict": "no matching uniform geometric-stalk cardinality bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constructible sheaf of finite sets on a Noetherian scheme has a uniform bound on the cardinalities of its geometric stalks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "service unavailable; no absence verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleCurveAnnihilator",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-curve-constructible-sub-part",
+   "place": "finite torsion bound, first step: only the geometric finite cardinality bound",
+   "via": [
+    "lem-weil-pbc-curve-constructible-annihilator"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleStalkCardinalityBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleStalkCardinalityBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_stalk_cardinality_bound_of_constructible",
+  "statement": "theorem exists_stalk_cardinality_bound_of_constructible\n    (X : Scheme.{u}) [IsNoetherian X]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hF : IsConstructibleEtaleSheafOfSets\n      ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F)) :\n    ∃ N : ℕ, ∀ x : X,\n      Finite (((pointSmallEtale (X.algClosurePoint x)).sheafFiber\n        (A := AddCommGrpCat.{u + 1})).obj F) ∧\n      Nat.card (((pointSmallEtale (X.algClosurePoint x)).sheafFiber\n        (A := AddCommGrpCat.{u + 1})).obj F) ≤ N",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T085346-L-42550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T085346-L-42550",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

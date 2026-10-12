@@ -13,32 +13,33 @@
  },
  "proof": [
   {
-   "text": "The curve is Noetherian since it is of finite type over a field. Every locally closed stratum of its finite constructible stratification is quasi-compact. The open images of a trivializing etale cover have a finite subcover; discard empty members. Constant underlying set sheaves have finite values because their geometric stalks are finite. Every stalk group on a selected member has order equal to the cardinality of that value. The factorial of that cardinality kills each such finite group. Multiply the finitely many positive factorials, taking 1 in the empty case.",
+   "text": "Apply the uniform finite stalk-cardinality bound on the Noetherian curve. Noetherianity follows from finite type over the field, and quasi-compactness from the curve structure morphism.",
    "uses": [
-    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+    "lem-weil-pbc-constructible-stalk-cardinality-bound"
    ],
    "elementary": false
   },
   {
-   "text": "Pullback identifies stratum stalks with the original stalks, so multiplication by this positive integer vanishes at every geometric stalk. Exactness implies that its image has zero stalks. Conservativity implies that image is zero, hence the multiplication morphism is zero.",
+   "text": "Let N be the bound. Choose n = N factorial, which is positive including N = 0. At each algebraic-closure residue-field point, the stalk group is finite and nonempty, so its cardinality is positive and at most N. Nat.dvd_factorial makes its cardinality divide n. Mathlib card_nsmul_eq_zero' (Lagrange) and mul_nsmul show n annihilates every element of the stalk group. Additivity of sheafFiber identifies the stalk map of n times the identity with this zero homomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the source library's Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint, the jointly faithful consequence of geometric-stalk conservativity, to conclude n times the identity of F equals zero. This avoids forming an image and separately invoking exactness.",
    "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "prop-weil-pbc-geometric-stalks-exact",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-constructible-stalk-cardinality-bound",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Finite-bound argument of the parent node, from Definition 03RW and Lemma 095E"
+  "place": "Original finite-bound argument, with cardinality maximum and factorial followed by direct jointly faithful stalk extensionality; implemented by U2."
  },
  "mathlib_searches": [
   {
@@ -113,9 +114,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T060740-L-2908850",
+  "landing": "20261012T085346-L-42550",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
