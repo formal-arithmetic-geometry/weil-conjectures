@@ -20,33 +20,27 @@
  },
  "proof": [
   {
-   "text": "Apply the finite unramified one-point closed-immersion theorem to every piece. Intersect its finitely many open neighbourhoods and replace pieces by their base changes. Closed immersions are stable under base change.",
+   "text": "Apply the finite unramified one-point closed-immersion theorem to every piece. Since each piece is finite over U and the projection to U is separated, IsProper.of_comp makes its open inclusion proper, hence its image is closed.",
    "uses": [
     "lem-weil-pbc-finite-unramified-one-point-closed",
-    "lem-weil-pbc-open-fibre-product",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The projection of the ambient pullback is separated. Each piece is proper over the base, hence its inclusion into the pullback is proper by the proper-over-separated theorem. Consequently each open piece is closed.",
-   "uses": [
     "lem-weil-pbc-proper-over-separated",
-    "def-weil-proper-morphism"
+    "def-weil-proper-morphism",
+    "def-weil-finite-integral-morphism"
    ],
    "elementary": false
   },
   {
-   "text": "Each pairwise intersection is closed in a finite piece and has closed image in the base. This image avoids the chosen point by the uniqueness and distinctness hypotheses. Delete the finite union of those images.",
+   "text": "Intersect the finitely many neighbourhoods supplied for the pieces. For each pair of distinct indices, the intersection is closed in the first finite piece, so its image in U is closed. Uniqueness of the marked fibre points and injectivity show that every such image avoids u. Remove these images and base change the family to the remaining open B.",
    "uses": [
     "def-weil-finite-integral-morphism"
    ],
    "elementary": false
   },
   {
-   "text": "Base change all pieces to the remaining open. Identify them as opens of the new pullback. They are disjoint, closed, and closed immersions over the new base. The marked points persist and exhaustion persists since open base change does not change the fibre at the retained point.",
+   "text": "The pullback of each piece is the preimage open. Pullback pasting identifies its morphism to B with a further restriction of the closed immersion over its chosen neighbourhood, so it remains a closed immersion. The deleted pairwise images make the pieces pairwise disjoint, and pullback along B preserves the marked points and the stated exhaustion.",
    "uses": [
     "lem-weil-pbc-open-fibre-product",
+    "def-weil-closed-immersion",
     "def-weil-open-immersion"
    ],
    "elementary": false
@@ -54,17 +48,17 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-unramified-one-point-closed",
-  "lem-weil-pbc-open-fibre-product",
-  "def-weil-closed-immersion",
   "lem-weil-pbc-proper-over-separated",
   "def-weil-proper-morphism",
   "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-closed-immersion",
   "def-weil-open-immersion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale.tex",
-  "place": "Tag 04DG (lemma-finite-unramified-one-point), then Tag 04HI (lemma-unramified-etale-local-technical), the pairwise-intersection deletion argument; Tag 01W6 for proper-over-separated"
+  "place": "Tag 04DG followed by Tag 04HI and the pairwise-intersection deletion argument; proper-over-separated is Tag 01W6"
  },
  "mathlib_searches": [
   {
@@ -140,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-165c5",
-  "group": "K1",
+  "reviewer": "COMPILER",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T063513-L-3156682",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the delivered theorem and helper signatures with their nodes, geometric constructions with cited sources, imports with public dependency closure, and proofs with compilation and axiom probes."
+  "landing": "20261012T085312-L-28634",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
