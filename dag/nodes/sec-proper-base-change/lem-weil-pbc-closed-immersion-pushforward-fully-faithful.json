@@ -29,93 +29,41 @@
  ],
  "proof": [
   {
-   "text": "Reduction to stalks. Let $\\mathcal G$ be an $\\mathcal O_Z$-module. The counit $\\varepsilon_{\\mathcal G}:i^*i_*\\mathcal G\\to\\mathcal G$ of $i^*\\dashv i_*$ is a morphism of $\\mathcal O_Z$-modules [def-pc-module-pullback], so it is an isomorphism as soon as its stalk map $(\\varepsilon_{\\mathcal G})_z:(i^*i_*\\mathcal G)_z\\to\\mathcal G_z$ [def-weil-pbc-module-stalk] is bijective for every $z\\in Z$ [lem-weil-pbc-module-iso-on-stalks] ($Z$ is a scheme). Fix $z\\in Z$ and put $x=i(z)$.",
+   "text": "For G on Z, the unit at i_*G is epimorphic by the epi clause of closedImmersion_unit_kernel. The right triangle identity makes i_*(counit G) its retraction. An epimorphic split monomorphism is invertible, and its retraction is its inverse. Thus the pushed-forward counit is invertible.",
    "uses": [
-    "def-pc-module-pullback",
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-module-iso-on-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS (lemma-i-star-equivalence), proof, first paragraph: 'We check this on stalks. Say z in Z and x = i(z).'"
-   }
-  },
-  {
-   "text": "The local ring map is surjective. Let $\\varphi=i^\\sharp_z:\\mathcal O_{X,x}\\to\\mathcal O_{Z,z}$, $a_x\\mapsto(i^\\sharp_V(a))_z$ for $a\\in\\mathcal O_X(V)$. It is the composite of the stalk map $\\mathcal O_{X,x}\\to(i_*\\mathcal O_Z)_x$ of $i^\\sharp:\\mathcal O_X\\to i_*\\mathcal O_Z$ with the bijection $c_z:(i_*\\mathcal O_Z)_x\\to\\mathcal O_{Z,z}$ of [lem-weil-pbc-closed-pushforward-stalks](2) for $\\mathcal G=\\mathcal O_Z$ ($i$ is a homeomorphism onto the closed subset $i(Z)$ [def-weil-closed-immersion]). Since $i^\\sharp$ is surjective as a map of sheaves [def-weil-closed-immersion], its stalk map at $x$ is surjective [lem-weil-pbc-locally-surjective-iff-stalks]; hence $\\varphi$ is surjective.",
-   "uses": [
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-locally-surjective-iff-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS (lemma-i-star-equivalence), proof, first paragraph: 'the fact that O_{Z,z} is a quotient of O_{X,x}'"
-   }
-  },
-  {
-   "text": "Sections of $i^*i_*\\mathcal G$ coming from $i_*\\mathcal G$. For $V\\subseteq X$ open and $t\\in(i_*\\mathcal G)(V)=\\mathcal G(i^{-1}V)$ write $i^*t\\in(i_*i^*i_*\\mathcal G)(V)=(i^*i_*\\mathcal G)(i^{-1}V)$ for the image of $t$ under the unit $\\eta_{i_*\\mathcal G}$. The triangle identity $i_*(\\varepsilon_{\\mathcal G})\\circ\\eta_{i_*\\mathcal G}=\\mathrm{id}_{i_*\\mathcal G}$ of the adjunction [def-pc-module-pullback], evaluated on $V$, says $\\varepsilon_{\\mathcal G}(i^*t)=t$ in $\\mathcal G(i^{-1}V)$.",
-   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-kernel",
     "def-pc-module-pullback"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Section 'Adjoint functors' (Definition 0037, definition-adjoint, and the unit/counit formulation); used implicitly in Modules 08KS, proof, first paragraph ('the canonical map i^*i_*F -> F')"
-   }
+   "elementary": false
   },
   {
-   "text": "The stalk of the counit at $z$ is bijective. Put $N=(i_*\\mathcal G)_x$, an $\\mathcal O_{X,x}$-module. Let $\\gamma:(i^*i_*\\mathcal G)_z\\to N\\otimes_{\\mathcal O_{X,x}}\\mathcal O_{Z,z}$ be the isomorphism of [lem-weil-pbc-module-stalk-pullback] (tensor product formed with $\\varphi$), under which $(i^*t)_z\\mapsto t_x\\otimes1$ for $t\\in(i_*\\mathcal G)(V)$, $x\\in V$; and let $c_z:N\\to\\mathcal G_z$, $t_x\\mapsto t_z$, be the bijection of [lem-weil-pbc-closed-pushforward-stalks](2). Let $d=(\\varepsilon_{\\mathcal G})_z\\circ\\gamma^{-1}:N\\otimes_{\\mathcal O_{X,x}}\\mathcal O_{Z,z}\\to\\mathcal G_z$, an additive map. Every element of $N$ is a germ $t_x$ [def-weil-pbc-module-stalk], and by the previous step $d(t_x\\otimes1)=(\\varepsilon_{\\mathcal G})_z((i^*t)_z)=(\\varepsilon_{\\mathcal G}(i^*t))_z=t_z=c_z(t_x)$; so $d(n\\otimes1)=c_z(n)$ for all $n\\in N$. As $\\varphi$ is surjective (step 2), each $b\\in\\mathcal O_{Z,z}$ is $\\varphi(\\tilde b)$ and $n\\otimes b=\\tilde bn\\otimes1$; hence every element of $N\\otimes\\mathcal O_{Z,z}$ is a finite sum $\\sum_kn_k\\otimes1=(\\sum_kn_k)\\otimes1$, i.e. of the form $n\\otimes1$. Therefore $d$ is surjective ($c_z$ is) and injective ($d(n\\otimes1)=0$ gives $c_z(n)=0$, so $n=0$). Thus $d$ is bijective and $(\\varepsilon_{\\mathcal G})_z=d\\circ\\gamma$ is bijective.",
+   "text": "At every z in Z, the natural isomorphisms between the stalks of closed pushforwards at i(z) and the original stalks at z conjugate the stalk map of the pushed-forward counit to the stalk map of the counit. The former is an isomorphism since the pushed-forward counit is. Hence the counit is an isomorphism by the stalk criterion and reflection of isomorphisms by the underlying presheaf functor.",
    "uses": [
-    "lem-weil-pbc-module-stalk-pullback",
     "lem-weil-pbc-closed-pushforward-stalks",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS (lemma-i-star-equivalence), proof, first paragraph: the displayed chain (i^*i_*F)_z = (i_*F)_x (x) O_{Z,z} = F_z (x) O_{Z,z} = F_z by Sheaves 0098 (lemma-stalk-pullback-modules) and Sheaves 00AE (lemma-stalks-closed-pushforward), literature/stacks-project/sheaves.tex"
-   }
-  },
-  {
-   "text": "The counit is an isomorphism. By the previous step $(\\varepsilon_{\\mathcal G})_z$ is bijective for every $z\\in Z$, so $\\varepsilon_{\\mathcal G}$ is an isomorphism of $\\mathcal O_Z$-modules [lem-weil-pbc-module-iso-on-stalks].",
-   "uses": [
     "lem-weil-pbc-module-iso-on-stalks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS (lemma-i-star-equivalence), proof, first paragraph: 'is an isomorphism. We check this on stalks.'"
-   }
+   "elementary": false
   },
   {
-   "text": "Full faithfulness. Apply [lem-weil-pbc-adjunction-counit-iso-right-fully-faithful] to the adjunction $i^*\\dashv i_*$ between $\\mathrm{Mod}(\\mathcal O_X)$ and $\\mathrm{Mod}(\\mathcal O_Z)$ [def-pc-module-pullback], whose counit is an isomorphism at every $\\mathcal O_Z$-module by the previous step: $\\varphi\\mapsto i_*\\varphi$ is a bijection $\\operatorname{Hom}_{\\mathcal O_Z}(\\mathcal G,\\mathcal G')\\to\\operatorname{Hom}_{\\mathcal O_X}(i_*\\mathcal G,i_*\\mathcal G')$.",
+   "text": "Install the componentwise counit isomorphisms, use Adjunction.fullyFaithfulROfIsIsoCounit, and extract injectivity and surjectivity of pushforward on every hom-set.",
    "uses": [
-    "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful",
-    "def-pc-module-pullback"
+    "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS (lemma-i-star-equivalence), proof, first paragraph: 'It follows that i_* is fully faithful'; Categories, Lemma 07RB (lemma-adjoint-fully-faithful) (2), literature/stacks-project/categories.tex"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-closed-immersion-unit-kernel",
   "def-pc-module-pullback",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-module-iso-on-stalks",
   "lem-weil-pbc-closed-pushforward-stalks",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-locally-surjective-iff-stalks",
-  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-module-iso-on-stalks",
   "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 08KS (lemma-i-star-equivalence), proof, first paragraph, with Sheaves 0098 and 00AE (literature/stacks-project/sheaves.tex) and Categories 07RB (literature/stacks-project/categories.tex)"
+  "by": "worker",
+  "group": "X3",
+  "date": "2026-10-13",
+  "description": "Shorter categorical argument using the existing unit-kernel theorem (Modules 08KS / Morphisms of Spaces 04CJ), the right triangle identity, closed pushforward stalks (Sheaves 00AE), and counit/full-faithfulness (Categories 07RB). No new intermediate statement."
  },
  "mathlib_searches": [
   {
@@ -202,5 +150,15 @@
   "group": "C1",
   "result": "pass",
   "note": "Z,X schemes + i:Z⟶X [IsClosedImmersion i]; i^*=tensorPullback (not abstract pullback) ⊣ Scheme.Modules.pushforward via recorded nonempty adjunction (counit-iso independent of choice); ∀G IsIso counit; ∀G G' Bijective φ↦i_*φ; O_X-module version, not a duplicate of étale 04CA"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T163624-L-2789102",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
