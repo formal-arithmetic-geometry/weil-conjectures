@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-affine-complement-reciprocal-cover",
+ "kind": "statement",
+ "title": "A reciprocal function on a neighbourhood of a finite affine complement",
+ "statement": "Let $X$ be an integral [def-pc-integral-scheme], separated [def-weil-proper-morphism], locally Noetherian [pqf-def-locnoeth] quasi-compact [def-weil-pbc-quasi-compact-scheme] scheme [def-pc-scheme] of topological Krull dimension one [def-kun-topological-krull-dimension]. Let $U$ be a nonempty affine open with finite complement. There exist an open $V$, $f\\in\\mathcal O_X(U)$ and $g\\in\\mathcal O_X(V)$ such that $U\\cup V=X$, the restrictions of $f$ and $g$ to $U\\cap V$ multiply to $1$, and $D(g)=U\\cap V$, where $D(g)$ denotes the points of $V$ at which the germ of $g$ is a unit in the local ring.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NB (varieties-lemma-find-globally-generated), proof, first paragraph and the open covering"
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "For every x outside U, its stalk is a Noetherian local domain with fraction field k(X). Its dimension is at most one by the generalization-chain description; the generic point lies in the nonempty U and strictly generalizes x, giving dimension at least one. The affine ring O(U) also has fraction field k(X). Separatedness gives the surjectivity of O(U) tensor O_{X,x} -> k(X).",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-sc-separated-affine-function-field-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the common-denominator theorem to the finite family of local stalks. Local rings are semilocal and their Jacobson radical is their maximal ideal. Obtain nonzero f in O(U) whose inverse has a representative b_x in each maximal ideal.",
+   "uses": [
+    "lem-sc-jacobson-denominator-function-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent each b_x on a neighbourhood V_x of x. Representatives agree on overlaps: their images in k(X) are the same inverse of f, and sections on nonempty opens inject into k(X); empty overlaps have unique sections. Glue them by the structure-sheaf axiom to g on V = union V_x. Then U union V = X. On U intersect V, fg = 1 by the same injectivity. Thus g is a unit there, while at each x outside U its germ is b_x in the maximal ideal. Hence D(g) = U intersect V. If the complement is empty, take V empty and f = 1.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-separated-affine-function-field-surjective",
+  "lem-sc-jacobson-denominator-function-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NB (varieties-lemma-find-globally-generated), proof, first paragraph and the open covering"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral separated scheme affine open finite complement reciprocal regular function vanishing at complement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "globally generated invertible sheaf section whose nonvanishing locus is prescribed affine open on integral separated curve",
+   "results": "8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen, AlgebraicGeometry.Scheme.affineBasicOpen, AlgebraicGeometry.IsAffineOpen.basicOpen, AlgebraicGeometry.Scheme.basicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.isLocalization_away_of_isAffine",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "nonvanishingLocus|GeneratingSections",
+   "results": "15 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FindGloballyGenerated",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "## Proof, first sentence: the proper curve C must first be shown projective; via Stacks 09NZ and 09NX, 09NX proof, first paragraph: ample invertible sheaves on the positive-dimensional irreducible components by 09ND; 09ND (varieties-lemma-dim-1-noetherian-integral-separated-has-ample), proof, third sentence: 'Thus by Lemma 09NB (varieties-lemma-find-globally-generated) we can find a pair (L_i, s_i)'; within 09NB: Varieties Lemma 09NB (varieties-lemma-find-globally-generated), proof, first paragraph and the open covering",
+   "via": [
+    "lem-sc-find-globally-generated",
+    "lem-sc-integral-dim-one-ample",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineComplementReciprocalCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComplementReciprocalCover.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_complement_reciprocal_cover",
+  "statement": "theorem exists_affine_complement_reciprocal_cover (X : Scheme.{u}) [IsIntegral X] [X.IsSeparated] [IsLocallyNoetherian X] [CompactSpace X] (hdim : topologicalKrullDim X = 1) (U : X.Opens) (hU : IsAffineOpen U) (hne : (U : Set X).Nonempty) (hfin : (Set.compl (U : Set X)).Finite) : ∃ (V : X.Opens) (f : Γ(X, U)) (g : Γ(X, V)), U ⊔ V = ⊤ ∧ X.presheaf.map (homOfLE inf_le_left).op f * X.presheaf.map (homOfLE inf_le_right).op g = 1 ∧ X.basicOpen g = U ⊓ V",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T110320-L-622476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T110320-L-622476",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -34,87 +34,36 @@
  ],
  "proof": [
   {
-   "text": "Write U=Spec(A), let K=k(X), and for each point x_i of the finite complement put B_i=O_{X,x_i} and m_i=m_{x_i}. Because X is Noetherian, x_i lies in an affine open Spec(R) of X with R Noetherian [pqf-def-locnoeth]; B_i is the stalk of Spec(R) at the prime x_i, a localization of R [lem-weil-pbc-spec-domain-stalks-function-field], hence Noetherian [lem-weil-pbc-localization-noetherian]; by [lem-sc-scheme-stalk-dimension-generalization-chains] and dim X=1 [def-kun-topological-krull-dimension], dim B_i is at most 1. The generic point belongs to the nonempty open U and differs from x_i, so (0) is strictly below m_i in B_i; hence dim B_i=1 [def-weil-pbc-krull-dimension-ring] and Spec(B_i) has exactly the generic and closed points. Since x_i is outside U, the pullback U\\times_X Spec(B_i) is the generic point Spec(K). The rings A and B_i embed in K [lem-sc-integral-scheme-stalks-in-function-field]. By separatedness, [lem-sc-separated-affine-function-field-surjective] gives a surjection A \\otimes B_i \\to K for every i.",
+   "text": "Apply the reciprocal-cover lemma to obtain V,f,g with U union V = X, fg = 1 on the overlap, and D(g) = U intersect V.",
    "uses": [
-    "def-sc-function-field",
-    "pqf-def-locnoeth",
-    "lem-weil-pbc-spec-domain-stalks-function-field",
-    "lem-weil-pbc-localization-noetherian",
-    "def-kun-topological-krull-dimension",
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-sc-scheme-stalk-dimension-generalization-chains",
-    "lem-sc-integral-scheme-stalks-in-function-field",
-    "lem-sc-separated-affine-function-field-surjective"
+    "lem-sc-affine-complement-reciprocal-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NB, proof, opening paragraph through the sentence applying separatedness"
-   }
+   "elementary": false
   },
   {
-   "text": "By step 1 each B_i is a Noetherian one-dimensional local domain; it is therefore semilocal, is a subring of K, and has fraction field K by [lem-sc-integral-scheme-stalks-in-function-field]. The nonempty affine U=Spec(A) has K as its fraction field by [lem-sc-integral-function-field-affine-fraction]. Applying [lem-sc-jacobson-denominator-function-field] to A and the B_i produces a nonzero f\\in A with f^{-1}\\in m_i for all i (the Jacobson radical of a local ring is its maximal ideal).",
+   "text": "Apply the reciprocal-cover line-bundle construction to obtain invertible L and compatible global sections s,t with X_s = U and V contained in X_t.",
    "uses": [
-    "lem-sc-integral-scheme-stalks-in-function-field",
-    "lem-sc-integral-function-field-affine-fraction",
-    "lem-sc-jacobson-denominator-function-field"
+    "lem-sc-reciprocal-cover-line-bundle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NB, proof, sentence applying Lemma 09N5"
-   }
+   "elementary": false
   },
   {
-   "text": "For each i, the condition f^{-1}\\in B_i means that f^{-1} is regular on some open neighbourhood U_i of x_i. The opens U and U_i cover X: U contains every point outside the finite complement, and U_i contains x_i. On U\\cap U_i the two regular functions f and f^{-1} are inverse units (their product has germ 1 in K, and O_X(U\\cap U_i)\\to K is injective [lem-sc-integral-scheme-stalks-in-function-field]), and on U_i\\cap U_j use the unit 1 as transition function.",
+   "text": "Form the family indexed by ULift (Fin 2) selecting s at 0 and t at 1. Every point belongs to U or V, hence to the nonvanishing locus of one of these two sections. The invertible generating-sections fibre criterion makes the associated free-module map an epimorphism. Its index type and section family therefore give GeneratingSections L. Return L and the value of s at the terminal open.",
    "uses": [
-    "lem-sc-integral-scheme-stalks-in-function-field"
+    "lem-weil-pbc-invertible-generating-sections-fibre"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NB, proof, construction of the open covering"
-   }
-  },
-  {
-   "text": "The transition functions f on U\\cap U_i, 1 on U_i\\cap U_j, and their inverses on reversed overlaps satisfy the Cech cocycle identities. By [lem-sc-glue-component-transition-cocycle] they glue the trivial modules on this open cover to an invertible module L. The local frames define a section s equal to 1 on U and f^{-1} on U_i, and a section t equal to f on U and 1 on U_i; compatibility follows from the chosen transition functions.",
-   "uses": [
-    "lem-sc-glue-component-transition-cocycle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NB, proof, Cech 2-cocycle and the two sections"
-   }
-  },
-  {
-   "text": "The section s is nowhere vanishing on U, while on each U_i its representative f^{-1} lies in the maximal ideal m_i and hence vanishes at x_i; therefore X_s=U. The section t is nowhere vanishing on every U_i, so X_t contains their union. Consequently s and t generate L at every point, and L is generated by global sections. This proves the claim.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NB, proof, final paragraph"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-function-field",
-  "pqf-def-locnoeth",
-  "lem-weil-pbc-spec-domain-stalks-function-field",
-  "lem-weil-pbc-localization-noetherian",
-  "def-kun-topological-krull-dimension",
-  "def-weil-pbc-krull-dimension-ring",
-  "lem-sc-scheme-stalk-dimension-generalization-chains",
-  "lem-sc-integral-scheme-stalks-in-function-field",
-  "lem-sc-separated-affine-function-field-surjective",
-  "lem-sc-integral-function-field-affine-fraction",
-  "lem-sc-jacobson-denominator-function-field",
-  "lem-sc-glue-component-transition-cocycle"
+  "lem-sc-affine-complement-reciprocal-cover",
+  "lem-sc-reciprocal-cover-line-bundle",
+  "lem-weil-pbc-invertible-generating-sections-fibre"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09NB (varieties-lemma-find-globally-generated), proof"
+  "place": "Varieties Lemma 09NB: reciprocal-cover construction, two local section pairs, and global generation. Lean combination by U1, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -192,5 +141,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T110320-L-622476",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
