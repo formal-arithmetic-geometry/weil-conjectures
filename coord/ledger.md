@@ -7401,3 +7401,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExtension (stage 3; reviewer PASS; first push; landing 20261012T110315-L-620526 (interface); batch 20261012T110249; modules 4; new nodes 3)
 - 11:03 L: merged deliver/Q3/Sheaf.Algebra.Homology.TotalFreeFiltration (stage 3; reviewer PASS; first push; landing 20261012T110316-L-620628 (interface); batch 20261012T110249; modules 4; new nodes 3)
 - 11:03 L: merged deliver/R1/Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle (stage 3; reviewer PASS; first push; landing 20261012T110316-L-620727 (interface); batch 20261012T110249; modules 2; new nodes 1)
+- 11:03 L: merged deliver/R2/Sheaf.AlgebraicGeometry.ProjGradedModuleSheafStalks (stage 3; reviewer PASS; first push; landing 20261012T110316-L-620869 (interface); batch 20261012T110249; modules 3; new nodes 2)

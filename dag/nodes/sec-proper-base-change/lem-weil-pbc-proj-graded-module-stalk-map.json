@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleSheafStalks",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proj-graded-module-sheaf-stalks",
+   "place": "Intermediate decomposition of proof step 1/4",
+   "via": [
+    "lem-weil-pbc-proj-graded-module-sheaf-stalks"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of a sheaf of graded modules on Proj is the degree zero localization at the homogeneous prime",
+   "results": "AlgebraicGeometry.homogeneousLocalizationToStalk, AlgebraicGeometry.stalkToFiberRingHom, AlgebraicGeometry.Proj.stalkIso, AlgebraicGeometry.homogeneousLocalizationToStalk_stalkToFiberRingHom, AlgebraicGeometry.Proj.stalkIso', AlgebraicGeometry.stalkToFiberRingHom_homogeneousLocalizationToStalk, AlgebraicGeometry.ProjectiveSpectrum.Proj.specStalkEquiv, AlgebraicGeometry.Proj.stalkIso'_symm_mk",
+   "date": "2026-10-12",
+   "verdict": "No matching module theorem; existing lemmas used where relevant"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule.mk",
+   "results": "LocalizedModule.mk, LocalizedModule.induction_on, LocalizedModule.mk_neg, LocalizedModule.induction_on₂, LocalizedModule.zero_mk, IsLocalizedModule.mk_eq_mk', LocalizedModule.smul'_mk, LocalizedModule.prod_mk",
+   "date": "2026-10-12",
+   "verdict": "No matching module theorem; existing lemmas used where relevant"
+  },
+  {
+   "tool": "grep",
+   "query": "degreeZeroFractions|gradedModuleSheaf_stalk",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No matching module theorem; existing lemmas used where relevant"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive map from a sheaf stalk to a localized graded module determined by its values on germs",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.IsInternal",
+   "results": "DirectSum.IsInternal, DirectSum.IsInternal.addSubmonoid_iSup_eq_top, DirectSum.IsInternal.addSubmonoid_iSupIndep, DirectSum.IsInternal.submodule_iSupIndep, DirectSum.IsInternal.addSubgroup_iSupIndep, DirectSum.IsInternal.isCompl, DirectSum.IsInternal.collectedBasis, DirectSum.IsInternal.submodule_iSup_eq_top",
+   "date": "2026-10-12",
+   "verdict": "No matching module theorem; existing lemmas used where relevant"
+  }
+ ],
+ "mathlib_match": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01M3 stalk computation"
+ },
+ "id": "lem-weil-pbc-proj-graded-module-stalk-map",
+ "title": "Canonical map from chart germs to prime localized fractions",
+ "statement": "Let $S$ be an $\\mathbb N$-graded commutative ring with grading $\\mathcal A$, and $M$ a $\\mathbb Z$-graded $S$-module with a grading $\\mathcal M$ compatible with scalar multiplication. Set $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]. Index charts by pairs $f=(a,d)$ with $d>0$ and $a\\in S_d$, put $D_f=D_+(a)$, $R_f=S_{(a)}$ [def-nagata-homogeneous-localization-degree-zero], and let $Z_f$ be submodules of $M_a$ whose carriers are precisely the equal-degree fractions [def-sc-degree-zero-module-fractions]. Suppose additive maps $\\rho_{f,g}:Z_f\\to Z_g$ and ring maps $\\rho^S_{f,g}:R_f\\to R_g$ are given for every $D_g\\subseteq D_f$. Suppose each inclusion admits a homogeneous relation $g^e=bf$ with $e>0$, each $\\rho$ is semilinear over $\\rho^S$, and for every such relation it sends $y/f^m$ to $b^my/g^{em}$. Assume identities, composition and bijectivity when chart opens coincide. Let $F$ be a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] with additive chart identifications $\\alpha_f:F(D_f)\\cong Z_f$ respecting scalars via awayToSection and restrictions via $\\rho$. Suppose submodules $Z_p$ of the ordinary prime localizations are given with carriers the equal-degree fractions. There exist additive maps $F_x\\to Z_p$, semilinear over stalkIso, sending the germ of every chart fraction $y/f^m$ to the unchanged fraction in the prime localization. Neither injectivity nor surjectivity is asserted; internality of the module grading is not assumed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01M3, stalk computation before Definition 01M6"
+ },
+ "proof": [
+  {
+   "text": "Use the positive homogeneous standard-open basis to define the map on germs. The chart restriction fraction formula and localization equality prove independence, additivity, semilinearity, and the displayed fraction formula.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-proj-structure-sheaf-standard-sections",
+    "lem-weil-pbc-stalk-germs-on-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-proj-structure-sheaf-standard-sections",
+  "lem-weil-pbc-stalk-germs-on-basis"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleStalkMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleStalkMap.lean",
+  "declaration": "AlgebraicGeometry.Proj.gradedModuleStalkMap",
+  "statement": "theorem gradedModuleStalkMap\n    (𝓜 : ℤ → AddSubgroup M)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),\n      a ∈ 𝒜 n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))\n    (Z : ∀ f : Fidx, Submodule R[f] N[f])\n    (hZ : (∀ f : Fidx, (Z f : Set N[f]) = degreeZeroFractions\n        (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M))\n        (Submonoid.powers f.val.1)))\n    (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])\n    (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g)\n    (hlaws : (∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n        (∃ (e k : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1) ∧\n        (∀ (r : R[f]) (q : Z f), rho f g i (r • q) = rhoS f g i r • rho f g i q) ∧\n        (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k → g.val.1 ^ e = a * f.val.1 →\n          ∀ (m : ℕ) (y : M) (q : Z f),\n            (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) →\n            (rho f g i q : N[g]) = mk (a ^ m • y)\n              (⟨g.val.1 ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g.val.1))) ∧\n      (∀ (f : Fidx) (i : D[f] ≤ D[f]) (q : Z f), rho f f i q = q) ∧\n      (∀ (f g h : Fidx) (i : D[g] ≤ D[f]) (j : D[h] ≤ D[g]) (q : Z f),\n        rho g h j (rho f g i q) = rho f h (j.trans i) q) ∧\n      (∀ (f g : Fidx) (i : D[g] ≤ D[f]), D[f] = D[g] →\n        Function.Bijective (rho f g i)))\n    (F : ModX) (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f)\n    (hchart : (∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])),\n        alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s) ∧\n      (∀ (f g : Fidx) (i : D[g] ≤ D[f]) (s : F.val.obj (op D[f])),\n        alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s)))\n    (Zp : ∀ x : Proj 𝒜, Submodule Rp[x] Np[x])\n    (hZp : ∀ x : Proj 𝒜, (Zp x : Set Np[x]) = degreeZeroFractions\n      (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M)) T[x]) :\n    ∃ (tau : ∀ x : Proj 𝒜,\n      (RingedSpace.moduleStalkFunctor (Proj 𝒜).toRingedSpace x).obj F →+ Zp x),\n      (∀ (x : Proj 𝒜) (r : (Proj 𝒜).presheaf.stalk x)\n        (s : (RingedSpace.moduleStalkFunctor (Proj 𝒜).toRingedSpace x).obj F),\n        tau x (r • s) = (stalkIso 𝒜 x).hom r • tau x s) ∧\n      (∀ (x : Proj 𝒜) (f : Fidx) (hx : x ∈ D[f]) (m : ℕ) (y : M)\n        (q : Z f) (t : T[x]),\n        (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) →\n        (t : S) = f.val.1 ^ m →\n        (tau x (TopCat.Presheaf.germ F.val.presheaf D[f] x hx\n          ((alpha f).symm q)) : Np[x]) = mk y t)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T110316-L-620869",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T110316-L-620869",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

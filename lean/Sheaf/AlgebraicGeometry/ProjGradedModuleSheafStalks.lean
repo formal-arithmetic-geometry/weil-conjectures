@@ -11,7 +11,8 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
 import Mathlib.Topology.Sheaves.Stalks
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.ProjGradedModuleStalkMap
+import Sheaf.AlgebraicGeometry.HomogeneousVectorAnnihilator
 
 /-!
 # ProjGradedModuleSheafStalks
@@ -55,6 +56,34 @@ local notation "T[" x "]" => (x).asHomogeneousIdeal.toIdeal.primeCompl
 local notation "Rp[" x "]" => HomogeneousLocalization 𝒜 T[x]
 local notation "Np[" x "]" => LocalizedModule T[x] M
 local notation "ModX" => SheafOfModules (moduleRings (Proj 𝒜).toRingedSpace)
+
+private noncomputable def primeDegreeZeroSubmodule
+    (𝓜 : ℤ → AddSubgroup M)
+    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),
+      a ∈ 𝒜 n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))
+    (x : Proj 𝒜) : Submodule Rp[x] Np[x] where
+  carrier := degreeZeroFractions (fun n : ℕ ↦ (𝒜 n : Set S))
+    (fun n : ℕ ↦ (𝓜 n : Set M)) T[x]
+  zero_mem' := ⟨0, 0, 1, (𝓜 0).zero_mem, SetLike.GradedOne.one_mem, zero_mk 1⟩
+  add_mem' := by
+    rintro _ _ ⟨d, y, t, hy, ht, rfl⟩ ⟨e, z, v, hz, hv, rfl⟩
+    refine ⟨d + e, (v : S) • y + (t : S) • z, t * v, ?_,
+      SetLike.mul_mem_graded ht hv, (mk_add_mk).symm⟩
+    apply (𝓜 ((d + e : ℕ) : ℤ)).add_mem
+    · simpa only [Nat.cast_add, add_comm] using hsmul e d v y hv hy
+    · simpa only [Nat.cast_add] using hsmul d e t z ht hz
+  smul_mem' := by
+    intro r q hq
+    obtain ⟨c, rfl⟩ := HomogeneousLocalization.mk_surjective r
+    rcases hq with ⟨d, y, t, hy, ht, rfl⟩
+    refine ⟨c.deg + d, (c.num : S) • y, ⟨c.den, c.den_mem⟩ * t, ?_,
+      SetLike.mul_mem_graded c.den.prop ht, ?_⟩
+    · change (c.num : S) • y ∈ 𝓜 ((c.deg + d : ℕ) : ℤ)
+      simpa only [Nat.cast_add] using hsmul c.deg d c.num y c.num.prop hy
+    · change LocalizedModule.mk _ _ = (algebraMap Rp[x] (Localization T[x])
+        (HomogeneousLocalization.mk c)) • mk y t
+      rw [HomogeneousLocalization.algebraMap_apply, HomogeneousLocalization.val_mk,
+        mk_smul_mk]
 
 /-- Stalks for a graded-module chart system.
 Source: Stacks Project, Constructions, Section 01M3 before Definition 01M6;
@@ -137,6 +166,112 @@ theorem gradedModuleSheaf_stalks
         (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) →
         (t : S) = f.val.1 ^ m →
         (mu x (TopCat.Presheaf.germ F.val.presheaf D[f] x hx
-          ((alpha f).symm q)) : Np[x]) = mk y t) := by sorry
+          ((alpha f).symm q)) : Np[x]) = mk y t) := by
+  classical
+  let Zp := primeDegreeZeroSubmodule 𝒜 𝓜 hsmul
+  have hZp : ∀ x : Proj 𝒜, (Zp x : Set Np[x]) = degreeZeroFractions
+      (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M)) T[x] :=
+    fun _ ↦ rfl
+  obtain ⟨tau, hscalar, hformula⟩ := gradedModuleStalkMap 𝒜 𝓜 hsmul
+    Z hZ rhoS rho hlaws F alpha hchart Zp hZp
+  have hB := (standardOpenProperties.{u, u, u} 𝒜).1
+  have hsurj (x : Proj 𝒜) : Function.Surjective (tau x) := by
+    intro q
+    have hq : (q : Np[x]) ∈ degreeZeroFractions
+        (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M)) T[x] := by
+      rw [← hZp x]
+      exact q.prop
+    rcases hq with ⟨d, y, t, hy, ht, heq⟩
+    obtain ⟨_, ⟨a, e, he, ha, rfl⟩, hxa, _⟩ :=
+      TopologicalSpace.Opens.isBasis_iff_nbhd.mp hB (show x ∈ (⊤ : (Proj 𝒜).Opens) from
+        trivial)
+    let f : Fidx := ⟨⟨(t : S) * a, d + e⟩,
+      Nat.add_pos_right d he, SetLike.mul_mem_graded ht ha⟩
+    have hx : x ∈ D[f] := by
+      change x ∈ basicOpen 𝒜 ((t : S) * a)
+      rw [basicOpen_mul]
+      exact ⟨t.prop, hxa⟩
+    let v : T[x] := ⟨f.val.1, hx⟩
+    let w : Submonoid.powers f.val.1 := ⟨f.val.1 ^ 1, ⟨1, rfl⟩⟩
+    have hw : mk (a • y) w ∈ Z f := by
+      change mk (a • y) w ∈ (Z f : Set N[f])
+      rw [hZ f]
+      refine ⟨d + e, a • y, w, ?_, ?_, rfl⟩
+      · change a • y ∈ 𝓜 ((d + e : ℕ) : ℤ)
+        simpa only [Nat.cast_add, add_comm] using hsmul e d a y ha hy
+      · change f.val.1 ^ 1 ∈ 𝒜 (d + e)
+        simpa only [pow_one] using f.prop.2
+    let qf : Z f := ⟨mk (a • y) w, hw⟩
+    refine ⟨TopCat.Presheaf.germ F.val.presheaf D[f] x hx ((alpha f).symm qf), ?_⟩
+    apply Subtype.ext
+    rw [hformula x f hx 1 (a • y) qf v rfl (pow_one _).symm]
+    rw [← heq]
+    change mk (a • y) (t * (⟨a, hxa⟩ : T[x])) = mk y t
+    exact mk_cancel_common_right t ⟨a, hxa⟩ y
+  have hinj (x : Proj 𝒜) : Function.Injective (tau x) := by
+    apply (injective_iff_map_eq_zero (tau x)).mpr
+    intro s hs
+    obtain ⟨_, hx, ⟨a, d, hd, ha, rfl⟩, v, hv⟩ :=
+      TopCat.Presheaf.exists_mem_germ_eq_of_isBasis hB F.val.presheaf x s
+    let f : Fidx := ⟨⟨a, d⟩, hd, ha⟩
+    let q : Z f := alpha f v
+    have hq : (q : N[f]) ∈ degreeZeroFractions
+        (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M))
+        (Submonoid.powers a) := by
+      rw [← hZ f]
+      exact q.prop
+    rcases hq with ⟨n, y, t, hy, ht, hrep⟩
+    obtain ⟨m, hm⟩ := t.prop
+    have hrep' : (q : N[f]) = mk y
+        (⟨a ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers a) := by
+      have ht_eq : t = (⟨a ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers a) :=
+        Subtype.ext hm.symm
+      simpa only [ht_eq] using hrep.symm
+    let tp : T[x] := ⟨a ^ m, pow_mem (show a ∈ T[x] from hx) m⟩
+    have hz : mk y tp = (0 : Np[x]) := by
+      have hf := hformula x f hx m y q tp hrep' rfl
+      have hg : (alpha f).symm q = v := (alpha f).symm_apply_apply v
+      rw [hg, hv, hs] at hf
+      exact hf.symm
+    obtain ⟨c, hc⟩ := mk_eq.mp (hz.trans (zero_mk 1).symm)
+    have hcy : (c : S) • y = 0 := by
+      change (c : S) • (1 : S) • y = (c : S) • (tp : S) • (0 : M) at hc
+      simpa only [one_smul, smul_zero] using hc
+    obtain ⟨k, b, hb, hbx, hby⟩ :=
+      homogeneousVectorAnnihilator 𝒜 𝓜 h𝓜 hsmul x n y hy c c.prop hcy
+    let g : Fidx := ⟨⟨a * b, d + k⟩,
+      Nat.add_pos_left hd k, SetLike.mul_mem_graded ha hb⟩
+    have hxg : x ∈ D[g] := by
+      change x ∈ basicOpen 𝒜 (a * b)
+      rw [basicOpen_mul]
+      exact ⟨hx, hbx⟩
+    have i : D[g] ≤ D[f] := by
+      change basicOpen 𝒜 (a * b) ≤ basicOpen 𝒜 a
+      rw [basicOpen_mul]
+      exact inf_le_left
+    have hrho := (hlaws.1 f g i).2.2 1 k b (by decide) hb
+      (by change (a * b) ^ 1 = b * a; simp [mul_comm]) m y q hrep'
+    have hzero : rho f g i q = 0 := by
+      apply Subtype.ext
+      rw [hrho]
+      change LocalizedModule.mk _ _ = (0 : N[g])
+      rw [← zero_mk (1 : Submonoid.powers g.val.1)]
+      apply (mk_eq).mpr
+      refine ⟨⟨g.val.1, ⟨1, pow_one _⟩⟩, ?_⟩
+      change g.val.1 • (1 : S) • (b ^ m • y) = g.val.1 • _ • (0 : M)
+      simp only [one_smul, smul_zero]
+      change (a * b) • (b ^ m • y) = 0
+      rw [mul_smul, smul_comm b (b ^ m), hby, smul_zero, smul_zero]
+    have hvzero : F.val.map (homOfLE i).op v = 0 := by
+      apply (alpha g).injective
+      rw [hchart.2 f g i v]
+      exact hzero.trans (map_zero _).symm
+    rw [← hv]
+    rw [← TopCat.Presheaf.germ_res_apply F.val.presheaf (homOfLE i) x hxg v]
+    change TopCat.Presheaf.germ F.val.presheaf D[g] x hxg
+      (F.val.map (homOfLE i).op v) = 0
+    rw [hvzero, map_zero]
+  let mu := fun x ↦ AddEquiv.ofBijective (tau x) ⟨hinj x, hsurj x⟩
+  exact ⟨Zp, hZp, mu, hscalar, hformula⟩
 
 end AlgebraicGeometry.Proj

@@ -1,0 +1,113 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleSheafStalks",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proj-graded-module-sheaf-stalks",
+   "place": "Intermediate decomposition of proof step 1/4",
+   "via": [
+    "lem-weil-pbc-proj-graded-module-sheaf-stalks"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of a sheaf of graded modules on Proj is the degree zero localization at the homogeneous prime",
+   "results": "AlgebraicGeometry.homogeneousLocalizationToStalk, AlgebraicGeometry.stalkToFiberRingHom, AlgebraicGeometry.Proj.stalkIso, AlgebraicGeometry.homogeneousLocalizationToStalk_stalkToFiberRingHom, AlgebraicGeometry.Proj.stalkIso', AlgebraicGeometry.stalkToFiberRingHom_homogeneousLocalizationToStalk, AlgebraicGeometry.ProjectiveSpectrum.Proj.specStalkEquiv, AlgebraicGeometry.Proj.stalkIso'_symm_mk",
+   "date": "2026-10-12",
+   "verdict": "No matching module theorem; existing lemmas used where relevant"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The annihilator of a homogeneous element of a graded module is a homogeneous ideal",
+   "results": "Ideal.IsHomogeneous, Ideal.mul_homogeneous_element_mem_of_mem, Ideal.homogeneousCore', HomogeneousIdeal, Ideal.homogeneousHull, Ideal.homogeneousCore, HomogeneousIdeal.irrelevant, Ideal.isHomogeneous_iff_forall_subset",
+   "date": "2026-10-12",
+   "verdict": "No matching module theorem; existing lemmas used where relevant"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.IsInternal",
+   "results": "DirectSum.IsInternal, DirectSum.IsInternal.addSubmonoid_iSup_eq_top, DirectSum.IsInternal.addSubmonoid_iSupIndep, DirectSum.IsInternal.submodule_iSupIndep, DirectSum.IsInternal.addSubgroup_iSupIndep, DirectSum.IsInternal.isCompl, DirectSum.IsInternal.collectedBasis, DirectSum.IsInternal.submodule_iSup_eq_top",
+   "date": "2026-10-12",
+   "verdict": "No matching module theorem; existing lemmas used where relevant"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous component outside a homogeneous prime annihilates a homogeneous module vector",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*annihilat|annihilat.*homogeneous",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No matching module theorem; existing lemmas used where relevant"
+  }
+ ],
+ "mathlib_match": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01M3 stalk computation"
+ },
+ "id": "lem-weil-pbc-homogeneous-vector-annihilator",
+ "title": "Homogeneous annihilator outside a homogeneous prime",
+ "statement": "Let $S$ be an $\\mathbb N$-graded commutative ring with grading $\\mathcal A$, and $M$ an $S$-module internally graded by $\\mathbb Z$ with grading $\\mathcal M$, compatible with graded scalar multiplication. Let $x\\in\\operatorname{Proj}(S)$ correspond to a homogeneous prime $\\mathfrak p$ [def-nagata-affine-proj]. If $y\\in M_z$ and $c\\notin\\mathfrak p$ satisfy $cy=0$, there exist $k\\in\\mathbb N$ and $b\\in S_k$ with $b\\notin\\mathfrak p$ and $by=0$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01M3, stalk computation before Definition 01M6"
+ },
+ "proof": [
+  {
+   "text": "Decompose the scalar into homogeneous components. Internal direct-sum grading separates the components of c*y, so each component kills y; homogeneity of the prime gives one component outside it.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HomogeneousVectorAnnihilator",
+  "file": "lean/Sheaf/AlgebraicGeometry/HomogeneousVectorAnnihilator.lean",
+  "declaration": "AlgebraicGeometry.Proj.homogeneousVectorAnnihilator",
+  "statement": "theorem homogeneousVectorAnnihilator\n    (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),\n      a ∈ 𝒜 n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))\n    (x : Proj 𝒜) (z : ℤ) (y : M) (hy : y ∈ 𝓜 z)\n    (c : S) (hc : c ∉ x.asHomogeneousIdeal) (hcy : c • y = 0) :\n    ∃ (k : ℕ) (b : S), b ∈ 𝒜 k ∧ b ∉ x.asHomogeneousIdeal ∧ b • y = 0",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T110316-L-620869",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T110316-L-620869",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
