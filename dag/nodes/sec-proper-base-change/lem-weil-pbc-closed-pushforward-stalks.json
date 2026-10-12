@@ -30,89 +30,35 @@
  ],
  "proof": [
   {
-   "text": "*Pushforward sections and stalk notation.* By [def-pc-module-pullback], for every open V subset X the pushforward is (i_* G)(V) = G(i^{-1} V), and its restriction maps are those of G. Thus a germ in (i_* G)_x is represented by a section s in G(i^{-1} V) for an open neighbourhood V of x, while a germ in G_z is represented by the same section on an open neighbourhood of z [def-weil-pbc-module-stalk]. The map c_z in the statement is therefore the map induced by sending this representative to its germ at z.",
+   "text": "Use Mathlib Scheme.Modules.pushforward for the underlying abelian presheaf of G on the scheme [def-pc-scheme]. At x outside the image, take the open complement of Set.range i.base, using h.isClosed_range. Every open contained in this complement has empty inverse image. TopCat.Sheaf.isTerminalOfEqEmpty and AddCommGrpCat.subsingleton_of_isZero make its section group subsingleton. Represent any two germs in that complement using exists_le_germ_eq; on the intersection their restrictions agree, so germ_res_apply identifies them.",
    "uses": [
-    "def-pc-module-pullback",
-    "def-weil-pbc-module-stalk"
+    "def-pc-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AE, setup and definition of i_*"
-   }
+   "elementary": false
   },
   {
-   "text": "*Vanishing off the image.* If x is not in the closed subset i(Z), then X \\ i(Z) is an open neighbourhood of x. Taking V = X \\ i(Z), one has i^{-1} V = emptyset. The sections of an O_Z-module over the empty open are the zero module, so (i_* G)(V) = 0. Every germ at x is represented after restriction to this neighbourhood, hence (i_* G)_x = 0 by [def-weil-pbc-module-stalk].",
-   "uses": [
-    "def-weil-closed-immersion",
-    "def-pc-module-pullback",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AE, proof: if x notin Z choose arbitrarily small U disjoint from Z; F(i^{-1}U) is the final object (zero for abelian sheaves)"
-   }
+   "text": "At z, apply TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing Ab to h.isInducing. The inferred IsIso gives bijectivity by ConcreteCategory.bijective_of_isIso. This is the cofinal-neighbourhood argument of Stacks Sheaves 00AE.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "*Neighbourhoods over a point of Z.* Fix z in Z and x = i(z). Since i identifies Z homeomorphically with the closed subspace i(Z), the sets i^{-1}V, as V ranges over open neighbourhoods of x in X, form a cofinal neighbourhood basis of z in Z: for every open W containing z in Z, write W = Z intersect U for an open U in X and replace U by U union (X \\ i(Z)) to obtain V with x in V and i^{-1}V = W. Conversely, i^{-1}V is an open neighbourhood of z. This is exactly the neighbourhood observation in the proof of Stacks Lemma 00AE.",
-   "uses": [
-    "def-pc-scheme",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AE, proof: every neighbourhood of z in Z is Z cap U for an open U of X"
-   }
+   "text": "For linearity, choose a germ representative for the scalar and a representative for the module element on a smaller neighbourhood, using exists_germ_eq and exists_le_germ_eq. Restrict the scalar by germ_res_apply. Rewrite the product by PresheafOfModules.germ_smul, apply stalkPushforward_germ_apply, and identify the sectionwise pushforward action with the action through i.app. Apply germ_smul on Z and Scheme.Hom.germ_stalkMap_apply. The two sides then agree definitionally.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "*The stalk map is bijective.* By the preceding cofinality, the directed colimit defining (i_* G)_x is the colimit of G(i^{-1}V) over the same neighbourhood system as the colimit defining G_z. Under this identification, the canonical map sends the class of s in G(i^{-1}V) to the class of the same s in G_z, hence is c_z. It is well defined because equality of germs means equality after restriction on a smaller neighbourhood [def-weil-pbc-module-stalk], and it is bijective because the two colimits have cofinal indexing systems. This is the second case of Stacks Lemma 00AE.",
-   "uses": [
-    "def-pc-module-pullback",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AE, proof: the second case follows because every neighbourhood of z is Z cap U; canonical map is an isomorphism on stalks"
-   }
-  },
-  {
-   "text": "*Linearity.* For a_x in O_{X,x} represented by a section a on V and s_{i(z)} represented by s in G(i^{-1}V), the pushforward module structure gives a_x s_{i(z)} = (a|_{i^{-1}V} s)_{i(z)}. Applying c_z gives (a|_{i^{-1}V} s)_z = i^sharp_z(a_x) s_z by the germ multiplication rule in [def-weil-pbc-module-stalk]. Thus c_z is O_{X,i(z)}-linear for the action through i^sharp_z.",
-   "uses": [
-    "def-weil-pbc-module-stalk",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS, stalk computation for i_* and O_X-linearity; the germ multiplication is the module-stalk construction"
-   }
-  },
-  {
-   "text": "*Naturality.* For a morphism of O_Z-modules phi: G -> H, the map on pushforwards sends a representative s in G(i^{-1}V) to phi(s) in H(i^{-1}V), and the induced stalk maps send s_z to phi(s)_z. Therefore c_z,H composed with (i_* phi)_x equals phi_z composed with c_z,G on every germ representative, so the square commutes and c_z is natural in G.",
-   "uses": [
-    "def-pc-module-pullback",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AE, canonical identification on stalks; naturality follows from functoriality of germs"
-   }
+   "text": "For naturality, use stalk_hom_ext. Compose each side with a germ. Rewrite by stalkFunctor_map_germ_assoc, stalkPushforward_germ, and stalkFunctor_map_germ; the sectionwise pushforward morphism is definitionally the original morphism evaluated on the inverse-image open.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "def-weil-pbc-module-stalk",
-  "def-weil-closed-immersion",
   "def-pc-scheme"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Lemma 00AE (sheaves-lemma-stalks-closed-pushforward), proof; O_X-linearity follows the stalk computation used in Modules, Lemma 08KS"
+  "place": "Sheaves Lemma 00AE; scalar compatibility is the germ computation of Modules Lemma 08KS, implemented with Mathlib germ_smul and germ_stalkMap_apply"
  },
  "mathlib_searches": [
   {
@@ -192,5 +138,15 @@
   "group": "E1",
   "result": "fix",
   "note": "i:Z->X scheme morphism with IsClosedEmbedding i.base = homeomorphism onto closed subset; G : Z.Modules; pushforward = Scheme.Modules.pushforward; (1) stalk off Set.range subsingleton; (2) stalkPushforward bijective/iso and O_{X,i(z)}-linear via i.stalkMap z (clause added by reviewer); (3) naturality square in G; statement correction reverted (only inserted Lean name); reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c537d",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T063509-L-3154794",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and all stalk, linearity, and naturality clauses with the node; verified the proof, node-field changes, import users, pruning, clean compilation, and exactly the three permitted axioms."
  }
 }
