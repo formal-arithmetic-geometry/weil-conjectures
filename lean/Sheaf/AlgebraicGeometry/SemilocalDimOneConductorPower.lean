@@ -8,6 +8,8 @@ public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower
 import Sheaf.RingTheory.FiniteIntegralConductor
+import Sheaf.AlgebraicGeometry.SemilocalDimOneConductorPowerAux
+import Sheaf.AlgebraicGeometry.FiniteConductorMul
 
 /-! # Conductor powers in a semilocal normalization
 
@@ -48,4 +50,21 @@ theorem semilocal_dim_one_conductor_power
       x ≠ 0 → x ∈ Ideal.jacobson (⊥ : Ideal (integralClosure B K)) →
         ∃ n : ℕ, 0 < n ∧ ∃ b : B,
           algebraMap B K b = (x : K) ^ n * (y : K) := by
-  sorry
+  intro x y hx hJ
+  obtain ⟨A, hfin, hfrac, hxm, hym, m, hm, a, haK, haJ⟩ :=
+    exists_finite_adjoin_with_jacobson_power B hdim K x y hJ
+  set_option linter.style.haveILetI false in
+    letI : Module.Finite B A := hfin
+  set_option linter.style.haveILetI false in
+    letI : IsFractionRing A K := hfrac
+  obtain ⟨r, hr, _⟩ := Subalgebra.exists_jacobson_pow_mul_mem_base hdim A
+  have hpow : a ^ r ∈
+      (Ideal.map (algebraMap B A) (Ideal.jacobson (⊥ : Ideal B))) ^ r :=
+    Ideal.pow_mem_pow haJ r
+  obtain ⟨b, hb⟩ := Subalgebra.exists_base_mul_mem_of_mem_map_jacobson_pow
+    hdim A (a ^ r) hpow ⟨(y : K), hym⟩
+  refine ⟨m * r, Nat.mul_pos hm hr, b, ?_⟩
+  calc
+    algebraMap B K b = (a : K) ^ r * (y : K) := hb
+    _ = ((x : K) ^ m) ^ r * (y : K) := by rw [haK]
+    _ = (x : K) ^ (m * r) * (y : K) := by rw [pow_mul]

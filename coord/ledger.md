@@ -9910,3 +9910,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/H1/Sheaf.AlgebraicGeometry.CoherentIdealPatchingExactSequence (stage 3; reviewer PASS; first push; landing 20261012T225313-L-1806760 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:53 L: merged deliver/H1/Sheaf.AlgebraicGeometry.Cohomology.OpenFreeSheafRestrictionHom (stage 3; reviewer PASS; first push; landing 20261012T225313-L-1806927 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/H2/Sheaf.AlgebraicGeometry.CoherentCokernelRelations (stage 3; reviewer PASS; first push; landing 20261012T225314-L-1807154 (interface); batch 20261012T225253; modules 3; new nodes 2)
+- 22:53 L: merged deliver/H2/Sheaf.AlgebraicGeometry.SemilocalDimOneConductorPower (stage 3; reviewer PASS; first push; landing 20261012T225314-L-1807347 (interface); batch 20261012T225253; modules 3; new nodes 2)
