@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-finite-row-total-column-comparison",
+ "kind": "statement",
+ "title": "Column comparison for total complexes with finitely many rows",
+ "statement": "Let C be an abelian category [def-sp-abelian], K and L nonnegative double complexes [def-sp-double-complex-total], f:K→L a morphism, and N a natural number. Assume K^{p,q} and L^{p,q} are zero for every p and every q>N. Assume that for every q the horizontal complex map K^{•,q}→L^{•,q}, equivalently the q-th component of the flipped map, is a quasi-isomorphism. Then the canonical total map Tot(f) is a quasi-isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Section 12.25, the second filtration by vertical degree; finite filtration comparison"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "For q=0,...,N+1 let F^q Tot(K) consist of the summands with vertical degree at least q, and similarly for L. The horizontal differential preserves q and the vertical differential raises it, so these are subcomplexes. F^{N+1} is zero by the support hypothesis, while F^0 is the full total. Each short exact sequence 0→F^{q+1}→F^q→gr^q→0 splits in every degree by the direct sum decomposition of the diagonal.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The quotient gr^q has degree-m object K^{m-q,q}, with zero terms if m<q. Its differential is the horizontal differential; the vertical differential lands in F^{q+1} and disappears. Hence the quotient map is the extension by zero of the horizontal map in degree q, translated by q; it is a quasi-isomorphism by the hypothesis. Equivalently, extend both indices to integers, transpose, and apply HomologicalComplex₂.total.quasiIso_map_of_finitely_many_columns for the outer bounds 0 and N, transporting along totalization and extension identifications.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Induct downwards on q from N+1. The map on F^{N+1} is a quasi-isomorphism because both sides are zero. If the map on F^{q+1} is a quasi-isomorphism, its map and the quotient map are quasi-isomorphisms; the long exact homology sequences of the two short exact sequences give a quasi-isomorphism on F^q by the five lemma (the existing HomologicalComplex.HomologySequence.quasiIso_τ₂). At q=0 this is the asserted total map. This includes N=0 and requires no horizontal upper bound.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Finite filtration argument; details of the five-lemma induction written by E1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A columnwise quasi-isomorphism of first quadrant double complexes induces a quasi-isomorphism on total complexes",
+   "results": "No exact theorem found; generic quasi-isomorphism criteria.",
+   "date": "2026-10-12",
+   "verdict": "No direct finite-row total comparison match."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*total|total.*quasiIso",
+   "results": "No matching declaration in Mathlib/Algebra/Homology.",
+   "date": "2026-10-12",
+   "verdict": "No direct finite-row total comparison match."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.QuasiIso",
+   "results": "loogle: unknown identifier 'HomologicalComplex.QuasiIso'",
+   "date": "2026-10-12",
+   "verdict": "No direct finite-row total comparison match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of double complexes with finitely many nonzero rows and quasi-isomorphisms on horizontal rows induces a quasi-isomorphism on total complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FirstQuadrantTotalComparison",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "Proof Step 1: finite-diagonal total comparison used for the affine-cover Cech augmentation",
+   "via": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "lem-sc-first-quadrant-column-augmentation",
+    "lem-sc-module-cech-beta-affine-quasi-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FirstQuadrantTotalComparisonFinite",
+  "file": "lean/Sheaf/Algebra/Homology/FirstQuadrantTotalComparisonFinite.lean",
+  "declaration": "HomologicalComplex₂.quasiIso_totalMap_of_columns_of_finite_rows",
+  "statement": "theorem quasiIso_totalMap_of_columns_of_finite_rows {C : Type u} [Category.{v} C] [Abelian C] {K L : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)} (f : K ⟶ L) (N : ℕ) (hK : ∀ p q : ℕ, N < q → IsZero ((K.X p).X q)) (hL : ∀ p q : ℕ, N < q → IsZero ((L.X p).X q)) (hf : ∀ q : ℕ, QuasiIso (((flipFunctor C (ComplexShape.up ℕ) (ComplexShape.up ℕ)).map f).f q)) : QuasiIso (total.map f (ComplexShape.up ℕ))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b8232",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T154828-L-2472313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b8232",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T154828-L-2472313",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules, nodes, report, target signature, and required importer all match the packet and compile cleanly."
+ }
+}

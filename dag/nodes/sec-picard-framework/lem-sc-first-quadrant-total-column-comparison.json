@@ -13,36 +13,33 @@
  ],
  "proof": [
   {
-   "text": "Extend both bicomplexes by zero to integer indices. Take the mapping cone of each column map, with its natural differential in the other direction. Each column cone is acyclic by the column quasi-isomorphism hypothesis. The resolution index is bounded below by -1, and the other index by 0.",
+   "text": "For a fixed homology degree n put N=n+1. Restrict each vertical complex to the finite shape with indices 0,...,N and extend by zero. The shape embedding has predecessor-closed image, hence its stupid truncation has a canonical projection. Map this functor and projection along the horizontal complex. The resulting square for f commutes by πStupidTrunc_f_naturality. Every term above row N is zero.",
    "uses": [
     "def-sp-double-complex-total"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/0133",
-    "place": "Lemma 12.25.4, finite-diagonal argument, applied to column cones"
-   }
+   "elementary": true
   },
   {
-   "text": "The total of the column-cone bicomplex is isomorphic to the cone of total.map f: both consist degreewise of the finite target diagonal and the shifted finite source diagonal. The cone differential agrees with the total differential after multiplying the shifted source components by the usual degree-dependent signs. Shift the lower bounds to zero and apply the first-quadrant spectral sequence, using the other direction as filtration. Its first page is the homology of the column cones, hence zero. All stable pages are zero. The finite filtration on homology has zero graded pieces; induction from the final zero step proves zero homology. Thus the total cone is acyclic, and the mapping-cone criterion proves total.map f is a quasi-isomorphism.",
+   "text": "At a retained vertical degree q≤N, the flipped projection is an isomorphism of horizontal complexes, since every component is an isomorphism. Its naturality square identifies the truncated horizontal map with the original one by an isomorphism of arrows. At q>N both horizontal complexes are zero. Therefore every horizontal map of the truncated bicomplex is a quasi-isomorphism. Apply the finite-row comparison lemma.",
    "uses": [
-    "thm-sp-double-complex-spectral-sequences"
+    "lem-sc-finite-row-total-column-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/0133",
-    "place": "Lemma 12.25.4, finite-diagonal argument, applied to column cones"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The total projection is an isomorphism in degree m≤N: every summand has p+q=m and thus q≤N, so its component is invertible; use GradedObject.isIso_mapMap_apply. In particular it is invertible on the three terms computing degree-n homology, including prev(0)=0. Thus it is a quasi-isomorphism at n by quasiIsoAt_iff' and ShortComplex.quasiIso_of_isIso. Totalize the naturality square and apply two-out-of-three at n to transfer the finite-row comparison to the original total map. Repeat for every n, using quasiIso_iff.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-double-complex-total",
-  "thm-sp-double-complex-spectral-sequences"
+  "lem-sc-finite-row-total-column-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/0133",
-  "place": "Lemma 12.25.4, finite-diagonal argument, applied to column cones"
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Finite row filtration of the total complex; finite diagonal locality, implemented by E1"
  },
  "mathlib_searches": [
   {
@@ -120,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K2",
+  "reviewer": "X-b8232",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T135248-L-1675133",
+  "landing": "20261012T154828-L-2472313",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered modules, nodes, report, target signature, and required importer all match the packet and compile cleanly."
  }
 }
