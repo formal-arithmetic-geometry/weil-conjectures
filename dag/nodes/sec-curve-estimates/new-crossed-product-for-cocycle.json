@@ -1,0 +1,121 @@
+{
+ "id": "new-crossed-product-for-cocycle",
+ "kind": "statement",
+ "title": "Crossed-product data for a cocycle",
+ "statement": "For any field K and any homogeneous continuous degree-two cocycle z of its absolute Galois group with coefficients in the discrete units of its separable closure (def-sc-galois-units-cohomology), there exist a central simple K-algebra A, a nonzero matrix size n, a separable-closure matrix splitting e, and locally constant invertible matrix lifts b satisfying the descent equation and with scalar defect exactly galoisUnitsCocycleValue K z (def-sc-brauer-scalar-defect).",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "The crossed-product construction following Lemma 03R6 and Theorem 03R7"
+ },
+ "stmt_deps": [
+  "def-sc-brauer-scalar-defect",
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Uncurry the homogeneous continuous cycle on the profinite Galois group and evaluate at (1,g,gh). Equivariance and the cycle equation give c(g,h)c(gh,j)=g(c(h,j))c(g,hj). Compactness and discreteness give finite image and a finite clopen coset refinement. Choose an open normal N on whose cosets c is constant, shrinking N to fix its values. Put L=(Ksep)^N and Gamma=Gal(L/K). Then c factors through Gamma squared with values in L-units.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct B(g) on the Gamma-indexed L-basis by B(g)e_j=c(g,j)e_(gj). These are invertible monomial matrices. Evaluating products on a basis vector gives B(g)g(B(h))=c(g,h)B(gh). The cocycle identity also makes B(1)=c(1,1)I, so conjugation by B followed by entrywise Galois action is a genuine semilinear matrix-algebra action T.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct A as the invariant K-subalgebra. Galois descent follows by averaging: sums over g of g(a)T_g(v) are invariant. An L-linear functional killing every such sum kills every v by independence of distinct field automorphisms, so invariant vectors span the matrix algebra. An invariant L-basis is a K-basis of A, since invariant linear combinations have fixed coefficients. Hence L tensor_K A is the full matrix algebra. Nonzero ideals extend to the whole matrix algebra, and dimension forces simplicity of A. Central elements extend to scalars, and invariance forces these scalars into K. This proves A is finite dimensional central simple.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Extend the splitting to Ksep, choose Fin n indexing of Gamma with n=card Gamma>0, and inflate B to the absolute Galois group. Its finite quotient dependence proves local constancy. The monomial identity gives the exact prescribed defect, even for unnormalized cocycles. T-invariance gives g(e(1 tensor a))=B(g)^(-1)e(1 tensor a)B(g), with precisely the required orientation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Theorem 03R7 surjectivity sketch and Section 0DVG; explicit monomial-matrix construction and descent expanded by the second reader"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous Galois two cocycle realized by semilinear matrices and a central simple algebra",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Galois 2 cocycle is the scalar multiplication defect of semilinear monomial matrices on its finite quotient regular representation",
+   "results": "GroupCohomology.LowDegree.cocycles₂ identities and Hilbert90 degree-one cocycles only; no central simple algebra realization.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.GeneralLinearGroup, IsLocallyConstant",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "crossed.product|CrossedProduct|monomial.*cocycle|projective.*representation|Galois.*descent in Mathlib/Algebra/BrauerGroup, upstream WeilConjectures/FieldTheory and lean/Sheaf/FieldTheory",
+   "results": "Only the existing parent realization hole and the scalar-defect comparison modules; no declaration realizing a prescribed continuous two-cocycle.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.CrossedProductRealization",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-scalar-defect-surjective-crossed-product-realization",
+   "place": "crossed-product construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.CrossedProductForCocycle",
+  "file": "lean/Sheaf/FieldTheory/CrossedProductForCocycle.lean",
+  "declaration": "Field.exists_crossedProduct_data_for_cocycle",
+  "statement": "theorem exists_crossedProduct_data_for_cocycle (K : Type u) [Field K] (z : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2) : ∃ (A : CSA.{u, u} K) (n : ℕ) (hn : n ≠ 0) (e : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K] Matrix (Fin n) (Fin n) (SeparableClosure K)) (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) → Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K)), IsLocallyConstant b ∧ (∀ (g : SeparableClosure K ≃ₐ[K] SeparableClosure K) (a : A), (e (1 ⊗ₜ[K] a)).map g = ((b g)⁻¹).val * e (1 ⊗ₜ[K] a) * (b g).val) ∧ (∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) = Matrix.GeneralLinearGroup.scalar (Fin n) (galoisUnitsCocycleValue K z g h) * b (g * h))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b0050",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T150959-L-2232820",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b0050",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T150959-L-2232820",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, node metadata, report, and direct importer matched against the packet and repository; all compiled successfully."
+ }
+}
