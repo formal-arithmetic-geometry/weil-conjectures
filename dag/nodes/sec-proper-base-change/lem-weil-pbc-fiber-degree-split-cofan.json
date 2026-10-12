@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-fiber-degree-split-cofan",
+ "kind": "statement",
+ "title": "Fibre degree of a finite coproduct of copies of the base",
+ "statement": "Let $p:Z\\to U$ be an affine morphism of schemes [def-pc-scheme, pqf-def-affine-morphism], let $J$ be a finite set, and let $D_j$ be schemes with maps $i_j:D_j\\to Z$ which form a coproduct cofan [def-galois-finite-coproduct]. Suppose each composite $p\\circ i_j:D_j\\to U$ is an isomorphism. For every point $x\\in U$, the scheme-theoretic fibre $Z_x$ [def-pc-scheme-fibre] has $\\dim_{\\kappa(x)}\\Gamma(Z_x,\\mathcal O_{Z_x})=|J|$, where $\\kappa(x)$ is the residue field [def-weil-residue-field]. This dimension is the fibre degree used in [def-pc-finite-locally-free]. The empty set $J$ is allowed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03SH (section-trace-method), paragraph after Definition 03SE; the ordinary residue-field product-algebra calculation of the number of sheets is written out by G2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-galois-finite-coproduct",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Put K = κ(x) and q : Spec K → U the residue-field map. Each i_j followed by p is an isomorphism. Thus s_j = q followed by its inverse, together with the identity of Spec K, is a pullback square over p ∘ i_j. Pullback.lift of s_j followed by i_j and the identity defines a_j : Spec K → Z_x, whose composite with the fibre projection is the identity. This is IsPullback.of_vert_isIso followed by pullback.lift_fst and pullback.lift_snd.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-galois-finite-coproduct"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Finite scheme coproducts are universal. Apply FinitaryPreExtensive.isUniversal_finiteCoproducts and IsUniversalColimit.nonempty_isColimit_of_isPullback_right to the squares just constructed. It follows that the a_j form a colimiting cofan for Z_x, and Sigma.desc a is an isomorphism.",
+   "uses": [
+    "lem-sc-etale-fibre-product-base-change-coproduct"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite-coproduct isomorphism sigmaSpec identifies the coproduct of J copies of Spec K with Spec(∏_J K). Compose it with the inverse of Sigma.desc a. Its composite with Spec of the diagonal algebra map K → ∏_J K equals the fibre projection: cancel Sigma.desc a, use sigmaSpec_comp_Spec_map_algebraMap, and check on each coprojection where both maps are the identity. Apply Scheme.Hom.finrankΓ_eq_of_iso and finrankΓ_SpecMap. The finite product ∏_J K has K-dimension |J|, by Module.finrank_fintype_fun_eq_card. For empty J this is the zero algebra and dimension zero. All these identifications are proved in Lean in the delivered module.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-galois-finite-coproduct"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-galois-finite-coproduct",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "def-pc-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "G2 stage 3 worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03SH, after Definition 03SE",
+  "note": "Agent-written complete residue-field computation of the split-map degree; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fiberDegree|finrank.*(pi|prod)",
+   "results": "3 hits; ; top results: Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "verdict": "no exact match",
+   "date": "2026-10-12",
+   "digest": "07ebf269d4148f15"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fibre degree of a finite coproduct of copies of a scheme is the cardinality of its index set",
+   "results": "8 hits; ; top results: CategoryTheory.PreGaloisCategory.card_fiber_coprod_eq_sum, AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, AlgebraicGeometry.sigmaMk, AlgebraicGeometry.IsFinite.instDescScheme, AlgebraicGeometry.isEmpty_pullback_sigmaι_of_ne, AlgebraicGeometry.Scheme.Hom.discrete_fiber",
+   "verdict": "no exact match",
+   "date": "2026-10-12",
+   "digest": "55cda4a1e5715a08"
+  },
+  {
+   "tool": "loogle",
+   "query": "Cofan, Equiv",
+   "results": "0 hits; loogle: unknown identifier 'Cofan'; top results: ",
+   "verdict": "no exact match",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre degree of a finite coproduct of copies of a scheme equals the number of summands",
+   "results": "0 hits; service unavailable: Internal Server Error; top results: ",
+   "verdict": "unavailable",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleDegreeSplitAt",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "trace splitting step: count the sheets of the finite étale local splitting by the fibre degree",
+   "via": [
+    "lem-weil-pbc-finite-etale-degree-split-at",
+    "lem-weil-pbc-finite-etale-trace-degree-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiberDegreeOfSplitCofan",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiberDegreeOfSplitCofan.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.fiberDegree_eq_nat_card_of_split_cofan",
+  "statement": "theorem Scheme.Hom.fiberDegree_eq_nat_card_of_split_cofan\n    {Z U : Scheme.{u}} (p : Z ⟶ U) [IsAffineHom p]\n    {J : Type u} [Finite J] (D : J → Scheme.{u}) (i : ∀ j, D j ⟶ Z)\n    (hc : Nonempty (IsColimit (Cofan.mk Z i)))\n    (hp : ∀ j, IsIso (i j ≫ p)) (x : U) :\n    p.fiberDegree x = Nat.card J",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T095903-L-316898",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T095903-L-316898",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

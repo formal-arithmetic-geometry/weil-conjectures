@@ -36,46 +36,41 @@
  },
  "proof": [
   {
-   "text": "Apply finite_etale_etale_local_split to Y×_X W→W at w. Obtain an étale neighbourhood U→W with a point above w and a finite clopen coproduct of pieces projecting isomorphically to U.",
+   "text": "Apply finite_etale_etale_local_split to p = pullback.snd f W.hom at w. This gives g : U → W.left, v over w, a finite type J, and a clopen colimiting cofan over pullback p g whose component projections to U are isomorphisms.",
    "uses": [
-    "lem-weil-pbc-finite-etale-etale-local-split"
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "def-pc-fibre-product"
    ],
    "elementary": false
   },
   {
-   "text": "Choose an algebraic closure of the residue field at the selected point of U. Base-change fibre-degree invariance and fiberDegree_eq_finrankΓ identify the geometric fibre dimension with d; exists_overIso_sigma_of_isSepClosed splits this fibre into exactly d points. Pull back the given coproduct to this same point; each component is a copy of the field spectrum, which has exactly one point. Hence its index set has cardinality d. The base-changed coproduct has underlying space the disjoint union of the component spaces. Since each component map to Spec Ω is an isomorphism, the projection of this disjoint union to its index set is a bijection. Comparing with the geometric fibre decomposition yields equality of the two finite cardinalities. No base nonemptiness is assumed globally: the distinguished point alone supplies the geometric point.",
+   "text": "Apply fiberDegree_eq_nat_card_of_split_cofan to pullback.snd p g and v. Its fibre degree is Nat.card J. Apply Scheme.Hom.fiberDegree_of_isPullback twice and the prescribed IsFiniteLocallyFreeOfDegree.fiberDegree_eq to conclude Nat.card J = d. This uses the ordinary residue field, with no algebraic closure or geometric fibre.",
    "uses": [
+    "lem-weil-pbc-fiber-degree-split-cofan",
     "def-pc-finite-locally-free",
-    "lem-galois-geometric-fibre",
-    "def-weil-algebraic-closure",
-    "def-weil-geometric-point",
-    "lem-weil-pbc-scheme-coproduct-copies"
+    "def-pc-fibre-product"
    ],
    "elementary": false
   },
   {
-   "text": "Reindex the finite set by Fin d, with the universe lift required by Lean. Compose U→W with W→X to obtain V. Pullback pasting transports the coproduct cofan to Y×_X V and preserves the component isomorphisms; the selected point maps to w.",
+   "text": "Set V = Scheme.Etale.mk (g ≫ W.hom) and a = MorphismProperty.Over.homMk g rfl. Transport the cofan along pullbackLeftPullbackSndIso f W.hom g using Cofan.ext and IsColimit.ofIsoColimit. Reindex by the equivalence ULift (Fin d) ≃ J obtained from the cardinal equality, using Cofan.isColimitEquivOfEquiv. Composition with the pasting isomorphism preserves open and closed immersions, and pullbackLeftPullbackSndIso_hom_snd preserves the component projections. The point equality is the original equality g v = w. The construction includes d = 0.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-open-fibre-product"
+    "def-pc-fibre-product"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-fibre-product",
   "def-pc-finite-locally-free",
-  "def-weil-algebraic-closure",
-  "def-weil-geometric-point",
-  "lem-galois-geometric-fibre",
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-scheme-coproduct-copies"
+  "lem-weil-pbc-fiber-degree-split-cofan",
+  "lem-weil-pbc-finite-etale-etale-local-split"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "G2 stage 3 worker",
   "document": "literature/stacks-project/etale.tex",
-  "place": "Tag 04HN (lemma-finite-etale-etale-local) in etale.tex; geometric-degree count in etale-cohomology.tex, Tag 03SH (section-trace-method) after Definition 03SE"
+  "place": "Tag 04HN (lemma-finite-etale-etale-local) in etale.tex; geometric-degree count in etale-cohomology.tex, Tag 03SH (section-trace-method) after Definition 03SE",
+  "note": "Residue-field product-algebra calculation replaces the geometric-fibre count; complete Lean proof, preserving the unit route."
  },
  "mathlib_searches": [
   {
@@ -134,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T085345-L-41958",
+  "landing": "20261012T095903-L-316898",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
