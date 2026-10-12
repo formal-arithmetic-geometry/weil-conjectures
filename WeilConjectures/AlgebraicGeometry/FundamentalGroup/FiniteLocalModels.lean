@@ -54,7 +54,8 @@ theorem finiteLocallyConstant_exists_local_models
   let _ : TopologicalSpace S := ⊥
   have : DiscreteTopology S := ⟨rfl⟩
   let j : E.over U ≅ (Etale.continuousMapSheafOfTypes T S).over U :=
-    e.symm ≪≫ ((T.smallEtaleTopology.overPullbackConstantSheafIso (Type (u + 1)) U).app S).symm ≪≫
+    e.symm ≪≫
+      ((T.smallEtaleTopology.overPullbackConstantSheafIso (Type (u + 1)) U).app S).symm ≪≫
       (T.smallEtaleTopology.overPullback (Type (u + 1)) U).mapIso
         (Etale.constantSheafIsoContinuousMapSheafOfTypes T S)
   obtain ⟨t⟩ := i.2
