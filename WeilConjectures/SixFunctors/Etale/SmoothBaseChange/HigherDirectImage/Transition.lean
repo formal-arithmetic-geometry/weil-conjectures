@@ -17,22 +17,16 @@ is a canonical map `Rh_* K ⟶ Rh'_* (a^* K)`, the composite of the unit of `Lh'
 the composition isomorphism `Lh'^* ≅ Lh^* ⋙ La^*` and the counit of `Lh^* ⊣ Rh_*`. In degree
 `q` it gives the transition map `R^q h_* F ⟶ R^q h'_* a^* F` of higher direct images. These
 are the maps along which higher direct images are compared when the source scheme varies, as
-in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit`.
+in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit` of
+`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Limit`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.lowerStarPlusTransition`: the map `Rh_* K ⟶ Rh'_* (a^* K)`.
 - `AlgebraicGeometry.Etale.higherDirectImageTransition`: the map
   `R^q h_* F ⟶ R^q h'_* a^* F`.
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.higherDirectImage_limit`: higher direct images commute with limits
-  of schemes along affine transition morphisms.
-
-## References
-
-- Stacks Project, Lemma 59.51.7, <https://stacks.math.columbia.edu/tag/09Z1>
+- `AlgebraicGeometry.Etale.higherDirectImageOverMap`: the transition maps for schemes over a
+  base, with coefficients pulled back from the base.
 -/
 
 @[expose] public section
@@ -97,35 +91,5 @@ noncomputable def Etale.higherDirectImageOverMap {W S : Scheme.{u}} (k : W ⟶ S
           G)))
 
 end Transition
-
-/-- Blueprint `sbc-lem-higher-direct-image-limit`: Higher direct images and limits of schemes.
-
-Let `W ⟶ S` be a morphism of schemes, `G` a sheaf of `Λ`-modules on `W_ét`, and
-`T = lim T_i` a cofiltered limit of schemes over `W` with affine transition morphisms, all
-quasi-compact and quasi-separated over `S`. Then `colim_i R^q g_{i,*} (G|_{T_i}) ≅
-R^q g_* (G|_T)`, where `g_i : T_i ⟶ S` and `g : T ⟶ S` are the structure morphisms. The
-statement is recorded on every geometric stalk, in the form of the two defining properties of
-a filtered colimit of modules: every element at the limit comes from some stage, and an element
-of a stage dying at the limit already dies at a later stage. This is the case of the blueprint
-statement for a system of sheaves pulled back from a fixed scheme. -/
-@[stacks 09Z1]
-theorem Etale.higherDirectImage_limit {W S : Scheme.{u}} (k : W ⟶ S)
-    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {I : Type u} [Category.{u} I]
-    [IsCofiltered I] (D : I ⥤ Over W) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]
-    [∀ i, QuasiCompact ((D.obj i).hom ≫ k)] [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)]
-    (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c))
-    [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)] (q : ℤ) (s : S) :
-    (∀ y : ((S.uliftPointSmallEtale s).sheafFiber.obj (Etale.higherDirectImage Λ
-        (c.pt.hom ≫ k) q (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G)) : ModuleCat.{u + 1} Λ),
-      ∃ (i : I) (y' : ((S.uliftPointSmallEtale s).sheafFiber.obj
-        (Etale.higherDirectImage Λ ((D.obj i).hom ≫ k) q
-          (((D.obj i).hom)^*[ModuleCat.{u + 1} Λ].obj G)) : ModuleCat.{u + 1} Λ)),
-        ((S.uliftPointSmallEtale s).sheafFiber.map
-          (Etale.higherDirectImageOverMap Λ k G q (c.π.app i))).hom y' = y) ∧
-    ∀ (i : I) y', ((S.uliftPointSmallEtale s).sheafFiber.map
-        (Etale.higherDirectImageOverMap Λ k G q (c.π.app i))).hom y' = 0 →
-      ∃ (j : I) (f : j ⟶ i), ((S.uliftPointSmallEtale s).sheafFiber.map
-        (Etale.higherDirectImageOverMap Λ k G q (D.map f))).hom y' = 0 :=
-  sorry
 
 end AlgebraicGeometry
