@@ -7297,3 +7297,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/V3/Sheaf.Algebra.ChangeIdealCompletion (stage 3; reviewer PASS; first push; landing 20261012T095929-L-326477 (proof); batch 20261012T095846; modules 1; new nodes 0)
 - 09:59 L: merged deliver/V3/Sheaf.AlgebraicGeometry.ConstantModuleLimitFiberDescent (stage 3; reviewer PASS; first push; landing 20261012T095929-L-326574 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:59 L: merged deliver/V3/Sheaf.AlgebraicGeometry.ConstantModulePushforwardGermVanishing (stage 3; reviewer PASS; first push; landing 20261012T095929-L-326671 (interface); batch 20261012T095846; modules 2; new nodes 1)
+- 09:59 L: merged deliver/V3/Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison (stage 3; reviewer PASS; first push; landing 20261012T095930-L-326769 (proof); batch 20261012T095846; modules 1; new nodes 0)

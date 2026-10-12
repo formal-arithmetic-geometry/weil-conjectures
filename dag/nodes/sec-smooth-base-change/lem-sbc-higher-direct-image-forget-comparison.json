@@ -14,49 +14,25 @@
  ],
  "proof": [
   {
-   "text": "Choose an injective module-sheaf resolution of F, bounded below in degree zero. The coefficient forgetful functor is exact, so its image is still a resolution of the underlying abelian sheaf. Use the equivalence with modules over the constant ring sheaf, preserving the underlying abelian sheaf and injectivity.",
+   "text": "Use the proved canonical bounded-below derived coefficient isomorphism moduleAbelianDerivedLowerStarIso Lambda h. The moduleAbelianForget functors are exact by the instances in that same module. Its invertibility was proved from all-object injective acyclicity and the sheafified cohomology description, with no flatness, nonzero-ring, or geometric hypothesis.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-module-sheaf-constant-ring-equivalence"
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Tag 03FD shows that the underlying abelian sheaf of every injective module-sheaf term has zero positive cohomology over every etale object U. The proof of the arbitrary-ring injective Sheaf.H acyclicity theorem gives this on localized small etale sites as well (restriction to an etale object preserves injectivity because extension by zero is exact). Tag 072W identifies the higher direct images as sheafifications of these cohomology presheaves. Hence every underlying resolution term is acyclic for abelian lowerStar.",
-   "uses": [
-    "lem-weil-pbc-injective-module-sheaf-H-acyclic",
-    "lem-weil-pbc-higher-direct-image-sheafified-presheaf"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "An acyclic resolution computes right derived functors, so abelian derived direct image of F_ab is computed by lowerStar of this underlying resolution. Module-valued derived direct image is computed by the original injective resolution. Both ordinary pushforwards are objectwise along the same etale base-change functor, and forgetting commutes with them. Exactness of forgetting gives the isomorphism of their degree-q homology objects. Use the bounded-below derived/single compatibility to identify these with the two displayed objects.",
-   "uses": [
-    "lemma-weil-pbc-leray-acyclicity",
-    "lem-sp-derived-functor-single-identification",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For q=0 the same comparison is ordinary direct image, and for q<0 the two resolutions have zero cohomology because they start in degree zero. Thus the isomorphism holds for every integer q, without nonzero-ring or flatness hypotheses.",
+   "text": "Place F in degree zero, obtaining K. Apply the derived coefficient isomorphism to K. Exact forgetting commutes with homology by Functor.mapDerivedCategoryPlusHomologyFunctorIso q, and with the degree-zero single functor by Functor.mapDerivedCategoryPlusSingleFunctor 0. Map the composite of the coefficient comparison and the derived direct image of the single-functor comparison through degree-q homology, and precompose with the homology-forgetting comparison. The resulting composite is exactly the displayed isomorphism by the definitions of higherDirectImage and rightDerivedLowerStarPlus. The same Lean expression works for every integer q, including zero and negative degrees.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-direct-image",
-  "lem-sp-derived-functor-single-identification",
-  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
-  "lem-weil-pbc-injective-module-sheaf-H-acyclic",
-  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
-  "lemma-weil-pbc-leray-acyclicity"
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
  ],
  "proof_origin": {
-  "by": "agent Q3",
-  "document": "Stacks Project, Tags 03FD and 072W",
-  "place": "Acyclic-resolution comparison implicit in the original prime-quotient detection node, step 3; explicit arbitrary-ring and universe formulation."
+  "by": "worker V3",
+  "document": "Stacks Project, Tags 03FD and 072W; proved Lean coefficient-comparison interface",
+  "place": "Specialize AlgebraicGeometry.Etale.moduleAbelianDerivedLowerStarIso to a degree-zero single complex; compose the proved exact-functor homology and single-functor isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -133,10 +109,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T085324-L-33744",
-  "kind": "interface",
+  "landing": "20261012T095930-L-326769",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
