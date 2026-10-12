@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-etale-module-injective-forget-acyclic",
+ "kind": "statement",
+ "title": "Underlying abelian acyclicity of injective module-valued etale sheaves",
+ "statement": "Let $Y$ be a scheme [def-weil-pbc-scheme-conventions] and $\\Lambda$ a commutative ring. If $G$ is injective in the category of $\\Lambda$-module valued sheaves on the small etale site [def-weil-pbc-etale-sheaves], let $SG$ be its underlying abelian sheaf. Then $R^{n+1}\\Gamma(Y,SG)=0$ for every $n\\geq0$, with global sections and cohomology as in [def-weil-pbc-etale-cohomology]. No injectivity of $SG$, compactness of $Y$, or flatness of $\\Lambda$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD, proof second paragraph, via Tags 03FC and 03F9"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Identify ModuleCat-valued sheaves with modules over the constant ring sheaf. Global scalars act sectionwise; a general constant-ring-sheaf section is locally represented by scalars, whose actions glue uniquely. Local equality makes the action independent of representatives and the sheaf condition supplies the identities and inverse equivalence. This exact equivalence commutes with underlying abelian sheaves and preserves injectives.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every covering, positive Cech cohomology of an injective module sheaf vanishes by the existing ringed-site theorem. Its free Cech chain complex is exact in positive degrees and Hom into the injective presheaf of modules is exact. Underlying abelian groups have the same sections, restrictions, and Cech differential.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the abelian Cech criterion with every etale object and every covering. The closure hypothesis is automatic and every covering refines itself. The preceding positive Cech vanishing therefore gives zero positive right derived evaluation on every etale object.",
+   "uses": [
+    "lem-weil-pbc-cech-vanishing-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate at the terminal identity etale object of Y. Its evaluation functor is naturally global sections. Transport the derived evaluation vanishing along this natural isomorphism and take degree n+1.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lem-weil-pbc-cech-vanishing-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD, proof second paragraph, via Tags 03FC and 03F9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An injective sheaf valued in modules has acyclic underlying abelian sheaf for global sections on the small etale site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective sheaf valued in modules has acyclic underlying abelian sheaf for global sections on the small etale site",
+   "results": "CochainComplex.cm5b.instInjectiveXIntI; CochainComplex.isKInjective_of_injective; CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex; CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex; CochainComplex.cm5b.I_X; CochainComplex.IsKInjective; CategoryTheory.InjectiveResolution.injective",
+   "date": "2026-10-12",
+   "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAcyclic.*(forget|restrictScalars)|isZero.*rightDerived.*toSheaf|injective.*abelian.*acyclic",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match (ingredients only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cohomology-filtered-colimit",
+   "place": "proof step 8, underlying injective acyclicity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleInjectiveForgetAcyclic.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_rightDerived_globalSections_forget_of_injective",
+  "statement": "theorem isZero_rightDerived_globalSections_forget_of_injective (Y : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective G] (n : ℕ) : IsZero (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerived (n + 1)).obj ((sheafCompose Y.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T032730-L-1421799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T032730-L-1421799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

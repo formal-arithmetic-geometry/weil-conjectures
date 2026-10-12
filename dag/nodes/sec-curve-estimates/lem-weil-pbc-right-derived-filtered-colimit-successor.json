@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-right-derived-filtered-colimit-successor",
+ "kind": "statement",
+ "title": "The successor step for filtered-colimit preservation by right derived functors",
+ "statement": "Let $A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian], let $B$ be abelian, and let $v:A\\to B$ be additive and left exact [def-sp-left-exact-additive]. Let $I$ be a small filtered category such that $I$-colimits exist and are exact in both $A$ and $B$. Fix $n\\geq0$. Suppose $R^nv$ preserves $I$-colimits and, for every diagram $J:I\\to A$ with injective values, $R^{n+1}v(\\varinjlim J)=0$. Then $R^{n+1}v$ preserves $I$-colimits. The right derived functors are computed by injective resolutions, with their natural connecting maps [lem-weil-pbc-horseshoe-delta-functor].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0739, second paragraph and its natural comparison diagram"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-horseshoe-delta-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose the right derived cohomological delta functor supplied by the existing horseshoe theorem. Use Grothendieck functorial monomorphism factorization on F_i to zero to construct a diagram of injectives J, a natural mono F to J, and its functorial cokernel Q. The cokernel short complex is short exact. Its colimit and every evaluation are short exact, since these functors are exact.",
+   "uses": [
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the connecting maps gives a natural transformation R^nv(Q) to R^{n+1}v(F). The sequence R^nv(J) to R^nv(Q) to R^{n+1}v(F) is exact pointwise, and its last arrow is epic because injectives have zero positive derived functors. Evaluation preserves homology, so pointwise homology zero implies zero homology of this short complex of diagrams. Exactness of colimit in B gives the first exact row with epic last arrow.",
+   "uses": [
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-weil-pbc-derived-functor-injective-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The colimit short exact sequence has the analogous exact row. Its connecting arrow is epic since R^{n+1}v(colim J) is zero by the hypothesis. The canonical colimit comparison maps form a morphism of the two short complexes: the first square is the colimit.map_post identity; the second is delta naturality for the morphism from the ith short exact sequence to its colimit, checked on every coprojection.",
+   "uses": [
+    "lem-weil-pbc-horseshoe-delta-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first two comparisons are isomorphisms by preservation in degree n. Apply Mathlib CategoryTheory.Abelian.isIso_of_epi_of_isIso to the two exact three-term rows with epic last arrows. The last comparison is an isomorphism. Mathlib preservesColimit_of_isIso_post proves preservation of the original diagram, and quantifying over all diagrams gives preservation of I-colimits.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "lem-weil-pbc-derived-functor-injective-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0739, second paragraph and its natural comparison diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If exact filtered colimits of injective objects are acyclic in degree n plus one and the nth right derived functor preserves filtered colimits then the next right derived functor preserves filtered colimits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If exact filtered colimits of injective objects are acyclic in degree n plus one and the nth right derived functor preserves filtered colimits then the next right derived functor preserves filtered colimits",
+   "results": "CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; CategoryTheory.Functor.rightDerived; CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; HomologicalComplex.ab5OfSize; HomologicalComplex.hasExactColimitsOfShape; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.toRightDerivedZero",
+   "date": "2026-10-12",
+   "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]olimit|[Cc]olimit.*rightDerived",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-12",
+   "verdict": "no match (ingredients only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cohomology-filtered-colimit",
+   "place": "proof steps 4 and 6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/RightDerived/FilteredColimitSuccessor.lean",
+  "declaration": "CategoryTheory.Functor.preservesColimitsOfShape_rightDerived_succ",
+  "statement": "theorem preservesColimitsOfShape_rightDerived_succ {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B] [Abelian A] [IsGrothendieckAbelian.{w} A] [Abelian B] (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v] (I : Type t) [SmallCategory I] [IsFiltered I] [HasColimitsOfShape I A] [HasExactColimitsOfShape I A] [HasColimitsOfShape I B] [HasExactColimitsOfShape I B] (n : ℕ) (hacyclic : ∀ (J : I ⥤ A), (∀ i : I, Injective (J.obj i)) → IsZero ((v.rightDerived (n + 1)).obj (colimit J))) [PreservesColimitsOfShape I (v.rightDerived n)] : PreservesColimitsOfShape I (v.rightDerived (n + 1))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T032730-L-1421799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T032730-L-1421799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

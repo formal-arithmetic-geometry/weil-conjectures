@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-etale-filtered-injective-acyclic",
+ "kind": "statement",
+ "title": "Filtered colimits of injective etale sheaves are Gamma-acyclic",
+ "statement": "Let $Y$ be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions]. Let $I$ be a small filtered category and $J:I\\to\\mathrm{Ab}(Y_{\\mathrm{et}})$ a diagram of abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves], with every $J_i$ injective. For every $n\\geq0$, $R^{n+1}\\Gamma(Y,\\varinjlim_I J)=0$, where derived global sections are as in [def-weil-pbc-etale-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0739, final claim and its proof; application to qcqs etale objects as in spaces-cohomology.tex, Tag 073E"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Take B to be the qcqs etale objects and Cov the finite coverings with all members and the covered object in B. Finite affine refinements are cofinal. Every iterated fibre product stays qcqs, by qcqs morphism permanence under base change and composition.",
+   "uses": [
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sections on B commute with the filtered colimit. Transfer the module-valued sections theorem to abelian sheaves using modules over the integers (universe lifting is harmless). Each term of a finite-cover Cech complex is a finite product of sections on the iterated fibre products. Finite products of abelian groups are finite biproducts and commute with colimits; compatibility with restrictions identifies the complexes and their differentials.",
+   "uses": [
+    "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The positive Cech cohomology of every J_i vanishes by injectivity. Exact filtered colimits of abelian groups preserve exactness degree by degree, so every positive Cech cohomology of colim J vanishes.",
+   "uses": [
+    "lem-weil-pbc-injective-sheaf-cech-acyclic",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the Cech vanishing criterion to B and Cov. It gives vanishing of positive derived evaluation on every U in B. The identity of Y is terminal and belongs to B. Evaluation there is naturally global sections; natural-isomorphism invariance of right derived functors gives the stated IsZero.",
+   "uses": [
+    "lem-weil-pbc-cech-vanishing-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
+  "def-weil-pbc-cech-complex",
+  "lem-weil-pbc-injective-sheaf-cech-acyclic",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-cech-vanishing-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0739, final claim and its proof; application to qcqs etale objects as in spaces-cohomology.tex, Tag 073E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits of injective sheaves have vanishing higher cohomology on quasi compact quasi separated etale sites",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of injective sheaves have vanishing higher cohomology on quasi compact quasi separated etale sites",
+   "results": "CochainComplex.isKInjective_of_injective; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CochainComplex.cm5b.instInjectiveXIntI; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; CochainComplex.IsKInjective; AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf; CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; CochainComplex.isKInjective_of_injective_aux",
+   "date": "2026-10-12",
+   "verdict": "no match (ingredients only)"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*injective|injective.*colimit",
+   "results": "Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean; Mathlib/CategoryTheory/Types/Monomorphisms.lean; Mathlib/CategoryTheory/Abelian/Injective/Basic.lean; Mathlib/CategoryTheory/Abelian/Injective/Basic.lean; Mathlib/CategoryTheory/Abelian/Injective/Basic.lean; Mathlib/CategoryTheory/Abelian/Injective/Basic.lean; Mathlib/CategoryTheory/Abelian/Injective/Basic.lean; Mathlib/CategoryTheory/Presentable/Limits.lean",
+   "date": "2026-10-12",
+   "verdict": "no match (ingredients only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cohomology-filtered-colimit",
+   "place": "proof step 5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFilteredInjectiveAcyclic.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_rightDerived_globalSections_colimit_of_injective",
+  "statement": "theorem isZero_rightDerived_globalSections_colimit_of_injective (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] (I : Type u) [SmallCategory I] [IsFiltered I] (J : I ⥤ Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (hJ : ∀ i : I, Injective (J.obj i)) (n : ℕ) : IsZero (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerived (n + 1)).obj (colimit J))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T032730-L-1421799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T032730-L-1421799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
