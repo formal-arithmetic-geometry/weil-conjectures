@@ -28,42 +28,28 @@
  ],
  "proof": [
   {
-   "text": "For a tower $A=(A_n,f_n)$, [lem-pc-tower-injective-embedding] gives a monomorphism $A\\to I$ in the abelian tower category [lem-pc-tower-abelian] such that each $I_n$ is an injective abelian group and each transition map $p_n:I_{n+1}\\to I_n$ is a split surjection.",
+   "text": "Apply [lem-pc-tower-injective-embedding] to an arbitrary tower A to obtain a monomorphism into a tower I of injective groups with split-surjective transitions. Apply [lem-pc-injective-split-tower-injective] to these properties to obtain injectivity of I in the tower category. Package I and the monomorphism as an injective presentation of A. Doing this for every A gives enough injectives [def-sp-enough-injectives].",
    "uses": [
     "lem-pc-tower-injective-embedding",
-    "lem-pc-tower-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
-   }
-  },
-  {
-   "text": "Such a tower $I$ is an injective object [def-sp-injective-resolutions] of the tower category. Let $A\\to B$ be a monomorphism of towers, with transition maps $f_n$ of $A$ and $g_n$ of $B$, and let $\\varphi:A\\to I$ be a morphism. Since kernels in the tower category [lem-pc-tower-abelian] are computed levelwise, each $A_n\\to B_n$ is injective. Extend $\\varphi_1$ to $\\psi_1:B_1\\to I_1$ by injectivity of $I_1$. If $\\psi_n:B_n\\to I_n$ extends $\\varphi_n$ and is compatible with the transitions up to level $n$, let $s_n$ be a section of $p_n$. On $A_{n+1}$ the map $\\varphi_{n+1}-s_n\\psi_ng_n=\\varphi_{n+1}-s_n\\varphi_nf_n$ satisfies $p_n(\\varphi_{n+1}-s_n\\varphi_nf_n)=\\varphi_nf_n-\\varphi_nf_n=0$, so it lands in $\\ker(p_n)$, which is injective as a direct summand of the injective group $I_{n+1}$; extend it to $\\chi:B_{n+1}\\to\\ker(p_n)$. Then $\\psi_{n+1}=\\chi+s_n\\psi_ng_n$ extends $\\varphi_{n+1}$ and satisfies $p_n\\psi_{n+1}=\\psi_ng_n$. The $\\psi_n$ form a morphism $B\\to I$ extending $\\varphi$, so $I$ is injective. Thus every tower embeds in an injective tower, which is [def-sp-enough-injectives].",
-   "uses": [
-    "lem-pc-tower-injective-embedding",
-    "lem-pc-tower-abelian",
-    "def-sp-injective-resolutions",
+    "lem-pc-injective-split-tower-injective",
     "def-sp-enough-injectives"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+    "place": "Tag 07KW, Lemma 15.88.1 setup for Ab(N)"
    }
   }
  ],
  "proof_deps": [
   "lem-pc-tower-injective-embedding",
-  "lem-pc-tower-abelian",
-  "def-sp-injective-resolutions",
+  "lem-pc-injective-split-tower-injective",
   "def-sp-enough-injectives"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+  "place": "Tag 07KW, Lemma 15.88.1 setup for Ab(N)"
  },
  "mathlib_searches": [
   {
@@ -147,5 +133,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T085234-L-12828",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

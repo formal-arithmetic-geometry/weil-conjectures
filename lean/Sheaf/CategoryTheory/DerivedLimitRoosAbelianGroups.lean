@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
 import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 import Sheaf.CategoryTheory.InjectiveTowerEmbedding
+import Sheaf.CategoryTheory.InjectiveSplitTower
 import Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact
 
 /-!
@@ -60,7 +61,10 @@ abelian groups with split-surjective transitions; compatible lifts are construct
 successively, extending at each stage into the injective kernel of the transition.
 Thus every tower admits a monomorphism to an injective tower. -/
 theorem roosTowerEnoughInjectives : EnoughInjectives (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) := by
-  sorry
+  constructor
+  intro A
+  obtain ⟨I, i, hi, hI, hp⟩ := tower_injective_embedding A
+  exact ⟨⟨I, injective_of_injective_split_tower I hI hp, i, hi⟩⟩
 
 attribute [local instance] roosTowerEnoughInjectives
 
@@ -72,7 +76,12 @@ are levelwise, and compatible tuples in a finite biproduct are pairs of compatib
 tuples. Inverse limit therefore preserves finite biproducts, hence is additive. -/
 theorem roosLimitAdditive :
     (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).Additive := by
-  sorry
+  constructor
+  intro A B f g
+  apply limit.hom_ext
+  intro n
+  simp only [lim_map, limMap_π, Preadditive.add_comp, NatTrans.app_add,
+    Preadditive.comp_add]
 
 attribute [local instance] roosLimitAdditive
 
