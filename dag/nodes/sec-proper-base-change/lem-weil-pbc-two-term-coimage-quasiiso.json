@@ -13,24 +13,25 @@
  ],
  "proof": [
   {
-   "text": "At r distinct from q-1 and q the term of M is zero, hence its homology is zero. At q-1 the incoming term M^(q-2) is zero and the outgoing differential is mono, so its kernel and homology vanish. The target single complex has zero homology in all these degrees, so the induced maps there are isomorphisms of zero objects.",
+   "text": "For r different from q, the target single complex has zero term and is exact. For r also different from q-1, M has zero term and is exact. At q-1 the incoming differential is zero since M^(q-2) is zero, and the outgoing differential is mono by hm, so ShortComplex.exact_iff_mono proves exactness. quasiIsoAt_iff_exactAt' proves the comparison in these degrees.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
    "elementary": true
   },
   {
-   "text": "At q the outgoing term is zero, so cycles are M^q. Cancel the mono inclusion of K cycles in the given differential equation: e1 d_M e0^(-1) pi is the corestriction of d_K into its cycles. The coimage projection pi is epi, so this identifies the boundary image of M under e1 with the boundary image of K. Consequently its homology cokernel identifies with the cokernel of K boundaries in K cycles, that is H^q(K).",
+   "text": "Cancel the mono K.iCycles q in hd to identify the corestriction of the incoming differential with K.toCycles (q-1) q. Let T be the short complex K.X(q-1) -> K.cycles q -> K.homology q; HomologicalComplex.homologyIsCokernel and ShortComplex.exact_of_g_is_cokernel prove T exact. Let S be M.X(q-1) -> M.X q -> (single q (K.homology q)).X q, whose second arrow is b.f q. The chain-map equation and the zero target term at q-1 prove S is a short complex. Construct T -> S with components the coimage projection followed by e0.inv, e1.inv, and singleObjXSelf.inv. Its squares commute by hd and hb. These components are epi, iso, and mono, respectively; ShortComplex.exact_iff_of_epi_of_isIso_of_mono transfers exactness to S.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-sp-abelian"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The normalization of b identifies the degree-q map with rho after identifying cycles. Therefore its induced map on the cokernel of boundaries is the identity of H^q(K), by uniqueness of cokernel descent. The single-complex homology at q is H^q(K). The map is an isomorphism at q and, by the first step, in all other degrees. This is exactly the definition of quasi-isomorphism.",
+   "text": "Since K.homologyπ q is epi, hb and cancellation of isomorphisms show b.f q is epi. The outgoing differential of M at q is zero because M.X(q+1) is zero. Both adjacent terms of the single complex are zero. Apply ShortComplex.quasiIso_iff_of_zeros' to S.Exact and Epi (b.f q), transported with quasiIsoAt_iff', to obtain the comparison at q. Assemble all degrees by quasiIso_iff.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "def-sp-abelian"
    ],
    "elementary": true
   }
@@ -42,7 +43,7 @@
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/08J5",
-  "place": "Remark 08J5 (remark-truncation-distinguished-triangle), second triangle, quotient quasi-isomorphism; original node step 6, expanded via Tag 010V (section-complexes) and Tag 0118 (section-truncations).; degreewise details expanded by F2 from Tags 010V, 0114, 0118."
+  "place": "Remark 13.12.4, second triangle; degreewise calculation from Tags 010V and 0118, formalized by B2 using Mathlib cokernel exactness and ShortComplex quasiIso_iff_of_zeros'."
  },
  "mathlib_searches": [
   {
@@ -120,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-afb21",
-  "group": "F2",
+  "reviewer": "X-92871",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T194109-L-454497",
+  "landing": "20261012T223358-L-1634402",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem signature and two remaining obligations with their DAG nodes and sources; verified axioms and clean compilation of all three delivered modules and direct importers TruncationCouple, TruncationDescends, and TruncationTriangle."
+  "note": "independent Codex review: Matched the unchanged theorem signature and complete proof with its DAG statement, proof records, and source; verified clean delivery compilation, direct importer UpperTruncationStepSES against the delivered module, and only the three permitted axioms."
  }
 }

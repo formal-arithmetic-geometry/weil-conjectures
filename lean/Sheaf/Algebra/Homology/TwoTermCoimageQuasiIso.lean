@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
+public import Mathlib.Algebra.Homology.QuasiIso
 
 /-!
 # Cohomology projection of a two-term coimage complex
@@ -59,6 +59,73 @@ theorem twoTermCoimage_quasiIso
     (b : M ⟶ (singleFunctor C q).obj (K.homology q))
     (hb : e₁.inv ≫ b.f q ≫
       (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q (K.homology q)).hom =
-      K.homologyπ q) : QuasiIso b := by sorry
+      K.homologyπ q) : QuasiIso b := by
+  have hprev : (ComplexShape.up ℤ).prev q = q - 1 := by simp
+  have hnext : (ComplexShape.up ℤ).next q = q + 1 := by simp
+  let L := (singleFunctor C q).obj (K.homology q)
+  have hL (r : ℤ) (hr : r ≠ q) : IsZero (L.X r) :=
+    HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) q
+      (K.homology q) r hr
+  have hdM : M.d q (q + 1) = 0 :=
+    (hM (q + 1) (by omega) (by omega)).eq_of_tgt _ _
+  have hw : M.d (q - 1) q ≫ b.f q = 0 := by
+    rw [← b.comm]
+    rw [(hL (q - 1) (by omega)).eq_of_src (L.d (q - 1) q) 0]
+    simp
+  let S := ShortComplex.mk (M.d (q - 1) q) (b.f q) hw
+  let T := ShortComplex.mk (K.toCycles (q - 1) q) (K.homologyπ q)
+    (K.toCycles_comp_homologyπ (q - 1) q)
+  have hT : T.Exact :=
+    T.exact_of_g_is_cokernel (K.homologyIsCokernel (q - 1) q hprev)
+  have hcore : cokernel.π (kernel.ι (K.d (q - 1) q)) ≫ e₀.inv ≫
+      M.d (q - 1) q ≫ e₁.hom = K.toCycles (q - 1) q := by
+    apply (cancel_mono (K.iCycles q)).1
+    simpa only [Category.assoc, K.toCycles_i] using hd
+  let e := HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q (K.homology q)
+  let φ : T ⟶ S :=
+    { τ₁ := cokernel.π (kernel.ι (K.d (q - 1) q)) ≫ e₀.inv
+      τ₂ := e₁.inv
+      τ₃ := e.inv
+      comm₁₂ := by
+        dsimp [T, S]
+        rw [← hcore]
+        simp
+      comm₂₃ := by
+        dsimp [T, S]
+        rw [← hb]
+        simp [e] }
+  have : Epi φ.τ₁ := by dsimp [φ]; infer_instance
+  have : IsIso φ.τ₂ := by dsimp [φ]; infer_instance
+  have : Mono φ.τ₃ := by dsimp [φ]; infer_instance
+  have hS : S.Exact := (ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ).1 hT
+  have : Epi (b.f q) := by
+    have : Epi (e₁.inv ≫ b.f q ≫ e.hom) := by
+      change Epi (e₁.inv ≫ b.f q ≫
+        (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q (K.homology q)).hom)
+      rw [hb]
+      infer_instance
+    have : Epi (e₁.inv ≫ b.f q) :=
+      (epi_comp_iff_of_isIso (e₁.inv ≫ b.f q) e.hom).1 (by
+        simpa only [Category.assoc] using this)
+    exact epi_of_epi e₁.inv (b.f q)
+  rw [quasiIso_iff]
+  intro i
+  by_cases hi : i = q
+  · subst i
+    rw [quasiIsoAt_iff' b (q - 1) q (q + 1) hprev hnext]
+    apply (ShortComplex.quasiIso_iff_of_zeros' _ hdM
+      ((hL (q - 1) (by omega)).eq_of_src _ _)
+      ((hL (q + 1) (by omega)).eq_of_tgt _ _)).2
+    exact ⟨hS, show Epi (b.f q) from inferInstance⟩
+  · have hLex : L.ExactAt i := HomologicalComplex.ExactAt.of_isZero (hL i hi)
+    rw [quasiIsoAt_iff_exactAt' b i hLex]
+    by_cases hi' : i = q - 1
+    · subst i
+      rw [HomologicalComplex.exactAt_iff' M (q - 2) (q - 1) q (by simp; omega)
+        (by simp)]
+      apply (ShortComplex.exact_iff_mono _
+        ((hM (q - 2) (by omega) (by omega)).eq_of_src _ _)).2
+      exact hm
+    · exact HomologicalComplex.ExactAt.of_isZero (hM i hi' hi)
 
 end CochainComplex
