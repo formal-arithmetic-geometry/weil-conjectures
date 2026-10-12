@@ -57,6 +57,9 @@ def inventory(upstream):
             p = ROOT/'lean'/path(m)
             if m.startswith('Sheaf.') and m not in modules and p.is_file():
                 modules[m] = p.read_text(); todo.append(m)
+    # Census warnings describe individual modules; they must not stop exports
+    # of unrelated sections. cut/check remain strict validation gates.
+    census = {m: ledger.scan_text(text) for m, text in modules.items()}
     available = {'.'.join(p.relative_to(upstream).with_suffix('').parts) for p in (upstream/'WeilConjectures').rglob('*.lean')}
     destinations = {}
     # A merged mapping is authoritative only when the destination really exists.
@@ -73,7 +76,7 @@ def inventory(upstream):
         ms = [m for m in ms if m.startswith('Sheaf.') and m not in available or
               m.startswith('WeilConjectures.') and (upstream/path(m)).is_file() and
               modules[m] != (upstream/path(m)).read_text()]
-        rows = [r for m in ms for r in scan(modules[m])]
+        rows = [r for m in ms for r in census[m][0]]
         deps = sorted({d for m in ms for d in IMPORT.findall(modules[m])
                        if d.startswith(('Sheaf.', 'WeilConjectures.')) and d not in available and d not in ms})
         out[u] = dict(section=u, chapter=unit.get('chapter'), title=unit.get('title'),
@@ -110,7 +113,8 @@ def inventory(upstream):
         assigned.setdefault(m, min(units_for_module, key=lambda u: (rank.get(u, len(rank)), u)))
     for s in order:
         s['modules'] = [m for m in s['modules'] if assigned.get(m, s['section']) == s['section']]
-        rows = [r for m in s['modules'] for r in scan(modules[m])]
+        rows = [r for m in s['modules'] for r in census[m][0]]
+        s['scan_warnings'] = {m: census[m][1] for m in s['modules'] if census[m][1]}
         s.update(declarations=len(rows),
                  proved=sum(not r['markers'] and r['kind'] != 'structure field' for r in rows),
                  holes=sum(bool(r['markers']) for r in rows),
