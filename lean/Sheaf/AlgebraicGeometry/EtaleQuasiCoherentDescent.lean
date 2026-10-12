@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
-import Sheaf.AlgebraicGeometry.FpqcTensorSections
+import Sheaf.AlgebraicGeometry.EtaleTensorSectionsHomComparison
 
 /-!
 # Étale descent for sections of quasi-coherent modules
@@ -33,18 +32,21 @@ Source: Stacks Project, Descent, Section 35.8, equation (35.8.1) and Lemma 35.8.
 Tags 03DR and 03DT (blueprint: lem-sc-etale-qcoherent-descent).
 
 Proof:
-1. A covering family of the small étale site is an fpqc covering of its target, by
-   `lem-weil-pbc-fpqc-finer-than-etale` and `def-weil-pbc-etale-site`.
-2. Apply `lem-sc-etale-qcoherent-descent-fpqc-sections` to the pullback of `F` on that
-   target: compatible sections on the covering family descend to a unique section.
-   In Stacks Tag 03DT this follows from descent of morphisms between quasi-coherent
-   modules (Proposition 35.5.2), identifying sections with maps from the structure sheaf.
-3. The restriction maps are those of `lem-sc-etale-qcoherent-presheaf-functorial`.
-   Thus the existence and uniqueness in step 2 are precisely the sheaf condition for
-   `etaleTensorSectionsPresheaf F` on `X.smallEtaleTopology`. -/
+1. Identify the underlying presheaf of sets with `etaleHom (unitObj X) F` using
+   `lem-sc-etale-tensor-sections-hom-comparison`. The identification intertwines the
+   unit-normalized tensor-pullback restrictions with the restrictions on module maps.
+2. The structure sheaf and `F` are quasi-coherent, so `isSheaf_etaleHom` gives the
+   sheaf condition for that Hom presheaf. This is the full-faithfulness part of fpqc
+   descent, restricted to the small étale site, exactly as in Stacks Tag 03DT.
+3. Transport the sheaf condition across the isomorphism, then reflect it through the
+   forgetful functor from abelian groups to sets. -/
 theorem isSheaf_etaleTensorSectionsPresheaf {X : Scheme.{u}} (F : X.Modules)
     [F.IsQuasicoherent] :
     Presheaf.IsSheaf X.smallEtaleTopology (etaleTensorSectionsPresheaf F) := by
-  sorry
+  apply Presheaf.isSheaf_of_isSheaf_comp _ _ (CategoryTheory.forget AddCommGrpCat)
+  rw [isSheaf_iff_isSheaf_of_type]
+  obtain ⟨e⟩ := nonempty_etaleTensorSectionsHomIso F
+  exact Presieve.isSheaf_iso _ e.symm
+    ((isSheaf_iff_isSheaf_of_type _ _).1 (isSheaf_etaleHom (unitObj X) F))
 
 end AlgebraicGeometry.Scheme.Modules

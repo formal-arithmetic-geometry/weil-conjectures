@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-etale-hom-sheaf",
+ "kind": "statement",
+ "title": "Étale sheaf of homomorphisms between quasi-coherent pullbacks",
+ "statement": "Let X be a scheme [def-pc-scheme] and M,N quasi-coherent O_X-module sheaves [def-weil-sheaf-of-modules-category, pqf-def-coherent]. The presheaf on the small étale site [def-weil-pbc-etale-site] given by u:U→X ↦ Hom(u^*M,u^*N), using the canonical pullback pseudofunctor [def-pc-module-pullback], is a sheaf of sets.",
+ "source": {
+  "document": "WeilConjectures/AlgebraicGeometry/Sites/EtaleHom.lean",
+  "place": "Modules.isSheaf_etaleHom (lines 160–167); fpqc full faithfulness, Stacks Tag 023T, restricted to the small étale site"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-etale-site",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Full faithfulness of fpqc descent for quasi-coherent modules gives the fpqc sheaf of morphisms between pullbacks. In the existing Lean proof this is isSheaf_presheafHom.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict this sheaf to the small étale site. Its coverings are fpqc, so every étale compatible family glues uniquely by the preceding sheaf condition. The upstream code implements this restriction via the continuous small-étale to pro-étale functor and proetaleTopology_le_fpqcTopology. This is the exact, already proved declaration isSheaf_etaleHom.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "WeilConjectures/AlgebraicGeometry/Sites/EtaleHom.lean",
+  "place": "Modules.isSheaf_etaleHom (lines 160–167); fpqc full faithfulness, Stacks Tag 023T, restricted to the small étale site"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent module homomorphisms satisfy fpqc descent",
+   "results": "Service unavailable: Internal Server Error. No search verdict.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom between pullbacks of quasi coherent modules is a sheaf on the small etale site",
+   "results": "Mathlib pullback and pseudofunctor definitions, no sheaf theorem.",
+   "date": "2026-10-12",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg isSheaf_etaleHom|isSheaf_presheafHom lean/WeilConjectures dag/nodes; blueprint_refs.py search homomorphisms quasi-coherent",
+   "results": "WeilConjectures.AlgebraicGeometry.Sites.EtaleHom.isSheaf_etaleHom gives the exact statement. Existing DAG mentions it in search reports only; no declaration record. Zero matching blueprint nodes. #print axioms reports only propext, Classical.choice, Quot.sound.",
+   "date": "2026-10-12",
+   "verdict": "exact existing library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-qcoherent-descent",
+   "place": "Proof: the recorded classical input Tag 03DT, identifying sections with maps from the pulled-back structure sheaf and descending those maps.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.EtaleHom",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isSheaf_etaleHom",
+  "statement": "lemma Modules.isSheaf_etaleHom (M N : modulesPseudofunctor.obj (.mk (op X)))\n    [(M : X.Modules).IsQuasicoherent] [(N : X.Modules).IsQuasicoherent] :\n    Presheaf.IsSheaf X.smallEtaleTopology (Modules.etaleHom M N)",
+  "branch": "slopmaster2",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.isSheaf_etaleHom",
+     "module": "WeilConjectures.AlgebraicGeometry.Sites.EtaleHom",
+     "kind": "lemma",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T063508-L-3154549",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T063508-L-3154549",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

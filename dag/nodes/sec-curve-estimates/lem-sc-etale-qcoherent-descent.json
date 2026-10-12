@@ -28,51 +28,33 @@
  ],
  "proof": [
   {
-   "text": "Let a covering family in the small etale site of X be given. By the definition of the small etale topology and the etale-to-fpqc comparison, this family is an fpqc covering of its target.",
+   "text": "Identify the underlying set presheaf of tensor-pullback sections with etaleHom(unitObj X,F). This comparison intertwines the normalized section restrictions with the canonical pullHom restrictions.",
    "uses": [
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-fpqc-finer-than-etale"
+    "lem-sc-etale-tensor-sections-hom-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Tag 022C (etale coverings are fpqc)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the fpqc descent statement for quasi-coherent modules to the pullback module on the target and to the compatible family of sections. It gives a unique section on the target whose pullbacks are the given sections; uniqueness is the uniqueness part of effective descent.",
+   "text": "The structure sheaf is quasi-coherent, as is F by hypothesis. Apply the already proved isSheaf_etaleHom to these two modules to obtain the sheaf condition on the small étale site. The fpqc descent part of the source is thus discharged by the existing Hom-descent theorem.",
    "uses": [
-    "lem-sc-etale-qcoherent-descent-fpqc-sections"
+    "lem-sc-etale-hom-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03DT (Lemma 35.8.1), proof via Proposition 35.5.2"
-   }
+   "elementary": false
   },
   {
-   "text": "The presheaf is the assignment in the statement because its restriction maps are the pullback restrictions of the functoriality node. Thus the existence and uniqueness just proved are precisely the sheaf equalizer condition on the small etale site.",
-   "uses": [
-    "lem-sc-etale-qcoherent-presheaf-functorial",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03DR equation (35.8.1) and Tag 03DT"
-   }
+   "text": "Presieve.isSheaf_iso transports the type-valued sheaf condition across the comparison. Presheaf.isSheaf_of_isSheaf_comp reflects it through the forgetful functor AddCommGrpCat→Type, which reflects limits, giving the abelian-group-valued assertion. These are two direct applications of the generic categorical sheaf lemmas.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-fpqc-finer-than-etale",
-  "lem-sc-etale-qcoherent-descent-fpqc-sections",
-  "lem-sc-etale-qcoherent-presheaf-functorial"
+  "lem-sc-etale-tensor-sections-hom-comparison",
+  "lem-sc-etale-hom-sheaf"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/descent.tex",
-  "place": "Tags 03DR and 03DT, Section 35.8"
+  "document": "Stacks Project, Descent",
+  "place": "Tag 03DT, proof of Lemma 35.8.1, section-to-morphism identification and full faithfulness; existing WeilConjectures.AlgebraicGeometry.Sites.EtaleHom.isSheaf_etaleHom supplies the descent"
  },
  "mathlib_searches": [
   {
@@ -181,5 +163,15 @@
   "group": "E1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T063508-L-3154549",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

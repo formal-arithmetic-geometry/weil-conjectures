@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-etale-tensor-sections-hom-comparison",
+ "kind": "statement",
+ "title": "Tensor-pullback sections as the étale Hom presheaf",
+ "statement": "Let X be a scheme [def-pc-scheme] and F any O_X-module sheaf [def-weil-sheaf-of-modules-category]. On the small étale category [def-weil-pbc-etale-site], the underlying set presheaf U↦Γ(U,tensorPullback(u)F), with the unit-normalized restrictions [lem-sc-etale-qcoherent-presheaf-functorial], is naturally isomorphic to U↦Hom(u^*O_X,u^*F), with the pullHom restrictions of the canonical module-pullback pseudofunctor [def-pc-module-pullback]. Here the latter pullback is Mathlib's abstract left adjoint, canonically identified with the tensor-formula one. F need not be quasi-coherent; no sheaf assertion is part of this statement.",
+ "source": {
+  "document": "Stacks Project, Descent",
+  "place": "Tag 03DT, proof of Lemma 35.8.1: reinterpretation of sections as maps from the pulled-back structure sheaf; Tag 03DR, equation (35.8.0.1)",
+  "url": "https://stacks.math.columbia.edu/tag/03DT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "def-pc-module-pullback",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof": [
+  {
+   "text": "For every u:U→X, compare the tensor-formula pullback with Mathlib's abstract pullback by Adjunction.leftAdjointUniq applied to their adjunctions with the same pushforward. The unit equation unit_leftAdjointUniq_hom_app pins the comparison to the canonical section pullback.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing upstream Scheme.Modules.pullbackObjUnitIso u for the abstract pullback of O_X, not the separate tensorPullbackObjUnitToUnit_isIso statement. Evaluation at 1 identifies Hom(O_U,u^*F) with global sections: the inverse sends s to a↦a·s|_V on each open V. Naturality of restriction makes this a module-sheaf map, and linearity plus restriction from the terminal open show the two operations are inverse. Equivalently, apply SheafOfModules.unitHomEquiv and identify a compatible section family with its value at the terminal open. Transport the target along the comparison of step 1 and the source along pullbackObjUnitIso u. These are direct applications of existing library interfaces and the definition of a module morphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For g:V→U over X, pullback sends multiplication by s to multiplication by its pulled-back section. The two composites of left-adjoint comparisons intertwine the same composite units, hence agree by uniqueness of conjugates. The definition of tensorSectionsComp is precisely this unit-normalized comparison. The equality g≫u=v gives the same equality transport in both presheaves. Thus the component bijections commute with etaleTensorSectionsRestriction and etaleHom.map. Assemble the component bijections into a natural isomorphism. No quasi-coherence or topology assertion is used.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Descent",
+  "place": "Tag 03DT, proof of Lemma 35.8.1: reinterpretation of sections as maps from the pulled-back structure sheaf; Tag 03DR, equation (35.8.0.1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The presheaf of sections of pullback modules is naturally isomorphic to Hom from the pullback of the structure sheaf",
+   "results": "Service unavailable: Internal Server Error. No search verdict.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "unitHomEquiv and its naturality lemmas identify module maps from the unit with compatible sections; they do not compare the two scheme-pullback presheaves.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg etale.*Hom.*Iso|Iso.*etale.*Hom|etaleTensorSectionsHom lean/Sheaf lean/WeilConjectures Mathlib/AlgebraicGeometry; blueprint_refs.py search sections pullback structure",
+   "results": "No existing tensor-sections/Hom presheaf comparison. Upstream EtaleStructureSheaf treats only the structure sheaf, via endomorphisms. Zero blueprint matches for sections pullback structure.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural equivalence between global sections of a module sheaf and morphisms from the unit module, compatible with scheme pullback",
+   "results": "Second reading: unitHomEquiv, unitHomEquiv_symm_comp, unitHomEquiv_comp_apply and pullbackPushforwardAdjunction; no comparison of the tensor and abstract étale presheaves. Source search also found upstream homSection_comp and homSection_injective, and the proved pullbackObjUnitIso.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-qcoherent-descent",
+   "place": "Proof: the recorded classical input Tag 03DT, identifying sections with maps from the pulled-back structure sheaf and descending those maps.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsHomComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorSectionsHomComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_etaleTensorSectionsHomIso",
+  "statement": "theorem nonempty_etaleTensorSectionsHomIso {X : Scheme.{u}} (F : X.Modules) :\n    Nonempty ((etaleTensorSectionsPresheaf F ⋙ CategoryTheory.forget AddCommGrpCat) ≅\n      etaleHom (unitObj X) F)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T063508-L-3154549",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T063508-L-3154549",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
