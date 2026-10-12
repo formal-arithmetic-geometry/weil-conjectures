@@ -1,11 +1,17 @@
 # Work queue
 
-112 items; claim with `tools/claim.py next <group> [--stage N]`.
+118 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (8)
+## Stage 1: nodes to split (14)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
+| `thm-weil-pbc-weak-etale-strict-local` | 10 | none |
+| `def-weil-pbc-ind-etale-algebra` | 11 | none |
+| `lem-weil-pbc-ind-etale-stability` | 11 | none |
+| `lem-weil-pbc-weak-etale-field` | 11 | none |
+| `lem-weil-pbc-weak-etale-integral-closure` | 11 | none |
+| `lem-weil-pbc-weak-etale-tor` | 12 | none |
 | `prop-weil-pbc-strict-local-exchange` | 1003 | sorry_here |
 | `lemma-weil-pbc-curve-normalization-constant` | 1008 | sorry_here |
 | `lemma-weil-pbc-smooth-curve-artin-schreier` | 1008 | sorry_here |
@@ -21,7 +27,7 @@
 |---|---|---|---|
 | `def-nagata-final-descended-model` | 3 | state | 1 |
 
-Not open yet: 42 nodes that wait for stage 1, 1 nodes that wait for a statement dependency.
+Not open yet: 47 nodes that wait for stage 1, 1 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (103)
 
@@ -62,15 +68,15 @@ Not open yet: 42 nodes that wait for stage 1, 1 nodes that wait for a statement 
 | `Sheaf.Paper.ZeroDimensionalGlobalSectionsExact` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleColimitCocone` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleFilteredData` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelection` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralStalkEmbedding` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk` | 5 | 1 | proof |
 | `Sheaf.RingTheory.StrictlyHenselianOfDimensionZero` | 5 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale` | 5 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection` | 6 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteEtaleLiftingEssentialSurjectivity` | 6 | 1 | proof |
