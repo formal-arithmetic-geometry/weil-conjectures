@@ -17,21 +17,29 @@
  ],
  "proof": [
   {
-   "text": "The image T of an affine open O of W is affine, because its inclusion into X is an open immersion and is an isomorphism onto its image. Apply hlocal to T.",
+   "text": "Apply IsAffineOpen.image_of_isOpenImmersion to W.ι and the affine open O. Put T = W.ι image O and use hlocal to obtain subsingleton cohomology over T.",
    "uses": [
     "lem-weil-pbc-open-immersion-iso-onto-image"
    ],
    "elementary": false
   },
   {
-   "text": "The fibre products O ×_W (W ×_X Z) and T ×_X Z are canonically isomorphic. Construct mutually inverse maps from their projections by the pullback universal properties and the isomorphism O ≅ T; their composites are identities by uniqueness.",
-   "uses": [],
-   "elementary": true
+   "text": "Use W.ι.isoImage O, pullback.map with isomorphism vertical maps, and pullbackRightPullbackFstIso to construct e from the iterated fibre product to T ×_X Z. The projection of e to X equals the iterated projection by the projection identities of those isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-iso-onto-image"
+   ],
+   "elementary": false
   },
   {
-   "text": "The inverse-image composition isomorphisms identify the coefficient sheaves under that scheme isomorphism. Forgetting module structure commutes with inverse image. Cohomology respects sheaf isomorphisms, and topological invariance along a scheme isomorphism identifies the cohomology groups. Transport the local vanishing.",
+   "text": "Compose four upperStarComp isomorphisms (mapping two of them through inverse-image functors) using the equality of projections to X. This identifies e.hom inverse image of the module sheaf over T ×_X Z with the iterated module inverse image of J.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply pullback_forget_modules_iso to e.hom and the module sheaf over T ×_X Z. Compose its inverse with sheafCompose.mapIso on the module-sheaf isomorphism. Apply Sheaf.functorH.mapIso, convert with Iso.addCommGroupIsoToAddEquiv, and compose with cohomologyEquiv along e.hom. The inverse of the resulting additive equivalence is injective, which transports subsingletonness.",
+   "uses": [
     "lemma-weil-pbc-etale-pullback-forget-modules",
     "prop-weil-pbc-universal-homeomorphism-topos"
    ],
@@ -46,8 +54,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 0A51 and 03D3",
-  "place": "The restriction and gluing steps of the finite-affine-cover induction"
+  "document": "Stacks Project, Tags 03CB, 03D3 and 03SI; Mathlib open-image and pullback-pasting APIs",
+  "place": "Complete Lean proof by affine image, canonical pullback isomorphism, inverse-image composition, forgetting coefficients, and cohomology equivalence; second reading by H1."
  },
  "mathlib_searches": [
   {
@@ -114,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-7dcf0",
-  "group": "T1",
+  "reviewer": "X-66b02",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T014245-L-874691",
-  "kind": "interface",
-  "note": "independent Codex review: Matched all delivered Lean signatures with their nodes, the induction with its proof metadata, and the remaining lemmas with their sources; compilation and axiom checks pass."
+  "landing": "20261012T022706-L-1073425",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the unchanged Lean signature to the node, the complete proof to its dependencies and updated metadata, and the report to the delivery; compilation is clean and axioms are only propext, Classical.choice, and Quot.sound."
  }
 }
