@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Constructible
-import Sheaf.Topology.ConstructibleInConstructible
-import WeilConjectures.ConstructibleSheaf.Refinement
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+import Sheaf.AlgebraicGeometry.EtaleStratificationLocalGluingCore
 
 /-!
 # Gluing finite étale constructible stratifications
@@ -68,6 +68,22 @@ theorem exists_constructible_stratification_finite_etale_of_affine_local
       ∀ i : Fin S.n,
         IsFinite (pullback.snd j (S.immersion i)) ∧
         Etale (pullback.snd j (S.immersion i)) := by
-  sorry
+  classical
+  obtain ⟨n, W, hW, hcover, hlocal⟩ := hlocal
+  choose T hc hf using hlocal
+  obtain ⟨S, hS, hfactor⟩ :=
+    exists_global_stratification_factoring_local n W hW hcover T hc
+  refine ⟨S, hS, ?_⟩
+  intro i
+  obtain ⟨a, b, q, hq⟩ := hfactor i
+  let g := (T a).immersion b ≫ (W a).ι
+  have : IsFinite (pullback.snd j g) := (hf a b).1
+  have : Etale (pullback.snd j g) := (hf a b).2
+  rw [← hq]
+  let e := pullbackLeftPullbackSndIso j g q
+  have he : e.inv ≫ pullback.snd (pullback.snd j g) q =
+      pullback.snd j (q ≫ g) := pullbackLeftPullbackSndIso_inv_snd_snd j g q
+  rw [← he]
+  exact ⟨inferInstance, inferInstance⟩
 
 end AlgebraicGeometry.Scheme

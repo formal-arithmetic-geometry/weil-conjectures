@@ -29,72 +29,34 @@
  ],
  "proof": [
   {
-   "text": "For each chart W_a contained in X, first note that W_a is quasi-compact because it is affine. Since X is quasi-compact and quasi-separated, [lem-weil-pbc-qcqs-scheme-spectral] gives a spectral space, whose definition [def-weil-spectral-space] includes a basis of quasi-compact opens, and [lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact] shows that the open W_a is retrocompact. Therefore its closed complement is constructible by [def-weil-constructible-subset]. Each local W_{a,b}, constructible in the retrocompact open W_a, is constructible in X by [lem-weil-pbc-constructible-in-retrocompact-open]; composing its immersion into W_a with the open immersion W_a to X makes it a locally closed subscheme of X. Add the closed complement as one further stratum, giving it a closed subscheme structure by [lem-weil-pbc-closed-subset-closed-subscheme]. Thus each chart produces a finite stratification of X by constructible locally closed subschemes: the local pieces cover W_a and the complement covers the rest.",
+   "text": "Choose the given local stratifications. Apply the geometric immersed-refinement theorem to obtain a constructible global stratification with actual factorization maps into local stratum representatives.",
    "uses": [
-    "def-constructible-stratification",
-    "def-weil-open-immersion",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-closed-subset-closed-subscheme",
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "def-weil-spectral-space",
-    "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
-    "lem-weil-pbc-constructible-in-retrocompact-open"
+    "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "def-constructible-stratification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma Tag 03S9, proof, locality reduction; the complement and subscheme structures are made explicit here"
-   }
+   "elementary": false
   },
   {
-   "text": "Iterate [lemma-constructible-common-refinement] over the finitely many chart stratifications. The resulting finite partition $(X_i)_i$ is constructible and locally closed, and each $X_i$ is contained in one member of every chart stratification. Since the $W_a$ cover $X$, each $X_i$ is contained in some $W_a$ rather than in its complement; for that $a$ it is therefore contained in one of the local pieces $W_{a,b}$.",
+   "text": "On each global stratum pull back the local finite etale morphism along its factorization map. Finiteness and etaleness persist by base change. The pullbackLeftPullbackSndIso identifies the iterated pullback with the pullback along the global immersion; composition with the inverse isomorphism preserves both properties.",
    "uses": [
-    "lemma-constructible-common-refinement"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma Tag 03S9, proof, second paragraph: finite intersections and disjointization of the local stratifications"
-   }
-  },
-  {
-   "text": "Fix an underlying stratum X_i and choose a,b with X_i contained in W_{a,b}. Define Z_i = X_i fibre-product over X with W_{a,b}, with its induced fibre-product scheme structure and actual projections p_i : Z_i\\to X_i and q_i : Z_i\\to W_{a,b}. The map $p_i$ is the base change of the immersion $W_{a,b}\\to X$ along $X_i\\to X$, hence an immersion [lem-weil-pbc-immersion-base-change-lft] (1); composed with the immersion $X_i\\to X$ it makes $Z_i\\to X$ an immersion [lem-weil-pbc-proper-fp-permanence] (e), whose image is $X_i\\cap W_{a,b}=X_i$ [lem-weil-pbc-base-change-image]; use $Z_i$ as the scheme representative of this stratum (same underlying set, so the $Z_i$ still form a finite partition by constructible locally closed subschemes). Pull back the finite morphism from U fibre-product over X with W_{a,b} to W_{a,b} along q_i; it is finite by base-change permanence (a) in [lem-weil-pbc-finite-morphism-permanence], and etale by the Mathlib-backed base-change node [lem-weil-pbc-etale-scheme-base-change]. Fibre-product associativity identifies the resulting source with U fibre-product over X with Z_i, so this map is finite etale over the stratum Z_i. Relabeling Z_i as X_i gives the required global partition.",
-   "uses": [
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-etale-scheme-base-change",
     "def-pc-fibre-product",
-    "lem-weil-pbc-immersion-base-change-lft",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-base-change-image"
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma Tag 03S9, proof, locality step and stability of finite etale morphisms under base change"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-constructible-stratification",
   "def-pc-fibre-product",
-  "def-weil-closed-immersion",
-  "def-weil-open-immersion",
-  "def-weil-spectral-space",
-  "lem-weil-pbc-base-change-image",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
-  "lem-weil-pbc-constructible-in-retrocompact-open",
   "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
-  "lemma-constructible-common-refinement"
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-weil-pbc-finite-morphism-permanence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, second paragraph"
+  "place": "Tag 03S0 locality reduction, split into geometric refinement and finite-etale base-change verification"
  },
  "mathlib_searches": [
   {
@@ -172,5 +134,15 @@
   "group": "K1",
   "result": "pass",
   "note": "qcqs X,U as CompactSpace+QuasiSeparatedSpace; [Etale j]; existential finite affine cover (Fin n, IsAffineOpen, union=univ); per-chart recorded LocallyClosedStratification (W a) + IsConstructible strata (slopmaster2 Topology.Stratification has no constructibility field); IsFinite∧Etale of pullback.snd j (S.immersion b ≫ (W a).ι); conclusion identical in form to F1 39c27f035 exists_etale_stratified_finite"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T060742-L-2909666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

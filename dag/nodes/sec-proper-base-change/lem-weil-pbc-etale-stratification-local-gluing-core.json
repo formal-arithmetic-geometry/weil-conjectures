@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-etale-stratification-local-gluing-core",
+ "kind": "lemma",
+ "title": "Global constructible immersed refinement factoring through local strata",
+ "statement": "Let X be a quasi-compact quasi-separated scheme (def-weil-pbc-scheme-conventions). Given a finite affine open cover W indexed by Fin n and, for each chart W_a, a finite constructible locally closed immersed stratification T_a (def-constructible-stratification), there exists a finite constructible locally closed immersed stratification S of X such that each stratum immersion of S factors by an actual scheme morphism through one local stratum immersion T_a,b -> W_a -> X. No morphism U -> X or finite-etale property is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Tag 03S0, locality reduction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-constructible-stratification"
+ ],
+ "proof": [
+  {
+   "text": "Extend each local partition by the closed complement of its affine chart. Affine charts are quasi-compact and hence retrocompact; local constructible subsets are constructible in X. Realize the complement as a closed subscheme and compose local immersions with the chart inclusion.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-weil-spectral-space",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-constructible-in-retrocompact-open",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the finite common refinement of these extended partitions using intersections, represented by fibre products. Discard empty parts. For each nonempty part choose a point and a chart containing it; refinement puts the entire part into one local stratum of that chart. The empty base admits the zero-stratum partition.",
+   "uses": [
+    "lemma-constructible-common-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Replace each chosen refined scheme by its fibre product with the local representative. The composite immersion has the same image, so the finite partition and constructibility persist. The second projection gives the actual factorization through the local representative.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-base-change-image",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-spectral-space",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-constructible-in-retrocompact-open",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+  "lemma-constructible-common-refinement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S0 locality reduction; finite intersection refinement and scheme pullback representatives as in the parent node steps 1-3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite constructible locally closed partition subordinate to affine open cover with morphisms factoring through local strata",
+   "results": "Eight affine open cover/refinement hits; none constructs an immersed finite partition with the requested factorization.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.LocallyClosedStratification",
+   "results": "No hit: this project-specific identifier is not in the Mathlib index.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stratification.*factor|factor.*stratification|exists.*refin",
+   "results": "Hits concern unrelated refinements and shrinking. Local rg finds Scheme.Stratification.inter and exists_refines, but these require existing global stratifications and do not extend affine-local partitions.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite affine open cover with constructible locally closed immersed partitions admits a global finite immersed partition factoring through local representatives",
+   "results": "Service unavailable: Internal Server Error; recorded in searches.jsonl. Other search services and source grep used.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleStratificationLocalGluing",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-etale-stratification-local-gluing"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleStratificationLocalGluingCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleStratificationLocalGluingCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_global_stratification_factoring_local",
+  "statement": "theorem exists_global_stratification_factoring_local\n    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (n : ℕ) (W : Fin n → X.Opens)\n    (hW : ∀ a, IsAffineOpen (W a))\n    (hcover : (⋃ a : Fin n, (W a : Set X)) = Set.univ)\n    (T : ∀ a, LocallyClosedStratification (W a))\n    (hc : ∀ a b, Topology.IsConstructible ((T a).stratum b)) :\n    ∃ S : LocallyClosedStratification X,\n      (∀ i, Topology.IsConstructible (S.stratum i)) ∧\n      ∀ i, ∃ (a : Fin n) (b : Fin (T a).n)\n        (q : S.domain i ⟶ (T a).domain b),\n        q ≫ ((T a).immersion b ≫ (W a).ι) = S.immersion i",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T060742-L-2909666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T060742-L-2909666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
