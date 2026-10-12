@@ -1,184 +1,186 @@
 {
- "id": "lem-weil-pbc-curve-constructible-reduction",
- "blueprint": {
-  "is": "lem-weil-pbc-curve-constructible-reduction",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Reduction to constructible prime torsion",
- "statement": "Let $k$ be an algebraically closed field, let $C$ be a scheme proper over $k$ [def-weil-proper-morphism] of dimension at most one, and let $F$ be a torsion abelian sheaf on $C_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf], so that $(C,F)$ is a curve coefficient pair [def-weil-pbc-curve-setting] with $C$ proper. Let $i:C_{\\mathrm{red}}\\to C$ be the reduction of $C$ [def-weil-pbc-scheme-reduction], and fix an algebraically closed extension $k'/k$. For a curve coefficient pair $(D,G)$ over $k$ write $\\rho^q_{k'/k}(D,G):H^q(D_{\\Et},G)\\to H^q((D_{k'})_{\\Et},G_{k'})$ for the pullback map [def-weil-pbc-extension-pullback] along the projection $D_{k'}=D\\times_kk'\\to D$, i.e. the pullback map of [def-weil-pbc-cohomology-pullback] for that morphism.\n\nAssume: for every prime number $r$ and every constructible sheaf $G$ of $\\mathbf F_r$-modules on $(C_{\\mathrm{red}})_{\\Et}$ (constructible in the sense of [def-weil-pbc-etale-constructible-sheaf] with $\\Lambda=\\mathbf F_r$; such a $G$ is killed by $r$, hence torsion, and $(C_{\\mathrm{red}},G)$ is a curve coefficient pair with $C_{\\mathrm{red}}$ reduced [def-pc-reduced-scheme] and proper), the map $\\rho^q_{k'/k}(C_{\\mathrm{red}},G)$ is bijective for every $q\\ge0$.\n\nThen $\\rho^q_{k'/k}(C,F)$ is bijective for every $q\\ge0$. In particular, if the hypothesis holds for every algebraically closed extension $k'/k$, then assertion $\\mathcal C_7(C,F)$ [def-weil-pbc-C7] (the seventh of the eight curve assertions) holds.\n\nThe coefficient passage runs through filtered colimits of constructible sheaves, the primary decomposition of a constructible sheaf killed by an integer, and the exact sequences $0\\to G[r]\\to G\\to G/G[r]\\to0$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-curve-constructible-reduction.md",
-  "place": "node lem-weil-pbc-curve-constructible-reduction, order 1153"
- },
- "stmt_deps": [
-  "def-weil-proper-morphism",
-  "def-weil-pbc-torsion-etale-sheaf",
-  "def-weil-pbc-curve-setting",
-  "def-weil-pbc-scheme-reduction",
-  "def-weil-pbc-extension-pullback",
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "def-pc-reduced-scheme",
-  "def-weil-pbc-C7"
- ],
- "proof": [
-  {
-   "text": "Let C0 be the nilradical subscheme of C, with inclusion i. The reduction lemma makes C0 reduced and i a surjective closed immersion, hence a universal homeomorphism. Its homeomorphism identifies topological dimensions, so i followed by f is a reduced proper curve. Pull i back along the given base-change projection to obtain P with projections a:P → C0 and j:P → Cprime. Paste the pullback squares to obtain the required field-extension square for C0. Properness gives qcqs source and target.",
-   "uses": [
-    "lem-weil-pbc-reduction-universal-homeomorphism",
-    "lem-weil-pbc-closed-immersion-proper",
-    "def-pc-fibre-product",
-    "def-weil-universal-homeomorphism"
-   ],
-   "elementary": false
+  "id": "lem-weil-pbc-curve-constructible-reduction",
+  "blueprint": {
+    "is": "lem-weil-pbc-curve-constructible-reduction",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "Let A be the underlying abelian sheaf of F and A0 = i^* A. The source stalk-torsion predicate agrees with local torsion; inverse image preserves local torsion, and the torsion characterizations identify this with IsTorsionAbelianSheaf A0. For every prime r, the hypothesis H applies to constructible ULift(ZMod r)-module sheaves on the reduced proper curve C0 and the pasted square. The new fixed-prime constructible approximation theorem therefore gives bijectivity for all abelian sheaves killed by r. Existing prime-torsion devissage gives bijectivity of cohomologyMap a A0 q for every q.",
-   "uses": [
-    "lem-weil-pbc-torsion-sheaf-characterizations",
-    "lem-weil-pbc-inverse-image-torsion",
-    "lem-pbc-q1-prime-constructible-pullback",
-    "lem-weil-pbc-pullback-iso-prime-torsion-devissage"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "Reduction to constructible prime torsion",
+  "statement": "Let $k$ be an algebraically closed field, let $C$ be a scheme proper over $k$ [def-weil-proper-morphism] of dimension at most one, and let $F$ be a torsion abelian sheaf on $C_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf], so that $(C,F)$ is a curve coefficient pair [def-weil-pbc-curve-setting] with $C$ proper. Let $i:C_{\\mathrm{red}}\\to C$ be the reduction of $C$ [def-weil-pbc-scheme-reduction], and fix an algebraically closed extension $k'/k$. For a curve coefficient pair $(D,G)$ over $k$ write $\\rho^q_{k'/k}(D,G):H^q(D_{\\Et},G)\\to H^q((D_{k'})_{\\Et},G_{k'})$ for the pullback map [def-weil-pbc-extension-pullback] along the projection $D_{k'}=D\\times_kk'\\to D$, i.e. the pullback map of [def-weil-pbc-cohomology-pullback] for that morphism.\n\nAssume: for every prime number $r$ and every constructible sheaf $G$ of $\\mathbf F_r$-modules on $(C_{\\mathrm{red}})_{\\Et}$ (constructible in the sense of [def-weil-pbc-etale-constructible-sheaf] with $\\Lambda=\\mathbf F_r$; such a $G$ is killed by $r$, hence torsion, and $(C_{\\mathrm{red}},G)$ is a curve coefficient pair with $C_{\\mathrm{red}}$ reduced [def-pc-reduced-scheme] and proper), the map $\\rho^q_{k'/k}(C_{\\mathrm{red}},G)$ is bijective for every $q\\ge0$.\n\nThen $\\rho^q_{k'/k}(C,F)$ is bijective for every $q\\ge0$. In particular, if the hypothesis holds for every algebraically closed extension $k'/k$, then assertion $\\mathcal C_7(C,F)$ [def-weil-pbc-C7] (the seventh of the eight curve assertions) holds.\n\nThe coefficient passage runs through filtered colimits of constructible sheaves, the primary decomposition of a constructible sheaf killed by an integer, and the exact sequences $0\\to G[r]\\to G\\to G/G[r]\\to0$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-curve-constructible-reduction.md",
+    "place": "node lem-weil-pbc-curve-constructible-reduction, order 1153"
   },
-  {
-   "text": "Topological invariance gives bijectivity for i and for its base change j. Functoriality identifies cohomologyMap a composed with cohomologyMap i with cohomologyMap(a followed by i), up to the cohomology bijection of upperStarComp. Thus the composite map is bijective. The pullback equation identifies a followed by i with j followed by the original base-change projection. Apply functoriality again and cancel the bijection for j and the composition isomorphism. The remaining map is exactly the original cohomologyMap in the required degree.",
-   "uses": [
-    "prop-weil-pbc-universal-homeomorphism-topos",
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-pc-fibre-product",
-  "def-weil-universal-homeomorphism",
-  "lem-pbc-q1-prime-constructible-pullback",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-inverse-image-torsion",
-  "lem-weil-pbc-pullback-iso-prime-torsion-devissage",
-  "lem-weil-pbc-reduction-universal-homeomorphism",
-  "lem-weil-pbc-torsion-sheaf-characterizations",
-  "prop-weil-pbc-universal-homeomorphism-topos"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Theorem 03SC, proof, first two paragraphs; 03SI, 03SA and 03Q5; prime-factor devissage replaces the separate Chinese-remainder/exponent branches"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "etale cohomology of a curve invariant under extension of algebraically closed base field, reduction to constructible coefficients",
-   "results": "Algebra.Etale.baseChange (Mathlib.RingTheory.Etale.Basic), IsEtale.instIsStableUnderBaseChangeScheme, IsEtale (Mathlib.AlgebraicGeometry.Morphisms.Etale), RingHom.Etale.isStableUnderBaseChange, Scheme.etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), Scheme.Etale",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "etale cohomology of a proper curve does not change under extension of algebraically closed field for torsion sheaves",
-   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.iff_exists_algEquiv_prod, FormallyEtale.of_restrictScalars, Algebra.Etale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.*): etale algebras only",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'Sheaf.H\\b\\|SheafCohomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'constructible\\|IsTorsion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
-   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/{Basic,Cech,MayerVietoris}.lean (Ext-defined Sheaf.H on one site, functorial in the sheaf only) and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; no pullback map along a morphism of schemes, no constructible etale sheaves, no curve cohomology",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 1153,
- "blueprint_uses": [
-  "def-weil-pbc-eight-curve-assertions",
-  "def-weil-pbc-etale-sheaves",
-  "lemma-weil-pbc-curve-filtered-cohomology",
-  "lemma-weil-pbc-eight-curve-devissage",
-  "thm-weil-pbc-universal-homeomorphism-invariance"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-etale-sheaves",
-  "thm-weil-pbc-universal-homeomorphism-invariance"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced"
-   ]
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
+  "stmt_deps": [
+    "def-weil-proper-morphism",
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-curve-setting",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-pbc-extension-pullback",
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-pc-reduced-scheme",
+    "def-weil-pbc-C7"
+  ],
+  "proof": [
     {
-     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-     "lines": [
-      135,
-      164
-     ],
-     "kind": "theorem",
-     "sorry": true
+      "text": "Let C0 be the nilradical subscheme of C, with inclusion i. The reduction lemma makes C0 reduced and i a surjective closed immersion, hence a universal homeomorphism. Its homeomorphism identifies topological dimensions, so i followed by f is a reduced proper curve. Pull i back along the given base-change projection to obtain P with projections a:P → C0 and j:P → Cprime. Paste the pullback squares to obtain the required field-extension square for C0. Properness gives qcqs source and target.",
+      "uses": [
+        "lem-weil-pbc-reduction-universal-homeomorphism",
+        "lem-weil-pbc-closed-immersion-proper",
+        "def-pc-fibre-product",
+        "def-weil-universal-homeomorphism"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Let A be the underlying abelian sheaf of F and A0 = i^* A. The source stalk-torsion predicate agrees with local torsion; inverse image preserves local torsion, and the torsion characterizations identify this with IsTorsionAbelianSheaf A0. For every prime r, the hypothesis H applies to constructible ULift(ZMod r)-module sheaves on the reduced proper curve C0 and the pasted square. The new fixed-prime constructible approximation theorem therefore gives bijectivity for all abelian sheaves killed by r. Existing prime-torsion devissage gives bijectivity of cohomologyMap a A0 q for every q.",
+      "uses": [
+        "lem-weil-pbc-torsion-sheaf-characterizations",
+        "lem-weil-pbc-inverse-image-torsion",
+        "lem-pbc-q1-prime-constructible-pullback",
+        "lem-weil-pbc-pullback-iso-prime-torsion-devissage"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Topological invariance gives bijectivity for i and for its base change j. Functoriality identifies cohomologyMap a composed with cohomologyMap i with cohomologyMap(a followed by i), up to the cohomology bijection of upperStarComp. Thus the composite map is bijective. The pullback equation identifies a followed by i with j followed by the original base-change projection. Apply functoriality again and cancel the bijection for j and the composition isomorphism. The remaining map is exactly the original cohomologyMap in the required degree.",
+      "uses": [
+        "prop-weil-pbc-universal-homeomorphism-topos",
+        "lem-weil-pbc-cohomology-pullback-functorial"
+      ],
+      "elementary": false
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "proof_deps": [
+    "def-pc-fibre-product",
+    "def-weil-universal-homeomorphism",
+    "lem-pbc-q1-prime-constructible-pullback",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-torsion",
+    "lem-weil-pbc-pullback-iso-prime-torsion-devissage",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "prop-weil-pbc-universal-homeomorphism-topos"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem 03SC, proof, first two paragraphs; 03SI, 03SA and 03Q5; prime-factor devissage replaces the separate Chinese-remainder/exponent branches"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "etale cohomology of a curve invariant under extension of algebraically closed base field, reduction to constructible coefficients",
+      "results": "Algebra.Etale.baseChange (Mathlib.RingTheory.Etale.Basic), IsEtale.instIsStableUnderBaseChangeScheme, IsEtale (Mathlib.AlgebraicGeometry.Morphisms.Etale), RingHom.Etale.isStableUnderBaseChange, Scheme.etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), Scheme.Etale",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "etale cohomology of a proper curve does not change under extension of algebraically closed field for torsion sheaves",
+      "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.iff_exists_algEquiv_prod, FormallyEtale.of_restrictScalars, Algebra.Etale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.*): etale algebras only",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'Sheaf.H\\b\\|SheafCohomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'constructible\\|IsTorsion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/",
+      "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/{Basic,Cech,MayerVietoris}.lean (Ext-defined Sheaf.H on one site, functorial in the sheaf only) and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; no pullback map along a morphism of schemes, no constructible etale sheaves, no curve cohomology",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1153,
+  "blueprint_uses": [
+    "def-weil-pbc-eight-curve-assertions",
+    "def-weil-pbc-etale-sheaves",
+    "lemma-weil-pbc-curve-filtered-cohomology",
+    "lemma-weil-pbc-eight-curve-devissage",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-etale-sheaves",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced"
+      ]
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+          "lines": [
+            135,
+            164
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "lem-weil-pbc-curve-constructible-reduction",
+    "worker": "stage1",
+    "summary": "Statement made precise against Stacks 03SC: a fixed algebraically closed k'/k, the pullback rho^q_{k'/k} of def-weil-pbc-extension-pullback / def-weil-pbc-cohomology-pullback, hypothesis on all constructible F_r-module sheaves on C_red for all primes r, conclusion rho^q(C,F) bijective for all q, hence C_7(C,F) [def-weil-pbc-C7] when it holds for all k'. stmt_deps: grab-bag def-weil-pbc-etale-sheaves replaced by def-weil-pbc-torsion-etale-sheaf (torsion) and def-weil-pbc-etale-constructible-sheaf (constructible, Lambda = F_r); def-weil-pbc-eight-curve-assertions replaced by its component def-weil-pbc-C7; added def-weil-pbc-curve-setting, def-weil-proper-morphism, def-pc-reduced-scheme, def-weil-pbc-extension-pullback, def-weil-pbc-cohomology-pullback and the new Mathlib leaf def-weil-pbc-scheme-reduction (X.nilradical.subscheme). The imported one-paragraph proof is replaced by eight steps following the first two paragraphs of the proof of 03SC: (1)-(2) reduction to C_red via the new lem-weil-pbc-reduction-universal-homeomorphism (Stacks 054M) and prop-weil-pbc-universal-homeomorphism-topos (03SI, same unit, Lean closed) instead of thm-weil-pbc-universal-homeomorphism-invariance (other unit), with the comparison square written out through the composition rule of lem-weil-pbc-cohomology-pullback-functorial; (3) two-out-of-three for pullback isomorphisms through the new lem-weil-pbc-pullback-cohomology-long-exact-ladder (pullback maps commute with the connecting maps; no node existed) and lem-weil-pbc-five-lemma: this replaces lemma-weil-pbc-eight-curve-devissage, whose statement concerns the conjunction of all eight assertions and cannot be applied to C_7 alone; (4) filtered colimits through lemma-weil-pbc-curve-filtered-cohomology (used only for its first sentence; the compatibility with the ground-field extension is derived from naturality and lem-weil-pbc-inverse-image-preserves-colimits); (5) F = colim F[n] and lem-kun-03sa (03SA(3), Lambda = Z/n) taken one after the other; (6) primary decomposition with thm-constructible-serre; (7) induction on the exponent with 0 -> G[l] -> G -> G/G[l] -> 0; (8) conclusion. The unreachable lemma-weil-pbc-curve-constructible-primary-reduction states the same reduction (for separated curves, extension invariance in general) with an uncited proof: it duplicates this node and is not cited; lemma-weil-pbc-curve-dense-open-reduction is the next reduction of 03SC (constructible F_l-sheaves to j_!G) and belongs to the parent's split, not to this statement."
+  },
+  "tool_uses": [
+    "lem-kun-03sa",
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "prop-weil-pbc-inverse-image-exact"
+  ],
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "statement made precise for (C_7) with a fixed k'; Stacks 03SC first paragraphs; 3 new nodes (1 Mathlib leaf); three generic lemmas accepted as tool uses; lemma-weil-pbc-curve-constructible-primary-reduction stays unreached as a less precise duplicate (merge in stage 3)"
+  },
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+    "declaration": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
+    "branch": "slopmaster2",
+    "line": 135,
+    "declarations": [
+      "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced"
+    ],
+    "sorry_free": false,
+    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "X-bd1bc",
+    "group": "A2",
+    "result": "pass",
+    "landing": "20261012T112828-L-763717",
+    "kind": "interface",
+    "note": "independent Codex review: Delivered finite-quotient signature, node record, change record, report, and Lean source matched each other and the repository; delivered module and downstream caller compiled cleanly.",
+    "sorry_before": [
+      "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
+    ],
+    "sorry_after": [
+      "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
+    ]
   }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "split_report": {
-  "date": "2026-10-09",
-  "item": "lem-weil-pbc-curve-constructible-reduction",
-  "worker": "stage1",
-  "summary": "Statement made precise against Stacks 03SC: a fixed algebraically closed k'/k, the pullback rho^q_{k'/k} of def-weil-pbc-extension-pullback / def-weil-pbc-cohomology-pullback, hypothesis on all constructible F_r-module sheaves on C_red for all primes r, conclusion rho^q(C,F) bijective for all q, hence C_7(C,F) [def-weil-pbc-C7] when it holds for all k'. stmt_deps: grab-bag def-weil-pbc-etale-sheaves replaced by def-weil-pbc-torsion-etale-sheaf (torsion) and def-weil-pbc-etale-constructible-sheaf (constructible, Lambda = F_r); def-weil-pbc-eight-curve-assertions replaced by its component def-weil-pbc-C7; added def-weil-pbc-curve-setting, def-weil-proper-morphism, def-pc-reduced-scheme, def-weil-pbc-extension-pullback, def-weil-pbc-cohomology-pullback and the new Mathlib leaf def-weil-pbc-scheme-reduction (X.nilradical.subscheme). The imported one-paragraph proof is replaced by eight steps following the first two paragraphs of the proof of 03SC: (1)-(2) reduction to C_red via the new lem-weil-pbc-reduction-universal-homeomorphism (Stacks 054M) and prop-weil-pbc-universal-homeomorphism-topos (03SI, same unit, Lean closed) instead of thm-weil-pbc-universal-homeomorphism-invariance (other unit), with the comparison square written out through the composition rule of lem-weil-pbc-cohomology-pullback-functorial; (3) two-out-of-three for pullback isomorphisms through the new lem-weil-pbc-pullback-cohomology-long-exact-ladder (pullback maps commute with the connecting maps; no node existed) and lem-weil-pbc-five-lemma: this replaces lemma-weil-pbc-eight-curve-devissage, whose statement concerns the conjunction of all eight assertions and cannot be applied to C_7 alone; (4) filtered colimits through lemma-weil-pbc-curve-filtered-cohomology (used only for its first sentence; the compatibility with the ground-field extension is derived from naturality and lem-weil-pbc-inverse-image-preserves-colimits); (5) F = colim F[n] and lem-kun-03sa (03SA(3), Lambda = Z/n) taken one after the other; (6) primary decomposition with thm-constructible-serre; (7) induction on the exponent with 0 -> G[l] -> G -> G/G[l] -> 0; (8) conclusion. The unreachable lemma-weil-pbc-curve-constructible-primary-reduction states the same reduction (for separated curves, extension invariance in general) with an uncited proof: it duplicates this node and is not cited; lemma-weil-pbc-curve-dense-open-reduction is the next reduction of 03SC (constructible F_l-sheaves to j_!G) and belongs to the parent's split, not to this statement."
- },
- "tool_uses": [
-  "lem-kun-03sa",
-  "lem-weil-pbc-inverse-image-preserves-colimits",
-  "prop-weil-pbc-inverse-image-exact"
- ],
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "statement made precise for (C_7) with a fixed k'; Stacks 03SC first paragraphs; 3 new nodes (1 Mathlib leaf); three generic lemmas accepted as tool uses; lemma-weil-pbc-curve-constructible-primary-reduction stays unreached as a less precise duplicate (merge in stage 3)"
- },
- "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-  "declaration": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
-  "branch": "slopmaster2",
-  "line": 135,
-  "declarations": [
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced"
-  ],
-  "sorry_free": false,
-  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
-  "result": "pass",
-  "landing": "20261012T135220-L-1656835",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
-  ],
-  "sorry_after": []
- }
 }

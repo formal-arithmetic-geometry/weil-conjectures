@@ -317,14 +317,6 @@ so that `C` is a torsion sheaf with finite stalks. Every class
 `c ∈ Hᵠ(T₀, C|)` of positive degree dies on the closed fibre `V₀ = T₀ ×_T V` of some finite,
 finitely presented `h : V ⟶ T` for which the unit `C ⟶ h_* h^* C` is a monomorphism.
 (blueprint: `lemma-weil-pbc-finite-cover-killing`) -/
-/- STATEMENT-DISPUTED: take A = k[t], I = 0, Λ = ℤ/2, and C the extension by zero
-from U = 𝔸¹_k \ {0,1}, for algebraically closed k. The boundary of the section (0,1)
-on {0,1} is a nonzero class in H¹(X,C). A finite h with monic unit has a nonempty
-generic fibre, hence a connected component dominating X and meeting both endpoint
-fibres. The pulled-back section still cannot extend to a locally constant function
-on that component, so its boundary remains nonzero. See report.md for the complete
-argument. Stacks 09ZD kills finite constant coefficients, not arbitrary constructible
-ones; Stacks 09ZE instead changes coefficients by a monomorphism. -/
 theorem exists_isFinite_cohomologyMap_eq_zero_of_henselianRing [Finite Λ] {A : Type u}
     [CommRing A]
     (I : Ideal A) [HenselianRing A I]

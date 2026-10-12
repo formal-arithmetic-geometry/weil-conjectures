@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentCoordinatesConstant
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk
 import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
@@ -23,53 +23,6 @@ Source: Stacks Project, Étale Cohomology, Lemma 09Z2 and Remark 09Z3.
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-private theorem descent_coordinate
-    {X X' : Scheme.{u}} (f : X' ⟶ X) [IsFinite f]
-    (G : Sheaf X.smallEtaleTopology (Type (u + 1)))
-    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X)
-    (t : {t : Spec (.of Ω) ⟶ X' // t ≫ f = x}) :
-    ∃ c : (Scheme.pointSmallEtale t.1).sheafFiber.obj
-        ((Scheme.etaleSetPullback f).obj G) →
-        (Scheme.pointSmallEtale x).sheafFiber.obj G,
-      Function.Bijective c ∧ ∀ a : (Scheme.pointSmallEtale x).sheafFiber.obj G,
-        c ((colimit.pre
-          ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
-            ((Scheme.etaleSetPullback f).obj G).obj)
-          (Etale.baseChangeNbhd f x t).op)
-          ((Scheme.pointSmallEtale x).sheafFiber.map
-            ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-              (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1))
-              (X.smallGrothendieckTopology @Etale)
-              (X'.smallGrothendieckTopology @Etale)).unit.app G) a)) = a := by
-  rcases t with ⟨t, ht⟩
-  subst x
-  obtain ⟨c, hc, hg, -⟩ := etaleSetInverseImageStalkGerm X X' f G Ω t
-  refine ⟨c, hc, ?_⟩
-  intro a
-  obtain ⟨U, z, s, rfl⟩ :=
-    (Scheme.pointSmallEtale (t ≫ f)).toPresheafFiber_jointly_surjective (P := G.obj) a
-  change c ((colimit.pre
-    ((CategoryOfElements.π (Scheme.pointSmallEtale t).fiber).op ⋙
-      ((Scheme.etaleSetPullback f).obj G).obj)
-    (Etale.baseChangeNbhd f (t ≫ f) ⟨t, rfl⟩).op)
-      ((Scheme.pointSmallEtale (t ≫ f)).presheafFiber.map
-    ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-      (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1))
-      (X.smallGrothendieckTopology @Etale)
-      (X'.smallGrothendieckTopology @Etale)).unit.app G).hom
-      ((Scheme.pointSmallEtale (t ≫ f)).toPresheafFiber U z G.obj s))) = _
-  erw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply]
-  have hpre := ConcreteCategory.congr_hom
-    (colimit.ι_pre
-      ((CategoryOfElements.π (Scheme.pointSmallEtale t).fiber).op ⋙
-        ((Scheme.etaleSetPullback f).obj G).obj)
-      (Etale.baseChangeNbhd f (t ≫ f) ⟨t, rfl⟩).op (op ⟨U, z⟩))
-    (etaleSetDescentUnit f G U s)
-  erw [hpre]
-  exact hg U z s
 
 /-- Source: Stacks Project, Étale Cohomology, Lemma 09Z2 and Remark 09Z3.
 (blueprint: lem-weil-pbc-sets-finite-descent-germ-lifts).
@@ -117,32 +70,6 @@ theorem finiteSurjectiveSetDescent_compatible_germ_lifts
                   ((f.Etale.sheafPushforwardContinuous (Type (u + 1))
                     X.smallEtaleTopology X'.smallEtaleTopology).obj
                       ((Scheme.etaleSetPullback f).obj G)).obj s' := by
-  classical
-  intro s' hs Ω _ _ x z
-  choose c hc hdiag using descent_coordinate f G x
-  let α := (Scheme.pointSmallEtale x).toPresheafFiber (Scheme.Etale.mk (𝟙 X)) z
-      ((f.Etale.sheafPushforwardContinuous (Type (u + 1))
-        X.smallEtaleTopology X'.smallEtaleTopology).obj
-          ((Scheme.etaleSetPullback f).obj G)).obj s'
-  let r := fun t : {t : Spec (.of Ω) ⟶ X' // t ≫ f = x} ↦ (colimit.pre
-          ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙
-            ((Scheme.etaleSetPullback f).obj G).obj)
-          (Etale.baseChangeNbhd f x t).op)
-  obtain ⟨x', hx'⟩ := f.surjective (x default)
-  obtain ⟨⟨t₀, ht₀⟩, -⟩ :=
-    Scheme.Hom.GeometricFiber.exists_apply_default_eq (f := f) (y := x) x' hx'
-  let t : {t : Spec (.of Ω) ⟶ X' // t ≫ f = x} := ⟨t₀, ht₀⟩
-  refine ⟨c t (r t α), ?_⟩
-  apply (finite_pushforward_set_stalk_bijective f ((Scheme.etaleSetPullback f).obj G) x).2.1
-  funext v
-  apply (hc v).1
-  change c v (r v ((Scheme.pointSmallEtale x).sheafFiber.map
-    ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-      (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1))
-      (X.smallGrothendieckTopology @Etale)
-      (X'.smallGrothendieckTopology @Etale)).unit.app G) (c t (r t α)))) =
-    c v (r v α)
-  rw [hdiag]
-  exact finiteSurjectiveSetDescent_coordinates_constant f G Ω x c hc hdiag s' hs z t v
+  sorry
 
 end AlgebraicGeometry
