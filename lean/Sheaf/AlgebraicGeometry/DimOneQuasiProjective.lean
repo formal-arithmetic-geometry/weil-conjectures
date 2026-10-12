@@ -50,6 +50,14 @@ theorem exists_closed_open_immersion_projectiveSpace_of_dim_le_one
       (i : X ⟶ U) (j : U ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k))),
       IsClosedImmersion i ∧ IsOpenImmersion j ∧ i ≫ g = f ∧
         j ≫ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k) = g := by
-  sorry
+  obtain ⟨L, hL, hample⟩ := Scheme.Modules.exists_isAmple_of_dim_le_one f
+    (by simpa only [← X.dim_eq_topologicalKrullDim] using hdim)
+  let := hL
+  obtain ⟨d, hd, N, e, he, hef, _⟩ :=
+    hample.exists_immersion_affine_base k X f L
+  obtain ⟨U, i, j, hi, hj, hij⟩ := IsImmersion.isImmersion_iff_exists.mp he
+  refine ⟨N, U, j ≫ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k),
+    i, j, hi, hj, ?_, rfl⟩
+  rw [← Category.assoc, hij, hef]
 
 end AlgebraicGeometry

@@ -28,8 +28,9 @@
  ],
  "proof": [
   {
-   "text": "By the dimension-one ample-sheaf theorem [lem-sc-dim-one-ample-invertible], the separated finite-type scheme X of dimension at most one carries an ample invertible module $\\mathcal L$ in the absolute sense of Stacks Definition 01PS.",
+   "text": "Rewrite the hypothesis X.dim ≤ 1 as topologicalKrullDim X ≤ 1 using Scheme.dim_eq_topologicalKrullDim [lem-pc-scheme-dimension-local-rings]. Apply Scheme.Modules.exists_isAmple_of_dim_le_one [lem-sc-dim-one-ample-invertible] to obtain an invertible module L and its ampleness proof.",
    "uses": [
+    "lem-pc-scheme-dimension-local-rings",
     "lem-sc-dim-one-ample-invertible"
    ],
    "elementary": false,
@@ -39,7 +40,7 @@
    }
   },
   {
-   "text": "Apply the affine-base ample-to-immersion lemma [lem-weil-pbc-ample-very-ample-immersion-affine-base] with A=k, f the structure morphism X\\to\\operatorname{Spec}(k), and $\\mathcal L$. Its finite-type hypothesis follows from the given finite-type hypothesis, and its affine-base hypothesis holds for $\\operatorname{Spec}(k)$. We obtain a projective space $\\mathbf P^N_k$ and an immersion i:X\\hookrightarrow\\mathbf P^N_k over k.",
+   "text": "Install the invertibility witness as a local instance and apply IsAmple.exists_immersion_affine_base [lem-weil-pbc-ample-very-ample-immersion-affine-base] to A=k, X, f, and L. The LocallyOfFiniteType hypothesis [def-weil-finite-type-morphism] is already available. Extract N, an immersion e into projective space, and the equality e ≫ π = f; the tensor-power isomorphism is not needed.",
    "uses": [
     "lem-weil-pbc-ample-very-ample-immersion-affine-base",
     "def-weil-finite-type-morphism"
@@ -51,7 +52,7 @@
    }
   },
   {
-   "text": "By the definition of an immersion, factor i as a closed immersion X\\hookrightarrow U followed by an open immersion U\\hookrightarrow\\mathbf P^N_k. These maps are over k, so the required locally closed immersion and the stated data are obtained.",
+   "text": "Use Mathlib IsImmersion.isImmersion_iff_exists, the factorization characterization recorded in [def-weil-closed-immersion] and [def-weil-open-immersion], to obtain U, a closed immersion i, an open immersion j, and i ≫ j = e. Set g = j ≫ π. Associativity, i ≫ j = e, and e ≫ π = f prove i ≫ g = f. The remaining equality j ≫ π = g is reflexive.",
    "uses": [
     "def-weil-closed-immersion",
     "def-weil-open-immersion"
@@ -64,6 +65,7 @@
   }
  ],
  "proof_deps": [
+  "lem-pc-scheme-dimension-local-rings",
   "lem-sc-dim-one-ample-invertible",
   "lem-weil-pbc-ample-very-ample-immersion-affine-base",
   "def-weil-finite-type-morphism",
@@ -73,7 +75,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Lemma 0A25 proof, reconstructed from the cited ample-sheaf input (Tag 09NZ) and Morphisms Lemma 01VS because the local Stacks source is unavailable (the proof follows Lemma 0A25 line by line; set to document by L: the source is in the repository, the worker lacked it on its machine)"
+  "place": "Lemma 0A25 proof, implemented by T1 from Tag 09NZ, the affine-base ample-to-immersion criterion (Tag 01VS), and Mathlib immersion factorization; the dimension hypothesis is transported by lem-pc-scheme-dimension-local-rings."
  },
  "mathlib_searches": [
   {
@@ -169,5 +171,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T053954-L-2646262",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
