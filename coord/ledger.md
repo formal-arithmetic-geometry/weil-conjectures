@@ -9609,3 +9609,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:34 L: merged deliver/G3/Sheaf.RingTheory.FiniteCoefficientTensorReductionSurjective (stage 3; reviewer PASS; first push; landing 20261012T213435-L-1177788 (proof); batch 20261012T213434; modules 1; new nodes 0)
 - 21:34 L: merged deliver/H1/Sheaf.RingTheory.SmoothLocalCompleteIntersection (stage 3; reviewer PASS; first push; landing 20261012T213436-L-1177922 (proof); batch 20261012T213434; modules 1; new nodes 0)
 - 21:34 L: merged deliver/K1/Sheaf.CategoryTheory.BoundedFilteredCoupleAbutment (stage 3; reviewer PASS; first push; landing 20261012T213436-L-1178094 (interface); batch 20261012T213434; modules 3; new nodes 2)
+- 21:34 L: merged deliver/N3/Sheaf.RingTheory.PopescuLiftSmoothAway (stage 3; reviewer PASS; first push; landing 20261012T213436-L-1178270 (proof); batch 20261012T213434; modules 1; new nodes 0)

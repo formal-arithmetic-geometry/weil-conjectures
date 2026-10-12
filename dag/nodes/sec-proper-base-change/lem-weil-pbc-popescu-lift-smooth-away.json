@@ -13,19 +13,26 @@
  ],
  "proof": [
   {
-   "text": "Use the cleared Prepared relations to expand pi p_{kl}=-a_k(f_l-pi z_l)+sum_{j in E_k}h_{klj}(f_j-pi z_j).",
+   "text": "Let P=R[x], A=P[1/pi], and t be the canonical inverse of pi in A. Define F:R[x,z] to A by x_i mapping to its polynomial class and z_j mapping to t f_j. The restriction of F to P is the localization map. The primary equations f_j-pi z_j vanish because pi t=1.",
    "uses": [
     "lem-weil-pbc-popescu-lift-preparation"
    ],
    "elementary": true
   },
   {
-   "text": "After inverting pi, the p_{kl} are redundant. Substitute z_j=pi^{-1}f_j to construct inverse R-algebra maps between D[1/pi] and R[x][1/pi]. Transport across ULift. This is an explicit substitution, not a chosen arbitrary algebra.",
+   "text": "Apply the polynomial localization map to the Prepared relation a_k f_l=sum_{j in E_k}h_{klj}f_j+pi^2 g_{kl}. Since t pi^2=pi, the substituted auxiliary equation is t times the difference between the two sides of this relation, hence zero. Every generator of the defining ideal is killed, so F descends through the explicit quotient and ULift and extends to f:D[1/pi] to A.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The original-variable inclusion into D[1/pi] extends to g:A to D[1/pi] because pi is a unit. The composite f g fixes P and hence fixes A by localization extensionality. For g f, the primary quotient relations imply f_j=pi z_j, while the image of t is the inverse of pi, so the composite fixes both x_i and z_j. Polynomial, quotient, ULift and localization extensionality show g f is the identity. These explicit inverse maps give an R-algebra equivalence A to D[1/pi].",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The polynomial algebra R[x] is smooth over R. Its principal localization remains smooth, and the explicit algebra equivalence transfers this to D[1/pi].",
+   "text": "P is formally smooth and finitely presented over R by the Mathlib polynomial instances. A is smooth over P by principal localization, so it is smooth over R by composition. Transport smoothness along the explicit equivalence to D[1/pi].",
    "uses": [
     "lem-weil-pbc-polynomial-ring-smooth",
     "lem-weil-pbc-smooth-ring-map-principal-localization",
@@ -118,10 +125,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T203940-L-829636",
-  "kind": "interface",
+  "landing": "20261012T213436-L-1178270",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
