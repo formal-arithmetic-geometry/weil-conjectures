@@ -1,0 +1,113 @@
+{
+ "id": "lem-sbc-smooth-connected-generic-geometry-stalk-iso",
+ "kind": "statement",
+ "title": "Common generic stalk isomorphism",
+ "statement": "Let S and C be integral schemes and c:C → S a smooth morphism [def-weil-pbc-scheme-conventions, def-sbc-smooth-morphisms]. Let Cη be integral and let q:Cη → Spec K(S), j:Cη → C form a cartesian generic fibre [def-pc-fibre-product]. Then there is e:Spec K(C) ≅ Spec K(Cη) with (e.hom ≫ Cη.fromSpecStalk(η_Cη)) ≫ j = C.fromSpecStalk(η_C). Normality and geometric connectedness are not needed for this assertion.",
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 01UA; Mathlib.AlgebraicGeometry.Stalk (fromSpecStalk preimmersion and naturality), Morphisms.Preimmersion (base change), and Limits (pullback range)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The generic-stalk spectrum has dense image in S. The pullback range formula and openness of c show j has dense image. The image of a generic point under a dominant continuous map is generic, so j(η_Cη)=η_C.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The generic-stalk spectrum map is a preimmersion and preimmersions are stable under base change. Thus j is a preimmersion and its generic stalk map is surjective. After transporting along the generic-point equality, this is a homomorphism of fields, hence injective, and therefore an isomorphism. Take the inverse of its Spec isomorphism; stalk-map and stalk-specialization naturality give the required compatibility.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "G2 second reader",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 01UA; Mathlib.AlgebraicGeometry.Stalk (fromSpecStalk preimmersion and naturality), Morphisms.Preimmersion (base change), and Limits (pullback range)",
+  "note": "Lean proof using only Mathlib; all normality and geometric connectedness assumptions removed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "stalk map of generic fiber projection is an isomorphism",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Scheme.arrowStalkMapSpecIso; AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv; AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc; AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued; AlgebraicGeometry.Scheme.fromSpecStalk_appTop; AlgebraicGeometry.germ_stalkClosedPointIso_hom; AlgebraicGeometry.Spec_stalkClosedPointIso; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec",
+   "verdict": "No complete match. Use Mathlib preimmersion base change, pullback range, field-map injectivity and stalk naturality to prove the result without a new open localization theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap, CategoryTheory.IsIso",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.IsOpenImmersion.instIsIsoCommRingCatStalkMap; AlgebraicGeometry.isIso_iff_isIso_stalkMap; AlgebraicGeometry.IsOpenImmersion.of_isIso_stalkMap; AlgebraicGeometry.IsOpenImmersion.iff_isIso_stalkMap; AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued; AlgebraicGeometry.isIso_stalkMap_coprodSpec",
+   "verdict": "No complete match. Use Mathlib preimmersion base change, pullback range, field-map injectivity and stalk naturality to prove the result without a new open localization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecStalk|genericPoint|functionField",
+   "date": "2026-10-12",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "verdict": "No complete match. Use Mathlib preimmersion base change, pullback range, field-map injectivity and stalk naturality to prove the result without a new open localization theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The function field of an integral generic fiber equals the function field of the integral total scheme",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometry",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-smooth-connected-generic-geometry",
+   "place": "Identification of the generic stalks"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryStalkIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/SmoothConnectedGenericGeometryStalkIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.smooth_connected_generic_geometry_stalk_iso",
+  "statement": "theorem smooth_connected_generic_geometry_stalk_iso {S C : Scheme.{u}} [IsIntegral S]\n    [IsIntegral C] (c : C ⟶ S) [Smooth c]\n    {Cη : Scheme.{u}} [IsIntegral Cη]\n    (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c) :\n    ∃ e : Spec C.functionField ≅ Spec Cη.functionField,\n      (e.hom ≫ Cη.fromSpecStalk (genericPoint Cη)) ≫ j =\n        C.fromSpecStalk (genericPoint C)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T135235-L-1666278",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T135235-L-1666278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

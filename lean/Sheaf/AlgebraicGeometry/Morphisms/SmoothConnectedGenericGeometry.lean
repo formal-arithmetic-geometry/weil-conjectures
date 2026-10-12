@@ -4,6 +4,8 @@ module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
+import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryStalkIso
 
 /-!
 # Geometry of a nonempty smooth geometrically connected family
@@ -49,6 +51,11 @@ theorem smooth_connected_generic_geometry {S C : Scheme.{u}} [IsIntegral S]
         (∀ x : Cη, IsIntegrallyClosed (Cη.presheaf.stalk x)) ∧
         ∃ e : Spec C.functionField ≅ Spec Cη.functionField,
           (e.hom ≫ Cη.fromSpecStalk (genericPoint Cη)) ≫ j =
-            C.fromSpecStalk (genericPoint C) := by sorry
+            C.fromSpecStalk (genericPoint C) := by
+  obtain ⟨hC, hη, hnC, hnη⟩ := smooth_connected_generic_geometry_core hS c q j hCη
+  let := hC
+  let := hη
+  obtain ⟨e, he⟩ := smooth_connected_generic_geometry_stalk_iso c q j hCη
+  exact ⟨hC, hη, hnC, hnη, e, he⟩
 
 end AlgebraicGeometry.Scheme
