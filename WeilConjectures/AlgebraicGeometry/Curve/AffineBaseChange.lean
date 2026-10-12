@@ -163,7 +163,8 @@ lemma Compactification.natCard_compl_baseChangeField [IsAlgClosed k] (c : Compac
   · obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback
       (f := c.g) (g := Spec.map (CommRingCat.ofHom (algebraMap k k'))) x.1
       (default : Spec (.of k')) (Subsingleton.elim _ _)
-    exact ⟨⟨z, fun h ↦ x.2 (by have := (Set.ext_iff.1 hrange _).1 h; rwa [Set.mem_preimage, hz] at this)⟩,
+    exact ⟨⟨z, fun h ↦ x.2 (by
+      have := (Set.ext_iff.1 hrange _).1 h; rwa [Set.mem_preimage, hz] at this)⟩,
       Subtype.ext hz⟩
 
 /-- **Base change of a connected curve.** Over an algebraically closed field `k`, the base change
@@ -190,7 +191,8 @@ theorem IsConnectedCurve.baseChangeField_of_compactification [IsAlgClosed k] [Is
   obtain ⟨z, -, -⟩ := Scheme.Pullback.exists_preimage_pullback
     (f := f) (g := Spec.map (CommRingCat.ofHom (algebraMap k k'))) x₀
     (default : Spec (.of k')) (Subsingleton.elim _ _)
-  have : Nonempty (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) := ⟨z⟩
+  have : Nonempty
+      (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) := ⟨z⟩
   have := (c.baseChangeField k').i.isOpenEmbedding.irreducibleSpace
   exact { krullDim_le_one := hc.krullDim_le_one
           connectedSpace := inferInstance

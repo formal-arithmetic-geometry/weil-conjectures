@@ -15,7 +15,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 Let `k ⊆ k'` be algebraically closed fields, `C` a smooth separated curve over `k` and `n` prime
 to `char k`. The pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`.
 
-It is injective in general (`AlgebraicGeometry.injective_cohomologyMap_pullback_fst_of_isAlgClosed`).
+It is injective in general
+(`AlgebraicGeometry.injective_cohomologyMap_pullback_fst_of_isAlgClosed`).
 A smooth curve is the disjoint union of its finitely many connected components, each of which is
 either a point `Spec k`, a smooth proper connected curve or a smooth affine connected curve; in
 each case both sides are finite of the same order.
@@ -217,7 +218,8 @@ finitely many connected components `Cᵢ` of `C` are clopen, and so are their pr
 `C_{k'}`, with `C'ᵢ ≅ (Cᵢ)_{k'}`; cohomology takes these decompositions to products
 (`AlgebraicGeometry.Etale.nonempty_equiv_pi_H_of_isClopen`). Each `Hᵠ(Cᵢ, ℤ/n)` is finite
 (`AlgebraicGeometry.IsCurve.finite_sheafH_constantZMod_of_connectedSpace`) and in bijection with
-`Hᵠ((Cᵢ)_{k'}, ℤ/n)` (`AlgebraicGeometry.IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace`),
+`Hᵠ((Cᵢ)_{k'}, ℤ/n)`
+(`AlgebraicGeometry.IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace`),
 so both sides are finite of the same order.
 (blueprint: `sk-prop-ext-invariance`) -/
 theorem IsCurve.bijective_fieldExtensionCohomologyMap [IsAlgClosed k] [IsCurve f] [Smooth f]
@@ -251,7 +253,9 @@ theorem IsCurve.bijective_fieldExtensionCohomologyMap [IsAlgClosed k] [IsCurve f
     hdisj (fun y ↦ ⟨y, hU y⟩) (C.constantZMod n) q
   obtain ⟨eC'⟩ := Etale.nonempty_equiv_pi_H_of_isClopen U'
     (fun c ↦ isClosed_connectedComponent.preimage (pullback.fst f φ).continuous)
-    (fun c d hcd ↦ (hdisj hcd).preimage (pullback.fst f φ)) (fun z ↦ ⟨pullback.fst f φ z, hU (pullback.fst f φ z)⟩) (C'.constantZMod n) q
+    (fun c d hcd ↦ (hdisj hcd).preimage (pullback.fst f φ))
+    (fun z ↦ ⟨pullback.fst f φ z, hU (pullback.fst f φ z)⟩)
+    (C'.constantZMod n) q
   -- each component
   have key (c : _root_.ConnectedComponents C) : Finite (Sheaf.H ((U c).toScheme.constantZMod n) q) ∧
       ∃ ψ : Sheaf.H ((U' c).toScheme.constantZMod n) q →
