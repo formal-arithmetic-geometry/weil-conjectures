@@ -30,47 +30,32 @@
  ],
  "proof": [
   {
-   "text": "Since $B$ is a finitely presented and flat $A$-module, it is a finite projective $A$-module [lem-weil-pbc-finitely-presented-flat-module-projective] (Stacks 00NX, (1)$\\Rightarrow$(2)). Hence [lem-weil-pbc-finite-projective-rank-locally-constant] for every prime $\\mathfrak p\\subset A$ the localization $B_{\\mathfrak p}$ is a finite free $A_{\\mathfrak p}$-module, say of rank $r(\\mathfrak p)$, and the function $r:\\operatorname{Spec}A\\to\\mathbf N$ is locally constant for the Zariski topology.",
-   "uses": [
-    "lem-weil-pbc-finitely-presented-flat-module-projective",
-    "lem-weil-pbc-finite-projective-rank-locally-constant"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0ELZ, sentence 'Hence $B$ is a finite locally free $A$-module by Algebra, Lemma 00NX'; rank function of Algebra Lemma 00NX (algebra.tex line 19027)"
-   }
+   "text": "Use RingHom.flat_algebraMap_iff to obtain Module.Flat A B. The bijective quotient map gives an A/I-algebra equivalence A/I ≃ B/IB. Compose its inverse with Algebra.TensorProduct.quotIdealMapEquivQuotTensor to identify (A/I) ⊗[A] B with A/I as an A/I-module. This is a construction from the given bijectivity, not a choice from an unproved existence theorem.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Rank $1$ along $V(I)$. Let $\\mathfrak p\\supseteq I$ be a prime and $\\kappa(\\mathfrak p)$ its residue field [def-weil-pbc-localization-at-prime]; since $I\\subseteq\\mathfrak p$, $\\kappa(\\mathfrak p)$ is an $A/I$-algebra. The given isomorphism $A/I\\to B/IB$ is $A$-linear, so $B\\otimes_A\\kappa(\\mathfrak p)\\cong(B/IB)\\otimes_{A/I}\\kappa(\\mathfrak p)\\cong(A/I)\\otimes_{A/I}\\kappa(\\mathfrak p)=\\kappa(\\mathfrak p)$, a $\\kappa(\\mathfrak p)$-vector space of dimension $1$. On the other hand $B\\otimes_A\\kappa(\\mathfrak p)\\cong B_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}\\kappa(\\mathfrak p)\\cong\\kappa(\\mathfrak p)^{\\oplus r(\\mathfrak p)}$ because $B_{\\mathfrak p}\\cong A_{\\mathfrak p}^{\\oplus r(\\mathfrak p)}$ (step 1). Comparing dimensions, $r(\\mathfrak p)=1$ for every $\\mathfrak p\\in V(I)$.",
+   "text": "For a prime p, Ideal.exists_le_maximal gives a maximal ideal m containing p. The definition of the Jacobson radical implies I ≤ m. By range_comap_of_surjective for A → A/I, there is a prime q of A/I with comap q = m. Module.rankAtStalk_eq_of_equiv and Module.rankAtStalk_self give rank one at q after base change, and Module.rankAtStalk_baseChange therefore gives rank one for B at m.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Module.rankAtStalk_eq_of_le_of_finite_of_flat' transfers rank one from m to p. The localization B_p is finite flat over the local ring A_p, so Module.free_of_flat_of_isLocalRing makes it free. Module.nonempty_linearEquiv_of_finrank_eq_one gives an equivalence A_p ≃ B_p; take its inverse to obtain the required B_p ≃ A_p.",
    "uses": [
     "def-weil-pbc-localization-at-prime"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0ELZ, 'the module $B$ has rank $1$ along $V(I)$' (written out)"
-   }
-  },
-  {
-   "text": "Rank $1$ everywhere. Let $U=\\{\\mathfrak p: r(\\mathfrak p)=1\\}$; since $r$ is locally constant (step 1), every point of $U$ has an open neighbourhood on which $r\\equiv1$, so $U$ is open and $Z=\\operatorname{Spec}A\\setminus U$ is closed, $Z=V(J)$ for an ideal $J\\subseteq A$. If $Z\\neq\\emptyset$ then $J\\neq A$, so $J$ is contained in a maximal ideal $\\mathfrak m$ (Zorn), and $\\mathfrak m\\in V(J)=Z$. But $\\mathfrak m$ contains the Jacobson radical, hence $I\\subseteq\\mathfrak m$, so $\\mathfrak m\\in V(I)\\subseteq U$ by step 2, a contradiction. Hence $Z=\\emptyset$, i.e. $B_{\\mathfrak p}$ is free of rank $1$ over $A_{\\mathfrak p}$ for every prime $\\mathfrak p$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0ELZ, 'as $(A, I)$ is a Zariski pair, we conclude that the rank is $1$ everywhere' (Zariski pair: Definition Tag 0ELY, line 2245; written out)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finitely-presented-flat-module-projective",
-  "lem-weil-pbc-finite-projective-rank-locally-constant",
   "def-weil-pbc-localization-at-prime"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "J3",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "proof of Lemma Tag 0ELZ (lemma-check-isomorphism-zariski), line 2265, with Algebra Lemma Tag 00NX (algebra.tex line 19027)"
+  "place": "Lemma Tag 0ELZ; shortened below the unit level using Mathlib rank specialization and quotient base change instead of local constancy"
  },
  "mathlib_searches": [
   {
@@ -181,5 +166,15 @@
   "group": "N1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T095910-L-319612",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
