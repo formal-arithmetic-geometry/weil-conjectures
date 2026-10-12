@@ -1210,6 +1210,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafHom
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheafification
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.CategoryTheory.SmallObject.TransfiniteIteration
 public import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
@@ -1687,6 +1688,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtaleFlat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GeometricFrobenius
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
