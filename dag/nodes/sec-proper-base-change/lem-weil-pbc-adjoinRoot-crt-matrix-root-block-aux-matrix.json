@@ -9,22 +9,27 @@
  },
  "proof": [
   {
-   "text": "Degree additivity follows from monicity and the factorization.",
+   "text": "Put R = A/I and p = f.map (Ideal.Quotient.mk I). Coprimality of g and h implies coprimality of their principal ideals by Ideal.isCoprime_span_singleton_iff. The factorization and Ideal.span_singleton_mul_span_singleton identify (p) with (g)(h). Compose Ideal.quotEquivOfEq with Ideal.quotientMulEquivQuotientProd to obtain the CRT ring equivalence. Its formula on polynomial classes shows that it preserves scalars and takes the root of p to the pair of roots, so AlgEquiv.ofRingEquiv promotes it to an R-algebra equivalence e.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "CRT and power-basis coordinate calculations produce the conjugating unit and matrix identity.",
+   "text": "The private proved helper root_matrix_entry expresses the (i,j) root-multiplication matrix entry as the coefficient at i of X^(j+1) modulo the monic polynomial. It follows from Algebra.leftMulMatrix_eq_repr_mul, the power-basis formula, and AdjoinRoot.modByMonicHom_mk. Polynomial.map_modByMonic and coeff_map show that reducing the root matrix of f gives the root matrix of p. Monicity preserves natDegree, and reindexing the power basis with finCongr followed by the given d gives precisely Matrix.reindex d d of the reduced matrix.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Let b be this reindexed power basis of AdjoinRoot p, and bprime the product of the power bases of the two factor quotients. Define U.val as LinearMap.toMatrix b bprime e.toLinearMap and U.inv as LinearMap.toMatrix bprime b e.symm.toLinearMap. LinearMap.toMatrix_comp and the inverse identities of e prove both unit laws. Because e preserves multiplication and sends the root to the pair of roots, conjugating root multiplication by e gives the product of the two root-multiplication endomorphisms. Apply LinearMap.toMatrix_comp twice and LinearMap.toMatrix_prodMap to obtain the desired block conjugation identity. Empty power bases, including constant factors equal to one, are covered without any extra nontriviality assumption.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "name": "Codex",
+  "name": "R2 stage-3 worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 09XI"
+  "place": "Tag 09XI, lemma-characterize-henselian-pair, proof of (3) implies (1); CRT decomposition and its power-basis coordinate calculation"
  },
  "mathlib_searches": [
   {
@@ -87,10 +92,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T154829-L-2472654",
-  "kind": "interface",
+  "landing": "20261012T163619-L-2787123",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
