@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusCore
+import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusLocallyFinitePresentation
+import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusQuasiCompact
 
 /-! # Representing the universal rank clause
 
@@ -35,7 +37,9 @@ theorem picardUniversalRankMatchLocus_structural {X S W : Scheme.{u}}
     (E : X.Modules) [E.IsFiniteLocallyFree] (j : W ⟶ S) (hj : IsImmersion j)
     (hchar : ∀ {T : Scheme.{u}} (g : T ⟶ S),
       (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalRankMatch f E g) :
-    LocallyOfFinitePresentation j ∧ QuasiCompact j := by sorry
+    LocallyOfFinitePresentation j ∧ QuasiCompact j := by
+  exact ⟨picardUniversalRankMatchLocus_locallyOfFinitePresentation f E j hj hchar,
+    picardUniversalRankMatchLocus_quasiCompact f E j hj hchar⟩
 
 /-- The universal rank clause alone is represented by a finitely presented immersion.
 Source: Stacks Project, Tag 0BDP, first three proof paragraphs, and Tags 0B91 and 0BDL.
