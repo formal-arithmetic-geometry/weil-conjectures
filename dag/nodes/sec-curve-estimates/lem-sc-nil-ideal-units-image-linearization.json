@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-nil-ideal-units-image-linearization",
+ "kind": "statement",
+ "title": "Linearization of the image of nil units modulo a smaller ideal",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $I,J$ be quasi-coherent ideal sheaves [def-sbc-ideal-sheaf-powers] such that $J\\subseteq I$, $I^2\\subseteq J$, and $I\\subseteq\\mathcal N_X$, the nilradical [def-weil-pbc-scheme-reduction]. For an ideal $K$, let $i_K:Z_K\\to X$ be its specified closed subscheme immersion, and let $q_K:\\mathbf G_{m,X}\\to(i_K)_*\\mathbf G_{m,Z_K}$ be restriction of units [def-sc-gm-torsor]. Let $I_{\\rm mod}$ and $J_{\\rm mod}$ denote the specified ideal modules, defined as kernels of restriction of the structure module to the closed subschemes, and let $F=\\operatorname{coker}(J_{\\rm mod}\\to I_{\\rm mod})$ using the specified inclusion. Assume $F$ is quasi-coherent. There is an isomorphism of abelian sheaves on $X_{\\rm et}$ between $\\operatorname{im}(\\ker(q_I)\\to\\mathbf G_{m,X}\\xrightarrow{q_J}(i_J)_*\\mathbf G_{m,Z_J})$ and $\\operatorname{ULift}(F_{\\rm et})$, where $F_{\\rm et}$ is the tensor-sections sheaf [def-sc-etale-qcoherent-module]. All kernels, images and cokernels are categorical constructions.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-pbc-scheme-reduction",
+  "def-sc-gm-torsor",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof": [
+  {
+   "text": "On an affine etale V over an affine open U=Spec A, write B=Gamma(V,O). Extend the ideals I,J to I_B,J_B in B. Flatness and the affine description of the specified ideal modules identify sections of the tensor pullback of their module cokernel with I_B/J_B. Kernels of abelian sheaves are computed on sections; images are sheafifications of sectionwise images. Thus the image in the statement is locally the image of 1+I_B in the units of B/J_B.",
+   "uses": [
+    "def-pc-scheme",
+    "def-sbc-ideal-sheaf-powers",
+    "def-weil-pbc-scheme-reduction",
+    "def-sc-gm-torsor",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+    "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
+   }
+  },
+  {
+   "text": "Every a in I_B is nilpotent: it is a finite sum of multiples of the images of nilpotents in I. The finite geometric series makes 1+a a unit. Send the image of 1+a in B/J_B to a modulo J_B. Equality of the unit images is exactly membership of the difference in J_B, so the map is well defined and injective. Every additive class is represented by such an a, so it is surjective. Multiplication is addition under this map because ab lies in J_B.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+    "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
+   }
+  },
+  {
+   "text": "Pullback of functions commutes with the formula 1+a to a mod J_B and its inverse. These bijective homomorphisms therefore glue over affine etale refinements to mutually inverse maps of the image sheaf and the specified tensor-sections sheaf. Lift the additive groups to the coefficient universe of Gm. The same argument covers I=J, zero ideals, empty schemes, and j=0 in the power specialization.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+    "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-pbc-scheme-reduction",
+  "def-sc-gm-torsor",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; affine argument preserved in lem-sc-reduction-units-power-cokernel"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The image of units congruent to one modulo a nil ideal I in units modulo J, where I squared is contained in J, is the additive etale sheaf of I modulo J",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For nil ideals J contained in I with I squared contained in J, the image of units 1+I in units modulo J is the additive etale sheaf I/J",
+   "results": "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot and Algebra.FormallyEtale.comp_bijective concern lifting algebra maps, not units or sheaf linearization; no matching declaration.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nilIdealUnitsImageIso|square.zero.*units|units.*square.zero",
+   "results": "No matches. Additional rg searches of both library roots found only the original power-cokernel statement and general units infrastructure.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerCokernel",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and its Claim: affine linearization of nilpotent units",
+   "via": [
+    "lem-sc-reduction-units-power-cokernel",
+    "lem-sc-reduction-units-power-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsImageLinearization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/NilIdealUnitsImageLinearization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_nilIdealUnitsImageIso",
+  "statement": "theorem nonempty_nilIdealUnitsImageIso (X : Scheme.{u}) (I J : X.IdealSheafData)\n    (hJI : J ≤ I) (hII : I * I ≤ J) (hIN : I ≤ X.nilradical)\n    [(cokernel (IdealSheafData.toModulesOfLE hJI)).IsQuasicoherent] :\n    Nonempty (image (kernel.ι (gmSheafToLowerStarGmSheaf I.subschemeι) ≫\n        gmSheafToLowerStarGmSheaf J.subschemeι) ≅\n      ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n        (Modules.etaleTensorSectionsSheaf\n          (cokernel (IdealSheafData.toModulesOfLE hJI)))))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T163617-L-2786369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T163617-L-2786369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
