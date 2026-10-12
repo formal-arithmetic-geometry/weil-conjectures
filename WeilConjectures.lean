@@ -68,6 +68,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.LerayNatural
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.CechGluing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
