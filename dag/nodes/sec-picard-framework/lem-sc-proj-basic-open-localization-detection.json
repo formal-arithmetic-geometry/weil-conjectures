@@ -1,0 +1,109 @@
+{
+ "id": "lem-sc-proj-basic-open-localization-detection",
+ "kind": "statement",
+ "title": "Detection of equality in A_f at homogeneous primes",
+ "statement": "Let A be an N-graded commutative ring with grading 𝒜 and let f be homogeneous of positive degree. If two elements z,w of the ordinary localization A_f have equal images in A_p for every homogeneous relevant prime p avoiding f, then z=w in A_f. The assertion includes nilpotent f.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Lemma 27.8.4"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "first localize at the homogeneous elements outside a homogeneous prime p.\nThis localization B has a Z-grading and injects into the ordinary localization A_p.\nTo see injectivity, write an ordinary denominator s outside p as a finite sum of\nhomogeneous components. Some component is outside p, hence is a unit in B. The grading\nmap sends s to a Laurent polynomial over B with a unit coefficient. McCoy's polynomial\nzero-divisor criterion says that this Laurent polynomial is regular: an annihilator\nwould annihilate every coefficient, including the unit. The grading map is injective\n(evaluation at 1 is a left inverse), so s is regular in B. Thus further localization\nat ordinary denominators outside p is injective, and vanishing in A_p implies that\neach homogeneous component already vanishes in B.\n\nNow write z-w over a common power of f. For a homogeneous component u of its numerator,\nthe ideal ann(u) is homogeneous: the homogeneous components of a*u have distinct\ndegrees, so a*u=0 implies that each component of a annihilates u. If no power of f\nkills u, ann(u) is disjoint from the powers of f. The prime-existence theorem gives\na prime containing ann(u) and avoiding f. Its homogeneous core is prime, still contains\nann(u), and avoids f; it is relevant since f has positive degree. At this core, the\nhypothesis and the preceding injectivity argument force u to vanish in B. Hence some\nhomogeneous denominator outside the core annihilates u, contradicting containment of\nann(u). A power of f therefore kills every component. A common power kills their sum,\nproving z=w. If f is nilpotent, A_f is zero.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Lemma 27.8.4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization at homogeneous prime ideals detects equality; homogeneous fractions define twist sections",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a Proj twisting sheaf on a homogeneous basic open are homogeneous fractions",
+   "results": "sectionInBasicOpen and awayToSection: structure sheaf only; no arbitrary-twist descent theorem. Loogle found ProjectiveSpectrum.mk, and LeanFinder found PrimeSpectrum.toPiLocalization_injective, but neither gives this result in one application.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneousCore|degreePart|IsFraction|sectionInBasicOpen in Mathlib and the twist modules",
+   "results": "Ideal.IsPrime.homogeneousCore; degreePart.mk; isLocallyFraction_mk. No descent or equality-detection theorem. Realization proved directly from these constructions.",
+   "date": "2026-10-12",
+   "verdict": "Use existing constructions; no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjTwistBasicOpenFractions",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof final clause: associated sheaf of a shift has homogeneous fraction charts",
+   "via": [
+    "lem-sc-proj-single-twist-basic-open-fractions",
+    "lem-sc-proj-finite-twist-coproduct-fractions",
+    "lem-sc-p1-proj-shifted-free-twist"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjBasicOpenLocalizationDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjBasicOpenLocalizationDetection.lean",
+  "declaration": "AlgebraicGeometry.Proj.basicOpen_localization_detection",
+  "statement": "theorem basicOpen_localization_detection {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] (f : A) (b : ℕ) (hb : 0 < b) (hf : f ∈ 𝒜 b) (z w : LocalizedModule.Away f A) (h : ∀ p : basicOpen 𝒜 f, IsLocalization.map (M := Submonoid.powers f) (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl) (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A) (Submonoid.powers_le.mpr p.2) z = IsLocalization.map (M := Submonoid.powers f) (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl) (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A) (Submonoid.powers_le.mpr p.2) w) : z = w",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T110317-L-620979",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T110317-L-620979",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
