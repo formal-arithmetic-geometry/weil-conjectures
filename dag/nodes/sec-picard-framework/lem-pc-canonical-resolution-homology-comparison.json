@@ -16,26 +16,33 @@
  ],
  "proof": [
   {
-   "text": "For the chosen resolution expand homologyRightDerivedFunctorPlusObjSingleFunctorIso and cancel its final inverse resolution comparison.",
+   "text": "Construct R = injectiveResolution X and a comparison φ : R.Hom I (identity X) using InjectiveResolution.desc. Pass to the extended complexes. Quotient comparison naturality and φ.ι′_comp_hom′ prove that the chosen augmentation followed by the localized comparison is resolutionAugmentationIso I.",
    "uses": [
+    "def-sp-injective-resolutions",
+    "def-pc-canonical-resolution-derived-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply naturality of F.rightDerivedFunctorPlusUnit to the comparison of resolutions and cancel its invertible components on injectives. Combined with the augmentation equality, this proves that the chosen rightDerivedFunctorPlusObjSingleFunctorIsoQ followed by the localized F-image of φ equals resolutionDerivedIso F I.",
+   "uses": [
+    "def-pc-canonical-resolution-derived-iso",
     "lem-sp-derived-functor-single-identification"
    ],
    "elementary": true
   },
   {
-   "text": "Choose a map from the chosen resolution to I lifting the identity. The augmentation commutes with this map. Naturality of the F derived unit and its invertibility on injectives identify the chosen comparison followed by the localized F-image of the map with resolutionDerivedIso F I. Naturality of quotient homology and isoRightDerivedObjCochainComplex identifies its homology with the prescribed resolution comparison.",
+   "text": "Use homologyFunctorObjQIso_hom_naturality and isoRightDerivedObjCochainComplex_inv_naturality at φ over identity X. Expand homologyRightDerivedFunctorPlusObjSingleFunctorIso, cancel the prescribed-resolution inverse, then expand isoRightDerivedObjCochainComplex and cancel the map-extension and extension homology inverses. This proves the local hcore without any new theorem or hole.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "lem-sp-derived-well-defined",
-    "def-pc-canonical-resolution-derived-iso"
+    "lem-sp-derived-functor-single-identification",
+    "lem-sp-derived-well-defined"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Expand isoRightDerivedObjCochainComplex. Cancel the inverse map/extension homology comparison against the map/extension factor of e, and the inverse extension homology comparison against ε_K. This proves the displayed equality, also in degree zero.",
+   "text": "Expand canonicalResolutionDerivedIso and apply homologyFunctorObjQIso_hom_naturality to the map-extension isomorphism. Functoriality and associativity identify the local hcore expression with the original right-hand side. The argument applies unchanged at n = 0.",
    "uses": [
-    "def-pc-canonical-resolution-derived-iso",
-    "lem-sp-derived-functor-single-identification"
+    "def-pc-canonical-resolution-derived-iso"
    ],
    "elementary": true
   }
@@ -50,7 +57,7 @@
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
   "place": "Tags 015M and 015N",
-  "note": "Canonical transport factors expanded from the source-library comparison definitions; decomposition of the existing resolution-unit-comparison proof."
+  "note": "H3 second reading: complete comparison proof using upstream PlusSingle naturality and Mathlib injective resolution comparison; no split-off theorem remains."
  },
  "mathlib_searches": [
   {
@@ -132,10 +139,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T144109-L-2094475",
-  "kind": "interface",
+  "landing": "20261012T184307-L-4005844",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -8960,3 +8960,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/H3/Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingBoundary (stage 3; reviewer PASS; first push; landing 20261012T184306-L-4005448 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/H3/Sheaf.AlgebraicGeometry.FormalCompletionMapSurjectiveProper (stage 3; reviewer PASS; first push; landing 20261012T184306-L-4005594 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/H3/Sheaf.AlgebraicGeometry.PicardProductOpenData (stage 3; reviewer PASS; first push; landing 20261012T184306-L-4005694 (interface); batch 20261012T184234; modules 4; new nodes 3)
+- 18:43 L: merged deliver/H3/Sheaf.CategoryTheory.CanonicalResolutionHomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T184307-L-4005844 (proof); batch 20261012T184234; modules 1; new nodes 0)
