@@ -85,58 +85,31 @@
    }
   },
   {
-   "text": "*Part (3), objects: the triple of an object of $\\mathcal N_U$.* Let $(V=\\operatorname{Spec}B,\\bar v)$ be in $\\mathcal N_U$, with $f=\\iota\\circ g$, $g:V\\to U$. By [lem-weil-pbc-etale-composition-cancellation] (1) $\\iota$ is etale, so by (3) $g$ is etale; by [def-weil-affine-spectrum] $g=\\operatorname{Spec}\\alpha$ for a unique ring map $\\alpha:A\\to B$, which makes $B$ an $A$-algebra with $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ etale. Write $\\bar v=\\operatorname{Spec}\\psi_v$ with $\\psi_v:B\\to\\Omega$, $\\mathfrak q_v=\\ker\\psi_v$ (the prime of the image point $v$) and $\\phi_v=\\bar\\psi_v:\\kappa(\\mathfrak q_v)\\to\\Omega$ (step 1; this is the field map of $\\bar v$ of [def-weil-geometric-point] under $\\kappa(v)=\\kappa(\\mathfrak q_v)$). The condition $f\\circ\\bar v=\\bar x$ is $\\iota\\circ g\\circ\\bar v=\\iota\\circ\\bar x_U$, i.e. ($\\iota$ is a monomorphism) $g\\circ\\bar v=\\bar x_U$, i.e. $\\psi_v\\circ\\alpha=\\chi$. Taking kernels, $\\alpha^{-1}(\\mathfrak q_v)=\\ker\\chi=\\mathfrak p$, so $\\mathfrak q_v$ lies over $\\mathfrak p$; passing to residue fields, $\\phi_v\\circ\\kappa(\\alpha)=\\bar\\chi$, i.e. $\\phi_v$ is a $\\kappa(\\mathfrak p)$-algebra map. By [lem-weil-pbc-etale-algebra-residue-field-separable] every $z\\in\\kappa(\\mathfrak q_v)$ is a root of a separable polynomial $P$ over $\\kappa(\\mathfrak p)$, so $\\phi_v(z)$ is a root of the separable polynomial $\\bar\\chi(P)$ over $\\bar\\chi(\\kappa(\\mathfrak p))$: $\\phi_v(z)\\in\\kappa(\\bar x)$ (step 1, [def-weil-pbc-relative-separable-closure]). So $(B,\\mathfrak q_v,\\phi_v)$, with $\\phi_v$ viewed as a map to $\\kappa(\\bar x)$, is an object of $\\mathcal T$; conversely the condition $\\psi_v\\circ\\alpha=\\chi$ holds for any $\\psi:B\\to\\Omega$ whose kernel lies over $\\mathfrak p$ and whose residue map is a $\\kappa(\\mathfrak p)$-algebra map, because $\\chi$ and $\\psi\\circ\\alpha$ both factor through $A\\to\\kappa(\\mathfrak p)$ and agree after it.",
+   "text": "Cancel i in the point equation and apply Etale.of_comp to the chart map. Its residue-field extension is separable by the formally unramified, locally finite type instance. The residue embedding of the composite point is the composite of residue maps. Regard the point embedding as an algebra homomorphism over the base residue field and apply IsSeparable.map. mem_separableClosure_iff then proves the image lies in K.",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-affine-spectrum",
     "def-weil-geometric-point",
-    "lem-weil-pbc-etale-algebra-residue-field-separable",
-    "def-weil-pbc-relative-separable-closure",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma Tag 04HX: 'we see that (O_S)_s = colim_{(B,q,φ)} B where the colimit is over etale A-algebras B endowed with a prime q lying over p and a κ(p)-algebra map φ: κ(q) → κ(s̄). Note that since κ(q) is finite separable over κ(p) the image of φ is contained in κ^sep'; Remark Tag 04HT"
-   }
-  },
-  {
-   "text": "*Part (3), morphisms: full faithfulness.* Let $(V'=\\operatorname{Spec}B',\\bar v')$, $(V=\\operatorname{Spec}B,\\bar v)$ be in $\\mathcal N_U$ with $f'=\\iota\\circ g'$, $f=\\iota\\circ g$. A $Y$-morphism $h:V'\\to V$ satisfies $\\iota\\circ g\\circ h=f\\circ h=f'=\\iota\\circ g'$, hence $g\\circ h=g'$ since $\\iota$ is a monomorphism (an open immersion, [def-weil-open-immersion]); conversely every $U$-morphism is a $Y$-morphism. By [def-weil-affine-spectrum] the $U$-morphisms $h$ are the $\\operatorname{Spec}\\beta$ for the $A$-algebra maps $\\beta:B\\to B'$, bijectively and compatibly with composition. The condition $h\\circ\\bar v'=\\bar v$ reads $\\psi_{v'}\\circ\\beta=\\psi_v$ (step 1), which holds iff $\\beta^{-1}(\\mathfrak q_{v'})=\\mathfrak q_v$ and $\\phi_{v'}\\circ\\kappa(\\beta)=\\phi_v$: the kernel of $\\psi_{v'}\\circ\\beta$ is $\\beta^{-1}(\\mathfrak q_{v'})$, and the factorization of $\\psi_{v'}\\circ\\beta$ through its residue field is $\\phi_{v'}\\circ\\kappa(\\beta)$ (uniqueness of the factorization in step 1). Hence $(V,\\bar v)\\mapsto(B,\\mathfrak q_v,\\phi_v)$, $\\operatorname{Spec}\\beta\\mapsto\\beta$ is a contravariant functor $\\mathcal N_U\\to\\mathcal T$ (a functor $\\mathcal N_U\\to\\mathcal T^{\\mathrm{op}}$) which is bijective on morphism sets.",
-   "uses": [
-    "def-weil-open-immersion",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma Tag 04HX (translation of the affine neighbourhoods over Spec(A) into triples)"
-   }
-  },
-  {
-   "text": "*Part (3), essential surjectivity.* Let $(B,\\mathfrak q,\\phi)$ be in $\\mathcal T$, with structure map $\\alpha:A\\to B$. Put $V=\\operatorname{Spec}B$, $g=\\operatorname{Spec}\\alpha$ (etale by hypothesis) and $f=\\iota\\circ g$, etale by [lem-weil-pbc-etale-composition-cancellation] (1),(2). Let $\\psi:B\\to B/\\mathfrak q\\to\\kappa(\\mathfrak q)\\xrightarrow{\\phi}\\kappa(\\bar x)\\subset\\Omega$ and $\\bar v=\\operatorname{Spec}\\psi$; then $\\ker\\psi=\\mathfrak q$ ($\\phi$ is injective, a map of fields) and $\\bar\\psi=\\phi$. Since $\\mathfrak q$ lies over $\\mathfrak p$ and $\\phi$ is a $\\kappa(\\mathfrak p)$-algebra map, $\\psi\\circ\\alpha=\\chi$ (end of the objects step), i.e. $f\\circ\\bar v=\\bar x$. So $(V,\\bar v)$ is an object of $\\mathcal N_U$ and its triple is exactly $(B,\\mathfrak q,\\phi)$. Together with full faithfulness, the functor $\\mathcal N_U\\to\\mathcal T^{\\mathrm{op}}$ is an equivalence (indeed surjective on objects).",
-   "uses": [
+    "def-weil-residue-field",
     "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-affine-spectrum",
-    "def-weil-etale-morphism"
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "def-weil-pbc-relative-separable-closure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma Tag 04HX; Remark Tag 04HT (an etale neighbourhood (U,u) of (S,s) with an embedding κ(u) ⊂ κ(s̄) over κ(s) gives an etale neighbourhood of s̄)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The colimits.* For $(V=\\operatorname{Spec}B,\\bar v)$ in $\\mathcal N_U$ one has $A_V=\\Gamma(\\operatorname{Spec}B,\\mathcal O)=B$, and for $h=\\operatorname{Spec}\\beta$ the map $\\Gamma(h)$ is $\\beta$ [def-weil-affine-spectrum]. So the diagram $A_\\bullet$ on $\\mathcal N_U^{\\mathrm{op}}$ is, through the equivalence $\\mathcal N_U^{\\mathrm{op}}\\simeq\\mathcal T$ of the previous steps, isomorphic to the diagram $(B,\\mathfrak q,\\phi)\\mapsto B$ on $\\mathcal T$. By [lem-weil-pbc-colimit-initial-full-subcategory] (2) $\\varinjlim_{\\mathcal N_U}A_V\\cong\\varinjlim_{\\mathcal T}B$, the coprojection of $(V,\\bar v)$ going to that of its triple; composing with part (2), $\\varinjlim_{\\mathcal N}A_V=\\varinjlim_{(B,\\mathfrak q,\\phi)\\in\\mathcal T}B$ canonically, compatibly with the maps from each $A_V$, $(V,\\bar v)\\in\\mathcal N_U$ [def-weil-pbc-category-colimit].",
+   "text": "Apply the chart-to-triples equivalence theorem to the proved residue-image containment. It supplies E, δ, and the precise ring and point compatibility equations.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-etale-chart-residue-triples-equivalence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma Tag 04HX: 'In other words, we see that (O_S)_s̄ = colim_{(B,q,φ)} B'"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The initially-small property of pointSmallEtale supplies colimits on the opposite category of all pointed neighbourhoods. Initiality of the affine inclusion and chart inclusion transfers existence to D and DU. Transfer through δ and E to DT. Choose colimit cocones; r is the final-inclusion colimit isomorphism, and s is its inverse followed by the natural-diagram and equivalence colimit isomorphisms. Their coprojection equations follow from ι_colimitIso_hom, ι_colimitIso_inv, and isoOfNatIso_ι_hom.",
+   "uses": [
+    "def-weil-pbc-pointed-etale-neighbourhoods",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -153,7 +126,7 @@
   "def-weil-pbc-category-colimit",
   "lem-weil-pbc-etale-composition-cancellation",
   "lem-weil-pbc-etale-algebra-residue-field-separable",
-  "def-weil-etale-morphism"
+  "lem-weil-pbc-etale-chart-residue-triples-equivalence"
  ],
  "proof_origin": {
   "by": "document",
@@ -262,5 +235,15 @@
   "group": "M1",
   "result": "pass",
   "note": "Y arbitrary scheme; geometric point as xU through open-immersion chart Spec A (x := xU ≫ i); p, kappa(p), e from SpecToEquivOfField; K = separableClosure F Omega; N = affine full subcat of (pointSmallEtale x).fiber.Elements (recorded match); NU by factorization property; (1) IsCofiltered; (2) Initial + incoming-arrow clause + canonical colimit comparison r; (3) residue embedding lands in K, E : NU^op ≌ T with delta on Gamma rings, chart and point equations pin (B,q_v,phi_v), final s compatible with coprojections; new node T: Under(Over) induced category = A-maps with psi'∘beta=psi ⇔ preimage + residue compatibility; compat on A ⇔ on kappa(p); combined compile clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T044749-L-2037829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

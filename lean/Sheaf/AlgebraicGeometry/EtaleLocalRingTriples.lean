@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.CategoryTheory.Limits.Final
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
+import Mathlib.CategoryTheory.Filtered.Final
+import Sheaf.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence
 
 /-!
 # Affine pointed étale neighbourhoods and residue-field triples
@@ -26,6 +28,80 @@ universe v
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem affine_refinement
+    {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ Y) (c : (pointSmallEtale x).fiber.Elements)
+    (U : c.1.left.Opens) (hU : c.2.left (default : Spec (.of Ω)) ∈ U) :
+    ∃ (d : (pointSmallEtale x).fiber.Elements) (f : d ⟶ c),
+      IsAffine d.1.left ∧ Set.range f.1.left ⊆ U := by
+  obtain ⟨R, j, hj, hmem, hsub⟩ := exists_affine_mem_range_and_range_subset hU
+  have := hj
+  have hpoint : Set.range c.2.left ⊆ Set.range j := by
+    rintro _ ⟨a, rfl⟩
+    have ha : a = (default : Spec (.of Ω)) :=
+      @Subsingleton.elim (Spec (.of Ω)) inferInstance a default
+    rwa [ha]
+  let l := IsOpenImmersion.lift j c.2.left hpoint
+  have hl : l ≫ j = c.2.left := IsOpenImmersion.lift_fac j c.2.left hpoint
+  let d : (pointSmallEtale x).fiber.Elements :=
+    Functor.elementsMk _ (Etale.mk (j ≫ c.1.hom))
+      (Over.homMk l (by
+        change l ≫ (j ≫ c.1.hom) = x
+        rw [← Category.assoc, hl]
+        exact Over.w c.2))
+  refine ⟨d, ⟨MorphismProperty.Over.homMk j rfl (by simp), ?_⟩,
+    inferInstanceAs (IsAffine (Spec R)), hsub⟩
+  apply Over.OverMorphism.ext
+  exact hl
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem residue_image_separable
+    {X S : Scheme.{v}} {Ω : Type v} [Field Ω]
+    (g : X ⟶ S) [Etale g] (s : Spec (.of Ω) ⟶ X)
+    (z : X.residueField (SpecToEquivOfField Ω X s).1) :
+    let p := (SpecToEquivOfField Ω S (s ≫ g)).1
+    let e := (SpecToEquivOfField Ω S (s ≫ g)).2
+    letI : Algebra (S.residueField p) Ω := e.hom.toAlgebra
+    (SpecToEquivOfField Ω X s).2 z ∈ separableClosure (S.residueField p) Ω := by
+  dsimp [SpecToEquivOfField] at z ⊢
+  rw [descResidueField_stalkClosedPointTo_comp]
+  let F := S.residueField (g (s (IsLocalRing.closedPoint Ω)))
+  let L := X.residueField (s (IsLocalRing.closedPoint Ω))
+  let f := g.residueFieldMap (s (IsLocalRing.closedPoint Ω))
+  let e := X.descResidueField (stalkClosedPointTo s)
+  let : Algebra F L := f.hom.toAlgebra
+  let : Algebra F Ω := (f ≫ e).hom.toAlgebra
+  change L at z
+  have : Algebra.IsSeparable F L := inferInstance
+  let a : L →ₐ[F] Ω := { e.hom with commutes' := fun _ ↦ rfl }
+  apply (mem_separableClosure_iff).2
+  exact (Algebra.IsSeparable.isSeparable F z).map a a.injective
+
+private theorem compatible_colimits
+    {J C T : Type*} [Category J] [Category C] [Category T]
+    (H : J ⥤ C) [H.Final] (D : C ⥤ CommRingCat.{v}) [HasColimit D]
+    (DT : T ⥤ CommRingCat.{v}) (E : J ≌ T) (δ : H ⋙ D ≅ E.functor ⋙ DT) :
+    ∃ (cn : Cocone D) (cu : Cocone (H ⋙ D)) (ct : Cocone DT),
+      Nonempty (IsColimit cn) ∧ Nonempty (IsColimit cu) ∧ Nonempty (IsColimit ct) ∧
+      ∃ (r : cu.pt ≅ cn.pt) (s : cn.pt ≅ ct.pt),
+        (∀ c : J, cu.ι.app c ≫ r.hom = cn.ι.app (H.obj c)) ∧
+        (∀ c : J, cn.ι.app (H.obj c) ≫ s.hom =
+          δ.hom.app c ≫ ct.ι.app (E.functor.obj c)) := by
+  have : HasColimit (E.functor ⋙ DT) := hasColimit_of_iso δ.symm
+  have : HasColimit DT := hasColimit_of_equivalence_comp E
+  let r := Functor.Final.colimitIso H D
+  let t := HasColimit.isoOfNatIso δ ≪≫ Functor.Final.colimitIso E.functor DT
+  refine ⟨colimit.cocone D, colimit.cocone (H ⋙ D), colimit.cocone DT,
+    ⟨colimit.isColimit D⟩, ⟨colimit.isColimit (H ⋙ D)⟩, ⟨colimit.isColimit DT⟩,
+    r, r.symm ≪≫ t, ?_, ?_⟩
+  · intro c
+    exact Functor.Final.ι_colimitIso_hom H D c
+  · intro c
+    dsimp [r, t]
+    simp only [Functor.Final.ι_colimitIso_inv_assoc,
+      HasColimit.isoOfNatIso_ι_hom_assoc, Functor.Final.ι_colimitIso_hom]
 
 /-- Stacks, Tags 03PQ, 04HT and 04HX
 (blueprint: lem-weil-pbc-etale-local-ring-triples).
@@ -110,6 +186,71 @@ theorem etale_local_ring_triples
             (∀ c : NUᵒᵖ, cu.ι.app c ≫ r.hom = cn.ι.app (Q.ι.op.obj c)) ∧
             (∀ c : NUᵒᵖ, cn.ι.app (Q.ι.op.obj c) ≫ s.hom =
               δ.hom.app c ≫ ct.ι.app (E.functor.obj c)) := by
-  sorry
+  classical
+  dsimp only
+  let x := xU ≫ i
+  let P : ObjectProperty (pointSmallEtale x).fiber.Elements := fun c ↦ IsAffine c.1.left
+  let Q : ObjectProperty P.FullSubcategory :=
+    fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom
+  have hP : ∀ c, ∃ d : P.FullSubcategory, Nonempty (P.ι.obj d ⟶ c) := by
+    intro c
+    obtain ⟨d, f, hd, -⟩ := affine_refinement x c ⊤ (by simp)
+    exact ⟨⟨d, hd⟩, ⟨f⟩⟩
+  have hN : IsCofiltered P.FullSubcategory :=
+    IsCofiltered.of_exists_of_isCofiltered_of_fullyFaithful P.ι hP
+  have := hN
+  have hQ : ∀ c, ∃ d : Q.FullSubcategory, Nonempty (d.obj ⟶ c) := by
+    intro c
+    have hx : c.obj.1.hom (c.obj.2.left (default : Spec (.of Ω))) ∈ Set.range i := by
+      refine ⟨xU default, ?_⟩
+      have hw := congrArg (fun f : Spec (.of Ω) ⟶ Y ↦ f default) (Over.w c.obj.2)
+      exact hw.symm
+    obtain ⟨d, f, hd, hsub⟩ := affine_refinement x c.obj
+      (c.obj.1.hom ⁻¹ᵁ i.opensRange) hx
+    have hr : Set.range (d.1.hom) ⊆ Set.range i := by
+      rintro _ ⟨a, rfl⟩
+      have hf : f.1.left ≫ c.obj.1.hom = d.1.hom := Over.w f.1.hom
+      rw [← hf]
+      exact hsub ⟨a, rfl⟩
+    let g := IsOpenImmersion.lift i d.1.hom hr
+    have hg : g ≫ i = d.1.hom := IsOpenImmersion.lift_fac i d.1.hom hr
+    exact ⟨⟨⟨d, hd⟩, g, hg⟩, ⟨P.homMk f⟩⟩
+  have hinitial : Q.ι.Initial :=
+    Functor.initial_of_exists_of_isCofiltered_of_fullyFaithful Q.ι hQ
+  let : Algebra ((Spec A).residueField (SpecToEquivOfField Ω (Spec A) xU).1) Ω :=
+    (SpecToEquivOfField Ω (Spec A) xU).2.hom.toAlgebra
+  have hres : ∀ (c : Q.FullSubcategory)
+      (z : c.obj.obj.1.left.residueField
+        (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).1),
+      (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).2 z ∈
+        separableClosure ((Spec A).residueField (SpecToEquivOfField Ω (Spec A) xU).1) Ω := by
+    intro c z
+    obtain ⟨g, hg⟩ := c.property
+    have : Etale (g ≫ i) := hg.symm ▸ c.obj.obj.1.prop
+    have : Etale g := Etale.of_comp g i
+    have heq : c.obj.obj.2.left ≫ g = xU := by
+      apply (cancel_mono i).1
+      rw [Category.assoc, hg]
+      exact Over.w c.obj.obj.2
+    have h := residue_image_separable g c.obj.obj.2.left z
+    rw [heq] at h
+    exact h
+  refine ⟨hN, hinitial, hQ, hres, ?_⟩
+  have hEquiv := etale_chart_residue_triples_equivalence Y Ω A i xU
+  have he := hEquiv hres
+  obtain ⟨E, δ, hE⟩ := he
+  refine ⟨E, δ, hE, ?_⟩
+  have hPinitial : P.ι.Initial :=
+    Functor.initial_of_exists_of_isCofiltered_of_fullyFaithful P.ι hP
+  have := hPinitial
+  have := hinitial
+  let Dall := (CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+    Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
+  have : HasColimit Dall := inferInstance
+  have : HasColimit ((P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+      Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ) := by
+    change HasColimit (P.ι.op ⋙ Dall)
+    infer_instance
+  exact compatible_colimits Q.ι.op _ _ E δ
 
 end AlgebraicGeometry.Scheme
