@@ -9,14 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
-import Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomology
-import Sheaf.AlgebraicGeometry.CurveCoefficientPair
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
-import Sheaf.Paper.ZeroDimensionalCohomology
-import WeilConjectures.SixFunctors.Finite.Exact
+
 import WeilConjectures.SixFunctors.OpenClosed.Exact
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenBoundaryCohomology
+import WeilConjectures.SixFunctors.Etale.Gabber
+import Mathlib.GroupTheory.QuotientGroup.Finite
 
 @[expose] public section
 
@@ -25,6 +22,14 @@ universe u
 open CategoryTheory AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.IsCurve
+
+private theorem finite_middle_of_exact {A B C : Type*}
+    [AddGroup A] [AddGroup B] [AddGroup C] [Finite A] [Finite C]
+    (a : A →+ B) (b : B →+ C) (h : Function.Exact a b) : Finite B := by
+  let _ := Fintype.ofFinite A
+  let _ := Fintype.ofFinite C
+  let _ := AddGroup.fintypeOfKerEqRange a b h.addMonoidHom_ker_eq
+  infer_instance
 
 /-- Unconditional finiteness of all cohomology groups is invariant under restriction
 and extension by zero across a dense open of a curve.
@@ -53,6 +58,48 @@ theorem dense_open_cohomology_finiteness (Λ : Type (u + 1)) [CommRing Λ] [Fini
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)) ↔
     (∀ q : ℕ, Finite (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) q)) := by
-  sorry
+  -- The reduced closed complement supplies the third term of the excision sequence.
+  let I := Scheme.IdealSheafData.vanishingIdeal U.compl
+  have hi : Set.range I.subschemeι.base = (Set.range U.ι.base)ᶜ := by
+    simp only [I, Scheme.IdealSheafData.range_subschemeι,
+      Scheme.IdealSheafData.coe_support_vanishingIdeal, Scheme.Opens.range_ι,
+      TopologicalSpace.Opens.coe_compl]
+  let E := sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  let S := (openClosedShortComplex (ModuleCat.{u + 1} Λ) U.ι I.subschemeι
+    (disjoint_range_of_range_eq_compl U.ι I.subschemeι hi) F).map E
+  have hS : S.ShortExact :=
+    shortExact_map_forget₂ Λ
+      (shortExact_openClosedShortComplex (ModuleCat.{u + 1} Λ) U.ι I.subschemeι F hi)
+  obtain ⟨hB0, hBpos⟩ := dense_open_boundary_cohomology Λ f F U hU
+  have hB : ∀ q : ℕ, Finite (Sheaf.H S.X₃ q) := by
+    intro q
+    cases q with
+    | zero => exact hB0
+    | succ q =>
+      have : Subsingleton (Sheaf.H S.X₃ (q + 1)) := hBpos (q + 1) (by omega)
+      infer_instance
+  have := hS.mono_f
+  have h0 : Function.Injective (Sheaf.H.map S.f 0) :=
+    CategoryTheory.Abelian.Ext.postcomp_mk₀_injective_of_mono _ S.f
+  -- Apply finite-kernel/finite-image arguments directly, without choosing higher isomorphisms.
+  change (∀ q : ℕ, Finite (Sheaf.H S.X₂ q)) ↔
+    (∀ q : ℕ, Finite (Sheaf.H S.X₁ q))
+  constructor
+  · intro h q
+    cases q with
+    | zero =>
+      have := h 0
+      exact Finite.of_injective (Sheaf.H.map S.f 0) h0
+    | succ q =>
+      have := h (q + 1)
+      have := hB q
+      exact finite_middle_of_exact (Sheaf.H.δSucc hS q) (Sheaf.H.map S.f (q + 1))
+        (Sheaf.H.exact_δSucc_map hS q)
+  · intro h q
+    have := h q
+    have := hB q
+    exact finite_middle_of_exact (Sheaf.H.map S.f q) (Sheaf.H.map S.g q)
+      (Sheaf.H.exact_map_map hS q)
 
 end AlgebraicGeometry.IsCurve
