@@ -6,8 +6,6 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-!
 # The cycle comparison for direct image before deriving
@@ -21,6 +19,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the mapped kernel and cokernel lifts unfolds several composed functors.
+set_option backward.isDefEq.respectTransparency false in
 /-- The comparison from cohomology of global sections to global sections of the
 cohomology sheaf is natural in arbitrary nonnegative complexes, before any resolution
 or derived-functor identification is chosen.
@@ -69,6 +70,121 @@ theorem leray_complex_cocycle_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (q : �
               (ComplexShape.up ℕ)).obj C).homologyπ q s) =
             (RingedSpace.globalSectionsFunctor Y.toRingedSpace).map
               ((((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
-                (ComplexShape.up ℕ)).obj C).homologyπ q) z := by sorry
+                (ComplexShape.up ℕ)).obj C).homologyπ q) z := by
+  classical
+  let G := RingedSpace.globalSectionsFunctor X.toRingedSpace
+  let D := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
+  let H := RingedSpace.globalSectionsFunctor Y.toRingedSpace
+  let U := forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
+    AddCommGrpCat
+  let V := forget₂ (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤)))
+    AddCommGrpCat
+  let T := H ⋙ V
+  let : PreservesFiniteLimits H := inferInstanceAs
+    (PreservesFiniteLimits (SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (op ⊤)))
+  let t : G ⋙ U ⟶ D ⋙ T :=
+    { app := fun M ↦ M.val.presheaf.map
+        (eqToHom (congrArg op (Opens.map_top f.base).symm))
+      naturality := by
+        intro M N a
+        exact (((PresheafOfModules.toPresheaf _).map a.val).naturality _).symm }
+  let A := G.mapHomologicalComplex (ComplexShape.up ℕ)
+  let B := D.mapHomologicalComplex (ComplexShape.up ℕ)
+  -- Lift transported global cycles through the evaluated kernel of the differential.
+  let k := fun C ↦ U.map ((A.obj C).iCycles q) ≫ t.app (C.X q)
+  have hk (C) : k C ≫ T.map ((B.obj C).d q (q + 1)) = 0 := by
+    dsimp only [k]
+    change U.map ((A.obj C).iCycles q) ≫ t.app (C.X q) ≫
+      (D ⋙ T).map (C.d q (q + 1)) = 0
+    rw [← t.naturality (C.d q (q + 1)), ← Category.assoc]
+    change U.map ((A.obj C).iCycles q) ≫ U.map ((A.obj C).d q (q + 1)) ≫
+      t.app (C.X (q + 1)) = 0
+    rw [← Category.assoc, ← U.map_comp, HomologicalComplex.iCycles_d, U.map_zero, zero_comp]
+  let ki := fun C ↦ KernelFork.mapIsLimit _
+    ((B.obj C).cyclesIsKernel q (q + 1) (by simp)) T
+  let c := fun C ↦ (ki C).lift (KernelFork.ofι (k C) (hk C))
+  have hc (C) : c C ≫ T.map ((B.obj C).iCycles q) = k C := by
+    exact Fork.IsLimit.lift_ι (ki C)
+  have c_nat {C C'} (a : C ⟶ C') :
+      U.map (HomologicalComplex.cyclesMap (A.map a) q) ≫ c C' =
+        c C ≫ T.map (HomologicalComplex.cyclesMap (B.map a) q) := by
+    apply Fork.IsLimit.hom_ext (ki C')
+    change (U.map (HomologicalComplex.cyclesMap (A.map a) q) ≫ c C') ≫
+        T.map ((B.obj C').iCycles q) =
+      (c C ≫ T.map (HomologicalComplex.cyclesMap (B.map a) q)) ≫
+        T.map ((B.obj C').iCycles q)
+    rw [Category.assoc, hc, Category.assoc, ← T.map_comp,
+      HomologicalComplex.cyclesMap_i, T.map_comp, ← Category.assoc (c C), hc]
+    dsimp only [k]
+    rw [← Category.assoc, ← U.map_comp, HomologicalComplex.cyclesMap_i, U.map_comp,
+      Category.assoc]
+    change U.map ((A.obj C).iCycles q) ≫
+        ((G ⋙ U).map (a.f q) ≫ t.app (C'.X q)) =
+      (U.map ((A.obj C).iCycles q) ≫ t.app (C.X q)) ≫ (D ⋙ T).map (a.f q)
+    rw [t.naturality, Category.assoc]
+  -- The same kernel uniqueness identifies the lift of each incoming boundary.
+  have c_boundary (C) :
+      U.map ((A.obj C).sc q).toCycles ≫ c C =
+        t.app (C.X ((ComplexShape.up ℕ).prev q)) ≫ T.map ((B.obj C).sc q).toCycles := by
+    apply Fork.IsLimit.hom_ext (ki C)
+    change (U.map ((A.obj C).sc q).toCycles ≫ c C) ≫
+        T.map ((B.obj C).iCycles q) =
+      (t.app (C.X ((ComplexShape.up ℕ).prev q)) ≫ T.map ((B.obj C).sc q).toCycles) ≫
+        T.map ((B.obj C).iCycles q)
+    rw [Category.assoc, hc]
+    dsimp only [k]
+    rw [← Category.assoc, ← U.map_comp]
+    change U.map (((A.obj C).sc q).toCycles ≫ ((A.obj C).sc q).iCycles) ≫
+        t.app (C.X q) =
+      (t.app (C.X ((ComplexShape.up ℕ).prev q)) ≫ T.map ((B.obj C).sc q).toCycles) ≫
+        T.map ((B.obj C).sc q).iCycles
+    rw [ShortComplex.toCycles_i, Category.assoc, ← T.map_comp, ShortComplex.toCycles_i]
+    exact t.naturality (C.d _ _)
+  let b := fun C ↦ c C ≫ T.map ((B.obj C).homologyπ q)
+  have hb (C) : U.map ((A.obj C).sc q).toCycles ≫ b C = 0 := by
+    dsimp only [b]
+    rw [← Category.assoc, c_boundary, Category.assoc, ← T.map_comp]
+    change t.app _ ≫ T.map (((B.obj C).sc q).toCycles ≫
+      ((B.obj C).sc q).homologyπ) = 0
+    rw [ShortComplex.toCycles_comp_homologyπ, T.map_zero, comp_zero]
+  -- Forgetting scalars preserves this cokernel, so the cycle map descends to homology.
+  let pi := fun C ↦ CokernelCofork.mapIsColimit _ ((A.obj C).sc q).homologyIsCokernel U
+  let δ := fun C ↦ (pi C).desc (CokernelCofork.ofπ (b C) (hb C))
+  have hδ (C) : U.map ((A.obj C).homologyπ q) ≫ δ C = b C := by
+    exact Cofork.IsColimit.π_desc (pi C)
+  -- Naturality can be checked after the cokernel quotient on cycles.
+  let τ : (A ⋙ HomologicalComplex.homologyFunctor _ _ q ⋙ U) ⟶
+      (B ⋙ HomologicalComplex.homologyFunctor _ _ q ⋙ T) :=
+    { app := δ
+      naturality := by
+        intro C C' a
+        change U.map (HomologicalComplex.homologyMap (A.map a) q) ≫ δ C' =
+          δ C ≫ T.map (HomologicalComplex.homologyMap (B.map a) q)
+        apply Cofork.IsColimit.hom_ext (pi C)
+        change U.map ((A.obj C).homologyπ q) ≫
+            (U.map (HomologicalComplex.homologyMap (A.map a) q) ≫ δ C') =
+          U.map ((A.obj C).homologyπ q) ≫
+            (δ C ≫ T.map (HomologicalComplex.homologyMap (B.map a) q))
+        calc
+          _ = U.map (HomologicalComplex.cyclesMap (A.map a) q) ≫
+              (U.map ((A.obj C').homologyπ q) ≫ δ C') := by
+            rw [← Category.assoc, ← U.map_comp, HomologicalComplex.homologyπ_naturality,
+              U.map_comp, Category.assoc]
+          _ = U.map (HomologicalComplex.cyclesMap (A.map a) q) ≫
+              (c C' ≫ T.map ((B.obj C').homologyπ q)) := by rw [hδ]
+          _ = c C ≫ (T.map (HomologicalComplex.cyclesMap (B.map a) q) ≫
+              T.map ((B.obj C').homologyπ q)) := by
+            rw [← Category.assoc, c_nat, Category.assoc]
+          _ = c C ≫ (T.map ((B.obj C).homologyπ q) ≫
+              T.map (HomologicalComplex.homologyMap (B.map a) q)) := by
+            rw [← T.map_comp, ← HomologicalComplex.homologyπ_naturality, T.map_comp]
+          _ = _ := by
+            rw [← Category.assoc (U.map ((A.obj C).homologyπ q)), hδ]
+            rfl }
+  refine ⟨τ, ?_⟩
+  intro C s
+  refine ⟨c C s, ?_, ?_⟩
+  · exact (CategoryTheory.congr_fun (hc C) s).symm
+  · exact CategoryTheory.congr_fun (hδ C) s
 
 end AlgebraicGeometry
