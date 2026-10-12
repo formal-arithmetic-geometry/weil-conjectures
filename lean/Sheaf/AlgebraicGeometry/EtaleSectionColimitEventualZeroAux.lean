@@ -31,7 +31,18 @@ theorem etale_section_colimit_eventual_zero_of_finite_cover
     (hsep : ∀ (j : I) (t : (G.obj j).obj.obj (Opposite.op U)),
       (∀ k, ((G.obj j).obj.map (q k).op).hom t = 0) → t = 0) :
     ∃ (j : I) (f : i ⟶ j), ((G.map f).hom.app (Opposite.op U)).hom s = 0 := by
-  sorry
+  classical
+  choose j f hf using hlocal
+  obtain ⟨l, g, a, ha⟩ := IsFiltered.wideSpan f
+  refine ⟨l, g, hsep l _ ?_⟩
+  intro k
+  have hnat := congrArg (fun z ↦ z.hom s) ((G.map g).hom.naturality (q k).op)
+  simp only [ModuleCat.comp_apply] at hnat
+  rw [← hnat, ← ha k, G.map_comp]
+  change ((G.map (a k)).hom.app (Opposite.op (V k))).hom
+    (((G.map (f k)).hom.app (Opposite.op (V k))).hom
+      (((G.obj i).obj.map (q k).op).hom s)) = 0
+  rw [hf k, map_zero]
 
 /-- Extraction of finite local data from a zero section in the sheaf colimit.
 Source: Stacks Project, Sites, Lemma Tag 0738, proof of part (2), together
