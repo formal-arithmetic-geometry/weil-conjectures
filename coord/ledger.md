@@ -5863,3 +5863,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:42 L: returned deliver/C1/WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (reviewer RETURN: (the landing tools, head 2722cdb69) the delivery did not land: NOT MERGED WeilConjectures.AlgebraicGeometry.Cohomology.E)
 - 02:43 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ModuleAcyclicUnderlyingSections (stage 3; reviewer PASS; after a return; landing 20261012T024320-L-1164525 (proof); modules 1; new nodes 0)
 - 02:45 L: merged deliver/Z2/def-nagata-relative-gluing-datum-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataRelativeGluingDatumDescent AlgebraicGeometry.NagataRelativeGluingDatum)
+- 02:45 L: returned deliver/F1/Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison (reviewer RETURN: (the landing tools, head 521cd6155) the delivery did not land: NOT MERGED Sheaf.CategoryTheory.ExtExactFunctorCompositio)
