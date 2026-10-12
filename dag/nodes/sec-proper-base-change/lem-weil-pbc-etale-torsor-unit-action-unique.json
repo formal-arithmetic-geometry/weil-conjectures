@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-etale-torsor-unit-action-unique",
+ "kind": "statement",
+ "title": "étale torsor unit action uniqueness",
+ "statement": "Let i:Y₀ → Y be a scheme morphism [def-weil-pbc-scheme-conventions], G an arbitrary abelian sheaf on Y_et [def-weil-pbc-etale-sheaf-of-sets], T a G-torsor [def-sc-gm-torsor], and S₁,S₂ torsors under i⁻¹G [def-weil-pbc-inverse-image]. Suppose E_j:i⁻¹_set T.sheaf ≅ S_j.sheaf are sheaf isomorphisms satisfying E_j(η_T(g+ᵥt))=η_G(g)+ᵥE_j(η_T(t)) for every W∈Y_et, g∈G(W), t∈T(W), where η_T,η_G are the respective adjunction units and j=1,2. Then E₁⁻¹ followed by E₂ is equivariant for every coefficient section and torsor section on every object of Y₀_et. Finiteness, representability and an equivalence on finite étale schemes are not required.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q1 (2) and 0A5G"
+ },
+ "proof": [
+  {
+   "text": "Construct the action as a sheaf morphism from the product using map_vadd for naturality. Set inverse image preserves finite limits by the presheaf left-Kan-extension flatness and sheafification instances (AB5OfSize for Type). Apply etaleInverseImageAbelianLift_hom to obtain ea and its hom-set equation. Substitute the identity and use the unit formula for homEquiv, then cancel ea, to get the coefficient unit compatibility.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q1 (2) and 0A5G"
+   }
+  },
+  {
+   "text": "Form k_j = prodComparison L G T followed by prod.map ea.inv E_j.hom. Naturality of the adjunction unit and the two product projection formulas give the coefficient and torsor components of the adjunct of k_j. Apply the adjunction homEquiv injectively to show k₁ followed by the S₁ action and E₁.inv then E₂.hom equals k₂ followed by the S₂ action: evaluating at sections, the hypotheses h₁ and h₂ identify both sides, and E₁.hom_inv_id cancels the middle comparison. Since k₁ is an isomorphism, cancel it. Evaluate the resulting morphism equality on the section (g,x), obtained using the product comparison for sheaf sections and Types.binaryProductIso. The two projection equations give the required equivariance for all g and x.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q1 (2) and 0A5G"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
+  "def-sc-gm-torsor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "V2: formal adjunction and binary-product proof of the action-uniqueness argument in Tag 03Q1 (2). Finite-limit preservation instantiated directly; only the abelian hom-set comparison is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image torsor actions uniquely determined by adjunction units",
+   "results": "Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image torsor actions uniquely determined by adjunction units",
+   "results": "Eight results; none states the required scheme torsor lifting or action/adjunction compatibility theorem. Results concern affine transition limits, constant-sheaf equivalences, or elementwise affine torsors.",
+   "verdict": "no usable match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor.*unit|unit.*torsor",
+   "results": "0 hits from msearch grep; direct repository rg found EtaleTorsorDescent representation and connected-base-only TorsorPullback, neither states this interface.",
+   "verdict": "no usable match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTorsorLifting",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-torsor-comparison",
+   "place": "proof steps 3 and 4: Tags 03Q1 (2) and 0A5G",
+   "via": [
+    "lem-weil-pbc-finite-etale-torsor-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTorsorUnitActionUnique",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTorsorUnitActionUnique.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_torsor_unit_action_unique",
+  "statement": "theorem etale_torsor_unit_action_unique {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y) (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (T : Sheaf.Torsor G) (S₁ S₂ : Sheaf.Torsor ((upperStar AddCommGrpCat.{u + 1} i).obj G)) (E₁ : (Scheme.etaleSetPullback i).obj T.sheaf ≅ S₁.sheaf) (E₂ : (Scheme.etaleSetPullback i).obj T.sheaf ≅ S₂.sheaf) (h₁ : (∀ (W : Y.Etale) (g : G.obj.obj (op W)) (t : T.sheaf.obj.obj (op W)), E₁.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj W)) (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (u + 1)) (Y.smallGrothendieckTopology @Etale) (Y₀.smallGrothendieckTopology @Etale)).unit.app T.sheaf).hom.app (op W) (T.vadd (op W) g t)) = S₁.vadd (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj W)) (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app G).hom.app (op W) g) (E₁.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj W)) (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (u + 1)) (Y.smallGrothendieckTopology @Etale) (Y₀.smallGrothendieckTopology @Etale)).unit.app T.sheaf).hom.app (op W) t)))) (h₂ : (∀ (W : Y.Etale) (g : G.obj.obj (op W)) (t : T.sheaf.obj.obj (op W)), E₂.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj W)) (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (u + 1)) (Y.smallGrothendieckTopology @Etale) (Y₀.smallGrothendieckTopology @Etale)).unit.app T.sheaf).hom.app (op W) (T.vadd (op W) g t)) = S₂.vadd (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj W)) (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app G).hom.app (op W) g) (E₂.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj W)) (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (u + 1)) (Y.smallGrothendieckTopology @Etale) (Y₀.smallGrothendieckTopology @Etale)).unit.app T.sheaf).hom.app (op W) t)))) : ∀ (U : Y₀.Etaleᵒᵖ) (g : ((upperStar AddCommGrpCat.{u + 1} i).obj G).obj.obj U) (x : S₁.sheaf.obj.obj U), (E₁.symm ≪≫ E₂).hom.hom.app U (S₁.vadd U g x) = S₂.vadd U g ((E₁.symm ≪≫ E₂).hom.hom.app U x)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T085353-L-45302",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T085353-L-45302",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

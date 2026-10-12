@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-finite-etale-scheme-torsor-lift",
+ "kind": "statement",
+ "title": "finite étale scheme torsor lifting",
+ "statement": "Let i:Y₀ → Y be a morphism of schemes [def-weil-pbc-scheme-conventions] inducing an equivalence on finite étale schemes [def-weil-pbc-finite-etale-category]. Let M be a finite abelian group and R₀ a torsor under the constant abelian sheaf M on Y₀_et [def-sc-gm-torsor, def-weil-pbc-constant-sheaf]. Then there exist a scheme M-torsor t₀ over Y₀, an isomorphism of its sheaf torsor with R₀, a scheme M-torsor t over Y, and an isomorphism e:P ×_Y Y₀ ≅ P₀ over Y₀ commuting with every M-action map. A scheme M-torsor means a finite étale surjective scheme with an M-action whose map ∐_M P → P ×_Y P is an isomorphism [lem-galois-etale-torsor-sheaf-torsor]. No connectedness, nonemptiness or surjectivity of i is assumed. The conclusion concerns geometric representatives and their actions only; no sheaf inverse-image comparison, unit equations, or arbitrary torsor transport is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-finite-etale-category",
+  "lem-galois-etale-torsor-sheaf-torsor",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A5G, final paragraph"
+ },
+ "proof": [
+  {
+   "text": "The finite constant torsor is étale locally the finite set M; hence its underlying sheaf is finite locally constant. Represent it by a finite étale scheme by Tag 03RV. Yoneda represents the constant action maps, and lifts their identities. Its sheaf torsor is isomorphic to R₀; local sections and simple transitivity make the representative a scheme torsor t₀. This is the existing EtaleTorsorDescent proof, which cannot be imported because HenselianFiniteEtale now reaches the item. Use the lower finite-locally-constant representability and Yoneda interfaces instead.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-sets-representability",
+    "lem-galois-etale-torsor-sheaf-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5G first paragraph and Tag 03RV"
+   }
+  },
+  {
+   "text": "Use essential surjectivity to lift the underlying finite étale scheme. Lift its conjugated M-action maps using fullness. Faithfulness gives their zero and addition equations.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5G, final paragraph"
+   }
+  },
+  {
+   "text": "Base change preserves finite coproducts and fibre products. All their structure morphisms are finite étale, so reflect the isomorphism ∐_M P → P ×_Y P from the corresponding simple-transitivity isomorphism for t₀.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category",
+    "lem-galois-etale-torsor-sheaf-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5G, final paragraph"
+   }
+  },
+  {
+   "text": "The image U of P → Y is open (étale implies flat and locally of finite presentation) and closed (finite implies proper). The clopen immersion U → Y is finite étale. Its pullback is an isomorphism since t₀ is surjective. Reflection of isomorphisms gives U=Y, hence P → Y surjective. The lifted action and comparison now give the claimed scheme torsor.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5G, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-etale-category",
+  "lem-galois-etale-torsor-sheaf-torsor",
+  "lem-weil-pbc-finite-locally-constant-sets-representability",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-flat-lfp-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A5G, final paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale scheme torsor action lifts along equivalence",
+   "results": "Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Torsors under a finite constant abelian sheaf lift along an equivalence on finite etale schemes",
+   "results": "Eight results; none states the required scheme torsor lifting or action/adjunction compatibility theorem. Results concern affine transition limits, constant-sheaf equivalences, or elementwise affine torsors.",
+   "verdict": "no usable match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEquivalence.*torsor|torsor.*IsEquivalence|lifts_torsor",
+   "results": "0 hits from msearch grep; direct repository rg found EtaleTorsorDescent representation and connected-base-only TorsorPullback, neither states this interface.",
+   "verdict": "no usable match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTorsorLifting",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-torsor-comparison",
+   "place": "proof steps 3 and 4: Tag 0A5G, final paragraph",
+   "via": [
+    "lem-weil-pbc-finite-etale-torsor-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleSchemeTorsorLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleSchemeTorsorLift.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteEtale_lifts_scheme_torsor",
+  "statement": "theorem finiteEtale_lifts_scheme_torsor [(@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange] {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y) (hFE : (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).IsEquivalence) (M : Type (u + 1)) [AddCommGroup M] [Finite M] (R₀ : Sheaf.Torsor ((constantSheaf Y₀.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M))) : ∃ (t₀ : Scheme.EtaleTorsor M Y₀) (_ : t₀.toSheafTorsor ≈ R₀) (t : Scheme.EtaleTorsor M Y) (e : pullback t.π i ≅ t₀.P), e.hom ≫ t₀.π = pullback.snd t.π i ∧ ∀ m : M, pullback.map t.π i t.π i (t.vadd m) (𝟙 Y₀) (𝟙 Y) (by rw [Category.comp_id, t.vadd_π]) (by rw [Category.comp_id, Category.id_comp]) ≫ e.hom = e.hom ≫ t₀.vadd m",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T085353-L-45302",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T085353-L-45302",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

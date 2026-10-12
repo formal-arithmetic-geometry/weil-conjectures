@@ -8,9 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.Sites.Torsor
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
-import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
-import WeilConjectures.ConstructibleSheaf.Defs
+
+import Sheaf.AlgebraicGeometry.FiniteEtaleSchemeTorsorLift
+import Sheaf.AlgebraicGeometry.SchemeTorsorPullbackCompatible
+import Sheaf.AlgebraicGeometry.EtaleTorsorUnitActionUnique
 
 /-!
 # Finite étale equivalences and transport of torsors
@@ -81,6 +82,14 @@ theorem finiteEtale_lifts_torsor_transport
     (R : Sheaf.Torsor ((upperStar AddCommGrpCat.{u + 1} i).obj
       ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)))) :
     ∃ T, τ T ≈ R := by
-  sorry
+  let c := (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} i).app
+    (AddCommGrpCat.of M)
+  obtain ⟨t₀, hrepr, t, e, he, hact⟩ :=
+    finiteEtale_lifts_scheme_torsor i hFE M (Sheaf.Torsor.ofIso c R)
+  obtain ⟨eR, hR⟩ := scheme_torsor_pullback_compatible i M t t₀ e he hact R hrepr
+  obtain ⟨eT, hT⟩ := hτ t.toSheafTorsor
+  refine ⟨t.toSheafTorsor, ⟨⟨eT.symm ≪≫ eR, ?_⟩⟩⟩
+  exact etale_torsor_unit_action_unique i _ t.toSheafTorsor
+    (τ t.toSheafTorsor) R eT eR hT hR
 
 end AlgebraicGeometry.Etale
