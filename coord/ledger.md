@@ -8583,3 +8583,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: merged deliver/V2/Sheaf.ConstructibleSheaf.TorsorInvariantSections (stage 3; reviewer PASS; first push; landing 20261012T163622-L-2788394 (proof); batch 20261012T163610; modules 1; new nodes 0)
 - 16:36 L: merged deliver/V3/Sheaf.AlgebraicGeometry.FixedPullbackDegreeZeroDescent (stage 3; reviewer PASS; first push; landing 20261012T163623-L-2788500 (interface); batch 20261012T163610; modules 2; new nodes 1)
 - 16:36 L: merged deliver/W2/Sheaf.AlgebraicGeometry.DerivedSingleHomEvaluation (stage 3; reviewer PASS; first push; landing 20261012T163623-L-2788602 (proof); batch 20261012T163610; modules 1; new nodes 0)
+- 16:36 L: merged deliver/W2/Sheaf.AlgebraicGeometry.EtaleFilteredStepCohomology (stage 3; reviewer PASS; first push; landing 20261012T163623-L-2788701 (proof); batch 20261012T163610; modules 1; new nodes 2)

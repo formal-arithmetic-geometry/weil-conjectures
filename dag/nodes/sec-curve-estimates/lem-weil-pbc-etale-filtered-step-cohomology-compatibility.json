@@ -1,0 +1,136 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Lemma 13.21.3 and Tag 0133"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-sp-cartan-eilenberg-mapped-total",
+  "lem-sp-cartan-eilenberg-total-resolution",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-sp-kinjective-computes",
+  "lem-weil-pbc-etale-filtered-step-cohomology-iso"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the augmented Cartan–Eilenberg bicomplex to complex degrees s ≥ q and extend by zero. The rows resolve the stupid truncation; finite diagonals give a bounded-below K-injective total and its augmentation computes derived global sections.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-total-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the mapped-total diagonal formula to identify the restricted mapped total with (T.L).step q and apply the K-injective computation to obtain the degree-p isomorphism.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-mapped-total",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the restricted augmentation with the truncation inclusion via T.aug_formula and T.over_K; the K-injective comparison principle, T.w_formula and T.c_formula identify the induced map with the derived truncation map. This also handles empty diagonals and arbitrary integer bounds.",
+   "uses": [
+    "lem-sp-kinjective-comparison-principle",
+    "def-weil-pbc-termwise-hypercohomology-presentation",
+    "lem-weil-pbc-etale-filtered-step-cohomology-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-sp-cartan-eilenberg-mapped-total",
+  "lem-sp-cartan-eilenberg-total-resolution",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-sp-kinjective-computes",
+  "lem-weil-pbc-etale-filtered-step-cohomology-iso"
+ ],
+ "proof_origin": {
+  "by": "worker W2",
+  "document": "Stacks Project",
+  "place": "Tags 015J and 0133"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered step cohomology isomorphism",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap",
+   "results": "generic homology map lemmas only",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered_step_cohomology",
+   "results": "current declaration only",
+   "date": "2026-10-13",
+   "verdict": "no prior match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered step cohomology",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFilteredStepCohomology",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-filtered-step-cohomology",
+   "place": "restricted comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "lem-weil-pbc-etale-filtered-step-cohomology-compatibility",
+ "title": "Compatibility of filtered-step cohomology isomorphism",
+ "statement": "For X,K,T,p,q, the canonical isomorphism selected by the preceding existence theorem satisfies the truncation inclusion homology equation.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFilteredStepCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFilteredStepCohomology.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_filtered_step_cohomology_compatibility",
+  "statement": "theorem etale_filtered_step_cohomology_compatibility\n    (X : Scheme.{u})\n    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))\n    (T : EtaleTermwiseHypercohomology X K) (p q : ℤ) :\n    HomologicalComplex.homologyMap (T.L.step q).arrow p ≫ (T.c p).hom =\n      (Classical.choice (etale_filtered_step_cohomology_iso X K T p q)).hom ≫\n        (cohomology AddCommGrpCat.{u + 1} X p).map\n          (DerivedCategory.Q.map (K.obj.ιStupidTrunc (ComplexShape.embeddingUpIntGE q)))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T163623-L-2788701",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T163623-L-2788701",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

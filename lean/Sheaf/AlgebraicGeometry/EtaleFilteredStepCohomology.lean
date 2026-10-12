@@ -51,7 +51,39 @@ and T.w_formula then identify the induced map with the map of the truncation
 inclusion. Finally T.c_formula fixes the full-total identification, giving the
 stated commutative equation. Empty diagonals, the zero complex and negative q
 satisfy the same finite-diagonal calculation; no positivity of q is required.
-(blueprint: lem-weil-pbc-etale-filtered-step-cohomology). -/
+(blueprint: lem-weil-pbc-etale-filtered-step-cohomology-iso). -/
+theorem etale_filtered_step_cohomology_iso
+    (X : Scheme.{u})
+    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (T : EtaleTermwiseHypercohomology X K) (p q : ℤ) :
+    Nonempty (((T.L.step q : CochainComplex AddCommGrpCat.{u + 1} ℤ).homology p) ≅
+        (cohomology AddCommGrpCat.{u + 1} X p).obj
+          (DerivedCategory.Q.obj (K.obj.stupidTrunc (ComplexShape.embeddingUpIntGE q)))) := by
+  sorry
+
+/-- Compatibility of the canonical filtered-step isomorphism with truncation inclusion.
+Source: Stacks Project, Tags 015J and 0133; restricted augmented-total comparison.
+
+Proof: Use the restricted augmented Cartan--Eilenberg total from
+`etale_filtered_step_cohomology_iso`. The diagonal description of the mapped total
+identifies its inclusion into the full mapped total with `(T.L.step q).arrow`.
+The augmentation comparison agrees with the truncation inclusion on degree-zero
+summands by `T.aug_formula` and `T.over_K`; the K-injective comparison principle
+therefore identifies the induced map with the derived map of
+`K.obj.ιStupidTrunc`. Applying global sections, homology, and the identifications
+`T.w_formula` and `T.c_formula` gives the displayed equality. The argument is
+degreewise and also covers empty diagonals, zero terms, and arbitrary integers p,q.
+(blueprint: lem-weil-pbc-etale-filtered-step-cohomology-compatibility). -/
+theorem etale_filtered_step_cohomology_compatibility
+    (X : Scheme.{u})
+    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+    (T : EtaleTermwiseHypercohomology X K) (p q : ℤ) :
+    HomologicalComplex.homologyMap (T.L.step q).arrow p ≫ (T.c p).hom =
+      (Classical.choice (etale_filtered_step_cohomology_iso X K T p q)).hom ≫
+        (cohomology AddCommGrpCat.{u + 1} X p).map
+          (DerivedCategory.Q.map (K.obj.ιStupidTrunc (ComplexShape.embeddingUpIntGE q))) := by
+  sorry
+
 theorem etale_filtered_step_cohomology
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -62,6 +94,9 @@ theorem etale_filtered_step_cohomology
       HomologicalComplex.homologyMap (T.L.step q).arrow p ≫ (T.c p).hom =
         e.hom ≫ (cohomology AddCommGrpCat.{u + 1} X p).map
           (DerivedCategory.Q.map (K.obj.ιStupidTrunc (ComplexShape.embeddingUpIntGE q))) := by
-  sorry
+  let e := Classical.choice (etale_filtered_step_cohomology_iso X K T p q)
+  refine ⟨e, ?_⟩
+  exact etale_filtered_step_cohomology_compatibility X K T p q
+
 
 end AlgebraicGeometry.Etale
