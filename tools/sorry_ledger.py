@@ -16,6 +16,8 @@ other otherwise. Reference approximation: qualified or terminal name token in ne
 proof, in same/import-reachable module, transitively through closed declarations and same-commit proved helpers.
 This is source evidence, not elaborated dependency information or a proof verdict.
 History is first-parent, recomputed every run. Claims come from the input git tree.
+report --post-build scans the last green build commit, then commits changed outputs
+under the merge lock (generation never holds a lock). No build is invoked.
 """
 from __future__ import annotations
 import argparse
@@ -33,7 +35,7 @@ import stage2_delivery as s2
 ROOT=pathlib.Path(__file__).resolve().parent.parent
 BASELINES=[('889327369','Queue at the start of stage 3'),
            ('660345513','Application of proof-dependency imports')]
-HOLE=re.compile(r"(?<![\w'.«])(?:sorry|admit|sorryAx)(?![\w'»])")
+HOLE=re.compile(r"(?<![\w'«])(?:sorry|admit|sorryAx)(?![\w'»])")
 DEFECT={'def','instance','structure field'}
 
 
@@ -349,6 +351,9 @@ def report(head, output=None):
            'Progress = closed − added in the closure, with pruning reported separately.','',
            f"Holes now: library **{now['library']}**, closure **{now['closure']}**, in definitions **{now['definitions']}**.",'',
            '| root | library | closure |','|---|---:|---:|']
+    defects=[f"- `{r['module']}::{r['name']}` ({r['kind']}, line {r['line']})" for r in now['rows'] if r['kind'] in DEFECT]
+    at=lines.index('| root | library | closure |')
+    lines[at:at]=['Definitions with holes (def/instance/structure field):','']+(defects or ['None.'])+['']
     for root,r in now['roots'].items(): lines.append(f"| {root} | {r['library']} | {r['closure']} |")
     lines+=['','| baseline | scope | closed | added | net | deleted | changed holed statements |','|---|---|---:|---:|---:|---:|---:|']
     for r in baselines:
@@ -375,9 +380,6 @@ def report(head, output=None):
             '| module | distance | holes | group |','|---|---:|---:|---|']
     for m in sorted(modules,key=lambda m:(s['dist'][m],m))[:20]:
         lines.append(f"| {m} | {s['dist'][m]} | {modules[m]} | {claims.get(m,'—')} |")
-    lines+=['','Definitions with holes (def/instance/structure field):','']
-    defects=[f"- `{r['module']}::{r['name']}` ({r['kind']}, line {r['line']})" for r in now['rows'] if r['kind'] in DEFECT]
-    lines+=defects or ['None.']
     pruned=sorted(set(m for r in baselines if 'closure' in r for m in r['closure']['pruned']))
     lines+=['','Modules pruned since the imports baseline:','']+([f'- `{m}`' for m in pruned] or ['None.'])
     lines+=['','Scanner limitations: macro-generated declarations, elaborated anonymous/private names, and tactic dependencies cannot be recovered from source. Synthetic names are source keys, not elaborated names.','','Diagnostics:','']
@@ -431,7 +433,12 @@ def post_build():
                     'Refresh source sorry ledger after green build\n\n'
                     'Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>',
                     '--',*paths],check=True)
-            return {'changed':changed,'summary':result}
+            return {'changed':changed,'holes':result['now']['library'],
+                    'closure':result['now']['closure'],'classes':result['classes']}
+
+
+def resolve(ref):
+    return git('rev-parse','--verify',ref+'^{commit}').decode().strip()
 
 
 def main():
@@ -441,10 +448,10 @@ def main():
     l=sub.add_parser('landings'); l.add_argument('--since',default=BASELINES[0][0])
     r=sub.add_parser('report'); r.add_argument('--commit',default='HEAD'); r.add_argument('--post-build',action='store_true')
     args=p.parse_args()
-    if args.command=='census': result=census(snapshot(tree(args.commit)))
-    elif args.command=='delta': result=delta(snapshot(tree(args.base)),snapshot(tree(args.head)))
-    elif args.command=='landings': result=history(args.since,'HEAD')
-    else: result=post_build() if args.post_build else report(args.commit)
+    if args.command=='census': result=census(snapshot(tree(resolve(args.commit))))
+    elif args.command=='delta': result=delta(snapshot(tree(resolve(args.base))),snapshot(tree(resolve(args.head))))
+    elif args.command=='landings': result=history(resolve(args.since),resolve('HEAD'))
+    else: result=post_build() if args.post_build else report(resolve(args.commit))
     print(json.dumps(result,ensure_ascii=False,sort_keys=True,indent=2))
 
 
