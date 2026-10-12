@@ -7,12 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Sheaf.AlgebraicGeometry.AbelianExchangeCubeComparisons
-import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.BaseChange.Square
+import Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsosSource
+import Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsosTarget
 
 /-! # Invertibility of the canonical strict-local stalk comparisons
 
@@ -107,6 +103,12 @@ theorem Etale.isIso_strictHenselization_exchangeCube_stalkComparisons
     IsIso (derivedStalkComparison jB t τ ht M₁ N₁
       (exchangeCubeSourceComparison sq₀.toCommSq h G) (q : ℤ)) ∧
     IsIso (derivedStalkComparison jB t τ ht M₂ N₂
-      (exchangeCubeTargetComparison sqB.toCommSq hb G) (q : ℤ)) := by sorry
+      (exchangeCubeTargetComparison sqB.toCommSq hb G) (q : ℤ)) := by
+  dsimp
+  constructor
+  · exact isIso_strictHenselization_exchangeCube_stalkComparisons_source
+      sq σ τ ι hι ν eA eB φ ρA ρB hφ hρA hρB hρ p₀ f₀ sq₀ p₁ f₁ sq₁ b sqB hb G q
+  · exact isIso_strictHenselization_exchangeCube_stalkComparisons_target
+      sq σ τ ι hι ν eA eB φ ρA ρB hφ hρA hρB hρ p₀ f₀ sq₀ p₁ f₁ sq₁ b sqB hb G q
 
 end AlgebraicGeometry
