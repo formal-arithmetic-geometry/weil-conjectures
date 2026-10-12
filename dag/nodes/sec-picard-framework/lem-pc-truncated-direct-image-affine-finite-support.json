@@ -14,40 +14,41 @@
  ],
  "proof": [
   {
-   "text": "Proof. Choose termwise representatives of the ambient coproduct. Exact sums compute\nits cohomology as the sum of the summands' cohomology, and these sums are quasi-coherent.\nExact sums commute with lower truncation, so the truncated family and its coproduct\nhave the common lower bound a. Over an affine open U of Y, the inverse image is qcqs.\nThe natural bounded-below hypercohomology spectral sequences have second pages\nH^p(f⁻¹U,H^r(τ≥a E)). Cohomology of module sheaves on this qcqs inverse image commutes\nwith sums. Thus the second-page comparison is bijective. Exact sums commute with the\nkernels and images of differentials, so all page comparisons are bijective. In total\ndegree q there are only the finitely many indices 0 ≤ p ≤ q-a. The finite convergent\nfiltrations therefore give surjectivity on the abutment: lift a section of the top\nnonzero graded piece, subtract its image, and repeat in the next filtration step.\nEach lift has finite support; the union of the finitely many supports is finite.\nFor the second-page terms, cohomology of a quasi-coherent module on the qcqs preimage of an affine open V commutes with localization at a pulled-back section: affine acyclicity and section localization give the affine case, and finite affine covers with quasi-compact overlaps give the general case by Mayer--Vietoris. Compatibility with restriction to principal opens of V and the higher-direct-image presheaf description prove quasi-coherence of the second-page sheaves. Kernel and cokernel closure give quasi-coherence of each later page by induction. Starting at the zero last filtration step, extension closure along the short exact sequences of the finite convergent filtration gives quasi-coherence of the abutment. This derives the required bounded-below quasi-coherence locally inside the spectral-sequence argument; it does not invoke the derived-direct-image bounded-below quasi-coherence theorem, whose imports reach the original truncated-coproduct comparison.\nConsequently, exact sections on the affine open U identify the sheaf abutments with\nthe displayed section modules. Naturality identifies the map with the displayed\nlinear map. If q<a the target is zero. If I is empty the ambient coproduct and its\nlower truncation are zero, so the target is zero as well.",
+   "text": "Construct ambient coproduct projections. Additivity gives componentwise left inverses and makes the sheaf coproduct comparison monic: prove injectivity after presheaf evaluation by direct-sum components and sheafify the monomorphism. This is the algebraic projection argument already used in DerivedDirectImageTruncatedCoproduct.",
    "uses": [
-    "lem-pc-derived-ambient-direct-sums",
-    "lem-pc-quasicoherent-module-coproducts",
-    "thm-sp-truncation-e2",
-    "lem-weil-pbc-qcqs-cohomology-direct-sum",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-sp-couple-morphism",
-    "lem-sp-finite-filtration-induction",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-pc-quasi-coherent-extension",
-    "lem-weil-pbc-quasi-coherent-module-kernel"
+    "lem-weil-pbc-module-presheaf-sheafification-exact"
    ],
    "elementary": false
+  },
+  {
+   "text": "The local-surjectivity theorem makes the same comparison epimorphic. In the abelian module-sheaf category it is therefore an isomorphism.",
+   "uses": [
+    "lem-pc-truncated-direct-image-sheaf-coproduct-epi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Affine evaluation of the coproduct of the lower-truncated higher-image sheaves is an actual module coproduct, by the affine-coproduct lemma. This statement involves no ambient derived coproduct S.",
+   "uses": [
+    "lem-pc-truncated-higher-images-affine-coproduct"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the evaluated coproduct with the algebraic direct sum by its universal property and ModuleCat.coprodIsoDirectSum. Factor the displayed map as the surjective direct-sum identification followed by evaluation of the sheaf isomorphism. Check the factorization on every DirectSum.lof; composition gives surjectivity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-ambient-direct-sums",
-  "lem-pc-quasicoherent-module-coproducts",
-  "thm-sp-truncation-e2",
-  "lem-weil-pbc-qcqs-cohomology-direct-sum",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-sp-couple-morphism",
-  "lem-sp-finite-filtration-induction",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-pc-quasi-coherent-extension",
-  "lem-weil-pbc-quasi-coherent-module-kernel"
+  "lem-weil-pbc-module-presheaf-sheafification-exact",
+  "lem-pc-truncated-direct-image-sheaf-coproduct-epi",
+  "lem-pc-truncated-higher-images-affine-coproduct"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "https://stacks.math.columbia.edu/tag/08DZ",
-  "place": "Bounded-below spectral-sequence paragraph, with Tag 015J; extract the surjectivity and affine-section clauses. Repair: derive abutment quasi-coherence using page kernel/cokernel closure and finite extension induction, avoiding the cyclic bounded-below quasi-coherence import."
+  "document": "Stacks Project, Tags 08DZ, 08D5 and 015J",
+  "place": "V1 Lean reduction: local sheaf epimorphy plus componentwise coproduct projections; an independent affine-coproduct cocone lemma identifies sections with the algebraic direct sum."
  },
  "mathlib_searches": [
   {
@@ -119,11 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-acff0",
   "group": "V1",
   "result": "pass",
-  "landing": "20261012T095927-L-325898",
+  "landing": "20261012T135326-L-1696976",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged item signature and all three Lean statements match their nodes; source arguments, proof dependencies, pruning, and report agree. All delivered modules and direct importer Sheaf.AlgebraicGeometry.DerivedDirectImageTruncatedCoproduct compile cleanly; axiom probes show only permitted axioms plus sorryAx from the two recorded holes."
  }
 }

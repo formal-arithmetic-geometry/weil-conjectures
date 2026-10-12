@@ -1,0 +1,144 @@
+{
+ "id": "lem-pc-truncated-direct-image-sheaf-coproduct-epi",
+ "kind": "statement",
+ "title": "Local surjectivity of the truncated sheaf coproduct comparison",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme], let $I$ be a set, $E_i\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category], and let $\\iota_i:E_i\\to S$ be an ambient coproduct in $D(\\mathcal O_X)$. For every $a,q\\in\\mathbf Z$, the canonical sheaf morphism $\\bigoplus_i H^q(Rf_*\\tau_{\\ge a}E_i)\\to H^q(Rf_*\\tau_{\\ge a}S)$ is an epimorphism. Here $Rf_*$ is [def-pc-derived-direct-image]. This asserts local lifting of sections, without an affine global-section lifting assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DZ",
+  "place": "Tag 08DZ, bounded-below spectral-sequence paragraph, with Tag 015J"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Choose representatives and identify the cohomology of the ambient coproduct with the sums. Exact sums commute with canonical lower truncation and give the common bound a.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums",
+    "lem-pc-quasicoherent-module-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply natural bounded-below hypercohomology. On affine opens, qcqs cohomology of the inverse image commutes with sums; the higher-direct-image presheaf description and sheafification give second-page isomorphisms.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Maps of exact couples induce maps of pages. Exact sums preserve kernels, images and cokernels, so the second-page isomorphisms propagate to the stable pages.",
+   "uses": [
+    "lem-sp-couple-morphism",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In total degree q, only 0 <= p <= q-a occurs. Exact sums of the uniformly finite convergent filtrations have the corresponding sums as graded pieces. Finite filtration induction makes the canonical abutment comparison an isomorphism, hence epi. Naturality identifies Sigma.desc; below a and for the empty family both sides are zero.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-sp-finite-filtration-induction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-ambient-direct-sums",
+  "lem-pc-quasicoherent-module-coproducts",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sp-couple-morphism",
+  "lem-sp-finite-filtration-induction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 08DZ, bounded-below spectral-sequence paragraph, with Tag 015J; the glue is written by V1 from the source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived direct image bounded below quasi coherent complexes coproduct epimorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded below hypercohomology commutes with direct sums",
+   "results": "Eight hits on HomComplex and injective replacement factorizations; none states the comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology.*sum|directSum.*[Ss]urject|coproduct.*[Ss]urject",
+   "results": "Only CompHausLike finiteCoproduct jointly surjective. Repository parent comparison imports this item and cannot be imported here.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TruncatedDirectImageAffineFiniteSupport",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DZ, bounded-below spectral-sequence paragraph, with Tag 015J",
+   "via": [
+    "lem-pc-truncated-direct-image-affine-finite-support",
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TruncatedDirectImageSheafCoproductEpi",
+  "file": "lean/Sheaf/AlgebraicGeometry/TruncatedDirectImageSheafCoproductEpi.lean",
+  "declaration": "AlgebraicGeometry.truncated_directImage_sheaf_coproduct_epi",
+  "statement": "theorem truncated_directImage_sheaf_coproduct_epi\n    {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w₂} (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))]\n    (I : Type u₁) (E : I → schemeDerivedQCohCategory X)\n    (S : schemeDerivedCategory X) (ι : ∀ i, (E i).obj ⟶ S)\n    (hc : IsColimit (Cofan.mk S ι)) (a q : ℤ) :\n    Epi (Sigma.desc (fun i ↦ (schemeHigherDirectImage f q).map\n      ((DerivedCategory.TStructure.t.truncGE a).map (ι i))))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-acff0",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T135326-L-1696976",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-acff0",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T135326-L-1696976",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged item signature and all three Lean statements match their nodes; source arguments, proof dependencies, pruning, and report agree. All delivered modules and direct importer Sheaf.AlgebraicGeometry.DerivedDirectImageTruncatedCoproduct compile cleanly; axiom probes show only permitted axioms plus sorryAx from the two recorded holes."
+ }
+}

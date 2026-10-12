@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-truncated-higher-images-affine-coproduct",
+ "kind": "statement",
+ "title": "Affine evaluation of the sheaf coproduct of truncated higher images",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme], $I$ a set, and $E_i\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category]. For integers $a,q$, put $M_i=H^q(Rf_*\\tau_{\\ge a}E_i)$, with $Rf_*$ as in [def-pc-derived-direct-image]. For every affine open $U\\subset Y$, evaluation at $U$ sends the canonical coproduct cocone $M_i\\to\\bigoplus_i M_i$ in module sheaves to a colimit cocone of $\\mathcal O_Y(U)$-modules. No ambient derived coproduct S is involved.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08D5",
+  "place": "Bounded-below quasi-coherence paragraph with Tag 015J, followed by affine quasi-coherent colimit evaluation, Tag 01I7."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Canonical lower truncation preserves quasi-coherent cohomology and has lower bound a: below a the homology is zero, above a it is unchanged. Use the free sheaf on the empty type to see that zero is quasi-coherent.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply bounded-below hypercohomology to each lower truncation. The second pages are ordinary higher images of quasi-coherent homology. Over an affine target open the preimage is qcqs. Localization of its cohomology, obtained from affine acyclicity and Mayer--Vietoris induction, commutes with principal restrictions. The higher-image presheaf description then gives the affine localization criterion for quasi-coherence of the second-page sheaves.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-sc-invert-s-cohomology",
+    "lem-pc-affine-vanishing",
+    "lem-sc-mayer-vietoris-open-cover",
+    "lem-weil-pbc-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every later page is a kernel modulo an image. Kernel and cokernel/image closure propagate quasi-coherence. In total degree q the finite convergent filtration has stable page terms as graded pieces. Descending induction from its zero step using extension closure proves that every M_i is quasi-coherent; below a it is zero.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-pc-quasi-coherent-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf coproduct of these quasi-coherent M_i is quasi-coherent. Apply affine evaluation of quasi-coherent colimit cocones to this canonical coproduct cocone. This includes the empty family and the empty open.",
+   "uses": [
+    "lem-pc-quasicoherent-module-coproducts",
+    "lem-weil-pbc-quasi-coherent-module-colimit-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "thm-sp-truncation-e2",
+  "lem-sc-invert-s-cohomology",
+  "lem-pc-affine-vanishing",
+  "lem-sc-mayer-vietoris-open-cover",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-quasi-coherent-extension",
+  "lem-pc-quasicoherent-module-coproducts",
+  "lem-weil-pbc-quasi-coherent-module-colimit-evaluation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Tags 08D5, 015J and 01I7",
+  "place": "V1 extracts quasi-coherence plus affine coproduct evaluation as an independent part of the finite-support argument. Localization proof is the same local argument recorded in the original item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine evaluation preserves coproducts of bounded below derived higher direct image quasi coherent sheaves",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine sections of coproducts of higher direct images of lower truncated quasi coherent complexes form a module coproduct",
+   "results": "Eight hits on free cofans, module sheaf colimits and abelianity; none gives evaluation of this higher-image family.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Cc]oproduct|[Cc]oproduct.*evaluation|higherDirectImage.*[Qq]uasicoherent in Mathlib/AlgebraicGeometry and ModuleCat/Sheaf",
+   "results": "No Mathlib matches. Library quasiCoherentModuleColimitEvaluation supplies the final step only after quasi-coherence; existing bounded-below QCoh theorem has an import path back to this item.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TruncatedDirectImageAffineFiniteSupport",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Bounded-below quasi-coherence paragraph with Tag 015J, followed by affine quasi-coherent colimit evaluation, Tag 01I7.",
+   "via": [
+    "lem-pc-truncated-direct-image-affine-finite-support",
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TruncatedHigherImagesAffineCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/TruncatedHigherImagesAffineCoproduct.lean",
+  "declaration": "AlgebraicGeometry.truncated_higherImages_affine_coproduct",
+  "statement": "theorem truncated_higherImages_affine_coproduct\n    {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w₂} (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))]\n    (I : Type u₁) (E : I → schemeDerivedQCohCategory X)\n    (a q : ℤ) (U : Y.Opens) (hU : IsAffineOpen U) :\n    Nonempty (IsColimit\n      ((SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (op U)).mapCocone\n        (Cofan.mk\n          (∐ (fun i ↦ (schemeHigherDirectImage f q).obj\n            ((DerivedCategory.TStructure.t.truncGE a).obj (E i).obj)))\n          (Sigma.ι (fun i ↦ (schemeHigherDirectImage f q).obj\n            ((DerivedCategory.TStructure.t.truncGE a).obj (E i).obj))))))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-acff0",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T135326-L-1696976",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-acff0",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T135326-L-1696976",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged item signature and all three Lean statements match their nodes; source arguments, proof dependencies, pruning, and report agree. All delivered modules and direct importer Sheaf.AlgebraicGeometry.DerivedDirectImageTruncatedCoproduct compile cleanly; axiom probes show only permitted axioms plus sorryAx from the two recorded holes."
+ }
+}
