@@ -16,21 +16,21 @@
  ],
  "proof": [
   {
-   "text": "For the identity arrow apply the left unit law of the canonical inverse-image composition comparison [lem-weil-pbc-inverse-image-composition]. Transport along D.map_id. Whiskering the identity comparison by v_i inverse image and evaluating at G gives precisely the first equation.",
+   "text": "For the identity arrow use the left unit law upperStarComp_id_left from [lem-weil-pbc-inverse-image-composition]. The fully proved private helper upperStarComp_inv_of_eq_id performs equality induction on an endomorphism h equal to the identity and evaluates the inverse of this unit law at G. Applying it with h = D.map (identity at op i), the equality D.map_id and wv i i (identity at i) gives exactly the transported identity comparison. All hypotheses and equality transports are retained.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false
   },
   {
-   "text": "For f:i->j and g:j->k, apply the associativity law from [lem-weil-pbc-inverse-image-composition] to D(g^op), D(f^op), and v_i. Identify the indicated composites with D((f followed by g)^op), v_j and v_k using D.map_comp and the specified compatibility equations. Take inverse components and multiply by the forward comparison for the first pair. Cancellation of that comparison proves the second equation.",
+   "text": "Evaluate the existing component associativity law upperStarComp_hom_app_map_upperStarComp_inv_app (WeilConjectures.SixFunctors.BaseChange.Pasting, a proved rearrangement of the coherence in [lem-weil-pbc-inverse-image-composition]) on D.map g.op, D.map f.op and v i, with named composites D.map (f followed by g).op, v j and v k. Supply D.map_comp, wv i j f and wv i k (f followed by g). The law says the forward comparison for the first pair followed by the pullback of phi f is phi (f followed by g) followed by the forward comparison for g. Cancel that last isomorphism using Iso.eq_comp_inv and reassociate to obtain precisely the cocycle equation.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the same associativity identity to p_j, D(f^op), and v_i. The cone equation identifies the first composite with p_i; compatibility identifies the remaining composites with v_j and v. The identity then equates the transition followed by b_j inverse with b_i inverse. Composing on the left with b_i and cancelling b_i with its inverse gives the identity, the third equation. All transports use the specified equalities; uniqueness of canonical comparisons makes them compatible.",
+   "text": "Apply the same component associativity law from [lem-weil-pbc-inverse-image-composition] to the cone leg at j, D.map f.op and v i, with named composites the cone leg at i, v j and vLimit. Supply the reversed cone equation d.w f.op, wv i j f and wLimit i. Compose the resulting equality on the left with eS i hom and on the right with eS j inverse. Associativity and the hom-inverse identities cancel both comparisons, leaving the identity of the pullback along vLimit. This is S.map f because S is the constant functor.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition"
    ],
@@ -43,7 +43,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), with its unit and associativity coherence; etale-cohomology.tex, inverse-system-of-sheaves construction preceding Theorem Tag 09YQ (theorem-colimit), and step 9 of lem-weil-pbc-etale-cohomology-limit-of-schemes"
+  "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), with its unit and associativity coherence; etale-cohomology.tex, inverse-system-of-sheaves construction preceding Theorem Tag 09YQ (theorem-colimit), and step 9 of lem-weil-pbc-etale-cohomology-limit-of-schemes; implemented by F1 using the proved unit law and the component associativity law in WeilConjectures.SixFunctors.BaseChange.Pasting, with equality induction and isomorphism cancellation."
  },
  "mathlib_searches": [
   {
@@ -126,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T053940-L-2638808",
-  "kind": "interface",
+  "landing": "20261012T070535-L-3470150",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
