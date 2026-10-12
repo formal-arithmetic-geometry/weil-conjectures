@@ -36,7 +36,7 @@
    }
   },
   {
-   "text": "Write $\\phi:\\operatorname{Spec}(B)\\to\\operatorname{Spec}(B')$ for the map induced by $B'\\subseteq B$. For each prime $\\mathfrak p\\in T$, Zariski's Main Theorem gives $h_{\\mathfrak p}\\in B'$ outside $\\mathfrak p$ for which $B'_{h_{\\mathfrak p}}\\to B_{h_{\\mathfrak p}}$ is an isomorphism. The union $U=\\bigcup_{\\mathfrak p\\in T}D(h_{\\mathfrak p})$ is open, contains $T$ in its inverse image, and $\\phi^{-1}(U)\\to U$ is a homeomorphism with isomorphic local rings.",
+   "text": "Write $\\phi:\\operatorname{Spec}(B)\\to\\operatorname{Spec}(B')$ for the map induced by $B'\\subseteq B$. For each prime $\\mathfrak p\\in T$, Zariski's Main Theorem gives $h_{\\mathfrak p}\\in B'$ outside $\\mathfrak p$ for which $B'_{h_{\\mathfrak p}}\\to B_{h_{\\mathfrak p}}$ is an isomorphism. The union $U=\\bigcup_{\\mathfrak p\\in T}D(h_{\\mathfrak p})$ is open, contains $T$ in its inverse image, and $\\phi^{-1}(U)\\to U$ is a homeomorphism with isomorphic local rings. In Lean, choose these elements as a family indexed by T. Mathlib SpecMapRestrictBasicOpenIso identifies each restricted spectrum map with the spectrum map of awayMap; isIso_SpecMap_iff turns bijectivity into an isomorphism. The open cover of the supremum, Opens.iSupOpenCover, and IsZariskiLocalAtTarget.iff_of_openCover glue the isomorphisms. Membership in the union follows from the element being outside the prime. This is the fully proved private helper exists_isIso_neighborhood_of_awayMap_bijective.",
    "uses": [
     "lem-weil-pbc-integral-closure-finite-fibre-quasi-finite",
     "lem-weil-pbc-integral-closure-zariski-main-away"
@@ -59,7 +59,7 @@
    }
   },
   {
-   "text": "Let $\\varepsilon'\\in B'/IB'$ be the idempotent $(1,0)$ for this product decomposition. Because $\\operatorname{Spec}(C'_1)$ is contained in $U$, choose $g\\in B'$ mapping to $\\varepsilon'$ with $D(g)\\subseteq U$; the same open-and-local-ring comparison gives $B'_g\\xrightarrow{\\sim}B_g$.",
+   "text": "Let $\\varepsilon'\\in B'/IB'$ be the idempotent $(1,0)$ for this product decomposition. Because $\\operatorname{Spec}(C'_1)$ is contained in $U$, choose $g\\in B'$ mapping to $\\varepsilon'$ with $D(g)\\subseteq U$; the same open-and-local-ring comparison gives $B'_g\\xrightarrow{\\sim}B_g$. To apply the existing Lean choose-g interface, give each product factor its A/I-algebra structure by composing the quotient ring map A/I -> B'/IB' with the product equivalence and the appropriate projection. Compatibility of the quotient comparison with algebraMap proves that the factor maps commute with A/I. A prime of the first factor pulls back to a prime omitting the idempotent; the image identity from the image-clopen lemma therefore places it in U.",
    "uses": [
     "lem-weil-pbc-integral-closure-finite-fibre-choose-g"
    ],
@@ -70,7 +70,7 @@
    }
   },
   {
-   "text": "The product idempotent has image $(1,0)$ in $C'_1\\times C'_2$, so the decomposition in the preceding steps is exactly the decomposition required in (i)--(ii), while the chosen $g$ gives (iii)--(iv).",
+   "text": "The product idempotent has image $(1,0)$ in $C'_1\\times C'_2$, so the decomposition in the preceding steps is exactly the decomposition required in (i)--(ii), while the chosen $g$ gives (iii)--(iv). Explicitly, for c in C_1 take the inverse under the product equivalence of (f_1^{-1}(c),0), where f_1 is the first-factor ring equivalence. Multiplication by the idempotent fixes this element and its image is (c,0). Conversely, a fixed element has second coordinate zero; the equation for its image determines its first coordinate by injectivity of f_1. The same coordinate calculation for the complementary idempotent proves preservation of the second factor. The supplied epsilon equals the inverse image of (1,0) by injectivity of e.",
    "uses": [
     "lem-weil-pbc-integral-closure-finite-fibre-image-clopen",
     "lem-weil-pbc-integral-closure-finite-fibre-choose-g"
@@ -175,5 +175,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T053955-L-2646527",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
