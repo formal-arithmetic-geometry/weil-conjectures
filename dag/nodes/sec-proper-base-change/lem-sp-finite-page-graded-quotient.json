@@ -14,26 +14,29 @@
  ],
  "proof": [
   {
-   "text": "Identify the prescribed inc with the canonical image inclusion family from pageCouple_image, using its recurrences. The next inc is the incoming derived-alpha image inclusion followed by inc r. Split the incoming (r+1)-fold iterate at index zero: its image is F.step(p+1).arrow followed by lambda. The lift equation and monicity of inc and lambda identify this derived-alpha image inside derived D with the next-step inclusion in F.step(p). Derived-couple exactness identifies it with the kernel of g.",
+   "text": "Use the proved private prescribed_inclusion_images and incoming_split_heq helpers of FinitePageImageLift through a proof-only import all. These identify the prescribed inc with the canonical image inclusion family from pageCouple_image and split the incoming (r+1)-fold iterate at index zero. Its image is F.step(p+1).arrow followed by lambda. The lift equation and monicity of inc and lambda identify this derived-alpha image inside derived D with the next-step inclusion in F.step(p). Derived-couple exactness identifies it with the kernel of g.",
    "uses": [
     "lem-sp-derived-couple-exact",
     "def-sp-convergence",
-    "def-sp-filtration"
+    "def-sp-filtration",
+    "lem-sp-finite-page-image-lift"
    ],
    "elementary": false
   },
   {
-   "text": "The target of the derived f map after g is derived D(p+2,q-1). It embeds by inc into the incoming r-fold image with source D(p+R,q-R+1). This source is zero since R>=q-a+2. Thus f has zero target, and derived-couple exactness makes g epi. After precomposition with lift and postcomposition with the canonical index transport it is still epi and has the next-step inclusion as kernel.",
+   "text": "The target of the derived f map after g is derived D(p+2,q-1). It embeds by inc into the incoming r-fold image with source D(p+R,q-R+1). This source is zero since R>=q-a+2. Thus f has zero target, and derived-couple exactness makes g epi. After precomposition with lift and postcomposition with the canonical index transport it is still epi and has the next-step inclusion as kernel. Reuse the proved pageD_zero helper of HalfPlaneWeakConvergence as a generic tool for this vanishing; no half-plane convergence hypothesis or conclusion is used.",
    "uses": [
     "lem-sp-derived-couple-exact",
-    "def-sp-exact-couple"
+    "def-sp-exact-couple",
+    "lem-sp-half-plane-weak-convergence"
    ],
    "elementary": false
   },
   {
-   "text": "In an abelian category an epimorphism is the cokernel of its kernel. Consequently the graded cokernel and page R are isomorphic by the unique map specified by their projection equation. Both p=0 and q<a satisfy the same image computation and inequality; no excluded bidegree or extra support assumption is needed.",
+   "text": "In an abelian category an epimorphism is the cokernel of its kernel. Consequently the graded cokernel and page R are isomorphic by the unique map specified by their projection equation. Both p=0 and q<a satisfy the same image computation and inequality; no excluded bidegree or extra support assumption is needed. Reuse its proved quotient_comparison helper as a generic abelian-category tool.",
    "uses": [
-    "def-sp-filtration"
+    "def-sp-filtration",
+    "lem-sp-half-plane-weak-convergence"
    ],
    "elementary": false
   }
@@ -42,11 +45,13 @@
   "def-sp-convergence",
   "def-sp-exact-couple",
   "def-sp-filtration",
-  "lem-sp-derived-couple-exact"
+  "lem-sp-derived-couple-exact",
+  "lem-sp-finite-page-image-lift",
+  "lem-sp-half-plane-weak-convergence"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "D3",
+  "group": "J1",
   "date": "2026-10-13",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
   "place": "proof, steps 5--6; canonical incoming-alpha image and quotient comparisons (Stacks Tags 011S, 011R and 0AMJ)"
@@ -120,10 +125,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T184248-L-3999316",
-  "kind": "interface",
+  "landing": "20261012T232859-L-2041813",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
