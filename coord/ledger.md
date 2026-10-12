@@ -8800,3 +8800,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/R1/Sheaf.AlgebraicGeometry.AffineQuotientRestrictedIso (stage 3; reviewer PASS; after a return; landing 20261012T173857-L-3303997 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/R1/Sheaf.AlgebraicGeometry.EtaleSplitsOffIsolatedPoints (stage 3; reviewer PASS; after a return; landing 20261012T173858-L-3304164 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/R1/Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjective (stage 3; reviewer PASS; first push; landing 20261012T173858-L-3304401 (interface); batch 20261012T173801; modules 2; new nodes 1)
+- 17:38 L: merged deliver/R2/Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTarget (stage 3; reviewer PASS; first push; landing 20261012T173859-L-3304627 (interface); batch 20261012T173801; modules 2; new nodes 1)

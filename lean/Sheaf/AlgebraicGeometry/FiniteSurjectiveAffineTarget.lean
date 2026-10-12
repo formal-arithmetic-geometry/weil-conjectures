@@ -8,13 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.DescendSurjective
 import Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetNoetherian
-import Sheaf.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetApproximation
 
 /-!
 # Affineness of a finite surjective image
@@ -81,6 +76,13 @@ Proof (the node's nine steps, with `Y` denoting its `S`):
    [lem-weil-pbc-limit-affine-transition, lem-weil-pbc-affine-morphism-permanence]. -/
 theorem isAffine_of_isFinite_surjective {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsFinite f] [Surjective f] [IsAffine X] : IsAffine Y := by
-  sorry
+  obtain ⟨a⟩ := exists_noetherian_affine_factor f
+  have : IsNoetherian a.Z := a.noetherian_Z
+  have : IsFinite a.g := a.finite_g
+  have : Surjective a.g := a.surjective_g
+  have : IsAffine a.W := a.affine_W
+  have : IsAffine a.Z := isAffine_of_isFinite_surjective_of_isNoetherian a.g
+  have : IsAffineHom a.q := a.affine_q
+  exact isAffine_of_isAffineHom a.q
 
 end AlgebraicGeometry

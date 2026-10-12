@@ -1,0 +1,252 @@
+{
+ "id": "lem-weil-pbc-finite-surjective-affine-target-approximation",
+ "kind": "statement",
+ "title": "Noetherian affine stage for a finite surjective affine morphism",
+ "statement": "Let f : X → Y be finite and surjective with X affine. Then there exist schemes Z and W and morphisms q : Y → Z and g : W → Z such that q is affine, Z is Noetherian, g is finite and surjective, and W is affine.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, proof of Lemma 01ZT (label lemma-affine), approximation and descent paragraphs"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "($S$ is quasi-compact, separated and quasi-separated.) Let $p:X\\to\\operatorname{Spec}\\mathbf Z$ and $q:S\\to\\operatorname{Spec}\\mathbf Z$ be the structure morphisms; $q\\circ f=p$ since a morphism into $\\operatorname{Spec}\\mathbf Z$ is a ring map $\\mathbf Z\\to\\Gamma$, which is unique [lem-weil-pbc-morphism-into-affine-scheme]. Since $X$ is affine, $p$ is a morphism between affine schemes, hence affine, hence quasi-compact and separated [lem-weil-pbc-affine-morphism-permanence] (3); so $X$ is quasi-compact [lem-weil-pbc-qcqs-over-affine] and $|S|=f(|X|)$ [def-weil-surjective-morphism] is quasi-compact as a continuous image of a quasi-compact space. The finite $f$ is integral [lem-weil-pbc-finite-iff-integral-lft], hence universally closed [pqf-lem-integral-univclosed] (Morphisms 01WM). As $f$ is surjective and universally closed and $p$ is separated, $q$ is separated [lem-weil-pbc-surjective-universally-closed-separated] (Morphisms 09MQ). Then the diagonal $S\\to S\\times_{\\mathbf Z}S$ is a closed immersion, hence affine [lem-weil-pbc-closed-immersion-integral-separated-uc] (b), hence quasi-compact [lem-weil-pbc-affine-morphism-permanence] (3): $S$ is quasi-separated [def-weil-pbc-scheme-conventions].",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-finite-iff-integral-lft",
+    "pqf-lem-integral-univclosed",
+    "lem-weil-pbc-surjective-universally-closed-separated",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Lemma 01ZT (lemma-affine, limits.tex line 2834), first paragraph (Morphisms 01WM, 09MQ); the quasi-separatedness of S, needed for 09YZ and 01ZA, is written out by the agent"
+   }
+  },
+  {
+   "text": "(Reduction to $f$ of finite presentation.) $f$ is integral (step 1) and $S$ is quasi-compact and quasi-separated, so by [lem-weil-pbc-integral-morphism-limit-of-finite] (Limits 09YZ) there are a directed set $A$, $S$-schemes $\\nu_a:X_a\\to S$ that are finite and of finite presentation [def-weil-finite-integral-morphism], affine transition morphisms over $S$ and morphisms $p_a:X\\to X_a$ over $S$ (so $f=\\nu_a\\circ p_a$) with $X=\\varprojlim_aX_a$. Each $\\nu_a$ is affine, hence quasi-compact and quasi-separated [lem-weil-pbc-affine-morphism-permanence] (3), so every $X_a$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (2); as the limit $X$ is affine, some $X_{a_0}$ is affine [lem-weil-pbc-limit-affine-stage] (Limits 01Z6). $\\nu_{a_0}$ is surjective because $f=\\nu_{a_0}\\circ p_{a_0}$ is [def-weil-surjective-morphism]. Replacing $(X,f)$ by $(X_{a_0},\\nu_{a_0})$ we may and do assume from now on that $f$ is finite, of finite presentation and surjective and $X$ is affine (step 1 still applies).",
+   "uses": [
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-limit-affine-stage",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Lemma 01ZT (lemma-affine, limits.tex line 2834), second paragraph (Stacks cites Lemma 09YY lemma-finite-in-finite-and-finite-presentation, whose transition maps are closed immersions; the agent uses the existing node for its generalization 09YZ to integral f, whose affine transitions are all that Lemma 01Z6 needs; the qcqs hypotheses of 01Z6 are checked by the agent)"
+   }
+  },
+  {
+   "text": "(Absolute Noetherian approximation of $S$.) $S$ is quasi-compact and quasi-separated (step 1), so by [prop-nagata-noetherian-inverse-system] (Limits 01ZA; Lean closed) it has a Noetherian approximation [def-nagata-noetherian-inverse-system]: a cofiltered diagram of schemes of finite type over $\\operatorname{Spec}\\mathbf Z$ with affine transition morphisms and a limit cone with vertex $S$. By [lem-weil-pbc-cofiltered-limit-directed-reindex] it is reindexed by a nonempty directed set $I$: an inverse system $(S_i,f_{ii'})_{i\\in I}$ of schemes of finite type over $\\mathbf Z$ with affine transitions and $S=\\varprojlim_iS_i$, projections $\\sigma_i:S\\to S_i$. Every $S_i$ is Noetherian [lem-weil-pbc-finite-type-over-noetherian], i.e. locally Noetherian [pqf-def-locnoeth] and quasi-compact, hence also quasi-separated [lem-weil-pbc-locally-noetherian-quasi-separated].",
+   "uses": [
+    "prop-nagata-noetherian-inverse-system",
+    "def-nagata-noetherian-inverse-system",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Lemma 01ZT (lemma-affine, limits.tex line 2834), third paragraph, first sentence (Proposition 01ZA proposition-approximate)"
+   }
+  },
+  {
+   "text": "(Descending $f$ to a finitely presented model.) $f$ is of finite presentation and the $S_i$ are quasi-compact and quasi-separated with affine transitions, so by [thm-pd-spreading-out] (1) (Limits 01ZM) there are $0\\in I$, a morphism of finite presentation $g_0:X_0\\to S_0$ [def-sbc-locally-finite-presentation] and an isomorphism $X\\cong X_0\\times_{S_0}S$ over $S$ (fibre product along $\\sigma_0$ [def-pc-fibre-product]). The subset $I_{\\ge0}$ is cofinal, so $S=\\varprojlim_{i\\ge0}S_i$ [lem-weil-pbc-colimit-initial-full-subcategory]; we index by $I_{\\ge0}$ from now on. Put $X_i=X_0\\times_{S_0}S_i$ and $g_i:X_i\\to S_i$ the projection. By [lem-weil-pbc-scheme-over-limit] (Limits 01YZ) $(X_i)_{i\\ge0}$ is an inverse system with affine transition morphisms whose limit is $X_0\\times_{S_0}S\\cong X$. Each $g_i$ is of finite presentation as a base change of $g_0$ [lem-weil-pbc-qcqs-morphism-permanence] (3), so $X_i$ is quasi-compact and quasi-separated over the quasi-compact quasi-separated $S_i$ [lem-weil-pbc-qcqs-morphism-permanence] (2). In the notation of the descent lemmas (Situation 081D) with $Y_0=S_0$ and $f_0=g_0$: $Y_i=S_0\\times_{S_0}S_i=S_i$, $f_i=g_i$, and the base change of $f_0$ to $S$ is $X_0\\times_{S_0}S\\to S$, which is $f$ up to the isomorphism over $S$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Lemma 01ZT (lemma-affine, limits.tex line 2834), third paragraph, second sentence (Lemma 01ZM lemma-descend-finite-presentation; Stacks' 'X_{i'} = X_i x_S S_{i'}' is a misprint for X_i x_{S_i} S_{i'}); the qcqs hypotheses and cofinality are written out by the agent"
+   }
+  },
+  {
+   "text": "($g_i$ is finite for large $i$.) $f$ is finite and $g_0$ is locally of finite type, being locally of finite presentation (a finitely presented algebra is finitely generated) [def-sbc-locally-finite-presentation] [def-weil-finite-type-morphism]; $S_0$, $X_0$ are quasi-compact and quasi-separated (steps 3, 4). By [lem-weil-pbc-descend-finite] (Limits 01ZO) $g_{i_1}$ is finite for some $i_1\\ge0$. For $i\\ge i_1$, $X_i=X_0\\times_{S_0}S_i\\cong X_{i_1}\\times_{S_{i_1}}S_i$ by pasting fibre squares [def-pc-fibre-product], so $g_i$ is a base change of $g_{i_1}$ and is finite [lem-weil-pbc-finite-morphism-permanence] (a).",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-descend-finite",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Lemma 01ZT (lemma-affine, limits.tex line 2834), third paragraph, third sentence (Lemma 01ZO lemma-descend-finite-finite-presentation); stability under increasing i written out by the agent"
+   }
+  },
+  {
+   "text": "($g_i$ is surjective for large $i$.) $f$ is surjective and $g_0$ is locally of finite presentation, so by [lem-weil-pbc-descend-surjective] (Limits 07RR) $g_{i_2}$ is surjective for some $i_2\\ge0$; for $i\\ge i_2$, $g_i$ is a base change of $g_{i_2}$ (as in step 5) and is surjective [lem-weil-pbc-surjective-base-change].",
+   "uses": [
+    "lem-weil-pbc-descend-surjective",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Not in Stacks' proof of 01ZT, which applies the Noetherian case to X_i -> S_i without saying why it is surjective; the agent supplies Limits Lemma 07RR (lemma-descend-surjective, limits.tex line 2069)"
+   }
+  },
+  {
+   "text": "($X_i$ is affine for large $i$.) $(X_i)_{i\\ge0}$ is a directed inverse system of quasi-compact quasi-separated schemes with affine transitions whose limit is isomorphic to the affine $X$ (step 4), hence affine [def-pc-scheme]; by [lem-weil-pbc-limit-affine-stage] (Limits 01Z6) there is $i_3$ with $X_i$ affine for all $i\\ge i_3$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-limit-affine-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Lemma 01ZT (lemma-affine, limits.tex line 2834), third paragraph, fourth sentence ('By Lemma 01Z6 once again we may assume that X_i is affine for all i')"
+   }
+  },
+  {
+   "text": "Choose a common upper bound of the three eventual stages. Set Z = Y_i, W = X_i and g = g_i; Z is Noetherian, W is affine, and g is finite and surjective. The limit projection q : Y → Z is affine since the transition maps are affine. Package these data without using the Noetherian affineness theorem.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-finite-iff-integral-lft",
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-surjective-universally-closed-separated",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-limit-affine-stage",
+  "prop-nagata-noetherian-inverse-system",
+  "def-nagata-noetherian-inverse-system",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-pd-spreading-out",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-scheme-over-limit",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "def-pc-scheme",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof_origin": {
+  "by": "worker stage 3",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, proof of Lemma 01ZT, approximation and descent paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a finite surjective morphism from an affine scheme factors through a Noetherian approximation with an affine projection",
+   "results": "Eight hits: affine-space surjectivity, affine-source cover, finite implies affine, affine finite-map criterion, and finite-type stage factorization; none provides this Noetherian finite-surjective affine stage. Rechecked by R2 second reader using msearch.py.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsAffineHom",
+   "results": "0 hits via msearch.py; checked by R2 second reader.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherianAffineFactor|exists_noetherian_affine_factor|isAffine_of_isFinite_surjective",
+   "results": "msearch.py Mathlib grep: 0 hits. Local rg over lean/Sheaf and lean/WeilConjectures finds only the existing target, its Noetherian case and their callers; no existing factor theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite surjective morphism with affine source admits a Noetherian finite surjective affine stage with affine target projection",
+   "results": "Unavailable: service returned Internal Server Error. Recorded by msearch.py; no search verdict inferred. Other services and local source search used instead.",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTarget",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-surjective-affine-target",
+   "place": "stage-3 proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetApproximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSurjectiveAffineTargetApproximation.lean",
+  "declaration": "AlgebraicGeometry.exists_noetherian_affine_factor",
+  "declarations": [
+   "AlgebraicGeometry.NoetherianAffineFactor",
+   "AlgebraicGeometry.exists_noetherian_affine_factor"
+  ],
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13",
+  "statement": "theorem exists_noetherian_affine_factor {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [IsFinite f] [Surjective f] [IsAffine X] :\n    Nonempty (NoetherianAffineFactor f)"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T173859-L-3304627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T173859-L-3304627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
