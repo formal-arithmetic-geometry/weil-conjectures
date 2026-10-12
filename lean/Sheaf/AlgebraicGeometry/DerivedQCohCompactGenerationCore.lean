@@ -4,6 +4,7 @@ public import Sheaf.AlgebraicGeometry.PerfectLocalizingClosure
 public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Mathlib.CategoryTheory.Triangulated.Orthogonal
 
 /-! # Perfect representatives detect zero
 
@@ -56,6 +57,78 @@ theorem schemeDerivedQCoh_representatives_generate (X : Scheme.{u})
     letI := htri
     letI := derivedQCohDirectSums X
     IsTriangulatedGeneratingFamily P := by
-  sorry
+  classical
+  let := htri
+  let := derivedQCohDirectSums X
+  intro K hK
+  by_contra h
+  change ¬ (∃ n : ℤ, ∃ f : ∐ P ⟶ K⟦n⟧, f ≠ 0) at h
+  push Not at h
+  have hsingle (i : I) (n : ℤ) (f : P i ⟶ K⟦n⟧) : f = 0 := by
+    let g : ∐ P ⟶ K⟦n⟧ := Sigma.desc fun j ↦
+      if hj : j = i then eqToHom (congrArg P hj) ≫ f else 0
+    have hg := h n g
+    have := congrArg (fun g ↦ Sigma.ι P i ≫ g) hg
+    simpa [g] using this
+  have hperfect (E : schemeDerivedQCohCategory X) (hE : Scheme.IsPerfect X E.obj)
+      (n : ℤ) (f : E ⟶ K⟦n⟧) : f = 0 := by
+    obtain ⟨i, ⟨e⟩⟩ := hrepresentatives E hE
+    have hf := hsingle i n (e.inv ≫ f)
+    have := congrArg (fun g ↦ e.hom ≫ g) hf
+    simpa using this
+  let S : ObjectProperty (schemeDerivedCategory X) := fun Y ↦ Y = K.obj
+  let Q := (S.shiftClosure ℤ).leftOrthogonal
+  let A : ObjectProperty (schemeDerivedQCohCategory X) := fun E ↦ Q E.obj
+  have hA : A ∈ {R : ObjectProperty (schemeDerivedQCohCategory X) |
+      (∀ E, Scheme.perfectSubcategory X E.obj → R E) ∧
+      (∀ B C, R B → Nonempty (B ≅ C) → R C) ∧
+      (∀ B (n : ℤ), R B → ∀ C, Nonempty (C.obj ≅ B.obj⟦n⟧) → R C) ∧
+      (∀ B C, R B → R C → ∀ T : Pretriangulated.Triangle (schemeDerivedCategory X),
+        T ∈ Pretriangulated.distinguishedTriangles →
+        Nonempty (T.obj₁ ≅ B.obj) → Nonempty (T.obj₂ ≅ C.obj) →
+        ∀ D, Nonempty (T.obj₃ ≅ D.obj) → R D) ∧
+      (∀ B C, R C → Nonempty (Retract B.obj C.obj) → R B) ∧
+      (∀ (J : Type u) (E : J → schemeDerivedQCohCategory X),
+        ∀ S' : schemeDerivedCategory X, ∀ ι : ∀ j, (E j).obj ⟶ S',
+        IsColimit (Cofan.mk S' ι) → ∀ B, Nonempty (B.obj ≅ S') →
+          (∀ j, R (E j)) → R B)} := by
+    refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+    · intro E hE Y f hY
+      obtain ⟨Y', n, e, hY'⟩ := hY
+      change Y' = K.obj at hY'
+      subst Y'
+      let c := ((schemeDerivedQCohProperty X).ι.commShiftIso n).app K
+      let g : E ⟶ K⟦n⟧ := ObjectProperty.homMk (f ≫ e.hom ≫ c.inv)
+      have hg := hperfect E hE n g
+      have hf : f ≫ e.hom ≫ c.inv = 0 := by
+        have := congrArg (fun g ↦ (schemeDerivedQCohProperty X).ι.map g) hg
+        simpa [g] using this
+      apply (cancel_mono (e.hom ≫ c.inv)).1
+      simpa using hf
+    · rintro B C hB ⟨e⟩
+      exact Q.prop_of_iso ((schemeDerivedQCohProperty X).ι.mapIso e) hB
+    · rintro B n hB C ⟨e⟩
+      exact Q.prop_of_iso e.symm (Q.le_shift n B.obj hB)
+    · rintro B C hB hC T hT ⟨eB⟩ ⟨eC⟩ D ⟨eD⟩
+      apply Q.prop_of_iso eD
+      exact Q.ext_of_isTriangulatedClosed₃ T hT
+        (Q.prop_of_iso eB.symm hB) (Q.prop_of_iso eC.symm hC)
+    · rintro B C hC ⟨r⟩ Y f hY
+      have hf := hC (r.r ≫ f) hY
+      have := congrArg (fun g ↦ r.i ≫ g) hf
+      simpa using this
+    · rintro J E S' ι hcol B ⟨e⟩ hE
+      apply Q.prop_of_iso e.symm
+      intro Y f hY
+      apply hcol.hom_ext
+      intro j
+      simpa using hE j.as (ι j.as ≫ f) hY
+  have hle : perfectLocalizingClosure X ≤ A := sInf_le hA
+  have hAK : A K := hle K (by rw [hclosure]; trivial)
+  have hid : 𝟙 K.obj = 0 := hAK (𝟙 K.obj) (S.le_shiftClosure K.obj rfl)
+  apply hK
+  rw [IsZero.iff_id_eq_zero]
+  apply (schemeDerivedQCohProperty X).ι.map_injective
+  simpa using hid
 
 end AlgebraicGeometry

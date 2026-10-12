@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "Use the supplied coproducts. If every map from the coproduct into every shift of K is zero, extend a map on an individual summand using zero maps on the other summands. The representative isomorphisms give the same vanishing for every perfect object. Shift adjunction converts target-shift vanishing to source-shift vanishing.",
+   "text": "Use the supplied coproducts. If every map from the coproduct into every shift of K is zero, extend a map on an individual summand using zero maps on the other summands. Precomposition with the coproduct inclusion proves that map is zero. The representative isomorphisms give the same vanishing for every perfect object. The inclusion of the quasi-coherent full subcategory commutes with shifts, so the same vanishing holds in the ambient category against every object isomorphic to a shift of K.",
    "uses": [
     "lem-pc-derived-qcoh-direct-sums",
     "def-pc-generators"
@@ -24,7 +24,7 @@
    "elementary": true
   },
   {
-   "text": "The class of objects A for which every map A[m] to K is zero is isomorphism-invariant, shift-closed, retract-closed, and sum-closed by the coproduct universal property and preservation of sums by shifts. For a cone, exactness of Hom makes its map to K factor through the shift of the first triangle term, so it vanishes. This class contains every perfect object and hence contains their localizing closure. The supplied equality with top puts K in it. Its identity is zero, so K is zero, including the empty-family case.",
+   "text": "Let S be the property of being equal to K.obj, and Q the left orthogonal of its shift closure. Mathlib supplies isomorphism invariance, shift stability and triangulated closure of Q; the triangle closure is exactness of Hom out of a triangle. Restrict Q to quasi-coherent objects. A retract inherits Q by composing with its retraction and section. An ambient coproduct inherits Q by its universal property, since every restriction of a map into any shift of K is zero. Thus this restricted property is among the properties defining perfectLocalizingClosure X and contains every perfect object. The assumed equality with top puts K in it. The shift closure contains K.obj, so its identity is zero. Faithfulness of the inclusion gives identity zero for K, hence K is zero, contradicting nonzeroness. This also covers an empty representative family.",
    "uses": [
     "lem-weil-pbc-hom-out-of-triangle-exact",
     "def-pc-perfect-localizing-closure"
@@ -41,7 +41,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived-categories-of-schemes.tex",
-  "place": "Tag 09IS; orthogonal-class reduction in lem-pc-derived-qcoh-compact-generation, proof step 2"
+  "place": "Tag 09IS; orthogonal-class reduction in lem-pc-derived-qcoh-compact-generation, proof step 2; implementation uses Mathlib Triangulated.Orthogonal for the equivalent target-shift orthogonal class"
  },
  "mathlib_searches": [
   {
@@ -112,10 +112,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T060754-L-2915684",
-  "kind": "interface",
+  "landing": "20261012T085404-L-49723",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
