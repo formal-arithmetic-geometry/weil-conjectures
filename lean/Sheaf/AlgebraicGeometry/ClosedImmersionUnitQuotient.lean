@@ -10,10 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Abelian.Images
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
-import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
-import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
+import Mathlib.CategoryTheory.Abelian.Basic
 
 /-!
 # Closed immersion unit and quotient
@@ -82,7 +80,37 @@ theorem closedImmersion_unit_quotient {Y Z : Scheme.{w}} (i : Z ⟶ Y)
         ∃ q : cokernel (image.ι (μ F)) ⟶ cokernel (image.ι (μ G)),
           cokernel.π (image.ι (μ F)) ≫ q = a ≫ cokernel.π (image.ι (μ G)) ∧
             q ≫ η' G = η' F ≫ (pushforward i).map ((tensorPullback i).map a) := by
-  sorry
+  dsimp
+  let adj : tensorPullback i ⊣ pushforward i :=
+    Classical.choice (nonempty_tensorPullbackAdjunction i)
+  let μ : ∀ F : Y.Modules, i.ker.toModules ⊗ F ⟶ F := fun F =>
+    i.ker.toModulesι ▷ F ≫ (λ_ F).hom
+  have h := closedImmersion_unit_kernel i
+  dsimp at h
+  have hex : ∀ F : Y.Modules,
+      ∃ e : cokernel (image.ι (μ F)) ≅ (pushforward i).obj ((tensorPullback i).obj F),
+        cokernel.π (image.ι (μ F)) ≫ e.hom = adj.unit.app F := by
+    intro F
+    obtain ⟨he, w, ⟨hk⟩⟩ := h F
+    have : Epi (adj.unit.app F) := he
+    let hc := Abelian.epiIsCokernelOfKernel (KernelFork.ofι _ w) hk
+    let e := (cokernelIsCokernel (image.ι (μ F))).coconePointUniqueUpToIso hc
+    refine ⟨e, ?_⟩
+    exact IsColimit.comp_coconePointUniqueUpToIso_hom
+      (cokernelIsCokernel (image.ι (μ F))) hc WalkingParallelPair.one
+  choose e he using hex
+  refine ⟨fun F => (e F).hom, ?_, ?_⟩
+  · intro F
+    exact ⟨(h F).1, (h F).2, he F, inferInstance⟩
+  · intro F G a
+    refine ⟨(e F).hom ≫ (pushforward i).map ((tensorPullback i).map a) ≫
+      (e G).inv, ?_, ?_⟩
+    · rw [← Category.assoc, he F]
+      change adj.unit.app F ≫ (tensorPullback i ⋙ pushforward i).map a ≫
+        (e G).inv = a ≫ cokernel.π (image.ι (μ G))
+      rw [← adj.unit.naturality_assoc, ← he G]
+      simp
+    · simp
 
 end
 end AlgebraicGeometry.Scheme.Modules
