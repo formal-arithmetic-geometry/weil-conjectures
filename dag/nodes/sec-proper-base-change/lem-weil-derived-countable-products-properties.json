@@ -37,10 +37,42 @@
  ],
  "proof": [
   {
-   "text": "Exact products identify cycles, boundaries and homology of termwise products. Product quasi-isomorphisms and the localization fraction calculus transfer the termwise universal property to the derived category and identify the homology limit comparison.",
+   "text": "Transport exact countable products from the universe-zero Shrink of the countable index type along the discrete equivalence. For a diagram of short complexes, regard it as a short complex in the functor category. The exact limit functor preserves homology, and its natural homology comparison identifies the homology of the componentwise limit with the limit of the homologies, including the projections. Apply this to the three consecutive terms of each cochain complex. These calculations are proved in the private helpers shortComplexHomologyLimit and complexHomologyLimit.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The termwise product is also a product in the homotopy category: lift each cone leg through the full quotient functor, use the product in complexes, and assemble component homotopies degreewise for uniqueness. The proof reuses the already proved HomotopyCategory.isLimitFanQuotient from WeilConjectures.Algebra.Homology.HomotopyCategory.Products. Transfer the preceding homology calculation through the essentially surjective quotient functor by choosing representatives of each object of a discrete diagram and transporting its product cone. The product comparison conjugates the image of a product of maps to the product of their homology maps. Thus quasi-isomorphisms in the homotopy category are stable under countable products.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the left and right calculi of fractions for quasi-isomorphisms in the homotopy category. Given a family of localized cone legs, represent the source and write each leg as a left fraction. Product the target denominators, which is still a quasi-isomorphism, and combine the numerators into a map to the product of their targets. Inverting the product denominator gives a lift, and cancellation of the component denominators proves its projection equations. This is the existence part of the private localizationPreservesProducts helper.",
    "uses": [
     "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pc-left-localization-hom-colimit",
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, first consider a map to a product in the homotopy category whose localized projections vanish. Left-fraction equality clears each zero equation by a denominator on its target. Product these denominators and use the product universal property to show that their product kills the map. That product is inverted, so the localized map vanishes. Next write any localized map to the product as a right fraction and apply this result to its numerator. Apply the resulting zero-detection to the difference of two proposed lifts. This completes localizationPreservesProducts without a Hom-colimit lemma. Compose with the quotient-product result and transport along quotientCompQhIso to obtain preservation by DerivedCategory.Q, proving the termwise-cone conclusion.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each homology degree, homologyFunctorFactors identifies Q followed by derived homology with complex homology, which preserves the countable products by the first step. Choose complex representatives of each object in an arbitrary discrete derived diagram using Q.EssSurj. Its termwise product cone is limiting after Q by the preceding steps, and its homology image is limiting by complex homology preservation. Transfer preservation across the representative isomorphisms; this is the private preservesProductsOfEssSurj helper. The construction includes empty index types and imposes no bounds on the complexes.",
+   "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-category-product"
    ],
@@ -48,15 +80,15 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pc-left-localization-hom-colimit",
   "def-weil-abstract-derived-category",
-  "def-weil-category-product"
+  "def-weil-category-product",
+  "lem-pc-quasi-isomorphisms-multiplicative-system"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 13.34.2, Tag 07KC"
+  "place": "Lemma 13.34.2, Tag 07KC",
+  "note": "P1: formal proof by exact limit/homology comparison and direct fraction calculus; uniqueness supplied explicitly. Reuses the proved quotient-product theorem in the source library."
  },
  "mathlib_searches": [
   {
@@ -105,10 +137,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T154831-L-2473312",
-  "kind": "interface",
+  "landing": "20261012T184327-L-4013332",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
