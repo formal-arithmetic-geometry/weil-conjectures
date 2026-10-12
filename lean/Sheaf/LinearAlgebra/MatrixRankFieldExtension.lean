@@ -6,7 +6,8 @@ Authors: SHEAF group Z2
 module
 
 public import Mathlib.LinearAlgebra.Matrix.Rank
-public import Mathlib.LinearAlgebra.LinearIndependent.BaseChange
+import Mathlib.LinearAlgebra.LinearIndependent.BaseChange
+import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 
 /-!
 # The rank of a matrix is unchanged by field extension
@@ -49,6 +50,34 @@ theorem rank_map_field_extension {K : Type u} {L : Type v} [Field K] [Field L] (
     (A.map ι).rank = A.rank ∧
       ∀ s : Set (Fin m), LinearIndependent L (fun i : s ↦ (A.map ι).row i) ↔
         LinearIndependent K (fun i : s ↦ A.row i) := by
-  sorry
+  let _ : Algebra K L := ι.toAlgebra
+  have hι : Function.Injective ι := (RingHom.injective ι)
+  have hind : ∀ s : Set (Fin m), LinearIndependent L (fun i : s ↦ (A.map ι).row i) ↔
+      LinearIndependent K (fun i : s ↦ A.row i) := by
+    intro s
+    rw [show (fun i : s ↦ (A.map ι).row i) =
+        (fun i : s ↦ ι ∘ A.row i) by
+      funext i; funext j; rfl]
+    simpa [RingHom.algebraMap_toAlgebra] using
+      (linearIndependent_algebraMap_comp_iff (R := K) (S := L)
+        (ι := s) (ι' := Fin n) (v := fun i : s ↦ A.row i))
+  have hrank : ∀ r : ℕ, r ≤ (A.map ι).rank ↔ r ≤ A.rank := by
+    intro r
+    have hmap := le_rank_map_iff A ι r
+    have hid := le_rank_map_iff A (RingHom.id K) r
+    rw [hmap]
+    have hid' : r ≤ A.rank ↔ ∃ (e₁ : Fin r → Fin m) (e₂ : Fin r → Fin n),
+        (A.submatrix e₁ e₂).det ≠ 0 := by simpa using hid
+    constructor
+    · rintro ⟨e₁, e₂, h⟩
+      exact hid'.mpr ⟨e₁, e₂, fun hz => h (by rw [hz, map_zero])⟩
+    · intro h
+      obtain ⟨e₁, e₂, h⟩ := hid'.mp h
+      refine ⟨e₁, e₂, ?_⟩
+      intro hz
+      apply h
+      apply hι
+      simpa using hz
+  refine ⟨le_antisymm (hrank _ |>.mp le_rfl) (hrank _ |>.mpr le_rfl), hind⟩
 
 end Matrix

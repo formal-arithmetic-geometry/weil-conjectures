@@ -26,70 +26,20 @@
  ],
  "proof": [
   {
-   "text": "*Step 1: setup.* Since $K$ is a field, the ring homomorphism $\\iota:K\\to L$ is injective (its kernel is an ideal not containing $1$, hence $0$), so $L$ is a field extension of $K$ [def-pc-field-extension] and we identify $K$ with $\\iota(K)\\subseteq L$, hence $K^n\\subseteq L^n$ entrywise. Write $r_1,\\ldots,r_m\\in K^n$ for the rows of the matrix $A$ [def-weil-matrix]; viewed in $L^n$ they are the rows of $A$ regarded as a matrix over $L$. For $F\\in\\{K,L\\}$, $\\operatorname{rank}_F(A)$ is by definition [def-weil-matrix-rank] the dimension [def-weil-vector-space-dimension] of the $F$-span $W_F\\subseteq F^n$ of $r_1,\\ldots,r_m$, a finite-dimensional space [def-weil-finite-dimensional-subspace] since it is spanned by $m$ vectors.",
-   "uses": [
-    "def-pc-field-extension",
-    "def-weil-matrix",
-    "def-weil-matrix-rank",
-    "def-weil-vector-space-dimension",
-    "def-weil-finite-dimensional-subspace"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157: states the fact ('Obviously, ...') without proof; the linear-algebra argument is written by an agent (no linear-algebra textbook in literature/; WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8, or Lang, Algebra, Ch. III §5 and Ch. XIII §4)"
-   }
-  },
-  {
-   "text": "*Step 2: rank as the largest independent set of rows.* Let $F\\in\\{K,L\\}$ and let $\\mathcal I_F$ be the set of subsets $S\\subseteq\\{1,\\ldots,m\\}$ such that $(r_i)_{i\\in S}$ is linearly independent over $F$; $\\emptyset\\in\\mathcal I_F$. Claim: $\\operatorname{rank}_F(A)=\\max\\{|S|:S\\in\\mathcal I_F\\}$. (a) By [lem-weil-span-independent-subfamily] there is $S_0\\subseteq\\{1,\\ldots,m\\}$ with $(r_i)_{i\\in S_0}$ linearly independent over $F$ and spanning $W_F$; by [lem-weil-dimension-span-independent-family], $\\dim_FW_F=|S_0|$, so $\\operatorname{rank}_F(A)=|S_0|\\leq\\max$. (b) Conversely, for $S\\in\\mathcal I_F$ the vectors $r_i$, $i\\in S$, lie in the finite-dimensional space $W_F$ and are linearly independent there, so $|S|\\leq\\dim_FW_F=\\operatorname{rank}_F(A)$ by [lem-weil-independent-family-card-le-dimension].",
-   "uses": [
-    "lem-weil-span-independent-subfamily",
-    "lem-weil-dimension-span-independent-family",
-    "lem-weil-independent-family-card-le-dimension",
-    "def-weil-matrix-rank"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157: states the fact ('Obviously, ...') without proof; the linear-algebra argument is written by an agent (no linear-algebra textbook in literature/; WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8, or Lang, Algebra, Ch. III §5 and Ch. XIII §4)"
-   }
-  },
-  {
-   "text": "*Step 3: independence of rows does not depend on the field.* For every $S\\subseteq\\{1,\\ldots,m\\}$, the vectors $(r_i)_{i\\in S}$ of $K^n$ are linearly independent over $L$ if and only if they are linearly independent over $K$, by [lem-weil-linear-independence-field-extension] applied to the field extension $K\\subseteq L$ and the family $(r_i)_{i\\in S}$. Hence $\\mathcal I_L=\\mathcal I_K$. This is also the 'equivalently' clause of the statement.",
-   "uses": [
-    "lem-weil-linear-independence-field-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157: states the fact ('Obviously, ...') without proof; the linear-algebra argument is written by an agent (no linear-algebra textbook in literature/; WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8, or Lang, Algebra, Ch. III §5 and Ch. XIII §4)"
-   }
-  },
-  {
-   "text": "*Step 4: conclusion.* By Step 2 for $F=L$ and $F=K$ and by Step 3, $\\operatorname{rank}_L(A)=\\max\\{|S|:S\\in\\mathcal I_L\\}=\\max\\{|S|:S\\in\\mathcal I_K\\}=\\operatorname{rank}_K(A)$.",
+   "text": "Use `Matrix.le_rank_map_iff` to characterize each rank bound by a nonvanishing minor. For the identity homomorphism, this gives the corresponding characterization of `r ≤ A.rank`. Since a field ring homomorphism is injective, a minor determinant is nonzero iff its image is nonzero, proving `r ≤ (A.map ι).rank ↔ r ≤ A.rank`; antisymmetry yields rank equality. For the row-family clause, identify `(A.map ι).row i` with `ι ∘ A.row i` and apply Mathlib `linearIndependent_algebraMap_comp_iff` using the algebra structure induced by `ι`.",
    "uses": [],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157: states the fact ('Obviously, ...') without proof; the linear-algebra argument is written by an agent (no linear-algebra textbook in literature/; WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8, or Lang, Algebra, Ch. III §5 and Ch. XIII §4)"
+    "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157; determinant criterion supplied by WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank."
    }
   }
  ],
- "proof_deps": [
-  "def-pc-field-extension",
-  "def-weil-matrix",
-  "def-weil-matrix-rank",
-  "def-weil-vector-space-dimension",
-  "def-weil-finite-dimensional-subspace",
-  "lem-weil-span-independent-subfamily",
-  "lem-weil-dimension-span-independent-family",
-  "lem-weil-independent-family-card-le-dimension",
-  "lem-weil-linear-independence-field-extension"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-  "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157: states the fact ('Obviously, ...') without proof; the linear-algebra argument is written by an agent (no linear-algebra textbook in literature/; WANTED: Bourbaki, Algebra I, Ch. II, §7 and §8, or Lang, Algebra, Ch. III §5 and Ch. XIII §4)"
+  "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157; formal proof uses determinant characterization and base-change linear independence."
  },
  "mathlib_searches": [
   {
@@ -170,5 +120,15 @@
   "reviewer": "Z2-mrf",
   "group": "Z2",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-da2ac",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T184241-L-3995518",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, repository diff, lcompile checks, direct importer checks, and axiom audit all satisfy the stage-3 review brief."
  }
 }
