@@ -40,8 +40,8 @@ finiteness of the morphism `Proj S → ℙ¹` given by `[l₀ : l₁]` over the 
 - `GradedAlgebra.IsStandard.finite_away` — and `S_(l₀)` is finite over `k[l₁ / l₀]`.
 
 The statement that a vector space over an infinite field is not a finite union of proper
-subspaces (blueprint `lem-pc-finite-linear-avoidance`) is `Subspace.biUnion_ne_univ_of_top_notMem`
-in Mathlib.
+subspaces (blueprint `lem-pc-finite-linear-avoidance`) is `Subspace.iUnion_ne_univ_of_ne_top`,
+a restatement of Mathlib's `Subspace.biUnion_ne_univ_of_top_notMem`.
 -/
 
 @[expose] public section
