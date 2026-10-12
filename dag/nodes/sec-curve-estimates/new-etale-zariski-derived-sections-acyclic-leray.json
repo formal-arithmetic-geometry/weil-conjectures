@@ -1,0 +1,138 @@
+{
+ "id": "new-etale-zariski-derived-sections-acyclic-leray",
+ "kind": "statement",
+ "title": "Acyclic Leray for derived evaluation without Ext",
+ "statement": "Let X be a scheme [def-pc-scheme], and i: X.Opens -> X.Etale a continuous finite-limit-preserving functor with additive sheaf pushforward T [def-weil-pbc-sites-and-cohomology]. Let Z evaluate an abelian Zariski sheaf at the top open, and E evaluate an abelian etale sheaf at i(top). For all etale sheaves F [def-weil-pbc-abelian-etale-sheaves] with R^(n+1)T(F)=0 for every n >= 0, there exist simultaneously additive equivalences c(F,hF,n): R^(n+1)Z(T(F)) -> R^(n+1)E(F), natural for all morphisms between these T-acyclic sheaves. No HasExt model, free representable, constant integer sheaf, or terminality hypothesis appears in this statement.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0733",
+  "place": "Lemma 21.14.6(1), direct resolution proof; Tag 072Z for preserved injectives"
+ },
+ "proof": [
+  {
+   "text": "Finite-limit-preserving i is representably flat; its continuous set-valued inverse image is left exact. The abelian-group-object lift is left exact and a left adjoint, hence exact. Its right adjoint T preserves injectives. Use an essentially small model of the etale site with the same coefficient universe.",
+   "uses": [
+    "lem-weil-pbc-zariski-etale-sheaf-left-exact",
+    "lem-weil-pbc-site-pullback-abelian-underlying",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an injective resolution I of a T-acyclic F. Left exactness identifies degree-zero kernel with T(F), and positive homology of T(I) equals R^q T(F)=0. T preserves injectives, so T(I) is an injective resolution of T(F). Compute derived evaluations using these resolutions. Evaluation of T(I) at top is evaluation of I at i(top), so the section complexes coincide.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift F -> G to their injective resolutions and apply T. The identical section complexes commute with these lifts; naturality of derived-resolution computations gives the equation. Homotopic lifts give equal homology maps and proof irrelevance removes dependence on acyclicity witnesses.",
+   "uses": [
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zariski-etale-sheaf-left-exact",
+  "lem-weil-pbc-site-pullback-abelian-underlying",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0733",
+  "place": "Lemma 21.14.6(1), direct resolution proof; Tag 072Z for preserved injectives",
+  "note": "Second-reader repair: explicit injective-resolution argument; not naturality of arbitrary equivalences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Acyclic direct image gives natural comparison of derived evaluation functors; constant integer sheaf Ext computes derived terminal sections in any universe",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism from sheaf cohomology with constant integer coefficients to right derived evaluation at a terminal object, and Leray for an acyclic direct image",
+   "digest": "d7931a6494337fc3",
+   "date": "2026-10-13",
+   "results": "DerivedCategory.singleFunctorCompHomologyFunctorIso; CategoryTheory.constantCommuteCompose; DerivedCategory.singleFunctorIsoCompQ; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.Sheaf.ΓNatIsoLim; CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app; CompHausLike.LocallyConstant.functorIso; CategoryTheory.sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf; no exact natural acyclic mixed-universe comparison. Read the resolution and functorH hits.",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerived, NatIso",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: "
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]omp|[Cc]omp.*rightDerived|cohomology.*evaluation",
+   "digest": "627b8b5df23bd999",
+   "date": "2026-10-13",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; no exact natural acyclic mixed-universe comparison. Read the resolution and functorH hits.",
+   "verdict": "ingredients only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleZariskiNaturalAcyclicLeray",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proper-case natural cohomology comparison, via lem-sc-etale-zariski-natural-acyclic-leray",
+   "via": [
+    "lem-sc-etale-zariski-natural-acyclic-leray"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleZariskiDerivedSectionsAcyclicLeray",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleZariskiDerivedSectionsAcyclicLeray.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleZariskiDerivedSectionsAcyclicLeray",
+  "statement": "theorem etaleZariskiDerivedSectionsAcyclicLeray\n    (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)\n    [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology]\n    [(i.sheafPushforwardContinuous AddCommGrpCat.{u}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).Additive]\n    [PreservesFiniteLimits i] :\n    let T := i.sheafPushforwardContinuous AddCommGrpCat.{u}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology\n    let Z := sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u} ⋙\n      (CategoryTheory.evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)\n    let E := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u} ⋙\n      (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u}).obj (op (i.obj ⊤))\n    ∃ c : ∀ (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})\n        (hF : ∀ n : ℕ, IsZero ((T.rightDerived (n + 1)).obj F)) (n : ℕ),\n        ((Z.rightDerived (n + 1)).obj (T.obj F)) ≃+\n          ((E.rightDerived (n + 1)).obj F),\n      ∀ (F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u})\n        (hF : ∀ n : ℕ, IsZero ((T.rightDerived (n + 1)).obj F))\n        (hG : ∀ n : ℕ, IsZero ((T.rightDerived (n + 1)).obj G))\n        (φ : F ⟶ G) (n : ℕ) (x : (Z.rightDerived (n + 1)).obj (T.obj F)),\n        c G hG n ((Z.rightDerived (n + 1)).map (T.map φ) x) =\n          (E.rightDerived (n + 1)).map φ (c F hF n x)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T232902-L-2042789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T232902-L-2042789",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

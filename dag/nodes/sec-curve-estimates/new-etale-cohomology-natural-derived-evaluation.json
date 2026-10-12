@@ -1,0 +1,135 @@
+{
+ "id": "new-etale-cohomology-natural-derived-evaluation",
+ "kind": "statement",
+ "title": "Natural standard-Ext comparison with derived terminal evaluation",
+ "statement": "Let X be a scheme [def-pc-scheme], V a terminal object of X.Etale, and E the additive evaluation-at-V functor on abelian etale sheaves [def-weil-pbc-sites-and-cohomology, def-weil-pbc-abelian-etale-sheaves]. For every sheaf F and n >= 0 there exist simultaneously additive equivalences e(F,n): H^(n+1)(X.Etale,F) -> R^(n+1)E(F), natural for every coefficient morphism F -> G. The left side is constant-integer-sheaf Ext in the standard large HasExt model [def-pc-ext, def-weil-pbc-etale-cohomology]; the right side is Mathlib right-derived evaluation in the coefficient universe. No direct-image functor or acyclicity hypothesis is involved.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pc-ext",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XP",
+  "place": "Lemma 13.27.2(1); cohomology definition Tag 01FT and natural comparison maps of injective resolutions"
+ },
+ "proof": [
+  {
+   "text": "The constant-sheaf adjunction at terminal V followed by evaluation at 1 identifies Hom from the constant lifted integers with evaluation at V, additively and naturally. Apply it to each term of an injective resolution.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compute standard large Ext using the Hom complex of the injective resolution and right-derived evaluation using its section complex. Lift the section complex to the Hom universe, take homology, and lower via the exact ULift functor.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "new-sheaf-cohomology-derived-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use comparison chain maps lifting every F -> G. Naturality of the adjunction and of the resolution computations makes the component equivalences commute with these maps. Homotopic lifts give the same homology map. The existing resolution-evaluation theorem supplies only endomorphism naturality; the cross-object argument is the remaining statement here.",
+   "uses": [
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "new-sheaf-cohomology-derived-evaluation",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/06XP",
+  "place": "Lemma 13.27.2(1); cohomology definition Tag 01FT and natural comparison maps of injective resolutions",
+  "note": "Second-reader repair: explicit injective-resolution argument; not naturality of arbitrary equivalences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Acyclic direct image gives natural comparison of derived evaluation functors; constant integer sheaf Ext computes derived terminal sections in any universe",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism from sheaf cohomology with constant integer coefficients to right derived evaluation at a terminal object, and Leray for an acyclic direct image",
+   "digest": "d7931a6494337fc3",
+   "date": "2026-10-13",
+   "results": "DerivedCategory.singleFunctorCompHomologyFunctorIso; CategoryTheory.constantCommuteCompose; DerivedCategory.singleFunctorIsoCompQ; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.Sheaf.ΓNatIsoLim; CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app; CompHausLike.LocallyConstant.functorIso; CategoryTheory.sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf; no exact natural acyclic mixed-universe comparison. Read the resolution and functorH hits.",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerived, NatIso",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: "
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]omp|[Cc]omp.*rightDerived|cohomology.*evaluation",
+   "digest": "627b8b5df23bd999",
+   "date": "2026-10-13",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; no exact natural acyclic mixed-universe comparison. Read the resolution and functorH hits.",
+   "verdict": "ingredients only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleZariskiNaturalAcyclicLeray",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proper-case natural cohomology comparison, via lem-sc-etale-zariski-natural-acyclic-leray",
+   "via": [
+    "lem-sc-etale-zariski-natural-acyclic-leray"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCohomologyNaturalDerivedEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCohomologyNaturalDerivedEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleCohomologyNaturalDerivedEvaluation",
+  "statement": "theorem etaleCohomologyNaturalDerivedEvaluation\n    (X : Scheme.{u}) (V : X.Etale) (hV : IsTerminal V) :\n    let E := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u} ⋙\n      (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u}).obj (op V)\n    ∃ e : ∀ (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) (n : ℕ),\n        @Sheaf.H _ _ X.smallEtaleTopology F inferInstance (HasExt.standard _) (n + 1) ≃+\n          ((E.rightDerived (n + 1)).obj F),\n      ∀ (F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) (φ : F ⟶ G) (n : ℕ)\n        (x : @Sheaf.H _ _ X.smallEtaleTopology F inferInstance\n          (HasExt.standard _) (n + 1)),\n        e G n (@Sheaf.H.map _ _ X.smallEtaleTopology inferInstance (HasExt.standard _)\n          _ _ φ (n + 1) x) = (E.rightDerived (n + 1)).map φ (e F n x)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T232902-L-2042789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T232902-L-2042789",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
