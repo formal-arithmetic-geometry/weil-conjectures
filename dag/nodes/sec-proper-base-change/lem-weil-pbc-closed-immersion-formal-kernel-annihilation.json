@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-formal-kernel-annihilation",
+ "kind": "statement",
+ "title": "Inverse-image ideal annihilation of a transported categorical formal kernel",
+ "statement": "Let $j:Z\\to X$ be a closed immersion of Noetherian schemes [def-weil-closed-immersion], let $Q$ be a quasi-coherent ideal [def-sbc-closed-immersion-ideal-sheaf], and choose any Abelian structure on $\\mathit{Coh}(X,Q)$ [lem-weil-pbc-coherent-formal-modules-abelian]. Let $M,N$ belong to $\\mathit{Coh}(X,Q)$ and $G,D$ to $\\mathit{Coh}(Z,Q\\mathcal O_Z)$ [def-weil-pbc-coherent-formal-module]. Given $a:M\\to N$, $\\alpha:G\\to D$, and inverse-system isomorphisms $e:M\\cong j_*G$, $d:N\\cong j_*D$ satisfying $d\\circ a=(j_*\\alpha)\\circ e$, let $L$ be a quasi-coherent ideal on $Z$, $t\\geq0$, and $k$ any limiting kernel fork of $\\alpha$. If $L^t$ annihilates every term of its point, then the inverse-image ideal $(L^t).\\operatorname{map}(j)$ annihilates every term of $\\operatorname{Ker}(a)$. Here ideal powers and their module products are those of [lem-weil-pbc-ideal-module-product-stalk], and map is the kernel ideal of the composite $(L^t).\\mathrm{subscheme}\\to Z\\to X$. No proper-support or nonempty-complement hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, closed quotient replacement and final comparison; Tags 087T, 087W, 087X for closed coherent equivalence and affine/local description of categorical formal kernels. Verified at https://stacks.math.columbia.edu/tag/088E and the corresponding tag pages."
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "On each affine open Spec A of X its inverse image in Z is Spec(A/I). The closed formal equivalence identifies pushforward with restriction of scalars on the finite completed modules of the affine equivalence. Their inverse limits are the same sets and maps, with restricted scalar action; restriction of scalars preserves kernels. The finite completed kernel is killed by I and its reductions therefore belong to the formal supported subcategory. Exact restriction and locality of exactness glue this kernel identification globally. In particular the pushforward of the given limiting fork is a categorical kernel; evaluation is not asserted to preserve kernels.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-coherent-formal-modules-local-exactness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The commuting square and its two isomorphisms identify this pushed kernel with kernel(a) by the uniqueness of limiting kernel forks. This argument depends only on universal properties and hence applies to any chosen Abelian structure.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On an affine open U of X, (L^t).map j is the inverse image ideal of L(V)^t under A -> A/I, with V the inverse image affine. The ideal-power product criterion translates hkill into annihilation of sections of each term of k.pt by L(V)^t. The pushed term has the restricted scalar action, so its sections are annihilated by the inverse image ideal. Apply the same zero-product criterion with exponent one and then transport through the components of the kernel isomorphism. This proves the stated termwise annihilation, also for exponent t=0.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-ideal-power-product-zero-affine-cover"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-formal-modules-local-exactness",
+  "lem-weil-pbc-ideal-power-product-zero-affine-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K3",
+  "date": "2026-10-13",
+  "note": "Detailed closed-pushforward kernel and inverse-image ideal argument in the parent node steps 2--3, following Stacks 088E, 087T, 087W, 087X."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion pushforward preserves annihilation of kernel of morphism coherent adic formal systems",
+   "results": "0 hits; service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of closed immersion pushforward on coherent adic formal systems kernel",
+   "results": "8 hits; AdicCompletion.map_exact, Profinite.NobelingProof.succ_exact, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, Function.Exact.exact_mapQ_iff, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.IdealSheafData.map_ker, CategoryTheory.ShortComplex.moduleCat_exact_iff_ker_sub_range, LinearMap.exact_of_comp_eq_zero_of_ker_le_range",
+   "date": "2026-10-13",
+   "verdict": "No matching formal-kernel transport statement; use the existing affine equivalence and local exactness."
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*kernel|kernel.*formal",
+   "results": "3 hits; Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No matching formal-kernel transport statement; use the existing affine equivalence and local exactness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionFormalComparisonTransport",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of finite-etale lifting: geometric comparison in the proof of Theorem 088E, paragraphs 2--4, before the Noetherian induction conclusion. This node supplies closed-immersion transport of a power-annihilated formal kernel. This node isolates only the categorical-kernel annihilation calculation.",
+   "via": [
+    "lem-weil-pbc-closed-immersion-formal-comparison-transport",
+    "lem-weil-pbc-grothendieck-existence-chow-comparison",
+    "lem-weil-pbc-grothendieck-existence-system-support",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionFormalKernelAnnihilation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionFormalKernelAnnihilation.lean",
+  "declaration": "AlgebraicGeometry.closedImmersion_formalKernel_annihilated",
+  "statement": "theorem closedImmersion_formalKernel_annihilated\n    {X Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Z]\n    (j : Z ⟶ X) [IsClosedImmersion j] (Q : X.IdealSheafData)\n    [Abelian (CoherentFormalModule X Q)]\n    (M N : CoherentFormalModule X Q)\n    (G D : CoherentFormalModule Z (Q.comap j))\n    (a : M ⟶ N) (α : G ⟶ D)\n    (e : M.obj ≅ G.obj ⋙ Scheme.Modules.pushforward j)\n    (d : N.obj ≅ D.obj ⋙ Scheme.Modules.pushforward j)\n    (hsquare : a.hom ≫ d.hom =\n      e.hom ≫ Functor.whiskerRight α.hom (Scheme.Modules.pushforward j))\n    (L : Z.IdealSheafData) (t : ℕ) (k : KernelFork α) (hk : IsLimit k)\n    (hkill : ∀ n : ℕ, IsZero (Scheme.idealModuleProduct\n      (Scheme.idealSheafPower L.toModulesι t).2 (k.pt.obj.obj (op n)))) :\n    AnnihilatedBy Q ((L ^ t).map j) (kernel a)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T202242-L-705280",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T202242-L-705280",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
