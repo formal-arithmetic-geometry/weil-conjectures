@@ -42,6 +42,7 @@ def load_nodes():
         if isinstance(value, dict):
             return {k: (v if k in ('lean', 'mathlib_match') else remap(v)) for k, v in value.items()}
         return value
+    load_nodes.aliases = mapping
     return {mapping.get(ident, ident): remap(node) for ident, node in result.items()}
 
 
@@ -290,7 +291,7 @@ def cut(args):
                     write(out / proof_path, fields(meta) + rendered(proof_body(node), ns) + '\n')
         outside = {str(p.relative_to(tree)): hashlib.sha256(p.read_bytes()).hexdigest()
                    for p in tree.rglob('*') if p.is_file() and 'blueprint' not in p.relative_to(tree).parts[:1] and '.git' not in p.relative_to(tree).parts}
-        manifest = {'mathlib_leaves': [ident for ident, node in ns.items() if node.get('status') == 'mathlib' and not (node.get('blueprint') or {}).get('is')], 'outside': outside, 'baseline': baseline, 'chapter': args.chapter, 'sketch': args.sketch, 'asks': ask}
+        manifest = {'id_aliases': getattr(load_nodes, 'aliases', {}), 'mathlib_leaves': [ident for ident, node in ns.items() if node.get('status') == 'mathlib' and not (node.get('blueprint') or {}).get('is')], 'outside': outside, 'baseline': baseline, 'chapter': args.chapter, 'sketch': args.sketch, 'asks': ask}
         write(out / '.blueprint-cut.json', json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
     changed = [str(p.relative_to(out)) for p in (out / 'blueprint').rglob('*.md') if baseline.get(str(p.relative_to(out))) != p.read_text()]
     print(json.dumps({'changed_files': len(changed), 'proposals': len(ask), 'files': sorted(changed)}, indent=2))
