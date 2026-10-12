@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
-public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
+public import WeilConjectures.DeligneLaumon.AffineLine.AffineCurveUpper
 public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.WeilSheaf.LisseLocus
@@ -106,8 +106,10 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_affineLine
     have : QuasiCompact (U.toScheme ↘ Spec (CommRingCat.of k₀)) := by
       rw [← hc]
       infer_instance
-    have hU := hasWeightsAtMostOver_compactlySupportedCohomology_of_isCurve ι _ hUl
-      (hG.upperStar U.ι) r
+    have : QuasiCompact U.ι := inferInstance
+    have : IsDominant U.ι := ⟨by rwa [DenseRange, Scheme.Opens.range_ι]⟩
+    have hU := WeilSheaf.LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology
+      ⟨U, U.ι, _, hUl⟩ (hG.upperStar U.ι) r
     obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_zero_higherLowerShriek
       (U.ι ≫ 𝔸(PUnit.{u + 1}; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
       ((WeilSheaf.upperStar U.ι).obj G) r
@@ -200,5 +202,30 @@ theorem WeilSheaf.subsingleton_compactlySupportedCohomology_zero_of_isAffine {C 
   obtain ⟨e⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_higherLowerShriek_zero f E 0
   have := WeilSheaf.subsingleton_compactlySupportedCohomology_higherLowerShriek_zero f E hE
   exact e.toLinearEquiv.toEquiv.subsingleton
+
+/-- **Affine compact-support upper bound.** Let `C` be a smooth geometrically connected affine
+curve over `k₀` and `F` a lisse Weil sheaf on `C`, punctually `ι`-pure of weight `w`. Then every
+`H_c^r(C, F)` has weights at most `w + r`. More precisely, `H_c^0(C, F) = 0`, `H_c^2(C, F)` is
+`ι`-pure of weight `w + 2`, and `H_c^r(C, F) = 0` for `r ∉ {0, 1, 2}`. The degree-one bound
+comes from a finite morphism `C ⟶ 𝔸¹` and the estimate on dense opens of the line
+(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology`),
+see `AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine`.
+(blueprint: `thm-a1-affine-curve-upper`) -/
+theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine_of_isLisse
+    {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l C)
+    (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
+    haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
+    (∀ r : ℤ, (F.compactlySupportedCohomology r).HasWeightsAtMostOver k₀ ι (w + r)) ∧
+      Subsingleton (F.compactlySupportedCohomology 0).carrier ∧
+      (F.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι (w + 2) ∧
+      ∀ r : ℤ, r < 0 ∨ 2 < r → Subsingleton (F.compactlySupportedCohomology r).carrier := by
+  have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
+  exact ⟨hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine ι
+      (ringKrullDim_le_of_smoothOfRelativeDimension (C ↘ Spec (CommRingCat.of k₀)) 1) F hw,
+    WeilSheaf.subsingleton_compactlySupportedCohomology_of_isLisse_of_isAffine hF (Or.inl le_rfl),
+    hw.isPureOfWeightOver_compactlySupportedCohomology_two hF,
+    fun r hr ↦ WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine F hr⟩
 
 end AlgebraicGeometry
