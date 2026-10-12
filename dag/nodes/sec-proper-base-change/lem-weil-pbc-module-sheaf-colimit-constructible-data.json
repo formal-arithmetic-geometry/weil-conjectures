@@ -16,53 +16,49 @@
  },
  "proof": [
   {
-   "text": "Constructible module sheaves have finite presentations by affine etale free sheaves. Choose a small skeleton of the affine etale objects; their finite sums and the sets of maps between these sums give a set of cokernels representing every constructible sheaf.",
+   "text": "For every constructible sheaf use exists_affine_free_etale_presentation. Index all pairs of finite families of etale objects and morphisms between their finite sums of free sheaves. This index is already a Type (u + 1), since X.Etale and the sheaf Hom types have that size. Every constructible sheaf is isomorphic to the cokernel of one of these morphisms by uniqueness of a cokernel colimit. ObjectProperty.Small and EssentiallySmall therefore give an essentially small full subcategory of constructible sheaves. No affine-etale skeleton is required at the larger universe u + 1 used in this statement.",
    "uses": [
-    "lem-weil-pbc-constructible-module-finite-presentation",
-    "lem-weil-pbc-affine-etale-essentially-small-cover"
+    "lem-weil-pbc-constructible-module-finite-presentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
+    "place": "Tags 03SA(3), 095N and 03RZ; categorical construction in the Lean docstring"
    }
   },
   {
-   "text": "Take representatives of constructible sheaves with maps to F and commuting triangles. Zero gives nonemptiness, direct sums give common successors, and cokernels of differences equalize parallel arrows. These objects are constructible by finite-sum and cokernel closure. The forgetful functor and the maps to F define D and iota.",
+   "text": "Compare IsConstructibleEtaleModuleSheaf with the library IsConstructibleSheaf by isConstructibleEtaleModuleSheaf_iff. The zero sheaf is constructible using the trivial stratification and zero constant values (the proved library lemma IsConstructibleSheaf.of_isZero). Constructible biproducts and cokernels follow from IsConstructibleSheaf.biprod and IsConstructibleSheaf.cokernel. Form B = CostructuredArrow P.ι F for the constructible object property P. Zero gives a member of B. A biproduct with its induced map to F gives a common successor. For parallel arrows f,g use the cokernel of f-g; their triangle equations ensure the map to F descends, and the cokernel condition equalizes the arrows. This proves B filtered. Mathlib StructuredArrow.Small makes B essentially small. Transport to SmallModel B and compose its inverse equivalence with the projection and inclusion to define D. The structure maps to F define iota; triangle commutativity proves naturality.",
    "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "thm-constructible-serre",
     "def-weil-pbc-etale-constructible-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
+    "place": "Tags 03SA(3), 095N and 03RZ; categorical construction in the Lean docstring"
    }
   },
   {
-   "text": "Every constructible map to F appears up to isomorphism, giving factorization. For maps p and q with equal composites, take the cokernel of (p,-q):G -> D_a plus D_b. Its map to F is induced by the equality; the two inclusions induce the common refinement and its relation.",
-   "uses": [
-    "thm-constructible-serre",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
+   "text": "A constructible map G -> F defines an object of B. The unit of the small-model equivalence gives its factorization into the diagram. For the relation clause, regard p and q as arrows in B from (G,p followed by iota_a) to the objects above a and b. Use filteredness first to take a common successor, then to equalize the resulting parallel arrows. Postcompose with the equivalence unit at this equalizing object, and use fullness of the inverse equivalence to obtain arrows out of a and b in SmallModel B. Applying the forgetful functor to the equalizing equation gives exactly p followed by D(f) = q followed by D(g).",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03SA(3), 095N, 03RZ, 09Z4; see the Lean docstring for the categorical argument"
+    "place": "Tags 03SA(3), 095N and 03RZ; categorical construction in the Lean docstring"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-constructible-module-finite-presentation",
-  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "thm-constructible-serre",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-pbc-etale-constructible-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Explicit categorical reduction of the construction in 03SA(3), using 095N, 03RZ and 09Z4"
+  "place": "T1: Lean realization of the existing categorical construction; finite-presentation smallness at universe u + 1 and filteredness followed by equivalence transport."
  },
  "mathlib_searches": [
   {
@@ -130,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-72c2e",
-  "group": "F1",
+  "reviewer": "COMPILER",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T023314-L-1110539",
-  "kind": "interface",
-  "note": "independent Codex review: Matched all three Lean signatures and proofs with their nodes, dependencies and cited Stacks arguments; compilation and scratch axiom checks pass; earlier B5 return is repaired."
+  "landing": "20261012T042420-L-1821532",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
