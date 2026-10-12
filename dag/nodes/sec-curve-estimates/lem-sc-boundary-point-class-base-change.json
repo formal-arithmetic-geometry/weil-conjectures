@@ -18,32 +18,54 @@
  ],
  "proof": [
   {
-   "text": "The compactification is a smooth connected, hence integral, noetherian curve. Its nonempty open C is dense; its closed complement is zero-dimensional and finite. All closed boundary points have residue field k by finite type and algebraic closedness. Their base changes are Spec k prime. The cartesian open-immersion square identifies the new complement with precisely these disjoint singleton fibres. This gives a bijection of boundary closed points, including the empty and singleton cases.",
+   "text": "Install regularity and irreducibility of the smooth connected ambient curve. The range of the open immersion is nonempty. IsOpen.isClosed_singleton_of_mem_compl in dimension one shows that every point outside it is closed. The cartesian open-immersion square (Compactification.isPullback_i_ofIsPullback and Scheme.range_snd_of_isPullback) identifies the new open range with the inverse image of the old one. Thus projection sends every new boundary point to an old closed boundary point. Finiteness of the complement is not needed.",
    "uses": [
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "lemma-nagata-compactification-base-change",
-    "lem-sc-base-change-curve"
+    "lemma-nagata-compactification-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "The projection is flat since it is the base change of a field extension. The effective Cartier ideal of a rational point pulls back to the ideal of its singleton reduced fibre. Flat pullback of the dual invertible ideal identifies the line bundles O(P) and the new point line bundle. Passage to Picard classes gives the displayed equality for every boundary point.",
+   "text": "For every old closed point P, pointOfClosedPoint constructs its rational section using algebraic closedness and finite type. Apply Scheme.Hom.baseChangeFieldPoint to get a rational section over k prime; it is a closed immersion, hence gives a closed point upstairs. The projection returns P. Scheme.Hom.baseChangeFieldPoint_eq_of_fst_eq proves that this is the unique point over P. Restrict the projection to the boundary subtypes, prove injectivity by this uniqueness and surjectivity by the lifted sections, and take the inverse of Equiv.ofBijective. Its inverse law gives the pointwise projection identity he.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-pc-rational-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a boundary point P construct its rational section p and base-changed section q. Uniqueness of the fibre identifies the point of q with e(P). Cancel the ambient base-change square from the outer identity square using IsPullback.of_bot to obtain IsPullback b q p projection. Scheme.ker_pointOfClosedPoint identifies ker(p) with the reduced point ideal I; map_vanishingIdeal applied to the reduced one-point source identifies ker(q) with the new point ideal J. The proved source theorem Scheme.Hom.ker_of_isPullback (flat base change of kernel ideals, with p a quasi-compact closed immersion and the projection flat) gives I.comap projection = J.",
    "uses": [
     "lem-pc-divisor-line-bundle-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Smoothness of relative dimension one makes I and J invertible. Apply IdealSheafData.IsInvertible.nonempty_pullback_dual_toModules_iso to I and its identified invertible pullback J. Compose this isomorphism with the Picard skeleton representative isomorphisms and use Pic.eq_iff_nonempty_iso. This gives exactly the displayed equality for each P, completing the unchanged existential statement.",
+   "uses": [
+    "lem-pc-divisor-line-bundle-properties",
+    "lem-pc-recd-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-point-residue-field-base",
   "lemma-nagata-compactification-base-change",
-  "lem-sc-base-change-curve",
-  "lem-pc-divisor-line-bundle-properties"
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-pc-rational-point",
+  "lem-pc-divisor-line-bundle-properties",
+  "lem-pc-recd-pullback"
  ],
  "proof_origin": {
-  "by": "V3",
+  "by": "J3",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-  "place": "Affine case, compactification/boundary and final compatibility paragraphs; expanded from the proof recorded in lem-sc-pic-affine-base-change-compatibility"
+  "place": "Affine boundary paragraph; second reading replaces the false arbitrary-bijection lemma by a direct proof using proved source rational-point fibre, kernel-pullback and invertible-ideal pullback declarations",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.baseChangeFieldPoint_eq_of_fst_eq",
+   "AlgebraicGeometry.Scheme.range_snd_of_isPullback",
+   "AlgebraicGeometry.Scheme.ker_pointOfClosedPoint",
+   "AlgebraicGeometry.Scheme.Hom.ker_of_isPullback",
+   "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.nonempty_pullback_dual_toModules_iso"
+  ]
  },
  "mathlib_searches": [
   {
@@ -122,10 +144,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T112853-L-772798",
-  "kind": "interface",
+  "landing": "20261012T135245-L-1672625",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
