@@ -13,36 +13,66 @@
  ],
  "proof": [
   {
-   "text": "Reduce to the prime field using the characteristic-zero and positive-characteristic field lifting results, then compose with the given adic formal smoothness.",
+   "text": "Put T=K[[X_1,...,X_d]] and N=(X_1,...,X_d). Mathlib gives Noetherianity, locality and N-adic completeness. The variables are nonunits by their zero constant terms, hence N is contained in the maximal ideal and the Jacobson radical. N^2 is N-adically closed: the defining intersection contains N^2 and its m=2 term equals N^2.",
    "uses": [
-    "lem-weil-pbc-char-zero-field-extension-formally-smooth",
-    "lem-weil-pbc-field-char-p-nilpotent-lifting",
-    "def-weil-pbc-formally-smooth-adic"
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-variables-complete"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a coefficient field and a cotangent basis, identify the square-zero first quotients with those of the power-series ring, and lift successively through square-zero kernels. Completeness gives the map; Nakayama gives the maximal-ideal equality and quotient surjectivity.",
+   "text": "Obtain the surjective first-order ring map g_0:A -> T/N^2, with inverse image of the image of N equal to m_A. No formal smoothness is needed for this finite construction.",
    "uses": [
-    "lem-weil-pbc-cohen-coefficient-ring-exists",
-    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-first-order-power-series-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift g_0 restricted to k to T to obtain a compatible scalar structure. In characteristic zero choose a transcendence basis over Q, use algebraicity and separability, and apply the Mathlib formally-smooth field theorem. In characteristic p use H1Cotangent vanishing over ZMod p and projectivity of the differential vector space. Discrete formal smoothness gives adic formal smoothness for source ideal zero. Apply the complete lifting theorem with I=N, J=N^2, r=t=1. Its reduction equality makes g_0 a k-algebra map for the constructed scalar structure.",
+   "uses": [
+    "lem-weil-pbc-char-zero-field-extension-formally-smooth",
+    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+    "lem-weil-pbc-fs-adic-lift-into-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the complete lifting theorem to the assumed adic formal smoothness of A, with source ideal m_A and I=N, J=N^2, r=t=1. The inverse-image condition proves g(m_A) lies in the image of N. Obtain f:A -> T reducing to g and taking m_A into N.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic",
+    "lem-weil-pbc-fs-adic-lift-into-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in N, surjectivity gives y with g(y)=x mod N^2. The inverse-image condition gives y in m_A, so x=f(y)+(x-f(y)) lies in Ideal.map f m_A + N^2. Nakayama for the finite T-module N, using N in the Jacobson radical, gives N contained in Ideal.map f m_A. Combine with the reverse containment to prove equality.",
+   "uses": [
     "lem-weil-pbc-nakayama-local-generators"
    ],
    "elementary": false
+  },
+  {
+   "text": "For a representative x of a class modulo Ideal.map f m_A, first-order surjectivity gives y with f(y)=x mod N^2. Since N^2 is contained in N=Ideal.map f m_A, the classes of f(y) and x agree. This proves quotient surjectivity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-variables-complete",
+  "lem-weil-pbc-first-order-power-series-comparison",
   "lem-weil-pbc-char-zero-field-extension-formally-smooth",
-  "lem-weil-pbc-field-char-p-nilpotent-lifting",
+  "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
   "def-weil-pbc-formally-smooth-adic",
-  "lem-weil-pbc-cohen-coefficient-ring-exists",
-  "lem-weil-pbc-power-series-field-cohen-regular-complete",
   "lem-weil-pbc-nakayama-local-generators"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07EI, proof"
+  "place": "Tag 07EI, first-order comparison and complete lifting; Tag 07NJ for the existing general lifting interface"
  },
  "mathlib_searches": [
   {
@@ -118,9 +148,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T110308-L-617512",
+  "landing": "20261012T135338-L-1702362",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
