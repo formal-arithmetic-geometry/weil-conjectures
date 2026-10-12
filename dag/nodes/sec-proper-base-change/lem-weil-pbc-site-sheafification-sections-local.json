@@ -24,53 +24,45 @@
  ],
  "proof": [
   {
-   "text": "Use the plus-construction realization of sheafification from [lem-weil-pbc-sheafification-plus-theorem], which identifies the universal-property sheafification $\\mathcal F^\\#$ with $\\mathcal F^{++}$. For $s\\in\\mathcal F^\\#(U)$, the definition of the second plus construction gives a covering of $U$ on which $s$ is represented by sections of $\\mathcal F^+$; refine each of those covering families by the first plus construction, so that on a covering $\\{U_i\\to U\\}$ the restriction of $s$ is represented by an actual section $s_i\\in\\mathcal F(U_i)$. On $U_i\\times_UU_j$, equality of the two representatives in $\\mathcal F^+$ means, by the common-refinement relation in the plus construction, that a further covering has equal pullbacks of $s_i$ and $s_j$. This is exactly the local representation and overlap condition of the statement; it is the construction in Sites, Lemma Tag 00WK.",
+   "text": "Proved partial step: the universal sheafification unit is locally surjective, without a universe comparison. Let G be sheafify(F), eta its unit, and R the sheaf closure of the image subfunctor of eta inside G. Mathlib Subfunctor.sheafify_isSheaf makes R a sheaf. Factor F -> R through G using sheafifyLift. Composing the resulting lift with R -> G gives the identity by sheafify_hom_ext. Consequently every section of G belongs to R, so the image sieve of every section covers. This is the private Lean lemma unit_locally_surjective.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-sheafification-plus-theorem"
+    "def-weil-pbc-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Lemma Tag 00WK (lemma-sections-sheafification), first paragraph, using the plus construction of Section 7.10"
-   }
+   "elementary": false
   },
   {
-   "text": "Conversely, suppose that $\\{U_i\\to U\\}$ and $s_i\\in\\mathcal F(U_i)$ satisfy the stated overlap condition. Their images $\\theta^2(s_i)\\in\\mathcal F^\\#(U_i)$ agree after pulling back to a covering of every $U_i\\times_UU_j$: the further-cover equality of the $s_i$ is preserved by the sheafification map. Thus the family $(\\theta^2(s_i))_i$ is descent data for the sheaf $\\mathcal F^\\#$, whose sheaf property and identification with $\\mathcal F^{++}$ are supplied by [lem-weil-pbc-sheafification-plus-theorem]; the equalizer sheaf condition gives a unique $s\\in\\mathcal F^\\#(U)$ restricting to it. The same uniqueness also shows that the section is independent of all refinements used to witness the overlap condition. This is the converse in Lemma Tag 00WK.",
+   "text": "Proved partial step: for each section of sheafify(F), use Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition to extract a precoverage covering presieve inside its covering image sieve. Choose a preimage on each covering arrow. The resulting family represents the section locally. This is local_representatives; the locally-equal overlap assertion is not included.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-sheafification-plus-theorem"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Theorem Tag 00WB, part (4), and Lemma Tag 00WK (lemma-sections-sheafification), converse"
-   }
-  },
-  {
-   "text": "For the final clause, let $p,q\\in\\mathcal F(U)$ and assume $\\theta^2(p)=\\theta^2(q)$. Regard $p$ and $q$ first as the canonical sections of $\\mathcal F^+(U)$. The separatedness assertion and injectivity of $\\mathcal F^+\\to\\mathcal F^{++}$ in Theorem Tag 00WB(1)--(2), recorded as [lem-weil-pbc-sheafification-plus-separated], imply that the two $\\mathcal F^+$-representatives are equal. By the definition of equality in $\\mathcal F^+$, each such equality has a covering refinement on which the restrictions of $p$ and $q$ agree in $\\mathcal F$. Composing the refinements is a covering by the site axioms [def-weil-pbc-sites-and-cohomology], and on it $p|_{U_i}=q|_{U_i}$, as required.",
-   "uses": [
-    "lem-weil-pbc-sheafification-plus-separated",
     "def-weil-pbc-sites-and-cohomology",
     "def-weil-pbc-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Theorem Tag 00WB, part (1), and Lemma Tag 00WK; the refinement argument is the common-refinement paragraph in the proof of 00WB"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Proved partial step: given locally compatible presheaf representatives, map them through the unit into the sheaf. Naturality carries each further-cover equality into equality after restriction in the sheaf. Separatedness on that cover proves compatibility on every overlap cone. The sheaf condition on the original covering then gives the unique amalgamation. This is the private Lean lemma local_descent.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "STATEMENT-DISPUTED: the remaining local-injectivity assertion is false with the unrestricted independent universes u and w in the recorded Lean signature. For a sufficiently large complete atomless Boolean site, all Type w-valued sheaves are subterminal and their reflector exists as the sheaf closure of the support of a presheaf. The constant two-element presheaf reflects to the terminal sheaf, so its distinct sections have equal images and are nowhere locally equal on a nonzero object. The worker report gives the cardinality and support-reflector arguments. The previous double-plus dependencies only apply to Type (max u w), not to arbitrary Type w. No theorem of local injectivity in the unrestricted universes is added.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-sheafification-plus-separated",
-  "lem-weil-pbc-sheafification-plus-theorem"
+  "def-weil-pbc-sheafification"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Theorem Tag 00WB and Lemma Tag 00WK; the final local-equality clause follows by applying 00WB to the two plus-construction representatives and refining as in 00WK"
+  "place": "Partial Lean proof using the sheafification universal property and Mathlib Subsheaf/IsSheafFor; Sites Tags 00WB and 00WK consulted. The unrestricted-universe signature is disputed by the Boolean-site counterexample in the U2 report."
  },
  "mathlib_searches": [
   {
@@ -154,5 +146,15 @@
   "group": "N1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0aeb6",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T044757-L-2041863",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module and DAG node preserve the target statement; helper proofs compile cleanly, imports are pruned, and the universe counterexample is explicitly documented with the disputed theorem marked."
  }
 }
