@@ -6,16 +6,10 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImageAffine
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesCokernelClosure
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # CoherentFormalModulesCoimageImage
 
@@ -58,6 +52,9 @@ theorem coherentFormalModules_coimageImage_isIso (X : Scheme.{u}) [IsNoetherian 
     [HasCokernels (CoherentFormalModule X I)]
     {F G : CoherentFormalModule X I} (α : F ⟶ G) :
     IsIso (Abelian.coimageImageComparison α) := by
-  sorry
+  exact (coherentFormalModule_isIso_of_isIso_restrict I
+    (fun U : X.affineOpens ↦ (U : X.Opens)) (iSup_affineOpens_eq_top X)
+    (Abelian.coimageImageComparison α)
+    (fun U n ↦ coherentFormalModules_coimageImage_isIso_restrict_affine X I U α n)).1
 
 end AlgebraicGeometry

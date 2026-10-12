@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-coherent-formal-coimage-image-affine",
+ "kind": "statement",
+ "title": "Affine-local comparison at one level",
+ "statement": "Let X be a Noetherian scheme and I an ideal sheaf, with any HasKernels and HasCokernels instances for the coherent formal module category [def-weil-pbc-coherent-formal-module]. For one affine open U of X, one arrow alpha:F to G, and one n in the natural numbers, the restriction to U of the level n+1 component of the canonical coimage-image comparison is an isomorphism of module sheaves. No abelian structure on the coherent formal category is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 087X (lemma-inverse-systems-abelian), last paragraph of the proof of part (1), Coim=Im"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Use the kernel construction of [lem-weil-pbc-coherent-formal-module-kernel] and termwise cokernels supplied by [lem-weil-pbc-coherent-formal-cokernel-closure]. Restriction to an affine open preserves these constructions: images, kernels and ideal products restrict, quotient maps restrict by [lem-weil-pbc-module-restriction-open-immersion-colimits], and any enlarged stabilization constant gives the same eventual quotient system. The restricted kernel is thus the system with affine sections $K/I^nK$, where $K=\\ker f$ in the affine equivalence [lem-weil-pbc-coherent-formal-modules-affine]. Noetherianity of the completion [lem-weil-pbc-adic-completion-noetherian] ensures that $K$ is finite. The equivalence similarly identifies the cokernel with $\\operatorname{Coker}f$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-coherent-formal-cokernel-closure",
+    "lem-weil-pbc-coherent-formal-module-kernel",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify coimage and image on the fixed affine with quotient systems of M/ker f and im f. Apply the module first isomorphism theorem, then reduce the inverse modulo J^(n+1) and take its associated sheaf. Transport along the unique kernel and cokernel identifications for arbitrary supplied structures. This is the affine algebraic step only; it neither glues inverses nor asserts a global abelian structure.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-coherent-formal-cokernel-closure",
+  "lem-weil-pbc-coherent-formal-module-kernel",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X, affine calculation and coimage-image paragraph; Lemma 087W. Expanded by U3 second reader, retaining the original affine then global-locality route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of coherent adic systems has invertible coimage image comparison on each affine open",
+   "results": "8 unrelated affine scheme results; no specialized comparison lemma",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso, Functor.map",
+   "results": "service reported unknown identifier IsIso; no result",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "coimageImageComparison; coherentFormalModule_isIso_of_isIso_restrict",
+   "results": "Generic Abelian.Basic comparison, preservation comparison isomorphisms, and existing global locality theorem; no affine coherent-formal comparison statement. ModuleCat termwise kernels are not formal kernels.",
+   "date": "2026-10-13",
+   "verdict": "no specialized match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For coherent formal modules on a Noetherian scheme the coimage image comparison restricts to an isomorphism on each affine open at every level",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error; no result or mathematical verdict",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImage",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-formal-coimage-image",
+   "place": "original affine calculation, excluding the global locality step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImageAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesCoimageImageAffine.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModules_coimageImage_isIso_restrict_affine",
+  "statement": "theorem coherentFormalModules_coimageImage_isIso_restrict_affine\n    (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)\n    [HasKernels (CoherentFormalModule X I)]\n    [HasCokernels (CoherentFormalModule X I)] (U : X.affineOpens)\n    {F G : CoherentFormalModule X I} (α : F ⟶ G) (n : ℕ) :\n    IsIso ((Scheme.Modules.restrictFunctor (U : X.Opens).ι).map\n      ((Abelian.coimageImageComparison α).hom.app (op n)))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T220527-L-1395763",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T220527-L-1395763",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9735,3 +9735,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:05 L: merged deliver/S2/Sheaf.AlgebraicGeometry.PicardPullbackBaseChange (stage 3; reviewer PASS; first push; landing 20261012T220525-L-1395345 (interface); batch 20261012T220515; modules 3; new nodes 2)
 - 22:05 L: merged deliver/S2/Sheaf.FieldTheory.BrauerScalarDefectTensorLifts (stage 3; reviewer PASS; first push; landing 20261012T220526-L-1395452 (interface); batch 20261012T220515; modules 2; new nodes 2)
 - 22:05 L: merged deliver/T1/Sheaf.CategoryTheory.GrothendieckBottomResolutionComparison (stage 3; reviewer PASS; after a return; landing 20261012T220526-L-1395576 (interface); batch 20261012T220515; modules 2; new nodes 1)
+- 22:05 L: merged deliver/U3/Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImage (stage 3; reviewer PASS; after a return; landing 20261012T220527-L-1395763 (interface); batch 20261012T220515; modules 2; new nodes 1)
