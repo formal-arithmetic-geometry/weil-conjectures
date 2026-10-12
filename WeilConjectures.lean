@@ -54,6 +54,7 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.EmbeddingOver
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Glue
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.ProjectiveDomination
+public import WeilConjectures.AlgebraicGeometry.ChowLemma.ProjectiveModification
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
@@ -1531,6 +1532,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModelReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
