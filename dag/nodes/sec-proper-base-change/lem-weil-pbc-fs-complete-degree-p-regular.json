@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-fs-complete-degree-p-regular",
+ "kind": "statement",
+ "title": "Regularity in a degree-p fraction-field step",
+ "statement": "Let A be a complete regular local domain with fraction field K, and C a complete Noetherian local, regular A-algebra whose local structure map is formally smooth adically [def-weil-pbc-formally-smooth-adic]. Let L/K be finite purely inseparable, K of prime characteristic p, and M intermediate with [L:M] = p. Use compatible A-actions. If M tensor_A C [def-weil-module-base-change] is regular [def-weil-regular-scheme], then L tensor_A C is regular.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition Tag 07PM, proof of (4) => (1), coefficient reduction and final two paragraphs; read at https://stacks.math.columbia.edu/tag/07PM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-module-base-change",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "Obtain f in R = M tensor_A C, a derivation D with D(f) a unit, and an equivalence R[z]/(z^p-f) to L tensor_A C from the degree-p construction.",
+   "uses": [
+    "lem-weil-pbc-fs-complete-degree-p-unit-derivation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Install the assumed regularity of R. Since p is prime, 1 <= p. Apply degree-p-extension-regular with exponent p and the unit derivative, then transport regularity through the supplied ring equivalence.",
+   "uses": [
+    "lem-weil-pbc-degree-p-extension-regular"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fs-complete-degree-p-unit-derivation",
+  "lem-weil-pbc-degree-p-extension-regular"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition Tag 07PM, proof of (4) => (1), coefficient reduction and final two paragraphs; read at https://stacks.math.columbia.edu/tag/07PM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite purely inseparable degree p extension of a fraction field gives a tensor polynomial quotient with a derivation having unit value, for a complete formally smooth algebra",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularity of tensor products of formally smooth complete algebras over complete regular local rings with finite fraction field extensions, by purely inseparable degree induction and derivation with unit derivative",
+   "results": "Algebra.Smooth.exists_finiteType; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Algebra.Smooth.exists_subalgebra_finiteType; Algebra.Smooth.exists_subalgebra_fg; Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg; Algebra.FormallySmooth.instTensorProduct; Algebra.IsStandardSmoothOfRelativeDimension.baseChange; Algebra.FormallyUnramified.iff_exists_tensorProduct. These concern ordinary formal smoothness or finite presentation, and do not give the adic complete generic-fibre claims.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*derivation|derivation.*[Uu]nit|formallySmooth.*[Rr]egular|formallySmoothAdic|generic.*[Ff]iber, in the pinned Mathlib RingTheory and FieldTheory; corresponding concept/name searches in both project roots and DAG",
+   "results": "Only Mathlib.RingTheory.Nilpotent.Exp.exp_mul_of_derivation for the regex, unrelated. Project has the existing ingredient nodes for 07PH, 07PL, 07PG, 09HI and finite models; no combined adic complete degree-p unit-derivation construction or the new regular coefficient-domain statements. The existing finite-subalgebra-fraction-field declaration requires a polynomial/power-series base rather than an arbitrary complete domain.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormallySmoothCompleteLocalGenericFiber",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proposition 07PM (4) => (1), coefficient reduction and degree-p induction in lem-weil-pbc-formally-smooth-complete-local-generic-fiber",
+   "via": [
+    "lem-weil-pbc-formally-smooth-complete-local-generic-fiber"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormallySmoothCompleteDegreePRegular",
+  "file": "lean/Sheaf/RingTheory/FormallySmoothCompleteDegreePRegular.lean",
+  "declaration": "Algebra.isRegularRing_tensorProduct_of_formallySmoothAdic_degree_p",
+  "statement": "theorem isRegularRing_tensorProduct_of_formallySmoothAdic_degree_p\n    (A : Type u) (C : Type v) (K : Type u) (L : Type w)\n    [CommRing A] [IsDomain A] [IsRegularLocalRing A]\n    [CommRing C] [IsLocalRing C] [IsRegularRing C]\n    [Field K] [Field L] [Algebra A C] [Algebra A K] [Algebra K L] [Algebra A L]\n    [IsScalarTower A K L] [IsFractionRing A K] [Module.Finite K L]\n    [IsPurelyInseparable K L]\n    [IsLocalHom (algebraMap A C)]\n    [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\n    [IsAdicComplete (IsLocalRing.maximalIdeal C) C]\n    (p : ℕ) [Fact p.Prime] [CharP K p]\n    (M : IntermediateField K L) [Algebra A M] [IsScalarTower A K M]\n    (hdegree : Module.finrank M L = p)\n    (hregular : IsRegularRing (TensorProduct A M C))\n    (hfs : FormallySmoothAdic A C (IsLocalRing.maximalIdeal C)) :\n    IsRegularRing (TensorProduct A L C)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457609",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457609",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

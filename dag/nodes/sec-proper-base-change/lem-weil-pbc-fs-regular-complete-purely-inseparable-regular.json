@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-fs-regular-complete-purely-inseparable-regular",
+ "kind": "statement",
+ "title": "Purely inseparable base changes of a regular formally smooth complete algebra",
+ "statement": "Let A be a complete regular local domain with fraction field K and C a complete Noetherian local regular A-algebra, with local structure map formally smooth for the maximal-ideal-adic topology [def-weil-pbc-formally-smooth-adic]. For every finite purely inseparable field extension L/K [def-weil-pbc-finite-purely-inseparable-extension], with compatible A-action, L tensor_A C [def-weil-module-base-change] is regular [def-weil-regular-scheme].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition Tag 07PM, proof of (4) => (1), coefficient reduction and final two paragraphs; read at https://stacks.math.columbia.edu/tag/07PM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-module-base-change",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "Localization base change identifies C tensor_A K with the localization of C at the images of nonzero A. Use localization of a regular ring, and tensor commutativity, to make K tensor_A C regular.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-of-regular-ring",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The field K has characteristic zero or prime characteristic. In characteristic zero, pure inseparability plus separability makes K -> L surjective (Mathlib IsPurelyInseparable.surjective_algebraMap_of_isSeparable). Tensor the induced A-algebra equivalence with C to transport regularity.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In prime characteristic p, use strong induction on finrank K L. If the bottom intermediate field is top, K -> L is surjective and the previous tensor-equivalence argument applies. Otherwise the final-step consequence of 09HI gives M with finrank K M < finrank K L and finrank M L = p; finiteness and pure inseparability over K are part of its conclusion.",
+   "uses": [
+    "lem-weil-pbc-purely-inseparable-pth-root-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give M the A-action composed through K. Apply the strong induction hypothesis to M. The degree-p regularity lemma then makes L tensor_A C regular. The induction uses the exact strict finrank inequality furnished by the tower.",
+   "uses": [
+    "lem-weil-pbc-fs-complete-degree-p-regular"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "def-weil-module-base-change",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-purely-inseparable-pth-root-tower",
+  "lem-weil-pbc-fs-complete-degree-p-regular"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition Tag 07PM, proof of (4) => (1), coefficient reduction and final two paragraphs; read at https://stacks.math.columbia.edu/tag/07PM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite purely inseparable degree p extension of a fraction field gives a tensor polynomial quotient with a derivation having unit value, for a complete formally smooth algebra",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularity of tensor products of formally smooth complete algebras over complete regular local rings with finite fraction field extensions, by purely inseparable degree induction and derivation with unit derivative",
+   "results": "Algebra.Smooth.exists_finiteType; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Algebra.Smooth.exists_subalgebra_finiteType; Algebra.Smooth.exists_subalgebra_fg; Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg; Algebra.FormallySmooth.instTensorProduct; Algebra.IsStandardSmoothOfRelativeDimension.baseChange; Algebra.FormallyUnramified.iff_exists_tensorProduct. These concern ordinary formal smoothness or finite presentation, and do not give the adic complete generic-fibre claims.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*derivation|derivation.*[Uu]nit|formallySmooth.*[Rr]egular|formallySmoothAdic|generic.*[Ff]iber, in the pinned Mathlib RingTheory and FieldTheory; corresponding concept/name searches in both project roots and DAG",
+   "results": "Only Mathlib.RingTheory.Nilpotent.Exp.exp_mul_of_derivation for the regex, unrelated. Project has the existing ingredient nodes for 07PH, 07PL, 07PG, 09HI and finite models; no combined adic complete degree-p unit-derivation construction or the new regular coefficient-domain statements. The existing finite-subalgebra-fraction-field declaration requires a polynomial/power-series base rather than an arbitrary complete domain.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormallySmoothCompleteLocalGenericFiber",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proposition 07PM (4) => (1), coefficient reduction and degree-p induction in lem-weil-pbc-formally-smooth-complete-local-generic-fiber",
+   "via": [
+    "lem-weil-pbc-formally-smooth-complete-local-generic-fiber"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormallySmoothRegularCompletePurelyInseparableRegular",
+  "file": "lean/Sheaf/RingTheory/FormallySmoothRegularCompletePurelyInseparableRegular.lean",
+  "declaration": "Algebra.isRegularRing_tensorProduct_of_formallySmoothAdic_regular_complete_purelyInseparable",
+  "statement": "theorem isRegularRing_tensorProduct_of_formallySmoothAdic_regular_complete_purelyInseparable\n    (A : Type u) (C : Type v) (K : Type u) (L : Type w)\n    [CommRing A] [IsDomain A] [IsRegularLocalRing A]\n    [CommRing C] [IsLocalRing C] [IsRegularRing C]\n    [Field K] [Field L] [Algebra A C] [Algebra A K] [Algebra K L] [Algebra A L]\n    [IsScalarTower A K L] [IsFractionRing A K] [Module.Finite K L]\n    [IsPurelyInseparable K L]\n    [IsLocalHom (algebraMap A C)]\n    [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\n    [IsAdicComplete (IsLocalRing.maximalIdeal C) C]\n    (hfs : FormallySmoothAdic A C (IsLocalRing.maximalIdeal C)) :\n    IsRegularRing (TensorProduct A L C)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457609",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T194118-L-457609",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
