@@ -106,6 +106,7 @@ def inventory(upstream):
             if len(fields) == 4 and fields[2] in out:
                 assigned[fields[0]] = fields[2]
     for m, units_for_module in owners.items():
+        if not units_for_module: continue
         assigned.setdefault(m, min(units_for_module, key=lambda u: (rank.get(u, len(rank)), u)))
     for s in order:
         s['modules'] = [m for m in s['modules'] if assigned.get(m, s['section']) == s['section']]
