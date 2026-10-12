@@ -9,7 +9,9 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
-import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
 
 /-! # Finite-term presentations on arbitrary affine schemes
 
@@ -40,6 +42,7 @@ noncomputable def affineModuleComplexFunctor (Y : Scheme.{u}) [IsAffine Y] :
       rw [tilde.map_zero]
       rfl⟩ (ComplexShape.up ℤ)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Every perfect quasi-coherent derived object on an affine scheme has a finite-term module
 complex presentation under the explicit associated-sheaf functor.
 Source: Stacks Project, Tag 08EB; Step 1 of lem-pc-perfect-affine-classes-small
@@ -67,6 +70,18 @@ theorem exists_affine_finite_module_presentation (Y : Scheme.{u}) [IsAffine Y]
     ∃ P : CochainComplex (ModuleCat.{u} Γ(Y, ⊤)) ℤ,
       (∀ n : ℤ, Module.Finite Γ(Y, ⊤) (P.X n)) ∧
       Nonempty (E.obj ≅ DerivedCategory.Q.obj ((affineModuleComplexFunctor Y).obj P)) := by
-  sorry
+  let A := Γ(Y, ⊤)
+  let : HasDerivedCategory.{u + 1} (SheafOfModules.{u}
+      (moduleRings (Spec (.of A)).toRingedSpace)) := HasDerivedCategory.standard _
+  let : ∀ U : (Spec (.of A)).Opens, HasDerivedCategory.{u + 1}
+      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) :=
+    fun _ ↦ HasDerivedCategory.standard _
+  obtain ⟨e, ⟨he⟩⟩ := exists_scheme_iso_derived_equivalence Y.isoSpec.symm
+  have hqc := scheme_iso_derived_inverse_preserves_qcoh Y.isoSpec.symm e he E
+  have hp := scheme_iso_derived_inverse_preserves_perfect Y.isoSpec.symm e he E.obj hE
+  let E' : schemeDerivedQCohCategory (Spec (.of A)) := ⟨e.inverse.obj E.obj, hqc⟩
+  obtain ⟨P, _, hf, _, ⟨hP⟩⟩ := (perfect_iff_affine_bounded_projective A E').mp hp
+  refine ⟨P, hf, ?_⟩
+  exact ⟨(e.counitIso.app E.obj).symm ≪≫ e.functor.mapIso hP ≪≫ he.app _⟩
 
 end AlgebraicGeometry.Scheme

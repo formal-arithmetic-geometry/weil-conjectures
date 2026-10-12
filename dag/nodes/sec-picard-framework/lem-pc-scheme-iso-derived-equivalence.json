@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-scheme-iso-derived-equivalence",
+ "kind": "statement",
+ "title": "Scheme-isomorphism equivalence on independent derived categories",
+ "statement": "Let X and Y be schemes in universe u [def-pc-scheme], s : X ≅ Y, and choose derived categories of their module sheaves [def-pc-derived-category] with independent morphism universes w₁ and w₂. There exists an equivalence e : D(O_X) ≌ D(O_Y) and a natural isomorphism Q_X ⋙ e.functor ≅ (s_* on cochain complexes) ⋙ Q_Y. The termwise functor uses the actual SheafOfModules.pushforward s.hom.toRingCatSheafHom, not a chosen derived functor.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Compose Scheme.Modules.pushforwardComp, pushforwardCongr of s.hom_inv_id and s.inv_hom_id, and pushforwardId to obtain a module-sheaf equivalence, with actual pushforwards as its functor and inverse. Equivalence.mk adjusts the triangle identity without changing these functors.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)"
+   }
+  },
+  {
+   "text": "Equivalence functors preserve limits and colimits and are additive. Apply Equivalence.mapHomologicalComplex and Functor.mapDerivedCategory to both sides. The factors isomorphisms and the termwise unit and counit produce the two comparisons required by Localization.equivalence, which gives an equivalence on the chosen derived categories. Its forward factorization is exactly Functor.mapDerivedCategoryFactors.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)",
+  "group": "M2",
+  "date": "2026-10-12",
+  "note": "Explicit scheme-isomorphism transport from the existing node proof; source checked at https://stacks.math.columbia.edu/tag/08EB and https://stacks.math.columbia.edu/tag/08CM. Mathlib localization and exact-functor constructions are used directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pushforward along a scheme isomorphism induces an equivalence of derived categories of sheaves of modules compatible with localization",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict inferred."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward along a scheme isomorphism preserves perfect complexes",
+   "date": "2026-10-12",
+   "results": "Functor.mapDerivedCategory, mapHomologicalComplexUpToQuasiIso, and its factors were returned, but no scheme-specific equivalence theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*[Ee]quiv|[Ee]quiv.*pushforward|mapDerivedCategory in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology",
+   "date": "2026-10-12",
+   "results": "Found generic Localization.equivalence, Equivalence.mapHomologicalComplex and Functor.mapDerivedCategory; used them directly.",
+   "verdict": "no exact scheme-level match; the listed ingredients are used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectAffineFinitePresentation",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine finite-presentation input: Step 1 and the quasi-coherence part of Step 2, isomorphism transport",
+   "via": [
+    "lem-pc-perfect-affine-finite-presentation",
+    "lem-pc-perfect-affine-classes-small",
+    "lem-pc-perfect-complexes-compact-set"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoDerivedEquivalence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_scheme_iso_derived_equivalence",
+  "statement": "theorem exists_scheme_iso_derived_equivalence {X Y : Scheme.{u}} (s : X ≅ Y)\n    [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w₂} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :\n    ∃ e : schemeDerivedCategory X ≌ schemeDerivedCategory Y,\n      Nonempty (DerivedCategory.Q ⋙ e.functor ≅\n        (@Functor.mapHomologicalComplex ℤ\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) _ _ _ _\n          (SheafOfModules.pushforward s.hom.toRingCatSheafHom)\n          ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

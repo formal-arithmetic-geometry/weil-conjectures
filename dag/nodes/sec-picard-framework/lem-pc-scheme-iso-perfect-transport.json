@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-scheme-iso-perfect-transport",
+ "kind": "statement",
+ "title": "Perfectness under an isomorphism-induced derived equivalence",
+ "statement": "Let s : X ≅ Y be a scheme isomorphism [def-pc-scheme]. Choose derived categories of module sheaves on X and all its open sites in morphism universe w₁, and on Y and all its open sites in morphism universe w₂ [def-pc-derived-category]. Let e : D(O_X) ≌ D(O_Y) have a natural isomorphism Q_X ⋙ e.functor ≅ (termwise pushforward along s.hom) ⋙ Q_Y. If E in D(O_Y) is perfect [def-pc-perfect-complex], then e.inverse.obj E is perfect on X. X and Y need not be affine, E need not be specified as quasi-coherent, and no relation between w₁ and w₂ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Identify e.functor with the localization of exact pushforward s.hom via the supplied comparison. The module-sheaf pushforward composition and identity comparisons and uniqueness of localization identify e.inverse with localization of pushforward s.inv. The same construction applies on every pair of corresponding open sites, with the independently given derived-category choices.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)"
+   }
+  },
+  {
+   "text": "For x in X choose the perfect neighbourhood V of s.hom(x) and local complex K supplied by IsPerfect Y E. Put U = s.hom⁻¹(V). The isomorphism identifies the two localized sites, their structure sheaves and the restriction of the inverse derived image. The associated exact module equivalence identifies finite free modules (free modules on ULift (Fin m) are coproducts of the structure module). It preserves the splitting maps and their composite identity, zero terms and the same degree bounds. Its termwise image of K is strictly perfect on U.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)"
+   }
+  },
+  {
+   "text": "Apply the localized open-site functor to the model isomorphism on V and use its localization factorization and restriction compatibility. This gives the required isomorphism from restriction of e.inverse.obj E to Q of the transported strictly perfect complex on U. Membership x ∈ U is precisely s.hom(x) ∈ V. These witnesses for all x prove IsPerfect. Empty schemes and zero complexes obey the same argument.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)",
+  "group": "M2",
+  "date": "2026-10-12",
+  "note": "Explicit scheme-isomorphism transport from the existing node proof; source checked at https://stacks.math.columbia.edu/tag/08EB and https://stacks.math.columbia.edu/tag/08CM. Mathlib localization and exact-functor constructions are used directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pushforward along an isomorphism preserves perfect complexes of sheaves of modules and quasi-coherent cohomology",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict inferred."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward along a scheme isomorphism preserves perfect complexes",
+   "date": "2026-10-12",
+   "results": "Returned generic exact-functor localization constructions only, not IsPerfect transport.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|perfect.*isomorphism|isomorphism.*perfect in Mathlib/AlgebraicGeometry and both source roots",
+   "date": "2026-10-12",
+   "results": "No Mathlib scheme-perfect predicate; Sheaf.DerivedPullbackPerfect concerns the specified derivedPullback in a shared universe and does not provide this independent-universe isomorphism comparison.",
+   "verdict": "no exact scheme-level match; the listed ingredients are used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectAffineFinitePresentation",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine finite-presentation input: Step 2, transport local strictly perfect models",
+   "via": [
+    "lem-pc-perfect-affine-finite-presentation",
+    "lem-pc-perfect-affine-classes-small",
+    "lem-pc-perfect-complexes-compact-set"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoPerfectTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.scheme_iso_derived_inverse_preserves_perfect",
+  "statement": "theorem scheme_iso_derived_inverse_preserves_perfect {X Y : Scheme.{u}}\n    (s : X ≅ Y)\n    [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w₂} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w₁} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ V : Y.Opens,\n      HasDerivedCategory.{w₂} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))]\n    (e : schemeDerivedCategory X ≌ schemeDerivedCategory Y)\n    (he : DerivedCategory.Q ⋙ e.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward s.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (E : schemeDerivedCategory Y) (hE : IsPerfect Y E) :\n    IsPerfect X (e.inverse.obj E)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

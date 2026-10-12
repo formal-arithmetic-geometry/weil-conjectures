@@ -1,0 +1,153 @@
+{
+ "id": "lem-pc-scheme-iso-derived-qcoh",
+ "kind": "statement",
+ "title": "Quasi-coherence under an isomorphism-induced derived equivalence",
+ "statement": "Let s : X ≅ Y be a scheme isomorphism [def-pc-scheme]. Choose D(O_X) and D(O_Y) [def-pc-derived-category] in independent morphism universes. Let e be an equivalence of these derived categories with a natural isomorphism Q_X ⋙ e.functor ≅ (termwise pushforward along s.hom) ⋙ Q_Y. If E is in D_QCoh(O_Y), then every cohomology sheaf of e.inverse.obj E is quasi-coherent, i.e. e.inverse.obj E belongs to D_QCoh(O_X). No perfection or choice of open-site derived categories is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Take a cochain representative P of e.inverse.obj E.obj using DerivedCategory.Q.objPreimage and its isomorphism. Map this isomorphism through e.functor, compose with the counit, and invert the supplied comparison at P. This identifies Q_Y(s_* P) with E.obj.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)"
+   }
+  },
+  {
+   "text": "Construct the sheaf equivalence with inverse pushforwards using pushforwardComp, pushforwardCongr and pushforwardId. Its forward functor F is exact. Compose the inverse of F.mapHomologicalComplexHomologyIso, the inverse Q-homology factorization, and homology of the preceding isomorphism. This identifies F(Hⁿ(P)) with Hⁿ(E), so the former is quasi-coherent.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)"
+   }
+  },
+  {
+   "text": "The inverse morphism s.inv is affine. Apply the quasi-coherence clause of lem-pc-affine-morphism-hi to F(Hⁿ(P)), then transfer through the inverse of the module equivalence unit to Hⁿ(P). Finally transfer through the homology factorization and the representative isomorphism to Hⁿ(e.inverse.obj E.obj). Do this for every integer n.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "lem-pc-affine-morphism-hi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EB, affine isomorphism transport in lem-pc-perfect-affine-finite-presentation; Tag 08CM (definition of perfection)",
+  "group": "M2",
+  "date": "2026-10-12",
+  "note": "Explicit scheme-isomorphism transport from the existing node proof; source checked at https://stacks.math.columbia.edu/tag/08EB and https://stacks.math.columbia.edu/tag/08CM. Mathlib localization and exact-functor constructions are used directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pushforward along an isomorphism preserves perfect complexes of sheaves of modules and quasi-coherent cohomology",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict inferred."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsQuasicoherent, pushforward",
+   "date": "2026-10-12",
+   "results": "No hits: Loogle reports IsQuasicoherent is unknown in its index.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isQuasicoherent.*push|push.*IsQuasicoherent in Mathlib/Algebra/Category/ModuleCat/Sheaf and the source library",
+   "date": "2026-10-12",
+   "results": "Mathlib has local-site pushforward criteria; the source theorem Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom supplies the module-sheaf preservation used here.",
+   "verdict": "no exact scheme-level match; the listed ingredients are used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectAffineFinitePresentation",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Affine finite-presentation input: Step 1 and the quasi-coherence part of Step 2, isomorphism transport",
+   "via": [
+    "lem-pc-perfect-affine-finite-presentation",
+    "lem-pc-perfect-affine-classes-small",
+    "lem-pc-perfect-complexes-compact-set"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeIsoDerivedQCoh.lean",
+  "declaration": "AlgebraicGeometry.Scheme.scheme_iso_derived_inverse_preserves_qcoh",
+  "statement": "theorem scheme_iso_derived_inverse_preserves_qcoh {X Y : Scheme.{u}} (s : X ≅ Y)\n    [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w₂} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (e : schemeDerivedCategory X ≌ schemeDerivedCategory Y)\n    (he : DerivedCategory.Q ⋙ e.functor ≅\n      (@Functor.mapHomologicalComplex ℤ\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) _ _ _ _\n        (SheafOfModules.pushforward s.hom.toRingCatSheafHom)\n        ⟨fun _ _ ↦ rfl⟩ (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q)\n    (E : schemeDerivedQCohCategory Y) :\n    schemeDerivedQCohProperty X (e.inverse.obj E.obj)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "split_report": {
+  "date": "2026-10-12",
+  "item": "Sheaf.AlgebraicGeometry.PerfectAffineFinitePresentation",
+  "worker": "stage3",
+  "summary": "Fully proved using exact pushforward and homology comparisons.",
+  "blueprint": "Quasi-coherence part of affine-isomorphism transport.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-morphism-hi",
+    "why": "Only the already-proved quasi-coherence clause for an affine morphism is used, specialized to the inverse scheme isomorphism. This is a generic tool, not a replacement for a unit step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101746",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T144128-L-2101746",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
