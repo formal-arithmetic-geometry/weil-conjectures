@@ -4,6 +4,7 @@ public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
 import Sheaf.AlgebraicGeometry.AffineConormalSections
 import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.DiagonalConormal
+import Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsChosen
 
 @[expose] public section
 
@@ -41,6 +42,15 @@ theorem exists_diagonalConormal_affine_sections_base (f : X ⟶ S)
     ∃ e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) ≃ₗ[Γ(X, U.1)]
           Γ(diagonalConormal f, U.1),
         ∀ a : Γ(X, U.1), e (CommRingCat.KaehlerDifferential.d a) =
-          D.d (X := op U.1) a := by sorry
+          D.d (X := op U.1) a := by
+  let D₀ := Classical.choose (exists_diagonalConormalDerivation f)
+  have hD₀ : IsDiagonalConormalDerivation f D₀ :=
+    Classical.choose_spec (exists_diagonalConormalDerivation f)
+  obtain ⟨e, he⟩ := exists_affine_sections_for_chosen_derivation f U V hUV
+  have hEq : D = D₀ := diagonalConormalDerivation_ext f hD hD₀
+  refine ⟨e, ?_⟩
+  intro a
+  rw [he a]
+  simp [D₀, hEq]
 
 end AlgebraicGeometry

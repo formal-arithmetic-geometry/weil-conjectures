@@ -1,0 +1,98 @@
+{
+ "id": "stage3-diagonal-conormal-chosen",
+ "kind": "lemma",
+ "title": "Affine sections for chosen normalized diagonal conormal derivation",
+ "statement": "For every f, U, V and hUV, the canonical normalized derivation chosen by exists_diagonalConormalDerivation admits an A-linear Kaehler differential equivalence with the asserted d-formula.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2"
+ },
+ "stmt_deps": [
+  "lem-sc-diagonal-conormal-derivation-exists"
+ ],
+ "proof": [
+  {
+   "text": "Perform the affine diagonal and conormal calculation of Tags 01KJ, 01R3 and 08S2.",
+   "uses": [
+    "lem-sc-diagonal-conormal-derivation-exists"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-diagonal-conormal-derivation-exists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2; stage-3 decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine sections Kahler differential equivalence for normalized diagonal conormal derivation",
+   "results": "No exact scheme-level match; ring and conormal infrastructure only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential conormal derivation",
+   "results": "Generic Kaehler differential and derivation lemmas; no exact scheme-level theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg \"diagonalConormalDerivation|affine_sections_for_chosen\" lean/Sheaf lean/WeilConjectures",
+   "results": "No existing declaration matching this intermediate theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsBase",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "stage3 decomposition",
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineSectionsChosen",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalConormalAffineSectionsChosen.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_sections_for_chosen_derivation",
+  "statement": "theorem exists_affine_sections_for_chosen_derivation (f : X ⟶ S)\n    (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :\n    let D := Classical.choose (exists_diagonalConormalDerivation f)\n    ∃ e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) ≃ₗ[Γ(X, U.1)]\n          Γ(diagonalConormal f, U.1),\n        ∀ a : Γ(X, U.1), e (CommRingCat.KaehlerDifferential.d a) =\n          D.d (X := op U.1) a",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T230804-L-1911661",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T230804-L-1911661",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
