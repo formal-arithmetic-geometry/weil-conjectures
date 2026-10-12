@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-direct-image-global-sections-kinjective-acyclic",
+ "kind": "statement",
+ "title": "Global-sections acyclicity of the direct image of a K-injective",
+ "statement": "For any scheme morphism f:X→Y [def-pc-scheme] and K-injective cochain complex I of O_X-modules [lem-sc-kinjective-quasi-iso-comparison], the right-derived unit for global sections on Y [def-pc-global-derived-rhom] evaluated at the homotopy-category image of f_*I is an isomorphism. The derived categories of O_Y-modules and Γ(Y,O_Y)-modules may have independent universes. There are no boundedness or qcqs hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 0D5T; applied to the global-sections point of Tag 0B6A"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "def-pc-global-derived-rhom"
+ ],
+ "proof": [
+  {
+   "text": "Let p_Y:Y→(pt,Γ(Y,O_Y)) be the constructed global-sections point morphism. Apply the successive-direct-image acyclicity theorem to f and p_Y, choosing the standard derived category of module sheaves on the point. The unit for p_Y direct image is invertible at f_*I.",
+   "uses": [
+    "def-pc-global-derived-rhom",
+    "lem-pc-ringed-space-direct-image-kinjective-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation on the point is an exact equivalence to Γ(Y,O_Y)-modules. Its composite with p_Y direct image is global sections, including the scalar action. The right-derived universal property gives the comparison compatible with the units. Applying the derived equivalence to the invertible unit from step 1, and conjugating by these comparison isomorphisms, proves the displayed global-sections unit invertible. No qcqs or boundedness condition is needed; for the identity morphism this reduces to the usual unit isomorphism on a K-injective, and for the zero complex all objects and maps are zero.",
+   "uses": [
+    "def-pc-global-derived-rhom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-global-derived-rhom",
+  "lem-pc-ringed-space-direct-image-kinjective-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W, 0D5T and the exact equivalence of modules on the global-sections point, Tag 0B6A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "globalSections.*(KInjective|acyclic)|(KInjective|acyclic).*globalSections",
+   "results": "[]",
+   "date": "2026-10-13",
+   "verdict": "no exact match: generic K-injective lemmas and ordinary injective derived vanishing do not give this unbounded sheaf acyclicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed spaces f, direct image of a K-injective complex is acyclic for derived global sections",
+   "results": "['CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ', 'CochainComplex.isKInjective_of_injective', 'CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex', 'CochainComplex.IsKInjective', 'CochainComplex.isKInjective_iff_rightOrthogonal', 'DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CochainComplex.cm5b.instInjectiveXIntI', 'CochainComplex.IsKInjective.rightOrthogonal']",
+   "date": "2026-10-13",
+   "verdict": "no exact match: generic K-injective lemmas and ordinary injective derived vanishing do not give this unbounded sheaf acyclicity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnit\", IsIso",
+   "results": "loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-13",
+   "verdict": "no exact match: generic K-injective lemmas and ordinary injective derived vanishing do not give this unbounded sheaf acyclicity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right-derived unit for global sections is invertible on the direct image of an unbounded K-injective complex of module sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-global-hom-adjunction",
+   "place": "Derived Leray comparison, global-sections acyclicity",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectImageGlobalSectionsKInjectiveAcyclic.lean",
+  "declaration": "AlgebraicGeometry.isIso_directImage_globalSections_unit_on_kInjective",
+  "statement": "theorem isIso_directImage_globalSections_unit_on_kInjective\n    {X Y : Scheme.{u}}\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [HasDerivedCategory.{wA}\n      (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤)))]\n    (f : X ⟶ Y)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    [I.IsKInjective] :\n    IsIso ((RingedSpace.globalSectionsFunctor Y.toRingedSpace).rightDerivedFunctorUnit.app\n      (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory\n          (.up ℤ)).obj ((HomotopyCategory.quotient _ (.up ℤ)).obj I)))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T184301-L-4003760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T184301-L-4003760",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
