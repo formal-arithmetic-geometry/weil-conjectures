@@ -9704,3 +9704,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 05:57 L: batch 20261012T215151 dependency take-out
 - 22:05 L: returned deliver/G1/Sheaf.AlgebraicGeometry.ProductResidueH1Injective (reviewer RETURN: (the landing tools, head 773993a6e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 22:05 L: returned deliver/M1/Sheaf.Algebra.Homology.UpperTruncationStepQuotient (reviewer RETURN: (the landing tools, head fb59ee470) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
