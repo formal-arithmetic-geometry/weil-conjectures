@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-presheaf-cech-sheaf-positive-exact",
+ "kind": "statement",
+ "title": "Positive exactness of the sheafified free presheaf Čech nerve",
+ "statement": "Let C have morphisms in universe v, let J be a Grothendieck topology, and assume abelian sheafification exists [def-weil-pbc-sites-and-cohomology]. For any arrow f:E→P of v-valued presheaves of sets, form A_n=(Z[N_n(f)])# with the alternating-face differential [def-sc-presheaf-cech-complex]. Then A is exact at n+1 for every natural n. No local-surjectivity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01GC, Lemma 25.4.2 and its proof; checked at https://stacks.math.columbia.edu/tag/01GC."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sc-presheaf-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "For any set map factor through its set-theoretic image. The inclusion is monic, so the wide-pullback universal properties give an isomorphism between the two nerves; nerveMonoIso constructs it and checks its naturality. The surjection onto the image has a right inverse by the proved choice theorem Function.Surjective.hasRightInverse. Mathlib Arrow.AugmentedCechNerve.extraDegeneracy, ExtraDegeneracy.map with AddCommGrpCat.free, and ExtraDegeneracy.homotopyEquiv give a homotopy equivalence with the free image group concentrated in degree zero. HomotopyEquiv.toHomologyIso and exactAt_iff_isZero_homology show exactness in every positive degree. All of this is proved in type_nerve_positive_exact, including the empty case.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation preserves finite limits. In nerveMapIso, preservesLimitIso and HasLimit.isoOfNatIso construct the comparison of the evaluated nerve with the nerve of the evaluated arrow; the projection and base equations prove naturality. Jointly faithful evaluation functors detect exactness by Mathlib JointlyReflectIsomorphisms.exact_iff. map_alternatingFaceMapComplex commutes evaluation with alternating faces. Hence the presheaf complex is exact in positive degrees; presheaf_nerve_positive_exact proves the claim.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Sheafification is exact and additive [lem-weil-pbc-sheafification-exact]. Map the proved presheaf short complexes by presheafToSheaf, then use map_alternatingFaceMapComplex to identify the result with the sheafified nerve complex.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Tag 01GC, Lemma 25.4.2 and its proof; checked at https://stacks.math.columbia.edu/tag/01GC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The alternating face map complex of the free abelian Cech nerve of an arbitrary map of presheaves is exact in positive degrees",
+   "results": "8 hits, including MayerVietorisSquare.shortComplex_exact and singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace; neither has the arbitrary presheaf-nerve statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy",
+   "results": "12 hits, including Arrow.AugmentedCechNerve.extraDegeneracy, ExtraDegeneracy.map and ExtraDegeneracy.homotopyEquiv. They give the contraction for a split epimorphism, but require the image and evaluation comparisons here.",
+   "date": "2026-10-13",
+   "verdict": "useful tools, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechNerve|homotopyEquiv",
+   "results": "CechNerve.lean and ExtraDegeneracy.lean provide the nerve, extra degeneracy and free contraction. The source library CechComplex.lean has cochain results on covering families, not this arbitrary presheaf chain complex. FreeCechComplexExactK1.lean concerns represented ringed-site module presheaves, not this statement. Blueprint search for sheafified free found no imported blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact augmented sheafified free abelian Cech nerve of a locally surjective map of presheaves",
+   "results": "UNAVAILABLE: service returned Internal Server Error; zero hits. No mathematical verdict is inferred from this failure.",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.PresheafCechSheafResolution",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "Second paragraph, via the presheaf-nerve vanishing criterion: augmented free nerve and its Hom comparison. This node isolates positive exactness of the sheafified free presheaf čech nerve.",
+   "via": [
+    "lem-sc-presheaf-cech-sheaf-resolution",
+    "lem-sc-presheaf-cech-ext-edge-kernel",
+    "lem-sc-presheaf-cech-ext-edge-injective",
+    "lem-sc-presheaf-cech-vanishing-criterion",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.PresheafCechSheafPositiveExact",
+  "file": "lean/Sheaf/CategoryTheory/Sites/PresheafCechSheafPositiveExact.lean",
+  "declaration": "CategoryTheory.Sheaf.presheafCechSheaf_positive_exact",
+  "statement": "theorem presheafCechSheaf_positive_exact\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{v}] (f : Arrow (Cᵒᵖ ⥤ Type v)) :\n  let F := (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙\n    presheafToSheaf J AddCommGrpCat\n  let A := (AlgebraicTopology.alternatingFaceMapComplex _).obj (f.cechNerve ⋙ F)\n  ∀ n : ℕ, A.ExactAt (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T230751-L-1906656",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T230751-L-1906656",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

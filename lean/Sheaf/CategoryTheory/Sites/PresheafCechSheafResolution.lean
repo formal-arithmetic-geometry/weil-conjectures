@@ -9,7 +9,8 @@ public import Sheaf.CategoryTheory.Sites.PresheafCechComplex
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicTopology.SetCechNerveFreeResolution
+import Sheaf.CategoryTheory.Sites.PresheafCechSheafPositiveExact
+import Sheaf.CategoryTheory.Sites.PresheafCechSheafAugmentationExact
 
 /-!
 # The augmented sheafified free presheaf Čech resolution
@@ -87,6 +88,90 @@ theorem exists_presheafCechSheafResolution
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}] (f : Arrow (Cᵒᵖ ⥤ Type v))
     (hf : Presheaf.IsLocallySurjective J f.hom) :
-    Nonempty (PresheafCechSheafResolution (J := J) f) := by sorry
+    Nonempty (PresheafCechSheafResolution (J := J) f) := by
+  let F := presheafCechFreeSheafFunctor J
+  let A := presheafCechSheafComplex J f
+  let ε : A.X 0 ⟶ F.obj f.right :=
+    F.map (WidePullback.base (fun _ : Fin 1 ↦ f.hom))
+  obtain ⟨hε, hex, hepi⟩ := presheafCechSheaf_augmentation_exact f hf
+  have hpos := presheafCechSheaf_positive_exact J f
+  let B : ℕ → Sheaf J AddCommGrpCat.{v}
+    | 0 => F.obj f.right
+    | n + 1 => A.X n
+  let g : ∀ n, A.X n ⟶ B n
+    | 0 => ε
+    | n + 1 => A.d (n + 1) n
+  have hz : ∀ n, A.d (n + 1) n ≫ g n = 0 := by
+    intro n
+    cases n with
+    | zero => exact hε
+    | succ n => exact A.d_comp_d _ _ _
+  let S : ℕ → ShortComplex (Sheaf J AddCommGrpCat.{v}) := fun n ↦
+    ShortComplex.mk (A.d (n + 1) n) (g n) (hz n)
+  have hS : ∀ n, (S n).Exact := by
+    intro n
+    cases n with
+    | zero => exact hex
+    | succ n =>
+      exact (HomologicalComplex.exactAt_iff' A (n + 2) (n + 1) n
+        (by simp) (by simp)).1 (hpos n)
+  let K := fun n ↦ (S n).cycles
+  let i : ∀ n, K n ⟶ A.X n := fun n ↦ (S n).iCycles
+  let p : ∀ n, A.X (n + 1) ⟶ K n := fun n ↦ (S n).toCycles
+  have hi : ∀ n, Mono (i n) := fun n ↦ inferInstanceAs (Mono (S n).iCycles)
+  have hp : ∀ n, Epi (p n) := fun n ↦ (hS n).epi_toCycles
+  have hd : ∀ n, p n ≫ i n = A.d (n + 1) n := fun n ↦ (S n).toCycles_i
+  have hzero : ∀ n, i (n + 1) ≫ p n = 0 := by
+    intro n
+    apply (cancel_mono (i n)).1
+    rw [Category.assoc, hd, zero_comp]
+    exact (S (n + 1)).iCycles_g
+  have hshort : ∀ n, (ShortComplex.mk (i (n + 1)) (p n) (hzero n)).ShortExact := by
+    intro n
+    let T := ShortComplex.mk (i (n + 1)) (p n) (hzero n)
+    let U := ShortComplex.mk (i (n + 1)) (A.d (n + 1) n)
+      ((S (n + 1)).iCycles_g)
+    let φ : T ⟶ U := ShortComplex.homMk (𝟙 _) (𝟙 _) (i n)
+      (by dsimp [T, U]; simp) (by dsimp [T, U]; simpa using (hd n).symm)
+    have : Epi φ.τ₁ := inferInstanceAs (Epi (𝟙 _))
+    have : IsIso φ.τ₂ := inferInstanceAs (IsIso (𝟙 _))
+    have : Mono φ.τ₃ := hi n
+    refine ShortComplex.ShortExact.mk' ?_ (hi (n + 1)) (hp n)
+    apply (ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ).2
+    exact U.exact_of_f_is_kernel (S (n + 1)).cyclesIsKernel
+  let e : f.cechNerve.obj (Opposite.op (SimplexCategory.mk 0)) ≅ f.left :=
+    { hom := WidePullback.π (fun _ : Fin 1 ↦ f.hom) 0
+      inv := WidePullback.lift f.hom (fun _ : Fin 1 ↦ 𝟙 f.left) (by simp)
+      hom_inv_id := by
+        apply WidePullback.hom_ext
+        · intro j
+          have hj : j = 0 := by
+            apply Fin.ext
+            have hj := j.isLt
+            change j.val < 1 at hj
+            change j.val = 0
+            omega
+          subst j
+          simp [Category.assoc]
+        · simp [Category.assoc]
+      inv_hom_id := by simp }
+  let e₀ : A.X 0 ≅ F.obj f.left := F.mapIso e
+  have he₀ : e₀.hom ≫ F.map f.hom = ε := by
+    change F.map e.hom ≫ F.map f.hom = ε
+    rw [← F.map_comp]
+    exact congrArg F.map (WidePullback.π_arrow _ 0)
+  have hinitial : i 0 ≫ (e₀.hom ≫ F.map f.hom) = 0 := by
+    rw [he₀]
+    exact (S 0).iCycles_g
+  refine ⟨⟨K, i, p, e₀, hinitial, ?_, hzero, hshort, hd⟩⟩
+  have : Epi ε := hepi
+  have : Epi (e₀.hom ≫ F.map f.hom) := by rwa [he₀]
+  refine ShortComplex.ShortExact.mk' ?_ (hi 0) inferInstance
+  let T := ShortComplex.mk (i 0) ε (S 0).iCycles_g
+  have hT : T.Exact := T.exact_of_f_is_kernel (S 0).cyclesIsKernel
+  let φ : (ShortComplex.mk (i 0) (e₀.hom ≫ F.map f.hom) hinitial) ≅ T :=
+    ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _)
+      (by simp [T]) (by dsimp [T]; simpa using he₀.symm)
+  exact (ShortComplex.exact_iff_of_iso φ).2 hT
 
 end CategoryTheory.Sheaf
