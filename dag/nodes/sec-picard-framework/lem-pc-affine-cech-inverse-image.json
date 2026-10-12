@@ -1,0 +1,114 @@
+{
+ "id": "lem-pc-affine-cech-inverse-image",
+ "kind": "statement",
+ "title": "Inverse-image compatibility on affine Cech cocycles",
+ "statement": "Let $R,S$ be commutative rings, $X,Y$ schemes [def-pc-scheme], $g:Y\\to X$, $f:X\\to\\operatorname{Spec}R$, and $f':Y\\to\\operatorname{Spec}S$. Let $U=(U_i)_{i\\in I}$ and $V=(V_i)_{i\\in I}$ be open covers, with every tuple intersection affine and $V_{i_0\\ldots i_k}\\subseteq g^{-1}U_{i_0\\ldots i_k}$. Let $M,N$ be quasi-coherent modules [pqf-def-coherent] on $X,Y$, and $\\varphi:M\\to g_*N$. Use the ordered Cech complexes and coordinates of [lem-pc-flat-cech-base-change], and the cohomology, exact inverse image, constant integer sheaf comparison and adjoint coefficient map of [def-pc-flat-cohomology-comparison]. For every $q\\in\\mathbb N$, there are $R$-linear and $S$-linear Leray isomorphisms $e:H^q(C(U,M))\\simeq HOver(f,M,q)$ and $e':H^q(C(V,N))\\simeq HOver(f',N,q)$ such that any cycles $z,z'$ whose coordinates satisfy $z'_{i_0\\ldots i_q}=\\varphi(z_{i_0\\ldots i_q})|_{V_{i_0\\ldots i_q}}$ have $e'([z'])=H(\\operatorname{coeff}(g,\\varphi))(H(\\operatorname{invImage}g,\\operatorname{constIso}(g)^{-1})(e([z])))$. No scalar-algebra relation between the two bases, finiteness of $I$, or flatness is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-flat-cech-base-change"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, commutative Cech-to-cohomology diagram"
+ },
+ "proof": [
+  {
+   "text": "Form augmented Cech double complexes of injective resolutions and compare through a resolution of the pushed-forward target resolution, as in the full diagram of Stacks 01FD. The coordinate hypothesis makes the coefficient-augmentation pentagon commute. The global-section augmentation is a quasi-isomorphism by injective Cech acyclicity; affine acyclicity gives the two linear Leray edge isomorphisms. Their scalar linearity follows by applying functoriality to multiplication. Following the outer diagram gives the equality on cocycle classes, and the constant integer sheaf comparison identifies this action with the specified exact inverse-image Ext map.",
+   "uses": [
+    "lem-sc-cech-spectral",
+    "lem-pc-cech-computes",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cech-spectral",
+  "lem-pc-cech-computes",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Proof, double-complex diagram and outer-side equality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech comparison map from Cech cohomology to sheaf cohomology natural under inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray Cech to sheaf cohomology comparison compatible with inverse image maps on matching cocycles",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda; groupCohomology.cocyclesMap_comp_isoCocycles₁_hom; groupCohomology.cocyclesMap_comp_isoCocycles₂_hom; groupCohomology.cochainsMap_f_2_comp_cochainsIso₂; CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback; groupCohomology.cochainsMap_f_1_comp_cochainsIso₁; groupCohomology.cocyclesMap_comp_isoCocycles₁_hom_apply; groupCohomology.cocyclesMap_cocyclesIso₀_hom_f_apply",
+   "date": "2026-10-12",
+   "verdict": "No matching Cech inverse-image comparison declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(pullback|inverseImage|naturality)",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No matching Cech inverse-image comparison declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechCocycles",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof, separated-case Cech paragraph: functoriality of the Cech-to-cohomology comparison before tensor extension.",
+   "via": [
+    "lem-pc-flat-cech-cohomology-square",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/AffineCechInverseImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affineCech_inverseImage",
+  "statement": "theorem exists_affineCech_inverseImage {R S : Type u} [CommRing R] [CommRing S] {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X) (f : X ⟶ Spec (.of R)) (f' : Y ⟶ Spec (.of S)) (U : ι → X.Opens) (V : ι → Y.Opens) (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l))) (hV : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, V (y l))) (hcover : iSup U = ⊤) (hcover' : iSup V = ⊤) (M : X.Modules) (N : Y.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent] (φ : M ⟶ (pushforward g).obj N) (q : ℕ) (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι), (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l))) : ∃ e : (cechOver f U M).homology q ≅ ModuleCat.of R (HOver f M q), ∃ e' : (cechOver f' V N).homology q ≅ ModuleCat.of S (HOver f' N q), ∀ (z : (cechOver f U M).cycles q) (z' : (cechOver f' V N).cycles q), (∀ y : Fin (q + 1) → ι, cechCoordinate f' V N q y ((cechOver f' V N).iCycles q z') = N.presheaf.map (homOfLE (hinter q y)).op (φ.val.app (op (⨅ l, U (y l))) (cechCoordinate f U M q y ((cechOver f U M).iCycles q z)))) → e'.hom ((cechOver f' V N).homologyπ q z') = Sheaf.H.map (coeff g φ) q (Sheaf.H.mapFunctor (invImage g) (constIso g).symm ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) q (e.hom ((cechOver f U M).homologyπ q z)))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T110319-L-621806",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T110319-L-621806",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

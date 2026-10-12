@@ -6,10 +6,9 @@ Authors: SHEAF group D2
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
-import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+import Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # The inverse-image Cech comparison on cocycles
 
@@ -101,6 +100,43 @@ theorem exists_cechBaseChange_cocycle_comparison
           (baseChangedModule (S := S) f M)).homologyπ q
             (extendedCechCycles f U M c q ((1 : S) ⊗ₜ[R] z))) =
           H.baseChangeLinear (S := S) f M q (e.hom ((cechOver f U M).homologyπ q z)) := by
-  sorry
+  classical
+  have : IsSeparated (terminal.from X) := by
+    rw [← terminal.comp_from f]
+    infer_instance
+  have hI (k : ℕ) (y : Fin (k + 1) → ι) : IsAffineOpen (⨅ l, U (y l)) :=
+    IsAffineOpen.iInf (fun l ↦ hU (y l))
+  have : IsAffineHom (baseChangeFst (S := S) f) := by
+    exact MorphismProperty.pullback_fst (P := @IsAffineHom) _ _
+      (isAffineHom_of_isAffine (baseChangeMap R S))
+  have : (baseChangedModule (S := S) f M).IsQuasicoherent := by
+    dsimp [baseChangedModule]
+    infer_instance
+  have hV (k : ℕ) (y : Fin (k + 1) → ι) :
+      IsAffineOpen (⨅ l, baseChangeCover (S := S) f U (y l)) := by
+    have he : (⨅ l, baseChangeCover (S := S) f U (y l)) =
+        baseChangeFst (S := S) f ⁻¹ᵁ (⨅ l, U (y l)) := by
+      ext x
+      simp [baseChangeCover, TopologicalSpace.Opens.coe_iInf, Set.mem_iInter]
+    rw [he]
+    exact (hI k y).preimage _
+  have hcover' : iSup (baseChangeCover (S := S) f U) = ⊤ :=
+    (baseChangeFst (S := S) f).iSup_preimage_eq_top hcover
+  obtain ⟨e, e', he⟩ := exists_affineCech_inverseImage
+    (baseChangeFst (S := S) f) f (baseChangeSnd (S := S) f)
+    U (baseChangeCover (S := S) f U) hI hV hcover hcover' M
+    (baseChangedModule (S := S) f M) (baseChangeUnit (S := S) f M) q
+    (baseChangeCover_intersection_le (S := S) f U)
+  refine ⟨e, e', fun z ↦ he z _ ?_⟩
+  intro y
+  have hi : (cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)
+      (baseChangedModule (S := S) f M)).iCycles q
+        (extendedCechCycles f U M c q ((1 : S) ⊗ₜ[R] z)) =
+          c.f q ((1 : S) ⊗ₜ[R] ((cechOver f U M).iCycles q z)) := by
+    dsimp only [extendedCechCycles]
+    rw [← ConcreteCategory.comp_apply, HomologicalComplex.liftCycles_i]
+    rfl
+  rw [hi]
+  simpa using hc q y 1 ((cechOver f U M).iCycles q z)
 
 end AlgebraicGeometry.Scheme.Modules
