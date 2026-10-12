@@ -27,65 +27,63 @@
  ],
  "proof": [
   {
-   "text": "Use the presheaf construction of [def-weil-pbc-site-extension-by-zero-presheaf]. It is additive, and for a morphism alpha its presheaf-level map is the direct sum, over all maps V \\to W, of the corresponding component maps of alpha.",
+   "text": "The explicit presheaf map is DirectSum.map on the section homomorphisms, by extensionality on direct-sum injections. Presheaf evaluation preserves monomorphisms, which in AddCommGrpCat are precisely injective homomorphisms. DirectSum.map_injective proves preservation of monomorphisms by presheaf extension by zero.",
    "uses": [
-    "def-weil-pbc-site-extension-by-zero-presheaf"
+    "def-weil-pbc-site-extension-by-zero-presheaf",
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites, Section 03DH and Lemma 03DJ, proof: construction of j_{U!}"
+    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact)"
    }
   },
   {
-   "text": "If alpha:F_1 \\to F_2 is a monomorphism of abelian sheaves on C/W, then its underlying presheaf morphism has sectionwise injective components: the sheaf inclusion preserves kernels, so the kernel is the sectionwise kernel by [lem-weil-pbc-sheafification-exact], and evaluation of presheaves is exact by [lem-weil-pbc-abelian-presheaves-evaluation-exact]. Therefore, at each V, the direct-sum map (j_{W,p!}alpha)_V is injective, since a finite-support element in its kernel has each component in the kernel of an injective alpha_{(V \\to W)}.",
-   "uses": [
-    "def-weil-pbc-site-extension-by-zero-presheaf",
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-abelian-presheaves-evaluation-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact), proof: the displayed direct-sum map on sections"
-   }
-  },
-  {
-   "text": "The presheaf map in Step 2 has zero kernel. Sheafification preserves finite limits, in particular kernels, by [lem-weil-pbc-sheafification-exact]. Hence its sheafification j_{W!}alpha has zero kernel and is a monomorphism in Ab(C).",
+   "text": "The sheaf inclusion and sheafification preserve finite limits, hence monomorphisms. Compose these with the presheaf functor of Step 1 to obtain monomorphism preservation by siteExtensionByZeroSheaf.",
    "uses": [
     "def-weil-pbc-site-extension-by-zero-presheaf",
     "lem-weil-pbc-sheafification-exact"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites, Lemma 03DJ, proof: sheafification is exact"
+    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact)"
    }
   },
   {
-   "text": "For a short exact sequence 0 \\to F_1 \\to F_2 \\to F_3 \\to 0, the last map F_2 \\to F_3 is a cokernel of the first by [lem-weil-pbc-abelian-exact-epi-cokernel]. The functor F \\mapsto (j_{W,p!}F)^\\# of Steps 1-3 is left adjoint to restriction by [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint], so it preserves this cokernel by [lem-weil-pbc-left-adjoint-preserves-colimits]. Thus (j_{W,p!}F_2)^\\# \\to (j_{W,p!}F_3)^\\# is a cokernel of (j_{W,p!}F_1)^\\# \\to (j_{W,p!}F_2)^\\#.",
+   "text": "The explicit sheaf functor and sheafPullbackConstruction.sheafPullback are both left adjoint to restriction. The existing presheaf adjunction gives the first adjunction; sheafAdjunctionContinuous gives the second. Adjunction.leftAdjointUniq gives their natural isomorphism, and Functor.PreservesMonomorphisms.of_iso transfers Step 2.",
    "uses": [
-    "lem-weil-pbc-abelian-exact-epi-cokernel",
-    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact), proof: right exactness from the adjunction"
-   }
-  },
-  {
-   "text": "The first map (j_{W,p!}F_1)^\\# \\to (j_{W,p!}F_2)^\\# is monic by Steps 2-3, and the second is its cokernel by Step 4. The abelian-category criterion [lem-weil-pbc-abelian-exact-epi-cokernel] therefore gives a short exact sequence 0 \\to (j_{W,p!}F_1)^\\# \\to (j_{W,p!}F_2)^\\# \\to (j_{W,p!}F_3)^\\# \\to 0. By [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint] and [lem-weil-pbc-site-restriction-adjunction], both F \\mapsto (j_{W,p!}F)^\\# and j_{W!} are left adjoint to j_W^*, so they are naturally isomorphic (uniqueness of adjoints); a sequence isomorphic to a short exact sequence is short exact, so 0 \\to j_{W!}F_1 \\to j_{W!}F_2 \\to j_{W!}F_3 \\to 0 is exact.",
-   "uses": [
-    "lem-weil-pbc-abelian-exact-epi-cokernel",
     "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
     "lem-weil-pbc-site-restriction-adjunction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact), conclusion"
+    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact)"
+   }
+  },
+  {
+   "text": "Restriction is additive by sectionwise evaluation. Its left adjoint is additive by Adjunction.left_adjoint_additive and therefore preserves zero morphisms. It preserves colimits by Adjunction.leftAdjoint_preservesColimits. For a short exact complex S, the final map is a cokernel of the first; CokernelCofork.mapIsColimit maps this universal property to the chosen extension functor.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact)"
+   }
+  },
+  {
+   "text": "ShortComplex.exact_and_epi_g_iff_g_is_cokernel applied to the mapped cokernel gives exactness and an epimorphic final map. The first map is monic by Step 3. Construct ShortComplex.ShortExact from these properties.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact)"
    }
   }
  ],
@@ -93,15 +91,15 @@
   "def-weil-pbc-site-extension-by-zero-presheaf",
   "lem-weil-pbc-abelian-presheaves-evaluation-exact",
   "lem-weil-pbc-sheafification-exact",
-  "lem-weil-pbc-abelian-exact-epi-cokernel",
   "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
   "lem-weil-pbc-site-restriction-adjunction",
-  "lem-weil-pbc-left-adjoint-preserves-colimits"
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-abelian-exact-epi-cokernel"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact) and its proof"
+  "place": "Lemma 03DJ; Lean implementation by U1 using the existing 03DI adjunction and Mathlib direct-sum injectivity and cokernel mapping"
  },
  "mathlib_searches": [
   {
@@ -201,5 +199,15 @@
   "group": "G1",
   "result": "pass",
   "note": "site = Precoverage C + HasIsos/IsStableUnderComposition/IsStableUnderBaseChange/HasPullbacks per def-weil-pbc-sites-and-cohomology record; localized topology J.toGrothendieck.over W (Sites/Over.lean); Ab sheaves AddCommGrpCat.{u}; j_W! = sheafPullbackConstruction.sheafPullback (Over.forget W), the functor of the restriction-adjunction mathlib_match sheafAdjunctionContinuous; SES clause as ShortExact -> (S.map j_W!).ShortExact; ∃ hL is a Prop witness (PreservesZeroMorphisms : Prop, not inferable: no IsLeftAdjoint instance on the construction), implied by exactness, precedent DiscreteModulesAbelian; compile 2 s measured"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T135322-L-1695070",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
