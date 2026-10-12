@@ -7,9 +7,8 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.Algebra.Polynomial.Basic
-import Sheaf.RingTheory.RegularBaseChange
-import Sheaf.RingTheory.LocalizationRegular
-import Sheaf.RingTheory.RegularThroughLocalization
+import Sheaf.RingTheory.PolynomialGRingRegularComparison
+import Sheaf.RingTheory.FibreRingNoetherian
 import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.PolynomialCompleteLocalFormalFibres
 import Sheaf.RingTheory.RegularComposition
@@ -56,4 +55,23 @@ theorem exists_polynomial_flat_local_regular_completion_comparison
           x ∈ IsLocalRing.maximalIdeal (Localization.AtPrime Q) →
             φ x ∈ IsLocalRing.maximalIdeal B) ∧
         ((algebraMap B (AdicCompletion (IsLocalRing.maximalIdeal B) B)).comp φ).IsRegular := by
-  sorry
+  obtain ⟨S, hS, hSN, hSL, hSC, Q', hQ', hQc, φ, hφ, hlocal⟩ :=
+    exists_polynomial_regular_local_comparison R hR Q
+  let := hS
+  let := hSN
+  let := hSL
+  let := hSC
+  let := hQ'
+  let B := Localization.AtPrime Q'
+  let A := Localization.AtPrime Q
+  let C := AdicCompletion (IsLocalRing.maximalIdeal B) B
+  let : Algebra A B := φ.toAlgebra
+  let : Algebra A C := ((algebraMap B C).comp φ).toAlgebra
+  let : IsScalarTower A B C := IsScalarTower.of_algebraMap_eq' rfl
+  have hB : IsNoetherianRing B := inferInstance
+  let : IsNoetherianRing C := AdicCompletion.isNoetherianRing _
+  have hc : (algebraMap B C).IsRegular := Polynomial.completeLocalFormalFibres S Q' hQc
+  have hcomp : (algebraMap A C).IsRegular :=
+    RingHom.IsRegular.comp_of_fiber_noetherian hφ hc
+      (fun p _ ↦ Ideal.isNoetherianRing_fiber p)
+  exact ⟨B, inferInstance, inferInstance, hB, φ, hφ.1, hlocal, hcomp⟩

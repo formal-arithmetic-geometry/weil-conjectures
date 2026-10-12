@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-polynomial-g-ring-regular-comparison",
+ "kind": "statement",
+ "title": "Regular local comparison for a polynomial G-ring localization",
+ "statement": "Let R be a G-ring [def-weil-pbc-g-ring] and Q a maximal ideal of R[X]. There exist a Noetherian local ring S [def-weil-pbc-noetherian-ring], complete at its maximal ideal m [def-weil-pbc-adically-complete-ring], a maximal ideal Q\\prime of S[X] with inverse image m under S to S[X], and a regular map [def-weil-pbc-g-ring] φ : R[X]_Q to S[X]_{Q\\prime} [def-weil-pbc-localization-at-prime] sending the maximal ideal of its source into the maximal ideal of its target.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition 07PV, completion square, second paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Contract Q to p and put A = R_p. Extend Q to a maximal ideal q of A[X] and identify A[X]_q with R[X]_Q. Complete A at its maximal ideal to obtain S; the completion is Noetherian, local, and complete. The common residue field gives a maximal ideal Q' of S[X] whose contraction is the maximal ideal of S. The maximal ideal of S is the extension of the finitely generated maximal ideal of A; completeness of completion for that extended ideal gives completeness at the maximal ideal of S.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change the regular map A to S along A to A[X], then localize at Q'. The resulting map is regular and flat. Its contraction identity makes it local, and transport along A[X]_q ≃ R[X]_Q gives the stated map. Composition is justified by regular composition and Noetherian fibres of the Noetherian target.",
+   "uses": [
+    "lem-weil-pbc-regular-base-change",
+    "lem-weil-pbc-localization-regular",
+    "lem-weil-pbc-regular-through-localization",
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-fibre-ring-noetherian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-regular",
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-regular-through-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition 07PV, completion square, second paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A G-ring polynomial localization admits a regular local map to a polynomial localization over a complete Noetherian local ring",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A G-ring polynomial localization admits a regular local map into a polynomial localization over a complete Noetherian local ring",
+   "results": "Eight hits concerning standard smooth localization; no G-ring completion comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completeLocalFormalFibres|exists.*regular.*comparison",
+   "results": "No matches in the Mathlib grep search. Separate rg searches in Sheaf and WeilConjectures found only the original comparison and the maximal-ideal comparison, whose hypotheses differ.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular morphism from a localization of a polynomial ring to a polynomial ring over the completion of its coefficient local ring",
+   "results": "Second reading: eight standard-smooth localization hits; none constructs this comparison map.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial, Localization.AtPrime",
+   "results": "Second reading: eleven hits on polynomial residue fields, unramified maps, universal factorization, and regular local polynomial rings; none supplies the comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*polynomial|polynomial.*completion|regular.*local.*comparison",
+   "results": "Second reading: completion/power-series and Laurent-series hits only. Local rg of both library roots found no duplicate comparison with these hypotheses.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialGRingComparison",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-type-over-g-ring-formal-fibres",
+   "place": "formal-fibre comparison step",
+   "via": [
+    "lem-weil-pbc-finite-type-over-g-ring-formal-fibres"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialGRingRegularComparison",
+  "file": "lean/Sheaf/RingTheory/PolynomialGRingRegularComparison.lean",
+  "declaration": "exists_polynomial_regular_local_comparison",
+  "statement": "theorem exists_polynomial_regular_local_comparison (R : Type u) [CommRing R] (hR : IsGRing R) (Q : Ideal (Polynomial R)) [Q.IsMaximal] : ∃ (S : Type u) (_ : CommRing S) (_ : IsNoetherianRing S) (_ : IsLocalRing S) (_ : IsAdicComplete (IsLocalRing.maximalIdeal S) S), ∃ (Q' : Ideal (Polynomial S)) (_ : Q'.IsMaximal), Q'.comap (Polynomial.C : S →+* Polynomial S) = IsLocalRing.maximalIdeal S ∧ ∃ φ : Localization.AtPrime Q →+* Localization.AtPrime Q', φ.IsRegular ∧ (∀ x : Localization.AtPrime Q, x ∈ IsLocalRing.maximalIdeal (Localization.AtPrime Q) → φ x ∈ IsLocalRing.maximalIdeal (Localization.AtPrime Q'))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085402-L-48928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085402-L-48928",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
