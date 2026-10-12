@@ -63,8 +63,13 @@ pushforward `AlgebraicGeometry.Etale.lowerStar` and the pullback
 def Hom.Etale (f : X ⟶ Y) : Y.Etale ⥤ X.Etale :=
   MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f
 
-instance (f : X ⟶ Y) : PreservesFiniteLimits f.Etale :=
-  inferInstanceAs <| PreservesFiniteLimits (MorphismProperty.Over.pullback @Etale ⊤ f)
+/-- The base change functor `f.Etale : Y.Etale ⥤ X.Etale`, `W ↦ W ×_Y X`, preserves finite
+limits. The small étale sites have finite limits (`MorphismProperty.Over.hasFiniteLimits`):
+the identity is a terminal object and fibre products are computed in schemes.
+(blueprint: `lem-weil-pbc-etale-base-change-finite-limits`) -/
+instance Hom.preservesFiniteLimits_etale (f : X ⟶ Y) : PreservesFiniteLimits f.Etale :=
+  inferInstanceAs <|
+    PreservesFiniteLimits (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f)
 
 /-- The base change functor `f.Etale` is representably flat: the small étale site of `Y`
 has finite limits and base change preserves them. -/
