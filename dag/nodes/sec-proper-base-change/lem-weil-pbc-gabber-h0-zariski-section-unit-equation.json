@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-gabber-h0-zariski-section-unit-equation",
+ "kind": "statement",
+ "title": "Core section isomorphism unit identity",
+ "statement": "Let $i:Z\\to X$ and $h:X\\prime\\to X$ be scheme morphisms and $F$ an étale sheaf of sets [def-weil-pbc-etale-sheaf-of-sets]. Use the explicitly constructed lift, comparison and preimage-open isomorphism [def-weil-pbc-gabber-h0-zariski-constructions], and put $f=\\mathrm{pr}_2:Z\\times_X X\\prime\\to X\\prime$ [def-pc-fibre-product]. As functions on $G(X\\prime)$, the composite of the étale unit for $f$ at the top-open étale object, restriction along the preimage-open isomorphism, and the canonical section comparison equals the function sending $s$ to the étale descent comparison for $h$ followed by $f$ applied to lift($s$), transported along pullback.condition.symm. There is no arbitrary Zariski comparison beta, no unit-compatibility hypothesis, and no closedness or finiteness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, fourth proof paragraph"
+ },
+ "proof": [
+  {
+   "text": "With f, B, p, b and a as in the Lean docstring, prove a.inv composed with p.hom equals B.map b.inv by forgetting to schemes, comparing both pullback projections and using that the top-open inclusion is an isomorphism. Contravariant functoriality of the iterated pullback sheaf gives K.map a.inv.op after K.map p.hom.op equal to K.map (B.map b.inv).op.",
+   "uses": [
+    "def-weil-pbc-gabber-h0-zariski-constructions",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate that equality on the étale unit at the top-open object. Unit naturality at b.inv identifies the result with the unit at the identity-pullback object applied to lift(s). Expand the remaining factors of the constructed section isomorphism: they are the same chosen sheaf composition component, pullbackComp restriction, and pullback.condition.symm transport as in etaleSetDescentComparison. Function extensionality gives the equality. Empty schemes satisfy the same categorical equalities.",
+   "uses": [
+    "def-weil-pbc-gabber-h0-zariski-constructions",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-gabber-h0-zariski-constructions",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "X2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, pullback-functoriality paragraph and fourth proof paragraph",
+  "note": "Expanded categorical computation of the compatibility left to the reader in the source; checked independently by the second reader."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberH0ZariskiTopUnitEquation",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph; the preceding paragraph states pullback functoriality",
+   "via": [
+    "lem-weil-pbc-gabber-h0-zariski-top-unit-equation",
+    "lem-weil-pbc-gabber-h0-zariski-local-data",
+    "lem-weil-pbc-gabber-h0-zariski-gluing",
+    "lem-weil-pbc-gabber-h0-finite-section"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GabberH0ZariskiSectionUnitEquation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberH0ZariskiSectionUnitEquation.lean",
+  "declaration": "AlgebraicGeometry.gabber_h0_zariski_section_unit_equation",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13",
+  "statement": "theorem gabber_h0_zariski_section_unit_equation\n    {X Z X' : Scheme.{u}} (i : Z ⟶ X) (h : X' ⟶ X)\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :\n    gabberZariskiCompare i h F ∘\n      (((Scheme.etaleSetPullback (pullback.snd i h)).obj\n        ((Scheme.etaleSetPullback h).obj F)).obj.map\n          (gabberPreimageEtaleIso (pullback.snd i h) ⊤).hom.op) ∘\n      (etaleSetDescentUnit (pullback.snd i h)\n        ((Scheme.etaleSetPullback h).obj F) (Scheme.Etale.mk (⊤ : X'.Opens).ι)) =\n      fun s : (gabberZariskiG h F).obj.obj (op (⊤ : X'.Opens)) ↦\n        eqToHom (congrArg\n          (fun k : pullback i h ⟶ X ↦ ((Scheme.etaleSetPullback k).obj F).obj.obj\n            (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj\n              (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := i) (g := h)).symm)\n          (etaleSetDescentComparison h (pullback.snd i h) F\n            (Scheme.Etale.mk (𝟙 X)) (gabberZariskiLift h F s))"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-gabber-h0-zariski-constructions",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of inverse image sheaf unit and composition isomorphism on global sections",
+   "results": [
+    "CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm",
+    "CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm",
+    "CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm",
+    "CategoryTheory.Sheaf.ΓRes_map_assoc",
+    "CategoryTheory.Sheaf.ΓRes_naturality",
+    "CategoryTheory.Sheaf.ΓObjEquivSections_naturality_symm",
+    "CategoryTheory.Sheaf.ΓRes_map",
+    "CategoryTheory.Sheaf.ΓHomEquiv_naturality_right"
+   ],
+   "date": "2026-10-12",
+   "verdict": "Generic naturality results, not this canonical geometric comparison identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": [
+    "CategoryTheory.NatTrans.naturality",
+    "CategoryTheory.Limits.PullbackCone.isoMk",
+    "CategoryTheory.Limits.PushoutCocone.isoMk",
+    "CategoryTheory.Limits.PullbackCone.isoMk_hom_hom",
+    "CategoryTheory.Limits.PullbackCone.isoMk_inv_hom",
+    "CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom",
+    "CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom",
+    "CategoryTheory.Grothendieck.map_map"
+   ],
+   "date": "2026-10-12",
+   "verdict": "Generic naturality results, not this canonical geometric comparison identity."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*naturality|naturality.*unit",
+   "results": [
+    "Mathlib/RepresentationTheory/Rep/Basic.lean",
+    "Mathlib/RepresentationTheory/Rep/Basic.lean",
+    "Mathlib/Condensed/Discrete/Colimit.lean",
+    "Mathlib/Condensed/Discrete/Colimit.lean",
+    "Mathlib/Condensed/Discrete/LocallyConstant.lean",
+    "Mathlib/Condensed/Discrete/Module.lean",
+    "Mathlib/Condensed/Discrete/Module.lean",
+    "Mathlib/Condensed/Light/TopCatAdjunction.lean"
+   ],
+   "date": "2026-10-12",
+   "verdict": "Generic naturality results, not this canonical geometric comparison identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of inverse image sheaf unit and composition isomorphism on global sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T212212-L-1098610",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T212212-L-1098610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

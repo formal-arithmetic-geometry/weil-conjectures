@@ -6,7 +6,7 @@ Authors: SHEAF group Y3
 module
 
 public import Sheaf.AlgebraicGeometry.GabberH0ZariskiConstructions
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.GabberH0ZariskiSectionUnitEquation
 
 /-! # The top-open comparison unit equation
 
@@ -49,6 +49,18 @@ theorem gabber_h0_zariski_top_unit_equation
         (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj
           (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := i) (g := h)).symm)
       (etaleSetDescentComparison h (pullback.snd i h) F
-        (Scheme.Etale.mk (𝟙 X)) (gabberZariskiLift h F s)) := by sorry
+        (Scheme.Etale.mk (𝟙 X)) (gabberZariskiLift h F s)) := by
+  have hb : beta.hom.app (op (⊤ : (pullback i h).Opens)) ∘
+      gabberZariskiUnit (pullback.snd i h) (gabberZariskiG h F) ⊤ =
+    (((Scheme.etaleSetPullback (pullback.snd i h)).obj
+      ((Scheme.etaleSetPullback h).obj F)).obj.map
+        (gabberPreimageEtaleIso (pullback.snd i h) ⊤).hom.op) ∘
+    (etaleSetDescentUnit (pullback.snd i h)
+      ((Scheme.etaleSetPullback h).obj F) (Scheme.Etale.mk (⊤ : X'.Opens).ι)) :=
+    funext (hbeta ⊤)
+  have ht := congrArg (fun f ↦ gabberZariskiCompare i h F ∘ f) hb
+  have hc := gabber_h0_zariski_section_unit_equation i h F
+  intro s
+  exact congrFun (ht.trans hc) s
 
 end AlgebraicGeometry
