@@ -8532,3 +8532,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:15 L: merged deliver/U1/Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopySpread (stage 3; reviewer PASS; first push; landing 20261012T161505-L-2649494 (interface); batch 20261012T161459; modules 3; new nodes 2)
 - 16:15 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ClosedImmersionOfValuativeFactorization (stage 3; reviewer PASS; first push; landing 20261012T161505-L-2649600 (proof); batch 20261012T161459; modules 1; new nodes 0)
 - 16:15 L: merged deliver/W3/Sheaf.AlgebraicGeometry.PicardProductOpen (stage 3; reviewer PASS; first push; landing 20261012T161506-L-2649745 (interface); batch 20261012T161459; modules 2; new nodes 1)
+- 16:16 L: returned deliver/Q3/Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise (reviewer RETURN: (reviewer X-66e61, head 66e618bbc) G1/H7: In dag/nodes/sec-proper-base-change/lem-weil-pbc-filtered-colimit-algebras-ten)
