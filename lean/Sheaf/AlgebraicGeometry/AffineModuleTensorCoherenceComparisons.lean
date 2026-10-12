@@ -9,11 +9,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+import Sheaf.AlgebraicGeometry.AffineModuleTensorAlgebraQuasiCoherent
 import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 import Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction
 import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.AffineModuleTensorCounitFactor
+import Sheaf.AlgebraicGeometry.AffineModuleTensorUnitLift
 /-! # Affine module tensor CoherenceComparisons
 
 Source: Stacks Project, Morphisms, Lemma 01SB.
@@ -70,6 +73,129 @@ local notation "qU" => SheafOfModules.isQuasicoherent U.ringCatSheaf
 set_option hygiene false in
 local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
+private theorem naturalFactor {C : Type*} [Category C] (F H : C ⥤ C)
+    (γ : F ⟶ H) (δ : F ⟶ 𝟭 C)
+    (h : ∀ X, (∃ a : H.obj X ⟶ X, γ.app X ≫ a = δ.app X) ∧ Epi (γ.app X)) :
+    ∃ α : H ⟶ 𝟭 C, ∀ X, γ.app X ≫ α.app X = δ.app X := by
+  classical
+  let a (X : C) := Classical.choose (h X).1
+  have ha (X : C) : γ.app X ≫ a X = δ.app X := Classical.choose_spec (h X).1
+  refine ⟨{ app := a, naturality := ?_ }, ha⟩
+  intro X Y k
+  have : Epi (γ.app X) := (h X).2
+  apply (cancel_epi (γ.app X)).mp
+  change γ.app X ≫ H.map k ≫ a Y = γ.app X ≫ a X ≫ k
+  rw [← Category.assoc, ← γ.naturality k, Category.assoc, ha Y,
+    ← Category.assoc, ha X]
+  exact δ.naturality k
+
+private theorem liftNatural {C D : Type*} [Category C] [Category D]
+    (Q : C ⥤ D) (H : C ⥤ C) (τ : Q ⟶ H ⋙ Q)
+    (hinj : ∀ X Y, Function.Injective (Q.map : (X ⟶ Y) → _))
+    (h : ∀ X, ∃ a : X ⟶ H.obj X, Q.map a = τ.app X) :
+    ∃ β : 𝟭 C ⟶ H, ∀ X, Q.map (β.app X) = τ.app X := by
+  classical
+  let a (X : C) := Classical.choose (h X)
+  have ha (X : C) : Q.map (a X) = τ.app X := Classical.choose_spec (h X)
+  refine ⟨{ app := a, naturality := ?_ }, ha⟩
+  intro X Y k
+  apply hinj _ _
+  simp only [Functor.id_map, Functor.map_comp]
+  rw [ha X, ha Y]
+  exact τ.naturality k
+
+private theorem tensorExtension_quasiCoherent [IsAffineHom f]
+    (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
+    (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t) (hb : b ≫ ε = 𝟙 U.sheaf)
+    (P : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B))
+    (κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f)
+    (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules)
+    (hobj : ∀ G, H.obj G = SheafOfModules.changeOfRings.{u, u, u} ε (P.obj G)) :
+    ∀ G : SheafOfModules.{u} (𝓡 A), G.IsQuasicoherent → (H.obj G).IsQuasicoherent := by
+  intro G hG
+  let Aalg : X.CommAlgebraSheaf := Under.mk ρ
+  let Balg : U.CommAlgebraSheaf := Under.mk b
+  let Calg : U.CommAlgebraSheaf := Under.mk (𝟙 U.sheaf)
+  let φ : Balg ⟶ Calg := Under.homMk ε hb
+  have hA : Aalg.toModule.IsQuasicoherent :=
+    (affine_morphism_relative_spec X).1 f inferInstance
+  have hB : Balg.toModule.IsQuasicoherent :=
+    affine_module_tensor_algebra_quasiCoherent f B b t hpush
+  have hC : Calg.toModule.IsQuasicoherent := by
+    change (SheafOfModules.unit U.ringCatSheaf).IsQuasicoherent
+    exact SheafOfModules.isQuasicoherent_unit.{u, u, u}
+  have hS : ((S).obj G).IsQuasicoherent :=
+    (quasiCoherent_iff_restrictScalars X Aalg hA G).mp hG
+  have : ((S).obj G).IsQuasicoherent := hS
+  let e : tensorPullback f ≅ pullback f :=
+    (adj₀).leftAdjointUniq (pullbackPushforwardAdjunction f)
+  have hT : ((tensorPullback f).obj ((S).obj G)).IsQuasicoherent :=
+    (qU).prop_of_iso (e.app ((S).obj G)).symm (by infer_instance)
+  have hPG : ((SheafOfModules.restrictScalars (𝓻 b)).obj (P.obj G)).IsQuasicoherent :=
+    (qU).prop_of_iso (κ.app G).symm hT
+  have hc := (quasiCoherent_algebra_changeOfRings U Balg Calg φ
+    (P.obj G) hB hC hPG).1
+  rw [hobj G]
+  exact hc
+
+private theorem scalarRestriction_injective :
+    ∀ G G', Function.Injective ((S).map : (G ⟶ G') → _) := by
+  intro G G' a b hab
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro V
+  ext g
+  exact congrArg (fun z ↦ z.val.app V g) hab
+
+private theorem comparisons_from_objectwise
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (Q : C ⥤ D) (J : E ⥤ C) (L : D ⥤ E) (adj : L ⊣ J ⋙ Q)
+    (H : C ⥤ E) (γ : Q ⋙ L ⟶ H)
+    (hinj : ∀ G G', Function.Injective (Q.map : (G ⟶ G') → _))
+    (hf : ∀ F : E, (∃ a : H.obj (J.obj F) ⟶ F,
+      γ.app (J.obj F) ≫ a = adj.counit.app F) ∧ Epi (γ.app (J.obj F)))
+    (hβ : ∀ G : C, ∃ a : G ⟶ J.obj (H.obj G),
+      Q.map a = (adj.homEquiv (Q.obj G) (H.obj G)) (γ.app G)) :
+    ∃ (α : J ⋙ H ⟶ 𝟭 E) (β : 𝟭 C ⟶ H ⋙ J),
+      (∀ F, γ.app (J.obj F) ≫ α.app F = adj.counit.app F) ∧
+      (∀ G, Q.map (β.app G) = (adj.homEquiv (Q.obj G) (H.obj G)) (γ.app G)) := by
+  let δ : J ⋙ (Q ⋙ L) ⟶ 𝟭 E :=
+    { app := fun F ↦ adj.counit.app F
+      naturality := by
+        intro F F' k
+        exact adj.counit.naturality k }
+  obtain ⟨α, ha⟩ := naturalFactor (J ⋙ (Q ⋙ L)) (J ⋙ H)
+    (Functor.whiskerLeft J γ) δ hf
+  let τ : Q ⟶ (H ⋙ J) ⋙ Q :=
+    { app := fun G ↦ (adj.homEquiv (Q.obj G) (H.obj G)) (γ.app G)
+      naturality := by
+        intro G G' k
+        rw [← adj.homEquiv_naturality_left]
+        have hn : L.map (Q.map k) ≫ γ.app G' = γ.app G ≫ H.map k := γ.naturality k
+        rw [hn, adj.homEquiv_naturality_right]
+        rfl }
+  obtain ⟨β, hc⟩ := liftNatural Q (H ⋙ J) τ hinj hβ
+  exact ⟨α, β, ha, hc⟩
+
+set_option maxHeartbeats 2000000 in
+-- Converting scheme pushforward to the composite right adjoint needs extra heartbeats.
+private theorem tensorComparisons_from_objectwise
+    (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (γ : S ⋙ tensorPullback f ⟶ H)
+    (hf : ∀ F : U.Modules, (∃ a : H.obj ((R).obj F) ⟶ F,
+      γ.app ((R).obj F) ≫ a = (adj₀).counit.app F) ∧ Epi (γ.app ((R).obj F)))
+    (hβ : ∀ G : SheafOfModules.{u} (𝓡 A), ∃ a : G ⟶ (R).obj (H.obj G),
+      (S).map a = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) :
+    ∃ (α : R ⋙ H ⟶ 𝟭 U.Modules) (β : 𝟭 (SheafOfModules.{u} (𝓡 A)) ⟶ H ⋙ R),
+      (∀ F : U.Modules, γ.app ((R).obj F) ≫ α.app F = (adj₀).counit.app F) ∧
+      (∀ G : SheafOfModules.{u} (𝓡 A),
+        (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) := by
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    exact comparisons_from_objectwise S R (tensorPullback f) (adj₀) H γ
+      (scalarRestriction_injective f) hf hβ
+
+set_option maxHeartbeats 2000000 in
+-- Elaborating the nested tensor transports requires additional heartbeats.
 /-- The tensor extension is quasi-coherent and carries the canonical comparison maps.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
 Proof: The affine direct-image algebra A is quasi-coherent by affine relative Spec.
@@ -135,7 +261,15 @@ theorem affine_module_tensor_coherenceComparisons [IsAffineHom f]
             (∀ F : U.Modules, γ.app ((R).obj F) ≫ α.app F = (adj₀).counit.app F) ∧
             (∀ G : SheafOfModules.{u} (𝓡 A),
               (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    constructor
+    · exact tensorExtension_quasiCoherent f B b t ε hpush hb P κ H hobj
+    · have hf := affine_module_tensor_counitFactor (U := U) (X := X) f B b t ε hpush hb ht
+        P pobj κ H hobj γ hP hH
+      have hβ := affine_module_tensor_unitLift (U := U) (X := X) f B b t ε hpush hb ht
+        P pobj κ H hobj γ hP hH
+      exact tensorComparisons_from_objectwise f H γ hf hβ
 
 end
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-affine-module-tensor-unit-lift",
+ "kind": "statement",
+ "title": "Objectwise algebra-linear lift of the pullback adjoint",
+ "statement": "Let $f:U\\to X$ be a morphism of schemes [def-pc-scheme]. Let $A=f_*\\mathcal O_U$, $\\rho:\\mathcal O_X\\to A$ the structure map, $R$ pushforward of modules to A-module sheaves and $S$ restriction along $\\rho$ [def-weil-sheaf-of-modules-category]. Write $I=f^{-1}$ on A-modules and $IA=f^{-1}A$, $r_0:f^{-1}\\mathcal O_X\\to\\mathcal O_U$ for the structure map, $t_0=f^{-1}\\rho$, and $e:IA\\to\\mathcal O_U$ for the ring-sheaf counit. Let $b:\\mathcal O_U\\to B$ and $t:IA\\to B$ form a pushout of $r_0,t_0$, and let $\\epsilon:B\\to\\mathcal O_U$ satisfy $b\\epsilon=1$ and $t\\epsilon=e$. Let $P$ be a functor from A-module sheaves to B-module sheaves, with specified identifications $P(G)=B\\otimes_{IA}I(G)$ and map $P(a)$ the transported sheafification of $1\\otimes I(a)$. Let $\\kappa:P\\operatorname{Res}_b\\simeq S f^*$ be a natural isomorphism, where $f^*$ is tensor pullback [def-pc-module-pullback]. Let $H$ be a functor to $\\mathcal O_U$-modules, with specified identifications $H(G)=\\mathcal O_U\\otimes_B P(G)$ and map $H(a)$ the transported sheafification of $1\\otimes P(a)$. Let $\\gamma:S f^*\\to H$ be natural. All tensor products here have the scalar factor first and are sheafified [def-pur-sheaf-tensor-product]. Let $\\theta_t,\\theta_\\epsilon$ denote their sheafification units and $\\eta^{\\mathrm{ab}}$ the inverse-image/direct-image unit on underlying abelian sheaves. For every open $V$ of X and section $g\\in G(V)$ assume, after the specified object identifications, $\\kappa_G^{-1}(\\eta^{f^*}_{SG,V}(g))=\\theta_t(1\\otimes\\eta^{\\mathrm{ab}}_{G,V}(g))$ over $f^{-1}V$, where $\\eta^{f^*}$ is the unit of the canonical adjunction of [lem-pc-module-pullback-adjunction]. For every open W of U and $p\\in P(G)(W)$ assume $\\gamma_G(\\kappa_G(p))=\\theta_\\epsilon(1\\otimes p)$. Then for every A-module sheaf G there exists an A-linear morphism $a_G:G\\to R(HG)$ whose scalar restriction is the canonical pullback adjoint of $\\gamma_G$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01SB (lemma-affine-equivalence-modules), construction of h and elucidation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The pullback adjoint is the pullback unit followed by pushforward of gamma. The hP tensor-unit formula identifies its section after kappa inverse with the sheafification of 1 tensor eta(g), and hH identifies the subsequent extension along epsilon.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a in A(V), inverse-image linearity gives eta(a g)=eta(a) eta(g). Move eta(a) first to the B factor along t by the balanced relation and then through epsilon in the second tensor product. The identity t epsilon=e and the ring adjunction triangle evaluate this scalar to a in R(HG). Thus the adjoint is A-linear, with its existing additivity and restriction compatibility. This defines a_G with exactly the required restricted map. Zero rings and empty opens satisfy the same calculation.",
+   "uses": [
+    "lem-pc-module-inverse-image-adjunction",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-inverse-image-adjunction",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "N1 worker",
+  "date": "2026-10-12",
+  "note": "Details of the tensor construction and elucidation of Stacks 01SB, read online at https://stacks.math.columbia.edu/tag/01SB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of a quasi-coherent sheaf of modules preserves quasi-coherence",
+   "results": "SheafOfModules.isQuasicoherent; SheafOfModules.IsQuasicoherent; SheafOfModules.QuasicoherentData; SheafOfModules.QuasicoherentData.I; SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData; SheafOfModules.QuasicoherentData.X; SheafOfModules.restrictScalars; PresheafOfModules.Sheafify.module",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level match."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent",
+   "results": "SheafOfModules.IsQuasicoherent; SheafOfModules.instIsQuasicoherentOfIsFinitePresentation; SheafOfModules.QuasicoherentData.isQuasicoherent; SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData; SheafOfModules.IsQuasicoherent.mk; SheafOfModules.instIsQuasicoherentObjIsQuasicoherent; SheafOfModules.Presentation.isQuasicoherent; SheafOfModules.isQuasicoherent_over",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level match."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*Quasicoherent|isQuasicoherent.*changeOfRings",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent pullback algebra tensor pushout sheaf modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf scalar extension unit epimorphism splitting ring homomorphism counit factorization",
+   "results": "SheafOfModules.unitHomEquiv_comp_apply; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.unitHomEquiv_symm_comp; PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app; SheafOfModules.unitToPushforwardObjUnit; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback adjunction unit algebra linear tensor scalar extension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*(counit|unit|epi)|restrictScalars.*Faithful",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/RingTheory/Algebraic/Integral.lean; Mathlib/RingTheory/Algebraic/Integral.lean; Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean; Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModuleTensorCoherenceComparisons",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 01SB tensor construction and elucidation: Objectwise algebra-linear lift of the pullback adjoint",
+   "via": [
+    "lem-weil-pbc-affine-module-tensor-coherence-comparisons",
+    "lem-weil-pbc-affine-module-tensor-construction",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModuleTensorUnitLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModuleTensorUnitLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_module_tensor_unitLift",
+  "statement": "theorem affine_module_tensor_unitLift\n    (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)\n    (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)\n    (hb : b ≫ ε = 𝟙 U.sheaf) (ht : t ≫ ε = e₀)\n    (P : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B))\n        (pobj : ∀ G, P.obj G = SheafOfModules.changeOfRings.{u, u, u} t (I G))\n        (κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f)\n    (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules)\n          (hobj : ∀ G, H.obj G = SheafOfModules.changeOfRings.{u, u, u} ε (P.obj G))\n          (γ : S ⋙ tensorPullback f ⟶ H)\n    (hP :\n        (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'),\n          P.map a = eqToHom (pobj G) ≫\n            SheafOfModules.changeOfRingsHom.{u, u, u} t (I G)\n              (TopCat.Sheaf.inverseImageModuleMap f.base A G a) ≫\n            eqToHom (pobj G').symm) ∧\n        (∀ (G : SheafOfModules.{u} (𝓡 A)) (V : (Opens X)ᵒᵖ) (g : G.val.obj V),\n          ((eqToHom (pobj G)).val.app ((Opens.map f.base).op.obj V))\n            ((κ.inv.app G).val.app ((Opens.map f.base).op.obj V)\n              (((adj₀).unit.app ((S).obj G)).val.app V g)) =\n            ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n              (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t (I G))).app\n                ((Opens.map f.base).op.obj V)\n                ((1 : B.obj.obj ((Opens.map f.base).op.obj V))\n                  ⊗ₜ[(IA).obj.obj ((Opens.map f.base).op.obj V),(t.hom.app\n                    ((Opens.map f.base).op.obj V)).hom]\n                  (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n                    (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app\n                      ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g))))\n    (hH :\n          (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'),\n            H.map a = eqToHom (hobj G) ≫\n              SheafOfModules.changeOfRingsHom.{u, u, u} ε (P.obj G) (P.map a) ≫\n              eqToHom (hobj G').symm) ∧\n          (∀ (G : SheafOfModules.{u} (𝓡 A)) (W : (Opens U)ᵒᵖ)\n              (p : (P.obj G).val.obj W),\n            ((eqToHom (hobj G)).val.app W)\n              ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) =\n              ((PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app\n                (SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε (P.obj G))).app W\n                  ((1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W,(ε.hom.app W).hom] p))) :\n    ∀ G : SheafOfModules.{u} (𝓡 A),\n      ∃ a : G ⟶ (R).obj (H.obj G),\n        (S).map a = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T150953-L-2231029",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T150953-L-2231029",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
