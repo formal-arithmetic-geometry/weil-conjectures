@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.AlgebraicGeometry.CechResolution
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # The alternating Čech calculation for the pinned derived mate
 

@@ -11,6 +11,7 @@ import Sheaf.AlgebraicGeometry.PicardKunnethQcoh
 import Sheaf.AlgebraicGeometry.ProperBasic
 
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
+import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 
 /-!
 # Projection pullbacks span the first cohomology of a product

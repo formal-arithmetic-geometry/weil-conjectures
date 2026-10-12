@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # CoherentFormalModulesCokernelClosure
 

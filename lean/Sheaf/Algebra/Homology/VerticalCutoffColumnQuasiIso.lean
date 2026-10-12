@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerMaps
+import Sheaf.Algebra.Homology.DoubleComplexVerticalWindow
 
 @[expose] public section
 

@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Forward implication for the section-ring chart formula
 

@@ -8,6 +8,8 @@ module
 public import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 /-! # CoherentFormalModulesFiniteProducts
 

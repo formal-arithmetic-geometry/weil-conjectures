@@ -10,6 +10,12 @@ public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Flat.Basic
+import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
+import Sheaf.LinearAlgebra.Matrix.LeftInverseMinors
+import Sheaf.RingTheory.EquationCountFibreDimensionFlat
+import Sheaf.RingTheory.StandardSmoothDimensionAtPoints
+import Sheaf.RingTheory.StrictlyStandardLocalizationSmooth
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-! # Quotient data for the desingularization construction
 

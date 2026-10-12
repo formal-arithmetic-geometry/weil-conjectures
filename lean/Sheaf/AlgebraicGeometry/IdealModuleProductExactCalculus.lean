@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 
 /-! # Annihilator calculus for sheaves of modules
 

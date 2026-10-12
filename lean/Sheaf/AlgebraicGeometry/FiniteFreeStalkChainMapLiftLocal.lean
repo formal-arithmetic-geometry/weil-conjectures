@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 public import Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Finite matrix extension to one neighbourhood
 

@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.CategoryTheory.ColimitSites
+import Sheaf.CategoryTheory.ColimitSiteSections
 
 /-! # Finite products of sections on a filtered colimit of sites
 

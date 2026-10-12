@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 
 import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Canonical module base change under changes of coordinates
 

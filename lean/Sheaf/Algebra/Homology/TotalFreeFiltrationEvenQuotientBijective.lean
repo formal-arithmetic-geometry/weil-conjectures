@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.TotalFreeFiltrationEvenQuotientMap
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Sheaf.Algebra.Homology.TotalFreeFiltrationTerms
 
 /-!
 # Degreewise bijectivity of the even column quotient map

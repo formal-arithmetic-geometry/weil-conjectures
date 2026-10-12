@@ -6,6 +6,7 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
+import Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso
 
 /-! # Existence of normalized additive Cech comparisons
 

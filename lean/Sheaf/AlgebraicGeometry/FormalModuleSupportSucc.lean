@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! Consecutive levels of a coherent formal module have equal support.
 

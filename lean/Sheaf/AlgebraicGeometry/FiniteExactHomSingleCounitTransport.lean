@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Canonical single-complex transport of a derived scalar counit
 

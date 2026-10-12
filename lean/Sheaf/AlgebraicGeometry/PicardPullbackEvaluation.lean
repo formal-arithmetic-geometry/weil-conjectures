@@ -6,6 +6,10 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Rank and evaluation for a module pulled back from the base
 

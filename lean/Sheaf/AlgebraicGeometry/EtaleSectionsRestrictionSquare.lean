@@ -6,6 +6,9 @@ Authors: SHEAF group N2
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # The sections comparison restriction square
 

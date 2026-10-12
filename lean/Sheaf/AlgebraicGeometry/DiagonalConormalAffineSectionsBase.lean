@@ -3,6 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.DiagonalConormalDerivation
 import Sheaf.AlgebraicGeometry.AffineConormalSections
 import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.DiagonalConormal
 
 @[expose] public section
 

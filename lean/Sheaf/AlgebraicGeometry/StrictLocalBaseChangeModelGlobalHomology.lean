@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-! # Global homology of base change to a chosen strict-local model
 

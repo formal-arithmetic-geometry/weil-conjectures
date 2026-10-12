@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
 import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiber
+import Sheaf.AlgebraicGeometry.StrictHenselization
 
 /-! # Factoring fibre restrictions through strict henselization sections
 

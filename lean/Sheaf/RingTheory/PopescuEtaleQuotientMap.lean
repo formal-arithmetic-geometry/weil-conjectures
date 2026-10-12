@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.Algebra.MvPolynomial.Basic
+import Sheaf.RingTheory.FlatPermanence
 
 /-!
 # The étale map into an adapted Artinian subalgebra

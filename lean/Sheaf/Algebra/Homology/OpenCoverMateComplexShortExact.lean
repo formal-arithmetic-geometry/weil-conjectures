@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Geometry.RingedSpace.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 
 /-! # The complex-level open-cover sequence with its canonical mate maps
 

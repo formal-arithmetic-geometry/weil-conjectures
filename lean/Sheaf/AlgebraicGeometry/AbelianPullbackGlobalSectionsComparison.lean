@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Coefficient comparison for global sections of inverse images
 Source: Stacks Project, Tags 00YV, 03CB and 03CC.

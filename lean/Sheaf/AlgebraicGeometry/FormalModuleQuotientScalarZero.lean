@@ -3,6 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 
 @[expose] public section
 

@@ -11,6 +11,9 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
+import Sheaf.Paper.HigherDirectImagePresheaf
 
 /-! # Surjectivity of ordinary higher direct image on coproducts
 

@@ -9,6 +9,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+import Sheaf.RingTheory.PolynomialOriginRegularLocal
 
 /-! # Residue identifications for a powered parameter quotient
 

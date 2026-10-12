@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Pulling a coefficient system to a cone
 

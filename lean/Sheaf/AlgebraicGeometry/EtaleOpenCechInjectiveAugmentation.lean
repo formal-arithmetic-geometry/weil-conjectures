@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
+import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
 
 /-! # The injective étale Čech row on an open covering
 

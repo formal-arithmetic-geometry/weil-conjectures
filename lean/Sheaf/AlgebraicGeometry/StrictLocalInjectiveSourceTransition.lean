@@ -6,6 +6,9 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+import Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison
+import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Computing source derived sections on an injective representative
 

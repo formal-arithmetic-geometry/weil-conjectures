@@ -8,6 +8,14 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.CategoryTheory.FiniteFiltrationRefinement
 
 /-! # A filtration with unresolved factors of smaller support
 

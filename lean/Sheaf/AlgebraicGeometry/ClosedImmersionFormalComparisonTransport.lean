@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 
 /-! # Transport of a formal comparison through a closed immersion
 

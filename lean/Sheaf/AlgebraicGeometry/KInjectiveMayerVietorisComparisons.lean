@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
 import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Derived comparisons for the fixed open direct-image complexes
 

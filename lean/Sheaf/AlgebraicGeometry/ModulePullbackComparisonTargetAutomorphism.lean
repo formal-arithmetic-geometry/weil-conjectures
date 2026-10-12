@@ -6,6 +6,8 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedPullback
 
 /-! # Changing the derived-to-ordinary comparison on a single module
 

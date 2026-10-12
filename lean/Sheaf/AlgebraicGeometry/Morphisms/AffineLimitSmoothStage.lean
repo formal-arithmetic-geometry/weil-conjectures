@@ -7,6 +7,8 @@ module
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.RingTheory.SmoothAlgebraFilteredColimitDescent
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Eventual smoothness of a finitely presented model over affine transition limits

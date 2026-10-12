@@ -10,6 +10,7 @@ public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionSmoothJacobian
 
 /-!
 # A Jacobian minor from a smooth fibre of a localized presentation

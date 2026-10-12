@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Monoidal.Multifunctor
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlatTensorProduct
 
 /-! # Natural tensor comparison of derived pullback
 

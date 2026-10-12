@@ -18,6 +18,8 @@ import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyNatural
 import Sheaf.AlgebraicGeometry.EtaleULiftInjectiveResolution
 import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
 import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
+import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
 
 /-! # Positive direct-image vanishing
 

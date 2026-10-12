@@ -6,6 +6,9 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Geometric complex system for restricted cohomology
 

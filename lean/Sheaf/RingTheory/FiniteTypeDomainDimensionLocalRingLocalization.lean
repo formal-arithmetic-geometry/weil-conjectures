@@ -3,6 +3,8 @@ module
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Sheaf.RingTheory.PolynomialRingMaximalChainHeightDifference
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
 
 /-! Localization dimension part of the finite type domain dimension theorem.
 

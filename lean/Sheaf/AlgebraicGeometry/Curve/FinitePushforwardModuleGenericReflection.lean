@@ -13,6 +13,7 @@ import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import WeilConjectures.SixFunctors.Finite.BaseChange
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 
 /-! # Generic local constancy reflected by a finite direct image
 

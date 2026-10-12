@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.ColimitSiteStageImage
+import Sheaf.CategoryTheory.FilteredColimitCategories
 
 /-! # ColimitSiteStageImageRefinement
 

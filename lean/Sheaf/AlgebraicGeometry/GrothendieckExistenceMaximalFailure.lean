@@ -10,6 +10,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
+import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
+import Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
 
 /-! # A maximal closed counterexample to proper algebraization
 

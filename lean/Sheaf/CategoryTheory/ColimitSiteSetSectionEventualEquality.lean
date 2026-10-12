@@ -10,6 +10,7 @@ public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Comma.Over.Basic
+import Sheaf.CategoryTheory.FilteredColimitCategories
 
 /-! # Equal stage-section images become equal after one refinement.
 

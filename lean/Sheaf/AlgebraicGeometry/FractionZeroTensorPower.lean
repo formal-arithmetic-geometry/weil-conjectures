@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
+import Sheaf.Topology.RingedSpaceModuleCohomology
 
 @[expose] public section
 

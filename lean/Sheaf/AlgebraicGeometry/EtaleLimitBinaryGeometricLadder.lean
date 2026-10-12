@@ -16,6 +16,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.CategoryTheory.Limits.Final
 import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # Geometric Mayer--Vietoris ladder before continuity
 
 Source: Stacks Project, Tags 09YQ and 0A50.

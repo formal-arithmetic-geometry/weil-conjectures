@@ -11,6 +11,9 @@ public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.Topology.Algebra.OpenSubgroup
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+import Sheaf.FieldTheory.OpenSubgroupFixedField
 
 /-!
 # Transport of an invariant primary module filtration to etale sheaves

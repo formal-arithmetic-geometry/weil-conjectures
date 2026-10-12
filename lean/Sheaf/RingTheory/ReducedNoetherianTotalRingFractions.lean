@@ -14,6 +14,7 @@ import Mathlib.RingTheory.LocalProperties.Reduced
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.Algebra.Algebra.Pi
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Total ring of fractions of a reduced Noetherian ring

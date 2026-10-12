@@ -12,6 +12,7 @@ import Sheaf.RingTheory.EquationCountFibreDimensionFlat
 import Sheaf.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
 import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
 import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
+import Sheaf.RingTheory.SingularIdeal
 
 /-! # Smoothness of the explicit Popescu quotient
 

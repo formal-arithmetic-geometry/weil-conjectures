@@ -6,6 +6,8 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso
 
 /-! # Compatibility of normalized comparisons with inverse image
 

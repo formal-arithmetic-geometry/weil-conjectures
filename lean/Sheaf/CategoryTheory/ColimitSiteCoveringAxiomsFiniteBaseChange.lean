@@ -3,6 +3,7 @@ module
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
+import Sheaf.CategoryTheory.FilteredColimitPreservesPullback
 
 @[expose] public section
 

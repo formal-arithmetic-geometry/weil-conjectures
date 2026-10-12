@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.RawAffineRestrictedCohomology
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Raw derived Hom equals restricted single-complex cohomology
 

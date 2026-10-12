@@ -8,6 +8,9 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
+import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import Sheaf.FieldTheory.GaloisAutomorphismExtension
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # The geometric units stalk with its Galois representation

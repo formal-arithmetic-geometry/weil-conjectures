@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.HomComplexSingle
+import Sheaf.Algebra.Homology.HomComplex
 
 /-! # Naturality of the single-source internal Hom comparison
 

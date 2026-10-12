@@ -13,6 +13,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import Mathlib.AlgebraicGeometry.Normalization
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
+import Sheaf.RingTheory.FlatLocalDepthFormula
+import Sheaf.RingTheory.NormalLocalDepthTwo
 
 /-!
 # Finiteness of the normalization over a stalk

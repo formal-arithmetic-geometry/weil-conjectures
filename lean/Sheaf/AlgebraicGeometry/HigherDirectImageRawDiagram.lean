@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # The raw cohomology diagram
 

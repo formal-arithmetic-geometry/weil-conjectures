@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.RingTheory.FiniteAfterCompletion
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Injectivity of the local completion comparison

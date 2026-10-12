@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 
 /-! # Pullback of strict-local representative sections
 

@@ -6,6 +6,8 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # The evaluation-isomorphism open inside the rank-matched locus
 

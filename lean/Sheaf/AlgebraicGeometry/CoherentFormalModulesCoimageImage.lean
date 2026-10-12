@@ -8,6 +8,14 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesCokernelClosure
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # CoherentFormalModulesCoimageImage
 

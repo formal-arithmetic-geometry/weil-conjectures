@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Restriction of coherent modules and its canonical comparison with completion.
 

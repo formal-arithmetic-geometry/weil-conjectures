@@ -11,6 +11,8 @@ import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 import Sheaf.AlgebraicGeometry.ProperPerfectDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 @[expose] public section
 

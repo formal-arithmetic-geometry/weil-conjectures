@@ -5,6 +5,7 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.Embedding.Extend
+import Sheaf.CategoryTheory.DoubleComplexTotal
 
 /-! # Extension by zero and first-quadrant totalization
 

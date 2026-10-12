@@ -2,6 +2,8 @@ module
 
 public import Sheaf.CategoryTheory.TruncationCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 @[expose] public section
 universe u₁ u₂ v₁ v₂ w₁ w₂

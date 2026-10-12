@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Pushforward of coherent thickening systems is an equivalence with adic systems.
 

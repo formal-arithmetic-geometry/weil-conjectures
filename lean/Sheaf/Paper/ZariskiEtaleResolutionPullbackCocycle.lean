@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.Paper.ZariskiEtaleResolutionHomologyIndependent
 
 
 /-! # Cocycle comparisons for object cohomology

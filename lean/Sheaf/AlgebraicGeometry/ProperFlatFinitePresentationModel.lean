@@ -8,6 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
+import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
+import Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 
 /-! # Finite-presentation flat models on a fixed affine base -/
 

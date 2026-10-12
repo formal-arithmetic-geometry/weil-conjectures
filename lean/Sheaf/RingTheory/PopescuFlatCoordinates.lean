@@ -10,6 +10,15 @@ public import Sheaf.RingTheory.PopescuAdmissibleSubalgebra
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.Algebra.MvPolynomial.Basic
+import Sheaf.RingTheory.ArtinianFlatSubalgebras
+import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
+import Sheaf.RingTheory.FlatOverRegular
+import Sheaf.RingTheory.GeometricallyRegularH1Injective
+import Sheaf.RingTheory.GeometricallyRegularOverFieldFlat
+import Sheaf.RingTheory.LocalizationOfRegularRing
+import Sheaf.RingTheory.PolynomialOriginRegularLocal
+import Sheaf.RingTheory.PopescuSolutionModuloChoose
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Flat coordinates adapted to an Artinian subalgebra

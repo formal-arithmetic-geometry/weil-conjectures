@@ -16,6 +16,9 @@ import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
 import WeilConjectures.AlgebraicGeometry.ChowLemma
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 
 /-! # Algebraization of the pullback along a Chow modification
 

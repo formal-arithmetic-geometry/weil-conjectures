@@ -31,6 +31,7 @@ import Sheaf.AlgebraicGeometry.PrimeInjectiveCohomologyComparison
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections
 import Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.CohomologyRestrictionSquareTransport
+import WeilConjectures.AlgebraicGeometry.Sites.Gm
 
 /-!
 # The curve assertions for constant coefficients on smooth curves

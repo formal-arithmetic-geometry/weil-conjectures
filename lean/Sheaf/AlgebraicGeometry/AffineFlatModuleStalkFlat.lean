@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.RingTheory.Flat.Basic
+import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
 
 /-! # Flat stalks from flat sections on affine subopens
 

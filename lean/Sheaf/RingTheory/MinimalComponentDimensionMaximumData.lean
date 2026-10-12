@@ -4,6 +4,9 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
+import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 @[expose] public section
 

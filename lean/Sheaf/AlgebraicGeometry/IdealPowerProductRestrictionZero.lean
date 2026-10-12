@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 /-! # Restriction detects vanishing of ideal-power products
 

@@ -8,6 +8,16 @@ public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.ModulePullbackFiniteType
+import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Canonical comparison of the stalk with local-base-change cohomology
 

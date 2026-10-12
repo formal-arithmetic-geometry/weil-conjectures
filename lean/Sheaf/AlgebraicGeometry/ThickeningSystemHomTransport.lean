@@ -3,6 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Transport of compatible morphism families
 

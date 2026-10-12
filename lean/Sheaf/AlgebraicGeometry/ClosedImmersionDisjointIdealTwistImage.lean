@@ -6,6 +6,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Abelian.Images
 public import Mathlib.CategoryTheory.Subobject.Limits
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 @[expose] public section
 

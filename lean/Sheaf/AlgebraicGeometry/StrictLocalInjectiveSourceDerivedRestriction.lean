@@ -6,6 +6,12 @@ Authors: SHEAF group S3
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+import Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison
+import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
+import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
+import Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 
 /-! # The derived mate on a neighbourhood germ -/
 

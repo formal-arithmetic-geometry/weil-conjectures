@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Lifting a fibre generator over the intersection of Picard loci
 

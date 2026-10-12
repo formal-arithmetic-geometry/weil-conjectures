@@ -13,6 +13,13 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+import Sheaf.AlgebraicGeometry.ChowRelativeAmple
+import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.AlgebraicGeometry.ChowLemma
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 
 /-! # A Chow module with finite cohomology and generic rank one
 

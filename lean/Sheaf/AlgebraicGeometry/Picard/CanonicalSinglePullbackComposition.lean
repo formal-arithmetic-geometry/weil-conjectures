@@ -6,6 +6,8 @@ Authors: SHEAF group U3
 module
 
 public import Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Single-module comparison and composition of two pullbacks
 

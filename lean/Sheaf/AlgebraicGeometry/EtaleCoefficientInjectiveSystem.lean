@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Injective embeddings of coefficient systems
 

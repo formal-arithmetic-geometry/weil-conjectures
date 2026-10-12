@@ -2,6 +2,7 @@ module
 public import Sheaf.RingTheory.StrictlyStandardElement
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
+import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
 @[expose] public section
 universe u v
 namespace Algebra

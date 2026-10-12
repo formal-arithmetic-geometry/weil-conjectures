@@ -5,6 +5,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
+import Sheaf.RingTheory.SmoothAtPrimeConormalData
 @[expose] public section
 universe u
 namespace Algebra

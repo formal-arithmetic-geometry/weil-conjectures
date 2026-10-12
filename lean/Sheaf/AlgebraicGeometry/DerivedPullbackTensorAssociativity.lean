@@ -6,6 +6,10 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlatTensorProduct
+import Sheaf.AlgebraicGeometry.DerivedPullback
+import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
 /-! # Associativity of derived pullback tensor comparisons
 

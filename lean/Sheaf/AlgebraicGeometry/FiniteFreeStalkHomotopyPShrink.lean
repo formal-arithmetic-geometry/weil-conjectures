@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Homotopy
 public import Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Spreading a homotopy of a bounded finite free complex
 

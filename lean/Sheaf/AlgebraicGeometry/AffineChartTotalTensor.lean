@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor
+import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 /-! # Total tensor complexes through the canonical affine chart
 

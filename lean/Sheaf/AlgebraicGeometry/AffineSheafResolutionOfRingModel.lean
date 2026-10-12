@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.QuasiIso
+import Sheaf.Algebra.Homology.ModuleStalkExact
 
 /-! # Sheafifying an actual affine ring resolution -/
 

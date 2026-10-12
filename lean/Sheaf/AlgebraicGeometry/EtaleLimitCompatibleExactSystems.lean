@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.Paper.ColimitSitesInjectiveSystem
 
 /-! # Compatible short exact systems of etale sheaves
 

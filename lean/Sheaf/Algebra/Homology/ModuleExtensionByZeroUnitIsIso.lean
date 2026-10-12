@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 
 /-! # Invertibility of the open extension unit
 

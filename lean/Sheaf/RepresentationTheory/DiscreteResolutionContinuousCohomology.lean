@@ -9,6 +9,8 @@ public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
+import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # Continuous cohomology from a transported injective resolution

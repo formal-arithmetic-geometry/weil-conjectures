@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Formality of modules on disjoint clopen rank strata
 

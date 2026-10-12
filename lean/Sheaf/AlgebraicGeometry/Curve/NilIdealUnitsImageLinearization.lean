@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-! # Linearization of the image of nilpotent units modulo an ideal
 

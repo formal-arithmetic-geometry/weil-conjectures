@@ -8,6 +8,8 @@ import Sheaf.Paper.StrictHenselizationLocalStructure
 import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
 import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-! # Integral strict-local fibre comparison
 

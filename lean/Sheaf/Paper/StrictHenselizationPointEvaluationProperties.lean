@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.StrictHenselizationPointEvaluationImage
 import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.StrictHenselizationTriples
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.Paper.StrictHenselizationPointEvaluation
 
 /-! # Surjectivity of pointed evaluation
 

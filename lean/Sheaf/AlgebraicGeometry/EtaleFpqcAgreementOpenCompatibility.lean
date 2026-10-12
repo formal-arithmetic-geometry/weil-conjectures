@@ -6,6 +6,9 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen
+import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenEtaleCriterion
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-! # Compatibility of agreement opens for a matching family
 Source: Stacks Project, Tag 09XN, agreement-open paragraph.

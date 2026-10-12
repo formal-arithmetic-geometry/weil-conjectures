@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.RingTheory.SingularIdealLocalizationSmooth
 
 /-!
 # The polynomial quotient used in separable Popescu preparation

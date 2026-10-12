@@ -14,6 +14,8 @@ import Sheaf.CategoryTheory.TruncationHypercohomology
 import Sheaf.CategoryTheory.TruncationRawExact
 import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
 import Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification
+import Sheaf.CategoryTheory.ExactCouple
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-! # A coproduct comparison of truncation exact couples
 

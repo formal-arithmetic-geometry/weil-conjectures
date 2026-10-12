@@ -5,6 +5,9 @@ Authors: SHEAF group C1
 -/
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
+import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact
 /-! # Ext transport from an open subscheme to its ambient scheme
 
 Source: Stacks Project, Tags 00A7, 01AK, 04J0, and Section 01F7.

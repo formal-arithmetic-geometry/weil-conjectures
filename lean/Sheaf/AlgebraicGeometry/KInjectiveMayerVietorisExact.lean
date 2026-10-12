@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 /-! # Exactness of the concrete direct-image Mayer--Vietoris complex
 

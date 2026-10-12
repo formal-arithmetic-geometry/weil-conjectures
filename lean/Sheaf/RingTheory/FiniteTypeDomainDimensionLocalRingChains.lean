@@ -4,6 +4,8 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.Order.Preorder.Chain
 public import Mathlib.Order.RelSeries
+import Sheaf.RingTheory.PolynomialRingMaximalChainHeightDifference
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
 
 /-! Common maximal-chain length part of the finite type domain dimension theorem.
 

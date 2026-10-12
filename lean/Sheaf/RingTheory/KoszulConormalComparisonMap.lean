@@ -3,6 +3,8 @@ module
 public import Sheaf.RingTheory.KoszulConormalComparison
 public import Sheaf.RingTheory.KoszulRegularSequence
 import Sheaf.RingTheory.KoszulConormalBasis
+import Sheaf.Paper.KoszulComplex
+import Sheaf.RingTheory.KoszulDualComplex
 
 /-!
 # Construction of the normalized dual Koszul comparison

@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.GabberH0ZariskiConstructions
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 
 /-! # Local transport through the composition comparison
 

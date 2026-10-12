@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.Filtration
 
 /-! # Horizontal filtration of the cone of a first-quadrant total map
 

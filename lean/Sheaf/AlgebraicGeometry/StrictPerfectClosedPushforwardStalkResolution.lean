@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Abelian.Projective.Resolution
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
 
 /-! # Bounded projective resolutions of closed-pushforward stalks
 

@@ -7,6 +7,13 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSheafComparison
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Eventual matching of local stage representatives
 

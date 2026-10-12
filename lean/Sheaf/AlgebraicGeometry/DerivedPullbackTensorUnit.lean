@@ -6,6 +6,10 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.DerivedPullback
+import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
 /-! # Unit laws for derived pullback tensor comparisons
 

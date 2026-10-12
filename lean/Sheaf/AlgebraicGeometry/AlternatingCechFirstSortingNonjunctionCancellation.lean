@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechSortingOperators
+import Sheaf.CategoryTheory.SiteCechComplex
 
 /-!
 # Nonjunction cancellation in the first sorting homotopy

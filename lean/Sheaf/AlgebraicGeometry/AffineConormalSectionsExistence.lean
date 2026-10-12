@@ -7,6 +7,9 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 @[expose] public section
 

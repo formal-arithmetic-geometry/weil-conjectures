@@ -12,6 +12,8 @@ import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Canonical module base change under open restriction
 
