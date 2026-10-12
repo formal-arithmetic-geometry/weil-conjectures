@@ -27,66 +27,44 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-jacobi-zariski-homology-sequence] to the composable maps $A\\to B\\to C$. It gives the exact sequence of $C$-modules from that node, including the left base-change term and the right relative-differentials term.",
+   "text": "Apply [lem-weil-pbc-jacobi-zariski-homology-sequence] to A → B → C = B/a. Retain exactness at H1(L_C/A), H1(L_C/B), and C tensor_B Omega_B/A; the left term is the kernel of the base-changed canonical cotangent differential.",
    "uses": [
     "lem-weil-pbc-jacobi-zariski-homology-sequence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), lines 35411--35446"
-   }
+   "elementary": false
   },
   {
-   "text": "Use [lem-weil-pbc-jacobi-zariski-surjection-h1] and [lem-weil-pbc-jacobi-zariski-surjection-differentials] for the surjection $B\\twoheadrightarrow C=B/\\mathfrak a$. They identify the relative degree-one homology with $\\mathfrak a/\\mathfrak a^2$ and make the final relative differential module zero.",
+   "text": "Apply [lem-weil-pbc-jacobi-zariski-left-term-vanishing]. Tensor symmetry, with LinearMap.rTensor_comm and baseChange_eq_ltensor, carries each element of the left kernel to the zero right-tensor kernel. Thus the left kernel is zero; its map u is zero. Exactness gives injectivity of H1Cotangent.map A B C C.",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-surjection-h1",
-    "lem-weil-pbc-jacobi-zariski-surjection-differentials"
+    "lem-weil-pbc-jacobi-zariski-left-term-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 07BP (lemma-NL-surjection), lines 35505--35515"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-jacobi-zariski-left-term-vanishing], projectivity of $\\Omega_{B/A}$ gives the Tor vanishings required for base change, and the hypothesis $H_1(L_{B/A})=0$ kills the left term in the sequence of [lem-weil-pbc-jacobi-zariski-homology-sequence].",
+   "text": "Use [lem-weil-pbc-jacobi-zariski-surjection-h1], realized by Extension.h1CotangentEquivCotangent on the quotient extension P. Identify P.ker with a using Ideal.mk_ker and transport its cotangent module by cotangentEquivCotangentKer and Ideal.Cotangent.equivOfEq, extending scalars along B → C. Call the resulting C-linear equivalence e. Set i = e composed with H1Cotangent.map, and d = P.cotangentComplex composed with the inverse cotangent identification. Extension.cotangentComplex_comp_h1CotangentEquivCotangent identifies d composed with e with the connecting map. LinearEquiv.conj_exact_iff_exact and surjective precomposition transport the two middle exactness assertions.",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-left-term-vanishing",
-    "def-weil-pbc-smooth-ring-map"
+    "lem-weil-pbc-jacobi-zariski-surjection-h1"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2, final assertion and proof, lines 35444--35446 and 35467--35485; More on Algebra, Lemma Tag 07M7"
-   }
+   "elementary": false
   },
   {
-   "text": "Finally [lem-weil-pbc-jacobi-zariski-differential-maps] gives the conormal and base-change differential maps, with $a\\bmod\\mathfrak a^2\\mapsto1\\otimes\\mathrm da$ and $c\\otimes\\mathrm db\\mapsto c\\,\\mathrm d\\bar b$. Truncating the exact sequence using the two vanishing endpoints yields the asserted short exact sequence.",
+   "text": "Take w = KaehlerDifferential.mapBaseChange A B C. The differential maps of [lem-weil-pbc-jacobi-zariski-differential-maps] give surjectivity by mapBaseChange_surjective for the quotient map, the formula for d by Extension.cotangentComplex_mk, and the formula for w by mapBaseChange_tmul and map_D. No use of the final relative differential module is needed.",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-differential-maps",
-    "def-weil-pbc-kahler-differentials"
+    "lem-weil-pbc-jacobi-zariski-differential-maps"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00RU (lemma-differential-seq), lines 34103--34118 and proof through line 34154"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-jacobi-zariski-homology-sequence",
-  "lem-weil-pbc-jacobi-zariski-surjection-h1",
-  "lem-weil-pbc-jacobi-zariski-surjection-differentials",
   "lem-weil-pbc-jacobi-zariski-left-term-vanishing",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-jacobi-zariski-differential-maps",
-  "def-weil-pbc-kahler-differentials"
+  "lem-weil-pbc-jacobi-zariski-surjection-h1",
+  "lem-weil-pbc-jacobi-zariski-differential-maps"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker Q2 stage 3",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tags 00S2, 07BP and 00RU, with the Tor specialization used in More on Algebra, Lemma Tag 07M7"
+  "place": "Tags 00S2, 07BP, 00RU; Lean transport using Mathlib Extension.ExtendScalars and tensor symmetry"
  },
  "mathlib_searches": [
   {
@@ -163,5 +141,15 @@
   "group": "K1",
   "result": "pass",
   "note": "A,B CommRing+Algebra (any ring map); H1(L_B/A)=0 as Subsingleton (H1Cotangent A B) = Generators.self kernel (non-hollow, no instance); Omega projective as Module.Projective B Ω[B/A] (same spelling as landed JacobiZariskiLeftTermVanishing); C = B/a with Ideal.instAlgebraQuotient; a/a^2 = a.Cotangent with instModuleQuotientCotangent; C⊗[B]Ω leftModule; all three maps C-linear; Injective i, Exact i δ, Exact δ w, Surjective w = 0->...->0; δ(a mod a^2)=1⊗da, w(c⊗db)=c·d(b̄); i existential as node gives no formula (downstream smooth-localization-conormal-split uses exactness only); compiled clean on L"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085323-L-33446",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
