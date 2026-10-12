@@ -8636,3 +8636,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/K1/Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison (stage 3; reviewer PASS; first push; landing 20261012T165518-L-2934881 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/K2/Sheaf.AlgebraicGeometry.ClosedImmersionRankedCohomologyReconstruction (stage 3; reviewer PASS; first push; landing 20261012T165518-L-2935012 (interface); batch 20261012T165503; modules 3; new nodes 2)
 - 16:55 L: merged deliver/K2/Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel (stage 3; reviewer PASS; first push; landing 20261012T165519-L-2935217 (proof); batch 20261012T165503; modules 1; new nodes 0)
+- 16:55 L: merged deliver/K3/Sheaf.AlgebraicGeometry.AbelianHigherDirectImageTransitionComp (stage 3; reviewer PASS; after a return; landing 20261012T165519-L-2935372 (interface); batch 20261012T165503; modules 2; new nodes 1)

@@ -1,0 +1,144 @@
+{
+ "id": "lem-sbc-abelian-higher-direct-image-core-comp",
+ "kind": "statement",
+ "title": "Composition with canonical abelian pullback coefficients",
+ "statement": "Let S, Y, Y′, Y″ be schemes [def-weil-pbc-scheme-conventions], with a : Y′ → Y, b : Y″ → Y′ and structure maps h : Y → S, h′ : Y′ → S, h″ : Y″ → S satisfying a followed by h = h′ and b followed by h′ = h″. For an abelian etale sheaf F on Y [def-weil-pbc-etale-sheaves] and p in N, the canonical comparison [def-sbc-abelian-higher-direct-image-map] for b followed by a with coefficient morphism c_{b,a,F} : (b a)^*F → b^*a^*F [lem-weil-pbc-inverse-image-composition] equals the comparison for a with the identity on a^*F followed by the comparison for b with the identity on b^*a^*F. No arbitrary coefficient morphisms, indexing category or coherence hypotheses enter this identity.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 09Z1 canonical comparison maps; derived adjunction functoriality"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-sbc-abelian-higher-direct-image-map",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Expand the comparisons before homology. Apply the inverse hom-set equivalence for the h″ derived adjunction to the composite comparison. Its naturality moves the first comparison inside b^*. The h′ counit followed by the adjunct defining that first comparison cancels its unit by the triangle identity.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Associativity of the derived inverse-image composition comparisons identifies the remaining adjunct with the comparison for b followed by a. On F concentrated in degree zero, the two single-complex comparisons compose to singleFunctor applied to the underived comparison c_{b,a,F}: this follows by checking degree zero and all zero degrees on the single complex and transporting by the exact-functor localization comparisons. Apply the h″ direct image and degree-p homology, both preserving composition. All witnesses of the structure-map equalities agree by proof irrelevance. Identity morphisms, p = 0 and zero F are included.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-derived-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "worker K3",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 09Z1 canonical comparison maps; adjunction and single-complex coherence elaboration by K3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*(transition|comparison).*comp|upperStarPlusComp",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "no match for derived comparisons of abelian etale sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of canonical higher direct image comparison maps for two morphisms of schemes with pullback coefficients",
+   "date": "2026-10-12",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.comp_app_assoc, AlgebraicGeometry.Scheme.comp_app_assoc, AlgebraicGeometry.Scheme.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.comp_appLE, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc",
+   "verdict": "no match for derived comparisons of abelian etale sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of canonical higher direct image comparison maps for two morphisms of schemes with pullback coefficients",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction comparison along a composite left adjoint is the composite of the right adjoint comparison maps",
+   "date": "2026-10-13",
+   "results": "Adjunction.comp, leftAdjointCompIso, leftAdjointCompIso_assoc and related component formulas. These supply adjunction/coherence primitives, not the abelian higher-direct-image identity with single-complex comparisons.",
+   "verdict": "no exact match; second-reader search"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlusSingleFunctor|upperStarPlusComp|leftAdjointCompIso_assoc",
+   "date": "2026-10-13",
+   "results": "Mathlib matches leftAdjointCompIso_assoc in Adjunction.CompositionIso and module pullback files. Local library search also read LowerStarPlusTransitionComp, HigherDirectImageTransitionCoreComposition and EtalePullbackSingleComp: their public statements require ModuleCat coefficients; generic single-complex helpers are private. No public AddCommGrpCat specialization or generic derived-transition composition statement found.",
+   "verdict": "no duplicate; second-reader search"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianHigherDirectImageTransitionComp",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Proof of the relative colimit assertion: composition of canonical higher direct image comparisons with pullback coefficients",
+   "via": [
+    "lem-sbc-abelian-higher-direct-image-transition-comp",
+    "lem-sbc-higher-direct-image-affine-computation-vanishing",
+    "lem-sbc-higher-direct-image-local-section-vanishing",
+    "sbc-lem-higher-direct-image-affine-section-vanishing",
+    "sbc-lem-higher-direct-image-limit-class-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianHigherDirectImageCoreComp",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianHigherDirectImageCoreComp.lean",
+  "declaration": "AlgebraicGeometry.Etale.abelianHigherDirectImage_core_comp",
+  "statement": "theorem abelianHigherDirectImage_core_comp {S Y Y' Y'' : Scheme.{v}}\n    (a : Y' ⟶ Y) (b : Y'' ⟶ Y') (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Y'' ⟶ S)\n    (wa : a ≫ h = h') (wb : b ≫ h' = h'') (p : ℕ)\n    (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :\n    abelianHigherDirectImageMap (b ≫ a) h h''\n        (by rw [Category.assoc, wa, wb]) p F\n        (((b)^*[AddCommGrpCat.{v + 1}]).obj\n          (((a)^*[AddCommGrpCat.{v + 1}]).obj F))\n        ((upperStarComp AddCommGrpCat.{v + 1} b a).hom.app F) =\n      abelianHigherDirectImageMap a h h' wa p F\n          (((a)^*[AddCommGrpCat.{v + 1}]).obj F) (𝟙 _) ≫\n        abelianHigherDirectImageMap b h' h'' wb p\n          (((a)^*[AddCommGrpCat.{v + 1}]).obj F)\n          (((b)^*[AddCommGrpCat.{v + 1}]).obj\n            (((a)^*[AddCommGrpCat.{v + 1}]).obj F)) (𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T165519-L-2935372",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T165519-L-2935372",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
