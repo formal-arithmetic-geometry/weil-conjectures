@@ -1,0 +1,121 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Lemma 59.39.2 (Tag 09XN, label lemma-describe-pullback), especially the second assertion and its proof, lines 4958-5027"
+ },
+ "id": "lem-weil-pbc-etale-sections-fpqc-separated",
+ "kind": "statement",
+ "title": "EtaleSectionsFpqcSeparated",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\{g_i:T_i\\to S\\}_{i\\in I}$ an fpqc covering [def-weil-pbc-fpqc-covering], and $F$ a sheaf of sets on the small etale site of $S$ [def-weil-pbc-etale-sheaf-of-sets]. For $t,t\\prime\\in\\Gamma(S,F)$, if their inverse-image pullbacks to $\\Gamma(T_i,g_i^{-1}F)$ agree for every $i$, then $t=t\\prime$. Here inverse image and its unit are those of [lem-weil-pbc-sets-etale-inverse-image-composition-units], and global-section pullback is the unit followed by restriction along $(g_i,\\mathrm{id}_{T_i}):T_i\\to S\\times_S T_i$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof": [
+  {
+   "text": "Apply the largest agreement open theorem to the identity etale object and the\ntwo global sections. Equality of their pullbacks factors every g_i through the\nagreement open. An fpqc covering is jointly surjective, so every point of S lies in\nthis open, which is therefore all of S. Test its universal property on the identity\nof S. Inverse image along the identity is canonically restriction along the identity;\nthe unit followed by restriction along the diagonal is the identity section map.\nThus equality after this identity pullback gives equality of the original sections.\nThis also handles an empty base or an empty indexing type whenever it is a cover.",
+   "uses": [
+    "lem-weil-pbc-etale-sections-equal-open",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-sections-equal-open",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 59.39.2 (Tag 09XN), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fpqc descent of sections arbitrary sheaf small etale site",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "descent of etale sheaf sections along fpqc family",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'fpqc.*descent|smallEtale.*section' Mathlib/AlgebraicGeometry/Sites",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injectivity of global sections under jointly surjective scheme pullback etale sheaves",
+   "results": "structure-sheaf injectivity and scheme-point injectivity only, no match",
+   "date": "2026-10-12",
+   "verdict": "no match on independent second reading"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSectionsFpqcDescent",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Tag 09XN section descent: EtaleSectionsFpqcSeparated",
+   "via": [
+    "lem-weil-pbc-etale-sections-fpqc-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionsFpqcSeparated",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionsFpqcSeparated.lean",
+  "declaration": "AlgebraicGeometry.etaleSections_eq_of_fpqc_pullbacks",
+  "statement": "theorem etaleSections_eq_of_fpqc_pullbacks\n    {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)\n    (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)\n    (F : Sheaf S.smallEtaleTopology (Type (u + 1)))\n    (t t' : F.obj.obj (op (Scheme.Etale.mk (𝟙 S))))\n    (heq : ∀ i,\n      ((Scheme.etaleSetPullback (g i)).obj F).obj.map\n        (MorphismProperty.Over.homMk (pullback.lift (g i) (𝟙 (T i))\n          ((Category.comp_id _).trans (Category.id_comp _).symm)) (by simp) :\n          Scheme.Etale.mk (𝟙 (T i)) ⟶\n            (MorphismProperty.Over.pullback @Etale ⊤ (g i)).obj (Scheme.Etale.mk (𝟙 S))).op\n        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (MorphismProperty.Over.pullback @Etale ⊤ (g i)) _\n          (S.smallGrothendieckTopology @Etale)\n          ((T i).smallGrothendieckTopology @Etale)).unit.app F).hom.app\n            (op (Scheme.Etale.mk (𝟙 S))) t) =\n      ((Scheme.etaleSetPullback (g i)).obj F).obj.map\n        (MorphismProperty.Over.homMk (pullback.lift (g i) (𝟙 (T i))\n          ((Category.comp_id _).trans (Category.id_comp _).symm)) (by simp) :\n          Scheme.Etale.mk (𝟙 (T i)) ⟶\n            (MorphismProperty.Over.pullback @Etale ⊤ (g i)).obj (Scheme.Etale.mk (𝟙 S))).op\n        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (MorphismProperty.Over.pullback @Etale ⊤ (g i)) _\n          (S.smallGrothendieckTopology @Etale)\n          ((T i).smallGrothendieckTopology @Etale)).unit.app F).hom.app\n            (op (Scheme.Etale.mk (𝟙 S))) t')) : t = t'",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "state": "none"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T135244-L-1670937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T135244-L-1670937",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

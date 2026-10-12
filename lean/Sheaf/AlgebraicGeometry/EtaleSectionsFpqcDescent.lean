@@ -7,9 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleInverseImageSectionDescription
-import Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent
-import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen
+
+import Sheaf.AlgebraicGeometry.EtaleSectionsFpqcExistence
+import Sheaf.AlgebraicGeometry.EtaleSectionsFpqcSeparated
 
 /-!
 # Fpqc descent of sections of an etale sheaf of sets
@@ -111,6 +111,10 @@ theorem existsUnique_etaleSection_of_fpqc_cover
           (S.smallGrothendieckTopology @Etale)
           ((T i).smallGrothendieckTopology @Etale)).unit.app F).hom.app
             (op (Scheme.Etale.mk (𝟙 S))) t) = s i := by
-  sorry
+  obtain ⟨t, ht⟩ := exists_etaleSection_of_fpqc_cover T g hcover F s hcompat
+  refine ⟨t, ht, ?_⟩
+  intro t' ht'
+  exact etaleSections_eq_of_fpqc_pullbacks T g hcover F t' t
+    (fun i ↦ (ht' i).trans (ht i).symm)
 
 end AlgebraicGeometry
