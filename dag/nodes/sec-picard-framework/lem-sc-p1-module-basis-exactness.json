@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-p1-module-basis-exactness",
+ "kind": "statement",
+ "title": "Module sheaf exactness from basis sections",
+ "statement": "Let X be a scheme and B a basis of open subsets of X: every point of every open W has a neighbourhood U∈B contained in W. Let F,G,H be sheaves of O_X-modules [def-weil-sheaf-of-modules-category] and i:F→G, q:G→H morphisms. Suppose for every U∈B the maps on sections i_U and q_U form an exact sequence of additive abelian groups, with i_U injective and q_U surjective. Then i followed by q is zero, i is a monomorphism and q is an epimorphism in the category of O_X-module sheaves, and for every proof h:i followed by q=0 the resulting short complex is exact.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules Section 01AF and Lemma 01AG, local lifting criterion for exactness"
+ },
+ "proof": [
+  {
+   "text": "For each W, use all basis opens U contained in W as an indexed cover. Naturality transports the composite and equality of sections to this cover. The composite vanishes on the cover because each sectionwise sequence is exact. Sheaf separation makes the composite zero on W. Likewise, if i_W(s)=i_W(t), injectivity on every basis member makes s and t agree on the cover, hence on W. Pointwise injectivity gives categorical monicity.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules Section 01AF and Lemma 01AG, local lifting criterion for exactness"
+   }
+  },
+  {
+   "text": "Surjectivity of q on each member of the basis cover lifts any section of H locally. Apply the epi clause of [lem-weil-pbc-ringed-space-module-exactness-local-lifting]. For a section s of G killed by q, naturality makes its restriction to each basis member lie in the kernel there. Sectionwise exactness supplies a local lift through i. Apply the exactness clause of the same local lifting theorem.",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules Section 01AF and Lemma 01AG, local lifting criterion for exactness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules Section 01AF and Lemma 01AG, local lifting criterion for exactness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sequence of sheaves of modules is short exact if it is short exact on a basis of open sets",
+   "results": "SheafOfModules.instAbelian and exactness in ModuleCat; no basis criterion.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Function.Exact",
+   "results": "No hits.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "exact.*(app|basis)|mono.*(app|basis)|epi.*(app|basis)",
+   "results": "Mathlib module-sheaf grep returned three incidental proof lines in PushforwardContinuous, Quasicoherent and PullbackFree, not basis exactness criteria. Separate repository rg found the existing local lifting criterion used in this proof.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Module sheaves are short exact when their sections over a basis of open sets are short exact",
+   "results": "Service unavailable: HTTP 500 Internal Server Error; no results returned. Other search kinds and source grep were performed.",
+   "date": "2026-10-12",
+   "verdict": null
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjSheafificationExact",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-proj-sheafification-exact",
+   "place": "proof, standard-chart exactness and local passage to module sheaves",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.BasisExactness",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/BasisExactness.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exactness_of_basis_sections",
+  "statement": "theorem exactness_of_basis_sections\n    (X : Scheme.{u}) (B : Set X.Opens) (hB : Opens.IsBasis B)\n    (F G H : X.Modules) (i : F ⟶ G) (q : G ⟶ H)\n    (hsections : ∀ U ∈ B,\n      Function.Injective (i.val.app (op U)) ∧\n      Function.Exact (i.val.app (op U)) (q.val.app (op U)) ∧\n      Function.Surjective (q.val.app (op U))) :\n    (i ≫ q = 0) ∧ Mono i ∧ Epi q ∧\n      (∀ h : i ≫ q = 0, (ShortComplex.mk i q h).Exact)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T063526-L-3162754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T063526-L-3162754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

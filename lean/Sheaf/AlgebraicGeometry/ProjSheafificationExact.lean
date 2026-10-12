@@ -8,11 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.ProjTildeFunctorial
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
-import Sheaf.Algebra.Module.ProjDegreeZeroLocalizationExact
-import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
-import Sheaf.Topology.PresheafModuleStalkFunctor
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import Sheaf.Algebra.Module.ProjAwayDegreeZeroExact
+import Sheaf.AlgebraicGeometry.Modules.BasisExactness
+import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
 
 /-!
 # Exactness of associated sheaves on the projective line
@@ -114,6 +112,31 @@ theorem proj_sheafification_shortExact
       alpha 2 f d hd hf (q.val.app (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) s) =
         mk (psi y) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f)) :
     ∃ h : i ≫ q = 0, (ShortComplex.mk i q h).ShortExact := by
-  sorry
+  have _ := hscalar
+  have _ := hres
+  let B : Set (Proj (homogeneousSubmodule (Fin 2) k)).Opens :=
+    {U | ∃ (f : MvPolynomial (Fin 2) k) (d : ℕ),
+      0 < d ∧ f ∈ homogeneousSubmodule (Fin 2) k d ∧
+        U = basicOpen (homogeneousSubmodule (Fin 2) k) f}
+  have hB : TopologicalSpace.Opens.IsBasis B :=
+    (standardOpenProperties.{u, u, u} (homogeneousSubmodule (Fin 2) k)).1
+  have hsections : ∀ U ∈ B,
+      Function.Injective (i.val.app (op U)) ∧
+      Function.Exact (i.val.app (op U)) (q.val.app (op U)) ∧
+      Function.Surjective (q.val.app (op U)) := by
+    rintro U ⟨f, d, hd, hf, rfl⟩
+    exact proj_away_degreeZero_exact k M 𝓜 h𝓜 hsmul f d hd hf
+      (fun j ↦ (F j).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)))
+      (fun j ↦ alpha j f d hd hf) (fun j ↦ halpha j f d hd hf)
+      phi psi hphi hpsi hinj hexact hsurj
+      (i.val.app (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))).hom
+      (q.val.app (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))).hom
+      (hi f d hd hf) (hq f d hd hf)
+  obtain ⟨hcomp, hmono, hepi, hex⟩ :=
+    Scheme.Modules.exactness_of_basis_sections
+      (Proj (homogeneousSubmodule (Fin 2) k)) B hB (F 0) (F 1) (F 2) i q hsections
+  let : Mono i := hmono
+  let : Epi q := hepi
+  exact ⟨hcomp, ⟨hex hcomp⟩⟩
 
 end AlgebraicGeometry.Proj
