@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-perfect-diagonal-dualizing-evaluation",
+ "kind": "statement",
+ "title": "Tensor evaluation against the dualizing object of a perfect diagonal",
+ "statement": "Let X and S be Noetherian schemes (locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]). Let f:X\\to S be flat [def-weil-flat-morphism] and proper [def-weil-proper-morphism]. Put P=X\\times_S X and let \\Delta:X\\to P be the diagonal [def-pc-base-change]. Choose derived categories [def-pc-derived-category] for X, S and P, and for each open of P in the same derived universe as P. Suppose the single complex \\Delta_*\\mathcal O_X[0] is perfect on P [def-pc-perfect-complex]. Let R:D_{QCoh}(X)\\to D_{QCoh}(S) be equipped with an isomorphism to the restriction of the recorded Rf_* after inclusion in D(S) [def-pc-derived-direct-image], and let a be a specified right adjoint of R. Let h_\\Delta witness that R\\Delta_* preserves quasi-coherent cohomology, and let c be a specified right adjoint of its full-subcategory restriction defined using h_\\Delta. Let O and O_P be quasi-coherent derived objects equipped with isomorphisms of their underlying objects to \\mathcal O_S[0] and \\mathcal O_P[0]. Then there is an isomorphism a(O)\\otimes^L c(O_P)\\cong\\mathbf 1_{D(X)} in the recorded derived tensor category [def-pc-scheme-derived-tensor-structure]. The derived universes of X, S and P may differ.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2Q and 0A9U, first three equalities in the displayed chain of Tag 0BRT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-weil-flat-morphism",
+  "def-pc-perfect-complex",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Use properness and finite type to see that P is Noetherian. The Noetherian direct-image theorem supplies the preservation witnesses. In a common derived universe, lift the comparison for R through the full inclusion, and transfer its adjunction to the canonical restricted direct image. The diagonal counit identity gives O_X[0] isomorphic to c(Lpr_1* a(O_S[0])).",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-proper-base-change",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proper closed diagonal has exact module pushforward, so its derived pushforward of the tensor unit is the given perfect single complex. Apply the perfect immersion tensor formula to K=Lpr_1* a(O_S[0]); its invertible mate gives LDelta* K tensor c(O_P[0]) isomorphic to c(K).",
+   "uses": [
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the derived pullback composition and identity comparisons with Delta followed by pr_1 = id. This identifies LDelta* Lpr_1* with the identity. Compose with the preceding two isomorphisms and invert. Transport the two structure objects by a and c. For distinct derived universes, use the equivalences of localizations induced by the identity of complexes; their comparisons with single functors, homology, derived functors and K-flat derived tensor transport this construction and both adjunctions. This establishes the assertion for the specified adjoints.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-category",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-base-change",
+  "lem-pc-noetherian-derived-direct-image-right-adjoint",
+  "lem-sc-smooth-proper-diagonal-pushforward-structure",
+  "lem-sc-smooth-proper-diagonal-tensor-formula",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2Q and 0A9U, first three equalities in the displayed chain of Tag 0BRT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat proper morphism perfect diagonal right adjoint diagonal dualizing object tensor evaluation is structure sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint smooth proper pushforward diagonal evaluation dualizing tensor normal determinant",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, PresheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, PresheafOfModules.instIsRightAdjointPushforward, CategoryTheory.ExponentiableMorphism.ev_def, CategoryTheory.ExponentiableMorphism.ev, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, CategoryTheory.ExponentiableMorphism.coev_def",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*(dualizing|counit)|locallyRankedExteriorComplex.*iso",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothProperDualizingTensorEvaluation",
+  "date": "2026-10-12",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: identify the canonical sheaf with relative differentials on each smooth curve; Tag 0BRT (lemma-smooth-proper), displayed chain of isomorphisms before determinant cancellation; Tags 0E2Q and 0A9U, first three equalities in the displayed chain of Tag 0BRT",
+   "via": [
+    "lem-sc-smooth-proper-dualizing-tensor-evaluation",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectDiagonalDualizingEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectDiagonalDualizingEvaluation.lean",
+  "declaration": "AlgebraicGeometry.perfectDiagonal_dualizing_evaluation",
+  "statement": "theorem perfectDiagonal_dualizing_evaluation (X S : Scheme.{u}) [IsNoetherian X] [IsNoetherian S] (f : X ⟶ S) [Flat f] [IsProper f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [HasDerivedCategory.{wP} (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace))] [∀ U : (pullback f f).Opens, HasDerivedCategory.{wP} (SheafOfModules.{u} ((moduleRings (pullback f f).toRingedSpace).over U))] (hperfect : Scheme.IsPerfect (pullback f f) ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace)) 0).obj ((Scheme.Modules.pushforward (pullback.diagonal f)).obj (SheafOfModules.unit X.ringCatSheaf)))) (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory S) (comparison : R ⋙ (schemeDerivedQCohProperty S).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory S ⥤ schemeDerivedQCohCategory X) (adj : R ⊣ a) (O : schemeDerivedQCohCategory S) (hO : O.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj (SheafOfModules.unit S.ringCatSheaf)) (hRΔ : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty (pullback f f) ((schemeDerivedDirectImage (pullback.diagonal f)).obj E.obj)) (c : schemeDerivedQCohCategory (pullback f f) ⥤ schemeDerivedQCohCategory X) (adjC : (schemeDerivedQCohProperty (pullback f f)).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage (pullback.diagonal f)) hRΔ ⊣ c) (OP : schemeDerivedQCohCategory (pullback f f)) (hOP : OP.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace)) 0).obj (SheafOfModules.unit (pullback f f).ringCatSheaf)) : Nonempty (((a.obj O).obj ⊗ (c.obj OP).obj) ≅ 𝟙_ (schemeDerivedCategory X))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T085324-L-33840",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T085324-L-33840",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-smooth-diagonal-dualizing-determinant",
+ "kind": "statement",
+ "title": "Constant-rank determinant description of the smooth diagonal dualizing object",
+ "statement": "Let S be a Noetherian scheme (locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]), and let f:X\\to S be proper [def-weil-proper-morphism] and smooth of relative dimension d\\geq0 [def-sbc-smooth-morphisms]. Put P=X\\times_S X with diagonal \\Delta:X\\to P [def-pc-base-change]. Choose derived categories for X and P, possibly in different universes [def-pc-derived-category]. Let h_\\Delta witness preservation of quasi-coherent cohomology by the recorded R\\Delta_* [def-pc-derived-direct-image], and let c:D_{QCoh}(P)\\to D_{QCoh}(X) be a specified right adjoint of its full-subcategory restriction using h_\\Delta. Let O_P be a quasi-coherent derived object with underlying object isomorphic to \\mathcal O_P[0]. Write M=\\Omega^1_{X/S} [def-sc-relative-differential-sheaf] and M^\\vee=\\mathcal Hom(M,\\mathcal O_X) [def-pur-sheaf-hom]. Then there is an isomorphism c(O_P)\\cong (\\bigwedge^d M^\\vee)[-d] in D(X), with the sheafified exterior power [def-sc-sheaf-exterior-power].",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BR0 specialized to the smooth diagonal, Tag 08S2, fourth equality of Tag 0BRT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "def-pur-sheaf-hom",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "Properness makes the diagonal closed. X and P are Noetherian by finite type and base change. The smooth diagonal theorem gives Koszul-regular local generators; restrict its affine open neighbourhoods near each diagonal point to give the regularity witness in the Koszul duality theorem.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-proper-base-change",
+    "lem-sc-smooth-proper-diagonal-koszul-regular"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the conormal with relative differentials. The latter is finite locally free of rank d. Stalks therefore have finrank d, so the constant locally constant function d satisfies the rank witness in Koszul duality. Apply that theorem with c and the literal single structure object, transporting O_P along its specified isomorphism.",
+   "uses": [
+    "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "lem-sc-smooth-omega-finite-locally-free",
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Dualize the conormal isomorphism by precomposition and take its sheafified exterior power. For constant rank d, the rank-d stratum is all of X and the other strata are empty. Their extension-by-zero terms are zero, so the locally ranked exterior complex is isomorphic to the single exterior sheaf in degree d. Its derived image is the degree-zero single shifted by -d. Compose with the inverse Koszul-duality isomorphism. This also works for empty X and d=0.",
+   "uses": [
+    "def-sc-locally-ranked-exterior-complex",
+    "def-sc-sheaf-exterior-power",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-base-change",
+  "lem-sc-smooth-proper-diagonal-koszul-regular",
+  "lem-sc-smooth-proper-diagonal-conormal-differentials",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-sc-smooth-proper-diagonal-koszul-dual",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-sc-sheaf-exterior-power",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BR0 specialized to the smooth diagonal, Tag 08S2, fourth equality of Tag 0BRT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth diagonal right adjoint structure sheaf top exterior power dual relative differentials negative dimension shift",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dualizing object of smooth diagonal is shifted top exterior power normal sheaf",
+   "results": "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, Algebra.smoothLocus_eq_compl_support_inter, AlgebraicGeometry.diagonal_Spec_map, AlgebraicGeometry.IsImmersion.instLiftSchemeId, AlgebraicGeometry.diagonal_SpecMap, AlgebraicGeometry.IsImmersion.instDiagonalScheme, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszulRegularImmersion_dualizing|diagonal_counit_identity|smooth_proper_diagonal_tensor_formula",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothProperDualizingTensorEvaluation",
+  "date": "2026-10-12",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: identify the canonical sheaf with relative differentials on each smooth curve; Tag 0BRT (lemma-smooth-proper), displayed chain of isomorphisms before determinant cancellation; Tag 0BR0 specialized to the smooth diagonal, Tag 08S2, fourth equality of Tag 0BRT",
+   "via": [
+    "lem-sc-smooth-proper-dualizing-tensor-evaluation",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothDiagonalDualizingDeterminant",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothDiagonalDualizingDeterminant.lean",
+  "declaration": "AlgebraicGeometry.smoothDiagonal_dualizing_determinant",
+  "statement": "theorem smoothDiagonal_dualizing_determinant (X S : Scheme.{u}) [IsNoetherian S] (f : X ⟶ S) (d : ℕ) [SmoothOfRelativeDimension d f] [IsProper f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wP} (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace))] (hRΔ : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty (pullback f f) ((schemeDerivedDirectImage (pullback.diagonal f)).obj E.obj)) (c : schemeDerivedQCohCategory (pullback f f) ⥤ schemeDerivedQCohCategory X) (adjC : (schemeDerivedQCohProperty (pullback f f)).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage (pullback.diagonal f)) hRΔ ⊣ c) (OP : schemeDerivedQCohCategory (pullback f f)) (hOP : OP.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace)) 0).obj (SheafOfModules.unit (pullback f f).ringCatSheaf)) : Nonempty ((c.obj OP).obj ≅ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (Scheme.Modules.exteriorSheaf (SheafOfModules.homObj (R := X.sheaf) f.relativeDifferentials (SheafOfModules.unit X.ringCatSheaf)) d))⟦-(d : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T085324-L-33840",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T085324-L-33840",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
