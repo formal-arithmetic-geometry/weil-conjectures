@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-formal-functions-degree-zero-augmentation-compatibility",
+ "kind": "statement",
+ "title": "Formal-fibre system compatibility for the fixed degree-zero augmentation",
+ "statement": "Let f:X→Y be a scheme morphism and y∈Y. Let α be the O_(Y,y)-linear stalk map of the canonical augmentation f_*O_X → R^0f_*O_X [def-weil-pbc-module-stalk]. Let C and S be the formal-fibre zeroth cohomology and section inverse systems [def-weil-pbc-formal-fibre-cohomology]. There exists an isomorphism b:C≅S over the completed local ring such that for every n, every canonical theta with IsFormalFunctionsTheta, every V containing y whose inverse image in X_n is the whole fibre, and every t∈Γ(f^(-1)V,O_X), b_n(theta(α(germ_V(t))))=i_n^*(t). The augmentation α is fixed; no stalk equivalence is chosen or asserted. Pullback of the unit module is tensor pullback [def-pc-module-pullback], and the cohomology transitions and canonical theta use the cohomology h-maps [def-weil-pbc-module-cohomology-fmap].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4 and 01FB, degree-zero augmentation; formal-fibre notation of coherent.tex Tag 02OD"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-fibre-cohomology",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Construct each b_n using the inverse degree-zero global-sections augmentation followed by global sections of the tensor-pullback unit isomorphism. Restrict scalars to the completed local ring. Augmentation compatibility of cohomology h-maps and the tensor-unit equation identify the transitions, giving a natural isomorphism b.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Augment t in the restricted resolution to obtain xi. The resolutionSectionClass formula followed by the inverse resolution comparison is the direct-image augmentation of t, so its germ equals α(germ(t)). Apply IsFormalFunctionsTheta to this class. Augmentation compatibility identifies the right side with pullback of t under b. The containment hypothesis identifies the restriction open with top, so its cohomology restriction is the identity; cancelling gives the displayed equation.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "lem-weil-pbc-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+  "lem-weil-pbc-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Degree-zero specialization of the constructions in Tags 01E4 and 01FB; explicit argument in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "zeroth derived functor augmentation germ pullback formal fibre structure sheaf compatibility",
+   "date": "2026-10-12",
+   "results": "TopCat.Presheaf.germ_stalkPullbackInv; TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom; TopCat.Presheaf.germToPullbackStalk; TopCat.Presheaf.germ_stalkPullbackHom; ModuleCat.Tilde.toOpen_germ; ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap; TopCat.Presheaf.germ_stalkPullbackHom_assoc; TopCat.Presheaf.germ_stalkPullbackInv_assoc",
+   "verdict": "Generic augmentation and germ results only; none states compatibility with the formal-fibre inverse system. The generic augmentation-isomorphism instances are used in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical zeroth derived augmentation on stalks and cohomology pullback of the structure sheaf on formal fibres",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.toRightDerivedZero",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.instIsIsoFunctorToRightDerivedZero; CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective; CategoryTheory.instIsIsoAppToRightDerivedZero; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc",
+   "verdict": "Generic augmentation and germ results only; none states compatibility with the formal-fibre inverse system. The generic augmentation-isomorphism instances are used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionSectionClass|formalFunctions|toRightDerivedZero|germ.*augmentation",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "verdict": "Generic augmentation and germ results only; none states compatibility with the formal-fibre inverse system. The generic augmentation-isomorphism instances are used in the parent proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroCompatibility",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-functions-degree-zero-compatibility",
+   "place": "The fibre-system and germ equation after fixing the canonical stalk augmentation; the parent constructs and proves the stalk equivalence separately.",
+   "via": [
+    "lem-weil-pbc-formal-functions-degree-zero-compatibility",
+    "lem-weil-pbc-formal-functions-degree-zero-dictionary"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroAugmentationCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsDegreeZeroAugmentationCompatibility.lean",
+  "declaration": "AlgebraicGeometry.formalFunctions_degreeZero_augmentation_compatibility",
+  "statement": "theorem formalFunctions_degreeZero_augmentation_compatibility {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (y : Y) :\n    ∃ b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ≅\n          formalFibreSectionsSystem f y,\n        ∀ (n : ℕ)\n          (θ : formalFunctionsStalk f y (SheafOfModules.unit X.ringCatSheaf) 0 →ₗ[\n            Y.presheaf.stalk y]\n            formalFibreCohomologyLocal f y (SheafOfModules.unit X.ringCatSheaf) 0 n),\n          IsFormalFunctionsTheta f y (SheafOfModules.unit X.ringCatSheaf) 0 n θ →\n          ∀ (V : Y.Opens) (hy : y ∈ V)\n            (hV : (⊤ : (formalFibre f y n).Opens) ≤\n              (formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)) (t : Γ(X, f ⁻¹ᵁ V)),\n            (b.hom.app (op n)) (θ (((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).map\n              ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).toRightDerivedZero.app\n                (SheafOfModules.unit X.ringCatSheaf))).hom (TopCat.Presheaf.germ\n              ((Scheme.Modules.pushforward f).obj\n                (SheafOfModules.unit X.ringCatSheaf)).val.presheaf V y hy t))) =\n              (formalFibreι f y n).appLE (f ⁻¹ᵁ V) ⊤ hV t",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0567b",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T194139-L-464476",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0567b",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T194139-L-464476",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, forced dictionary adaptation, DAG records, and report matched against packet and repository; all delivered modules and downstream importer compiled."
+ }
+}

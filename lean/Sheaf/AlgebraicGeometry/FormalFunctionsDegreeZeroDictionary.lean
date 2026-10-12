@@ -71,8 +71,7 @@ theorem formalFunctions_degreeZero_dictionary {X Y : Scheme.{u}} (f : X ⟶ Y) (
               ((Scheme.Modules.pushforward f).obj
                 (SheafOfModules.unit X.ringCatSheaf)).val.presheaf V y hy t))) =
               (formalFibreι f y n).appLE (f ⁻¹ᵁ V) ⊤ hV t := by
-  obtain ⟨a, _⟩ := formalFunctions_degreeZero_stalkIso f y
-  obtain ⟨b, _⟩ := formalFunctions_degreeZero_systemIso f y
-  exact ⟨a, b, formalFunctions_degreeZero_compatibility f y a b⟩
+  obtain ⟨a, _, b, hb⟩ := formalFunctions_degreeZero_compatibility f y
+  exact ⟨a, b, hb⟩
 
 end AlgebraicGeometry

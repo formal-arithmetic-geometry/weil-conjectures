@@ -11,9 +11,9 @@
   "def-pc-module-pullback"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 02OD"
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4 and 01FB, degree-zero augmentation; stalk equivalence assembled using Mathlib instIsIsoAppToRightDerivedZero and ConcreteCategory.isIso_iff_bijective"
  },
  "mathlib_searches": [
   {
@@ -57,26 +57,26 @@
  "unit": "sk-thm-p1",
  "id": "lem-weil-pbc-formal-functions-degree-zero-compatibility",
  "title": "Compatibility of degree-zero identifications",
- "statement": "the compatibility predicate in the target theorem, for given a and b",
+ "statement": "For a morphism of schemes f:X→Y and y∈Y, there exist an O_(Y,y)-linear equivalence from the ordinary direct-image stalk of O_X to its zeroth derived direct-image stalk, and an isomorphism from the formal-fibre zeroth cohomology system to its section system [def-weil-pbc-formal-fibre-cohomology], such that every canonical theta sends the class of each germ of a section, under those identifications, to section pullback along the formal-fibre inclusion. The formula is the degree-zero dictionary formula; the two identifications are chosen jointly, not arbitrary. In addition, the underlying linear map of the chosen stalk equivalence is exactly the stalk of the canonical degree-zero direct-image augmentation.",
  "proof": [
   {
-   "text": "Under the stalk and system identifications, evaluate the defining IsFormalFunctionsTheta equation on the degree-zero augmentation class of a germ. The containment hypothesis identifies restriction to the whole fibre with the displayed pullback section, yielding the formula.",
+   "text": "The direct-image functor preserves finite limits. Its degree-zero augmentation is an isomorphism, and taking the module stalk preserves this isomorphism. The underlying linear map is bijective, so LinearEquiv.ofBijective constructs a with that exact underlying map. Its toLinearMap equals the canonical stalk augmentation by reflexivity; retain this equality in the conclusion.",
    "uses": [
-    "lem-weil-pbc-formal-functions-degree-zero-stalk-iso",
-    "lem-weil-pbc-formal-functions-degree-zero-system-iso",
-    "def-weil-pbc-formal-fibre-cohomology",
-    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
-    "lem-weil-pbc-higher-direct-image-presheaf"
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the augmentation compatibility statement to get b and the pullback equation for the fixed augmentation map. This is precisely the underlying map of the constructed a, so the joint existential follows definitionally. Return a, its canonical-map equality, b and the germ formula.",
+   "uses": [
+    "lem-weil-pbc-formal-functions-degree-zero-augmentation-compatibility"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-formal-fibre-cohomology",
-  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-formal-functions-degree-zero-stalk-iso",
-  "lem-weil-pbc-formal-functions-degree-zero-system-iso"
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-formal-functions-degree-zero-augmentation-compatibility"
  ],
  "lean": {
   "existing": false,
@@ -86,7 +86,7 @@
   "branch": "sheaf-dag",
   "by": "C2",
   "date": "2026-10-12",
-  "statement": "theorem formalFunctions_degreeZero_compatibility {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (y : Y)\n    (a : ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj\n        ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))) ≃ₗ[\n          Y.presheaf.stalk y]\n        formalFunctionsStalk f y (SheafOfModules.unit X.ringCatSheaf) 0)\n    (b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ≅\n          formalFibreSectionsSystem f y) :\n    ∀ (n : ℕ)\n      (θ : formalFunctionsStalk f y (SheafOfModules.unit X.ringCatSheaf) 0 →ₗ[\n        Y.presheaf.stalk y]\n        formalFibreCohomologyLocal f y (SheafOfModules.unit X.ringCatSheaf) 0 n),\n      IsFormalFunctionsTheta f y (SheafOfModules.unit X.ringCatSheaf) 0 n θ →\n      ∀ (V : Y.Opens) (hy : y ∈ V)\n        (hV : (⊤ : (formalFibre f y n).Opens) ≤\n          (formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)) (t : Γ(X, f ⁻¹ᵁ V)),\n        (b.hom.app (op n)) (θ (a (TopCat.Presheaf.germ\n          ((Scheme.Modules.pushforward f).obj\n            (SheafOfModules.unit X.ringCatSheaf)).val.presheaf V y hy t))) =\n          (formalFibreι f y n).appLE (f ⁻¹ᵁ V) ⊤ hV t"
+  "statement": "theorem formalFunctions_degreeZero_compatibility {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (y : Y) :\n    ∃ a : ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj\n        ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))) ≃ₗ[\n          Y.presheaf.stalk y]\n        formalFunctionsStalk f y (SheafOfModules.unit X.ringCatSheaf) 0,\n      a.toLinearMap = ((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).map\n        ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).toRightDerivedZero.app\n          (SheafOfModules.unit X.ringCatSheaf))).hom ∧\n      ∃ b : formalFibreCohomologySystem f y (SheafOfModules.unit X.ringCatSheaf) 0 ≅\n          formalFibreSectionsSystem f y,\n        ∀ (n : ℕ)\n          (θ : formalFunctionsStalk f y (SheafOfModules.unit X.ringCatSheaf) 0 →ₗ[\n            Y.presheaf.stalk y]\n            formalFibreCohomologyLocal f y (SheafOfModules.unit X.ringCatSheaf) 0 n),\n          IsFormalFunctionsTheta f y (SheafOfModules.unit X.ringCatSheaf) 0 n θ →\n          ∀ (V : Y.Opens) (hy : y ∈ V)\n            (hV : (⊤ : (formalFibre f y n).Opens) ≤\n              (formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)) (t : Γ(X, f ⁻¹ᵁ V)),\n            (b.hom.app (op n)) (θ (a (TopCat.Presheaf.germ\n              ((Scheme.Modules.pushforward f).obj\n                (SheafOfModules.unit X.ringCatSheaf)).val.presheaf V y hy t))) =\n              (formalFibreι f y n).appLE (f ⁻¹ᵁ V) ⊤ hV t"
  },
  "blueprint": {
   "is": null,
@@ -112,11 +112,42 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
+  "reviewer": "X-0567b",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T154242-L-2434262",
+  "landing": "20261012T194139-L-464476",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean files, forced dictionary adaptation, DAG records, and report matched against packet and repository; all delivered modules and downstream importer compiled."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "S2 stage 2",
+  "old_statement": "the compatibility predicate in the target theorem, for given a and b",
+  "old_proof": [
+   {
+    "text": "Under the stalk and system identifications, evaluate the defining IsFormalFunctionsTheta equation on the degree-zero augmentation class of a germ. The containment hypothesis identifies restriction to the whole fibre with the displayed pullback section, yielding the formula.",
+    "uses": [
+     "lem-weil-pbc-formal-functions-degree-zero-stalk-iso",
+     "lem-weil-pbc-formal-functions-degree-zero-system-iso",
+     "def-weil-pbc-formal-fibre-cohomology",
+     "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+     "lem-weil-pbc-higher-direct-image-presheaf"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-formal-fibre-cohomology",
+   "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+   "lem-weil-pbc-higher-direct-image-presheaf",
+   "lem-weil-pbc-formal-functions-degree-zero-stalk-iso",
+   "lem-weil-pbc-formal-functions-degree-zero-system-iso"
+  ],
+  "what": "Arbitrary a and b cannot satisfy this formula: for f=id of Spec Q and t=1, replacing the canonical system identification b by -b changes 1 to -1, while IsFormalFunctionsTheta does not mention a or b. Choose the identifications jointly instead, construct a from the degree-zero augmentation, and leave only the canonical augmentation-to-fibre-system compatibility obligation. The chosen a is also required to have the canonical augmentation as its underlying linear map. This stronger conclusion distinguishes compatibility from the already-stated dictionary and exposes the construction rather than duplicating the dictionary theorem.",
+  "source": {
+   "document": "literature/stacks-project/cohomology.tex",
+   "place": "Tags 01E4 and 01FB, degree-zero canonical augmentation compatibility"
+  },
+  "citers": []
  }
 }
