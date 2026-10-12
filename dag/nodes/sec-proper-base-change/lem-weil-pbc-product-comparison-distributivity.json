@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-product-comparison-distributivity",
+ "kind": "statement",
+ "title": "Product comparison transports distributivity",
+ "statement": "Let C and D be categories with binary products, and F : C → D a functor preserving binary products. Let R,X in C, R′,X′ in D, p : R′ ≅ F(R), q : X′ ≅ F(X), addV : X × X → X, addU : X′ × X′ → X′, and muV : R × X → X. Assume F(addV) = prodComparison(F,X,X) followed by (q⁻¹ × q⁻¹), addU, and q. Assume the source distributivity diagram: (id_R × addV) followed by muV equals the pair of muV after the first/second and first/third projections, followed by addV. Define mu = (p × q) followed by the inverse comparison for (R,X), F(muV), and q⁻¹. Then (id_R′ × addU) followed by mu equals the pair of mu after the first/second and first/third projections, followed by addU. No algebraic structures, adjunctions, sites or sectionwise descriptions are required.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, proof of lemma-pullback-module; product-comparison naturality calculation"
+ },
+ "proof": [
+  {
+   "text": "Expand the transported map and define the outer and inner product comparison composites.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the two projection identities of product comparisons to show that the triple-product comparison commutes with the two projections, the addition map, and the two module projections.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the desired equality by the invertible triple-product comparison, apply F to the source distributivity equality, and cancel the comparison isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, product comparison naturality calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite product preserving functor preserves distributivity diagram of scalar action",
+   "results": "8 hits: CategoryTheory.IsMonoidalDistrib.of_MonoidalPreadditive_with_binary_coproducts, CategoryTheory.leftDistributor, CategoryTheory.leftDistributor_hom, CategoryTheory.instPreservesFiniteBiproductsTensorLeft, CategoryTheory.IsMonoidalLeftDistrib.preservesBinaryCoproducts_tensorLeft, CategoryTheory.rightDistributor, CategoryTheory.rightDistributor_hom, CategoryTheory.instPreservesFiniteBiproductsTensorRight; ",
+   "date": "2026-10-12",
+   "verdict": "No exact distributivity transport theorem among returned hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "prodComparison",
+   "results": "0 hits: ; loogle: unknown identifier 'prodComparison'",
+   "date": "2026-10-12",
+   "verdict": "Query identifier unavailable to Loogle"
+  },
+  {
+   "tool": "grep",
+   "query": "prodComparison.*(lift|map|naturality)",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Biproducts.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Biproducts.lean; ",
+   "date": "2026-10-12",
+   "verdict": "No exact distributivity transport theorem among returned hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A binary product preserving functor transports a distributivity diagram along isomorphisms",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageScalarDistributivityLeft",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Tag 03D2 scalar-action construction below derived inverse image: transport distributivity by binary-product comparisons",
+   "via": [
+    "lem-weil-pbc-inverse-image-scalar-distributivity-left",
+    "lem-weil-pbc-inverse-image-module-action-laws",
+    "lem-weil-pbc-inverse-image-module-object",
+    "lem-weil-pbc-inverse-image-module-construction",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProductComparisonDistributivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProductComparisonDistributivity.lean",
+  "declaration": "CategoryTheory.Limits.productComparison_distributivity",
+  "statement": "theorem productComparison_distributivity {C D : Type*} [Category C] [Category D] [HasBinaryProducts C] [HasBinaryProducts D] (F : C ⥤ D) [PreservesLimitsOfShape (Discrete WalkingPair) F] {R X : C} {R' X' : D} (p : R' ≅ F.obj R) (q : X' ≅ F.obj X) (addV : X ⨯ X ⟶ X) (addU : X' ⨯ X' ⟶ X') (muV : R ⨯ X ⟶ X) (hadd : F.map addV = prodComparison F X X ≫ prod.map q.inv q.inv ≫ addU ≫ q.hom) (hdist : prod.map (𝟙 R) addV ≫ muV = prod.lift (prod.lift prod.fst (prod.snd ≫ prod.fst) ≫ muV) (prod.lift prod.fst (prod.snd ≫ prod.snd) ≫ muV) ≫ addV) : let mu := prod.map p.hom q.hom ≫ inv (prodComparison F R X) ≫ F.map muV ≫ q.inv prod.map (𝟙 R') addU ≫ mu = prod.lift (prod.lift prod.fst (prod.snd ≫ prod.fst) ≫ mu) (prod.lift prod.fst (prod.snd ≫ prod.snd) ≫ mu) ≫ addU",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T144144-L-2106996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T144144-L-2106996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
