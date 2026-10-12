@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-formal-fibre-idempotent-limit",
+ "kind": "statement",
+ "title": "Compatible lifting of an idempotent to the formal-fibre section limit",
+ "statement": "Let f:X→S be a morphism of schemes, s∈S, A=O_(S,s) and m its maximal ideal. Use the formal-fibre section system [def-weil-pbc-formal-fibre-cohomology]: X_n=Spec(A/m^(n+1))×_S X, its section modules over the completed ring, and restriction transitions. For every idempotent e∈Γ(X_0,O), there exists an element v of the inverse limit of these section modules whose zeroth projection equals e. No properness, Noetherian or henselian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0G7X, Noetherian paragraph, infinitesimal idempotent lifting (lines 8133--8146); verified at https://stacks.math.columbia.edu/tag/0G7X"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-fibre-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For A = O_(S,s), set m = maximalIdeal A. The map X_0 to X_n is the base change of A/m^(n+1) to A/m. The image ideal m/m^(n+1) has (n+1)st power zero. Pasting pullbacks and identifying the double quotient identifies the base change with X_0, compatibly with its projections.",
+   "uses": [
+    "def-weil-pbc-formal-fibre-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply nilpotent_baseChange_idempotents to the first projection X_n to Spec(A/m^(n+1)) and the image ideal m/m^(n+1). Transport its unique idempotent lift along the preceding identification to obtain e_n on X_n restricting to e on X_0. This is uniqueness among idempotents; no surjectivity on all sections is asserted.",
+   "uses": [
+    "lem-weil-pbc-base-change-nilpotent-thickening-idempotents"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transition X_n to X_(n+1) followed by restriction from X_0 is restriction from X_0. Pullback preserves idempotents. Consequently e_(n+1) restricts to e_n by uniqueness. The compatible family determines an element v of the concrete inverse limit of modules over the completed ring, and its zeroth component is e. This includes e = 0, e = 1 and empty fibres; it does not require the two clopen pieces to be nonempty.",
+   "uses": [
+    "def-weil-pbc-formal-fibre-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formal-fibre-cohomology",
+  "lem-weil-pbc-base-change-nilpotent-thickening-idempotents"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0G7X, Noetherian paragraph, infinitesimal idempotent lifting (lines 8133--8146); verified at https://stacks.math.columbia.edu/tag/0G7X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "idempotents uniquely lift along nilpotent ideal quotients and compatible inverse system",
+   "results": "Service unavailable: Internal Server Error; no absence verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible lifting of idempotents along an inverse sequence of infinitesimal scheme fibres",
+   "results": "Ring idempotent lifting lemmas (existsUnique_isIdempotentElem_eq_of_ker_isNilpotent, OrthogonalIdempotents.lift_of_isNilpotent_ker) require membership in the ring-map image. They do not prove surjectivity on scheme global-section idempotents or transport the infinitesimal pullbacks. No exact formal-fibre-system lemma found.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent.*limit|limit.*idempotent|formalFibre.*idempotent; blueprint_refs.py search idempotent; rg on formal fibre modules",
+   "results": "Only categorical splitting of idempotents in limits and unrelated imports in Mathlib. No matching theorem in FormalFibreCohomology or the source library. The existing nilpotent scheme base-change theorem supplies the geometric input but not the inverse-system glue. Blueprint search found no same-statement node.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFibreIdempotentImageNoetherian",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Tag 0G7X Noetherian case, compatible idempotents on infinitesimal fibres",
+   "via": [
+    "lem-weil-pbc-stein-fibre-idempotent-image-noetherian",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFibreIdempotentLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFibreIdempotentLimit.lean",
+  "declaration": "AlgebraicGeometry.formalFibre_idempotent_limit",
+  "statement": "theorem formalFibre_idempotent_limit {X S : Scheme.{u}} (f : X ⟶ S) (s : S) (e : Γ(formalFibre f s 0, ⊤)) (he : IsIdempotentElem e) : ∃ v : ↥(limit (formalFibreSectionsSystem f s)), (limit.π (formalFibreSectionsSystem f s) (op 0)) v = e",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T163619-L-2787330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T163619-L-2787330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

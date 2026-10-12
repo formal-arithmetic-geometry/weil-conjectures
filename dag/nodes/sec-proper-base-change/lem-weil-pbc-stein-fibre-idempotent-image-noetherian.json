@@ -14,65 +14,51 @@
  ],
  "proof": [
   {
-   "text": "(Noetherian case, setup.) In Steps 1-4 assume moreover that $S$ is locally Noetherian [pqf-def-locnoeth]. Put $A=\\mathcal O_{S,s}$, $\\mathfrak m=\\mathfrak m_s$, $M=(f_*\\mathcal O_X)_s$ (an $A$-module) and, for $n\\ge1$, $A_n=A/\\mathfrak m^n$, $X_n=\\operatorname{Spec}A_n\\times_SX$, so that $X_1=\\operatorname{Spec}\\kappa(s)\\times_SX$ is the fibre $X_s$ [def-pc-scheme-fibre] (up to the symmetry of the fibre product). By the definition of locally Noetherian, $s$ lies in an affine open $\\operatorname{Spec}B\\subseteq S$ with $B$ Noetherian; $A=B_{\\mathfrak p}$ for the prime $\\mathfrak p$ of $s$, so $A$ is a Noetherian local ring [lem-weil-pbc-localization-noetherian] and $\\mathfrak m$ is finitely generated.",
+   "text": "Identify X_0 with the usual scheme-theoretic fibre using Ideal.quotEquivOfEq for m^1=m, the induced Spec isomorphism, pullback.map and pullback symmetry. The resulting isomorphism commutes with projection to X. Pull the given idempotent e back along it, then obtain v in the formal-fibre section inverse limit using formalFibre_idempotent_limit.",
+   "uses": [
+    "lem-weil-pbc-formal-fibre-idempotent-limit",
+    "def-weil-pbc-formal-fibre-cohomology",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply formal_functions_stalk_structureSheaf to identify the completed pushforward structure-sheaf module stalk with the formal-fibre section limit. Pull v back through its inverse. The first limit projection composed with this isomorphism is linear over the completed local ring, hence over the original local ring.",
+   "uses": [
+    "lem-weil-pbc-formal-functions-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local stalk ring is Noetherian by Mathlib AlgebraicGeometry.Noetherian, so its maximal ideal is finitely generated. Prove that maximal-ideal scalars kill the zeroth formal-fibre section module using evalₐ_of and the quotient scalar map. In completion_image_mod_one choose x whose quotient modulo m agrees with the completed element. AdicCompletion.pow_smul_top_eq_ker_eval shows their difference lies in m times the completed module, which the zeroth projection kills by linearity. Their zeroth images therefore agree.",
    "uses": [
     "pqf-def-locnoeth",
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-localization-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "proof of Lemma 0G7X, second paragraph ('Assume S is Noetherian'), lines 8128-8132"
-   }
-  },
-  {
-   "text": "(Lifting $e$ to the infinitesimal neighbourhoods.) For $n\\ge1$, $X_1=X_n\\times_{\\operatorname{Spec}A_n}\\operatorname{Spec}(A_n/\\mathfrak mA_n)$ (associativity of fibre products, $A_n/\\mathfrak mA_n=\\kappa(s)$), and the ideal $J=\\mathfrak m/\\mathfrak m^n$ of $A_n$ satisfies $J^n=0$. Hence the restriction $\\Gamma(X_n,\\mathcal O_{X_n})\\to\\Gamma(X_1,\\mathcal O_{X_1})$ along the closed immersion $X_1\\to X_n$ is a bijection on idempotents [lem-weil-pbc-base-change-nilpotent-thickening-idempotents] (this is the statement that $X_n$ and $X_s$ have the same underlying space, so the decomposition $X_s=T_1\\amalg T_2$ given by $e$ lifts to $X_n$). Let $e_n\\in\\Gamma(X_n,\\mathcal O_{X_n})$ be the unique idempotent restricting to $e$. For $n\\le n'$ the restriction of $e_{n'}$ to $X_n$ is an idempotent whose restriction to $X_1$ is $e$ (the composite $X_1\\to X_n\\to X_{n'}$ is the closed immersion $X_1\\to X_{n'}$), so it equals $e_n$ by uniqueness. Thus $(e_n)_n\\in\\varprojlim_n H^0(X_n,\\mathcal O_{X_n})$, with first component $e_1=e$.",
-   "uses": [
-    "lem-weil-pbc-base-change-nilpotent-thickening-idempotents"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "proof of Lemma 0G7X, lines 8133-8146 ('Since the underlying topological space of X_n is equal to that of X_s ... e_{n+1} restricts to e_n on X_n')"
-   }
-  },
-  {
-   "text": "(Formal functions.) By the theorem on formal functions at $s$ [lem-weil-pbc-formal-functions-stalk] with $p=0$ and $\\mathcal F=\\mathcal O_X$ ($f$ proper, $S$ locally Noetherian, $\\mathcal O_X$ coherent), the maps $\\theta_n:M\\to H^0(X_n,\\mathcal O_{X_n})$ (pull back a germ of a section of $\\mathcal O_X$ over $f^{-1}(V)$ to $X_n$) induce an $A$-linear isomorphism $\\theta:M^\\wedge\\to\\varprojlim_nH^0(X_n,\\mathcal O_{X_n})$, $M^\\wedge=\\varprojlim_nM/\\mathfrak m^nM$, with $\\theta\\circ\\iota=(\\theta_n)_n$ for the canonical map $\\iota:M\\to M^\\wedge$. Note that $\\theta_1:M\\to H^0(X_1,\\mathcal O_{X_1})=H^0(X_s,\\mathcal O_{X_s})$ is the map of the statement. Put $e_\\infty=\\theta^{-1}((e_n)_n)\\in M^\\wedge$; its image under the first component of $\\theta$ is $e$.",
-   "uses": [
-    "lem-weil-pbc-formal-functions-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "proof of Lemma 0G7X, lines 8132-8149, citing Cohomology of Schemes, Lemma 02OD (coherent-lemma-formal-functions-stalk)"
-   }
-  },
-  {
-   "text": "(Descending from the completion.) Since $\\mathfrak m$ is finitely generated, the projection $p_1:M^\\wedge\\to M/\\mathfrak mM$ is surjective with kernel $\\mathfrak mM^\\wedge$, and $p_1\\circ\\iota$ is the quotient map $M\\to M/\\mathfrak mM$ [lem-weil-pbc-module-completion-complete] (part (2), $n=1$; this is Algebra 05GG, $M^\\wedge/\\mathfrak mM^\\wedge=M/\\mathfrak mM$). Choose $x\\in M$ with $p_1(\\iota(x))=p_1(e_\\infty)$; then $\\iota(x)-e_\\infty\\in\\mathfrak mM^\\wedge$, so, $\\theta$ being $A$-linear, $\\theta(\\iota(x))-(e_n)_n\\in\\mathfrak m\\cdot\\varprojlim_nH^0(X_n,\\mathcal O_{X_n})$. Its first component lies in $\\mathfrak m\\,H^0(X_1,\\mathcal O_{X_1})=0$, since $A$ acts on $H^0(X_1,\\mathcal O_{X_1})$ through $A\\to\\kappa(s)$ ($X_1$ is a scheme over $\\operatorname{Spec}\\kappa(s)$). Hence $\\theta_1(x)=e_1=e$, i.e. $e$ is in the image of $(f_*\\mathcal O_X)_s\\to H^0(X_s,\\mathcal O_{X_s})$. This proves the lemma when $S$ is locally Noetherian.",
-   "uses": [
     "lem-weil-pbc-module-completion-complete",
-    "lem-weil-pbc-formal-functions-stalk"
+    "def-weil-pbc-formal-fibre-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "proof of Lemma 0G7X, lines 8150-8157, citing Algebra, Lemma 05GG (algebra-lemma-hathat-finitely-generated)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Represent x by a germ of a section t on f⁻¹U using TopCat.Presheaf.exists_germ_eq. The fibre projection has image over s, so every fibre point lies over f⁻¹U. Use the formal-functions germ formula to show t restricts to the chosen idempotent on X_0. The projection-compatible isomorphism X_0≅X_s gives the desired equality on X_s by appLE composition and injectivity of pullback along an isomorphism. No idempotence of t is asserted.",
+   "uses": [
+    "lem-weil-pbc-formal-functions-stalk",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "pqf-def-locnoeth",
   "def-pc-scheme-fibre",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-base-change-nilpotent-thickening-idempotents",
+  "def-weil-pbc-formal-fibre-cohomology",
+  "lem-weil-pbc-formal-fibre-idempotent-limit",
   "lem-weil-pbc-formal-functions-stalk",
-  "lem-weil-pbc-module-completion-complete"
+  "lem-weil-pbc-module-completion-complete",
+  "pqf-def-locnoeth"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Noetherian part of Tag 0G7X, Steps 1--4"
+  "place": "Tag 0G7X Noetherian argument, with explicit completion descent and germ/pullback glue formalized by S2"
  },
  "mathlib_searches": [
   {
@@ -157,9 +143,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T144135-L-2103938",
+  "landing": "20261012T163619-L-2787330",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
