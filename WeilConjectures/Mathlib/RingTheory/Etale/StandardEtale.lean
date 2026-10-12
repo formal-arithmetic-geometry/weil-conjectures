@@ -333,8 +333,9 @@ theorem AdjoinRoot.etale_X_pow_sub_C {n : ℕ} {t : R} (hn₀ : n ≠ 0) (hn : I
   Algebra.Etale.of_equiv (StandardEtalePair.ofXPowSubCRingEquiv hn₀ hn ht)
 
 variable (S) in
-/-- Every standard etale algebra over a quotient `R ⧸ I` is the base change of a standard etale
-algebra over `R`. -/
+/-- Blueprint `lemma-openclosed-standard-etale-lift`: Lifting a standard étale algebra along a
+quotient. Every standard etale algebra over a quotient `R ⧸ I` is the base change of a standard
+etale algebra over `R`. -/
 theorem Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor (I : Ideal R)
     [Algebra (R ⧸ I) S] [Algebra.IsStandardEtale (R ⧸ I) S] :
     ∃ (T : Type u) (_ : CommRing T) (_ : Algebra R T),

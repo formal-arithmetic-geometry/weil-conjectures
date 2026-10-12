@@ -283,6 +283,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalizationChart
+public import WeilConjectures.AlgebraicGeometry.NoetherianComponents
 public import WeilConjectures.AlgebraicGeometry.Picard.AffineSpaceRigidity
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
@@ -675,12 +676,18 @@ public import WeilConjectures.Compactification.TwoOpenSetup
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.Devissage
+public import WeilConjectures.ConstructibleSheaf.ExtensionByZero
+public import WeilConjectures.ConstructibleSheaf.FiniteDerived
+public import WeilConjectures.ConstructibleSheaf.FiniteMorphism
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.FreeLifting
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
 public import WeilConjectures.ConstructibleSheaf.Monoidal
+public import WeilConjectures.ConstructibleSheaf.Noetherian
+public import WeilConjectures.ConstructibleSheaf.NormalGenericConstant
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 public import WeilConjectures.ConstructibleSheaf.Presentation
