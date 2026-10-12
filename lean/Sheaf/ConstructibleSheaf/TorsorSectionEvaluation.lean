@@ -6,7 +6,8 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.ConstructibleSheaf.TorsorSectionRepresentation
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.ConstructibleSheaf.TorsorOrdinaryEvaluation
+import Sheaf.ConstructibleSheaf.TorsorOrdinaryEvaluationEquivariant
 
 /-!
 # Evaluation of torsor-trivialized sheaves in their sections over the cover
@@ -55,6 +56,21 @@ theorem Scheme.GaloisCover.exists_sectionEvaluation
       (constantSheaf c.P.smallEtaleTopology
         (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj A)) :
     ∃ α : F.obj ⟶ c.sectionRepresentationPresheaf ℓ F,
-      c.SectionEvaluationNormalized ℓ F α := by sorry
+      c.SectionEvaluationNormalized ℓ F α := by
+  obtain ⟨β, hβ, hΔ⟩ := c.exists_ordinarySectionEvaluation ℓ P F A h
+  have heq := c.ordinarySectionEvaluation_equivariant ℓ P F A h β hβ hΔ
+  let α : F.obj ⟶ c.sectionRepresentationPresheaf ℓ F :=
+    { app := fun W ↦ ModuleCat.ofHom
+        { toFun := fun s ↦ ⟨β W s, heq W s⟩
+          map_add' := by intro s t; apply Subtype.ext; exact map_add (β W) s t
+          map_smul' := by intro r s; apply Subtype.ext; exact map_smul (β W) r s }
+      naturality := by
+        intro W W' f
+        ext s
+        apply Subtype.ext
+        apply LocallyConstant.ext
+        intro x
+        exact hβ W W' f s x }
+  exact ⟨α, hΔ⟩
 
 end AlgebraicGeometry
