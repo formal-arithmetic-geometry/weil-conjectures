@@ -1,0 +1,104 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma 37.7.1 (Tag 04F3), affine construction and gluing"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-universal-first-order-thickening"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine local universal first order thickening",
+   "results": "No exact existing theorem; affine construction interfaces are project-specific.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUniversalFirstOrderThickening affine",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine local lifting property thickening schemes",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExistence",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-universal-first-order-thickening-globalization",
+ "title": "Affine-to-global lifting for universal first order thickenings",
+ "statement": "For h : Z ⟶ X and i : Z ⟶ Z', h' : Z' ⟶ X, if i is a first order thickening, i ≫ h' = h, and the universal lifting property holds whenever both test schemes are affine, then IsUniversalFirstOrderThickening h i h'.",
+ "proof": [
+  {
+   "text": "Cover an arbitrary test target by affine opens, apply the affine lifting property, glue the local morphisms, and use affine uniqueness on overlaps.",
+   "uses": [
+    "lem-weil-pbc-universal-thickening-open-pieces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-universal-thickening-open-pieces"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04F3, gluing step"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningAffineGlobalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalFirstOrderThickeningAffineGlobalization.lean",
+  "declaration": "AlgebraicGeometry.isUniversalFirstOrderThickening_of_affine_local",
+  "statement": "theorem isUniversalFirstOrderThickening_of_affine_local {Z X Z' : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X) (hi : IsFirstOrderThickening i) (hcomp : i ≫ h' = h) (haffine : ∀ {T T' : Scheme.{u}} [IsAffine T] [IsAffine T'] (j : T ⟶ T') (b : T' ⟶ X) (a : T ⟶ Z), IsFirstOrderThickening j → j ≫ b = a ≫ h → ∃! a' : T' ⟶ Z', a' ≫ h' = b ∧ j ≫ a' = a ≫ i) : IsUniversalFirstOrderThickening h i h'",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-universal-first-order-thickening-exists-existence",
+   "place": "strict decomposition of the affine construction and globalization steps",
+   "via": [
+    "lem-weil-pbc-universal-first-order-thickening-exists-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T225321-L-1810246",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T225321-L-1810246",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

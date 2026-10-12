@@ -2,6 +2,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
+import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningAffineLocal
+import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningAffineGlobalization
 
 /-!
 # Existence part of universal first order thickenings
@@ -34,6 +36,9 @@ theorem FormallyUnramified.exists_universalFirstOrderThickening_existence
     {Z X : Scheme.{u}} (h : Z ⟶ X) [FormallyUnramified h] :
     ∃ (Z' : Scheme.{u}) (i : Z ⟶ Z') (h' : Z' ⟶ X),
       IsUniversalFirstOrderThickening h i h' := by
-  sorry
+  obtain ⟨Z', i, h', hi, hcomp, haffine⟩ :=
+    FormallyUnramified.exists_affine_local_universalFirstOrderThickening h
+  exact ⟨Z', i, h', isUniversalFirstOrderThickening_of_affine_local
+    h i h' hi hcomp haffine⟩
 
 end AlgebraicGeometry
