@@ -406,8 +406,11 @@ variable {l : ℕ} [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K] {X Y : 
 (SGA 4½, *Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the
 derived pushforward `Rg_* F` of a constructible `ℓ`-adic sheaf along a morphism `g` locally of
 finite type between affine schemes, with target of finite type, is bounded with constructible
-cohomology sheaves `Rⁿg_* F`. This is the affine `ℚ̄_ℓ` case of blueprint
-`sk-prop-sf-finiteness`. -/
+cohomology sheaves `Rⁿg_* F`. This is the affine case of clause (iii) of blueprint
+`sk-thm-sf-ctf-stability` at the adic stage (`Rf_*` preserves `D^b_c`), which is deduced from
+the finite-coefficient statement `sk-prop-sf-finiteness` by derived limits over the finite
+reductions; it is not part of `sk-prop-sf-finiteness` itself, which concerns finite
+coefficients. -/
 theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [IsAffine Y] {T : Scheme.{u}} [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]
     {F : AdicSheaf l T} (hF : IsAdicConstructibleSheaf F) :
