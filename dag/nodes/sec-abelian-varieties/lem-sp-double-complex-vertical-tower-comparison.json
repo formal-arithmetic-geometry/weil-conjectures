@@ -1,0 +1,175 @@
+{
+ "id": "lem-sp-double-complex-vertical-tower-comparison",
+ "kind": "statement",
+ "title": "Homology of a totalized cutoff cone equals smart vertical interval homology",
+ "statement": "Let C be abelian, with totals for all nonnegative double complexes, and let K be one. Use the explicit cutoff tower of [lem-sp-double-complex-vertical-tower-maps]. For any integer a, upper endpoint j in EInt with a<=j, and integer degree n, the homology of the cone of its a-to-j map is isomorphic to the homology of the extended total smart interval. For finite j=b this interval applies W[a,b) of [def-sp-double-complex-vertical-window] columnwise. At top it applies the smart lower truncation at a to the extended column and restricts back. At bottom it is zero (the inequality excludes this case).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
+  "place": "Proof steps 1 and 2, first sequence: Homology of a totalized cutoff cone equals smart vertical interval homology"
+ },
+ "stmt_deps": [
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "proof": [
+  {
+   "text": "For finite upper endpoint b, the cone of tau_{<a} -> tau_{<b} in each column maps quasi-isomorphically to the quotient. The quotient maps quasi-isomorphically to tau_{>=a}(tau_{<b}). Smart truncations commute when a<=b, giving W[a,b). At top replace tau_{<b} by the original extended column. These comparisons are natural in the horizontal direction.",
+   "uses": [
+    "def-sp-double-complex-vertical-window"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The unique tower maps are the totalizations of these columnwise smart inclusions, by their factorization into the monomorphic top inclusion.",
+   "uses": [
+    "lem-sp-double-complex-vertical-tower-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Keep the column cones integer-indexed, including their possibly nonzero vertical degree -1; do not restrict them to nonnegative vertical degrees. Their uniform lower bound -1 still makes every total diagonal finite. Totalization commutes with cones after the standard sign change on the shifted summand. It preserves columnwise quasi-isomorphisms in this uniformly bounded-below situation: the cone has acyclic columns; eliminate successive horizontal components of a total cycle using vertical exactness. The vertical degree decreases, so the finite diagonal chase terminates. This is a kernel-image chase in an arbitrary abelian category. Apply homology to the resulting zigzag of quasi-isomorphisms. The cutoff and smart-window complexes have zero negative terms, so their extension-restriction loses no data. The cases a=b, negative bounds and negative homology degrees are included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-double-complex-vertical-tower-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
+  "place": "Proof steps 1 and 2, first sequence: Homology of a totalized cutoff cone equals smart vertical interval homology; explicit cone-tower realization of the spectral-object reformulation"
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T12:23:14Z",
+   "tool": "leansearch",
+   "query": "total complex of bounded below double complex with acyclic columns is acyclic",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Service unavailable; no absence verdict."
+  },
+  {
+   "t": "2026-10-12T12:23:14Z",
+   "tool": "leanfinder",
+   "query": "mapping cone of two smart truncation inclusions is quasi-isomorphic to the interval truncation",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CochainComplex.quasiIso_truncGEMap_iff",
+    "CochainComplex.quasiIso_truncLEMap_iff",
+    "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+    "CochainComplex.instQuasiIsoIntπTruncGEOfIsGE",
+    "CochainComplex.quasiIso_ιTruncLE_iff",
+    "HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g",
+    "CochainComplex.quasiIso_πTruncGE_iff",
+    "HomologicalComplex.quasiIsoAt_ιTruncLE"
+   ],
+   "digest": "5b1926cff3d44b17",
+   "date": "2026-10-12",
+   "results": [
+    "CochainComplex.quasiIso_truncGEMap_iff",
+    "CochainComplex.quasiIso_truncLEMap_iff",
+    "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+    "CochainComplex.instQuasiIsoIntπTruncGEOfIsGE",
+    "CochainComplex.quasiIso_ιTruncLE_iff",
+    "HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g",
+    "CochainComplex.quasiIso_πTruncGE_iff",
+    "HomologicalComplex.quasiIsoAt_ιTruncLE"
+   ],
+   "verdict": "Truncation quasi-isomorphism APIs found, but no totalized smart-window cone comparison."
+  },
+  {
+   "t": "2026-10-12T12:20:07Z",
+   "tool": "grep",
+   "query": "shortComplexTruncLEX₃ToTruncGE|mappingCone.*homology|isZero_of_isStrictlyLE",
+   "sub": "",
+   "ok": true,
+   "n_hits": 20,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+    "Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean"
+   ],
+   "digest": "5a2617004e84384b",
+   "date": "2026-10-12",
+   "results": [
+    "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+    "Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean"
+   ],
+   "verdict": "Short exact truncation and cone homology APIs found; the finite-diagonal totalization comparison remains to formalize."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DoubleComplexVerticalSpectralObject",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-double-complex-spectral-sequences",
+   "place": "Proof steps 1 and 2, first sequence: Homology of a totalized cutoff cone equals smart vertical interval homology",
+   "via": [
+    "lem-sp-double-complex-vertical-spectral-object"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparison",
+  "file": "lean/Sheaf/Algebra/Homology/DoubleComplexVerticalTowerComparison.lean",
+  "declaration": "HomologicalComplex₂.verticalTower_interval_homology_iso",
+  "statement": "theorem verticalTower_interval_homology_iso (a : ℤ) (j : EInt) (haj : (a : EInt) ≤ j) (n : ℤ) : Nonempty ((CochainComplex.mappingCone ((verticalTower K).map (homOfLE haj))).homology n ≅ ((total (((verticalInterval a j).mapHomologicalComplex (ComplexShape.up ℕ)).obj K) (ComplexShape.up ℕ)).extend ComplexShape.embeddingUpNat).homology n)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f8f5f",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T135230-L-1661406",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f8f5f",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T135230-L-1661406",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean declarations with their nodes and unchanged existing signature; all three modules and direct importer WeilConjectures.Mathlib.Algebra.Homology.TotalComplex compile cleanly; axiom probes confirm the reported single comparison sorry."
+ }
+}

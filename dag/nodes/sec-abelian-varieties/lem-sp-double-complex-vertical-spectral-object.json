@@ -12,30 +12,37 @@
  ],
  "proof": [
   {
-   "text": "Regard the transpose of K extended by zero vertically as a bounded-below complex in the abelian category of nonnegative horizontal complexes. Exact horizontal evaluation identifies its canonical smart truncations with the columnwise truncations [def-sp-double-complex-vertical-window]. Totalize interval objects; use one-sided truncations for infinite endpoints and K for the whole interval.",
+   "text": "Construct the explicit EInt-indexed smart cutoff tower. Finite terms are totalized columnwise tau_{<b} cutoffs extended to integer degrees; bottom is zero, top is the total of columnwise extension-restriction. Canonical inclusions into top are monomorphic and nested, so their unique factors give a functor.",
    "uses": [
-    "def-sp-double-complex-vertical-window"
+    "lem-sp-double-complex-vertical-tower-maps"
    ],
    "elementary": true
   },
   {
-   "text": "Totalization on uniformly bounded-below complexes of horizontal complexes preserves cones and vertical quasi-isomorphisms. For the latter, an acyclic-column cone is acyclic on totals: eliminate the leftmost component of a total cycle using vertical exactness; subtract its total boundary and move to the next horizontal index. The vertical index decreases, so the uniform lower bound terminates this finite diagonal chase. This is equivalently a chase of kernels and images in the abelian category. Thus totalization descends to a triangulated functor on the bounded-below derived category. Apply the standard t-structure spectral object to K, then this functor and the homology functor. The natural connecting maps and exactness are provided by these constructions, and the interval comparisons are their object identifications.",
-   "uses": [],
+   "text": "Precompose Mathlib HomotopyCategory.spectralObjectMappingCone with this tower and apply its homological functor to C. This supplies the spectral object and its exactness. For finite lower bounds use the cone-to-smart-interval homology comparison. For the whole interval the cone has zero source; its inclusion is an isomorphism onto the top complex. The explicit natural extension-restriction isomorphism identifies top homology with that of Tot(K).",
+   "uses": [
+    "lem-sp-double-complex-vertical-tower-comparison"
+   ],
    "elementary": true
   },
   {
-   "text": "Intervals ending at or below zero vanish. Intervals starting at a have no total terms below a. These imply the two first-quadrant vanishing conditions, also for extended endpoints.",
-   "uses": [],
+   "text": "Cutoffs ending at or below zero are zero termwise; their totals and mapping cones are zero. A smart interval starting at a has zero vertical terms below a; every total summand in degree n<a therefore vanishes. Transport this homology vanishing through the interval comparison, also when the upper bound is top. Bottom-to-anything has no lower-bound condition, and top-to-top vanishes by the isomorphism axiom. This proves both first-quadrant conditions.",
+   "uses": [
+    "def-sp-double-complex-vertical-window",
+    "lem-sp-double-complex-vertical-tower-comparison"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-double-complex-vertical-window"
+  "def-sp-double-complex-vertical-window",
+  "lem-sp-double-complex-vertical-tower-comparison",
+  "lem-sp-double-complex-vertical-tower-maps"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-double-complex-spectral-sequences.md",
-  "place": "Proof steps 1 and 2, first sequence; spectral-object reformulation"
+  "place": "Proof steps 1 and 2, first sequence; explicit smart-cutoff tower and Mathlib mapping-cone spectral object in place of descended triangulated totalization"
  },
  "mathlib_searches": [
   {
@@ -159,11 +166,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E2",
+  "reviewer": "X-f8f5f",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T085231-L-11267",
+  "landing": "20261012T135230-L-1661406",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered Lean declarations with their nodes and unchanged existing signature; all three modules and direct importer WeilConjectures.Mathlib.Algebra.Homology.TotalComplex compile cleanly; axiom probes confirm the reported single comparison sorry."
  }
 }
