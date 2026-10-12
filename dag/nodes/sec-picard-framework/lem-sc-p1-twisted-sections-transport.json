@@ -24,22 +24,53 @@
  ],
  "proof": [
   {
-   "text": "Transport the twisted sheaf and its global sections along the projective-line chart isomorphism, using the shifted-free twist comparison. The chart maps preserve the specified scalar action. Apply finite coherent cohomology on the projective line to the transported module.",
+   "text": "Polynomial Proj is locally Noetherian because its degree-zero ring is isomorphic to k and toSpecZero is locally of finite type. Apply the coherence criterion to G. The finite-pushforward theorem for the identity gives finite sections on every affine open. These modules are finitely presented over the Noetherian affine rings; apply the affine finite-presentation criterion and locality over the affine-open cover. This is the private, fully proved finitePresentation_of_coherent helper.",
    "uses": [
-    "lem-sc-p1-proj-shifted-free-twist",
-    "lem-sc-p1-coherent-finite"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-one variable opens cover polynomial Proj by iSup_basicOpen_eq_top'. Proj.isInvertible_twist gives invertibility of O(n) for every integer n. The proved source-library isFinitePresentation_tensorObj carries finite presentation of G to F = G tensor O(n); locally this tensor is isomorphic to G, including when n is negative or zero.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define p as the canonical linearProjection for the two variables indexed by ULift(Fin 2). It is an isomorphism on each standard target chart by isIso_polynomial_linearProjection_restrict, hence globally by the Zariski locality of isomorphisms. Define L as pushforward p of F. An isomorphism is a closed immersion; the source-library closed-immersion theorem gives finite presentation of L, and the affine-pushforward theorem gives quasi-coherence.",
+   "uses": [
+    "def-pc-linear-pair-morphism",
+    "lem-sc-p1-polynomial-projection-chart-iso",
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ProjectiveLine.finiteDimensional_H k L in degree zero. H.zeroLinearEquiv L identifies H-zero with global sections of L, which have the same underlying group as sections of F. linearProjection_over identifies p followed by the projective-line structure map with toSpecBase. Naturality of GammaSpecIso identifies the composite map on constants with rho, since algebraMap k A-zero is homogeneousSubmoduleZeroEquiv. Thus the H-zero equivalence is k-linear for exactly the prescribed action; take its inverse and pair it with finite dimensionality.",
+   "uses": [
+    "lem-sc-p1-coherent-finite",
+    "def-pc-linear-pair-morphism"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-p1-proj-shifted-free-twist",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pc-linear-pair-morphism",
+  "lem-sc-p1-polynomial-projection-chart-iso",
+  "lem-pc-closed-immersion-coherent-cohomology",
   "lem-sc-p1-coherent-finite"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01YS",
-  "place": "01YS(3)"
+  "place": "01YS(3), with 01XZ (coherence and affine finite presentation), 01NG (projective charts); canonical direct-image transport proof written in Lean by P2"
  },
  "mathlib_searches": [
   {
@@ -97,9 +128,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T160137-L-2564589",
+  "landing": "20261012T173849-L-3301932",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
