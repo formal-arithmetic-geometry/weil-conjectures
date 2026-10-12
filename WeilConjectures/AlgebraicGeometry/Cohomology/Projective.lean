@@ -20,19 +20,18 @@ quasi-compact and quasi-separated morphism to a quasi-compact base, the higher d
 quasi-coherent sheaves vanish in degrees bounded uniformly in the sheaf and the base change.
 
 A projective morphism `f : X ⟶ S` is presented through a closed immersion `i : X ⟶ ℙ(n; S)` over
-`S`, as in the blueprint's definition of (H-)projective morphisms. The cohomology `ℱ.H q` of a
-sheaf on a scheme `X` over `Spec A` is an `A`-module through the structure morphism; this is
-`AlgebraicGeometry.Scheme.Modules.moduleHOfSpec`.
+`S`, as in the blueprint's definition of (H-)projective morphisms. The finiteness of the
+cohomology over a noetherian ring is in
+`WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite`
+(`AlgebraicGeometry.ProjectiveSpace.finite_H`,
+`AlgebraicGeometry.Scheme.Modules.finite_H_of_isClosedImmersion`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_of_isPullback`: the uniform
   vanishing bound for a quasi-compact quasi-separated morphism over a quasi-compact base.
-- `AlgebraicGeometry.ProjectiveSpace.finite_H`: the cohomology of a coherent sheaf on `ℙⁿ_A` is
-  finite over `A`.
-- `AlgebraicGeometry.Scheme.Modules.finite_H_of_isClosedImmersion` and
-  `subsingleton_H_of_isClosedImmersion`: the same for a closed subscheme of `ℙⁿ_A`, together with
-  the vanishing above `n`.
+- `AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_isClosedImmersion`: the vanishing of the
+  cohomology of a closed subscheme of `ℙⁿ_A` above `n`.
 - `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage_of_isClosedImmersion`
   and `isZero_higherDirectImage_of_isClosedImmersion`: coherence and vanishing of the higher
   direct images along a projective morphism.
@@ -72,52 +71,11 @@ theorem exists_isZero_higherDirectImage_of_isPullback [CompactSpace T] (f : X �
       ∀ p ≥ n, IsZero ((higherDirectImage f' p).obj ℱ') :=
   sorry
 
-/-- The cohomology of a sheaf of modules on a scheme `X` with a morphism `f : X ⟶ Spec A` is an
-`A`-module, by restriction of scalars of the `Γ(X, ⊤)`-module structure along
-`A ≅ Γ(Spec A, ⊤) ⟶ Γ(X, ⊤)`.
-
-This is not an instance, since `f` cannot be inferred. -/
-abbrev moduleHOfSpec {A : Type u} [CommRing A] (f : X ⟶ Spec (.of A)) (M : X.Modules) (q : ℕ) :
-    Module A (M.H q) :=
-  Module.compHom (M.H q) ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom
-
 end Scheme.Modules
 
 open Scheme.Modules
 
-variable {n : Type u} [Finite n]
-
-/-- **Coherent cohomology of projective space over a noetherian ring.** Let `A` be noetherian
-and `ℱ` a coherent module on `ℙⁿ_A`. Then each `H^q(ℙⁿ_A, ℱ)` is a finite `A`-module.
-
-By descending induction on `q`, for all coherent modules at once: for `q > n` the cohomology
-vanishes; in general, a surjection `ℰ ⟶ ℱ` from a finite sum `ℰ` of twists `𝒪(m)` with coherent
-kernel `𝒦` gives an exact sequence `H^q(ℰ) ⟶ H^q(ℱ) ⟶ H^{q+1}(𝒦)` whose outer terms are finite.
-
-(blueprint: `lem-pc-projective-space-coherent-finiteness`) -/
-theorem ProjectiveSpace.finite_H (A : Type u) [CommRing A] [IsNoetherianRing A]
-    (ℱ : (ℙ(n; Spec (.of A))).Modules)
-    [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ]
-    [SheafOfModules.IsFinitePresentation (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ] (q : ℕ) :
-    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) ℱ q
-    Module.Finite A (ℱ.H q) :=
-  sorry
-
-variable {X : Scheme.{u}}
-
-/-- **Coherent cohomology of a projective scheme over a noetherian ring.** Let `A` be
-noetherian, `i : X ⟶ ℙⁿ_A` a closed immersion and `ℱ` a coherent `𝒪_X`-module. Then each
-`H^q(X, ℱ)` is a finite `A`-module: `i_* ℱ` is coherent with the same cohomology as `ℱ`, and
-`AlgebraicGeometry.ProjectiveSpace.finite_H` applies to it.
-
-(blueprint: `lem-pc-projective-coherent-finiteness`) -/
-theorem Scheme.Modules.finite_H_of_isClosedImmersion (A : Type u) [CommRing A]
-    [IsNoetherianRing A] (i : X ⟶ ℙ(n; Spec (.of A))) [IsClosedImmersion i] (ℱ : X.Modules)
-    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
-    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    letI := moduleHOfSpec (i ≫ ℙ(n; Spec (.of A)) ↘ Spec (.of A)) ℱ q
-    Module.Finite A (ℱ.H q) :=
-  sorry
+variable {n : Type u} [Finite n] {X : Scheme.{u}}
 
 /-- **Vanishing of the cohomology of a projective scheme above the dimension.** Let
 `i : X ⟶ ℙᵈ_A` be a closed immersion, `ℙᵈ_A = ℙ(n; Spec A)` with `Nat.card n = d + 1`, and

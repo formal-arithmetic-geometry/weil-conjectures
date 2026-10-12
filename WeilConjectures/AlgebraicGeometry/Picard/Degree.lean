@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
+public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
@@ -31,7 +32,10 @@ section of `Pic_{X/S}` over `T`.
 
 - `AlgebraicGeometry.isLocallyConstant_picardPresheafDegree` and
   `AlgebraicGeometry.picardPresheafDegree_map`: the fibrewise degree is locally constant and
-  compatible with base change (blueprint `lem-pd-degree-locally-constant`).
+  compatible with base change (blueprint `lem-pd-degree-locally-constant`, parts 1 and 3).
+- `AlgebraicGeometry.picardPresheafDegree_mul_map_snd`: twisting by a class pulled back from
+  the base does not change the fibrewise degree (blueprint `lem-pd-degree-locally-constant`,
+  part 2).
 - `AlgebraicGeometry.picardPresheafDegree_eq_of_toPicardFunctor_eq`: two classes with the same
   image in `Pic_{X/S}` have the same fibrewise degree.
 - `AlgebraicGeometry.Scheme.Modules.degree_pullback_of_isPullback`: the degree of an invertible
@@ -52,10 +56,9 @@ The fibrewise degree is defined through the fibre Euler characteristics
 The blueprint packages the degree as a morphism `Pic_{X/S} ⟶ ℤ` to the constant sheaf.  Here it is
 spelled out as a function `AlgebraicGeometry.picardDegree` on sections, together with its
 naturality `AlgebraicGeometry.picardDegree_map` and its local constancy; the sheaf property of
-the target is not needed.  Twisting by a class pulled back from the base (part (2) of the
-blueprint lemma) is not stated here. The group law of `AlgebraicGeometry.Scheme.Pic` is in
-`WeilConjectures/AlgebraicGeometry/Picard/Group.lean`, which this file does not need; for a
-smooth proper curve, the additivity of the degree on the fibres over field-valued points is
+the target is not needed.  The tensor product on `Pic (X_T)` is the group law of
+`WeilConjectures/AlgebraicGeometry/Picard/Group.lean`. For a smooth proper curve, the
+additivity of the degree on the fibres over field-valued points is
 `AlgebraicGeometry.picardFibreDegree_mul`.
 -/
 
@@ -147,6 +150,41 @@ theorem isLocallyConstant_picardPresheafDegree [IsProper f] [LocallyOfFinitePres
   exact (Modules.isLocallyConstant_eulerCharFiber _ _
     (Modules.isFlatOver_of_isInvertible _ _)).sub
     (Modules.isLocallyConstant_eulerCharFiber _ _ (Modules.isFlatOver_of_isInvertible _ _))
+
+/-- Twisting a class by the pullback of a class from the base does not change its restriction
+to the fibres: on the fibre over `t` the twist is pulled back from `Spec κ(t)`, whose Picard group
+is trivial. -/
+lemma Scheme.Pic.map_fiberι_mul_map {Y T : Scheme.{u}} (g : Y ⟶ T) (L : Y.Pic) (N : T.Pic)
+    (t : T) : Pic.map (g.fiberι t) (L * Pic.map g N) = Pic.map (g.fiberι t) L := by
+  rw [Pic.map_mul, ← Pic.map_comp, Scheme.Hom.fiber_fac, Pic.map_comp,
+    Subsingleton.elim (h := Pic.subsingleton_spec (T.residueField t)) (Pic.map _ N) 1,
+    Pic.map_one, mul_one]
+
+/-- The fibre Euler characteristic at `t` of (the representative of) a class of the Picard group
+only depends on the restriction of the class to the fibre over `t`. -/
+lemma Scheme.Modules.eulerCharFiber_eq_of_pic_map_fiberι_eq {Y T : Scheme.{u}} (g : Y ⟶ T)
+    {L L' : Y.Pic} {t : T} (h : Pic.map (g.fiberι t) L = Pic.map (g.fiberι t) L') :
+    Modules.eulerCharFiber ((fromSkeleton _).obj L.val) g t =
+      Modules.eulerCharFiber ((fromSkeleton _).obj L'.val) g t := by
+  obtain ⟨e⟩ := Pic.eq_iff_nonempty_iso.1 h
+  let := g.fiberOverSpecResidueField t
+  refine finsum_congr fun q ↦ ?_
+  exact congrArg (fun n : ℕ ↦ (-1) ^ q * (n : ℤ)) (Modules.finrankH_congr _
+    ((fromSkeletonToSkeletonIso _).symm ≪≫ e ≪≫ fromSkeletonToSkeletonIso _) q)
+
+/-- **Twisting by a class from the base does not change the fibrewise degree.** For
+`ℒ ∈ Pic (X_T)` and an invertible module `𝒩` on `T`, the fibrewise degree of `ℒ ⊗ f_T^* 𝒩` is
+that of `ℒ`, where `f_T : X_T ⟶ T` is the projection: on the fibre over `t` the module `f_T^* 𝒩`
+is pulled back from `Spec κ(t)`, hence trivial.
+
+(blueprint: `lem-pd-degree-locally-constant`, part 2) -/
+theorem picardPresheafDegree_mul_map_snd {T : Over S} (L : (pullback f T.hom).Pic)
+    (N : T.left.Pic) :
+    picardPresheafDegree f (T := T) (L * Pic.map (pullback.snd f T.hom) N) =
+      picardPresheafDegree f (T := T) L := by
+  funext t
+  rw [picardPresheafDegree, picardPresheafDegree,
+    Modules.eulerCharFiber_eq_of_pic_map_fiberι_eq _ (Pic.map_fiberι_mul_map _ L N t)]
 
 /-- Two classes of the Picard presheaf with the same image in the relative Picard functor have
 the same fibrewise degree: they agree after pullback along an fppf covering, every point of `T`
