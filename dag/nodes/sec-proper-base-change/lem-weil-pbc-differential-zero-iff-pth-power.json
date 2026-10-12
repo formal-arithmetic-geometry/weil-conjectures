@@ -62,27 +62,27 @@
    }
   },
   {
-   "text": "(Only if.) Suppose $\\mathrm da=0$. By Step 3 write $a=\\sum_Ec_Et^E$ with $c_E\\in K^p$, only finitely many nonzero. Each $c_E$ is a $p$th power, so $\\mathrm dc_E=0$ by Step 1, and the Leibniz rule gives $\\mathrm d(c_Et^E)=c_E\\,\\mathrm d(t^E)+t^E\\mathrm dc_E=c_E\\,\\mathrm d(t^E)$. Write $\\varepsilon_i$ for the family with $1$ at $i$ and $0$ elsewhere. By the Leibniz rule and Step 1, $\\mathrm d(t^E)=\\sum_{i:\\,e_i\\ge1}e_i\\,t^{E-\\varepsilon_i}\\mathrm dt_i$ (a finite sum over the $i$ with $e_i\\ne0$). Hence $$0=\\mathrm da=\\sum_{i\\in I}\\Big(\\sum_{E:\\,e_i\\ge1}e_i\\,c_E\\,t^{E-\\varepsilon_i}\\Big)\\mathrm dt_i,$$ and since $(\\mathrm dt_i)$ is a basis of $\\Omega_{K/k}$ (Step 3), $\\sum_{E:\\,e_i\\ge1}e_ic_E\\,t^{E-\\varepsilon_i}=0$ in $K$ for every $i$. Fix $i$. The map $E\\mapsto E-\\varepsilon_i$ is injective on the families $E$ with $e_i\\ge1$ and takes values in families with entries in $[0,p)$, so the $t^{E-\\varepsilon_i}$ occurring are distinct members of the basis $(t^{E'})$ of $K$ over $K^p$; their coefficients $e_ic_E$ lie in $K^p$ (the integer $e_i$ is in the prime field $\\mathbf F_p=\\mathbf F_p^p\\subseteq K^p$), hence $e_ic_E=0$. As $1\\le e_i\\le p-1$ is not divisible by $p$, $e_i$ is invertible in $K$, so $c_E=0$ for every $E$ with $e_i\\ge1$. Every $E\\ne0$ has some $e_i\\ge1$, so $c_E=0$ for all $E\\ne0$ and $a=c_0\\,t^0=c_0\\in K^p$, i.e. $a=b^p$ for some $b\\in K$. With Step 1 this proves the lemma.",
+   "text": "Use [lem-weil-pbc-p-basis-zero-differential-coefficients] with the monomial basis transported in Step 3 and the basis of differentials from that step. It makes every nonconstant coefficient of a with da=0 vanish. By extensionality its coordinate vector is the single coefficient at exponent zero. Apply the monomial basis reconstruction map: t^0=1, so a is its constant coefficient, hence belongs to kK^p=K^p from Step 2. The coefficient lemma proves the source partial-derivative argument by the Euler operator t_i*d_i, acting diagonally on monomials with eigenvalue E_i.",
    "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-p-basis-differentials-basis"
+    "lem-weil-pbc-p-basis-zero-differential-coefficients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof of (2) implies (1): applying the derivation dual to dx_i to a relation sum a_E x^E lowers the exponent e_i and multiplies by e_i; the same computation applied to da"
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof of (2) implies (1), lines 11382-11394; its dual derivations and partial-derivative calculation, multiplied by t_i to give the Euler operator"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-kahler-differentials",
   "lem-weil-pbc-p-basis-exists",
-  "lem-weil-pbc-p-basis-differentials-basis"
+  "lem-weil-pbc-p-basis-differentials-basis",
+  "lem-weil-pbc-p-basis-zero-differential-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Written by an agent from More on Algebra, Definition Tag 07P1 and Lemma Tag 07P2 (p-bases; the computation is the one of 07P2's proof of (2) implies (1)), on the route set by the lead's brief. The source of the statement, Algebra Lemma Tag 031W (lemma-derivative-zero-pth-power, algebra.tex line 44174), proves it differently: reduction to a finitely generated extension (031G), a separating transcendence basis x_1..x_r, Omega_{K/k} free on the dx_i for K finite separable over k(x) ('computation omitted'), the minimal polynomial of a, and Fields Lemma 031V."
+  "place": "Tags 07P1 and 07P2, preserving the p-basis route. Step 2 uses Frobenius fieldRange; Step 3 transports the prime-field p-basis by a ring equivalence of equal subfields and Basis.mapCoeffs; Step 4 uses the fully proved Euler-operator coefficient lemma. The source statement remains Algebra Tag 031W."
  },
  "mathlib_searches": [
   {
@@ -200,5 +200,15 @@
   "group": "H1",
   "result": "pass",
   "note": "p prime=(p:ℕ)[Fact p.Prime]; k perfect field char p=[Field k][CharP k p][PerfectField k] (≡ PerfectRing k p in char p); K/k=[Field K][Algebra k K]; d=KaehlerDifferential.D k K; da=0 ↔ ∃ b, a=b^p; F_p example illustrative; no Mathlib/upstream equivalent found"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261012T225255-L-1800036",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -9858,3 +9858,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:52 L: merged deliver/A2/Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModelBaseChange (stage 3; reviewer PASS; first push; landing 20261012T225254-L-1799666 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:52 L: merged deliver/A2/Sheaf.FieldTheory.FiniteGaloisCocycleData (stage 3; reviewer PASS; first push; landing 20261012T225255-L-1799812 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:52 L: merged deliver/A2/Sheaf.RingTheory.PopescuUniversalStandardizer (stage 3; reviewer PASS; first push; landing 20261012T225255-L-1799913 (interface); batch 20261012T225253; modules 2; new nodes 1)
+- 22:52 L: merged deliver/A4/Sheaf.RingTheory.KaehlerDifferentialZeroIffPow (stage 3; reviewer PASS; first push; landing 20261012T225255-L-1800036 (interface); batch 20261012T225253; modules 2; new nodes 1)
