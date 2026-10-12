@@ -731,6 +731,43 @@ theorem Hom.isInvertible_zeroLocus [IsIntegral X] {φ : M ⟶ N} (hφ : φ ≠ 0
     φ.zeroLocus.IsInvertible :=
   (Hom.isLocallyPrincipal_zeroLocus φ).isInvertible fun h ↦ hφ ((Hom.zeroLocus_eq_bot_iff φ).mp h)
 
+/-- **Uniqueness of the zero scheme.** Let `I` be an ideal sheaf (a closed subscheme of `X`) such
+that on every affine open `U = Spec A` on which `M` and `N` have free generators `eM` and `eN`,
+with `φ(eM) = b • eN`, the ideal of `I` is `(b)`, i.e. `I ∩ U = Spec(A/(b))`. Then `I = Z(φ)`.
+
+Such affine opens cover every affine open by basic opens
+(`AlgebraicGeometry.Scheme.Modules.exists_basicOpen_isFreeGenerator`), and an ideal of `A` is
+determined by its localizations on such a cover
+(`AlgebraicGeometry.IsAffineOpen.mem_of_forall_exists_basicOpen`); `Z(φ)` has the same local
+ideals (`AlgebraicGeometry.Scheme.Modules.Hom.ideal_zeroLocus`).
+
+(blueprint: `lem-pc-zero-scheme-properties`, part (1), uniqueness) -/
+theorem Hom.eq_zeroLocus_of_ideal_eq_span (φ : M ⟶ N) (I : X.IdealSheafData)
+    (hI : ∀ (U : X.affineOpens) (eM : Γ(M, U.1)) (eN : Γ(N, U.1)), IsFreeGenerator eM →
+      IsFreeGenerator eN → ∀ b : Γ(X, U.1), φ.app U.1 eM = b • eN → I.ideal U = Ideal.span {b}) :
+    I = φ.zeroLocus := by
+  have hle (J J' : X.IdealSheafData)
+      (hJ : ∀ (U : X.affineOpens) (eM : Γ(M, U.1)) (eN : Γ(N, U.1)), IsFreeGenerator eM →
+        IsFreeGenerator eN → ∀ b : Γ(X, U.1), φ.app U.1 eM = b • eN →
+          J.ideal U = Ideal.span {b})
+      (hJ' : ∀ (U : X.affineOpens) (eM : Γ(M, U.1)) (eN : Γ(N, U.1)), IsFreeGenerator eM →
+        IsFreeGenerator eN → ∀ b : Γ(X, U.1), φ.app U.1 eM = b • eN →
+          J'.ideal U = Ideal.span {b}) : J ≤ J' := by
+    intro U a ha
+    refine U.2.mem_of_forall_exists_basicOpen _ a fun x hx ↦ ?_
+    obtain ⟨g, hxg, ⟨eM, hM⟩, eN, hN⟩ := exists_basicOpen_isFreeGenerator M N U.2 hx
+    obtain ⟨b, hb⟩ := hN.exists_smul_eq (φ.app _ eM)
+    refine ⟨g, hxg, ?_⟩
+    have h := Ideal.mem_map_of_mem (X.presheaf.map (homOfLE (X.basicOpen_le g)).op).hom ha
+    rw [J.map_ideal_basicOpen, hJ (X.affineBasicOpen g) eM eN hM hN b hb.symm,
+      ← hJ' (X.affineBasicOpen g) eM eN hM hN b hb.symm, ← J'.map_ideal_basicOpen] at h
+    exact h
+  have hZ : ∀ (U : X.affineOpens) (eM : Γ(M, U.1)) (eN : Γ(N, U.1)), IsFreeGenerator eM →
+      IsFreeGenerator eN → ∀ b : Γ(X, U.1), φ.app U.1 eM = b • eN →
+        φ.zeroLocus.ideal U = Ideal.span {b} :=
+    fun U _ _ hM hN _ hb ↦ φ.ideal_zeroLocus U hM hN hb
+  exact le_antisymm (hle _ _ hI hZ) (hle _ _ hZ hI)
+
 end Properties
 
 end Modules
