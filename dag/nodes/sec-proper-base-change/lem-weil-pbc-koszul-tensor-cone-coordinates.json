@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-koszul-tensor-cone-coordinates",
+ "kind": "statement",
+ "title": "Tensor Koszul coordinates for adjoining the final generator",
+ "statement": "Let R be a commutative ring, M an R-module, r a natural number and f : Fin (r+1) -> R. Put g(i)=f(i.castSucc), A=K(g) tensor_R M and B=K(f) tensor_R M, with the complexes of [def-weil-pbc-koszul-complex]. There exist R-linear equivalences e0 : B_0 -> A_0 and e_n : B_(n+1) -> A_(n+1) direct_sum A_n for every n>=0. They satisfy e0(d_B x)=d_A(e_0 x).first + f(last r)*(e_0 x).second for x in B_1, and e_n(d_B x)=(d_A(e_(n+1) x).first + f(last r)*(e_(n+1) x).second, -d_A(e_(n+1) x).second) for x in B_(n+2). There is no regularity or nonzero-module hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0628 and 0629, cone of multiplication by the final generator; step 2 of the regular-sequence node; read online at https://stacks.math.columbia.edu/tag/062F and https://stacks.math.columbia.edu/tag/0629 because the literature source is not present on this machine"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the exterior-power basis [lem-weil-pbc-exterior-power-free-basis] for the free modules on Fin r and Fin (r+1). In positive degree, partition the basis wedges according to whether the final generator occurs. The first part identifies with the prefix exterior power in that degree. In the second part move the final generator to the front, absorbing the sign of that permutation, and identify the remaining wedge with the prefix exterior power one degree lower. This gives genuine linear equivalences over any commutative ring, including the zero ring.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree zero use the identifications of each zeroth exterior power with R. Tensor these degreewise equivalences with M and distribute tensor products over the two summands. On a wedge without the final generator contraction is the prefix differential. On e_last wedge b, contractLeft_ι_mul gives f_last*b - e_last wedge d_A b. Thus the differential formulas hold on spanning basis tensors and hence everywhere. Degree one has only the first component in degree zero; exterior powers above the rank are zero, so the formulas also cover all higher degrees and r=0.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-exterior-power-free-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0628 and 0629, cone of multiplication by the final generator; step 2 of the regular-sequence node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul complex adjoining an element is a mapping cone with terms exterior powers of a direct sum",
+   "results": "Attempted via msearch.py; service unavailable: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splitting the Koszul complex when adjoining the last generator as the mapping cone of scalar multiplication",
+   "results": "Mapping cone degreewise splittings in Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit and mappingCone.decomp_to/decomp_from. These concern generic cochain cones, not exterior powers or the Koszul differential.",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\"",
+   "results": "ExteriorAlgebra.exteriorPower, exteriorPower.presentation, exteriorPower.ιMulti_family_span_fixedDegree_of_span. No direct sum decomposition commuting with contraction.",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "rg directSum|DirectSum|prod.*Equiv|Equiv.*prod|sum.*Equiv|Equiv.*sum Mathlib/LinearAlgebra/ExteriorAlgebra Mathlib/LinearAlgebra/ExteriorPower; rg koszul|Koszul lean/WeilConjectures/RingTheory lean/Sheaf/RingTheory",
+   "results": "Exterior algebra graded direct sum of homogeneous pieces exists; no last-generator decomposition of the Koszul complex. The existing target node describes this calculation but states no separate cone theorem.",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RegularSequenceKoszulRegular",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split: essential surjectivity via Stacks 0GS2; the regular-sequence conormal argument needed in its approximation and Popescu smoothing chain, made precise by Stacks 0665; the specialization of Stacks 0665 (hypothesis H_1-regular) to a regular sequence, via Stacks 062F then 0CEM; Tags 0628 and 0629, cone of multiplication by the final generator; step 2 of the regular-sequence node",
+   "via": [
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "lem-weil-pbc-regular-quotient-ideal-intersection",
+    "lem-weil-pbc-conormal-intersection-regular-quotient",
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulTensorConeCoordinates",
+  "file": "lean/Sheaf/RingTheory/KoszulTensorConeCoordinates.lean",
+  "declaration": "ExteriorAlgebra.exists_koszulTensorConeCoordinates",
+  "statement": "theorem exists_koszulTensorConeCoordinates {R : Type u} [CommRing R] (M : Type v) [AddCommGroup M] [Module R M] {r : ℕ} (f : Fin (r + 1) → R) : let A := koszulComplexTensor R r (fun i ↦ f i.castSucc) M let B := koszulComplexTensor R (r + 1) f M ∃ (e₀ : B.X 0 ≃ₗ[R] A.X 0) (e : ∀ n : ℕ, B.X (n + 1) ≃ₗ[R] A.X (n + 1) × A.X n), (∀ x : B.X 1, e₀ (B.d 1 0 x) = A.d 1 0 (e 0 x).1 + f (Fin.last r) • (e 0 x).2) ∧ (∀ (n : ℕ) (x : B.X (n + 2)), e n (B.d (n + 2) (n + 1) x) = (A.d (n + 2) (n + 1) (e (n + 1) x).1 + f (Fin.last r) • (e (n + 1) x).2, -A.d (n + 1) n (e (n + 1) x).2))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T135323-L-1695321",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T135323-L-1695321",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
