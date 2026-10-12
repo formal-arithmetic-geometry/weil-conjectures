@@ -38,65 +38,48 @@
  ],
  "proof": [
   {
-   "text": "Setup. Write $V(I)=\\{\\mathfrak P\\in X: I\\subseteq\\mathfrak P\\}$ for an ideal $I\\subseteq S$; these are the closed subsets of $X$ [def-weil-affine-spectrum], and $x=\\mathfrak p$. The field $k$ is a Noetherian ring [def-weil-pbc-noetherian-ring] (its only ideals are $0$ and $k$), so $S$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian] and has only finitely many minimal prime ideals $\\mathfrak q_1,\\dots,\\mathfrak q_r$ [lem-weil-pbc-noetherian-finitely-many-minimal-primes]. The irreducible components of $X$ are exactly the sets $V(\\mathfrak q_1),\\dots,V(\\mathfrak q_r)$ [lem-weil-pbc-spec-irreducible-components-minimal-primes], and they are pairwise distinct since $V(\\mathfrak q_j)\\subseteq V(\\mathfrak q_l)$ iff $\\mathfrak q_l\\subseteq\\mathfrak q_j$ [lem-weil-pbc-spec-irreducible-closed-subsets-primes] (1). By the same part (1), $x=\\mathfrak p\\in V(\\mathfrak q_j)$ iff $\\mathfrak q_j\\subseteq\\mathfrak p$. Put $I'=\\{j:\\mathfrak q_j\\subseteq\\mathfrak p\\}$: the irreducible components through $x$ are the $V(\\mathfrak q_j)$, $j\\in I'$, and the minimal primes contained in $\\mathfrak p$ (the $\\mathfrak q_1,\\dots,\\mathfrak q_t$ of the statement) are the $\\mathfrak q_j$, $j\\in I'$. $I'\\neq\\emptyset$, since $\\mathfrak p$ contains a minimal prime of $S$ [lem-weil-pbc-prime-contains-minimal-prime] (with $I=0$).",
+   "text": "Construct qs as the finite set of minimal primes below p using Noetherianity of the finite type algebra. A minimal prime exists below p. Every quotient S/q in qs is a finite type domain. The finite-type-domain dimension theorem supplies its uniquely determined finite natural dimension; choose its numerical representation and take an attained maximum n using Finset.exists_max_image.",
    "uses": [
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-noetherian-ring",
     "lem-weil-pbc-finite-type-algebra-noetherian",
     "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
-    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-    "lem-weil-pbc-prime-contains-minimal-prime"
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852): 'Let X = union of the Z_i be the decomposition of X into its irreducible components. There are finitely many of them (see Lemmas 00FN lemma-obvious-Noetherian and 00FR lemma-Noetherian-topology). Let I' = {i | x in Z_i}'; 'Let q_i denote the minimal primes of S corresponding to the irreducible components Z_i' (Lemma 00ES (3))"
+    "place": "Algebra, Lemma Tag 00OT (label lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27848), especially equality of (1) and (2); tag verified in stacks-project/tags/tags (00OT,algebra-lemma-dimension-at-a-point-finite-type-over-field)"
    }
   },
   {
-   "text": "The dimensions of the components. Fix $j$ and let $\\pi_j:S\\to S/\\mathfrak q_j$ be the quotient map. $S/\\mathfrak q_j$ is an integral domain ($\\mathfrak q_j$ is prime) and a finite type $k$-algebra (compose a surjection $k[x_1,\\dots,x_n]\\to S$ with $\\pi_j$) [def-weil-pbc-finite-type-algebra]; it is nonzero, so it has a maximal ideal [lem-weil-pbc-proper-ideal-contained-in-maximal], and [lem-weil-pbc-finite-type-domain-dimension-local-ring] says that $d_j:=\\dim(S/\\mathfrak q_j)$ [def-weil-pbc-krull-dimension-ring] is a non-negative integer. The map $\\operatorname{Spec}(S/\\mathfrak q_j)\\to X$, $\\bar{\\mathfrak P}\\mapsto\\pi_j^{-1}(\\bar{\\mathfrak P})$, is a homeomorphism onto $V(\\mathfrak q_j)$ with its subspace topology [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], so the Krull dimension of the space $V(\\mathfrak q_j)$ [def-kun-topological-krull-dimension] equals that of the space $\\operatorname{Spec}(S/\\mathfrak q_j)$ [lem-weil-pbc-homeomorphism-krull-dimension], which is $d_j$ [lem-weil-pbc-spec-topological-krull-dimension-ring]. Put $N=\\max_{j\\in I'}d_j$, the maximum of a finite nonempty set of non-negative integers (step 1). By step 1, $N$ is both the maximum of the dimensions of the irreducible components of $X$ through $x$ and $\\max_{1\\le i\\le t}\\dim(S/\\mathfrak q_i)$ over the minimal primes $\\mathfrak q_i\\subseteq\\mathfrak p$; so the two forms of the statement agree, and it remains to show $\\dim_xX=N$ and $\\min_{\\mathfrak m}\\dim(S_{\\mathfrak m})=N$.",
+   "text": "Identify irreducible components with zero loci of minimal primes. The closed embedding Spec(S/q) into Spec S induces a homeomorphism onto V(q). Homeomorphism invariance and the spectrum/ring dimension equality give dim V(q) = dim S/q. The maximum and its attainment therefore give both component clauses.",
    "uses": [
-    "def-weil-pbc-finite-type-algebra",
-    "lem-weil-pbc-proper-ideal-contained-in-maximal",
-    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
-    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
     "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
-    "def-kun-topological-krull-dimension",
     "lem-weil-pbc-homeomorphism-krull-dimension",
     "lem-weil-pbc-spec-topological-krull-dimension-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852): 'The number (2) is max_{i in I'} dim(Z_i)'; Z_i = V(q_i) is homeomorphic to Spec(S/q_i) (Lemma 00E5 lemma-spec-closed), and dim of a ring is dim of its spectrum (Definition 00KE)"
+    "place": "Algebra, Lemma Tag 00OT (label lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27848), especially equality of (1) and (2); tag verified in stacks-project/tags/tags (00OT,algebra-lemma-dimension-at-a-point-finite-type-over-field)"
    }
   },
   {
-   "text": "Chains through a minimal prime. Let $j\\in\\{1,\\dots,r\\}$. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus] the map $\\bar{\\mathfrak P}\\mapsto\\pi_j^{-1}(\\bar{\\mathfrak P})$ is a bijection from the primes of $S/\\mathfrak q_j$ onto the primes of $S$ containing $\\mathfrak q_j$, with inverse $\\mathfrak P\\mapsto\\pi_j(\\mathfrak P)$; both maps preserve inclusion (preimage and image of sets do), hence strict inclusion. (a) If $\\mathfrak q_j\\subseteq\\mathfrak P_0\\subsetneq\\cdots\\subsetneq\\mathfrak P_s$ are primes of $S$, then $\\pi_j(\\mathfrak P_0)\\subsetneq\\cdots\\subsetneq\\pi_j(\\mathfrak P_s)$ is a chain of primes of $S/\\mathfrak q_j$, so $s\\le d_j$ [def-weil-pbc-krull-dimension-ring]. (b) If $\\mathfrak m$ is a maximal ideal of $S$ with $\\mathfrak q_j\\subseteq\\mathfrak m$, then $\\dim(S_{\\mathfrak m})\\ge d_j$. Indeed $\\bar{\\mathfrak m}=\\pi_j(\\mathfrak m)$ is a maximal ideal of $S/\\mathfrak q_j$ (as $(S/\\mathfrak q_j)/\\bar{\\mathfrak m}\\cong S/\\mathfrak m$ is a field), so $d_j=\\dim((S/\\mathfrak q_j)_{\\bar{\\mathfrak m}})$ [lem-weil-pbc-finite-type-domain-dimension-local-ring] (step 2), which is the supremum of the lengths $s$ of chains $\\bar{\\mathfrak P}_0\\subsetneq\\cdots\\subsetneq\\bar{\\mathfrak P}_s\\subseteq\\bar{\\mathfrak m}$ of primes of $S/\\mathfrak q_j$ [lem-weil-pbc-localization-dimension-chains-below-prime]. Each such chain gives the chain $\\pi_j^{-1}(\\bar{\\mathfrak P}_0)\\subsetneq\\cdots\\subsetneq\\pi_j^{-1}(\\bar{\\mathfrak P}_s)\\subseteq\\mathfrak m$ of primes of $S$, so $s\\le\\dim(S_{\\mathfrak m})$ by [lem-weil-pbc-localization-dimension-chains-below-prime] for $S$ and $\\mathfrak m$. Hence $d_j\\le\\dim(S_{\\mathfrak m})$.",
+   "text": "For a prime q below a maximal m, map m to a maximal ideal M of S/q. The finite-type-domain theorem identifies dim S/q with dim (S/q)_M. Strict monotonicity of prime comap for the surjective quotient map bounds height M by height m. Localization dimension is prime height, giving dim S/q <= dim S_m. Apply this to the quotient attaining n to prove the lower bound for every maximal m above p.",
    "uses": [
-    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
-    "def-weil-pbc-krull-dimension-ring",
     "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
     "lem-weil-pbc-localization-dimension-chains-below-prime"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852): 'For each i such that x_0 in Z_i (which is equivalent to m containing q_i) we have a surjection S_m -> S_m/q_i S_m = (S/q_i)_m ... We conclude, using Lemma 00OS (lemma-dimension-spell-it-out), that the dimension of S_m is the maximum of the dimensions of the Z_i passing through x_0'; the source gets the upper bound from Lemma 00ET (the q_i S_m exhaust the minimal primes of S_m), here replaced by the chain count (a) and step 9"
+    "place": "Algebra, Lemma Tag 00OT (label lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27848), especially equality of (1) and (2); tag verified in stacks-project/tags/tags (00OT,algebra-lemma-dimension-at-a-point-finite-type-over-field)"
    }
   },
   {
-   "text": "Lower bound for the local rings. Let $\\mathfrak m\\supseteq\\mathfrak p$ be a maximal ideal of $S$. For $j\\in I'$ we have $\\mathfrak q_j\\subseteq\\mathfrak p\\subseteq\\mathfrak m$, so $\\dim(S_{\\mathfrak m})\\ge d_j$ by step 3 (b). Taking the maximum over $j\\in I'$: $\\dim(S_{\\mathfrak m})\\ge N$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852): 'First of all, x_0 is contained in all the irreducible components Z_i, i in I''"
-   }
-  },
-  {
-   "text": "Maximal ideals in a neighbourhood. Let $W\\subseteq X$ be open with $\\mathfrak p\\in W$. The sets $D(f)=\\{\\mathfrak P: f\\notin\\mathfrak P\\}$ form a basis of the topology [lem-weil-pbc-spec-localization-away-basic-open] (i), so there is $f\\in S$ with $\\mathfrak p\\in D(f)\\subseteq W$, i.e. $f\\notin\\mathfrak p$. Since $S$ is a finite type $k$-algebra, [lem-weil-pbc-finite-type-over-field-prime-intersection-maximal] gives a maximal ideal $\\mathfrak m\\supseteq\\mathfrak p$ with $f\\notin\\mathfrak m$, i.e. $\\mathfrak m\\in D(f)\\subseteq W$. So every open neighbourhood of $x$ contains a maximal ideal $\\mathfrak m\\supseteq\\mathfrak p$.",
+   "text": "Every open neighbourhood W of p contains a basic open D(f) through p. The Jacobson equality p.jacobson = p gives a maximal ideal m above p excluding f, hence a maximal ideal in W.",
    "uses": [
     "lem-weil-pbc-spec-localization-away-basic-open",
     "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
@@ -104,88 +87,74 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852): 'Note that each W_i, i in I' contains a closed point because X is Jacobson, see Section 00FZ (section-ring-jacobson)' and 'Because S is Jacobson (as we saw above) it is enough to show that V(p) minus T is nonempty'; the Jacobson property is Lemma 00G1 (lemma-finite-type-field-Jacobson)"
+    "place": "Algebra, Lemma Tag 00OT (label lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27848), especially equality of (1) and (2); tag verified in stacks-project/tags/tags (00OT,algebra-lemma-dimension-at-a-point-finite-type-over-field)"
    }
   },
   {
-   "text": "Lower bound for the neighbourhoods: $\\dim W\\ge N$ for every open $W\\ni x$, where $\\dim W$ is the Krull dimension of $W$ with the subspace topology [def-kun-topological-krull-dimension]. Take $\\mathfrak m\\in W$ as in step 5 and a chain $\\mathfrak P_0\\subsetneq\\cdots\\subsetneq\\mathfrak P_s\\subseteq\\mathfrak m$ of primes of $S$. The sets $V(\\mathfrak P_l)$ are irreducible closed subsets of $X$ [lem-weil-pbc-spec-irreducible-closed-subsets-primes] (2), they contain $\\mathfrak m\\in W$ (part (1), as $\\mathfrak P_l\\subseteq\\mathfrak m$), so they meet $W$, and $V(\\mathfrak P_s)\\subsetneq\\cdots\\subsetneq V(\\mathfrak P_0)$ (part (1): $V(\\mathfrak P)\\subseteq V(\\mathfrak P')$ iff $\\mathfrak P'\\subseteq\\mathfrak P$). By [lem-weil-pbc-open-subspace-irreducible-closed-correspondence] the sets $V(\\mathfrak P_l)\\cap W$ are irreducible closed subsets of $W$ and $V(\\mathfrak P_s)\\cap W\\subsetneq\\cdots\\subsetneq V(\\mathfrak P_0)\\cap W$, a chain of length $s$; so $\\dim W\\ge s$. Taking the supremum over such chains, $\\dim W\\ge\\dim(S_{\\mathfrak m})$ [lem-weil-pbc-localization-dimension-chains-below-prime], and $\\dim(S_{\\mathfrak m})\\ge N$ by step 4.",
+   "text": "For any prime m in an open W, dim S_m <= dim W. The ambient height of m equals the coheight of its irreducible closure through the order isomorphism between primes and irreducible closed sets. The open-subspace map preserves this coheight, and coheight is at most the Krull dimension of W. This proves the neighbourhood lower bound n <= dim W using the maximal ideal from the previous step.",
    "uses": [
-    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
     "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
     "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
-    "lem-weil-pbc-localization-dimension-chains-below-prime"
+    "def-kun-topological-krull-dimension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852): 'The existence of a closed point implies, via Lemma 00OS (lemma-dimension-spell-it-out), that there is a chain of irreducible closed subsets of length equal to dim(Z_i) in the open W_i'; here one closed point m in W containing p serves all i in I' at once"
+    "place": "Algebra, Lemma Tag 00OT (label lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27848), especially equality of (1) and (2); tag verified in stacks-project/tags/tags (00OT,algebra-lemma-dimension-at-a-point-finite-type-over-field)"
    }
   },
   {
-   "text": "The neighbourhood $U$ and the upper bound $\\dim U\\le N$. Let $T=\\bigcup_{j\\notin I'}V(\\mathfrak q_j)$, a finite union of closed sets, hence closed, and $U=X\\setminus T$, open; $\\mathfrak p\\notin V(\\mathfrak q_j)$ for $j\\notin I'$ (step 1), so $x\\in U$. Let $Y_0\\subsetneq\\cdots\\subsetneq Y_s$ be a chain of irreducible closed subsets of $U$ [def-kun-topological-krull-dimension]. By [lem-weil-pbc-open-subspace-irreducible-closed-correspondence] their closures $\\overline{Y_l}$ in $X$ are irreducible closed subsets of $X$ meeting $U$, with $\\overline{Y_0}\\subsetneq\\cdots\\subsetneq\\overline{Y_s}$; by [lem-weil-pbc-spec-irreducible-closed-subsets-primes] (2),(1) $\\overline{Y_l}=V(\\mathfrak P_l)$ for primes with $\\mathfrak P_s\\subsetneq\\cdots\\subsetneq\\mathfrak P_0$. $\\mathfrak P_s$ contains a minimal prime of $S$ [lem-weil-pbc-prime-contains-minimal-prime], one of the $\\mathfrak q_j$ (step 1). Then $V(\\mathfrak P_s)\\subseteq V(\\mathfrak q_j)$ and $V(\\mathfrak P_s)$ meets $U$, so $V(\\mathfrak q_j)\\not\\subseteq T$, i.e. $j\\in I'$. The chain $\\mathfrak q_j\\subseteq\\mathfrak P_s\\subsetneq\\cdots\\subsetneq\\mathfrak P_0$ gives $s\\le d_j\\le N$ by step 3 (a). Hence $\\dim U\\le N$.",
+   "text": "Remove the finite union T of V(q) over minimal primes q not below p, obtaining an open neighbourhood U. Map any strict chain c of irreducible closed subsets of U to its closures in Spec S and then, in reversed order, to prime ideals. Take a minimal prime q below the smallest prime in this reversed chain. The largest closed subset c.last has a point y in U; its closure lies in V(q), so q cannot be among the removed primes. Thus q belongs to qs. All primes of the chain contain q. Restricting the prime chain to V(q) preserves its length, which is at most dim S/q <= n. Taking the supremum of chain lengths gives dim U <= n.",
    "uses": [
-    "def-kun-topological-krull-dimension",
-    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-contains-minimal-prime",
     "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-    "lem-weil-pbc-prime-contains-minimal-prime"
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-kun-topological-krull-dimension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852): 'let T = union of the Z_i, i not in I'. Then U = X minus T is an open subset of X containing the point x ... For any open W in U with x in W the irreducible components of W are the irreducible sets W_i = Z_i cap W for i in I' ... Since W_i in Z_i we have dim(W_i) <= dim(Z_i)'"
+    "place": "Algebra, Lemma Tag 00OT (label lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27848), especially equality of (1) and (2); tag verified in stacks-project/tags/tags (00OT,algebra-lemma-dimension-at-a-point-finite-type-over-field)"
    }
   },
   {
-   "text": "(1) = (2). By definition [def-kun-topological-dimension-at-point] $\\dim_xX$ is the minimum of $\\dim W$ over the open $W\\ni x$. By step 6 every such $W$ has $\\dim W\\ge N$, and the open $U\\ni x$ of step 7 has $\\dim U\\le N$. Hence $\\dim_xX=\\dim U=N$, which by step 2 is the maximum of the dimensions of the irreducible components through $x$ and equals $\\max_{1\\le i\\le t}\\dim(S/\\mathfrak q_i)$.",
+   "text": "The infimum defining dim_p Spec S is at least n by the neighbourhood lower bound and at most n using U. A maximal m above p in U has n <= dim S_m <= dim U <= n, so its localization has dimension exactly n and realizes the required minimum. Assemble this with qs, the attained quotient maximum and the component clauses.",
    "uses": [
     "def-kun-topological-dimension-at-point"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852): 'Hence dim(W) is equal to the number (2). This proves that (1) = (2).'"
-   }
-  },
-  {
-   "text": "(2) = (3). By step 5 applied to $W=U$ there is a maximal ideal $\\mathfrak m_0\\supseteq\\mathfrak p$ with $\\mathfrak m_0\\in U$. Let $\\mathfrak P_0\\subsetneq\\cdots\\subsetneq\\mathfrak P_s\\subseteq\\mathfrak m_0$ be a chain of primes of $S$. $\\mathfrak P_0$ contains a minimal prime $\\mathfrak q_j$ [lem-weil-pbc-prime-contains-minimal-prime] (step 1); then $\\mathfrak q_j\\subseteq\\mathfrak m_0$, i.e. $\\mathfrak m_0\\in V(\\mathfrak q_j)$ [lem-weil-pbc-spec-irreducible-closed-subsets-primes] (1), and $\\mathfrak m_0\\notin T$, so $j\\in I'$; step 3 (a) gives $s\\le d_j\\le N$. Taking the supremum, $\\dim(S_{\\mathfrak m_0})\\le N$ [lem-weil-pbc-localization-dimension-chains-below-prime]. With step 4, $\\dim(S_{\\mathfrak m_0})=N\\le\\dim(S_{\\mathfrak m})$ for every maximal $\\mathfrak m\\supseteq\\mathfrak p$; so the minimum of $\\dim(S_{\\mathfrak m})$ over the maximal ideals $\\mathfrak m\\supseteq\\mathfrak p$ exists, is attained at $\\mathfrak m_0$ and equals $N=\\dim_xX$ (step 8).",
-   "uses": [
-    "lem-weil-pbc-prime-contains-minimal-prime",
-    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-    "lem-weil-pbc-localization-dimension-chains-below-prime"
-   ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00OT (lemma-dimension-at-a-point-finite-type-over-field, lines 27803-27852): 'To finish the proof of the lemma it suffices to show that we can choose x_0 such that x_0 in Z_i => i in I'. Because S is Jacobson ... it is enough to show that V(p) minus T is nonempty. And this is clear since it contains the point x'"
+    "place": "Algebra, Lemma Tag 00OT (label lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27848), especially equality of (1) and (2); tag verified in stacks-project/tags/tags (00OT,algebra-lemma-dimension-at-a-point-finite-type-over-field)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-affine-spectrum",
-  "def-weil-pbc-noetherian-ring",
   "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
-  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
   "lem-weil-pbc-prime-contains-minimal-prime",
-  "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-proper-ideal-contained-in-maximal",
   "lem-weil-pbc-finite-type-domain-dimension-local-ring",
-  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
   "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
-  "def-kun-topological-krull-dimension",
   "lem-weil-pbc-homeomorphism-krull-dimension",
   "lem-weil-pbc-spec-topological-krull-dimension-ring",
   "lem-weil-pbc-localization-dimension-chains-below-prime",
   "lem-weil-pbc-spec-localization-away-basic-open",
   "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
   "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-krull-dimension-ring",
   "def-kun-topological-dimension-at-point"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 00OT (label lemma-dimension-at-a-point-finite-type-over-field, lines 27787-27852) and its proof, with Lemma 00OS (lemma-dimension-spell-it-out, line 27763), 00ES (3), 00G1, 00E0, 00E5; two local changes: one maximal ideal m in W containing p (Jacobson plus a basic open D(f)) replaces a closed point in each W_i, and the bound dim S_m <= max dim(S/q_i) is obtained by counting chains through the minimal prime below each chain instead of citing Lemma 00ET (minimal primes of S_m)"
+  "place": "Algebra, Lemma 00OT and its proof (lines 27787-27852). Lean implementation by B3: finite minimal-prime maximum, quotient/comap height lower bound, Jacobson neighbourhoods, open-embedding coheight comparison, and removal of components followed by a prime-chain bound."
  },
  "mathlib_searches": [
   {
@@ -286,5 +255,15 @@
   "group": "C1",
   "result": "fix",
   "note": "k field, S finite-type k-algebra, p prime -> x in Spec S; qs = minimal primes <= p, nonempty (t>=1); n:N = dim_x X (topologicalKrullDimAt); max over irreducibleComponents through x (subspace topologicalKrullDim) upper bound + attained; FIXED quotient clause from all-equal to max (<= n + attained); min over maximal m >= p of dim S_m lower bound + attained"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T151905-L-2286949",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
