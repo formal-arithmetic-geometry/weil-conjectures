@@ -1,0 +1,109 @@
+{
+ "id": "def-weil-pbc-finite-precoverage",
+ "kind": "definition",
+ "title": "Finite indexed precoverage closure axioms",
+ "status": "split",
+ "statement": "Let C be a category and P a precoverage [def-weil-pbc-sites-and-cohomology]. Define stability under finite base change by requiring any family of pullback squares indexed by a finite set, whose original family covers, to give a covering family. Define stability under finite composition by requiring the composite of a finite indexed covering family with one finite indexed covering family over each member to cover.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites Definition 00VH, axioms (2) and (3), restricted to finite families in Situation 0A34 and Lemma 09YL"
+ },
+ "proof": [
+  {
+   "text": "Use the indexed pullback and composition axioms of Mathlib Precoverage, restricting all index types to finite types. The unrestricted axioms imply these restrictions by direct application.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": "Definitions follow the finite families of Stacks 09YL; implication instances are direct applications of Mathlib axioms.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite precoverage closure classes",
+   "results": "Mathlib Sites.Finite defines finite precoverage and pretopology, but no finite indexed closure classes.",
+   "date": "2026-10-12",
+   "verdict": "no exact finite indexed classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "precoverage base change finite indexed family",
+   "results": "The finite pretopology uses chosen pullbacks; indexed closure classes not found.",
+   "date": "2026-10-12",
+   "verdict": "no exact finite indexed classes"
+  },
+  {
+   "tool": "loogle",
+   "query": "Precoverage.IsStableUnderBaseChange",
+   "results": "Mathlib Precoverage gives unrestricted indexed closure; restricting index finiteness is needed.",
+   "date": "2026-10-12",
+   "verdict": "no exact finite indexed classes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite indexed precoverage stable under base change composition",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSites",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "finite-family site construction in Stacks 09YL",
+   "via": [
+    "lem-weil-pbc-colimit-of-sites"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FinitePrecoverage",
+  "declaration": "CategoryTheory.Precoverage.IsStableUnderFiniteBaseChange",
+  "declarations": [
+   "CategoryTheory.Precoverage.IsStableUnderFiniteBaseChange",
+   "CategoryTheory.Precoverage.IsStableUnderFiniteComposition",
+   "CategoryTheory.Precoverage.finiteBaseChange_of_baseChange",
+   "CategoryTheory.Precoverage.finiteComposition_of_composition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FinitePrecoverage.lean",
+  "statement": "class IsStableUnderFiniteBaseChange (J : Precoverage C) : Prop",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fac14",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T135234-L-1665787",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fac14",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T135234-L-1665787",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered finite-family interfaces and wrapper proof match the corrected nodes, change record and source; targets unchanged; axiom checks pass."
+ }
+}
