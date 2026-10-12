@@ -123,6 +123,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorDegree
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
+public import WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Curve.EffectiveDivisorCount
 public import WeilConjectures.AlgebraicGeometry.Curve.Estimate
