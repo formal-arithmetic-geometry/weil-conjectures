@@ -7352,7 +7352,6 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/F3/Sheaf.AlgebraicGeometry.SectionComponentLocallyConstructible (stage 3; reviewer PASS; first push; landing 20261012T110301-L-614433 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:03 L: merged deliver/F3/Sheaf.RingTheory.GeometricallyRegularFibersOfMaximal (stage 3; reviewer PASS; first push; landing 20261012T110301-L-614619 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:03 L: merged deliver/G1/Sheaf.AlgebraicGeometry.LowerStarPlusTransitionComp (stage 3; reviewer PASS; first push; landing 20261012T110301-L-614790 (proof); batch 20261012T110249; modules 1; new nodes 0)
-- 11:03 L: merged deliver/G1/Sheaf.ConstructibleSheaf.ConstantModuleDual (stage 3; reviewer PASS; first push; landing 20261012T110302-L-614935 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:03 L: merged deliver/G1/Sheaf.ConstructibleSheaf.EtaleDualRestriction (stage 3; reviewer PASS; first push; landing 20261012T110302-L-615058 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:03 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Cohomology.FlatAffineTensorReassociation (stage 3; reviewer PASS; first push; landing 20261012T110302-L-615190 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/G2/Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect (stage 3; reviewer PASS; first push; landing 20261012T110303-L-615341 (interface); batch 20261012T110249; modules 3; new nodes 2)
@@ -7454,3 +7453,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:18 L: returned deliver/D2/Sheaf.AlgebraicGeometry.SupportedQCohTriangulated (reviewer RETURN: (reviewer X-0ecac, head 0ecaca8b9) 6 (nodes agree): update dag/nodes/sec-picard-framework/lem-pc-supported-qcoh-triangul)
 - 11:19 L: returned deliver/F3/Sheaf.CategoryTheory.ColimitSites (reviewer RETURN: (reviewer X-11ce3, head 11ce3ec69) E2: the target statements are false as written. Revise the node and Challenge stateme)
 - 11:20 L: returned deliver/J1/Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated (reviewer RETURN: (reviewer X-dd007, head dd0079fe1) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ex)
+
+- 19:24 L: import cycle: the delivery made ConstantModuleDual import ConstantFiniteDual, which imports ConstantModuleDual
