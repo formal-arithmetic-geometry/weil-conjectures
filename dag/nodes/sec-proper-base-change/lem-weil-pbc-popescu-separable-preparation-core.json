@@ -10,7 +10,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Proof of Lemma 07FE, polynomial quotient and improve-presentation construction before applying 07FD; F1 second reading separates the independent parameter-selection step."
+  "place": "Proof of 07FE; S3 explicit quotient, improve-presentation and evaluation reduction"
  },
  "mathlib_searches": [
   {
@@ -66,54 +66,39 @@
  ],
  "proof": [
   {
-   "text": "Choose finite generators a_j of H_{A/k}. Construct B=A[x_i,z_ij]/(x_i^n−Σ_j z_ij a_j); its presentation over R is finite.",
+   "text": "Choose finite generators of H_{A/k} by Noetherianity. Form the actual polynomial quotient and its base map. Apply the quotient smoothness statement to obtain finite presentation and the smooth a_j and X_i opens.",
    "uses": [
     "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-weil-pbc-singular-ideal"
+    "lem-weil-pbc-popescu-polynomial-quotient-smooth"
    ],
    "elementary": false
   },
   {
-   "text": "Eliminate z_il after inverting a_l. This exhibits B_(a_l) as a polynomial extension of the smooth base change of A_(a_l). After inverting x_i the a_j generate the unit ideal; smoothness on their principal cover proves B_(x_i) smooth. The empty generator family produces the zero localization.",
-   "uses": [
-    "lem-weil-pbc-singular-ideal-localization-smooth",
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
-    "lem-weil-pbc-smooth-ring-map-principal-localization",
-    "lem-weil-pbc-smooth-ring-map-local-on-cover"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Improve B to C with a B-algebra retraction. Its indicated localizations are smooth, and at the x_i their differentials are free. Noetherianity makes C finitely presented. Choose a common positive strictly-standard exponent c.",
+   "text": "Apply the proved improve-presentation theorem to B to obtain its finite-type retract C. Compose finite-type maps and use the Noetherian polynomial base to get finite presentation. Transport the X_i opens and apply the common-exponent statement.",
    "uses": [
     "lem-weil-pbc-improve-presentation",
     "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-    "lem-weil-pbc-smooth-free-differentials-strictly-standard-power"
+    "lem-weil-pbc-common-strictly-standard-power"
    ],
    "elementary": false
   },
   {
-   "text": "For any receiving algebra and evaluation with the required nth powers in the extended singular ideal, expand those powers in the images of the fixed generators a_j. Evaluate the Z_ij at their coefficients; the equations vanish and give B → Λ. Compose with the retraction C → B. Smoothness of C at each β(a_j) gives extension of H_{A/k} inside H_{C/R}. Map this inclusion to Λ and take radicals to obtain the Popescu-ideal inequality. The quotient and symmetric-algebra constructions remain in universe max(u,v).",
+   "text": "For any receiving algebra, expand each nth power in the mapped finite generating family. Explicit evaluation kills the quotient relations, so it descends to B; compose with the retraction to obtain γ. Verify the polynomial-base and A-map identities. The smooth a_j opens put the mapped generators in H_{C/R}; map this inclusion through γ and take radicals. These evaluation and ideal-comparison steps are fully proved in Lean.",
    "uses": [
     "def-weil-pbc-popescu-resolution",
     "def-weil-pbc-singular-ideal"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-algebra-noetherian",
-  "def-weil-pbc-singular-ideal",
-  "lem-weil-pbc-singular-ideal-localization-smooth",
-  "lem-weil-pbc-polynomial-ring-smooth",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition",
-  "lem-weil-pbc-smooth-ring-map-principal-localization",
-  "lem-weil-pbc-smooth-ring-map-local-on-cover",
+  "lem-weil-pbc-popescu-polynomial-quotient-smooth",
   "lem-weil-pbc-improve-presentation",
   "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-weil-pbc-smooth-free-differentials-strictly-standard-power",
-  "def-weil-pbc-popescu-resolution"
+  "lem-weil-pbc-common-strictly-standard-power",
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-pbc-singular-ideal"
  ],
  "lean": {
   "existing": false,
@@ -138,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-c5ea2",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T135230-L-1662221",
+  "landing": "20261012T184345-L-4020641",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered proof and two helper statements with their DAG nodes, source arguments, unchanged interfaces, clean compilation and axiom checks."
  }
 }

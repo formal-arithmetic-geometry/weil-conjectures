@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-common-strictly-standard-power",
+ "kind": "statement",
+ "title": "A common strictly standard exponent for finitely many smooth free opens",
+ "statement": "Let R→C be a finitely presented map of commutative rings [def-weil-pbc-finitely-presented-algebra], let ι be a finite type and x:ι→C. Assume each C_(x_i) is smooth over R [def-weil-pbc-smooth-ring-map], with free module Ω_(C_(x_i)/R) of Kähler differentials [def-weil-pbc-kahler-differentials]. There is c≥1 such that every x_i^c is strictly standard over R [def-weil-pbc-strictly-standard-element].",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "status": "split",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07EZ(e) and proof of Lemma 07FE, common exponent"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-strictly-standard-element"
+ ],
+ "proof": [
+  {
+   "text": "For each x_i, finite presentation makes the localized module of differentials finite. Its free basis is thus finite, also for a zero localization. Add a rank-zero free summand to express stable freeness. Apply the mathematically correct statement of Stacks 07EZ(e) to obtain a positive threshold e_i for all larger powers. The existing Lean record of that node needs the product parentheses repaired before it can be applied.",
+   "uses": [
+    "lem-weil-pbc-smooth-free-differentials-strictly-standard-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take c=1+Σ_i e_i. Every threshold is at most c, so all x_i^c are strictly standard. The empty family gives c=1.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-free-differentials-strictly-standard-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07EZ(e) and proof of Lemma 07FE, common exponent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented algebra smooth localization free differentials common strictly standard powers",
+   "results": "Service unavailable: Internal Server Error; unavailable, not evidence of absence.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial quotient universal evaluation smooth localizations singular ideal",
+   "results": "Eight results on smooth and standard smooth localizations; no universal quotient construction or common strictly standard exponent.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth.comp",
+   "results": "Algebra.Smooth.comp supplies composition of smooth maps, not the explicit quotient or common exponent.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "strictlyStandard|strictly_standard|popescuPolynomial",
+   "results": "No Mathlib matches. Local rg found SmoothFreeDifferentialsStrictlyStandardPower; its stable-free hypothesis is incorrectly parenthesized.",
+   "date": "2026-10-13"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuSeparablePreparationCore",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-popescu-separable-preparation-core",
+   "place": "Lemma 07EZ(e) and proof of Lemma 07FE, common exponent"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CommonStrictlyStandardPower",
+  "file": "lean/Sheaf/RingTheory/CommonStrictlyStandardPower.lean",
+  "declaration": "Algebra.exists_common_strictlyStandard_power",
+  "statement": "theorem exists_common_strictlyStandard_power (R : Type u) (C : Type v) [CommRing R] [CommRing C] [Algebra R C] [FinitePresentation R C] {ι : Type} [Finite ι] (x : ι → C) (h : ∀ i, Smooth R (Localization.Away (x i)) ∧ Module.Free (Localization.Away (x i)) (KaehlerDifferential R (Localization.Away (x i)))) : ∃ c : ℕ, 1 ≤ c ∧ ∀ i, IsStrictlyStandardElement (R := R) (x i ^ c)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c5ea2",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T184345-L-4020641",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c5ea2",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T184345-L-4020641",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered proof and two helper statements with their DAG nodes, source arguments, unchanged interfaces, clean compilation and axiom checks."
+ }
+}

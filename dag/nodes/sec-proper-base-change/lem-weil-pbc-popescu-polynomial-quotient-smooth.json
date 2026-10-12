@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-popescu-polynomial-quotient-smooth",
+ "kind": "statement",
+ "title": "Smoothness of the explicit separable-preparation quotient",
+ "statement": "Let k be a field and A a finitely presented k-algebra [def-weil-pbc-finitely-presented-algebra]. Let d,n,m be natural numbers with n≥1 and a:Fin m→A generate H_{A/k} [def-weil-pbc-singular-ideal]. Set R=k[X_i | i∈Fin d] [def-weil-pbc-mv-polynomial-ring] and B=A[X_i,Z_ij]/(X_i^n−Σ_j Z_ij a_j), with its R-algebra structure sending X_i to its class. Then B is finitely presented over R; every B_(a_j) and every B_(X_i) is smooth over R [def-weil-pbc-smooth-ring-map].",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "status": "split",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "proof of Lemma 07FE, first paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Form the explicitly defined polynomial quotient B=A[X_i,Z_ij]/(X_i^n−Σ_j Z_ij a_j). Combine a finite presentation of A over k with the finitely many auxiliary variables and equations to obtain finite presentation over R=k[X_i].",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each a_j belongs to H_{A/k}, so A_(a_j) is smooth over k. After inverting a_j, solve all equations for Z_ij; B_(a_j) is a polynomial algebra in the remaining Z variables over A_(a_j)[X_i]. Smoothness follows by base change and composition.",
+   "uses": [
+    "lem-weil-pbc-singular-ideal-localization-smooth",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The relation for X_i implies that the a_j generate the unit ideal in B_(X_i). Apply smoothness locality on this cover, using smoothness of the doubly localized a_j opens. If m=0 the localization is zero. If d=0 there are no X opens or relations.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "lem-weil-pbc-smooth-ring-map-local-on-cover"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-singular-ideal-localization-smooth",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-principal-localization",
+  "lem-weil-pbc-smooth-ring-map-local-on-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "proof of Lemma 07FE, first paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented algebra smooth localization free differentials common strictly standard powers",
+   "results": "Service unavailable: Internal Server Error; unavailable, not evidence of absence.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial quotient universal evaluation smooth localizations singular ideal",
+   "results": "Eight results on smooth and standard smooth localizations; no universal quotient construction or common strictly standard exponent.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth.comp",
+   "results": "Algebra.Smooth.comp supplies composition of smooth maps, not the explicit quotient or common exponent.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "strictlyStandard|strictly_standard|popescuPolynomial",
+   "results": "No Mathlib matches. Local rg found SmoothFreeDifferentialsStrictlyStandardPower; its stable-free hypothesis is incorrectly parenthesized.",
+   "date": "2026-10-13"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuSeparablePreparationCore",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-popescu-separable-preparation-core",
+   "place": "proof of Lemma 07FE, first paragraph"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuPolynomialQuotientSmooth",
+  "file": "lean/Sheaf/RingTheory/PopescuPolynomialQuotientSmooth.lean",
+  "declaration": "Algebra.popescuPolynomialQuotient_smooth",
+  "statement": "theorem popescuPolynomialQuotient_smooth {k : Type u} {A : Type v} [Field k] [CommRing A] [Algebra k A] [FinitePresentation k A] (d n : ℕ) (hn : 1 ≤ n) {m : ℕ} (a : Fin m → A) (ha : Ideal.span (Set.range a) = singularIdeal k A) : let B := PopescuPolynomialQuotient d n a letI := (popescuPolynomialBaseMap (k := k) d n a).toRingHom.toAlgebra FinitePresentation (MvPolynomial (Fin d) k) B ∧ (∀ j : Fin m, Smooth (MvPolynomial (Fin d) k) (Localization.Away (algebraMap A B (a j)))) ∧ ∀ i : Fin d, Smooth (MvPolynomial (Fin d) k) (Localization.Away (algebraMap (MvPolynomial (Fin d) k) B (MvPolynomial.X i)))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13",
+  "declarations": [
+   "Algebra.popescuPolynomialRelations",
+   "Algebra.PopescuPolynomialQuotient",
+   "Algebra.popescuPolynomialBaseMap",
+   "Algebra.popescuPolynomialQuotient_smooth"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c5ea2",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T184345-L-4020641",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c5ea2",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T184345-L-4020641",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered proof and two helper statements with their DAG nodes, source arguments, unchanged interfaces, clean compilation and axiom checks."
+ }
+}
