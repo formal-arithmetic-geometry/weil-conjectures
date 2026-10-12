@@ -6,8 +6,8 @@ Authors: SHEAF group V2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsFactors
-import Sheaf.AlgebraicGeometry.EtaleRestrictedTotalConstruction
-import Sheaf.Paper.EtaleTermwiseHypercohomology
+import Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsComponentEpi
+import Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsInclusionMono
 
 /-! # Degreewise restricted sections comparison
 
@@ -45,6 +45,15 @@ theorem etaleRestrictedSectionsLift_component_isIso
     (T : EtaleTermwiseHypercohomology X K) (q n : ℤ) :
     IsIso (((T.L.step q).factorThru (etaleRestrictedSectionsInclusion X K T q)
       (etaleRestrictedSections_factors X K T q)).f n) := by
-  sorry
+  let f := ((T.L.step q).factorThru (etaleRestrictedSectionsInclusion X K T q)
+    (etaleRestrictedSections_factors X K T q)).f n
+  have hfac : f ≫ (T.L.step q).arrow.f n =
+      (etaleRestrictedSectionsInclusion X K T q).f n := by
+    exact HomologicalComplex.congr_hom (Subobject.factorThru_arrow _ _ _) n
+  have : Mono ((etaleRestrictedSectionsInclusion X K T q).f n) :=
+    etaleRestrictedSectionsInclusion_mono_component X K T q n
+  have hmono : Mono f := mono_of_mono_fac hfac
+  have hepi : Epi f := etaleRestrictedSectionsLift_component_epi X K T q n
+  exact isIso_of_mono_of_epi f
 
 end AlgebraicGeometry.Etale

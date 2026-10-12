@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-etale-restricted-sections-component-epi",
+ "kind": "statement",
+ "title": "Degreewise epimorphism of the restricted sections factorization",
+ "statement": "For any scheme X, bounded-below complex K, presentation T, integers q,n, the degree-n factorization of the restricted sections inclusion through T.L.step q is epic.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Proof remark (3), finite diagonal comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-restricted-total-construction",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-weil-pbc-etale-restricted-sections-factors"
+ ],
+ "proof": [
+  {
+   "text": "The retained total in degree n is the finite coproduct of exactly the diagonal summands with second index at least q. The finite-diagonal sections comparison identifies this coproduct with the image defining the second-filtration step, so the induced map onto that step is epic.",
+   "uses": [
+    "def-weil-pbc-etale-restricted-total-construction",
+    "def-weil-pbc-termwise-hypercohomology-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-restricted-total-construction",
+  "def-weil-pbc-termwise-hypercohomology-presentation"
+ ],
+ "proof_origin": {
+  "by": "stage-3 worker B3",
+  "document": "Stacks Project",
+  "place": "Tag 015J, proof remark (3), finite diagonal comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degreewise epimorphism of restricted sections finite diagonal total",
+   "results": "service unavailable; no exact match",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Epi (factorThru f)",
+   "results": "generic factorization lemmas only",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Epi.*factorThru restricted sections",
+   "results": "no existing exact theorem",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of total complexes induced by degreewise split monomorphisms is a monomorphism in each degree",
+   "results": "HomologicalComplex.mono_of_mono_f and instMonoFOfHasFiniteLimits; no exact restricted-total result. The existing upstream stupidTruncRetract gives the component retractions used in the now-proved monicity theorem.",
+   "verdict": "generic ingredients, not a duplicate",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Subobject.factorThru",
+   "results": "factorThru_arrow, factorThru_mk_self, factorThru_ofLE, factorThru_right; none supplies the required image calculation.",
+   "verdict": "no exact epimorphism result",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "ιStupidTruncf_πStupidTruncf|totalDesc|secondFiltration; restricted sections in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib totalDesc and ι_totalDesc; upstream stupid-truncation retraction identity; Sheaf DoubleComplexTotal.secondFiltration. No existing theorem for this lift epimorphism; retraction ingredients close monicity.",
+   "verdict": "use existing ingredients",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsComponentIso",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-restricted-sections-lift-component-isIso",
+   "place": "degreewise component calculation",
+   "via": "stage-3 decomposition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsComponentEpi",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRestrictedSectionsComponentEpi.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleRestrictedSectionsLift_component_epi",
+  "statement": "theorem etaleRestrictedSectionsLift_component_epi\n    (X : Scheme.{u})\n    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))\n    (T : EtaleTermwiseHypercohomology X K) (q n : ℤ) :\n    Epi (((T.L.step q).factorThru (etaleRestrictedSectionsInclusion X K T q)\n      (etaleRestrictedSections_factors X K T q)).f n)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T225257-L-1800595",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T225257-L-1800595",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
