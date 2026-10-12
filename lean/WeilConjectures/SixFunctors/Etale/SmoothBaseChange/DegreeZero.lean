@@ -10,6 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+import Sheaf.CategoryTheory.RightDerivedBaseChangeZeroUnit
+import Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres
+import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
+import Sheaf.AlgebraicGeometry.EtaleChartSectionsArrowComparison
 
 /-!
 # Degree-zero flat base change
@@ -212,6 +217,80 @@ section DegreeZero
 
 variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem isIso_ab_unit_sections_of_flat_connected {V W : Scheme.{u}}
+    (q : W ⟶ V) [Flat q] [QuasiCompact q] [GeometricallyConnected q]
+    (G : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    IsIso (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} q).unit.app G).hom.app
+      (op (Scheme.Etale.mk (𝟙 V)))) := by
+  have : (MorphismProperty.Over.pullback @Etale ⊤ q).IsContinuous
+      V.smallEtaleTopology W.smallEtaleTopology := Etale.isContinuous_overPullback q
+  obtain ⟨_, ea, da, Lr, ar, er, dr, hda, hdr, heq, hunit, hrest⟩ :=
+    etaleInverseImageAlgebraicStructures W V q
+  clear hrest heq hdr hda dr er ar Lr
+  have hb := etaleSet_sections_bijective_of_flat_qc_connected_geometricFibres q
+    (fun s ↦ GeometricallyConnected.geometrically_connectedSpace (f := q) _ _ _
+      (IsPullback.of_hasPullback _ _)) ((sheafForget V.smallEtaleTopology).obj G)
+  have : IsIso (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (MorphismProperty.Over.pullback @Etale ⊤ q) (Type (u + 1))
+      V.smallEtaleTopology W.smallEtaleTopology).unit.app
+        ((sheafForget V.smallEtaleTopology).obj G)).hom.app
+          (op (Scheme.Etale.mk (𝟙 V)))) := (isIso_iff_bijective _).2 hb
+  have hu := congrArg (fun f ↦ f.hom.app (op (Scheme.Etale.mk (𝟙 V)))) (hunit G)
+  clear hunit
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] at hu
+  erw [← hu] at this
+  have : IsIso ((sheafForget V.smallEtaleTopology).map
+      ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} q).unit.app G) |>.hom.app
+        (op (Scheme.Etale.mk (𝟙 V)))) :=
+    IsIso.of_isIso_comp_right _
+      ((da.hom.app ((q)^*[AddCommGrpCat.{u + 1}].obj G)).hom.app
+        (op (Scheme.Etale.mk (𝟙 V))) ≫
+      (((MorphismProperty.Over.pullback @Etale ⊤ q).sheafPushforwardContinuous
+        (Type (u + 1)) (smallGrothendieckTopology (@Etale) V)
+          (smallGrothendieckTopology (@Etale) W)).map
+          (ea.hom.app G)).hom.app (op (Scheme.Etale.mk (𝟙 V))))
+  have : IsIso ((forget AddCommGrpCat.{u + 1}).map
+      (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} q).unit.app G).hom.app
+        (op (Scheme.Etale.mk (𝟙 V))))) := this
+  exact isIso_of_reflects_iso _ (forget AddCommGrpCat.{u + 1})
+
+private theorem isIso_module_unit_sections_of_flat_connected {V W : Scheme.{u}}
+    (q : W ⟶ V) [Flat q] [QuasiCompact q] [GeometricallyConnected q]
+    (G : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso (((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) q).unit.app G).hom.app
+      (op (Scheme.Etale.mk (𝟙 V)))) := by
+  let U := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
+  let GV := (sheafCompose V.smallEtaleTopology U).obj G
+  let GW := (sheafCompose W.smallEtaleTopology U).obj ((q)^*[_].obj G)
+  let κ := ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} q).homEquiv GV GW).symm
+    ((sheafCompose V.smallEtaleTopology U).map
+      ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) q).unit.app G))
+  have : IsIso κ := Etale.isIso_moduleAbelianInverseImageComparison q Λ G
+  have hu : (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} q).unit.app GV ≫
+      (q)_*[AddCommGrpCat.{u + 1}].map κ =
+    (sheafCompose V.smallEtaleTopology U).map
+      ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) q).unit.app G) := by
+    have he := ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} q).homEquiv
+      GV GW).apply_symm_apply
+        ((sheafCompose V.smallEtaleTopology U).map
+          ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) q).unit.app G))
+    rw [Adjunction.homEquiv_unit] at he
+    exact he
+  have hs := congrArg (fun f ↦ f.hom.app (op (Scheme.Etale.mk (𝟙 V)))) hu
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] at hs
+  change _ ≫ _ = U.map
+    (((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) q).unit.app G).hom.app
+      (op (Scheme.Etale.mk (𝟙 V)))) at hs
+  have := isIso_ab_unit_sections_of_flat_connected q GV
+  have : IsIso (U.map
+      (((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) q).unit.app G).hom.app
+        (op (Scheme.Etale.mk (𝟙 V))))) := by
+    rw [← hs]
+    infer_instance
+  exact isIso_of_reflects_iso _ U
+
 variable (p) in
 /-- Let `φ : W ⟶ V ×_S X` be a morphism of étale `X`-schemes such that the induced morphism
 `q : W ⟶ V` is flat, quasi-compact and has geometrically connected fibres. Then for every
@@ -230,8 +309,11 @@ theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (Module
     [Flat (φ.left ≫ pullback.fst V.hom p)]
     [QuasiCompact (φ.left ≫ pullback.fst V.hom p)]
     [GeometricallyConnected (φ.left ≫ pullback.fst V.hom p)] :
-    IsIso (Etale.upperStarSectionsMap _ p G φ) :=
-  sorry
+    IsIso (Etale.upperStarSectionsMap _ p G φ) := by
+  obtain ⟨α⟩ := Etale.nonempty_etaleChartSections_arrowIso Λ p G φ
+  exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff α).2
+    (isIso_module_unit_sections_of_flat_connected Λ
+      (φ.left ≫ pullback.fst V.hom p) ((V.hom)^*[_].obj G))
 
 /-- Blueprint `sbc-lem-degree-zero-flat-base-change`: degree-zero flat base change.
 
@@ -309,6 +391,8 @@ theorem Etale.isIso_baseChangeMap_app_of_flat [Flat p] [LocallyOfFinitePresentat
       (by rw [reassoc_of% hφ']; simp [c])] at h₂
     exact IsIso.of_isIso_comp_left (Etale.upperStarSectionsMap _ p ((g)_*[_].obj F) φ) _
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- In degree zero the base-change map `AlgebraicGeometry.Etale.baseChangeHomologyMap` of the
 derived base-change morphism is, up to isomorphism of arrows, the underived base-change map
 `AlgebraicGeometry.Etale.baseChangeMap`: the degree-zero homology of
@@ -318,8 +402,49 @@ of the derived adjunctions restrict in degree zero to those of the underived adj
 theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_zero (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Nonempty (Arrow.mk (Etale.baseChangeHomologyMap Λ sq 0 F) ≅
-      Arrow.mk ((Etale.baseChangeMap _ sq.toCommSq).app F)) :=
-  sorry
+      Arrow.mk ((Etale.baseChangeMap _ sq.toCommSq).app F)) := by
+  let G := (g)_*[ModuleCat.{u + 1} Λ]
+  let G' := (h)_*[ModuleCat.{u + 1} Λ]
+  let β := (e)^*[ModuleCat.{u + 1} Λ]
+  let γ := (p)^*[ModuleCat.{u + 1} Λ]
+  let δ := Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq
+  let l := (γ.mapDerivedCategoryPlusHomologyFunctorIso 0).symm.app
+      (G.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≪≫
+    γ.mapIso ((G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0).app F)
+  let r := (DerivedCategory.Plus.homologyFunctor _ 0).mapIso
+      (G'.rightDerivedFunctorPlus.mapIso ((β.mapDerivedCategoryPlusSingleFunctor 0).app F)) ≪≫
+    (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0).app (β.obj F)
+  have hδ : Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq =
+      Functor.rightDerivedFunctorPlusBaseChange δ := by
+    rw [Etale.baseChange_eq_derivedBaseChangeMapPlus]
+    rfl
+  have hw : Etale.baseChangeHomologyMap Λ sq 0 F ≫ r.hom =
+      l.hom ≫ (Functor.rightDerivedBaseChange δ 0).app F := by
+    change (DerivedCategory.Plus.homologyFunctor _ 0).map
+        ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≫ r.hom = _
+    rw [hδ, Functor.rightDerivedBaseChange_app]
+    dsimp only [l, r, G, G', β, γ, Iso.trans_hom, Functor.mapIso_hom,
+      Iso.app_hom, Iso.app_inv, Iso.symm_hom]
+    simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id]
+    simp only [Int.natCast_zero, Category.id_comp, Iso.inv_hom_id_app_assoc]
+  let l₀ := γ.mapIso (G.rightDerivedZeroIsoSelf.app F)
+  let r₀ := G'.rightDerivedZeroIsoSelf.app (β.obj F)
+  have hw₀ : (Functor.rightDerivedBaseChange δ 0).app F ≫ r₀.hom =
+      l₀.hom ≫ δ.app F := by
+    apply (cancel_epi l₀.inv).1
+    change (γ.map (G.toRightDerivedZero.app F) ≫
+        (Functor.rightDerivedBaseChange δ 0).app F) ≫ r₀.hom =
+      l₀.inv ≫ l₀.hom ≫ δ.app F
+    rw [Functor.rightDerivedBaseChange_zero_unit]
+    simp [r₀, Functor.rightDerivedZeroIsoSelf]
+  exact ⟨Arrow.isoMk (l ≪≫ l₀) (r ≪≫ r₀) (by
+    change (l.hom ≫ l₀.hom) ≫ δ.app F =
+      Etale.baseChangeHomologyMap Λ sq 0 F ≫ (r.hom ≫ r₀.hom)
+    rw [← Category.assoc, hw]
+    simp only [Category.assoc]
+    rw [hw₀])⟩
 
 end DegreeZero
 

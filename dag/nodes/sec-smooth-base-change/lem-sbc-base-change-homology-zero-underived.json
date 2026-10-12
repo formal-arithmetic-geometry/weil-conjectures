@@ -1,0 +1,130 @@
+{
+ "id": "lem-sbc-base-change-homology-zero-underived",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-degree-zero-flat-base-change",
+   "place": "sk-prop-deg0 degree-zero statement, identifying the map on H^0 with the underived exchange",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Degree-zero homology exchange is isomorphic to the underived exchange",
+ "statement": "Let $Y\\xrightarrow{e}T$, $Y\\xrightarrow{h}X$, $T\\xrightarrow{g}S$, $X\\xrightarrow{p}S$ form a Cartesian square [def-weil-pbc-cartesian-square], and let $F$ be a sheaf of modules over a commutative ring $\\Lambda$ on $T_{et}$ [def-weil-pbc-etale-site]. The degree-zero homology of the derived base-change morphism on $F[0]$ [def-weil-pbc-derived-exchange] is isomorphic, as an arrow of module sheaves on $X_{et}$, to the underived base-change morphism $p^*g_*F\\to h_*e^*F$ [def-weil-pbc-underived-exchange].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TD part (3), plus source DerivedComparison.baseChange_eq_derivedBaseChangeMapPlus and PlusBaseChange.rightDerivedBaseChange_app."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved Etale.baseChange_eq_derivedBaseChangeMapPlus to express the derived mate as generic derived base change of the underived transformation delta.",
+   "uses": [
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the source comparison by exact pullback/homology commutation followed by the single-complex/right-derived comparison. Construct the target comparison by right-derived pushforward of the exact pullback/single comparison followed by its single-complex/right-derived comparison. Expand rightDerivedBaseChange_app and cancel comparison isomorphisms to obtain a commuting square from H^0 of base change to R^0 base change.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Left exactness makes the degree-zero augmentations invertible. Apply the generic base-change unit equation, cancel the inverse source augmentation, and use the inverse target augmentation to obtain the commuting square from R^0 base change to delta.",
+   "uses": [
+    "lem-sbc-right-derived-base-change-zero-unit",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the source and target isomorphisms of the two squares. Associativity and the two square equations give Arrow.isoMk for the required arrows.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-exchange",
+  "lem-sbc-right-derived-base-change-zero-unit",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TD part (3), plus source DerivedComparison.baseChange_eq_derivedBaseChangeMapPlus and PlusBaseChange.rightDerivedBaseChange_app."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "zeroth right derived base change commutes with the unit to the zeroth right derived functor",
+   "results": "Service unavailable: internal server error. No absence claim based on this service.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedZeroIsoSelf",
+   "results": "Mathlib gives rightDerivedZeroIsoSelf and its augmentation identities, not the base-change augmentation equation.",
+   "verdict": "partial match; use the existing degree-zero isomorphism",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg rightDerivedBaseChange|mapDerivedCategoryPlusHomologyFunctorIso Mathlib/CategoryTheory Mathlib/Algebra/Homology; rg rightDerivedBaseChange_zero lean/WeilConjectures lean/Sheaf",
+   "results": "No Mathlib or library degree-zero base-change unit equation. PlusBaseChange contains the derived defining equation and the homology definition.",
+   "verdict": "no match for the required equation",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-deg0",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/DegreeZero.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_zero",
+  "statement": "theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_zero (sq : IsPullback e h g p) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Nonempty (Arrow.mk (Etale.baseChangeHomologyMap Λ sq 0 F) ≅ Arrow.mk ((Etale.baseChangeMap _ sq.toCommSq).app F))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T042426-L-1823918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T042426-L-1823918",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

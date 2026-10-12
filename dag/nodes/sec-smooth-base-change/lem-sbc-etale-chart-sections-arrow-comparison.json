@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-etale-chart-sections-arrow-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-degree-zero-flat-base-change",
+   "place": "sk-prop-deg0 Step 2, comparison of inverse-image sections on an etale chart before applying Tag 0A3H",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Comparison of chart sections with the terminal inverse-image unit",
+ "statement": "Let $p:X\\to S$ be a scheme morphism, $\\Lambda$ a commutative ring, $G$ a sheaf of $\\Lambda$-modules on the small etale site of $S$ [def-weil-pbc-etale-site], and $V\\to S$, $W\\to X$ etale objects. Let $\\varphi:W\\to V\\times_S X$ be a morphism over $X$, and let $q:W\\to V$ be its composite with the first projection [def-pc-fibre-product]. The map $G(V)\\to (p^*G)(W)$ given by the inverse-image adjunction unit and restriction along $\\varphi$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image] is isomorphic as an arrow of $\\Lambda$-modules to the terminal-object unit map $\\Gamma(V,r^*G)\\to\\Gamma(V,q_*q^*r^*G)$, where $r:V\\to S$. No flatness, quasi-compactness, or connectedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZX, first displayed formula and footnote 1; Tag 0A3H applied after restriction. Source APIs: Etale.upperStarIsoLocalizationRestriction and upperStarComp."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Put j=W.hom and r=V.hom. The equation defining the chart gives j followed by p equal to q followed by r. Both j and r are etale.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The etale localization comparison identifies G(V) with terminal sections of r^*G, and sections of p^*G on W with terminal sections of j^*p^*G. Inverse-image composition identifies j^*p^*G with q^*r^*G using the equation of Step 1. These comparisons are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pullback of the terminal V-object along q is canonically the terminal W-object. Transport target sections along that isomorphism.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The unit equation for composite adjunctions and the restriction-unit equation identify the chart restriction of the unit for p with the terminal unit for q. The source and target comparisons therefore form a commutative square; Arrow.isoMk supplies the claimed arrow isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZX, first displayed formula and footnote 1; Tag 0A3H applied after restriction. Source APIs: Etale.upperStarIsoLocalizationRestriction and upperStarComp."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale inverse image restricted to etale chart is pullback of restriction with unit on global sections",
+   "results": "Service unavailable: internal server error. No absence claim based on this service.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image restriction to etale chart comparison on global sections unit",
+   "results": "Eight results about algebraic restriction and open immersions; no arrow comparison for arbitrary etale charts.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg rightDerivedBaseChange|upperStarSectionsMap|mapDerivedCategoryPlusHomologyFunctorIso Mathlib/CategoryTheory Mathlib/Algebra/Homology; rg upperStarIsoLocalizationRestriction lean/WeilConjectures lean/Sheaf",
+   "results": "No Mathlib match. Source localization and composition comparisons exist, but no arbitrary-chart sections arrow isomorphism.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-deg0",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleChartSectionsArrowComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartSectionsArrowComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_etaleChartSections_arrowIso",
+  "statement": "theorem nonempty_etaleChartSections_arrowIso (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S) (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {V : S.Etale} {W : X.Etale} (φ : W ⟶ (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ p).obj V) : Nonempty (Arrow.mk (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app G).hom.app (op V) ≫ ((p)^*[ModuleCat.{u + 1} Λ].obj G).obj.map φ.op) ≅ Arrow.mk (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (φ.left ≫ pullback.fst V.hom p)).unit.app ((V.hom)^*[ModuleCat.{u + 1} Λ].obj G)).hom.app (op (Scheme.Etale.mk (𝟙 V.left)))))",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T042426-L-1823918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T042426-L-1823918",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

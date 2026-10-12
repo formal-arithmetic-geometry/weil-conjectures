@@ -1,0 +1,129 @@
+{
+ "id": "lem-sbc-module-chart-sections-flat-connected",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-degree-zero-flat-base-change",
+   "place": "sk-prop-deg0 Step 2, the flat quasi-compact connected-fibre sections comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Module-valued sections agree on a flat connected chart",
+ "statement": "Let $p:X\\to S$ be a morphism of schemes and $\\Lambda$ a commutative ring. For a sheaf $G$ of $\\Lambda$-modules on $S_{et}$ [def-weil-pbc-etale-site], etale objects $V\\to S$, $W\\to X$, and a chart morphism $\\varphi:W\\to V\\times_S X$ [def-pc-fibre-product], put $q:W\\to V$ equal to its first projection. If $q$ is flat, quasi-compact, and geometrically connected, then the unit-and-restriction map $G(V)\\to(p^*G)(W)$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image] is an isomorphism of $\\Lambda$-modules.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H and Tag 0EZX, proof. Lean private helpers isIso_ab_unit_sections_of_flat_connected and isIso_module_unit_sections_of_flat_connected."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "For an abelian sheaf on V, apply the existing flat quasi-compact connected-fibre set-sections theorem to its underlying sheaf. GeometricallyConnected supplies the required connected geometric fibres.",
+   "uses": [
+    "lem-weil-pbc-etale-sections-flat-qc-connected-fibres"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the set/abelian inverse-image and direct-image comparisons and their unit equation. Evaluate at the terminal V-object. The composite of the forgotten abelian unit with the comparison isomorphisms is the bijective set unit, so cancellation and reflection by the forgetful functor prove the abelian unit is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forget module sheaves to abelian sheaves. The existing module/abelian inverse-image comparison is the adjoint transpose of the forgotten module unit and is an isomorphism. The homEquiv unit equation expresses the forgotten module unit as the abelian unit followed by the pushforward of this comparison. Thus it is an isomorphism, and forgetting modules reflects isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-inverse-image-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the chart-sections arrow comparison and transport isomorphism of the terminal module unit along the arrow isomorphism.",
+   "uses": [
+    "lem-sbc-etale-chart-sections-arrow-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-etale-chart-sections-arrow-comparison",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H and Tag 0EZX, proof. Lean private helpers isIso_ab_unit_sections_of_flat_connected and isIso_module_unit_sections_of_flat_connected."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale inverse image restricted to etale chart is pullback of restriction with unit on global sections",
+   "results": "Service unavailable: internal server error. No absence claim based on this service.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image restriction to etale chart comparison on global sections unit",
+   "results": "Eight results about algebraic restriction and open immersions; no arrow comparison for arbitrary etale charts.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg rightDerivedBaseChange|upperStarSectionsMap|mapDerivedCategoryPlusHomologyFunctorIso Mathlib/CategoryTheory Mathlib/Algebra/Homology; rg upperStarIsoLocalizationRestriction lean/WeilConjectures lean/Sheaf",
+   "results": "No Mathlib match. Source localization and composition comparisons exist, but no arbitrary-chart sections arrow isomorphism.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-deg0",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/DegreeZero.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_upperStarSectionsMap",
+  "statement": "theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {V : S.Etale} {W : X.Etale} (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V) [Flat (φ.left ≫ pullback.fst V.hom p)] [QuasiCompact (φ.left ≫ pullback.fst V.hom p)] [GeometricallyConnected (φ.left ≫ pullback.fst V.hom p)] : IsIso (Etale.upperStarSectionsMap _ p G φ)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T042426-L-1823918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T042426-L-1823918",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

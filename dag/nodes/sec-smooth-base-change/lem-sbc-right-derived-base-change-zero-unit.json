@@ -1,0 +1,122 @@
+{
+ "id": "lem-sbc-right-derived-base-change-zero-unit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-degree-zero-flat-base-change",
+   "place": "sk-prop-deg0 degree-zero identification: compatibility of the underived exchange with H^0 of the derived exchange",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Degree-zero derived base change respects the augmentations",
+ "statement": "Let $B,B\\prime,C,C\\prime$ be abelian categories with derived categories, and assume enough injectives in $B,B\\prime$ [def-weil-pbc-derived-categories]. Let $G:B\\to C$ and $G\\prime:B\\prime\\to C\\prime$ be additive left exact functors, and let $\\beta:B\\to B\\prime$, $\\gamma:C\\to C\\prime$ be additive exact functors [lem-sp-exact-functor-preserves-homology]. For a natural transformation $e:G\\gamma\\to\\beta G\\prime$, write $R^0e$ for its degree-zero derived base-change transformation and $a_G:G\\to R^0G$, $a_{G\\prime}:G\\prime\\to R^0G\\prime$ for the canonical augmentations [lem-weil-pbc-left-exact-injective-resolution-degree-zero]. For every $Y$ in $B$, $\\gamma(a_G(Y));R^0e(Y)=e(Y);a_{G\\prime}(\\beta Y)$. Here semicolons mean composition in the written order.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TD, part (3), and the defining equation rightDerivedFunctorPlusBaseChange_fac in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+ ],
+ "proof": [
+  {
+   "text": "Choose a nonnegative injective resolution Y to I and evaluate rightDerivedFunctorPlusBaseChange_fac on Y[0]. Its unit equation says that base change after the source augmentation is e followed by the target augmentation.",
+   "uses": [
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply degree-zero homology and the single-complex/right-derived comparison isomorphisms. Exactness of beta and gamma allows the homology comparisons defining rightDerivedBaseChange.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A nonnegative complex has no boundaries in degree zero. Its augmentation into the kernel of the first differential is precisely toRightDerivedZero. Naturality of e with the resolution augmentation then gives the displayed identity.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-exchange",
+  "lem-sp-derived-functor-single-identification",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TD, part (3), and the defining equation rightDerivedFunctorPlusBaseChange_fac in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "zeroth right derived base change commutes with the unit to the zeroth right derived functor",
+   "results": "Service unavailable: internal server error. No absence claim based on this service.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedZeroIsoSelf",
+   "results": "Mathlib gives rightDerivedZeroIsoSelf and its augmentation identities, not the base-change augmentation equation.",
+   "verdict": "partial match; use the existing degree-zero isomorphism",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg rightDerivedBaseChange|mapDerivedCategoryPlusHomologyFunctorIso Mathlib/CategoryTheory Mathlib/Algebra/Homology; rg rightDerivedBaseChange_zero lean/WeilConjectures lean/Sheaf",
+   "results": "No Mathlib or library degree-zero base-change unit equation. PlusBaseChange contains the derived defining equation and the homology definition.",
+   "verdict": "no match for the required equation",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-deg0",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedBaseChangeZeroUnit",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedBaseChangeZeroUnit.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedBaseChange_zero_unit",
+  "statement": "theorem rightDerivedBaseChange_zero_unit (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) : γ.map (G.toRightDerivedZero.app Y) ≫ (rightDerivedBaseChange e 0).app Y = e.app Y ≫ G'.toRightDerivedZero.app (β.obj Y)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T042426-L-1823918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T042426-L-1823918",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
