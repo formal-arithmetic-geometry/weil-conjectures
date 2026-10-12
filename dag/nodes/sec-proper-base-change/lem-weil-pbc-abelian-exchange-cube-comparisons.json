@@ -17,30 +17,35 @@
  ],
  "proof": [
   {
-   "text": "Apply the proved horizontal pasting law for the derived exchange to the original square followed by the square over jB, and to the square over jA followed by the local square over g0. The outer mates agree because their horizontal maps agree by the two cube equations. Cancel the composition isomorphisms. Insert the inverse-image/single-complex comparison by naturality of the local mate.",
+   "text": "Form the two commuting outer squares with horizontal maps b g′, jB g and p1 p0, g0 jA. Apply derivedBaseChangeMapPlus_paste_horiz to sq followed by sqB and to sq0 followed by sq1, at K. Transport the outer mate along h and hb by equality elimination; commutativity witnesses agree by proof irrelevance. Precompose the transported equality by the inverse composition isomorphism for jB,g and postcompose by Rf1 of the composition isomorphism for p1,p0. Associativity, functoriality, and the hom/inv identities cancel the adjacent inverse factors, yielding the derived cube identity before the single-complex comparison.",
    "uses": [
     "lemma-weil-pbc-derived-exchange-coherence"
    ],
    "elementary": false
   },
   {
-   "text": "Apply homology and the fibre functor. Naturality of the exact inverse-image/homology comparison and of the inverse-image stalk comparison transports the resulting equality to the two explicitly constructed derivedStalkComparison maps. This is a formal calculation, with no invertibility assumption on either mate.",
+   "text": "Apply naturality of the local derived mate to the inverse-image/single-complex comparison for p0. Postcompose the derived cube identity with Rf1 of p1 inverse image of this comparison. Reassociate and use functoriality to obtain the equality between exchangeCubeSourceComparison followed by the local mate and jB inverse image of the original mate followed by exchangeCubeTargetComparison.",
    "uses": [
-    "def-weil-pbc-derived-inverse-image",
-    "lem-weil-pbc-inverse-image-stalk-germ"
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove postcomposition functoriality of derivedStalkComparison by substituting s=t jB and using the homology and point fibre functors’ composition laws. Prove precomposition naturality by the inverse-image stalk isomorphism’s inverse naturality, then the exact inverse-image/homology isomorphism’s hom naturality. Rewrite both sides of the target with these two formulas and the derived cube identity. This works for every degree and every commuting cube, including zero complexes and identity cubes.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-derived-inverse-image",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lemma-weil-pbc-derived-exchange-coherence"
+  "lemma-weil-pbc-derived-exchange-coherence",
+  "def-weil-pbc-derived-inverse-image"
  ],
  "proof_origin": {
-  "by": "worker Y2",
+  "by": "worker J1",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Stacks Project, Tags 03Q9 (theorem-higher-direct-images, restriction of section complexes) and 095T (theorem-proper-base-change, final stalk calculation); cube compatibility is the formal horizontal-mate-pasting calculation. Canonical-map formulation written by an agent."
+  "place": "Stacks Project, Tags 03Q9 and 095T; formal horizontal mate-pasting calculation written and checked in Lean using the source library pasting theorem, equality transport, and naturality of the stalk and homology comparisons."
  },
  "mathlib_searches": [
   {
@@ -121,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T110326-L-625176",
-  "kind": "interface",
+  "landing": "20261012T135242-L-1669085",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
