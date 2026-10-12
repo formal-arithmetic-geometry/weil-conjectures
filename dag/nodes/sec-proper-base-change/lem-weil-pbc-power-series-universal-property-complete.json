@@ -33,82 +33,38 @@
  ],
  "proof": [
   {
-   "text": "*Notation and partial sums.* By [def-weil-pbc-multivariate-power-series] an element of $\\Lambda[[x_1,\\ldots,x_n]]$ is a family $F=(a_E)_{E\\in\\mathbf N^n}$ of elements of $\\Lambda$, written $\\sum_Ea_Ex^E$, with coefficientwise sum and product $(FG)_H=\\sum_{E+E'=H}a_Eb_{E'}$ for $G=(b_{E'})$; a constant $\\lambda\\in\\Lambda$ is the series $\\lambda x^0$, and $x_i$ is the series with coefficient $1$ at the $i$-th unit vector $\\varepsilon_i$ and $0$ elsewhere, so that $x^E=x_1^{e_1}\\cdots x_n^{e_n}$ is the series with coefficient $1$ at $E$ and $0$ elsewhere, and $a_Ex^E$ (product of the constant $a_E$ with $x^E$) is the series with coefficient $a_E$ at $E$ and $0$ elsewhere. For $F=\\sum_Ea_Ex^E$ and $m\\ge1$ put $P_m(F)=\\sum_{|E|<m}\\alpha(a_E)t^E\\in T$, a finite sum (there are finitely many $E\\in\\mathbf N^n$ with $|E|<m$). Since $t_i\\in\\mathfrak a$, $t^E\\in\\mathfrak a^{|E|}$ for every $E$. Hence for $m'\\ge m\\ge1$, $P_{m'}(F)-P_m(F)=\\sum_{m\\le|E|<m'}\\alpha(a_E)t^E\\in\\mathfrak a^m$.",
-   "uses": [
-    "def-weil-pbc-multivariate-power-series"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
-   }
-  },
-  {
-   "text": "*Definition of $\\Phi(F)$, and its characterization.* By [def-weil-pbc-adically-complete-ring] the canonical map $T\\to\\varprojlim_mT/\\mathfrak a^m$, $s\\mapsto(s\\bmod\\mathfrak a^m)_m$, is bijective. By step 1 the classes $P_m(F)\\bmod\\mathfrak a^m$ form a compatible family: the image of $P_{m+1}(F)\\bmod\\mathfrak a^{m+1}$ under $T/\\mathfrak a^{m+1}\\to T/\\mathfrak a^m$ is $P_{m+1}(F)\\bmod\\mathfrak a^m=P_m(F)\\bmod\\mathfrak a^m$. By surjectivity there is $\\Phi(F)\\in T$ with $\\Phi(F)\\equiv P_m(F)\\pmod{\\mathfrak a^m}$ for every $m\\ge1$; by injectivity it is the only such element (two such elements have the same image in the inverse limit). In particular, an element $s\\in T$ with $s\\in\\mathfrak a^m$ for every $m\\ge1$ is $0$ (it and $0$ have the same image), i.e. $\\bigcap_m\\mathfrak a^m=0$. This defines a map $\\Phi:\\Lambda[[x_1,\\ldots,x_n]]\\to T$ and proves the clause of the statement that $\\Phi(F)$ is the unique element congruent to $\\sum_{|E|<m}\\alpha(a_E)t^E$ modulo $\\mathfrak a^m$ for all $m\\ge1$.",
-   "uses": [
-    "def-weil-pbc-adically-complete-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
-   }
-  },
-  {
-   "text": "*$\\Phi$ is a ring homomorphism.* Fix $m\\ge1$ and $F=\\sum a_Ex^E$, $G=\\sum b_Ex^E$. (a) Sums are coefficientwise, so $P_m(F+G)=P_m(F)+P_m(G)$ as $\\alpha$ is additive; hence $\\Phi(F+G)$ and $\\Phi(F)+\\Phi(G)$ are both congruent to $P_m(F+G)$ modulo $\\mathfrak a^m$ for every $m$, and they are equal by the uniqueness of step 2. (b) The unit $1=x^0$ has $P_m(1)=\\alpha(1)t^0=1$ for every $m\\ge1$, so $\\Phi(1)=1$ by step 2. (c) $P_m(F)P_m(G)=\\sum_{|E|<m,\\,|E'|<m}\\alpha(a_E)\\alpha(b_{E'})t^{E+E'}$. If $|E+E'|<m$ then $|E|,|E'|<m$, so the terms with $|E+E'|<m$ are all present and, grouped by $H=E+E'$, give $\\sum_{|H|<m}\\alpha\\bigl(\\sum_{E+E'=H}a_Eb_{E'}\\bigr)t^H=P_m(FG)$ ($\\alpha$ is a ring homomorphism); the remaining terms have $|E+E'|\\ge m$ and lie in $\\mathfrak a^m$ (step 1). So $P_m(F)P_m(G)\\equiv P_m(FG)\\pmod{\\mathfrak a^m}$. Since $\\Phi(F)-P_m(F)$ and $\\Phi(G)-P_m(G)$ lie in the ideal $\\mathfrak a^m$, also $\\Phi(F)\\Phi(G)\\equiv P_m(F)P_m(G)\\equiv P_m(FG)\\pmod{\\mathfrak a^m}$, for every $m\\ge1$; by the uniqueness of step 2, $\\Phi(FG)=\\Phi(F)\\Phi(G)$.",
+   "text": "Construct for each m the ring homomorphism q_m by composing Mathlib MvPowerSeries.truncTotalAlgHom with Ideal.quotientMap of MvPolynomial.eval₂Hom α t. The variables ideal maps into a because t_i is in a, and Ideal.le_comap_pow sends its mth power into a^m. Mathlib truncTotal_sub_truncTotal_mem_pow_idealOfVars proves compatibility. IsAdicComplete.liftRingHom constructs Φ with these projections; no witness is chosen from an unproved theorem.",
    "uses": [
     "def-weil-pbc-multivariate-power-series",
     "def-weil-pbc-adically-complete-ring"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
-   }
+   "elementary": true
   },
   {
-   "text": "*The values on $\\Lambda$ and on the $x_i$.* For $\\lambda\\in\\Lambda$ the series $\\lambda x^0$ has $P_m(\\lambda)=\\alpha(\\lambda)$ for every $m\\ge1$, so $\\Phi(\\lambda)=\\alpha(\\lambda)$ by step 2. For the series $x_i$ (coefficient $1$ at $\\varepsilon_i$, $|\\varepsilon_i|=1$) one has $P_1(x_i)=0$ and $P_m(x_i)=t_i$ for $m\\ge2$; as $t_i\\in\\mathfrak a$, $t_i\\equiv P_m(x_i)\\pmod{\\mathfrak a^m}$ for every $m\\ge1$, so $\\Phi(x_i)=t_i$ by step 2. (For $n=0$ there are no $x_i$ and $\\Phi=\\alpha$.) With step 3 this proves the existence part of the statement.",
-   "uses": [
-    "def-weil-pbc-multivariate-power-series",
-    "def-weil-pbc-adically-complete-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
-   }
-  },
-  {
-   "text": "*Series without terms of degree $<m$ lie in the ideal generated by the monomials of degree $m$.* Let $m\\ge1$ and $R=\\sum_Gr_Gx^G\\in\\Lambda[[x_1,\\ldots,x_n]]$ with $r_G=0$ for $|G|<m$. Let $\\mathcal E_m=\\{E\\in\\mathbf N^n:|E|=m\\}$, a finite set. For each $G$ with $|G|\\ge m$ choose $E(G)\\in\\mathcal E_m$ with $E(G)\\le G$ componentwise (lower the entries of $G$ one unit at a time, from the last nonzero entry, until the total is $m$). For $E\\in\\mathcal E_m$ let $g_E\\in\\Lambda[[x_1,\\ldots,x_n]]$ have coefficient $r_{E+H}$ at $H$ if $|E+H|\\ge m$ and $E(E+H)=E$, and $0$ otherwise. By the product formula of [def-weil-pbc-multivariate-power-series] the coefficient of $x^Eg_E$ at $G$ is $0$ unless $E\\le G$, and then it is the coefficient of $g_E$ at $G-E$, namely $r_G$ if $E(G)=E$ and $0$ otherwise (note $|G|\\ge|E|=m$ when $E\\le G$). Summing over the finite set $\\mathcal E_m$, the coefficient of $\\sum_{E\\in\\mathcal E_m}x^Eg_E$ at $G$ is $r_G$ if $|G|\\ge m$ (exactly one $E$, namely $E(G)$, contributes) and $0=r_G$ if $|G|<m$ (no $E\\in\\mathcal E_m$ is $\\le G$). Hence $R=\\sum_{E\\in\\mathcal E_m}x^Eg_E$, a finite sum.",
-   "uses": [
-    "def-weil-pbc-multivariate-power-series"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
-   }
-  },
-  {
-   "text": "*Uniqueness among all ring homomorphisms.* Let $\\Phi':\\Lambda[[x_1,\\ldots,x_n]]\\to T$ be any ring homomorphism with $\\Phi'(\\lambda)=\\alpha(\\lambda)$ for $\\lambda\\in\\Lambda$ and $\\Phi'(x_i)=t_i$ for all $i$ (no continuity is assumed). Then $\\Phi'(x^E)=t^E$ by multiplicativity. Fix $F=\\sum a_Ex^E$ and $m\\ge1$, and write $F=F_{<m}+R$ with $F_{<m}=\\sum_{|E|<m}a_Ex^E$ (a finite sum of the series $a_Ex^E=a_E\\cdot x^E$ of step 1) and $R=F-F_{<m}$, whose coefficients vanish in degrees $<m$. Then $\\Phi'(F_{<m})=\\sum_{|E|<m}\\alpha(a_E)t^E=P_m(F)$. By step 5, $R=\\sum_{|E|=m}x^Eg_E$, so $\\Phi'(R)=\\sum_{|E|=m}t^E\\Phi'(g_E)\\in\\mathfrak a^m$ since $t^E\\in\\mathfrak a^m$ (step 1). Hence $\\Phi'(F)\\equiv P_m(F)\\pmod{\\mathfrak a^m}$ for every $m\\ge1$, and $\\Phi'(F)=\\Phi(F)$ by the uniqueness in step 2. So $\\Phi'=\\Phi$.",
+   "text": "Use IsHausdorff.funext' to compare elements by all projections. Constant truncations equal the constant for m>0. Variable truncations equal X_i for m>1 and zero otherwise; t_i belongs to a and therefore to a^m for m≤1. The zero projection is trivial. This gives the prescribed values and the equivalence between all positive truncation congruences and y=Φ(F).",
    "uses": [
     "def-weil-pbc-adically-complete-ring"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "fact used without statement or proof in the proof of Lemma Tag 07NL (line 9719); proof written by an agent"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For any competing ring homomorphism Ψ, polynomial induction gives Ψ(p)=eval₂ α t p. Apply power_series_mem_combined_ideal_pow_iff with base ideal zero: the tail F-truncTotal m F has vanishing coefficients below m, so lies in (X)^m. Since Ψ(X_i)=t_i is in a, Ideal.le_comap_pow sends this tail into a^m. Thus Ψ and Φ have equal projections for every m; separatedness gives Ψ=Φ. No continuity hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-pbc-adically-complete-ring"
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "used without statement as 'the universal property of power series rings' in the proof of Lemma Tag 07NL (line 9719), in the proof of Lemma Tag 07NN (line 9812) and in Algebra, proof of Theorem Tag 032A (algebra.tex line 45014); no Stacks lemma states it, the proof is written by an agent from [def-weil-pbc-multivariate-power-series] and [def-weil-pbc-adically-complete-ring]"
+  "place": "Universal property used in Tags 07NL and 07NN, and algebra.tex Tag 032A; six-step parent argument formalized using Mathlib truncation quotient homomorphisms and adic lifts, and the proved combined-ideal coefficient criterion (base ideal zero). G2 second reading, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -201,5 +157,15 @@
   "group": "H1",
   "result": "fix",
   "note": "Λ,T CommRing indep. universes; a ideal, IsAdicComplete a T; α ring hom; n, t : Fin n → T, t i ∈ a; ∃Φ tied: Φ∘C = α, Φ(X i)=t i, ∀F y (∀m≥1 mk(a^m) y = mk(a^m)(eval₂ α t (truncTotal m F))) ↔ y=Φ F, uniqueness among all ring maps (no continuity); n=0, m=1 checked; partial sums restated to C1 form"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T202239-L-704138",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
