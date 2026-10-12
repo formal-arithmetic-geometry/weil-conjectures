@@ -30,97 +30,28 @@
  ],
  "proof": [
   {
-   "text": "($C$ is finite and integral over $R$.) The polynomial $z^p-f\\in R[z]$ is monic of degree $p\\ge1$, so by [lem-weil-pbc-monic-quotient-free] $C=R[z]/(z^p-f)$ is a free $R$-module with basis the classes of $1,z,\\dots,z^{p-1}$; in particular $C$ is a finitely generated $R$-module [def-weil-finitely-generated-module]. By [lem-weil-pbc-finite-algebra-is-integral] $C$ is integral over $R$ (via $\\varphi$).",
+   "text": "Apply [lem-weil-pbc-completion-finite-quotient-data], the single-prime finite completion comparison, to obtain the levelwise completed-base map g and the tensor isomorphism gamma with its pure-tensor formula.",
    "uses": [
-    "lem-weil-pbc-monic-quotient-free",
-    "def-weil-finitely-generated-module",
-    "lem-weil-pbc-finite-algebra-is-integral"
+    "lem-weil-pbc-completion-finite-quotient-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring, line 12306), proof: 'the completion of C = B[z]/(z^p-f) equals B_r^\\wedge[z]/(z^p-f)' (stated without argument)"
-   }
+   "elementary": false
   },
   {
-   "text": "($\\mathfrak n$ is the only prime of $C$ over $\\mathfrak m$.) Since $\\varphi$ is integral (step 1) and $\\mathfrak n$ is maximal, $\\varphi^{-1}(\\mathfrak n)$ is a maximal ideal of $R$ by [lem-weil-pbc-integral-maximal-contracts-maximal]; $R$ being local, $\\varphi^{-1}(\\mathfrak n)=\\mathfrak m$. Conversely let $\\mathfrak q\\subset C$ be a prime with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak m$. Since $\\mathfrak m$ is maximal and $\\varphi$ is integral, $\\mathfrak q$ is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal], so $\\mathfrak q=\\mathfrak n$, $C$ having only one maximal ideal. Hence the primes of $C$ lying over $\\mathfrak m$ are exactly $\\mathfrak q_1=\\mathfrak n$ (one prime, $m=1$ in the notation of 07N9).",
+   "text": "Specialize polynomial base change [lem-weil-pbc-presentation-base-change] to the one-variable quotient. Lean uses AdjoinRoot.tensorAlgEquiv and then AdjoinRoot.mapAlgEquiv along the coefficient isomorphism Rhat tensor_R R = Rhat (Algebra.TensorProduct.rid). The resulting inverse delta sends mk(map iota q) to 1 tensor mk(q). Verify this on each monomial C(r) X^k, then additivity gives it for every q. Compose delta with gamma; the pure-tensor formula at a=1 and g(1)=1 prove the required polynomial compatibility. Retain g and gamma as the other witnesses.",
    "uses": [
-    "lem-weil-pbc-integral-maximal-contracts-maximal",
-    "lem-weil-pbc-integral-prime-over-maximal-maximal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 07N9 (lemma-completion-finite-extension), applied with p = m"
-   }
-  },
-  {
-   "text": "(Localizing a local ring at its maximal ideal changes nothing.) In the local ring $R$ every element $t\\notin\\mathfrak m$ is a unit (otherwise $tR$ is a proper ideal, contained in a maximal ideal, which can only be $\\mathfrak m$). So by [lem-weil-pbc-localization-units-or-zero] (2), applied to the localization $R\\to R_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime] at $T=R\\setminus\\mathfrak m$, the map $R\\to R_{\\mathfrak m}$, $r\\mapsto r/1$, is an isomorphism of rings; it carries $\\mathfrak m^n$ onto $\\mathfrak m^nR_{\\mathfrak m}$, hence induces isomorphisms $R/\\mathfrak m^n\\xrightarrow{\\sim}R_{\\mathfrak m}/\\mathfrak m^nR_{\\mathfrak m}$ commuting with the reductions $n+1\\to n$, and so an isomorphism of $R$-algebras $R^\\wedge\\xrightarrow{\\sim}(R_{\\mathfrak m})^\\wedge=\\varprojlim_nR_{\\mathfrak m}/\\mathfrak m^nR_{\\mathfrak m}$ [def-weil-pbc-adic-completion] (componentwise). In the same way, $C$ being local with maximal ideal $\\mathfrak n$, $C\\to C_{\\mathfrak n}$ is an isomorphism carrying $\\mathfrak n^n$ onto $\\mathfrak n^nC_{\\mathfrak n}$, and induces an isomorphism of $C$-algebras $C^\\wedge\\xrightarrow{\\sim}(C_{\\mathfrak n})^\\wedge=\\varprojlim_nC_{\\mathfrak n}/\\mathfrak n^nC_{\\mathfrak n}$. Under these identifications the local map $R_{\\mathfrak m}\\to C_{\\mathfrak n}$, $r/t\\mapsto\\varphi(r)/\\varphi(t)$, is $\\varphi$ (both composites $R\\to C_{\\mathfrak n}$ equal $r\\mapsto\\varphi(r)/1$), so the map $(R_{\\mathfrak m})^\\wedge\\to(C_{\\mathfrak n})^\\wedge$ it induces becomes the map $R^\\wedge\\to C^\\wedge$ induced by $R/\\mathfrak m^n\\to C/\\mathfrak n^n$ (well defined as $\\varphi(\\mathfrak m)\\subseteq\\mathfrak n$ by step 2).",
-   "uses": [
-    "lem-weil-pbc-localization-units-or-zero",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-adic-completion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 07N9 (lemma-completion-finite-extension), applied with p = m"
-   }
-  },
-  {
-   "text": "(The tensor product is the completion.) Apply [lem-weil-pbc-completion-finite-extension] to the Noetherian ring $R$, the ring map $\\varphi:R\\to C$ making $C$ a finitely generated $R$-module (step 1) and the prime $\\mathfrak p=\\mathfrak m$ (maximal, hence prime); by step 2 the primes of $C$ over $\\mathfrak m$ are just $\\mathfrak q_1=\\mathfrak n$. It gives an isomorphism of $C$-algebras $(R_{\\mathfrak m})^\\wedge\\otimes_RC\\xrightarrow{\\sim}(C_{\\mathfrak n})^\\wedge$, compatible with the $(R_{\\mathfrak m})^\\wedge$-algebra structures, $(R_{\\mathfrak m})^\\wedge$ acting on the right through the map induced by $R_{\\mathfrak m}\\to C_{\\mathfrak n}$. Composing with the isomorphisms of step 3 (and $R^\\wedge\\otimes_RC\\cong(R_{\\mathfrak m})^\\wedge\\otimes_RC$, the tensor product of the $R$-algebra isomorphism of step 3 with the identity of $C$) gives an isomorphism $\\gamma:R^\\wedge\\otimes_RC\\xrightarrow{\\sim}C^\\wedge$ of $C$-algebras and of $R^\\wedge$-algebras ($R^\\wedge$ acting on $C^\\wedge$ through $R/\\mathfrak m^n\\to C/\\mathfrak n^n$). Being $C$-linear and $R^\\wedge$-linear with $\\gamma(1\\otimes1)=1$, it is $\\gamma(a\\otimes c)=a\\cdot\\iota_C(c)$. This is the second assertion. (The $\\mathfrak n$-adic versus $\\mathfrak m$-adic topology on $C$ is handled inside the cited lemma, its step 4.)",
-   "uses": [
-    "lem-weil-pbc-completion-finite-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 07N9 (lemma-completion-finite-extension), statement, with p = m and one prime n over it; its last step is Lemma Tag 00MA (lemma-completion-tensor)"
-   }
-  },
-  {
-   "text": "(Base change of the presentation.) The quotient map $\\pi:R[z]\\to C$ is a presentation of $C$ over $R$ with one variable and one relation $z^p-f$ (the polynomial ring in one variable [def-weil-polynomial-ring] is the case $J=\\{1\\}$ of [def-weil-pbc-mv-polynomial-ring]). By [lem-weil-pbc-presentation-base-change] with $R'=R^\\wedge$, the $R^\\wedge$-algebra map $\\pi':R^\\wedge[z]\\to C\\otimes_RR^\\wedge$, $z\\mapsto\\bar z\\otimes1$, is surjective with kernel generated by $z^p-\\iota(f)$ (the image of $z^p-f$ under $\\iota$ on coefficients). Hence, composing with the swap $C\\otimes_RR^\\wedge\\cong R^\\wedge\\otimes_RC$, we get an isomorphism of $R^\\wedge$-algebras $\\delta:R^\\wedge[z]/(z^p-\\iota(f))\\xrightarrow{\\sim}R^\\wedge\\otimes_RC$ with $\\delta(\\bar z)=1\\otimes\\bar z$. Put $\\theta=\\gamma\\circ\\delta$ (step 4), a ring isomorphism.",
-   "uses": [
-    "def-weil-polynomial-ring",
-    "def-weil-pbc-mv-polynomial-ring",
     "lem-weil-pbc-presentation-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring, line 12306), proof: 'the completion of C = B[z]/(z^p-f) equals B_r^\\wedge[z]/(z^p-f)' (stated without argument)"
-   }
-  },
-  {
-   "text": "(Compatibility with the maps from $R[z]$.) Let $\\alpha:R[z]\\to R^\\wedge[z]/(z^p-\\iota(f))$ and $\\beta=\\iota_C\\circ\\pi:R[z]\\to C^\\wedge$ be the two maps of the statement. Both $\\theta\\circ\\alpha$ and $\\beta$ are $R$-algebra maps ($R$ acting on $C^\\wedge$ through $\\iota_C\\circ\\varphi$, which equals the action through $\\iota$ and the $R^\\wedge$-structure, both being $r\\mapsto(\\varphi(r)\\bmod\\mathfrak n^n)_n$), since $\\theta$ is $R^\\wedge$-linear. On $z$: $\\theta(\\alpha(z))=\\gamma(\\delta(\\bar z))=\\gamma(1\\otimes\\bar z)=\\iota_C(\\bar z)=\\beta(z)$ by steps 4 and 5. Two $R$-algebra maps out of $R[z]$ that agree on $z$ are equal [def-weil-pbc-mv-polynomial-ring], so $\\theta\\circ\\alpha=\\beta$. This is the first assertion.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring, line 12306), proof: 'the completion of C = B[z]/(z^p-f) equals B_r^\\wedge[z]/(z^p-f)' (stated without argument)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-monic-quotient-free",
-  "def-weil-finitely-generated-module",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-pbc-integral-maximal-contracts-maximal",
-  "lem-weil-pbc-integral-prime-over-maximal-maximal",
-  "lem-weil-pbc-localization-units-or-zero",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-adic-completion",
-  "lem-weil-pbc-completion-finite-extension",
-  "def-weil-polynomial-ring",
-  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-completion-finite-quotient-data",
   "lem-weil-pbc-presentation-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof, where the identity is stated without argument; the proof is written by an agent from Algebra Lemma Tag 07N9 (lemma-completion-finite-extension) applied at p = m"
+  "place": "Tag 07PR (lemma-helper-G-ring), degree-p step; finite local comparison remains open, while the base-changed polynomial presentation and its compatibility are proved using Mathlib AdjoinRoot.tensorAlgEquiv and mapAlgEquiv."
  },
  "mathlib_searches": [
   {
@@ -231,5 +162,15 @@
   "group": "F1",
   "result": "pass",
   "note": "Noetherian local (R,m) as IsNoetherianRing+IsLocalRing/maximalIdeal; p>=1 as ℕ with 1≤p; C=AdjoinRoot(X^p-C f) (literally R[X]/span) with C local as instance, n its maximalIdeal; completions AdicCompletion m R / n S with algebraMap; R^-action g pinned levelwise via evalₐ (unique, = induced R/m^k→C/n^k); θ ring iso compatible with all of R[z]; γ ring iso with a⊗c↦g a*ιS c (both algebra compatibilities); ofTensorProductEquivOfFiniteNoetherian is m-adic linear only → existing:false right"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T194124-L-459516",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

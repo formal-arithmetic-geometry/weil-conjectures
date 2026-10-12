@@ -1,0 +1,161 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompletionFiniteQuotient",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-helper-g-ring-char-p",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof, degree-p step: 'the completion of C = B[z]/(z^p-f) equals B_r^\\wedge[z]/(z^p-f)'; the finite-quotient completion argument uses Algebra Lemma Tag 00MA and completion-finite-extension Tag 07N9"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product with completion of a noetherian local ring equals maximal ideal completion of a finite local algebra",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite local algebra completion tensor isomorphism with compatible quotient coordinates",
+   "date": "2026-10-12",
+   "verdict": "ingredient only; no exact match",
+   "results": "AdicCompletion.ofTensorProductEquivOfPiFintype; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProduct_tmul"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTensorProduct|tensorAlgEquiv|completion.*finite.*local",
+   "date": "2026-10-12",
+   "verdict": "ingredient only; no exact match",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Extension/Generators.lean; Mathlib/RingTheory/Extension/Generators.lean; Mathlib/RingTheory/Extension/Generators.lean; Mathlib/RingTheory/Extension/Generators.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean"
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 07N9 (lemma-completion-finite-extension), the single-prime local specialization; reduction in original finite-quotient plan steps 1-4."
+ },
+ "id": "lem-weil-pbc-completion-finite-quotient-data",
+ "title": "Completed-base map and tensor comparison for the finite local quotient",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative Noetherian [def-weil-pbc-noetherian-ring] local ring, $p\\geq1$ an integer, and $f\\in R$. Set $S=R[z]/(z^p-f)$, with polynomial ring [def-weil-polynomial-ring], and assume $S$ is local with maximal ideal $\\mathfrak n$. Write $\\varphi:R\\to S$, $\\widehat R=\\varprojlim_kR/\\mathfrak m^k$, $\\widehat S=\\varprojlim_kS/\\mathfrak n^k$ [def-weil-pbc-adic-completion], and $\\iota_S:S\\to\\widehat S$. There exist a ring map $g:\\widehat R\\to\\widehat S$ and a ring isomorphism $\\gamma:\\widehat R\\otimes_RS\\to\\widehat S$ such that for every $a\\in\\widehat R$, $k\\geq0$ and $r\\in R$, $a_k=r\\bmod\\mathfrak m^k$ implies $(g(a))_k=\\varphi(r)\\bmod\\mathfrak n^k$, and $\\gamma(a\\otimes c)=g(a)\\iota_S(c)$ for every $c\\in S$.",
+ "proof": [
+  {
+   "text": "($C$ is finite and integral over $R$.) The polynomial $z^p-f\\in R[z]$ is monic of degree $p\\ge1$, so by [lem-weil-pbc-monic-quotient-free] $C=R[z]/(z^p-f)$ is a free $R$-module with basis the classes of $1,z,\\dots,z^{p-1}$; in particular $C$ is a finitely generated $R$-module [def-weil-finitely-generated-module]. By [lem-weil-pbc-finite-algebra-is-integral] $C$ is integral over $R$ (via $\\varphi$).",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring, line 12306), proof: 'the completion of C = B[z]/(z^p-f) equals B_r^\\wedge[z]/(z^p-f)' (stated without argument)"
+   }
+  },
+  {
+   "text": "($\\mathfrak n$ is the only prime of $C$ over $\\mathfrak m$.) Since $\\varphi$ is integral (step 1) and $\\mathfrak n$ is maximal, $\\varphi^{-1}(\\mathfrak n)$ is a maximal ideal of $R$ by [lem-weil-pbc-integral-maximal-contracts-maximal]; $R$ being local, $\\varphi^{-1}(\\mathfrak n)=\\mathfrak m$. Conversely let $\\mathfrak q\\subset C$ be a prime with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak m$. Since $\\mathfrak m$ is maximal and $\\varphi$ is integral, $\\mathfrak q$ is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal], so $\\mathfrak q=\\mathfrak n$, $C$ having only one maximal ideal. Hence the primes of $C$ lying over $\\mathfrak m$ are exactly $\\mathfrak q_1=\\mathfrak n$ (one prime, $m=1$ in the notation of 07N9).",
+   "uses": [
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07N9 (lemma-completion-finite-extension), applied with p = m"
+   }
+  },
+  {
+   "text": "(Localizing a local ring at its maximal ideal changes nothing.) In the local ring $R$ every element $t\\notin\\mathfrak m$ is a unit (otherwise $tR$ is a proper ideal, contained in a maximal ideal, which can only be $\\mathfrak m$). So by [lem-weil-pbc-localization-units-or-zero] (2), applied to the localization $R\\to R_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime] at $T=R\\setminus\\mathfrak m$, the map $R\\to R_{\\mathfrak m}$, $r\\mapsto r/1$, is an isomorphism of rings; it carries $\\mathfrak m^n$ onto $\\mathfrak m^nR_{\\mathfrak m}$, hence induces isomorphisms $R/\\mathfrak m^n\\xrightarrow{\\sim}R_{\\mathfrak m}/\\mathfrak m^nR_{\\mathfrak m}$ commuting with the reductions $n+1\\to n$, and so an isomorphism of $R$-algebras $R^\\wedge\\xrightarrow{\\sim}(R_{\\mathfrak m})^\\wedge=\\varprojlim_nR_{\\mathfrak m}/\\mathfrak m^nR_{\\mathfrak m}$ [def-weil-pbc-adic-completion] (componentwise). In the same way, $C$ being local with maximal ideal $\\mathfrak n$, $C\\to C_{\\mathfrak n}$ is an isomorphism carrying $\\mathfrak n^n$ onto $\\mathfrak n^nC_{\\mathfrak n}$, and induces an isomorphism of $C$-algebras $C^\\wedge\\xrightarrow{\\sim}(C_{\\mathfrak n})^\\wedge=\\varprojlim_nC_{\\mathfrak n}/\\mathfrak n^nC_{\\mathfrak n}$. Under these identifications the local map $R_{\\mathfrak m}\\to C_{\\mathfrak n}$, $r/t\\mapsto\\varphi(r)/\\varphi(t)$, is $\\varphi$ (both composites $R\\to C_{\\mathfrak n}$ equal $r\\mapsto\\varphi(r)/1$), so the map $(R_{\\mathfrak m})^\\wedge\\to(C_{\\mathfrak n})^\\wedge$ it induces becomes the map $R^\\wedge\\to C^\\wedge$ induced by $R/\\mathfrak m^n\\to C/\\mathfrak n^n$ (well defined as $\\varphi(\\mathfrak m)\\subseteq\\mathfrak n$ by step 2).",
+   "uses": [
+    "lem-weil-pbc-localization-units-or-zero",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07N9 (lemma-completion-finite-extension), applied with p = m"
+   }
+  },
+  {
+   "text": "(The tensor product is the completion.) Apply [lem-weil-pbc-completion-finite-extension] to the Noetherian ring $R$, the ring map $\\varphi:R\\to C$ making $C$ a finitely generated $R$-module (step 1) and the prime $\\mathfrak p=\\mathfrak m$ (maximal, hence prime); by step 2 the primes of $C$ over $\\mathfrak m$ are just $\\mathfrak q_1=\\mathfrak n$. It gives an isomorphism of $C$-algebras $(R_{\\mathfrak m})^\\wedge\\otimes_RC\\xrightarrow{\\sim}(C_{\\mathfrak n})^\\wedge$, compatible with the $(R_{\\mathfrak m})^\\wedge$-algebra structures, $(R_{\\mathfrak m})^\\wedge$ acting on the right through the map induced by $R_{\\mathfrak m}\\to C_{\\mathfrak n}$. Composing with the isomorphisms of step 3 (and $R^\\wedge\\otimes_RC\\cong(R_{\\mathfrak m})^\\wedge\\otimes_RC$, the tensor product of the $R$-algebra isomorphism of step 3 with the identity of $C$) gives an isomorphism $\\gamma:R^\\wedge\\otimes_RC\\xrightarrow{\\sim}C^\\wedge$ of $C$-algebras and of $R^\\wedge$-algebras ($R^\\wedge$ acting on $C^\\wedge$ through $R/\\mathfrak m^n\\to C/\\mathfrak n^n$). Being $C$-linear and $R^\\wedge$-linear with $\\gamma(1\\otimes1)=1$, it is $\\gamma(a\\otimes c)=a\\cdot\\iota_C(c)$. This is the second assertion. (The $\\mathfrak n$-adic versus $\\mathfrak m$-adic topology on $C$ is handled inside the cited lemma, its step 4.)",
+   "uses": [
+    "lem-weil-pbc-completion-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07N9 (lemma-completion-finite-extension), statement, with p = m and one prime n over it; its last step is Lemma Tag 00MA (lemma-completion-tensor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-localization-units-or-zero",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-completion-finite-extension"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionFiniteQuotientData",
+  "file": "lean/Sheaf/RingTheory/CompletionFiniteQuotientData.lean",
+  "declaration": "AdicCompletion.completion_finite_quotient_data",
+  "statement": "theorem completion_finite_quotient_data\n    (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    (p : ℕ) (hp : 1 ≤ p) (f : R) [IsLocalRing (AdjoinRoot (X ^ p - C f))] :\n    let S := AdjoinRoot (X ^ p - C f)\n    let m := IsLocalRing.maximalIdeal R\n    let n := IsLocalRing.maximalIdeal S\n    let Rhat := AdicCompletion m R\n    let Shat := AdicCompletion n S\n    let ι := algebraMap R Rhat\n    let ιS := algebraMap S Shat\n    let φ := algebraMap R S\n    ∃ g : Rhat →+* Shat,\n      (∀ (a : Rhat) (k : ℕ) (r : R),\n        evalₐ m k a = Ideal.Quotient.mk (m ^ k) r →\n        evalₐ n k (g a) = Ideal.Quotient.mk (n ^ k) (φ r)) ∧\n      (∃ γ : (Rhat ⊗[R] S) ≃+* Shat,\n        ∀ (a : Rhat) (c : S), γ (a ⊗ₜ[R] c) = g a * ιS c)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T194124-L-459516",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T194124-L-459516",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.RingTheory.CompletionFiniteExtension
+import Sheaf.RingTheory.CompletionFiniteQuotientData
 
 /-!
 # Completion of a finite local polynomial quotient
@@ -73,6 +73,43 @@ theorem completion_finite_quotient
           θ (AdjoinRoot.mk _ (Polynomial.map ι q)) = ιS (AdjoinRoot.mk _ q)) ∧
       (∃ γ : (Rhat ⊗[R] S) ≃+* Shat,
         ∀ (a : Rhat) (c : S), γ (a ⊗ₜ[R] c) = g a * ιS c) := by
-  sorry
+  dsimp
+  let S := AdjoinRoot (X ^ p - C f)
+  let m := IsLocalRing.maximalIdeal R
+  let n := IsLocalRing.maximalIdeal S
+  let Rhat := AdicCompletion m R
+  let ι := algebraMap R Rhat
+  let P : R[X] := X ^ p - C f
+  let Q : (Rhat ⊗[R] R)[X] := P.map Algebra.TensorProduct.includeRight.toRingHom
+  let U : Rhat[X] := X ^ p - C (ι f)
+  let e := AdjoinRoot.tensorAlgEquiv (R := R) (T := Rhat) P Q rfl
+  let rid := Algebra.TensorProduct.rid R Rhat Rhat
+  have hmap : Q.map rid.toRingHom = U := by
+    simp [Q, P, U, rid, ι, Algebra.smul_def]
+  let e' := AdjoinRoot.mapAlgEquiv rid Q U (hmap ▸ Associated.refl U)
+  let δ := (e.trans e').symm
+  have hδ (q : R[X]) :
+      δ (AdjoinRoot.mk U (Polynomial.map ι q)) =
+        (1 : Rhat) ⊗ₜ[R] AdjoinRoot.mk P q := by
+    apply (e.trans e').injective
+    simp only [δ, AlgEquiv.apply_symm_apply]
+    change AdjoinRoot.mk U (Polynomial.map ι q) = e' (e (1 ⊗ₜ[R] AdjoinRoot.mk P q))
+    induction q using Polynomial.induction_on' with
+    | add q r hq hr =>
+      simpa [TensorProduct.tmul_add] using congrArg₂ (· + ·) hq hr
+    | monomial k r =>
+      rw [← Polynomial.C_mul_X_pow_eq_monomial]
+      simp only [Polynomial.map_mul, Polynomial.map_C, Polynomial.map_pow,
+        Polynomial.map_X, map_mul, map_pow, AdjoinRoot.mk_C, AdjoinRoot.mk_X]
+      change _ = e' (e (Algebra.TensorProduct.includeRight
+        (AdjoinRoot.of P r * AdjoinRoot.root P ^ k)))
+      simp only [map_mul, map_pow]
+      simp [e, e', AdjoinRoot.coe_mapAlgEquiv, rid, ι, Algebra.smul_def]
+  obtain ⟨g, hg, γ, hγ⟩ := completion_finite_quotient_data R p hp f
+  refine ⟨g, hg, ⟨δ.toRingEquiv.trans γ, ?_⟩, ⟨γ, hγ⟩⟩
+  intro q
+  change γ (δ (AdjoinRoot.mk U (Polynomial.map ι q))) = _
+  rw [hδ, hγ]
+  simp [P]
 
 end AdicCompletion
