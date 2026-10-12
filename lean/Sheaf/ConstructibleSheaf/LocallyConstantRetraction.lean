@@ -7,9 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.ConstructibleSheaf.Defs
-import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+
+import Sheaf.AlgebraicGeometry.FiniteEtaleModuleTraceDegree
+import Mathlib.Algebra.Field.ZMod
 
 /-!
 # Finite étale trace splitting
@@ -61,6 +61,15 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction
           ((v)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G) ⟶ G,
         (Etale.upperStarLowerStarAdjunction
           (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) v).unit.app G ≫ r = 𝟙 G := by
-  sorry
+  obtain ⟨t, ht⟩ := exists_finiteEtaleModuleTrace_degree
+    (ULift.{u + 1} (ZMod ℓ)) v G d hdeg
+  have hd0 : (d : ZMod ℓ) ≠ 0 := (ZMod.natCast_eq_zero_iff d ℓ).not.mpr hd
+  refine ⟨(d : ULift.{u + 1} (ZMod ℓ))⁻¹ • t, ?_⟩
+  rw [Linear.comp_smul, ht, smul_smul]
+  have hi : (d : ULift.{u + 1} (ZMod ℓ))⁻¹ * (d : ULift.{u + 1} (ZMod ℓ)) = 1 := by
+    apply ULift.ext
+    change (d : ZMod ℓ)⁻¹ * (d : ZMod ℓ) = 1
+    exact inv_mul_cancel₀ (a := (d : ZMod ℓ)) hd0
+  rw [hi, one_smul]
 
 end AlgebraicGeometry

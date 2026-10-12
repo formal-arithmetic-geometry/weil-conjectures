@@ -25,28 +25,25 @@
  ],
  "proof": [
   {
-   "text": "For finite étale v, the trace morphism v_*v^*G ⟶ G composed with the adjunction unit is multiplication by the constant geometric-fibre degree d. Since d is invertible in F_ℓ, multiply the trace by d⁻¹; the resulting morphism is a retraction of the unit.",
+   "text": "Apply the coefficient-linear trace degree theorem to R = ULift (ZMod ℓ), v, G and the prescribed geometric-fibre cardinality d, obtaining t with η_G ≫ t = (d : R) • id_G. This step does not use invertibility of d.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-finite-etale-trace",
-    "lem-weil-pbc-finite-etale-trace-degree"
+    "lem-weil-pbc-finite-etale-module-trace-degree"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Section 03SH (section-trace-method), characterization of trace and the restriction/trace composite immediately after Definition 03SE (definition-trace-map)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The nondivisibility hypothesis and ZMod.natCast_eq_zero_iff show that (d : ZMod ℓ) is nonzero. The prime hypothesis supplies its field structure. Consequently its inverse times itself is one; ULift.ext lifts this scalar equality. Set r = (d : R)⁻¹ • t. By linearity of composition and smul_smul, η_G ≫ r = ((d : R)⁻¹ * (d : R)) • id_G = id_G.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-etale-trace",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-finite-etale-trace-degree"
+  "lem-weil-pbc-finite-etale-module-trace-degree"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Section 03SH (section-trace-method), characterization of trace and the restriction/trace composite immediately after Definition 03SE (definition-trace-map)"
+  "place": "B2 stage 3: coefficient-linear trace degree followed by inverse-scalar normalization, following Section 03SH after Definition 03SE"
  },
  "status": "split",
  "blueprint_kind": "lemma",
@@ -147,9 +144,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T031106-L-1325090",
+  "landing": "20261012T035539-L-1594250",
   "kind": "interface",
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
