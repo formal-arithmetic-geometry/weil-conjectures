@@ -36,6 +36,9 @@ scheme over a field `k` can be checked after base change to an arbitrary field e
   surjective morphisms.
 - `AlgebraicGeometry.GeometricallyIntegral.of_isPullback`: geometric integrality descends along
   field extensions.
+- `AlgebraicGeometry.of_isPullback_Spec_map_algebraMap`,
+  `AlgebraicGeometry.connectedSpace_of_isPullback_Spec_map_algebraMap`: properties satisfying fpqc
+  descent, and connectedness, descend along field extensions.
 - `AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux`:
   the combination of the above for a base change along a field extension.
 -/
@@ -236,6 +239,30 @@ theorem GeometricallyIntegral.of_isPullback {k K : Type u} [Field k] [Field K] [
   have : Flat sL := hf
   have : Surjective sL := hs
   exact isIntegral_of_flat_of_surjective (pullback.fst snd sL)
+
+/-- A property of morphisms satisfying fpqc descent descends along a field extension: if the base
+change `Z'` of a `k`-scheme `Z` to a field extension `K` of `k` has it over `K`, then `Z` has it
+over `k`. This applies to being locally of finite type, smooth or proper, among others (blueprint
+`thm-pd-fpqc-local-properties`). -/
+theorem of_isPullback_Spec_map_algebraMap (P : MorphismProperty Scheme.{u})
+    [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] {k K : Type u} [Field k] [Field K]
+    [Algebra k K] {Z Z' : Scheme.{u}} {z : Z ⟶ Spec (.of k)} {z' : Z' ⟶ Spec (.of K)}
+    {q : Z' ⟶ Z} (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+    (hz' : P z') : P z :=
+  of_isPullback_of_descendsAlong h.flip
+    (surjective_inf_flat_inf_quasiCompact_Spec_map_algebraMap k K) hz'
+
+/-- Connectedness descends along a field extension: if the base change `Z'` of a `k`-scheme `Z`
+to a field extension `K` of `k` is connected, then so is `Z`, the projection `Z' ⟶ Z` being
+surjective (blueprint `thm-pd-fpqc-local-properties`). -/
+theorem connectedSpace_of_isPullback_Spec_map_algebraMap {k K : Type u} [Field k] [Field K]
+    [Algebra k K] {Z Z' : Scheme.{u}} {z : Z ⟶ Spec (.of k)} {z' : Z' ⟶ Spec (.of K)}
+    {q : Z' ⟶ Z} (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+    [ConnectedSpace Z'] : ConnectedSpace Z := by
+  obtain ⟨⟨hs, -⟩, -⟩ := surjective_inf_flat_inf_quasiCompact_Spec_map_algebraMap k K
+  have : Surjective q := MorphismProperty.of_isPullback (P := @Surjective) h.flip hs
+  exact q.surjective.connectedSpace q.continuous
+
 
 /-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
 field extension and let `Z` be a scheme over `k` whose base change `Z'` to `K` is proper, smooth
