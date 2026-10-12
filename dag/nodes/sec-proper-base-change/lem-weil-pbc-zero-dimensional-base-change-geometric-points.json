@@ -14,28 +14,37 @@
  ],
  "proof": [
   {
-   "text": "The zero-dimensional base-change point description gives a bijective projection and dimension zero, and Nullstellensatz identifies residue fields on C′ with k′. Choose the canonical residue-field point at each c′; the empty scheme gives the empty family. Transport the point description from the canonical pullback to the given cartesian square.",
+   "text": "Recover the ring map k → k′ from ι by Spec.preimage and install its algebra structure. Apply the canonical zero-dimensional base-change point theorem. The isomorphism h.isoPullback identifies C′ with the canonical pullback; compose its underlying homeomorphism with the projection homeomorphism. Its underlying equivalence b agrees with ι′ by isoPullback_hom_fst. Invariance of topological Krull dimension under this isomorphism gives dimension at most zero.",
    "uses": [
     "lem-weil-pbc-zero-dimensional-base-change-points"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Separatedness and finite type are stable under base change. Together with dimension zero, these supply IsCurve f′.",
+   "text": "Apply the three base-change stability properties to h: separatedness, local finite type, and quasi-compactness. Combine these with dimension at most zero, hence at most one, to construct IsCurve f′.",
    "uses": [
     "lem-pod-separated-finite-type-base-change"
    ],
    "elementary": false
+  },
+  {
+   "text": "The canonical point theorem makes C discrete. The composed homeomorphism makes C′ discrete, so every singleton is closed. Apply the closed-point residue-field isomorphism over the algebraically closed field k′. Mathlib pointOfClosedPoint is Spec of that isomorphism followed by fromSpecResidueField; pointOfClosedPoint_apply verifies that this morphism sends default to c′. Taking this construction for every c′ gives the family s. The construction needs no nonempty hypothesis and therefore includes the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-base-change-points",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-zero-dimensional-base-change-points",
-  "lem-pod-separated-finite-type-base-change"
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-closed-point-residue-field-base"
  ],
  "proof_origin": {
-  "by": "P1",
+  "by": "M1",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
-  "place": "Degree-zero proof, point bijection and chosen geometric points; Stacks Tags 00KH, 00FV, 01JT."
+  "place": "Degree-zero point description, transported explicitly with isoPullback; closed-point construction in Mathlib.AlgebraicGeometry.AlgClosed.Basic."
  },
  "mathlib_searches": [
   {
@@ -109,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-e08dd",
-  "group": "P1",
+  "reviewer": "COMPILER",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T014912-L-898850",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; target signature is unchanged; proof, split statements, nodes, imports, report, and mechanical checks satisfy all stage-3 review points."
+  "landing": "20261012T024851-L-1212006",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
