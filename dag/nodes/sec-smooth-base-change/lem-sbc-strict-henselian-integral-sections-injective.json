@@ -14,29 +14,20 @@
  ],
  "proof": [
   {
-   "text": "Since p is integral and the base is affine, write Z as Spec B for an integral A-algebra B using the canonical affine presentation. Set J=m_A B. Apply the integral-over-henselian-pair theorem to obtain HenselianRing B J.",
+   "text": "Read Spec.preimage t as a ring map and use ht to show m_A is in its kernel. Construct the quotient lift ψ : κ(A) → Ω and r=Spec ψ. Prove r ≫ s=t, where s=Spec(A→κ(A)). Form Z₀=Z×_Aκ(A) and construct j:Z′→Z₀ by pullback.lift. Pullback pasting proves (j,p′,p₀,r) Cartesian.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply integralHenselianClosedFibreSections_injective to i₀:Z₀→Z, then etaleModuleSectionsFieldExtension_injective to j and i₀*F, using separable closedness of the residue field of A.",
    "uses": [
-    "lem-weil-pbc-integral-over-henselian-pair"
+    "new-integral-henselian-closed-fibre-sections",
+    "new-etale-module-sections-field-extension"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the degree-zero comparison to the proper identity of Spec B and the quotient map B -> B/J. It makes restriction of F to the closed fibre an isomorphism on sections. This also covers B=0.",
-   "uses": [
-    "lemma-weil-pbc-etale-degree-zero"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The closed-image condition on t says that the corresponding A -> Omega map kills m_A, hence factors through k=A/m_A. This is a field embedding, with k separably closed. Identify Z′ with the extension of the closed fibre along k -> Omega. Apply the base-field-extension section comparison and the canonical module/set inverse-image comparison, with its unit equation, to get bijectivity on module sections.",
-   "uses": [
-    "lem-weil-pbc-sections-base-field-extension",
-    "lem-sc-etale-module-set-pullback-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Composition of inverse-image units, transported through the affine presentation and pullback isomorphism, identifies the displayed global-section map with the two successive restrictions. The composition formula on global sections makes this identification explicit. Compose the two injective maps.",
+   "text": "Use globalSectionsUpperStarMap_comp′ for i=j≫i₀. Evaluate the equality at two sections. Equality after i implies equality after the two successive restrictions; their injectivity gives equality of the original sections.",
    "uses": [
     "lemma-weil-pbc-finite-pullback-composition"
    ],
@@ -44,16 +35,14 @@
   }
  ],
  "proof_deps": [
-  "lem-sc-etale-module-set-pullback-comparison",
-  "lem-weil-pbc-integral-over-henselian-pair",
-  "lem-weil-pbc-sections-base-field-extension",
-  "lemma-weil-pbc-etale-degree-zero",
+  "new-integral-henselian-closed-fibre-sections",
+  "new-etale-module-sections-field-extension",
   "lemma-weil-pbc-finite-pullback-composition"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 09XK, 09ZH and 0A3I; henselian degree-zero consequence used for the integral comparison; assembly of the canonical maps"
+  "place": "Tags 09XK, 0A0C and 0A3I; explicit quotient factorization, pullback pasting and composition of the two restrictions in Lean."
  },
  "mathlib_searches": [
   {
@@ -125,9 +114,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T173900-L-3304977",
+  "landing": "20261012T214709-L-1270803",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

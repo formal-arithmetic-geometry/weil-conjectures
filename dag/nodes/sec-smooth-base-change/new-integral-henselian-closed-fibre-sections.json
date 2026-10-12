@@ -1,0 +1,116 @@
+{
+ "id": "new-integral-henselian-closed-fibre-sections",
+ "kind": "statement",
+ "title": "Integral henselian restriction to the residue-field fibre",
+ "statement": "Let A be a henselian local ring, Λ a commutative ring, p : Z → Spec A integral [def-weil-finite-integral-morphism], F an etale sheaf of Λ-modules [def-weil-pbc-etale-sheaves], and (i₀,p₀,p,Spec(A → A/m_A)) Cartesian [def-weil-pbc-cartesian-square]. Then restriction Γ(Z,F) → Γ(Z₀,i₀*F) is injective. No separably closed residue field, finite type, torsion or nonempty scheme assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XK, combined with Etale Cohomology Tag 0A0C"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Take the canonical affine presentation Z ≅ Spec Γ(Z,⊤). The structure ring map A → B is integral; apply henselianRing_of_isIntegral to (A,m_A), obtaining (B,m_A B) henselian.",
+   "uses": [
+    "lem-weil-pbc-integral-over-henselian-pair"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the henselian degree-zero comparison to the proper identity of Spec B and the ideal m_A B. Identify its quotient fibre Spec(B/m_A B) with the given residue-field fibre using the tensor-quotient isomorphism and transport the section map through the affine and pullback isomorphisms. This gives an isomorphism, hence injectivity; B=0 is included.",
+   "uses": [
+    "lemma-weil-pbc-etale-degree-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lemma-weil-pbc-etale-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XK, combined with Etale Cohomology Tag 0A0C"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "henselian integral algebra restriction to residue field is injective on etale module sections",
+   "results": "8 hits; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Ideal.injective_algebraMap_quotient_residueField; AlgHom.IsArithFrobAt.restrict_injective; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Ideal.ResidueField.algHom_ext; Algebra.FormallyUnramified.comp_injective; Ideal.ResidueField.algHom_ext_iff",
+   "date": "2026-10-12",
+   "verdict": "No exact match for etale module section comparison; local Sheaf and upstream sources searched separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"globalSectionsUpperStarMap\"",
+   "results": "0 hits; ",
+   "date": "2026-10-12",
+   "verdict": "No exact match for etale module section comparison; local Sheaf and upstream sources searched separately."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*sections|sections.*henselian",
+   "results": "0 hits; ",
+   "date": "2026-10-12",
+   "verdict": "No exact match for etale module section comparison; local Sheaf and upstream sources searched separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of etale module sections to the residue-field fibre of an integral scheme over a henselian local ring is injective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictHenselianIntegralSectionsInjective",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-strict-henselian-integral-sections-injective",
+   "place": "Residue-field restriction"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralHenselianClosedFibreSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralHenselianClosedFibreSections.lean",
+  "declaration": "AlgebraicGeometry.Etale.integralHenselianClosedFibreSections_injective",
+  "statement": "theorem integralHenselianClosedFibreSections_injective\n    (Λ : Type (u + 1)) [CommRing Λ]\n    (A : Type u) [CommRing A] [HenselianLocalRing A]\n    {Z Z₀ : Scheme.{u}} (p : Z ⟶ Spec (.of A)) [IsIntegralHom p]\n    (i₀ : Z₀ ⟶ Z) (p₀ : Z₀ ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (sq : IsPullback i₀ p₀ p (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))\n    (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    Function.Injective (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i₀ F).hom",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T214709-L-1270803",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T214709-L-1270803",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

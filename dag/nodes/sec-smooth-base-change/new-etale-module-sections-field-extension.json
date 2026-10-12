@@ -1,0 +1,117 @@
+{
+ "id": "new-etale-module-sections-field-extension",
+ "kind": "statement",
+ "title": "Module sections under extension of a separably closed field",
+ "statement": "Let k,K be fields with k separably closed, Λ a commutative ring, S a k-scheme, t : Spec K → Spec k, and (i,p′,p,t) Cartesian [def-weil-pbc-cartesian-square]. For every etale sheaf F of Λ-modules [def-weil-pbc-etale-sheaves] on S, restriction Γ(S,F) → Γ(S′,i*F) is injective. No integrality of p or algebraic closedness of K is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3I; canonical module/set comparison; proof generalized from Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "Use the k-algebra structure on K defined by Spec.preimage t. Apply etale_sections_base_field_extension to the underlying set sheaf. Compose its bijective unit with isIso_upperStar_forget_comparison; the homEquiv unit formula identifies the resulting function with the module unit.",
+   "uses": [
+    "lem-weil-pbc-sections-base-field-extension",
+    "lem-sc-etale-module-set-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality with the terminal-object isomorphism to move from identity-object evaluation to global sections. This makes the canonical pullback section map an isomorphism. Use the isomorphism from the given Cartesian square to the canonical pullback and globalSectionsUpperStarMap_comp′ to transport it to i, then use ModuleCat.mono_iff_injective.",
+   "uses": [
+    "lemma-weil-pbc-finite-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sections-base-field-extension",
+  "lem-sc-etale-module-set-pullback-comparison",
+  "lemma-weil-pbc-finite-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3I; canonical module/set comparison; proof generalized from Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "henselian integral algebra restriction to residue field is injective on etale module sections",
+   "results": "8 hits; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Ideal.injective_algebraMap_quotient_residueField; AlgHom.IsArithFrobAt.restrict_injective; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Ideal.ResidueField.algHom_ext; Algebra.FormallyUnramified.comp_injective; Ideal.ResidueField.algHom_ext_iff",
+   "date": "2026-10-12",
+   "verdict": "No exact match for etale module section comparison; local Sheaf and upstream sources searched separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"globalSectionsUpperStarMap\"",
+   "results": "0 hits; ",
+   "date": "2026-10-12",
+   "verdict": "No exact match for etale module section comparison; local Sheaf and upstream sources searched separately."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*sections|sections.*henselian",
+   "results": "0 hits; ",
+   "date": "2026-10-12",
+   "verdict": "No exact match for etale module section comparison; local Sheaf and upstream sources searched separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale sheaf module sections are invariant under extension of a separably closed field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictHenselianIntegralSectionsInjective",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-strict-henselian-integral-sections-injective",
+   "place": "Further extension of the residue field"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleSectionsFieldExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleSectionsFieldExtension.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleModuleSectionsFieldExtension_injective",
+  "statement": "theorem etaleModuleSectionsFieldExtension_injective\n    (Λ : Type (u + 1)) [CommRing Λ]\n    (k K : Type u) [Field k] [Field K] [IsSepClosed k]\n    {S S' : Scheme.{u}} (p : S ⟶ Spec (.of k))\n    (t : Spec (.of K) ⟶ Spec (.of k))\n    (i : S' ⟶ S) (p' : S' ⟶ Spec (.of K)) (sq : IsPullback i p' p t)\n    (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    Function.Injective (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F).hom",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T214709-L-1270803",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T214709-L-1270803",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

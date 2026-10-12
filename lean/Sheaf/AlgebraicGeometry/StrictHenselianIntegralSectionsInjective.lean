@@ -8,10 +8,8 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Sheaf.RingTheory.IntegralOverHenselianPair
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
-import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
-import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
+import Sheaf.AlgebraicGeometry.IntegralHenselianClosedFibreSections
+import Sheaf.AlgebraicGeometry.EtaleModuleSectionsFieldExtension
 
 /-! # Injectivity of integral sections over a strictly henselian base
 
@@ -53,6 +51,47 @@ theorem strictHenselianIntegralSections_injective
     (i : Z' ⟶ Z) (p' : Z' ⟶ Spec (.of Ω)) (sq : IsPullback i p' p t)
     (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Function.Injective (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F).hom := by
-  sorry
+  let φ := (Spec.preimage t).hom
+  have htφ : PrimeSpectrum.comap φ (IsLocalRing.closedPoint Ω) =
+      IsLocalRing.closedPoint A := by
+    change Spec.map (CommRingCat.ofHom φ) (IsLocalRing.closedPoint Ω) = _
+    simpa only [φ, CommRingCat.ofHom_hom, Spec.map_preimage] using ht
+  have hker : IsLocalRing.maximalIdeal A ≤ RingHom.ker φ := by
+    have h := congrArg PrimeSpectrum.asIdeal htφ
+    simpa only [PrimeSpectrum.comap_asIdeal, IsLocalRing.closedPoint,
+      IsLocalRing.maximalIdeal_eq_bot, RingHom.ker_eq_comap_bot] using le_of_eq h.symm
+  let ψ : IsLocalRing.ResidueField A →+* Ω :=
+    Ideal.Quotient.lift (IsLocalRing.maximalIdeal A) φ hker
+  let s : Spec (.of (IsLocalRing.ResidueField A)) ⟶ Spec (.of A) :=
+    Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))
+  let r : Spec (.of Ω) ⟶ Spec (.of (IsLocalRing.ResidueField A)) :=
+    Spec.map (CommRingCat.ofHom ψ)
+  have hrs : r ≫ s = t := by
+    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    exact Spec.map_preimage t
+  let Z₀ := Limits.pullback p s
+  let i₀ : Z₀ ⟶ Z := Limits.pullback.fst p s
+  let p₀ : Z₀ ⟶ Spec (.of (IsLocalRing.ResidueField A)) := Limits.pullback.snd p s
+  let j : Z' ⟶ Z₀ := Limits.pullback.lift i (p' ≫ r) (by rw [Category.assoc, hrs]; exact sq.w)
+  have hj : j ≫ i₀ = i := by simp [j, i₀]
+  have hjp : j ≫ p₀ = p' ≫ r := by simp [j, p₀]
+  have sqj : IsPullback j p' p₀ r := by
+    have outer : IsPullback p' (j ≫ i₀) (r ≫ s) p := by
+      simpa only [hj, hrs] using sq.flip
+    exact (IsPullback.of_bot outer hjp.symm (IsPullback.of_hasPullback p s).flip).flip
+  have h₀ := integralHenselianClosedFibreSections_injective Λ A p i₀ p₀
+    (IsPullback.of_hasPullback p s) F
+  have h₁ := etaleModuleSectionsFieldExtension_injective Λ
+    (IsLocalRing.ResidueField A) Ω p₀ r j p' sqj ((i₀)^*[ModuleCat.{u + 1} Λ].obj F)
+  have hcomp := globalSectionsUpperStarMap_comp' (ModuleCat.{u + 1} Λ) j i₀ i hj.symm F
+  intro x y hxy
+  apply h₀
+  apply h₁
+  have he := congrArg (fun f ↦ f.hom x) hcomp
+  have he' := congrArg (fun f ↦ f.hom y) hcomp
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at he he'
+  exact he.symm.trans ((congrArg
+    ((Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map
+      ((upperStarComp (ModuleCat.{u + 1} Λ) j i₀ i hj.symm).hom.app F)).hom hxy).trans he')
 
 end AlgebraicGeometry.Etale
