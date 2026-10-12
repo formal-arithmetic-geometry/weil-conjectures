@@ -27,61 +27,72 @@
  ],
  "proof": [
   {
-   "text": "For each integer n, the canonical lower-truncation triangle is $H^{-n}(E)[n]\\to E_n\\to E_{n-1}\\to H^{-n}(E)[n+1]$ by [lem-pc-derived-lower-truncation-step-triangle].",
+   "text": "Apply exists_lowerTruncationStepTriangle to E.obj and n. Its middle morphism is the canonical transition from tau_{>=-n} E to tau_{>=-n+1} E.",
    "uses": [
     "lem-pc-derived-lower-truncation-step-triangle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4 proof of part (2), truncation triangle"
+    "place": "Tag 08D4 proof of part (2), truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1} and the two shifted vanishings"
    }
   },
   {
-   "text": "Applying the right derived functor RF, which is a triangulated functor on bounded below derived categories [lem-weil-pbc-derived-direct-image-triangulated] (all of $E_n$, $E_{n-1}$ and $H^{-n}(E)[n]$ are bounded below), to this triangle gives a distinguished triangle, and the long exact cohomology sequence [lem-sf-derived-homology-long-exact] contains the segment $H^i(RF(H^{-n}(E)[n]))\\to H^i(RF(E_n))\\to H^i(RF(E_{n-1}))\\to H^{i+1}(RF(H^{-n}(E)[n]))$.",
+   "text": "Apply the unbounded right derived functor, using the source library's CommShift and IsTriangulated instances. This produces a distinguished triangle with middle morphism F.rightDerivedFunctor.map of the canonical transition.",
    "uses": [
-    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1} and the two shifted vanishings"
+   }
+  },
+  {
+   "text": "The proved private helper isZero_rightDerived_shifted_single composes four isomorphisms: the identification of Q of the degree-zero single complex with DerivedCategory.singleFunctor; RF commutation with the n-shift; the cohomology shift isomorphism from degree j of the n-shift to degree n+j; and F.homologyRightDerivedFunctorObjSingleFunctorIso from PlusCompatibility. The latter is the already-proved bounded-below single-object comparison transported by F.rightDerivedFunctorPlusCompatibility. Thus vanishing of R^p F(M), with n+j=p, gives vanishing of H^j(RF(M[0][n])).",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sp-derived-cohomology-shift",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1} and the two shifted vanishings"
+   }
+  },
+  {
+   "text": "Set M=H^{-n}(E). It is quasi-coherent by E.property (-n). For j=i and j=i+1, the inequality n>=N-i gives n+j>=N>=0. Use p=(n+j).toNat; integer arithmetic proves its cast equals n+j and N<=p. Apply hvan and the preceding helper to obtain the two zero endpoint objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1} and the two shifted vanishings"
+   }
+  },
+  {
+   "text": "Use HomologySequence.mono_homologyMap_mor₂_iff and epi_homologyMap_mor₂_iff on the mapped distinguished triangle. The incoming arrow is zero since its source is zero, and the connecting arrow is zero since its target is zero. The middle homology map is therefore monic and epic; isIso_of_mono_of_epi proves the unchanged conclusion.",
+   "uses": [
     "lem-sf-derived-homology-long-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4 proof of part (2), apply RF and use the long exact sequence"
-   }
-  },
-  {
-   "text": "By the shift identification for right derived functors [lem-sp-shift-identification], for every integer j the endpoint group $H^j(RF(H^{-n}(E)[n]))$ identifies with $R^{j+n}F(H^{-n}(E))$ when j+n\\ge0, and is zero when j+n<0. Since $n\\ge N-i$, both indices $i+n$ and $i+n+1$ are at least N, so the two endpoint groups around $H^i(RF(E_n))\\to H^i(RF(E_{n-1}))$ vanish by the hypothesis $R^pF(\\mathcal F)=0$ for p\\ge N$.",
-   "uses": [
-    "lem-sp-shift-identification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4 proof of part (2), the two shifted derived-functor vanishings"
-   }
-  },
-  {
-   "text": "Exactness of the long sequence at the two middle terms, together with the vanishing of the adjacent endpoint groups from Step 3, makes the transition map $H^i(RF(E_n))\\to H^i(RF(E_{n-1}))$ both injective and surjective, hence an isomorphism.",
-   "uses": [
-    "lem-sf-derived-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4 proof of part (2), conclusion from the long exact sequence"
+    "place": "Tag 08D4 proof of part (2), truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1} and the two shifted vanishings"
    }
   }
  ],
  "proof_deps": [
   "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-pc-right-derived-functor-triangulated",
   "lem-sf-derived-homology-long-exact",
-  "lem-sp-shift-identification",
-  "lem-weil-pbc-derived-direct-image-triangulated"
+  "lem-sp-derived-cohomology-shift",
+  "lem-sp-derived-functor-single-identification"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D4"
+  "place": "Tag 08D4, proof of (2), truncation stabilization; formalized using the already-proved unbounded RF triangulated and single-object comparison declarations"
  },
  "mathlib_searches": [
   {
@@ -171,5 +182,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T085239-L-14637",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
