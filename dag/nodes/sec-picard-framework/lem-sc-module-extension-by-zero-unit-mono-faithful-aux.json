@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-module-extension-by-zero-unit-mono-faithful-aux",
+ "kind": "statement",
+ "title": "Extension by zero and sheafification are faithful",
+ "statement": "For every ringed space X and open W, the extension-by-zero then module-sheafification functor on module sheaves is faithful.",
+ "stmt_deps": [
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 00A7 (4)"
+ },
+ "proof": [
+  {
+   "text": "The extension presheaf is separated: use DirectSum.ext; for every index V → W its single summand is the input sheaf on Over W, and lift a covering sieve through Sieve.overEquiv. Separation of the input sheaf proves equality of the component. If there are no indices, DirectSum.ext is vacuous.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheafification unit is locally injective. Apply Mathlib Presheaf.isLocallyInjective_iff_injective_of_separated to the separated underlying abelian presheaf. Naturality of the module sheafification unit then reflects equality of sheafified morphisms to equality of the extension presheaf morphisms.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the extended morphisms on DirectSum.of at the arrow defining an object of Over W. DirectSum.lmap_of and DirectSum.of_injective recover equality of the original module morphisms.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "Y3 second reader",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 00A7 (4)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|isLocallyInjective_iff_injective_of_separated",
+   "date": "2026-10-12",
+   "digest": "5c6d7431efae7270",
+   "results": "Mathlib/CategoryTheory/Sites/LocallyInjective.lean, Mathlib/CategoryTheory/Sites/LocallyInjective.lean",
+   "verdict": "Mathlib supplies separation and local-injectivity tools; no existing theorem for this composed extension functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated presheaf has injective canonical maps to its sheafification",
+   "date": "2026-10-12",
+   "digest": "04b35effdb3f8e3d",
+   "results": "CategoryTheory.GrothendieckTopology.Plus.inj_of_sep, CategoryTheory.Presheaf.isLocallyInjective_iff_injective_of_separated, CategoryTheory.GrothendieckTopology.Plus.sep, CategoryTheory.Sheaf.isSeparated, CategoryTheory.GrothendieckTopology.Plus.meqOfSep, CategoryTheory.Presieve.isSeparatedFor_singleton, CategoryTheory.GrothendieckTopology.Plus.exists_of_sep, CategoryTheory.Presheaf.IsSheaf.isSeparated",
+   "verdict": "Mathlib supplies separation and local-injectivity tools; no existing theorem for this composed extension functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.isLocallyInjective_iff_injective_of_separated",
+   "date": "2026-10-12",
+   "digest": "f5592db13f8a4637",
+   "results": "CategoryTheory.Presheaf.isLocallyInjective_iff_injective_of_separated",
+   "verdict": "Mathlib supplies separation and local-injectivity tools; no existing theorem for this composed extension functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero followed by sheafification is faithful for sheaves of modules on an open subspace",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitMono",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-module-extension-by-zero-unit-mono",
+   "place": "faithfulness substep",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitFaithful",
+  "file": "lean/Sheaf/Algebra/Homology/ModuleExtensionByZeroUnitFaithful.lean",
+  "declaration": "AlgebraicGeometry.extensionByZero_faithful",
+  "statement": "theorem extensionByZero_faithful (X : RingedSpace.{u}) (W : Opens X) :\n    (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙\n      PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).Faithful",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T232144-L-1994137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T232144-L-1994137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

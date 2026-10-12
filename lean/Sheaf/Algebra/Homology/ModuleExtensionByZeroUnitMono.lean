@@ -1,6 +1,7 @@
 module
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitFaithful
+import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 universe u
@@ -13,5 +14,10 @@ the resulting restriction map is injective, and sheafification preserves this co
 (blueprint: lem-sc-module-extension-by-zero-unit-mono) -/
 theorem moduleExtensionByZero_unit_mono (X : RingedSpace.{u}) (W : Opens X)
     (G : SheafOfModules.{u} ((moduleRings X).over W)) :
-    Mono ((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).unit.app G) := by sorry
+    Mono ((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).unit.app G) := by
+  let adj := Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2
+  let : (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙
+      PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).Faithful :=
+    extensionByZero_faithful X W
+  exact adj.unit_mono_of_L_faithful G
 end AlgebraicGeometry
