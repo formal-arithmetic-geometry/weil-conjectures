@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-derived-unit-leray-comp",
+ "kind": "statement",
+ "title": "Derived unit and Leray composition",
+ "statement": "Let $f:Y\\to X$ and $g:Z\\to Y$ be morphisms of schemes [def-weil-pbc-scheme-conventions], and let $K\\in D(\\mathcal A_X)$, where $\\mathcal A_X$ is the category of abelian etale sheaves on $X$ [def-weil-pbc-etale-sheaves]. Write $U_h=D(h^{-1})$ for the derived inverse-image functor [def-weil-pbc-inverse-image, lem-weil-pbc-exact-functor-derived-factorization], and $T_h(K)=\\lambda_{h,U_h(K)}\\circ R\\Gamma(\\eta_{h,K})$, where $\\eta_h$ is the derived adjunction unit and $\\lambda_h$ is the canonical Leray comparison [def-weil-pbc-etale-cohomology]. Let $C:U_{f\\circ g}\\simeq U_g\\circ U_f$ be the localization of the inverse-image composition isomorphism [lem-weil-pbc-inverse-image-composition], followed by the exact-functor composition comparison. Then $R\\Gamma_Z(C_K)\\circ T_{f\\circ g}(K)=T_g(U_f(K))\\circ T_f(K)$. This is an equality of derived morphisms, without an auxiliary complex morphism or a homology degree; $K$ need not be bounded below.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 015M (lemma-compose-derived-functors), with the canonical comparison construction of lemma-compose-derived-functors-general; sites.tex Lemma Tag 03CB (lemma-composition-morphisms-sites). Categorical elaboration of the corresponding step of the parent node. The unbounded extension uses K-injective representatives and the general comparison of Tag 05T2; Tag 015M itself states the bounded-below result."
+ },
+ "proof": [
+  {
+   "text": "Write U_f and U_g for the exact functors induced on derived categories, R_f and R_g for the derived direct images, C:U_(g≫f)≅U_f followed by U_g for mapDerivedCategoryNatIso(upperStarComp) followed by mapDerivedCategoryCompIso, and D:R_g followed by R_f≅R_(g≫f) for its conjugate. The derived adjunction unit equation states eta_(g≫f),K followed by R_(g≫f)(C_K) equals eta_f,K followed by R_f(eta_g,U_f(K)) followed by D_(U_g(U_f(K))). It is the unit-conjugation equation for the adjunctions; the conjugate agrees with the canonical derived direct-image composition by the right-derived comparison characterization.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05T2 (lemma-compose-derived-functors-general) and Lemma Tag 015M (lemma-compose-derived-functors); sites.tex Lemma Tag 03CB (lemma-composition-morphisms-sites). Categorical elaboration of the corresponding step of the parent node."
+   }
+  },
+  {
+   "text": "The underived direct-image and terminal-section comparisons associate: evaluating an iterated base change of the terminal object is the same as evaluating its composite base change, because both isomorphisms commute with its projections. Deriving that equation yields RGamma_X(D_M) followed by lambda_(g≫f),M equal to lambda_f,R_g(M) followed by lambda_g,M. Indeed both sides precomposed with the composite right-derived unit are the localization of that underived comparison. Direct image preserves K-injectives, so the composite right-derived functor has the universal property, which makes these transformations equal.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05T2 (lemma-compose-derived-functors-general) and Lemma Tag 015M (lemma-compose-derived-functors); sites.tex Lemma Tag 03CB (lemma-composition-morphisms-sites). Categorical elaboration of the corresponding step of the parent node."
+   }
+  },
+  {
+   "text": "Use naturality of lambda_(g≫f) at C_K to move RGamma_Z(C_K) across lambda_(g≫f). Substitute the unit equation from step 1 and then the Leray composition equation from step 2, with M=U_g(U_f(K)). The resulting composite contains RGamma_X(R_f(eta_g,U_f(K))) followed by lambda_f,R_g(U_g(U_f(K))). Naturality of lambda_f at eta_g,U_f(K) replaces these by lambda_f,U_f(K) followed by RGamma_Y(eta_g,U_f(K)). After reassociating, the result is exactly the product of the unit-Leray composites for f at K and for g at U_f(K).",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05T2 (lemma-compose-derived-functors-general) and Lemma Tag 015M (lemma-compose-derived-functors); sites.tex Lemma Tag 03CB (lemma-composition-morphisms-sites). Categorical elaboration of the corresponding step of the parent node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Categorical elaboration of the canonical comparison of Lemma Tag 015M (lemma-compose-derived-functors), using the inverse-image adjunction coherence of sites.tex Tag 03CB (lemma-composition-morphisms-sites); the original item proof steps 1 and 2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections pullback adjunction unit Leray comparison identity composition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_naturality",
+   "results": "CategoryTheory.Adjunction.unit_naturality in Mathlib.CategoryTheory.Adjunction.Basic",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(comp|id)|derived.*unit",
+   "results": "Mathlib derived functor unit declarations; no exact coherence theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedEtaleCohomologyPullbackLaws",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "the naturality of the complex-continuity input to the sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'; identity/coherence of the pullback used to form the complex system, parent proof step 2",
+   "via": [
+    "lem-weil-pbc-derived-cohomology-pullback-laws",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedUnitLerayComp",
+  "file": "lean/Sheaf/Paper/DerivedUnitLerayComp.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedUnitLeray_comp",
+  "statement": "theorem derivedUnitLeray_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :\n    (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map\n      ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (g ≫ f)).unit.app K) ≫\n    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} (g ≫ f)).hom.app\n      ((upperStar AddCommGrpCat.{u + 1} (g ≫ f)).mapDerivedCategory.obj K) ≫\n    (rightDerivedGlobalSections AddCommGrpCat.{u + 1} Z).map\n      ((Functor.mapDerivedCategoryNatIso (upperStarComp AddCommGrpCat.{u + 1} g f) ≪≫\n        Functor.mapDerivedCategoryCompIso (upperStar AddCommGrpCat.{u + 1} f)\n          (upperStar AddCommGrpCat.{u + 1} g)).hom.app K) =\n    (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map\n      ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app K) ≫\n    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} f).hom.app\n      ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj K) ≫\n    (rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map\n      ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app\n        ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj K)) ≫\n    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} g).hom.app\n      ((upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategory.obj\n        ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj K))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T095852-L-312340",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T095852-L-312340",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

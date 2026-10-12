@@ -16,40 +16,31 @@
  ],
  "proof": [
   {
-   "text": "For the identity, [lem-weil-pbc-inverse-image-composition] identifies the unit followed by the direct-image identity and inverse-image identity comparisons with the identity. The Leray comparison is the derived global-section image of the direct-image comparison, by uniqueness of right-derived comparisons in [def-weil-pbc-etale-cohomology]. Apply homology to obtain the identity law.",
+   "text": "For the identity clause, rewrite P using hP. The private idFactors calculation identifies the localized identity comparison with the exact-functor factorization followed by Q of the complex identity map. The mapDerivedCategoryNatIso_fac equation then identifies the entire complex-to-derived map with the localization of upperStarId. Apply the derived unit-Leray identity and then homology, which preserves identity. All localization glue is proved explicitly in Lean.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-etale-cohomology"
+    "lem-weil-pbc-derived-unit-leray-id",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 015J (lemma-two-ss-complex-functor), Remark Tag 015K; etale-cohomology.tex Lemma Tag 0EZM (lemma-colimit-variant-complexes)"
-   }
+   "elementary": true
   },
   {
-   "text": "For composition, move the second unit past the first complex map by naturality. The composite-unit equation of [lem-weil-pbc-inverse-image-composition] turns these two units into the unit for the composite. The Leray comparisons agree with the derived direct-image composition comparison because they are induced by the same underived global-section comparisons; uniqueness of right-derived comparison transformations [def-weil-pbc-etale-cohomology] gives their equality. Naturality of the complex-to-derived comparison combines u and v into v composed with g-inverse-image of u and the inverse of the inverse-image composition comparison. Apply global sections and homology, both of which preserve composition.",
+   "text": "For composition, rewrite all three occurrences of P using hP. The private compFactors lemma combines mapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_fac to identify the complex comparison for g≫f. Naturality of the factorization moves Q(v) past the second factorization. The private unitLeray_naturality lemma is naturality of the whiskered adjunction unit followed by the whiskered Leray comparison. Use it to move the first lifted complex morphism past the second unit-Leray composite. Combine with the derived unit-Leray composition equation and apply homology preservation of composition. These are the explicit hf, hv, hn, hh calculations in the Lean proof.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-inverse-image"
+    "lem-weil-pbc-derived-unit-leray-comp",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 015J (lemma-two-ss-complex-functor), Remark Tag 015K; etale-cohomology.tex Lemma Tag 0EZM (lemma-colimit-variant-complexes)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-inverse-image-composition",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-inverse-image"
+  "lem-weil-pbc-derived-unit-leray-id",
+  "lem-weil-pbc-derived-unit-leray-comp",
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma Tag 015J (lemma-two-ss-complex-functor), Remark Tag 015K; etale-cohomology.tex Lemma Tag 0EZM (lemma-colimit-variant-complexes)"
+  "place": "Categorical elaboration of the canonical comparison of Lemma Tag 015M (lemma-compose-derived-functors), using the inverse-image adjunction coherence of sites.tex Tag 03CB (lemma-composition-morphisms-sites); the original item proof steps 1 and 2."
  },
  "mathlib_searches": [
   {
@@ -132,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T070543-L-3474152",
+  "landing": "20261012T095852-L-312340",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
