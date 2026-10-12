@@ -13,20 +13,28 @@
  ],
  "proof": [
   {
-   "text": "Choose the finite constructible locally closed stratification and finite constant-module trivializations supplied by module constructibility. Copy the domains, immersions and topological stratification into Scheme.Stratification. Forget modules first to abelian groups and then to sets. Inverse image commutes with this composite forgetful functor: underlying sets preserve finite limits and filtered colimits, so they commute with the local equivalence relation construction of inverse image and sheafification. Restriction to an object is computed sectionwise and commutes with forgetting. Constant sheaves are locally constant functions with values in the coefficient object, so forgetting a constant module sheaf gives the constant set sheaf of the same underlying finite set. Apply these comparisons to each trivializing isomorphism to obtain local constancy of the set pullback to every stratum.",
+   "text": "Unpack the module-constructibility witness and retain its topological stratification, domains, immersions and range equalities. These fields give Scheme.Stratification directly; the explicit constructibility conjunct is redundant because Topology.Stratification already contains isConstructible_stratum. On each stratum apply the first equivalence of finite_locally_constant_module_values_iff to obtain IsFiniteLocallyConstantSheaf for the module inverse image.",
    "uses": [
     "def-weil-pbc-etale-constructible-sheaf",
     "def-constructible-stratification",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the inverse-image/underlying-set comparison directly. Base change on small etale sites is representably flat; its opposite has filtered costructured-arrow categories (structuredArrowOpEquivalence). The module forgetful functor preserves these filtered colimits, after shrinking the hom universe. Thus leftKanExtensionCompIsoOfPreserves identifies forgetting the module presheaf inverse image with the set presheaf inverse image. Compose its sheafification with sheafComposeNatIso, since forgetting preserves sheafification, to obtain the isomorphism of the two sheaf inverse images. The direct module-to-set forgetful sheaf is definitionally the composite through abelian groups in the statement.",
+   "uses": [
     "def-weil-pbc-inverse-image",
-    "def-weil-pbc-constant-sheaf"
+    "def-weil-pbc-etale-sheaves"
    ],
    "elementary": false
   },
   {
-   "text": "For each geometric point of a stratum choose a lift to a member of its jointly surjective etale trivializing cover. Restriction does not change its geometric stalk, and the stalk of a constant set sheaf is its constant value. The chosen finite module therefore supplies a finite set stalk. This proves finite local constancy on each stratum, hence constructibility of the underlying set sheaf. The empty scheme permits an empty partition, and the zero module has a singleton underlying set, so neither case needs an additional assumption.",
+   "text": "For a finite locally constant module sheaf on a stratum, choose its LocallyConstantDatum. Restriction commutes definitionally with sheafCompose, and Mathlib's constant-sheaf composition instance gives constant set sheaves on the same cover. At an algebraically closed point, IsFiniteSheaf.isFinitelyGenerated_sheafFiber and ModuleCat.isFinitelyGenerated_iff give a finitely generated module stalk. Module.finite_of_finite makes this stalk finite over the finite ring. Point.sheafFiberCompIso and Finite.of_equiv transfer finiteness to the underlying set stalk. Finally transport both local constancy and stalk finiteness through the inverse-image comparison (using overPullback.mapIso, Sheaf.isConstant_congr and sheafFiber.mapIso), and package the retained stratification.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-etale-sheaves",
     "lem-weil-pbc-finite-locally-constant-module-values"
    ],
    "elementary": false
@@ -35,17 +43,17 @@
  "proof_deps": [
   "def-weil-pbc-etale-constructible-sheaf",
   "def-constructible-stratification",
+  "lem-weil-pbc-finite-locally-constant-module-values",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-finite-locally-constant-module-values"
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-geometric-stalks"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 095E(3), 03RU and 09Z6: forgetting finite module trivializations in the partition argument",
-  "note": "Comparison of the two formal definitions, expanding the forgetful step of the item plan."
+  "note": "U1 Lean proof: retain the same strata and use finite_locally_constant_module_values_iff; the inverse-image, constant-sheaf and geometric-stalk forgetful comparisons are proved from Mathlib APIs in private helpers. No new admitted statements."
  },
  "mathlib_searches": [
   {
@@ -133,10 +141,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T034201-L-1510264",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T042422-L-1822250",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
