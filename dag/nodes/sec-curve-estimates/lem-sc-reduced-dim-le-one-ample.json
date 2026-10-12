@@ -31,108 +31,52 @@
  ],
  "proof": [
   {
-   "text": "If $X=\\varnothing$ or $\\dim X\\le0$, [lem-sc-zero-dim-noetherian-affine] makes $X$ affine and $\\mathcal O_X$ ample. This includes finite discrete unions of reduced closed points and the empty scheme. Henceforth assume $\\dim X=1$.",
+   "text": "If dim X ≤ 0, take the tensor unit and the existing dimension-zero affineness and ampleness theorem. This includes the empty scheme.",
    "uses": [
     "lem-sc-zero-dim-noetherian-affine"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemmas 0AAX and 0CKV; dimension-zero branch omitted from the statement of Varieties Lemma 09NX"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $Z_1,\\ldots,Z_r$ be the finitely many irreducible components of $X$, each with its reduced closed subscheme structure. Each $Z_i$ is integral, Noetherian and separated as a closed subscheme of $X$, and has dimension $0$ or $1$. By [lem-sc-integral-dim-one-ample] in dimension $1$ and [lem-sc-zero-dim-noetherian-affine] in dimension $0$, choose an ample invertible $\\mathcal O_{Z_i}$-module $\\mathcal L_i$. The set $T=\\bigcup_{i\\ne j}(Z_i\\cap Z_j)$ is a finite set of closed points, and each $x\\notin T$ lies on exactly one component, by [lem-sc-component-intersections-finite].",
+   "text": "Use component_intersections_finite to enumerate the components via Fintype.equivFin. Give each its vanishing-ideal subscheme structure. The proved source-library reducedness instance and Mathlib irreducible-subspace result make each integral; closed immersion gives inherited Noetherianity, separatedness and dimension bound. If its dimension is ≤0 use the zero-dimensional theorem; otherwise ENat.WithBot.add_one_le_iff and the bound show dimension=1, so use the integral theorem. Choose ample modules on the components. Identify T with the union of intersections in the enumeration.",
    "uses": [
-    "lem-sc-integral-dim-one-ample",
-    "lem-sc-zero-dim-noetherian-affine",
     "lem-sc-component-intersections-finite",
+    "lem-sc-zero-dim-noetherian-affine",
+    "lem-sc-integral-dim-one-ample",
     "def-pc-integral-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NX, proof, first three sentences; Lemma 09ND; Properties Lemma 0CKV for zero-dimensional components"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $i$, apply [lem-sc-ample-finite-principal-affine] to $E=T\\cap Z_i$, $W=Z_i$ and $\\mathcal L_i$. Replace $\\mathcal L_i$ by the resulting positive power and obtain $s_i$ whose affine nonvanishing locus $(Z_i)_{s_i}$ contains $T\\cap Z_i$. The intersections $Z_i\\cap Z_j$ are finite discrete spaces (step 2); therefore [lem-sc-glue-component-line-bundles] gives an invertible $\\mathcal O_X$-module $\\mathcal L$ and a section $s$ restricting to each $s_i$.",
+   "text": "Apply the glued component affine section theorem to obtain L with ample component restrictions and an affine first-power section locus U containing T.",
    "uses": [
-    "lem-sc-ample-finite-principal-affine",
-    "lem-sc-component-intersections-finite",
-    "lem-sc-glue-component-line-bundles"
+    "lem-sc-glued-component-affine-section"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NX, proof, first and second paragraphs; Properties Lemma 09NV; Varieties Lemma 09NE"
-   }
+   "elementary": false
   },
   {
-   "text": "The open $X_s$ contains $T$. Its closed subschemes $(Z_i)_{s_i}$ are affine and their underlying sets cover $X_s$; as $Z_i$ is closed in $X$, each is closed in $X_s$. Apply [lem-sc-closed-affine-union-affine] to conclude that $X_s$ is affine.",
-   "uses": [
-    "lem-sc-closed-affine-union-affine"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NX, proof, second paragraph; Limits Lemma 09NL"
-   }
-  },
-  {
-   "text": "Fix $x\\in X\\setminus T$, lying on the unique component $Z_1$ (step 2). Let $Z$ be the reduced union of the other components, with ideal $\\mathcal I\\subseteq\\mathcal O_X$, and let $\\mathcal I_1$ be its image in $\\mathcal O_{Z_1}$. Then $x\\notin V(\\mathcal I_1)$: otherwise $x$ would lie on both $Z_1$ and $Z$. Applying [lem-sc-ample-ideal-section] to the ample $\\mathcal L_1$ and ideal $\\mathcal I_1$ gives $m_1>0$ and $t_1\\in\\Gamma(Z_1,\\mathcal I_1\\mathcal L_1^{\\otimes m_1})$ nonvanishing at $x$. The definition of ampleness [def-weil-pbc-ample-invertible-module] gives $m_2>0$ and $t_2\\in\\Gamma(Z_1,\\mathcal L_1^{\\otimes m_2})$ with $x\\in(Z_1)_{t_2}$ affine.",
+   "text": "For x in T use the section of U. Otherwise component_intersections_finite and injectivity of the enumeration give a unique component index containing x. Apply the component-supported affine section theorem to obtain a positive-power affine section locus through x. Rewrite each locus equality into the defining pointwise germ equivalence of IsAmple. CompactSpace X is already an assumption, so this proves IsAmple X L.",
    "uses": [
     "lem-sc-component-intersections-finite",
-    "lem-sc-ample-ideal-section",
+    "lem-sc-component-supported-affine-section",
     "def-weil-pbc-ample-invertible-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NX, proof, final paragraph; Properties Proposition 01Q3 and Definition 01PS"
-   }
-  },
-  {
-   "text": "Set $m=m_1+m_2$ and $t=t_1t_2$. Multiplication places $t$ in $\\Gamma(Z_1,\\mathcal I_1\\mathcal L_1^{\\otimes m})$, and its nonvanishing locus is $(Z_1)_t=(Z_1)_{t_1}\\cap(Z_1)_{t_2}$, containing $x$. It is affine by [lem-sc-affine-cap-section-open] applied to the affine open $(Z_1)_{t_2}$ and the section $t_1$.",
-   "uses": [
-    "lem-sc-affine-cap-section-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NX, proof, final four sentences; Properties Lemma 01PV"
-   }
-  },
-  {
-   "text": "By [lem-sc-conductor-sections], $t$ extends to a global section $\\widetilde t$ of $\\mathcal L^{\\otimes m}$ vanishing on all components except $Z_1$. Its nonvanishing locus $X_{\\widetilde t}$ equals $(Z_1)_t$, which is affine and contains $x$ by step 6. Together with the affine $X_s$ for points of $T$ (step 4), these sections verify the defining criterion [def-weil-pbc-ample-invertible-module] at every point of the quasi-compact Noetherian scheme $X$. Thus $\\mathcal L$ is ample.",
-   "uses": [
-    "lem-sc-conductor-sections",
-    "def-weil-pbc-ample-invertible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NX, proof, conductor equality and conclusion; Varieties Remark 09NW"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-zero-dim-noetherian-affine",
-  "lem-sc-integral-dim-one-ample",
   "lem-sc-component-intersections-finite",
+  "lem-sc-integral-dim-one-ample",
   "def-pc-integral-scheme",
-  "lem-sc-ample-finite-principal-affine",
-  "lem-sc-glue-component-line-bundles",
-  "lem-sc-closed-affine-union-affine",
-  "lem-sc-ample-ideal-section",
-  "def-weil-pbc-ample-invertible-module",
-  "lem-sc-affine-cap-section-open",
-  "lem-sc-conductor-sections"
+  "lem-sc-glued-component-affine-section",
+  "lem-sc-component-supported-affine-section",
+  "def-weil-pbc-ample-invertible-module"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09NX (varieties-lemma-dim-1-noetherian-reduced-separated-has-ample), with dimension-zero branch from Properties Lemmas 0AAX and 0CKV"
+  "place": "09NX, full proof, with dimension-zero components handled by Properties 0AAX and 0CKV; steps 3-4 and 5-7 extracted to two intermediate statements by M1"
  },
  "mathlib_searches": [
   {
@@ -218,5 +162,15 @@
   "group": "E1",
   "result": "pass",
   "note": "Matched node clause by clause: Scheme.{u} X; Noetherian = [IsLocallyNoetherian X] [CompactSpace X] (sc-family form); reduced = AlgebraicGeometry.IsReduced; separated over Spec Z = Scheme.IsSeparated (terminal.from X); dim X<=1 = topologicalKrullDim X <= 1 in WithBot ℕ∞ (empty, dim 0, mixed-dimension components allowed); conclusion ∃ L : X.Modules, ∃ hL : L.IsInvertible, @IsAmple X L hL with #check confirming IsAmple = landed AlgebraicGeometry.Scheme.Modules.IsAmple (packet §5 mislabelled it as upstream field-relative AlgebraicGeometry.IsAmple); same form as landed ExistsAmpleOfDimLEOne and ExistsAmpleOfEnoughGloballyGenerated; no hollow hypotheses, single universe, no new definitions; docstring gives node's 7 proof steps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T085303-L-25047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -9,15 +9,13 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
-import Sheaf.AlgebraicGeometry.AmpleFinitePrincipalAffine
-import Sheaf.AlgebraicGeometry.AmpleIdealSection
+import Sheaf.AlgebraicGeometry.GluedComponentAffineSection
+import Sheaf.AlgebraicGeometry.ComponentSupportedAffineSection
 import Sheaf.AlgebraicGeometry.ComponentIntersectionsFinite
-import Sheaf.AlgebraicGeometry.ConductorSections
-import Sheaf.AlgebraicGeometry.GlueComponentLineBundles
 import Sheaf.AlgebraicGeometry.IntegralDimOneAmple
-import Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover
 import Sheaf.AlgebraicGeometry.ZeroDimNoetherianAffine
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Ample invertible modules on reduced Noetherian schemes of dimension at most one
 
@@ -67,6 +65,109 @@ theorem exists_isAmple_of_reduced_dim_le_one (X : Scheme.{u})
     [IsLocallyNoetherian X] [CompactSpace X] [IsReduced X] [X.IsSeparated]
     (hdim : topologicalKrullDim X ≤ 1) :
     ∃ L : X.Modules, ∃ hL : L.IsInvertible, @IsAmple X L hL := by
-  sorry
+  classical
+  by_cases hzero : topologicalKrullDim X ≤ 0
+  · exact ⟨CategoryTheory.MonoidalCategory.tensorUnit X.Modules, inferInstance,
+      (isAffine_and_isAmple_tensorUnit_of_dim_le_zero X hzero).2⟩
+  let A := {Z : Set X // Z ∈ irreducibleComponents X}
+  have hparts := component_intersections_finite X hdim
+  let : Fintype A := hparts.1.fintype
+  let r := Fintype.card A
+  let e : Fin r ≃ A := (Fintype.equivFin A).symm
+  let Z (a : Fin r) : TopologicalSpace.Closeds X :=
+    ⟨(e a).1, isClosed_of_mem_irreducibleComponents _ (e a).2⟩
+  let I (a : Fin r) := Scheme.IdealSheafData.vanishingIdeal (Z a)
+  let C (a : Fin r) := (I a).subscheme
+  let i (a : Fin r) : C a ⟶ X := (I a).subschemeι
+  have hrange (a : Fin r) : Set.range (i a) = (e a).1 := by
+    change Set.range (I a).subschemeι = (e a).1
+    rw [Scheme.IdealSheafData.range_subschemeι]
+    simp [I, Z]
+  have hcomponents (a : Fin r) : Set.range (i a) ∈ irreducibleComponents X :=
+    (hrange a).symm ▸ (e a).2
+  have hdistinct : Function.Injective fun a ↦ Set.range (i a) := by
+    intro a b hab
+    apply e.injective
+    apply Subtype.ext
+    simpa only [hrange] using hab
+  have hcover : (⋃ a, Set.range (i a)) = Set.univ := by
+    apply Set.eq_univ_of_forall
+    intro x
+    obtain ⟨W, hW, hxW⟩ := exists_mem_irreducibleComponents_subset_of_isIrreducible {x}
+      isIrreducible_singleton
+    obtain ⟨a, ha⟩ := e.surjective ⟨W, hW⟩
+    apply Set.mem_iUnion.mpr
+    refine ⟨a, ?_⟩
+    rw [hrange, ha]
+    exact hxW (Set.mem_singleton x)
+  have (a : Fin r) : IsClosedImmersion (i a) := inferInstance
+  have (a : Fin r) : IsReduced (C a) := inferInstance
+  have (a : Fin r) : IsIntegral (C a) := by
+    have : IrreducibleSpace (C a) := Subtype.irreducibleSpace (e a).2.1
+    exact isIntegral_of_irreducibleSpace_of_isReduced _
+  have : IsNoetherian X := ⟨⟩
+  have (a : Fin r) : IsNoetherian (C a) := isNoetherian_of_locallyOfFiniteType (i a)
+  have (a : Fin r) : (C a).IsSeparated := by
+    constructor
+    rw [← CategoryTheory.Limits.terminal.comp_from (i a)]
+    infer_instance
+  have hamp (a : Fin r) : ∃ M : (C a).Modules,
+      ∃ hM : M.IsInvertible, @IsAmple (C a) M hM := by
+    have hCdim : topologicalKrullDim (C a) ≤ 1 :=
+      ((i a).isClosedEmbedding.isInducing.topologicalKrullDim_le).trans hdim
+    by_cases hCzero : topologicalKrullDim (C a) ≤ 0
+    · exact ⟨CategoryTheory.MonoidalCategory.tensorUnit (C a).Modules, inferInstance,
+        (isAffine_and_isAmple_tensorUnit_of_dim_le_zero (C a) hCzero).2⟩
+    · apply exists_isAmple_of_integral_dim_one
+      apply le_antisymm hCdim
+      simpa using (ENat.WithBot.add_one_le_iff (n := 0)).mpr (lt_of_not_ge hCzero)
+  choose M hM hMample using hamp
+  let (a : Fin r) : (M a).IsInvertible := hM a
+  let T : Set X := {x | ∃ W₁ ∈ irreducibleComponents X,
+    ∃ W₂ ∈ irreducibleComponents X, W₁ ≠ W₂ ∧ x ∈ W₁ ∩ W₂}
+  have hT : T = {x | ∃ a b : Fin r, a ≠ b ∧
+      x ∈ Set.range (i a) ∩ Set.range (i b)} := by
+    ext x
+    constructor
+    · rintro ⟨W₁, hW₁, W₂, hW₂, hne, hx⟩
+      obtain ⟨a, ha⟩ := e.surjective ⟨W₁, hW₁⟩
+      obtain ⟨b, hb⟩ := e.surjective ⟨W₂, hW₂⟩
+      have hab : a ≠ b := by
+        intro hab
+        apply hne
+        exact congrArg Subtype.val (ha.symm.trans (hab ▸ hb))
+      exact ⟨a, b, hab, by simpa only [hrange, ha, hb] using hx⟩
+    · rintro ⟨a, b, hab, hx⟩
+      exact ⟨_, hcomponents a, _, hcomponents b,
+        fun heq ↦ hab (hdistinct heq), hx⟩
+  obtain ⟨L, hL, hres, s, U, hTU, hU, hUs⟩ :=
+    exists_glued_component_affine_section X r C i hcover T hT
+      hparts.2.2.1 hparts.2.2.2.1 M hMample
+  let : L.IsInvertible := hL
+  refine ⟨L, hL, inferInstance, ?_⟩
+  intro x
+  by_cases hx : x ∈ T
+  · refine ⟨1, Nat.zero_lt_one, s, U, hTU hx, hU, ?_⟩
+    intro y
+    change y ∈ U ↔ y ∈ nonvanishingLocus (L.tensorPow 1) s
+    rw [← hUs]
+    rfl
+  · have hunique : ∃! a, x ∈ Set.range (i a) := by
+      obtain ⟨W, ⟨hW, hxW⟩, huniq⟩ := hparts.2.2.2.2 x hx
+      obtain ⟨a, ha⟩ := e.surjective ⟨W, hW⟩
+      refine ⟨a, by simpa only [hrange, ha] using hxW, ?_⟩
+      intro b hxb
+      apply hdistinct
+      change Set.range (i b) = Set.range (i a)
+      rw [hrange a, ha]
+      exact huniq _ ⟨hcomponents b, hxb⟩
+    obtain ⟨n, hn, t, V, hxV, hV, hVt⟩ :=
+      exists_component_supported_affine_section X r C i hcomponents hdistinct hcover
+        L hres x hunique
+    refine ⟨n, hn, t, V, hxV, hV, ?_⟩
+    intro y
+    change y ∈ V ↔ y ∈ nonvanishingLocus (L.tensorPow n) t
+    rw [← hVt]
+    rfl
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-component-supported-affine-section",
+ "kind": "statement",
+ "title": "Affine power sections at points belonging to a unique component",
+ "statement": "Let X be a reduced Noetherian scheme [def-pc-scheme] [pqf-def-locnoeth] [def-weil-pbc-quasi-compact-scheme] [def-pc-reduced-scheme], and C_a → X (a in Fin r) distinct reduced closed subschemes [def-weil-closed-immersion] with ranges irreducible components [def-weil-irreducible-components] covering X. Let L be an invertible module [def-sc-invertible-module] whose tensor pullback to each C_a [def-pc-module-pullback] is ample [def-weil-pbc-ample-invertible-module]. For any x in X lying on exactly one C_a there are n>0, s in Gamma(X,L^n), and an affine open U containing x equal to the nonvanishing locus of s. This makes no assertion at points belonging to two components.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NX, proof final paragraph (steps 5-7 of lem-sc-reduced-dim-le-one-ample), and Remark 09NW; Properties 01Q3 and 01PV"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-module-pullback",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Let a be the unique component containing x. The finite union of the other components is closed. Give it its reduced induced structure Z, let I be its vanishing ideal and I_a its image on C_a. The lift of x is outside V(I_a). Compactness of C_a follows from its closed immersion into compact X.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the ample ideal section theorem to the ample restriction of L and I_a at the lift of x. Obtain t1 in a positive tensor power coming from the ideal, nonvanishing at x. The ample criterion also yields a positive power section t2 with affine locus through x. Multiply these sections: the degree is positive, the product still comes from I_a, and its locus is the intersection of the two loci. The affine-cap-section-open theorem makes this intersection affine inside the affine locus of t2.",
+   "uses": [
+    "lem-sc-ample-ideal-section",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical tensor-power pullback isomorphisms and the conductor section theorem to extend the product to a global section of L^n, zero on Z. Its locus is the image of the affine component locus. On X minus Z, C_a → X is a surjective closed immersion of reduced schemes, hence an isomorphism: its ideal is zero, since all its local sections vanish at every point in this reduced open. Thus the image is an affine open of X containing x. If r=1, Z is empty and I=O_X. If r=0 the unique-component hypothesis is impossible.",
+   "uses": [
+    "lem-sc-conductor-sections",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-sc-ample-ideal-section",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-affine-cap-section-open",
+  "lem-sc-conductor-sections",
+  "def-pc-reduced-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NX, proof final paragraph (steps 5-7 of lem-sc-reduced-dim-le-one-ample), and Remark 09NW; Properties 01Q3 and 01PV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A line bundle ample on each reduced component has an affine power section neighbourhood at a point belonging to only one component",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable (HTTP 500); other searches used"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(IsAmple|nonvanishingLocus|glueComponentLineBundles)\\b",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No matching absolute ample-module or component-section theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend conductor supported sections from one irreducible component to get affine nonvanishing loci",
+   "results": "8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff, AlgebraicGeometry.IsAffineOpen.self_le_basicOpen_union_iff, AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff",
+   "date": "2026-10-12",
+   "verdict": "No matching absolute ample-module or component-section theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a line bundle ample on every irreducible component, construct a global tensor power section with affine locus at a point outside the other components",
+   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+   "date": "2026-10-12",
+   "verdict": "Second reader: no matching theorem; results concern structure-sheaf sections rather than invertible-module gluing or absolute ampleness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proof first sentence, via 09NZ and 09NX: Varieties Lemma 09NX, proof final paragraph (steps 5-7 of lem-sc-reduced-dim-le-one-ample), and Remark 09NW; Properties 01Q3 and 01PV",
+   "via": [
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComponentSupportedAffineSection",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_component_supported_affine_section",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentSupportedAffineSection.lean",
+  "statement": "theorem exists_component_supported_affine_section (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] [IsReduced X] (r : ℕ) (C : Fin r → Scheme.{u}) (i : ∀ a, C a ⟶ X) [∀ a, IsReduced (C a)] [∀ a, IsClosedImmersion (i a)] (hcomponents : ∀ a, Set.range (i a) ∈ irreducibleComponents X) (hdistinct : Function.Injective fun a ↦ Set.range (i a)) (hcover : (⋃ a, Set.range (i a)) = Set.univ) (L : X.Modules) [L.IsInvertible] (hL : ∀ a, ∃ h : ((tensorPullback (i a)).obj L).IsInvertible, @IsAmple (C a) ((tensorPullback (i a)).obj L) h) (x : X) (hx : ∃! a, x ∈ Set.range (i a)) : ∃ n : ℕ, 0 < n ∧ ∃ s : (L.tensorPow n).val.presheaf.obj (Opposite.op ⊤), ∃ U : X.Opens, x ∈ U ∧ IsAffineOpen U ∧ (U : Set X) = nonvanishingLocus (L.tensorPow n) s",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T085303-L-25047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T085303-L-25047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

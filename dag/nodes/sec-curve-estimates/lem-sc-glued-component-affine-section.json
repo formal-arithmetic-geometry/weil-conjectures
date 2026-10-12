@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-glued-component-affine-section",
+ "kind": "statement",
+ "title": "Glued component bundles with an affine section near their intersections",
+ "statement": "Let X be a reduced scheme [def-pc-scheme] [def-pc-reduced-scheme], C_a → X (a in Fin r) a finite closed subscheme cover [def-weil-closed-immersion], and T the union of the distinct pairwise intersections. Suppose T is finite and every point of T is closed in X. For ample invertible modules M_a on C_a [def-sc-invertible-module] [def-weil-pbc-ample-invertible-module], there is an invertible module L on X whose tensor pullbacks [def-pc-module-pullback] to every C_a are ample, and a section s of L^1 with an affine nonvanishing open U containing T. No ampleness on X is concluded.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NX, proof first two paragraphs (steps 3-4 of lem-sc-reduced-dim-le-one-ample); Properties 09NV, Varieties 09NE, Limits 09NL"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Pull T back to each closed subscheme. The preimage is finite because each immersion is injective. Apply the affine-section neighbourhood lemma with W the whole subscheme to each ample M_a. Replace M_a by the resulting positive tensor power, which stays ample by the ampleness criterion: for exponent k>0, raise each section of M^n to its kth power, a section of (M^k)^n with the same nonvanishing locus.",
+   "uses": [
+    "lem-sc-ample-finite-principal-affine",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every distinct pairwise intersection is a subset of T, hence a finite set of closed points. Its subspace is T1 and finite, so discrete. The chosen sections are nonvanishing on these intersections. Glue their invertible modules and sections on the reduced ambient scheme.",
+   "uses": [
+    "lem-sc-glue-component-line-bundles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback commutes with the residue-field value of a section. The glued section locus pulls back to each chosen affine locus and contains T. These affine loci are closed subschemes covering it. Apply the finite closed affine cover theorem. Transport the section through the canonical isomorphism L.tensorPow 1 ≅ L. The restriction isomorphisms transport ampleness from each powered M_a to the restriction of L. With r=0 the cover makes X empty, and the unit with its zero section has empty affine locus.",
+   "uses": [
+    "lem-sc-closed-affine-union-affine",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ample-finite-principal-affine",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-glue-component-line-bundles",
+  "lem-sc-closed-affine-union-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NX, proof first two paragraphs (steps 3-4 of lem-sc-reduced-dim-le-one-ample); Properties 09NV, Varieties 09NE, Limits 09NL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Glue ample line bundles on finitely many closed components with a common affine nonvanishing neighbourhood of their finite intersections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable (HTTP 500); other searches used"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue line bundles on reduced scheme components with affine section near their intersections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, AlgebraicGeometry.Scheme.IdealSheafData.opensRange_glueDataObjMap, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι",
+   "date": "2026-10-12",
+   "verdict": "No matching absolute ample-module or component-section theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(IsAmple|nonvanishingLocus|glueComponentLineBundles)\\b",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No matching absolute ample-module or component-section theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on a finite reduced closed cover with discrete overlaps admits glued sections nonzero on the overlaps",
+   "results": "AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover",
+   "date": "2026-10-12",
+   "verdict": "Second reader: no matching theorem; results concern structure-sheaf sections rather than invertible-module gluing or absolute ampleness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proof first sentence, via 09NZ and 09NX: Varieties Lemma 09NX, proof first two paragraphs (steps 3-4 of lem-sc-reduced-dim-le-one-ample); Properties 09NV, Varieties 09NE, Limits 09NL",
+   "via": [
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GluedComponentAffineSection",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_glued_component_affine_section",
+  "file": "lean/Sheaf/AlgebraicGeometry/GluedComponentAffineSection.lean",
+  "statement": "theorem exists_glued_component_affine_section (X : Scheme.{u}) [IsReduced X] (r : ℕ) (C : Fin r → Scheme.{u}) (i : ∀ a, C a ⟶ X) [∀ a, IsClosedImmersion (i a)] (hcover : (⋃ a, Set.range (i a)) = Set.univ) (T : Set X) (hT : T = {x | ∃ a b : Fin r, a ≠ b ∧ x ∈ Set.range (i a) ∩ Set.range (i b)}) (hfinite : T.Finite) (hclosed : ∀ x ∈ T, IsClosed ({x} : Set X)) (M : ∀ a, (C a).Modules) [∀ a, (M a).IsInvertible] (hM : ∀ a, IsAmple (C a) (M a)) : ∃ (L : X.Modules) (hL : L.IsInvertible), (∀ a, ∃ h : ((tensorPullback (i a)).obj L).IsInvertible, @IsAmple (C a) ((tensorPullback (i a)).obj L) h) ∧ ∃ s : (L.tensorPow 1).val.presheaf.obj (Opposite.op ⊤), ∃ U : X.Opens, T ⊆ (U : Set X) ∧ IsAffineOpen U ∧ (U : Set X) = nonvanishingLocus (L.tensorPow 1) s",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T085303-L-25047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T085303-L-25047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
