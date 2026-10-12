@@ -15,30 +15,46 @@
  ],
  "proof": [
   {
-   "text": "On each affine open V of Y, f^{-1}(V) is qcqs. Restriction to that open carries the given coproduct to a coproduct: open restriction is left adjoint to open direct image, so preserves colimits. Apply the qcqs module cohomology direct-sum theorem to the restricted cofan. Every degree-p cohomology class with coefficients in N is a finite sum of images of classes with coefficients in the M_i. The affine opens give a basis of neighborhoods of each point of Y.",
+   "text": "Fix maps a,b out of R^p f_*N with equal composites with the coproduct comparison. Precompose by each coproduct injection; the Sigma.ι_desc identity gives R^p f_*(ι_i) followed by a equal to the same map followed by b.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the affine-local cohomology presentation to reduce a=b to equality after each natural comparison c_V(N) on every affine V in Y. Set U=f^{-1}(V). QuasiCompact f and the compactness of affine V make U compact; QuasiSeparated f and the quasi-separatedness of affine V make U quasi-separated (Mathlib Scheme.Hom.isCompact_preimage and isQuasiSeparated_preimage). Restriction along U.ι is left adjoint to pushforward, so isColimitOfPreserves transports the given coproduct cofan to U.toScheme.",
    "uses": [
-    "lem-weil-pbc-qcqs-cohomology-direct-sum"
+    "lem-pc-higher-direct-image-affine-cohomology-presentation",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
    ],
    "elementary": false
   },
   {
-   "text": "Use the injective-resolution higher-direct-image presheaf description for N and for each M_i, including its naturality in coefficient maps. Each germ of the target higher direct image is represented by a class on the inverse image of some affine neighborhood. The finite-sum expression of the first step supplies finitely many source higher-image sections whose images have this germ. Their coproduct injections and sum give a source germ lifting it. Module coproducts are sheafifications of the sectionwise module coproduct presheaves and the underlying abelian sheaf functor preserves these colimits. Thus the comparison is surjective on all stalks, hence epic. Its maps from summands are exactly the functor maps of ordinary rightDerived p by naturality. Empty families give a zero point and p=0 gives the ordinary sections argument.",
+   "text": "Apply moduleCohomology_directSum_bijective to the restricted cofan on U.toScheme and use its surjectivity clause. Naturality of c_V and the equalities on each summand imply that c_V(N) followed by the section maps of a and b agree on the images of every summand cohomology group.",
    "uses": [
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-pc-higher-direct-image-affine-cohomology-presentation"
    ],
    "elementary": false
+  },
+  {
+   "text": "The private additive-group helper pulls back an arbitrary class through the surjective DirectSum.toModule map and performs DirectSum.induction_on. Agreement on each summand, zero and sums gives equality on every class. Apply the detection clause of the presentation to obtain a=b, which is the categorical definition of Epi. Empty index sets are covered by the same zero and addition induction; p=0 needs no special branch.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-qcqs-cohomology-direct-sum",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+  "lem-pc-higher-direct-image-affine-cohomology-presentation",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project, Tag 07TB",
-  "place": "Surjectivity expansion of the affine-local cohomology argument for module coproducts"
+  "by": "worker",
+  "group": "U2",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 07TB, 01FF, 01E1 and 01E4",
+  "place": "Affine-local cohomology argument; categorical right cancellation instead of constructing source germs",
+  "note": "Restriction and cohomology-surjectivity steps and naturality/additive finite-support glue compiled in Lean. The coefficient-natural affine presentation is isolated as one strictly smaller statement."
  },
  "mathlib_searches": [
   {
@@ -123,9 +139,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T184354-L-4023672",
+  "landing": "20261012T212724-L-1131877",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

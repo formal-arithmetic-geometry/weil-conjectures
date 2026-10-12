@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-higher-direct-image-affine-cohomology-presentation",
+ "kind": "statement",
+ "title": "Affine-local cohomology classes detect maps out of ordinary higher direct image",
+ "statement": "Let f:X→Y be any morphism of schemes [def-pc-scheme] and p∈ℕ. For each open V of Y put U=f⁻¹(V), j_U:U→X, let H_U^p be module cohomology [pqf-def-cohomology] on U, and forget its global scalar action. There are natural transformations in the coefficient O_X-module M, c_V: H_U^p(j_U^*(-))→Γ(V,R^p f_*(-)), where restriction is [lem-weil-pbc-module-restriction-open-immersion-colimits] and ordinary module higher direct image is [pqf-def-cohomology]. For every module N on X [def-weil-sheaf-of-modules-category], module Q on Y, and maps a,b:R^p f_*N→Q, if c_V(N) followed by Γ(V,a) equals c_V(N) followed by Γ(V,b) for every affine open V, then a=b. No compactness, quasi-separatedness, quasi-coherence, family, or coproduct hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01E4",
+  "place": "Lemma 20.7.3; coefficient naturality of the injective-resolution comparison, using Lemma 20.7.1 (Tag 01E1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof": [
+  {
+   "text": "For each coefficient module M choose an injective resolution I. Open restriction is exact and carries I to an injective resolution on U (01E1). Through overFunctorEquiv, the resolution is a resolution of Scheme.Modules.restrictFunctor U.ι applied to M. The restrictAppIso at top identifies its global sections complex with the sections of I over U; forgetting scalars is exact, so the resulting homology is the underlying additive group of H^p(U,M|U).",
+   "uses": [
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "This section complex is also the evaluation at V of f_*I. Map its homology through sectionCohomologyTheta, then through the inverse of I.isoRightDerivedObj f_* p. This defines c_V(M). Lift every coefficient map to a map of the chosen resolutions. The restricted lift preserves the augmentation; isoRightDerivedObj_hom_naturality, naturality of mapHomologyIso, and the adjunction unit/counit identities show that the displayed maps commute with this lift. Homotopic lifts give identical homology maps, yielding a natural transformation on coefficient modules.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison of the cohomology presheaf with R^p f_*N is an isomorphism on stalks. Each germ is the image of a class on a neighborhood; restrict that class to an affine sub-neighborhood using the restriction compatibility in the higher-direct-image presheaf lemma. The assumed equality of composites with c_V(N) gives equality after applying a and b to this germ. Since all germs have such representatives, a and b agree on all stalks. For a section over W, equal stalk images at every point of W imply local equality and hence equality by sheaf uniqueness, proving a=b. For empty Y there are no germs and uniqueness is vacuous; p=0 uses the same resolution maps.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U2",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 01E1 and 01E4",
+  "place": "Coefficient-natural form of the cohomology-presheaf description and its affine-basis detection consequence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural morphisms from cohomology of a module restricted to inverse image opens into sections of higher direct image, detecting morphisms on an affine basis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical map from cohomology on inverse image open subsets to sections of higher direct image, natural in coefficients; higher direct image is sheafification of this presheaf",
+   "results": "8 hits, chiefly CategoryTheory.Sheaf.cohomologyPresheafFunctor and cohomologyPresheaf (abelian sheaves); no module higher-image comparison",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"restrictFunctor\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*restrictFunctor|restrictFunctor.*rightDerived; sectionCohomologyTheta and openModuleCohomology comparisons in both library roots",
+   "results": "0 Mathlib hits. Existing HigherDirectImagePresheaf gives resolution-specific theta and restriction compatibility. OpenModuleCohomologyComparison gives only an objectwise additive equivalence to abelian H, not a coefficient-natural transformation to higher direct image sections. No existing declaration has the combined natural/detection interface.",
+   "date": "2026-10-13",
+   "verdict": "split missing naturality and affine-basis glue, retaining existing comparison as a proof dependency"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleHigherDirectImageCoproductEpi",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-module-higher-direct-image-coproduct-epi",
+   "place": "Proof step 2, coefficient-natural cohomology-presheaf to higher-direct-image comparison on an affine basis",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageAffineCohomologyPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageAffineCohomologyPresentation.lean",
+  "declaration": "AlgebraicGeometry.higherDirectImage_affine_cohomology_presentation",
+  "statement": "theorem higherDirectImage_affine_cohomology_presentation\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (p : ℕ) :\n    ∃ c : ∀ V : Y.Opens,\n      Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι ⋙\n        RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p ⋙\n          forget₂ (ModuleCat.{u}\n            ((moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace).obj.obj (Opposite.op ⊤)))\n              AddCommGrpCat.{u} ⟶\n      (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p ⋙\n        RingedSpace.openModuleSections Y.toRingedSpace V,\n      ∀ (N : X.Modules) (Q : Y.Modules)\n        (a b : ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj N ⟶ Q),\n        (∀ (V : Y.Opens), IsAffineOpen V →\n          (c V).app N ≫ (RingedSpace.openModuleSections Y.toRingedSpace V).map a =\n            (c V).app N ≫ (RingedSpace.openModuleSections Y.toRingedSpace V).map b) →\n        a = b",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T212724-L-1131877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T212724-L-1131877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

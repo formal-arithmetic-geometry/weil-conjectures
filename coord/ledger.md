@@ -9589,3 +9589,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:27 L: merged deliver/P2/Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs (stage 3; reviewer PASS; first push; landing 20261012T212723-L-1131496 (interface); batch 20261012T212719; modules 2; new nodes 1)
 - 21:27 L: merged deliver/P3/Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseShrink (stage 3; reviewer PASS; first push; landing 20261012T212723-L-1131657 (interface); batch 20261012T212719; modules 3; new nodes 2)
 - 21:27 L: merged deliver/T3/Sheaf.AlgebraicGeometry.PopescuAuxiliarySubmersivePresentation (stage 3; reviewer PASS; first push; landing 20261012T212723-L-1131779 (proof); batch 20261012T212719; modules 1; new nodes 0)
+- 21:27 L: merged deliver/U2/Sheaf.AlgebraicGeometry.ModuleHigherDirectImageCoproductEpi (stage 3; reviewer PASS; first push; landing 20261012T212724-L-1131877 (interface); batch 20261012T212719; modules 2; new nodes 1)

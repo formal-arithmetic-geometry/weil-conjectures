@@ -11,9 +11,9 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
-import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.HigherDirectImageAffineCohomologyPresentation
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Surjectivity of ordinary higher direct image on coproducts
 
@@ -29,6 +29,29 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+open Classical in
+private theorem addHom_eq_of_directSum_surjective
+    {S : Type u} [Ring S] {J : Type u} {L : J → Type u}
+    [∀ j, AddCommGroup (L j)] [∀ j, Module S (L j)]
+    {P : Type u} [AddCommGroup P] [Module S P]
+    (φ : ∀ j, L j →ₗ[S] P)
+    (hs : Function.Surjective (DirectSum.toModule S J P φ))
+    {Q : Type u} [AddCommGroup Q] (a b : P →+ Q)
+    (h : ∀ j x, a (φ j x) = b (φ j x)) : a = b := by
+  classical
+  ext x
+  obtain ⟨z, rfl⟩ := hs x
+  induction z using DirectSum.induction_on with
+  | zero => simp only [map_zero]
+  | of j y =>
+      rw [← DirectSum.lof_eq_of S J L j y, DirectSum.toModule_lof]
+      exact h j y
+  | add z w hz hw => simp only [map_add, hz, hw]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 600000 in
+-- The restriction and derived-functor comparisons require substantial elaboration.
 /-- Ordinary higher direct image sends a module-sheaf coproduct cofan to a jointly
 surjective family. No quasi-coherence hypothesis is needed.
 Source: Stacks Project, Tag 07TB, proof using cohomology on inverse images of affine
@@ -61,6 +84,48 @@ theorem moduleHigherDirectImage_coproduct_epi
     (hc : IsColimit (Cofan.mk N ι)) (p : ℕ) :
     Epi (Sigma.desc (fun i ↦
       ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).map (ι i))) := by
-  sorry
+  classical
+  obtain ⟨c, hdetect⟩ := higherDirectImage_affine_cohomology_presentation f p
+  let R := (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p
+  constructor
+  intro Q a b hab
+  apply hdetect N Q a b
+  intro V hV
+  let U := f ⁻¹ᵁ V
+  let T := Scheme.Modules.restrictFunctor U.ι
+  let H := RingedSpace.moduleCohomology U.toScheme.toRingedSpace p
+  have : CompactSpace U :=
+    (isCompact_iff_compactSpace).mp (f.isCompact_preimage hV.isCompact)
+  have : QuasiSeparatedSpace U :=
+    (isQuasiSeparated_iff_quasiSeparatedSpace _ U.2).mp
+      (f.isQuasiSeparated_preimage hV.isQuasiSeparated)
+  have hT : IsColimit (Cofan.mk (T.obj N) (fun i ↦ T.map (ι i))) :=
+    isColimitMapCoconeCofanMkEquiv T M ι (isColimitOfPreserves T hc)
+  have hsurj := (Scheme.moduleCohomology_directSum_bijective U.toScheme I
+    (fun i ↦ T.obj (M i)) (T.obj N) (fun i ↦ T.map (ι i)) hT p).2
+  let A := (c V).app N ≫ (RingedSpace.openModuleSections Y.toRingedSpace V).map a
+  let B := (c V).app N ≫ (RingedSpace.openModuleSections Y.toRingedSpace V).map b
+  have hi (i : I) : R.map (ι i) ≫ a = R.map (ι i) ≫ b := by
+    have h := congrArg (fun k ↦ Sigma.ι (fun i ↦ R.obj (M i)) i ≫ k) hab
+    change Sigma.ι (fun i ↦ R.obj (M i)) i ≫
+      (Sigma.desc (fun i ↦ R.map (ι i)) ≫ a) =
+        Sigma.ι (fun i ↦ R.obj (M i)) i ≫
+          (Sigma.desc (fun i ↦ R.map (ι i)) ≫ b) at h
+    simpa only [colimit.ι_desc_assoc, Cofan.mk_ι_app] using h
+  have hAB (i : I) :
+      (forget₂ _ AddCommGrpCat).map (H.map (T.map (ι i))) ≫ A =
+        (forget₂ _ AddCommGrpCat).map (H.map (T.map (ι i))) ≫ B := by
+    have hn := (c V).naturality (ι i)
+    change (forget₂ _ AddCommGrpCat).map (H.map (T.map (ι i))) ≫
+        (c V).app N = (c V).app (M i) ≫
+          (RingedSpace.openModuleSections Y.toRingedSpace V).map (R.map (ι i)) at hn
+    dsimp only [A, B]
+    rw [← Category.assoc, hn, Category.assoc, ← Functor.map_comp, hi,
+      Functor.map_comp, ← Category.assoc, ← hn, Category.assoc]
+  apply AddCommGrpCat.hom_ext
+  apply addHom_eq_of_directSum_surjective
+    (fun i ↦ (H.map (T.map (ι i))).hom) hsurj
+  intro i y
+  exact ConcreteCategory.congr_hom (hAB i) y
 
 end AlgebraicGeometry
