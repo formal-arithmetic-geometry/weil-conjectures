@@ -13,24 +13,35 @@
  ],
  "proof": [
   {
-   "text": "Compare I and I₁ by lifts of the identity of F, and J and J₁ by lifts of\n the identity of g'^*F. Their composites are homotopic to identities. Pushforward\n preserves injectives because g' is flat. The two augmented maps into the pushed\n target resolution are homotopic by uniqueness of lifts. Apply f_*, the square\n isomorphism, and the termwise adjunction; these preserve homotopies. Homology\n identifies the two resulting maps. Naturality of the exact pullback homology\n comparison and of isoRightDerivedObj cancels the resolution comparisons, giving\n the asserted equality on the fixed derived objects.",
+   "text": "Use InjectiveResolution.homotopyEquiv to obtain augmented comparison maps a : I → I₁ and b : J → J₁. Flatness of g′ makes the terms of g′_*J₁ injective. The augmentation equations show that t followed by g′_*b and a followed by t₁ agree on F in degree zero. Construct their homotopy directly over the natural numbers: for their difference e, exactness of F → I⁰ → I¹ extends e⁰ to s₀ : I¹ → (g′_*J₁)⁰; exactness in each successive degree extends eⁿ - s_{n-1}d to s_n. The chain-map equation makes this difference vanish on the preceding differential. Mathlib Homotopy.mkCoinductive assembles these extensions. This is the private proved helper augmentedHomotopy, which needs no exactness of the target complex.",
    "uses": [
-    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map this homotopy by f_* and compose with the natural square isomorphism. Naturality of that isomorphism gives the homotopy between q followed by g_*f′_*b and f_*a followed by q₁. Apply g^* and compose with the termwise counit. Adjunction.homEquiv_naturality_right_symm and homEquiv_naturality_left_symm identify the endpoints with c followed by f′_*b and g^*f_*a followed by c₁. Homotopy.homologyMap_eq gives equality of the induced cohomology composites.",
+   "uses": [
     "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply InjectiveResolution.isoRightDerivedObj_hom_naturality to a over the identity of F, and isoRightDerivedObj_inv_naturality to b over the identity of g′^*F. Apply ShortComplex.mapHomologyIso_inv_naturality to f_*a and the exact functor g^*. Expand flatBaseChangeResolutionBeta. Substitute the source comparison, move it through the pullback-homology isomorphism, use the equality on homology from the preceding step, and cancel the target comparison by inverse naturality. The resulting composites are exactly the asserted two maps.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
   "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 02N7, 01FB, 01E4; the parent proof split, with degreewise lift construction using Mathlib InjectiveResolution.desc"
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Cohomology Tags 02N7, 01FB, 01E4; Derived Categories Tag 013S. Lean realization by N1: natural-number coinductive comparison homotopy following Mathlib CategoryTheory/Abelian/Injective/Resolution.lean descHomotopyZero; termwise adjunction; Mathlib RightDerived and ShortComplex.PreservesHomology naturality (2026-10-13)."
  },
  "mathlib_searches": [
   {
@@ -131,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-7c799",
-  "group": "R2",
+  "reviewer": "COMPILER",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T160142-L-2566203",
-  "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures, unchanged construction bodies and public re-exports with the nodes and change record; all six modules compile cleanly, axioms checked, direct importers: none. Accepted as a decomposition with three documented holes."
+  "landing": "20261012T173844-L-3300884",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
