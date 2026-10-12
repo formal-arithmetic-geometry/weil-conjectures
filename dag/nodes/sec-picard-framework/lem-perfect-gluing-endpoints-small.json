@@ -1,0 +1,187 @@
+{
+ "id": "lem-perfect-gluing-endpoints-small",
+ "kind": "statement",
+ "title": "Small Mayer-Vietoris endpoint families",
+ "statement": "Let $X,Y$ be schemes in universe $u$, let $U,V$ be opens of $X$, and let $f:Y\\to X$ be an open immersion with image $U\\cup V$. Suppose $P_w(X,U)$, $P_w(X,V)$, and $P_w(X,U\\cap V)$ [def-pc-perfect-classes-small-on-open]. Fix derived categories in morphism universe $w$ on $Y$ and its localized open sites [def-pc-derived-category]. Then the skeletons of both endpoint families $M_{f^{-1}U,f^{-1}V}$ and $N_{f^{-1}U,f^{-1}V}$ [def-perfect-gluing-endpoint-properties] are $u$-small.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BV, lemma-exact-sequence-j-star; Step 2 of lem-pc-perfect-complexes-compact-set, using Tag 08DR"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-perfect-classes-small-on-open",
+  "def-perfect-gluing-endpoint-properties"
+ ],
+ "proof": [
+  {
+   "text": "U,V and U intersect V lie in opensRange f. Apply the restriction-smallness theorem to each; preimage preserves intersections.",
+   "uses": [
+    "lem-perfect-restriction-classes-small"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Index middle endpoints by the product of the first two restriction skeletons and overlap endpoints by the third restriction skeleton. Send a skeleton representative through the actual derived direct-image functor, taking the biproduct for middle endpoints. Any endpoint in the property is isomorphic to such an image by fromSkeletonToSkeletonIso, mapped by direct image and biproduct.mapIso.",
+   "uses": [
+    "def-perfect-gluing-endpoint-properties"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any small family of ambient objects covering a full subcategory up to isomorphism, map its skeleton injectively into the range of the family in the ambient skeleton. Full faithfulness gives mapSkeleton_injective, and small_of_injective gives smallness. Apply this proved private helper to the two constructed families.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-perfect-restriction-classes-small",
+  "def-perfect-gluing-endpoint-properties"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q3",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BV; the original affine/Mayer-Vietoris/08DR route, expressed on localized sites"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "triangle.*iso|iso.*triangle",
+   "date": "2026-10-12",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+   "verdict": "Generic supporting declarations only; no exact specialized assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smallness of isomorphism classes of cones in a triangulated category with small hom sets and small families of endpoints",
+   "date": "2026-10-12",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.exists_triangle, CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one, CategoryTheory.Triangulated.TStructure.triangle_iso_exists, CategoryTheory.Triangulated.TStructure, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Triangulated.TStructure.le_isClosedUnderIsomorphisms, CategoryTheory.IsTriangulated.mk', CategoryTheory.Triangulated.TStructure.IsGE",
+   "verdict": "Generic supporting declarations only; no exact specialized assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Skeleton",
+   "date": "2026-10-12",
+   "results": "12 hits: CategoryTheory.Skeleton, CategoryTheory.instCategorySkeleton, CategoryTheory.toSkeleton, CategoryTheory.instInhabitedSkeleton, CategoryTheory.skeleton_skeletal, CategoryTheory.fromSkeleton, CategoryTheory.instCoeSortSkeleton, CategoryTheory.skeletonEquivalence",
+   "verdict": "Generic supporting declarations only; no exact specialized assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mayer Vietoris triangle localized category sheaves of modules restriction right adjoint derived functor",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.HasLocalization",
+   "date": "2026-10-12",
+   "results": "12 hits: CategoryTheory.MorphismProperty.HasLocalization, CategoryTheory.MorphismProperty.HasLocalization.standard, CategoryTheory.MorphismProperty.Localization', CategoryTheory.MorphismProperty.HasLocalization.D, CategoryTheory.MorphismProperty.instCategoryLocalization', CategoryTheory.MorphismProperty.HasLocalization.hD, CategoryTheory.MorphismProperty.Q', CategoryTheory.MorphismProperty.HasLocalization.L",
+   "verdict": "Generic supporting declarations only; no exact specialized assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint|HasLocalization|mapDerivedCategory",
+   "date": "2026-10-12",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "verdict": "Generic supporting declarations only; no exact specialized assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES|exists_iso_of_arrow_iso",
+   "date": "2026-10-12",
+   "results": "4 hits: Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean",
+   "verdict": "Generic supporting declarations only; no exact specialized assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|perfect.*restrict|restrict.*perfect",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "Generic supporting declarations only; no exact specialized assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "date": "2026-10-12",
+   "results": "3 hits: SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv",
+   "verdict": "Generic supporting declarations only; no exact specialized assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A distinguished Mayer Vietoris triangle computes an object from derived direct images of its restrictions to two opens",
+   "date": "2026-10-12",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition",
+   "verdict": "Generic supporting declarations only; no exact specialized assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image of restrictions of perfect complexes forms small families of isomorphism classes",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small isomorphism classes of restrictions of perfect quasi-coherent complexes along an open immersion",
+   "date": "2026-10-12",
+   "results": "8 hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, SheafOfModules.isQuasicoherent, CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt",
+   "verdict": "Generic supporting declarations only; no exact specialized assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallGluingCore",
+  "date": "2026-10-12",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "set-of-representatives input: derived Mayer-Vietoris gluing over two opens",
+   "via": [
+    "new-perfect-classes-small-gluing-core",
+    "lem-pc-perfect-classes-small-gluing",
+    "lem-pc-perfect-complexes-compact-set"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectGluingEndpointsSmall",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectGluingEndpointsSmall.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfectGluing_endpoints_small",
+  "statement": "theorem perfectGluing_endpoints_small (X : Scheme.{u}) (U V : X.Opens) (pU : PerfectComplexClassesSmallOnOpen.{u, w} X U) (pV : PerfectComplexClassesSmallOnOpen.{u, w} X V) (pUV : PerfectComplexClassesSmallOnOpen.{u, w} X (U ⊓ V)) (Y : Scheme.{u}) (f : Y ⟶ X) [IsOpenImmersion f] (hr : f.opensRange = U ⊔ V) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ W : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))] : Small.{u} (Skeleton (perfectGluingMiddleProperty Y (f ⁻¹ᵁ U) (f ⁻¹ᵁ V)).FullSubcategory) ∧ Small.{u} (Skeleton (perfectGluingOverlapProperty Y (f ⁻¹ᵁ U) (f ⁻¹ᵁ V)).FullSubcategory)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T144139-L-2105290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T144139-L-2105290",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8179,3 +8179,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.DerivedPulledGlobalGermFac (stage 3; reviewer PASS; first push; landing 20261012T144138-L-2104899 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.FlatModulePullbackExact (stage 3; reviewer PASS; first push; landing 20261012T144138-L-2105090 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/Q2/Sheaf.FieldTheory.GeometricallyReducedExtensionSeparable (stage 3; reviewer PASS; first push; landing 20261012T144138-L-2105192 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallGluingCore (stage 3; reviewer PASS; first push; landing 20261012T144139-L-2105290 (interface); batch 20261012T144049; modules 5; new nodes 4)

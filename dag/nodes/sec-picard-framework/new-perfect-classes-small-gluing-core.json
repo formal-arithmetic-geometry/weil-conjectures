@@ -14,24 +14,37 @@
  ],
  "proof": [
   {
-   "text": "Transport the three smallness hypotheses to the inverse-image opens of Y, use the derived Mayer--Vietoris triangle, and encode perfect cocones by a u-small type of triples and maps computed via K-injective resolutions. Uniqueness of cocones up to isomorphism gives a surjection onto the perfect skeleton; apply small_of_surjective.",
+   "text": "Set A=f inverse U and B=f inverse V; preimage_opensRange and the range equality show A union B is top. Apply endpoint smallness and the triangle-presentation theorem to every perfect quasi-coherent object.",
    "uses": [
-    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-perfect-gluing-endpoints-small",
+    "lem-perfect-gluing-triangle-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "K-injective resolutions give LocallySmall u of the ambient derived category via the source-library DerivedCategory.locallySmall instance, for the supplied localization universe w.",
+   "uses": [
     "prop-pur-kinjective-resolutions-exist"
    ],
+   "elementary": true
+  },
+  {
+   "text": "The proved private small_skeleton_of_triangle_terms helper encodes the second triangle arrow between chosen skeleton representatives of its second and third objects. Its indexing type is a dependent sum of the two small skeletons and their u-small Hom type. Map each distinguished triangle to its arrow skeleton; every such class belongs to the range of the encoded family. Equality of arrow classes gives an arrow isomorphism. Rotate the two distinguished triangles and use Mathlib exists_iso_of_arrow_iso to get an isomorphism of shifted first terms. Full faithfulness of shift removes the shift, and full faithfulness of the perfect/QCoh inclusion yields equality of perfect skeleton classes. This injects that skeleton into the small range of arrow classes. small_of_injective concludes without selecting an arbitrary cone object.",
+   "uses": [],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-mayer-vietoris-triangle",
+  "lem-perfect-gluing-endpoints-small",
+  "lem-perfect-gluing-triangle-presentation",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "C3",
+  "group": "Q3",
   "date": "2026-10-12",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08BV and Step 2 of lem-pc-perfect-complexes-compact-set"
+  "place": "Tag 08BV; the original affine/Mayer-Vietoris/08DR route, expressed on localized sites"
  },
  "mathlib_searches": [
   {
@@ -95,9 +108,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T110256-L-612752",
+  "landing": "20261012T144139-L-2105290",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
