@@ -7,8 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
+import Mathlib.CategoryTheory.Sites.Limits
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Sheaf.AlgebraicGeometry.EtaleSetStagePresheafLocallyInjective
+import Sheaf.AlgebraicGeometry.EtaleSetStagePresheafLocallySurjective
 
 /-! # Sheaf-level continuity on the original affine étale site
 
@@ -89,6 +91,37 @@ theorem etaleSetStageSheaf_isColimit
         Arrow.mk ((K.ι.app (op j)).hom.app (op W)) =
           Arrow.mk (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom)
             (c.π.app (op i₀)) (c.w j.hom) G W.obj)) →
-      Nonempty (IsColimit K) := by sorry
+      Nonempty (IsColimit K) := by
+  dsimp only
+  intro E K hobj hpt hmap hleg
+  let J := Scheme.fullAffineEtaleTopology (D.obj (op i₀))
+  let F := E ⋙ sheafToPresheaf J (Type (u + 1))
+  let a := colimit.desc F ((sheafToPresheaf J (Type (u + 1))).mapCocone K)
+  have hinj : Presheaf.IsLocallyInjective J a :=
+    etaleSetStagePresheaf_locallyInjective D c hc i₀ G E K hobj hpt hmap hleg
+  have hsurj : Presheaf.IsLocallySurjective J a :=
+    etaleSetStagePresheaf_locallySurjective D c hc i₀ G E K hobj hpt hmap hleg
+  let H := Sheaf.sheafifyCocone (colimit.cocone F)
+  let hH := Sheaf.isColimitSheafifyCocone (colimit.cocone F) (colimit.isColimit F)
+  let q := hH.desc K
+  have hfac : toSheafify J (colimit F) ≫ q.hom = a := by
+    apply colimit.hom_ext
+    intro i
+    rw [← Category.assoc]
+    have hι : (H.ι.app i).hom =
+        colimit.ι F i ≫ toSheafify J (colimit F) := by
+      simpa only [colimit.cocone_ι, colimit.cocone_x] using
+        Sheaf.sheafifyCocone_ι_app_val (colimit.cocone F) i
+    rw [← hι]
+    change (H.ι.app i ≫ q).hom = _
+    rw [hH.fac]
+    exact (colimit.ι_desc ((sheafToPresheaf J (Type (u + 1))).mapCocone K) i).symm
+  have hqinj : Sheaf.IsLocallyInjective q :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J a hfac
+  have hqsurj : Sheaf.IsLocallySurjective q :=
+    Presheaf.isLocallySurjective_of_isLocallySurjective_fac J hfac
+  have : IsIso (hH.desc K) :=
+    (Sheaf.isLocallyBijective_iff_isIso q).mp ⟨hqinj, hqsurj⟩
+  exact ⟨IsColimit.ofPointIso hH⟩
 
 end AlgebraicGeometry

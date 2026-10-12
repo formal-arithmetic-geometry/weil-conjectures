@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-sets-stage-presheaf-locally-surjective",
+ "kind": "statement",
+ "title": "Local surjective of the stage presheaf comparison",
+ "statement": "Let I be a nonempty directed preorder, D : I^op → Scheme a system of qcqs schemes with affine transition morphisms, c a limiting cone, i₀ a fixed index, and G a sheaf of sets on D(i₀) [def-weil-pbc-sets-section-comparison]. On the full affine étale site J of D(i₀) [def-weil-pbc-full-affine-etale-site], let E be any diagram indexed by (Over(op i₀))^op whose objects are the restricted stage push-pull sheaves A_j = (f_j)_* f_j^{-1}G, whose maps are the canonical section comparisons, and let K be a cocone with point L = p_* p^{-1}G and canonical comparison legs. Let Q be the colimit in presheaves of the underlying presheaves of E, and let a : Q → L be the unique presheaf morphism induced by the legs of K. Then a is locally surjective: for every affine étale test object W and t in L(W), the sieve of arrows V → W for which t|V is in the image of a_V is J-covering. This is only the existence part of the comparison; it asserts no uniqueness or equality of representatives.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, equation-compute-pullback-to-limit, existence part; affine etale application in Etale Cohomology Tag 09YQ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sets-section-comparison",
+  "def-weil-pbc-full-affine-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the system to the cofinal upper tail of i₀. Apply the affine étale site colimit presentation to this tail. The base change of an affine test object W is affine, because the cone projection is affine. Transport the stage and limit inverse images through the full-affine restriction equivalences using the unit-compatible inverse-image comparison.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+    "lem-weil-pbc-affine-etale-site-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The construction in Sites 0A35, equation-compute-pullback-to-limit, represents a limit inverse-image section by stage inverse-image sections. Indeed inverse-image sections are locally represented by an original section of G and a map into its base change. The finite-presentation object and arrow descent clauses place these maps at stages. A covering that supplies these representatives has a finite affine refinement; descend that finite cover to a common stage using covering descent.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites",
+    "lem-weil-pbc-affine-etale-site-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Overlaps of the local representatives agree at the limit. Descend the finite equations witnessing agreement to a later common stage, using the eventual-equality clause of the site presentation. The sheaf axiom at that stage glues the representatives. This is the existence part of 0A35's section formula. The adjunction-unit and composition equations identify its map with etaleSetSectionComparison and hence, by the supplied component equations, with the leg of K.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Insert the resulting stage representative into the presheaf colimit using its coprojection. The presheaf colimit universal property says that its comparison image is the given limit section. Thus the image sieve is covering (indeed the argument gives a representative on W itself). Empty covers are allowed throughout; on an empty object the sheaf axiom gives the unique section, with no nonemptiness assumption on G.",
+   "uses": [
+    "lem-weil-pbc-presheaf-colimits-sectionwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-presheaf-colimits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q3",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, equation-compute-pullback-to-limit, existence portion; transported through affine sites following 09YQ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local representatives and local eventual equality of sections of inverse images of etale sheaves in limits of schemes",
+   "results": "Service returned Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The presheaf colimit of push pull sheaves of sets at stages of a limit of schemes maps locally injectively and locally surjectively to the limit push pull sheaf",
+   "results": "Eight hits include PresheafedSpace.pushforwardDiagramToColimit, colimit_presheaf, and Zariski representability local injectivity. None gives the etale inverse-image limit comparison.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "Presheaf.IsLocallyInjective|Presheaf.IsLocallySurjective; rg stage comparisons in lean/WeilConjectures and lean/Sheaf; blueprint search local representatives and local eventual equality",
+   "results": "Mathlib has the general local comparison and sheafification APIs. Project section continuity and affine eventual equality depend on the current item and cannot be imported (import_direction.py reports the cycle). Blueprint searches return zero exact matches. ColimitSites is stated for Cat.{u,u} and Type u; the affine site presentation uses Cat.{u,u+1} and this coefficient sheaf uses Type (u+1), requiring transport rather than a direct application.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetStageSheafColimit",
+  "date": "2026-10-12",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "degree-zero continuity: existence of local stage section representatives",
+   "via": [
+    "lem-weil-pbc-sets-stage-sheaf-colimit",
+    "lem-weil-pbc-sets-section-lift-affine",
+    "lem-weil-pbc-sets-section-lift",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetStagePresheafLocallySurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetStagePresheafLocallySurjective.lean",
+  "declaration": "AlgebraicGeometry.etaleSetStagePresheaf_locallySurjective",
+  "statement": "theorem etaleSetStagePresheaf_locallySurjective\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1))) :\n    let ρ := (Scheme.fullAffineEtaleInclusion (D.obj (op i₀))).sheafPushforwardContinuous\n      (Type (u + 1)) (Scheme.fullAffineEtaleTopology (D.obj (op i₀)))\n      (D.obj (op i₀)).smallEtaleTopology\n    let A := fun j : Over (op i₀) ↦ ρ.obj\n      (((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).sheafPushforwardContinuous\n        (Type (u + 1)) ((D.obj (op i₀)).smallGrothendieckTopology (P := @Etale) (Q := @Etale))\n        ((D.obj j.left).smallGrothendieckTopology (P := @Etale) (Q := @Etale))).obj\n          ((Scheme.etaleSetPullback (D.map j.hom)).obj G))\n    let L := ρ.obj\n      ((@Functor.sheafPushforwardContinuous _ _ _ _\n        (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀)))\n        (Type (u + 1)) _ ((D.obj (op i₀)).smallGrothendieckTopology (P := @Etale) (Q := @Etale))\n        (c.pt.smallGrothendieckTopology (P := @Etale) (Q := @Etale))\n        (Etale.isContinuous_overPullback (c.π.app (op i₀)))).obj\n          ((Scheme.etaleSetPullback (c.π.app (op i₀))).obj G))\n    ∀ (E : (Over (op i₀))ᵒᵖ ⥤\n        Sheaf (Scheme.fullAffineEtaleTopology (D.obj (op i₀))) (Type (u + 1)))\n      (K : Cocone E),\n      (∀ j : Over (op i₀), E.obj (op j) = A j) → K.pt = L →\n      (∀ (j k : Over (op i₀)) (a : k ⟶ j)\n        (W : (D.obj (op i₀)).FullAffineEtale),\n        Arrow.mk ((E.map a.op).hom.app (op W)) =\n          Arrow.mk (etaleSetSectionComparison (D.map a.left) (D.map j.hom) (D.map k.hom)\n            ((D.map_comp a.left j.hom).symm.trans\n              (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) a.w)) G W.obj)) →\n      (∀ (j : Over (op i₀)) (W : (D.obj (op i₀)).FullAffineEtale),\n        Arrow.mk ((K.ι.app (op j)).hom.app (op W)) =\n          Arrow.mk (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom)\n            (c.π.app (op i₀)) (c.w j.hom) G W.obj)) →\n      Presheaf.IsLocallySurjective\n      (Scheme.fullAffineEtaleTopology (D.obj (op i₀)))\n      (colimit.desc\n        (E ⋙ sheafToPresheaf (Scheme.fullAffineEtaleTopology (D.obj (op i₀)))\n          (Type (u + 1)))\n        ((sheafToPresheaf (Scheme.fullAffineEtaleTopology (D.obj (op i₀)))\n          (Type (u + 1))).mapCocone K))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T160141-L-2565977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T160141-L-2565977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

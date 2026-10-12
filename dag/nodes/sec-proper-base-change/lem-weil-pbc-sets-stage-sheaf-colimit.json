@@ -13,29 +13,36 @@
  ],
  "proof": [
   {
-   "text": "Apply the affine-site colimit presentation to the cofinal upper tail. Use the inverse-image description of 0A35, local section representatives and local equality, then transport along full-affine restriction and unit-compatible composition. This identifies the sheafification of the stage presheaf colimit with the limit push-pull sheaf. The universal property of sheafification gives the colimit. The supplied component equations identify the diagram and cocone with these canonical maps. This step asserts local representatives, not preservation by evaluation.",
+   "text": "Form the presheaf colimit Q of the underlying stage diagram. Its comparison a to the underlying limit sheaf is locally injective and locally surjective by the two local comparison statements. These are separate equality and existence claims, and neither claims the colimit universal property.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-colimit-of-sites",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+    "lem-weil-pbc-sets-stage-presheaf-locally-injective",
+    "lem-weil-pbc-sets-stage-presheaf-locally-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafify the presheaf colimit cocone to obtain a colimiting sheaf cocone H (Mathlib Sheaf.isColimitSheafifyCocone). Its universal property gives q : H.pt → K.pt. Compare coprojections using Sheaf.sheafifyCocone_ι_app_val and the factorization equations of H: the presheaf comparison is toSheafify(Q) followed by q.hom. The presheaf colimit hom-ext theorem proves this equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The sheafification unit is locally surjective. Mathlib Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac and Presheaf.isLocallySurjective_of_isLocallySurjective_fac transfer the two local properties of a to q.hom. Apply Sheaf.isLocallyBijective_iff_isIso to q, and IsColimit.ofPointIso to the colimiting cocone H. This proves Nonempty(IsColimit K) with its given objects and component equations unchanged.",
+   "uses": [
+    "lem-galois-set-sheaf-local-bijection-isomorphism"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-colimit-of-sites",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+  "lem-weil-pbc-sets-stage-presheaf-locally-injective",
+  "lem-weil-pbc-sets-stage-presheaf-locally-surjective",
+  "lem-galois-set-sheaf-local-bijection-isomorphism"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M3",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0A35 inverse-image formula and local representative/equality argument; transport via affine étale site presentation"
+  "group": "Q3",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, equality/existence split; formal sheafification assembly using Mathlib Sites/Limits and LocallyBijective"
  },
  "mathlib_searches": [
   {
@@ -113,11 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-884e1",
-  "group": "M3",
+  "reviewer": "COMPILER",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T144128-L-2101954",
+  "landing": "20261012T160141-L-2565977",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules, DAG statements, report, change record, and both direct importers matched the stage-3 brief and compiled successfully."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
