@@ -47,17 +47,17 @@
    }
   },
   {
-   "text": "The point $x'_n$ (Stacks: 'Since $\\kappa(s)=\\kappa(u)$ the fibre $(X_U)_u=X_s$. Hence there exists a unique point $x'_n\\in X_u$ corresponding to $x_n$'). By [lem-weil-pbc-fibre-product-points] the points $y\\in X_U$ with $p(y)=x_n$ and $q(y)=u$ are in bijection with the primes of $T=\\kappa(x_n)\\otimes_{\\kappa(s)}\\kappa(u)$ [def-pc-fibre-product]. Since $\\beta:\\kappa(s)\\to\\kappa(u)$ is an isomorphism, the ring map $\\kappa(x_n)\\to T$, $a\\mapsto a\\otimes1$, is an isomorphism, with inverse $a\\otimes b\\mapsto a\\,\\alpha(\\beta^{-1}(b))$ where $\\alpha:\\kappa(s)\\to\\kappa(x_n)$ is induced by $f$ [def-weil-residue-field]; so $T$ is a field, its only prime is $0$, and there is exactly one such point, call it $x'_n$. As $T/0=T$ is a field, [lem-weil-pbc-fibre-product-point-residue-field] gives that $T\\to\\kappa(x'_n)$ is an isomorphism compatible with the maps from $\\kappa(x_n)$; composing with the isomorphism $\\kappa(x_n)\\to T$, the map $\\kappa(x_n)\\to\\kappa(x'_n)$ induced by $p$ is an isomorphism.",
+   "text": "Lift the last point x to X_U directly using canonical field-spectrum maps. Write beta for the isomorphism kappa(phi(t)) -> kappa(t) and alpha for kappa(phi(t)) -> kappa(x), with the residue-field congruence from f(x)=phi(t). The map Spec(kappa(x)) -> U induced by beta inverse followed by alpha commutes over S with the canonical point map into X, by residue-field-point naturality. The pullback universal property gives l:Spec(kappa(x))->X_U. Its unique point z projects to x and t. Factor l through Spec(kappa(z)) using the morphism-from-spec-field theorem. Naturality, the equality of the first projection with the canonical point map, full faithfulness of Spec, and the monomorphism of the canonical point map show that the induced map c:kappa(x)->kappa(z) has a left inverse b:kappa(z)->kappa(x). Since b is an injective field map and split surjective, b and hence c are isomorphisms. No uniqueness of z is needed for the induction.",
    "uses": [
-    "lem-weil-pbc-fibre-product-points",
     "def-pc-fibre-product",
     "def-weil-residue-field",
-    "lem-weil-pbc-fibre-product-point-residue-field"
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-residue-field-point-naturality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 02LL (more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points), proof, lines 11998-12011"
+    "place": "More on Morphisms, Lemma 02LL (more-morphisms-lemma-etale-makes-quasi-finite-finite-multiple-points, line 11974), statement and proof (lines 11974-12011; induction on n from Lemma 02LK, more-morphisms-lemma-etale-makes-quasi-finite-finite-at-point, line 11924, itself reduced to Algebra, Lemma 00UJ)"
    }
   },
   {
@@ -118,9 +118,9 @@
   "lem-weil-pbc-etale-composition-cancellation",
   "def-weil-etale-morphism",
   "def-weil-residue-field",
-  "lem-weil-pbc-fibre-product-points",
   "def-pc-fibre-product",
-  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-residue-field-point-naturality",
   "lem-weil-pbc-lft-base-change",
   "lem-weil-pbc-isolated-fibre-point-base-change",
   "def-pc-scheme-fibre",
@@ -130,9 +130,9 @@
   "lem-weil-pbc-elementary-etale-finite-piece-persistence"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 02LL, proof (lines 11998-12011); the base case n=0 and the verification of (iii) for V_n are written out by the agent"
+  "place": "Stacks 02LL induction, using the existing 02LK one-point and persistence statements; step 2 replaced by canonical field-spectrum lift and split field-map argument, formalized by A3 on 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -216,5 +216,15 @@
   "group": "J1",
   "result": "fix",
   "note": "f lft, s, Fin n points no distinctness (Stacks 02LL), hx, isolated via f.asFiber in f.fiber (f (x i)) as 2e990db3c; Etale φ, φ u = s, IsIso residueFieldMap as F1 4d326dc08; per i: V i finite over U, unique v i : V i over u, maps to x i, IsIso residue map"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-adbf6",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T135215-L-1654756",
+  "kind": "proof",
+  "note": "independent Codex review: Unchanged Lean signature matches the node and Stacks 02LL (https://stacks.math.columbia.edu/tag/02LL); proof records agree, axioms are permitted apart from documented existing holes, and delivery plus both direct importers compile cleanly."
  }
 }
