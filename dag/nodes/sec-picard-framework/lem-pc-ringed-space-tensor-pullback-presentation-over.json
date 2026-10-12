@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-ringed-space-tensor-pullback-presentation-over",
+ "kind": "statement",
+ "title": "Tensor pullback transports a presentation over a specified open",
+ "statement": "Let g:X→Y be a morphism of ringed spaces, G an O_Y-module, and V an open of Y. If G.over V has a global free presentation p, then the concrete tensor pullback of G, restricted over the specific inverse-image open g⁻¹(V), admits a global free presentation. There is no quasi-coherence hypothesis and no unspecified neighbourhood.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01BG",
+  "place": "Lemma 17.10.4, global presentation step, applied to the restricted morphism g⁻¹(V)→V"
+ },
+ "stmt_deps": [
+  "lem-pc-ringed-space-tensor-pullback-underived",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Identify the restriction of the concrete tensor pullback over g⁻¹(V) with tensor pullback along the restricted ringed-space morphism g⁻¹(V)→V. Opens contained in V are cofinal in the inverse-image computation on opens contained in g⁻¹(V); tensor products and sheafification commute with restriction.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The inverse-image/extension-of-scalars composite along that restricted morphism is a left adjoint by the underived tensor pullback theorem, hence preserves coproducts and cokernels. It sends the unit to the unit by b tensor a ↦ b g-sharp(a), with inverse b ↦ b tensor 1. Apply Mathlib SheafOfModules.Presentation.map to p, then Presentation.ofIsIso along the restriction comparison. This supplies the required global presentation.",
+   "uses": [
+    "lem-pc-ringed-space-tensor-pullback-underived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-space-tensor-pullback-underived"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/01BG",
+  "place": "Lemma 17.10.4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Presentation.*(pullback|inverseImage|changeOfRings)|(pullback|inverseImage|changeOfRings).*Presentation",
+   "date": "2026-10-12",
+   "results": "Four unrelated hits (unitization and finite-presentation scheme morphisms); no concrete sheaf presentation transport theorem. Additional rg searches of lean/ find a scheme-specific pullback proof but no arbitrary ringed-space restriction comparison.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.Presentation.map",
+   "date": "2026-10-12",
+   "results": "Found the generic SheafOfModules.Presentation.map and its component lemmas; none identifies concrete ringed-space tensor pullback with the restricted pullback.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A global presentation of a module sheaf pulls back to a global presentation on the inverse image of an open subset",
+   "date": "2026-10-12",
+   "results": "Found the generic SheafOfModules.Presentation.map and its component lemmas; none identifies concrete ringed-space tensor pullback with the restricted pullback.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transporting a global free presentation through the tensor pullback of sheaves on ringed spaces",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackQCoHLocal",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ringed-space-tensor-pullback-qcoh-local"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedSpaceTensorPullbackPresentation.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.tensorModulePullback_presentation_over",
+  "statement": "theorem tensorModulePullback_presentation_over\n    {X Y : RingedSpace.{u}} (g : X ⟶ Y)\n    (G : SheafOfModules.{u} (moduleRings Y)) (V : TopologicalSpace.Opens Y)\n    (p : (G.over V).Presentation) :\n    Nonempty\n      (((SheafOfModules.changeOfRings.{u, u, u}\n        (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)\n        (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf G)).over\n          ((TopologicalSpace.Opens.map g.hom.base).obj V)).Presentation)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T144059-L-2090941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T144059-L-2090941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

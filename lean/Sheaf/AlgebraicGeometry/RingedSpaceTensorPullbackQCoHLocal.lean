@@ -2,6 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackPresentation
+import Mathlib.CategoryTheory.Sites.Spaces
 
 @[expose] public section
 
@@ -22,6 +24,11 @@ theorem tensorModulePullback_isQuasicoherent_local
       ((SheafOfModules.changeOfRings.{u, u, u}
         (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)
         (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf G)).over U).IsQuasicoherent := by
-  sorry
+  obtain ⟨q⟩ := hG.nonempty_quasicoherentData
+  have hcov := (Opens.coversTop_iff Y q.X).mp q.coversTop
+  obtain ⟨i, hi⟩ := hcov.exists_mem (g.hom.base x)
+  obtain ⟨p⟩ := tensorModulePullback_presentation_over g G (q.X i) (q.presentation i)
+  exact ⟨(TopologicalSpace.Opens.map g.hom.base).obj (q.X i), hi,
+    p.isQuasicoherent⟩
 
 end AlgebraicGeometry.RingedSpace
