@@ -8619,3 +8619,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/E1/Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular (stage 3; reviewer PASS; first push; landing 20261012T165510-L-2932558 (interface); batch 20261012T165503; modules 2; new nodes 1)
 - 16:55 L: merged deliver/E3/Sheaf.AlgebraicGeometry.AffineAlgebraExactDerivedCounitIso (stage 3; reviewer PASS; first push; landing 20261012T165510-L-2932678 (interface); batch 20261012T165503; modules 2; new nodes 1)
 - 16:55 L: merged deliver/E3/Sheaf.Paper.MLCohomologyPowersIdealKernelBound (stage 3; reviewer PASS; first push; landing 20261012T165511-L-2932905 (proof); batch 20261012T165503; modules 1; new nodes 0)
+- 16:55 L: merged deliver/F2/Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections (stage 3; reviewer PASS; first push; landing 20261012T165511-L-2933020 (proof); batch 20261012T165503; modules 1; new nodes 0)

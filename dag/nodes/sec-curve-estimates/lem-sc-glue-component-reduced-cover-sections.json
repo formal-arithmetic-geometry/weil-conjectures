@@ -25,54 +25,38 @@
  ],
  "proof": [
   {
-   "text": "Write $X^\\circ=X\\setminus T$ and $W_i=(Z_i\\cap X^\\circ)_{\\mathrm{top}}$. Each $Z_i\\cap Z_j$ is closed in $X$ by [def-weil-closed-immersion], so their finite union $T$ is closed and $X^\\circ$ is open. If a point of $X^\\circ$ lay in both $W_i$ and $W_j$ with $i\\ne j$, it would lie in $T$; hence the $W_i$ are pairwise disjoint. They cover $X^\\circ$ because the $Z_i$ cover $X$ set theoretically. Each $W_i$ is closed in $X^\\circ$, and its complement is the finite union of the other closed $W_j$; thus each $W_i$ is also open. This includes $r=0$ (then $X^\\circ=\\emptyset$) and $r=1$ (then $T=\\emptyset$).",
+   "text": "For each index a the image of i a is closed by [def-weil-closed-immersion]. The finite union T of pairwise intersections is therefore closed. The set W a = T complement intersect range (i a) equals the complement of T union the images with index b different from a: the forward inclusion uses the definition of T, and the reverse inclusion uses the covering hypothesis. Thus W a is open. A point in two distinct W a would lie in T, so the W a are disjoint; their union is T complement by distributivity and the covering hypothesis. All these arguments are implemented directly with finite unions and set membership.",
    "uses": [
     "def-weil-closed-immersion"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NE (varieties-lemma-glue-invertible-sheaves), proof, first paragraph after setting T; finite closed-cover topology written out"
-   }
+   "elementary": true
   },
   {
-   "text": "Give $W_i$ its open subscheme structure in $X^\\circ$ [def-pc-scheme]. The restriction of the closed immersion $Z_i\\hookrightarrow X$ to $W_i$ is a closed immersion with underlying image all of $W_i$ [def-weil-closed-immersion]. On any affine open $V=\\operatorname{Spec}R\\subseteq W_i$, it is $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$ for the ideal $I=\\mathcal I_i(V)$ [def-sbc-closed-immersion-ideal-sheaf], and full support means $V(I)=\\operatorname{Spec}R=V(0)$. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], $\\sqrt I=\\sqrt0$. Since $V$ is open in the reduced scheme $X$, $R$ is reduced by [def-pc-reduced-scheme], so $\\sqrt0=0$; hence $I=0$. Thus the restricted closed immersion is an isomorphism on every affine open $V$ and consequently $Z_i\\setminus T\\cong W_i$ as schemes over $X^\\circ$. The $W_i$ are disjoint open subschemes covering $X^\\circ$, so their scheme-theoretic union is $X^\\circ$: on every affine open its defining ideal is locally the zero ideal, since one $W_i$ contains each point.",
+   "text": "For an open V contained in T complement, set U a = V intersect W a, viewed as an open of X [def-pc-scheme]. Then the U a cover V and the inverse images of U a and V under i a are equal. The restricted closed immersion i a on U a is surjective: each point of U a is in the image of i a. Its target is reduced as an open of the reduced scheme X [def-pc-reduced-scheme]. Apply Mathlib AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective to obtain an isomorphism. Its map on global sections, transported by arrowResLEAppIso, makes (i a).app (U a) an isomorphism of rings. The equality of the inverse images gives a bijection e a = (i a).appLE (U a) ((i a) inverse image V) from sections on U a to the desired component sections.",
    "uses": [
-    "def-pc-scheme",
     "def-weil-closed-immersion",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-pc-scheme",
     "def-pc-reduced-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NE (varieties-lemma-glue-invertible-sheaves), proof, first paragraph: 'As X is reduced we have X minus T = union (Z_i minus T) as schemes'; affine ideal argument supplied"
-   }
+   "elementary": false
   },
   {
-   "text": "For an open $U\\subseteq X^\\circ$, the finitely many $U_i=U\\cap W_i$ are pairwise disjoint opens covering $U$ by step 1. The structure sheaf of the scheme [def-pc-scheme] satisfies the sheaf axiom, so a section on $U$ is uniquely a tuple of sections on the $U_i$: compatibility on $U_i\\cap U_j=\\emptyset$ is automatic, since a sheaf of rings has the unique section on the empty open. By step 2, $U_i\\cong U\\cap Z_i$ as open subschemes of $Z_i$; restriction therefore identifies $\\mathcal O_X(U_i)$ with $\\mathcal O_{Z_i}(U\\cap Z_i)$. Combining these identifications gives the asserted restriction isomorphism, also when a factor is empty or when $U=\\emptyset$.",
+   "text": "Naturality, Scheme.Hom.map_appLE, identifies restriction from V to U a followed by e a with (i a).app V. Injectivity of all e a and TopCat.Sheaf.eq_of_locally_eq' give injectivity of the original map. For surjectivity, choose the unique preimage under each proved bijection e a of the given component section. Equal indices are compatible trivially; distinct U a have empty intersection, whose structure-sheaf sections form a subsingleton. TopCat.Sheaf.existsUnique_gluing' glues the compatible family on the cover of V. The naturality factorization gives the required component sections. Empty opens and an empty index type are included by the same sheaf theorems.",
    "uses": [
     "def-pc-scheme"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NE (varieties-lemma-glue-invertible-sheaves), proof, first remark and the displayed product identity in the transition-function paragraph"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-closed-immersion",
   "def-pc-scheme",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
   "def-pc-reduced-scheme"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09NE, proof, first paragraph and transition-function paragraph; local source absent, checked against the Stacks Project web edition"
+  "place": "Stacks Project Tag 09NE, proof, first paragraph and product formula, verified against https://stacks.math.columbia.edu/tag/09NE on 2026-10-13; Lean proof by F2 uses Mathlib isIso_of_isClosedImmersion_of_surjective and sheaf unique gluing instead of the explicit affine ideal argument"
  },
  "mathlib_searches": [
   {
@@ -151,5 +135,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T165511-L-2933020",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
