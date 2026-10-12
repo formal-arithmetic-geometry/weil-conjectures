@@ -32,6 +32,57 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+/-- Specialize the weakly regular module theorem to the ring, transporting its homology
+vanishing along the degreewise tensor-unit isomorphisms. Source: Stacks Tag 062F
+(blueprint: lem-sc-smooth-proper-diagonal-koszul-regular). -/
+private theorem isKoszulRegular_of_isWeaklyRegular {R : Type u} [CommRing R] {r : ℕ} (g : Fin r → R)
+    (h : RingTheory.Sequence.IsWeaklyRegular R (List.ofFn g)) :
+    RingTheory.Sequence.IsKoszulRegular g := by
+  let e : ExteriorAlgebra.koszulComplexTensor R r g R ≅
+      ExteriorAlgebra.koszulComplex R r g :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun n ↦ (TensorProduct.rid R (⋀[R]^n (Fin r →₀ R))).toModuleIso)
+      (by
+        intro i j hij
+        have he : i = j + 1 := by simpa using hij.symm
+        subst i
+        simp only [ExteriorAlgebra.koszulComplexTensor, ExteriorAlgebra.koszulComplex,
+          ChainComplex.of_d]
+        ext1
+        apply TensorProduct.ext
+        ext x
+        simp)
+  intro n hn
+  exact (RingTheory.Sequence.isKoszulRegularOn_of_isWeaklyRegular R g h n hn).of_iso
+    ((HomologicalComplex.homologyFunctor _ _ n).mapIso e.symm)
+
+/-- A closed immersion on an affine open is the spectrum of the quotient by its section
+kernel. Surjectivity gives the ring isomorphism by the first isomorphism theorem; naturality
+of the affine spectrum isomorphism proves compatibility over the open. Source: the affine
+closed-immersion description used in Stacks Tag 068C
+(blueprint: lem-sc-smooth-proper-diagonal-koszul-regular). -/
+private theorem affine_closedImmersion_quotient {X Y : Scheme.{u}} (i : X ⟶ Y) [IsClosedImmersion i]
+    (U : Y.Opens) (hU : IsAffineOpen U) :
+    ∃ e : (i ⁻¹ᵁ U).toScheme ≅
+        Spec (CommRingCat.of (Γ(Y, U) ⧸ RingHom.ker (i.app U).hom)),
+      i ∣_ U ≫ U.toSpecΓ = e.hom ≫
+        Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (RingHom.ker (i.app U).hom))) := by
+  let φ := (i.app U).hom
+  have hb : Function.Bijective φ.kerLift :=
+    ⟨φ.kerLift_injective, Ideal.Quotient.lift_surjective_of_surjective _ _
+      (i.app_surjective U hU)⟩
+  let er := (RingEquiv.ofBijective φ.kerLift hb).toCommRingCatIso
+  refine ⟨(hU.preimage i).isoSpec ≪≫ Scheme.Spec.mapIso er.op, ?_⟩
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.op_hom, Scheme.Spec_map,
+    Quiver.Hom.unop_op, Category.assoc, ← Spec.map_comp]
+  change i ∣_ U ≫ U.toSpecΓ = (i ⁻¹ᵁ U).toSpecΓ ≫
+    Spec.map (CommRingCat.ofHom (φ.kerLift.comp (Ideal.Quotient.mk (RingHom.ker φ))))
+  have hc : φ.kerLift.comp (Ideal.Quotient.mk (RingHom.ker φ)) = φ := by
+    ext x
+    rfl
+  rw [hc]
+  exact (Scheme.Opens.toSpecΓ_naturality i U).symm
+
 /-- The closed diagonal of a finite type smooth morphism of pure relative dimension `d`
 over a Noetherian scheme is a Koszul-regular immersion of codimension `d`, its
 pushed-forward structure sheaf in degree zero is perfect, and the diagonal is proper.
@@ -75,6 +126,39 @@ theorem smooth_diagonal_koszul_regular_perfect_proper {X S : Scheme.{u}}
           ((Scheme.Modules.pushforward (pullback.diagonal f)).obj
             (SheafOfModules.unit X.ringCatSheaf))) ∧
     IsProper (pullback.diagonal f) := by
-  sorry
+  have hlocal : ∀ y : (pullback f f : Scheme.{u}),
+      ∃ U : (pullback f f).Opens, y ∈ U ∧ IsAffineOpen U ∧
+        ∃ (I : Ideal (Γ(pullback f f, U))) (r : ℕ) (g : Fin r → Γ(pullback f f, U)),
+          I = Ideal.span (Set.range g) ∧ RingTheory.Sequence.IsKoszulRegular g ∧
+          (∃ e : ((pullback.diagonal f) ⁻¹ᵁ U).toScheme ≅
+              Spec (CommRingCat.of (Γ(pullback f f, U) ⧸ I)),
+            (pullback.diagonal f) ∣_ U ≫ U.toSpecΓ =
+              e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ∧
+          (I = ⊤ ∨ r = d) := by
+    intro y
+    obtain ⟨U, hy, hgen⟩ := exists_isRegular_smooth_diagonal_generators d f y
+    let I := RingHom.ker ((pullback.diagonal f).app U.1).hom
+    have hquot := affine_closedImmersion_quotient (pullback.diagonal f) U.1 U.2
+    refine ⟨U.1, hy, U.2, I, ?_⟩
+    rcases hgen with htop | ⟨l, hlen, hreg, hspan⟩
+    · refine ⟨1, fun _ ↦ 1, ?_, ?_, hquot, Or.inl htop⟩
+      · rw [show I = ⊤ from htop]
+        simp
+      · apply isKoszulRegular_of_isWeaklyRegular
+        rw [List.ofFn_succ, List.ofFn_zero]
+        exact (RingTheory.Sequence.isWeaklyRegular_singleton_iff _ _).mpr
+          (isUnit_one.isSMulRegular _)
+    · refine ⟨l.length, l.get, ?_, ?_, hquot, Or.inr hlen⟩
+      · change RingHom.ker ((pullback.diagonal f).app U.1).hom = _
+        rw [← hspan]
+        ext x
+        simp
+      · apply RingTheory.Sequence.IsRegular.isKoszulRegular
+        simpa only [List.ofFn_get] using hreg
+  refine ⟨hlocal, ?_, inferInstance⟩
+  apply (koszulRegular_closedImmersion_perfect (pullback.diagonal f) ?_).2.2
+  intro y
+  obtain ⟨U, hy, hU, I, r, g, hspan, hreg, hquot, _⟩ := hlocal y
+  exact ⟨U, hy, hU, I, r, g, hspan, hreg, hquot⟩
 
 end AlgebraicGeometry
