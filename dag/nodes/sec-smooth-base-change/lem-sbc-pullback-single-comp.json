@@ -14,12 +14,17 @@
  ],
  "proof": [
   {
-   "text": "Represent F[0] by the single cochain complex on F. The levelwise composition isomorphism is the sheaf pullback composition isomorphism in degree zero; in every other degree both routes are the unique zero morphisms. The levelwise single comparison is identity in degree zero and the unique zero-object comparison elsewhere. Thus the two routes agree degreewise.",
+   "text": "For arbitrary additive functors G and H, compare their levelwise single-complex comparisons with the single-complex comparison for G ⋙ H. Extensionality reduces equality to each integer degree. At the supported degree use singleMapHomologicalComplex_hom_app_self and functoriality; at every other degree use singleMapHomologicalComplex_hom_app_ne and preservation of zero morphisms. Prove likewise compatibility with an arbitrary natural isomorphism e : G ≅ H, degreewise using the single-complex comparison and the single functor on e.hom.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply the homotopy quotient and localization to this equality. Expand mapDerivedCategorySingleFunctor and the composition and natural-isomorphism comparisons using their factorization equations; naturality moves each factor past the levelwise comparison and intermediate factors cancel. Their restrictions define the bounded-below comparisons. The fully faithful inclusion of D⁺ into D reflects equality. Compose with the inverse underived sheaf composition comparison to obtain exactly the displayed inverse orientation. No hypotheses on π₁ or π₂ are needed, so identities and the zero sheaf satisfy the same calculation.",
+   "text": "Expand each mapDerivedCategorySingleFunctor component as mapDerivedCategoryFactors.hom followed by Q of the singleMapHomologicalComplex component (single_hom). For composition move the factorization comparison across the localized single comparison by mapDerivedCategoryFactors_hom_naturality_assoc; combine Q maps, use the degreewise equality, and apply mapDerivedCategoryCompIso_fac, whose levelwise composition comparison is the identity. For a natural isomorphism use mapDerivedCategoryNatIso_fac_assoc followed by the second degreewise equality. This proves derived composition compatibility and derived natural-isomorphism compatibility separately, without passing through the homotopy quotient.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the faithful inclusion DerivedCategory.Plus.ι to each bounded-below compatibility equation. The inclusion lemmas for mapDerivedCategoryPlusSingleFunctor, mapDerivedCategoryPlusCompIso, and mapDerivedCategoryPlusNatIso reduce them to the corresponding proved unbounded equations; maps of the restricted functors and the single functor agree definitionally with their unbounded maps. Specialize to G = π₂* and H = π₁* and e = upperStarComp. Cancel the epimorphism upperStarPlusComp.hom at F[0], expand its two factors, use the two bounded-below equations, then cancel the single-functor image of e.hom followed by e.inv. This is exactly the displayed inverse orientation.",
    "uses": [],
    "elementary": true
   }
@@ -27,8 +32,8 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "dag/nodes/sec-smooth-base-change/lem-sbc-pullback-comparison-comp.json; WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
-  "place": "Proof step 2 (coefficient identity); definitions mapDerivedCategoryPlusSingleFunctor, mapDerivedCategoryPlusCompIso, mapDerivedCategoryPlusNatIso, and their factorization lemmas"
+  "document": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor; Mathlib.Algebra.Homology.Additive; Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor",
+  "place": "singleMapHomologicalComplex component lemmas; mapDerivedCategoryCompIso_fac; mapDerivedCategoryNatIso_fac; inclusion component lemmas; complete Lean proof by A2, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -106,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T3",
+  "reviewer": "X-83bcf",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T110319-L-621902",
+  "landing": "20261012T135214-L-1654653",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature with the node statement and the proof with its recorded route; delivery and sole direct importer compile cleanly, and all eight proved declarations use only the three permitted axioms."
  }
 }
