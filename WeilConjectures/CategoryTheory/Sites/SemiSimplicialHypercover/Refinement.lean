@@ -330,3 +330,30 @@ lemma refinement_obj_prop (hU : ∀ k, P (U.obj k)) (hW : ∀ k, P (W k)) (n : �
 end Closure
 
 end CategoryTheory.SemiSimplicialObject
+
+namespace CategoryTheory.ObjectProperty
+
+open Limits
+
+variable {C : Type u} [Category.{v} C] [HasFiniteLimits C] (P : ObjectProperty C)
+  [P.IsClosedUnderIsomorphisms] [P.IsClosedUnderLimitsOfShape (Discrete.{0} PEmpty)]
+  [P.IsClosedUnderLimitsOfShape WalkingCospan]
+
+/-- A property of objects which is stable under isomorphisms, terminal objects and pullbacks is
+stable under all finite limits. -/
+lemma isClosedUnderLimitsOfShape_of_terminal_of_pullback (J : Type) [SmallCategory J]
+    [FinCategory J] : P.IsClosedUnderLimitsOfShape J := by
+  have : HasTerminal P.FullSubcategory := inferInstance
+  have : HasPullbacks P.FullSubcategory := inferInstance
+  have : HasFiniteLimits P.FullSubcategory := hasFiniteLimits_of_hasTerminal_and_pullbacks
+  have : PreservesFiniteLimits P.ι := preservesFiniteLimits_of_preservesTerminal_and_pullbacks _
+  exact P.isClosedUnderLimitsOfShape_of_preservesLimitsOfShape_ι J
+
+/-- A property of objects which is stable under isomorphisms, terminal objects and pullbacks is
+stable under finite products. -/
+lemma isClosedUnderFiniteProducts_of_terminal_of_pullback : P.IsClosedUnderFiniteProducts where
+  isClosedUnderLimitsOfShape J _ := by
+    have := Fintype.ofFinite J
+    exact P.isClosedUnderLimitsOfShape_of_terminal_of_pullback _
+
+end CategoryTheory.ObjectProperty
