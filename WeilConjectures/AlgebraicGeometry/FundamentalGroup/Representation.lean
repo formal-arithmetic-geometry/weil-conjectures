@@ -125,6 +125,17 @@ lemma forgetStalkEquiv_symm_naturality {F F' : Y.FiniteLocallyConstantModule Λ}
       FiniteLocallyConstant.stalkMap s ((forget Y Λ).map f) ((forgetStalkEquiv s F).symm x) := by
   rw [Equiv.symm_apply_eq, forgetStalkEquiv_naturality, Equiv.apply_symm_apply]
 
+/-- The stalk of the underlying sheaf of sets of `F` at the germ of a section is the germ of
+the section in the stalk of `F`. -/
+lemma forgetStalkEquiv_toPresheafFiber (F : Y.FiniteLocallyConstantModule Λ)
+    (X : Y.Etale) (x : (pointSmallEtale s).fiber.obj X) (a : F.obj.obj.obj (op X)) :
+    forgetStalkEquiv s F
+        ((pointSmallEtale s).toPresheafFiber X x ((forget Y Λ).obj F).obj.obj a) =
+      ((pointSmallEtale s).toPresheafFiber X x F.obj.obj).hom a :=
+  ConcreteCategory.congr_hom
+    ((pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app (forgetModule Λ) X x
+      F.obj.obj) a
+
 end Stalk
 section Action
 

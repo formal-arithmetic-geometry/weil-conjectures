@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocalMonodromy
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapPow
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.Compactification.Defs
 
@@ -80,21 +81,6 @@ theorem exists_geometricGaloisFrobenius_pow_apply_eq [Finite k] [LocallyOfFinite
   rw [← hs]
   refine h.symm.trans ?_
   exact congrArg s.base (Subsingleton.elim _ _)
-
-variable {f} {Y : Scheme.{u}} {g : Y ⟶ Spec (.of k)}
-
-/-- The base change to `k̄` of a morphism over a finite field `k` commutes with the powers of the
-geometric Galois Frobenii. -/
-@[reassoc]
-theorem geometricFiberMap_comp_geometricGaloisFrobenius_pow [Finite k] (φ : X ⟶ Y)
-    (h : φ ≫ g = f) (m : ℕ) :
-    geometricFiberMap φ h ≫ (g.geometricGaloisFrobenius ^ m).hom =
-      (f.geometricGaloisFrobenius ^ m).hom ≫ geometricFiberMap φ h := by
-  induction m with
-  | zero => exact (Category.comp_id _).trans (Category.id_comp _).symm
-  | succ m ih =>
-    rw [pow_succ, pow_succ, Aut.Aut_mul_def, Aut.Aut_mul_def, Iso.trans_hom, Iso.trans_hom,
-      geometricFiberMap_comp_geometricGaloisFrobenius_assoc, ih, Category.assoc]
 
 end AlgebraicGeometry.Scheme.Hom
 

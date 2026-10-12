@@ -58,17 +58,6 @@ section Germs
 
 variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
 
-lemma FiniteLocallyConstantModule.forgetStalkEquiv_toPresheafFiber {Λ : Type (u + 1)}
-    [CommRing Λ] [Finite Λ] (F : Y.FiniteLocallyConstantModule Λ) (V : Y.Etale)
-    (v : (pointSmallEtale s).fiber.obj V) (z : ToType (F.obj.obj.obj (op V))) :
-    FiniteLocallyConstantModule.forgetStalkEquiv s F
-        ((pointSmallEtale s).toPresheafFiber V v ((FiniteLocallyConstantModule.forget Y Λ).obj
-          F).obj.obj z) =
-      (pointSmallEtale s).toPresheafFiber V v F.obj.obj z :=
-  ConcreteCategory.congr_hom
-    ((pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app
-      (FiniteLocallyConstantModule.forgetModule Λ) V v F.obj.obj) z
-
 lemma FiniteLocallyConstant.isoStalkEquiv_toPresheafFiber {F : Y.FiniteLocallyConstant}
     {P : Y.FiniteEtale} (i : F ≅ (FiniteEtale.toFiniteLocallyConstant Y).obj P) (V : Y.Etale)
     (v : (pointSmallEtale s).fiber.obj V) (z : ToType (F.obj.obj.obj (op V))) :

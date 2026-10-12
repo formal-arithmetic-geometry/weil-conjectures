@@ -352,21 +352,6 @@ section Free
 
 variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
 
-omit [Finite Λ] in
-/-- The stalk of the underlying sheaf of sets of `F` at the germ of a section is the germ of
-the section in the stalk of `F`. -/
-lemma forgetStalkEquiv_toPresheafFiber [Finite Λ] (F : Y.FiniteLocallyConstantModule Λ)
-    (X : Y.Etale) (x : (pointSmallEtale s).fiber.obj X) (a : F.obj.obj.obj (op X)) :
-    forgetStalkEquiv s F
-        ((pointSmallEtale s).toPresheafFiber X x ((forget Y Λ).obj F).obj.obj a) =
-      ((pointSmallEtale s).toPresheafFiber X x F.obj.obj).hom a := by
-  have h := ConcreteCategory.congr_hom
-    ((pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app (forgetModule Λ) X x
-      F.obj.obj) a
-  refine Eq.trans ?_ h
-  simp [forgetStalkEquiv]
-  rfl
-
 variable (Λ) in
 /-- The basis of the stalk `Λ[P]_s = Λ[P_s]` of the free sheaf on a finite étale `Y`-scheme `P`,
 indexed by the geometric fibre `P_s`. -/
