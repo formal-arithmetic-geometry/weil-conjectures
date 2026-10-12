@@ -1,0 +1,104 @@
+{
+ "id": "lem-pc-topological-cech-zero-gluing-iso",
+ "kind": "statement",
+ "title": "The restriction map to degree-zero Čech cohomology is invertible",
+ "statement": "Let $X$ be a topological space, $U_i$ an open cover ($\\sup_i U_i=X$), and $F$ any abelian sheaf [def-sc-topological-abelian-cohomology]. The canonical restriction map $F(X)\\to\\check H^0(U,F)$ is an isomorphism, including empty and infinite covers.",
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2, zero-row restriction identification; source CechCohomology.lean:181-203"
+ },
+ "proof": [
+  {
+   "text": "Use the proved source isIso_toCechCohomologyZero_app. The homology projection is invertible in degree zero. The sheaf gluing theorem identifies restriction families with zero cocycles, and separatedness proves injectivity. The Fin-1 tuple intersections themselves cover X, so empty covers are included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2, zero-row restriction identification; source CechCohomology.lean:181-203"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural comparison from Cech cohomology to sheaf cohomology compatible with connecting morphisms",
+   "results": "{\"t\": \"2026-10-12T21:41:49Z\", \"tool\": \"leanfinder\", \"query\": \"natural comparison from Cech cohomology to sheaf cohomology compatible with connecting morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue\"], \"digest\": \"af48ead6015e9afc\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; source library declarations used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*comparison|Cech.*Comparison",
+   "results": "{\"t\": \"2026-10-12T21:42:26Z\", \"tool\": \"grep\", \"query\": \"cech.*comparison|Cech.*Comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; source library declarations used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology canonical comparison injective resolution double complex connecting homomorphism",
+   "results": "{\"t\": \"2026-10-12T21:45:19Z\", \"tool\": \"leansearch\", \"query\": \"Cech cohomology canonical comparison injective resolution double complex connecting homomorphism\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction augmentation from global sections of an injective sheaf to its Cech complex is a quasi-isomorphism",
+   "results": "{\"t\": \"2026-10-12T22:32:45Z\", \"tool\": \"leanfinder\", \"query\": \"restriction augmentation from global sections of an injective sheaf to its Cech complex is a quasi-isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"CategoryTheory.instIsIsoToRightDerivedZero'\", \"CochainComplex.isKInjective_iff_of_iso\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\"], \"digest\": \"ec433737b04fe3ad\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; source library declarations used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemExistence",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-comparison-system-existence",
+   "place": "Augmented injective Čech double complex and packaging of its comparison maps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Topology.Sheaves.CechCohomology",
+  "declaration": "TopCat.Sheaf.isIso_toCechCohomologyZero_app",
+  "statement": "lemma isIso_toCechCohomologyZero_app (hU : iSup U = ⊤)\n    (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :\n    IsIso ((toCechCohomologyZero U).app F)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T234221-L-2125679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T234221-L-2125679",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

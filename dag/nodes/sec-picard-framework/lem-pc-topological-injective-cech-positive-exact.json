@@ -1,0 +1,104 @@
+{
+ "id": "lem-pc-topological-injective-cech-positive-exact",
+ "kind": "statement",
+ "title": "Positive exactness of injective topological Čech cochains",
+ "statement": "Let $X$ be a topological space, $U_i$ any family of opens, and $I$ an injective abelian sheaf [def-sc-topological-abelian-cohomology]. Its ordered Čech complex is exact in every degree $q+1$, for every $q\\in\\mathbf N$. No covering hypothesis or finiteness hypothesis is needed.",
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EP",
+  "place": "Tag 01EP, injective Čech acyclicity; source WeilConjectures/Topology/Sheaves/Cech.lean:288-307"
+ },
+ "proof": [
+  {
+   "text": "Use the source library theorem exactAt_cechComplex_of_injective. Its proved argument embeds the presheaf in its Godement presheaf, splits that embedding by injectivity, and transports the explicit Godement Čech contraction through the splitting. This statement has no remaining proof hole.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/Topology/Sheaves/Cech.lean",
+  "place": "Tag 01EP, injective Čech acyclicity; source WeilConjectures/Topology/Sheaves/Cech.lean:288-307"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural comparison from Cech cohomology to sheaf cohomology compatible with connecting morphisms",
+   "results": "{\"t\": \"2026-10-12T21:41:49Z\", \"tool\": \"leanfinder\", \"query\": \"natural comparison from Cech cohomology to sheaf cohomology compatible with connecting morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue\"], \"digest\": \"af48ead6015e9afc\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; source library declarations used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*comparison|Cech.*Comparison",
+   "results": "{\"t\": \"2026-10-12T21:42:26Z\", \"tool\": \"grep\", \"query\": \"cech.*comparison|Cech.*Comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; source library declarations used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology canonical comparison injective resolution double complex connecting homomorphism",
+   "results": "{\"t\": \"2026-10-12T21:45:19Z\", \"tool\": \"leansearch\", \"query\": \"Cech cohomology canonical comparison injective resolution double complex connecting homomorphism\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction augmentation from global sections of an injective sheaf to its Cech complex is a quasi-isomorphism",
+   "results": "{\"t\": \"2026-10-12T22:32:45Z\", \"tool\": \"leanfinder\", \"query\": \"restriction augmentation from global sections of an injective sheaf to its Cech complex is a quasi-isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"CategoryTheory.instIsIsoToRightDerivedZero'\", \"CochainComplex.isKInjective_iff_of_iso\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\"], \"digest\": \"ec433737b04fe3ad\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; source library declarations used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemExistence",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-comparison-system-existence",
+   "place": "Augmented injective Čech double complex and packaging of its comparison maps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Topology.Sheaves.Cech",
+  "declaration": "TopCat.Presheaf.exactAt_cechComplex_of_injective",
+  "statement": "theorem exactAt_cechComplex_of_injective\n    (I : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) [Injective I]\n    (q : ℕ) : ((cechComplex U).obj I.obj).ExactAt (q + 1)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T234221-L-2125679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T234221-L-2125679",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

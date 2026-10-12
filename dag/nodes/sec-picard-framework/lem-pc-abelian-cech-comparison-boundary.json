@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-abelian-cech-comparison-boundary",
+ "kind": "statement",
+ "title": "Boundary compatibility for canonical augmentation quotients",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U_i$ an open cover, $0\\to F_1\\to F_2\\to F_3\\to0$ a short exact sequence of abelian sheaves [def-sc-topological-abelian-cohomology] surjective on sections over every tuple intersection, and $q\\geq0$. Suppose $c:\\check H^{q+1}(U,F_1)\\to H^{q+1}(X,F_1)$ and $d:\\check H^q(U,F_3)\\to H^q(X,F_3)$ satisfy IsAbelianCechComparison [def-pc-abelian-cech-comparison-construction]. Then $c\\circ\\check\\delta^q=\\delta_H^q\\circ d$. In particular the construction hypothesis, not degree-zero normalization alone, forces compatibility.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-topological-abelian-cohomology",
+  "def-pc-abelian-cech-comparison-construction"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2, augmented double complex; Tag 013T, horseshoe resolutions; Tag 0117, functorial homology sequence"
+ },
+ "proof": [
+  {
+   "text": "Choose horseshoe resolutions of the three sheaves. Their degreewise split exact sequence remains exact after sections, products, and finite-diagonal totalization. The assumed tuple surjectivity also makes the coefficient Čech sequence short exact.",
+   "uses": [
+    "lem-sp-horseshoe-prescribed-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both sets of augmentations give morphisms of short exact complex sequences. Naturality of homology connecting maps yields the beta and alpha boundary squares. The constant-sheaf adjunction identifies the section boundary with the Ext boundary via the usual lift-differentiate-lift cocycle computation.",
+   "uses": [
+    "def-pc-abelian-cech-comparison-construction",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the canonical quotient equations on these horseshoe resolutions. Cancel H(alpha) in degree q+1 and the canonical section/Ext identification.",
+   "uses": [
+    "lem-pc-abelian-cech-alpha-quasi-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-horseshoe-prescribed-resolutions",
+  "def-pc-abelian-cech-comparison-construction",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-pc-abelian-cech-alpha-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2, augmented double complex; Tag 013T, horseshoe resolutions; Tag 0117, functorial homology sequence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural comparison from Cech cohomology to sheaf cohomology compatible with connecting morphisms",
+   "results": "{\"t\": \"2026-10-12T21:41:49Z\", \"tool\": \"leanfinder\", \"query\": \"natural comparison from Cech cohomology to sheaf cohomology compatible with connecting morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue\"], \"digest\": \"af48ead6015e9afc\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; source library declarations used where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*comparison|Cech.*Comparison",
+   "results": "{\"t\": \"2026-10-12T21:42:26Z\", \"tool\": \"grep\", \"query\": \"cech.*comparison|Cech.*Comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; source library declarations used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology canonical comparison injective resolution double complex connecting homomorphism",
+   "results": "{\"t\": \"2026-10-12T21:45:19Z\", \"tool\": \"leansearch\", \"query\": \"Cech cohomology canonical comparison injective resolution double complex connecting homomorphism\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction augmentation from global sections of an injective sheaf to its Cech complex is a quasi-isomorphism",
+   "results": "{\"t\": \"2026-10-12T22:32:45Z\", \"tool\": \"leanfinder\", \"query\": \"restriction augmentation from global sections of an injective sheaf to its Cech complex is a quasi-isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"CategoryTheory.instIsIsoToRightDerivedZero'\", \"CochainComplex.isKInjective_iff_of_iso\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\"], \"digest\": \"ec433737b04fe3ad\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; source library declarations used where applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemExistence",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-comparison-system-existence",
+   "place": "Augmented injective Čech double complex and packaging of its comparison maps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonBoundary",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.abelianCechComparison_boundary",
+  "statement": "theorem abelianCechComparison_boundary\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤)\n    (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))\n    (hT : T.ShortExact)\n    (hg : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      Function.Surjective (T.g.hom.app (op (⨅ l, U (y l))))) (q : ℕ)\n    (c : (TopCat.Sheaf.cechCohomologyFunctor U (q + 1)).obj T.X₁ ⟶\n      (Sheaf.functorH (Opens.grothendieckTopology X) (q + 1)).obj T.X₁)\n    (d : (TopCat.Sheaf.cechCohomologyFunctor U q).obj T.X₃ ⟶\n      (Sheaf.functorH (Opens.grothendieckTopology X) q).obj T.X₃)\n    (hc : IsAbelianCechComparison U T.X₁ (q + 1) c)\n    (hd : IsAbelianCechComparison U T.X₃ q d) :\n    TopCat.Sheaf.cechδ U hT hg q ≫ c = d ≫ Sheaf.functorHδ hT q",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/AbelianCechComparisonBoundary.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T234221-L-2125679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T234221-L-2125679",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

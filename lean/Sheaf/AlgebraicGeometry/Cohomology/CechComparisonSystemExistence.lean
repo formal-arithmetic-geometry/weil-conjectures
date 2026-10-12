@@ -6,8 +6,10 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
-import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemComparison
-import Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechAlphaQuasiIso
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonMaps
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonNaturality
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonBoundary
 
 /-! # Existence of normalized additive Cech comparisons
 
@@ -43,5 +45,19 @@ theorem exists_cechComparisonSystem
     {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (hcover : iSup U = ⊤) :
     Nonempty (CechComparisonSystem U hcover) := by
-  sorry
+  classical
+  choose c hc hzero using fun F ↦ exists_abelianCechComparison_maps U hcover F
+    (fun I ↦ abelianCechAlpha_quasiIso U hcover I)
+  let comparison : ∀ q, TopCat.Sheaf.cechCohomologyFunctor U q ⟶
+      Sheaf.functorH (Opens.grothendieckTopology X) q := fun q ↦
+    { app := fun F ↦ c F q
+      naturality := fun F G f ↦
+        abelianCechComparison_naturality U hcover f q (c F q) (c G q) (hc F q) (hc G q) }
+  refine ⟨{ comparison := comparison, zero := ?_, connecting := ?_ }⟩
+  · apply NatTrans.ext
+    funext F
+    exact hzero F
+  · intro T hT hg q
+    exact abelianCechComparison_boundary U hcover T hT hg q
+      (c T.X₁ (q + 1)) (c T.X₃ q) (hc T.X₁ (q + 1)) (hc T.X₃ q)
 end AlgebraicGeometry.Scheme.Modules
