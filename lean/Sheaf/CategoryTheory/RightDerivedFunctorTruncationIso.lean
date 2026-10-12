@@ -39,6 +39,35 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Functor
 
+/-- The long exact sequence puts the cone in degrees at least `n + 1`. -/
+private theorem isGE_cone_of_homology_map
+    {A : Type u₁} [Category.{v₁} A] [Abelian A] [HasDerivedCategory.{w₁} A]
+    (n : ℤ) (T : Pretriangulated.Triangle (DerivedCategory.Plus A))
+    (hT : T ∈ Pretriangulated.distinguishedTriangles)
+    (hiso : ∀ i : ℤ, i ≤ n →
+      IsIso ((DerivedCategory.Plus.homologyFunctor A i).map T.mor₁))
+    (hmono : Mono ((DerivedCategory.Plus.homologyFunctor A (n + 1)).map T.mor₁)) :
+    T.obj₃.IsGE (n + 1) := by
+  rw [← DerivedCategory.Plus.isGE_ι_obj_iff, DerivedCategory.isGE_iff]
+  intro i hi
+  let U := (DerivedCategory.Plus.ι (C := A)).mapTriangle.obj T
+  have hU : U ∈ Pretriangulated.distinguishedTriangles :=
+    (DerivedCategory.Plus.ι (C := A)).map_distinguished T hT
+  have : IsIso ((DerivedCategory.homologyFunctor A i).map U.mor₁) :=
+    hiso i (by lia)
+  have hm : Mono ((DerivedCategory.homologyFunctor A (i + 1)).map U.mor₁) := by
+    by_cases h : i + 1 ≤ n
+    · have : IsIso ((DerivedCategory.homologyFunctor A (i + 1)).map U.mor₁) :=
+        hiso (i + 1) h
+      infer_instance
+    · have h' : i + 1 = n + 1 := by lia
+      rw [h']
+      exact hmono
+  exact (DerivedCategory.HomologySequence.exact₃ U hU i (i + 1)).isZero_X₂
+    ((DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff U hU i).1
+      inferInstance)
+    ((DerivedCategory.HomologySequence.mono_homologyMap_mor₁_iff U hU i (i + 1)).1 hm)
+
 /-- A left exact additive functor between Grothendieck abelian categories preserves
 cohomology isomorphisms through degree `n` under its right derived functor, provided the
 original map is also monic on cohomology in degree `n + 1`.
@@ -76,13 +105,31 @@ theorem mono_homologyFunctor_rightDerivedFunctorPlus_map
     (hmono : Mono ((DerivedCategory.Plus.homologyFunctor A (n + 1)).map c)) :
     ∀ j : ℤ, j ≤ n →
       Mono ((DerivedCategory.Plus.homologyFunctor B j).map (v.rightDerivedFunctorPlus.map c)) := by
-  sorry
+  intro j hj
+  obtain ⟨C, g, h, hT⟩ := Pretriangulated.distinguished_cocone_triangle c
+  have : C.IsGE (n + 1) :=
+    isGE_cone_of_homology_map n (Pretriangulated.Triangle.mk c g h) hT hiso hmono
+  let U := (DerivedCategory.Plus.ι (C := B)).mapTriangle.obj
+    (v.rightDerivedFunctorPlus.mapTriangle.obj (Pretriangulated.Triangle.mk c g h))
+  have hU : U ∈ Pretriangulated.distinguishedTriangles :=
+    (DerivedCategory.Plus.ι (C := B)).map_distinguished _
+      (v.rightDerivedFunctorPlus.map_distinguished _ hT)
+  exact (DerivedCategory.HomologySequence.mono_homologyMap_mor₁_iff
+    U hU (j - 1) j (by lia)).2
+    ((v.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
+      C (n + 1) (q := j - 1) (by lia)).eq_of_src _ _)
 
 /-- The cone argument of Stacks Lemma 05TC gives the epimorphism half in low degrees.
 Source: Stacks Project, Derived Categories, Lemma 05TC, part (2).
 (blueprint: lem-weil-pbc-derived-functor-truncation-iso-epi)
-Proof: apply the long exact cohomology sequence to the image of the cone triangle under the
-right derived functor; the lower cohomology of the cone vanishes, so the displayed map is epic. -/
+Proof: complete the given map to a distinguished triangle in the bounded-below category.
+In each degree `i ≤ n`, surjectivity of the first map makes the second cohomology map zero.
+Injectivity of the first map in degree `i + 1` makes the connecting map zero: use `hiso`
+when `i + 1 ≤ n`, and `hmono` when `i = n`. Exactness at the cone then gives zero
+cohomology in every degree below `n + 1`, hence the cone is `IsGE (n + 1)`.
+Apply the triangulated right derived functor to this triangle. Negative vanishing makes
+the derived cone's degree-`j` cohomology zero for `j ≤ n`. The second map in the derived
+long exact sequence is therefore zero, which makes its first map epic. -/
 theorem epi_homologyFunctor_rightDerivedFunctorPlus_map
     {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
     {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]
@@ -94,7 +141,18 @@ theorem epi_homologyFunctor_rightDerivedFunctorPlus_map
     (hmono : Mono ((DerivedCategory.Plus.homologyFunctor A (n + 1)).map c)) :
     ∀ j : ℤ, j ≤ n →
       Epi ((DerivedCategory.Plus.homologyFunctor B j).map (v.rightDerivedFunctorPlus.map c)) := by
-  sorry
+  intro j hj
+  obtain ⟨C, g, h, hT⟩ := Pretriangulated.distinguished_cocone_triangle c
+  have : C.IsGE (n + 1) :=
+    isGE_cone_of_homology_map n (Pretriangulated.Triangle.mk c g h) hT hiso hmono
+  let U := (DerivedCategory.Plus.ι (C := B)).mapTriangle.obj
+    (v.rightDerivedFunctorPlus.mapTriangle.obj (Pretriangulated.Triangle.mk c g h))
+  have hU : U ∈ Pretriangulated.distinguishedTriangles :=
+    (DerivedCategory.Plus.ι (C := B)).map_distinguished _
+      (v.rightDerivedFunctorPlus.map_distinguished _ hT)
+  exact (DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff U hU j).2
+    ((v.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
+      C (n + 1) (q := j) (by lia)).eq_of_tgt _ _)
 
 set_option linter.style.haveILetI false in
 theorem isIso_homologyFunctor_rightDerivedFunctorPlus_map

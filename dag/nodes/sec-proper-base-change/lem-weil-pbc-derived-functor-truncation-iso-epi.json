@@ -21,20 +21,39 @@
  ],
  "proof": [
   {
-   "text": "Complete the cone argument and long exact cohomology sequence from the parent lemma, retaining only the epi half of the conclusion.",
+   "text": "Complete c to a distinguished triangle L → M → C → L[1] in D⁺(A). Map it to D(A) using the triangulated inclusion. For each i < n + 1, H^i(c) is an isomorphism, hence epic. The long exact sequence makes H^i(M) → H^i(C) zero. The map H^(i+1)(c) is monic by hiso if i + 1 ≤ n, and by hmono otherwise, since then i = n. Thus the connecting map is zero. Exactness at H^i(C), with both adjacent arrows zero, gives H^i(C) = 0. The cohomological characterization of the standard t-structure gives C.IsGE (n + 1). This is the proved private helper isGE_cone_of_homology_map.",
    "uses": [
-    "lem-weil-pbc-derived-functor-truncation-iso"
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-sf-derived-homology-long-exact"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply v.rightDerivedFunctorPlus and the triangulated inclusion into D(B) to obtain a distinguished triangle. Negative vanishing at the bound n + 1 gives zero cohomology of the derived cone in every degree less than n + 1.",
+   "uses": [
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For j ≤ n the derived cone has zero cohomology in degree j. Hence the map H^j(Rv M) → H^j(Rv C) is zero. Apply HomologySequence.epi_homologyMap_mor₁_iff to deduce that H^j(Rv c) is epic.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-derived-functor-truncation-iso"
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-derived-functor-negative-vanishing"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05TC, proof of part (2)"
+  "place": "Lemma 05TC (lemma-negative-vanishing), proof of part (2), with the cone of c; the cone bound follows from the long exact cohomology sequence"
  },
  "mathlib_searches": [
   {
@@ -162,19 +181,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T184359-L-4025378",
+  "landing": "20261012T194132-L-461951",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.Functor.epi_homologyFunctor_rightDerivedFunctorPlus_map",
-   "CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι",
-   "CategoryTheory.Functor.mono_homologyFunctor_rightDerivedFunctorPlus_map"
-  ],
-  "sorry_after": [
-   "CategoryTheory.Functor.epi_homologyFunctor_rightDerivedFunctorPlus_map",
-   "CategoryTheory.Functor.mono_homologyFunctor_rightDerivedFunctorPlus_map"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
