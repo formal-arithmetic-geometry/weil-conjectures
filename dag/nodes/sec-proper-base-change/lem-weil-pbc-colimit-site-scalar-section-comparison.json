@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-colimit-site-scalar-section-comparison",
+ "kind": "statement",
+ "title": "Scalar stage-section representatives and eventual zero",
+ "statement": "In the filtered colimit-site setting of [lem-weil-pbc-colimit-of-sites] and [def-weil-pbc-sites-and-cohomology], let G(j) be abelian stage sheaves, H a diagram of their inverse images, E its specified identifications, and theta their adjoint section transitions. Write beta for the inverse-image units followed by E inverse and assume beta compatibility with H. Let c be a colimiting cocone of H. Fix i and one object X of F(i). For a in Under(i) put B(a)=G(a.right)(F(a.hom)(X)) and C=c.pt(V(i)(X)). Suppose rho(b):B(a)->B(a′) obeys identity and composition laws and mu(a):B(a)->C obeys rho(b);mu(a′)=mu(a). Assume Arrow.mk(rho(b)) equals Arrow.mk of theta evaluated at F(a.hom)(X), and Arrow.mk(mu(a)) equals Arrow.mk of beta followed by c’s coprojection at that object. Then (1) every x in C is mu(a)(z) for some a and z in B(a), and (2) whenever mu(a)(z)=0 there are a′ and b:a->a′ with rho(b)(z)=0. No finite product or arbitrary product cocone is part of the assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, equation Tag 09YM and proof of Lemma Tag 09YN; finite-cover section comparison by Sites, Tag 0738, and abelian extension by Modules on Sites, Tag 03CO; scalar step used in Cohomology on Sites, Tag 09YP"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-colimit-of-sites",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The identity and composition laws of rho define the scalar section functor on Under i with object B(a)=G(a.right)(F(a.hom)(X)); the rho/mu equation defines its cocone with apex C=c.pt(V(i)(X)). Arrow equations include all endpoint transports and identify these maps with theta and beta followed by the coprojections of c.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the inner inverse-image section formula 09YM to each H(j), using E(j) to identify it with the inverse image of G(j). The object and arrow colimit hypotheses lift any finite set of presentations, restriction arrows and relations to a common stage. Their eventual equality makes the simultaneous-refinement category filtered. A common refinement with (i,X) and eventual equality of competing refinements show the diagonal refinement functor is final. Reindex the iterated filtered colimit by composites. Transpose the H transition maps through the inverse-image adjunctions; beta compatibility identifies their evaluated adjuncts with theta, hence with rho by the supplied Arrow equation.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By hQ each Q-cover is the image of a P-stage cover, and by hfinite that image presieve is finite. Apply the abelian finite-cover-site section comparison (Sites 0738 and Modules on Sites 03CO) to H and c evaluated at V(i)(X). The finite products and equalizers in the sheaf condition commute with filtered colimits. Together with the inner comparison and diagonal reindexing, this proves that the supplied scalar cocone with legs mu is colimiting. The supplied Arrow equation on mu identifies its legs with the units followed by c coprojections. Empty covers give zero section groups, so the argument also applies to them.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites-sections",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A filtered colimit of abelian groups is the quotient of stage representatives by eventual equality. Thus each element of C has a representative z in some B(a), proving the first clause. Equality of mu(a)(z) with mu(a)(0) is witnessed by an arrow b:a->a′; additivity identifies rho(b)(0) with zero, proving the second clause. These are the elementwise consequences of the scalar comparison; they do not assert a universal property for any product cocone.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-colimit-of-sites-sections",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, equation Tag 09YM and proof of Lemma Tag 09YN; finite-cover section comparison by Sites, Tag 0738, and abelian extension by Modules on Sites, Tag 03CO; scalar step used in Cohomology on Sites, Tag 09YP"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections on filtered colimit sites are represented at a stage and equality is detected at a later stage",
+   "results": "Service unavailable: Internal Server Error; no absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a filtered colimit of inverse image sheaves on a colimit site have finite stage representatives and a representative of zero vanishes at a later stage",
+   "results": "Concrete.colimit_rep_eq_zero concerns ModuleCat diagrams whose colimit comparison is already established. Condensed and LightCondensed.isColimitLocallyConstantPresheaf are special constructions on profinite sites. No general varying-site scalar comparison found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg scalar.*section|section.*representative in lean/Sheaf/CategoryTheory, lean/WeilConjectures/CategoryTheory and Mathlib/CategoryTheory/Sites; blueprint_refs.py search scalar section and 09YN",
+   "results": "ColimitSiteSections computes only the outer fixed-site colimit. ColimitSiteAbelianSectionUniversality computes one fixed stage sheaf’s inverse image, not a varying G(j) system. VaryingSiteSectionsZeroDetection requires composition isomorphisms and pullback data absent from this interface. CohomologyColimitSitesDegreeZeroDescent additionally requires derived pullback maps and Ext data. No blueprint node matches the scalar interface. General Concrete representative/equality lemmas require the scalar colimit comparison already proved.",
+   "date": "2026-10-13",
+   "verdict": "no matching Lean interface"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteFiniteProductSections",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Scalar 09YM/09YN comparison underlying the finite-product step of Tag 09YP",
+   "via": [
+    "lem-weil-pbc-colimit-site-finite-product-sections",
+    "lem-weil-pbc-colimit-of-sites-cech-complex-colimit-data",
+    "lem-weil-pbc-colimit-of-sites-cech-complex",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteScalarSectionComparison",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteScalarSectionComparison.lean",
+  "declaration": "CategoryTheory.colimitSite_scalar_sections_representatives_and_zero",
+  "statement": "theorem colimitSite_scalar_sections_representatives_and_zero\n    {J : Type u} [SmallCategory J] [IsFiltered J]\n    (F : J ⥤ Cat.{u, u}) (P : ∀ j, Precoverage (F.obj j))\n    [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderComposition]\n    [∀ j, (P j).IsStableUnderBaseChange] [∀ j, (P j).HasPullbacks]\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),\n      R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (F.map a).toFunctor)\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    [∀ (j k : J) (a : j ⟶ k), PreservesFiniteLimits\n      (sheafPullback (F.map a).toFunctor (Type u)\n        (P j).toGrothendieck (P k).toGrothendieck)]\n    [∀ (j k : J) (a : j ⟶ k), PreservesFiniteColimits\n      (sheafPullback (F.map a).toFunctor (Type u)\n        (P j).toGrothendieck (P k).toGrothendieck)]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    [Q.HasIsos] [Q.IsStableUnderComposition] [Q.IsStableUnderBaseChange] [Q.HasPullbacks]\n    (hQ : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n      ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),\n        S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)\n    [∀ j, (V.ι.app j).toFunctor.IsContinuous (P j).toGrothendieck Q.toGrothendieck]\n    (G : ∀ j, Sheaf (P j).toGrothendieck AddCommGrpCat.{u})\n    (θ : ∀ (j k : J) (a : j ⟶ k),\n      (G j).obj ⟶ (F.map a).toFunctor.op ⋙ (G k).obj)\n    (H : J ⥤ Sheaf Q.toGrothendieck AddCommGrpCat.{u})\n    (E : ∀ j, H.obj j ≅\n      (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck Q.toGrothendieck).obj (G j)) :\n    let β := fun (j : J) (X : F.obj j) ↦\n      (((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck Q.toGrothendieck).unit.app (G j)).hom.app (op X)) ≫\n        (E j).inv.hom.app (op ((V.ι.app j).toFunctor.obj X))\n    (∀ (j k : J) (a : j ⟶ k) (X : F.obj j),\n      Arrow.mk (β j X ≫ (H.map a).hom.app (op ((V.ι.app j).toFunctor.obj X))) =\n        Arrow.mk ((θ j k a).app (op X) ≫ β k ((F.map a).toFunctor.obj X))) →\n    ∀ (c : Cocone H), IsColimit c →\n    ∀ (i : J) (X : F.obj i),\n    let B := fun a : Under i ↦\n      (G a.right).obj.obj (op ((F.map a.hom).toFunctor.obj X))\n    let C := c.pt.obj.obj (op ((V.ι.app i).toFunctor.obj X))\n    ∀ (ρ : ∀ {a a' : Under i}, (a ⟶ a') → (B a ⟶ B a'))\n      (μ : ∀ a : Under i, B a ⟶ C),\n      (∀ a : Under i, ρ (𝟙 a) = 𝟙 (B a)) →\n      (∀ {a a' a'' : Under i} (b : a ⟶ a') (b' : a' ⟶ a''),\n        ρ (b ≫ b') = ρ b ≫ ρ b') →\n      (∀ {a a' : Under i} (b : a ⟶ a'), ρ b ≫ μ a' = μ a) →\n      (∀ {a a' : Under i} (b : a ⟶ a'),\n        Arrow.mk (ρ b) = Arrow.mk ((θ a.right a'.right b.right).app\n          (op ((F.map a.hom).toFunctor.obj X)))) →\n      (∀ a : Under i, Arrow.mk (μ a) =\n        Arrow.mk (β a.right ((F.map a.hom).toFunctor.obj X) ≫\n          (c.ι.app a.right).hom.app\n            (op ((V.ι.app a.right).toFunctor.obj\n              ((F.map a.hom).toFunctor.obj X))))) →\n      (∀ x : C, ∃ (a : Under i) (z : B a), μ a z = x) ∧\n      (∀ (a : Under i) (z : B a), μ a z = 0 →\n        ∃ (a' : Under i) (b : a ⟶ a'), ρ b z = 0)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T194136-L-463267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T194136-L-463267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
