@@ -31,12 +31,22 @@
  ],
  "proof": [
   {
-   "text": "The categorical conjugation argument using evaluation isomorphisms and closed-immersion full faithfulness proves this intermediate transport statement.",
+   "text": "For L = tensorPullback(j n) and R = pushforward(j n), choose the existing tensor-pullback adjunction. The closed-immersion theorem makes each counit component invertible. For a natural endomorphism a of L, naturality at the unit, together with the left triangle identity, gives counit(L X) followed by a(X) equal to a(R L X) followed by counit(L X). Naturality of the counit at an arbitrary v : L A -> L B and naturality of a at R(v) then give a(A) followed by v equal to v followed by a(B), after cancellation of the invertible counit. This categorical argument is proved as the private helper reflector_endomorphism_naturality.",
    "uses": [
     "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
     "def-pc-module-pullback"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "At level n put a = (c n).symm composed with d n, an automorphism of tensorPullback(j n). Its component commutes with v n by the preceding argument. Write d(M) = c(M) followed by a(M), reassociate both compatibility equations, and cancel the invertible component a(F). Thus d-compatibility and c-compatibility are equivalent at each level and hence for whole families.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Equiv.subtypeEquivRight to the pointwise equivalence of the two compatibility predicates. This equivalence leaves each underlying family unchanged by definition.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -44,9 +54,10 @@
   "def-pc-module-pullback"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Remark 088F and Lemma 087T"
+  "by": "worker",
+  "group": "H1",
+  "date": "2026-10-13",
+  "description": "Lean implementation of the existing categorical conjugation route: counit isomorphisms, naturality at the unit and at pushed-forward morphisms, and cancellation. No new dependency or intermediate hole."
  },
  "lean": {
   "existing": false,
@@ -101,11 +112,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "X-e1b27",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T202256-L-709901",
+  "landing": "20261012T220520-L-1393566",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module and node statement matched exactly; all files and the listed importer compiled cleanly, with no forbidden declarations or remaining sorry."
  }
 }
