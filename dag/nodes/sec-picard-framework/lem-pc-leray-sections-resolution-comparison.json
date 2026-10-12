@@ -1,0 +1,152 @@
+{
+ "id": "lem-pc-leray-sections-resolution-comparison",
+ "kind": "statement",
+ "title": "Sections of direct image: natural resolution comparison with cycle formula",
+ "statement": "For schemes X,Y [def-pc-scheme] and f:X\\to Y, put D=f_* [def-pc-ringed-spaces-derived-direct-image], G=\\Gamma(Y,-), and H^q(X,-)=R^q\\Gamma(X,-) [pqf-def-cohomology]. There are natural isomorphisms e_q:H^q(X,-)\\to R^q(D\\circ G), after forgetting scalars. For every module sheaf F [def-weil-sheaf-of-modules-category], injective resolution I of F [def-sp-injective-resolutions], and global q-cycle s of \\Gamma(X,I), set K=D(I), T=G(D(I)). There is z in G(Z^q K) whose image under G(iCycles_K) is the restriction of iCycles(s) along the equality f^{-1}(Y)=X. For every c:G(Z^q K)\\to Z^q T satisfying c followed by iCycles_T = G(iCycles_K), e_q sends the class of s, transported by the inverse canonical resolution identification [lem-sp-derived-well-defined], to the class of c(z), transported by the inverse canonical resolution identification for D\\circ G. No edge map and no acyclicity witness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01F2, proof referring to lemma-before-Leray and remark-elucidate-lemma: the identity Gamma(X,I)=Gamma(Y,f_*I); cycle-level expansion by G1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "pqf-def-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "lem-sp-derived-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "The direct-image definition identifies sections over Y with sections on the inverse image of the whole space. Restriction along Opens.map_top and its inverse give inverse additive maps, natural in the module sheaf. Apply these maps in every degree of a complex; presheaf restriction commutes with the differentials and with cochain maps.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "pqf-def-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply homology to these inverse termwise maps after forgetting scalars. Conjugating with the canonical isoRightDerivedObj isomorphisms for chosen injective resolutions gives e_q. For a coefficient morphism, use a resolution comparison extending it: naturality of restriction and of isoRightDerivedObj gives naturality of e_q. A comparison extending the identity gives the same formula for every supplied resolution I.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sp-derived-well-defined",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Global sections preserves the kernel of the degree-q differential. Lift the transported global cycle to z in sections of the cycle sheaf. The inclusion equation characterizes z uniquely. Given any c satisfying its inclusion equation, c(z) is the transported global cycle, by monicity of the cycle inclusion. The homology map induced by the termwise section identification takes the original cycle class to the class represented by c(z). Conjugating with isoRightDerivedObj proves the displayed formula. The cycle quotient is epic, so the formula determines e on every cohomology class; degree zero, zero complexes, and empty schemes obey the same kernel argument.",
+   "uses": [
+    "pqf-def-cohomology",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sp-injective-resolutions",
+  "lem-sp-derived-well-defined",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "lemma-before-Leray and remark-elucidate-lemma, expansion of the termwise identity and kernel lift"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived functors of naturally isomorphic global sections functors are naturally isomorphic after forgetting scalars",
+   "results": "PresheafOfModules.sheafificationCompForgetCompToPresheaf, SheafOfModules.toSheafCompSheafToPresheafIso, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, PresheafOfModules.sheafificationCompToSheaf, CategoryTheory.instIsIsoAppToRightDerivedZero, CategoryTheory.instIsIsoAppFromLeftDerivedZero, CategoryTheory.Functor.rightDerivedZeroIsoSelf",
+   "date": "2026-10-12",
+   "verdict": "no specialized comparison with the required cycle formula; general resolution API found"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-12",
+   "verdict": "no specialized comparison with the required cycle formula; general resolution API found"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*DirectImage|rightDerived.*[iI]so|leray_edge_grothendieck",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+   "date": "2026-10-12",
+   "verdict": "no specialized comparison with the required cycle formula; general resolution API found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between global sections and sections of direct image induces natural isomorphisms on right derived functors with a formula on global cocycles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"iso\"",
+   "results": "Functor.rightDerivedNatIso and localization-derived comparison declarations; their source types require derived-functor/localization data and do not state this module-valued resolution cycle formula.",
+   "date": "2026-10-12",
+   "verdict": "second reading: generic tools only, no replacement statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism of cohomology obtained from an isomorphism of additive section functors and an exact forgetful functor",
+   "results": "Group cohomology isomorphisms with Ext and explicit low-degree complexes; unrelated specializations.",
+   "date": "2026-10-12",
+   "verdict": "second reading: no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LerayEdgeGrothendieckComparison",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "proof, passage over the affine base from higher direct images to cohomology: termwise sections identification in the Leray argument",
+   "via": [
+    "lem-pc-leray-edge-grothendieck-comparison",
+    "lem-pc-leray-edge-vanishing-iso",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LeraySectionsResolutionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/LeraySectionsResolutionComparison.lean",
+  "declaration": "AlgebraicGeometry.leray_sections_resolution_comparison",
+  "statement": "theorem leray_sections_resolution_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    let D := RingedSpace.moduleDirectImage f.toLRSHom.toShHom\n    let G := RingedSpace.globalSectionsFunctor Y.toRingedSpace\n    ∃ e : ∀ q : ℕ,\n      (RingedSpace.moduleCohomology X.toRingedSpace q ⋙ forget₂ _ AddCommGrpCat) ≅\n        ((D ⋙ G).rightDerived q ⋙ forget₂ _ AddCommGrpCat),\n    ∀ (q : ℕ) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n      (I : InjectiveResolution F)\n      (s : (RingedSpace.globalSectionsComplex I).cycles q),\n      let K := (D.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n      let T := ((D ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex\n      ∃ z : G.obj (K.cycles q),\n        (I.cocomplex.X q).val.presheaf.map\n            (eqToHom (congrArg op (Opens.map_top f.base).symm))\n            ((RingedSpace.globalSectionsComplex I).iCycles q s) = G.map (K.iCycles q) z ∧\n        ∀ (c : G.obj (K.cycles q) ⟶ T.cycles q),\n          c ≫ T.iCycles q = G.map (K.iCycles q) →\n          (e q).hom.app F\n              ((I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) q).inv\n                ((RingedSpace.globalSectionsComplex I).homologyπ q s)) =\n            (I.isoRightDerivedObj (D ⋙ G) q).inv (T.homologyπ q (c z))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T095902-L-316306",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T095902-L-316306",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
