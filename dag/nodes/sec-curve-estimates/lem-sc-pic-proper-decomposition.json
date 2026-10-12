@@ -19,25 +19,29 @@
  ],
  "proof": [
   {
-   "text": "**The degree is surjective, with an explicit preimage of $1$.** Let $C$ be a proper smooth connected curve over the algebraically closed field $k$ ([def-sc-curves]). By [lem-sc-smooth-connected-curve-local-rings] (2), $C$ has a closed point $P$. Since $C$ is of finite type over $k$ and $k$ is algebraically closed, $k\\to\\kappa(P)$ is an isomorphism by [lem-weil-pbc-closed-point-residue-field-base], so $P$ is a $k$-rational point (this is the place where the blueprint invokes the Nullstellensatz; with the degree $\\deg\\sum n_Q[Q]=\\sum n_Q$ of [def-sc-divisor] it is not even needed, and with the weighted degree $\\sum n_Q[\\kappa(Q):k]$ of the unit sketch it gives the same value). The divisor $[P]\\in\\operatorname{Div}(C)$ has $\\deg[P]=1$ by the definition of the degree of a divisor ([def-sc-divisor]). The degree on $\\operatorname{Pic}(C)$ is, by [def-sc-pic0], the degree of divisors transported along the isomorphism of abelian groups $\\operatorname{Cl}(C)\\xrightarrow{\\sim}\\operatorname{Pic}(C)$, $D\\mapsto[\\mathcal O_C(D)]$ of [lem-sc-divisor-class-curve]; it is well defined because principal divisors have degree $0$ ([lem-sc-deg-principal-zero]), and it is a homomorphism of groups, since $D\\mapsto\\deg D=\\sum n_Q$ is additive on $\\operatorname{Div}(C)$ and the identification with $\\operatorname{Pic}(C)$ is a group isomorphism. Put $\\lambda:=[\\mathcal O_C(P)]\\in\\operatorname{Pic}(C)$. Then $\\deg\\lambda=\\deg[P]=1$, and for $n\\in\\mathbf Z$, $\\deg(\\lambda^{\\otimes n})=\\deg[\\mathcal O_C(nP)]=\\deg(n[P])=n$. Hence $\\deg:\\operatorname{Pic}(C)\\to\\mathbf Z$ is surjective, and $s:\\mathbf Z\\to\\operatorname{Pic}(C)$, $n\\mapsto\\lambda^{\\otimes n}=[\\mathcal O_C(nP)]$, is a group homomorphism with $\\deg\\circ s=\\mathrm{id}_{\\mathbf Z}$. (Any closed point $P$ may be used; citers use this freedom to pick $P$.)",
+   "text": "Install the structure morphism f as C.Over. Connectedness is given by [def-sc-curves]. Finite type implies locally Noetherian, and smoothness gives regularity by [lem-sc-smooth-regular]. The source theorem IsRegular.irreducibleSpace gives irreducibility (the irreducibility part of [lem-sc-regular-connected-integral]). Apply smoothOfRelativeDimension_iff_topologicalKrullDim_eq to the dimension-one hypothesis to obtain SmoothOfRelativeDimension 1 f. These are consequences, not new assumptions.",
    "uses": [
     "def-sc-curves",
-    "lem-sc-smooth-connected-curve-local-rings",
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "def-sc-divisor",
+    "lem-sc-smooth-regular",
+    "lem-sc-regular-connected-integral"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the source-library homomorphism d = Scheme.picDegreeHom k C, whose value is Multiplicative.ofAdd (f.picDegree L), and whose kernel has carrier f.picZero by Scheme.coe_ker_picDegreeHom [def-sc-pic0]. Scheme.surjective_picDegreeHom supplies g with d(g) = ofAdd 1: its proof chooses a closed point of the nonempty proper curve and uses Scheme.picDegreeHom_ofClosedPoint. Thus the degree-one point argument is retained without the full divisor-class comparison or local-rings package. Define sigma = zpowersHom C.Pic g. The homomorphism power law proves d(sigma n) = n for every integer n.",
+   "uses": [
+    "def-sc-curves",
     "def-sc-pic0",
-    "lem-sc-divisor-class-curve",
-    "lem-sc-deg-principal-zero",
     "def-sc-picard-group"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-pic-proper-decomposition.md",
-    "place": "## Proof"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/Curve/Picard.lean",
+    "place": "picDegreeHom, coe_ker_picDegreeHom, picDegreeHom_ofClosedPoint, surjective_picDegreeHom"
    }
   },
   {
-   "text": "**Exactness and the splitting.** Write the group law of $\\operatorname{Pic}(C)$ additively. By definition $\\operatorname{Pic}^0(C)=\\ker(\\deg)$ ([def-sc-pic0]), so $0\\to\\operatorname{Pic}^0(C)\\hookrightarrow\\operatorname{Pic}(C)\\xrightarrow{\\deg}\\mathbf Z$ is exact (injectivity of the inclusion and exactness in the middle are the definition of a kernel), and step 1 gives exactness at $\\mathbf Z$. With the section $s$ of step 1 define\n$$\\Phi:\\operatorname{Pic}(C)\\to\\mathbf Z\\oplus\\operatorname{Pic}^0(C),\\qquad x\\mapsto\\bigl(\\deg x,\\ x-s(\\deg x)\\bigr),$$\nwhich lands in $\\mathbf Z\\oplus\\operatorname{Pic}^0(C)$ because $\\deg(x-s(\\deg x))=\\deg x-\\deg x=0$, and is a homomorphism because $\\deg$ and $s$ are. Its inverse is $\\Psi(n,y)=s(n)+y$: $\\Psi\\Phi(x)=s(\\deg x)+x-s(\\deg x)=x$, and $\\Phi\\Psi(n,y)=(n+\\deg y,\\ s(n)+y-s(n))=(n,y)$ since $\\deg y=0$. So $\\Phi$ is an isomorphism $\\operatorname{Pic}(C)\\cong\\mathbf Z\\oplus\\operatorname{Pic}^0(C)$ whose first component is $\\deg$ and which restricts to the identity on $\\operatorname{Pic}^0(C)$, i.e. the sequence splits. (This is the elementary fact that a short exact sequence of abelian groups ending in the free group $\\mathbf Z$ splits; in Mathlib it is the $R=\\mathbf Z$ case of `Function.Exact.splitSurjectiveEquiv`, Mathlib/Algebra/Exact/Basic.lean line 381, applied to the section $s$.)",
+   "text": "Set P0 = ker d. Construct e(L) = (d(L), L * sigma(d(L)) inverse), with inverse (n,y) -> sigma(n) * y. The section identity puts the second coordinate in the kernel. Cancellation proves the left inverse; d(y)=1 and the section identity prove the right inverse. Commutativity proves multiplicativity. The first coordinate is definitionally the required degree. For y in P0, d(y)=1 and sigma(1)=1 give e(y)=(1,y), including equality of the subtype coordinate.",
    "uses": [
     "def-sc-pic0",
     "def-sc-picard-group"
@@ -45,24 +49,21 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-pic-proper-decomposition.md",
-    "place": "## Proof"
+    "place": "## Proof, exactness and splitting"
    }
   }
  ],
  "proof_deps": [
   "def-sc-curves",
-  "lem-sc-smooth-connected-curve-local-rings",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "def-sc-divisor",
+  "lem-sc-smooth-regular",
+  "lem-sc-regular-connected-integral",
   "def-sc-pic0",
-  "lem-sc-divisor-class-curve",
-  "lem-sc-deg-principal-zero",
   "def-sc-picard-group"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-pic-proper-decomposition.md",
-  "place": "## Proof (the blueprint is agent-written; the surjectivity of deg is also the last sentence of the unit sketch sk-def-pic/_section.md, (P2): 'it is surjective because C ... has a closed point p, and over algebraically closed k a closed point has [kappa(p):k]=1')"
+  "place": "## Proof; source-library degree-one surjectivity and an explicit splitting with both compatibilities (N1 stage 3)"
  },
  "mathlib_searches": [
   {
@@ -167,5 +168,15 @@
   "group": "G1",
   "result": "fix",
   "note": "k alg closed=IsAlgClosed; proper smooth connected curve=IsConnectedCurve f, Smooth f, IsProper f (as K1 genus-invariant); Pic=C.Pic; Pic0=subgroup with carrier recorded f.picZero; deg=f.picDegree; split: e first component deg, e restricts to id on Pic0"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T053943-L-2640279",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
