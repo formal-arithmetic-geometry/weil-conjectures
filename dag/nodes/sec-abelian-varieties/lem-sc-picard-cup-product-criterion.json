@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-picard-cup-product-criterion",
+ "kind": "statement",
+ "title": "Cup-product transpose detects the evaluation counit",
+ "statement": "Let $f:X\\to S$ be flat, proper and locally of finite presentation [def-weil-flat-morphism, def-weil-proper-morphism, def-sbc-locally-finite-presentation], and suppose the unit $\\mathcal O_T\\to p_*p^*\\mathcal O_T$ of the tensor-pullback adjunction [lem-pc-module-pullback-adjunction] is invertible after every base change $T\\to S$. Let $E$ be a finite locally free $\\mathcal O_X$-module [def-sc-finite-locally-free-sheaf]. Let $j:W\\to S$ satisfy $P(f,E,hj)$ for every $h:T\\to W$ [def-sc-picard-direct-image-rank-condition]. Put $p:X_W\\to W$, $q:X_W\\to X$, $N=p_*q^*E$ and $D=p_*q^*(E^\\vee)$, where $E^\\vee=\\mathcal Hom(E,\\mathcal O_X)$ [def-pur-sheaf-hom]. Then $D$ is finite locally free and there is a morphism $\\varphi:D\\to N^\\vee$ such that, for every $h:T\\to W$, $h^*\\varphi$ is invertible if and only if the canonical counit $p_T^*p_{T*}q_T^*E\\to q_T^*E$ is invertible.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "final two proof paragraphs, cup product and local dual bases, before the determinant-open assertion"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-picard-direct-image-rank-condition",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Apply the universal rank condition to identity morphisms on W. Around each point it gives simultaneous rank-r trivializations for N, D and the pulled-back E. Consequently D is finite locally free and N is finite locally free by the explicit first conjunct.",
+   "uses": [
+    "def-sc-picard-direct-image-rank-condition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify q^*(E^dual) with (q^*E)^dual by the finite free dual basis calculation. Define the pairing N tensor D to O_W by pushforward of evaluation and the inverse of O_W to p_*O_{X_W}. The latter is obtained from hO and the pullback structure-sheaf isomorphism. Transposing gives phi:D to N^dual. Naturality of these maps and the canonical base-change isomorphisms in the rank condition identify h^*phi with the cup-product transpose for every test scheme. Iterated pullbacks are compared by the canonical composition isomorphisms.",
+   "uses": [
+    "def-sc-picard-direct-image-rank-condition",
+    "lem-pc-module-pullback-adjunction",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An invertible transpose gives local dual bases sigma_i and tau_j with products delta_ij. Viewed upstairs, sigma_i define exactly the adjunction counit and tau_j define its left inverse. Source and target are locally free of the same rank r. A left inverse for a square matrix makes its determinant a unit; the adjugate then gives a two-sided inverse. Thus the counit is invertible. Conversely an invertible counit identifies E_T with p_T^*N_T. Dualization and the finite locally free projection formula identify D_T with N_T^dual tensor p_{T*}O_{X_T}, hence N_T^dual. The pairing is evaluation under this identification, so its transpose is invertible. Both arguments apply to arbitrary rings; when r=0 both maps are isomorphisms of zero modules, and the empty base is vacuous.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-sc-picard-direct-image-rank-condition",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-direct-image-rank-condition",
+  "lem-pc-module-pullback-adjunction",
+  "def-pur-sheaf-hom",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "final two proof paragraphs, cup product and local dual bases, before the determinant-open assertion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a proper flat family with universal pushforward of the structure sheaf equal to the structure sheaf and universally rank matched direct images, the transpose of cup product between the direct images of a vector bundle and its dual is an isomorphism if and only if the adjunction counit is an isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cup product pairing between the direct images of a vector bundle and its dual is perfect if and only if the pullback pushforward evaluation counit is invertible, under equal rank and base change assumptions",
+   "results": "8 hits: FGModuleCat.exactPairing, LinearMap.toPerfPair, LinearMap.IsPerfPair.dualEval, LinearMap.IsPerfPair.compl₁₂, LinearMap.apply_toPerfPair_flip, LinearMap.IsPerfPair.congr, LinearEquiv.instIsPerfPair, RootPairing.isPerfPair_toLinearMap",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cup.?product.*counit|counit.*cup.?product|[Pp]erfect[Pp]airing",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardEvaluationOpenLocus",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: universal locally closed Picard locus, final two proof paragraphs, cup product and local dual bases, before the determinant-open assertion",
+   "via": [
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardCupProductCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardCupProductCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_picardCupProductCriterion",
+  "statement": "theorem exists_picardCupProductCriterion {X S : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (E : X.Modules) [E.IsFiniteLocallyFree]\n    {W : Scheme.{u}} (j : W ⟶ S)\n    (hW : ∀ {T : Scheme.{u}} (h : T ⟶ W), PicardDirectImageRankCondition f E (h ≫ j)) :\n    ((Modules.pushforward (pullback.snd f j)).obj\n      ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E))).IsFiniteLocallyFree ∧\n    ∃ φ : ((Modules.pushforward (pullback.snd f j)).obj\n        ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E))) ⟶\n      Modules.dual ((Modules.pushforward (pullback.snd f j)).obj\n        ((Modules.tensorPullback (pullback.fst f j)).obj E)),\n      ∀ {T : Scheme.{u}} (h : T ⟶ W),\n        IsIso ((Modules.tensorPullback h).map φ) ↔\n          IsIso ((Classical.choose\n            (Modules.exists_tensorPullbackAdjunction (pullback.snd f (h ≫ j)))).counit.app\n              ((Modules.tensorPullback (pullback.fst f (h ≫ j))).obj E))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T194156-L-470458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T194156-L-470458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

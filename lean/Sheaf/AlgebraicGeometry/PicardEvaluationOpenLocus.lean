@@ -6,6 +6,8 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoOpen
+import Sheaf.AlgebraicGeometry.PicardCupProductCriterion
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
@@ -62,6 +64,19 @@ theorem exists_picardEvaluationOpenLocus {X S : Scheme.{u}} (f : X ⟶ S)
           IsIso ((Classical.choose
             (Modules.exists_tensorPullbackAdjunction (pullback.snd f (h ≫ j)))).counit.app
               ((Modules.tensorPullback (pullback.fst f (h ≫ j))).obj E)) := by
-  sorry
+  obtain ⟨hD, φ, hφ⟩ := exists_picardCupProductCriterion f hO E j hW
+  let N := (Modules.pushforward (pullback.snd f j)).obj
+    ((Modules.tensorPullback (pullback.fst f j)).obj E)
+  have hN : N.IsFiniteLocallyFree := by
+    have hW1 := hW (𝟙 W)
+    rw [Category.id_comp] at hW1
+    exact hW1.1
+  let := hN
+  let := hD
+  let := Modules.IsFiniteLocallyFree.dual N
+  obtain ⟨Z, k, hk, hkqc, hZ⟩ := Modules.exists_finiteLocallyFreeMapIsoOpen _ _ φ
+  refine ⟨Z, k, hk, hkqc, ?_⟩
+  intro T h
+  exact (hZ h).trans (hφ h)
 
 end AlgebraicGeometry.Scheme

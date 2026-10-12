@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-finite-locally-free-map-iso-open",
+ "kind": "statement",
+ "title": "Universal retrocompact isomorphism open of a map of vector bundles",
+ "statement": "Let $W$ be a scheme [def-pc-scheme], let $M,N$ be finite locally free $\\mathcal O_W$-modules with possibly varying ranks [def-sc-finite-locally-free-sheaf], and let $\\varphi:M\\to N$ be a morphism. There exist a scheme $Z$ and an open immersion $k:Z\\to W$ [def-weil-open-immersion] which is quasi-compact [def-weil-finite-type-morphism], such that for every morphism $h:T\\to W$, $h$ factors through $k$ if and only if $h^*\\varphi$ is invertible, where pullback is the tensor-formula pullback [def-pc-module-pullback].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05GD",
+  "place": "Lemma 10.79.4, matrix proof and isomorphism locus; Tag 0BDP, final determinant sentence"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose simultaneous local finite free frames. On an equal-rank frame of rank r the isomorphism locus is D(det(phi)); the adjugate gives the inverse there. On an unequal-rank frame the locus is empty, since an isomorphism at a point would reduce to an isomorphism of vector spaces of unequal dimensions. The rank-zero determinant is 1. These local opens agree on overlaps by their intrinsic isomorphism criterion.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the union of the local opens, with its open subscheme structure [def-weil-open-immersion]. On any affine open of W choose finitely many principal affine subopens trivializing both bundles. Its intersection with the union is covered by finitely many principal opens (or empty opens) of these affine subopens. These are quasi-compact, hence the union is retrocompact and its open inclusion is quasi-compact.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tensor-formula pullback in local frames applies the ring map to the matrix. A square matrix is invertible exactly when its determinant is a unit, over every ring, including nonreduced rings. Thus on each local frame h factors through the principal open exactly when the pulled-back matrix is invertible. The local factorizations glue uniquely because the inclusions are open immersions. Rank mismatch is impossible at a point of the test scheme; empty test schemes are vacuous.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finite-locally-free-sheaf",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/05GD",
+  "place": "Lemma 10.79.4, matrix proof and isomorphism locus; Tag 0BDP, final determinant sentence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The isomorphism locus of a morphism between finite locally free sheaves is a retrocompact open subscheme and commutes with arbitrary base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map between finite locally free sheaves is invertible on a quasi compact open locus, and pullback along a scheme morphism is invertible exactly when it factors through that open",
+   "results": "8 hits: AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsLocalAtTarget.of_isPullback, AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE_locally, AlgebraicGeometry.IsZariskiLocalAtTarget.of_isPullback, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.HasRingHomProperty.respects_isOpenImmersion",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isomorphism locus|isIsoLocus|isoLocus",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardEvaluationOpenLocus",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: universal locally closed Picard locus, Lemma 10.79.4, matrix proof and isomorphism locus; Tag 0BDP, final determinant sentence",
+   "via": [
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeMapIsoOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finiteLocallyFreeMapIsoOpen",
+  "statement": "theorem exists_finiteLocallyFreeMapIsoOpen {W : Scheme.{u}} (M N : W.Modules)\n    [M.IsFiniteLocallyFree] [N.IsFiniteLocallyFree] (φ : M ⟶ N) :\n    ∃ (Z : Scheme.{u}) (k : Z ⟶ W), IsOpenImmersion k ∧ QuasiCompact k ∧\n      ∀ {T : Scheme.{u}} (h : T ⟶ W),\n        (∃ l : T ⟶ Z, l ≫ k = h) ↔ IsIso ((tensorPullback h).map φ)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T194156-L-470458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T194156-L-470458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
