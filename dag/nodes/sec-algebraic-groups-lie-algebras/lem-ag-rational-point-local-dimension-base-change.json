@@ -1,0 +1,129 @@
+{
+ "id": "lem-ag-rational-point-local-dimension-base-change",
+ "kind": "statement",
+ "title": "Local dimension at a rational point is preserved by field extension",
+ "statement": "Let k be a field, K/k a field extension [def-pc-field-extension], and f: X \\to \\operatorname{Spec} k a locally finite type morphism of schemes [def-pc-scheme] [def-weil-finite-type-morphism]. Let p: \\operatorname{Spec} k \\to X satisfy f \\circ p = \\mathrm{id}. Put Y = X \\times_{\\operatorname{Spec} k} \\operatorname{Spec} K [def-pc-fibre-product], with projections a: Y \\to X and b: Y \\to \\operatorname{Spec} K, and let q: \\operatorname{Spec} K \\to Y satisfy b \\circ q = \\mathrm{id} and a \\circ q = p \\circ g, where g is induced by the given field inclusion. If x=p(*) and y=q(*) are the images of the unique points, then the local rings [def-weil-pbc-module-stalk] have equal Krull dimension [def-weil-pbc-krull-dimension-ring]: $\\dim \\mathcal O_{X,x}=\\dim \\mathcal O_{Y,y}$, including nonreduced schemes and without any separatedness assumption.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+  "place": "First proof paragraph of lem-ag-group-identity-local-dimension, rational-point scalar-extension comparison; Stacks Tags 00P4 and 00OU"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood Spec A of x. Local finite type makes A a finite type k-algebra. The inverse image is Spec(A tensor_k K); the projection contracts the prime at y to the prime at x by the equation on q. Both are maximal because the sections identify their residue fields with k and K respectively.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply dimension-at-point field extension to the two corresponding primes of A and A tensor_k K. Their topological local dimensions coincide.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-field-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the two maximal ideals, closed-point dimension equals dimension of localization. The affine stalk isomorphisms and invariance of stalks under open immersion identify these localizations with the displayed scheme stalks. Compose the equalities.",
+   "uses": [
+    "lem-weil-pbc-closed-point-dimension-local-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-closed-point-dimension-local-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+  "place": "H1 makes the rational-point comparison in the first paragraph precise using the two stated affine comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The dimension of the local ring at a rational point of a finite type scheme is preserved by field extension",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of the stalk at a rational point of a finite type scheme is preserved by extension of the ground field",
+   "results": "IsLocalization.AtPrime.ringKrullDim_eq_height; no exact scalar-extension comparison",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Spec.stalkIso",
+   "results": "Spec.stalkIso identifies affine stalks with prime localizations; no field-extension dimension equality",
+   "date": "2026-10-12",
+   "verdict": "useful interface only"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*baseChange|ringKrullDim.*rationalPoint",
+   "results": "No exact lemma in Mathlib; library has affine topological comparison and closed-point localization comparison only",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GroupScheme.IdentityLocalDimension",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-same-lie-closed-subgroup",
+   "place": "Dimension paragraph: scalar extension preserves local dimension at the rational identity",
+   "via": [
+    "lem-ag-group-identity-local-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-i-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RationalPointLocalDimensionBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalPointLocalDimensionBaseChange.lean",
+  "declaration": "AlgebraicGeometry.ringKrullDim_rationalPoint_field_baseChange",
+  "statement": "theorem ringKrullDim_rationalPoint_field_baseChange\n    {k : Type u} [Field k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f]\n    (p : Spec (.of k) ⟶ X) (hp : p ≫ f = 𝟙 _)\n    (K : Type u) [Field K] [Algebra k K]\n    (q : Spec (.of K) ⟶ pullback f\n      (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n    (hq : q ≫ pullback.snd f\n      (Spec.map (CommRingCat.ofHom (algebraMap k K))) = 𝟙 _)\n    (hqp : q ≫ pullback.fst f\n      (Spec.map (CommRingCat.ofHom (algebraMap k K))) =\n        Spec.map (CommRingCat.ofHom (algebraMap k K)) ≫ p) :\n    ringKrullDim (X.presheaf.stalk (p (IsLocalRing.closedPoint k))) =\n      ringKrullDim ((pullback f\n        (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk\n          (q (IsLocalRing.closedPoint K)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T085245-L-17513",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T085245-L-17513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
