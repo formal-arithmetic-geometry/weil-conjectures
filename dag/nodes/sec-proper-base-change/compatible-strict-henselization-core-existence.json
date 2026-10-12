@@ -1,0 +1,110 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HX, 03PS and 04DY"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Proof: take A and B to be the actual coordinate-ring colimits strictHenselizationRing of the indicated geometric points, with eA and eB the identity spectrum isomorphisms. By affine neighbourhood cofinality and Tag 04HX, these colimits are the strict henselizations of the local rings at the images of σ and τ. Their residue fields are the separable algebraic closures of the respective point residue fields inside Ω; they are henselian local rings with separably closed residue fields. The integral factorizations hσ and hτ identify k and k' as algebraic extensions of those point residue fields. Since k and k' are separably closed, their embeddings into Ω contain these separable closures. The remaining extensions are algebraic purely inseparable: an algebraic extension of a separably closed field has no nontrivial separable part. Take ρA and ρB to be the spectra of these residue inclusions. Purely inseparable algebraic field extensions give integral, radicial, surjective spectrum maps, hence universal homeomorphisms. The inclusions extend the given point residue maps, so composition with the ring residue maps and the colimit structural maps gives σ and τ. No ring data are chosen from a mere unproved existence assertion. ",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HX, 03PS and 04DY; second reader corrected decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The colimit of pointed affine etale neighborhoods is a henselian local ring with separably closed residue field",
+   "results": "UNAVAILABLE: service Internal Server Error; no verdict recorded.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict henselian local ring spectrum pointed etale limit affine residue field",
+   "results": "Eight hits: etale locus and Scheme.SpecToEquivOfField APIs; no strict henselization construction or functoriality theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalHom",
+   "results": "Local hom composition and unit reflection APIs, no strict henselization construction or functoriality.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg strictHenselization|strictHensel|StrictHensel lean/Sheaf/AlgebraicGeometry lean/WeilConjectures/AlgebraicGeometry",
+   "results": "StrictHenselization contains concrete coordinate-ring colimit and affine spectrum; StrictHenselizationStructuralMap proves structural compatibility. No ring localness/residue-field or compatible functoriality theorem; upper compatible residue theorems depend on this item and cannot be used.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreData",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "compatible-strict-henselization-core-data",
+   "place": "construction split"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "compatible-strict-henselization-core-existence",
+ "title": "Strict henselization ring and residue existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationCoreExistence.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_compatibleStrictHenselizationCoreExistence",
+  "statement": "theorem Etale.exists_compatibleStrictHenselizationCoreExistence\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (hσ : ∃ (s : S) (ψ : S.residueField s ⟶ .of k),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ S.fromSpecResidueField s = σ)\n    (hτ : ∃ (t : T) (ψ : T.residueField t ⟶ .of k'),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ T.fromSpecResidueField t = τ)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k')) :\n    let s := ν ≫ ι ≫ σ\n    let t := ν ≫ τ\n    ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B),\n      letI := cA\n      letI := cB\n      ∃ (hA : HenselianLocalRing A) (hB : HenselianLocalRing B),\n        letI := hA\n        letI := hB\n        ∃ (sA : IsSepClosed (IsLocalRing.ResidueField A))\n          (sB : IsSepClosed (IsLocalRing.ResidueField B)),\n          letI := sA\n          letI := sB\n          ∃ (eA : Spec (.of A) ≅ strictHenselizationScheme s)\n            (eB : Spec (.of B) ≅ strictHenselizationScheme t)\n            (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n            (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))),\n            IsUniversalHomeomorphism ρA ∧ IsUniversalHomeomorphism ρB ∧\n            ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n              eA.hom ≫ strictHenselizationStructuralMap s = σ ∧\n            ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n              eB.hom ≫ strictHenselizationStructuralMap t = τ",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "statement": "For the two geometric points induced from σ and τ in the algebraically closed Ω, the coordinate-ring strict henselizations have henselian local and separably closed residue structures, spectrum identifications, and universal-homeomorphism residue maps factoring σ and τ. No ring map between the two rings is asserted.",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T135236-L-1666580",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T135236-L-1666580",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

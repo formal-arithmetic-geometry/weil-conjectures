@@ -2,6 +2,8 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreExistence
+import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreCompletion
 @[expose] public section
 universe u
 set_option autoImplicit false
@@ -52,5 +54,19 @@ theorem Etale.exists_compatibleStrictHenselizationCoreData
               ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫
                 eA.hom ≫ strictHenselizationStructuralMap s = σ ∧
               ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫
-                eB.hom ≫ strictHenselizationStructuralMap t = τ := by sorry
+                eB.hom ≫ strictHenselizationStructuralMap t = τ := by
+  dsimp
+  obtain ⟨A, B, cA, cB, hA, hB, sA, sB, eA, eB, ρA, ρB, hUA, hUB, ha0, hb0⟩ :=
+    Etale.exists_compatibleStrictHenselizationCoreExistence σ τ ι hι hσ hτ ν
+  let := cA
+  let := cB
+  let := hA
+  let := hB
+  let := sA
+  let := sB
+  obtain ⟨φ, hφ, hbase⟩ :=
+    Etale.exists_compatibleStrictHenselizationCoreCompletion
+      (by simpa only [Category.assoc] using congrArg (ν ≫ ·) hι) eA eB
+  exact ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB, ρA, ρB, hUA, hUB,
+    hbase, ha0, hb0⟩
 end AlgebraicGeometry

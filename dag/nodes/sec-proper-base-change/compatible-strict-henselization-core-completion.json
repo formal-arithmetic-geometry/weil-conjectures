@@ -1,0 +1,110 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04GU"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Proof: the equality of geometric points gives the functor from pointed etale neighbourhoods of S to those of T by base change. Its maps to the two colimits induce the morphism from strictHenselizationScheme t to strictHenselizationScheme s over g. Transport through eA and eB, then use the fully faithful contravariant Spec functor to obtain the ring homomorphism. On closed points this sends the selected geometric point to the selected geometric point; the corresponding map of local rings is local. The colimit cone compatibility gives the structural equality. ",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04GU; second reader corrected decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The colimit of pointed affine etale neighborhoods is a henselian local ring with separably closed residue field",
+   "results": "UNAVAILABLE: service Internal Server Error; no verdict recorded.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict henselian local ring spectrum pointed etale limit affine residue field",
+   "results": "Eight hits: etale locus and Scheme.SpecToEquivOfField APIs; no strict henselization construction or functoriality theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalHom",
+   "results": "Local hom composition and unit reflection APIs, no strict henselization construction or functoriality.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg strictHenselization|strictHensel|StrictHensel lean/Sheaf/AlgebraicGeometry lean/WeilConjectures/AlgebraicGeometry",
+   "results": "StrictHenselization contains concrete coordinate-ring colimit and affine spectrum; StrictHenselizationStructuralMap proves structural compatibility. No ring localness/residue-field or compatible functoriality theorem; upper compatible residue theorems depend on this item and cannot be used.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreData",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "compatible-strict-henselization-core-data",
+   "place": "construction split"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "compatible-strict-henselization-core-completion",
+ "title": "Functoriality of compatible strict henselizations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreCompletion",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationCoreCompletion.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_compatibleStrictHenselizationCoreCompletion",
+  "statement": "theorem Etale.exists_compatibleStrictHenselizationCoreCompletion\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {Ω A B : Type u} [Field Ω] [IsAlgClosed Ω]\n    [CommRing A] [CommRing B] [HenselianLocalRing A] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)]\n    [IsSepClosed (IsLocalRing.ResidueField B)]\n    {s : Spec (.of Ω) ⟶ S} {t : Spec (.of Ω) ⟶ T}\n    (hst : s = t ≫ g)\n    (eA : Spec (.of A) ≅ strictHenselizationScheme s)\n    (eB : Spec (.of B) ≅ strictHenselizationScheme t) :\n    ∃ (φ : A →+* B) (hφ : IsLocalHom φ),\n      Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n          strictHenselizationStructuralMap s =\n        eB.hom ≫ strictHenselizationStructuralMap t ≫ g",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "statement": "Given geometric points s and t over the same algebraically closed field with s = t composed with g, and affine strictly henselian presentations eA and eB of their strict henselization schemes, there exists a local ring map A to B whose spectrum map commutes with the structural maps over g.",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T135236-L-1666580",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T135236-L-1666580",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
