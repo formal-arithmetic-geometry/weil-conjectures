@@ -13,13 +13,10 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Sheaf.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.CompleteLocalMapRegularPresentation
-import Sheaf.RingTheory.CompleteLocalQuotient
-import Sheaf.RingTheory.FlatOverRegular
+import Sheaf.RingTheory.CompleteLocalBaseChangeFiber
 import Sheaf.RingTheory.FormallySmoothAdicBaseChange
-import Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular
 import Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiber
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
+import Sheaf.RingTheory.RegularPresentationFlatFiber
 
 /-!
 # Lifting formally smooth complete local algebras from a residue field
@@ -95,6 +92,48 @@ theorem exists_formallySmoothAdic_lift_residue_field
         ∀ a : A₀,
           σ (Ideal.Quotient.mkₐ A₀ ((IsLocalRing.maximalIdeal A₀).map γ)
             (algebraMap A₀ C a)) = algebraMap A₀ E a := by
-  sorry
+  have hlocalE : IsLocalHom (algebraMap A₀ E) := by
+    have hcomp : (algebraMap (IsLocalRing.ResidueField A₀) E).comp
+        (IsLocalRing.residue A₀) = algebraMap A₀ E := by
+      ext a
+      exact (IsScalarTower.algebraMap_apply A₀ (IsLocalRing.ResidueField A₀) E a).symm
+    rw [← hcomp]
+    infer_instance
+  obtain ⟨R, S, _, _, _, _, hR, hS, q, v, u, hq, hqLocal, hv, hvLocal,
+    huLocal, hcomm, hres, hparams, _, hfiber⟩ :=
+    RingHom.exists_complete_local_map_regular_presentation (algebraMap A₀ E)
+  have := hR
+  have := hS
+  have := hqLocal
+  have := hvLocal
+  have := huLocal
+  obtain ⟨T, _, _, _, _, _, hTLocal, hTFlat, e, he, hTFiber⟩ :=
+    RingHom.exists_flat_complete_model_of_regular_presentation A₀ E hE R S q v u
+      hq hv hcomm hres hparams hfiber
+  have := hTLocal
+  have halg : (algebraMap R T).toAlgebra = (inferInstance : Algebra R T) := by
+    apply Algebra.algebra_ext
+    intro r
+    rfl
+  have hT : FormallySmoothAdic R T (IsLocalRing.maximalIdeal T) := by
+    have h := RingHom.formallySmoothAdic_of_flat_closedFiber R T
+      (algebraMap R T) hTFlat hTFiber
+    rw [halg] at h
+    exact h
+  let : Algebra R A₀ := q.toAlgebra
+  let : Algebra A₀ (TensorProduct R T A₀) := Algebra.TensorProduct.rightAlgebra
+  obtain ⟨hC, hCNoeth, hCComplete, hCLocal, hCMax, ⟨σ⟩⟩ :=
+    complete_local_baseChange_closedFiber R A₀ T E hq e he
+  have := hC
+  have := hCNoeth
+  have := hCComplete
+  have hfs : FormallySmoothAdic A₀ (TensorProduct R T A₀)
+      (IsLocalRing.maximalIdeal (TensorProduct R T A₀)) := by
+    rw [← hCMax]
+    exact formallySmoothAdic_tensorProduct R T A₀ (IsLocalRing.maximalIdeal T) hT
+  refine ⟨TensorProduct R T A₀, inferInstance, hCNoeth, hC, hCComplete, inferInstance,
+    algebraMap A₀ (TensorProduct R T A₀), rfl, hCLocal, hfs, σ, ?_⟩
+  intro a
+  exact σ.commutes a
 
 end Algebra

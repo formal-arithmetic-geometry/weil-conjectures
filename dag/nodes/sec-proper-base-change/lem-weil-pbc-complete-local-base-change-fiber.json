@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-complete-local-base-change-fiber",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "the final base-change and quotient-completeness argument",
+   "via": [
+    "lem-weil-pbc-fs-adic-lift-from-residue-field"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Complete local base change and closed-fibre identification",
+ "statement": "Let R,A,T be commutative local rings, with T Noetherian [def-weil-pbc-noetherian-ring] and complete for its maximal ideal [def-weil-pbc-adically-complete-ring]. Let q:R\\twoheadrightarrow A and f:R\\to T be local ring maps. Let E be a commutative A-algebra and e:T/m_R T\\cong E a ring isomorphism such that e(f(r)\\bmod m_R T)=q(r) in E for every r. Then C=T\\otimes_R A with the canonical right A-algebra structure is Noetherian complete local, A\\to C is local, the image of m_T generates m_C, and C/m_A C\\cong E as A-algebras.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Tag 07NR (lemma-lift-fs), the final base-change and quotient-completeness argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Set I=ker q. Surjectivity gives A ≅ R/I, and the tensor-quotient isomorphism identifies C with T/IT. Locality implies I lies in m_R and IT lies in m_T. Quotient completeness yields the Noetherian complete local structure and maximal ideal formula.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-complete-local-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Tag 07NR (lemma-lift-fs), the final base-change and quotient-completeness argument"
+   }
+  },
+  {
+   "text": "A surjective local map carries m_R onto m_A. Therefore A → C is local, m_A C is the image of m_R T, and quotienting C by m_A C gives T/m_R T. Compose with e. Lift each a in A to r in R and use compatibility of e to check A-linearity of the ring isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Tag 07NR (lemma-lift-fs), the final base-change and quotient-completeness argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-complete-local-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Tag 07NR (lemma-lift-fs), the final base-change and quotient-completeness argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A formally smooth complete local algebra over a residue field lifts to a complete local algebra over the base ring",
+   "results": "Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.lift, IsAdicComplete.liftAlgHom, Algebra.FormallySmooth.of_isLocalization, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.exists_kerProj_comp_eq_id",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmoothAdic|lift_residue_field|quotient.*base.*change",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Remove equations from a complete regular local presentation to obtain a flat local algebra with prescribed formally smooth closed fibre",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a complete Noetherian local algebra along a surjective local map is complete local and preserves its closed fibre",
+   "results": "RingHom.SurjectiveOnStalks.baseChange, RingHom.surjective_isStableUnderBaseChange, RingHom.SurjectiveOnStalks.baseChange', Algebra.QuasiFiniteAt.baseChange, RingHom.EssFiniteType.isStableUnderBaseChange, Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver, RingHom.finite_isStableUnderBaseChange, RingHom.finiteType_isStableUnderBaseChange",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.quotIdealMapEquivTensorQuot",
+   "results": "Algebra.TensorProduct.quotIdealMapEquivTensorQuot, Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul, Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk",
+   "date": "2026-10-12",
+   "verdict": "no exact match; constituent only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormallySmoothAdicLift",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompleteLocalBaseChangeFiber",
+  "file": "lean/Sheaf/RingTheory/CompleteLocalBaseChangeFiber.lean",
+  "declaration": "Algebra.complete_local_baseChange_closedFiber",
+  "statement": "theorem complete_local_baseChange_closedFiber (R : Type w) (A : Type u) (T : Type w) (E : Type v) [CommRing R] [CommRing A] [CommRing T] [CommRing E] [IsLocalRing R] [IsLocalRing A] [IsLocalRing T] [IsNoetherianRing T] [IsAdicComplete (IsLocalRing.maximalIdeal T) T] [Algebra R A] [Algebra R T] [Algebra A E] [IsLocalHom (algebraMap R A)] [IsLocalHom (algebraMap R T)] (hq : Function.Surjective (algebraMap R A)) (e : (T ⧸ (IsLocalRing.maximalIdeal R).map (algebraMap R T)) ≃+* E) (he : ∀ r : R, e (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal R).map (algebraMap R T)) (algebraMap R T r)) = algebraMap A E (algebraMap R A r)) : letI : Algebra A (T ⊗[R] A) := Algebra.TensorProduct.rightAlgebra ∃ hlocal : IsLocalRing (T ⊗[R] A), IsNoetherianRing (T ⊗[R] A) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (T ⊗[R] A)) (T ⊗[R] A) ∧ IsLocalHom (algebraMap A (T ⊗[R] A)) ∧ (IsLocalRing.maximalIdeal T).map (algebraMap T (T ⊗[R] A)) = IsLocalRing.maximalIdeal (T ⊗[R] A) ∧ Nonempty (((T ⊗[R] A) ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A (T ⊗[R] A))) ≃ₐ[A] E)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T211617-L-1058216",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T211617-L-1058216",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
