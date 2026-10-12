@@ -11,6 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 import Sheaf.LinearAlgebra.ExteriorTopDirectSum
+import Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparisonLocal
 
 /-!
 # Construction of the determinant comparison on a split open
@@ -83,6 +84,14 @@ theorem determinant_split_comparison_exists {X : Scheme.{v}}
         (exteriorSheaf S.X₂ r₂).val.map (homOfLE hZW).op (d W hW y) =
           d Z (hZW.trans hW)
             ((exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃).val.map
-              (homOfLE hZW).op y)) := by sorry
+              (homOfLE hZW).op y)) := by
+  intro x hx
+  obtain ⟨V, hVU, hxV, d, hd⟩ :=
+    determinant_split_comparison_local S r₁ r₂ r₃ hr U e hf hg l hl x hx
+  refine ⟨V, hVU, hxV, d, hd, ?_⟩
+  apply determinant_split_comparison_restriction S r₁ r₂ r₃ hr V d
+    (fun W hW b j ↦ l W (hW.trans hVU) (b j))
+  intro W hW a b
+  exact hd W hW a b
 
 end AlgebraicGeometry.Scheme.Modules
