@@ -25,41 +25,46 @@
  ],
  "proof": [
   {
-   "text": "The closed subspace T is Noetherian and has finitely many irreducible components. Enumerate them. Each component is closed in X and proper in T, since T is not irreducible. Choose its partition using the induction hypothesis.",
-   "uses": [
-    "lem-weil-pbc-noetherian-finite-components",
-    "lem-weil-pbc-constructible-etale-lisse-partition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For every part of component i, remove the inverse image of the union of earlier components. This is an open subscheme of that part. Compose its open immersion with the old immersion. The resulting images are the old images minus the earlier components, hence their finite union is T and they are pairwise disjoint.",
+   "text": "Since T is nonempty but not irreducible, it is not preirreducible. Apply Mathlib isPreirreducible_iff_isClosed_union_isClosed contrapositively to obtain closed A and B covering T with neither containing T. Intersect each with T to obtain proper closed subsets Z and W covering T. Apply the induction hypothesis to Z and W.",
    "uses": [
     "lem-weil-pbc-constructible-etale-lisse-partition"
    ],
    "elementary": true
   },
   {
-   "text": "Open pullback preserves local constancy. At a geometric point of the open, the inverse-image stalk bijection identifies the new stalk with the old finite stalk. The composition comparison identifies this iterated open restriction with the ambient pullback along the composite immersion. Thus the new parts form a finite lisse partition.",
+   "text": "For every stratum of the partition on W, take the open inverse image of the complement of Z and compose its open immersion with the original immersion. Its image is the old image minus Z. These images are still pairwise disjoint and their union is W minus Z.",
+   "uses": [
+    "lem-weil-pbc-constructible-etale-lisse-partition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The open pullback of each old lisse sheaf is locally constant by the open-pullback theorem. The inverse-image stalk bijection transfers finiteness of every old geometric stalk to the new stalk. The inverse-image composition isomorphism then transfers local constancy and stalk finiteness to the pullback along the composite immersion.",
    "uses": [
     "lem-weil-pbc-etale-locally-constant-open-pullback",
     "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
    "elementary": false
+  },
+  {
+   "text": "Concatenate the partition of Z with the partition of W minus Z using Fin.append on bundled schemes and immersions. The supports are disjoint. Their union is T. All immersions and lisse proofs are inherited from the two partitions, giving the required finite lisse partition.",
+   "uses": [
+    "lem-weil-pbc-constructible-etale-lisse-partition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-constructible-etale-lisse-partition",
   "lem-weil-pbc-etale-locally-constant-open-pullback",
-  "lem-weil-pbc-noetherian-finite-components",
   "lem-weil-pbc-sets-etale-inverse-image-composition-units",
   "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-constructible-noetherian.md",
-  "place": "Detailed reduction of blueprint proof steps 2--3, as in the Lean declaration docstring; second reading by J2."
+  "place": "Reducible partition step: binary closed decomposition using Mathlib isPreirreducible_iff_isClosed_union_isClosed replaces enumeration of irreducible components; open subtraction and concatenation follow the original plan. The partition concatenation uses a finite tuple of bundled schemes and immersions, with explicit range and property transports. The complete module compiles locally."
  },
  "mathlib_searches": [
   {
@@ -137,10 +142,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T060742-L-2909566",
-  "kind": "interface",
+  "landing": "20261012T095919-L-323060",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
