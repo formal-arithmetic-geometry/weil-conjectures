@@ -26,19 +26,16 @@
  ],
  "proof": [
   {
-   "text": "The composite $u\\circ v$ is continuous: it carries a covering in $\\mathcal C_3$ first to a covering in $\\mathcal C_2$ and then to one in $\\mathcal C_1$, and the two canonical fibre-product comparison isomorphisms compose to the comparison for $u\\circ v$. Applying the sheaf pullback construction twice gives, on every object $T$ of $\\mathcal C_3$, $(v^s u^s\\mathcal G)(T)=\\mathcal G(u(v(T)))=((u\\circ v)^s\\mathcal G)(T)$, with the same restriction maps; this holds for sets and, by the algebraic-structure identification, for abelian sheaves.",
-   "uses": [
-    "lem-weil-pbc-site-continuous-pushforward-sheaf",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects"
-   ],
-   "elementary": false,
+   "text": "Identify the presieve mapped by V ⋙ U with the presieve mapped first by V and then U, by eliminating the constructors of Presieve.map in both directions. Apply hVcover and hUcover. For a covering arrow f and arbitrary g, use hVpullback and hUpullback at V.map f, V.map g; Presieve.map_map supplies membership in the image covering. Transfer preservation along cospanCompIso V f g using preservesLimit_of_iso_diagram and apply comp_preservesLimit. Functor.isContinuous_comp supplies the composite continuity instance from the two given instances. Both sheaf pushforward equalities are definitional, exactly as in Functor.sheafPushforwardContinuousComp, for sets and abelian groups.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), proof of (1) and (2), and Definitions 00WV and 00X1"
+    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites, line 2764) and its proof; Definition 03CC (definition-composition-morphisms-sites) and the sentence after it"
    }
   },
   {
-   "text": "For sheaves of sets and for abelian sheaves, the adjunctions $u_s\\dashv u^s$ and $v_s\\dashv v^s$ compose to $u_s v_s\\dashv v^s u^s$; its unit is $v^s\\eta_u v_s\\circ\\eta_v$. By Step 1 the right adjoint of this composite is identified with $(u\\circ v)^s$, while [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] supplies $(u\\circ v)_s\\dashv (u\\circ v)^s$. The unique isomorphism between these left adjoints compatible with the two units is the adjunction uniqueness isomorphism, yielding $(u\\circ v)_s\\cong u_s\\circ v_s$ and the stated unit equation.",
+   "text": "For sets and abelian groups separately, compose the constructed sheafAdjunctionContinuous adjunctions using Adjunction.comp. Their right adjoint is definitionally the pushforward of V ⋙ U. Compare with sheafAdjunctionContinuous of V ⋙ U by Adjunction.leftAdjointUniq. Adjunction.unit_leftAdjointUniq_hom_app gives the unit compatibility; Adjunction.comp_unit_app expands the composite unit to the formula in the conclusion. Uniqueness follows componentwise: apply injectivity of the first adjunction homEquiv, whose value is unit followed by the right adjoint map, to the two comparison components, then use natural-transformation and isomorphism extensionality. The private proved helper leftAdjointUniq_existsUnique packages precisely this existing adjunction-uniqueness argument.",
    "uses": [
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
     "def-weil-pbc-composite-adjunction",
@@ -47,24 +44,20 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), proof: composition of the two adjunctions and uniqueness of left adjoints; Categories Lemma Tag 0B65"
+    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites, line 2764) and its proof; Definition 03CC (definition-composition-morphisms-sites) and the sentence after it"
    }
   },
   {
-   "text": "Since $u_s$ and $v_s$ preserve finite limits and finite colimits, their composite does as well, by applying the preservation property successively to each finite diagram. Thus $(u\\circ v)_s$ is exact because it is naturally isomorphic to $u_s v_s$. Together with Step 1 this says that $u\\circ v$ is a continuous functor whose sheaf left adjoint is exact, hence it defines the composite morphism of sites $g\\circ f$. The direct-image identity $(g\\circ f)_*=g_*f_*$ and inverse-image isomorphism $(g\\circ f)^{-1}\\cong f^{-1}g^{-1}$ are the corresponding sheaf-level identifications from Steps 1 and 2.",
-   "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
-   ],
+   "text": "Extract the sets comparison isomorphism from step 2. Apply comp_preservesFiniteLimits and comp_preservesFiniteColimits to the supplied preservation instances for the two constructed left adjoints. Transfer both properties to the composite site pullback with preservesFiniteLimits_of_natIso and preservesFiniteColimits_of_natIso, using the inverse comparison isomorphism. Package these instances as Nonempty and combine them with the two site conditions, continuity instance, pushforward equalities and unique unit-compatible isomorphisms.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Definition Tag 00X1, Lemma Tag 03CB, and the sentence after Definition Tag 03CC"
+    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites, line 2764) and its proof; Definition 03CC (definition-composition-morphisms-sites) and the sentence after it"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-continuous-pushforward-sheaf",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-conjugate-iso-unit-equation"
@@ -156,5 +149,15 @@
   "group": "K1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T053949-L-2643582",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
