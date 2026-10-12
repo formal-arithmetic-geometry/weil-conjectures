@@ -13,7 +13,29 @@
  },
  "proof": [
   {
-   "text": "Define the forward map by evaluating at (1,g,gh) and the inverse by the equivariant formula. Continuity follows from the Krull topology and the discrete coefficient action; the cocycle equation follows by the homogeneous differential calculation.",
+   "text": "Use Mathlib InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois to obtain local compactness of the absolute Galois group. Equip the separable closure temporarily with the discrete topology. Mathlib stabilizer_isOpen_of_isIntegral and continuousSMul_iff_stabilizer_isOpen prove its action is continuous. Units.ext identifies the fibers of the additive unit action with field-element fibers, proving joint continuity of the actual coefficient action.",
+   "uses": [
+    "def-sc-galois-units-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On invariant degree-two cochains define coordinates f(g,h)=f(1,g,gh). Evaluation is jointly continuous by local compactness. Reconstruct with a continuous map on (G × G) × G sending (a,b,c) to rho(a)(f(a⁻¹b,b⁻¹c)); curry it twice. Expanding the coinduced action proves invariance. Group cancellation and equivariance prove both inverse identities.",
+   "uses": [
+    "def-sc-galois-units-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the recursive homogeneous differential in degree two to f(b,c,d) - (f(a,c,d) - (f(a,b,d) - f(a,b,c))). Evaluating at (1,g,gh,g(hi)) and using invariance gives the displayed inhomogeneous cocycle equation. Conversely apply rho(a) to that equation at (a⁻¹b,b⁻¹c,c⁻¹d); cancellation gives zero homogeneous differential.",
+   "uses": [
+    "def-sc-galois-units-cohomology",
+    "def-sc-galois-units-two-cocycle-classes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use KernelFork.mapIsoOfIsLimit with homogeneousCochains.cyclesIsKernel and TopModuleCat.isLimitKer to identify categorical cycles with the explicit differential kernel. Compose the proved kernel equivalence with the equivalence between a ContinuousMap with the cocycle identity and a function with continuity and the same identity.",
    "uses": [
     "def-sc-galois-units-cohomology",
     "def-sc-galois-units-two-cocycle-classes"
@@ -26,9 +48,9 @@
   "def-sc-galois-units-two-cocycle-classes"
  ],
  "proof_origin": {
-  "by": "J1 stage-3 worker",
+  "by": "S1 stage-3 worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Section 0DVG"
+  "place": "Section 0DVG (inhomogeneous differential); explicit homogeneous calculations written by S1"
  },
  "mathlib_searches": [
   {
@@ -95,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J1",
+  "reviewer": "X-69f97",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T112843-L-768938",
+  "landing": "20261012T160830-L-2612354",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, DAG nodes, report, and direct importer matched the review brief; compilation and axiom checks passed."
  }
 }
