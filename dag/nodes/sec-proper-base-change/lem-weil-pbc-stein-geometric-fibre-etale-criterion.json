@@ -27,31 +27,19 @@
  ],
  "proof": [
   {
-   "text": "Write $k=\\kappa(s)$. For an etale neighbourhood $(U,u)\\to(S,s)$, the residue-field map $k\\to\\kappa(u)$ is a finite separable extension by [lem-weil-pbc-etale-residue-field-extension-separable]. Associativity of fibre products identifies the fibre $X_u$ with the base change $X_s\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\kappa(u)$ (the fibre and base-change conventions are [def-pc-scheme-fibre] and [def-pc-base-change]).",
+   "text": "Use Mathlib isPullback_fiberToSpecResidueField_of_isPullback on the canonical pullback square for g and the neighbourhood map e. After replacing s by e(t), this gives the neighbourhood fibre as a cartesian square over the fibre g.fiber s and Spec κ(t). Geometric connectedness applies to this square directly, without a finite-separability hypothesis on the residue extension.",
    "uses": [
     "def-pc-scheme-fibre",
-    "def-pc-base-change",
-    "lem-weil-pbc-etale-residue-field-extension-separable"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 03GZ, proof, first paragraph (line 15224), with the fibre-product identification written out"
-   }
-  },
-  {
-   "text": "If $X_s$ is geometrically connected, then its base change along every field extension of $k$ is connected by [def-pc-geometrically-irreducible]. Applying this to the finite separable extension $k\\subseteq\\kappa(u)$ from Step 1 and using the fibre identification there shows that every etale-neighbourhood fibre $X_u$ is connected.",
-   "uses": [
     "def-pc-geometrically-irreducible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 03GZ, proof, first paragraph (line 15224)"
+    "place": "Tag 03GZ, proof, forward implication; cartesian identification by Mathlib fibre pullback lemma"
    }
   },
   {
-   "text": "Conversely, assume every etale-neighbourhood fibre is connected. If $X_s$ were not geometrically connected, [lem-weil-pbc-geometrically-connected-finite-separable-test] would provide a finite separable extension $k\\subseteq k'$ for which $X_s\\times_k\\operatorname{Spec}k'$ is disconnected. By [lem-weil-pbc-etale-neighbourhood-prescribed-residue-field] there is an affine etale neighbourhood $(U,u)\\to(S,s)$ whose residue extension $\\kappa(u)/k$ is identified with $k'/k$. Under that identification Step 1 identifies $X_u$ with the disconnected base change, contradicting the hypothesis. Therefore $X_s$ is geometrically connected.",
+   "text": "For the converse apply the finite-separable test to g.fiber s with its canonical structure morphism. For each finite separable extension K/κ(s), realize K as the residue field of an etale neighbourhood by the prescribed-residue-field theorem, with its compatible field isomorphism.",
    "uses": [
     "lem-weil-pbc-geometrically-connected-finite-separable-test",
     "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field"
@@ -59,14 +47,23 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 03GZ, proof, second paragraph (lines 15226--15233), using Varieties Lemma 0389 and Lemma 02LF"
+    "place": "Tag 03GZ, proof, converse (using Tags 0389 and 02LF)"
+   }
+  },
+  {
+   "text": "Apply Spec to the compatible residue-field isomorphism. Spec.map_comp and ring-map extensionality show that it identifies the residue-field map with the algebra map into K. Transport the cartesian square of the first step using IsPullback.of_iso, leaving its top-left corner unchanged. Its isoPullback induces a homeomorphism to the tested field base change. Transfer the assumed ConnectedSpace instance along that homeomorphism; the finite-separable criterion then proves geometric connectedness.",
+   "uses": [
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03GZ, proof, identification of X_u with the field base change; categorical and topological glue written by A3"
    }
   }
  ],
  "proof_deps": [
   "def-pc-scheme-fibre",
-  "def-pc-base-change",
-  "lem-weil-pbc-etale-residue-field-extension-separable",
   "def-pc-geometrically-irreducible",
   "lem-weil-pbc-geometrically-connected-finite-separable-test",
   "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field"
@@ -74,7 +71,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 37.53.6 (Tag 03GZ, label lemma-characterize-geometrically-connected-fibres), proof lines 15221--15233"
+  "place": "Tag 03GZ, proof; A3 realizes the argument using Mathlib cartesian fibre squares and compatible Spec isomorphisms (2026-10-12)"
  },
  "mathlib_searches": [
   {
@@ -152,5 +149,15 @@
   "group": "R1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T144051-L-2088138",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
