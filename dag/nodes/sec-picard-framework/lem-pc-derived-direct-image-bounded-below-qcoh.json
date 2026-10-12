@@ -1,0 +1,165 @@
+{
+ "id": "lem-pc-derived-direct-image-bounded-below-qcoh",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: compare the dualizing sheaves of the source and target under the finite morphism",
+   "via": [
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Bounded-below derived direct image has quasi-coherent cohomology",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme]. Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category], and let $a\\in\\mathbf Z$ satisfy $H^j(E)=0$ for all $j<a$ [def-sbc-standard-tstructure-derived-category]. Then $H^q(Rf_*E)$ is quasi-coherent for every $q\\in\\mathbf Z$, equivalently $Rf_*E\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$, where $Rf_*$ is [def-pc-derived-direct-image].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a strictly bounded-below representative of $E$ using the standard t-structure [def-sbc-standard-tstructure-derived-category]. Apply [thm-sp-truncation-e2] to module direct image. Its bounded-below derived functor agrees with $Rf_*$ [def-pc-derived-direct-image], since both are computed by an injective (hence K-injective) resolution of a bounded-below representative. The E2 terms are $R^p f_*H^j(E)$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "thm-sp-truncation-e2",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
+   }
+  },
+  {
+   "text": "Clause (1) of [lem-pc-finite-support-hi] makes every E2 term quasi-coherent. Negative first-index terms and terms with $j<a$ vanish by the quadrant bound in [thm-sp-truncation-e2].",
+   "uses": [
+    "lem-pc-finite-support-hi",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
+   }
+  },
+  {
+   "text": "Induct on the page number. A next-page term is the kernel of its outgoing differential modulo the image of its incoming differential. The kernel and cokernel/image closure lemmas [lem-weil-pbc-quasi-coherent-module-kernel] and [lem-weil-pbc-quasi-coherent-module-cokernel-image] make it quasi-coherent. Transfer these categorical constructions across the equivalence between Scheme.Modules and the shared SheafOfModules category if their category instances differ. Thus every stable term is quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
+   }
+  },
+  {
+   "text": "For each integer $q$, [thm-sp-truncation-e2] gives a finite filtration of $H^q(Rf_*E)$, full at first index zero and zero beyond $q-a$. Every graded piece is a stable page term, by the convergence comparisons. The zero final step is quasi-coherent (it is locally free on the empty set of generators). Descend through the finite number of steps, applying [lem-pc-quasi-coherent-extension] to $0\\to F^{p+1}\\to F^p\\to\\operatorname{gr}^p\\to0$. The full step is quasi-coherent, as required for each $q$.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-pc-quasi-coherent-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "thm-sp-truncation-e2",
+  "def-pc-derived-direct-image",
+  "lem-pc-finite-support-hi",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-quasi-coherent-extension"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded below complex with quasi coherent cohomology has quasi coherent derived direct image under a quasi compact quasi separated morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image of a bounded below complex has quasi coherent cohomology",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; DerivedCategory.Q; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*quasi.?coherent|quasi.?coherent.*derived",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageBoundedBelowQCoh.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedDirectImage_preserves_QCoh_of_isGE",
+  "statement": "theorem schemeDerivedDirectImage_preserves_QCoh_of_isGE\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E)\n    (a : ℤ) [E.IsGE a] :\n    schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T060751-L-2914109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T060751-L-2914109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

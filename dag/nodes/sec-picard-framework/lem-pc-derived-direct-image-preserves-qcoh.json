@@ -25,52 +25,41 @@
  ],
  "proof": [
   {
-   "text": "Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and fix an affine open $V=\\operatorname{Spec}(A)\\subseteq Y$; put $U=f^{-1}(V)$ and $f_V:U\\to V$, again quasi-compact and quasi-separated (a base change of $f$ along an open immersion). Choose a K-injective resolution $E\\to I$; by [lem-sc-derived-k-injective-restrict-open] $I|_U$ is K-injective, and $(f_*I)|_V=(f_V)_*(I|_U)$ termwise, so $(Rf_*E)|_V\\cong Rf_{V*}(E|_U)$ and, restriction being exact, $\\mathcal H^q(Rf_*E)|_V\\cong\\mathcal H^q(Rf_{V*}(E|_U))$. Also $E|_U\\in D_{\\mathrm{QCoh}}(\\mathcal O_U)$ [def-pc-derived-category]. Fix an integer $q$. Since $V$ is quasi-compact, [lem-pc-derived-direct-image-uniform-truncation-bound] for $f_V$ gives an integer $n$ (depending on $q$) such that $\\mathcal H^q(Rf_{V*}(E|_U))\\to\\mathcal H^q(Rf_{V*}\\tau_{\\geq -n}(E|_U))$ is an isomorphism. The complex $K=\\tau_{\\geq -n}(E|_U)$ is bounded below with $\\mathcal H^j(K)=0$ for $j<-n$, so [thm-sp-truncation-e2] applies to $v=f_{V*}$ with $a=-n$ (its $Rv$ on $D^+$ is $Rf_{V*}$, both computed by K-injective resolutions [def-pc-derived-direct-image]) and gives a spectral sequence with $E_2^{p,j}=R^p(f_V)_*\\mathcal H^j(K)$, where $\\mathcal H^j(K)=\\mathcal H^j(E)|_U$ for $j\\geq -n$ and $0$ for $j<-n$, converging to $\\mathcal H^{p+j}(Rf_{V*}K)$ with a finite filtration (clauses 3, 5, 6). Each $\\mathcal H^j(K)$ is quasi-coherent, so [lem-pc-finite-support-hi](1) for $f_V$ makes every $E_2^{p,j}$ quasi-coherent.",
+   "text": "Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and fix $q\\in\\mathbf Z$. For each affine open $U\\subseteq Y$, [lem-pc-derived-direct-image-affine-truncation-comparison] supplies an integer $n$ for which the restriction of $H^q(Rf_*E)\\to H^q(Rf_*\\tau_{\\geq -n}E)$ is an isomorphism. Canonical truncation preserves quasi-coherent cohomology: use DerivedCategory.homologyProperty_truncGE for the property SheafOfModules.isQuasicoherent. It contains zero, witnessed by the free sheaf on the empty type; the identity on that free sheaf is zero since freeHomEquiv has an empty target family. Thus the truncation lies in $D_{\\mathrm{QCoh}}(X)$ and is bounded below by $-n$.",
    "uses": [
-    "lem-sc-derived-k-injective-restrict-open",
+    "lem-pc-derived-direct-image-affine-truncation-comparison",
     "def-pc-derived-category",
-    "lem-pc-derived-direct-image-uniform-truncation-bound",
-    "thm-sp-truncation-e2",
-    "def-pc-derived-direct-image",
-    "lem-pc-finite-support-hi"
+    "def-sbc-standard-tstructure-derived-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D5, proof of part (1): canonical truncations and quasi-coherence of the higher direct images"
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
    }
   },
   {
-   "text": "In total degree $q$, clause 5 of [thm-sp-truncation-e2] gives a finite filtration $0=F^{q+n+1}H^q\\subseteq\\dots\\subseteq F^0H^q=H^q:=\\mathcal H^q(Rf_{V*}K)$ and clause 6 gives $\\operatorname{gr}^pH^q\\cong E_\\infty^{p,q-p}=E_{r_0}^{p,q-p}$, obtained from the quasi-coherent $E_2^{p,q-p}$ by finitely many passages $E_{r+1}=\\ker d_r/\\operatorname{im}d_r$ with $d_r$ maps between quasi-coherent $\\mathcal O_V$-modules. Kernels, images and cokernels of maps of quasi-coherent modules are quasi-coherent ([lem-weil-pbc-quasi-coherent-module-kernel], [lem-weil-pbc-quasi-coherent-module-cokernel-image](2)), so every $E_\\infty^{p,q-p}$, hence every $\\operatorname{gr}^pH^q$, is quasi-coherent; by descending induction on $p$, using [lem-pc-quasi-coherent-extension] on the short exact sequences $0\\to F^{p+1}H^q\\to F^pH^q\\to\\operatorname{gr}^pH^q\\to0$, $H^q$ is quasi-coherent. By Step 1, $\\mathcal H^q(Rf_*E)|_V\\cong H^q$ is quasi-coherent. Since the affine opens $V$ cover $Y$ and quasi-coherence is local, $\\mathcal H^q(Rf_*E)$ is quasi-coherent for every $q$, i.e. $Rf_*E\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [def-pc-derived-category].",
+   "text": "Apply [lem-pc-derived-direct-image-bounded-below-qcoh] to the truncation. Its q-th higher direct image is quasi-coherent, hence so is its restriction to $U$ by SheafOfModules.isQuasicoherent_over. Transport this property through the inverse of the isomorphism in the previous step, using ObjectProperty.prop_of_iso. Since the affine opens cover $Y$ (iSup_affineOpens_eq_top), SheafOfModules.IsQuasicoherent.of_coversTop gives quasi-coherence of $H^q(Rf_*E)$. This holds for every integer $q$, which is precisely the required schemeDerivedQCohProperty.",
    "uses": [
-    "thm-sp-truncation-e2",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-pc-quasi-coherent-extension",
+    "lem-pc-derived-direct-image-bounded-below-qcoh",
     "def-pc-derived-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D5, proof of part (1): finite truncation filtration and closure properties of quasi-coherent modules"
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
    }
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-k-injective-restrict-open",
+  "lem-pc-derived-direct-image-affine-truncation-comparison",
   "def-pc-derived-category",
-  "lem-pc-derived-direct-image-uniform-truncation-bound",
-  "thm-sp-truncation-e2",
-  "def-pc-derived-direct-image",
-  "lem-pc-finite-support-hi",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-pc-quasi-coherent-extension"
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-derived-direct-image-bounded-below-qcoh"
  ],
  "proof_origin": {
-  "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), part (1)"
+  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)",
+  "by": "document"
  },
  "mathlib_searches": [
   {
@@ -170,5 +159,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T060751-L-2914109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

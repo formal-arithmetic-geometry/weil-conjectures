@@ -1,0 +1,162 @@
+{
+ "id": "lem-pc-derived-direct-image-affine-truncation-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: compare the dualizing sheaves of the source and target under the finite morphism",
+   "via": [
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine-local canonical truncation comparison for higher direct image",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme]. Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category], $q\\in\\mathbf Z$, and let $U\\subseteq Y$ be an affine open. For some $n\\in\\mathbf Z$, the restriction to $U$ of the canonical map $H^q(Rf_*E)\\to H^q(Rf_*\\tau_{\\geq -n}E)$ is an isomorphism. Here $Rf_*$ is [def-pc-derived-direct-image], and the truncation and its projection are [def-sbc-standard-tstructure-derived-category]. No quasi-coherence assertion about either side is included.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $V=f^{-1}(U)$ and consider $f_U:V\\to U$. This is qcqs by stability under base change along an open immersion, and the affine scheme $U$ is quasi-compact. Restriction is exact and preserves quasi-coherence, so $E|_V$ has quasi-coherent cohomology. Use the standard localization model for the two local derived categories; the choices do not alter the comparison because all functors come from localization.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
+   }
+  },
+  {
+   "text": "Use [lem-pc-restrict-derived-direct-image-open] to obtain the natural identification $(Rf_*E)|_U\\cong R(f_U)_*(E|_V)$. This is computed by restricting a K-injective resolution, using [lem-sc-derived-k-injective-restrict-open]. The comparison is natural in the morphism $E\\to\\tau_{\\geq -n}E$.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-sc-derived-k-injective-restrict-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
+   }
+  },
+  {
+   "text": "Apply the second clause of [lem-pc-derived-direct-image-uniform-truncation-bound] to $f_U$, $E|_V$, and $q$. Choose its threshold $n_0$ as $n$. The q-th higher direct image of the canonical truncation projection on $V$ is an isomorphism.",
+   "uses": [
+    "lem-pc-derived-direct-image-uniform-truncation-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
+   }
+  },
+  {
+   "text": "Exact restriction commutes with homology and canonical truncation, including its projection: use Functor.mapDerivedCategoryHomologyFunctorIso and Functor.mapDerivedCategoryTruncGEIso from the existing exact-functor library. These comparisons carry the isomorphism from the previous step to the restriction to $U$ of the q-th higher direct image of the global projection. Naturality of the open-restriction comparison identifies this with the displayed map.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a qcqs morphism and any affine open in the target sufficiently low canonical truncation is an isomorphism on a fixed higher direct image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an affine open of the derived direct image canonical truncation map is an isomorphism in any fixed cohomology degree for sufficiently low truncation",
+   "results": "CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE; HomologicalComplex.instIsIsoFTruncLE'ToRestrictionOfIsStrictlySupported; HomologicalComplex.isIso_restrictionToTruncGE'; CochainComplex.isIso_ιTruncLE_iff; AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso; HomologicalComplex.isIso_truncLE'ToRestriction; HomologicalComplex.instIsIsoFRestrictionToTruncGE'OfIsStrictlySupported; CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trunc.*[Dd]irect[Ii]mage|[Dd]irect[Ii]mage.*trunc|trunc.*pushforward",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageAffineTruncationComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageAffineTruncationComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_isIso_schemeHigherDirectImage_truncGE_over_affine",
+  "statement": "theorem exists_isIso_schemeHigherDirectImage_truncGE_over_affine\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E)\n    (q : ℤ) (U : Y.affineOpens) :\n    ∃ n : ℤ, IsIso\n      ((SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) U.1).map\n        ((schemeHigherDirectImage f q).map\n          ((DerivedCategory.TStructure.t.truncGEπ (-n)).app E)))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T060751-L-2914109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T060751-L-2914109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
