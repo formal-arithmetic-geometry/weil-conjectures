@@ -28,59 +28,50 @@
  ],
  "proof": [
   {
-   "text": "Form the presheaf $\\mathcal P$ of $\\mathcal O_X$-modules by the sectionwise colimit $\\mathcal P(U)=\\varinjlim_i\\mathcal F_i(U)$. The sheafification of $\\mathcal P$ is a colimit of the $\\mathcal F_i$ in $\\Mod(\\mathcal O_X)$, so it is canonically isomorphic to the given colimit $(\\mathcal F,(c_i))$; this is the colimit construction in Modules 01AH(2), also recorded for arbitrary diagrams by [lem-weil-pbc-module-sheaves-colimits-forgetful]. For each open $U$, the filtered-colimit module lemma [lem-weil-pbc-filtered-colimit-modules-elementwise] identifies the underlying set of $\\mathcal P(U)$ with the colimit of the sets $\\mathcal F_i(U)$, compatibly with restrictions. Thus the underlying presheaf of sets of $\\mathcal P$ is the objectwise colimit of the underlying presheaves of sets of the $\\mathcal F_i$.",
+   "text": "Apply CategoryTheory.moduleSheaves_colimits_forgetful to O and I. Its preservation clause says that toSheaf O preserves I-colimits, so the given module colimit has underlying abelian sheaf the colimit of the abelian-sheaf diagram H = F ⋙ toSheaf O. This keeps the existing Modules 01AH/03DB/03CY tool, without constructing another presheaf of modules.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-presheaf-modules-colimits-sectionwise"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AH (lemma-limits-colimits), part (2), together with Sheaves, Lemma 007O (lemma-properties-algebraic-structures), item (7), and Section 009D (section-limits-presheaves)"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-module-sheafification-underlying-sets], the underlying sheaf of sets of the module sheafification of $\\mathcal P$ is the sheafification of the underlying presheaf of sets of $\\mathcal P$. Transporting along the canonical isomorphism between this module sheafification and $\\mathcal F$ identifies the underlying maps with the maps induced by the $c_i$.",
+   "text": "Let J be the opens topology, U the forgetful functor from abelian groups to sets, L the abelian presheaf sheafification functor, S = sheafCompose J U, and G = H ⋙ sheafToPresheaf J AddCommGrpCat. The category I is filtered since it is a nonempty directed preorder. The forgetful instance in the cited Mathlib leaf and the pointwise whiskeringRight preservation instance show that forgetting G to a diagram of set presheaves preserves its colimit.",
    "uses": [
-    "lem-weil-pbc-module-sheafification-underlying-sets",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites, Lemma 03CY (lemma-sheafification-presheaf-modules), with Sheaves, Lemma 0087 (lemma-sheafify-presheaf-structures), item (1)"
-   }
-  },
-  {
-   "text": "The sheafification of the objectwise presheaf colimit is a colimit in sheaves of sets by [lem-weil-pbc-sheaves-colimit-sheafification]. Applying this to the underlying presheaves from Step 1 and the identification in Step 2 proves that the underlying sheaf of sets of $\\mathcal F$, with the underlying maps of the $c_i$, is the colimit of the underlying sheaves of sets of the $\\mathcal F_i$.",
-   "uses": [
-    "lem-weil-pbc-sheaves-colimit-sheafification",
+    "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Section 009E (section-limits-sheaves), item (3)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Sheafification of set presheaves preserves colimits by its left-adjoint universal property. The canonical sheafComposeNatIso J U, which commutes abelian sheafification with forgetting to sets, identifies whiskeringRight U followed by set sheafification with L ⋙ S. Thus L ⋙ S preserves the colimit of G. This uses the abelian-to-sets comparison part of the module-sheafification underlying-sets Mathlib leaf.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-underlying-sets",
+    "lem-weil-pbc-sheaves-colimit-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit of the abelian sheafification adjunction is an isomorphism, giving e : G ⋙ L ≅ H. For hG = colimit.isColimit G, the mapped cocone L.mapCocone hG.cocone is colimiting, and its image under S is colimiting because L ⋙ S preserves hG. The lemma preservesColimit_of_preserves_colimit_cocone therefore shows that S preserves the colimit of G ⋙ L; preservesColimit_of_iso_diagram transports this along e to H. Composing with step 1 and applying isColimitOfPreserves to the supplied witness proves the required universal property with exactly the mapped coprojections.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-category-colimit",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+  "def-weil-pbc-category-colimit",
   "lem-weil-pbc-module-sheafification-underlying-sets",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-sheaves-colimit-sheafification"
+  "lem-weil-pbc-sheaves-colimit-sheafification",
+  "def-weil-pbc-sheafification"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "T3",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01AH (lemma-limits-colimits), part (2), with Sheaves, Lemmas 007O and 0087 and Section 009E"
+  "place": "Modules 01AH(2), via the established module-to-abelian-sheaf colimit tool; abelian-group filtered colimits and the Mathlib sheafComposeNatIso comparison implement Sheaves 007O, 0087, 009E"
  },
  "mathlib_searches": [
   {
@@ -168,5 +159,15 @@
   "group": "E1",
   "result": "fix",
   "note": "X topological space, O sheaf of rings, Mod(O)=SheafOfModules, directed set Preorder+IsDirected+Nonempty, given cocone with IsColimit, conclusion IsColimit of mapCocone under toSheaf⋙forget to sets; index/module universes unified to u"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T085344-L-41429",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

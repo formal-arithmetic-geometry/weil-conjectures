@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.Topology.Sheaves.SheafCondition.Sites
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-!
 # Underlying sheaves of sets and directed colimits of module sheaves
@@ -54,6 +56,30 @@ theorem underlying_directed_colimit_isColimit
       sheafCompose (Opens.grothendieckTopology X)
         (CategoryTheory.forget AddCommGrpCat.{u}))).mapCocone
         c)) := by
-  sorry
+  classical
+  -- First prove filtered-colimit preservation for abelian sheaves to sets.
+  let J := Opens.grothendieckTopology X
+  let U := CategoryTheory.forget AddCommGrpCat.{u}
+  let S := sheafCompose J U
+  let L := presheafToSheaf J AddCommGrpCat.{u}
+  let G := (F ⋙ toSheaf O) ⋙ sheafToPresheaf J AddCommGrpCat.{u}
+  let e : G ⋙ L ≅ F ⋙ toSheaf O :=
+    Functor.isoWhiskerLeft (F ⋙ toSheaf O)
+      (asIso (sheafificationAdjunction J AddCommGrpCat.{u}).counit)
+  have : PreservesColimit G (L ⋙ S) :=
+    preservesColimit_of_natIso G
+      (sheafComposeNatIso J U (sheafificationAdjunction J AddCommGrpCat.{u})
+        (sheafificationAdjunction J (Type u)))
+  -- Test preservation on a sheafified presheaf colimit, then use the counit iso.
+  let hG := colimit.isColimit G
+  have : PreservesColimit (G ⋙ L) S :=
+    preservesColimit_of_preserves_colimit_cocone (isColimitOfPreserves L hG)
+      (isColimitOfPreserves (L ⋙ S) hG)
+  have : PreservesColimit (F ⋙ toSheaf O) S :=
+    preservesColimit_of_iso_diagram S e
+  -- The existing module-sheaf colimit tool supplies the first forgetful step.
+  have : PreservesColimitsOfShape I (toSheaf O) :=
+    ((CategoryTheory.moduleSheaves_colimits_forgetful O).2.2.2.2.2 I).2.1
+  exact ⟨isColimitOfPreserves (toSheaf O ⋙ S) _hc⟩
 
 end SheafOfModules
