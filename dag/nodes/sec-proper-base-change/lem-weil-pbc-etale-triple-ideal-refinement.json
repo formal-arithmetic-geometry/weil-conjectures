@@ -9,25 +9,25 @@
  },
  "proof": [
   {
-   "text": "For the etale map R -> B and q over p, Stacks Tag 00U4(1) gives p B_q = q B_q. Hence f/1 belongs to the extension of pB to B_q. Clearing the finitely many denominators in this ideal membership gives g outside q such that gf belongs to pB.",
+   "text": "Equip B with the R-algebra induced by alpha. Convert scheme etaleness to Algebra.Etale using HasRingHomProperty.Spec_iff and RingHom.etale_algebraMap. Since q lies over p, Algebra.isUnramifiedAt_iff_map_eq gives p B_q equal to the maximal ideal. Map f in q into B_q and use IsLocalization.algebraMap_mem_map_algebraMap_iff to obtain g outside q with g*f in pB.",
    "uses": [
     "lem-weil-pbc-etale-prime-generates-maximal"
    ],
    "elementary": false
   },
   {
-   "text": "Use the principal localization B[1/g]. Its map to K extends since g has nonzero image; the kernel prime and fraction-field embedding define a compatible residue triple as in the unit-refinement construction. Spec(B[1/g]) -> Spec(B) is the principal open immersion, hence is etale by lem-weil-pbc-etale-composition-cancellation(1); its composite to Spec(R) is etale by clause (2). In B[1/g], the image of gf lies in pB[1/g]; multiplying by the inverse of g puts the image of f in this ideal.",
+   "text": "Apply etaleResidueTriple_unit_refinement to g to obtain a successor s and a morphism a with the image of g a unit. The Under-category morphism relation gives alpha_t followed by the ring map beta equal to alpha_s. Ideal.map_map and Ideal.mem_map_of_mem therefore carry g*f into pB_s. Rewrite beta(g*f) as beta(g)*beta(f), then apply Ideal.unit_mul_mem_iff_mem to cancel the unit beta(g).",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation"
+    "lem-weil-pbc-etale-triple-unit-refinement"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-prime-generates-maximal",
-  "lem-weil-pbc-etale-composition-cancellation"
+  "lem-weil-pbc-etale-triple-unit-refinement"
  ],
- "proof_origin": "Stacks Project Tags 04GN and 04GP, with kernel and residue-field constructions; second reading by D2, 2026-10-12.",
+ "proof_origin": "Stacks Project Tags 04GN and 04GP, with Tag 00U4(1); the principal-localization construction is reused through unit refinement. Lean ideal transport and unit cancellation by A3, 2026-10-12.",
  "status": "split",
  "created": {
   "by": "worker",
@@ -109,11 +109,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2e48d",
-  "group": "D2",
+  "reviewer": "COMPILER",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T085225-L-8352",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four nodes, cited dependencies and sources, import-change users, unit route, report, and earlier return; all modules and the direct importer compile cleanly; axiom audits show only standard axioms and the three reported helper sorries."
+  "landing": "20261012T095851-L-311801",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
