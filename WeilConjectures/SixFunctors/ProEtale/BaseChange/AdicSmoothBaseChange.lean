@@ -150,8 +150,14 @@ theorem isIso_adicBaseChangeTowerMap [Smooth p] [QuasiCompact g] [QuasiSeparated
     IsIso (adicBaseChangeTowerMap I sq.toCommSq K) := by
   rw [NatTrans.isIso_iff_isIso_app]
   rintro ⟨n⟩
-  exact isIso_derivedBaseChangeMap_app_of_smooth_of_nsmul_eq_zero R p sq (pow_ne_zero n hN₀)
-    (by rw [Nat.cast_pow]; exact hNS.pow n) _ (hK n) (nsmul_id_derivedCompletionDiagram_obj hNI K n)
+  -- Rewrite with the equation lemma so that the kernel never has to unfold the exchange map
+  -- `ProEtale.derivedBaseChangeMap` while checking the final term.
+  rw [adicBaseChangeTowerMap, Functor.whiskerLeft_app]
+  have hNn : IsUnit ((N ^ n : ℕ) : Γ(S, ⊤)) := by
+    rw [Nat.cast_pow]
+    exact hNS.pow n
+  exact isIso_derivedBaseChangeMap_app_of_smooth_of_nsmul_eq_zero R p sq (pow_ne_zero n hN₀) hNn
+    _ (hK n) (nsmul_id_derivedCompletionDiagram_obj hNI K n)
 
 /-- The derived direct image `Rh_*` commutes with derived limits: it sends a homotopy limit cone
 of a tower to a homotopy limit cone of its image. It is a triangulated right adjoint, so it

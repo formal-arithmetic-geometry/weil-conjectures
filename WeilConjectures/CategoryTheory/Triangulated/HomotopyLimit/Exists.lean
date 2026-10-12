@@ -42,12 +42,35 @@ noncomputable def coneOfComp {F : ℕᵒᵖ ⥤ C} {P : Fan fun n : ℕ ↦ F.ob
       dsimp
       rw [id_comp, assoc, ← towerShift_proj hP, ← assoc, hc])
 
-omit [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] in
+omit [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 @[simp]
 lemma coneOfComp_π_app {F : ℕᵒᵖ ⥤ C} {P : Fan fun n : ℕ ↦ F.obj (op n)} (hP : IsLimit P)
     {X : C} (c : X ⟶ P.pt) (hc : c ≫ towerShift hP = c) (n : ℕ) :
     (coneOfComp hP c hc).π.app (op n) = c ≫ P.proj n :=
   rfl
+
+/-- The first map `c : X ⟶ ∏ₙ Fₙ` of a Milnor triangle is fixed by the transition endomorphism
+`t`, being killed by `1 - t`. -/
+lemma comp_towerShift_of_distinguished {F : ℕᵒᵖ ⥤ C} {P : Fan fun n : ℕ ↦ F.obj (op n)}
+    (hP : IsLimit P) {X : C} {c : X ⟶ P.pt} {δ : P.pt ⟶ X⟦(1 : ℤ)⟧}
+    (hT : Triangle.mk c (𝟙 _ - towerShift hP) δ ∈ distTriang C) : c ≫ towerShift hP = c := by
+  have : c ≫ (𝟙 P.pt - towerShift hP) = 0 := comp_distTriang_mor_zero₁₂ _ hT
+  rw [Preadditive.comp_sub, comp_id, sub_eq_zero] at this
+  exact this.symm
+
+/-- The cone over a tower `F` given by the first map `c : X ⟶ ∏ₙ Fₙ` of a Milnor triangle
+`X ⟶ ∏ₙ Fₙ ──1 - t──▶ ∏ₙ Fₙ ⟶ X⟦1⟧` is a homotopy limit cone. -/
+lemma isHomotopyLimit_coneOfComp {F : ℕᵒᵖ ⥤ C} {P : Fan fun n : ℕ ↦ F.obj (op n)}
+    (hP : IsLimit P) {X : C} {c : X ⟶ P.pt} {δ : P.pt ⟶ X⟦(1 : ℤ)⟧}
+    (hT : Triangle.mk c (𝟙 _ - towerShift hP) δ ∈ distTriang C) :
+    IsHomotopyLimit (coneOfComp hP c (comp_towerShift_of_distinguished hP hT)) := by
+  refine ⟨P, hP, δ, ?_⟩
+  have : Fan.IsLimit.lift hP (fun n ↦ (coneOfComp hP c
+      (comp_towerShift_of_distinguished hP hT)).π.app (op n)) = c :=
+    Fan.IsLimit.hom_ext hP _ _ fun n ↦ by simp
+  rw [this]
+  exact hT
 
 /-- Every tower in a pretriangulated category with countable products has a homotopy limit
 cone. -/
@@ -56,15 +79,7 @@ lemma exists_isHomotopyLimit (F : ℕᵒᵖ ⥤ C) [HasProduct fun n : ℕ ↦ F
   let P : Fan fun n : ℕ ↦ F.obj (op n) := Fan.mk _ (Pi.π _)
   let hP : IsLimit P := productIsProduct _
   obtain ⟨X, c, δ, hT⟩ := distinguished_cocone_triangle₁ (𝟙 P.pt - towerShift hP)
-  have hc : c ≫ towerShift hP = c := by
-    have : c ≫ (𝟙 P.pt - towerShift hP) = 0 := comp_distTriang_mor_zero₁₂ _ hT
-    rw [Preadditive.comp_sub, comp_id, sub_eq_zero] at this
-    exact this.symm
-  refine ⟨coneOfComp hP c hc, P, hP, δ, ?_⟩
-  have : Fan.IsLimit.lift hP (fun n ↦ (coneOfComp hP c hc).π.app (op n)) = c :=
-    Fan.IsLimit.hom_ext hP _ _ fun n ↦ by simp
-  rw [this]
-  exact hT
+  exact ⟨_, isHomotopyLimit_coneOfComp hP hT⟩
 
 /-- A morphism of towers `a : F ⟶ G` which is an isomorphism at every level induces an
 isomorphism on homotopy limits: if `X ⟶ ∏ Fₙ ⟶ ∏ Fₙ ⟶ X⟦1⟧` and `Y ⟶ ∏ Gₙ ⟶ ∏ Gₙ ⟶ Y⟦1⟧` are
