@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.RingTheory.FormallySmoothAdic
+import Sheaf.RingTheory.SquareZeroSmallModel
 
 @[expose] public section
 
@@ -41,6 +42,23 @@ theorem formallySmoothAdic_lift_universe
     (g : S →ₐ[R] D ⧸ J)
     (hg : ∃ k : ℕ, 1 ≤ k ∧ ∀ x ∈ n ^ k, g x = 0) :
     ∃ f : S →ₐ[R] D, (Ideal.Quotient.mkₐ R J).comp f = g := by
-  sorry
+  obtain ⟨D₀, instRing, instAlg, e, K, q, g₀, hK, hq, hqe, hqg⟩ :=
+    exists_squareZero_small_model R S D J hJ g
+  let := instRing
+  let := instAlg
+  obtain ⟨k, hk, hgk⟩ := hg
+  have hg₀ : ∃ k : ℕ, 1 ≤ k ∧ ∀ x ∈ n ^ k, g₀ x = 0 := by
+    refine ⟨k, hk, fun x hx ↦ hq ?_⟩
+    have hxg : q (g₀ x) = g x := DFunLike.congr_fun hqg x
+    rw [hxg, hgk x hx, map_zero]
+  obtain ⟨f₀, hf₀⟩ := h K hK g₀ hg₀
+  refine ⟨e.comp f₀, ?_⟩
+  calc
+    (Ideal.Quotient.mkₐ R J).comp (e.comp f₀) =
+        ((Ideal.Quotient.mkₐ R J).comp e).comp f₀ := (AlgHom.comp_assoc _ _ _).symm
+    _ = (q.comp (Ideal.Quotient.mkₐ R K)).comp f₀ := by rw [hqe]
+    _ = q.comp ((Ideal.Quotient.mkₐ R K).comp f₀) := AlgHom.comp_assoc _ _ _
+    _ = q.comp g₀ := by rw [hf₀]
+    _ = g := hqg
 
 end Algebra
