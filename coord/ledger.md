@@ -7035,3 +7035,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/S2/Sheaf.AlgebraicGeometry.FiniteConstantMapOpenFactorization (stage 3; reviewer PASS; first push; landing 20261012T085334-L-37588 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:53 L: merged deliver/S2/Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor (stage 3; reviewer PASS; first push; landing 20261012T085335-L-37690 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/S2/Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage (stage 3; reviewer PASS; first push; landing 20261012T085335-L-37786 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/S2/Sheaf.CategoryTheory.CohomologyColimitSitesZeroComparison (stage 3; reviewer PASS; first push; landing 20261012T085335-L-37882 (interface); batch 20261012T085205; modules 4; new nodes 3)

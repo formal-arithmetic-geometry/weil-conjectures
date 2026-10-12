@@ -15,34 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Identify degree-zero Ext with sections. The two degree-zero unit formulas identify transitions and cocone legs with unit maps followed by the system maps.",
+   "text": "Represent a kernel element in the filtered group colimit at a stage. Use Arrow endpoint transport to transfer its vanishing cocone image to the composite canonical cohomology map and system cocone map. Evaluate the degree-zero class on the identity generator; naturality and the assumed canonical-map unit formula show its section image in K is zero.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-cohomology-pullback"
+    "lem-weil-pbc-object-cohomology-zero-evaluation",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "Use the inverse-image section formula of Sites 0A35, flatten the two filtered colimits over stage arrows, and apply finite-cover section comparison 09YN. This identifies the comparison with a section-group isomorphism, hence makes it injective. The existing fixed-site section declaration needs the inner-colimit argument, which is part of this step.",
+   "text": "Apply varying-site section zero detection. Use the assumed stage-map unit formula and evaluation naturality to show the later cohomology transition has zero section. Injectivity of evaluation makes the later class itself zero. Arrow transport then makes the D transition zero, and the colimit transition equation makes the original kernel element zero.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites",
-    "lem-weil-pbc-colimit-of-sites-sections",
+    "lem-weil-pbc-object-cohomology-zero-evaluation",
+    "lem-weil-pbc-varying-site-sections-zero-detection",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "lem-weil-pbc-colimit-of-sites",
-  "lem-weil-pbc-colimit-of-sites-sections",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-object-cohomology-zero-evaluation",
+  "lem-weil-pbc-varying-site-sections-zero-detection"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 09YP, using Sites 09YN and the right-exact diagram of Tag 0739"
+  "place": "Tag 09YP, degree zero; sections via Sites 09YN and 0A35",
+  "note": "S2: complete Lean Ext-to-sections and colimit-kernel argument; fixed-site outer sections proved; inner inverse-image step split off"
  },
  "mathlib_searches": [
   {
@@ -130,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T063509-L-3154669",
+  "landing": "20261012T085335-L-37882",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
