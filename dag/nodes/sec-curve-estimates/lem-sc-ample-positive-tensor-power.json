@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-ample-positive-tensor-power",
+ "kind": "statement",
+ "title": "Positive tensor powers preserve absolute ampleness",
+ "statement": "Let X be a scheme [def-pc-scheme], M an invertible module [def-sc-invertible-module], and k a positive natural number. If M is ample [def-weil-pbc-ample-invertible-module], then its kth tensor power is ample.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PT (lemma-ample-power), forward implication; Definition 01PS"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "At each point unpack absolute ampleness and keep its affine open, positive exponent n and section s of M^n. Form tensorPowSection of homOfGlobalSection(s), raised to the positive exponent k. The source ClearDenominators theorem exists_tensorPowSectionOne_eq_pow_smul supplies a local free frame E for this tensor power and coefficient a^k when s has coefficient a in a free frame. Its restriction identity identifies this with the global powered section.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove that a local free generator gives a bijective scalar map on stalks by representing scalars and vectors as germs. Its span is top, so Submodule.mem_smul_span_singleton identifies maximal-ideal membership of a times the frame with membership of a. A positive power of a is a unit exactly when a is a unit. Hence the powered section has the original nonvanishing locus.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport the powered section through tensorPowMulIso, the equality n*k=k*n, and tensorPowMulIso again. Prove preservation of nonvanishing under a module isomorphism using inverse linear maps on stalks and Submodule.smul_top_le_comap_smul_top. The resulting section of (M^k)^n has the same affine locus. Compactness is unchanged.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Lemma 01PT (lemma-ample-power), forward implication; Definition 01PS",
+  "note": "H2 formal proof following the cited source, checked by lcompile.py."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A positive tensor power of an ample invertible sheaf is ample",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive tensor power of an ample invertible sheaf is ample",
+   "results": "Scheme.basicOpen_pow and seven algebraic/basic-open results, none for absolute ampleness",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "nonvanishingLocus|IsAmple.*tensorPow",
+   "results": "0 hits in Mathlib",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GluedComponentAffineSection",
+  "group": "H2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "09NX first two paragraphs via the projectivity argument: replace each ample component module by a positive tensor power.",
+   "via": [
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-glued-component-affine-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AmplePositiveTensorPower",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmplePositiveTensorPower.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_positive_tensorPow",
+  "statement": "theorem isAmple_positive_tensorPow {X : Scheme.{u}} (M : X.Modules) [M.IsInvertible]\n    (hM : IsAmple X M) (k : ℕ) (hk : 0 < k) : IsAmple X (M.tensorPow k)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-92135",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135240-L-1667920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-92135",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135240-L-1667920",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged item signature and both helper statements with their DAG records and sources; all delivered modules and direct importer ExistsAmpleOfReducedDimLEOne compile cleanly; axiom checks show only standard axioms and sorryAx from existing dependencies; earlier return repaired."
+ }
+}

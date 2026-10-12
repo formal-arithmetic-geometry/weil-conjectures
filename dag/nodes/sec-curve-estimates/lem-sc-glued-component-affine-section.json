@@ -17,39 +17,41 @@
  ],
  "proof": [
   {
-   "text": "Pull T back to each closed subscheme. The preimage is finite because each immersion is injective. Apply the affine-section neighbourhood lemma with W the whole subscheme to each ample M_a. Replace M_a by the resulting positive tensor power, which stays ample by the ampleness criterion: for exponent k>0, raise each section of M^n to its kth power, a section of (M^k)^n with the same nonvanishing locus.",
+   "text": "Pull back the finite overlap set T to each component using injectivity of its closed immersion. Apply exists_affine_section_neighbourhood_of_finite with W=top, obtaining a positive exponent n_a, section s_a and affine locus V_a containing the inverse image of T. Let P_a=M_a.tensorPow(n_a). Apply isAmple_positive_tensorPow to retain ampleness.",
    "uses": [
     "lem-sc-ample-finite-principal-affine",
-    "def-weil-pbc-ample-invertible-module"
+    "lem-sc-ample-positive-tensor-power"
    ],
    "elementary": false
   },
   {
-   "text": "Every distinct pairwise intersection is a subset of T, hence a finite set of closed points. Its subspace is T1 and finite, so discrete. The chosen sections are nonvanishing on these intersections. Glue their invertible modules and sections on the reduced ambient scheme.",
+   "text": "Each distinct overlap is a subset of T, hence finite. Pull back the closed singletons of X to the overlap subtype to supply T1Space; Finite.instDiscreteTopology makes it discrete. Each chosen section is nonvanishing there. Apply the section clause of glueComponentLineBundles to P_a,s_a, obtaining L,t and compatible component restriction isomorphisms.",
    "uses": [
     "lem-sc-glue-component-line-bundles"
    ],
    "elementary": false
   },
   {
-   "text": "Pullback commutes with the residue-field value of a section. The glued section locus pulls back to each chosen affine locus and contains T. These affine loci are closed subschemes covering it. Apply the finite closed affine cover theorem. Transport the section through the canonical isomorphism L.tensorPow 1 ≅ L. The restriction isomorphisms transport ampleness from each powered M_a to the restriction of L. With r=0 the cover makes X empty, and the unit with its zero section has empty affine locus.",
+   "text": "Transfer invertibility and ampleness to each tensor pullback using the component isomorphism and isAmple_iff_of_iso. Apply affine_locus_of_compatible_component_sections to the fixed glued section and the affine opens V_a. Package its section of L^1 and affine open containing T with the component ampleness witnesses. No separate nonempty-cover case is needed.",
    "uses": [
-    "lem-sc-closed-affine-union-affine",
-    "def-weil-pbc-ample-invertible-module"
+    "lem-sc-ample-iso",
+    "lem-sc-affine-locus-compatible-component-sections"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-ample-finite-principal-affine",
-  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-ample-positive-tensor-power",
   "lem-sc-glue-component-line-bundles",
-  "lem-sc-closed-affine-union-affine"
+  "lem-sc-ample-iso",
+  "lem-sc-affine-locus-compatible-component-sections"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09NX, proof first two paragraphs (steps 3-4 of lem-sc-reduced-dim-le-one-ample); Properties 09NV, Varieties 09NE, Limits 09NL"
+  "place": "Varieties Lemma 09NX, proof first two paragraphs (steps 3-4 of lem-sc-reduced-dim-le-one-ample); Properties 09NV, Varieties 09NE, Limits 09NL",
+  "note": "H2: compiled assembly with fully proved positive-power and affine compatible-section helpers; no new sorry."
  },
  "mathlib_searches": [
   {
@@ -128,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M1",
+  "reviewer": "X-92135",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T085303-L-25047",
+  "landing": "20261012T135240-L-1667920",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged item signature and both helper statements with their DAG records and sources; all delivered modules and direct importer ExistsAmpleOfReducedDimLEOne compile cleanly; axiom checks show only standard axioms and sorryAx from existing dependencies; earlier return repaired."
  }
 }

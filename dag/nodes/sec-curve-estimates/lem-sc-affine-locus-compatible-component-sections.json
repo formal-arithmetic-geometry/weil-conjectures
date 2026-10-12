@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-affine-locus-compatible-component-sections",
+ "kind": "statement",
+ "title": "Affine locus of compatible sections on a finite closed cover",
+ "statement": "Let X be a scheme [def-pc-scheme], covered set theoretically by finitely many closed immersions i_a:C_a → X [def-weil-closed-immersion]. Let T be any subset of X. Fix an invertible module L [def-sc-invertible-module] with global section t, invertible modules P_a on C_a with sections s_a and affine opens V_a equal to their nonvanishing loci [def-weil-pbc-ample-invertible-module]. Suppose i_a^{-1}(T) lies in the locus of s_a. Suppose there are isomorphisms i_a^*L ≅ P_a carrying the adjunction-unit restriction of t to s_a [def-pc-module-pullback] [lem-pc-module-pullback-adjunction]. Then there is a section q of L^1 and an affine open U containing T whose underlying set is its nonvanishing locus. No reducedness, ampleness, finiteness of T or gluing conclusion is assumed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 09NX, second paragraph, affine glued section locus; Limits Lemma 09NL and Properties Section 01PR"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Apply nonvanishing_section_trivializes to the fixed L,t, obtaining its open locus U.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing nonvanishing_tensorPullback theorem to identify the nonvanishing of the adjunction-unit restriction of t with that of t. The component isomorphism preserves nonvanishing, and section compatibility identifies this locus with V_a. The cover and containment hypothesis now put T inside U.",
+   "uses": [
+    "lem-sc-nonvanishing-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The morphismRestrict of every closed immersion to U is still a closed immersion. Its source is (i_a^{-1}U).toScheme = (V_a).toScheme, affine by hypothesis. Lift a point of U through hcover, obtaining the explicit finite closed cover required by isAffine_of_finite_closed_cover. That theorem makes U affine. This covers r=0 as well.",
+   "uses": [
+    "lem-sc-closed-affine-union-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the right unitor L.tensorPow 1 ≅ L and its inverse to transport t. The stalk-isomorphism argument preserves the locus U, giving q and the required witnesses.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-sc-nonvanishing-tensor-pullback",
+  "lem-sc-closed-affine-union-affine",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 09NX, second paragraph, affine glued section locus; Limits Lemma 09NL and Properties Section 01PR",
+  "note": "H2 formal proof following the cited source, checked by lcompile.py."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of an invertible sheaf has affine nonvanishing locus if its restrictions to a finite closed cover have affine nonvanishing loci",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of an invertible sheaf has affine nonvanishing locus if its restrictions to a finite closed cover have affine nonvanishing loci",
+   "results": "Basic-open and structure-sheaf localization lemmas; no invertible-section finite-closed-cover criterion",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "nonvanishingLocus|IsAmple.*tensorPow",
+   "results": "0 hits in Mathlib",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GluedComponentAffineSection",
+  "group": "H2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "09NX second paragraph via projectivity: X_s contains T and is covered by the affine closed component section loci.",
+   "via": [
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-glued-component-affine-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLocusOfCompatibleComponentSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocusOfCompatibleComponentSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_locus_of_compatible_component_sections",
+  "statement": "theorem affine_locus_of_compatible_component_sections\n    (X : Scheme.{u}) (r : ℕ) (C : Fin r → Scheme.{u})\n    (i : ∀ a, C a ⟶ X) [∀ a, IsClosedImmersion (i a)]\n    (hcover : (⋃ a, Set.range (i a)) = Set.univ) (T : Set X)\n    (L : X.Modules) [L.IsInvertible] (t : Γ(L, ⊤))\n    (P : ∀ a, (C a).Modules) [∀ a, (P a).IsInvertible]\n    (s : ∀ a, Γ(P a, ⊤)) (V : ∀ a, (C a).Opens)\n    (hTV : ∀ a, i a ⁻¹' T ⊆ nonvanishingLocus (P a) (s a))\n    (hVlocus : ∀ a, (V a : Set (C a)) = nonvanishingLocus (P a) (s a))\n    (hVaff : ∀ a, IsAffineOpen (V a))\n    (he : ∀ a, ∃ e : (tensorPullback (i a)).obj L ≅ P a,\n      e.hom.val.app (op ⊤)\n        (((Classical.choose (exists_tensorPullbackAdjunction (i a))).unit.app L).val.app\n          (op ⊤) t) = s a) :\n    ∃ (q : (L.tensorPow 1).val.presheaf.obj (op ⊤)) (U : X.Opens),\n      T ⊆ (U : Set X) ∧ IsAffineOpen U ∧\n        (U : Set X) = nonvanishingLocus (L.tensorPow 1) q",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-92135",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135240-L-1667920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-92135",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135240-L-1667920",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged item signature and both helper statements with their DAG records and sources; all delivered modules and direct importer ExistsAmpleOfReducedDimLEOne compile cleanly; axiom checks show only standard axioms and sorryAx from existing dependencies; earlier return repaired."
+ }
+}
