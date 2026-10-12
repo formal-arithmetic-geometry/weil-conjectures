@@ -7,10 +7,10 @@ module
 
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Homology.HomotopyCategory
+import Sheaf.Algebra.Homology.LocalizedHomComplexCycles
+import Sheaf.Algebra.Homology.LocalizedHomComplexHomology
 
 /-!
 # Sections of the sheaf Hom complex and homotopy classes
@@ -73,6 +73,11 @@ theorem localizedHomComplex_homotopy
         ((e z).f p).val.app W =
           (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W) ∧
       ∃ a : S.homology 0 ≃ (q.obj (res.obj L) ⟶ q.obj (res.obj I)),
-        ∀ z : S.cycles 0, a (S.homologyπ 0 z) = q.map (e z) := by sorry
+        ∀ z : S.cycles 0, a (S.homologyπ 0 z) = q.map (e z) := by
+  classical
+  let hcyc := localizedHomComplex_cycles_aux (C := C) J R U L I hzero
+  rcases hcyc with ⟨e, he⟩
+  refine ⟨e, he, ?_⟩
+  exact localizedHomComplex_homology_aux (C := C) J R U L I hzero e he
 
 end CategoryTheory

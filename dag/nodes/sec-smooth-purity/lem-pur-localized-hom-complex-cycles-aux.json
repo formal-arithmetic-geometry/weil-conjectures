@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-localized-hom-complex-cycles-aux",
+ "kind": "statement",
+ "title": "Degree-zero cocycles identify localized chain maps",
+ "statement": "For a category C with topology J, a commutative ring sheaf R, U in C, and arbitrary cochain complexes L,I of R-modules, assume restriction to C/U preserves zero morphisms. Let S be the evaluated section complex of [def-pur-hom-complex], with its specified product projections pi, and res the termwise restriction. There exists an equivalence e from the degree-zero cycles of S to chain maps res(L) → res(I). For every cycle z, degree p and object W of (C/U)^op, the component (e z)^p at W is the value at W of pi(L,I,0,p,p) evaluated on the included cycle z at U.",
+ "stmt_deps": [
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, Hom complexes; Equation 0A8Y (degree zero)"
+ },
+ "proof": [
+  {
+   "text": "Proof: apply section evaluation at U to the product cone specified by\n`homComplex_exists`. The forgetful functor from sheaves of modules and evaluation\nof presheaves preserve products, as does the forgetful functor from modules to\nabelian groups. Sections of the internal Hom at U are natural linear maps of\nrestricted modules on C/U. Thus a section of degree n is a family of maps\nL^p|U to I^(p+n)|U, with components given by the chosen projections. For n = 0,\nthe differential formula is d_I f - f d_L. Its vanishing says precisely that the\nfamily is a chain map (the non-successive chain-map equations are zero by the\ncomplex shape). The cycle inclusion identifies cycles with the kernel of this\ndifferential. Send a cycle to the resulting chain map. Conversely, assemble the\ncomponents of a chain map using the sectionwise product universal property; its\nchain-map equations put it in that kernel, hence yield a unique cycle. These\nconstructions are inverse because the product projections are jointly injective\nand the cycle inclusion is injective. The definition of the forward construction\ngives the displayed component formula. All products are indexed by integers;\nno finite-support or boundedness condition enters.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, Hom complexes; Equation 0A8Y (degree zero), verified online; second-reader decomposition of the two original proof steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cocyclesEquiv|homAddEquiv|homology.*Homotopy",
+   "results": "Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvarianceTopCat.lean, Mathlib/AlgebraicTopology/SingularHomology/HomologyZero.lean, Mathlib/AlgebraicTopology/SingularHomology/HomologyZero.lean, Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean, Mathlib/AlgebraicTopology/SingularHomology/HomotopyInvariance.lean, Mathlib/AlgebraicTopology/EilenbergSteenrod.lean, Mathlib/AlgebraicTopology/EilenbergSteenrod.lean, Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+   "date": "2026-10-12",
+   "verdict": "Related categorical Hom-complex API; no sectionwise sheaf/slice comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "zero cocycles of Hom complex correspond to chain maps and boundaries correspond to homotopies",
+   "results": "CochainComplex.HomComplex.CohomologyClass.toHom_mk_eq_zero_iff, CochainComplex.HomComplex.CohomologyClass.mk_eq_zero_iff, CochainComplex.HomComplex.CohomologyClass, CochainComplex.HomComplex.CohomologyClass.mk_zero, CochainComplex.HomComplex.CohomologyClass.mk, CochainComplex.HomComplex.Cocycle.toSingleMk_mem_coboundaries_iff, CochainComplex.HomComplex.Cocycle.ofHom, CochainComplex.HomComplex.Cocycle.fromSingleMk_mem_coboundaries_iff",
+   "date": "2026-10-12",
+   "verdict": "Related categorical Hom-complex API; no sectionwise sheaf/slice comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.CohomologyClass.homAddEquiv",
+   "results": "CochainComplex.HomComplex.CohomologyClass.homAddEquiv, CochainComplex.HomComplex.CohomologyClass.homAddEquiv_apply",
+   "date": "2026-10-12",
+   "verdict": "Related categorical Hom-complex API; no sectionwise sheaf/slice comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "sections of internal Hom complex on a site identify cycles with chain maps on the slice category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "equivHom|equivHomotopy|leftHomologyData|homAddEquiv in Mathlib/Algebra/Homology/HomotopyCategory; homComplex in lean/Sheaf and lean/WeilConjectures",
+   "results": "Cocycle.equivHom; Cochain.equivHomotopy; CohomologyClass.homAddEquiv; leftHomologyData'. These apply to the categorical complex of Hom groups; the comparison with evaluated sheaf products is not stated there. No duplicate localized comparison found in the project.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; use these APIs when formalizing the remaining comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedHomComplexHomotopy",
+  "date": "2026-10-12",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Finite level, third operation: derived internal Hom computed with a K-injective resolution of the second variable; the localized comparison identifies degree-zero section cocycles with chain maps by the specified product projections.",
+   "via": [
+    "lem-pur-localized-hom-complex-homotopy",
+    "lem-pur-rhom-into-kinjective-local"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedHomComplexCycles",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedHomComplexCycles.lean",
+  "declaration": "CategoryTheory.localizedHomComplex_cycles_aux",
+  "statement": "theorem localizedHomComplex_cycles_aux\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    (L I : CochainComplex (SheafOfModules.{max u v}\n      ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ)\n    (hzero : Functor.PreservesZeroMorphisms\n      (SheafOfModules.overFunctor.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R) U)) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let H := homComplex (R := R) L I\n    let π := Classical.choose (Classical.choose_spec\n      (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))\n    let S := ((SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n      forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj H\n    letI := hzero\n    let res : CochainComplex (SheafOfModules.{max u v} R₀) ℤ ⥤\n        CochainComplex (SheafOfModules.{max u v} (R₀.over U)) ℤ :=\n      (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex (ComplexShape.up ℤ)\n    ∃ e : S.cycles 0 ≃ (res.obj L ⟶ res.obj I),\n      (∀ (z : S.cycles 0) (p : ℤ) (W : (Over U)ᵒᵖ),\n        ((e z).f p).val.app W =\n          (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4cc3b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T135301-L-1684750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4cc3b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T135301-L-1684750",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with their DAG nodes and Stacks 0A8X/0A8Y; all three modules and sole direct importer RhomIntoKInjectiveLocal compile cleanly; axioms are standard plus sorryAx from the two reported auxiliary holes."
+ }
+}
