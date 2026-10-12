@@ -13,20 +13,42 @@
  ],
  "proof": [
   {
-   "text": "H_1-vanishing identifies the kernel of the generator map with the image of the second Koszul differential; after tensoring with A/I the differential vanishes, yielding injectivity and surjectivity.",
+   "text": "Use degree-one homology vanishing to express any exact relation sum a_i f_i = 0 as a degree-two Koszul boundary. Identify degree one with the free module through exteriorPower.oneEquiv. The contraction of a wedge v_0 wedge v_1 is phi(v_0) v_1 - phi(v_1) v_0, where phi is the linear combination with f. Its coordinates belong to I, since both phi values belong to I. The exterior power is spanned by wedges, so all boundary coordinates belong to I.",
    "uses": [
-    "def-weil-pbc-koszul-regular-sequence"
+    "def-weil-pbc-koszul-regular-sequence",
+    "def-weil-pbc-koszul-complex"
    ],
    "elementary": false
+  },
+  {
+   "text": "By induction on the product ideal I squared, every x in I squared has an expression sum b_i f_i with every b_i in I: for y z with y,z in I express z in the generators and multiply its coefficients by y; add such expressions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a relation among conormal generators with quotient coefficients, lift the coefficients to a_i in A. The relation says sum a_i f_i belongs to I squared. Subtract the expression from the previous step to obtain the exact relation sum (a_i-b_i) f_i = 0. The boundary argument makes every a_i-b_i belong to I, hence every a_i belongs to I and the original quotient coefficients vanish. Apply Fintype.linearIndependent_iff.",
+   "uses": [
+    "def-sc-koszul-conormal-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For spanning, lift any conormal element to I using Ideal.toCotangent_surjective, and apply span induction to I = span(range f). Scalar multiplication by a in A on the conormal module agrees with scalar multiplication by its image in A/I. Combine spanning with the linear independence proved above.",
+   "uses": [
+    "def-sc-koszul-conormal-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-koszul-regular-sequence"
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-koszul-complex",
+  "def-sc-koszul-conormal-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 062I"
+  "place": "Tag 062I, first paragraph; explicit coefficient argument implementing the displayed exact sequence and reduction modulo the generated ideal (K2)"
  },
  "mathlib_searches": [
   {
@@ -94,10 +116,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T184342-L-4019402",
-  "kind": "interface",
+  "landing": "20261012T234220-L-2125582",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
