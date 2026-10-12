@@ -105,11 +105,10 @@
    }
   },
   {
-   "text": "(Lower bound: a chain of primes.) For $0\\le i\\le d$ let $P_i=(X_1,\\ldots,X_i)\\subseteq R_0$ ($P_0=0$). By [lem-weil-pbc-power-series-quotient-variables], $R_0/P_i\\cong\\Lambda[[X_{i+1},\\ldots,X_d]]$ via $\\pi_i$, which is a nonzero integral domain since $\\Lambda$ is one (step 1, [lem-weil-pbc-power-series-domain]); so $P_i$ is a prime ideal. For $i<d$, $P_i\\subsetneq P_{i+1}$: $X_{i+1}\\in P_{i+1}$, and $X_{i+1}\\notin P_i=\\ker\\pi_i$ because $\\pi_i(X_{i+1})=X_{i+1}\\ne0$. This is a chain $P_0\\subsetneq\\cdots\\subsetneq P_d$ of prime ideals of length $d$. If $\\Lambda$ is a Cohen ring, moreover $P_d\\subsetneq\\mathfrak m_0=(p,X_1,\\ldots,X_d)$, a prime (maximal) ideal (step 3): $p\\in\\mathfrak m_0$, and $p\\notin P_d=\\ker(F\\mapsto F(0))$ since $p(0)=p\\ne0$ in $\\Lambda$ (step 1); this extends the chain to length $d+1$. By the definition of Krull dimension [def-weil-pbc-krull-dimension-ring], $\\dim R_0\\ge n$ ($n$ as in step 6).",
+   "text": "Lower dimension bound: induct on the number d of variables. MvPowerSeries.isEmptyEquiv identifies the zero-variable ring with the coefficient ring. MvPowerSeries.finSuccEquiv identifies the (d+1)-variable ring with PowerSeries of the d-variable ring. Apply ringKrullDim_succ_le_ringKrullDim_powerseries and transport dimension through the ring equivalence. Thus dim Lambda + d <= dim Lambda[[X_1,...,X_d]]. A field has dimension zero (ringKrullDim_eq_zero_of_field); a Cohen ring is a DVR and has dimension one (IsDiscreteValuationRing.ringKrullDim_eq_one). This proves the needed lower bounds without a separately formalized prime chain.",
    "uses": [
-    "lem-weil-pbc-power-series-quotient-variables",
-    "lem-weil-pbc-power-series-domain",
-    "def-weil-pbc-krull-dimension-ring"
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-pbc-cohen-ring"
    ],
    "elementary": false,
    "source": {
@@ -147,7 +146,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023) states the result without proof; the proof is written by an agent"
+  "place": "Remark Tag 032C states the result. M1 second reading implements steps 1-6 and 8 using the existing dependency declarations and their Mathlib matches, and replaces step 7 by induction through MvPowerSeries.finSuccEquiv and Mathlib ringKrullDim_succ_le_ringKrullDim_powerseries."
  },
  "mathlib_searches": [
   {
@@ -223,5 +222,15 @@
   "group": "M1",
   "result": "pass",
   "note": "Λ CommRing u + IsField ∨ ∃p IsCohenRing p; R0 = MvPowerSeries (Fin d) Λ; (1) Noetherian/IsDomain/IsLocalRing, m0 = span(range X) resp. insert (C p); (2) e : Λ⧸m_Λ ≃+* R0⧸m0 pinned by e(mk a)=mk(C a); (3) IsAdicComplete m0; (4) IsRegularLocalRing, ringKrullDim = d resp. d+1; names resolve to _root_ by rfl inside namespace MvPowerSeries; d=0 ok"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T120759-L-973017",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
