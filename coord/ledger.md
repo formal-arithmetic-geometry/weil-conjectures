@@ -7659,3 +7659,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:44 L: merged deliver/D3/Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat (stage 3; reviewer PASS; first push; landing 20261012T124409-L-1170435 (proof); batch 20261012T120425; modules 1; new nodes 0)
 - 12:44 L: returned deliver/P2/Sheaf.AlgebraicGeometry.NormalizedGenericDataLifts (reviewer RETURN: (reviewer X-95e09, head 95e090418) B2/B3/B4: In dag/nodes/sec-proper-base-change/new-normalized-generic-data-lifts.json,)
 - 12:45 L: merged deliver/G1/Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsos (stage 3; reviewer PASS; first push; landing 20261012T124541-L-1178320 (interface); batch 20261012T120425; modules 3; new nodes 2)
+- 12:46 L: returned deliver/H2/Sheaf.AlgebraicGeometry.EtaleLimitAffineEventualZero (reviewer RETURN: (reviewer X-7dba8, head 7dba89394) B3: In each new node file lem-weil-pbc-etale-limit-affine-degree-zero-kernel.json, le)
