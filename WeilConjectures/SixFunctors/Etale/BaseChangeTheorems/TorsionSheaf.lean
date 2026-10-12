@@ -498,7 +498,8 @@ noncomputable def Etale.DerivedCategory.Plus.moduleTorsionHomologyOfPrimes (P : 
       (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) n).obj K)
 
 /-- `P`-torsion cohomology is in particular torsion cohomology. -/
-lemma Etale.DerivedCategory.Plus.moduleTorsionHomologyOfPrimes_le_moduleTorsionHomology (P : Set ℕ) :
+lemma Etale.DerivedCategory.Plus.moduleTorsionHomologyOfPrimes_le_moduleTorsionHomology
+    (P : Set ℕ) :
     Etale.DerivedCategory.Plus.moduleTorsionHomologyOfPrimes Λ X P ≤
       Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X :=
   fun _ hK n ↦ have := hK n; .of_isTorsionSheafOfPrimes P _

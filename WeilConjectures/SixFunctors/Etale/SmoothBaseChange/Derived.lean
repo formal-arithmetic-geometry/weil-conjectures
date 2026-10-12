@@ -83,7 +83,8 @@ def Scheme.invertiblePrimes (S : Scheme.{u}) : Set ℕ :=
 invertible on `S`. -/
 lemma Scheme.IsTorsionModuleSheafOfInvertibleOrder.of_isTorsionSheafOfPrimes {S T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionModuleSheafOfPrimes S.invertiblePrimes F] : IsTorsionModuleSheafOfInvertibleOrder S F where
+    [IsTorsionModuleSheafOfPrimes S.invertiblePrimes F] :
+    IsTorsionModuleSheafOfInvertibleOrder S F where
   exists_isUnit_nsmul_eq_zero Ω _ _ s x := by
     obtain ⟨n, hn, hP, hx⟩ :=
       IsTorsionModuleSheafOfPrimes.exists_nsmul_eq_zero (P := S.invertiblePrimes) Ω s x
