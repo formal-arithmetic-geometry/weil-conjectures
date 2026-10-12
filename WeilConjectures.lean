@@ -256,6 +256,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.Modules.FaithfullyFlatDescent
 public import WeilConjectures.AlgebraicGeometry.Modules.FieldBaseChange
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatResolution
