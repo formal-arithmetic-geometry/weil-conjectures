@@ -12,113 +12,35 @@
  },
  "proof": [
   {
-   "text": "*Lifting the idempotent.* Write $\\bar e=(1,0)\\in B/IB=B_1\\times B_2$, an idempotent, which is the image of $b$. Since $B$ is a finitely generated $A$-module, $B$ is integral over $A$ [lem-weil-pbc-finite-algebra-is-integral]. By [lem-weil-pbc-lift-idempotent-upstairs] there are a ring map $A\\to A'$ with $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ etale such that $\\alpha:A/I\\to A'/IA'$ is an isomorphism, and an idempotent $e'\\in B':=B\\otimes_AA'$ whose image under $B'\\to B'/IB'=B\\otimes_A(A'/IA')\\xrightarrow{\\mathrm{id}\\otimes\\alpha^{-1}}B\\otimes_A(A/I)=B/IB$ is $\\bar e$.",
+   "text": "Apply the flat split neighbourhood theorem to obtain C, the quotient compatibility, ideals K and L, and the first and second factor relations.",
    "uses": [
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-weil-pbc-lift-idempotent-upstairs"
+    "lem-weil-pbc-gabber-flat-split-neighbourhood"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), first sentence (Lemma 07M4)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The decomposition upstairs.* $B'$ is a finitely generated $A'$-module (if $b_1,\\dots,b_n$ generate $B$ over $A$, the $b_k\\otimes1$ generate $B'$ over $A'$). Put $B'_1=B'/(1-e')B'$ and $B'_2=B'/e'B'$; since $e'$ is idempotent, $B'\\to B'_1\\times B'_2$ is an isomorphism of $A'$-algebras, and both factors are finitely generated $A'$-modules. Reducing modulo $I$ and using the identification $B'/IB'\\cong B/IB$ of step 1, under which $e'\\mapsto\\bar e=(1,0)$, we get $B'_1/IB'_1\\cong(B/IB)/(1-\\bar e)=B_1$ and $B'_2/IB'_2\\cong(B/IB)/\\bar e=B_2$, compatibly with the structure maps from $A'/IA'\\cong A/I$. In particular the image $b'=(b'_1,b'_2)$ of $b$ in $B'$ satisfies $b'_1\\equiv1$ modulo $IB'_1$ and $b'_2\\in IB'_2$.",
+   "text": "Use the quotient compatibility and the Jacobson radical hypothesis with the flat maximal-fibre criterion to prove C is faithfully flat over A.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'Consider the corresponding A'-algebra decomposition B' = B'_1 x B'_2 which is compatible with the one given in the lemma upon reduction modulo I'"
-   }
+   "elementary": false
   },
   {
-   "text": "*Nakayama.* Let $C$ be the cokernel of the $A'$-linear map $A'\\to B'_1$; it is a finitely generated $A'$-module (a quotient of $B'_1$). Since $C/IC$ is the cokernel of $A'/IA'\\to B'_1/IB'_1$, which by step 2 is the cokernel of the surjection $A/I\\to B_1$, we have $C=(IA')C$. By [lem-weil-pbc-nakayama-one-plus-ideal-annihilator] (applied to the ring $A'$ and the ideal $IA'$) there is $g\\in A'$ with $g-1\\in IA'$ and $gC=0$, i.e. $gy$ lies in the image of $A'$ for every $y\\in B'_1$.",
-   "uses": [
-    "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
-    "def-weil-finitely-generated-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'The map A' -> B'_1 is surjective modulo IA'. By Nakayama's lemma (Algebra, Lemma 00DV) we can find i in IA' such that ...'"
-   }
-  },
-  {
-   "text": "*Replacing $A'$ by $A'':=A'_g$.* (a) $A\\to A''$ is flat: $A\\to A'$ is flat because it is etale [lem-weil-pbc-etale-algebra-flat], $A'\\to A'_g$ is flat as a localization [lem-weil-pbc-localization-flat], and a composite of flat ring maps is flat [lem-weil-pbc-flat-ring-map-comp]. (b) $A/I\\to A''/IA''$ is an isomorphism: $A''/IA''=(A'/IA')_{\\bar g}$ and $\\bar g=1$ in $A'/IA'$, so $A'/IA'\\to A''/IA''$ is an isomorphism, and we compose with $\\alpha$. (c) Put $B''=B\\otimes_AA''=B'\\otimes_{A'}A''=B'_g$ and $B''_k=(B'_k)_g$, so $B''=B''_1\\times B''_2$ as $A''$-algebras, each $B''_k$ is a finitely generated $A''$-module, and $B''_k/IB''_k\\cong B'_k/IB'_k$ (again because $g\\equiv1$ modulo $IA'$). The map $A''\\to B''_1$ is surjective: an element $y/g^n$ of $(B'_1)_g$ equals $(gy)/g^{n+1}$, and $gy$ is the image of some $a\\in A'$ by step 3, so $y/g^n$ is the image of $a/g^{n+1}$. (d) By step 2 the image $b''=(b''_1,b''_2)$ of $b$ in $B''$ satisfies $b''_1-1\\in IB''_1$ and $b''_2\\in IB''_2$.",
-   "uses": [
-    "lem-weil-pbc-etale-algebra-flat",
-    "lem-weil-pbc-localization-flat",
-    "lem-weil-pbc-flat-ring-map-comp"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'after replacing A' by A'_{1+i} the map A' -> B'_1 is surjective'; 'The map A -> A' [is] flat because it is etale (Algebra, Lemma 00U2)'"
-   }
-  },
-  {
-   "text": "*The first component.* Since $A''\\to B''_1$ is surjective, $IB''_1$ is the image of $IA''$; so there is $a'\\in IA''$ mapping to $b''_1-1$, i.e. $b''_1-1-a'=0$ in $B''_1$.",
+   "text": "In the quotient by L, apply the monic polynomial annihilator for an element of an extended ideal. Multiply by X and then by X - 1 - a; the zero intersection K ⊓ L gives a relation whose difference from (X - 1)X^d has coefficients in IC.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'Thus we may pick a' in IA' mapping to b'_1 - 1'"
-   }
+   "elementary": false
   },
   {
-   "text": "*The second component.* $B''_2$ is a finitely generated $A''$-module, hence integral over $A''$ [lem-weil-pbc-finite-algebra-is-integral], and $b''_2\\in IB''_2=(IA'')B''_2$. By [lem-weil-pbc-integral-extended-ideal-element-monic] (Algebra, Lemma 00H5, applied to $A''\\to B''_2$ and the ideal $IA''$) there is a monic $g_2=x^e+\\sum_{j<e}c_jx^j\\in A''[x]$ with all $c_j\\in IA''$ and $g_2(b''_2)=0$. Put $d=e+1$ and $G=xg_2=x^d+\\sum_{j<d}c'_jx^j$ (so $c'_0=0$, $c'_j=c_{j-1}$); then $d\\ge1$, all $c'_j\\in IA''$ and $G(b''_2)=0$. (Stacks takes $g$ of degree $d$ directly; multiplying by $x$ ensures $d\\ge1$, which fails for $g_2$ only when $e=0$, i.e. $B''_2=0$.)",
-   "uses": [
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-weil-pbc-integral-extended-ideal-element-monic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'By Algebra, Lemma 00H5 there exist a monic polynomial g(x) = x^d + sum a'_j x^j of degree d with a'_j in IA' such that g(b'_2) = 0'"
-   }
-  },
-  {
-   "text": "*A relation in $B''$.* Let $H=(x-1-a')G\\in A''[x]$. Its value at $b''=(b''_1,b''_2)$ is computed componentwise: the first factor vanishes at $b''_1$ (step 5) and $G$ vanishes at $b''_2$ (step 6), so $H(b'')=0$. Moreover $H-(x-1)x^d=(x-1)(G-x^d)-a'G$ has degree $\\le d$ and all its coefficients in $IA''$ (as $G-x^d$ has coefficients in $IA''$ and $a'\\in IA''$). Hence $(b''-1)(b'')^d\\in N'':=\\sum_{j=0}^dIA''\\cdot(b'')^j\\subseteq B''$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'Thus the image b' = (b'_1, b'_2) in B' of b is a root of the polynomial (x - 1 - a')g(x). We conclude that (b' - 1)(b')^d in sum IA' (b')^j'"
-   }
-  },
-  {
-   "text": "*$A\\to A''$ is faithfully flat.* Let $\\mathfrak m\\subset A$ be a maximal ideal. As $I$ lies in the Jacobson radical, $I\\subseteq\\mathfrak m$, so by step 4(b) $A''/\\mathfrak mA''\\cong(A''/IA'')/\\mathfrak m(A''/IA'')\\cong(A/I)/(\\mathfrak m/I)=A/\\mathfrak m\\neq0$. Since $A\\to A''$ is flat (step 4(a)), it is faithfully flat [lem-weil-pbc-flat-faithfully-flat-maximal-ideals]. (Stacks argues that the image of $\\operatorname{Spec}A''\\to\\operatorname{Spec}A$ is open (Proposition 00I1) and contains $V(I)$, hence every maximal ideal, hence is everything; the fact used is the same, that every maximal ideal of $A$ lies in $V(I)$ and is in the image, and the criterion Algebra Lemma 00HP makes the openness unnecessary.)",
-   "uses": [
-    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0EM0 (lemma-helper-finite, line 2290), 'For this it is enough to see that the ring map A -> A' is faithfully flat ... the image contains V(I). Since I is contained in the Jacobson radical of A we conclude'"
-   }
-  },
-  {
-   "text": "Represent each coefficient in IC as a finite sum of c*i with c in C and i in I. Taking the corresponding sums of pure tensors gives coefficient tensors c_j in C tensor_A I. Their images under the base changes of the linear maps i ↦ i*b^j sum to 1 tensor (b-1)b^d, by step 7. This is an equality in the tensor algebra before taking any quotient.",
+   "text": "Represent each coefficient in IC by a tensor in C tensor_A I using span induction, evaluate the resulting coefficient tensors, and identify the left side via the tensor algebra map.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-finitely-generated-module",
-  "lem-weil-pbc-etale-algebra-flat",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
-  "lem-weil-pbc-flat-ring-map-comp",
-  "lem-weil-pbc-integral-extended-ideal-element-monic",
-  "lem-weil-pbc-lift-idempotent-upstairs",
-  "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator"
+  "lem-weil-pbc-gabber-flat-split-neighbourhood"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0EM0, construction preceding descent; positive degree ensured by multiplying the second-factor annihilator by X"
+  "place": "Tag 0EM0, formalized reduction after the flat split neighbourhood; polynomial and tensor steps are proved directly in Mathlib"
  },
  "mathlib_searches": [
   {
@@ -188,9 +110,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261012T135310-L-1689549",
+  "landing": "20261012T154838-L-2475177",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-gabber-flat-split-neighbourhood",
+ "kind": "statement",
+ "title": "Flat split neighbourhood in Gabber's finite algebra argument",
+ "statement": "Let A and B be commutative rings, B a finite A-algebra [def-weil-finitely-generated-module], and I an ideal of A (no Jacobson hypothesis). Let B1 and B2 be A/I-algebras, and e: B/IB ≃ B1 × B2 a structure-map-compatible ring equivalence. Assume A/I → B1 is surjective and b in B maps to (1,0). There exist a commutative A-algebra C in the universe of A, flat over A, and a structure-map-compatible equivalence A/I ≃ C/IC. In T = C tensor_A B there are ideals K,L with K ∩ L = 0 and a scalar a in IC such that 1 tensor b - 1 - a belongs to K and 1 tensor b belongs to L + (IC)T.",
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EM0, proof of lemma-helper-finite, lifting the idempotent and splitting factors"
+ },
+ "proof": [
+  {
+   "text": "Lift the idempotent through an etale neighbourhood, split the finite algebra into factors, apply Nakayama and localize, then record the kernel and ideal relations.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-lift-idempotent-upstairs",
+    "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EM0 proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-lift-idempotent-upstairs",
+  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-ring-map-comp"
+ ],
+ "proof_origin": "Stacks Project Tag 0EM0, formalized as an intermediate stage-3 statement.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flat algebra quotient ring equivalence ideal tensor product",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat A C -> Ideal quotient equivalence",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat_iff quotientMap TensorProduct Ideal",
+   "results": "used existing declarations only",
+   "date": "2026-10-12",
+   "verdict": "no direct theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat split finite algebra neighbourhood preserving quotient",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteGabberUpstairsRelation",
+  "date": "2026-10-12",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-gabber-upstairs-tensor-coefficients"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteGabberFlatSplit",
+  "file": "lean/Sheaf/RingTheory/FiniteGabberFlatSplit.lean",
+  "declaration": "Algebra.exists_flat_split_gabber_neighbourhood",
+  "statement": "theorem exists_flat_split_gabber_neighbourhood\n    {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]\n    [Module.Finite A B] (I : Ideal A)\n    (B₁ : Type w) (B₂ : Type z) [CommRing B₁] [CommRing B₂]\n    [Algebra (A ⧸ I) B₁] [Algebra (A ⧸ I) B₂]\n    (e : (B ⧸ I.map (algebraMap A B)) ≃+* (B₁ × B₂))\n    (he : ∀ a : A, e (Ideal.Quotient.mk (I.map (algebraMap A B)) (algebraMap A B a)) =\n      (algebraMap (A ⧸ I) B₁ (Ideal.Quotient.mk I a),\n        algebraMap (A ⧸ I) B₂ (Ideal.Quotient.mk I a)))\n    (h₁ : Function.Surjective (algebraMap (A ⧸ I) B₁))\n    (b : B) (hb : e (Ideal.Quotient.mk (I.map (algebraMap A B)) b) = (1, 0)) :\n    ∃ (C : CommRingCat.{u}) (f : A →+* C),\n      letI : Algebra A C := f.toAlgebra\n      Module.Flat A C ∧\n        ∃ α : A ⧸ I ≃+* C ⧸ I.map (algebraMap A C),\n          (∀ a : A, α (Ideal.Quotient.mk I a) =\n            Ideal.Quotient.mk _ (algebraMap A C a)) ∧\n          ∃ K L : Ideal (TensorProduct A C B), K ⊓ L = ⊥ ∧\n            ∃ a : C, a ∈ I.map (algebraMap A C) ∧\n              ((1 : C) ⊗ₜ[A] b) - 1 - algebraMap C (TensorProduct A C B) a ∈ K ∧\n              ((1 : C) ⊗ₜ[A] b) ∈ L ⊔\n                (I.map (algebraMap A C)).map (algebraMap C (TensorProduct A C B))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T154838-L-2475177",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T154838-L-2475177",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
