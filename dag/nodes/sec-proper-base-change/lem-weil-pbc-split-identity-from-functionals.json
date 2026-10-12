@@ -32,7 +32,18 @@
  ],
  "proof": [
   {
-   "text": "Construct the complementary terms as S_j. Restrict d_i to ker α→ker β using βd_i=α; restrict d_(i+1) into ker α using its assumed zero coefficient; all remaining maps have codomain either the original module or the top submodule and restrict immediately. Their composites vanish because the submodule inclusions are injective and the original composites vanish.",
+   "text": "Use split_submodules_stable to prove that the explicit kernel and line families are invariant under every differential. Apply restrictToSubmodules to construct both complexes by restricting the original differentials. Their square-zero relations follow by evaluating C.d_comp_d in the ambient module.",
+   "uses": [
+    "lem-weil-pbc-split-submodules-stable"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
+   }
+  },
+  {
+   "text": "The line terms are the spans R·z and R·w in the two specified degrees and bottom elsewhere. The restrictions of α and β give linear equivalences from these spans to R: the inverse sends r to r·z or r·w. Their composites are identities because α(z)=β(w)=1. The relation βd=α makes the middle differential the identity under these equivalences.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -41,16 +52,7 @@
    }
   },
   {
-   "text": "Construct T with a universe lift of R in the two specified degrees, the zero module elsewhere, identity differential i→i−1, and all other differentials zero. Consecutive maps have zero composite since no two nonzero differentials are composable.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
-   }
-  },
-  {
-   "text": "At i split x as (x−α(x)z)+α(x)z. At i−1 split y as (y−β(y)w)+β(y)w. In each case the first component is in the specified kernel, and applying the functional proves uniqueness. Elsewhere use the original module plus the zero module. These maps and their displayed inverses are linear, yielding the binary DirectSum linear equivalences ψ_j.",
+   "text": "Prove IsCompl(ker α, R·z) and IsCompl(ker β, R·w) using x=(x−α(x)z)+α(x)z and the corresponding formula for β. Elsewhere top and bottom are complementary. Compose DirectSum.linearEquivFunOnFintype, the Boolean-function/product equivalence, and Submodule.prodEquivOfIsCompl to obtain ψ. Its value on the two summands is the sum of their ambient inclusions.",
    "uses": [
     "def-weil-pbc-direct-sum-modules"
    ],
@@ -61,7 +63,7 @@
    }
   },
   {
-   "text": "Check compatibility by degrees: at i+1 the coefficient is zero by hin; at i, d(x+r z)=d(x)+r w using hdz and βd=α; at i−1, d(y+s w)=d(y) using hout; everywhere else the maps are the original differentials. Thus ψ is a chain isomorphism. The complementary terms were constructed as S_j, so their identifying equivalences g are identities.",
+   "text": "Both complexes have the original differential restricted to their submodules. Thus ψ commutes with the differentials by linearity: d(x+t)=d(x)+d(t). The kernel-term equivalences g are identities. No arbitrary degreewise equivalence or arbitrary existential witness is used.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -71,6 +73,7 @@
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-split-submodules-stable",
   "def-weil-pbc-direct-sum-modules"
  ],
  "proof_origin": {
@@ -154,9 +157,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T173825-L-3295447",
+  "landing": "20261012T184334-L-4016493",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

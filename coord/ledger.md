@@ -9040,3 +9040,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.AlternatingCechSortedContraction (stage 3; reviewer PASS; first push; landing 20261012T184333-L-4016069 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets (stage 3; reviewer PASS; after a return; landing 20261012T184334-L-4016211 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/Q2/Sheaf.RingTheory.SingularIdealsAbsoluteBound (stage 3; reviewer PASS; first push; landing 20261012T184334-L-4016359 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/Q3/Sheaf.Algebra.Homology.SplitIdentityFromFunctionals (stage 3; reviewer PASS; first push; landing 20261012T184334-L-4016493 (interface); batch 20261012T184234; modules 2; new nodes 1)
