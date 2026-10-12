@@ -7641,3 +7641,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:11 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransportCocycle (stage 3; reviewer PASS; first push; landing 20261012T121111-L-991415 (proof); batch 20261012T120425; modules 1; new nodes 0)
 - 12:11 L: merged deliver/R1/Sheaf.AlgebraicGeometry.SplitReductionSpectrumComponents (stage 3; reviewer PASS; first push; landing 20261012T121127-L-992414 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 12:11 L: merged deliver/R1/Sheaf.CategoryTheory.SheafAbelianObjectsBijective (stage 3; reviewer PASS; first push; landing 20261012T121143-L-994717 (interface); batch 20261012T120425; modules 3; new nodes 2)
+- 12:11 L: merged deliver/R1/Sheaf.ConstructibleSheaf.TorsorAssociatedModuleComparisons (stage 3; reviewer PASS; first push; landing 20261012T121159-L-996048 (interface); batch 20261012T120425; modules 3; new nodes 2)

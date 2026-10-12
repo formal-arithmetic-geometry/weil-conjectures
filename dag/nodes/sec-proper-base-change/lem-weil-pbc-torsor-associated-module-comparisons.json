@@ -17,21 +17,29 @@
  ],
  "proof": [
   {
-   "text": "1. Over the pullback of the torsor to its total space, use the diagonal section. An\n   equivariant locally constant section is determined by evaluation at this section;\n   conversely extend a locally constant section by the representation action on each\n   translate of the diagonal. The torsor isomorphism identifies these translates with\n   all of the pulled-back torsor. These inverse formulas are linear and commute with\n   etale restrictions and intertwining maps. The equivariant section presheaf is a\n   sheaf: glue on the induced etale cover of the total space, and use uniqueness of\n   gluing to preserve equivariance. Thus sheafification does not change its sections.\n   The evaluation formulas give the natural pullback comparison, including the scalar\n   restriction in the definition of the associated functor.\n2. For the trivial representation the equivariance condition is invariance. On an\n   etale cover admitting a torsor section, an invariant locally constant function on\n   the torsor is a unique locally constant function downstairs. Changing the section\n   translates it by a group element, so invariance identifies the resulting functions\n   on overlaps. Glue them downstairs. Pullback and this descent are inverse linear\n   maps, natural in the etale object, giving the coefficient comparison. Neither\n   argument imposes finite generation on the module.",
+   "text": "Compute etale pullback by upperStarIsoLocalizationRestriction. Use pushforwardContinuousSheafificationCompatibility for the continuous and cocontinuous localization functor to move sheafification past restriction. Whisker the diagonal presheaf comparison with presheafToSheaf, then compose with sheafificationNatIso to obtain the natural pullback comparison. No separate sheaf axiom for the equivariant presheaf is needed.",
    "uses": [
-    "def-weil-pbc-torsor-associated-module"
+    "lem-weil-pbc-torsor-diagonal-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the invariant coefficient presheaf comparison through presheafToSheaf. Compose with the inverse sheafificationIso of the constant coefficient sheaf. Return the two composed isomorphisms as Nonempty witnesses.",
+   "uses": [
+    "lem-weil-pbc-torsor-invariant-sections"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-torsor-associated-module"
+  "lem-weil-pbc-torsor-diagonal-evaluation",
+  "lem-weil-pbc-torsor-invariant-sections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)",
-  "note": "Detailed implementation of the corresponding steps of the parent descent argument; extends fixed finite torsor descent to arbitrary modules."
+  "note": "R1: complete categorical assembly from two strictly smaller presheaf comparisons; the unit route and theorem statement are unchanged."
  },
  "mathlib_searches": [
   {
@@ -138,11 +146,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-a2263",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T085241-L-15409",
+  "landing": "20261012T121159-L-996048",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged comparison signature and two new presheaf lemmas with their nodes, torsor definitions, and source arguments; all three delivered modules and the sole direct importer TorsorModuleDescentEquivalence compile cleanly; axiom output contains only permitted axioms and expected sorryAx."
  }
 }
