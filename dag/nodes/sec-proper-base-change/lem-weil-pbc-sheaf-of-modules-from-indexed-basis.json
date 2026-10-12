@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "1. Set B=range U and choose one index c(V) for each V in B. Give V the module Q(c(V)),\n   transported along U(c(V))=V. Restriction is r between the chosen indices. The identity,\n   composition and scalar laws descend to this presheaf of modules.",
+   "text": "Set B = range U and choose c(V) with U(c(V)) = V. Define F(V) by restricting scalars on Q(c(V)) along the equality-induced ring map R(V) → R(U(c(V))). Its carrier is Q(c(V)), so the original additive restrictions define rb. Identity and composition follow from rid and rcomp; semilinearity follows from rsmul and functoriality of R.",
    "uses": [],
    "elementary": true
   },
@@ -22,7 +22,7 @@
    "elementary": true
   },
   {
-   "text": "3. The finite refinement hypothesis descends to B: index a covering by its members,\n   choose an index for each, apply hrefine and take the displayed finite basis opens.\n   Transport each compatible finite family to the chosen representatives. Composition\n   and the inverse identifications from step 2 translate overlap equality into hglue.\n   Transport its unique glued element back to obtain finite unique gluing on B.",
+   "text": "Descend finite refinement by indexing C ⊆ B by its subtype, applying hrefine to its chosen representatives, and taking the resulting opens as elements of B. For finite gluing, restrict each overlap equality from the chosen representative of the intersection to cap(c(V_j),c(V_k)). Composition turns it into precisely the overlap hypothesis of hglue. Apply hglue to the chosen indices; the carriers of F are unchanged, so the unique section and its restriction formulas give finite unique gluing on B.",
    "uses": [],
    "elementary": true
   },
@@ -34,23 +34,24 @@
    "elementary": false
   },
   {
-   "text": "5. A compatible linear family psi restricts to the chosen representatives. Apply the\n   basis-extension universal property to obtain its unique morphism. Composition extends\n   its section formula to every original index, and uniqueness on chosen indices proves\n   uniqueness on all indices. If every psi i is bijective, so is every chosen map, and\n   the basis-extension isomorphism criterion applies. Empty covers are included in hglue,\n   so this construction also applies to the empty space and empty basis.",
+   "text": "Compose each compatible family psi with iota to get linear maps E(U_i) → G(U_i). Apply Mathlib TopCat.Sheaf.restrictHomEquivHom on the indexed basis to the underlying additive maps. The extension is linear: restrict its scalar-linearity equation to a basis neighbourhood of each point, use naturality and the given basis linearity, then sheaf section_ext. Hom uniqueness follows from TopCat.Sheaf.hom_ext. If every psi_i is bijective, each component is bijective because iota_i is a linear equivalence. TopCat.Sheaf.isIso_iff_isIso_basis and reflection of isomorphisms by SheafOfModules.toSheaf give IsIso. No nonempty-index or nonempty-cover assumption is used.",
    "uses": [
-    "lem-weil-pbc-sheaf-of-modules-from-basis"
+    "lem-weil-pbc-sheaf-morphism-on-basis"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sheaf-of-modules-from-basis"
+  "lem-weil-pbc-sheaf-of-modules-from-basis",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q2",
+  "group": "V3",
   "date": "2026-10-12",
   "document": "literature/stacks-project/sheaves.tex",
   "place": "Section 009H, Tags 009L, 009N, 009T and 009U; choose one index per basis open",
-  "note": "Source argument specialized to the existing Lean chart interfaces."
+  "note": "Implemented representative descent using restriction of scalars. Existence uses the stated set-basis theorem; the universal property uses the existing Mathlib basis morphism leaf directly."
  },
  "mathlib_searches": [
   {
@@ -121,10 +122,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T110315-L-620526",
-  "kind": "interface",
+  "landing": "20261012T135330-L-1698793",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
