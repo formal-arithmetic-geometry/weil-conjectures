@@ -8,7 +8,8 @@ module
 public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Topology.Compactness.Compact
 public import Sheaf.Topology.AbelianOpenExtensionByZero
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Topology.AbelianSheafFiniteGeneratorStages
+import Sheaf.Topology.AbelianSheafDirectedStalkColimit
 
 /-! # AbelianSheafFiniteGenerationExhaustion
 
@@ -63,6 +64,11 @@ theorem abelianSheaf_finiteGeneration_exhaustion
           ((constantSheaf
             (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i)))
             AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ (D.obj i), Epi g) := by
-  sorry
+  classical
+  let S := Σ U : {U : Opens X // IsCompact (U : Set X)}, F.obj.obj (op U.val)
+  obtain ⟨D, c, hcover, hstage⟩ := abelianSheaf_finiteGenerator_stages X hbas F
+  refine ⟨Finset S, inferInstance, inferInstance, inferInstance, D, c, ?_, hstage⟩
+  exact abelianSheaf_directed_stalk_colimit X F (Finset S) D c
+    (fun i ↦ (hstage i).1) hcover
 
 end TopCat

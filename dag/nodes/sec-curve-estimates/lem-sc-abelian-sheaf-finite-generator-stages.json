@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-abelian-sheaf-finite-generator-stages",
+ "kind": "statement",
+ "title": "Finite-generator subsheaf stages with joint stalk coverage",
+ "statement": "Let $X$ have a basis of quasi-compact opens and let $F$ be an abelian sheaf [def-sc-topological-abelian-cohomology]. Let $S=\\coprod_{U\\subseteq X\\text{ open quasi-compact}} F(U)$. There is a functor $D:\\operatorname{Finset}(S)\\to\\operatorname{Ab}(X)$ and a cocone $c:D\\to F$ whose maps are monomorphisms and jointly surjective on every stalk: for each $x$ and $t\\in F_x$ there are $A\\in\\operatorname{Finset}(S)$ and $s\\in(D_A)_x$ with $(c_A)_x(s)=t$. Each $D_A$ admits an epimorphism from a finite coproduct of $E_U=j_!\\underline{\\mathbf Z}_U$, where all indexing opens are quasi-compact, allowing an empty coproduct. The constant sheaf and extension by zero are [def-weil-pbc-constant-sheaf] and [def-sc-abelian-open-extension-by-zero]; stalks are [def-weil-pbc-module-stalk].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02UX (lemma-vanishing-generated-one-section), first paragraph of the proof"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "For each compact-open section s construct E_U to F by the constant sheaf adjunction, multiplication by s, and the extension-by-zero counit. The distinguished integer-1 germ maps to s_x.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-sc-abelian-open-extension-by-zero",
+    "lem-sc-topological-extension-by-zero-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite set A form the finite coproduct of its generators and take the image of its map to F. Abelian image factorization yields the monic inclusion and epic presentation. Enumerate A by Fin A.card.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For A contained in B, use the commuting square of coproducts over F to induce the image inclusion. Uniqueness under the monic inclusion proves identity and composition laws and cocone compatibility.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Represent a germ on an open neighborhood, then restrict to a compact basis open. The singleton stage for this restricted section contains the germ by the integer-1 formula. This gives the asserted joint stalk coverage, with no claim yet that F is the colimit.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "lem-sc-topological-extension-by-zero-stalks"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-open-extension-by-zero",
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-module-stalk",
+  "lem-sc-topological-extension-by-zero-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02UX, first paragraph; explicit implementation of its stalkwise colimit argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "directed colimit of subsheaves jointly surjective on stalks",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf is the filtered colimit of subobjects whose stalks exhaust every stalk",
+   "results": "Generic germ existence, basis germ existence, and existence of filtered sheaf colimits; no finite-generation exhaustion or directed stalk-cover criterion.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteGeneration|jointly.*stalk|stalk.*colimit",
+   "results": "Stalk and skyscraper APIs; local Mathlib search finds Types.FilteredColimit.isColimitOf' and the stalkwise isomorphism criterion. No existing construction of finite-generator abelian subsheaf diagrams.",
+   "date": "2026-10-12",
+   "verdict": "generic APIs used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.AbelianSheafFiniteGenerationExhaustion",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Lemma 02UX, first paragraph, finite-generation exhaustion",
+   "via": [
+    "lem-sc-abelian-sheaf-finite-generation-exhaustion",
+    "lem-sc-cohomology-reduction-constant-subsheaves",
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.AbelianSheafFiniteGeneratorStages",
+  "file": "lean/Sheaf/Topology/AbelianSheafFiniteGeneratorStages.lean",
+  "declaration": "TopCat.abelianSheaf_finiteGenerator_stages",
+  "statement": "theorem abelianSheaf_finiteGenerator_stages (X : TopCat.{u}) (hbas : ∀ (U : Set X), IsOpen U → ∀ x ∈ U, ∃ V : Set X, IsOpen V ∧ IsCompact V ∧ x ∈ V ∧ V ⊆ U) (F : X.Sheaf AddCommGrpCat.{u}) : let S := Σ U : {U : Opens X // IsCompact (U : Set X)}, F.obj.obj (op U.val) ∃ (D : Finset S ⥤ X.Sheaf AddCommGrpCat.{u}) (c : D ⟶ (Functor.const (Finset S)).obj F), (∀ (x : X) (t : Presheaf.stalk (C := AddCommGrpCat.{u}) F.obj x), ∃ (i : Finset S) (s : Presheaf.stalk (C := AddCommGrpCat.{u}) (D.obj i).obj x), (Presheaf.stalkFunctor AddCommGrpCat.{u} x).map (c.app i).hom s = t) ∧ ∀ i : Finset S, Mono (c.app i) ∧ (∃ (n : ℕ) (U : Fin n → Opens X) (_ : ∀ i, IsCompact ((U i : Opens X) : Set X)), ∃ g : (∐ fun i ↦ (TopCat.Sheaf.abelianOpenExtensionByZero (U i)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ (D.obj i), Epi g)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T085334-L-37491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T085334-L-37491",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
