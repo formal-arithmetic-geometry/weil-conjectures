@@ -14,32 +14,28 @@
  },
  "proof": [
   {
-   "text": "Evaluate the presheaf left Kan extension at T as a filtered colimit over (StructuredArrow T i).op. Filtered colimits of sets commute with finite limits in every larger coefficient universe. Compose with sheaf inclusion and sheafification, both left exact, and use uniqueness of left adjoints to identify the composite with the canonical sheafPullback.",
+   "text": "Install the given continuity hypothesis as an instance. Restrict the AB5 instance for Type (max (u + 1) v) to filtered indexing categories with objects and morphisms in universe u using CategoryTheory.AB5OfSize_of_univLE. Apply the already proved CategoryTheory.preservesFiniteLimits_op_lan_of_flat from WeilConjectures.Mathlib.CategoryTheory.Functor.Flat to i: this is the universe-general version of the sectionwise filtered-colimit argument for presheaf pullback. Finally apply CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits. That theorem composes the limit-preserving sheaf inclusion, left Kan extension, and sheafification and transfers preservation across sheafPullbackIso, obtained from uniqueness of the left adjoint. Thus the original arbitrary-universe canonical sheaf pullback preserves finite limits.",
    "uses": [
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
     "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-    "lem-weil-pbc-sheafification-sets-exact",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-sheafification-sets-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 00X5 (lemma-directed-morphism, line 2802), proof (u_p commutes with finite limits by Categories Lemma 002W since the I_Y^opp are filtered, Lemma 00X3; sheafification commutes with finite limits, Lemma 00WJ; u_s = # o u_p); Proposition Tag 00X6 (proposition-get-morphism, line 2827), proof"
+    "place": "Lemma Tag 00X5, with Tags 00X3 and 00WJ; filtered colimits of sets commute with finite limits in the larger coefficient universe"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
   "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-  "lem-weil-pbc-sheafification-sets-exact",
-  "def-weil-pbc-sites-and-cohomology"
+  "lem-weil-pbc-sheafification-sets-exact"
  ],
  "proof_origin": {
-  "by": "S1 stage 3 second reading",
+  "by": "U2 stage 3 second reading",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Lemma Tag 00X5, with filtered-colimit argument in arbitrary larger universes"
+  "place": "Lemma Tag 00X5, realized using the closed universe-general Kan-extension theorem and Mathlib sheafPullbackConstruction.preservesFiniteLimits"
  },
  "mathlib_searches": [
   {
@@ -115,10 +111,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T053953-L-2645445",
-  "kind": "interface",
+  "landing": "20261012T063523-L-3160912",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
