@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Monoidal.Functor
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
 
 /-!
 # Transport of a lax monoidal structure along a natural isomorphism
@@ -24,6 +25,8 @@ structure of `G` is determined by the oplax structure of `F` and the adjunction.
 - `CategoryTheory.Adjunction.isIso_ε_of_isIso_η` and
   `CategoryTheory.Adjunction.isIso_μ_of_isIso_δ`: for a monoidal adjunction `F ⊣ G` with
   invertible unit and counit, the comparison maps of `G` are invertible if those of `F` are.
+- `CategoryTheory.Functor.eq_of_leftUnitality`: the unit comparison `F (𝟙_ D) ⟶ 𝟙_ C` of a
+  functor is determined by an invertible tensor comparison and the left unitality axiom.
 -/
 
 @[expose] public section
@@ -83,6 +86,30 @@ lemma transport_μ {F G : C ⥤ D} [F.LaxMonoidal] (i : F ≅ G) (X Y : C) :
     μ G X Y = (i.inv.app X ⊗ₘ i.inv.app Y) ≫ μ F X Y ≫ i.hom.app (X ⊗ Y) :=
   rfl
 
+variable (F : C ⥤ D) [F.LaxMonoidal] [IsIso (ε F)]
+
+/-- If the unit comparison `ε` of a lax monoidal functor is an isomorphism, so is
+`μ : F X ⊗ F 𝟙_ ⟶ F (X ⊗ 𝟙_)`: by right unitality, it is
+`(F X ◁ ε)⁻¹ ≫ ρ_ ≫ F (ρ_)⁻¹`. -/
+lemma isIso_μ_tensorUnit_right (X : C) : IsIso (μ F X (𝟙_ C)) := by
+  have h : μ F X (𝟙_ C) =
+      CategoryTheory.inv (F.obj X ◁ ε F) ≫ (ρ_ (F.obj X)).hom ≫ F.map (ρ_ X).inv := by
+    rw [right_unitality, Category.assoc, Category.assoc, ← F.map_comp, Iso.hom_inv_id,
+      F.map_id, Category.comp_id, IsIso.inv_hom_id_assoc]
+  rw [h]
+  infer_instance
+
+/-- If the unit comparison `ε` of a lax monoidal functor is an isomorphism, so is
+`μ : F 𝟙_ ⊗ F X ⟶ F (𝟙_ ⊗ X)`: by left unitality, it is
+`(ε ▷ F X)⁻¹ ≫ λ_ ≫ F (λ_)⁻¹`. -/
+lemma isIso_μ_tensorUnit_left (X : C) : IsIso (μ F (𝟙_ C) X) := by
+  have h : μ F (𝟙_ C) X =
+      CategoryTheory.inv (ε F ▷ F.obj X) ≫ (λ_ (F.obj X)).hom ≫ F.map (λ_ X).inv := by
+    rw [left_unitality, Category.assoc, Category.assoc, ← F.map_comp, Iso.hom_inv_id,
+      F.map_id, Category.comp_id, IsIso.inv_hom_id_assoc]
+  rw [h]
+  infer_instance
+
 end CategoryTheory.Functor.LaxMonoidal
 
 namespace CategoryTheory.Adjunction
@@ -114,3 +141,24 @@ lemma isIso_μ_of_isIso_δ [IsIso adj.unit] [IsIso adj.counit] (X Y : D)
   infer_instance
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Functor
+
+open MonoidalCategory
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D] {F : D ⥤ C}
+
+/-- The unit comparison of a functor is determined by its tensor comparison: if
+`u, u' : F (𝟙_ D) ⟶ 𝟙_ C` both satisfy the left unitality axiom of an oplax monoidal functor
+for the same invertible comparison `φ : F (𝟙_ D ⊗ 𝟙_ D) ⟶ F (𝟙_ D) ⊗ F (𝟙_ D)`, and `u` is an
+isomorphism, then `u = u'`. -/
+lemma eq_of_leftUnitality (φ : F.obj (𝟙_ D ⊗ 𝟙_ D) ⟶ F.obj (𝟙_ D) ⊗ F.obj (𝟙_ D)) [IsIso φ]
+    (u u' : F.obj (𝟙_ D) ⟶ 𝟙_ C) [IsIso u]
+    (h : φ ≫ u ▷ F.obj (𝟙_ D) ≫ (λ_ _).hom = F.map (λ_ (𝟙_ D)).hom)
+    (h' : φ ≫ u' ▷ F.obj (𝟙_ D) ≫ (λ_ _).hom = F.map (λ_ (𝟙_ D)).hom) :
+    u = u' := by
+  refine whiskerRight_injective_of_tensorIso (Y := 𝟙_ C) (ρ_ _ ≪≫ asIso u) ?_
+  rw [← cancel_epi φ, ← cancel_mono (λ_ _).hom, Category.assoc, Category.assoc, h, h']
+
+end CategoryTheory.Functor

@@ -140,6 +140,25 @@ theorem iSup_opensRange_fromSpec_eq_top :
     X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
   exact Opens.mem_iSup.mpr ⟨⟨V, hV⟩, by rwa [IsAffineOpen.opensRange_fromSpec]⟩
 
+/-- **A criterion for quasi-coherence.** An `𝒪_X`-module `M` is quasi-coherent as soon as, for
+every affine open `W` of `X` and every `f ∈ Γ(X, W)`, every section of `M` over `D(f)` becomes the
+restriction of a section over `W` after multiplication by a power of `f`, and every section over
+`W` vanishing on `D(f)` is killed by a power of `f` [EGA I, Théorème 1.4.1]. -/
+theorem isQuasicoherent_of_forall_isAffineOpen (M : X.Modules)
+    (h₁ : ∀ (W : X.Opens), IsAffineOpen W → ∀ (f : Γ(X, W)) (s : Γ(M, X.basicOpen f)),
+      ∃ (n : ℕ) (t : Γ(M, W)), M.presheaf.map (homOfLE (X.basicOpen_le f)).op t =
+        X.presheaf.map (homOfLE (X.basicOpen_le f)).op f ^ n • s)
+    (h₂ : ∀ (W : X.Opens), IsAffineOpen W → ∀ (f : Γ(X, W)) (t : Γ(M, W)),
+      M.presheaf.map (homOfLE (X.basicOpen_le f)).op t = 0 → ∃ n : ℕ, f ^ n • t = 0) :
+    M.IsQuasicoherent :=
+  isQuasicoherent_of_iSup_opensRange_eq_top M
+    (fun U : {U : X.Opens // IsAffineOpen U} ↦ U.2.fromSpec) iSup_opensRange_fromSpec_eq_top
+    fun U ↦
+      have : IsIso (M.restrict U.2.fromSpec).fromTildeΓ :=
+        (isIso_fromTildeΓ_iff_isLocalizing _).2
+          (isLocalizing_restrict_fromSpec_of_forall M U.2 (h₁ U.1 U.2) (h₂ U.1 U.2))
+      presentationOfIsIsoFromTildeΓ _
+
 /-- **The kernel of a morphism of quasi-coherent modules is quasi-coherent.** On an affine open
 `U`, restriction along `Spec Γ(X, U) ⟶ X` commutes with kernels, and on `Spec Γ(X, U)` the kernel of
 a morphism of localizing modules is localizing (`isLocalizing_kernel`). -/

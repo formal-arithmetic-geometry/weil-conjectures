@@ -29,8 +29,10 @@ two-sided tensor inverse (`CategoryTheory.IsInvertible.isDualizable`).
   internal hom `ihom X` is `Y ⊗ -`.
 - `CategoryTheory.MonoidalClosed.ihomUnitTensorToIhom`: the canonical comparison map
   `(ihom X).obj (𝟙_ C) ⊗ Z ⟶ (ihom X).obj Z`.
-- `CategoryTheory.tensorRightCompIsoOfTensorInverse`: for `F ⊣ G ⊣ H` with `F` monoidal and `L`
-  invertible, `H (K ⊗ L) ≅ H K ⊗ F L` (co-projection).
+- `CategoryTheory.tensorRightEquivalenceOfTensorIso`: tensoring on the right with an object
+  with a two-sided tensor inverse is an equivalence.
+- `CategoryTheory.MonoidalClosed.ihomTensorToIhom`: the canonical comparison map
+  `(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)`.
 
 ## Main statements
 
@@ -43,6 +45,8 @@ two-sided tensor inverse (`CategoryTheory.IsInvertible.isDualizable`).
 - `CategoryTheory.MonoidalClosed.exactPairingOfIsIso`: conversely, if the comparison map
   `(ihom X).obj (𝟙_ C) ⊗ X ⟶ (ihom X).obj X` is an isomorphism, `(ihom X).obj (𝟙_ C)` is a
   left dual of `X`.
+- `CategoryTheory.MonoidalClosed.isIso_ihomTensorToIhom`: the comparison map
+  `(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)` is an isomorphism when `N` is invertible.
 
 -/
 
@@ -77,6 +81,13 @@ theorem IsDualizable.tensorObj {X Y : C} (hX : IsDualizable X) (hY : IsDualizabl
 theorem IsDualizable.of_iso {X Y : C} (e : X ≅ Y) (hX : IsDualizable X) : IsDualizable Y := by
   obtain ⟨_⟩ := hX
   exact ⟨{ rightDual := Xᘁ, exact := exactPairingCongrLeft e.symm }⟩
+
+/-- The counit of the adjunction `- ⊗ Y ⊣ - ⊗ Y'` of an exact pairing of `Y` and `Y'` is the
+evaluation `(X ⊗ Y') ⊗ Y ≅ X ⊗ (Y' ⊗ Y) ⟶ X`. -/
+theorem tensorRightAdjunction_counit_app (Y Y' : C) [ExactPairing Y Y'] (X : C) :
+    (tensorRightAdjunction Y Y').counit.app X =
+      (α_ X Y' Y).hom ≫ X ◁ ε_ Y Y' ≫ (ρ_ X).hom := by
+  simp [tensorRightAdjunction, tensorRightHomEquiv]
 
 /-- An object `X` of a monoidal category is *invertible* if it admits a two-sided tensor
 inverse, that is, an object `Y` with `X ⊗ Y ≅ 𝟙_ C` and `Y ⊗ X ≅ 𝟙_ C`. The Tate twists of the
@@ -140,6 +151,35 @@ theorem isDualizable_of_tensorIso {X Y : C} (e : X ⊗ Y ≅ 𝟙_ C) (e' : Y �
 theorem IsInvertible.isDualizable {X : C} (hX : IsInvertible X) : IsDualizable X := by
   obtain ⟨Y, ⟨e⟩, ⟨e'⟩⟩ := hX
   exact isDualizable_of_tensorIso e e'
+
+section
+
+universe v u
+
+variable {D : Type u} [Category.{v} D] [MonoidalCategory D]
+
+/-- Tensoring on the right with an object `N` with a two-sided tensor inverse `N'` is an
+equivalence of categories, with quasi-inverse tensoring on the right with `N'`. -/
+@[simps! functor_obj inverse_obj]
+noncomputable def tensorRightEquivalenceOfTensorIso {N N' : D} (e : N ⊗ N' ≅ 𝟙_ D)
+    (e' : N' ⊗ N ≅ 𝟙_ D) : D ≌ D :=
+  Equivalence.mk (tensorRight N) (tensorRight N')
+    (NatIso.ofComponents (fun Z ↦ (ρ_ Z).symm ≪≫ whiskerLeftIso Z e.symm ≪≫ (α_ Z N N').symm)
+      (fun f ↦ by
+        simp only [Iso.trans_hom, Iso.symm_hom, whiskerLeftIso_hom, Functor.id_map,
+          Functor.comp_map, Category.assoc]
+        erw [rightUnitor_inv_naturality_assoc, ← whisker_exchange_assoc,
+          associator_inv_naturality_left]
+        rfl))
+    (NatIso.ofComponents (fun Z ↦ α_ Z N' N ≪≫ whiskerLeftIso Z e' ≪≫ ρ_ Z)
+      (fun f ↦ by
+        simp only [Iso.trans_hom, whiskerLeftIso_hom, Functor.id_map,
+          Functor.comp_map, Category.assoc]
+        change (f ▷ N') ▷ N ≫ _ = _
+        erw [associator_naturality_left_assoc, ← whisker_exchange_assoc,
+          rightUnitor_naturality]))
+
+end
 
 /-- The counit of `tensorLeftAdjunction Y X : tensorLeft X ⊣ tensorLeft Y` at `Z` is the composite
 ```
@@ -241,6 +281,62 @@ lemma whiskerLeft_ihomUnitTensorToIhom_ev (X Z : C) :
       (α_ _ _ _).inv ≫ (ihom.ev X).app (𝟙_ C) ▷ Z ≫ (λ_ Z).hom := by
   rw [← uncurry_eq, ihomUnitTensorToIhom, uncurry_curry]
 
+/-- The canonical comparison map `(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)`: the transpose of
+`X ⊗ ((ihom X).obj Z ⊗ N) ≅ (X ⊗ (ihom X).obj Z) ⊗ N ⟶ Z ⊗ N`, built from the evaluation
+`X ⊗ (ihom X).obj Z ⟶ Z`. -/
+noncomputable def ihomTensorToIhom (X Z N : C) : (ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N) :=
+  curry ((α_ _ _ _).inv ≫ (ihom.ev X).app Z ▷ N)
+
+/-- The transpose of `ihomTensorToIhom X Z N` is evaluation of the first factor. -/
+lemma whiskerLeft_ihomTensorToIhom_ev (X Z N : C) :
+    X ◁ ihomTensorToIhom X Z N ≫ (ihom.ev X).app (Z ⊗ N) =
+      (α_ _ _ _).inv ≫ (ihom.ev X).app Z ▷ N := by
+  rw [← uncurry_eq, ihomTensorToIhom, uncurry_curry]
+
+/-- Precomposing `ihomTensorToIhom X Z N` with `f ▷ N` transposes to `uncurry f ▷ N`. -/
+lemma uncurry_whiskerRight_comp_ihomTensorToIhom {X Z N T : C} (f : T ⟶ (ihom X).obj Z) :
+    uncurry (f ▷ N ≫ ihomTensorToIhom X Z N) = (α_ _ _ _).inv ≫ uncurry f ▷ N := by
+  rw [uncurry_eq, uncurry_eq, MonoidalCategory.whiskerLeft_comp_assoc,
+    whiskerLeft_ihomTensorToIhom_ev, associator_inv_naturality_middle_assoc, comp_whiskerRight]
+
+/-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist (the
+categorical core).
+
+In a monoidal closed category, for every invertible object `N` the canonical map
+`(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)` is an isomorphism, for all `X` and `Z`. Since
+`- ⊗ N` is an autoequivalence, both sides corepresent the same functor
+`T ↦ (X ⊗ T ⊗ N⁻¹ ⟶ Z)`, and the canonical map induces this identification (Yoneda). No
+hypothesis on `X` is needed. -/
+theorem isIso_ihomTensorToIhom (X Z : C) {N : C} (hN : IsInvertible N) :
+    IsIso (ihomTensorToIhom X Z N) := by
+  obtain ⟨N', ⟨e⟩, ⟨e'⟩⟩ := hN
+  let E := tensorRightEquivalenceOfTensorIso e e'
+  have inj {T : C} (a a' : T ⟶ (ihom X).obj Z)
+      (h : a ▷ N ≫ ihomTensorToIhom X Z N = a' ▷ N ≫ ihomTensorToIhom X Z N) : a = a' := by
+    apply uncurry_injective
+    apply whiskerRight_injective_of_tensorIso e
+    rw [← cancel_epi (α_ _ _ _).inv, ← uncurry_whiskerRight_comp_ihomTensorToIhom,
+      ← uncurry_whiskerRight_comp_ihomTensorToIhom, h]
+  have surj {T : C} (g : T ⊗ N ⟶ (ihom X).obj (Z ⊗ N)) :
+      ∃ a : T ⟶ (ihom X).obj Z, a ▷ N ≫ ihomTensorToIhom X Z N = g := by
+    let b : X ⊗ T ⟶ Z := E.functor.preimage ((α_ _ _ _).hom ≫ uncurry g)
+    have hb : b ▷ N = (α_ _ _ _).hom ≫ uncurry g := E.functor.map_preimage _
+    refine ⟨curry b, uncurry_injective ?_⟩
+    rw [uncurry_whiskerRight_comp_ihomTensorToIhom, uncurry_curry, hb, Iso.inv_hom_id_assoc]
+  refine isIso_of_yoneda_map_bijective _ (fun T ↦ ⟨fun x x' h ↦ ?_, fun g ↦ ?_⟩)
+  · let ι := E.counitIso.app T
+    let a : E.inverse.obj T ⟶ (ihom X).obj Z := E.functor.preimage (ι.hom ≫ x)
+    let a' : E.inverse.obj T ⟶ (ihom X).obj Z := E.functor.preimage (ι.hom ≫ x')
+    have ha : a ▷ N = ι.hom ≫ x := E.functor.map_preimage _
+    have ha' : a' ▷ N = ι.hom ≫ x' := E.functor.map_preimage _
+    have h : x ≫ ihomTensorToIhom X Z N = x' ≫ ihomTensorToIhom X Z N := h
+    rw [← cancel_epi ι.hom, ← ha, ← ha', inj a a' (by rw [ha, ha', Category.assoc,
+      Category.assoc, h])]
+  · obtain ⟨a, ha⟩ := surj ((E.counitIso.app T).hom ≫ g)
+    refine ⟨(E.counitIso.app T).inv ≫ a ▷ N, ?_⟩
+    dsimp only
+    rw [Category.assoc, ha, Iso.inv_hom_id_assoc]
+
 variable (X : C) [IsIso (ihomUnitTensorToIhom X X)]
 
 /-- If the comparison map `(ihom X).obj (𝟙_ C) ⊗ X ⟶ (ihom X).obj X` is an isomorphism, the
@@ -292,47 +388,5 @@ noncomputable def exactPairingOfIsIso : ExactPairing ((ihom X).obj (𝟙_ C)) X 
   evaluation_coevaluation' := evaluation_coevaluationOfIsIso X
 
 end MonoidalClosed
-
-section TensorInverse
-
-variable {D : Type*} [Category D] [MonoidalCategory D] {F : C ⥤ D} {G : D ⥤ C} {H : C ⥤ D}
-  (adj₁ : F ⊣ G) (adj₂ : G ⊣ H)
-  (τ : (Functor.postcompose₂.obj F).obj (curriedTensor C) ≅
-    (((Functor.whiskeringLeft₂ D).obj F).obj F).obj (curriedTensor D))
-  (η : F.obj (𝟙_ C) ≅ 𝟙_ D) {L M : C} (e₁ : L ⊗ M ≅ 𝟙_ C) (e₂ : M ⊗ L ≅ 𝟙_ C)
-
-/-- A functor `F` with `F (K ⊗ M) ≅ F K ⊗ F M` naturally commutes with tensoring on the right
-by an object: `F (K ⊗ L) ≅ F K ⊗ F L`, naturally in `K`. -/
-noncomputable def tensorRightCompIsoOfTensorNatIso (L : C) :
-    tensorRight L ⋙ F ≅ F ⋙ tensorRight (F.obj L) :=
-  NatIso.ofComponents (fun K ↦ (τ.app K).app L) fun f ↦ NatTrans.congr_app (τ.hom.naturality f) L
-
-include adj₁ in
-/-- Let `F ⊣ G` with `F` monoidal, and let `L` have a two-sided tensor inverse `M`. Then `G`
-commutes with tensoring by `M` up to applying `F` to it: `G A ⊗ M ≅ G (A ⊗ F M)`, naturally in
-`A`. Both functors are right adjoint to `K ↦ F (K ⊗ L) ≅ F K ⊗ F L`. -/
-noncomputable def compTensorRightIsoOfTensorInverse :
-    G ⋙ tensorRight M ≅ tensorRight (F.obj M) ⋙ G :=
-  letI := exactPairingOfTensorIso e₁ e₂
-  letI := exactPairingOfTensorIso (((τ.app L).app M).symm ≪≫ F.mapIso e₁ ≪≫ η)
-    (((τ.app M).app L).symm ≪≫ F.mapIso e₂ ≪≫ η)
-  conjugateIsoEquiv ((tensorRightAdjunction L M).comp adj₁)
-    (adj₁.comp (tensorRightAdjunction (F.obj L) (F.obj M)))
-    (tensorRightCompIsoOfTensorNatIso τ L).symm
-
-/-- **Co-projection.** Let `F ⊣ G ⊣ H` with `F` monoidal, and let `L` have a two-sided tensor
-inverse. Then `H` commutes with tensoring by `L` up to applying `F` to it:
-`H (K ⊗ L) ≅ H K ⊗ F L`, naturally in `K`. Both functors are right adjoint to
-`A ↦ G A ⊗ M ≅ G (A ⊗ F M)`, by `CategoryTheory.compTensorRightIsoOfTensorInverse`. -/
-noncomputable def tensorRightCompIsoOfTensorInverse :
-    tensorRight L ⋙ H ≅ H ⋙ tensorRight (F.obj L) :=
-  letI := exactPairingOfTensorIso e₂ e₁
-  letI := exactPairingOfTensorIso (((τ.app M).app L).symm ≪≫ F.mapIso e₂ ≪≫ η)
-    (((τ.app L).app M).symm ≪≫ F.mapIso e₁ ≪≫ η)
-  conjugateIsoEquiv (adj₂.comp (tensorRightAdjunction M L))
-    ((tensorRightAdjunction (F.obj M) (F.obj L)).comp adj₂)
-    (compTensorRightIsoOfTensorInverse adj₁ τ η e₁ e₂).symm
-
-end TensorInverse
 
 end CategoryTheory

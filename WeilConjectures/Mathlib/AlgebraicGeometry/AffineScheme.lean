@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.RingTheory.PrincipalIdealDomain
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-!
@@ -29,6 +30,9 @@ to `Spec Γ(X, ⊤)_x`. We record this morphism and the induced map on global se
 
 We also show that an affine scheme `V` equipped with a morphism `g : V ⟶ S` is covered by
 finitely many basic opens, each of which lands in an affine open of `S`.
+
+The local rings of `Spec A` are integrally closed if `A` is an integrally closed domain
+(`AlgebraicGeometry.Scheme.isIntegrallyClosed_stalk_Spec`).
 
 We also record that, for a morphism `f : X ⟶ Y`, the affine opens of `X` contained in the
 preimage of an affine open of `Y` form a basis of the topology of `X`
@@ -385,5 +389,19 @@ theorem Hom.bijective_app_of_comp_eq_id {P B : Scheme.{u}} (π : P ⟶ B) (σ : 
     rfl
 
 end Scheme
+
+/-- The local rings of the spectrum of an integrally closed domain are integrally closed. -/
+lemma Scheme.isIntegrallyClosed_stalk_Spec (A : Type u) [CommRing A] [IsDomain A]
+    [IsIntegrallyClosed A] (z : Spec (.of A)) :
+    IsIntegrallyClosed ((Spec (.of A)).presheaf.stalk z) := by
+  let := TopCat.Presheaf.algebra_section_stalk (Spec (.of A)).presheaf
+    (⟨z, trivial⟩ : (⊤ : (Spec (.of A)).Opens))
+  have := (isAffineOpen_top (Spec (.of A))).isLocalization_stalk ⟨z, trivial⟩
+  have : IsIntegrallyClosed Γ(Spec (.of A), ⊤) :=
+    .of_equiv (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.symm
+  have : IsDomain Γ(Spec (.of A), ⊤) :=
+    MulEquiv.isDomain A (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.toMulEquiv
+  exact isIntegrallyClosed_of_isLocalization _ _
+    ((isAffineOpen_top _).primeIdealOf ⟨z, trivial⟩).asIdeal.primeCompl_le_nonZeroDivisors
 
 end AlgebraicGeometry

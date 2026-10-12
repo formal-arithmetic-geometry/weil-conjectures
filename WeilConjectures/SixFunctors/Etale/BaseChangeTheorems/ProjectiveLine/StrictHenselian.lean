@@ -9,7 +9,8 @@ public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
-public import WeilConjectures.CategoryTheory.Sites.SheafCohomology.InjectiveZMod
+public import WeilConjectures.CategoryTheory.Sites.CoinduceZMod
+public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyModules
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FiniteLowerStarLift
@@ -214,11 +215,9 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
       rw [cohomologyMap_map, hz, ← Sheaf.H.map_comp_apply, ← Functor.map_comp,
         Iso.hom_inv_id, CategoryTheory.Functor.map_id, Sheaf.H.map_id_apply,
         ← Sheaf.H.map_comp_apply, Iso.hom_inv_id, Sheaf.H.map_id_apply]
-    have : (coindZMod.{u + 1} r).IsRightAdjoint := (forget₂CoindZModAdj r).isRightAdjoint
-    have : PreservesLimitsOfSize.{u, u + 1} (coindZMod.{u + 1} r) :=
-      (forget₂CoindZModAdj r).rightAdjoint_preservesLimits
-    have hI := CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective _ r
-      (Fact.out : r.Prime).ne_zero I 0
+    have : NeZero r := ⟨(Fact.out : r.Prime).ne_zero⟩
+    have hI := CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective.{u + 1, u + 1, u, u + 1}
+      Λ I 0
     have hψ : (e.app G).inv ≫ (sheafCompose _ fo).map ((ι)^*[ModuleCat.{u + 1} Λ].map (ψ j)) =
         (ι)^*[AddCommGrpCat.{u + 1}].map ((sheafCompose _ fo).map (ψ j)) ≫ (e.app I).inv :=
       (e.inv.naturality (ψ j)).symm
@@ -279,9 +278,7 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField_zmod (r : ℕ)
     (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
   let Λ := ULift.{u + 1} (ZMod r)
   let fo := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
-  have : (coindZMod.{u + 1} r).IsRightAdjoint := (forget₂CoindZModAdj r).isRightAdjoint
-  have : PreservesLimitsOfSize.{u, u + 1} (coindZMod.{u + 1} r) :=
-    (forget₂CoindZModAdj r).rightAdjoint_preservesLimits
+  have : NeZero r := ⟨(Fact.out : r.Prime).ne_zero⟩
   induction q generalizing F with
   | zero => exact Etale.bijective_cohomologyMap_zero_projectiveLine_residueField A Λ F
   | succ n ih =>
@@ -291,8 +288,7 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField_zmod (r : ℕ)
       shortExact_map_forget₂ Λ { exact := ShortComplex.exact_cokernel i }
     have hS₀ := hS.map_of_exact ((ι)^*[AddCommGrpCat.{u + 1}])
     have hI : Subsingleton (Sheaf.H ((sheafCompose _ fo).obj (Injective.under F)) (n + 1)) :=
-      CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective _ r (Fact.out : r.Prime).ne_zero
-        _ n
+      CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective.{u + 1, u + 1, u, u + 1} Λ _ n
     have hI₀ : Subsingleton (Sheaf.H ((ι)^*[AddCommGrpCat.{u + 1}].obj
         ((sheafCompose _ fo).obj (Injective.under F))) (n + 1)) := by
       have := Etale.subsingleton_H_projectiveLine_closedFibre_of_injective A r

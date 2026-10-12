@@ -46,6 +46,8 @@ the repository has no constructibility notion on the pro-étale site to be an eq
   `AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`: `ν^*` is fully faithful, with
   invertible unit.
 - `AlgebraicGeometry.ProEtale.nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar`
+  (the comparison commutes with direct images) and
+  `AlgebraicGeometry.ProEtale.comparisonUpperStarUnitIso` (`ν^*` preserves the monoidal unit).
 -/
 
 @[expose] public section
@@ -101,6 +103,30 @@ theorem nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar {U V : Schem
       (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective A u I)
   ⟨asIso (Functor.rightDerivedFunctorPlusBaseChange
     (lowerStarComparisonUpperStarBaseChange u A))⟩
+
+section Unit
+
+open MonoidalCategory Functor.OplaxMonoidal
+
+variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
+
+/-- The comparison pullback `ν^*` sends the constant sheaf `Λ_X`, the monoidal unit of étale
+sheaves of `Λ`-modules, to the monoidal unit of pro-étale sheaves. This is the comparison map
+`η` of the oplax monoidal pullback of sheaves along the inclusion of sites, which is invertible
+since that inclusion is representably flat
+(`CategoryTheory.Functor.sheafPullbackConstruction.isIso_η_sheafPullback`). -/
+noncomputable def comparisonUpperStarUnitIso :
+    ν^*(X)[ModuleCat.{u + 1} Λ].obj (𝟙_ _) ≅ 𝟙_ _ :=
+  have (K : X.ProEtᵒᵖ) : IsConnected (CostructuredArrow (X.toProEt).op K) :=
+    have : IsFiltered (CostructuredArrow (X.toProEt).op K) :=
+      IsFiltered.of_equivalence (structuredArrowOpEquivalence _ (Opposite.unop K))
+    IsFiltered.isConnected _
+  have := Functor.sheafPullbackConstruction.isIso_η_sheafPullback (X.toProEt)
+    (ModuleCat.{u + 1} Λ) X.smallEtaleTopology (Scheme.ProEt.topology X)
+  asIso (η (Functor.sheafPullbackConstruction.sheafPullback (X.toProEt) (ModuleCat.{u + 1} Λ)
+    X.smallEtaleTopology (Scheme.ProEt.topology X)))
+
+end Unit
 
 end ProEtale
 

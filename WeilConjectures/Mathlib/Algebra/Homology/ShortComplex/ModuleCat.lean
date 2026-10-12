@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.CategoryTheory.Abelian.Exact
 public import Mathlib.LinearAlgebra.Dimension.RankNullity
 public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Homology of complexes of modules
@@ -38,6 +39,9 @@ class map from cycles to homology and its naturality.
 For a short complex `X₁ ⟶ X₂ ⟶ X₃` of vector spaces with `X₂` finite dimensional, the dimension of
 its homology is `dim X₂ - rank g - rank f`
 (`CategoryTheory.ShortComplex.finrank_homology_add_finrank_range_add_finrank_range`).
+
+Over a Noetherian ring, the middle term of an exact sequence of finitely generated modules is
+finitely generated (`CategoryTheory.ShortComplex.Exact.moduleFinite_X₂`).
 -/
 
 @[expose] public section
@@ -193,3 +197,19 @@ theorem finrank_homology_add_finrank_range_add_finrank_range :
 end CategoryTheory.ShortComplex
 
 end FiniteDimensional
+
+namespace CategoryTheory.ShortComplex
+
+variable {R : Type u} [CommRing R] [IsNoetherianRing R] {S : ShortComplex (ModuleCat.{v} R)}
+
+/-- Over a Noetherian ring, in an exact sequence `X₁ ⟶ X₂ ⟶ X₃` of modules with `X₁` and `X₃`
+finitely generated, the module `X₂` is finitely generated: the kernel of `X₂ ⟶ X₃` is the image
+of `X₁`, and its image is a submodule of the Noetherian module `X₃`. -/
+lemma Exact.moduleFinite_X₂ (hS : S.Exact) [Module.Finite R S.X₁] [Module.Finite R S.X₃] :
+    Module.Finite R S.X₂ := by
+  rw [ShortComplex.moduleCat_exact_iff_range_eq_ker] at hS
+  refine ⟨Submodule.fg_of_fg_map_of_fg_inf_ker S.g.hom (IsNoetherian.noetherian _) ?_⟩
+  rw [top_inf_eq, ← hS, LinearMap.range_eq_map]
+  exact Module.Finite.fg_top.map _
+
+end CategoryTheory.ShortComplex

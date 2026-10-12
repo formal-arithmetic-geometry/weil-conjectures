@@ -125,24 +125,27 @@ variable [Finite Λ] {c : ℕ} {i : Z ⟶ X}
 the iterated cup product with supports of the Kummer boundaries
 (`AlgebraicGeometry.Etale.kummerBoundaryProduct`), supported on
 `V(f₁) ∩ ⋯ ∩ V(f_c) = Z_U`. -/
-noncomputable def frameClass [HasKummerClass Λ] (F : i.EtaleFrame c) :
+noncomputable def frameClass [HasKummerClass Λ] [HasInvertibleExponent Λ X] (F : i.EtaleFrame c) :
     constantComplex Λ F.U ⟶
       (R(F.U.zeroLocusSubschemeι (Set.range F.f))_![ModuleCat.{u + 1} Λ]).obj
         ((R(F.U.zeroLocusSubschemeι (Set.range F.f))^![ModuleCat.{u + 1} Λ]).obj
           ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
+  haveI : HasInvertibleExponent Λ F.U := .of_hom F.e
   kummerBoundaryProduct Λ F.f
 
 /-- The restriction of a class `γ ∈ H^{2c}_Z(X, Λ(c))` to a frame `(e : U ⟶ X, f)`, a class in
 `H^{2c}_{Z_U}(U, Λ(c))`: the restriction of supports along the étale `e`
 (`AlgebraicGeometry.Etale.restrictSupportedClass`), with `Λ_U ≅ Le^* Λ_X` and
 `Le^* (Λ_X(c)[2c]) ≅ Λ_U(c)[2c]`. -/
-noncomputable def frameRestriction [HasTateTwist Λ] [IsClosedImmersion i] (F : i.EtaleFrame c)
+noncomputable def frameRestriction [HasTateTwist Λ] [IsClosedImmersion i]
+    [HasInvertibleExponent Λ X] (F : i.EtaleFrame c)
     (γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
       ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))) :
     constantComplex Λ F.U ⟶
       (R(F.U.zeroLocusSubschemeι (Set.range F.f))_![ModuleCat.{u + 1} Λ]).obj
         ((R(F.U.zeroLocusSubschemeι (Set.range F.f))^![ModuleCat.{u + 1} Λ]).obj
           ((tateObject Λ F.U c)⟦2 * (c : ℤ)⟧)) :=
+  haveI : HasInvertibleExponent Λ F.U := .of_hom F.e
   restrictSupportedClass (ModuleCat.{u + 1} Λ) F.e i _ F.toZ F.isPullback
     (leftDerivedUpperStarConstantComplexIso Λ F.e).inv (leftDerivedUpperStarTateShiftIso Λ F.e c) γ
 

@@ -81,7 +81,7 @@ namespace AlgebraicGeometry
 namespace ChowGraph
 
 variable {ι : Type*} [Finite ι] {X S : Scheme.{u}} {f : X ⟶ S} {U : ι → X.Opens}
-  (M : ∀ i, ProperClosedModel ((U i).ι ≫ f)) [NoetherianSpace X]
+  (M : ∀ i, ProperClosedModel ((U i).ι ≫ f)) [QuasiCompact (tuple M)]
 
 /-- The open `Vᵢ = pᵢ⁻¹(Uᵢ)` of the graph: the preimage under the `i`-th projection of the
 image of `Uᵢ` in the closed model `Mᵢ.Z`. -/

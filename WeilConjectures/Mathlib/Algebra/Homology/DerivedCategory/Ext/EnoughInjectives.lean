@@ -7,62 +7,124 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-!
-# Vanishing of `Ext` into torsion subobjects of injective objects
+# Comparing `Ext`-groups by dimension shifting
 
-Let `J` be an injective object of an abelian category and `r` an integer such that
-multiplication by `r` is an epimorphism on `J`, with kernel `ι : K ⟶ J`. If `U` is an object on
-which multiplication by `r` is a monomorphism, then `Ext U K (n + 1) = 0` for all `n`: in the
-long exact sequence of `0 ⟶ K ⟶ J ⟶ J ⟶ 0`, the groups `Ext U J (n + 1)` vanish, and
-multiplication by `r` on `Hom(U, J)` is onto since `J` is injective. The same then holds for any
-retract of `K`.
+Let `X` be an object of an abelian category and `0 → S.X₁ → S.X₂ → S.X₃ → 0` a short exact
+sequence. If `S.X₂` has no `Ext¹` from `X`, then `Ext¹(X, S.X₁)` vanishes exactly when every
+morphism `X ⟶ S.X₃` lifts to `S.X₂`; if `S.X₂` has no `Ext` from `X` in degrees `n + 1` and
+`n + 2`, then `Ext^{n + 2}(X, S.X₁)` vanishes exactly when `Ext^{n + 1}(X, S.X₃)` does.
 
-For abelian sheaves, with `U` the constant sheaf `ℤ` and `J` an injective sheaf, this shows that
-the `r`-torsion `J[r]` of an injective sheaf, and hence any sheaf of `ℤ/r`-modules which is
-injective as such, has no higher cohomology.
+Combining the two along injective resolutions compares `Ext`-groups computed in two different
+abelian categories. Let `Φ : C ⥤ D` be an exact functor, `P : C` and `Z : D`, such that `Φ` sends
+the injective objects of `C` to objects without higher `Ext` from `Z`, and such that the
+vanishing of `Ext¹(Z, Φ S.X₁)` for a short exact sequence `S` with injective middle term lets
+morphisms `P ⟶ S.X₃` lift to `S.X₂`. Then `Ext^{n + 1}(P, F) = 0` as soon as
+`Ext^{n + 1}(Z, Φ F) = 0` (`CategoryTheory.Abelian.Ext.subsingleton_of_subsingleton_map`). This is
+how the cohomology of a sheaf of modules is compared with the cohomology of its underlying
+abelian sheaf.
 
 ## Main statements
 
-- `CategoryTheory.Abelian.Ext.subsingleton_of_shortExact_smul`: the vanishing for `K`.
-- `CategoryTheory.Abelian.Ext.subsingleton_of_retract`: `Ext` into a retract.
+- `CategoryTheory.Abelian.Ext.subsingleton_one_iff_surjective`: the degree-one criterion.
+- `CategoryTheory.Abelian.Ext.subsingleton_succ_succ_iff`: dimension shifting.
+- `CategoryTheory.Abelian.Ext.subsingleton_of_subsingleton_map`: the comparison.
 -/
 
 @[expose] public section
 
-universe w v u
+universe w w' v v' u u'
 
 namespace CategoryTheory.Abelian.Ext
 
 open Limits
 
+section
+
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C]
 
-/-- Let `0 ⟶ K ⟶ J ⟶ J ⟶ 0` be short exact with second map multiplication by `r` and `J`
-injective, and let `r` act injectively on `U`. Then `Ext U K (n + 1) = 0`. -/
-theorem subsingleton_of_shortExact_smul {U K J : C} [Injective J] (r : ℤ) [Mono (r • 𝟙 U)]
-    {ι : K ⟶ J} (w : ι ≫ (r • 𝟙 J : J ⟶ J) = 0) (hS : (ShortComplex.mk ι (r • 𝟙 J) w).ShortExact)
-    (n : ℕ) : Subsingleton (Ext.{w} U K (n + 1)) := by
-  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
-  have hx : x.comp (mk₀ ι) (add_zero _) = 0 := eq_zero_of_injective _
-  obtain ⟨y, rfl⟩ := covariant_sequence_exact₁ U hS x hx rfl
-  rcases n with _ | n
-  · -- `y : Hom(U, J)` is divisible by `r`, since `J` is injective
-    obtain ⟨g, rfl⟩ := (mk₀_bijective U J).2 y
-    let h : U ⟶ J := Injective.factorThru g (r • 𝟙 U)
-    have hh : h ≫ (r • 𝟙 J) = g := by
-      rw [Preadditive.comp_zsmul, Category.comp_id, ← Category.id_comp h,
-        ← Preadditive.zsmul_comp]
-      exact Injective.comp_factorThru g (r • 𝟙 U)
-    rw [← hh, ← mk₀_comp_mk₀, comp_assoc_of_second_deg_zero, hS.comp_extClass, comp_zero]
-  · rw [eq_zero_of_injective y, zero_comp]
+/-- **The degree-one criterion.** For a short exact sequence `0 → S.X₁ → S.X₂ → S.X₃ → 0` such
+that `Ext¹(X, S.X₂) = 0`, the group `Ext¹(X, S.X₁)` vanishes if and only if every morphism
+`X ⟶ S.X₃` lifts along `S.g`. -/
+lemma subsingleton_one_iff_surjective (X : C) {S : ShortComplex C} (hS : S.ShortExact)
+    [Subsingleton (Ext.{w} X S.X₂ 1)] :
+    Subsingleton (Ext.{w} X S.X₁ 1) ↔ Function.Surjective (fun f : X ⟶ S.X₂ ↦ f ≫ S.g) := by
+  constructor
+  · intro _ q
+    obtain ⟨x₂, hx₂⟩ := covariant_sequence_exact₃ X hS (mk₀ q) (zero_add 1)
+      (Subsingleton.elim _ _)
+    obtain ⟨f, rfl⟩ := addEquiv₀.symm.surjective x₂
+    refine ⟨f, (mk₀_bijective _ _).1 ?_⟩
+    rw [← hx₂]
+    exact (mk₀_comp_mk₀ f S.g).symm
+  · intro h
+    refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+    obtain ⟨y, rfl⟩ := covariant_sequence_exact₁ X hS x (Subsingleton.elim _ _) (zero_add 1)
+    obtain ⟨q, rfl⟩ := addEquiv₀.symm.surjective y
+    obtain ⟨f, rfl⟩ := h q
+    change (mk₀ (f ≫ S.g)).comp hS.extClass _ = 0
+    rw [← mk₀_comp_mk₀, comp_assoc _ _ _ (zero_add 0) (zero_add 1) (zero_add 1),
+      hS.comp_extClass, comp_zero]
 
-/-- `Ext` into a retract of an object with vanishing `Ext` vanishes. -/
-theorem subsingleton_of_retract {U F K : C} (i : F ⟶ K) (p : K ⟶ F) (hip : i ≫ p = 𝟙 F)
-    (n : ℕ) [Subsingleton (Ext.{w} U K n)] : Subsingleton (Ext.{w} U F n) := by
-  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
-  have : x = (x.comp (mk₀ i) (add_zero n)).comp (mk₀ p) (add_zero n) := by
-    rw [comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, hip, comp_mk₀_id]
-  rw [this, Subsingleton.elim (x.comp (mk₀ i) (add_zero n)) 0, zero_comp]
+/-- **Dimension shifting.** For a short exact sequence `0 → S.X₁ → S.X₂ → S.X₃ → 0` such that
+`S.X₂` has no `Ext` from `X` in degrees `n + 1` and `n + 2`, the group `Ext^{n + 2}(X, S.X₁)`
+vanishes if and only if `Ext^{n + 1}(X, S.X₃)` does. -/
+lemma subsingleton_succ_succ_iff (X : C) {S : ShortComplex C} (hS : S.ShortExact) (n : ℕ)
+    [Subsingleton (Ext.{w} X S.X₂ (n + 1))] [Subsingleton (Ext.{w} X S.X₂ (n + 2))] :
+    Subsingleton (Ext.{w} X S.X₁ (n + 2)) ↔ Subsingleton (Ext.{w} X S.X₃ (n + 1)) := by
+  constructor
+  · intro _
+    refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+    obtain ⟨y, rfl⟩ := covariant_sequence_exact₃ X hS x rfl (Subsingleton.elim _ _)
+    rw [Subsingleton.elim y 0, zero_comp]
+  · intro _
+    refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+    obtain ⟨y, rfl⟩ := covariant_sequence_exact₁ X hS x (Subsingleton.elim _ _) rfl
+    rw [Subsingleton.elim y 0, zero_comp]
+
+end
+
+variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C] [EnoughInjectives C]
+  {D : Type u'} [Category.{v'} D] [Abelian D] [HasExt.{w'} D]
+
+/-- **Comparing `Ext`-groups along an exact functor.** Let `Φ : C ⥤ D` be an additive functor
+between abelian categories which preserves short exact sequences, `C` having enough injectives,
+and let `P : C` and `Z : D`. Assume that
+
+* `Φ` sends injective objects of `C` to objects without higher `Ext` from `Z`;
+* for every short exact sequence `0 → S.X₁ → S.X₂ → S.X₃ → 0` in `C` with `S.X₂` injective and
+  `Ext¹(Z, Φ S.X₁) = 0`, every morphism `P ⟶ S.X₃` lifts along `S.g`.
+
+Then `Ext^{n + 1}(P, F) = 0` as soon as `Ext^{n + 1}(Z, Φ F) = 0`. The proof embeds `F` into an
+injective object and shifts dimensions on both sides. -/
+theorem subsingleton_of_subsingleton_map (Φ : C ⥤ D) [Φ.Additive]
+    (hΦex : ∀ (S : ShortComplex C), S.ShortExact → (S.map Φ).ShortExact) (P : C) (Z : D)
+    (hΦ : ∀ (I : C) [Injective I] (n : ℕ), Subsingleton (Ext.{w'} Z (Φ.obj I) (n + 1)))
+    (hsurj : ∀ (S : ShortComplex C), S.ShortExact → Injective S.X₂ →
+      Subsingleton (Ext.{w'} Z (Φ.obj S.X₁) 1) →
+        Function.Surjective (fun f : P ⟶ S.X₂ ↦ f ≫ S.g))
+    (n : ℕ) (F : C) (hF : Subsingleton (Ext.{w'} Z (Φ.obj F) (n + 1))) :
+    Subsingleton (Ext.{w} P F (n + 1)) := by
+  induction n generalizing F with
+  | zero =>
+    let S := ShortComplex.mk (Injective.ι F) (cokernel.π (Injective.ι F)) (cokernel.condition _)
+    have hS : S.ShortExact :=
+      ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+    have : Subsingleton (Ext.{w} P S.X₂ 1) := subsingleton_of_injective _ _ 0
+    exact (subsingleton_one_iff_surjective P hS).2 (hsurj S hS inferInstance hF)
+  | succ n ih =>
+    let S := ShortComplex.mk (Injective.ι F) (cokernel.π (Injective.ι F)) (cokernel.condition _)
+    have hS : S.ShortExact :=
+      ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+    have hS' : (S.map Φ).ShortExact := hΦex S hS
+    have : Subsingleton (Ext.{w} P S.X₂ (n + 1)) := subsingleton_of_injective _ _ n
+    have : Subsingleton (Ext.{w} P S.X₂ (n + 2)) := subsingleton_of_injective _ _ (n + 1)
+    have : Subsingleton (Ext.{w'} Z (S.map Φ).X₂ (n + 1)) := hΦ S.X₂ n
+    have : Subsingleton (Ext.{w'} Z (S.map Φ).X₂ (n + 2)) := hΦ S.X₂ (n + 1)
+    have hQ : Subsingleton (Ext.{w'} Z (Φ.obj S.X₃) (n + 1)) :=
+      (subsingleton_succ_succ_iff Z hS' n).1 hF
+    exact (subsingleton_succ_succ_iff P hS n).2 (ih S.X₃ hQ)
 
 end CategoryTheory.Abelian.Ext

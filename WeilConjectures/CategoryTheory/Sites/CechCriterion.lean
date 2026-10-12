@@ -289,6 +289,42 @@ theorem subsingleton_H_succ_of_exactAt_cechComplex (B : C → Prop) (hBT : B T)
     exact subsingleton_H_succ_of_comp_extClass hS (q + 1) fun y ↦ by
       rw [Subsingleton.elim y 0, Ext.zero_comp]
 
+
+include hT in
+/-- **The Čech criterion in degree two.** Let `T` be a terminal object and `F` an abelian sheaf
+such that, for every short exact sequence `0 → F → I → Q → 0`, sections of `Q` lift to `I` over
+the members of a class `B` of objects. If every covering sieve of `T` contains a finite family
+`U` generating a covering sieve, whose Čech nerve lies in `B` and on which the second Čech
+cohomology of `F` vanishes, then `H²(F) = 0`.
+
+Embedding `F` into an injective sheaf `I` with cokernel `Q`, the Čech complexes of `F`, `I` and
+`Q` on the families form a short exact sequence, so the first Čech cohomology of `Q` vanishes on
+them, hence `H¹(Q) = 0`, and `H²(F)` is a quotient of `H¹(Q)`. -/
+theorem subsingleton_H_two_of_exactAt_cechComplex (B : C → Prop)
+    (F : Sheaf J AddCommGrpCat.{max w v})
+    (hsurj : ∀ {S : ShortComplex (Sheaf J AddCommGrpCat.{max w v})}, S.ShortExact →
+      S.X₁ = F → ∀ V, B V → Function.Surjective (S.g.hom.app (op V)))
+    (hcov : ∀ R ∈ J T, ∃ (n : ℕ) (U : Fin n → Over T),
+      (∀ (k : ℕ) (y : Fin (k + 1) → Fin n), B (cechNerveObj U y).left) ∧ (∀ a, R (U a).hom) ∧
+      Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ J T ∧
+      ((cechComplex U).obj F.obj).ExactAt 2) :
+    Subsingleton (Sheaf.H F 2) := by
+  let S := ShortComplex.mk (Injective.ι F) (cokernel.π (Injective.ι F)) (cokernel.condition _)
+  have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  -- `H¹(Q) = 0` for the cokernel `Q` of `F → I`
+  have hQ : Subsingleton (Sheaf.H S.X₃ 1) := by
+    let S' := ShortComplex.mk (Injective.ι S.X₃) (cokernel.π (Injective.ι S.X₃))
+      (cokernel.condition _)
+    have hS' : S'.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+    refine subsingleton_H_succ_of_comp_extClass hS' 0
+      (comp_extClass_eq_zero_of_surjective hT hS' ?_)
+    refine surjective_app_of_exactAt_cechComplex_one hS' fun R hR ↦ ?_
+    obtain ⟨n, U, hUB, hUR, hUJ, hU⟩ := hcov R hR
+    exact ⟨n, U, hUR, hUJ, exactAt_cechComplex_of_sectionwise U S.f.hom S.g.hom
+      app_g_app_f (injective_app_f hS) (exists_app_f_eq hS)
+      (fun k y ↦ hsurj hS rfl _ (hUB k y)) 0 hU (exactAt_cechComplex_of_injective S.X₂ U 0)⟩
+  exact subsingleton_H_succ_of_comp_extClass hS 1 fun y ↦ by
+    rw [Subsingleton.elim y 0, Ext.zero_comp]
 end
 
 end Sheaf

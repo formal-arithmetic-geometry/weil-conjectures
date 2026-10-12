@@ -32,6 +32,7 @@ involves no comparison at all.
 
 - `AlgebraicGeometry.Etale.derivedTensorAssociator`: `(K ⊗ᴸ M) ⊗ᴸ N ≅ K ⊗ᴸ (M ⊗ᴸ N)`.
 - `AlgebraicGeometry.Etale.derivedTensorLeftUnitor`: `Λ_X ⊗ᴸ K ≅ K`.
+- `AlgebraicGeometry.Etale.derivedTensorLeftUnitorNatIso`: `Λ_X ⊗ᴸ - ≅ 𝟭`.
 - `AlgebraicGeometry.Etale.derivedTensorRightUnitor`: `K ⊗ᴸ Λ_X ≅ K`.
 - `AlgebraicGeometry.Etale.IsPerfectPairing`: perfectness of a pairing `C ⊗ᴸ D ⟶ Λ_X`.
 
@@ -68,6 +69,11 @@ noncomputable def derivedTensorAssociator
       ((derivedTensor A X).obj K).obj (((derivedTensor A X).obj M).obj N) :=
   α_ K M N
 
+/-- `AlgebraicGeometry.Etale.derivedTensorAssociator` is the associator of `D(X_ét)`. -/
+lemma derivedTensorAssociator_eq (K M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    derivedTensorAssociator A X K M N = α_ K M N :=
+  rfl
+
 /-- The left unitor `Λ_X ⊗ᴸ K ≅ K` of the derived tensor product, `Λ_X = 𝟙_` being the
 constant complex. -/
 noncomputable def derivedTensorLeftUnitor
@@ -75,12 +81,23 @@ noncomputable def derivedTensorLeftUnitor
     ((derivedTensor A X).obj (𝟙_ _)).obj K ≅ K :=
   λ_ K
 
+/-- The left unitor `Λ_X ⊗ᴸ K ≅ K` of the derived tensor product, as a natural isomorphism
+`Λ_X ⊗ᴸ - ≅ 𝟭`. -/
+noncomputable def derivedTensorLeftUnitorNatIso :
+    (derivedTensor A X).obj (𝟙_ _) ≅ 𝟭 (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
+  NatIso.ofComponents (derivedTensorLeftUnitor A X) fun f ↦ leftUnitor_naturality f
+
 /-- The right unitor `K ⊗ᴸ Λ_X ≅ K` of the derived tensor product, `Λ_X = 𝟙_` being the
 constant complex. -/
 noncomputable def derivedTensorRightUnitor
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((derivedTensor A X).obj K).obj (𝟙_ _) ≅ K :=
   ρ_ K
+
+/-- `AlgebraicGeometry.Etale.derivedTensorRightUnitor` is the right unitor of `D(X_ét)`. -/
+lemma derivedTensorRightUnitor_eq (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    derivedTensorRightUnitor A X K = ρ_ K :=
+  rfl
 
 /-- The symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K` of the derived tensor product, natural in both variables:
 an isomorphism between `- ⊗ᴸ -` and the flipped bifunctor `(K, M) ↦ M ⊗ᴸ K`. The derived

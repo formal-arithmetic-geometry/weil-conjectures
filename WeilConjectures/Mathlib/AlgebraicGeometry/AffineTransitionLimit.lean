@@ -1292,10 +1292,15 @@ instance : IsCofilteredOrEmpty E.Stage where
     have hmap : T₂.A.map (resAlgHom (k ≫ k₂)) ≤ E.fiberProduct j := by
       rintro p ⟨q, hq, rfl⟩
       exact resAlgHom_mem_fiberProduct _ (T₂.A_le_fiberProduct hq)
-    refine ⟨T₁.restrict (k ≫ k₁) (T₂.A.map (resAlgHom (k ≫ k₂))) hmap (T₂.hAfg.map _),
-      T₁.restrictHom _ _ _ _, ⟨k ≫ k₂, fun l ↦ ?_, fun p hp ↦ ?_⟩, trivial⟩
-    · exact (E.res_res k₂ k _).symm.trans ((hk l).symm.trans (E.res_res k₁ k _))
-    · exact T₁.le_restrict_A _ _ _ _ ⟨p, hp, rfl⟩
+    -- Stated for a general subalgebra `A'`: for the concrete one, elaborating the components
+    -- of the morphism to `T₂` is very slow.
+    have H (A' : Subalgebra ℤ (Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤))) (hA' : A' ≤ E.fiberProduct j)
+        (hfg : A'.FG) (hle : T₂.A.map (resAlgHom (k ≫ k₂)) ≤ A') :
+        ∃ (W : E.Stage) (_ : W ⟶ T₁) (_ : W ⟶ T₂), True :=
+      ⟨T₁.restrict (k ≫ k₁) A' hA' hfg, T₁.restrictHom _ _ _ _,
+        ⟨k ≫ k₂, fun l ↦ (E.res_res k₂ k _).symm.trans ((hk l).symm.trans (E.res_res k₁ k _)),
+          fun p hp ↦ T₁.le_restrict_A _ _ _ _ (hle ⟨p, hp, rfl⟩)⟩, trivial⟩
+    exact H _ hmap (T₂.hAfg.map _) le_rfl
   cone_maps T₁ T₂ f g := by
     obtain ⟨j', k, hk⟩ := IsCofilteredOrEmpty.cone_maps f.base g.base
     refine ⟨T₁.restrict k ⊥ bot_le Subalgebra.fg_bot, T₁.restrictHom _ _ _ _, ?_⟩
@@ -1779,8 +1784,6 @@ noncomputable def isLimitBaseCone (E : ExtensionData.{u}) (T₀ : E.Stage) :
     IsLimit (E.cone.whisker (Over.forget T₀ ⋙ E.stageIndex ⋙ Over.forget E.i₀)) :=
   (Functor.Initial.isLimitWhiskerEquiv _ E.cone).symm E.N.isLimit
 
-set_option maxHeartbeats 1600000 in
--- Naturality of the chart isomorphism unfolds the pushout of every stage below `T₀`.
 /-- (Implementation) The `U`-chart of a stage scheme is `Dⱼ`, compatibly with the
 transition morphisms. -/
 noncomputable def chartUIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
@@ -1788,8 +1791,7 @@ noncomputable def chartUIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
   NatIso.ofComponents
     (fun S ↦ IsOpenImmersion.isoOfRangeEq (pushout.inl (E.Wι S.left.j) S.left.toSpec)
       (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ T₀.chartU))
-      (by rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange,
-        Scheme.Opens.opensRange_ι, Stage.preimage_chartU S.hom]))
+      (Scheme.Hom.range_eq_range_ι_of_opensRange_eq _ (Stage.preimage_chartU S.hom).symm))
     (fun {S S'} k ↦ by
       rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ T₀.chartU))]
       simp only [Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac,
@@ -1826,8 +1828,6 @@ noncomputable def isLimitInterCone (E : ExtensionData.{u}) (T₀ : E.Stage) :
     IsLimit (E.Wc.whisker (Over.forget T₀ ⋙ E.stageIndex)) :=
   (Functor.Initial.isLimitWhiskerEquiv _ E.Wc).symm E.isLimitWc
 
-set_option maxHeartbeats 1600000 in
--- Naturality of the overlap isomorphism unfolds the pushout of every stage below `T₀`.
 /-- (Implementation) The overlap of the two charts of a stage scheme is `Wⱼ`, compatibly
 with the transition morphisms. -/
 noncomputable def interIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
@@ -1836,9 +1836,9 @@ noncomputable def interIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
     (fun S ↦ IsOpenImmersion.isoOfRangeEq
       (E.Wι S.left.j ≫ pushout.inl (E.Wι S.left.j) S.left.toSpec)
       (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ (T₀.chartU ⊓ T₀.chartV)))
-      (by rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange,
-        Scheme.Opens.opensRange_ι, Scheme.Hom.preimage_inf, Stage.preimage_chartU S.hom,
-        Stage.preimage_chartV S.hom, Stage.chartU_inf_chartV]))
+      (Scheme.Hom.range_eq_range_ι_of_opensRange_eq _ ((congrArg₂ (· ⊓ ·)
+        (Stage.preimage_chartU S.hom) (Stage.preimage_chartV S.hom)).trans
+          (Stage.chartU_inf_chartV _)).symm))
     (fun {S S'} k ↦ by
       rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ
         (T₀.chartU ⊓ T₀.chartV)))]
@@ -1904,8 +1904,12 @@ lemma exists_hom_algHom_eq (E : ExtensionData.{u}) (T : E.Stage) (a b : ↥T.A)
     rw [← T.hA _ a.2, ← T.hA _ b.2, h]
   have hcpt : IsCompact ((⊤ : (E.WD.obj T.j).Opens) : Set (E.WD.obj T.j)) := isCompact_univ
   obtain ⟨j', k, hk⟩ := exists_app_map_eq_map_of_isLimit E.WD E.Wc E.isLimitWc hcpt _ _ ht
-  exact ⟨T.restrict k ⊥ bot_le Subalgebra.fg_bot,
-    T.restrictHom k ⊥ bot_le Subalgebra.fg_bot, Stage.Hom.algHom_eq_of _ a b h hk⟩
+  -- Stated for a general subalgebra `A'`: at `A' = ⊥`, unifying `hk` with the goal is very
+  -- slow.
+  have H (A' : Subalgebra ℤ (Γ(E.X, E.V) × Γ(E.WD.obj j', ⊤))) (hA' : A' ≤ E.fiberProduct j')
+      (hfg : A'.FG) : ∃ (T' : E.Stage) (f : T' ⟶ T), f.algHom a = f.algHom b :=
+    ⟨T.restrict k A' hA' hfg, T.restrictHom k A' hA' hfg, Stage.Hom.algHom_eq_of _ a b h hk⟩
+  exact H ⊥ bot_le Subalgebra.fg_bot
 
 /-- (Implementation) The system of coefficient algebras of the stages, as a diagram in the
 opposite category of commutative rings. -/
@@ -1964,8 +1968,6 @@ lemma isoSpec_inv_toSpecΓ (E : ExtensionData.{u}) :
     E.hV.isoSpec.inv ≫ E.V.toSpecΓ = 𝟙 _ := by
   rw [← IsAffineOpen.isoSpec_hom E.hV, Iso.inv_hom_id]
 
-set_option maxHeartbeats 1600000 in
--- Naturality of the chart isomorphism unfolds the pushout of every stage below `T₀`.
 /-- (Implementation) The `Spec A`-chart of a stage scheme is `Spec A`, compatibly with the
 transition morphisms. -/
 noncomputable def chartVIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
@@ -1973,8 +1975,7 @@ noncomputable def chartVIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
   NatIso.ofComponents
     (fun S ↦ IsOpenImmersion.isoOfRangeEq (pushout.inr (E.Wι S.left.j) S.left.toSpec)
       (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ T₀.chartV))
-      (by rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange,
-        Scheme.Opens.opensRange_ι, Stage.preimage_chartV S.hom]))
+      (Scheme.Hom.range_eq_range_ι_of_opensRange_eq _ (Stage.preimage_chartV S.hom).symm))
     (fun {S S'} k ↦ by
       rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ T₀.chartV))]
       simp only [Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac,
@@ -3844,7 +3845,7 @@ include hc in
 
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes with affine
 transition maps. If `lim Dᵢ` is separated, then `Dᵢ` is separated for every `i` past some stage.
-(Blueprint: `lemma:nagata-fixed-base-separated-stage-exists`.) -/
+(Blueprint: `lemma-nagata-separated-stage-exists-absolute`.) -/
 @[stacks 086Q]
 theorem Scheme.exists_isSeparated_of_isLimit [c.pt.IsSeparated] :
     ∃ i₀ : I, ∀ {i : I} (_ : i ⟶ i₀), (D.obj i).IsSeparated := by
@@ -3915,7 +3916,8 @@ include hc in
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes over a base
 `S`, with affine transition maps and quasi-compact structure morphisms. If `lim Dᵢ ⟶ S` is
 separated, then `Dᵢ ⟶ S` is separated for every `i` past some stage.
-(Blueprint: `lemma:nagata-fixed-base-separated-eventually`.) -/
+(Blueprint: `lemma-nagata-fixed-base-separated-stage-exists`,
+`lemma-nagata-fixed-base-separated-eventually`.) -/
 @[stacks 01ZH]
 theorem Scheme.exists_isSeparated_app_of_isLimit (i₀ : I)
     [IsSeparated (c.π.app i₀ ≫ t.app i₀)] :

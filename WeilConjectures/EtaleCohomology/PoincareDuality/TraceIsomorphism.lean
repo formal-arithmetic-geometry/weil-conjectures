@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 
 /-!
 # The trace isomorphism
@@ -30,10 +31,16 @@ supports.
 
 ## Main definitions
 
+- `AlgebraicGeometry.Etale.unitClassCompactSupport`: the class `1 ∈ H^0_c(X, Λ)`.
+- `AlgebraicGeometry.Etale.TateOrientation.traceDualityEquiv`: the duality at `i = 0`,
+  `H^{2d}_c(X, Λ(d)) ≃ Hom(Ra_! Λ_X, Λ_Y)`.
 - `AlgebraicGeometry.Etale.pointClass`: the class `[x ⊂ X] ∈ H^{2d}_c(X, Λ(d))` of a `k`-point.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.TateOrientation.traceMap_eq_unitClassCompactSupport_comp`: the trace
+  `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` is the map produced by the duality at `i = 0`, followed by
+  evaluation at `1 ∈ H^0_c(X, Λ)`; `bijective_traceMap_iff` is the resulting criterion.
 - `AlgebraicGeometry.Etale.TateOrientation.bijective_untwistedTraceMap`: the untwisted trace
   `H^{2d}_c(X, Λ) ⟶ Λ(-d)` is bijective.
 - `AlgebraicGeometry.Etale.exists_tateOrientation_traceMap_pointClass`: for a suitable (the
@@ -72,8 +79,79 @@ open Scheme
 
 namespace Etale
 
+section DualityAtZero
+
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
+  {a : X ⟶ Y} [IsProper a] {d : ℕ}
+
+variable (Λ a) in
+/-- The class `1 ∈ H^0_c(X, Λ)` of a proper morphism `a : X ⟶ Y`, as a morphism
+`Λ_Y ⟶ Ra_! Λ_X`: the unit `Λ_Y ⟶ Ra_* La^* Λ_Y` of `La^* ⊣ Ra_*`, read through
+`La^* Λ_Y ≅ Λ_X` and `Ra_* ≅ Ra_!`. -/
+noncomputable def unitClassCompactSupport :
+    𝟙_ (DerivedCategoryModule Λ Y) ⟶ (R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X) :=
+  (derivedUpperStarLowerStarAdjunction _ a).unit.app (constantComplex Λ Y) ≫
+    (R((a)_*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarConstantComplexIso Λ a).hom ≫
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar _ a).inv.app _
+
+namespace TateOrientation
+
+/-- Blueprint `sk-cor-trace` (the duality at `i = 0`): for a Tate orientation `γ` of a proper
+morphism `a : X ⟶ Y`, the duality isomorphism in degree `0`,
+`H^{2d}_c(X, Λ(d)) ≃ Hom(Ra_! Λ_X, Λ_Y)`, that is `H^{2d}(X, Λ(d)) ≅ H^0_c(X, Λ)^∨` over a
+separably closed field. It is the composite
+```
+Hom(Λ_Y, (Ra_! Λ_X(d))[2d]) ≃ Hom(Λ_Y, Ra_*(Λ_X(d)[2d]))      (Ra_! ≅ Ra_*)
+                            ≃ Hom(Λ_X, Λ_X(d)[2d])            (La^* ⊣ Ra_*, La^* Λ_Y ≅ Λ_X)
+                            ≃ Hom(Λ_X, Ra^! Λ_Y)              (γ)
+                            ≃ Hom(Ra_! Λ_X, Λ_Y)              (Ra_! ⊣ Ra^!).
+``` -/
+noncomputable def traceDualityEquiv (γ : TateOrientation Λ a d) :
+    ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶
+        ((R(a)_![ModuleCat.{u + 1} Λ]).obj (tateObject Λ X d))⟦(2 * d : ℤ)⟧) ≃
+      ((R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X) ⟶
+        𝟙_ (DerivedCategoryModule Λ Y)) :=
+  (((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).symm.app _ ≪≫
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar _ a).app _).homToEquiv.trans <|
+    ((derivedUpperStarLowerStarAdjunction _ a).homEquiv _ _).symm.trans <|
+      ((leftDerivedUpperStarConstantComplexIso Λ a).homCongr γ.dualizingComplexIso).trans
+        ((rightDerivedUpperShriekAdjunction _ a).homEquiv _ _).symm
+
+/-- Blueprint `sk-cor-trace` (the trace is the map produced by the duality at `i = 0`): the trace
+map `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` of a Tate orientation `γ` of a proper morphism `a` is the
+duality isomorphism `H^{2d}_c(X, Λ(d)) ≃ Hom(Ra_! Λ_X, Λ_Y)`
+(`AlgebraicGeometry.Etale.TateOrientation.traceDualityEquiv`) followed by evaluation at the
+class `1 ∈ H^0_c(X, Λ)` (`AlgebraicGeometry.Etale.unitClassCompactSupport`). -/
+theorem traceMap_eq_unitClassCompactSupport_comp (γ : TateOrientation Λ a d)
+    (c : (𝟙_ (DerivedCategoryModule Λ Y)) ⟶
+        ((R(a)_![ModuleCat.{u + 1} Λ]).obj (tateObject Λ X d))⟦(2 * d : ℤ)⟧) :
+    γ.traceMap c = unitClassCompactSupport Λ a ≫ γ.traceDualityEquiv c :=
+  Adjunction.comp_map_counit_eq_comp_homEquiv_symm (derivedUpperStarLowerStarAdjunction _ a)
+    (rightDerivedUpperShriekAdjunction _ a) (rightDerivedLowerShriekIsoRightDerivedLowerStar _ a)
+    (A := constantComplex Λ Y) (leftDerivedUpperStarConstantComplexIso Λ a)
+    (((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso (2 * d : ℤ)).symm.app _)
+    γ.dualizingComplexIso c
+
+/-- The trace map `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` of a Tate orientation of a proper morphism is
+bijective if and only if evaluation at `1 ∈ H^0_c(X, Λ)`,
+`Hom(Ra_! Λ_X, Λ_Y) ⟶ Hom(Λ_Y, Λ_Y)`, is bijective, that is if and only if
+`H^0_c(X, Λ)^∨ ⟶ Λ` is: the trace is this evaluation read through the duality at `i = 0`
+(`AlgebraicGeometry.Etale.TateOrientation.traceMap_eq_unitClassCompactSupport_comp`). -/
+theorem bijective_traceMap_iff (γ : TateOrientation Λ a d) :
+    Function.Bijective γ.traceMap ↔ Function.Bijective
+      (fun h : (R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X) ⟶
+        𝟙_ (DerivedCategoryModule Λ Y) ↦ unitClassCompactSupport Λ a ≫ h) := by
+  have : ⇑γ.traceMap = (fun h ↦ unitClassCompactSupport Λ a ≫ h) ∘ γ.traceDualityEquiv :=
+    funext (traceMap_eq_unitClassCompactSupport_comp γ)
+  rw [this]
+  exact Function.Bijective.of_comp_iff _ γ.traceDualityEquiv.bijective
+
+end TateOrientation
+
+end DualityAtZero
+
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsAlgClosed k]
-  [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} {d : ℕ}
+  [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} [HasInvertibleExponent Λ X] {d : ℕ}
   (a : X ⟶ Spec (.of k)) [IsProper a] [SmoothOfRelativeDimension d a] [GeometricallyConnected a]
 
 namespace TateOrientation
@@ -89,7 +167,12 @@ theorem bijective_untwistedTraceMap (γ : TateOrientation Λ a d) :
   -- Proof sketch (blueprint): the duality `sk-thm-sf-identification` at `K = Λ_X` and `i = 0`
   -- reads `H^0_c(X, Λ)^∨ ≅ H^{2d}(X, Λ)(d)`; `H^0_c = H^0` as `X` is proper, and
   -- `H^0(X, Λ) = Λ` as `X` is connected (`sk-lem-finite`). The resulting isomorphism is the
-  -- counit of `Ra_! ⊣ Ra^!` read through `γ`, i.e. the trace map.
+  -- counit of `Ra_! ⊣ Ra^!` read through `γ`, i.e. the trace map
+  -- (`traceMap_eq_unitClassCompactSupport_comp` for the twisted trace).
+  -- Missing: (i) `Hom(Ra_! Λ_X, Λ_Y) ⟶ Hom(Λ_Y, Λ_Y)`, evaluation at `1`, is bijective; for a
+  -- self-injective `Λ` this is `H^0(X, Λ) = Λ` plus `Ext^{>0}_Λ(-, Λ) = 0` in the point category,
+  -- for a general finite `Λ` it needs the perfectness of `RΓ(X, Λ)`; (ii) the untwisted form
+  -- needs `Λ_k(-d)` to lie in degree `0`, which `HasTateTwist` does not provide.
   sorry
 
 /-- The untwisted trace on ordinary cohomology, `tr^{(-d)}_X : H^{2d}(X, Λ) ⟶ Λ(-d)`, is
@@ -139,6 +222,9 @@ theorem exists_tateOrientation_traceMap_pointClass :
   -- Under `γ` the class `[x ⊂ X]` is `1 ∈ H^0(Rx^! Ra^! Λ)`, and its trace is the composite
   -- `Λ = R(a ∘ x)_! R(a ∘ x)^! Λ ≅ Ra_! Rx_! Rx^! Ra^! Λ ⟶ Ra_! Ra^! Λ ⟶ Λ` of counits, which is
   -- the counit of `R(a ∘ x)_! ⊣ R(a ∘ x)^!`, the identity.
+  -- Missing: the canonical orientation of `sk-thm-smooth-purity` (only `Nonempty`), the
+  -- identification `cl_x = Φ_x` of `sk-thm-regular` (c) (only `IsIso cl_x` is stated) and the
+  -- composition isomorphisms `R(x ≫ a)_! ≅ Rx_! ⋙ Ra_!`, `R(𝟙)_! ≅ 𝟭` (only `Nonempty`).
   sorry
 
 /-- Blueprint `sk-cor-trace`: The trace isomorphism.

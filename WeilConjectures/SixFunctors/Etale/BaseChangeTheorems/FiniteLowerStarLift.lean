@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMapBaseChange
 public import WeilConjectures.SixFunctors.Finite.BaseChange
@@ -22,8 +23,6 @@ of the acyclicity of restricted injectives on `ℙ¹` over a strictly henselian 
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.bijective_edgeMap_of_isFinite`: the Leray edge map along a finite
-  morphism is bijective.
 - `AlgebraicGeometry.Etale.surjective_cohomologyMap_one_lowerStar_constantSheaf`: the lifting.
 -/
 
@@ -36,23 +35,6 @@ open CategoryTheory Limits Abelian
 namespace AlgebraicGeometry.Etale
 
 open Scheme
-/-- For a finite morphism `f`, the edge map `Hⁿ(Y, f_* G) ⟶ Hⁿ(X, G)` is bijective: `f_*` is
-exact, so the `Ext`-adjunction of `f^* ⊣ f_*` is bijective. -/
-theorem bijective_edgeMap_of_isFinite {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
-    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :
-    Function.Bijective fun x : Sheaf.H (((f)_*[AddCommGrpCat.{u + 1}]).obj G) n ↦
-      Sheaf.H.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).counit.app G) n
-        (cohomologyMap f _ n x) := by
-  have hb := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).mapExtCounit_bijective
-    ((constantSheaf _ AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) G n
-  have : (fun x : Sheaf.H (((f)_*[AddCommGrpCat.{u + 1}]).obj G) n ↦
-      Sheaf.H.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).counit.app G) n
-        (cohomologyMap f _ n x)) = (Ext.precompAddEquiv ((upperStarConstantSheafIso
-          AddCommGrpCat.{u + 1} f).symm.app (AddCommGrpCat.of (ULift ℤ))) G n) ∘
-        (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).mapExtCounit _ G n :=
-    funext fun x ↦ map_counit_cohomologyMap f G n x
-  rw [this]
-  exact (AddEquiv.bijective _).comp hb
 
 /-- **Classes of finite pushforwards of finite constant sheaves lift from the closed fibre.**
 Let `(A, I)` be a henselian pair, `p : X ⟶ Spec A` with closed fibre `ι : X₀ ⟶ X`, and

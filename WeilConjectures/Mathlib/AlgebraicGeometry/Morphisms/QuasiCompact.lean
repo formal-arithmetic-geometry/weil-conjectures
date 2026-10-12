@@ -25,7 +25,8 @@ statement about prime spectra,
 `PrimeSpectrum.exists_specializes_of_mem_closure_range_comap`.
 
 A quasi-compact scheme is the union of finitely many affine opens
-(`AlgebraicGeometry.Scheme.exists_finset_isAffineOpen_sup_eq_top`).
+(`AlgebraicGeometry.Scheme.exists_finset_isAffineOpen_sup_eq_top`), and the inclusion of an open
+and closed subscheme is quasi-compact (`AlgebraicGeometry.Scheme.Opens.quasiCompact_ι_of_isClosed`).
 -/
 
 @[expose] public section
@@ -109,5 +110,10 @@ lemma Scheme.exists_finset_isAffineOpen_sup_eq_top (T : Scheme.{u}) [CompactSpac
   · rw [hsU]
     exact iSup₂_le fun i hi ↦ Finset.le_sup (f := id)
       (Finset.mem_image_of_mem _ (hs.mem_toFinset.2 hi))
+
+/-- The inclusion of an open and closed subscheme is quasi-compact. -/
+lemma Scheme.Opens.quasiCompact_ι_of_isClosed {X : Scheme.{u}} (W : X.Opens)
+    (hW : IsClosed (W : Set X)) : QuasiCompact W.ι :=
+  ⟨fun _ _ hc ↦ hW.isClosedEmbedding_subtypeVal.isCompact_preimage hc⟩
 
 end AlgebraicGeometry
