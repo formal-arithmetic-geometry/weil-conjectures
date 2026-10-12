@@ -9937,3 +9937,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/P1/Sheaf.CategoryTheory.RightDerivedExactComposite (stage 3; reviewer PASS; first push; landing 20261012T225323-L-1810847 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/P2/Sheaf.AlgebraicGeometry.ModulePullbackIdealPowerProductImage (stage 3; reviewer PASS; after a return; landing 20261012T225323-L-1811010 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/P2/Sheaf.FieldTheory.SeparablyGeneratedDifferentialsBasis (stage 3; reviewer PASS; first push; landing 20261012T225324-L-1811123 (proof); batch 20261012T225253; modules 1; new nodes 0)
+- 22:53 L: returned deliver/X2/Sheaf.Paper.ZariskiEtaleResolutionCocycleCompatibility (reviewer RETURN: (reviewer X-07c23, head 07c2364ec) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.ZariskiEtaleRe)
