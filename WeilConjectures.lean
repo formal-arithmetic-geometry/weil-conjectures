@@ -345,6 +345,7 @@ public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalizationChart
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximationFamily
+public import WeilConjectures.AlgebraicGeometry.OpenClosedInduction
 public import WeilConjectures.AlgebraicGeometry.Picard.AffineSpaceRigidity
 public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
@@ -2064,6 +2065,7 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Additivity
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve
@@ -2075,7 +2077,9 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.KernelPushforwar
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.LocalFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Localization
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ModelRestriction
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Pairing
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Perfectness
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ProperPushforward
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.TraceClass
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.TraceMap

@@ -6,7 +6,11 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.AlgebraicGeometry.OpenClosedInduction
+public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Additivity
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ModelRestriction
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Perfectness
 
 /-!
 # The finite-coefficient Lefschetz trace formula
@@ -61,6 +65,81 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA] {s X : Scheme.{u}}
 
+namespace WeilComplex.IsModelFrobenius
+
+variable {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (G : GeometricOperations A (Spec (.of Ω)))
+  {k : Type u} [Field k] [Finite k]
+
+/-- Steps 1–4 of the proof of blueprint `thm-trf-coefficient-morphism-trace-formula`: the trace
+formula for a Weil complex whose model `X₀` is affine. An affine `X₀` of finite type over `k` is
+a closed subscheme of some `𝔸ᵈ_k`, and the trace formula on closed subschemes of `𝔸ᵈ_k` is
+proved by induction on `d` through the Weil `!`-pushforward along `𝔸ᵈ ⟶ 𝔸ᵈ⁻¹`, starting from
+closed subschemes of the affine line, which are the line itself or finite. -/
+theorem traceFormula_of_isAffine {aX : X ⟶ Spec (.of Ω)} [IsGeometric aX]
+    [HasCompactification aX] {W : WeilComplex (A := A) aX} {X₀ : Scheme.{u}}
+    {f₀ : X₀ ⟶ Spec (.of k)} [IsSeparated f₀] [LocallyOfFiniteType f₀] [IsAffine X₀]
+    {σ : Spec (.of Ω) ⟶ Spec (.of k)} {p : X ⟶ X₀} (hΦ : W.IsModelFrobenius f₀ σ p)
+    (hctf : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m) [IsProper (W.graph G hctf m).snd] :
+    W.TraceFormula G hctf m :=
+  sorry
+
+/-- The trace formula for a Weil complex whose Frobenius is the base change of the `q`-power
+Frobenius of a separated finite type model `X₀` over `k`, for every `m ≥ 1`. The affine case is
+`traceFormula_of_isAffine`; the general case follows by induction on a finite affine open cover
+of `X₀` (`Scheme.induction_on_isCompl`), splitting off at each step a closed subscheme of an
+affine open, which is affine, by additivity of the trace formula (`traceFormula_of_isCompl`)
+(Step 5 of the proof of blueprint `thm-trf-coefficient-morphism-trace-formula`). -/
+theorem traceFormula {aX : X ⟶ Spec (.of Ω)} [IsGeometric aX]
+    [HasCompactification aX] {W : WeilComplex (A := A) aX} {X₀ : Scheme.{u}}
+    {f₀ : X₀ ⟶ Spec (.of k)} [IsSeparated f₀] [LocallyOfFiniteType f₀] [QuasiCompact f₀]
+    {σ : Spec (.of Ω) ⟶ Spec (.of k)} {p : X ⟶ X₀} (hΦ : W.IsModelFrobenius f₀ σ p)
+    (hctf : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m) [IsProper (W.graph G hctf m).snd] :
+    W.TraceFormula G hctf m := by
+  have : CompactSpace X₀ := (quasiCompact_iff_compactSpace f₀).mp inferInstance
+  revert X W aX σ p
+  refine Scheme.induction_on_isCompl (S := Spec (.of k))
+    (P := fun {X₀} f₀ ↦ ∀ [IsSeparated f₀] [LocallyOfFiniteType f₀] [QuasiCompact f₀]
+      {X : Scheme.{u}} {aX : X ⟶ Spec (.of Ω)} [IsGeometric aX] [HasCompactification aX]
+      {W : WeilComplex (A := A) aX} {σ : Spec (.of Ω) ⟶ Spec (.of k)} {p : X ⟶ X₀},
+      W.IsModelFrobenius f₀ σ p → ∀ (hctf : G.ctf X W.obj) [IsProper (W.graph G hctf m).snd],
+        W.TraceFormula G hctf m) ?_ ?_ f₀
+  · intro X₀ f₀ _ _ _ _ X aX _ _ W σ p hΦ hctf _
+    exact traceFormula_of_isAffine G hΦ hctf m hm
+  · intro X₀ U₀ Z₀ f₀ j₀ i₀ _ _ _ hU₀ hcompl hU hZ _ _ _ X aX _ _ W σ p hΦ hctf _
+    have : QuasiCompact (j₀ ≫ f₀) := (quasiCompact_iff_compactSpace _).mpr hU₀
+    have : QuasiCompact (i₀ ≫ f₀) := inferInstance
+    obtain ⟨frobU, sqU, hΦU⟩ := hΦ.exists_upperStarPull W (pullback.fst p j₀) j₀ (pullback.snd p j₀)
+      (IsPullback.of_hasPullback p j₀).flip fun F₀ hF₀ ↦
+        hF₀.exists_comp_eq_of_isOpenImmersion f₀ j₀
+    obtain ⟨frobZ, sqZ, hΦZ⟩ := hΦ.exists_upperStarPull W (pullback.fst p i₀) i₀ (pullback.snd p i₀)
+      (IsPullback.of_hasPullback p i₀).flip fun F₀ hF₀ ↦
+        hF₀.exists_comp_eq_of_isClosedImmersion f₀ i₀
+    have := hΦU.isGeometric
+    have := hΦZ.isGeometric
+    have := hΦU.isFinite_frobeniusIterate _ m
+    have := hΦZ.isFinite_frobeniusIterate _ m
+    have hctfU := G.ctf_upperStar (pullback.fst p j₀) (.mk (aY := aX) rfl) hctf
+    have hctfZ := G.ctf_upperStar (pullback.fst p i₀) (.mk (aY := aX) rfl) hctf
+    have : IsProper ((W.upperStarPull (pullback.fst p j₀) rfl frobU sqU).graph G hctfU m).snd :=
+      inferInstanceAs
+        (IsProper ((W.upperStarPull (pullback.fst p j₀) rfl frobU sqU).frobeniusIterate m))
+    have : IsProper ((W.upperStarPull (pullback.fst p i₀) rfl frobZ sqZ).graph G hctfZ m).snd :=
+      inferInstanceAs
+        (IsProper ((W.upperStarPull (pullback.fst p i₀) rfl frobZ sqZ).frobeniusIterate m))
+    have : HasRightDual ((rightDerivedLowerShriek A (pullback.fst p j₀ ≫ aX)).obj
+        (W.upperStarPull (pullback.fst p j₀) rfl frobU sqU).obj) :=
+      (G.nonempty_hasRightDual_rightDerivedLowerShriek _ hctfU).some
+    have : HasRightDual ((rightDerivedLowerShriek A (pullback.fst p i₀ ≫ aX)).obj
+        (W.upperStarPull (pullback.fst p i₀) rfl frobZ sqZ).obj) :=
+      (G.nonempty_hasRightDual_rightDerivedLowerShriek _ hctfZ).some
+    intro _ _ _
+    exact traceFormula_of_isCompl G (pullback.fst p j₀) (pullback.fst p i₀) rfl rfl
+      (isCompl_range_of_isPullback (IsPullback.of_hasPullback p j₀).flip
+        (IsPullback.of_hasPullback p i₀).flip hcompl)
+      W hctf frobU frobZ sqU sqZ m (hU hΦU hctfU) (hZ hΦZ hctfZ)
+
+end WeilComplex.IsModelFrobenius
+
 /-- Blueprint `thm-trf-coefficient-morphism-trace-formula`: the trace formula for an arbitrary
 Frobenius coefficient morphism `φ : LΦ₁^* K ⟶ K`, with no invertibility assumed. For a Weil
 complex on the geometric base change `X = X₀ ×_{𝐅_q} Ω` of a separated finite type `X₀/𝐅_q`,
@@ -82,8 +161,10 @@ theorem trace_globalOperator_eq_sum_trace_stalkFrobenius_of_coeff {Ω : Type u} 
     haveI := hΦ.isGeometric
     MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G hctf m) hctf) =
       ∑ x : {x : Spec (.of Ω) ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x},
-        MonoidalCategory.trace (W.stalkFrobenius m x.1 x.2.2) :=
-  sorry
+        MonoidalCategory.trace (W.stalkFrobenius m x.1 x.2.2) := by
+  have := hΦ.isGeometric
+  have h := hΦ.traceFormula G hctf m hm
+  exact h
 
 /-- **The finite-coefficient Lefschetz trace formula.** For every Weil datum on the
 geometric base change `X = X₀ ×_{𝐅_q} Ω` of a separated finite type `X₀/𝐅_q`, `Ω`
