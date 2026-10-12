@@ -13,7 +13,28 @@
  ],
  "proof": [
   {
-   "text": "Proof: quotienting the lifted polynomial ring by the constants from I reduces its coefficients\nto A/I. The old equations then become P.relation by L.map_relation, and partial derivatives\nand determinants commute with this coefficient map. Quotienting further by the old equations\nidentifies their quotient with B by P's presentation property. The remaining equation is\ntherefore t * P.jacobian - 1. Since P.jacobian is a unit, evaluation at its inverse gives an\nisomorphism B[t]/(t * P.jacobian - 1) to B: its inverse includes B as constants, and their\ncomposites fix B and t, the latter because t * P.jacobian = 1 forces t to be that inverse.\nComposing these identifications gives e. On coefficients, old variables, and t its composite\nwith the quotient map agrees with L.polynomialReduction; polynomial and quotient induction\ntherefore give e (mk x) = L.reduction x for every x.",
+   "text": "Let J be I extended to L.LiftRing, Q = L.LiftRing/J, and q the composite polynomial quotient map. Constants from I vanish in Q, so the coefficient map descends to c : A/I to Q. Evaluate the old variables at q(X_some_i) to obtain g. Polynomial extensionality gives g(map(mk_I)(p)) = q(rename_some(p)). The equations map_relation show that g kills every original relation; the presentation kernel is their span, so the quotient equivalence of the presentation gives a ring homomorphism h : B to Q with h(aeval(P.val)(p)) = g(p).",
+   "uses": [
+    "def-exc-etale-algebra-lift"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The reduction map kills J because it sends each coefficient a in I through A/I. Descend it to f : Q to B. On coefficients and the old variables f composed with g is aeval(P.val). Surjectivity of this presentation evaluation then proves f(h(b)) = b for every b.",
+   "uses": [
+    "def-exc-etale-algebra-lift"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply pderiv_map, map_relation and RingHom.map_det to the lifted Jacobian polynomial. The reduced matrix is the transpose of P.jacobiMatrix by map_eq_id; det_transpose removes this transpose. Thus h(P.jacobian) = q(rename_some(L.jacobianPolynomial)). The lifted equation t times Delta minus 1 vanishes in Q, giving q(X_none) times h(P.jacobian) = 1. Since h(P.jacobian) is a unit, cancellation proves h(P.jacobian_isUnit.unit inverse) = q(X_none).",
+   "uses": [
+    "def-exc-etale-algebra-lift"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The composite h with polynomialReduction agrees with q on coefficients, old variables, and the extra variable none by the preceding inverse-Jacobian calculation. MvPolynomial.ringHom_ext proves the equality on every polynomial. Surjectivity of each quotient map then gives h(f(x)) = x for all x in Q. Assemble f and h with these two inverse laws into the required RingEquiv; its action on mk(x) is reduction(x) by definition.",
    "uses": [
     "def-exc-etale-algebra-lift"
    ],
@@ -26,7 +47,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-etale-algebra-lift.md",
-  "place": "Proof, reduction modulo I"
+  "place": "Proof, reduction modulo I; direct mutually inverse maps realizing the construction of Stacks Tag 04D1"
  },
  "mathlib_searches": [
   {
@@ -99,10 +120,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T144134-L-2103544",
-  "kind": "interface",
+  "landing": "20261012T184328-L-4013876",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
