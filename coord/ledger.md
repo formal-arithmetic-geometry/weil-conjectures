@@ -6769,3 +6769,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/C2/Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic (stage 3; reviewer PASS; first push; landing 20261012T085220-L-6021 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:52 L: merged deliver/C2/Sheaf.Paper.EtaleStandardCoverCech (stage 3; reviewer PASS; first push; landing 20261012T085220-L-6143 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:52 L: merged deliver/C3/Sheaf.AlgebraicGeometry.EtaleQcoherentCohomologyULift (stage 3; reviewer PASS; first push; landing 20261012T085220-L-6311 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:52 L: merged deliver/C3/Sheaf.AlgebraicGeometry.FpqcDescendQuasiCompact (stage 3; reviewer PASS; first push; landing 20261012T085221-L-6419 (proof); batch 20261012T085205; modules 1; new nodes 0)

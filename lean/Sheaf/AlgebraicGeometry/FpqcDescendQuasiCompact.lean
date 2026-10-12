@@ -37,6 +37,19 @@ quasi-compactness of `g`.
 theorem quasiCompact_of_fpqc_baseChange {S S' X : Scheme.{u}} (g : S' ⟶ S)
     [Flat g] [Surjective g] [QuasiCompact g] (f : X ⟶ S)
     [QuasiCompact (pullback.snd f g)] : QuasiCompact f := by
-  sorry
+  apply quasiCompact_iff_forall_isAffineOpen.mpr
+  intro U hU
+  have hV : IsCompact (g ⁻¹' (U : Set S)) :=
+    QuasiCompact.isCompact_preimage _ U.isOpen hU.isCompact
+  have hW : IsCompact ((pullback.snd f g) ⁻¹' (g ⁻¹' (U : Set S))) :=
+    QuasiCompact.isCompact_preimage _ (U.isOpen.preimage g.continuous) hV
+  have heq : (pullback.fst f g) ⁻¹' (f ⁻¹' (U : Set S)) =
+      (pullback.snd f g) ⁻¹' (g ⁻¹' (U : Set S)) := by
+    rw [← Set.preimage_comp, ← Set.preimage_comp]
+    change (pullback.fst f g ≫ f) ⁻¹' (U : Set S) = (pullback.snd f g ≫ g) ⁻¹' (U : Set S)
+    rw [pullback.condition]
+  rw [← heq] at hW
+  have himage := hW.image (pullback.fst f g).continuous
+  rwa [Set.image_preimage_eq _ (pullback.fst f g).surjective] at himage
 
 end AlgebraicGeometry
