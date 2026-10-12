@@ -30,107 +30,53 @@
  ],
  "proof": [
   {
-   "text": "*Setting; $f_*$ is left exact additive.* Write $s:\\mathcal F\\to\\mathcal I^\\bullet$ for an injective resolution of $\\mathcal F$ in $\\textit{Ab}(\\mathcal C)$ with $\\mathcal I^q=0$ for $q<0$; it exists because $\\textit{Ab}(\\mathcal C)$ is abelian with enough injectives [lem-weil-pbc-site-sheaves-enough-injectives], [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1). By [def-weil-pbc-sites-and-cohomology] (3), $f_*=u^s$ is precomposition with $u$: $(f_*\\mathcal G)(W)=\\mathcal G(u(W))$ and $(f_*\\psi)_W=\\psi_{u(W)}$ for $W\\in\\operatorname{Ob}(\\mathcal D)$. Hence $f_*$ is additive (addition of morphisms is sectionwise), and it preserves kernels: kernels in $\\textit{Ab}(\\mathcal C)$ and $\\textit{Ab}(\\mathcal D)$ are sectionwise kernels [lem-weil-pbc-sheafification-exact] (1), so $(f_*\\ker\\psi)(W)=\\ker(\\psi_{u(W)})=\\ker((f_*\\psi)_W)$. So $f_*$ is left exact additive [def-sp-left-exact-additive] and, for every $W$, $\\Gamma(W,f_*\\mathcal G)=\\Gamma(u(W),\\mathcal G)$ and $\\Gamma(W,f_*\\psi)=\\Gamma(u(W),\\psi)$ as groups and maps; in particular $\\Gamma(V,f_*\\mathcal I^\\bullet)=\\Gamma(u(V),\\mathcal I^\\bullet)$ as complexes of abelian groups.",
+   "text": "For the unchanged Lean existential conclusion, use the two resolution-to-cohomology isomorphisms directly. Obtain finite-limit preservation of abelian inverse image from the underlying-set comparison and reflection of limits by forgetful sheaves. Its adjunction to pushforward gives preservation of injectives; the right adjunction also gives preservation of limits by pushforward. This uses no cover-preservation or pullback-preservation assumptions beyond those in the existing Lean signature.",
    "uses": [
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-sheafification-exact",
-    "def-sp-left-exact-additive"
+    "lem-weil-pbc-site-pullback-abelian-underlying",
+    "lem-sp-right-adjoint-preserves-injectives"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 01FT (cohomology over an object) and Lemma Tag 0733 (lemma-apply-Leray, line 2347)"
-   }
+   "elementary": false
   },
   {
-   "text": "*$f_*$ of the injective resolution is an injective resolution of $f_*\\mathcal F$.* (a) Each $f_*\\mathcal I^q$ is injective in $\\textit{Ab}(\\mathcal D)$: $f_*$ is right adjoint to $f^{-1}$ [def-weil-pbc-sites-and-cohomology] (3), and $f^{-1}:\\textit{Ab}(\\mathcal D)\\to\\textit{Ab}(\\mathcal C)$ is an exact additive functor of abelian categories [lem-weil-pbc-site-pullback-abelian-exact], so [lem-sp-right-adjoint-preserves-injectives] applies (Stacks Homology, Lemma Tag 015Z; for sites Cohomology on Sites, Lemma Tag 0730 with $\\mathcal O=\\mathbf Z$, and Lemma Tag 072Z, which gives the weaker total acyclicity for ringed topoi). (b) Exactness: by [lem-weil-pbc-derived-functor-map-via-lift] applied to $v=f_*$ and the resolution $s$, there are isomorphisms $\\iota^q:R^qf_*\\mathcal F\\xrightarrow{\\sim}H^q(f_*\\mathcal I^\\bullet)$; by hypothesis $R^qf_*\\mathcal F=0$ for $q>0$, so $f_*\\mathcal I^\\bullet$ is exact at $f_*\\mathcal I^q$ for every $q\\ge1$. In degree $0$, by [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (2) for the left exact additive $f_*$ (step 1), $f_*(s)$ induces an isomorphism $f_*\\mathcal F\\to\\ker(f_*d^0)$; so $f_*(s)$ is a monomorphism with image $\\ker(f_*d^0)$. Hence $0\\to f_*\\mathcal F\\xrightarrow{f_*(s)}f_*\\mathcal I^0\\to f_*\\mathcal I^1\\to\\cdots$ is exact, and $f_*(s):f_*\\mathcal F\\to f_*\\mathcal I^\\bullet$ is an injective resolution [def-sp-injective-resolutions] with $f_*\\mathcal I^q=0$ for $q<0$.",
+   "text": "Choose I = injectiveResolution F. Construct mapResolution T I he explicitly with cocomplex T(I), injective terms, and augmentation obtained by fromSingle₀Equiv from T.map(I.ι.f 0). KernelFork.mapIsLimit gives the quasi-isomorphism in degree zero, using quasiIsoAt₀_iff and ShortComplex.quasiIso_iff_of_zeros. For n+1, isoRightDerivedObj identifies homology with the assumed zero higher derived image, hence T(I) is exact there. This constructs an injective resolution P of T(F) without a new existence lemma or hole.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-sp-right-adjoint-preserves-injectives",
-    "lem-weil-pbc-derived-functor-map-via-lift",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 072Z (lemma-direct-image-injective-sheaf, line 2212); Lemma Tag 0730 (lemma-pushforward-injective-flat); literature/stacks-project/homology.tex Lemma Tag 015Z (lemma-adjoint-preserve-injectives, line 7270)"
-   }
-  },
-  {
-   "text": "*The pullback computed from this resolution.* Let $r:f^{-1}f_*\\mathcal F\\to\\mathcal J^\\bullet$ be an injective resolution in $\\textit{Ab}(\\mathcal C)$ with $\\mathcal J^q=0$ for $q<0$ ([lem-weil-pbc-site-sheaves-enough-injectives], [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1)). Apply [lem-weil-pbc-site-cohomology-pullback] to $\\mathcal A=f_*\\mathcal F$ with the injective resolution $f_*(s):f_*\\mathcal F\\to f_*\\mathcal I^\\bullet$ of step 2 and the resolution $r$: there is a morphism of complexes $\\beta:f^{-1}f_*\\mathcal I^\\bullet\\to\\mathcal J^\\bullet$ with $\\beta^0\\circ f^{-1}(f_*s)=r$, and by its clause (1) (independence of the choices) $f^*:H^p(V,f_*\\mathcal F)\\to H^p(u(V),f^{-1}f_*\\mathcal F)$ is $f^*=(\\iota^p_{\\mathcal J})^{-1}\\circ H^p(c)\\circ\\iota^p_{f_*\\mathcal I}$ with $c=\\Gamma(u(V),\\beta)\\circ\\eta_{f_*\\mathcal I^\\bullet}(V):\\Gamma(V,f_*\\mathcal I^\\bullet)\\to\\Gamma(u(V),f^{-1}f_*\\mathcal I^\\bullet)\\to\\Gamma(u(V),\\mathcal J^\\bullet)$, where $\\eta_{f_*\\mathcal I^\\bullet}$ is the unit applied termwise and $\\iota^p_P$ are the identifications of [lem-weil-pbc-derived-functor-map-via-lift] for $v=\\Gamma(V,-)$, resp. $\\Gamma(u(V),-)$ (the identifications $H^p(W,\\mathcal G)=H^p(\\Gamma(W,P^\\bullet))$ of [def-weil-pbc-sites-and-cohomology] (2)).",
-   "uses": [
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-pbc-site-cohomology-pullback",
-    "lem-weil-pbc-derived-functor-map-via-lift",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 0733 (lemma-apply-Leray, line 2347), part (1); the direct proof its proof calls 'a good exercise'"
-   }
-  },
-  {
-   "text": "*The map induced by the counit.* By [lem-weil-pbc-injective-resolution-lift-exists] (for $h=\\varepsilon_{\\mathcal F}:f^{-1}f_*\\mathcal F\\to\\mathcal F$ and the injective resolutions $r$ and $s$) there is a morphism of complexes $\\psi:\\mathcal J^\\bullet\\to\\mathcal I^\\bullet$ with $\\psi^0\\circ r=s\\circ\\varepsilon_{\\mathcal F}$, and by [lem-weil-pbc-derived-functor-map-via-lift] for $v=\\Gamma(u(V),-)$, $H^p(u(V),\\varepsilon_{\\mathcal F})=(\\iota^p_{\\mathcal I})^{-1}\\circ H^p(\\Gamma(u(V),\\psi))\\circ\\iota^p_{\\mathcal J}$. With step 3, $e^p_{V,\\mathcal F}=(\\iota^p_{\\mathcal I})^{-1}\\circ H^p\\bigl(\\Gamma(u(V),\\psi\\beta)\\circ\\eta_{f_*\\mathcal I^\\bullet}(V)\\bigr)\\circ\\iota^p_{f_*\\mathcal I}$.",
-   "uses": [
-    "lem-weil-pbc-injective-resolution-lift-exists",
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive",
     "lem-weil-pbc-derived-functor-map-via-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 0733 (lemma-apply-Leray, line 2347), part (1); the direct proof its proof calls 'a good exercise'"
-   }
+   "elementary": true
   },
   {
-   "text": "*$\\psi\\beta$ is homotopic to the counit of the complex.* Let $\\varepsilon_{\\mathcal I^\\bullet}:f^{-1}f_*\\mathcal I^\\bullet\\to\\mathcal I^\\bullet$ be the counit applied termwise; it is a morphism of complexes by naturality of $\\varepsilon$ at the differentials. Let $\\alpha:(f^{-1}f_*\\mathcal F)[0]\\to f^{-1}f_*\\mathcal I^\\bullet$ be the morphism given by $f^{-1}(f_*s)$ in degree $0$. Since $f^{-1}$ is exact [lem-weil-pbc-site-pullback-abelian-exact], it carries the exact sequence $0\\to f_*\\mathcal F\\to f_*\\mathcal I^0\\to f_*\\mathcal I^1\\to\\cdots$ of step 2 to an exact sequence, so $\\alpha$ is a quasi-isomorphism. In degree $0$, $\\psi^0\\beta^0f^{-1}(f_*s)=\\psi^0r=s\\,\\varepsilon_{\\mathcal F}$ (steps 3, 4) and $\\varepsilon_{\\mathcal I^0}\\circ f^{-1}f_*(s)=s\\circ\\varepsilon_{\\mathcal F}$ (naturality of $\\varepsilon$ at $s:\\mathcal F\\to\\mathcal I^0$); all other degrees of $(f^{-1}f_*\\mathcal F)[0]$ are $0$. So $(\\psi\\beta)\\circ\\alpha=\\varepsilon_{\\mathcal I^\\bullet}\\circ\\alpha$, and since $\\mathcal I^\\bullet$ is bounded below with injective terms, [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] gives a homotopy $\\psi\\beta\\simeq\\varepsilon_{\\mathcal I^\\bullet}$, $\\psi^n\\beta^n-\\varepsilon_{\\mathcal I^n}=d k^n+k^{n+1}d$. Applying the additive functor $\\Gamma(u(V),-)$ gives a homotopy $\\Gamma(u(V),\\psi\\beta)\\simeq\\Gamma(u(V),\\varepsilon_{\\mathcal I^\\bullet})$, and composing with the chain map $\\eta_{f_*\\mathcal I^\\bullet}(V)$, $H^p(\\Gamma(u(V),\\psi\\beta)\\circ\\eta_{f_*\\mathcal I^\\bullet}(V))=H^p(\\Gamma(u(V),\\varepsilon_{\\mathcal I^\\bullet})\\circ\\eta_{f_*\\mathcal I^\\bullet}(V))$.",
-   "uses": [
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 0733 (lemma-apply-Leray, line 2347), part (1); the direct proof its proof calls 'a good exercise'"
-   }
-  },
-  {
-   "text": "*Triangle identity; conclusion.* For each $n$, by step 1, $\\Gamma(u(V),\\varepsilon_{\\mathcal I^n})\\circ\\eta_{f_*\\mathcal I^n}(V)=(f_*\\varepsilon_{\\mathcal I^n})_V\\circ(\\eta_{f_*\\mathcal I^n})_V=(f_*\\varepsilon_{\\mathcal I^n}\\circ\\eta_{f_*\\mathcal I^n})_V=\\mathrm{id}$, by the triangle identity $f_*\\varepsilon\\circ\\eta_{f_*}=\\mathrm{id}_{f_*}$ of the adjunction $f^{-1}\\dashv f_*$ with unit $\\eta$ and counit $\\varepsilon$ [def-weil-pbc-sites-and-cohomology] (3). So the chain map of step 5 is the identity of the complex $\\Gamma(V,f_*\\mathcal I^\\bullet)=\\Gamma(u(V),\\mathcal I^\\bullet)$, and by steps 4 and 5 $e^p_{V,\\mathcal F}=(\\iota^p_{\\mathcal I})^{-1}\\circ\\iota^p_{f_*\\mathcal I}$, a composite of two isomorphisms $H^p(V,f_*\\mathcal F)\\to H^p(\\Gamma(V,f_*\\mathcal I^\\bullet))=H^p(\\Gamma(u(V),\\mathcal I^\\bullet))\\to H^p(u(V),\\mathcal F)$. Hence $e^p_{V,\\mathcal F}$ is an isomorphism for every $p\\ge0$. In degree $0$, $f^*=\\eta_{f_*\\mathcal F}(V)$ ([lem-weil-pbc-site-cohomology-pullback] (1)) and $H^0(u(V),\\varepsilon_{\\mathcal F})=\\varepsilon_{\\mathcal F}(u(V))$ under $H^0=\\Gamma$ ([def-weil-pbc-sites-and-cohomology] (2)), so $e^0=\\varepsilon_{\\mathcal F}(u(V))\\circ\\eta_{f_*\\mathcal F}(V)=(f_*\\varepsilon_{\\mathcal F}\\circ\\eta_{f_*\\mathcal F})_V=\\mathrm{id}$, the parenthetical remark of the statement.",
+   "text": "The continuous pushforward is precomposition, so T followed by sections at V equals sections at U(V), on objects and morphisms. The complex-composition comparison and the homology functor identify the homology of sections of P with that of sections of I. Apply the existing natural object-cohomology/right-derived-sections comparison on both sites, and compute those derived functors using P and I via isoRightDerivedObj. Compose these isomorphisms.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-cohomology-pullback"
+    "lem-sc-site-cohomology-right-derived-sections",
+    "lem-weil-pbc-derived-functor-map-via-lift"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 0733 (lemma-apply-Leray, line 2347), part (1); the direct proof its proof calls 'a good exercise'"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Keep the arbitrary Ext universe of the original signature. For each site use extAddEquivCohomologyClass first in the given Ext universe and then in universe u, with the SAME chosen resolution and representing free sheaf. The latter HasExt follows from enough injectives. Compose through the common cohomology-class group, the small-universe comparison of the preceding step, and the inverse large-universe comparison. This gives an additive equivalence and hence an isomorphism in the original universe. Choose its hom for each p,V; IsIso of each hom completes the existential conclusion. No claim of identification with the specified pullback-counit map is added.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-sheafification-exact",
-  "def-sp-left-exact-additive",
-  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-pullback-abelian-underlying",
   "lem-sp-right-adjoint-preserves-injectives",
-  "lem-weil-pbc-derived-functor-map-via-lift",
   "def-sp-injective-resolutions",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "lem-weil-pbc-injective-resolution-lift-exists",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sc-site-cohomology-right-derived-sections",
+  "lem-weil-pbc-site-sheaves-enough-injectives"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 0733 (lemma-apply-Leray, line 2347) part (1), whose proof only says the statement follows from the Leray spectral sequence 0732 or 'directly (without using the spectral sequence)', left as an exercise; the direct argument here uses Tag 072Z/0730 and Homology Tag 015Z (f_* of injectives) and identifies the map with the edge map of the statement, which the source does not name"
+  "place": "Lemma 0733(1), direct injective-resolution argument of original steps 1 and 2 followed by section-complex comparison. Formalized by V1 on 2026-10-12 for the unchanged Lean existential statement; the stronger specified-edge-map identification in the natural-language node remains a statement-fidelity issue reported separately."
  },
  "mathlib_searches": [
   {
@@ -253,5 +199,15 @@
   "group": "Q1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-40a3f",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T135326-L-1697097",
+  "kind": "interface",
+  "note": "independent Codex review: The unchanged Lean signature and delivered proof match the updated DAG proof route; delivery and sole direct importer compile cleanly; axiom checks show only permitted axioms and existing transitive sorryAx."
  }
 }
