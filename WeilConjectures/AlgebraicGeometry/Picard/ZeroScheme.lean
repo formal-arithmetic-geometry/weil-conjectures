@@ -562,23 +562,22 @@ scheme `D = Z(s) ⊆ X_T` is a relative effective Cartier divisor on `X_T/T`, fi
 of degree `g` over `T`, where `g` is the genus of the curve.
 
 There is no definition of a relative effective Cartier divisor, so the conclusion is stated
-as the existence of the divisor: there is a point `D` of the Hilbert functor `Hilb^g_{X/k}(T)`
-whose closed subscheme is moreover an effective Cartier centre in `X_T`.
-
-The witness is the zero scheme of the adjunction morphism, by
-`AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit`.
+as: the zero scheme `Z(s)` of the adjunction morphism is the closed subscheme of a point `D` of
+the Hilbert functor `Hilb^g_{X/k}(T)`, and it is moreover an effective Cartier centre in `X_T`
+(`AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit`).
 
 (blueprint: `sk-lem-picard-zero-dictionary`) -/
-theorem exists_isEffectiveCartierCenter_hilbertPresheaf [IsSepClosed k]
+theorem exists_isEffectiveCartierCenter_hilbertPresheaf
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
       HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
     (T : Over (Spec (.of k)))
     (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T)) :
     ∃ D : (hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj (op T),
-      IsEffectiveCartierCenter D.1.subschemeι :=
+      D.1 = (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus ∧
+        IsEffectiveCartierCenter D.1.subschemeι :=
   have h := isInvertible_zeroLocus_directImageCounit σ hσ T ℒ
-  ⟨⟨_, h.2⟩, h.1.isEffectiveCartierCenter⟩
+  ⟨⟨_, h.2⟩, rfl, h.1.isEffectiveCartierCenter⟩
 
 /-- **The zero-scheme dictionary is injective.** Two classes `ℒ, ℒ' ∈ F(T)` whose adjunction
 morphisms have the same zero scheme `D` are equal.
