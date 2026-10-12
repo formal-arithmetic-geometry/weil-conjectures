@@ -2,6 +2,8 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.Ring
 public import Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.CategoryTheory.Adjunction.RingAdjunctPreservesOperations
+import Sheaf.CategoryTheory.Adjunction.RingCoadjunctPreservesOperations
 
 @[expose] public section
 
@@ -86,6 +88,60 @@ theorem ringHomEquivCore
         L.map (eR.inv.app Y) ≫ eL.inv.app (RF.obj Y) ≫
           (CommRingObjCat.forget B).map ((c.homEquiv (RF.obj Y) Y).symm (𝟙 _)) =
             adj.counit.app Y.X) := by
-  sorry
+  set_option backward.defeqAttrib.useBackward true in
+    let eL := eqToIso hL
+    let eR := eqToIso hR
+    have hf := ringAdjunctPreservesOperations adj LF RF hL hR opsL opsR
+    have hg := ringCoadjunctPreservesOperations adj LF RF hL hR opsL opsR
+    let E : ∀ X Y, (LF.obj X ⟶ Y) ≃ (X ⟶ RF.obj Y) := fun X Y ↦
+      { toFun := fun f ↦ CommRingObjCat.Hom.mk (adj.homEquiv X.X Y.X (eL.inv.app X ≫ f.hom) ≫
+            eR.inv.app Y) (isRingHom := hf X Y f)
+        invFun := fun g ↦ CommRingObjCat.Hom.mk (eL.hom.app X ≫
+            (adj.homEquiv X.X Y.X).symm (g.hom ≫ eR.hom.app Y)) (isRingHom := hg X Y g)
+        left_inv := fun f ↦ by
+          apply CommRingObjCat.hom_ext
+          dsimp
+          simp [Category.assoc, eL, eR]
+        right_inv := fun g ↦ by
+          apply CommRingObjCat.hom_ext
+          dsimp
+          simp [Category.assoc, eL, eR] }
+    let c : Adjunction.CoreHomEquiv LF RF :=
+      { homEquiv := E
+        homEquiv_naturality_left_symm := by
+          intro X' X Y f g
+          apply CommRingObjCat.hom_ext
+          change eL.hom.app X' ≫ (adj.homEquiv _ _).symm
+              ((f.hom ≫ g.hom) ≫ eR.hom.app Y) =
+            (LF.map f).hom ≫ eL.hom.app X ≫
+              (adj.homEquiv _ _).symm (g.hom ≫ eR.hom.app Y)
+          rw [Category.assoc, adj.homEquiv_naturality_left_symm]
+          simpa only [Category.assoc, Functor.comp_map, CommRingObjCat.forget_map,
+            CommRingObjCat.forget_obj] using
+            congrArg (fun t ↦ t ≫ (adj.homEquiv _ _).symm (g.hom ≫ eR.hom.app Y))
+              (eL.hom.naturality f).symm
+        homEquiv_naturality_right := by
+          intro X Y Y' f g
+          apply CommRingObjCat.hom_ext
+          change adj.homEquiv _ _ (eL.inv.app X ≫ (f.hom ≫ g.hom)) ≫
+              eR.inv.app Y' =
+            (adj.homEquiv _ _ (eL.inv.app X ≫ f.hom) ≫ eR.inv.app Y) ≫ (RF.map g).hom
+          rw [← Category.assoc, adj.homEquiv_naturality_right]
+          simpa only [Category.assoc, Functor.comp_map, CommRingObjCat.forget_map,
+            CommRingObjCat.forget_obj] using
+            congrArg (fun t ↦ adj.homEquiv _ _ (eL.inv.app X ≫ f.hom) ≫ t)
+              (eR.inv.naturality g) }
+    refine ⟨c, ?_, ?_, ?_⟩
+    · intro X Y f
+      change (adj.homEquiv _ _ _ ≫ eR.inv.app Y) ≫ eR.hom.app Y = _
+      simp [Category.assoc, eL, eR]
+    · intro X
+      change (adj.homEquiv _ _ (eL.inv.app X ≫ 𝟙 _) ≫ eR.inv.app _) ≫
+        eR.hom.app _ ≫ R.map (eL.hom.app X) = _
+      simp [Category.assoc, adj.homEquiv_unit, ← R.map_comp, eL, eR]
+    · intro Y
+      change L.map (eR.inv.app Y) ≫ eL.inv.app _ ≫
+        (eL.hom.app _ ≫ (adj.homEquiv _ _).symm (𝟙 _ ≫ eR.hom.app Y)) = _
+      simp [adj.homEquiv_counit, eL, eR]
 
 end CategoryTheory.Adjunction

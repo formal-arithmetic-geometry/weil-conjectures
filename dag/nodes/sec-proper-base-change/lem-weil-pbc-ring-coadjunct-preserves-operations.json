@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-ring-coadjunct-preserves-operations",
+ "kind": "statement",
+ "title": "The inverse adjunct preserves internal ring operations",
+ "statement": "Let A and B be categories with Cartesian monoidal structures (products and terminal objects, def-weil-category-product) and braided structures. Let L : A to B and R : B to A preserve finite products and let adj : L be left adjoint to R. Let LF and RF be functors on the categories of internal commutative ring objects, with equalities hL : LF followed by forget B = forget A followed by L and hR : RF followed by forget A = forget B followed by R. Write eL and eR for the isomorphisms induced by these equalities. For F equal to L or R and the corresponding lifted functor, assume for each ring object Z: each binary operation of F-lift(Z) followed by e_Z equals (e_Z times e_Z) followed by the inverse product comparison and F applied to that operation of Z; each constant zero or one followed by e_Z equals the inverse terminal comparison followed by F applied to that constant of Z; and negation followed by e_Z equals e_Z followed by F applied to negation. Then every ring morphism g : X to RF(Y) has conjugated inverse adjunct eL followed by Phi inverse(g followed by eR) which is an internal ring morphism LF(X) to Y. These hypotheses and the exact conclusion are specified verbatim in lean.statement.",
+ "stmt_deps": [
+  "def-weil-category-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, proof of (2) and its extension to rings; https://stacks.math.columbia.edu/tag/00YV"
+ },
+ "proof": [
+  {
+   "text": "For a binary operation m, let rho be R's product comparison and lambda L's. Naturality of epsilon at the two projections, together with the projection equations of rho and lambda, gives L(rho inverse) followed by epsilon_(Y times Y) equal to lambda_(RY,RY) followed by (epsilon_Y times epsilon_Y). Check this equality by composing with each projection; cancel the invertible product comparisons when checking. Naturality of epsilon at m_Y then identifies the composite of L of the transported binary operation with epsilon_Y with the product of epsilon_Y's followed by m_Y. Substitute opsL and opsR and the equation m_X followed by g equals (g times g) followed by m_(RF Y). Cancel eL and eR to obtain m_(LF X) followed by the conjugated inverse adjunct equal to the product of two copies of that adjunct followed by m_Y. Apply this to addition and multiplication. For a constant q, naturality at q_Y and uniqueness of the map into the terminal object identify the composite of the inverse terminal comparisons and epsilon_terminal with the identity. With the constant equations opsL, opsR, and that for g, this proves q_(LF X) followed by the inverse adjunct equals q_Y, both for zero and for one. Package zero and addition as IsAddMonHom and one and multiplication as IsMonHom; these give IsRingHom. Negation preservation follows from additivity and is not a field of IsRingHom.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-category-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, operation-compatibility details supplied by T1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsRingHom|CommRingObjCat.Hom|homEquiv_naturality",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/CodiscreteCategory.lean, Mathlib/CategoryTheory/CodiscreteCategory.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+   "digest": "87ffae4e0d9583f8",
+   "verdict": "No exact internal-ring adjunct preservation theorem; IsRingHom and generic adjunction naturality are available."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRingHom\"",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.IsRingHom.id, CategoryTheory.IsRingHom, CategoryTheory.IsRingHom.toIsAddMonHom, CategoryTheory.IsRingHom.toIsMonHom, CategoryTheory.IsRingHom.mk, CategoryTheory.IsRingHom.comp, CategoryTheory.RingObjCat.Hom.isRingHom, CategoryTheory.CommRingObjCat.Hom.isRingHom",
+   "digest": "1db7b3e6057fa210",
+   "verdict": "No exact internal-ring adjunct preservation theorem; IsRingHom and generic adjunction naturality are available."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between finite product preserving functors restricts to internal commutative ring homomorphisms",
+   "date": "2026-10-12",
+   "results": "CommRingCat.instIsRightAdjointCommMonCatForget₂, CommRingCat.forget₂Adj, CommRingCat.coyonedaAdj, CommRingCat.instIsRightAdjointForget, CommRingCat.adj, CommRingCat.monoidAlgebraAdj, CommRingCat.instIsLeftAdjointCommMonCatUnderMonoidAlgebra, CommRingCat.instIsRightAdjointOppositeObjFunctorTypeYoneda",
+   "digest": "71616b0de9d82c1b",
+   "verdict": "No exact internal-ring adjunct preservation theorem; IsRingHom and generic adjunction naturality are available."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunct and inverse adjunct of an internal commutative ring morphism preserve its ring operations under a finite product preserving adjunction",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "monObj.*[Aa]dj|[Aa]dj.*monObj|[Nn]atTrans.*[Mm]onoidal|[Mm]onoidal.*[Nn]atTrans",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Discrete.lean",
+   "digest": "b9a73f6f6a32e759",
+   "verdict": "Second reading: generic monoidal natural-transformation and hom-monoid tools exist; no exact conjugated ring adjunct preservation theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMonHom\", \"app\"",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.IsMonHom.monoidHom_apply, CategoryTheory.Bimon.instIsMonHomHomEquivMonComonUnitIsoAppXAux, CategoryTheory.Bimon.instIsMonHomComonHomEquivMonComonCounitIsoAppX",
+   "digest": "296db0e80fb86b10",
+   "verdict": "Second reading: generic monoidal natural-transformation and hom-monoid tools exist; no exact conjugated ring adjunct preservation theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between functors preserving finite products preserves internal monoid addition and multiplication",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Functor.homMonoidHom, CategoryTheory.Functor.map_mul, CategoryTheory.Functor.homMonoidHom_apply, CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functorObjObj_mon_mul, CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functor, CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functorObj, CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.functorObjObj, CategoryTheory.Functor.mapMonFunctor",
+   "digest": "3f2a5180c8c88dfe",
+   "verdict": "Second reading: generic monoidal natural-transformation and hom-monoid tools exist; no exact conjugated ring adjunct preservation theorem found."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Adjunction.RingHomEquivCore",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Operation-preservation step of lem-weil-pbc-ring-hom-equiv-core, supporting the inverse-image adjunction in the exchange construction",
+   "via": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Adjunction.RingCoadjunctPreservesOperations",
+  "file": "lean/Sheaf/CategoryTheory/Adjunction/RingCoadjunctPreservesOperations.lean",
+  "declaration": "CategoryTheory.Adjunction.ringCoadjunctPreservesOperations",
+  "statement": "theorem ringCoadjunctPreservesOperations\n    {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]\n    {B : Type uB} [Category.{vB} B] [CartesianMonoidalCategory B]\n    {L : A ⥤ B} {R : B ⥤ A} (adj : L ⊣ R)\n    [PreservesFiniteProducts L] [PreservesFiniteProducts R]\n    [BraidedCategory A] [BraidedCategory B]\n    (LF : CommRingObjCat A ⥤ CommRingObjCat B) (RF : CommRingObjCat B ⥤ CommRingObjCat A)\n    (hL : LF ⋙ CommRingObjCat.forget B = CommRingObjCat.forget A ⋙ L)\n    (hR : RF ⋙ CommRingObjCat.forget A = CommRingObjCat.forget B ⋙ R)\n    (opsL : let eL := eqToIso hL; (∀ X : CommRingObjCat A,\n            AddMonObj.add (X := (LF.obj X).X) ≫ eL.hom.app X =\n              (eL.hom.app X ⊗ₘ eL.hom.app X) ≫\n                (prodComparisonIso L X.X X.X).inv ≫ L.map (AddMonObj.add (X := X.X)) ∧\n            AddMonObj.zero (X := (LF.obj X).X) ≫ eL.hom.app X =\n              (preservesTerminalIso L).inv ≫ L.map (AddMonObj.zero (X := X.X)) ∧\n            AddGrpObj.neg (X := (LF.obj X).X) ≫ eL.hom.app X =\n              eL.hom.app X ≫ L.map (AddGrpObj.neg (X := X.X)) ∧\n            MonObj.mul (X := (LF.obj X).X) ≫ eL.hom.app X =\n              (eL.hom.app X ⊗ₘ eL.hom.app X) ≫\n                (prodComparisonIso L X.X X.X).inv ≫ L.map (MonObj.mul (X := X.X)) ∧\n            MonObj.one (X := (LF.obj X).X) ≫ eL.hom.app X =\n              (preservesTerminalIso L).inv ≫ L.map (MonObj.one (X := X.X))))\n    (opsR : let eR := eqToIso hR; (∀ X : CommRingObjCat B,\n            AddMonObj.add (X := (RF.obj X).X) ≫ eR.hom.app X =\n              (eR.hom.app X ⊗ₘ eR.hom.app X) ≫\n                (prodComparisonIso R X.X X.X).inv ≫ R.map (AddMonObj.add (X := X.X)) ∧\n            AddMonObj.zero (X := (RF.obj X).X) ≫ eR.hom.app X =\n              (preservesTerminalIso R).inv ≫ R.map (AddMonObj.zero (X := X.X)) ∧\n            AddGrpObj.neg (X := (RF.obj X).X) ≫ eR.hom.app X =\n              eR.hom.app X ≫ R.map (AddGrpObj.neg (X := X.X)) ∧\n            MonObj.mul (X := (RF.obj X).X) ≫ eR.hom.app X =\n              (eR.hom.app X ⊗ₘ eR.hom.app X) ≫\n                (prodComparisonIso R X.X X.X).inv ≫ R.map (MonObj.mul (X := X.X)) ∧\n            MonObj.one (X := (RF.obj X).X) ≫ eR.hom.app X =\n              (preservesTerminalIso R).inv ≫ R.map (MonObj.one (X := X.X)))) :\n    ∀ (X : CommRingObjCat A) (Y : CommRingObjCat B) (g : X ⟶ RF.obj Y),\n      IsRingHom (show (LF.obj X).X ⟶ Y.X from (eqToIso hL).hom.app X ≫\n        (adj.homEquiv X.X Y.X).symm (g.hom ≫ (eqToIso hR).hom.app Y))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T070552-L-3477910",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T070552-L-3477910",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
