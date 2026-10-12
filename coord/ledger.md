@@ -6515,3 +6515,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: merged deliver/S1/Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantDatum (stage 3; reviewer PASS; first push; landing 20261012T063519-L-3159241 (proof); batch 20261012T063502; modules 1; new nodes 0)
 - 06:35 L: merged deliver/S1/Sheaf.AlgebraicGeometry.DerivedPullback (stage 3; reviewer PASS; first push; landing 20261012T063519-L-3159337 (interface); batch 20261012T063502; modules 3; new nodes 2)
 - 06:35 L: merged deliver/S2/Sheaf.AlgebraicGeometry.FiniteEtaleModuleTraceData (stage 3; reviewer PASS; first push; landing 20261012T063519-L-3159435 (interface); batch 20261012T063502; modules 2; new nodes 1)
+- 06:35 L: merged deliver/S2/Sheaf.AlgebraicGeometry.ProjectiveLineOriginalStalkTotalCohomologyExchange (stage 3; reviewer PASS; first push; landing 20261012T063519-L-3159531 (interface); batch 20261012T063502; modules 2; new nodes 1)

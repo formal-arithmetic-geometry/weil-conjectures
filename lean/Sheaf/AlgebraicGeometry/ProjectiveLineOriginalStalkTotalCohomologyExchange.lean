@@ -9,12 +9,9 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
+import Sheaf.AlgebraicGeometry.ModuleAbelianStalkExchange
 import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
-import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
-import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange
 
 /-! # Stalk exchange under compatible strict localization
 
@@ -102,6 +99,25 @@ theorem Etale.projectiveLine_originalStalk_totalCohomologyExchange
       ∀ x, c₂ ((((pointSmallEtale τ).sheafFiber
           (A := ModuleCat.{u + 1} Λ)).map
           (Etale.baseChangeHomologyMap Λ sq q F)).hom x) =
-        Etale.cohomologyMap (ProjectiveSpace.map _ g₀) G₀ q (c₁ x) := by sorry
+        Etale.cohomologyMap (ProjectiveSpace.map _ g₀) G₀ q (c₁ x) := by
+  let p := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ))
+  let G := (sheafCompose _
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F
+  let g₀ := Spec.map (CommRingCat.ofHom φ)
+  let h := ProjectiveSpace.map (ULift.{u} (Fin 2)) g₀
+  obtain ⟨b₁, b₂, hb⟩ := Etale.exists_addEquiv_module_abelian_stalk_exchange
+    Λ (ProjectiveLine S ↘ S) f' g' g sq τ F q
+  obtain ⟨a₁, a₂, ha⟩ := Etale.projectiveLine_abelian_originalStalk_totalExchange
+    sq σ τ ι hι ν eA eB φ ρA ρB hφ hρA hρB hρ G q
+  obtain ⟨d⟩ := Etale.pullback_forget_modules_iso Λ p F
+  let c₁ := ((Sheaf.functorH _ q).mapIso d.symm).addCommGroupIsoToAddEquiv
+  let c₂ := ((Sheaf.functorH _ q).mapIso
+    (((h)^*[AddCommGrpCat.{u + 1}]).mapIso d.symm)).addCommGroupIsoToAddEquiv
+  refine ⟨(b₁.trans a₁).trans c₁, (b₂.trans a₂).trans c₂, ?_⟩
+  intro x
+  change c₂ (a₂ (b₂ _)) = Etale.cohomologyMap h _ q (c₁ (a₁ (b₁ x)))
+  rw [hb x, ha (b₁ x)]
+  exact (Etale.cohomologyMap_map h q d.inv (a₁ (b₁ x))).symm
 
 end AlgebraicGeometry

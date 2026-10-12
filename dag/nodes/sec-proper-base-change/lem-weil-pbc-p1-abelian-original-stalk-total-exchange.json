@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-p1-abelian-original-stalk-total-exchange",
+ "kind": "statement",
+ "title": "Abelian original-stalk exchange on total strict-local projective lines",
+ "statement": "Let S,T,X′ be schemes, with g:T→S, f′:X′→T and g′:X′→P¹_S forming a cartesian square with the projective-line projection [def-weil-pbc-cartesian-square, def-nagata-projective-space-base-change]. Let k,k′ be separably closed fields and Ω algebraically closed, and let σ:Spec k→S, τ:Spec k′→T, ι:Spec k′→Spec k and ν:Spec Ω→Spec k′ satisfy ι≫σ=τ≫g [def-weil-geometric-point]. Let A,B be strictly henselian local rings [def-weil-pbc-henselian-terminology], with eA:Spec A≅S_(νισ), eB:Spec B≅T_(ντ), and set jA=eA≫j_(νισ), jB=eB≫j_(ντ) [def-weil-pbc-strict-henselization-limit, def-weil-pbc-strict-henselization-structural-map]. Suppose φ:A→B is local, and ρA:Spec k→Spec κA, ρB:Spec k′→Spec κB obey Spec φ≫jA=jB≫g, ρA≫rA≫jA=σ, ρB≫rB≫jB=τ and ρB≫Spec(κφ)=ι≫ρA, where rA,rB are the residue closed-point maps. For any abelian étale sheaf G on P¹_S [def-weil-pbc-abelian-etale-sheaves], put G₀=P¹(jA)^*G and h=P¹(Spec φ). For every natural q, set K=G[0], C₁=H^q(g^*Rf_*K), C₂=H^q(Rf′_*g′^*K), where f:P¹_S→S is the projection, and e=H^q(Ex):C₁→C₂ [def-weil-pbc-derived-exchange]. There are additive equivalences a₁:(C₁)_τ≃H^q(P¹_A,G₀) and a₂:(C₂)_τ≃H^q(P¹_B,h^*G₀) with a₂(e_τ(x))=h^*(a₁(x)) for every x [def-weil-pbc-geometric-stalks, def-weil-pbc-cohomology-pullback, def-weil-pbc-etale-cohomology]. No module coefficients, torsion assumption, local closed-point higher-direct-image stalk, or closed-fibre cohomology appears in this conclusion.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, theorem-higher-direct-images, first assertion and restriction-complex construction; Tag 095T, theorem-proper-base-change, final stalk calculation (only the total-space restriction part)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-nagata-projective-space-base-change",
+  "def-weil-geometric-point",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Properness gives qcqs for the projective-line projection and its base change. The inverse-image stalk comparison identifies the source with the direct-image stalk at σ. Enlarging the separably closed point fields to Ω preserves pointed étale neighbourhood stalks because each finite separable residue extension is already split. Apply the unrestricted abelian strict-henselization stalk formula at νισ and ντ. Transport the resulting cohomology along eA,eB and the pullback isomorphisms to P¹_A and P¹_B; inverse-image composition identifies the coefficients with G₀ and h^*G₀.",
+   "uses": [
+    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a bounded below injective abelian resolution I and a K-injective replacement J of g′^*I. The termwise exchange is pullback of sections on each base-changed pointed neighbourhood, followed by the comparison to J. The structural and residue squares make the two maps to each pointed neighbourhood the same: both lift the prescribed geometric point and uniqueness of pointed étale lifts over a strict henselian local ring identifies them. Hence restriction to P¹_B after the termwise exchange equals restriction to P¹_A followed by h-pullback. Exactness of filtered colimits permits passage to homology. The derived adjunction and constant-sheaf comparison identify this map with the Ext map cohomologyMap. Transport a nonstandard pullback X′ by the unique pullback isomorphism, whose coherence preserves the equality.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-termwise",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker S2",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q9 and 095T; abelian geometric restriction part separated from coefficient comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "geometric stalk of higher direct image is cohomology of strict localization compatible with base change",
+   "results": "8 hits; TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalkPushforward_germ_apply, TopCat.Presheaf.stalkPushforward_germ, TopCat.Presheaf.stalkPushforward_germ_assoc, TopCat.Presheaf.stalkPullbackHom, TopCat.Presheaf.stalkPushforward.comp, TopCat.Presheaf.stalkPullbackInv, TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk_assoc; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "d65a1fb07032207d"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.cohomologyMap",
+   "results": "0 hits; ; loogle: unknown identifier 'AlgebraicGeometry.Etale.cohomologyMap'",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization.*stalk|stalk.*strictHenselization",
+   "results": "0 hits; ; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct image abelian geometric stalk strict henselization natural base change exchange",
+   "results": "0 hits; ; service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineOriginalStalkTotalCohomologyExchange",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Original-stalk to total-space comparison, abelian geometric part",
+   "via": [
+    "lem-weil-pbc-p1-strict-local-stalk-exchange-comparison",
+    "lem-weil-pbc-p1-original-stalk-total-cohomology-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineAbelianOriginalStalkTotalExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLine_abelian_originalStalk_totalExchange",
+  "statement": "theorem Etale.projectiveLine_abelian_originalStalk_totalExchange\n    {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}\n    (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    {A B : Type u} [CommRing A] [HenselianLocalRing A]\n    [CommRing B] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)]\n    (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ))\n    (φ : A →+* B) [IsLocalHom φ]\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hφ : Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n        strictHenselizationStructuralMap (ν ≫ ι ≫ σ) =\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g)\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)\n    (hρ : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA)\n    (G : Sheaf (ProjectiveLine S).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    let G₀ := (ProjectiveSpace.map _\n      (eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)))^*[\n      AddCommGrpCat.{u + 1}].obj G\n    let g₀ := Spec.map (CommRingCat.ofHom φ)\n    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G\n    let C₁ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      ((R+((ProjectiveLine S ↘ S)_*[AddCommGrpCat.{u + 1}]) ⋙\n        D+((g)^*[AddCommGrpCat.{u + 1}])).obj K)\n    let C₂ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      ((D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙\n        R+((f')_*[AddCommGrpCat.{u + 1}])).obj K)\n    let e := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map\n      ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K)\n    ∃ (a₁ : ((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj C₁ ≃+ Sheaf.H G₀ q)\n      (a₂ : ((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj C₂ ≃+\n        Sheaf.H ((ProjectiveSpace.map _ g₀)^*[AddCommGrpCat.{u + 1}].obj G₀) q),\n      ∀ x, a₂ ((((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).map e).hom x) =\n        Etale.cohomologyMap (ProjectiveSpace.map _ g₀) G₀ q (a₁ x)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-unrestricted-strict-henselization-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T063519-L-3159531",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T063519-L-3159531",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
