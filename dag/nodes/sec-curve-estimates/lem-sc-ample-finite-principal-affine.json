@@ -27,44 +27,74 @@
  ],
  "proof": [
   {
-   "text": "Assume first $E\\neq\\emptyset$ (the case $E=\\emptyset$ is treated at the end). Since $Y$ carries the ample invertible sheaf $\\mathcal M$, [lem-sc-ample-finite-set-affine] (Properties Lemma 01ZY), applied to $Y$ itself, gives an affine open $U'\\subseteq Y$ with $E\\subseteq U'$. Put $U=U'\\cap W$, an open subset with $E\\subseteq U\\subseteq W$ (it need not be affine; the restriction of $\\mathcal M$ to $W$ need not be ample, as $W$ need not be quasi-compact, so 01ZY is not applied to $W$).",
+   "text": "Choose an affine open A containing E by [lem-sc-ample-finite-set-affine]. Let B = A intersect W, and choose J with support Y minus B using [lem-sc-closed-subset-qc-ideal].",
    "uses": [
-    "lem-sc-ample-finite-set-affine"
+    "lem-sc-ample-finite-set-affine",
+    "lem-sc-closed-subset-qc-ideal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 09NV, proof, first paragraph: by Lemma 01ZY choose an affine open U subset W containing E"
+    "place": "Properties Lemma 09NV (properties-lemma-ample-finite-set-in-principal-affine)"
    }
   },
   {
-   "text": "Put $S=\\bigoplus_{n\\ge0}\\Gamma(Y,\\mathcal M^{\\otimes n})$, a nonnegatively graded commutative ring. For each $e\\in E$, let $\\mathfrak p_e$ be the homogeneous prime of sections vanishing at $e$, and let $I\\subset S_+$ be the graded ideal of positive-degree sections vanishing at every point of $Y\\setminus U$. By [lem-sc-closed-subset-qc-ideal] choose a quasi-coherent ideal sheaf $\\mathcal J\\subseteq\\mathcal O_Y$ with $V(\\mathcal J)=Y\\setminus U$. For $e\\in E$ we have $e\\in U$, so $e\\notin V(\\mathcal J)$, and since $Y$ is quasi-compact (part of the ampleness of $\\mathcal M$), [lem-sc-ample-ideal-section] gives $n>0$ and $u\\in\\Gamma(Y,\\mathcal J\\mathcal M^{\\otimes n})$ with $e\\in Y_u$; at a point $y\\in V(\\mathcal J)$ the germ $u_y$ lies in $\\mathcal J_y(\\mathcal M^{\\otimes n})_y\\subseteq\\mathfrak m_y(\\mathcal M^{\\otimes n})_y$, so $u$ vanishes on $Y\\setminus U$. Thus $u\\in I$ and $u\\notin\\mathfrak p_e$, i.e. $I\\not\\subseteq\\mathfrak p_e$ for every $e$. By graded prime avoidance [lem-sc-graded-prime-avoidance] (Algebra Lemma 00JS), there is a homogeneous positive-degree $s\\in I$ outside every $\\mathfrak p_e$.",
+   "text": "Insert each section from the ampleness cover into its single homogeneous summand of the section ring [def-sc-invertible-section-ring]. Apply [lem-sc-ample-proj-canonical-map] to obtain f from Y to Proj of this ring. Define p_y to be the homogeneous prime represented by f(y). The inverse-image formula gives, for positive-degree homogeneous x, x in p_y if and only if y is outside the nonvanishing locus of its degree component. Define I to be the intersection of the irrelevant ideal and all p_z with z outside B. This is a homogeneous ideal contained in the irrelevant ideal.",
    "uses": [
-    "lem-sc-closed-subset-qc-ideal",
+    "def-sc-invertible-section-ring",
+    "lem-sc-ample-proj-canonical-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 09NV (properties-lemma-ample-finite-set-in-principal-affine)"
+   }
+  },
+  {
+   "text": "Prove locally that an image section of J tensor N, for invertible N, vanishes on the support of J. Use the sheaf-level invertibility comparison [lem-pc-invertible-sheaf-instance] and a local affine free generator e of N. The existing proved TensorSection.IsFreeGenerator.bijective_tmulSection_right writes the restricted tensor section as a tensor e with a section a of J. Its image is c times e, where c is the image of a and belongs to J.ideal on this affine open by the proved range_toModulesι_app. A support point is in the zero locus of this ideal, so the germ of c is a nonunit and lies in the maximal ideal. Germ compatibility with restrictions and scalar action puts the image section in the maximal ideal times the stalk. These are existing proved library and Mathlib calculations, implemented explicitly in the local Lean proof.",
+   "uses": [
+    "lem-pc-invertible-sheaf-instance",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 09NV (properties-lemma-ample-finite-set-in-principal-affine)"
+   }
+  },
+  {
+   "text": "For y in B, the support equality says y is outside J. Supply CompactSpace Y from ampleness and apply [lem-sc-ample-ideal-section]. The resulting positive-power section is nonvanishing at y, and the preceding local calculation shows its locus is contained in B. Insert it into the section ring: its positive degree puts it in the irrelevant ideal, and vanishing outside B puts it in all p_z there, hence in I. It is outside p_y, proving I is not contained in p_y. Enumerate the finite set E by Fin(card E) and apply [lem-sc-graded-prime-avoidance] to obtain positive-degree homogeneous x in I avoiding every point prime of E.",
+   "uses": [
     "lem-sc-ample-ideal-section",
     "lem-sc-graded-prime-avoidance"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 09NV, proof, second paragraph: define S, p_x and I, use the basis of X_s and Algebra Lemma 00JS"
+    "place": "Properties Lemma 09NV (properties-lemma-ample-finite-set-in-principal-affine)"
    }
   },
   {
-   "text": "By the definitions of $I$ and $\\mathfrak p_e$, $E\\subseteq Y_s\\subseteq U\\subseteq W$. Since $U'$ is affine and $Y_s\\subseteq U\\subseteq U'$, [lem-sc-affine-cap-section-open] gives that $Y_s=U'\\cap Y_s$ is affine. If $E$ is empty, take any positive tensor power and the zero section, whose nonvanishing locus is empty and affine.",
+   "text": "Take s to be the degree-n component of x. Prime membership shows its nonvanishing locus contains E and is contained in B. Apply the positive-power clause of [lem-sc-affine-cap-section-open] on A. Since the locus is contained in A, the affine intersection open is exactly the entire nonvanishing locus; it is contained in W. The same finite enumeration and prime-avoidance application works for E empty, with no separate choice or nonemptiness assumption.",
    "uses": [
     "lem-sc-affine-cap-section-open"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 09NV, proof, final paragraph: then E subset X_s subset U and X_s is affine by Lemma 01PV"
+    "place": "Properties Lemma 09NV (properties-lemma-ample-finite-set-in-principal-affine)"
    }
   }
  ],
  "proof_deps": [
   "lem-sc-ample-finite-set-affine",
   "lem-sc-closed-subset-qc-ideal",
+  "def-sc-invertible-section-ring",
+  "lem-sc-ample-proj-canonical-map",
+  "lem-pc-invertible-sheaf-instance",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
   "lem-sc-ample-ideal-section",
   "lem-sc-graded-prime-avoidance",
   "lem-sc-affine-cap-section-open"
@@ -72,7 +102,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties Lemma 09NV proof"
+  "place": "Properties Lemma 09NV proof, with point primes supplied by Tag 01PZ canonical map and local tensor-section calculation written in Lean by F2"
  },
  "mathlib_searches": [
   {
@@ -151,5 +181,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T085235-L-13205",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
