@@ -1,6 +1,6 @@
 # Work queue
 
-57 items; claim with `tools/claim.py next <group> [--stage N]`.
+60 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (47)
+## Stage 3: modules to prove (50)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -54,11 +54,12 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.LocallyConstantReduction` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineLocalAcyclicOpenRestriction` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardNoetherian` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 1 | proof |
 | `Sheaf.Paper.InverseImageStalkGerm` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent` | 5 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelection` | 5 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralStalkEmbedding` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange` | 5 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleExactSegment` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1` | 5 | 1 | proof |
@@ -66,7 +67,9 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.RestrictedCohomologyColimit` | 5 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale` | 5 | 4 | proof |
+| `Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic` | 6 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.IntegralConstantModulePushforwardColimit` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleAcyclicUnderlyingSections` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology` | 6 | 1 | proof |
 | `Sheaf.Topology.IrreducibleIntegerExtensionVanishing` | 6 | 1 | proof |
