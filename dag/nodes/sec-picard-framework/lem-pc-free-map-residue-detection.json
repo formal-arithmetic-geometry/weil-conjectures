@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-free-map-residue-detection",
+ "kind": "statement",
+ "title": "Residue evaluations detect finite free maps on reduced schemes",
+ "statement": "Let X be a reduced scheme [def-pc-scheme, def-pc-reduced-scheme], let I be any index set and J a finite index set, and let δ:O_X^(I)→O_X^(J) be a morphism of free sheaves [def-weil-pbc-free-module, def-weil-sheaf-of-modules-category]. Suppose for every x∈X every entry of the matrix of δ in the canonical bases evaluates to zero in κ(x) [def-weil-residue-field]. Then δ=0. This includes the empty scheme and empty index sets.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "Proof (3), reduced-ring normal form: the complementary block vanishes in every residue field, hence over the reduced ring; source argument retained in the parent node docstring and unit record"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-free-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "For every matrix entry s, all residue evaluations vanish, so its basic open is empty by basicOpen_eq_bot_iff_forall_evaluation_eq_zero. Reducedness implies s=0 by eq_zero_of_basicOpen_eq_bot; this is the affine nilradical argument followed by sheaf separation.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-basic-open-function",
+    "def-weil-residue-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every i∈I and j∈J the map ι_i≫δ≫π_j from O_X to itself sends 1 to the zero entry, so it is zero. Indeed 1 generates the unit sheaf on every open, morphisms commute with restriction, and scalar-linearity determines the map from its value on 1. The sum over J of π_j≫ι_j is the identity, so ι_i≫δ is zero. The coproduct universal property then gives δ=0.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-free-module",
+  "def-weil-residue-field",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-basic-open-function"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "Proof (3), reduced-ring normal form: the complementary block vanishes in every residue field, hence over the reduced ring; source argument retained in the parent node docstring and unit record; R2 separates pointwise rank from reducedness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of finite free sheaves on a reduced scheme is zero when all its residue field matrices are zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of finite free sheaves on a reduced scheme is zero if its matrix vanishes in every residue field",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom.zero_app, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, SheafOfModules.generatorsOfIsCokernelFree_I, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.generatorsOfIsCokernelFree_s",
+   "date": "2026-10-12",
+   "verdict": "Related tools found, no exact free-sheaf detection theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "freeMatrix.*(injective|zero)|basicOpen.*evaluation",
+   "results": "Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/ResidueField.lean",
+   "date": "2026-10-12",
+   "verdict": "Related tools found, no exact free-sheaf detection theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ComplementaryBlockVanishes",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pc-semicontinuity-base-change",
+   "place": "Proof (3), reduced-ring normal form: the complementary block vanishes in every residue field, hence over the reduced ring; source argument retained in the parent node docstring and unit record",
+   "via": [
+    "lem-pc-complementary-block-vanishes",
+    "lem-pc-constant-rank-map-local-normal-form-nonempty",
+    "lem-pc-constant-rank-map-local-normal-form",
+    "lem-pc-constant-rank-map-kernel-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.FreeMapResidueDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/FreeMapResidueDetection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.free_map_eq_zero_of_residue_evaluations",
+  "statement": "theorem free_map_eq_zero_of_residue_evaluations\n    {X : Scheme.{u}} [IsReduced X] {I J : Type u} [Finite J] [DecidableEq J]\n    (δ : free (R := X.ringCatSheaf) I ⟶ free J)\n    (hδ : ∀ x : X, (freeMatrix δ).map (X.Γevaluation x) = 0) : δ = 0",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T213853-L-1209730",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T213853-L-1209730",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

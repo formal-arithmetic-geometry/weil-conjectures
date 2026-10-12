@@ -8,6 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 
+import Sheaf.AlgebraicGeometry.Modules.ComplementaryBlockResidueVanishes
+import Sheaf.AlgebraicGeometry.Modules.FreeMapResidueDetection
+
 /-! # Vanishing of the complementary block on a reduced scheme
 
 Source: `thm-pc-semicontinuity-base-change`, proof (3), larger minors vanish.
@@ -62,6 +65,11 @@ theorem complementary_block_eq_zero_of_rank_le
     (δ : free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin (m - a))) ⟶
       free (ULift.{u} (Fin (n - a))))
     (hform : (restrictFunctor U.ι).map ((Modules.pullback j).map φ) =
-      eS.hom ≫ biprod.map f δ ≫ eT.inv) : δ = 0 := by sorry
+      eS.hom ≫ biprod.map f δ ≫ eT.inv) : δ = 0 := by
+  let : IsReduced Z := isReduced_of_isOpenImmersion j
+  apply free_map_eq_zero_of_residue_evaluations
+  intro x
+  exact complementary_block_residue_eq_zero_of_rank_le eM eN φ j a U eS eT f δ
+    hform x (hrank x.1 x.2)
 
 end AlgebraicGeometry.Scheme.Modules

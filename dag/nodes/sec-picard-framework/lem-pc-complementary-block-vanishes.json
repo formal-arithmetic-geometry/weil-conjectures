@@ -20,43 +20,30 @@
  ],
  "proof": [
   {
-   "text": "For z in U choose the field point from the rank bound. Its image lies in the image of the composite open immersion U→Z→Y, hence it factors uniquely through U. Pull back the given diagonal equality. Under the pullback free isomorphisms its fibre map is block diagonal with invertible a-dimensional block f. The matrix rank is unchanged by the chosen basis isomorphisms; its image is the direct sum of the full first summand and the image of the fibre of δ. Therefore its rank is a plus the rank of that fibre, so the bound by a forces the latter rank to be zero. A zero-rank linear map over a field is zero.",
-   "uses": [
-    "def-weil-matrix-rank",
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The map to the chosen field factors through the residue field at z via the stalk map. A unital homomorphism between fields is injective, so every matrix entry of δ vanishes already in the residue field at z. On any affine open V inside U it therefore belongs to every prime of Γ(V,O). The intersection of these primes is the nilradical. Γ(V,O) is reduced because U is an open subscheme of reduced Y, hence this intersection is zero.",
+   "text": "The open immersion j identifies Z with an open subscheme of reduced Y, so Z and U are reduced (Mathlib isReduced_of_isOpenImmersion). Apply residue-field detection to δ on U.",
    "uses": [
     "def-pc-reduced-scheme",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+    "lem-pc-free-map-residue-detection"
    ],
    "elementary": false
   },
   {
-   "text": "All entries of δ are zero on each affine open V. Its value on each finite free basis element is consequently zero on this affine cover. The sheaf axiom makes these sections globally zero, and the universal property of the free sheaf gives δ=0. Empty U gives the zero sheaf category, a=0 treats the whole map this way, and zero-sized complementary summands give the same conclusion.",
+   "text": "For each x∈U specialize hrank at its underlying point x.1 with membership x.2, and apply the pointwise complementary-block residue theorem to the given bases, invertible f, δ and diagonal equality. This supplies the residue matrix vanishing required by detection.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-free-module"
+    "lem-pc-complementary-block-residue-vanishes"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-reduced-scheme",
-  "def-weil-matrix-rank",
-  "def-weil-pbc-free-module",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+  "lem-pc-complementary-block-residue-vanishes",
+  "lem-pc-free-map-residue-detection"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
-  "place": "Proof (3), reduced-ring normal form: the complementary block vanishes in every residue field, hence over the reduced ring; K1 explicit subargument, 2026-10-13"
+  "place": "Proof (3), pointwise fibre rank followed by reducedness; R2 compiled reduction, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -128,9 +115,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T173838-L-3299230",
+  "landing": "20261012T213853-L-1209730",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
