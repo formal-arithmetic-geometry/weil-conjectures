@@ -25,9 +25,8 @@
  ],
  "proof": [
   {
-   "text": "Let (U_i → U) be an etale covering family in T_Et. By [lem-weil-pbc-fpqc-finer-than-etale] it is an fpqc covering of U. Apply [lem-weil-pbc-fpqc-representable-descent] with base U and target X to the compatible scheme morphisms U_i → X: compatibility means equality after composition with the two projections of U_i ×_U U_j. This yields a unique scheme morphism g:U → X restricting to the given maps. Write p:X → T and u:U → T for the structure maps. The composites p ∘ g and u restrict to the same maps U_i → T because every given map is a T-morphism. Apply the uniqueness clause of the same descent node again, with target T, to conclude p ∘ g = u. Thus g is a T-morphism. Absolute uniqueness also gives uniqueness among T-morphisms; this is precisely the sheaf equalizer condition.",
+   "text": "Mathlib proves that the fpqc topology is subcanonical (the descent assertion of [lem-weil-pbc-fpqc-representable-descent]). In Mathlib.AlgebraicGeometry.Sites.Proetale, etaleTopology_le_proetaleTopology and the subcanonical proetaleTopology instance give etaleTopology.Subcanonical by Subcanonical.of_le. The instance subcanonical_over then makes yoneda.obj (Over.mk (X → T)) a sheaf on etaleTopology.over T: it glues underlying scheme morphisms and checks the structure map by uniqueness, exactly as in the original descent argument. The fully faithful inclusion Etale.forget T preserves finite limits, hence is representably flat. Scheme.locallyCoverDense_of_le T le_rfl and Functor.coverPreserving_restrictedTopology show it preserves covers from smallEtaleTopology T to etaleTopology.over T. Functor.isContinuous_iff_coverPreserving therefore makes this inclusion continuous. Apply op_comp_isSheaf_of_isSheaf_type to restrict the representable sheaf, then IsSheaf.isSheafFor to the given covering presieve. All these categorical transport statements are proved in Mathlib; no new descent lemma is needed.",
    "uses": [
-    "lem-weil-pbc-fpqc-finer-than-etale",
     "lem-weil-pbc-fpqc-representable-descent"
    ],
    "elementary": false,
@@ -38,13 +37,12 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-fpqc-finer-than-etale",
   "lem-weil-pbc-fpqc-representable-descent"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03O3 (etale-cohomology-lemma-representable-sheaf-fpqc, lines 1066–1076) and 03O4 (etale-cohomology-remark-fpqc-finest, lines 1086–1095), literature/stacks-project/etale-cohomology.tex"
+  "place": "Tags 03O3 and 03O4, implemented using Mathlib fpqc/proetale subcanonicity, subcanonical_over, and continuous restriction; G2 stage 3"
  },
  "mathlib_searches": [
   {
@@ -123,5 +121,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T042408-L-1815157",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -2,7 +2,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Sites.IsSheafFor
-import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
+import Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-!
 # Representable presheaves are sheaves on the small étale site
@@ -47,6 +47,23 @@ theorem smallEtaleRepresentablePresheaf_isSheaf
         Presieve.IsSheafFor
           ((Scheme.Etale.forget T).op ⋙
             yoneda.obj (Over.mk (X ↘ T))) R := by
-  sorry
+  let : Scheme.etaleTopology.Subcanonical :=
+    GrothendieckTopology.Subcanonical.of_le Scheme.etaleTopology_le_proetaleTopology
+  have h : Presieve.IsSheaf (Scheme.etaleTopology.over T)
+      (yoneda.obj (Over.mk (X ↘ T))) :=
+    GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable _
+  let : RepresentablyFlat (Scheme.Etale.forget T) :=
+    flat_of_preservesFiniteLimits _
+  let : (Scheme.Etale.forget T).LocallyCoverDense (Scheme.etaleTopology.over T) :=
+    Scheme.locallyCoverDense_of_le T le_rfl
+  let : (Scheme.Etale.forget T).IsContinuous (Scheme.smallEtaleTopology T)
+      (Scheme.etaleTopology.over T) := by
+    apply (Functor.isContinuous_iff_coverPreserving).2
+    exact Functor.coverPreserving_restrictedTopology (Scheme.Etale.forget T)
+      (Scheme.etaleTopology.over T)
+  have hsmall := (Scheme.Etale.forget T).op_comp_isSheaf_of_isSheaf_type
+    (Scheme.smallEtaleTopology T) h
+  intro U R hR
+  exact hsmall.isSheafFor R hR
 
 end AlgebraicGeometry
