@@ -23,54 +23,47 @@
  ],
  "proof": [
   {
-   "text": "For every integer n, sending a denominator s:X'\\to X in S/X to its shifted morphism s[n]:X'[n]\\to X[n] defines an equivalence S/X\\simeq S/X[n]. The forward implication that s[n] lies in S is the shift-compatibility axiom (MS5) in [def-pur-saturated-triangulated-localization], and the reverse implication follows by applying the same axiom to -n; identities and commuting triangles are preserved by the shift automorphism.",
+   "text": "Use the identity and saturation clauses of [def-pur-saturated-triangulated-localization] to show that S contains all isomorphisms, and hence respects isomorphisms by stability under composition. Construct shiftOver on S/X by shifting each denominator and each horizontal map. MS5 makes its objects valid. Faithfulness and fullness of the shift on C give faithfulness and fullness of shiftOver. Given a denominator t over X[n], choose a source A whose shift is isomorphic to the source of t and lift the composite of this isomorphism with t by fullness. Iso-invariance and MS5 put the lifted arrow in S. This proves essential surjectivity and therefore gives the denominator equivalence E.",
    "uses": [
     "def-pur-saturated-triangulated-localization",
     "def-weil-triangulated-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SU(2), proof from the shift automorphism and MS5"
-   }
+   "elementary": true
   },
   {
-   "text": "Write G:S/X\\to\\mathcal D' for s:X'\\mapsto F(X') and G_n:S/X[n]\\to\\mathcal D' for t:X''\\mapsto F(X''). Exactness of F supplies the canonical shift isomorphisms F(X')[n]\\cong F(X'[n]); hence, after the equivalence in Step 1, G_n is naturally isomorphic to the postcomposition of G by the shift [n] on \\mathcal D'. Postcomposition by this automorphism preserves the cone, retraction, and factorization conditions in the definition of an essentially constant pro-object. Therefore G is essentially constant with value LF(X) if and only if G_n is essentially constant with value LF(X)[n].",
+   "text": "Directly prove invariance of the defining cone/retraction/factorization data of [def-pc-essentially-constant-pro-diagram] under postcomposition with any functor and under natural isomorphism of diagrams. For reindexing along an equivalence e:K to J, pull back the cone along e.functor, choose e.inverse(j0) as retraction stage, and compose the original retraction with G.map(e.counitIso.hom at j0). For a common earlier stage k with arrows a:k to j0 and b:k to e.functor(j), choose e.inverse(k), the arrow e.inverse.map(a), and e.inverse.map(b) followed by e.unitIso.inv at j. Counit naturality and the triangle identity give the required factorization. Applying this in both directions gives reindexing invariance.",
    "uses": [
-    "def-weil-triangulated-category",
-    "def-pc-essentially-constant-pro-diagram",
-    "lem-pc-essentially-constant-pro-hom-colimit"
+    "def-pc-essentially-constant-pro-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SU(2), proof of the LF clause"
-   }
+   "elementary": true
   },
   {
-   "text": "The equivalence of denominator categories and the transported cone identify the value at X[n] with LF(X)[n]. This gives the canonical isomorphism LF(X)[n]\\to LF(X[n]); applying the construction with -n gives the converse implication, so LF is defined at X exactly when it is defined at X[n].",
+   "text": "The commShiftIso of F is a natural isomorphism w:E.functor followed by Gn to G followed by shift[n]. Apply Step 2 first to postcomposition by shift[n], then to w inverse and the denominator equivalence E, to transport a value at X to its shifted value at X[n]. Conversely reindex a value at X[n] along E, postcompose with the inverse shift, and cancel the shift/inverse-shift composite using the unit isomorphism of shiftEquiv. This proves both implications of definedness.",
    "uses": [
+    "def-pur-saturated-triangulated-localization",
     "def-weil-triangulated-category",
-    "def-pc-essentially-constant-pro-diagram",
-    "lem-pc-essentially-constant-pro-hom-colimit"
+    "def-pc-essentially-constant-pro-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SU(2), conclusion of the LF clause"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For the supplied limit cones, apply isLimitOfPreserves to shiftEquiv.functor, and whisker the second cone along E before postcomposing with w.hom. IsLimit.postcomposeHomEquiv and IsLimit.whiskerEquivalence show both are limits of G followed by shift[n]. Their conePointUniqueUpToIso gives the required isomorphism. Its hom_comp equation, after cancellation of w.hom, is precisely the requested denominator leg equation, independent of the proof of membership in S. Any other compatible isomorphism has the same composites with all legs of the reindexed second cone, hence has the same hom by IsLimit.hom_ext and is equal by Iso.ext.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-saturated-triangulated-localization",
   "def-weil-triangulated-category",
-  "def-pc-essentially-constant-pro-diagram",
-  "lem-pc-essentially-constant-pro-hom-colimit"
+  "def-pc-essentially-constant-pro-diagram"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05SU(2)"
+  "place": "Lemma 05SU(2), omitted proof supplied by C1 using Definition 05PU(2) and Mathlib limit uniqueness"
  },
  "mathlib_searches": [
   {
@@ -159,5 +152,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T144055-L-2089743",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
