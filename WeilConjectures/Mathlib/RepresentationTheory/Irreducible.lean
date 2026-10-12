@@ -238,6 +238,30 @@ namespace Representation
 variable {k G H V W : Type*} [Field k] [Group G] [Group H] [AddCommGroup V] [Module k V]
   [AddCommGroup W] [Module k W] {ρ : Representation k G V} {σ : Representation k G W}
 
+/-- **Schur's scalar lemma.** An endomorphism `c` of a finite-dimensional irreducible representation
+over an algebraically closed field commuting with the action is a scalar `a • 1` for a unique
+`a`: an eigenspace of `c` is a nonzero subrepresentation, hence everything.
+(blueprint: `lem-wf-schur-scalar`) -/
+theorem IsIrreducible.existsUnique_eq_smul_id [IsAlgClosed k] [FiniteDimensional k V]
+    (hρ : ρ.IsIrreducible) (c : Module.End k V)
+    (hc : ∀ g, c ∘ₗ ρ g = ρ g ∘ₗ c) : ∃! a : k, c = a • LinearMap.id := by
+  have := hρ.nontrivial
+  obtain ⟨a, ha⟩ := Module.End.exists_eigenvalue c
+  let E : Subrepresentation ρ :=
+    ⟨Module.End.eigenspace c a, fun g v hv ↦ by
+      rw [Module.End.mem_eigenspace_iff] at hv ⊢
+      rw [← LinearMap.comp_apply, hc, LinearMap.comp_apply, hv, map_smul]⟩
+  have hE : E ≠ ⊥ := fun h ↦ Module.End.hasEigenvalue_iff.1 ha
+    (congrArg Subrepresentation.toSubmodule h)
+  have htop : E = ⊤ := (hρ.eq_bot_or_eq_top E).resolve_left hE
+  refine ⟨a, LinearMap.ext fun v ↦ ?_, fun b hb ↦ ?_⟩
+  · have hv : v ∈ E := htop ▸ Submodule.mem_top
+    exact Module.End.mem_eigenspace_iff.1 hv
+  · obtain ⟨v, hv⟩ := exists_ne (0 : V)
+    have h1 : c v = a • v := Module.End.mem_eigenspace_iff.1 (htop ▸ Submodule.mem_top : v ∈ E)
+    rw [hb, LinearMap.smul_apply, LinearMap.id_apply] at h1
+    exact smul_left_injective k hv h1
+
 /-- An irreducible representation equivalent to a subquotient `M ⧸ N` of `ρ` is a constituent
 of `ρ`. -/
 theorem isConstituent_of_equiv_subquotient (hσ : σ.IsIrreducible) {N M : Subrepresentation ρ}

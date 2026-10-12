@@ -249,9 +249,8 @@ This is also the biduality clause of blueprint `thm-sf-dual-perfect`.
 For a dualizable `K` the coefficient biduality `K ⟶ K^∨∨` is an isomorphism. -/
 theorem isIso_coefficientDualDoubleDual_app
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : IsDualizable K) :
-    IsIso ((coefficientDualDoubleDual A X).app K) := by
-  obtain ⟨_⟩ := hK
-  exact MonoidalClosed.isIso_toIhomIhomUnit K
+    IsIso ((coefficientDualDoubleDual A X).app K) :=
+  MonoidalClosed.isIso_toIhomIhomUnit_of_isDualizable hK
 
 end Biduality
 
