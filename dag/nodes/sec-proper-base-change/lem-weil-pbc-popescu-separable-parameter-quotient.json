@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-popescu-separable-parameter-quotient",
+ "kind": "statement",
+ "title": "Resolving the quotient by powers of a regular parameter system",
+ "statement": "Let k be a field, Λ a Noetherian k-algebra and q a prime with Λ_q regular of dimension d [def-weil-regular-scheme] and κ(q)/k separable [def-weil-pbc-separable-field-extension]. Let R=k[x_1,...,x_d], φ:R→Λ a k-algebra map whose variable images generate the maximal ideal of Λ_q. For any c≥1, any finitely presented R-algebra C and compatible R-algebra map γ:C→Λ, put J=(x_i^(8c)), J_C=JC and J_Λ=JΛ. Then C/J_C is finitely presented over R/J, there is an induced map γ₀:C/J_C→Λ/J_Λ compatible with γ, and a prime q₀ of Λ/J_Λ whose inverse image is q, such that γ₀ at q₀ can be Popescu resolved [def-weil-pbc-popescu-resolution].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FE, as repaired in lem-weil-pbc-popescu-resolve-separable"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Each parameter lies in q by contraction. The inverse image p in R is the origin maximal ideal, with residue field k. Construct the canonical quotient maps and quotient prime; finite presentation descends under base change.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At q the d generators are a regular sequence in the d-dimensional regular local ring. The regular-local polynomial-origin ring has the same dimension. The flat-over-regular lemma makes R_p→Λ_q flat; quotient base change makes the reduced local map flat.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-polynomial-ring-origin-regular-local",
+    "lem-weil-pbc-flat-over-regular",
+    "lem-weil-pbc-flat-module-quotient-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For e=8c, the maximal ideal in R_p/J is nilpotent: degree d(e−1)+1 forces some variable exponent ≥e. Its residue field is k and the target fiber is κ(q). Separability gives that fiber as a filtered colimit of smooth k-algebras. Nilpotent lifting then gives the reduced local target as a filtered colimit of smooth algebras over the reduced local base.",
+   "uses": [
+    "lem-kun-separable-smooth-colimit",
+    "lem-weil-pbc-popescu-lift-nilpotent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor the finitely presented reduced local source through a smooth stage. Its singular ideal is the unit ideal, so this is a local resolution.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "def-weil-pbc-singular-ideal",
+    "def-weil-pbc-popescu-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The reduced local target has a unique prime because any prime containing the powered parameters contains the maximal ideal. If the reduced singular ideal escapes q₀, the identity is a resolution. Otherwise q₀ is minimal over it and its localization has dimension zero; height-zero delocalization gives the required global quotient resolution. For d=0 both parameter ideals vanish and the local rings are fields.",
+   "uses": [
+    "lem-weil-pbc-popescu-delocalize-height-zero",
+    "def-weil-pbc-popescu-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-polynomial-ring-origin-regular-local",
+  "lem-weil-pbc-flat-over-regular",
+  "lem-weil-pbc-flat-module-quotient-flat",
+  "lem-kun-separable-smooth-colimit",
+  "lem-weil-pbc-popescu-lift-nilpotent",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-popescu-resolution",
+  "lem-weil-pbc-popescu-delocalize-height-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FE, as repaired in lem-weil-pbc-popescu-resolve-separable; Y2 formal decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular local ring parameter power quotient separable residue field filtered colimit smooth algebras",
+   "results": "service unavailable: Internal Server Error; unavailable, not a negative search.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing",
+   "results": "IsRegularLocalRing, IsRegularLocalRing.toIsLocalRing, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, IsRegularLocalRing.instOfIsLocalRingOfIsDomainOfIsPrincipalIdealRing, IsRegularLocalRing.toIsNoetherian, IsRegularLocalRing.of_ringEquiv, IsRegularLocalRing.spanFinrank_maximalIdeal, IsRegularRing.isRegularLocalRing_localization. Ingredients only; no complete matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "Popescu|IsRegularLocalRing",
+   "results": "Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean. Ingredients only; no complete matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuResolveSeparable",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); subsidiary 07FE: Resolving the quotient by powers of a regular parameter system",
+   "via": [
+    "lem-weil-pbc-popescu-resolve-separable",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuSeparableParameterQuotient",
+  "file": "lean/Sheaf/RingTheory/PopescuSeparableParameterQuotient.lean",
+  "declaration": "Algebra.exists_popescu_resolution_parameter_quotient",
+  "statement": "theorem exists_popescu_resolution_parameter_quotient {k : Type u} {C : Type v} {Λ : Type w} [Field k] [CommRing C] [CommRing Λ] [Algebra k Λ] (d c : ℕ) (hc : 1 ≤ c) (φ : MvPolynomial (Fin d) k →ₐ[k] Λ) [Algebra (MvPolynomial (Fin d) k) C] [FinitePresentation (MvPolynomial (Fin d) k) C] (γ : letI := φ.toRingHom.toAlgebra; C →ₐ[MvPolynomial (Fin d) k] Λ) (q : PrimeSpectrum Λ) [IsNoetherianRing Λ] [IsRegularLocalRing (Localization.AtPrime q.asIdeal)] (hdim : ringKrullDim (Localization.AtPrime q.asIdeal) = (d : WithBot ℕ∞)) (hgen : Ideal.span (Set.range (fun i : Fin d ↦ algebraMap Λ (Localization.AtPrime q.asIdeal) (φ (MvPolynomial.X i)))) = IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal)) (hsep : IsSeparableExtension k q.asIdeal.ResidueField) : letI := φ.toRingHom.toAlgebra let J : Ideal (MvPolynomial (Fin d) k) := Ideal.span (Set.range (fun i : Fin d ↦ (MvPolynomial.X i ^ c) ^ 8)) let J_C := Ideal.map (algebraMap (MvPolynomial (Fin d) k) C) J let J_Λ := Ideal.map (algebraMap (MvPolynomial (Fin d) k) Λ) J ∃ (_ : FinitePresentation (MvPolynomial (Fin d) k ⧸ J) (C ⧸ J_C)) (γ₀ : (C ⧸ J_C) →ₐ[MvPolynomial (Fin d) k ⧸ J] (Λ ⧸ J_Λ)) (q₀ : PrimeSpectrum (Λ ⧸ J_Λ)), γ₀.toRingHom.comp (Ideal.Quotient.mk J_C) = (Ideal.Quotient.mk J_Λ).comp γ.toRingHom ∧ PrimeSpectrum.comap (Ideal.Quotient.mk J_Λ) q₀ = q ∧ CanBePopescuResolved γ₀ q₀",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T095933-L-328164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T095933-L-328164",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

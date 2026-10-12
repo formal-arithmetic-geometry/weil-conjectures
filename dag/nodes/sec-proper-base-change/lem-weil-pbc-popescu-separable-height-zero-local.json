@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-popescu-separable-height-zero-local",
+ "kind": "statement",
+ "title": "Resolving the localized zero-dimensional separable problem",
+ "statement": "Let k be a field, A a finitely presented k-algebra, Λ a Noetherian k-algebra, α:A→Λ and q a prime. If Λ_q is regular of dimension zero [def-weil-regular-scheme] and κ(q) is separable over k [def-weil-pbc-separable-field-extension], the localized problem k_p→k_p⊗_k A→Λ_q at its maximal ideal can be resolved [def-weil-pbc-popescu-resolution], where p is the inverse image of q in k. No minimality condition on q is needed.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FE, as repaired in lem-weil-pbc-popescu-resolve-separable"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "The regular local dimension formula and spanFinrank zero criterion imply the maximal ideal of Λ_q is zero. Its residue-field map is bijective, giving a k-algebra equivalence Λ_q≃κ(q). The localization k_p≃k is obtained from localization at units.",
+   "uses": [
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the separable smooth-subalgebra colimit theorem. Directedness and a finite induction put the images of a finite generating set for k_p⊗_k A in one smooth finitely generated subalgebra S. The adjoin-image identity shows the entire range lies in S.",
+   "uses": [
+    "lem-kun-separable-smooth-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use a surjection from a finite-variable polynomial ring to establish Small S, and transport to Shrink S in universe max(u,v). Define the maps by range restriction and inverse residue equivalence. Give the intermediate ring its k_p-algebra structure through the source map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restriction of scalars across the formally unramified localization preserves formal smoothness here; finite presentation over k_p follows from that over k. The resulting intermediate ring is smooth, so its singular ideal and its extended radical ideal are the unit ideal. The ideal contains the starting ideal and escapes the proper maximal ideal.",
+   "uses": [
+    "def-weil-pbc-singular-ideal",
+    "def-weil-pbc-popescu-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-kun-separable-smooth-colimit",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-popescu-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FE, as repaired in lem-weil-pbc-popescu-resolve-separable; Y2 formal decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular local ring parameter power quotient separable residue field filtered colimit smooth algebras",
+   "results": "service unavailable: Internal Server Error; unavailable, not a negative search.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Popescu resolution for dimension zero local ring separable residue field",
+   "results": "IsLocalRing.finrank_cotangentSpace_eq_zero_iff, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.instFiniteResidueFieldOfFormallyUnramified, IsLocalRing.subsingleton_cotangentSpace_iff, Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal. Ingredients only; no complete matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "Algebra.canBePopescuResolved|Algebra.IsStrictlyStandardElement|IsRegularLocalRing.spanFinrank",
+   "results": "No hits. Ingredients only; no complete matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuResolveSeparable",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); subsidiary 07FE: Resolving the localized zero-dimensional separable problem",
+   "via": [
+    "lem-weil-pbc-popescu-resolve-separable",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuSeparableHeightZeroLocal",
+  "file": "lean/Sheaf/RingTheory/PopescuSeparableHeightZeroLocal.lean",
+  "declaration": "Algebra.popescu_separable_height_zero_local",
+  "statement": "theorem popescu_separable_height_zero_local {k : Type u} {A : Type v} {Λ : Type w} [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ] [FinitePresentation k A] [IsNoetherianRing Λ] (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ) [IsRegularLocalRing (Localization.AtPrime q.asIdeal)] (hdim : ringKrullDim (Localization.AtPrime q.asIdeal) = 0) (hsep : IsSeparableExtension k q.asIdeal.ResidueField) : letI := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under k) q.asIdeal CanBePopescuResolved (Algebra.TensorProduct.lift (Algebra.ofId (Localization.AtPrime (q.asIdeal.under k)) (Localization.AtPrime q.asIdeal)) ((IsScalarTower.toAlgHom k Λ (Localization.AtPrime q.asIdeal)).comp α) (fun _ _ => Commute.all _ _)) ⟨IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal), inferInstance⟩",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T095933-L-328164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T095933-L-328164",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

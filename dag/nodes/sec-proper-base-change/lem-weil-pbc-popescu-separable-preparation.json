@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-popescu-separable-preparation",
+ "kind": "statement",
+ "title": "Preparing the positive-dimensional polynomial lifting problem",
+ "statement": "Let k be a field, A a finitely presented k-algebra, Λ a Noetherian k-algebra, α:A→Λ and q a prime whose localization is regular [def-weil-regular-scheme] of positive dimension d. Put I=H_{A/k}Λ [def-weil-pbc-singular-ideal] and assume I⊆q and q^nΛ_q⊆IΛ_q for n≥1. Then there exist c≥1, an evaluation φ:R=k[x_1,...,x_d]→Λ, a finitely presented R-algebra C carrying the compatible k-structure, and maps β:A→C and γ:C→Λ composing to α. The images π_i=φ(x_i) generate the maximal ideal of Λ_q; h_α⊆h_γ [def-weil-pbc-popescu-resolution]; π_i^c∈q; on Λ/(π_j^(8c):j<i), annihilation by π_i equals annihilation by π_i²; and every image x_i^c in C is strictly standard over R [def-weil-pbc-strictly-standard-element]. C can be taken in universe max(u,v), where k:Type u and A:Type v.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FE, as repaired in lem-weil-pbc-popescu-resolve-separable"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-strictly-standard-element"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite generators a_j of H_{A/k}. Construct B=A[x_i,z_ij]/(x_i^n−Σ_j z_ij a_j); its presentation over R is finite.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Eliminate z_il after inverting a_l. This exhibits B_(a_l) as a polynomial extension of the smooth base change of A_(a_l). After inverting x_i the a_j generate the unit ideal; smoothness on their principal cover proves B_(x_i) smooth. The empty generator family produces the zero localization.",
+   "uses": [
+    "lem-weil-pbc-singular-ideal-localization-smooth",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "lem-weil-pbc-smooth-ring-map-local-on-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Improve B to C with a B-algebra retraction. Its indicated localizations are smooth, and at the x_i their differentials are free. Noetherianity makes C finitely presented. Choose a common positive strictly-standard exponent c.",
+   "uses": [
+    "lem-weil-pbc-improve-presentation",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-smooth-free-differentials-strictly-standard-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply controlled generators with exponent e=8c and ideal I (not its radical). Obtain π_i with π_i^n∈I, the required localized generation, and the first/square annihilator equalities modulo the earlier e-th powers.",
+   "uses": [
+    "lem-weil-pbc-popescu-find-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write π_i^n=Σ λ_ij α(a_j). Evaluation x_i↦π_i,z_ij↦λ_ij annihilates the relations; compose with the retraction C→B. Smoothness of C_(a_j) places the image of each a_j in H_{C/R}, proving the required ideal containment after mapping and taking radicals. Contraction of the localized maximal ideal gives π_i∈q. Finite type over R over k gives a small presentation, transported to universe max(u,v).",
+   "uses": [
+    "def-weil-pbc-popescu-resolution",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-singular-ideal-localization-smooth",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-principal-localization",
+  "lem-weil-pbc-smooth-ring-map-local-on-cover",
+  "lem-weil-pbc-improve-presentation",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-smooth-free-differentials-strictly-standard-power",
+  "lem-weil-pbc-popescu-find-sequence",
+  "def-weil-pbc-popescu-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FE, as repaired in lem-weil-pbc-popescu-resolve-separable; Y2 formal decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular local ring parameter power quotient separable residue field filtered colimit smooth algebras",
+   "results": "service unavailable: Internal Server Error; unavailable, not a negative search.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation factorization with strictly standard powers and annihilator equality",
+   "results": "MvPolynomial.finitePresentation_universalFactorizationMap, Algebra.FinitePresentation.iff, Algebra.FinitePresentation.of_span_eq_top_target, Algebra.Generators.exists_presentation_of_free_cotangent, Polynomial.instFinitePresentationUniversalFactorizationRing, AdicCompletion.exists_smodEq_pow_add_one_smul, PowerSeries.exist_eq_span_eq_ncard_of_X_notMem, Algebra.FinitePresentation.quotient. Ingredients only; no complete matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "canBePopescuResolved|IsStrictlyStandardElement",
+   "results": "No hits. Ingredients only; no complete matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuResolveSeparable",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); subsidiary 07FE: Preparing the positive-dimensional polynomial lifting problem",
+   "via": [
+    "lem-weil-pbc-popescu-resolve-separable",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuSeparablePreparation",
+  "file": "lean/Sheaf/RingTheory/PopescuSeparablePreparation.lean",
+  "declaration": "Algebra.exists_popescu_separable_preparation",
+  "statement": "theorem exists_popescu_separable_preparation {k : Type u} {A : Type v} {Λ : Type w} [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ] [FinitePresentation k A] [IsNoetherianRing Λ] (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ) [IsRegularLocalRing (Localization.AtPrime q.asIdeal)] (d n : ℕ) (hd : 1 ≤ d) (hn : 1 ≤ n) (hdim : ringKrullDim (Localization.AtPrime q.asIdeal) = (d : WithBot ℕ∞)) (hIq : Ideal.map α.toRingHom (singularIdeal k A) ≤ q.asIdeal) (hpow : (q.asIdeal ^ n).map (algebraMap Λ (Localization.AtPrime q.asIdeal)) ≤ (Ideal.map α.toRingHom (singularIdeal k A)).map (algebraMap Λ (Localization.AtPrime q.asIdeal))) : ∃ (c : ℕ) (φ : MvPolynomial (Fin d) k →ₐ[k] Λ), letI := φ.toRingHom.toAlgebra ∃ (C : Type (max u v)) (_ : CommRing C) (_ : Algebra k C) (_ : Algebra (MvPolynomial (Fin d) k) C) (_ : IsScalarTower k (MvPolynomial (Fin d) k) C) (_ : FinitePresentation (MvPolynomial (Fin d) k) C) (β : A →ₐ[k] C) (γ : C →ₐ[MvPolynomial (Fin d) k] Λ), 1 ≤ c ∧ Ideal.span (Set.range (fun i : Fin d ↦ algebraMap Λ (Localization.AtPrime q.asIdeal) (φ (MvPolynomial.X i)))) = IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ∧ (γ.restrictScalars k).comp β = α ∧ popescuIdeal α ≤ popescuIdeal γ ∧ (∀ i : Fin d, algebraMap (MvPolynomial (Fin d) k) Λ ((MvPolynomial.X i : MvPolynomial (Fin d) k) ^ c) ∈ q.asIdeal) ∧ (∀ (i : Fin d) (x : Λ ⧸ Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧ y = algebraMap (MvPolynomial (Fin d) k) Λ (MvPolynomial.X j ^ c) ^ 8}), (MvPolynomial.X i : MvPolynomial (Fin d) k) • x = 0 ↔ (MvPolynomial.X i : MvPolynomial (Fin d) k) ^ 2 • x = 0) ∧ (∀ i : Fin d, IsStrictlyStandardElement (R := MvPolynomial (Fin d) k) (algebraMap (MvPolynomial (Fin d) k) C ((MvPolynomial.X i : MvPolynomial (Fin d) k) ^ c)))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T095933-L-328164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T095933-L-328164",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
