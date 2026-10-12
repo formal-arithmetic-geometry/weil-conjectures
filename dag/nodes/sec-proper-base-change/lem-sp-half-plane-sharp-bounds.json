@@ -1,0 +1,119 @@
+{
+ "id": "lem-sp-half-plane-sharp-bounds",
+ "kind": "statement",
+ "title": "Sharp cycle and boundary stabilization bounds for a half-plane couple",
+ "statement": "theorem halfPlane_sharp_bounds {B : Type u₂} [Category.{v₂} B] [Abelian B] (X : BigradedExactCouple B 0) (a : ℤ) (hD : ∀ p q : ℤ, q < a → IsZero (X.D p q)) (hE : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q)) : (∀ (r : ℕ) (p q : ℤ), 2 ≤ r → (p < 0 ∨ q < a) → IsZero (X.page r p q)) ∧ (∀ (r : ℕ) (p q : ℤ), 2 ≤ r → ¬ IsZero (X.page r p q) → a ≤ q ∧ q ≤ p + q ∧ 0 ≤ p ∧ p ≤ p + q - a) ∧ X.IsBounded ∧ (∀ (r : ℕ) (p q : ℤ), 2 ≤ r → max (q - a + 1) p < (r : ℤ) → (X.pageCouple (r - 2)).d p q = 0 ∧ (X.pageCouple (r - 2)).dInto p q = 0) ∧ (∀ (p q : ℤ) (t : ℕ), max 2 (max (q - a + 2) (p + 1)) ≤ (t : ℤ) → X.cycleBoundaryTower.Z (t - 2) p q = X.cycleBoundaryTower.Z ((max 2 (max (q - a + 2) (p + 1))).toNat - 2) p q ∧ X.cycleBoundaryTower.B (t - 2) p q = X.cycleBoundaryTower.B ((max 2 (max (q - a + 2) (p + 1))).toNat - 2) p q) ∧ X.IsRegular ∧ (∀ (r : ℕ) (p q : ℤ), q - a < (r : ℤ) → imageSubobject (X.incomingAlphaIter r p q) = ⊥) ∧ X.IsComplete",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof, steps 3--5; Lean refinement with the same objects and canonical maps"
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Each later E term is a subquotient of the initial E term, so induction\npreserves its lower-half-plane support. A nonzero term therefore has p>=0 and\nq>=a; on a total-degree diagonal this leaves finitely many indices, proving\nboundedness. The outgoing differential has zero target when r>q-a+1, and the\nincoming differential has zero source when r>p. The defining recurrences for\ncycles and boundaries then become equalities from max(2,q-a+2,p+1) onwards;\ninduction gives the displayed equalities with their initial stable values.\nThis proves regularity. The source of the incoming alpha iterate is D(p+r,q-r),\nzero when r>q-a, so its image is bottom. For each bidegree these images are\ntherefore eventually bottom, proving completeness.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "thm-sp-half-plane-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+    "place": "proof, steps 3--5; Lean refinement with the same objects and canonical maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "thm-sp-half-plane-convergence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "Lean interface refinement of steps 3--5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact couple stabilization lower half plane",
+   "results": "UNAVAILABLE: service returned Internal Server Error. Other search kinds used.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact couple stabilization lower half plane",
+   "results": "Mathlib has spectral objects and homology sequences, but no BigradedExactCouple or its sharp stabilization theorem. Existing halfPlaneConvergence supplies support and regularity; recursive tower identities give sharp bounds.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exact_couple|halfPlaneConvergence|singleFunctor|isZero in Mathlib and both library roots; blueprint_refs search truncation exact and half-plane",
+   "results": "Mathlib has spectral objects and homology sequences, but no BigradedExactCouple or its sharp stabilization theorem. Existing halfPlaneConvergence supplies support and regularity; recursive tower identities give sharp bounds. Blueprint matches were read; none exposes the additional arbitrary-instance or canonical-map interface.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TruncationHypercohomology",
+  "group": "Q1",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-truncation-e2",
+   "place": "proof, steps 3--5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.HalfPlaneSharpBounds",
+  "file": "lean/Sheaf/CategoryTheory/HalfPlaneSharpBounds.lean",
+  "declaration": "CategoryTheory.halfPlane_sharp_bounds",
+  "statement": "theorem halfPlane_sharp_bounds {B : Type u₂} [Category.{v₂} B] [Abelian B] (X : BigradedExactCouple B 0) (a : ℤ) (hD : ∀ p q : ℤ, q < a → IsZero (X.D p q)) (hE : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q)) : (∀ (r : ℕ) (p q : ℤ), 2 ≤ r → (p < 0 ∨ q < a) → IsZero (X.page r p q)) ∧ (∀ (r : ℕ) (p q : ℤ), 2 ≤ r → ¬ IsZero (X.page r p q) → a ≤ q ∧ q ≤ p + q ∧ 0 ≤ p ∧ p ≤ p + q - a) ∧ X.IsBounded ∧ (∀ (r : ℕ) (p q : ℤ), 2 ≤ r → max (q - a + 1) p < (r : ℤ) → (X.pageCouple (r - 2)).d p q = 0 ∧ (X.pageCouple (r - 2)).dInto p q = 0) ∧ (∀ (p q : ℤ) (t : ℕ), max 2 (max (q - a + 2) (p + 1)) ≤ (t : ℤ) → X.cycleBoundaryTower.Z (t - 2) p q = X.cycleBoundaryTower.Z ((max 2 (max (q - a + 2) (p + 1))).toNat - 2) p q ∧ X.cycleBoundaryTower.B (t - 2) p q = X.cycleBoundaryTower.B ((max 2 (max (q - a + 2) (p + 1))).toNat - 2) p q) ∧ X.IsRegular ∧ (∀ (r : ℕ) (p q : ℤ), q - a < (r : ℤ) → imageSubobject (X.incomingAlphaIter r p q) = ⊥) ∧ X.IsComplete",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070547-L-3475880",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070547-L-3475880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

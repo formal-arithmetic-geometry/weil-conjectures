@@ -26,123 +26,52 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (exact couple and iterated couples; part 1).** By [lem-sp-truncation-couple-exact] the truncation couple $(D,E,\\alpha,f,g)$ of $K$ [def-sp-truncation-couple] is an exact couple [def-sp-exact-couple], with $\\alpha=\\mathcal H^{p+q}(Rv\\,i_{q+1})$, $g=\\mathcal H^{p+q}(Rv\\,j_q)$ and $f$ the boundary of $Rv$ of the truncation triangle (Step 1 there). By [lem-sp-derived-couple-exact] the iterated couples $C_r$, $C_2=(D,E,\\alpha,f,g)$, $C_{r+1}=C_r'$, are exact couples for all $r\\geq2$, with $D_r^{p,q}=\\operatorname{im}(\\alpha^{r-2}:D^{p+r-2,q-r+2}\\to D^{p,q})$, $\\alpha_r$ the restriction of $\\alpha$, $f_r$ of bidegree $(2,-1)$, $g_r$ of bidegree $(r-2,2-r)$, and $E_{r+1}=\\ker d_r/\\operatorname{im}d_r$, $d_r=g_r\\circ f_r$ of bidegree $(r,1-r)$; this is the spectral sequence of the couple of [def-sp-exact-couple].",
+   "text": "Use raw-map exactness for the specified HasDerivedCategory instances. Construct the type-zero BigradedExactCouple with raw D,E,alpha,f and indexed g. Each exactness field follows from ShortComplex.exact_iff_image_eq_kernel. Its three structure-map equations simplify to identities.",
+   "uses": [
+    "lem-sp-truncation-raw-exact",
+    "def-sp-exact-couple"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the natural E2 comparison by whiskering the inverse single-functor shift isomorphism, RF commShiftIso, the homology shift isomorphism, and the ordinary derived functor comparison. The latter is a natural isomorphism obtained by whiskering rightDerivedFunctorPlusCompatibility and composing with singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso. Its component formula holds definitionally. The E-term comparison is the inverse bridge followed by its component at K.",
    "uses": [
     "def-sp-truncation-couple",
-    "lem-sp-truncation-couple-exact",
-    "def-sp-exact-couple",
-    "lem-sp-derived-couple-exact"
+    "lem-sp-derived-functor-single-identification",
+    "src-right-derived-functor-plus-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Section 12.21 (011P): Definition 011Q (definition-exact-couple), Lemma 011R (lemma-exact-couple), Definition 011S, Remark 011U; derived.tex Remark 08J5 (remark-truncation-distinguished-triangle, line 4076) for the triangles"
-   }
+   "elementary": false
   },
   {
-   "text": "**Step 2 (the $E_2$-page; part 2).** $E_2^{p,q}=E^{p,q}=\\mathcal H^{p+q}(Rv(\\mathcal H^q(K)[-q]))$ by [def-sp-exact-couple] ($E_2=E$). For $p\\geq0$, part 2 of [lem-sp-shift-identification] gives the isomorphism $\\mathcal H^{p+q}(Rv(\\mathcal H^qK[-q]))\\cong\\mathcal H^p(Rv(\\mathcal H^qK[0]))\\cong R^pv(\\mathcal H^qK)$, natural in $K$ (the composite of $\\mathcal H^{p+q}(\\sigma^{-q})$, the shift identification $\\tau^{-q,p+q}$ and $\\theta^p$ named there); for $p<0$ part 3 of that lemma gives $E_2^{p,q}=0$. This is the $E_2$-term $R^pF(H^q(K^\\bullet))$ of the second spectral sequence of Stacks 015J.",
+   "text": "Apply truncation_quadrant_vanishing for the two initial support conditions. Apply halfPlane_sharp_bounds to supply later-page support, boundedness, vanishing differentials, sharp cycle and boundary constancy, regularity, incoming-image vanishing, and completeness.",
    "uses": [
-    "def-sp-exact-couple",
-    "lem-sp-shift-identification"
+    "lem-sp-truncation-quadrant-vanishing",
+    "lem-sp-half-plane-sharp-bounds"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015J (lemma-two-ss-complex-functor, line 7177): ${}^{\\prime\\prime}E_2^{p,q}=R^pF(H^q(K^\\bullet))$; Lemma 05SU (lemma-derived-shift, line 4657)"
-   }
+   "elementary": false
   },
   {
-   "text": "**Step 3 (quadrant and finitely many terms; part 3).** We use [lem-weil-pbc-derived-functor-negative-vanishing]: if $M\\in D^+(\\mathcal A)$ has $\\mathcal H^i(M)=0$ for $i<b$, then $\\mathcal H^j(RvM)=0$ for $j<b$. (i) $D^{p,q}=0$ for $q<a$: by [lem-weil-pbc-truncation-cohomology], $\\mathcal H^i(\\tau_{\\leq q}K)\\cong\\mathcal H^i(K)=0$ for $i\\leq q$ (as $i\\leq q<a$) and $\\mathcal H^i(\\tau_{\\leq q}K)=0$ for $i>q$, so $\\tau_{\\leq q}K$ is acyclic (it need not be the zero complex, since the terms $K^i$, $i<a$, need not vanish), and the lemma with $b=p+q+1$ gives $\\mathcal H^{p+q}(Rv\\,\\tau_{\\leq q}K)=0$. (ii) $E^{p,q}=0$ for $q<a$: $\\mathcal H^q(K)=0$, so $\\mathcal H^q(K)[-q]$ is the zero complex, and the lemma with $b=p+q+1$ applies. (iii) $E^{p,q}=0$ for $p<0$: $\\mathcal H^q(K)[-q]$ is concentrated in degree $q$, the lemma with $b=q$ gives $\\mathcal H^{p+q}=0$ for $p+q<q$ (Step 2). So $E_2^{p,q}=0$ unless $p\\geq0$, $q\\geq a$. For $r\\geq2$, $E_{r+1}^{p,q}=\\ker d_r/\\operatorname{im}d_r$ is a subquotient of $E_r^{p,q}$ (Step 1), hence by induction of $E_2^{p,q}$, and so vanishes wherever $E_2^{p,q}$ does; likewise $E_\\infty^{p,q}=Z_\\infty^{p,q}/B_\\infty^{p,q}$ [def-sp-convergence] when it exists. If $p+q=n$ and $E_r^{p,q}\\neq0$ then $q\\geq a$ and $p=n-q\\geq0$: $a\\leq q\\leq n$, $0\\leq p\\leq n-a$, at most $n-a+1$ bidegrees, none if $n<a$ (bounded, Stacks 0BDU (3)). This repeats Steps 1 and 3 of [lemma-weil-pbc-hypercohomology-convergence] for a general $v$.",
+   "text": "Apply truncation_canonical_abutment to this exact couple and its three structure-map equalities. This supplies the canonical inclusions and maps to H, finite transported image filtrations, the specified graded maps and equations, and the diagonal colimit giving convergence. Combine these witnesses with the preceding clauses by conjunction and existential introduction.",
    "uses": [
-    "lem-weil-pbc-derived-functor-negative-vanishing",
-    "lem-weil-pbc-truncation-cohomology",
-    "def-sp-truncation-couple",
-    "lem-sp-derived-couple-exact",
-    "def-sp-convergence"
+    "lem-sp-truncation-canonical-abutment"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05TC (lemma-negative-vanishing, line 5497), part (1); homology.tex Definition 0BDU (definition-bounded-ss, line 6262), item (3); homology.tex Section 12.15 (0118) for the cohomology of $\\tau_{\\leq q}$"
-   }
-  },
-  {
-   "text": "**Step 4 (stabilization and regularity; part 4).** $d_r$ has bidegree $(r,1-r)$ (Step 1). Out of $(p,q)$ it lands in $E_r^{p+r,q-r+1}$, zero by Step 3 when $q-r+1<a$, i.e. $r>q-a+1$; into $(p,q)$ it starts at $E_r^{p-r,q+r-1}$, zero when $p-r<0$, i.e. $r>p$. For $r\\geq r_0(p,q)=\\max(2,q-a+2,p+1)$ both vanish, so $E_{r+1}^{p,q}=\\ker d_r/\\operatorname{im}d_r=E_r^{p,q}$; in terms of [def-sp-convergence], $Z_{r+1}^{p,q}$ (inverse image of $\\ker d_r=E_r^{p,q}$) equals $Z_r^{p,q}$ and $B_{r+1}^{p,q}$ (inverse image of $\\operatorname{im}d_r=0$) equals $B_r^{p,q}$. Hence $Z_\\infty^{p,q}=\\bigcap_rZ_r^{p,q}=Z_{r_0}^{p,q}$ and $B_\\infty^{p,q}=\\bigcup_rB_r^{p,q}=B_{r_0}^{p,q}$ exist and $E_\\infty^{p,q}=E_{r_0}^{p,q}$. The $Z_r$ being eventually constant is \"regular\" as [def-sp-convergence] now words it and in Stacks (0BDU (1), 0BDV (1)); the $B_r$ being eventually constant is Stacks' \"coregular\" (0BDU (2), 0BDV (2)); both hold. This is the stabilization bound $r>\\max(q-a+1,p)$ of [thm-sp-half-plane-convergence], whose hypotheses ($D^{p,q}=0$ for $q<a$, $E_2^{p,q}=0$ unless $p\\geq0$, $q\\geq a$) hold by Step 3.",
-   "uses": [
-    "def-sp-exact-couple",
-    "def-sp-convergence",
-    "thm-sp-half-plane-convergence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Definition 0BDU (definition-bounded-ss, line 6262), items (1)-(2); Lemma 0BDV (lemma-relate-boundedness, line 6292), parts (1)-(5) and the hint of its proof; Lemma 011T for $Z_r$, $B_r$ of an exact couple; Definition 011O for $E_\\infty$"
-   }
-  },
-  {
-   "text": "**Step 5 (the canonical abutment $A^n=D^{0,n}$, its filtration, completeness).** Put $A^n=D^{0,n}$ and $F^pA^n=\\operatorname{im}(\\alpha^p:D^{p,n-p}\\to A^n)$ for $p\\geq0$, $F^pA^n=A^n$ for $p\\leq0$, a decreasing filtration [def-sp-filtration] ($\\alpha^{p+1}=\\alpha^p\\circ\\alpha$, so $F^{p+1}\\subseteq F^p$); it is the filtration $F^pA^n=G_{n-p}A^n$ of [thm-sp-half-plane-convergence]. For $p\\geq n-a+1$ the source $D^{p,n-p}$ has second index $n-p<a$, so it is $0$ (Step 3) and $F^pA^n=0$; with $F^0A^n=A^n$ the filtration is finite, exhaustive (union $F^0=A^n$) and separated (intersection inside $F^{n-a+1}=0$) (Stacks 0121). Completeness: $\\operatorname{im}(\\alpha^r:D^{p+r,q-r}\\to D^{p,q})=0$ as soon as $q-r<a$, i.e. for $r>q-a$, so the intersection over $r$ is $0$ [def-sp-convergence]. Moreover, for $w\\leq-1$ the map $\\alpha:D^{w+1,n-w-1}\\to D^{w,n-w}$ is an isomorphism: by the exactness of [def-sp-exact-couple] its kernel is $\\operatorname{im}(f:E^{w-1,n-w}\\to D^{w+1,n-w-1})=0$ and its image is $\\ker(g:D^{w,n-w}\\to E^{w,n-w})=D^{w,n-w}$, both $E$-terms having negative first index (Step 3). So $\\lambda_w:=\\alpha^{-w}:A^n\\to D^{w,n-w}$ is an isomorphism for $w\\leq0$, $\\lambda_0=\\mathrm{id}$.",
-   "uses": [
-    "def-sp-filtration",
-    "def-sp-exact-couple",
-    "def-sp-convergence",
-    "thm-sp-half-plane-convergence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Definition 0121 (definition-filtered, line 4667), items (7), (9); Section 12.21 (011P), Definition 011Q (exactness of the couple)"
-   }
-  },
-  {
-   "text": "**Step 6 ($E_\\infty\\cong\\operatorname{gr}A$: the isomorphism $\\psi$).** Let $n=p+q$, $p\\geq0$, $r=r_1(p,q)=\\max(p+3,q-a+2)$, $u=p-r+2\\leq-1$, $v=q+r-2$. By Step 1, $D_r^{u,v}=\\operatorname{im}(\\alpha^{r-2}:D^{p,q}\\to D^{u,v})$, and $\\alpha^{r-2}=\\lambda_u\\circ\\alpha^p$ on $D^{p,q}$ (exponents $p+(-u)=r-2$), so $D_r^{u,v}=\\lambda_u(F^pA^n)$; likewise ($u+1\\leq0$) $D_r^{u+1,v-1}=\\operatorname{im}(\\alpha^{r-2}:D^{p+1,q-1}\\to D^{u+1,v-1})=\\lambda_{u+1}(F^{p+1}A^n)$, and $\\alpha_r$, the restriction of $\\alpha$, maps it onto $\\alpha\\lambda_{u+1}(F^{p+1}A^n)=\\lambda_u(F^{p+1}A^n)$. The map $f_r:E_r^{p,q}\\to D_r^{p+2,q-1}=\\operatorname{im}(\\alpha^{r-2}:D^{p+r,q-r+1}\\to D^{p+2,q-1})$ is zero since $q-r+1<a$ gives $D^{p+r,q-r+1}=0$. Exactness of the exact couple $C_r$ (Step 1) at $D_r^{u,v}$ and at $E_r^{p,q}$ ($g_r$ has bidegree $(r-2,2-r)$, so $g_r:D_r^{u,v}\\to E_r^{p,q}$) gives the exact sequence $D_r^{u+1,v-1}\\xrightarrow{\\alpha_r}D_r^{u,v}\\xrightarrow{g_r}E_r^{p,q}\\to0$. Hence $\\bar g_r:D_r^{u,v}/\\alpha_r(D_r^{u+1,v-1})\\to E_r^{p,q}$ is an isomorphism, and composing with the isomorphism $F^pA^n/F^{p+1}A^n\\cong\\lambda_u(F^pA^n)/\\lambda_u(F^{p+1}A^n)$ induced by the isomorphism $\\lambda_u$ (Step 5) gives the isomorphism $\\psi^{p,q}:\\operatorname{gr}^pA^n\\to E_r^{p,q}$; as $r\\geq r_0(p,q)$, $E_r^{p,q}=E_\\infty^{p,q}$ (Step 4). For $p<0$: $\\operatorname{gr}^pA^n=A^n/A^n=0$ ($p+1\\leq0$) and $E_\\infty^{p,q}=0$ (Step 3). This is the isomorphism $\\psi_r$ of part 3 of [lem-sp-exact-functor-couple] and the identification $E_r^{p,q}=G_qA^{p+q}/G_{q-1}A^{p+q}$ of [thm-sp-half-plane-convergence], whose statement does not name the map; the argument is written out here so that $\\Theta$ below is a named map.",
-   "uses": [
-    "lem-sp-derived-couple-exact",
-    "def-sp-exact-couple",
-    "def-sp-filtration",
-    "def-sp-convergence",
-    "thm-sp-half-plane-convergence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma 011R (lemma-exact-couple), Lemma 011T (lemma-spectral-sequence-associated-exact-couple, line 5356); Lemma 012F for $E_\\infty$ and the associated graded (the filtered-complex form)"
-   }
-  },
-  {
-   "text": "**Step 7 (the abutment is $\\mathcal H^n(RvK)$ with the stated filtration; parts 5 and 6).** By [lem-weil-pbc-derived-direct-image-triangulated] $Rv$ is a functor $D^+(\\mathcal A)\\to D^+(\\mathcal B)$ and $\\mathcal H^n$ is a functor, so $\\alpha^p:D^{p,n-p}\\to D^{0,n}$, the composite of the $\\mathcal H^n(Rv\\,i_{m+1})$ for $n-p\\leq m<n$ (Step 1), is $\\mathcal H^n(Rv)$ of the composite inclusion $\\tau_{\\leq n-p}K\\to\\tau_{\\leq n}K$, and $c_n\\circ\\alpha^p$ is $\\mathcal H^n(Rv)$ of the inclusion $\\tau_{\\leq n-p}K\\to K$. By [lem-weil-pbc-derived-functor-truncation-iso], $c_n:\\mathcal H^n(Rv\\,\\tau_{\\leq n}K)\\to\\mathcal H^n(RvK)$ is an isomorphism. Hence for $p\\geq0$, $c_n(F^pA^n)=\\operatorname{im}(c_n\\circ\\alpha^p)=F^pH^n$, and for $p\\leq0$, $c_n(F^pA^n)=c_n(A^n)=H^n$, which equals $F^pH^n$ because $\\operatorname{im}(\\mathcal H^n(Rv\\,\\tau_{\\leq n-p}K)\\to H^n)$ contains $\\operatorname{im}(c_n)=H^n$ ($\\tau_{\\leq n}K\\subseteq\\tau_{\\leq n-p}K$, functoriality again). So $F^pH^n$ is the image filtration [def-sp-image-filtration] of $(A^n,F)$ along $c_n$, and $c_n$ is an isomorphism of filtered objects $(A^n,F)\\cong(H^n,F)$. Transporting Step 5: $F^pH^n=H^n$ for $p\\leq0$, $F^pH^n=0$ for $p\\geq n-a+1$, finite, exhaustive, separated, and the inverse system $H^n/F^pH^n$ is constant ($=H^n$) for $p\\geq n-a+1$, so $H^n=\\lim_pH^n/F^pH^n$ with no $\\lim^1$ condition (Stacks 012U (3)). $c_n$ induces isomorphisms $\\operatorname{gr}^p(c_n):\\operatorname{gr}^pA^n\\to\\operatorname{gr}^pH^n$, so $\\Theta^{p,q}=\\psi^{p,q}\\circ\\operatorname{gr}^p(c_n)^{-1}$ is an isomorphism $\\operatorname{gr}^pH^{p+q}\\cong E_\\infty^{p,q}$ (Step 6). With Step 4 (regular) and Step 5 (complete) this is convergence in the sense of [def-sp-convergence], and with Step 2 it is $E_2^{p,q}=R^pv(\\mathcal H^qK)\\Rightarrow\\mathcal H^{p+q}(RvK)$, as in Stacks 015J (bounded, converges, finite filtrations). This repeats Steps 5-6 of [lemma-weil-pbc-hypercohomology-convergence] for a general $v$.",
-   "uses": [
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "lem-weil-pbc-derived-functor-truncation-iso",
-    "def-sp-image-filtration",
-    "def-sp-filtration",
-    "def-sp-convergence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05TC (lemma-negative-vanishing, line 5497), part (2); Lemma 015J (lemma-two-ss-complex-functor, line 7177), last sentence; homology.tex Definition 012U (definition-filtered-complex-ss-converges, line 6317), Lemma 012W (lemma-biregular-ss-converges, line 6362), parts (2)-(3)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-truncation-couple",
-  "lem-sp-truncation-couple-exact",
+  "lem-sp-truncation-raw-exact",
   "def-sp-exact-couple",
-  "lem-sp-derived-couple-exact",
-  "lem-sp-shift-identification",
-  "lem-weil-pbc-derived-functor-negative-vanishing",
-  "lem-weil-pbc-truncation-cohomology",
-  "def-sp-convergence",
-  "thm-sp-half-plane-convergence",
-  "def-sp-filtration",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "lem-weil-pbc-derived-functor-truncation-iso",
-  "def-sp-image-filtration"
+  "def-sp-truncation-couple",
+  "lem-sp-derived-functor-single-identification",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sp-truncation-quadrant-vanishing",
+  "lem-sp-half-plane-sharp-bounds",
+  "lem-sp-truncation-canonical-abutment"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/homology.tex",
-  "place": "Section 12.21 (011P, exact couples), Definitions 0BDU/012U and Lemmas 0BDV/012W (boundedness, convergence); literature/stacks-project/derived.tex Lemmas 05TC and 015J. Stacks constructs the spectral sequence of 015J from a Cartan-Eilenberg double complex, not from the truncation couple; the exact-couple route is the blueprint's (literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md), each step written out by an agent from the Stacks places cited"
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "steps 1--7, assembled from four strictly partial interfaces; E2 comparison and two interfaces fully proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -446,5 +375,15 @@
     }
    }
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070547-L-3475880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

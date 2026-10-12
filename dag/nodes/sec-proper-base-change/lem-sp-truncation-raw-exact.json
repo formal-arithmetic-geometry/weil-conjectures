@@ -1,0 +1,125 @@
+{
+ "id": "lem-sp-truncation-raw-exact",
+ "kind": "statement",
+ "title": "Exactness of raw truncation maps for arbitrary derived-category instances",
+ "statement": "theorem truncation_raw_exact {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A] {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₂} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (K : CochainComplex.Plus A) : let g : ∀ p q : ℤ, TruncationCouple.D F K p q ⟶ TruncationCouple.E F K (p + (0 : ℕ)) (q - (0 : ℕ)) := fun p q ↦ TruncationCouple.g F K p q ≫ eqToHom (by simp) (∀ p q : ℤ, ∃ w : TruncationCouple.f F K p q ≫ TruncationCouple.alpha F K (p + 2) (q - 1) = 0, (ShortComplex.mk _ _ w).Exact) ∧ (∀ p q : ℤ, ∃ w : g p q ≫ TruncationCouple.f F K (p + (0 : ℕ)) (q - (0 : ℕ)) = 0, (ShortComplex.mk _ _ w).Exact) ∧ (∀ p q : ℤ, ∃ w : TruncationCouple.alpha F K p q ≫ g (p - 1) (q + 1) = 0, (ShortComplex.mk _ _ w).Exact)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof, step 1; Lean refinement with the same objects and canonical maps"
+ },
+ "stmt_deps": [
+  "def-sp-truncation-couple"
+ ],
+ "proof": [
+  {
+   "text": "The triangle tau<=q-1 K -> tau<=q K -> H^q(K)[-q] with the boundary\nchosen by `TruncationCouple.existsUnique_boundary` is distinguished. Apply the\ntriangulated right derived functor and its homology sequence. Transport exactness\nacross the three bridge isomorphisms. The g-f and f-alpha pairs use the triangle at q, in total degrees p+q\nand p+q+1 respectively; the alpha-g pair uses the triangle at q+1, in total\ndegree p+q.\nThe index identities preserve total degree, and transport of exact short complexes\npreserves both their zero composites and their image-equals-kernel condition.",
+   "uses": [
+    "def-sp-truncation-couple",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+    "place": "proof, step 1; Lean refinement with the same objects and canonical maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-truncation-couple",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-direct-image-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "Lean interface refinement of step 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology of distinguished triangle is exact",
+   "results": "UNAVAILABLE: service returned Internal Server Error. Other search kinds used.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology of distinguished triangle is exact",
+   "results": "DerivedCategory.HomologySequence.exact₁, exact₂, exact₃ and ShortComplex.exact_iff_of_iso supply ingredients; no exact raw truncation-couple theorem for arbitrary HasDerivedCategory instances.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exact_couple|halfPlaneConvergence|singleFunctor|isZero in Mathlib and both library roots; blueprint_refs search truncation exact and half-plane",
+   "results": "DerivedCategory.HomologySequence.exact₁, exact₂, exact₃ and ShortComplex.exact_iff_of_iso supply ingredients; no exact raw truncation-couple theorem for arbitrary HasDerivedCategory instances. Blueprint matches were read; none exposes the additional arbitrary-instance or canonical-map interface.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact sequence in cohomology of a distinguished truncation triangle after a right derived functor",
+   "results": "Second reading: HomologySequence.exact₁/exact₂/exact₃ give the raw exact-sequence building blocks; eventual-constant colimit lemmas supply colimit building blocks. Neither supplies the entire stated bridge-transport or canonical-map interface.",
+   "verdict": "building blocks only; no exact interface found",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TruncationHypercohomology",
+  "group": "Q1",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-truncation-e2",
+   "place": "proof, step 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TruncationRawExact",
+  "file": "lean/Sheaf/CategoryTheory/TruncationRawExact.lean",
+  "declaration": "CategoryTheory.truncation_raw_exact",
+  "statement": "theorem truncation_raw_exact {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A] {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₂} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (K : CochainComplex.Plus A) : let g : ∀ p q : ℤ, TruncationCouple.D F K p q ⟶ TruncationCouple.E F K (p + (0 : ℕ)) (q - (0 : ℕ)) := fun p q ↦ TruncationCouple.g F K p q ≫ eqToHom (by simp) (∀ p q : ℤ, ∃ w : TruncationCouple.f F K p q ≫ TruncationCouple.alpha F K (p + 2) (q - 1) = 0, (ShortComplex.mk _ _ w).Exact) ∧ (∀ p q : ℤ, ∃ w : g p q ≫ TruncationCouple.f F K (p + (0 : ℕ)) (q - (0 : ℕ)) = 0, (ShortComplex.mk _ _ w).Exact) ∧ (∀ p q : ℤ, ∃ w : TruncationCouple.alpha F K p q ≫ g (p - 1) (q + 1) = 0, (ShortComplex.mk _ _ w).Exact)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070547-L-3475880",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070547-L-3475880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

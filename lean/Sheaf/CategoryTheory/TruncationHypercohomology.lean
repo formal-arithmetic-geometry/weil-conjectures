@@ -10,14 +10,10 @@ public import Sheaf.CategoryTheory.TruncationCouple
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Sheaf.CategoryTheory.ImageFiltration
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification
-import Sheaf.CategoryTheory.DerivedCoupleExact
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.Filtration
-import Sheaf.CategoryTheory.HalfPlaneConvergence
-import Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso
-import Sheaf.CategoryTheory.TruncationCoupleExact
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.CategoryTheory.TruncationRawExact
+import Sheaf.CategoryTheory.TruncationQuadrantVanishing
+import Sheaf.CategoryTheory.HalfPlaneSharpBounds
+import Sheaf.CategoryTheory.TruncationCanonicalAbutment
 
 /-!
 # The truncation hypercohomology spectral sequence
@@ -37,6 +33,19 @@ universe u₁ u₂ v₁ v₂ w₁ w₂
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
+
+private noncomputable def singleComparison
+    {A : Type u₁} [Category.{v₁} A] [Abelian A]
+    [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A]
+    {B : Type u₂} [Category.{v₂} B] [Abelian B]
+    [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₂} B]
+    (F : A ⥤ B) [F.Additive] (p : ℕ) :
+    DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙
+      DerivedCategory.homologyFunctor B p ≅ F.rightDerived p :=
+  Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor A 0)
+    (Functor.isoWhiskerRight F.rightDerivedFunctorPlusCompatibility.symm
+      (DerivedCategory.homologyFunctor B p)) ≪≫
+    F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p
 
 /-- The six assertions of the truncation hypercohomology theorem, including the
 canonical maps to the abutment, the natural second-page comparison, and the map
@@ -223,6 +232,65 @@ theorem exists_truncationHypercohomology
           (∀ n p : ℤ, (AH n).ι p ≫ eqToHom (hAH n) =
             eqToHom (by congr 1; omega) ≫ j n (n - p)) ∧
           X.ConvergesTo L AH := by
-  sorry
+  classical
+  obtain ⟨hα, hf, hg⟩ := truncation_raw_exact F K
+  let X : BigradedExactCouple B 0 := by
+    refine
+      { D := TruncationCouple.D F K
+        E := TruncationCouple.E F K
+        alpha := TruncationCouple.alpha F K
+        f := TruncationCouple.f F K
+        g := fun p q ↦ TruncationCouple.g F K p q ≫ eqToHom (by simp)
+        alpha_f_zero := fun p q ↦ (hα p q).choose
+        f_g_zero := ?_
+        g_alpha_zero := ?_
+        exact_alpha := fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp
+          (hα p q).choose_spec
+        exact_f := ?_
+        exact_g := ?_ }
+    · exact fun p q ↦ (hf p q).choose
+    · exact fun p q ↦ (hg p q).choose
+    · exact fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (hf p q).choose_spec
+    · exact fun p q ↦ (ShortComplex.exact_iff_image_eq_kernel _).mp (hg p q).choose_spec
+  have hαX : ∀ p q : ℤ, X.alpha p q =
+      eqToHom (by rfl) ≫ TruncationCouple.alpha F K p q ≫ eqToHom (by rfl) := by
+    intro p q
+    simp [X]
+  have hfX : ∀ p q : ℤ, X.f p q =
+      eqToHom (by rfl) ≫ TruncationCouple.f F K p q ≫ eqToHom (by rfl) := by
+    intro p q
+    simp [X]
+  have hgX : ∀ p q : ℤ, X.initialG p q =
+      eqToHom (by rfl) ≫ TruncationCouple.g F K p q ≫ eqToHom (by rfl) := by
+    intro p q
+    simp [X, BigradedExactCouple.initialG]
+  obtain ⟨hneg, hDzero, hEzero⟩ := truncation_quadrant_vanishing F K a ha
+  have hEX : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q) := by
+    intro p q h
+    exact h.elim (hneg p q) (hEzero p q)
+  refine ⟨X, rfl, rfl, hαX, hfX, hgX, ?_, hneg, hDzero, ?_⟩
+  · intro p q
+    let Hq := CochainComplex.Plus.ι A ⋙
+      HomologicalComplex.homologyFunctor A (ComplexShape.up ℤ) q
+    let e₁ := Functor.isoWhiskerRight
+      (((DerivedCategory.singleFunctors A).shiftIso (-q) q 0 (by omega)).symm)
+      (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B ((p : ℤ) + q))
+    let e₂ := Functor.isoWhiskerLeft (DerivedCategory.singleFunctor A 0)
+      (Functor.isoWhiskerRight (F.rightDerivedFunctor.commShiftIso (-q))
+        (DerivedCategory.homologyFunctor B ((p : ℤ) + q)))
+    let e₃ := Functor.isoWhiskerLeft
+      (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor)
+      ((DerivedCategory.homologyFunctor B 0).shiftIso (-q) ((p : ℤ) + q) p (by omega))
+    let e := Functor.isoWhiskerLeft Hq (e₁ ≪≫ e₂ ≪≫ e₃ ≪≫ singleComparison F p)
+    refine ⟨e, ?_, ?_⟩
+    · intro L
+      rfl
+    · refine ⟨eqToIso (by rfl) ≪≫
+        (TruncationCouple.bridgeIso F (TruncationCouple.cohomologyComplex K q)
+          ((p : ℤ) + q)).symm ≪≫ e.app K, rfl⟩
+  · obtain ⟨hpage, hsupport, hbounded, hd, hstable, hregular, himage, hcomplete⟩ :=
+      halfPlane_sharp_bounds X a hDzero hEX
+    exact ⟨hpage, hsupport, hbounded, hd, hstable, hregular, himage, hcomplete,
+      truncation_canonical_abutment F K a ha X rfl rfl hαX hfX hgX hDzero hEX⟩
 
 end CategoryTheory

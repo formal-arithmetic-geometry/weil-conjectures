@@ -1,0 +1,118 @@
+{
+ "id": "lem-sp-truncation-quadrant-vanishing",
+ "kind": "statement",
+ "title": "Vanishing of the raw truncation couple in the lower half plane",
+ "statement": "theorem truncation_quadrant_vanishing {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A] {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₂} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (K : CochainComplex.Plus A) (a : ℤ) (ha : ∀ q : ℤ, q < a → IsZero (K.obj.homology q)) : (∀ p q : ℤ, p < 0 → IsZero (TruncationCouple.E F K p q)) ∧ (∀ p q : ℤ, q < a → IsZero (TruncationCouple.D F K p q)) ∧ (∀ p q : ℤ, q < a → IsZero (TruncationCouple.E F K p q))",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "proof, step 3; Lean refinement with the same objects and canonical maps"
+ },
+ "stmt_deps": [
+  "def-sp-truncation-couple"
+ ],
+ "proof": [
+  {
+   "text": "For q<a the truncation has zero homology in every degree: below and at q\nuse the homology isomorphism of its inclusion and the hypothesis on K; above q\nuse strict upper support. Its image in the derived category is zero, and additive\nRF and homology preserve zero objects. For E with q<a the single complex is zero\nbecause H^q(K) is zero. For p<0, RF of the degree-zero single object has no negative\nhomology; shift it by -q and use commutation of RF and homology with shifts.\nFinally transport all three zero-object assertions through `bridgeIso`. The negative-degree assertion uses Functor.isGE_rightDerivedFunctor_obj_singleFunctor from src-right-derived-functor-plus-compatibility directly; zero objects are detected by DerivedCategory.isZero_of_forall_isZero_homology from the proved source library.",
+   "uses": [
+    "def-sp-truncation-couple",
+    "lem-weil-pbc-truncation-cohomology",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+    "place": "proof, step 3; Lean refinement with the same objects and canonical maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-truncation-couple",
+  "lem-weil-pbc-truncation-cohomology",
+  "src-right-derived-functor-plus-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
+  "place": "Lean interface refinement of step 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived functor cohomology of truncations vanishes below a bound",
+   "results": "UNAVAILABLE: service returned Internal Server Error. Other search kinds used.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived functor cohomology of truncations vanishes below a bound",
+   "results": "DerivedCategory.isZero_iff, CochainComplex.quasiIsoAt_ιTruncLE and Functor.isGE_rightDerivedFunctor_obj_singleFunctor supply the proof, but none states all raw-term vanishing assertions.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exact_couple|halfPlaneConvergence|singleFunctor|isZero in Mathlib and both library roots; blueprint_refs search truncation exact and half-plane",
+   "results": "DerivedCategory.isZero_iff, CochainComplex.quasiIsoAt_ιTruncLE and Functor.isGE_rightDerivedFunctor_obj_singleFunctor supply the proof, but none states all raw-term vanishing assertions. Blueprint matches were read; none exposes the additional arbitrary-instance or canonical-map interface.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TruncationHypercohomology",
+  "group": "Q1",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-truncation-e2",
+   "place": "proof, step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TruncationQuadrantVanishing",
+  "file": "lean/Sheaf/CategoryTheory/TruncationQuadrantVanishing.lean",
+  "declaration": "CategoryTheory.truncation_quadrant_vanishing",
+  "statement": "theorem truncation_quadrant_vanishing {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A] {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₂} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (K : CochainComplex.Plus A) (a : ℤ) (ha : ∀ q : ℤ, q < a → IsZero (K.obj.homology q)) : (∀ p q : ℤ, p < 0 → IsZero (TruncationCouple.E F K p q)) ∧ (∀ p q : ℤ, q < a → IsZero (TruncationCouple.D F K p q)) ∧ (∀ p q : ℤ, q < a → IsZero (TruncationCouple.E F K p q))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070547-L-3475880",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T070547-L-3475880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
