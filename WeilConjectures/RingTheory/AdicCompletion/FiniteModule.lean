@@ -72,10 +72,12 @@ generate `M`; in particular `M` is a finite `A`-module.
 theorem Module.finite_and_span_eq_top_of_isAdicComplete [IsAdicComplete I A] [IsHausdorff I M]
     [Module.Finite A (M ⧸ (I • ⊤ : Submodule A M))] :
     Module.Finite A M ∧ ∀ (r : ℕ) (x : Fin r → M),
-      span A (Set.range ((I • ⊤ : Submodule A M).mkQ ∘ x)) = ⊤ → span A (Set.range x) = ⊤ := by
+      span A (Set.range ((I • ⊤ : Submodule A M).mkQ ∘ x)) = ⊤ →
+        span A (Set.range x) = ⊤ := by
   classical
   refine ⟨?_, fun r x hx ↦ Submodule.span_range_eq_top_of_isPrecomplete I x hx⟩
-  obtain ⟨r, y, hy⟩ := Module.Finite.exists_fin (R := A) (M := M ⧸ (I • ⊤ : Submodule A M))
+  obtain ⟨r, y, hy⟩ :=
+    Module.Finite.exists_fin (R := A) (M := M ⧸ (I • ⊤ : Submodule A M))
   choose x hx using fun i ↦ (I • ⊤ : Submodule A M).mkQ_surjective (y i)
   have hxy : (I • ⊤ : Submodule A M).mkQ ∘ x = y := funext hx
   refine ⟨⟨Finset.univ.image x, ?_⟩⟩
