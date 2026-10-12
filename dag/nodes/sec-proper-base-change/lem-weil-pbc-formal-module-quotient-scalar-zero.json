@@ -15,22 +15,29 @@
  ],
  "proof": [
   {
-   "text": "At each point z the image K of J_z in O_{X,z} contains the image of I under the base-to-stalk ring map. Hence the image of I^n lies in K^n by multiplicativity and finite sums.",
+   "text": "For n = 0, the ideal power inclusion is the identity of the unit module. Its multiplication map is the left unitor, hence epic. Its image inclusion is epic and its cokernel is zero. Evaluation gives a subsingleton section module.",
    "uses": [
-    "def-nagata-extended-ideal"
+    "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": true
   },
   {
-   "text": "For n >= 1 identify the quotient stalk with F_z/(K^n F_z) by exactness of stalks and the ideal-power product formula. Elements of K^n kill this quotient. For n = 0, J^0 is O_X, its product with F is F, and the cokernel is zero.",
+   "text": "At x use ideal_module_product_stalk to obtain the unit-stalk comparison e, the stalk ideal K, and the positive-power quotient equivalence. For b in I, the Mathlib pullback-ideal adjunction L <= (L.comap f).map f and ideal_ker_le show that f*(b) is killed by J.subschemeι. The sectionwise kernel range of J.toModulesι gives a global ideal section lifting f*(b). Take its germ and apply e to conclude that g(b) belongs to K.",
    "uses": [
-    "lem-weil-pbc-ideal-module-product-stalk",
-    "def-weil-pbc-coherent-formal-module"
+    "def-nagata-extended-ideal",
+    "lem-weil-pbc-ideal-module-product-stalk"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Germs commute with scalar multiplication. The specified scalar multiple of t has zero germ at every point of U; separatedness of the sheaf implies it is zero. This includes the empty scheme and the zero or unit ideal.",
+   "text": "Ideal.map_pow and monotonicity of powers imply g(a) belongs to K^(n+1). Lift the germ of t through the linear quotient equivalence and choose a quotient representative y. The product g(a) smul y belongs to K^(n+1) smul top, so its quotient class is zero. Linearity transports this to zero in the quotient stalk.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use germ_smul and germ_res_apply to identify this zero stalk element with the germ of the claimed scalar multiple. Mathlib Presheaf.section_ext proves the section equality.",
    "uses": [],
    "elementary": true
   }
@@ -41,9 +48,9 @@
   "def-weil-pbc-coherent-formal-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 02OC; stalk verification via Modules Tags 01AG and 01CB"
+  "place": "Tag 02OC, with Modules Tags 01AG and 01CB; F3 second reading realizes the stalk argument using Mathlib ideal pullback adjunction and the existing quotient-stalk equivalence."
  },
  "mathlib_searches": [
   {
@@ -119,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T184240-L-3995018",
-  "kind": "interface",
+  "landing": "20261012T211614-L-1057107",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
