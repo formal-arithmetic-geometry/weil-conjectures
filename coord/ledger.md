@@ -6558,3 +6558,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 
 - 2026-10-12: source sorry ledger distinguishes proof, decomposition, movement and pruning; supplements the batch static gate. Regenerated and committed from the pinned green snapshot by proof-imports-cycle.sh, without a build or a lock during scanning.
 - 07:05 L: returned deliver/G2/Sheaf.AlgebraicGeometry.Curve.DenseOpenBaseChangeComparison (reviewer RETURN: (the landing tools, head 58cbf46a9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 07:05 L: returned deliver/N2/Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficientsBackward (reviewer RETURN: (the landing tools, head 2c16cf58d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
