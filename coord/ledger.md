@@ -7717,3 +7717,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:44 L: returned deliver/P3/Sheaf.AlgebraicGeometry.AffineTildeTotalTensor (reviewer RETURN: (reviewer X-f934a, head f934aa1a4) H10 / reader gate: Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde times out)
 - 13:44 L: returned deliver/N3/Sheaf.AlgebraicGeometry.ConstantModulePullbackSectionComparison (reviewer RETURN: (reviewer X-1407b, head 1407b1eea) H9 (review point 5): In lean/Sheaf/AlgebraicGeometry/PullbackSectionTransport.lean li)
 - 13:48 L: returned deliver/N3/Sheaf.Algebra.Homology.KInjectiveRestrictLocalized (reviewer RETURN: (reviewer X-35c09, head 35c097468) C1: In dag/nodes/sec-smooth-purity/lem-pur-kinjective-restrict-localized-adjunction.j)
+- 13:49 L: returned deliver/Y2/Sheaf.Paper.StrictHenselizationPointedMap (reviewer RETURN: (reviewer X-3bcd8, head 3bcd80179) E2/E3, reviewer brief §4: strictHenselizationPointedMap_factorization is false, altho)
