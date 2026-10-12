@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-spectral-object-bottom-page-compatibility",
+ "kind": "statement",
+ "title": "Bottom-page cycles-to-homology compatibility",
+ "statement": "Let C be abelian, Y an EInt-indexed first-quadrant spectral object, E its standard E2 spectral sequence [def-sp-spectral-sequence], and m_(p,r) the explicit bottom-page maps [def-sc-spectral-object-bottom-page-map]. For every natural p and integer r>=2, the following equality of maps from the cycles at (p,0) on page r to H_Y^p(bottom,top) holds: iCycles_(p,0) followed by m_(p,r) equals homologyPi_(p,0), followed by the standard page homology isomorphism E_r.homology(p,0) ~= E_(r+1)^(p,0), followed by m_(p,r+1).",
+ "source": {
+  "document": "Stacks Project, Homology and Derived Categories; Mathlib.Algebra.Homology.SpectralObject",
+  "place": "Tags 012K and 015N, expanded via Page.lean (ιE and map_ιE), Cycles.lean (fromOpcycles and opcyclesMap_fromOpcycles), SpectralSequence.lean (spectralSequence_iso and spectralSequenceHomologyData)"
+ },
+ "stmt_deps": [
+  "def-sp-spectral-sequence",
+  "def-sc-spectral-object-bottom-page-map"
+ ],
+ "proof": [
+  {
+   "text": "Set a=2-r and c=r-1. Rewrite the standard spectral-object homology isomorphism using spectralSequence_iso. Its homology data have kernel object E^p(a-1,0,1,c), included by changing a-1 to a and projected by changing c to c+1. The canonical cycles isomorphisms therefore reduce the desired square to equality of two maps out of this kernel object. This is exactly spectralSequenceHomologyData_left_i and spectralSequenceHomologyData_left_π, together with cyclesIso_hom_comp_i and homologyπ_comp_homologyIso_hom.",
+   "uses": [
+    "def-sp-spectral-sequence",
+    "def-sc-spectral-object-bottom-page-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the bottom-page maps. Cancel the page comparison and its inverse. Apply map_ιE: on the left the opcycles map is the identity; on the right it is the map changing c to c+1. Then opcyclesMap_fromOpcycles replaces the latter followed by fromOpcycles at c+1 with fromOpcycles at c followed by H^p(0,c)->H^p(0,c+1).",
+   "uses": [
+    "def-sc-spectral-object-bottom-page-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Functoriality of H gives the commuting square between H^p(bottom,c), H^p(0,c), H^p(bottom,c+1), H^p(0,c+1). Both vertical maps are invertible by first-quadrant vanishing in (bottom,0), in degrees p and p+1. Move these inverses across the square. The two maps from H^p(bottom,c) to H^p(bottom,top) agree by functoriality; thus the claimed square commutes. This argument applies unchanged at p=0 and r=2.",
+   "uses": [
+    "def-sc-spectral-object-bottom-page-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-spectral-object-bottom-page-map",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homology and Derived Categories; Mathlib.Algebra.Homology.SpectralObject",
+  "place": "Tags 012K and 015N, expanded via Page.lean (ιE and map_ιE), Cycles.lean (fromOpcycles and opcyclesMap_fromOpcycles), SpectralSequence.lean (spectralSequence_iso and spectralSequenceHomologyData)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "map from bottom row spectral sequence page to abutment using spectral object opcycles; successor homology compatibility",
+   "results": "Service unavailable: Internal Server Error; no absence verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectral object iota E from opcycles naturality bottom page homology comparison",
+   "results": "CochainComplex.homologySequenceδ_quotient_mapTriangle_obj and related mapping-cone homology-sequence declarations; no bottom-page map or its local compatibility square.",
+   "date": "2026-10-13",
+   "verdict": "Related APIs only; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "bottomPageMap|map_ιE|opcyclesMap_fromOpcycles|spectralSequence_iso in Mathlib/Algebra/Homology/SpectralObject; bottomEdge in lean/WeilConjectures and lean/Sheaf",
+   "results": "Mathlib Page.lean: map_ιE, iota-E, fromOpcycles; Cycles.lean: opcyclesMap_fromOpcycles; SpectralSequence.lean: spectralSequence_iso and spectralSequenceHomologyData. Source SpectralSequence.lean: bottomEdge only at page two. No bottomPageMap or local bottom-page compatibility declaration. Whole DAG and blueprint search: no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "Build the map from existing APIs; the compatibility is a new local lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SpectralObjectBottomFiltration",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Spectral-object bottom-edge factorization: single-page cycles/homology square in the iterated bottom projection",
+   "via": [
+    "lem-sc-spectral-object-bottom-filtration",
+    "lem-sc-topological-leray-cartan-eilenberg-cocycle",
+    "lem-sc-topological-leray-bottom-realization",
+    "lem-sc-topological-leray-spectral-sequence",
+    "lem-sc-leray-closed-pushforward-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SpectralObjectBottomPageCompatibility",
+  "file": "lean/Sheaf/CategoryTheory/SpectralObjectBottomPageCompatibility.lean",
+  "declaration": "CategoryTheory.Abelian.SpectralObject.bottomPageMap_compatibility",
+  "statement": "theorem bottomPageMap_compatibility\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (Y : SpectralObject C EInt) [Y.IsFirstQuadrant]\n    (p : ℕ) (r : ℤ) (hr : 2 ≤ r) :\n    (Y.E₂SpectralSequenceNat.page r hr).iCycles (p, 0) ≫ Y.bottomPageMap p r hr =\n      (Y.E₂SpectralSequenceNat.page r hr).homologyπ (p, 0) ≫\n        (Y.E₂SpectralSequenceNat.iso r (r + 1) (p, 0) rfl hr).hom ≫\n          Y.bottomPageMap p (r + 1) (by omega)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T202235-L-703005",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T202235-L-703005",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

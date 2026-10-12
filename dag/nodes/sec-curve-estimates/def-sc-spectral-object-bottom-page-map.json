@@ -1,0 +1,93 @@
+{
+ "id": "def-sc-spectral-object-bottom-page-map",
+ "kind": "definition",
+ "title": "Bottom-row page map to the spectral-object abutment",
+ "statement": "Let C be abelian and Y an EInt-indexed first-quadrant spectral object with its standard E2 spectral sequence [def-sp-spectral-sequence]. For p a natural number and r an integer at least 2, set a=2-r and c=r-1. Define m_(p,r):E_r^(p,0) -> H_Y^p(bottom,top) as follows: identify the page term with E_Y^p(a,0,1,c); apply iota-E to opZ_Y^p(0,1,c), then fromOpcycles to H_Y^p(0,c); apply the inverse of H_Y^p(bottom,c)->H_Y^p(0,c), then H_Y^p(bottom,c)->H_Y^p(bottom,top). The inverse exists by first-quadrant vanishing of H_Y^p(bottom,0) and H_Y^(p+1)(bottom,0). These maps define an explicit morphism, with no choice of an existence witness.",
+ "source": {
+  "document": "Stacks Project, Homology and Derived Categories; Mathlib.Algebra.Homology.SpectralObject",
+  "place": "Tags 012K and 015N, expanded via Page.lean (ιE and map_ιE), Cycles.lean (fromOpcycles and opcyclesMap_fromOpcycles), SpectralSequence.lean (spectralSequence_iso and spectralSequenceHomologyData)"
+ },
+ "stmt_deps": [
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "map from bottom row spectral sequence page to abutment using spectral object opcycles; successor homology compatibility",
+   "results": "Service unavailable: Internal Server Error; no absence verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectral object iota E from opcycles naturality bottom page homology comparison",
+   "results": "CochainComplex.homologySequenceδ_quotient_mapTriangle_obj and related mapping-cone homology-sequence declarations; no bottom-page map or its local compatibility square.",
+   "date": "2026-10-13",
+   "verdict": "Related APIs only; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "bottomPageMap|map_ιE|opcyclesMap_fromOpcycles|spectralSequence_iso in Mathlib/Algebra/Homology/SpectralObject; bottomEdge in lean/WeilConjectures and lean/Sheaf",
+   "results": "Mathlib Page.lean: map_ιE, iota-E, fromOpcycles; Cycles.lean: opcyclesMap_fromOpcycles; SpectralSequence.lean: spectralSequence_iso and spectralSequenceHomologyData. Source SpectralSequence.lean: bottomEdge only at page two. No bottomPageMap or local bottom-page compatibility declaration. Whole DAG and blueprint search: no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "Build the map from existing APIs; the compatibility is a new local lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SpectralObjectBottomFiltration",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Spectral-object bottom-edge factorization: single-page cycles/homology square in the iterated bottom projection",
+   "via": [
+    "lem-sc-spectral-object-bottom-filtration",
+    "lem-sc-topological-leray-cartan-eilenberg-cocycle",
+    "lem-sc-topological-leray-bottom-realization",
+    "lem-sc-topological-leray-spectral-sequence",
+    "lem-sc-leray-closed-pushforward-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SpectralObjectBottomPageMap",
+  "file": "lean/Sheaf/CategoryTheory/SpectralObjectBottomPageMap.lean",
+  "declaration": "CategoryTheory.Abelian.SpectralObject.bottomPageMap",
+  "statement": "def bottomPageMap (p : ℕ) (r : ℤ) (hr : 2 ≤ r) :\n    (Y.E₂SpectralSequenceNat.page r hr).X (p, 0) ⟶\n      (Y.H p).obj (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T202235-L-703005",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T202235-L-703005",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

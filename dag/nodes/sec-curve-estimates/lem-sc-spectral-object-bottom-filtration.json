@@ -13,39 +13,58 @@
  ],
  "proof": [
   {
-   "text": "The abutment of a first-quadrant spectral object identifies consecutive image-filtration quotients with stable spectral-object terms. Transport these cokernel isomorphisms by h. The standard spectral-object page comparison identifies them with the terms at page p+q+2, supplying g.",
+   "text": "Use nonempty_cokernel_ofLE_imageFiltration_iso and nonempty_pageInfinity_iso for the raw image filtration. Transport its consecutive subobject inclusions through h using underlyingIso and cokernel.mapIso; hT identifies the result with the specified filtration T. This proves graded_comparison for every p,q.",
    "uses": [
     "lem-sp-first-quadrant-spectral-object-abutment",
     "def-sp-filtration"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "First-quadrant vanishing makes T_p^(p+1) zero. Its arrow into T_p^p is zero, so the cokernel projection is an isomorphism. Compose g_(p,0)^(-1) with the inverse projection to obtain k; the quotient equation follows by cancellation.",
+   "text": "Use the explicit bottomPageMap. Its value at r=2 is the page-two interval comparison followed by bottomEdge, by EIsoH_hom_opcyclesIsoH_inv. At r=p+2 it is monic: page comparison, iota-E, fromOpcycles and the inverse H map are monic, and H^p(bottom,p+1)->H^p(bottom,top) is an isomorphism by first-quadrant vanishing in degrees p-1 and p.",
    "uses": [
-    "def-sp-filtration",
+    "def-sc-spectral-object-bottom-page-map",
     "lem-sp-first-quadrant-spectral-object-abutment"
    ],
    "elementary": true
   },
   {
-   "text": "On the bottom row cycles inclusion is invertible, hence ht uniquely determines every t and hb2,hbt uniquely determine b by integer induction. Express successor-page homology isomorphisms using the spectral-object kernel/image model: the transition is the quotient map of its opcycles. Induct through r=2,...,p+1; their composite is the opcycles quotient from interval (0,1) to the stabilized bottom term. Its composite with the inclusion of the image filtration is the defining inverse of H^p(bottom,1)->H^p(0,1), followed by H^p(bottom,1)->H^p(bottom,top), namely bottomEdge. Transport through h to obtain the displayed factorization.",
+   "text": "Bottom-row outgoing differentials vanish by the natural-number complex shape, so cycles inclusion is invertible. From ht the transitions t are epi. Integer induction from hb2,hbt proves b is epi. Cancel cycles inclusion in bottomPageMap_compatibility and use ht; integer induction then gives b_(p,r) followed by bottomPageMap_(p,r) equals bottomPageMap_(p,2).",
    "uses": [
-    "def-sp-spectral-sequence",
+    "lem-sc-spectral-object-bottom-page-compatibility",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Since b_(p,p+2) is epi and bottomPageMap_(p,p+2) is mono, its mono represents the image of bottomPageMap_(p,2). imageSubobject_bottomEdge identifies this image with imageFiltration(p,1). Transport by h and use hT to construct k with Subobject.isoOfEqMk. The preceding induction gives the bottom factorization.",
+   "uses": [
+    "def-sc-spectral-object-bottom-page-map",
+    "lem-sc-spectral-object-bottom-page-compatibility",
     "lem-sp-first-quadrant-spectral-object-abutment"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "First-quadrant vanishing and hT give T_p^(p+1)=bottom, so its inclusion into T_p^p is zero and its cokernel projection is invertible. For q=0 define g as the inverse cokernel projection followed by k inverse. For q nonzero use graded_comparison. Cancellation proves the quotient identity, completing the existence assertion.",
+   "uses": [
+    "def-sp-filtration",
+    "lem-sp-first-quadrant-spectral-object-abutment"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sp-first-quadrant-spectral-object-abutment",
+  "def-sc-spectral-object-bottom-page-map",
   "def-sp-filtration",
-  "def-sp-spectral-sequence"
+  "def-sp-spectral-sequence",
+  "lem-sc-spectral-object-bottom-page-compatibility",
+  "lem-sp-first-quadrant-spectral-object-abutment"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/015N",
-  "place": "Tags 015J, 015N and Homology Tag 012K; successive image quotients and bottom opcycles projection; expanded spectral-object formulation by H1"
+  "document": "Stacks Project, Homology and Derived Categories; Mathlib.Algebra.Homology.SpectralObject",
+  "place": "Existing abutment APIs plus the explicit bottom-page map and its local successor compatibility; Lean proof by E1."
  },
  "mathlib_searches": [
   {
@@ -188,11 +207,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-8c075",
-  "group": "H1",
+  "reviewer": "COMPILER",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T173831-L-3297062",
+  "landing": "20261012T202235-L-703005",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered Lean statements and proof with their DAG nodes, unchanged existing signature, cited spectral-object APIs, clean compilation, and axiom checks."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
