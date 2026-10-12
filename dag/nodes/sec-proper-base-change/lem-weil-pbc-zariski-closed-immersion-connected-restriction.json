@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-zariski-closed-immersion-connected-restriction",
+ "kind": "statement",
+ "title": "Zariski closed-immersion restriction with connected point closures",
+ "statement": "Let $X,Z$ be schemes, with $X$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions], and let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion]. Suppose that $\\overline{\\{x\\}}\\cap\\operatorname{range}(i)$ is nonempty and connected for every $x\\in X$. For every sheaf $G$ of sets in $\\mathrm{Type}(u+1)$ on the underlying Zariski space of $X$, the restriction map $\\Gamma(X,G)\\to\\Gamma(Z,i^{-1}G)$, defined by the inverse-image adjunction unit [def-weil-pbc-topological-inverse-image] evaluated at the top open, is bijective. Here the schemes have universe $u$ and inverse image is left Kan extension followed by sheafification.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZG, lemma-h0-topological; closed-image and universe transport of the restriction unit"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The qcqs scheme X has spectral underlying space. A closed immersion identifies Z homeomorphically with its closed image D. By commutativity of intersection, the hypothesis supplies the connected nonempty intersections required by spectral closed restriction.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the homeomorphism ULift.down from the topological universe lift of X to X. The lifted space is spectral and the lifted image is closed with the same connected point-closure intersections. The order isomorphism on opens transports the sheaf by precomposition, preserving covers and their matching families. Apply spectral_closed_restriction at universe u+1 to this transported sheaf with values in Type (u+1).",
+   "uses": [
+    "lem-weil-pbc-h0-spectral-closed-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport along the open-set order isomorphisms and the homeomorphism from Z to D. Their precomposition functors identify pushforwards. The unique comparison of left adjoints compatible with units identifies inverse images and their restriction units. Evaluation at the top open conjugates the spectral bijection by bijections to the exact left-Kan-extension/sheafification unit in the statement.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-h0-spectral-closed-restriction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZG, lemma-h0-topological; closed-image and universe transport of the restriction unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Zariski sheaf global sections closed embedding spectral space connected intersections point closures",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski sheaf global sections closed embedding spectral space connected intersections point closures",
+   "date": "2026-10-12",
+   "results": "Results: AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, PrimeSpectrum.instPrespectralSpace, PrimeSpectrum.instSpectralSpace, SpectralSpace.toQuasiSober, SpectralSpace.toQuasiSeparatedSpace, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible, PrimeSpectrum.zariskiTopology. No matching Zariski restriction comparison found.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "spectral.*restriction|closed.*restriction|restriction.*bijective",
+   "date": "2026-10-12",
+   "results": "Results: Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean. No matching Zariski restriction comparison found.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAbelianH0FiniteConnectedCriterion",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Step 4: Gabber comparison in degree zero; its Zariski spectral restriction step, via the abelian finite-cover connectedness criterion",
+   "via": [
+    "lem-weil-pbc-etale-abelian-h0-finite-connected-criterion",
+    "prop-weil-pbc-gabber-pair-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiClosedImmersionConnectedRestriction.lean",
+  "declaration": "AlgebraicGeometry.zariski_closed_immersion_connected_restriction",
+  "statement": "theorem zariski_closed_immersion_connected_restriction {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (i : Z ⟶ X) [IsClosedImmersion i] (hconn : ∀ x : X, IsConnected (closure ({x} : Set X) ∩ Set.range i)) : letI : ∀ P : X.Opensᵒᵖ ⥤ Type (u + 1), (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)).op.HasPointwiseLeftKanExtension P := fun P U ↦ @Types.hasColimit.{u, u + 1, u} (CostructuredArrow.{u, u, u, u} (Opens.map i.base).op U) inferInstance (small_succ.{u} _) (CostructuredArrow.proj _ U ⋙ P) ∀ G : TopCat.Sheaf (Type (u + 1)) X.toTopCat, Function.Bijective (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)) (Type (u + 1)) (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app G).hom.app (op (⊤ : X.Opens)))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T042421-L-1821941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T042421-L-1821941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

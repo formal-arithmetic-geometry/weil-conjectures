@@ -17,44 +17,40 @@
  ],
  "proof": [
   {
-   "text": "Finite covers of X are qcqs and spectral. Base change of i is closed, and its image is the inverse image of range i. Apply the spectral closed restriction criterion to each finite cover and its point closures; the hypothesis supplies connected nonempty intersections.",
+   "text": "Apply the Zariski closed-immersion connected-restriction lemma to i, using the identity finite cover and irreducibility of each point closure. For a finite cover h:X′→X, finite morphisms preserve qcqs. Apply the same lemma to pullback.snd i h; Scheme.Pullback.range_snd identifies its image with h inverse image of range i, so the original hypothesis supplies connected point-closure intersections.",
    "uses": [
+    "lem-weil-pbc-zariski-closed-immersion-connected-restriction",
     "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-h0-spectral-closed-restriction"
+    "lem-weil-pbc-closed-immersion-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "The identity is finite, so the previous step gives both comparisons required by Gabber’s Zariski-to-étale criterion. Apply that criterion to the underlying set sheaf of G to obtain bijective restriction.",
+   "text": "Apply gabber_h0_etale_criterion to the two Zariski comparisons and the underlying sheaf of sets of G. This yields bijectivity of the set inverse-image unit at the identity étale object.",
    "uses": [
     "lem-weil-pbc-gabber-h0-etale-criterion"
    ],
    "elementary": false
   },
   {
-   "text": "Forgetting abelian groups preserves finite limits and filtered colimits. It commutes with the filtered pointwise inverse-image construction and sheafification. The comparisons respect adjunction units and terminal evaluation, identifying the underlying globalSectionsUpperStarMap with the bijection of the preceding step. Its inverse is additive, proving it an isomorphism.",
+   "text": "Use the inverse-image algebraic-structures theorem to obtain the natural forgetful comparisons and their unit equation. Evaluate that equation at the identity étale object. The two comparison factors are isomorphisms, so cancellation gives an isomorphism for the underlying function of the abelian unit. The abelian forgetful functor reflects isomorphisms. Naturality along the canonical isomorphism to the chosen terminal object transports this to terminal evaluation. All remaining factors in globalSectionsUpperStarMap are canonical isomorphisms, so their composite is an isomorphism.",
    "uses": [
-    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-zariski-closed-immersion-connected-restriction",
   "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-qcqs-scheme-spectral",
   "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-h0-spectral-closed-restriction",
   "lem-weil-pbc-gabber-h0-etale-criterion",
-  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project",
-  "place": "Lemmas 59.82.4 (09ZG), https://stacks.math.columbia.edu/tag/09ZG, and 59.82.2 (09ZF), https://stacks.math.columbia.edu/tag/09ZF; underlying abelian sheaf version"
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09ZG (lemma-h0-topological) and 09ZF (lemma-gabber-h0), with the recorded inverse-image algebraic-structures comparison"
  },
  "mathlib_searches": [
   {
@@ -121,10 +117,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T033636-L-1481564",
+  "landing": "20261012T042421-L-1821941",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

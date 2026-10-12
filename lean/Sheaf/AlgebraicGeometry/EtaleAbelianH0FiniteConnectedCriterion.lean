@@ -9,9 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Sheaf.AlgebraicGeometry.GabberH0EtaleCriterion
-import Sheaf.Topology.SpectralClosedRestriction
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction
 
 /-!
 # A finite-cover connectedness criterion for abelian étale sections
@@ -59,6 +59,64 @@ theorem isIso_abelian_globalSectionsUpperStarMap_of_finite_connected_closed_inte
       ∀ C : Set X', IsClosed C → IsIrreducible C →
         IsConnected (C ∩ h ⁻¹' Set.range i))
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
-    IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} i G) := by sorry
+    IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} i G) := by
+  have hZar := zariski_closed_immersion_connected_restriction i (fun x ↦ by
+    simpa using hconn X (𝟙 X) (closure ({x} : Set X)) isClosed_closure
+      (isIrreducible_singleton.closure))
+  have hFinite (X' : Scheme.{u}) (h : X' ⟶ X) [IsFinite h] := by
+    letI : CompactSpace X' := QuasiCompact.compactSpace_of_compactSpace h
+    letI : QuasiSeparatedSpace X' := quasiSeparatedSpace_of_quasiSeparated h
+    exact zariski_closed_immersion_connected_restriction (pullback.snd i h) (fun x ↦ by
+      rw [Scheme.Pullback.range_snd]
+      exact hconn X' h (closure ({x} : Set X')) isClosed_closure
+        (isIrreducible_singleton.closure))
+  have hsets := gabber_h0_etale_criterion i hZar hFinite
+    ((sheafForget (D := AddCommGrpCat.{u + 1}) X.smallEtaleTopology).obj G)
+  obtain ⟨_, ea, da, _, _, _, _, _, _, _, hunit, _⟩ :=
+    etaleInverseImageAlgebraicStructures Z X i
+  let W : X.Etaleᵒᵖ := Opposite.op (Scheme.Etale.mk (𝟙 X))
+  let ev := (sheafSections X.smallEtaleTopology (Type (u + 1))).obj W
+  have heq := congrArg (fun k ↦ ev.map k) (hunit G)
+  simp only [Functor.map_comp] at heq
+  have : IsIso (ev.map
+      ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ i) (Type (u + 1))
+        (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)
+        (Z.smallGrothendieckTopology @AlgebraicGeometry.Etale)).unit.app
+          ((sheafForget (D := AddCommGrpCat.{u + 1}) X.smallEtaleTopology).obj G))) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr hsets
+  have hη : IsIso (ev.map
+      ((sheafForget (D := AddCommGrpCat.{u + 1}) X.smallEtaleTopology).map
+        ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app G))) := by
+    have hi : IsIso (ev.map
+        ((sheafForget (D := AddCommGrpCat.{u + 1}) X.smallEtaleTopology).map
+          ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app G)) ≫
+      ev.map (da.hom.app ((upperStar AddCommGrpCat.{u + 1} i).obj G)) ≫
+      ev.map ((Functor.sheafPushforwardContinuous
+        (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ i) (Type (u + 1))
+          (X.smallGrothendieckTopology @AlgebraicGeometry.Etale)
+          (Z.smallGrothendieckTopology @AlgebraicGeometry.Etale)).map (ea.hom.app G))) := by
+      rw [heq]
+      infer_instance
+    simpa only [isIso_comp_right_iff] using hi
+  change IsIso ((forget AddCommGrpCat.{u + 1}).map
+    (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app G).hom.app W)) at hη
+  have : IsIso
+      (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app G).hom.app W) :=
+    isIso_of_reflects_iso _ (forget AddCommGrpCat.{u + 1})
+  have hterminal : IsIso
+      (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app G).hom.app
+        (Opposite.op (⊤_ X.Etale))) := by
+    exact (NatTrans.isIso_app_iff_of_iso
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app G).hom
+      ((MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X).uniqueUpToIso
+        (terminalIsTerminal (C := X.Etale))).op).mpr inferInstance
+  have : IsIso (((sheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (Opposite.op (⊤_ X.Etale))).map
+        ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app G)) := hterminal
+  have : IsIso (((upperStar AddCommGrpCat.{u + 1} i).obj G).obj.map
+      (PreservesTerminal.iso i.Etale).inv.op) := by infer_instance
+  unfold globalSectionsUpperStarMap
+  infer_instance
 
 end AlgebraicGeometry.Etale
