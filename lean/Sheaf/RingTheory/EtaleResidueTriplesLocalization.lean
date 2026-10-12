@@ -6,9 +6,11 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
-public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.RingTheory.EtaleResidueTripleUnitRefinement
+import Sheaf.RingTheory.EtaleResidueTripleIdealRefinement
+import Sheaf.RingTheory.EtaleResidueTriplesRepresentatives
 
 /-!
 # Localization properties of the pointed etale colimit
@@ -52,6 +54,54 @@ theorem etaleResidueTriples_colimit_localization
       ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ).hom) :
     (∀ x : c.pt, ψ x ≠ 0 → IsUnit x) ∧
       RingHom.ker ψ = p.asIdeal.map ρ.hom := by
-  sorry
+  let χ := CommRingCat.ofHom (algebraMap ((Spec R).residueField p) K)
+  have eval_zero (t : EtaleResidueTriples R p K χ) (f : t.B) :
+      (((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ).hom f = 0) ↔
+        f ∈ t.q.asIdeal := by
+    change t.φ.hom (((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q).hom f) = 0 ↔ _
+    rw [map_eq_zero]
+    have hcanon := Spec.algebraMap_residueFieldIso_inv t.B t.q
+    change CommRingCat.ofHom (algebraMap t.B t.q.asIdeal.ResidueField) ≫
+      (Spec.residueFieldIso t.B t.q).inv =
+        (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q at hcanon
+    rw [← hcanon]
+    change (Spec.residueFieldIso t.B t.q).inv.hom
+      (algebraMap t.B t.q.asIdeal.ResidueField f) = 0 ↔ _
+    rw [map_eq_zero]
+    exact show f ∈ RingHom.ker (algebraMap t.B t.q.asIdeal.ResidueField) ↔
+        f ∈ t.q.asIdeal by rw [Ideal.ker_algebraMap_residueField]
+  have eval_compat (t : EtaleResidueTriples R p K χ) (f : t.B) :
+      ψ ((c.ι.app t).hom f) =
+        ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ).hom f :=
+    DFunLike.congr_fun (hψ t) f
+  constructor
+  · intro x hx
+    obtain ⟨t, f, rfl⟩ := etaleResidueTriples_colimit_representative R p K χ c hc x
+    have hf : f ∉ t.q.asIdeal := by
+      intro hf
+      exact hx ((eval_compat t f).trans ((eval_zero t f).mpr hf))
+    obtain ⟨s, a, ha⟩ := etaleResidueTriple_unit_refinement R p K χ t f hf
+    have hw := ConcreteCategory.congr_hom (c.w a) f
+    exact hw ▸ ha.map (c.ι.app s).hom
+  · apply le_antisymm
+    · intro x hx
+      obtain ⟨t, f, rfl⟩ := etaleResidueTriples_colimit_representative R p K χ c hc x
+      have hf : f ∈ t.q.asIdeal := (eval_zero t f).mp
+        ((eval_compat t f).symm.trans (RingHom.mem_ker.mp hx))
+      obtain ⟨s, a, ha⟩ := etaleResidueTriple_ideal_refinement R p K χ t f hf
+      have hm := Ideal.mem_map_of_mem (c.ι.app s).hom ha
+      rw [Ideal.map_map] at hm
+      have hcomp : (c.ι.app s).hom.comp s.α.hom = ρ.hom :=
+        congrArg CommRingCat.Hom.hom (hρ s)
+      rw [hcomp] at hm
+      exact (ConcreteCategory.congr_hom (c.w a) f) ▸ hm
+    · rw [Ideal.map_le_iff_le_comap]
+      let t : EtaleResidueTriples R p K χ :=
+        ⟨R, 𝟙 R, inferInstance, p, by simp, χ, by simp⟩
+      have htρ : c.ι.app t = ρ := by simpa [t] using hρ t
+      intro r hr
+      change ψ (ρ.hom r) = 0
+      rw [← htρ]
+      exact (eval_compat t r).trans ((eval_zero t r).mpr hr)
 
 end AlgebraicGeometry.Scheme

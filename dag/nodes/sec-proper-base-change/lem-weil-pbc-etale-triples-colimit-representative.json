@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-etale-triples-colimit-representative",
+ "kind": "lemma",
+ "title": "Etale residue triple colimit representative",
+ "statement": "Let $R$ be a commutative ring, $p$ a prime, $K$ a field, and $\\chi:\\kappa(p)\\to K$ a field homomorphism. Let $D$ be the forgetful ring diagram of [def-weil-pbc-etale-residue-triples], and let $c$ be a colimit cocone for $D$. For every $x\\in c.\\mathrm{pt}$, there are a triple $t$ and an element $f\\in t.B$ such that $c.\\iota_t(f)=x$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GN and 04GP"
+ },
+ "proof": [
+  {
+   "text": "The category of triples is filtered by lem-weil-pbc-etale-triples-filtered-colimit-filtered, whose statement permits arbitrary K and fixed chi.",
+   "uses": [
+    "lem-weil-pbc-etale-triples-filtered-colimit-filtered"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inside the vertex C of the given cocone, let S consist of all coprojection images. The identity triple represents zero and one, and negatives stay at the same stage. A common successor for two representing objects, together with cocone naturality and the ring-homomorphism laws, represents their sum and product. Therefore S is a subring of C. Each coprojection corestricts to S and its naturality follows by injectivity of the inclusion S -> C.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the given colimit universal property to the cocone with vertex S to obtain d:C -> S. The composite C -> S -> C agrees with the identity after every coprojection, so it is the identity by colimit uniqueness. Thus each x in C is the underlying value of d(x), which belongs to S, and membership in S provides its representative. This argument is independent of the size of the indexing category.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-triples-filtered-colimit-filtered"
+ ],
+ "proof_origin": "Stacks Project Tags 04GN and 04GP, filtered-colimit representatives step; D2 second reader supplies the elementary subring and colimit-uniqueness argument, checked in Lean with filteredness as an explicit assumption, 2026-10-12.",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesLocalization",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-triples-colimit-localization",
+   "place": "proof steps",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTriplesRepresentatives",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_colimit_representative",
+  "statement": "theorem etaleResidueTriples_colimit_representative\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (c : Cocone (etaleResidueTriplesRingDiagram R p K χ)) (hc : IsColimit c)\n    (x : c.pt) : ∃ (t : EtaleResidueTriples R p K χ) (f : t.B),\n      (c.ι.app t).hom f = x",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-residue-triples"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Elements of a colimit of pointed etale algebras are represented by an element of one etale algebra",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Unavailable; no mathematical verdict drawn from service failure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of a filtered colimit of commutative rings comes from a ring in the diagram",
+   "date": "2026-10-12",
+   "results": "['CommRingCat.FilteredColimits.colimit', 'CommRingCat.FilteredColimits.R', 'CommRingCat.FilteredColimits.colimitCocone', 'CommRingCat.FilteredColimits.colimitCoconeIsColimit', 'CommRingCat.FilteredColimits.colimitCommRing', 'CommRingCat.Colimits.colimitIsColimit', 'CommRingCat.Colimits.coconeFun', 'RingCat.FilteredColimits.colimit']",
+   "verdict": "Mathlib constructs filtered ring colimits and their representatives; this result additionally requires filteredness and essential smallness of the category of triples. The existing etaleResidueTriples_filtered_colimit assumes a separable closure, whereas this statement permits any field embedding. No duplicate statement was found in lean/Sheaf or the upstream library."
+  },
+  {
+   "tool": "grep",
+   "query": "jointly_surjective|preservesFilteredColimits",
+   "date": "2026-10-12",
+   "results": "['Mathlib/Algebra/Category/Ring/FilteredColimits.lean', 'Mathlib/Algebra/Category/Ring/FilteredColimits.lean', 'Mathlib/Algebra/Category/Ring/FilteredColimits.lean', 'Mathlib/Algebra/Category/Ring/FilteredColimits.lean', 'Mathlib/Algebra/Category/Ring/FilteredColimits.lean', 'Mathlib/Algebra/Category/Ring/FinitePresentation.lean', 'Mathlib/Algebra/Category/Ring/FinitePresentation.lean', 'Mathlib/Algebra/Category/Ring/FinitePresentation.lean']",
+   "verdict": "Mathlib constructs filtered ring colimits and their representatives; this result additionally requires filteredness and essential smallness of the category of triples. The existing etaleResidueTriples_filtered_colimit assumes a separable closure, whereas this statement permits any field embedding. No duplicate statement was found in lean/Sheaf or the upstream library.",
+   "sub": "Algebra/Category/Ring"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2e48d",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085225-L-8352",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2e48d",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085225-L-8352",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four nodes, cited dependencies and sources, import-change users, unit route, report, and earlier return; all modules and the direct importer compile cleanly; axiom audits show only standard axioms and the three reported helper sorries."
+ }
+}

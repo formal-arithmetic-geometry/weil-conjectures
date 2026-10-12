@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-etale-triple-ideal-refinement",
+ "kind": "lemma",
+ "title": "Etale residue triple ideal refinement",
+ "statement": "Let $R$ be a commutative ring, $p$ a prime, $K$ a field, and $\\chi:\\kappa(p)\\to K$ a field homomorphism. For a triple $t=(B,\\alpha,q,\\phi)$ in [def-weil-pbc-etale-residue-triples] and $f\\in q$, there are a triple $s=(B_s,\\alpha_s,q_s,\\phi_s)$ and a morphism $a:t\\to s$ whose underlying ring map sends $f$ into the ideal $pB_s$, the extension along $\\alpha_s$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GN, 04GP, and 00U4(1)"
+ },
+ "proof": [
+  {
+   "text": "For the etale map R -> B and q over p, Stacks Tag 00U4(1) gives p B_q = q B_q. Hence f/1 belongs to the extension of pB to B_q. Clearing the finitely many denominators in this ideal membership gives g outside q such that gf belongs to pB.",
+   "uses": [
+    "lem-weil-pbc-etale-prime-generates-maximal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the principal localization B[1/g]. Its map to K extends since g has nonzero image; the kernel prime and fraction-field embedding define a compatible residue triple as in the unit-refinement construction. Spec(B[1/g]) -> Spec(B) is the principal open immersion, hence is etale by lem-weil-pbc-etale-composition-cancellation(1); its composite to Spec(R) is etale by clause (2). In B[1/g], the image of gf lies in pB[1/g]; multiplying by the inverse of g puts the image of f in this ideal.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": "Stacks Project Tags 04GN and 04GP, with kernel and residue-field constructions; second reading by D2, 2026-10-12.",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesLocalization",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-triples-colimit-localization",
+   "place": "proof steps",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTripleIdealRefinement",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTripleIdealRefinement.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriple_ideal_refinement",
+  "statement": "theorem etaleResidueTriple_ideal_refinement\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (t : EtaleResidueTriples R p K χ) (f : t.B) (hf : f ∈ t.q.asIdeal) :\n    ∃ (s : EtaleResidueTriples R p K χ) (a : t ⟶ s),\n      ((etaleResidueTriplesRingDiagram R p K χ).map a).hom f ∈\n        p.asIdeal.map s.α.hom",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-residue-triples"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an etale algebra and a prime q over p, every element in q enters p after principal localization outside q",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Unavailable; no mathematical verdict drawn from service failure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An element in a prime q above p of an etale R algebra becomes a member of p S after localization away from q",
+   "date": "2026-10-12",
+   "results": "['Algebra.exists_etale_of_isEtaleAt', 'Algebra.mem_etaleLocus_iff', 'RingHom.Etale.ofLocalizationSpanTarget', 'Algebra.IsEtaleAt.comp', 'RingHom.Etale.ofLocalizationSpan', 'Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq', 'Algebra.IsEtaleAt', 'Algebra.basicOpen_subset_etaleLocus_iff_etale']",
+   "verdict": "Mathlib gives local unramified ideal equality and clearing denominators, but not the required morphism of residue triples."
+  },
+  {
+   "tool": "grep",
+   "query": "mem_map_algebraMap_iff|iff_map_maximalIdeal_eq|algebraMap_isUnit",
+   "date": "2026-10-12",
+   "results": "['Mathlib/RingTheory/Spectrum/Prime/Topology.lean', 'Mathlib/RingTheory/Spectrum/Prime/Topology.lean', 'Mathlib/RingTheory/RamificationInertia/Ramification.lean', 'Mathlib/RingTheory/Localization/Algebra.lean', 'Mathlib/RingTheory/Localization/Algebra.lean', 'Mathlib/RingTheory/Localization/Ideal.lean', 'Mathlib/RingTheory/Localization/Ideal.lean', 'Mathlib/RingTheory/Localization/Ideal.lean']",
+   "verdict": "Mathlib gives local unramified ideal equality and clearing denominators, but not the required morphism of residue triples.",
+   "sub": "RingTheory"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2e48d",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085225-L-8352",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2e48d",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085225-L-8352",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four nodes, cited dependencies and sources, import-change users, unit route, report, and earlier return; all modules and the direct importer compile cleanly; axiom audits show only standard axioms and the three reported helper sorries."
+ }
+}

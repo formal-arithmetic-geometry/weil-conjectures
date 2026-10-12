@@ -10,13 +10,38 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "This intermediate theorem is exactly the indicated construction step from the source proof; the remaining details are postponed to this named theorem.",
+   "text": "Represent each colimit element by f at a triple t. The kernel of B -> kappa(q) -> K is q, since the field embedding is injective. Compatibility with psi therefore detects exactly membership in q.",
+   "uses": [
+    "lem-weil-pbc-etale-triples-colimit-representative"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If psi(x) is nonzero, its representative f is outside q. Refine to a triple where f is a unit and map that unit to the colimit. Cocone naturality identifies the image with x.",
+   "uses": [
+    "lem-weil-pbc-etale-triple-unit-refinement"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If psi(x)=0, its representative belongs to q. Refine until the image belongs to pB_s, then map its ideal membership to the colimit. Cocone naturality and the structural-map equation give x in pC.",
+   "uses": [
+    "lem-weil-pbc-etale-triple-ideal-refinement"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the reverse ideal inclusion, use the identity triple (R,id,p,chi). Its coprojection equals rho by h_rho, and the residue map kills p. Thus pC is contained in ker psi.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [],
- "proof_origin": "Stacks Project Tags 04GW, 04GN, and 04GP; split by worker A3.",
+ "proof_deps": [
+  "lem-weil-pbc-etale-triples-colimit-representative",
+  "lem-weil-pbc-etale-triple-unit-refinement",
+  "lem-weil-pbc-etale-triple-ideal-refinement"
+ ],
+ "proof_origin": "Stacks Project Tags 04GN and 04GP; D2 proves the unchanged statement by representative, unit-refinement, and ideal-refinement reductions, 2026-10-12.",
  "status": "split",
  "created": {
   "by": "worker",
@@ -81,11 +106,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A3",
+  "reviewer": "X-2e48d",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T044737-L-2031325",
+  "landing": "20261012T085225-L-8352",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four nodes, cited dependencies and sources, import-change users, unit route, report, and earlier return; all modules and the direct importer compile cleanly; axiom audits show only standard axioms and the three reported helper sorries."
  }
 }
