@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
@@ -991,5 +992,39 @@ noncomputable def extensionByZero [DerivedBraiding A] [Etale.HasBoundedBelowUppe
       (rightDerivedLowerShriek A j).mapIso K.frobenius
 
 end StrictWeilComplex
+
+namespace GeometricOperations
+
+variable [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+
+/-- The identification `Ly^* A ≃ A_T` is compatible with transport along `y = x`. -/
+lemma leftDerivedUpperStarCongr_inv_app_upperStarUnit_hom (G : GeometricOperations A s)
+    {T : Scheme.{u}} {x y : T ⟶ X} (e : y = x) :
+    (leftDerivedUpperStarCongr A e).inv.app (𝟙_ _) ≫ (G.upperStarUnit y).hom =
+      (G.upperStarUnit x).hom := by
+  subst e
+  simp
+
+/-- Blueprint `cor-trf-constant-stalk-trace`: for the constant complex `K = A_X` with the
+canonical coefficient map `u : Lh^* A_X ≃ A_X` (`GeometricOperations.upperStarUnit`), the stalk
+endomorphism `A ≃ Lx^* A_X ≃ Lx^* Lh^* A_X ──Lx^* u──▶ Lx^* A_X` at every point `x` fixed by
+`h` is the identity, so its categorical trace is `1`. -/
+theorem trace_stalk_upperStarUnit (G : GeometricOperations A s) (h : X ⟶ X) (x : s ⟶ X)
+    (hx : x ≫ h = x) [HasRightDual (((upperStar A x).leftDerivedFunctor).obj (𝟙_ _))] :
+    MonoidalCategory.trace ((leftDerivedUpperStarCongr A hx).inv.app (𝟙_ _) ≫
+        (leftDerivedUpperStarComp A x h).hom.app (𝟙_ _) ≫
+        ((upperStar A x).leftDerivedFunctor).map (G.upperStarUnit h).hom) = 𝟙 _ := by
+  have key : (leftDerivedUpperStarComp A x h).hom.app (𝟙_ _) ≫
+      ((upperStar A x).leftDerivedFunctor).map (G.upperStarUnit h).hom =
+      (G.upperStarUnit (x ≫ h)).hom ≫ (G.upperStarUnit x).inv := by
+    rw [Iso.eq_comp_inv, upperStarUnit, upperStarUnit, upperStarUnit, Iso.symm_hom,
+      Iso.symm_hom, Iso.symm_hom, G.upperStarUnit_comp, Category.assoc]
+  rw [key, ← Category.assoc, G.leftDerivedUpperStarCongr_inv_app_upperStarUnit_hom hx,
+    Iso.hom_inv_id, MonoidalCategory.trace_eq_of_iso (G.upperStarUnit x) (𝟙 _) (𝟙 _) (by simp),
+    MonoidalCategory.trace_id_tensorUnit]
+
+end GeometricOperations
 
 end AlgebraicGeometry.ProEtale

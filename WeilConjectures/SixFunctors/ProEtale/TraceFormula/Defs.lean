@@ -884,6 +884,15 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
   identity isomorphism `L(𝟙 X)^* ≃ 𝟭`. -/
   upperStarUnit_id (X : Scheme.{u}) :
     (upperStarMonoidal (𝟙 X)).εIso.inv = (leftDerivedUpperStarId A X).hom.app (𝟙_ _)
+  /-- the unit of the monoidal structure of the pullback is compatible with composition: the
+  identification `L(f ≫ g)^* A_Z ≃ A_X` is `L(f ≫ g)^* A_Z ≃ Lf^* Lg^* A_Z ≃ Lf^* A_Y ≃ A_X`, read
+  through the composition isomorphism `leftDerivedUpperStarComp` (the pullbacks form a monoidal
+  pseudofunctor; blueprint `prop-functor-package`). -/
+  upperStarUnit_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    (upperStarMonoidal (f ≫ g)).εIso.inv =
+      (leftDerivedUpperStarComp A f g).hom.app (𝟙_ _) ≫
+        ((upperStar A f).leftDerivedFunctor).map (upperStarMonoidal g).εIso.inv ≫
+        (upperStarMonoidal f).εIso.inv
   /-- the monoidal structure of `Lf^*` is braided: its tensor map `μ` commutes with the
   braidings `β` of `D(Y, A)` and `D(X, A)`, that is, the square
 

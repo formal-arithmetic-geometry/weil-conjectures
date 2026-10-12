@@ -101,6 +101,23 @@ theorem trace_comp_idempotent {P Q : C} [HasRightDual P] [HasRightDual Q] (v : P
     (i : Q ⟶ P) (π : P ⟶ Q) : trace (v ≫ π ≫ i) = trace (i ≫ v ≫ π) := by
   rw [← Category.assoc, trace_comp_comm]
 
+/-- The trace of the identity of the monoidal unit is the identity, for any right dual of the
+unit. -/
+theorem trace_id_tensorUnit [HasRightDual (𝟙_ C)] : trace (𝟙 (𝟙_ C)) = 𝟙 _ := by
+  have h := ExactPairing.evaluation_coevaluation (𝟙_ C) (𝟙_ C)ᘁ
+  rw [whiskerRight_id, id_whiskerLeft] at h
+  have hc : (ρ_ (𝟙_ C ⊗ (𝟙_ C)ᘁ)).inv ≫ (α_ _ _ _).hom ≫ (λ_ ((𝟙_ C)ᘁ ⊗ 𝟙_ C)).hom =
+      (λ_ (𝟙_ C)ᘁ).hom ≫ (ρ_ (𝟙_ C)ᘁ).inv := by
+    monoidal_coherence
+  have h' : (ρ_ (𝟙_ C)).hom ≫ (η_ _ _ ≫ (λ_ (𝟙_ C)ᘁ).hom ≫ (ρ_ (𝟙_ C)ᘁ).inv ≫ ε_ _ _) ≫
+      (λ_ (𝟙_ C)).inv = 𝟙 _ := by
+    rw [← reassoc_of% hc]
+    simpa [unitors_equal] using h
+  rw [trace, id_whiskerRight, Category.id_comp, braiding_tensorUnit_left]
+  calc _ = (ρ_ (𝟙_ C)).inv ≫ ((ρ_ (𝟙_ C)).hom ≫ (η_ _ _ ≫ (λ_ (𝟙_ C)ᘁ).hom ≫
+        (ρ_ (𝟙_ C)ᘁ).inv ≫ ε_ _ _) ≫ (λ_ (𝟙_ C)).inv) ≫ (λ_ (𝟙_ C)).hom := by simp
+    _ = 𝟙 _ := by rw [h']; simp [unitors_equal]
+
 /-- In a braided monoidal closed category, the internal hom `[X, 𝟙_ C]` out of an object `X`
 with a right dual `Xᘁ` is isomorphic to `Xᘁ`: both `ihom X` and `tensorRight Xᘁ` are right
 adjoint to `X ⊗ - ≅ - ⊗ X`. -/
