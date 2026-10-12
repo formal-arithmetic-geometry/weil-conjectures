@@ -48,9 +48,10 @@ lemma upperStarFreeSheafIso_inv_comp
 `θ : h^* Λ[W] ≅ Λ[W']` of sheaves of `Λ`-modules such that for every sheaf `H` on `T_ét` and
 every section `s ∈ H(W)`, with `φ_s : Λ[W] ⟶ H` the morphism corresponding to `s`, the section
 of `h^* H` over `W'` corresponding to `h^*(φ_s) ∘ θ⁻¹ : Λ[W'] ⟶ h^* H` is the
-image `η_H(s)` of `s` under the unit `η : H ⟶ h_* h^* H`, a section of `(h_* h^* H)(W) = (h^* H)(W')`. Here
-`Λ[W]` is the free sheaf `j_{W!} Λ_W`, the sheafification of `V ↦ Λ^{(Hom_T(V, W))}`, and the
-correspondence `Hom(Λ[W], H) ≃ H(W)` is `AlgebraicGeometry.Etale.freeSheafHomEquiv`.
+image `η_H(s)` of `s` under the unit `η : H ⟶ h_* h^* H`, a section of
+`(h_* h^* H)(W) = (h^* H)(W')`. Here `Λ[W]` is the free sheaf `j_{W!} Λ_W`, the sheafification
+of `V ↦ Λ^{(Hom_T(V, W))}`, and the correspondence `Hom(Λ[W], H) ≃ H(W)` is
+`AlgebraicGeometry.Etale.freeSheafHomEquiv`.
 (blueprint: `lem-weil-pbc-inverse-image-free-etale-module`) -/
 theorem existsUnique_upperStarFreeSheafIso :
     ∃! θ : (h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ T).obj W) ≅
