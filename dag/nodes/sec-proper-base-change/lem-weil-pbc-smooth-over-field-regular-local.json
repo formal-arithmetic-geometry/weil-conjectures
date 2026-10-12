@@ -31,157 +31,49 @@
  ],
  "proof": [
   {
-   "text": "(Setup and the fibre dimension.) Fix a prime $\\mathfrak q\\subset A$ and write $\\kappa=\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime]. By [def-weil-pbc-smooth-ring-map] $A$ is a finitely presented $k$-algebra, $A\\cong k[x_1,\\dots,x_n]/(g_1,\\dots,g_m)$, so $A$ is a finite type $k$-algebra [def-weil-pbc-finite-type-algebra]; and $k\\to A$ is smooth at $\\mathfrak q$ [def-weil-pbc-singular-ideal], with $g=1\\notin\\mathfrak q$, since $A_1=A$ is a smooth $k$-algebra. Hence [lem-weil-pbc-smooth-over-field-dimension-differentials] gives that $\\Omega_{A/k}\\otimes_A\\kappa$ [def-weil-pbc-kahler-differentials] is a finite-dimensional $\\kappa$-vector space with $$\\dim_{\\kappa}\\Omega_{A/k}\\otimes_A\\kappa=\\dim_{\\mathfrak q}(\\operatorname{Spec}A)$$ [def-kun-topological-dimension-at-point]. (This is the implication (1) $\\Rightarrow$ (3) of the source, which reduces the final assertion to the case where (2) holds.)",
+   "text": "Smoothness gives finite presentation and hence finite type. A field is Noetherian, so A is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Its localization A_q is Noetherian by [lem-weil-pbc-localization-noetherian] and local by [def-weil-pbc-localization-at-prime].",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-smooth-ring-map",
-    "def-weil-pbc-finite-type-algebra",
-    "def-weil-pbc-singular-ideal",
-    "lem-weil-pbc-smooth-over-field-dimension-differentials",
-    "def-weil-pbc-kahler-differentials",
-    "def-kun-topological-dimension-at-point"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), proof lines 38629-38639 ((1) => (3), so (2) holds)"
-   }
-  },
-  {
-   "text": "(The algebraically closed field.) Let $K$ be an algebraic closure of $\\kappa$ [def-weil-algebraic-closure] with its field homomorphism $\\psi:\\kappa\\to K$; $K$ is an algebraically closed field extension of $k$ through $k\\to A\\to\\kappa\\xrightarrow{\\psi}K$ [def-pc-field-extension]. Put $A_K=K\\otimes_kA$, a $K$-algebra through $\\lambda\\mapsto\\lambda\\otimes1$, with $j:A\\to A_K$, $a\\mapsto1\\otimes a$ [lem-weil-pbc-algebra-tensor-pushout-universal-property]. If $a_1,\\dots,a_n$ generate $A$ as a $k$-algebra (step 1), then $1\\otimes a_1,\\dots,1\\otimes a_n$ generate $A_K$ as a $K$-algebra, since $\\lambda\\otimes p(a_1,\\dots,a_n)=\\lambda\\,p(1\\otimes a_1,\\dots,1\\otimes a_n)$ for a polynomial $p$ over $k$ and the $\\lambda\\otimes a$ span $A_K$; so $A_K$ is a finite type $K$-algebra [def-weil-pbc-finite-type-algebra].",
-   "uses": [
-    "def-weil-algebraic-closure",
-    "def-pc-field-extension",
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-pbc-finite-type-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38646-38653"
-   }
-  },
-  {
-   "text": "(The point $\\mathfrak m$ over $\\mathfrak q$.) By [lem-weil-pbc-algebra-tensor-pushout-universal-property] (2), applied to the $k$-algebra maps $\\mathrm{id}_K:K\\to K$ and $A\\to\\kappa\\xrightarrow{\\psi}K$, there is a $k$-algebra map $\\phi:A_K\\to K$ with $\\phi(\\lambda\\otimes a)=\\lambda\\,\\psi(\\bar a)$, $\\bar a$ the image of $a$ in $\\kappa$; it is the composite $A_K\\to K\\otimes_k\\kappa\\xrightarrow{\\mathrm{id}_K\\otimes\\psi}K$ of the source. It is $K$-linear and surjective ($\\phi(\\lambda\\otimes1)=\\lambda$), so $\\mathfrak m=\\ker\\phi$ is a maximal ideal of $A_K$, and the residue field $\\kappa(\\mathfrak m)=(A_K)_{\\mathfrak m}/\\mathfrak m(A_K)_{\\mathfrak m}\\cong A_K/\\mathfrak m$ [def-weil-pbc-localization-at-prime] is identified with $K$ by $\\phi$; in particular the composite $K\\to A_K\\to\\kappa(\\mathfrak m)$ of the structure map with the residue map is an isomorphism of $K$-algebras. Moreover $\\phi(j(a))=\\psi(\\bar a)$ and $\\psi$ is injective, so $j^{-1}(\\mathfrak m)=\\{a:\\bar a=0\\}=\\mathfrak q$: $\\mathfrak m$ lies over $\\mathfrak q$.",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38650-38660"
-   }
-  },
-  {
-   "text": "(Dimensions.) By [lem-weil-pbc-dimension-at-point-field-extension] for $k\\to K$, the finite type $k$-algebra $A$ and the prime $\\mathfrak m$ of $A_K$ lying over $\\mathfrak q$ (step 3), $\\dim_{\\mathfrak q}(\\operatorname{Spec}A)=\\dim_{\\mathfrak m}(\\operatorname{Spec}A_K)$ [def-kun-topological-dimension-at-point]; that node writes $A\\otimes_kK$, and the swap $a\\otimes\\lambda\\mapsto\\lambda\\otimes a$ is an isomorphism of $K$-algebras compatible with the maps from $A$, so it carries the prime over $\\mathfrak q$ to $\\mathfrak m$ and induces a homeomorphism of spectra, which preserves dimensions at corresponding points. By [lem-weil-pbc-closed-point-dimension-local-ring] for the field $K$, the finite type $K$-algebra $A_K$ (step 2) and its maximal ideal $\\mathfrak m$, $\\dim_{\\mathfrak m}(\\operatorname{Spec}A_K)=\\dim((A_K)_{\\mathfrak m})$ [def-weil-pbc-krull-dimension-ring]. Hence, with step 1, $$\\dim((A_K)_{\\mathfrak m})=\\dim_{\\mathfrak q}(\\operatorname{Spec}A)=\\dim_\\kappa\\Omega_{A/k}\\otimes_A\\kappa,$$ a finite number.",
-   "uses": [
-    "lem-weil-pbc-dimension-at-point-field-extension",
-    "def-kun-topological-dimension-at-point",
-    "lem-weil-pbc-closed-point-dimension-local-ring",
-    "def-weil-pbc-krull-dimension-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38661-38665 (citing Lemma 00P4 lemma-dimension-at-a-point-preserved-field-extension and Lemma 00OU lemma-dimension-closed-point-finite-type-field)"
-   }
-  },
-  {
-   "text": "(Differentials.) By [lem-weil-pbc-kahler-differentials-base-change] for $k\\to K$ and $k\\to A$, $\\Omega_{A_K/K}\\cong A_K\\otimes_A\\Omega_{A/k}$ as $A_K$-modules [def-weil-pbc-kahler-differentials]. Tensoring with $\\kappa(\\mathfrak m)=K$ over $A_K$ (step 3) and using associativity, $\\Omega_{A_K/K}\\otimes_{A_K}\\kappa(\\mathfrak m)\\cong\\Omega_{A/k}\\otimes_AK$, where $A$ acts on $K$ through $\\phi\\circ j=\\psi\\circ(A\\to\\kappa)$; since this map factors through $\\kappa$, $\\Omega_{A/k}\\otimes_AK\\cong(\\Omega_{A/k}\\otimes_A\\kappa)\\otimes_\\kappa K$, the extension of scalars along $\\psi$ of the $\\kappa$-vector space $V=\\Omega_{A/k}\\otimes_A\\kappa$. A basis $(e_i)$ of $V$ gives the basis $(e_i\\otimes1)$ of $V\\otimes_\\kappa K$, so $$\\dim_{\\kappa(\\mathfrak m)}\\Omega_{A_K/K}\\otimes_{A_K}\\kappa(\\mathfrak m)=\\dim_\\kappa\\Omega_{A/k}\\otimes_A\\kappa=\\dim((A_K)_{\\mathfrak m})$$ by step 4. (The source first shrinks $A$ to a principal localization on which $\\Omega_{A/k}$ is generated by at most $\\dim_{\\mathfrak q}(\\operatorname{Spec}A)$ elements; only the fibre dimension at $\\mathfrak m$ is used below, and the equality above gives it directly.)",
-   "uses": [
-    "lem-weil-pbc-kahler-differentials-base-change",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38642-38648 and 38666-38670 (citing Lemma 00RV lemma-differentials-base-change)"
-   }
-  },
-  {
-   "text": "(The cotangent space of $(A_K)_{\\mathfrak m}$; the regularity half of Lemma 00TS, (3) $\\Rightarrow$ (1), through Lemma 00TR.) Put $R=(A_K)_{\\mathfrak m}$, $\\mathfrak n=\\mathfrak mR$ its maximal ideal and $\\kappa'=R/\\mathfrak n=\\kappa(\\mathfrak m)$ [def-weil-pbc-localization-at-prime]; $R$ is a $K$-algebra through $K\\to A_K\\to R$, and $K\\to\\kappa'$ is an isomorphism (step 3). A field is Noetherian [def-weil-pbc-noetherian-ring], so $A_K$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] (step 2) and $R$ is a Noetherian local ring by [lem-weil-pbc-localization-noetherian]. (a) By [lem-weil-pbc-jacobi-zariski-differential-maps] for $K\\to R$ and the ideal $\\mathfrak n$, the sequence $\\mathfrak n/\\mathfrak n^2\\xrightarrow{\\delta}\\kappa'\\otimes_R\\Omega_{R/K}\\xrightarrow{w}\\Omega_{\\kappa'/K}\\to0$, $\\delta(a\\bmod\\mathfrak n^2)=1\\otimes\\mathrm da$, is exact. Since $K\\to\\kappa'$ is an isomorphism of $K$-algebras, $\\Omega_{\\kappa'/K}\\cong\\Omega_{K/K}=0$ (for $\\lambda\\in K$, $\\mathrm d\\lambda=\\lambda\\,\\mathrm d1=0$ by the Leibniz rule and $K$-linearity of $\\mathrm d$ [def-weil-pbc-kahler-differentials]), so $\\delta$ is surjective. (b) $\\delta$ is injective. Let $C=R/\\mathfrak n^2$ and $\\pi:C\\to\\kappa'$ the quotient map, a $K$-algebra map with kernel $\\mathfrak n/\\mathfrak n^2$, of square zero. Let $\\sigma:\\kappa'\\to C$ be the composite of the inverse of the isomorphism $K\\to\\kappa'$ with the structure map $K\\to C$; it is a $K$-algebra map with $\\pi\\circ\\sigma=\\mathrm{id}_{\\kappa'}$ (since $K\\to C\\to\\kappa'$ is $K\\to\\kappa'$). By [lem-weil-pbc-square-zero-section-conormal-retraction] for $K$, $C$, $\\pi$, $\\sigma$, the map $\\delta_C:\\mathfrak n/\\mathfrak n^2\\to\\kappa'\\otimes_C\\Omega_{C/K}$, $x\\mapsto1\\otimes\\mathrm dx$, is injective. The quotient map $q:R\\to C$ induces the $\\kappa'$-linear map $q_*:\\kappa'\\otimes_R\\Omega_{R/K}\\to\\kappa'\\otimes_C\\Omega_{C/K}$, $1\\otimes\\mathrm db\\mapsto1\\otimes\\mathrm d(q(b))$ (functoriality of $\\Omega$, [def-weil-pbc-kahler-differentials]), and $q_*\\circ\\delta=\\delta_C$ (both send $a\\bmod\\mathfrak n^2$ to $1\\otimes\\mathrm d(q(a))$). As $\\delta_C$ is injective, so is $\\delta$. Hence $\\delta:\\mathfrak n/\\mathfrak n^2\\to\\kappa'\\otimes_R\\Omega_{R/K}$ is an isomorphism of $\\kappa'$-vector spaces. (In the source, Lemma 00TR proves this for every maximal ideal of a finite type algebra over an algebraically closed field, getting $\\kappa'=K$ from the Nullstellensatz and the injectivity from the split sequence of Lemma 02HP; here $\\kappa'=K$ holds by construction, step 3.)",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-noetherian-ring",
     "lem-weil-pbc-finite-type-algebra-noetherian",
     "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-jacobi-zariski-differential-maps",
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-square-zero-section-conormal-retraction"
+    "def-weil-pbc-localization-at-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00TS (lemma-characterize-smooth-kbar, line 38505), proof line 38525 ((1), (2), (3) equivalent by Lemma 00TR); Lemma Tag 00TR (lemma-rank-omega, line 38475) and its proof (exact sequence of Lemma 00RU lemma-differential-seq, split by Lemma 02HP lemma-differential-seq-split, Omega of kappa(m)/k = 0)"
-   }
+   "elementary": true
   },
   {
-   "text": "($(A_K)_{\\mathfrak m}$ is regular.) By [lem-weil-pbc-kahler-differentials-localization] for $K\\to A_K$ and the multiplicative set $A_K\\setminus\\mathfrak m$, $\\Omega_{R/K}\\cong(\\Omega_{A_K/K})_{\\mathfrak m}=\\Omega_{A_K/K}\\otimes_{A_K}R$ as $R$-modules [def-weil-pbc-module-localization], so $\\kappa'\\otimes_R\\Omega_{R/K}\\cong\\Omega_{A_K/K}\\otimes_{A_K}\\kappa(\\mathfrak m)$ by associativity of the tensor product. By steps 6 and 5, $$\\dim_{\\kappa'}\\mathfrak n/\\mathfrak n^2=\\dim_{\\kappa(\\mathfrak m)}\\Omega_{A_K/K}\\otimes_{A_K}\\kappa(\\mathfrak m)=\\dim R .$$ By [lem-weil-pbc-regular-local-cotangent-dimension] for the Noetherian local ring $R$ (step 6), $R=(A_K)_{\\mathfrak m}$ is a regular local ring [def-weil-regular-scheme].",
+   "text": "Smoothness includes formal smoothness. Localization preserves formal smoothness: compose its square-zero lifting property [lem-weil-pbc-localization-square-zero-lifting] with that for k -> A. In Lean the instance Algebra.FormallySmooth k (Localization q.primeCompl) supplies this composition. For every square-zero ideal J of a k-algebra D and every k-algebra map A_q -> D/J that kills a positive power of the maximal ideal, FormallySmooth.comp_surjective gives a lift A_q -> D. The power condition need not be used, since formal smoothness lifts every such map. This proves [def-weil-pbc-formally-smooth-adic] for the maximal-ideal-adic topology.",
    "uses": [
-    "lem-weil-pbc-kahler-differentials-localization",
-    "def-weil-pbc-module-localization",
-    "lem-weil-pbc-regular-local-cotangent-dimension",
-    "def-weil-regular-scheme"
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-localization-square-zero-lifting",
+    "def-weil-pbc-formally-smooth-adic"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38674-38676 ('we know by Lemma 00TS that the local ring (S_K)_m is regular')"
-   }
+   "elementary": true
   },
   {
-   "text": "(Flat descent of regularity.) By [lem-weil-pbc-field-extension-base-change-faithfully-flat] for $K/k$ and the $k$-algebra $A$, the map $A\\to A\\otimes_kK$ is faithfully flat, in particular flat [def-weil-pbc-faithfully-flat-ring-map]; composing with the swap isomorphism $A\\otimes_kK\\cong K\\otimes_kA$, the map $j:A\\to A_K$ is flat [def-weil-pbc-flat-ring-map]. $A$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] (step 1) and $A_K$ by step 6. By [lem-weil-pbc-flat-local-ring-maps] for $j$, the prime $\\mathfrak m$ and $j^{-1}(\\mathfrak m)=\\mathfrak q$ (step 3), the induced map $A_{\\mathfrak q}\\to(A_K)_{\\mathfrak m}$ is a flat local homomorphism of Noetherian local rings. Since $(A_K)_{\\mathfrak m}$ is a regular local ring (step 7), [lem-weil-pbc-flat-under-regular] gives that $A_{\\mathfrak q}$ is a regular local ring [def-weil-regular-scheme]. As $\\mathfrak q$ was arbitrary, this proves the statement.",
+   "text": "Apply [lem-weil-pbc-fs-adic-field-regular-local] to the Noetherian local k-algebra A_q from step 1 and its adic formal smoothness from step 2. It is a regular local ring. This uses 07EI as a generic tool below the unit level; no realized statement or step of sk-thm-p1 is bypassed.",
    "uses": [
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "def-weil-pbc-faithfully-flat-ring-map",
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-flat-local-ring-maps",
-    "lem-weil-pbc-flat-under-regular",
-    "def-weil-regular-scheme"
+    "lem-weil-pbc-fs-adic-field-regular-local"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), lines 38677-38679 (citing Lemma 00OF lemma-flat-under-regular)"
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07EI (lemma-fs-implies-regular)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-smooth-ring-map",
-  "def-weil-pbc-finite-type-algebra",
-  "def-weil-pbc-singular-ideal",
-  "lem-weil-pbc-smooth-over-field-dimension-differentials",
-  "def-weil-pbc-kahler-differentials",
-  "def-kun-topological-dimension-at-point",
-  "def-weil-algebraic-closure",
-  "def-pc-field-extension",
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "lem-weil-pbc-dimension-at-point-field-extension",
-  "lem-weil-pbc-closed-point-dimension-local-ring",
-  "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-kahler-differentials-base-change",
-  "def-weil-pbc-noetherian-ring",
   "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-jacobi-zariski-differential-maps",
-  "lem-weil-pbc-square-zero-section-conormal-retraction",
-  "lem-weil-pbc-kahler-differentials-localization",
-  "def-weil-pbc-module-localization",
-  "lem-weil-pbc-regular-local-cotangent-dimension",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-  "def-weil-pbc-faithfully-flat-ring-map",
-  "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-flat-local-ring-maps",
-  "lem-weil-pbc-flat-under-regular"
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-square-zero-lifting",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-fs-adic-field-regular-local"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), final assertion and its proof (lines 38629-38639 and 38642-38679), with Lemma Tag 00TS (lemma-characterize-smooth-kbar, line 38505) and Lemma Tag 00TR (lemma-rank-omega, line 38475) for the regularity of (S_K)_m"
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07EI, applied after formal smoothness is localized (Algebra, Tag 04EG) and restricted to continuous square-zero test maps (More on Algebra, Tags 07EB and 07NI). Shorter route written by M3."
  },
  "mathlib_searches": [
   {
@@ -287,5 +179,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T085308-L-26815",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
