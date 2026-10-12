@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-proper-strict-local-arbitrary-geometric-fibre-sections",
+ "kind": "statement",
+ "title": "Proper sections on an arbitrary geometric closed fibre of a strict local base",
+ "statement": "Let $\\Lambda$ be a commutative ring, $R$ a strictly henselian local ring [def-weil-pbc-henselian-terminology], $\\Omega$ an algebraically closed field [def-weil-geometric-point], and $t:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}R$ a morphism sending the unique point to the closed point. Let $p:Z\\to\\operatorname{Spec}R$ be proper [def-weil-pbc-scheme-conventions], let $i:Z_0\\to Z$ and $p_0:Z_0\\to\\operatorname{Spec}\\Omega$ give a cartesian square with $p,t$ [def-weil-pbc-cartesian-square], and let $F$ be a sheaf of $\\Lambda$-modules on $Z_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves]. Then the actual restriction $\\Gamma(Z,F)\\to\\Gamma(Z_0,i^{-1}F)$ defined by the adjunction unit [def-weil-pbc-finite-section-pullback] is an isomorphism. The extension to $\\Omega$ need not be algebraic.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0A0C (lemma-h0-proper-over-henselian-pair), 0A3I (lemma-sections-base-field-extension), and the paragraph before 0A3T (lemma-proper-pushforward-stalk)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-geometric-point",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-finite-section-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Write the ring map of t as φ:R→Ω. The closed-point hypothesis says the inverse image of the zero prime is the maximal ideal of R, hence φ is local. IsLocalRing.ResidueField.lift factors it through κ=R/m. The spectrum of this equality factors t as Spec Ω→Spec κ→Spec R. The Lean proof uses the prime-comap equality and lift_comp_residue.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the henselian-pair section comparison to the maximal ideal of R. This makes restriction to Zκ invertible.",
+   "uses": [
+    "lemma-weil-pbc-etale-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the separably closed field-extension theorem to the underlying set sheaf on Zκ. The canonical module/set inverse-image comparison is invertible and is the adjoint transpose of the forgotten module unit. The homEquiv unit identity identifies the forgotten module restriction with the set restriction followed by this comparison. Thus it is bijective, and ConcreteCategory.isIso_iff_bijective makes the module restriction invertible. Transfer from identity-object sections to the chosen terminal object by naturality and terminalIsoIsTerminal.",
+   "uses": [
+    "lem-weil-pbc-sections-base-field-extension",
+    "lem-sc-etale-module-set-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use pullbackLeftPullbackSndIso to identify the twice-base-changed fibre with the fibre of t, and use sq.isoPullback for the prescribed cartesian model. For each composite restriction, globalSectionsUpperStarMap_comp identifies the map followed by the inverse-image composition isomorphism with the two successive restrictions. Cancel that isomorphism to obtain invertibility of the map in the statement.",
+   "uses": [
+    "lemma-weil-pbc-finite-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-etale-degree-zero",
+  "lem-weil-pbc-sections-base-field-extension",
+  "lem-sc-etale-module-set-pullback-comparison",
+  "lemma-weil-pbc-finite-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0A0C (lemma-h0-proper-over-henselian-pair), 0A3I (lemma-sections-base-field-extension), and the paragraph before 0A3T (lemma-proper-pushforward-stalk)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale sheaf sections proper scheme strictly henselian closed geometric fibre field extension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections of proper scheme over strictly henselian local ring restriction to geometric closed fibre isomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.SpecToEquivOfLocalRing_symm_apply, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe; no matching comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|globalSectionsUpperStarMap|baseChangeMap",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperGeometricPointExchange",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Tags 0A0C (lemma-h0-proper-over-henselian-pair), 0A3I (lemma-sections-base-field-extension), and the paragraph before 0A3T (lemma-proper-pushforward-stalk); strict-local sections and the degree-zero restriction in its stalk argument",
+   "via": [
+    "lem-weil-pbc-proper-geometric-point-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperStrictLocalFibreSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperStrictLocalFibreSections.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_strictLocal_geometricClosedPoint",
+  "statement": "theorem isIso_globalSectionsUpperStarMap_of_strictLocal_geometricClosedPoint (Λ : Type (u + 1)) [CommRing Λ] (R : Type u) [CommRing R] [IsStrictlyHenselianLocalRing R] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {Z Z₀ : Scheme.{u}} {p : Z ⟶ Spec (.of R)} [IsProper p] {i : Z₀ ⟶ Z} {p₀ : Z₀ ⟶ Spec (.of Ω)} (t : Spec (.of Ω) ⟶ Spec (.of R)) (ht : t default = IsLocalRing.closedPoint R) (sq : IsPullback i p₀ p t) (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T135227-L-1659365",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T135227-L-1659365",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
