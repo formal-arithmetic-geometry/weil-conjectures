@@ -7775,3 +7775,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/D2/Sheaf.AlgebraicGeometry.DirectImageTruncationTailBound (stage 3; reviewer PASS; first push; landing 20261012T135224-L-1658326 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/D2/Sheaf.AlgebraicGeometry.SupportedQCohTriangulated (stage 3; reviewer PASS; after a return; landing 20261012T135224-L-1658455 (proof); batch 20261012T135212; modules 1; new nodes 3; change records: coord/changes/supportedProperty.md)
 - 13:52 L: merged deliver/D2/Sheaf.AlgebraicGeometry.ThickeningIntegral (stage 3; reviewer PASS; first push; landing 20261012T135224-L-1658556 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:52 L: merged deliver/D2/Sheaf.RingTheory.DesingularizeStrictlyStandard (stage 3; reviewer PASS; first push; landing 20261012T135225-L-1658655 (interface); batch 20261012T135212; modules 3; new nodes 2)

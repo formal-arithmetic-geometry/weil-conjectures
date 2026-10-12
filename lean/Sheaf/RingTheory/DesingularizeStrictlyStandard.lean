@@ -9,9 +9,8 @@ public import Sheaf.RingTheory.StrictlyStandardElement
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
-import Sheaf.RingTheory.PopescuDesingularize
-import Sheaf.RingTheory.StrictlyStandardBaseChange
+import Sheaf.RingTheory.DesingularizeAnnihilatorConstruction
+import Sheaf.RingTheory.SingularIdealsOfAnnihilatorBound
 
 /-!
 # Desingularization along a strictly standard element
@@ -76,6 +75,16 @@ theorem exists_desingularization_strictlyStandard
         Ideal.map dB.toRingHom (singularIdeal R D) ≤
           @singularIdeal D B _ _ dB.toRingHom.toAlgebra ∧
         Ideal.map dB.toRingHom (singularIdeal R D) ≤ singularIdeal R B := by
-  sorry
+  obtain ⟨B, instB, instRB, β, aB, dB, hfp, ha, hd, hbound⟩ :=
+    exists_desingularization_annihilator_bound R Λ A D π α δ hΛ hstandard hquot
+  let : CommRing B := instB
+  let : Algebra R B := instRB
+  let : Algebra D B := dB.toRingHom.toAlgebra
+  have : IsScalarTower R D B := IsScalarTower.of_algHom dB
+  have : FinitePresentation D B := hfp
+  have : FinitePresentation R B := FinitePresentation.trans R D B
+  obtain ⟨hrelative, habsolute⟩ :=
+    singularIdeals_of_annihilator_bound R D B dB hfp π hR hbound
+  exact ⟨B, instB, instRB, inferInstance, β, aB, dB, ha, hd, hrelative, habsolute⟩
 
 end Algebra
