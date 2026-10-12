@@ -88,3 +88,41 @@ noncomputable def sectionsToKaehler (m : Γ(g.relativeDifferentials, U)) :
       (g.relativeDifferentials.presheaf.map (homOfLE hU.image_fromSpec_top.le).op m))
 
 end AlgebraicGeometry.Scheme.Hom
+
+namespace AlgebraicGeometry.Scheme.Hom
+
+variable {X : Scheme.{u}} {R : Type u} [CommRing R] (g : X ⟶ Spec (.of R)) (U : X.Opens)
+  [Algebra R Γ(X, U)]
+
+
+/-- The universal derivation `d : Γ(X, U) → Γ(Ω¹_{X/R}, U)` as an `R`-derivation, for any
+`R`-algebra structure on `Γ(X, U)` given by the structure map and any compatible `R`-module
+structure on `Γ(Ω¹_{X/R}, U)`. -/
+noncomputable def sectionsDerivation
+    (h : algebraMap R Γ(X, U) = (g.specStructureMap U).hom) [Module R Γ(g.relativeDifferentials, U)]
+    [IsScalarTower R Γ(X, U) Γ(g.relativeDifferentials, U)] :
+    Derivation R Γ(X, U) Γ(g.relativeDifferentials, U) :=
+  sorry
+
+@[simp]
+lemma sectionsDerivation_apply
+    (h : algebraMap R Γ(X, U) = (g.specStructureMap U).hom) [Module R Γ(g.relativeDifferentials, U)]
+    [IsScalarTower R Γ(X, U) Γ(g.relativeDifferentials, U)] (b : Γ(X, U)) :
+    g.sectionsDerivation U h b = g.sectionsD U b :=
+  sorry
+
+/-- **Sections of the sheaf of differentials over an affine open.** For an affine open `U` of a
+scheme `X` over `Spec R`, the `Γ(X, U)`-linear map `Ω[Γ(X, U)⁄R] → Γ(Ω¹_{X/R}, U)`,
+`D b ↦ d b`, is an isomorphism. -/
+noncomputable def kaehlerSectionsEquiv
+    (h : algebraMap R Γ(X, U) = (g.specStructureMap U).hom) (hU : IsAffineOpen U) :
+    Ω[Γ(X, U)⁄R] ≃ₗ[Γ(X, U)] Γ(g.relativeDifferentials, U) :=
+  sorry
+
+@[simp]
+lemma kaehlerSectionsEquiv_D
+    (h : algebraMap R Γ(X, U) = (g.specStructureMap U).hom) (hU : IsAffineOpen U) (b : Γ(X, U)) :
+    g.kaehlerSectionsEquiv U h hU (KaehlerDifferential.D R Γ(X, U) b) = g.sectionsD U b :=
+  sorry
+
+end AlgebraicGeometry.Scheme.Hom

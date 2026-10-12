@@ -141,7 +141,9 @@ public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Curve.SeparatingFunction
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
+public import WeilConjectures.AlgebraicGeometry.Curve.SmoothSections
 public import WeilConjectures.AlgebraicGeometry.Curve.TracePairing
+public import WeilConjectures.AlgebraicGeometry.Curve.TraceSections
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.AlgebraicGeometry.DensePoints
 public import WeilConjectures.AlgebraicGeometry.Descent
@@ -308,6 +310,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackSections
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHom
+public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHomAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
@@ -405,6 +408,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Duality
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineChartBasis
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferentials
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineGeometricallyIrreducible
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
