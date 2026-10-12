@@ -14,16 +14,25 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine chart around x, then a principal open contained in V; express its defining tensor using finitely many coefficients and descend the principal open to the corresponding finitely generated subalgebra.",
+   "text": "Let I be the finitely generated k-subalgebras of A, ordered by inclusion. Bottom makes I nonempty and the supremum of two finitely generated subalgebras gives directedness. The already proved CommRingCat.isColimitFGSubalgebraCocone exhibits A as their filtered colimit. Applying the right adjoint Spec gives a limit cone c with point Spec A. Form the diagram E of pullbacks X_B and the cone e with point X_A and legs canonicalProjection. Verify its naturality on the two pullback projections using c.w. The pullback squares isPullback_baseChangeMap and the connected-limit theorem isLimitOfIsPullbackOfIsConnected show e is limiting. Every transition is affine because it is a base change of a map between affine spectra. All diagram data and commuting equations are constructed directly in the Lean proof.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose an affine open U in X_A containing x and contained in V by exists_isAffineOpen_mem_and_subset. It is compact. Apply Mathlib exists_preimage_eq (the compact-open descent clause of pqf-lem-limit-qc-open-descends, whose Mathlib form only needs a cofiltered index and affine transitions) to E, e, and U. Obtain a stage B and compact open W with canonicalProjection inverse image equal to U. Rewrite this equality to obtain point membership and containment in V. No compactness or quasi-separatedness of X or of the stages is assumed.",
+   "uses": [
+    "pqf-lem-limit-qc-open-descends"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "pqf-lem-limit-qc-open-descends"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties, Tag 0388, lines 811--848"
+  "document": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/Connected.lean; WeilConjectures/Mathlib/Algebra/Category/Ring/FilteredColimits.lean",
+  "place": "exists_preimage_eq (Stacks 01Z4(1)); isLimitOfIsPullbackOfIsConnected; isColimitFGSubalgebraCocone. Direct inverse-limit proof written by N3 replacing the coefficient plan of Stacks 0388."
  },
  "mathlib_searches": [
   {
@@ -104,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T160134-L-2563289",
-  "kind": "interface",
+  "landing": "20261012T165526-L-2937839",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
