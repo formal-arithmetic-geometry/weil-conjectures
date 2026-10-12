@@ -1,0 +1,96 @@
+{
+ "id": "lem-sc-central-simple-tensor-end-injective",
+ "kind": "lemma",
+ "title": "Injectivity of canonical enveloping map",
+ "statement": "Let $K$ be a field and $A$ a finite-dimensional nonzero associative unital central simple $K$-algebra. The canonical unital $K$-algebra homomorphism $A \\otimes_K A^{\\mathrm{op}} \\to \\operatorname{End}_K(A)$, sending $a \\otimes b^{\\mathrm{op}}$ to the linear map $v \\mapsto avb$, is injective.",
+ "source": {
+  "document": "Stacks Project, Brauer groups",
+  "place": "Tag 074I, Lemma 11.4.10, injectivity argument; tensor simplicity in Tag 074G, Lemma 11.4.8"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The opposite algebra is finite-dimensional central simple. By the tensor simplicity result of Stacks Tag 074G, the enveloping algebra A tensor A^op is simple. The kernel of its unital homomorphism to End_K(A) is a two-sided ideal, hence either zero or the whole algebra. It is not the whole algebra because one maps to the identity endomorphism, which is nonzero: its value at one is one in the nonzero algebra A. The kernel is therefore zero; subtracting two elements with equal image gives their equality. This argument proves injectivity without the dimension-comparison step of the parent node.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Brauer groups",
+  "place": "Tag 074I, Lemma 11.4.10, injectivity argument; tensor simplicity in Tag 074G, Lemma 11.4.8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical homomorphism from a central simple algebra tensor its opposite to its linear endomorphisms is injective",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "central simple algebra enveloping action faithful tensor opposite",
+   "results": "CSA definitions, Azumaya implies centrality, and centrality descent for tensor products; no injectivity theorem under the CSA hypotheses.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mulLeftRight|tensorProduct_of_isCentral|IsSimpleRing",
+   "results": "Azumaya bijectivity assumes IsAzumaya, which is not supplied by CSA. Matrix-specific inverses require a matrix algebra. Additional rg on the project found only the parent hole and a field-extension tensor simplicity theorem requiring a commutative field factor, not A^op.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.CentralSimpleTensorEnd",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-central-simple-tensor-end",
+   "place": "decomposition of canonical enveloping map proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.CentralSimpleTensorInjective",
+  "file": "lean/Sheaf/FieldTheory/CentralSimpleTensorInjective.lean",
+  "declaration": "Field.centralSimple_mulLeftRight_injective",
+  "statement": "theorem centralSimple_mulLeftRight_injective (K : Type u) [Field K] (A : CSA.{u, u} K) :\n    Function.Injective (AlgHom.mulLeftRight K A)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T173856-L-3303458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T173856-L-3303458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

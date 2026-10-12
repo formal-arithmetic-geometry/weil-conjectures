@@ -7,6 +7,11 @@ module
 
 public import Mathlib.Algebra.BrauerGroup.Defs
 public import Mathlib.Algebra.Azumaya.Defs
+import Sheaf.FieldTheory.CentralSimpleTensorInjective
+import Mathlib.LinearAlgebra.Basis.MulOpposite
+import Mathlib.RingTheory.TensorProduct.Finite
+import Mathlib.LinearAlgebra.FreeModule.Finite.Matrix
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # The enveloping algebra of a central simple algebra
@@ -34,6 +39,11 @@ surjective. This proves bijectivity of the explicitly constructed map.
 Source: Stacks Project, Tag 074I, Lemma 11.4.10.
 (blueprint: lem-sc-central-simple-tensor-end). -/
 theorem centralSimple_mulLeftRight_bijective (K : Type u) [Field K] (A : CSA.{u, u} K) :
-    Function.Bijective (AlgHom.mulLeftRight K A) := by sorry
+    Function.Bijective (AlgHom.mulLeftRight K A) := by
+  have hi := centralSimple_mulLeftRight_injective K A
+  refine ⟨hi, ?_⟩
+  apply (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
+    (f := (AlgHom.mulLeftRight K A).toLinearMap) ?_).mp hi
+  rw [Module.finrank_tensorProduct, Module.finrank_linearMap, MulOpposite.finrank]
 
 end Field
