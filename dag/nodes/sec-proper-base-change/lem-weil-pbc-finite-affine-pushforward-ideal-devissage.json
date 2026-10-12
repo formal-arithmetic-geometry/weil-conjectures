@@ -1,0 +1,191 @@
+{
+ "id": "lem-weil-pbc-finite-affine-pushforward-ideal-devissage",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Noetherian affine-image case (01YQ), steps 5 and 6 of lem-weil-pbc-finite-surjective-affine-target-noetherian",
+   "via": [
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ideal products in finite pushforwards from affine schemes supply acyclic coherent devissage subobjects",
+ "statement": "Let $f:Y\\to X$ be a finite morphism of schemes [def-pc-scheme, def-weil-finite-integral-morphism], with $Y$ affine [def-pc-scheme] and $X$ locally Noetherian [pqf-def-locnoeth]. Let $F$ be a coherent $\\mathcal O_Y$-module [pqf-def-coherent, def-weil-sheaf-of-modules-category], $x\\in X$, and $\\iota:J\\hookrightarrow\\mathcal O_X$ a quasi-coherent ideal inclusion [pqf-def-coherent]. Assume its stalk map at $x$ is surjective [def-weil-pbc-module-stalk]. Put $G=f_*F$ [def-pc-module-pullback] and $JG=\\operatorname{im}(J\\otimes G\\to G)$ [lem-weil-pbc-ideal-module-product-stalk]. There is a subobject $Gprime\\subseteq G$ which is coherent, whose inclusion factors through $JG\\hookrightarrow G$, whose stalk inclusion at $x$ is surjective, and for which $H^1(X,Gprime)=0$ [pqf-def-cohomology]. No surjectivity of $f$, support condition, generic-point condition, or quasi-compactness of $X$ is needed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "A finite morphism is locally of finite type, so Y is locally Noetherian. The coherent F is quasi-coherent of finite type; G = f_*F is coherent and hence quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-finite-iff-integral-lft",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
+   }
+  },
+  {
+   "text": "Construct K = JG as the image of multiplication. The tensor product of J and G is quasi-coherent, and so is its image K. As a quasi-coherent submodule of coherent G, K is coherent. Take Gprime = Subobject.mk of its monic inclusion. Its canonical underlying isomorphism identifies it with K, transports coherence, and supplies the factorization of its arrow through K.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
+   }
+  },
+  {
+   "text": "The range of K_x to G_x is the ideal J_x times the whole module G_x. Since the inclusion J_x to O_X,x is surjective, its ideal image is the unit ideal. Thus K_x to G_x is surjective, and so is the stalk map of Gprime.arrow after the underlying isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
+   }
+  },
+  {
+   "text": "Since f is affine and F and J are quasi-coherent, the affine ideal projection formula gives quasi-coherent L = (f^*J)F and identifies the subobjects K and f_*L in G. Direct image preserves monomorphisms; the image-of-monomorphism isomorphisms and Subobject.isoOfMkEqMk identify K with f_*L.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-pushforward-ideal-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
+   }
+  },
+  {
+   "text": "The affine-morphism edge map identifies the additive groups of H^1(X,f_*L) and H^1(Y,L). The latter is zero: use the proved affine-scheme vanishing for Scheme.Modules.H and the module/abelian-cohomology comparison (identifying terminal-open Ext with Ext from the constant integer sheaf). Thus H^1(X,f_*L) is zero as a module. Apply the cohomology functor to the isomorphisms from the preceding steps and transport IsZero to Gprime.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-pc-affine-vanishing",
+    "lem-sc-module-abelian-zariski-cohomology",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-iff-integral-lft",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-pushforward-ideal-product",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-affine-vanishing",
+  "lem-sc-module-abelian-zariski-cohomology",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent finite pushforward affine scheme ideal product cohomology vanishing",
+   "results": "Service unavailable: Internal Server Error (0 hits); not a no-match verdict.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf pushed forward along a finite morphism from an affine scheme has vanishing first cohomology after multiplying by a quasi coherent ideal",
+   "results": "Eight hits: affine-transition-limit section vanishing, Scheme.Modules.instAbelian, finite_app, IsFiniteType; none is an ideal-product cohomology result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero, AlgebraicGeometry.IsFinite",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "idealModuleProduct",
+   "results": "0 Mathlib hits; local rg finds the construction, stalk calculation and affine projection formula, but no combined devissage witness theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetNoetherian",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffinePushforwardIdealDevissage",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffinePushforwardIdealDevissage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_affine_pushforward_ideal_devissage",
+  "statement": "theorem finite_affine_pushforward_ideal_devissage\n    {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [IsAffine Y]\n    [IsLocallyNoetherian X] (F : Y.Modules)\n    (hF : RingedSpace.IsCoherent Y.toRingedSpace F) (x : X)\n    {J : X.Modules} (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf)\n    [Mono ι] [J.IsQuasicoherent]\n    (hι : Function.Surjective\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom) :\n    ∃ G' : Subobject ((pushforward f).obj F),\n      RingedSpace.IsCoherent X.toRingedSpace (G' : X.Modules) ∧\n      (∃ h : (G' : X.Modules) ⟶ idealModuleProduct ι ((pushforward f).obj F),\n        G'.arrow = h ≫ idealModuleProductι ι ((pushforward f).obj F)) ∧\n      Function.Surjective\n        ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map G'.arrow).hom ∧\n      IsZero ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj\n        (G' : X.Modules))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T110306-L-616951",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T110306-L-616951",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

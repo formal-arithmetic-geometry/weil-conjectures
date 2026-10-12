@@ -8,17 +8,14 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import Sheaf.AlgebraicGeometry.AffinePushforwardIdealProduct
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
+import Sheaf.AlgebraicGeometry.FiniteAffinePushforwardIdealDevissage
 import Sheaf.AlgebraicGeometry.CoherentPropertyDevissageIntegralSubschemes
-import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
-import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.SerreCriterionAffineness
 import Sheaf.Paper.FiniteSurjectiveCoherentGenericSupport
+import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
+import Sheaf.AlgebraicGeometry.SerreCriterionAffineness
 import Sheaf.Paper.PQFCohomology
 
 /-!
@@ -40,42 +37,105 @@ namespace AlgebraicGeometry
 morphism from an affine scheme is affine. Source: Stacks Project, Lemma 01YQ.
 (blueprint: lem-weil-pbc-finite-surjective-affine-target-noetherian).
 
-Proof (the node's eight steps):
-1. Finiteness makes f affine and locally of finite type, so Y is locally Noetherian.
-   Coherent modules on X and Y are quasi-coherent of finite type
-   [def-weil-finite-integral-morphism, lem-weil-pbc-finite-iff-integral-lft,
-   pqf-lem-locnoeth-lft, pqf-lem-coherent-ft-locnoeth].
-2. For coherent F on X, let P(F) mean H¹(X,F) = 0. The zero module satisfies P.
-   The long exact sequence makes P stable under extensions
-   [pqf-def-cohomology, lem-weil-pbc-coherent-property-devissage-integral-subschemes].
-3. If P holds for a positive finite direct sum of F, inclusion and projection of its
-   first summand give a retraction on H¹, proving P(F) [pqf-def-cohomology].
-4. For an integral closed subscheme Z with generic point ξ, choose a coherent F on Y
-   whose pushforward has support Z and whose stalk at ξ is annihilated by m_ξ.
-   Its pushforward G is coherent and supplies devissage conditions (3)(a),(b)
-   [lem-weil-pbc-finite-surjective-coherent-generic-support,
-   lem-weil-pbc-finite-pushforward-coherent,
-   lem-weil-pbc-coherent-property-devissage-integral-subschemes].
-5. For a quasi-coherent ideal J with J_ξ = O_X,ξ, the submodule G' = JG is
-   quasi-coherent, hence coherent, and G'_ξ = G_ξ
-   [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections,
-   lem-weil-pbc-coherent-kernel-cokernel-locnoeth,
-   lem-weil-pbc-ideal-module-product-stalk].
-6. The projection formula identifies G' with f_*(f⁻¹J F), with f⁻¹J F quasi-coherent.
-   Affine-morphism cohomology comparison and affine vanishing on Y give H¹(X,G') = 0,
-   establishing devissage condition (3)(c)
-   [lem-weil-pbc-affine-pushforward-ideal-product,
-   lem-weil-pbc-affine-morphism-cohomology-edge, pqf-lem-affine-vanishing,
-   lem-weil-pbc-coherent-property-devissage-integral-subschemes].
-7. Devissage gives H¹(X,F) = 0 for every coherent F
+Proof:
+1. Set P(F) to H¹(X,F) = 0. The recorded cohomological delta-functor makes
+   degree-one cohomology additive and exact in the middle of a short exact sequence.
+   Hence P holds for zero and is stable under extensions [pqf-def-cohomology].
+2. Inclusion and projection of the zeroth summand of a positive finite biproduct
+   give a retraction. Applying cohomology shows that P of the biproduct implies P(F).
+3. For an integral closed subscheme with generic point ξ, choose coherent F on Y
+   with the required pushforward support and generic annihilator
+   [lem-weil-pbc-finite-surjective-coherent-generic-support]. Finite pushforward
+   coherence makes G = f_*F coherent [lem-weil-pbc-finite-pushforward-coherent].
+   The ideal-product lemma supplies the coherent, generically full, acyclic subobject
+   [lem-weil-pbc-finite-affine-pushforward-ideal-devissage].
+4. Apply coherent devissage to obtain P for every coherent module
    [lem-weil-pbc-coherent-property-devissage-integral-subschemes].
-8. X is quasi-separated because it is locally Noetherian. Quasi-coherent ideals
-   of finite type are coherent, so step 7 and Serre's criterion imply X affine
-   [lem-weil-pbc-locally-noetherian-quasi-separated, pqf-lem-coherent-ft-locnoeth,
-   pqf-lem-serre-criterion]. -/
+5. A finite-type ideal module is quasi-coherent: it is the kernel of the map from
+   the structure module to the closed-subscheme structure-module pushforward
+   [lem-pc-closed-immersion-coherent-cohomology,
+   lem-weil-pbc-quasi-coherent-module-kernel]. It is therefore coherent on locally
+   Noetherian X [pqf-lem-coherent-ft-locnoeth]. Noetherian X is compact and
+   quasi-separated [lem-weil-pbc-locally-noetherian-quasi-separated], so its ideal
+   H¹ vanishing implies affineness [pqf-lem-serre-criterion]. -/
 theorem isAffine_of_isFinite_surjective_of_isNoetherian
     {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [Surjective f] [IsAffine Y]
-    [IsNoetherian X] : IsAffine X := by
-  sorry
+    [IsNoetherian X] : IsAffine X :=
+  open CategoryTheory.Limits ZeroObject in by
+  classical
+  let : Zero X.Modules := HasZeroObject.zero' X.Modules
+  let H := RingedSpace.moduleCohomology X.toRingedSpace 1
+  let P : X.Modules → Prop := fun F ↦ IsZero (H.obj F)
+  obtain ⟨D, hD⟩ := (sheafCohomologyAndHigherDirectImages.{u, u, u} X).1
+  have hadd : H.Additive := by
+    simpa only [H, hD] using D.additive 1
+  let := hadd
+  have hzero : P (0 : X.Modules) := H.map_isZero (isZero_zero _)
+  have hext : ∀ (S : ShortComplex X.Modules), S.ShortExact →
+      RingedSpace.IsCoherent X.toRingedSpace S.X₁ →
+      RingedSpace.IsCoherent X.toRingedSpace S.X₂ →
+      RingedSpace.IsCoherent X.toRingedSpace S.X₃ →
+      P S.X₁ → P S.X₃ → P S.X₂ := by
+    intro S hS _ _ _ h₁ h₃
+    obtain ⟨w, hw⟩ := D.exact_middle S hS 1
+    have hz := hw.isZero_of_both_isZero
+    dsimp only [ShortComplex.mk, ShortComplex.X₁, ShortComplex.X₂, ShortComplex.X₃] at hz
+    rw [hD] at hz
+    exact hz h₁ h₃
+  have hsum : ∀ (F : X.Modules) (r : ℕ),
+      RingedSpace.IsCoherent X.toRingedSpace F → 1 ≤ r →
+      P (@biproduct (Fin r) X.Modules _ _ (fun _ : Fin r ↦ F)
+        (HasBiproduct.of_hasProduct (fun _ : Fin r ↦ F))) → P F := by
+    intro F r _ hr hF
+    let : HasBiproduct (fun _ : Fin r ↦ F) := HasBiproduct.of_hasProduct _
+    let j : Fin r := ⟨0, hr⟩
+    apply (IsZero.iff_id_eq_zero _).mpr
+    calc
+      𝟙 (H.obj F) = H.map (biproduct.ι (fun _ : Fin r ↦ F) j) ≫
+          H.map (biproduct.π (fun _ : Fin r ↦ F) j) := by
+        rw [← H.map_comp, biproduct.ι_π_self, H.map_id]
+      _ = 0 := by rw [hF.eq_of_tgt (H.map (biproduct.ι (fun _ : Fin r ↦ F) j)) 0,
+        zero_comp]
+  have hintegral : ∀ (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i]
+      [IsIntegral Z] (ξ : X)
+      (hclosure : closure ({ξ} : Set X) = Set.range i.base),
+      ∃ G : X.Modules,
+        RingedSpace.IsCoherent X.toRingedSpace G ∧
+        ({x : X | ¬ Subsingleton (G.presheaf.stalk x)} = Set.range i.base) ∧
+        (∀ g : X.presheaf.stalk ξ, ∀ m : (RingedSpace.moduleStalkFunctor
+          X.toRingedSpace ξ).obj G, g ∈ IsLocalRing.maximalIdeal _ → g • m = 0) ∧
+        ∀ (J : X.Modules) (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf)
+          [Mono ι] [J.IsQuasicoherent],
+          Function.Surjective
+            ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map ι).hom →
+          ∃ G' : Subobject G,
+            RingedSpace.IsCoherent X.toRingedSpace (G' : X.Modules) ∧
+            (∃ h : (G' : X.Modules) ⟶ Scheme.idealModuleProduct ι G,
+              G'.arrow = h ≫ Scheme.idealModuleProductι ι G) ∧
+            Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map
+              G'.arrow).hom ∧ P (G' : X.Modules) := by
+    intro Z i _ _ ξ hclosure
+    obtain ⟨F, hF, hsupp, hann⟩ := Scheme.exists_coherent_pushforward_support_eq_range
+      f i ξ hclosure
+    refine ⟨(Scheme.Modules.pushforward f).obj F,
+      (Scheme.Modules.isCoherent_pushforward_of_isFinite f F hF).1,
+      hsupp, fun g m hg ↦ hann g hg m, ?_⟩
+    intro J ι _ _ hι
+    exact Scheme.Modules.finite_affine_pushforward_ideal_devissage f F hF ξ ι hι
+  have hall := Scheme.Modules.coherent_property_devissage_integral_subschemes
+    X P hzero hext hsum hintegral
+  apply Scheme.isAffine_of_finiteType_ideal_h1_zero X
+  intro I hI
+  have hq : I.toModules.IsQuasicoherent := by
+    have := SheafOfModules.isQuasicoherent_unit (R := I.subscheme.ringCatSheaf)
+    have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+    have hp := Scheme.Modules.isQuasicoherent_pushforward_of_isClosedImmersion I.subschemeι
+      (SheafOfModules.unit I.subscheme.ringCatSheaf)
+    have : ((SheafOfModules.pushforward I.subschemeι.toRingCatSheafHom).obj
+        (SheafOfModules.unit I.subscheme.ringCatSheaf)).IsQuasicoherent := hp
+    exact Scheme.Modules.isQuasicoherent_kernel I.toPushforwardSubscheme
+  exact hall I.toModules
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X I.toModules).mpr
+      ⟨hq, hI⟩)
 
 end AlgebraicGeometry

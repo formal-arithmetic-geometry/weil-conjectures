@@ -33,129 +33,84 @@
  ],
  "proof": [
   {
-   "text": "(Preliminaries.) $f$ is finite, so it is affine [def-weil-finite-integral-morphism] and locally of finite type [lem-weil-pbc-finite-iff-integral-lft]; as $X$ is locally Noetherian, so is $Y$ [pqf-lem-locnoeth-lft]. On the locally Noetherian schemes $X$ and $Y$ a module is coherent iff it is quasi-coherent of finite type [pqf-lem-coherent-ft-locnoeth]; in particular every coherent $\\mathcal O_X$- or $\\mathcal O_Y$-module is quasi-coherent.",
+   "text": "Define H = moduleCohomology X 1 and P(F) = IsZero(H.obj F). Obtain the cohomological delta-functor from sheafCohomologyAndHigherDirectImages. Its degree-one functor is additive, so it sends the zero module to zero. For a short exact complex use exact_middle in degree one and ShortComplex.Exact.isZero_of_both_isZero to prove extension stability.",
    "uses": [
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-finite-iff-integral-lft",
-    "pqf-lem-locnoeth-lft",
-    "pqf-lem-coherent-ft-locnoeth"
+    "pqf-def-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian, coherent.tex line 3557), proof; Stacks uses 'a finite morphism is affine' and the coherence/quasi-coherence of the sheaves without comment (the local Noetherianity of Y is in the proof of 01YO)"
+    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
    }
   },
   {
-   "text": "(The property; hypothesis (1).) For a coherent $\\mathcal O_X$-module $\\mathcal F$ let $\\mathcal P(\\mathcal F)$ mean $H^1(X,\\mathcal F)=0$, cohomology as in [pqf-def-cohomology]. We verify hypotheses (0), (1), (2), (3) of [lem-weil-pbc-coherent-property-devissage-integral-subschemes] for $\\mathcal P$. (0): $H^1(X,0)=0$, since the zero module has the zero injective resolution [pqf-def-cohomology]. (1): a short exact sequence $0\\to\\mathcal F_1\\to\\mathcal F\\to\\mathcal F_2\\to0$ of coherent $\\mathcal O_X$-modules gives the long exact cohomology sequence [pqf-def-cohomology], whose part $H^1(X,\\mathcal F_1)\\to H^1(X,\\mathcal F)\\to H^1(X,\\mathcal F_2)$ is exact; if the outer terms are $0$, so is $H^1(X,\\mathcal F)$.",
-   "uses": [
-    "pqf-def-cohomology",
-    "lem-weil-pbc-coherent-property-devissage-integral-subschemes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian, coherent.tex line 3557), proof, second paragraph ('Property (1) follows from the long exact cohomology sequence')"
-   }
-  },
-  {
-   "text": "(Hypothesis (2).) Let $\\mathcal F$ be coherent with $H^1(X,\\mathcal F^{\\oplus r})=0$, $r\\ge1$. The inclusion $\\iota:\\mathcal F\\to\\mathcal F^{\\oplus r}$ of the first summand and the projection $\\pi:\\mathcal F^{\\oplus r}\\to\\mathcal F$ onto it satisfy $\\pi\\circ\\iota=\\mathrm{id}_{\\mathcal F}$. Since $H^1(X,-)$ is a functor [pqf-def-cohomology], $H^1(\\pi)\\circ H^1(\\iota)=\\mathrm{id}_{H^1(X,\\mathcal F)}$, so the identity of $H^1(X,\\mathcal F)$ factors through $H^1(X,\\mathcal F^{\\oplus r})=0$, and $H^1(X,\\mathcal F)=0$.",
+   "text": "For r >= 1 choose the zeroth element of Fin r. The inclusion and projection of that summand compose to the identity. Apply H.map_comp and H.map_id; if H of the biproduct is zero, H of the inclusion is zero, hence the identity on H(F) is zero. Thus P(F).",
    "uses": [
     "pqf-def-cohomology"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian, coherent.tex line 3557), proof, second paragraph ('Property (2) follows since H^1(X,-) is an additive functor'; written here with a retraction, which needs only functoriality)"
+    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
    }
   },
   {
-   "text": "(Hypothesis (3), the sheaf $\\mathcal G$, (a) and (b).) Let $i:Z\\to X$ be a closed immersion with $Z$ integral and $\\xi\\in X$ with $\\overline{\\{\\xi\\}}=i(Z)$. As $f$ is finite and surjective and $X$ is locally Noetherian, [lem-weil-pbc-finite-surjective-coherent-generic-support] gives a coherent $\\mathcal O_Y$-module $\\mathcal F$ with $\\operatorname{Supp}(f_*\\mathcal F)=i(Z)$ and $\\mathfrak m_\\xi(f_*\\mathcal F)_\\xi=0$. Put $\\mathcal G=f_*\\mathcal F$; it is a coherent $\\mathcal O_X$-module [lem-weil-pbc-finite-pushforward-coherent] ($f$ finite, $X$ locally Noetherian), and it satisfies (a) and (b) of [lem-weil-pbc-coherent-property-devissage-integral-subschemes](3).",
+   "text": "For each integral closed subscheme and its generic point, exists_coherent_pushforward_support_eq_range gives F on Y with the prescribed support and annihilator for G = f_*F. Finite pushforward coherence supplies coherence of G. Apply finite_affine_pushforward_ideal_devissage to each monic quasi-coherent ideal inclusion with surjective generic stalk, obtaining precisely condition (3)(c).",
    "uses": [
     "lem-weil-pbc-finite-surjective-coherent-generic-support",
     "lem-weil-pbc-finite-pushforward-coherent",
-    "lem-weil-pbc-coherent-property-devissage-integral-subschemes"
+    "lem-weil-pbc-finite-affine-pushforward-ideal-devissage"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian, coherent.tex line 3557), proof, third paragraph (Stacks does not say that G = f_*F is coherent, which the devissage lemma requires; it is Lemma 01Y6)"
+    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
    }
   },
   {
-   "text": "(Hypothesis (3)(c): the subsheaf $\\mathcal G'$.) Let $\\mathcal J\\subseteq\\mathcal O_X$ be a quasi-coherent sheaf of ideals with $\\mathcal J_\\xi=\\mathcal O_{X,\\xi}$, and put $\\mathcal G'=\\mathcal J\\mathcal G\\subseteq\\mathcal G$, the image of $\\mathcal J\\otimes_{\\mathcal O_X}\\mathcal G\\to\\mathcal G$. Since $\\mathcal G$ is quasi-coherent (step 1), $\\mathcal G'$ is a quasi-coherent sub-$\\mathcal O_X$-module of $\\mathcal G$ [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections](1), hence coherent, being a quasi-coherent submodule of the coherent $\\mathcal G$ on the locally Noetherian $X$ [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2). Its stalk is $\\mathcal G'_\\xi=\\mathcal J_\\xi\\mathcal G_\\xi=\\mathcal O_{X,\\xi}\\mathcal G_\\xi=\\mathcal G_\\xi$ as submodules of $\\mathcal G_\\xi$ [lem-weil-pbc-ideal-module-product-stalk](1),(2). It remains to show $\\mathcal P(\\mathcal G')$, i.e. $H^1(X,\\mathcal G')=0$.",
-   "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-ideal-module-product-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian, coherent.tex line 3557), proof, third paragraph ('the quasi-coherent subsheaf G' = JG satisfies P'; Stacks does not write out the coherence of G' or the equality of stalks G'_xi = G_xi)"
-   }
-  },
-  {
-   "text": "(Hypothesis (3)(c): $H^1(X,\\mathcal G')=0$.) $f$ is affine (step 1) and $\\mathcal F$ is quasi-coherent (step 1), so by [lem-weil-pbc-affine-pushforward-ideal-product] the sheaf $\\mathcal F'=f^{-1}\\mathcal J\\cdot\\mathcal F$ is a quasi-coherent $\\mathcal O_Y$-module and $\\mathcal G'=\\mathcal J\\cdot f_*\\mathcal F=f_*\\mathcal F'$. Since $f$ is affine and $\\mathcal F'$ quasi-coherent, the edge map $H^1(X,f_*\\mathcal F')\\to H^1(Y,\\mathcal F')$ is an isomorphism [lem-weil-pbc-affine-morphism-cohomology-edge]. Since $Y$ is affine, $Y$ is an affine open of itself and $H^1(Y,\\mathcal F')=0$ [pqf-lem-affine-vanishing]. Hence $H^1(X,\\mathcal G')=H^1(X,f_*\\mathcal F')\\cong H^1(Y,\\mathcal F')=0$, and $\\mathcal G'$ satisfies (3)(c) of [lem-weil-pbc-coherent-property-devissage-integral-subschemes].",
-   "uses": [
-    "lem-weil-pbc-affine-pushforward-ideal-product",
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "pqf-lem-affine-vanishing",
-    "lem-weil-pbc-coherent-property-devissage-integral-subschemes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian, coherent.tex line 3557), proof, third paragraph (Lemmas 01YP, 01XB and 089W)"
-   }
-  },
-  {
-   "text": "(All coherent sheaves.) $X$ is Noetherian and $\\mathcal P$ satisfies (0), (1), (2), (3) of [lem-weil-pbc-coherent-property-devissage-integral-subschemes] (steps 2 to 6), so $H^1(X,\\mathcal F)=0$ for every coherent $\\mathcal O_X$-module $\\mathcal F$.",
+   "text": "Apply coherent_property_devissage_integral_subschemes to the zero, extension, summand, and integral hypotheses constructed above. It gives H^1(X,F) = 0 for every coherent F.",
    "uses": [
     "lem-weil-pbc-coherent-property-devissage-integral-subschemes"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian, coherent.tex line 3557), proof, first two paragraphs"
+    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
    }
   },
   {
-   "text": "(Serre's criterion.) $X$ is quasi-compact (hypothesis (4)) and quasi-separated, being locally Noetherian [lem-weil-pbc-locally-noetherian-quasi-separated]. Let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent sheaf of ideals of finite type. On the locally Noetherian $X$ it is coherent [pqf-lem-coherent-ft-locnoeth], so $H^1(X,\\mathcal I)=0$ by step 7. By Serre's criterion [pqf-lem-serre-criterion] $X$ is affine.",
+   "text": "Noetherian X supplies compactness and quasi-separatedness. For any IdealSheafData I of finite type, its module is the kernel of the structure-sheaf map to the closed-subscheme direct image. The structure modules are quasi-coherent; closed-immersion pushforward preserves quasi-coherence, and the proved source quasi-coherent kernel theorem makes I.toModules quasi-coherent. By the locally Noetherian coherence criterion it is coherent. Apply the preceding vanishing to this ideal and then Serre's finite-type ideal criterion.",
    "uses": [
     "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
     "pqf-lem-coherent-ft-locnoeth",
     "pqf-lem-serre-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian, coherent.tex line 3557), proof, first paragraph: the second of Stacks' two options, Lemma 01XG (lemma-quasi-separated-h1-zero-covering), which needs quasi-separatedness (Properties 01OY) and only ideals of finite type"
+    "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-finite-integral-morphism",
-  "lem-weil-pbc-finite-iff-integral-lft",
-  "pqf-lem-locnoeth-lft",
-  "pqf-lem-coherent-ft-locnoeth",
   "pqf-def-cohomology",
-  "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
   "lem-weil-pbc-finite-surjective-coherent-generic-support",
   "lem-weil-pbc-finite-pushforward-coherent",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-ideal-module-product-stalk",
-  "lem-weil-pbc-affine-pushforward-ideal-product",
-  "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "pqf-lem-affine-vanishing",
+  "lem-weil-pbc-finite-affine-pushforward-ideal-devissage",
+  "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "pqf-lem-coherent-ft-locnoeth",
   "pqf-lem-serre-criterion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 01YQ (label lemma-image-affine-finite-morphism-affine-Noetherian, coherent.tex line 3557) and its proof, lines 3570-3616"
+  "place": "Cohomology of Schemes, Lemma 01YQ (lemma-image-affine-finite-morphism-affine-Noetherian), proof paragraph verifying devissage (3)(c); checked at https://stacks.math.columbia.edu/tag/01YQ",
+  "note": "J2 formalized steps 2, 3, 4, 7, 8; steps 5-6 isolated as the strictly smaller ideal-product devissage lemma. Original theorem statement unchanged."
  },
  "mathlib_searches": [
   {
@@ -256,5 +211,15 @@
   "group": "E1",
   "result": "fix",
   "note": "(1) IsFinite f, (2) Surjective f, (3) IsAffine Y, (4) Noetherian X -> [IsNoetherian X] (was IsLocallyNoetherian+CompactSpace; STATE NOETHERIAN SCHEME), conclusion IsAffine X; one universe; no hollow clause"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T110306-L-616951",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
