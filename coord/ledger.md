@@ -6320,3 +6320,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:50 L: returned deliver/S1/Sheaf.AlgebraicGeometry.DescendAffine (reviewer RETURN: (reviewer X-Conne, head Connectio) the reviewer passed it, but the landing failed: [--drop-files DROP_FILES] [--revert-s)
 - 05:50 L: returned deliver/G1/Sheaf.AlgebraicGeometry.AffineEtaleDescentData (reviewer RETURN: (reviewer X-e0335, head e0335d21b) D1 (brief §4): The two new nodes merely restate the item's conjuncts, leaving all mat)
 - 05:55 L: returned deliver/G1/Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeSystem (reviewer RETURN: (reviewer X-33dfc, head 33dfcf8ff) B2: dag/nodes/sec-proper-base-change/lem-weil-pbc-affine-etale-base-change-geometry.j)
+- 05:55 L: returned deliver/K2/Sheaf.RingTheory.HenselianEtaleRetractionUniqueness (reviewer RETURN: (reviewer X-af7fc, head af7fcd7a7) E2: The claimed dual-number counterexample is invalid: with algebraMap ψ, neither σ =)
