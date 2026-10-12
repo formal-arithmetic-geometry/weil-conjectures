@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Topology.Constructible
 import Sheaf.Topology.ConstructibleIsRetrocompact
+import Mathlib.Topology.Spectral.Prespectral
 
 /-!
 # Constructible intersections in a constructible subspace
@@ -51,6 +52,25 @@ theorem isConstructible_inter_subtype
     {E E' : Set X}
     (hE : IsConstructible E) (hE' : IsConstructible E') :
     IsConstructible ((Subtype.val : E → X) ⁻¹' E') := by
-  sorry
+  let : PrespectralSpace X := ⟨hBasis⟩
+  apply hE'.preimage continuous_subtype_val
+  intro V hVo hVr W hWc hWo
+  obtain ⟨O, hOo, hOW⟩ := IsEmbedding.subtypeVal.isInducing.isOpen_iff.mp hWo
+  obtain ⟨U, hUc, hUo, hWU, hUO⟩ :=
+    PrespectralSpace.exists_isCompact_and_isOpen_between
+      (hWc.image continuous_subtype_val) hOo (by
+        rintro _ ⟨x, hx, rfl⟩
+        change x ∈ Subtype.val ⁻¹' O
+        rwa [hOW])
+  have hUW : (Subtype.val : E → X) ⁻¹' U = W := by
+    apply Subset.antisymm
+    · intro x hx
+      rw [← hOW]
+      exact hUO hx
+    · intro x hx
+      exact hWU ⟨x, hx, rfl⟩
+  rw [← hUW, ← preimage_inter, IsEmbedding.subtypeVal.isCompact_iff]
+  simpa only [Subtype.image_preimage_coe, inter_comm] using
+    hE.isRetrocompact (hVr hUc hUo) (hVo.inter hUo)
 
 end Topology
