@@ -1,23 +1,9 @@
-/-
-Copyright (c) 2026 The SHEAF contributors. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Y2
--/
 module
 
+import Sheaf.AlgebraicGeometry.TorsionControlledEasyAlgebraizationBridge
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.Algebra.Category.ModuleCat.Limits
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.RingTheory.FiniteIffFormalGlueing
-import Sheaf.RingTheory.FormalGlueingIsogeny
-import Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLift
-import Sheaf.Topology.GlueSheavesOfModules
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Sheaf.AlgebraicGeometry.Coherent
 
 /-! # Construction of a torsion-controlled algebraization
@@ -87,6 +73,11 @@ theorem torsionControlled_algebraization_construction
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2
         (kernel a.hom)) ∧
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2
-        (cokernel a.hom))) := by sorry
+        (cokernel a.hom))) := by
+  have htorsion := ((coherentFormalModule_annihilated_iff X J J N
+    ((completion X J).obj H) δ).out 1 0).mp hlocal
+  obtain ⟨F, a, β, hδ, ha⟩ :=
+    torsionControlled_easy_algebraization_bridge J H N δ htorsion
+  exact ⟨F, a, β, hδ, ha⟩
 
 end AlgebraicGeometry
