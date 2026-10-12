@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+import Sheaf.AlgebraicGeometry.Morphisms.NormalFamilyGenericLimit
+import Sheaf.AlgebraicGeometry.Morphisms.PointedGaloisCoverLimitDescent
 
 /-!
 # Noetherian approximation data for spreading a finite torsor
@@ -72,6 +74,25 @@ theorem GaloisCover.exists_noetherian_spreading_data {S C : Scheme.{u}} [Compact
         IsPullback q₀ j₀ (S₀.fromSpecStalk (genericPoint S₀)) c₀ ∧
         sη₀ ≫ q₀ = 𝟙 _ ∧ sη₀ ≫ j₀ = S₀.fromSpecStalk (genericPoint S₀) ≫ σ₀ ∧
         (∃ z₀ : Spec S₀.functionField ⟶ Z₀.P, z₀ ≫ Z₀.π = sη₀) ∧
-        k ≫ j₀ = j ≫ a ∧ IsPullback χ Z.π Z₀.π k := by sorry
+        k ≫ j₀ = j ≫ a ∧ IsPullback χ Z.π Z₀.π k := by
+  obtain ⟨I, hcat, hmodel⟩ :=
+    exists_normal_family_generic_limit hS c σ hσ (Nat.card G) hG q j hCη sη hsq hsj
+  let : SmallCategory I := hcat
+  obtain ⟨hco, D, K, κ, b, s, hκ, hb, hDqc, hDqs, hKqc, hKqs, hDa, hKa, hs,
+    S₀, C₀, hI₀, hfamily⟩ := hmodel
+  let : IsCofiltered I := hco
+  let : ∀ i, IsIntegral (S₀ i) := hI₀
+  obtain ⟨c₀, σ₀, q₀, j₀, e, a, hstage⟩ := hfamily
+  obtain ⟨i, Z₀, χ, hχ, z₀, hz₀⟩ :=
+    GaloisCover.exists_pointed_stage_of_affine_limits D K hDqc hDqs hKqc hKqs hDa hKa
+      κ b hκ hb s sη hs G Z hZ
+  obtain ⟨hN, hqs, hnormal, hqc, hqsc, hsm, hconn, hsec, hn, hgen, hsq₀, hsj₀,
+    hcomp⟩ := hstage i
+  refine ⟨S₀ i, C₀ i, hI₀ i, c₀ i, σ₀ i, D.obj i, q₀ i, j₀ i,
+    (e i).inv ≫ s.app i, Z₀, a i, κ.app i, χ, hN, hqs, hnormal, hqc, hqsc, hsm,
+    hconn, hsec, hn, hgen, ?_, ?_, ?_, hcomp, hχ⟩
+  · simpa only [Category.assoc] using hsq₀
+  · simpa only [Category.assoc] using hsj₀
+  · exact ⟨(e i).inv ≫ z₀, by rw [Category.assoc, hz₀]⟩
 
 end AlgebraicGeometry.Scheme

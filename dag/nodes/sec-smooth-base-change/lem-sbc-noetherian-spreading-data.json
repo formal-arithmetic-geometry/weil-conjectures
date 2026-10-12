@@ -15,18 +15,35 @@
  ],
  "proof": [
   {
-   "text": "Write the qcqs integral normal base as a directed limit of normal integral schemes of\nfinite type over the integers with affine transition maps. This is obtained from absolute\nNoetherian approximation by normalizing each stage in the base: these normalizations are\nfinite by the finiteness theorem over the integers and their limit is the given normal\nbase, as is checked on affine opens. Descend the finitely presented smooth qcqs family and\nits section to one stage. Replace the descended family by the open locus with geometrically\nconnected fibres; the original family maps into this locus, and the section lands in it\nafter enlarging the stage. Descend invertibility of the group order. The generic fibre is\nthe limit of the generic fibres at the stages. Finite étale descent therefore descends the\ncover and its finite group action, including the torsor isomorphism, to some generic fibre.\nDescend the rational point and its equality with the generic section after enlarging the\nstage once more. The resulting family comparison and generic-fibre comparison commute;\nthe comparison of covers is a pullback by finite étale descent. Retain these comparison\nmaps and all the descended hypotheses. No extension of the descended cover is constructed\nin this lemma.",
-   "uses": [],
+   "text": "Apply exists_normal_family_generic_limit with n=Nat.card G. Retain the two generic-fibre limit cones, their compatible sections, and all normal Noetherian family data at every stage. This construction does not involve Z.",
+   "uses": [
+    "lem-sbc-normal-family-generic-limit"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply exists_pointed_stage_of_affine_limits to these two systems and Z. It selects a stage i, a finite Galois torsor Z₀ on its generic fibre, a cartesian comparison χ, and a point z₀ from K_i above s_i.",
+   "uses": [
+    "lem-sbc-pointed-galois-cover-limit-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose S₀=S_i and C₀=C_i and use the family data at i. Set the generic section to e_i.inv ≫ s_i, and transport the descended point to e_i.inv ≫ z₀. Associativity and z₀ ≫ Z₀.π=s_i give its required equality. The two generic-section equalities follow by associativity from the family data. Take a=a_i and k=κ_i. The comparison k ≫ j₀=j ≫ a and the cartesian cover square are exactly the two previously retained hypotheses.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-normal-family-generic-limit",
+  "lem-sbc-pointed-galois-cover-limit-descent"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "G3",
+  "by": "N2",
   "document": "Stacks Project",
-  "place": "Tag 0EZJ, proof of Lemma 58.31.9, Noetherian approximation and descent before applying the Noetherian case",
-  "note": "Only the descent step; no extension theorem is assumed or concluded."
+  "place": "Tag 0EZJ, proof of Lemma 58.31.9, limit reduction",
+  "note": "Lean decomposition into a family/generic-fibre inverse-system step and a general pointed torsor descent step; the final stage selection and point transport are proved in Lean. No statement or definition changes."
  },
  "mathlib_searches": [
   {
@@ -116,9 +133,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T085244-L-16680",
+  "landing": "20261012T110313-L-619622",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

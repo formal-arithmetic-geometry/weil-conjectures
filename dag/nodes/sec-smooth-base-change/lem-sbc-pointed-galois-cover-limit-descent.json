@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-pointed-galois-cover-limit-descent",
+ "kind": "statement",
+ "title": "Pointed finite Galois torsors descend along affine inverse limits",
+ "statement": "Let I be a small cofiltered category and D,K:I→Scheme inverse systems with qcqs objects and affine transition maps. Let κ:X→D and b:T→K be limit cones. Let s:K→D be a natural transformation and sη:T→X a morphism with sηκ_i=b_i s_i for every i. Let G be a finite group and Z→X a finite étale G-torsor, not necessarily connected. Suppose there exists z:T→Z with zπ=sη. Then at some stage i there are a finite étale G-torsor Z_i→D_i and χ:Z→Z_i such that the square with the two torsor projections and κ_i is cartesian, and a morphism z_i:K_i→Z_i with z_iπ_i=s_i. No Noetherian, integral, normal or smooth hypothesis is assumed on these systems.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, last paragraph of the limit reduction; Tag 0BTV (Lemma 58.14.1), finite étale inverse-limit equivalence; Tag 01ZM, morphism descent"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "First reindex the small cofiltered category by a coinitial directed poset. Limits\nand affine-transition hypotheses are preserved. A stage found there maps to an\nobject of I, giving the required stage in the original system.\n1. A finite étale cover is of finite presentation. Descend its underlying scheme and\n   structure map along D. Increase the stage so that the descended map is finite,\n   étale and surjective. Finiteness and étaleness descend for finitely presented maps.\n   Surjectivity follows after increasing the stage because the image of a finite\n   étale map is clopen and its complement has empty pullback to the limit. These\n   complements form a qcqs affine-transition inverse system. If every complement\n   were nonempty, compactness for inverse limits would make its limit nonempty;\n   hence some complement is empty.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-descend-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the finitely many action maps and the finitely many equations for the unit,\n   multiplication, and compatibility with the projection. The torsor comparison map\n   from the finite coproduct to the fibre square descends as well. Descend its inverse\n   and the two inverse equations by full faithfulness at sufficiently large stages.\n   This gives a GaloisCover Z₀ at a stage i, together with a cartesian comparison χ.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull Z₀ back along s at that stage. The point z at the limit lifts to a section of\n   this pullback, because z ≫ Z.π = sη and sη is compatible with the two cones. The\n   pullback cover is finite étale, hence finitely presented, over K at that stage.\n   Finite-presentation descent of morphisms along K descends this section at a later\n   stage, including its equality with the identity on K. Base change Z₀ to the same\n   later stage of D. Naturality of s identifies its pullback to K with the pullback\n   used to descend the section. Composing the descended section with the projection\n   to the cover gives z₀ and z₀ ≫ Z₀.π = s.app i. Pasting the two cartesian comparison\n   squares preserves the required pullback with the original cover.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-finite",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "N2",
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, last paragraph of the limit reduction; Tag 0BTV (Lemma 58.14.1), finite étale inverse-limit equivalence; Tag 01ZM, morphism descent",
+  "note": "Residual step of the limit reduction, with the omitted compatibility and point-descent details written out; no extension theorem is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite etale covers with finite group actions and a section descend along cofiltered limits of schemes with affine transition maps",
+   "results": "Service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale G torsor with a section over an inverse limit of schemes descends to some stage with its point and finite group action",
+   "results": "Mathlib returns eventual-equality and morphism-factorization results from AlgebraicGeometry.AffineTransitionLimit and an abstract Galois category lemma; none states descent of a pointed finite torsor.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "GaloisCover.*(limit|stage|descent)|normal.*[Aa]pprox|[Aa]pprox.*normal",
+   "results": "No matching result in Mathlib. Local source/DAG search also checked Noetherian approximation, finite-presentation descent, and inverse-limit étale descent; no existing node or declaration states this combined residual step.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NoetherianSpreadingData",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EZJ, last paragraph of the limit reduction; Tag 0BTV (Lemma 58.14.1), finite étale inverse-limit equivalence; Tag 01ZM, morphism descent",
+   "via": [
+    "lem-sbc-noetherian-spreading-data",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PointedGaloisCoverLimitDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PointedGaloisCoverLimitDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.exists_pointed_stage_of_affine_limits",
+  "statement": "theorem GaloisCover.exists_pointed_stage_of_affine_limits\n    {I : Type u} [SmallCategory I] [IsCofiltered I] (D K : I ⥤ Scheme.{u})\n    (hDqc : ∀ i, CompactSpace (D.obj i)) (hDqs : ∀ i, QuasiSeparatedSpace (D.obj i))\n    (hKqc : ∀ i, CompactSpace (K.obj i)) (hKqs : ∀ i, QuasiSeparatedSpace (K.obj i))\n    (hDa : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f))\n    (hKa : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (K.map f))\n    {X T : Scheme.{u}} (κ : (Functor.const I).obj X ⟶ D)\n    (b : (Functor.const I).obj T ⟶ K)\n    (hκ : IsLimit (Cone.mk X κ)) (hb : IsLimit (Cone.mk T b))\n    (s : K ⟶ D) (sη : T ⟶ X) (hs : ∀ i, sη ≫ κ.app i = b.app i ≫ s.app i)\n    (G : Type (u + 1)) [Group G] [Finite G] (Z : GaloisCover G X)\n    (hZ : ∃ z : T ⟶ Z.P, z ≫ Z.π = sη) :\n    ∃ (i : I) (Z₀ : GaloisCover G (D.obj i)) (χ : Z.P ⟶ Z₀.P),\n      IsPullback χ Z.π Z₀.π (κ.app i) ∧\n      ∃ z₀ : K.obj i ⟶ Z₀.P, z₀ ≫ Z₀.π = s.app i",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T110313-L-619622",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T110313-L-619622",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
