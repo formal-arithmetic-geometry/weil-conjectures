@@ -1,0 +1,106 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 087X, affine calculation of Coim=Im"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X, affine first-isomorphism calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coimage image comparison is monic and epic on affine open coherent formal modules",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coimage image comparison is monic and epic on affine open coherent formal modules",
+   "results": "8 results, including Scheme.Modules.instAbelian, but no coherent-formal comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coimageImageComparison; isIso_of_mono_of_epi in Mathlib and library",
+   "results": "Generic balanced-category criterion found in Mathlib.CategoryTheory.Balanced; no specialized affine comparison.",
+   "date": "2026-10-13",
+   "verdict": "no specialized match"
+  }
+ ],
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImageAffine",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-formal-coimage-image-affine",
+   "place": "strict mono/epi decomposition",
+   "via": [
+    "lem-weil-pbc-coherent-formal-coimage-image-affine"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-weil-pbc-coherent-formal-coimage-image-affine-mono",
+ "title": "Affine restriction comparison is monic",
+ "statement": "Under the hypotheses of the affine coimage-image comparison, the restriction of its level n component to an affine open is a monomorphism.",
+ "proof": [
+  {
+   "text": "The affine equivalence identifies the comparison with the module first-isomorphism map, which is injectivity; restriction and associated sheaf preserve this property, and universal kernel/cokernel identifications transport it.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-coherent-formal-module-kernel",
+    "lem-weil-pbc-coherent-formal-cokernel-closure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-formal-module-kernel",
+  "lem-weil-pbc-coherent-formal-cokernel-closure"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImageRestrictAffineMono",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesCoimageImageRestrictAffineMono.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModules_coimageImage_isMono_restrict_affine",
+  "statement": "theorem coherentFormalModules_coimageImage_isMono_restrict_affine (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) [HasKernels (CoherentFormalModule X I)] [HasCokernels (CoherentFormalModule X I)] (U : X.affineOpens) {F G : CoherentFormalModule X I} (α : F ⟶ G) (n : ℕ) : Mono ((Scheme.Modules.restrictFunctor (U : X.Opens).ι).map ((Abelian.coimageImageComparison α).hom.app (op n)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T230752-L-1907175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T230752-L-1907175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9998,3 +9998,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:07 L: merged deliver/A3/Sheaf.RingTheory.CmModuleGoodElementNonzerodivisor (stage 3; reviewer PASS; first push; landing 20261012T230751-L-1906859 (interface); batch 20261012T230749; modules 2; new nodes 1)
 - 23:07 L: merged deliver/A4/Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection (stage 3; reviewer PASS; first push; landing 20261012T230752-L-1906968 (interface); batch 20261012T230749; modules 4; new nodes 3)
 - 23:07 L: merged deliver/B4/Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal (stage 3; reviewer PASS; first push; landing 20261012T230752-L-1907076 (interface); batch 20261012T230749; modules 3; new nodes 2)
+- 23:07 L: merged deliver/C3/Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImageAffine (stage 3; reviewer PASS; first push; landing 20261012T230752-L-1907175 (interface); batch 20261012T230749; modules 3; new nodes 2)

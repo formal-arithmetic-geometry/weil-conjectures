@@ -3,13 +3,8 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesCokernelClosure
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImageRestrictAffineMono
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesCoimageImageRestrictAffineEpi
 
 /-! # Affine-local coimage-image comparison
 
@@ -61,6 +56,10 @@ theorem coherentFormalModules_coimageImage_isIso_restrict_affine
     {F G : CoherentFormalModule X I} (α : F ⟶ G) (n : ℕ) :
     IsIso ((Scheme.Modules.restrictFunctor (U : X.Opens).ι).map
       ((Abelian.coimageImageComparison α).hom.app (op n))) := by
-  sorry
+  let φ := (Scheme.Modules.restrictFunctor (U : X.Opens).ι).map
+    ((Abelian.coimageImageComparison α).hom.app (op n))
+  have : Mono φ := coherentFormalModules_coimageImage_isMono_restrict_affine X I U α n
+  have : Epi φ := coherentFormalModules_coimageImage_isEpi_restrict_affine X I U α n
+  exact isIso_of_mono_of_epi φ
 
 end AlgebraicGeometry
