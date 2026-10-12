@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-regular-closed-point-smooth-source",
+ "kind": "statement",
+ "title": "Regular closed points over an algebraically closed field are smooth (proved source theorem)",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], $A$ a finite type $k$-algebra [def-weil-pbc-finite-type-algebra], and $q$ a maximal ideal of $A$. If $A_q$ [def-weil-pbc-localization-at-prime] is a regular local ring [def-weil-regular-scheme], then $A$ is smooth over $k$ at $q$ [def-weil-pbc-singular-ideal].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00TV (lemma-separable-smooth), regular implies smooth, at a closed point with residue field k; equivalently Lemma 00TS (lemma-finite-type-algebraically-closed), (1) implies (4). Source-library implementation: WeilConjectures/Mathlib/RingTheory/Smooth/Local.lean:51-193 and 226-235."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-singular-ideal"
+ ],
+ "proof": [
+  {
+   "text": "The already proved source theorem Algebra.IsSmoothAt.of_isRegularLocalRing_of_isAlgClosed is the exact statement. Its proof makes the residue field finite over k using Zariski's lemma and then identifies it with k by algebraic closedness. Thus its algebra map is surjective and the residue field is formally smooth over k.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source proof localizes a finite polynomial presentation at the prime above q. This gives a surjection from a regular local formally smooth polynomial localization B to A_q. Apply the proved regular-local-quotient independent-generators theorem to its kernel. The cotangent map to the differential fibre is injective because the residue field is formally smooth. The kernel generators therefore have independent differential images. The source proves injectivity of the cotangent-complex base-change map by expressing its elements as linear combinations of these generators and using their independence. Mathlib Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange proves formal smoothness of A_q, which is IsSmoothAt k q.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-regular-local-quotient-independent-generators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-regular-local-quotient-independent-generators"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra 00TV and its closed-point special case 00TS; the full proof is already Lean-verified in the source theorem and its helpers, not a new unproved lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular local ring at a maximal ideal of a finite type algebra over an algebraically closed field is smooth at that ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt, IsRegularLocalRing",
+   "results": "0 hits in Mathlib",
+   "date": "2026-10-13",
+   "verdict": "no match in Mathlib; exact proved source theorem found by reading Smooth/Local.lean:226-235"
+  },
+  {
+   "tool": "grep",
+   "query": "of_isRegularLocalRing_of_isAlgClosed|localization_of_isRegularLocalRing",
+   "results": "0 hits in Mathlib",
+   "date": "2026-10-13",
+   "verdict": "no match in Mathlib; exact proved source theorem found by reading Smooth/Local.lean:226-235"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RegularMaximalJacobianPresentation",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7, essential surjectivity: regular closed points admit smooth presentations; proved source regular-point smoothness replaces the polynomial conormal calculation below this unit.",
+   "via": [
+    "lem-weil-pbc-regular-maximal-jacobian-presentation",
+    "lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound",
+    "lem-weil-pbc-differentials-dimension-bound-smooth-at-prime",
+    "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "lem-weil-pbc-smooth-at-generic-point-over-field",
+    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-geometric-regularity-separable-extension",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.RingTheory.Smooth.Local",
+  "declaration": "Algebra.IsSmoothAt.of_isRegularLocalRing_of_isAlgClosed",
+  "statement": "theorem Algebra.IsSmoothAt.of_isRegularLocalRing_of_isAlgClosed {k A : Type*} [Field k]\n    [IsAlgClosed k] [CommRing A] [Algebra k A] [Algebra.FiniteType k A] (q : Ideal A)\n    [q.IsMaximal] [IsRegularLocalRing (Localization.AtPrime q)] : Algebra.IsSmoothAt k q",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13",
+  "note": "Existing proved theorem in lean/WeilConjectures/Mathlib/RingTheory/Smooth/Local.lean:226-235; no module delivered. #print axioms confirms propext, Classical.choice, Quot.sound only. Not the cyclic Sheaf regular/smooth equivalence."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T213846-L-1207343",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T213846-L-1207343",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9619,3 +9619,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:37 L: returned deliver/E3/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (reviewer RETURN: (reviewer X-be589, head be58923be) C6: The delivery introduces a cycle between `lem-pd-glued-effective-model-charts` and)
 - 21:38 L: returned deliver/G1/Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRingChains (reviewer RETURN: (the landing tools, head 8dc6ff918) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 21:38 L: returned deliver/M2/Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel (reviewer RETURN: (the landing tools, head 595b3d8ec) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 21:38 L: merged deliver/A2/Sheaf.Paper.RegularMaximalJacobianPresentation (stage 3; reviewer PASS; first push; landing 20261012T213846-L-1207343 (proof); batch 20261012T213845; modules 1; new nodes 1)

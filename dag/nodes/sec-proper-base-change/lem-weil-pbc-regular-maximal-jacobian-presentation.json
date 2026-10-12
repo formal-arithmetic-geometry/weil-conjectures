@@ -39,85 +39,43 @@
  ],
  "proof": [
   {
-   "text": "Take a finite polynomial presentation phi:P -> S, where P=k[X_1,...,X_N], with kernel I, and let M=phi^{-1}(m). The ideal M is maximal. The polynomial localization A=P_M is regular local; A/IA is isomorphic to S_m, regular by hypothesis. The proved independent-generators theorem supplies a finite set generating IA whose cotangent classes in A are independent.",
+   "text": "Install maximality and regularity as local instances. Apply the independently proved source regular-closed-point theorem Algebra.IsSmoothAt.of_isRegularLocalRing_of_isAlgClosed. Since k is Noetherian, finite type implies finite presentation. Apply Mathlib Algebra.IsSmoothAt.exists_notMem_isStandardSmooth to obtain g outside m and a standard smooth presentation of S_g.",
    "uses": [
+    "lem-weil-pbc-regular-closed-point-smooth-source",
     "def-weil-pbc-finite-type-algebra",
-    "lem-weil-pbc-polynomial-ring-field-regular-ring",
-    "lem-weil-pbc-localization-at-prime-of-quotient",
-    "lem-weil-pbc-regular-local-quotient-independent-generators"
+    "lem-weil-pbc-smooth-ring-map-locally-standard-smooth"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 00TS, polynomial-presentation argument; Lemma 00NR"
-   }
+   "elementary": false
   },
   {
-   "text": "Write each chosen generator of IA as f_j/s_j with f_j in I and s_j outside M. Multiplication by the nonzero residue of s_j preserves independence, so the classes of f_j are independent. The closed-point cotangent comparison identifies dim cotangent(A) with the polynomial differential fibre dimension. The canonical conormal map to this fibre is surjective by the conormal exact sequence and Omega_{kappa(M)/k}=0; equal finite dimensions make it an isomorphism. In the polynomial differential basis, the images of f_j are their gradient vectors. Independence therefore gives a nonzero square minor Delta; its image phi(Delta) is outside m.",
+   "text": "Unpack IsStandardSmooth.out into finite index types and a submersive presentation P. Reindex its variables by Fin n. Lift the linear order of Fin n to the relation indices along the injective variable selection, then use monoEquivOfFin to enumerate them increasingly. Reindex the relations by this order isomorphism. SubmersivePresentation.reindex preserves the unit Jacobian; by the lifted order the resulting map Fin c -> Fin n is strictly increasing. These constructions work for c=0 and n=0.",
    "uses": [
-    "lem-weil-pbc-maximal-ideal-differential-cotangent-dimension",
-    "lem-weil-pbc-jacobi-zariski-differential-maps",
-    "lem-weil-pbc-kahler-differentials-localization",
-    "lem-weil-pbc-polynomial-ring-kahler-basis",
-    "lem-weil-pbc-zariski-lemma",
-    "lem-weil-pbc-alg-closed-finite-extension-trivial",
-    "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor"
+    "def-weil-pbc-standard-smooth-algebra"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 00TS, independent linear terms and final Jacobian rank argument; Lemma 00TR"
-   }
+   "elementary": true
   },
   {
-   "text": "Set J=(f_j). The finite P-module I/J has zero localization at M because JA=IA. Choose finite generators of I/J. For each generator the zero-fraction criterion gives an element outside M annihilating it. Their finite product b is outside M and annihilates all of I/J. Thus (I/J)_b=0 and P_b/JP_b -> S_{phi(b)} is an isomorphism.",
+   "text": "Use Presentation.quotientEquiv.restrictScalars k as the required algebra equivalence; span_range_relation_eq_ker identifies its domain. Transport jacobian_isUnit backwards along this equivalence using MulEquiv.isUnit_map. The matrix in the statement is the transpose of PreSubmersivePresentation.jacobiMatrix by jacobiMatrix_apply, so Matrix.det_transpose identifies its determinant with the unit just obtained. No arbitrary unproved witness or additional equation is introduced.",
    "uses": [
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 00TS, finitely generated kernel vanishing after localization"
-   }
-  },
-  {
-   "text": "Let g=phi(b)*phi(Delta), outside m. Adjoin variables z,w and equations bz-1, Delta*w-1 to P/J. The quotient is isomorphic to S_g by the universal properties of polynomial algebras, quotients and localization. Select the old minor variables together with z,w. The enlarged Jacobian block is triangular with determinant b*Delta^2, a unit because both b and Delta have explicit inverses in the quotient. Reorder the selected variables increasingly, changing the determinant at most by a unit sign. Empty equation sets use Delta=1, and a zero I/J uses b=1. The map to S_g sends X_i to phi(X_i), z to phi(b) inverse and w to phi(Delta) inverse. For the inverse, I maps to zero because b annihilates I/J and is invertible; descend P to S and extend to S_g using invertibility of g. The composites fix these polynomial generators and their specified inverses, so are identities.",
-   "uses": [
-    "def-weil-ring-localization-away",
+    "def-weil-pbc-standard-smooth-algebra",
     "def-weil-pbc-matrix-determinant",
-    "def-weil-pbc-polynomial-partial-derivative",
-    "lem-weil-pbc-block-triangular-determinant"
+    "def-weil-pbc-polynomial-partial-derivative"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 00TE, converse proof: adjoining inverse variables"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-regular-closed-point-smooth-source",
   "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-polynomial-ring-field-regular-ring",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
-  "lem-weil-pbc-regular-local-quotient-independent-generators",
-  "lem-weil-pbc-maximal-ideal-differential-cotangent-dimension",
-  "lem-weil-pbc-jacobi-zariski-differential-maps",
-  "lem-weil-pbc-kahler-differentials-localization",
-  "lem-weil-pbc-polynomial-ring-kahler-basis",
-  "lem-weil-pbc-zariski-lemma",
-  "lem-weil-pbc-alg-closed-finite-extension-trivial",
-  "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "def-weil-ring-localization-away",
+  "lem-weil-pbc-smooth-ring-map-locally-standard-smooth",
+  "def-weil-pbc-standard-smooth-algebra",
   "def-weil-pbc-matrix-determinant",
-  "def-weil-pbc-polynomial-partial-derivative",
-  "lem-weil-pbc-block-triangular-determinant"
+  "def-weil-pbc-polynomial-partial-derivative"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma 00TS, independent-equations argument, simplified using the proved Lemma 00NR independent-generators theorem; Lemma 00TE, inverse-variable construction. This bypasses the global-complete-intersection shrinking because independence already supplies the minor."
+  "place": "Shorter route written by A2 using the already proved source-library regular closed-point theorem (00TV, closed-point case of 00TS), Mathlib standard smooth neighbourhoods, finite ordered reindexing and determinant transpose. The unit route sk-thm-p1 is unchanged; this node is not in its realized statement/steps lists."
  },
  "mathlib_searches": [
   {
@@ -193,10 +151,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T203947-L-831775",
-  "kind": "interface",
+  "landing": "20261012T213846-L-1207343",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
