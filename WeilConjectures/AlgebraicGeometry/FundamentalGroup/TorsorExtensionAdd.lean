@@ -250,4 +250,142 @@ lemma exists_pairDiff_eq (c₁ c₂ : Y.gmSheaf.obj.obj (op U)) (hc₁ : m • c
     exact zmodChar_neg_sub_one _ _ _
 end LocalTrivialization
 
+/-! ### Exactness and the identification `N ≅ μ_m` -/
+
+lemma ιN_ι_pairDiff_app (b : ULift.{u + 1} (ZMod m) × ULift.{u + 1} (ZMod m))
+    (hb : b = (1, 0) ∨ b = (0, 1)) (U : Y.Etaleᵒᵖ) (n : T.pairN.obj.obj U) :
+    (T.pairDiff b).hom.app U ((kernel.ι (m • 𝟙 T.pushforwardGm)).hom.app U
+      ((kernel.ι T.pairPhi).hom.app U n)) = 0 := by
+  have h : kernel.ι T.pairPhi ≫ kernel.ι (m • 𝟙 T.pushforwardGm) ≫ T.pairDiff b = 0 := by
+    rw [← pairMuDiff_ι, ← Category.assoc, T.ιN_pairMuDiff b hb, zero_comp]
+  change (kernel.ι T.pairPhi ≫ kernel.ι (m • 𝟙 T.pushforwardGm) ≫ T.pairDiff b).hom.app U n = 0
+  rw [h]
+  rfl
+
+lemma epi_pairSeq_g : Epi T.pairSeq.g := by
+  have : Presheaf.IsLocallySurjective Y.smallEtaleTopology T.pairSeq.g.hom := ⟨fun {U} s ↦ by
+    apply T.mem_smallEtaleTopology_of_coverArrow
+    set U' := T.coverObj U
+    set s' := (T.pairN ⊞ T.pairN).obj.map (T.coverArrow U).op s
+    set n₁ := (biprod.fst : T.pairN ⊞ T.pairN ⟶ _).hom.app (op U') s'
+    set n₂ := (biprod.snd : T.pairN ⊞ T.pairN ⟶ _).hom.app (op U') s'
+    set w₁ := (kernel.ι (m • 𝟙 T.pushforwardGm)).hom.app (op U')
+      ((kernel.ι T.pairPhi).hom.app (op U') n₁)
+    set w₂ := (kernel.ι (m • 𝟙 T.pushforwardGm)).hom.app (op U')
+      ((kernel.ι T.pairPhi).hom.app (op U') n₂)
+    have hw₁ : m • w₁ = 0 := by
+      rw [← nsmul_id_app]
+      exact kernel_ι_app_apply_eq_zero _ _ _
+    have hw₂ : m • w₂ = 0 := by
+      rw [← nsmul_id_app]
+      exact kernel_ι_app_apply_eq_zero _ _ _
+    have hσ := T.coverObj_section U
+    obtain ⟨c₁, hc₁, hcw₁⟩ := T.exists_of_pairDiff_eq_zero (pullback.snd U.hom T.π) hσ w₁ hw₁
+      (T.ιN_ι_pairDiff_app _ (.inl rfl) _ _) (T.ιN_ι_pairDiff_app _ (.inr rfl) _ _)
+    obtain ⟨c₂, hc₂, hcw₂⟩ := T.exists_of_pairDiff_eq_zero (pullback.snd U.hom T.π) hσ w₂ hw₂
+      (T.ιN_ι_pairDiff_app _ (.inl rfl) _ _) (T.ιN_ι_pairDiff_app _ (.inr rfl) _ _)
+    obtain ⟨y, hy, hy₁, hy₂⟩ := T.exists_pairDiff_eq (pullback.snd U.hom T.π) hσ c₁ c₂
+      (congrArg ULift.down hc₁) (congrArg ULift.down hc₂)
+    obtain ⟨v, hv⟩ := exists_kernel_ι_app_eq (m • 𝟙 T.pushforwardGm) y
+      (by rw [nsmul_id_app, hy])
+    have hDv₁ : (T.pairMuDiff (1, 0)).hom.app (op U') v = (kernel.ι T.pairPhi).hom.app _ n₁ := by
+      apply injective_kernel_ι_app
+      rw [← app_apply_comp, pairMuDiff_ι, app_apply_comp, hv, hy₁, hcw₁]
+    have hDv₂ : (T.pairMuDiff (0, 1)).hom.app (op U') v = (kernel.ι T.pairPhi).hom.app _ n₂ := by
+      apply injective_kernel_ι_app
+      rw [← app_apply_comp, pairMuDiff_ι, app_apply_comp, hv, hy₂, hcw₂]
+    obtain ⟨k, hk⟩ := exists_kernel_ι_app_eq (T.pairPhi ≫ biprod.map T.pairPhi T.pairPhi) v (by
+      apply biprod_app_ext
+      · rw [map_zero, ← app_apply_comp, Category.assoc, biprod.map_fst, ← Category.assoc,
+          show T.pairPhi ≫ biprod.fst = T.pairMuDiff (1, 0) from biprod.lift_fst _ _,
+          app_apply_comp, hDv₁]
+        exact kernel_ι_app_apply_eq_zero _ _ _
+      · rw [map_zero, ← app_apply_comp, Category.assoc, biprod.map_snd, ← Category.assoc,
+          show T.pairPhi ≫ biprod.snd = T.pairMuDiff (0, 1) from biprod.lift_snd _ _,
+          app_apply_comp, hDv₂]
+        exact kernel_ι_app_apply_eq_zero _ _ _)
+    refine ⟨k, biprod_app_ext _ _ ?_ ?_⟩
+    · apply injective_kernel_ι_app
+      change ((T.pairSeq.g ≫ biprod.fst) ≫ kernel.ι T.pairPhi).hom.app _ k = _
+      rw [show T.pairSeq.g ≫ biprod.fst = T.pairQ (1, 0) (.inl rfl) from biprod.lift_fst _ _,
+        pairQ_ι, app_apply_comp]
+      exact (congrArg _ hk).trans hDv₁
+    · apply injective_kernel_ι_app
+      change ((T.pairSeq.g ≫ biprod.snd) ≫ kernel.ι T.pairPhi).hom.app _ k = _
+      rw [show T.pairSeq.g ≫ biprod.snd = T.pairQ (0, 1) (.inr rfl) from biprod.lift_snd _ _,
+        pairQ_ι, app_apply_comp]
+      exact (congrArg _ hk).trans hDv₂⟩
+  exact Sheaf.epi_of_isLocallySurjective T.pairSeq.g
+
+lemma pairSeq_shortExact : T.pairSeq.ShortExact :=
+  haveI := T.epi_pairSeq_g
+  { exact := T.pairSeq_exact }
+
+/-- The map `μ_m ⟶ π_* μ_m` pulling back roots of unity from the base. -/
+noncomputable def pairUnitMu : Y.rootsOfUnitySheaf m ⟶ T.pairMu :=
+  kernel.map _ _ T.pushforwardGmUnit T.pushforwardGmUnit (by
+    rw [Preadditive.comp_nsmul, Preadditive.nsmul_comp, Category.comp_id, Category.id_comp])
+
+@[reassoc (attr := simp)]
+lemma pairUnitMu_ι : T.pairUnitMu ≫ kernel.ι _ = kernel.ι _ ≫ T.pushforwardGmUnit :=
+  kernel.lift_ι _ _ _
+
+lemma pairUnitMu_pairMuDiff (b : ULift.{u + 1} (ZMod m) × ULift.{u + 1} (ZMod m)) :
+    T.pairUnitMu ≫ T.pairMuDiff b = 0 := by
+  rw [← cancel_mono (kernel.ι (m • 𝟙 T.pushforwardGm)), Category.assoc, pairMuDiff_ι,
+    pairUnitMu_ι_assoc, pairDiff, Preadditive.comp_sub, pushforwardGmUnit_comp_translate,
+    Category.comp_id, sub_self, comp_zero, zero_comp]
+
+/-- The map `μ_m ⟶ N`: roots of unity pulled back from the base are invariant. -/
+noncomputable def pairUnit : Y.rootsOfUnitySheaf m ⟶ T.pairN :=
+  kernel.lift _ T.pairUnitMu (by
+    apply biprod.hom_ext <;> simp [pairPhi, pairUnitMu_pairMuDiff])
+
+@[reassoc (attr := simp)]
+lemma pairUnit_ι : T.pairUnit ≫ kernel.ι _ = T.pairUnitMu :=
+  kernel.lift_ι _ _ _
+
+lemma isIso_pairUnit : IsIso T.pairUnit := by
+  have hι : T.pairUnit ≫ kernel.ι T.pairPhi ≫ kernel.ι (m • 𝟙 T.pushforwardGm) =
+      kernel.ι (m • 𝟙 Y.gmSheaf) ≫ T.pushforwardGmUnit := by
+    simp
+  have : Mono T.pushforwardGmUnit := by
+    have : Presheaf.IsLocallyInjective Y.smallEtaleTopology T.pushforwardGmUnit.hom :=
+      ⟨fun {U} x y hxy ↦ by
+        apply T.mem_smallEtaleTopology_of_coverArrow
+        change Y.gmSheaf.obj.map (T.coverArrow U.unop).op x =
+          Y.gmSheaf.obj.map (T.coverArrow U.unop).op y
+        have h := congrArg (T.pushforwardGm.obj.map (T.coverArrow U.unop).op) hxy
+        rw [← NatTrans.naturality_apply, ← NatTrans.naturality_apply] at h
+        have h' := congrArg (T.localUnits (pullback.snd U.unop.hom T.π)
+          (T.coverObj_section U.unop) 0) h
+        rw [localUnits_unit, localUnits_unit] at h'
+        exact ULift.ext _ _ h'⟩
+    exact Sheaf.mono_of_isLocallyInjective _
+  have : Mono T.pairUnit := by
+    have : Mono (T.pairUnit ≫ kernel.ι T.pairPhi ≫ kernel.ι (m • 𝟙 T.pushforwardGm)) := by
+      rw [hι]
+      infer_instance
+    exact mono_of_mono T.pairUnit (kernel.ι T.pairPhi ≫ kernel.ι (m • 𝟙 T.pushforwardGm))
+  have : Epi T.pairUnit := by
+    have : Presheaf.IsLocallySurjective Y.smallEtaleTopology T.pairUnit.hom := ⟨fun {U} s ↦ by
+      apply T.mem_smallEtaleTopology_of_coverArrow
+      set U' := T.coverObj U
+      set s' := T.pairN.obj.map (T.coverArrow U).op s
+      set w := (kernel.ι (m • 𝟙 T.pushforwardGm)).hom.app (op U')
+        ((kernel.ι T.pairPhi).hom.app (op U') s')
+      have hw : m • w = 0 := by
+        rw [← nsmul_id_app]
+        exact kernel_ι_app_apply_eq_zero _ _ _
+      obtain ⟨c, hc, hcw⟩ := T.exists_of_pairDiff_eq_zero (pullback.snd U.hom T.π)
+        (T.coverObj_section U) w hw (T.ιN_ι_pairDiff_app _ (.inl rfl) _ _)
+        (T.ιN_ι_pairDiff_app _ (.inr rfl) _ _)
+      obtain ⟨r, hr⟩ := exists_kernel_ι_app_eq (m • 𝟙 Y.gmSheaf) c (by rw [nsmul_id_app, hc])
+      refine ⟨r, injective_kernel_ι_app _ _ (injective_kernel_ι_app _ _ ?_)⟩
+      change (T.pairUnit ≫ kernel.ι T.pairPhi ≫ kernel.ι (m • 𝟙 T.pushforwardGm)).hom.app _ r = w
+      rw [hι, app_apply_comp]
+      exact (congrArg _ hr).trans hcw⟩
+    exact Sheaf.epi_of_isLocallySurjective T.pairUnit
+  exact isIso_of_mono_of_epi _
+
 end AlgebraicGeometry.Scheme.EtaleTorsor
