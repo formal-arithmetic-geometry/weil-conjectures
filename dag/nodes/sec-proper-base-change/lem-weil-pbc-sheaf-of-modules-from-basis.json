@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "*Sheaf condition for all $\\mathcal B$-coverings.* For $U\\in\\mathcal B$ let $C(U)$ be the set of finite $\\mathcal B$-coverings $U=U_1\\cup\\dots\\cup U_n$ ($n\\ge0$). By the refinement hypothesis every $\\mathcal B$-covering of $U$ (any family of members of $\\mathcal B$ with union $U$) is refined by a member of $C(U)$, i.e. $C(U)$ is cofinal; note that the hypothesis is a finite refinement, not a finite subcovering, which is exactly what cofinality asks. The exactness hypothesis says that the underlying presheaf of sets of $F$ on $\\mathcal B$ (with $s|_V=r_{U,V}(s)$; $U\\cap V\\in\\mathcal B$ by hypothesis) satisfies the gluing condition (compatible on the $U_i\\cap U_j$ implies unique amalgamation) for every member of $C(U)$. By [lem-weil-pbc-basis-sheaf-cofinal-coverings] it satisfies the gluing condition for every $\\mathcal B$-covering $(U_i)_{i\\in I}$ of every $U\\in\\mathcal B$, $I$ arbitrary.",
+   "text": "Form the additive functor Fab on the basis from F and r, using rid and rcomp. Select coverings whose index type is equivalent to Fin n. The finite-refinement hypothesis, applied to the image of an arbitrary cover, supplies a selected refinement indexed by ULift (Fin n); choose the refinement map from the membership witnesses. Reindex hglue along the finite equivalence. Apply lem-weil-pbc-basis-sheaf-cofinal-coverings to Fab followed by the forgetful functor, obtaining unique gluing on arbitrary basis coverings. Empty index types and n = 0 are included throughout.",
    "uses": [
     "lem-weil-pbc-basis-sheaf-cofinal-coverings"
    ],
@@ -37,7 +37,7 @@
    }
   },
   {
-   "text": "*The extension as a sheaf of abelian groups.* By step 1, the presheaf of abelian groups $(F(U),r_{U,V})$ on $\\mathcal B$ satisfies the hypothesis of [lem-weil-pbc-sheaf-on-basis-extends] ($\\mathcal B$ is a basis closed under pairwise intersections). Hence there is a sheaf of abelian groups $F^{ext}$ on $X$ with group isomorphisms $\\iota_U:F^{ext}(U)\\to F(U)$, $U\\in\\mathcal B$, such that $\\iota_V(t|_V)=r_{U,V}(\\iota_U(t))$ for $V\\subseteq U$ in $\\mathcal B$.",
+   "text": "Apply lem-weil-pbc-sheaf-on-basis-extends to Fab with the gluing obtained in step 1. Convert the resulting additive categorical isomorphisms to additive equivalences j. Their restriction compatibility is precisely the input needed by the scalar-action construction of step 3.",
    "uses": [
     "lem-weil-pbc-sheaf-on-basis-extends"
    ],
@@ -48,7 +48,7 @@
    }
   },
   {
-   "text": "*The module structure (proof of (a)).* Following Stacks 009T, the multiplication is constructed on the level of presheaves of sets. Let $P$ be the presheaf of sets $W\\mapsto\\mathcal O(W)\\times F^{ext}(W)$ on $X$ (componentwise restriction) and $Q$ the underlying sheaf of sets of $F^{ext}$ (a sheaf of abelian groups is a sheaf on underlying sets: the gluing condition is the same statement). For $U\\in\\mathcal B$ put $\\mu_U(a,t)=\\iota_U^{-1}(a\\,\\iota_U(t))$ for $a\\in\\mathcal O(U)$, $t\\in F^{ext}(U)$. For $V\\subseteq U$ in $\\mathcal B$: $\\iota_V(\\mu_U(a,t)|_V)=r_{U,V}(a\\,\\iota_U(t))=a|_V\\,r_{U,V}(\\iota_U(t))=a|_V\\,\\iota_V(t|_V)=\\iota_V(\\mu_V(a|_V,t|_V))$, using the compatibility of $\\iota$ (step 2) and the semilinearity of $r_{U,V}$; so $(\\mu_U)_{U\\in\\mathcal B}$ is a family of maps $P(U)\\to Q(U)$ compatible with the restrictions. By [lem-weil-pbc-sheaf-morphism-on-basis] (a) (values in sets) there is a unique morphism of presheaves of sets $\\mu:P\\to Q$ with these components on $\\mathcal B$; write $a\\cdot t=\\mu_W(a,t)$ for every open $W$. Each module axiom is an equality of two morphisms of presheaves of sets into $Q$ built from $\\mu$, the ring operations of $\\mathcal O$ and the addition of $F^{ext}$ (all compatible with restrictions): $(ab)\\cdot t=a\\cdot(b\\cdot t)$ and $(a+b)\\cdot t=a\\cdot t+b\\cdot t$ as maps $\\mathcal O\\times\\mathcal O\\times F^{ext}\\to F^{ext}$, $a\\cdot(t+t')=a\\cdot t+a\\cdot t'$ as maps $\\mathcal O\\times F^{ext}\\times F^{ext}\\to F^{ext}$, $1\\cdot t=t$ as maps $F^{ext}\\to F^{ext}$. On every $U\\in\\mathcal B$ the two sides agree, because there $\\mu_U$ is the $\\mathcal O(U)$-module structure of $F(U)$ transported along the additive bijection $\\iota_U$. By the uniqueness in [lem-weil-pbc-sheaf-morphism-on-basis] (a) (two morphisms from a presheaf into a sheaf agreeing on $\\mathcal B$ are equal) each axiom holds on every open $W$. So every $F^{ext}(W)$ is an $\\mathcal O(W)$-module extending its group structure, the restrictions are semilinear (naturality of $\\mu$), and $F^{ext}$ is a sheaf of abelian groups: it is a sheaf of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. Each $\\iota_U$ is $\\mathcal O(U)$-linear since $\\iota_U(a\\cdot t)=\\iota_U(\\mu_U(a,t))=a\\,\\iota_U(t)$, and compatible with restrictions by step 2. This is (a).",
+   "text": "Form the presheaf of sets P(W) = O(W) × A(W), where A is the additive sheaf of step 2. On a basis open U define the action by j_U^{-1}(a • j_U(t)); j compatibility and rsmul give naturality on the basis. Use the Mathlib morphism-extension leaf lem-weil-pbc-sheaf-morphism-on-basis (restrictHomEquivHom and extend_hom_app) to extend this action to a natural map P -> A on underlying sets. Its naturality makes restrictions semilinear. For each of the six Module axioms, restrict its two sides to an arbitrary basis neighbourhood inside W and apply j_U: naturality and the basis action formula reduce equality to the corresponding axiom in F(U). Mathlib section_ext identifies sections whose germs agree, so the axiom holds on W. Construct the presheaf of modules with PresheafOfModules.ofPresheaf; its additive presheaf is A, hence it is a sheaf. The j_U become linear equivalences. This constructs clause (a), without arbitrary unproved choices in definitions.",
    "uses": [
     "lem-weil-pbc-sheaf-morphism-on-basis",
     "def-weil-sheaf-of-modules-category"
@@ -60,7 +60,7 @@
    }
   },
   {
-   "text": "*Morphisms out of $F^{ext}$ (proof of (b)).* Let $\\mathcal G$ be a sheaf of $\\mathcal O$-modules and $\\psi_U:F(U)\\to\\mathcal G(U)$, $U\\in\\mathcal B$, $\\mathcal O(U)$-linear and compatible with restrictions. The maps $\\psi_U\\circ\\iota_U:F^{ext}(U)\\to\\mathcal G(U)$ are additive and compatible with restrictions (step 2). By [lem-weil-pbc-sheaf-morphism-on-basis] (a) (values in abelian groups) there is exactly one morphism of sheaves of abelian groups $\\Psi:F^{ext}\\to\\mathcal G$ with $\\Psi_U=\\psi_U\\circ\\iota_U$ for $U\\in\\mathcal B$. It is $\\mathcal O$-linear: the two morphisms of presheaves of sets $\\mathcal O\\times F^{ext}\\to\\mathcal G$, $(a,t)\\mapsto\\Psi(a\\cdot t)$ and $(a,t)\\mapsto a\\,\\Psi(t)$, agree on every $U\\in\\mathcal B$ ($\\iota_U$ and $\\psi_U$ are $\\mathcal O(U)$-linear), hence are equal by the uniqueness in [lem-weil-pbc-sheaf-morphism-on-basis] (a) (values in sets). Uniqueness of $\\Psi$ among morphisms of $\\mathcal O$-modules follows from uniqueness among morphisms of abelian sheaves. If every $\\psi_U$ is bijective, every $\\Psi_U$, $U\\in\\mathcal B$, is an isomorphism, so $\\Psi$ is an isomorphism of sheaves of abelian groups by [lem-weil-pbc-sheaf-morphism-on-basis] (b); its inverse is $\\mathcal O$-linear on every open (the inverse of a bijective linear map is linear), so $\\Psi$ is an isomorphism of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. Finally, if $(F',\\iota')$ is another sheaf of $\\mathcal O$-modules with $\\mathcal O(U)$-linear isomorphisms $\\iota'_U:F'(U)\\to F(U)$ compatible with restrictions, applying this to $\\mathcal G=F'$, $\\psi_U=\\iota_U'^{-1}$ gives an isomorphism $\\Psi:F^{ext}\\to F'$ with $\\iota'_U\\Psi_U=\\iota_U$, and it is the only morphism with this property; so $(F^{ext},\\iota)$ is unique up to unique isomorphism. This is (b).",
+   "text": "Given compatible basiswise linear maps, extend their additive maps using restrictHomEquivHom. For linearity on any W, restrict the desired equality to a basis neighbourhood of each point of W. Naturality of the additive extension, semilinearity of restrictions, and its specified basis component reduce to the basiswise linearity; section_ext gives the global equality. Package this as a module-sheaf morphism with PresheafOfModules.homMk. The Mathlib basis hom_ext theorem gives uniqueness. If the basis maps are bijective, compose with the basis linear equivalences to get bijective components of the extended additive sheaf morphism. Apply isIso_iff_isIso_basis and reflection of isomorphisms by SheafOfModules.toSheaf. For another extension G with identifications j, extend the maps j_U^{-1}; they are compatible by injectivity of j_V. Their components are bijective, so asIso gives the desired isomorphism. Morphism uniqueness and Iso.ext prove uniqueness of this isomorphism. This proves clause (b).",
    "uses": [
     "lem-weil-pbc-sheaf-morphism-on-basis",
     "def-weil-sheaf-of-modules-category"
@@ -72,7 +72,7 @@
    }
   },
   {
-   "text": "*Stalks (proof of (c)).* Let $x\\in X$. The set $\\mathcal B_x=\\{U\\in\\mathcal B:x\\in U\\}$ is directed by reverse inclusion ($U\\cap V\\in\\mathcal B_x$ for $U,V\\in\\mathcal B_x$). Let $F^{ext}_x$ be the stalk with germs $t\\mapsto t_x$ [def-weil-pbc-module-stalk] and put $\\lambda_U=(\\,\\cdot\\,)_x\\circ\\iota_U^{-1}:F(U)\\to F^{ext}_x$ for $U\\in\\mathcal B_x$. These are compatible: for $V\\subseteq U$ in $\\mathcal B_x$ and $s\\in F(U)$, $\\iota_V^{-1}(r_{U,V}(s))=(\\iota_U^{-1}s)|_V$ (step 2), and a section and its restriction have the same germ. We show that $(F^{ext}_x,(\\lambda_U))$ is a colimit of the $F(U)$, $U\\in\\mathcal B_x$. Let $A$ be an abelian group and $\\varphi_U:F(U)\\to A$ additive maps with $\\varphi_V\\circ r_{U,V}=\\varphi_U$. By [lem-weil-pbc-stalk-germs-on-basis] (i) every element of $F^{ext}_x$ is $t_x$ with $t\\in F^{ext}(U)$, $U\\in\\mathcal B_x$; set $\\varphi(t_x)=\\varphi_U(\\iota_U(t))$. This is well defined: if $t_x=t'_x$ with $t\\in F^{ext}(U)$, $t'\\in F^{ext}(U')$, by [lem-weil-pbc-stalk-germs-on-basis] (ii) there is $W\\in\\mathcal B_x$, $W\\subseteq U\\cap U'$, with $t|_W=t'|_W$, whence $\\varphi_U(\\iota_Ut)=\\varphi_W(r_{U,W}\\iota_Ut)=\\varphi_W(\\iota_W(t|_W))=\\varphi_W(\\iota_W(t'|_W))=\\varphi_{U'}(\\iota_{U'}t')$. It is additive (two germs are germs over a common $W\\in\\mathcal B_x$, by restriction), satisfies $\\varphi\\circ\\lambda_U=\\varphi_U$, and is the only such map since the images of the $\\lambda_U$ cover $F^{ext}_x$. So $F^{ext}_x=\\varinjlim_{U\\in\\mathcal B_x}F(U)$ via the $\\lambda_U$. Moreover $\\lambda_U(as)=a_x\\lambda_U(s)$ for $a\\in\\mathcal O(U)$ ($\\iota_U$ is linear and germs are multiplicative, [def-weil-pbc-module-stalk]), so the identification is compatible with the $\\mathcal O_x$-module structure. This is (c).",
+   "text": "For clause (c), compose phi_U with the additive part of iota_U to obtain compatible additive maps kappa on basis sections of E. Form the sigma type of basis neighbourhoods and their sections and its germ map q to the stalk. By lem-weil-pbc-stalk-germs-on-basis, q is surjective, and two representatives with equal germs restrict equally on a common basis neighbourhood. Compatibility of kappa thus shows that their assigned values are equal. Function.extend produces the induced stalk function with the required germ formula. To prove additivity, represent two stalk elements on basis opens U,V, restrict them to U ∩ V, use additivity of the germ map and of kappa on that intersection. The additive map is unique by surjectivity of q. Translate the germ formula through iota_U^{-1}. Finally, linearity of iota_U^{-1} and PresheafOfModules.germ_ringCat_smul prove the scalar germ identity.",
    "uses": [
     "lem-weil-pbc-stalk-germs-on-basis",
     "def-weil-pbc-module-stalk"
@@ -95,7 +95,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves on Spaces, Section 009H (label section-bases): Lemmas 009K/009L, 009M, 009N, 009Q, 009T, 009U and the remarks on stalks; the module structure is extended with the morphism-extension of the reviewed Mathlib leaf lem-weil-pbc-sheaf-morphism-on-basis (Stacks 009O/009U functoriality) instead of Stacks' families of germs satisfying (*)"
+  "place": "Stacks Section 009H, Lemmas 009L/009N/009Q/009T/009U; implemented by Q3 using Mathlib morphism extension, local section equality and basis germs. The six module laws and linearity are checked on basis neighbourhoods via section_ext."
  },
  "mathlib_searches": [
   {
@@ -206,5 +206,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T095920-L-323347",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
