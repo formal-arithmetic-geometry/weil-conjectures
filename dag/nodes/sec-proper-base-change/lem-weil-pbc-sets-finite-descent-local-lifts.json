@@ -5,9 +5,11 @@
   "place": "Remark 09Z3 (remark-cohomological-descent-finite), using Lemma 09Z2 (lemma-cohomological-descent-finite)"
  },
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "H3",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Remark 09Z3 and Lemma 09Z2, geometric-stalk argument, followed by the local filtered-colimit equality criterion"
+  "place": "Lemma 09Z2 and Remark 09Z3; geometric stalk portion split off, filtered-colimit refinement and covering portion proved in Lean"
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
@@ -24,135 +26,33 @@
  ],
  "proof": [
   {
-   "text": "*$f_1$ is finite.* By [lem-weil-pbc-finite-morphism-permanence] (a), applied to the finite $f$ and the base change along $f$, the projection $p_1:X''=X'\\times_XX'\\to X'$ is finite; by [lem-weil-pbc-finite-composition], $f_1=f\\circ p_1$ is finite.",
+   "text": "Apply [lem-weil-pbc-sets-finite-descent-germ-lifts] to the compatible section to obtain a preimage of its germ under the stalk unit at every geometric point.",
    "uses": [
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-finite-composition"
+    "lem-weil-pbc-sets-finite-descent-germ-lifts"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09Z2, statement: '$f_n:X_n\\to Y$' (finite, used in the proof through Proposition 03QP)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The sheaves and maps (Stacks: 'for each of the projections $d_j$ there is a map $d_j^{-1}f_n^{-1}\\mathcal F\\to f_{n+1}^{-1}\\mathcal F$. These maps induce maps $\\delta_j$').* Put $A=f_*f^{-1}G$ and $B=f_{1*}f_1^{-1}G$, sheaves of sets on $X_{\\Et}$ with $A(U)=(f^{-1}G)(U\\times_XX')$ and $B(U)=(f_1^{-1}G)(U\\times_XX'')$ for $U$ in $X_{\\Et}$ (the direct image $(e_*H)(U)=H(U\\times_ST)$ of [lem-weil-pbc-sets-etale-inverse-image-composition-units]). Let $\\eta:G\\to A$ be the unit, $\\eta_U(a)=f^*a$. For $j=1,2$ let $\\tau_{j,U}:U\\times_XX''\\xrightarrow{\\sim}(U\\times_XX')\\times_{X',p_j}X''$ be the canonical isomorphism over $X''$ [def-pc-fibre-product] (sending a point $(u,x'')$ to $((u,p_jx''),x'')$), natural in $U$, and define $\\delta_{j,U}:A(U)\\to B(U)$ by $\\delta_{j,U}(s)=(f_1^{-1}G)(\\tau_{j,U})\\bigl(c_{f,p_j,G}(p_j^*s)\\bigr)$, where $p_j^*s\\in(p_j^{-1}f^{-1}G)((U\\times_XX')\\times_{X'}X'')$ and $c_{f,p_j,G}:p_j^{-1}f^{-1}G\\to(f\\circ p_j)^{-1}G=f_1^{-1}G$. By clause (0) of [lem-weil-pbc-sets-etale-inverse-image-composition-units] ($p_j^*$ commutes with restriction along $U'\\times_XX'\\to U\\times_XX'$, and $c_{f,p_j,G}$ is a morphism of sheaves) and the naturality of $\\tau_{j,U}$ in $U$, the $\\delta_{j,U}$ commute with restrictions, so $\\delta_1,\\delta_2:A\\to B$ are morphisms of sheaves. For $U=X$, under the identifications of the statement, $\\eta_X(s)=f^*s$ and $\\delta_{j,X}(s')=c_{f,p_j,G}(p_j^*s')$, so the claim is that $\\eta_X$ is a bijection of $G(X)$ onto $\\{s'\\in A(X):\\delta_{1,X}(s')=\\delta_{2,X}(s')\\}$.",
-   "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09Z2, proof, second paragraph ('there is a map $d_j^{-1}f_n^{-1}\\mathcal F\\to f_{n+1}^{-1}\\mathcal F$ ... maps $\\delta_j$'; 'the canonical map $\\mathcal F\\to f_*f^{-1}\\mathcal F$'), for $n=0$ and sheaves of sets as in Remark 09Z3"
-   }
-  },
-  {
-   "text": "*Geometric points over $\\bar x$.* Fix a geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$ [def-weil-geometric-point]. Let $P$ be the set of geometric points $\\bar x':\\operatorname{Spec}\\Omega\\to X'$ with $f\\circ\\bar x'=\\bar x$ and $P_1$ the set of $\\bar x'':\\operatorname{Spec}\\Omega\\to X''$ with $f_1\\circ\\bar x''=\\bar x$. By the universal property of the fibre product [def-pc-fibre-product], $\\bar x''\\mapsto(p_1\\circ\\bar x'',p_2\\circ\\bar x'')$ is a bijection $P_1\\to P\\times P$ (a pair $(\\bar x'_1,\\bar x'_2)\\in P\\times P$ satisfies $f\\bar x'_1=\\bar x=f\\bar x'_2$, so it is $(p_1,p_2)\\circ(\\bar x'_1,\\bar x'_2)$ for exactly one $(\\bar x'_1,\\bar x'_2):\\operatorname{Spec}\\Omega\\to X''$). Since $f$ is surjective [def-weil-surjective-morphism] there is $x'\\in X'$ over the point $x$ under $\\bar x$, and [lem-weil-pbc-finite-geometric-point-lift] gives $\\bar x'\\in P$ over $x'$; so $P\\neq\\emptyset$.",
-   "uses": [
-    "def-weil-geometric-point",
-    "def-pc-fibre-product",
-    "def-weil-surjective-morphism",
-    "lem-weil-pbc-finite-geometric-point-lift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09Z2, proof, third paragraph: 'Let $E=\\{\\overline x:\\Spec(k)\\to X\\mid f(\\overline x)=\\overline y\\}$. Then $E$ is a finite nonempty set', and the identification of the geometric points of $X_1$ over $\\overline y$ with $E^2$ in '$\\bigoplus_{e\\in E^{n+1}}$'"
-   }
-  },
-  {
-   "text": "*The stalks of $A$ and $B$ (Stacks: '$(\\mathcal F_n)_{\\bar y}=\\bigoplus_{e\\in E^{n+1}}\\mathcal F_{\\bar y}$ by Proposition 03QP and Lemma 03Q1').* Stalks and germs are those of [def-weil-pbc-geometric-stalks]. For $\\bar x'\\in P$ let $r_{\\bar x'}:A_{\\bar x}\\to(f^{-1}G)_{\\bar x'}$ be the restriction of germs of [lem-weil-pbc-sets-finite-pushforward-stalk] (for $f$ and $H=f^{-1}G$), and for $\\bar x''\\in P_1$ let $r^1_{\\bar x''}:B_{\\bar x}\\to(f_1^{-1}G)_{\\bar x''}$ be the same for the finite $f_1$ (step 1) and $H=f_1^{-1}G$; by that node $(r_{\\bar x'})_{\\bar x'}:A_{\\bar x}\\to\\prod_P(f^{-1}G)_{\\bar x'}$ and $(r^1_{\\bar x''})_{\\bar x''}:B_{\\bar x}\\to\\prod_{P_1}(f_1^{-1}G)_{\\bar x''}$ are bijective. Let $c_{f,\\bar x'}=c_{f,\\bar x',G}:(f^{-1}G)_{\\bar x'}\\to G_{\\bar x}$ and $c_{f_1,\\bar x''}=c_{f_1,\\bar x'',G}:(f_1^{-1}G)_{\\bar x''}\\to G_{\\bar x}$ be the bijections of [lem-weil-pbc-sets-etale-inverse-image-stalk-germ]. Then $\\Phi=(c_{f,\\bar x'}\\circ r_{\\bar x'})_{\\bar x'\\in P}:A_{\\bar x}\\to\\prod_PG_{\\bar x}$ and $\\Phi_1=(c_{f_1,\\bar x''}\\circ r^1_{\\bar x''})_{\\bar x''\\in P_1}:B_{\\bar x}\\to\\prod_{P_1}G_{\\bar x}$ are bijective.",
-   "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-sets-finite-pushforward-stalk",
-    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09Z2, proof, third paragraph: 'by Proposition 03QP and Lemma 03Q1' (Proposition 03QP (1), the product form for sheaves of sets; Lemma 03Q1 (3))"
-   }
-  },
-  {
-   "text": "*$\\eta$ on stalks is the diagonal.* Let $\\eta_{\\bar x}:G_{\\bar x}\\to A_{\\bar x}$ be the induced map of stalks (germ of $a\\in G(U)$ at $(U,\\bar u)$ $\\mapsto$ germ of $\\eta_U(a)$ at $(U,\\bar u)$; well defined since $\\eta$ commutes with restrictions, [def-weil-pbc-category-colimit]). For $\\bar x'\\in P$: $r_{\\bar x'}$ sends the germ of $\\eta_U(a)=f^*a$ at $(U,\\bar u)$ to its germ at $(U\\times_XX',(\\bar u,\\bar x'))$, and $c_{f,\\bar x'}$ sends that to the germ of $a$ at $(U,\\bar u)$ by the germ formula of [lem-weil-pbc-sets-etale-inverse-image-stalk-germ]. Since every element of the colimit of sets $G_{\\bar x}$ is the germ of some $a\\in G(U)$ [def-weil-pbc-category-colimit], $\\Phi\\circ\\eta_{\\bar x}$ is the diagonal $\\Delta:G_{\\bar x}\\to\\prod_PG_{\\bar x}$, $g\\mapsto(g)_{\\bar x'\\in P}$.",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
-    "lem-weil-pbc-sets-finite-pushforward-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09Z2, proof, last paragraph: 'Here the first map is the diagonal map' (left implicit in the source: that the identification of the stalks carries the augmentation to the diagonal)"
-   }
-  },
-  {
-   "text": "*Compatibility of $c_{f,p_j,G}$ with the stalk bijections.* Let $\\bar x''\\in P_1$, $j\\in\\{1,2\\}$ and $\\bar x'_j=p_j\\circ\\bar x''\\in P$. For a pointed etale neighbourhood $(W,\\bar w)$ of $\\bar x'_j$ in $X'$, the pair $(W\\times_{X',p_j}X'',(\\bar w,\\bar x''))$ is a pointed etale neighbourhood of $\\bar x''$; for $t\\in(f^{-1}G)(W)$ put $L(\\text{germ of }t\\text{ at }(W,\\bar w))=c_{f_1,\\bar x''}\\bigl(\\text{germ of }c_{f,p_j,G}(p_j^*t)\\text{ at }(W\\times_{X'}X'',(\\bar w,\\bar x''))\\bigr)$. This defines a map $L:(f^{-1}G)_{\\bar x'_j}\\to G_{\\bar x}$: the right side is compatible with the transition maps, since $p_j^*$ commutes with restriction (clause (0) of [lem-weil-pbc-sets-etale-inverse-image-composition-units]), $c_{f,p_j,G}$ is a morphism of sheaves, and a morphism $(W_1,\\bar w_1)\\to(W_2,\\bar w_2)$ of pointed neighbourhoods induces one of the base-changed neighbourhoods, so the universal property of the colimit applies [def-weil-pbc-category-colimit]. Claim: $L=c_{f,\\bar x'_j}$. Every element of $(f^{-1}G)_{\\bar x'_j}$ is the germ of $f^*a$ at $(U\\times_XX',(\\bar u,\\bar x'_j))$ for some pointed etale neighbourhood $(U,\\bar u)$ of $\\bar x$ and $a\\in G(U)$: indeed $c_{f,\\bar x'_j}$ is bijective, every element of $G_{\\bar x}$ is a germ $[a]_{(U,\\bar u)}$, and $c_{f,\\bar x'_j}$ maps the germ of $f^*a$ to $[a]_{(U,\\bar u)}$ ([lem-weil-pbc-sets-etale-inverse-image-stalk-germ]). On such an element, clause (1) of [lem-weil-pbc-sets-etale-inverse-image-composition-units] (for $g=p_j$) gives $c_{f,p_j,G}(p_j^*f^*a)=f_1^*a$ under $(U\\times_XX')\\times_{X'}X''\\cong U\\times_XX''$, which carries $((\\bar u,\\bar x'_j),\\bar x'')$ to $(\\bar u,\\bar x'')$; so $L$ of it is $c_{f_1,\\bar x''}(\\text{germ of }f_1^*a\\text{ at }(U\\times_XX'',(\\bar u,\\bar x'')))=[a]_{(U,\\bar u)}$ by the germ formula for $f_1$, which is $c_{f,\\bar x'_j}$ of the same element. Hence $L=c_{f,\\bar x'_j}$.",
-   "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
-    "def-weil-pbc-category-colimit",
-    "def-pc-fibre-product",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09Z2, proof, last paragraph: 'the map $\\bigoplus_{e\\in E^{n+1}}M\\to\\bigoplus_{e\\in E^{n+2}}M$ is ... induced by the $(n+2)$ projections $E^{n+2}\\to E^{n+1}$' (left implicit in the source: that the identification of the stalks carries $\\delta_j$ to the map induced by the $j$-th projection; this step and the next write it out)"
-   }
-  },
-  {
-   "text": "*$\\delta_j$ on stalks is induced by the $j$-th projection.* Let $\\delta_{j,\\bar x}:A_{\\bar x}\\to B_{\\bar x}$ be the induced map of stalks. Let $\\alpha\\in A_{\\bar x}$ be the germ at $(V,\\bar v)$ of $s\\in A(V)=(f^{-1}G)(V\\times_XX')$ [def-weil-pbc-category-colimit]. For $\\bar x''\\in P_1$ with $\\bar x'_j=p_j\\bar x''$, $r^1_{\\bar x''}(\\delta_{j,\\bar x}(\\alpha))$ is the germ of $\\delta_{j,V}(s)=(f_1^{-1}G)(\\tau_{j,V})(c_{f,p_j,G}(p_j^*s))$ at $(V\\times_XX'',(\\bar v,\\bar x''))$, which equals the germ of $c_{f,p_j,G}(p_j^*s)$ at $((V\\times_XX')\\times_{X'}X'',((\\bar v,\\bar x'_j),\\bar x''))$ since $\\tau_{j,V}$ is an isomorphism of pointed neighbourhoods [def-pc-fibre-product]. Applying $c_{f_1,\\bar x''}$ and step 7 (with $W=V\\times_XX'$, $\\bar w=(\\bar v,\\bar x'_j)$, $t=s$): $c_{f_1,\\bar x''}r^1_{\\bar x''}\\delta_{j,\\bar x}(\\alpha)=c_{f,\\bar x'_j}(\\text{germ of }s\\text{ at }(V\\times_XX',(\\bar v,\\bar x'_j)))=c_{f,\\bar x'_j}r_{\\bar x'_j}(\\alpha)$. So the $\\bar x''$-component of $\\Phi_1\\delta_{j,\\bar x}(\\alpha)$ is the $p_j\\bar x''$-component of $\\Phi(\\alpha)$.",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-sets-finite-pushforward-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09Z2, proof, last paragraph (the maps induced by the projections), for $n=0$"
-   }
-  },
-  {
-   "text": "For each geometric point x, compatibility of the germ of s\\prime makes its product coordinates equal, by the preceding comparison calculation. Choose one lift (the lift set is nonempty); its common coordinate is a germ in G_x whose diagonal is the germ of s\\prime.",
-   "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Represent this G_x germ on a pointed étale neighbourhood. Equality of its image with the germ of s\\prime in the filtered colimit A_x is witnessed on a common pointed refinement. On this refinement the restricted section is the unit of the chosen restricted preimage, by naturality of the unit. Choose a geometric point over every underlying point using an algebraic closure of its residue field. The resulting refinement arrows are jointly surjective and each belongs to the image sieve. Thus the image sieve covers X. If X is empty the same argument is the empty cover.",
+   "text": "For each underlying point v of X, use the algebraic closure of its residue field to construct a geometric point x above v. Represent the supplied G_x preimage by a section b on a pointed neighbourhood (V,w), using joint surjectivity of germs. Map V to the identity object. Naturality of the unit and the germ relation show that its image and the restriction of s-prime have equal germs at w. Equality in the filtered colimit yields a refinement r:W→V with equal restricted sections. Naturality identifies the restriction of the unit image with the unit of b restricted to W. The lifted point of W maps to v. Thus each resulting arrow W→X belongs to the image sieve and their underlying images cover X. The jointly-surjective étale criterion makes their generated sieve covering, and upward closure makes the image sieve covering. For empty X the empty family is covering. This is implemented by the proved private helper imageSieve_mem_of_geometric_germ_lifts.",
    "uses": [
     "def-weil-algebraic-closure",
+    "def-weil-geometric-point",
     "def-weil-pbc-geometric-stalks",
     "lem-weil-pbc-filtered-colimit-sets-elementwise",
     "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-etale-sheaf-of-sets"
+    "def-weil-pbc-etale-site"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
   "def-weil-algebraic-closure",
   "def-weil-geometric-point",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-etale-sheaf-of-sets",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-surjective-morphism",
   "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-finite-composition",
-  "lem-weil-pbc-finite-geometric-point-lift",
-  "lem-weil-pbc-finite-morphism-permanence",
   "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
-  "lem-weil-pbc-sets-finite-pushforward-stalk"
+  "lem-weil-pbc-sets-finite-descent-germ-lifts"
  ],
  "status": "split",
  "created": {
@@ -234,9 +134,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T085259-L-23084",
+  "landing": "20261012T095907-L-318409",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
