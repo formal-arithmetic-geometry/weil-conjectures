@@ -15,6 +15,20 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CommRingCat
 
+/-- The integrally closedness conclusion from the common-stage argument, once the
+localization cocone has been constructed.  This isolates the algebraic part of
+Stacks Project, Algebra, Lemma Tag 037D.
+(blueprint: lem-weil-pbc-filtered-colimit-normal-ring-integrally-closed-common-stage)
+-/
+theorem integrallyClosed_of_localization_cocone
+    {I : Type u} [SmallCategory I] [IsFiltered I]
+    {R : Type u} [CommRing R]
+    (D : I ⥤ CommRingCat.{u})
+    (c : Cocone D) (hc : c.pt = CommRingCat.of R)
+    (hD : ∀ i : I, IsIntegrallyClosed (D.obj i)) :
+    IsIntegrallyClosed R := by
+  sorry
+
 /-- The localization of a filtered colimit at a prime is integrally closed when
  every stage localization at a contracted prime is integrally closed.
 (blueprint: lem-weil-pbc-filtered-colimit-normal-ring-integrally-closed)
@@ -30,6 +44,15 @@ theorem filtered_colimit_localization_isIntegrallyClosed
       IsIntegrallyClosed (Localization.AtPrime p))
     (p : Ideal ((colimit F : CommRingCat.{u}) : Type u)) [p.IsPrime] :
     IsIntegrallyClosed (Localization.AtPrime p) := by
-  sorry
+  let ι : ∀ i : I, (F.obj i) ⟶ colimit F := fun i => colimit.ι F i
+  let pᵢ : ∀ i : I, Ideal ((F.obj i : CommRingCat) : Type u) :=
+    fun i => Ideal.comap (ι i).hom p
+  obtain ⟨hpᵢ, hcomp, D, hD, hmaps, c, hc, hι, hcol⟩ :=
+    AlgebraicGeometry.filteredColimitLocalizationAtPrime F p
+  have hDi : ∀ i : I, IsIntegrallyClosed (D.obj i) := by
+    intro i
+    rw [hD i]
+    exact hF i (pᵢ i)
+  exact integrallyClosed_of_localization_cocone D c hc hDi
 
 end CommRingCat
