@@ -25,30 +25,41 @@
  ],
  "proof": [
   {
-   "text": "This intermediate result is the corresponding geometric comparison, proved by decomposing étale objects into geometric points and applying the sheaf equalizer condition.",
+   "text": "The identity etale object is terminal. For any covering sieve of the chosen terminal object, the identity geometric point supplies an arrow in the sieve and a marked lift from Spec Ω. Composing that lift with the unique morphism from the terminal object to the identity etale object gives a section of the covering arrow. Downward closure puts the identity in the sieve, so the sieve is maximal. This constructs smallEtaleTopology.IsLocalSite in Lean.",
    "uses": [
-    "lem-weil-pbc-etale-fibre-discrete-separable-points",
-    "def-weil-pbc-etale-sheaf-of-sets",
     "def-weil-pbc-etale-site",
-    "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
-    "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Mathlib CategoryTheory.GrothendieckTopology.IsLocalSite.full_constantSheaf and faithful_constantSheaf give full faithfulness of the constant sheaf functor. Thus the unit of constantSheafAdj is invertible. Its right triangle identity shows that evaluation at the terminal object sends the counit to an isomorphism.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any morphism of sheaves, the identity-neighbourhood germ maps are bijective by lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk. Naturality conjugates its terminal component to its identity geometric fibre map. The single geometric point id : Spec Ω → Spec Ω is jointly surjective. Apply the conservative-family theorem, lifted by WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint to Type (u+1), and transport through Point.uliftSheafFiberIso. Therefore an invertible terminal component implies an invertible sheaf morphism. Apply this to the counit from the previous step.",
+   "uses": [
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-fibre-discrete-separable-points",
-  "def-weil-pbc-etale-sheaf-of-sets",
   "def-weil-pbc-etale-site",
-  "lem-weil-pbc-constant-sheaf-set-sections-connected-natural",
+  "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-geometric-stalks"
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Remark 59.23.2 and Lemma 59.39.3"
+  "by": "agent",
+  "group": "R1",
+  "date": "2026-10-12",
+  "note": "Direct Lean proof: locality of the site, full faithfulness on a local site, the adjunction right triangle, and conservativity of the identity geometric point. No new unproved statements."
  },
  "mathlib_searches": [
   {
@@ -115,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T053928-L-2633814",
-  "kind": "interface",
+  "landing": "20261012T070548-L-3476214",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
