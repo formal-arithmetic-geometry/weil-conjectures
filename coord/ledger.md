@@ -5742,3 +5742,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:11 L: returned deliver/C1/WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (reviewer RETURN: (reviewer X-bb494, head bb4949ffe) D1/D2: DegreeEulerCharUnfolding.lean:19–24 moves the entire unresolved assertion into)
 - 00:13 L: merged deliver/G1/WeilConjectures.AlgebraicGeometry.Curve.Reductions (stage 3; reviewer PASS; first push; landing 20261012T001209-L-509996 (interface); modules 3; new nodes 2)
 - 00:14 L: merged deliver/F1/Sheaf.AlgebraicGeometry.Curve.AlgebraicallyClosedCohomologyInvariant (stage 3; reviewer PASS; after a return; landing 20261012T001358-L-515291 (interface); modules 2; new nodes 1)
+- 00:17 L: returned deliver/F1/Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass (reviewer RETURN: (reviewer X-9c1da, head 9c1da4ba0) C4: In dag/nodes/sec-proper-base-change/lem-weil-pbc-constructible-restriction-class-)
