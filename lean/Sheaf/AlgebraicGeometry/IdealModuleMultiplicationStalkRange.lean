@@ -9,8 +9,8 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.Images
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.StalkTensorMultiplicationRange
+import Sheaf.AlgebraicGeometry.StalkImageRange
 
 /-! # Range of ideal multiplication on module stalks
 
@@ -52,7 +52,11 @@ theorem ideal_multiplication_stalk_range {X : Scheme.{u}} {J : X.Modules}
     LinearMap.range (S.map (image.ι (ι ▷ F ≫ (λ_ F).hom))).hom =
       (LinearMap.range (S.map ι ≫ e.hom).hom : Ideal (X.presheaf.stalk x)) •
         (⊤ : Submodule (X.presheaf.stalk x) (S.obj F)) := by
-  sorry
+  dsimp
+  let _ : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x
+  rw [stalk_image_inclusion_range]
+  exact stalk_tensor_multiplication_range ι F x e he
 
 end
 end AlgebraicGeometry.Scheme
