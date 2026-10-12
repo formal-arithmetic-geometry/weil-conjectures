@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-affine-module-basic-open-localization",
+ "kind": "statement",
+ "title": "Affine basic-open sections of a quasi-coherent module satisfy the two localization conditions",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $F$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], $U$ an affine open [def-weil-affine-spectrum], and $g\\in\\Gamma(X,U)$. (1) For every $s\\in\\Gamma(F,D(g))$ there exist $n\\geq0$ and $t\\in\\Gamma(F,U)$ such that $t|_{D(g)}=(g|_{D(g)})^n s$. (2) If $t\\in\\Gamma(F,U)$ restricts to zero on $D(g)$, there exists $n\\geq0$ with $g^n t=0$.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+  "place": "exists_map_eq_pow_smul_of_isAffineOpen and exists_pow_smul_eq_zero_of_isAffineOpen; the affine tilde-Gamma argument of Stacks Schemes 01IA and 01HV"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Restrict F along the canonical open immersion Spec Gamma(X,U) -> X. Quasi-coherence makes the tilde-Gamma counit an isomorphism, so the restricted module is localizing. Transport the surjectivity and equality axioms for localization at powers of g through restrictAppIso. The first axiom gives a power multiple extending every section; applied to equality with zero, the second gives a power killing a section that restricts to zero. These are the two existing, fully proved upstream declarations.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+  "place": "proofs of the two affine basic-open denominator lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of a quasi-coherent module over a basic open of an affine scheme extends after multiplication by a power of the defining element",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicoherent module on an affine open has stalk equal to localization of its sections",
+   "results": "IsAffineOpen.isLocalization_stalk; tilde stalk localization declarations. No arbitrary quasi-coherent-module basic-open statement in the indexed Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "Related results; exact two lemmas found locally upstream."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_map_eq_pow_smul_of_isAffineOpen|exists_pow_smul_eq_zero_of_isAffineOpen|isLocalizedModule_basicOpen",
+   "results": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Tilde.lean: both denominator lemmas are fully proved, and isLocalizedModule_basicOpen packages them.",
+   "date": "2026-10-12",
+   "verdict": "Exact upstream match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "basic-open argument replacing the stalk transport in finite-type-module-support-closed",
+   "via": [
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "AlgebraicGeometry.Scheme.Modules.exists_map_eq_pow_smul_of_isAffineOpen",
+    "AlgebraicGeometry.Scheme.Modules.exists_pow_smul_eq_zero_of_isAffineOpen"
+   ],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_map_eq_pow_smul_of_isAffineOpen",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exists_map_eq_pow_smul_of_isAffineOpen",
+   "AlgebraicGeometry.Scheme.Modules.exists_pow_smul_eq_zero_of_isAffineOpen"
+  ],
+  "statement": "lemma exists_map_eq_pow_smul_of_isAffineOpen {W : X.Opens} (hW : IsAffineOpen W) (f : Γ(X, W)) (s : Γ(M, X.basicOpen f)) : ∃ (n : ℕ) (t : Γ(M, W)), M.presheaf.map (homOfLE (X.basicOpen_le f)).op t = X.presheaf.map (homOfLE (X.basicOpen_le f)).op f ^ n • s",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12",
+  "note": "Both clauses are existing proved source-library declarations; no new Lean module or proof obligation."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T144105-L-2093068",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T144105-L-2093068",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

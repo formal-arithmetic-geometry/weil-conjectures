@@ -30,86 +30,64 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the affine chart).* Let $U\\subseteq X$ be an affine open, $A=\\mathcal O_X(U)$, $M=\\mathcal F(U)$. Let $g=\\iota_U:\\operatorname{Spec}A\\to X$ be the canonical open immersion with image $U$, and for $x\\in U$ let $\\mathfrak p_x$ be the prime with $g(\\mathfrak p_x)=x$ [lem-weil-pbc-affine-open-spec-points]; $g$ induces the identity of $A$ on global sections ($\\Gamma(\\operatorname{Spec}A,\\mathcal O)=A$ [def-weil-affine-spectrum]). Let $\\mathcal G=\\mathcal F|_{\\operatorname{Spec}A}$ be the restriction along $g$, $\\mathcal G(W)=\\mathcal F(g(W))$ with the restriction maps of $\\mathcal F$ [lem-weil-pbc-module-restriction-open-immersion-colimits]; it is quasi-coherent by [lem-weil-pbc-module-restriction-open-immersion-colimits](2), and $\\Gamma(\\operatorname{Spec}A,\\mathcal G)=\\mathcal F(U)=M$ as $A$-modules. Since $\\mathcal F$ is quasi-coherent of finite type, $M$ is a finitely generated $A$-module [lem-weil-pbc-quasi-coherent-finite-type-affine](c). The counit $\\varepsilon:\\widetilde M\\to\\mathcal G$ is an isomorphism of $\\mathcal O_{\\operatorname{Spec}A}$-modules [lem-weil-pbc-affine-tilde-gamma-adjunction](3).",
+   "text": "For a quasi-coherent module F and affine open U, give the stalk its Gamma(X,U)-module structure through the ring germ. The ring stalk is localization at the prime of x, so every denominator has a unit germ and acts invertibly on the module stalk. Basic opens of U form a neighbourhood basis.",
    "uses": [
     "lem-weil-pbc-affine-open-spec-points",
     "def-weil-affine-spectrum",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent a stalk element by a section over V. Choose D(g) containing x inside V. The affine basic-open localization lemma extends the restricted section after multiplication by g^n; taking germs gives the surjectivity axiom of IsLocalizedModule. For equal germs of sections over U, germ_eq gives equality on a neighbourhood V; shrink to D(g), apply the vanishing half of basic-open localization to their difference, and get g^n times the difference zero. The canonical IsLocalizedModule.iso therefore gives the additive equivalence; linearity and mk_cancel give the required germ identity.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction preserves finite type: restrict the local generating cover along Over.forget U and map its finite generating families through the local left adjoints, which preserve colimits and the unit. This is the proved private isFiniteType_over helper. Apply the finite-generation clause of quasicoherent_finite_type_affine. Transfer nontriviality through the stalk equivalence and apply Module.mem_support_iff_of_finite (Algebra 00L2).",
+   "uses": [
+    "pqf-def-coherent",
     "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056I (lemma-support-affine-open): M = Γ(U, F) on U = Spec(A); Properties, Lemma 01PB (literature/stacks-project/properties.tex) for M finite; Schemes, Lemma 01IA (lemma-quasi-coherent-affine, literature/stacks-project/schemes.tex) for F|_U = M~"
-   }
-  },
-  {
-   "text": "*Step 2 (the stalk of $\\mathcal F$ at $x\\in U$ is a stalk on the chart).* Let $x\\in U$, $\\mathfrak p=\\mathfrak p_x$. The map $W\\mapsto g(W)$ is an order isomorphism from the open neighbourhoods of $\\mathfrak p$ in $\\operatorname{Spec}A$ onto the open neighbourhoods of $x$ contained in $U$ ($g$ is a homeomorphism onto the open $U$), and these are cofinal among all open neighbourhoods of $x$ in $X$ (intersect with $U$). Since $\\mathcal G(W)=\\mathcal F(g(W))$ with the same restriction maps, the directed colimits defining the stalks [def-weil-pbc-module-stalk] agree: $s_{\\mathfrak p}\\mapsto s_x$ ($s\\in\\mathcal G(W)=\\mathcal F(g(W))$) is a well-defined bijective additive map $\\mathcal G_{\\mathfrak p}\\to\\mathcal F_x$ (well defined and injective by the description of equality of germs, surjective because every germ at $x$ is represented over an open inside $U$). It is $A$-linear for the actions of $A=\\mathcal O_X(U)=\\Gamma(\\operatorname{Spec}A,\\mathcal O)$ through the germ maps, because the $\\mathcal O_{\\operatorname{Spec}A}(W)$-module structure on $\\mathcal G(W)$ is the $\\mathcal O_X(g(W))$-structure transported along $g^\\sharp$ [lem-weil-pbc-module-restriction-open-immersion-colimits].",
-   "uses": [
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056I (lemma-support-affine-open), proof: 'F_x = M_p' (the identification of the stalk of F at x with the stalk of F|_U at the point of Spec(A), which the source leaves implicit)"
-   }
-  },
-  {
-   "text": "*Step 3 ($\\mathcal F_x\\cong M_{\\mathfrak p_x}$).* The isomorphism $\\varepsilon$ of Step 1 induces an $A$-linear bijection $\\varepsilon_{\\mathfrak p}:\\widetilde M_{\\mathfrak p}\\to\\mathcal G_{\\mathfrak p}$, $s_{\\mathfrak p}\\mapsto\\varepsilon(s)_{\\mathfrak p}$, with inverse $(\\varepsilon^{-1})_{\\mathfrak p}$ [def-weil-pbc-module-stalk]. By [lem-weil-pbc-spec-tilde-stalk-localization] the germ map $\\lambda_M:M\\to\\widetilde M_{\\mathfrak p}$, $m\\mapsto\\tau(m)_{\\mathfrak p}$, is a localization of $M$ at $S=A\\setminus\\mathfrak p$, so $m/s\\mapsto s^{-1}\\lambda_M(m)$ is an $A$-linear bijection $M_{\\mathfrak p}=S^{-1}M\\to\\widetilde M_{\\mathfrak p}$. Composing with $\\varepsilon_{\\mathfrak p}$ and the bijection of Step 2 gives an $A$-linear isomorphism $M_{\\mathfrak p_x}\\cong\\mathcal F_x$ (compatible with $\\mathcal O_{X,x}\\cong\\mathcal O_{\\operatorname{Spec}A,\\mathfrak p_x}\\cong A_{\\mathfrak p_x}$). In particular $\\mathcal F_x\\neq0$ if and only if $M_{\\mathfrak p_x}\\neq0$.",
-   "uses": [
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-spec-tilde-stalk-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056I (lemma-support-affine-open), proof: 'the equality F_x = M_p, see Schemes, Lemma 01HV (schemes-lemma-spec-sheaves) (7)'"
-   }
-  },
-  {
-   "text": "*Step 4 (the support on $U$).* By definition $x\\in\\operatorname{Supp}(\\mathcal F)$ if and only if $\\mathcal F_x\\neq0$ [def-weil-pbc-closed-subset-proper-over-base](2), i.e. (Step 3) if and only if $M_{\\mathfrak p_x}\\neq0$, i.e. $\\mathfrak p_x\\in\\operatorname{Supp}(M)$. Since $M$ is finitely generated (Step 1), [lem-weil-pbc-finite-module-support-annihilator] gives $M_{\\mathfrak p_x}\\neq0\\iff\\operatorname{Ann}_A(M)\\subseteq\\mathfrak p_x$. Hence, identifying $U$ with $\\operatorname{Spec}A$ via $g$, $\\operatorname{Supp}(\\mathcal F)\\cap U=g(V(\\operatorname{Ann}_A(M)))$.",
-   "uses": [
-    "def-weil-pbc-closed-subset-proper-over-base",
     "lem-weil-pbc-finite-module-support-annihilator"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056I (lemma-support-affine-open) and Lemma 056J (lemma-support-finite-type) proof of (1), second argument, with Algebra, Lemma 00L2 (algebra-lemma-support-closed, literature/stacks-project/algebra.tex)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 5 (closedness).* $V(\\operatorname{Ann}_A(M))$ is closed in the Zariski topology of $\\operatorname{Spec}A$ [def-weil-affine-spectrum], and $g$ is a homeomorphism onto the open $U$ [lem-weil-pbc-affine-open-spec-points], so $\\operatorname{Supp}(\\mathcal F)\\cap U$ is closed in $U$ for every affine open $U$. The affine opens cover $X$ [def-pc-scheme], and $X\\setminus\\operatorname{Supp}(\\mathcal F)=\\bigcup_U\\bigl(U\\setminus(\\operatorname{Supp}(\\mathcal F)\\cap U)\\bigr)$ is a union of opens of $U$, hence of $X$; so $\\operatorname{Supp}(\\mathcal F)$ is closed in $X$.",
+   "text": "For each affine U, use fromSpec_primeIdealOf to send a point of the support to its prime in V(Ann). Conversely a prime in V(Ann) maps into U by range_fromSpec; injectivity of the open immersion identifies its inverse prime, and the support criterion gives membership. This proves the stated image equality.",
    "uses": [
-    "def-weil-affine-spectrum",
     "lem-weil-pbc-affine-open-spec-points",
-    "def-pc-scheme"
+    "lem-weil-pbc-finite-module-support-annihilator"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 056J (lemma-support-finite-type) part (1), proof: 'combine Lemma 056I, Properties Lemma 01PB and Algebra Lemma 00L2'"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For a point outside the support, choose an affine neighbourhood U. The image under fromSpec of the complement of V(Ann Gamma(F,U)) is open, contains the point, and lies in the support complement by the pointwise support criterion. Thus the support complement is open and the support is closed.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-affine-open-spec-points",
   "def-weil-affine-spectrum",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-spec-tilde-stalk-localization",
-  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-weil-pbc-finite-module-support-annihilator",
   "def-pc-scheme"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 056J (lemma-support-finite-type), proof of part (1), second argument (via Lemma 056I lemma-support-affine-open, Properties Lemma 01PB lemma-finite-type-module, Algebra Lemma 00L2 algebra-lemma-support-closed); the stalk identification of 056I from Schemes Lemma 01HV (7)"
+  "place": "056I and 056J(1), using the basic-open fraction argument of Schemes 01HV/01IA; Lean proof written by F1, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -193,5 +171,15 @@
   "group": "E1",
   "result": "fix",
   "note": "X scheme, F quasi-coherent + IsFiniteType; per affine U, x in U: F_x = M_p tied via germs, x in Supp iff Ann(Gamma(F,U)) <= p_x, Supp cap U = fromSpec '' V(Ann), IsClosed Supp"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T144105-L-2093068",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
