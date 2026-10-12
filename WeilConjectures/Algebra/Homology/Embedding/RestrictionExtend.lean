@@ -42,7 +42,8 @@ lemma hasLift_id_restriction (K : HomologicalComplex C c') [K.IsStrictlySupporte
 instance isIso_liftExtend_id_restriction (K : HomologicalComplex C c')
     [K.IsStrictlySupported e] :
     IsIso (e.liftExtend (𝟙 (K.restriction e)) (hasLift_id_restriction e K)) := by
-  have (i' : ι') : IsIso ((e.liftExtend (𝟙 (K.restriction e)) (hasLift_id_restriction e K)).f i') := by
+  have (i' : ι') :
+      IsIso ((e.liftExtend (𝟙 (K.restriction e)) (hasLift_id_restriction e K)).f i') := by
     by_cases hi : ∃ i, e.f i = i'
     · obtain ⟨i, rfl⟩ := hi
       rw [e.isIso_liftExtend_f_iff _ _ rfl]

@@ -241,7 +241,9 @@ lemma isTorsionSection_iff_exists_smul_eq_zero [IsReduced X]
       intro h
       exact ha ((AlgebraicGeometry.basicOpen_eq_bot_iff a).mp (SetLike.coe_injective (h.trans rfl)))
     refine isTorsionSection_of_presheaf_map_eq_zero (X.basicOpen_le a) hne' ?_
-    obtain ⟨b, hb⟩ := X.toRingedSpace.isUnit_res_basicOpen a |>.exists_left_inv
+    obtain ⟨b, hb⟩ : ∃ b : Γ(X, X.basicOpen a),
+        b * X.presheaf.map (homOfLE (X.basicOpen_le a)).op a = 1 :=
+      (X.toRingedSpace.isUnit_res_basicOpen a).exists_left_inv
     have h := congrArg (M.presheaf.map (homOfLE (X.basicOpen_le a)).op) hs
     rw [Modules.map_smul, map_zero] at h
     have h' := congrArg (b • ·) h
