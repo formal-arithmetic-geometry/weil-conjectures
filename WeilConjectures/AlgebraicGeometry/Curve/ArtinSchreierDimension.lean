@@ -29,6 +29,8 @@ are not available yet; the statement is recorded without proof.
 
 universe u
 
+open CategoryTheory
+
 namespace AlgebraicGeometry
 
 /-- **Artin–Schreier vanishing on a smooth curve.** Let `C` be a smooth separated connected
