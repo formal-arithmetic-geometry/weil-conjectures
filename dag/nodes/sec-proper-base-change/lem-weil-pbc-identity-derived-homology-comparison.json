@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-identity-derived-homology-comparison",
+ "kind": "statement",
+ "title": "Identity derived homology comparison",
+ "statement": "Let C be an abelian category with a chosen derived category [def-weil-pbc-derived-categories], n any integer, and K any bounded below derived object. The canonical map Hⁿ(K)→Hⁿ(D⁺(Id)(K)) given by mapDerivedCategoryPlusHomologyFunctorIso for Id is Hⁿ of the inverse component of mapDerivedCategoryPlusIdIso at K.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "Cohomology, Lemma 01F8 (lemma-functoriality), equations 01F9 (equation-functorial-derived) and 01FA (equation-functorial), Remark 01FB (remark-explain-arrow); sites-cohomology.tex Remark 08J6 for the site version."
+ },
+ "proof": [
+  {
+   "text": "On complexes the identity functor preserves the defining kernel and cokernel diagrams identically, so its homology comparison is the homology of the complex identity comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the localization factorization equations and natTrans_ext to extend the complex equality to derived objects, then restrict to D⁺. The compatibility isomorphisms cancel.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "W2 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "Canonical unit and homology comparisons in equations 01F9 and 01FA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "classical derived base change identity exact functor equals derived adjunction unit global sections",
+   "date": "2026-10-12",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη",
+   "verdict": "No exact statement found."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*IdIso.*homology",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact statement found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "identity functor commutes with homology canonical derived category identity isomorphism",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "identity functor homology comparison equals homology of the derived identity comparison",
+   "date": "2026-10-12",
+   "results": "8 hits: CategoryTheory.ShortComplex.map_leftRightHomologyComparison', HomologicalComplex.homologyFunctorIso_hom_app, DerivedCategory.singleFunctorCompHomologyFunctorIso, CategoryTheory.ShortComplex.homologyFunctorIso, CategoryTheory.ShortComplex.rightHomologyFunctorIso, CategoryTheory.ShortComplex.RightHomologyData.mapHomologyIso'_eq, CategoryTheory.ShortComplex.mapHomologyIso'_eq_mapHomologyIso, HomologicalComplex.homologyFunctorIso",
+   "verdict": "No exact statement found."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso.*id|homologyFunctorIso.*id|IdIso.*homology",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact statement found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived base change transformation for global sections equals derived adjunction unit followed by Leray",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*BaseChange|derived.*unit",
+   "date": "2026-10-12",
+   "results": "6 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "verdict": "No exact statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedUnitClassicalPullback",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-local-exchange",
+   "place": "Identify the canonical cohomology pullback map in the stalk calculation.",
+   "via": [
+    "lem-weil-pbc-derived-unit-classical-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.IdentityDerivedHomologyComparison",
+  "file": "lean/Sheaf/CategoryTheory/IdentityDerivedHomologyComparison.lean",
+  "declaration": "CategoryTheory.Functor.identityDerivedHomologyComparison",
+  "statement": "theorem identityDerivedHomologyComparison {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C] (n : ℤ) (K : DerivedCategory.Plus C) : ((𝟭 C).mapDerivedCategoryPlusHomologyFunctorIso n).hom.app K = (DerivedCategory.Plus.homologyFunctor C n).map ((mapDerivedCategoryPlusIdIso C).inv.app K)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T110325-L-624416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T110325-L-624416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,7 +7,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+import Sheaf.AlgebraicGeometry.DerivedUnitClassicalPullbackCoherence
+import Sheaf.CategoryTheory.IdentityDerivedHomologyComparison
 
 /-! # Derived-unit pullback and classical derived base change
 
@@ -66,6 +67,12 @@ theorem derivedUnit_classicalPullback {X X' : Scheme.{u}} (g' : X' ⟶ X)
           (L.obj G) =
       (Γ.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).hom.app G ≫
         (Functor.rightDerivedBaseChange e q).app G := by
-  sorry
+  dsimp only
+  rw [Functor.rightDerivedBaseChange_app]
+  simp only [Functor.id_map, Iso.hom_inv_id_app_assoc]
+  rw [Functor.identityDerivedHomologyComparison]
+  rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
+  rw [derivedUnit_classicalPullback_coherence]
+  simp only [Functor.map_comp, Category.assoc]
 
 end AlgebraicGeometry
