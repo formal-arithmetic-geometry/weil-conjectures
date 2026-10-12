@@ -49,12 +49,12 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteAffineCoverRestrictionBound` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image` | 3 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PrimeInjectiveCohomologyComparison` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TorsionFilteredUnion` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleRestrictionClassCore` | 4 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparison` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 6 | proof |
 | `Sheaf.Topology.NoetherianVanishingByIrreducibleComponents` | 5 | 2 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
