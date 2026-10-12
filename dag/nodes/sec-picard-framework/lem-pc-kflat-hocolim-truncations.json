@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pc-complex-hocolim-colimit] to the sequence of good truncations $\\tau_{\\le N}\\mathcal G^\\bullet$ with its canonical transition maps. It gives a quasi-isomorphism from $\\operatorname{hocolim}_{N}\\tau_{\\le N}\\mathcal G^\\bullet$ to the termwise filtered colimit $\\varinjlim_N\\tau_{\\le N}\\mathcal G^\\bullet$.",
+   "text": "Use the proved source-library truncLEMapOfLE and truncLEMapOfLE_ι to construct the natural-number diagram D with D(n) = tau_{<=n} K and its cocone of truncation inclusions. Apply [lem-pc-complex-hocolim-colimit] to D. Extensionality on the coproduct summands identifies telescopeShift R D with the required identity-minus-shift endomorphism.",
    "uses": [
     "lem-pc-complex-hocolim-colimit"
    ],
@@ -33,7 +33,7 @@
    }
   },
   {
-   "text": "In each degree $i$, the good truncation $(\\tau_{\\le N}\\mathcal G^\\bullet)^i$ equals $\\mathcal G^i$ for every $N\\ge i+1$ (for $N=i$ it is $\\ker d^i$, and for $N<i$ it is $0$), and the transition maps between these terms are then identities; so in each degree the sequence is eventually constant equal to $\\mathcal G^i$ and the colimit in degree $i$ is $\\mathcal G^i$. Thus the canonical map $\\varinjlim_N\\tau_{\\le N}\\mathcal G^\\bullet\\to\\mathcal G^\\bullet$ is an isomorphism of cochain complexes, hence a quasi-isomorphism [def-pc-quasi-iso-modules]. Composing with Step 1 proves the truncation assertion.",
+   "text": "For each integer degree i, choose the natural number i.toNat + 1. At every subsequent index n the inclusion (tau_{<=n} K)^i -> K^i is an isomorphism, by the proved source-library isIso_ιTruncLE_f and i < n. The source-library isColimitOfIsEventuallyConstant gives the evaluated colimit cocone; HomologicalComplex.isColimitOfEval makes the truncation-inclusion cocone a colimit of complexes [def-pc-cochain-complex-modules]. The unique colimit isomorphism e : colimit D ~= K sends each structure map to its truncation inclusion. Compose the telescope comparison g with e.hom. Coproduct extensionality checks its unshifted component, associativity of HomComplex cochains checks its zero shifted component, and composition with an isomorphism preserves quasi-isomorphisms [def-pc-quasi-iso-modules].",
    "uses": [
     "def-pc-cochain-complex-modules",
     "def-pc-quasi-iso-modules"
@@ -45,9 +45,9 @@
    }
   },
   {
-   "text": "Let $(f_j:E_j^\\bullet\\to F_j^\\bullet)_{j\\in J}$ be a filtered diagram of quasi-isomorphisms. For $\\Mod(\\mathcal O)$ to be abelian the site is small, or essentially so [def-weil-sheaf-of-modules-category]; replacing $\\mathcal C$ by an equivalent small site does not change $\\Mod(\\mathcal O)$, so the hypothesis of [prop-pur-kinjective-resolutions-exist] holds and by it filtered colimits in the sheaf-of-$\\mathcal O$-modules category are exact. Therefore kernels, images, and cohomology of the termwise colimit commute with the filtered colimit, so $H^i(\\varinjlim_jE_j^\\bullet)\\cong\\varinjlim_jH^i(E_j^\\bullet)$ and likewise for $F_j^\\bullet$. The induced map on these groups is the filtered colimit of the isomorphisms $H^i(f_j)$, hence is an isomorphism for every $i$; the induced map of colimit complexes is a quasi-isomorphism.",
+   "text": "Apply [lem-pur-ringed-site-grothendieck-abelian] directly to the given small ringed site [def-weil-sheaf-of-modules-category]. Only its Grothendieck abelian assertion is used, giving exact filtered colimits; no K-injective resolutions are needed. The proved source-library HomologicalComplex.isStableUnderColimitsOfShape_quasiIso instance and MorphismProperty.colimMap then show that the filtered colimit of the componentwise quasi-isomorphisms is a quasi-isomorphism [def-pc-quasi-iso-modules]. This instance expresses that exact colimits commute with homology and hence preserve the homology isomorphisms.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-ringed-site-grothendieck-abelian",
     "def-pc-cochain-complex-modules",
     "def-pc-quasi-iso-modules",
     "def-weil-sheaf-of-modules-category"
@@ -63,13 +63,13 @@
   "lem-pc-complex-hocolim-colimit",
   "def-pc-cochain-complex-modules",
   "def-pc-quasi-iso-modules",
-  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-ringed-site-grothendieck-abelian",
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 06YS"
+  "place": "Lemma 06YS; telescope comparison from Derived Categories Lemma 0949. Formalized by T1 using the proved source-library truncation maps, eventual-constant colimit criterion and exact-colimit stability of quasi-isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -157,5 +157,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085339-L-39258",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

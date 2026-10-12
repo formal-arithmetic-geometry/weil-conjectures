@@ -12,8 +12,10 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplexTrunc
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 import Sheaf.Algebra.Homology.TelescopeColimit
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # Homotopy colimit of good truncations
@@ -31,6 +33,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
+set_option maxHeartbeats 800000 in
+-- Comparing the two telescope formulas unfolds the truncation diagram under a cone type.
 /-- (blueprint: lem-pc-kflat-hocolim-truncations) For a complex `K` of modules over a sheaf of
 commutative rings on a site, the canonical map from the telescope of its good truncations to
 `K` is a quasi-isomorphism. Also, filtered colimits preserve quasi-isomorphisms of such
@@ -43,7 +47,7 @@ transition maps. Its telescope comparison gives a quasi-isomorphism to the termw
 `K` for `n > i`. The transition maps are eventually identities, so this colimit is `K`.
 Compose the telescope comparison with this isomorphism. The canonical cone map is zero
 on the shifted summand and is the sum of the truncation inclusions on the unshifted summand.
-3. As in `prop-pur-kinjective-resolutions-exist`, filtered colimits of sheaves of modules
+3. By `lem-pur-ringed-site-grothendieck-abelian`, filtered colimits of sheaves of modules
 on a small ringed site are exact. Hence they commute with kernels, images, and cohomology.
 The induced map on each cohomology sheaf is the filtered colimit of isomorphisms, so it
 is an isomorphism. This uses the meanings of cochain complexes and quasi-isomorphisms
@@ -74,6 +78,59 @@ theorem quasiIso_hocolim_truncLE_and_filtered_colimit
             (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
         (α : F ⟶ G), (∀ i : I, QuasiIso (α.app i)) →
           QuasiIso (colim.map α)) := by
-  sorry
+  let M := SheafOfModules.{u}
+    ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
+  let E : ℕ → CochainComplex M ℤ := fun n ↦ K.truncLE (n : ℤ)
+  let D : ℕ ⥤ CochainComplex M ℤ :=
+    { obj := E
+      map := fun {n m} f ↦ K.truncLEMapOfLE n m (by exact_mod_cast leOfHom f)
+      map_id := fun n ↦ by
+        dsimp [E]
+        simp [← cancel_mono (K.ιTruncLE (n : ℤ))]
+      map_comp := fun f g ↦ by
+        simp [← cancel_mono (K.ιTruncLE _), Category.assoc] }
+  let c : Cocone D :=
+    { pt := K
+      ι := { app := fun n ↦ K.ιTruncLE (n : ℤ)
+             naturality := fun n m f ↦ by simp [D] } }
+  have hc : IsColimit c := by
+    apply HomologicalComplex.isColimitOfEval
+    intro i
+    apply isColimitOfIsEventuallyConstant _ (i.toNat + 1)
+    intro n f
+    apply isIso_ιTruncLE_f
+    have hn := leOfHom f
+    omega
+  let e : colimit D ≅ K :=
+    (colimit.isColimit D).coconePointUniqueUpToIso hc
+  have he (n : ℕ) : colimit.ι D n ≫ e.hom = K.ιTruncLE (n : ℤ) := by
+    exact IsColimit.comp_coconePointUniqueUpToIso_hom _ _ n
+  let t : ∀ n : ℕ, E n ⟶ E (n + 1) :=
+    fun n ↦ D.map (homOfLE (Nat.le_succ n))
+  have ht (n : ℕ) : t n ≫ K.ιTruncLE ((n + 1 : ℕ) : ℤ) =
+      K.ιTruncLE (n : ℤ) := by simp [t, D]
+  have hs : telescopeShift R D =
+      𝟙 (∐ E) - Sigma.desc (fun n ↦ t n ≫ Sigma.ι E (n + 1)) := by
+    apply Sigma.hom_ext
+    intro n
+    simp [telescopeShift, E, t, D, Preadditive.comp_sub]
+  obtain ⟨g, hg, hz, hq⟩ := quasiIso_telescopeColimit R D
+  have hq' : QuasiIso (g ≫ e.hom) := by
+    let _ := hq
+    infer_instance
+  constructor
+  · refine ⟨t, ht, ?_⟩
+    rw [← hs]
+    refine ⟨g ≫ e.hom, ?_, ?_, hq'⟩
+    · rw [← Category.assoc, hg]
+      apply Sigma.hom_ext
+      intro n
+      simpa only [telescopeToColimit, Sigma.ι_desc_assoc, Sigma.ι_desc] using he n
+    · rw [HomComplex.Cochain.ofHom_comp]
+      rw [← HomComplex.Cochain.comp_assoc_of_second_is_zero_cochain]
+      rw [hz, HomComplex.Cochain.zero_comp]
+  · intro I _ _ F G α hα
+    let _ := (SheafOfModules.grothendieckAbelian_with_localized_generator J R).1
+    exact (HomologicalComplex.quasiIso M (.up ℤ)).colimMap α hα
 
 end CochainComplex
