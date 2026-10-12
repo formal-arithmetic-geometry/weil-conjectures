@@ -1,0 +1,184 @@
+{
+ "id": "lem-weil-pbc-symmetric-stabilization-differentials",
+ "kind": "statement",
+ "title": "Reduced differentials of a symmetric stabilization",
+ "statement": "Let $A,B,Q$ be commutative rings with $A$-algebra structures on $B,Q$, let $A_1$ be an $A$-algebra, and let $K$ be an $A_1$-module. Write $S=\\operatorname{Sym}_{A_1}(K)$ [lem-weil-pbc-symmetric-algebra-universal-property] with a compatible $A$-algebra structure, and $D=S\\otimes_A B$. Let $\\sigma:B\\to Q$, $\\eta:A_1\\to Q$, and $\\tau:D\\to Q$ be $A$-algebra maps with $\\tau(1\\otimes b)=\\sigma(b)$ and $\\tau(a\\otimes1)=\\eta(a)$ for $a\\in A_1$. Then $Q\\otimes_D\\Omega_{D/A_1}\\cong (Q\\otimes_B\\Omega_{B/A})\\oplus(Q\\otimes_{A_1}K)$ as $Q$-modules [def-weil-pbc-kahler-differentials], where the scalar actions on $Q$ are through $\\tau,\\sigma,\\eta$. No smoothness, projectivity or surjectivity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07M7, first paragraph, symmetric-algebra stabilization; the differential universal-property calculation underlying its conormal direct-sum isomorphism"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-module-base-change",
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof": [
+  {
+   "text": "For any Q-module N, restriction of an A1-derivation D→N to the factors gives an A1-derivation S→N and an A-derivation B→N. Conversely (dS,dB) extends by d(s tensor b)=sigma(b) dS(s)+tau(s tensor 1) dB(b). A-balance follows since both derivations kill A; the Leibniz rule follows by expansion on pure tensors. These constructions are inverse since pure tensors generate D.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-module-base-change-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An A1-derivation S→N is uniquely determined by its A1-linear restriction to K. Given v:K→N, send k to (tau(iota(k) tensor 1),v(k)) in the square-zero Q-algebra Q⊕N and extend by SymmetricAlgebra.lift. Its first component equals the restriction of tau by algHom_ext. Its second component is the required derivation, by the product law (q,n)(qprime,nprime)=(q qprime,q nprime+qprime n). Thus this functor is represented by Q tensor_A1 K.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-module-base-change-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The B-derivation functor is represented by Q tensor_B Omega[B/A], and the D-derivation functor by Q tensor_D Omega[D/A1]. Combine the inverse restrictions with these differential and tensor universal properties. The inverse of the resulting Q-linear equivalence sends (q tensor db,0) to q tensor d(1 tensor b), and (0,q tensor k) to q tensor d(iota(k) tensor 1). The forward map and inverse agree on these spanning generators by the two restriction formulas. The compatibility equations ensure precisely the stated Q scalar actions.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-module-base-change-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-module-base-change-universal-property",
+  "lem-weil-pbc-symmetric-algebra-universal-property"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S3",
+  "date": "2026-10-12",
+  "description": "Universal-property expansion of the symmetric stabilization calculation in Stacks 07M7, written by S3."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T12:22:10Z",
+   "tool": "grep",
+   "query": "KaehlerDifferential|SymmetricAlgebra|cancelBaseChange",
+   "sub": "",
+   "ok": true,
+   "n_hits": 25,
+   "note": "",
+   "top": [
+    "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean"
+   ],
+   "digest": "39946b6298e32307"
+  },
+  {
+   "t": "2026-10-12T12:22:11Z",
+   "tool": "leanfinder",
+   "query": "Differentials of tensor products of algebras split as the direct sum of the differentials of each factor",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "KaehlerDifferential.derivationTensorProduct",
+    "KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul",
+    "Algebra.Generators.toKaehler_tmul_D",
+    "KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul'",
+    "KaehlerDifferential.derivationTensorProduct_algebraMap",
+    "Algebra.Generators.H1Cotangent.δAux",
+    "tensorKaehlerQuotKerSqEquiv_tmul_D",
+    "KaehlerDifferential.tensorKaehlerEquiv_tmul_D"
+   ],
+   "digest": "2ceb54ebd8e0495e"
+  },
+  {
+   "t": "2026-10-12T12:22:12Z",
+   "tool": "loogle",
+   "query": "KaehlerDifferential, LinearEquiv",
+   "sub": "",
+   "ok": true,
+   "n_hits": 12,
+   "note": "",
+   "top": [
+    "KaehlerDifferential.quotKerTotalEquiv",
+    "KaehlerDifferential.linearMapEquivDerivation",
+    "KaehlerDifferential.linearMapEquivDerivation_apply_apply",
+    "KaehlerDifferential.linearMapEquivDerivation_symm_apply",
+    "KaehlerDifferential.quotKerTotalEquiv_symm_apply",
+    "KaehlerDifferential.quotKerTotalEquiv_apply",
+    "KaehlerDifferential.endEquivDerivation'",
+    "KaehlerDifferential.polynomialEquiv"
+   ],
+   "digest": "a24628839490f7fc"
+  },
+  {
+   "t": "2026-10-12T12:33:54Z",
+   "tool": "leansearch",
+   "query": "Kahler differentials of Sym_A1 K tensor_A B over A1 reduced by a section are the direct sum of reduced differentials of B over A and the reduced module K",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothSectionDifferentialData",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity approximation step: Tag 07M7, first paragraph, symmetric-algebra reduced differential calculation",
+   "via": [
+    "lem-weil-pbc-smooth-section-stabilization-free",
+    "lem-weil-pbc-smooth-section-differential-basis",
+    "lem-weil-pbc-smooth-section-etale-neighbourhoods",
+    "lem-weil-pbc-smooth-section-etale-lift",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SymmetricStabilizationDifferentials",
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricStabilizationDifferentials.lean",
+  "declaration": "AlgebraicGeometry.symmetric_stabilization_differentials",
+  "statement": "theorem symmetric_stabilization_differentials\n    (A B Q : Type u) [CommRing A] [CommRing B] [CommRing Q]\n    [Algebra A B] [Algebra A Q] (A₁ : CommAlgCat.{u} A)\n    (K : Type u) [AddCommGroup K] [Module A₁ K]\n    [Algebra A (SymmetricAlgebra A₁ K)]\n    [IsScalarTower A A₁ (SymmetricAlgebra A₁ K)]\n    (σ : B →ₐ[A] Q) (η : A₁ →ₐ[A] Q)\n    (τ : (SymmetricAlgebra A₁ K ⊗[A] B) →ₐ[A] Q)\n    (hσ : τ.comp Algebra.TensorProduct.includeRight = σ)\n    (hη : ∀ a : A₁, τ (algebraMap A₁ (SymmetricAlgebra A₁ K ⊗[A] B) a) = η a) :\n    letI : Algebra B Q := σ.toRingHom.toAlgebra\n    letI : Algebra A₁ Q := η.toRingHom.toAlgebra\n    letI : Algebra (SymmetricAlgebra A₁ K ⊗[A] B) Q := τ.toRingHom.toAlgebra\n    Nonempty ((Q ⊗[SymmetricAlgebra A₁ K ⊗[A] B]\n      KaehlerDifferential A₁ (SymmetricAlgebra A₁ K ⊗[A] B)) ≃ₗ[Q]\n        ((Q ⊗[B] KaehlerDifferential A B) × (Q ⊗[A₁] K)))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T135316-L-1692407",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T135316-L-1692407",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

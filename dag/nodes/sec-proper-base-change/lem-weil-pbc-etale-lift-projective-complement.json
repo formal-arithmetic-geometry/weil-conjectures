@@ -1,0 +1,180 @@
+{
+ "id": "lem-weil-pbc-etale-lift-projective-complement",
+ "kind": "statement",
+ "title": "An étale lift of a finite projective complement",
+ "statement": "Let $A$ be a commutative ring, $J$ an ideal, and $P$ a finite projective $A/J$-module [def-weil-pbc-projective-module]. There exist an étale $A$-algebra $A_1$ [def-weil-etale-morphism], a surjective $A$-algebra map $\\eta:A_1\\to A/J$, and a finite projective $A_1$-module $K$ such that $P\\oplus((A/J)\\otimes_{A_1}K)$ is free [def-weil-pbc-free-module], using the $A_1$-action through $\\eta$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07M7, first paragraph (projective complement and symmetric-algebra stabilization); Tag 07M5 for lifting the complement"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-finitely-generated-module",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-free-module",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Use Module.Finite.exists_comp_eq_id_of_projective to split f:(A/J)^n→P with section g. Put Kbar=ker f. The map x↦x-g(f(x)) is a retraction onto Kbar, proving it finite projective. The inverse maps (p,k)↦g(p)+k and x↦(f(x),x-g(f(x))) identify P×Kbar with (A/J)^n, so it is free.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift Kbar with Tag 07M5 to K over A1, with quotient isomorphism alpha:A/J≃A1/JA1. Define eta=alpha inverse composed with the quotient map. Compatibility of alpha proves eta A-linear, and the two maps are surjective.",
+   "uses": [
+    "lem-weil-pbc-lift-projective-module-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify K/JA1 K with (A1/JA1) tensor_A1 K using quotTensorEquivQuotSMul. Compose its inverse with the lift equivalence. Extend scalars by alpha inverse to A/J. The two cancelBaseChange equivalences and tensor lid identify (A/J) tensor_A1 K with Kbar. Take the product with the identity on P and transport freeness.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-universal-property"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-lift-projective-module-etale",
+  "lem-weil-pbc-module-base-change-universal-property"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S3",
+  "date": "2026-10-12",
+  "description": "Source route of Stacks 07M7; explicit Lean construction and scalar transport."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T12:10:35Z",
+   "tool": "leanfinder",
+   "query": "A finite projective module admits a finite projective complement making its direct sum free",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "Module.Finite.exists_comp_eq_id_of_projective",
+    "Module.Projective.iff_split'",
+    "Module.Projective.iff_split",
+    "Module.finitePresentation_of_projective",
+    "Module.Projective.of_basis",
+    "Module.projective_def",
+    "Module.projective_def'",
+    "ModuleCat.projective_of_free"
+   ],
+   "digest": "9f70735f0893b92b"
+  },
+  {
+   "t": "2026-10-12T12:10:36Z",
+   "tool": "loogle",
+   "query": "Module.Projective, Module.Free",
+   "sub": "",
+   "ok": true,
+   "n_hits": 3,
+   "note": "",
+   "top": [
+    "Module.Projective.of_free",
+    "Module.Projective.iff_split",
+    "Module.Projective.iff_split'"
+   ],
+   "digest": "e62b1444794747dc"
+  },
+  {
+   "t": "2026-10-12T12:22:10Z",
+   "tool": "grep",
+   "query": "KaehlerDifferential|SymmetricAlgebra|cancelBaseChange",
+   "sub": "",
+   "ok": true,
+   "n_hits": 25,
+   "note": "",
+   "top": [
+    "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean"
+   ],
+   "digest": "39946b6298e32307"
+  },
+  {
+   "t": "2026-10-12T12:33:53Z",
+   "tool": "leansearch",
+   "query": "For a finite projective module P over A/J there is an etale A algebra A1 and a finite projective module K with P direct sum (A/J tensor over A1 K) free",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothSectionDifferentialData",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity approximation step: Tag 07M7, first paragraph, an étale lift of a finite projective complement",
+   "via": [
+    "lem-weil-pbc-smooth-section-stabilization-free",
+    "lem-weil-pbc-smooth-section-differential-basis",
+    "lem-weil-pbc-smooth-section-etale-neighbourhoods",
+    "lem-weil-pbc-smooth-section-etale-lift",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLiftProjectiveComplement",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLiftProjectiveComplement.lean",
+  "declaration": "AlgebraicGeometry.exists_etale_lift_projective_complement",
+  "statement": "theorem exists_etale_lift_projective_complement\n    (A : Type u) [CommRing A] (J : Ideal A)\n    (P : Type u) [AddCommGroup P] [Module (A ⧸ J) P]\n    [Module.Finite (A ⧸ J) P] [Module.Projective (A ⧸ J) P] :\n    ∃ A₁ : CommAlgCat.{u} A,\n      Etale (Spec.map (CommRingCat.ofHom (algebraMap A A₁))) ∧\n      ∃ η : A₁ →ₐ[A] A ⧸ J, Function.Surjective η ∧\n        ∃ (K : Type u) (_ : AddCommGroup K) (_ : Module A₁ K),\n          Module.Finite A₁ K ∧ Module.Projective A₁ K ∧\n          letI : Algebra A₁ (A ⧸ J) := η.toRingHom.toAlgebra\n          Module.Free (A ⧸ J) (P × ((A ⧸ J) ⊗[A₁] K))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T135316-L-1692407",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T135316-L-1692407",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
