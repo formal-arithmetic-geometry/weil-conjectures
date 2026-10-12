@@ -1,0 +1,151 @@
+{
+ "id": "lem-sbc-base-change-restrict-scalars-arrow",
+ "kind": "statement",
+ "title": "Étale base-change arrows commute with restriction of coefficients",
+ "statement": "Let Λ and Λ′ be commutative rings in Type(u+1), φ:Λ→Λ′ a ring homomorphism, and Y --e→ T, Y --h→ X, T --g→ S, X --p→ S a cartesian square of schemes [sbc-def-base-change-square], with g quasi-compact and quasi-separated. For every integer q and sheaf G of Λ′-modules on T_et, the degree-q base-change arrow [sbc-def-base-change-map] of the Λ-module sheaf Res_φ G is isomorphic in the arrow category of Λ-module sheaves on X_et to Res_φ applied to the degree-q base-change arrow of G.",
+ "source": {
+  "document": "Stacks Project, Cohomology on Sites",
+  "place": "Lemma 21.20.7(3), Tag 0D6J: coefficient-independent derived direct image; Remark 21.19.3, Tag 07A7: exchange via adjunction; assembled as the change-of-rings step of Coefficients.lean",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "https://stacks.math.columbia.edu/tag/0D6J"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "https://stacks.math.columbia.edu/tag/07A7"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sbc-def-base-change-map",
+  "sbc-def-base-change-square"
+ ],
+ "proof": [
+  {
+   "text": "For a coefficient morphism φ:Λ→Λ′, restriction is exact and commutes with inverse image of module sheaves: both underlying inverse images and the restricted scalar actions agree. Direct image commutes with restriction sectionwise.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "An injective Λ′-module sheaf is acyclic for direct image on each étale slice even after restricting coefficients. Compute higher direct images with such an injective resolution to get the canonical comparison of derived direct images. It is compatible with the derived-functor units and composition. This assertion concerns acyclicity, and does not assert that restriction preserves injective sheaves.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0D6J(3)"
+   }
+  },
+  {
+   "text": "The underived exchange maps are mates under the pullback/direct-image adjunctions. The inverse-image and direct-image comparisons of step 1 identify their units and counits. Deriving and taking degree-q homology therefore gives commuting comparison maps on the source and target with the base-change maps. The vertical maps are isomorphisms by steps 1 and 2, giving an isomorphism in the arrow category. Negative degrees give zero endpoints.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 07A7"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/Coefficients.lean",
+  "place": "Change-of-rings docstring, assembled using Stacks 0D6J(3) and 07A7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules annihilated by an integer is a sheaf over the quotient ring and restriction of scalars commutes with cohomology and base change",
+   "results": "CategoryTheory.Sheaf.H, SheafOfModules.instAbelian, CategoryTheory.Sheaf.cohomologyPresheaf, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.cohomologyPresheafFunctor, instAbelianCondensedMod, instAbelianLightCondMod",
+   "date": "2026-10-12",
+   "verdict": "No matching coefficient base-change arrow comparison; related results only."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Ee]quiv|[Ee]quiv.*quotient|restrictScalars.*[Ii]so",
+   "results": "Mathlib/Algebra/Category/CommAlgCat/FiniteType.lean, Mathlib/Algebra/Category/MonCat/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-12",
+   "verdict": "No matching coefficient base-change arrow comparison; related results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules annihilated by an integer is a sheaf over the quotient ring and restriction of scalars commutes with cohomology and base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictScalars",
+   "results": "ModuleCat.restrictScalars, ModuleCat.instFaithfulRestrictScalars, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.instPreservesMonomorphismsRestrictScalars, ModuleCat.instReflectsIsomorphismsRestrictScalars, ModuleCat.instAdditiveRestrictScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.restrictScalarsId",
+   "date": "2026-10-12",
+   "verdict": "No matching coefficient base-change arrow comparison; related results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for etale sheaves commutes with derived direct image and identifies the base change morphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.restrictScalars_map_val, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pushforwardCongr, PresheafOfModules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-12",
+   "verdict": "No matching coefficient base-change arrow comparison; related results only."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|baseChangeHomologyMap|derived.*[Rr]estrict",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No matching coefficient base-change arrow comparison; related results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-smooth-base-change",
+   "place": "Proof step 2: reduction of sheaves annihilated by n to coefficient rings annihilated by n",
+   "via": [
+    "lem-sbc-quotient-coefficients-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-smooth-base-change",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleBaseChangeRestrictScalars",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleBaseChangeRestrictScalars.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_baseChangeHomologyMap_restrictScalars_arrow_iso",
+  "statement": "theorem exists_baseChangeHomologyMap_restrictScalars_arrow_iso {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X} (sq : IsPullback e h g p) [QuasiCompact g] [QuasiSeparated g] (q : ℤ) (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ')) : Nonempty (Arrow.mk (baseChangeHomologyMap Λ sq q ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G)) ≅ Arrow.mk ((Sheaf.restrictScalars X.smallEtaleTopology φ).map (baseChangeHomologyMap Λ' sq q G)))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T042425-L-1823473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T042425-L-1823473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

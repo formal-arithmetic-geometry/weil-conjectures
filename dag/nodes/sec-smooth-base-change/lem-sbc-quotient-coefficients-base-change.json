@@ -1,0 +1,135 @@
+{
+ "id": "lem-sbc-quotient-coefficients-base-change",
+ "kind": "statement",
+ "title": "Change to quotient coefficients for an annihilated sheaf",
+ "statement": "Let Λ be a commutative ring, n a natural number, q an integer, and Y --e→ T, Y --h→ X, T --g→ S, X --p→ S a cartesian square [sbc-def-base-change-square], with g quasi-compact and quasi-separated. Assume BC(p,Λ/(n),q): the degree-q base-change map is invertible in every such base-change square for every sheaf of Λ/(n)-modules. For any sheaf F of Λ-modules on T_et with n times its identity zero, its degree-q base-change map [sbc-def-base-change-map] is an isomorphism.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/Coefficients.lean",
+  "place": "Module docstring: Change of rings; docstring of Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero"
+ },
+ "stmt_deps": [
+  "sbc-def-base-change-map",
+  "sbc-def-base-change-square"
+ ],
+ "proof": [
+  {
+   "text": "Set R=Λ/(n) and G=Hom_Λ(R,F), the sheaf coextension of scalars. The counit Res G→F is an isomorphism. Sectionwise it is evaluation at 1. ModuleCat.mono_coextendQuotientShortComplex_f gives its injectivity. ModuleCat.exact_coextendQuotientShortComplex says its image is the kernel of multiplication by n; n times the identity of F is zero, so this kernel is all of F. These pointwise isomorphisms are a sheaf isomorphism. The helper isIso_quotientCounit proves this in Lean.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The hypothesis BC(p,R,q), unfolded, makes the base-change map of G over R an isomorphism. Restriction of scalars preserves this isomorphism. Apply the coefficient comparison [lem-sbc-base-change-restrict-scalars-arrow] to obtain that the base-change map of Res G over Λ is an isomorphism.",
+   "uses": [
+    "lem-sbc-base-change-restrict-scalars-arrow"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the base-change map for the counit c:Res G→F expresses its value at F as (source.map c) inverse, followed by its value at Res G, followed by target.map c. All three factors are isomorphisms, hence so is their composite. This is the original theorem with unchanged hypotheses, including n=0 and n=1.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-base-change-restrict-scalars-arrow"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/Coefficients.lean",
+  "place": "Module docstring: Change of rings; docstring of Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules annihilated by an integer is a sheaf over the quotient ring and restriction of scalars commutes with cohomology and base change",
+   "results": "CategoryTheory.Sheaf.H, SheafOfModules.instAbelian, CategoryTheory.Sheaf.cohomologyPresheaf, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.cohomologyPresheafFunctor, instAbelianCondensedMod, instAbelianLightCondMod",
+   "date": "2026-10-12",
+   "verdict": "No matching coefficient base-change arrow comparison; related results only."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Ee]quiv|[Ee]quiv.*quotient|restrictScalars.*[Ii]so",
+   "results": "Mathlib/Algebra/Category/CommAlgCat/FiniteType.lean, Mathlib/Algebra/Category/MonCat/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-12",
+   "verdict": "No matching coefficient base-change arrow comparison; related results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules annihilated by an integer is a sheaf over the quotient ring and restriction of scalars commutes with cohomology and base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictScalars",
+   "results": "ModuleCat.restrictScalars, ModuleCat.instFaithfulRestrictScalars, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.instPreservesMonomorphismsRestrictScalars, ModuleCat.instReflectsIsomorphismsRestrictScalars, ModuleCat.instAdditiveRestrictScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.restrictScalarsId",
+   "date": "2026-10-12",
+   "verdict": "No matching coefficient base-change arrow comparison; related results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for etale sheaves commutes with derived direct image and identifies the base change morphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.restrictScalars_map_val, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pushforwardCongr, PresheafOfModules.pushforward_obj_obj, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-12",
+   "verdict": "No matching coefficient base-change arrow comparison; related results only."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|baseChangeHomologyMap|derived.*[Rr]estrict",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No matching coefficient base-change arrow comparison; related results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-smooth-base-change",
+   "place": "Proof step 2: reduction of sheaves annihilated by n to coefficient rings annihilated by n",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-smooth-base-change",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/Coefficients.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero",
+  "statement": "theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero (sq : IsPullback e h g p) [QuasiCompact g] [QuasiSeparated g] (q : ℤ) (n : ℕ) (hp : Etale.BaseChangeProperty (Λ ⧸ Ideal.span {(n : Λ)}) p q) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : n • 𝟙 F = 0) : IsIso (Etale.baseChangeHomologyMap Λ sq q F)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T042425-L-1823473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T042425-L-1823473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

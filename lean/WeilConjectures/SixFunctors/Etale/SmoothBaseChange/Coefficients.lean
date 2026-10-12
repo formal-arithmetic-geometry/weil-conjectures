@@ -7,6 +7,8 @@ module
 
 public import Mathlib
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Sheaf.AlgebraicGeometry.EtaleBaseChangeRestrictScalars
 
 /-!
 # The coefficients of the smooth base change theorem
@@ -123,6 +125,30 @@ end Identification
 
 section Torsion
 
+private lemma isIso_quotientCounit (n : ℕ)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : n • 𝟙 F = 0) :
+    IsIso ((Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology
+      (Ideal.Quotient.mk (Ideal.span {(n : Λ)}))).counit.app F) := by
+  let c := (Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology
+    (Ideal.Quotient.mk (Ideal.span {(n : Λ)}))).counit.app F
+  have (U : T.Etaleᵒᵖ) : IsIso (c.hom.app U) := by
+    rw [ConcreteCategory.isIso_iff_bijective]
+    refine ⟨?_, ?_⟩
+    · exact (ModuleCat.mono_iff_injective _).1
+        (ModuleCat.mono_coextendQuotientShortComplex_f (n : Λ) (F.obj.obj U))
+    · intro x
+      apply (ShortComplex.moduleCat_exact_iff _).1
+        (ModuleCat.exact_coextendQuotientShortComplex (n : Λ) (F.obj.obj U)) x
+      have hn : n • 𝟙 (F.obj.obj U) = 0 :=
+        congrArg (fun α : F ⟶ F ↦ α.hom.app U) hF
+      change (n : Λ) • x = 0
+      have hx := congrArg (fun α : F.obj.obj U ⟶ F.obj.obj U ↦ α.hom x) hn
+      simpa only [ModuleCat.hom_nsmul, LinearMap.smul_apply,
+        ModuleCat.hom_id, LinearMap.id_apply, ModuleCat.hom_zero,
+        LinearMap.zero_apply, Nat.cast_smul_eq_nsmul] using hx
+  have : IsIso ((sheafToPresheaf _ _).map c) := NatIso.isIso_of_isIso_app c.hom
+  exact isIso_of_reflects_iso c (sheafToPresheaf _ _)
+
 /-- The change of rings `Λ ↝ Λ/nΛ` for the base-change map.
 
 Let `F` be a sheaf of `Λ`-modules on `T_ét` killed by `n`. Then `F` is a sheaf of
@@ -134,8 +160,37 @@ theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero (sq : IsPullback e h 
     [QuasiCompact g] [QuasiSeparated g] (q : ℤ) (n : ℕ)
     (hp : Etale.BaseChangeProperty (Λ ⧸ Ideal.span {(n : Λ)}) p q)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : n • 𝟙 F = 0) :
-    IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
-  sorry
+    IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
+  let φ := Ideal.Quotient.mk (Ideal.span {(n : Λ)})
+  have : (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ).IsRightAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).isRightAdjoint
+  have : PreservesLimitsOfSize.{u, u + 1}
+      (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ) :=
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).rightAdjoint_preservesLimits
+  let G := (sheafCompose T.smallEtaleTopology
+    (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ)).obj F
+  let c := (Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology φ).counit.app F
+  have : IsIso c := isIso_quotientCounit Λ n F hF
+  have : IsIso (Etale.baseChangeHomologyMap (Λ ⧸ Ideal.span {(n : Λ)}) sq q G) :=
+    hp g e h sq G
+  obtain ⟨a⟩ := Etale.exists_baseChangeHomologyMap_restrictScalars_arrow_iso φ sq q G
+  have : IsIso (Etale.baseChangeHomologyMap Λ sq q
+      ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G)) :=
+    (Arrow.isIso_iff_isIso_of_isIso a.hom).2 (by infer_instance)
+  have hc := Etale.baseChangeHomologyMap_naturality Λ sq q c
+  change Etale.baseChangeHomologyMap Λ sq q
+      ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G) ≫
+      (Etale.baseChangeTargetFunctor Λ e h q).map c =
+    (Etale.baseChangeSourceFunctor Λ p g q).map c ≫
+      Etale.baseChangeHomologyMap Λ sq q F at hc
+  have heq : Etale.baseChangeHomologyMap Λ sq q F =
+      inv ((Etale.baseChangeSourceFunctor Λ p g q).map c) ≫
+        Etale.baseChangeHomologyMap Λ sq q
+          ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G) ≫
+        (Etale.baseChangeTargetFunctor Λ e h q).map c := by
+    rw [hc, IsIso.inv_hom_id_assoc]
+  rw [heq]
+  infer_instance
 
 /-- *Filtered torsion*: to prove that the base-change map is an isomorphism at a sheaf which is
 torsion of orders invertible on `S`, it suffices to do so at the sheaves killed by a single
