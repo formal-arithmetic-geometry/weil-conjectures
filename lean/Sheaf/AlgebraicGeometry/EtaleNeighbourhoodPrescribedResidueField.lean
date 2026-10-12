@@ -60,6 +60,67 @@ theorem Scheme.exists_etale_neighbourhood_prescribed_residueField
         ∀ a : S.residueField s,
           e (algebraMap (S.residueField s) k a) =
             (φ.residueFieldMap u).hom ((S.residueFieldCongr h).inv.hom a) := by
-  sorry
+  classical
+  obtain ⟨R, ι, hι, ⟨p, hp⟩, -⟩ :=
+    Scheme.exists_affine_mem_range_and_range_subset (X := S) (U := ⊤) (x := s) trivial
+  subst s
+  have : IsOpenImmersion ι := hι
+  let θ : S.residueField (ι p) ≃+* p.asIdeal.ResidueField :=
+    ((asIso (ι.residueFieldMap p)) ≪≫
+      Scheme.Spec.residueFieldIso R p).commRingCatIsoToRingEquiv
+  let : Algebra p.asIdeal.ResidueField k :=
+    ((algebraMap (S.residueField (ι p)) k).comp θ.symm.toRingHom).toAlgebra
+  have htransport : (RingEquiv.refl k).toRingHom.comp
+      (algebraMap (S.residueField (ι p)) k) =
+      (algebraMap p.asIdeal.ResidueField k).comp θ.toRingHom := by
+    ext x
+    exact congrArg (algebraMap (S.residueField (ι p)) k) (θ.symm_apply_apply x).symm
+  have : FiniteDimensional p.asIdeal.ResidueField k :=
+    Module.Finite.of_equiv_equiv θ (RingEquiv.refl k) htransport.symm
+  have : Algebra.IsSeparable p.asIdeal.ResidueField k :=
+    Algebra.IsSeparable.of_equiv_equiv θ (RingEquiv.refl k) htransport.symm
+  obtain ⟨A, hA, aA, heA, P, hP, hcomap, e, he⟩ :=
+    Algebra.exists_etale_residueField_equiv p.asIdeal k
+  let := hA
+  let := aA
+  let := heA
+  let := hP
+  let ψ : R ⟶ CommRingCat.of A := CommRingCat.ofHom (algebraMap R A)
+  let f := Spec.map ψ
+  let q : Spec (CommRingCat.of A) := ⟨P, hP⟩
+  have hfq : f q = p := by
+    apply PrimeSpectrum.ext
+    exact hcomap.symm
+  subst p
+  have : Etale f := by
+    exact (HasRingHomProperty.Spec_iff (P := @Etale)).mpr
+      (RingHom.etale_algebraMap.mpr inferInstance)
+  let ε : k ≃+* (Spec (CommRingCat.of A)).residueField q :=
+    e.symm.trans
+      (Scheme.Spec.residueFieldIso (CommRingCat.of A) q).commRingCatIsoToRingEquiv.symm
+  refine ⟨Spec (CommRingCat.of A), f ≫ ι, inferInstance, q,
+    rfl, ε, ?_⟩
+  intro a
+  apply (Scheme.Spec.residueFieldIso (CommRingCat.of A) q).commRingCatIsoToRingEquiv.injective
+  apply e.injective
+  have hnat := congrArg (fun m ↦ m.hom ((ι.residueFieldMap (f q)).hom a))
+    (Spec.residueFieldMap_residueFieldIso_hom ψ q)
+  simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.comp_apply] at hnat
+  change e ((Scheme.Spec.residueFieldIso (CommRingCat.of A) q).hom.hom
+    (ε (algebraMap (S.residueField (ι (f q))) k a))) = _
+  have hε (b : k) :
+      (Scheme.Spec.residueFieldIso (CommRingCat.of A) q).hom.hom (ε b) = e.symm b :=
+    (Scheme.Spec.residueFieldIso (CommRingCat.of A) q).commRingCatIsoToRingEquiv.apply_symm_apply
+      (e.symm b)
+  rw [hε, e.apply_symm_apply]
+  rw [Scheme.residueFieldMap_comp]
+  change algebraMap (S.residueField (ι (f q))) k a =
+    e ((Scheme.Spec.residueFieldIso (CommRingCat.of A) q).hom.hom
+      ((f.residueFieldMap q).hom ((ι.residueFieldMap (f q)).hom a)))
+  rw [hnat]
+  change algebraMap (S.residueField (ι (f q))) k a =
+    e (Ideal.ResidueField.map (f q).asIdeal P (algebraMap R A) hcomap (θ a))
+  rw [he]
+  exact congrArg (algebraMap (S.residueField (ι (f q))) k) (θ.symm_apply_apply a).symm
 
 end AlgebraicGeometry
