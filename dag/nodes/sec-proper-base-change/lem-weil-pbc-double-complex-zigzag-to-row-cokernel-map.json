@@ -33,7 +33,7 @@
  ],
  "proof": [
   {
-   "text": "(The row-cokernel complex and $\\Phi^{\\mathrm{rt}}$.) For $x\\in A_{1,q}$ ($q\\ge1$), $\\delta_{0,q}(d_{1,q}x)=d_{1,q-1}(\\delta_{1,q}x)\\in\\operatorname{im}d_{1,q-1}$, so $\\pi_{q-1}\\circ\\delta_{0,q}$ vanishes on $\\operatorname{im}d_{1,q}=\\ker\\pi_q$ and factors uniquely through the surjection $\\pi_q$ as an $R$-linear $\\delta^{\\mathrm{rt}}_q$ with $\\delta^{\\mathrm{rt}}_q\\pi_q=\\pi_{q-1}\\delta_{0,q}$. Then $\\delta^{\\mathrm{rt}}_{q-1}\\delta^{\\mathrm{rt}}_q\\pi_q=\\pi_{q-2}\\delta_{0,q-1}\\delta_{0,q}=0$ and $\\pi_q$ is surjective, so $\\delta^{\\mathrm{rt}}_{q-1}\\delta^{\\mathrm{rt}}_q=0$ and $A^{\\mathrm{rt}}_\\bullet$ (extended by $0$ in negative degrees, $\\delta^{\\mathrm{rt}}_0=0$) is a chain complex in the sense of [def-weil-pbc-module-chain-complex-homology]. For a morphism $\\Phi$: $\\Phi_{0,q}(d_{1,q}x)=d_{1,q}(\\Phi_{1,q}x)$, so $\\pi_q\\Phi_{0,q}$ vanishes on $\\ker\\pi_q$ and defines $\\Phi^{\\mathrm{rt}}_q$ with $\\Phi^{\\mathrm{rt}}_q\\pi_q=\\pi_q\\Phi_{0,q}$; and $\\delta^{\\mathrm{rt}}_q\\Phi^{\\mathrm{rt}}_q\\pi_q=\\pi_{q-1}\\delta_{0,q}\\Phi_{0,q}=\\pi_{q-1}\\Phi_{0,q-1}\\delta_{0,q}=\\Phi^{\\mathrm{rt}}_{q-1}\\delta^{\\mathrm{rt}}_q\\pi_q$, so by surjectivity of $\\pi_q$ the family $\\Phi^{\\mathrm{rt}}$ is a morphism of chain complexes, which induces $H_n(\\Phi^{\\mathrm{rt}})$ [def-weil-pbc-module-chain-complex-homology]. (This verifies the facts the statement records about $A^{\\mathrm{rt}}_\\bullet$ and $\\Phi^{\\mathrm{rt}}$; the source calls them clear.)",
+   "text": "Use the existing row-cokernel complex A.opcycles 0 and projection A.pOpcycles 0. HomologicalComplex.opcyclesIsCokernel identifies the latter as the cokernel of A.d 1 0. ShortComplex.exact_of_g_is_cokernel gives the corresponding exact short complex of chain complexes; map it through evaluation in degree q and use Exact.moduleCat_range_eq_ker to identify the horizontal image with the projection kernel. Evaluation preserves epimorphisms, and ModuleCat.epi_iff_surjective gives surjectivity. The differential formula is the projection chain map's commutation equation. HomologicalComplex.p_opcyclesMap, evaluated in degree q, gives the morphism formula. These are the row-cokernel and induced-map constructions of [def-weil-pbc-module-chain-complex-homology].",
    "uses": [
     "def-weil-pbc-module-chain-complex-homology"
    ],
@@ -44,7 +44,7 @@
    }
   },
   {
-   "text": "(a) Let $a\\in Z_n(A)$. If $n=0$ there is nothing to prove ($\\delta^{\\mathrm{rt}}_0=0$). If $n\\ge1$, the zig-zag condition of [def-weil-pbc-double-complex-zigzag-module] at $(p,q)=(1,n-1)$ reads $d_{1,n-1}(a_{1,n-1})=\\delta_{0,n}(a_{0,n})$. Hence $\\delta^{\\mathrm{rt}}_n(\\pi_n(a_{0,n}))=\\pi_{n-1}(\\delta_{0,n}(a_{0,n}))=\\pi_{n-1}(d_{1,n-1}(a_{1,n-1}))=0$, since $\\pi_{n-1}$ kills $\\operatorname{im}d_{1,n-1}$. So $\\pi_n(a_{0,n})\\in\\ker\\delta^{\\mathrm{rt}}_n$.",
+   "text": "For degree zero, the outgoing differential is zero by the shape. For degree n+1, evaluate a zigzag's defining relation at (0,n), using [def-weil-pbc-double-complex-zigzag-module]. It equates the horizontal image of the (1,n) component with the vertical image of the endpoint. The projection commutes with the vertical differential and kills the horizontal image by HomologicalComplex.d_pOpcycles, so the projected endpoint is a cycle. Compose the endpoint projection with the inclusion of zigzagCycles, and lift this linear morphism through HomologicalComplex.liftCycles. The kernel universal property supplies a linear lift, with its endpoint formula from liftCycles_i; this construction includes degree zero.",
    "uses": [
     "def-weil-pbc-double-complex-zigzag-module",
     "def-weil-pbc-module-chain-complex-homology"
@@ -56,7 +56,7 @@
    }
   },
   {
-   "text": "(b) Let $a\\in Z_n(A)\\cap B_n(A)$. By [def-weil-pbc-double-complex-zigzag-module], $a=D_{n+1}(b)$ for some $b\\in T_{n+1}(A)$, so its component at $(0,n)$ is $a_{0,n}=d_{1,n}(b_{1,n})+\\delta_{0,n+1}(b_{0,n+1})$. Applying $\\pi_n$ and using $\\pi_n d_{1,n}=0$ and $\\pi_n\\delta_{0,n+1}=\\delta^{\\mathrm{rt}}_{n+1}\\pi_{n+1}$ (step 1) gives $\\pi_n(a_{0,n})=\\delta^{\\mathrm{rt}}_{n+1}(\\pi_{n+1}(b_{0,n+1}))\\in\\operatorname{im}\\delta^{\\mathrm{rt}}_{n+1}$; by (a) it lies in $\\ker\\delta^{\\mathrm{rt}}_n$, and its class in $H_n(A^{\\mathrm{rt}}_\\bullet)=\\ker\\delta^{\\mathrm{rt}}_n/\\operatorname{im}\\delta^{\\mathrm{rt}}_{n+1}$ [def-weil-pbc-module-chain-complex-homology] is zero.",
+   "text": "By DirectSum.linearMap_ext, check the projected endpoint of zigzagBoundary on each direct-sum generator of degree n+1 [def-weil-pbc-double-complex-zigzag-module]. A generator in column zero gives the vertical differential, commuting with the cokernel projection. A generator in column one gives the horizontal differential, killed by d_pOpcycles, while its vertical contribution has endpoint zero. Every generator in a column at least two has endpoint zero for both contributions. Thus the projected endpoint of D b is the row-cokernel differential of the projected endpoint of b. If a zigzag a is in zigzagBoundaries, choose b with D b=a only within this proof. Every cycle c lifting its endpoint equals toCycles of that projected b, since iCycles is injective. HomologicalComplex.toCycles_comp_homologyπ makes its homology class zero [def-weil-pbc-module-chain-complex-homology].",
    "uses": [
     "def-weil-pbc-double-complex-zigzag-module",
     "def-weil-pbc-module-chain-complex-homology"
@@ -68,7 +68,7 @@
    }
   },
   {
-   "text": "(The map $\\rho^A_n$.) The map $\\tilde\\rho:Z_n(A)\\to H_n(A^{\\mathrm{rt}}_\\bullet)$, $a\\mapsto[\\pi_n(a_{0,n})]$, is the composite of the $R$-linear maps $Z_n(A)\\hookrightarrow T_n(A)\\to A_{0,n}$ (projection to the component $(0,n)$), $\\pi_n$, which lands in $\\ker\\delta^{\\mathrm{rt}}_n$ on $Z_n(A)$ by (a), and the quotient map $\\ker\\delta^{\\mathrm{rt}}_n\\to H_n(A^{\\mathrm{rt}}_\\bullet)$; hence it is $R$-linear. By (b) its kernel contains the submodule $Z_n(A)\\cap B_n(A)$, so by the universal property of the quotient module it factors uniquely through $\\mathbf H_n(A)=Z_n(A)/(Z_n(A)\\cap B_n(A))$ as an $R$-linear map $\\rho^A_n$ with $\\rho^A_n([a])=[\\pi_n(a_{0,n})]$.",
+   "text": "Compose the linear lift from step 2 with homologyπ to obtain a linear map f on zigzagCycles. Step 3 shows that the comap of zigzagBoundaries along its inclusion is contained in ker f. Submodule.liftQ constructs rho on the quotient zigzagModule of [def-weil-pbc-double-complex-zigzag-module]. For any cycle c lifting the same endpoint, injectivity of iCycles identifies c with the constructed lift; liftQ's representative computation then gives rho([a])=homologyπ(c). No object is selected from an unproved existence statement.",
    "uses": [
     "def-weil-pbc-double-complex-zigzag-module",
     "def-weil-pbc-module-chain-complex-homology"
@@ -80,7 +80,7 @@
    }
   },
   {
-   "text": "(c) Let $\\Phi:A\\to B$ and $[a]\\in\\mathbf H_n(A)$ with $a\\in Z_n(A)$. By [def-weil-pbc-double-complex-zigzag-module], $\\mathbf H_n(\\Phi)[a]=[\\Phi(a)]$ with $\\Phi(a)_{0,n}=\\Phi_{0,n}(a_{0,n})$, so $\\rho^B_n(\\mathbf H_n(\\Phi)[a])=[\\pi_n(\\Phi_{0,n}(a_{0,n}))]=[\\Phi^{\\mathrm{rt}}_n(\\pi_n(a_{0,n}))]$ by step 1, and this is $H_n(\\Phi^{\\mathrm{rt}})([\\pi_n(a_{0,n})])=H_n(\\Phi^{\\mathrm{rt}})(\\rho^A_n[a])$ by the definition of the induced map on homology [def-weil-pbc-module-chain-complex-homology]. As every element of $\\mathbf H_n(A)$ is such a class, $H_n(\\Phi^{\\mathrm{rt}})\\circ\\rho^A_n=\\rho^B_n\\circ\\mathbf H_n(\\Phi)$. No exactness of rows or columns was used in steps 1-5.",
+   "text": "For a bicomplex morphism Phi, DirectSum.linearMap_ext proves that the endpoint of zigzagTotalMap Phi is Phi's (0,n) component applied to the endpoint. The existing zigzagTotalMap_preserves from [def-weil-pbc-double-complex-zigzag-module] provides the mapped zigzag b; unfold zigzagMap's Submodule.mapQ to compute it on representatives. HomologicalComplex.cyclesMap_i, p_opcyclesMap, and the endpoint identity show that cyclesMap of the row-cokernel morphism sends the constructed lift of a to the constructed lift of b, by injectivity of iCycles. HomologicalComplex.homologyπ_naturality [def-weil-pbc-module-chain-complex-homology] now proves the naturality equation on a representative. Surjectivity of mkQ and LinearMap.ext prove the equality of linear maps. No row or column exactness is assumed.",
    "uses": [
     "def-weil-pbc-double-complex-zigzag-module",
     "def-weil-pbc-module-chain-complex-homology"
@@ -99,7 +99,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18449-18455 (the canonical homomorphism) and 18506-18521 (functoriality diagram); the source states the map and calls the diagram clear; the verifications of the cycle property, well-definedness, linearity and naturality are written out here"
+  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18449-18455 (the canonical homomorphism) and 18506-18521 (functoriality diagram); the source states the map and calls the diagram clear; the verifications of the cycle property, well-definedness, linearity and naturality are written out here; Lean realization by U3, 2026-10-12: the five steps use Mathlib cokernel/exactness, cycle lift, quotient lift, and homology naturality APIs, with fully proved private endpoint calculations."
  },
  "mathlib_searches": [
   {
@@ -200,5 +200,15 @@
   "group": "G1",
   "result": "pass",
   "note": "R CommRing u/v; A,B HomologicalComplex2 (ModuleCat R) down N down N, Phi : A ⟶ B; A^rt = A.opcycles 0 (degree q = coker (A.d 1 0).f q, kernel=range+surjective), delta^rt pi = pi delta, Phi^rt = opcyclesMap Phi 0 with pi-formula; (a) d n (n-1) of pi(a_{0,n}) = 0 (n=0 by shape) + iCycles lift; (b) Z∩B => homologyPi c = 0; rho on mkQ reps of zigzagModule; (c) homologyMap(opcyclesMap Phi 0) ∘ rho A = rho B ∘ zigzagMap; same opcycles/iCycles form as landed E1 RowCycleLiftsToZigzag; #check of zigzag* resolves to HomologicalComplex2.*"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T115244-L-887395",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
