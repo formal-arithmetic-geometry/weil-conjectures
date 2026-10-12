@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-cofiltered-fixed-base-cohomology-continuity",
+ "kind": "statement",
+ "title": "Continuity of a supplied fixed-base cohomology cocone",
+ "statement": "Let J be a small nonempty cofiltered category, D:J→Sch a diagram of qcqs schemes with affine transitions [def-weil-pbc-scheme-conventions], π:D→const S, c a limit cone, and t:c.pt→S such that t=c_j π_j for all j. For an abelian etale sheaf G on S [def-weil-pbc-abelian-etale-sheaves] and q≥0, suppose H:Jᵒᵖ→Ab has stage isomorphisms H(j)≅H^q(π_j⁻¹G) and maps given by the triangle pullbacks of [lem-weil-pbc-etale-cohomology-triangle-laws]. Suppose B is a cocone for H and e:B.pt≅H^q(t⁻¹G), whose legs followed by e are the stage isomorphisms followed by the triangle pullbacks along c_j. Then B is a colimit cocone [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Theorem 59.51.3 (09YQ), https://stacks.math.columbia.edu/tag/09YQ; directed final reindexing, Tag 0032"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-etale-cohomology-triangle-laws"
+ ],
+ "proof": [
+  {
+   "text": "Choose the directed final functor to J opposite, and whisker c along its initial left opposite. This gives the same limit, with qcqs stages and affine transitions.",
+   "uses": [
+    "lem-weil-pbc-cofiltered-limit-directed-reindex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use inverse upperStarComp for the stage sheaf transitions. Unit and associativity coherence verify the sheaf-system equations. Use the constant diagram with value t inverse image G on the limit; upperStarComp identifies its objects with the pulled-back stage sheaves and associativity verifies its transition equations.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity cocone on the constant limit-sheaf diagram is a colimit since the directed category is connected.",
+   "uses": [
+    "lem-weil-pbc-colimit-constant-connected-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The given hH and hB give exactly the canonical comparison equations of nonempty_isColimit_etale_cohomology_of_isLimit. Apply that theorem to the reindexed data. Transfer its universal property back with Functor.Final.isColimitWhiskerEquiv.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-initial-functor-cofiltered-criterion"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Theorem 59.51.3 (09YQ), https://stacks.math.columbia.edu/tag/09YQ; directed final reindexing, Tag 0032"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology pullback composition maps for commuting triangles and continuity for cofiltered inverse limits of schemes",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error. No absence verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of an inverse limit of qcqs schemes with affine transition maps is the filtered colimit of their cohomology",
+   "date": "2026-10-12",
+   "results": "Closest results are AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone and related structure-sheaf sections statements, not etale cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyMap|upperStarComp_assoc|cohomology.*colimit",
+   "date": "2026-10-12",
+   "results": "Found cohomologyPullbackFunctorial, upperStarComp_id_left, upperStarComp_hom_app_map_upperStarComp_inv_app_assoc, and nonempty_isColimit_etale_cohomology_of_isLimit. These are used in the proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CofilteredEtaleCohomologyCocone",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cofiltered-etale-cohomology-cocone",
+   "place": "stage-3 Lean proof of the recorded argument",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity",
+  "file": "lean/Sheaf/AlgebraicGeometry/CofilteredFixedBaseCohomologyContinuity.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_isColimit_cofiltered_fixed_base_cohomology",
+  "statement": "theorem nonempty_isColimit_cofiltered_fixed_base_cohomology {J : Type u} [SmallCategory J] [IsCofiltered J] {S : Scheme.{u}} (D : J ⥤ Scheme.{u}) (π : D ⟶ (Functor.const J).obj S) [∀ j, CompactSpace (D.obj j)] [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (t : c.pt ⟶ S) (ht : ∀ j : J, t = c.π.app j ≫ π.app j) (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (H : Jᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (eH : ∀ j : J, H.obj (op j) ≅ AddCommGrpCat.of (Sheaf.H (((π.app j)^*[AddCommGrpCat.{u + 1}]).obj G) q)) (hH : ∀ (j k : J) (f : j ⟶ k), H.map f.op = (eH k).hom ≫ AddCommGrpCat.ofHom (cohomologyTriangleMap (D.map f) (π.app k) (π.app j) (by have h := (π.naturality f).symm change π.app j ≫ 𝟙 S = D.map f ≫ π.app k at h exact (Category.comp_id _).symm.trans h) G q) ≫ (eH j).inv) (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H (((t)^*[AddCommGrpCat.{u + 1}]).obj G) q)) (hB : ∀ j : J, B.ι.app (op j) ≫ eB.hom = (eH j).hom ≫ AddCommGrpCat.ofHom (cohomologyTriangleMap (c.π.app j) (π.app j) t (ht j) G q)) : Nonempty (IsColimit B)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T044754-L-2040168",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T044754-L-2040168",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

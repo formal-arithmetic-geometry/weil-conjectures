@@ -17,56 +17,41 @@
  ],
  "proof": [
   {
-   "text": "Construct the stage cohomology diagram from inverse-image composition and cohomological pullback. Naturality of π and pullback coherence give the compatible additive restriction maps r_j and the stage identifications e_j.",
+   "text": "Naturality of π and the cone equation imply c_jπ_j=c_kπ_k along every arrow. A common predecessor shows that all composites equal t=c_j0π_j0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define H with stage cohomology groups and transition homomorphisms cohomologyTriangleMap. The triangle identity and composition laws prove the functor equations. Choose eH as identity isomorphisms and r_j as cohomologyMap π_j. The proved triangle restriction equation gives compatibility and the stage comparison equation.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-etale-cohomology-triangle-laws"
    ],
    "elementary": false
   },
   {
-   "text": "The maps c_jπ_j agree: for any two indices choose a common predecessor and use the cone and π equations. Thus all limit inverse-image sheaves identify compatibly with t⁻¹G, where t=c_j₀π_j₀.",
+   "text": "Construct B with point H^q(t inverse image G) and legs given by triangle pullback along c_j. The triangle composition law and cone equation prove naturality. Use the supplied-cocone continuity theorem to obtain its colimit universal property. Choose e as the identity isomorphism.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition"
+    "lem-weil-pbc-etale-cohomology-triangle-laws",
+    "lem-weil-pbc-cofiltered-fixed-base-cohomology-continuity"
    ],
    "elementary": false
   },
   {
-   "text": "Reindex J opposite by a small directed final functor. Its opposite is initial and preserves the limit cone. The compatible sheaves on the limit have colimit t⁻¹G, since the index is nonempty and connected.",
+   "text": "Apply the triangle restriction equation to each projection c_j to get B_j r_j=cohomologyMap t, completing the specified comparison equation.",
    "uses": [
-    "lem-weil-pbc-cofiltered-limit-directed-reindex",
-    "lem-weil-pbc-colimit-constant-connected-diagram"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply abelian cohomology continuity (09YQ) to the directed reindexing and its constant compatible limit sheaves. This supplies the colimit cocone and comparison isomorphism. Transfer its universal property back along the final functor.",
-   "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Pullback functoriality identifies e B_j r_j with pullback along t, and e_j r_j with pullback along π_j. These yield the two displayed equations.",
-   "uses": [
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-etale-cohomology-triangle-laws"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-cofiltered-limit-directed-reindex",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-  "lem-weil-pbc-initial-functor-cofiltered-criterion"
+  "lem-weil-pbc-etale-cohomology-triangle-laws",
+  "lem-weil-pbc-cofiltered-fixed-base-cohomology-continuity"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project",
-  "place": "Theorem 59.51.3 (09YQ), https://stacks.math.columbia.edu/tag/09YQ; cofiltered-to-directed reindexing by Stacks 0032"
+  "document": "Stacks Project and source Lean",
+  "place": "Theorem 59.51.3 (09YQ), with explicit triangle maps and directed reindexing as in Tag 0032; S2 stage-3 proof"
  },
  "mathlib_searches": [
   {
@@ -133,10 +118,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T033636-L-1481564",
+  "landing": "20261012T044754-L-2040168",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

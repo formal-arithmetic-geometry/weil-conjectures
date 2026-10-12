@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-etale-cohomology-triangle-laws",
+ "kind": "statement",
+ "title": "Triangle laws for fixed-base etale cohomology pullback",
+ "statement": "Given a scheme S, an abelian etale sheaf G on S [def-weil-pbc-abelian-etale-sheaves], and q≥0, with cohomology as in [def-weil-pbc-etale-cohomology], assign to every commuting triangle X --f--> Y --a--> S with b=f a the homomorphism H^q(a⁻¹G)→H^q(b⁻¹G) obtained by cohomological pullback [def-weil-pbc-cohomology-pullback] and the inverse-image composition isomorphism [lem-weil-pbc-inverse-image-composition]. The identity triangle induces the identity homomorphism. For X --f--> Y --g--> Z over S, the map of the composite triangle is the composite of the two triangle maps. The triangle map sends the restriction of x in H^q(S,G) along a to its restriction along b.",
+ "source": {
+  "document": "Stacks Project and source Lean",
+  "place": "Cohomology Section 20.14 (01F7); inverse-image coherence from WeilConjectures.SixFunctors.BaseChange.Pasting, upperStarComp_hom_app_map_upperStarComp_inv_app_assoc"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply the identity part of cohomologyPullbackFunctorial and upperStarComp_id_left to obtain the identity map.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality and composition of cohomology pullback; combine the three sheaf morphisms using upperStarComp_hom_app_map_upperStarComp_inv_app_assoc, the component associativity coherence of inverse images. Cancel the comparison with its inverse.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project and source Lean",
+  "place": "Cohomology Section 20.14 (01F7); inverse-image coherence from WeilConjectures.SixFunctors.BaseChange.Pasting, upperStarComp_hom_app_map_upperStarComp_inv_app_assoc"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology pullback composition maps for commuting triangles and continuity for cofiltered inverse limits of schemes",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error. No absence verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of an inverse limit of qcqs schemes with affine transition maps is the filtered colimit of their cohomology",
+   "date": "2026-10-12",
+   "results": "Closest results are AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone and related structure-sheaf sections statements, not etale cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyMap|upperStarComp_assoc|cohomology.*colimit",
+   "date": "2026-10-12",
+   "results": "Found cohomologyPullbackFunctorial, upperStarComp_id_left, upperStarComp_hom_app_map_upperStarComp_inv_app_assoc, and nonempty_isColimit_etale_cohomology_of_isLimit. These are used in the proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CofilteredEtaleCohomologyCocone",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cofiltered-etale-cohomology-cocone",
+   "place": "stage-3 Lean proof of the recorded argument",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCohomologyTriangleLaws",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCohomologyTriangleLaws.lean",
+  "declaration": "AlgebraicGeometry.Etale.cohomologyTriangleMap_laws",
+  "statement": "theorem cohomologyTriangleMap_laws (S : Scheme.{u}) (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : (∀ (X : Scheme.{u}) (a : X ⟶ S), cohomologyTriangleMap (𝟙 X) a a (by simp) G q = AddMonoidHom.id _) ∧ (∀ (X Y Z : Scheme.{u}) (f : X ⟶ Y) (g : Y ⟶ Z) (a : Z ⟶ S) (b : Y ⟶ S) (d : X ⟶ S) (hb : b = g ≫ a) (hd : d = f ≫ b), cohomologyTriangleMap (f ≫ g) a d (by rw [hd, hb, Category.assoc]) G q = (cohomologyTriangleMap f b d hd G q).comp (cohomologyTriangleMap g a b hb G q))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.Etale.cohomologyTriangleMap",
+   "AlgebraicGeometry.Etale.cohomologyTriangleMap_restriction",
+   "AlgebraicGeometry.Etale.cohomologyTriangleMap_laws"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T044754-L-2040168",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T044754-L-2040168",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
