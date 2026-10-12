@@ -1,0 +1,108 @@
+{
+ "id": "lem-pd-transport-left-naturality",
+ "kind": "statement",
+ "title": "Underlying-map naturality of descent transport",
+ "statement": "Let $p:X\\to Y$ be a morphism of schemes [def-pc-scheme], $V\\to X$ a scheme over $X$, and $D$ a transport descent datum [def-pd-descent-datum]. For $g:T'\\to T$, maps $f_1,f_2:T\\to X$ with equal composites to $Y$, and $a:T\\to V$ over $f_1$, let $f_i'=g f_i$ and let $a'$ over $f_1'$ have underlying map $g a$. Then the underlying map of the transport of $a'$ from $f_1'$ to $f_2'$ is $g$ followed by the underlying map of the transport of $a$ from $f_1$ to $f_2$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0H8K, naturality of the cartesian descent datum"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pd-descent-datum"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the equalities f1'=g f1 and f2'=g f2. Extensionality of Over morphisms identifies a' with Over.homMk g followed by a from the equality of underlying maps. Apply the existing transport_homMk_comp field and project to underlying maps.",
+   "uses": [
+    "def-pd-descent-datum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pd-descent-datum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0H8K; direct application of the existing transport_homMk_comp field"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "DescentDatum.transport_homMk_comp",
+   "date": "2026-10-12",
+   "results": "Mathlib-only index does not recognize this source-library identifier."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of transport in a descent datum under precomposition",
+   "date": "2026-10-12",
+   "results": "Pseudofunctor descent interfaces returned; these use a different descent representation. Source-library transport_homMk_comp is used directly."
+  },
+  {
+   "tool": "grep",
+   "query": "transport_left_naturality|transport_homMk_comp",
+   "date": "2026-10-12",
+   "results": "Remote Mathlib grep returned no match. Local source-library search finds transport_homMk_comp in WeilConjectures.CategoryTheory.Comma.Over.DescentDatum. The returned delivery had two identical private wrappers; this node extracts one shared wrapper."
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of the underlying morphism of descent transport under precomposition",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no verdict assigned."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InvariantAffineNeighbourhoods",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-effective-descent",
+   "place": "Shared transport naturality in the invariant affine neighbourhood proof",
+   "via": [
+    "lem-pd-invariant-affine-neighbourhoods"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TransportLeftNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/TransportLeftNaturality.lean",
+  "declaration": "CategoryTheory.Over.DescentDatum.transport_left_naturality",
+  "statement": "theorem transport_left_naturality\n    {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X} (D : Over.DescentDatum p V)\n    {T T' : Scheme.{u}} (g : T' ⟶ T) (f₁ f₂ : T ⟶ X)\n    (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V)\n    (f₁' f₂' : T' ⟶ X) (h' : f₁' ≫ p = f₂' ≫ p) (a' : Over.mk f₁' ⟶ V)\n    (hf₁ : f₁' = g ≫ f₁) (hf₂ : f₂' = g ≫ f₂) (ha : a'.left = g ≫ a.left) :\n    (D.transport f₁' f₂' h' a').left = g ≫ (D.transport f₁ f₂ h a).left",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T095856-L-314202",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T095856-L-314202",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

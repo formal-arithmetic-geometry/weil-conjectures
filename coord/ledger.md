@@ -7178,3 +7178,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:58 L: merged deliver/D2/Sheaf.AlgebraicGeometry.Curve.PicRestrictionDivisorCorrection (stage 3; reviewer PASS; first push; landing 20261012T095855-L-313768 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:58 L: merged deliver/D2/Sheaf.AlgebraicGeometry.Curve.PicZeroTorsionBaseChange (stage 3; reviewer PASS; first push; landing 20261012T095856-L-313905 (interface); batch 20261012T095846; modules 2; new nodes 1)
 - 09:58 L: merged deliver/D3/Sheaf.AlgebraicGeometry.EtaleAbelianDirectImageInternal (stage 3; reviewer PASS; first push; landing 20261012T095856-L-314059 (proof); batch 20261012T095846; modules 1; new nodes 0)
+- 09:58 L: merged deliver/D3/Sheaf.AlgebraicGeometry.InvariantAffineNeighbourhoods (stage 3; reviewer PASS; after a return; landing 20261012T095856-L-314202 (interface); batch 20261012T095846; modules 4; new nodes 3)

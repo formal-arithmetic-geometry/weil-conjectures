@@ -1,0 +1,137 @@
+{
+ "id": "lem-pd-descent-norm-affine-shrinking",
+ "kind": "statement",
+ "title": "Invariant affine shrinking around a finite saturated set",
+ "statement": "Let $p:X\\to Y$ be finite, flat and locally of finite presentation [def-pc-finite-locally-free], and let $V\\to X$ have a transport descent datum $D$ [def-pd-descent-datum]. Let $(s,q):R\\to V\\times_Y X$ be a cartesian presentation [def-pc-fibre-product], with target $t:R\\to V$ given by universal transport of $s$ along $s\\circ(V\\to X)$ and $q$. Suppose $S\\subseteq V$ is finite and saturated, meaning $s^{-1}(S)=t^{-1}(S)$. For any affine open $A\\subseteq V$ containing $S$, there exists an affine open $U$ with $S\\subseteq U\\subseteq A$ and $s^{-1}(U)=t^{-1}(U)$. The empty finite set and varying local ranks are allowed. Surjectivity of $p$ is not assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03JE, proof from the affine open W to the norm nonvanishing locus"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "The naturality, identity and cocycle of D give a cartesian groupoid with source s, target t and inversion. The source is a base change of p and inversion exchanges source and target, hence both projections are finite locally free.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-fibre-product",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let Z=t(s^{-1}(V minus A)). It is closed since t is finite. Its complement W is invariant by composition and inversion, is contained in A by identity arrows, and contains S by saturation. Finite prime avoidance on A gives f with S contained in D(f) contained in W.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-prime-avoidance",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On s^{-1}(W), t factors through A. Set g=Norm_s(t* f), the determinant of multiplication by t* f on the finite locally free algebra. Locally on W this is a finite free algebra; reduce the matrix modulo the residue field of w. Its determinant is nonzero precisely when multiplication by t* f is invertible in that finite-dimensional algebra, equivalently t* f belongs to no maximal ideal of that fibre. Thus g is nonzero at w precisely when f is nonzero on every target in the orbit of w. Saturation implies g is nonzero at all points of S. The same criterion and the groupoid laws imply D(g) is invariant. Identity arrows show D(g) is contained in D(f).",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict g to the affine D(f). Its basic open equals D(g), because D(g) is already contained in D(f); thus it is affine. Set U=D(g). It contains S, is contained in A and is invariant. For empty S take the empty affine open.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-pc-scheme",
+  "def-pd-descent-datum",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-prime-avoidance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 03JE, proof from the affine open W to the norm nonvanishing locus"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite saturated subset of affine open finite locally free groupoid invariant affine shrinking by norm",
+   "date": "2026-10-12",
+   "results": "Candidates: AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover, AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.of_affine_open_cover. Inspected returned signatures; no scheme groupoid saturation or norm affine-shrinking theorem.",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "orbit|groupoid|Norm.*basicOpen|norm.*affine",
+   "date": "2026-10-12",
+   "results": "Candidates: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean. Inspected returned signatures; no scheme groupoid saturation or norm affine-shrinking theorem.",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite saturated subset in affine open finite flat groupoid invariant affine neighbourhood norm",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InvariantAffineNeighbourhoods",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-effective-descent",
+   "place": "Proof: invariant affine neighbourhood step, Tag 03JE, proof from the affine open W to the norm nonvanishing locus",
+   "via": [
+    "lem-pd-invariant-affine-neighbourhoods"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DescentNormAffineShrinking",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescentNormAffineShrinking.lean",
+  "declaration": "CategoryTheory.Over.DescentDatum.exists_descent_norm_affine_shrinking",
+  "statement": "theorem exists_descent_norm_affine_shrinking\n    {X Y R : Scheme.{u}} {p : X ⟶ Y} {V : Over X}\n    (D : Over.DescentDatum p V) (s : R ⟶ V.left) (q : R ⟶ X) (t : R ⟶ V.left)\n    (hsq : IsPullback s q (V.hom ≫ p) p)\n    (ht : (D.transport (s ≫ V.hom) q\n      (by simpa only [Category.assoc] using hsq.w) (Over.homMk s)).left = t)\n    [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]\n    (S : Set V.left) (hS : S.Finite) (hstable : s ⁻¹' S = t ⁻¹' S)\n    (A : V.left.Opens) (hA : IsAffineOpen A) (hSA : S ⊆ A) :\n    ∃ U : V.left.Opens, S ⊆ U ∧ IsAffineOpen U ∧ U ≤ A ∧ s ⁻¹' (U : Set V.left) =\n      t ⁻¹' (U : Set V.left)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T095856-L-314202",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T095856-L-314202",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

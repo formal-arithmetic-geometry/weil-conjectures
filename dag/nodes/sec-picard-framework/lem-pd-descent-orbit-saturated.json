@@ -1,0 +1,126 @@
+{
+ "id": "lem-pd-descent-orbit-saturated",
+ "kind": "statement",
+ "title": "An orbit of a cartesian descent groupoid is saturated",
+ "statement": "Let $p:X\\to Y$ be a morphism of schemes [def-pc-scheme], $V\\to X$ a scheme over $X$, and $D$ a transport descent datum [def-pd-descent-datum]. Let $s:R\\to V$ and $q:R\\to X$ exhibit $R=V\\times_Y X$ for $V\\to Y$ the composite with $p$ [def-pc-fibre-product]. Write $t:R\\to V$ for the morphism obtained by transporting the universal point $s$ from $s\\circ(V\\to X)$ to $q$. For every $v\\in V$, put $O_v=t(s^{-1}(\\{v\\}))$. Then $s^{-1}(O_v)=t^{-1}(O_v)$. No flatness, finiteness, surjectivity, or closed-point hypothesis is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03JE (orbit saturation in the proof) and 0H8K (cartesian groupoid associated to descent)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum"
+ ],
+ "proof": [
+  {
+   "text": "Transport naturality identifies transport of a map into R with its composite with t. The transported point lies over q, so t composed with V to X equals q. This uses the shared transport_left_naturality theorem, imported from its own module.",
+   "uses": [
+    "def-pd-descent-datum",
+    "lem-pd-transport-left-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For maps g1,g2:W to R with g1 t = g2 s, use the cartesian square to construct c:W to R with c s = g1 s and c q = g2 q. Apply transport naturality twice and the cocycle law to obtain c t = g2 t. Likewise lift (t,s followed by V to X) to an inverse map i:R to R; naturality and the cocycle followed by transport_self give i s = t and i t = s.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum",
+    "lem-pd-transport-left-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If s(r) is in the orbit of v, choose r0 with s(r0)=v and t(r0)=s(r). Lift (r0,r) to a point of the scheme pullback of t and s. Compose its arrows using c from the previous step: c(z) has source v and target t(r). Thus t(r) belongs to the orbit. Apply this implication to i(r) and use i s=t and i t=s for the converse.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "lem-pd-transport-left-naturality",
+  "lem-weil-pbc-fibre-product-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 03JE (orbit saturation in the proof) and 0H8K (cartesian groupoid associated to descent)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scheme descent datum orbit saturated under transport",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "orbit|groupoid|Norm.*basicOpen|norm.*affine",
+   "date": "2026-10-12",
+   "results": "Candidates: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean. Inspected returned signatures; no scheme groupoid saturation or norm affine-shrinking theorem.",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the orbit of a point under a scheme descent groupoid is saturated under source and target",
+   "date": "2026-10-12",
+   "results": "Candidates: IsQuotientCoveringMap.apply_eq_iff_mem_orbit, AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f, AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans, AlgebraicGeometry.Scheme.IsLocallyDirected.openCover_I₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S, AlgebraicGeometry.Scheme.Cover.exists_eq, CategoryTheory.Limits.SingleObj.colimitTypeRel_iff_orbitRel, AlgebraicGeometry.Scheme.GlueData.Rel. Inspected returned signatures; no scheme groupoid saturation or norm affine-shrinking theorem.",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InvariantAffineNeighbourhoods",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-effective-descent",
+   "place": "Proof: invariant affine neighbourhood step, Tags 03JE (orbit saturation in the proof) and 0H8K (cartesian groupoid associated to descent)",
+   "via": [
+    "lem-pd-invariant-affine-neighbourhoods"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DescentOrbitSaturated",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescentOrbitSaturated.lean",
+  "declaration": "CategoryTheory.Over.DescentDatum.descent_orbit_saturated",
+  "statement": "theorem descent_orbit_saturated\n    {X Y R : Scheme.{u}} {p : X ⟶ Y} {V : Over X}\n    (D : Over.DescentDatum p V) (s : R ⟶ V.left) (q : R ⟶ X) (t : R ⟶ V.left)\n    (hsq : IsPullback s q (V.hom ≫ p) p)\n    (ht : (D.transport (s ≫ V.hom) q\n      (by simpa only [Category.assoc] using hsq.w) (Over.homMk s)).left = t)\n    (v : V.left) :\n    s ⁻¹' (t '' (s ⁻¹' {v})) = t ⁻¹' (t '' (s ⁻¹' {v}))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T095856-L-314202",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T095856-L-314202",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
