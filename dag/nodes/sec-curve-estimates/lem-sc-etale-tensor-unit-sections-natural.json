@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-etale-tensor-unit-sections-natural",
+ "kind": "statement",
+ "title": "Natural unit-module tensor-section coordinates",
+ "statement": "For every scheme X, the associated etale sheaf of the unit O_X-module [def-sc-etale-qcoherent-module] admits additive section coordinates b_U with values Gamma(U,O_U), natural under etale restrictions. If theta has components Gamma(U,u^*(multiplication by r)) for a global function r, then b_U(theta_U(x)) = b_U(x) u^*(r). This statement concerns sections and sheaf morphisms only, not cohomology.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0096 and 01CA, pullback of the unit; Tag 03DR, equation (35.8.1)."
+ },
+ "stmt_deps": [
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof": [
+  {
+   "text": "Take the section maps of tensorPullbackObjUnitToUnit and use its isomorphism and adjunction-unit characterization to identify them with structure-sheaf coordinates.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized pullback composition unit equation identifies restriction with the usual structure-sheaf map. For multiplication by r, naturality of the adjunction and O_U-linearity give multiplication by u*(r); use the stipulated component formula for theta. This holds for empty schemes and r=0,1.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 0096 and 01CA, pullback of the unit; Tag 03DR, equation (35.8.1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ulift.*cohomology|cohomology.*ulift|rightDerived.*[Ll]inear",
+   "date": "2026-10-12",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "verdict": "No theorem stating this comparison was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison of etale and Zariski cohomology of structure sheaf commuting with scalar multiplication",
+   "date": "2026-10-12",
+   "results": "8 hits: Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_etaleLocus_iff, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Algebra.FormallyEtale.localization_map, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyEtale.localization_base, KaehlerDifferential.isBaseChange_of_formallyEtale; digest cb2f5ffca4efb0f9",
+   "verdict": "No theorem stating this comparison was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext",
+   "date": "2026-10-12",
+   "results": "12 hits: CategoryTheory.Abelian.Ext, CategoryTheory.Abelian.Ext.instAddCommGroup, CategoryTheory.hasExt_iff_small_ext, CategoryTheory.Abelian.Ext.mk₀, CategoryTheory.Abelian.Ext.chgUniv, CategoryTheory.Abelian.Ext.homEquiv₀, CategoryTheory.Abelian.extFunctorObj_obj_coe, CategoryTheory.Abelian.Ext.mk₀_bijective; digest 49ce6c0660e2116f",
+   "verdict": "No theorem stating this comparison was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of sheaf cohomology under coefficient universe lift and comparison with module right derived global sections",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "FreeAbelianGroup.uniqueEquiv",
+   "date": "2026-10-12",
+   "results": "1 hits: FreeAbelianGroup.uniqueEquiv; digest 2ff430053af7a499",
+   "verdict": "No theorem stating this comparison was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyComparison",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-additive-cohomology-scalar-comparison",
+   "place": "proof steps 1--3",
+   "via": [
+    "lem-sc-additive-cohomology-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorUnitSectionsNatural",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorUnitSectionsNatural.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_etaleTensorUnit_sections_natural",
+  "statement": "theorem exists_etaleTensorUnit_sections_natural (X : Scheme.{u}) :\n    ∃ b : ∀ U : X.Etaleᵒᵖ,\n        (etaleTensorSectionsSheaf (SheafOfModules.unit X.ringCatSheaf)).obj.obj U ≃+\n          Γ(U.unop.left, ⊤),\n      (∀ (U V : X.Etaleᵒᵖ) (g : U ⟶ V)\n          (x : (etaleTensorSectionsSheaf (SheafOfModules.unit X.ringCatSheaf)).obj.obj U),\n        b V ((etaleTensorSectionsSheaf (SheafOfModules.unit X.ringCatSheaf)).obj.map g x) =\n          g.unop.left.appTop (b U x)) ∧\n      (∀ (r : Γ(X, ⊤))\n          (θ : etaleTensorSectionsSheaf (SheafOfModules.unit X.ringCatSheaf) ⟶\n            etaleTensorSectionsSheaf (SheafOfModules.unit X.ringCatSheaf)),\n        (∀ U : X.Etale, θ.hom.app (Opposite.op U) =\n          ((tensorPullback U.hom).map (smulHom (SheafOfModules.unit X.ringCatSheaf) r)).app ⊤) →\n        ∀ (U : X.Etaleᵒᵖ)\n          (x : (etaleTensorSectionsSheaf (SheafOfModules.unit X.ringCatSheaf)).obj.obj U),\n          b U (θ.hom.app U x) =\n            b U x * (show Γ(U.unop.left, ⊤) from U.unop.hom.appTop r))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T154835-L-2474457",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T154835-L-2474457",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
