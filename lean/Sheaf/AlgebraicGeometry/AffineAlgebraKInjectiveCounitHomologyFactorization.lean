@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
+import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCohomologyComparison
+import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility
 
 /-! # The affine algebra counit on K-injective cohomology
 
@@ -60,6 +62,8 @@ theorem affine_algebra_kinjective_counit_homology_factorization
         (P.mapHomologicalComplexHomologyIso (.up ℤ) n).hom.app
             (((RingedSpace.moduleDirectImage
               (toDirectImageAlgebraSpace f)).mapHomologicalComplex (.up ℤ)).obj I) ≫
-          P.map e.hom ≫ a.counit.app (I.homology n) := by sorry
+          P.map e.hom ≫ a.counit.app (I.homology n) := by
+  obtain ⟨e, _⟩ := affine_algebra_kinjective_cohomology_comparison f I hI n
+  exact ⟨e, affine_algebra_kinjective_counit_compatibility f P a I hI n e⟩
 
 end AlgebraicGeometry

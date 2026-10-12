@@ -1,0 +1,98 @@
+{
+ "id": "new-affine-algebra-kinjective-counit-compatibility",
+ "kind": "statement",
+ "title": "Affine K-injective counit compatibility",
+ "statement": "Under the affine cohomology comparison e, the homology of the termwise counit of any additive exact left adjoint P equals the exact-functor homology comparison followed by P.map e and the ordinary counit.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW and Tag 08D4"
+ },
+ "proof": [
+  {
+   "text": "Compute on affine charts, where the counit sends b tensor s to b*s, and use naturality of kernels and images.",
+   "uses": [
+    "new-affine-algebra-kinjective-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-affine-algebra-kinjective-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "homology of the affine counit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homology.*counit|counit.*homology",
+   "results": "No hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplexHomologyIso",
+   "results": "unknown identifier",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homology comparison for affine direct image of K-injective complexes and the pullback pushforward counit",
+   "results": "service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitHomologyFactorization",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-algebra-kinjective-counit-homology-factorization",
+   "place": "proof"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraKInjectiveCounitCompatibility.lean",
+  "declaration": "AlgebraicGeometry.affine_algebra_kinjective_counit_compatibility",
+  "statement": "theorem affine_algebra_kinjective_counit_compatibility\n    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]\n    (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤\n      SheafOfModules.{v} (moduleRings X.toRingedSpace))\n    [P.Additive] [Limits.PreservesFiniteLimits P] [Limits.PreservesFiniteColimits P]\n    (a : P ⊣ RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f))\n    (I : CochainComplex (SheafOfModules.{v} (moduleRings X.toRingedSpace)) ℤ)\n    [I.IsKInjective] (hI : ∀ n : ℤ, (I.homology n).IsQuasicoherent) (n : ℤ)\n    (e : (((RingedSpace.moduleDirectImage\n          (toDirectImageAlgebraSpace f)).mapHomologicalComplex (.up ℤ)).obj I).homology n ≅\n        (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).obj (I.homology n)) :\n      HomologicalComplex.homologyMap ((a.mapHomologicalComplex (.up ℤ)).counit.app I) n =\n        (P.mapHomologicalComplexHomologyIso (.up ℤ) n).hom.app\n            (((RingedSpace.moduleDirectImage\n              (toDirectImageAlgebraSpace f)).mapHomologicalComplex (.up ℤ)).obj I) ≫\n          P.map e.hom ≫ a.counit.app (I.homology n)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T184243-L-3996684",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T184243-L-3996684",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
