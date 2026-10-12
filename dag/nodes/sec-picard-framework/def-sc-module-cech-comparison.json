@@ -16,9 +16,40 @@
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 01EQ, proof: the maps alpha and beta into the total complex of the Cech double complex of an injective resolution"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Additivity is proved by extensionality on cochain degrees and product projections: after unfolding the Cech functor, the component module maps preserve addition. Restriction from the whole space to itself is the identity by uniqueness of the initial morphism and functor.map_id.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove naturality of the degree-zero restriction map by product projections and presheaf-of-modules naturality. Prove its Cech differential is zero: expand the two cofaces and compose restriction maps; both composites are the unique inclusion into the whole space. Expand the total differential to prove alpha commutes with it; the Cech component is zero, and the resolution component is naturality. Outside adjacent degrees both differentials are zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For beta, the resolution augmentation composed with its differential is zero. Map this identity through the additive Cech functor. Expand the total differential on the (0,n) summand: the resolution component is zero and the Cech sign is +1. The remaining equation is the chain-map identity of the mapped augmentation. Outside adjacent degrees both differentials are zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an open cover, augment every Cech row of the injective resolution by its global sections. Each row augmentation is a quasi-isomorphism by lem-sc-injective-module-cech-augmentation. Naturality gives a chain map a from the global-sections resolution complex to the zero column of the flipped double complex; its composite with the next differential vanishes. Compose alpha with the inverse total-flip isomorphism. Its degree-n component is a.f n followed by the (0,n) inclusion, because the sign (-1)^(n*0) is +1. Apply lem-sc-first-quadrant-column-augmentation to the flipped double complex. Cancel the total-flip isomorphism to obtain QuasiIso alpha, hence IsIso on degree-p homology. The local natural-number total-flip sign structure and its sign identities are proved explicitly in Lean.",
+   "uses": [
+    "lem-sc-injective-module-cech-augmentation",
+    "lem-sc-first-quadrant-column-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-injective-module-cech-augmentation",
+  "lem-sc-first-quadrant-column-augmentation"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01EP and 01EQ, the augmented-row argument, implemented through the existing first-quadrant column augmentation after total-flip symmetry; E3 stage 3, 2026-10-12."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -127,22 +158,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "B2",
+  "reviewer": "COMPILER",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T135218-L-1656160",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.cechComplexFunctor_presheafModuleCat_additive",
-   "AlgebraicGeometry.Scheme.Modules.moduleCechAlpha_comm",
-   "AlgebraicGeometry.Scheme.Modules.moduleCechAlpha_isIso",
-   "AlgebraicGeometry.Scheme.Modules.moduleCechBeta_comm",
-   "AlgebraicGeometry.Scheme.Modules.moduleCech_top_restriction"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.Modules.moduleCechAlpha_comm",
-   "AlgebraicGeometry.Scheme.Modules.moduleCechAlpha_isIso"
-  ]
+  "landing": "20261012T152346-L-2312722",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

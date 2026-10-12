@@ -9,6 +9,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.AlgebraicGeometry.InjectiveModuleCechAugmentation
+import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
+import Mathlib.Algebra.Homology.TotalComplexSymmetry
 
 /-! # The canonical module-valued Čech comparison
 
@@ -100,6 +103,55 @@ noncomputable def moduleCechZero {X : Scheme.{u}} {ι : Type u} (U : ι → X.Op
     Pi.lift fun y : Fin 1 → ι =>
       F.presheafModuleCat.map (homOfLE (le_top (a := ∏ᶜ fun l => U (y l)))).op
 
+/-- Restrictions of global sections commute with coefficient morphisms.
+Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+private theorem moduleCechZero_naturality {X : Scheme.{u}} {ι : Type u}
+    (U : ι → X.Opens) {F G : X.Modules} (f : F ⟶ G) :
+    moduleCechZero U F ≫
+        ((CategoryTheory.cechComplexFunctor U).map
+          ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+            f.val)).f 0 =
+      (RingedSpace.globalSectionsFunctor X.toRingedSpace).map f ≫ moduleCechZero U G := by
+  apply Pi.hom_ext
+  intro y
+  dsimp [moduleCechZero, CategoryTheory.cechComplexFunctor,
+    FormalCoproduct.cochainComplexFunctor, FormalCoproduct.cosimplicialObjectFunctor,
+    FormalCoproduct.evalOp, AlgebraicTopology.alternatingCofaceMapComplex,
+    AlgebraicTopology.AlternatingCofaceMapComplex.map]
+  simp only [Category.assoc]
+  erw [Pi.map_π, Pi.lift_π_assoc, Pi.lift_π]
+  ext x
+  simp only [ModuleCat.comp_apply]
+  exact PresheafOfModules.naturality_apply f.val _ x
+
+/-- The two restrictions of a global section to each pairwise intersection agree.
+Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
+private theorem moduleCechZero_d {X : Scheme.{u}} {ι : Type u}
+    (U : ι → X.Opens) (F : X.Modules) :
+    moduleCechZero U F ≫
+      ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).d 0 1 = 0 := by
+  change moduleCechZero U F ≫
+    AlgebraicTopology.AlternatingCofaceMapComplex.objD
+      ((FormalCoproduct.cosimplicialObjectFunctor
+        (FormalCoproduct.mk _ U).cech).obj F.presheafModuleCat) 0 = 0
+  dsimp only [AlgebraicTopology.AlternatingCofaceMapComplex.objD]
+  rw [Fin.sum_univ_two]
+  simp only [
+    Fin.val_zero, Fin.val_one, pow_zero, pow_one, one_smul, neg_smul,
+    Preadditive.comp_add, Preadditive.comp_neg]
+  rw [← sub_eq_add_neg]
+  apply sub_eq_zero.mpr
+  apply Pi.hom_ext
+  intro y
+  dsimp [moduleCechZero, FormalCoproduct.cosimplicialObjectFunctor,
+    FormalCoproduct.evalOp, CosimplicialObject.δ]
+  simp only [Category.assoc]
+  erw [Pi.lift_π, Pi.lift_π]
+  erw [Pi.lift_π_assoc, Pi.lift_π_assoc]
+  congr 1
+  erw [← F.presheafModuleCat.map_comp, ← F.presheafModuleCat.map_comp]
+  congr 1
+
 /-- Components of the map from global sections of the resolution to its Čech total complex.
 Source: Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
 noncomputable def moduleCechAlphaComponent {X : Scheme.{u}} {ι : Type u}
@@ -119,7 +171,37 @@ theorem moduleCechAlpha_comm {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     moduleCechAlphaComponent U I n ≫
         ((moduleCechDouble U I).total (ComplexShape.up ℕ)).d n m =
       (RingedSpace.globalSectionsComplex I).d n m ≫ moduleCechAlphaComponent U I m := by
-  sorry
+  by_cases hnm : n + 1 = m
+  · dsimp only [moduleCechAlphaComponent]
+    rw [HomologicalComplex₂.total_d, Preadditive.comp_add,
+      Category.assoc, Category.assoc, HomologicalComplex₂.ι_D₁,
+      HomologicalComplex₂.ι_D₂,
+      HomologicalComplex₂.d₁_eq _ _ hnm 0 m (by simp [← hnm]),
+      HomologicalComplex₂.d₂_eq' _ _ n (show (0 : ℕ) + 1 = 1 from rfl)]
+    dsimp
+    simp only [one_smul, Linear.comp_units_smul]
+    have hv : moduleCechZero U (I.cocomplex.X n) ≫
+        ((moduleCechDouble U I).X n).d 0 1 = 0 := by
+      change moduleCechZero U (I.cocomplex.X n) ≫
+        ((CategoryTheory.cechComplexFunctor U).obj
+          (I.cocomplex.X n).presheafModuleCat).d 0 1 = 0
+      exact moduleCechZero_d U (I.cocomplex.X n)
+    simp only [← Category.assoc, hv,
+      zero_comp, smul_zero, add_zero]
+    have hh : moduleCechZero U (I.cocomplex.X n) ≫
+        ((moduleCechDouble U I).d n m).f 0 =
+      (RingedSpace.globalSectionsComplex I).d n m ≫
+        moduleCechZero U (I.cocomplex.X m) := by
+      change moduleCechZero U (I.cocomplex.X n) ≫
+        ((CategoryTheory.cechComplexFunctor U).map
+          ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+            (I.cocomplex.d n m).val)).f 0 =
+        (RingedSpace.globalSectionsFunctor X.toRingedSpace).map (I.cocomplex.d n m) ≫
+          moduleCechZero U (I.cocomplex.X m)
+      exact moduleCechZero_naturality U (I.cocomplex.d n m)
+    rw [hh]
+  · rw [HomologicalComplex.shape _ _ _ hnm, HomologicalComplex.shape _ _ _ hnm]
+    simp
 
 /-- The map alpha of Stacks 01EQ (blueprint: def-sc-module-cech-comparison). -/
 noncomputable def moduleCechAlpha {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
@@ -194,7 +276,62 @@ all finite filtration quotients, and induction on the filtration gives the resul
 theorem moduleCechAlpha_isIso {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (hU : iSup U = ⊤) {F : X.Modules} (I : InjectiveResolution F) (p : ℕ) :
     IsIso (HomologicalComplex.homologyMap (moduleCechAlpha U I) p) := by
-  sorry
+  let symmetry : TotalComplexShapeSymmetry
+      (ComplexShape.up ℕ) (ComplexShape.up ℕ) (ComplexShape.up ℕ) :=
+    { symm := fun i j ↦ Nat.add_comm j i
+      σ := fun i j ↦ (-1 : ℤˣ) ^ (i * j)
+      σ_ε₁ := by
+        rintro i _ rfl j
+        dsimp
+        rw [mul_one, Nat.add_mul, one_mul, pow_add, mul_left_comm,
+          Int.units_mul_self, mul_one]
+      σ_ε₂ := by
+        rintro i j _ rfl
+        dsimp
+        rw [one_mul, Nat.mul_add, Nat.mul_one, pow_add] }
+  let K := moduleCechDouble U I
+  let A := RingedSpace.globalSectionsComplex I
+  let a : A ⟶ K.flip.X 0 :=
+    { f := fun n ↦ moduleCechZero U (I.cocomplex.X n)
+      comm' := fun n m _ ↦ by
+        change moduleCechZero U (I.cocomplex.X n) ≫
+            ((CategoryTheory.cechComplexFunctor U).map
+              ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+                (I.cocomplex.d n m).val)).f 0 =
+          (RingedSpace.globalSectionsFunctor X.toRingedSpace).map
+            (I.cocomplex.d n m) ≫ moduleCechZero U (I.cocomplex.X m)
+        exact moduleCechZero_naturality U (I.cocomplex.d n m) }
+  have ha : a ≫ K.flip.d 0 1 = 0 := by
+    apply HomologicalComplex.hom_ext
+    intro n
+    change moduleCechZero U (I.cocomplex.X n) ≫
+      ((CategoryTheory.cechComplexFunctor U).obj
+        (I.cocomplex.X n).presheafModuleCat).d 0 1 = 0
+    exact moduleCechZero_d U (I.cocomplex.X n)
+  let b := moduleCechAlpha U I ≫ (K.totalFlipIso (ComplexShape.up ℕ)).inv
+  have hb : ∀ n : ℕ, b.f n = a.f n ≫
+      K.flip.ιTotal (ComplexShape.up ℕ) 0 n n (by simp) := by
+    intro n
+    dsimp only [b, HomologicalComplex.comp_f, moduleCechAlpha,
+      moduleCechAlphaComponent, a]
+    rw [Category.assoc, K.ιTotal_totalFlipIso_f_inv]
+    change (1 : ℤˣ) • moduleCechZero U (I.cocomplex.X n) ≫
+      K.flip.ιTotal (ComplexShape.up ℕ) 0 n n (by simp) = _
+    simp only [one_smul]
+  have hcol : ∀ n : ℕ, QuasiIso
+      ((CochainComplex.fromSingle₀Equiv (K.flip.flip.X n) (A.X n)).symm
+        ⟨a.f n, by simpa using congrArg (fun f ↦ f.f n) ha⟩) := by
+    intro n
+    apply injectiveModuleCechAugmentation_quasiIso U hU (I.cocomplex.X n)
+      (moduleCech_top_restriction X)
+    dsimp [a, moduleCechZero, CochainComplex.fromSingle₀Equiv]
+    rfl
+  have : QuasiIso b :=
+    HomologicalComplex₂.quasiIso_of_column_augmentation K.flip A a ha b hb hcol
+  have : QuasiIso (moduleCechAlpha U I) :=
+    quasiIso_of_comp_right (moduleCechAlpha U I)
+      (K.totalFlipIso (ComplexShape.up ℕ)).inv
+  infer_instance
 
 /-- A map `c : Ȟ^p(U, F) ⟶ H^p(X, F)` is the canonical comparison of Stacks 01EQ: for every
 injective resolution `F → I^•`, `c` followed by the identification `H^p(X, F) ≅ H^p(Γ(X, I^•))`
