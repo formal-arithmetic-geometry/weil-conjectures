@@ -132,7 +132,95 @@ theorem etale_linearization {k : Type u} [Field k] [PerfectField k] (c : ℕ) (i
   obtain ⟨m, g, h, hh, het⟩ := Algebra.exists_etale_mvPolynomial_of_isWeaklyRegular (R := k)
     (A := Γ(X, U.1)) (B := Γ(Z, i ⁻¹ᵁ U.1)) hsurj r.get hker (by rwa [List.ofFn_get])
     q.asIdeal hp
-  sorry
+  -- the localizations `A_h` and `B_h`
+  let Ah := Localization.Away h
+  let Bh := Localization (Algebra.algebraMapSubmonoid Γ(Z, i ⁻¹ᵁ U.1) (Submonoid.powers h))
+  have : IsLocalization ((Submonoid.powers h).map (algebraMap Γ(X, U.1) Γ(Z, i ⁻¹ᵁ U.1))) Bh :=
+    inferInstanceAs (IsLocalization (Algebra.algebraMapSubmonoid _ (Submonoid.powers h)) Bh)
+  let ψ : CommRingCat.of Ah ⟶ CommRingCat.of Bh := CommRingCat.ofHom (algebraMap Ah Bh)
+  let φ : CommRingCat.of (MvPolynomial (Fin r.length ⊕ Fin m) k) ⟶ CommRingCat.of Ah :=
+    CommRingCat.ofHom ((algebraMap Γ(X, U.1) Ah).comp
+      (MvPolynomial.aeval (R := k) (Sum.elim r.get g)).toRingHom)
+  let lin : CommRingCat.of (MvPolynomial (Fin r.length ⊕ Fin m) k) ⟶
+      CommRingCat.of (MvPolynomial (Fin m) k) := CommRingCat.ofHom
+    (MvPolynomial.aeval (R := k) (Sum.elim (fun _ ↦ (0 : MvPolynomial (Fin m) k))
+      MvPolynomial.X)).toRingHom
+  let φ' : CommRingCat.of (MvPolynomial (Fin m) k) ⟶ CommRingCat.of Bh :=
+    CommRingCat.ofHom (MvPolynomial.rename (R := k) (Sum.inr (α := Fin r.length))).toRingHom ≫
+      φ ≫ ψ
+  let jU : Spec (.of Ah) ⟶ X :=
+    Spec.map (CommRingCat.ofHom (algebraMap Γ(X, U.1) Ah)) ≫ U.2.fromSpec
+  let jV : Spec (.of Bh) ⟶ Z :=
+    Spec.map (CommRingCat.ofHom (algebraMap Γ(Z, i ⁻¹ᵁ U.1) Bh)) ≫ hV.fromSpec
+  have hψsurj : Function.Surjective ψ := by
+    change Function.Surjective (algebraMap Ah Bh)
+    rw [localizationAlgebraMap_def]
+    exact IsLocalization.map_surjective_of_surjective (Submonoid.powers h) Ah Bh hsurj
+  have hψker : RingHom.ker ψ.hom =
+      Ideal.span (Set.range fun a ↦ φ (MvPolynomial.X (Sum.inl a))) := by
+    change RingHom.ker (algebraMap Ah Bh) = _
+    rw [localizationAlgebraMap_def, IsLocalization.ker_map Bh (algebraMap _ _) rfl]
+    change Ideal.map _ (RingHom.ker (i.app U.1).hom) = _
+    rw [hker, Ideal.map_span, ← Set.range_comp]
+    congr 2
+    funext a
+    simp [φ]
+  have hφet : Etale (Spec.map φ) := HasRingHomProperty.Spec_iff.mpr het
+  have hk : Spec.map φ ≫ Spec.map (CommRingCat.ofHom MvPolynomial.C) = jU ≫ aX := by
+    rw [← Spec.map_comp]
+    simp only [jU, Category.assoc]
+    rw [← IsAffineOpen.SpecMap_appLE_fromSpec aX (isAffineOpen_top _) U.2 heU,
+      IsAffineOpen.fromSpec_top, Scheme.isoSpec_Spec_inv, ← Spec.map_comp, ← Spec.map_comp]
+    congr 1
+    ext x
+    simp [φ]
+    rfl
+  -- the square `Z ∩ U = V`
+  have : Algebra.IsPushout Γ(X, U.1) Γ(Z, i ⁻¹ᵁ U.1) Ah Bh :=
+    Algebra.isPushout_of_isLocalization (Submonoid.powers h) (R := Γ(X, U.1)) (A := Ah)
+      Γ(Z, i ⁻¹ᵁ U.1) Bh
+  have := this.symm
+  have hleft : IsPullback (Spec.map ψ) (Spec.map (CommRingCat.ofHom (algebraMap _ Bh)))
+      (Spec.map (CommRingCat.ofHom (algebraMap Γ(X, U.1) Ah))) (Spec.map (i.app U.1)) :=
+    isPullback_SpecMap_of_isPushout _ _ _ _
+      (CommRingCat.isPushout_of_isPushout Γ(X, U.1) Ah Γ(Z, i ⁻¹ᵁ U.1) Bh)
+  have hbig : IsPullback (Spec.map ψ) jV jU i :=
+    hleft.paste_vert (U.2.isPullback_SpecMap_app_fromSpec i hV)
+  have hjV : IsOpenImmersion jV :=
+    MorphismProperty.of_isPullback (P := @IsOpenImmersion) hbig inferInstance
+  have hz : z ∈ Set.range jV := by
+    have hq' : q ∈ (Spec.map (CommRingCat.ofHom (algebraMap Γ(X, U.1) Ah))).opensRange := by
+      rw [Scheme.Hom.opensRange_localizationAway]
+      exact hh
+    obtain ⟨q', hq'⟩ := hq'
+    obtain ⟨w, -, hw⟩ := Scheme.Pullback.exists_preimage_pullback (f := jU) (g := i) q' z
+      (by rw [← hq, ← hq']; rfl)
+    exact ⟨hbig.isoPullback.inv w, by rw [← Scheme.Hom.comp_apply, hbig.isoPullback_inv_snd, hw]⟩
+  -- the square `V = u⁻¹(𝔸^m)`
+  have hlinX : ∀ a, lin (MvPolynomial.X (Sum.inl a)) = 0 := fun a ↦ by simp [lin]
+  have hw : φ ≫ ψ = lin ≫ φ' := by
+    ext : 1
+    refine MvPolynomial.ringHom_ext (fun x ↦ ?_) fun a ↦ ?_
+    · simp [lin, φ']
+    · rcases a with a | j
+      · change ψ (φ _) = φ' (lin _)
+        rw [hlinX, map_zero, ← RingHom.mem_ker]
+        change _ ∈ RingHom.ker ψ.hom
+        rw [hψker]
+        exact Ideal.subset_span ⟨a, rfl⟩
+      · simp [lin, φ']
+  have hlinsurj : Function.Surjective lin := fun p ↦
+    ⟨MvPolynomial.rename Sum.inr p, by simp [lin, MvPolynomial.bind₁_rename]⟩
+  have hkerle : RingHom.ker ψ.hom ≤ (RingHom.ker lin.hom).map φ.hom := by
+    rw [hψker, Ideal.span_le]
+    rintro _ ⟨a, rfl⟩
+    exact Ideal.mem_map_of_mem _ (hlinX a)
+  have hlin : IsPullback (Spec.map ψ) (Spec.map φ') (Spec.map φ) (Spec.map lin) :=
+    isPullback_SpecMap_of_isPushout _ _ _ _
+      (CommRingCat.isPushout_of_surjective φ lin ψ φ' hw hlinsurj hψsurj hkerle)
+  have hφ'et : Etale (Spec.map φ') := MorphismProperty.of_isPullback hlin hφet
+  exact ⟨m, .of Ah, .of Bh, jU, jV, ψ, φ, φ', inferInstance, hjV, hz, hbig, hψsurj, hψker,
+    hφet, hk, hφ'et, hlin⟩
 
 end IsRegularImmersion
 
