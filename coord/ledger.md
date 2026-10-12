@@ -9578,3 +9578,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:22 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso (stage 3; reviewer PASS; first push; landing 20261012T212212-L-1098808 (interface); batch 20261012T212205; modules 2; new nodes 1)
 - 21:25 L: returned deliver/Q2/Sheaf.Topology.TopologicalInducedEdgeAndMap (reviewer RETURN: (reviewer X-c9696, head c96965b25) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Topology.Topological)
 - 21:27 L: returned deliver/V1/Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover (reviewer RETURN: (reviewer X-9bfe6, head 9bfe64dbb) the reviewer passed it, but the landing failed: af/AlgebraicGeometry/CoherentModuleLo)
+- 21:27 L: returned deliver/K3/Sheaf.AlgebraicGeometry.IntegralStrictHenselianGeometricFibreSections (reviewer RETURN: (the landing tools, head 55f1f9634) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
