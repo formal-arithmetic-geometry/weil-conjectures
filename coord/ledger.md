@@ -5774,3 +5774,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:00 L: returned deliver/P1/Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections (reviewer RETURN: (reviewer X-1286e, head 1286e7125) D1: `exists_zeroDimensional_globalSections_iso_decomposition` remains equivalent to t)
 - 01:00 L: returned deliver/S1/Sheaf.AlgebraicGeometry.TensorPullback (reviewer RETURN: (reviewer X-b5ddd, head b5dddc828) B2/B3: dag/nodes/sec-abelian-varieties/aux-tensor-pullback-map-id.json:5 is not self-)
 - 01:02 L: merged deliver/U1/Sheaf.Topology.InverseImageModule (stage 3; reviewer PASS; first push; landing 20261012T010114-L-707596 (interface); modules 3; new nodes 2)
+- 01:02 L: returned deliver/J1/Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit (reviewer RETURN: (reviewer X-c7148, head c714864ce) C1: In dag/nodes/sec-curve-estimates/lem-weil-pbc-cohomology-filtered-colimit.json, p)
