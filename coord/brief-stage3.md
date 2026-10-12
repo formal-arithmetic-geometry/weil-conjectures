@@ -49,7 +49,7 @@ A statement you believe false: mark it `STATEMENT-DISPUTED: <reason>` in the mod
 
 ## 5. Compiling
 
-On the server: `SHEAF_GROUP=<G> tools/lean_file.sh lean/.sandbox/<G>/<item>/<File>.lean`. From another machine: `ssh <server> 'cd ~/weil-conjectures-sheaf && tools/compile_remote.sh <G> <name>' < <file>.lean`, where `<name>` is your module name, with its dots or with every `.` replaced by `_` (120 s; against the last green global build plus your group's landings). Compile until clean: no error, no warning.
+On the server: `SHEAF_GROUP=<G> tools/lean_file.sh lean/.sandbox/<G>/<item>/<File>.lean`. From another machine: `ssh <server> 'cd ~/weil-conjectures-sheaf && tools/compile_remote.sh <G> <name>' < <file>.lean`, where `<name>` is your module name, with its dots or with every `.` replaced by `_` (60 s; against the last green global build plus your group's landings). Compile until clean: no error, no warning.
 
 ## 6. Delivering
 

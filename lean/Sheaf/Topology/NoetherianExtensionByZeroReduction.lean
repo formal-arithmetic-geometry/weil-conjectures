@@ -5,6 +5,9 @@ public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Topology.Compactness.Compact
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
+import Sheaf.Topology.ConstantSubsheafFiniteFiltration
+import Sheaf.Topology.CohomologyReductionConstantSubsheaves
 
 @[expose] public section
 
@@ -19,6 +22,39 @@ namespace TopCat
 Source: literature/stacks-project/cohomology.tex, Lemma 02UX.
 (blueprint: lem-sc-noetherian-extension-by-zero-reduction).
 -/
+
+private lemma cohomology_zero_middle (X : TopCat.{u})
+    (S : ShortComplex (X.Sheaf AddCommGrpCat.{u})) (hS : S.ShortExact) (p : ℕ)
+    (h₁ : IsZero (CategoryTheory.Sheaf.H' S.X₁ p (⊤ : Opens X)))
+    (h₃ : IsZero (CategoryTheory.Sheaf.H' S.X₃ p (⊤ : Opens X))) :
+    IsZero (CategoryTheory.Sheaf.H' S.X₂ p (⊤ : Opens X)) := by
+  have hsub₁ := AddCommGrpCat.subsingleton_of_isZero h₁
+  have hsub₃ := AddCommGrpCat.subsingleton_of_isZero h₃
+  rw [AddCommGrpCat.isZero_iff_subsingleton]
+  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+  obtain ⟨y, rfl⟩ := Abelian.Ext.covariant_sequence_exact₂ _ hS x (hsub₃.elim _ _)
+  rw [hsub₁.elim y 0, Abelian.Ext.zero_comp]
+
+private lemma cohomology_zero_right (X : TopCat.{u})
+    (S : ShortComplex (X.Sheaf AddCommGrpCat.{u})) (hS : S.ShortExact) (p : ℕ)
+    (h₂ : IsZero (CategoryTheory.Sheaf.H' S.X₂ p (⊤ : Opens X)))
+    (h₁ : IsZero (CategoryTheory.Sheaf.H' S.X₁ (p + 1) (⊤ : Opens X))) :
+    IsZero (CategoryTheory.Sheaf.H' S.X₃ p (⊤ : Opens X)) := by
+  have hsub₂ := AddCommGrpCat.subsingleton_of_isZero h₂
+  have hsub₁ := AddCommGrpCat.subsingleton_of_isZero h₁
+  rw [AddCommGrpCat.isZero_iff_subsingleton]
+  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+  obtain ⟨y, rfl⟩ :=
+    Abelian.Ext.covariant_sequence_exact₃ _ hS x rfl (hsub₁.elim _ _)
+  rw [hsub₂.elim y 0, Abelian.Ext.zero_comp]
+
+private lemma cohomology_zero_iso (X : TopCat.{u})
+    {F G : X.Sheaf AddCommGrpCat.{u}} (e : F ≅ G) (p : ℕ)
+    (hG : IsZero (CategoryTheory.Sheaf.H' G p (⊤ : Opens X))) :
+    IsZero (CategoryTheory.Sheaf.H' F p (⊤ : Opens X)) := by
+  exact hG.of_iso (((CategoryTheory.Sheaf.cohomologyPresheafFunctor
+    (Opens.grothendieckTopology X) p) ⋙
+    (evaluation _ _).obj (op (⊤ : Opens X))).mapIso e)
 
 /-- Vanishing of cohomology for extensions by zero of constant sheaves on
 quasi-compact opens implies vanishing for every abelian sheaf.
@@ -61,6 +97,34 @@ theorem noetherian_extensionByZero_reduction
     (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
     (p : ℕ) (hp : d < p) :
     IsZero (CategoryTheory.Sheaf.H' F p (⊤ : Opens X)) := by
-  sorry
+  refine noetherian_vanishing_of_constant_subsheaves X d hbas hint hvanish ?_ F p hp
+  intro K ι hι hgen q hq
+  have : Mono ι := hι
+  obtain ⟨m, L, f, hf, Q, S, hS, hQ, hquot, hzero, ⟨eK⟩⟩ :=
+    TopCat.Sheaf.constantSubsheaf_finite_filtration X
+      (fun U V hU hV ↦ hint U V U.isOpen V.isOpen hU hV)
+      K _ ι ⟨Iso.refl _⟩ hgen
+  have hQzero (i : Fin m) : IsZero (CategoryTheory.Sheaf.H' (Q i) q (⊤ : Opens X)) := by
+    obtain ⟨U, V, hU, hV, _, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ := hquot i
+    have hz₂ := cohomology_zero_iso X e₂ q (hvanish q hq U hU)
+    have hz₁ := cohomology_zero_iso X e₁ (q + 1)
+      (hvanish (q + 1) (Nat.lt_trans hq (Nat.lt_succ_self q)) V hV)
+    exact cohomology_zero_iso X e₃.symm q (cohomology_zero_right X (S i) (hS i) q hz₂ hz₁)
+  have hLzero (i : Fin (m + 1)) :
+      IsZero (CategoryTheory.Sheaf.H' (L i) q (⊤ : Opens X)) := by
+    induction i using Fin.induction with
+    | zero =>
+      change IsZero ((Abelian.extFunctorObj _ q).obj (L 0))
+      exact Functor.map_isZero _ hzero
+    | succ i ih =>
+      have : Mono (f i) := hf i
+      let T := ShortComplex.mk (f i) (cokernel.π (f i)) (cokernel.condition (f i))
+      have hT : T.ShortExact :=
+        ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel (f i))
+          inferInstance inferInstance
+      obtain ⟨eQ⟩ := hQ i
+      exact cohomology_zero_middle X T hT q ih
+        (cohomology_zero_iso X eQ.symm q (hQzero i))
+  exact cohomology_zero_iso X eK.symm q (hLzero (Fin.last m))
 
 end TopCat

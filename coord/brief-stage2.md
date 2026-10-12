@@ -63,7 +63,7 @@ Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 - No file-local `notation`, `local instance`, `private` definition or abbreviation in a statement module; a statement must read outside its file and namespace (`Module.Basis`, not `Basis`) (F1 91b674ef5, J1 f048a280a, E1 b5d12a0ed; STATE line FILE-LOCAL NOTATION).
 - Derived tensor on schemes: new statements use the global `schemeDerivedTensorMonoidal` (def-pc-scheme-derived-tensor-structure, M1 0ec9b24af) with `⊗`, `▷`, `𝟙_`; landed K-flat-representative statements stay valid; never a second derived-tensor definition (STATE line DERIVED TENSOR ON SCHEMES).
 - No tautological conjunct (`pullback.condition`, `0 ≤ h`) and no clause the node does not state (C1 f683186fb, 52041d948; J1 6b2c20148).
-- Compile under the default 120 s limit; never raise SHEAF_FILE_TIMEOUT to pass (G1 61a26ce2c). `Additive` of a three-fold functor composite needs `set_option synthInstance.maxSize 2048` (H1 8f2941a40).
+- Compile under the default 60 s limit; never raise SHEAF_FILE_TIMEOUT to pass (G1 61a26ce2c). `Additive` of a three-fold functor composite needs `set_option synthInstance.maxSize 2048` (H1 8f2941a40).
 - Conventions added at B-1418 (STATE): PSEUDO-COHERENT, PERFECT, TOR AMPLITUDE, DERIVED PULLBACK, DERIVED FIBRES, EXTENSION BY ZERO, KOSZUL COMPLEX, P-BASIS, POWER SERIES, POPESCU FAMILY, RELATIVE SPEC AND QUASI-COHERENT ALGEBRAS, PROJ TWISTS, REGULAR and FAITHFULLY FLAT RING MAPS — read them before stating a node of these families.
 - Derived restriction to an open U of a scheme is `(SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U ⋙ Equivalence.functor (C := …) (D := …) (Scheme.Modules.overEquiv U)).mapDerivedCategory` into `schemeDerivedCategory U.toScheme` (G1 ce180b4c0, M1 f526a6fea); between opens `overMap ... |>.mapDerivedCategory`, Hom restriction `AlgebraicGeometry.derivedOpenHomRestriction`; the exactness instances `moduleOverFunctor_*`/`moduleOverMap_*` in lean/Sheaf/Paper/DerivedHomMayerVietoris.lean are shared, a restatement fails H4 (STATE line DERIVED RESTRICTION TO AN OPEN).
 - A statement you find false or untypable: correct the node by (C) of §1, following the source, with `statement_change` and the report section. Never write it weaker, never change the statement silently (H7).
@@ -105,7 +105,7 @@ Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 
 You have no compiled Lean. Compile on the server:
 `ssh <server> 'cd ~/weil-conjectures-sheaf && tools/compile_remote.sh <G> <item>' < <file>.lean`
-(120 s limit; prints the errors; compiled against the last green global build plus your group's landed modules). Compile until the file is clean: no error, no warning (fix unused variables). A declaration you can read in `lean/` but that does not compile for you has landed since the last green build: wait, do not write it again. A timeout is a fault of a definition, not of the limit.
+(60 s limit; prints the errors; compiled against the last green global build plus your group's landed modules). Compile until the file is clean: no error, no warning (fix unused variables). A declaration you can read in `lean/` but that does not compile for you has landed since the last green build: wait, do not write it again. A timeout is a fault of a definition, not of the limit.
 
 ## 5. The node records
 
