@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "Apply the defining affine-open condition of the fpqc covering [def-weil-pbc-fpqc-covering] to $T$ itself. It gives a finite index set $J$, a map $a:J\\to I$, and affine opens $V_j=\\operatorname{Spec}(A_j)\\subseteq T_{a(j)}$ whose images cover $T$. The definition also gives flatness of every $f_i$; the construction allows $J=\\varnothing$ when $T=\\varnothing$.",
+   "text": "Form the PreZeroHypercover of the given family. The qc part of hf gives QuasiCompactCover; apply Mathlib QuasiCompactCover.exists_isAffineOpen_of_isCompact to the compact whole affine base. This gives finite selected affine opens with union of images equal to the whole base. The other part of hf gives Flat for each family morphism.",
    "uses": [
     "def-weil-pbc-fpqc-covering"
    ],
@@ -38,7 +38,7 @@
    }
   },
   {
-   "text": "For each $j$, apply the affine-chart flatness criterion [lem-weil-pbc-flat-morphism-affine-criterion] to the flat morphism $f_{a(j)}:T_{a(j)}\\to T$ and its affine open $V_j$. Thus the induced map $R=\\mathcal O_T(T)\\to\\mathcal O_{T_{a(j)}}(V_j)=A_j$ is flat. The finite product $\\prod_{j\\in J}A_j$ is flat as an $R$-module by [lem-weil-pbc-finite-product-flat-modules], so the product ring map is flat.",
+   "text": "Restrict each flat family morphism to the selected affine open. Scheme.Hom.flat_appTop gives flatness of its global-section map; compose with the bijective ΓSpecIso inverse. Regard these coordinate rings as R-algebras. Transport flatness of their direct sum along DirectSum.linearEquivFunOnFintype to obtain flatness of the finite product.",
    "uses": [
     "def-weil-pbc-fpqc-covering",
     "lem-weil-pbc-flat-morphism-affine-criterion",
@@ -51,7 +51,7 @@
    }
   },
   {
-   "text": "Let $\\mathfrak p\\in\\operatorname{Spec}R$. Since the images of the $V_j$ cover $T$, there are $j$ and $\\mathfrak q\\in\\operatorname{Spec}A_j$ mapping to $\\mathfrak p$. The coordinate projection $\\pi_j:\\prod_kA_k\\to A_j$ pulls $\\mathfrak q$ back to a prime of $\\prod_kA_k$ whose contraction along the product map $R\\to\\prod_kA_k$ is $\\mathfrak p$. Hence the map on spectra of the product ring map is surjective. Combining this with step 2 and the flat-plus-surjective-spectrum criterion [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] proves that $R\\to\\prod_jA_j$ is faithfully flat.",
+   "text": "For a prime p of R use the covering equality to find a selected affine open and a point mapping to p. Its isoSpec image is a prime q of its coordinate ring. Naturality of toSpecΓ and the ΓSpecIso counit identity show that q contracts to p. Pull q back along the product coordinate evaluation map; comap_comp_apply shows this prime also contracts to p. Apply RingHom.FaithfullyFlat.iff_flat_and_comap_surjective.",
    "uses": [
     "def-weil-pbc-fpqc-covering",
     "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
@@ -72,7 +72,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/topologies.tex",
-  "place": "Definition Tag 022B, with Morphisms Lemma Tag 01U5 and Algebra Lemma Tag 00HQ"
+  "place": "Definition Tag 022B, with Morphisms Lemma Tag 01U5 and Algebra Lemma Tag 00HQ; formalized directly with Mathlib by N2 second reader"
  },
  "mathlib_searches": [
   {
@@ -176,5 +176,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T060746-L-2911772",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -49,6 +49,47 @@ theorem exists_fpqc_affine_standard_refinement (R : CommRingCat.{u})
       (∀ j, IsAffineOpen (V j)) ∧
       (RingHom.pi (fun j : Fin n ↦
         ((ΓSpecIso R).inv ≫ ((V j).ι ≫ f (a j)).appTop).hom)).FaithfullyFlat := by
-  sorry
+  classical
+  let E : PreZeroHypercover (Spec R) := ⟨I, T, f⟩
+  have hqc : QuasiCompactCover E := presieve₀_mem_qcPrecoverage_iff.mp hf.1
+  have hflat : ∀ i, Flat (f i) := ((ofArrows_mem_precoverage_iff @Flat).mp hf.2).2
+  obtain ⟨n, a, V, hV, hcover⟩ :=
+    QuasiCompactCover.exists_isAffineOpen_of_isCompact E (isAffineOpen_top _).isCompact
+  have : ∀ j, IsAffine (V j).toScheme := hV
+  let A (j : Fin n) := Γ((V j).toScheme, ⊤)
+  let g (j : Fin n) : R →+* A j :=
+    ((ΓSpecIso R).inv ≫ ((V j).ι ≫ f (a j)).appTop).hom
+  have hg : ∀ j, (g j).Flat := by
+    intro j
+    have : Flat (f (a j)) := hflat _
+    exact RingHom.Flat.comp
+      (RingHom.Flat.of_bijective (ConcreteCategory.bijective_of_isIso (ΓSpecIso R).inv))
+      (((V j).ι ≫ f (a j)).flat_appTop)
+  let : ∀ j, Algebra R (A j) := fun j ↦ (g j).toAlgebra
+  have : ∀ j, Module.Flat R (A j) := hg
+  have hpi : (RingHom.pi g).Flat := by
+    change Module.Flat R (∀ j, A j)
+    exact Module.Flat.of_linearEquiv
+      (DirectSum.linearEquivFunOnFintype R (Fin n) (fun j ↦ ↥(A j))).symm
+  refine ⟨n, a, V, hV, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective.mpr ⟨hpi, ?_⟩⟩
+  intro p
+  have hp : p ∈ ⋃ j, f (a j) '' (V j) := by
+    rw [hcover]
+    trivial
+  obtain ⟨j, x, hx, hxp⟩ := Set.mem_iUnion.mp hp
+  let q : PrimeSpectrum (A j) := (V j).toScheme.isoSpec.hom ⟨x, hx⟩
+  have hq : PrimeSpectrum.comap (g j) q = p := by
+    change (Spec.map (CommRingCat.ofHom (g j)))
+      ((V j).toScheme.isoSpec.hom ⟨x, hx⟩) = p
+    have heq : (V j).toScheme.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom (g j)) =
+        (V j).ι ≫ f (a j) := by
+      change (V j).toScheme.toSpecΓ ≫
+        Spec.map ((ΓSpecIso R).inv ≫ ((V j).ι ≫ f (a j)).appTop) = _
+      rw [Spec.map_comp, ← Category.assoc, ← toSpecΓ_naturality,
+        Category.assoc, toSpecΓ_SpecMap_ΓSpecIso_inv, Category.comp_id]
+    exact (congrArg (fun k : (V j).toScheme ⟶ Spec R ↦ k ⟨x, hx⟩) heq).trans hxp
+  refine ⟨PrimeSpectrum.comap (Pi.evalRingHom (fun j ↦ ↥(A j)) j) q, ?_⟩
+  rw [← PrimeSpectrum.comap_comp_apply]
+  exact hq
 
 end AlgebraicGeometry.Scheme
