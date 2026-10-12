@@ -110,7 +110,8 @@ private lemma of_ofArrows_mem_fpqcPrecoverage [IsZariskiLocalAtTarget P]
     have hx : (U : S.Opens).ι x ∈ (U : Set S) := by simp
     rw [← hcov] at hx
     obtain ⟨_, ⟨k, rfl⟩, y, hy, hyx⟩ := hx
-    refine Set.mem_iUnion.mpr ⟨⟨k⟩, ⟨y, hy⟩, (U : S.Opens).ι.isOpenEmbedding.injective ?_⟩
+    refine Set.mem_iUnion.mpr
+      ⟨⟨k⟩, ⟨y, hy⟩, (U : S.Opens).ι.isOpenEmbedding.injective ?_⟩
     rw [← Scheme.Hom.comp_apply, hh]
     exact hyx
   · -- The base change of `f ∣_ U` along `h k` is a base change of `pullback.snd f (g (idx k))`
@@ -136,11 +137,13 @@ the base changes `pullback.snd f (g i)` of `f : X ⟶ S` have `P`, then `f` has 
 
 (blueprint: `lem-weil-pbc-fpqc-local-on-base-criterion`) -/
 theorem fpqc_local_on_base_criterion
-    (h₀ : ∀ ⦃X S X' S' : Scheme.{u}⦄ (f : X ⟶ S) (f' : X' ⟶ S') (a : X ≅ X') (b : S ≅ S'),
+    (h₀ : ∀ ⦃X S X' S' : Scheme.{u}⦄ (f : X ⟶ S) (f' : X' ⟶ S') (a : X ≅ X')
+      (b : S ≅ S'),
       f ≫ b.hom = a.hom ≫ f' → P f → P f')
     (h₁ : ∀ ⦃X S S' : Scheme.{u}⦄ (f : X ⟶ S) (g : S' ⟶ S), Flat g → P f →
       P (pullback.snd f g))
-    (h₂ : ∀ ⦃X S : Scheme.{u}⦄ (f : X ⟶ S) {K : Type u} (V : K → S.Opens), iSup V = ⊤ →
+    (h₂ : ∀ ⦃X S : Scheme.{u}⦄ (f : X ⟶ S) {K : Type u} (V : K → S.Opens),
+      iSup V = ⊤ →
       (∀ k, P (f ∣_ V k)) → P f)
     (h₃ : ∀ ⦃X S S' : Scheme.{u}⦄ [IsAffine S] [IsAffine S'] (g : S' ⟶ S) (f : X ⟶ S),
       Flat g → Surjective g → P (pullback.snd f g) → P f)
@@ -174,7 +177,8 @@ end Criterion
 
 section Covering
 
-variable {X S : Scheme.{u}} (f : X ⟶ S) {ι : Type v} {T : ι → Scheme.{u}} (g : ∀ i, T i ⟶ S)
+variable {X S : Scheme.{u}} (f : X ⟶ S) {ι : Type v} {T : ι → Scheme.{u}}
+  (g : ∀ i, T i ⟶ S)
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Being finite descends along fpqc coverings** (Stacks 02LA): if the base changes of
@@ -186,7 +190,8 @@ theorem isFinite_of_fpqc_cover (hg : Presieve.ofArrows T g ∈ Scheme.fpqcPrecov
     (H : ∀ i, IsFinite (pullback.snd f (g i))) : IsFinite f := by
   have := IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact.{u}
   exact Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology
-    (P := (@IsFinite : MorphismProperty Scheme.{u})) (Precoverage.generate_mem_toGrothendieck hg) f _ _ (fun i ↦ .of_hasPullback f (g i)) H
+    (P := (@IsFinite : MorphismProperty Scheme.{u})) (Precoverage.generate_mem_toGrothendieck hg) f
+    _ _ (fun i ↦ .of_hasPullback f (g i)) H
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Being flat descends along fpqc coverings** (Stacks 02L2): if the base changes of
@@ -197,7 +202,8 @@ flat.
 theorem flat_of_fpqc_cover (hg : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)
     (H : ∀ i, Flat (pullback.snd f (g i))) : Flat f :=
   Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology
-    (P := (@Flat : MorphismProperty Scheme.{u})) (Precoverage.generate_mem_toGrothendieck hg) f _ _ (fun i ↦ .of_hasPullback f (g i)) H
+    (P := (@Flat : MorphismProperty Scheme.{u})) (Precoverage.generate_mem_toGrothendieck hg) f
+    _ _ (fun i ↦ .of_hasPullback f (g i)) H
 
 end Covering
 
@@ -233,7 +239,8 @@ theorem quasiCompact_of_fpqc_baseChange [QuasiCompact (pullback.snd f g)] : Quas
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Separatedness descends along flat, surjective, quasi-compact morphisms** (Stacks 02KU): if
-the base change `X ×_S S' ⟶ S'` of `f : X ⟶ S` along such a `g : S' ⟶ S` is separated, then so
+the base change `X ×_S S' ⟶ S'` of `f : X ⟶ S` along such a `g : S' ⟶ S` is separated, then
+so
 is `f`.
 
 (blueprint: `lem-weil-pbc-fpqc-descend-separated`) -/
@@ -254,7 +261,8 @@ end FlatSurjective
 
 (blueprint: `lem-weil-pbc-fpqc-finer-than-etale`) -/
 theorem Scheme.fpqcCover_of_smallEtaleCover {T : Scheme.{u}} {U : T.Etale} {ι : Type v}
-    {V : ι → T.Etale} (f : ∀ i, V i ⟶ U) (hf : Sieve.ofArrows V f ∈ T.smallEtaleTopology U) :
+    {V : ι → T.Etale} (f : ∀ i, V i ⟶ U)
+    (hf : Sieve.ofArrows V f ∈ T.smallEtaleTopology U) :
     Presieve.ofArrows (fun i ↦ (V i).left) (fun i ↦ (f i).left) ∈ fpqcPrecoverage U.left := by
   refine fppfPrecoverage_le_fpqcPrecoverage _ ?_
   rw [fppfPrecoverage, ofArrows_mem_precoverage_iff]
