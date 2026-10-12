@@ -70,6 +70,86 @@ theorem sectionsComparison_restriction_square {X Y : Scheme.{v}} (a : X ⟶ Y)
       toDerived X
         (((upperStar AddCommGrpCat.{v + 1} a).mapHomologicalComplex (.up ℤ)).obj C) ≫
       (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctor.map
-        ((upperStar AddCommGrpCat.{v + 1} a).mapDerivedCategoryFactors.inv.app C) := by sorry
+        ((upperStar AddCommGrpCat.{v + 1} a).mapDerivedCategoryFactors.inv.app C) := by
+  intro restriction toDerived
+  let F := upperStar AddCommGrpCat.{v + 1} a
+  let R := lowerStar AddCommGrpCat.{v + 1} a
+  let G := Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}
+  let H := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}
+  let adj := upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} a
+  let e := lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} a
+  let K := (HomotopyCategory.quotient _ (.up ℤ)).obj C
+  -- Factor the derived adjunction unit on the homotopy class of C.
+  have hη : (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1} a).unit.app
+        (DerivedCategory.Qh.obj K) ≫
+      R.rightDerivedFunctor.map (F.mapDerivedCategoryFactorsh.hom.app K) =
+      DerivedCategory.Qh.map ((adj.mapHomotopyCategory (.up ℤ)).unit.app K) ≫
+        R.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj K) :=
+    (adj.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
+      (HomotopyCategory.quasiIso _ (.up ℤ)) F.mapDerivedCategoryFactorsh.hom
+      R.rightDerivedFunctorUnit K
+  -- The Leray comparison carries the composite derived unit to the sections unit.
+  have hc : (Functor.rightDerivedFunctorCompUnit R G).app
+        ((F.mapHomotopyCategory (.up ℤ)).obj K) ≫
+      (Functor.rightDerivedFunctorCompIso' R G e).hom.app
+        (DerivedCategory.Qh.obj ((F.mapHomotopyCategory (.up ℤ)).obj K)) =
+      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app
+        ((F.mapHomotopyCategory (.up ℤ)).obj K)) ≫
+      H.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj K) := by
+    simp [Functor.rightDerivedFunctorCompIso', Functor.rightDerivedFunctorCompIso,
+      Functor.rightDerivedFunctorNatIso, Functor.rightDerivedFunctorNatTrans]
+    rfl
+  have hi : (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ G)) (.up ℤ)).inv.app
+      ((F.mapHomotopyCategory (.up ℤ)).obj K) = 𝟙 _ := by
+    rw [← cancel_epi
+      ((Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ G)) (.up ℤ)).hom.app
+        ((F.mapHomotopyCategory (.up ℤ)).obj K)), Iso.hom_inv_id_app]
+    change 𝟙 _ = _ ≫ 𝟙 _
+    rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id]
+  dsimp [Functor.rightDerivedFunctorCompUnit] at hc
+  rw [hi] at hc
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
+    Category.assoc] at hc
+  -- Use naturality to establish the square before transporting to complexes.
+  have hh : G.rightDerivedFunctorUnit.app K ≫
+      G.rightDerivedFunctor.map
+        ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1} a).unit.app
+          (DerivedCategory.Qh.obj K)) ≫
+      (Functor.rightDerivedFunctorCompIso' R G e).hom.app
+        (F.mapDerivedCategory.obj (DerivedCategory.Qh.obj K)) ≫
+      H.rightDerivedFunctor.map (F.mapDerivedCategoryFactorsh.hom.app K) =
+      DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex restriction (.up ℤ)).app C)) ≫
+      H.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj K) := by
+    rw [← NatTrans.naturality]
+    simp only [Functor.comp_map]
+    erw [← G.rightDerivedFunctor.map_comp_assoc, hη,
+      Functor.map_comp, Category.assoc]
+    erw [← G.rightDerivedFunctorUnit.naturality_assoc]
+    erw [hc]
+    simp only [Functor.comp_map]
+    erw [← DerivedCategory.Qh.map_comp_assoc]
+    congr 2
+    erw [Adjunction.mapHomotopyCategory_unit_app_quotient,
+      Functor.mapHomotopyCategory_map]
+    simp only [NatTrans.mapHomotopyCategory_app]
+    erw [← Functor.map_comp]
+    congr 1
+  -- Only the exact inverse-image localization comparison is cancelled.
+  rw [← cancel_mono (H.rightDerivedFunctor.map
+    (F.mapDerivedCategoryFactors.hom.app C))]
+  simp only [toDerived, Category.assoc]
+  dsimp only [K] at hh
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app] at hh
+  dsimp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso] at hh ⊢
+  repeat erw [CategoryTheory.Functor.map_id] at hh
+  repeat erw [Category.id_comp] at hh
+  repeat erw [Category.comp_id] at hh
+  repeat erw [CategoryTheory.Functor.map_id]
+  repeat erw [Category.id_comp]
+  erw [← H.rightDerivedFunctor.map_comp, Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.comp_id]
+  exact hh
 
 end AlgebraicGeometry.Etale
