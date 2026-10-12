@@ -9,6 +9,7 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Idempotents
 import Sheaf.RingTheory.QuotientHenselianPair
+import Sheaf.RingTheory.HenselianIntegralIdempotentLifting
 
 /-!
 # Quotients of strictly henselian local rings
@@ -55,4 +56,39 @@ theorem isStrictlyHenselianLocalRing_quotient
             ∃! b : B, IsIdempotentElem b ∧
               Ideal.Quotient.mk
                 ((IsLocalRing.maximalIdeal (A ⧸ I)).map (algebraMap (A ⧸ I) B)) b = e := by
-  sorry
+  classical
+  let : IsStrictlyHenselianLocalRing A := hA
+  have hproper : I ≠ ⊤ :=
+    ne_top_of_le_ne_top (IsLocalRing.maximalIdeal.isMaximal A).ne_top hI
+  let : Nontrivial (A ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr hproper
+  let : IsLocalRing (A ⧸ I) :=
+    IsLocalRing.of_surjective' (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+  let : IsLocalHom (Ideal.Quotient.mk I) :=
+    IsLocalHom.of_surjective (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+  have hmax := IsLocalRing.map_maximalIdeal_of_surjective
+    (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+  let f := IsLocalRing.ResidueField.map (Ideal.Quotient.mk I)
+  have hsurj : Function.Surjective f := by
+    intro x
+    obtain ⟨b, rfl⟩ := IsLocalRing.residue_surjective x
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective b
+    exact ⟨IsLocalRing.residue A a, rfl⟩
+  let e := RingEquiv.ofBijective f ⟨f.injective, hsurj⟩
+  have hres : ∀ a : A,
+      e.symm (IsLocalRing.residue (A ⧸ I) (Ideal.Quotient.mk I a)) =
+        IsLocalRing.residue A a := by
+    intro a
+    exact e.symm_apply_apply (IsLocalRing.residue A a)
+  have hpair := IsLocalRing.henselianRing_quotient_maximalIdeal A I hI
+  rw [hmax] at hpair
+  let : HenselianRing (A ⧸ I) (IsLocalRing.maximalIdeal (A ⧸ I)) := hpair
+  let : HenselianLocalRing (A ⧸ I) := {
+    is_henselian := fun f hf a ha hu ↦
+      HenselianRing.is_henselian f hf a ha (hu.map _) }
+  let : IsSepClosed (IsLocalRing.ResidueField (A ⧸ I)) :=
+    IsSepClosed.of_ringEquiv e
+  have hstrict : IsStrictlyHenselianLocalRing (A ⧸ I) := ⟨inferInstance⟩
+  refine ⟨inferInstance, hmax.symm, ⟨e.symm, hres⟩, hstrict, inferInstance, ?_⟩
+  intro B _ _ _ b hb
+  exact Algebra.existsUnique_isIdempotentElem_of_henselianRing
+    (A ⧸ I) (IsLocalRing.maximalIdeal (A ⧸ I)) B b hb
