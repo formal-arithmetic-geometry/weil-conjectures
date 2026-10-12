@@ -29,121 +29,75 @@
  ],
  "proof": [
   {
-   "text": "(Presentations.) Let $\\alpha:P=A[x_b,\\ b\\in B]\\to B$, $x_b\\mapsto b$, be the canonical presentation of $B$ over $A$ ($P=A[B]$, $x_b=[b]$), kernel $I=I_{B/A}$; $\\beta:Q=B[y_c,\\ c\\in C]\\to C$, $y_c\\mapsto c$, the canonical presentation of $C$ over $B$, kernel $J=I_{C/B}$; $\\gamma:P'=A[x_b,y_c]\\to C$ the $A$-algebra map with $x_b\\mapsto\\varphi(b)$, $y_c\\mapsto c$ (surjective), kernel $K$; and $\\varepsilon:A[z_c,\\ c\\in C]\\to C$, $z_c\\mapsto c$, the canonical presentation of $C$ over $A$, kernel $I_{C/A}$. For each presentation $\\pi:R[x_t]\\to S$ with kernel $I_\\pi$, $S\\otimes\\Omega_{R[x_t]/R}$ is free on the $1\\otimes\\mathrm dx_t$ and $1\\otimes\\mathrm dg=\\sum_t\\pi(\\partial g/\\partial x_t)(1\\otimes\\mathrm dx_t)$ [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables]; so the complex $\\mathrm{NL}(\\pi)=(I_\\pi/I_\\pi^2\\xrightarrow{\\mathrm d_\\pi}S\\otimes\\Omega_{R[x_t]/R})$ of [lem-weil-pbc-nl-presentation-h1-functoriality] is, under $\\mathrm d[s]\\leftrightarrow1\\otimes\\mathrm dx_s$, exactly the complex $\\mathrm{NL}_{S/R}$ of [def-weil-pbc-smooth-ring-map] when $\\pi$ is the canonical presentation. Thus $\\mathrm{NL}(\\alpha)=\\mathrm{NL}_{B/A}$, $\\mathrm{NL}(\\beta)=\\mathrm{NL}_{C/B}$, $\\mathrm{NL}(\\varepsilon)=\\mathrm{NL}_{C/A}$, and $H_1(\\mathrm{NL}_{B/A}\\otimes_BC)=\\ker(\\mathrm d_\\alpha\\otimes\\mathrm{id}_C)$.",
+   "text": "Construct u by restricting the lifted conormal map of the canonical presentation to the base-changed kernel. Commutation with cotangentComplex shows it lands in H1(L_C/A). Construct t as LinearMap.tensorKer C C applied to the canonical presentation differential. Its pure-tensor formula and the ambient formula for u are definitional equalities. These are real constructions, with no chosen unproved data.",
    "uses": [
     "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-nl-presentation-h1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), lines 35411--35485 (tag verified in stacks-project/tags/tags: 00S2,algebra-lemma-exact-sequence-NL)"
+   }
+  },
+  {
+   "text": "For exactness at H1(L_C/A), use the composite presentation F = Q.comp P and its presentation equivalence e with the canonical presentation E. Mathlib Generators.Cotangent.exact gives a preimage x of each cycle e(y) annihilated by the map to Q. Generators.H1Cotangent.map_comp_cotangentComplex_baseChange and Generators.CotangentSpace.map_toComp_injective imply x is in the base-changed kernel. Extension.Cotangent.map_sub_map shows that any two presentation maps agree on this base-changed kernel: their difference factors through the base-changed differential. This identifies the preimage with u(x). Conversely, compose the two conormal maps and apply Generators.Cotangent.exact.apply_apply_eq_zero. The composite-presentation conormal exactness and differential injection are already proved in Mathlib.RingTheory.Kaehler.JacobiZariski; their polynomial-kernel and basis inputs are the cited leaves.",
+   "uses": [
+    "lem-weil-pbc-polynomial-coefficient-map-kernel",
     "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
     "lem-weil-pbc-nl-presentation-h1-functoriality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof lines 35448--35485"
+    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), lines 35411--35485 (tag verified in stacks-project/tags/tags: 00S2,algebra-lemma-exact-sequence-NL)"
    }
   },
   {
-   "text": "(Morphisms of presentations.) The inclusion $\\iota:P\\to P'$, $x_b\\mapsto x_b$, satisfies $\\gamma\\iota=\\varphi\\alpha$, so it is a morphism of presentations from $\\alpha$ to $\\gamma$ over the square ($A=A$, $\\varphi$); the ring map $\\pi:P'\\to Q$ that is $A\\to B$ on coefficients, $x_b\\mapsto b$ (a constant of $Q$) and $y_c\\mapsto y_c$, satisfies $\\beta\\pi=\\gamma$, so it is a morphism of presentations from $\\gamma$ to $\\beta$ over the square ($A\\to B$, $\\mathrm{id}_C$) [lem-weil-pbc-nl-presentation-h1-functoriality]. Hence $\\iota(I)\\subseteq K$, $\\pi(K)\\subseteq J$ and we get $C$-linear maps $\\iota_1:I/I^2\\otimes_BC\\to K/K^2$ ($C$-linear extension of the $B$-linear map $\\iota_1$ of that node) and $\\pi_1:K/K^2\\to J/J^2$, and likewise $\\iota_0:(B\\otimes_P\\Omega_{P/A})\\otimes_BC\\to C\\otimes_{P'}\\Omega_{P'/A}$ and $\\pi_0:C\\otimes_{P'}\\Omega_{P'/A}\\to C\\otimes_Q\\Omega_{Q/B}$, with $\\mathrm d_\\gamma\\iota_1=\\iota_0(\\mathrm d_\\alpha\\otimes\\mathrm{id}_C)$ and $\\mathrm d_\\beta\\pi_1=\\pi_0\\mathrm d_\\gamma$ (same node). Also $\\pi\\iota(f)=\\alpha(f)$ is the constant $\\alpha(f)\\in B\\subseteq Q$, which is $0$ for $f\\in I$, so $\\pi_1\\iota_1=0$; and $\\pi_0\\iota_0=0$ since $\\mathrm d(\\pi(x_b))=\\mathrm d(b)=0$ in $\\Omega_{Q/B}$.",
-   "uses": [
-    "lem-weil-pbc-nl-presentation-h1-functoriality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof lines 35448--35485"
-   }
-  },
-  {
-   "text": "(Top row exact.) By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] the three modules $(B\\otimes_P\\Omega_{P/A})\\otimes_BC$, $C\\otimes_{P'}\\Omega_{P'/A}$, $C\\otimes_Q\\Omega_{Q/B}$ are free over $C$ on $\\{\\mathrm dx_b\\}$, $\\{\\mathrm dx_b\\}\\cup\\{\\mathrm dy_c\\}$, $\\{\\mathrm dy_c\\}$ respectively, and $\\iota_0(\\mathrm dx_b)=\\mathrm dx_b$, $\\pi_0(\\mathrm dx_b)=\\mathrm d(b)=0$, $\\pi_0(\\mathrm dy_c)=\\mathrm dy_c$. Hence $0\\to(B\\otimes_P\\Omega_{P/A})\\otimes_BC\\xrightarrow{\\iota_0}C\\otimes_{P'}\\Omega_{P'/A}\\xrightarrow{\\pi_0}C\\otimes_Q\\Omega_{Q/B}\\to0$ is exact (it is the split sequence $0\\to C^{(B)}\\to C^{(B)}\\oplus C^{(C)}\\to C^{(C)}\\to0$).",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof lines 35448--35485"
-   }
-  },
-  {
-   "text": "(Bottom row exact: $I/I^2\\otimes_BC\\xrightarrow{\\iota_1}K/K^2\\xrightarrow{\\pi_1}J/J^2\\to0$.) The map $\\pi:P'=P[y_c]\\to B[y_c]=Q$ is the coefficientwise map of $\\alpha:P\\to B$; since $\\alpha$ is surjective, $\\pi$ is surjective with kernel $\\mathfrak n=I\\cdot P'$ [lem-weil-pbc-polynomial-coefficient-map-kernel]. As $\\gamma=\\beta\\pi$, $K=\\pi^{-1}(J)$, so $\\pi(K)=J$ and $\\mathfrak n\\subseteq K$. Hence $\\pi_1$ is surjective, and its kernel is $\\{k\\bmod K^2: \\pi(k)\\in J^2\\}$; since $\\pi^{-1}(J^2)=\\pi^{-1}(\\pi(K^2))=K^2+\\mathfrak n$, this kernel is $(K^2+\\mathfrak n)/K^2$, the image of $\\mathfrak n=I P'$ in $K/K^2$, i.e. the $P'$-submodule (equivalently $C$-submodule) generated by the classes of $\\iota(f)$, $f\\in I$, which is the image of $\\iota_1$. Together with $\\pi_1\\iota_1=0$ (step 2) the row is exact.",
-   "uses": [
-    "lem-weil-pbc-polynomial-coefficient-map-kernel"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof lines 35448--35485"
-   }
-  },
-  {
-   "text": "(Snake lemma.) Steps 2--4 give a commutative diagram of $C$-modules with exact rows $I/I^2\\otimes_BC\\to K/K^2\\to J/J^2\\to0$ and $0\\to(B\\otimes_P\\Omega_{P/A})\\otimes_BC\\to C\\otimes_{P'}\\Omega_{P'/A}\\to C\\otimes_Q\\Omega_{Q/B}\\to0$ and vertical maps $\\mathrm d_\\alpha\\otimes\\mathrm{id}_C$, $\\mathrm d_\\gamma$, $\\mathrm d_\\beta$. By [lem-weil-pbc-snake-lemma-modules] (with $\\Lambda=C$) there is a $C$-linear $\\partial_0:\\ker\\mathrm d_\\beta\\to\\operatorname{coker}(\\mathrm d_\\alpha\\otimes\\mathrm{id}_C)$ with\n$$\\ker(\\mathrm d_\\alpha\\otimes\\mathrm{id}_C)\\xrightarrow{\\iota_1}\\ker\\mathrm d_\\gamma\\xrightarrow{\\pi_1}\\ker\\mathrm d_\\beta\\xrightarrow{\\partial_0}\\operatorname{coker}(\\mathrm d_\\alpha\\otimes\\mathrm{id}_C)\\xrightarrow{\\bar\\iota_0}\\operatorname{coker}\\mathrm d_\\gamma\\xrightarrow{\\bar\\pi_0}\\operatorname{coker}\\mathrm d_\\beta\\to0$$\nexact, the final surjectivity because $\\pi_0$ is surjective.",
-   "uses": [
-    "lem-weil-pbc-snake-lemma-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof lines 35448--35485"
-   }
-  },
-  {
-   "text": "(Identifying the cokernels.) By [lem-weil-pbc-jacobi-zariski-differential-maps] applied to $A\\to P$ and the ideal $I$ (with $P/I\\cong B$ via $\\alpha$), $I/I^2\\xrightarrow{\\mathrm d_\\alpha}B\\otimes_P\\Omega_{P/A}\\to\\Omega_{B/A}\\to0$, $1\\otimes\\mathrm dg\\mapsto\\mathrm d\\alpha(g)$, is exact, so $\\operatorname{coker}\\mathrm d_\\alpha\\cong\\Omega_{B/A}$ with $\\mathrm dx_b\\mapsto\\mathrm db$; tensoring with $C$ keeps this right exact [lem-weil-pbc-tensor-right-exact], so $\\operatorname{coker}(\\mathrm d_\\alpha\\otimes\\mathrm{id}_C)\\cong\\Omega_{B/A}\\otimes_BC\\cong C\\otimes_B\\Omega_{B/A}$, $\\mathrm dx_b\\otimes c\\mapsto c\\otimes\\mathrm db$. The same node applied to $A\\to P'$, $K$ and to $B\\to Q$, $J$ gives $\\operatorname{coker}\\mathrm d_\\gamma\\cong\\Omega_{C/A}$ ($\\mathrm dx_b\\mapsto\\mathrm d\\varphi(b)$, $\\mathrm dy_c\\mapsto\\mathrm dc$) and $\\operatorname{coker}\\mathrm d_\\beta\\cong\\Omega_{C/B}$ ($\\mathrm dy_c\\mapsto\\mathrm dc$). Under these isomorphisms $\\bar\\iota_0$ becomes $c\\otimes\\mathrm db\\mapsto c\\,\\mathrm d\\varphi(b)$, i.e. $w$, and $\\bar\\pi_0$ sends $\\mathrm d\\varphi(b)$ (the image of $\\mathrm dx_b$) to $0=z(\\mathrm d\\varphi(b))$ and $\\mathrm dc$ (image of $\\mathrm dy_c$) to $\\mathrm dc=z(\\mathrm dc)$; as the $\\mathrm d\\varphi(b)$, $\\mathrm dc$ generate $\\Omega_{C/A}$, $\\bar\\pi_0$ becomes $z$. Define $\\partial$ as $\\partial_0$ followed by the isomorphism $\\operatorname{coker}(\\mathrm d_\\alpha\\otimes\\mathrm{id}_C)\\cong C\\otimes_B\\Omega_{B/A}$; by step 1, $\\ker\\mathrm d_\\beta=H_1(L_{C/B})$. Step 5 then gives exactness of $H_1(L_{C/B})\\xrightarrow{\\partial}C\\otimes_B\\Omega_{B/A}\\xrightarrow{w}\\Omega_{C/A}\\xrightarrow{z}\\Omega_{C/B}\\to0$ and $\\operatorname{im}(\\pi_1|_{\\ker\\mathrm d_\\gamma})=\\ker\\partial$.",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-differential-maps",
-    "lem-weil-pbc-tensor-right-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof lines 35448--35485"
-   }
-  },
-  {
-   "text": "(Identifying $\\ker\\mathrm d_\\gamma$ with $H_1(L_{C/A})$ and the maps $u$, $v$.) Let $\\psi:A[z_c]\\to P'$, $z_c\\mapsto y_c$, and $\\theta:P'\\to A[z_c]$, $x_b\\mapsto z_{\\varphi(b)}$, $y_c\\mapsto z_c$ ($A$-algebra maps). Then $\\gamma\\psi=\\varepsilon$ and $\\varepsilon\\theta=\\gamma$, so $\\psi$ is a morphism of presentations from $\\varepsilon$ to $\\gamma$ and $\\theta$ one from $\\gamma$ to $\\varepsilon$, over identity squares. Since $\\theta\\psi=\\mathrm{id}$, $\\theta_*\\psi_*=\\mathrm{id}$; since $\\psi\\theta$ and $\\mathrm{id}_{P'}$ are both morphisms of presentations from $\\gamma$ to $\\gamma$, $\\psi_*\\theta_*=(\\psi\\theta)_*=(\\mathrm{id}_{P'})_*=\\mathrm{id}$ [lem-weil-pbc-nl-presentation-h1-functoriality] (1), (2). So $\\psi_*:H_1(L_{C/A})=\\ker\\mathrm d_\\varepsilon\\to\\ker\\mathrm d_\\gamma$ is an isomorphism with inverse $\\theta_*$. Moreover $\\theta\\iota:A[x_b]\\to A[z_c]$ is $x_b\\mapsto z_{\\varphi(b)}$, i.e. $\\varphi_\\sharp$, so $\\theta_*\\circ\\iota_1=u$ on $\\ker(\\mathrm d_\\alpha\\otimes\\mathrm{id}_C)$ (both are $(g\\bmod I^2)\\otimes c\\mapsto c\\,(\\varphi_\\sharp(g)\\bmod I_{C/A}^2)$; in particular $u$ is well defined and lands in $H_1(L_{C/A})$); and $\\pi\\psi:A[z_c]\\to Q=B[y_c]$ is $A\\to B$ on coefficients and $z_c\\mapsto y_c$, i.e. the map defining $v$, so $\\pi_1\\circ\\psi_*=v$ (and $v$ lands in $H_1(L_{C/B})$) by composition (2) of that node.",
-   "uses": [
-    "lem-weil-pbc-nl-presentation-h1-functoriality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof lines 35448--35485"
-   }
-  },
-  {
-   "text": "(Exactness at $H_1(L_{C/A})$ and at $H_1(L_{C/B})$.) From step 5, $\\operatorname{im}\\iota_1=\\ker(\\pi_1|_{\\ker\\mathrm d_\\gamma})$ in $\\ker\\mathrm d_\\gamma$. Applying the isomorphism $\\theta_*=\\psi_*^{-1}$ of step 7: $\\operatorname{im}u=\\theta_*(\\operatorname{im}\\iota_1)=\\theta_*(\\ker\\pi_1)=\\ker(\\pi_1\\psi_*)=\\ker v$. And $\\ker\\partial=\\operatorname{im}\\pi_1=\\operatorname{im}(\\pi_1\\psi_*)=\\operatorname{im}v$ since $\\psi_*$ is surjective onto $\\ker\\mathrm d_\\gamma$ (step 6 for the first equality). With step 6 the whole six-term sequence is exact.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof lines 35448--35485"
-   }
-  },
-  {
-   "text": "(Tor clause.) Apply [lem-weil-pbc-two-term-complex-kernel-base-change] to the $B$-linear map $\\delta_{B/A}:N_1=I/I^2\\to N_0=\\bigoplus_{b\\in B}B\\,\\mathrm d[b]$, whose target is free, with kernel $H_1(L_{B/A})$ and cokernel $\\Omega_{B/A}$ (step 6, via step 1). If $\\operatorname{Tor}^B_1(\\Omega_{B/A},C)=\\operatorname{Tor}^B_2(\\Omega_{B/A},C)=0$ [def-weil-pbc-tor-modules], the map $H_1(L_{B/A})\\otimes_BC\\to\\ker(\\delta_{B/A}\\otimes\\mathrm{id}_C)=H_1(\\mathrm{NL}_{B/A}\\otimes_BC)$, $h\\otimes c\\mapsto h\\otimes c$, is an isomorphism; it is $C$-linear.",
-   "uses": [
-    "lem-weil-pbc-two-term-complex-kernel-base-change",
-    "def-weil-pbc-tor-modules",
-    "def-weil-pbc-smooth-ring-map",
-    "lem-weil-pbc-jacobi-zariski-differential-maps"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof lines 35448--35485"
-   }
-  },
-  {
-   "text": "(Explicit form of $\\partial$.) Let $h=g\\bmod J^2\\in\\ker\\mathrm d_\\beta$ with $g=\\sum_\\alpha b_\\alpha y^\\alpha\\in J$ ($b_\\alpha\\in B$, $y^\\alpha$ the monomials in the $y_c$, coefficients unique). Put $g'=\\sum_\\alpha x_{b_\\alpha}y^\\alpha\\in P'$. Then $\\pi(g')=\\sum_\\alpha b_\\alpha y^\\alpha=g$, so $g'\\in\\pi^{-1}(J)=K$ (step 4) and $\\pi_1(g'\\bmod K^2)=h$: $g'\\bmod K^2$ is a lift of $h$ as required in the construction of the connecting map in [lem-weil-pbc-snake-lemma-modules]. By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] (step 1), $\\mathrm d_\\gamma(g'\\bmod K^2)=\\sum_b\\gamma(\\partial g'/\\partial x_b)\\,\\mathrm dx_b+\\sum_c\\gamma(\\partial g'/\\partial y_c)\\,\\mathrm dy_c$. Here $\\partial g'/\\partial x_b=\\sum_{\\alpha:\\,b_\\alpha=b}y^\\alpha$, so the first sum is $\\sum_\\alpha\\gamma(y^\\alpha)\\,\\mathrm dx_{b_\\alpha}=\\iota_0\\big(\\sum_\\alpha\\mathrm dx_{b_\\alpha}\\otimes\\beta(y^\\alpha)\\big)$ (as $\\gamma(y^\\alpha)=\\beta(y^\\alpha)$); and $\\gamma(\\partial g'/\\partial y_c)=\\sum_\\alpha\\varphi(b_\\alpha)\\,\\beta(\\partial y^\\alpha/\\partial y_c)=\\beta(\\partial g/\\partial y_c)$, which is $0$ for every $c$ because $\\mathrm d_\\beta(h)=\\sum_c\\beta(\\partial g/\\partial y_c)\\,\\mathrm dy_c=0$ and the $\\mathrm dy_c$ are a basis (step 3). So $\\mathrm d_\\gamma(g'\\bmod K^2)=\\iota_0(u)$ with $u=\\sum_\\alpha\\mathrm dx_{b_\\alpha}\\otimes\\beta(y^\\alpha)$, and by the construction in [lem-weil-pbc-snake-lemma-modules], $\\partial_0(h)=u\\bmod\\operatorname{im}(\\mathrm d_\\alpha\\otimes\\mathrm{id}_C)$. Under the isomorphism $\\operatorname{coker}(\\mathrm d_\\alpha\\otimes\\mathrm{id}_C)\\cong C\\otimes_B\\Omega_{B/A}$, $\\mathrm dx_b\\otimes c\\mapsto c\\otimes\\mathrm db$, of step 6, this gives $\\partial(h)=\\sum_\\alpha\\beta(y^\\alpha)\\otimes\\mathrm db_\\alpha$, which is the explicit formula of the statement ($y^\\alpha=[c]^\\alpha$, $\\beta=\\gamma_{C/B}$).",
+   "text": "Apply Mathlib Algebra.H1Cotangent.exact_map_δ and exact_δ_mapBaseChange for exactness at H1(L_C/B) and C tensor Omega_B/A. These are the already-proved presentation snake argument, with the cokernel identification obtained from the conormal exact sequence and tensor right exactness. Apply KaehlerDifferential.exact_mapBaseChange_map and map_surjective for the final exactness and surjectivity. Thus no diagram or connecting map needs to be chosen anew.",
    "uses": [
     "lem-weil-pbc-snake-lemma-modules",
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), lines 35411--35485 (tag verified in stacks-project/tags/tags: 00S2,algebra-lemma-exact-sequence-NL)"
+   }
+  },
+  {
+   "text": "For the coefficient formula, identify the given h with the subtype represented by Cotangent.mk g, using injectivity of its inclusion. Apply Mathlib Generators.H1Cotangent.δ_eq_δAux, write g as its finite monomial sum with MvPolynomial.as_sum, and apply δAux_monomial to each summand. The canonical Q has val = id, yielding precisely the stated product of powers.",
+   "uses": [
     "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), lines 35411--35485 (tag verified in stacks-project/tags/tags: 00S2,algebra-lemma-exact-sequence-NL)"
+   }
+  },
+  {
+   "text": "For the Tor criterion, apply the existing bijective_twoTermKernelBaseChange_algebra to the ULift of the presentation differential. Freeness is transported along the ring equivalence ULift B = B and the module equivalence for ULift. Exactness and surjectivity of toKaehler identify the lifted cokernel with ULift Omega_B/A by the first isomorphism theorem. Map this isomorphism through Tor to obtain its degree-one and degree-two vanishing hypotheses. Explicit kernel and tensor equivalences transport the resulting bijectivity back to tensorKer C C. The commuting square is checked on pure tensors and extended by tensor induction. This transport uses no Tor invariance theorem between different universes; every Tor in the application stays in the same lifted ModuleCat.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-weil-pbc-two-term-complex-kernel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), lines 35411--35485 (tag verified in stacks-project/tags/tags: 00S2,algebra-lemma-exact-sequence-NL)"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-smooth-ring-map",
   "def-weil-pbc-tor-modules",
   "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-kahler-differentials-first-exact-sequence",
   "lem-weil-pbc-nl-presentation-h1-functoriality",
   "lem-weil-pbc-polynomial-coefficient-map-kernel",
   "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
@@ -152,9 +106,9 @@
   "lem-weil-pbc-two-term-complex-kernel-base-change"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), statement lines 35411--35446, proof lines 35448--35485; the presentations are chosen as the canonical ones where possible (alpha, beta), with Lemma Tag 00S1 used for gamma; the 'precise definition of the maps', omitted in Stacks, is written out in steps 2, 6, 7"
+  "place": "Tag 00S2, lemma-exact-sequence-NL. Lean proof follows the same composite-presentation diagram, reuses its already proved Mathlib clauses, and supplies base-changed homotopy and explicit ULift transport. Source checked at https://stacks.math.columbia.edu/tag/00S2; local source copy unavailable on this machine."
  },
  "mathlib_searches": [
   {
@@ -237,5 +191,15 @@
   "group": "J1",
   "result": "pass",
   "note": "A,B,C arbitrary CommRings with Algebra A B, B C, A C + IsScalarTower (composite only); canonical presentations Generators.self; u pinned via injective h1Cotangentι on all of ker(P.cotangentComplex.baseChange C) with defaultHom = phi_sharp (spelling as M1 e6dafbfe1); v = H1Cotangent.map A B C C; w,z = mapBaseChange/map; delta = Mathlib H1Cotangent.delta, coefficient formula checked against delta_eq_deltaAux/deltaAux_monomial with self.val = id; v,delta,w,z exactness + surjectivity are Mathlib's exact_map_delta/exact_delta_mapBaseChange/exact_mapBaseChange_map/map_surjective verbatim, u-exactness and Tor clause new (Mathlib TODO); Tor' derives first argument Omega[B/A], degrees 1 and 2, ULift.module actions rfl to the B-actions; t pinned on pure tensors; no hollow hypotheses, no quantified universes"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T095854-L-313063",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
