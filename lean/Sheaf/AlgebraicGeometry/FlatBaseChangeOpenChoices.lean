@@ -125,7 +125,7 @@ Scheme.Hom.comp_preimage to identify both composite inverse images. -/
 theorem flatBaseChangeOpenEquality {X S S' : Scheme.{uOpen}}
     (f : X ⟶ S) (g : S' ⟶ S) (V : S.Opens) :
     (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V) = (pullback.fst g f) ⁻¹ᵁ (g ⁻¹ᵁ V) :=
-  by sorry
+  by rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, pullback.condition]
 
 /-- Transport a cohomology class of a restricted resolution to a section of its
 cohomology sheaf. Every arrow is a specified resolution/evaluation comparison or theta.
