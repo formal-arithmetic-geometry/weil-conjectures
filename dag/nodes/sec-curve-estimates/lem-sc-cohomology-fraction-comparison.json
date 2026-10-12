@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-cohomology-fraction-comparison",
+ "kind": "statement",
+ "title": "Descent of comparison through fraction relations",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "statement": "Let X be a scheme [def-pc-scheme], L an invertible O_X-module [def-sc-invertible-module], F any O_X-module, and s a global section of L. Write H^p(W,G) for open module cohomology [def-sc-open-module-cohomology], and C^p(W) for CohomologyFractionPresentation L F s p W [def-sc-cohomology-fraction-presentation], with generator [n,xi]. Let S be the nonvanishing open of s. There are additive maps c(W,p):C^p(W) -> H^p(W intersect S,F) simultaneously for all W,p such that multiplication by s^n applied to c(W,p)([n,xi]) is xi restricted to W intersect S. There is no assertion of exactness or bijectivity of c.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-open-module-cohomology",
+  "def-sc-cohomology-fraction-presentation",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MR, canonical fraction comparison and Mayer--Vietoris paragraph; Tag 01EB naturality"
+ },
+ "proof": [
+  {
+   "text": "Obtain the individual-twist division maps q with their transition compatibility.",
+   "uses": [
+    "lem-sc-cohomology-section-division"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend q to the direct sum using DirectSum.toAddMonoid. Each generating relation iota_n(xi)-iota_(n+b)(s^b xi) maps to zero by transition compatibility. AddSubgroup.closure_le puts the subgroup of relations in its kernel.",
+   "uses": [
+    "def-sc-cohomology-fraction-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use QuotientAddGroup.lift. Evaluate its value on the generator using lift_mk and DirectSum.toAddMonoid_of, then apply the division formula.",
+   "uses": [
+    "def-sc-cohomology-fraction-presentation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cohomology-section-division",
+  "def-sc-cohomology-fraction-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MR, canonical fraction comparison and Mayer--Vietoris paragraph; Tag 01EB naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris exact sequence localization twisted sheaf cohomology comparison fractions",
+   "results": "Generic MayerVietorisSquare short complexes only; no comparison on the project fraction presentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact, AddMonoidHom",
+   "results": "Function.Exact/addMonoidHom exactness transport and kernel-range lemmas; no fraction comparison or exact localized row.",
+   "date": "2026-10-13",
+   "verdict": "generic exactness infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "CohomologyFractionPresentation|localizedCohomology|mayerVietoris",
+   "results": "Only the current item and modules above it provide the localized diagram; generic MayerVietoris files in Mathlib. The source library has no cohomology-fraction construction. DirectSum.toAddMonoid and QuotientAddGroup.lift supply quotient descent.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate; generic tools used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exactness of sequential direct limits of additive groups and quotient by transition relations",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizedCohomologyMayerVietoris",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
+   "place": "Tag 09MR, fraction comparison and Mayer--Vietoris paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CohomologyFractionComparison",
+  "file": "lean/Sheaf/Paper/CohomologyFractionComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_cohomologyFraction_comparison",
+  "statement": "theorem exists_cohomologyFraction_comparison (X : Scheme.{uMV}) (L F : X.Modules) [L.IsInvertible]\n    (s : Γ(L, ⊤))\n    (S : X.Opens) (_hS : (S : Set X) = nonvanishingLocus L s) :\n    ∃ c : ∀ (W : X.Opens) (p : ℕ), CohomologyFractionPresentation L F s p W →+\n      (openModuleCohomology X.toRingedSpace p (W ⊓ S)).obj F,\n      (∀ (W : X.Opens) (p n : ℕ)\n        (ξ : (openModuleCohomology X.toRingedSpace p W).obj (F ⊗ L.tensorPow n : X.Modules)),\n        (openModuleCohomology X.toRingedSpace p (W ⊓ S)).map\n            (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :\n              F ⟶ (F ⊗ L.tensorPow n : X.Modules))\n            (c W p (cohomologyFraction L F s p W n ξ)) =\n          (openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE (inf_le_left : W ⊓ S ≤ W))).app (F ⊗ L.tensorPow n : X.Modules) ξ)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T212720-L-1130689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T212720-L-1130689",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

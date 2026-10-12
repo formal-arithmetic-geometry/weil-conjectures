@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-cohomology-section-division",
+ "kind": "statement",
+ "title": "Division on individual twisted cohomology groups",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "statement": "Let X be a scheme [def-pc-scheme], L an invertible O_X-module [def-sc-invertible-module], F any O_X-module, and s a global section of L. Write H^p(W,G) for open module cohomology [def-sc-open-module-cohomology]. Let S be an open with underlying set nonvanishingLocus L s [def-weil-pbc-ample-invertible-module]. There are additive maps q(W,p,n):H^p(W,F tensor L^n) -> H^p(W intersect S,F), for all opens W and p,n >= 0, such that multiplication by s^n applied to q(W,p,n)(xi) is the restriction of xi, and q(W,p,n+b)(s^b xi)=q(W,p,n)(xi) for every b >= 0. Multiplication by s^n on H^p(W intersect S,F) is bijective onto H^p(W intersect S,F tensor L^n).",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-open-module-cohomology",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MR, canonical fraction comparison and Mayer--Vietoris paragraph; Tag 01EB naturality"
+ },
+ "proof": [
+  {
+   "text": "On S the section s is a free generator of L. Taking its tensor powers and tensoring with F gives an isomorphism F|_S -> (F tensor L^n)|_S for every n, with the multiplication morphism stated in Lean.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict further to W intersect S. Compute cohomology there using the restricted injective resolution; the resulting cohomology morphism is the displayed map of openModuleCohomology, and is bijective because cohomology preserves the local isomorphism. Define q as restriction followed by its additive inverse.",
+   "uses": [
+    "def-sc-open-module-cohomology",
+    "lem-sc-ringed-space-restrict-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Multiplying q by s^n cancels the inverse. For transition compatibility multiply both expressions by s^(n+b); naturality of restriction and the tensor-power multiplication formula give equal values. Cancel the bijective multiplier. For S empty the target is zero, and n=0 gives restriction.",
+   "uses": [
+    "def-sc-open-module-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "def-sc-open-module-cohomology",
+  "lem-sc-ringed-space-restrict-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MR, canonical fraction comparison; Tag 01CY, nonvanishing section trivialization; Tag 01E1, restriction of injective resolutions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris exact sequence localization twisted sheaf cohomology comparison fractions",
+   "results": "Generic MayerVietorisSquare short complexes only; no comparison on the project fraction presentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact, AddMonoidHom",
+   "results": "Function.Exact/addMonoidHom exactness transport and kernel-range lemmas; no fraction comparison or exact localized row.",
+   "date": "2026-10-13",
+   "verdict": "generic exactness infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "CohomologyFractionPresentation|localizedCohomology|mayerVietoris",
+   "results": "Only the current item and modules above it provide the localized diagram; generic MayerVietoris files in Mathlib. The source library has no cohomology-fraction construction. DirectSum.toAddMonoid and QuotientAddGroup.lift supply quotient descent.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate; generic tools used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exactness of sequential direct limits of additive groups and quotient by transition relations",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizedCohomologyMayerVietoris",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
+   "place": "Tag 09MR, fraction comparison and Mayer--Vietoris paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CohomologySectionDivision",
+  "file": "lean/Sheaf/Paper/CohomologySectionDivision.lean",
+  "declaration": "AlgebraicGeometry.exists_cohomologySection_division",
+  "statement": "theorem exists_cohomologySection_division (X : Scheme.{uMV})\n    (L F : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))\n    (S : X.Opens) (_hS : (S : Set X) = nonvanishingLocus L s) :\n    ∃ q : ∀ (W : X.Opens) (p n : ℕ),\n      (openModuleCohomology X.toRingedSpace p W).obj (F ⊗ L.tensorPow n : X.Modules) →+\n        (openModuleCohomology X.toRingedSpace p (W ⊓ S)).obj F,\n      (∀ (W : X.Opens) (p n : ℕ)\n        (ξ : (openModuleCohomology X.toRingedSpace p W).obj (F ⊗ L.tensorPow n : X.Modules)),\n        (openModuleCohomology X.toRingedSpace p (W ⊓ S)).map\n            (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :\n              F ⟶ (F ⊗ L.tensorPow n : X.Modules))\n            (q W p n ξ) =\n          (openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE (inf_le_left : W ⊓ S ≤ W))).app (F ⊗ L.tensorPow n : X.Modules) ξ) ∧\n      (∀ (W : X.Opens) (p n b : ℕ)\n        (ξ : (openModuleCohomology X.toRingedSpace p W).obj\n          (F ⊗ L.tensorPow n : X.Modules)),\n        q W p (n + b) ((openModuleCohomology X.toRingedSpace p W).map\n          (mulTensorPowSection (homOfGlobalSection L s) F n b) ξ) = q W p n ξ) ∧\n      (∀ (W : X.Opens) (p n : ℕ), Function.Bijective\n        ((openModuleCohomology X.toRingedSpace p (W ⊓ S)).map\n          (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :\n            F ⟶ (F ⊗ L.tensorPow n : X.Modules))))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T212720-L-1130689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T212720-L-1130689",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

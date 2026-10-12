@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-cohomology-fraction-mayer-vietoris-exact",
+ "kind": "statement",
+ "title": "Exactness of the upper fraction sequence",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "statement": "Let X be a scheme [def-pc-scheme], L an invertible O_X-module [def-sc-invertible-module], F any O_X-module, and s a global section of L. Write H^p(W,G) for open module cohomology [def-sc-open-module-cohomology], and C^p(W) for CohomologyFractionPresentation L F s p W [def-sc-cohomology-fraction-presentation], with generator [n,xi]. Suppose delta(A,B,p):H^p(A intersect B,-) -> H^(p+1)(A union B,-) is a natural transformation in the module for every pair of opens and p. Assume the degree-zero restriction pair is injective for every module, and the restriction-pair, difference-of-restrictions, and delta maps give the three exact positions of a Mayer--Vietoris sequence for every module and p. For any U,V there are additive maps a:C^p(U union V) -> C^p(U) times C^p(V), b:C^p(U) times C^p(V) -> C^p(U intersect V), and d:C^p(U intersect V) -> C^(p+1)(U union V), for all p. Their values on generators are respectively the pair of restrictions, the positive U restriction, the negative V restriction, and delta applied to the numerator. The map a in degree zero is injective, and all triples (a_p,b_p), (b_p,d_p), (d_p,a_(p+1)) are exact. This statement has no comparison maps and no nonvanishing open.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-open-module-cohomology",
+  "def-sc-cohomology-fraction-presentation",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-mayer-vietoris-ringed-space"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MR, canonical fraction comparison and Mayer--Vietoris paragraph; Tag 01EB naturality"
+ },
+ "proof": [
+  {
+   "text": "Module naturality of the assumed boundary and of cohomology restriction commutes with transition multiplication. Extend the maps to direct sums and descend to quotient fraction presentations; this gives a,b,d and the four generator formulas.",
+   "uses": [
+    "def-sc-cohomology-fraction-presentation",
+    "def-sc-open-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor-power multiplication identities make this presentation the sequential direct limit over the nonnegative twists. Move a finite sum to a common denominator. A fraction is zero exactly when a further transition kills its numerator: express membership in the generated subgroup by finitely many relations and move all of them to one sufficiently large denominator, where they cancel.",
+   "uses": [
+    "def-sc-cohomology-fraction-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent a class in the kernel at a single denominator, then increase the denominator until its image is zero. At that twist use the assumed exactness to choose a preimage; its fraction is a preimage of the original class. For the product term move both components to the same denominator first. Conversely the composites vanish on each numerator by the assumed exactness, hence on the quotient. Apply the same eventual-zero criterion and degree-zero injectivity to prove injectivity of a_0.",
+   "uses": [
+    "def-sc-cohomology-fraction-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cohomology-fraction-presentation",
+  "def-sc-open-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MR, canonical fraction comparison and Mayer--Vietoris paragraph; Tag 01EB naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris exact sequence localization twisted sheaf cohomology comparison fractions",
+   "results": "Generic MayerVietorisSquare short complexes only; no comparison on the project fraction presentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact, AddMonoidHom",
+   "results": "Function.Exact/addMonoidHom exactness transport and kernel-range lemmas; no fraction comparison or exact localized row.",
+   "date": "2026-10-13",
+   "verdict": "generic exactness infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "CohomologyFractionPresentation|localizedCohomology|mayerVietoris",
+   "results": "Only the current item and modules above it provide the localized diagram; generic MayerVietoris files in Mathlib. The source library has no cohomology-fraction construction. DirectSum.toAddMonoid and QuotientAddGroup.lift supply quotient descent.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate; generic tools used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exactness of sequential direct limits of additive groups and quotient by transition relations",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizedCohomologyMayerVietoris",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
+   "place": "Tag 09MR, fraction comparison and Mayer--Vietoris paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CohomologyFractionMayerVietorisExact",
+  "file": "lean/Sheaf/Paper/CohomologyFractionMayerVietorisExact.lean",
+  "declaration": "AlgebraicGeometry.exists_cohomologyFraction_mayerVietoris_exact",
+  "statement": "theorem exists_cohomologyFraction_mayerVietoris_exact (X : Scheme.{uMV})\n    (L F : X.Modules) [L.IsInvertible]\n    (s : Γ(L, ⊤))\n    (U V : X.Opens) (δ : ∀ (A B : X.Opens) (p : ℕ),\n      openModuleCohomology X.toRingedSpace p (A ⊓ B) ⟶\n        openModuleCohomology X.toRingedSpace (p + 1) (A ⊔ B))\n    (_hinj :\n      (∀ (A B : X.Opens) (G : X.Modules),\n        Function.Injective\n          (fun x : (openModuleCohomology X.toRingedSpace 0 (A ⊔ B)).obj G =>\n            ((openModuleCohomologyRestriction X.toRingedSpace 0\n                (homOfLE (le_sup_left : A ≤ A ⊔ B))).app G x,\n              (openModuleCohomologyRestriction X.toRingedSpace 0\n                (homOfLE (le_sup_right : B ≤ A ⊔ B))).app G x))))\n    (_hexact :\n      (∀ (A B : X.Opens) (G : X.Modules) (p : ℕ),\n        Function.Exact\n          (fun x : (openModuleCohomology X.toRingedSpace p (A ⊔ B)).obj G =>\n            ((openModuleCohomologyRestriction X.toRingedSpace p\n                (homOfLE (le_sup_left : A ≤ A ⊔ B))).app G x,\n              (openModuleCohomologyRestriction X.toRingedSpace p\n                (homOfLE (le_sup_right : B ≤ A ⊔ B))).app G x))\n          (fun x : (openModuleCohomology X.toRingedSpace p A).obj G ×\n              (openModuleCohomology X.toRingedSpace p B).obj G =>\n            (openModuleCohomologyRestriction X.toRingedSpace p\n                (homOfLE (inf_le_left : A ⊓ B ≤ A))).app G x.1 -\n              (openModuleCohomologyRestriction X.toRingedSpace p\n                (homOfLE (inf_le_right : A ⊓ B ≤ B))).app G x.2) ∧\n        Function.Exact\n          (fun x : (openModuleCohomology X.toRingedSpace p A).obj G ×\n              (openModuleCohomology X.toRingedSpace p B).obj G =>\n            (openModuleCohomologyRestriction X.toRingedSpace p\n                (homOfLE (inf_le_left : A ⊓ B ≤ A))).app G x.1 -\n              (openModuleCohomologyRestriction X.toRingedSpace p\n                (homOfLE (inf_le_right : A ⊓ B ≤ B))).app G x.2)\n          ((δ A B p).app G) ∧\n        Function.Exact ((δ A B p).app G)\n          (fun x : (openModuleCohomology X.toRingedSpace (p + 1) (A ⊔ B)).obj G =>\n            ((openModuleCohomologyRestriction X.toRingedSpace (p + 1)\n                (homOfLE (le_sup_left : A ≤ A ⊔ B))).app G x,\n              (openModuleCohomologyRestriction X.toRingedSpace (p + 1)\n                (homOfLE (le_sup_right : B ≤ A ⊔ B))).app G x)))) :\n    ∃ (a : ∀ p : ℕ, CohomologyFractionPresentation L F s p (U ⊔ V) →+\n        CohomologyFractionPresentation L F s p U × CohomologyFractionPresentation L F s p V)\n      (b : ∀ p : ℕ,\n        CohomologyFractionPresentation L F s p U × CohomologyFractionPresentation L F s p V →+\n          CohomologyFractionPresentation L F s p (U ⊓ V))\n      (d : ∀ p : ℕ, CohomologyFractionPresentation L F s p (U ⊓ V) →+\n        CohomologyFractionPresentation L F s (p + 1) (U ⊔ V)),\n      (∀ (p n : ℕ) (ξ : (openModuleCohomology X.toRingedSpace p (U ⊔ V)).obj\n          (F ⊗ L.tensorPow n : X.Modules)),\n        a p (cohomologyFraction L F s p (U ⊔ V) n ξ) =\n          (cohomologyFraction L F s p U n\n            ((openModuleCohomologyRestriction X.toRingedSpace p\n              (homOfLE le_sup_left)).app (F ⊗ L.tensorPow n : X.Modules) ξ),\n          cohomologyFraction L F s p V n\n            ((openModuleCohomologyRestriction X.toRingedSpace p\n              (homOfLE le_sup_right)).app (F ⊗ L.tensorPow n : X.Modules) ξ))) ∧\n      (∀ (p n : ℕ)\n        (ξ : (openModuleCohomology X.toRingedSpace p U).obj (F ⊗ L.tensorPow n : X.Modules)),\n        b p (cohomologyFraction L F s p U n ξ, 0) = cohomologyFraction L F s p (U ⊓ V) n\n          ((openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE inf_le_left)).app (F ⊗ L.tensorPow n : X.Modules) ξ)) ∧\n      (∀ (p n : ℕ)\n        (ξ : (openModuleCohomology X.toRingedSpace p V).obj (F ⊗ L.tensorPow n : X.Modules)),\n        b p (0, cohomologyFraction L F s p V n ξ) = -cohomologyFraction L F s p (U ⊓ V) n\n          ((openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE inf_le_right)).app (F ⊗ L.tensorPow n : X.Modules) ξ)) ∧\n      (∀ (p n : ℕ) (ξ : (openModuleCohomology X.toRingedSpace p (U ⊓ V)).obj\n          (F ⊗ L.tensorPow n : X.Modules)),\n        d p (cohomologyFraction L F s p (U ⊓ V) n ξ) =\n          cohomologyFraction L F s (p + 1) (U ⊔ V) n\n            ((δ U V p).app (F ⊗ L.tensorPow n : X.Modules) ξ)) ∧\n      Function.Injective (a 0) ∧\n      (∀ p : ℕ, Function.Exact (a p) (b p) ∧ Function.Exact (b p) (d p) ∧\n        Function.Exact (d p) (a (p + 1)))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T212720-L-1130689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T212720-L-1130689",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

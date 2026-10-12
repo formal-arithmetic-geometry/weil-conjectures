@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-cohomology-fraction-mayer-vietoris-squares",
+ "kind": "statement",
+ "title": "Commutativity of the fraction comparison squares",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "statement": "Let X be a scheme [def-pc-scheme], L an invertible O_X-module [def-sc-invertible-module], F any O_X-module, and s a global section of L. Write H^p(W,G) for open module cohomology [def-sc-open-module-cohomology], and C^p(W) for CohomologyFractionPresentation L F s p W [def-sc-cohomology-fraction-presentation], with generator [n,xi]. Let S be the nonvanishing open of s. Let delta be module-natural connecting transformations for all pairs of opens and p, compatible with intersection of the cover with every open T. Let additive c(W,p):C^p(W) -> H^p(W intersect S,F) satisfy multiplication-by-s^n times c([n,xi]) equals restriction of xi. Let a,b,d be additive maps between the fraction presentations for U union V, U,V, and U intersect V, satisfying the four generator formulas for restriction, difference, and boundary. Then c commutes with a (both component restrictions), with b (difference of restrictions), and with d (the connecting transformation on U intersect S,V intersect S, transported along the distributive lattice equalities). No exactness of either row is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-open-module-cohomology",
+  "def-sc-cohomology-fraction-presentation",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-mayer-vietoris-ringed-space"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MR, canonical fraction comparison and Mayer--Vietoris paragraph; Tag 01EB naturality"
+ },
+ "proof": [
+  {
+   "text": "Obtain injectivity of multiplication by s^n on every W intersect S from division on the individual twists. Derive composition of cohomology restrictions by NatTrans.rightDerived_comp. Any square of open inclusions commutes because the inclusion category is thin.",
+   "uses": [
+    "lem-sc-cohomology-section-division",
+    "def-sc-open-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a fraction generator, apply the injective multiplier to both sides of the restriction comparison. Naturality and the equation specifying c reduce the equality to the restriction square. Quotient induction followed by DirectSum.induction_on gives extensionality for additive maps out of C^p(W). Apply it to each component of a, and to b composed with each inclusion of a product summand; the second summand has the prescribed minus sign.",
+   "uses": [
+    "def-sc-cohomology-fraction-presentation",
+    "def-sc-open-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the assumed boundary restriction square with the maps identifying (U intersect S) intersect (V intersect S) and (U intersect S) union (V intersect S). Composition of restrictions identifies its endpoints with (U intersect V) intersect S and (U union V) intersect S. On a generator apply injective multiplication, then the formula for d and c. Naturality of this composite connecting transformation moves multiplication across it, and the boundary restriction square proves the equality. Additive extensionality extends it to all fractions.",
+   "uses": [
+    "def-sc-open-module-cohomology",
+    "def-sc-cohomology-fraction-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cohomology-section-division",
+  "def-sc-open-module-cohomology",
+  "def-sc-cohomology-fraction-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MR, canonical fraction comparison and Mayer--Vietoris paragraph; Tag 01EB naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris exact sequence localization twisted sheaf cohomology comparison fractions",
+   "results": "Generic MayerVietorisSquare short complexes only; no comparison on the project fraction presentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact, AddMonoidHom",
+   "results": "Function.Exact/addMonoidHom exactness transport and kernel-range lemmas; no fraction comparison or exact localized row.",
+   "date": "2026-10-13",
+   "verdict": "generic exactness infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "CohomologyFractionPresentation|localizedCohomology|mayerVietoris",
+   "results": "Only the current item and modules above it provide the localized diagram; generic MayerVietoris files in Mathlib. The source library has no cohomology-fraction construction. DirectSum.toAddMonoid and QuotientAddGroup.lift supply quotient descent.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate; generic tools used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exactness of sequential direct limits of additive groups and quotient by transition relations",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizedCohomologyMayerVietoris",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
+   "place": "Tag 09MR, fraction comparison and Mayer--Vietoris paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CohomologyFractionMayerVietorisSquares",
+  "file": "lean/Sheaf/Paper/CohomologyFractionMayerVietorisSquares.lean",
+  "declaration": "AlgebraicGeometry.cohomologyFraction_mayerVietoris_squares",
+  "statement": "theorem cohomologyFraction_mayerVietoris_squares (X : Scheme.{uMV})\n    (L F : X.Modules) [L.IsInvertible]\n    (s : Γ(L, ⊤))\n    (U V S : X.Opens) (_hS : (S : Set X) = nonvanishingLocus L s)\n    (δ : ∀ (A B : X.Opens) (p : ℕ),\n      openModuleCohomology X.toRingedSpace p (A ⊓ B) ⟶\n        openModuleCohomology X.toRingedSpace (p + 1) (A ⊔ B))\n    (_hrestrict :\n      (∀ (A B T : X.Opens) (p : ℕ),\n        δ A B p ≫ openModuleCohomologyRestriction X.toRingedSpace (p + 1)\n            (homOfLE (sup_le_sup inf_le_left inf_le_left)) =\n          openModuleCohomologyRestriction X.toRingedSpace p\n              (homOfLE (inf_le_inf inf_le_left inf_le_left)) ≫\n            δ (A ⊓ T) (B ⊓ T) p))\n    (c : ∀ (W : X.Opens) (p : ℕ), CohomologyFractionPresentation L F s p W →+\n      (openModuleCohomology X.toRingedSpace p (W ⊓ S)).obj F)\n    (_hc :\n      (∀ (W : X.Opens) (p n : ℕ)\n        (ξ : (openModuleCohomology X.toRingedSpace p W).obj (F ⊗ L.tensorPow n : X.Modules)),\n        (openModuleCohomology X.toRingedSpace p (W ⊓ S)).map\n            (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) :\n              F ⟶ (F ⊗ L.tensorPow n : X.Modules))\n            (c W p (cohomologyFraction L F s p W n ξ)) =\n          (openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE (inf_le_left : W ⊓ S ≤ W))).app (F ⊗ L.tensorPow n : X.Modules) ξ))\n    (a : ∀ p : ℕ, CohomologyFractionPresentation L F s p (U ⊔ V) →+\n        CohomologyFractionPresentation L F s p U × CohomologyFractionPresentation L F s p V)\n      (b : ∀ p : ℕ,\n        CohomologyFractionPresentation L F s p U × CohomologyFractionPresentation L F s p V →+\n          CohomologyFractionPresentation L F s p (U ⊓ V))\n      (d : ∀ p : ℕ, CohomologyFractionPresentation L F s p (U ⊓ V) →+\n        CohomologyFractionPresentation L F s (p + 1) (U ⊔ V))\n    (_hform :\n      (∀ (p n : ℕ) (ξ : (openModuleCohomology X.toRingedSpace p (U ⊔ V)).obj\n          (F ⊗ L.tensorPow n : X.Modules)),\n        a p (cohomologyFraction L F s p (U ⊔ V) n ξ) =\n          (cohomologyFraction L F s p U n\n            ((openModuleCohomologyRestriction X.toRingedSpace p\n              (homOfLE le_sup_left)).app (F ⊗ L.tensorPow n : X.Modules) ξ),\n          cohomologyFraction L F s p V n\n            ((openModuleCohomologyRestriction X.toRingedSpace p\n              (homOfLE le_sup_right)).app (F ⊗ L.tensorPow n : X.Modules) ξ))) ∧\n      (∀ (p n : ℕ)\n        (ξ : (openModuleCohomology X.toRingedSpace p U).obj (F ⊗ L.tensorPow n : X.Modules)),\n        b p (cohomologyFraction L F s p U n ξ, 0) = cohomologyFraction L F s p (U ⊓ V) n\n          ((openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE inf_le_left)).app (F ⊗ L.tensorPow n : X.Modules) ξ)) ∧\n      (∀ (p n : ℕ)\n        (ξ : (openModuleCohomology X.toRingedSpace p V).obj (F ⊗ L.tensorPow n : X.Modules)),\n        b p (0, cohomologyFraction L F s p V n ξ) = -cohomologyFraction L F s p (U ⊓ V) n\n          ((openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE inf_le_right)).app (F ⊗ L.tensorPow n : X.Modules) ξ)) ∧\n      (∀ (p n : ℕ) (ξ : (openModuleCohomology X.toRingedSpace p (U ⊓ V)).obj\n          (F ⊗ L.tensorPow n : X.Modules)),\n        d p (cohomologyFraction L F s p (U ⊓ V) n ξ) =\n          cohomologyFraction L F s (p + 1) (U ⊔ V) n\n            ((δ U V p).app (F ⊗ L.tensorPow n : X.Modules) ξ))) :\n      (∀ (p : ℕ) (x : CohomologyFractionPresentation L F s p (U ⊔ V)),\n        c U p (a p x).1 =\n          (openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE (inf_le_inf_right S le_sup_left))).app F (c (U ⊔ V) p x) ∧\n        c V p (a p x).2 =\n          (openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE (inf_le_inf_right S le_sup_right))).app F (c (U ⊔ V) p x)) ∧\n      (∀ (p : ℕ)\n        (x : CohomologyFractionPresentation L F s p U × CohomologyFractionPresentation L F s p V),\n        c (U ⊓ V) p (b p x) =\n          (openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE (inf_le_inf_right S inf_le_left))).app F (c U p x.1) -\n          (openModuleCohomologyRestriction X.toRingedSpace p\n            (homOfLE (inf_le_inf_right S inf_le_right))).app F (c V p x.2)) ∧\n      (∀ (p : ℕ) (x : CohomologyFractionPresentation L F s p (U ⊓ V)),\n        c (U ⊔ V) (p + 1) (d p x) =\n          (openModuleCohomologyRestriction X.toRingedSpace (p + 1)\n            (homOfLE (inf_sup_right U V S).le)).app F\n            ((δ (U ⊓ S) (V ⊓ S) p).app F\n              ((openModuleCohomologyRestriction X.toRingedSpace p\n                (homOfLE (inf_inf_distrib_right U V S).ge)).app F\n                  (c (U ⊓ V) p x))))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T212720-L-1130689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T212720-L-1130689",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
