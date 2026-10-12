@@ -25,7 +25,29 @@ theorem exists_finite_free_resolution_data_zero
       (∀ i : Fin 0,
         Module.Free R (S.obj' (i.val + 2) (by omega)) ∧
         Module.Finite R (S.obj' (i.val + 2) (by omega))) := by
-  sorry
+  let U := ModuleCat.of R (ULift.{max u v} M)
+  let Z := ModuleCat.of R PUnit
+  let z : Z ⟶ U := 0
+  let e : U ⟶ U := 𝟙 _
+  let S := ComposableArrows.mk₃ z e (0 : U ⟶ Z)
+  refine ⟨S, ?_, ?_, ?_, ?_, ?_⟩
+  · change (ComposableArrows.mk₃ (0 : Z ⟶ U) (𝟙 U) (0 : U ⟶ Z)).Exact
+    apply ComposableArrows.exact_of_δ₀
+    · apply ComposableArrows.exact₂_mk _ (by simp [ComposableArrows.Precomp.map])
+      apply (CategoryTheory.ShortComplex.exact_iff_mono _ (by simp)).2
+      change Mono (𝟙 U)
+      infer_instance
+    · apply ComposableArrows.exact₂_mk _ (by simp [ComposableArrows.Precomp.map])
+      apply (CategoryTheory.ShortComplex.exact_iff_epi _ (by simp [ComposableArrows.Precomp.map])).2
+      change Epi (𝟙 U)
+      infer_instance
+  · change IsZero Z
+    exact ModuleCat.isZero_of_subsingleton _
+  · change IsZero Z
+    exact ModuleCat.isZero_of_subsingleton _
+  · exact ⟨ULift.moduleEquiv⟩
+  · intro i
+    exact i.elim0
 
 /-- The successor step, adjoining one finite-free presentation to a truncation.
 Source: Stacks Project, Algebra, Tag 00LP, part (2).
