@@ -1,0 +1,126 @@
+{
+ "id": "def-weil-pbc-torsor-section-representation",
+ "kind": "definition",
+ "title": "Canonical representation on sections over a torsor",
+ "statement": "Let $V$ be a scheme, $\\ell\\in\\mathbb N$, $P$ a finite group, and $c:Y\\to V$ a finite etale $\\operatorname{ULift}(P)$-torsor [def-sbc-normal-dominant-galois, def-weil-pbc-scheme-conventions]. For a sheaf $F$ of $\\operatorname{ULift}(\\mathbb Z/\\ell\\mathbb Z)$-modules [def-weil-pbc-etale-sheaves], set $B=F(Y)$ with scalars restricted along the inverse of $\\operatorname{ULift}(k)\\cong k$. Define the representation $N_F$ by $\\rho(g)=F(g^{-1}:Y\\to Y)$. Define $Q_F(W)$ to be the coefficient-lifted presheaf of equivariant locally constant functions on $W\\times_VY$ for $N_F$ [def-weil-pbc-torsor-associated-module]. A natural module morphism $\\alpha:F\\to Q_F$ is normalized if $\\alpha_Y(s)(\\Delta(y))=s$ for every $s\\in F(Y)$ and $y\\in Y$, where $\\Delta:Y\\to Y\\times_VY$ is the diagonal. All constructions use genuine section data and restriction maps; no choice from an unproved existence statement occurs.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3); explicit section-evaluation implementation of the fixed-torsor argument"
+ },
+ "stmt_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-torsor-associated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Representation on module sheaf sections induced by inverse deck transformations of a Galois cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representation on sections of a module sheaf over a finite Galois torsor given by inverse deck transformations",
+   "results": "CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, TannakaDuality.FiniteGroup.ofRightFDRep_hom, TannakaDuality.FiniteGroup.algHomOfRightFDRepComp, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, TannakaDuality.FiniteGroup.ofRightFDRep, FDRep.of_ρ, TannakaDuality.FiniteGroup.leftRegularFDRepHom",
+   "date": "2026-10-12",
+   "verdict": "No exact statement. Read the related algebraic and sheafification interfaces; they do not give this fixed-torsor section construction."
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*sheaf|sheaf.*equivariant|deck.*section|section.*deck in Mathlib/AlgebraicGeometry, Mathlib/CategoryTheory/Sites and Mathlib/RepresentationTheory; sectionRepresentation and SectionEvaluationNormalized in project Lean and DAG",
+   "results": "No Mathlib matches for these torsor section constructions. The existing project TorsorAssociatedModule defines equivariant functions, but not the canonical F(Y) representation, normalized evaluation, or its bijectivity. Existing TorsorModuleDescentEquivalence depends on the current item and cannot be used.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate or usable independent declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"ConnectedSpace\"",
+   "results": "IsLocallyConstant.apply_eq_of_preconnectedSpace and LocallyConstant.apply_eq_of_preconnectedSpace: equality of locally constant values on preconnected spaces. These are tools for the global constant-value identification, not an evaluation or descent theorem.",
+   "date": "2026-10-12",
+   "verdict": "Second reader: no duplicate; full signatures inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant etale sheaf trivialized by a Galois cover is recovered from its global sections on the cover",
+   "results": "CompHausLike.LocallyConstant.counit_app_val, counitAppAppImage, incl_of_counitAppApp, presheaf_ext, functorToPresheavesIso, counit, functorIso; CategoryTheory.evalEquiv_symm_apply. These have compact Hausdorff-like or types sites, not the small etale site.",
+   "date": "2026-10-12",
+   "verdict": "Second reader: no applicable torsor section construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.TorsorAssociatedModuleEssentialImage",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-torsor-module-descent-equivalence",
+   "place": "Essential image step: Canonical representation on sections over a torsor",
+   "via": [
+    "lem-weil-pbc-torsor-associated-module-essential-image",
+    "lem-weil-pbc-torsor-module-descent-equivalence",
+    "lem-weil-pbc-connected-torsor-module-descent",
+    "lem-weil-pbc-sylow-cover-stalk-data",
+    "lem-weil-pbc-sylow-cover-associated-sheaf"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.TorsorSectionRepresentation",
+  "file": "lean/Sheaf/ConstructibleSheaf/TorsorSectionRepresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.sectionRepresentation",
+  "statement": "def sectionRepresentation : Rep.{u + 1} (ZMod ℓ) P",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.GaloisCover.sectionObject",
+   "AlgebraicGeometry.Scheme.GaloisCover.sectionDeck",
+   "AlgebraicGeometry.Scheme.GaloisCover.sectionModule",
+   "AlgebraicGeometry.Scheme.GaloisCover.sectionRepresentation",
+   "AlgebraicGeometry.Scheme.GaloisCover.sectionRepresentationPresheaf",
+   "AlgebraicGeometry.Scheme.GaloisCover.SectionEvaluationNormalized"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T112830-L-764300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T112830-L-764300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

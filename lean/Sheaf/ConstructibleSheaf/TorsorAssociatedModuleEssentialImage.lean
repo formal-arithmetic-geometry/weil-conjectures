@@ -6,6 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.ConstructibleSheaf.TorsorAssociatedModule
+import Sheaf.ConstructibleSheaf.TorsorSectionEvaluation
+import Sheaf.ConstructibleSheaf.TorsorSectionEvaluationBijective
 
 /-!
 # The essential image of the associated module functor
@@ -51,6 +53,17 @@ theorem Scheme.GaloisCover.associatedModuleFunctor_essentialImage
     (h : Nonempty ((c.π)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj F ≅
       (constantSheaf c.P.smallEtaleTopology
         (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj A)) :
-    ∃ N : Rep.{u + 1} (ZMod ℓ) P, Nonempty ((c.associatedModuleFunctor ℓ).obj N ≅ F) := by sorry
+    ∃ N : Rep.{u + 1} (ZMod ℓ) P, Nonempty ((c.associatedModuleFunctor ℓ).obj N ≅ F) := by
+  obtain ⟨α, hα⟩ := c.exists_sectionEvaluation ℓ P F A h
+  have hbij (W : V.Etaleᵒᵖ) : Function.Bijective (α.app W) :=
+    c.sectionEvaluation_bijective ℓ P F A h α hα W
+  have (W : V.Etaleᵒᵖ) : IsIso (α.app W) :=
+    (ConcreteCategory.isIso_iff_bijective (α.app W)).2 (hbij W)
+  have : IsIso α := NatIso.isIso_of_isIso_app α
+  let e := (presheafToSheaf V.smallEtaleTopology
+    (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).mapIso (asIso α).symm
+  let ε := asIso ((sheafificationAdjunction V.smallEtaleTopology
+    (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).counit.app F)
+  exact ⟨c.sectionRepresentation ℓ F, ⟨e ≪≫ ε⟩⟩
 
 end AlgebraicGeometry
