@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "**Step 2 (the pushout as a cokernel).** Let $\\pi:I\\oplus B\\to Q$ be a cokernel of $(u,-f):A\\to I\\oplus B$ (biproducts and cokernels exist in $\\mathcal A$ [def-sp-abelian]), and let $\\iota_Q=\\pi\\circ\\mathrm{in}_I$, $v_Q=\\pi\\circ\\mathrm{in}_B$. Morphisms $\\psi:I\\oplus B\\to W$ correspond bijectively to pairs $(j',k')=(\\psi\\,\\mathrm{in}_I,\\psi\\,\\mathrm{in}_B)$, and $\\psi\\circ(u,-f)=j'u-k'f$; so pairs with $j'u=k'f$ are exactly the $\\psi$ killing $(u,-f)$, and these factor uniquely through $\\pi$. Hence $(Q,\\iota_Q,v_Q)$ is a pushout of $u$ and $f$, and $E\\cong\\operatorname{Coker}((u,-f))$ compatibly with $\\iota$, $v$ (uniqueness of colimits up to unique isomorphism [def-weil-pbc-category-colimit]). This identification is the parenthetical claim of the statement and is not used below.",
+   "text": "**Step 2 (the pushout as a cokernel).** Let $\\pi:I\\oplus B\\to Q$ be a cokernel of $(u,-f):A\\to I\\oplus B$ (biproducts and cokernels exist in $\\mathcal A$ [def-sp-abelian]), and let $\\iota_Q=\\pi\\circ\\mathrm{in}_I$, $v_Q=\\pi\\circ\\mathrm{in}_B$. Morphisms $\\psi:I\\oplus B\\to W$ correspond bijectively to pairs $(j',k')=(\\psi\\,\\mathrm{in}_I,\\psi\\,\\mathrm{in}_B)$, and $\\psi\\circ(u,-f)=j'u-k'f$; so pairs with $j'u=k'f$ are exactly the $\\psi$ killing $(u,-f)$, and these factor uniquely through $\\pi$. Hence $(Q,\\iota_Q,v_Q)$ is a pushout of $u$ and $f$, and $E\\cong\\operatorname{Coker}((u,-f))$ compatibly with $\\iota$, $v$ (uniqueness of colimits up to unique isomorphism [def-weil-pbc-category-colimit]). This identification is the parenthetical claim of the statement and is not used below. In Lean, Mathlib Abelian.BiproductToPushoutIsCokernel.isColimitBiproductToPushout supplies this cokernel cofork; IsColimit.coconePointUniqueUpToIso identifies it with the chosen cokernel. Precomposition with each biproduct inclusion proves the two compatibility equations.",
    "uses": [
     "def-sp-abelian",
     "def-weil-pbc-category-colimit"
@@ -73,12 +73,12 @@
    }
   },
   {
-   "text": "**Step 5 ($p$ is a cokernel of $\\iota$).** The square with $w=A$, $y=B$, $x=I$, $z=E$, top $f:A\\to B$, left $u:A\\to I$, right $v:B\\to E$, bottom $\\iota:I\\to E$ commutes ($v f=\\iota u$) and is cocartesian (Step 1). Since $0\\to A\\xrightarrow fB\\xrightarrow gC\\to0$ is short exact, $g$ is a cokernel of $f$ [lem-weil-pbc-abelian-exact-epi-cokernel](a) ($g$ is an epimorphism and the sequence is exact at $B$). Let $c:E\\to K$ be a cokernel of $\\iota$. By [lem-weil-pbc-pushout-cokernel-iso] (with $\\pi_f=g$, $\\pi_k=c$, $h=v$, $k=\\iota$) the morphism $\\theta:C\\to K$ with $\\theta\\circ g=c\\circ v$ is an isomorphism. Put $p'=\\theta^{-1}\\circ c:E\\to C$. Then $p'\\circ\\iota=0$ and $p'\\circ v=\\theta^{-1}\\theta g=g$, so $p'=p$ by the uniqueness in Step 3. Thus $p$ is the composite of the cokernel $c$ of $\\iota$ with an isomorphism, hence itself a cokernel of $\\iota$.",
+   "text": "**Step 5 (p is a cokernel of iota, directly).** For any k:E→W killing iota, the pushout relation gives f followed by v followed by k equal to u followed by iota followed by k, hence zero. Since g is a cokernel of f by [lem-weil-pbc-abelian-exact-epi-cokernel](a), there is a unique l:C→W with g followed by l equal to v followed by k. The maps p followed by l and k agree after iota (both zero) and after v (both v followed by k); the pushout universal property [def-weil-pbc-category-colimit] makes them equal. Moreover p is epic since v followed by p is the epic map g. Consequently this factorization is unique, so p is a cokernel of iota. Lean implements the factorization with CokernelCofork.IsColimit.desc' and pushout.hom_ext, and the cokernel with CokernelCofork.IsColimit.ofπ'. This avoids any separate cokernel-isomorphism theorem.",
    "uses": [
     "lem-weil-pbc-abelian-exact-epi-cokernel",
-    "lem-weil-pbc-pushout-cokernel-iso"
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
     "place": "Lemma Tag 08N3 (lemma-cartesian-kernel, line 852), part (2): Coker(f) -> Coker(k) induced by h is an isomorphism for a cocartesian square"
@@ -100,13 +100,12 @@
   "lem-weil-pbc-abelian-exact-epi-cokernel",
   "def-weil-pbc-category-colimit",
   "def-sp-abelian",
-  "lem-weil-pbc-abelian-pushout-mono",
-  "lem-weil-pbc-pushout-cokernel-iso"
+  "lem-weil-pbc-abelian-pushout-mono"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Section Tag 010I (section-extensions), item (2) after the definition of Ext; Lemmas Tag 08N4 (lemma-cartesian-cocartesian) (2) and Tag 08N3 (lemma-cartesian-kernel) (2); Example Tag 05PJ (example-fibre-product-pushouts) (2). Stacks gives only 'By Lemma lemma-cartesian-cocartesian'; the identification of the cokernel (08N3) and the construction of p are written out here."
+  "place": "Section Tag 010I (section-extensions), item (2) after the definition of Ext; Lemmas Tag 08N4 (lemma-cartesian-cocartesian) (2) and Tag 08N3 (lemma-cartesian-kernel) (2); Example Tag 05PJ (example-fibre-product-pushouts) (2). Stacks gives only 'By Lemma lemma-cartesian-cocartesian'; the identification of the cokernel (08N3) and the construction of p are written out here. Stage-3 Lean proof by U3: Step 5 instead verifies the cokernel universal property directly from the original cokernel and the pushout, using the same 08N3 argument without the separate isomorphism lemma. All steps are proved using Mathlib; there are no intermediate proof holes."
  },
  "mathlib_searches": [
   {
@@ -190,5 +189,15 @@
   "group": "C1",
   "result": "fix",
   "note": "Abelian 𝒜 (def-sp-abelian, Mathlib Abelian, independent universes); S ShortComplex + ShortExact = 0→A→B→C→0; u : S.X₁ ⟶ I arbitrary; E = Mathlib pushout u S.f with inl/inr (colimit of span); Coker((u,-f)) iso compatible with both inclusions; unique p with inr≫p=g, inl≫p=0; ShortComplex.mk inl p ShortExact; morphism (u,inr,id). FIX: dropped tautological conjunct u≫inl=f≫inr (= pushout.condition) and the duplicate inl≫p=0 conjunct now carried by hz"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T085350-L-43965",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
