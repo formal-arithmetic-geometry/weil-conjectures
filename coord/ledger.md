@@ -6453,3 +6453,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:31 L: returned deliver/M1/Sheaf.CategoryTheory.SiteCechMathlibComparison (reviewer RETURN: (reviewer X-6ed67, head 6ed676d3c) H10: In lean/Sheaf/CategoryTheory/SiteCechMathlibComparison.lean, after line 10, inse)
 - 06:31 L: returned deliver/C1/Sheaf.AlgebraicGeometry.ConstantPullbackCompositionCoherence (reviewer RETURN: (reviewer X-1e64f, head 1e64fc27c) H4 (duplicate statement; roles/lead.md §4.5): In lean/Sheaf/AlgebraicGeometry/Constan)
 - 06:31 L: returned deliver/K2/Sheaf.RingTheory.HenselianEtaleRetractionUniqueness (reviewer RETURN: (reviewer X-8c14c, head 8c14c291b) E2 / review point 4: The replacement counterexample is valid, so the remaining sorry )
+- 06:31 L: returned deliver/H2/Sheaf.AlgebraicGeometry.StrictHenselization (reviewer RETURN: (reviewer X-2a8d3, head 2a8d3d2d5) F (brief point 2): In coord/changes/strictHenselization-proof-imports.md, before line)
