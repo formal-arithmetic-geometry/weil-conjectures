@@ -18,50 +18,29 @@
  ],
  "proof": [
   {
-   "text": "The isomorphisms eS and eT identify the original cartesian square with the chosen pullback of f followed by eS.hom and eT.inv followed by g and eS.hom. The unique pullback isomorphism preserves the first projection and takes the second projection, followed by eT.inv, to f'.",
+   "text": "Construct c0 and its comparison property by the direct left-derived counit construction on the first projection of the coordinate pullback.",
    "uses": [
-    "def-pc-fibre-product"
+    "stage3-canonicalModuleBaseChange_iso_comparison_c0"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the coordinate-compatibility theorem to this c0 and hc0, obtaining a, b and the equality. Package c0, hc0, a, b and the equality into the existential conclusion.",
+   "uses": [
+    "stage3-canonicalModuleBaseChange_iso_comparison_ab"
    ],
    "elementary": true
-  },
-  {
-   "text": "Pullback along a scheme isomorphism is an exact equivalence on modules. Its derived functor is the induced equivalence on derived categories. Direct image along the inverse is its inverse equivalence. Apply composition of derived pullbacks and direct images and the inverse-coordinate identities to obtain a. Use the pullback isomorphism and tensor-pullback composition to identify the ordinary pulled-back modules; derive this identification and then apply direct image composition to obtain b.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-derived-direct-image-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transport the witnessing counit in hc through the pullback isomorphism. Composition with exact equivalences preserves its left-derived universal property. Evaluating on G[0] and inserting the ordinary tensor-pullback identification gives c0 with the required comparison predicate.",
-   "uses": [
-    "def-pc-derived-module-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transpose both base-change mates under the adjunction for the second projection. The pullback composition comparisons identify their transposes: both are pullback of the same counit of f, with inverse coordinates cancelled. Injectivity of the adjunction Hom equivalence gives the equality of mates. Naturality then composes with the transported module counit from step 3, giving the displayed square. This also applies to empty schemes and zero modules.",
-   "uses": [
-    "def-pc-derived-base-change-map",
-    "def-pc-derived-module-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
-  "def-pc-derived-module-base-change-map",
-  "def-pc-fibre-product",
-  "lem-pc-derived-direct-image-composition",
-  "lem-pc-ringed-spaces-derived-pullback-composition"
+  "stage3-canonicalModuleBaseChange_iso_comparison_c0",
+  "stage3-canonicalModuleBaseChange_iso_comparison_ab"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08HY",
   "place": "Tag 08HY, counit construction; Tag 0D5T, derived composition; Tag 08IB, first proof paragraph (coordinate transport part)",
-  "note": "Expanded the restriction / coordinate-transport part of the assigned node; sources read online because this clone omits untracked literature."
+  "note": "Second reading by J3: counit existence is proved directly from the derived pullback specification; geometric coordinate compatibility remains one strict intermediate hole. This is a decomposition with zero net holes closed."
  },
  "mathlib_searches": [
   {
@@ -167,9 +146,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T184325-L-4012384",
+  "landing": "20261012T220522-L-1394068",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

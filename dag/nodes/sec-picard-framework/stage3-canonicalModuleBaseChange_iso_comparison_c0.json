@@ -1,0 +1,128 @@
+{
+ "id": "stage3-canonicalModuleBaseChange_iso_comparison_c0",
+ "kind": "statement",
+ "title": "Existence of the module comparison on the coordinate pullback",
+ "statement": "Choose the shared derived categories and additive tensor pullbacks [def-pc-derived-category, def-pc-module-pullback]. Let $f:X\\to S$, $g:S'\\to S$, $g':X'\\to X$, and $f':X'\\to S'$ form a cartesian square of schemes [def-pc-scheme, def-pc-fibre-product]. Let $G$ be an $\\mathcal O_X$-module and $c:Lg'^*(G[0])\\to(g'^*G)[0]$ satisfy IsDerivedModulePullbackComparison [def-pc-derived-module-base-change-map]. For arbitrary scheme isomorphisms $e_S:S\\cong A$, $e_T:S'\\cong B$, set $f_A=f\\mathbin{\\gg}e_S$, $g_A=e_T^{-1}\\mathbin{\\gg}g\\mathbin{\\gg}e_S$, $P=X\\times_A B$, $p:P\\to X$, $q:P\\to B$, and $T=R(e_T^{-1})_*$. There exists $c_0:Lp^*(G[0])\\to(p^*G)[0]$ satisfying IsDerivedModulePullbackComparison [def-pc-derived-module-base-change-map]. No compatibility with the original c is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tag 08HY, counit construction; Tag 0D5T, derived composition; Tag 08IB, first proof paragraph (coordinate transport part)"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-base-change-map",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Take p to be the first projection of the chosen pullback. Unpack the specification of derivedPullback p supplied by exists_derivedPullback. Identify its underived functor with tensorPullback p using functor extensionality on the object and map formulas. Evaluate the left-derived counit at G in degree zero and compose with the localized single-complex pullback identification. The resulting comparison satisfies the predicate by definition; the original square and hc are unnecessary.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-derived-module-base-change-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tag 08HY, counit construction; Tag 0D5T, derived composition; Tag 08IB, first proof paragraph (coordinate transport part)",
+  "note": "Second reader: direct construction from the existing derived-pullback specification; this theorem is proved, not left sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left derived counit comparison single module automorphism degree zero",
+   "results": "8 hits: Rep.standardComplex.εToSingle₀_comp_eq, DerivedCategory.singleFunctorIsoCompQ, HomologicalComplex.dgoEquivHomologicalComplexCounitIso_hom_app_f, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app, HomologicalComplex.singleCompEvalIsoSelf, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id, DerivedCategory.singleFunctorsPostcompQIso_hom_hom",
+   "date": "2026-10-13",
+   "verdict": "generic derived-functor and mate infrastructure only; no exact scheme-coordinate statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "12 hits: CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.HasLeftDerivedFunctor.mk', CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension, CategoryTheory.Functor.leftDerivedLift, CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-13",
+   "verdict": "generic derived-functor and mate infrastructure only; no exact scheme-coordinate statement"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|singleMapHomologicalComplex|conjugateIsoEquiv",
+   "results": "25 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Comma/Over/Pullback.lean, Mathlib/CategoryTheory/Comma/Over/Pullback.lean, Mathlib/CategoryTheory/Comma/Over/Pullback.lean, Mathlib/CategoryTheory/Comma/Over/Pullback.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean",
+   "date": "2026-10-13",
+   "verdict": "generic derived-functor and mate infrastructure only; no exact scheme-coordinate statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived module pullback comparison under isomorphisms of schemes and independent left derived counits",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparison",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Step 1 local affine reduction: transport the already restricted square through spectrum coordinates",
+   "via": [
+    "lem-pc-canonical-module-base-change-affine-chart-comparison",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparisonC0",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalModuleBaseChangeIsoComparisonC0.lean",
+  "declaration": "AlgebraicGeometry.canonicalModuleBaseChange_iso_comparison_c0",
+  "statement": "theorem canonicalModuleBaseChange_iso_comparison_c0\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (a : Y ⟶ Z), (Scheme.Modules.tensorPullback a).Additive]\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (g' : X' ⟶ X) (f' : X' ⟶ S') (_sq : IsPullback g' f' f g)\n    (G : X.Modules)\n    (c : (derivedPullback g').obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ⟶\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).obj\n            ((Scheme.Modules.tensorPullback g').obj G))\n    (_hc : IsDerivedModulePullbackComparison g' G c)\n    {A B : Scheme.{u}} (eS : S ≅ A) (eT : S' ≅ B) :\n    let fA := f ≫ eS.hom\n    let gA := eT.inv ≫ g ≫ eS.hom\n    ∃ c0 : (derivedPullback (pullback.fst fA gA)).obj\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ⟶\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) 0).obj\n            ((Scheme.Modules.tensorPullback (pullback.fst fA gA)).obj G),\n      IsDerivedModulePullbackComparison (pullback.fst fA gA) G c0",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T220522-L-1394068",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T220522-L-1394068",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

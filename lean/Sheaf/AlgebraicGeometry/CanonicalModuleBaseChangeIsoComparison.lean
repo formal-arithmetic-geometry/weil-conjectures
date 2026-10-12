@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparisonC0
+import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparisonCompat
 
 /-! # Canonical module base change under changes of coordinates
 
@@ -33,27 +32,17 @@ Tag 08IB, affine coordinate change in the first proof paragraph.
 (blueprint: lem-pc-canonical-module-base-change-iso-comparison).
 
 Proof:
-1. The isomorphisms eS and eT identify the original cartesian square with the
-chosen pullback of f followed by eS.hom and eT.inv followed by g and eS.hom.
-The unique pullback isomorphism preserves the first projection and takes the
-second projection, followed by eT.inv, to f'.
-2. Pullback along a scheme isomorphism is an exact equivalence on modules.
-Its derived functor is the induced equivalence on derived categories. Direct
-image along the inverse is its inverse equivalence. Apply composition of derived
-pullbacks and direct images and the inverse-coordinate identities to obtain a.
-Use the pullback isomorphism and tensor-pullback composition to identify the
-ordinary pulled-back modules; derive this identification and then apply direct
-image composition to obtain b.
-3. Transport the witnessing counit in hc through the pullback isomorphism.
-Composition with exact equivalences preserves its left-derived universal
-property. Evaluating on G[0] and inserting the ordinary tensor-pullback
-identification gives c0 with the required comparison predicate.
-4. Transpose both base-change mates under the adjunction for the second
-projection. The pullback composition comparisons identify their transposes:
-both are pullback of the same counit of f, with inverse coordinates cancelled.
-Injectivity of the adjunction Hom equivalence gives the equality of mates.
-Naturality then composes with the transported module counit from step 3,
-giving the displayed square. This also applies to empty schemes and zero modules. -/
+1. Apply canonicalModuleBaseChange_iso_comparison_c0 to obtain a comparison
+at the first projection of the chosen coordinate pullback. This uses the
+existing derived-pullback counit, evaluated at the module in degree zero;
+no transport of the original comparison is required for existence.
+2. Apply canonicalModuleBaseChange_iso_comparison_ab to this comparison. It
+supplies the coordinate isomorphisms and the equality. Its geometric argument
+uses pullback/direct-image composition and mate naturality; its independence
+of the chosen comparison uses the ordinary target-automorphism lemma.
+3. Package the comparison, its property, and the two isomorphisms with the
+equality. This includes empty schemes and zero modules.
+-/
 theorem exists_canonicalModuleBaseChange_iso_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -93,6 +82,9 @@ theorem exists_canonicalModuleBaseChange_iso_comparison
           a.hom ≫ T.map
             (schemeDerivedBaseChangeMap fA (pullback.snd fA gA) gA (pullback.fst fA gA)
               pullback.condition E ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
-      := by sorry
+      := by
+  obtain ⟨c0, hc0⟩ := canonicalModuleBaseChange_iso_comparison_c0 f g g' f' sq G c hc eS eT
+  obtain ⟨a, b, hab⟩ := canonicalModuleBaseChange_iso_comparison_ab f g g' f' sq G c hc eS eT c0 hc0
+  exact ⟨c0, hc0, a, b, hab⟩
 
 end AlgebraicGeometry
