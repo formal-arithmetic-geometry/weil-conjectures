@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-spec-ring-cohomology-diagram",
+ "kind": "statement",
+ "title": "Cohomology diagram for a directed affine ring system",
+ "statement": "Given a directed ring diagram with colimit cocone and compatible maps of its spectra to a scheme T, and a sheaf G on the etale site of T, there exist a cohomology diagram H and a cocone B with explicit pullback comparison isomorphisms and cocone-leg equations as in Tag 09YQ. The complete quantified Lean signature, including all coherence equations, is recorded verbatim in lean.statement.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09YQ",
+  "place": "Canonical cohomology diagram and comparison maps; inverse-image and cohomology pullback functoriality"
+ },
+ "proof": [
+  {
+   "text": "Set H(a) to the cohomology of the inverse image of G along v(a).\nFor f : a to b, pull cohomology back along Spec(R(f)) and then apply the inverse\nof the inverse-image composition isomorphism, using the given equation wv.\nNaturality of pullback on cohomology and the composition coherence of inverse\nimage show that these maps compose. The identity coherence gives the identity\nlaw. For the cocone vertex take the cohomology of the inverse image along vLimit.\nDefine the leg at a by pullback along Spec(c.ι(a)) followed by the inverse\ncomposition isomorphism for wLimit(a). The cocone identity for c and the same\ncomposition coherence prove naturality of these legs. Take eH and eB to be\nidentity isomorphisms. This construction does not use the colimit property of c,\nfilteredness, henselianness, or torsion; these are needed only by subsequent\ncontinuity applications. It works for the zero ring and in degree zero.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/09YQ",
+  "place": "Canonical cohomology diagram and comparison maps; inverse-image and cohomology pullback functoriality",
+  "by": "worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "henselization of closed affine pair as filtered colimit of etale neighborhoods cohomology continuity",
+   "results": "AffineTransitionLimit section descent results; no assembled presentation or canonical cohomology diagram.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsColimit Cocone Spec",
+   "results": "Service rejected unqualified IsColimit; no hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "henselization|cohomology_spec_ring_colimit; ring diagrams and cohomology pullback functoriality in lean/Sheaf and lean/WeilConjectures",
+   "results": "PairHenselization and EtaleCohomologyLimitOfSchemes provide ingredients; neither constructs this interface. CofilteredEtaleCohomologyCocone provides a cohomology colimit with different leg equations, not this explicit ring diagram.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subscheme of an affine scheme has a henselization that is a filtered colimit of etale neighborhoods",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineClosedHenselianNeighborhoodColimit",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "the cohomology diagram and canonical comparison maps",
+   "via": [
+    "lem-weil-pbc-affine-closed-henselian-neighborhood-colimit",
+    "lem-weil-pbc-affine-closed-etale-neighborhood-comparison",
+    "lem-weil-pbc-affine-closed-injective-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SpecRingCohomologyDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpecRingCohomologyDiagram.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_spec_ring_cohomology_diagram",
+  "statement": "theorem exists_spec_ring_cohomology_diagram\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)\n    (T : Scheme.{u}) (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (v : ∀ i : I, Spec (R.obj i) ⟶ T)\n    (wv : ∀ (i j : I) (f : i ⟶ j), v j = Spec.map (R.map f) ≫ v i)\n    (vLimit : Spec c.pt ⟶ T) (wLimit : ∀ i : I, vLimit = Spec.map (c.ι.app i) ≫ v i)\n    (p : ℕ) :\n    ∃ (H : I ⥤ AddCommGrpCat.{u + 1})\n    (eH : ∀ i : I, H.obj i ≅\n      AddCommGrpCat.of (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (v i)).obj G) p)),\n    (∀ (i j : I) (f : i ⟶ j), H.map f =\n      (eH i).hom ≫ AddCommGrpCat.ofHom\n        (cohomologyMap (Spec.map (R.map f))\n          ((upperStar AddCommGrpCat.{u + 1} (v i)).obj G) p) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map\n          ((upperStarComp AddCommGrpCat.{u + 1} (Spec.map (R.map f)) (v i)\n            (v j) (wv i j f)).inv.app G) p) ≫ (eH j).inv) ∧\n    ∃ (B : Cocone H) (eB : B.pt ≅\n      AddCommGrpCat.of (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} vLimit).obj G) p)),\n    (∀ i : I, B.ι.app i ≫ eB.hom =\n      (eH i).hom ≫ AddCommGrpCat.ofHom\n        (cohomologyMap (Spec.map (c.ι.app i))\n          ((upperStar AddCommGrpCat.{u + 1} (v i)).obj G) p) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map\n          ((upperStarComp AddCommGrpCat.{u + 1} (Spec.map (c.ι.app i)) (v i)\n            vLimit (wLimit i)).inv.app G) p))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T053920-L-2629817",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T053920-L-2629817",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

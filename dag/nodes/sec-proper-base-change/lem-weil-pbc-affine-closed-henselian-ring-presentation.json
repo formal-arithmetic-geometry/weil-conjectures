@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-affine-closed-henselian-ring-presentation",
+ "kind": "statement",
+ "title": "Affine closed henselian ring presentation",
+ "statement": "For an affine scheme X and closed immersion i : Z ⟶ X, there exist a small directed preorder I, a ring diagram R : I ⥤ CommRingCat, a colimit cocone c, an ideal K of c.pt with HenselianRing c.pt K, maps t : Spec c.pt ⟶ X and e : Z ≅ Spec(c.pt ⧸ K), and compatible etale maps v a : Spec(R a) ⟶ X presenting t, such that i = e.hom ≫ Spec.map (Ideal.Quotient.mk K) ≫ t. The complete quantified Lean signature, including all coherence equations, is recorded verbatim in lean.statement.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A51",
+  "place": "the affine construction of the henselization and its etale presentation; Tag 0032, construction of a directed final index"
+ },
+ "proof": [
+  {
+   "text": "Write the affine X as Spec B. A closed immersion into an affine scheme has\nan affine source, and its surjective map on global sections presents Z as Spec(B/L),\nwhere L is the kernel. Apply pair_henselization to B and L. Its category of etale\nB-algebras trivial modulo L is essentially small and filtered. Replace it by a\nsmall skeleton and then by a cofinal directed preorder (Stacks, Tag 0032).\nFor the latter, first multiply the small category by the natural-number order;\nprojection is final. Consider finitely generated subcategories with a unique\nterminal object, ordered by inclusion, and map each to its terminal object.\nA finite collection of generators admits a cocone by filteredness. Increasing\nits natural-number coordinate makes the apex new, so adjoining the cocone\nproduces such a subcategory. Applying this to the union of two finite sets of\ngenerators proves directedness. Every object occurs in a subcategory; every\narrow can be added to the generators, which proves finality. The generators\nform a finite subset of the small category's morphisms, so the resulting index\nhas universe u. Restrict the ring diagram to this preorder. Finality preserves\nits colimit A and its structure map B to A. Put K = LA. Pair henselization gives\nhenselianness and the quotient isomorphism B/L to A/K. Composing its spectrum with\nthe affine presentation of Z gives e. The quotient map followed by the structure\nmap is the original immersion because the corresponding ring maps agree.\nThe stage structure maps v are etale, and their compatibility and the compatibility\nof t with the colimit coprojections are the defining equations of the diagram\nof B-algebras. These arguments allow L = 0 and L = B; in the latter case the\nhenselization is the zero ring and the closed fibre is empty.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-colimit-initial-full-subcategory"
+ ],
+ "proof_origin": {
+  "document": "https://stacks.math.columbia.edu/tag/0A51",
+  "place": "the affine construction of the henselization and its etale presentation; Tag 0032, construction of a directed final index",
+  "by": "worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "henselization of closed affine pair as filtered colimit of etale neighborhoods cohomology continuity",
+   "results": "AffineTransitionLimit section descent results; no assembled presentation or canonical cohomology diagram.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsColimit Cocone Spec",
+   "results": "Service rejected unqualified IsColimit; no hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "henselization|cohomology_spec_ring_colimit; ring diagrams and cohomology pullback functoriality in lean/Sheaf and lean/WeilConjectures",
+   "results": "PairHenselization and EtaleCohomologyLimitOfSchemes provide ingredients; neither constructs this interface. CofilteredEtaleCohomologyCocone provides a cohomology colimit with different leg equations, not this explicit ring diagram.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subscheme of an affine scheme has a henselization that is a filtered colimit of etale neighborhoods",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineClosedHenselianNeighborhoodColimit",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "the affine construction of the henselization and its etale presentation",
+   "via": [
+    "lem-weil-pbc-affine-closed-henselian-neighborhood-colimit",
+    "lem-weil-pbc-affine-closed-etale-neighborhood-comparison",
+    "lem-weil-pbc-affine-closed-injective-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineClosedHenselianRingPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineClosedHenselianRingPresentation.lean",
+  "declaration": "AlgebraicGeometry.Etale.affine_closed_henselian_ring_presentation",
+  "statement": "theorem Etale.affine_closed_henselian_ring_presentation\n    {X Z : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) [IsClosedImmersion i] :\n    ∃ (I : Type u) (_ : Preorder I) (_ : IsDirected I (· ≤ ·)) (_ : Nonempty I)\n      (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (_ : IsColimit c)\n      (K : Ideal c.pt) (_ : HenselianRing c.pt K)\n      (t : Spec c.pt ⟶ X) (e : Z ≅ Spec (.of (c.pt ⧸ K))),\n      i = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K)) ≫ t ∧\n      ∃ v : ∀ a : I, Spec (R.obj a) ⟶ X,\n        (∀ (a b : I) (f : a ⟶ b), v b = Spec.map (R.map f) ≫ v a) ∧\n        (∀ a : I, t = Spec.map (c.ι.app a) ≫ v a) ∧\n        (∀ a : I, Etale (v a))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T053920-L-2629817",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T053920-L-2629817",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

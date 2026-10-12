@@ -6,10 +6,10 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.AlgebraicGeometry.AffineClosedHenselianRingPresentation
+import Sheaf.AlgebraicGeometry.SpecRingCohomologyDiagram
 import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
 import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
-import Sheaf.RingTheory.PairHenselization
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Continuity at the henselization of a closed affine pair -/
 
@@ -61,6 +61,20 @@ theorem Etale.affine_closed_henselian_neighborhood_colimit
           ∀ a, Nonempty (H.obj a ≅ AddCommGrpCat.of (Sheaf.H
             ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
               ((v a)^*[ModuleCat.{u + 1} Λ].obj J)) q)) := by
-  sorry
+  obtain ⟨I, _, _, _, R, c, hc, K, hK, t, e, hi, v, wv, wt, hev⟩ :=
+    Etale.affine_closed_henselian_ring_presentation i
+  obtain ⟨H, eH, hH, B, eB, hB⟩ :=
+    Etale.exists_spec_ring_cohomology_diagram R c hc X
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj J) v wv t wt q
+  obtain ⟨hcol⟩ := AlgebraicGeometry.Etale.nonempty_isColimit_etale_cohomology_spec_ring_colimit
+    R c hc X ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj J)
+    ((fun a ↦ v a)) wv t wt q H eH hH B eB hB
+  refine ⟨c.pt, inferInstance, K, hK, t, e, hi, I, inferInstance, inferInstance,
+    (fun a ↦ Spec (R.obj a)), v, hev, H, B, ⟨hcol⟩, ?_, ?_⟩
+  · obtain ⟨et⟩ := Etale.pullback_forget_modules_iso Λ t J
+    exact ⟨(Sheaf.functorH _ q).mapIso et ≪≫ eB.symm⟩
+  · intro a
+    obtain ⟨ea⟩ := Etale.pullback_forget_modules_iso Λ (v a) J
+    exact ⟨eH a ≪≫ (Sheaf.functorH _ q).mapIso ea.symm⟩
 
 end AlgebraicGeometry
