@@ -10,8 +10,7 @@ public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.CategoryTheory.Monoidal.Ring
 public import Mathlib.Algebra.Category.Ring.Limits
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.CategoryTheory.Adjunction.LiftedCommRingBranch
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresRingCore
+import Sheaf.AlgebraicGeometry.EtaleRingDirectImageOperations
 
 /-!
 # Identifying the ring-object lift of sectionwise etale direct image
@@ -122,6 +121,74 @@ theorem etaleRingDirectImageComparison (U V : Scheme.{u}) (f : U ⟶ V)
       ∃ d : RF ⋙ GV ≅ GU ⋙ Rr,
         ∀ X, (sheafForget V.smallEtaleTopology).map (d.hom.app X) =
           (eqToIso hGV).hom.app (RF.obj X) ≫ (eqToIso hRF).hom.app X ≫
-            R.map ((eqToIso hGU).inv.app X) := by sorry
+            R.map ((eqToIso hGU).inv.app X) := by
+  dsimp only
+  intro RF hRF hprod opsR
+  obtain h := etaleRingDirectImageOperations U V f
+    FU GU hFU hGU hGUFU opsU FV GV hFV hGV hGVFV opsV RF hRF opsR
+  let α X : (sheafForget V.smallEtaleTopology).obj (GV.obj (RF.obj X)) ⟶
+      (sheafForget V.smallEtaleTopology).obj
+        (((MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous
+          CommRingCat.{u + 1} (V.smallGrothendieckTopology @Etale)
+          (U.smallGrothendieckTopology @Etale)).obj (GU.obj X)) :=
+    (eqToIso hGV).hom.app (RF.obj X) ≫ (eqToIso hRF).hom.app X ≫
+      ((MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous
+        (Type (u + 1)) (V.smallGrothendieckTopology @Etale)
+        (U.smallGrothendieckTopology @Etale)).map ((eqToIso hGU).inv.app X)
+  let dh X : GV.obj (RF.obj X) ⟶
+      ((MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous
+        CommRingCat.{u + 1} (V.smallGrothendieckTopology @Etale)
+        (U.smallGrothendieckTopology @Etale)).obj (GU.obj X) :=
+    ⟨{ app Z := CommRingCat.ofHom
+        { toFun := (α X).hom.app Z
+          map_zero' := (h X Z).2.1
+          map_add' := (h X Z).1
+          map_one' := (h X Z).2.2.2
+          map_mul' := (h X Z).2.2.1 }
+       naturality := by
+         intro Z W g
+         ext a
+         exact ConcreteCategory.congr_hom ((α X).hom.naturality g) a }⟩
+  have hh X : (sheafForget V.smallEtaleTopology).map (dh X) = α X := by
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext Z
+    ext a
+    rfl
+  have hi X : IsIso (dh X) := by
+    have hm : IsIso ((sheafForget V.smallEtaleTopology).map (dh X)) := by
+      rw [hh]
+      dsimp only [α]
+      infer_instance
+    exact isIso_of_reflects_iso (dh X) (sheafForget V.smallEtaleTopology)
+  let d := fun X ↦ @asIso _ _ _ _ (dh X) (hi X)
+  have hd X : (sheafForget V.smallEtaleTopology).map (d X).hom =
+      (eqToIso hGV).hom.app (RF.obj X) ≫ (eqToIso hRF).hom.app X ≫
+        ((MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous
+          (Type (u + 1)) (V.smallGrothendieckTopology @Etale)
+          (U.smallGrothendieckTopology @Etale)).map ((eqToIso hGU).inv.app X) := hh X
+  refine ⟨NatIso.ofComponents d ?_, hd⟩
+  intro X Y g
+  apply (sheafForget V.smallEtaleTopology).map_injective
+  simp only [Functor.map_comp, Functor.comp_map]
+  rw [hd, hd]
+  have hnV := (eqToIso hGV).hom.naturality (RF.map g)
+  have hnR := (eqToIso hRF).hom.naturality g
+  have hnU := (eqToIso hGU).inv.naturality g
+  dsimp only [Functor.comp_map] at hnV hnR hnU
+  simp only [Category.assoc]
+  rw [← Category.assoc, hnV]
+  simp only [Category.assoc]
+  rw [← Category.assoc ((CommRingObjCat.forget _).map (RF.map g)), hnR]
+  simp only [Category.assoc]
+  rw [← Functor.map_comp]
+  have ht := congrArg
+    ((MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous
+      (Type (u + 1)) (V.smallGrothendieckTopology @Etale)
+      (U.smallGrothendieckTopology @Etale)).map hnU
+  exact congrArg (fun k ↦ (eqToIso hGV).hom.app (RF.obj X) ≫
+    (eqToIso hRF).hom.app X ≫ k) ht |>.trans (by
+      simp only [Functor.map_comp]
+      rfl)
 
 end AlgebraicGeometry

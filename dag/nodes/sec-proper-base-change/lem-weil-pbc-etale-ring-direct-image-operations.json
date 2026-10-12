@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-etale-ring-direct-image-operations",
+ "kind": "statement",
+ "title": "Sectionwise ring-operation preservation of the etale direct-image comparison",
+ "statement": "Let U,V be schemes [def-pc-scheme], f:U -> V, and b be base change on their small etale sites [def-weil-pbc-etale-site]. Write R and Rr for sectionwise set and commutative-ring direct image. Let FU,GU and FV,GV be the ring-sheaf/internal-ring functors [lem-weil-pbc-sheaf-algebraic-structures-ring-core], with strict underlying forgetful equalities, GU FU = id and GV FV = id, and the five canonical sectionwise operation formulas for FU and FV. Let RF be a functor on internal commutative rings from the U-site to the V-site, whose underlying functor is strictly R. Assume R preserves finite products, and RF satisfies the five right-operation transport formulas of [lem-weil-pbc-lifted-comm-ring-branch]. For each internal ring X and etale object Z of V, let c be the section map of eGV(RF X) followed by eRF(X) followed by R(eGU(X) inverse). Regarding its source and target as the section rings of GV(RF X) and Rr(GU X), c preserves addition, zero, multiplication and one. This statement asserts only these four equations and no bundled morphism, inverse or naturality in X.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, proof of (2), ring paragraph; Section 00YR, sextuples"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-sheaf-algebraic-structures-ring-core",
+  "lem-weil-pbc-lifted-comm-ring-branch"
+ ],
+ "proof": [
+  {
+   "text": "For either site and internal ring Y, apply the supplied formulas for F to G(Y). The equality G followed by F = identity identifies F(G(Y)) with Y including its ring-object operations. The strict forgetful equalities imply that the composite underlying identifications are identity maps. Thus the inverse underlying identification associated to G transports addition, zero, multiplication and one to the section operations of G(Y).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the inverse product comparison for sectionwise R at Z. Composing with each projection gives the two input coordinates at the base-changed object, so its value on a pair is the same pair. The inverse terminal comparison evaluates to the unique singleton section.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the supplied RF transport identities for addition, zero, multiplication and one at Z. Substitute the descriptions of the product and terminal comparisons, then substitute the inverse-identification operation formulas for GU and GV obtained in step 1. Each result is precisely the corresponding displayed preservation equation for c.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sectionwise calculation in Proposition 00YV ring paragraph and Section 00YR; read https://stacks.math.columbia.edu/tag/00YV and https://stacks.math.columbia.edu/tag/00YR. Uses the operation assumptions, not an invocation of the existential ring-core or lifted-adjunction theorems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation of sheaves of sets lifts to ring sheaves if all components preserve addition multiplication and one",
+   "results": "Eight module-sheaf forgetful and section-map declarations; no sectionwise internal-ring direct-image operation theorem.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.prodComparisonIso",
+   "results": "OK zero hits; unknown identifier CategoryTheory.prodComparisonIso.",
+   "date": "2026-10-12",
+   "verdict": "No exact match from this query."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuous.*(mul|add)|prodComparisonIso.*sheaf",
+   "results": "OK zero hits.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sectionwise direct image of ring sheaves preserves addition zero multiplication and one under the internal ring object comparison",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleRingDirectImageComparison",
+  "date": "2026-10-12",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Operation-preservation part of the sectionwise comparison in step 3 of lem-weil-pbc-etale-ring-inverse-image-unit, before assembly of the natural isomorphism.",
+   "via": [
+    "lem-weil-pbc-etale-ring-direct-image-comparison",
+    "lem-weil-pbc-etale-ring-inverse-image-unit",
+    "lem-weil-pbc-etale-inverse-image-ring-adjunction",
+    "lem-weil-pbc-etale-inverse-image-ring-lift",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleRingDirectImageOperations",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRingDirectImageOperations.lean",
+  "declaration": "AlgebraicGeometry.etaleRingDirectImageOperations",
+  "statement": "theorem etaleRingDirectImageOperations (U V : Scheme.{u}) (f : U ⟶ V)\n    (FU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1} ⥤\n      CommRingObjCat (Sheaf U.smallEtaleTopology (Type (u + 1))))\n    (GU : CommRingObjCat (Sheaf U.smallEtaleTopology (Type (u + 1))) ⥤\n      Sheaf U.smallEtaleTopology CommRingCat.{u + 1})\n    (hFU : FU ⋙ CommRingObjCat.forget _ = sheafForget U.smallEtaleTopology)\n    (hGU : GU ⋙ sheafForget U.smallEtaleTopology = CommRingObjCat.forget _)\n    (hGUFU : GU ⋙ FU = 𝟭 _)\n    (opsU : (∀ (A : Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (Z : U.Etaleᵒᵖ),\n        (∀ a b : (FU.obj A).X.obj.obj Z,\n          ((eqToIso hFU).hom.app A).hom.app Z\n            ((AddMonObj.add (X := (FU.obj A).X)).hom.app Z (a, b)) =\n            (show A.obj.obj Z from ((eqToIso hFU).hom.app A).hom.app Z a) +\n              (show A.obj.obj Z from ((eqToIso hFU).hom.app A).hom.app Z b)) ∧\n        (∀ t : (𝟙_ (Sheaf U.smallEtaleTopology (Type (u + 1)))).obj.obj Z,\n          ((eqToIso hFU).hom.app A).hom.app Z ((AddMonObj.zero (X := (FU.obj A).X)).hom.app Z t) =\n            (0 : A.obj.obj Z)) ∧\n        (∀ a : (FU.obj A).X.obj.obj Z,\n          ((eqToIso hFU).hom.app A).hom.app Z ((AddGrpObj.neg (X := (FU.obj A).X)).hom.app Z a) =\n            -(show A.obj.obj Z from ((eqToIso hFU).hom.app A).hom.app Z a)) ∧\n        (∀ a b : (FU.obj A).X.obj.obj Z,\n          ((eqToIso hFU).hom.app A).hom.app Z ((MonObj.mul (X := (FU.obj A).X)).hom.app Z (a, b)) =\n            (show A.obj.obj Z from ((eqToIso hFU).hom.app A).hom.app Z a) *\n              (show A.obj.obj Z from ((eqToIso hFU).hom.app A).hom.app Z b)) ∧\n        (∀ t : (𝟙_ (Sheaf U.smallEtaleTopology (Type (u + 1)))).obj.obj Z,\n          ((eqToIso hFU).hom.app A).hom.app Z ((MonObj.one (X := (FU.obj A).X)).hom.app Z t) =\n            (1 : A.obj.obj Z))))\n    (FV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤\n      CommRingObjCat (Sheaf V.smallEtaleTopology (Type (u + 1))))\n    (GV : CommRingObjCat (Sheaf V.smallEtaleTopology (Type (u + 1))) ⥤\n      Sheaf V.smallEtaleTopology CommRingCat.{u + 1})\n    (hFV : FV ⋙ CommRingObjCat.forget _ = sheafForget V.smallEtaleTopology)\n    (hGV : GV ⋙ sheafForget V.smallEtaleTopology = CommRingObjCat.forget _)\n    (hGVFV : GV ⋙ FV = 𝟭 _)\n    (opsV : (∀ (A : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) (Z : V.Etaleᵒᵖ),\n        (∀ a b : (FV.obj A).X.obj.obj Z,\n          ((eqToIso hFV).hom.app A).hom.app Z\n            ((AddMonObj.add (X := (FV.obj A).X)).hom.app Z (a, b)) =\n            (show A.obj.obj Z from ((eqToIso hFV).hom.app A).hom.app Z a) +\n              (show A.obj.obj Z from ((eqToIso hFV).hom.app A).hom.app Z b)) ∧\n        (∀ t : (𝟙_ (Sheaf V.smallEtaleTopology (Type (u + 1)))).obj.obj Z,\n          ((eqToIso hFV).hom.app A).hom.app Z ((AddMonObj.zero (X := (FV.obj A).X)).hom.app Z t) =\n            (0 : A.obj.obj Z)) ∧\n        (∀ a : (FV.obj A).X.obj.obj Z,\n          ((eqToIso hFV).hom.app A).hom.app Z ((AddGrpObj.neg (X := (FV.obj A).X)).hom.app Z a) =\n            -(show A.obj.obj Z from ((eqToIso hFV).hom.app A).hom.app Z a)) ∧\n        (∀ a b : (FV.obj A).X.obj.obj Z,\n          ((eqToIso hFV).hom.app A).hom.app Z ((MonObj.mul (X := (FV.obj A).X)).hom.app Z (a, b)) =\n            (show A.obj.obj Z from ((eqToIso hFV).hom.app A).hom.app Z a) *\n              (show A.obj.obj Z from ((eqToIso hFV).hom.app A).hom.app Z b)) ∧\n        (∀ t : (𝟙_ (Sheaf V.smallEtaleTopology (Type (u + 1)))).obj.obj Z,\n          ((eqToIso hFV).hom.app A).hom.app Z ((MonObj.one (X := (FV.obj A).X)).hom.app Z t) =\n            (1 : A.obj.obj Z)))) :\n    let b := MorphismProperty.Over.pullback @Etale ⊤ f\n    let R := b.sheafPushforwardContinuous (Type (u + 1))\n      (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)\n    let Rr := b.sheafPushforwardContinuous CommRingCat.{u + 1}\n      (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)\n    ∀ (RF : CommRingObjCat (Sheaf U.smallEtaleTopology (Type (u + 1))) ⥤\n          CommRingObjCat (Sheaf V.smallEtaleTopology (Type (u + 1))))\n      (hRF : RF ⋙ CommRingObjCat.forget _ = CommRingObjCat.forget _ ⋙ R)\n      [PreservesFiniteProducts R],\n      (∀ X : CommRingObjCat (Sheaf U.smallEtaleTopology (Type (u + 1))),\n            AddMonObj.add (X := (RF.obj X).X) ≫ (eqToIso hRF).hom.app X =\n              ((eqToIso hRF).hom.app X ⊗ₘ (eqToIso hRF).hom.app X) ≫\n                (prodComparisonIso R X.X X.X).inv ≫ R.map (AddMonObj.add (X := X.X)) ∧\n            AddMonObj.zero (X := (RF.obj X).X) ≫ (eqToIso hRF).hom.app X =\n              (preservesTerminalIso R).inv ≫ R.map (AddMonObj.zero (X := X.X)) ∧\n            AddGrpObj.neg (X := (RF.obj X).X) ≫ (eqToIso hRF).hom.app X =\n              (eqToIso hRF).hom.app X ≫ R.map (AddGrpObj.neg (X := X.X)) ∧\n            MonObj.mul (X := (RF.obj X).X) ≫ (eqToIso hRF).hom.app X =\n              ((eqToIso hRF).hom.app X ⊗ₘ (eqToIso hRF).hom.app X) ≫\n                (prodComparisonIso R X.X X.X).inv ≫ R.map (MonObj.mul (X := X.X)) ∧\n            MonObj.one (X := (RF.obj X).X) ≫ (eqToIso hRF).hom.app X =\n              (preservesTerminalIso R).inv ≫ R.map (MonObj.one (X := X.X))) →\n      ∀ X (Z : V.Etaleᵒᵖ),\n        let c : (GV.obj (RF.obj X)).obj.obj Z → (Rr.obj (GU.obj X)).obj.obj Z :=\n          ((eqToIso hGV).hom.app (RF.obj X) ≫\n          (eqToIso hRF).hom.app X ≫ R.map ((eqToIso hGU).inv.app X)).hom.app Z\n        (∀ a b : (GV.obj (RF.obj X)).obj.obj Z, c (a + b) = c a + c b) ∧\n        c (0 : (GV.obj (RF.obj X)).obj.obj Z) = 0 ∧\n        (∀ a b : (GV.obj (RF.obj X)).obj.obj Z, c (a * b) = c a * c b) ∧\n        c (1 : (GV.obj (RF.obj X)).obj.obj Z) = 1",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T135339-L-1702688",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T135339-L-1702688",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

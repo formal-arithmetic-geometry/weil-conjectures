@@ -15,22 +15,25 @@
  ],
  "proof": [
   {
-   "text": "The forgetful equalities identify the underlying source of the comparison\nwith R(X), and its target with R of the underlying ring sheaf GU(X). Use their\ncanonical isomorphisms to define the displayed underlying comparison. The strict\ninverse identity GU FU = id transports the five section formulas for FU to GU;\nsimilarly GV FV = id transports the formulas for FV to GV. At every etale object,\nthe product comparison of R is the coordinate pairing: this follows by composing\nwith both projections. Its terminal comparison is the unique map between singleton\nsections. Substitute these facts in the five RF operation equations. The underlying\ncomparison then preserves addition, zero, negation, multiplication and one on each\nsection. Bundle its components and inverse as ring homomorphisms. Naturality follows\nfrom the underlying comparisons, since forgetting ring coefficients is faithful.\nTheir composites are identities by the underlying isomorphism identities. This\nconstructs d with exactly the displayed underlying formula. No inverse-image functor,\nunit or adjunction is involved in this assertion.",
+   "text": "Apply the sectionwise operation-preservation theorem, which provides only addition, zero, multiplication and one equations. Use them to construct CommRingCat homomorphisms sectionwise from the prescribed underlying comparison; naturality at etale objects is inherited from that comparison.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-ring-core",
-    "lem-weil-pbc-lifted-comm-ring-branch"
+    "lem-weil-pbc-etale-ring-direct-image-operations"
    ],
    "elementary": false
+  },
+  {
+   "text": "The underlying comparison is a composite of isomorphisms. Since sheafForget reflects isomorphisms, the constructed ring-sheaf morphism is invertible. Its source-ring-object naturality follows by faithfulness of sheafForget from naturality of eGV, eRF and eGU inverse, and the fact that sectionwise ring direct image commutes with forgetting. Assemble with NatIso.ofComponents.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sheaf-algebraic-structures-ring-core",
-  "lem-weil-pbc-lifted-comm-ring-branch"
+  "lem-weil-pbc-etale-ring-direct-image-operations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Details of the sectionwise right operation identification in Proposition 00YV ring paragraph; source read at https://stacks.math.columbia.edu/tag/00YV and https://stacks.math.columbia.edu/tag/00YR"
+  "place": "Y3: split off only the four operation equations; explicitly construct ring homomorphisms, reflect invertibility through sheafForget, and prove naturality to assemble the natural isomorphism."
  },
  "mathlib_searches": [
   {
@@ -118,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-4117f",
-  "group": "F3",
+  "reviewer": "COMPILER",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261012T112838-L-767132",
+  "landing": "20261012T135339-L-1702688",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proof with their DAG nodes, dependency declarations, Stacks sources, report, and successful module/importer compilation."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
