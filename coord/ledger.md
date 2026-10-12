@@ -8898,3 +8898,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/C2/Sheaf.RingTheory.SmoothAtPrimeOfDifferentialsDimensionBound (stage 3; reviewer PASS; first push; landing 20261012T184245-L-3997611 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/C3/Sheaf.AlgebraicGeometry.EtaleStalkContinuousCohomology (stage 3; reviewer PASS; first push; landing 20261012T184245-L-3997819 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/C3/Sheaf.AlgebraicGeometry.InvertibleSectionRing (stage 3; reviewer PASS; first push; landing 20261012T184246-L-3997985 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:42 L: merged deliver/C3/Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation (stage 3; reviewer PASS; first push; landing 20261012T184246-L-3998120 (interface); batch 20261012T184234; modules 4; new nodes 3)

@@ -8,9 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
-import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisExact
+import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisComparisons
 
 /-! # The short exact complex presenting direct-image Mayer--Vietoris
 
@@ -30,6 +29,10 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 800000 in
+-- The transported restriction functors require extra elaboration heartbeats.
 /-- The injective representative gives a short exact sequence with comparisons of
 its first two arrows to the derived units and the difference of restriction maps.
 Source: Stacks Project, Cohomology, Tag 08BV, construction of the short exact sequence
@@ -103,6 +106,39 @@ theorem schemeKInjective_mayerVietoris_presentation
         biprod.desc
           (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left) adjU adjUV E)
           (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right) adjV adjUV E)) := by
-  sorry
+  obtain ⟨eU, eV, eW, hu, hv, hru, hrv⟩ :=
+    schemeOpenModuleImageComplex_comparisons X U V I E e adjU adjV adjUV
+  let Q : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ ⥤
+      schemeDerivedCategory X := DerivedCategory.Q
+  have : PreservesBinaryBiproducts Q :=
+    preservesBinaryBiproducts_of_preservesBiproducts Q
+  let eB : DerivedCategory.Q.obj (schemeMayerVietorisB X U V I) ≅
+      (schemeDerivedDirectImage U.ι).obj
+        ((schemeOpenRestriction X U).mapDerivedCategory.obj E) ⊞
+      (schemeDerivedDirectImage V.ι).obj
+        ((schemeOpenRestriction X V).mapDerivedCategory.obj E) :=
+    Q.mapBiprod (schemeOpenModuleImageComplex X U I)
+      (schemeOpenModuleImageComplex X V I) ≪≫ biprod.mapIso eU eV
+  refine ⟨schemeMayerVietorisB X U V I, schemeOpenModuleImageComplex X (U ⊓ V) I,
+    schemeMayerVietorisF X U V I, schemeMayerVietorisG X U V I,
+    schemeMayerVietoris_zero X U V I, eB, eW,
+    schemeMayerVietorisComplex_shortExact X U V hcover I hI, ?_, ?_⟩
+  · dsimp only [schemeMayerVietorisF, eB, Iso.trans_hom, biprod.mapIso]
+    rw [← Category.assoc, biprod.map_lift_mapBiprod]
+    apply biprod.hom_ext
+    · simp only [Category.assoc, biprod.map_fst]
+      rw [← Category.assoc, biprod.lift_fst]
+      simpa [Category.assoc] using hu
+    · simp only [Category.assoc, biprod.map_snd]
+      rw [← Category.assoc, biprod.lift_snd]
+      simpa [Category.assoc] using hv
+  · dsimp only [schemeMayerVietorisG, eB, Iso.trans_hom, biprod.mapIso]
+    rw [← biprod.mapBiprod_hom_desc Q]
+    simp only [Category.assoc]
+    apply congrArg (fun k => (Q.mapBiprod
+      (schemeOpenModuleImageComplex X U I) (schemeOpenModuleImageComplex X V I)).hom ≫ k)
+    apply biprod.hom_ext'
+    · simpa [Category.assoc] using hru
+    · simpa [Category.assoc] using congrArg Neg.neg hrv
 
 end AlgebraicGeometry

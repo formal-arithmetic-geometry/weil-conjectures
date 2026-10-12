@@ -1,0 +1,142 @@
+{
+ "id": "def-pc-kinjective-mayer-vietoris-data",
+ "kind": "definition",
+ "title": "Concrete open restriction/direct-image Mayer-Vietoris diagram",
+ "statement": "Let X be a scheme [def-pc-scheme], U,V open subschemes, and I a cochain complex of O_X-modules [def-weil-sheaf-of-modules-category]. Write r_A for exact restriction and t_{A,W} for nested restriction, with alpha_{A,W}:r_A t_{A,W} isomorphic to r_W [def-pc-derived-open-restriction-maps]. Let j_{A*} be underived module direct image. Transport Scheme.Modules.restrictAdjunction A.ι along Scheme.Modules.overFunctorEquiv A to obtain a_A:r_A left adjoint to j_{A*}. Put M_A=r_A followed by j_{A*} and J_A=M_A(I), applied termwise. For W contained in A define rho_{A,W}:M_A -> M_W as the a_W-mate of alpha inverse, followed by t_{A,W} of the a_A-counit, followed by alpha. Define B=J_U direct-sum J_V, C=J_{U intersection V}, f:I -> B as the pair of the termwise a_U and a_V units, and g:B -> C as the difference of the termwise rho_{U,U intersection V} and rho_{V,U intersection V}. These are chain maps and fg=0: the two iterated units both equal the intersection unit by naturality and the left triangle identity. Define the short complex S(X,U,V,I)=(I -> B -> C) using these explicit objects, arrows and zero-composite proof. No cover, injectivity, existence theorem, or derived category is needed to define this diagram.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 20.33.2 (Tag 08BV, lemma-exact-sequence-j-star), displayed direct-image sequence and proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Transport Scheme.Modules.restrictAdjunction along Scheme.Modules.overFunctorEquiv; construct the composite restriction/direct-image functor, its termwise units, and the nested restriction transformation as the mate of the restricted counit conjugated by schemeOpenRestrictionCompIso. Naturality supplies the chain-map identities. All objects and arrows are these explicit constructions.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The generic unit_comp_mate calculation first uses homEquiv_naturality_left. Naturality of the inverse composition isomorphism and the larger adjunction left triangle identity reduce its transpose to the identity; homEquiv_id gives the smaller unit. Apply this in every degree to obtain schemeOpenModuleImage_unit_restriction and its complex version.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define f by biprod.lift of the two units and g by biprod.desc of the overlap maps with a minus sign on V. The lift-desc formula, preservation of negation under composition, and the iterated-unit identities give unit_W minus unit_W equals zero. Use this proved equality to construct schemeMayerVietorisComplex as ShortComplex.mk.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 20.33.2 (Tag 08BV, lemma-exact-sequence-j-star), displayed direct-image sequence and proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit of restriction direct image is compatible with nested restriction via the counit mate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv_naturality_left\"",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_left; CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left; CategoryTheory.Adjunction.homEquiv_naturality_left_symm; CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left_symm; CategoryTheory.Adjunction.homEquiv_naturality_left_square; CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff; CategoryTheory.Adjunction.homEquiv_naturality_left_square_assoc; PresheafOfModules.ModuleColimit.homEquiv_naturality_left",
+   "date": "2026-10-13",
+   "verdict": "Generic ingredients; no complete specialization to the canonical scheme diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorEquiv|restrictAdjunction|homEquiv_naturality_left",
+   "results": "Mathlib/Condensed/Light/Epi.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/CategoryTheory/Endofunctor/Algebra.lean; Mathlib/Order/Category/BddLat.lean; Mathlib/Order/Category/PartOrd.lean; Mathlib/AlgebraicTopology/CechNerve.lean; Mathlib/Algebra/Category/Grp/Adjunctions.lean; Mathlib/Algebra/Category/Grp/Adjunctions.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic ingredients; no complete specialization to the canonical scheme diagram"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Derived Mayer-Vietoris gluing over a union of opens: Concrete open restriction/direct-image Mayer-Vietoris diagram",
+   "via": [
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-pc-perfect-complexes-compact-set",
+    "lem-pc-kinjective-mayer-vietoris-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData",
+  "file": "lean/Sheaf/AlgebraicGeometry/KInjectiveMayerVietorisData.lean",
+  "declaration": "AlgebraicGeometry.schemeMayerVietorisComplex",
+  "statement": "def schemeMayerVietorisComplex (X : Scheme.{u}) (U V : X.Opens)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :\n    ShortComplex (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.schemeOpenModuleAdjunction",
+   "AlgebraicGeometry.schemeOpenModuleImage",
+   "AlgebraicGeometry.schemeOpenModuleImage_additive",
+   "AlgebraicGeometry.schemeOpenModuleImage_preservesZero",
+   "AlgebraicGeometry.schemeOpenModuleImageRestriction",
+   "AlgebraicGeometry.schemeOpenModuleImage_unit_restriction",
+   "AlgebraicGeometry.schemeOpenModuleImageComplex",
+   "AlgebraicGeometry.schemeOpenModuleImageComplexUnit",
+   "AlgebraicGeometry.schemeOpenModuleImageComplexRestriction",
+   "AlgebraicGeometry.schemeMayerVietorisB",
+   "AlgebraicGeometry.schemeMayerVietorisF",
+   "AlgebraicGeometry.schemeMayerVietorisG",
+   "AlgebraicGeometry.schemeMayerVietoris_zero",
+   "AlgebraicGeometry.schemeMayerVietorisComplex"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T184246-L-3998120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T184246-L-3998120",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
