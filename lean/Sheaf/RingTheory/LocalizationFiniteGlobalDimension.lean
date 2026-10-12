@@ -7,8 +7,6 @@ module
 
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Sheaf.RingTheory.LocalizationResolutionStep
-import Sheaf.RingTheory.LocalizationGlobalStep
 
 /-!
 # Localization and finite global dimension
@@ -50,7 +48,6 @@ theorem localization_preserves_projective_and_global_dimension
       ∃ hS : HasFiniteGlobalDimension.{u, max u v} (Localization S),
         globalDimension.{u, max u v} (Localization S) hS ≤
           globalDimension.{u, max u v} R h) := by
-  exact ⟨localization_resolution_step R S n, (localization_global_step R S n).1,
-    (localization_global_step R S n).2⟩
+  sorry
 
 end Ring

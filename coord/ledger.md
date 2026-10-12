@@ -8912,7 +8912,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/E1/Sheaf.AlgebraicGeometry.FiniteTypeIdealH1Representatives (stage 3; reviewer PASS; first push; landing 20261012T184250-L-3999967 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/E1/Sheaf.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth (stage 3; reviewer PASS; after a return; landing 20261012T184250-L-4000068 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:42 L: merged deliver/E1/Sheaf.Paper.DerivedTotalResolutionColumnZero (stage 3; reviewer PASS; first push; landing 20261012T184250-L-4000167 (interface); batch 20261012T184234; modules 2; new nodes 1)
-- 18:42 L: merged deliver/E1/Sheaf.RingTheory.LocalizationFiniteGlobalDimension (stage 3; reviewer PASS; first push; landing 20261012T184251-L-4000267 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/E2/Sheaf.Algebra.TorDimensionShiftFree (stage 3; reviewer PASS; first push; landing 20261012T184251-L-4000364 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/E2/Sheaf.AlgebraicGeometry.EtaleLimitAffineExactLadder (stage 3; reviewer PASS; first push; landing 20261012T184251-L-4000461 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/E3/Sheaf.AlgebraicGeometry.AffineFiniteFreeModelRetracts (stage 3; reviewer PASS; first push; landing 20261012T184252-L-4000569 (interface); batch 20261012T184234; modules 2; new nodes 1)
@@ -9131,3 +9130,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:57 L: returned deliver/T2/Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroHomFormula (reviewer RETURN: (reviewer X-3410d, head 3410d7079) C4 (review brief point 6): dag/nodes/sec-proper-base-change/lem-weil-pbc-module-exten)
 - 18:57 L: returned deliver/S2/Sheaf.Paper.QuasiCompactH1Zero (reviewer RETURN: (reviewer X-bf3b3, head bf3b32a1b) H9/G1 (review point 5; earlier return unrepaired): In lean/Sheaf/Paper/H1ClosedPointA)
 - 19:00 L: returned deliver/Q2/Sheaf.CategoryTheory.CartanEilenbergConeFiltration (reviewer RETURN: (reviewer X-7c220, head 7c2209ccf) B2: In both new node JSON files, replace statement = "A strict substatement of lem-sp)
+
+- 03:02 L: (the batch landing, head b923dc739) taken out of the library again by the maintainer: your delivery imports Sheaf.RingTheory.LocalizationResolutionStep and Sheaf.RingTheory.Localiz
