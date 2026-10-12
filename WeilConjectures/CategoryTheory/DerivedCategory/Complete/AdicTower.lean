@@ -17,8 +17,8 @@ Let `(C, J)` be an essentially small site, `R` a commutative ring and `ϖ ∈ R`
 generating the ideal `I`. For a normalized `ϖ`-adic tower `T` of complexes of sheaves of
 `R`-modules (`CochainComplex.IsNormalizedAdicTower`) and a homotopy limit
 `K = R lim_n T_n` of its image in `D(J, R)`, the reductions `K ⊗ᴸ R/Iⁿ` are the `T_n`,
-compatibly with the reduction maps and with the transitions
-(work in progress).
+compatibly with the reduction maps and with the transitions:
+`DerivedCategory.exists_derivedCompletionDiagram_iso_of_isNormalizedAdicTower`.
 
 The proof follows blueprint `sk-prop-trace-adic` (i): `- ⊗ᴸ R/Iⁿ` is triangulated and commutes
 with countable products, hence with `R lim`; on complexes it is the mapping cone of `ϖⁿ`
@@ -223,6 +223,38 @@ lemma derivedCompletionCone_π_app_naturality
   change ((ρ_ K).inv ≫ K ◁ _) ≫ _ = f ≫ (ρ_ K').inv ≫ K' ◁ _
   rw [assoc, whisker_exchange, ← assoc, ← rightUnitor_inv_naturality, assoc]
 
+/-- Under `reductionConeIso`, the reduction map of `K` followed by the reduction of a morphism
+`g : K ⟶ Q X` is `g` followed by the inclusion of `X` into the mapping cone. -/
+@[reassoc]
+lemma derivedCompletionCone_π_app_comp_reductionFunctor_map
+    {K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
+    {X : CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ} (g : K ⟶ Q.obj X) (n : ℕ) :
+    (derivedCompletionCone J I K).π.app (op n) ≫ (reductionFunctor J I n).map g ≫
+        (reductionConeIso hϖ hI n X).hom =
+      g ≫ Q.map (CochainComplex.mappingCone.inr (ϖ ^ n • 𝟙 X)) := by
+  rw [← assoc]
+  erw [derivedCompletionCone_π_app_naturality]
+  rw [assoc, derivedCompletionCone_π_app_reductionConeIso_hom]
+
+/-- Under `reductionConeIso`, the transitions of the tower of reductions of `K`, composed with
+the reduction of a morphism `g : K ⟶ Q X`, become the maps of mapping cones induced by
+`ϖⁿ⁻ᵏ`. -/
+@[reassoc]
+lemma derivedCompletionDiagram_map_comp_reductionFunctor_map
+    {K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
+    {X : CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ} (g : K ⟶ Q.obj X) {k n : ℕ}
+    (h : k ≤ n) :
+    (derivedCompletionDiagram J I K).map (homOfLE h).op ≫ (reductionFunctor J I k).map g ≫
+        (reductionConeIso hϖ hI k X).hom =
+      (reductionFunctor J I n).map g ≫ (reductionConeIso hϖ hI n X).hom ≫
+        Q.map (CochainComplex.mappingCone.map (ϖ ^ n • 𝟙 X) (ϖ ^ k • 𝟙 X) (ϖ ^ (n - k) • 𝟙 X)
+          (𝟙 X) (smul_comp_smul_eq (by rw [← pow_add, Nat.add_sub_cancel' h]) X).symm) := by
+  rw [← assoc]
+  erw [whisker_exchange]
+  rw [assoc]
+  erw [derivedCompletionDiagram_map_reductionConeIso_hom]
+  rfl
+
 end Reduction'
 
 end DerivedCategory
@@ -267,8 +299,8 @@ lemma inl_v_coneToLevel_f (hT : IsNormalizedAdicTower ϖ T) {k n N : ℕ} (hk : 
     (mappingCone.inl (ϖ ^ n • 𝟙 (T.obj (op N)))).v p q hpq ≫ (hT.coneToLevel hk hN).f q = 0 := by
   simp [coneToLevel]
 
-lemma ρ_desc_cokerIso_hom (hT : IsNormalizedAdicTower ϖ T) (n : ℕ) :
-    ρ.app _ ≫ desc.app _ ≫ (hT.cokerIso n (op 0)).hom =
+lemma ρ_desc_cokerDesc (hT : IsNormalizedAdicTower ϖ T) (n : ℕ) :
+    ρ.app _ ≫ desc.app _ ≫ hT.cokerDesc n (op 0) =
       hT.coneToLevel (k := n) (n := n) (N := 0 + n) le_rfl (by omega) := by
   refine mappingCone_hom_ext (fun p q hpq ↦ ?_) ?_
   · simp only [HomologicalComplex.comp_f]
@@ -277,7 +309,7 @@ lemma ρ_desc_cokerIso_hom (hT : IsNormalizedAdicTower ϖ T) (n : ℕ) :
     erw [mappingCone.inl_v_desc_f_assoc]
     simp
   · erw [inr_coneToLevel, reassoc_of% (inr_ρ_desc ((arrowTower (ϖ := ϖ) (T := T) n).obj (op 0))),
-      π_cokerIso_hom]
+      π_cokerDesc]
     rfl
 
 lemma coneToLevel_comp_map (hT : IsNormalizedAdicTower ϖ T) {k k' n N : ℕ} (hk : k ≤ n)
@@ -341,7 +373,46 @@ lemma isIso_reduction_comp_coneToLevel (n : ℕ) :
     simp only [Iso.refl_hom, id_comp]
     rfl
   have := hT.isIso_π_comp n hc₃
-  rw [ρ_desc_cokerIso_hom] at this
+  rw [ρ_desc_cokerDesc] at this
   simpa [c₃, E, c₁] using this
+/-- The composite `c.pt ⊗ᴸ R/Iⁿ ⟶ Q(cone(ϖⁿ on T_N)) ⟶ Q(T_k)` of the reduction of the leg
+`c.π_N` with `coneToLevel` does not depend on `N`. -/
+lemma reduction_comp_coneToLevel_eq {k n N N' : ℕ} (hk : k ≤ n) (hN' : k ≤ N') (h : N' ≤ N) :
+    (reductionFunctor J I n).map (c.π.app (op N')) ≫
+        (reductionConeIso hϖ hI n (T.obj (op N'))).hom ≫ Q.map (hT.coneToLevel hk hN') =
+      (reductionFunctor J I n).map (c.π.app (op N)) ≫
+        (reductionConeIso hϖ hI n (T.obj (op N))).hom ≫
+          Q.map (hT.coneToLevel hk (hN'.trans h)) := by
+  have := reductionConeIso_hom_naturality hϖ hI n (T.map (homOfLE h).op)
+  rw [← c.w (homOfLE h).op, Functor.map_comp, assoc]
+  erw [reassoc_of% this]
+  rw [← Functor.map_comp, map_map_coneToLevel]
+
+/-- For a normalized `ϖ`-adic tower `T` and a homotopy limit `c` of its image in `D(J, R)`, the
+tower of reductions `c.pt ⊗ᴸ R/Iⁿ` is isomorphic to `n ↦ T_n`, compatibly with the legs of `c`
+and the reduction maps `c.pt ⟶ c.pt ⊗ᴸ R/Iⁿ`. -/
+theorem exists_derivedCompletionDiagram_iso_of_isNormalizedAdicTower
+    (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {ϖ})
+    {T : ℕᵒᵖ ⥤ CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ}
+    (hT : CochainComplex.IsNormalizedAdicTower ϖ T) {c : Cone (T ⋙ Q)} (hc : IsHomotopyLimit c) :
+    ∃ e : derivedCompletionDiagram J I c.pt ≅ T ⋙ Q, ∀ n : ℕ,
+      c.π.app (op n) = (derivedCompletionCone J I c.pt).π.app (op n) ≫ e.hom.app (op n) := by
+  have hiso (n : ℕ) : IsIso ((reductionFunctor J I n).map (c.π.app (op n)) ≫
+      (reductionConeIso hϖ hI n (T.obj (op n))).hom ≫
+        Q.map (hT.coneToLevel (k := n) (n := n) (N := n) le_rfl le_rfl)) := by
+    rw [reduction_comp_coneToLevel_eq hϖ hI hT le_rfl le_rfl (Nat.le_add_left n 0)]
+    exact isIso_reduction_comp_coneToLevel hϖ hI hT hc n
+  refine ⟨NatIso.ofComponents (fun n ↦ @asIso _ _ _ _ _ (hiso n.unop)) ?_, fun n ↦ ?_⟩
+  · rintro ⟨n⟩ ⟨k⟩ f
+    have h : k ≤ n := leOfHom f.unop
+    obtain rfl : f = (homOfLE h).op := rfl
+    simp only [asIso_hom, Opposite.unop_op, Functor.comp_map, assoc]
+    rw [derivedCompletionDiagram_map_comp_reductionFunctor_map_assoc, ← Functor.map_comp,
+      map_smul_coneToLevel hT le_rfl h, ← Functor.map_comp, coneToLevel_comp_map,
+      reduction_comp_coneToLevel_eq hϖ hI hT h le_rfl h]
+  · simp only [NatIso.ofComponents_hom_app, asIso_hom, Opposite.unop_op]
+    rw [derivedCompletionCone_π_app_comp_reductionFunctor_map_assoc, ← Functor.map_comp,
+      inr_coneToLevel]
+    simp
 
 end DerivedCategory
