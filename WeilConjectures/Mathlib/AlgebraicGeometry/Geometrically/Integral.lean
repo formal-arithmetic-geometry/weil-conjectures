@@ -5,21 +5,24 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
-# Composites of morphisms with geometrically integral fibres
+# Geometrically integral morphisms
 
 A flat morphism with geometrically reduced (resp. integral) fibres followed by a morphism locally
 of finite type with geometrically reduced (resp. integral) fibres has geometrically reduced
 (resp. integral) fibres. In particular a product of two geometrically integral schemes of finite
-type over a field is geometrically integral.
+type over a field is geometrically integral. An irreducible space is connected, so a geometrically
+irreducible morphism, and in particular a geometrically integral one, is geometrically connected.
 
 ## Main statements
 
 - `AlgebraicGeometry.GeometricallyReduced.comp_of_flat`
 - `AlgebraicGeometry.GeometricallyIntegral.comp_of_flat`
+- `AlgebraicGeometry.GeometricallyIntegral.geometricallyConnected`
 -/
 
 @[expose] public section
@@ -29,6 +32,25 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
+
+section Connected
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- A geometrically irreducible morphism is geometrically connected: every geometric fibre is
+irreducible, hence connected. -/
+lemma GeometricallyIrreducible.geometricallyConnected [GeometricallyIrreducible f] :
+    GeometricallyConnected f :=
+  ⟨fun _ _ y _ fst snd h ↦
+    haveI := GeometricallyIrreducible.geometrically_irreducibleSpace (f := f) y fst snd h
+    inferInstance⟩
+
+/-- A geometrically integral morphism is geometrically connected. -/
+lemma GeometricallyIntegral.geometricallyConnected [GeometricallyIntegral f] :
+    GeometricallyConnected f :=
+  GeometricallyIrreducible.geometricallyConnected f
+
+end Connected
 
 variable {X Y Z : Scheme.{u}}
 

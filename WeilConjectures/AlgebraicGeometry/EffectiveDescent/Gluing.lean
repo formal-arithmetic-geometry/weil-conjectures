@@ -90,7 +90,7 @@ lemma restrict_transport_left_homOfLE {U U' : V.left.Opens} (hU : D.IsInvariant 
         (Over.homMk (a.left ≫ V.left.homOfLE hle) (by simpa using Over.w a))).left := by
   rw [← cancel_mono U.ι, Category.assoc, Scheme.homOfLE_ι, restrict_transport_left_ι,
     restrict_transport_left_ι]
-  exact D.transport_left_congr _ _ rfl rfl _ _ (by simp)
+  exact D.transport_left_congr' _ _ rfl rfl _ _ (by simp)
 
 /-- **Effectivity passes to smaller invariant opens.** -/
 lemma isEffective_restrict_of_le [Flat p] [Surjective p] [QuasiCompact p] {U U' : V.left.Opens}

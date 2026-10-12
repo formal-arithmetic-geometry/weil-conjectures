@@ -189,35 +189,6 @@ section DegreePart
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
 
-/-- The canonical morphism `Pic^d_{X/k} ⟶ Pic_{X/k}`: the fppf sheafification of the inclusion of
-the degree-`d` subfunctor `AlgebraicGeometry.picardSubfunctorDegree` of the Picard presheaf. -/
-noncomputable def picardFunctorDegreeι (d : ℤ) : picardFunctorDegree f d ⟶ picardFunctor f :=
-  (presheafToSheaf (fppfTopology.over (Spec (.of k))) (Type (u + 1))).map
-    (picardSubfunctorDegree f d).ι
-
-instance (d : ℤ) : Mono (picardFunctorDegreeι f d) := by
-  unfold picardFunctorDegreeι
-  infer_instance
-
-instance (d : ℤ) : Mono (picardFunctorDegreeι f d).hom :=
-  (sheafToPresheaf _ _).map_mono (picardFunctorDegreeι f d)
-
-/-- The morphism `Pic^d_{X/k} ⟶ Pic_{X/k}` is injective on sections. -/
-theorem injective_picardFunctorDegreeι_app (d : ℤ) (T : (Over (Spec (.of k)))ᵒᵖ) :
-    Function.Injective ((picardFunctorDegreeι f d).hom.app T) := by
-  rw [← mono_iff_injective]
-  infer_instance
-
-/-- The morphism `Pic^d_{X/k} ⟶ Pic_{X/k}` is compatible with the sheafification maps. -/
-lemma picardFunctorDegreeι_hom_app_toSheafify (d : ℤ) {T : Over (Spec (.of k))}
-    (L : (picardSubfunctorDegree f d).toFunctor.obj (op T)) :
-    (picardFunctorDegreeι f d).hom.app (op T)
-        ((toSheafify (fppfTopology.over (Spec (.of k)))
-          (picardSubfunctorDegree f d).toFunctor).app (op T) L) =
-      (toPicardFunctor f).app (op T) L.val :=
-  (congrArg (fun φ ↦ φ.app (op T) L)
-    (toSheafify_naturality (fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f d).ι)).symm
-
 variable [IsProper f] [LocallyOfFinitePresentation f]
 
 /-- **`Pic^d_{X/k}` is the subfunctor of classes of degree `d`**: the image of the monomorphism
@@ -239,7 +210,7 @@ theorem range_picardFunctorDegreeι (d : ℤ) :
         (toSheafify (fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f d).toFunctor)
         y) t
     rw [picardDegree_eq f _ g L.val (by
-      rw [← picardFunctorDegreeι_hom_app_toSheafify, hL]
+      rw [← picardFunctorDegreeι_app_toSheafify, hL]
       exact NatTrans.naturality_apply (picardFunctorDegreeι f d).hom g.op y) z]
     exact (mem_picardSubfunctorDegree_iff f d L.val).1 L.2 z
   · rintro ⟨T⟩ x hx
@@ -253,14 +224,14 @@ theorem range_picardFunctorDegreeι (d : ℤ) :
       exact hx _
     exact ⟨(toSheafify (fppfTopology.over (Spec (.of k)))
       (picardSubfunctorDegree f d).toFunctor).app (op Z) ⟨L, hL'⟩, by
-      rw [picardFunctorDegreeι_hom_app_toSheafify, hL]⟩
+      rw [picardFunctorDegreeι_app_toSheafify, hL]⟩
 
 instance (d : ℤ) : IsIso (Subfunctor.lift (picardFunctorDegreeι f d).hom
     (range_picardFunctorDegreeι f d).le) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro T
   rw [isIso_iff_bijective]
-  refine ⟨fun a b h ↦ injective_picardFunctorDegreeι_app f d T (congrArg Subtype.val h),
+  refine ⟨fun a b h ↦ injective_picardFunctorDegreeι_app f d T.unop (congrArg Subtype.val h),
     fun ⟨x, hx⟩ ↦ ?_⟩
   rw [← range_picardFunctorDegreeι] at hx
   obtain ⟨y, rfl⟩ := hx

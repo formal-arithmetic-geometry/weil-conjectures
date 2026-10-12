@@ -43,13 +43,13 @@ lemma transport_left_eq_comp (D : DescentDatum p V) {T T' : C} (g : T ⟶ T') (f
   rw [D.transport_homMk_comp g f₁ f₂ h a']
   simp
 
-/-- The transport only depends on the underlying morphism of the point. -/
-lemma transport_left_congr (D : DescentDatum p V) {T : C} {f₁ f₂ f₁' f₂' : T ⟶ X}
+/-- A form of `CategoryTheory.Over.DescentDatum.transport_left_congr` with the equations between
+the morphisms oriented the other way. -/
+lemma transport_left_congr' (D : DescentDatum p V) {T : C} {f₁ f₂ f₁' f₂' : T ⟶ X}
     (h : f₁ ≫ p = f₂ ≫ p) (h' : f₁' ≫ p = f₂' ≫ p) (hf₁ : f₁' = f₁) (hf₂ : f₂' = f₂)
     (a : Over.mk f₁ ⟶ V) (a' : Over.mk f₁' ⟶ V) (ha : a'.left = a.left) :
-    (D.transport f₁' f₂' h' a').left = (D.transport f₁ f₂ h a).left := by
-  simpa using D.transport_left_eq_comp (𝟙 T) f₁ f₂ h a h' (by simpa using hf₁)
-    (by simpa using hf₂) a' (by simpa using ha)
+    (D.transport f₁' f₂' h' a').left = (D.transport f₁ f₂ h a).left :=
+  D.transport_left_congr h' h a' a hf₁ hf₂ ha
 
 /-- For an effective descent datum, with descended object `V₀` and projection `q`, the
 transport of a point `a` over `f₁` is the unique point over `f₂` with the same image in `V₀`. -/

@@ -15,23 +15,26 @@ public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.DualNumbers
-public import WeilConjectures.AlgebraicGeometry.DescentFiniteLevel
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
+public import WeilConjectures.CategoryTheory.Comma.Over.DescentRepresentable
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
-public import WeilConjectures.AlgebraicGeometry.Picard.FpqcSheaf
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.Regular
-public import WeilConjectures.CategoryTheory.Comma.Over.DescentRepresentable
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
+public import WeilConjectures.PointCount
+public import WeilConjectures.AlgebraicGeometry.FieldExtensionLimit
+public import WeilConjectures.Mathlib.CategoryTheory.Types.Basic
 
 /-!
 # The Jacobian of a smooth projective curve
@@ -168,6 +171,9 @@ value at an algebraically closed point — are stated separately.
   change (blueprint `cor-pd-pic0-base-change`).
 - `AlgebraicGeometry.exists_intermediateField_descentDatum`: the descent datum is defined at a
   finite separable level (blueprint `cor-pd-finite-level`).
+- `AlgebraicGeometry.isSheafFor_picardFunctorDegree_singleton`: `Pic^d_{C/k}` satisfies the sheaf
+  condition for flat, surjective, quasi-compact morphisms, such as `T_K ⟶ T` for a field
+  extension `K/k`.
 - `AlgebraicGeometry.nonempty_representableBy_picardFunctorDegree_of_isPullback`: `Pic^0_{C/k}`
   is represented by the descended scheme (Step 7 of `thm-pd-jacobian-general-field`).
 - `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree`: `Pic^0_{C/k}` is
@@ -287,6 +293,96 @@ theorem mem_picardSubfunctorDegree_iff (f : X ⟶ Spec (.of k)) [IsProper f]
   · obtain ⟨s⟩ : Nonempty (Spec (.of K)) := inferInstance
     rw [picardFibreDegree_eq_picardPresheafDegree f L t s]
     exact h _
+
+section DegreeInclusion
+
+variable (f : X ⟶ Spec (.of k)) (d : ℤ)
+
+/-- The inclusion `Pic^d_{X/k} ⟶ Pic_{X/k}` of the degree-`d` part into the relative Picard
+functor, induced by the inclusion of the degree-`d` subfunctor of the Picard presheaf. -/
+noncomputable def picardFunctorDegreeι : picardFunctorDegree f d ⟶ picardFunctor f :=
+  ⟨sheafifyLift (fppfTopology.over (Spec (.of k)))
+    ((picardSubfunctorDegree f d).ι ≫ toPicardFunctor f) (picardFunctor f).property⟩
+
+/-- On the image of a class `M` of the degree-`d` subfunctor, the inclusion
+`Pic^d_{X/k} ⟶ Pic_{X/k}` is the image of `M` in `Pic_{X/k}`. -/
+lemma picardFunctorDegreeι_app_toSheafify {T : Over (Spec (.of k))}
+    (M : (picardSubfunctorDegree f d).toFunctor.obj (.op T)) :
+    (picardFunctorDegreeι f d).hom.app _
+        ((toSheafify (fppfTopology.over (Spec (.of k)))
+          (picardSubfunctorDegree f d).toFunctor).app _ M) =
+      (toPicardFunctor f).app _ M.1 :=
+  ConcreteCategory.congr_hom (NatTrans.congr_app (toSheafify_sheafifyLift (fppfTopology.over _)
+    ((picardSubfunctorDegree f d).ι ≫ toPicardFunctor f) (picardFunctor f).property) (.op T)) M
+
+/-- **`Pic^d_{X/k}` is a subsheaf of `Pic_{X/k}`**: the inclusion is injective on sections, as
+the inclusion of the degree-`d` subfunctor is injective and sheafification preserves local
+injectivity. -/
+lemma injective_picardFunctorDegreeι_app (T : Over (Spec (.of k))) :
+    Function.Injective ((picardFunctorDegreeι f d).hom.app (.op T)) := by
+  let J := fppfTopology.over (Spec (.of k))
+  let α := (picardSubfunctorDegree f d).ι ≫ toPicardFunctor f
+  have : Presheaf.IsLocallyInjective J α := inferInstance
+  have : Presheaf.IsLocallyInjective J (picardFunctorDegreeι f d).hom :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J α
+      (toSheafify_sheafifyLift J α _)
+  exact (Sheaf.isLocallyInjective_iff_injective _).1 this _
+
+variable [IsProper f] [LocallyOfFinitePresentation f]
+
+/-- The sections of `Pic^d_{X/k}` have degree `d` at every point, being locally represented by
+classes of fibrewise degree `d`. -/
+lemma picardDegree_picardFunctorDegreeι {T : Over (Spec (.of k))}
+    (s : (picardFunctorDegree f d).obj.obj (.op T)) (t : T.left) :
+    picardDegree f ((picardFunctorDegreeι f d).hom.app _ s) t = d := by
+  let J := fppfTopology.over (Spec (.of k))
+  obtain ⟨Z, g, ⟨a, ha⟩, -, -, z, rfl⟩ := exists_flat_mem_of_mem_fppfTopology_over
+    (Presheaf.imageSieve_mem J (toSheafify J (picardSubfunctorDegree f d).toFunctor) s) t
+  rw [← picardDegree_map, ← NatTrans.naturality_apply (picardFunctorDegreeι f d).hom,
+    show (picardFunctorDegree f d).obj.map g.op s =
+      (toSheafify J (picardSubfunctorDegree f d).toFunctor).app _ a from ha.symm,
+    picardFunctorDegreeι_app_toSheafify, picardDegree_toPicardFunctor]
+  exact (mem_picardSubfunctorDegree_iff f d a.1).1 a.2 z
+
+/-- **The sections of `Pic^d_{X/k}` are the sections of `Pic_{X/k}` of degree `d`.** A section
+of `Pic_{X/k}` of degree `d` at every point is locally represented by classes of fibrewise
+degree `d`, hence lies locally, and so globally, in the subsheaf `Pic^d_{X/k}`. -/
+lemma exists_picardFunctorDegreeι_app_eq {T : Over (Spec (.of k))}
+    (x : (picardFunctor f).obj.obj (.op T)) (hx : ∀ t, picardDegree f x t = d) :
+    ∃ s, (picardFunctorDegreeι f d).hom.app _ s = x := by
+  let J := fppfTopology.over (Spec (.of k))
+  let β := (picardFunctorDegreeι f d).hom
+  let R := Presheaf.imageSieve β x
+  -- `x` lies locally in the image: its local representatives have degree `d`
+  have hR : R ∈ J T := by
+    refine J.superset_covering (fun V g hg ↦ ?_) (Presheaf.imageSieve_mem J (toPicardFunctor f) x)
+    obtain ⟨L, hL⟩ := hg
+    have hL' : L ∈ (picardSubfunctorDegree f d).obj (.op V) :=
+      (mem_picardSubfunctorDegree_iff f d L).2 fun v ↦ by
+        rw [← picardDegree_eq f x g L hL v, hx]
+    exact ⟨(toSheafify J (picardSubfunctorDegree f d).toFunctor).app _ ⟨L, hL'⟩, by
+      rw [picardFunctorDegreeι_app_toSheafify]
+      exact hL⟩
+  -- choose preimages on the members of `R`; they are compatible since `β` is injective
+  let fam : Presieve.FamilyOfElements (picardFunctorDegree f d).obj R.arrows :=
+    fun _ _ hg ↦ hg.choose
+  have hfam {V : Over (Spec (.of k))} (g : V ⟶ T) (hg : R g) :
+      β.app _ (fam g hg) = (picardFunctor f).obj.map g.op x :=
+    hg.choose_spec
+  have hc : fam.Compatible := by
+    rw [Presieve.compatible_iff_sieveCompatible]
+    intro V W g h hg
+    apply injective_picardFunctorDegreeι_app f d
+    change β.app _ _ = β.app _ _
+    rw [NatTrans.naturality_apply, hfam, hfam, op_comp, Functor.map_comp_apply]
+  have hF := (isSheaf_iff_isSheaf_of_type _ _).1 (picardFunctorDegree f d).property
+  have hG := (isSheaf_iff_isSheaf_of_type _ _).1 (picardFunctor f).property
+  obtain ⟨s, hs, -⟩ := hF R hR fam hc
+  refine ⟨s, (hG R hR).isSeparatedFor.ext fun V g hg ↦ ?_⟩
+  change (picardFunctor f).obj.map g.op (β.app _ s) = _
+  rw [← NatTrans.naturality_apply, hs g hg, hfam]
+
+end DegreeInclusion
 
 end DegreeSubfunctor
 
@@ -1250,7 +1346,10 @@ lemma tangentSubgroup_eq_infPoints : tangentSubgroup P = GrpObj.infPoints P := b
   rfl
 
 /-- The kernel of `P(k[ε]) → P(k)` is commutative, even when `P` is not: it is the group of
-infinitesimal points of `P` (`AlgebraicGeometry.GrpObj.isMulCommutative_infPoints`). -/
+infinitesimal points of `P` (`AlgebraicGeometry.GrpObj.isMulCommutative_infPoints`).
+
+This rests on `AlgebraicGeometry.GrpObj.isMulCommutative_infPoints`, which is not yet proved
+(`sorry`). -/
 instance : IsMulCommutative (tangentSubgroup P) := by
   rw [tangentSubgroup_eq_infPoints]
   exact GrpObj.isMulCommutative_infPoints P
@@ -1285,7 +1384,10 @@ lemma tangentSpaceAt.val_smul (c : k) (v : tangentSpaceAt P η[P]) :
     (c • v).1 = dualNumbersScale k c ≫ v.1 :=
   rfl
 
-/-- The scalar action is additive in the scalar: `(c + d) • v = c • v + d • v`. -/
+/-- The scalar action is additive in the scalar: `(c + d) • v = c • v + d • v`.
+
+The proof goes through `AlgebraicGeometry.GrpObj.lieEquiv` and the lemmas on it in
+`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie.lean`, which are not yet proved (`sorry`). -/
 theorem tangentSpaceAt.add_smul (c d : k) (v : tangentSpaceAt P η[P]) :
     (c + d) • v = c • v + d • v := by
   -- transport along the bijection `GrpObj.lieEquiv` with the Lie algebra, which turns the group
@@ -1907,59 +2009,524 @@ lemma specMap_algebraMap_comp_specMap_algebraMap (k K L : Type u) [CommRing k] [
       Spec.map (CommRingCat.ofHom (algebraMap k L)) := by
   rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq]
 
-/-- **`Pic^0_{C/k}` satisfies the sheaf condition for a faithfully flat quasi-compact
-morphism.** For a smooth projective geometrically integral curve `C` over `k` and a flat
-surjective quasi-compact morphism `π : T' ⟶ T` of `k`-schemes, for instance the base change
-`T_K ⟶ T` of a field extension `K / k`, the degree-zero part of the Picard functor satisfies the
-sheaf condition for `π`.
+omit [Field k] in
+lemma isFinite_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra k K]
+    [FiniteDimensional k K] : IsFinite (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+  IsFinite.SpecMap_iff _ |>.mpr (RingHom.finite_algebraMap.mpr inferInstance)
 
-`Pic_{C/k}` does (`AlgebraicGeometry.isSheafFor_singleton_picardFunctor`), `Pic^0_{C/k}` is a
-subsheaf of it, and a section of `Pic_{C/k}` whose pullback along `π` has degree zero has degree
-zero everywhere, `π` being surjective, hence is locally, and so globally, in `Pic^0_{C/k}`. -/
-theorem isSheafFor_singleton_picardFunctorDegree (C : Scheme.{u}) [C.Over (Spec (.of k))]
+omit [Field k] in
+lemma flat_specMap_algebraMap (k K : Type u) [Field k] [CommRing K] [Algebra k K] :
+    Flat (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+  Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
+
+omit [Field k] in
+lemma locallyOfFinitePresentation_specMap_algebraMap (k K : Type u) [Field k] [Field K]
+    [Algebra k K] [FiniteDimensional k K] :
+    LocallyOfFinitePresentation (Spec.map (CommRingCat.ofHom (algebraMap k K))) := by
+  rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFinitePresentation)]
+  exact RingHom.FinitePresentation.of_finiteType.mp
+    (RingHom.finite_algebraMap.mpr inferInstance).finiteType
+
+omit [Field k] in
+lemma surjective_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra k K] :
+    Surjective (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+  ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
+
+/-- **`Pic_{C/k}` satisfies the sheaf condition for fpqc coverings.** Let `C` be a smooth
+projective geometrically integral curve over `k` and `π : T' ⟶ T` a flat, surjective,
+quasi-compact morphism of `k`-schemes. Then `Pic_{C/k}` satisfies the sheaf condition for the
+covering `π`, although it is only defined as an fppf sheaf.
+
+A closed point `x` of `C` has a residue field `K'` finite over `k`, so `T_{K'} = T ×_k K' ⟶ T`
+is an fppf covering, and it suffices to check the sheaf condition after base change to the
+`k`-schemes `Y` over `T_{K'}` (`CategoryTheory.Presieve.isSheafFor_trans`). Such a `Y` lies over
+`Spec K'`, where `Pic_{C/k}` restricts to `Pic_{C_{K'}/K'}`
+(`AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback`); since `C_{K'}` has the
+`K'`-rational point `x`, this is an fpqc sheaf (`AlgebraicGeometry.isSheaf_fpqc_picardFunctor`). -/
+theorem isSheafFor_picardFunctor_singleton (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
     [GeometricallyIntegral (C ↘ Spec (.of k))] {T T' : Over (Spec (.of k))} (π : T' ⟶ T)
     [Flat π.left] [Surjective π.left] [QuasiCompact π.left] :
-    Presieve.IsSheafFor (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj (.singleton π) := by
+    Presieve.IsSheafFor (picardFunctor (C ↘ Spec (.of k))).obj (.singleton π) := by
   set f := C ↘ Spec (.of k)
-  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
-  let J' := fppfTopology.over (Spec (.of k))
-  let S := picardSubfunctorDegree f 0
-  -- the comparison `β : Pic^0_{C/k} ⟶ Pic_{C/k}` is injective on sections
-  let α : S.toFunctor ⟶ (picardFunctor f).obj := S.ι ≫ toPicardFunctor f
-  let β : picardFunctorDegree f 0 ⟶ picardFunctor f :=
-    ⟨sheafifyLift J' α (picardFunctor f).property⟩
-  have fac : toSheafify J' S.toFunctor ≫ β.hom = α := toSheafify_sheafifyLift J' α _
-  have : Presheaf.IsLocallyInjective J' α := inferInstance
-  have : Presheaf.IsLocallyInjective J' β.hom :=
-    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J' α fac
-  have hβ (U : (Over (Spec (.of k)))ᵒᵖ) : Function.Injective (β.hom.app U) :=
-    (Sheaf.isLocallyInjective_iff_injective β).1 this _
-  have hβS {T : Over (Spec (.of k))} (M : S.toFunctor.obj (.op T)) :
-      β.hom.app _ ((toSheafify J' S.toFunctor).app _ M) = (toPicardFunctor f).app _ M.1 :=
-    ConcreteCategory.congr_hom (NatTrans.congr_app fac (.op T)) M
-  -- sections of `Pic^0_{C/k}` have fibrewise degree zero
-  have hdeg {T : Over (Spec (.of k))} (s : (picardFunctorDegree f 0).obj.obj (.op T))
-      (t : T.left) : picardDegree f (β.hom.app _ s) t = 0 := by
-    obtain ⟨Z, g, ⟨a, ha⟩, -, -, z, rfl⟩ := exists_flat_mem_of_mem_fppfTopology_over
-      (Presheaf.imageSieve_mem J' (toSheafify J' S.toFunctor) s) t
-    rw [← picardDegree_map, ← NatTrans.naturality_apply β.hom]
-    erw [← ha]
-    rw [hβS, picardDegree_toPicardFunctor]
-    exact (mem_picardSubfunctorDegree_iff f 0 a.1).1 a.2 z
-  refine Presieve.isSheafFor_singleton_of_injective β.hom hβ
-    (isSheafFor_singleton_picardFunctor π) fun s ⟨x, hx⟩ ↦ ?_
-  refine Presieve.mem_range_of_imageSieve_mem J'
-    ((isSheaf_iff_isSheaf_of_type _ _).1 (picardFunctorDegree f 0).property)
-    ((isSheaf_iff_isSheaf_of_type _ _).1 (picardFunctor f).property) β.hom hβ s
-    (J'.superset_covering ?_ (Presheaf.imageSieve_mem J' (toPicardFunctor f) s))
-  rintro Z g ⟨M, hM⟩
-  have hMS : M ∈ S.obj (.op Z) := (mem_picardSubfunctorDegree_iff f 0 M).2 fun z ↦ by
-    rw [← picardDegree_toPicardFunctor, hM, picardDegree_map]
-    obtain ⟨t', ht'⟩ := π.left.surjective (g.left z)
-    rw [← ht', ← picardDegree_map, ← hx]
-    exact hdeg x t'
-  exact ⟨(toSheafify J' S.toFunctor).app _ ⟨M, hMS⟩, by rw [hβS, hM]⟩
+  set G := (picardFunctor f).obj
+  -- a closed point `x` of `C`; its residue field `K'` is finite over `k`
+  have : IsIntegral C := GeometricallyIntegral.isIntegral_of_subsingleton f
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  obtain ⟨x, -, hx⟩ := IsClosed.exists_closed_singleton (S := (Set.univ : Set C)) isClosed_univ
+    Set.univ_nonempty
+  let K' := C.residueField x
+  let : Algebra k K' := (f.residueFieldAlgebraMap x).toAlgebra
+  have : Module.Finite k K' := f.finite_residueField_of_isClosed x hx
+  set g' := Spec.map (CommRingCat.ofHom (algebraMap k K'))
+  have := isFinite_specMap_algebraMap k K'
+  have := flat_specMap_algebraMap k K'
+  have := locallyOfFinitePresentation_specMap_algebraMap k K'
+  have := surjective_specMap_algebraMap k K'
+  -- `C_{K'}` has a `K'`-point, so `Pic_{C_{K'}/K'}` is an fpqc sheaf
+  have : SmoothOfRelativeDimension 1 (pullback f g' ↘ Spec (.of K')) :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd _ _))
+  have : IsProper (pullback f g' ↘ Spec (.of K')) := inferInstanceAs (IsProper (pullback.snd _ _))
+  have : GeometricallyIntegral (pullback f g' ↘ Spec (.of K')) :=
+    inferInstanceAs (GeometricallyIntegral (pullback.snd _ _))
+  let σ : Spec (.of K') ⟶ pullback f g' := pullback.lift (C.fromSpecResidueField x) (𝟙 _)
+    (by rw [Category.id_comp]; exact (f.specMap_residueFieldAlgebraMap x).symm)
+  obtain ⟨e⟩ := nonempty_picardFunctor_iso_of_isPullback (IsPullback.of_hasPullback f g')
+  have hG' : Presheaf.IsSheaf (fpqcTopology.over (Spec (.of K'))) ((Over.map g').op ⋙ G) :=
+    (Presheaf.isSheaf_of_iso_iff e).2
+      (isSheaf_fpqc_picardFunctor σ (pullback.lift_snd _ _ _))
+  -- the base change `T_{K'} ⟶ T` is an fppf covering along which every object has a `K'`-point
+  have hG := (isSheaf_iff_isSheaf_of_type _ _).1 (picardFunctor f).property
+  let u := Functor.RepresentableBy.descentCoverπ g' T
+  have : Flat u.left := inferInstanceAs (Flat (pullback.fst _ _))
+  have : Surjective u.left := inferInstanceAs (Surjective (pullback.fst _ _))
+  have : LocallyOfFinitePresentation u.left :=
+    inferInstanceAs (LocallyOfFinitePresentation (pullback.fst _ _))
+  have hu := Scheme.singleton_mem_over_fppfTopology u
+  rw [Presieve.isSheafFor_iff_generate]
+  refine Presieve.isSheafFor_trans G _ _ (hG _ hu)
+    (fun Y h _ ↦ (hG _ (GrothendieckTopology.pullback_stable _ h hu)).isSeparatedFor)
+    fun Y h hh ↦ ?_
+  obtain ⟨W, h, _, ⟨⟩, rfl⟩ := hh
+  rw [← Sieve.pullbackArrows_comm, Presieve.pullback_singleton,
+    ← Presieve.isSheafFor_iff_generate]
+  have hpb := (IsPullback.of_hasPullback π (h ≫ u)).map (Over.forget _)
+  have : Flat (pullback.snd π (h ≫ u)).left :=
+    MorphismProperty.of_isPullback (P := @Flat) hpb ‹_›
+  have : Surjective (pullback.snd π (h ≫ u)).left :=
+    MorphismProperty.of_isPullback (P := @Surjective) hpb ‹_›
+  have : QuasiCompact (pullback.snd π (h ≫ u)).left :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact) hpb ‹_›
+  exact isSheafFor_singleton_of_isSheaf_overMap g' hG' _ (h.left ≫ pullback.snd T.hom g')
+    (by rw [Category.assoc, ← Over.w h]; rfl)
+
+
+/-- **`Pic^d_{C/k}` satisfies the sheaf condition for fpqc coverings.** Let `C` be a smooth
+projective geometrically integral curve over `k` and `π : T' ⟶ T` a flat, surjective,
+quasi-compact morphism of `k`-schemes. Then `Pic^d_{C/k}` satisfies the sheaf condition for the
+covering `π`: a section of `Pic^d_{C/k}` over `T'` whose two pullbacks to `T' ×_T T'` agree
+descends to a section of `Pic_{C/k}` over `T`
+(`AlgebraicGeometry.isSheafFor_picardFunctor_singleton`), which has degree `d` at every point
+since `π` is surjective, hence is a section of `Pic^d_{C/k}`
+(`AlgebraicGeometry.exists_picardFunctorDegreeι_app_eq`). -/
+theorem isSheafFor_picardFunctorDegree_singleton (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (d : ℤ) {T T' : Over (Spec (.of k))}
+    (π : T' ⟶ T) [Flat π.left] [Surjective π.left] [QuasiCompact π.left] :
+    Presieve.IsSheafFor (picardFunctorDegree (C ↘ Spec (.of k)) d).obj (.singleton π) := by
+  set f := C ↘ Spec (.of k)
+  have : LocallyOfFinitePresentation f :=
+    have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+    inferInstance
+  let β := (picardFunctorDegreeι f d).hom
+  have hP := isSheafFor_picardFunctor_singleton C π
+  rw [Presieve.isSheafFor_singleton] at hP ⊢
+  intro y hy
+  obtain ⟨x, hx, hxu⟩ := hP (β.app _ y) fun {Z} p₁ p₂ hp ↦ by
+    rw [← NatTrans.naturality_apply, ← NatTrans.naturality_apply, hy p₁ p₂ hp]
+  -- the descended class has degree `d`, since `π` is surjective
+  obtain ⟨s, rfl⟩ := exists_picardFunctorDegreeι_app_eq f d x fun t ↦ by
+    obtain ⟨t', rfl⟩ := π.left.surjective t
+    rw [← picardDegree_map, hx, picardDegree_picardFunctorDegreeι]
+  refine ⟨s, injective_picardFunctorDegreeι_app f d _ ?_, fun s' hs' ↦
+    injective_picardFunctorDegreeι_app f d _ (hxu _ ?_)⟩
+  · rw [NatTrans.naturality_apply]
+    exact hx
+  · beta_reduce
+    rw [← NatTrans.naturality_apply, hs']
+
+
+/-- **`Pic^0_{C/k}` is represented by the descended scheme.** Let `K/k` be a field extension, let
+`J_K` represent the restriction of `Pic^0_{C/k}` to schemes over `K`, and let `J` be a `k`-scheme
+with `J ×_k K ≅ J_K` through which the canonical descent datum of `J_K` relative to
+`Spec K ⟶ Spec k` is the trivial one: the projection `q : J_K ⟶ J` is invariant under transport.
+Then `J` represents `Pic^0_{C/k}`.
+
+This is Step 7 of the proof of `AlgebraicGeometry.exists_jacobian_descent`, which applies it at a
+finite separable level `K`. For infinite `K` the morphism `Spec K ⟶ Spec k` is faithfully flat and
+quasi-compact but not locally of finite presentation, so this does not follow from the fppf
+sheaf property of `Pic^0_{C/k}` alone. The points of `J` descend along the base changes
+`T_K ⟶ T` of `Spec K ⟶ Spec k`, which are effective epimorphisms, and `Pic^0_{C/k}` satisfies
+the sheaf condition for them (`AlgebraicGeometry.isSheafFor_picardFunctorDegree_singleton`); this is
+`CategoryTheory.Functor.RepresentableBy.nonempty_representableBy_of_descent`.
+
+(blueprint: `thm-pd-jacobian-general-field`, Step 7) -/
+theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} [Field K]
+    [Algebra k K] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (JK : Over (Spec (.of K)))
+    (r : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy JK)
+    (J : Over (Spec (.of k))) (q : JK.left ⟶ J.left)
+    (hq : IsPullback q JK.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+    (hinv : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of K))
+      (h : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+        f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K))) (a : Over.mk f₁ ⟶ JK),
+      (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q) :
+    Nonempty ((picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J) :=
+  have := flat_specMap_algebraMap k K
+  have := surjective_specMap_algebraMap k K
+  Functor.RepresentableBy.nonempty_representableBy_of_descent r q hq hinv
+    (fun T ↦ inferInstance)
+    (fun T a ha ↦ ⟨EffectiveEpi.desc _ a fun g₁ g₂ hg ↦ by
+        simpa using congrArg (pullback.lift g₁ g₂ hg ≫ ·) ha,
+      EffectiveEpi.fac _ _ _⟩)
+    fun T ↦
+      have : Flat (Functor.RepresentableBy.descentCoverπ
+          (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).left :=
+        inferInstanceAs (Flat (pullback.fst _ _))
+      have : Surjective (Functor.RepresentableBy.descentCoverπ
+          (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).left :=
+        inferInstanceAs (Surjective (pullback.fst _ _))
+      have : QuasiCompact (Functor.RepresentableBy.descentCoverπ
+          (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).left :=
+        inferInstanceAs (QuasiCompact (pullback.fst _ _))
+      isSheafFor_picardFunctorDegree_singleton C 0 _
+
+open Functor.RepresentableBy IntermediateField in
+/-- **The canonical descent datum of `J_s` is trivial at a finite level.** Let `J_s` represent the
+restriction of `Pic^0_{C/k}` to schemes over a separable closure `k_s`. Then there are a finite
+subextension `L` of `k_s/k`, an `L`-scheme `J_L` and a cartesian square `J_s = J_L ×_L k_s`
+through which the transport of points of `J_s` induced by `Pic^0_{C/k}` is trivial along pairs of
+`k_s`-points which agree over `L`.
+
+`J_s` descends to some finite `K'` (Stacks 01ZM). The transport of `Pic^0_{C/k}` and the
+projection to `J_{K'}` give two morphisms over `Spec (k_s ⊗_{K'} k_s)`; they agree on the diagonal
+`Spec k_s`, which is the limit of the `Spec (k_s ⊗_L k_s)`, hence over some
+`Spec (k_s ⊗_L k_s)` (Stacks 01ZM). -/
+theorem exists_finiteSubext_isPullback_overTransport {ks : Type u} [Field ks] [Algebra k ks]
+    [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (Js : Over (Spec (.of ks)))
+    (rs : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy Js) :
+    ∃ (L : FiniteSubext k ks) (JL : Over (Spec (.of L.1))) (q : Js.left ⟶ JL.left)
+      (_ : IsPullback q Js.hom JL.hom (Spec.map (CommRingCat.ofHom (algebraMap L.1 ks)))),
+      ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of ks))
+        (h : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k ks)) =
+          f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k ks))),
+        f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap L.1 ks)) =
+          f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap L.1 ks)) →
+        ∀ a : Over.mk f₁ ⟶ Js, (rs.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q := by
+  have : IsSepClosed ks := IsSepClosure.sep_closed k
+  have : Algebra.IsSeparable k ks := IsSepClosure.separable
+  -- `J_s` is smooth and proper over `k_s`
+  have : SmoothOfRelativeDimension 1 (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd _ _))
+  have : IsProper (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (IsProper (pullback.snd _ _))
+  have : GeometricallyIntegral (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (GeometricallyIntegral (pullback.snd _ _))
+  obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
+    (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
+    (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
+  have : IsProper Js.hom := isProper_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  have hsm := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  have : Smooth Js.hom := hsm.smooth
+  -- `J_s` descends to a finite subextension `K'`
+  obtain ⟨K', Y, p, _, _, _, q', hq'⟩ := exists_finiteSubext_isPullback (F := k) Js.hom
+  let gs := Spec.map (CommRingCat.ofHom (algebraMap k ks))
+  let ι' := Spec.map (CommRingCat.ofHom (algebraMap K'.1 ks))
+  have hgs (L : FiniteSubext k ks) : Spec.map (CommRingCat.ofHom (algebraMap L.1 ks)) ≫
+      Spec.map (CommRingCat.ofHom (algebraMap k L.1)) = gs :=
+    specMap_algebraMap_comp_specMap_algebraMap k L.1 ks
+  -- the two projections of `Spec (k_s ⊗_{K'} k_s)`
+  let pr₁ := tensorSpecPr₁ K'
+  let pr₂ := tensorSpecPr₂ K'
+  have hpr : pr₁ ≫ ι' = pr₂ ≫ ι' := (isPullback_tensorSpecPr K').w
+  have hprg : pr₁ ≫ gs = pr₂ ≫ gs := by
+    rw [← hgs K', ← Category.assoc, hpr, Category.assoc]
+  -- the universal pair of points over `Spec (k_s ⊗_{K'} k_s)`
+  let pV := pullback.snd Js.hom pr₁
+  let f₁V := pullback.fst Js.hom pr₁ ≫ Js.hom
+  let f₂V := pV ≫ pr₂
+  have hf₁V : f₁V = pV ≫ pr₁ := pullback.condition
+  have hfV : f₁V ≫ gs = f₂V ≫ gs := by
+    rw [hf₁V, Category.assoc, hprg, Category.assoc]
+  let a₀ : Over.mk f₁V ⟶ Js := Over.homMk (pullback.fst Js.hom pr₁) rfl
+  -- the two morphisms to `J_{K'}`: the projection, and the transport followed by it
+  let u := (rs.overTransport f₁V f₂V hfV a₀).left ≫ q'
+  let pW := pullback.snd p (pr₁ ≫ ι')
+  have hψ : (pullback.fst Js.hom pr₁ ≫ q') ≫ p = pV ≫ pr₁ ≫ ι' := by
+    rw [Category.assoc, hq'.w, ← Category.assoc, pullback.condition, Category.assoc]
+  have hχ : u ≫ p = pV ≫ pr₁ ≫ ι' := by
+    have := Over.w (rs.overTransport f₁V f₂V hfV a₀)
+    simp only [Over.mk_hom] at this
+    rw [Category.assoc, hq'.w, ← Category.assoc, this, hpr]
+    rfl
+  let ψ := pullback.lift _ _ hψ
+  let χ := pullback.lift _ _ hχ
+  -- on the diagonal the two morphisms agree, the transport being trivial there
+  let δ : Spec (.of ks) ⟶ Spec (.of (TensorProduct K'.1 ks ks)) :=
+    (diagonalSpecCone k ks).π.app (.op K')
+  have hdiag : pullback.fst pV δ ≫ ψ = pullback.fst pV δ ≫ χ := by
+    let z := pullback.fst pV δ
+    have hz : z ≫ f₂V = z ≫ f₁V := by
+      rw [hf₁V]
+      simp only [f₂V, ← Category.assoc, z, pullback.condition]
+      rw [Category.assoc, Category.assoc]
+      exact (congrArg _ (diagonalSpecCone_π_comp_tensorSpecPr₂ K')).trans
+        (congrArg _ (diagonalSpecCone_π_comp_tensorSpecPr₁ K')).symm
+    have hkey := congrArg CommaMorphism.left
+      (rs.overDescentDatum.transport_homMk_comp z f₁V f₂V hfV a₀)
+    have hself : (rs.overDescentDatum.transport (z ≫ f₁V) (z ≫ f₂V)
+        (by simp only [Category.assoc]; rw [hfV])
+        ((Over.homMk z : Over.mk (z ≫ f₁V) ⟶ Over.mk f₁V) ≫ a₀)).left =
+          z ≫ pullback.fst Js.hom pr₁ := by
+      rw [rs.overDescentDatum.transport_left_congr _ rfl
+        ((Over.homMk z : Over.mk (z ≫ f₁V) ⟶ Over.mk f₁V) ≫ a₀)
+        ((Over.homMk z : Over.mk (z ≫ f₁V) ⟶ Over.mk f₁V) ≫ a₀) rfl hz rfl,
+        Over.DescentDatum.transport_self]
+      rfl
+    have h₁ : z ≫ (rs.overTransport f₁V f₂V hfV a₀).left = z ≫ pullback.fst Js.hom pr₁ :=
+      hkey.symm.trans hself
+    apply pullback.hom_ext
+    · simp only [ψ, χ, Category.assoc, pullback.lift_fst, u]
+      rw [← Category.assoc, ← h₁, Category.assoc]
+    · simp only [ψ, χ, Category.assoc, pullback.lift_snd]
+  -- hence they agree over some `Spec (k_s ⊗_L k_s)` (Stacks 01ZM)
+  have : ∀ {i j : (FiniteSubext k ks)ᵒᵖ} (f : i ⟶ j),
+      IsAffineHom (((diagonalDiagram k ks).op ⋙ Scheme.Spec).map f) := fun f ↦
+    isAffineHom_of_isAffine (X := Spec _) (Y := Spec _) _
+  have : ∀ i : (FiniteSubext k ks)ᵒᵖ,
+      CompactSpace (((diagonalDiagram k ks).op ⋙ Scheme.Spec).obj i) := fun i ↦
+    have : IsAffine (((diagonalDiagram k ks).op ⋙ Scheme.Spec).obj i) :=
+      inferInstanceAs (IsAffine (Spec _))
+    inferInstance
+  have : ∀ i : (FiniteSubext k ks)ᵒᵖ,
+      QuasiSeparatedSpace (((diagonalDiagram k ks).op ⋙ Scheme.Spec).obj i) := fun i ↦
+    have : IsAffine (((diagonalDiagram k ks).op ⋙ Scheme.Spec).obj i) :=
+      inferInstanceAs (IsAffine (Spec _))
+    inferInstance
+  obtain ⟨⟨L⟩, f, hL⟩ := Scheme.exists_pullback_fst_comp_eq_of_isLimit
+    (isLimitDiagonalSpecCone k ks) (i := .op K') pV pW ψ χ (pullback.lift_snd _ _ _)
+    (pullback.lift_snd _ _ _) hdiag
+  have hKL : K' ≤ L := leOfHom f.unop
+  let incl : Spec (.of L.1) ⟶ Spec (.of K'.1) :=
+    Spec.map (CommRingCat.ofHom (IntermediateField.inclusion hKL).toRingHom)
+  let ιL := Spec.map (CommRingCat.ofHom (algebraMap L.1 ks))
+  have hincl : ιL ≫ incl = ι' := by
+    rw [← Spec.map_comp]
+    rfl
+  let JL : Over (Spec (.of L.1)) := Over.mk (pullback.snd p incl)
+  let q : Js.left ⟶ JL.left := pullback.lift q' (Js.hom ≫ ιL) (by
+    rw [hq'.w, Category.assoc, hincl])
+  have hq : IsPullback q Js.hom JL.hom ιL := by
+    refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _) (IsPullback.of_hasPullback p incl)
+    rw [pullback.lift_fst, hincl]
+    exact hq'
+  refine ⟨L, JL, q, hq, fun {T} f₁ f₂ h hL' a ↦ ?_⟩
+  apply pullback.hom_ext
+  · simp only [Category.assoc, q, pullback.lift_fst]
+    -- factor the pair `(f₁, f₂)` through the universal pair
+    let t : T ⟶ Spec (.of (TensorProduct L.1 ks ks)) := (isPullback_tensorSpecPr L).lift f₁ f₂ hL'
+    let tm := t ≫ ((diagonalDiagram k ks).op ⋙ Scheme.Spec).map f
+    have htm₁ : tm ≫ pr₁ = f₁ := by
+      simp only [tm, Category.assoc, pr₁]
+      rw [map_comp_tensorSpecPr₁ f]
+      exact (isPullback_tensorSpecPr L).lift_fst _ _ _
+    have htm₂ : tm ≫ pr₂ = f₂ := by
+      simp only [tm, Category.assoc, pr₂]
+      rw [map_comp_tensorSpecPr₂ f]
+      exact (isPullback_tensorSpecPr L).lift_snd _ _ _
+    have ha : a.left ≫ Js.hom = f₁ := Over.w a
+    let v : T ⟶ pullback Js.hom pr₁ := pullback.lift a.left tm (by rw [ha, htm₁])
+    have hv₁ : v ≫ pullback.fst Js.hom pr₁ = a.left := pullback.lift_fst _ _ _
+    have hv₂ : v ≫ pV = tm := pullback.lift_snd _ _ _
+    let g : T ⟶ pullback pV (((diagonalDiagram k ks).op ⋙ Scheme.Spec).map f) :=
+      pullback.lift v t hv₂
+    have hg : v ≫ u = v ≫ pullback.fst Js.hom pr₁ ≫ q' := by
+      have e₀ : g ≫ pullback.fst pV (((diagonalDiagram k ks).op ⋙ Scheme.Spec).map f) = v :=
+        pullback.lift_fst _ _ _
+      have := congrArg (fun φ ↦ g ≫ φ ≫ pullback.fst p (pr₁ ≫ ι')) hL
+      simp only [ψ, χ, Category.assoc, pullback.lift_fst] at this
+      erw [pullback.lift_fst_assoc, pullback.lift_fst_assoc] at this
+      rw [← Category.assoc v (pullback.fst Js.hom pr₁) q', hv₁]
+      refine (congrArg (· ≫ u) e₀).symm.trans ?_
+      simpa only [Category.assoc] using this.symm
+    have hkey := congrArg CommaMorphism.left
+      (rs.overDescentDatum.transport_homMk_comp v f₁V f₂V hfV a₀)
+    have e₁ : f₁ = v ≫ f₁V := by
+      simp only [f₁V]
+      rw [← Category.assoc, hv₁, ha]
+    have e₂ : f₂ = v ≫ f₂V := by
+      simp only [f₂V]
+      rw [← Category.assoc, hv₂, htm₂]
+    have hcongr := rs.overDescentDatum.transport_left_congr h
+      (by simp only [Category.assoc]; rw [hfV])
+      a ((Over.homMk v : Over.mk (v ≫ f₁V) ⟶ Over.mk f₁V) ≫ a₀) e₁ e₂ hv₁.symm
+    change (rs.overDescentDatum.transport f₁ f₂ h a).left ≫ q' = _
+    rw [hcongr]
+    refine (congrArg (· ≫ q') hkey).trans ?_
+    change (v ≫ (rs.overTransport f₁V f₂V hfV a₀).left) ≫ q' = _
+    rw [Category.assoc, ← hv₁, Category.assoc]
+    exact hg
+  · simp only [Category.assoc, q, pullback.lift_snd]
+    have h₁ := Over.w a
+    have h₂ := Over.w (rs.overTransport f₁ f₂ h a)
+    simp only [Over.mk_hom] at h₁ h₂
+    rw [← Category.assoc, h₂, ← Category.assoc, h₁]
+    exact hL'.symm
+
+/-- **`Pic^0_{C/k}` is represented at a finite separable level by a descent of `J_s`.** Let `J_s`
+represent the restriction of `Pic^0_{C/k}` to schemes over a separable closure `k_s`. Then there are
+a finite separable subextension `K` of `k_s/k` and a `K`-scheme `J_K` with `J_K ×_K k_s ≅ J_s`,
+through a projection `q : J_s ⟶ J_K`, such that `J_K` represents the restriction of
+`Pic^0_{C/k}` to schemes over `K` compatibly with `q`: a point `a` of `J_s` and the point `q ∘ a`
+of `J_K` classify the same section of `Pic^0_{C/k}`.
+
+This is the content of `cor-pd-finite-level` and Step 7 at the finite level: `J_s` and its
+canonical descent datum, being of finite presentation, are defined over a finite separable
+subextension (Stacks 01ZM), and the descended scheme represents `Pic^0_{C/k}` over `K`. -/
+theorem exists_intermediateField_representableBy {ks : Type u} [Field ks] [Algebra k ks]
+    [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (Js : Over (Spec (.of ks)))
+    (rs : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy Js) :
+    ∃ (K : IntermediateField k ks), FiniteDimensional k K ∧ Algebra.IsSeparable k K ∧
+      ∃ (JK : Over (Spec (.of K))) (q : Js.left ⟶ JK.left)
+        (hq : IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks))))
+        (rK : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
+          (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy JK),
+        ∀ {T : Scheme.{u}} (f : T ⟶ Spec (.of ks)) (a : Over.mk f ⟶ Js),
+          rK.homEquiv (Over.homMk (a.left ≫ q) (by
+            rw [Category.assoc, hq.w, ← Category.assoc, Over.w a]; rfl) :
+              Over.mk (f ≫ Spec.map (CommRingCat.ofHom (algebraMap K ks))) ⟶ JK) =
+            (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+              (Over.homMk (𝟙 T) (by
+                simp [specMap_algebraMap_comp_specMap_algebraMap k K ks]) :
+                (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj
+                  (Over.mk (f ≫ Spec.map (CommRingCat.ofHom (algebraMap K ks)))) ⟶
+                Over.mk (f ≫ Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op
+              (rs.homEquiv a) :=
+  by
+  have : Algebra.IsSeparable k ks := IsSepClosure.separable
+  obtain ⟨L, JL, q, hq, hinv⟩ := exists_finiteSubext_isPullback_overTransport C Js rs
+  let P := (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj
+  let gs := Spec.map (CommRingCat.ofHom (algebraMap k ks))
+  let gL := Spec.map (CommRingCat.ofHom (algebraMap k L.1))
+  let ιL := Spec.map (CommRingCat.ofHom (algebraMap L.1 ks))
+  have hgs : ιL ≫ gL = gs := specMap_algebraMap_comp_specMap_algebraMap k L.1 ks
+  -- the representation of `Pic^0_{C/k}` over `k_s`, viewed through `Spec k_s ⟶ Spec L`
+  let α : Over.map gs ≅ Over.map ιL ⋙ Over.map gL :=
+    Over.mapCongr gs (ιL ≫ gL) hgs.symm ≪≫ Over.mapComp ιL gL
+  let rs' : ((Over.map ιL).op ⋙ (Over.map gL).op ⋙ P).RepresentableBy Js :=
+    rs.ofIso (Functor.isoWhiskerRight (NatIso.op α).symm P)
+  have hrs' {T : Scheme.{u}} (f : T ⟶ Spec (.of ks)) (b : Over.mk f ⟶ Js) :
+      rs'.homEquiv b = P.map (Over.homMk (𝟙 T) (by simp [← hgs]) :
+        (Over.map gL).obj ((Over.map ιL).obj (Over.mk f)) ⟶ (Over.map gs).obj (Over.mk f)).op
+          (rs.homEquiv b) := rfl
+  have htr {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of ks)) (h : f₁ ≫ ιL = f₂ ≫ ιL)
+      (a : Over.mk f₁ ⟶ Js) :
+      rs'.overTransport f₁ f₂ h a = rs.overTransport f₁ f₂
+        (by have := congrArg (· ≫ gL) h; simp only [Category.assoc, hgs] at this; exact this)
+          a := by
+    apply rs'.homEquiv.injective
+    rw [Functor.RepresentableBy.homEquiv_overTransport, hrs']
+    erw [hrs' f₁ a, Functor.RepresentableBy.homEquiv_overTransport]
+    exact FunctorToTypes.map_map_eq_map_map_of_comp_eq P
+      ((Over.map gL).map (Functor.RepresentableBy.overMapHomMkId f₁ f₂ h)) _ _ _
+      (by ext; simp) _
+  have := flat_specMap_algebraMap L.1 ks
+  have := surjective_specMap_algebraMap L.1 ks
+  obtain ⟨rK, hrK⟩ := Functor.RepresentableBy.exists_representableBy_of_descent
+    (F := (Over.map gL).op ⋙ P) rs' q hq
+    (fun f₁ f₂ h a ↦ by rw [htr]; exact hinv f₁ f₂ _ h a)
+    (fun T ↦ inferInstance)
+    (fun T a ha ↦ ⟨EffectiveEpi.desc _ a fun g₁ g₂ hg ↦ by
+        simpa using congrArg (pullback.lift g₁ g₂ hg ≫ ·) ha,
+      EffectiveEpi.fac _ _ _⟩)
+    fun T ↦
+      have : Flat ((Over.map gL).map (Functor.RepresentableBy.descentCoverπ ιL T)).left :=
+        inferInstanceAs (Flat (pullback.fst _ _))
+      have : Surjective ((Over.map gL).map (Functor.RepresentableBy.descentCoverπ ιL T)).left :=
+        inferInstanceAs (Surjective (pullback.fst _ _))
+      have : QuasiCompact ((Over.map gL).map (Functor.RepresentableBy.descentCoverπ ιL T)).left :=
+        inferInstanceAs (QuasiCompact (pullback.fst _ _))
+      Functor.RepresentableBy.isSheafFor_singleton_overMap gL _
+        (isSheafFor_picardFunctorDegree_singleton C 0 _)
+  refine ⟨L.1, L.2, Algebra.isSeparable_tower_bot_of_isSeparable k L.1 ks, JL, q, hq, rK,
+    fun {T} f a ↦ ?_⟩
+  -- restrict the compatibility of `rK` along the section `T ⟶ T ×_L k_s`
+  let b : (Over.map ιL).obj (Over.mk f) ⟶ JL := Over.homMk (a.left ≫ q) (by
+    rw [Category.assoc, hq.w, ← Category.assoc, Over.w a]; rfl)
+  let s : Over.mk f ⟶ Over.mk (pullback.snd ((Over.map ιL).obj (Over.mk f)).hom ιL) :=
+    Over.homMk (pullback.lift (𝟙 T) f (by simp)) (pullback.lift_snd _ _ _)
+  have hs : (Over.map ιL).map s ≫
+      Functor.RepresentableBy.descentCoverπ ιL ((Over.map ιL).obj (Over.mk f)) = 𝟙 _ := by
+    ext
+    exact pullback.lift_fst _ _ _
+  have h := FunctorToTypes.map_map_eq_map_map_of_comp_eq ((Over.map gL).op ⋙ P)
+    ((Over.map ιL).map s)
+    (Functor.RepresentableBy.descentCoverπ ιL ((Over.map ιL).obj (Over.mk f))) (𝟙 _) (𝟙 _)
+    (by rw [hs, Category.comp_id]) (rK.homEquiv b)
+  erw [hrK] at h
+  have hid (y) : ((Over.map gL).op ⋙ P).map (𝟙 ((Over.map ιL).obj (Over.mk f))).op y = y := by
+    rw [op_id, CategoryTheory.Functor.map_id]
+    rfl
+  rw [hid, hid] at h
+  change rK.homEquiv b = _
+  rw [← h]
+  change ((Over.map ιL).op ⋙ (Over.map gL).op ⋙ P).map s.op (rs'.homEquiv _) = _
+  rw [← rs'.homEquiv_comp, hrs']
+  congr 2
+  refine Over.OverMorphism.ext (hq.hom_ext ?_ ?_)
+  · simp only [s, b, Over.comp_left, Over.homMk_left, Category.assoc, IsPullback.lift_fst]
+    rw [pullback.lift_fst_assoc]
+    exact Category.id_comp _
+  · simp only [s, Over.comp_left, Over.homMk_left, Category.assoc, IsPullback.lift_snd]
+    rw [pullback.lift_snd]
+    exact (Over.w a).symm
+
+/-- A descent `J_K` of the Jacobian `J_s` of `C_{k_s}` to a finite separable level `K` is
+projective over `K`, so every finite set of its points lies in an affine open: `J_s` is a
+proper group scheme, hence quasi-projective, the immersion into projective space descends to
+`J_K`, and it is closed since `J_K` is proper. -/
+lemma exists_isAffineOpen_superset_of_isPullback {ks : Type u} [Field ks] [Algebra k ks]
+    [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (Js : Over (Spec (.of ks)))
+    (rs : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy Js)
+    (K : IntermediateField k ks) (JK : Over (Spec (.of K))) (q : Js.left ⟶ JK.left)
+    (hq : IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks)))) :
+    ∀ s : Set JK.left, s.Finite → ∃ U : JK.left.Opens, IsAffineOpen U ∧ s ⊆ U := by
+  have : IsSepClosed ks := IsSepClosure.sep_closed k
+  have : SmoothOfRelativeDimension 1 (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd _ _))
+  have : IsProper (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (IsProper (pullback.snd _ _))
+  have : GeometricallyIntegral (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (GeometricallyIntegral (pullback.snd _ _))
+  obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
+    (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
+    (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
+  have hP : IsProper Js.hom := isProper_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  obtain ⟨hG, -⟩ := exists_commGrpObj_isPicardZeroMul _ (rs.ofIso e)
+  obtain ⟨α, _, j, hj, hjf⟩ := GrpObj.exists_isImmersion_projectiveSpace Js
+  have : IsImmersion j := hj
+  obtain ⟨β, _, i, hi, hif⟩ := exists_isImmersion_projectiveSpace_of_pullback (k := K) (K := ks)
+    JK.hom (hq.isoPullback.inv ≫ j) (by rw [Category.assoc, hjf, hq.isoPullback_inv_snd])
+  have : IsImmersion i := hi
+  -- `J_K` is proper, so the immersion is closed
+  have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  have := geometricallyIntegral_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  obtain ⟨hJK, -, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
+    JK.hom Js.hom q hq
+    (arithmeticGenus ks
+      (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))))
+  have : UniversallyClosed (i ≫ ℙ(β; Spec (.of K)) ↘ Spec (.of K)) := by
+    rw [hif]
+    infer_instance
+  have := IsClosedImmersion.of_comp_of_isSeparated i (ℙ(β; Spec (.of K)) ↘ Spec (.of K))
+  exact fun s hs ↦ exists_isAffineOpen_superset_of_isClosedImmersion i s hs
 
 /-- **The descent datum is defined at a finite separable level.** Let `C` be a smooth projective
 geometrically integral curve over `k`, let `k_s` be a separable closure of `k` and let `J_s`
@@ -1990,79 +2557,33 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
         D.IsBaseChange (specMap_algebraMap_comp_specMap_algebraMap k K ks) hq.w
             rs.overDescentDatum ∧
           ∀ s : Set JK.left, s.Finite → ∃ U : JK.left.Opens, IsAffineOpen U ∧ s ⊆ U := by
-  have : Algebra.IsAlgebraic k ks := IsSepClosure.separable.isAlgebraic
-  -- `Js` is the Jacobian of `C_{k_s}`: it is of finite presentation and quasi-projective
-  obtain ⟨J', _, e', hJ'P, hJ'S, -, -, -⟩ := exists_jacobian_pullback (k := k) ks C _ rfl
-  obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
-    (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
-    (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
-  let i : Js ≅ J' := (rs.ofIso e).uniqueUpToIso e'
-  have hi : Js.hom = i.hom.left ≫ J'.hom := (Over.w i.hom).symm
-  have := hJ'P
-  have := hJ'S
-  have : Smooth J'.hom := SmoothOfRelativeDimension.smooth (arithmeticGenus k C) J'.hom
-  have : LocallyOfFinitePresentation Js.hom := by rw [hi]; infer_instance
-  have : QuasiCompact Js.hom := by rw [hi]; infer_instance
-  have : QuasiSeparated Js.hom := by rw [hi]; infer_instance
-  obtain ⟨α, _, j, hj, hjJ⟩ := GrpObj.exists_isImmersion_projectiveSpace J'
-  -- the descent datum at a finite level
-  obtain ⟨K, hK, JK, q, hq, D, hD⟩ := exists_intermediateField_isBaseChange rs
-    fun π _ _ _ ↦ isSheafFor_singleton_picardFunctorDegree (k := k) C π
-  refine ⟨K, hK, Algebra.isSeparable_tower_bot_of_isSeparable k K ks, JK, q, hq, D, hD, ?_⟩
-  -- `J_K` is quasi-projective, since `J_K ×_K k_s ≅ Js` is
-  have : IsImmersion (hq.isoPullback.inv ≫ i.hom.left ≫ j) := inferInstance
-  obtain ⟨β, _, j', hj', hj'K⟩ := exists_isImmersion_projectiveSpace_of_pullback JK.hom
-    (hq.isoPullback.inv ≫ i.hom.left ≫ j) (by
-      rw [Category.assoc, Category.assoc, hjJ, ← hi, IsPullback.isoPullback_inv_snd])
-  exact IsQuasiProjective.exists_isAffineOpen_superset ⟨β, inferInstance, j', hj', hj'K⟩
+  obtain ⟨K, hfin, hsep, JK, q, hq, rK, hc⟩ := exists_intermediateField_representableBy C Js rs
+  refine ⟨K, hfin, hsep, JK, q, hq, rK.overDescentDatum, fun T f₁ f₂ h a ↦ ?_, ?_⟩
+  · -- the canonical datum of `J_K` base changes to that of `J_s`, both being induced by
+    -- `Pic^0_{C/k}`
+    let ιK := Spec.map (CommRingCat.ofHom (algebraMap K ks))
+    have hιK : ιK ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+        Spec.map (CommRingCat.ofHom (algebraMap k ks)) :=
+      specMap_algebraMap_comp_specMap_algebraMap k K ks
+    have h' : (f₁ ≫ ιK) ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+        (f₂ ≫ ιK) ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) := by
+      rw [Category.assoc, Category.assoc, hιK]
+      exact h
+    let c := rs.overTransport f₁ f₂ h a
+    let a₁ : Over.mk (f₁ ≫ ιK) ⟶ JK := Over.homMk (a.left ≫ q) (by
+      rw [Category.assoc, hq.w, ← Category.assoc, Over.w a]; rfl)
+    let c₁ : Over.mk (f₂ ≫ ιK) ⟶ JK := Over.homMk (c.left ≫ q) (by
+      rw [Category.assoc, hq.w, ← Category.assoc, Over.w c]; rfl)
+    have key : rK.overTransport (f₁ ≫ ιK) (f₂ ≫ ιK) h' a₁ = c₁ := by
+      apply rK.homEquiv.injective
+      rw [Functor.RepresentableBy.homEquiv_overTransport]
+      erw [hc f₁ a, hc f₂ c]
+      simp only [c]
+      rw [Functor.RepresentableBy.homEquiv_overTransport]
+      exact FunctorToTypes.map_map_eq_map_map_of_comp_eq _ _ _ _ _ (by ext; simp) _
+    exact congrArg (·.left) key
+  · exact exists_isAffineOpen_superset_of_isPullback C Js rs K JK q hq
 
-/-- **`Pic^0_{C/k}` is represented by the descended scheme.** Let `K/k` be a field extension, let
-`J_K` represent the restriction of `Pic^0_{C/k}` to schemes over `K`, and let `J` be a `k`-scheme
-with `J ×_k K ≅ J_K` through which the canonical descent datum of `J_K` relative to
-`Spec K ⟶ Spec k` is the trivial one: the projection `q : J_K ⟶ J` is invariant under transport.
-Then `J` represents `Pic^0_{C/k}`.
-
-This is Step 7 of the proof of `AlgebraicGeometry.exists_jacobian_descent`, applied with
-`K = k_s`. The morphism `Spec K ⟶ Spec k` is faithfully flat and quasi-compact but in general not
-locally of finite presentation, so this does not follow from the fppf sheaf property of
-`Pic^0_{C/k}` alone. Since `Pic^0_{C/k}` and `J` are locally of finite presentation, the
-identification of `Pic^0_{C/k}` with `h_J` over `K` is defined over a finitely generated
-subalgebra `A ⊆ K` (Stacks 01ZC), along which fppf descent of sections applies; equivalently, by
-fpqc descent of morphisms (Stacks 02W0) it agrees with the representing object of `Pic^0_{C/k}`.
-
-(blueprint: `thm-pd-jacobian-general-field`, Step 7) -/
-theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} [Field K]
-    [Algebra k K] (C : Scheme.{u}) [C.Over (Spec (.of k))]
-    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
-    [GeometricallyIntegral (C ↘ Spec (.of k))] (JK : Over (Spec (.of K)))
-    (r : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
-      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy JK)
-    (J : Over (Spec (.of k))) (q : JK.left ⟶ J.left)
-    (hq : IsPullback q JK.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))))
-    (hinv : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of K))
-      (h : f₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
-        f₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap k K))) (a : Over.mk f₁ ⟶ JK),
-      (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q) :
-    Nonempty ((picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J) := by
-  set p := Spec.map (CommRingCat.ofHom (algebraMap k K))
-  have : Flat p := Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
-  have : Surjective p := ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
-  have hπ (T : Over (Spec (.of k))) : Flat (Over.baseChangeπ p T).left ∧
-      Surjective (Over.baseChangeπ p T).left ∧ QuasiCompact (Over.baseChangeπ p T).left :=
-    ⟨inferInstanceAs (Flat (pullback.fst _ _)), inferInstanceAs (Surjective (pullback.fst _ _)),
-      inferInstanceAs (QuasiCompact (pullback.fst _ _))⟩
-  obtain ⟨e, -⟩ := Functor.RepresentableBy.exists_representableBy_of_isPullback hq hinv
-    (fun T ↦
-      have := (hπ T).1
-      have := (hπ T).2.1
-      have := (hπ T).2.2
-      isSheafFor_singleton_picardFunctorDegree C (Over.baseChangeπ p T))
-    fun T ↦
-      have := (hπ T).1
-      have := (hπ T).2.1
-      have := (hπ T).2.2
-      isSheafFor_singleton_yoneda J (Over.baseChangeπ p T)
-  exact ⟨e⟩
 
 /-- **The geometric points of `Pic^0_{C₀/k₀}`.** Let `C₀` be a smooth projective geometrically
 integral curve over `k₀`, let `K` be an algebraically closed extension of `k₀` and let `C` be the
@@ -2236,30 +2757,6 @@ theorem exists_picardZero_equiv_picardFunctorDegree {k₀ K : Type u} [Field k�
     rw [← Pic.map_comp, ← Pic.map_comp]
     simp only [γ, Iso.inv_hom_id_assoc]
 
-
-omit [Field k] in
-lemma isFinite_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra k K]
-    [FiniteDimensional k K] : IsFinite (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
-  IsFinite.SpecMap_iff _ |>.mpr (RingHom.finite_algebraMap.mpr inferInstance)
-
-omit [Field k] in
-lemma flat_specMap_algebraMap (k K : Type u) [Field k] [CommRing K] [Algebra k K] :
-    Flat (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
-  Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
-
-omit [Field k] in
-lemma locallyOfFinitePresentation_specMap_algebraMap (k K : Type u) [Field k] [Field K]
-    [Algebra k K] [FiniteDimensional k K] :
-    LocallyOfFinitePresentation (Spec.map (CommRingCat.ofHom (algebraMap k K))) := by
-  rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFinitePresentation)]
-  exact RingHom.FinitePresentation.of_finiteType.mp
-    (RingHom.finite_algebraMap.mpr inferInstance).finiteType
-
-omit [Field k] in
-lemma surjective_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra k K] :
-    Surjective (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
-  ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
-
 /-- **The Jacobian over an arbitrary ground field, as a representing object.** Let `C` be a smooth
 projective geometrically integral curve of genus `g` over a field `k`. Then `Pic^0_{C/k}` is
 represented, compatibly with the group laws, by an abelian variety of dimension `g` over `k`. No
@@ -2293,25 +2790,26 @@ theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Fie
   obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
     (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
     (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
-  -- Steps 2 and 3: its canonical descent datum is defined at a finite separable level `K`.
-  obtain ⟨K, _, _, JK, q', hq', D, hD, hJK⟩ :=
-    exists_intermediateField_descentDatum C Js (rJs.ofIso e.symm)
+  -- Steps 2 and 3: `J_s` and its canonical descent datum are defined at a finite separable
+  -- level `K`, where a descent `J_K` of `J_s` represents `Pic^0_{C/k}`.
+  obtain ⟨K, _, _, JK, q', hq', rK, -⟩ :=
+    exists_intermediateField_representableBy C Js (rJs.ofIso e.symm)
+  have hJK := exists_isAffineOpen_superset_of_isPullback C Js (rJs.ofIso e.symm) K JK q' hq'
   have := isFinite_specMap_algebraMap k K
   have := flat_specMap_algebraMap k K
   have := locallyOfFinitePresentation_specMap_algebraMap k K
   have := surjective_specMap_algebraMap k K
-  -- Step 4: the descent datum `φ_K` is effective, with descended scheme `J`.
-  obtain ⟨J, q, hq, hinv⟩ := D.isEffective_of_isFinite hJK
-  -- Step 7: `J` represents `Pic^0_{C/k}`, since `J ×_k k_s ≅ J_s` compatibly with the canonical
-  -- descent datum of `J_s`.
+  -- Step 4: the canonical descent datum `φ_K` of `J_K` is effective, with descended scheme `J`.
+  obtain ⟨J, q, hq, hinv⟩ := rK.overDescentDatum.isEffective_of_isFinite hJK
+  -- Step 7, at the finite level `K`: `J` represents `Pic^0_{C/k}`, since `J ×_k K ≅ J_K`
+  -- compatibly with the canonical descent datum of `J_K`.
+  obtain ⟨r⟩ := nonempty_representableBy_picardFunctorDegree_of_isPullback
+    C JK rK J q hq fun f₁ f₂ h a ↦ by
+      rw [← Functor.RepresentableBy.overDescentDatum_transport]
+      exact hinv f₁ f₂ h a
   have hs := specMap_algebraMap_comp_specMap_algebraMap k K ks
   have hJ : IsPullback (q' ≫ q) Js.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k ks))) :=
     hs ▸ hq'.paste_horiz hq
-  obtain ⟨r⟩ := nonempty_representableBy_picardFunctorDegree_of_isPullback C Js
-    (rJs.ofIso e.symm) J (q' ≫ q) hJ fun f₁ f₂ h a ↦ by
-      rw [← Category.assoc, ← Functor.RepresentableBy.overDescentDatum_transport, ← hD f₁ f₂ h a,
-        hinv]
-      simp
   -- Step 6: the geometric properties descend along `k ⊆ k_s`.
   obtain ⟨hP, hS, hG⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
     J.hom Js.hom (q' ≫ q) hJ g

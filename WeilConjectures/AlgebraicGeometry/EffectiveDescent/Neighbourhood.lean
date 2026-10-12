@@ -98,7 +98,7 @@ lemma lift_fst_snd_univ {T : Scheme.{u}} (a b : T ⟶ Limits.pullback (V.hom ≫
     refine (congrArg (· ≫ D.univ) ?_).trans hab
     ext <;> simp [α]
   have e₃ := D.transport_left_eq _ _ (h₁₂.trans h₂₃) α
-  rw [← D.transport_transport _ _ _ h₁₂ h₂₃, D.transport_left_congr h₂₃ h₂₃ rfl rfl β _ e₂,
+  rw [← D.transport_transport _ _ _ h₁₂ h₂₃, D.transport_left_congr' h₂₃ h₂₃ rfl rfl β _ e₂,
     D.transport_left_eq] at e₃
   refine e₃.symm.trans ?_
   congr 1
