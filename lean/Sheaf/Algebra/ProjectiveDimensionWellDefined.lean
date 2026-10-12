@@ -60,6 +60,23 @@ theorem projective_and_global_dimension_well_defined
     ((∃ b : ℕ, Ring.HasGlobalDimensionLE.{u, max u v} R b) →
       ∃ g : ℕ, Ring.HasGlobalDimensionLE.{u, max u v} R g ∧
         ∀ k : ℕ, Ring.HasGlobalDimensionLE.{u, max u v} R k ↔ g ≤ k) := by
-  sorry
+  classical
+  have pad (N : ModuleCat.{max u v} R) {a b : ℕ} (hab : a ≤ b)
+      (h : HasProjectiveResolutionLE N a) : HasProjectiveResolutionLE N b := by
+    obtain ⟨P, hP⟩ := h
+    exact ⟨P, fun i hi ↦ hP i (lt_of_le_of_lt hab hi)⟩
+  refine ⟨?_, ?_, ?_⟩
+  · intro P hP i hi
+    exact hP i (lt_of_le_of_lt hnm hi)
+  · intro h
+    have hex : ∃ d : ℕ, HasProjectiveResolutionLE M d := ⟨n, h⟩
+    refine ⟨Nat.find hex, Nat.find_spec hex, fun k ↦ ⟨?_, ?_⟩⟩
+    · exact fun hk ↦ Nat.find_min' hex hk
+    · exact fun hk ↦ pad M hk (Nat.find_spec hex)
+  · intro hex
+    refine ⟨Nat.find hex, Nat.find_spec hex, fun k ↦ ⟨?_, ?_⟩⟩
+    · exact fun hk ↦ Nat.find_min' hex hk
+    · intro hk N
+      exact pad N hk (Nat.find_spec hex N)
 
 end ModuleCat
