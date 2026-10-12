@@ -1,0 +1,143 @@
+{
+ "id": "lem-sbc-finite-etale-open-generic-algebra",
+ "kind": "statement",
+ "title": "Generic algebra embedding for finite etale open covers",
+ "statement": "Let $X$ be an integral scheme, $U\\subseteq X$ an open subscheme, and $P\\to U$ a finite etale morphism [def-weil-pbc-scheme-conventions, def-weil-etale-morphism]. Let $V\\subseteq X$ be a nonempty affine open with $A=\\Gamma(V,\\mathcal O_X)$ and $K=\\operatorname{Frac}(A)$ [def-weil-affine-spectrum, def-sc-function-field]. Put $f:P\\to X$ for the composite and $B=\\Gamma(f^{-1}V,\\mathcal O_P)$ with its structural $A$-algebra structure. There exists a commutative finite etale $K$-algebra $D$ and an injective $A$-algebra homomorphism $B\\to D$, where the $A$-algebra structure on $D$ is induced through $A\\to K$. The open $U$, the cover, and the generic algebra may be empty or zero.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 02GL (lemma-etale-over-field) and 081I (flat base change of scheme-theoretic images); application to the generic-point map"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-sc-function-field"
+ ],
+ "proof": [
+  {
+   "text": "If U is empty then P is empty, B is the zero ring, and the zero K-algebra supplies an injective structural map. Otherwise U contains the generic point of the integral X. Identify the generic stalk on V with Frac(A), and let alpha:Spec K -> U be the induced generic map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Form P_eta = P times_U Spec K and D = Gamma(P_eta,O). Base change preserves finiteness and etaleness, so P_eta is affine and D is finite etale over K. These are the standard Mathlib IsFinite pullback instances, Etale pullback instances and HasRingHomProperty affine dictionary.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The generic map alpha is quasi-compact: each inverse image of an open is empty or the one-point Spec K. Its image is dense, and its target U is reduced, so it is scheme-theoretically dominant. Apply flat base change of scheme-theoretic dominance to the flat P -> U. The resulting projection P_eta -> P is quasi-compact and scheme-theoretically dominant; its maps on all section rings are injective. Use Mathlib IsSchemeTheoreticallyDominant.of_isPullback and Scheme.Hom.app_injective.",
+   "uses": [
+    "lemma-nagata-dense-flat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since V contains the generic point, the inverse image of f^{-1}V in P_eta is all of P_eta. Composing the injective section map with this open-equality isomorphism gives B -> D. Naturality of section maps in the pullback square and the generic-stalk/fraction-field identification give its A-algebra compatibility.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-dense-flat-pullback"
+ ],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "P2",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 02GL (lemma-etale-over-field) and 081I (flat base change of scheme-theoretic images); application to the generic-point map",
+  "note": "Affine generic-algebra route below the local finiteness node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a finite etale cover of an open subscheme of an integral scheme inject into a finite etale algebra over the fraction field of an affine open",
+   "results": "AlgebraicGeometry.map_injective_of_isIntegral; AlgebraicGeometry.Scheme.germToFunctionField_injective; AlgebraicGeometry.germ_injective_of_isIntegral; AlgebraicGeometry.specTargetImageFactorization_app_injective; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; AlgebraicGeometry.exists_lift_of_germInjective; AlgebraicGeometry.stalkMap_injective_of_isAffine; AlgebraicGeometry.Scheme.Hom.toImage_app_injective",
+   "date": "2026-10-13",
+   "verdict": "Related declarations found; no complete geometric statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a finite etale cover of an open integral scheme inject into a finite etale algebra over the fraction field of an affine open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+   "results": "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+   "date": "2026-10-13",
+   "verdict": "Related declarations found; no complete geometric statement."
+  },
+  {
+   "tool": "grep",
+   "query": "germToFunctionField_injective|isTorsionFree_of_flat|iff_exists_algEquiv_prod",
+   "results": "Mathlib/AlgebraicGeometry/OrderOfVanishing.lean; Mathlib/AlgebraicGeometry/OrderOfVanishing.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/RingTheory/Etale/Field.lean; Mathlib/RingTheory/Etale/Field.lean; Mathlib/RingTheory/Etale/Field.lean; Mathlib/RingTheory/Etale/Field.lean; Mathlib/RingTheory/Etale/Field.lean",
+   "date": "2026-10-13",
+   "verdict": "Related declarations found; no complete geometric statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFinite",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "proof of local claim: finiteness of the extension over Spec O(S,s)",
+   "via": [
+    "lem-sbc-stalk-normalization-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleOpenGenericAlgebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteEtaleOpenGenericAlgebra.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finiteEtale_open_generic_algebra",
+  "statement": "theorem exists_finiteEtale_open_generic_algebra {X : Scheme.{u}} [IsIntegral X]\n    (U : X.Opens) (P : U.toScheme.FiniteEtale) (V : X.Opens) [Nonempty V]\n    (hV : IsAffineOpen V) :\n    letI : Algebra Γ(X, V) Γ(P.obj.left, (P.obj.hom ≫ U.ι) ⁻¹ᵁ V) :=\n      ((P.obj.hom ≫ U.ι).app V).hom.toAlgebra\n    ∃ (D : Type u) (_ : CommRing D) (_ : Algebra (FractionRing Γ(X, V)) D),\n      Module.Finite (FractionRing Γ(X, V)) D ∧\n      Algebra.FormallyEtale (FractionRing Γ(X, V)) D ∧\n      letI : Algebra Γ(X, V) D :=\n        Algebra.compHom D (algebraMap Γ(X, V) (FractionRing Γ(X, V)))\n      ∃ e : Γ(P.obj.left, (P.obj.hom ≫ U.ι) ⁻¹ᵁ V) →ₐ[Γ(X, V)] D,\n        Function.Injective e",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T213852-L-1209305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T213852-L-1209305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

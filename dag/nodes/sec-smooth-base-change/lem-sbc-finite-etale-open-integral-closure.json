@@ -1,0 +1,147 @@
+{
+ "id": "lem-sbc-finite-etale-open-integral-closure",
+ "kind": "statement",
+ "title": "Finite affine integral closure in an open finite etale cover",
+ "statement": "Let $X$ be a normal integral Noetherian scheme, where normal means every local ring is integrally closed [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois]. Let $U\\subseteq X$ be any open and let $P\\to U$ be finite etale [def-weil-etale-morphism]. For every affine open $V\\subseteq X$, put $A=\\Gamma(V,\\mathcal O_X)$, $f:P\\to X$, and $B=\\Gamma(f^{-1}V,\\mathcal O_P)$ with the structural $A$-algebra structure. Then the integral closure of $A$ in $B$ [def-weil-pbc-integral-closure] is a finite $A$-module [def-weil-finitely-generated-module]. Empty opens and empty covers are included.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 032L (lemma-Noetherian-normal-domain-finite-separable-extension), applied after injection into the finite etale generic algebra"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "If V is empty then B is the zero ring, and its integral closure is finite. For nonempty V, integrality makes A a domain and local Noetherianity makes A Noetherian. For every maximal ideal of A the affine stalk/localization equivalence identifies its localization with an integrally closed stalk of X. Mathlib IsIntegrallyClosed.of_localization_maximal therefore makes A integrally closed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the generic-algebra embedding to obtain a finite formally etale K=Frac(A)-algebra D with an injective A-algebra map e:B -> D. Only a proposition is being proved; no definition chooses arbitrary data from this existence theorem.",
+   "uses": [
+    "lem-sbc-finite-etale-open-generic-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "D is reduced by formal unramifiedness over a field and Artinian by finite-dimensionality. Mathlib IsArtinianRing.equivPi identifies D with the finite product of fields L_m=D/m. The quotient fields are finite separable over K by the finite-etale-field instances. Each integralClosure A L_m is finite over A by the Noetherian normal separable integral closure theorem.",
+   "uses": [
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map an element of integralClosure A B to its images in every integralClosure A L_m. Integrality is preserved by the component algebra maps. This gives an A-linear map F into the finite product of these finite modules. If F(x)=F(y), the product-field equivalence and injectivity of e give x=y. Mathlib Module.Finite.of_injective over the Noetherian A now proves finiteness of the source.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-finite-etale-open-generic-algebra",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+ ],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "P2",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 032L (lemma-Noetherian-normal-domain-finite-separable-extension), applied after injection into the finite etale generic algebra",
+  "note": "Affine generic-algebra route below the local finiteness node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a noetherian integrally closed domain in a finite separable field extension is finite",
+   "results": "IsIntegralClosure.finite; integralClosure.isNoetherianRing; IsIntegralClosure.isNoetherianRing; IsIntegralClosure.isNoetherian; Ring.instFiniteNormalClosure; Ring.instFiniteNormalClosure_1; integralClosure.isIntegrallyClosedOfFiniteExtension; NumberField.RingOfIntegers.extension_isNoetherian",
+   "date": "2026-10-13",
+   "verdict": "Related declarations found; no complete geometric statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegralClosure.finite",
+   "results": "IsIntegralClosure.finite",
+   "date": "2026-10-13",
+   "verdict": "Related declarations found; no complete geometric statement."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|IsIntegralClosure.finite",
+   "results": "Mathlib/NumberTheory/FunctionField.lean; Mathlib/NumberTheory/FunctionField.lean; Mathlib/NumberTheory/FunctionField.lean; Mathlib/NumberTheory/FunctionField.lean; Mathlib/NumberTheory/FunctionField.lean; Mathlib/NumberTheory/ClassNumber/Finite.lean; Mathlib/NumberTheory/ClassNumber/Finite.lean; Mathlib/NumberTheory/ClassNumber/Finite.lean",
+   "date": "2026-10-13",
+   "verdict": "Related declarations found; no complete geometric statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a normal Noetherian integral scheme the integral closure in sections of a finite etale cover of an open subset is a finite module on every affine open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFinite",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "proof of local claim: finiteness of the extension over Spec O(S,s)",
+   "via": [
+    "lem-sbc-stalk-normalization-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleOpenIntegralClosure",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteEtaleOpenIntegralClosure.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtale_open_integralClosure_finite",
+  "statement": "theorem finiteEtale_open_integralClosure_finite {X : Scheme.{u}} [IsNoetherian X]\n    [IsIntegral X] (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x))\n    (U : X.Opens) (P : U.toScheme.FiniteEtale) (V : X.Opens)\n    (hV : IsAffineOpen V) :\n    letI : Algebra Γ(X, V) Γ(P.obj.left, (P.obj.hom ≫ U.ι) ⁻¹ᵁ V) :=\n      ((P.obj.hom ≫ U.ι).app V).hom.toAlgebra\n    Module.Finite Γ(X, V)\n      (integralClosure Γ(X, V) Γ(P.obj.left, (P.obj.hom ≫ U.ι) ⁻¹ᵁ V))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T213852-L-1209305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T213852-L-1209305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

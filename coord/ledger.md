@@ -9635,3 +9635,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:38 L: merged deliver/M3/Sheaf.Paper.EtaleHypercohomologyCETotalMaps (stage 3; reviewer PASS; after a return; landing 20261012T213851-L-1208924 (interface); batch 20261012T213845; modules 3; new nodes 2)
 - 21:38 L: merged deliver/N1/Sheaf.CategoryTheory.ColimitSiteStageImageSheaf (stage 3; reviewer PASS; first push; landing 20261012T213851-L-1209061 (interface); batch 20261012T213845; modules 2; new nodes 1)
 - 21:38 L: merged deliver/N2/Sheaf.AlgebraicGeometry.IdealPowersReesMultiplication (stage 3; reviewer PASS; first push; landing 20261012T213851-L-1209178 (interface); batch 20261012T213845; modules 2; new nodes 1)
+- 21:38 L: merged deliver/P2/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFinite (stage 3; reviewer PASS; first push; landing 20261012T213852-L-1209305 (interface); batch 20261012T213845; modules 3; new nodes 2)

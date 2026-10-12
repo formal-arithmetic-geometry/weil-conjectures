@@ -15,26 +15,40 @@
  ],
  "proof": [
   {
-   "text": "The minimality condition on s identifies the inverse image of U in\nSpec O(S,s) with the punctured spectrum. This is a normal Noetherian local\ndomain of positive dimension, since the generic point belongs to U.\nSmoothness and geometrically connected fibres make the local total space\nnormal integral. Extend the G-action to the punctured cover by generic full\nfaithfulness. In dimension one the base is a DVR. The ramification indices\nof each connected component divide the order of its stabilizer, hence |G|,\nand are invertible. The tame normalization theorem makes the normalization\nfinite locally free. In dimension at least two normality gives depth at least\ntwo on the base, and flatness gives that bound along the missing fibre.\nThe depth-two extension of the finite algebra is coherent and finite by\n0EY6. It is normal: on affine charts a function integral over this algebra\nlies in the normal algebra on the punctured open and extends by the depth-two\nproperty. Thus it is the integral closure in the punctured algebra.\nIntegral closure commutes with localization, so this local normalization is\nexactly the pullback of the relative normalization used in the conclusion.\nFor a disconnected cover perform the construction on its components and\ncombine the resulting finite algebras as a finite product. Empty covers are\nincluded. No rational point or section is needed for finiteness.",
+   "text": "If C is empty, the local total space is empty and the normalization pullback map is an isomorphism, hence finite.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For nonempty C apply smooth_connected_generic_geometry_core to get integrality and integrally closed stalks. Smoothness implies locally finite type, and quasi-compactness over the Noetherian S gives IsNoetherian C by Mathlib isNoetherian_of_locallyOfFiniteType.",
    "uses": [
-    "lem-sbc-generic-fibre-action-extension",
-    "lem-weil-pbc-normal-local-depth-two",
-    "lem-weil-pbc-flat-local-depth-formula"
+    "lem-sbc-smooth-connected-generic-geometry-core"
    ],
    "elementary": false
+  },
+  {
+   "text": "For f=PA.obj.hom composed with the open inclusion into C, apply the finite affine integral-closure lemma on every affine V of C. Mathlib fromNormalization_app and normalizationObjIso identify the normalization ring map with the finite structural algebra map followed by an isomorphism. The IsFinite constructor glues these affine conclusions into global finiteness of f.fromNormalization.",
+   "uses": [
+    "lem-sbc-finite-etale-open-integral-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back this finite normalization along pullback.fst c (S.fromSpecStalk s). Mathlib finiteness under base change gives exactly the original conclusion. No compatibility theorem for normalization and localization is needed: the given normalization is already globally finite.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-generic-fibre-action-extension",
-  "lem-weil-pbc-normal-local-depth-two",
-  "lem-weil-pbc-flat-local-depth-formula"
+  "lem-sbc-finite-etale-open-integral-closure",
+  "lem-sbc-smooth-connected-generic-geometry-core"
  ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "X2",
-  "document": "Stacks Project",
-  "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of local claim: dimension-one tame normalization and dimension-at-least-two finite depth-two extension",
-  "note": "The finite depth-two construction is identified with the actual relative normalization using normality and localization of integral closure."
+  "kind": "written-by-agent",
+  "by": "P2",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 032L (lemma-Noetherian-normal-domain-finite-separable-extension), affine generic-algebra proof of the finiteness clause in 0EYJ",
+  "note": "Only the below-unit finiteness sublemma is shortened; the spreading theorem, trait tests, purity and depth-two etaleness route above it are unchanged."
  },
  "mathlib_searches": [
   {
@@ -120,9 +134,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T173917-L-3309950",
+  "landing": "20261012T213852-L-1209305",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
