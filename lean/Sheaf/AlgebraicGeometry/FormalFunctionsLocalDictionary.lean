@@ -1,0 +1,86 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group P3
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+
+/-! # The geometric dictionary for stalkwise formal functions
+
+Source: Stacks Project, Tag 02OD, proof before applying Theorem 02OC
+(blueprint: lem-weil-pbc-formal-functions-local-dictionary).
+
+This identifies uncompleted cohomology and the finite quotient systems. It does not
+assert a comparison of completed cohomology with an inverse limit.
+-/
+
+@[expose] public section
+
+universe u
+
+set_option autoImplicit false
+
+open CategoryTheory CategoryTheory.Limits Opposite IsLocalRing
+
+namespace AlgebraicGeometry
+
+/-- The geometric identifications used before applying the theorem on formal functions.
+Source: Stacks Project, Tag 02OD, proof, together with Tags 02KH, 01E4, 089W and 01FB
+(blueprint: lem-weil-pbc-formal-functions-local-dictionary).
+
+Proof: Put A = O_(Y,y), and base change f along the flat canonical map Spec A → Y.
+A is Noetherian, the base-changed map is proper, and the pulled-back module is coherent:
+pullback preserves quasi-coherence and finite type, which characterize coherence on
+locally Noetherian schemes. Flat base change (02KH) identifies the higher direct image
+stalk with the cohomology H on this base change. The section-class formula for flat
+base change and the associated-presheaf description (01E4) identify this equivalence
+on germs with pullback. Every open containing the closed point of Spec A is all of
+Spec A, so the final stalk is global cohomology.
+For each positive level n+1, paste the two pullback squares to identify the infinitesimal
+fibre with the quotient base change of this local scheme. Its closed immersion has ideal
+m^(n+1) O. The closed immersion unit has kernel m^(n+1) F', so it identifies the pushed
+forward fibre module with formalModuleQuotient J (n+1) F'. The affine cohomology edge
+isomorphism (089W) then gives the component of b. These components commute with
+transitions: the two sheaf maps agree after precomposition with the epimorphic quotient
+projection, hence agree; functoriality of the cohomology h-maps gives naturality.
+Restrict the completed scalar action to A; on each component it is the same quotient
+scalar action. The pullback maps on neighbourhood cohomology descend to A-linear maps
+kappa on the stalk, by their compatibility with restrictions and the stalk colimit.
+Functoriality identifies their values with b applied to the quotient restriction of a.
+The section-class formula identifies these maps with IsFormalFunctionsTheta, for every
+choice of injective resolutions and open comparison data. These arguments apply equally
+to p=0, the zero module and an empty fibre; no nonzero or surjectivity hypothesis on a
+finite-level cohomology map is used. -/
+theorem formalFunctions_local_dictionary {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
+    [IsLocallyNoetherian Y] (F : X.Modules)
+    (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) :
+    let X' := pullback (Y.fromSpecStalk y) f
+    let f' := pullback.fst (Y.fromSpecStalk y) f
+    let F' := (Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F
+    let J := (Scheme.IdealSheafData.ofIdealTop
+      ((maximalIdeal (Y.presheaf.stalk y)).map
+        (Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv.hom)).comap f'
+    let C := RingedSpace.moduleCohomology X'.toRingedSpace p ⋙
+      ModuleCat.restrictScalars
+        ((Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv ≫ f'.appTop).hom
+    RingedSpace.IsCoherent X'.toRingedSpace F' ∧
+      ∃ a : formalFunctionsStalk f y F p ≃ₗ[Y.presheaf.stalk y] C.obj F',
+      ∃ b : formalCompletionSystem J F' ⋙ C ≅
+        formalFibreCohomologySystem f y F p ⋙ ModuleCat.restrictScalars
+          (algebraMap (Y.presheaf.stalk y)
+            (AdicCompletion (maximalIdeal (Y.presheaf.stalk y)) (Y.presheaf.stalk y))),
+      ∃ κ : ∀ n : ℕ, formalFunctionsStalk f y F p →ₗ[Y.presheaf.stalk y]
+        formalFibreCohomologyLocal f y F p n,
+        (∀ n : ℕ, IsFormalFunctionsTheta f y F p n (κ n)) ∧
+        ∀ (n : ℕ) (z : formalFunctionsStalk f y F p),
+          κ n z = (b.hom.app (op n))
+            ((C.map (formalModuleQuotientπ J (n + 1) F')) (a z)) := by
+  sorry
+
+end AlgebraicGeometry
