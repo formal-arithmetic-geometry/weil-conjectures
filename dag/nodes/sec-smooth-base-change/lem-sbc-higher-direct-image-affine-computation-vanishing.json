@@ -19,33 +19,37 @@
  "statement": "Let S be a scheme [def-weil-pbc-scheme-conventions], I a nonempty directed preorder, and D : Iᵒᵖ → Over(S) an inverse system with affine transition morphisms and qcqs structure morphisms. Let c be a cone whose underlying scheme cone is limiting and whose structure morphism is qcqs. Let F_i be abelian etale sheaves [def-weil-pbc-etale-sheaves], with unital compatible inverse-image maps φ [def-weil-pbc-inverse-image]. Let H, eH and hH present the pulled-back coefficient diagram on the limit, with colimit F. For p ≥ 0, an affine etale object V of S [def-weil-pbc-etale-site], a stage i, and a section y of R^p g_i,* F_i [def-weil-pbc-direct-image] on V, suppose the canonical map [def-sbc-abelian-higher-direct-image-map] along c.π_i, with coefficient map eH_i.inv followed by the colimit coprojection, sends y to zero. Then there are j and f : i → j such that the canonical higher-image transition along D(f.op), with coefficient map φ(f), sends y to zero on the same V. No presentation K or colimit of the higher images is required.",
  "proof": [
   {
-   "text": "Identify the stage and limit higher direct images with sheafified cohomology presheaves, naturally for canonical derived units and coefficient maps. Lift y locally, refine using local injectivity so the limit cohomology representatives are zero, and refine by affines.",
+   "text": "Use the natural sheafification comparison uniformly in stage and coefficients. The image sieve of the stage comparison covers V. On a local raw lift z, naturality and injectivity of the limit comparison identify the original zero hypothesis with zero of the sheafified raw limit class.",
    "uses": [
-    "sbc-lem-higher-direct-image-presheaf"
+    "lem-sbc-abelian-higher-direct-image-natural-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "On each affine member W, base change the scheme cone and restrict coefficients. The stages and limit are qcqs, transitions affine, and the cone limiting. Inverse image preserves the coefficient colimit and degree-zero complexes. Apply complex cohomology continuity with lower bound zero. Its canonical comparison is the one above. Injectivity and the filtered group colimit equality criterion kill the representative at a later stage, hence its higher-image section.",
+   "text": "Apply local eventual vanishing of the raw class. Its witnesses, mapped through the same natural comparison, kill the original section locally. Cover transitivity shows the sieve of eventual-zero restrictions is covering.",
    "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+    "lem-sbc-higher-direct-image-raw-local-class-vanishing",
+    "lem-sbc-abelian-higher-direct-image-natural-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The affine V is quasi-compact. Extract a finite subcover, use directedness for a common later stage, and use naturality to keep every restricted section zero at that stage. Sheaf separatedness implies the section on V is zero. For degree zero use sections; on the empty affine object its section group is zero.",
-   "uses": [],
-   "elementary": true
+   "text": "Extract a finite subcover of affine V from the covering sieve using compactness and the open ranges of etale arrows. IsFiltered.wideSpan gives a common stage for the finitely many witnesses. Canonical transition composition keeps all restricted sections zero at that stage; naturality and sheaf separatedness give zero on V. The empty subcover case is included by the same wideSpan and separatedness argument.",
+   "uses": [
+    "lem-sbc-abelian-higher-direct-image-transition-comp"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "sbc-lem-higher-direct-image-presheaf",
-  "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "lem-sbc-higher-direct-image-raw-local-class-vanishing",
+  "lem-sbc-abelian-higher-direct-image-transition-comp"
  ],
  "proof_origin": {
-  "by": "worker K2",
+  "by": "worker H3",
   "document": "Stacks Project, Etale Cohomology",
-  "place": "Tag 09Z1 proof, expanded using Tags 03Q8 and 0EZM; affine part of the assigned local-section vanishing argument"
+  "place": "Tag 09Z1 proof, natural comparison of Tag 03Q8, local raw-class vanishing and finite-cover assembly; Lean proof written by H3"
  },
  "mathlib_searches": [
   {
@@ -117,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T095911-L-320000",
+  "landing": "20261012T135241-L-1668677",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

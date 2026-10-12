@@ -7826,3 +7826,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/H3/Sheaf.AlgebraicGeometry.FiniteEtaleTraceSplitReindexing (stage 3; reviewer PASS; first push; landing 20261012T135240-L-1668128 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:52 L: merged deliver/H3/Sheaf.AlgebraicGeometry.FlatRestrictionUnion (stage 3; reviewer PASS; first push; landing 20261012T135241-L-1668318 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/H3/Sheaf.AlgebraicGeometry.GrothendieckExistenceSupportedSystem (stage 3; reviewer PASS; first push; landing 20261012T135241-L-1668518 (interface); batch 20261012T135212; modules 3; new nodes 2)
+- 13:52 L: merged deliver/H3/Sheaf.AlgebraicGeometry.HigherDirectImageAffineComputationVanishing (stage 3; reviewer PASS; first push; landing 20261012T135241-L-1668677 (interface); batch 20261012T135212; modules 3; new nodes 2)
