@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-proj-graded-module-chart-basis-comparison-fixed",
+ "kind": "statement",
+ "title": "Fixed-chart compatible principal-open section equivalence",
+ "statement": "For each fixed positive homogeneous chart f, under the localization comparison, scalar compatibility, canonical ring-map, and restriction hypotheses of the parent chart-basis theorem, there exists a compatible family of linear equivalences on the principal-open basis of that chart.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01MB, last paragraph; fixed-chart component of the principal-open section comparison"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof": [
+  {
+   "text": "Apply the same construction as in the parent theorem after fixing the chart f: identify each principal open with a homogeneous principal chart, transport sections through alpha and theta, and use localization uniqueness for restriction compatibility. The full construction is left as this intermediate theorem for a later worker.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "K1 stage 3",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01MB, last paragraph",
+  "note": "Fixed-chart decomposition of the parent statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "principal open compatible linear equivalence sheaf sections",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "principal open compatible linear equivalence sheaf sections",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedModuleChart_basisComparison_fixed",
+   "results": "no existing declaration",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparison",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proj-graded-module-chart-basis-comparison",
+   "place": "fixed-chart component",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixed",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleChartBasisComparisonFixed.lean",
+  "declaration": "AlgebraicGeometry.Proj.gradedModuleChart_basisComparison_fixed",
+  "statement": "theorem gradedModuleChart_basisComparison_fixed\n    (Z : ∀ f : Fidx, Submodule R[f] N[f])\n    (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])\n    (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g)\n    (U : ∀ (f g : Fidx), R[f])\n    (hU : ∀ (f g : Fidx), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)\n      (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1))\n    (theta : ∀ (f g : Fidx), D[g] ≤ D[f] →\n      LocalizedModule.Away (U f g) (Z f) ≃+ Z g)\n    (thetaS : ∀ (f g : Fidx), D[g] ≤ D[f] → Localization.Away (U f g) ≃+* R[g])\n    (htheta : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n      (∀ r : R[f], thetaS f g i (algebraMap R[f] (Localization.Away (U f g)) r) =\n        rhoS f g i r) ∧\n      (∀ q : Z f, theta f g i (mk q 1) = rho f g i q) ∧\n      (∀ (r : Localization.Away (U f g)) (q : LocalizedModule.Away (U f g) (Z f)),\n        theta f g i (r • q) = thetaS f g i r • theta f g i q))\n    (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n      ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1,\n        (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) =\n          algebraMap S (Localization.Away g.val.1) a) ∧\n        ∀ r : R[f], (rhoS f g i r).val = l r.val)\n    (F : ModX) (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f)\n    (hscalar : ∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])),\n      alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s)\n    (hrestriction : ∀ (f g : Fidx) (i : D[g] ≤ D[f])\n      (s : F.val.obj (op D[f])),\n      alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s))\n    (f : Fidx) :\n      let e := basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1\n      let E := Scheme.Modules.restrict F D[f].ι\n      let G := Scheme.Modules.restrict (tilde (ModuleCat.of R[f] (Z f))) e.hom\n      let B := Set.range (fun r : R[f] ↦ e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r)\n      ∃ l : ∀ U : B, E.val.obj (op U.val) ≃ₗ[\n          D[f].toScheme.ringCatSheaf.obj.obj (op U.val)]\n          G.val.obj (op U.val),\n        ∀ (U V : B) (i : V.val ≤ U.val) (s : E.val.obj (op U.val)),\n          l V (E.val.map (homOfLE i).op s) = G.val.map (homOfLE i).op (l U s)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-58535",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T184313-L-4007901",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-58535",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T184313-L-4007901",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files and DAG metadata matched the packet; both modules and the direct importer compiled without warnings, with only the documented sorryAx dependency."
+ }
+}

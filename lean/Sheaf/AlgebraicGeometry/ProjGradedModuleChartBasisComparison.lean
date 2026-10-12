@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparisonFixed
 
 /-!
 # Principal-open section comparison for a graded-module chart
@@ -37,6 +38,7 @@ local instance localizedModuleHomogeneousScalarsBasisComparison (T : Submonoid S
     (algebraMap (HomogeneousLocalization 𝒜 T) (Localization T))
 
 set_option quotPrecheck false
+set_option linter.unusedVariables false
 
 local notation "Fidx" => {p : S × ℕ // 0 < p.2 ∧ p.1 ∈ 𝒜 p.2}
 local notation "R[" f "]" => HomogeneousLocalization.Away 𝒜 (f).val.1
@@ -109,6 +111,9 @@ theorem gradedModuleChart_basisComparison
           D[f].toScheme.ringCatSheaf.obj.obj (op U.val)]
           G.val.obj (op U.val),
         ∀ (U V : B) (i : V.val ≤ U.val) (s : E.val.obj (op U.val)),
-          l V (E.val.map (homOfLE i).op s) = G.val.map (homOfLE i).op (l U s) := by sorry
+          l V (E.val.map (homOfLE i).op s) = G.val.map (homOfLE i).op (l U s) := by
+  intro f
+  exact gradedModuleChart_basisComparison_fixed 𝒜 Z rhoS rho U hU theta thetaS htheta
+    hcanonical F alpha hscalar hrestriction f
 
 end AlgebraicGeometry.Proj
