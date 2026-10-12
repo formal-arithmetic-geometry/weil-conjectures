@@ -26,53 +26,36 @@
  ],
  "proof": [
   {
-   "text": "(Part (1).) Let $s,s'\\in\\mathcal F^+(U)$ and let $\\mathcal U^0=\\{U_i\\to U\\}_{i\\in I}$ be a covering with $s|_{U_i}=s'|_{U_i}$ for all $i$. By [lem-weil-pbc-site-plus-construction-presheaf] (1) write $s=[\\mathcal U,t]$ and $s'=[\\mathcal U',t']$ with $t\\in H^0(\\mathcal U,\\mathcal F)$, $t'\\in H^0(\\mathcal U',\\mathcal F)$, $\\mathcal U=\\{U_a\\to U\\}_{a\\in A}$, $\\mathcal U'=\\{U'_b\\to U\\}_{b\\in B}$. Applying [lem-weil-pbc-site-coverings-common-refinement] twice, there is a covering $\\mathcal W=\\{W_j\\to U\\}_{j\\in J}$ with morphisms of coverings over $\\mathrm{id}_U$ to $\\mathcal U^0$, $\\mathcal U$ and $\\mathcal U'$; so for every $j$ the map $w_j:W_j\\to U$ factors as $W_j\\to U_{i(j)}\\to U$, as $W_j\\xrightarrow{c_j}U_{a(j)}\\to U$ and as $W_j\\xrightarrow{c'_j}U'_{b(j)}\\to U$. Put $x_j=t_{a(j)}|_{W_j}=\\mathcal F(c_j)(t_{a(j)})$ and $x'_j=t'_{b(j)}|_{W_j}\\in\\mathcal F(W_j)$. By [lem-weil-pbc-site-plus-construction-presheaf] (3), $s|_{W_j}=\\mathcal F^+(w_j)(s)=\\theta_{W_j}(x_j)$ and $s'|_{W_j}=\\theta_{W_j}(x'_j)$. Since $w_j$ factors through $U_{i(j)}\\to U$ and $\\mathcal F^+$ is a presheaf [lem-weil-pbc-site-plus-construction-presheaf] (4), $s|_{W_j}=(s|_{U_{i(j)}})|_{W_j}=(s'|_{U_{i(j)}})|_{W_j}=s'|_{W_j}$, hence $\\theta_{W_j}(x_j)=\\theta_{W_j}(x'_j)$. By [lem-weil-pbc-site-plus-construction-presheaf] (2) (the case of $\\theta$) there is for each $j$ a covering $\\{W_{jk}\\to W_j\\}_{k\\in K_j}$ with $x_j|_{W_{jk}}=x'_j|_{W_{jk}}$ for all $k$. By axiom (ii) of a site [def-weil-pbc-sites-and-cohomology], $\\mathcal V=\\{W_{jk}\\to W_j\\to U\\}_{(j,k)}$ is a covering of $U$. The maps $W_{jk}\\to W_j\\xrightarrow{c_j}U_{a(j)}$ with the index map $(j,k)\\mapsto a(j)$ form a morphism of coverings $f:\\mathcal V\\to\\mathcal U$ over $\\mathrm{id}_U$, and likewise $f':\\mathcal V\\to\\mathcal U'$ via $c'_j$ [def-weil-pbc-site-plus-construction] (b); by functoriality of $\\mathcal F$, $(f^*t)_{(j,k)}=t_{a(j)}|_{W_{jk}}=x_j|_{W_{jk}}=x'_j|_{W_{jk}}=(f'^*t')_{(j,k)}$. Hence $f^*t=f'^*t'$, and by [lem-weil-pbc-site-plus-construction-presheaf] (2) $s=[\\mathcal U,t]=[\\mathcal U',t']=s'$. So $\\mathcal F^+$ is separated.",
+   "text": "Use Mathlib GrothendieckTopology.Plus.sep for the generated covering sieve associated to a ZeroHypercover. Each sieve arrow factors through a hypercover arrow by Sieve.mem_ofArrows_iff, and functoriality converts the given equalities into equality on every sieve arrow.",
    "uses": [
-    "lem-weil-pbc-site-plus-construction-presheaf",
-    "lem-weil-pbc-site-coverings-common-refinement",
-    "def-weil-pbc-sites-and-cohomology",
     "def-weil-pbc-site-plus-construction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Theorem 00WB, proof of (1) (with Lemma 00W6 for the common refinement and Lemma 00W9 for $s|_{W_j}=\\theta(s_j)$)"
+    "document": "Mathlib.CategoryTheory.Sites.ConcreteSheafification",
+    "place": "GrothendieckTopology.Plus.sep"
    }
   },
   {
-   "text": "(A separated presheaf injects into its plus construction.) Let $\\mathcal G$ be a separated presheaf of sets on $\\mathcal C$ and $a,b\\in\\mathcal G(U)$ with $\\theta_{\\mathcal G,U}(a)=\\theta_{\\mathcal G,U}(b)$, i.e. $[\\{\\mathrm{id}_U\\},a]=[\\{\\mathrm{id}_U\\},b]$ [def-weil-pbc-site-plus-construction] (c). By [lem-weil-pbc-site-plus-construction-presheaf] (2) there is a covering $\\{V_k\\to U\\}_{k\\in K}$ with $a|_{V_k}=b|_{V_k}$ for all $k$, i.e. $a$ and $b$ have the same image in $\\prod_k\\mathcal G(V_k)$. Since $\\mathcal G$ is separated (definition in the statement), $a=b$. Thus $\\theta_{\\mathcal G,U}$ is injective for every $U$.",
-   "uses": [
-    "lem-weil-pbc-site-plus-construction-presheaf",
-    "def-weil-pbc-site-plus-construction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Theorem 00WB, proof of (2), first sentence (the maps $\\mathcal F(U)\\to H^0(\\mathcal U,\\mathcal F)$ are injective for $\\mathcal F$ separated), Definition 00WA"
-   }
-  },
-  {
-   "text": "(Part (2).) $\\mathcal F^+$ is a presheaf of sets [lem-weil-pbc-site-plus-construction-presheaf] (4), separated by the first step; the second step applied to $\\mathcal G=\\mathcal F^+$ shows that $\\theta_{\\mathcal F^+}:\\mathcal F^+\\to(\\mathcal F^+)^+=\\mathcal F^{++}$ is injective on every object.",
+   "text": "Apply the equality criterion from the plus-construction presheaf lemma to injectivity of toPlus on plusObj P, then use the separatedness result from the first step.",
    "uses": [
     "lem-weil-pbc-site-plus-construction-presheaf"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Theorem 00WB, parts (1) and (2)"
+    "document": "Mathlib.CategoryTheory.Sites.ConcreteSheafification and lean/Sheaf/CategoryTheory/Sites/SitePlusConstructionPresheaf",
+    "place": "Plus.inj_of_sep pattern and plus_construction_presheaf"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-site-plus-construction",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-coverings-common-refinement",
   "lem-weil-pbc-site-plus-construction-presheaf"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Sites, Theorem 00WB (theorem-plus), proofs of (1) and (2)"
+  "by": "mathlib and library",
+  "document": "Mathlib.CategoryTheory.Sites.ConcreteSheafification; lean/Sheaf/CategoryTheory/Sites/SitePlusConstructionPresheaf",
+  "place": "Plus.sep and equality criterion"
  },
  "mathlib_searches": [
   {
@@ -177,5 +160,15 @@
   "group": "T1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T044741-L-2034138",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
