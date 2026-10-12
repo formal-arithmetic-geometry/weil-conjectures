@@ -14,10 +14,31 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-flat resolution P representing E and a complex N representing F. The canonical derived tensor is isomorphic to Q(Tot(P tensor N)) by its K-flat construction. Apply the tensor clause of derivedPullback_tensor_preserve_QCoh with the identity morphism of X, and transport quasi-coherence along this comparison: homology preserves isomorphisms and quasi-coherence is invariant under sheaf isomorphisms.",
+   "text": "Use essential surjectivity of DerivedCategory.Q to choose complexes M and N representing E and F. Apply CochainComplex.exists_isKFlatResolution to M, obtaining a K-flat complex P and a quasi-isomorphism f:P→M. Localization turns f into an isomorphism Q(P)≅E. Transport the given quasi-coherent cohomology of E and F along these representing isomorphisms, using the homology functors and isomorphism-invariance of quasi-coherence.",
    "uses": [
-    "lem-pc-derived-pullback-tensor-qcoh",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution"
+   }
+  },
+  {
+   "text": "Apply kFlat_derivedTensor_comparison_natIso to the constant functors at P and N from the one-object discrete category. Its component identifies Q(P) tensor-derived Q(N) with Q(Tot(P tensor N)), for the recorded canonical derived monoidal structure. Compose with the tensor of the representing isomorphisms to identify E tensor-derived F with that quotient.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 06YH, definition-derived-tor"
+   }
+  },
+  {
+   "text": "Apply the tensor clause of derivedPullback_tensor_preserve_QCoh with the identity morphism of X to P and N. For every integer degree, map the inverse tensor comparison through the homology functor and transport quasi-coherence of the total tensor quotient to E tensor-derived F.",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-qcoh"
    ],
    "elementary": false,
    "source": {
@@ -27,13 +48,14 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-pullback-tensor-qcoh",
-  "def-pc-scheme-derived-tensor-structure"
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-pc-derived-pullback-tensor-qcoh"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08DX, lemma-quasi-coherence-tensor-product; proof reconstructed from the recorded interfaces"
+  "place": "Tag 08DX, lemma-quasi-coherence-tensor-product"
  },
  "mathlib_searches": [
   {
@@ -105,10 +127,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T112833-L-765270",
-  "kind": "interface",
+  "landing": "20261012T135250-L-1676284",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
