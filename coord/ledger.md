@@ -8507,3 +8507,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:08 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses (stage 3; reviewer PASS; first push; landing 20261012T160833-L-2613488 (interface); batch 20261012T160822; modules 3; new nodes 2)
 - 16:08 L: merged deliver/Y3/Sheaf.Algebra.Homology.ZigzagZeroComponentBoundary (stage 3; reviewer PASS; first push; landing 20261012T160834-L-2613591 (proof); batch 20261012T160822; modules 1; new nodes 0)
 - 16:08 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.DerivedLocalizationTensorComparison (stage 3; reviewer PASS; first push; landing 20261012T160834-L-2613688 (proof); batch 20261012T160822; modules 1; new nodes 0)
+- 16:09 L: returned deliver/G3/Sheaf.Topology.ConstantSubsheafNormalizedCore (reviewer RETURN: (reviewer X-ed6e7, head ed6e79a17) E2: `constantSubsheaf_normalized_sections_compatibility` is false. Take X a one-point)
