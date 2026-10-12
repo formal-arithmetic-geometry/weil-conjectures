@@ -15,59 +15,45 @@
  },
  "proof": [
   {
-   "text": "*The functor $u$.* For an open subscheme $U\\subseteq X$ the inclusion $U\\hookrightarrow X$ is an open immersion, hence etale, so it is an object of $X_{\\Et}$; for opens $W\\subseteq U\\subseteq X$ the inclusion $W\\hookrightarrow U$ is an $X$-morphism and a morphism of $X_{\\Et}$ [lem-weil-pbc-open-immersion-etale]. The morphisms of $X_{\\rm Zar}$ [def-sc-zariski-site] are the inclusions $W\\subseteq U$, so there is at most one morphism between two objects; $u$ sends $W\\subseteq U$ to the inclusion morphism $W\\hookrightarrow U$. The inclusion of $U$ in itself goes to $\\mathrm{id}_U$ and the composite of the inclusions $V\\subseteq W\\subseteq U$ goes to the composite $V\\hookrightarrow W\\hookrightarrow U$, which is the inclusion $V\\hookrightarrow U$; so $u:X_{\\rm Zar}\\to X_{\\Et}$ [def-weil-pbc-etale-site] is a functor.",
+   "text": "Lift X.restrictFunctor to X.Etale using the Mathlib instance that open immersions are etale. The lifted functor forgets definitionally to X.restrictFunctor; functor laws are inherited by MorphismProperty.Comma.lift.",
    "uses": [
     "lem-weil-pbc-open-immersion-etale",
     "def-sc-zariski-site",
     "def-weil-pbc-etale-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma Tag 02GP (lemma-open-immersion-etale, line 8236)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Finite limits in $X_{\\rm Zar}$.* In $X_{\\rm Zar}$ [def-sc-zariski-site] every open $U$ has exactly one morphism $U\\to X$ (the inclusion $U\\subseteq X$), so $X$ is a final object. For morphisms $V\\subseteq U\\supseteq W$, the open $V\\cap W$ with its inclusions into $V$ and $W$ is a fibre product $V\\times_UW$: an open $T$ admits morphisms $T\\to V$ and $T\\to W$ (necessarily compatible over $U$, since there is at most one morphism $T\\to U$) iff $T\\subseteq V$ and $T\\subseteq W$, iff $T\\subseteq V\\cap W$, and then the morphism $T\\to V\\cap W$ is unique. In particular for $T\\subseteq U$ and $U_i\\subseteq U$ one has $T\\times_UU_i=T\\cap U_i$.",
+   "text": "An etale X-scheme T has open image in X by lem-weil-pbc-etale-morphism-open-map (Mathlib Scheme.Hom.isOpenMap). Sending T to this image and an X-morphism to the induced containment defines etaleImage: X.Etale -> X.Opens. For any open U, an inclusion image(T) <= U gives a unique X-morphism T -> U by IsOpenImmersion.lift; conversely such a morphism puts the image in U. The two maps are inverse: containment proofs are subsingletons and morphisms agree after composition with the monomorphism U -> X. Naturality follows by the same monomorphism cancellation. Thus etaleImage is left adjoint to the inclusion.",
    "uses": [
-    "def-sc-zariski-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Proposition Tag 00X6 (proposition-get-morphism, line 2827), hypotheses (1) and (2), checked for $\\mathcal C=X_{\\rm Zar}$ (written by an agent: 09AX states no verification)"
-   }
-  },
-  {
-   "text": "*$u$ preserves the final object and fibre products (clause (2)).* By [lem-weil-pbc-etale-base-change-finite-limits] (clause 2, for the base $V=X$) $\\mathrm{id}_X:X\\to X$ is a final object of $X_{\\Et}$, and for morphisms $W_1\\to W\\leftarrow W_2$ of $X_{\\Et}$ the scheme-theoretic fibre product $W_1\\times_WW_2$, with its map to $X$, is a fibre product in $X_{\\Et}$. Hence $u(X)=(X\\xrightarrow{\\mathrm{id}}X)$ is final. Let $V,W\\subseteq U$ be opens of $X$ and $f:V\\to U$ the inclusion. By [lem-weil-pbc-open-preimage-fibre-product], applied to $f$ and the open subscheme $W\\subseteq U$, the open subscheme $f^{-1}(W)=V\\cap W$ of $V$, with its inclusion into $V$ and the restriction $f|_{V\\cap W}:V\\cap W\\to W$ (the inclusion), is a fibre product $V\\times_UW$ of schemes [def-pc-fibre-product]. So the two cones $u(V\\cap W)$ (with the inclusions, which are $u$ of the projections of step 2) and $u(V)\\times_{u(U)}u(W)$ (the chosen scheme fibre product) are both limit cones of the same diagram of schemes, and the canonical morphism $c:u(V\\cap W)\\to u(V)\\times_{u(U)}u(W)$ (the one compatible with the projections) is an isomorphism of schemes by uniqueness of limits up to unique isomorphism. Both cones lie over $X$ through $U\\hookrightarrow X$, so $c$ and $c^{-1}$ are $X$-morphisms, and $c$ is an isomorphism in $X_{\\Et}$, whose morphisms are the $X$-morphisms [def-weil-pbc-etale-site]. Thus $u$ commutes with the fibre products of step 2.",
-   "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-sc-zariski-site",
     "def-weil-pbc-etale-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Lemma Tag 01JR (lemma-open-fibre-product, line 3197); topologies.tex Lemma Tag 021D (lemma-fibre-products-etale, line 946)"
-   }
-  },
-  {
-   "text": "*$u$ is continuous (clause (1)).* Let $\\{U_i\\subseteq U\\}_{i\\in I}$ be a covering of $X_{\\rm Zar}$, i.e. opens $U_i\\subseteq U$ with $\\bigcup_iU_i=U$ [def-sc-zariski-site]. (a) Each $u(U_i)\\to u(U)$ is the inclusion $U_i\\hookrightarrow U$, a morphism of $X_{\\Et}$ by step 1, i.e. an etale morphism over $X$; the family is jointly surjective onto $U$ because the $U_i$ cover $U$. So $\\{u(U_i)\\to u(U)\\}_{i\\in I}$ is a covering of $X_{\\Et}$ [def-weil-pbc-etale-site]. (b) For a morphism $T\\subseteq U$ of $X_{\\rm Zar}$, $T\\times_UU_i=T\\cap U_i$ (step 2) and the canonical morphism $u(T\\cap U_i)\\to u(T)\\times_{u(U)}u(U_i)$ is an isomorphism by step 3 (with $V=T$, $W=U_i$). These are conditions (a) and (b) of [def-weil-pbc-sites-and-cohomology] (3) (Sites, Definition 00WV), so $u$ is continuous.",
-   "uses": [
-    "def-sc-zariski-site",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Definition Tag 00WV (definition-continuous, line 2524)"
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 03WT (etale morphisms are open); the factorization through an open subscheme is the open-immersion universal property"
    }
   },
   {
-   "text": "Finite-limit preservation implies representable flatness by flat_of_preservesFiniteLimits: StructuredArrow T i has finite limits, hence is cofiltered.",
+   "text": "Use the right-adjoint limit-preservation instance from Mathlib.CategoryTheory.Adjunction.Limits to obtain PreservesFiniteLimits i. Apply IsTerminal.isTerminalObj to isTerminalTop to obtain terminality of i(top). Since X.Opens has finite limits, flat_of_preservesFiniteLimits i gives RepresentablyFlat i.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Present a covering sieve S on U as Sieve.ofArrows V f. By Sieve.functorPushforward_ofArrows its image is generated by the maps i(f_j). The criterion ofArrows_mem_smallEtaleTopology_iff reduces covering to joint surjectivity. For x in U, the Zariski covering condition gives a member W -> U of S containing x. Its factorization through some f_j gives x in V_j. The point of V_j with underlying point x maps to x by Scheme.homOfLE_apply. This works for every covering sieve, including the empty covering of the empty open.",
+   "uses": [
+    "def-sc-zariski-site",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Functor.isContinuous_iff_coverPreserving with the representable-flatness instance and the covering proof. Package the inclusion, its definitional forgetful equality, finite-limit preservation, terminality, continuity and flatness into the required existential conjunction.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
    "elementary": true
   }
  ],
@@ -75,15 +61,13 @@
   "lem-weil-pbc-open-immersion-etale",
   "def-sc-zariski-site",
   "def-weil-pbc-etale-site",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-morphism-open-map",
   "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
-  "by": "S1 stage 3 second reading",
+  "by": "U2 stage 3 worker",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 00X6 and 00X5"
+  "place": "Tags 00X6 and 00X5; finite-limit comparison supplied by the open-image adjunction, using Morphisms Tag 03WT"
  },
  "mathlib_searches": [
   {
@@ -159,10 +143,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T053953-L-2645445",
-  "kind": "interface",
+  "landing": "20261012T063522-L-3160766",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
