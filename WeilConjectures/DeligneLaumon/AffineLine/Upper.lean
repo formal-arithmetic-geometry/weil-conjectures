@@ -59,44 +59,56 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
+namespace WeilSheaf
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+  {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+
+/-- Pullbacks of Weil sheaves along equal morphisms are isomorphic. Stating this for an equation
+of morphisms keeps the kernel from unfolding `WeilSheaf.upperStar` when two instances of
+`Scheme.Hom.IsOver` differ; the instances are implicit arguments, so that they are found by
+unification. -/
+noncomputable def upperStarCongr {φ ψ : X ⟶ Y} {_ : φ.IsOver (Spec (CommRingCat.of k₀))}
+    {_ : ψ.IsOver (Spec (CommRingCat.of k₀))} (h : φ = ψ) :
+    upperStar (k₀ := k₀) (l := l) φ ≅ upperStar ψ :=
+  eqToIso (by subst h; rfl)
+
+end WeilSheaf
+
 namespace WeilSheaf.LisseOnDenseOpen
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- **Degree one of the affine-line estimate.** If `F` is lisse on the dense open `U₀ ⊆ 𝔸¹`,
-punctually `ι`-pure of weight `w` and unramified at infinity, then `H_c^1(𝔸¹, j_*F)` has weights
-at most `w + 1`. Write `F ≅ j'^* G` for a lisse `G` on an open `W ⊆ ℙ¹` containing `∞`; by
-`hasWeightsAtMostOver_compactlySupportedCohomology_one_of_upperStar` it suffices to treat
-`N = j'^* M` for `M` irreducible lisse on `W`. Such an `N` is irreducible and unramified at
-infinity; it is either geometrically constant, hence a constant twist with `H_c^1 = 0`, or it is
-covered by `hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity`.
-(blueprint: `thm-a1-line-middle-extension-upper`) -/
-theorem hasWeightsAtMostOver_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
-    (D : LisseOnDenseOpen k₀ l) (hinf : D.IsUnramifiedAtInfinity) {w : ℝ}
+/-- The datum `D` with another lisse sheaf `G` on `U₀` is unramified at infinity if and only if
+`G` is. -/
+theorem isUnramifiedAtInfinity_withSheaf_iff (D : LisseOnDenseOpen k₀ l)
+    (G : WeilSheaf k₀ l D.U) (hG : G.IsLisse) :
+    (D.withSheaf G hG).IsUnramifiedAtInfinity ↔ G.IsUnramifiedAtInfinity D.j :=
+  Iff.rfl
+
+/-- Degree one of the affine-line estimate, for a sheaf `F ≅ j'^* G` restricted from a lisse
+sheaf `G` on an open `W ⊆ ℙ¹` containing `∞`, along the open immersion `j' : U₀ ⟶ W`. -/
+theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_iso_upperStar
+    (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l)
+    (W : (ProjectiveLine (Spec (CommRingCat.of k₀))).Opens)
+    (hW : ProjectiveLine.affineChart (Spec (CommRingCat.of k₀)) ⁻¹ᵁ W = D.j.opensRange)
+    (hWtop : (ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))).opensRange ⊔ W = ⊤)
+    (j' : D.U ⟶ W) [j'.IsOver (Spec (CommRingCat.of k₀))]
+    (hj' : j' ≫ W.ι = D.j ≫ ProjectiveLine.affineChart (Spec (CommRingCat.of k₀)))
+    (G : WeilSheaf k₀ l W) (hG : G.IsLisse) (e : (upperStar j').obj G ≅ D.sheaf) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
     (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
   obtain ⟨ψ, hψ⟩ := AddChar.exists_ne_one_of_isAlgClosed k₀ (PadicAlgCl l) (by
     rw [ringChar.eq_zero]
     exact (CharP.ringChar_ne_zero_of_finite k₀).symm)
-  obtain ⟨W, hW, hWtop, G, hG, ⟨e⟩⟩ := hinf
-  have hrange : Set.range (D.j ≫ ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))) ⊆ Set.range W.ι := by
-    rintro _ ⟨x, rfl⟩
-    rw [Scheme.Opens.range_ι]
-    have hx := D.j.mem_opensRange.2 ⟨x, rfl⟩
-    rw [← hW] at hx
-    exact hx
-  set j' := IsOpenImmersion.lift W.ι (D.j ≫ ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))) hrange
-  have hj' : j' ≫ W.ι = D.j ≫ ProjectiveLine.affineChart (Spec (CommRingCat.of k₀)) := IsOpenImmersion.lift_fac _ _ _
   have : IsOpenImmersion j' := by
     have : IsOpenImmersion (j' ≫ W.ι) := hj' ▸ inferInstance
     exact IsOpenImmersion.of_comp j' W.ι
-  have : j'.IsOver (Spec (CommRingCat.of k₀)) := ⟨by
-    rw [← Scheme.Opens.ι_comp_over, ← Category.assoc, hj', Category.assoc,
-      ProjectiveLine.affineChart_over, comp_over]⟩
   have : Nonempty D.U := by
     have : Nonempty (affineLine k₀) := ⟨affineLine.origin k₀⟩
     exact (D.isDominant.denseRange.nonempty_iff).2 inferInstance
-  have hWne : (W : Set (ProjectiveLine (Spec (CommRingCat.of k₀)))).Nonempty := ⟨_, (j' (Classical.arbitrary D.U)).2⟩
+  have hWne : (W : Set (ProjectiveLine (Spec (CommRingCat.of k₀)))).Nonempty :=
+    ⟨_, (j' (Classical.arbitrary D.U)).2⟩
   have : GeometricallyIrreducible (W.toScheme ↘ Spec (CommRingCat.of k₀)) := by
     rw [← Scheme.Opens.ι_comp_over]
     exact ProjectiveLine.geometricallyIrreducible_opens k₀ W hWne
@@ -134,9 +146,30 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one (ι : PadicAlgCl l
       LisseOnDenseOpen.subsingleton_compactlySupportedCohomology_one_of_iso_constantTwist
         (D.withSheaf ((upperStar j').obj M) (ProEtale.IsAdicLisseSheaf.upperStar _ hM.1)) e'
     exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _ _ _
-  · exact hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity ψ ι hψ
+  · -- state the condition at infinity over `D.U`, where all terms agree syntactically
+    have hinfM : ((upperStar j').obj M).IsUnramifiedAtInfinity D.j :=
+      ⟨W, hW, hWtop, M, hM.1, ⟨(upperStarCongr (by
+        rw [← cancel_mono W.ι, IsOpenImmersion.lift_fac, hj'])).app M⟩⟩
+    exact hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity ψ ι hψ
       (D.withSheaf ((upperStar j').obj M) (ProEtale.IsAdicLisseSheaf.upperStar _ hM.1)) hN
-      ⟨W, hW, hWtop, M, hM.1, ⟨Iso.refl _⟩⟩ hc hMw
+      ((isUnramifiedAtInfinity_withSheaf_iff _ _ _).2 hinfM) hc hMw
+
+/-- **Degree one of the affine-line estimate.** If `F` is lisse on the dense open `U₀ ⊆ 𝔸¹`,
+punctually `ι`-pure of weight `w` and unramified at infinity, then `H_c^1(𝔸¹, j_*F)` has weights
+at most `w + 1`. Write `F ≅ j'^* G` for a lisse `G` on an open `W ⊆ ℙ¹` containing `∞`; by
+`hasWeightsAtMostOver_compactlySupportedCohomology_one_of_upperStar` it suffices to treat
+`N = j'^* M` for `M` irreducible lisse on `W`. Such an `N` is irreducible and unramified at
+infinity; it is either geometrically constant, hence a constant twist with `H_c^1 = 0`, or it is
+covered by `hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity`.
+(blueprint: `thm-a1-line-middle-extension-upper`) -/
+theorem hasWeightsAtMostOver_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
+    (D : LisseOnDenseOpen k₀ l) (hinf : D.IsUnramifiedAtInfinity) {w : ℝ}
+    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
+    (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
+  obtain ⟨W, hW, hWtop, G, hG, ⟨e⟩⟩ := hinf
+  -- `upperStarCongr` with a postponed proof makes the kernel compare syntactically equal pullbacks
+  exact hasWeightsAtMostOver_compactlySupportedCohomology_one_of_iso_upperStar ι D W hW hWtop _
+    (IsOpenImmersion.lift_fac _ _ _) G hG ((upperStarCongr (by rfl)).app G ≪≫ e) hw
 
 /-- Let `j : U₀ ↪ 𝔸¹_{k₀}` be a dense open immersion and let `F` be a lisse Weil sheaf on `U₀`,
 punctually `ι`-pure of weight `w` and unramified at infinity. Then `H_c^r(𝔸¹, j_*F)` has
@@ -165,8 +198,9 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_directImage (ι : PadicAlg
         subsingleton_compactlySupportedCohomology_directImage D.j D.sheaf D.lisse
         (Or.inr hr)
       exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _ _ _
-    · exact_mod_cast (AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two
-        D.j D.sheaf ι D.lisse hw).hasWeightsAtMostOver
+    · exact_mod_cast
+        (AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two
+          D.j D.sheaf ι D.lisse hw).hasWeightsAtMostOver
 
 /-- In degree zero the compactly supported cohomology of `j_*F` on the line vanishes.
 (blueprint: `sk-thm-dl-a1-upper`) -/
