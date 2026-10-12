@@ -7,7 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import Sheaf.AlgebraicGeometry.EtaleInverseImageScalarDistributivity
+import Sheaf.AlgebraicGeometry.EtaleInverseImageScalarAssociativity
+import Mathlib.Algebra.Module.MinimalAxioms
 /-! # Transporting modules through the etale inverse image
 
 Source: Stacks Project, Tags 03D1 and 03D2
@@ -121,6 +123,62 @@ theorem etaleInverseImageModuleActionLaws (U V : Scheme.{u}) (f : U ⟶ V)
           ((prod.fst : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj A) ⟶
             FrU.obj (Lr.obj O)).hom.app W x : OR.obj.obj W)
           ((prod.snd : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj A) ⟶
-            FaU.obj A).hom.app W x : A.obj.obj W) = mu.hom.app W x := by sorry
+            FaU.obj A).hom.app W x : A.obj.obj W) = mu.hom.app W x := by
+  dsimp only
+  intro Lr ar er ea h G
+  have hadd := etaleInverseImageScalarDistributivity U V f O Lr ar er ea h G
+    (etaleModuleScalarAction V O G) (by intro W x; rfl)
+  have hmul := etaleInverseImageScalarAssociativity U V f O Lr ar er ea h G
+    (etaleModuleScalarAction V O G) (by intro W x; rfl)
+  let A := (Etale.upperStar AddCommGrpCat.{u + 1} f).obj
+    ((SheafOfModules.toSheaf.{u + 1} _).obj G)
+  let mu := prod.map (er.hom.app O)
+      (ea.hom.app ((SheafOfModules.toSheaf.{u + 1} _).obj G)) ≫
+    inv (prodComparison (Scheme.etaleSetPullback f)
+      ((sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology).obj O)
+      ((sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology).obj
+        ((SheafOfModules.toSheaf.{u + 1} _).obj G))) ≫
+    (Scheme.etaleSetPullback f).map (etaleModuleScalarAction V O G) ≫
+      ea.inv.app ((SheafOfModules.toSheaf.{u + 1} _).obj G)
+  let FrU := sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology
+  let FaU := sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology
+  let e : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj A) ≅
+      MonoidalCategory.tensorObj (FrU.obj (Lr.obj O)) (FaU.obj A) :=
+    (limit.isLimit _).conePointUniqueUpToIso
+      (CartesianMonoidalCategory.tensorProductIsBinaryProduct _ _)
+  let m : ∀ W : U.Etaleᵒᵖ, Module ((Lr.obj O).obj.obj W) (A.obj.obj W) := fun W ↦ by
+    let : SMul ((Lr.obj O).obj.obj W) (A.obj.obj W) :=
+      ⟨fun r x ↦ (e.inv ≫ mu).hom.app W (r, x)⟩
+    exact Module.ofMinimalAxioms (hadd W).1 (hadd W).2 (hmul W).1 (hmul W).2
+  refine ⟨m, ?_⟩
+  intro W x
+  change (e.inv ≫ mu).hom.app W
+      (((prod.fst : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj A) ⟶
+        FrU.obj (Lr.obj O)).hom.app W x),
+       ((prod.snd : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj A) ⟶
+        FaU.obj A).hom.app W x)) = mu.hom.app W x
+  have hf : e.hom ≫ CartesianMonoidalCategory.fst _ _ =
+      (prod.fst : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj A) ⟶ FrU.obj (Lr.obj O)) := by
+    exact IsLimit.conePointUniqueUpToIso_hom_comp
+      (limit.isLimit (pair (FrU.obj (Lr.obj O)) (FaU.obj A)))
+      (CartesianMonoidalCategory.tensorProductIsBinaryProduct _ _) ⟨WalkingPair.left⟩
+  have hs : e.hom ≫ CartesianMonoidalCategory.snd _ _ =
+      (prod.snd : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj A) ⟶ FaU.obj A) := by
+    exact IsLimit.conePointUniqueUpToIso_hom_comp
+      (limit.isLimit (pair (FrU.obj (Lr.obj O)) (FaU.obj A)))
+      (CartesianMonoidalCategory.tensorProductIsBinaryProduct _ _) ⟨WalkingPair.right⟩
+  have hp : (e.hom.hom.app W x) =
+      (((prod.fst : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj A) ⟶
+        FrU.obj (Lr.obj O)).hom.app W x),
+       ((prod.snd : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj A) ⟶
+        FaU.obj A).hom.app W x)) := by
+    apply Prod.ext
+    · exact ConcreteCategory.congr_hom (C := Type (u + 1))
+        (congrArg (fun k ↦ k.hom.app W) hf) x
+    · exact ConcreteCategory.congr_hom (C := Type (u + 1))
+        (congrArg (fun k ↦ k.hom.app W) hs) x
+  rw [← hp]
+  exact ConcreteCategory.congr_hom (C := Type (u + 1))
+    (congrArg (fun k ↦ k.hom.app W) (e.hom_inv_id_assoc mu)) x
 
 end AlgebraicGeometry
