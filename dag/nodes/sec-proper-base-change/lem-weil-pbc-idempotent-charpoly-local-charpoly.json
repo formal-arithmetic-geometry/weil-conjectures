@@ -12,21 +12,28 @@
  ],
  "proof": [
   {
-   "text": "Reindex the ambient module by Fin (card n). Apply [lem-weil-pbc-idempotent-endomorphism-image-base-change] to P and 1-P to obtain complementary finite projective images and their base-change identifications.",
-   "uses": [
-    "lem-weil-pbc-idempotent-endomorphism-image-base-change"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [lem-weil-pbc-finite-projective-standard-free-cover] to both images. Refine the two finite standard covers by all pairwise products. The products span the unit ideal because the product of two expressions for 1 in the original spans is an expression for 1 in the product span. Localizing further preserves freeness and the split decomposition.",
+   "text": "Reindex by Fin (card n) and let p be the linear endomorphism represented by P. Idempotence makes its range a split summand: its subtype and the codomain restriction of p compose to identity. Thus its range is finite projective. Apply [lem-weil-pbc-finite-projective-standard-free-cover] to this one image, obtaining a finite unit-ideal standard cover on which its localized module is finite free. No cover of the complementary image or pairwise refinement is needed.",
    "uses": [
     "lem-weil-pbc-finite-projective-standard-free-cover"
    ],
    "elementary": false
   },
   {
-   "text": "On each refined localization, concatenate finite bases of the two images. The commuting equation makes T preserve both images, so P is diag(1,0) and T is diag(U,V). The polynomial matrix from [def-weil-pbc-idempotent-charpoly] is then diag(X-U,1). Determinants commute with ring maps and basis change, and the determinant of this block matrix is U.charpoly. Enumerate the cover by Fin r; the size of U can vary by cover member. Over the zero ring or an empty ambient matrix the equality is immediate with d=0.",
+   "text": "For each member of the cover apply [lem-weil-pbc-idempotent-endomorphism-image-base-change]. Its tensor-to-image equivalence, composed with Mathlib IsLocalizedModule.isBaseChange.equiv, identifies the localized original image with the range of the entrywise localized projector. Transfer finite freeness across this equivalence. In a nonzero localization choose Module.finBasis of this range.",
+   "uses": [
+    "lem-weil-pbc-idempotent-endomorphism-image-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The basis coordinates of the projector range give rectangular matrices Q and R for its inclusion and projection, with QR=P and RQ=1. For C denoting entrywise constant polynomials, set Qc=C(Q), Rc=C(R). Rewrite the defining determinant in [def-weil-pbc-idempotent-charpoly] as det(1+((X-T-1)Qc)Rc). Mathlib Matrix.det_one_add_mul_comm makes this det(1+Rc((X-T-1)Qc)). Since Rc Qc=1 and Rc commutes with the rectangular scalar X, its matrix is X-C(RTQ); its determinant is (RTQ).charpoly. These equalities are the proved private idempotentCharpoly_retract helper. The formula works even without TP=PT.",
+   "uses": [
+    "def-weil-pbc-idempotent-charpoly"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib Matrix.det_reindexAlgEquiv directly to the defining polynomial matrix to identify the determinant after reindexing by Fin (card n). Apply Mathlib RingHom.map_det directly to Polynomial.mapRingHom of the localization map; its preservation of addition, subtraction, identity, multiplication, and constant polynomials, together with Matrix.charmatrix_map, identifies the localized determinant with the determinant of the localized matrices. No separate mapping or reindexing theorem is declared. Take U_i=R_i T_i Q_i and d_i equal to the finite basis size. If a localization is the zero ring, take d_i=0 and U_i=0; all polynomials there are equal. Empty ambient index sets are covered by the same construction. The original cover already spans the unit ideal.",
    "uses": [
     "def-weil-pbc-idempotent-charpoly"
    ],
@@ -40,9 +47,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "name": "R2 second reader",
+  "name": "T2 stage-3 worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 09XI, local determinant calculation of the two complementary finite projective images"
+  "place": "Tag 09XI, local finite-projective image; rectangular determinant compression via Mathlib Matrix.det_one_add_mul_comm instead of complementary-basis diagonalization; repair: reuse general Mathlib determinant functoriality and reindexing directly, removing duplicate private helper declarations"
  },
  "mathlib_searches": [
   {
@@ -115,10 +122,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T112849-L-771463",
-  "kind": "interface",
+  "landing": "20261012T151914-L-2290758",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
