@@ -1,0 +1,238 @@
+{
+ "id": "lem-weil-pbc-gabber-h0-finite-section",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Tag 0A0C proof invoking 09ZF; inside 09ZF, construction of s′ by local representatives, finite refinement and Zariski gluing",
+   "via": [
+    "lem-weil-pbc-gabber-h0-finite-lift",
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "GabberH0FiniteSection",
+ "statement": "Let $X$ be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], and let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion]. Suppose that for every sheaf of sets $G$ on the underlying Zariski space of $X$, the canonical restriction $\\Gamma(X,G)\\to\\Gamma(Z,i^{-1}_{\\mathrm{Zar}}G)$ is bijective, with topological inverse image as in [def-weil-pbc-topological-inverse-image]. Suppose also that for every finite morphism $h:X'\\to X$ [def-weil-finite-integral-morphism], the same assertion holds for the base-changed closed immersion $i':Z'=Z\\times_XX'\\to X'$ and every Zariski sheaf of sets on $X'$. For every sheaf of sets $F$ on $X_{\\rm et}$ [def-weil-pbc-etale-sheaf-of-sets] and every $t\\in\\Gamma(Z,i^{-1}_{\\rm et}F)$, there exist a finite surjective $h:X\\prime\\to X$ [def-weil-finite-integral-morphism, def-weil-surjective-morphism] and $s\\prime\\in\\Gamma(X\\prime,h^{-1}_{\\rm et}F)$ such that, with $Z\\prime=Z\\times_X X\\prime$, $h_Z:Z\\prime\\to Z$ and $i\\prime:Z\\prime\\to X\\prime$, $c_{i,h_Z}(h_Z^*t)=c_{h,i\\prime}(i\\prime^*s\\prime)$ after transport along $h_Z\\circ i=i\\prime\\circ h$ [def-pc-fibre-product, lem-weil-pbc-sets-etale-inverse-image-composition-units]. No equality of the two projection pullbacks is asserted.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-surjective-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof": [
+  {
+   "text": "For e:T→S, write e^*s for the adjunction unit applied to a section, and use the unit-compatible composition comparisons to identify iterated inverse images with the composite inverse image. Write Z′ = Z ×_X X′, h_Z = pullback.fst i h and i′ = pullback.snd i h. The latter is a closed immersion by base change.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09ZF, proof, third paragraph (notation i^{-1}s) and fourth paragraph (Z' = X' x_X Z, i' the base change of i)"
+   }
+  },
+  {
+   "text": "*Every nonempty closed subset $T\\subseteq X$ meets $i(Z)$* (source, fourth paragraph: 'by assumption (1) applied to the sheaf $(T\\to X)_*\\underline{\\mathbf Z}$'; we use the two-element set). Let $T\\subseteq X$ be closed and nonempty and suppose $T\\cap i(Z)=\\emptyset$. Let $\\mathcal L$ be the sheaf of sets $W\\mapsto\\{$locally constant maps $W\\cap T\\to\\{0,1\\}\\}$ on $X$ [lem-weil-pbc-closed-pushforward-constant-stalks] (0). The constant maps $0,1\\in\\mathcal L(X)$ are different since $T\\neq\\emptyset$. For $z\\in Z$ the stalk $(i^{-1}_{\\rm Zar}\\mathcal L)_z$ is in bijection with $\\mathcal L_{i(z)}$ [lem-weil-pbc-sets-inverse-image-stalk], which has exactly one element because $i(z)\\notin T$ [lem-weil-pbc-closed-pushforward-constant-stalks] (b). Hence $\\eta^{\\rm Zar}_X(0)$ and $\\eta^{\\rm Zar}_X(1)$ have the same germ at every point of $Z$ and are equal [lem-weil-pbc-sheaf-sections-determined-by-germs], contradicting the bijectivity of $\\Gamma(X,\\mathcal L)\\to\\Gamma(Z,i^{-1}_{\\rm Zar}\\mathcal L)$ in hypothesis (1). So $T\\cap i(Z)\\neq\\emptyset$.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-constant-stalks",
+    "lem-weil-pbc-sets-inverse-image-stalk",
+    "lem-weil-pbc-sheaf-sections-determined-by-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09ZF, proof, fourth paragraph: 'Observe that every nonempty closed subscheme T of X meets Z by assumption (1)'"
+   }
+  },
+  {
+   "text": "*Local form of a section of $i^{-1}F$* (source: 'By construction of $i^{-1}_{small}\\mathcal F$'). Let $t\\in\\Gamma(Z,i^{-1}F)$. Write $i^{-1}F=(i_pF)^\\#$ with $i_pF(V)=\\varinjlim_{(U,\\varphi)\\in\\mathcal I_V^{op}}F(U)$, $\\mathcal I_V$ the pairs of $U$ etale over $X$ and a $Z$-morphism $\\varphi:V\\to U\\times_XZ$, with coprojections $\\iota_{(U,\\varphi)}$ and sheafification map $\\theta$ [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] (2), for the functor $U\\mapsto U\\times_XZ$ of [lem-weil-pbc-etale-base-change-finite-limits] (1). By [lem-weil-pbc-site-sheafification-sections-local] there are an etale covering $\\{V_j\\to Z\\}_{j\\in J}$ and $\\sigma_j\\in i_pF(V_j)$ with $t|_{V_j}=\\theta(\\sigma_j)$. The category $\\mathcal I_{V_j}^{op}$ is filtered [lem-weil-pbc-presheaf-pullback-sets-left-exact] (2), since $X_{\\Et}$ has finite limits and $U\\mapsto U\\times_XZ$ commutes with them [lem-weil-pbc-etale-base-change-finite-limits] (2), (3); so $\\sigma_j=\\iota_{(U_j,\\varphi_j)}(s_j)$ for some $(U_j,\\varphi_j)$ and $s_j\\in F(U_j)$ [lem-weil-pbc-filtered-colimit-sets-elementwise] (1). By the definition of the restriction maps of $i_pF$, $\\iota_{(U_j,\\varphi_j)}(s_j)$ is the restriction along $\\varphi_j:V_j\\to U_j\\times_XZ$ of $\\iota_{(U_j,\\mathrm{id})}(s_j)$, and $\\theta(\\iota_{(U_j,\\mathrm{id})}(s_j))=i^*s_j$ is the unit; as $\\theta$ is a morphism of presheaves, $t|_{V_j}=(i^*s_j)|_{V_j}$, the restriction along $\\varphi_j$.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09ZF, proof, fourth paragraph, first sentence"
+   }
+  },
+  {
+   "text": "*Shrinking $U_j$ so that $t|_{U_j\\times_XZ}=i^*s_j$.* The morphism $\\varphi_j:V_j\\to U_j\\times_XZ$ is a morphism of schemes etale over $Z$, hence etale [lem-weil-pbc-etale-composition-cancellation] (3), so its image $O_j$ is open [lem-weil-pbc-etale-morphism-open-map]. The projection $U_j\\times_XZ\\to U_j$ is a closed immersion [lem-weil-pbc-closed-immersion-base-change], a homeomorphism onto a closed subset carrying the subspace topology [def-weil-closed-immersion], so $O_j=U'_j\\times_XZ$ for an open $U'_j\\subseteq U_j$. Replace $U_j$ by $U'_j$ (etale over $X$ by [lem-weil-pbc-etale-composition-cancellation] (1), (2)), $s_j$ by $s_j|_{U'_j}$ and $\\varphi_j$ by its corestriction; the equality of the previous step persists by [lem-weil-pbc-sets-etale-inverse-image-composition-units] (0). Now $\\varphi_j$ is surjective, so $\\{\\varphi_j:V_j\\to U_j\\times_XZ\\}$ is a covering of $Z_{\\Et}$ [def-weil-pbc-etale-site]. Since $V_j\\to Z$ factors as $V_j\\to U_j\\times_XZ\\to Z$, the sections $t|_{U_j\\times_XZ}$ and $i^*s_j$ have the same restriction along $\\varphi_j$, hence are equal by the sheaf condition for this one-member covering [def-weil-pbc-etale-sheaf-of-sets].",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09ZF, proof, fourth paragraph: 'Since V_j -> U_j x_X Z is etale, the image is an open subscheme ... we conclude that t|_{U_j x_X Z} = i^{-1}s_j'"
+   }
+  },
+  {
+   "text": "*$\\coprod_jU_j\\to X$ is surjective etale.* Let $U=\\coprod_jU_j$ (disjoint union of schemes, each $U_j$ an open subscheme of $U$) with $u:U\\to X$ given by the structure maps; $u$ is etale since each $U_j\\to X$ is [lem-weil-pbc-etale-local-on-source]. Its image $\\bigcup_ju(U_j)$ is open [lem-weil-pbc-etale-morphism-open-map]. It contains $i(Z)$: for $z\\in Z$ there are $j$ and $v\\in V_j$ over $z$ (the $V_j$ cover $Z$), and the image of $v$ under $V_j\\to U_j\\times_XZ\\to U_j$ lies over $i(z)$. Its complement is closed and disjoint from $i(Z)$, hence empty by step 2. So $u$ is surjective and etale, and $X$ is quasi-compact and quasi-separated.",
+   "uses": [
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09ZF, proof, fourth paragraph: 'Thus we see that coprod U_j -> X is surjective'"
+   }
+  },
+  {
+   "text": "*Finite refinement.* By [lemma-weil-pbc-finite-refinement-etale-cover] applied to $u$ there are a finite, finitely presented, surjective $h:X'\\to X$, a finite open covering $X'=\\bigcup_aW_a$ and $X$-morphisms $\\phi_a:W_a\\to U$ with $u\\circ\\phi_a=h|_{W_a}$. The opens $W_\\alpha=\\phi_a^{-1}(U_j)$, $\\alpha=(a,j)$, cover $X'$; put $j(\\alpha)=j$ and let $g_\\alpha:W_\\alpha\\to U_{j(\\alpha)}$ be the restriction of $\\phi_a$, an $X$-morphism: $(U_{j(\\alpha)}\\to X)\\circ g_\\alpha=h|_{W_\\alpha}$. (This is the refinement $X'=\\bigcup_{\\alpha\\in A}W_\\alpha$, $j:A\\to J$ of the source.)",
+   "uses": [
+    "lemma-weil-pbc-finite-refinement-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09ZF, proof, fourth paragraph: 'By More on Morphisms, Lemma 09Z0 we can find a finite surjective morphism X' -> X ... g_alpha : W_alpha -> U_{j(alpha)} over X'"
+   }
+  },
+  {
+   "text": "*The local sections $s'_\\alpha$ and the section $t'$ on $Z'$.* Put $F'=h^{-1}F$ and $e=i\\circ h_Z=h\\circ i':Z'\\to X$. For each $\\alpha$, $\\gamma_\\alpha=(g_\\alpha,\\mathrm{incl}):W_\\alpha\\to U_{j(\\alpha)}\\times_XX'$ is a morphism of $X'_{\\Et}$; let $s'_\\alpha=(h^*s_{j(\\alpha)})|_{W_\\alpha}\\in F'(W_\\alpha)$, the restriction along $\\gamma_\\alpha$. Let $\\kappa=c_{h,i',F}^{-1}\\circ c_{i,h_Z,F}:h_Z^{-1}i^{-1}F\\xrightarrow{\\sim}i'^{-1}F'$ [lem-weil-pbc-sets-etale-inverse-image-composition-units] (1) and $t'=\\kappa(h_Z^*t)\\in\\Gamma(Z',i'^{-1}F')$. Claim: $t'|_{W_\\alpha\\cap Z'}=i'^*s'_\\alpha$. Write $j=j(\\alpha)$. Applying $h_Z^*$ to $t|_{U_j\\times_XZ}=i^*s_j$ (step 4) gives $(h_Z^*t)|_{U_j\\times_XZ'}=h_Z^*(i^*s_j)$ by [lem-weil-pbc-sets-etale-inverse-image-composition-units] (0); by (1), $c_{i,h_Z,F}(h_Z^*i^*s_j)=e^*s_j=c_{h,i',F}(i'^*h^*s_j)$, and $c$ commutes with restrictions, so $t'|_{U_j\\times_XZ'}=i'^*(h^*s_j)$ in $(i'^{-1}F')((U_j\\times_XX')\\times_{X'}Z')$. Restricting along $\\gamma_\\alpha\\times_{X'}Z':W_\\alpha\\times_{X'}Z'=W_\\alpha\\cap Z'\\to(U_j\\times_XX')\\times_{X'}Z'$ and using (0) once more gives $t'|_{W_\\alpha\\cap Z'}=i'^*s'_\\alpha$.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09ZF, proof, fourth paragraph: 'Denote F' the pullback of F to X'_etale ... Then t'|_{W_alpha x_X Z} is equal to (i')^{-1}s'_alpha by construction'"
+   }
+  },
+  {
+   "text": "*$t'$ comes from a section $s'\\in\\Gamma(X',F')$.* Apply [lem-weil-pbc-gabber-zariski-etale-restriction-injective] to $i':Z'\\to X'$ and $F'$: $\\beta':i'^{-1}_{\\rm Zar}F'_{\\rm Zar}\\to(i'^{-1}F')_{\\rm Zar}$ is injective on every open and $\\beta'(\\eta^{\\rm Zar}_W(s))=i'^*s$. Put $\\sigma_\\alpha=\\eta^{\\rm Zar}_{W_\\alpha}(s'_\\alpha)$ on $W_\\alpha\\cap Z'$; then $\\beta'(\\sigma_\\alpha)=i'^*s'_\\alpha=t'|_{W_\\alpha\\cap Z'}$ by step 7. On $W_\\alpha\\cap W_{\\alpha'}\\cap Z'$ the restrictions of $\\sigma_\\alpha,\\sigma_{\\alpha'}$ have the same image $t'|$ under the injective $\\beta'$, so they agree; as the $W_\\alpha\\cap Z'$ cover $Z'$ they glue to $\\sigma\\in\\Gamma(Z',i'^{-1}_{\\rm Zar}F'_{\\rm Zar})$, a sheaf [def-weil-pbc-topological-inverse-image] (3), and $\\beta'(\\sigma)=t'$ because both sides restrict to $t'|_{W_\\alpha\\cap Z'}$ on each $W_\\alpha\\cap Z'$ (sheaf condition of $(i'^{-1}F')_{\\rm Zar}$). Hypothesis (2) for the finite $h$ and the Zariski sheaf $F'_{\\rm Zar}$ gives $s'\\in F'_{\\rm Zar}(X')=\\Gamma(X',F')$ with $\\eta^{\\rm Zar}_{X'}(s')=\\sigma$, hence $i'^*s'=\\beta'(\\sigma)=t'$. (So $t'$ is a section of the subsheaf $i'^{-1}(F'|_{X'_{Zar}})$, as the source says.)",
+   "uses": [
+    "lem-weil-pbc-gabber-zariski-etale-restriction-injective",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 09ZF, proof, fourth paragraph: 'We conclude that t' is a section of the subsheaf ... By assumption (2) the section t' comes from a section s''"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-pushforward-constant-stalks",
+  "lem-weil-pbc-sets-inverse-image-stalk",
+  "lem-weil-pbc-sheaf-sections-determined-by-germs",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-etale-local-on-source",
+  "lemma-weil-pbc-finite-refinement-etale-cover",
+  "lem-weil-pbc-gabber-zariski-etale-restriction-injective",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section on a closed subscheme lifts to an etale inverse image section on a finite surjective cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of an etale sheaf on a closed subscheme lifts to a finite surjective cover under Zariski global section bijectivity",
+   "results": "Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.exists_lift_of_germInjective; AlgebraicGeometry.exists_lift_of_germInjective_aux; Algebra.isOpen_etaleLocus; Algebra.basicOpen_subset_etaleLocus_iff_etale; AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective; AlgebraicGeometry.Scheme.Etale; Algebra.mem_etaleLocus_iff",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "gabber|DescentComparison|sheafPullback.*[Cc]omp",
+   "results": "Mathlib/Topology/Sheaves/Functors.lean; Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean; Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean; Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberH0FiniteLift",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GabberH0FiniteSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberH0FiniteSection.lean",
+  "declaration": "AlgebraicGeometry.gabber_h0_finite_section",
+  "statement": "theorem gabber_h0_finite_section {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (i : Z ⟶ X) [IsClosedImmersion i] (hZar : letI : ∀ P : X.Opensᵒᵖ ⥤ Type (u + 1), (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)).op.HasPointwiseLeftKanExtension P := fun P U ↦ @Types.hasColimit.{u, u + 1, u} (CostructuredArrow.{u, u, u, u} (Opens.map i.base).op U) inferInstance (small_succ.{u} _) (CostructuredArrow.proj _ U ⋙ P) ∀ G : TopCat.Sheaf (Type (u + 1)) X.toTopCat, Function.Bijective (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)) (Type (u + 1)) (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app G).hom.app (op (⊤ : X.Opens)))) (hFinite : ∀ (X' : Scheme.{u}) (h : X' ⟶ X) [IsFinite h], let b : CategoryTheory.Functor.{u, u, u, u} X'.Opens (pullback i h : Scheme.{u}).Opens := Opens.map ((pullback.snd i h : (pullback i h : Scheme.{u}) ⟶ X').base) letI : ∀ P : X'.Opensᵒᵖ ⥤ Type (u + 1), b.op.HasPointwiseLeftKanExtension P := fun P U ↦ @Types.hasColimit.{u, u + 1, u} (CostructuredArrow.{u, u, u, u} b.op U) inferInstance (small_succ.{u} _) (CostructuredArrow.proj b.op U ⋙ P) ∀ G : TopCat.Sheaf (Type (u + 1)) X'.toTopCat, Function.Bijective (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b (Type (u + 1)) (Opens.grothendieckTopology X') (Opens.grothendieckTopology (pullback i h : Scheme.{u}))).unit.app G).hom.app (op (⊤ : X'.Opens)))) (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (t : ((Scheme.etaleSetPullback i).obj F).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj (Scheme.Etale.mk (𝟙 X))))) : ∃ (X' : Scheme.{u}) (h : X' ⟶ X) (_ : IsFinite h) (_ : Surjective h) (s' : ((Scheme.etaleSetPullback h).obj F).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj (Scheme.Etale.mk (𝟙 X))))), etaleSetDescentComparison i (pullback.fst i h) F (Scheme.Etale.mk (𝟙 X)) t = eqToHom (congrArg (fun k : pullback i h ⟶ X ↦ ((Scheme.etaleSetPullback k).obj F).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := i) (g := h)).symm) (etaleSetDescentComparison h (pullback.snd i h) F (Scheme.Etale.mk (𝟙 X)) s')",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T063504-L-3152526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T063504-L-3152526",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

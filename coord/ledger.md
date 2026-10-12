@@ -6460,3 +6460,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: returned deliver/T2/Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreImageClopen (reviewer RETURN: (the landing tools, head 5a8eabc92) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 06:35 L: merged deliver/A2/Sheaf.AlgebraicGeometry.EtaleInverseImageModuleLinearCriterion (stage 3; reviewer PASS; first push; landing 20261012T063503-L-3152189 (interface); batch 20261012T063502; modules 3; new nodes 2)
 - 06:35 L: merged deliver/A3/Sheaf.AlgebraicGeometry.LimitPullbackSectionsColimit (stage 3; reviewer PASS; first push; landing 20261012T063504-L-3152358 (interface); batch 20261012T063502; modules 3; new nodes 2)
+- 06:35 L: merged deliver/B2/Sheaf.AlgebraicGeometry.GabberH0FiniteLift (stage 3; reviewer PASS; after a return; landing 20261012T063504-L-3152526 (interface); batch 20261012T063502; modules 3; new nodes 2)
