@@ -11,10 +11,8 @@ public import Mathlib.CategoryTheory.Action.Continuous
 public import Mathlib.CategoryTheory.Action.Concrete
 public import Mathlib.CategoryTheory.Types.Basic
 public import Mathlib.FieldTheory.KrullTopology
-import Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields
-import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
-import Sheaf.FieldTheory.EtaleFieldGaloisClassification
-import WeilConjectures.Mathlib.RingTheory.Etale.Field
+import Sheaf.AlgebraicGeometry.EtaleFieldPointFunctorEssSurj
+import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Étale schemes over a field and continuous G-sets
@@ -70,6 +68,51 @@ theorem etaleFieldGsets
           ∀ x : (forget₂ _ (Type u)).obj (E.functor.obj X),
             ∃ (i : ι) (y : (forget₂ _ (Type u)).obj (E.functor.obj (U i))),
               (forget₂ _ (Type u)).map (E.functor.map (f i)) y = x) := by
-  sorry
+  let F := etaleFieldPointFunctor K Ksep
+  have h := etaleFieldPointFunctor_fullyFaithful K Ksep
+  let := h.1
+  let := h.2
+  let := etaleFieldPointFunctor_essSurj K Ksep
+  let : F.IsEquivalence := {}
+  let : IsSepClosed Ksep := IsSepClosure.sep_closed K
+  refine ⟨F.asEquivalence, fun X ↦ Equiv.refl _, ?_, ?_, ?_⟩
+  · intro X Y f x
+    rfl
+  · intro X g x
+    rfl
+  · intro ι X U f
+    change Sieve.ofArrows U f ∈ (Spec (CommRingCat.of K)).smallEtaleTopology X ↔
+      ∀ x : etaleFieldBasePoint K Ksep ⟶ (Scheme.Etale.forget _).obj X,
+        ∃ (i : ι) (y : etaleFieldBasePoint K Ksep ⟶
+          (Scheme.Etale.forget _).obj (U i)), y ≫ (Scheme.Etale.forget _).map (f i) = x
+    rw [Scheme.ofArrows_mem_smallEtaleTopology_iff]
+    constructor
+    · intro hc x
+      have hx : x.left (default : Spec (CommRingCat.of Ksep)) ∈
+          ⋃ i, Set.range (f i).left := by rw [hc]; trivial
+      simp only [Set.mem_iUnion, Set.mem_range] at hx
+      obtain ⟨i, z, hz⟩ := hx
+      obtain ⟨l, hl, _⟩ := Scheme.exists_fac_of_etale_of_isSepClosed
+        (f i).left x.left z hz
+      refine ⟨i, Over.homMk l ?_, ?_⟩
+      · change l ≫ (U i).hom = Spec.map (CommRingCat.ofHom (algebraMap K Ksep))
+        have hf : (f i).left ≫ X.hom = (U i).hom := (f i).w
+        rw [← hf, ← Category.assoc, hl]
+        exact Over.w x
+      · apply Over.OverMorphism.ext
+        exact hl
+    · intro hp
+      ext z
+      simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
+      obtain ⟨x, hx⟩ := Scheme.pointSmallEtaleFiberObjToPreimage_surjective
+        (Spec.map (CommRingCat.ofHom (algebraMap K Ksep))) rfl X
+        ⟨z, by
+          change (X.hom z : Spec (CommRingCat.of K)) = _
+          exact Subsingleton.elim (α := Spec (CommRingCat.of K)) _ _⟩
+      obtain ⟨i, y, hy⟩ := hp x
+      refine ⟨i, y.left (default : Spec (CommRingCat.of Ksep)), ?_⟩
+      have he := congrArg (fun t ↦ t.left (default : Spec (CommRingCat.of Ksep))) hy
+      have hz : x.left (default : Spec (CommRingCat.of Ksep)) = z := congrArg Subtype.val hx
+      exact he.trans hz
 
 end AlgebraicGeometry

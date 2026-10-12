@@ -1,0 +1,127 @@
+{
+ "id": "lem-exc-etale-field-point-functor-ess-surj",
+ "kind": "statement",
+ "title": "Essential surjectivity of the concrete geometric-point functor",
+ "statement": "Let K be a field [def-pc-field-extension], Ksep a separable closure, and G=Gal(Ksep/K) with its Krull topology. Let P take an etale K-scheme X [def-weil-etale-morphism] to Hom_K(Spec Ksep,X), with its continuous discrete G-action [lem-exc-etale-field-geometric-action-continuous], and take a map to postcomposition. Then every discrete continuous G-set is isomorphic to P(X) for some etale K-scheme X.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03QR, Lemma lemma-sheaves-point; read at https://stacks.math.columbia.edu/tag/03QR; construction of an inverse by orbit stabilizer fixed fields"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-etale-morphism",
+  "lem-exc-etale-field-geometric-action-continuous"
+ ],
+ "proof": [
+  {
+   "text": "Decompose a discrete continuous G-set S into G-orbits and choose a point in each nonempty orbit. Each stabilizer H is open by continuity and discreteness. The Galois group is compact, and its quotient by an open subgroup is finite (Mathlib Subgroup.quotient_finite_of_isOpen); thus every orbit is finite.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-exc-etale-field-galois-classification] to each finite transitive orbit. Its stabilizer fixed field is a finite separable extension L of K, and the orbit is equivariantly isomorphic to the set of K-embeddings L -> Ksep. The chosen orbit representatives and the quotient orbit index set have universe u, so the coproduct remains a Scheme in universe u.",
+   "uses": [
+    "lem-exc-etale-field-galois-classification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each Spec L is etale over K by [lem-weil-pbc-finite-separable-extension-etale]. Form their coproduct, whose structure map is etale by [lem-exc-etale-coproduct-etale]. Spec Ksep is a singleton scheme, so any geometric point of this coproduct factors uniquely through a component. Its geometric-point G-set is therefore the disjoint union of the embedding G-sets, equivariantly isomorphic to S. Empty S gives the empty coproduct.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-exc-etale-coproduct-etale"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-coproduct-etale",
+  "lem-exc-etale-field-galois-classification",
+  "lem-weil-pbc-finite-separable-extension-etale"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03QR; construction of an inverse by orbit stabilizer fixed fields"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Galois action on geometric points of an etale scheme is continuous with open stabilizers",
+   "results": "Unavailable: Internal Server Error from service (msearch.py).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric point functor etale schemes field full faithful essentially surjective Galois action",
+   "results": "Scheme.Etale.forgetFullyFaithful concerns the forgetful functor to Over, not the geometric-point functor. Scheme.SpecToEquivOfField describes individual geometric points. No exact categorical equivalence or full-faithfulness/essential-surjectivity result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "continuousSMul_iff_stabilizer_isOpen",
+   "results": "General criterion for continuity of discrete group actions; used for the proved continuity node.",
+   "date": "2026-10-12",
+   "verdict": "tool, not an exact statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rg pointSmallEtale|DiscreteContAction|etaleFieldGsets|galois.*Equivalence lean/WeilConjectures lean/Sheaf; rg stabilizer.*Open Mathlib/FieldTheory Mathlib/Topology/Algebra",
+   "results": "Mathlib provides exists_fac_of_etale_of_isSepClosed and pointSmallEtaleFiberObjToPreimage_surjective, used to prove covers; stabilizer_isOpen_of_isIntegral and continuousSMul_iff_stabilizer_isOpen prove continuity. Existing library supplies finite-field classification and fibre decomposition, but not the passage to arbitrary etale schemes.",
+   "date": "2026-10-12",
+   "verdict": "tools found; no exact result for the categorical gaps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFieldGsets",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, first paragraph: finite etale objects correspond to finite continuous G-sets; construction of an inverse by orbit stabilizer fixed fields",
+   "via": [
+    "lem-exc-etale-field-gsets"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFieldPointFunctorEssSurj",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFieldPointFunctorEssSurj.lean",
+  "declaration": "AlgebraicGeometry.etaleFieldPointFunctor_essSurj",
+  "statement": "theorem etaleFieldPointFunctor_essSurj : (etaleFieldPointFunctor K Ksep).EssSurj",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T085256-L-21906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T085256-L-21906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

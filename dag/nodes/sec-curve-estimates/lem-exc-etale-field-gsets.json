@@ -22,67 +22,38 @@
  ],
  "proof": [
   {
-   "text": "For an etale K-scheme X, the set Hom_K(Spec K^sep,X) carries a G-action by precomposition. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] with S=Spec K: X is a disjoint union of spectra of finite separable extensions, so every geometric point factors through one such component. By [lem-exc-etale-field-galois-classification], the stabilizer of a point is Gal(K^sep/sigma(L)) for the corresponding K-embedding sigma, an open subgroup of G. Thus the action is discrete and continuous, and the construction is functorial in X.",
+   "text": "Construct the geometric-point action by precomposition and use [lem-exc-etale-field-geometric-action-continuous] to prove continuity. With the discrete topology these form objects of DiscreteContAction. Postcomposition defines the functor P; its identity, composition and equivariance laws follow from associativity and the Spec functor laws.",
    "uses": [
-    "lem-weil-pbc-etale-fibre-discrete-separable-points",
-    "lem-exc-etale-field-galois-classification"
+    "lem-exc-etale-field-geometric-action-continuous"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 03QR, Lemma lemma-sheaves-point, first paragraph; Morphisms Tag 02GL (morphisms-lemma-etale-over-field) for the field decomposition"
-   }
+   "elementary": false
   },
   {
-   "text": "A morphism of etale K-schemes induces a G-equivariant map on geometric points. Decompose source and target into their connected finite-separable spectrum components by [lem-weil-pbc-etale-fibre-discrete-separable-points] with S=Spec K. On one source component, connectedness forces an equivariant map to land in one target orbit; the full-faithfulness clause of [lem-exc-etale-field-galois-classification] identifies that equivariant map with a unique K-morphism of spectra. Taking these componentwise maps gives a unique K-morphism of the coproducts. Conversely, the same componentwise construction sends every K-morphism to its geometric-point map, so the functor is fully faithful.",
+   "text": "Apply [lem-exc-etale-field-point-functor-fully-faithful] and [lem-exc-etale-field-point-functor-ess-surj] to P. These give the Full, Faithful, and EssSurj instances, hence a Functor.IsEquivalence instance and P.asEquivalence. The points equivalences are identity equivalences. Naturality and the specified action formula are definitional for this explicit functor.",
    "uses": [
-    "lem-weil-pbc-etale-fibre-discrete-separable-points",
-    "lem-exc-etale-field-galois-classification"
+    "lem-exc-etale-field-point-functor-fully-faithful",
+    "lem-exc-etale-field-point-functor-ess-surj"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 03QR, Lemma lemma-sheaves-point, full-faithfulness paragraph, using the finite Galois correspondence"
-   }
+   "elementary": false
   },
   {
-   "text": "Let S be a discrete continuous G-set. Decompose S into G-orbits. For s in S, continuity makes its stabilizer G_s open, so the orbit G/G_s is finite; by [lem-exc-etale-field-galois-classification] there is a finite separable extension L_s/K with G_s=Gal(K^sep/L_s), namely L_s=(K^sep)^{G_s}, and the orbit is represented by Spec L_s. Each Spec L_s -> Spec K is etale by [lem-weil-pbc-finite-separable-extension-etale], and their coproduct is etale by [lem-exc-etale-coproduct-etale]. Its geometric points are the disjoint union of the corresponding finite orbits, canonically isomorphic to S. Therefore the functor is essentially surjective.",
+   "text": "By [def-weil-pbc-etale-site], a family covers exactly when it is jointly surjective on underlying scheme points (Mathlib Scheme.ofArrows_mem_smallEtaleTopology_iff). For a covering and a geometric point x, choose a point in some U_i over x(default). Mathlib Scheme.exists_fac_of_etale_of_isSepClosed lifts x through U_i because Ksep is separably closed. This lift is a morphism over Spec K and maps to x. Conversely, Mathlib Scheme.pointSmallEtaleFiberObjToPreimage_surjective supplies a geometric point over every point of X, since Spec K has one point. Surjectivity on geometric points therefore implies joint surjectivity on scheme points. This proves the covering criterion, including arbitrary index universes and the empty family.",
    "uses": [
-    "lem-exc-etale-field-galois-classification",
-    "lem-weil-pbc-finite-separable-extension-etale",
-    "lem-exc-etale-coproduct-etale"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 03QR, Lemma lemma-sheaves-point, essential-surjectivity paragraph; Morphisms Tag 02GL for finite separable pieces"
-   }
-  },
-  {
-   "text": "For a family (U_i \\to X) of etale morphisms of etale K-schemes, write P(-)=Hom_K(Spec K^sep,-). Suppose the family is a covering in the small etale site, i.e. jointly surjective on points [def-weil-pbc-etale-site]. Let \\bar x \\in P(X) lie over x in X and pick u in some U_i mapping to x. By [lem-weil-pbc-etale-fibre-discrete-separable-points] with S=Spec K, the components {x} of X and {u} of U_i are isomorphic over K to Spec kappa(x) and Spec kappa(u) with kappa(x), kappa(u) finite separable over K, and the morphism U_i \\to X restricts to a K-morphism Spec kappa(u) \\to Spec kappa(x). By [lem-exc-etale-field-galois-classification], P(Spec kappa(u)) and P(Spec kappa(x)) are transitive (in particular nonempty) G-sets; the induced G-equivariant map between them hits some point of the transitive G-set P(Spec kappa(x)) and hence, by equivariance, all of it; \\bar x factors through the component {x} (Spec K^sep is a single point), so \\bar x is hit. Thus the family is jointly surjective on P. Conversely, assume the maps P(U_i) \\to P(X) are jointly surjective. For x in X, [lem-weil-pbc-etale-fibre-discrete-separable-points] with S=Spec K says that kappa(x) is finite separable over K, so P(Spec kappa(x)) is nonempty by [lem-exc-etale-field-galois-classification] and x admits a point \\bar x in P(X) over it; a preimage of \\bar x in some P(U_i) lies over a point of U_i mapping to x. Thus the family is jointly surjective on points, and it is a covering by the definition [def-weil-pbc-etale-site] of coverings in the small etale site. Under the equivalence already established, these are exactly jointly surjective families of G-equivariant maps.",
-   "uses": [
-    "lem-weil-pbc-etale-fibre-discrete-separable-points",
-    "lem-exc-etale-field-galois-classification",
     "def-weil-pbc-etale-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 03QR, Lemma lemma-sheaves-point, with Remark 03QS; the converse is the geometric-point argument using Morphisms 02GL"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-fibre-discrete-separable-points",
-  "lem-exc-etale-field-galois-classification",
-  "lem-weil-pbc-finite-separable-extension-etale",
-  "lem-exc-etale-coproduct-etale",
+  "lem-exc-etale-field-geometric-action-continuous",
+  "lem-exc-etale-field-point-functor-fully-faithful",
+  "lem-exc-etale-field-point-functor-ess-surj",
   "def-weil-pbc-etale-site"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 03QR (Lemma lemma-sheaves-point), Remark 03QS, and Morphisms Tag 02GL (morphisms-lemma-etale-over-field)"
+  "place": "Tags 03QR and 03QS; explicit geometric-point functor, affine-neighborhood proof of continuity, categorical assembly, and Mathlib separably-closed-point lifting for covers"
  },
  "mathlib_searches": [
   {
@@ -175,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T085256-L-21906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
