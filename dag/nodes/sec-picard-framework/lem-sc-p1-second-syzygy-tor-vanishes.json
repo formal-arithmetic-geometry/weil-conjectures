@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Replace M by F_0/ker(q_0) via the first isomorphism theorem when its universe differs. The maps yield two short exact sequences with free middle modules. The natural-isomorphism clause of [lem-sc-p1-tor-dimension-shifting] identifies Tor_1(ker(q_1),k) with Tor_3(M,k).",
+   "text": "Use the small quotient F₀/ker(q₀), canonically isomorphic to M by surjectivity. Its quotient map has exactly ker(q₀) as kernel. Transport q₁ along that kernel equality; its kernel is unchanged up to the induced linear equivalence. The finite bases make F₀ and F₁ free. Apply [lem-sc-p1-tor-dimension-shifting] to the two short exact kernel sequences to identify Tor₁(ker(q₁),k) with Tor₃(F₀/ker(q₀),k). This stays in the ring universe regardless of the universe of M.",
    "uses": [
     "lem-sc-p1-tor-dimension-shifting"
    ],
@@ -34,10 +34,10 @@
    }
   },
   {
-   "text": "The exact free Koszul complex in [lem-sc-p1-koszul-resolution] resolves S/(X_0,X_1) in degrees 0,1,2. The quotient is the constant-coefficient S-module k: constant coefficient is surjective, and its kernel is the variable ideal because each nonconstant monomial is divisible by a variable. Package the Koszul complex as a projective resolution. By [def-weil-pbc-tor-modules], Tor_3(k,M) is its third homology after tensoring with M. There is no degree-three term, hence this homology is zero.",
+   "text": "In the proved private helper third_tor_constantCoeff, form the S-linear constant-coefficient map c:S→k with the restricted scalar action; it is surjective since c(C(a))=a. Use [lem-sc-p1-koszul-resolution] and identify ker(c) with ker(q): the ideal spanned by X₀,X₁ is idealOfVars, whose first-power support criterion says exactly that the coefficient at zero vanishes. Restrict the Koszul map g:S²→S to g′:S²→ker(c); exactness of g,q proves its surjectivity. Exactness and injectivity of f give a short exact sequence 0→S→S²→ker(c)→0. Apply [lem-sc-p1-tor-dimension-shifting] to this sequence and 0→ker(c)→S→k→0. Its isomorphism identifies Tor₃(k,N) with Tor₁(S,N), which is zero by Mathlib isZero_Tor'_succ_of_projective because S is free and projective. Thus no bounded-resolution packaging is needed.",
    "uses": [
     "lem-sc-p1-koszul-resolution",
-    "def-weil-pbc-tor-modules"
+    "lem-sc-p1-tor-dimension-shifting"
    ],
    "elementary": false,
    "source": {
@@ -58,13 +58,12 @@
  "proof_deps": [
   "lem-sc-p1-tor-dimension-shifting",
   "lem-weil-pbc-tor-symmetry",
-  "lem-sc-p1-koszul-resolution",
-  "def-weil-pbc-tor-modules"
+  "lem-sc-p1-koszul-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-  "place": "proof, graded free resolution construction (expanded in the existing graded-syzygy DAG node)"
+  "place": "Koszul resolution and dimension shifting; R1 implements the Tor₃ vanishing by a second application of dimension shifting to the Koszul sequences, reducing to Mathlib vanishing for the free module S (2026-10-12)."
  },
  "mathlib_searches": [
   {
@@ -134,10 +133,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T085211-L-1989",
-  "kind": "interface",
+  "landing": "20261012T095921-L-323765",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
