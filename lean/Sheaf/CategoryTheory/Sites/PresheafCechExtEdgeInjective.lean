@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.Sites.PresheafCechComplex
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Sheaf.AlgebraicTopology.SetCechNerveFreeResolution
+import Sheaf.CategoryTheory.Sites.PresheafCechExtEdgeKernel
 
 /-!
 # Injectivity of the presheaf Čech descent edge map
@@ -70,6 +71,16 @@ theorem presheafCech_ext_edge_injective
       Ext ((presheafToSheaf J AddCommGrpCat).obj (f.right ⋙ AddCommGrpCat.free)) F q ↦
         (Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map
           (Functor.whiskerRight f.hom AddCommGrpCat.free))).comp x (Nat.zero_add q)) := by
-  sorry
+  intro x y hxy
+  let g := fun z : Ext ((presheafToSheaf J AddCommGrpCat).obj
+      (f.right ⋙ AddCommGrpCat.free)) F q ↦
+    (Ext.mk₀ ((presheafToSheaf J AddCommGrpCat).map
+      (Functor.whiskerRight f.hom AddCommGrpCat.free))).comp z (Nat.zero_add q)
+  have hxy' : g x = g y := hxy
+  have hz : g (x - y) = 0 := by
+    dsimp [g] at hxy' ⊢
+    rw [sub_eq_add_neg, Ext.comp_add, Ext.comp_neg, hxy', add_neg_cancel]
+  have hk := presheafCech_ext_edge_kernel F f hf q hq hlower hcech (x - y) hz
+  exact sub_eq_zero.mp hk
 
 end CategoryTheory.Sheaf
