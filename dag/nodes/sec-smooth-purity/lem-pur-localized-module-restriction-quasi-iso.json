@@ -14,14 +14,22 @@
  ],
  "proof": [
   {
-   "text": "Restriction retains section modules and their maps on objects (V,f) of C/U. Kernels are sectionwise. Covers of (V,f) correspond to covers of V with their forced maps to U, so local cokernel representatives and local equalities commute with restriction. Thus restriction preserves kernels and cokernels and is additive and exact.",
+   "text": "Let F be module restriction, G the forgetful functor on the slice to abelian sheaves, and H abelian-sheaf restriction. The equality F composed with G = toSheaf R composed with H is definitional, expressed in Lean by Iso.refl. The source-library instance Functor.preservesFiniteLimits_sheafPushforwardContinuous gives finite-limit preservation of H. Module forgetting preserves finite limits and reflects finite limits (Mathlib); transport the composite preservation across the identity comparison and reflect through G to obtain finite-limit preservation of F.",
    "uses": [
     "def-pur-localized-ringed-site"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Exact additive functors preserve homology. Apply Mathlib HomologicalComplex.quasiIso_map_of_preservesHomology: each restricted homology map is restriction of an invertible homology map under the natural comparison, and is therefore invertible.",
+   "text": "Over.forget U is cocontinuous for every Grothendieck topology. Mathlib Functor.sheafAdjunctionCocontinuous makes H a left adjoint, hence it preserves colimits of size max u v, and therefore finite colimits. The proved source-library instance SheafOfModules.preservesFiniteColimits_toSheaf supplies finite-colimit preservation of module forgetting. G reflects isomorphisms, so it reflects each finite colimit because these colimits exist and G preserves them (reflectsColimitsOfShape_of_reflectsIsomorphisms). Transfer composite preservation across the same identity comparison and reflect through G to obtain finite-colimit preservation of F. No binary products of the site, commutativity of its rings, or chosen precoverage are required.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Functor.additive_of_preserves_binary_products gives additivity of F from finite-limit preservation. Finite-limit and finite-colimit preservation supply Functor.PreservesHomology via Mathlib preservesHomologyOfExact. HomologicalComplex.quasiIso_map_of_preservesHomology applied to t and F is exactly the stated conclusion. All imported preservation instances are proved, and no new intermediate theorem with sorry is needed.",
    "uses": [
     "def-pc-quasi-iso-modules"
    ],
@@ -30,12 +38,13 @@
  ],
  "proof_deps": [
   "def-pur-localized-ringed-site",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "def-pc-quasi-iso-modules"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Section 03DH, restriction j_U^*; exactness recalled in Lemma 18.19.4 (03DK)"
+  "by": "agent",
+  "document": "Mathlib and the proved source-library preservation instances",
+  "place": "F3 stage 3, 2026-10-12: categorical transfer through the forgetful functor, followed by HomologicalComplex.quasiIso_map_of_preservesHomology"
  },
  "mathlib_searches": [
   {
@@ -106,10 +115,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T135238-L-1667422",
-  "kind": "interface",
+  "landing": "20261012T151907-L-2287989",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
