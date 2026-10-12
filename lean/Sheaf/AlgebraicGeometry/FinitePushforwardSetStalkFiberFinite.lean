@@ -1,5 +1,6 @@
 module
 public import WeilConjectures.SixFunctors.Finite.Stalk
+import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -19,5 +20,5 @@ theorem finite_pushforward_set_stalk_fiber_finite
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) :
     Finite {x : Spec (.of Ω) ⟶ X // x ≫ f = y} := by
-  sorry
+  exact @Scheme.Hom.GeometricFiber.finite _ _ f Ω _ y _
 end AlgebraicGeometry
