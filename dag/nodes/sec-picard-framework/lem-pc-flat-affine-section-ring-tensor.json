@@ -13,25 +13,26 @@
  },
  "proof": [
   {
-   "text": "Restrict the cartesian square to the open W: the inverse-image open W\\prime is its pullback along W→X. Identify W with Spec A by its canonical affine-open isomorphism. Naturality of the structure map identifies W→Spec R with Spec α. The affine fibre-product isomorphism identifies W\\prime with Spec(A⊗_R S). Its two projection formulas give the maps A→A⊗_R S and S→A⊗_R S.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
-   "elementary": false
+   "text": "Apply Mathlib isIso_pushoutSection_of_isAffineOpen to the cartesian base-change square, the top affine opens of Spec R and Spec S, and W. The inverse-image condition on W′ identifies the prescribed intersection with W′. By isIso_pushoutSection_iff the four appLE maps form a pushout in CommRingCat. This includes the empty affine open.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply global sections to that scheme isomorphism and compose with the canonical Γ(Spec C)=C isomorphism. The A-projection formula proves this is an A-algebra equivalence; the S-projection formula says that it sends 1⊗b to β(b). For empty W the construction still works: A and B are zero rings.",
+   "text": "Transport this pushout through Scheme.ΓSpecIso for R and S. ΓSpecIso_naturality identifies the map between the base rings with algebraMap R S; the remaining maps are exactly α, β and the specified baseChangeFst.appLE.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compare the resulting pushout with CommRingCat.isPushout_tensorProduct using IsPushout.isoIsPushout. The left projection identity makes its ring equivalence an A-algebra equivalence. The right projection identity proves e(1 tensor b)=β(b).",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-fibre-product-affine-spectra"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01I4",
-  "place": "Affine pullback formula, restricted to W, with global sections and the projection identities; Tag 02KG affine calculation."
+  "place": "Affine pullback and global sections, implemented using Mathlib isIso_pushoutSection_of_isAffineOpen and the tensor-product pushout; Tag 02KG affine calculation."
  },
  "mathlib_searches": [
   {
@@ -112,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T110302-L-615190",
-  "kind": "interface",
+  "landing": "20261012T135247-L-1674705",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
