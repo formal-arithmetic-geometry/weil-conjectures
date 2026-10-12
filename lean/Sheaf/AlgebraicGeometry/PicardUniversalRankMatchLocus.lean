@@ -11,9 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus
-import Sheaf.AlgebraicGeometry.ProperNormalizedFibres
+import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchLocusCore
 
 /-! # Representing the universal rank clause
 
@@ -27,6 +25,17 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
+
+/-- The structural properties of the core representing immersion.
+Source: Stacks Project, Tag 0BDP, quasi-compactness and finite-presentation locality.
+(blueprint: lem-sc-picard-universal-rank-match-locus-structural)
+-/
+theorem picardUniversalRankMatchLocus_structural {X S W : Scheme.{u}}
+    (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
+    (E : X.Modules) [E.IsFiniteLocallyFree] (j : W ⟶ S) (hj : IsImmersion j)
+    (hchar : ∀ {T : Scheme.{u}} (g : T ⟶ S),
+      (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalRankMatch f E g) :
+    LocallyOfFinitePresentation j ∧ QuasiCompact j := by sorry
 
 /-- The universal rank clause alone is represented by a finitely presented immersion.
 Source: Stacks Project, Tag 0BDP, first three proof paragraphs, and Tags 0B91 and 0BDL.
@@ -64,6 +73,9 @@ theorem exists_picardUniversalRankMatchLocus {X S : Scheme.{u}} (f : X ⟶ S)
     ∃ (W : Scheme.{u}) (j : W ⟶ S),
       IsImmersion j ∧ LocallyOfFinitePresentation j ∧ QuasiCompact j ∧
       ∀ {T : Scheme.{u}} (g : T ⟶ S),
-        (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalRankMatch f E g := by sorry
+        (∃ h : T ⟶ W, h ≫ j = g) ↔ PicardUniversalRankMatch f E g := by
+  obtain ⟨W, j, hj, hchar⟩ := exists_picardUniversalRankMatchLocus_core f hO E
+  obtain ⟨hfp, hqc⟩ := picardUniversalRankMatchLocus_structural f E j hj hchar
+  exact ⟨W, j, hj, hfp, hqc, hchar⟩
 
 end AlgebraicGeometry.Scheme
