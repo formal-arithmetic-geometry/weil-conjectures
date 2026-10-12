@@ -76,11 +76,41 @@ theorem IsFiniteLocallyConstantSheaf.isConstructibleSheaf (hF : IsFiniteLocallyC
     IsConstructibleSheaf F :=
   ⟨Stratification.trivial X, fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar (𝟙 X) F⟩
 
+-- Retain the original sheafification parameter for API compatibility.
+set_option linter.unusedSectionVars false in
 /-- A constructible sheaf is finite: a geometric point of `X` lies in a stratum, through whose
 immersion it factors, and the stalk of `F` there is the stalk of the finite locally constant
 pullback of `F` to the stratum. -/
-theorem IsConstructibleSheaf.isFiniteSheaf (hF : IsConstructibleSheaf F) : IsFiniteSheaf F :=
-  sorry
+theorem IsConstructibleSheaf.isFiniteSheaf (hF : IsConstructibleSheaf F) : IsFiniteSheaf F where
+  isFinitelyGenerated_sheafFiber Ω _ _ s := by
+    obtain ⟨S, hS⟩ := hF.exists_stratification
+    have ht : s.base (default : Spec (.of Ω)) ∈ ⋃ k, S.stratum k := by
+      rw [S.iUnion_stratum_eq_univ]
+      exact Set.mem_univ _
+    obtain ⟨k, hk⟩ := Set.mem_iUnion.mp ht
+    rw [← S.range_immersion k] at hk
+    obtain ⟨z, hz⟩ := hk
+    have : IsImmersion (S.immersion k) := S.isImmersion k
+    let i := S.immersion k
+    let j := i.coborderRange.ι
+    have hr : Set.range s.base ⊆ Set.range j.base := by
+      apply Scheme.range_base_subset_of_closedPoint_mem
+      rw [Scheme.Opens.range_ι]
+      exact subset_coborder ⟨z, hz.trans (congrArg s.base (Subsingleton.elim _ _))⟩
+    let t := IsOpenImmersion.lift j s hr
+    have ht : t ≫ j = s := IsOpenImmersion.lift_fac j s hr
+    have ht' : t.base (IsLocalRing.closedPoint Ω) ∈ Set.range i.liftCoborder.base := by
+      refine ⟨z, j.isOpenEmbedding.injective ?_⟩
+      rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, i.liftCoborder_ι, ht]
+      exact hz.trans (congrArg s.base (Subsingleton.elim _ _))
+    obtain ⟨s', hs', _⟩ := IsClosedImmersion.existsUnique_fac_of_field i.liftCoborder t ht'
+    have hs : s' ≫ S.immersion k = s := by
+      change s' ≫ i = s
+      rw [← i.liftCoborder_ι, ← Category.assoc, hs', ht]
+    have hfin := (hS k).toIsFiniteSheaf.isFinitelyGenerated_sheafFiber Ω s'
+    have e := (Etale.upperStarCompSheafFiberIso A (S.immersion k) s').app F
+    have hstalk := hfin.of_iso e
+    rwa [hs] at hstalk
 
 /-- A constructible locally constant sheaf is finite locally constant. -/
 theorem IsConstructibleSheaf.isFiniteLocallyConstantSheaf (hF : IsConstructibleSheaf F)
