@@ -59,20 +59,16 @@ theorem isQuasicoherent_higherDirectImage (q : ℕ) :
     (fun U : {U : T.Opens // IsAffineOpen U} ↦ U.2.fromSpec) iSup_opensRange_fromSpec_eq_top
     fun U ↦ ?_
   let g := U.2.fromSpec
-  have := isGrothendieckAbelian (pullback f g)
-  have : SheafOfModules.IsQuasicoherent (R := (pullback f g).ringCatSheaf)
-      ((Modules.pullback (pullback.fst f g)).obj ℱ) :=
-    (SheafOfModules.isQuasicoherent _).prop_of_iso
-      ((restrictFunctorIsoPullback (pullback.fst f g)).app ℱ) inferInstance
-  obtain ⟨n, hn⟩ := exists_higherDirectImageBound_top (pullback.snd f g)
-    ((Modules.pullback (pullback.fst f g)).obj ℱ)
-  have : SheafOfModules.IsQuasicoherent (R := (Spec Γ(T, U.1)).ringCatSheaf)
-      (((higherDirectImage f q).obj ℱ).restrict g) :=
-    (SheafOfModules.isQuasicoherent _).prop_of_iso
-      (higherDirectImagePullbackIsoRestrict (IsPullback.of_hasPullback f g) ℱ q)
-      (hn.higherDirectImage.1 q)
-  have : IsIso (((higherDirectImage f q).obj ℱ).restrict g).fromTildeΓ :=
-    isIso_fromTildeΓ_of_isQuasicoherent _
+  have : IsIso (((higherDirectImage f q).obj ℱ).restrict g).fromTildeΓ := by
+    have := isGrothendieckAbelian (Limits.pullback f g)
+    obtain ⟨n, hn⟩ := exists_higherDirectImageBound_top (pullback.snd f g)
+      ((Modules.pullback (pullback.fst f g)).obj ℱ)
+    have : SheafOfModules.IsQuasicoherent (R := (Spec Γ(T, U.1)).ringCatSheaf)
+        (((higherDirectImage f q).obj ℱ).restrict g) :=
+      (SheafOfModules.isQuasicoherent (Spec Γ(T, U.1)).ringCatSheaf).prop_of_iso
+        (higherDirectImagePullbackIsoRestrict (IsPullback.of_hasPullback f g) ℱ q)
+        (hn.higherDirectImage.1 q)
+    exact isIso_fromTildeΓ_of_isQuasicoherent _
   exact presentationOfIsIsoFromTildeΓ _
 
 end QuasiCoherence
@@ -566,7 +562,7 @@ lemma isZero_of_forall_exists_isZero_restrict (M : T.Modules)
     (fun _ ↦ homOfLE inf_le_left))
   have hS : S ∈ Opens.grothendieckTopology T V := fun t ht ↦
     ⟨V ⊓ U t, homOfLE inf_le_left,
-      ⟨_, 𝟙 _, _, Presieve.ofArrows.mk ⟨t, ht⟩, Category.id_comp _⟩, ⟨ht, hU t⟩⟩
+      ⟨_, 𝟙 _, _, Presieve.ofArrows.mk (⟨t, ht⟩ : V), Category.id_comp _⟩, ⟨ht, hU t⟩⟩
   refine ((M.isSheaf_presheaf_comp_forget) _ hS).isSeparatedFor.ext fun Z l hl ↦ ?_
   obtain ⟨Y, g, _, hf, rfl⟩ := hl
   obtain ⟨t⟩ := hf
@@ -593,15 +589,12 @@ theorem exists_isZero_higherDirectImage_restrict (t : T) :
   obtain ⟨U, hU, htU, -⟩ :=
     (TopologicalSpace.Opens.isBasis_iff_nbhd.1 T.isBasis_affineOpens) (show t ∈ ⊤ from trivial)
   have : IsAffine U := hU
-  have := isGrothendieckAbelian (pullback f U.ι)
-  have : SheafOfModules.IsQuasicoherent (R := (pullback f U.ι).ringCatSheaf)
-      ((Modules.pullback (pullback.fst f U.ι)).obj ℱ) :=
-    (SheafOfModules.isQuasicoherent _).prop_of_iso
-      ((restrictFunctorIsoPullback (pullback.fst f U.ι)).app ℱ) inferInstance
-  obtain ⟨n, hn⟩ := exists_higherDirectImageBound_top (pullback.snd f U.ι)
-    ((Modules.pullback (pullback.fst f U.ι)).obj ℱ)
+  have := isGrothendieckAbelian (Limits.pullback f (Scheme.Opens.ι U))
+  obtain ⟨n, hn⟩ := exists_higherDirectImageBound_top (pullback.snd f (Scheme.Opens.ι U))
+    ((Modules.pullback (pullback.fst f (Scheme.Opens.ι U))).obj ℱ)
   exact ⟨U, n, htU, fun q hq ↦ IsZero.of_iso (hn.higherDirectImage.2 q hq)
-    (higherDirectImagePullbackIsoRestrict (IsPullback.of_hasPullback f U.ι) ℱ q).symm⟩
+    (higherDirectImagePullbackIsoRestrict (IsPullback.of_hasPullback f (Scheme.Opens.ι U)) ℱ
+      q).symm⟩
 
 /-- **Vanishing of the higher direct images in large degrees over a quasi-compact base.** In the
 situation of `AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_restrict`, if `T`

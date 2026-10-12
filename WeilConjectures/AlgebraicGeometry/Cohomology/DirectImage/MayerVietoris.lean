@@ -311,13 +311,18 @@ noncomputable def mvComplexShortComplexEvalIso (K : CochainComplex X.Modules ℕ
         (mvComplex f U K) (mvComplex f V K)).hom]
       simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
       apply biprod.hom_ext
-      · simp [mvShortComplex, mvComplexShortComplex, ← HomologicalComplex.comp_f]
+      · simp only [Iso.refl_hom, ShortComplex.map_f, HomologicalComplex.eval_map,
+          biprod.uniqueUpToIso_hom, Functor.mapBinaryBicone_fst, BinaryBiproduct.bicone_fst,
+          Category.id_comp, Category.assoc, biprod.lift_fst, mvShortComplex, mvComplexShortComplex,
+          ← HomologicalComplex.comp_f]
         exact (biprod.lift_fst _ _).symm
-      · simp [mvShortComplex, mvComplexShortComplex, ← HomologicalComplex.comp_f]
+      · simp only [Iso.refl_hom, ShortComplex.map_f, HomologicalComplex.eval_map,
+          biprod.uniqueUpToIso_hom, Functor.mapBinaryBicone_snd, BinaryBiproduct.bicone_snd,
+          Category.id_comp, Category.assoc, biprod.lift_snd, mvShortComplex, mvComplexShortComplex,
+          ← HomologicalComplex.comp_f]
         exact (biprod.lift_snd _ _).symm) (by
       apply biprod.hom_ext' <;>
-        simp [mvShortComplex, mvComplexShortComplex, Functor.mapBiprod_inv,
-          ← HomologicalComplex.comp_f])
+        simp [mvShortComplex, mvComplexShortComplex, ← HomologicalComplex.comp_f])
 
 /-- The Mayer–Vietoris short complex of a complex of flasque modules is short exact. -/
 lemma mvComplexShortComplex_shortExact (K : CochainComplex X.Modules ℕ)
@@ -329,6 +334,45 @@ lemma mvComplexShortComplex_shortExact (K : CochainComplex X.Modules ℕ)
       (mvShortComplex_shortExact f U V (K.X n))
 
 end MayerVietoris
+
+section AffineCovers
+
+/-- Two affine opens contained in an affine open meet in an affine open. -/
+lemma isAffineOpen_inf_of_le {A V₁ V₂ : X.Opens} (hA : IsAffineOpen A) (hV₁ : IsAffineOpen V₁)
+    (hV₂ : IsAffineOpen V₂) (h₁ : V₁ ≤ A) (h₂ : V₂ ≤ A) : IsAffineOpen (V₁ ⊓ V₂) :=
+  have : IsIso (pullback.diagonal (𝟙 X)) := (pullback.isIso_diagonal_iff (𝟙 X)).mpr inferInstance
+  (isAffineHom_diagonal_iff (f := 𝟙 X)).mp inferInstance A hA V₁ (by simpa using h₁) V₂
+    (by simpa using h₂) hV₁ hV₂
+
+/-- A quasi-compact open of a scheme is the union of a nonempty finite family of affine opens. -/
+lemma exists_finset_affineOpens_sup_eq {W : X.Opens} (hW : IsCompact (W : Set X)) :
+    ∃ t : Finset X.affineOpens, t.Nonempty ∧ t.sup (fun V ↦ (V : X.Opens)) = W := by
+  classical
+  obtain ⟨t, ht⟩ := hW.elim_finite_subcover
+    (fun V : {V : X.affineOpens // (V : X.Opens) ≤ W} ↦ ((V.1 : X.Opens) : Set X))
+    (fun V ↦ (V.1 : X.Opens).isOpen) (fun x hx ↦ by
+      obtain ⟨V, hV, hxV, hVW⟩ :=
+        (TopologicalSpace.Opens.isBasis_iff_nbhd.1 X.isBasis_affineOpens) hx
+      exact Set.mem_iUnion.2 ⟨⟨⟨V, hV⟩, hVW⟩, hxV⟩)
+  refine ⟨insert ⟨⊥, isAffineOpen_bot X⟩ (t.map (Function.Embedding.subtype _)),
+    Finset.insert_nonempty _ _, le_antisymm (Finset.sup_le fun V hV ↦ ?_) fun x hx ↦ ?_⟩
+  · obtain rfl | hV := Finset.mem_insert.1 hV
+    · exact bot_le
+    obtain ⟨V', -, rfl⟩ := Finset.mem_map.1 hV
+    exact V'.2
+  · obtain ⟨V, hV, hxV⟩ := Set.mem_iUnion₂.1 (ht hx)
+    exact (Finset.le_sup (f := fun V : X.affineOpens ↦ (V : X.Opens))
+      (Finset.mem_insert_of_mem (Finset.mem_map_of_mem _ hV))) hxV
+
+/-- Preimages commute with finite unions of opens. -/
+lemma preimage_finset_sup {Y Z : Scheme.{u}} (φ : Y ⟶ Z) {ι : Type*} (s : Finset ι)
+    (U : ι → Z.Opens) : φ ⁻¹ᵁ s.sup U = s.sup fun i ↦ φ ⁻¹ᵁ U i := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp
+  | insert a s ha ih => rw [Finset.sup_insert, Finset.sup_insert, Scheme.Hom.preimage_sup, ih]
+
+end AffineCovers
 
 section Derived
 
@@ -466,7 +510,7 @@ instance : IsIso (pushforwardToPushforwardRestrictTop f) := by
   intro V
   simp only [pushforwardToPushforwardRestrictTop, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Hom.comp_app, pushforward_map_app, restrictAdjunction_unit_app_app,
-    pushforwardComp_hom_app_app, Category.comp_id]
+    pushforwardComp_hom_app_app]
   exact isIso_presheaf_map_of_eq M _ (by
     rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι, top_inf_eq])
 
@@ -507,31 +551,6 @@ theorem higherDirectImageBound_finsetSup (B : X.Opens → Prop)
     refine (HigherDirectImageBound.sup f ℱ h₁ h₂ h₃).mono ?_
     have := hs.card_pos
     omega
-
-/-- Two affine opens contained in an affine open meet in an affine open. -/
-lemma isAffineOpen_inf_of_le {A V₁ V₂ : X.Opens} (hA : IsAffineOpen A) (hV₁ : IsAffineOpen V₁)
-    (hV₂ : IsAffineOpen V₂) (h₁ : V₁ ≤ A) (h₂ : V₂ ≤ A) : IsAffineOpen (V₁ ⊓ V₂) :=
-  have : IsIso (pullback.diagonal (𝟙 X)) := (pullback.isIso_diagonal_iff (𝟙 X)).mpr inferInstance
-  (isAffineHom_diagonal_iff (f := 𝟙 X)).mp inferInstance A hA V₁ (by simpa using h₁) V₂
-    (by simpa using h₂) hV₁ hV₂
-
-/-- A quasi-compact open of a scheme is a finite union of affine opens. -/
-lemma exists_finset_affineOpens_sup_eq {W : X.Opens} (hW : IsCompact (W : Set X)) :
-    ∃ t : Finset X.affineOpens, t.sup (fun V ↦ (V : X.Opens)) = W := by
-  classical
-  obtain ⟨t, ht⟩ := hW.elim_finite_subcover
-    (fun V : {V : X.affineOpens // (V : X.Opens) ≤ W} ↦ ((V.1 : X.Opens) : Set X))
-    (fun V ↦ (V.1 : X.Opens).isOpen) (fun x hx ↦ by
-      obtain ⟨V, hV, hxV, hVW⟩ :=
-        (TopologicalSpace.Opens.isBasis_iff_nbhd.1 X.isBasis_affineOpens) hx
-      exact Set.mem_iUnion.2 ⟨⟨⟨V, hV⟩, hVW⟩, hxV⟩)
-  refine ⟨t.map (Function.Embedding.subtype _), le_antisymm (Finset.sup_le fun V hV ↦ ?_)
-    fun x hx ↦ ?_⟩
-  · obtain ⟨V', -, rfl⟩ := Finset.mem_map.1 hV
-    exact V'.2
-  · obtain ⟨V, hV, hxV⟩ := Set.mem_iUnion₂.1 (ht hx)
-    exact (Finset.le_sup (f := fun V : X.affineOpens ↦ (V : X.Opens))
-      (Finset.mem_map_of_mem _ hV)) hxV
 
 variable (f ℱ) [IsAffine T] [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
 
@@ -609,8 +628,8 @@ theorem exists_higherDirectImageBound_top [QuasiCompact f] [QuasiSeparated f] :
   obtain ⟨s, hs, hcov⟩ := exists_finset_isAffineOpen_sup_eq_top (X := X)
   have (i j : X.affineOpens) : ∃ t : Finset X.affineOpens,
       t.sup (fun V ↦ (V : X.Opens)) = (i : X.Opens) ⊓ j :=
-    exists_finset_affineOpens_sup_eq
-      (QuasiSeparatedSpace.inter_isCompact _ _ i.1.isOpen i.2.isCompact j.1.isOpen j.2.isCompact)
+    (exists_finset_affineOpens_sup_eq (QuasiSeparatedSpace.inter_isCompact _ _ i.1.isOpen
+      i.2.isCompact j.1.isOpen j.2.isCompact)).imp fun _ h ↦ h.2
   choose t ht using this
   refine ⟨_, hcov ▸ higherDirectImageBound_of_affineCover f ℱ s hs (fun i ↦ i) (fun i _ ↦ i.2) t
     (fun V ↦ V) (fun _ _ _ _ V _ ↦ V.2) (fun i _ j _ ↦ ht i j)

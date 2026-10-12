@@ -77,6 +77,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Derived.Pullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechExact
@@ -85,6 +86,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModul
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModuleBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.MayerVietoris
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.ProjectionFormula
@@ -107,6 +109,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Projective.Finiteness
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
+public import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Restriction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Curve

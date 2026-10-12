@@ -91,6 +91,13 @@ theorem isQuasicoherent_of_shortExact (hS : S.ShortExact)
     refine ⟨m + n, ?_⟩
     rw [pow_add, mul_smul, ← ha, ← Hom.app_smul, hm, map_zero]
 
+/-- The pullback of a quasi-coherent module along an open immersion is quasi-coherent. -/
+instance isQuasicoherent_pullback_of_isOpenImmersion {Y : Scheme.{u}} (g : Y ⟶ X)
+    [IsOpenImmersion g] (M : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M] :
+    SheafOfModules.IsQuasicoherent (R := Y.ringCatSheaf) ((Modules.pullback g).obj M) :=
+  (SheafOfModules.isQuasicoherent Y.ringCatSheaf).prop_of_iso
+    ((restrictFunctorIsoPullback g).app M) inferInstance
+
 /-- A zero `𝒪_X`-module is quasi-coherent. -/
 lemma isQuasicoherent_of_isZero {M : X.Modules} (hM : IsZero M) :
     SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M :=

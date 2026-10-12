@@ -96,10 +96,6 @@ theorem exists_isZero_higherDirectImage_of_isPullback [CompactSpace T] (f : X �
     refine ⟨s.card * m + 2, fun g g' f' _ sq W' hW' hW'A ℱ' _ p hp ↦ ?_⟩
     have : IsAffine W' := hW'
     have := isGrothendieckAbelian (f' ⁻¹ᵁ W')
-    have : SheafOfModules.IsQuasicoherent (R := (f' ⁻¹ᵁ W').toScheme.ringCatSheaf)
-        ((Modules.pullback (f' ⁻¹ᵁ W').ι).obj ℱ') :=
-      (SheafOfModules.isQuasicoherent _).prop_of_iso
-        ((restrictFunctorIsoPullback (f' ⁻¹ᵁ W').ι).app ℱ') inferInstance
     refine IsZero.of_iso ?_
       (higherDirectImagePullbackIsoRestrict (isPullback_morphismRestrict f' W').flip ℱ' p).symm
     -- the preimages in `f'⁻¹ W'` of the affine opens of `X` over `A` are affine
@@ -219,14 +215,10 @@ theorem isZero_higherDirectImage_of_isClosedImmersion {d : ℕ} (hn : Nat.card n
   obtain ⟨S', hS', hsS', -⟩ :=
     (TopologicalSpace.Opens.isBasis_iff_nbhd.1 S.isBasis_affineOpens) (show s ∈ ⊤ from trivial)
   have : IsAffine S' := hS'
-  have sq := IsPullback.of_hasPullback (i ≫ ℙ(n; S) ↘ S) S'.ι
-  let g := pullback.fst (i ≫ ℙ(n; S) ↘ S) S'.ι
-  let f' := pullback.snd (i ≫ ℙ(n; S) ↘ S) S'.ι
-  have := isGrothendieckAbelian (pullback (i ≫ ℙ(n; S) ↘ S) S'.ι)
-  have : SheafOfModules.IsQuasicoherent (R := (pullback (i ≫ ℙ(n; S) ↘ S) S'.ι).ringCatSheaf)
-      ((Modules.pullback g).obj ℱ) :=
-    (SheafOfModules.isQuasicoherent _).prop_of_iso ((restrictFunctorIsoPullback g).app ℱ)
-      inferInstance
+  have sq := IsPullback.of_hasPullback (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S')
+  let g := pullback.fst (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S')
+  let f' := pullback.snd (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S')
+  have := isGrothendieckAbelian (Limits.pullback (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S'))
   refine ⟨S', hsS', IsZero.of_iso ?_ (higherDirectImagePullbackIsoRestrict sq ℱ q).symm⟩
   -- the base change of `X` to `S'` is covered by the `d + 1` affine opens over the standard ones
   let U (j : n) := g ⁻¹ᵁ (i ⁻¹ᵁ ProjectiveSpace.standardOpen n S j ⊓ (i ≫ ℙ(n; S) ↘ S) ⁻¹ᵁ S')
@@ -239,7 +231,7 @@ theorem isZero_higherDirectImage_of_isClosedImmersion {d : ℕ} (hn : Nat.card n
       (ProjectiveSpace.standardOpen n S j).ι).preimage i
     rwa [image_preimage_ι_comp, Scheme.Hom.preimage_inf, inf_comm, ← Scheme.Hom.comp_preimage]
       at h
-  have hsep (V₁ V₂ : (pullback (i ≫ ℙ(n; S) ↘ S) S'.ι).Opens) (h₁ : IsAffineOpen V₁)
+  have hsep (V₁ V₂ : (Limits.pullback (i ≫ ℙ(n; S) ↘ S) (Scheme.Opens.ι S')).Opens) (h₁ : IsAffineOpen V₁)
       (h₂ : IsAffineOpen V₂) : IsAffineOpen (V₁ ⊓ V₂) :=
     (isAffineHom_diagonal_iff (f := f')).mp inferInstance ⊤ (isAffineOpen_top _) V₁ (by simp) V₂
       (by simp) h₁ h₂
