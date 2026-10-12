@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-ext-pullback-hom-complex",
+ "kind": "statement",
+ "title": "Ext pullback before evaluating the Hom complex",
+ "statement": "Let $g:X^\\prime\\to X$ be a scheme morphism [def-pc-scheme], $G$ an abelian etale sheaf [def-weil-pbc-abelian-etale-sheaves], and $q\\geq0$. Let $L=g^{-1}$ [def-weil-pbc-derived-inverse-image], let $R$ and $R^\\prime$ be the chosen injective resolutions of $G$ and $LG$ [def-sp-injective-resolutions], and let $\\varphi:LR\\to R^\\prime$ commute up to homotopy with their augmentations. Let $\\alpha:\\mathbb Z_{X^\\prime}\\to L\\mathbb Z_X$ be the inverse constant-sheaf comparison. Define $c$ on degree-$n$ cochains by $a\\mapsto\\alpha;L(a);\\varphi^n$. Under the Ext-to-Hom-complex homology equivalences [lem-weil-pbc-ext-via-injective-resolution], the cohomology pullback [def-weil-pbc-cohomology-pullback] is $H^q(c)$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Ext computed by injective resolutions, with functoriality equations 01F9 and 01FA"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-ext-resolution-sections-iso"
+ ],
+ "proof": [
+  {
+   "text": "Write a class as a cocycle into the chosen resolution, using the\nExt/resolution equivalence. Its inverse sends it to the roof whose right arrow\nis the augmentation. Apply the exact inverse-image functor to the roof and\nprecompose with the constant-sheaf comparison. The supplied augmentation\nhomotopy makes the localized composite of the pulled-back augmentation and φ\nidentical to the target augmentation. Cancel that invertible augmentation.\nThe resulting roof is the class of the cochain obtained by applying inverse\nimage degreewise and composing with φ. This is homPullbackMap by its explicit\nformula. Passing from cocycles modulo boundaries to the homology of the Hom\ncomplex gives the square below. The argument includes degree zero and zero\nobjects; it uses no injectivity of the pulled-back resolution.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-weil-pbc-inverse-image-exact",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "E1 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "equations 01F9 and 01FA; details of the parent node proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext map exact functor computed on cocycles in injective resolutions",
+   "date": "2026-10-12",
+   "results": "extMk_hom, mapExactFunctor_hom, extMk_comp_mk₀, mk₀_comp_extMk; no cross-category resolution formula",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext exact functor injective resolution cocycle comparison",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass|upperStarConstantSheafIso",
+   "date": "2026-10-12",
+   "results": "Injective/Ext.lean extEquivCohomologyClass and its symm_mk_hom; no pullback formula",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExtPullbackResolutionSections",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-local-exchange",
+   "place": "Proof: compute the stalk of exchange termwise before closed-fibre comparison; identify the cohomology pullback map.",
+   "via": [
+    "lem-weil-pbc-ext-pullback-resolution-sections",
+    "lem-weil-pbc-sheafH-right-derived-pullback",
+    "lem-weil-pbc-abelian-derived-global-ext-pullback",
+    "lem-weil-pbc-strict-local-abelian-total-exchange",
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExtPullbackHomComplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExtPullbackHomComplex.lean",
+  "declaration": "AlgebraicGeometry.SheafPullbackResolution.extPullback_homComplex",
+  "statement": "theorem extPullback_homComplex {X X' : Scheme.{u}} (g : X' ⟶ X)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)\n    (φ : ((upperStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (.up ℤ)).obj\n      (injectiveResolution G).cochainComplex ⟶\n      (injectiveResolution ((upperStar AddCommGrpCat.{u + 1} g).obj G)).cochainComplex)\n    (hφ : Nonempty (Homotopy\n      (((upperStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (.up ℤ)).map\n        (injectiveResolution G).ι' ≫ φ)\n      ((HomologicalComplex.singleMapHomologicalComplex\n        (upperStar AddCommGrpCat.{u + 1} g) (.up ℤ) 0).hom.app G ≫\n        (injectiveResolution ((upperStar AddCommGrpCat.{u + 1} g).obj G)).ι'))) :\n    let R := injectiveResolution G\n    let R' := injectiveResolution ((upperStar AddCommGrpCat.{u + 1} g).obj G)\n    R.extAddEquivCohomologyClass.toAddCommGrpIso.hom ≫\n        (leftHomologyData _ (injectiveResolution G).cochainComplex (q : ℤ)).homologyIso.inv ≫\n        HomologicalComplex.homologyMap (homPullbackMap (upperStar AddCommGrpCat.{u + 1} g)\n          ((upperStarConstantSheafIso AddCommGrpCat.{u + 1} g).inv.app\n            (AddCommGrpCat.of (ULift.{u + 1} ℤ))) _ _ φ) (q : ℤ) =\n      AddCommGrpCat.ofHom (cohomologyMap g G q) ≫\n        R'.extAddEquivCohomologyClass.toAddCommGrpIso.hom ≫\n        (leftHomologyData _\n          (injectiveResolution ((upperStar AddCommGrpCat.{u + 1} g).obj G)).cochainComplex\n          (q : ℤ)).homologyIso.inv",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T194107-L-453772",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T194107-L-453772",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

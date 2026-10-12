@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-constant-sheaf-pullback-transpose",
+ "kind": "statement",
+ "title": "Transpose of pullback from a constant sheaf",
+ "statement": "Let $g:X^\\prime\\to X$ be a scheme morphism [def-pc-scheme], $M$ an abelian group, $F$ an abelian etale sheaf on $X$ [def-weil-pbc-abelian-etale-sheaves], and $a:\\underline M_X\\to F$. Let $L=g^{-1}$ [def-weil-pbc-derived-inverse-image] and $\\alpha:\\underline M_{X^\\prime}\\to L\\underline M_X$ be the inverse constant-sheaf comparison. Let $\\eta_F:\\Gamma(X,F)\\to\\Gamma(X^\\prime,LF)$ be the inverse-image unit followed by the canonical identification of sections of the pushforward [def-weil-pbc-etale-cohomology]. Then the transpose of $\\alpha;L(a)$ under the constant-sheaf/global-sections adjunction on $X^\\prime$ is the transpose of $a$ under that adjunction on $X$, followed by $\\eta_F$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08J6",
+  "place": "remark-before-Leray; constant-sheaf/global-sections adjunction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use uniqueness of the two left adjoints to terminal sections to transpose the inverse constant-sheaf comparison. Expand the composite adjunction hom equivalence. Naturality of the inverse-image adjunction unit sends L(a) to a followed by the unit on F. Transport global sections to terminal sections by right-adjoint uniqueness, cancel its inverse followed by its hom, and use hom-equivalence naturality to recover the stated unit section map. These are precisely the definitions of upperStarConstantSheafIso and lowerStarCompGlobalSectionsIso.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "E1 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "equations 01F9 and 01FA; details of the parent node proof",
+  "note": "Proved in Lean from Mathlib adjunction uniqueness and naturality; no sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext map exact functor computed on cocycles in injective resolutions",
+   "date": "2026-10-12",
+   "results": "extMk_hom, mapExactFunctor_hom, extMk_comp_mk₀, mk₀_comp_extMk; no cross-category resolution formula",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext exact functor injective resolution cocycle comparison",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass|upperStarConstantSheafIso",
+   "date": "2026-10-12",
+   "results": "Injective/Ext.lean extEquivCohomologyClass and its symm_mk_hom; no pullback formula",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExtPullbackResolutionSections",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-local-exchange",
+   "place": "Proof: compute the stalk of exchange termwise before closed-fibre comparison; identify the cohomology pullback map.",
+   "via": [
+    "lem-weil-pbc-ext-pullback-resolution-sections",
+    "lem-weil-pbc-sheafH-right-derived-pullback",
+    "lem-weil-pbc-abelian-derived-global-ext-pullback",
+    "lem-weil-pbc-strict-local-abelian-total-exchange",
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantSheafPullbackTranspose",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantSheafPullbackTranspose.lean",
+  "declaration": "AlgebraicGeometry.constantSheaf_pullback_transpose",
+  "statement": "theorem constantSheaf_pullback_transpose {X X' : Scheme.{u}} (g : X' ⟶ X)\n    (M : AddCommGrpCat.{u + 1})\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (a : (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj M ⟶ F) :\n    let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}\n    let Γ' := Sheaf.Γ X'.smallEtaleTopology AddCommGrpCat.{u + 1}\n    let L := upperStar AddCommGrpCat.{u + 1} g\n    let η : Γ ⟶ L ⋙ Γ' :=\n      (Functor.leftUnitor Γ).inv ≫\n        Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit Γ ≫\n        (Functor.associator _ _ _).hom ≫\n        Functor.whiskerLeft L (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g).hom\n    (constantSheafΓAdj X'.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv M (L.obj F)\n        ((upperStarConstantSheafIso AddCommGrpCat.{u + 1} g).inv.app M ≫ L.map a) =\n      (constantSheafΓAdj X.smallEtaleTopology AddCommGrpCat.{u + 1}).homEquiv M F a ≫\n        η.app F",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T194107-L-453772",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T194107-L-453772",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
