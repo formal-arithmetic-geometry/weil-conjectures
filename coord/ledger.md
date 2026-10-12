@@ -8735,3 +8735,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/E3/Sheaf.AlgebraicGeometry.ClassicalPullbackResolutionSections (stage 3; reviewer PASS; first push; landing 20261012T173818-L-3293332 (interface); batch 20261012T173801; modules 2; new nodes 1)
 - 17:38 L: merged deliver/E3/Sheaf.CategoryTheory.RoosPrefixAcyclic (stage 3; reviewer PASS; first push; landing 20261012T173819-L-3293606 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/E3/Sheaf.Paper.MLCohomologyPowersIdealKernelBound (stage 3; reviewer PASS; first push; landing 20261012T173819-L-3293739 (proof); batch 20261012T173801; modules 1; new nodes 0)
+- 17:38 L: merged deliver/E3/Sheaf.Paper.ZariskiEtaleResolutionHomologyDataExists (stage 3; reviewer PASS; first push; landing 20261012T173820-L-3293869 (interface); batch 20261012T173801; modules 3; new nodes 2)

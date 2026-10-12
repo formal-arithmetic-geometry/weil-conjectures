@@ -10,9 +10,8 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.Paper.ZariskiEtaleResolutionHomologyIndependent
+import Sheaf.Paper.ZariskiEtaleResolutionCocycleHomology
+import Sheaf.Paper.ZariskiEtaleResolutionPullbackCocycle
 
 /-! # Resolution comparison bridge -/
 
@@ -22,6 +21,32 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.Functor.sheafPullbackConstruction
+
+private noncomputable def resolutionSectionEquiv
+    {C : Type*} [Category.{u + 1} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u + 1}] (V : C)
+    (A : Sheaf J AddCommGrpCat.{u + 1}) :
+    ((presheafToSheaf J AddCommGrpCat.{u + 1}).obj
+      (yoneda.obj V ⋙ AddCommGrpCat.free) ⟶ A) ≃ A.obj.obj (op V) :=
+  ((sheafificationAdjunction J AddCommGrpCat.{u + 1}).homEquiv _ A).trans
+    (((AddCommGrpCat.adj.whiskerRight Cᵒᵖ).homEquiv (yoneda.obj V) A.obj).trans yonedaEquiv)
+
+private lemma resolutionSectionEquiv_comp
+    {C : Type*} [Category.{u + 1} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u + 1}] (V : C)
+    {A B : Sheaf J AddCommGrpCat.{u + 1}}
+    (a : (presheafToSheaf J AddCommGrpCat.{u + 1}).obj
+      (yoneda.obj V ⋙ AddCommGrpCat.free) ⟶ A) (f : A ⟶ B) :
+    resolutionSectionEquiv J V B (a ≫ f) =
+      (f.hom.app (op V)).hom (resolutionSectionEquiv J V A a) := by
+  rfl
+
+private lemma resolutionSectionEquiv_zero
+    {C : Type*} [Category.{u + 1} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u + 1}] (V : C)
+    (A : Sheaf J AddCommGrpCat.{u + 1}) :
+    resolutionSectionEquiv J V A 0 = 0 := by
+  rfl
 
 /-- The canonical pullback-counit map is represented by any augmented comparison.
 
@@ -144,5 +169,36 @@ theorem zariski_etale_resolution_homology_data_exists
         (HomologicalComplex.homologyMap
           (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
             (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex
-               (ComplexShape.up ℕ)).map b) q).hom (e₁ x) := by sorry
-
+               (ComplexShape.up ℕ)).map b) q).hom (e₁ x) := by
+  obtain ⟨e₁, e₂, he⟩ :=
+    zariski_etale_resolution_cocycle_homology i hi F I R b q V
+  refine ⟨e₁, e₂, ?_⟩
+  intro x
+  obtain ⟨a, ha, rfl⟩ := R.extMk_surjective x (q + 1) rfl
+  let J := Opens.grothendieckTopology X.carrier
+  let K := X.smallEtaleTopology
+  let s := resolutionSectionEquiv J V (R.cocomplex.X q) a
+  let c := (resolutionSectionEquiv K (i.obj V) (I.cocomplex.X q)).symm
+    ((b.f q).hom.app (op V) s)
+  have hsec : (b.f q).hom.app (op V) s =
+      resolutionSectionEquiv K (i.obj V) (I.cocomplex.X q) c := by
+    exact (Equiv.apply_symm_apply _ _).symm
+  have hc : c ≫ I.cocomplex.d q (q + 1) = 0 := by
+    apply (resolutionSectionEquiv K (i.obj V) (I.cocomplex.X (q + 1))).injective
+    rw [resolutionSectionEquiv_comp, ← hsec, resolutionSectionEquiv_zero]
+    have hcomm := congrArg
+      (fun f ↦ (f.hom.app (op V)).hom s) (b.comm q (q + 1))
+    have hz : (R.cocomplex.d q (q + 1)).hom.app (op V) s = 0 := by
+      change resolutionSectionEquiv J V (R.cocomplex.X (q + 1))
+        (a ≫ R.cocomplex.d q (q + 1)) = 0
+      rw [ha, resolutionSectionEquiv_zero]
+    change (I.cocomplex.d q (q + 1)).hom.app (op (i.obj V))
+        ((b.f q).hom.app (op V) s) =
+      (b.f (q + 1)).hom.app (op V)
+        ((R.cocomplex.d q (q + 1)).hom.app (op V) s) at hcomm
+    rw [hz, map_zero] at hcomm
+    exact hcomm
+  have hclass := zariski_etale_resolution_pullback_cocycle
+    i hi fstar hfstar F I R b hb q V a ha c hc hsec
+  rw [hclass]
+  exact he a ha c hc hsec
