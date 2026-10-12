@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-pointwise-truncation-open-stabilization",
+ "kind": "statement",
+ "title": "Local open cohomology of lower truncations stabilizes in two adjacent degrees",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space and $E\\in D(\\operatorname{Mod}(\\mathcal O_X))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $b:\\mathbf Z\\to\\mathbf Z$ and $B$ be any family of open subsets of $X$. Suppose $H^p(U,H^{r-p}(E))=0$ for every $r\\in\\mathbf Z$, $p\\in\\mathbf N$, $U\\in B$ with $p>b(r)$ [def-sc-open-module-cohomology]. For every $m\\in\\mathbf Z$, there exists $N\\in\\mathbf N$ with $-N\\le m$ such that for every $U\\in B$ and $n\\ge N$, the canonical transition $\\tau_{\\ge -n-1}E\\to\\tau_{\\ge -n}E$ [def-sbc-standard-tstructure-derived-category] induces isomorphisms on $H^{m-1}(R\\Gamma(U,-))$ and $H^m(R\\Gamma(U,-))$ [def-pc-open-module-derived-sections].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D62, label lemma-is-limit-per-point, final truncation-triangle paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sc-open-module-cohomology",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-pc-open-module-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Choose N = max(-m, b(m-1)-m, b(m)-m-1, b(m+1)-m-2).toNat + 1. For n >= N and q in {m-1,m,m+1}, put p=(q+n+1).toNat. Integer arithmetic gives p=q+n+1>=0, p>b(q), and q-p=-n-1. The hypothesis makes H^p(U,H^(-n-1)(E)) zero, uniformly in U in B.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the successive lower-truncation distinguished triangle at n+1. Apply RΓ(U,-), which carries distinguished triangles to distinguished triangles and commutes with shifts. Its first object is RΓ(U,H^(-n-1)(E)[n+1]).",
+   "uses": [
+    "lem-pc-derived-lower-truncation-step-triangle",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cohomology shift isomorphism identifies H^q of that object with H^(q+n+1)(RΓ(U,H^(-n-1)(E)[0])). The single-object comparison for bounded-below right derived functors, transported along the proved unbounded/bounded-below compatibility, identifies this with the classical open module cohomology in degree p. Transport the zero objects from the first step across these explicit isomorphisms.",
+   "uses": [
+    "lem-sp-derived-cohomology-shift",
+    "lem-sp-derived-functor-single-identification",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first object of the mapped triangle has zero cohomology in degrees m-1, m and m+1. Apply the long exact cohomology sequence twice: the middle homology map is monic and epic in degrees m-1 and m, hence is an isomorphism. Rewrite -(n+1)+1=-n to identify the middle arrow with the stated transition.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sp-derived-functor-single-identification",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D62, label lemma-is-limit-per-point, final truncation-triangle paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "eventual stabilization cohomology lower truncations local cohomological bound",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "eventual stabilization of cohomology of derived sections of lower truncations from local cohomology vanishing",
+   "results": "8 hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isZero_of_isLE, DerivedCategory.isGE_iff, DerivedCategory.isZero_of_isGE, DerivedCategory.isLE_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CochainComplex.cm5b.instIsStrictlyGEI",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyRightDerivedFunctorObjSingleFunctorIso|truncGE.*stabil",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.PointwiseTruncationLimitIsIso",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0D62, lemma-is-limit-per-point, the two adjacent transition maps and the three endpoint vanishings in its proof",
+   "via": [
+    "lem-pc-ringed-space-pointwise-truncation-limit-isIso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.PointwiseTruncationOpenStabilization",
+  "file": "lean/Sheaf/Topology/PointwiseTruncationOpenStabilization.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.pointwise_truncation_open_stabilization",
+  "statement": "theorem pointwise_truncation_open_stabilization (X : RingedSpace.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]\n    [HasDerivedCategory.{v} AddCommGrpCat.{u}]\n    (E : DerivedCategory (SheafOfModules.{u} (moduleRings X)))\n    (b : ℤ → ℤ) (B : Set (Opens X))\n    (hvan : ∀ (m : ℤ) (p : ℕ) (U : Opens X), U ∈ B → b m < (p : ℤ) →\n      IsZero ((openModuleCohomology X p U).obj\n        ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X))\n          (m - (p : ℤ))).obj E)))\n    (m : ℤ) :\n    ∃ N : ℕ, -(N : ℤ) ≤ m ∧ ∀ (U : Opens X), U ∈ B → ∀ n : ℕ, N ≤ n →\n      IsIso ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} (m - 1)).map\n        ((openModuleDerivedSections X U).map\n          ((DerivedCategory.TStructure.t.natTransTruncGEOfLE\n            (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E))) ∧\n      IsIso ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} m).map\n        ((openModuleDerivedSections X U).map\n          ((DerivedCategory.TStructure.t.natTransTruncGEOfLE\n            (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T163613-L-2784633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T163613-L-2784633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
