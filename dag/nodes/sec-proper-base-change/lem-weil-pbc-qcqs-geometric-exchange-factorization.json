@@ -20,45 +20,57 @@
  ],
  "proof": [
   {
-   "text": "The residue-field description of the strict henselization supplies its local and strictly henselian structures. Construct t as the spectrum of the residue map followed by the residue-field equivalence and its inclusion into Ω. Its prime-comap formula gives the closed-point condition, and the pointed-neighbourhood equations give tρ=s. Define q by the pullback lift of g′ and f′t. Pullback pasting, using the original cartesian square, gives its cartesian square and qp=g′.",
+   "text": "Use strictHenselizationResidue with the geometric residue-field algebra structure. Construct t explicitly as Spec of the residue map followed by the residue-field equivalence and inclusion into Ω. PrimeSpectrum.comap_comp and IsLocalRing.PrimeSpectrum.comap_residue give t(default)=closedPoint. The residue theorem gives tρ=s and all pointed-neighbourhood equations.",
    "uses": [
     "lem-weil-pbc-strict-henselization-functoriality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
+   }
   },
   {
-   "text": "For the underlying sheaf of sets, qcqs continuity identifies the direct-image stalk with sections of the strict-henselian base change, with the representative restriction formula. The module forgetful functor preserves the filtered stalk colimit. Apply the module/set inverse-image comparison, whose adjoint-transpose identity respects units. These comparisons identify the bijective set map with a linear map e.hom and make it invertible, with the same representative formula. Orient the fibre product by its symmetry isomorphism and transport terminal sections to global sections.",
-   "uses": [
-    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
-    "lem-sc-etale-module-set-pullback-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The inverse-image stalk/germ theorem identifies the source stalk. For a pointed affine representative (U,u), expand the exchange unit, square comparison and counit. The unit pulls the section on U×Y X to its iterated inverse image. The square comparison identifies the two iterated pullbacks, and the counit restricts to the pointed fibre. Because t maps to u on this representative, this is precisely e.hom followed by restriction along q. The inverse upperStarComp identifies q inverse image of p inverse image with g′ inverse image. The inverse lowerStarCompGlobalSectionsIso and global terminal germ identify the result with the target stalk. Agreement on these representatives gives the displayed equality by the colimit hom-ext principle.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "def-weil-pbc-underived-exchange"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On Spec Ω every pointed neighbourhood (U,u) admits the section u from the identity object. Equality of identity germs is witnessed on a common pointed neighbourhood; pull back along its section to recover equality. Every germ has a neighbourhood representative; pull it back along the pointed section to give an identity representative. Thus the identity-object germ is bijective. The Lean proof uses toPresheafFiber_eq_iff′ and toPresheafFiber_jointly_surjective, and a universe-shrunk filtered-colimit preservation instance. Compose with the actual global-sections/terminal-sections isomorphism.",
+   "text": "Construct q=pullback.lift(g′,f′t). The original square and tρ=s give its compatibility. The lift equations give qp=g′ and qh=f′t. IsPullback.of_right cancels the canonical pullback square from the original square, proving (q,f′,h,t) cartesian.",
    "uses": [],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
+   }
+  },
+  {
+   "text": "Apply exists_qcqsStrictLocalModuleComparison to obtain e₀ with its representative formula. Transport its source by eqToIso along id≫s=s, giving the precise iso e in the unchanged statement.",
+   "uses": [
+    "lem-weil-pbc-qcqs-strict-local-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
+   }
+  },
+  {
+   "text": "Apply strictLocal_exchange_compatibility with the explicitly constructed t and q, their pointed-neighbourhood and lift equations, and e₀.hom with its representative formula. Unfold geometricPointGlobalGerm and the transported iso, and reassociate the composite to obtain exactly the required equality.",
+   "uses": [
+    "lem-weil-pbc-strict-local-exchange-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
+   }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-strict-henselization-functoriality",
-  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
-  "lem-sc-etale-module-set-pullback-comparison",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "def-weil-pbc-underived-exchange"
+  "lem-weil-pbc-qcqs-strict-local-module-comparison",
+  "lem-weil-pbc-strict-local-exchange-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q9 (theorem-higher-direct-images), degree zero and its canonical representative restriction; Tag 03Q1 inverse-image stalks; Tag 0A3U (lemma-proper-base-change-f-star), compatibility omitted in the source and expanded here"
+  "place": "Tags 03Q9, 03Q1 and 0A3U; Lean reduction by P1 separates module continuity and formal representative compatibility, with residue point and cartesian lift constructed directly"
  },
  "mathlib_searches": [
   {
@@ -140,9 +152,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T150950-L-2229864",
-  "kind": "interface"
+  "landing": "20261012T153012-L-2351260",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

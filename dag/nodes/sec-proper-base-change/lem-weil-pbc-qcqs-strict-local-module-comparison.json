@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-qcqs-strict-local-module-comparison",
+ "kind": "statement",
+ "title": "Canonical qcqs strict-local comparison for module coefficients",
+ "statement": "Let Λ be a commutative coefficient ring, f:X→Y a quasi-compact quasi-separated scheme morphism [def-weil-pbc-scheme-conventions], s:Spec Ω→Y a geometric point with Ω algebraically closed [def-weil-geometric-point], and F a sheaf of Λ-modules on X_et [def-weil-pbc-etale-sheaves]. Write R=O^sh_(Y,s) and ρ:Spec R→Y for the affine pointed-neighbourhood colimit and its structural map [def-weil-pbc-strict-henselization-limit; def-weil-pbc-strict-henselization-structural-map], Z=X×_Y Spec R, p:Z→X, H=p⁻¹F. For each small-model affine pointed representative (V,v), let c_V:Spec R→V be the canonical limit leg followed by Spec Γ(V,⊤)≅V. The map Z→V×_Y X has components (h c_V,p), where h:Z→Spec R. Its graph gives the terminal-neighbourhood morphism δ_V from Z to p⁻¹(V×_Y X). Define r_V:F(V×_Y X)→Γ(Z,H) to be the p-adjunction unit at V×_Y X, restriction along δ_V, and the inverse terminal-section identification. This is implemented by qcqsStrictLocalNeighbourhoodSection and qcqsStrictLocalSectionRestriction, using pullback symmetry to match the library's reversed orientation. There is an isomorphism e:(f_*F)_s≅Γ(Z,H) such that germ_(V,v) followed by e.hom equals r_V for every affine pointed representative. The predicate IsQcqsStrictLocalModuleComparison is exactly these equations. Stalks and germs use pointSmallEtale.sheafFiber and toPresheafFiber [def-weil-pbc-geometric-stalks]. This asserts continuity and its representative formula; it says nothing about exchange or restriction to a geometric fibre.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Apply the set-valued qcqs continuity theorem to the underlying set sheaf. Its unique bijective comparison has the unit/limit-leg formula on all affine pointed representatives.",
+   "uses": [
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
+   }
+  },
+  {
+   "text": "Forgetting modules preserves filtered stalk colimits. Use the module/set inverse-image comparison and its adjoint-transpose unit identity to transport the set comparison to the underlying sets of the module pullback sections. Pullback symmetry changes ρ×f to f×ρ; terminal-section and global-section identifications give the displayed target.",
+   "uses": [
+    "lem-sc-etale-module-set-pullback-comparison",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
+   }
+  },
+  {
+   "text": "Each representative restriction is linear. The filtered module-colimit universal property constructs a linear map with the representative formula; after forgetting modules it is exactly the bijective set comparison. A bijective linear map is invertible. The unit identities in the preceding step prove the specified formula for its hom. Empty X and zero Λ give zero modules and do not require any additional assumptions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "lem-sc-etale-module-set-pullback-comparison",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Parent factorization proof step 2; Tag 03Q9 proof, maps from neighbourhood sections to strict-local sections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale direct image stalk strict henselization module global sections; base change exchange map stalk germ compatibility inverse image",
+   "results": "Both searches unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical isomorphism of modules between the stalk of an etale direct image and global sections on the strict henselization base change, with germ formula; exchange compatibility with fibre restriction",
+   "results": "Eight hits per query, on structure-sheaf stalk maps in Spec/AffineScheme, Scheme.stalkMap_germ, and ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap. These concern Zariski structure-sheaf or tilde stalks, not the etale direct image or exchange.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber",
+   "results": "12 hits including presheafFiber_hom_ext, toPresheafFiber_naturality, toPresheafFiber_w, and toPresheafFiber_presheafFiberDesc. These are general colimit tools, not the desired etale comparison or exchange identity.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|baseChangeMap|strictLocal in Mathlib/CategoryTheory/Sites; qcqs.*[Ss]talk|strictHenselization.*[Cc]omparison|baseChangeMap.*[Gg]erm in the project library",
+   "results": "No Mathlib sites hits and no exact library theorem. The library has the set-valued continuity theorem and the module/set inverse-image comparison; the finite base-change stalk-restriction theorem only computes pointwise restrictions, not the global-section factorization.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcqsGeometricExchangeFactorization",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Parent factorization proof step 2; Tag 03Q9 proof, maps from neighbourhood sections to strict-local sections",
+   "via": [
+    "lem-weil-pbc-qcqs-geometric-exchange-factorization",
+    "lem-weil-pbc-proper-geometric-point-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsStrictLocalModuleComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_qcqsStrictLocalModuleComparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.qcqsStrictLocalNeighbourhoodSection",
+   "AlgebraicGeometry.Etale.qcqsStrictLocalSectionRestriction",
+   "AlgebraicGeometry.Etale.IsQcqsStrictLocalModuleComparison",
+   "AlgebraicGeometry.Etale.exists_qcqsStrictLocalModuleComparison"
+  ],
+  "statement": "theorem exists_qcqsStrictLocalModuleComparison (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : ∃ e : (Scheme.pointSmallEtale s).sheafFiber.obj ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ≅ (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F), IsQcqsStrictLocalModuleComparison Λ f s F e.hom",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T153012-L-2351260",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T153012-L-2351260",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

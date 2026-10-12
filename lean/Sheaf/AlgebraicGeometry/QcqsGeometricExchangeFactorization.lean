@@ -11,10 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
+import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
+import Sheaf.AlgebraicGeometry.StrictLocalExchangeCompatibility
 
 /-! # The degree-zero exchange factorization through strict-local sections
 
@@ -100,6 +99,50 @@ theorem qcqs_geometricExchange_factorization
               ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) ≫
             geometricPointGlobalGerm Λ Ω
               ((lowerStar (ModuleCat.{u + 1} Λ) f').obj
-                ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)) := by sorry
+                ((upperStar (ModuleCat.{u + 1} Λ) g').obj F))  := by
+  classical
+  dsimp only
+  let : Algebra (Y.residueField (s (IsLocalRing.closedPoint Ω))) Ω :=
+    (Scheme.descResidueField (Scheme.stalkClosedPointTo s)).hom.toAlgebra
+  obtain ⟨hlocal, hstrict, _, _, σ, ⟨hpoint, hbase⟩, _⟩ :=
+    strictHenselizationResidue s rfl
+  let := hlocal
+  let t := Spec.map (CommRingCat.ofHom
+    (((IntermediateField.val
+      (separableClosure (Y.residueField (s (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
+        σ.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing s))))
+  have ht : t default = IsLocalRing.closedPoint (Scheme.strictHenselizationRing s) := by
+    rw [Subsingleton.elim (default : Spec (.of Ω)) (IsLocalRing.closedPoint Ω)]
+    change PrimeSpectrum.comap
+      ((((IntermediateField.val
+        (separableClosure (Y.residueField (s (IsLocalRing.closedPoint Ω))) Ω)).toRingHom).comp
+          σ.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing s)))
+      (IsLocalRing.closedPoint Ω) = _
+    rw [PrimeSpectrum.comap_comp]
+    exact IsLocalRing.PrimeSpectrum.comap_residue _ _
+  have htbase : t ≫ Scheme.strictHenselizationStructuralMap s = s := hbase
+  let q := pullback.lift g' (f' ≫ t)
+    (sq.w.trans (by rw [Category.assoc, htbase]))
+  have hq : q ≫ pullback.fst f (Scheme.strictHenselizationStructuralMap s) = g' :=
+    pullback.lift_fst _ _ _
+  have hqt : q ≫ pullback.snd f (Scheme.strictHenselizationStructuralMap s) = f' ≫ t :=
+    pullback.lift_snd _ _ _
+  have hcart : IsPullback q f'
+      (pullback.snd f (Scheme.strictHenselizationStructuralMap s)) t := by
+    apply IsPullback.of_right (s := ?_) hqt (IsPullback.of_hasPullback _ _)
+    simpa only [hq, htbase] using sq
+  refine ⟨hlocal, hstrict, t, q, ht, hcart, hq, ?_⟩
+  obtain ⟨e₀, he₀⟩ := exists_qcqsStrictLocalModuleComparison Λ f s F
+  let e : (Scheme.pointSmallEtale ((𝟙 (Spec (.of Ω))) ≫ s)).sheafFiber.obj
+      ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F) ≅
+      (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology
+        (ModuleCat.{u + 1} Λ)).obj
+        ((upperStar (ModuleCat.{u + 1} Λ)
+          (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F) :=
+    (eqToIso (by rw [Category.id_comp])) ≪≫ e₀
+  refine ⟨e, ?_⟩
+  simpa only [e, Iso.trans_hom, eqToIso.hom, geometricPointGlobalGerm,
+    Category.assoc] using
+    strictLocal_exchange_compatibility Λ sq F t hpoint q hqt hq e₀.hom he₀
 
 end AlgebraicGeometry.Etale
