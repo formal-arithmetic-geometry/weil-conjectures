@@ -1,6 +1,6 @@
 # Work queue
 
-1831 items; claim with `tools/claim.py next <group> [--stage N]`.
+1832 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (14)
 
@@ -29,7 +29,7 @@
 
 Not open yet: 47 nodes that wait for stage 1.
 
-## Stage 3: modules to prove (1816)
+## Stage 3: modules to prove (1817)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -1006,7 +1006,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.Topology.Sheaves.LerayAcyclicComparison` | 9 | 1 | proof |
 | `Sheaf.Topology.SpectralLimitConstructibleClosed` | 9 | 1 | proof |
 | `Sheaf.Topology.SpectralLimitConstructibleClosedNonempty` | 9 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.Serre` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic` | 9 | 1 | proof |
@@ -1052,6 +1051,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CoherentPseudoCoherent` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.CotangentComplexSymmetricAlgebra` | 10 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.DerivedPullbackSingleCohomology` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule` | 10 | 15 | proof |
 | `Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation` | 10 | 1 | proof |
@@ -1070,6 +1070,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.FormalSystemsKernelReesFinite` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GradedSerreVanishing` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy` | 10 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.HigherDirectImageDerivedModel` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InvertibleSectionLocalization` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfDegreeOfEtaleCover` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect` | 10 | 1 | proof |
