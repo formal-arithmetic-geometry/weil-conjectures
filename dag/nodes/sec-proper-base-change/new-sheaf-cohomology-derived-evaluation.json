@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "Let Z_J be the constant integer sheaf. The constant-sheaf adjunction at terminal T identifies Hom(Z_J,F) with Hom(Z,F(T)), and evaluation at 1 gives an additive natural equivalence with F(T). The inverse sends a section s to n -> n*s. These formulas commute with every morphism of abelian sheaves.",
+   "text": "The private evaluationEquiv is the composite of (constantSheafAdj J AddCommGrpCat hT).homAddEquiv and uliftZMultiplesAddEquiv. Its naturality follows from Adjunction.homEquiv_naturality_right and evaluation at 1. This identifies maps from the constant lifted integer sheaf with evaluation at T, additively and naturally.",
    "uses": [
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-sheafification"
@@ -24,7 +24,7 @@
    "elementary": true
   },
   {
-   "text": "Choose an injective resolution R of F in the abelian sheaf category. Apply the preceding natural equivalence degreewise to identify the Hom(Z_J,R) complex with the evaluation complex R(T). Naturality makes this commute with each differential, so the two complexes have additively equivalent cohomology in degree q+1.",
+   "text": "Choose R = injectiveResolution F. In the integer-indexed complex R.cochainComplex, identify each HomComplex component with maps from the integer sheaf using Cochain.fromSingleEquiv, then with terminal evaluation using evaluationEquiv. The Hom groups have universe max u w, so compose with AddEquiv.ulift.symm and lift evaluation by AddCommGrpCat.uliftFunctor.{u,w}. HomologicalComplex.Hom.isoOfComponents packages the isomorphism. Its differential equation follows from Cochain.fromSingleMk_surjective, Cochain.δ_fromSingleMk and evaluationEquiv_naturality.",
    "uses": [
     "def-sp-injective-resolutions",
     "def-weil-pbc-constant-sheaf"
@@ -32,7 +32,7 @@
    "elementary": true
   },
   {
-   "text": "The Hom-complex cohomology is Ext^(q+1)(Z_J,F), as computed by Mathlib InjectiveResolution.extAddEquivCohomologyClass and HomComplex.homologyAddEquiv. The evaluation-complex cohomology is right-derived evaluation, as computed by InjectiveResolution.isoRightDerivedObj. Compose the first comparison, the cohomology of the complex isomorphism, and the inverse of the second. No module-sheaf injectivity or vanishing result enters.",
+   "text": "Compose R.extAddEquivCohomologyClass with the inverse of HomComplex.leftHomologyData.homologyIso, homologyFunctor.mapIso of complexEvaluationIso, the evaluation complex short complex mapHomologyIso for the exact universe-lift functor, and that functor applied to the inverse of R.isoRightDerivedObjCochainComplex E (q+1) from the proved source module WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle. Convert the resulting group isomorphism to an additive equivalence and compose with AddEquiv.ulift to remove the universe lift. All three original argument steps are implemented; no unresolved intermediate theorem is introduced.",
    "uses": [
     "def-sp-injective-resolutions",
     "def-sp-left-exact-additive",
@@ -49,9 +49,9 @@
   "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "Q2 stage 3 worker",
   "document": "https://stacks.math.columbia.edu/tag/01FT",
-  "place": "Cohomology on Sites, Section 21.2, Equation (21.2.0.1) and the following right-derived-functor description; identify Mathlib Sheaf.H with this definition by the constant-sheaf adjunction and the injective-resolution computation of Ext."
+  "place": "Cohomology on Sites, Section 21.2, Equation (21.2.0.1) and the following right-derived-functor description; identify Mathlib Sheaf.H with this definition by the constant-sheaf adjunction and the injective-resolution computation of Ext.; degreewise construction adapted from Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison, complexSectionsIso and sheafHRightDerivedIso; universe lift added to support arbitrary site and value universes."
  },
  "mathlib_searches": [
   {
@@ -137,10 +137,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T032116-L-1384760",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T042416-L-1819523",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
