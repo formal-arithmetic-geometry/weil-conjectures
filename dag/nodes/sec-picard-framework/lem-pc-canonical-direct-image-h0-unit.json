@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-canonical-direct-image-h0-unit",
+ "kind": "statement",
+ "title": "Degree-zero normalization of the canonical direct-image unit",
+ "statement": "Choose shared derived categories [def-pc-derived-category]. Let $f:X\\to S$ be a scheme morphism [def-pc-scheme] with injective resolutions in $X.\\mathrm{Modules}$ [def-sp-injective-resolutions], and let $M$ be any $\\mathcal O_X$-module. Let $u_f(M):(f_*M)[0]\\to Rf_*(M[0])$ be canonicalSingleDirectImageMap [lem-pc-canonical-single-direct-image-comparison]. Let $z:H^0(Rf_*(M[0]))\\cong f_*M$ be homologyRightDerivedFunctorObjSingleFunctorIso followed by rightDerivedZeroIsoSelf for moduleDirectImage [def-pc-derived-direct-image]. Let $k:H^0((f_*M)[0])\\cong f_*M$ be singleFunctorCompHomologyFunctorIso. Then $H^0(u_f(M))\\gg z.\\mathrm{hom}=k.\\mathrm{hom}$. No higher direct image vanishing or flatness is assumed.",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 079V and 0A1G; injective-resolution augmentation and rightDerivedZeroIsoSelf"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-sp-injective-resolutions",
+  "lem-pc-canonical-single-direct-image-comparison",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "The universal-property factorization for\n`rightDerivedFunctorPlusCompatibility` carries the unbounded right-derived unit\nto the bounded-below unit. Evaluate it on the single complex of M. Naturality of\nthe bounded-below unit along the injective-resolution augmentation identifies its\nH⁰, after `homologyRightDerivedFunctorPlusObjSingleFunctorIso`, with the classical\nmap `toRightDerivedZero`. The single-map direct-image comparison cancels the\nsingle-complex comparison in this computation. Pushforward is left exact, so\n`rightDerivedZeroIsoSelf` is inverse to `toRightDerivedZero`; their composite is\nthe identity. Consequently the displayed composite is the canonical single\nhomology identification, not an unspecified isomorphism. No positive-cohomology\nvanishing is assumed. Zero modules and empty schemes use the same augmentation\nand inverse-cancellation formulas.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "lem-pc-canonical-single-direct-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "lem-pc-canonical-single-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 079V and 0A1G; injective-resolution augmentation and rightDerivedZeroIsoSelf; explicit canonical-interface calculation by U3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedZeroIsoSelf|toRightDerivedZero.*[Ii]so|rightDerivedUnique.*fac",
+   "results": "Actual search hits: Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean. No exact specialization states this pinned scheme identity.",
+   "date": "2026-10-12",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homologyRightDerivedFunctorObjSingleFunctorIso rightDerivedZeroIsoSelf unit compatibility",
+   "results": "Actual search hits: DerivedCategory.singleFunctorCompHomologyFunctorIso, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, DerivedCategory.singleFunctorIsoCompQ. No exact specialization states this pinned scheme identity.",
+   "date": "2026-10-12",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The zeroth homology of the right derived functor unit composed with the comparison to the zeroth classical right derived functor equals the identity for a left exact functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof of lem-pc-canonical-degree-zero-mate-square: Tags 079V and 0A1G; injective-resolution augmentation and rightDerivedZeroIsoSelf",
+   "via": [
+    "lem-pc-canonical-degree-zero-mate-square",
+    "lem-pc-counit-base-change-degree-zero-comparison",
+    "lem-pc-counit-base-change-is-iso",
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/CanonicalDirectImageH0Unit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.canonicalDirectImageH0Unit",
+  "statement": "theorem canonicalDirectImageH0Unit {X S : Scheme.{u}} (f : X ⟶ S) [HasInjectiveResolutions X.Modules] (M : X.Modules) : (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).map (canonicalSingleDirectImageMap f M) ≫ (Functor.homologyRightDerivedFunctorObjSingleFunctorIso (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) M 0 ≪≫ (pushforward f).rightDerivedZeroIsoSelf.app M).hom = ((DerivedCategory.singleFunctorCompHomologyFunctorIso (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).app ((pushforward f).obj M)).hom",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T163622-L-2788292",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T163622-L-2788292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-canonical-single-pullback-square",
+ "kind": "statement",
+ "title": "Single pullback comparisons respect square composition and module morphisms",
+ "statement": "Choose shared derived categories [def-pc-derived-category]. Let $f:X\\to S$, $g:S\\prime\\to S$, $g\\prime:X\\prime\\to X$, $f\\prime:X\\prime\\to S\\prime$ be scheme morphisms [def-pc-scheme] with $g\\prime\\gg f=f\\prime\\gg g$. Let $N$ be an $\\mathcal O_S$-module, $M$ an $\\mathcal O_X$-module, and $a:f^*N\\to M$ [lem-pc-module-pullback-adjunction]. Let $E=N[0]$ and let $c:g\\prime{}^*f^*N\\cong f\\prime{}^*g^*N$ be pullbackComp followed by pullbackCongr followed by inverse pullbackComp [def-pc-module-pullback]. Let $d_E:Lf\\prime{}^*Lg^*E\\to Lg\\prime{}^*Lf^*E$ be derived composition for $(f\\prime,g)$ followed by transport along the square equality and inverse derived composition for $(g\\prime,f)$ [lem-pc-ringed-spaces-derived-pullback-composition]. Write $p_b$ for canonicalSinglePullbackMap [lem-pc-canonical-single-pullback-comparison]. In Lean composition order, $d_E\\gg Lg\\prime{}^*(p_f(N)\\gg a[0])\\gg p_{g\\prime}(M)=Lf\\prime{}^*(p_g(N))\\gg p_{f\\prime}(g^*N)\\gg(c^{-1}\\gg g\\prime{}^*a)[0]$. This statement concerns pullbacks alone and does not assert a base-change or H-zero formula.",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 0D5S and defining leftDerivedLift factorization of exists_derivedPullbackComposition"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-module-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-canonical-single-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the defining `leftDerivedLift` factorization for the selected\ncomposition isomorphisms on N[0]. It identifies successive left-derived counits\nwith the counit for the composite followed by underived tensor composition.\nApply this identity to (f', g) and (g', f), transport along h, and cancel the\ninvertible derived composition comparison to obtain the square for N.\nTransport tensor pullback to ordinary pullback by the unique left-adjoint\nisomorphisms. Their counit laws identify tensor composition, defined as the mate\nof pushforward composition, with `pullbackComp`; transport along h becomes\n`pullbackCongr h`. Thus the ordinary square comparison is c.inv. Finally,\nnaturality of the left-derived counit and of the single-map comparisons for the\nmorphism a moves a across the g' comparison, yielding the displayed formula.\nNo comparison on a single module is inverted. The argument covers h reflexive,\nidentity morphisms, zero a, zero modules and empty schemes without extra assumptions.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-canonical-single-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-canonical-single-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 0D5S and defining leftDerivedLift factorization of exists_derivedPullbackComposition; explicit canonical-interface calculation by U3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedLift_fac|singleMapHomologicalComplex.*naturality|conjugateEquiv_pullbackComp",
+   "results": "Actual search hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean. No exact specialization states this pinned scheme identity.",
+   "date": "2026-10-12",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison from the derived pullback of a single module to the single ordinary pullback is natural and compatible with composition of scheme pullbacks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "single complex derived pullback counit naturality composition comparison",
+   "results": "Actual search hits: CategoryTheory.PullbackShift.adjunction_counit, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, DerivedCategory.singleFunctorCompHomologyFunctorIso, AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app, CategoryTheory.Limits.CategoricalPullback.functorEquiv_counitIso_hom_app_snd_app, CategoryTheory.Limits.CategoricalPullback.functorEquiv_counitIso_hom_app_fst_app, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app. No exact specialization states this pinned scheme identity.",
+   "date": "2026-10-12",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof of lem-pc-canonical-degree-zero-mate-square: Tag 0D5S and defining leftDerivedLift factorization of exists_derivedPullbackComposition",
+   "via": [
+    "lem-pc-canonical-degree-zero-mate-square",
+    "lem-pc-counit-base-change-degree-zero-comparison",
+    "lem-pc-counit-base-change-is-iso",
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/CanonicalSinglePullbackSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.canonicalSinglePullbackSquare",
+  "statement": "theorem canonicalSinglePullbackSquare {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S') (h : g' ≫ f = f' ≫ g) (N : S.Modules) (M : X.Modules) (a : (pullback f).obj N ⟶ M) : let E := (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj N let c := (pullbackComp g' f).app N ≪≫ (pullbackCongr h).app N ≪≫ ((pullbackComp f' g).app N).symm let d := ((Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))) f' g).hom.app E ≫ eqToHom (congrArg (fun k ↦ (derivedPullback k).obj E) h.symm) ≫ ((Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))) g' f).inv.app E d ≫ (derivedPullback g').map (canonicalSinglePullbackMap f N ≫ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map a) ≫ canonicalSinglePullbackMap g' M = (derivedPullback f').map (canonicalSinglePullbackMap g N) ≫ canonicalSinglePullbackMap f' ((pullback g).obj N) ≫ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).map (c.inv ≫ (pullback g').map a)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T163622-L-2788292",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T163622-L-2788292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-canonical-single-adjunction-transpose",
+ "kind": "statement",
+ "title": "Single-module transpose under the pinned derived adjunction",
+ "statement": "Choose the shared derived categories of $\\mathcal O$-modules [def-pc-derived-category]. Let $f:X\\to S$ be a scheme morphism [def-pc-scheme], $N$ an $\\mathcal O_S$-module, $M$ an $\\mathcal O_X$-module and $a:f^*N\\to M$ [lem-pc-module-pullback-adjunction]. Write $p_f(N):Lf^*(N[0])\\to(f^*N)[0]$ for canonicalSinglePullbackMap [lem-pc-canonical-single-pullback-comparison] and $u_f(M):(f_*M)[0]\\to Rf_*(M[0])$ for canonicalSingleDirectImageMap [lem-pc-canonical-single-direct-image-comparison]. Let $A_f:Lf^*\\dashv Rf_*$ be the adjunction selected by exists_schemeDerivedAdjunction using the same chosen left-derived counit as derived composition [def-pc-derived-base-change-map]. Then $A_f.\\operatorname{homEquiv}(p_f(N)\\circ a[0])=\\operatorname{homEquiv}_{f^*\\dashv f_*}(a)[0]\\circ u_f(M)$, where the displayed composite follows Lean order (first $p_f$, then $a[0]$, and first the ordinary transpose, then $u_f$). No injective-resolution, flatness or vanishing hypothesis is required.",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 079W and 0FP1; factorization in exists_schemeDerivedAdjunction"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-canonical-single-direct-image-comparison",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Let ε be the selected left-derived counit and t the unique isomorphism\nfrom tensor pullback to ordinary pullback preserving their common right adjoint.\nRepresent a by the homotopy-category single map after the single-map comparison\nfor tensor pullback and t. Apply the factorization in\n`Classical.choose_spec (exists_schemeDerivedAdjunction ...)` to this morphism.\nNaturality of the single-map comparison identifies its underived transpose with\nthe single map of the tensor adjunction transpose. The counit law for\n`leftAdjointUniq` identifies this transpose with the ordinary adjunction transpose.\nThe inverse single-map comparison for direct image followed by the specified\nright-derived unit is exactly `canonicalSingleDirectImageMap`. Reassociate the\nresult to obtain the equality. No invertibility of a pullback comparison is used;\nzero modules and empty schemes satisfy the same naturality and counit identities.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-canonical-single-pullback-comparison",
+    "lem-pc-canonical-single-direct-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-canonical-single-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 079W and 0FP1; factorization in exists_schemeDerivedAdjunction; explicit canonical-interface calculation by U3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|derivedε_fac_app|homEquiv_naturality",
+   "results": "Actual search hits: Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean, Mathlib/AlgebraicTopology/SimplicialSet/TopAdj.lean. No exact specialization states this pinned scheme identity.",
+   "date": "2026-10-12",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction derived hom equivalence counit unit compatibility singleFunctor",
+   "results": "Actual search hits: CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit, CategoryTheory.Adjunction.homEquiv_counit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_unit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.adjunctionOfEquivLeft_counit_app, CategoryTheory.Adjunction.adjunctionOfEquivRight_counit_app, CategoryTheory.Adjunction.derived_counit. No exact specialization states this pinned scheme identity.",
+   "date": "2026-10-12",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Under a derived adjunction the left derived counit followed by a single complex morphism transposes to the ordinary adjunction transpose followed by the right derived unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof of lem-pc-canonical-degree-zero-mate-square: Tags 079W and 0FP1; factorization in exists_schemeDerivedAdjunction",
+   "via": [
+    "lem-pc-canonical-degree-zero-mate-square",
+    "lem-pc-counit-base-change-degree-zero-comparison",
+    "lem-pc-counit-base-change-is-iso",
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Picard.CanonicalSingleAdjunctionTranspose",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/CanonicalSingleAdjunctionTranspose.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.canonicalSingleAdjunctionTranspose",
+  "statement": "theorem canonicalSingleAdjunctionTranspose {X S : Scheme.{u}} (f : X ⟶ S) (N : S.Modules) (M : X.Modules) (a : (pullback f).obj N ⟶ M) : (Classical.choose (exists_schemeDerivedAdjunction f (hAdd := (Classical.choose exists_derivedPullbackComposition) f) ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) f) ((Classical.choose (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition))) f))).homEquiv _ _ (canonicalSinglePullbackMap f N ≫ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map a) = (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).map ((pullbackPushforwardAdjunction f).homEquiv _ _ a) ≫ canonicalSingleDirectImageMap f M",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T163622-L-2788292",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T163622-L-2788292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
