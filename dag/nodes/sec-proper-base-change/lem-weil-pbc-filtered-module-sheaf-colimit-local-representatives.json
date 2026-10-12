@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-filtered-module-sheaf-colimit-local-representatives",
+ "kind": "statement",
+ "title": "Local stage representatives for filtered colimits of module-valued sheaves",
+ "statement": "Let C be a category with Grothendieck topology J, Λ a commutative ring, I a small filtered category [def-weil-pbc-category-colimit], and G : I → Sh(C, Mod_Λ) a diagram of module-valued sheaves [def-weil-sheaf-of-modules-category]. Let c be a colimit cocone of G. For every object U and section t of c.pt at U, there exists a covering sieve S on U such that for every f : V → U in S there exist i ∈ I and s ∈ G_i(V) with c_i(s) = t restricted along f. No finite-cover hypothesis, compatibility of the sections, or uniform choice of i is asserted. The object, morphism, coefficient and diagram universes are independent; the section-module universe is max of the coefficient and diagram universes.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0738, proof of (4), first local-representatives assertion; local-image subsheaf construction written by Y2 as a universe-independent proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Define the subfunctor R of the underlying type presheaf of H = c.pt by sectionwise membership in the image of some coprojection. Cocone naturality proves restriction stability. IsFiltered.nonempty gives the zero section; IsFiltered.max and the cocone equations place sums in a common stage; linearity gives scalar stability. Thus each R(U) is a submodule.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take Subfunctor.sheafify J R, the local-membership closure inside H. GrothendieckTopology.intersection_covering proves additive closure by intersecting the sieves witnessing membership of two sections. Scalar closure follows from superset_covering and linearity. These submodules form a module-valued presheaf K. Mathlib Subfunctor.sheafify_isSheaf says the underlying type presheaf is a sheaf. To use independent universes, represent the module forgetful functor by the lifted rank-one module ULift Λ using evaluation at 1, so it preserves limits of arbitrary site size; it reflects such limits by factorization through AddCommGrpCat. Presheaf.isSheaf_of_isSheaf_comp therefore proves K is a module-valued sheaf.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The coprojections of c factor through K, since R ≤ Subfunctor.sheafify J R. They form a cocone d. Its coprojections followed by the inclusion m : K → H equal those of c. IsColimit.hom_ext and IsColimit.fac show hc.desc d ≫ m = identity H. Apply this identity to t: t lies in the local-membership closure of R. By the definition of Subfunctor.sheafify, R.sieveOfSection t is covering, and its membership supplies precisely the required stage and section.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0738 local representability; Y2 supplies the fully compiled local-image subsheaf proof using Mathlib Subfunctor.sheafify_isSheaf, avoiding sheafification size assumptions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every section of a filtered colimit of sheaves of modules locally comes from a diagram stage",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of filtered colimits of module valued sheaves locally lift to a diagram stage",
+   "results": "SheafOfModules.Presentation.isColimit; SheafOfModules.LocalGeneratorsData; PresheafOfModules.Sheafify.instNonemptySMulCandidate; no theorem for arbitrary module-valued sheaf colimits with independent universes.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Subfunctor.sheafify_isSheaf",
+   "results": "CategoryTheory.Subfunctor.sheafify_isSheaf in Mathlib.CategoryTheory.Sites.Subsheaf proves the local-membership closure is a type-valued sheaf; used in the proof.",
+   "verdict": "supporting lemma",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*local|imageSieve.*colimit|LocallySurjective.*colimit; sheafify_isSheaf; ringLmapEquivSelf; ModuleCat Limits preserves/reflects limits",
+   "results": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit: Etale.sheafifyCocone_locally is proved but fixes diagram universe to Type and module universe to u+1; not this general interface. Mathlib Subfunctor.sheafify_isSheaf, ModuleCat.forget₂AddCommGroup_reflectsLimitOfSize, and coyoneda preservation are the ingredients used.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSectionColimitLocalLifts",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constructible-finitely-presented",
+   "place": "Local stage representatives in the finite local lift argument, before selection of a finite covering and synchronization of stages.",
+   "via": [
+    "lem-weil-pbc-etale-section-colimit-local-lifts",
+    "lem-weil-pbc-etale-section-colimit-representative",
+    "lem-weil-pbc-etale-qcqs-sections-filtered-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredModuleSheafColimitLocalRepresentatives",
+  "file": "lean/Sheaf/CategoryTheory/FilteredModuleSheafColimitLocalRepresentatives.lean",
+  "declaration": "CategoryTheory.filtered_module_sheaf_colimit_local_representatives",
+  "statement": "theorem filtered_module_sheaf_colimit_local_representatives {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (Λ : Type r) [CommRing Λ] (I : Type w) [SmallCategory I] [IsFiltered I] (G : I ⥤ Sheaf J (ModuleCat.{max r w} Λ)) (c : Cocone G) (hc : IsColimit c) (U : C) (t : c.pt.obj.obj (op U)) : ∃ S : Sieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → ∃ (i : I) (s : (G.obj i).obj.obj (op V)), ((c.ι.app i).hom.app (op V)).hom s = (c.pt.obj.map f.op).hom t",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T063528-L-3163501",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T063528-L-3163501",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

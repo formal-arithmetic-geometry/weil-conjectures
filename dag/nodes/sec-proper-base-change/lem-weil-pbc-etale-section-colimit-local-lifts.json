@@ -16,45 +16,38 @@
  ],
  "proof": [
   {
-   "text": "Form the sectionwise presheaf colimit P and identify its module sheafification with H, respecting the coprojections, by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Local representability of sheafification [lem-weil-pbc-site-sheafification-sections-local] gives a covering and sections of P whose images are the restrictions of t.",
+   "text": "Apply [lem-weil-pbc-filtered-module-sheaf-colimit-local-representatives] to obtain a covering sieve S of arrows on which t comes from a stage. This proved local-image subsheaf argument works in the independent universes of this statement without assuming the existence of a presheaf sheafification.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "lem-weil-pbc-filtered-module-sheaf-colimit-local-representatives"
    ],
    "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-etale-composition-cancellation], every arrow of this covering is etale on underlying schemes. View it on the small etale site of U. Apply [lem-weil-pbc-etale-qcqs-cofinal-finite-coverings] to obtain a finite affine refinement with quasi-compact pairwise scheme fibre products. Compose its structure maps with U to X to obtain objects V_b of the small etale site of X. The forgetful functor from this etale slice preserves these pullbacks, so the underlying schemes of the intrinsic pullbacks of f_b and f_b′ are isomorphic to the quasi-compact scheme fibre products, hence are compact.",
+   "text": "Present S by the family indexed by S.arrows.category (Mathlib Sieve.ofArrows_category). The small-etale covering criterion gives joint surjectivity on U.left. The arrows are etale by [lem-weil-pbc-etale-composition-cancellation], realized by the Mathlib instance on underlying arrows. Form the scheme etale cover C, use QuasiCompactCover.of_isOpenMap and QuasiCompactCover.exists_hom to obtain a finite affine refinement D and its factorization k. Compose D.f with U.hom to make X-etale objects, and reindex by ULift of Fin in universe u. The refinement factorization and downward closure ensure all resulting arrows still lie in S.",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings"
+    "lem-weil-pbc-etale-composition-cancellation"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict each local presheaf representative along the refinement map. By the filtered module-colimit representative criterion (Concrete.colimit_exists_rep, with the ModuleCat filtered-colimit forgetful preservation instance; the set version is [lem-weil-pbc-filtered-colimit-sets-elementwise]), each resulting section of P(V_b) comes from a section at some diagram stage i_b.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
+   "text": "The affine sources of D are quasi-compact. Since U.left is quasi-separated, Mathlib quasi-compactness and pullback instances make the scheme pullbacks of D.f quasi-compact. The composite Scheme.Etale.forget X followed by Over.forget X preserves pullbacks. PreservesPullback.iso identifies each intrinsic etale pullback with the corresponding scheme pullback, and the inverse scheme-isomorphism homeomorphism transfers CompactSpace.",
+   "uses": [],
    "elementary": false
   },
   {
-   "text": "Filteredness supplies a common target i for the finitely many i_b (IsFiltered.sup_objs_exists). Transport all representatives to i. The colimit cocone equations show that their images still equal the restrictions of t. Reindex the finite covering by ULift of Fin n in universe u. In the empty-cover case choose any diagram object, which exists since the category is filtered, and use the empty family. No equality on overlaps and no global section at a diagram stage has been obtained.",
+   "text": "Choose a stage j_b and representative x_b for each refined covering arrow from S. Apply IsFiltered.sup_objs_exists to the finite image of b ↦ j_b, including the empty image. Choose arrows j_b → i and transport x_b using G. Applying the colimit cocone equation c.w to x_b shows that the images of these transported sections are still the restrictions of t.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-filtered-module-sheaf-colimit-local-representatives",
+  "lem-weil-pbc-etale-composition-cancellation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0738, proof of (4), first paragraph; finite etale refinements as in Tag 03Q4, Lemma 59.51.4 proof step 1; arbitrary filtered-category common target written out by P1"
+  "place": "Tag 0738, proof of (4), and etale-cohomology.tex Tag 03Q4 Lemma 59.51.4 step 1; Y2 realizes finite refinement directly with Mathlib QuasiCompactCover.exists_hom and local representability with the proved local-image subsheaf argument."
  },
  "mathlib_searches": [
   {
@@ -151,9 +144,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T053946-L-2641999",
+  "landing": "20261012T063528-L-3163501",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
