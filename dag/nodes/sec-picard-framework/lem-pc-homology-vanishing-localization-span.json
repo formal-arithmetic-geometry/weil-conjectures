@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-homology-vanishing-localization-span",
+ "kind": "statement",
+ "title": "Cohomology vanishing is detected on a finite standard-open cover",
+ "statement": "Let $A$ be a commutative ring, $M^\\bullet$ a complex of $A$-modules, and $f:\\{0,\\ldots,r-1\\}\\to A$ a finite family generating the unit ideal. View its cohomology in the derived category [def-weil-abstract-derived-category], and localize termwise at each $f_i$ [def-weil-pbc-module-localization-away]. For any integer $n$, if $H^n(M^\\bullet\\otimes_A A_{f_i})=0$ for every $i$, then $H^n(M^\\bullet)=0$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066D, proof, first paragraph; Algebra, Tag 00EO (1)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Exact localization identifies $H^n(M^\\bullet\\otimes_A A_{f_i})$ with $H^n(M^\\bullet)_{f_i}$. Equivalently use the exactness of the localized differential pair and identify termwise extension of scalars with module localization.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the unit-ideal localization zero criterion to each element of $H^n(M^\\bullet)$. All its localized images are zero, so it is zero, and the module is a zero object.",
+   "uses": [
+    "lem-weil-pbc-localized-span-eq-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localized-span-eq-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066D, proof, first paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization detects vanishing of cohomology on standard opens generating the unit ideal",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of homology of a complex can be checked after localization at elements generating the unit ideal",
+   "date": "2026-10-12",
+   "results": "DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, CochainComplex.isZero_of_isGE, CochainComplex.isZero_of_isLE, HomotopyCategory.mem_subcategoryAcyclic_iff, HomologicalComplex.isZero_single_obj_homology",
+   "verdict": "No exact match; related general tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "exact_of_isLocalized_span|eq_zero_of_isLocalized_span",
+   "date": "2026-10-12",
+   "results": "Mathlib/RingTheory/LocalProperties/Submodule.lean, Mathlib/RingTheory/LocalProperties/Exactness.lean, Mathlib/RingTheory/LocalProperties/Exactness.lean",
+   "verdict": "No exact match; related general tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ring-pseudo-coherent-localization-glue",
+   "place": "proof step 1 (local vanishing detection)"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.HomologyVanishingLocalizationSpan",
+  "file": "lean/Sheaf/RingTheory/HomologyVanishingLocalizationSpan.lean",
+  "declaration": "DerivedCategory.homology_vanishes_of_localization_span",
+  "statement": "theorem homology_vanishes_of_localization_span\n    {A : Type u₁} [CommRing A] [HasDerivedCategory.{w₁} (ModuleCat.{max u₁ v₁} A)]\n    (M : CochainComplex (ModuleCat.{max u₁ v₁} A) ℤ)\n    (r : ℕ) (f : Fin r → A)\n    [∀ i : Fin r, HasDerivedCategory.{w₂} (ModuleCat.{max u₁ v₁} (Localization.Away (f i)))]\n    (hf : Ideal.span (Set.range f) = ⊤)\n    (n : ℤ)\n    (hlocal : ∀ i : Fin r,\n      IsZero ((homologyFunctor (ModuleCat.{max u₁ v₁} (Localization.Away (f i))) n).obj\n        (Q.obj ((Functor.mapHomologicalComplex\n          (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i))))\n          (ComplexShape.up ℤ)).obj M)))) :\n    IsZero ((homologyFunctor (ModuleCat.{max u₁ v₁} A) n).obj (Q.obj M))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T213847-L-1207586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T213847-L-1207586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

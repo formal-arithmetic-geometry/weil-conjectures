@@ -9621,3 +9621,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:38 L: returned deliver/M2/Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel (reviewer RETURN: (the landing tools, head 595b3d8ec) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 21:38 L: merged deliver/A2/Sheaf.Paper.RegularMaximalJacobianPresentation (stage 3; reviewer PASS; first push; landing 20261012T213846-L-1207343 (proof); batch 20261012T213845; modules 1; new nodes 1)
 - 21:38 L: merged deliver/D2/Sheaf.RingTheory.RegularTensorProductOfFormallySmoothAdic (stage 3; reviewer PASS; first push; landing 20261012T213846-L-1207487 (proof); batch 20261012T213845; modules 1; new nodes 0)
+- 21:38 L: merged deliver/D3/Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue (stage 3; reviewer PASS; first push; landing 20261012T213847-L-1207586 (interface); batch 20261012T213845; modules 3; new nodes 2)

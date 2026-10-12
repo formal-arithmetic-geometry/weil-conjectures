@@ -9,10 +9,11 @@ public import Sheaf.RingTheory.MPseudoCoherent
 public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent
 import Sheaf.RingTheory.MPseudoCoherentVanishingBase
 import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
 import Sheaf.RingTheory.PseudoCoherentIffAllM
+import Sheaf.RingTheory.HomologyVanishingLocalizationSpan
+import Sheaf.RingTheory.MPseudoCoherentLocalizationConeStep
 
 /-!
 # Gluing pseudo-coherence over a finite standard-open cover
@@ -28,6 +29,20 @@ universe w₁ w₂ v₁ u₁
 open CategoryTheory
 
 namespace DerivedCategory
+
+private theorem isMPseudoCoherent_boundedAbove
+    {R : Type u₁} [CommRing R] [HasDerivedCategory.{w₁} (ModuleCat.{v₁} R)]
+    (m : ℤ) (C : DerivedCategory (ModuleCat.{v₁} R)) (hC : IsMPseudoCoherent m C) :
+    ∃ n : ℤ, ∀ j : ℤ, n < j → Limits.IsZero ((homologyFunctor (ModuleCat.{v₁} R) j).obj C) := by
+  obtain ⟨E, a, b, hge, hle, hfree, α, hiso, hepi⟩ := hC
+  have : E.IsStrictlyLE b := hle
+  have : (Q.obj E).IsLE b := inferInstance
+  refine ⟨max m b, fun j hj ↦ ?_⟩
+  have : IsIso ((homologyFunctor (ModuleCat.{v₁} R) j).map α) :=
+    hiso j (lt_of_le_of_lt (le_max_left m b) hj)
+  exact (isZero_of_isLE (Q.obj E) b j
+    (lt_of_le_of_lt (le_max_right m b) hj)).of_iso
+      (asIso ((homologyFunctor (ModuleCat.{v₁} R) j).map α)).symm
 
 /-- Pseudo-coherence, including fixed-degree pseudo-coherence, glues under localization at
 finitely many elements generating the unit ideal. Rings are commutative, as in Stacks.
@@ -68,6 +83,53 @@ theorem ringPseudoCoherent_localization_glue
           (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i))))
           (ComplexShape.up ℤ)).obj M))) →
       IsPseudoCoherent (Q.obj M)) := by
-  sorry
+  classical
+  have glue (m : ℤ) (M : CochainComplex (ModuleCat.{max u₁ v₁} A) ℤ)
+      (hlocal : ∀ i : Fin r, IsMPseudoCoherent m
+        (Q.obj ((Functor.mapHomologicalComplex
+          (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i))))
+          (ComplexShape.up ℤ)).obj M))) : IsMPseudoCoherent m (Q.obj M) := by
+    have bounded : ∃ n : ℤ, ∀ j : ℤ, n < j →
+        Limits.IsZero ((homologyFunctor (ModuleCat.{max u₁ v₁} A) j).obj (Q.obj M)) := by
+      have hb (i : Fin r) := isMPseudoCoherent_boundedAbove m _ (hlocal i)
+      choose bound hbound using hb
+      obtain ⟨n, hn⟩ := (Set.finite_range bound).bddAbove
+      refine ⟨n, fun j hj ↦ homology_vanishes_of_localization_span M r f hf j ?_⟩
+      intro i
+      exact hbound i j (lt_of_le_of_lt (hn (Set.mem_range_self i)) hj)
+    have descent (k : ℕ) :
+        ∀ (K : CochainComplex (ModuleCat.{max u₁ v₁} A) ℤ),
+        (∀ i : Fin r, IsMPseudoCoherent m
+          (Q.obj ((Functor.mapHomologicalComplex
+            (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i))))
+            (ComplexShape.up ℤ)).obj K))) →
+        (∀ j : ℤ, m + (k : ℤ) ≤ j →
+          Limits.IsZero ((homologyFunctor (ModuleCat.{max u₁ v₁} A) j).obj (Q.obj K))) →
+        IsMPseudoCoherent m (Q.obj K) := by
+      induction k with
+      | zero =>
+        intro K hK hvan
+        exact isMPseudoCoherent_of_homology_vanishes m (Q.obj K)
+          (fun j hj ↦ hvan j (by simpa using hj))
+      | succ k ih =>
+        intro K hK hvan
+        obtain ⟨E, N, a, b, c, hT, hE, hNvan, hNlocal⟩ :=
+          isMPseudoCoherent_localization_cone_step K r f hf m (m + (k : ℤ))
+            (by omega) (fun j hj ↦ hvan j (by omega)) hK
+        have hN := ih N hNlocal (fun j hj ↦ hNvan j (by omega))
+        exact (isMPseudoCoherent_of_distinguished_triangle A m
+          (Pretriangulated.Triangle.mk a b c) hT).2.1 hE hN
+    obtain ⟨n, hn⟩ := bounded
+    exact descent (n - m + 1).toNat M hlocal (fun j hj ↦ hn j (by omega))
+  refine ⟨glue m M, ?_⟩
+  intro hlocal
+  apply (isPseudoCoherent_iff_forall_isMPseudoCoherent A M).2
+  intro k
+  apply glue k M
+  intro i
+  exact (isPseudoCoherent_iff_forall_isMPseudoCoherent (Localization.Away (f i))
+    ((Functor.mapHomologicalComplex
+      (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i))))
+      (ComplexShape.up ℤ)).obj M)).1 (hlocal i) k
 
 end DerivedCategory

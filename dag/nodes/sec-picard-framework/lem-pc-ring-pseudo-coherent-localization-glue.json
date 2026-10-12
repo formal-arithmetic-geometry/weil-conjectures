@@ -26,62 +26,46 @@
  ],
  "proof": [
   {
-   "text": "Fix an integer $m$. We prove the $m$-pseudo-coherent clause in the form: every complex $K^\\bullet$ of $A$-modules whose localizations $K^\\bullet_{f_i}=K^\\bullet\\otimes_AA_{f_i}$ are $m$-pseudo-coherent (over $A_{f_i}$) is $m$-pseudo-coherent. Localization is exact, so $H^j(K^\\bullet)_{f_i}=H^j(K^\\bullet_{f_i})$. Each $K^\\bullet_{f_i}$ receives a morphism from a bounded complex inducing isomorphisms on $H^j$ for $j>m$, so $H^j(K^\\bullet_{f_i})=0$ for $j$ large; let $n$ be the largest integer with $H^n(K^\\bullet_{f_i})\\neq0$ for some $i$ ($n=-\\infty$ if there is none). Since the $f_i$ generate the unit ideal, a module whose localizations at all $f_i$ vanish is zero, so $H^j(K^\\bullet)=0$ for $j>n$. We induct on $n-m$. If $n<m$, then $H^j(K^\\bullet)=0$ for every $j\\ge m$, and $K^\\bullet$ is $m$-pseudo-coherent by [lem-pc-ring-m-pseudo-coherent-vanishing-base].",
+   "text": "Fix $m$. Each local bounded finite-free witness gives cohomology vanishing above the maximum of $m$ and its upper term bound; transfer vanishing across the witness cohomology isomorphisms. Choose a common upper bound using finiteness of the index set. Apply [lem-pc-homology-vanishing-localization-span] in each degree above that bound to obtain global vanishing. This includes the empty cover.",
+   "uses": [
+    "lem-pc-homology-vanishing-localization-span"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on $k\\in\\mathbf N$ in the assertion that any locally $m$-pseudo-coherent complex vanishing in all degrees $j\\ge m+k$ is globally $m$-pseudo-coherent. For $k=0$, use the vanishing base theorem.",
    "uses": [
     "lem-pc-ring-m-pseudo-coherent-vanishing-base"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.76.4 (Tag 066D), proof: setup and the case $n<m$ via Tag 064W"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $n\\ge m$. The morphism witnessing that $K^\\bullet_{f_i}$ is $m$-pseudo-coherent also witnesses that it is $n$-pseudo-coherent (isomorphisms on $H^j$ for $j>n$, and on $H^n$ an isomorphism if $n>m$, a surjection if $n=m$), and $H^j(K^\\bullet_{f_i})=0$ for $j>n$. Hence [lem-sc-finite-cohomology], applied over $A_{f_i}$ with the integer $n$, shows that $H^n(K^\\bullet)_{f_i}=H^n(K^\\bullet_{f_i})$ is a finite $A_{f_i}$-module for each $i$, and [lem-weil-pbc-module-finite-of-localization-span] shows that $H^n(K^\\bullet)$ is a finite $A$-module. Choose a finite free $A$-module $E$ and a surjection $E\\to H^n(K^\\bullet)$; since $E$ is free it lifts to $E\\to\\operatorname{Ker}(d^n_K)$, giving a map of complexes $\\alpha\\colon E[-n]\\to K^\\bullet$ that is surjective on $H^n$. Let $C(\\alpha)^\\bullet$ be its cone, so $E[-n]\\to K^\\bullet\\to C(\\alpha)^\\bullet\\to E[-n][1]$ is a distinguished triangle in $D(A)$.",
+   "text": "At $k+1$, set $n=m+k$. Apply [lem-pc-m-pseudo-coherent-localization-cone-step], giving a distinguished triangle with an $m$-pseudo-coherent source and a locally $m$-pseudo-coherent cone vanishing above $n-1$. The induction hypothesis applies to the cone. The second clause of the triangle theorem then gives $m$-pseudo-coherence of the original complex. For a global bound $b$, choose $k=\\max(b-m+1,0)$; integer arithmetic verifies the needed bound.",
    "uses": [
-    "lem-sc-finite-cohomology",
-    "lem-weil-pbc-module-finite-of-localization-span"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.76.4 (Tag 066D), proof: finiteness of $H^n$ via Tag 064S and Algebra, Lemma 00EO, and the choice of $\\alpha$"
-   }
-  },
-  {
-   "text": "The long exact cohomology sequence of the triangle, with $H^j(E[-n])=0$ for $j\\neq n$, $H^n(E[-n])=E\\to H^n(K^\\bullet)$ surjective and $H^j(K^\\bullet)=0$ for $j>n$, gives $H^j(C(\\alpha)^\\bullet)=0$ for $j\\ge n$. Localization is exact and commutes with shifts and cones, so $E[-n]_{f_i}\\to K^\\bullet_{f_i}\\to C(\\alpha)^\\bullet_{f_i}\\to E[-n]_{f_i}[1]$ is a distinguished triangle in $D(A_{f_i})$, and $H^j(C(\\alpha)^\\bullet_{f_i})=0$ for $j\\ge n$. The complex $E[-n]_{f_i}$ is a bounded complex of finite free $A_{f_i}$-modules, so the identity shows it is $k$-pseudo-coherent for every $k$, in particular $(m+1)$-pseudo-coherent. The first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] over $A_{f_i}$ shows that each $C(\\alpha)^\\bullet_{f_i}$ is $m$-pseudo-coherent. For $C(\\alpha)^\\bullet$ the largest degree of nonzero local cohomology is $<n$, so the induction hypothesis shows that $C(\\alpha)^\\bullet$ is $m$-pseudo-coherent. As $E[-n]$ is $m$-pseudo-coherent, the second clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] over $A$, applied to $E[-n]\\to K^\\bullet\\to C(\\alpha)^\\bullet\\to E[-n][1]$, shows that $K^\\bullet$ is $m$-pseudo-coherent. Taking $K^\\bullet=M^\\bullet$ proves the first assertion.",
-   "uses": [
+    "lem-pc-m-pseudo-coherent-localization-cone-step",
     "lem-pc-ring-pseudo-coherent-distinguished-triangle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.76.4 (Tag 066D), proof: cone induction via Tag 064R"
-   }
+   "elementary": false
   },
   {
-   "text": "For the pseudo-coherent clause, assume every $M^\\bullet_{f_i}$ is pseudo-coherent over $A_{f_i}$. By the implication from pseudo-coherence to $m$-pseudo-coherence for every $m$ in [lem-pc-ring-pseudo-coherent-iff-all-m] over $A_{f_i}$, each $M^\\bullet_{f_i}$ is $m$-pseudo-coherent for every integer $m$. By the first assertion, proved in the previous steps for an arbitrary $m$, $M^\\bullet$ is $m$-pseudo-coherent for every integer $m$. By the converse implication of [lem-pc-ring-pseudo-coherent-iff-all-m] over $A$, $M^\\bullet$ is pseudo-coherent, that is, quasi-isomorphic to a bounded-above complex of finite free $A$-modules.",
+   "text": "For the pseudo-coherent clause, use the equivalence with all fixed-degree conditions locally, apply the fixed-degree descent just proved for each integer, and use the same equivalence globally.",
    "uses": [
     "lem-pc-ring-pseudo-coherent-iff-all-m"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.76.4 (Tag 066D), pseudo-coherent clause, via Lemma 15.66.5 (Tag 064U)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-homology-vanishing-localization-span",
   "lem-pc-ring-m-pseudo-coherent-vanishing-base",
-  "lem-sc-finite-cohomology",
-  "lem-weil-pbc-module-finite-of-localization-span",
+  "lem-pc-m-pseudo-coherent-localization-cone-step",
   "lem-pc-ring-pseudo-coherent-distinguished-triangle",
   "lem-pc-ring-pseudo-coherent-iff-all-m"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.76.4 (Tag 066D), both clauses, with Tags 064N, 064R, 064S, 064U, and 064W"
+  "place": "Tag 066D: formalized natural-number cone induction with separate vanishing detection and cone-step obligations, D3 stage 3, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -176,5 +160,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T213847-L-1207586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
