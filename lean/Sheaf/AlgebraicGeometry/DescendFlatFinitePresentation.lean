@@ -5,11 +5,11 @@ Authors: SHEAF group J1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Sheaf.RingTheory.ColimitFlatRingMap
+import Sheaf.AlgebraicGeometry.FiniteAffineFlatModels
 
 /-!
 # Descent of flatness to a finite stage
@@ -69,6 +69,33 @@ theorem exists_flat_stage_of_limit
     (hflat : Flat (((Over.pullback (c.π.app (op i₀))).map f₀).left)) :
     ∃ (i : I) (hi : i₀ ≤ i),
       Flat (((Over.pullback (D.map (homOfLE hi).op)).map f₀).left) := by
-  sorry
+  classical
+  let J := {i : I // i₀ ≤ i}
+  let j₀ : J := ⟨i₀, le_rfl⟩
+  let : Nonempty J := ⟨j₀⟩
+  let : IsDirected J (· ≤ ·) := ⟨fun j k ↦ by
+    obtain ⟨l, hjl, hkl⟩ := exists_ge_ge j.val k.val
+    exact ⟨⟨l, j.property.trans hjl⟩, hjl, hkl⟩⟩
+  obtain ⟨n, F, B, C, φ, hfp, hlimit, hstage⟩ :=
+    exists_finite_affine_flat_models D c hc i₀ X₀ Y₀ f₀
+  have hevent (b : Fin n) := RingHom.exists_eventually_flat_of_colimit_flat
+    (F b) j₀ (B b) (C b) (φ b).hom (hfp b) ((hlimit.mp hflat) b)
+  choose k hk hflatk using hevent
+  have hbound : ∀ s : Finset (Fin n), ∃ j : J, ∀ b ∈ s, k b ≤ j := by
+    intro s
+    induction s using Finset.induction_on with
+    | empty => exact ⟨j₀, by simp⟩
+    | @insert b s hbs ih =>
+      obtain ⟨j, hj⟩ := ih
+      obtain ⟨l, hbl, hjl⟩ := exists_ge_ge (k b) j
+      refine ⟨l, ?_⟩
+      intro a ha
+      rcases Finset.mem_insert.mp ha with rfl | ha
+      · exact hbl
+      · exact (hj a ha).trans hjl
+  obtain ⟨j, hj⟩ := hbound Finset.univ
+  refine ⟨j.val, j.property, (hstage j).mpr ?_⟩
+  intro b
+  exact hflatk b j (hj b (Finset.mem_univ b))
 
 end AlgebraicGeometry

@@ -2,108 +2,35 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "*Step 1 (finitely many affine triples).* Write $g_0:Y_0\\to S_0$ for the structure morphism of $Y_0$ (so $g_0\\circ f_0$ is that of $X_0$), $p_i:S\\to S_i$ for the projections of the limit, and $t_{ii'}$ ($i\\ge i'$) for the transition morphisms, $t_{00}=\\mathrm{id}$. Let $x\\in X_0$. Choose an affine open $W\\subseteq S_0$ containing $g_0(f_0(x))$, an affine open $V\\subseteq g_0^{-1}(W)$ containing $f_0(x)$, and an affine open $U\\subseteq f_0^{-1}(V)$ containing $x$ (every point has an affine open neighbourhood inside any given open neighbourhood: [lem-weil-pbc-affine-open-spec-points] identifies an affine open with a spectrum, whose principal opens $D(h)$ form a basis of affine opens). Since $X_0$ is quasi-compact [def-weil-pbc-scheme-conventions], finitely many such triples $(W_b,V_b,U_b)$, $b=1,\\dots,m$, satisfy $X_0=\\bigcup_bU_b$, $f_0(U_b)\\subseteq V_b$, $g_0(V_b)\\subseteq W_b$. (The source covers $Y_0$ first and then each $f_0^{-1}(Y_{j,0})$; the triples above are the same data.) Put $A_0^b=\\mathcal O_{S_0}(W_b)$, $B_0^b=\\mathcal O_{Y_0}(V_b)$, $C_0^b=\\mathcal O_{X_0}(U_b)$, with the ring maps $A_0^b\\to B_0^b$ induced by $g_0$ and $\\varphi_0^b:B_0^b\\to C_0^b$ induced by $f_0$, a homomorphism of $A_0^b$-algebras. By [lem-weil-pbc-morphism-into-affine-scheme], under the identifications $W_b=\\operatorname{Spec}A_0^b$, $V_b=\\operatorname{Spec}B_0^b$, $U_b=\\operatorname{Spec}C_0^b$ of [lem-weil-pbc-affine-open-spec-points], the restrictions $U_b\\to V_b\\to W_b$ of $f_0$ and $g_0$ are $\\operatorname{Spec}$ of these ring maps. Since $f_0$ is locally of finite presentation, $\\varphi_0^b$ is of finite presentation by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. (Only the quasi-compactness of $X_0$ is used; the quasi-separatedness in Situation 081D is not needed here.)",
+   "text": "Use exists_finite_affine_flat_models to obtain finitely many ring diagrams on J = {i | i₀ ≤ i}, finitely presented maps φ_b, and the two equivalences detecting flatness at the limit and at each stage. This is exactly the geometric part of the original proof, collected separately without the algebraic descent assertion.",
    "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+    "lem-weil-pbc-finite-affine-flat-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, proof of Lemma Tag 04AI (lemma-descend-flat-finite-presentation, line 1868), first paragraph: finite affine open coverings of $Y_0$ and of $f_0^{-1}Y_{j,0}$"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (the base over $W_b$ as a colimit of rings).* Fix $b$ and drop it from the notation. For $i\\ge0$ put $W_i=t_{i0}^{-1}(W)\\subseteq S_i$, an affine open since $t_{i0}$ is affine [pqf-def-affine-morphism], and $A_i=\\mathcal O_{S_i}(W_i)$. For $i\\ge i'\\ge0$, $t_{ii'}$ maps $W_i$ into $W_{i'}$ and induces a ring map $A_{i'}\\to A_i$; these form a directed system of rings over the directed set $I_{\\ge0}=\\{i\\in I:i\\ge0\\}$, and by [lem-weil-pbc-morphism-into-affine-scheme] the restricted transition morphism $W_i\\to W_{i'}$ is $\\operatorname{Spec}(A_{i'}\\to A_i)$. Let $A=\\varinjlim_{i\\ge0}A_i$ [def-weil-pbc-category-colimit] and $W_S=p_0^{-1}(W)\\subseteq S$. By [lem-weil-pbc-limit-affine-transition] (clause on open subschemes of a stage, with $U_0=W$), $W_S$ with the restricted projections is the limit of $(W_i)_{i\\ge0}$; by [lem-weil-pbc-spec-colimit-limit] so is $\\operatorname{Spec}A$ with the morphisms induced by the coprojections. By uniqueness of limits there is an isomorphism $W_S\\cong\\operatorname{Spec}A$ under which $p_0|_{W_S}:W_S\\to W$ is $\\operatorname{Spec}(A_0\\to A)$.",
-   "uses": [
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-spec-colimit-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, proof of Lemma Tag 04AI, 'In the affine case we reduce to the following algebra result. Suppose that $R=\\colim R_i$'; Situation Tag 081D (line 1739)"
-   }
-  },
-  {
-   "text": "*Step 3 (the pieces of $f_T$ are spectra).* Let $T$ be either $S_i$ for some $i\\ge0$, with $q=t_{i0}$, $W_T=W_i$, $A_T=A_i$, or $S$, with $q=p_0$, $W_T=W_S$, $A_T=A$ (step 2); in both cases $W_T=q^{-1}(W)=\\operatorname{Spec}A_T$ over $W=\\operatorname{Spec}A_0$. Let $X_T=X_0\\times_{S_0}T$, $Y_T=Y_0\\times_{S_0}T$ with projections $\\mathrm{pr}_1,\\mathrm{pr}_2$ [def-pc-fibre-product] and $f_T=f_0\\times\\mathrm{id}_T$ (so $f_T=f_i$ for $T=S_i$, $f_T=f$ for $T=S$). Put $U_T=\\mathrm{pr}_1^{-1}(U)\\subseteq X_T$ and $V_T=\\mathrm{pr}_1^{-1}(V)\\subseteq Y_T$. Since $q\\circ\\mathrm{pr}_2=g_0f_0\\circ\\mathrm{pr}_1$ maps $U_T$ into $W$, $\\mathrm{pr}_2(U_T)\\subseteq W_T$, so $U_T=\\mathrm{pr}_1^{-1}(U)\\cap\\mathrm{pr}_2^{-1}(W_T)$, and [lem-weil-pbc-open-fibre-product] identifies $U_T$ with $U\\times_WW_T$ compatibly with the projections; by [lem-weil-pbc-fibre-product-affine-spectra] $U_T\\cong\\operatorname{Spec}(A_T\\otimes_{A_0}C_0)$, the projections becoming $\\operatorname{Spec}$ of $c\\mapsto1\\otimes c$ and $a\\mapsto a\\otimes1$ (the swap $C_0\\otimes_{A_0}A_T\\cong A_T\\otimes_{A_0}C_0$ is the symmetry of $\\otimes$). In the same way $V_T\\cong\\operatorname{Spec}(A_T\\otimes_{A_0}B_0)$. Since $\\mathrm{pr}_1\\circ f_T=f_0\\circ\\mathrm{pr}_1$ and $f_0(U)\\subseteq V$, $f_T(U_T)\\subseteq V_T$; the restriction $f_T|:U_T\\to V_T$ and $\\operatorname{Spec}(\\mathrm{id}_{A_T}\\otimes\\varphi_0)$ are two morphisms into $V_T\\cong V\\times_WW_T$ with the same components ($f_0|_U\\circ\\mathrm{pr}_1$, as $(\\mathrm{id}\\otimes\\varphi_0)(1\\otimes b)=1\\otimes\\varphi_0(b)$ and $f_0|_U=\\operatorname{Spec}\\varphi_0$ by step 1; and $\\mathrm{pr}_2$, as $(\\mathrm{id}\\otimes\\varphi_0)(a\\otimes1)=a\\otimes1$), hence equal by the universal property of the fibre product. So, up to these isomorphisms, $f_T|:U_T\\to V_T$ is $\\operatorname{Spec}$ of $\\varphi_T=\\mathrm{id}_{A_T}\\otimes\\varphi_0:A_T\\otimes_{A_0}B_0\\to A_T\\otimes_{A_0}C_0$. For $T=S_i$ the opens $U^b_{S_i}$, $b=1,\\dots,m$, cover $X_i$, being preimages of the covering $X_0=\\bigcup_bU_b$.",
-   "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, proof of Lemma Tag 04AI, first paragraph: 'the morphisms of affines $X_{k,i}\\to Y_{j,i}\\to S_{j,i}$ which are the base changes of $X_{k,0}\\to Y_{j,0}\\to S_{j,0}$ to $S_i$'"
-   }
-  },
-  {
-   "text": "*Step 4 (the hypothesis on the piece over $S$).* Take $T=S$ in step 3 and put $B=A\\otimes_{A_0}B_0$, $C=A\\otimes_{A_0}C_0$, $\\varphi=\\mathrm{id}_A\\otimes\\varphi_0$. By [def-weil-flat-morphism], $f$ is flat at every $x\\in X$: $\\mathcal O_{X,x}$ is flat over $\\mathcal O_{Y,f(x)}$. The local rings of an open subscheme are those of the ambient scheme [def-pc-scheme], so for $x\\in U_S$ the local homomorphism $\\mathcal O_{V_S,f(x)}\\to\\mathcal O_{U_S,x}$ of $f|:U_S\\to V_S$ is that of $f$; hence $f|$ is flat. Isomorphisms $\\alpha:\\operatorname{Spec}C\\to U_S$, $\\beta:V_S\\to\\operatorname{Spec}B$ with $\\operatorname{Spec}\\varphi=\\beta\\circ f|\\circ\\alpha$ (step 3) identify the local homomorphism of $\\operatorname{Spec}\\varphi$ at a point $z$ with that of $f|$ at $\\alpha(z)$ through ring isomorphisms, so $\\operatorname{Spec}\\varphi:\\operatorname{Spec}C\\to\\operatorname{Spec}B$ is flat [def-weil-flat-morphism]. By [lem-weil-pbc-flat-ring-map-iff-flat-affine], $\\varphi$ is a flat ring map [def-weil-pbc-flat-ring-map].",
-   "uses": [
-    "def-weil-flat-morphism",
-    "def-pc-scheme",
-    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, proof of Lemma Tag 04AI: 'Since the property of being flat is local' and the hypothesis 'If $R\\otimes_{R_0}A_0\\to R\\otimes_{R_0}B_0$ is flat'"
-   }
-  },
-  {
-   "text": "*Step 5 (the algebra fact).* By steps 1, 2 and 4, the directed system $(A_i)_{i\\ge0}$ with colimit $A$, the index $0$ and the $A_0$-algebra homomorphism of finite presentation $\\varphi_0:B_0\\to C_0$ satisfy the hypotheses of [lem-weil-pbc-colimit-flat-ring-map] over the directed set $I_{\\ge0}$ (its $B,C,\\varphi$ are those of step 4, and $\\varphi$ is flat). So there is $i_b\\ge0$ such that $\\varphi_i=\\mathrm{id}_{A_i}\\otimes\\varphi_0:A_i\\otimes_{A_0}B_0\\to A_i\\otimes_{A_0}C_0$ is a flat ring map for every $i\\ge i_b$.",
+   "text": "The upper tail J is nonempty (j₀ = i₀) and directed: take a common upper bound in I for two elements; it remains above i₀. For each b, use the limit flatness equivalence to get flatness of id tensor φ_b over colimit F_b. Apply RingHom.exists_eventually_flat_of_colimit_flat to F_b, j₀ and φ_b. This gives k_b ≥ j₀ and flatness of the tensor map at every j ≥ k_b.",
    "uses": [
     "lem-weil-pbc-colimit-flat-ring-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, proof of Lemma Tag 04AI, second paragraph: 'This follows from Algebra, Lemma 02JO part (3)'"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 6 (a common index; $f_i$ is flat).* $I$ is directed and there are finitely many $b$, so there is $i\\in I$ with $i\\ge0$ and $i\\ge i_b$ for $b=1,\\dots,m$. For each $b$, $\\varphi^b_i$ is flat (step 5), so $\\operatorname{Spec}\\varphi^b_i$ is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine]; by step 3 (with $T=S_i$) the restriction $f_i|:U^b_{S_i}\\to V^b_{S_i}$ is $\\operatorname{Spec}\\varphi^b_i$ up to isomorphisms of source and target, so as in step 4 it is flat at every point of $U^b_{S_i}$ [def-weil-flat-morphism]. Let $x\\in X_i$; by step 3 $x\\in U^b_{S_i}$ for some $b$, and since the local rings of the open subschemes $U^b_{S_i}\\subseteq X_i$ and $V^b_{S_i}\\subseteq Y_i$ are those of $X_i$ and $Y_i$ [def-pc-scheme], $\\mathcal O_{X_i,x}$ is flat over $\\mathcal O_{Y_i,f_i(x)}$. Hence $f_i$ is flat.",
+   "text": "Choose the k_b in the proof. By finite-set induction, using directedness at each insertion and j₀ for the empty set, find a common upper bound j for all k_b. Apply the eventual assertion for each b at j, and the stage flatness equivalence, to obtain flatness of the pulled-back f₀ at j.val ≥ i₀. All glue in this step is implemented in Lean, including the empty family.",
    "uses": [
-    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-    "def-weil-flat-morphism",
-    "def-pc-scheme"
+    "lem-weil-pbc-finite-affine-flat-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, proof of Lemma Tag 04AI, first paragraph: 'it suffices to prove the lemma for the morphisms of affines'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-open-spec-points",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-morphism-into-affine-scheme",
-  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-  "pqf-def-affine-morphism",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-spec-colimit-limit",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "def-weil-flat-morphism",
-  "def-pc-scheme",
-  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-finite-affine-flat-models",
   "lem-weil-pbc-colimit-flat-ring-map"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Limits, Lemma Tag 04AI (lemma-descend-flat-finite-presentation, line 1868) and its proof, in Situation Tag 081D (situation-descent-property, line 1739); the algebra step is Algebra, Lemma Tag 02JO (3) (algebra.tex line 47331); the affine reduction written out as in the reviewed splits of Limits 07RP (lem-weil-pbc-descend-etale)"
+  "place": "Tag 04AI; stage-3 Lean reduction by P2: the geometric chart comparison is a separate theorem; algebraic descent uses the existing RingHom.exists_eventually_flat_of_colimit_flat, and finite directed upper bounds are proved in Lean."
  },
  "mathlib_match": null,
  "status": "split",
@@ -229,5 +156,15 @@
   "group": "J1",
   "result": "fix",
   "note": "I directed preorder in Type u (fixed from Type v), D : Iᵒᵖ ⥤ Scheme.{u} affine transitions, Cone+IsLimit, i₀, S₀/X₀/Y₀ qcqs via CompactSpace/QuasiSeparatedSpace, f₀ : X₀ ⟶ Y₀ in Over S₀, LocallyOfFinitePresentation f₀.left, f = Over.pullback (c.π.app) map flat, ∃ i ≥ i₀ with Over.pullback (D.map) map Flat; matches J1 13cd55798 form"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-58098",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T120935-L-983140",
+  "kind": "interface",
+  "note": "independent Codex review: Lean signatures and proofs match the node records; both delivered modules and direct importer Sheaf.AlgebraicGeometry.DescendFiniteLocallyFree compile cleanly; axiom checks agree with the report."
  }
 }
