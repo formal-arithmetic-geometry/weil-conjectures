@@ -12,10 +12,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint
-import Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import Sheaf.AlgebraicGeometry.Curve.GenericTorsionFiniteStalk
+import Sheaf.AlgebraicGeometry.Curve.GenericTorsionCohomologyColimit
 
 /-! # Finite-stalk approximation for a generic torsion sheaf
 
@@ -69,6 +67,12 @@ theorem exists_generic_torsion_finite_stalk_cohomology_colimit
       ∀ q : ℕ, Nonempty (IsColimit
         (((Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField) ⋙
           Sheaf.functorH X.smallEtaleTopology q).mapCocone (Cocone.mk M ι))) := by
-  sorry
+  obtain ⟨I, hI, hfiltered, F, ι, htor, hfin, hcolim⟩ :=
+    exists_generic_torsion_finite_stalk_colimit X M hM
+  let _ := hI
+  let _ := hfiltered
+  refine ⟨I, hI, hfiltered, F, ι, htor, hfin, hcolim, ?_⟩
+  exact generic_torsion_cohomology_colimit X M hcolim
+
 
 end AlgebraicGeometry.Scheme
