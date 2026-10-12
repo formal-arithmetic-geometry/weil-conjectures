@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-exchange-pointed-representative",
+ "kind": "statement",
+ "title": "Exchange on a pointed representative",
+ "statement": "theorem exchange_pointed_representative (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : Y.Etale) (v : (Scheme.pointSmallEtale s).fiber.obj V) : (Scheme.pointSmallEtale s).toPresheafFiber V v ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ (geometricPointSourceStalkIso Λ s ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F)).inv ≫ (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).sheafFiber.map ((baseChangeMap (ModuleCat.{u + 1} Λ) sq).app F) = geometricFibreSectionRestriction Λ sq F V v ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X') (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) ≫ (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) f').inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (Spec (.of Ω))) (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))) Over.mkIdTerminal)).hom.app ((lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)) ≫ (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).toPresheafFiber (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))) (Over.homMk (𝟙 _) (Category.comp_id _)) ((lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)).obj",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-finite-section-pullback",
+  "lem-weil-pbc-qcqs-strict-local-module-comparison",
+  "lem-sbc-geometric-fibre-exchange-germs"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing private sourceStalkIso_germ theorem from GeometricFibreExchangeGerms via a proof-only import all, rather than reproving the inverse-image stalk comparison. Germ naturality and unit_map_baseChangeMap_app rewrite exchange on the representative as the g′ unit followed by the pushforward square comparison. Restrict the pointed neighbourhood over Spec Omega along its marked section to the terminal germ. Identify the resulting iterated pullback lift by its projections with geometricFibreSectionLift. Expanding lowerStarCompGlobalSectionsIso and transporting terminal evaluations via Sheaf.GammaRes_map gives precisely the three target comparison factors. This is the representative calculation already contained in the proved geometricFibreExchange_germs, used here for a commutative square with no cartesianness assumption. The terminal evaluation transport uses the existing private eval_eq_res theorem from UnderivedGlobalGermExchange via a proof-only import all; no duplicate helper is declared.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lemma-openclosed-stalk-upperstar",
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-finite-section-pullback",
+    "lem-sbc-geometric-fibre-exchange-germs",
+    "lem-weil-pbc-underived-global-germ-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "lemma-openclosed-stalk-upperstar",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-finite-section-pullback",
+  "lem-sbc-geometric-fibre-exchange-germs",
+  "lem-weil-pbc-underived-global-germ-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Second reader U3: representative calculation adapted from the proved Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms; Stacks 03Q1 and 0A3U; returned-delivery repair: reuse both existing private helper theorems by import all"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale direct image stalk strict henselization module global sections; base change exchange map stalk germ compatibility inverse image",
+   "results": "Both searches unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical isomorphism of modules between the stalk of an etale direct image and global sections on the strict henselization base change, with germ formula; exchange compatibility with fibre restriction",
+   "results": "Eight hits per query, on structure-sheaf stalk maps in Spec/AffineScheme, Scheme.stalkMap_germ, and ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap. These concern Zariski structure-sheaf or tilde stalks, not the etale direct image or exchange.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber",
+   "results": "12 hits including presheafFiber_hom_ext, toPresheafFiber_naturality, toPresheafFiber_w, and toPresheafFiber_presheafFiberDesc. These are general colimit tools, not the desired etale comparison or exchange identity.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|baseChangeMap|strictLocal in Mathlib/CategoryTheory/Sites; qcqs.*[Ss]talk|strictHenselization.*[Cc]omparison|baseChangeMap.*[Gg]erm in the project library",
+   "results": "No Mathlib sites hits and no exact library theorem. The library has the set-valued continuity theorem and the module/set inverse-image comparison; the finite base-change stalk-restriction theorem only computes pointwise restrictions, not the global-section factorization.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a sheaf section along a commutative square agrees with the adjunction unit on a marked etale neighbourhood",
+   "results": "8 hits, topological sheaf pullback and unrelated scheme/open immersion results; no etale strict-local section formula.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.baseChangeMap",
+   "results": "No hits (identifier not known by Mathlib-only loogle).",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_map_baseChangeMap_app|geometricFibreSectionRestriction|qcqsStrictLocalSectionRestriction in lean/Sheaf and lean/WeilConjectures",
+   "results": "Found the proved representative calculation in geometricFibreExchange_germs, reused to prove exchange_pointed_representative. No existing strict-local section pullback identity; restriction naturality concerns refinement, not pullback to the fibre.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalExchangeCompatibility",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-strict-local-exchange-compatibility",
+   "place": "Representative calculation in original steps 3 and 4"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeometricFibreExchangeRepresentative",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricFibreExchangeRepresentative.lean",
+  "declaration": "AlgebraicGeometry.Etale.exchange_pointed_representative",
+  "declarations": [
+   "AlgebraicGeometry.Etale.exchange_pointed_representative"
+  ],
+  "statement": "theorem exchange_pointed_representative (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : Y.Etale) (v : (Scheme.pointSmallEtale s).fiber.obj V) : (Scheme.pointSmallEtale s).toPresheafFiber V v ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj ≫ (geometricPointSourceStalkIso Λ s ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F)).inv ≫ (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).sheafFiber.map ((baseChangeMap (ModuleCat.{u + 1} Λ) sq).app F) = geometricFibreSectionRestriction Λ sq F V v ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X') (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) ≫ (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) f').inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (Spec (.of Ω))) (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))) Over.mkIdTerminal)).hom.app ((lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)) ≫ (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).toPresheafFiber (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))) (Over.homMk (𝟙 _) (Category.comp_id _)) ((lowerStar (ModuleCat.{u + 1} Λ) f').obj ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)).obj",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T184351-L-4022487",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T184351-L-4022487",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

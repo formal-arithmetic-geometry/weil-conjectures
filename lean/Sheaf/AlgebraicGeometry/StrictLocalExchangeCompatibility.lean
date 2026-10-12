@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+import Sheaf.AlgebraicGeometry.GeometricFibreExchangeRepresentative
+import Sheaf.AlgebraicGeometry.StrictLocalSectionPullback
 
 /-! # Exchange and the representative restriction comparison
 
@@ -55,6 +55,7 @@ private theorem module_inverseImage_stalk_germ
   rw [← Category.assoc, ← huU]
   rfl
 
+set_option maxRecDepth 2048 in
 /-- Any linear map with the strict-local representative formula intertwines exchange
 with restriction to a pointed fibre. This is a compatibility result, with no qcqs,
 properness, local-ring, closed-point or invertibility hypothesis.
@@ -125,6 +126,51 @@ theorem strictLocal_exchange_compatibility
         (Scheme.Etale.mk (𝟙 (Spec (.of Ω))))
         (Over.homMk (𝟙 _) (Category.comp_id _))
         ((lowerStar (ModuleCat.{u + 1} Λ) f').obj
-          ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)).obj := by sorry
+          ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)).obj := by
+  let P := (lowerStar (ModuleCat.{u + 1} Λ) f).obj F
+  let e := geometricPointSourceStalkIso Λ s P
+  let r := globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q
+        ((upperStar (ModuleCat.{u + 1} Λ)
+          (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F) ≫
+      (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map
+        ((upperStarComp (ModuleCat.{u + 1} Λ) q
+          (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) g' hq.symm).inv.app F)
+  let b := (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) f').inv.app
+        ((upperStar (ModuleCat.{u + 1} Λ) g').obj F) ≫
+      (Sheaf.ΓNatIsoSheafSections _ _
+        (IsTerminal.isTerminalOfObj
+          (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (Spec (.of Ω)))
+          (Scheme.Etale.mk (𝟙 (Spec (.of Ω)))) Over.mkIdTerminal)).hom.app
+            ((lowerStar (ModuleCat.{u + 1} Λ) f').obj
+              ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)) ≫
+      (Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).toPresheafFiber
+        (Scheme.Etale.mk (𝟙 (Spec (.of Ω))))
+        (Over.homMk (𝟙 _) (Category.comp_id _))
+        ((lowerStar (ModuleCat.{u + 1} Λ) f').obj
+          ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)).obj
+  change _ = e.hom ≫ a ≫ r ≫ b
+  apply (Iso.inv_comp_eq e).1
+  let N := (equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙
+    Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
+      (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)
+  have : N.Initial := (Scheme.strictHenselization_properties s).1
+  let c := ((Scheme.pointSmallEtale s).presheafFiberCocone P.obj).whisker N.op
+  let hc : IsColimit c :=
+    (Functor.Final.isColimitWhiskerEquiv N.op _).symm
+      ((Scheme.pointSmallEtale s).isColimitPresheafFiberCocone P.obj)
+  apply hc.hom_ext
+  intro j
+  change (Scheme.pointSmallEtale s).toPresheafFiber _ _ P.obj ≫
+    (e.inv ≫ _) = (Scheme.pointSmallEtale s).toPresheafFiber _ _ P.obj ≫ (a ≫ r ≫ b)
+  have he := exchange_pointed_representative Λ sq.toCommSq F
+    ((Scheme.AffineEtale.Spec Y).obj
+        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j.unop).1)
+    ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j.unop).2
+  have hr := strictLocal_section_pullback Λ sq.toCommSq F t hpoint q hqt hq j.unop
+  have h := congrArg (fun k ↦ k ≫ r ≫ b) (ha j.unop)
+  simpa only [r, b, e, P, N, Scheme.strictHenselizationAffineInclusion,
+    Functor.comp_obj, Functor.op_obj, ObjectProperty.ι, ObjectProperty.lift,
+    Functor.Elements.precomp, inducedFunctor, Functor.elementsMk, Category.assoc] using
+    (he.trans (congrArg (fun k ↦ k ≫ b) hr).symm).trans h.symm
 
 end AlgebraicGeometry.Etale

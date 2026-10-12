@@ -1,0 +1,166 @@
+{
+ "id": "lem-weil-pbc-strict-local-section-pullback",
+ "kind": "statement",
+ "title": "Strict-local representative section pullback",
+ "statement": "theorem strictLocal_section_pullback (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (t : Spec (.of Ω) ⟶ Scheme.strictHenselizationScheme s) (hpoint : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), t ≫ (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv = ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2.left) (q : X' ⟶ pullback f (Scheme.strictHenselizationStructuralMap s)) (hqt : q ≫ pullback.snd f (Scheme.strictHenselizationStructuralMap s) = f' ≫ t) (hq : q ≫ pullback.fst f (Scheme.strictHenselizationStructuralMap s) = g') (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) : qcqsStrictLocalSectionRestriction Λ f s F j ≫ globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F) ≫ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map ((upperStarComp (ModuleCat.{u + 1} Λ) q (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) g' hq.symm).inv.app F) = geometricFibreSectionRestriction Λ sq F ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X') (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, degree zero and canonical representative restriction; Tag 03Q1 (3); Tag 0A3U, degree-zero compatibility expanded in the parent node"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-finite-section-pullback",
+  "lem-weil-pbc-qcqs-strict-local-module-comparison",
+  "lem-sbc-geometric-fibre-exchange-germs"
+ ],
+ "proof": [
+  {
+   "text": "/-- Pulling a strict-local representative section back to the pointed fibre is the\nunit restriction along that representative's marked point.\nSource: Stacks Project, Tag 03Q9, canonical restriction on representatives, and\nTag 0A3U, degree-zero compatibility in the parent factorization.\n(blueprint: lem-weil-pbc-strict-local-section-pullback).\n\nProof: expand `qcqsStrictLocalSectionRestriction` and the global-sections pullback.\nNaturality of terminal evaluation changes the latter into the unit for q followed\nby restriction along its terminal lift. Naturality of the unit moves the strict-local\nlimit-leg restriction past this unit. The composition-unit identity and the inverse\nof `upperStarComp` identify the two successive inverse-image units with the unit for\ng'. The remaining morphism from the terminal object to g'^*f^*V has outer second\nprojection identity. Its inner projections are g', by hq, and f' followed by the\nmarked point: use hqt to replace the map to the strict-local base by f't, then use\nhpoint to replace t followed by the limit leg by the marked point. Pullback hom-ext\ntherefore identifies this morphism with `geometricFibreSectionLift`. The terminal\nsection/global-section isomorphisms cancel, leaving exactly the stated identity.\nNo isomorphism of stalks, comparison map a, qcqs hypothesis, or exchange map occurs.\nThe argument is valid for empty schemes and zero coefficient modules as well. -/",
+   "uses": [
+    "lem-weil-pbc-qcqs-strict-local-module-comparison",
+    "def-weil-pbc-finite-section-pullback",
+    "lem-sbc-geometric-fibre-exchange-germs"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-strict-local-module-comparison",
+  "def-weil-pbc-finite-section-pullback",
+  "lem-sbc-geometric-fibre-exchange-germs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Parent factorization proof step 3; Tag 03Q1 (3) germ formula and Tag 0A3U omitted exchange compatibility expanded on representatives; current second reading U3: geometricFibreSectionLift/Restriction definitions explicitly retained in the proof dependencies"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale direct image stalk strict henselization module global sections; base change exchange map stalk germ compatibility inverse image",
+   "results": "Both searches unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical isomorphism of modules between the stalk of an etale direct image and global sections on the strict henselization base change, with germ formula; exchange compatibility with fibre restriction",
+   "results": "Eight hits per query, on structure-sheaf stalk maps in Spec/AffineScheme, Scheme.stalkMap_germ, and ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap. These concern Zariski structure-sheaf or tilde stalks, not the etale direct image or exchange.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber",
+   "results": "12 hits including presheafFiber_hom_ext, toPresheafFiber_naturality, toPresheafFiber_w, and toPresheafFiber_presheafFiberDesc. These are general colimit tools, not the desired etale comparison or exchange identity.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|baseChangeMap|strictLocal in Mathlib/CategoryTheory/Sites; qcqs.*[Ss]talk|strictHenselization.*[Cc]omparison|baseChangeMap.*[Gg]erm in the project library",
+   "results": "No Mathlib sites hits and no exact library theorem. The library has the set-valued continuity theorem and the module/set inverse-image comparison; the finite base-change stalk-restriction theorem only computes pointwise restrictions, not the global-section factorization.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a sheaf section along a commutative square agrees with the adjunction unit on a marked etale neighbourhood",
+   "results": "8 hits, topological sheaf pullback and unrelated scheme/open immersion results; no etale strict-local section formula.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.baseChangeMap",
+   "results": "No hits (identifier not known by Mathlib-only loogle).",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_map_baseChangeMap_app|geometricFibreSectionRestriction|qcqsStrictLocalSectionRestriction in lean/Sheaf and lean/WeilConjectures",
+   "results": "Found the proved representative calculation in geometricFibreExchange_germs, reused to prove exchange_pointed_representative. No existing strict-local section pullback identity; restriction naturality concerns refinement, not pullback to the fibre.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image adjunction unit compatible with restriction of sections along a composite scheme morphism",
+   "results": "Eight hits: Zariski Scheme.Modules restrictAdjunction/restrictFunctorComp and scheme structure-sheaf appLE maps; none computes strict-local etale module sections.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "One generic adjunction uniqueness/unit lemma; it helps identify canonical units but does not give this section-pullback identity.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictLocal.*pullback|SectionRestriction|globalSectionsUpperStarMap|upperStarComp_hom_app_unit_app in lean/Sheaf and lean/WeilConjectures",
+   "results": "QcqsStrictLocalRestrictionNaturality concerns neighbourhood refinements only. IntegralFibreSectionLocalLiftAux has a stronger existential integral comparison with sorry, not the canonical arbitrary-q formula. Coherence contains the proved composition-unit identity, but the terminal evaluation and projection calculation remain to be formalized.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalExchangeCompatibility",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-strict-local-exchange-compatibility",
+   "place": "Representative calculation in original steps 3 and 4"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalSectionPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalSectionPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictLocal_section_pullback",
+  "declarations": [
+   "AlgebraicGeometry.Etale.strictLocal_section_pullback"
+  ],
+  "statement": "theorem strictLocal_section_pullback (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : CommSq g' f' f s) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (t : Spec (.of Ω) ⟶ Scheme.strictHenselizationScheme s) (hpoint : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), t ≫ (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv = ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2.left) (q : X' ⟶ pullback f (Scheme.strictHenselizationStructuralMap s)) (hqt : q ≫ pullback.snd f (Scheme.strictHenselizationStructuralMap s) = f' ≫ t) (hq : q ≫ pullback.fst f (Scheme.strictHenselizationStructuralMap s) = g') (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) : qcqsStrictLocalSectionRestriction Λ f s F j ≫ globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) q ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F) ≫ (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).map ((upperStarComp (ModuleCat.{u + 1} Λ) q (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) g' hq.symm).inv.app F) = geometricFibreSectionRestriction Λ sq F ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ X') (Scheme.Etale.mk (𝟙 X')) Over.mkIdTerminal)).inv.app ((upperStar (ModuleCat.{u + 1} Λ) g').obj F)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T184351-L-4022487",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T184351-L-4022487",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
