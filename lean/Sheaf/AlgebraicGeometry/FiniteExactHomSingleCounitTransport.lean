@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso
-import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.SingleRightDerivedExactComposition
+import Sheaf.AlgebraicGeometry.ExactDerivedAdjunctionSingleCounit
+import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-! # Canonical single-complex transport of a derived scalar counit
 
@@ -19,12 +21,165 @@ Source: Stacks Project, Tags 0AVW and 0AX3
 
 @[expose] public section
 
+section ProofAssembly
+
+universe uC uA uB vC vA vB wC wDA wB
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian
+namespace CategoryTheory
+variable {C : Type uC} {A : Type uA} {B : Type uB}
+  [Category.{vC} C] [Category.{vA} A] [Category.{vB} B]
+  [Abelian C] [Abelian A] [Abelian B]
+  [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wDA} A]
+  [HasDerivedCategory.{wB} B] [HasKInjectiveResolutions C]
+  [HasKInjectiveResolutions A] [HasKInjectiveResolutions B]
+omit [HasKInjectiveResolutions B] in
+private theorem derivedNatIso_refl (F : C ⥤ B) [F.Additive] :
+    Functor.rightDerivedFunctorNatIso (Iso.refl F) = Iso.refl F.rightDerivedFunctor := by
+  ext
+  simp [Functor.rightDerivedFunctorNatIso, Functor.rightDerivedFunctorNatTrans]
+
+private theorem assembly (F : C ⥤ A) (T : A ⥤ B) (H : B ⥤ A)
+    [F.Additive] [T.Additive] [H.Additive]
+    [PreservesFiniteLimits T] [PreservesFiniteColimits T]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [T.ReflectsIsomorphisms]
+    (adj : T ⊣ H) (M : C) (L : B)
+    (hcf : IsIso (DerivedCategory.Q.map
+      ((HomologicalComplex.singleMapHomologicalComplex (F ⋙ T)
+        (ComplexShape.up ℤ) 0).inv.app M) ≫
+      (F ⋙ T).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj
+        ((CochainComplex.singleFunctor C 0).obj M))))
+    (e : F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj M) ≅
+      H.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor B 0).obj L)) :
+    ∃ j : F.obj M ≅ H.obj L,
+      (DerivedCategory.singleFunctor B 0).map (T.map j.hom ≫ adj.counit.app L) =
+      DerivedCategory.Q.map
+        ((HomologicalComplex.singleMapHomologicalComplex (F ⋙ T)
+          (ComplexShape.up ℤ) 0).inv.app M) ≫
+        (F ⋙ T).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj
+          ((CochainComplex.singleFunctor C 0).obj M)) ≫
+        (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F T).hom.app
+          ((DerivedCategory.singleFunctor C 0).obj M) ≫
+        T.mapDerivedCategory.map e.hom ≫
+        adj.mapDerivedCategoryRightDerivedAdjunction.counit.app
+          ((DerivedCategory.singleFunctor B 0).obj L) := by
+  classical
+  let K := (CochainComplex.singleFunctor C 0).obj M
+  let cg : (DerivedCategory.singleFunctor A 0).obj (F.obj M) ⟶
+      F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj M) :=
+    DerivedCategory.Q.map
+    ((HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) 0).inv.app M) ≫
+    F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj K)
+  let cf : (DerivedCategory.singleFunctor B 0).obj (T.obj (F.obj M)) ⟶
+      (F ⋙ T).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj M) :=
+    DerivedCategory.Q.map
+    ((HomologicalComplex.singleMapHomologicalComplex (F ⋙ T)
+      (ComplexShape.up ℤ) 0).inv.app M) ≫
+    (F ⋙ T).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj K)
+  let t := (T.mapDerivedCategorySingleFunctor 0).app (F.obj M)
+  let g := (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F T).app
+    ((DerivedCategory.singleFunctor C 0).obj M)
+  have hcomp : t.inv ≫ T.mapDerivedCategory.map cg ≫ g.inv = cf :=
+    F.single_rightDerived_exact_composition T M
+  have : T.mapDerivedCategory.ReflectsIsomorphisms := by
+    constructor
+    intro P Q a ha
+    rw [DerivedCategory.isIso_iff]
+    intro n
+    have : IsIso ((DerivedCategory.homologyFunctor _ n ⋙ T).map a) :=
+      (NatIso.isIso_map_iff (T.mapDerivedCategoryHomologyFunctorIso n) a).mpr
+        (by dsimp; infer_instance)
+    have : IsIso (T.map ((DerivedCategory.homologyFunctor A n).map a)) := ‹_›
+    exact isIso_of_reflects_iso ((DerivedCategory.homologyFunctor _ n).map a) T
+  have : IsIso (t.inv ≫ T.mapDerivedCategory.map cg ≫ g.inv) := by
+    rw [hcomp]
+    exact hcf
+  have : IsIso (T.mapDerivedCategory.map cg ≫ g.inv) :=
+    IsIso.of_isIso_comp_left t.inv _
+  have : IsIso (T.mapDerivedCategory.map cg) := IsIso.of_isIso_comp_right _ g.inv
+  have : IsIso cg := isIso_of_reflects_iso cg T.mapDerivedCategory
+  let h := H.singleFunctorCompRightDerivedFunctorIso.app L
+  let d := asIso cg ≪≫ e ≪≫ h
+  let S := DerivedCategory.singleFunctor A 0
+  let j := S.preimageIso d
+  refine ⟨j, ?_⟩
+  have hj : S.map j.hom = cg ≫ e.hom ≫ h.hom := by
+    change S.map (S.preimage d.hom) = _
+    rw [Functor.map_preimage]
+    rfl
+  have hcounit := adj.exact_derivedAdjunction_single_counit L
+  have heq : (DerivedCategory.singleFunctor B 0).map (T.map j.hom) =
+      t.inv ≫ T.mapDerivedCategory.map (S.map j.hom) ≫
+        (T.mapDerivedCategorySingleFunctor 0).hom.app (H.obj L) := by
+    have hn := (T.mapDerivedCategorySingleFunctor 0).hom.naturality j.hom
+    dsimp only [Functor.comp_map] at hn
+    exact (t.inv_comp_eq.mpr hn).symm
+  have hc : (T.mapDerivedCategorySingleFunctor 0).hom.app (H.obj L) ≫
+      (DerivedCategory.singleFunctor B 0).map (adj.counit.app L) =
+      T.mapDerivedCategory.map h.inv ≫
+        adj.mapDerivedCategoryRightDerivedAdjunction.counit.app
+          ((DerivedCategory.singleFunctor B 0).obj L) := hcounit.symm
+  simp only [← Category.assoc]
+  change (DerivedCategory.singleFunctor B 0).map (T.map j.hom ≫ adj.counit.app L) =
+    ((cf ≫ g.hom) ≫ T.mapDerivedCategory.map e.hom) ≫
+      adj.mapDerivedCategoryRightDerivedAdjunction.counit.app _
+  simp only [Category.assoc]
+  rw [Functor.map_comp, heq]
+  simp only [Category.assoc]
+  rw [hc, hj]
+  simp only [Functor.map_comp, Category.assoc]
+  simp only [← Functor.map_comp_assoc,
+    Iso.hom_inv_id, Functor.map_id, Category.id_comp]
+  rw [← hcomp]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  simp only [Functor.map_comp, Category.assoc]
+private theorem assembly_transport (F : C ⥤ A) (T : A ⥤ B) (H : B ⥤ A)
+    (G : C ⥤ B)
+    [F.Additive] [T.Additive] [H.Additive] [G.Additive]
+    [PreservesFiniteLimits T] [PreservesFiniteColimits T]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    [T.ReflectsIsomorphisms]
+    (adj : T ⊣ H) (M : C) (L : B) (hFT : F ⋙ T = G)
+    (hcf : IsIso (DerivedCategory.Q.map
+      ((HomologicalComplex.singleMapHomologicalComplex G
+        (ComplexShape.up ℤ) 0).inv.app M) ≫
+      G.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj
+        ((CochainComplex.singleFunctor C 0).obj M))))
+    (γ : F.rightDerivedFunctor ⋙ T.mapDerivedCategory ≅ G.rightDerivedFunctor)
+    (hγ : γ = (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F T).symm ≪≫
+      Functor.rightDerivedFunctorNatIso (eqToIso hFT))
+    (e : F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj M) ≅
+      H.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor B 0).obj L)) :
+    ∃ j : F.obj M ≅ H.obj L,
+      (DerivedCategory.singleFunctor B 0).map (T.map j.hom ≫ adj.counit.app L) =
+      eqToHom (congrArg (fun J : C ⥤ B =>
+        (DerivedCategory.singleFunctor B 0).obj (J.obj M)) hFT) ≫
+      DerivedCategory.Q.map
+        ((HomologicalComplex.singleMapHomologicalComplex G
+          (ComplexShape.up ℤ) 0).inv.app M) ≫
+        G.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj
+          ((CochainComplex.singleFunctor C 0).obj M)) ≫
+        γ.inv.app ((DerivedCategory.singleFunctor C 0).obj M) ≫
+        T.mapDerivedCategory.map e.hom ≫
+        adj.mapDerivedCategoryRightDerivedAdjunction.counit.app
+          ((DerivedCategory.singleFunctor B 0).obj L) := by
+  subst G
+  simp only [eqToIso_refl, derivedNatIso_refl, Iso.trans_refl] at hγ
+  subst γ
+  simpa only [eqToHom_refl, Category.id_comp, Iso.symm_inv] using
+    assembly F T H adj M L hcf e
+
+end CategoryTheory
+
+end ProofAssembly
+
 universe u wX wY wA
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.lazyWhnfCore false in
 set_option maxHeartbeats 800000 in
 -- Elaborating the canonical factorization unfolds the two ring-sheaf presentations.
 /-- Lift an algebra-valued derived isomorphism between single complexes, keeping
@@ -109,6 +264,23 @@ theorem finite_exactHom_single_counit_transport
           e.hom ≫
         adjH.mapDerivedCategoryRightDerivedAdjunction.counit.app
           ((DerivedCategory.singleFunctor
-            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj L) := by sorry
+            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj L) := by
+  let F := RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)
+  let T := SheafOfModules.restrictScalars.{u}
+    (R := moduleRings Y.toRingedSpace)
+    (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom
+  have heT : T ⋙ SheafOfModules.toSheaf.{u} (moduleRings Y.toRingedSpace) ≅
+      SheafOfModules.toSheaf.{u} (moduleRings (directImageAlgebraSpace f)) := Iso.refl _
+  have : T.ReflectsIsomorphisms := by
+    have : (T ⋙ SheafOfModules.toSheaf.{u}
+        (moduleRings Y.toRingedSpace)).ReflectsIsomorphisms :=
+      reflectsIsomorphisms_of_iso heT.symm
+    exact reflectsIsomorphisms_of_comp T
+      (SheafOfModules.toSheaf.{u} (moduleRings Y.toRingedSpace))
+  have hFT : F ⋙ T = RingedSpace.moduleDirectImage f.toLRSHom.toShHom := rfl
+  have hf := affine_singlePushforward_unit_isIso f M hM
+  have result := CategoryTheory.assembly_transport F T H
+    (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) adjH M L hFT hf γ hγ e
+  simpa only [eqToHom_refl, Category.id_comp] using result
 
 end AlgebraicGeometry

@@ -1,0 +1,109 @@
+{
+ "id": "lem-sc-single-right-derived-exact-composition",
+ "kind": "statement",
+ "title": "Canonical single comparison under exact postcomposition",
+ "statement": "Let C,A,B be abelian categories with derived categories [def-weil-abstract-derived-category] and K-injective resolutions on C and A. Let F:C→A be additive and T:A→B be additive and exact. For M in C let cF(M):(FM)[0]→RF(M[0]) be the inverse termwise single comparison followed by the right-derived unit. Let t:T-derived((FM)[0])≅(TFM)[0] be the exact-T single comparison and let k:R(F⋙T)≅RF⋙D(T) be the canonical exact-postcomposition comparison. Then t⁻¹ followed by D(T)(cF(M)) followed by k⁻¹ at M[0] equals c(F⋙T)(M).",
+ "source": {
+  "document": "literature/stacks-project/duality.tex; literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, lemma-affine-morphism, final pushforward identification; Tag 0AX3, remark-trace-map-finite"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Postcompose the claimed equality with k.hom. Uniqueness of right-derived functors factors the composite right-derived unit followed by k.hom into the termwise-composition comparison, the unit of RT and RT of the unit of RF. Naturality of RT≅D(T), followed by its defining unit factorization, replaces the unit of RT by the inverse exact localization comparison.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Move Q of the inverse F-single comparison through the exact localization comparison by naturality. The termwise comparison for F followed by T equals the T-single comparison followed by T of the F-single comparison: at degree zero both are the canonical object-identification maps, and away from zero both have zero source and target. Applying Q, functoriality and cancellation of k proves the equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0AVW and 0AX3; Lean right-derived-functor infrastructure",
+  "place": "Canonical exact-postcomposition comparison and derived counit factorization on single complexes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "single complex comparison for exact functor and derived adjunction counit",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact functor derived category single functor counit adjunction",
+   "results": "mapDerivedCategorySingleFunctor, singleFunctorIsoCompQ, derived_counit; no exact comparison identity.",
+   "date": "2026-10-13",
+   "verdict": "generic infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*[Cc]ounit|[Cc]ounit.*single; rightDerivedFunctorCompMapDerivedCategoryIso; rightDerivedUnique in Mathlib and WeilConjectures",
+   "results": "Found the single comparison, exact-composition construction, and derived counit factorization; no combined equality.",
+   "date": "2026-10-13",
+   "verdict": "generic infrastructure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteExactHomSingleCounitTransport",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof: affine restriction-of-scalars right adjoint and its trace comparison; Tag 0AVW, lemma-affine-morphism, final pushforward identification; Tag 0AX3, remark-trace-map-finite",
+   "via": [
+    "lem-sc-finite-exact-hom-single-counit-transport",
+    "lem-sc-finite-exact-hom-degree-zero-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleRightDerivedExactComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleRightDerivedExactComposition.lean",
+  "declaration": "CategoryTheory.Functor.single_rightDerived_exact_composition",
+  "statement": "theorem single_rightDerived_exact_composition (F : C ⥤ A) (T : A ⥤ B)\n    [F.Additive] [T.Additive] [PreservesFiniteLimits T] [PreservesFiniteColimits T]\n    (M : C) :\n    (T.mapDerivedCategorySingleFunctor 0).inv.app (F.obj M) ≫\n      T.mapDerivedCategory.map\n        (DerivedCategory.Q.map\n          ((HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) 0).inv.app M) ≫\n          F.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj\n            ((CochainComplex.singleFunctor C 0).obj M))) ≫\n      (rightDerivedFunctorCompMapDerivedCategoryIso F T).inv.app\n        ((DerivedCategory.singleFunctor C 0).obj M) =\n    DerivedCategory.Q.map\n      ((HomologicalComplex.singleMapHomologicalComplex (F ⋙ T)\n        (ComplexShape.up ℤ) 0).inv.app M) ≫\n      (F ⋙ T).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj\n        ((CochainComplex.singleFunctor C 0).obj M))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7cdaf",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T235555-L-2201444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7cdaf",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T235555-L-2201444",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivery at 7cdaffdbb1b2 with the packet, unchanged theorem signature, DAG records and canonical comparison definitions; all three modules and direct importer FiniteExactHomDegreeZeroLift compile cleanly, with expected axioms."
+ }
+}
