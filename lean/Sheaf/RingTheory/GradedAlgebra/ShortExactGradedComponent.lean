@@ -24,6 +24,33 @@ universe u v w x
 
 namespace DirectSum
 
+private theorem homogeneous_preimage
+    {A : Type v} [AddCommGroup A] {B : Type w} [AddCommGroup B]
+    (𝒜 : ℤ → AddSubgroup A) (ℬ : ℤ → AddSubgroup B)
+    (hA : IsInternal 𝒜) (hB : IsInternal ℬ) (f : A →+ B)
+    (hf : ∀ (n : ℤ) (a : A), a ∈ 𝒜 n → f a ∈ ℬ n)
+    (n : ℤ) (b : ℬ n) (a : A) (ha : f a = b) :
+    ∃ aₙ : 𝒜 n, f aₙ = b := by
+  classical
+  let fn : ∀ n, 𝒜 n →+ ℬ n := fun n ↦
+    { toFun := fun a ↦ ⟨f a, hf n a a.property⟩
+      map_zero' := Subtype.ext (f.map_zero)
+      map_add' := fun a a' ↦ Subtype.ext (f.map_add a a') }
+  have hmap (d : ⨁ n, 𝒜 n) :
+      DirectSum.coeAddMonoidHom ℬ (DirectSum.map fn d) =
+        f (DirectSum.coeAddMonoidHom 𝒜 d) := by
+    induction d using DirectSum.induction_on with
+    | zero => simp
+    | of n a => simp [fn]
+    | add d e hd he => simp [hd, he]
+  obtain ⟨d, hd⟩ := hA.2 a
+  have he : DirectSum.map fn d = DirectSum.of (fun n ↦ ℬ n) n b := by
+    apply hB.1
+    rw [hmap, hd, ha, DirectSum.coeAddMonoidHom_of]
+  have hn := congrArg (fun d : ⨁ n, ℬ n ↦ d n) he
+  simp only [DirectSum.map_apply, DirectSum.of_eq_same] at hn
+  exact ⟨d n, congrArg Subtype.val hn⟩
+
 /-- A short exact sequence of degree-preserving maps of integer-graded modules
 restricts to a short exact sequence in each degree.
 Source: Stacks Project, Algebra, Section 00JL (`section-graded`), the graded-module
@@ -60,6 +87,26 @@ theorem shortExact_graded_component
     let iₙ : 𝒜 n → ℬ n := fun a ↦ ⟨i a, hi n a a.property⟩
     let pₙ : ℬ n → 𝒞 n := fun b ↦ ⟨p b, hp n b b.property⟩
     Function.Injective iₙ ∧ Function.Exact iₙ pₙ ∧ Function.Surjective pₙ := by
-  sorry
+  dsimp
+  constructor
+  · intro a a' h
+    apply Subtype.ext
+    exact _hinj (congrArg Subtype.val h)
+  constructor
+  · intro b
+    constructor
+    · intro hb
+      obtain ⟨a, ha⟩ := (_hexact (b : B)).mp (congrArg Subtype.val hb)
+      obtain ⟨aₙ, haₙ⟩ := homogeneous_preimage 𝒜 ℬ _hA _hB i.toAddMonoidHom hi n b a ha
+      exact ⟨aₙ, Subtype.ext haₙ⟩
+    · rintro ⟨a, ha⟩
+      apply Subtype.ext
+      change p (b : B) = 0
+      rw [← congrArg Subtype.val ha]
+      exact _hexact.apply_apply_eq_zero a
+  · intro c
+    obtain ⟨b, hb⟩ := _hsurj c
+    obtain ⟨bₙ, hbₙ⟩ := homogeneous_preimage ℬ 𝒞 _hB _hC p.toAddMonoidHom hp n c b hb
+    exact ⟨bₙ, Subtype.ext hbₙ⟩
 
 end DirectSum
