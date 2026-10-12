@@ -28,14 +28,22 @@
  ],
  "proof": [
   {
-   "text": "Put Y = X′ ×_X X′ and D = Z ×_X Y. For each projection p_r, the pullback universal property gives q_r : D → Z′, with q_r followed by the immersion into X′ equal to j followed by p_r, and q_r followed by the projection to Z equal to D → Z. These identities follow by checking both projections.",
+   "text": "Construct q_1 and q_2 : Z ×_X (X′ ×_X X′) → Z ×_X X′ by pullback.lift. The pullback condition and associativity give their defining commutativity equations; pullback.lift_fst and pullback.lift_snd identify both projection composites.",
    "uses": [
     "def-pc-fibre-product"
    ],
    "elementary": true
   },
   {
-   "text": "Apply the inverse-image unit along q_r to the given closed-fibre equation. Naturality in sheaves and objects, and associativity of the unit-compatible composition comparisons, rewrite the closed restriction of c_(h,p_r)(p_r^*s′) as c_(i,D→Z)((D→Z)^*t). This expression is independent of r. The two pasting maps coincide because their projections coincide. Cancel the isomorphic comparison to the composite inverse image; the remaining equality is exactly equality under the unit along j. For the second projection transport along p_1 h = p_2 h is eqToHom along pullback.condition.symm.",
+   "text": "Prove the section-level composition identity comparison_assoc by evaluating etaleSetInverseImageCompositionUnits: naturality in site objects moves the first fibre-product pasting map through the next unit, naturality in sheaves moves the first composition comparison through it, the associativity clause rewrites the composite of comparison morphisms, and the unit equation combines the two remaining units. Naturality of the last comparison moves the inverse pasting map across it. MorphismProperty.Over.pullbackComp_assoc identifies the two triple pasting maps; pasting_transport supplies the cast along Category.assoc, map_transport eliminates the sheaf and object transports by equality induction, and the pasting isomorphism hom/inv equation cancels the last pair.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Turn hres into heterogeneous equality by equality induction on its eqToHom transport. Apply comparison_square, the fully proved generic consequence of comparison_assoc, to q_1 and q_2. Rewrite their two projection composites: both left sides become the same comparison applied to t, so transitivity identifies the two comparisons of s′ along j p_1 and j p_2. Apply restricted_comparisons: use comparison_assoc to return to the iterated comparisons, comparison_cast to account for p_2 h = p_1 h, and comparison_cancel to cancel the section maps of the comparison and pasting isomorphisms using ConcreteCategory.bijective_of_isIso. This gives exactly the original equality under the raw unit along j.",
    "uses": [
     "lem-weil-pbc-sets-etale-inverse-image-composition-units",
     "def-pc-fibre-product"
@@ -48,9 +56,9 @@
   "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through equality of the projection pullbacks, before the invocation of Remark 09Z3"
+  "place": "Tag 09ZF, proof of lemma-gabber-h0, third paragraph compatibility and fourth paragraph projection comparison. The formal proof follows the existing node plan, deriving section-level associativity from etaleSetInverseImageCompositionUnits and fibre-product pasting coherence. B2, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -120,8 +128,8 @@
   "reviewer": "COMPILER",
   "group": "B2",
   "result": "pass",
-  "landing": "20261012T063504-L-3152526",
-  "kind": "interface",
+  "landing": "20261012T085213-L-2789",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
