@@ -7,7 +7,8 @@ module
 
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
+import Sheaf.RingTheory.ResidueFieldTowerSystem
+import Sheaf.RingTheory.FlatLocalTowerDirectLimit
 
 /-!
 # Flat local extensions with prescribed residue field
@@ -71,6 +72,51 @@ theorem exists_flat_local_extension_given_residue_field
       (φ : R →+* S) (_ : IsLocalHom φ),
       φ.Flat ∧ (maximalIdeal R).map φ = maximalIdeal S ∧
       ∃ e : ResidueField S ≃+* K, e.toRingHom.comp (ResidueField.map φ) = ι := by
-  sorry
+  classical
+  obtain ⟨ord, A, rings, locals, algebras, f, system, ψ, hψ, hflat, hmax,
+    hker, hcomp, hcover⟩ := exists_residue_field_tower_system R K ι
+  let := ord
+  let := rings
+  let := locals
+  let := algebras
+  let := system
+  let S := DirectLimit A f
+  let φ : R →+* S := algebraMap R S
+  let q : S →+* K := DirectLimit.Ring.lift A f K ψ hψ
+  have hqof (i) (a : A i) : q (DirectLimit.Ring.of A f i a) = ψ i a := rfl
+  have hqcomp : q.comp φ = ι.comp (residue R) := by
+    ext r
+    let i : ULift.{u} K := ⟨0⟩
+    change q (algebraMap R (DirectLimit A f) r) = ι (residue R r)
+    rw [DirectLimit.algebraMap_def i]
+    exact DFunLike.congr_fun (hcomp i) r
+  have hsurj : Function.Surjective q := by
+    intro x
+    obtain ⟨i, a, ha⟩ := hcover x
+    exact ⟨DirectLimit.Ring.of A f i a, (hqof i a).trans ha⟩
+  have hη : RingHom.ker (ι.comp (residue R)) = maximalIdeal R := by
+    ext r
+    change ι (residue R r) = 0 ↔ r ∈ maximalIdeal R
+    rw [map_eq_zero_iff ι ι.injective, residue_eq_zero_iff]
+  obtain ⟨localS, localφ, hflatS, hmap, hqker⟩ :=
+    flat_local_tower_directLimit (ι.comp (residue R)) hη A f ψ hψ hflat hmax hker hcomp
+  have := localS
+  have := localφ
+  have : IsLocalHom q := ⟨by
+    intro x hx
+    apply notMem_maximalIdeal.mp
+    rw [← hqker]
+    exact isUnit_iff_ne_zero.mp hx⟩
+  let e : ResidueField S ≃+* K := RingEquiv.ofBijective (ResidueField.lift q)
+    ⟨(ResidueField.lift q).injective, by
+      intro x
+      obtain ⟨s, hs⟩ := hsurj x
+      exact ⟨residue S s, hs⟩⟩
+  refine ⟨S, inferInstance, inferInstance, φ, inferInstance,
+    hflatS, hmap, e, ?_⟩
+  ext x
+  obtain ⟨r, rfl⟩ := residue_surjective x
+  change q (φ r) = ι (residue R r)
+  exact DFunLike.congr_fun hqcomp r
 
 end IsLocalRing
