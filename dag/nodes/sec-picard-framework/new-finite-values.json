@@ -12,20 +12,35 @@
  ],
  "proof": [
   {
-   "text": "The locally homogeneous-fraction predicate for the twist gives a/d on a neighborhood. Refine by D₊(u), then replace by N/h=(a*u*f)/(d*u*f) so h has positive degree c. The chart sends this to D(h^b/f^c); quasi-compactness extracts a finite cover and the chart elements span one. Construct t=(h^(b-1)*N/f^c)/(h^b/f^c). For any e with the two identities, applying e to g*(1/g)=1 forces F(g) to be a unit and hence p to lie in D₊(h). Applying e to g*t=z gives the asserted value after cancellation. On the empty chart take the empty family in the zero ring.",
+   "text": "Apply twist_local_clearing at every point of Spec B to choose g_x,z_x with x∈D(g_x) and F_p(g_x)s(p)=F_p(z_x) whenever F_p(g_x) is a unit.",
    "uses": [
-    "def-weil-pbc-proj-twisting-sheaf"
+    "lem-sc-proj-twist-local-clearing"
    ],
    "elementary": false
+  },
+  {
+   "text": "Spec B is compact and each D(g_x) is open. Use IsCompact.elim_finite_subcover to extract a finite set a of indices whose principal opens cover Spec B. Reindex a by Fin a.card using Finset.equivFin. The cover/unit-ideal equivalence PrimeSpectrum.iSup_basicOpen_eq_top_iff gives Ideal.span (range g)=top. The empty spectrum is handled by the same compactness argument, with a possibly empty index set.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite index construct t_i=LocalizedModule.mk z_i ⟨g_i,mem_powers g_i⟩. Mathlib smul'_mk and mk_cancel give g_i•(w/g_i)=w/1. For an additive evaluation e extending F_p and satisfying the scalar identity, apply these identities at w=1. This gives F_p(g_i)*e(1/g_i)=F_p(1)=1, so F_p(g_i) is a unit. Apply them again at w=z_i to obtain F_p(g_i)*e(t_i)=F_p(z_i). The local clearing identity yields F_p(z_i)=F_p(g_i)*s(p); cancel the unit to conclude e(t_i)=s(p).",
+   "uses": [
+    "lem-sc-proj-twist-local-clearing"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proj-twisting-sheaf"
+  "lem-sc-proj-twist-local-clearing",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "https://stacks.math.columbia.edu/tag/01M7",
-  "place": "Section 27.8; Lemma 27.8.1 and preceding construction; G3 second reading supplies the explicit localization argument."
+  "document": "https://stacks.math.columbia.edu/tag/01M3",
+  "place": "Lemma 01M4 (2),(3) and the local fraction construction before 01M7, specialized to A(k); complete Lean construction and arbitrary additive evaluation cancellation by V2."
  },
  "mathlib_searches": [
   {
@@ -107,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-0f47c",
-  "group": "G3",
+  "reviewer": "COMPILER",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T194113-L-455918",
+  "landing": "20261012T225335-L-1814822",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the packet and node statements; all modules and direct importer compile, with only permitted axioms and documented sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
