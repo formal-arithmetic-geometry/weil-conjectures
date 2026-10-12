@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-flat-base-change-resolution-iso",
+ "kind": "statement",
+ "title": "Invertibility of the resolution-defined qcqs flat base-change map",
+ "statement": "For f:X→S quasi-compact and quasi-separated, g:S′→S flat, g′=pullback.snd g f flat, F a quasi-coherent O_X-module, I and J injective resolutions of F and g′*F, t:I→g′_*J an augmentation-preserving comparison lift, and p≥0, the specific sheaf morphism flatBaseChangeResolutionBeta f g I J t p is an isomorphism. This is the actual O_X-module-derived comparison, for arbitrary flat base change, not only an Ext cohomology dimension identity over field extensions. [def-weil-pbc-flat-base-change-resolution-construction] [def-sp-injective-resolutions] [pqf-def-coherent]",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Lemma 30.5.2, part (1) and its proof: affine-local reduction, separated Cech proof and the qcqs Cech-to-cohomology spectral sequence; comparison map from 02N7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "def-sp-injective-resolutions",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Reduce locally on S′ to affine flat base change. On a finite affine cover of the qcqs source, the Cech-to-cohomology spectral sequence computes derived module cohomology. For each quasi-compact separated intersection, refine by finite affine covers; quasi-coherent sections on affine intersections base change by tensor. The tensor functor is exact, so it commutes with the homology of these complexes and the spectral-sequence abutments. The scalar extension is therefore an isomorphism in every degree, including zero. This is the proof of Stacks 02KH, with ordinary module cohomology computed using its injective resolutions.",
+   "uses": [
+    "pqf-def-cohomology",
+    "lem-pc-flat-tensor-complex-cohom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the isomorphism with the specified resolution-defined sheaf comparison: both arise from the pullback unit, and the augmented lift gives that unit on cocycles. The section computation and independence of augmented lifts identify the map for all I,J,t. Local invertibility is invertibility of the sheaf morphism.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-resolution-construction",
+    "lem-weil-pbc-flat-base-change-map-sections",
+    "lem-weil-pbc-flat-base-change-resolution-independence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-cohomology",
+  "lem-pc-flat-tensor-complex-cohom",
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "lem-weil-pbc-flat-base-change-map-sections",
+  "lem-weil-pbc-flat-base-change-resolution-independence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Lemma 30.5.2, part (1) and its proof: affine-local reduction, separated Cech proof and the qcqs Cech-to-cohomology spectral sequence; comparison map from 02N7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The flat base change map for higher direct images of quasicoherent modules is an isomorphism; local spectrum stalks and total cohomology",
+   "results": "The launcher search returned Internal Server Error; unavailable, no absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image stalk at y is isomorphic to cohomology after base change to spectrum of local ring at y",
+   "results": "StructureSheaf.toPushforwardStalk_comp, Scheme.Modules.restrictStalkNatIso, TopCat.Presheaf.stalkPullbackIso and ModuleCat.Tilde.stalkIso. These are underived stalk or scalar identifications, not this resolution-defined comparison. Loogle Scheme.fromSpecStalk supplies the base map only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "flatBaseChangeResolutionBeta|IsIso beta|stalk.*cohomology|cohomology.*stalk in Mathlib, lean/Sheaf and lean/WeilConjectures; blueprint_refs.py searches 02KH, local spectrum, closed point stalk and higher direct image local ring",
+   "results": "No Mathlib statement of this comparison. Source field-extension cohomology and DAG compact-separated Ext-based cohomology comparisons do not state invertibility of this O_X-module-derived sheaf map. No imported blueprint node matches the local transport.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFunctionsLocalStalkComparison",
+  "group": "M1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Lemma 30.5.2, part (1) and its proof: affine-local reduction, separated Cech proof and the qcqs Cech-to-cohomology spectral sequence; comparison map from 02N7.",
+   "via": [
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeResolutionIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionBeta_isIso",
+  "statement": "theorem Scheme.Modules.flatBaseChangeResolutionBeta_isIso\n    {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    [QuasiCompact f] [QuasiSeparated f] [Flat g] [Flat (pullback.snd g f)]\n    (F : X.Modules) [F.IsQuasicoherent]\n    (I : InjectiveResolution F)\n    (J : InjectiveResolution\n      ((Scheme.Modules.tensorPullback (pullback.snd g f)).obj F))\n    (t : I.cocomplex ⟶\n      ((Scheme.Modules.pushforward (pullback.snd g f)).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj J.cocomplex)\n    (ht : I.ι.f 0 ≫ t.f 0 =\n      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction\n        (pullback.snd g f))).unit.app F ≫\n          (Scheme.Modules.pushforward (pullback.snd g f)).map (J.ι.f 0)) (p : ℕ) :\n    IsIso (Scheme.Modules.flatBaseChangeResolutionBeta f g I J t p)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T194122-L-458808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T194122-L-458808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

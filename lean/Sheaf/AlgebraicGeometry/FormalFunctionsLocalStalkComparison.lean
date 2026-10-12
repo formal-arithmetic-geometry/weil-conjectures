@@ -8,13 +8,16 @@ public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections
+import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
+import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.LocalDerivedStalkTransport
+import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.ModulePullbackFiniteType
-import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.Paper.HigherDirectImagePresheaf
 import Sheaf.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -97,7 +100,34 @@ theorem formalFunctions_local_stalk_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) :
     ∃ a : formalFunctionsStalk f y F p ≃ₗ[Y.presheaf.stalk y]
       formalFunctionsLocalCohomology f y F p,
-      IsFormalFunctionsLocalComparison f y F p a.toLinearMap := by sorry
+      IsFormalFunctionsLocalComparison f y F p a.toLinearMap := by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : F.IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp hF).1
+  have : Flat (Y.fromSpecStalk y) :=
+    (Scheme.fromSpecStalk_local_properties Y y).2.2.2.2.2
+  have : Flat (pullback.snd (Y.fromSpecStalk y) f) := inferInstance
+  obtain ⟨beta, hbeta, _, hsections⟩ :=
+    Scheme.Modules.flatBaseChangeMap_sections f (Y.fromSpecStalk y) F p
+  let I := injectiveResolution F
+  let K := injectiveResolution
+    ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)
+  obtain ⟨t, ht⟩ := Scheme.Modules.flatBaseChangeResolutionLift f (Y.fromSpecStalk y) I K
+  have : IsIso beta := by
+    rw [← hbeta I K t ht]
+    exact Scheme.Modules.flatBaseChangeResolutionBeta_isIso
+      f (Y.fromSpecStalk y) F I K t ht p
+  obtain ⟨a, ha⟩ := localDerived_stalk_transport f y F p
+    (((Scheme.Modules.pushforward f).rightDerived p).obj F) beta
+  refine ⟨a, ?_⟩
+  intro I K V hy D xi
+  have h := ha I K V hy D
+    ((Scheme.Modules.moduleCohomologyFMap
+      ((pullback.snd (Y.fromSpecStalk y) f).resLE (f ⁻¹ᵁ V)
+        ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p) xi)
+    (D.sourceClass p xi) (hsections I K V D xi)
+  dsimp only [Scheme.Modules.FlatBaseChangeOpenChoices.sourceClass] at h
+  exact h
 
 end
 end AlgebraicGeometry
