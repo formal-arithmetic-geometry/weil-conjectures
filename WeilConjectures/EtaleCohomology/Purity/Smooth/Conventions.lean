@@ -306,6 +306,7 @@ noncomputable def leftDerivedUpperStarConstantComplexIso (f : X ⟶ Y) :
   haveI := isIso_leftDerivedUpperStarOplaxMonoidal_η (ModuleCat.{u + 1} Λ) f
   asIso (Functor.OplaxMonoidal.η (L((f)^*[ModuleCat.{u + 1} Λ])))
 
+omit [HasTateTwist Λ] in
 variable (Λ) in
 /-- Derived pullback preserves ⊗-invertibility: `Lf^*(K ⊗^L M) ≅ Lf^* K ⊗^L Lf^* M` and
 `Lf^* Λ_Y ≅ Λ_X`. -/

@@ -118,13 +118,14 @@ Untwisting, `Lu^* (K(-m)[-2m]) ≅ Λ_U` is the constant sheaf in degree zero, s
 `K(-m)[-2m]` is its own `H⁰` placed in degree zero and `H⁰` is finite locally constant; its
 stalks are those of `Λ_U`, a geometric point of `T` lifting to `U`. -/
 theorem exists_nonempty_iso_twistShift_of_leftDerivedUpperStar_iso {U T : Scheme.{u}}
-    (u : U ⟶ T) [Etale u] [Surjective u] (m : ℤ)
+    (u : U ⟶ T) [Etale u] [Surjective u] [HasInvertibleExponent Λ T] (m : ℤ)
     (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (e : (L((u)^*[ModuleCat.{u + 1} Λ])).obj K ≅ (twistShift Λ U m).obj (constantComplex Λ U)) :
     ∃ L : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsFiniteLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ T),
         Nonempty ((pointSmallEtale x).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
       Nonempty (K ≅ (twistShift Λ T m).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L)) := by
+  have : HasInvertibleExponent Λ U := .of_hom u
   let K₀ := (twistShift Λ T (-m)).obj K
   -- untwisting, `Lu^* K₀` is the unit sheaf in degree zero
   let e₀ : (L((u)^*[ModuleCat.{u + 1} Λ])).obj K₀ ≅
@@ -393,6 +394,9 @@ theorem exists_nonempty_iso_familyObject_twistShift :
         ((_root_.DerivedCategory.singleFunctor _ 0).obj L)) := by
   obtain ⟨θ⟩ := D.nonempty_iso_leftDerivedUpperStar_oneSection_familyObject Λ
   obtain ⟨B', u, hu, hsurj, -, ⟨c⟩, e, -⟩ := D.exists_etale_familyObject_data Λ aB θ
+  have : HasInvertibleExponent Λ B' := .of_hom u
+  have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); B') :=
+    .of_hom (𝔸(ULift.{u} (Fin 1); B') ↘ B')
   have : _root_.AlgebraicGeometry.Etale (AffineSpace.map (ULift.{u} (Fin 1)) u) :=
     MorphismProperty.of_isPullback (P := @AlgebraicGeometry.Etale)
       (AffineSpace.isPullback_map u).flip hu
@@ -426,6 +430,9 @@ theorem nonempty_iso_familyObject_leftDerivedUpperStar :
       (L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).obj (sectionInvariant Λ g s)) := by
   obtain ⟨θ⟩ := D.nonempty_iso_leftDerivedUpperStar_oneSection_familyObject Λ
   obtain ⟨B', u, hu, hsurj, hsep, ⟨c⟩, e, φ, h⟩ := D.exists_etale_familyObject_data Λ aB θ
+  have : HasInvertibleExponent Λ B' := .of_hom u
+  have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); B') :=
+    .of_hom (𝔸(ULift.{u} (Fin 1); B') ↘ B')
   let a' := 𝔸(ULift.{u} (Fin 1); B') ↘ B'
   let ε' := leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} Λ) _ a'
     (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B')
