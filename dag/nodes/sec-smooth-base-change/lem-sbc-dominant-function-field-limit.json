@@ -14,23 +14,37 @@
  ],
  "proof": [
   {
-   "text": "Dominance sends generic points to generic points. The stalk maps therefore give embeddings of stage function fields into k(S). Each transition is dominant since its composite with a dominant limit projection is dominant. Its generic stalk map gives the corresponding embedding of function fields. Functoriality of stalk maps gives the spectrum diagram K and the natural maps b and t; take e_i to be the identity on the actual spectrum of the stage field.",
+   "text": "A dominant map of irreducible schemes sends the generic point to the generic point: apply IsGenericPoint.image to genericPoint_spec and use DenseRange.closure_range. Each transition X.map f is dominant by IsDominant.of_comp and the cone identity. Construct the spectrum maps from the actual generic stalk maps, transported by eqToHom along the generic-point equality. Scheme.SpecMap_stalkMap_fromSpecStalk proves compatibility with the generic inclusions. Cancel these monomorphisms to prove the functor and natural-transformation laws. This constructs K, b and t, with e the identity isomorphisms.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "Choose a nonempty affine open U_j at one stage, and pass to the cofiltered slice over j. The inverse images U_i are affine nonempty integral opens, as is their limit U in S. The affine limit identifies its ring with the filtered colimit of the stage coordinate rings. Their maps are injective by dominance. A fraction in the limit ring has numerator and nonzero denominator in a common stage, so k(S) is the filtered colimit of the stage fraction fields; injectivity follows from the field embeddings. Cofinality of the slice proves the assertion over I. Applying Spec gives the limit cone b. The generic stalk maps give both stated comparison identities. Spectra of fields are qcqs and every morphism between affine schemes is affine.",
+   "text": "For a point s of S whose projections are all the stage generic points, Mathlib isBasis_preimage_isAffineOpen gives a basis of inverse images of stage affine opens. Every basis neighbourhood of the generic point of S contains s, since its image at the relevant stage equals the image of that generic point. Thus s specializes to the generic point. The generic point specializes to s; T0 separation gives equality. In particular, for any cone z on K, lift its composite with t through the limiting cone on X. Every point of this lifted morphism maps to the generic point of S, because each stage spectrum is the spectrum of a field and has exactly one point.",
    "uses": [],
    "elementary": false
+  },
+  {
+   "text": "Any morphism g:T to S whose image consists of the generic point factors uniquely through every affine neighbourhood of that point. Use IsOpenImmersion.lift for the factors; cancel the open inclusions to prove their compatibility. The universal property of the generic stalk spectrum as the limit of these affine neighbourhoods gives a morphism T to Spec k(S) whose composite with the canonical generic inclusion is g. Apply this construction to each cone on K. Cancel the stage generic inclusions and use the limit identities on X to prove the cone factorization identities. Cancel the generic inclusion into S and use uniqueness for the limit on X to prove uniqueness. This proves that the explicitly constructed cone b is limiting without a separate fraction-field colimit calculation.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each K.obj i is literally Spec k(X_i), so Mathlib affine-scheme instances give CompactSpace and QuasiSeparatedSpace. Every transition between these affine schemes is affine. The identity isomorphisms give the first comparison equality by Category.id_comp; the stalk-map compatibility established in the first step gives the second comparison equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+ ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "F2",
+  "kind": "written-by-agent",
+  "by": "A3",
   "document": "Stacks Project",
-  "place": "Tag 0EZJ, proof of Lemma 58.31.9, function-field calculation underlying the assertion that the generic fibre is a limit",
-  "note": "The categorical steps in CartesianFamilyGenericLimit are proved in Lean; the geometric existence steps are separated with their full source argument."
+  "place": "Tag 0EZJ generic-fibre limit assertion; alternative universal-property proof using the affine-transition limit basis (Tag 01Z4, Mathlib isBasis_preimage_isAffineOpen) and Spec of the stalk as the limit of affine neighbourhoods (Tag 0GWT and Tag 01YW).",
+  "note": "The entire proof is checked in Lean. The original node fraction-field-colimit route is replaced below the unit level; no new unproved statements are introduced. Source Tag 0EZJ read on 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -110,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-af525",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T135233-L-1665220",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet statements and compiled successfully, including direct importer NoetherianSpreadingData; interface, proof, DAG, residual-sorry, report, and reader-gate checks passed."
+  "landing": "20261012T173807-L-3290197",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
