@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar

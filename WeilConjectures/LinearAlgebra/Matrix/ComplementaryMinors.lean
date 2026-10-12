@@ -363,4 +363,101 @@ theorem rank_map_add_rank_map_add_eq_of_exact (hψ : ∀ s, ψ s ≠ 0 → IsUni
 
 end Complex
 
+section SplitHomology
+
+variable {R : Type*} [CommRing R] {ι₀ ι₁ ι₂ : Type*} [Fintype ι₀] [Fintype ι₁] [Fintype ι₂]
+  [DecidableEq ι₁]
+
+/-- `HasSplitHomology A₁ A₂ k` says that the middle term `R^{ι₁}` of the composable matrices
+`A₁ : R^{ι₀} → R^{ι₁}` and `A₂ : R^{ι₁} → R^{ι₂}` is split by matrices `I`, `P` with `P I = 1`,
+`A₂ I = 0`, `P A₁ = 0` and `I P + A₁ σ + τ A₂ = 1`: the cohomology is free on `k`, split off by
+`I` and `P`. -/
+def HasSplitHomology (A₁ : Matrix ι₁ ι₀ R) (A₂ : Matrix ι₂ ι₁ R) (k : Type*) [Fintype k]
+    [DecidableEq k] : Prop :=
+  ∃ (I : Matrix ι₁ k R) (P : Matrix k ι₁ R) (σ : Matrix ι₀ ι₁ R) (τ : Matrix ι₁ ι₂ R),
+    P * I = 1 ∧ A₂ * I = 0 ∧ P * A₁ = 0 ∧ I * P + A₁ * σ + τ * A₂ = 1
+
+variable {A₁ : Matrix ι₁ ι₀ R} {A₂ : Matrix ι₂ ι₁ R} {k : Type*} [Fintype k] [DecidableEq k]
+
+lemma HasSplitHomology.map {S : Type*} [CommRing S] (f : R →+* S)
+    (h : HasSplitHomology A₁ A₂ k) : HasSplitHomology (A₁.map f) (A₂.map f) k := by
+  obtain ⟨I, P, σ, τ, h₁, h₂, h₃, h₄⟩ := h
+  refine ⟨I.map f, P.map f, σ.map f, τ.map f, ?_, ?_, ?_, ?_⟩
+  · rw [← Matrix.map_mul, h₁, Matrix.map_one _ (map_zero f) (map_one f)]
+  · rw [← Matrix.map_mul, h₂, Matrix.map_zero _ (map_zero f)]
+  · rw [← Matrix.map_mul, h₃, Matrix.map_zero _ (map_zero f)]
+  · rw [← Matrix.map_mul, ← Matrix.map_mul, ← Matrix.map_mul, ← Matrix.map_add _ (map_add f),
+      ← Matrix.map_add _ (map_add f), h₄, Matrix.map_one _ (map_zero f) (map_one f)]
+
+lemma HasSplitHomology.of_equiv {k' : Type*} [Fintype k'] [DecidableEq k'] (e : k ≃ k')
+    (h : HasSplitHomology A₁ A₂ k) : HasSplitHomology A₁ A₂ k' := by
+  obtain ⟨I, P, σ, τ, h₁, h₂, h₃, h₄⟩ := h
+  refine ⟨I.submatrix id e.symm, P.submatrix e.symm id, σ, τ, ?_, ?_, ?_, ?_⟩
+  · rw [show P.submatrix e.symm id * I.submatrix id e.symm = (P * I).submatrix e.symm e.symm by
+      ext; simp [Matrix.mul_apply], h₁, submatrix_one_equiv]
+  · rw [show A₂ * I.submatrix id e.symm = (A₂ * I).submatrix id e.symm by
+      ext; simp [Matrix.mul_apply], h₂, submatrix_zero]
+    rfl
+  · rw [show P.submatrix e.symm id * A₁ = (P * A₁).submatrix e.symm id by
+      ext; simp [Matrix.mul_apply], h₃, submatrix_zero]
+    rfl
+  · rw [show I.submatrix id e.symm * P.submatrix e.symm id = I * P by
+      ext a b
+      simp only [Matrix.mul_apply, submatrix_apply, id]
+      exact Fintype.sum_equiv e.symm _ _ fun _ ↦ rfl, h₄]
+
+/-- Split factorisations of two composable matrices with `L₁ L₁' + M₂' M₂ = 1` exhibit the
+middle term as split exact. -/
+lemma hasSplitHomology_of_add_eq_one [IsEmpty k] {ρ₁ ρ₂ : Type*} [Fintype ρ₁]
+    [Fintype ρ₂] {L₁ : Matrix ι₁ ρ₁ R} {M₁ : Matrix ρ₁ ι₀ R} {L₁' : Matrix ρ₁ ι₁ R}
+    {M₁' : Matrix ι₀ ρ₁ R} {L₂ : Matrix ι₂ ρ₂ R} {M₂ : Matrix ρ₂ ι₁ R} {L₂' : Matrix ρ₂ ι₂ R}
+    {M₂' : Matrix ι₁ ρ₂ R} [DecidableEq ρ₁] [DecidableEq ρ₂]
+    (h₁ : A₁ = L₁ * M₁ ∧ L₁' * L₁ = 1 ∧ M₁ * M₁' = 1)
+    (h₂ : A₂ = L₂ * M₂ ∧ L₂' * L₂ = 1 ∧ M₂ * M₂' = 1) (h : L₁ * L₁' + M₂' * M₂ = 1) :
+    HasSplitHomology A₁ A₂ k := by
+  refine ⟨0, 0, M₁' * L₁', M₂' * L₂', Subsingleton.elim _ _, by simp, by simp, ?_⟩
+  rw [Matrix.zero_mul, zero_add, ← h, h₁.1, h₂.1, Matrix.mul_assoc, ← Matrix.mul_assoc M₁,
+    h₁.2.2, Matrix.one_mul, Matrix.mul_assoc, ← Matrix.mul_assoc L₂', h₂.2.1, Matrix.one_mul]
+
+/-- Split factorisations of two composable matrices and a split factorisation `ε = L₃ M₃`,
+`M₃ L₃ = 1`, of the idempotent `ε = (1 - L₁ L₁') (1 - M₂' M₂)` exhibit the cohomology as free
+on `k`. -/
+lemma hasSplitHomology_of_splitIdempotent {ρ₁ ρ₂ : Type*} [Fintype ρ₁]
+    [Fintype ρ₂] {L₁ : Matrix ι₁ ρ₁ R} {M₁ : Matrix ρ₁ ι₀ R} {L₁' : Matrix ρ₁ ι₁ R}
+    {M₁' : Matrix ι₀ ρ₁ R} {L₂ : Matrix ι₂ ρ₂ R} {M₂ : Matrix ρ₂ ι₁ R} {L₂' : Matrix ρ₂ ι₂ R}
+    {M₂' : Matrix ι₁ ρ₂ R} [DecidableEq ρ₁] [DecidableEq ρ₂] (hA : A₂ * A₁ = 0)
+    (h₁ : A₁ = L₁ * M₁ ∧ L₁' * L₁ = 1 ∧ M₁ * M₁' = 1)
+    (h₂ : A₂ = L₂ * M₂ ∧ L₂' * L₂ = 1 ∧ M₂ * M₂' = 1) {L₃ : Matrix ι₁ k R}
+    {M₃ : Matrix k ι₁ R} (hε : splitIdempotent L₁ L₁' M₂ M₂' = L₃ * M₃) (h₃ : M₃ * L₃ = 1) :
+    HasSplitHomology A₁ A₂ k := by
+  obtain ⟨k₁, k₂, k₃⟩ := split_homology_data hA h₁.1 h₁.2.1 h₁.2.2 h₂.1 h₂.2.1 h₂.2.2 hε h₃
+  exact ⟨L₃, M₃, _, _, h₃, k₁, k₂, k₃⟩
+
+end SplitHomology
+
+section SplitHomologyField
+
+variable {K : Type*} [Field K] {ι₀ ι₁ ι₂ : Type*} [Fintype ι₀] [Fintype ι₁] [Fintype ι₂]
+  [DecidableEq ι₁] {A₁ : Matrix ι₁ ι₀ K} {A₂ : Matrix ι₂ ι₁ K} {k : Type*} [Fintype k]
+  [DecidableEq k]
+
+/-- Over a field, split cohomology on `k` has dimension `|k|`. -/
+lemma HasSplitHomology.rank_add_rank_add_card (hA : A₂ * A₁ = 0)
+    (h : HasSplitHomology A₁ A₂ k) : A₁.rank + A₂.rank + Fintype.card k = Fintype.card ι₁ := by
+  obtain ⟨I, P, σ, τ, h₁, h₂, h₃, h₄⟩ := h
+  exact rank_add_rank_add_card_eq A₁ A₂ I P σ τ hA h₁ h₂ h₃ h₄
+
+omit [Fintype ι₀] [Fintype ι₂] in
+/-- Over a field, the ranks of an idempotent matrix `e` and of `1 - e` add up to the size. -/
+lemma rank_add_rank_one_sub {e : Matrix ι₁ ι₁ K} (he : e * e = e) :
+    e.rank + (1 - e).rank = Fintype.card ι₁ := by
+  refine le_antisymm ?_ ?_
+  · exact rank_add_rank_le_of_mul_eq_zero e (1 - e) (by rw [Matrix.sub_mul, he, Matrix.one_mul,
+      sub_self])
+  · rw [← rank_one (R := K) (n := ι₁)]
+    conv_lhs => rw [← add_sub_cancel e (1 : Matrix ι₁ ι₁ K)]
+    exact rank_add_le _ _
+
+end SplitHomologyField
+
 end Matrix

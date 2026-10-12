@@ -156,7 +156,7 @@ local frame is a free generator (`AlgebraicGeometry.Scheme.Modules.isFreeGenerat
 instance isInvertible_exteriorPower (M : X.Modules) {r : ℕ} [M.IsFiniteLocallyFreeOfRank r] :
     (M.exteriorPower r).IsInvertible := by
   refine isInvertible_of_forall_exists_isFreeGenerator fun x ↦ ?_
-  obtain ⟨U, v, hx, hv⟩ := exists_isLocalFrame M x
+  obtain ⟨U, v, hx, hv⟩ := exists_isLocalFrame (r := r) M x
   exact ⟨U, wedge v, hx, hv.isFreeGenerator_wedge⟩
 
 section ShortExact
@@ -193,8 +193,8 @@ lemma IsLocalFrame.cons_of_shortExact (hS : S.ShortExact) {r : ℕ} {U : X.Opens
   intro W hW
   obtain ⟨b₁, hb₁⟩ := hl W hW
   obtain ⟨b₃, hb₃⟩ := ht W hW
-  obtain ⟨b, hb⟩ := Module.Basis.exists_eq_cons_of_exact (injective_app_of_mono' S.f W)
-    (exact_appₗ hS W) b₁ b₃ (fun k ↦ S.X₂.presheaf.map (homOfLE hW).op (t k)) fun k ↦ by
+  obtain ⟨b, hb⟩ := Module.Basis.exists_eq_cons_of_exact (f := Hom.appₗ S.f W)
+    (g := Hom.appₗ S.g W) (injective_app_of_mono' S.f W) (exact_appₗ hS W) b₁ b₃ (fun k ↦ S.X₂.presheaf.map (homOfLE hW).op (t k)) fun k ↦ by
       rw [Hom.appₗ_apply, Hom.app_presheaf_map, hb₃]
   refine ⟨b, fun k ↦ ?_⟩
   rw [hb]
@@ -213,8 +213,8 @@ lemma exists_adapted_frame (hS : S.ShortExact) {r : ℕ} [S.X₁.IsFiniteLocally
   have := SheafOfModules.IsFiniteLocallyFreeOfRank.isLocallyFree S.X₁ 1
   have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) S.X₁ :=
     SheafOfModules.instIsQuasicoherentOfIsLocallyFree S.X₁
-  obtain ⟨U₁, l, hx₁, hl⟩ := exists_isLocalFrame S.X₁ x
-  obtain ⟨U₃, w, hx₃, hw⟩ := exists_isLocalFrame S.X₃ x
+  obtain ⟨U₁, l, hx₁, hl⟩ := exists_isLocalFrame (r := 1) S.X₁ x
+  obtain ⟨U₃, w, hx₃, hw⟩ := exists_isLocalFrame (r := r) S.X₃ x
   obtain ⟨_, ⟨U, hU, rfl⟩, hxU, hUle⟩ :=
     X.isBasis_affineOpens.exists_subset_of_mem_open (⟨hx₁, hx₃⟩ : x ∈ U₁ ⊓ U₃) (U₁ ⊓ U₃).isOpen
   replace hUle : U ≤ U₁ ⊓ U₃ := hUle

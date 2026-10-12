@@ -8,7 +8,16 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.RingTheory.Flat.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
