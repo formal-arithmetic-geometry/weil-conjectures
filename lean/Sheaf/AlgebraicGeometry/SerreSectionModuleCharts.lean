@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group H1
+Authors: SHEAF groups H1 and P3
 -/
 module
 
@@ -10,7 +10,9 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Sheaf.AlgebraicGeometry.SerreSectionModuleComparison
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import Sheaf.AlgebraicGeometry.SerreSectionModuleChartAdditive
+import Sheaf.AlgebraicGeometry.SerreSectionModuleChartScalar
+import Sheaf.AlgebraicGeometry.SerreSectionModuleChartRestriction
 
 /-!
 # Localization charts for the truncated graded section module
@@ -30,27 +32,45 @@ namespace AlgebraicGeometry.Proj
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
+/-- Changing denominators preserves equality, including for nonhomogeneous numerators. -/
+private theorem fractionChange_eq {R M : Type*} [CommRing R] [AddCommGroup M]
+    [Module R M] (f g a : R) (e m n : ℕ) (hrel : g ^ e = a * f) (y z : M)
+    (h : mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) =
+      mk z (⟨f ^ n, ⟨n, rfl⟩⟩ : Submonoid.powers f)) :
+    mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g) =
+      mk (a ^ n • z) (⟨g ^ (e * n), ⟨e * n, rfl⟩⟩ : Submonoid.powers g) := by
+  obtain ⟨t, ht⟩ := mk_eq.mp h
+  obtain ⟨q, hq⟩ := t.property
+  have hclear : f ^ q • (f ^ n • y) = f ^ q • (f ^ m • z) := by
+    simpa only [Submonoid.smul_def, ← hq] using ht
+  apply mk_eq.mpr
+  refine ⟨⟨g ^ (e * q), ⟨e * q, rfl⟩⟩, ?_⟩
+  simp only [Submonoid.smul_def, pow_mul, hrel, mul_pow, mul_smul]
+  calc
+    a ^ q • f ^ q • (a ^ n • f ^ n • (a ^ m • y)) =
+        (a ^ q * a ^ n * a ^ m) • (f ^ q • (f ^ n • y)) := by
+      simp only [← mul_smul, mul_comm, mul_left_comm, mul_assoc]
+    _ = (a ^ q * a ^ n * a ^ m) • (f ^ q • (f ^ m • z)) := by rw [hclear]
+    _ = a ^ q • f ^ q • (a ^ m • f ^ m • (a ^ n • z)) := by
+      simp only [← mul_smul, mul_comm, mul_left_comm, mul_assoc]
+
 /-- The truncated section module has canonical localization charts on the original sheaf.
 Source: Stacks Project, Proposition 0BXD, final paragraph of the proof.
 (blueprint: lem-sc-p1-serre-section-module-charts)
 
 Proof:
-1. For homogeneous f of degree d > 0, represent a degree-zero fraction by y/f^r with
-   y in degree r*d. Map it to the unique section s on D+(f) whose product with f^r
-   is the restriction of φ(r*d)(y). Multiplication by f^r is invertible on D+(f).
-   The section comparison theorem supplies existence of these sections and says
-   that a numerator restricting to zero is killed by a power of f. Together with
-   the compatibility hφ, this is exactly the localization equivalence relation;
-   hence the map is well-defined and injective. Its surjectivity is the first
-   clause of the same comparison theorem. Invert this additive bijection to get α.
-2. For a homogeneous scalar fraction, multiply the representative numerators and
-   denominators. The compatibility hφ identifies the resulting numerator with
-   multiplication on twisted sections. Inverting the powers of f on D+(f) gives
-   the scalar formula. Additivity extends this calculation to every chart scalar.
-3. If g^e = a*f, the fraction y/f^m becomes a^m*y/g^(e*m). Both numerator sections
-   restrict to the same section after multiplication by g^(e*m): hφ identifies
-   multiplication by a^m, and the relation identifies f^m*a^m with g^(e*m).
-   Invertibility on D+(g) proves the restriction formula for every representative.
+1. Use serreSectionModuleChartAdditive on each homogeneous positive-degree f and
+   choose its additive injection, range identity, and denominator characterization.
+2. Represent an arbitrary scalar by a/f^l using Away.mk_surjective. The existence
+   clause of serreSectionModuleComparison and the denominator characterization
+   represent the section by y/f^m with homogeneous y. Apply the homogeneous scalar
+   calculation serreSectionModuleChartScalar, then mk_smul_mk and pow_add.
+3. For restriction, the same comparison gives a homogeneous representative z/f^n.
+   Apply serreSectionModuleChartRestriction to it. For the arbitrary representative
+   y/f^m in the statement, mk_eq clears denominators. The proved fractionChange_eq
+   multiplies this equality by powers of a and uses g^e=a*f to give equality of the
+   transformed fractions in M_g. Thus the homogeneous restriction formula implies
+   the formula for every representative, including nonhomogeneous numerators.
 The statement assumes a graded section module but asserts no finite generation;
 that independent part is supplied by serreSectionModuleFinite.
 -/
@@ -99,6 +119,42 @@ theorem serreSectionModuleCharts
           (s : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),
           alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →
           alpha g b hb hg (G.val.map (homOfLE inc).op s) =
-            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g)) := by sorry
+            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g)) := by
+  classical
+  have hcharts := fun f d hd hf ↦
+    serreSectionModuleChartAdditive k G hG M 𝓜 h𝓜 hsmul hneg φ hφ f d hd hf
+  choose alpha hinj hrange hnorm using hcharts
+  refine ⟨alpha, ?_, ?_, ?_⟩
+  · intro f d hd hf
+    exact ⟨hinj f d hd hf, hrange f d hd hf⟩
+  · intro f d hd hf r s
+    obtain ⟨l, a, ha, rfl⟩ :=
+      HomogeneousLocalization.Away.mk_surjective (homogeneousSubmodule (Fin 2) k) hf r
+    obtain ⟨m, t, ht⟩ := (serreSectionModuleComparison G hG hd hf).1 s
+    let y : 𝓜 (0 + ((m • d : ℕ) : ℤ)) := (φ _ (by positivity)).symm t
+    have hs : alpha f d hd hf s =
+        mk (y : M) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) := by
+      apply (hnorm f d hd hf m y s).mpr
+      simpa only [y, AddEquiv.apply_symm_apply] using ht
+    rw [serreSectionModuleChartScalar k G M 𝓜 hsmul φ hφ f d hd hf
+      (alpha f d hd hf) (hnorm f d hd hf) l a ha m y s hs]
+    simp only [HomogeneousLocalization.algebraMap_apply, HomogeneousLocalization.Away.val_mk,
+      hs, mk_smul_mk]
+    congr 1
+    apply Subtype.ext
+    exact pow_add f l m
+  · intro f g d b hd hb hf hg inc e c a he ha hrel m y s hs
+    -- The comparison supplies a homogeneous representative for this same section.
+    obtain ⟨n, t, ht⟩ := (serreSectionModuleComparison G hG hd hf).1 s
+    let z : 𝓜 (0 + ((n • d : ℕ) : ℤ)) := (φ _ (by positivity)).symm t
+    have hz : alpha f d hd hf s =
+        mk (z : M) (⟨f ^ n, ⟨n, rfl⟩⟩ : Submonoid.powers f) := by
+      apply (hnorm f d hd hf n z s).mpr
+      simpa only [z, AddEquiv.apply_symm_apply] using ht
+    have hres := serreSectionModuleChartRestriction k G M 𝓜 hsmul φ hφ
+      f g d b hd hb hf hg (alpha f d hd hf) (alpha g b hb hg)
+      (hnorm f d hd hf) (hnorm g b hb hg) inc e c a he ha hrel n z s hz
+    refine hres.trans ?_
+    exact fractionChange_eq f g a e n m hrel (z : M) y (hz.symm.trans hs)
 
 end AlgebraicGeometry.Proj

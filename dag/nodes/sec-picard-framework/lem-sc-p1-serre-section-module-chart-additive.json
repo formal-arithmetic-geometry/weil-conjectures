@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-p1-serre-section-module-chart-additive",
+ "kind": "statement",
+ "title": "Canonical additive chart with denominator characterization",
+ "statement": "Let k be a field, S=k[x_0,x_1] with its standard grading and P=Proj S [def-sc-p1-standard]. Let G be an O_P-module and M an S-module with additive subgroups M_z for z in Z and S_n M_z contained in M_(n+z). Let phi_z: M_z -> Gamma(P,G tensor O_P(z)) be additive equivalences for z>=0, compatible with every homogeneous multiplication via G tensor twistMul [def-weil-pbc-proj-twisting-sheaf]. Assume also G coherent [pqf-def-coherent], the Z-grading internal and M_z=0 for z<0. For any homogeneous f in S_d with d>0 there exists an additive injection alpha_f:Gamma(D+(f),G)->M_f with image exactly the degreeZeroFractions [def-sc-degree-zero-module-fractions] and with the denominator characterization. The denominator characterization for a homogeneous f in S_d is: for every m>=0, y in M_(m*d), and s in Gamma(D+(f),G), alpha_f(s)=y/f^m if and only if phi_(m*d)(y) restricts to the product of s with f^m; this product is ((rho_G)^(-1) followed by G tensor unitToTwist(f^m)) applied to s. ",
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "pqf-def-coherent",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proposition 0BXD, final paragraph; parent chart proof step 1"
+ },
+ "proof": [
+  {
+   "text": "use serreSectionModuleComparison for existence and annihilation. Multiplication\nby f^m on G over D+(f) is invertible: restrict unitToTwist, tensor with G, and compose\nwith the inverse right unitor. Send a homogeneous fraction y/f^m to the inverse image\nof the restriction of phi(y). If f is zero, D+(f) is empty and M_f is zero, so use the\nunique map. Otherwise f^m is nonzero and its homogeneous degree is m*d; uniqueness\nof homogeneous degree puts every equal-degree fraction in this form. Clear the two\ndenominators in an equality LocalizedModule.mk_eq; compatibility hphi shows that the\ninverse images agree. This defines an additive map out of the degree-zero fractions.\nFor addition take a common denominator and use additivity of phi in that degree.\nIf its image is zero, the annihilation clause of the comparison kills the numerator\nby a power of f; compatibility hphi and injectivity of phi translate this into zero\nin M_f. The existence clause makes the map surjective. Invert this additive bijection\nand include it into M_f to obtain alpha. The definition and invertibility of\nmultiplication give the stated equivalence for every homogeneous y and every s.",
+   "uses": [
+    "lem-sc-p1-serre-section-module-comparison",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-serre-section-module-comparison",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proposition 0BXD, final paragraph; expanded fraction calculation from lem-sc-p1-serre-section-module-charts by P3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical graded section module localization isomorphism on Proj",
+   "results": "Service unavailable: Internal Server Error; no search verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero localization of a graded section module is isomorphic to sections on a standard open of Proj",
+   "results": "Eight results for the structure sheaf, including Proj.basicOpenIsoAway and awayToSection. None constructs graded module comparison charts or their formulas.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule, AddEquiv",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "serreSectionModule|degreeZeroFractions; twistRestrictIso|unitToTwist|twistMul|awayToSection; blueprint_refs search graded section module and degree-zero fractions",
+   "results": "No direct chart theorem in Mathlib or WeilConjectures. Sheaf has the parent statement and the existence/annihilation comparison, but no canonical additive chart or homogeneous scalar/restriction calculation. Blueprint searches: zero matches. Mathlib Away.mk_surjective and LocalizedModule.mk_eq/mk_smul_mk are used in the assembly, not matches for these statements.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SerreSectionModuleCharts",
+  "date": "2026-10-12",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, first sentence: canonical graded-section-module chart; additive part",
+   "via": [
+    "lem-sc-p1-serre-section-module-charts",
+    "lem-sc-p1-coherent-proj-representation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SerreSectionModuleChartAdditive",
+  "file": "lean/Sheaf/AlgebraicGeometry/SerreSectionModuleChartAdditive.lean",
+  "declaration": "AlgebraicGeometry.Proj.serreSectionModuleChartAdditive",
+  "statement": "theorem serreSectionModuleChartAdditive\n    (k : Type u) [Field k]\n    (G : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)\n    (hG : RingedSpace.IsCoherent\n      (Proj (homogeneousSubmodule (Fin 2) k)).toRingedSpace G)\n    (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M),\n      a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))\n    (hneg : ∀ z : ℤ, z < 0 → 𝓜 z = ⊥)\n    (φ : ∀ z : ℤ, 0 ≤ z →\n        (𝓜 z ≃+ Γ(G ⊗ Proj.twist (homogeneousSubmodule (Fin 2) k) z, ⊤)))\n    (hφ : ∀ (z : ℤ) (hz : 0 ≤ z) (e : ℕ) (hze : 0 ≤ z + e) (a : MvPolynomial (Fin 2) k)\n        (ha : a ∈ homogeneousSubmodule (Fin 2) k e)\n        (y : 𝓜 z) (hay : a • (y : M) ∈ 𝓜 (z + e)),\n        φ (z + e) hze ⟨a • (y : M), hay⟩ =\n          Scheme.Modules.Hom.app (G ◁ Proj.twistMul z ha) ⊤ (φ z hz y))\n    (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n    (hf : f ∈ homogeneousSubmodule (Fin 2) k d) :\n    ∃ (alpha : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n      LocalizedModule.Away f M),\n      Function.Injective alpha ∧\n      Set.range alpha = degreeZeroFractions\n        (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n        (fun n : ℕ ↦ (𝓜 n : Set M)) (Submonoid.powers f) ∧\n      (∀ (m : ℕ) (y : 𝓜 (0 + ((m • d : ℕ) : ℤ)))\n        (s : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n      alpha s = mk (y : M) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) ↔\n        (G ⊗ Proj.twist (homogeneousSubmodule (Fin 2) k)\n          (0 + ((m • d : ℕ) : ℤ))).presheaf.map\n            (homOfLE le_top : basicOpen (homogeneousSubmodule (Fin 2) k) f ⟶ ⊤).op\n            (φ _ (by positivity) y) =\n          Scheme.Modules.Hom.app\n            ((ρ_ G).inv ≫ G ◁ Proj.unitToTwist (SetLike.pow_mem_graded m hf))\n            (basicOpen (homogeneousSubmodule (Fin 2) k) f) s)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T085318-L-31414",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T085318-L-31414",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
