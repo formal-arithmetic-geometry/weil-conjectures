@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-pbc-p1-compatible-strict-henselization-residues",
+ "kind": "statement",
+ "title": "Compatible strict henselizations with integral geometric residue maps",
+ "statement": "Let g:T→S be a scheme morphism [def-pc-scheme]. Let k,k′ be separably closed fields [def-pc-separably-closed], σ:Spec k→S and τ:Spec k′→T integral geometric points [def-weil-geometric-point], and ι:Spec k′→Spec k satisfy ι≫σ=τ≫g. Integral means that each point factors through the residue field of its image by an integral field homomorphism [def-weil-residue-field]. Let Ω be an algebraically closed field and ν:Spec Ω→Spec k′ any field-spectrum morphism. Set s=ν≫ι≫σ and t=ν≫τ. There exist strictly henselian local rings A,B [def-weil-pbc-henselian-terminology], isomorphisms eA:Spec A≅S_(s) and eB:Spec B≅T_(t) to the strict henselization schemes [def-weil-pbc-strict-henselization-limit], a local homomorphism φ:A→B, and universal homeomorphisms ρA:Spec k→Spec κA and ρB:Spec k′→Spec κB. Writing jA=eA≫j_s and jB=eB≫j_t for the canonical structural maps [def-weil-pbc-strict-henselization-structural-map], rA,rB for the closed-point maps, and i0 for the residue-field map induced by φ, one has Spec φ≫jA=jB≫g, ρA≫rA≫jA=σ, ρB≫rB≫jB=τ, and ρB≫i0=ι≫ρA. This result is purely geometric and contains no sheaf or cohomology.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HX, 03PS and 04GU; proof of Tag 095T, last two paragraphs; Tag 04DY"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-separably-closed",
+  "def-weil-geometric-point",
+  "def-weil-residue-field",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply strictHenselizationResidue at s and t: the canonical colimits are strictly henselian and their residue fields are the relative separable closures of the image residue fields inside Ω. Take their spectra for eA and eB.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-relative-separable-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A separable polynomial over an image residue field splits in k or k′ because those fields are separably closed. Hence its roots in Ω already lie in the corresponding embedded field. Factor the relative separable-closure embeddings through k and k′ to obtain ρA and ρB. The integral geometric-point factorizations make these fields algebraic over their base residue fields; an algebraic extension of a separably closed field is purely inseparable. The spectra of the resulting purely inseparable extensions are integral, surjective and universally injective, hence universal homeomorphisms.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "def-pc-separably-closed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The residue factorizations of strictHenselizationResidue give the equalities with σ and τ. Apply strictHenselizationFunctoriality to s=t≫g using hι. It gives φ and the structural square. The induced residue embeddings commute after their injective embeddings into Ω, so cancel those embeddings to get ρB≫i0=ι≫ρA.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-separably-closed",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HX, 03PS and 04GU; proof of Tag 095T, last two paragraphs; Tag 04DY; specialized and formalized by Q1 without strict-local closed-fibre base change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictHenselization.*stalk|baseChangeHomologyMap|strictHensel.*[Ff]unctor",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale higher direct image geometric stalk exchange compatible strict henselization local model",
+   "results": "AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.spread_out_of_isGermInjective; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.instCategoryEtale; Algebra.mem_etaleLocus_iff; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "c6b7010431eea91c"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.ResidueField.map",
+   "results": "IsLocalRing.ResidueField.map_id; IsLocalRing.ResidueField.map; IsLocalRing.ResidueField.map_id_apply; IsLocalRing.ResidueField.map_comp_residue; IsLocalRing.ResidueField.map_comp; IsLocalRing.ResidueField.map_residue; IsLocalRing.ResidueField.map_map; IsLocalRing.ResidueField.mapEquiv_apply",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "554a4491197d9ff4"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible strict henselizations geometric points residue purely inseparable field maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology pullback commutative square universal homeomorphisms equivalence sheaf coefficients",
+   "results": "TopCat.Sheaf.pullbackIso; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj; AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso; CategoryTheory.Sheaf.isPullback_square_op_map_yoneda_presheafToSheaf_yoneda_iff; SheafOfModules.pullbackObjFreeIso; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_bijective_toPullbackObj; AlgebraicGeometry.Scheme.Pullback.cocycle",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "25e2f2b1108dd1bc"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Cc]ompose|[Cc]ompose.*sheafPullback|mapFunctor_bijective",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization residue field relative separable closure integral geometric point purely inseparable extension",
+   "results": "Algebra.instIsSeparableResidueFieldOfFormallyUnramified; instIsSeparableResidueFieldOfQuotientIdeal; Algebra.instFormallyUnramifiedResidueField_1; Algebra.isSeparable_residueField_iff; instIsAlgebraicResidueFieldOfIsIntegral; Algebra.instFormallyUnramifiedResidueField; Algebra.FormallyUnramified.iff_map_maximalIdeal_eq; Algebra.FormallyUnramified.of_map_maximalIdeal",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "559bb6b09bd3a06d"
+  },
+  {
+   "tool": "grep",
+   "query": "separableClosure|IsPurelyInseparable",
+   "results": "Mathlib/FieldTheory/CardinalEmb.lean; Mathlib/FieldTheory/CardinalEmb.lean; Mathlib/FieldTheory/SeparableClosure.lean; Mathlib/FieldTheory/SeparableClosure.lean; Mathlib/FieldTheory/SeparableClosure.lean; Mathlib/FieldTheory/SeparableClosure.lean; Mathlib/FieldTheory/SeparableClosure.lean; Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "8d88ac5af5aec078"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-p1-strict-local-model-comparison",
+   "place": "Compatible strict henselizations with integral geometric residue maps",
+   "via": [
+    "Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison",
+    "Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResidues",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineCompatibleStrictHenselizationResidues.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLine_compatibleStrictHenselizationResidues",
+  "statement": "theorem Etale.projectiveLine_compatibleStrictHenselizationResidues {S T : Scheme.{u}} {g : T ⟶ S} {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] [Field Ω] [IsAlgClosed Ω] (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g) (hσ : ∃ (s : S) (ψ : S.residueField s ⟶ .of k), ψ.hom.IsIntegral ∧ Spec.map ψ ≫ S.fromSpecResidueField s = σ) (hτ : ∃ (t : T) (ψ : T.residueField t ⟶ .of k'), ψ.hom.IsIntegral ∧ Spec.map ψ ≫ T.fromSpecResidueField t = τ) (ν : Spec (.of Ω) ⟶ Spec (.of k')) : let s := ν ≫ ι ≫ σ let t := ν ≫ τ ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B), letI := cA letI := cB ∃ (hA : HenselianLocalRing A) (hB : HenselianLocalRing B), letI := hA letI := hB ∃ (sA : IsSepClosed (IsLocalRing.ResidueField A)) (sB : IsSepClosed (IsLocalRing.ResidueField B)), letI := sA letI := sB ∃ (φ : A →+* B) (hφ : IsLocalHom φ), letI := hφ ∃ (eA : Spec (.of A) ≅ strictHenselizationScheme s) (eB : Spec (.of B) ≅ strictHenselizationScheme t) (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A))) (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))), IsUniversalHomeomorphism ρA ∧ IsUniversalHomeomorphism ρB ∧ Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫ strictHenselizationStructuralMap s = eB.hom ≫ strictHenselizationStructuralMap t ≫ g ∧ ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ eA.hom ≫ strictHenselizationStructuralMap s = σ ∧ ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫ eB.hom ≫ strictHenselizationStructuralMap t = τ ∧ ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T042416-L-1819410",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T042416-L-1819410",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

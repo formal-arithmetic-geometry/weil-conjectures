@@ -1,0 +1,171 @@
+{
+ "id": "lem-weil-pbc-p1-residue-cohomology-comparison",
+ "kind": "statement",
+ "title": "Cohomology conjugacy for compatible residue universal homeomorphisms",
+ "statement": "Let Λ be a commutative ring, S a scheme, A,B commutative local rings, φ:A→B a local homomorphism, and jA:Spec A→S. Let k,k′ be fields, σ:Spec k→S, and ι:Spec k′→Spec k. Suppose ρA:Spec k→Spec κA and ρB:Spec k′→Spec κB are universal homeomorphisms with ρA≫rA≫jA=σ and ρB≫Spec(κφ)=ι≫ρA. Here rA is the closed-point map and κφ the induced residue map [def-weil-residue-field]. For any Λ-module étale sheaf F on P¹_S, put F0=P¹(jA)^*F, G0 the underlying abelian sheaf of P¹(rA)^*F0, and G the underlying abelian sheaf of P¹(σ)^*F [def-nagata-projective-space-base-change, def-weil-pbc-inverse-image]. For every q≥0 there are additive equivalences b1:H^q(G0)≃H^q(G) and b2:H^q(P¹(κφ)^*G0)≃H^q(P¹(ι)^*G) such that b2(P¹(κφ)^*y)=P¹(ι)^*(b1(y)) for every cohomology class y [def-weil-pbc-etale-cohomology, def-weil-pbc-cohomology-pullback]. No separable closedness, strict henselianity, torsion, or stalk exchange is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04DY and 03SI; cohomology.tex Tag 01F8; residue square in proof of Tag 095T"
+ },
+ "stmt_deps": [
+  "def-weil-residue-field",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Base change ρA and ρB to projective lines; their universal-homeomorphism property is stable under this base change. Their cohomology pullbacks are additive equivalences.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use pullback_forget_modules_iso at jA, rA and σ, and the inverse-image composition isomorphisms. The equality ρA≫rA≫jA=σ yields a sheaf isomorphism e:(P¹ρA)^*G0≅G. No naturality of the chosen forgetful comparison is needed: fix e and construct the target comparison from it.",
+   "uses": [
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write u=P¹ρA,v=P¹ρB,f=P¹κφ,g=P¹ι, so vf=gu. Let c1=(vf)^*≅v^*f^* expressed over the diagonal gu and c2=(gu)^*≅g^*u^*. Define e2=(c1^{-1}c2)(G0) followed by g^*e. Define b1 as pullback along u followed by H(e), and b2 as pullback along v followed by H(e2). cohomologyPullbackFunctorial rewrites both iterated pullbacks as cohomology of gu followed by H(c1) or H(c2). Naturality moves H(e) through g-pullback; H-map composition cancels c1 with its inverse. The two sides are identical, proving the equation.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04DY and 03SI; cohomology.tex Tag 01F8; residue square in proof of Tag 095T; specialized and formalized by Q1 without strict-local closed-fibre base change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictHenselization.*stalk|baseChangeHomologyMap|strictHensel.*[Ff]unctor",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale higher direct image geometric stalk exchange compatible strict henselization local model",
+   "results": "AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.spread_out_of_isGermInjective; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.instCategoryEtale; Algebra.mem_etaleLocus_iff; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "c6b7010431eea91c"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing.ResidueField.map",
+   "results": "IsLocalRing.ResidueField.map_id; IsLocalRing.ResidueField.map; IsLocalRing.ResidueField.map_id_apply; IsLocalRing.ResidueField.map_comp_residue; IsLocalRing.ResidueField.map_comp; IsLocalRing.ResidueField.map_residue; IsLocalRing.ResidueField.map_map; IsLocalRing.ResidueField.mapEquiv_apply",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "554a4491197d9ff4"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible strict henselizations geometric points residue purely inseparable field maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology pullback commutative square universal homeomorphisms equivalence sheaf coefficients",
+   "results": "TopCat.Sheaf.pullbackIso; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj; AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso; CategoryTheory.Sheaf.isPullback_square_op_map_yoneda_presheafToSheaf_yoneda_iff; SheafOfModules.pullbackObjFreeIso; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_bijective_toPullbackObj; AlgebraicGeometry.Scheme.Pullback.cocycle",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "25e2f2b1108dd1bc"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Cc]ompose|[Cc]ompose.*sheafPullback|mapFunctor_bijective",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization residue field relative separable closure integral geometric point purely inseparable extension",
+   "results": "Algebra.instIsSeparableResidueFieldOfFormallyUnramified; instIsSeparableResidueFieldOfQuotientIdeal; Algebra.instFormallyUnramifiedResidueField_1; Algebra.isSeparable_residueField_iff; instIsAlgebraicResidueFieldOfIsIntegral; Algebra.instFormallyUnramifiedResidueField; Algebra.FormallyUnramified.iff_map_maximalIdeal_eq; Algebra.FormallyUnramified.of_map_maximalIdeal",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "559bb6b09bd3a06d"
+  },
+  {
+   "tool": "grep",
+   "query": "separableClosure|IsPurelyInseparable",
+   "results": "Mathlib/FieldTheory/CardinalEmb.lean; Mathlib/FieldTheory/CardinalEmb.lean; Mathlib/FieldTheory/SeparableClosure.lean; Mathlib/FieldTheory/SeparableClosure.lean; Mathlib/FieldTheory/SeparableClosure.lean; Mathlib/FieldTheory/SeparableClosure.lean; Mathlib/FieldTheory/SeparableClosure.lean; Mathlib/FieldTheory/PurelyInseparable/AdjoinPthRoots.lean",
+   "date": "2026-10-12",
+   "verdict": "no match",
+   "digest": "8d88ac5af5aec078"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-p1-strict-local-model-comparison",
+   "place": "Cohomology conjugacy for compatible residue universal homeomorphisms",
+   "via": [
+    "Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison",
+    "Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineResidueCohomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineResidueCohomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLine_residueCohomologyComparison",
+  "statement": "theorem Etale.projectiveLine_residueCohomologyComparison (Λ : Type (u + 1)) [CommRing Λ] {S : Scheme.{u}} {A B : Type u} [CommRing A] [IsLocalRing A] [CommRing B] [IsLocalRing B] {k k' : Type u} [Field k] [Field k'] (jA : Spec (.of A) ⟶ S) (φ : A →+* B) [IsLocalHom φ] (σ : Spec (.of k) ⟶ S) (ι : Spec (.of k') ⟶ Spec (.of k)) (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A))) (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))) [IsUniversalHomeomorphism ρA] [IsUniversalHomeomorphism ρB] (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ jA = σ) (hρ : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA) (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) : let F₀ := (ProjectiveSpace.map _ jA)^*[ModuleCat.{u + 1} Λ].obj F let rA := Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) let i₀ := Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) let G₀ := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _ rA)^*[ModuleCat.{u + 1} Λ].obj F₀) let G := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F) ∃ (b₁ : Sheaf.H G₀ q ≃+ Sheaf.H G q) (b₂ : Sheaf.H ((ProjectiveSpace.map _ i₀)^*[AddCommGrpCat.{u + 1}].obj G₀) q ≃+ Sheaf.H ((ProjectiveSpace.map _ ι)^*[AddCommGrpCat.{u + 1}].obj G) q), (∀ y, b₂ (Etale.cohomologyMap (ProjectiveSpace.map _ i₀) G₀ q y) = Etale.cohomologyMap (ProjectiveSpace.map _ ι) G q (b₁ y))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T042416-L-1819410",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T042416-L-1819410",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

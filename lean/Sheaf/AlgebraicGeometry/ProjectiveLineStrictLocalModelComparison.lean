@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResidues
+import Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalStalkExchangeComparison
+import Sheaf.AlgebraicGeometry.ProjectiveLineResidueCohomologyComparison
 import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
@@ -118,6 +122,32 @@ theorem Etale.projectiveLine_strictLocal_modelComparison
                     (Etale.baseChangeHomologyMap Λ
                       (ProjectiveSpace.isPullback_map _ g₀) q F₀)).hom (a₁ x)) ∧
                 (∀ y, b₂ (Etale.cohomologyMap (ProjectiveSpace.map _ i₀) G₀ q y) =
-                  Etale.cohomologyMap (ProjectiveSpace.map _ ι) G q (b₁ y)) := by sorry
+                  Etale.cohomologyMap (ProjectiveSpace.map _ ι) G q (b₁ y)) := by
+  let ν := Spec.map (CommRingCat.ofHom (algebraMap k' (AlgebraicClosure k')))
+  let s := ν ≫ ι ≫ σ
+  obtain ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB,
+      ρA, ρB, hUA, hUB, hbase, hρA, hρB, hρ⟩ :=
+    Etale.projectiveLine_compatibleStrictHenselizationResidues σ τ ι hι hσ hτ ν
+  letI := cA
+  letI := cB
+  letI : HenselianLocalRing A := hA
+  letI : HenselianLocalRing B := hB
+  letI : IsSepClosed (IsLocalRing.ResidueField A) := sA
+  letI : IsSepClosed (IsLocalRing.ResidueField B) := sB
+  letI := hφ
+  letI := hUA
+  letI := hUB
+  let F₀ := (ProjectiveSpace.map _ (eA.hom ≫ strictHenselizationStructuralMap s))^*[
+    ModuleCat.{u + 1} Λ].obj F
+  have hF₀ : IsTorsionSheaf F₀ := inferInstance
+  obtain ⟨a₁, a₂, ha⟩ :=
+    Etale.projectiveLine_strictLocal_stalkExchangeComparison Λ sq σ τ ι hι ν eA eB φ
+      ρA ρB hbase hρA hρB hρ F q
+  obtain ⟨b₁, b₂, hb⟩ :=
+    Etale.projectiveLine_residueCohomologyComparison Λ (A := A) (B := B)
+      (eA.hom ≫ strictHenselizationStructuralMap s) φ σ ι ρA ρB hρA hρ F q
+  exact ⟨A, B, inferInstanceAs (CommRing A), inferInstanceAs (CommRing B),
+    hA, hB, sA, sB, φ, hφ, F₀, hF₀, a₁, a₂, b₁, b₂, ha, hb⟩
+
 
 end AlgebraicGeometry
