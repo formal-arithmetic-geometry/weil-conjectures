@@ -24,39 +24,44 @@
  },
  "proof": [
   {
-   "text": "Smoothness and connectedness over the algebraically closed field give geometric integrality. Geometric integrality, separatedness and finite type make X a variety of dimension one. The curve relative-dimension-one lemma, applied to the identity base change, gives smooth relative dimension one. Jacobian representability gives a commutative abelian variety representing the degree-zero Picard functor, with its tensor-compatible group law.",
+   "text": "Connectedness over the algebraically closed field gives geometric connectedness. The regularity argument for smooth geometrically connected schemes gives geometric irreducibility, and smoothness gives geometric reducedness, hence geometric integrality. The source-library dimension criterion smoothOfRelativeDimension_iff_topologicalKrullDim_eq gives smooth relative dimension one from IsConnectedCurve.krullDim_eq_one.",
    "uses": [
-    "thm-sc-jacobian-representability",
-    "lem-sc-smooth-regular",
     "lem-weil-separably-closed-geometrically-connected",
-    "sbc-lem-smooth-geometrically-reduced",
-    "lem-sc-curve-base-change-relative-dimension-one"
+    "lem-sc-smooth-regular",
+    "sbc-lem-smooth-geometrically-reduced"
    ],
    "elementary": false
   },
   {
-   "text": "Base change preserves connected curve structure, smoothness and properness. Apply degree-zero Picard representability on the extended curve. The Jacobian compatibility square and the pullback adjunction identify its rational points with morphisms Spec kprime to J over k. The compatibility square for the sheafification units identifies pullback of a class with extension of its representing point; multiplication compatibility makes both equivalences multiplicative. Transport across the given equalities of subgroup underlying sets.",
+   "text": "Apply exists_jacobian to obtain one commutative representing group scheme J, proper, geometrically integral, and smooth of the indicated relative dimension. These properties give IsAbelianVariety J. Transport G and Gprime to picardZero using coe_ker_picDegreeHom and the supplied underlying-set equalities. Smooth relative dimension one and properness on the pullback follow by the existing base-change instances.",
    "uses": [
-    "lem-sc-base-change-curve",
-    "lem-sc-jacobian-base-change-compatible",
     "thm-sc-jacobian-representability"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use the existing source declarations exists_picardZero_equiv_picardFunctorDegree_zero and exists_picardZero_equiv_picardFunctorDegree to compare G and Gprime with values of the original Picard sheaf at Spec k and Spec kprime. In the latter theorem take the canonical pullback square: its isoPullback is the identity, by the two projection equations and pullback.hom_ext. The recorded formulas identify both comparisons with the sheafification unit. Apply exists_mulEquiv_of_isPicardZeroMul to the same representation r for both comparisons to obtain multiplicative equivalences e and eprime.",
+   "uses": [
+    "thm-sc-jacobian-representability"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the injectivity of r.homEquiv and its naturality homEquiv_comp to reduce the square to the naturality of the sheafification unit. The Picard presheaf map is Pic.map of baseChangeMap; Pic.map_comp and pullback.lift_fst identify this map on a class pulled back from X with Pic.map of pullback.fst f b. The hypothesis hj finishes the equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "thm-sc-jacobian-representability",
   "lem-sc-smooth-regular",
   "lem-weil-separably-closed-geometrically-connected",
-  "sbc-lem-smooth-geometrically-reduced",
-  "lem-sc-base-change-curve",
-  "lem-sc-jacobian-base-change-compatible",
-  "lem-sc-curve-base-change-relative-dimension-one"
+  "sbc-lem-smooth-geometrically-reduced"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-  "place": "Proper degree-one Jacobian comparison and base-change square."
+  "place": "Proper degree-one Jacobian comparison; W3 second reading uses the existing geometric-point Picard comparison and naturality for one representing Jacobian."
  },
  "mathlib_searches": [
   {
@@ -121,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T095856-L-313905",
-  "kind": "interface",
+  "landing": "20261012T112853-L-773117",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
