@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-affine-chart-base-change-iso",
+ "kind": "statement",
+ "title": "Projection-compatible spectrum presentation of a base-changed affine chart",
+ "statement": "Let $z:Z\\to S$ and $t:T\\to S$ be morphisms of schemes [def-pc-scheme]. Let $W\\subset S$, $V\\subset Z$ be opens with $V\\subset z^{-1}(W)$. Let $R$ be a commutative ring and $A,B$ commutative $R$-algebras. Suppose $e_0:W\\cong\\operatorname{Spec}R$, $e_B:V\\cong\\operatorname{Spec}B$ and $e:t^{-1}(W)\\cong\\operatorname{Spec}A$ are isomorphisms [def-weil-affine-spectrum] commuting with the maps to $W$ and the specified structure maps to $\\operatorname{Spec}R$. Write $p:Z\\times_ST\\to Z$, $q:Z\\times_ST\\to T$ for the projections [def-pc-fibre-product]. There is an isomorphism $i:p^{-1}(V)\\cong\\operatorname{Spec}(A\\otimes_R B)$ such that $p\\circ\\iota\\circ i^{-1}=\\iota_V\\circ e_B^{-1}\\circ\\operatorname{Spec}(b\\mapsto1\\otimes b)$ and $q\\circ\\iota\\circ i^{-1}=\\iota_{t^{-1}(W)}\\circ e^{-1}\\circ\\operatorname{Spec}(a\\mapsto a\\otimes1)$, where $\\iota$ denotes the open-subscheme inclusion. Zero rings and empty opens are allowed.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01JR (lemma-open-fibre-product) and 01I4 (lemma-fibre-product-affine-schemes); read at https://stacks.math.columbia.edu/tag/01JR and /tag/01I4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Map the affine pullback Spec(B) ×[Spec(R)] Spec(A) to Z ×[S] T using the specified presentations and the chart inclusions. The two compatibility equations make this a map of diagrams. It is an open immersion with image p⁻¹(V) ∩ q⁻¹(t⁻¹(W)), by the open fibre-product lemma. The containment V⊆z⁻¹(W) and p≫z=q≫t imply p⁻¹(V)⊆q⁻¹(t⁻¹(W)); hence the image is p⁻¹(V). The two open immersions with this same image give an isomorphism with the inverse-image open subscheme.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product) and 01I4 (lemma-fibre-product-affine-schemes); read at https://stacks.math.columbia.edu/tag/01JR and /tag/01I4"
+   }
+  },
+  {
+   "text": "Compose the inverse of the open-subscheme isomorphism with pullback symmetry and pullbackSpecIso R A B. The projection equations of pullback.map, pullback symmetry and pullbackSpecIso show that its inverse projects to Spec(includeRight)≫eB⁻¹≫ιV and Spec(includeLeft)≫e⁻¹≫ι(t⁻¹W), respectively. No nonzero-ring or nonempty-chart hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product) and 01I4 (lemma-fibre-product-affine-schemes); read at https://stacks.math.columbia.edu/tag/01JR and /tag/01I4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01JR (lemma-open-fibre-product) and 01I4 (lemma-fibre-product-affine-schemes); read at https://stacks.math.columbia.edu/tag/01JR and /tag/01I4",
+  "note": "Formal assembly of the open-fibre-product and affine-spectrum formulas, with both projection equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq",
+   "results": "AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq, AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_hom_fac, AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_inv_fac, AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_hom_fac_assoc, AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_inv_fac_assoc",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; combined projection-compatible chart identification proved in Lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of an affine open under base change is the spectrum of the tensor product with compatible pullback projections",
+   "results": "AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc, AlgebraicGeometry.pullbackSpecIso_inv_fst', AlgebraicGeometry.pullbackSpecIso_inv_fst, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; combined projection-compatible chart identification proved in Lean"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"def pullbackSpecIso|lemma pullbackSpecIso_inv_(fst|snd)|instance Scheme.pullback_map_isOpenImmersion|lemma range_map|def isoOfRangeEq\" Mathlib/AlgebraicGeometry/{Pullbacks,PullbackCarrier,OpenImmersion}.lean",
+   "results": "Pullbacks.lean:701 Scheme.pullback_map_isOpenImmersion; :726 pullbackSpecIso; :740 pullbackSpecIso_inv_fst; :756 pullbackSpecIso_inv_snd; PullbackCarrier.lean:355 Scheme.Pullback.range_map; OpenImmersion.lean:727 IsOpenImmersion.isoOfRangeEq. Independent second reading also searched scheme restriction/base-change isomorphisms in lean/Sheaf and lean/WeilConjectures; no duplicate combined theorem found.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; combined projection-compatible chart identification proved in Lean"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of an affine open under base change is the spectrum of the tensor product with compatible pullback projections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartTensorComparison",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Step 2 of the affine-chart tensor-comparison reduction of the affine descent route: spectrum identification of each base-changed chart with both projections fixed.",
+   "via": [
+    "lem-weil-pbc-affine-chart-tensor-comparison",
+    "lem-weil-pbc-affine-chart-directed-ring-model",
+    "lem-weil-pbc-etale-affine-chart-descent",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineChartBaseChangeIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartBaseChangeIso.lean",
+  "declaration": "AlgebraicGeometry.exists_affineChart_baseChangeIso",
+  "statement": "theorem exists_affineChart_baseChangeIso\n    {S Z : Scheme.{u}} (z : Z ⟶ S)\n    (W : S.Opens) (V : Z.Opens) (eV : V ≤ z ⁻¹ᵁ W)\n    (R B : CommRingCat.{u}) [Algebra R B]\n    (e0 : W.toScheme ≅ Spec R) (eB : V.toScheme ≅ Spec B)\n    (hB : z.resLE W V eV ≫ e0.hom =\n      eB.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R B)))\n    (T : Scheme.{u}) (t : T ⟶ S) (A : CommRingCat.{u}) [Algebra R A]\n    (e : (t ⁻¹ᵁ W).toScheme ≅ Spec A)\n    (h : t.resLE W _ le_rfl ≫ e0.hom =\n      e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R A))) :\n    ∃ i : ((pullback.fst z t) ⁻¹ᵁ V).toScheme ≅ Spec (.of (A ⊗[R] B)),\n      i.inv ≫ ((pullback.fst z t) ⁻¹ᵁ V).ι ≫ pullback.fst z t =\n        Spec.map (CommRingCat.ofHom Algebra.TensorProduct.includeRight.toRingHom) ≫\n          eB.inv ≫ V.ι ∧\n      i.inv ≫ ((pullback.fst z t) ⁻¹ᵁ V).ι ≫ pullback.snd z t =\n        Spec.map (CommRingCat.ofHom Algebra.TensorProduct.includeLeftRingHom) ≫\n          e.inv ≫ (t ⁻¹ᵁ W).ι",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T085256-L-21781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T085256-L-21781",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

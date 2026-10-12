@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.AlgebraicGeometry.AffineChartBaseChangeIso
 
 /-!
 # Tensor-product comparison for a single affine chart
@@ -72,6 +73,100 @@ theorem exists_affineChart_tensorComparison
                 ((pullback.fst X₀.hom t) ⁻¹ᵁ U).ι ≫
                   ((Over.pullback t).map f₀).left ∧
               Nonempty (Arrow.mk g ≅ Arrow.mk (Spec.map (CommRingCat.ofHom
-                (Algebra.TensorProduct.map (AlgHom.id R A) φ).toRingHom))) := by sorry
+                (Algebra.TensorProduct.map (AlgHom.id R A) φ).toRingHom))) := by
+  let B := Γ(Y₀.left, V)
+  let C := Γ(X₀.left, U)
+  let q : B ⟶ C := f₀.left.appLE V U eU
+  let rW : R ⟶ Γ(S, W) := Spec.preimage (hW.isoSpec.inv ≫ e0.hom)
+  let rB : R ⟶ B := rW ≫ Y₀.hom.appLE W V eV
+  let aB : Algebra R B := rB.hom.toAlgebra
+  let aC : Algebra R C := (rB ≫ q).hom.toAlgebra
+  let φ : B →ₐ[R] C :=
+    { q.hom with commutes' := fun r ↦ rfl }
+  refine ⟨B, C, aB, aC, φ, ?_, ?_⟩
+  · exact f₀.left.finitePresentation_appLE hV hU eU
+  · intro T t A aA
+    let := aA
+    intro e h
+    have hB : Y₀.hom.resLE W V eV ≫ e0.hom =
+        hV.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R B)) := by
+      change _ = hV.isoSpec.hom ≫ Spec.map (rW ≫ Y₀.hom.appLE W V eV)
+      rw [Spec.map_comp, ← Category.assoc]
+      change _ = (V.toSpecΓ ≫ Spec.map (Y₀.hom.appLE W V eV)) ≫ Spec.map rW
+      rw [Scheme.Opens.toSpecΓ_SpecMap_appLE]
+      simp [rW, ← hW.isoSpec_hom]
+    have hφ : f₀.left.resLE V U eU ≫ hV.isoSpec.hom =
+        hU.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom φ.toRingHom) := by
+      exact (Scheme.Opens.toSpecΓ_SpecMap_appLE f₀.left V U eU).symm
+    have eUW : U ≤ X₀.hom ⁻¹ᵁ W := by
+      rw [← Over.w f₀, Scheme.Hom.comp_preimage]
+      exact eU.trans ((TopologicalSpace.Opens.map f₀.left.base).map (homOfLE eV)).le
+    have hC : X₀.hom.resLE W U eUW ≫ e0.hom =
+        hU.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R C)) := by
+      change _ = hU.isoSpec.hom ≫ Spec.map (rB ≫ q)
+      have hφ' : f₀.left.resLE V U eU ≫ hV.isoSpec.hom =
+          hU.isoSpec.hom ≫ Spec.map q := hφ
+      have hB' : Y₀.hom.resLE W V eV ≫ e0.hom =
+          hV.isoSpec.hom ≫ Spec.map rB := hB
+      rw [Spec.map_comp, ← Category.assoc, ← hφ', Category.assoc, ← hB']
+      rw [← Category.assoc]
+      apply congrArg (fun k : U.toScheme ⟶ W.toScheme ↦ k ≫ e0.hom)
+      rw [← cancel_mono W.ι]
+      simp only [Scheme.Hom.resLE_comp_ι, Category.assoc,
+        Scheme.Hom.resLE_comp_ι_assoc, Over.w]
+    obtain ⟨iB, hiB₁, hiB₂⟩ := exists_affineChart_baseChangeIso
+      Y₀.hom W V eV R B e0 hV.isoSpec hB T t A e h
+    obtain ⟨iC, hiC₁, hiC₂⟩ := exists_affineChart_baseChangeIso
+      X₀.hom W U eUW R C e0 hU.isoSpec hC T t A e h
+    let fT := ((Over.pullback t).map f₀).left
+    have hf₁ : fT ≫ pullback.fst Y₀.hom t = pullback.fst X₀.hom t ≫ f₀.left := by
+      simp [fT, Over.pullback_map_left]
+    have hf₂ : fT ≫ pullback.snd Y₀.hom t = pullback.snd X₀.hom t := by
+      simp [fT, Over.pullback_map_left]
+    have eUT : (pullback.fst X₀.hom t) ⁻¹ᵁ U ≤
+        fT ⁻¹ᵁ ((pullback.fst Y₀.hom t) ⁻¹ᵁ V) := by
+      rw [← Scheme.Hom.comp_preimage, hf₁, Scheme.Hom.comp_preimage]
+      exact ((TopologicalSpace.Opens.map (pullback.fst X₀.hom t).base).map
+        (homOfLE eU)).le
+    let g := fT.resLE _ _ eUT
+    let ψ := Algebra.TensorProduct.map (AlgHom.id R A) φ
+    let sψ := Spec.map (CommRingCat.ofHom ψ.toRingHom)
+    have hRight : sψ ≫ Spec.map (CommRingCat.ofHom
+        (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom) =
+        Spec.map (CommRingCat.ofHom
+          (Algebra.TensorProduct.includeRight : C →ₐ[R] A ⊗[R] C).toRingHom) ≫
+          Spec.map q := by
+      dsimp [sψ]
+      rw [← Spec.map_comp, ← Spec.map_comp]
+      congr 1
+    have hLeft : sψ ≫ Spec.map (CommRingCat.ofHom
+        (Algebra.TensorProduct.includeLeftRingHom : A →+* A ⊗[R] B)) =
+        Spec.map (CommRingCat.ofHom
+          (Algebra.TensorProduct.includeLeftRingHom : A →+* A ⊗[R] C)) := by
+      dsimp [sψ]
+      rw [← Spec.map_comp]
+      congr 1
+      ext a
+      simp [ψ]
+    refine ⟨g, Scheme.Hom.resLE_comp_ι fT eUT, ⟨?_⟩⟩
+    refine Arrow.isoMk' g sψ iC iB ?_
+    rw [← cancel_epi iC.inv, ← cancel_mono iB.inv,
+      ← cancel_mono (((pullback.fst Y₀.hom t) ⁻¹ᵁ V).ι)]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id_assoc]
+    apply pullback.hom_ext
+    · simp only [Category.assoc]
+      rw [hiB₁, reassoc_of% hRight]
+      dsimp [g]
+      rw [Scheme.Hom.resLE_comp_ι_assoc, hf₁, reassoc_of% hiC₁]
+      have hh := IsAffineOpen.SpecMap_appLE_fromSpec f₀.left hV hU eU
+      change Spec.map q ≫ hV.isoSpec.inv ≫ V.ι = hU.isoSpec.inv ≫ U.ι ≫ f₀.left at hh
+      simpa only [Category.assoc, IsAffineOpen.fromSpec, AlgHom.toRingHom_eq_coe] using
+        congrArg
+        (fun k ↦ Spec.map (CommRingCat.ofHom
+          (Algebra.TensorProduct.includeRight : C →ₐ[R] A ⊗[R] C).toRingHom) ≫ k) hh
+    · simp only [Category.assoc]
+      rw [hiB₂, reassoc_of% hLeft]
+      dsimp [g]
+      rw [Scheme.Hom.resLE_comp_ι_assoc, hf₂, hiC₂]
 
 end AlgebraicGeometry

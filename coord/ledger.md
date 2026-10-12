@@ -6894,3 +6894,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/J3/Sheaf.RingTheory.FlatUnderRegular (stage 3; reviewer PASS; first push; landing 20261012T085255-L-21425 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/J3/Sheaf.RingTheory.GeometricallyRegularDescent (stage 3; reviewer PASS; first push; landing 20261012T085255-L-21522 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/K1/Sheaf.AlgebraicGeometry.AffineAlgebraLocalMaps (stage 3; reviewer PASS; first push; landing 20261012T085256-L-21624 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/K1/Sheaf.AlgebraicGeometry.AffineChartTensorComparison (stage 3; reviewer PASS; first push; landing 20261012T085256-L-21781 (interface); batch 20261012T085205; modules 2; new nodes 1)
