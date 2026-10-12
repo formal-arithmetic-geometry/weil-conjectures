@@ -1,6 +1,6 @@
 # Work queue
 
-61 items; claim with `tools/claim.py next <group> [--stage N]`.
+66 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -22,17 +22,22 @@
 
 Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (53)
+## Stage 3: modules to prove (58)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 6 | proof |
+| `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.ConstantPullbackCompositionCoherence` | 2 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions` | 2 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions` | 2 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Curve.PrimeConstructiblePullback` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit` | 2 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism` | 2 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations` | 2 | 2 | proof |
 | `Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.KernelCokernel` | 2 | 1 | proof |
