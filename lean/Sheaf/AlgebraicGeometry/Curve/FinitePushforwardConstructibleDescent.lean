@@ -66,6 +66,48 @@ so K is torsion (prop-weil-pbc-geometric-stalks-exact,
 lem-weil-pbc-torsion-sheaf-characterizations). All three terms are curve coefficient pairs.
 6. Apply lem-weil-pbc-curve-constructible-sub-quotient to this short exact sequence:
 a quotient of the constructible middle term is constructible (09BH (2)). -/
+theorem CurveCoefficientPair.constructible_of_short_exact
+    {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
+    (Fmid K : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (hK : P.C.IsTorsionAbelianSheaf K)
+    (hmidT : P.C.IsTorsionAbelianSheaf Fmid)
+    (hmid : CurveCoefficientPair.IsConstructible
+      ({ C := P.C, toSpec := P.toSpec, isCurve := P.isCurve, F := Fmid,
+         isTorsion := hmidT } : CurveCoefficientPair k))
+    (alpha : K ⟶ Fmid) (beta : Fmid ⟶ P.F) (w : alpha ≫ beta = 0)
+    (hshort : (ShortComplex.mk alpha beta w).ShortExact) :
+    P.IsConstructible := by
+  let Q : CurveCoefficientPair k :=
+    { C := P.C, toSpec := P.toSpec, isCurve := P.isCurve, F := Fmid,
+      isTorsion := hmidT }
+  exact (CurveCoefficientPair.constructible_sub_quotient Q K P.F hK P.isTorsion
+    alpha beta w hshort hmid).2
+
+/-- The geometric stalk argument supplies a torsion constructible middle term and a short exact
+sequence ending in the original sheaf. (source: Stacks Project, Tags 03QP, 095G, 09BH;
+(blueprint: lem-weil-pbc-finite-pushforward-data)
+Proof: construct the inverse-image sheaf and prove the counit is stalkwise surjective
+using the finite stalk formula. Apply exactness of geometric stalks to obtain the
+kernel short exact sequence. -/
+theorem CurveCoefficientPair.finite_pushforward_data
+    {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
+    {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g]
+    (f : P.C ⟶ Y) [IsFinite f] (hf : f ≫ g = P.toSpec)
+    (hT : Y.IsTorsionAbelianSheaf (Etale.lowerStar AddCommGrpCat.{u + 1} f |>.obj P.F))
+    (hC : CurveCoefficientPair.IsConstructible
+      ({ C := Y, toSpec := g, isCurve := inferInstance,
+         F := (Etale.lowerStar AddCommGrpCat.{u + 1} f).obj P.F, isTorsion := hT }
+        : CurveCoefficientPair k)) :
+    ∃ (Fmid K : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})
+      (hmidT : P.C.IsTorsionAbelianSheaf Fmid)
+      (_hK : P.C.IsTorsionAbelianSheaf K)
+      (_hmid : CurveCoefficientPair.IsConstructible
+        ({ C := P.C, toSpec := P.toSpec, isCurve := P.isCurve, F := Fmid,
+           isTorsion := hmidT } : CurveCoefficientPair k))
+      (alpha : K ⟶ Fmid) (beta : Fmid ⟶ P.F) (w : alpha ≫ beta = 0),
+      (ShortComplex.mk alpha beta w).ShortExact := by
+  sorry
+
 theorem CurveCoefficientPair.isConstructible_of_finite_pushforward
     {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
     {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g]
@@ -78,6 +120,10 @@ theorem CurveCoefficientPair.isConstructible_of_finite_pushforward
          F := (Etale.lowerStar AddCommGrpCat.{u + 1} f).obj P.F
          isTorsion := hT } : CurveCoefficientPair k)) →
       P.IsConstructible := by
-  sorry
+  intro hC
+  obtain ⟨Fmid, K, hmidT, hK, hmid, alpha, beta, hw, hshort⟩ :=
+    CurveCoefficientPair.finite_pushforward_data P g f hf hT hC
+  exact CurveCoefficientPair.constructible_of_short_exact P Fmid K hK hmidT hmid
+    alpha beta hw hshort
 
 end AlgebraicGeometry

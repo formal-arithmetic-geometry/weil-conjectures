@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-finite-pushforward-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-algebraically-closed-extension",
+   "place": "step 3, 4, 7 of its split (source: Section 03SB, Lemma 03SG (lemma-even-easier) and its proof, and Lemma 0A5B (lemma-constant-smooth-statements))",
+   "via": [
+    "lem-weil-pbc-curve-assertions-finite-pushforward"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Finite pushforward constructible descent data",
+ "statement": "Under the hypotheses of finite_pushforward_constructible_descent and constructibility of the pushforward, there exist torsion sheaves Fmid and K, a constructible Fmid, and a short exact sequence K → Fmid → P.F.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology: the converse of Lemma 095R (lemma-finite-pushforward-constructible), needed for the assertions (4), (5) of Lemma 0A5D ('those statements that apply', Section 03SB, list after Situation 03SB) for f_*F. Intended proof: the counit f^{-1}f_*F -> F is surjective (on stalks it is the projection of the finite stalk formula, lemma-weil-pbc-finite-stalk-formula, onto the factor of the given point), f^{-1}f_*F is constructible (Lemma 095G, lemma-pullback-constructible), and a quotient of a constructible abelian sheaf on a Noetherian scheme is constructible (Proposition 09BH, proposition-constructible-over-noetherian (2)). Not stated in Stacks; the composition of these three is the agent's."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct the inverse-image sheaf and its counit; finite stalk formula makes the counit stalkwise surjective.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use exactness and torsion characterizations to obtain the kernel short exact sequence and constructibility of the middle term.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "The composition is not in Stacks (the converse of Lemma 095R, lemma-finite-pushforward-constructible); it combines Proposition 03QP (1) (finite stalk formula), Lemma 095G (pullback of constructible), Theorem 03PU (exactness on stalks) and Proposition 09BH (2) (quotients of constructible sheaves on Noetherian schemes); the identification of the counit on stalks is written out by the agent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constructible etale sheaf: if the pushforward along a finite morphism is constructible then the sheaf is constructible",
+   "results": "TopCat.Sheaf.pushforward_sheaf_of_sheaf, Scheme.Hom.isConstructible_preimage, SheafOfModules.pushforward, Scheme.Hom.isLocallyConstructible_image: constructible subsets only, no constructible sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient of a constructible etale sheaf on a noetherian scheme is constructible",
+   "results": "Scheme.Hom.isConstructible_image (Chevalley), isLocallyConstructible_image, Topology.IsLocallyConstructible.isConstructible, iff_isConstructible_of_isOpenCover, exists_of_res_zero_of_qcqs_of_top: constructible sets only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'constructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/ ; grep -rn 'IsConstructibleSheaf\\|constructibleSheaf' Mathlib/",
+   "results": "none: Mathlib has constructible subsets (Topology/Constructible.lean, Morphisms/FinitePresentation.lean) but no constructible sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsConstructible.preimage\\|isConstructible_preimage' Mathlib/Topology Mathlib/AlgebraicGeometry",
+   "results": "Topology/Constructible.lean:244 IsConstructible.preimage (continuous map with retrocompact preimages of retrocompact opens, Stacks 005I); AlgebraicGeometry/Morphisms/FinitePresentation.lean:172 Scheme.Hom.isConstructible_preimage (Stacks 054I): constructible subsets only, an alternative for step 4(a) (the step uses the Noetherian X instead); no constructible sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match (for the statement)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardConstructibleDescent",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-finite-pushforward-constructible-descent",
+  "worker": "stage1",
+  "summary": "Statement kept (the hypothesis 'f_*F torsion' is redundant by part (a) of lem-weil-pbc-curve-assertions-finite-pushforward, harmless). Proof in six steps along the intended route of the source field: (1) notation, X Noetherian (elementary); (2) the counit f^{-1}f_*F -> F is surjective on every geometric stalk: its stalk is the restriction of germs r composed with the inverse-image stalk iso (new node lem-weil-pbc-counit-stalk-germ-restriction, any morphism; Lean slopmaster2 Etale.stalkRestrict_eq_counit, sorry-free), and for finite f the r's over a geometric point assemble to the finite stalk formula iso (new node lem-weil-pbc-finite-stalk-formula-restriction, the explicit form of the closed lemma-weil-pbc-finite-stalk-formula; Lean Etale.isIso_piLift_stalkRestrict, sorry-free); (3) epimorphism: cokernel zero on a covering family of stalks, via prop-weil-pbc-geometric-stalks-exact and the Mathlib leaf lem-weil-pbc-geometric-stalks-detect-mono (as in the sibling); (4) f^{-1}f_*F constructible in the curve sense, following Stacks 095G's proof directly in the curve sense with the closed nodes lemma-constructible-pullback-stratification, lemma-constructible-pullback-locally-constant, lemma-constructible-iso-invariance, lemma-openclosed-stalk-upperstar and lem-weil-pbc-inverse-image-composition (strata constructible because X is Noetherian), plus torsion via lem-weil-pbc-torsion-sheaf-characterizations; prop-constructible-pullback (closed) was not cited directly because its finiteness clause (def-constructible-finite) quantifies over separably closed geometric points while the curve definition uses algebraically closed ones; (5) the kernel is torsion; (6) the reviewed sibling lem-weil-pbc-curve-constructible-sub-quotient (Stacks 09BH (2)) gives F constructible as the quotient. Leaves/closed ends: steps 1 and 6 elementary; all cited nodes closed or Mathlib except lem-weil-pbc-inverse-image-stalk-germ (unsplit) and lem-weil-pbc-torsion-sheaf-characterizations (split, reviewed) and the two new unsplit nodes, whose slopmaster2 Lean is sorry-free (to be attached at review)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardConstructibleDescent",
+  "declaration": "AlgebraicGeometry.CurveCoefficientPair.finite_pushforward_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FinitePushforwardConstructibleDescent.lean",
+  "statement": "theorem CurveCoefficientPair.finite_pushforward_data {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k) {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f] (hf : f ≫ g = P.toSpec) (hT : Y.IsTorsionAbelianSheaf (Etale.lowerStar AddCommGrpCat.{u + 1} f |>.obj P.F)) (hC : CurveCoefficientPair.IsConstructible ({ C := Y, toSpec := g, isCurve := inferInstance, F := (Etale.lowerStar AddCommGrpCat.{u + 1} f).obj P.F, isTorsion := hT } : CurveCoefficientPair k)) : ∃ (Fmid K : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hmidT : P.C.IsTorsionAbelianSheaf Fmid) (_hK : P.C.IsTorsionAbelianSheaf K) (_hmid : CurveCoefficientPair.IsConstructible ({ C := P.C, toSpec := P.toSpec, isCurve := P.isCurve, F := Fmid, isTorsion := hmidT } : CurveCoefficientPair k)) (alpha : K ⟶ Fmid) (beta : Fmid ⟶ P.F) (w : alpha ≫ beta = 0), (ShortComplex.mk alpha beta w).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T044749-L-2037705",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T044749-L-2037705",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
