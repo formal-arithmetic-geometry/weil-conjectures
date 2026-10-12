@@ -268,6 +268,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexExact
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexSplit
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeMatrix
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratesFibre
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
@@ -408,6 +409,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Spreading
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistTensor
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
