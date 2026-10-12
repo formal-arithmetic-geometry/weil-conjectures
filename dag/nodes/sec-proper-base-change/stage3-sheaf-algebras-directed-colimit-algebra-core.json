@@ -7,16 +7,31 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Construct the sectionwise filtered colimit and sheafify it, then verify the stated universal property.",
+   "text": "Choose an index i0, possible because I is nonempty, and define sigmaP as the composite of its structure map with its presheaf coprojection. For any i, choose a common upper bound k of i and i0. Under.w for both transition maps and the cocone equations show that both composites equal the composite at k. Thus all structure maps induce sigmaP.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The hypothesis hp gives a colimit after evaluation at every open. Apply Mathlib evaluationJointlyReflectsColimits (CategoryTheory/Limits/FunctorCategory/Basic.lean) to obtain IsColimit p, then Sheaf.isColimitSheafifyCocone (CategoryTheory/Sites/Limits.lean) to obtain a colimit cocone c of sheaves on F composed with Under.forget O. Its coprojections are p.ι.app i composed with toSheafify by Sheaf.sheafifyCocone_ι_app_val.",
    "uses": [],
    "elementary": false
+  },
+  {
+   "text": "Define sigma by composing sigmaP with toSheafify. The preceding equality of structure maps and the formula for the sheafified coprojections give (F.obj i).hom composed with c.ι.app i equal to sigma. Lift each coprojection with Under.homMk; naturality follows from c.w and Under.UnderMorphism.ext.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary algebra cocone s, descend its underlying sheaf cocone using the sheaf colimit c. The descent respects the structure map: factor sigma through the coprojection at i0, use the sheaf colimit factorization equation, then Under.w for s.ι.app i0. Factorization and uniqueness in Under O follow from those in sheaves using Under.UnderMorphism.ext. The required coprojection formula is Sheaf.sheafifyCocone_ι_app_val.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sections 009D and 009E; Modules 01AH"
+  "by": "U3 stage 3 worker",
+  "document": "Mathlib/CategoryTheory/Sites/Limits.lean; Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean",
+  "place": "Sheaf.isColimitSheafifyCocone and evaluationJointlyReflectsColimits, with the explicit Under-category universal-property argument"
  },
  "mathlib_searches": [
   {
@@ -87,11 +102,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K2",
+  "reviewer": "X-00611",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T053938-L-2638101",
+  "landing": "20261012T095926-L-325606",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature and completed proof with the node, Mathlib APIs, import-change record, downstream importer, and report; compilation is clean and axioms are exactly propext, Classical.choice, Quot.sound."
  }
 }
