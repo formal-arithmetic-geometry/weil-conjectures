@@ -5756,3 +5756,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:37 L: merged deliver/C1/WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian (stage 3; reviewer PASS; first push; landing 20261012T003530-L-597800 (interface); modules 4; new nodes 3)
 - 00:37 L: returned deliver/G1/Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image (reviewer RETURN: (reviewer X-708cd, head 708cda526) H8: In HenselianFinitePushforwardH1Lift.lean, add the required module docstring `/-! )
 - 00:39 L: merged deliver/E1/WeilConjectures.AlgebraicGeometry.Curve.FieldExtension (stage 3; reviewer PASS; after a return; landing 20261012T003805-L-609832 (interface); modules 3; new nodes 2)
+- 00:39 L: returned deliver/Q1/Sheaf.Paper.ZeroDimensionalCohomology (reviewer RETURN: (reviewer X-0bfb8, head 0bfb8452a) B: In dag/nodes/sec-curve-estimates/zero-dimensional-etale-cohomology-rest.json, repl)
