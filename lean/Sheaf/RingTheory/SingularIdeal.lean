@@ -46,7 +46,7 @@ Source: Stacks Project, Smoothing Ring Maps, Definition 07C5
 (blueprint: def-weil-pbc-singular-ideal). -/
 theorem singularIdeal_isRadical (R : Type u) (A : Type v) [CommRing R] [CommRing A]
     [Algebra R A] : (singularIdeal R A).IsRadical := by
-  sorry
+  exact Ideal.radical_isRadical _
 
 /-- The smooth locus is the union of the basic opens of smooth principal localizations.
 For a prime `q`, membership on either side means there is a `g` outside `q` whose
@@ -57,7 +57,10 @@ theorem smoothAtPrime_locus_eq (R : Type u) (A : Type v) [CommRing R] [CommRing 
     [Algebra R A] :
     {q : PrimeSpectrum A | IsSmoothAtPrime R q} =
       ⋃ g ∈ smoothElements R A, (PrimeSpectrum.basicOpen g : Set (PrimeSpectrum A)) := by
-  sorry
+  ext q
+  simp only [Set.mem_ofPred_eq, Set.mem_iUnion, SetLike.mem_coe,
+    PrimeSpectrum.mem_basicOpen, IsSmoothAtPrime, smoothElements, exists_prop]
+  exact exists_congr fun g ↦ and_comm
 
 /-- The smooth locus is open: by `smoothAtPrime_locus_eq` it is a union of basic
 opens, each of which is open. Source: Stacks Project,
@@ -65,7 +68,8 @@ Smoothing Ring Maps, after Definition 07C5 (blueprint: def-weil-pbc-singular-ide
 theorem isOpen_smoothAtPrime_locus (R : Type u) (A : Type v) [CommRing R] [CommRing A]
     [Algebra R A] :
     IsOpen {q : PrimeSpectrum A | IsSmoothAtPrime R q} := by
-  sorry
+  rw [smoothAtPrime_locus_eq]
+  exact isOpen_iUnion fun g ↦ isOpen_iUnion fun _ ↦ (PrimeSpectrum.basicOpen g).isOpen
 
 /-- The zero locus of `H_{A/R}` is precisely the nonsmooth locus, or equivalently the
 intersection of the zero loci of all smooth localization elements. A prime contains
@@ -81,7 +85,20 @@ theorem singularIdeal_zeroLocus (R : Type u) (A : Type v) [CommRing R] [CommRing
       {q : PrimeSpectrum A | ¬ IsSmoothAtPrime R q} ∧
     PrimeSpectrum.zeroLocus (singularIdeal R A : Set A) =
       ⋂ g ∈ smoothElements R A, PrimeSpectrum.zeroLocus ({g} : Set A) := by
-  sorry
+  rw [singularIdeal, PrimeSpectrum.zeroLocus_radical, PrimeSpectrum.zeroLocus_span]
+  constructor
+  · ext q
+    simp only [PrimeSpectrum.mem_zeroLocus, Set.mem_ofPred_eq, IsSmoothAtPrime,
+      smoothElements, Set.subset_def, Set.mem_ofPred_eq]
+    constructor
+    · intro h ⟨g, hg, hs⟩
+      exact hg (h g hs)
+    · intro h g hs
+      by_contra hg
+      exact h ⟨g, hg, hs⟩
+  · ext q
+    simp only [PrimeSpectrum.mem_zeroLocus, Set.mem_iInter, Set.subset_def,
+      Set.mem_singleton_iff, forall_eq]
 
 /-- `H_{A/R}` is the unique radical ideal with the nonsmooth locus as its zero locus.
 By `singularIdeal_zeroLocus`, `J` and `H_{A/R}` have the same zero locus. The
@@ -94,6 +111,8 @@ theorem singularIdeal_unique (R : Type u) (A : Type v) [CommRing R] [CommRing A]
     (hV : PrimeSpectrum.zeroLocus (J : Set A) =
       {q : PrimeSpectrum A | ¬ IsSmoothAtPrime R q}) :
     J = singularIdeal R A := by
-  sorry
+  have h := PrimeSpectrum.zeroLocus_eq_iff.mp
+    (hV.trans (singularIdeal_zeroLocus R A).1.symm)
+  rwa [hJ.radical, (singularIdeal_isRadical R A).radical] at h
 
 end Algebra
