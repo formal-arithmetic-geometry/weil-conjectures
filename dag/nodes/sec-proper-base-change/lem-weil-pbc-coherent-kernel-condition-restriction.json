@@ -15,32 +15,29 @@
  ],
  "proof": [
   {
-   "text": "Let V be open in W and let V prime be its image in X. It is open in X because W is open. The open-site equivalence and iterated-slice equivalence identify (F restricted to W) restricted to V with F restricted to V prime, and identify the structure modules.",
+   "text": "Set U = W.ι image V. Scheme.Hom.isoImage gives the canonical isomorphism s : V.toScheme ≅ U.toScheme. Compose Scheme.Modules.overEquiv U, restriction along s.hom (an equivalence with inverse restriction along s.inv), and the inverse of Scheme.Modules.overEquiv V. The restriction composition and congruence isomorphisms, together with isoImage_hom_ι, give an isomorphism T(F.over U) ≅ (F restricted to W).over V. The unit comparison isomorphisms show T preserves the structure module.",
    "uses": [
     "def-pc-scheme",
     "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "pqf-def-coherent"
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "These equivalences preserve finite coproducts and kernels. Transfer the given rank-n free-source map to the module category over V prime. Its kernel is finite type by the hypothesis on F.",
+   "text": "Mathlib SheafOfModules.mapFreeIso identifies T of the rank-n free module with the rank-n free module over V, since equivalences preserve coproducts. Use fullness of T to pull back the conjugate of the given morphism to a morphism g over U. The assumed kernel condition gives finite type of kernel g. PreservesKernel.iso and kernel.mapIso identify T(kernel g) with kernel f.",
    "uses": [
     "def-pc-scheme",
     "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "pqf-def-coherent"
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the kernel back to V. Transfer each finite family of local generating sections and its epimorphism along the equivalences. Corresponding open neighbourhoods cover, so finite type transfers. This proves the assertion, also for empty opens and rank zero.",
+   "text": "Prove finite-type transport directly using local generators: transport every finite generating family through the pushforward on the corresponding slice sites; these functors preserve coproducts and epimorphisms. Cocontinuity lifts the covering of the terminal object. Shrink the index type of the resulting local generators to the module universe. Apply this to the two open-site module equivalences and to restriction along s.hom, then transport through the kernel isomorphism. The construction uses no nonempty-open or positive-rank assumption, so also applies to the empty open and n = 0.",
    "uses": [
     "def-pc-scheme",
     "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "pqf-def-coherent"
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": false
   }
@@ -48,13 +45,12 @@
  "proof_deps": [
   "def-pc-scheme",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "pqf-def-coherent"
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Definitions 01BV (definition-coherent), 01B5 (definition-finite-type), and Section 01AF (section-kernels); read at the official Stacks tag pages; specialization of the parent proof: Steps 1 and 3 of the parent: transfer the kernel condition through nested restrictions."
+  "place": "Definitions 01BV (definition-coherent), 01B5 (definition-finite-type), and Section 01AF (section-kernels), checked at the official Stacks tag pages. E4 formalization: use the canonical isomorphism of the nested open with its image rather than the iterated-slice equivalence; finite-generator transport follows the proved private argument in Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine."
  },
  "mathlib_searches": [
   {
@@ -141,10 +137,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261012T223423-L-1643086",
-  "kind": "interface",
+  "landing": "20261012T234217-L-2124611",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
