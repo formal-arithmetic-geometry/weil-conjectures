@@ -8570,3 +8570,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionUnitIso (stage 3; reviewer PASS; first push; landing 20261012T163618-L-2786843 (interface); batch 20261012T163610; modules 2; new nodes 1)
 - 16:36 L: merged deliver/R2/Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclicDegree (stage 3; reviewer PASS; first push; landing 20261012T163619-L-2786997 (proof); batch 20261012T163610; modules 1; new nodes 1)
 - 16:36 L: merged deliver/R2/Sheaf.RingTheory.AdjoinRootCRTRootBlockAux (stage 3; reviewer PASS; first push; landing 20261012T163619-L-2787123 (proof); batch 20261012T163610; modules 1; new nodes 0)
+- 16:36 L: merged deliver/R2/Sheaf.RingTheory.PopescuLiftOnce (stage 3; reviewer PASS; first push; landing 20261012T163619-L-2787224 (interface); batch 20261012T163610; modules 2; new nodes 1)
