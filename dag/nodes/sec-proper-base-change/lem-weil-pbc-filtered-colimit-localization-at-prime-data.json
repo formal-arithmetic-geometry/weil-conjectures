@@ -22,16 +22,31 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The fraction construction and filteredness argument establishes the localization colimit data.",
+   "text": "Set q_i = comap (colimit.ι F i) p. The colimit cocone identity gives q_i = comap (F.map a) q_j. Define D on objects by Localization.AtPrime q_i and on arrows by Localization.localRingHom. IsLocalization.ringHom_ext reduces the functor laws to the corresponding laws for F.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Define κ_i : D_i → Localization.AtPrime p by Localization.localRingHom applied to colimit.ι F i. The localRingHom_to_map identity proves the required algebraMap compatibility; ringHom_ext and colimit.w prove naturality, producing the stated cocone c.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Given a cocone s over D, compose its legs with the stage algebraMaps to obtain a cocone U(s) over F. Let f_s = colimit.desc F U(s). For y outside p, Types.jointly_surjective_of_isColimit, applied after isColimitOfPreserves (forget CommRingCat), supplies x in some F_i with ι_i(x)=y. Then x is outside q_i, so IsLocalization.map_units and its image under s_i show f_s(y) is a unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define the induced map from Localization.AtPrime p to s.pt by IsLocalization.lift of f_s with the preceding unit proof. Its factorization equations follow by ringHom_ext at each q_i, localRingHom_to_map, lift_eq, and colimit.ι_desc. For uniqueness first restrict any competing map to colimit F; colimit.hom_ext and the given cocone equations identify this restriction with f_s. Then ringHom_ext at p identifies the competing localization map with the constructed lift. These data form IsColimit c.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "worker",
+  "by": "D2 stage 3 worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 037D fraction construction"
+  "place": "Tag 037D localization-colimit assertion; universal-property proof using Mathlib Localization.localRingHom, IsLocalization.lift, IsLocalization.ringHom_ext, and preservation of filtered colimits by forget CommRingCat, written by the worker."
  },
  "mathlib_searches": [
   {
@@ -152,10 +167,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T054001-L-2649085",
-  "kind": "interface",
+  "landing": "20261012T063506-L-3153505",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
