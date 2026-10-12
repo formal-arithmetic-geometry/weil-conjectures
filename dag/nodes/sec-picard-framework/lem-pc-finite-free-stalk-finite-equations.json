@@ -15,29 +15,30 @@
  },
  "proof": [
   {
-   "text": "Restriction preserves zero objects and finite free sheaves. For each index whose source and target are nonzero choose their finite bases on U and form the matrix of f_i minus g_i. Pullback of matrices applies the scheme map to every coefficient (Scheme.Modules.freeMatrix_pullback). The stalk scheme map has its section map equal to the germ map, through the global sections isomorphism of Spec O_(Y,y), by Scheme.fromSpecStalk_appTop and the open stalk isomorphism. Thus the assumed equality of pullbacks makes every matrix coefficient have zero germ.",
-   "uses": [
-    "def-weil-pbc-free-module",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false
+   "text": "Induct over a finite set of indices. For the empty family use U. For the insertion of i let V be the neighbourhood supplied by the induction hypothesis. If A_i or B_i is zero, restriction preserves zero objects (Functor.map_isZero) and maps out of or into a zero object are unique (IsZero.eq_of_src, IsZero.eq_of_tgt); retain V.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For each of the finitely many coefficients apply the germ equality criterion, equivalently RingedSpace.exists_res_eq_zero_of_germ_eq_zero, and intersect the resulting neighbourhoods inside U. On V all coefficient restrictions vanish. The restricted matrices are therefore zero and the restricted maps agree, by the universal property of the free sheaf and its coordinate projections. Zero source or zero target indices require no equations. For an empty index type or no coefficients choose V=U.",
+   "text": "In the remaining case A_i has a finite free isomorphism. Map it by restrictFunctor U.ι to obtain the source isomorphism required by lem-pc-finite-free-stalk-map-eq-shrink. Apply that lemma to f_i,g_i on U with additional neighbourhood V. This yields W≤V containing y, with their direct restrictions from U equal.",
    "uses": [
-    "def-weil-pbc-free-module"
+    "lem-pc-finite-free-stalk-map-eq-shrink"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Previously obtained equalities on V persist on W. The natural isomorphism restrictFunctorCongr composed with restrictFunctorComp identifies restriction along homOfLE (W≤U) with the composition of the two restrictions; apply its naturality and cancel its isomorphism component. Applying the restriction functor to the old equality gives the new one. This closes the induction; use the full finite set of indices.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "def-weil-pbc-free-module"
+  "lem-pc-finite-free-stalk-map-eq-shrink"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "lem-pc-finite-free-stalk-degreewise-shrink, steps 1 and 2: finite matrices of commutativity defects, zero-germ shrinking; detailed expansion of the already recorded finite matrix argument"
+  "place": "Finite germ equality argument, using the existing finite-free-source local map equality lemma and finite-set induction. Formalized by C2; no matrix construction is required."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -113,10 +114,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T212723-L-1131657",
-  "kind": "interface",
+  "landing": "20261012T215153-L-1303544",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
