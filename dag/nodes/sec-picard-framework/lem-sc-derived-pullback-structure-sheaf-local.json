@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-derived-pullback-structure-sheaf-local",
+ "kind": "statement",
+ "title": "Derived pullback of the structure sheaf with local derived categories",
+ "statement": "For any scheme morphism g:T→S [def-pc-scheme], and specified derived-category localizations [def-pc-derived-category] only for S and T, Lg* [def-pc-derived-pullback] of O_S in degree zero is isomorphic to O_T in degree zero. No flatness or Noetherian hypothesis on the morphism is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YD and 06YJ; tensor unit identification in Modules, Tag 0096"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "proof": [
+  {
+   "text": "The single complex O_S[0] is bounded above by zero. Tensoring with its sole nonzero term is the identity, so it is flat; all other terms are zero and flat. Apply flatComplexDerivedPullback and the single-complex localization comparisons.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The object equalities specifying the termwise tensor-pullback functor, followed by tensorPullbackObjUnitToUnit_isIso, identify its value on O_S with O_T. Apply the degree-zero single functor to this isomorphism and compose.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q3",
+  "date": "2026-10-13",
+  "note": "Second reader: explicit reduction following the cited Stacks argument and the existing declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedPullback.*structureSheaf|proper_flat_rightAdjoint_baseChange|nonempty_derivedPullback.*iso",
+   "results": "No hits in Mathlib. Separate rg search found flatComplexDerivedPullback, the private flat-single helper, and proper_flat_rightAdjoint_baseChange; none supplies the local QCoh comparison.",
+   "date": "2026-10-13",
+   "verdict": "tool lemmas only; no matching public local theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty (_ ≅ _), \"baseChange\"",
+   "results": "No hits in Mathlib. Separate rg search found flatComplexDerivedPullback, the private flat-single helper, and proper_flat_rightAdjoint_baseChange; none supplies the local QCoh comparison.",
+   "date": "2026-10-13",
+   "verdict": "tool lemmas only; no matching public local theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image of the rank one free structure sheaf complex is the structure sheaf complex",
+   "results": "SheafOfModules.ιFree_mapFree_inv; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv; AlgebraicGeometry.structurePresheafCompForget; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget; ModuleCat.tildeInModuleCat; ModuleCat.tilde; AlgebraicGeometry.StructureSheaf.isIso_to_global",
+   "date": "2026-10-13",
+   "verdict": "tool lemmas only; no matching public local theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization equivalences transport derived exceptional inverse image base change on a cartesian square",
+   "results": "CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isLocalization; CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'; CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.of_isLocalization_of_isLocalization; CategoryTheory.Localization.compEquivalenceFromModelInverseIso; CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.guitartExact'; CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence; CategoryTheory.LocalizerMorphism.isLeftDerivabilityStructure_iff; CategoryTheory.LocalizerMorphism.Derives.isIso",
+   "date": "2026-10-13",
+   "verdict": "tool lemmas only; no matching public local theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjoint\", \"Uniq\"",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_refl; CategoryTheory.Adjunction.rightAdjointUniq_inv_app; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-13",
+   "verdict": "tool lemmas only; no matching public local theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The left derived pullback functor of modules on schemes sends the degree zero structure sheaf to the structure sheaf; proper flat exceptional inverse image commutes with base change.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalBaseChangeLocalDerivedCategories",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-diagonal-basechange-local-derived-categories",
+   "place": "structure-sheaf identification",
+   "via": [
+    "lem-sc-diagonal-basechange-local-derived-categories"
+   ]
+  },
+  "same_as": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackStructureSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackStructureSheaf.lean",
+  "declaration": "AlgebraicGeometry.nonempty_derivedPullback_structureSheaf_iso",
+  "statement": "theorem nonempty_derivedPullback_structureSheaf_iso\n    {T S : Scheme.{u}} (g : T ⟶ S)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] :\n    Nonempty ((derivedPullback g).obj\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj\n          (SheafOfModules.unit (moduleRings S.toRingedSpace))) ≅\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).obj\n          (SheafOfModules.unit (moduleRings T.toRingedSpace)))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T173856-L-3303701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T173856-L-3303701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

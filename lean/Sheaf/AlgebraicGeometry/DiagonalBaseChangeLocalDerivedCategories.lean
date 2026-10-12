@@ -12,8 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Adjunction.Basic
-import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChange
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.AlgebraicGeometry.SelfProductRightAdjointBaseChangeLocal
+import Sheaf.AlgebraicGeometry.DerivedPullbackStructureSheaf
 
 /-!
 # Base change of a right adjoint on the self-product
@@ -100,6 +100,18 @@ theorem diagonal_baseChange_upperShriek_local
             ⟨(DerivedCategory.singleFunctor
               (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj
               (SheafOfModules.unit (moduleRings S.toRingedSpace)), hOS⟩)) := by
-  sorry
+  obtain ⟨e⟩ := nonempty_derivedPullback_structureSheaf_iso f
+  let OS : schemeDerivedQCohCategory S := ⟨_, hOS⟩
+  let OX : schemeDerivedQCohCategory X := ⟨_, hOX⟩
+  have hLfOS : schemeDerivedQCohProperty X ((derivedPullback f).obj OS.obj) := by
+    intro n
+    exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).mapIso e.symm) (hOX n)
+  let eQC : (⟨(derivedPullback f).obj OS.obj, hLfOS⟩ : schemeDerivedQCohCategory X) ≅ OX :=
+    (schemeDerivedQCohProperty X).isoMk e
+  obtain ⟨ebase⟩ := proper_flat_selfProduct_rightAdjoint_baseChange_local
+    f hRf hRpr₂ hLpr₁ a b adjA adjB OS hLfOS
+  exact ⟨(b.mapIso eQC).symm ≪≫ ebase⟩
 
 end AlgebraicGeometry

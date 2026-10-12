@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-self-product-right-adjoint-base-change-local",
+ "kind": "statement",
+ "title": "Self-product right-adjoint base change at a complex with local derived categories",
+ "statement": "Let f:X→S be proper, flat and locally of finite presentation between Noetherian schemes [def-pc-scheme, def-weil-proper-morphism, def-weil-flat-morphism]. Specify derived-category localizations [def-pc-derived-category] only for S, X and P=X×_S X [def-pc-base-change]. Let hRf, hRpr2 and hLpr1 assert preservation of quasi-coherent cohomology by the restricted derived direct images Rf*, Rpr2* [def-pc-derived-direct-image] and derived pullback Lpr1* [def-pc-derived-pullback]. Let a and b be chosen right adjoints to these restricted direct images. For any K in D_QCoh(S) whose derived pullback Lf*K has quasi-coherent cohomology, b(Lf*K) is isomorphic to Lpr1*a(K) in D_QCoh(P). The membership witness for Lf*K only types this expression.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AAB; specialization in Tag 0E2P"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "proof": [
+  {
+   "text": "Use the localization universal property to compare the specified localizations with standard choices for all schemes. The left- and right-derived universal properties compare derived pullback and direct image, and the cohomology comparisons restrict these equivalences to D_QCoh. Transport the adjunctions and use right-adjoint uniqueness. Apply proper_flat_rightAdjoint_baseChange with g=f, evaluate at K, and invert the resulting isomorphism; transport it back. No identification of Lf*K with a structure sheaf is involved.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-basechange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proper-flat-right-adjoint-basechange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q3",
+  "date": "2026-10-13",
+  "note": "Second reader: explicit reduction following the cited Stacks argument and the existing declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedPullback.*structureSheaf|proper_flat_rightAdjoint_baseChange|nonempty_derivedPullback.*iso",
+   "results": "No hits in Mathlib. Separate rg search found flatComplexDerivedPullback, the private flat-single helper, and proper_flat_rightAdjoint_baseChange; none supplies the local QCoh comparison.",
+   "date": "2026-10-13",
+   "verdict": "tool lemmas only; no matching public local theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty (_ ≅ _), \"baseChange\"",
+   "results": "No hits in Mathlib. Separate rg search found flatComplexDerivedPullback, the private flat-single helper, and proper_flat_rightAdjoint_baseChange; none supplies the local QCoh comparison.",
+   "date": "2026-10-13",
+   "verdict": "tool lemmas only; no matching public local theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image of the rank one free structure sheaf complex is the structure sheaf complex",
+   "results": "SheafOfModules.ιFree_mapFree_inv; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv; AlgebraicGeometry.structurePresheafCompForget; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget; ModuleCat.tildeInModuleCat; ModuleCat.tilde; AlgebraicGeometry.StructureSheaf.isIso_to_global",
+   "date": "2026-10-13",
+   "verdict": "tool lemmas only; no matching public local theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization equivalences transport derived exceptional inverse image base change on a cartesian square",
+   "results": "CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.isLocalization; CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.mk'; CategoryTheory.LocalizerMorphism.IsLocalizedEquivalence.of_isLocalization_of_isLocalization; CategoryTheory.Localization.compEquivalenceFromModelInverseIso; CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.guitartExact'; CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence; CategoryTheory.LocalizerMorphism.isLeftDerivabilityStructure_iff; CategoryTheory.LocalizerMorphism.Derives.isIso",
+   "date": "2026-10-13",
+   "verdict": "tool lemmas only; no matching public local theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjoint\", \"Uniq\"",
+   "results": "CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_refl; CategoryTheory.Adjunction.rightAdjointUniq_inv_app; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-13",
+   "verdict": "tool lemmas only; no matching public local theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The left derived pullback functor of modules on schemes sends the degree zero structure sheaf to the structure sheaf; proper flat exceptional inverse image commutes with base change.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalBaseChangeLocalDerivedCategories",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-diagonal-basechange-local-derived-categories",
+   "place": "localization transport and base change at K",
+   "via": [
+    "lem-sc-diagonal-basechange-local-derived-categories"
+   ]
+  },
+  "same_as": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SelfProductRightAdjointBaseChangeLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfProductRightAdjointBaseChangeLocal.lean",
+  "declaration": "AlgebraicGeometry.proper_flat_selfProduct_rightAdjoint_baseChange_local",
+  "statement": "theorem proper_flat_selfProduct_rightAdjoint_baseChange_local\n    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Limits.pullback f f).toRingedSpace))]\n    (hRf : ∀ E : schemeDerivedQCohCategory X,\n      schemeDerivedQCohProperty S ((schemeDerivedDirectImage f).obj E.obj))\n    (hRpr₂ : ∀ E : schemeDerivedQCohCategory (Limits.pullback f f),\n      schemeDerivedQCohProperty X\n        ((schemeDerivedDirectImage (pullback.snd f f)).obj E.obj))\n    (hLpr₁ : ∀ E : schemeDerivedQCohCategory X,\n      schemeDerivedQCohProperty (Limits.pullback f f)\n        ((derivedPullback (pullback.fst f f)).obj E.obj))\n    (a : schemeDerivedQCohCategory S ⥤ schemeDerivedQCohCategory X)\n    (b : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory (Limits.pullback f f))\n    (adjA : (schemeDerivedQCohProperty S).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) hRf ⊣ a)\n    (adjB : (schemeDerivedQCohProperty X).lift\n      ((schemeDerivedQCohProperty (Limits.pullback f f)).ι ⋙\n        schemeDerivedDirectImage (pullback.snd f f)) hRpr₂ ⊣ b)\n    (K : schemeDerivedQCohCategory S)\n    (hLfK : schemeDerivedQCohProperty X ((derivedPullback f).obj K.obj)) :\n    Nonempty\n      (b.obj ⟨(derivedPullback f).obj K.obj, hLfK⟩ ≅\n        ((schemeDerivedQCohProperty (Limits.pullback f f)).lift\n          ((schemeDerivedQCohProperty X).ι ⋙ derivedPullback (pullback.fst f f))\n          hLpr₁).obj (a.obj K))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T173856-L-3303701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T173856-L-3303701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
