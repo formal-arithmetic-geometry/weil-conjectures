@@ -58,6 +58,22 @@ theorem isIso_structureSheafMap_of_proper_flat_geometricallyReduced_connected_fi
         IsIso ((Classical.choose
           (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app
             (SheafOfModules.unit T.ringCatSheaf)) := by
-  sorry
+  apply isIso_structureSheafMap_of_proper_flat_fiberwise f
+  intro s
+  let k : Type u := S.residueField s
+  let F := f.fiberToSpecResidueField s
+  let : (Scheme.Hom.fiber f s).Over (Spec (.of k)) :=
+    f.fiberOverSpecResidueField s
+  let : GeometricallyReduced ((Scheme.Hom.fiber f s) ↘ Spec (.of k)) := hred s
+  have : IsProper ((Scheme.Hom.fiber f s) ↘ Spec (.of k)) := by
+    change IsProper (pullback.snd f (S.fromSpecResidueField s))
+    exact MorphismProperty.pullback_snd _ _ inferInstance
+  have hbij : Function.Bijective (Scheme.globalSectionsRingHom k
+      (X := Scheme.Hom.fiber f s)) :=
+    (Scheme.globalSectionsRingHom_bijective_iff_geometricallyConnected k
+      (Scheme.Hom.fiber f s)).2 (hconn s)
+  have : IsIso ((Scheme.ΓSpecIso (.of k)).inv ≫ F.appTop) :=
+    (CategoryTheory.ConcreteCategory.isIso_iff_bijective _).2 hbij
+  exact IsIso.of_isIso_comp_left (Scheme.ΓSpecIso (.of k)).inv F.appTop
 
 end AlgebraicGeometry
