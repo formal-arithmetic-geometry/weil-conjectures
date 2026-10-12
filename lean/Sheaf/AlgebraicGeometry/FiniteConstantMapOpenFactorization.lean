@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Mathlib.RingTheory.Finiteness.Cardinality
+import Sheaf.AlgebraicGeometry.FiniteFreeConstantMapOpenFactorization
 
 /-! # Extending a stalk factorization of a finite constant map
 
@@ -57,6 +59,23 @@ theorem exists_open_factorization_of_finite_constant_map
           ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N) ⟶
           (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj F),
       ψ ≫ (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).map φ =
-        (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).map α := by sorry
+        (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).map α := by
+  classical
+  obtain ⟨n, q, hq⟩ := Module.Finite.exists_fin' Λ N
+  let C := constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  let Q := ModuleCat.of Λ (Fin n → Λ)
+  let q' : Q ⟶ N := ModuleCat.ofHom q
+  have : Epi q' := (ModuleCat.epi_iff_surjective q').mpr hq
+  let S := (pointSmallEtale (X.algClosurePoint x)).sheafFiber (A := ModuleCat.{u + 1} Λ)
+  obtain ⟨U, hU, β, hβ⟩ := exists_open_factorization_of_finite_free_constant_map
+    φ n (C.map q' ≫ α) x (S.map (C.map q') ≫ l) (by
+      rw [Category.assoc, hl, S.map_comp])
+  let P := Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι
+  have : Epi (C.map q') := by infer_instance
+  have : Epi (P.map (C.map q')) := by infer_instance
+  have : StrongEpi (P.map (C.map q')) := strongEpi_of_epi _
+  let sq : CommSq β (P.map (C.map q')) (P.map φ) (P.map α) :=
+    ⟨by simpa only [Functor.map_comp] using hβ⟩
+  exact ⟨U, hU, sq.lift, sq.fac_right⟩
 
 end AlgebraicGeometry.Scheme

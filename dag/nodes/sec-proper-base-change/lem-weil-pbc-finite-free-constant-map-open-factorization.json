@@ -1,0 +1,161 @@
+{
+ "id": "lem-weil-pbc-finite-free-constant-map-open-factorization",
+ "kind": "statement",
+ "title": "Open extension of a finite free constant-map stalk factorization",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions], $\\Lambda$ a commutative ring, $F,G$ module sheaves on its small etale site [def-weil-pbc-etale-site], and $\\varphi:F\\to G$ a monomorphism. For $n\\in\\mathbb N$, let $Q=\\Lambda^{\\operatorname{Fin}(n)}$ and let $\\alpha:Q_X\\to G$ be a map from the constant sheaf [def-constructible-constant]. For $x\\in X$, let $s_x$ be the algebraic-closure geometric point. If $l:(Q_X)_{s_x}\\to F_{s_x}$ satisfies $l\\varphi_{s_x}=\\alpha_{s_x}$, then there is a Zariski open $U$ containing $x$ and $\\beta:Q_X|_U\\to F|_U$ with $\\beta(\\varphi|_U)=\\alpha|_U$. Stalks are those of [def-weil-pbc-geometric-stalks]. This statement concerns only the free generators; no descent through module relations is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09BH, Proposition 59.74.1 (3), finite generator lifting and descent paragraph, applied to the standard basis of a finite free module"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-constructible-constant",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "For each standard basis vector of Q, represent its image under l on a pointed etale neighbourhood. Take a common refinement of the finitely many neighbourhoods, then refine again so that the images of the representatives under phi agree with the corresponding sections obtained from alpha. The required equality holds in the stalk, so filtered-colimit equality supplies the refinements.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-constructible-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The etale neighbourhood V has open image U containing x. On V times_U V, the two lifts of each standard basis vector have the same image in G, because that image comes from the global map alpha. Monicity of phi makes the lifts equal. Sheaf descent along the surjective etale cover V to U gives a section of F|_U for every basis vector.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The universal property of the finite free module gives the linear map Q to global sections of F|_U. Use the constant-sheaf/global-sections adjunction and constant pullback comparison to obtain beta. Check the desired equality on the standard basis. For n=0 the source is zero, and the zero map on all of X suffices; for the zero ring the same argument applies. No relation among generators remains to be imposed.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-maps-global-sections",
+    "def-constructible-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constant",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+ ],
+ "proof_origin": {
+  "by": "S2 stage 3",
+  "document": "Stacks Project, with the specialization to a finite free source written by S2",
+  "place": "Tag 09BH, Proposition 59.74.1 (3), finite generator lifting and descent paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite free constant etale sheaf morphism factors on an open neighborhood when it factors through a monomorphism on a geometric stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a finite free constant etale module sheaf which factors through a subsheaf at a geometric stalk factors on a Zariski neighborhood",
+   "results": [
+    "AlgebraicGeometry.exists_lift_of_germInjective",
+    "AlgebraicGeometry.exists_lift_of_germInjective_aux",
+    "ModuleCat.Tilde.exists_const"
+   ],
+   "date": "2026-10-12",
+   "verdict": "These concern structure sheaves or quasi-coherent modules, not arbitrary etale module sheaves. No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite",
+   "results": [
+    "Module.Finite.exists_fin",
+    "Module.Finite.exists_fin'"
+   ],
+   "date": "2026-10-12",
+   "verdict": "A finite free surjection provides the algebraic reduction; it does not supply local lifting of generators."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*factor|factor.*constant; rg finite_constant_map on lean/WeilConjectures and lean/Sheaf",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+    "Sheaf/AlgebraicGeometry/FiniteConstantMapOpenFactorization.lean"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No independent existing theorem supplies this finite-free lifting. ConstantSheafAdj supplies the final adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteConstantMapOpenFactorization",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-eight-curve-devissage",
+   "place": "Proof step 2(b), finite generic generators: the lifting and descent step before killing module relations",
+   "via": [
+    "lem-weil-pbc-finite-constant-map-open-factorization",
+    "lem-weil-pbc-noetherian-constant-subsheaf-generic",
+    "lem-weil-pbc-module-generic-generators",
+    "lem-weil-pbc-module-subobject-generic-neighbourhood",
+    "lem-weil-pbc-module-subobject-generic-constancy",
+    "lem-weil-pbc-constructible-module-subobject-noetherian"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeConstantMapOpenFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeConstantMapOpenFactorization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_open_factorization_of_finite_free_constant_map",
+  "statement": "theorem exists_open_factorization_of_finite_free_constant_map\n    {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]\n    {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}\n    (φ : F ⟶ G) [Mono φ] (n : ℕ)\n    (α : (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n        (ModuleCat.of Λ (Fin n → Λ)) ⟶ G)\n    (x : X)\n    (l : (pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj\n        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n          (ModuleCat.of Λ (Fin n → Λ))) ⟶\n        (pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F)\n    (hl : l ≫ (pointSmallEtale (X.algClosurePoint x)).sheafFiber.map φ =\n      (pointSmallEtale (X.algClosurePoint x)).sheafFiber.map α) :\n    ∃ (U : X.Opens) (_hU : x ∈ U)\n      (ψ : (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj\n          ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n          (ModuleCat.of Λ (Fin n → Λ))) ⟶\n          (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj F),\n      ψ ≫ (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).map φ =\n        (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).map α",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T085334-L-37588",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T085334-L-37588",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
