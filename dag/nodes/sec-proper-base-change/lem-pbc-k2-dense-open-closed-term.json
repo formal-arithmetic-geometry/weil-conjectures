@@ -17,25 +17,46 @@
  ],
  "proof": [
   {
-   "text": "Form the reduced closed complement i:Z→X and the module open-closed short exact sequence. Forget to abelian sheaves, an exact functor. Its first arrow is exactly ε; choose the last object B and last arrow b from this sequence.",
+   "text": "Form the canonical open-closed short complex for U.ι and U.closedComplement. Apply shortExact_openClosedShortComplex, then the proved exact coefficient-forgetting lemma shortExact_map_forget₂. Take B, b and the zero-composite witness from this mapped complex; its first arrow is definitionally the required underlying counit.",
    "uses": [
-    "lem-weil-pbc-open-closed-short-exact",
-    "lem-weil-pbc-extension-by-zero-adjunction"
+    "lem-weil-pbc-open-closed-short-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_dense_irreducible_opens to U. Its finite union V lies in U and has zero-dimensional complement. The underlying map of the closed complement Z into the complement of V is inducing, since its composite with the subtype inclusion is the closed embedding Z→X. Monotonicity of topological Krull dimension for inducing maps therefore gives dim Z≤0. The structural map Z→Spec k is separated and finite type by composition with a closed immersion.",
+   "uses": [
+    "lem-pbc-q1-dense-irreducible-opens",
+    "def-weil-pbc-curve-setting"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let G be the underlying abelian sheaf of i^*F on Z. Coefficient forgetting commutes definitionally with i_*, so B=i_*G. Apply zero_dimensional_etale_cohomology using the algebraic-closure geometric point at each point of Z. Its positive-degree vanishing is stated in derived cohomology; transport it to Sheaf.H by nonempty_sheafH_extDerivedIso. Injectivity of the finite edge map gives Subsingleton(H¹(X,B)).",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "lem-weil-pbc-finite-pushforward-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "Density excludes the generic points of the Noetherian curve. The closed complement is therefore finite and zero-dimensional, with residue fields k. Finite exact direct image and Leray identify cohomology of B with that on Z, which vanishes in positive degrees. After the field extension, finite-exchange base change for the closed immersion identifies the pulled-back B with the corresponding closed term on the finite union of k'-points. Its degree-one cohomology vanishes as well. The degree-zero canonical map is the product of stalk comparisons, and hence bijective. This works for arbitrary module stalks; finiteness of those stalks is not needed. Empty complements give the zero sheaf.",
+   "text": "Form Z′=Z×_X X′ and paste its cartesian square with the given field-extension square. Give Z the curve instance using dim Z≤0. zeroDimensional_baseChange_geometric_points supplies a curve instance on Z′ and dim Z′≤0. As above, zero-dimensional cohomology and the Ext/derived comparison give H¹(Z′,g^*G)=0. The finite edge map gives H¹(X′,i′_*g^*G)=0, and the finite exchange isomorphism identifies this sheaf with ι′^*B. Transport subsingletonness through H¹ of that isomorphism.",
    "uses": [
-    "def-weil-pbc-curve-setting",
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "lem-weil-pbc-cohomology-pullback-derived-unit",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-zero-dimensional-base-change-geometric-points",
     "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "lem-weil-pbc-finite-pushforward-cohomology",
+    "lemma-weil-pbc-finite-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical global-sections pullback for G on the zero-dimensional Z is bijective. Conjugate it by the degree-zero Sheaf.H/global-sections equivalences; cohomologyMap_zero_eq_globalSectionsUpperStarMap identifies the conjugate with cohomologyMap g G 0. To transfer this bijectivity to B=i_*G, use cohomology_edgeMap_baseChange: the g comparison composed with the source finite edge map equals the target finite edge map composed with H⁰ of finite exchange and the ι′ comparison. bijective_edgeMap_baseChange supplies bijectivity of the source edge map and of the composite target edge/exchange. Bijectivity of compositions and cancellation of the latter bijection prove the required canonical ι′ comparison is bijective. Pair this with the actual short exact sequence and both vanishing proofs. Empty complements and empty schemes are included by all the cited statements, with no nonempty-point choice.",
+   "uses": [
     "lem-weil-pbc-zero-dimensional-pullback-global-sections",
-    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "lem-weil-pbc-edge-map-base-change",
     "lemma-weil-pbc-finite-exchange"
    ],
    "elementary": false
@@ -43,22 +64,21 @@
  ],
  "proof_deps": [
   "def-weil-pbc-curve-setting",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-pbc-q1-dense-irreducible-opens",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-edge-map-base-change",
+  "lem-weil-pbc-finite-pushforward-cohomology",
   "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "lem-weil-pbc-zero-dimensional-base-change-geometric-points",
   "lem-weil-pbc-zero-dimensional-cohomology",
   "lem-weil-pbc-zero-dimensional-pullback-global-sections",
-  "lemma-weil-pbc-finite-direct-image-exact",
   "lemma-weil-pbc-finite-exchange"
  ],
  "proof_origin": {
-  "by": "K2 stage 3",
+  "by": "Q1 stage-3 worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJA (lemma-restrict-to-open), proof: the five-term exact sequence and remark (c)"
+  "place": "Tag 0GJA (lemma-restrict-to-open), proof and remark (c); Lean realization using the closed-complement short complex, zero-dimensional cohomology, and canonical finite edge-map base change (2026-10-12). Source read at https://stacks.math.columbia.edu/tag/0GJA because the local literature file is absent."
  },
  "mathlib_searches": [
   {
@@ -150,10 +170,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T063514-L-3156950",
-  "kind": "interface",
+  "landing": "20261012T085320-L-32298",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
