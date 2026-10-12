@@ -6,6 +6,8 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
+import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen
+import Sheaf.AlgebraicGeometry.EtaleSetCartesianUnitEquality
 
 /-! # The agreement open for canonical inverse-image section comparisons
 Source: Stacks Project, Tag 09XM, with inverse-image unit compatibility in
@@ -53,6 +55,66 @@ theorem etaleSetSectionComparison_equal_open
         etaleSetSectionComparison h f k hk G V s =
           etaleSetSectionComparison h f k hk G V t ↔
         (pullback.map V.hom k V.hom f (𝟙 V.left) h (𝟙 R)
-          (by simp) (by simpa using hk.symm)) ⁻¹ᵁ U = ⊤ := by sorry
+          (by simp) (by simpa using hk.symm)) ⁻¹ᵁ U = ⊤ := by
+  classical
+  let F := (Scheme.etaleSetPullback f).obj G
+  let Q := (MorphismProperty.Over.pullback @Etale ⊤ f).obj V
+  obtain ⟨U, hU, _⟩ := existsUnique_etaleSections_equal_open S F Q s t
+  refine ⟨U, ?_⟩
+  intro T h k hk
+  subst k
+  let A := (MorphismProperty.Over.pullback @Etale ⊤ (h ≫ f)).obj V
+  let e : A ≅ (MorphismProperty.Over.pullback @Etale ⊤ h).obj Q :=
+    (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) h f).app V
+  let p : A.left ⟶ Q.left :=
+    pullback.map V.hom (h ≫ f) V.hom f (𝟙 V.left) h (𝟙 R)
+      (by simp) (by simp)
+  have hp : e.hom.left ≫ pullback.fst Q.hom h = p := by
+    apply pullback.hom_ext
+    · simp only [MorphismProperty.Over.pullback, Functor.id_obj, Functor.const_obj_obj,
+        Iso.app_hom, MorphismProperty.Over.pullbackComp_hom_app_left, pullback.map_id,
+        Category.id_comp, Category.assoc, limit.lift_π, PullbackCone.mk_π_app,
+        Category.comp_id, A, Q, e, p]
+      exact pullbackLeftPullbackSndIso_inv_fst V.hom f h
+    · simp only [MorphismProperty.Over.pullback, Functor.id_obj, Functor.const_obj_obj,
+        Iso.app_hom, MorphismProperty.Over.pullbackComp_hom_app_left, pullback.map_id,
+        Category.id_comp, Category.assoc, limit.lift_π, PullbackCone.mk_π_app, A, Q, e, p]
+      exact pullbackLeftPullbackSndIso_inv_fst_snd V.hom f h
+  let η := ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.pullback @Etale ⊤ h) (Type (u + 1))
+    (S.smallGrothendieckTopology @Etale)
+    (T.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op Q)
+  let c := Classical.choose etaleSetInverseImageCompositionUnits.2.2 R S T f h
+  let γ := (c.hom.app G).hom.app
+    (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj Q))
+  let H := (Scheme.etaleSetPullback (h ≫ f)).obj G
+  let τ := H.obj.map e.hom.op
+  have hγ : Function.Injective γ := CategoryTheory.injective_of_mono γ
+  have hτ : Function.Injective τ := CategoryTheory.injective_of_mono τ
+  have hcomparison :
+      etaleSetSectionComparison h f (h ≫ f) rfl G V s =
+          etaleSetSectionComparison h f (h ≫ f) rfl G V t ↔ η s = η t := by
+    change τ (γ (η s)) = τ (γ (η t)) ↔ η s = η t
+    exact ⟨fun heq ↦ hγ (hτ heq), fun heq ↦ congrArg (fun x ↦ τ (γ x)) heq⟩
+  have hfactor := hU A.left p
+  have hunit := etaleSetCartesianUnit_eq_iff h F Q A e p hp s t
+  have hopen : (∃ b : A.left ⟶ U.toScheme, b ≫ U.ι = p) ↔ p ⁻¹ᵁ U = ⊤ := by
+    constructor
+    · rintro ⟨b, hb⟩
+      apply top_unique
+      intro x _
+      change p x ∈ U
+      have hx := congrArg (fun a : A.left ⟶ Q.left ↦ a x) hb
+      rw [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply] at hx
+      rw [← hx]
+      exact (b x).property
+    · intro hall
+      refine ⟨IsOpenImmersion.lift U.ι p ?_, IsOpenImmersion.lift_fac _ _ _⟩
+      rw [Scheme.Opens.range_ι]
+      rintro x ⟨y, rfl⟩
+      have hy : y ∈ p ⁻¹ᵁ U := by rw [hall]; trivial
+      exact hy
+  exact hcomparison.trans (hunit.trans (hfactor.symm.trans hopen))
+
 
 end AlgebraicGeometry

@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-sets-cartesian-unit-equality",
+ "kind": "statement",
+ "title": "Equality of unit sections on a cartesian etale object",
+ "statement": "Let $S,T$ be schemes [def-pc-scheme], $h:T\\to S$ a morphism, $F$ a sheaf of sets on the small etale site of $S$ [def-weil-pbc-etale-sheaf-of-sets], $Q\\to S$ and $A\\to T$ etale objects [def-weil-pbc-etale-site]. Let $e:A\\xrightarrow{\\sim}Q\\times_ST$ be an isomorphism over $T$ and $p:A\\to Q$ its first projection [def-pc-fibre-product]. For $s,t\\in F(Q)$, their images under the inverse-image unit for $h$ agree on $Q\\times_ST$ if and only if their arbitrary restrictions along $p$ agree on the identity object of $A$. Here arbitrary restriction means the unit for $p$ followed by $Q\\to S$, then restriction along $(p,\\mathrm{id}_A)$ to the identity object [lem-weil-pbc-sets-etale-inverse-image-composition-units].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites.tex",
+  "place": "Tag 03S2 (section-extension-by-zero), paragraph after Definition 03S3; Tag 00XZ (section-localize); Tags 03CB (lemma-composition-morphisms-sites) and 03CC (definition-composition-morphisms-sites), composition of inverse images and units."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof": [
+  {
+   "text": "Write v=A.hom and B=Q times_S T. The hypothesis on e and p, together with e being a morphism over T, gives p followed by Q.hom = v followed by h. Transport the arbitrary restriction formula along this equality by substituting the composite morphism; this avoids rewriting dependent site instances.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let E identify the pullback of Q along v followed by h with the iterated pullback along h and v, let d=(p,id), and put dprime=d followed by E.hom. The two pullback projections show that composition of dprime with the localization counit is e.hom after the identity-object isomorphism. Use pullback.hom_ext, the two pullbackLeftPullbackSndIso inverse projection formulas and the hypothesis on p.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The chosen composition isomorphism c for h and v satisfies the composition unit equation. Its naturality for dprime identifies the arbitrary restriction along p with c, evaluated at the identity object of A.left, applied to the restriction of the successive h- and v-units along dprime. Cancellation of E.hom followed by E.inv is the required functor-map calculation.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the etale inverse-image/restriction isomorphism rho for v. Its unit equation at B and naturality for dprime identify the preceding restriction, after rho, with the h-unit at Q followed by F_h restricted along the identity-object isomorphism and e. All three postcomposition maps (c inverse, rho and restriction along these isomorphisms) are isomorphisms in Type, hence injective. Apply this equality to s and t and cancel these maps to obtain the iff.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "worker T3 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites.tex",
+  "place": "Tags 03S2, 00XZ, 03CB and 03CC; explicit Lean proof of the two paths around the cartesian square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of an etale sheaf along an etale morphism is restriction and unit compatible with composition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale sheaf equality after the base change unit is equivalent to equality on the total space of the pulled back etale object",
+   "results": "8 hits: TopCat.Presheaf.pullback_obj_obj_ext_iff, TopCat.Presheaf.pullback_obj_obj_ext, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Functor.IsLocallyFaithful.ext, AlgebraicGeometry.IsEtale.of_comp, StandardEtalePair.hom_ext_iff, KaehlerDifferential.isBaseChange_of_formallyEtale, StandardEtalePresentation.mk.inj",
+   "date": "2026-10-12",
+   "verdict": "No exact match. The hits supply generic ingredients used in the proof, not this cartesian unit equality criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.injective_of_mono",
+   "results": "1 hits: CategoryTheory.injective_of_mono",
+   "date": "2026-10-12",
+   "verdict": "No exact match. The hits supply generic ingredients used in the proof, not this cartesian unit equality criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_leftAdjointUniq_hom_app|pullbackComp_hom_app_left",
+   "results": "3 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean, Mathlib/CategoryTheory/Sites/LeftExact.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match. The hits supply generic ingredients used in the proof, not this cartesian unit equality criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonEqualOpen",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Degree-zero continuity: agreement of section comparisons, step 2 of lem-weil-pbc-sets-section-comparison-equal-open (cartesian-square unit compatibility).",
+   "via": [
+    "lem-weil-pbc-sets-section-comparison-equal-open",
+    "lem-weil-pbc-affine-section-same-stage-equality",
+    "lem-weil-pbc-affine-section-cocone-colimit",
+    "lem-weil-pbc-sets-section-affine-eventual-equality",
+    "lem-weil-pbc-sets-section-eventual-equality",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetCartesianUnitEquality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetCartesianUnitEquality.lean",
+  "declaration": "AlgebraicGeometry.etaleSetCartesianUnit_eq_iff",
+  "statement": "theorem etaleSetCartesianUnit_eq_iff {S T : Scheme.{u}} (h : T ⟶ S) (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (Q : S.Etale) (A : T.Etale) (e : A ≅ (MorphismProperty.Over.pullback @Etale ⊤ h).obj Q) (p : A.left ⟶ Q.left) (hp : e.hom.left ≫ pullback.fst Q.hom h = p) (s t : F.obj.obj (op Q)) : let η := ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ h) (Type (u + 1)) (S.smallGrothendieckTopology @Etale) (T.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op Q) let ηp := ((@Functor.sheafPullbackConstruction.sheafAdjunctionContinuous _ _ _ _ (MorphismProperty.Over.pullback @Etale ⊤ (p ≫ Q.hom)) (Type (u + 1)) _ (S.smallGrothendieckTopology @Etale) (A.left.smallGrothendieckTopology @Etale) (Etale.isContinuous_overPullback (p ≫ Q.hom)) _ _).unit.app F).hom.app (op Q) let δ : Scheme.Etale.mk (𝟙 A.left) ⟶ (MorphismProperty.Over.pullback @Etale ⊤ (p ≫ Q.hom)).obj Q := MorphismProperty.Over.homMk (pullback.lift p (𝟙 A.left) (Category.id_comp (p ≫ Q.hom)).symm) (pullback.lift_snd _ _ _) η s = η t ↔ ((Scheme.etaleSetPullback (p ≫ Q.hom)).obj F).obj.map δ.op (ηp s) = ((Scheme.etaleSetPullback (p ≫ Q.hom)).obj F).obj.map δ.op (ηp t)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T154836-L-2474647",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T154836-L-2474647",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8414,3 +8414,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:48 L: merged deliver/R1/Sheaf.AlgebraicGeometry.HigherDirectImageRawLocalClassVanishing (stage 3; reviewer PASS; first push; landing 20261012T154834-L-2474210 (interface); batch 20261012T154824; modules 2; new nodes 1)
 - 15:48 L: merged deliver/S2/Sheaf.AlgebraicGeometry.FinitePushforwardFiniteStalkModule (stage 3; reviewer PASS; after a return; landing 20261012T154835-L-2474320 (interface); batch 20261012T154824; modules 4; new nodes 3)
 - 15:48 L: merged deliver/S3/Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T154835-L-2474457 (interface); batch 20261012T154824; modules 5; new nodes 4)
+- 15:48 L: merged deliver/T3/Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonEqualOpen (stage 3; reviewer PASS; first push; landing 20261012T154836-L-2474647 (interface); batch 20261012T154824; modules 2; new nodes 1)
