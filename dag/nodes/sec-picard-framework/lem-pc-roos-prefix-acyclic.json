@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "For the explicit tower B=T_s(A), every successor transition is restriction. Extend a tuple by zero to prove surjectivity, including the empty initial prefix. This is roosPrefix_transition_surjective.",
+   "text": "Prove all composite transitions of a tower with surjective successor transitions surjective by induction on the target index. Mathlib Functor.isMittagLeffler_of_surjective then proves its underlying-set tower is Mittag--Leffler. Apply this to the finite-prefix tower using roosPrefix_transition_surjective (extension by zero, including the empty prefix).",
    "uses": [
     "lem-pc-roos-finite-prefix-construction"
    ],
@@ -27,62 +27,53 @@
    }
   },
   {
-   "text": "Fix a surjective tower $B=(B_n,g_n)$. By [lem-pc-tower-injective-embedding], embed it as a subobject $B\\hookrightarrow I$ of a tower whose level groups are injective and whose transition maps $p_n:I_{n+1}\\to I_n$ are split surjections. Put $Q_n=I_n/B_n$; the induced transition $Q_{n+1}\\to Q_n$ is surjective, because a representative in $I_n$ lifts along the split surjection $p_n$ and its class maps to the prescribed class. Thus $0\\to B\\to I\\to Q\\to0$ is a short exact sequence of towers [lem-pc-tower-abelian].",
+   "text": "For each Mittag--Leffler tower B, obtain a monomorphism i:B→I from tower_injective_embedding. The levels of I are injective and its successor transitions split. The theorem injective_of_injective_split_tower makes I injective as a tower. Construct Q as cokernel i and use Mathlib cokernelSequence_exact and Mono i for the short exact sequence S:0→B→I→Q→0. Exactness of evaluation gives termwise short exactness.",
    "uses": [
     "lem-pc-tower-injective-embedding",
-    "lem-pc-tower-abelian"
+    "lem-pc-injective-split-tower-injective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+    "place": "Tag 07KW, Lemma 15.88.1, proof (https://stacks.math.columbia.edu/tag/07KW)"
    }
   },
   {
-   "text": "The tower $I$ is injective in the tower category by [lem-pc-injective-split-tower-injective]. Therefore its higher derived limits vanish directly from the injective-resolution definition [def-sp-left-exact-additive]: resolve $I$ by the identity in degree zero. Since the kernel tower $B$ has surjective transitions, [lem-weil-pbc-tower-limit-exact-surjective-kernels] (b), with $R=\\mathbf Z$, makes $\\varprojlim I\\to\\varprojlim Q$ surjective. The long exact sequence of right derived functors for $0\\to B\\to I\\to Q\\to0$, supplied by [lem-weil-pbc-horseshoe-delta-functor] (2) (its hypotheses hold: the tower category has enough injectives [lem-pc-tower-enough-injectives] and $\\varprojlim$ is additive and left exact [lem-pc-tower-limit-left-exact]), then has $\\varprojlim I\\to\\varprojlim Q\\to R^1\\varprojlim B\\to R^1\\varprojlim I=0$; hence $R^1\\varprojlim B=0$.",
+   "text": "Use the existing horseshoe right-derived delta-functor for lim. For degree one, mittagLeffler_quotient_and_limit_exact (3) makes lim.map S.g epic since B is ML. Mathlib rightDerivedZeroIsoSelf transfers this to R⁰lim.map S.g. Exactness to its right makes the connecting map zero. Exactness at R¹lim B, with R¹lim I=0 by Mathlib isZero_rightDerived_obj_injective_succ, therefore makes R¹lim B zero.",
    "uses": [
-    "lem-pc-injective-split-tower-injective",
-    "def-sp-left-exact-additive",
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
-    "lem-weil-pbc-horseshoe-delta-functor",
-    "lem-pc-tower-enough-injectives",
-    "lem-pc-tower-limit-left-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1 (3), right acyclicity of Mittag--Leffler systems"
-   }
-  },
-  {
-   "text": "For every $q\\ge2$, the same long exact sequence gives an isomorphism $R^q\\varprojlim B\\cong R^{q-1}\\varprojlim Q$, because the adjacent groups $R^q\\varprojlim I$ and $R^{q-1}\\varprojlim I$ vanish. The quotient tower $Q$ is again surjective by Step 1, so induction on $q$ (with the base case $q=1$ proved in Step 2, applied to every surjective tower) gives $R^{q-1}\\varprojlim Q=0$, and therefore $R^q\\varprojlim B=0$.",
-   "uses": [
-    "lem-pc-injective-split-tower-injective",
-    "def-sp-left-exact-additive",
+    "lem-weil-pbc-mittag-leffler-limit-exact",
     "lem-weil-pbc-horseshoe-delta-functor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1 (3), right acyclicity of Mittag--Leffler systems"
+    "place": "Tag 07KW, Lemma 15.88.1, proof (https://stacks.math.columbia.edu/tag/07KW)"
+   }
+  },
+  {
+   "text": "Induct on the positive degree simultaneously for every ML tower B. The split successor transitions of I are surjective, so the first step proves I is ML. By mittagLeffler_quotient_and_limit_exact (2), Q is ML. At degree q+2, exactness of R^(q+1)lim Q→R^(q+2)lim B→R^(q+2)lim I makes the middle term zero: the left term vanishes by induction and the right term by injectivity of I. Apply this induction to the explicit finite-prefix tower.",
+   "uses": [
+    "lem-weil-pbc-mittag-leffler-limit-exact",
+    "lem-weil-pbc-horseshoe-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1, proof (https://stacks.math.columbia.edu/tag/07KW)"
    }
   }
  ],
  "proof_deps": [
-  "def-sp-left-exact-additive",
   "lem-pc-injective-split-tower-injective",
   "lem-pc-roos-finite-prefix-construction",
-  "lem-pc-tower-abelian",
-  "lem-pc-tower-enough-injectives",
   "lem-pc-tower-injective-embedding",
-  "lem-pc-tower-limit-left-exact",
   "lem-weil-pbc-horseshoe-delta-functor",
-  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+  "lem-weil-pbc-mittag-leffler-limit-exact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07KW, Lemma 15.88.1, proof (https://stacks.math.columbia.edu/tag/07KW)"
+  "place": "Tag 07KW (3), injective-tower dimension shifting using Homology Tag 02N1 (2),(3)"
  },
  "mathlib_searches": [
   {
@@ -164,10 +155,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T163617-L-2786473",
-  "kind": "interface",
+  "landing": "20261012T173819-L-3293606",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
