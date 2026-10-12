@@ -1,0 +1,114 @@
+{
+ "kind": "statement",
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardLifting",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-thickening-system-pushforward-lifting",
+   "place": "proof decomposition of the lifting theorem",
+   "via": [
+    "lem-weil-pbc-thickening-system-pushforward-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-thickening-system-pushforward-lifting-assembly",
+ "title": "Assembly of adjacent pushforward identifications",
+ "statement": "Given a coherent thickening system R and termwise isomorphisms e_n : P(R)_n ≅ H_n satisfying the adjacent transition equation, there is an isomorphism of inverse systems P(R) ≅ H.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 088F and equation 0880"
+ },
+ "proof": [
+  {
+   "text": "Define the natural transformation with components e_n using NatTrans.ofOpSequence and the given adjacent compatibility. Define its inverse from e_n.inv; inverse naturality follows by cancelling the monomorphism e_n.hom and using the compatibility equation. The componentwise inverse identities make the two natural transformations inverse.",
+   "uses": [
+    "lem-weil-pbc-thickening-system-pushforward-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-thickening-system-pushforward-functor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib.CategoryTheory.Functor.OfSequence",
+  "place": "NatTrans.ofOpSequence and componentwise Iso identities"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "coherent sheaves on closed thickenings inverse system adic quotient transition",
+   "results": "msearch.py returned Internal Server Error (unavailable).",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "equivalence coherent systems on infinitesimal thickenings and adic inverse systems of coherent sheaves",
+   "results": "localCohomology and equivalences of sheaf sites, not this tower construction.",
+   "date": "2026-10-13",
+   "verdict": "No matching theorem among the returned results."
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.Functor, ℕ",
+   "results": "General categorical declarations; direct source search located Functor.ofOpSequence and NatTrans.ofOpSequence.",
+   "date": "2026-10-13",
+   "verdict": "Sequence constructors suffice for functoriality; they do not assert the geometric adic or lifting conditions."
+  },
+  {
+   "tool": "grep",
+   "query": "thickeningSystems|CoherentThickeningSystem|IsCoherentFormalModule; Functor/OfSequence",
+   "results": "No earlier termwise tower functor, adic verification or object lifting theorem. Mathlib Functor/OfSequence has ofOpSequence and NatTrans.ofOpSequence. Blueprint searches for thickening, adic and inverse system found no same statement.",
+   "date": "2026-10-13",
+   "verdict": "The functor can be constructed from the sequence API; the two geometric substatements need new nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAssembly",
+  "file": "lean/Sheaf/AlgebraicGeometry/ThickeningSystemPushforwardAssembly.lean",
+  "declaration": "AlgebraicGeometry.thickeningSystemPushforward_assemble",
+  "statement": "theorem thickeningSystemPushforward_assemble {X : Scheme.{v}} [IsNoetherian X] {T : ℕ → Scheme.{v}} {i : ∀ n, T n ⟶ T (n + 1)} (j : ∀ n, T n ⟶ X) (hi : ∀ n, i n ≫ j (n + 1) = j n) (ai : ∀ n, Scheme.Modules.tensorPullback (i n) ⊣ Scheme.Modules.pushforward (i n)) (J : X.IdealSheafData) (R : CoherentThickeningSystem T i) (H : CoherentFormalModule X J) (e : ∀ n, ((thickeningSystemPushforward j hi ai).obj R).obj (op n) ≅ H.obj.obj (op n)) (he : ∀ n, ((thickeningSystemPushforward j hi ai).obj R).map (homOfLE (Nat.le_succ n)).op ≫ (e n).hom = (e (n + 1)).hom ≫ H.obj.map (homOfLE (Nat.le_succ n)).op) : Nonempty ((thickeningSystemPushforward j hi ai).obj R ≅ H.obj)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-coherent-thickening-system",
+  "lem-weil-pbc-thickening-system-pushforward-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T223420-L-1642283",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T223420-L-1642283",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
