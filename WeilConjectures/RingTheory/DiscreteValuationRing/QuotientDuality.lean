@@ -214,7 +214,11 @@ omit [IsDiscreteValuationRing R] in
 /-- Blueprint `lem-weil-coefficient-frobenius`, clause (2): ordinary evaluation is not an
 isomorphism for every finite `𝒪`-module: `𝒪 ⧸ ϖ` is nonzero while its double dual vanishes.
 Derived evaluation is an isomorphism for every perfect complex
-(`DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`, clause (3)). -/
+(`CategoryTheory.MonoidalClosed.isIso_toIhomIhomUnit`, clause (3)).
+
+Blueprint `rem-weil-biduality-coefficients`: computing two ordinary duals over the
+non-self-injective ring `𝒪` does not compute two derived duals; the point case of Verdier
+biduality uses perfect derived biduality instead. -/
 theorem not_isReflexive_quotient : ¬ IsReflexive R (R ⧸ Ideal.span {ϖ}) := by
   intro h
   have hinj := h.bijective_dual_eval'.1
