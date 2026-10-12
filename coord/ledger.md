@@ -5828,3 +5828,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:08 L: merged deliver/K1/Sheaf.AlgebraicGeometry.GlobalSectionsStalkComparison (stage 3; reviewer PASS; first push; landing 20261012T020819-L-987360 (proof); modules 1; new nodes 0)
 - 02:10 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ConstantPullbackIdentityCoherence (stage 3; reviewer PASS; first push; landing 20261012T021015-L-995891 (proof); modules 1; new nodes 0)
 - 02:12 L: returned deliver/C1/WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (reviewer RETURN: (reviewer X-2722c, head 2722cdb69) the reviewer passed it, but the landing failed: NOT MERGED WeilConjectures.AlgebraicG)
+- 02:12 L: returned deliver/C1/Sheaf.AlgebraicGeometry.InjectiveEtaleModuleCechH1 (reviewer RETURN: (reviewer X-9e2c5, head 9e2c52bc0) C4: In dag/nodes/sec-proper-base-change/lem-weil-pbc-injective-etale-constant-ring-mo)
