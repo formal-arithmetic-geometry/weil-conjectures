@@ -8,15 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
-import Sheaf.CategoryTheory.ColimitSiteSections
-import Mathlib.CategoryTheory.Limits.Connected
-import Mathlib.CategoryTheory.Sites.Equivalence
+import Sheaf.AlgebraicGeometry.EtaleAffineSectionColimit
+import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.Types.Filtered
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
 
 /-! # Eventual equality on an affine étale object
 Source: Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YN.
@@ -68,6 +62,14 @@ theorem etaleSetSectionAffineEventualEquality
             (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) a.w)) G W₀) s =
         (etaleSetSectionComparison (D.map b.left) (D.map k.hom) (D.map l.hom)
           ((D.map_comp b.left k.hom).symm.trans
-            (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) b.w)) G W₀) t := by sorry
+            (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) b.w)) G W₀) t := by
+  classical
+  intro hst
+  let F := etaleStageSectionDiagram D c i₀ G W₀
+  let C := etaleStageSectionCocone D c i₀ G W₀
+  obtain ⟨hC⟩ := etaleStageSectionCocone_isColimit D c hc i₀ G W₀
+  have he : C.ι.app (op j) s = C.ι.app (op k) t := hst
+  obtain ⟨l, a, b, hab⟩ := (Types.FilteredColimit.isColimit_eq_iff F hC).mp he
+  exact ⟨l.unop, a.unop, b.unop, hab⟩
 
 end AlgebraicGeometry

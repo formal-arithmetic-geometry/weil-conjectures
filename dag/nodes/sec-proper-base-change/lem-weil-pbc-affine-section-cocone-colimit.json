@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-affine-section-cocone-colimit",
+ "kind": "statement",
+ "title": "Affine etale section cocone is a colimit",
+ "statement": "Let I be a nonempty directed preorder, D : I^op → Scheme a diagram of qcqs schemes with affine transitions, c a limit cone, i₀ a stage, G a sheaf of sets on D(i₀), and W₀ an affine etale object over D(i₀) with quasi-compact and quasi-separated structure map. The canonical cocone of stage section sets [def-weil-pbc-affine-section-cocone] is a colimit cocone in Type (u+1). This asserts the universal property for all compatible maps out of the entire section diagram, not merely eventual equality of a specified pair.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0EYL, 09YN and 09YQ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-affine-section-cocone",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the directed upper tail over i₀. It is nonempty and cofinal, and the restricted cone is still limiting. Limit projections are affine. Apply the affine etale site colimit presentation of Tag 0EYL, including its strictification and compatibility with base changes.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-etale-site-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the full-site sheaves to the affine sites via the restriction equivalences. The inverse-image comparison preserves adjunction units and composition, so the section diagram and its cone legs become exactly the specified canonical maps. Pulling the inverse images of G to the limit yields a system isomorphic to the constant system on the limit inverse image of G, using the unit-compatible composition isomorphisms. This nonempty filtered category is connected, hence the constant system has this sheaf as colimit.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+    "lem-weil-pbc-site-equivalence-sheaf-transport",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-weil-pbc-sets-section-comparison-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the varying-site section theorem of Tag 09YN on the base changes of W₀ in the affine site. It identifies the colimit of the stage section sets with the sections of the sheaf colimit. Transport its universal property and legs back through the full/affine equivalences. The unit equations identify these legs with the constructed section cocone, proving its IsColimit property. The existing fixed-site ColimitSiteSections theorem supplies only the section-evaluation part; the varying-site identifications still require formalization.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-colimit-of-sites-sections",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+  "lem-weil-pbc-sets-section-comparison-laws",
+  "lem-weil-pbc-site-equivalence-sheaf-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09YQ and 0EYL; Sites Tag 09YN; concrete functor and cocone formulation by M3. Source read at https://stacks.math.columbia.edu/tag/09YN and /tag/0EYL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equality of sections of inverse image etale sheaves on an inverse limit is detected at a finite stage",
+   "results": "Returned exists_app_map_eq_map_of_isLimit and structure-sheaf global section continuity. These concern the structure sheaf, not arbitrary set-valued etale inverse images. No exact match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of an etale inverse image sheaf on a limit form a filtered colimit of stage sections",
+   "results": "Unavailable: service unavailable: Internal Server Error. No verdict from this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.FilteredColimit.isColimit_eq_iff",
+   "results": "Found the generic equality criterion for a specified colimit cocone. It applies after proving the geometric cocone colimit property, but does not prove that property.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*section.*colimit|Section.*Colimit; etaleSetSectionAffineEventualEquality in lean/Sheaf and lean/WeilConjectures",
+   "results": "No existing canonical stage-section diagram or colimit theorem. ColimitSiteSections states evaluation commutes with filtered colimits of sheaves on one fixed site, rather than the varying-site section comparison needed here. ComparisonLaws supplies the concrete functor and cocone equations.",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality",
+  "date": "2026-10-12",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sets-section-affine-eventual-equality",
+   "place": "affine section colimit reduction",
+   "via": [
+    "lem-weil-pbc-sets-section-affine-eventual-equality"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineSectionColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineSectionColimit.lean",
+  "declaration": "AlgebraicGeometry.etaleStageSectionCocone_isColimit",
+  "statement": "theorem etaleStageSectionCocone_isColimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1))) (W₀ : (D.obj (op i₀)).Etale) [QuasiCompact W₀.hom] [QuasiSeparated W₀.hom] [IsAffine W₀.left] : Nonempty (IsColimit (etaleStageSectionCocone D c i₀ G W₀))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T095914-L-321063",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T095914-L-321063",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
