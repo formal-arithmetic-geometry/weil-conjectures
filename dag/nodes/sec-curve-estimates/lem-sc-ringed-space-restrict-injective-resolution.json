@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-derived-open-restriction-adjunction-exact], the restriction functor $j^{-1}:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Mod}(\\mathcal O_U)$ is exact. Applying this functor termwise to the augmented exact complex $0\\to F\\to I^0\\to I^1\\to\\cdots$ therefore gives an exact augmented complex $0\\to F|_U\\to I^0|_U\\to I^1|_U\\to\\cdots$.",
+   "text": "By [lem-sc-derived-open-restriction-adjunction-exact], restriction R preserves finite limits and finite colimits. It is additive by the existing moduleOverFunctor_additive instance. Mathlib therefore supplies R.PreservesHomology, and HomologicalComplex.quasiIso_map_of_preservesHomology makes the termwise image of the augmentation of [def-sp-injective-resolutions] a quasi-isomorphism.",
    "uses": [
     "lem-sc-derived-open-restriction-adjunction-exact",
     "def-sp-injective-resolutions"
@@ -51,9 +51,8 @@
    }
   },
   {
-   "text": "By [lem-sc-ringed-space-module-sheaves-enough-injectives], instantiated for the ringed space $(U,\\mathcal O_U)$, the category of $\\mathcal O_U$-modules is abelian and has enough injectives. Combining Steps 1 and 2, the restricted augmented complex is exact and has injective terms; it is therefore an injective resolution of $F|_U$ by [def-sp-injective-resolutions]. In particular, every term $I^n|_U$ is injective.",
+   "text": "Use Mathlib HomologicalComplex.singleMapHomologicalComplex to identify the image under R of the complex concentrated in degree zero at F with the complex concentrated in degree zero at R(F). Precompose the mapped augmentation with the inverse of this isomorphism. Its composite is still a quasi-isomorphism, and Step 2 supplies injective terms, so these data define the required InjectiveResolution by [def-sp-injective-resolutions]. Choose the equality of complexes to be reflexivity. The single-complex comparison has identity component in degree zero; hence the transported augmentation is exactly R.map (I.ι.f 0). The module-sheaf categories are already abelian by Mathlib, and no existence theorem for injective resolutions or enough-injectives hypothesis is needed.",
    "uses": [
-    "lem-sc-ringed-space-module-sheaves-enough-injectives",
     "def-sp-injective-resolutions"
    ],
    "elementary": true,
@@ -66,13 +65,12 @@
  "proof_deps": [
   "lem-sc-derived-open-restriction-adjunction-exact",
   "def-sp-injective-resolutions",
-  "lem-sp-right-adjoint-preserves-injectives",
-  "lem-sc-ringed-space-module-sheaves-enough-injectives"
+  "lem-sp-right-adjoint-preserves-injectives"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology, Lemma 01E1 (lemma-cohomology-of-open), part (1) and proof"
+  "place": "Cohomology, Lemma 01E1 (lemma-cohomology-of-open), part (1) and proof; Lean implementation by C1 uses Mathlib preservation of quasi-isomorphisms and the single-complex comparison."
  },
  "mathlib_searches": [
   {
@@ -153,5 +151,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T063505-L-3153043",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

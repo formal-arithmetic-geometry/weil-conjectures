@@ -48,6 +48,22 @@ theorem restrict_injectiveResolution (X : RingedSpace.{u}) (U : Opens X)
       (h : J.cocomplex = (R.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex),
       J.ι.f 0 ≫ eqToHom (congrArg (fun K => K.X 0) h) = R.map (I.ι.f 0)) ∧
     (∀ n : ℕ, Injective (R.obj (I.cocomplex.X n))) := by
-  sorry
+  let R := SheafOfModules.overFunctor.{u} (moduleRings X) U
+  obtain ⟨hlim, hcolim, hleft, _, ⟨adj⟩⟩ := open_restriction_adjunction_exact X U
+  let := hlim
+  let := hcolim
+  let := hleft
+  let : R.PreservesInjectiveObjects :=
+    adj.preservesInjectiveObjects_of_preservesFiniteLimits
+  have hinj (n : ℕ) : Injective (R.obj (I.cocomplex.X n)) := by
+    infer_instance
+  let e := (HomologicalComplex.singleMapHomologicalComplex R (ComplexShape.up ℕ) 0).app F
+  let J : InjectiveResolution (R.obj F) :=
+    { cocomplex := (R.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
+      injective := hinj
+      ι := e.inv ≫ (R.mapHomologicalComplex (ComplexShape.up ℕ)).map I.ι
+      quasiIso := by infer_instance }
+  refine ⟨⟨J, rfl, ?_⟩, hinj⟩
+  simp [J, e, R]
 
 end AlgebraicGeometry.RingedSpace
