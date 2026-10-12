@@ -25,7 +25,7 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Let $\\mathfrak m$ be the unique maximal ideal of $R$, let $\\kappa=R/\\mathfrak m$, and write $q:R\\to\\kappa$ for the quotient homomorphism. Maximality makes $\\kappa$ a field. Since $p\\cdot1_R=0$, also $p\\cdot1_\\kappa=0$. If $a^p=a$, then $q(a)^p=q(a)$ because $q$ preserves powers. By [lem-sc-field-artin-schreier-kernel] applied to $\\kappa$, there is a unique $c\\in\\mathbf F_p$ with $q(a)=c\\cdot1_\\kappa=q(c\\cdot1_R)$.",
+   "text": "Give R characteristic p by CharP.charP_iff_prime_eq_zero, and give its residue field the same characteristic by mapping p=0. Map a^p=a along q=IsLocalRing.residue R. Subfield.mem_bot_iff_pow_eq_self and ZMod.fieldRange_castHom_eq_bot (the Mathlib field-kernel calculation [lem-sc-field-artin-schreier-kernel]) give c : ZMod p with q(a)=ZMod.cast c. The quotient map commutes with the cast, as follows from ZMod.cast_eq_val and map_natCast.",
    "uses": [
     "lem-sc-field-artin-schreier-kernel"
    ],
@@ -36,7 +36,7 @@
    }
   },
   {
-   "text": "Put $b=a-c\\cdot1_R$. The equality of their images under $q$ gives $b\\in\\mathfrak m$. The binomial theorem in characteristic $p$ gives $b^p=a^p-(c\\cdot1_R)^p=a-c\\cdot1_R=b$: each intermediate binomial coefficient is divisible by the prime $p$, and $(c\\cdot1_R)^p=c\\cdot1_R$ because $c^p=c$ in $\\mathbf F_p$ by [lem-sc-field-artin-schreier-kernel]. Since $p\\ge2$, the ideal property yields $b^{p-1}\\in\\mathfrak m$, whence $1-b^{p-1}\\notin\\mathfrak m$ (otherwise $1$ would lie in the proper ideal $\\mathfrak m$). Thus $1-b^{p-1}$ is a unit by [lem-weil-pbc-local-ring-unit-criterion]. Now $b(1-b^{p-1})=b-b^p=0$, and multiplication by the inverse of this unit gives $b=0$. Therefore $a=c\\cdot1_R$.",
+   "text": "For every c : ZMod p, ZMod.cast_pow and ZMod.pow_card give (ZMod.cast c : R)^p=ZMod.cast c. Set b=a-ZMod.cast c. Its residue is zero, and sub_pow_char gives b^p=b. Since p is prime, p-1 is positive, so the residue of 1-b^(p-1) is 1 and therefore nonzero. IsLocalRing.residue_ne_zero_iff_isUnit, the residue formulation of [lem-weil-pbc-local-ring-unit-criterion], makes 1-b^(p-1) a unit. Expanding b*(1-b^(p-1)) gives b-b^p=0. Cancel this unit with IsUnit.mul_right_cancel to get b=0 and hence ZMod.cast c=a.",
    "uses": [
     "lem-sc-field-artin-schreier-kernel",
     "lem-weil-pbc-local-ring-unit-criterion"
@@ -48,7 +48,7 @@
    }
   },
   {
-   "text": "Conversely, for each $c\\in\\mathbf F_p$, [lem-sc-field-artin-schreier-kernel] says $c^p=c$, and the canonical ring map $\\mathbf F_p\\to R$ preserves powers, so $(c\\cdot1_R)^p=c\\cdot1_R$. The map from $\\mathbf F_p$ therefore lands in the stated solution set, and step 2 proves surjectivity. If $c\\cdot1_R=d\\cdot1_R$, applying $q$ gives $c\\cdot1_\\kappa=d\\cdot1_\\kappa$; injectivity of the map $\\mathbf F_p\\to\\kappa$ in [lem-sc-field-artin-schreier-kernel] gives $c=d$. Hence the map is bijective.",
+   "text": "ZMod.castHom_injective R applies because R has characteristic p. It gives uniqueness of the constant c once its cast equals a. Conversely, the power equality for every cast follows from ZMod.pow_card and ZMod.cast_pow as above. Thus a^p=a if and only if there is exactly one c : ZMod p with ZMod.cast c=a.",
    "uses": [
     "lem-sc-field-artin-schreier-kernel"
    ],
@@ -64,9 +64,9 @@
   "lem-weil-pbc-local-ring-unit-criterion"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0A3J (section-artin-schreier) asserts the Artin-Schreier kernel; the local-ring calculation is supplied here, using Stacks Algebra Tag 00E9 (lemma-characterize-local-ring) for units"
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
+  "place": "proof, first sentence; implemented residue-field reduction and unit cancellation directly from Mathlib by N2, second reading, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -152,5 +152,15 @@
   "group": "K1",
   "result": "pass",
   "note": "p prime=(hp : p.Prime); local ring=[CommRing R][IsLocalRing R] (nontrivial = has a maximal ideal); p*1_R=0=(hchar : (p:R)=0) literal; c*1_R=ZMod.cast (canonical map for p prime); exactly one c + bijection onto roots = a^p=a <-> exists! c; name absent from Mathlib (#check), no landed AS-kernel decl for local rings"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T060747-L-2912142",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
