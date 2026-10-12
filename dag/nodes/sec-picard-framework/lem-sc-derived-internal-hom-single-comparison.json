@@ -1,168 +1,165 @@
 {
-  "id": "lem-sc-derived-internal-hom-single-comparison",
-  "kind": "statement",
-  "title": "Unary internal Hom derives to internal RHom from a degree-zero module",
-  "statement": "Let $X$ be a scheme [def-pc-scheme], $M$ an $\\mathcal O_X$-module, and $T_M=\\mathcal Hom_{\\mathcal O_X}(M,-)$ [def-pur-sheaf-hom], assumed additive. Let $S:D(\\mathcal O_X)\\to D(\\mathcal O_X)$ [def-pc-derived-category] with comparison $\\delta:T_M^{\\bullet}Q\\to QS$ be a right derived functor of termwise internal Hom, for quasi-isomorphisms. Then $S$ is naturally isomorphic to $R\\mathcal Hom_{\\mathcal O_X}(M[0],-)$ [def-pur-derived-internal-hom]. No local freeness, algebra structure, or adjunction is assumed.",
-  "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BV1, lemma-sheafhom-affine-ext; sites-cohomology.tex Section 08J7, Lemma 0A95"
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-pur-sheaf-hom",
-    "def-pc-derived-category",
-    "def-pur-derived-internal-hom"
-  ],
-  "proof": [
-    {
-      "text": "Choose the functorial K-injective resolution in O_X-modules. The K-injective right derivability structure computes any right derived functor S of termwise Hom on those representatives, with its comparison invertible there. Termwise additive Hom preserves homotopy equivalences, and quasi-isomorphisms between K-injectives are homotopy equivalences; hence the K-injective localizer derives termwise Hom followed by Q.",
-      "uses": [
-        "prop-pur-kinjective-resolutions-exist",
-        "def-pur-derived-internal-hom"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The existing homComplex_single_iso identifies Hom-complex(M[0],I) with degreewise Hom(M,I). Its projection onto the sole surviving factor is natural in I by the map formula of homComplex_exists; insert zero in the other factors for its inverse. This upgrades the objectwise comparison to a natural chain isomorphism.",
-      "uses": [
-        "lem-sc-hom-complex-single",
-        "def-pur-hom-complex"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Specialize derivedInternalHom_comparison to M[0] and the same K-injective resolution. Compose with the preceding natural chain isomorphism. Descend along the K-injective localization equivalence, or use uniqueness of the right derived functor, to obtain S isomorphic to RHom(M[0],-). No exactness or local freeness of M is assumed; the argument includes zero M and unbounded target complexes.",
-      "uses": [
-        "def-pur-derived-internal-hom",
-        "prop-pur-kinjective-resolutions-exist",
-        "lem-sc-hom-complex-single"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "prop-pur-kinjective-resolutions-exist",
+ "id": "lem-sc-derived-internal-hom-single-comparison",
+ "kind": "statement",
+ "title": "Unary internal Hom derives to internal RHom from a degree-zero module",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $M$ an $\\mathcal O_X$-module, and $T_M=\\mathcal Hom_{\\mathcal O_X}(M,-)$ [def-pur-sheaf-hom], assumed additive. Let $S:D(\\mathcal O_X)\\to D(\\mathcal O_X)$ [def-pc-derived-category] with comparison $\\delta:T_M^{\\bullet}Q\\to QS$ be a right derived functor of termwise internal Hom, for quasi-isomorphisms. Then $S$ is naturally isomorphic to $R\\mathcal Hom_{\\mathcal O_X}(M[0],-)$ [def-pur-derived-internal-hom]. No local freeness, algebra structure, or adjunction is assumed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BV1, lemma-sheafhom-affine-ext; sites-cohomology.tex Section 08J7, Lemma 0A95"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-hom",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Use the source-library functorial K-injective replacement I and augmentation η. Termwise additive internal Hom preserves homotopy equivalences, so the K-injective localizer derives termwise Hom followed by Q. Mathlib Derives.isIso_of_isRightDerivedFunctor makes δ invertible on I(K). Q inverts η, yielding a natural isomorphism Q⋙S ≅ I⋙T_M^bullet⋙Q.",
+   "uses": [
     "def-pur-derived-internal-hom",
-    "lem-sc-hom-complex-single",
-    "def-pur-hom-complex"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BV1, expanding the construction via sites-cohomology.tex 0A95 and the single-source Hom-complex formula"
+    "lem-pur-kinjective-degreewise-existence"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Right derived internal sheaf Hom from a module agrees with derived internal Hom from that module concentrated in degree zero",
-      "results": "CategoryTheory.Sheaf.H, SheafOfModules.unitHomEquiv, CategoryTheory.Sheaf.cohomologyPresheafFunctor, SheafOfModules.unitHomEquiv_comp_apply, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, CategoryTheory.Sheaf.cohomologyPresheaf",
-      "date": "2026-10-12",
-      "verdict": "No exact match for the unary sheaf-valued RHom comparison."
-    },
-    {
-      "tool": "loogle",
-      "query": "Functor.IsRightDerivedFunctor",
-      "results": "loogle: unknown identifier 'Functor.IsRightDerivedFunctor'",
-      "date": "2026-10-12",
-      "verdict": "No exact match for the unary sheaf-valued RHom comparison."
-    },
-    {
-      "tool": "grep",
-      "query": "derivedInternalHom|homComplex.*single",
-      "results": "No hits",
-      "date": "2026-10-12",
-      "verdict": "No exact match for the unary sheaf-valued RHom comparison."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Right derived internal sheaf Hom from a module agrees with derived internal Hom from that module concentrated in degree zero",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-12"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"rightDerivedUnique\"",
-      "results": "CategoryTheory.Functor.rightDerivedUnique in Mathlib.CategoryTheory.Functor.Derived.RightDerived",
-      "date": "2026-10-12",
-      "verdict": "Generic uniqueness supplies the final step only; it does not supply the natural single-source Hom-complex comparison."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "natural isomorphism between derived functors computed on injective resolutions uniqueness of right derived functors",
-      "results": "InjectiveResolution.isoRightDerivedObj_hom_naturality and related Abelian.RightDerived lemmas",
-      "date": "2026-10-12",
-      "verdict": "Ordinary derived functors into an abelian category, not unbounded sheaf-valued RHom."
-    },
-    {
-      "tool": "grep",
-      "query": "homComplex|internalHom|rightDerivedUnique",
-      "results": "Mathlib HomotopyCategory.HomComplexSingle is the morphism-group Hom complex; local rg finds Sheaf.AlgebraicGeometry.HomComplexSingle and objectwise RHom computations, but no unary natural derived comparison.",
-      "date": "2026-10-12",
-      "verdict": "No duplicate; use the existing objectwise single-source construction for the natural comparison."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.FiniteSheafHomAffineAdjoint",
-    "date": "2026-10-12",
-    "group": "Y3"
+  {
+   "text": "Specialize derivedInternalHom_comparison at M[0]. Use curryObjProdComp and curry.mapIso to express it as an isomorphism from Q precomposed with the desired specialization to I followed by the single-source Hom-complex functor and Q. Compose with the natural chain comparison of lem-sc-hom-complex-single-natural.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sc-hom-complex-single-natural"
+   ],
+   "elementary": false
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "proof, affine sheaf-Hom adjunction: identification of the underlying derived functor with internal RHom",
-      "via": [
-        "lem-sc-finite-sheafhom-affine-adjoint",
-        "lem-sc-finite-duality-derived-hom"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lean": {
-    "module": "Sheaf.Algebra.Homology.DerivedInternalHomSingleComparison",
-    "declaration": "CategoryTheory.derivedInternalHom_single_comparison",
-    "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHomSingleComparison.lean",
-    "statement": "theorem derivedInternalHom_single_comparison (X : AlgebraicGeometry.Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (AlgebraicGeometry.moduleRings X.toRingedSpace))] (M : SheafOfModules.{u} (AlgebraicGeometry.moduleRings X.toRingedSpace)) [((SheafOfModules.homFunctor X.sheaf).obj (op M)).Additive] (S : DerivedCategory (SheafOfModules.{u} (AlgebraicGeometry.moduleRings X.toRingedSpace)) ⥤ DerivedCategory (SheafOfModules.{u} (AlgebraicGeometry.moduleRings X.toRingedSpace))) (δ : ((SheafOfModules.homFunctor X.sheaf).obj (op M)).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ S) (hδ : S.IsRightDerivedFunctor δ (HomologicalComplex.quasiIso _ (.up ℤ))) : Nonempty (S ≅ (Functor.curry.obj (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf)).obj (op ((DerivedCategory.singleFunctor _ 0).obj M)))",
-    "branch": "sheaf-dag",
-    "by": "Y3",
-    "date": "2026-10-12",
-    "existing": false
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "reviewed": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "Y3",
-    "result": "pass",
-    "landing": "20261012T095933-L-328453",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "Y3",
-    "result": "pass",
-    "landing": "20261012T095933-L-328453",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Compose the first comparison with the inverse of the second. Localization.fullyFaithfulWhiskeringLeft Q and preimageIso descend the resulting natural isomorphism to S ≅ RHom(M[0],-).",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-sc-hom-complex-single-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Algebra/Homology/DerivedInternalHomSingleComparison.lean",
+  "place": "Y2 proof: K-injective computation of δ, specialization of derivedInternalHom_comparison, and fully faithful localization descent; follows original source construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived internal sheaf Hom from a module agrees with derived internal Hom from that module concentrated in degree zero",
+   "results": "CategoryTheory.Sheaf.H, SheafOfModules.unitHomEquiv, CategoryTheory.Sheaf.cohomologyPresheafFunctor, SheafOfModules.unitHomEquiv_comp_apply, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, CategoryTheory.Sheaf.cohomologyPresheaf",
+   "date": "2026-10-12",
+   "verdict": "No exact match for the unary sheaf-valued RHom comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsRightDerivedFunctor",
+   "results": "loogle: unknown identifier 'Functor.IsRightDerivedFunctor'",
+   "date": "2026-10-12",
+   "verdict": "No exact match for the unary sheaf-valued RHom comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|homComplex.*single",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No exact match for the unary sheaf-valued RHom comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived internal sheaf Hom from a module agrees with derived internal Hom from that module concentrated in degree zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedUnique\"",
+   "results": "CategoryTheory.Functor.rightDerivedUnique in Mathlib.CategoryTheory.Functor.Derived.RightDerived",
+   "date": "2026-10-12",
+   "verdict": "Generic uniqueness supplies the final step only; it does not supply the natural single-source Hom-complex comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between derived functors computed on injective resolutions uniqueness of right derived functors",
+   "results": "InjectiveResolution.isoRightDerivedObj_hom_naturality and related Abelian.RightDerived lemmas",
+   "date": "2026-10-12",
+   "verdict": "Ordinary derived functors into an abelian category, not unbounded sheaf-valued RHom."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex|internalHom|rightDerivedUnique",
+   "results": "Mathlib HomotopyCategory.HomComplexSingle is the morphism-group Hom complex; local rg finds Sheaf.AlgebraicGeometry.HomComplexSingle and objectwise RHom computations, but no unary natural derived comparison.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate; use the existing objectwise single-source construction for the natural comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteSheafHomAffineAdjoint",
+  "date": "2026-10-12",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine sheaf-Hom adjunction: identification of the underlying derived functor with internal RHom",
+   "via": [
+    "lem-sc-finite-sheafhom-affine-adjoint",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedInternalHomSingleComparison",
+  "declaration": "CategoryTheory.derivedInternalHom_single_comparison",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHomSingleComparison.lean",
+  "statement": "theorem derivedInternalHom_single_comparison (X : AlgebraicGeometry.Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (AlgebraicGeometry.moduleRings X.toRingedSpace))] (M : SheafOfModules.{u} (AlgebraicGeometry.moduleRings X.toRingedSpace)) [((SheafOfModules.homFunctor X.sheaf).obj (op M)).Additive] (S : DerivedCategory (SheafOfModules.{u} (AlgebraicGeometry.moduleRings X.toRingedSpace)) ⥤ DerivedCategory (SheafOfModules.{u} (AlgebraicGeometry.moduleRings X.toRingedSpace))) (δ : ((SheafOfModules.homFunctor X.sheaf).obj (op M)).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ S) (hδ : S.IsRightDerivedFunctor δ (HomologicalComplex.quasiIso _ (.up ℤ))) : Nonempty (S ≅ (Functor.curry.obj (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf)).obj (op ((DerivedCategory.singleFunctor _ 0).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T095933-L-328453",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T173919-L-3310518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

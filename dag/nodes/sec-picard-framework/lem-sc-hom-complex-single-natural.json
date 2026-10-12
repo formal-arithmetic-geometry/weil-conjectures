@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-hom-complex-single-natural",
+ "kind": "statement",
+ "title": "Natural single-source internal Hom chain comparison",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $M$ a sheaf of $\\mathcal O_X$-modules. The cochain-complex functor $K\\mapsto\\mathcal Hom^\\bullet(M[0],K)$ [def-pur-hom-complex] is naturally isomorphic to termwise application of $\\mathcal Hom(M,-)$ [def-pur-sheaf-hom] to cochain complexes [def-pc-cochain-complex-modules]. The postcomposition functor is additive as in [lem-sc-hom-complex-single]. No boundedness or exactness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X, section-hom-complexes: product, differential and map formulas; parent comparison proof step 2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pc-cochain-complex-modules",
+  "lem-sc-hom-complex-single"
+ ],
+ "proof": [
+  {
+   "text": "For the single complex M[0], define the degree-n map to Hom(M,K^n) by the degree-zero source projection of homComplex_exists. All other source factors are zero. The product universal property supplies the inverse by inserting the inverse identification at source degree zero and zero elsewhere. This is the construction in lem-sc-hom-complex-single, not an arbitrary choice of its objectwise isomorphisms.",
+   "uses": [
+    "lem-sc-hom-complex-single",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Hom-complex differential formula shows that these projections commute with differentials: the source differential is zero, leaving exactly postcomposition with the target differential. The Hom-complex map formula, applied to the identity of M[0] and an arbitrary chain map f:K→K′, identifies map(f) followed by the degree-zero projection with the projection followed by postcomposition with f. Therefore the chain isomorphisms form a natural isomorphism. The argument works degree by degree, including zero M, zero target, an empty scheme, and arbitrary unbounded targets.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-single"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-single",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X, section-hom-complexes, map formula specialized to the identity of the degree-zero source"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism between internal Hom complex from a single module in degree zero and termwise sheaf Hom",
+   "results": "CochainComplex.HomComplex.Cochain.fromSingleEquiv and toSingleEquiv; SheafOfModules.unitHomEquiv variants; evaluation corepresentability by a single complex. These concern Hom groups or the unit, rather than sheaf-valued Hom from an arbitrary module.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedUnique\"",
+   "results": "CategoryTheory.Functor.rightDerivedUnique, Mathlib.CategoryTheory.Functor.Derived.RightDerived.",
+   "date": "2026-10-13",
+   "verdict": "Generic derived uniqueness does not supply chain-level naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex_single|kInjectiveResolutionFunctor",
+   "results": "msearch grep returned zero hits; local rg found the objectwise AlgebraicGeometry.homComplex_single_iso, not the required natural isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "Objectwise comparison exists, natural comparison not found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphism between internal Hom complex from a single module in degree zero and termwise sheaf Hom",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error; no conclusion about matches.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedInternalHomSingleComparison",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-internal-hom-single-comparison",
+   "place": "proof step 2",
+   "via": [
+    "lem-sc-hom-complex-single"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HomComplexSingleNatural",
+  "file": "lean/Sheaf/AlgebraicGeometry/HomComplexSingleNatural.lean",
+  "declaration": "AlgebraicGeometry.homComplex_single_natural_iso",
+  "statement": "theorem homComplex_single_natural_iso\n    (Y : Scheme.{u})\n    (P : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :\n    Nonempty ((homComplexFunctor (R := Y.sheaf)).obj\n        (op ((CochainComplex.singleFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj P)) ≅\n      ((SheafOfModules.homFunctor Y.sheaf).obj (op P)).mapHomologicalComplex (.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T173919-L-3310518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T173919-L-3310518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
