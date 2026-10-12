@@ -9561,3 +9561,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:16 L: merged deliver/U3/Sheaf.CategoryTheory.ColimitSiteAbelianSectionRepresentatives (stage 3; reviewer PASS; after a return; landing 20261012T211619-L-1058722 (interface); batch 20261012T211610; modules 4; new nodes 3)
 - 21:22 L: returned deliver/T1/Sheaf.CategoryTheory.GrothendieckBottomResolutionComparison (reviewer RETURN: (the landing tools, head d42e87ee1) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 21:22 L: merged deliver/A2/Sheaf.AlgebraicGeometry.IntegralIdealComparisonFiltrations (stage 3; reviewer PASS; first push; landing 20261012T212206-L-1096684 (interface); batch 20261012T212205; modules 2; new nodes 1)
+- 21:22 L: merged deliver/B2/Sheaf.AlgebraicGeometry.AffineFiniteTypeGeneratingSections (stage 3; reviewer PASS; first push; landing 20261012T212206-L-1096894 (proof); batch 20261012T212205; modules 1; new nodes 1)

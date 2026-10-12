@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-quasicoherent-epi-affine-cover",
+ "kind": "statement",
+ "title": "Surjectivity on an affine cover implies a quasi-coherent-target epimorphism",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $M,N$ sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], with $N$ quasi-coherent [pqf-def-coherent], and $\\varphi:M\\to N$ a morphism. Let $(U_i)_{i\\in I}$ be affine opens covering $X$. If $\\Gamma(U_i,\\varphi)$ is surjective for every $i$, then $\\varphi$ is an epimorphism in the category of $\\mathcal O_X$-modules (equivalently, locally surjective).",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean",
+  "place": "epi_of_surjective_app, lines 365-386; its basic-open argument uses Stacks Schemes 01IA and 01HV"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Given y on W and x in W, choose an affine-cover member U_i containing x and a basic open D(g) containing x and contained in W intersect U_i. By the affine basic-open localization theorem, the restriction of y to D(g) becomes the restriction of a section t on U_i after multiplication by a power g^k. Lift t to z on U_i using the assumed surjectivity. Since g is invertible on D(g), g^(-k) times the restriction of z lifts y there. Thus the map is locally surjective; the forgetful functor to sheaves of abelian groups reflects epimorphisms, and a locally surjective sheaf map is epi. This is the complete proof of the existing source declaration epi_of_surjective_app.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-module-basic-open-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean",
+  "place": "epi_of_surjective_app and epi_of_forall_exists_app_eq"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism into a quasi coherent sheaf is epi if surjective on sections on an affine open cover",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjectivity on sections of an affine open cover implies epimorphism of quasicoherent sheaves",
+   "results": "Sheaf.epi_of_isLocallySurjective, Sheaf.isLocallySurjective_iff_epi, PresheafOfModules.epi_of_surjective. No affine-cover statement in indexed Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "related general sheaf lemmas; exact source result found by local rg"
+  },
+  {
+   "tool": "grep",
+   "query": "epi_of_surjective_app",
+   "results": "msearch grep: no Mathlib hits. Local rg: lean/WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean:369, fully proved epi_of_surjective_app. No existing DAG node records this declaration.",
+   "date": "2026-10-13",
+   "verdict": "exact match in source library"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFiniteTypeGeneratingSections",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7: essential-surjectivity paragraphs, affine finite global generators",
+   "via": [
+    "lem-weil-pbc-affine-finite-type-generating-sections",
+    "lem-weil-pbc-coherent-twist-global-generation",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.epi_of_surjective_app",
+  "statement": "lemma epi_of_surjective_app {M N : X.Modules} [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) N] (φ : M ⟶ N) {ι : Type*} (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcov : ⨆ i, U i = ⊤) (h : ∀ i, Function.Surjective (φ.app (U i))) : Epi φ",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13",
+  "note": "Existing fully proved source-library theorem, not a new statement or proof obligation."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T212206-L-1096894",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T212206-L-1096894",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
