@@ -10,7 +10,7 @@ public import Sheaf.Topology.InverseImageModule
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Homology.Additive
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
-import Sheaf.Topology.InverseImageStalk
+import Sheaf.Algebra.Homology.InverseImageStalkScalarTransport
 
 /-!
 # The stalk complex of termwise tensor pullback
@@ -65,7 +65,61 @@ theorem exists_tensorPullback_stalk_complex_iso
         ((((ModuleCat.extendScalars ρ).mapHomologicalComplex (.up ℤ)).obj
           (((RingedSpace.moduleStalkFunctor Y (f x)).mapHomologicalComplex (.up ℤ)).obj K)) ≅
         (((RingedSpace.moduleStalkFunctor X x).mapHomologicalComplex (.up ℤ)).obj P)) :=
-  by sorry
+  by
+    let k := TopCat.Presheaf.stalkPullbackHom CommRingCat.{u} f Y.presheaf x ≫
+      (TopCat.Presheaf.stalkFunctor CommRingCat.{u} x).map
+        (toSheafify (Opens.grothendieckTopology X)
+          ((TopCat.Presheaf.pullback CommRingCat.{u} f).obj Y.presheaf))
+    let ψ : TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X.carrier)
+        (TopCat.Sheaf.inverseImageRing f Y.sheaf).obj x →+* X.presheaf.stalk x :=
+      ((TopCat.Presheaf.stalkFunctor CommRingCat.{u} x).map α.hom).hom
+    let ρ := ψ.comp k.hom
+    obtain ⟨c, β, hβ, hc⟩ := exists_ringed_inverseImage_stalk_scalar_transport X Y f α x
+    obtain ⟨τ, _, hτ⟩ := SheafOfModules.stalkChangeOfRingsIso X.carrier
+      (TopCat.Sheaf.inverseImageRing f Y.sheaf) X.sheaf α x
+    let δ (M : RingedSpace.Modules Y) :
+        (ModuleCat.extendScalars ρ).obj
+            ((RingedSpace.moduleStalkFunctor Y (f x)).obj M) ≅
+          (RingedSpace.moduleStalkFunctor X x).obj
+            (SheafOfModules.changeOfRings.{u, u, u} α
+              (TopCat.Sheaf.inverseImageModule f Y.sheaf M)) :=
+      β M ≪≫ τ (TopCat.Sheaf.inverseImageModule f Y.sheaf M)
+    have hδ (M N : RingedSpace.Modules Y) (a : M ⟶ N) :
+        (ModuleCat.extendScalars ρ).map
+            ((RingedSpace.moduleStalkFunctor Y (f x)).map a) ≫ (δ N).hom =
+          (δ M).hom ≫ (RingedSpace.moduleStalkFunctor X x).map
+            (SheafOfModules.changeOfRingsHom.{u, u, u} α
+              (TopCat.Sheaf.inverseImageModule f Y.sheaf M)
+              (TopCat.Sheaf.inverseImageModuleMap f Y.sheaf M a)) := by
+      apply ModuleCat.ExtendScalars.hom_ext
+      intro m
+      change (τ _).hom ((β N).hom
+        ((ModuleCat.extendScalars ρ).map
+          ((RingedSpace.moduleStalkFunctor Y (f x)).map a)
+          (@TensorProduct.tmul _ _ _ _ _ _ (Module.compHom _ ρ) _
+            (1 : X.presheaf.stalk x) m))) = _
+      rw [ModuleCat.ExtendScalars.map_tmul, hβ, hc]
+      change (τ _).hom _ = (RingedSpace.moduleStalkFunctor X x).map _
+        ((τ _).hom ((β M).hom (@TensorProduct.tmul _ _ _ _ _ _ (Module.compHom _ ρ) _
+            (1 : X.presheaf.stalk x) m)))
+      rw [hβ]
+      exact (hτ _ _ (TopCat.Sheaf.inverseImageModuleMap f Y.sheaf M a) 1 (c M m)).symm
+    refine ⟨ρ, ⟨HomologicalComplex.Hom.isoOfComponents
+      (fun i ↦ δ (K.X i) ≪≫ ((RingedSpace.moduleStalkFunctor X x).mapIso (e i)).symm)
+      ?_⟩⟩
+    intro i j _
+    change ((δ (K.X i)).hom ≫ (RingedSpace.moduleStalkFunctor X x).map (e i).inv) ≫
+        (RingedSpace.moduleStalkFunctor X x).map (P.d i j) =
+      (ModuleCat.extendScalars ρ).map
+        ((RingedSpace.moduleStalkFunctor Y (f x)).map (K.d i j)) ≫
+        ((δ (K.X j)).hom ≫ (RingedSpace.moduleStalkFunctor X x).map (e j).inv)
+    apply (cancel_mono ((RingedSpace.moduleStalkFunctor X x).map (e j).hom)).1
+    simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id]
+    rw [he i j]
+    simp only [← Category.assoc]
+    simp only [Iso.inv_hom_id, Category.id_comp]
+    rw [(RingedSpace.moduleStalkFunctor X x).map_id, Category.comp_id]
+    exact (hδ (K.X i) (K.X j) (K.d i j)).symm
 
 end
 end CochainComplex
