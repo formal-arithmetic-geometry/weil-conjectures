@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-pushed-resolution-positive-homology-zero",
+ "kind": "statement",
+ "title": "Positive homology of the continuously pushed injective resolution vanishes",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] in universe $u+1$ and $i:X.\\mathrm{Opens}\\to X.\\mathrm{Etale}$ a continuous functor [def-weil-pbc-sites-and-cohomology]. Assume abelian sheafification on both sites [def-weil-pbc-sheafification], HasExt in any universe $t$ on etale abelian sheaves with coefficients in universe $u+1$, and that the abelian sheaf pullback along $i$ is additive. Let $F$ be an etale abelian sheaf [def-weil-pbc-abelian-etale-sheaves]. Suppose for every $q>0$ the zero endomorphism of the presheaf $U\\mapsto H^q(i(U),F)$ is locally injective: any two sections become equal on a covering sieve. For every supplied injective resolution $I$ of $F$ [def-sp-injective-resolutions] and every $q>0$, the degree-$q$ homology object of the complex of sheaves $i_*I$ is zero. No degree-zero comparison or augmentation is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072W (lemma-higher-direct-images), proof, applied to positive-degree locally zero cohomology; Tag 0733(1) (lemma-apply-Leray)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Apply objectCohomologyPresheaf_resolution to the supplied I and q. It gives a natural isomorphism between the Ext cohomology presheaf and homology of the underlying resolution presheaf complex after lifting both to a common universe. Precompose the comparison by i.op. Precomposition of abelian presheaves preserves limits and colimits, hence homology, so its mapHomologyIso identifies the restricted homology presheaf with homology of the presheaf complex underlying i_*I.",
+   "uses": [
+    "lem-weil-pbc-object-cohomology-presheaf-resolution",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the universe lift of an abelian presheaf, the equalizer sieve of two lifted sections equals that of their underlying sections, by injectivity of ULift.up. Local injectivity of the zero endomorphism is therefore equivalent before and after either lift. It also transfers across a natural isomorphism by conjugating the zero endomorphism. Apply these facts and the hypothesis at q>0 to the comparison in step 1: zero on presheaf homology of the pushed complex is locally injective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib Presheaf.isLocallyInjective_presheafToSheaf_map_iff and Sheaf.mono_of_isLocallyInjective show that the sheafification of this zero endomorphism is mono. Exact sheafification is additive, so its image is the zero endomorphism. IsZero.of_mono_eq_zero then shows that sheafified presheaf homology is a zero object. Exact sheafification commutes with homology via mapHomologyIso. The sheafification counit is a natural isomorphism on sheaves and consequently on the underlying complex. Compose these isomorphisms to transport zero-object status to homology of i_*I. This works for zero sheaves and the empty scheme; no degree-zero assertion or augmentation is used.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-object-cohomology-presheaf-resolution",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072W (lemma-higher-direct-images), proof",
+  "note": "H3 formalizes the positive-degree component via the existing universe-lifted object-cohomology comparison, local injectivity of zero, and exact sheafification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "positive homology of pushed sheaf injective resolution locally zero cohomology",
+   "results": "DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CochainComplex.isKInjective_of_injective; CochainComplex.isKInjective_of_injective_aux; CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex; CochainComplex.cm5b.instInjectiveXIntI; CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt; CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; CochainComplex.IsKInjective",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing object-cohomology comparison used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "positive homology pushed injective sheaf resolution locally zero cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|pushed_resolution_positive",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing object-cohomology comparison used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZariskiEtalePushedResolutionQuasiIso",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Positive-degree cohomology in the Zariski-etale comparison serving step 7 of the Gabber effacement split; the positive homology component of the pushed-resolution argument (Tag 072W).",
+   "via": [
+    "lem-weil-pbc-zariski-etale-pushed-resolution-quasi-iso",
+    "lem-weil-pbc-zariski-etale-canonical-leray",
+    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+    "lem-weil-pbc-gabber-criterion",
+    "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+    "lem-weil-pbc-integral-cover-trivial-cohomology",
+    "lem-weil-pbc-integral-cover-kills-constant-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PushedResolutionPositiveHomologyZero",
+  "file": "lean/Sheaf/Paper/PushedResolutionPositiveHomologyZero.lean",
+  "declaration": "pushed_resolution_positive_homology_isZero",
+  "statement": "theorem pushed_resolution_positive_homology_isZero\n    {X : Scheme.{u + 1}}\n    (i : X.Opens ⥤ X.Etale)\n    (hi : i.IsContinuous (Opens.grothendieckTopology X.carrier)\n      X.smallEtaleTopology)\n    [HasSheafify (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1}]\n    [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}]\n    [HasExt.{t} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]\n    [(sheafPullback i AddCommGrpCat.{u + 1}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).Additive]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hvan : ∀ q : ℕ, 0 < q →\n      Presheaf.IsLocallyInjective (Opens.grothendieckTopology X.carrier)\n        (0 : i.op ⋙ Sheaf.cohomologyPresheaf F q ⟶\n          i.op ⋙ Sheaf.cohomologyPresheaf F q)) :\n    ∀ (I : InjectiveResolution F) (n : ℕ), 0 < n →\n      IsZero (((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n        (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj I.cocomplex |>.homology n)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T160137-L-2564310",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T160137-L-2564310",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
