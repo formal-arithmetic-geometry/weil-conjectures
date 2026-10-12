@@ -196,3 +196,14 @@ ideal is its nilradical. (blueprint: `lem-weil-pbc-local-dimension-zero-henselia
 instance (priority := 100) HenselianLocalRing.of_krullDimLE_zero {R : Type*} [CommRing R]
     [IsLocalRing R] [Ring.KrullDimLE 0 R] : HenselianLocalRing R :=
   .of_maximalIdeal_le_nilradical (Ring.KrullDimLE.nilradical_eq_maximalIdeal (R := R)).ge
+
+/-- **Uniqueness of simple roots in a residue class.** Let `R` be a local ring with maximal ideal
+`𝔪`, `f : R[X]` and `a b : R` roots of `f` with `a - b ∈ 𝔪` and `f'(a) ∉ 𝔪`. Then `a = b`.
+This is mathlib's `IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub`, phrased with `𝔪`.
+(blueprint: `lem-weil-pbc-simple-root-uniqueness`) -/
+@[stacks 06RR]
+theorem IsLocalRing.eq_of_eval_eq_zero_of_sub_mem_maximalIdeal {R : Type*} [CommRing R]
+    [IsLocalRing R] {f : R[X]} {a b : R} (ha : f.eval a = 0) (hb : f.eval b = 0)
+    (hab : a - b ∈ maximalIdeal R) (h' : f.derivative.eval a ∉ maximalIdeal R) : a = b :=
+  eq_of_eval_eq_zero_of_not_isUnit_sub ha hb ((mem_maximalIdeal _).1 hab)
+    (notMem_maximalIdeal.1 h')

@@ -323,6 +323,24 @@ instance isReduced_ring [IsReduced R] (P : StandardEtalePair R) : IsReduced P.Ri
 
 end IsReduced
 
+/-- **Maps out of a standard étale algebra.** Let `P = (f, g)` be a standard étale pair over `R`,
+with standard étale algebra `P.Ring = R[X][Y] ⧸ (f, Yg - 1)` and `x = P.X` the class of `X`, and
+let `L` be an `R`-algebra. Then
+1. for every `b : L` with `f(b) = 0` and `g(b)` a unit there is exactly one `R`-algebra map
+   `χ : P.Ring → L` with `χ x = b`;
+2. every `R`-algebra map `χ : P.Ring → L` satisfies `f(χ x) = 0` and `g(χ x)` is a unit, and is
+   determined by `χ x`.
+This is mathlib's `StandardEtalePair.homEquiv`.
+(blueprint: `lem-weil-pbc-standard-etale-pair-maps`) -/
+@[stacks 00UB]
+theorem existsUnique_algHom_and_hasMap {R : Type*} [CommRing R] (P : StandardEtalePair R)
+    (L : Type*) [CommRing L] [Algebra R L] :
+    (∀ b : L, P.HasMap b → ∃! χ : P.Ring →ₐ[R] L, χ P.X = b) ∧
+      ∀ χ : P.Ring →ₐ[R] L, P.HasMap (χ P.X) ∧
+        ∀ χ' : P.Ring →ₐ[R] L, χ' P.X = χ P.X → χ' = χ :=
+  ⟨fun b hb ↦ ⟨P.lift b hb, P.lift_X b hb, fun _ h ↦ P.hom_ext (by simpa using h)⟩,
+    fun χ ↦ ⟨(P.homEquiv χ).2, fun _ h ↦ P.hom_ext h⟩⟩
+
 end StandardEtalePair
 
 /-- **The Kummer algebra is etale.** For `n ≠ 0` and `n`, `t` invertible in `R`, the algebra
