@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+public import WeilConjectures.AlgebraicGeometry.Curve.Devissage
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
@@ -27,8 +27,6 @@ the hypotheses of the reduction statements) a sheaf of modules over `ULift (ZMod
 
 - `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`: étale cohomology of a
   quasi-compact quasi-separated scheme commutes with filtered colimits.
-- `AlgebraicGeometry.IsCurve.Assertions.of_shortExact`: dévissage, the assertions for the outer
-  terms of a short exact sequence imply those for the middle term.
 - `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero`: field
   extension invariance in dimension zero.
 - `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced`: `C₇` reduces to
@@ -84,24 +82,6 @@ theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
       Sheaf.H.map (c.ι.app j) q y = x) ∧
     ∀ (j : J) (y : Sheaf.H (D.obj j) q), Sheaf.H.map (c.ι.app j) q y = 0 →
       ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 :=
-  sorry
-
-/-! ### Dévissage -/
-
-/-- **Short exact dévissage for the eight curve assertions.** Let `X` be a curve over `k` and
-`0 ⟶ F₁ ⟶ F ⟶ F₂ ⟶ 0` a short exact sequence of étale sheaves of `Λ`-modules on `X`. If the
-eight assertions `C(X, F₁)` and `C(X, F₂)` hold, then so does `C(X, F)`: the long exact
-cohomology sequences (and their pullbacks along a field extension) pass vanishing, finiteness
-and bijectivity to the middle term, the hypotheses of the assertions being inherited by
-subsheaves and quotients, constructibility for subsheaves since `Λ` is noetherian; for `C₈` one uses
-`H³(X, F₁) = 0`, i.e. `C₁(X, F₁)`.
-(blueprint: `lemma-weil-pbc-eight-curve-devissage`) -/
-theorem IsCurve.Assertions.of_shortExact [IsNoetherianRing Λ] {k : Type u} [Field k]
-    {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) [IsCurve f]
-    {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
-    (h₁ : IsCurve.Assertions Λ f S.X₁) (h₃ : IsCurve.Assertions Λ f S.X₃) :
-    IsCurve.Assertions Λ f S.X₂ :=
   sorry
 
 /-! ### Dimension zero -/
