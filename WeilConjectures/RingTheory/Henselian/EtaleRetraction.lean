@@ -175,6 +175,32 @@ theorem existsUnique_algHom_comap_maximalIdeal_eq_of_forall_exists_isRoot
     simp [χ]
   exact ⟨σ, hσq, fun σ' hσ' ↦ algHom_ext_of_comap_maximalIdeal_eq (hσ'.trans hσq.symm)⟩
 
+/-- **Quotients by complements of idempotents with a unique maximal ideal are local.** Let `x`
+be a nonzero idempotent of a commutative ring `B` such that at most one maximal ideal of `B`
+does not contain `x`. Then `B ⧸ (1 - x)` is a local ring. -/
+theorem _root_.IsIdempotentElem.isLocalRing_quotient_span_one_sub {B : Type*} [CommRing B]
+    {x : B}
+    (hx : IsIdempotentElem x) (hx0 : x ≠ 0)
+    (H : ∀ M₁ M₂ : Ideal B, M₁.IsMaximal → M₂.IsMaximal → x ∉ M₁ → x ∉ M₂ → M₁ = M₂) :
+    IsLocalRing (B ⧸ Ideal.span {1 - x}) := by
+  have : Nontrivial (B ⧸ Ideal.span {1 - x}) := by
+    refine Ideal.Quotient.nontrivial_iff.mpr fun h ↦ hx0 ?_
+    rw [Ideal.span_singleton_eq_top] at h
+    simpa using h.mul_left_eq_zero.mp hx.mul_one_sub_self
+  refine .of_unique_max_ideal ?_
+  obtain ⟨M, hM⟩ := Ideal.exists_maximal (B ⧸ Ideal.span {1 - x})
+  have hnot (N : Ideal (B ⧸ Ideal.span {1 - x})) (hN : N.IsMaximal) :
+      x ∉ N.comap (Ideal.Quotient.mk _) := by
+    intro hxN
+    have h1 : 1 - x ∈ N.comap (Ideal.Quotient.mk _) := by
+      rw [Ideal.mem_comap, Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.mem_span_singleton_self _)]
+      exact N.zero_mem
+    have h2 := add_mem h1 hxN
+    rw [sub_add_cancel, Ideal.mem_comap, map_one] at h2
+    exact hN.ne_top ((Ideal.eq_top_iff_one N).mpr h2)
+  refine ⟨M, hM, fun N hN ↦ Ideal.comap_injective_of_surjective _ Ideal.Quotient.mk_surjective ?_⟩
+  exact H _ _ (Ideal.comap_isMaximal_of_surjective _ Ideal.Quotient.mk_surjective)
+    (Ideal.comap_isMaximal_of_surjective _ Ideal.Quotient.mk_surjective) (hnot N hN) (hnot M hM)
 /-- **Étale retractions give product decompositions of finite algebras.** Let `(R, 𝔪, κ)` be a
 local ring such that for every étale `R`-algebra `R'` and every prime `𝔪'` of `R'` over `𝔪`
 with `κ → κ(𝔪')` bijective there is an `R`-algebra map `τ : R' →ₐ[R] R` with `τ⁻¹(𝔪) = 𝔪'`.
@@ -189,8 +215,47 @@ theorem exists_algEquiv_pi_isLocalRing_of_forall_exists_algHom
       ∃ τ : R' →ₐ[R] R, (maximalIdeal R).comap τ = m')
     (B : Type u) [CommRing B] [Algebra R B] [Module.Finite R B] :
     ∃ (r : ℕ) (B' : Fin r → Type u) (_ : ∀ i, CommRing (B' i)) (_ : ∀ i, Algebra R (B' i))
-      (_ : ∀ i, IsLocalRing (B' i)), Nonempty (B ≃ₐ[R] ∀ i, B' i) :=
-  sorry
+      (_ : ∀ i, IsLocalRing (B' i)), Nonempty (B ≃ₐ[R] ∀ i, B' i) := by
+  classical
+  obtain ⟨R', _, _, _, P, _, hPm, n, e, he, P', _, _, hP, -, hP''⟩ :=
+    Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq (S := B)
+      (maximalIdeal R)
+  obtain ⟨τ, hτ⟩ := H R' P (P.over_def (maximalIdeal R)).symm hP
+  let φ : R' ⊗[R] B →ₐ[R] B :=
+    Algebra.TensorProduct.lift ((Algebra.ofId R B).comp τ) (AlgHom.id R B)
+      fun _ _ ↦ Commute.all _ _
+  have hφs : Function.Surjective φ := fun b ↦ ⟨1 ⊗ₜ b, by simp [φ]⟩
+  have hlies (M : Ideal B) [M.IsMaximal] : (M.comap φ).LiesOver P := by
+    refine ⟨?_⟩
+    rw [← hτ]
+    ext x
+    rw [Ideal.mem_comap, Ideal.mem_comap, Ideal.mem_comap, ← comap_eq_maximalIdeal_of_finite M,
+      Ideal.mem_comap]
+    simp [φ, Algebra.TensorProduct.algebraMap_apply]
+  have hkey (i : Fin (n + 1)) (M₁ M₂ : Ideal B) (h₁ : M₁.IsMaximal) (h₂ : M₂.IsMaximal)
+      (hM₁ : φ (e i) ∉ M₁) (hM₂ : φ (e i) ∉ M₂) : M₁ = M₂ := by
+    have H₁ := hP'' (M₁.comap φ) inferInstance (hlies M₁)
+    have H₂ := hP'' (M₂.comap φ) inferInstance (hlies M₂)
+    refine Ideal.comap_injective_of_surjective φ hφs ?_
+    obtain ⟨j, rfl⟩ | rfl := i.eq_castSucc_or_eq_last
+    · rw [H₁.2 j hM₁, H₂.2 j hM₂]
+    · exact absurd H₁.1 hM₁
+  let J := {i : Fin (n + 1) // φ (e i) ≠ 0}
+  have hJ : CompleteOrthogonalIdempotents fun j : J ↦ φ (e j) := by
+    have hfe := he.map φ.toRingHom
+    refine ⟨hfe.1.embedding (Function.Embedding.subtype _), ?_⟩
+    calc ∑ j : J, φ (e j) = ∑ i ∈ Finset.univ.filter (fun i ↦ φ (e i) ≠ 0), φ (e i) :=
+          (Finset.sum_subtype (p := fun i ↦ φ (e i) ≠ 0) _ (fun _ ↦ by simp)
+            fun i ↦ φ (e i)).symm
+      _ = ∑ i, φ (e i) := Finset.sum_filter_ne_zero _
+      _ = 1 := hfe.complete
+  let Q (j : J) := B ⧸ Ideal.span {1 - φ (e j)}
+  let eJ := Fintype.equivFin J
+  refine ⟨Fintype.card J, fun k ↦ Q (eJ.symm k), fun _ ↦ inferInstance, fun _ ↦ inferInstance,
+    fun k ↦ (he.idem _).map φ |>.isLocalRing_quotient_span_one_sub (eJ.symm k).2
+      (hkey _), ⟨?_⟩⟩
+  exact (AlgEquiv.ofBijective (AlgHom.pi fun j ↦ Ideal.Quotient.mkₐ R _)
+    hJ.bijective_pi).trans (AlgEquiv.piCongrLeft R Q eJ.symm).symm
 
 /-- **Henselian local rings: idempotent lifting versus root lifting.** For a local ring
 `(R, 𝔪, κ)` the following are equivalent:
