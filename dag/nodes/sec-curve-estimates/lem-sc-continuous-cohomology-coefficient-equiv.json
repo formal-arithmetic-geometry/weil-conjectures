@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-continuous-cohomology-coefficient-equiv",
+ "kind": "lemma",
+ "title": "Equivariant discrete coefficient equivalences preserve continuous cohomology across universes",
+ "statement": "Let $G$ be a topological group in universe $u$. Let $M,N$ be integer modules,\nwith discrete topologies and actions of $G$ by linear automorphisms, in universes\n$\\max(u,s)$ and $\\max(u,t)$ respectively. Let $e:M\\simeq_{\\mathbf Z}N$ be a linear\nequivalence with $e(gx)=g e(x)$ for every $g\\in G$ and $x\\in M$.\nFor every $q\\in\\mathbf N$ there is a type equivalence\n$H^q_{\\mathrm{cont}}(G,M)\\simeq H^q_{\\mathrm{cont}}(G,N)$.\nThe continuous cohomology here is homology in topological integer modules of the\nhomogeneous cochain complex: degree $n$ is the invariant submodule of $n+1$ iterated\ncontinuous-map spaces, where the action on a map is $(g f)(x)=g(f(g^{-1}x))$.\nStarting with constant insertion from coefficients to continuous maps, its differential\nis recursively constant insertion minus the previous differential applied pointwise.\nJoint continuity of the group action is not required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 0DVG, section-continuous-group-cohomology, profinite comparison; explicit homogeneous change of variables"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Make e a continuous representation equivalence: discrete topologies give continuity in both directions, and integer scalar multiplication agrees with integer repeated addition even when the bundled module instances differ. Recursively postcompose through coinduction to obtain equivalences of every resolution term. Restrict their equivariant maps to invariants. The recursive differential commutes with these maps by induction, using preservation of subtraction; off-shape differentials are zero. This is implemented by coindEquiv, resolutionEquiv, resolutionEquiv_d, invariantsEquiv, cochainsEquiv and cochainsEquiv_d.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the short complexes at degree q, restrict the middle linear equivalence to the kernels, using the commuting outgoing map and injectivity of the next equivalence. The commuting incoming map and surjectivity of the preceding equivalence identify the boundary ranges. Apply Submodule.Quotient.equiv to obtain inverse equivalences of kernel modulo image, including across universes. TopModuleCat.isLimitKer and isColimitCoker give concrete left homology data; their homologyIso identifies the categorical homology with these quotients. Compose the underlying equivalences. This is implemented by concreteData and shortComplexEquiv, entirely in Mathlib.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "parent comparison, step 3: transport homogeneous complexes through the equivariant coefficient equivalence e, including between universes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivariant linear equivalences between discrete topological representations in different universes induce equivalences on continuous cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant linear equivalence of discrete topological representations in different universes induces an equivalence of their continuous cohomology",
+   "results": "Read results: ContinuousCohomology.continuousCohomologyZeroIso, groupCohomology.coindIso, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology.cocycles₁IsoOfIsTrivial, groupCohomology.congr, groupCohomology.π_comp_H0IsoOfIsTrivial_hom_apply, groupCohomology.cochainsIso₁, continuousCohomology. No exact match for the stated theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCohomology|isoRightDerivedObj",
+   "results": "Read results: Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean. No exact match for the stated theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.DiscreteInvariantsContinuousComparison",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "parent comparison, step 3: transport homogeneous complexes through the equivariant coefficient equivalence e, including between universes",
+   "via": [
+    "lem-sc-discrete-invariants-continuous-comparison",
+    "lem-sc-etale-units-h2-reverse-embedding",
+    "lem-sc-etale-units-two-cocycle-comparison",
+    "lem-sc-etale-galois-units-comparison"
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.ContinuousCohomologyCoefficientEquiv",
+  "file": "lean/Sheaf/RepresentationTheory/ContinuousCohomologyCoefficientEquiv.lean",
+  "declaration": "Rep.nonempty_equiv_continuousCohomology_coefficients",
+  "statement": "theorem nonempty_equiv_continuousCohomology_coefficients (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] (M : TopRep.{max u s} ℤ G) (N : TopRep.{max u t} ℤ G) [DiscreteTopology M.V] [DiscreteTopology N.V] (e : M.V ≃ₗ[ℤ] N.V) (he : ∀ (g : G) (x : M.V), e (M.ρ g x) = N.ρ g (e x)) (q : ℕ) : Nonempty (continuousCohomology q M ≃ continuousCohomology q N)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T184330-L-4014645",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T184330-L-4014645",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

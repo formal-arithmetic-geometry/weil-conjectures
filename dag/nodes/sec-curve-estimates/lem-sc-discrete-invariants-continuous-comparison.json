@@ -15,40 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Transport an injective resolution of F across E. An equivalence preserves injectives and exact sequences. The natural isomorphism Gamma to invariants identifies its Gamma complex with the invariant complex. This computes the right derived functor.",
+   "text": "Choose an injective resolution I of F. Define V to be the invariants functor after E, and deduce V.Additive from eta via Functor.additive_of_iso. InjectiveResolution.isoRightDerivedObj computes derived Gamma using Gamma(I). NatIso.mapHomologicalComplex eta identifies Gamma(I) with V(I); apply the homology functor to this complex isomorphism and take its underlying additive equivalence.",
    "uses": [
     "def-sp-injective-resolutions",
     "def-sp-left-exact-additive"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Continuous inhomogeneous cochains on discrete modules give an exact delta-functor: compact finite powers have finite image under maps to a discrete group, so a surjection admits continuous lifts of each cochain. Embed m into locally constant functions by x maps to x*m, with right translation action. Finite clopen partitions yield open stabilizers and continuity of the insertion operator h(F)(g1,...,g(n-1))(x)=F(x,g1,...,g(n-1))(1). Expanding the alternating differential gives dh+hd=1 in positive degrees. Thus continuous cohomology is effaceable and universal. It and derived invariants have the same degree zero, so the universal extensions in both directions are inverse.",
+   "text": "Give the underlying module E(F) the discrete topology and construct its continuous representation M directly, by viewing each action linear map as a continuous linear map. Apply the invariant-resolution comparison to M with the identity coefficient equivalence. This identifies H^q(V(I)) with continuous cohomology of M in the same universe.",
    "uses": [
-    "lem-weil-pbc-effaceable-delta-functor-universal",
-    "lem-weil-pbc-right-derived-universal-delta-functor"
+    "lem-sc-discrete-resolution-continuous-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "Use the compact-open exponential law to identify iterated continuous maps with jointly continuous maps. Evaluate homogeneous equivariant cochains at (1,g1,g1*g2,...); use g0*c(g0^-1*g1,...,g(n-1)^-1*gn) as the inverse. Expand the recursive differential to see alternating omission become the inhomogeneous differential. Transport coefficients through e. The maps are inverse on cochains, cocycles and coboundaries. Underlying TopModuleCat homology is kernel modulo image, giving the claimed equivalence across universes.",
+   "text": "Apply the proved coefficient-equivalence theorem to the given equivariant linear equivalence e from M to N. Compose the three type equivalences to obtain the original conclusion.",
    "uses": [
-    "def-exc-discrete-modules-category"
+    "lem-sc-continuous-cohomology-coefficient-equiv"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-injective-resolutions",
   "def-sp-left-exact-additive",
-  "lem-weil-pbc-effaceable-delta-functor-universal",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "def-exc-discrete-modules-category"
+  "lem-sc-discrete-resolution-continuous-cohomology",
+  "lem-sc-continuous-cohomology-coefficient-equiv"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Section 0DVG, section-continuous-group-cohomology, profinite comparison; explicit homogeneous change of variables"
+  "place": "Section 0DVG; P3 formalizes resolution/natural-isomorphism transport and proves the cross-universe homogeneous coefficient transport; the same-universe profinite resolution comparison is a separate named theorem."
  },
  "mathlib_searches": [
   {
@@ -120,9 +118,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T165520-L-2935568",
+  "landing": "20261012T184330-L-4014645",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

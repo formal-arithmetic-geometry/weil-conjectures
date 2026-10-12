@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-discrete-resolution-continuous-cohomology",
+ "kind": "lemma",
+ "title": "Invariants of a transported injective resolution compute homogeneous continuous cohomology",
+ "statement": "Let $G$ be a compact Hausdorff totally disconnected topological group in universe $u$.\nLet $\\mathcal A$ be an abelian category [def-sp-abelian], and let\n$E:\\mathcal A\\simeq\\operatorname{DiscreteRep}_{\\mathbf Z}(G)$ be an equivalence\n[def-exc-discrete-modules-category], with representation universe $r=\\max(u,s)$.\nLet $V:\\mathcal A\\to\\mathrm{Ab}_r$ send an object to the invariant subgroup of its\nimage under $E$, and send an equivariant coefficient map to its restriction on invariants.\nAssume $V$ is additive [def-sp-left-exact-additive]. Let $F\\in\\mathcal A$ and\n$I$ be any injective resolution of $F$ [def-sp-injective-resolutions].\nLet $N$ be an integer representation of $G$ on a discrete topological module in universe $r$,\nand let $e:E(F)\\simeq_{\\mathbf Z}N$ satisfy $e(gx)=g e(x)$.\nFor every $q\\in\\mathbf N$ the underlying type of $H^q(V(I^\\bullet))$ is equivalent to\n$H^q_{\\mathrm{cont}}(G,N)$. Here the latter is homology in topological integer modules\nof the homogeneous cochain complex: degree $n$ is the $G$-invariant submodule of\n$n+1$ iterated continuous-map spaces, with diagonal action\n$(g f)(x)=g(f(g^{-1}x))$ and differential constant insertion minus the preceding\ndifferential applied pointwise. No finite-ring hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 0DVG, section-continuous-group-cohomology, profinite comparison; explicit homogeneous change of variables"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-exc-discrete-modules-category",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Transport the given injective resolution through the equivalence. Equivalences preserve exactness and injective objects, so applying invariants computes derived invariants on E(F).",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Continuous inhomogeneous cochains are exact on short exact sequences of discrete modules: compact powers have finite-image continuous maps, and choosing lifts of these finitely many values yields continuous lifts. Embed a discrete module M into locally constant functions G to M by the orbit map, with right translation action. A finite clopen partition and compactness give an open subgroup stabilizing each function. The insertion h(F)(g1,...,g(n-1))(x)=F(x,g1,...,g(n-1))(1) is continuous and satisfies dh+hd=1 in positive degrees by expansion of the inhomogeneous differential. Thus the continuous cohomology delta-functor is effaceable and universal. Derived invariants are universal as well and have the same degree zero. Extend the identity in both directions; uniqueness makes the composites identities.",
+   "uses": [
+    "lem-weil-pbc-effaceable-delta-functor-universal",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the compact-open exponential law to pass from iterated maps to maps on finite powers. Evaluate homogeneous invariant cochains at (1,g1,g1*g2,...), with inverse (g0,...,gn) maps to g0*c(g0^-1*g1,...,g(n-1)^-1*gn). Expanding the recursive homogeneous differential gives the inhomogeneous differential. Postcomposition with e and its inverse transports coefficients in the same universe. These cochain equivalences descend through cocycles modulo coboundaries; underlying TopModuleCat homology is that quotient, giving the claimed type equivalence.",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-exc-discrete-modules-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "parent comparison, steps 1 and 2 and homogeneous/inhomogeneous portion of step 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous cohomology computed by invariants of an injective resolution of discrete representations",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived invariants of discrete continuous representations of a profinite group are continuous group cohomology",
+   "results": "Read results: continuousCohomology, ContinuousCohomology.continuousCohomologyZeroIso, ContinuousCohomology.MultiInd.complex, ContinuousCohomology.homogeneousCochains, ContinuousCohomology.invariants, ContinuousCohomology.I_obj_V_carrier, ContinuousCohomology.I_obj_V_topologicalSpace, ContinuousCohomology.instLinearActionTopModuleCatInvariants. No exact match for the stated theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCohomology|isoRightDerivedObj",
+   "results": "Read results: Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean. No exact match for the stated theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.DiscreteInvariantsContinuousComparison",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "parent comparison, steps 1 and 2 and homogeneous/inhomogeneous portion of step 3",
+   "via": [
+    "lem-sc-discrete-invariants-continuous-comparison",
+    "lem-sc-etale-units-h2-reverse-embedding",
+    "lem-sc-etale-units-two-cocycle-comparison",
+    "lem-sc-etale-galois-units-comparison"
+   ]
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.DiscreteResolutionContinuousCohomology",
+  "file": "lean/Sheaf/RepresentationTheory/DiscreteResolutionContinuousCohomology.lean",
+  "declaration": "Rep.nonempty_equiv_invariantResolution_continuousCohomology",
+  "statement": "theorem nonempty_equiv_invariantResolution_continuousCohomology (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Category.{w} A] [Abelian A] (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G) [(E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙ forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat).Additive] (F : A) (I : InjectiveResolution F) (N : TopRep.{max u s} ℤ G) [DiscreteTopology N.V] (e : (E.functor.obj F).obj.V ≃ₗ[ℤ] N.V) (he : ∀ (g : G) (x : (E.functor.obj F).obj.V), e ((E.functor.obj F).obj.ρ g x) = N.ρ g (e x)) (q : ℕ) : Nonempty (((((E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙ forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homology q) ≃ continuousCohomology q N)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T184330-L-4014645",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T184330-L-4014645",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

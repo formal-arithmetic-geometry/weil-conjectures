@@ -9,6 +9,8 @@ public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.RepresentationTheory.DiscreteResolutionContinuousCohomology
+import Sheaf.RepresentationTheory.ContinuousCohomologyCoefficientEquiv
 
 /-!
 # Derived invariants and homogeneous continuous cohomology
@@ -68,6 +70,33 @@ theorem nonempty_equiv_rightDerived_continuousCohomology
     (he : ∀ (g : G) (x : (E.functor.obj F).obj.V),
       e ((E.functor.obj F).obj.ρ g x) = N.ρ g (e x)) (q : ℕ) :
     Nonempty ((Γ.rightDerived q).obj F ≃ continuousCohomology q N) := by
-  sorry
+  classical
+  let V := E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙
+    forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat
+  let _ : V.Additive := Functor.additive_of_iso η
+  obtain ⟨I⟩ := HasInjectiveResolution.out (Z := F)
+  let : TopologicalSpace (E.functor.obj F).obj.V := ⊥
+  let : DiscreteTopology (E.functor.obj F).obj.V := ⟨rfl⟩
+  let ρ : ContRepresentation ℤ G (E.functor.obj F).obj.V :=
+    .ofMonoidHom
+      { toFun := fun g ↦ ⟨(E.functor.obj F).obj.ρ g, continuous_of_discreteTopology⟩
+        map_one' := by
+          ext x
+          change (E.functor.obj F).obj.ρ 1 x = x
+          simp
+        map_mul' := by
+          intro g h
+          ext x
+          change (E.functor.obj F).obj.ρ (g * h) x =
+            (E.functor.obj F).obj.ρ g ((E.functor.obj F).obj.ρ h x)
+          simp [map_mul] }
+  let M : TopRep.{max u s} ℤ G := TopRep.of ρ
+  obtain ⟨a⟩ := nonempty_equiv_invariantResolution_continuousCohomology
+    G A E F I M (LinearEquiv.refl ℤ _) (fun _ _ ↦ rfl) q
+  obtain ⟨b⟩ := nonempty_equiv_continuousCohomology_coefficients G M N e he q
+  let c := (I.isoRightDerivedObj Γ q) ≪≫
+    (HomologicalComplex.homologyFunctor AddCommGrpCat (ComplexShape.up ℕ) q).mapIso
+      ((NatIso.mapHomologicalComplex η (ComplexShape.up ℕ)).app I.cocomplex)
+  exact ⟨c.addCommGroupIsoToAddEquiv.toEquiv.trans (a.trans b)⟩
 
 end Rep
