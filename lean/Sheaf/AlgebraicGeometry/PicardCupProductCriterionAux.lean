@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 @[expose] public section
 
@@ -30,7 +31,35 @@ theorem picard_dual_directImage_isFiniteLocallyFree {X S : Scheme.{u}} (f : X �
     (hW : ∀ {T : Scheme.{u}} (h : T ⟶ W), PicardDirectImageRankCondition f E (h ≫ j)) :
     ((Modules.pushforward (pullback.snd f j)).obj
       ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E))).IsFiniteLocallyFree := by
-  sorry
+  classical
+  have _hO := hO j
+  let N := (Modules.pushforward (pullback.snd f j)).obj
+    ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E))
+  have hlocal (w : W) : ∃ U : W.Opens, w ∈ U ∧
+      ((Modules.tensorPullback U.ι).obj N).IsFiniteLocallyFree := by
+    obtain ⟨U, hw, r, _, hN, _⟩ := (hW (𝟙 W)).2.1 (𝟙 W) w
+    have hr : SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+        ((Modules.tensorPullback U.ι).obj N) r := by
+      exact (congrArg (fun k : W ⟶ S ↦
+        SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+          ((Modules.tensorPullback U.ι).obj
+            ((Modules.pushforward (pullback.snd f k)).obj
+              ((Modules.tensorPullback (pullback.fst f k)).obj (Modules.dual E)))) r)
+        (by simp : 𝟙 W ≫ 𝟙 W ≫ j = j)).mp hN
+    have := hr
+    exact ⟨U, hw, SheafOfModules.IsFiniteLocallyFreeOfRank.isFiniteLocallyFree.{u, u, u} _ r⟩
+  choose U hw hU using hlocal
+  apply Modules.isFiniteLocallyFree_of_isOpenImmersion N (fun w ↦ (U w).ι)
+  · apply eq_top_iff.mpr
+    intro w _
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨w, by
+      rw [Scheme.Opens.opensRange_ι]
+      exact hw w⟩
+  · intro w
+    have := hU w
+    exact SheafOfModules.IsFiniteLocallyFree.of_iso.{u, u, u}
+      (((Classical.choose (Modules.exists_tensorPullbackAdjunction (U w).ι)).leftAdjointUniq
+        (Modules.pullbackPushforwardAdjunction (U w).ι)).app N)
 
 /-- Once both direct images are finite locally free, cup product detects the
 adjunction counit after arbitrary base change.
