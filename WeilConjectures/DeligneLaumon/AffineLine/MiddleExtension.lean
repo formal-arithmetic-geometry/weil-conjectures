@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.Constituent
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
+public import WeilConjectures.DeligneLaumon.AffineLine.PunctualTransform
 
 /-!
 # Irreducible middle extensions under the Fourier transform
@@ -130,21 +131,20 @@ theorem not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity (hψ : �
     ¬ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by
   sorry
 
--- TODO(adic): needs the transforms of skyscraper sheaves (`lem-fd-first-formula`), the base
--- change of the transform to `k̄` (`lem-fd-base-change`), Fourier inversion
--- (`lem-fd-inversion`) and `j^* j_* M = M`, none of which exist yet for pro-étale Weil complexes
--- (`AlgebraicGeometry.Etale.*` are stated in the étale formalism); also a geometric transform
--- on `D(𝔸¹_{k̄})` to state the base change.
 /-- **The punctual case is excluded.** For `M` irreducible lisse and nonexceptional, the
 transform of `(j_*M)[1]` is not a sheaf of finite support in degree `0`: otherwise inverting the
-transform and passing to `k̄` would give `M_k̄ ≅ ⊕_ξ (ℒ_{ψ(-ξ x)}|_U)^{n_ξ}`, so that `M` would
-have a linear character as a geometric constituent.
+transform gives `(j_*M)[1](-1) ≅ FT_{ψ⁻¹}(G)`, whose underlying geometric sheaf is a sum of
+linear characters `ℒ_{ψ(a x)}` over the geometric points of the support of `G`, so that `M_k̄`
+would surject onto some `ℒ_{ψ(a x)}|_U`
+(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_hasLinearArtinSchreierConstituent_of_iso`).
 (blueprint: `prop-a1-fourier-middle-extension`, Steps 2 and 3) -/
 theorem isEmpty_iso_fourierTransform_middleExtension_toComplex (hψ : ψ ≠ 1)
     (hD : D.sheaf.IsIrreducibleLisse) (hne : D.sheaf.IsNonexceptional ψ D.j)
     (G : WeilSheaf k₀ l (affineLine k₀)) (hG : (WeilSheaf.support G).Finite) :
     IsEmpty ((fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G) := by
-  sorry
+  refine ⟨fun e ↦ ?_⟩
+  obtain ⟨a, ha⟩ := D.exists_hasLinearArtinSchreierConstituent_of_iso ψ hψ hD.2.1 G hG e
+  exact hne a ha
 
 end LisseOnDenseOpen
 

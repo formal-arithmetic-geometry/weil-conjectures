@@ -260,7 +260,6 @@ theorem exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv
   exact ⟨a k, e₁.hom ≫ biproduct.π _ k ≫ (e k).some.hom ≫
     biproduct.π _ ⟨0, Nat.pos_of_ne_zero hk⟩, inferInstance⟩
 
-
 namespace LisseOnDenseOpen
 
 variable (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseOnDenseOpen k₀ l)
@@ -302,6 +301,44 @@ theorem hasLinearArtinSchreierConstituent_of_epi {a : AlgebraicClosure k₀}
     ΦU.mapIso (upperStarDirectImageIso D.j D.sheaf).symm
   exact ⟨D.sheaf.obj.carrier, 𝟙 _, cD.hom ≫ (jg)^*ᵃ[l].map p, D.lisse,
     inferInstance, epi_comp' inferInstance (Functor.map_epi _ _)⟩
+
+/-- If `j_*M` has zero underlying geometric sheaf, then `M = j^* j_* M` is zero. -/
+theorem isZero_of_isZero_carrier_directImage (h : IsZero D.directImage.obj.carrier) :
+    IsZero D.sheaf := by
+  let jg := Scheme.Hom.geometricFiberMap D.j (comp_over D.j (Spec (CommRingCat.of k₀)))
+  let ΦU := (WeilSheaf.objectProperty k₀ l D.U).ι ⋙
+    Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l D.U)
+  let cD : D.sheaf.obj.carrier ≅ (jg)^*ᵃ[l].obj D.directImage.obj.carrier :=
+    ΦU.mapIso (upperStarDirectImageIso D.j D.sheaf).symm
+  have := (ProEtale.adicUpperStarLowerStarAdjunction l jg).isLeftAdjoint
+  exact isZero_iff_isZero_carrier.2 (((jg)^*ᵃ[l].map_isZero h).of_iso cD)
+
+/-- The punctual case of `prop-a1-fourier-middle-extension`, Step 3, for an explicit
+presentation `FT_{ψ⁻¹}(G) ≅ (π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^*E))[1]` of the inverse transform. -/
+theorem exists_hasLinearArtinSchreierConstituent_of_iso_of_isPullback (hψ : ψ ≠ 1)
+    (hD : ¬ IsZero D.sheaf) (G : WeilSheaf k₀ l (affineLine k₀))
+    (e : (fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G)
+    {Z X' : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
+    [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z] [X'.Over (Spec (CommRingCat.of k₀))]
+    (i : Z ⟶ affineLine k₀) [i.IsOver (Spec (CommRingCat.of k₀))]
+    (q : X' ⟶ Z) [q.IsOver (Spec (CommRingCat.of k₀))]
+    (i' : X' ⟶ affinePlane k₀) [i'.IsOver (Spec (CommRingCat.of k₀))]
+    (π : X' ⟶ affineLine k₀) [π.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact π]
+    [QuasiSeparated π] [LocallyOfFiniteType π]
+    (hπ : i' ≫ affinePlane.snd k₀ = π) (hw : i' ≫ affinePlane.fst k₀ = q ≫ i)
+    (hP : IsPullback q π (Z ↘ Spec (CommRingCat.of k₀))
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
+    (E : WeilSheaf k₀ l Z)
+    (e₂ : (fourierTransform ψ⁻¹).obj (WeilSheaf.toComplex.obj G) ≅
+      WeilSheaf.toShiftedComplex.obj ((WeilSheaf.lowerStar π).obj
+        (((WeilSheaf.upperStar i').obj (fourierKernel ψ⁻¹)).tensorObj
+          ((WeilSheaf.upperStar q).obj E)
+          (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ⁻¹))))) :
+    ∃ a : AlgebraicClosure k₀, D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by
+  obtain ⟨c⟩ := D.nonempty_carrier_directImage_iso_of_iso ψ hψ e e₂
+  obtain ⟨a, p, hp⟩ := exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv ψ i q i' π hπ hw
+    hP E fun h ↦ hD (D.isZero_of_isZero_carrier_directImage (h.of_iso c))
+  exact ⟨a, D.hasLinearArtinSchreierConstituent_of_epi ψ (c.hom ≫ p)⟩
 
 /-- **A punctual transform forces a linear geometric constituent** (blueprint
 `prop-a1-fourier-middle-extension`, Step 3). If the transform of the middle extension
@@ -354,17 +391,8 @@ theorem exists_hasLinearArtinSchreierConstituent_of_iso (hψ : ψ ≠ 1) (hD : �
   -- `FT_{ψ⁻¹}(G)` is the sheaf `π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^* i^* G)` in degree `-1`
   obtain ⟨e₂⟩ := nonempty_iso_fourierTransform_toComplex_of_isPullback ψ⁻¹ V.ι i hi q i' π rfl
     (IsPullback.of_hasPullback i (affinePlane.fst k₀)) G hz
-  -- by inversion, `j_*M` and `π_*(…)` have the same underlying geometric sheaf
-  obtain ⟨c⟩ := D.nonempty_carrier_directImage_iso_of_iso ψ hψ e e₂
-  have hH : ¬ IsZero ((WeilSheaf.lowerStar π).obj
-      (((WeilSheaf.upperStar i').obj (fourierKernel ψ⁻¹)).tensorObj
-        ((WeilSheaf.upperStar q).obj ((WeilSheaf.upperStar i).obj G))
-        (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ⁻¹)))).obj.carrier :=
-    fun h ↦ hD (((WeilSheaf.upperStar D.j).map_isZero
-      (isZero_iff_isZero_carrier.2 (h.of_iso c))).of_iso (upperStarDirectImageIso D.j D.sheaf).symm)
-  obtain ⟨a, p, hp⟩ := exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv ψ i q i' π rfl
-    pullback.condition.symm hP ((WeilSheaf.upperStar i).obj G) hH
-  exact ⟨a, D.hasLinearArtinSchreierConstituent_of_epi ψ (c.hom ≫ p)⟩
+  exact D.exists_hasLinearArtinSchreierConstituent_of_iso_of_isPullback ψ hψ hD G e i q i' π rfl
+    pullback.condition.symm hP _ e₂
 
 end LisseOnDenseOpen
 
