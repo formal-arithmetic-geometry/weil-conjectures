@@ -1,0 +1,140 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-etale-mayer-vietoris-module-exact-segment",
+ "title": "Exact Mayer--Vietoris segment for module-sheaf pullbacks",
+ "statement": "Let $\\Lambda$ be a commutative ring, $i:Z\\to X$ a morphism of schemes, $J$ a sheaf of $\\Lambda$-modules on the small etale site of $X$, $U,V\\subseteq X$ opens with $U\\cup V=X$, and $r\\in\\mathbb N$. With the scheme and site conventions [def-weil-pbc-scheme-conventions, def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves], let $F$ be the underlying abelian sheaf of $i^*J$, and $F_T$ the underlying abelian sheaf of $\\operatorname{pr}_1^*(T.\\iota^*J)$ on $T\\times_XZ$ [def-weil-pbc-inverse-image, def-weil-pbc-abelian-etale-sheaves]. There exist additive homomorphisms $\\delta:H^r(F_{U\\cap V})\\to H^{r+1}(F)$ and $\\rho:H^{r+1}(F)\\to H^{r+1}(F_U)\\times H^{r+1}(F_V)$ such that $\\operatorname{im}\\delta=\\ker\\rho$, where cohomology is Sheaf.H [def-weil-pbc-etale-cohomology]. No vanishing hypothesis is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A50",
+  "place": "Two-open long exact sequence, transported via inverse-image composition and underlying abelian sheaves (Tags 03D3 and 03D7)."
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleVanishing",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-affine-cover-restriction-bound",
+   "place": "Mayer--Vietoris induction, exact-sequence construction",
+   "via": [
+    "lem-weil-pbc-etale-mayer-vietoris-module-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "proof": [
+  {
+   "text": "Base change of each open inclusion is an open immersion; its image is the inverse-image open in Z. The two images cover Z, and the base change of U ∩ V identifies with their intersection. Identify each base-change scheme with its image.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-open-immersion-iso-onto-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse-image composition and forgetting module structure identify the restrictions of the underlying abelian sheaf of i^*J with the displayed sheaves; transport across the scheme isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply etale_mayerVietoris to F on Z and its inverse-image open cover. Use nonempty_sheafH_extDerivedIso to pass from derived cohomology to Sheaf.H. Transport the connecting and restriction homomorphisms through the additive identifications of the four groups. These preserve images and kernels, yielding the exact pair without any vanishing assumptions.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-immersion-iso-onto-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Tags 0A50, 03D3 and 03D7",
+  "place": "Exact segment construction and inverse-image identifications; transport written by J1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The connecting homomorphism and restriction homomorphism form an exact pair in the Mayer Vietoris cohomology sequence for an abelian sheaf on an etale open cover",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No mathematical verdict inferred; other searches and source inspection supply the comparison.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact connecting homomorphism for cohomology of a sheaf on a union of two open subschemes",
+   "results": "8 results: MayerVietorisSquare.shortComplex_exact and shortComplex_shortExact among them. Mathlib sequence_exact gives object cohomology on a site, not the four module-pullback Sheaf.H groups; comparisons remain necessary.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact, Subsingleton",
+   "results": "One unrelated noetherian-induction result; no relevant theorem.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "grep",
+   "query": "mayerVietoris|mayer_vietoris",
+   "results": "Mathlib has GrothendieckTopology.MayerVietorisSquare.sequence_exact. Local library has etale_mayerVietoris and etale_mayerVietoris_pullback; these use abelian inverse images or derived evaluation, not module pullback groups. Neither directly states this transported exact segment.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleExactSegment",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleMayerVietorisModuleExactSegment.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_module_mayer_vietoris_exact_segment",
+  "statement": "theorem Etale.exists_module_mayer_vietoris_exact_segment\n    (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)\n    (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (U V : X.Opens) (hcover : U ⊔ V = ⊤) (r : ℕ) :\n    ∃ δ : (Sheaf.H\n      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n        ((pullback.fst (U ⊓ V).ι i)^*[ModuleCat.{u + 1} Λ].obj\n          (((U ⊓ V).ι)^*[ModuleCat.{u + 1} Λ].obj J))) r) →+ (Sheaf.H\n      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n        ((i)^*[ModuleCat.{u + 1} Λ].obj J)) (r + 1)),\n      ∃ ρ : (Sheaf.H\n      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n        ((i)^*[ModuleCat.{u + 1} Λ].obj J)) (r + 1)) →+ ((Sheaf.H\n      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n        ((pullback.fst U.ι i)^*[ModuleCat.{u + 1} Λ].obj\n          ((U.ι)^*[ModuleCat.{u + 1} Λ].obj J))) (r + 1)) × (Sheaf.H\n      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n        ((pullback.fst V.ι i)^*[ModuleCat.{u + 1} Λ].obj\n          ((V.ι)^*[ModuleCat.{u + 1} Λ].obj J))) (r + 1))),\n        Function.Exact δ ρ",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a500b",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T021332-L-1010221",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a500b",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T021332-L-1010221",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean signatures with their nodes, the vanishing proof with its metadata, and the remaining exact segment with Stacks Tag 0A50 and its comparison dependencies; compilation and axiom checks pass."
+ }
+}
