@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-formal-pushforward-conditions",
+ "kind": "statement",
+ "title": "Coherent adic conditions under closed pushforward",
+ "statement": "theorem closedImmersion_formal_pushforward_conditions {Z X : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] [IsNoetherian X] (I : X.IdealSheafData)\n    (G : ℕᵒᵖ ⥤ Z.Modules) (hG : IsCoherentFormalModule (I.comap i) G) :\n    IsCoherentFormalModule I (G ⋙ Scheme.Modules.pushforward i)",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 087T, 088A (identification of supported formal systems), equation 0880"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "pqf-def-locnoeth",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "pqf-def-coherent",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-pbc-coherent-formal-module",
+  "def-nagata-extended-ideal",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Coherence implies quasi-coherence; finite closed pushforward preserves coherence on every term.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image comparison for the positive power n+1 identifies the image of the pushed-forward upstairs product inclusion with the downstairs product inclusion. The upstairs inclusion is zero by its zero source, hence the pushed-forward image and then the downstairs product are zero.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the canonical quotient comparison with the pushforward of the upstairs adic isomorphism. Its projection equation followed by functoriality proves the transition equation.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-closed-immersion-pushforward-ideal-powers"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 087T and 088A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor pullback of an adic inverse system annihilated by the kernel of a closed immersion is an adic inverse system",
+   "results": "AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-13",
+   "verdict": "Generic adic-completion or functor-category tools only; no geometric adic-condition lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Termwise direct image under a closed immersion preserves coherent adic inverse systems",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"whiskeringRight\"",
+   "results": "CategoryTheory.Functor.whiskeringRight, CategoryTheory.Functor.faithful_whiskeringRight_obj, CategoryTheory.Functor.whiskeringRight_obj_id, CategoryTheory.Functor.FullyFaithful.whiskeringRight, CategoryTheory.Functor.full_whiskeringRight_obj, CategoryTheory.Functor.whiskeringRight_obj_obj, CategoryTheory.Functor.whiskeringRightObjIdIso, CategoryTheory.Functor.whiskeringRight_obj_map",
+   "date": "2026-10-13",
+   "verdict": "Generic adic-completion or functor-category tools only; no geometric adic-condition lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "CoherentFormalModule|formal.*pushforward|formal.*pullback|[Aa]dic [Ss]ystem",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic adic-completion or functor-category tools only; no geometric adic-condition lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalenceTermwise",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-closed-immersion-coherent-formal-equivalence-termwise",
+   "place": "Termwise pushforward adic-condition verification",
+   "via": [
+    "lem-weil-pbc-closed-immersion-coherent-formal-equivalence-termwise"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionFormalPushforwardConditions",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionFormalPushforwardConditions.lean",
+  "declaration": "AlgebraicGeometry.closedImmersion_formal_pushforward_conditions",
+  "statement": "theorem closedImmersion_formal_pushforward_conditions {Z X : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] [IsNoetherian X] (I : X.IdealSheafData)\n    (G : ℕᵒᵖ ⥤ Z.Modules) (hG : IsCoherentFormalModule (I.comap i) G) :\n    IsCoherentFormalModule I (G ⋙ Scheme.Modules.pushforward i)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T220529-L-1396682",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T220529-L-1396682",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
