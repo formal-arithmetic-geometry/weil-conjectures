@@ -9209,3 +9209,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/J1/Sheaf.RingTheory.FormallySmoothCompleteLocalGenericFiber (stage 3; reviewer PASS; after a return; landing 20261012T194118-L-457609 (interface); batch 20261012T194054; modules 5; new nodes 4)
 - 19:41 L: merged deliver/J2/Sheaf.FieldTheory.PurelyInseparableDegreePIntermediate (stage 3; reviewer PASS; first push; landing 20261012T194119-L-457720 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/J3/Sheaf.RingTheory.PurelyInseparableIntegralPrimeUnique (stage 3; reviewer PASS; first push; landing 20261012T194119-L-457820 (proof); batch 20261012T194054; modules 1; new nodes 0)
+- 19:41 L: merged deliver/J3/Sheaf.RingTheory.QuasiFiniteAtFiniteSubalgebraAway (stage 3; reviewer PASS; first push; landing 20261012T194120-L-457919 (proof); batch 20261012T194054; modules 1; new nodes 0)
