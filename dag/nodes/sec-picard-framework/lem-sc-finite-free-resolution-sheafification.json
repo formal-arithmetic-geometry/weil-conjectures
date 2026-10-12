@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-finite-free-resolution-sheafification",
+ "kind": "statement",
+ "title": "Sheafification of an explicit finite free resolution on an affine chart",
+ "statement": "Let X be a scheme, U an open, and e : U.toScheme ≅ Spec A [def-weil-affine-spectrum]. Let M be an A-module, and let an explicit augmented exact resolution of M by finite free A-modules be given by ranks n, augmentation ε and maps d, with surjectivity and kernel-range equalities. Then there is a bounded-above cochain complex [def-weil-pbc-module-chain-complex-homology] of finite free sheaves of modules [def-weil-sheaf-of-modules-category] on the over-site of U and a quasi-isomorphism to the degree-zero complex of the transported tilde of M [lem-weil-pbc-spec-module-tilde-sections]. The construction places the j-th free term in degree -j, applies tilde, and transports along e and the open-subscheme/over-site equivalence.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma 26.5.4, Tag 01HV, functoriality and exactness of tilde; Modules Lemma 17.3.1, Tag 01AG; Algebra Lemma 10.71.1, Tag 00LP supplies the algebraic resolution used by the parent"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof": [
+  {
+   "text": "Define the cochain complex from the augmented exact resolution by placing the j-th free module in degree -j and zero above degree zero; kernel-range identities give d squared zero and the augmentation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply tilde termwise; localization of tilde stalks and module stalk exactness imply the augmented sheaf complex is quasi-isomorphic to the degree-zero tilde module.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the complex and augmentation across the affine chart and over-site equivalences; finite functions give finite free sheaf terms, including rank zero above the bound.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01HV, functorial exactness of tilde, applied to the resolution of Tag 00LP, with stalk detection from Tag 01AG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact sequence of finite free modules sheafifies on Spec to a bounded above free cochain complex quasi-isomorphic to the associated module sheaf",
+   "results": "8 hits: SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.IsFinitePresentation, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.isQuasicoherent, SheafOfModules.instAbelian, SheafOfModules.IsQuasicoherent, SheafOfModules.isFinitePresentation",
+   "date": "2026-10-12",
+   "verdict": "no match for the complete sheafification statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde, CategoryTheory.Functor.PreservesHomology",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no match for the complete sheafification statement"
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.*(exact|homology|quasi)|((exact|homology|quasi).*tilde)|resolution.*sheaf",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-12",
+   "verdict": "no match for the complete sheafification statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of an exact augmented finite free resolution gives a quasi-isomorphism of cochain complexes on an affine scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.AlgebraicGeometry.CoherentAffineFreeResolution",
+  "by": "worker",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "parenthetical Ext-vanishing proof, resolve the coherent sheaf on an affine neighbourhood",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeResolutionSheafification",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeResolutionSheafification.lean",
+  "declaration": "AlgebraicGeometry.finite_free_resolution_sheafification",
+  "statement": "theorem finite_free_resolution_sheafification (X : Scheme.{u}) (U : X.Opens) (A : Type u) [CommRing A] (e : U.toScheme ≅ Spec (CommRingCat.of A)) (M : Type u) [AddCommGroup M] [Module A M] (n : ℕ → ℕ) (ε : (Fin (n 0) → A) →ₗ[A] M) (d : ∀ j : ℕ, (Fin (n (j + 1)) → A) →ₗ[A] (Fin (n j) → A)) (hε : Function.Surjective ε) (h₀ : LinearMap.ker ε = LinearMap.range (d 0)) (hd : ∀ j : ℕ, LinearMap.ker (d j) = LinearMap.range (d (j + 1))) : ∃ E : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ, (∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (E.X i)) ∧ (∀ i : ℤ, ∃ r : ℕ, Nonempty (E.X i ≅ SheafOfModules.free (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin r)))) ∧ ∃ q : E ⟶ (CochainComplex.singleFunctor (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) 0).obj ((Scheme.Modules.overEquiv U).inverse.obj ((Scheme.Modules.restrictFunctor e.hom).obj (tilde (ModuleCat.of A M)))), QuasiIso q",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T165513-L-2933591",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T165513-L-2933591",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

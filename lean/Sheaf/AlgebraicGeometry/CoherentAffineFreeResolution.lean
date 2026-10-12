@@ -10,10 +10,10 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Homology.QuasiIso
-import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.RingTheory.FiniteFreeResolution
+import Sheaf.AlgebraicGeometry.FiniteFreeResolutionSheafification
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Finite free resolutions on affine neighbourhoods
 
@@ -68,6 +68,61 @@ theorem coherent_affine_free_resolution
         ∃ q : E ⟶ (CochainComplex.singleFunctor
           (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) 0).obj (F.over U),
           QuasiIso q := by
-  sorry
+  obtain ⟨hq, ht⟩ :=
+    (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp hF
+  have : F.IsQuasicoherent := hq
+  have : F.IsFiniteType := ht
+  obtain ⟨D, hD⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
+  obtain ⟨i, hxi⟩ := ((Opens.coversTop_iff _ D.X).mp D.coversTop).exists_mem x
+  obtain ⟨U, hU, hxU, hUi⟩ := exists_isAffineOpen_mem_and_subset hxi
+  have : IsNoetherianRing Γ(X, U) :=
+    IsLocallyNoetherian.component_noetherian ⟨U, hU⟩
+  let W : X.Opens := D.X i
+  let f := hU.fromSpec
+  let v : Spec Γ(X, U) ⟶ W.toScheme :=
+    IsOpenImmersion.lift W.ι f (by
+      rw [Scheme.Opens.range_ι]
+      exact hU.opensRange_fromSpec.le.trans hUi)
+  have hv : v ≫ W.ι = f := IsOpenImmersion.lift_fac _ _ _
+  have : IsOpenImmersion (v ≫ W.ι) := by rw [hv]; infer_instance
+  have : IsOpenImmersion v := IsOpenImmersion.of_comp v W.ι
+  have : PreservesColimitsOfSize.{u, u} (Scheme.Modules.restrictFunctor v) :=
+    inferInstance
+  let H := (Scheme.Modules.overEquiv (D.X i)).functor ⋙
+    Scheme.Modules.restrictFunctor v
+  let a₀ : SheafOfModules.overFunctor X.ringCatSheaf (D.X i) ⋙ H ≅
+      Scheme.Modules.restrictFunctor f :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (Scheme.Modules.overFunctorEquiv (D.X i)) _ ≪≫
+      (Scheme.Modules.restrictFunctorComp v W.ι).symm ≪≫
+      Scheme.Modules.restrictFunctorCongr hv
+  have := hD.isFiniteType i
+  let σ := ((D.generators i).map H (Scheme.Modules.restrictUnitIso v).symm).ofEpi
+    (a₀.app F).hom
+  let G := F.restrict hU.fromSpec
+  let M := moduleSpecΓFunctor.obj G
+  have : Module.Finite Γ(X, U) Γ(G, ⊤) :=
+    Scheme.Modules.finite_sections_top_of_isIso_fromTildeΓ G σ
+  have : Module.Finite Γ(X, U) M :=
+    inferInstanceAs (Module.Finite Γ(X, U) Γ(G, ⊤))
+  let e := hU.isoSpec
+  let a : F.restrict U.ι ≅ (Scheme.Modules.restrictFunctor e.hom).obj G :=
+    (Scheme.Modules.restrictFunctorCongr hU.isoSpec_hom_fromSpec.symm).app F ≪≫
+      (Scheme.Modules.restrictFunctorComp e.hom hU.fromSpec).app F
+  let b : G ≅ tilde M := (asIso G.fromTildeΓ).symm
+  let c := a ≪≫ (Scheme.Modules.restrictFunctor e.hom).mapIso b
+  refine ⟨U, Γ(X, U), inferInstance, inferInstance, hxU, hU,
+    M, inferInstance, inferInstance, inferInstance, e, ⟨c⟩, ?_⟩
+  obtain ⟨n, ε, d, hε, h₀, hd⟩ := Module.exists_finite_free_resolution Γ(X, U) M
+  obtain ⟨E, hbound, hfree, q, hq⟩ :=
+    finite_free_resolution_sheafification X U Γ(X, U) e M n ε d hε h₀ hd
+  let t : F.over U ≅ (Scheme.Modules.overEquiv U).inverse.obj
+      ((Scheme.Modules.restrictFunctor e.hom).obj (tilde (ModuleCat.of Γ(X, U) M))) :=
+    (Scheme.Modules.overEquiv U).unitIso.app (F.over U) ≪≫
+      (Scheme.Modules.overEquiv U).inverse.mapIso
+        ((Scheme.Modules.overFunctorEquiv U).app F ≪≫ c)
+  have : QuasiIso q := hq
+  refine ⟨E, hbound, hfree, q ≫ (CochainComplex.singleFunctor _ 0).map t.inv, ?_⟩
+  infer_instance
 
 end AlgebraicGeometry

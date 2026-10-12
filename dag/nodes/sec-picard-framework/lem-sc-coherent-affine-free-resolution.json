@@ -28,58 +28,34 @@
  ],
  "proof": [
   {
-   "text": "Because $X$ is Noetherian, its quasi-compact and locally Noetherian hypotheses give an affine open neighbourhood $U=\\operatorname{Spec}(A)$ of $x$ with $A$ Noetherian: choose an affine member of the locally Noetherian affine cover containing $x$.",
+   "text": "Use coherence on the locally Noetherian scheme to obtain quasi-coherence and finite type. Choose a finite-type local generating family and an affine neighbourhood of x inside one member; transport its generators along the open immersion to obtain finite sections on the affine chart. The affine Noetherian component theorem gives the ring Noetherian and the tilde counit identifies the restriction with the tilde of its finite module of sections. The finite-section step uses the proved source-library theorem Scheme.Modules.finite_sections_top_of_isIso_fromTildeΓ, rather than the larger bundled affine finite-type criterion.",
    "uses": [
-    "def-weil-pbc-quasi-compact-scheme",
-    "pqf-def-locnoeth"
+    "pqf-def-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma Tag 01XZ, local affine reduction"
-   }
+   "elementary": false
   },
   {
-   "text": "By [pqf-lem-coherent-ft-locnoeth], $\\mathcal F|_U$ is quasi-coherent of finite type. Hence [lem-weil-pbc-quasi-coherent-finite-type-affine](a) gives that $M=\\Gamma(U,\\mathcal F)$ is a finite $A$-module, and [lem-weil-pbc-affine-tilde-gamma-adjunction](3) gives the counit isomorphism $\\widetilde M\\cong\\mathcal F|_U$.",
-   "uses": [
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma Tag 01XZ, coherent sheaf on an affine Noetherian open"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-finite-free-resolution-noetherian] to $M$ and write its exact augmented resolution as $\\cdots\\to A^{\\oplus n_2}\\to A^{\\oplus n_1}\\to A^{\\oplus n_0}\\to M\\to0$. Apply the tilde functor termwise and place $\\widetilde{A^{\\oplus n_i}}$ in cochain degree $-i$, with the augmentation in degree $0$. Each term is a finite-rank free $\\mathcal O_U$-module. For every $y\\in U$ corresponding to $\\mathfrak p\\subset A$, [lem-weil-pbc-spec-tilde-stalk-localization] identifies its stalk with the localization at $\\mathfrak p$; localization is exact, so the stalk of this augmented sheaf complex is the localized exact module resolution. By [lem-weil-pbc-module-stalk-exact](5), exactness is detected on stalks. Thus the resulting bounded-above complex $E^\\bullet$ is quasi-isomorphic to $\\widetilde M[0]\\cong\\mathcal F|_U[0]$.",
+   "text": "Apply the finite free resolution theorem to the finite module of sections, and apply the sheafification theorem to obtain the bounded-above finite-free complex and quasi-isomorphism. Transport the augmentation across the chart and over-site equivalences.",
    "uses": [
     "lem-weil-pbc-finite-free-resolution-noetherian",
-    "lem-weil-pbc-spec-tilde-stalk-localization",
-    "lem-weil-pbc-module-stalk-exact"
+    "lem-sc-finite-free-resolution-sheafification",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 00LP, together with Schemes Tag 01HV and Modules Tag 01AG"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-quasi-compact-scheme",
   "pqf-def-locnoeth",
   "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "lem-weil-pbc-finite-free-resolution-noetherian",
-  "lem-weil-pbc-spec-tilde-stalk-localization",
-  "lem-weil-pbc-module-stalk-exact"
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sc-finite-free-resolution-sheafification"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma Tag 01XZ, with Algebra Tag 00LP and affine tilde/Gamma equivalence Tags 01IA, 01IB"
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00LP, 01HV, 01AG; affine reduction Tag 01XZ"
  },
  "mathlib_searches": [
   {
@@ -169,8 +145,8 @@
   "file": "lean/Sheaf/AlgebraicGeometry/CoherentAffineFreeResolution.lean",
   "statement": "theorem coherent_affine_free_resolution (X : Scheme.{u}) [IsNoetherian X] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (x : X) : ∃ (U : X.Opens) (A : Type u) (_ : CommRing A) (_ : IsNoetherianRing A) (_ : x ∈ U) (_ : IsAffineOpen U) (M : Type u) (_ : AddCommGroup M) (_ : Module A M) (_ : Module.Finite A M) (e : U.toScheme ≅ Spec (CommRingCat.of A)), Nonempty (F.restrict U.ι ≅ (Scheme.Modules.restrictFunctor e.hom).obj (tilde (ModuleCat.of A M))) ∧ ∃ (E : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ), (∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (E.X i)) ∧ (∀ i : ℤ, ∃ r : ℕ, Nonempty (E.X i ≅ SheafOfModules.free (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin r)))) ∧ ∃ q : E ⟶ (CochainComplex.singleFunctor (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) 0).obj (F.over U), QuasiIso q",
   "branch": "sheaf-dag",
-  "by": "F1",
-  "date": "2026-10-11",
+  "by": "G3",
+  "date": "2026-10-12",
   "existing": false
  },
  "reviewed_lean": {
@@ -192,5 +168,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T165513-L-2933591",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
