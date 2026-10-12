@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.FiveLemma
 public import Mathlib.GroupTheory.QuotientGroup.Finite
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective
 
 /-!
@@ -186,6 +187,47 @@ lemma subsingleton_H_X₁_of_shortExact (n : ℕ) [Subsingleton (Sheaf.H S.X₃ 
 
 end LongExact
 
+section Retract
+
+variable {X Y : Scheme.{u}} (g : Y ⟶ X) {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+  (i : G ⟶ F) (r : F ⟶ G) (hir : i ≫ r = 𝟙 G)
+
+/-- The cohomology of a zero sheaf vanishes. -/
+lemma subsingleton_H_of_isZero (hG : IsZero G) (n : ℕ) : Subsingleton (Sheaf.H G n) := by
+  have h (z : Sheaf.H G n) : z = 0 := by
+    rw [← Ext.comp_mk₀_id z, hG.eq_of_src (𝟙 G) 0, Ext.mk₀_zero, Ext.comp_zero]
+  exact ⟨fun x y ↦ by rw [h x, h y]⟩
+
+include hir in
+/-- The map induced on cohomology by a section of a retraction is injective. -/
+lemma injective_H_map_of_retract (n : ℕ) : Function.Injective (Sheaf.H.map i n) :=
+  Function.LeftInverse.injective (g := Sheaf.H.map r n) fun x ↦ by
+    rw [← Sheaf.H.map_comp_apply, hir, Sheaf.H.map_id_apply]
+
+include hir in
+/-- A retract of a sheaf whose pullback map on `Hⁿ` is surjective has a surjective pullback map
+on `Hⁿ`. -/
+lemma surjective_cohomologyMap_of_retract (n : ℕ)
+    (hF : Function.Surjective (cohomologyMap g F n)) :
+    Function.Surjective (cohomologyMap g G n) := by
+  intro y
+  obtain ⟨z, hz⟩ := hF (Sheaf.H.map ((g)^*[AddCommGrpCat.{u + 1}].map i) n y)
+  refine ⟨Sheaf.H.map r n z, ?_⟩
+  rw [cohomologyMap_map, hz, ← Sheaf.H.map_comp_apply, ← Functor.map_comp, hir,
+    CategoryTheory.Functor.map_id, Sheaf.H.map_id_apply]
+
+include hir in
+/-- A retract of a sheaf whose pullback map on `Hⁿ` is bijective has a bijective pullback map
+on `Hⁿ`. -/
+lemma bijective_cohomologyMap_of_retract (n : ℕ)
+    (hF : Function.Bijective (cohomologyMap g F n)) :
+    Function.Bijective (cohomologyMap g G n) := by
+  refine ⟨fun x y h ↦ injective_H_map_of_retract i r hir n (hF.1 ?_),
+    surjective_cohomologyMap_of_retract g i r hir n hF.2⟩
+  rw [cohomologyMap_map, cohomologyMap_map, h]
+
+end Retract
+
 end Etale
 
 namespace IsCurve
@@ -195,6 +237,83 @@ open Etale
 variable {Λ : Type (u + 1)} [CommRing Λ] {k : Type u} [Field k] {X : Scheme.{u}}
   {f : X ⟶ Spec (.of k)}
 
+/-- **The eight curve assertions for the zero sheaf**: all cohomology groups, also after any
+pullback, vanish. -/
+theorem Assertions.of_isZero {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (hG : IsZero G) : Assertions Λ f G := by
+  have h₀ : IsZero ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) :=
+    Functor.map_isZero _ hG
+  have hX := subsingleton_H_of_isZero h₀
+  have hY {Y : Scheme.{u}} (g : Y ⟶ X) := subsingleton_H_of_isZero
+    (Functor.map_isZero (g)^*[AddCommGrpCat.{u + 1}] h₀)
+  have hbij {Y : Scheme.{u}} (g : Y ⟶ X) (q : ℕ) :
+      Function.Bijective (cohomologyMap g
+        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) q) :=
+    have := hX q
+    have := hY g q
+    ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun _ ↦ ⟨0, Subsingleton.elim _ _⟩⟩
+  exact ⟨fun q _ ↦ hX q, fun q _ ↦ hX q, fun _ _ _ _ q _ ↦ hX q,
+    fun q ↦ have := hX q; Finite.of_subsingleton, fun q ↦ have := hX q; Finite.of_subsingleton,
+    fun _ _ _ _ _ _ ι' _ q ↦ hbij ι' q, fun _ _ _ _ _ _ ι' _ q ↦ hbij ι' q,
+    fun a _ ↦ (hbij a 2).2⟩
+
+/-- **The eight curve assertions pass to retracts.** Let `G` be a retract of an étale sheaf `F`
+of `Λ`-modules on `X` (`i : G ⟶ F`, `r : F ⟶ G`, `i ≫ r = 𝟙 G`), and suppose that the
+coefficient hypotheses of the assertions `C₃`, `C₄`, `C₆` for `G` imply those for `F`, unless
+`G` is zero. Then `C(X, F)` implies `C(X, G)`: the cohomology of `G` and its pullback maps are
+retracts of those of `F`. -/
+theorem Assertions.of_retract {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (i : G ⟶ F) (r : F ⟶ G) (hir : i ≫ r = 𝟙 G) (hF : Assertions Λ f F)
+    (hprim : ∀ (p : ℕ), Scheme.IsPrimaryTorsionSheaf Λ G p →
+      Scheme.IsPrimaryTorsionSheaf Λ F p ∨ IsZero G)
+    (hcons : Scheme.IsConstructibleSheaf G → Scheme.IsConstructibleSheaf F)
+    (hinv : Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) G →
+      Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F ∨ IsZero G) :
+    Assertions Λ f G := by
+  set Φ := sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  have hir' : Φ.map i ≫ Φ.map r = 𝟙 _ := by rw [← Φ.map_comp, hir, Φ.map_id]
+  have hinj (q : ℕ) := injective_H_map_of_retract (Φ.map i) (Φ.map r) hir' q
+  by_cases hG : IsZero G
+  · exact Assertions.of_isZero hG
+  refine ⟨fun q hq ↦ ?_, fun q hq ↦ ?_, fun p _ _ hp q hq ↦ ?_, fun q ↦ ?_, fun q ↦ ?_,
+    fun k' _ _ X' ι f' ι' h q ↦ ?_, fun k' _ _ X' ι f' ι' h q ↦ ?_, fun {W} a _ ↦ ?_⟩
+  · have := hF.subsingleton_of_two_lt q hq
+    exact (hinj q).subsingleton
+  · have := hF.subsingleton_of_one_lt_of_isAffine q hq
+    exact (hinj q).subsingleton
+  · rcases hprim p hp with hp' | hp'
+    · have := hF.subsingleton_of_one_lt_of_isPrimaryTorsionSheaf p hp' q hq
+      exact (hinj q).subsingleton
+    · exact absurd hp' hG
+  · rename_i hcG hiG
+    have := hcons hcG
+    rcases hinv hiG with hiF | hz
+    · have := hF.finite_of_isTorsionSheafOfInvertibleOrder q
+      exact Finite.of_injective _ (hinj q)
+    · exact absurd hz hG
+  · rename_i _ hcG
+    have := hcons hcG
+    have := hF.finite_of_isProper q
+    exact Finite.of_injective _ (hinj q)
+  · rename_i hiG _ _
+    rcases hinv hiG with hiF | hz
+    · exact bijective_cohomologyMap_of_retract ι' (Φ.map i) (Φ.map r) hir' q
+        (hF.bijective_cohomologyMap_of_isTorsionSheafOfInvertibleOrder k' h q)
+    · exact absurd hz hG
+  · exact bijective_cohomologyMap_of_retract ι' (Φ.map i) (Φ.map r) hir' q
+      (hF.bijective_cohomologyMap_of_isProper k' h q)
+  · exact surjective_cohomologyMap_of_retract a (Φ.map i) (Φ.map r) hir' 2
+      (hF.surjective_cohomologyMap_of_isOpenImmersion a)
+
+/-- The eight curve assertions are invariant under isomorphism of sheaves. -/
+theorem Assertions.of_iso {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : G ≅ F)
+    (hF : Assertions Λ f F)
+    (hprim : ∀ (p : ℕ), Scheme.IsPrimaryTorsionSheaf Λ G p → Scheme.IsPrimaryTorsionSheaf Λ F p)
+    (hinv : Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) G →
+      Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F) :
+    Assertions Λ f G :=
+  hF.of_retract e.hom e.inv e.hom_inv_id (fun p hp ↦ .inl (hprim p hp))
+    (fun _ ↦ Scheme.IsConstructibleSheaf.of_iso e) (fun h ↦ .inl (hinv h))
 /-- **The eight curve assertions pass to the kernel of an epimorphism onto an acyclic sheaf.**
 Let `0 ⟶ A ⟶ B ⟶ C ⟶ 0` be a short exact sequence of étale sheaves of `Λ`-modules on a
 `k`-scheme `X`, such that `C` has no cohomology in positive degrees, and neither have its
@@ -214,19 +333,14 @@ theorem Assertions.of_shortExact_of_subsingleton
       Subsingleton (Sheaf.H ((a)^*[AddCommGrpCat.{u + 1}].obj
         ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj S.X₃))
           (q + 1)))
-    (hzero : (∀ q, Subsingleton (Sheaf.H
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj S.X₁) q)) →
-        Assertions Λ f S.X₁)
     (hprim : ∀ (p : ℕ), Scheme.IsPrimaryTorsionSheaf Λ S.X₁ p →
-      Scheme.IsPrimaryTorsionSheaf Λ S.X₂ p ∨ ∀ q, Subsingleton (Sheaf.H
-        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj S.X₁) q))
+      Scheme.IsPrimaryTorsionSheaf Λ S.X₂ p ∨ IsZero S.X₁)
     (hcons : Scheme.IsConstructibleSheaf S.X₁ →
       Scheme.IsConstructibleSheaf S.X₂ ∧ Scheme.IsConstructibleSheaf S.X₃)
     (hinv : Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) S.X₁ →
       (Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) S.X₂ ∧
         Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) S.X₃) ∨
-      ∀ q, Subsingleton (Sheaf.H
-        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj S.X₁) q)) :
+      IsZero S.X₁) :
     Assertions Λ f S.X₁ := by
   set Φ := sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
   have hT : (S.map Φ).ShortExact := shortExact_map_sheafCompose_forget₂ hS
@@ -247,15 +361,15 @@ theorem Assertions.of_shortExact_of_subsingleton
     · have : Finite (Sheaf.H (S.map Φ).X₂ (q + 1)) := hB' (q + 1)
       have : Finite (Sheaf.H (S.map Φ).X₃ q) := hC' q
       exact finite_H_X₁_of_shortExact hT q
-  by_cases hA : ∀ q, Subsingleton (Sheaf.H (Φ.obj S.X₁) q)
-  · exact hzero hA
+  by_cases hA : IsZero S.X₁
+  · exact Assertions.of_isZero hA
   refine ⟨fun q hq ↦ hsub q (by omega) (hB.subsingleton_of_two_lt q hq),
     fun q hq ↦ hsub q hq (hB.subsingleton_of_one_lt_of_isAffine q hq),
     fun p _ _ hp q hq ↦ ?_, fun q ↦ ?_, fun q ↦ ?_, fun k' _ _ X' ι f' ι' h q ↦ ?_,
     fun k' _ _ X' ι f' ι' h q ↦ ?_, fun {W} a _ ↦ ?_⟩
   · rcases hprim p hp with hp' | hp'
     · exact hsub q hq (hB.subsingleton_of_one_lt_of_isPrimaryTorsionSheaf p hp' q hq)
-    · exact hp' q
+    · exact absurd hp' hA
   · rename_i hcA hiA
     obtain ⟨hcB, hcC⟩ := hcons hcA
     rcases hinv hiA with ⟨hiB, hiC⟩ | hz
