@@ -9745,3 +9745,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:05 L: merged deliver/X2/Sheaf.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal (stage 3; reviewer PASS; first push; landing 20261012T220529-L-1396799 (proof); batch 20261012T220515; modules 1; new nodes 1)
 - 22:05 L: merged deliver/X3/Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisComparisons (stage 3; reviewer PASS; first push; landing 20261012T220530-L-1396973 (interface); batch 20261012T220515; modules 4; new nodes 3)
 - 22:05 L: merged deliver/Y2/Sheaf.RingTheory.AdjoinSingletonMaximalFiniteCover (stage 3; reviewer PASS; first push; landing 20261012T220530-L-1397223 (interface); batch 20261012T220515; modules 2; new nodes 1)
+- 22:10 L: returned deliver/B3/Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent (reviewer RETURN: (reviewer X-b3fc8, head b3fc8cee3) C1: In dag/nodes/sec-picard-framework/lem-pc-ordinary-higher-image-open-base-change.j)
