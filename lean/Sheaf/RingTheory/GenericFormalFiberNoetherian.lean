@@ -1,0 +1,34 @@
+module
+
+public import Sheaf.RingTheory.GRing
+public import Sheaf.RingTheory.CohenRing
+public import Mathlib.RingTheory.MvPowerSeries.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+
+/-! Noetherianity of the generic formal fibre of a regular power-series model.
+(blueprint: new-lem-weil-pbc-generic-formal-fibre-noetherian) -/
+
+@[expose] public section
+
+universe u
+
+/-- The generic formal fibre in the regular power-series case is Noetherian.
+Source: Stacks Project, More on Algebra, Proposition 07PS, first two paragraphs.
+(blueprint: new-lem-weil-pbc-generic-formal-fibre-noetherian) -/
+theorem isNoetherian_genericFormalFiber_of_regular_powerSeries
+    (A : Type u) [CommRing A] [IsDomain A] [IsRegularLocalRing A]
+    (hmodel :
+      (∃ (k : Type u), ∃ h : Field k, ∃ d : ℕ,
+        let _ := h
+        Nonempty (A ≃+* MvPowerSeries (Fin d) k)) ∨
+      (∃ (Λ : Type u), ∃ h : CommRing Λ, ∃ d : ℕ,
+        let _ := h
+        ∃ p : ℕ, IsCohenRing p Λ ∧
+          Nonempty (A ≃+* MvPowerSeries (Fin d) Λ)))
+    (P : Ideal A) [P.IsPrime] :
+    let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P))
+      (Localization.AtPrime P)
+    IsNoetherianRing ((⊥ : Ideal A).Fiber C) := by
+  sorry
+
+end

@@ -9,10 +9,8 @@ public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.CohenRing
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Sheaf.RingTheory.CompletionRegularLocal
-import Sheaf.RingTheory.LocalizationOfRegularRing
-import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber
-import Sheaf.RingTheory.RegularLocalLocalization
+import Sheaf.RingTheory.GenericFormalFiberNoetherian
+import Sheaf.RingTheory.GenericFormalFiberPurelyInseparableRegular
 
 /-!
 # Generic formal fibres of regular power-series models
@@ -60,4 +58,7 @@ theorem isGeometricallyRegular_genericFormalFiber_of_regular_powerSeries
     let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P))
       (Localization.AtPrime P)
     Algebra.IsGeometricallyRegular (⊥ : Ideal A).ResidueField ((⊥ : Ideal A).Fiber C) := by
-  sorry
+  dsimp [Algebra.IsGeometricallyRegular]
+  constructor
+  · exact isNoetherian_genericFormalFiber_of_regular_powerSeries A hmodel P
+  · exact isRegular_genericFormalFiber_after_finite_purelyInseparable A hmodel P

@@ -1,0 +1,106 @@
+{
+ "id": "new-lem-weil-pbc-generic-formal-fibre-purely-inseparable-regular",
+ "kind": "statement",
+ "title": "Regularity after finite purely inseparable base change",
+ "statement": "Every finite purely inseparable base change of the generic formal fibre is a regular ring.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition Tag 07PS, last two paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-regular-scheme",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "This is a named intermediate obligation extracted from the corresponding clause of Proposition 07PS. Its proof is left for a subsequent worker; the parent theorem combines it with the other clause.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition Tag 07PS, last two paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "IsNoetherianRing generic formal fibre power series",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGeometricallyRegular IsNoetherianRing Fiber AdicCompletion",
+   "date": "2026-10-12",
+   "results": "0 hits",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*regular.*formal.*fiber",
+   "date": "2026-10-12",
+   "results": "0 hits in Mathlib",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "Codex",
+  "item": "Sheaf.RingTheory.RegularPowerSeriesGenericFormalFiber",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-regular-power-series-generic-formal-fibre",
+   "place": "intermediate clause extracted from the parent proof",
+   "via": [
+    "lem-weil-pbc-regular-power-series-generic-formal-fibre"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.GenericFormalFiberPurelyInseparableRegular",
+  "file": "lean/Sheaf/RingTheory/GenericFormalFiberPurelyInseparableRegular.lean",
+  "declaration": "isRegular_genericFormalFiber_after_finite_purelyInseparable",
+  "statement": "theorem isRegular_genericFormalFiber_after_finite_purelyInseparable     (A : Type u) [CommRing A] [IsDomain A] [IsRegularLocalRing A]     (hmodel :       (∃ (k : Type u), ∃ h : Field k, ∃ d : ℕ,         let _ := h         Nonempty (A ≃+* MvPowerSeries (Fin d) k)) ∨       (∃ (Λ : Type u), ∃ h : CommRing Λ, ∃ d : ℕ,         let _ := h         ∃ p : ℕ, IsCohenRing p Λ ∧           Nonempty (A ≃+* MvPowerSeries (Fin d) Λ)))     (P : Ideal A) [P.IsPrime] :     let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P))       (Localization.AtPrime P)     ∀ (k' : Type (max u u)) [Field k']       [Algebra ((⊥ : Ideal A).ResidueField) k'] [Module.Finite ((⊥ : Ideal A).ResidueField) k']       [IsPurelyInseparable ((⊥ : Ideal A).ResidueField) k'],       IsRegularRing         (TensorProduct ((⊥ : Ideal A).ResidueField) k' ((⊥ : Ideal A).Fiber C)) ",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T112845-L-769948",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T112845-L-769948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

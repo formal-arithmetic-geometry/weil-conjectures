@@ -1,0 +1,38 @@
+module
+
+public import Sheaf.RingTheory.GRing
+public import Sheaf.RingTheory.CohenRing
+public import Mathlib.RingTheory.MvPowerSeries.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+
+/-! Regularity after purely inseparable base change for generic formal fibres.
+(blueprint: new-lem-weil-pbc-generic-formal-fibre-purely-inseparable-regular) -/
+
+@[expose] public section
+
+universe u
+
+/-- Every finite purely inseparable base change of the generic formal fibre is regular.
+Source: Stacks Project, More on Algebra, Proposition 07PS, last two paragraphs.
+(blueprint: new-lem-weil-pbc-generic-formal-fibre-purely-inseparable-regular) -/
+theorem isRegular_genericFormalFiber_after_finite_purelyInseparable
+    (A : Type u) [CommRing A] [IsDomain A] [IsRegularLocalRing A]
+    (hmodel :
+      (∃ (k : Type u), ∃ h : Field k, ∃ d : ℕ,
+        let _ := h
+        Nonempty (A ≃+* MvPowerSeries (Fin d) k)) ∨
+      (∃ (Λ : Type u), ∃ h : CommRing Λ, ∃ d : ℕ,
+        let _ := h
+        ∃ p : ℕ, IsCohenRing p Λ ∧
+          Nonempty (A ≃+* MvPowerSeries (Fin d) Λ)))
+    (P : Ideal A) [P.IsPrime] :
+    let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P))
+      (Localization.AtPrime P)
+    ∀ (k' : Type (max u u)) [Field k']
+      [Algebra ((⊥ : Ideal A).ResidueField) k'] [Module.Finite ((⊥ : Ideal A).ResidueField) k']
+      [IsPurelyInseparable ((⊥ : Ideal A).ResidueField) k'],
+      IsRegularRing
+        (TensorProduct ((⊥ : Ideal A).ResidueField) k' ((⊥ : Ideal A).Fiber C)) := by
+  sorry
+
+end
