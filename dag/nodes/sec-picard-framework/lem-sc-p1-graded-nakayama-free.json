@@ -23,61 +23,43 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-p1-graded-nakayama-generation], choose a homogeneous k-basis of N/S_+N and homogeneous lifts n_1,...,n_r. The corresponding graded map q:F=direct sum_j S(-deg n_j) \\to N is surjective, and its induced map F/S_+F \\to N/S_+N is an isomorphism, so q is a minimal finite graded free presentation.",
+   "text": "Use [lem-sc-p1-minimal-graded-presentation-exists] to construct the finite homogeneous free source, its grading, and a minimal graded surjection q onto the given N. Package these data as MinimalGradedPresentation k.",
    "uses": [
-    "lem-sc-p1-graded-nakayama-generation"
+    "lem-sc-p1-minimal-graded-presentation-exists"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof, graded Nakayama criterion applied to K_2"
-   }
+   "elementary": false
   },
   {
-   "text": "Put K=ker(q). The minimal-presentation Tor calculation [lem-sc-p1-minimal-presentation-tor] identifies Tor_1^S(N,k) with K/S_+K. The hypothesis Tor_1^S(N,k)=0 therefore gives K/S_+K=0.",
+   "text": "Apply [lem-sc-p1-minimal-presentation-tor] to this presentation and the given vanishing Tor hypothesis, obtaining a subsingleton kernel quotient K/IK.",
    "uses": [
     "lem-sc-p1-minimal-presentation-tor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof, graded Nakayama criterion applied to K_2"
-   }
+   "elementary": false
   },
   {
-   "text": "The kernel K=ker(q) of the graded surjection q:F \\to N between finitely generated graded S-modules is a finitely generated graded S-module by [lem-sc-p1-graded-kernel-finite]. Applying [lem-sc-p1-graded-nakayama-generation] to K and the empty family of homogeneous generators, using K/S_+K=0, yields K=0.",
+   "text": "The finite homogeneous source basis supplies a finite homogeneous spanning set. Apply [lem-sc-p1-graded-kernel-finite] to obtain homogeneity and finite generation of K=ker q. The finite spanning set yields Module.Finite S K. Pull each homogeneous subgroup of F back along K.subtype. Prove this grading is internal: componentwise inclusion of the direct sums is injective by internality in F, and each x in K is the sum of its ambient homogeneous components, which remain in K by homogeneity. Scalar compatibility is inherited from F. Now [lem-sc-p1-graded-nakayama-generation], its zero-quotient clause, makes K subsingleton.",
    "uses": [
     "lem-sc-p1-graded-kernel-finite",
     "lem-sc-p1-graded-nakayama-generation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof, graded Nakayama criterion applied to K_2"
-   }
+   "elementary": false
   },
   {
-   "text": "Thus q:F \\to N is an isomorphism of graded modules. Since F is a finite direct sum of graded shifts S(d) [def-weil-pbc-proj-twisting-sheaf] (2), N has the asserted graded-free form.",
-   "uses": [
-    "def-weil-pbc-proj-twisting-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof, graded Nakayama criterion applied to K_2"
-   }
+   "text": "A subsingleton kernel is bottom, hence q is injective. Together with surjectivity this gives a linear equivalence. Map the homogeneous source basis along it; degree preservation proves membership in the required target degree. No sheaf twist construction is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-p1-graded-nakayama-generation",
+  "lem-sc-p1-minimal-graded-presentation-exists",
   "lem-sc-p1-minimal-presentation-tor",
   "lem-sc-p1-graded-kernel-finite",
-  "def-weil-pbc-proj-twisting-sheaf"
+  "lem-sc-p1-graded-nakayama-generation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-  "place": "proof, graded Nakayama criterion applied to K_2"
+  "place": "P2 stage-3 Lean reduction: construct minimal presentation, apply Tor, inherit kernel grading, apply graded Nakayama and transport basis; 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -157,5 +139,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-92dcd",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T121039-L-988448",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered packet, files, node records, report, compilation, and direct importer GradedSyzygy checked against the repository and review brief; all checks pass."
  }
 }
