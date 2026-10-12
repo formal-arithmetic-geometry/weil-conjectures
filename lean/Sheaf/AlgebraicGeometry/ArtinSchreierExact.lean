@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.AlgebraicGeometry.ArtinSchreierData
+import Sheaf.AlgebraicGeometry.ArtinSchreierExactComponents
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 @[expose] public section
@@ -42,6 +43,8 @@ theorem artinSchreier_data_shortExact
             (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app U (ULift.up c))) =
         (c.val : Γ(U.unop.left, ⊤))) :
     ShortComplex.ShortExact (ShortComplex.mk iota wp hzero) := by
-  sorry
+  obtain ⟨hex, hmono, hepi⟩ := artinSchreier_data_exact_components f p hp G hG a wp iota
+    hzero hrestr hwp hiota
+  exact ShortComplex.ShortExact.mk' hex hmono hepi
 
 end AlgebraicGeometry

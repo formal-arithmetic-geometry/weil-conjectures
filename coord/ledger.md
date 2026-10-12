@@ -6222,3 +6222,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/K2/Sheaf.CategoryTheory.SheafAlgebrasDirectedColimit (stage 3; reviewer PASS; first push; landing 20261012T053938-L-2638101 (interface); batch 20261012T053916; modules 3; new nodes 2)
 - 05:39 L: merged deliver/K2/Sheaf.RingTheory.HenselizationUniversalProperty (stage 3; reviewer PASS; first push; landing 20261012T053939-L-2638200 (interface); batch 20261012T053916; modules 2; new nodes 1)
 - 05:39 L: merged deliver/K2/Sheaf.RingTheory.PairHenselization (stage 3; reviewer PASS; first push; landing 20261012T053939-L-2638311 (interface); batch 20261012T053916; modules 4; new nodes 3)
+- 05:39 L: merged deliver/M1/Sheaf.AlgebraicGeometry.ArtinSchreierExact (stage 3; reviewer PASS; first push; landing 20261012T053939-L-2638409 (interface); batch 20261012T053916; modules 2; new nodes 1)
