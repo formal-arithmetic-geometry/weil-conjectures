@@ -15,34 +15,30 @@
  ],
  "proof": [
   {
-   "text": "A nonempty one-point etale K-scheme is Spec of a finite separable extension. Apply etale_fibre_discrete_separable_points over the unique point of Spec K, identify the fibre with X, and use its only singleton component. Choose a lift and identify its residue field with a finite intermediate field L of Ks.",
+   "text": "Construct a nonempty geometric lift of X using etale_fibre_discrete_separable_points (or exists_fac_of_etale_of_isSepClosed), and choose a lift x₀.",
    "uses": [
     "lem-weil-pbc-etale-fibre-discrete-separable-points"
    ],
    "elementary": false
   },
   {
-   "text": "Let A be the subfield of Omega algebraic over K. A root in Omega of a polynomial over A is algebraic over K, so A is algebraically closed. Every lift of an etale object factors uniquely through A because its residue field is finite separable over K. The pointed-neighbourhood categories, stalk colimits and germ maps for A and Omega are thus naturally identified. Extend any K-automorphism of Ks to A; fix a transcendence basis of Omega/A and extend across the algebraic closure of the rational-function field to obtain an automorphism of Omega. Every germ has a representative, so the germ formula identifies rho with the canonical action of fieldSections_stalkInvariants transported along this stalk identification.",
+   "text": "Apply the selected-lift reconstruction obligation to obtain a section z whose germ at x₀ is f x₀.",
    "uses": [
-    "lem-weil-pbc-etale-fibre-discrete-separable-points",
-    "def-weil-pbc-geometric-stalks",
-    "lem-exc-field-sections-stalk-invariants"
+    "lem-exc-field-equivariant-germs-one-point-selected-lift"
    ],
    "elementary": false
   },
   {
-   "text": "For an element of the subgroup fixing L choose an extending automorphism of Omega. It fixes the chosen lift of X, so covariance makes the value of f at this lift invariant. Apply the surjectivity of fieldSections_stalkInvariants over L to obtain a section with that germ. Every other lift of X gives a K-embedding of L into Ks, which extends to an automorphism of Ks and then to Omega. The covariance equation for f and the canonical germ equation now give the prescribed germ at every lift. Transport across the one-point scheme isomorphism to obtain the section on X. No covering by several components and no global sheaf gluing is used.",
+   "text": "Apply propagation from the selected lift to identify the germ of z with f at every lift.",
    "uses": [
-    "lem-exc-field-sections-stalk-invariants",
-    "def-weil-pbc-geometric-stalks"
+    "lem-exc-field-equivariant-germs-one-point-propagation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-geometric-stalks",
-  "lem-exc-field-sections-stalk-invariants",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+  "lem-exc-field-equivariant-germs-one-point-selected-lift",
+  "lem-exc-field-equivariant-germs-one-point-propagation"
  ],
  "proof_origin": {
   "by": "worker",
@@ -124,10 +120,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T144103-L-2092068",
-  "kind": "interface",
+  "landing": "20261012T173913-L-3308658",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

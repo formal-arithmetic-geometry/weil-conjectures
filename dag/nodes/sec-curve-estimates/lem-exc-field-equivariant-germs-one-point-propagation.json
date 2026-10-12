@@ -1,0 +1,111 @@
+{
+ "id": "lem-exc-field-equivariant-germs-one-point-propagation",
+ "kind": "statement",
+ "title": "Propagation from one lift to all lifts",
+ "statement": "Let $K,K_s,\\Omega$ be fields in $\\mathrm{Type}\\,u$, with compatible embeddings $K\\to K_s\\to\\Omega$, where $K_s$ is a separable closure of $K$ [def-pd-separable-closure] and $\\Omega$ is algebraically closed. Put $S=\\operatorname{Spec}K$, $G=\\operatorname{Gal}(K_s/K)$, and $w=\\max(u+1,v)$. Let $F$ be a sheaf with values in $\\mathrm{Type}\\,w$ on the small etale site of $S$ [def-weil-pbc-etale-sheaf-of-sets], and let $p$ be the geometric point defined by $K\\to\\Omega$, with stalk $p^*F$ and germ maps $\\gamma_{Y,y}:F(Y)\\to p^*F$ [def-weil-pbc-geometric-stalks]. Suppose $\\rho:G\\to(p^*F\\to p^*F)$ satisfies $\\rho(g)(\\gamma_{Y,y}(z))=\\gamma_{Y,y^{\\prime}}(z)$ whenever $\\tau:\\Omega\\simeq_K\\Omega$ extends $g$ and $y^{\\prime}=\\operatorname{Spec}(\\tau)\\circ y$. No action laws for $\\rho$ need be assumed separately. For any nonempty etale $K$-scheme $X$ whose underlying space has exactly one point and function $f:p(X)\\to p^*F$ satisfying $f(x^{\\prime})=\\rho(g)(f(x))$ whenever $\\tau$ extends $g$ and $x^{\\prime}=\\operatorname{Spec}(\\tau)\\circ x$, there exists $z\\in F(X)$ such that $\\gamma_{X,x}(z)=f(x)$ for every lift $x\\in p(X)$. No assertion for empty schemes or for schemes with more than one point is made.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JM, direct proof of lemma-global-sections-point; Tag 03QW, section-galois-action-stalks, including nonalgebraic geometric points"
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite separable invariant-section theorem to the residue field of the unique point and transport across the pointed isomorphism.",
+   "uses": [
+    "lem-exc-field-sections-stalk-invariants"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-field-sections-stalk-invariants"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JM and 03QW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of a sheaf on a one point etale scheme over a field are equivariant functions from geometric lifts to its stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant family of stalk elements on a nonempty one point etale scheme over a field is realized by a section",
+   "results": "Scheme.stalkClosedPointTo, germ_stalkClosedPointTo_Spec_fromSpecStalk, fromSpecStalk_appTop, germ_stalkClosedPointTo_Spec, StructureSheaf.stalkToFiberRingHom_germ, germ_stalkClosedPointTo, StructureSheaf.toOpen_Γgerm_apply, stalkClosedPointTo_fromSpecStalk",
+   "verdict": "no exact match: these concern structure sheaves, not arbitrary etale sheaves",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toPresheafFiber\"",
+   "results": "Point.toPresheafFiber, toPresheafFiberNatTrans, toPresheafFiber_w, toPresheafFiber_jointly_surjective, toPresheafFiber_presheafFiberDesc and naturality lemmas",
+   "verdict": "no invariant-section realization theorem",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg one.point|onePoint|subsingleton.*Etale|Subsingleton X.left in lean/Sheaf/AlgebraicGeometry and lean/WeilConjectures/AlgebraicGeometry; msearch grep toPresheafFiber.*injective|equivariant.*germ|isDiscrete_preimage_singleton",
+   "results": "Existing FieldSectionsStalkInvariants requires Algebra.IsAlgebraic K Omega and gives invariant sections only over chosen finite intermediate fields; FieldEquivariantGermFamilySection is the unreduced parent. No realization result with the one-point interface and arbitrary Omega.",
+   "verdict": "no exact match; use the existing invariant-section theorem in the one-point proof plan",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FieldEquivariantGermsOnePoint",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-equivariant-germs-one-point",
+   "place": "stage-3 decomposition of the one-point reconstruction proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FieldEquivariantGermsOnePoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldEquivariantGermsOnePoint.lean",
+  "declaration": "AlgebraicGeometry.Scheme.onePoint_propagate_from_selected_lift",
+  "statement": "theorem onePoint_propagate_from_selected_lift\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))\n    (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left] :\n    let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))\n    ∀ (x₀ : p.fiber.obj X) (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),\n      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n        (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n          τ.toRingHom.comp (algebraMap Ks Ω))\n        (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y)\n        (hy : y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left)\n        (z : F.obj.obj (op Y)),\n        ρ g (p.toPresheafFiber Y y F.obj z) = p.toPresheafFiber Y y' F.obj z) →\n      ∀ (f : p.fiber.obj X → p.sheafFiber.obj F),\n        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n          (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n            τ.toRingHom.comp (algebraMap Ks Ω))\n          (x x' : p.fiber.obj X)\n          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left),\n          f x' = ρ g (f x)) →\n        ∀ (z : F.obj.obj (op X)),\n          p.toPresheafFiber X x₀ F.obj z = f x₀ →\n          ∀ x : p.fiber.obj X,\n            p.toPresheafFiber X x F.obj z = f x",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T173913-L-3308658",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T173913-L-3308658",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

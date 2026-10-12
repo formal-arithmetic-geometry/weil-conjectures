@@ -49,6 +49,70 @@ of Ks and then to Omega. Apply covariance of f and the germ formula to show
 that the same section has the prescribed germ at every lift. Transport the
 section back across the one-point scheme isomorphism. No gluing over distinct
 components is asserted or used in this lemma. -/
+/- Source: Stacks Project, Tag 04JM.
+The invariant-section reconstruction
+for the selected geometric lift of a one-point etale scheme.
+(blueprint: lem-exc-field-equivariant-germs-one-point-selected-lift).
+The proof chooses the finite separable residue field of the unique point, applies
+`fieldSections_stalkInvariants`, and transports the resulting invariant section
+across the pointed isomorphism. -/
+theorem onePoint_selected_lift_section
+    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
+    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
+    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
+    (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left] :
+    let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
+    ∀ (x₀ : p.fiber.obj X) (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),
+      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
+        (hτ : (algebraMap Ks Ω).comp g.toRingHom =
+          τ.toRingHom.comp (algebraMap Ks Ω))
+        (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y)
+        (hy : y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left)
+        (z : F.obj.obj (op Y)),
+        ρ g (p.toPresheafFiber Y y F.obj z) = p.toPresheafFiber Y y' F.obj z) →
+      ∀ (f : p.fiber.obj X → p.sheafFiber.obj F),
+        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
+          (hτ : (algebraMap Ks Ω).comp g.toRingHom =
+            τ.toRingHom.comp (algebraMap Ks Ω))
+          (x x' : p.fiber.obj X)
+          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left),
+          f x' = ρ g (f x)) →
+        ∃ z : F.obj.obj (op X),
+          p.toPresheafFiber X x₀ F.obj z = f x₀ := by sorry
+
+/- Source: Stacks Project, Tag 03QW.  Once a section has the prescribed germ at
+one lift, covariance and the canonical germ action propagate that equality to all
+lifts of a one-point etale scheme.
+(blueprint: lem-exc-field-equivariant-germs-one-point-propagation). -/
+theorem onePoint_propagate_from_selected_lift
+    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
+    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
+    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
+    (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left] :
+    let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
+    ∀ (x₀ : p.fiber.obj X) (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),
+      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
+        (hτ : (algebraMap Ks Ω).comp g.toRingHom =
+          τ.toRingHom.comp (algebraMap Ks Ω))
+        (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y)
+        (hy : y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left)
+        (z : F.obj.obj (op Y)),
+        ρ g (p.toPresheafFiber Y y F.obj z) = p.toPresheafFiber Y y' F.obj z) →
+      ∀ (f : p.fiber.obj X → p.sheafFiber.obj F),
+        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
+          (hτ : (algebraMap Ks Ω).comp g.toRingHom =
+            τ.toRingHom.comp (algebraMap Ks Ω))
+          (x x' : p.fiber.obj X)
+          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left),
+          f x' = ρ g (f x)) →
+        ∀ (z : F.obj.obj (op X)),
+          p.toPresheafFiber X x₀ F.obj z = f x₀ →
+          ∀ x : p.fiber.obj X,
+            p.toPresheafFiber X x F.obj z = f x := by sorry
+
+set_option linter.unusedVariables false in
 theorem field_equivariant_germ_family_section_onePoint
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
@@ -72,6 +136,21 @@ theorem field_equivariant_germ_family_section_onePoint
           (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left),
           f x' = ρ g (f x)) →
         ∃ z : F.obj.obj (op X), ∀ x : p.fiber.obj X,
-          p.toPresheafFiber X x F.obj z = f x := by sorry
+          p.toPresheafFiber X x F.obj z = f x  := by
+  classical
+  dsimp
+  let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
+  intro ρ hρ f hf
+  have hnon : Nonempty (p.fiber.obj X) := by
+    let y : X.left := Classical.choice (inferInstance : Nonempty X.left)
+    obtain ⟨l, hl, hy⟩ := exists_fac_of_etale_of_isSepClosed X.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) y (Subsingleton.elim (α := Spec (.of K)) _ _)
+    exact ⟨Over.homMk l hl⟩
+  let x₀ : p.fiber.obj X := Classical.choice hnon
+  obtain ⟨z, hz⟩ := onePoint_selected_lift_section K Ks Ω F X x₀ ρ hρ f hf
+  refine ⟨z, ?_⟩
+  intro x
+  exact onePoint_propagate_from_selected_lift K Ks Ω F X x₀ ρ hρ f hf z
+    (hz) x
 
 end AlgebraicGeometry.Scheme
