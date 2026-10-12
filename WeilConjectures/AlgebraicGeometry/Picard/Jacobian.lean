@@ -184,7 +184,8 @@ value at an algebraically closed point — are stated separately.
   Jacobian commutes with base change of the ground field (blueprint `sk-prop-jacobian`,
   `thm-pd-jacobian-general-field`).
 - `AlgebraicGeometry.exists_jacobian_descent`: the Jacobian over a general base field (blueprint
-  `sk-prop-jacobian-descent`).
+  `sk-prop-jacobian-descent`), and `AlgebraicGeometry.exists_jacobian_descent_torsion`: its
+  `ℓⁿ`-torsion clause.
 -/
 
 @[expose] public section
@@ -1348,8 +1349,8 @@ lemma tangentSubgroup_eq_infPoints : tangentSubgroup P = GrpObj.infPoints P := b
 /-- The kernel of `P(k[ε]) → P(k)` is commutative, even when `P` is not: it is the group of
 infinitesimal points of `P` (`AlgebraicGeometry.GrpObj.isMulCommutative_infPoints`).
 
-This rests on `AlgebraicGeometry.GrpObj.isMulCommutative_infPoints`, which is not yet proved
-(`sorry`). -/
+This rests on `AlgebraicGeometry.GrpObj.isMulCommutative_infPoints`
+(`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/InfPointsEquiv.lean`). -/
 instance : IsMulCommutative (tangentSubgroup P) := by
   rw [tangentSubgroup_eq_infPoints]
   exact GrpObj.isMulCommutative_infPoints P
@@ -1387,7 +1388,8 @@ lemma tangentSpaceAt.val_smul (c : k) (v : tangentSpaceAt P η[P]) :
 /-- The scalar action is additive in the scalar: `(c + d) • v = c • v + d • v`.
 
 The proof goes through `AlgebraicGeometry.GrpObj.lieEquiv` and the lemmas on it in
-`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie.lean`, which are not yet proved (`sorry`). -/
+`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/InfPointsEquiv.lean` and
+`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Functoriality.lean`. -/
 theorem tangentSpaceAt.add_smul (c d : k) (v : tangentSpaceAt P η[P]) :
     (c + d) • v = c • v + d • v := by
   -- transport along the bijection `GrpObj.lieEquiv` with the Lie algebra, which turns the group
@@ -2085,9 +2087,12 @@ theorem nonempty_representableBy_picardFunctorDegree_baseChange {K : Type u} [Fi
 integral curve of genus `g` over a separably closed field `k`. Then the Jacobian `J` of
 `AlgebraicGeometry.exists_jacobian` can be chosen so that moreover, for every field extension
 `k ⊆ k'` (in particular for `k'` algebraically closed) and every base change `X_{k'}` of `X`, the
-base change `J ×_k k'` represents `Pic^0_{X_{k'}/k'}`: `J(X_{k'}) = J(X) ×_k k'`. In fact any
-representing object of `Pic^0_{X/k}` has this property
-(`AlgebraicGeometry.nonempty_representableBy_picardFunctorDegree_baseChange`).
+base change `J ×_k k'` represents `Pic^0_{X_{k'}/k'}` as a group scheme: `J(X_{k'}) = J(X) ×_k k'`.
+That is, `J ×_k k'` carries a commutative group scheme structure and a representation of
+`Pic^0_{X_{k'}/k'}` respecting the group laws (`AlgebraicGeometry.IsPicardZeroMul`), as for `J`
+itself. In fact any representing object of `Pic^0_{X/k}` has this property
+(`AlgebraicGeometry.nonempty_representableBy_picardFunctorDegree_baseChange`,
+`AlgebraicGeometry.exists_commGrpObj_isPicardZeroMul`).
 
 (blueprint: `sk-prop-jacobian`, the clause `J(C_{k'}) = J(C) ×_k k'`) -/
 theorem exists_jacobian_baseChange [IsSepClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
@@ -2107,10 +2112,18 @@ theorem exists_jacobian_baseChange [IsSepClosed k] (X : Scheme.{u}) [X.Over (Spe
             (Spec.map (CommRingCat.ofHom (algebraMap k k'))) →
           ∀ (J' : Over (Spec (.of k'))) (qJ : J'.left ⟶ J.left),
             IsPullback qJ J'.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k k'))) →
-            Nonempty ((picardFunctorDegree (X' ↘ Spec (.of k')) 0).obj.RepresentableBy J') := by
+            ∃ (_ : CommGrpObj J')
+              (e' : (picardFunctorDegree (X' ↘ Spec (.of k')) 0).obj.RepresentableBy J'),
+              IsPicardZeroMul (X' ↘ Spec (.of k')) e' := by
   obtain ⟨J, _, e, hP, hS, hG, he, hZ⟩ := exists_jacobian (k := k) (X := X)
-  exact ⟨J, inferInstance, e, hP, hS, hG, he, hZ, fun _ _ _ _ _ q h J' qJ hJ ↦
-    nonempty_representableBy_picardFunctorDegree_baseChange q h 0 e J' qJ hJ⟩
+  refine ⟨J, inferInstance, e, hP, hS, hG, he, hZ, fun k' _ _ X' _ q h J' qJ hJ ↦ ?_⟩
+  have : SmoothOfRelativeDimension 1 (X' ↘ Spec (.of k')) :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange 1).of_isPullback h ‹_›
+  have : IsProper (X' ↘ Spec (.of k')) := IsProper.isStableUnderBaseChange.of_isPullback h ‹_›
+  obtain ⟨e'⟩ := nonempty_representableBy_picardFunctorDegree_baseChange q h 0 e J' qJ hJ
+  obtain ⟨_, he'⟩ := exists_commGrpObj_isPicardZeroMul (X' ↘ Spec (.of k')) e'
+  exact ⟨inferInstance, e', he'⟩
+
 omit [Field k] in
 lemma specMap_algebraMap_comp_specMap_algebraMap (k K L : Type u) [CommRing k] [CommRing K]
     [CommRing L] [Algebra k K] [Algebra K L] [Algebra k L] [IsScalarTower k K L] :
@@ -3119,6 +3132,56 @@ theorem exists_jacobian_descent (k₀ ks K : Type u) [Field k₀] [Field ks] [Fi
     refine ⟨γ, hγp, hγ, act, hact, fun L ↦ r.homEquiv.injective ?_⟩
     simp only [hψ, Equiv.apply_symm_apply, r.homEquiv_comp, hΦσ]
 
+/-- **The `ℓⁿ`-torsion of the Jacobian over a general base field.** In the situation of
+`AlgebraicGeometry.exists_jacobian_descent` (`C₀` a proper smooth geometrically connected curve
+over an arbitrary field `k₀`, `C = C₀ ×_{k₀} k̄₀`), the Galois-equivariant group isomorphism
+`e : Pic^0(C) ≃* J₀(k̄₀)` restricts, for every `ℓ` and `n`, to an isomorphism of the
+`ℓⁿ`-torsion subgroups `Pic^0(C)[ℓⁿ] ≃* J₀[ℓⁿ](k̄₀)`, which is the restriction of `e` and hence
+`Gal(k̄₀/k₀)`-equivariant. No finiteness of `k₀` and no rational point of `C₀` is assumed.
+
+(blueprint: `sk-prop-jacobian-descent`, the `ℓⁿ`-torsion clause) -/
+theorem exists_jacobian_descent_torsion (k₀ ks K : Type u) [Field k₀] [Field ks] [Field K]
+    [Algebra k₀ ks] [Algebra k₀ K] [Algebra ks K] [IsScalarTower k₀ ks K]
+    [IsSepClosure k₀ ks] [IsAlgClosure k₀ K] (C₀ : Scheme.{u}) [C₀.Over (Spec (.of k₀))]
+    [SmoothOfRelativeDimension 1 (C₀ ↘ Spec (.of k₀))] [IsProper (C₀ ↘ Spec (.of k₀))]
+    [GeometricallyConnected (C₀ ↘ Spec (.of k₀))] (g : ℕ) (hg : arithmeticGenus k₀ C₀ = g)
+    (C : Scheme.{u}) [C.Over (Spec (.of K))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))]
+    [IsProper (C ↘ Spec (.of K))] (p : C ⟶ C₀)
+    (hC : IsPullback p (C ↘ Spec (.of K)) (C₀ ↘ Spec (.of k₀))
+      (Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))) :
+    ∃ (J₀ : Over (Spec (.of k₀))) (_ : CommGrpObj J₀)
+      (r : (picardFunctorDegree (C₀ ↘ Spec (.of k₀)) 0).obj.RepresentableBy J₀),
+      IsProper J₀.hom ∧ SmoothOfRelativeDimension g J₀.hom ∧ GeometricallyIntegral J₀.hom ∧
+        IsPicardZeroMul _ r ∧
+        ∃ e : picardZero K C ≃*
+            (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k₀ K))) ⟶ J₀),
+          (∀ L, ∃ h, e L = r.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k₀)))
+            (picardSubfunctorDegree (C₀ ↘ Spec (.of k₀)) 0).toFunctor).app _
+              ⟨Pic.map hC.isoPullback.inv L.1, h⟩)) ∧
+          (∀ σ : K ≃ₐ[k₀] K, ∃ γ : C ⟶ C, γ ≫ p = p ∧
+            γ ≫ (C ↘ Spec (.of K)) = (C ↘ Spec (.of K)) ≫
+              Spec.map (CommRingCat.ofHom σ.toAlgHom.toRingHom) ∧
+            ∃ act : picardZero K C → picardZero K C,
+              (∀ L, (act L).1 = Pic.map γ L.1) ∧
+                ∀ L, e (act L) = specAlgEquivOver σ ≫ e L) ∧
+          ∀ ℓ n : ℕ, ∃ eₙ : (powMonoidHom (ℓ ^ n) : picardZero K C →* picardZero K C).ker ≃*
+              (powMonoidHom (ℓ ^ n) : (Over.mk (Spec.map (CommRingCat.ofHom
+                (algebraMap k₀ K))) ⟶ J₀) →* _).ker,
+            ∀ L, (eₙ L : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k₀ K))) ⟶ J₀) = e L := by
+  obtain ⟨J₀, _, r, hP, hS, hG, hr, -, e, he, hσ⟩ :=
+    exists_jacobian_descent k₀ ks K C₀ g hg C p hC
+  refine ⟨J₀, inferInstance, r, hP, hS, hG, hr, e, he, hσ, fun ℓ n ↦ ?_⟩
+  have hK : (powMonoidHom (ℓ ^ n) : picardZero K C →* picardZero K C).ker.map e.toMonoidHom =
+      (powMonoidHom (ℓ ^ n) : (Over.mk (Spec.map (CommRingCat.ofHom
+        (algebraMap k₀ K))) ⟶ J₀) →* _).ker := by
+    ext y
+    simp only [Subgroup.mem_map, MonoidHom.mem_ker, powMonoidHom_apply]
+    constructor
+    · rintro ⟨x, hx, rfl⟩
+      rw [MulEquiv.coe_toMonoidHom, ← map_pow, hx, map_one]
+    · intro hy
+      exact ⟨e.symm y, by rw [← map_pow, hy, map_one], by simp⟩
+  exact ⟨(e.subgroupMap _).trans (MulEquiv.subgroupCongr hK), fun L ↦ rfl⟩
 
 /-- **Base change of a representing object of `Pic^d`.** Let `C` be a proper curve of finite
 presentation over `k`, let `J` represent `Pic^d_{C/k}` by `r`, let `K/k` be a field extension and

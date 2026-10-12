@@ -29,6 +29,12 @@ the degree decomposition `Pic_{X/k} = ∐_d Pic^d_{X/k}` of
   `ℒ ↦ ℒ ⊗ pr_X^* M` (`AlgebraicGeometry.exists_iso_representableBy_picardFunctorDegree`); with
   `M = 𝒪_X(d x)` for a rational point `x` this identifies `P^0` with `P^d`
   (`AlgebraicGeometry.exists_iso_representableBy_picardFunctorDegree_zero`).
+* The translation `τ_M` of a scheme `P` representing `Pic_{X/k}` by a class `M ∈ Pic X`
+  (`AlgebraicGeometry.picardTranslation`), on points `x ↦ x · [M]`
+  (`AlgebraicGeometry.picardTranslation_hom_eq_mul`), has inverse `τ_{M⁻¹}`
+  (`AlgebraicGeometry.picardTranslation_inv`) and restricts to the isomorphisms between the
+  degree components (`AlgebraicGeometry.comp_picardTranslation_hom`,
+  `AlgebraicGeometry.exists_decomposition_picardTranslation`).
 -/
 
 @[expose] public section
@@ -351,6 +357,216 @@ theorem exists_iso_representableBy_picardFunctorDegree {d d' e : ℤ} (M : X.Pic
   refine Eq.trans ?_ h₂.symm
   exact (congr_arg (fun ψ ↦ ψ.app (.op T) L) (toSheafify_naturality J ε.hom))
 
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- Tensoring with the pullback `pr_X^* M` of a class `M ∈ Pic X`, as an endomorphism of the
+Picard presheaf `T ↦ Pic (X_T)`. -/
+noncomputable def picardPresheafMulMapFst (M : X.Pic) :
+    picardPresheaf (X ↘ Spec (.of k)) ⟶ picardPresheaf (X ↘ Spec (.of k)) where
+  app T := TypeCat.ofHom fun L ↦ (show (pullback (X ↘ Spec (.of k)) T.unop.hom).Pic from L) *
+    Pic.map (pullback.fst (X ↘ Spec (.of k)) T.unop.hom) M
+  naturality {T T'} φ := by
+    ext L
+    exact (pic_map_baseChangeMap_mul_map_fst φ.unop L M).symm
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+lemma picardPresheafMulMapFst_app_apply (M : X.Pic) (T : (Over (Spec (.of k)))ᵒᵖ)
+    (L : (pullback (X ↘ Spec (.of k)) T.unop.hom).Pic) :
+    (picardPresheafMulMapFst M).app T L =
+      L * Pic.map (pullback.fst (X ↘ Spec (.of k)) T.unop.hom) M :=
+  rfl
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- Tensoring with `pr_X^* M` is an automorphism of the Picard presheaf, with inverse tensoring
+with `pr_X^* M⁻¹`. -/
+noncomputable def picardPresheafMulMapFstIso (M : X.Pic) :
+    picardPresheaf (X ↘ Spec (.of k)) ≅ picardPresheaf (X ↘ Spec (.of k)) where
+  hom := picardPresheafMulMapFst M
+  inv := picardPresheafMulMapFst M⁻¹
+  hom_inv_id := by
+    ext T L
+    change _ * _ * _ = _
+    rw [show Pic.map _ M⁻¹ = (Pic.map _ M)⁻¹ from map_inv (Pic.mapHom _) M,
+      mul_inv_cancel_right]
+    rfl
+  inv_hom_id := by
+    ext T L
+    change _ * _ * _ = _
+    rw [show Pic.map _ M⁻¹ = (Pic.map _ M)⁻¹ from map_inv (Pic.mapHom _) M,
+      inv_mul_cancel_right]
+    rfl
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- **Translation on the Picard scheme.** Let `P` represent the relative Picard functor
+`Pic_{X/k}` through `hP` and let `M ∈ Pic X`. The translation `τ_M : P ≅ P` is the automorphism
+of `P` whose functor of points is the sheafification of `ℒ ↦ ℒ ⊗ pr_X^* M`: a `T`-point `x` of
+`P` is sent to the point `hP.homEquiv.symm (x · (a_M)_T)` (`picardTranslation_homEquiv`,
+`picardTranslation_hom_eq_mul`), where `a_M` is the `k`-point `[M]`. For `M = 𝒪_X(dx)` this is
+the translation `τ_d` of the blueprint.
+
+(blueprint: `prop-pd-picard-degree-decomposition`, part (4)) -/
+noncomputable def picardTranslation {P : Over (Spec (.of k))}
+    (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) (M : X.Pic) : P ≅ P :=
+  hP.uniqueUpToIso (hP.ofIso ((sheafToPresheaf (fppfTopology.over (Spec (.of k))) _).mapIso
+    ((presheafToSheaf (fppfTopology.over (Spec (.of k))) (Type (u + 1))).mapIso
+      (picardPresheafMulMapFstIso M))).symm)
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- The functor of points of the translation `τ_M` is the sheafification of tensoring with
+`pr_X^* M`. -/
+lemma picardTranslation_homEquiv {P : Over (Spec (.of k))}
+    (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) (M : X.Pic)
+    {T : Over (Spec (.of k))} (a : T ⟶ P) :
+    hP.homEquiv (a ≫ (picardTranslation hP M).hom) =
+      (sheafifyMap (fppfTopology.over (Spec (.of k))) (picardPresheafMulMapFst M)).app (.op T)
+        (hP.homEquiv a) := by
+  have h := hP.homEquiv_comp_uniqueUpToIso_hom (hP.ofIso
+    ((sheafToPresheaf (fppfTopology.over (Spec (.of k))) _).mapIso
+      ((presheafToSheaf (fppfTopology.over (Spec (.of k))) (Type (u + 1))).mapIso
+        (picardPresheafMulMapFstIso M))).symm) a
+  exact (((((sheafToPresheaf (fppfTopology.over (Spec (.of k))) _).mapIso
+      ((presheafToSheaf (fppfTopology.over (Spec (.of k))) (Type (u + 1))).mapIso
+        (picardPresheafMulMapFstIso M))).app (.op T)).toEquiv.symm_apply_eq).1 h)
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- **The translation `τ_M` on points coming from invertible modules**: the point classifying
+`ℒ ∈ Pic (X_T)` is sent to the point classifying `ℒ ⊗ pr_X^* M`.
+
+(blueprint: `prop-pd-picard-degree-decomposition`, part (4)) -/
+lemma homEquiv_symm_toPicardFunctor_comp_picardTranslation_hom {P : Over (Spec (.of k))}
+    (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) (M : X.Pic)
+    {T : Over (Spec (.of k))} (L : (pullback (X ↘ Spec (.of k)) T.hom).Pic) :
+    hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app (.op T) L) ≫
+        (picardTranslation hP M).hom =
+      hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app (.op T)
+        (L * Pic.map (pullback.fst (X ↘ Spec (.of k)) T.hom) M)) := by
+  rw [Equiv.eq_symm_apply, picardTranslation_homEquiv, Equiv.apply_symm_apply]
+  exact (congr_arg (fun ψ ↦ ψ.app (.op T) L)
+    (toSheafify_naturality (fppfTopology.over (Spec (.of k))) (picardPresheafMulMapFst M))).symm
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- **The inverse of `τ_M` is `τ_{M⁻¹}`.** For `M = 𝒪_X(dx)` this says `τ_d⁻¹ = τ_{-d}`.
+
+(blueprint: `prop-pd-picard-degree-decomposition`, part (4)) -/
+theorem picardTranslation_inv {P : Over (Spec (.of k))}
+    (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) (M : X.Pic) :
+    (picardTranslation hP M).inv = (picardTranslation hP M⁻¹).hom := by
+  have h : sheafifyMap (fppfTopology.over (Spec (.of k))) (picardPresheafMulMapFst M) ≫
+      sheafifyMap (fppfTopology.over (Spec (.of k))) (picardPresheafMulMapFst M⁻¹) = 𝟙 _ := by
+    rw [← sheafifyMap_comp]
+    exact (congrArg (sheafifyMap (fppfTopology.over (Spec (.of k))))
+      (picardPresheafMulMapFstIso M).hom_inv_id).trans (sheafifyMap_id _ _)
+  refine Iso.inv_ext (hP.homEquiv.injective ?_)
+  rw [← Category.id_comp ((picardTranslation hP M).hom ≫ _), ← Category.assoc,
+    picardTranslation_homEquiv, picardTranslation_homEquiv]
+  exact congr_arg (fun ψ ↦ ψ.app (.op P) (hP.homEquiv (𝟙 P))) h
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- **`τ_M` is translation by the `k`-point `[M]`.** If `P` is a group scheme representing
+`Pic_{X/k}` compatibly with the group laws, then `τ_M = m ∘ (id, a_M ∘ π)`: a `T`-point `x` is
+sent to `x · (a_M)_T`, where `a_M : Spec k ⟶ P` classifies `M` and `π : T ⟶ Spec k`.
+
+(blueprint: `prop-pd-picard-degree-decomposition`, part (4)) -/
+theorem picardTranslation_hom_eq_mul {P : Over (Spec (.of k))} [GrpObj P]
+    (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P)
+    (hPm : IsPicardMul (X ↘ Spec (.of k)) hP) (M : X.Pic) {T : Over (Spec (.of k))}
+    (a : T ⟶ P) :
+    a ≫ (picardTranslation hP M).hom = a * (toUnit T ≫ hP.homEquiv.symm
+      ((toPicardFunctor (X ↘ Spec (.of k))).app (.op (𝟙_ (Over (Spec (.of k)))))
+        (Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) M))) := by
+  apply hP.homEquiv.injective
+  refine SheafifyGrp.ext (J := fppfTopology.over (Spec (.of k)))
+    (P := picardPresheaf (X ↘ Spec (.of k))) _
+    (SheafifyGrp.imageSieve_mem (J := fppfTopology.over (Spec (.of k))) (hP.homEquiv a))
+    fun Z g ⟨L, hL⟩ ↦ ?_
+  have ha : g ≫ a = hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app (.op Z) L) := by
+    refine hP.homEquiv.eq_symm_apply.2 ((hP.homEquiv_comp g a).trans ?_)
+    exact hL.symm
+  have hb (N : (pullback (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom).Pic) :
+      toUnit Z ≫ hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app _ N) =
+        hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app (.op Z)
+          (Pic.map (baseChangeMap (X ↘ Spec (.of k)) (toUnit Z)) N)) := by
+    rw [hP.comp_homEquiv_symm]
+    exact congrArg hP.homEquiv.symm
+      (NatTrans.naturality_apply (toPicardFunctor (X ↘ Spec (.of k))) (toUnit Z).op N).symm
+  have hfst : baseChangeMap (X ↘ Spec (.of k)) (toUnit Z) ≫
+      pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom =
+        pullback.fst (X ↘ Spec (.of k)) Z.hom :=
+    pullback.lift_fst _ _ _ |>.trans (Category.comp_id _)
+  refine (hP.homEquiv_comp g _).symm.trans (Eq.trans ?_ (hP.homEquiv_comp g _))
+  congr 1
+  rw [← Category.assoc, ha, homEquiv_symm_toPicardFunctor_comp_picardTranslation_hom,
+    MonObj.comp_mul, ha, ← Category.assoc, comp_toUnit, hb, ← Pic.map_comp, hfst, hPm]
+
+/-- **The translation restricts to the translation between degree components.** Let `P`
+represent `Pic_{X/k}`, let `j : P^d ⟶ P` and `j' : P^{d'} ⟶ P` be the inclusions of schemes
+representing `Pic^d_{X/k}` and `Pic^{d'}_{X/k}`, compatible with the representations, and let
+`φ : P^d ≅ P^{d'}` act on points by tensoring with `pr_X^* M`, where `M ∈ Pic X` has degree
+`e = d' - d` (`AlgebraicGeometry.exists_iso_representableBy_picardFunctorDegree`). Then the
+translation `τ_M` of `P` restricts to `φ`: `j ≫ τ_M = φ ≫ j'`.
+
+(blueprint: `prop-pd-picard-degree-decomposition`, part (4)) -/
+theorem comp_picardTranslation_hom {d d' e : ℤ} (M : X.Pic)
+    (hM : picDegreeHom k X M = .ofAdd e) (h : d' = d + e) {P Pd Pd' : Over (Spec (.of k))}
+    (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P)
+    (ed : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy Pd)
+    (ed' : (picardFunctorDegree (X ↘ Spec (.of k)) d').obj.RepresentableBy Pd')
+    (j : Pd ⟶ P) (j' : Pd' ⟶ P)
+    (hj : ∀ {T : Over (Spec (.of k))} (L : (picardPresheaf (X ↘ Spec (.of k))).obj (.op T))
+      (hL : L ∈ (picardSubfunctorDegree (X ↘ Spec (.of k)) d).obj (.op T)),
+      ed.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+          (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor).app (.op T) ⟨L, hL⟩) ≫ j =
+        hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app (.op T) L))
+    (hj' : ∀ {T : Over (Spec (.of k))} (L : (picardPresheaf (X ↘ Spec (.of k))).obj (.op T))
+      (hL : L ∈ (picardSubfunctorDegree (X ↘ Spec (.of k)) d').obj (.op T)),
+      ed'.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+          (picardSubfunctorDegree (X ↘ Spec (.of k)) d').toFunctor).app (.op T) ⟨L, hL⟩) ≫ j' =
+        hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app (.op T) L))
+    (φ : Pd ≅ Pd')
+    (hφ : ∀ {T : Over (Spec (.of k))}
+      (L : (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor.obj (.op T)),
+      ed.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+          (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor).app (.op T) L) ≫ φ.hom =
+        ed'.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+          (picardSubfunctorDegree (X ↘ Spec (.of k)) d').toFunctor).app (.op T)
+            ((picardSubfunctorDegreeMulMapFst M hM h).app (.op T) L))) :
+    j ≫ (picardTranslation hP M).hom = φ.hom ≫ j' := by
+  apply hP.homEquiv.injective
+  refine SheafifyGrp.ext (J := fppfTopology.over (Spec (.of k)))
+    (P := picardPresheaf (X ↘ Spec (.of k))) _
+    (SheafifyGrp.imageSieve_mem (J := fppfTopology.over (Spec (.of k)))
+      (P := (picardSubfunctorDegree _ d).toFunctor) (ed.homEquiv (𝟙 Pd))) fun Z g ⟨L, hL⟩ ↦ ?_
+  have hg : g = ed.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+      (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor).app (.op Z) L) := by
+    refine ed.homEquiv.eq_symm_apply.2 ?_
+    have h' := ed.homEquiv_comp g (𝟙 Pd)
+    rw [Category.comp_id] at h'
+    exact h'.trans hL.symm
+  have h₁ : g ≫ j = hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app (.op Z) L.1) :=
+    (congrArg (· ≫ j) hg).trans (hj L.1 L.2)
+  have h₂ : (g ≫ φ.hom) ≫ j' = hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app
+      (.op Z) ((picardSubfunctorDegreeMulMapFst M hM h).app (.op Z) L).1) :=
+    (congrArg (· ≫ j') ((congrArg (· ≫ φ.hom) hg).trans (hφ L))).trans
+      (hj' _ ((picardSubfunctorDegreeMulMapFst M hM h).app (.op Z) L).2)
+  refine (hP.homEquiv_comp g _).symm.trans (Eq.trans ?_ (hP.homEquiv_comp g _))
+  congr 1
+  rw [← Category.assoc, h₁, homEquiv_symm_toPicardFunctor_comp_picardTranslation_hom,
+    ← Category.assoc, h₂]
+  rfl
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- **The inverse translation restricts to the inverse.** In the situation of
+`comp_picardTranslation_hom`, the translation `τ_{M⁻¹} = τ_M⁻¹` of `P` restricts to `φ⁻¹`:
+`j' ≫ τ_{M⁻¹} = φ⁻¹ ≫ j`.
+
+(blueprint: `prop-pd-picard-degree-decomposition`, part (4)) -/
+theorem comp_picardTranslation_inv_hom {P Pd Pd' : Over (Spec (.of k))}
+    (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) (M : X.Pic)
+    (j : Pd ⟶ P) (j' : Pd' ⟶ P) (φ : Pd ≅ Pd')
+    (hφ : j ≫ (picardTranslation hP M).hom = φ.hom ≫ j') :
+    j' ≫ (picardTranslation hP M⁻¹).hom = φ.inv ≫ j := by
+  rw [← picardTranslation_inv, eq_comm, Iso.inv_comp_eq, ← Category.assoc, ← hφ,
+    Category.assoc, Iso.hom_inv_id, Category.comp_id]
+
 variable [GeometricallyIntegral (X ↘ Spec (.of k))]
 
 /-- **`Pic^0 ≅ Pic^d` by tensoring with `𝒪_X(dx)`.** Let `X` be a smooth projective curve over a
@@ -381,6 +597,54 @@ theorem exists_iso_representableBy_picardFunctorDegree_zero (d : ℤ)
     rw [map_zpow, picDegreeHom_ofIsInvertible, degree_toModules_ker_fieldPoints, ← ofAdd_zsmul,
       smul_eq_mul, neg_mul_neg, _root_.mul_one]
   exact ⟨_, hM, rfl, exists_iso_representableBy_picardFunctorDegree _ hM _ P₀ Pd hP₀ hPd⟩
+
+
+/-- **Translation by `𝒪_X(dx)` on the Picard scheme, restricted to the degree components.** Let
+`X` be a smooth projective curve over a separably closed field `k`, `x` a rational point, and
+`P` a scheme representing `Pic_{X/k}`, with its decomposition into the open and closed
+subschemes `P^d` representing `Pic^d_{X/k}` (`exists_decomposition_picardFunctor_representableBy`).
+Let `M = 𝒪_X(dx)` and let `τ_d = picardTranslation hP M` be the translation of `P` by the
+`k`-point `[𝒪_X(dx)]`, whose inverse is `τ_{-d} = picardTranslation hP M⁻¹`
+(`picardTranslation_inv`). Then `τ_d` restricts to an isomorphism `φ : P^0 ≅ P^d` which on
+points is tensoring with `pr_X^* 𝒪_X(dx)`, i.e. `j_0 ≫ τ_d = φ ≫ j_d`, and `τ_{-d}` restricts to
+its inverse, `j_d ≫ τ_{-d} = φ⁻¹ ≫ j_0`.
+
+(blueprint: `prop-pd-picard-degree-decomposition`, part (4)) -/
+theorem exists_decomposition_picardTranslation [IsSepClosed k] (d : ℤ)
+    (x : (X ↘ Spec (.of k)).fieldPoints k) (P : Over (Spec (.of k)))
+    (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) :
+    ∃ (M : X.Pic) (hM : picDegreeHom k X M = .ofAdd d),
+      (letI := (Hom.isInvertible_ker_fieldPoints x).isInvertible_toModules;
+        M = Pic.ofIsInvertible x.1.ker.toModules ^ (-d)) ∧
+      ∃ (Pd : ℤ → Over (Spec (.of k))) (j : ∀ d, Pd d ⟶ P)
+        (e : ∀ d, (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy (Pd d)),
+        (∀ d, IsOpenImmersion (j d).left) ∧
+        (∀ d, IsClopen (Set.range (j d).left.base)) ∧
+        (∀ d d', d ≠ d' → Disjoint (Set.range (j d).left.base) (Set.range (j d').left.base)) ∧
+        (⋃ d, Set.range (j d).left.base) = Set.univ ∧
+        (∀ d {T : Over (Spec (.of k))} (L : (picardPresheaf (X ↘ Spec (.of k))).obj (.op T))
+          (hL : L ∈ (picardSubfunctorDegree (X ↘ Spec (.of k)) d).obj (.op T)),
+          (e d).homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+              (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor).app (.op T) ⟨L, hL⟩) ≫
+            j d = hP.homEquiv.symm ((toPicardFunctor (X ↘ Spec (.of k))).app (.op T) L)) ∧
+        ∃ φ : Pd 0 ≅ Pd d,
+          (∀ {T : Over (Spec (.of k))}
+            (L : (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).toFunctor.obj (.op T)),
+            (e 0).homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+                (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).toFunctor).app (.op T) L) ≫
+              φ.hom = (e d).homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+                (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor).app (.op T)
+                  ((picardSubfunctorDegreeMulMapFst M hM (zero_add d).symm).app (.op T) L))) ∧
+          j 0 ≫ (picardTranslation hP M).hom = φ.hom ≫ j d ∧
+          j d ≫ (picardTranslation hP M⁻¹).hom = φ.inv ≫ j 0 := by
+  obtain ⟨Pd, j, e, h₁, -, h₂, h₃, h₄, hj⟩ :=
+    exists_decomposition_picardFunctor_representableBy P hP
+  obtain ⟨M, hM, hMx, φ, hφ⟩ :=
+    exists_iso_representableBy_picardFunctorDegree_zero d x (Pd 0) (Pd d) (e 0) (e d)
+  have hτ := comp_picardTranslation_hom M hM (zero_add d).symm hP (e 0) (e d) (j 0) (j d)
+    (hj 0) (hj d) φ hφ
+  exact ⟨M, hM, hMx, Pd, j, e, h₁, h₂, h₃, h₄, hj, φ, hφ, hτ,
+    comp_picardTranslation_inv_hom hP M (j 0) (j d) φ hτ⟩
 
 end Translation
 
