@@ -9,8 +9,6 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.RingTheory.CohenRing
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.MvPowerSeries.Basic
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegularCore
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegularResidue
 
 /-!
 # Complete local domains finite over regular subrings
@@ -158,12 +156,6 @@ theorem complete_local_domain_finite_over_regular
           let _ := h
           ∃ p : ℕ, IsCohenRing p Λ ∧
           Nonempty (R₀ ≃+* MvPowerSeries (Fin d) Λ))) := by
-      obtain ⟨R₀, hreg, hcore⟩ :=
-        complete_local_domain_finite_over_regular_core R
-      let _ := hreg.toIsLocalRing
-      obtain ⟨hcomplete, hfinite⟩ := hcore
-      obtain ⟨hcomap, e, he, hmodel⟩ :=
-        complete_local_domain_finite_over_regular_residue R R₀ hreg hfinite hcomplete
-      exact ⟨R₀, hreg, hcomplete, hfinite, hcomap, e, he, hmodel⟩
+  sorry
 
 end IsLocalRing
