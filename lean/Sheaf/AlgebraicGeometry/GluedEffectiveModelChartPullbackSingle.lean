@@ -9,6 +9,16 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace CategoryTheory.Over.DescentDatum
 
+/- STATEMENT-DISPUTED: The hypotheses do not specify the descended overlaps or cover V.
+Take X = Y = W₀ = Spec k, p = identity, V = Spec k ⨿ Spec k over X by the fold map,
+I a singleton, U its first component, W the identity object over Y, q the component
+isomorphism, q₀ the fold map, and j the identity. All hypotheses hold. The conclusion
+would make U.ι an isomorphism (a pullback of j = identity), although it misses the
+second component. Even adding a cover of V and cartesianity for all charts is
+insufficient: use two indices for the two components and let both j be identity.
+The specified data permit identifying disjoint source charts in the target.
+See report.md for the hypothesis-by-hypothesis check and compiled counterexample. -/
+
 /-- The pullback property for one chart follows from local cartesian chart data
 and the open cover of the glued model.  This is the local chart-square verification
 in Stacks Project, Descent, Tag 0AP4.
