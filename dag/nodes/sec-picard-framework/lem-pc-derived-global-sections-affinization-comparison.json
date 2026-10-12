@@ -15,37 +15,32 @@
  ],
  "proof": [
   {
-   "text": "Let P be the one-point ringed space with ring A, as in [def-pc-global-derived-rhom]. Let p:X → P have the identity on A, and let b:Y → P have ring map ΓSpecIso.inv:A → Γ(Y,O_Y). The Γ-Spec adjunction identity ΓSpecIso.inv ≫ a.appTop = id gives a ≫ b = p. On the empty open every sheaf of rings has its terminal zero ring, so this determines the entire ringed-space morphism. The identity is also valid when X is empty, when A is the zero ring.",
-   "uses": [
-    "def-pc-global-derived-rhom"
-   ],
+   "text": "The underived composite a_* followed by Γ(Spec Γ(X,O_X),-) and restriction along ΓSpecIso.inv is naturally isomorphic to Γ(X,-). On whole-space sections it is successive restriction along a.appTop and ΓSpecIso.inv. Mathlib Scheme.toSpecΓ_appTop identifies a.appTop with ΓSpecIso.hom; ModuleCat.restrictScalarsComp and restrictScalarsId identify the two restrictions with the identity, naturally in module morphisms.",
+   "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply [lem-pc-ringed-spaces-derived-direct-image-composition] to a and b, obtaining Ra_* ⋙ Rb_* ≅ Rp_*. This uses no exactness of module pullback and no flatness of a: the ringed-space theorem is the derived adjunction/composition theorem, not a claim that underived pushforward preserves K-injectivity.",
+   "text": "By [lem-pc-global-sections-direct-image-kinjective-acyclic], the right-derived unit of the latter global-sections/restriction functor G is invertible on a_*I for every K-injective I. The composite unit for Ra_* followed by RG is therefore invertible on K-injective I: its other factor is RG of the unit of Ra_*, which is invertible at I. The K-injective derivability criterion makes this composite a right derived functor of the underived composite a_* followed by G.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-direct-image-composition"
+    "lem-pc-global-sections-direct-image-kinjective-acyclic"
    ],
    "elementary": false
   },
   {
-   "text": "The evaluation equivalence Mod(P) ≌ Mod(A) of [def-pc-global-derived-rhom] is exact. Compose its induced derived equivalence with the preceding comparison. It identifies Rp_* with RΓ(X,-); underived b_* followed by evaluation is Γ(Y,-) with scalars restricted along ΓSpecIso.inv. Postcomposition by an exact equivalence commutes with the total right derived construction, so Rb_* followed by derived evaluation is the right derived functor of that underived composite. Invert and compose the natural comparisons to obtain the asserted isomorphism. Naturality is inherited from the derived composition and exact-functor localization comparisons, hence holds on every unbounded derived object.",
-   "uses": [
-    "def-pc-global-derived-rhom"
-   ],
-   "elementary": false
+   "text": "The uniqueness isomorphism for right derived functors identifies R(a_* followed by G) with Ra_* followed by RG. Apply right-derived functoriality to the underived natural isomorphism of the first step, invert that isomorphism, and compose with uniqueness. This is exactly the required natural isomorphism RΓ(X,-) to Ra_* followed by RG, with the stated universe instances and scalar transport unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-global-derived-rhom",
-  "lem-pc-ringed-spaces-derived-direct-image-composition"
+  "lem-pc-global-sections-direct-image-kinjective-acyclic"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "M1",
+  "agent": "M2",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0D5T, specialized to the one-point global-sections morphism of Tag 079V",
-  "note": "Specialization written by M1 after reading Tags 0D5T and 079V online; local literature checkout has only indexes."
+  "place": "Tags 0D5T and 079V",
+  "note": "Proved underived scalar cancellation in Lean and used the K-injective acyclicity criterion directly. The new acyclicity theorem is also proved from existing point-evaluation and ringed-space direct-image acyclicity declarations; no new sorry."
  },
  "mathlib_searches": [
   {
@@ -119,9 +114,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T165520-L-2935849",
+  "landing": "20261012T194124-L-459267",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

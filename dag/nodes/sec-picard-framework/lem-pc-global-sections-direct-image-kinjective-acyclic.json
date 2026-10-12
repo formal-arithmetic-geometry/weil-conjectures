@@ -1,0 +1,152 @@
+{
+ "id": "lem-pc-global-sections-direct-image-kinjective-acyclic",
+ "kind": "statement",
+ "title": "Global sections acyclicity of direct images of K-injective complexes",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], let $A$ be a commutative ring and $\\varphi:A\\to\\Gamma(Y,\\mathcal O_Y)$ a ring map. Let $I$ be any K-injective unbounded complex of $\\mathcal O_X$-modules. With module direct image [def-pc-ringed-spaces-derived-direct-image], module-valued global sections [def-sc-ringed-space-module-cohomology], and derived categories [def-pc-derived-category], the right-derived unit for $G=\\operatorname{Res}_{\\varphi}\\circ\\Gamma(Y,-)$ is invertible at $f_*I$: $Q(G(f_*I))\\to RG(Q(f_*I))$ is an isomorphism in $D(A)$. No flatness, quasi-coherence or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 20.28.2 (Tag 0D5T) and Section 20.28 (Tag 079V); point-valued global sections construction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-direct-image-global-sections-kinjective-acyclic] to f and I. The unit of RΓ(Y,-) is invertible at f_*I. Choose the standard derived category for Γ(Y,O_Y)-modules as the intermediate category; no K-injectivity of f_*I is assumed.",
+   "uses": [
+    "lem-pc-direct-image-global-sections-kinjective-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For additive F and exact G, RF followed by RG with its composite unit is a right derived functor of F followed by G. At an object where the F unit is invertible the composite unit is invertible, since the G unit is invertible everywhere. The right-derived universal property gives an invertible descent comparison; its unit equation transfers invertibility to the standard unit of R(F followed by G). Apply this to F=Γ(Y,-) and exact restriction of scalars G=Res_φ, valid for every ring map, including noninjective φ and zero rings.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-direct-image-global-sections-kinjective-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "M2",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D5T and 079V",
+  "note": "Second reading M2: reused the existing direct-image global-sections acyclicity theorem, followed by exact restriction of scalars; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pushforward of K-injective complexes of modules is acyclic for global sections",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of K-injective module complex is acyclic for global sections",
+   "results": "Eight hits: IsKInjective and bounded-below injective criteria, injective resolutions, right-orthogonal characterization, and ordinary higher-derived vanishing. None is this module-valued unbounded unit comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.mapHomotopyCategory",
+   "results": "Unknown identifier; no hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*[Kk][Ii]njective|[Kk][Ii]njective.*globalSections in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Category/ModuleCat",
+   "results": "No hits. The project already supplies general direct-image acyclicity and the point-evaluation equivalence, used here.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived unit invertible on pushforward K injective complex global sections",
+   "results": "Eight hits, about ordinary right derived functors on injectives or K-injective localization; none is this unbounded scalar-restricted unit statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*[Kk].*[Ii]njective|[Kk].*[Ii]njective.*globalSections (Lean library and upstream)",
+   "results": "Found AlgebraicGeometry.isIso_directImage_globalSections_unit_on_kInjective in Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic. Reused it; exact scalar restriction is the remaining extension.",
+   "date": "2026-10-13",
+   "verdict": "partial match reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedGlobalSectionsAffinizationComparison",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "global-sections affinization comparison: exact evaluation on the point after derived direct-image composition",
+   "via": [
+    "lem-pc-derived-global-sections-affinization-comparison",
+    "lem-pc-derived-global-sections-preserves-coproducts",
+    "lem-pc-derived-tensor-unit-compact",
+    "lem-pc-perfect-object-compact",
+    "lem-sc-smooth-proper-tensor-direct-sums",
+    "lem-pc-derived-global-sections-cohomology-coproduct"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GlobalSectionsDirectImageKInjectiveAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalSectionsDirectImageKInjectiveAcyclic.lean",
+  "declaration": "AlgebraicGeometry.isIso_globalSections_restrictScalars_unit_on_directImage_kInjective",
+  "statement": "theorem isIso_globalSections_restrictScalars_unit_on_directImage_kInjective\n    {X Y : Scheme.{u}} {A : CommRingCat.{u}}\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [HasDerivedCategory.{wA} (ModuleCat.{u} A)]\n    (f : X ⟶ Y) (φ : A ⟶ Γ(Y, ⊤))\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    [I.IsKInjective] :\n    IsIso ((RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙\n      ModuleCat.restrictScalars φ.hom).rightDerivedFunctorUnit.app\n        (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory\n          (ComplexShape.up ℤ)).obj\n            ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I)))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T194124-L-459267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T194124-L-459267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

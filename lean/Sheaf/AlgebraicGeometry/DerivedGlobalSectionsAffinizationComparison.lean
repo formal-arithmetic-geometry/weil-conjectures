@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.GlobalDerivedHom
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.AlgebraicGeometry.GlobalSectionsDirectImageKInjectiveAcyclic
 
 /-! # Derived global sections after affinization
 
@@ -23,6 +23,23 @@ and the construction of derived global sections in Section 20.28, Tag 079V.
 universe u wX wY wA
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
+
+private noncomputable def underived_comparison (X : Scheme.{u}) :
+    RingedSpace.moduleDirectImage X.toSpecΓ.toLRSHom.toShHom ⋙
+      (RingedSpace.globalSectionsFunctor (Spec Γ(X, ⊤)).toRingedSpace ⋙
+        ModuleCat.restrictScalars (Scheme.ΓSpecIso Γ(X, ⊤)).inv.hom) ≅
+      RingedSpace.globalSectionsFunctor X.toRingedSpace := by
+  refine NatIso.ofComponents (fun M ↦ ?_) ?_
+  · change (ModuleCat.restrictScalars (Scheme.ΓSpecIso Γ(X, ⊤)).inv.hom).obj
+      ((ModuleCat.restrictScalars X.toSpecΓ.appTop.hom).obj (M.val.obj (op ⊤))) ≅
+      M.val.obj (op ⊤)
+    exact (ModuleCat.restrictScalarsComp _ _).symm.app _ ≪≫
+      (ModuleCat.restrictScalarsId' _ (by
+        rw [← CommRingCat.hom_comp, Scheme.toSpecΓ_appTop, Iso.inv_hom_id]
+        rfl)).app _
+  · intro M N f
+    apply ModuleCat.hom_ext
+    rfl
 
 /-- Derived global sections factors through derived pushforward to the spectrum of
 its own coefficient ring. The ring isomorphism `ΓSpecIso` supplies the scalar transport.
@@ -56,6 +73,37 @@ theorem derivedGlobalSections_affinization_comparison (X : Scheme.{u})
       schemeDerivedDirectImage X.toSpecΓ ⋙
         (RingedSpace.globalSectionsFunctor (Spec Γ(X, ⊤)).toRingedSpace ⋙
           ModuleCat.restrictScalars (Scheme.ΓSpecIso Γ(X, ⊤)).inv.hom).rightDerivedFunctor) := by
-  sorry
+  let : HasDerivedCategory.{wA} (ModuleCat.{u} Γ(X, ⊤)) :=
+    inferInstanceAs (HasDerivedCategory.{wA}
+      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))))
+  have : (RingedSpace.globalSectionsFunctor X.toRingedSpace).Additive :=
+    RingedSpace.globalSectionsFunctor_additive X.toRingedSpace
+  let F := RingedSpace.moduleDirectImage X.toSpecΓ.toLRSHom.toShHom
+  let G := RingedSpace.globalSectionsFunctor (Spec Γ(X, ⊤)).toRingedSpace ⋙
+    ModuleCat.restrictScalars (Scheme.ΓSpecIso Γ(X, ⊤)).inv.hom
+  let β := Functor.rightDerivedFunctorCompUnit F G
+  have hβ : (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor).IsRightDerivedFunctor β
+      (HomotopyCategory.quasiIso
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)) := by
+    refine (HomotopyCategory.KInjectives.localizerMorphism_derives
+      ((F ⋙ G).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+        DerivedCategory.Qh)).isRightDerivedFunctor_of_isIso _ (fun J ↦ ?_)
+    obtain ⟨I, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective J
+    change IsIso (β.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I))
+    have h₁ : IsIso (F.rightDerivedFunctorUnit.app
+        ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I)) := inferInstance
+    have h₂ : IsIso (G.rightDerivedFunctorUnit.app
+        ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj
+          ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I))) :=
+      isIso_globalSections_restrictScalars_unit_on_directImage_kInjective
+        X.toSpecΓ (Scheme.ΓSpecIso Γ(X, ⊤)).inv I
+    dsimp [β, Functor.rightDerivedFunctorCompUnit]
+    infer_instance
+  let e := Functor.rightDerivedUnique (F ⋙ G).rightDerivedFunctor
+    (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor)
+    (F ⋙ G).rightDerivedFunctorUnit β
+    (HomotopyCategory.quasiIso
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))
+  exact ⟨(Functor.rightDerivedFunctorNatIso (underived_comparison X)).symm ≪≫ e⟩
 
 end AlgebraicGeometry
