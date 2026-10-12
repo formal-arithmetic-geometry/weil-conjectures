@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-etale-affine-open-cech-derived-evaluation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-prop-cd Step 5, last sentence: quasi-coherent etale descent for the Artin-Schreier bound; Acyclic affine-open cover computes derived evaluation",
+   "via": [
+    "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
+    "lem-sc-etale-qcoherent-cohomology-ulift"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Acyclic affine-open cover computes derived evaluation",
+ "statement": "Let $X$ be a separated scheme [def-weil-pbc-scheme-conventions]. Let $i:X_{Zar}\\to X_{et}$ be a cover-preserving finite-limit-preserving functor [def-weil-pbc-sites-and-cohomology] whose composite with forgetting to schemes over $X$ is the open-subscheme restriction functor; assume $i(X)$ is terminal. Let $U_j$ be a finite affine open cover of $X$, and $G$ an additive etale sheaf with coefficients in $\\mathrm{Ab}_{u+1}$ [def-weil-pbc-abelian-etale-sheaves], whose sheaf category has injective resolutions. Assume that $R^q\\mathrm{ev}_W(G)=0$ for every affine etale $X$-scheme $W$ and every $q>0$. Then for every $q\\geq0$, $R^q\\mathrm{ev}_{i(X)}(G)$ is isomorphic as an additive group to the degree-$q$ homology of $C^\\bullet(U,i^*G)$ [def-weil-pbc-cech-complex]. Here $i^*G$ is the section presheaf $W\\mapsto G(i(W))$, and derived evaluation means the right-derived functor of sheaf evaluation at that object.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cech-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03AZ",
+  "place": "Lemma 03AZ, Cech-to-cohomology spectral sequence, acyclic-cover specialization; Theorem 03P2 separated-case proof. Worker-written derived-evaluation formulation."
+ },
+ "proof": [
+  {
+   "text": "Cover preservation makes the image of U a covering of i(X). Finite-limit preservation identifies its nonempty iterated products over the terminal object with open intersections. Separatedness makes each intersection affine. Therefore hvan vanishes on all these products. The affineness follows by iterating IsAffineOpen.inf in a separated scheme (Mathlib AlgebraicGeometry/Morphisms/Affine.lean:335-345); the categorical product of opens is their infimum.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the Cech-to-derived spectral sequence with large coefficients. Identify its cohomology-over-object groups with derived evaluation by computing Hom from the sheafified free representable on an injective resolution: the free-Yoneda adjunction identifies this Hom naturally with evaluation, so their complexes are isomorphic. All positive rows vanish by hvan; the zero row identifies naturally with the sections complex.",
+   "uses": [
+    "lem-sc-cech-spectral",
+    "new-sheaf-cohomology-derived-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each r>=2 differential entering or leaving (q,0) has one end in a positive row or outside the first quadrant, hence is zero. Thus its stable value is its E2 value. The abutment filtration has all graded pieces zero except (q,0), so its unique nonzero quotient is the whole abutment. The finite-product comparisons commute with projections, thus with cofaces, identifying the zero row with the displayed open Cech complex. Degree zero is sheaf gluing, including the empty cover of an empty scheme.",
+   "uses": [
+    "lem-sc-cech-spectral"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cech-spectral",
+  "new-sheaf-cohomology-derived-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03AZ",
+  "place": "Lemma 03AZ, Cech-to-cohomology spectral sequence, acyclic-cover specialization; Theorem 03P2 separated-case proof. Worker-written derived-evaluation formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation of an etale sheaf acyclic on affine objects is computed by the Cech complex of a finite affine open cover of a separated scheme",
+   "date": "2026-10-12",
+   "digest": "7d71bfc36865dad2",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit; AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "verdict": "No exact comparison theorem found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology computes sheaf cohomology for an acyclic cover",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleTensor.*[Ii]so|[Ii]so.*etaleTensor|rightDerived.*cech|cech.*rightDerived",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "results": "",
+   "verdict": "No exact comparison theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleQcoherentULiftFiniteCechComparison",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineOpenCechDerivedEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineOpenCechDerivedEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_rightDerived_etale_affineOpenCech",
+  "statement": "theorem nonempty_rightDerived_etale_affineOpenCech\n    (X : Scheme.{u}) [X.IsSeparated]\n    (i : X.Opens ⥤ X.Etale)\n    (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor)\n    (hc : CoverPreserving (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology i)\n    [PreservesFiniteLimits i] (ht : IsTerminal (i.obj ⊤))\n    {ι : Type u} [Finite ι] (U : ι → X.Opens)\n    (hU : ∀ j, IsAffineOpen (U j)) (hcover : iSup U = ⊤)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    [HasInjectiveResolutions (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]\n    (hvan : ∀ (W : X.Etale), IsAffine W.left → ∀ (q : ℕ), 0 < q →\n      IsZero (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n        (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj\n          (op W)).rightDerived q).obj G))\n    (q : ℕ) :\n    Nonempty ((((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n      (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj\n        (op (i.obj ⊤))).rightDerived q).obj G)\n        ≅ ((cechComplexFunctor U).obj (i.op ⋙ G.obj)).homology q)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-13c1e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T112837-L-766774",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-13c1e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T112837-L-766774",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their DAG/Lean statements, compiled cleanly, and the direct importer compiled against them."
+ }
+}

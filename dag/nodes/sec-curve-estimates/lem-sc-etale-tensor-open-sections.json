@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-etale-tensor-open-sections",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-prop-cd Step 5, last sentence: quasi-coherent etale descent for the Artin-Schreier bound; Tensor-pullback sections on opens recover module sections",
+   "via": [
+    "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
+    "lem-sc-etale-qcoherent-cohomology-ulift"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor-pullback sections on opens recover module sections",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $F$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], and $i:X.Opens\\to X.Etale$ a functor whose composite with the forgetful functor to schemes over $X$ equals the open-subscheme restriction functor. Let $P_F$ be the additive tensor-section presheaf $T\\mapsto\\Gamma(T,t^*F)$ with the unit-normalized pullback restrictions [lem-sc-etale-qcoherent-presheaf-functorial]. Then $i^{op}\\circ P_F$ is naturally isomorphic as an additive presheaf on $X.Opens$ to $W\\mapsto\\Gamma(W,F)$, equivalently to $F.presheafModuleCat$ after forgetting global-section module scalars [def-sc-module-cech-comparison]. No quasi-coherence, covering or separatedness assumption is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-sc-module-cech-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03DR",
+  "place": "Associated quasi-coherent section presheaf equation (35.8.0.1); module restriction/pullback comparison from Tags 0095 and 0096, adjunction uniqueness."
+ },
+ "proof": [
+  {
+   "text": "Compare tensor pullback with abstract pullback using the unit-normalized uniqueness of left adjoints to module pushforward. For each open immersion compare abstract pullback with module restriction, also by uniqueness of left adjoints. Evaluation of the restriction section isomorphism at the whole open gives the component additive isomorphism to F(W). The equality hi supplies the same identification for i(W).",
+   "uses": [
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an inclusion V into W, the unit equation identifies the tensor section unit with ordinary section restriction under these comparisons. The composition comparison of tensorSectionsComp is the conjugate of pushforwardComp, so uniqueness of unit-normalized comparisons identifies it with the restriction composition comparison. Substitute the over-X factorization equality to obtain the naturality square.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble these component additive isomorphisms and their naturality into a natural isomorphism. Forgetting module scalars in presheafModuleCat changes neither sections nor restrictions. Empty opens and zero modules are included because all comparisons are isomorphisms of zero groups there.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03DR",
+  "place": "Associated quasi-coherent section presheaf equation (35.8.0.1); module restriction/pullback comparison from Tags 0095 and 0096, adjunction uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated quasi coherent etale sheaf restricted to open subschemes is naturally isomorphic to the original module section presheaf",
+   "date": "2026-10-12",
+   "digest": "3dfd80d80c37e9f6",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app; AlgebraicGeometry.Scheme.restrictFunctorΓ; AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.structurePresheafCompForget; SheafOfModules.toSheafCompSheafToPresheafIso; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+   "verdict": "No exact comparison theorem found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated quasi coherent etale sheaf restricted to open subschemes is naturally isomorphic to the original module section presheaf",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleTensor.*[Ii]so|[Ii]so.*etaleTensor|rightDerived.*cech|cech.*rightDerived",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "results": "",
+   "verdict": "No exact comparison theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictFunctorIsoPullback\"",
+   "date": "2026-10-12",
+   "digest": "8ca5314c09b20fac",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, Mathlib.AlgebraicGeometry.Modules.Sheaf",
+   "verdict": "Component restriction/pullback iso exists; the natural open-section presheaf comparison for unit-normalized tensor restrictions is additional."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleQcoherentULiftFiniteCechComparison",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorOpenSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorOpenSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_etaleTensor_openSections_iso",
+  "statement": "theorem nonempty_etaleTensor_openSections_iso\n    (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)\n    (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules) :\n    Nonempty (i.op ⋙ etaleTensorSectionsPresheaf F ≅\n      F.presheafModuleCat ⋙ forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u})",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-13c1e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T112837-L-766774",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-13c1e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T112837-L-766774",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched their DAG/Lean statements, compiled cleanly, and the direct importer compiled against them."
+ }
+}

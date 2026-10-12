@@ -26,41 +26,44 @@
  },
  "proof": [
   {
-   "text": "Every nonempty finite intersection of the affine opens is affine because X is separated. Pullback preserves quasi-coherence. The open-immersion pullback/restriction identification and pullback-composition isomorphism identify the associated etale sheaf sections with the sections of F on these intersections, and commute with every restriction map. Apply ULift to these section identifications.",
+   "text": "Use zariski_to_etale_core to choose the open-subscheme inclusion, its cover preservation, finite-limit preservation and terminal top object. On all affine etale objects, obtain vanishing of positive derived evaluation by applying the finite affine etale Cech basis, lifted affine tensor Cech vanishing, and the Cech vanishing criterion.",
    "uses": [
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-pc-module-pullback-identity-composition"
+    "lem-weil-pbc-zariski-etale-core",
+    "new-etale-finite-affine-cech-basis",
+    "new-etale-affine-tensor-cech-vanishing",
+    "lem-weil-pbc-cech-vanishing-criterion"
    ],
    "elementary": false
   },
   {
-   "text": "The lifted affine quasi-coherent acyclicity theorem kills every positive cohomology row on these intersections. Apply the Cech-to-derived spectral sequence of the covering in the larger coefficient universe; its degree-zero row computes positive sheaf cohomology. At the terminal object the free-abelian-Yoneda adjunction identifies Hom from the sheafified free representable with evaluation; computing Ext on an injective resolution therefore identifies the H' abutment with right-derived evaluation. Then apply cohomology_nonempty_addEquiv_rightDerived_evaluation_succ to identify this derived evaluation with Ext-defined H. Equivalently, the free representable at the terminal object is the constant integer sheaf. No preservation of injectives by ULift is claimed.",
+   "text": "Apply cohomology_nonempty_addEquiv_rightDerived_evaluation_succ at i(top). The acyclic finite affine open cover comparison identifies its derived evaluation with homology of the open-section Cech complex.",
    "uses": [
-    "lem-sc-etale-affine-qcoherent",
-    "lem-sc-cech-spectral",
-    "new-sheaf-cohomology-derived-evaluation"
+    "new-sheaf-cohomology-derived-evaluation",
+    "lem-sc-etale-affine-open-cech-derived-evaluation"
    ],
    "elementary": false
   },
   {
-   "text": "Each Cech degree is a finite product of section groups. Forgetting module scalars and applying ULift preserve these finite products. The section identifications commute with each face restriction, and additivity preserves its sign and the finite alternating sum. They give a complex isomorphism between the etale section complex and the image under forget-scalars followed by ULift of the module section Cech complex. Apply homology to this isomorphism and compose with the edge comparison. This step does not identify the homology with the unlifted cohomology.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply the natural open-section presheaf isomorphism and whisker it by ULift, using functor associators. Applying cechComplexFunctor gives a complex isomorphism to the Cech complex of the lifted underlying module presheaf. The private proved liftedModuleCechIso identifies this with the lift of the module Cech complex: its components are PreservesProduct.iso, and cechComplexFunctor_d_pi, map_sum, map_zsmul and piComparison_comp_pi prove differential compatibility. Apply homologyMapIso and compose the additive equivalences.",
+   "uses": [
+    "lem-sc-etale-tensor-open-sections"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-module-pullback-identity-composition",
-  "lem-sc-cech-spectral",
-  "lem-sc-etale-affine-qcoherent",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-sc-etale-affine-open-cech-derived-evaluation",
+  "lem-sc-etale-tensor-open-sections",
+  "lem-weil-pbc-cech-vanishing-criterion",
+  "lem-weil-pbc-zariski-etale-core",
+  "new-etale-affine-tensor-cech-vanishing",
+  "new-etale-finite-affine-cech-basis",
   "new-sheaf-cohomology-derived-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/03P2",
-  "place": "Separated-case affine-cover computation; the same argument in lifted abelian-group coefficients, with finite-product and complex comparisons spelled out."
+  "place": "Separated-case affine-cover proof; explicit Lean composition using derived evaluation and the proved coefficient-product complex comparison."
  },
  "mathlib_searches": [
   {
@@ -137,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "X-13c1e",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T085220-L-6311",
+  "landing": "20261012T112837-L-766774",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched their DAG/Lean statements, compiled cleanly, and the direct importer compiled against them."
  }
 }
