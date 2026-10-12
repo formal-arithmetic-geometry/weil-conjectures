@@ -1,0 +1,123 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03JE, final norm argument"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DescentNormLocusAffine",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "id": "lem-pd-finite-locally-free-norm-charts",
+ "title": "Norm sections on local finite free affine charts",
+ "statement": "Let s:Y→X be a finite flat locally finitely presented morphism of schemes [def-pc-scheme, def-pc-finite-locally-free], W an open of X, and a a section of O_Y over s⁻¹(W). There is a section g of O_X on W such that every x in W has an affine open neighbourhood B contained in W with the section algebra Γ(Y,s⁻¹(B)) finite free over Γ(X,B), using s.app B for the algebra structure, and the restriction of g to B equals the finite free algebra norm of the restriction of a to s⁻¹(B). No constant rank, surjectivity, or affineness of W is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Restrict s over W. On an affine neighbourhood of each point, finiteness makes the inverse image affine and its section algebra finite; local finite presentation makes this a finitely presented module and flatness makes it flat. Localize at the point, where a finite presented flat module over a local ring is free, and descend a basis to a principal neighbourhood. This supplies affine charts B contained in W with finite free section algebra.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each chart, form the determinant of multiplication by a restricted to its inverse image. On overlaps, refine by affine principal neighbourhoods in both charts. Algebra.norm_localization identifies the restrictions, and determinant invariance under basis changes identifies the two computations. The sheaf property of O_X glues the compatible determinants to g on W, whose restrictions satisfy the asserted equalities. Rank may vary across charts; on a nonempty overlap it agrees locally. Empty inverse images have rank zero and determinant 1. Empty W gives a vacuous chart condition.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 03JE, final norm argument, local determinant construction and fibre criterion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free morphism of schemes has a norm on sections computed locally by determinants",
+   "date": "2026-10-12",
+   "results": "Service returned Internal Server Error; unavailable.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free norm section gluing determinants",
+   "date": "2026-10-12",
+   "results": "Algebra.norm_apply, StructureSheaf.normalize_finite_fraction_representation; no norm section gluing theorem.",
+   "verdict": "No exact match; determinant and section tools are only partial matches."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation.exists_free_localizedModule_powers",
+   "date": "2026-10-12",
+   "results": "Mathlib.RingTheory.Localization.Free: Module.FinitePresentation.exists_free_localizedModule_powers.",
+   "verdict": "Partial: local module freeness, without a glued scheme norm."
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*basicOpen|basicOpen.*norm; exists.*free; norm.*localization",
+   "date": "2026-10-12",
+   "results": "Mathlib localization/free and Algebra.norm_localization; WeilConjectures.BaseChangeNorm has only a field-extension geometric criterion. Blueprint search found no matching imported node.",
+   "verdict": "No general norm section construction found."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-effective-descent",
+   "place": "Proof: invariant affine neighbourhoods, Tag 03JE, norm construction on the open W′",
+   "via": [
+    "lem-pd-descent-norm-locus-affine",
+    "lem-pd-descent-norm-affine-shrinking",
+    "lem-pd-invariant-affine-neighbourhoods"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeNormCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeNormCharts.lean",
+  "declaration": "AlgebraicGeometry.exists_finiteLocallyFree_norm_charts",
+  "statement": "theorem exists_finiteLocallyFree_norm_charts\n    {X Y : Scheme.{u}} (s : Y ⟶ X)\n    [IsFinite s] [Flat s] [LocallyOfFinitePresentation s]\n    (W : X.Opens) (a : Γ(Y, s ⁻¹ᵁ W)) :\n    ∃ g : Γ(X, W), ∀ x : X, x ∈ W →\n      ∃ (B : X.Opens) (hBW : B ≤ W), x ∈ B ∧ IsAffineOpen B ∧\n        (letI := (s.app B).hom.toAlgebra\n         Module.Free Γ(X, B) Γ(Y, s ⁻¹ᵁ B) ∧\n         Module.Finite Γ(X, B) Γ(Y, s ⁻¹ᵁ B) ∧\n         X.presheaf.map (homOfLE hBW).op g =\n           Algebra.norm Γ(X, B)\n             (Y.presheaf.map (homOfLE (s.preimage_mono hBW)).op a))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T151906-L-2287474",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T151906-L-2287474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
