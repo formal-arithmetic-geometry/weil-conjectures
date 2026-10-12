@@ -36,6 +36,8 @@ after multiplication by a power of `s`.
 - `AlgebraicGeometry.Scheme.CoordinateCover.Section`: sections of degree `n`.
 - `AlgebraicGeometry.Scheme.CoordinateCover.hom`: the morphism to projective space defined by a
   family of sections.
+- `AlgebraicGeometry.Scheme.CoordinateCover.sigma`: coordinate covers of the members of a
+  disjoint open cover glue.
 
 ## Main statements
 
@@ -377,6 +379,128 @@ def ofSections : X.CoordinateCover α where
 lemma ofSections_U (a : α) : (ofSections σ c hc hcov).U a = (σ a).nonvanishing := rfl
 
 end OfSections
+
+section Sigma
+
+variable {X : Scheme.{u}} {κ : Type u} (V : κ → X.Opens) {ι : κ → Type u}
+  (𝒟 : ∀ c, (V c).toScheme.CoordinateCover (ι c))
+
+lemma _root_.AlgebraicGeometry.Scheme.Opens.image_ι_inf (W : X.Opens) (A B : W.toScheme.Opens) :
+    W.ι ''ᵁ (A ⊓ B) = W.ι ''ᵁ A ⊓ W.ι ''ᵁ B :=
+  Opens.ext (Set.image_inter W.ι.isOpenEmbedding.injective)
+
+lemma _root_.AlgebraicGeometry.Scheme.Opens.image_ι_le (W : X.Opens) (A : W.toScheme.Opens) :
+    W.ι ''ᵁ A ≤ W := by
+  rintro _ ⟨x, -, rfl⟩
+  exact x.2
+
+/-- Sections over an open in the image of an open immersion are determined by their pullbacks. -/
+lemma _root_.AlgebraicGeometry.Scheme.Opens.eq_of_ι_app_eq (W : X.Opens) {O : X.Opens}
+    (hO : O ≤ W) {s t : Γ(X, O)} (h : W.ι.app O s = W.ι.app O t) : s = t := by
+  have : IsIso (W.ι.app O) := W.ι.isIso_app O (by rwa [Scheme.Opens.opensRange_ι])
+  exact (ConcreteCategory.bijective_of_isIso (W.ι.app O)).1 h
+
+/-- The ratios of the glued coordinate cover: the ratios of `𝒟 c` within the chart `c`, and `0`
+between charts of different members of the cover. -/
+noncomputable def sigmaRatio :
+    (a b : Σ c, ι c) → Γ(X, (V a.1).ι ''ᵁ (𝒟 a.1).U a.2)
+  | ⟨c, i⟩, ⟨c', j⟩ =>
+    open Classical in
+    if h : c' = c then ((V c).ι.appIso _).inv ((𝒟 c).ratio i (h ▸ j)) else 0
+
+lemma sigmaRatio_mk (c : κ) (i j : ι c) :
+    sigmaRatio V 𝒟 ⟨c, i⟩ ⟨c, j⟩ = ((V c).ι.appIso _).inv ((𝒟 c).ratio i j) := by
+  simp [sigmaRatio]
+
+lemma sigmaRatio_of_ne {a b : Σ c, ι c} (h : b.1 ≠ a.1) : sigmaRatio V 𝒟 a b = 0 := by
+  obtain ⟨c, i⟩ := a
+  obtain ⟨c', j⟩ := b
+  simp [sigmaRatio, h]
+
+lemma basicOpen_appIso_inv (W : X.Opens) (A : W.toScheme.Opens) (r : Γ(W.toScheme, A)) :
+    X.basicOpen ((W.ι.appIso A).inv r) = W.ι ''ᵁ (W.toScheme.basicOpen r) := by
+  have h1 : X.basicOpen ((W.ι.appIso A).inv r) ≤ W.ι.opensRange :=
+    (X.basicOpen_le _).trans (W.ι.image_le_image_iff A ⊤ |>.mpr le_top |>.trans
+      (W.ι.image_top_eq_opensRange).le)
+  calc X.basicOpen ((W.ι.appIso A).inv r)
+      _ = W.ι ''ᵁ (W.ι ⁻¹ᵁ X.basicOpen ((W.ι.appIso A).inv r)) :=
+        ((W.ι.image_preimage_eq_opensRange_inf _).trans (inf_eq_right.mpr h1)).symm
+      _ = W.ι ''ᵁ (W.toScheme.basicOpen r) := by
+        congr 1
+        rw [Scheme.preimage_basicOpen, Scheme.Hom.appIso_inv_app_apply, Scheme.basicOpen_res]
+        simp [Scheme.basicOpen_le]
+
+
+lemma ι_app_map_appIso_inv (W : X.Opens) {A : W.toScheme.Opens} {O : X.Opens}
+    (g : O ⟶ W.ι ''ᵁ A) (r : Γ(W.toScheme, A)) :
+    W.ι.app O (X.presheaf.map g.op ((W.ι.appIso A).inv r)) =
+      W.toScheme.presheaf.map (homOfLE (by
+        simpa [Scheme.Hom.preimage_image_eq] using W.ι.preimage_mono g.le)).op r := by
+  rw [← CommRingCat.comp_apply, Scheme.Hom.naturality, ← CommRingCat.comp_apply,
+    ← Category.assoc, Scheme.Hom.appIso_inv_app, ← Functor.map_comp]
+  rfl
+variable (hV : Pairwise (Function.onFun Disjoint V)) (hcov : ⨆ c, V c = ⊤)
+
+include hV in
+lemma inf_eq_bot_of_ne {a b : Σ c, ι c} (h : b.1 ≠ a.1) :
+    (V a.1).ι ''ᵁ (𝒟 a.1).U a.2 ⊓ (V b.1).ι ''ᵁ (𝒟 b.1).U b.2 = ⊥ :=
+  eq_bot_iff.mpr ((inf_le_inf (Scheme.Opens.image_ι_le _ _) (Scheme.Opens.image_ι_le _ _)).trans
+    (hV (Ne.symm h)).le_bot)
+
+/-- **Gluing coordinate covers over a disjoint open cover.** If `X` is the disjoint union of
+opens `V c`, coordinate covers `𝒟 c` of the `V c` glue to a coordinate cover of `X`, whose
+charts are the charts of the `𝒟 c`. -/
+noncomputable def sigma : X.CoordinateCover (Σ c, ι c) where
+  U a := (V a.1).ι ''ᵁ (𝒟 a.1).U a.2
+  ratio := sigmaRatio V 𝒟
+  ratio_self a := by
+    obtain ⟨c, i⟩ := a
+    rw [sigmaRatio_mk, ratio_self, map_one]
+  basicOpen_ratio a b := by
+    obtain ⟨c, i⟩ := a
+    obtain ⟨c', j⟩ := b
+    by_cases h : c' = c
+    · subst h
+      rw [sigmaRatio_mk, basicOpen_appIso_inv, basicOpen_ratio, Scheme.Opens.image_ι_inf]
+    · rw [sigmaRatio_of_ne V 𝒟 h, Scheme.basicOpen_zero]
+      exact (inf_eq_bot_of_ne V 𝒟 hV h).symm
+  ratio_mul a b l := by
+    by_cases hab : b.1 = a.1
+    · obtain ⟨c, i⟩ := a
+      obtain ⟨c', j⟩ := b
+      have hab' : c' = c := hab
+      subst c'
+      by_cases hl : l.1 = c
+      · obtain ⟨c'', k⟩ := l
+        have hl' : c'' = c := hl
+        subst c''
+        rw [sigmaRatio_mk, sigmaRatio_mk, sigmaRatio_mk]
+        refine Scheme.Opens.eq_of_ι_app_eq (V c) (inf_le_left.trans
+          (Scheme.Opens.image_ι_le _ _)) ?_
+        have := congrArg ((V c).toScheme.presheaf.map (eqToHom (show (V c).ι ⁻¹ᵁ
+            ((V c).ι ''ᵁ (𝒟 c).U i ⊓ (V c).ι ''ᵁ (𝒟 c).U j) = (𝒟 c).U i ⊓ (𝒟 c).U j by
+          rw [← Scheme.Opens.image_ι_inf, Scheme.Hom.preimage_image_eq])).op)
+          ((𝒟 c).ratio_mul i j k)
+        rw [map_mul, ι_app_map_appIso_inv, ι_app_map_appIso_inv, ι_app_map_appIso_inv]
+        simp only [map_mul, ← CommRingCat.comp_apply, ← Functor.map_comp] at this
+        exact this
+      · rw [sigmaRatio_of_ne V 𝒟 (a := ⟨c, i⟩) hl, sigmaRatio_of_ne V 𝒟 (a := ⟨c, j⟩) hl, map_zero,
+          map_zero, mul_zero]
+    · have h0 := inf_eq_bot_of_ne V 𝒟 hV hab
+      have : ∀ O : X.Opens, O = ⊥ → Subsingleton Γ(X, O) := by
+        rintro O rfl
+        infer_instance
+      exact (this _ h0).elim _ _
+  iSup_U := by
+    rw [eq_top_iff, ← hcov, iSup_le_iff]
+    intro c
+    rw [← Scheme.Opens.opensRange_ι (V c), ← Scheme.Hom.image_top_eq_opensRange, ← (𝒟 c).iSup_U,
+      Scheme.Hom.image_iSup]
+    exact iSup_le fun i ↦ le_iSup (fun a : Σ c, ι c ↦ (V a.1).ι ''ᵁ (𝒟 a.1).U a.2) ⟨c, i⟩
+
+lemma sigma_U (a : Σ c, ι c) : (sigma V 𝒟 hV hcov).U a = (V a.1).ι ''ᵁ (𝒟 a.1).U a.2 := rfl
+
+end Sigma
 
 end Scheme.CoordinateCover
 
