@@ -15,58 +15,43 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Write $\\Omega,\\Omega'$ for the algebraically closed fields of $\\bar x,\\bar x'$ [def-weil-geometric-point], which are extensions of $\\kappa(x)$, and choose a separable closure $\\kappa(x)^s$ [def-pd-separable-closure]. By [lem-exc-etale-embedding-extension-sepclosed], applied with $E=\\kappa(x)^s$, $F=L=\\kappa(x)$ and the given inclusions $\\kappa(x)\\to\\Omega$ and $\\kappa(x)\\to\\Omega'$ (every element of $\\kappa(x)^s$ is algebraic and separable over $\\kappa(x)$, so its minimal polynomial splits in the algebraically closed fields $\\Omega,\\Omega'$), there are $\\kappa(x)$-embeddings $e:\\kappa(x)^s\\to\\Omega$ and $e':\\kappa(x)^s\\to\\Omega'$. Let $s:\\operatorname{Spec}\\kappa(x)^s\\to X$ be the composite of $\\operatorname{Spec}\\kappa(x)^s\\to\\operatorname{Spec}\\kappa(x)$ with the canonical morphism $\\operatorname{Spec}\\kappa(x)\\to X$. Then $\\bar x=s\\circ\\operatorname{Spec}(e)$ and $\\bar x'=s\\circ\\operatorname{Spec}(e')$, and $\\bar y=\\operatorname{Spec}(e)$, $\\bar y'=\\operatorname{Spec}(e')$ are geometric points of $Y=\\operatorname{Spec}\\kappa(x)^s$ (the morphism $s$ itself need not be a geometric point, since $\\kappa(x)^s$ need not be algebraically closed).",
+   "text": "Let x be the common image and k = X.residueField x. Take K = SeparableClosure k [def-pd-separable-closure]. Obtain the maps k to Omega and Omega-prime using descResidueField and stalkClosedPointTo, transporting the second along residueFieldCongr for the equality of images [def-weil-geometric-point]. Apply IsAlgClosed.lift [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] to construct k-algebra embeddings e and e-prime. Put f = Spec(algebraMap k K) followed by fromSpecResidueField x, y = Spec(e), and y-prime = Spec(e-prime). AlgHom.commutes and descResidueField_stalkClosedPointTo_fromSpecResidueField prove y followed by f = s and y-prime followed by f = s-prime.",
    "uses": [
     "def-weil-geometric-point",
     "def-pd-separable-closure",
-    "lem-exc-etale-embedding-extension-sepclosed"
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-support-geometric-point-independent.md",
-    "place": "## Proof, first sentence through the displayed inverse-image formulas"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $G=s^{-1}F$ on $Y_{\\Et}$ [def-weil-pbc-inverse-image]. By [lem-weil-pbc-inverse-image-stalk-germ] applied to $f=s:Y\\to X$ and the geometric points $\\bar y$, $\\bar y'$ of $Y$, whose image geometric points are $\\bar x$ and $\\bar x'$, there are isomorphisms $G_{\\bar y}\\cong F_{\\bar x}$ and $G_{\\bar y'}\\cong F_{\\bar x'}$. The ring $\\kappa(x)^s$ is a strictly henselian local ring: its maximal ideal is $0$, so idempotents of $B/0B=B$ lift uniquely for every finite algebra $B$, and its residue field $\\kappa(x)^s$ is separably closed [def-weil-pbc-henselian-terminology]. By [lem-weil-pbc-strictly-henselian-sections-stalk] applied to $R=\\kappa(x)^s$, $S=Y$ and the geometric points $\\bar y$, $\\bar y'$ over its closed point, the germ maps $G(Y)\\to G_{\\bar y}$ and $G(Y)\\to G_{\\bar y'}$ are isomorphisms. Hence $F_{\\bar x}\\cong G_{\\bar y}\\cong G(Y)\\cong G_{\\bar y'}\\cong F_{\\bar x'}$.",
+   "text": "Let G = Etale.upperStar f applied to F [def-weil-pbc-inverse-image]. The natural isomorphism Etale.upperStarCompSheafFiberIso [lemma-openclosed-stalk-upperstar] identifies its stalks at y and y-prime with the original stalks. K is henselian because it is a field (Field.henselian), and its residue field is isomorphic to K by the bijective residue map, so IsSepClosed.of_ringEquiv makes K strictly henselian [def-weil-pbc-henselian-terminology]. Spec K is a singleton, so y and y-prime lie over its closed point. Apply strictlyHenselianSections_geometricStalk_isIso [lem-weil-pbc-strictly-henselian-sections-stalk] twice to identify both stalks of G with its global sections.",
    "uses": [
     "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lemma-openclosed-stalk-upperstar",
     "def-weil-pbc-henselian-terminology",
     "lem-weil-pbc-strictly-henselian-sections-stalk"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-support-geometric-point-independent.md",
-    "place": "## Proof, sentence beginning 'By def-weil-pbc-geometric-stalks'"
-   }
+   "elementary": false
   },
   {
-   "text": "The isomorphism in Step 2 gives $F_{\\bar x}=0$ if and only if $F_{\\bar x'}=0$. By [def-kun-support], membership of $x$ in the support is defined by nonvanishing of a geometric stalk over $x$, so the support is independent of the chosen geometric point.",
-   "uses": [
-    "def-kun-support"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-support-geometric-point-independent.md",
-    "place": "## Proof, final sentence beginning 'The two colimits therefore have the same index category up to cofinality'"
-   }
+   "text": "Apply Iso.isZero_iff to the two global germ isomorphisms and the two pullback-stalk comparison isomorphisms. Compose the resulting equivalences and rewrite the factorizations from step 1. This proves the simultaneous vanishing assertion with exactly the original hypotheses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-geometric-point",
   "def-pd-separable-closure",
-  "lem-exc-etale-embedding-extension-sepclosed",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
   "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-openclosed-stalk-upperstar",
   "def-weil-pbc-henselian-terminology",
-  "lem-weil-pbc-strictly-henselian-sections-stalk",
-  "def-kun-support"
+  "lem-weil-pbc-strictly-henselian-sections-stalk"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-support-geometric-point-independent.md",
-  "place": "## Proof"
+  "place": "Proof, implemented by W2 using the common separable closure and global germ comparisons; only the stalk isomorphism, not its germ compatibility, is needed."
  },
  "mathlib_searches": [
   {
@@ -162,5 +147,15 @@
   "group": "J1",
   "result": "pass",
   "note": "X : Scheme.{u}; geometric points as s : Spec Ω ⟶ X, s' : Spec Ω' ⟶ X with Ω, Ω' algebraically closed exactly as def-weil-geometric-point (pointSmallEtale accepts via IsAlgClosed->IsSepClosed); x as h : s default = s' default; F abelian étale sheaf Ab.{u+1} = AddCommGrpCat.{u+1} as in merged files; F_x=0 <-> F_x'=0 as IsZero of sheafFiber.obj both sides; support clause a corollary (def-kun-support unrecorded); docstring has node proof; no Mathlib/source equivalent (pointSmallEtaleCongr only for isomorphic Spec)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T054001-L-2649202",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

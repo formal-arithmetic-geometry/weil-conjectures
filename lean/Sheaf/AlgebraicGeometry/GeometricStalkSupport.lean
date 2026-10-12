@@ -6,12 +6,8 @@ Authors: SHEAF worker J1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleSupport
 import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.Paper.InverseImageStalkGerm
-import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # Independence of the geometric point in étale sheaf support
@@ -48,6 +44,70 @@ theorem isZero_sheafFiber_iff_of_same_image {X : Scheme.{u}}
     (h : s default = s' default) (F : Sheaf X.smallEtaleTopology Ab.{u + 1}) :
     IsZero ((pointSmallEtale s).sheafFiber.obj F) ↔
       IsZero ((pointSmallEtale s').sheafFiber.obj F) := by
-  sorry
+  have h0 : s (IsLocalRing.closedPoint Ω) = s' (IsLocalRing.closedPoint Ω') :=
+    (congrArg s (Subsingleton.elim _ default)).trans
+      (h.trans (congrArg s' (Subsingleton.elim default _)))
+  let x := s (IsLocalRing.closedPoint Ω)
+  let k := ↑(X.residueField x)
+  let K := SeparableClosure k
+  let b : k →+* Ω := (X.descResidueField (Scheme.stalkClosedPointTo s)).hom
+  let b' : k →+* Ω' := ((X.residueFieldCongr h0).hom ≫
+    X.descResidueField (Scheme.stalkClosedPointTo s')).hom
+  let : Algebra k Ω := b.toAlgebra
+  let : Algebra k Ω' := b'.toAlgebra
+  have : Module.IsTorsionFree k Ω := DivisionSemiring.to_moduleIsTorsionFree
+  have : Module.IsTorsionFree k Ω' := DivisionSemiring.to_moduleIsTorsionFree
+  let e : K →ₐ[k] Ω := IsAlgClosed.lift
+  let e' : K →ₐ[k] Ω' := IsAlgClosed.lift
+  let f : Spec (.of K) ⟶ X :=
+    Spec.map (CommRingCat.ofHom (algebraMap k K)) ≫ X.fromSpecResidueField x
+  let y : Spec (.of Ω) ⟶ Spec (.of K) := Spec.map (CommRingCat.ofHom e.toRingHom)
+  let y' : Spec (.of Ω') ⟶ Spec (.of K) := Spec.map (CommRingCat.ofHom e'.toRingHom)
+  have hy : y ≫ f = s := by
+    dsimp [y, f]
+    rw [← Spec.map_comp_assoc]
+    have he : CommRingCat.ofHom (algebraMap k K) ≫ CommRingCat.ofHom (e : K →+* Ω) =
+        CommRingCat.ofHom b := by
+      ext a
+      exact e.commutes a
+    rw [he]
+    exact Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField Ω X s
+  have hy' : y' ≫ f = s' := by
+    dsimp [y', f]
+    rw [← Spec.map_comp_assoc]
+    have he : CommRingCat.ofHom (algebraMap k K) ≫ CommRingCat.ofHom (e' : K →+* Ω') =
+        CommRingCat.ofHom b' := by
+      ext a
+      exact e'.commutes a
+    rw [he]
+    change Spec.map ((X.residueFieldCongr h0).hom ≫
+      X.descResidueField (Scheme.stalkClosedPointTo s')) ≫ _ = _
+    rw [Spec.map_comp, Category.assoc, Scheme.residueFieldCongr_fromSpecResidueField]
+    exact Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField Ω' X s'
+  have hK : IsStrictlyHenselianLocalRing K := by
+    let E : K ≃+* IsLocalRing.ResidueField K :=
+      RingEquiv.ofBijective (IsLocalRing.residue K)
+        ⟨RingHom.injective _, IsLocalRing.residue_surjective⟩
+    exact ⟨IsSepClosed.of_ringEquiv E⟩
+  let G := (AlgebraicGeometry.Etale.upperStar Ab.{u + 1} f).obj F
+  have hys : y default = IsLocalRing.closedPoint K := Subsingleton.elim _ _
+  have hys' : y' default = IsLocalRing.closedPoint K := Subsingleton.elim _ _
+  have hg := (strictlyHenselianSections_geometricStalk_isIso.{u, u} hK y hys).1 G
+  have hg' := (strictlyHenselianSections_geometricStalk_isIso.{u, u} hK y' hys').1 G
+  let c := (AlgebraicGeometry.Etale.upperStarCompSheafFiberIso Ab.{u + 1} f y).app F
+  let c' := (AlgebraicGeometry.Etale.upperStarCompSheafFiberIso Ab.{u + 1} f y').app F
+  have hz : IsZero ((pointSmallEtale y).sheafFiber.obj G) ↔
+      IsZero ((pointSmallEtale y').sheafFiber.obj G) :=
+    (asIso ((pointSmallEtale y).toPresheafFiber
+      (Scheme.Etale.mk (𝟙 (Spec (.of K))))
+      (Over.homMk y (Category.comp_id y)) G.obj)).symm.isZero_iff.trans
+        (asIso ((pointSmallEtale y').toPresheafFiber
+          (Scheme.Etale.mk (𝟙 (Spec (.of K))))
+          (Over.homMk y' (Category.comp_id y')) G.obj)).isZero_iff
+  have hc := c.isZero_iff
+  have hc' := c'.isZero_iff
+  rw [hy] at hc
+  rw [hy'] at hc'
+  exact hc.symm.trans (hz.trans hc')
 
 end AlgebraicGeometry.Scheme
