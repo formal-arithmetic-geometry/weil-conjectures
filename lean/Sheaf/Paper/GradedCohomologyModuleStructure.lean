@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.DirectSum.Module
 public import Sheaf.Paper.PQFCohomology
+import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-!
 # The homogeneous action on graded cohomology
@@ -81,6 +82,120 @@ theorem gradedCohomologyModuleStructure
         DirectSum.of (fun n => ((RingedSpace.moduleCohomology
           X.toRingedSpace p).obj (G n) : Type u)) (m + k)
           ((RingedSpace.moduleCohomology X.toRingedSpace p).map (mu m k b) x) := by
-  sorry
+  classical
+  let F := RingedSpace.moduleCohomology X.toRingedSpace p
+  let H : ℕ → Type u := fun m ↦ F.obj (G m)
+  let V := DirectSum ℕ H
+  have : F.Additive := by
+    dsimp [F, RingedSpace.moduleCohomology]
+    infer_instance
+  -- Extend each homogeneous operator to the direct sum by its universal property.
+  let muAdd (m k : ℕ) : graded k →+ (G m ⟶ G (m + k)) :=
+    { toFun := mu m k
+      map_add' := hmu_add m k
+      map_zero' := by
+        apply add_left_cancel (a := mu m k 0)
+        simpa only [add_zero] using (hmu_add m k 0 0).symm }
+  let T (k : ℕ) : graded k →+ AddMonoid.End V :=
+    { toFun := fun b ↦ DirectSum.toAddMonoid fun m ↦
+        (DirectSum.of H (m + k)).comp (F.map (mu m k b)).hom.toAddMonoidHom
+      map_zero' := by
+        apply DirectSum.addHom_ext
+        intro m x
+        change (DirectSum.toAddMonoid (γ := V) _) (DirectSum.of H m x) = 0
+        rw [DirectSum.toAddMonoid_of]
+        change DirectSum.of H (m + k) (F.map (mu m k 0) x) = 0
+        rw [show mu m k 0 = 0 from (muAdd m k).map_zero, F.map_zero]
+        simp
+      map_add' := by
+        intro b c
+        apply DirectSum.addHom_ext
+        intro m x
+        change (DirectSum.toAddMonoid (γ := V) _) (DirectSum.of H m x) =
+          (DirectSum.toAddMonoid (γ := V) _) (DirectSum.of H m x) +
+            (DirectSum.toAddMonoid (γ := V) _) (DirectSum.of H m x)
+        rw [DirectSum.toAddMonoid_of, DirectSum.toAddMonoid_of,
+          DirectSum.toAddMonoid_of]
+        change DirectSum.of H (m + k) (F.map (mu m k (b + c)) x) =
+          DirectSum.of H (m + k) (F.map (mu m k b) x) +
+            DirectSum.of H (m + k) (F.map (mu m k c) x)
+        rw [hmu_add, F.map_add]
+        exact map_add (DirectSum.of H (m + k)) _ _ }
+  have hT (k m : ℕ) (b : graded k) (x : H m) :
+      T k b (DirectSum.of H m x) = DirectSum.of H (m + k) (F.map (mu m k b) x) := by
+    change (DirectSum.toAddMonoid (γ := V) _) (DirectSum.of H m x) = _
+    rw [DirectSum.toAddMonoid_of]
+    rfl
+  -- The heterogeneous equalities of sheaf maps give ordinary equalities in the sum.
+  have transport {m n n' : ℕ} (hn : n = n')
+      {q : G m ⟶ G n} {q' : G m ⟶ G n'} (hq : HEq q q') (x : H m) :
+      DirectSum.of H n (F.map q x) = DirectSum.of H n' (F.map q' x) := by
+    subst n'
+    cases hq
+    rfl
+  have sectionwise_id (m n : ℕ) (hn : n = m) (q : G m ⟶ G n)
+      (hq : ∀ (U : X.Opens) (t : (G m).val.obj (op U)),
+        HEq (q.val.app (op U) t) t) : HEq q (𝟙 (G m)) := by
+    subst n
+    apply heq_of_eq
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro t
+    exact eq_of_heq (hq U.unop t)
+  have hTunit : T 0 ⟨1, hunit⟩ = 1 := by
+    apply DirectSum.addHom_ext
+    intro m x
+    rw [hT]
+    have hmu_one : HEq (mu m 0 ⟨1, hunit⟩) (𝟙 (G m)) := by
+      apply sectionwise_id m (m + 0) (Nat.add_zero m)
+      intro U t
+      simpa only [map_one, one_smul] using hmu_scalar m 1 U t
+    change DirectSum.of H (m + 0) (F.map (mu m 0 ⟨1, hunit⟩) x) =
+      DirectSum.of H m x
+    simpa only [F.map_id, ModuleCat.id_apply] using transport (Nat.add_zero m) hmu_one x
+  have hTmul (k l : ℕ) (b : graded k) (c : graded l) :
+      T (k + l) ⟨b.val * c.val, hmul k l b.property c.property⟩ = T k b * T l c := by
+    apply DirectSum.addHom_ext
+    intro m x
+    change _ = T k b (T l c (DirectSum.of H m x))
+    rw [hT, hT, hT]
+    have hh := transport (by omega : m + l + k = m + (k + l))
+      (hmu_mul m k l b c) x
+    simpa only [F.map_comp, ModuleCat.comp_apply] using hh.symm
+  -- The internal grading gives a canonical inverse to the sum of the inclusions.
+  let e := (LinearEquiv.ofBijective (DirectSum.coeLinearMap graded) hgrading).toAddEquiv
+  let act : B →+ AddMonoid.End V := (DirectSum.toAddMonoid T).comp e.symm.toAddMonoidHom
+  have he (k : ℕ) (b : graded k) : e (DirectSum.of (fun k ↦ graded k) k b) = b.val := by
+    exact DirectSum.coeLinearMap_of graded k b
+  have hact (k : ℕ) (b : graded k) : act b.val = T k b := by
+    rw [← he k b]
+    simp [act]
+  -- Distributivity reduces arbitrary scalar products to homogeneous products.
+  have hactmul (b c : B) : act (b * c) = act b * act c := by
+    obtain ⟨b, rfl⟩ := e.surjective b
+    obtain ⟨c, rfl⟩ := e.surjective c
+    induction b using DirectSum.induction_on with
+    | zero => simp
+    | add b b' hb hb' => simp only [map_add, add_mul, hb, hb']
+    | of k b =>
+      induction c using DirectSum.induction_on with
+      | zero => simp
+      | add c c' hc hc' => simp only [map_add, mul_add, hc, hc']
+      | of l c =>
+        rw [he, he]
+        exact (hact (k + l) ⟨b.val * c.val, hmul k l b.property c.property⟩).trans
+          ((hTmul k l b c).trans (by rw [hact, hact]))
+  let ρ : B →+* AddMonoid.End V :=
+    { act with
+      map_one' := (hact 0 ⟨1, hunit⟩).trans hTunit
+      map_mul' := hactmul }
+  refine ⟨Module.compHom V ρ, ?_⟩
+  intro k m b x
+  change act b.val (DirectSum.of H m x) = _
+  rw [hact]
+  exact hT k m b x
 
 end AlgebraicGeometry
