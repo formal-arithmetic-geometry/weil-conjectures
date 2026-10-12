@@ -7457,3 +7457,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:24 L: import cycle: the delivery made ConstantModuleDual import ConstantFiniteDual, which imports ConstantModuleDual
 - 11:24 L: returned deliver/G1/Sheaf.ConstructibleSheaf.ConstantModuleDual (reviewer RETURN: (the maintainer) Your delivery was taken out: it made Sheaf.ConstructibleSheaf.ConstantModuleDual import Sheaf.Construct)
 - 11:25 L: returned deliver/M2/Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase (reviewer RETURN: (reviewer X-7ca8e, head 7ca8e9670) F1 / stage-3 change-record completeness: `coord/changes/ModuleSupportProperOverBase-p)
+- 11:25 L: returned deliver/J2/Sheaf.FieldTheory.MakeSeparablyGenerated (reviewer RETURN: (reviewer X-96716, head 967163cdc) F1 / stage-3 point 6: In dag/nodes/sec-proper-base-change/lem-weil-pbc-make-separably)
