@@ -1,0 +1,189 @@
+{
+ "id": "lem-pc-v3-integral-ideal-comparison-filtrations",
+ "kind": "statement",
+ "title": "Common submodule comparison with smaller-support integral filtrations",
+ "statement": "Let $X$ be Noetherian [pqf-def-locnoeth], let $i:W\\to X$ be a closed immersion [def-weil-closed-immersion] with $W$ integral [def-pc-integral-scheme], and put $\\xi=i(\\operatorname{genericPoint}W)$. Let $G$ be coherent [pqf-def-coherent], with support $i(W)$ [def-weil-pbc-module-stalk], with $\\mathfrak m_\\xi G_\\xi=0$, and with a compatible one-dimensional $\\kappa(\\xi)$-module structure [def-weil-residue-field]. For any quasi-coherent ideal $I\\subseteq\\mathcal O_W$ specified by $W.\\mathrm{IdealSheafData}$, either $i_*I$ is zero or there are $K,Q_1,Q_2$ and short exact sequences $0\\to K\\to G\\to Q_1\\to0$ and $0\\to K\\to i_*I\\to Q_2\\to0$ [def-pc-module-pullback]. Each $Q_t$ admits a finite increasing chain of subobjects from zero to all of $Q_t$, with every successive cokernel isomorphic to $j_*J$ for some closed immersion $j:W'\\to X$, integral $W'$, and quasi-coherent ideal $J$ on $W'$, where $j(W')\\subsetneq i(W)$. No cohomology or properness hypothesis is assumed.",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tags 01YH and 01YF, lemma-property-irreducible and lemma-coherent-filter"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "If I is zero, its module and closed pushforward are zero. Otherwise ideals on the locally Noetherian W are coherent, as are their closed pushforwards.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic-point ideal inclusion to G on i(W). It produces an inclusion from a finite sum of pushforwards of a nonzero ideal J, isomorphically near the generic point. The residue-field-line hypothesis and the generic stalk of a nonzero ideal force one summand.",
+   "uses": [
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quasi-coherent intersection J cap I is nonzero: on a nonempty affine open in the integral W, a product of nonzero sections lies nontrivially in the intersection. Set K = i_*(J cap I). The inclusions into G and i_*I are monomorphisms with coherent cokernels Q1,Q2. Their generic stalk maps are isomorphisms, so the cokernel supports miss the generic point and are proper closed subsets of i(W). Take the cokernel short exact sequences.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-intersection",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Filter each coherent cokernel by integral-ideal factors. Stalk exactness confines all factor supports to the cokernel support; a nonzero integral ideal has full integral support. Thus each integral closed image in these filtrations is strictly smaller than i(W). Use the empty filtration for zero cokernels.",
+   "uses": [
+    "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-quasi-coherent-ideal-intersection",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-coherent-filtration-integral-subschemes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tags 01YH and 01YF, lemma-property-irreducible and lemma-coherent-filter"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An ideal sheaf on an integral Noetherian scheme and a coherent sheaf of generic rank one have a common submodule with cokernels filtered by ideals on strictly smaller integral closed subschemes",
+   "results": {
+    "t": "2026-10-12T16:59:42Z",
+    "tool": "leansearch",
+    "query": "An ideal sheaf on an integral Noetherian scheme and a coherent sheaf of generic rank one have a common submodule with cokernels filtered by ideals on strictly smaller integral closed subschemes",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal sheaf and a coherent sheaf of generic rank one on a Noetherian integral support have a common submodule and cokernels supported away from the generic point",
+   "results": {
+    "t": "2026-10-12T16:59:32Z",
+    "tool": "leanfinder",
+    "query": "An ideal sheaf and a coherent sheaf of generic rank one on a Noetherian integral support have a common submodule and cokernels supported away from the generic point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal",
+     "Module.support_quotient",
+     "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+     "AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff_of_mem",
+     "AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff"
+    ],
+    "digest": "77f6698bd27e4720"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching scheme-module theorem: the hits supply algebraic or ideal-data ingredients, not the asserted construction."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*rank|rank.*generic|coherent.*filtration",
+   "results": {
+    "t": "2026-10-12T16:59:30Z",
+    "tool": "grep",
+    "query": "generic.*rank|rank.*generic|coherent.*filtration",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "No matching scheme-module theorem: the hits supply algebraic or ideal-data ingredients, not the asserted construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralIdealProperCohomology",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tags 01YH and 01YF, lemma-property-irreducible and lemma-coherent-filter",
+   "via": [
+    "lem-pc-e2-integral-ideal-proper-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralIdealComparisonFiltrations",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralIdealComparisonFiltrations.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_integral_ideal_comparison_filtrations",
+  "statement": "theorem exists_integral_ideal_comparison_filtrations (X W : Scheme.{u}) [IsNoetherian X] (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W] (G : X.Modules) (hGcoh : RingedSpace.IsCoherent X.toRingedSpace G) (hGsupp : {x : X | ¬ Subsingleton (G.presheaf.stalk x)} = Set.range i.base) (hGann : ∀ a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk (i.base (genericPoint W))), ∀ v : (RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).obj G, a • v = 0) (hGrank : ∃ inst : Module (X.residueField (i.base (genericPoint W))) ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).obj G), (∀ (a : X.presheaf.stalk (i.base (genericPoint W))) (v : (RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).obj G), a • v = (X.residue (i.base (genericPoint W))) a • v) ∧ Module.finrank (X.residueField (i.base (genericPoint W))) ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).obj G) = 1) (I : W.IdealSheafData) : IsZero ((pushforward i).obj I.toModules) ∨ ∃ (K Q₁ Q₂ : X.Modules) (a : K ⟶ G) (b : G ⟶ Q₁) (hab : a ≫ b = 0), (ShortComplex.mk a b hab).ShortExact ∧ ∃ (d : K ⟶ (pushforward i).obj I.toModules) (e : (pushforward i).obj I.toModules ⟶ Q₂) (hde : d ≫ e = 0), (ShortComplex.mk d e hde).ShortExact ∧ ∀ Q : X.Modules, Q = Q₁ ∨ Q = Q₂ → ∃ (m : ℕ) (c : Fin (m + 1) → Subobject Q) (hc : Monotone c), c 0 = ⊥ ∧ c (Fin.last m) = ⊤ ∧ ∀ k : Fin m, ∃ (W' : Scheme.{u}) (j : W' ⟶ X), IsClosedImmersion j ∧ IsIntegral W' ∧ ∃ J : W'.IdealSheafData, Set.range j.base ⊂ Set.range i.base ∧ Nonempty (cokernel (Subobject.ofLE (c k.castSucc) (c k.succ) (hc k.castSucc_le_succ)) ≅ (pushforward j).obj J.toModules)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T184353-L-4023465",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T184353-L-4023465",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

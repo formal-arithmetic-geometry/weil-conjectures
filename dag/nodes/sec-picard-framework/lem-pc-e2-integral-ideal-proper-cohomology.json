@@ -14,48 +14,34 @@
  ],
  "proof": [
   {
-   "text": "Use Noetherian induction on integral closed supports. For each support, Chow's projective modification and a common relatively ample twist yield a coherent generic-rank-one module with finite cohomology. Projective cohomology finiteness must come independently from the projective-space case, rather than the projective higher-image theorem proved from proper coherence. Derived composition and relative twisting vanishing identify the needed cohomology.",
+   "text": "Derive Noetherianity of X from the affine Noetherian base and proper finite-type morphism. Prove all three finiteness implications in the long exact sequence, simultaneously in every degree, by Noetherian finite-submodule and extension arguments. For the first term in degree zero use its injection into H^0 of the middle term. Prove zero and isomorphism invariance, and induction on finite subobject filtrations in Lean.",
    "uses": [
-    "lem-weil-pbc-chow-noetherian",
-    "lem-pc-chow-relative-ample",
-    "lem-pc-relative-kill-by-twisting",
-    "lem-pc-projective-coherent-finiteness",
-    "lem-pc-derived-direct-image-composition",
-    "lem-pc-closed-immersion-coherent-cohomology",
-    "lem-pc-affine-morphism-hi"
+    "lem-pc-euler-additive",
+    "lem-weil-pbc-noetherian-submodule-finite"
    ],
    "elementary": false
   },
   {
-   "text": "The generic-rank-one comparison of Tag 01YH embeds a nonzero ideal into the Chow module. Compare any ideal with that one via their nonzero intersection. The cokernels have smaller support and are finite in cohomology by induction; the long exact sequence gives finiteness for the ideal. Smaller-support modules are reduced by the integral-ideal filtration. Zero ideals have zero cohomology. All maps are linear over the base ring. The induction concerns finiteness in every degree simultaneously; the long exact sequence proves two-out-of-three, with the preceding term zero in degree zero.",
+   "text": "Induct over closed subsets of X using WellFoundedLT on Closeds X. For an integral closed image choose the Chow module G with finite cohomology and generic rank one, then use the geometric comparison. The zero branch has finite cohomology. In the other branch every cokernel filtration factor is an ideal on a strictly smaller integral closed image. The induction hypothesis and finite-filtration induction give finite cohomology to both cokernels. The first short exact sequence transfers finiteness from G and Q1 to K; the second transfers it from K and Q2 to the given ideal. Specialize the simultaneous-degree conclusion to q.",
    "uses": [
-    "lem-pc-coherent-property-irreducible",
-    "lem-weil-pbc-coherent-filtration-integral-subschemes",
     "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "lem-pc-euler-additive"
+    "lem-pc-v3-chow-finite-cohomology-witness",
+    "lem-pc-v3-integral-ideal-comparison-filtrations"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-chow-noetherian",
-  "lem-pc-chow-relative-ample",
-  "lem-pc-relative-kill-by-twisting",
-  "lem-pc-projective-coherent-finiteness",
-  "lem-pc-derived-direct-image-composition",
-  "lem-pc-closed-immersion-coherent-cohomology",
-  "lem-pc-affine-morphism-hi",
-  "lem-pc-coherent-property-irreducible",
-  "lem-weil-pbc-coherent-filtration-integral-subschemes",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-pc-euler-additive",
   "lem-weil-pbc-noetherian-submodule-finite",
-  "lem-pc-euler-additive"
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-pc-v3-chow-finite-cohomology-witness",
+  "lem-pc-v3-integral-ideal-comparison-filtrations"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "Stacks Project",
-  "place": "Tags 02O5 and 01YH"
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tags 02O5 and 01YH, with geometric comparison extracted to avoid circular Lean imports"
  },
  "mathlib_searches": [
   {
@@ -161,9 +147,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T163614-L-2785106",
+  "landing": "20261012T184353-L-4023465",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
