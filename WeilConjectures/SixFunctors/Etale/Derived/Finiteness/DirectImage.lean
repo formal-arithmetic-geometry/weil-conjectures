@@ -15,6 +15,11 @@ public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
+public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
+public import WeilConjectures.SixFunctors.OpenClosed.Derived
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
@@ -36,10 +41,12 @@ The proofs follow the blueprint: the finiteness of `Rf_*` is the theorem
 `thm-dg-finite-type-constructibility`, that of `Rf_! = Rg_* ∘ j_!` follows from it for the
 proper `g` of a compactification together with the constructibility of extensions by zero, and
 the vanishing of `Rᵠf_!` above twice the fibre dimension is read off the sheaf case
-`sbc-thm-finiteness-finite-type` by a dévissage along the truncation triangles. The theorems
-`thm-dg-finite-type-constructibility`, `sbc-thm-finiteness-finite-type` (vanishing clause) and
-`cor-fin-deligne-open-finite-coefficients` are nodes of the blueprint subsection `sk-prop-sf-cbc`
-and are stated here with `sorry`; they are proved there.
+`sbc-thm-finiteness-finite-type` by a dévissage along the truncation triangles. The open case
+`cor-fin-deligne-open-finite-coefficients` is the sheaf case
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field`
+(`cor-fin-deligne-open-over-field`) extended to complexes by
+`AlgebraicGeometry.Etale.boundedConstructible_obj_of_forall_singleFunctor`. The vanishing clause
+of `sbc-thm-finiteness-finite-type` is stated here with `sorry`.
 
 ## Main statements
 
@@ -81,8 +88,8 @@ Let `Λ` be a finite ring annihilated by an integer invertible in the field `k`,
 `j : X ⟶ Y` be an open immersion of finite-type `k`-schemes (`X` is of finite type over `k` as
 soon as `Y` is, `Y` being noetherian). Then `Rj_*` carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`.
 
-This is a node of the blueprint subsection `sk-prop-sf-cbc`, where it is proved by Deligne's
-generic constructibility for an open immersion and a dévissage from `𝔽_ℓ` to `Λ`. -/
+The sheaf case is `cor-fin-deligne-open-over-field`, stated for every finite `Λ` whose exponent is
+invertible, so no dévissage from `𝔽_ℓ` to `Λ` is needed; complexes follow by truncation. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion
     [HasInvertibleExponent Λ (Spec (.of k))] (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
     [QuasiCompact aY] (j : X ⟶ Y) [IsOpenImmersion j]
@@ -90,7 +97,134 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
       ((R((j)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-  sorry
+  boundedConstructible_obj_of_forall_singleFunctor Λ _
+    (fun F _ ↦ boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field Λ aY j F) hK
+
+/-- The separated case of `thm-dg-finite-type-constructibility`: for a separated morphism
+`f : X ⟶ Y` of finite-type `k`-schemes, factor `f` through a compactification
+`X ⟶[c.i] Z ⟶[c.g] Y` (Nagata); then `Rf_* = Rc.g_* ∘ Rc.i_*`, where the open direct image
+`Rc.i_*` preserves bounded constructibility (`cor-fin-deligne-open-finite-coefficients`) and so
+does the proper direct image `Rc.g_*` (`lem-fin-proper-bounded-constructible`). -/
+lemma boundedConstructible_rightDerivedLowerStar_of_isSeparated
+    [HasInvertibleExponent Λ (Spec (.of k))] (f : X ⟶ Y) [IsSeparated f]
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  have : IsNoetherian X :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian aX
+      __ := QuasiCompact.compactSpace_of_compactSpace aX }
+  have : IsNoetherian Y :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian aY
+      __ := QuasiCompact.compactSpace_of_compactSpace aY }
+  have : LocallyOfFiniteType f := by
+    subst hf
+    exact locallyOfFiniteType_of_comp f aY
+  let c := HasCompactification.compactification f
+  have h₁ := boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion Λ (c.g ≫ aY) c.i K hK
+  exact ObjectProperty.prop_of_iso _
+    ((rightDerivedLowerStarComp _ c.i c.g).app K ≪≫
+      (rightDerivedLowerStarCongr _ c.comm.symm).app K)
+    (boundedConstructible_rightDerivedLowerStar_of_isProper aY c.g h₁)
+
+open Pretriangulated in
+/-- The induction step of `thm-dg-finite-type-constructibility`, on the number `n` of affine opens
+needed to cover the source. For an affine open `j : U ⟶ X` of the cover, with closed complement
+`i : Z ⟶ X`, complete the unit to a distinguished triangle `K ⟶ Rj_* j^* K ⟶ C ⟶ K[1]`. The
+middle term is bounded constructible (`cor-fin-deligne-open-finite-coefficients`), and so is its
+direct image `R(jf)_* j^* K`, `j ≫ f` being separated. The cone `C` is bounded constructible and
+vanishes on `U`, so `C ≅ Ri_* i^* C` and `Rf_* C ≅ R(if)_* i^* C`, which is bounded constructible
+by induction, `Z` being covered by the `n - 1` affine opens `i⁻¹ V`, `V ≠ U`. -/
+lemma boundedConstructible_rightDerivedLowerStar_of_card_le
+    [HasInvertibleExponent Λ (Spec (.of k))] (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
+    [QuasiCompact aY] (n : ℕ) :
+    ∀ (W : Scheme.{u}) (aW : W ⟶ Spec (.of k)) [LocallyOfFiniteType aW] [QuasiCompact aW]
+      (s : Finset W.Opens), (∀ U ∈ s, IsAffineOpen U) → (∀ x : W, ∃ U ∈ s, x ∈ U) →
+      s.card ≤ n → ∀ (f : W ⟶ Y), f ≫ aY = aW →
+      ∀ K : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+        DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) W K →
+        DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+          ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  have hempty (W : Scheme.{u}) (s : Finset W.Opens) (hcov : ∀ x : W, ∃ U ∈ s, x ∈ U)
+      (hs : s = ∅) (f : W ⟶ Y) (K) : DerivedCategory.boundedConstructible
+        (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+    have : IsEmpty W := ⟨fun x ↦ by obtain ⟨U, hU, -⟩ := hcov x; simp [hs] at hU⟩
+    exact boundedConstructible_of_isZero Λ
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).map_isZero (isZero_derivedCategory_of_isEmpty _ W K))
+  induction n with
+  | zero =>
+    intro W aW _ _ s _ hcov hn f _ K _
+    exact hempty W s hcov (Finset.card_eq_zero.1 (Nat.le_zero.1 hn)) f K
+  | succ n ih =>
+    intro W aW _ _ s hs hcov hn f hf K hK
+    obtain rfl | ⟨U, hU⟩ := s.eq_empty_or_nonempty
+    · exact hempty W ∅ hcov rfl f K
+    let P := DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) W
+    let Q := DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+    let j := U.ι
+    let i := U.closedComplement
+    have hij : Set.range i.base = (Set.range j.base)ᶜ := by
+      rw [U.range_closedComplement, Scheme.Opens.range_ι]
+    let adj := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j
+    obtain ⟨C, g, h, hT⟩ := distinguished_cocone_triangle (adj.unit.app K)
+    -- the middle term `Rj_* j^* K` and its direct image `R(jf)_* j^* K`
+    have hjK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) U
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj K) :=
+      hK.mapDerivedCategory_upperStar j
+    have h₂ : P ((R((j)_*[ModuleCat.{u + 1} Λ])).obj
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj K)) :=
+      boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion Λ aW j _ hjK
+    have : IsAffine U := hs U hU
+    have h₂' : Q ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj K))) :=
+      Q.prop_of_iso ((rightDerivedLowerStarComp _ j f).app _).symm
+        (boundedConstructible_rightDerivedLowerStar_of_isSeparated Λ (j ≫ f) (j ≫ aW) aY
+          (by simp [hf]) _ hjK)
+    -- the cone `C` is bounded constructible and vanishes on `U`
+    have hC : P C := P.ext_of_isTriangulatedClosed₃ _ hT hK h₂
+    have hCU : IsZero ((Etale.upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.obj C) := by
+      refine (Triangle.isZero₃_iff_isIso₁ _
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.map_distinguished _ hT)).2 ?_
+      change IsIso ((Etale.upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.map
+        (adj.unit.app K))
+      have : IsIso ((Etale.upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategory.map
+          (adj.unit.app K) ≫ adj.counit.app _) := by
+        rw [adj.left_triangle_components K]
+        exact IsIso.id _
+      exact IsIso.of_isIso_comp_right _ (adj.counit.app _)
+    -- hence `C ≅ Ri_* i^* C`
+    obtain ⟨w, hw⟩ := exists_distTriang_openClosed (ModuleCat.{u + 1} Λ) j i hij C
+    have hu : IsIso ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app C) :=
+      (Triangle.isZero₁_iff_isIso₂ _ hw).1 (Functor.map_isZero _ hCU)
+    -- the closed complement is covered by fewer affine opens
+    classical
+    let s' := (s.erase U).image fun V ↦ i ⁻¹ᵁ V
+    have hs' : ∀ V ∈ s', IsAffineOpen V := by
+      simp only [s', Finset.mem_image]
+      rintro _ ⟨V, hV, rfl⟩
+      exact (hs V (Finset.mem_of_mem_erase hV)).preimage i
+    have hcov' : ∀ z, ∃ V ∈ s', z ∈ V := by
+      intro z
+      obtain ⟨V, hV, hz⟩ := hcov (i z)
+      have hiz : i z ∉ U := by
+        have : i z ∈ Set.range i.base := ⟨z, rfl⟩
+        rw [hij, Scheme.Opens.range_ι] at this
+        exact this
+      exact ⟨i ⁻¹ᵁ V, Finset.mem_image_of_mem _ (Finset.mem_erase.2 ⟨by rintro rfl; exact hiz hz,
+        hV⟩), hz⟩
+    have hcard : s'.card ≤ n := Finset.card_image_le.trans (by
+      rw [Finset.card_erase_of_mem hU]
+      lia)
+    have hZ := ih _ (i ≫ aW) s' hs' hcov' hcard (i ≫ f) (by simp [hf]) _
+      (hC.mapDerivedCategory_upperStar i)
+    have h₃ : Q ((R((f)_*[ModuleCat.{u + 1} Λ])).obj C) :=
+      Q.prop_of_iso ((R((f)_*[ModuleCat.{u + 1} Λ])).mapIso (asIso
+        ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app C)) ≪≫
+          (rightDerivedLowerStarComp _ i f).app _).symm hZ
+    exact Q.ext_of_isTriangulatedClosed₁ _
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).map_distinguished _ hT) h₂' h₃
 
 /-- Blueprint `thm-dg-finite-type-constructibility`: Bounded constructibility of every
 finite-type direct image.
@@ -99,8 +233,12 @@ Let `f : X ⟶ Y` be a morphism between finite-type schemes over a field `k`, an
 finite ring annihilated by an integer invertible in `k`. Then `Rf_*` carries `D^b_c(X, Λ)` into
 `D^b_c(Y, Λ)`. The morphism `f` need not be separated.
 
-This is a node of the blueprint subsection `sk-prop-sf-cbc`, where it is proved by a finite Čech
-resolution reducing it to an open immersion followed by a projective morphism. -/
+The blueprint uses a finite alternating Čech resolution; we induct instead on the number of
+affine opens covering `X` (`boundedConstructible_rightDerivedLowerStar_of_card_le`), along the
+triangle `K ⟶ Rj_* j^* K ⟶ C` for one affine open `j`, whose cone `C` lives on the closed
+complement. Affine pieces are handled through a compactification
+(`boundedConstructible_rightDerivedLowerStar_of_isSeparated`): an open immersion followed by a
+proper morphism, as in the blueprint. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType
     [HasInvertibleExponent Λ (Spec (.of k))] (f : X ⟶ Y) (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
@@ -108,8 +246,22 @@ theorem boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-  sorry
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  classical
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have hcov : ∀ x : X, ∃ U : X.affineOpens, x ∈ (U : Set X) := fun x ↦ by
+    have hx : x ∈ (⊤ : X.Opens) := trivial
+    rw [← iSup_affineOpens_eq_top X, TopologicalSpace.Opens.mem_iSup] at hx
+    exact hx
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun U : X.affineOpens ↦ (U : Set X))
+    (fun U ↦ U.1.isOpen) fun x _ ↦ Set.mem_iUnion.2 (hcov x)
+  refine boundedConstructible_rightDerivedLowerStar_of_card_le Λ aY _ X aX
+    (t.image Subtype.val) ?_ (fun x ↦ ?_) le_rfl f hf K hK
+  · simp only [Finset.mem_image]
+    rintro _ ⟨U, -, rfl⟩
+    exact U.2
+  · obtain ⟨U, hU, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ x))
+    exact ⟨U, Finset.mem_image_of_mem _ hU, hx⟩
 
 /-- Blueprint `sbc-thm-finiteness-finite-type`: Finiteness of higher direct images of
 finite-type morphisms, the vanishing clause.
@@ -136,34 +288,6 @@ theorem isZero_homology_rightDerivedLowerShriek_singleFunctor
   sorry
 
 /-! ### Auxiliary lemmas -/
-
-omit [Finite Λ] in
-/-- A zero object of the derived category of étale sheaves is bounded constructible. -/
-lemma boundedConstructible_of_isZero
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : IsZero K) : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K := by
-  have h (i : ℤ) := (_root_.DerivedCategory.homologyFunctor _ i).map_isZero hK
-  exact ⟨⟨⟨0, (_root_.DerivedCategory.isGE_iff K 0).2 fun i _ ↦ h i⟩,
-    ⟨0, (_root_.DerivedCategory.isLE_iff K 0).2 fun i _ ↦ h i⟩⟩,
-    fun n ↦ IsConstructibleSheaf.of_isZero (h n)⟩
-
-omit [Finite Λ] in
-/-- Extension by zero along a quasi-compact open immersion `j` preserves bounded
-constructibility: `j_!` is exact, and the extension by zero of a constructible sheaf is
-constructible. -/
-lemma boundedConstructible_mapDerivedCategory_openImmersionLowerShriek (j : X ⟶ Y)
-    [IsOpenImmersion j] [QuasiCompact j]
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
-    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
-      (D((j)_!open[ModuleCat.{u + 1} Λ]).obj K) := by
-  let F := (j)_!open[ModuleCat.{u + 1} Λ]
-  refine ⟨F.bounded_mapDerivedCategory_obj hK.1, fun n ↦ ?_⟩
-  have := hK.2 n
-  have : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ n ⋙ F).obj K) :=
-    IsConstructibleSheaf.openImmersionLowerShriek j j.closedComplement
-      j.range_closedComplement ((_root_.DerivedCategory.homologyFunctor _ n).obj K)
-  exact IsConstructibleSheaf.of_iso ((F.mapDerivedCategoryHomologyFunctorIso n).app K)
 
 omit [Finite Λ] in
 open _root_.DerivedCategory in

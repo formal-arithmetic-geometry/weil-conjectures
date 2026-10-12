@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 
 /-!
 # Compact direct images: bounded constructibility and base change
@@ -51,15 +52,24 @@ theorem boundedConstructible_rightDerivedLowerShriek_and_isIso {k : Type u} [Fie
     [HasInvertibleExponent Λ (Spec (.of k))] {X S : Scheme.{u}} (f : X ⟶ S)
     [HasCompactification f] (aX : X ⟶ Spec (.of k)) (aS : S ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aS] [QuasiCompact aS]
-    (hf : f ≫ aS = aX)
+    (_hf : f ≫ aS = aX)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) S
         ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) ∧
       ∀ (S' X' : Scheme.{u}) [IsNoetherian S'] (v : S' ⟶ S) (vX : X' ⟶ X) (f' : X' ⟶ S')
         [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback vX f' f v),
-        IsIso ((rightDerivedLowerShriekBaseChangeMap Λ sq).app K) :=
-  sorry
+        IsIso ((rightDerivedLowerShriekBaseChangeMap Λ sq).app K) := by
+  refine ⟨?_, fun S' X' _ v vX f' _ _ sq ↦ ?_⟩
+  · let c := HasCompactification.compactification f
+    have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
+    have : IsNoetherian c.Z :=
+      { __ := LocallyOfFiniteType.isLocallyNoetherian (c.g ≫ aS)
+        __ := QuasiCompact.compactSpace_of_compactSpace c.g }
+    exact boundedConstructible_rightDerivedLowerStar_of_isProper aS c.g
+      (boundedConstructible_mapDerivedCategory_openImmersionLowerShriek Λ c.i hK)
+  · have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
+    infer_instance
 
 end Etale
 

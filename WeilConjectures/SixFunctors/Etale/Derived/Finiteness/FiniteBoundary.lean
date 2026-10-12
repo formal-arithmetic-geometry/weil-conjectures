@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
@@ -152,13 +154,47 @@ theorem boundedConstructible_of_upperStar_of_rightDerivedLowerStar [Finite Λ] {
     [IsOpenImmersion a] (i : Z ⟶ Y) [IsClosedImmersion i] (hai : Set.range i = (Set.range a)ᶜ)
     [IsFinite (i ≫ b)]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : ∃ n : ℤ, K.IsGE n)
+    (_hK : ∃ n : ℤ, K.IsGE n)
     (ha : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) G
       ((Etale.upperStar (ModuleCat.{u + 1} Λ) a).mapDerivedCategory.obj K))
     (hb : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) S
       ((R((b)_*[ModuleCat.{u + 1} Λ])).obj K)) :
-    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K :=
-  sorry
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K := by
+  cases isEmpty_or_nonempty Y with
+  | inl hY => exact boundedConstructible_of_isZero Λ (isZero_derivedCategory_of_isEmpty _ Y K)
+  | inr hY =>
+  have : Nonempty S := ⟨b hY.some⟩
+  have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aS
+  have : IsNoetherian S :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian aS
+      __ := QuasiCompact.compactSpace_of_compactSpace aS }
+  have : IsNoetherian Y :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian (b ≫ aS)
+      __ := QuasiCompact.compactSpace_of_compactSpace (b ≫ aS) }
+  have : IsNoetherian Z :=
+    { __ := LocallyOfFiniteType.isLocallyNoetherian (i ≫ b ≫ aS)
+      __ := QuasiCompact.compactSpace_of_compactSpace (i ≫ b ≫ aS) }
+  have : IsFinite i := ((IsClosedImmersion.iff_isFinite_and_mono i).1 inferInstance).1
+  let P := DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+  let Q := DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) S
+  obtain ⟨w, hw⟩ := exists_distTriang_openClosed (ModuleCat.{u + 1} Λ) a i hai K
+  let N := (Etale.upperStar (ModuleCat.{u + 1} Λ) i).mapDerivedCategory.obj K
+  -- the first vertex `a_! a^* K` is bounded constructible, and so is its direct image
+  have h₁ : P (D((a)_!open[ModuleCat.{u + 1} Λ]).obj
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) a).mapDerivedCategory.obj K)) :=
+    boundedConstructible_mapDerivedCategory_openImmersionLowerShriek Λ a ha
+  have hb₁ := boundedConstructible_rightDerivedLowerStar_of_isProper aS b h₁
+  -- so is the direct image of the third vertex `Ri_* i^* K`
+  have hb₃ : Q ((R((b)_*[ModuleCat.{u + 1} Λ])).obj
+      ((R((i)_*[ModuleCat.{u + 1} Λ])).obj N)) :=
+    Q.ext_of_isTriangulatedClosed₃ _
+      ((R((b)_*[ModuleCat.{u + 1} Λ])).map_distinguished _ hw) hb₁ hb
+  -- hence `i^* K` is bounded constructible, `i ≫ b` being finite
+  have hN : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z N :=
+    DerivedCategory.boundedConstructible_of_rightDerivedLowerStar (i ≫ b) N
+      (Q.prop_of_iso ((rightDerivedLowerStarComp (ModuleCat.{u + 1} Λ) i b).app N) hb₃)
+  exact P.ext_of_isTriangulatedClosed₂ _ hw h₁
+    (boundedConstructible_rightDerivedLowerStar_of_isFinite Λ i hN)
 
 end Etale
 

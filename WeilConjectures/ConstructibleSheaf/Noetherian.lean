@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.NoetherianComponents
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.ConstructibleSheaf.StalkCardinality
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
 
 /-!
 # Constructible sheaves on Noetherian schemes
@@ -117,8 +119,80 @@ theorem Scheme.isConstructibleSheaf_iff_isConstructible_card {X : Scheme.{u}} [I
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteSheaf F] :
     IsConstructibleSheaf F ↔ ∀ n : ℕ, 1 ≤ n →
       IsConstructible {x : X | Nat.card ((pointSmallEtale (X.algClosurePoint x)).sheafFiber
-        (A := ModuleCat.{u + 1} Λ) |>.obj F) = n} :=
-  sorry
+        (A := ModuleCat.{u + 1} Λ) |>.obj F) = n} := by
+  refine ⟨fun _ n _ ↦ IsConstructibleSheaf.isConstructible_setOf_natCard F n, fun hC ↦ ?_⟩
+  classical
+  -- `F` is a quotient of a sum of constructible sheaves `v_! Λ`
+  let G : Etale.SectionIndex F → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+    fun i ↦ Etale.lowerShriekUnit (Λ := Λ) i.1.1.hom i.1.1.prop
+  have hG (i : Etale.SectionIndex F) : IsConstructibleSheaf (G i) :=
+    have : IsAffine ((𝟭 Scheme).obj i.1.1.left) := i.1.2
+    have : Etale i.1.1.hom := i.1.1.prop
+    isConstructibleSheaf_lowerShriekUnit_of_isAffine_source (X := X) i.1.1.hom
+  have := Etale.epi_sigmaDesc_sectionHom F
+  let φ := fun i : Etale.SectionIndex F ↦ Etale.sectionHom F i.1.1.hom i.1.1.prop i.2
+  let d (S : Finset (Etale.SectionIndex F)) := finsetSigmaDesc G φ S
+  -- the images of the finite subsums are constructible
+  have hI (S : Finset (Etale.SectionIndex F)) : IsConstructibleSheaf (Abelian.coimage (d S)) := by
+    have := isConstructibleSheaf_finsetSigma G S
+    have := IsConstructibleSheaf.of_mono (kernel.ι (d S))
+    exact IsConstructibleSheaf.cokernel _
+  have hfin (x : X) : Finite ((pointSmallEtale (X.algClosurePoint x)).sheafFiber
+      (A := ModuleCat.{u + 1} Λ) |>.obj F) :=
+    have := (ModuleCat.isFinitelyGenerated_iff _).1
+      (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (F := F) _ (X.algClosurePoint x))
+    Module.finite_of_finite Λ
+  -- the locus where the subsum indexed by `S` is surjective on stalks
+  let E (S : Finset (Etale.SectionIndex F)) : Set X :=
+    ⋃ n : ℕ, ({x : X | Nat.card ((pointSmallEtale (X.algClosurePoint x)).sheafFiber
+      (A := ModuleCat.{u + 1} Λ) |>.obj (Abelian.coimage (d S))) = n + 1} ∩
+      {x : X | Nat.card ((pointSmallEtale (X.algClosurePoint x)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ) |>.obj F) = n + 1})
+  have hE (S : Finset (Etale.SectionIndex F)) (x : X) : x ∈ E S ↔
+      Function.Surjective ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.map (d S)) := by
+    have := hfin x
+    rw [surjective_sheafFiber_map_iff_natCard_coimage]
+    simp only [E, Set.mem_iUnion, Set.mem_inter_iff, Set.mem_ofPred_eq]
+    refine ⟨fun ⟨n, h₁, h₂⟩ ↦ h₁.trans h₂.symm, fun h ↦ ?_⟩
+    obtain ⟨n, hn⟩ := Nat.exists_eq_add_one_of_ne_zero (Nat.card_pos (α := 
+      ((pointSmallEtale (X.algClosurePoint x)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ) |>.obj F))).ne'
+    exact ⟨n, h.trans hn, hn⟩
+  have hcov : (Set.univ : Set X) ⊆ ⋃ S, E S := by
+    intro x _
+    obtain ⟨S, hS⟩ := exists_finset_surjective_sheafFiber_map G φ (X.algClosurePoint x)
+      ((ModuleCat.isFinitelyGenerated_iff _).1
+        (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (F := F) _ _))
+    exact Set.mem_iUnion.mpr ⟨S, (hE S x).2 hS⟩
+  obtain ⟨T, hT₀⟩ := (isCompact_univ (X := WithConstructibleTopology X)).elim_finite_subcover
+    (fun S ↦ WithTopology.ofTopology ⁻¹' E S)
+    (fun S ↦ by
+      rw [WithConstructibleTopology.isOpen_iff]
+      refine @isOpen_iUnion X _ (constructibleTopology X) _ fun n ↦ ?_
+      exact @IsOpen.inter X (constructibleTopology X) _ _
+        (IsConstructibleSheaf.isConstructible_setOf_natCard _ _).isClopen_constructibleTopology.2
+        (hC _ (Nat.le_add_left 1 n)).isClopen_constructibleTopology.2)
+    (fun w _ ↦ by simpa using hcov (Set.mem_univ (WithTopology.ofTopology w)))
+  have hT (x : X) : x ∈ ⋃ S ∈ T, E S := by
+    simpa using hT₀ (Set.mem_univ (WithTopology.toTopology _ x))
+  -- the subsum indexed by `T.sup id` is an epimorphism
+  have hall (x : X) : IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj
+      (cokernel (d (T.sup id)))) := by
+    obtain ⟨S, hST, hx⟩ := Set.mem_iUnion₂.mp (hT x)
+    rw [isZero_sheafFiber_cokernel_iff]
+    intro m
+    obtain ⟨y, hy⟩ := (hE S x).1 hx m
+    exact range_sheafFiber_map_finsetSigmaDesc_mono G φ _ (Finset.le_sup (f := id) hST) ⟨y, hy⟩
+  have : IsIso (0 : cokernel (d (T.sup id)) ⟶ _) :=
+    isIso_of_isIso_sheafFiber_map _ fun x ↦ by
+      have hx : IsZero ((X.uliftPointSmallEtale x).sheafFiber.obj (cokernel (d (T.sup id)))) :=
+        (hall x).of_iso (((pointSmallEtale (X.algClosurePoint x)).uliftSheafFiberIso _).app _)
+      exact ⟨0, hx.eq_of_src _ _, hx.eq_of_src _ _⟩
+  have : Epi (d (T.sup id)) := Preadditive.epi_of_isZero_cokernel _ (by
+    rw [IsZero.iff_id_eq_zero, ← IsIso.hom_inv_id (0 : cokernel (d (T.sup id)) ⟶
+      cokernel (d (T.sup id))), zero_comp])
+  have := hI (T.sup id)
+  exact IsConstructibleSheaf.of_iso (asIso (Abelian.factorThruCoimage (d (T.sup id))))
 
 end AlgebraicGeometry
 

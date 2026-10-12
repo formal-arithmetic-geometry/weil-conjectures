@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-!
 # Deligne's generic constructibility for an open immersion
@@ -154,8 +155,16 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field {
     [IsOpenImmersion j] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsConstructibleSheaf F] :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
-      ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) :=
-  sorry
+      ((R((j)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) := by
+  obtain ⟨U, ⟨s, hs⟩, h⟩ := exists_hasConstructibleDirectImageBaseChangeOn Λ
+    (𝟙 (Spec (.of k))) aY j F
+  have hU : Set.range (𝟙 (Spec (.of k))) ⊆ (U : Set (Spec (.of k))) := by
+    rintro x -
+    rwa [Subsingleton.elim x s]
+  have := (h (Spec (.of k)) (𝟙 _) hU Y X (𝟙 Y) aY (𝟙 X) j (IsPullback.id_horiz aY)
+    (IsPullback.id_horiz j)).1
+  exact ObjectProperty.prop_of_iso _ ((R((j)_*[ModuleCat.{u + 1} Λ])).mapIso
+    ((leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) X).app _)) this
 
 end Etale
 
