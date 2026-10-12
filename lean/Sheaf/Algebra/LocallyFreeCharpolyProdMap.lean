@@ -9,6 +9,8 @@ public import Sheaf.Algebra.LocallyFreeCharpoly
 public import Mathlib.Logic.Equiv.Fin.Basic
 public import Mathlib.Algebra.Module.LinearMap.Prod
 import Sheaf.Algebra.CharpolyLocallyFree
+import Sheaf.Algebra.LocallyFreeCharpolyProdCover
+import Sheaf.Algebra.LocallyFreeCharpolyProdIdentity
 
 /-! # Characteristic polynomials on locally free direct sums
 
@@ -66,6 +68,10 @@ theorem locallyFreeCharpoly_prodMap
           (LocalizedModule.Away (g k) (M₁ × M₂)), True),
       locallyFreeCharpoly g hggen hgfree (φ₁.prodMap φ₂) =
         locallyFreeCharpoly f₁ hgen₁ hfree₁ φ₁ * locallyFreeCharpoly f₂ hgen₂ hfree₂ φ₂ := by
-  sorry
+  dsimp
+  obtain ⟨hggen, hgfree, _⟩ := locallyFreeCharpoly_prodCover f₁ f₂ hgen₁ hgen₂ hfree₁ hfree₂
+  refine ⟨hggen, hgfree, ?_⟩
+  exact locallyFreeCharpoly_prodIdentity f₁ f₂ hgen₁ hgen₂ hfree₁ hfree₂ φ₁ φ₂
+    hggen hgfree rfl
 
 end Algebra

@@ -28,79 +28,22 @@
  ],
  "proof": [
   {
-   "text": "The products $g_{ij}=f^{(1)}_if^{(2)}_j$ ($1\\le i\\le r_1$, $1\\le j\\le r_2$) generate the unit ideal of $A$: choose $a_i,b_j\\in A$ with $\\sum_ia_if^{(1)}_i=1=\\sum_jb_jf^{(2)}_j$; multiplying the two sums gives $\\sum_{i,j}a_ib_j\\,g_{ij}=1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), the identity CharPol$_A(T:B\\to B)$ = CharPol$_A(T:eB\\to eB)$ CharPol$_A(T:(1-e)B\\to(1-e)B)$ ('Details omitted'); written out by the agent"
-   }
-  },
-  {
-   "text": "Fix $(i,j)$, put $g=g_{ij}$ and $A'=A_g$. For $k=1,2$, $M_k\\otimes_AA'$ is a free $A'$-module of rank $n_k$. For $k=1$ put $f=f^{(1)}_i$ (for $k=2$, $f=f^{(2)}_j$; the argument is the same). By hypothesis $(M_1)_f$ is free of rank $n_1$ over $A_f$, so $M_1\\otimes_AA_f$ is free of rank $n_1$ by [lem-weil-pbc-localization-away-tensor-iso]. The element $f$ divides $g$ and $g$ is invertible in $A_g$, so $f$ is invertible in $A_g$ ($f\\cdot(f^{(2)}_j/g)=1$); hence the canonical map $A_f\\to A_g$ of [def-weil-pbc-module-localization-away] (for the module $A$; it is the ring map $a/f^e\\mapsto (f^{(2)}_j)^ea/g^e$) is a ring homomorphism under $A$, and [lem-weil-pbc-free-base-change-tower] applied to $A\\to A_f\\to A_g$ and $M_1$ shows that $M_1\\otimes_AA_g$ is free of rank $n_1$ over $A_g$.",
+   "text": "Obtain the product cover and local bases from the product-cover theorem, then apply the local characteristic-polynomial identity.",
    "uses": [
-    "lem-weil-pbc-localization-away-tensor-iso",
-    "lem-weil-pbc-free-base-change-tower",
-    "def-weil-pbc-module-localization-away"
+    "lem-weil-pbc-charpoly-locally-free-direct-sum-cover",
+    "lem-weil-pbc-charpoly-locally-free-direct-sum-identity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), the identity CharPol$_A(T:B\\to B)$ = CharPol$_A(T:eB\\to eB)$ CharPol$_A(T:(1-e)B\\to(1-e)B)$ ('Details omitted'); written out by the agent"
-   }
-  },
-  {
-   "text": "With $g,A'$ as in step 2 and $M=M_1\\oplus M_2$, $\\varphi=\\varphi_1\\oplus\\varphi_2$: the map $M\\otimes_AA'\\to(M_1\\otimes_AA')\\oplus(M_2\\otimes_AA')$, $(x_1,x_2)\\otimes b\\mapsto(x_1\\otimes b,x_2\\otimes b)$, is an isomorphism of $A'$-modules (tensor product commutes with finite direct sums; the inverse is $(y_1,y_2)\\mapsto\\iota_1(y_1)+\\iota_2(y_2)$ with $\\iota_k\\otimes1$ induced by the inclusions), and on generators one checks that it carries $\\varphi\\otimes1$ to $(\\varphi_1\\otimes1)\\oplus(\\varphi_2\\otimes1)$. By step 2 and [lem-weil-pbc-charpoly-direct-sum-free] the right side is free of rank $n_1+n_2$, hence so is $M\\otimes_AA'$, and by [lem-weil-pbc-localization-away-tensor-iso] so is $M_g=M_{f^{(1)}_if^{(2)}_j}$. Together with step 1 this proves the first assertion: $M$ is finite locally free of constant rank $n_1+n_2$ on the standard covering by the $g_{ij}$; in particular $\\mathrm{CharPol}_A(\\varphi:M\\to M)$ is defined [def-weil-pbc-charpoly-locally-free].",
-   "uses": [
-    "lem-weil-pbc-charpoly-direct-sum-free",
-    "lem-weil-pbc-localization-away-tensor-iso",
-    "def-weil-pbc-charpoly-locally-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), the identity CharPol$_A(T:B\\to B)$ = CharPol$_A(T:eB\\to eB)$ CharPol$_A(T:(1-e)B\\to(1-e)B)$ ('Details omitted'); written out by the agent"
-   }
-  },
-  {
-   "text": "With $g,A'$ as in step 2, let $\\rho:A[T]\\to A'[T]$ be the map applying $A\\to A'$ to the coefficients (a ring homomorphism). By steps 2 and 3, $M_1\\otimes_AA'$, $M_2\\otimes_AA'$ and $M\\otimes_AA'$ are free of ranks $n_1$, $n_2$, $n_1+n_2$, so the characterizing property of [def-weil-pbc-charpoly-locally-free] (the polynomial of [lem-weil-pbc-charpoly-locally-free-existence]) applies to each with the ring map $A\\to A'$: $\\rho(\\mathrm{CharPol}_A(\\varphi_k))=\\det(T-\\varphi_k\\otimes1)$ on $M_k\\otimes_AA'$ and $\\rho(\\mathrm{CharPol}_A(\\varphi))=\\det(T-\\varphi\\otimes1)$ on $M\\otimes_AA'$. A characteristic polynomial does not change under an isomorphism of free modules that intertwines the endomorphisms (compute it in a basis and its image), so by step 3 $\\det(T-\\varphi\\otimes1)=\\det(T-((\\varphi_1\\otimes1)\\oplus(\\varphi_2\\otimes1)))$, which is $\\det(T-\\varphi_1\\otimes1)\\det(T-\\varphi_2\\otimes1)$ by [lem-weil-pbc-charpoly-direct-sum-free] (with $B=A'$, $N_k=M_k\\otimes_AA'$, $\\psi_k=\\varphi_k\\otimes1$). Hence $\\rho(\\mathrm{CharPol}_A(\\varphi))=\\rho(\\mathrm{CharPol}_A(\\varphi_1))\\rho(\\mathrm{CharPol}_A(\\varphi_2))=\\rho(\\mathrm{CharPol}_A(\\varphi_1)\\mathrm{CharPol}_A(\\varphi_2))$.",
-   "uses": [
-    "def-weil-pbc-charpoly-locally-free",
-    "lem-weil-pbc-charpoly-locally-free-existence",
-    "lem-weil-pbc-charpoly-direct-sum-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), the identity CharPol$_A(T:B\\to B)$ = CharPol$_A(T:eB\\to eB)$ CharPol$_A(T:(1-e)B\\to(1-e)B)$ ('Details omitted'); written out by the agent"
-   }
-  },
-  {
-   "text": "Write $\\delta=\\mathrm{CharPol}_A(\\varphi)-\\mathrm{CharPol}_A(\\varphi_1)\\mathrm{CharPol}_A(\\varphi_2)=\\sum_mc_mT^m\\in A[T]$. By step 4, for every $(i,j)$ each coefficient satisfies $c_m/1=0$ in $A_{g_{ij}}$, the localization of the $A$-module $A$ at $g_{ij}$ [def-weil-pbc-module-localization-away]. The $g_{ij}$ generate the unit ideal (step 1), so [lem-weil-pbc-localized-span-eq-zero] (with $R=A$, $M=A$, $s=\\{g_{ij}\\}$) gives $c_m=0$ for all $m$. Hence $\\delta=0$, i.e. $\\mathrm{CharPol}_A(\\varphi_1\\oplus\\varphi_2)=\\mathrm{CharPol}_A(\\varphi_1)\\cdot\\mathrm{CharPol}_A(\\varphi_2)$.",
-   "uses": [
-    "lem-weil-pbc-localized-span-eq-zero",
-    "def-weil-pbc-module-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), the identity CharPol$_A(T:B\\to B)$ = CharPol$_A(T:eB\\to eB)$ CharPol$_A(T:(1-e)B\\to(1-e)B)$ ('Details omitted'); written out by the agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-localization-away-tensor-iso",
-  "lem-weil-pbc-free-base-change-tower",
-  "def-weil-pbc-module-localization-away",
-  "lem-weil-pbc-charpoly-direct-sum-free",
-  "def-weil-pbc-charpoly-locally-free",
-  "lem-weil-pbc-charpoly-locally-free-existence",
-  "lem-weil-pbc-localized-span-eq-zero"
+  "lem-weil-pbc-charpoly-locally-free-direct-sum-cover",
+  "lem-weil-pbc-charpoly-locally-free-direct-sum-identity"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1): the identity is stated there with 'Details omitted'; the steps (reduction to the standard covering by the products and the free case) are the agent's"
+  "place": "Tag 09XI"
  },
  "mathlib_searches": [
   {
@@ -190,5 +133,15 @@
   "group": "E1",
   "result": "pass",
   "note": "A CommRing no extra hyps; M1,M2 independent universes; covers f1,f2 Fin-indexed with unit-ideal + Fin nk bases of LocalizedModule.Away over Localization.Away exactly as J1 locallyFreeCharpoly binders; conclusion: product cover via finProdFinEquiv, hggen + Fin(n1+n2) bases on M1×M2 (local freeness clause), locallyFreeCharpoly of prodMap = product; not LinearMap.charpoly_prodMap (free only); edge r=0,n=0 fine"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T053941-L-2639464",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
