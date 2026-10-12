@@ -1,6 +1,7 @@
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.Algebra.Homology.LocalizedRestrictionExtensionExists
 
 @[expose] public section
 
@@ -42,6 +43,12 @@ theorem localized_restriction_adjunction
       PreservesFiniteLimits G ∧ PreservesFiniteColimits G ∧
       (SheafOfModules.overFunctor.{max u v} R U).Additive ∧
       Nonempty (G ⊣ SheafOfModules.overFunctor.{max u v} R U) := by
-  sorry
+  obtain ⟨G, hlim, hcolim, hadj⟩ :=
+    localized_restriction_extension_exists R U hzero
+  refine ⟨G, hlim, hcolim, ?_, hadj⟩
+  constructor
+  intro X Y f g
+  ext V x
+  rfl
 
 end CategoryTheory

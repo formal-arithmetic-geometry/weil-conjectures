@@ -1,0 +1,127 @@
+{
+ "id": "new-localized-restriction-extension-exists",
+ "kind": "statement",
+ "title": "Exact extension adjoint for localized restriction",
+ "statement": "For a sheaf of rings R on a Grothendieck site and an object U, assuming localized restriction preserves zero morphisms, there exists a functor G from localized module sheaves to module sheaves preserving finite limits and finite colimits and left adjoint to restriction.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 08FI"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct the direct-sum presheaf over arrows V → U, with scalar action on each summand and restrictions into the composite-arrow summand. Sheafify it to obtain an additive functor G. A map from the localized sheaf to restriction gives a map from each summand, and conversely precomposition with each summand inclusion recovers such a map. These operations are inverse and natural, so module sheafification gives the adjunction. Monomorphisms are sectionwise injections, direct sums preserve injections, and exact module sheafification preserves monomorphisms by lem-weil-pbc-sheafification-exact. The additive left adjoint G is right exact and preserves monomorphisms, hence exact; it preserves kernels and finite biproducts, hence finite limits, and its adjunction gives finite colimits.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 08FI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact left adjoint to SheafOfModules.overFunctor preserving finite limits and colimits",
+   "results": "No matching theorem for arbitrary GrothendieckTopology and RingCat.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact left adjoint to localized restriction of sheaves of modules",
+   "results": "No exact matching declaration.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesFiniteLimits G ∧ PreservesFiniteColimits G ∧ Nonempty (G ⊣ SheafOfModules.overFunctor _ _)",
+   "results": "No matching theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localized restriction extension adjunction arbitrary GrothendieckTopology RingCat",
+   "results": "Existing localizedModule_adjunction_exact requires SmallCategory, Precoverage, and CommRingCat.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left adjoint to restriction of module sheaves on slice category using direct sums",
+   "results": "8 hits: free/forget adjunctions and module sheafification adjunction; none constructs the localized restriction left adjoint.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (second reading)"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "3 hits: overFunctor, overFunctorMap, and Scheme.Modules.overFunctorEquiv; no left-adjoint theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (second reading)"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjoint.*overFunctor|overFunctor.*adjunction|localizedModule_adjunction_exact",
+   "results": "msearch returned zero Mathlib hits. Direct rg of lean found localizedModule_adjunction_exact, whose SmallCategory, Precoverage and CommRingCat assumptions do not match this item.",
+   "date": "2026-10-13",
+   "verdict": "no applicable theorem (second reading)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedRestrictionAdjunction",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-kinjective-restrict-localized-adjunction",
+   "place": "proof step 1"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedRestrictionExtensionExists",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedRestrictionExtensionExists.lean",
+  "declaration": "CategoryTheory.localized_restriction_extension_exists",
+  "statement": "theorem localized_restriction_extension_exists\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (R : Sheaf J RingCat.{max u v}) (U : C)\n    (hzero : (SheafOfModules.overFunctor.{max u v} R U).PreservesZeroMorphisms) :\n    ∃ (G : SheafOfModules.{max u v} (R.over U) ⥤ SheafOfModules.{max u v} R),\n      PreservesFiniteLimits G ∧ PreservesFiniteColimits G ∧\n      Nonempty (G ⊣ SheafOfModules.overFunctor.{max u v} R U)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T184331-L-4015071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T184331-L-4015071",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
