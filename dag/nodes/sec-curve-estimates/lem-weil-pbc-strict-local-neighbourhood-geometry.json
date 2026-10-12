@@ -12,24 +12,30 @@
  ],
  "proof": [
   {
-   "text": "use strictHenselization_properties to obtain the cofiltered small category and\nits limiting cone. Identify the spectra of global sections with the affine\nneighbourhoods, compatibly with the chosen legs. The equation characterizing\nstrictHenselizationStructuralMap makes this a cone in Over S. Fibre products commute\nwith this connected limit, giving a limit cone with vertex X ×_S S_(s), after the\ncanonical symmetry from V ×_S X. Its first component is the original limit leg and\nits second is the projection to X, which prove the two displayed leg equations.\nEach stage maps by a base change of f to an affine neighbourhood. Quasi-compactness\nand quasi-separatedness of f therefore make the stage qcqs. A map between the affine\nneighbourhoods is affine; its base change is the stage transition and is also affine.\nNo qcqs assumption on X or S themselves is needed.",
+   "text": "Apply [lem-weil-pbc-strict-henselization-base-change-cone] to f and s. Its small diagram is definitionally the canonical strictLocalNeighbourhoodDiagram. Extend the resulting cone along pullbackSymmetry f (strictHenselizationStructuralMap s). Transport IsLimit with Cone.extendIso. Precompose both projection equations with the symmetry and simplify to obtain the required first and over equations.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "lemma-weil-pbc-fibre-product-limit",
-    "def-weil-pbc-strict-henselization-structural-map"
+    "lem-weil-pbc-strict-henselization-base-change-cone"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Every stage neighbourhood is a spectrum and therefore affine, compact and quasi-separated. The first projection from its pullback along f is quasi-compact and quasi-separated by base-change stability. Apply Mathlib AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace and AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated to this projection to obtain the required stage properties.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a neighbourhood transition, install the two spectrum affineness instances. The map is affine by Mathlib AlgebraicGeometry.isAffineHom_of_isAffine. Its stage transition is the pullback lift, so Mathlib CategoryTheory.MorphismProperty.pullbackLift_fst_snd with P = IsAffineHom and the over-category commutativity equation proves it affine. Assemble these fields with the transported cone into StrictLocalNeighbourhoodGeometry.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-henselization-limit",
-  "lemma-weil-pbc-fibre-product-limit",
-  "def-weil-pbc-strict-henselization-structural-map"
+  "lem-weil-pbc-strict-henselization-base-change-cone"
  ],
  "proof_origin": {
-  "by": "G2 following document",
+  "by": "Y2 following document and existing Lean proof",
   "document": "Stacks Project",
-  "place": "Tag 03Q9, first proof paragraph; canonical cone transport and qcqs stage checks"
+  "place": "Tag 03Q9, first proof paragraph; existing strictHenselizationBaseChangeCone_exists, pullback symmetry and Mathlib qcqs base-change lemmas"
  },
  "mathlib_searches": [
   {
@@ -102,10 +108,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T085242-L-16042",
-  "kind": "interface",
+  "landing": "20261012T110327-L-625275",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
