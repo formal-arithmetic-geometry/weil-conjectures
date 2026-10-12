@@ -6,7 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-!
 # Flatness descends along fpqc covering families
@@ -51,6 +52,9 @@ theorem flat_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v}
     (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S)
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)
     (h : ∀ i, Flat (pullback.snd f (g i))) : Flat f := by
-  sorry
+  apply Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (P := @Flat) ?_ f
+    (fun i => pullback.fst f (g i)) (fun i => pullback.snd f (g i))
+    (fun i => IsPullback.of_hasPullback f (g i)) h
+  exact Precoverage.generate_mem_toGrothendieck hg
 
 end AlgebraicGeometry
