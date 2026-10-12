@@ -31,113 +31,22 @@
  ],
  "proof": [
   {
-   "text": "(Replace $R_0$ by its image.) Let $\\mathfrak p=\\ker(R_0\\to B)$ and $\\bar R=R_0/\\mathfrak p$, identified with the image of $R_0$ in $B$. As $B$ is a domain, $1\\ne0$ in $B$, so $\\mathfrak p\\ne R_0$, and by [lem-weil-pbc-complete-local-quotient] $\\bar R$ is a Noetherian local ring, with maximal ideal $\\bar{\\mathfrak m}=\\mathfrak m_0/\\mathfrak p$, which is $\\bar{\\mathfrak m}$-adically complete. Being a subring of $B$, $\\bar R$ is a domain with $p=0$ in $\\bar R$. Elements of $B$ generating $B$ as an $R_0$-algebra also generate it as an $\\bar R$-algebra, so $\\bar R\\subseteq B$ is of finite type [def-weil-pbc-finite-type-algebra].",
+   "text": "Obtain a fraction-field derivation detecting the image of f from the fraction-field substep, then clear denominators using the domain substep.",
    "uses": [
-    "lem-weil-pbc-complete-local-quotient",
-    "def-weil-pbc-finite-type-algebra"
+    "lem-weil-pbc-fraction-field-derivation-nonzero",
+    "lem-weil-pbc-domain-derivation-from-fraction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PH (lemma-find-D, line 11860), proof, first paragraph"
-   }
-  },
-  {
-   "text": "(Replace $\\bar R$ by a power series ring over a field.) By [lem-weil-pbc-complete-local-domain-finite-over-regular] applied to the Noetherian complete local domain $\\bar R$ there is a subring $R_1\\subseteq\\bar R$ over which $\\bar R$ is a finitely generated module, with $R_1\\cong k[[X_1,\\ldots,X_n]]$ for a field $k$ or $R_1\\cong\\Lambda[[X_1,\\ldots,X_n]]$ for a Cohen ring $\\Lambda$. The second case is impossible: in a Cohen ring the maximal ideal $p\\Lambda$ is nonzero [def-weil-pbc-cohen-ring], so $p\\ne0$ in $\\Lambda\\subseteq\\Lambda[[X_1,\\ldots,X_n]]$ [def-weil-pbc-multivariate-power-series], whereas $p=0$ in $R_1\\subseteq B$. Hence $R_1=k[[x_1,\\ldots,x_n]]$ ($x_i$ the image of $X_i$), and $p=0$ in $k\\subseteq R_1\\subseteq B$, so $k$ has characteristic $p$; $R_1$ is a domain by [lem-weil-pbc-power-series-field-cohen-regular-complete] (1), and $R_1\\to B$ is injective (an inclusion of subrings). $B$ is of finite type over $R_1$: if $r_1,\\ldots,r_s$ generate $\\bar R$ as an $R_1$-module and $b_1,\\ldots,b_t$ generate $B$ as an $\\bar R$-algebra, then every element of $B$ is a polynomial in the $b_j$ with coefficients $\\sum_lc_lr_l$, $c_l\\in R_1$, so $r_1,\\ldots,r_s,b_1,\\ldots,b_t$ generate $B$ as an $R_1$-algebra [def-weil-pbc-finite-type-algebra].",
-   "uses": [
-    "lem-weil-pbc-complete-local-domain-finite-over-regular",
-    "def-weil-pbc-cohen-ring",
-    "def-weil-pbc-multivariate-power-series",
-    "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "def-weil-pbc-finite-type-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PH (lemma-find-D, line 11860), proof, first paragraph"
-   }
-  },
-  {
-   "text": "(Noether normalization and the element $f'$.) By [lem-weil-pbc-noether-normalization-over-domain] applied to the injective finite type map $R_1\\to B$ of Step 2 ($R_1$ a domain) there are $d\\ge0$, $y_1,\\ldots,y_d\\in B$, an $R_1$-subalgebra $B'\\subseteq B$ and a nonzero $g\\in R_1$ such that $A:=R_1[y_1,\\ldots,y_d]\\subseteq B'$ is a polynomial ring $k[[x_1,\\ldots,x_n]][y_1,\\ldots,y_d]$ over $R_1$ [def-weil-pbc-mv-polynomial-ring], $B'$ is a finitely generated $A$-module, and $B'_g\\to B_g$ is bijective. $B'$ is a domain with $p=0$, and $g\\ne0$ in $B$. Surjectivity of $B'_g\\to B_g$ gives, for every $b\\in B$, some $b'\\in B'$ and $e\\ge0$ with $b/1=b'/g^e$ in $B_g$, i.e. $g^u(g^eb-b')=0$ for some $u$, hence $g^eb=b'\\in B'$ since $B$ is a domain. Consequently every element of $B$, hence of $M$, is a quotient of elements of $B'$: the fraction field [def-weil-pbc-localization-at-prime] of $B'$ is $M$. Applying this to $b=f$, choose $e$ with $g^ef\\in B'$ and $N\\ge0$ with $pN\\ge e$; then $f':=g^{pN}f=g^{pN-e}(g^ef)\\in B'$. And $f'$ is not a $p$th power in $M$: $f'=h^p$ with $h\\in M$ would give $f=(h/g^N)^p$.",
-   "uses": [
-    "lem-weil-pbc-noether-normalization-over-domain",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PH (lemma-find-D, line 11860), proof, first paragraph"
-   }
-  },
-  {
-   "text": "(Reduction to $B'$.) Suppose a derivation $D':B'\\to B'$ with $D'(f')\\ne0$ is given (Steps 5 and 6 construct one). $B$ is of finite type over $B'$ (the generators over $R_1\\subseteq B'$ from Step 2 serve), $g\\in R_1\\subseteq B'$ is a nonzerodivisor in the domain $B$ as $g\\ne0$, and $B'_g\\to B_g$ is bijective (Step 3). By [lem-weil-pbc-derivation-extends-finite-type-extension] there are $N'\\ge0$ and a derivation $D:B\\to B$ with $D(b')=g^{N'}D'(b')$ for $b'\\in B'$. Then $D(f')=g^{N'}D'(f')\\ne0$, $B$ being a domain and $g\\ne0$. On the other hand, by the Leibniz rule $D(a^r)=ra^{r-1}D(a)$ for $r\\ge1$ (induction on $r$) and $D(1)=D(1\\cdot1)=2D(1)$, i.e. $D(1)=0$; as $p=0$ in $B$ this gives $D(g^{pN})=0$, and so $D(f')=D(g^{pN}f)=g^{pN}D(f)+fD(g^{pN})=g^{pN}D(f)$. Hence $g^{pN}D(f)\\ne0$ and $D(f)\\ne0$, which proves the lemma once $D'$ exists.",
-   "uses": [
-    "lem-weil-pbc-derivation-extends-finite-type-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PH (lemma-find-D, line 11860), proof, first paragraph ('If we can find a derivation D' : B' -> B' with D'(f') != 0, then Lemma 07PE guarantees that D = g^M D' extends to B ... is nonzero')"
-   }
-  },
-  {
-   "text": "(Choice of the subfield $K'$.) Now $B'$ is a domain containing $A=k[[x_1,\\ldots,x_n]][y_1,\\ldots,y_d]$ and finite over it, with fraction field $M$ (Step 3); let $K$ be the fraction field of $A$, so $K\\subseteq M$. ($M/K$ is finite.) Every element of $B'$ is integral over $A$ [lem-weil-pbc-finite-algebra-is-integral]; for $0\\ne s\\in B'$ take a monic relation $s^r+a_1s^{r-1}+\\cdots+a_r=0$ ($a_i\\in A$) of least degree; then $a_r\\ne0$ (else cancel $s$ in the domain $B'$), so $s^{-1}=-a_r^{-1}(s^{r-1}+a_1s^{r-2}+\\cdots+a_{r-1})\\in K\\cdot B'$. Thus $M=\\{b/s\\}$ is spanned over $K$ by finitely many $A$-module generators of $B'$, and $M/K$ is a finite field extension [def-pc-field-extension]. ($\\mathrm df'\\ne0$.) $\\mathbf F_p$ is perfect and $f'$ is not a $p$th power in $M$ (Step 3), so $\\mathrm df'\\ne0$ in the module of Kähler differentials $\\Omega_{M/\\mathbf F_p}$ [def-weil-pbc-kahler-differentials] by [lem-weil-pbc-differential-zero-iff-pth-power]. (The subfields.) Choose a $p$-basis $(t_i)_{i\\in I}$ of $k$ by [lem-weil-pbc-p-basis-exists], and for finite $J\\subseteq I$ let $k_J$, $A_J=k_J[[x_1^p,\\ldots,x_n^p]][y_1^p,\\ldots,y_d^p]$ and $K_J\\subseteq K$ be as in [lem-weil-pbc-power-series-ring-subfields]; by its parts (2)-(4) the family $(K_J)_J$ satisfies conditions (i)-(iii) of [lem-weil-pbc-intersection-subfields-differentials], whose part (2), applied to the finite extension $M/K$, gives $M^p=\\bigcap_JE_J$ with $E_J:=M^pK_J\\subseteq M$. The family $(E_J)_J$ of subfields of $M$ satisfies (i)-(iii) for the field $M$: $M^p\\subseteq E_J$; $\\bigcap_JE_J=M^p$; and $E_{J\\cup J'}\\subseteq E_J\\cap E_{J'}$ because $K_{J\\cup J'}\\subseteq K_J\\cap K_{J'}$ (part (4)). By part (1) of [lem-weil-pbc-intersection-subfields-differentials] for $M$ and $(E_J)_J$, since $\\mathrm df'\\ne0$ there is a finite $J\\subseteq I$ such that the image of $\\mathrm df'$ in $\\Omega_{M/E_J}$ is nonzero. Fix this $J$ and put $A'=A_J$, $K'=K_J\\subseteq E_J$.",
-   "uses": [
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "def-pc-field-extension",
-    "lem-weil-pbc-differential-zero-iff-pth-power",
-    "lem-weil-pbc-p-basis-exists",
-    "lem-weil-pbc-power-series-ring-subfields",
-    "lem-weil-pbc-intersection-subfields-differentials",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PH (lemma-find-D), proof, second paragraph ('Note that df is not zero in Omega_{L/F_p} ... We apply Lemma 07P5 to find a subfield k' subset k of finite index such that ... df does not map to zero in Omega_{L/K'}'); the use of Lemma 07P4 (1) and (2) that the source leaves implicit is written out"
-   }
-  },
-  {
-   "text": "(The derivation $D'$ of $B'$.) $\\Omega_{M/E_J}$ is an $M$-vector space and the image $\\omega$ of $\\mathrm df'$ in it is nonzero (Step 5), so by [lem-weil-pbc-vector-space-dual-separates] there is an $M$-linear $\\varphi:\\Omega_{M/E_J}\\to M$ with $\\varphi(\\omega)\\ne0$. By the universal property of [def-weil-pbc-kahler-differentials], $\\delta=\\varphi\\circ\\mathrm d:M\\to M$ is an $E_J$-derivation with $\\delta(f')=\\varphi(\\omega)\\ne0$; it vanishes on $E_J\\supseteq K'\\supseteq A'$. $A$ is a finitely generated $A'$-module ([lem-weil-pbc-power-series-ring-subfields] (1)) and $B'$ is a finitely generated $A$-module (Step 3), so $B'$ is a finitely generated $A'$-module [lem-weil-pbc-finite-module-over-finite-algebra]; let $b_1,\\ldots,b_t$ generate it. Write $\\delta(b_i)=c_i/s_i$ with $c_i,s_i\\in B'$, $s_i\\ne0$ (Step 3: $M$ is the fraction field of $B'$), and put $s=s_1\\cdots s_t$ and $D'=s\\delta$, again a derivation of $M$ (additivity and the Leibniz rule are preserved by multiplying with $s$). For $b=\\sum_ia_ib_i\\in B'$ with $a_i\\in A'$ the Leibniz rule and $\\delta(a_i)=0$ give $D'(b)=\\sum_ia_i\\,s\\,c_i/s_i\\in B'$. So $D'$ maps $B'$ into $B'$ and restricts to a derivation $D':B'\\to B'$, with $D'(f')=s\\delta(f')\\ne0$ since $M$ is a field and $s\\ne0$. This is the derivation required in Step 4, which completes the proof.",
-   "uses": [
-    "lem-weil-pbc-vector-space-dual-separates",
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-power-series-ring-subfields",
-    "lem-weil-pbc-finite-module-over-finite-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PH (lemma-find-D), proof, second paragraph ('Thus we can choose a K'-derivation D' : L -> L with D'(f) != 0 ... Setting D = g_1 ... g_t D' we win')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-complete-local-quotient",
-  "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-complete-local-domain-finite-over-regular",
-  "def-weil-pbc-cohen-ring",
-  "def-weil-pbc-multivariate-power-series",
-  "lem-weil-pbc-power-series-field-cohen-regular-complete",
-  "lem-weil-pbc-noether-normalization-over-domain",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-derivation-extends-finite-type-extension",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "def-pc-field-extension",
-  "lem-weil-pbc-differential-zero-iff-pth-power",
-  "lem-weil-pbc-p-basis-exists",
-  "lem-weil-pbc-power-series-ring-subfields",
-  "lem-weil-pbc-intersection-subfields-differentials",
-  "def-weil-pbc-kahler-differentials",
-  "lem-weil-pbc-vector-space-dual-separates",
-  "lem-weil-pbc-finite-module-over-finite-algebra"
+  "lem-weil-pbc-fraction-field-derivation-nonzero",
+  "lem-weil-pbc-domain-derivation-from-fraction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07PH (lemma-find-D, line 11860) and its proof; the steps the source leaves implicit (the Cohen-ring case excluded by p = 0, the fraction field of B', the computation of D(f), the finiteness of L/K, the application of 07P4 (1) and (2), the existence of the K'-derivation) are written out"
+  "place": "Lemma 07PH, composition of the fraction-field and denominator-clearing substeps"
  },
  "mathlib_searches": [
   {
@@ -239,17 +148,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T194125-L-459635",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "Derivation.exists_apply_ne_zero_of_not_pth_power"
-  ],
-  "sorry_after": [
-   "Derivation.exists_domain_derivation_of_fraction_derivation",
-   "Derivation.exists_fraction_field_derivation_of_not_pth_power"
-  ]
+  "landing": "20261012T225318-L-1809196",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,103 @@
+{
+ "id": "lem-weil-pbc-nonzero-differential-to-derivation",
+ "kind": "statement",
+ "title": "Nonzero differential gives derivation",
+ "statement": "For a field M of characteristic p and f : M with nonzero universal differential over ZMod p, there exists D : Derivation Z M M with D f ≠ 0.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 07PH differential-functional step"
+ },
+ "proof": [
+  {
+   "text": "Choose a linear functional nonzero on the differential and compose it with the universal derivation.",
+   "uses": [
+    "lem-weil-pbc-vector-space-dual-separates",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-vector-space-dual-separates",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 07PH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "nonzero Kahler differential linear functional derivation",
+   "results": "no exact match",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lift Kahler differential to derivation nonzero",
+   "results": "no exact match",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "liftKaehlerDifferential",
+   "results": "universal-property ingredients only",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.Derivation.DetectNonPthPower",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-fraction-field-derivation-nonzero",
+   "place": "differential-functional step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.Derivation.NonzeroDifferentialToDerivation",
+  "file": "lean/Sheaf/RingTheory/Derivation/NonzeroDifferentialToDerivation.lean",
+  "declaration": "exists_derivation_of_nonzero_kahler_differential",
+  "statement": "theorem exists_derivation_of_nonzero_kahler_differential (p : ℕ) [Fact p.Prime] (M : Type u) [Field M] [CharP M p] [Algebra (ZMod p) M] (f : M) (h : KaehlerDifferential.D (ZMod p) M f ≠ 0) : ∃ D : Derivation ℤ M M, D f ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T225318-L-1809196",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T225318-L-1809196",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

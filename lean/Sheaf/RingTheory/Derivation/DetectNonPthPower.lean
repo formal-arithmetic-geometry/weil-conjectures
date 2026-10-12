@@ -4,6 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group M1
 -/
 module
+import Mathlib.Algebra.CharP.Algebra
+import Mathlib.Algebra.Algebra.ZMod
+import Mathlib.Algebra.Field.ZMod
 
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Derivation.Basic
@@ -11,16 +14,8 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Sheaf.FieldTheory.ExistsPBasis
-import Sheaf.FieldTheory.IntersectionSubfieldsDifferentials
-import Sheaf.Paper.DerivationExtendsFiniteType
-import Sheaf.RingTheory.CohenRing
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
-import Sheaf.RingTheory.CompleteLocalQuotient
 import Sheaf.RingTheory.KaehlerDifferentialZeroIffPow
-import Sheaf.RingTheory.NoetherNormalizationOverDomain
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.PowerSeriesRingSubfields
+import Sheaf.RingTheory.Derivation.NonzeroDifferentialToDerivation
 
 /-!
 # Detecting non-pth-powers by absolute derivations
@@ -55,7 +50,17 @@ theorem exists_fraction_field_derivation_of_not_pth_power
     [Algebra R₀ B] [Algebra.FiniteType R₀ B]
     (f : B) (hf : ¬ ∃ x : M, x ^ p = algebraMap B M f) :
     ∃ D : Derivation ℤ M M, D (algebraMap B M f) ≠ 0 := by
-  sorry
+  let : CharP M p := charP_of_injective_ringHom (IsFractionRing.injective B M) p
+  let : Algebra (ZMod p) M := ZMod.algebra M p
+  have hdiff : KaehlerDifferential.D (ZMod p) M (algebraMap B M f) ≠ 0 := by
+    intro hz
+    have hp := (KaehlerDifferential.D_eq_zero_iff_exists_pow_of_perfectField p
+      (ZMod p) M (algebraMap B M f)).mp hz
+    rcases hp with ⟨x, hx⟩
+    apply hf
+    exact ⟨x, hx.symm⟩
+  exact exists_derivation_of_nonzero_kahler_differential p M
+    (algebraMap B M f) hdiff
 
 /-- Denominator clearing for a finite type domain.
 (blueprint: lem-weil-pbc-domain-derivation-from-fraction)
