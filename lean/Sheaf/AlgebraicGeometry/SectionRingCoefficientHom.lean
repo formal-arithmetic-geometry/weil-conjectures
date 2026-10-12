@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+import Sheaf.AlgebraicGeometry.SectionRingCoefficientData
 
 /-! # Coefficients in a homogeneous localization of a section ring
 
@@ -48,6 +49,15 @@ theorem exists_sectionRing_coefficient_hom
           (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op
             ((s.val ^ n) (n • d)) =
         (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op
-          (ξ.val (n • d)) := by sorry
+          (ξ.val (n • d)) := by
+  obtain ⟨c, hc0, hc1, hcadd, hcmul, hcoef⟩ :=
+    exists_sectionRing_coefficient_data X L d s hd U hs
+  let ρ : HomogeneousLocalization.Away (sectionRingGrade L) s.val →+* Γ(X, U) :=
+    { toFun := c
+      map_one' := hc1
+      map_mul' := hcmul
+      map_zero' := hc0
+      map_add' := hcadd }
+  exact ⟨ρ, hcoef⟩
 
 end AlgebraicGeometry.Scheme.Modules
