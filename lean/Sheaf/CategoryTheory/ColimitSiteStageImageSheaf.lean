@@ -8,7 +8,7 @@ module
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Sheaf.CategoryTheory.ColimitSiteStageImage
-import Sheaf.CategoryTheory.FilteredColimitCategories
+import Sheaf.CategoryTheory.ColimitSiteStageImageSheafAux
 
 /-! # ColimitSiteStageImageSheaf
 
@@ -89,6 +89,10 @@ theorem colimit_site_stage_image_isSheaf
                   Arrow.mk (((sheafAdjunctionContinuous (V.ι.app i).toFunctor (Type u)
                     (P i).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X))))
     : Presheaf.IsSheaf Q.toGrothendieck
-      (colimitSiteStageImage F P V Q i G α).toFunctor := by sorry
+      (colimitSiteStageImage F P V Q i G α).toFunctor := by
+  rw [isSheaf_iff_isSheaf_of_type]
+  intro Y R hR
+  exact colimit_site_stage_image_local_isSheafFor J F P hfinite hcover hpullback
+    V hobjects harrows Q hQ hVpullback i G α hα Y R hR
 
 end CategoryTheory
