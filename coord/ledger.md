@@ -9190,3 +9190,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/G1/Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules (stage 3; reviewer PASS; after a return; landing 20261012T194111-L-455199 (interface); batch 20261012T194054; modules 3; new nodes 3)
 - 19:41 L: merged deliver/G1/Sheaf.RingTheory.RelativeGlobalCompleteIntersectionSmoothJacobian (stage 3; reviewer PASS; first push; landing 20261012T194112-L-455300 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/G2/Sheaf.RingTheory.PolynomialQuotientDimensionLowerBound (stage 3; reviewer PASS; first push; landing 20261012T194112-L-455499 (proof); batch 20261012T194054; modules 1; new nodes 0)
+- 19:41 L: merged deliver/G2/Sheaf.RingTheory.RelativeGlobalCompleteIntersectionFlat (stage 3; reviewer PASS; first push; landing 20261012T194113-L-455604 (proof); batch 20261012T194054; modules 1; new nodes 0)
