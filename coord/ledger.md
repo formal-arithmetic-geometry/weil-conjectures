@@ -7749,3 +7749,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/A3/Sheaf.AlgebraicGeometry.PicardProductOpen (stage 3; reviewer PASS; first push; landing 20261012T135216-L-1655144 (proof); batch 20261012T135212; modules 1; new nodes 1)
 - 13:52 L: merged deliver/A3/Sheaf.RingTheory.EtaleResidueTripleUnitRefinement (stage 3; reviewer PASS; after a return; landing 20261012T135216-L-1655242 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/A3/Sheaf.RingTheory.SingularIdealLocalizationSmooth (stage 3; reviewer PASS; first push; landing 20261012T135216-L-1655387 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:52 L: merged deliver/A3/Sheaf.RingTheory.SmoothAtGenericPointOverField (stage 3; reviewer PASS; first push; landing 20261012T135217-L-1655533 (proof); batch 20261012T135212; modules 1; new nodes 1)
