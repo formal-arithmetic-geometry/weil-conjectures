@@ -19,16 +19,26 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Represent two elements at stages, lift both to a common stage, use the domain property there, and detect any zero relation at a later stage by filteredness; transport the resulting IsDomain instance along the vertex equality.",
+   "text": "Transport along the vertex equality. Install the domain instances at every stage. Mathlib CommRingCat.FilteredColimits.nontrivial gives nontriviality of the cocone vertex.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The forgetful functor to types preserves filtered colimits. Apply Types.FilteredColimit.jointly_surjective_of_isColimit₂ to represent the two factors a and b at one stage i. Map their product to the vertex; it is zero by the original zero-product hypothesis and preservation of multiplication.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply Types.FilteredColimit.isColimit_eq_iff' to the product and zero at i, obtaining a map i → j at which the product is zero. Since D(j) is a domain, one image factor is zero. Cocone naturality and preservation of zero show that the corresponding original factor is zero. This constructs NoZeroDivisors at the vertex; NoZeroDivisors.to_isDomain combines it with nontriviality.",
    "uses": [],
    "elementary": false
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "worker",
+  "by": "W2 stage 3 worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 037D"
+  "place": "Tag 037D, common-stage argument implemented using Mathlib filtered-colimit APIs"
  },
  "mathlib_searches": [
   {
@@ -88,10 +98,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T053926-L-2632973",
-  "kind": "interface",
+  "landing": "20261012T063526-L-3162875",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
