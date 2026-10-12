@@ -7,6 +7,9 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 import Sheaf.FieldTheory.GaloisAutomorphismExtension
+import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
+import Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection
+import Mathlib.FieldTheory.AlgebraicClosure
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-! # Realizing equivariant germs on a one-point etale scheme
@@ -161,6 +164,106 @@ private theorem onePoint_lifts_transitive
     simp
   rw [← hx x', ht', Category.assoc, hx x]
 
+set_option backward.isDefEq.respectTransparency false in
+/-- A chosen lift identifies a one-point etale scheme with a finite subfield of Ks.
+Source: Stacks Project, Tags 02GL and 03QW. The residue-field point is an isomorphism,
+and its finite separable field embeds in Ks through the chosen geometric lift. -/
+private theorem onePoint_field_model
+    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
+    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]
+    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]
+    (X : (Spec (.of K)).Etale) [Subsingleton X.left] [Nonempty X.left]
+    (x : (pointSmallEtale
+      (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X) :
+    ∃ (M : IntermediateField K Ks) (hfin : FiniteDimensional K M)
+      (hsep : Algebra.IsSeparable K M),
+      letI := hfin
+      letI := hsep
+      letI : Algebra.Etale K M := Algebra.Etale.of_finite_of_isSeparable
+      ∃ e : X ≅ etaleSpec K M,
+        x.left ≫ e.hom.left = Spec.map
+          (CommRingCat.ofHom ((algebraMap Ks Ω).comp M.subtype)) := by
+  classical
+  dsimp only
+  let y : X.left := Classical.choice (inferInstance : Nonempty X.left)
+  let q : X.left ⟶ Spec (.of K) := X.hom
+  let L := X.left.residueField y
+  let j := X.left.fromSpecResidueField y
+  let i := Spec.homEquiv (j ≫ q)
+  let : Algebra K L := i.hom.toAlgebra
+  have : IsClosedImmersion ((Spec (.of K)).fromSpecResidueField (q y)) :=
+    isClosed_singleton_iff_isClosedImmersion.mp (isClosed_discrete _)
+  have : Surjective ((Spec (.of K)).fromSpecResidueField (q y)) :=
+    ⟨fun z ↦ ⟨default, Subsingleton.elim _ _⟩⟩
+  have := isIso_of_isClosedImmersion_of_surjective
+    ((Spec (.of K)).fromSpecResidueField (q y))
+  have : Etale (Spec.map (q.residueFieldMap y)) :=
+    HasRingHomProperty.Spec_iff.mpr (q.etale_residueFieldMap y)
+  have : Etale (j ≫ q) := by
+    dsimp [j]
+    rw [← q.SpecMap_residueFieldMap_fromSpecResidueField y]
+    infer_instance
+  have hi : Spec.map i = j ≫ q := Spec.homEquiv.symm_apply_apply _
+  have : Etale (Spec.map i) := hi ▸ ‹Etale (j ≫ q)›
+  have : Algebra.Etale K L := by
+    rw [← RingHom.etale_algebraMap, RingHom.algebraMap_toAlgebra]
+    exact HasRingHomProperty.Spec_iff.mp ‹Etale (Spec.map i)›
+  have : Algebra.IsSeparable K L :=
+    (Algebra.FormallyEtale.iff_isSeparable _ _).mp inferInstance
+  have : DiscreteTopology X.left := inferInstance
+  have : IsClosedImmersion j := .of_isPreimmersion j (isClosed_discrete _)
+  have : Surjective j := ⟨fun z ↦ ⟨default, Subsingleton.elim _ _⟩⟩
+  have : IsReduced X.left := isReduced_of_etale q
+  have : IsIso j := isIso_of_isClosedImmersion_of_surjective j
+  have : Module.Finite K L := Algebra.FormallyUnramified.finite_of_free K L
+  let t := x.left ≫ inv j
+  have ht : t ≫ Spec.map i =
+      Spec.map (CommRingCat.ofHom (algebraMap K Ω)) := by
+    rw [hi]
+    dsimp [t]
+    rw [Category.assoc, IsIso.inv_hom_id_assoc]
+    exact Over.w x
+  let σ : L →ₐ[K] Ω :=
+    { (Spec.homEquiv t).hom with
+      commutes' := by
+        intro k
+        have h := ht
+        rw [← Spec.homEquiv.symm_apply_apply t] at h
+        change Spec.map (Spec.homEquiv t) ≫ Spec.map i = _ at h
+        rw [← Spec.map_comp] at h
+        have h' := Spec.homEquiv.symm.injective h
+        exact DFunLike.congr_fun (congrArg CommRingCat.Hom.hom h') k }
+  obtain ⟨σs, hσs⟩ := factor_separable_embedding K Ks Ω L σ
+  let M := σs.fieldRange
+  let a : L ≃ₐ[K] M := σs.equivFieldRange
+  have : FiniteDimensional K M := a.toLinearEquiv.finiteDimensional
+  have : Algebra.IsSeparable K M := inferInstance
+  have : Algebra.Etale K M := Algebra.Etale.of_finite_of_isSeparable
+  let r : Spec (.of M) ⟶ Spec (.of L) := Spec.map (CommRingCat.ofHom a.toRingHom)
+  have : IsIso r := inferInstance
+  let b : X.left ≅ Spec (.of M) := (asIso j).symm ≪≫ (asIso r).symm
+  have hb : b.hom ≫ (etaleSpec K M).hom = X.hom := by
+    have hri : r ≫ Spec.map i = (etaleSpec K M).hom := by
+      rw [← Spec.map_comp]
+      congr 1
+      ext k
+      exact congrArg Subtype.val (a.commutes k)
+    change (inv j ≫ inv r) ≫ _ = _
+    rw [Category.assoc]
+    rw [← hri, IsIso.inv_hom_id_assoc, hi, IsIso.inv_hom_id_assoc]
+  let e : X ≅ etaleSpec K M := MorphismProperty.Over.isoMk b hb
+  refine ⟨M, inferInstance, inferInstance, e, ?_⟩
+  apply (cancel_mono r).1
+  change (x.left ≫ (inv j ≫ inv r)) ≫ r = _
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  change t = _
+  rw [← Spec.homEquiv.symm_apply_apply t]
+  change Spec.map (CommRingCat.ofHom σ.toRingHom) = _
+  rw [← Spec.map_comp]
+  exact congrArg (fun f : L →ₐ[K] Ω ↦ Spec.map (CommRingCat.ofHom f.toRingHom)) hσs.symm
+
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Tag 04JM, direct proof of lemma-global-sections-point,
 and Tag 03QW, section-galois-action-stalks.
 (blueprint: lem-exc-field-equivariant-germs-one-point).
@@ -217,7 +320,110 @@ theorem onePoint_selected_lift_section
           (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left),
           f x' = ρ g (f x)) →
         ∃ z : F.obj.obj (op X),
-          p.toPresheafFiber X x₀ F.obj z = f x₀ := by sorry
+          p.toPresheafFiber X x₀ F.obj z = f x₀ := by
+  classical
+  dsimp only
+  intro x₀ ρ hρ f hf
+  let A := algebraicClosure K Ω
+  have : IsAlgClosed A := IsAlgClosure.isAlgClosed K
+  let j : Ks →ₐ[K] A := (IsScalarTower.toAlgHom K Ks Ω).codRestrict A.toSubalgebra
+    (fun x ↦ mem_algebraicClosure_iff'.mpr
+      ((Algebra.IsIntegral.isIntegral x).map
+        (IsScalarTower.toAlgHom K Ks Ω)))
+  let : Algebra Ks A := j.toRingHom.toAlgebra
+  have : IsScalarTower K Ks A :=
+    IsScalarTower.of_algebraMap_eq (fun k ↦ (j.commutes k).symm)
+  have : IsScalarTower Ks A Ω := IsScalarTower.of_algebraMap_eq (fun k ↦ rfl)
+  let sA := Spec.map (CommRingCat.ofHom (algebraMap K A))
+  let sΩ := Spec.map (CommRingCat.ofHom (algebraMap K Ω))
+  let q := pointSmallEtale sA
+  let p := pointSmallEtale sΩ
+  let a := Spec.map (CommRingCat.ofHom (algebraMap A Ω))
+  have ha : a ≫ sA = sΩ := by
+    rw [← Spec.map_comp]
+    exact congrArg (fun c ↦ Spec.map (CommRingCat.ofHom c))
+      (IsScalarTower.algebraMap_eq K A Ω).symm
+  let b : Over.mk sΩ ⟶ Over.mk sA := Over.homMk a ha
+  let α : q.fiber ⟶ p.fiber :=
+    Functor.whiskerLeft (Etale.forget _) (coyoneda.map b.op)
+  obtain ⟨_, hc, _⟩ := geometricPointMorphism_stalk_bijection.{u, max (u + 1) v}
+    sΩ sA a ha
+  obtain ⟨⟨c, hcg, _⟩, hcb⟩ := hc F
+  let e := Equiv.ofBijective c (hcb c hcg)
+  obtain ⟨lift, act, hlift, hact, _⟩ := fieldSections_stalkInvariants K Ks A sA rfl
+  obtain ⟨hactg, hbij, _, _⟩ := hact F
+  have he (Y : (Spec (.of K)).Etale) (y : q.fiber.obj Y)
+      (z : F.obj.obj (op Y)) :
+      e (q.toPresheafFiber Y y F.obj z) =
+        p.toPresheafFiber Y (α.app Y y) F.obj z := hcg Y y z
+  have heact (g : Gal(Ks/K)) (m : q.sheafFiber.obj F) :
+      e ((act F).smul g m) = ρ g (e m) := by
+    obtain ⟨Y, y, z, rfl⟩ := q.toPresheafFiber_jointly_surjective (P := F.obj) m
+    obtain ⟨τ, hτ⟩ := exists_algEquiv_extending_separableClosure K Ks Ω g
+    let τA : A ≃ₐ[K] A :=
+      { toFun := fun x ↦ ⟨τ x, mem_algebraicClosure_iff'.mpr
+          ((mem_algebraicClosure_iff'.mp x.property).map τ.toAlgHom)⟩
+        invFun := fun x ↦ ⟨τ.symm x, mem_algebraicClosure_iff'.mpr
+          ((mem_algebraicClosure_iff'.mp x.property).map τ.symm.toAlgHom)⟩
+        left_inv := fun x ↦ Subtype.ext (τ.symm_apply_apply x)
+        right_inv := fun x ↦ Subtype.ext (τ.apply_symm_apply x)
+        map_mul' := fun x y ↦ Subtype.ext (map_mul τ (x : Ω) (y : Ω))
+        map_add' := fun x y ↦ Subtype.ext (map_add τ (x : Ω) (y : Ω))
+        commutes' := fun k ↦ Subtype.ext (τ.commutes k) }
+    have hτA : (algebraMap Ks A).comp g.toRingHom =
+        τA.toRingHom.comp (algebraMap Ks A) := by
+      ext k
+      exact DFunLike.congr_fun hτ k
+    have htA : Spec.map (CommRingCat.ofHom τA.toRingHom) ≫ sA = sA := by
+      change Spec.map (CommRingCat.ofHom τA.toRingHom) ≫
+        Spec.map (CommRingCat.ofHom (algebraMap K A)) = _
+      rw [← Spec.map_comp]
+      exact congrArg (fun c ↦ Spec.map (CommRingCat.ofHom c))
+        τA.toAlgHom.comp_algebraMap
+    let y' : q.fiber.obj Y := Over.homMk
+      (Spec.map (CommRingCat.ofHom τA.toRingHom) ≫ y.left)
+      ((Category.assoc _ _ _).trans
+        ((congrArg (fun t ↦ Spec.map (CommRingCat.ofHom τA.toRingHom) ≫ t)
+          (show y.left ≫ Y.hom = sA from Over.w y)).trans htA))
+    rw [hactg g τA hτA Y y y' rfl z, he, he]
+    apply (hρ g τ hτ Y (α.app Y y) (α.app Y y') ?_ z).symm
+    change a ≫ (Spec.map (CommRingCat.ofHom τA.toRingHom) ≫ y.left) =
+      Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ (a ≫ y.left)
+    rw [← Category.assoc, ← Category.assoc, ← Spec.map_comp, ← Spec.map_comp]
+    congr 2
+  obtain ⟨L, hfin, hsep, d, hd⟩ := onePoint_field_model K Ks Ω X x₀
+  let := hfin
+  let := hsep
+  have : Algebra.Etale K L := Algebra.Etale.of_finite_of_isSeparable
+  have hdLift : p.fiber.map d.hom x₀ = α.app (etaleSpec K L) (lift L) := by
+    apply Over.OverMorphism.ext
+    change x₀.left ≫ d.hom.left = a ≫ (lift L).left
+    rw [hd, hlift, ← Spec.map_comp]
+    congr 1
+  let m := e.symm (f x₀)
+  have hm : ∀ g ∈ L.fixingSubgroup, (act F).smul g m = m := by
+    intro g hg
+    apply e.injective
+    rw [heact]
+    change ρ g (e (e.symm (f x₀))) = e (e.symm (f x₀))
+    rw [e.apply_symm_apply]
+    obtain ⟨τ, hτ⟩ := exists_algEquiv_extending_separableClosure K Ks Ω g
+    have hx : x₀.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x₀.left := by
+      apply (cancel_mono d.hom.left).1
+      rw [Category.assoc, hd, ← Spec.map_comp]
+      congr 1
+      ext k
+      have h := DFunLike.congr_fun hτ (k : Ks)
+      have hgk := (IntermediateField.mem_fixingSubgroup_iff L g).mp hg k k.property
+      change algebraMap Ks Ω (k : Ks) = τ (algebraMap Ks Ω (k : Ks))
+      exact (h.symm.trans (congrArg (algebraMap Ks Ω) hgk)).symm
+    exact (hf g τ hτ x₀ x₀ hx).symm
+  obtain ⟨zL, _, hzL⟩ := (hbij L).surjOn hm
+  refine ⟨F.obj.map d.hom.op zL, ?_⟩
+  have hw := p.toPresheafFiber_w_apply d.hom x₀ F.obj zL
+  rw [hdLift] at hw
+  exact hw.trans ((he (etaleSpec K L) (lift L) zL).symm.trans
+    ((congrArg e hzL).trans (e.apply_symm_apply (f x₀))))
 
 set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Tags 02GL and 03QW.

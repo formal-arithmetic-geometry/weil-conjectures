@@ -15,7 +15,34 @@
  ],
  "proof": [
   {
-   "text": "Apply the finite separable invariant-section theorem to reconstruct a section matching the prescribed germ at the selected lift, and transport across the pointed isomorphism.",
+   "text": "The proved private helper onePoint_field_model identifies X with Spec of a finite separable intermediate field L of Ks, carrying the selected lift to the canonical embedding L -> Ks -> Omega. It uses the residue-field point j of the unique point: discreteness makes j a closed immersion, surjectivity and reducedness make it an isomorphism. Etaleness of the residue-field map gives a finite separable extension. Factor the selected embedding through Ks with factor_separable_embedding, take its fieldRange, and form the pointed spectrum isomorphism using equivFieldRange. These are direct Mathlib constructions; no additional reconstruction obligation is introduced.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct A = algebraicClosure K Omega, the relative algebraic closure, using Mathlib. Its isAlgClosure instance makes it algebraically closed and algebraic over K. CodRestrict the map Ks -> Omega to A, since every element of Ks is algebraic over K. Apply geometricPointMorphism_stalk_bijection to Spec Omega -> Spec A over Spec K to obtain a representative-preserving equivalence e between the A-stalk and the Omega-stalk. The equivalence is uniquely determined by its formula on representatives.",
+   "uses": [
+    "lem-weil-pbc-geometric-point-morphism-stalk-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply fieldSections_stalkInvariants at A. Its lift is prescribed by the embedding of each intermediate field, and its action is prescribed by the germ formula. For any g, extend g to tau on Omega, explicitly restrict tau and its inverse to A (integrality is preserved by algebra maps), and use the action formula on an arbitrary germ representative. The representative-preserving stalk comparison then gives e(action(g,m)) = rho(g,e(m)). Joint surjectivity of the germ maps proves this identity for every stalk element.",
+   "uses": [
+    "lem-exc-field-sections-stalk-invariants",
+    "lem-exc-galois-automorphism-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For g in L.fixingSubgroup, its extension tau fixes the selected lift: compose that lift with the pointed isomorphism to Spec L and check equality of the underlying ring maps on each element of L. Covariance of f therefore fixes f(x0) under rho(g). By injectivity of e and the action comparison, e.symm(f(x0)) is fixed by the canonical action of L.fixingSubgroup.",
+   "uses": [
+    "lem-exc-galois-automorphism-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The surjectivity clause of fieldSections_stalkInvariants produces a section zL over Spec L with germ e.symm(f(x0)). Pull it back along the pointed isomorphism X -> Spec L. Mathlib toPresheafFiber_w_apply and the representative formula for e identify its germ at x0 with f(x0), proving the selected-lift conclusion.",
    "uses": [
     "lem-exc-field-sections-stalk-invariants"
    ],
@@ -23,12 +50,16 @@
   }
  ],
  "proof_deps": [
-  "lem-exc-field-sections-stalk-invariants"
+  "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+  "lem-exc-field-sections-stalk-invariants",
+  "lem-exc-galois-automorphism-extension"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "F1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04JM and 03QW"
+  "place": "Tag 04JM, direct invariant-section proof; Tag 03QW, action on germ representatives; Tag 04FN, change of geometric-point field. Lean proof combines the existing stated theorems with proved residue-field and action-compatibility glue."
  },
  "mathlib_searches": [
   {
@@ -102,17 +133,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T194121-L-458310",
+  "landing": "20261012T213847-L-1207854",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.onePoint_propagate_from_selected_lift",
-   "AlgebraicGeometry.Scheme.onePoint_selected_lift_section"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.onePoint_selected_lift_section"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
