@@ -7496,3 +7496,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/E3/Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowers (stage 3; reviewer PASS; first push; landing 20261012T112836-L-766375 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/E3/Sheaf.RingTheory.LinearEquationLocalizationPolynomial (stage 3; reviewer PASS; first push; landing 20261012T112836-L-766474 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/F1/Sheaf.AlgebraicGeometry.FiniteConstantAbelianNeighborhood (stage 3; reviewer PASS; first push; landing 20261012T112836-L-766571 (interface); batch 20261012T112824; modules 2; new nodes 3)
+- 11:28 L: merged deliver/F1/Sheaf.AlgebraicGeometry.HigherDirectImageTransitionComposition (stage 3; reviewer PASS; first push; landing 20261012T112837-L-766677 (interface); batch 20261012T112824; modules 3; new nodes 2)

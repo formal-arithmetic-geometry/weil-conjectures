@@ -1,0 +1,113 @@
+{
+ "id": "lem-sbc-higher-image-transition-naturality",
+ "kind": "statement",
+ "title": "Coefficient naturality of higher direct image transitions",
+ "statement": "Let Λ be a commutative ring, a:Y′→Y, h:Y→S and h′:Y′→S be scheme morphisms [def-weil-pbc-scheme-conventions] with a≫h=h′. For integer q, etale Λ-module sheaves F,G on Y [def-weil-pbc-etale-sheaves], and a sheaf morphism f:F→G, the canonical transition t [def-sbc-module-higher-image-transitions] satisfies H^q(Rh_*f[0])≫t(a,G)=t(a,F)≫H^q(Rh′_*(a^*f)[0]); a^* is the etale inverse image [def-weil-pbc-inverse-image].",
+ "source": {
+  "document": "Stacks Project and source library",
+  "place": "Tags 09Z1 and 03Q8, canonical comparisons; formal adjunction calculation for these comparisons"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "def-sbc-module-higher-image-transitions",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "write the derived transition as the composite natural transformation formed by\nthe h' adjunction unit, the pullback composition comparison, and pullback of the h\nadjunction counit. Each is natural, so its naturality square commutes for F[0]→G[0].\nThe single-complex comparison is itself natural, and applying Rh'_* and homology\npreserves the commuting square. This gives the displayed equality. For identity maps\nit is reflexivity, for zero maps it is the zero equality by additivity, and the argument\nuses no geometric or cohomological bound assumptions.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and source library",
+  "place": "Canonical comparison of Tag 09Z1; explicit formal assembly from derived adjunction and pullback coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "higherDirectImageTransition|lowerStarPlusTransition",
+   "results": "No exact hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match for the stated higher transition identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image transition natural in coefficient sheaf composition canonical comparison",
+   "results": "SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardComp_hom_app_val_app, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc, SheafOfModules.pushforward_assoc, CategoryTheory.sheafCompose_comp, CategoryTheory.Sheaf.ΓRes_map_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match for the stated higher transition identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical higher direct image transition maps naturality composition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageTransitionComposition",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Canonical transition maps in the higher-direct-image limit argument; composition of the comparison",
+   "via": [
+    "sbc-lem-higher-image-over-transition-coherence",
+    "lem-sbc-higher-image-transition-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageTransitionNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageTransitionNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.higher_direct_image_transition_naturality",
+  "statement": "theorem higher_direct_image_transition_naturality\n    (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' : Scheme.{u}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S)\n    (w : a ≫ h = h') (q : ℤ)\n    (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (f : F ⟶ G) :\n    (DerivedCategory.Plus.homologyFunctor _ q).map\n        (R+((h)_*[ModuleCat.{u + 1} Λ]).map\n          ((DerivedCategory.Plus.singleFunctor _ 0).map f)) ≫\n      higherDirectImageTransition Λ a h h' w q G =\n    higherDirectImageTransition Λ a h h' w q F ≫\n      (DerivedCategory.Plus.homologyFunctor _ q).map\n        (R+((h')_*[ModuleCat.{u + 1} Λ]).map\n          ((DerivedCategory.Plus.singleFunctor _ 0).map\n            (((a)^*[ModuleCat.{u + 1} Λ]).map f)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T112837-L-766677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T112837-L-766677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

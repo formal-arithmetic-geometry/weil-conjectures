@@ -6,8 +6,8 @@ Authors: SHEAF group C3
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.HigherDirectImageTransitionCoreComposition
+import Sheaf.AlgebraicGeometry.HigherDirectImageTransitionNaturality
 
 /-! # Composition of higher direct image triangles
 
@@ -62,6 +62,12 @@ theorem higher_direct_image_transition_composition
       (higherDirectImageTransition Λ b h' h'' wb q F' ≫
         (DerivedCategory.Plus.homologyFunctor _ q).map
           (R+((h'')_*[ModuleCat.{u + 1} Λ]).map
-            ((DerivedCategory.Plus.singleFunctor _ 0).map g))) := by sorry
+            ((DerivedCategory.Plus.singleFunctor _ 0).map g)))  := by
+  have hc := higher_direct_image_transition_core_composition Λ a b h h' h'' wa wb q F
+  have hn := higher_direct_image_transition_naturality Λ b h' h'' wb q
+    (((a)^*[ModuleCat.{u + 1} Λ]).obj F) F' f
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hc, ← reassoc_of% hn]
+
 
 end AlgebraicGeometry.Etale

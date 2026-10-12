@@ -1,0 +1,117 @@
+{
+ "id": "lem-sbc-higher-image-transition-core-composition",
+ "kind": "statement",
+ "title": "Canonical-coefficient transition composition",
+ "statement": "Let Λ be a commutative ring and let a:Y′→Y, b:Y″→Y′, h:Y→S, h′:Y′→S and h″:Y″→S be scheme morphisms [def-weil-pbc-scheme-conventions] with a≫h=h′ and b≫h′=h″. For every etale Λ-module sheaf F on Y [def-weil-pbc-etale-sheaves] and integer q, let t be the higher direct image transition [def-sbc-module-higher-image-transitions] and c:(b≫a)^*F→b^*a^*F the pullback composition comparison [lem-weil-pbc-inverse-image-composition]. Then t(b≫a,F) followed by H^q(Rh″_* c[0]) equals t(a,F) followed by t(b,a^*F).",
+ "source": {
+  "document": "Stacks Project and source library",
+  "place": "Tags 09Z1 and 03Q8, canonical comparisons; formal adjunction calculation for these comparisons"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "def-sbc-module-higher-image-transitions",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "use the derived transition composition identity at F[0], then apply homology.\nThe derived identity follows by applying the inverse h'' adjunction hom-set equivalence:\nnaturality moves the first transition inside b^*, the h' counit cancels the h' unit,\nand associativity of derived pullback comparisons identifies the remaining adjunct\nwith the one for b≫a. The two degree-zero comparisons compose to the ordinary pullback\ncomparison, as checked degreewise on the single complex and preserved by localization.\nThus homology gives precisely the displayed comparison. Identity morphisms give the\nunit law and zero sheaves give zero maps; no properness or degree bound is required.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sbc-lower-star-plus-transition-comp"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sbc-lower-star-plus-transition-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and source library",
+  "place": "Canonical comparison of Tag 09Z1; explicit formal assembly from derived adjunction and pullback coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "higherDirectImageTransition|lowerStarPlusTransition",
+   "results": "No exact hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match for the stated higher transition identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image transition natural in coefficient sheaf composition canonical comparison",
+   "results": "SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardComp_hom_app_val_app, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc, SheafOfModules.pushforward_assoc, CategoryTheory.sheafCompose_comp, CategoryTheory.Sheaf.ΓRes_map_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match for the stated higher transition identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical higher direct image transition maps naturality composition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageTransitionComposition",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Canonical transition maps in the higher-direct-image limit argument; composition of the comparison",
+   "via": [
+    "sbc-lem-higher-image-over-transition-coherence",
+    "lem-sbc-higher-image-transition-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageTransitionCoreComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageTransitionCoreComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.higher_direct_image_transition_core_composition",
+  "statement": "theorem higher_direct_image_transition_core_composition\n    (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' Y'' : Scheme.{u}}\n    (a : Y' ⟶ Y) (b : Y'' ⟶ Y') (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Y'' ⟶ S)\n    (wa : a ≫ h = h') (wb : b ≫ h' = h'') (q : ℤ)\n    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    higherDirectImageTransition Λ (b ≫ a) h h''\n        (by rw [Category.assoc, wa, wb]) q F ≫\n      (DerivedCategory.Plus.homologyFunctor _ q).map\n        (R+((h'')_*[ModuleCat.{u + 1} Λ]).map\n          ((DerivedCategory.Plus.singleFunctor _ 0).map\n            ((upperStarComp (ModuleCat.{u + 1} Λ) b a).hom.app F))) =\n      higherDirectImageTransition Λ a h h' wa q F ≫\n        higherDirectImageTransition Λ b h' h'' wb q\n          (((a)^*[ModuleCat.{u + 1} Λ]).obj F)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T112837-L-766677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T112837-L-766677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
