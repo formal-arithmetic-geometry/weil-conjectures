@@ -13,22 +13,37 @@
  ],
  "proof": [
   {
-   "text": "Apply the same finite local frame projection-formula calculation to the dual finite locally free module.",
+   "text": "The duals of E and N are finite locally free by Modules.IsFiniteLocallyFree.dual. For any scheme morphism k, the chosen tensor-pullback adjunction and the ordinary pullback adjunction share pushforward as right adjoint. Their leftAdjointUniq isomorphism c identifies the two pullback functors.",
    "uses": [
-    "lem-sc-finite-locally-free-tensor-unit",
-    "lem-weil-pbc-module-base-change-map-open-restriction"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply nonempty_pullback_dual_iso_of_isFiniteLocallyFree to M. Compose c at M^dual, that duality comparison, and dualFunctor.mapIso of (c at M).op to obtain tensorPullback k (M^dual) isomorphic to the dual of tensorPullback k M. This is the proved private helper tensorPullback_dual_iso.",
+   "uses": [
+    "lem-ag-pullback-dual-finite-locally-free"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At q = pullback.fst f g and p = pullback.snd f g, let dE and dN be the comparisons just obtained. If i represents e, the composition dE followed by the inverse of dualFunctor.mapIso i.op followed by dN inverse identifies q^*(E^dual) with p^*(N^dual). Apply the primal base-change theorem to E^dual and N^dual, this isomorphism, the original hO and h.",
+   "uses": [
+    "lem-sc-picard-pullback-base-change-primal"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-finite-locally-free-tensor-unit",
-  "lem-weil-pbc-module-base-change-map-open-restriction"
+  "lem-pc-module-pullback-adjunction",
+  "lem-ag-pullback-dual-finite-locally-free",
+  "lem-sc-picard-pullback-base-change-primal"
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "projection-formula paragraph after dualizing"
+  "place": "projection-formula paragraph, the dual-module clause",
+  "note": "Formalized by applying the existing primal theorem to the dual modules; pullback-duality comparison from Tag 0FNV is transported along uniqueness of left adjoints."
  },
  "mathlib_searches": [
   {
@@ -88,11 +103,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-36f37",
   "group": "S2",
   "result": "pass",
-  "landing": "20261012T220525-L-1395345",
+  "landing": "20261012T232905-L-2043709",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module and importer compile cleanly; theorem signature and Challenge targets unchanged; import pruning is documented and reader-gate verified."
  }
 }
