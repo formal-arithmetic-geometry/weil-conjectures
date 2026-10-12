@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-open-pushforward-derived-comparison",
+ "kind": "statement",
+ "title": "Derived composition for an open-pushforward-acyclic module",
+ "statement": "Let f:X → Y be a scheme morphism and W an open subscheme of X with inclusion j. Assume the module categories on X and W have injective resolutions. If M is an O_W-module acyclic for j_*, then for every natural number q there is an isomorphism R^q f_*(j_*M) ≅ R^q(f j)_*M. No affine, separatedness or quasi-coherence assumption is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sp-acyclic",
+  "def-sp-injective-resolutions"
+ ],
+ "source": {
+  "document": "WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean",
+  "place": "Functor.quasiIso_map_of_rightAcyclic_nat and Functor.rightDerivedObjIsoOfResolution; injective-resolution proof of the comparison in blueprint lem-pc-cech-resolution, paragraphs 2 and 3"
+ },
+ "proof": [
+  {
+   "text": "Restriction to W preserves monomorphisms, as its maps on sections are the original maps on the image open. The restriction adjunction therefore sends injectives under j_* to injectives, by Mathlib Adjunction.map_injective. Both j_* and f_* are left exact by their adjunctions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose an injective resolution I of M. Every term is j_*-acyclic. The single complex on M also has j_*-acyclic terms by hM and the vanishing of its positive terms. Functor.quasiIso_map_of_rightAcyclic_nat therefore makes the induced augmentation j_*M to j_*I a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Functor.rightDerivedObjIsoOfResolution to f_* and the augmentation j_*M to j_*I; the terms are injective and hence f_*-acyclic. Pushforward composition identifies f_*j_*I with (f j)_*I. Compose its homology isomorphism with the inverse of InjectiveResolution.isoRightDerivedObj for (f j)_*.",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean",
+  "place": "Functor.quasiIso_map_of_rightAcyclic_nat and Functor.rightDerivedObjIsoOfResolution; injective-resolution proof of the comparison in blueprint lem-pc-cech-resolution, paragraphs 2 and 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an open immersion j and a j-star acyclic module M, higher direct images of j-star M under f agree with higher direct images of M under the composite",
+   "results": "Service unavailable: Internal Server Error. No mathematical search verdict; other search kinds and local source searches used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived functor composition on an acyclic object under a functor preserving injectives",
+   "results": "8 hits, including exact-functor derived factorization and rightDerived_map_eq, no exact composition-on-acyclic-object match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedObjIsoOfResolution\"",
+   "results": "0 hits; upstream rg finds the acyclic-resolution computation and quasiIso_map_of_rightAcyclic_nat, both used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; upstream ingredients used"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedObjIsoOfResolution|injective.*pushforward|pushforward.*injective",
+   "results": "msearch returned 5 unrelated Mathlib hits. Local rg in lean/Sheaf and upstream found acyclic resolution and affine cohomology-edge proofs, but no existing open-pushforward derived comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenPushforwardAcyclic",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-open-pushforward-acyclic",
+   "place": "derived-composition comparison in its second proof step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenPushforwardDerivedComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenPushforwardDerivedComparison.lean",
+  "declaration": "AlgebraicGeometry.open_pushforward_rightDerived_comparison",
+  "statement": "theorem open_pushforward_rightDerived_comparison\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [HasInjectiveResolutions (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (W : X.Opens) [HasInjectiveResolutions W.toScheme.Modules]\n    (M : W.toScheme.Modules)\n    (hM : (Scheme.Modules.pushforward W.ι).rightAcyclic M) (q : ℕ) :\n    Nonempty\n      (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived q).obj\n          ((Scheme.Modules.pushforward W.ι).obj M) ≅\n        ((Scheme.Modules.pushforward (W.ι ≫ f)).rightDerived q).obj M)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261012T231634-L-1961824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261012T231634-L-1961824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
