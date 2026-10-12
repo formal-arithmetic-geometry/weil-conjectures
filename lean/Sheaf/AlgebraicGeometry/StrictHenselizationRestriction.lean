@@ -11,6 +11,8 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 
 /-!
 # Canonical restriction to a strict henselization
@@ -124,7 +126,88 @@ theorem existsUnique_strictHenselizationStalkRestriction
         ((upperStar AddCommGrpCat.{v + 1}
           (Scheme.strictHenselizationStructuralMap s)).obj F),
       IsStrictHenselizationStalkRestriction s F r := by
-  sorry
+  let N := (equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙
+    Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
+      (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)
+  have : N.Initial := (Scheme.strictHenselization_properties s).1
+  -- Initiality makes the representative germ cocone a colimit.
+  let c := ((Scheme.pointSmallEtale s).presheafFiberCocone F.obj).whisker N.op
+  let hc : IsColimit c :=
+    (Functor.Final.isColimitWhiskerEquiv N.op _).symm
+      ((Scheme.pointSmallEtale s).isColimitPresheafFiberCocone F.obj)
+  let d : Cocone (N.op ⋙ (CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).op ⋙
+      F.obj) :=
+    { pt := (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+        AddCommGrpCat.{v + 1}).obj
+          ((upperStar AddCommGrpCat.{v + 1}
+            (Scheme.strictHenselizationStructuralMap s)).obj F)
+      ι := { app j := strictHenselizationSectionRestriction s F j.unop
+             naturality := by
+               intro i j a
+               dsimp
+               simp only [Category.comp_id]
+               let t := (CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).map
+                 (N.map a.unop)
+               -- Compare the two pullback projections, using naturality of the limit legs.
+               have ht : strictHenselizationNeighbourhoodSection s j.unop ≫
+                   (Scheme.strictHenselizationStructuralMap s).Etale.map t =
+                     strictHenselizationNeighbourhoodSection s i.unop := by
+                 apply MorphismProperty.Over.Hom.ext
+                 apply pullback.hom_ext
+                 · rw [MorphismProperty.Comma.comp_left]
+                   dsimp only [Scheme.Hom.Etale, MorphismProperty.Over.pullback,
+                     strictHenselizationNeighbourhoodSection, MorphismProperty.Over.homMk,
+                     Over.homMk, CostructuredArrow.homMk,
+                     MorphismProperty.Comma.comp_left]
+                   simp only [Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc]
+                   erw [pullback.lift_fst]
+                   have : IsAffine
+                       ((CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).obj
+                         (N.obj j.unop)).left := by
+                     change IsAffine (Spec _)
+                     infer_instance
+                   have : IsAffine
+                       ((CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).obj
+                         (N.obj i.unop)).left := by
+                     change IsAffine (Spec _)
+                     infer_instance
+                   have hw := Scheme.isoSpec_inv_naturality t.left
+                   let Ri := unop ((equivSmallModel.{v}
+                     (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj i.unop).1.left
+                   let Rj := unop ((equivSmallModel.{v}
+                     (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j.unop).1.left
+                   change Spec.map t.left.appTop ≫ (Spec Ri).isoSpec.inv =
+                     (Spec Rj).isoSpec.inv ≫ t.left at hw
+                   simp only [Scheme.isoSpec_Spec_inv] at hw
+                   erw [← hw, ← Category.assoc]
+                   exact congrArg (fun z ↦ z ≫ _) ((Scheme.strictHenselizationCone s).w a.op)
+                 · rw [MorphismProperty.Comma.comp_left]
+                   dsimp only [Scheme.Hom.Etale, MorphismProperty.Over.pullback,
+                     strictHenselizationNeighbourhoodSection, MorphismProperty.Over.homMk,
+                     Over.homMk, CostructuredArrow.homMk,
+                     MorphismProperty.Comma.comp_left]
+                   simp only [Category.assoc, pullback.lift_snd]
+                   erw [pullback.lift_snd]
+               simp only [strictHenselizationSectionRestriction]
+               rw [← Category.assoc, ← Category.assoc]
+               erw [((upperStarLowerStarAdjunction AddCommGrpCat.{v + 1}
+                 (Scheme.strictHenselizationStructuralMap s)).unit.app F).hom.naturality t.op]
+               simp only [Category.assoc]
+               let H := (upperStar AddCommGrpCat.{v + 1}
+                 (Scheme.strictHenselizationStructuralMap s)).obj F
+               change _ ≫ H.obj.map
+                 ((Scheme.strictHenselizationStructuralMap s).Etale.map t).op ≫
+                 H.obj.map (strictHenselizationNeighbourhoodSection s j.unop).op ≫ _ = _
+               rw [← H.obj.map_comp_assoc, ← op_comp, ht]
+               rfl } }
+  -- Descend the compatible restrictions; the same colimit gives uniqueness.
+  refine ⟨hc.desc d, ?_, ?_⟩
+  · intro j
+    exact hc.fac d (op j)
+  · intro r hr
+    apply hc.hom_ext
+    intro j
+    exact (hr j.unop).trans (hc.fac d j).symm
 
 /-- Global sections on the strict henselization are exact.
 Source: Stacks, Tag 03QO (strictly henselian local schemes have exact global sections)
@@ -138,7 +221,23 @@ theorem strictHenselization_globalSections_preservesFiniteColimits :
     PreservesFiniteColimits
       (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
         AddCommGrpCat.{v + 1}) := by
-  sorry
+  let := (Scheme.descResidueField (Scheme.stalkClosedPointTo s)).hom.toAlgebra
+  obtain ⟨hlocal, hstrict, _⟩ := strictHenselizationResidue s rfl
+  let := hlocal
+  let := hstrict
+  let E := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+    AddCommGrpCat.{v + 1}
+  have hE : ((sheafSections (Scheme.strictHenselizationScheme s).smallEtaleTopology
+      AddCommGrpCat.{v + 1}).obj
+        (op (Scheme.etaleTerminal (Scheme.strictHenselizationRing s)))).PreservesEpimorphisms := by
+    exact Scheme.preservesEpimorphisms_sheafSections_of_isStrictlyHenselianLocalRing
+      (Scheme.strictHenselizationRing s)
+  have : E.PreservesEpimorphisms :=
+    Functor.PreservesEpimorphisms.of_iso
+      (Sheaf.ΓNatIsoSheafSections _ AddCommGrpCat.{v + 1}
+        (Scheme.isTerminalEtaleTerminal (Scheme.strictHenselizationRing s))).symm
+  have : E.PreservesHomology := Functor.preservesHomology_of_preservesEpis_and_kernels E
+  exact E.preservesFiniteColimits_of_preservesHomology
 
 /-- The canonical Leray and exact-global-sections comparison over the strict local base.
 Source: Stacks, Tags 03Q9 and 03QO; the derived-functor composition isomorphism

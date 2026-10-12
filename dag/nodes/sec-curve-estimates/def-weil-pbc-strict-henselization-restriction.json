@@ -24,9 +24,38 @@
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Theorem Tag 03Q9 (theorem-higher-direct-images), final paragraph of its proof constructing restriction from germs; Lemma Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian) for exact global sections on the strict local base"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the germ restriction, use the initial representative affine pointed-neighbourhood functor of strictHenselization_properties (def-weil-pbc-strict-henselization-limit). Its opposite is final. Mathlib GrothendieckTopology.Point.isColimitPresheafFiberCocone and Functor.Final.isColimitWhiskerEquiv identify the stalk germ cocone restricted to these representatives as a colimit.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a pointed transition t: V_j → V_i, compare the two projections of the pullback to prove section_j ≫ g.Etale.map t = section_i. The second projection is the identity; the first is the limit-cone naturality equation followed by the natural affine-spectrum identification (Mathlib Scheme.isoSpec_inv_naturality and Scheme.isoSpec_Spec_inv). Naturality of the inverse-image adjunction unit then gives F.map t.op ≫ restriction_j = restriction_i. These are the cocone equations. Descend this cocone using IsColimit.desc; IsColimit.fac gives the required germ equations, and IsColimit.hom_ext gives uniqueness.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For exact global sections, give Ω its canonical algebra structure over the residue field of the geometric image. Clause (1) of lem-weil-pbc-strict-henselization-functoriality, namely strictHenselizationResidue, supplies the strictly henselian local ring structure on strictHenselizationRing s. The already proved source-library declaration Scheme.preservesEpimorphisms_sheafSections_of_isStrictlyHenselianLocalRing (WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian, Stacks 03QO) supplies preservation of epimorphisms by evaluation at the terminal etale object. Transport it to global sections through Sheaf.ΓNatIsoSheafSections. Global sections preserve kernels and are additive; Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels and Functor.preservesFiniteColimits_of_preservesHomology give the stated exactness.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q9 and 03QO; explicit Lean colimit descent and terminal-section exactness using the existing source-library proof of 03QO (J2, 2026-10-12)."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -116,5 +145,15 @@
   "group": "Q1",
   "result": "fix",
   "note": "qcqs f, geometric point (Omega alg. closed), S_(s)=strictHenselizationScheme, g = landed strictHenselizationStructuralMap (delivered strictHenselizationToBase/extended cone = second spelling + choice via sorried initiality, reverted), p = pullback.fst, (R^q f_* Gm)_s = sheafFiber of H^q(rightDerivedLowerStarPlus f), H^q(X',p^-1 Gm) = Etale.cohomology of upperStar p; r_G now tied by IsStrictHenselizationStalkRestriction + existsUnique theorem, rho^q = r >> strictHenselizationCohomologyComparison (mate + Leray); units clause = upstream upperStarGmSheafToGmSheaf p; final clause composite; check_dag clean; reverted the delivery's change of existing node(s) def-weil-pbc-strict-henselization-limit (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T044746-L-2036102",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
