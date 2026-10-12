@@ -7658,3 +7658,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 
 - 20:48 L: batch 20261012T120425 bisection test completed
 - 12:48 L: returned deliver/K3/Sheaf.RingTheory.HenselizationPairGRingCore (reviewer RETURN: (reviewer X-43dae, head 43dae26ba) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.RingTheory.Henseliza)
+- 12:49 L: merged deliver/J3/Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree (stage 3; reviewer PASS; first push; landing 20261012T124923-L-1197109 (proof); batch 20261012T120425; modules 1; new nodes 0)
