@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "(1), reduction to $n=2$. Let $f:X\\to S$ be locally of finite type. For $n=1$ there is nothing to prove. For $n\\ge3$, $Z_1\\cup\\dots\\cup Z_n=(Z_1\\cup\\dots\\cup Z_{n-1})\\cup Z_n$, and $Z_1\\cup\\dots\\cup Z_{n-1}$ is a closed subset proper over $S$ by induction, so the case $n=2$ (Steps 2-4) gives the claim. For $n=0$ the union is $\\emptyset$: the empty scheme with its unique morphism $e:\\emptyset\\to X$ is a closed immersion with image $\\emptyset$ [def-weil-closed-immersion] (it is cut out by the ideal $\\mathcal O_X$), and $f\\circ e:\\emptyset\\to S$ is separated, quasi-compact, locally of finite type and universally closed because all its base changes have empty source [def-weil-proper-morphism]; so a closed subscheme structure on $\\emptyset$ is proper over $S$, and $\\emptyset$ is proper over $S$ by [lem-weil-pbc-closed-subset-proper-over-base-properties](1). (Stacks states the lemma for $Z_1,\\dots,Z_n$ at once; the induction replaces the $n$-fold disjoint union by twofold ones.)",
+   "text": "The empty family has supremum bottom. Use the initial empty scheme and its canonical map to X as a closed immersion with empty range. Mathlib instances make its composite with sX proper; the existential closed-structure characterization gives properness of bottom.",
    "uses": [
     "def-weil-closed-immersion",
     "def-weil-proper-morphism",
@@ -37,41 +37,37 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0CYR (lemma-union-closed-proper-over-base), proof"
+    "place": "Cohomology of Schemes, Lemma 0CYR (lemma-union-closed-proper-over-base) for (1) and Lemma 0CYQ (lemma-functoriality-closed-proper-over-base) part (3) for (2)"
    }
   },
   {
-   "text": "(1), $n=2$: the finite morphism $g$. Let $Z_1,Z_2\\subseteq X$ be closed subsets proper over $S$ and let $i_k:Z_{k,\\mathrm{red}}\\to X$ be their reduced induced closed subscheme structures [lem-weil-pbc-reduced-induced-closed-subscheme], closed immersions with $i_k(Z_{k,\\mathrm{red}})=Z_k$, such that $p_k=f\\circ i_k:Z_{k,\\mathrm{red}}\\to S$ is proper [def-weil-pbc-closed-subset-proper-over-base](1). Let $W=Z_{1,\\mathrm{red}}\\amalg Z_{2,\\mathrm{red}}$ with coprojections $\\iota_k$, $g:W\\to X$ the morphism with $g\\circ\\iota_k=i_k$, and $p:W\\to S$ the morphism with $p\\circ\\iota_k=p_k$; then $p=f\\circ g$ (both agree after composition with $\\iota_1,\\iota_2$). The closed immersions $i_k$ are finite [lem-weil-pbc-closed-immersion-finite] (Stacks Morphisms 035C), so $g$ is finite [lem-weil-pbc-finite-coproduct] (Stacks Morphisms 0CYI). Since $\\mathrm{id}_X$ is a closed immersion, hence proper [lem-weil-pbc-proper-fp-permanence](c), $g=\\mathrm{id}_X\\circ g$ is proper by [lem-weil-pbc-finite-morphism-permanence](c) (Stacks Morphisms 01WN: finite morphisms are proper), in particular universally closed [def-weil-proper-morphism].",
+   "text": "For two closed subsets A and B, use the actual constructions i = (vanishingIdeal A).subschemeι and j = (vanishingIdeal B).subschemeι. Their ranges are A and B by Mathlib range_subschemeι and coe_support_vanishingIdeal, and the hypotheses are definitionally IsProper (i ≫ sX) and IsProper (j ≫ sX). The closed immersions are finite, and Mathlib IsFinite.instDescScheme makes g = coprod.desc i j finite and therefore universally closed. No application of the bundled reduced_induced_closed_subscheme theorem is needed.",
    "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
     "def-weil-pbc-closed-subset-proper-over-base",
     "lem-weil-pbc-closed-immersion-finite",
     "lem-weil-pbc-finite-coproduct",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "def-weil-proper-morphism"
+    "lem-weil-pbc-finite-morphism-permanence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0CYR (lemma-union-closed-proper-over-base), proof; Morphisms, Lemmas 035C (lemma-closed-immersion-finite), 0CYI (lemma-finite-union-finite), 01WN (lemma-finite-proper)"
+    "place": "Cohomology of Schemes, Lemma 0CYR (lemma-union-closed-proper-over-base) for (1) and Lemma 0CYQ (lemma-functoriality-closed-proper-over-base) part (3) for (2)"
    }
   },
   {
-   "text": "(1), $n=2$: $W$ is proper over $S$. Since $p_1,p_2$ are proper, $p:W\\to S$ is proper [lem-weil-pbc-proper-coproduct](2); in particular $p$ is locally of finite type [def-weil-proper-morphism]. The identity $\\mathrm{id}_W$ is a closed immersion with image $W$, i.e. a closed subscheme structure on the closed subset $W$ of $W$, and $p\\circ\\mathrm{id}_W=p$ is proper; by [lem-weil-pbc-closed-subset-proper-over-base-properties](1), applied to $p:W\\to S$, the closed subset $W\\subseteq W$ is proper over $S$. (This is the sentence 'since $Z_1\\amalg\\ldots\\amalg Z_n$ is proper over $S$' of Stacks.)",
+   "text": "Rewrite g ≫ sX with coprod.desc_comp. Apply proper_coproduct_two to the two proper component composites. The identity closed immersion of the coproduct then witnesses that its whole closed subset is proper over S, by closed_subset_proper_over_base_properties.",
    "uses": [
     "lem-weil-pbc-proper-coproduct",
-    "def-weil-proper-morphism",
     "lem-weil-pbc-closed-subset-proper-over-base-properties"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0CYR (lemma-union-closed-proper-over-base), proof"
+    "place": "Cohomology of Schemes, Lemma 0CYR (lemma-union-closed-proper-over-base) for (1) and Lemma 0CYQ (lemma-functoriality-closed-proper-over-base) part (3) for (2)"
    }
   },
   {
-   "text": "(1), $n=2$: conclusion. Apply [lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image] (Stacks 0CYQ (2)) to the $S$-morphism $g:W\\to X$ (with $p:W\\to S$ and $f:X\\to S$ locally of finite type, Steps 2-3, and $f\\circ g=p$), which is universally closed (Step 2), and to the closed subset $W$ proper over $S$ (Step 3): $g(W)$ is a closed subset of $X$ proper over $S$. By [lem-weil-pbc-proper-coproduct](1), $W=\\iota_1(Z_{1,\\mathrm{red}})\\cup\\iota_2(Z_{2,\\mathrm{red}})$, so $g(W)=i_1(Z_{1,\\mathrm{red}})\\cup i_2(Z_{2,\\mathrm{red}})=Z_1\\cup Z_2$ (Step 2). Hence $Z_1\\cup Z_2$ is proper over $S$.",
+   "text": "Apply image_isClosedSubsetProperOver_of_universallyClosed to g and the whole closed subset. Mathlib isCompl_range_inl_inr says that the two coprojection ranges cover the coproduct. Together with coprod.inl_desc and coprod.inr_desc and the ranges of i and j, this identifies range g with A union B. Extensionality identifies the resulting closed subset with A supremum B.",
    "uses": [
     "lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image",
     "lem-weil-pbc-proper-coproduct"
@@ -79,46 +75,32 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0CYR (lemma-union-closed-proper-over-base), proof (last sentence, citing Lemma 0CYQ part (2))"
+    "place": "Cohomology of Schemes, Lemma 0CYR (lemma-union-closed-proper-over-base) for (1) and Lemma 0CYQ (lemma-functoriality-closed-proper-over-base) part (3) for (2)"
    }
   },
   {
-   "text": "(2), the scheme-theoretic inverse image. Let $s_X:X\\to S$, $s_Y:Y\\to S$ be the structure morphisms (locally of finite type, $s_Y\\circ f=s_X$), $f:X\\to Y$ proper, and $Z\\subseteq Y$ closed and proper over $S$. Let $i_Z:Z_{\\mathrm{red}}\\to Y$ be the reduced induced closed subscheme structure [lem-weil-pbc-reduced-induced-closed-subscheme], so $i_Z(Z_{\\mathrm{red}})=Z$ and $q=s_Y\\circ i_Z:Z_{\\mathrm{red}}\\to S$ is proper [def-weil-pbc-closed-subset-proper-over-base](1). Let $Z'=X\\times_{f,Y,i_Z}Z_{\\mathrm{red}}$ be the fibre product [def-pc-fibre-product] (the scheme-theoretic inverse image of Stacks Schemes 01JV) with projections $a:Z'\\to X$, $b:Z'\\to Z_{\\mathrm{red}}$, $i_Z\\circ b=f\\circ a$. Then $a$ is a closed immersion, as a base change of the closed immersion $i_Z$ [lem-weil-pbc-closed-immersion-base-change] (Stacks Schemes 01JU), and $b$ is proper, as a base change of the proper $f$ [lem-weil-pbc-proper-fp-permanence](b) (Stacks Morphisms 01W4).",
+   "text": "Induct on n. For n = 0 use properness of bottom and iSup_of_empty. For n + 1, Fin.cases and the universal property of the supremum give the equality iSup Z = Z 0 supremum (iSup (fun i : Fin n => Z i.succ)). Apply the binary union result and the induction hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYR (lemma-union-closed-proper-over-base) for (1) and Lemma 0CYQ (lemma-functoriality-closed-proper-over-base) part (3) for (2)"
+   }
+  },
+  {
+   "text": "For the inverse-image clause let i be the canonical closed immersion of the vanishing-ideal subscheme of Z. The hypothesis gives IsProper (i ≫ sY). Form pullback f i. Its first projection is a closed immersion by base change of i, and its second is proper by base change of f. The equality f ≫ sY = sX and pullback.condition rewrite the first projection composed with sX as the second projection composed with i ≫ sY, hence a proper composite. Mathlib Scheme.Pullback.range_fst (the range corollary of its points description) identifies the first projection range with f inverse-image range i = f inverse-image Z. Apply the existential closed-structure characterization to conclude.",
    "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-pbc-closed-subset-proper-over-base",
     "def-pc-fibre-product",
     "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-proper-fp-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0CYQ (lemma-functoriality-closed-proper-over-base), proof of (3); Schemes, Definition 01JV (definition-inverse-image-closed-subscheme) and Lemma 01JU (lemma-fibre-product-immersion); Morphisms, Lemma 01W4 (lemma-base-change-proper)"
-   }
-  },
-  {
-   "text": "(2), the underlying set of $Z'$. $a(Z')=f^{-1}(Z)$: if $z\\in Z'$ then $f(a(z))=i_Z(b(z))\\in Z$. Conversely let $x\\in X$ with $f(x)\\in Z$, say $f(x)=i_Z(y)=:t$ with $y\\in Z_{\\mathrm{red}}$. The ring $\\kappa(x)\\otimes_{\\kappa(t)}\\kappa(y)$ is nonzero (a tensor product of two nonzero vector spaces over the field $\\kappa(t)$), so it has a prime ideal $\\mathfrak p$, and by [lem-weil-pbc-fibre-product-points] (Stacks Schemes 01JT) there is $z\\in Z'$ with $a(z)=x$ (and $b(z)=y$). In particular $f^{-1}(Z)=a(Z')$ is closed in $X$, $a$ being a closed immersion [def-weil-closed-immersion], and $a:Z'\\to X$ is a closed subscheme structure on $f^{-1}(Z)$.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-points",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0CYQ (lemma-functoriality-closed-proper-over-base), proof of (3) (implicit there: the scheme-theoretic inverse image has underlying set $f^{-1}(Z)$, Schemes Definition 01JV with Lemma 01JT (lemma-points-fibre-product))"
-   }
-  },
-  {
-   "text": "(2), conclusion. $s_X\\circ a=s_Y\\circ f\\circ a=s_Y\\circ i_Z\\circ b=q\\circ b$ is proper as a composite of the proper morphisms $b$ (Step 5) and $q$ [lem-weil-pbc-proper-fp-permanence](a) (Stacks Morphisms 01W3). So $f^{-1}(Z)$ has a closed subscheme structure $a:Z'\\to X$ (Step 6) whose morphism to $S$ is proper; since $s_X$ is locally of finite type, [lem-weil-pbc-closed-subset-proper-over-base-properties](1) shows that $f^{-1}(Z)$ is a closed subset of $X$ proper over $S$.",
-   "uses": [
     "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "def-weil-pbc-closed-subset-proper-over-base"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0CYQ (lemma-functoriality-closed-proper-over-base), proof of (3); Morphisms, Lemma 01W3 (lemma-composition-proper)"
+    "place": "Cohomology of Schemes, Lemma 0CYR (lemma-union-closed-proper-over-base) for (1) and Lemma 0CYQ (lemma-functoriality-closed-proper-over-base) part (3) for (2)"
    }
   }
  ],
@@ -126,22 +108,21 @@
   "def-weil-closed-immersion",
   "def-weil-proper-morphism",
   "lem-weil-pbc-closed-subset-proper-over-base-properties",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
   "def-weil-pbc-closed-subset-proper-over-base",
   "lem-weil-pbc-closed-immersion-finite",
   "lem-weil-pbc-finite-coproduct",
-  "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-finite-morphism-permanence",
   "lem-weil-pbc-proper-coproduct",
   "lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image",
   "def-pc-fibre-product",
   "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-fibre-product-points"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 0CYR (lemma-union-closed-proper-over-base) and Lemma 0CYQ (lemma-functoriality-closed-proper-over-base) part (3), with their proofs"
+  "place": "Lemmas 0CYR and 0CYQ(3), realized by binary coproduct induction and Mathlib pullback range_fst; reviewed by B2, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -217,5 +198,15 @@
   "group": "K1",
   "result": "pass",
   "note": "X,S,sX LFT shared; (1) Fin n family of Closeds each IsClosedSubsetProperOver sX, conclusion on ⨆ (closed finite union, n=0 bot); (2) Y, sY LFT, IsProper f, f ≫ sY = sX, Z proper via sY, Closeds.preimage along f.base proper via sX; landed H1 IsClosedSubsetProperOver, no second spelling"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T135218-L-1656061",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
