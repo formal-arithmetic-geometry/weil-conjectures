@@ -11,8 +11,8 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.StrictlyStandardElement
 public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
-import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
-import Sheaf.RingTheory.FilteredColimitSmoothProduct
+import Sheaf.RingTheory.PopescuStandardNonzerodivisorAux
+import Sheaf.RingTheory.ElementaryToStrict
 import Sheaf.RingTheory.PopescuDelocalizeBase
 
 /-! # A standard nonzerodivisor from the field case of Popescu -/
@@ -56,4 +56,13 @@ theorem exists_popescu_standard_nonzerodivisor
     ∃ (B : Type (max u v)) (_ : CommRing B) (_ : Algebra R B)
       (_ : Algebra.FinitePresentation R B) (aB : A →ₐ[R] B) (β : B →ₐ[R] Λ) (π : R),
       β.comp aB = α ∧ π ∈ R⁰ ∧
-        Algebra.IsStrictlyStandardElement (R := R) (algebraMap R B π) := by sorry
+        Algebra.IsStrictlyStandardElement (R := R) (algebraMap R B π) := by
+  obtain ⟨B', _, _, _, β', γ', hfactor⟩ :=
+    exists_localized_smooth_factorization h R Λ hreg A α
+  obtain ⟨B, _, _, hBfp, aB, β, hcomp, π, hs⟩ :=
+    Algebra.exists_factorization_isElementaryStandardElement_of_localized_smooth
+      α R⁰ β' γ' (by
+        ext x
+        exact RingHom.congr_fun hfactor x)
+  exact ⟨B, inferInstance, inferInstance, hBfp, aB, β, π.val, hcomp, π.property,
+    elementary_standard_is_strict hs⟩

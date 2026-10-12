@@ -31,64 +31,31 @@
  ],
  "proof": [
   {
-   "text": "PT over the total ring of fractions. Let $S\\subset R$ be the set of nonzerodivisors and $Q=S^{-1}R$. $R$ is reduced, Noetherian and nonzero, so it has finitely many minimal primes $\\mathfrak q_1,\\dots,\\mathfrak q_t$ [lem-weil-pbc-noetherian-finitely-many-minimal-primes], $t\\ge1$ (a nonzero ring has a prime, and every prime contains a minimal prime), and by [lem-weil-pbc-reduced-noetherian-total-ring-fractions] each $K_i=R_{\\mathfrak q_i}=\\kappa(\\mathfrak q_i)$ is a field and $Q\\to K_1\\times\\cdots\\times K_t$ is an isomorphism. Tensoring with $\\Lambda$ over $R$: $S^{-1}\\Lambda\\cong\\Lambda\\otimes_RQ\\cong\\prod_i\\Lambda\\otimes_RK_i=:\\prod_i\\Lambda_i$ (localization is base change to $S^{-1}R$, and $\\otimes$ commutes with finite products), compatibly with $Q\\cong\\prod_iK_i$. Each $\\Lambda_i=\\Lambda\\otimes_R\\kappa(\\mathfrak q_i)$ [def-weil-pbc-localization-at-prime] is the fibre ring of $R\\to\\Lambda$ at $\\mathfrak q_i$, so it is Noetherian and geometrically regular over $\\kappa(\\mathfrak q_i)=K_i$ by regularity [def-weil-pbc-g-ring]. Hence $K_i\\to\\Lambda_i$ is a regular ring map of Noetherian rings: it is flat, every module over a field being free [def-weil-pbc-flat-ring-map], and its only fibre ring, over the prime $(0)$ of $K_i$ with $\\kappa((0))=K_i$, is $\\Lambda_i\\otimes_{K_i}K_i\\cong\\Lambda_i$. By the field-case hypothesis PT holds for each $K_i\\to\\Lambda_i$, so by [lem-weil-pbc-popescu-product], applied $t-1$ times ($(K_1\\times\\cdots\\times K_{s})\\times K_{s+1}$ for $s=1,\\dots,t-1$), PT holds for $\\prod_iK_i\\to\\prod_i\\Lambda_i$, hence, transporting along the isomorphisms $Q\\cong\\prod_iK_i$, $S^{-1}\\Lambda\\cong\\prod_i\\Lambda_i$, for $Q\\to S^{-1}\\Lambda$ [def-weil-pbc-filtered-colimit-smooth-algebras].",
+   "text": "Apply the localized smooth factorization theorem with the field-case hypothesis to obtain a smooth algebra B\\prime over Localization R⁰ and maps factoring the localized alpha.",
    "uses": [
-    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-g-ring",
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-popescu-product",
-    "def-weil-pbc-filtered-colimit-smooth-algebras",
-    "def-weil-pbc-noetherian-ring"
+    "lem-weil-pbc-popescu-standard-nonzerodivisor-aux"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F5 (lemma-reduce-to-field, lines 2011-2064), third paragraph ('Q = K_1 x ... x K_n is a product of fields, see Algebra, Lemmas 02LX and 00FR. By Lemma 07F3 and our assumption PT holds for S^{-1}R -> S^{-1}Lambda'; the regularity of K_i -> Lambda_i, which Stacks leaves implicit, is written out here)"
-   }
+   "elementary": false
   },
   {
-   "text": "A smooth factorization over $Q$. $S^{-1}A\\cong A\\otimes_RQ$ is a $Q$-algebra of finite presentation (a presentation of $A$ over $R$ base-changes to one over $Q$), and $S^{-1}\\alpha:S^{-1}A\\to S^{-1}\\Lambda$ is a homomorphism of $Q$-algebras. By the preceding step, $S^{-1}\\Lambda$ is a colimit, in the category of commutative $Q$-algebras, of a filtered diagram $j\\mapsto B_j$ of smooth $Q$-algebras with coprojections $\\iota_j$ [def-weil-pbc-filtered-colimit-smooth-algebras]; by [lem-weil-pbc-filtered-colimit-algebras-elementwise] (1) it is also a colimit of the underlying diagram of commutative rings, so by [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] there are $j$ and a $Q$-algebra map $\\beta':S^{-1}A\\to B_j$ with $\\iota_j\\circ\\beta'=S^{-1}\\alpha$. Put $B'=B_j$, $\\gamma'=\\iota_j$: a factorization $S^{-1}A\\to B'\\to S^{-1}\\Lambda$ of $S^{-1}\\alpha$ with $B'$ smooth over $Q=S^{-1}R$ [def-weil-pbc-smooth-ring-map].",
+   "text": "Apply the existing delocalization theorem with S = R⁰ and that factorization. Its output B lies in universe max(u,v); extract the denominator pi:S and its elementary standard property. Underlying ring-hom equality implies algebra-hom equality by extensionality.",
    "uses": [
-    "def-weil-pbc-filtered-colimit-smooth-algebras",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-    "def-weil-pbc-smooth-ring-map"
+    "lem-weil-pbc-popescu-delocalize-base"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F5 (lemma-reduce-to-field, lines 2011-2064), third paragraph ('Hence we can find a factorization S^{-1}A -> B' -> S^{-1}Lambda with B' smooth over S^{-1}R', i.e. Algebra Lemma 07C3, (1) implies (2))"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-popescu-delocalize-base] to the localized smooth factorization. This gives a finitely presented algebra $B$, maps $A\\to B\\to\\Lambda$ with composite $\\alpha$, and $\\pi$ in the nonzerodivisor submonoid whose image is elementary standard. An elementary standard element is strictly standard [def-weil-pbc-strictly-standard-element]: use the coefficient of its initial minor for that subset of columns and zero for all other subsets; transpose the minor matrix if needed. The relation condition is unchanged. The delocalization constructs a quotient of a polynomial ring in finitely many variables over $R$, hence its carrier is in the common universe of $A$ and $\\Lambda$.",
+   "text": "Apply the proved elementary-to-strict bridge. The denominator pi has nonzerodivisor membership by its subtype property, and the delocalization output already gives beta.comp aB = alpha. Assemble these witnesses.",
    "uses": [
-    "lem-weil-pbc-popescu-delocalize-base",
-    "def-weil-pbc-strictly-standard-element"
+    "lem-weil-pbc-elementary-to-strict"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F5 (lemma-reduce-to-field, lines 2011-2064), fourth paragraph ('We apply Lemma 07F4 ... After replacing A by B we may assume that pi is elementary standard, hence strictly standard in A')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-g-ring",
-  "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-popescu-product",
-  "def-weil-pbc-filtered-colimit-smooth-algebras",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-popescu-standard-nonzerodivisor-aux",
   "lem-weil-pbc-popescu-delocalize-base",
-  "def-weil-pbc-strictly-standard-element"
+  "lem-weil-pbc-elementary-to-strict"
  ],
  "proof_origin": {
   "by": "document",
@@ -161,9 +128,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T095927-L-326091",
+  "landing": "20261012T135247-L-1675004",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -7845,3 +7845,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/J3/Sheaf.RingTheory.TensorFiniteTypeLimit (stage 3; reviewer PASS; first push; landing 20261012T135246-L-1674460 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/K1/Sheaf.AlgebraicGeometry.Cohomology.FlatAffineSectionRingTensor (stage 3; reviewer PASS; first push; landing 20261012T135247-L-1674705 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/K1/Sheaf.AlgebraicGeometry.ConductorSectionsRestriction (stage 3; reviewer PASS; first push; landing 20261012T135247-L-1674856 (interface); batch 20261012T135212; modules 2; new nodes 2)
+- 13:52 L: merged deliver/K1/Sheaf.RingTheory.PopescuStandardNonzerodivisor (stage 3; reviewer PASS; first push; landing 20261012T135247-L-1675004 (interface); batch 20261012T135212; modules 3; new nodes 2)

@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-elementary-to-strict",
+ "kind": "statement",
+ "title": "Elementary standard elements are strictly standard",
+ "statement": "Let A be a finitely presented algebra over a commutative ring R [def-weil-pbc-finitely-presented-algebra]. Every elementary standard element a of A over R is strictly standard over R [def-weil-pbc-strictly-standard-element].",
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-strictly-standard-element"
+ ],
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Definition Tag 07C7 (definition-strictly-standard), and Lemma Tag 07F5 fourth paragraph"
+ },
+ "proof": [
+  {
+   "text": "Unpack the elementary standard presentation with n variables, m relations and c initial columns. Take the subset s of the first c variables. Its cardinality is c; its increasing enumeration is Fin.castLE by Finset.orderEmbOfFin_unique. Give coefficient b to s and coefficient zero to every other c-element subset. The sum over all subsets reduces to the chosen term, and Matrix.det_transpose identifies its determinant with the elementary one. Retain the identical relation-ideal condition. This argument also works for c=0, when s is empty and the empty determinant is 1.",
+   "uses": [
+    "def-weil-pbc-strictly-standard-element"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strictly-standard-element"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Definition Tag 07C7 (definition-strictly-standard), and Lemma Tag 07F5 fourth paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An elementary standard element is a linear combination of Jacobian minors and hence is strictly standard",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "elementary standard Jacobian minor linear combination all minors determinant transpose",
+   "results": "Hits: Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential, Algebra.PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det, Algebra.SubmersivePresentation.jacobianRelations_spec, Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs, Algebra.SubmersivePresentation.jacobianOfHasCoeffs, Algebra.PreSubmersivePresentation.jacobian, Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one, Matrix.adjugate_apply. No theorem states this result; the listed algebraic tools are used in the proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finset.orderEmbOfFin_unique",
+   "results": "Hits: Finset.orderEmbOfFin_unique. No theorem states this result; the listed algebraic tools are used in the proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStrictlyStandardElement|IsElementaryStandardElement|ind_smooth|indSmooth",
+   "results": "Hits: . No theorem states this result; the listed algebraic tools are used in the proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuStandardNonzerodivisor",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Total-fraction smooth factorization and elementary-to-strict conversion in Lemma 07F5, serving step 7 of the finite-etale lifting split.",
+   "via": [
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ElementaryToStrict",
+  "file": "lean/Sheaf/RingTheory/ElementaryToStrict.lean",
+  "declaration": "elementary_standard_is_strict",
+  "statement": "theorem elementary_standard_is_strict\n    {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]\n    [Algebra.FinitePresentation R A] {a : A}\n    (ha : Algebra.IsElementaryStandardElement (R := R) a) :\n    Algebra.IsStrictlyStandardElement (R := R) a",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T135247-L-1675004",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T135247-L-1675004",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
