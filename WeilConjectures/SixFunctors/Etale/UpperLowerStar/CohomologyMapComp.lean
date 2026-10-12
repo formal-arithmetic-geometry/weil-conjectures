@@ -20,6 +20,8 @@ pullback map along `f ≫ g` is.
 
 - `AlgebraicGeometry.Etale.cohomologyMap_cohomologyMap`: the composition formula.
 - `AlgebraicGeometry.Etale.bijective_cohomologyMap_comp_iff`: bijectivity of the composite.
+- `AlgebraicGeometry.Etale.bijective_cohomologyMap_iff_of_iso`: bijectivity of the pullback
+  map only depends on the coefficient sheaf up to isomorphism.
 -/
 
 @[expose] public section
@@ -87,5 +89,25 @@ theorem bijective_cohomologyMap_comp_iff (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ 
     funext fun x ↦ cohomologyMap_cohomologyMap f g k hk F x
   rw [this]
   exact (Function.Bijective.of_comp_iff' (bijective_mk₀_comp_comp_mk₀ _ _ n) _)
+
+/-- The map on sheaf cohomology induced by an isomorphism of sheaves is bijective. -/
+lemma _root_.CategoryTheory.Sheaf.H.map_bijective_of_iso {C : Type*} [Category C]
+    {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{u + 1}]
+    [HasExt.{u + 1} (Sheaf J AddCommGrpCat.{u + 1})] {A B : Sheaf J AddCommGrpCat.{u + 1}}
+    (e : A ≅ B) (n : ℕ) : Function.Bijective (Sheaf.H.map e.hom n) :=
+  Function.bijective_iff_has_inverse.2 ⟨Sheaf.H.map e.inv n,
+    fun x ↦ by rw [← Sheaf.H.map_comp_apply, e.hom_inv_id, Sheaf.H.map_id_apply],
+    fun x ↦ by rw [← Sheaf.H.map_comp_apply, e.inv_hom_id, Sheaf.H.map_id_apply]⟩
+
+/-- The pullback map on étale cohomology along `f` is bijective for a sheaf `F` if and only if
+it is bijective for a sheaf `G` isomorphic to `F`. -/
+theorem bijective_cohomologyMap_iff_of_iso (f : X ⟶ Y)
+    {F G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} (e : F ≅ G) (n : ℕ) :
+    Function.Bijective (cohomologyMap f F n) ↔ Function.Bijective (cohomologyMap f G n) := by
+  have h : cohomologyMap f G n ∘ Sheaf.H.map e.hom n =
+      Sheaf.H.map (((f)^*[AddCommGrpCat.{u + 1}]).mapIso e).hom n ∘ cohomologyMap f F n :=
+    funext fun x ↦ cohomologyMap_map f n e.hom x
+  rw [← (Sheaf.H.map_bijective_of_iso e n).of_comp_iff, h,
+    (Sheaf.H.map_bijective_of_iso _ n).of_comp_iff']
 
 end AlgebraicGeometry.Etale
