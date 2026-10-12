@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.Algebra.BigOperators.Finsupp.Basic
+import Sheaf.FieldTheory.PBasisExtension
 
 /-!
 # Existence of a p-basis
@@ -65,6 +66,41 @@ theorem exists_p_basis (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k 
       (b : Module.Basis {E : I →₀ ℕ // ∀ i : I, E i < p}
         (IntermediateField.adjoin (ZMod p) (Set.range (fun x : k => x ^ p))) k),
       ∀ E, b E = E.val.prod (fun i e => t i ^ e) := by
-  sorry
+  let I := Empty
+  let x : I → k := fun i => i.elim
+  have hx : LinearIndependent
+      (IntermediateField.adjoin (ZMod p) (Set.range (fun a : k => a ^ p)))
+      (fun E : {E : I →₀ ℕ // ∀ i : I, E i < p} =>
+        E.val.prod (fun i e => x i ^ e)) := by
+    rw [linearIndependent_iff]
+    intro l hl
+    apply Finsupp.ext
+    intro E
+    have hE : E = ⟨0, by intro i; exact i.elim⟩ := by
+      apply Subtype.ext
+      apply Finsupp.ext
+      intro i
+      exact i.elim
+    subst hE
+    let z : {E : I →₀ ℕ // ∀ i : I, E i < p} :=
+      ⟨0, by intro i; exact i.elim⟩
+    have hlz : l = Finsupp.single z (l z) := by
+      apply Finsupp.ext
+      intro E
+      have hEz : E = z := by
+        apply Subtype.ext
+        apply Finsupp.ext
+        intro i
+        exact i.elim
+      subst E
+      simp
+    rw [hlz] at hl
+    simpa [Finsupp.linearCombination_single] using hl
+  obtain ⟨J, y, b, hb⟩ := FieldTheory.exists_pBasis_extension (k := ZMod p) (K := k)
+    (p := p) x hx
+  refine ⟨Empty ⊕ J, Sum.elim (fun i : Empty => i.elim) y, ?_, ?_⟩
+  · exact b
+  · exact hb
+
 
 end Field
