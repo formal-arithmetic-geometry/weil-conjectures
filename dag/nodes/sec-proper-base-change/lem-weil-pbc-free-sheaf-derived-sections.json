@@ -16,42 +16,41 @@
  ],
  "proof": [
   {
-   "text": "Choose an injective resolution $F\\to I^\\bullet$ in the category of sheaves of $\\Lambda$-modules, using [lem-weil-pbc-module-sheaves-enough-injectives]. Its bounded-below injective complex is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Maps from $\\Lambda_Z[0]$ to $F[0][q]$ are therefore degree-$q$ cohomology of the Hom complex from $\\Lambda_Z[0]$ to $I^\\bullet$, by [lem-weil-pbc-kinjective-hom-derived]. The full inclusion of the bounded-below derived category preserves these Hom sets.",
+   "text": "Use the fully faithful bounded-below inclusion and its shift compatibility to identify shifted maps from the degree-zero terminal free sheaf with Ext. Mathlib Abelian.Ext.homAddEquiv realizes the derived Hom comparison. For an injective resolution R of F, Mathlib InjectiveResolution.extAddEquivCohomologyClass identifies Ext with degree-q cohomology classes of the Hom complex; its construction uses bounded-below K-injectivity and the K-injective Hom comparison. Reuse EtaleComparisonAux.extClass_naturality from the existing sheafH Ext-derived comparison module via a proof-only import all. This generic lemma proves injective Ext postcomposition naturality on representatives. The shifted-Hom comparison uses the shift isomorphism naturality.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
     "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The free-sheaf sections equivalence, concretely Etale.freeSheafHomEquiv, identifies each term $\\operatorname{Hom}(\\Lambda_Z,I^n)$ with the underlying abelian group of $I^n(Z)$. This is the sheafified free-Yoneda adjunction [lem-weil-pbc-sheaf-free-separator]. Naturality in $I^n$ identifies composition with its differential with the sections differential. Since $Z$ is terminal, evaluation is module global sections. The exact forgetful functor from modules to abelian groups preserves kernels, cokernels and homology, hence the Hom-complex cohomology is the underlying abelian group of $H^q(\\Gamma(I^\\bullet))$.",
+   "text": "Use the free-Yoneda sections adjunction, concretely Etale.freeSheafHomEquiv and freeSheafHomEquiv_comp, from the Hom identification in [lem-weil-pbc-sheaf-free-separator]. Prove its additivity by freeSheafSections. Cochain.fromSingleEquiv gives a termwise additive isomorphism between the Hom complex and terminal sections of the resolution after forgetting module structure. Cochain.δ_fromSingleMk and naturality identify the differentials. Construct the induced cohomology-class isomorphism. Reuse the generic EtaleComparisonAux.postMap, postClass and homologyClass_naturality from the existing sheafH Ext-derived comparison module, rather than duplicating its postcomposition constructions or naturality theorems. Combine that homology naturality with the termwise sections isomorphism naturality. The exact module forgetful functor preserves homology, by ShortComplex.mapHomologyIso. Terminal evaluation is naturally isomorphic to global sections by Sheaf.ΓNatIsoSheafSections.",
    "uses": [
-    "lem-weil-pbc-sheaf-free-separator"
+    "lem-weil-pbc-sheaf-free-separator",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
    "elementary": true
   },
   {
-   "text": "By [lem-sp-derived-functor-single-identification], the complex $\\Gamma(I^\\bullet)$ computes the module derived global sections of $F[0]$. A map of sheaves lifts to its injective resolutions. The termwise sections equivalence commutes with this lift by freeSheafHomEquiv_comp, so the induced comparison commutes with cohomology maps. Lifts are unique up to homotopy; homotopic maps induce the same cohomology maps by [lem-weil-pbc-homotopic-maps-equal-cohomology]. Package the additive component isomorphisms as a natural isomorphism. This argument requires no compactness, separation or torsion.",
+   "text": "Apply InjectiveResolution.isoRightDerivedObjCochainComplex and its inverse naturality to identify the computed homology with the classical right derived functor of terminal sections. Transport along its natural isomorphism with global sections using NatTrans.rightDerived. The bounded-below/unbounded compatibility Functor.rightDerivedFunctorPlusCompatibility and [lem-sp-derived-functor-single-identification], in its natural form singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso, identify that functor with homology of unbounded derived global sections on F[0]. Package all additive component isomorphisms as natural isomorphisms and compose. All naturality equations use the same resolution lift and are proved explicitly, so no separate invocation of a homotopy-invariance lemma is needed.",
    "uses": [
-    "lem-sp-derived-functor-single-identification",
-    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+    "lem-sp-derived-functor-single-identification"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-enough-injectives",
   "lem-weil-pbc-bounded-below-injectives-kinjective",
   "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-sheaf-free-separator",
   "lem-sp-derived-functor-single-identification",
-  "lem-weil-pbc-homotopic-maps-equal-cohomology"
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 015A, 05TI, 070I, 03DI",
-  "place": "injective-resolution comparison, written by J1 from these sources"
+  "document": "Stacks Project, Tags 015A, 05TI, 070I, 03DI; Mathlib injective Ext comparison and source PlusSingle/PlusCompatibility",
+  "place": "N3: explicit Hom-complex/terminal-sections comparison and naturality; reuse existing injective-resolution and derived-functor comparisons; repair: reuse existing private generic EtaleComparisonAux postcomposition and naturality declarations through import all"
  },
  "mathlib_searches": [
   {
@@ -118,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-d47e7",
-  "group": "J1",
+  "reviewer": "X-bc2f1",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T060741-L-2909403",
+  "landing": "20261012T135258-L-1680624",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean statements and proof route match the nodes; documented refactors preserve retained interfaces and components; both modules compile without warnings, and axiom checks show only permitted axioms plus sorryAx from named open dependencies."
+  "note": "independent Codex review: Delivery packet matched the node and source; delivered module and direct importer compiled cleanly, with permitted axioms only and no sorries."
  }
 }
