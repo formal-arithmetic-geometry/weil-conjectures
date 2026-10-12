@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
+import Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionBijective
 
 /-! # Strict-local module restriction: one step of the comparison
 
@@ -77,6 +78,9 @@ theorem isIso_qcqsStrictLocalRestriction_of_formula
       (IsTerminal.isTerminalOfObj
         (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤
           (pullback f (Scheme.strictHenselizationStructuralMap s)))
-        (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) : IsIso a := by sorry
+        (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) : IsIso a := by
+  let _ : IsIso a := (ConcreteCategory.isIso_iff_bijective a).mpr
+    (bijective_qcqsStrictLocalRestriction_of_formula Λ f s F a ha)
+  infer_instance
 
 end AlgebraicGeometry.Etale
