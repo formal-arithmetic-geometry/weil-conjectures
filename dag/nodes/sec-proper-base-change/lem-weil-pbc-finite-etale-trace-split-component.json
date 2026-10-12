@@ -37,7 +37,7 @@
  },
  "proof": [
   {
-   "text": "Use upperStarIsoLocalizationRestriction and leftAdjointUniq unit compatibility to express restriction on W as restriction along W×_X Y→W. Apply the localization property of the chosen trace to W→X; pullback symmetry and pasting identify the local pullback with Y×_X W.",
+   "text": "Use upperStarIsoLocalizationRestriction and Adjunction.unit_leftAdjointUniq_hom_app to express the transported restriction component as F of the first pullback projection. For an etale localization g:U→X and a split pullback f′:Y×_X U→U, construct the iterated-pullback comparison and its inverse explicitly by pullback.lift. Check both inverse laws and both projection identities by pullback.hom_ext. Apply properties (1) and (2) of the chosen trace family. Naturality of the localization restriction isomorphism carries the local sum into F. Cancel that isomorphism and the pullback comparison to obtain a sum of restrictions along transported sections.",
    "uses": [
     "lem-weil-pbc-etale-inverse-image-restriction",
     "lem-weil-pbc-finite-etale-trace-exists",
@@ -46,7 +46,7 @@
    "elementary": false
   },
   {
-   "text": "Invert each component projection to obtain a section. The split property of existsUnique_finiteEtaleTrace expresses the localized trace as the sum of restrictions along the sections. The restriction along the projection composed with each section contribution is the identity by contravariant functoriality. Composition distributes over the finite sum, so the composite is |J| times identity. Cancel the localization isomorphisms. The empty sum is zero and the empty covering forces sections over an empty object to vanish.",
+   "text": "Each transported section composed with the projection is identity, by the first projection identity of the comparison and pullback.lift_fst. Insert and cancel the inverse-image restriction isomorphism, distribute composition over the finite sum, and use contravariant functoriality to turn each summand into identity. Finset.sum_const gives the cardinality multiple, including an empty index set. Invert the supplied component projections to produce the required sections; localize at g=W.hom and evaluate at the identity object of W.Etale. The localized identity object is canonically isomorphic to W. Naturality of restriction followed by trace, and the inverse laws of this final isomorphism, give the stated component equality.",
    "uses": [
     "lem-weil-pbc-finite-etale-trace-exists",
     "def-weil-pbc-abelian-etale-sheaves"
@@ -63,7 +63,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03SH (section-trace-method), characterization (1) and (2) after Definition 03SE (definition-trace-map)"
+  "place": "Tag 03SH, characterization (1) and (2) after Definition 03SE; explicit pullback-pasting and finite-sum calculation formalized by H2"
  },
  "mathlib_searches": [
   {
@@ -122,10 +122,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T085345-L-41958",
-  "kind": "interface",
+  "landing": "20261012T110305-L-616253",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
