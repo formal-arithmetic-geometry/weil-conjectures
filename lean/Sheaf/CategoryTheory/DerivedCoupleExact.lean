@@ -6,6 +6,9 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.DerivedCoupleKernelIdentities
+import Sheaf.CategoryTheory.DerivedCoupleMapUniqueness
+import Sheaf.CategoryTheory.DerivedCoupleBoundaryVanishes
 
 /-!
 # Exactness of derived bigraded couples
@@ -89,8 +92,16 @@ theorem derived_couple_exact {C : Type u} [Category.{v} C] [Abelian C]
             X.gToCycles (p + 1) (q - 1) ≫
               X.derivedEProjection ((p + 1) + s) ((q - 1) - s) ≫
                 eqToHom (by congr 1 <;> omega) →
-          c = M.g p q)) := by
-  sorry
+          c = M.g p q))  := by
+  have hk := derived_couple_kernel_identities X
+  obtain ⟨M, hM⟩ := derived_couple_map_uniqueness X
+  refine ⟨hk, ?_, ?_, ?_, ⟨M, hM.1, hM.2.1, hM.2.2⟩⟩
+  · intro p q
+    simp [gToCycles]
+  · intro p q
+    exact X.d_comp_d p q
+  · exact derived_couple_boundary_vanishes X
+
 
 /-- Iterated derived couples are the images of the iterated `alpha` maps.
 Here `n` is `r - 2`: the actual page number is `n + 2`. The quantified families
