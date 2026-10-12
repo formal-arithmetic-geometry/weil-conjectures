@@ -32,6 +32,8 @@ and `End (𝟙_ C) = R`.
 - `CategoryTheory.MonoidalCategory.ihomUnitIsoRightDual`: in a braided monoidal closed
   category, the internal dual `ihom X (𝟙_ C)` of an object with a right dual `Xᘁ` is `Xᘁ`.
 
+- `CategoryTheory.MonoidalClosed.toIhomIhom`: the double-dual map `X ⟶ [[X, W], W]` relative to
+  an object `W`, natural in `X` (`CategoryTheory.MonoidalClosed.toIhomIhomNatTrans`).
 - `CategoryTheory.MonoidalClosed.toIhomIhomUnit`: the canonical biduality map
   `X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of a braided monoidal closed category.
 
@@ -102,6 +104,45 @@ theorem IsDualizable.ihom_unit {X : C} (hX : IsDualizable X) :
 
 namespace MonoidalClosed
 
+/-- The canonical double-dual map `X ⟶ [[X, W], W]` relative to an object `W` of a braided
+monoidal closed category: the transpose of
+```
+                 β_                  ev
+  [X, W] ⊗ X ──────────→ X ⊗ [X, W] ──────────→ W.
+```
+For `W = 𝟙_ C` it is `CategoryTheory.MonoidalClosed.toIhomIhomUnit`. -/
+noncomputable def toIhomIhom (W X : C) : X ⟶ (ihom ((ihom X).obj W)).obj W :=
+  curry ((β_ _ X).hom ≫ (ihom.ev X).app W)
+
+lemma uncurry_toIhomIhom (W X : C) :
+    uncurry (toIhomIhom W X) = (β_ _ X).hom ≫ (ihom.ev X).app W :=
+  uncurry_curry _
+
+/-- The double-dual map is natural: for `f : X ⟶ Y` the square
+```
+  X ───────── f ─────────→ Y
+  │                        │
+  toIhomIhom W X     toIhomIhom W Y
+  ↓                        ↓
+  [[X, W], W] ─[[f, W], W]→ [[Y, W], W]
+```
+commutes. -/
+@[reassoc]
+lemma toIhomIhom_naturality (W : C) {X Y : C} (f : X ⟶ Y) :
+    f ≫ toIhomIhom W Y = toIhomIhom W X ≫ (pre ((pre f).app W)).app W := by
+  apply uncurry_injective
+  rw [uncurry_natural_left, uncurry_pre_app, uncurry_toIhomIhom, uncurry_toIhomIhom,
+    BraidedCategory.braiding_naturality_right_assoc, BraidedCategory.braiding_naturality_left_assoc,
+    id_tensor_pre_app_comp_ev]
+
+/-- The double-dual maps `X ⟶ [[X, W], W]` as a natural transformation from the identity to
+the square of the contravariant functor `[-, W]`. -/
+@[simps]
+noncomputable def toIhomIhomNatTrans (W : C) :
+    𝟭 C ⟶ (internalHom.flip.obj W).rightOp ⋙ internalHom.flip.obj W where
+  app X := toIhomIhom W X
+  naturality _ _ f := toIhomIhom_naturality W f
+
 /-- The canonical biduality map `X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of a braided monoidal closed category:
 the transpose of
 ```
@@ -111,6 +152,9 @@ the transpose of
 -/
 noncomputable def toIhomIhomUnit (X : C) : X ⟶ (ihom ((ihom X).obj (𝟙_ C))).obj (𝟙_ C) :=
   curry ((β_ _ X).hom ≫ (ihom.ev X).app (𝟙_ C))
+
+/-- The double-dual map relative to the unit is `toIhomIhomUnit`. -/
+lemma toIhomIhom_unit (X : C) : toIhomIhom (𝟙_ C) X = toIhomIhomUnit X := rfl
 
 /-- In a braided monoidal closed category, the canonical biduality map
 `X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of an object with a right dual is an isomorphism. -/
