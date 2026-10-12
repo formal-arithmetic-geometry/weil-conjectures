@@ -7137,3 +7137,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:54 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FinitePushforwardDerivedHomQCoherent (stage 3; reviewer PASS; first push; landing 20261012T085403-L-49132 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:54 L: merged deliver/X3/Sheaf.Paper.AlgebraizeFiniteOverProper (stage 3; reviewer PASS; first push; landing 20261012T085403-L-49234 (interface); batch 20261012T085205; modules 4; new nodes 3)
 - 08:54 L: merged deliver/X3/Sheaf.Paper.HigherDirectImagePresheaf (stage 3; reviewer PASS; first push; landing 20261012T085403-L-49337 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:54 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.AbelianSheavesGModulesData (stage 3; reviewer PASS; first push; landing 20261012T085404-L-49434 (interface); batch 20261012T085205; modules 2; new nodes 2)

@@ -1,0 +1,148 @@
+{
+ "id": "lem-exc-abelian-sheaves-gmodules-transport",
+ "kind": "statement",
+ "title": "Transport abelian sheaves to discrete representations without a stalk comparison",
+ "statement": "Let $u,v$ be universes, $w=\\max(u+1,v)$, and $\\mathcal C$ a category whose objects lie in $\\mathrm{Type}(u+1)$ and morphisms in $\\mathrm{Type}(u)$. Let $J$ be a Grothendieck topology on $\\mathcal C$, and let $G:\\mathrm{Type}(u)$ be a topological group. Write $\\mathrm{Sh}(J,\\mathcal A)$ for the category of $\\mathcal A$-valued sheaves (presheaves satisfying the matching-family condition for every covering sieve). Let $D$ be the category of discrete continuous integer representations of $G$ [def-exc-discrete-modules-category], with carriers in $\\mathrm{Type}(w)$; its objects are abelian groups with $G$ acting by additive automorphisms and with each element having open stabilizer, and its maps are equivariant additive maps. Let $U:D\\to\\mathrm{Rep}_{\\mathbb Z}(G)$ be the full-subcategory inclusion. Let $V$ include the category of discrete continuous $G$-actions on $\\mathrm{Type}(w)$ into the category of all $G$-actions on $\\mathrm{Type}(w)$. Given an equivalence $E_{\\rm set}:\\mathrm{Sh}(J,\\mathrm{Type}(w))\\simeq\\mathrm{DiscreteContAction}(\\mathrm{Type}(w),G)$, there exist an equivalence $E:\\mathrm{Sh}(J,\\mathrm{AddCommGrp}(w))\\simeq D$ and a natural isomorphism of underlying $G$-action functors $\\beta:E\\,U\\,\\mathrm{RepToAction}_{\\mathbb Z,G}\\,\\mathrm{forget}_{\\mathbb Z}\\mathrm{.mapAction}(G)\\cong\\mathrm{sheafCompose}(J,\\mathrm{forget}_{\\rm Ab})\\,E_{\\rm set}\\,V$. Thus beta is natural in the abelian sheaf and is equivariant on each component. No point of the site, no stalk functor and no additive stalk comparison are assumed or asserted.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+ },
+ "stmt_deps": [
+  "def-exc-discrete-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "For a category C, Grothendieck topology J and topological group G as in the statement, identify abelian-group-valued sheaves with internal integer modules [def-pod-internal-module] in set-valued sheaves. In one direction give the underlying sheaf its sectionwise addition, zero, negation and integer multiplication. In the other, evaluate all operation diagrams at every object of C to obtain an abelian group and integer-module structure on each set of sections; naturality of the operations makes all restriction maps additive. The sheaf condition is equivalent to its underlying-set condition because limits of abelian groups are computed on their sets. Operation-preserving maps are precisely natural transformations with additive components, so the constructions are inverse on objects and morphisms.",
+   "uses": [
+    "def-pod-internal-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+   }
+  },
+  {
+   "text": "Identify internal integer modules [def-pod-internal-module] in discrete continuous G-sets with the category in [def-exc-discrete-modules-category]. Equivariant operations on a G-set give its carrier an abelian group and unique integer-module structure; equivariance of addition and zero makes each G-action map integer-linear. Conversely a representation supplies equivariant operation maps. The stabilizer condition is equivalent to joint continuity of the action on the discrete carrier: at (g,x) take g times an open stabilizer of x; conversely continuity at (1,x) gives an open neighbourhood inside the stabilizer, whose translates make the entire stabilizer open. Maps preserving the operations are exactly equivariant integer-linear maps. Thus the two constructions are inverse and preserve the underlying action.",
+   "uses": [
+    "def-pod-internal-module",
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+   }
+  },
+  {
+   "text": "The categories of set-valued sheaves and discrete continuous G-sets have finite products; the latter use the diagonal action on a finite product, with stabilizer the finite intersection of open stabilizers. Apply [lem-pod-equivalence-induces-module-objects] with R equal to the integers and e equal to Eset, and compose with the two identifications of the preceding steps. This gives E. The equality of underlying functors from that theorem and the underlying-action comparisons of the identifications compose to beta. The transported unit and counit are operation-preserving by naturality, so E is an equivalence. This construction uses no point or stalk isomorphism.",
+   "uses": [
+    "lem-pod-equivalence-induces-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-modules-category",
+  "def-pod-internal-module",
+  "lem-pod-equivalence-induces-module-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence between set valued sheaves and discrete continuous group actions induces an equivalence between abelian group valued sheaves and discrete continuous integer representations",
+   "results": "LeanSearch returned Internal Server Error; no search results were available.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of sheaves of abelian groups and discrete continuous group representations induced by equivalence of set valued sheaves",
+   "results": "Eight hits, headed by LightCondMod.LocallyConstant.functorIsoDiscreteComponents and CondensedMod.LocallyConstant.functorIsoDiscrete. They concern constant condensed modules, not this categorical transport.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Equivalence",
+   "results": "Twelve hits, including sheafBotEquivalence, sheafEquiv and sheafCongr; none identifies abelian sheaves with representations from the supplied set-valued equivalence.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommGrp.*[Ss]heaf|[Ss]heaf.*CommGrp|CommGrp.*[Aa]ction|[Aa]ction.*CommGrp",
+   "results": "Twenty-five hits in topology/sheaves and module sheaves; no arbitrary-site equivalence of internal group objects with abelian sheaves or discrete representations.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.mapCommGrp",
+   "results": "Five hits include Equivalence.mapCommGrp and its projections. This transports group objects but does not give the two required identifications with abelian sheaves and discrete representations.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianSheavesGModulesData",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, first paragraph: the abelian enhancement of the set-valued sheaf/G-set equivalence, before identifying it with the stalk",
+   "via": [
+    "lem-exc-abelian-sheaves-gmodules-core",
+    "lem-exc-abelian-sheaves-gmodules"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianSheavesGModulesTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianSheavesGModulesTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.abelianSheaves_transport",
+  "statement": "theorem abelianSheaves_transport\n    {C : Type (u + 1)} [Category.{u} C]\n    (J : GrothendieckTopology C)\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] :\n    let D := Rep.DiscreteContinuousRep.{0, u, max (u + 1) v} ℤ G\n    let U : D ⥤ Rep.{max (u + 1) v} ℤ G := ObjectProperty.ι _\n    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G))\n      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))\n    ∀ (Eset : Sheaf J (Type (max (u + 1) v)) ≌\n        DiscreteContAction (Type (max (u + 1) v)) G),\n    ∃ (E : Sheaf J AddCommGrpCat.{max (u + 1) v} ≌ D),\n      Nonempty\n        (E.functor ⋙ U ⋙ Rep.RepToAction ℤ G ⋙\n            (CategoryTheory.forget (ModuleCat.{max (u + 1) v} ℤ)).mapAction G ≅\n          sheafCompose J (CategoryTheory.forget AddCommGrpCat.{max (u + 1) v}) ⋙\n            Eset.functor ⋙ V)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T085404-L-49434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T085404-L-49434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

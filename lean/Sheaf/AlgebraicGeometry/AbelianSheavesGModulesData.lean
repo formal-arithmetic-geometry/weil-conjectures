@@ -8,7 +8,9 @@ module
 public import Mathlib.CategoryTheory.Sites.Point.Basic
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
-import Sheaf.CategoryTheory.EquivalenceInternalModule
+import Sheaf.AlgebraicGeometry.AbelianSheavesGModulesTransport
+import Mathlib.Algebra.Category.Grp.LeftExactFunctor
+import Mathlib.Algebra.Category.Grp.AB
 
 /-!
 # Lifting a stalk equivalence to abelian group objects
@@ -75,6 +77,74 @@ theorem abelianSheaves_equiv_discreteGModules_core
         (i.hom.app F) ((E.functor.obj F).obj.ρ g
           ((i.inv.app F) (p.toPresheafFiber X x F.obj z))) =
             p.toPresheafFiber X x' F.obj z := by
-  sorry
+  dsimp
+  intro Eset j
+  obtain ⟨E, ⟨beta⟩⟩ := abelianSheaves_transport.{u, v} J G Eset
+  let U := ObjectProperty.ι
+    (fun X : Rep.{max (u + 1) v} ℤ G ↦ ∀ x : X.V, IsOpen {g : G | X.ρ g x = x})
+  let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G))
+    ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))
+  let H := E.functor ⋙ U ⋙ Rep.RepToAction ℤ G ⋙
+    Action.forget (ModuleCat.{max (u + 1) v} ℤ) G ⋙
+    forget₂ (ModuleCat.{max (u + 1) v} ℤ) AddCommGrpCat
+  let : Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget AddCommGrpCat.{max (u + 1) v}) :=
+    Limits.preservesFilteredColimitsOfSize_shrink.{u, max (u + 1) v, u, max (u + 1) v} _
+  let : AB5OfSize.{u, u} AddCommGrpCat.{max (u + 1) v} :=
+    AB5OfSize_shrink.{u, u, max (u + 1) v, max (u + 1) v} _
+  let : Limits.HasFiniteBiproducts (Sheaf J AddCommGrpCat.{max (u + 1) v}) :=
+    Limits.HasFiniteBiproducts.of_hasFiniteProducts
+  let Q := sheafCompose J (CategoryTheory.forget AddCommGrpCat.{max (u + 1) v})
+  let gamma := p.sheafFiberCompIso (CategoryTheory.forget AddCommGrpCat.{max (u + 1) v})
+  let alpha : H ⋙ CategoryTheory.forget AddCommGrpCat ≅
+      p.sheafFiber ⋙ CategoryTheory.forget AddCommGrpCat :=
+    Functor.isoWhiskerRight beta (Action.forget (Type (max (u + 1) v)) G) ≪≫
+      Functor.associator Q (Eset.functor ⋙ V) (Action.forget _ G) ≪≫
+      Functor.isoWhiskerLeft Q j ≪≫ gamma
+  -- The stalk comparison proves left exactness; transport need not supply it.
+  have : Limits.PreservesFiniteLimits (H ⋙ CategoryTheory.forget AddCommGrpCat) :=
+    Limits.preservesFiniteLimits_of_natIso alpha.symm
+  have : Limits.PreservesFiniteLimits H :=
+    Limits.preservesFiniteLimits_of_reflects_of_preserves H
+      (CategoryTheory.forget AddCommGrpCat)
+  let L := AddCommGrpCat.leftExactFunctorForgetEquivalence
+    (Sheaf J AddCommGrpCat.{max (u + 1) v})
+  -- Full faithfulness lifts alpha together with its exact underlying map.
+  let i' : LeftExactFunctor.of H ≅ LeftExactFunctor.of p.sheafFiber :=
+    L.functor.preimageIso (ObjectProperty.isoMk _ alpha)
+  let i : H ≅ p.sheafFiber := (ObjectProperty.ι _).mapIso i'
+  refine ⟨E, i, ⟨beta⟩, ?_⟩
+  have hi : Functor.isoWhiskerRight i (CategoryTheory.forget AddCommGrpCat) = alpha := by
+    have h := L.functor.map_preimage (X := LeftExactFunctor.of H)
+      (Y := LeftExactFunctor.of p.sheafFiber) (ObjectProperty.isoMk _ alpha).hom
+    have h' := congrArg (fun f ↦ f.hom) h
+    apply Iso.ext
+    exact h'
+  intro F g X x x' z hset
+  have hif (a : (E.functor.obj F).obj.V) :
+      (i.hom.app F) a = (gamma.hom.app F)
+        ((j.hom.app (Q.obj F)) ((beta.hom.app F).hom a)) := by
+    have h := congrArg (fun t ↦ t.hom.app F) hi
+    exact ConcreteCategory.congr_hom h a
+  have hgamma (y : p.fiber.obj X) :
+      (gamma.hom.app F) (p.toPresheafFiber X y (Q.obj F).obj z) =
+        p.toPresheafFiber X y F.obj z := by
+    exact ConcreteCategory.congr_hom
+      (p.toPresheafFiber_presheafFiberCompIso_hom_app
+        (CategoryTheory.forget AddCommGrpCat.{max (u + 1) v}) X y F.obj) z
+  have hcomm (a : (E.functor.obj F).obj.V) :
+      (beta.hom.app F).hom ((E.functor.obj F).obj.ρ g a) =
+        (Eset.functor.obj (Q.obj F)).obj.obj.ρ g ((beta.hom.app F).hom a) := by
+    exact ConcreteCategory.congr_hom ((beta.hom.app F).comm g) a
+  have hinv : (beta.hom.app F).hom
+      ((i.inv.app F) (p.toPresheafFiber X x F.obj z)) =
+        (j.inv.app (Q.obj F)) (p.toPresheafFiber X x (Q.obj F).obj z) := by
+    apply (ConcreteCategory.bijective_of_isIso (j.hom.app (Q.obj F))).1
+    apply (ConcreteCategory.bijective_of_isIso (gamma.hom.app F)).1
+    rw [← hif]
+    simp only [Iso.inv_hom_id_app_apply]
+    exact (hgamma x).symm
+  erw [hif, hcomm, hinv, hset]
+  exact hgamma x'
 
 end AlgebraicGeometry.Scheme

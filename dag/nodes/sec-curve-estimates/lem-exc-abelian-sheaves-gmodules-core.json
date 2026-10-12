@@ -13,35 +13,55 @@
  ],
  "proof": [
   {
-   "text": "Transport integer internal modules along the supplied equivalence Eset using [lem-pod-equivalence-induces-module-objects]. Equivalences preserve finite products. Identify internal integer modules in sheaves of sets with abelian-group-valued sheaves, since products and the sheaf condition are computed on underlying sets. Identify internal integer modules in discrete continuous G-sets with integer representations with open stabilizers [def-exc-discrete-modules-category]. These identifications preserve operations and morphisms and give E and the underlying-action natural isomorphism.",
+   "text": "Apply [lem-exc-abelian-sheaves-gmodules-transport] to J, G and Eset. Obtain the equivalence E and the equivariant underlying-action comparison beta. This theorem contains no point or stalk comparison; the rest of the proof constructs those comparisons and their action compatibility.",
    "uses": [
-    "lem-pod-equivalence-induces-module-objects",
-    "def-exc-discrete-modules-category"
+    "lem-exc-abelian-sheaves-gmodules-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point; Tags 03QT and 03QW"
+    "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
    }
   },
   {
-   "text": "Naturality of j with respect to the group operations and its cartesian compatibility lift it to an additive stalk comparison i. Let gamma be the canonical underlying-set/additive-stalk comparison from Mathlib GrothendieckTopology.Point.sheafFiberCompIso, and beta the equivariant underlying-action comparison from step 1. Choose i with gamma composed with forget(i) equal to j composed with forget(beta). This equation, equivariance of beta, and compatibility of gamma with maps from sections identify the images of the two additive germs with the set-valued germs in the premise. Apply gamma to the desired equality, use the premise, and use injectivity of gamma. This gives the action implication independently of any field or choice of Galois extensions.",
+   "text": "Let H be the underlying abelian-group functor of E, and Q the forgetful functor on abelian sheaves. Let gamma:Q followed by the set-valued stalk -> additive stalk followed by forget be Point.sheafFiberCompIso. Whisker beta with the underlying-set functor for actions, then compose with Q whiskered with j and with gamma; obtain alpha:H followed by forget -> additive stalk followed by forget. The additive stalk preserves finite limits (Point.Basic and AddCommGrpCat.AB, with AB5OfSize_shrink to the point universe). Hence so does H followed by forget, by preservesFiniteLimits_of_natIso. The forgetful functor reflects finite limits, so preservesFiniteLimits_of_reflects_of_preserves makes H left exact. These are direct Mathlib applications, not extra assumptions on E or beta.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point; Tags 03QT and 03QW"
+    "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+   }
+  },
+  {
+   "text": "The source category of abelian sheaves is preadditive and has finite products, hence finite biproducts (HasFiniteBiproducts.of_hasFiniteProducts). Apply [lem-exc-left-exact-functor-forget-equivalence] to this category. Both H and the additive stalk are left exact. Take preimageIso of alpha in this fully faithful forgetful functor and forget the left-exact-functor wrappers to obtain i. Functor.map_preimage gives forget(i)=alpha, on the nose. On every object F and element a this reads i_F(a)=gamma_F(j_QF(beta_F(a))).",
+   "uses": [
+    "lem-exc-left-exact-functor-forget-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+   }
+  },
+  {
+   "text": "Point.toPresheafFiber_presheafFiberCompIso_hom_app says gamma_F carries the set-valued germ of z at y to its additive germ, for y=x and y=x′. The comm equation for beta_F says beta_F(rho_E(g,a))=rho_set(g,beta_F(a)). To identify beta_F(i_F^{-1}(germ_x(z))), apply injectivity first of j_QF and then of gamma_F; the equation forget(i)=alpha and inverse-isomorphism cancellation identify it with j_QF^{-1}(set-germ_x(z)). Substitute this equality, equivariance of beta_F, and the supplied set-germ equality into the formula for i_F. Apply the germ comparison at x′. This proves exactly the additive action implication; there is no choice or nonemptiness hypothesis on z.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
    }
   }
  ],
  "proof_deps": [
-  "def-exc-discrete-modules-category",
-  "lem-pod-equivalence-induces-module-objects"
+  "lem-exc-abelian-sheaves-gmodules-transport",
+  "lem-exc-left-exact-functor-forget-equivalence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point; Tags 03QT and 03QW; formal categorical specialization and universe adaptation by worker Y2"
+  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point",
+  "note": "Formal categorical reduction by worker Y2: transport without a point, then Mathlib left-exact functor full faithfulness and the explicit germ calculation."
  },
  "mathlib_searches": [
   {
@@ -118,7 +138,7 @@
   "reviewer": "COMPILER",
   "group": "Y2",
   "result": "pass",
-  "landing": "20261012T060800-L-2918866",
+  "landing": "20261012T085404-L-49434",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

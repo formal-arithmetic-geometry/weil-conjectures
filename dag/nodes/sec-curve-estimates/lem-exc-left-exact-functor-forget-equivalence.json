@@ -1,0 +1,106 @@
+{
+ "id": "lem-exc-left-exact-functor-forget-equivalence",
+ "kind": "statement",
+ "title": "Forgetting abelian groups gives an equivalence of left-exact functor categories",
+ "statement": "Let $\\mathcal A$ be a preadditive category with morphisms in $\\mathrm{Type}(w)$ and finite biproducts. For a category $\\mathcal B$, let $\\mathcal A\\mathbin{\\to_\\ell}\\mathcal B$ denote the category of finite-limit-preserving functors from $\\mathcal A$ to $\\mathcal B$ and natural transformations. Postcomposition with the forgetful functor from abelian groups with carriers in $\\mathrm{Type}(w)$ to $\\mathrm{Type}(w)$ is the functor of an equivalence $(\\mathcal A\\mathbin{\\to_\\ell}\\mathrm{AddCommGrp}(w))\\simeq(\\mathcal A\\mathbin{\\to_\\ell}\\mathrm{Type}(w))$. In particular it is fully faithful and therefore every natural isomorphism of the underlying set-valued functors of two left-exact abelian-group-valued functors has a unique lift to an additive natural isomorphism.",
+ "source": {
+  "document": "Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean",
+  "place": "AddCommGrpCat.leftExactFunctorForgetEquivalence, lines 120-127; hypotheses lines 39-40"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use AddCommGrpCat.leftExactFunctorForgetEquivalence. Its definition at lines 120-127 has functor postcomposition with forget AddCommGrpCat, so this is exactly the displayed equivalence. Full faithfulness of the functor of an equivalence gives the lifting clause (Functor.preimageIso and Functor.map_preimage).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean",
+    "place": "AddCommGrpCat.leftExactFunctorForgetEquivalence, lines 120-127; hypotheses lines 39-40"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean",
+  "place": "AddCommGrpCat.leftExactFunctorForgetEquivalence, lines 120-127; hypotheses lines 39-40"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an additive category the category of finite limit preserving functors to abelian groups is equivalent to finite limit preserving functors to sets by the forgetful functor",
+   "results": "LeanSearch returned Internal Server Error; no results were available.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGrpCat.leftExactFunctorForgetEquivalence",
+   "results": "One exact hit: AddCommGrpCat.leftExactFunctorForgetEquivalence, for a preadditive category with finite biproducts.",
+   "date": "2026-10-12",
+   "verdict": "exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftExactFunctorForgetEquivalence",
+   "results": "Six hits including the implementing namespace in Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean and its use in Preadditive/Indization.lean. Read the declaration and canonical forgetful functor at lines 120-127, with hypotheses at lines 39-40.",
+   "date": "2026-10-12",
+   "verdict": "exact match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AddCommGrpCat.leftExactFunctorForgetEquivalence",
+  "file": "Mathlib/Algebra/Category/Grp/LeftExactFunctor.lean",
+  "how": "Read hypotheses at lines 39-40 and the definition at lines 120-127. Its functor is exactly postcomposition with forget AddCommGrpCat; the lift of an isomorphism is the standard preimageIso of this fully faithful functor. The target carrier universe is the source hom universe, exactly as in the statement."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianSheavesGModulesData",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, first paragraph: compatibility of the abelian enhancement with the stalk, specifically the lift of its natural underlying-set comparison",
+   "via": [
+    "lem-exc-abelian-sheaves-gmodules-core",
+    "lem-exc-abelian-sheaves-gmodules"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.Algebra.Category.Grp.LeftExactFunctor",
+  "declaration": "AddCommGrpCat.leftExactFunctorForgetEquivalence",
+  "statement": "noncomputable def leftExactFunctorForgetEquivalence (C : Type u) [Category.{v} C] [Preadditive C] [HasFiniteBiproducts C] : (C ⥤ₗ AddCommGrpCat.{v}) ≌ (C ⥤ₗ Type v)",
+  "branch": "mathlib",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T085404-L-49434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T085404-L-49434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
