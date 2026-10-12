@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
@@ -619,6 +620,28 @@ lemma isIso_normalizationPullback_of_isAffineHom [IsAffineHom f]
       Scheme.Hom.fromNormalization_app _ hV, IsIso.Iso.inv_inv, Category.assoc, Iso.inv_hom_id,
       Category.comp_id]
     exact congr(CommRingCat.ofHom $(ψ.comp_algebraMap.symm))
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The relative normalization `f.normalization ⟶ S` is étale over an affine open `U ⊆ S` as
+soon as the integral closure of `Γ(S, U)` in `Γ(X, f⁻¹ U)` is étale over `Γ(S, U)`. -/
+lemma etale_fromNormalization_of_isAffineOpen {U : S.Opens} (hU : IsAffineOpen U)
+    (h : letI := (f.app U).hom.toAlgebra
+      Algebra.Etale Γ(S, U) (integralClosure Γ(S, U) Γ(X, f ⁻¹ᵁ U))) :
+    Etale ((f.fromNormalization ⁻¹ᵁ U).ι ≫ f.fromNormalization) := by
+  have : IsAffine U := hU
+  have : IsAffine (f.fromNormalization ⁻¹ᵁ U) := hU.preimage _
+  rw [← Scheme.Hom.resLE_comp_ι f.fromNormalization (e := le_rfl)]
+  suffices Etale (f.fromNormalization.resLE U _ le_rfl) by infer_instance
+  rw [HasRingHomProperty.iff_of_isAffine (P := @Etale)]
+  have : (RingHom.toMorphismProperty RingHom.Etale).RespectsIso :=
+    RingHom.toMorphismProperty_respectsIso_iff.mp RingHom.Etale.respectsIso
+  refine (MorphismProperty.arrow_mk_iso_iff (RingHom.toMorphismProperty RingHom.Etale)
+    (arrowResLEAppIso f.fromNormalization U _ le_rfl)).mpr ?_
+  change RingHom.Etale (f.fromNormalization.appLE U _ le_rfl).hom
+  rw [← Scheme.Hom.app_eq_appLE, fromNormalization_app _ hU]
+  let := (f.app U).hom.toAlgebra
+  exact RingHom.Etale.respectsIso.1 _ (f.normalizationObjIso hU).symm.commRingCatIsoToRingEquiv
+    (RingHom.etale_algebraMap.mpr h)
 
 end Hom
 
