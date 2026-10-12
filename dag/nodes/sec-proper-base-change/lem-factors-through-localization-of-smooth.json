@@ -10,7 +10,17 @@
  },
  "proof": [
   {
-   "text": "Choose a finite polynomial presentation of C. Clear the finitely many denominators of the generator images with a product s₀ in S. Each relation evaluated at these images vanishes after localization at S; choose its annihilating denominator using the localization equality criterion. Multiply these witnesses with s₀. At this principal localization all generators are defined and all relations vanish, giving f. The localization universal property gives k, and equality on the generators proves k.comp f = g. Empty products are 1 and 0 in S is allowed.",
+   "text": "Use Algebra.FinitePresentation.out to choose a surjective polynomial presentation q on Fin n with finitely generated kernel. IsLocalization.exist_integer_multiples_of_finite supplies a common denominator s₀ in S for the images of the variables. Evaluating the polynomials at these fractions in P localized at s₀ gives f₀. IsLocalization.Away.liftAlgHom gives k₀ to the localization at S. The fraction multiplication identity and unit cancellation show k₀.comp f₀ = g.comp q on each variable, hence on every polynomial.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose a finite set rels spanning the kernel of q. For each r in rels, f₀(r) maps to zero under k₀. Write f₀(r) times s₀^m as the image of b in P using IsLocalization.Away.surj. Mapping this identity under k₀ proves that b maps to zero in the localization at S. IsLocalization.map_eq_zero_iff supplies t(r) in S with t(r)*b = 0. Cancelling the invertible power of s₀ shows that the image of t(r) annihilates f₀(r) already in P localized at s₀.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set s = s₀ times the product of the t(r). Since s₀ divides s, localization gives a map j from P localized at s₀ to P localized at s. Each t(r) also divides s and so has invertible image there; map its annihilator identity under j and cancel to show j(f₀(r)) = 0. Ideal.span_le then places the kernel of q inside the kernel of j.comp f₀. Descend by AlgHom.liftOfSurjective to obtain f on C. The canonical k from P localized at s to the localization at S satisfies k.comp j = k₀ by localization extensionality. Surjectivity of q, the descent evaluation identity and k₀.comp f₀ = g.comp q prove k.comp f = g. The finite-family and product constructions cover empty variables and relations, and the unit arguments remain valid for the zero ring.",
    "uses": [],
    "elementary": true
   }
@@ -19,7 +29,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 00CR and 00QO: explicit denominator-clearing specialization"
+  "place": "Tags 00CR and 00QO: explicit denominator clearing, implemented using Mathlib localization and surjective descent interfaces"
  },
  "mathlib_searches": [
   {
@@ -91,10 +101,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T113947-L-820843",
-  "kind": "interface",
+  "landing": "20261012T144153-L-2110029",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
