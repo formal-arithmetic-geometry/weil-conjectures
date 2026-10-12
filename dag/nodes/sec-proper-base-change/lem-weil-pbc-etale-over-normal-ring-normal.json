@@ -24,36 +24,21 @@
  ],
  "proof": [
   {
-   "text": "*$\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is smooth.* By hypothesis $f=\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism]. By [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] an etale morphism of schemes is smooth in the sense of [def-sbc-smooth-morphisms] (locally of finite presentation and formally smooth); so $f$ is smooth.",
+   "text": "The given etale ring map f is smooth [def-weil-pbc-smooth-ring-map]: apply Mathlib RingHom.etale_iff_formallyUnramified_and_smooth to hf and take the second conjunct. This directly supplies the ring-theoretic etale-hence-smooth step; no scheme fibre dimension or affine comparison is needed.",
    "uses": [
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "def-sbc-smooth-morphisms"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 06DI (lemma-henselization-normal, line 11110): 'filtered colimits of etale hence smooth R-algebras, the result follows from Algebra, Lemma normal-goes-up' (Tag 033C)"
-   }
-  },
-  {
-   "text": "*$A\\to B$ is a smooth ring map.* The morphism $f$ is $\\operatorname{Spec}$ of the ring map $A\\to B$. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is smooth in the sense of [def-sbc-smooth-morphisms] if and only if $A\\to B$ is a smooth ring map [def-weil-pbc-smooth-ring-map]; by the first step the left side holds, so $A\\to B$ is smooth.",
-   "uses": [
-    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
-    "def-sbc-smooth-morphisms",
     "def-weil-pbc-smooth-ring-map"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 06DI (lemma-henselization-normal, line 11110): 'filtered colimits of etale hence smooth R-algebras, the result follows from Algebra, Lemma normal-goes-up' (Tag 033C)"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U9 (lemma-etale-standard-smooth), etale implies smooth; implemented by Mathlib RingHom.etale_iff_formallyUnramified_and_smooth"
    }
   },
   {
-   "text": "*$B$ is normal.* $A$ is a normal ring [def-weil-pbc-normal-ring] and $A\\to B$ is a smooth ring map by the second step, so $B$ is a normal ring by [lem-weil-pbc-smooth-over-normal-ring-normal] (Stacks 033C, normality goes up along smooth ring maps).",
+   "text": "Apply [lem-weil-pbc-smooth-over-normal-ring-normal] to the smooth ring map from the first step and the supplied normality [def-weil-pbc-normal-ring] of A. Its conclusion is exactly the required prime-local normality of B.",
    "uses": [
-    "def-weil-pbc-normal-ring",
-    "lem-weil-pbc-smooth-over-normal-ring-normal"
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "def-weil-pbc-normal-ring"
    ],
    "elementary": false,
    "source": {
@@ -63,18 +48,14 @@
   }
  ],
  "proof_deps": [
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-  "def-sbc-smooth-morphisms",
-  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
   "def-weil-pbc-smooth-ring-map",
-  "def-weil-pbc-normal-ring",
-  "lem-weil-pbc-smooth-over-normal-ring-normal"
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "def-weil-pbc-normal-ring"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, proof of Lemma Tag 06DI (etale hence smooth, then Algebra Lemma Tag 033C)"
+  "place": "Proof of Tag 06DI: etale hence smooth, then Algebra Tag 033C; the first implication is directly Mathlib RingHom.etale_iff_formallyUnramified_and_smooth."
  },
  "mathlib_searches": [
   {
@@ -158,5 +139,15 @@
   "group": "H1",
   "result": "fix",
   "note": "commutative rings A,B independent universes; f : A →+* B with Spec B→Spec A etale as RingHom.Etale; A normal and conclusion B normal both as ∀ prime, IsDomain ∧ IsIntegrallyClosed of Localization.AtPrime (K1 ccd06d885 spelling); zero ring vacuous; no finiteness/Noetherian added; reverted the delivery's change of existing node(s) def-weil-pbc-normal-ring (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/RingTheory/NormalRing.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T044743-L-2035064",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

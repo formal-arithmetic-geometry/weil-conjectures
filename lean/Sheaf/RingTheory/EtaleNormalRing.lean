@@ -8,7 +8,6 @@ module
 public import Mathlib.RingTheory.RingHom.Etale
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.RingTheory.SmoothNormalRing
 
 /-!
@@ -50,6 +49,6 @@ theorem Etale.isNormalRing {A : Type uA} {B : Type uB} [CommRing A] [CommRing B]
       IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) :
     ∀ (q : Ideal B) [q.IsPrime],
       IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q) := by
-  sorry
+  exact ((etale_iff_formallyUnramified_and_smooth f).mp hf).2.isNormalRing hA
 
 end RingHom
