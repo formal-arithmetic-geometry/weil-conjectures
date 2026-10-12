@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.KrullDimension.Module
 public import Mathlib.RingTheory.Noetherian.Defs
+import Mathlib.RingTheory.KrullDimension.Regular
 
 /-!
 # Depth is bounded by support dimension
@@ -26,29 +27,46 @@ namespace IsLocalRing
 its support dimension. Source: Stacks Project, Algebra, Lemma 00LK
 (blueprint: lem-weil-pbc-depth-le-support-dimension).
 
-Proof, following the five steps of the DAG node:
-1. The maximal ideal is the Jacobson radical. Nakayama
-   (lem-weil-pbc-nakayama-jacobson) gives `m M ≠ M` for the nonzero finite module.
-   Thus def-weil-pbc-depth expresses depth as the supremum of lengths of regular
-   sequences in `m` (def-weil-pbc-regular-sequence), the relevant case of Tag 00LJ.
-2. Induct on `r` to show that any nonzero finite module admitting a regular
-   sequence of length `r` in `m` has support dimension at least `r`. For `r = 0`,
-   its annihilator is proper and lies in `m`; its support contains `m` by
-   lem-weil-pbc-finite-module-support-annihilator, giving a chain of length zero.
-3. For a sequence `f₁, …, fᵣ` with `r > 0`, the finite quotient `N/f₁N` is nonzero.
-   The quotient isomorphisms identify its successive quotients by `f₂, …, fᵣ`
-   with those of `N`, so the tail is regular by def-weil-pbc-regular-sequence.
-   Induction bounds the quotient's support dimension below by `r - 1`.
-4. The first element is a nonzerodivisor in `m`. Clause (2) of
-   lem-weil-pbc-support-dimension-quotient-element-equality (Tag 0B52) says that
-   the quotient's support dimension plus one is that of `N`. Therefore the latter
-   is at least `r`, also when the quotient's support dimension is infinite.
-5. Apply this bound to every regular sequence on `M` and take their supremum
-   (def-weil-pbc-depth), obtaining the required inequality. -/
+Proof:
+1. Nakayama gives `m M ≠ M`, so depth is the supremum of lengths of
+   `M`-regular sequences in the maximal ideal.
+2. For each such list `rs`, Mathlib's
+   `Module.supportDim_add_length_eq_supportDim_of_isRegular` gives
+   `dim Supp(M/(rs)M) + length(rs) = dim Supp(M)`. Regularity makes the
+   quotient nonzero, so its support dimension is nonnegative. Thus
+   `length(rs) ≤ dim Supp(M)`, including when this dimension is infinite.
+3. The support dimension of `M` is not bottom. Write it as a coercion from
+   `ℕ∞`, apply the preceding bound to every regular sequence, and take the
+   supremum defining depth. -/
 theorem depth_le_supportDim {R : Type u} [CommRing R] [IsNoetherianRing R]
     [IsLocalRing R] (M : Type v) [AddCommGroup M] [Module R M]
     [Module.Finite R M] [Nontrivial M] :
     (IsLocalRing.depth (R := R) M : WithBot ℕ∞) ≤ Module.supportDim R M := by
-  sorry
+  have hm : maximalIdeal R • (⊤ : Submodule R M) ≠ ⊤ :=
+    (Submodule.top_ne_ideal_smul_of_le_jacobson_annihilator
+      (maximalIdeal_le_jacobson (Module.annihilator R M))).symm
+  have hd := Module.supportDim_ne_bot_of_nontrivial R M
+  rw [← WithBot.coe_unbot (Module.supportDim R M) hd]
+  apply WithBot.coe_le_coe.mpr
+  unfold IsLocalRing.depth Ideal.depth
+  rw [if_neg hm]
+  apply sSup_le
+  rintro n ⟨rs, hreg, _, rfl⟩
+  apply WithBot.coe_le_coe.mp
+  rw [WithBot.coe_unbot]
+  let := hreg.quot_ofList_smul_nontrivial (⊤ : Submodule R M)
+  have hq := Module.supportDim_ne_bot_of_nontrivial R
+    (M ⧸ Ideal.ofList rs • (⊤ : Submodule R M))
+  have hzero : 0 ≤ Module.supportDim R
+      (M ⧸ Ideal.ofList rs • (⊤ : Submodule R M)) := by
+    rw [← WithBot.coe_unbot _ hq]
+    exact WithBot.coe_le_coe.mpr zero_le
+  calc
+    ((rs.length : ℕ∞) : WithBot ℕ∞) ≤
+        Module.supportDim R (M ⧸ Ideal.ofList rs • (⊤ : Submodule R M)) + rs.length := by
+      simpa only [add_zero, add_comm, WithBot.coe_natCast] using
+        add_le_add_right hzero (rs.length : WithBot ℕ∞)
+    _ = Module.supportDim R M :=
+      Module.supportDim_add_length_eq_supportDim_of_isRegular rs hreg
 
 end IsLocalRing

@@ -7013,3 +7013,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/R2/Sheaf.CategoryTheory.CohomologyColimitSitesCorrectedLift (stage 3; reviewer PASS; first push; landing 20261012T085328-L-35426 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:53 L: merged deliver/R2/Sheaf.CategoryTheory.CohomologyColimitSitesDegreeZeroDescent (stage 3; reviewer PASS; first push; landing 20261012T085328-L-35523 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:53 L: merged deliver/R2/Sheaf.Paper.SmoothSectionEtaleLift (stage 3; reviewer PASS; first push; landing 20261012T085329-L-35620 (interface); batch 20261012T085205; modules 3; new nodes 2)
+- 08:53 L: merged deliver/R2/Sheaf.RingTheory.DepthLeSupportDimension (stage 3; reviewer PASS; first push; landing 20261012T085329-L-35717 (proof); batch 20261012T085205; modules 1; new nodes 0)
