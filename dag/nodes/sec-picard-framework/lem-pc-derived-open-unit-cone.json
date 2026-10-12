@@ -13,50 +13,40 @@
  ],
  "proof": [
   {
-   "text": "Identify the over-site module sheaves with modules on the open subscheme via Scheme.Modules.overEquiv. Exact restriction preserves quasi-coherent cohomology. The open inclusion is quasi-compact since U is compact in the affine X, and is separated. Its derived direct image preserves quasi-coherent cohomology; uniqueness of right adjoints identifies it with the supplied R after transporting across the over-site equivalence.",
+   "text": "Use the canonical standard derived localization on the open subscheme and the derived equivalence induced by Scheme.Modules.overEquiv. Transport Scheme.Modules.restrictAdjunction across overFunctorEquiv to obtain r ⋙ e.functor ⊣ G, with G the underived open direct image. Exactness of restriction makes G preserve K-injective complexes. The proved library theorem Functor.full_rightDerivedFunctor and its faithful counterpart make the derived G fully faithful. Derive the adjunction using mapDerivedCategoryRightDerivedAdjunction, and cancel the derived over equivalence. Adjunction.rightAdjointUniq identifies the resulting right adjoint with the supplied R, transporting fullness and faithfulness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compactness of U supplies CompactSpace U and quasiCompact_of_compactSpace gives QuasiCompact U.ι; the open immersion is quasi-separated. Exact restriction preserves quasi-coherent cohomology by [lem-pc-derived-open-restriction-qcoh-iff] and isQuasicoherent_over. Apply [lem-pc-derived-direct-image-preserves-qcoh] to U.ι. The composition isomorphism mapDerivedCategoryCompIso and the right-adjoint uniqueness isomorphism transport this property to R(F(E)).",
    "uses": [
     "lem-pc-derived-open-restriction-qcoh-iff",
     "lem-pc-derived-direct-image-preserves-qcoh"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IR, lemma-orthogonal-koszul-complex, first paragraph; Tag 08D5, qcqs derived direct image; Cohomology, Tag 08FE"
-   }
+   "elementary": false
   },
   {
-   "text": "Both E and R(F(E)) have quasi-coherent cohomology. In the long exact cohomology sequence, H^n(C) is an extension of the cokernel of H^n(E)→H^n(R(F(E))) by the kernel of the next cohomology map. Kernels, cokernels and extensions of quasi-coherent sheaves are quasi-coherent, so each H^n(C) is quasi-coherent.",
+   "text": "Specialize [lem-pc-supported-qcoh-triangulated] to support Set.univ: the support condition is vacuous, so schemeDerivedQCohProperty is triangulated. Its invariance under isomorphisms follows degreewise from homologyFunctor.mapIso. ObjectProperty.ext_of_isTriangulatedClosed₃ applied to the supplied distinguished triangle and hE together with quasi-coherence of R(F(E)) proves quasi-coherence of C.",
    "uses": [
-    "def-pc-derived-category"
+    "lem-pc-supported-qcoh-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IR, lemma-orthogonal-koszul-complex, first paragraph; Tag 08D5, qcqs derived direct image; Cohomology, Tag 08FE"
-   }
+   "elementary": false
   },
   {
-   "text": "Restriction of derived direct image along the same open is the identity: use the open-restriction comparison and compute on a K-injective resolution; on each open W in U the section complex is unchanged. This identifies the derived counit with an isomorphism. The adjunction triangle identity then makes F(adj.unit_E) invertible. Applying exact F to the distinguished triangle gives F(C)=0 by the zero-cone criterion. These assertions are invariant under the canonical isomorphism between right adjoints.",
-   "uses": [
-    "lem-pc-restrict-derived-direct-image-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IR, lemma-orthogonal-koszul-complex, first paragraph; Tag 08D5, qcqs derived direct image; Cohomology, Tag 08FE"
-   }
+   "text": "Fullness and faithfulness of R make adj.counit.app (F.obj E) invertible. The adjunction identity F.map(adj.unit.app E) ≫ adj.counit.app(F.obj E) = 𝟙 gives invertibility of F.map(adj.unit.app E), by isIso_of_comp_hom_eq_id. Exact restriction F.mapDerivedCategory preserves the distinguished triangle. Triangle.isZero₃_of_isIso₁ makes its third object F(C) zero.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-derived-open-restriction-qcoh-iff",
   "lem-pc-derived-direct-image-preserves-qcoh",
-  "def-pc-derived-category",
-  "lem-pc-restrict-derived-direct-image-open"
+  "lem-pc-supported-qcoh-triangulated"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09IR, lemma-orthogonal-koszul-complex, first paragraph; Tag 08D5, qcqs derived direct image; Cohomology, Tag 08FE"
+  "place": "Tag 09IR, first paragraph; Tag 08D5(1); categorical realization by the existing derived-adjunction and fully-faithful-derived-functor theorems (W3 stage 3)"
  },
  "mathlib_searches": [
   {
@@ -127,10 +117,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T144153-L-2109824",
-  "kind": "interface",
+  "landing": "20261012T194154-L-469498",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
