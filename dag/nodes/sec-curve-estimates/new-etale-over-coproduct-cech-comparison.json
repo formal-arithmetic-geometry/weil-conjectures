@@ -13,36 +13,33 @@
  },
  "proof": [
   {
-   "text": "Restrict G to the slice over U and transport it through the proved upstream Etale.overSheafEquiv to U.left.smallEtaleTopology; Etale.overEquiv preserves finite products and projections. Reindex I by Fin n, including the tuple products and omitted-factor maps. Use the cofan universal property to identify W with the canonical coproduct. Apply fibre-product distribution over that finite coproduct to identify each singleton iterated product with the coproduct of the indexed family products, with projection compatibility.",
+   "text": "Use the canonical Pi.map arrows in Over U. The new geometric product-cofan theorem identifies their underlying scheme cofan as a coproduct, by transporting the existing fibre-product distribution through Etale.overEquiv and finite-product comparisons.",
    "uses": [
-    "lem-sc-etale-fibre-product-coproduct"
+    "new-etale-over-coproduct-power-cofan"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict G to the disjoint summands. Its sheaf axiom identifies sections with their product, by the disjoint-cover restriction isomorphism. The summands remain etale objects over X. Empty summands and the empty family use terminal sections on the empty scheme.",
+   "text": "For any finite scheme coproduct cofan in X_et, Sigma.desc of its arrows is an isomorphism. Its inclusions are open immersions by Sigma.ι_desc, their images cover by sigmaOpenCover and surjectivity, and are disjoint by injectivity and sigmaι_eq_iff. Faithfulness of the forgetful functor gives monicity in X_et. Apply the already proved Etale.isIso_piLift_of_disjoint. This proves the product restriction map is an isomorphism, including empty tuple families.",
    "uses": [
-    "lem-sc-etale-coproduct-cech-restriction-bijective"
+    "lem-weil-pbc-disjoint-etale-sections-product"
    ],
    "elementary": false
   },
   {
-   "text": "Compare the chosen fibre products with Mathlib products in Over U. The distribution projection equations show the restriction maps commute with every face and hence their alternating sums. Take the degreewise inverse to orient the complex isomorphism from the family to the singleton.",
-   "uses": [
-    "lem-weil-pbc-etale-site-cech-complex-comparison"
-   ],
-   "elementary": false
+   "text": "Construct the cosimplicial restriction transformation directly between Mathlib formal-coproduct cosimplicial objects. In each degree its components are the singleton-tuple product projection followed by restriction along Pi.map of the c_i. Naturality follows after each target projection from Pi.map_π and Pi.lift_π: deleting or repeating a factor commutes with applying the same coprojections. Functor.map_comp transfers these equalities to sections. The singleton-tuple projection is the productUniqueIso hom; composing it with step 2 proves each component is an isomorphism. Apply Mathlib alternatingCofaceMapComplex to get a chain map, HomologicalComplex.Hom.isIso_of_components to make it invertible, and take its inverse to obtain the required orientation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-etale-fibre-product-coproduct",
-  "lem-sc-etale-coproduct-cech-restriction-bijective",
-  "lem-weil-pbc-etale-site-cech-complex-comparison"
+  "new-etale-over-coproduct-power-cofan",
+  "lem-weil-pbc-disjoint-etale-sections-product"
  ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
-  "place": "Tag 03OZ, equation 59.22.1.1 and the fibre-product coproduct formula in the proof; https://stacks.math.columbia.edu/tag/03OZ"
+  "place": "Tag 03OZ, displayed fibre-product coproduct decomposition following equation 59.22.1.1; https://stacks.math.columbia.edu/tag/03OZ"
  },
  "mathlib_searches": [
   {
@@ -119,9 +116,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T110259-L-613579",
+  "landing": "20261012T135237-L-1666728",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,118 @@
+{
+ "id": "new-etale-over-coproduct-power-cofan",
+ "kind": "statement",
+ "title": "Canonical product cofan over an etale object is a scheme coproduct",
+ "statement": "Let X be a scheme, U an object of X_et, I a finite type in Type (u+1), V_i objects of X_et with f_i:V_i -> U, and W an object with g:W -> U and c_i:V_i -> W. Suppose (W.left,(c_i).left) is a coproduct cofan of schemes and c_i followed by g equals f_i. For every n >= 0, set A_i=Over.mk f_i and B=Over.mk g. The canonical arrows Pi.map(Over.homMk(c_(t r))) from the product of A_(t r), r in Fin(n+1), to the product of n+1 copies of B, indexed by t:Fin(n+1)->I, form a colimit cofan after forgetting to schemes. This only asserts the geometric coproduct universal property, with no sheaf or complex comparison. [def-weil-pbc-etale-site] [def-pc-fibre-product] [lem-weil-pbc-scheme-coproduct-family]",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03OZ, displayed fibre-product coproduct decomposition following equation 59.22.1.1; https://stacks.math.columbia.edu/tag/03OZ"
+ },
+ "proof": [
+  {
+   "text": "Apply Etale.overEquiv U and Etale.forget U.left. They preserve finite products. Identify the supplied scheme cofan with the canonical coproduct by Sigma.desc of the c_i; its colimit property makes this map an isomorphism. The equations c_i followed by g = f_i give an isomorphism in Over U.left from the canonical coproduct object to the image of Over.mk g.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply etale_fibre_product_coproduct to the underlying schemes V_i and maps (f_i).left over U.left in degree n. Compose its distribution isomorphism with the product of the isomorphism from step 1. The first projection equations and Sigma.ι_desc show that this composite equals Sigma.desc of Pi.map of the given coprojections. Thus those Pi.map arrows form a colimit cofan in Over U.left.",
+   "uses": [
+    "lem-sc-etale-fibre-product-coproduct"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The product comparison isomorphisms for the functor of step 1 commute with the Pi.map arrows: after each projection this is the functor map_comp equation. Transport the cofan universal property back through these isomorphisms: a cocone is first precomposed with each component inverse, its unique descent is then precomposed with the point comparison map. The factorization equations and uniqueness follow by cancellation of the comparison isomorphisms. Finally Over.forget U.left preserves coproducts and gives the displayed scheme cofan.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-sc-etale-fibre-product-coproduct"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 03OZ, displayed fibre-product coproduct decomposition following equation 59.22.1.1; https://stacks.math.columbia.edu/tag/03OZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite products distribute over coproducts of schemes in a slice category",
+   "results": "Service unavailable: Internal Server Error. No absence verdict.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\"",
+   "results": "Found piComparison_comp_π and instIsIsoPiComparison, providing the product transport maps; no etale coproduct-power cofan statement.",
+   "verdict": "Supporting lemmas found; no exact match.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "power.*[Cc]olimit|[Cc]olimit.*power|[Pp]roduct.*[Cc]ofan in lean/Sheaf/AlgebraicGeometry/Etale* and lean/WeilConjectures/Mathlib/AlgebraicGeometry/Sites",
+   "results": "No exact statement. Existing etale_fibre_product_coproduct provides the scheme-slice distribution isomorphism and is used; EtaleCoproductCechRestriction requires a terminal base and small indices and is not needed.",
+   "verdict": "Use existing distribution and product-preservation lemmas.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOverCoproductCechComparison",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-etale-over-coproduct-cech-comparison",
+   "place": "Proof step 1, identification of tuple-indexed categorical products over U with the coproduct distribution in schemes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOverCoproductPowerCofan",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOverCoproductPowerCofan.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_over_coproduct_power_isColimit",
+  "statement": "theorem etale_over_coproduct_power_isColimit\n    (X : Scheme.{u}) (U : X.Etale) (I : Type (u + 1)) [Finite I]\n    (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U)\n    (W : X.Etale) (g : W ⟶ U) (c : ∀ i : I, V i ⟶ W)\n    (hc : IsColimit (Cofan.mk W.left (fun i ↦ (c i).left)))\n    (hw : ∀ i : I, c i ≫ g = f i) (n : ℕ) :\n    let A : I → Over U := fun i ↦ Over.mk (f i)\n    let B : Fin (n + 1) → Over U := fun _ ↦ Over.mk g\n    Nonempty (IsColimit (Cofan.mk (∏ᶜ B).left.left (fun t : Fin (n + 1) → I ↦\n      ((Limits.Pi.map (fun r ↦ Over.homMk (c (t r)) (hw (t r))) :\n        (∏ᶜ fun r ↦ A (t r)) ⟶ ∏ᶜ B).left).left)))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T135237-L-1666728",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T135237-L-1666728",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
