@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.AmpleOnReductionNoetherian
+import Sheaf.AlgebraicGeometry.AmpleIso
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne
 import Sheaf.AlgebraicGeometry.PicardLift
 import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
@@ -56,6 +58,31 @@ theorem exists_isAmple_of_dim_le_one {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (hdim : topologicalKrullDim X ≤ 1) :
     ∃ L : X.Modules, ∃ hL : L.IsInvertible, @IsAmple X L hL := by
-  sorry
+  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
+  have : X.IsSeparated := HasAffineProperty.iff_of_isAffine.mp
+    (inferInstance : IsSeparated f)
+  let Z := X.nilradical.subscheme
+  let i : Z ⟶ X := X.nilradical.subschemeι
+  have hred := reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism X
+  have : IsReduced Z := hred.1
+  have : IsClosedImmersion i := hred.2.1
+  have : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType i
+  have : Z.IsSeparated := HasAffineProperty.iff_of_isAffine.mp
+    (inferInstance : IsSeparated (i ≫ f))
+  have hi : IsHomeomorph i.base :=
+    isHomeomorph_iff_isEmbedding_surjective.mpr ⟨i.isEmbedding, hred.2.2.1.surj⟩
+  have hZdim : topologicalKrullDim Z ≤ 1 := by
+    rw [IsHomeomorph.topologicalKrullDim_eq i.base hi]
+    exact hdim
+  obtain ⟨N, hN, hNamp⟩ := exists_isAmple_of_reduced_dim_le_one Z hZdim
+  obtain ⟨L, hL, ⟨e⟩⟩ :=
+    exists_isInvertible_tensorPullback_iso_of_isClosedImmersion i hdim N hN
+  have : L.IsInvertible := hL
+  have : N.IsInvertible := hN
+  have : ((tensorPullback i).obj L).IsInvertible :=
+    ((invertible_pullback_tensor i).1 L).2
+  refine ⟨L, hL, ?_⟩
+  apply (isAmple_iff_of_isClosedImmersion_of_isHomeomorph i hi L).mp
+  exact (isAmple_iff_of_iso e).mpr hNamp
 
 end AlgebraicGeometry.Scheme.Modules
