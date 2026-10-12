@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Restrict e to every smaller open W. It gives an O_X(W)-basis of M(W) with r generators whose coordinates commute with all smaller-open restrictions. Take the increasing exterior basis. The exterior coordinates on pure wedges are determinants of the original coordinates. Ring restriction preserves those determinants, so the exterior basis identifies the restricted presheaf P_n with the finite product of O_X indexed by the n-element subsets of Fin(r). Check naturality on pure wedges and extend by their spanning property.",
+   "text": "Evaluate the free-sheaf cofan on each object W of Over U. Evaluation preserves finite products and is additive, hence preserves finite coproducts. Compare this evaluated colimit with the Finsupp cofan to obtain a basis indexed by ULift (Fin r), whose vectors are the canonical free sections. Reindex to Fin r and pull back through the evaluated frame. Take Module.Basis.exteriorPower n, and use its basis equivalence with the sectionwise basis of the free sheaf indexed by ULift (Set.powersetCard (Fin r) n). The frame basis is natural because canonical free sections are global sections and the inverse frame is a presheaf morphism. Exterior restriction takes each increasing wedge to the increasing wedge of the restricted frame vectors, by exteriorSheafRestriction_existsUnique. Check the coordinate equivalences commute with restriction on these exterior basis vectors, then apply PresheafOfModules.isoMk. This directly gives the restricted presheaf isomorphism without determinant coordinate calculations.",
    "uses": [
     "def-weil-pbc-free-module",
     "def-sc-sheaf-exterior-power",
@@ -23,7 +23,7 @@
    "elementary": false
   },
   {
-   "text": "The finite product of the structure sheaf on the localized open site is a sheaf: compatible sections glue coordinate by coordinate, and uniqueness follows coordinate by coordinate as well. On this finite index set it is the free sheaf. Localizing sheafification to U has the same universal factorization property as sheafification of the restriction, since any cover of a smaller open is unchanged by localization. Consequently its unit is an isomorphism on the localized site. This yields the asserted free-sheaf isomorphism and bijectivity of the unit on every V contained in U. The empty-subset basis for n=0 and empty index set for n>r require no separate ring hypotheses.",
+   "text": "Transport the sheaf property of the finite free sheaf across the presheaf coordinate isomorphism. The underlying abelian presheaf map of the module sheafification unit is toSheafify, hence locally injective and locally surjective. Restriction along Over.forget U preserves both properties: this functor is cocontinuous for the over topology, and Mathlib Presheaf.isLocallyInjective_whisker and isLocallySurjective_whisker apply. Regard the restricted unit as a morphism of sheaves of modules using the transported sheaf property. Its underlying morphism of abelian sheaves is an isomorphism by Sheaf.isLocallyBijective_iff_isIso; reflect this isomorphism through SheafOfModules.toSheaf. Compose the inverse unit with the coordinate isomorphism and lift through SheafOfModules.fullyFaithfulForget to get the asserted sheaf isomorphism. Evaluate the restricted unit at Over.mk g for every V → U; the evaluated isomorphism is precisely the original unit at V, so ConcreteCategory.isIso_iff_bijective gives the second conclusion. The same construction covers n=0, n>r, empty opens and zero rings.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface",
     "def-sc-sheaf-exterior-power"
@@ -39,8 +39,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "dag/nodes/sec-picard-framework/lem-sc-exterior-dual-local-frames.json",
-  "place": "Step 2 of the frame lemma: local sectionwise exterior basis comparison used in determinant inversion of lem-sc-finite-duality. Complete coordinate argument written in the Lean docstring; source Tag 0BRT only motivates its use."
+  "document": "dag/nodes/sec-picard-framework/lem-sc-exterior-sheaf-local-free-comparison.json",
+  "place": "S3 stage-3 proof, 2026-10-13: the original two-step route, with naturality checked on increasing exterior basis vectors instead of determinant coordinates, and local unit comparison proved using cocontinuous restriction of locally bijective maps. Increasing-wedge basis read in Stacks algebra.tex, Tag 00DM, section-tensor-algebra; Tag 0BRT remains the motivating determinant inversion."
  },
  "mathlib_searches": [
   {
@@ -110,10 +110,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T165531-L-2939565",
-  "kind": "interface",
+  "landing": "20261012T194140-L-464879",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
