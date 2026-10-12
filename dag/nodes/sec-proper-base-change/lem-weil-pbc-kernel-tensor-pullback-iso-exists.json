@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-kernel-tensor-pullback-iso-exists",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-conormal-sheaf-formally-unramified",
+   "place": "proof step 4: transport along the unique compatible isomorphism",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Tensor pullback of kernel ideals under an ambient isomorphism",
+ "statement": "Let i₁:Z→Z₁ and i₂:Z→Z₂ be closed immersions of schemes [def-weil-closed-immersion, def-pc-scheme], and let φ:Z₁→Z₂ be an isomorphism such that i₁≫φ=i₂. Put Iⱼ=ker(O_{Zⱼ}→(iⱼ)_*O_Z) [def-sbc-closed-immersion-ideal-sheaf] and Mⱼ=iⱼ*Iⱼ using tensor pullback [def-pc-module-pullback]. Let ηⱼ:Iⱼ→(iⱼ)_*Mⱼ be the normalized tensor pullback adjunction unit [lem-pc-module-pullback-adjunction], sending a local section to its pure tensor with 1. There exists an O_Z-module isomorphism e:M₂≅M₁ such that for every open U⊆Z₂, sections s₂∈I₂(U), s₁∈I₁(φ⁻¹U) whose structure-sheaf images satisfy ι₁(s₁)=φ♯(ι₂(s₂)), and every open W⊆Z with W⊆i₂⁻¹U and W⊆i₁⁻¹(φ⁻¹U), one has e_W(η₂,U(s₂)|_W)=η₁,φ⁻¹U(s₁)|_W. No uniqueness assertion is included in this lemma.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemmas 01R3 and 01R4, specialized to a common closed subscheme and an ambient isomorphism; Sheaves, Lemma 0096"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Define β_U:I₂(U)→I₁(φ⁻¹U) by mapping the structure-sheaf image along φ.app U and taking its unique lift through the injective kernel inclusion. The equation i₁≫φ=i₂ shows it vanishes under i₁.app. Injectivity of the kernel inclusion proves additivity, semilinearity, and restriction compatibility, so these maps define β:I₂→φ_*I₁.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-scheme",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose β with φ_*η₁ and transport φ_*i₁_*M₁ to i₂_*M₁ using pushforward composition and hc. Under the normalized i₂ pullback adjunction this gives a map M₂→M₁. The unit equation yields the section formula on i₂⁻¹U=i₁⁻¹φ⁻¹U. Naturality yields it after both restrictions to W; uniqueness of ideal section lifts identifies the prescribed s₁ with β_U(s₂).",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Repeat with inv φ and i₂≫inv φ=i₁. The two kernel-section maps compose to identities because φ and inv φ induce inverse ring-sheaf maps. Both composites of the adjoint module maps therefore fix every pullback-unit section. Injectivity of the adjunction Hom bijection shows the composites are identities, giving the required module isomorphism.",
+   "uses": [
+    "def-pc-scheme",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemmas 01R3 and 01R4, specialized to a common closed subscheme and an ambient isomorphism; Sheaves, Lemma 0096"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "conormal sheaf pullback of kernel ideal invariant under isomorphism of ambient schemes",
+   "results": "Service unavailable (Internal Server Error); no claim of a successful search.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transport ideal sheaf kernel across scheme isomorphism and pull back modules",
+   "results": "Scheme.IdealSheafData.map_ker, comap, map, comapIso and Hom.ker: ideal-data transport only, not a module isomorphism with normalized section formula.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kernel\", \"iso\"",
+   "results": "Limits.kernelIsIsoComp, kernelIsoOfEq and related categorical kernel isomorphisms; no scheme tensor-pullback ideal section comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toModules.*[Ii]so|[Ii]so.*toModules|ker.*pullback; rg conormal in lean/Sheaf and lean/WeilConjectures",
+   "results": "No direct comparison theorem in Mathlib or upstream. Read ClosedImmersionConormalFunctorial: gives a morphism from the pullback along an arbitrary map of subschemes and an adjoint equation, not the present ambient-isomorphism conclusion; obtaining it still needs inversion, identity-pullback comparison, and unit formula transport.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KernelTensorPullbackIsoExists",
+  "file": "lean/Sheaf/AlgebraicGeometry/KernelTensorPullbackIsoExists.lean",
+  "declaration": "AlgebraicGeometry.exists_kernelTensorPullbackIso",
+  "statement": "theorem exists_kernelTensorPullbackIso {Z Z₁ Z₂ : Scheme.{u}}\n    (i₁ : Z ⟶ Z₁) (i₂ : Z ⟶ Z₂) [IsClosedImmersion i₁] [IsClosedImmersion i₂]\n    (φ : Z₁ ⟶ Z₂) [IsIso φ] (hc : i₁ ≫ φ = i₂) :\n    ∃ e : (Scheme.Modules.tensorPullback i₂).obj i₂.ker.toModules ≅\n        (Scheme.Modules.tensorPullback i₁).obj i₁.ker.toModules,\n          ∀ (U : Z₂.Opens) (s₂ : Γ(i₂.ker.toModules, U))\n            (s₁ : Γ(i₁.ker.toModules, φ ⁻¹ᵁ U)),\n            i₁.ker.toModulesι.app (φ ⁻¹ᵁ U) s₁ =\n              φ.app U (i₂.ker.toModulesι.app U s₂) →\n            ∀ (W : Z.Opens) (a : W ≤ i₂ ⁻¹ᵁ U) (b : W ≤ i₁ ⁻¹ᵁ (φ ⁻¹ᵁ U)),\n              e.hom.app W\n                  (((Scheme.Modules.tensorPullback i₂).obj i₂.ker.toModules).val.map (homOfLE a).op\n                    (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction\n                      i₂)).unit.app i₂.ker.toModules).app U s₂)) =\n                ((Scheme.Modules.tensorPullback i₁).obj i₁.ker.toModules).val.map (homOfLE b).op\n                  (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction\n                    i₁)).unit.app i₁.ker.toModules).app (φ ⁻¹ᵁ U) s₁)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T213435-L-1177513",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T213435-L-1177513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

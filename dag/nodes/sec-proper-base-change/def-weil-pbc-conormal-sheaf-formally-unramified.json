@@ -31,63 +31,43 @@
  ],
  "proof": [
   {
-   "text": "(Choice of thickening.) By [lem-weil-pbc-universal-first-order-thickening-exists], the formally unramified morphism $h:Z\\to X$ admits a universal first order thickening $i:Z\\to Z'$ over $X$. The same lemma gives the unique isomorphism over $X$, compatible with $i$, between any two such choices.",
+   "text": "Use FormallyUnramified.exists_universalFirstOrderThickening for existence of a universal thickening and the unique compatible scheme comparison, with its IsIso property.",
    "uses": [
     "lem-weil-pbc-universal-first-order-thickening-exists"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 04F3 (lemma-universal-thickening) and Section Tag 04F2, opening uniqueness discussion"
-   }
+   "elementary": false
   },
   {
-   "text": "(The ideal sheaf.) For the chosen closed immersion $i:Z\\to Z'$, let $\\mathcal I=\\ker(\\mathcal O_{Z'}\\to i_*\\mathcal O_Z)$, the ideal sheaf of the immersion [def-sbc-closed-immersion-ideal-sheaf]. Because $Z\\subset Z'$ is first order, the defining ideal satisfies $\\mathcal I^2=0$ [def-sbc-first-order-thickening]. Thus $\\mathcal I/\\mathcal I^2$ is canonically $\\mathcal I$ as an $\\mathcal O_{Z'}$-module.",
+   "text": "The unchanged conormal definition is the tensor pullback of the kernel ideal module. H₁.1.1 and H₂.1.1 provide the two closed immersion instances from their first order thickening hypotheses. Apply exists_kernelTensorPullbackIso to the compatible ambient isomorphism for existence of a module isomorphism satisfying the section equation.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-kernel-tensor-pullback-iso-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove uniqueness in Lean. A kernel section s₂ maps under φ.app into the kernel of i₁.app by the compatibility equation. range_toModulesι_app_eq and toImage_imageι identify this kernel with the range of the ideal module inclusion and yield s₁. For two candidate isomorphisms, set W=i₂⁻¹U; compatibility implies W=i₁⁻¹φ⁻¹U. The two section formulas then show equality on every i₂ pullback-unit section. Apply the injective adjunction Hom equivalence, module morphism extensionality, and Iso.ext.",
    "uses": [
     "def-sbc-closed-immersion-ideal-sheaf",
-    "def-sbc-first-order-thickening"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Definition Tag 04F4 (definition-universal-thickening), item (2), together with Definition Tag 04EX (definition-thickening), item (2), and Morphisms Definition Tag 01R2"
-   }
-  },
-  {
-   "text": "(The conormal module.) Pull the quotient module $\\mathcal I/\\mathcal I^2$ back along $i$ using the module pullback [def-pc-module-pullback]. This produces an $\\mathcal O_Z$-module $\\mathcal C_{Z/X}:=i^*(\\mathcal I/\\mathcal I^2)=i^*\\mathcal I$. It is precisely the conormal sheaf of the closed immersion $i$, so the displayed object has the claimed module structure and notation.",
-   "uses": [
-    "def-pc-module-pullback",
-    "def-sbc-closed-immersion-ideal-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Definition Tag 04F4 item (2), invoking Morphisms Definition Tag 01R2 (morphisms-definition-conormal-sheaf); module pullback is Sheaves Tag 0095"
-   }
-  },
-  {
-   "text": "(Independence of the choice.) If $(Z'_1,i_1)$ and $(Z'_2,i_2)$ are two universal thickenings, the unique compatible isomorphism $\\varphi:Z'_1\\xrightarrow{\\sim}Z'_2$ identifies their ideal sheaves and, after applying the pullback along the common closed subscheme $Z$, identifies $i_1^*(\\mathcal I_1/\\mathcal I_1^2)$ with $i_2^*(\\mathcal I_2/\\mathcal I_2^2)$. The uniqueness clause makes this identification independent of any choices and functorial, so $\\mathcal C_{Z/X}$ is defined up to the unique canonical isomorphism asserted in the statement.",
-   "uses": [
-    "lem-weil-pbc-universal-first-order-thickening-exists",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Section Tag 04F2 and Definition Tag 04F4 item (2), using the unique isomorphism of universal thickenings from Lemma Tag 04F3"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-universal-first-order-thickening-exists",
-  "def-sbc-closed-immersion-ideal-sheaf",
   "def-sbc-first-order-thickening",
-  "def-pc-module-pullback"
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-kernel-tensor-pullback-iso-exists",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Definition Tag 04F4, with the well-definedness details expanded from Tags 04F2, 04F3, 04EX, and 01R2"
+  "place": "04F2/04F3/04F4, using the kernel comparison of Morphisms 01R4 and the uniqueness argument from Sheaves 0096"
  },
  "mathlib_searches": [
   {
@@ -178,5 +158,15 @@
   "reviewer": "R-cfu",
   "group": "J1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T213435-L-1177513",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
