@@ -15,31 +15,31 @@
  ],
  "proof": [
   {
-   "text": "Take global sections on Spec of the stalk and use the affine associated-module-sheaf correspondence on the finite free terms and matrices. Reverse the integer grading to view the complex as a chain complex. This correspondence also carries the homotopies and the residue pullback to their module counterparts.",
+   "text": "Choose a finite free rank n(j) for each term. Strongly induct on the natural number sum of n(k) for k in {0,...,d}. If all residue differentials vanish, return P and HomotopyEquiv.refl P with its original support and freeness.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Induct on the sum of the ranks in degrees 0 through d. If a differential matrix has a unit entry, apply [lem-weil-pbc-free-complex-unit-entry-splits]. The identity summand has a contraction given by the inverse identity in the reverse direction. Projection and inclusion of the complement are thus inverse up to homotopy, the complementary terms remain finite free, the support bounds remain unchanged, and the rank sum decreases by two. Apply the induction hypothesis to the complement and compose its homotopy equivalence with this one.",
+   "text": "Otherwise apply [lem-pc-finite-free-stalk-unit-cancellation]. It returns a homotopy equivalent complement P' with chosen ranks n', an index i<d, n'(i)+1=n(i), n'(i+1)+1=n(i+1), and unchanged ranks elsewhere. A case split at i and i+1 gives n'(k)<=n(k) for every k. Since i belongs to {0,...,d} and n'(i)<n(i), Finset.sum_lt_sum proves that the complement has strictly smaller rank sum.",
    "uses": [
-    "lem-weil-pbc-free-complex-unit-entry-splits"
+    "lem-pc-finite-free-stalk-unit-cancellation"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "If there is no unit entry, every coefficient belongs to the maximal ideal, because the stalk is a local ring. Reduction modulo that ideal therefore has zero differentials. Return the associated-sheaf complex and compose the homotopy equivalences constructed in the induction. No residue-cohomology assumption is used. If the rank sum is zero or d is zero, no cancellation is needed and the identity equivalence suffices.",
+   "text": "Apply the strong induction hypothesis to the complement, using its support bounds and free identifications. Compose the cancellation homotopy equivalence with the inductively obtained one by HomotopyEquiv.trans. The resulting complex has the required bounds, finite free terms and zero residue differentials. The zero-rank case needs no separate construction, since no cancellation can have rank sum less than zero.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-free-complex-unit-entry-splits"
+  "lem-pc-finite-free-stalk-unit-cancellation"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "U1",
+  "group": "V2",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00MT, lemma-add-trivial-complex, iterated unit-entry cancellation; blueprint lem-pc-perfect-locus, proof step 4"
+  "place": "Tag 00MT; strong rank-sum induction formalized in Lean, one sheaf cancellation separated into its own node"
  },
  "mathlib_searches": [
   {
@@ -125,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T161505-L-2649396",
+  "landing": "20261012T165538-L-2941850",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
