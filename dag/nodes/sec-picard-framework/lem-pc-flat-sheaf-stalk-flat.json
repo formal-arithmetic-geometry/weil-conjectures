@@ -21,29 +21,29 @@
  ],
  "proof": [
   {
-   "text": "Fix x and an acyclic three-term complex M^\\bullet of \\mathcal O_{X,x}-modules. The termwise skyscraper complex i_{x,*}M^\\bullet is acyclic and its stalk at x is M^\\bullet by [lem-pc-skyscraper-complex].",
+   "text": "Fix a point $x$ and an injective linear map $f:M\\to N$ of stalk modules. The skyscraper functor [def-pc-ringed-module-skyscraper] sends it to a monomorphism: its maps on sections are pointwise $f$, so cancellation holds at each membership proof.",
    "uses": [
-    "lem-pc-skyscraper-complex"
+    "def-pc-ringed-module-skyscraper"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 17.17.2 (Tag 05NE), proof of (1) => (2), skyscraper complex"
+    "place": "Tag 05NE, lemma-flat-stalks-flat, flat sheaf implies flat stalks; injectivity criterion for flatness"
    }
   },
   {
-   "text": "Since \\mathcal F is flat, the functor \\mathcal G\\mapsto\\mathcal G\\otimes_{\\mathcal O_X}\\mathcal F is exact by [def-pc-flat-sheaf-modules]. Applying it to the acyclic complex i_{x,*}M^\\bullet shows that i_{x,*}M^\\bullet\\otimes_{\\mathcal O_X}\\mathcal F is acyclic.",
+   "text": "Flatness [def-pc-flat-sheaf-modules] supplies preservation of finite limits by right tensoring with $\\mathcal F$. Consequently the skyscraper map tensored with $\\mathcal F$ is monic. Package this as exactness of a short complex whose first map is zero.",
    "uses": [
     "def-pc-flat-sheaf-modules"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 17.17.2 (Tag 05NE), proof of (1) => (2)"
+    "place": "Tag 05NE, lemma-flat-stalks-flat, flat sheaf implies flat stalks; injectivity criterion for flatness"
    }
   },
   {
-   "text": "Stalk exactness [lem-weil-pbc-module-stalk-exact] makes the stalk at x of this tensor complex acyclic. Applying [lem-pc-ringed-space-module-stalk-tensor] degreewise identifies it with M^\\bullet\\otimes_{\\mathcal O_{X,x}}\\mathcal F_x. Hence tensoring every exact three-term complex M^\\bullet with \\mathcal F_x on the right remains exact, which is precisely flatness of \\mathcal F_x.",
+   "text": "Apply [lem-weil-pbc-module-stalk-exact] to this short complex. Its stalk is exact; since the first map is still zero, its second map is monic. Naturality of [lem-pc-ringed-space-module-stalk-tensor] identifies this second map, up to conjugation by isomorphisms, with the skyscraper stalk map tensored with $\\mathcal F_x$.",
    "uses": [
     "lem-weil-pbc-module-stalk-exact",
     "lem-pc-ringed-space-module-stalk-tensor"
@@ -51,20 +51,33 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 17.17.2 (Tag 05NE), proof of (1) => (2), stalkwise exactness and Lemma 17.16.1"
+    "place": "Tag 05NE, lemma-flat-stalks-flat, flat sheaf implies flat stalks; injectivity criterion for flatness"
+   }
+  },
+  {
+   "text": "For [def-pc-ringed-module-skyscraper], send a vector to the germ of its constant global section. Every neighbourhood section is a function on a subsingleton inhabited domain and hence constant; equality of germs detects the value, so this map is bijective. Representing scalars locally proves linearity, and [def-pc-module-stalk-functor] takes pointwise maps to their maps on constant germs. These natural linear isomorphisms conjugate the skyscraper stalk map to $f$. Tensoring these isomorphisms preserves them, so $f\\otimes\\mathrm{id}_{\\mathcal F_x}$ is monic. Mathlib Module.Flat.iff_rTensor_preserves_injective_linearMap concludes flatness.",
+   "uses": [
+    "def-pc-ringed-module-skyscraper",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 05NE, lemma-flat-stalks-flat, flat sheaf implies flat stalks; injectivity criterion for flatness"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-skyscraper-complex",
+  "def-pc-ringed-module-skyscraper",
   "def-pc-flat-sheaf-modules",
   "lem-weil-pbc-module-stalk-exact",
-  "lem-pc-ringed-space-module-stalk-tensor"
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "def-pc-module-stalk-functor"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 17.17.2 (Tag 05NE), implication (1) => (2)"
+  "place": "Tag 05NE, lemma-flat-stalks-flat, converse proof; S2 uses the monomorphism criterion and proves natural skyscraper stalk recovery directly"
  },
  "mathlib_searches": [
   {
@@ -185,5 +198,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T165532-L-2939710",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
