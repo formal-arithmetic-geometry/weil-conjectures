@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 import Sheaf.Algebra.Homology.PreciseVanishing
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 /-!
 # Lifting maps from bounded projective complexes
@@ -56,6 +57,47 @@ theorem derived_map_lift
       IsIso ((DerivedCategory.homologyFunctor (ModuleCat R) i).map α))
     (hα_epi : Epi ((DerivedCategory.homologyFunctor (ModuleCat R) n).map α)) :
     ∃ γ : P ⟶ E, DerivedCategory.Q.map γ ≫ α = β := by
-  sorry
+  classical
+  obtain ⟨a, b, ha, hb⟩ := hbounded
+  have : P.IsStrictlyGE a := ha
+  have : P.IsStrictlyLE b := hb
+  have : ∀ i : ℤ, Projective (P.X i) := hprojective
+  have : P.IsKProjective := CochainComplex.isKProjective_of_projective P b
+  obtain ⟨C, g, d, hT⟩ :=
+    Pretriangulated.distinguished_cocone_triangle α
+  let T := Pretriangulated.Triangle.mk α g d
+  have hC : ∀ i : ℤ, n ≤ i →
+      IsZero ((DerivedCategory.homologyFunctor (ModuleCat R) i).obj C) := by
+    intro i hi
+    have hEpi : Epi ((DerivedCategory.homologyFunctor (ModuleCat R) i).map α) := by
+      rcases eq_or_lt_of_le hi with rfl | hi
+      · exact hα_epi
+      · have := hα_iso i hi
+        infer_instance
+    have hIso : IsIso ((DerivedCategory.homologyFunctor (ModuleCat R) (i + 1)).map α) :=
+      hα_iso (i + 1) (by omega)
+    apply (DerivedCategory.HomologySequence.exact₃ T hT i (i + 1)).isZero_X₂_iff.mpr
+    constructor
+    · exact (DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff T hT i).mp hEpi
+    · exact (DerivedCategory.HomologySequence.mono_homologyMap_mor₁_iff
+        T hT i (i + 1)).mp (by
+          change Mono ((DerivedCategory.homologyFunctor (ModuleCat R) (i + 1)).map α)
+          infer_instance)
+  let K := DerivedCategory.Q.objPreimage C
+  let e : DerivedCategory.Q.obj K ≅ C := DerivedCategory.Q.objObjPreimageIso C
+  have hK : ∀ i : ℤ, n ≤ i → IsZero (K.homology i) := by
+    intro i hi
+    exact (hC i hi).of_iso
+      (((DerivedCategory.homologyFunctorFactors (ModuleCat R) i).app K).symm ≪≫
+        (DerivedCategory.homologyFunctor (ModuleCat R) i).mapIso e)
+  have hzero : β ≫ g = 0 := by
+    have hz := precise_vanishing (ModuleCat R) P K n
+      ⟨a, b, fun i hi ↦ P.isZero_of_isStrictlyGE a i hi,
+        fun i hi ↦ P.isZero_of_isStrictlyLE b i hi⟩ hprojective hbelow hK
+      (β ≫ g ≫ e.inv)
+    simpa using congrArg (fun f ↦ f ≫ e.hom) hz
+  obtain ⟨δ, hδ⟩ := T.coyoneda_exact₂ hT β hzero
+  obtain ⟨γ, hγ⟩ := CochainComplex.IsKProjective.exists_Q_map_eq P E δ
+  exact ⟨γ, by rw [hγ]; exact hδ.symm⟩
 
 end RingTheory
