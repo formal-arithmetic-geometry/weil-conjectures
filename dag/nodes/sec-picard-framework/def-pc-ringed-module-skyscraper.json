@@ -13,9 +13,29 @@
   "document": "literature/stacks-project/sheaves.tex",
   "place": "Tag 009A (definition-skyscraper-sheaf), case (4); termwise extension"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "Restriction is semilinear: evaluate at membership in the smaller open and use TopCat.Presheaf.germ_res_apply' to identify the two germs.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing. For each membership proof in the union, choose an index whose open contains x and take that section value. Pairwise compatibility on intersections proves each restriction equation. Any other gluing has the same value by its restriction to the chosen member. If x is absent from the union, the section domain is empty, including for an empty cover.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The induced module maps act pointwise. Extensionality and definitional equality prove identity, composition, and additivity. The resulting functor can be extended termwise by Functor.mapHomologicalComplex.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "E1",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 009A (4); existing Lean docstring arguments, implemented using Mathlib germ restriction and unique gluing"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -151,5 +171,15 @@
   "group": "C1",
   "result": "fix",
   "note": "X : RingedSpace (arbitrary ringed space), x : X, M : CochainComplex (ModuleCat (X.presheaf.stalk x)) Z; skyscraper = termwise ringedModuleSkyscraperFunctor (PLift (x in U) -> M, germ action, coefficient sheaf = landed Modules X); conj1 Nonempty (landed RingedSpace.moduleStalkFunctor termwise of skyscraper complex = M) in complexes over O_{X,x}; conj2 M.Acyclic -> skyscraper complex Acyclic; all 5 return points of R-skc0933 repaired; new node statement aligned to ringed space (commutative O_X) as in the Lean; compiled with #check, clean 2.3 s"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T154829-L-2472491",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

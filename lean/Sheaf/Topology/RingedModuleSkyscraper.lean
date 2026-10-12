@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 
+import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+
 /-!
 # Skyscraper modules on a ringed space
 
@@ -81,7 +83,10 @@ theorem ringedSkyscraperPresheafAb_smul
       ((sheafCompose (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u_sky} RingCat.{u_sky})).obj X.sheaf).obj.map f a •
         (ringedSkyscraperPresheafAb X x M).map f s := by
-  sorry
+  funext h
+  change (X.presheaf.germ V.unop x (f.unop.le h.down) a) • s ⟨f.unop.le h.down⟩ =
+    (X.presheaf.germ W.unop x h.down (X.presheaf.map f a)) • s ⟨f.unop.le h.down⟩
+  rw [X.presheaf.germ_res_apply' f x h.down a]
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
 The skyscraper presheaf is a sheaf. Proof: on a cover, all components whose opens contain x
@@ -91,7 +96,21 @@ containing x, or from the empty domain of the section function. -/
 theorem ringedSkyscraperPresheafAb_isSheaf
     (M : ModuleCat.{u_sky} (X.presheaf.stalk x)) :
     Presheaf.IsSheaf (Opens.grothendieckTopology X) (ringedSkyscraperPresheafAb X x M) := by
-  sorry
+  classical
+  apply (TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing
+    (ringedSkyscraperPresheafAb X x M)).mpr
+  intro ι U sf hsf
+  choose index index_spec using fun h : PLift (x ∈ iSup U) ↦ Opens.mem_iSup.mp h.down
+  let s : RingedSkyscraperSections X x M (iSup U) :=
+    fun h ↦ sf (index h) ⟨index_spec h⟩
+  refine ⟨s, ?_, ?_⟩
+  · intro i
+    funext h
+    exact congrFun (hsf (index ⟨(Opens.leSupr U i).le h.down⟩) i)
+      ⟨⟨index_spec ⟨(Opens.leSupr U i).le h.down⟩, h.down⟩⟩
+  · intro t ht
+    funext h
+    exact congrFun (ht (index h)) ⟨index_spec h⟩
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
 The skyscraper module, with its concrete section data and germ scalar action. -/
@@ -123,7 +142,8 @@ Skyscraper maps preserve identities. Proof: on each open and membership proof th
 map is the identity on the value module; extensionality gives the equality. -/
 theorem ringedModuleSkyscraperMap_id (M : ModuleCat.{u_sky} (X.presheaf.stalk x)) :
     ringedModuleSkyscraperMap X x (𝟙 M) = 𝟙 _ := by
-  sorry
+  ext V s
+  rfl
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
 Skyscraper maps preserve composition. Proof: evaluate the two sides on a section and a
@@ -132,7 +152,8 @@ theorem ringedModuleSkyscraperMap_comp
     {M N P : ModuleCat.{u_sky} (X.presheaf.stalk x)} (f : M ⟶ N) (g : N ⟶ P) :
     ringedModuleSkyscraperMap X x (f ≫ g) =
       ringedModuleSkyscraperMap X x f ≫ ringedModuleSkyscraperMap X x g := by
-  sorry
+  ext V s
+  rfl
 
 /-- Stacks, Tag 009A (4) (blueprint: def-pc-ringed-module-skyscraper).
 The skyscraper functor from stalk modules to sheaves of modules on the ringed space.
@@ -151,7 +172,10 @@ The skyscraper functor is additive. Proof: each map on sections is pointwise the
 so the image of a sum of module maps is the sum of the images, on every open. -/
 theorem ringedModuleSkyscraperFunctor_additive :
     (ringedModuleSkyscraperFunctor X x).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  ext V s
+  rfl
 
 attribute [instance] ringedModuleSkyscraperFunctor_additive
 
