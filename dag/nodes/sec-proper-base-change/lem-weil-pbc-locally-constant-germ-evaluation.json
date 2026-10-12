@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "For every open neighbourhood V of x, evaluation at x defines a map L_R(V) to R. If W is a smaller open neighbourhood of x, then restricting a locally constant map g from V to W does not change g(x). Thus these evaluation maps are compatible with all transition maps. By the universal property of the colimit they induce a unique map ev_x:L_R,x to R satisfying ev_x(g_x)=g(x) for every representative g. This property determines ev_x uniquely because every element of the filtered colimit L_R,x is represented by some g_x.",
+   "text": "Choose for each stalk element a representative using Mathlib TopCat.Presheaf.exists_germ_eq. Define evaluation to be the value of this representative at x. For any other representative of the same germ, TopCat.Presheaf.germ_eq gives equal restrictions on a common neighbourhood; evaluating these at x proves the evaluation formula. Every stalk element has a representative, so the formula also proves uniqueness.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
@@ -49,7 +49,7 @@
    }
   },
   {
-   "text": "The map ev_x is injective. Let g_x and h_x be germs represented by locally constant maps g:V to R and h:W to R, and suppose g(x)=h(x). By local constancy, there are open neighbourhoods V' of x in V and W' of x in W on which g and h are respectively constant. On the open neighbourhood N=V' intersect W' of x, both restrictions are the constant map with value g(x)=h(x), so they agree. The elementwise equality criterion for the filtered colimit therefore gives g_x=h_x. Hence ev_x is bijective.",
+   "text": "Represent the two stalk elements by ga on Va and gb on Vb using TopCat.Presheaf.exists_germ_eq. The evaluation formula shows that their values at x agree. IsLocallyConstant.isOpen_fiber gives open fibres of these point values in Va and Vb. Their images in X are open because the inclusions of open subspaces are open maps. Intersect these images to obtain a common open neighbourhood of x. The two restrictions there are equal by LocallyConstant.ext, since each equals its value at x. Apply TopCat.Presheaf.germ_ext to obtain equality of the germs.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
@@ -145,5 +145,15 @@
   "group": "H1",
   "result": "fix",
   "note": "X : TopCat, x, R set; L_R inline LocallyConstant presheaf with comap restriction; stalk/germ over OpenNhds by reverse inclusion; ev formula on every germ, Bijective, uniqueness over all ev'; R empty/singleton"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T053948-L-2642931",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
