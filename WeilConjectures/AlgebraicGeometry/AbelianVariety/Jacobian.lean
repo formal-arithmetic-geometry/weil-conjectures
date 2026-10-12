@@ -37,6 +37,11 @@ The existence of a Jacobian over a separably closed field is
 ## Main definitions
 
 - `AlgebraicGeometry.IsJacobian`: the property of being a Jacobian of a curve.
+
+## Main statements
+
+- `AlgebraicGeometry.exists_isJacobian`: over a separably closed field, a smooth projective
+  geometrically integral curve has a Jacobian.
 -/
 
 @[expose] public section
@@ -73,5 +78,50 @@ class IsJacobian (f : C ⟶ Spec (.of K)) [IsCurve f] [Smooth f] [IsProper f]
   isomorphism of group-valued functors. -/
   represents : ∃ φ : (picardFunctorDegree f 0).obj ≅ yoneda.obj J ⋙ uliftFunctor.{u + 1},
     IsPicardZeroMul f ((Functor.RepresentableBy.equivUliftYonedaIso _ J).symm φ.symm)
+
+/-- A separated quasi-compact scheme smooth of relative dimension one over a field is a curve:
+smooth morphisms are locally of finite type and the source has dimension at most one. -/
+instance IsCurve.of_smoothOfRelativeDimension_one (f : C ⟶ Spec (.of K))
+    [SmoothOfRelativeDimension 1 f] [IsSeparated f] [QuasiCompact f] : IsCurve f where
+  toLocallyOfFiniteType :=
+    have := SmoothOfRelativeDimension.smooth 1 f
+    inferInstance
+  krullDim_le_one := by exact_mod_cast topologicalKrullDim_le_of_smoothOfRelativeDimension f 1
+
+/-- A Jacobian of `C` can be built from any representation of `Pic⁰_{C/K}` by a proper,
+geometrically integral group scheme `J`, smooth of relative dimension the genus of `C`, which
+respects the group laws.
+
+(blueprint: `sk-def-av-jacobian`) -/
+theorem IsJacobian.of_representableBy (f : C ⟶ Spec (.of K)) [IsCurve f] [Smooth f]
+    [IsProper f] [GeometricallyIntegral f]
+    (J : Over (Spec (.of K))) [GrpObj J] [IsProper J.hom] [GeometricallyIntegral J.hom]
+    (hJ : SmoothOfRelativeDimension f.genus J.hom)
+    (e : (picardFunctorDegree f 0).obj.RepresentableBy J) (he : IsPicardZeroMul f e) :
+    IsJacobian f J := by
+  have : IsIntegral J.left := GeometricallyIntegral.isIntegral_of_subsingleton J.hom
+  have : Smooth J.hom := SmoothOfRelativeDimension.smooth f.genus J.hom
+  have : IsAbelianVariety J := { }
+  refine ⟨?_, ⟨((Functor.RepresentableBy.equivUliftYonedaIso _ J) e).symm, ?_⟩⟩
+  · have h := IsAbelianVariety.topologicalKrullDim_eq J
+    rw [topologicalKrullDim_eq_of_smoothOfRelativeDimension J.hom f.genus] at h
+    exact_mod_cast h.symm
+  · rwa [Iso.symm_symm_eq, Equiv.symm_apply_apply]
+
+/-- **The Jacobian is a Jacobian.** A smooth projective geometrically integral curve `C` over a
+separably closed field `K` has a Jacobian in the sense of blueprint `sk-def-av-jacobian`: an
+abelian variety of dimension the genus of `C` representing `Pic⁰_{C/K}` as a group-valued
+functor. This repackages `AlgebraicGeometry.exists_jacobian`, the genus
+`dim_K Γ(C, Ω¹_{C/K})` being the arithmetic genus `dim_K H¹(C, 𝒪_C)` by
+`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`.
+
+(blueprint: `sk-prop-jacobian`, `sk-def-av-jacobian`) -/
+theorem exists_isJacobian [IsSepClosed K] [C.Over (Spec (.of K))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] [IsProper (C ↘ Spec (.of K))]
+    [GeometricallyIntegral (C ↘ Spec (.of K))] [Smooth (C ↘ Spec (.of K))] :
+    ∃ (J : Over (Spec (.of K))) (_ : CommGrpObj J), IsJacobian (C ↘ Spec (.of K)) J := by
+  obtain ⟨J, _, e, _, hs, _, he, -⟩ := exists_jacobian (k := K) (X := C)
+  rw [← Scheme.genus_eq_arithmeticGenus] at hs
+  exact ⟨J, inferInstance, IsJacobian.of_representableBy _ J hs e he⟩
 
 end AlgebraicGeometry
