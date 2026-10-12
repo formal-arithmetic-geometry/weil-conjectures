@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Section 0EHN, zero-system argument; direct categorical proof by V3 using Mathlib zero-object tools"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ContainsZero|IsClosedUnderBinaryProducts|IsClosedUnderLimitsOfShape",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/Local.lean, Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean, Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean, Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean, Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean, Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean, Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean, Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean",
+   "verdict": "Generic categorical or module tools only; no specialized coherent adic closure theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "object property containing zero objects closed under terminal limits and binary biproducts of coherent adic systems",
+   "date": "2026-10-12",
+   "results": "Hausdorffification.induction_on, localCohomology, localCohomology.ofDiagram, localCohomology.ofSelfLERadical, localCohomology.hasColimitDiagram, IsAdicComplete, AdicCompletion.induction_on, Hausdorffification",
+   "verdict": "Generic categorical or module tools only; no specialized coherent adic closure theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.IsClosedUnderFiniteProducts",
+   "date": "2026-10-12",
+   "results": "loogle: unknown identifier 'ObjectProperty.IsClosedUnderFiniteProducts'",
+   "verdict": "Generic categorical or module tools only; no specialized coherent adic closure theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Binary direct sums of coherent sheaves with ideal adic transition quotient isomorphisms preserve the adic condition; the zero sheaf is coherent",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent sheaf zero object finitely presented identity cokernel binary direct sum adic inverse system",
+   "date": "2026-10-13",
+   "results": "SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.Presentation.IsFinite, SheafOfModules.Presentation.isColimit, SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "verdict": "Independent second reading: generic presentation and finite-product tools only; no specialized coherent formal binary/empty closure theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoherent.*IsZero|IsZero.*IsCoherent|idealModuleProduct.*biprod|IsClosedUnderFiniteProducts.mk",
+   "date": "2026-10-13",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean",
+   "verdict": "Independent second reading: generic presentation and finite-product tools only; no specialized coherent formal binary/empty closure theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedUnderFiniteProducts\"",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.ObjectProperty.IsClosedUnderFiniteProducts, CategoryTheory.ObjectProperty.instIsClosedUnderLimitsOfShapeDiscreteOfIsClosedUnderFiniteProductsOfFinite, CategoryTheory.ObjectProperty.IsClosedUnderFiniteProducts.isClosedUnderLimitsOfShape, CategoryTheory.ObjectProperty.IsClosedUnderFiniteProducts.of_isClosedUnderLimitsOfShape, CategoryTheory.ObjectProperty.instHasFiniteProductsFullSubcategoryOfIsClosedUnderFiniteProducts, CategoryTheory.ObjectProperty.IsClosedUnderFiniteProducts.mk, CategoryTheory.ObjectProperty.IsClosedUnderFiniteProducts.mk', CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms",
+   "verdict": "Independent second reading: generic presentation and finite-product tools only; no specialized coherent formal binary/empty closure theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModulesFiniteProducts",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity argument: the abelian coherent-formal-module category used for Grothendieck existence; additive structure, binary and empty products.",
+   "via": [
+    "lem-weil-pbc-coherent-formal-finite-products",
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-coherent-formal-finite-products-empty-products",
+ "title": "Coherent formal modules are closed under empty products",
+ "statement": "Let $X$ be a Noetherian scheme and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent ideal sheaf. The vertex of every limiting cone over the empty diagram in the ambient category of inverse systems of $\\mathcal O_X$-modules is a coherent adic inverse system [def-weil-pbc-coherent-formal-module].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Section 0EHN, zero-system argument written out from the definition"
+ },
+ "proof": [
+  {
+   "text": "An empty-diagram limit is a zero inverse system by IsLimit.isZero_pt. Mathlib IsZero.obj applied to the zero inverse system shows directly that all terms are zero. Present a zero term as the cokernel of the identity of a rank-one free module: this gives quasi-coherence and finite type, hence coherence by pqf-lem-coherent-ft-locnoeth. The ideal product is a subobject of a zero term, hence zero; the formal quotient is an epimorphic image of a zero term, hence zero. The unique isomorphism of these zero objects gives the transition condition.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesEmptyProducts",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesEmptyProducts.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModules_closedUnderEmptyProducts",
+  "statement": "theorem coherentFormalModules_closedUnderEmptyProducts (X : Scheme.{u})\n    [IsNoetherian X] (I : X.IdealSheafData) :\n    (IsCoherentFormalModule I).IsClosedUnderLimitsOfShape (Discrete PEmpty)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-69c5f",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T220528-L-1396208",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-69c5f",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T220528-L-1396208",
+  "kind": "interface",
+  "note": "independent Codex review: All three Lean signatures match their nodes; existing interfaces and unit route are preserved. Delivered modules and direct importer CoherentFormalModulesAbelian compile cleanly; axiom checks match the reported binary-product hole."
+ }
+}

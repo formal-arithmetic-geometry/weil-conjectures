@@ -7,9 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesBinaryProducts
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesEmptyProducts
 
 /-! # CoherentFormalModulesFiniteProducts
 
@@ -44,6 +43,10 @@ along that isomorphism. No nonempty index set is assumed.
 theorem coherentFormalModules_closedUnderFiniteProducts (X : Scheme.{u})
     [IsNoetherian X] (I : X.IdealSheafData) :
     (IsCoherentFormalModule I).IsClosedUnderFiniteProducts := by
-  sorry
+  have hempty : (IsCoherentFormalModule I).IsClosedUnderLimitsOfShape
+      (Discrete PEmpty) := coherentFormalModules_closedUnderEmptyProducts X I
+  have hbin : (IsCoherentFormalModule I).IsClosedUnderBinaryProducts :=
+    coherentFormalModules_closedUnderBinaryProducts X I
+  exact ObjectProperty.IsClosedUnderFiniteProducts.mk'
 
 end AlgebraicGeometry
