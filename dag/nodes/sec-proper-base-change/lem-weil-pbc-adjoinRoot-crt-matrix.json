@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-adjoinRoot-crt-matrix",
+ "kind": "statement",
+ "title": "Simultaneous CRT coordinates for reduced root and idempotent-lift multiplication matrices",
+ "statement": "Let A be a commutative ring, I an ideal with nonzero R=A/I, f in A[X] monic, and g,h in R[X] monic and coprime with fbar=g*h. Let e in AdjoinRoot f have images 1 and 0 in AdjoinRoot g and AdjoinRoot h under the canonical coefficient-reduction quotient maps. Let T,P be multiplication by the root and by e in the power basis of AdjoinRoot f, and Tg,Th the root multiplication matrices in the power bases of AdjoinRoot g and AdjoinRoot h [lem-weil-pbc-monic-quotient-free]. There exist an index equivalence d: Fin deg f ≃ Fin deg g ⊕ Fin deg h and an invertible matrix U over R on this sum index such that U reindex_d(Tbar) U^-1 = blockdiag(Tg,Th) and U reindex_d(Pbar) U^-1 = blockdiag(1,0).",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, lemma-characterize-henselian-pair, proof of (3) implies (1), B/IB product decomposition; its coordinate and matrix details written out by E2"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-monic-quotient-free"
+ ],
+ "proof": [
+  {
+   "text": "Let R=A/I, assumed nonzero. Monicity preserves the degree of f under coefficient reduction. The coordinates of the power basis of AdjoinRoot f reduce to the power basis of AdjoinRoot of fbar. Multiplication matrices reduce entrywise: products of representatives are computed by division by the monic polynomial, and division and remainder commute with coefficient reduction. This follows by uniqueness of remainder and reducing the monic division identity.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For fbar=g*h, coprimality gives comaximal ideals (g) and (h). Ideal.isCoprime_span_singleton_iff and Ideal.quotientMulEquivQuotientProd give the algebra-compatible CRT isomorphism AdjoinRoot fbar to AdjoinRoot g times AdjoinRoot h. The two components are the quotient maps, so the root maps to the pair of roots and the residue of e maps to (1,0).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Concatenate the power bases of the two factors. Monicity over nonzero R gives deg f=deg g+deg h. Hence their sum index type is equivalent to Fin deg f. Reindex the reduced basis along this equivalence d. The coordinate isomorphism to the concatenated basis is invertible; its matrix is a unit U. Its inverse is the inverse coordinate map, and their matrix products are identities by LinearMap.toMatrix_comp.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The CRT algebra equivalence intertwines multiplication. Multiplication by the pair of roots is block diagonal with the respective root matrices. Multiplication by (1,0) is the first projection with blocks 1,0,0,0. Applying the matrix-of-composition identity gives both conjugation identities with the same U. Degree-zero factors have the empty power basis, so no nontriviality assumption on either factor algebra is needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-quotient-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "name": "E2 stage-3 worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, lemma-characterize-henselian-pair, proof of (3) implies (1), B/IB product decomposition; its coordinate and matrix details written out by E2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Chinese remainder equivalence polynomial quotient product monic power basis multiplication matrix",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no absence claim"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, Matrix",
+   "date": "2026-10-12",
+   "results": "0 hits",
+   "verdict": "No direct coordinate-matrix theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "characteristic polynomial multiplication by root monic polynomial quotient Chinese remainder coprime product",
+   "date": "2026-10-12",
+   "results": "Partial fraction and universal coprime factorization results, no CRT multiplication matrix theorem",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot.*(crt|CRT|chinese|Matrix)|leftMulMatrix.*reindex; chineseRemainder and quotient product searches",
+   "date": "2026-10-12",
+   "results": "No AdjoinRoot multiplication matrix match. Ideal.quotientMulEquivQuotientProd and Ideal.isCoprime_span_singleton_iff provide the underlying CRT ring equivalence, but not its power-basis matrix compatibility.",
+   "verdict": "Pieces available; simultaneous matrix-coordinate compatibility remains to formalize."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinRootIdempotentCharpolyMap",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); determinant realization of the lifted-idempotent monic-factorization step; the residue CRT coordinate step of the determinant calculation",
+   "via": [
+    "lem-weil-pbc-adjoinRoot-idempotent-charpoly-map",
+    "lem-weil-pbc-idempotent-splitting-monic-factorization",
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AdjoinRootCRTMatrix",
+  "file": "lean/Sheaf/RingTheory/AdjoinRootCRTMatrix.lean",
+  "declaration": "Polynomial.adjoinRoot_crt_matrix",
+  "statement": "theorem adjoinRoot_crt_matrix {A : Type u} [CommRing A] (I : Ideal A) [Nontrivial (A ⧸ I)] (f : A[X]) (hf : f.Monic) (g h : (A ⧸ I)[X]) (hg : g.Monic) (hh : h.Monic) (hcoprime : IsCoprime g h) (hfactor : f.map (Ideal.Quotient.mk I) = g * h) (e : AdjoinRoot f) (he₁ : AdjoinRoot.map (Ideal.Quotient.mk I) f g (hfactor.symm ▸ dvd_mul_right g h) e = 1) (he₀ : AdjoinRoot.map (Ideal.Quotient.mk I) f h (hfactor.symm ▸ dvd_mul_left h g) e = 0) : let b := (AdjoinRoot.powerBasis' hf).basis; let T := Algebra.leftMulMatrix b (AdjoinRoot.root f); let P := Algebra.leftMulMatrix b e; let Tg := Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hg).basis (AdjoinRoot.root g); let Th := Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hh).basis (AdjoinRoot.root h); ∃ (d : Fin f.natDegree ≃ (Fin g.natDegree ⊕ Fin h.natDegree)) (U : (Matrix (Fin g.natDegree ⊕ Fin h.natDegree) (Fin g.natDegree ⊕ Fin h.natDegree) (A ⧸ I))ˣ), U.val * Matrix.reindex d d (T.map (Ideal.Quotient.mk I)) * U⁻¹.val = Matrix.fromBlocks Tg 0 0 Th ∧ U.val * Matrix.reindex d d (P.map (Ideal.Quotient.mk I)) * U⁻¹.val = Matrix.fromBlocks 1 0 0 0",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085230-L-10803",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085230-L-10803",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
