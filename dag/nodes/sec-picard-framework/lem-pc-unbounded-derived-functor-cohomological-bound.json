@@ -27,70 +27,47 @@
  ],
  "proof": [
   {
-   "text": "For each n\\ge0 put E_n=\\tau_{\\ge -n}E. The truncation tower reconstruction and the compatibility of the right derived functor with its derived inverse limit give E\\simeq R\\varprojlim_nE_n and RF(E)\\simeq R\\varprojlim_nRF(E_n) by [lem-pc-qcoh-truncation-derived-limit].",
+   "text": "Use the canonical reconstruction after RF supplied by [lem-pc-qcoh-truncation-derived-limit]. Construct its inverse-system functor using Functor.ofOpSequence and apply [lem-pc-derived-limit-milnor-sequence] in degree i.",
    "uses": [
-    "lem-pc-qcoh-truncation-derived-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4 proof of part (2), first paragraph; Tags 08D3 and 08D1"
-   }
-  },
-  {
-   "text": "Applying the Milnor exact sequence [lem-pc-derived-limit-milnor-sequence] to the tower RF(E_n), for every i we obtain $$0\\to R^1\\varprojlim_n H^{i-1}(RF(E_n))\\to H^i(RF(E))\\to\\varprojlim_n H^i(RF(E_n))\\to0.$$",
-   "uses": [
+    "lem-pc-qcoh-truncation-derived-limit",
     "lem-pc-derived-limit-milnor-sequence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4 proof of part (2), displayed short exact sequence; Tag 07KY"
-   }
+   "elementary": false
   },
   {
-   "text": "The shifted truncation triangle and the vanishing hypothesis give the stabilization statement [lem-pc-derived-functor-truncation-stabilization]: H^i(RF(E_n))\\to H^i(RF(E_{n-1})) is an isomorphism whenever n\\ge N-i, because the two endpoint cohomology groups are R^{i+n}F(H^{-n}(E)) and R^{i+n+1}F(H^{-n}(E)).",
+   "text": "The bound on E means E is in D≤b for the standard t-structure [def-sbc-standard-tstructure-derived-category]; hence its truncation τ≥(b+1)E is zero. The right derived functor sends zero objects to zero objects (Functor.isZero_rightDerivedFunctor_obj). Starting at n=-b-1, use integer induction and [lem-pc-derived-functor-truncation-stabilization] to show H^i(RF(E_n))=0 for every integer n≥-b-1. Each successor index n+1 is ≥N-i since i≥b+N.",
    "uses": [
+    "def-sbc-standard-tstructure-derived-category",
     "lem-pc-derived-functor-truncation-stabilization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4 proof of part (2), truncation triangle and the two shifted derived-functor vanishings"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $i$. By Step 3 (applied in degrees $i$ and $i-1$) the transition maps of the towers $H^{i-1}(RF(E_n))$ and $H^i(RF(E_n))$ are isomorphisms for $n\\ge N-i+1$ and $n\\ge N-i$ respectively. An eventually constant tower of abelian groups is Mittag--Leffler, so its $R^1\\varprojlim$ vanishes, and its limit maps isomorphically to each term past the stabilization index (Stacks Tag 07KW). Hence the left term of the sequence of Step 2 is zero and $H^i(RF(E))\\cong H^i(RF(E_m))$ for every integer $m\\ge\\max(0,N-i-1)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4 proof of part (2), Mittag--Leffler conclusion; More on Algebra Tag 07KW"
-   }
-  },
-  {
-   "text": "Let $i>b+N-1$, i.e. $i\\ge b+N$, and put $m=\\max(0,N-i-1)$; then $m\\ge -b-1$ since $N-i-1\\le -b-1$. Every integer $n$ with $-b\\le n\\le m$ satisfies $n\\ge -b\\ge N-i$, so by [lem-pc-derived-functor-truncation-stabilization] the maps $H^i(RF(E_n))\\to H^i(RF(E_{n-1}))$ for $n=m,m-1,\\dots,-b$ are isomorphisms, and their composite gives $H^i(RF(E_m))\\cong H^i(RF(E_{-b-1}))=H^i(RF(\\tau_{\\ge b+1}E))$. Since $H^j(E)=0$ for $j>b$, $\\tau_{\\ge b+1}E=0$ [def-sbc-standard-tstructure-derived-category], and $RF(0)=0$. With Step 4, $H^i(RF(E))=0$ for every $i>b+N-1$.",
+   "text": "For degree i-1 the successor transition of the natural-number truncation tower is invertible once n≥max(0,N-i), by [lem-pc-derived-functor-truncation-stabilization]. Apply [lem-pc-derived-limit-eventually-iso] to make the left endpoint of the Milnor sequence zero.",
    "uses": [
     "lem-pc-derived-functor-truncation-stabilization",
-    "def-sbc-standard-tstructure-derived-category"
+    "lem-pc-derived-limit-eventually-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4 proof of part (3), final paragraph"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The degree-i tower is eventually zero by the integer induction. For any j choose n=max(j,max(0,-b-1)). The projection of the inverse limit to term n is zero; cone compatibility along n→j implies the projection to j is zero. Limit extensionality therefore makes the inverse limit zero. Both endpoint maps of the Milnor short exact complex are zero; ShortComplex.Exact.isZero_X₂ gives H^i(RF(E))=0.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-qcoh-truncation-derived-limit",
   "lem-pc-derived-limit-milnor-sequence",
+  "def-sbc-standard-tstructure-derived-category",
   "lem-pc-derived-functor-truncation-stabilization",
-  "def-sbc-standard-tstructure-derived-category"
+  "lem-pc-derived-limit-eventually-iso"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D4, part (3), upper-bound clause and proof"
+  "place": "Tag 08D4, proof of (2) and final upper-bound paragraph of (3)",
+  "note": "The same reconstruction/stabilization route, with integer induction proving eventual zero directly rather than identifying a chosen stable term."
  },
  "mathlib_searches": [
   {
@@ -176,5 +153,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T063506-L-3153255",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

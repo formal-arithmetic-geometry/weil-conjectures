@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-derived-limit-eventually-iso",
+ "kind": "statement",
+ "title": "First derived inverse limit vanishes for eventually invertible towers",
+ "statement": "Let $(A_n,f_n:A_{n+1}\\to A_n)_{n\\ge0}$ be an inverse system of abelian groups [def-weil-inverse-system]. Suppose there is $m\\ge0$ such that $f_n$ is an isomorphism for every $n\\ge m$. Then $R^1\\varprojlim_n A_n=0$, where $R^1\\varprojlim$ is the first right derived functor of the additive inverse-limit functor [def-sp-left-exact-additive].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KW (lemma-Rlim), part (3), specialized to eventually constant systems; Tag 08D4 (perfect.tex, lemma-application-nice-K-injective), proof of (2)"
+ },
+ "stmt_deps": [
+  "def-weil-inverse-system",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-derived-limit-roos-abelian-groups] to identify the first right derived inverse limit with the cokernel of the transition endomorphism 1-s [def-weil-tower-transition-endomorphism].",
+   "uses": [
+    "lem-pc-derived-limit-roos-abelian-groups",
+    "def-weil-tower-transition-endomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write P for the product with projections pr_n. Choose m after which each f_n is invertible. Define maps q_n:P→A_n starting with q_m=0. Recursively upwards put q_(n+1)=(q_n-pr_n) followed by f_n inverse. Recursively downwards below m put q_n=pr_n+q_(n+1) followed by f_n. The two recursions give q_n-q_(n+1) followed by f_n=pr_n at every n, including m=0. Product extensionality shows that the product lift of the q_n followed by 1-s is the identity. Thus 1-s is a split epimorphism, its cokernel is zero, and the Roos isomorphism transports this zero object to R^1 lim A.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KW (lemma-Rlim), part (3), specialized to eventually constant systems; Tag 08D4 (perfect.tex, lemma-application-nice-K-injective), proof of (2)",
+  "note": "Explicit split-epimorphism recursion for the eventually constant special case of the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "first derived inverse limit of eventually constant tower of abelian groups vanishes",
+   "results": "Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "first right derived functor of inverse limit vanishes for tower of abelian groups with eventually isomorphism transition maps",
+   "results": "Eight hits, including isZero_rightDerived_obj_injective_succ and generic derived functors; none supplies the eventual-constant inverse-limit assertion.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"lim\"",
+   "results": "Two pointwise derived-functor hasColimit lemmas, no matching inverse-limit result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*lim|lim.*rightDerived|roos|Roos",
+   "results": "One hit in PointwiseRightDerived.lean for hasColimit; no matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step, uniform truncation prerequisite: the vanishing of the first inverse limit in Tag 08D4 (2), used in the upper-bound argument",
+   "via": [
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedLimitEventuallyIso",
+  "file": "lean/Sheaf/CategoryTheory/DerivedLimitEventuallyIso.lean",
+  "declaration": "CategoryTheory.isZero_firstDerivedLimit_of_eventually_isIso",
+  "statement": "theorem isZero_firstDerivedLimit_of_eventually_isIso\n    (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u})\n    (hA : ∃ m : ℕ, ∀ n : ℕ, m ≤ n →\n      IsIso (A.map (homOfLE (Nat.le_succ n)).op)) :\n    IsZero (((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived 1).obj A)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T063506-L-3153255",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T063506-L-3153255",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
