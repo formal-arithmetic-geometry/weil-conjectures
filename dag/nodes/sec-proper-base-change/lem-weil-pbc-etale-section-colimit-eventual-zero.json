@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-etale-section-colimit-eventual-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constructible-finitely-presented",
+   "place": "Step 3 (Hom of an affine representable module sheaf is evaluation); the application of Sites Tag 0738 to sections, injectivity by finite local vanishing.",
+   "via": [
+    "lem-weil-pbc-etale-qcqs-sections-filtered-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Eventual vanishing of a section in an etale sheaf colimit",
+ "statement": "Let $X$ be a scheme and $\\Lambda$ a commutative ring. Let $X_{\\mathrm{Et}}$ be its small etale site [def-weil-pbc-etale-site], and let $G:\\mathcal I\\to\\mathrm{Mod}(X_{\\mathrm{Et}},\\Lambda)$ be a diagram of sheaves of $\\Lambda$-modules [def-weil-pbc-etale-sheaves], [def-weil-sheaf-of-modules-category], indexed by a small filtered category $\\mathcal I$ [def-weil-pbc-category-colimit]. Let $(H,(c_i))$ be a colimit cocone of $G$. Let $U\\to X$ be an object of $X_{\\mathrm{Et}}$ whose underlying scheme is quasi-compact [def-weil-pbc-scheme-conventions]. For any object $i$ of $\\mathcal I$ and $s\\in G_i(U)$ such that $(c_i)_U(s)=0$, there exist an object $j$ and an arrow $f:i\\to j$ such that $G(f)_U(s)=0$. No quasi-separatedness assumption is made on $U$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 0738 (lemma-directed-colimits-sections), proof of part (2), applied to the etale site as in Etale Cohomology, Tag 03Q4 (section-colimit)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Form the sectionwise module presheaf colimit $P$. By [lem-weil-pbc-module-sheaves-colimits-forgetful], its sheafification is the underlying colimit sheaf $H$, compatibly with all coprojections. For constant coefficients the category of module sheaves is the category of sheaves with values in $\\Lambda$-modules. Apply [lem-weil-pbc-site-sheafification-sections-local] to the underlying presheaf of sets: the class of $s$ equals zero locally on a covering of $U$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A morphism between objects of the small etale site is etale by [lem-weil-pbc-etale-composition-cancellation]. Its image is open by [lem-weil-pbc-etale-morphism-open-map]. The images of the witnessing covering arrows form an open cover of the quasi-compact scheme $U$. Choose a finite subfamily still covering $U$; it remains a covering of the etale site.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each member of this finite covering, [lem-weil-pbc-filtered-colimit-sets-elementwise] gives an arrow out of $i$ killing the restriction of $s$. Filteredness gives a cocone over the finite diagram consisting of $i$, the finitely many target objects, and their arrows from $i$; thus there is one arrow $i\\to j$ factoring compatibly through every killing arrow. Its transport of $s$ restricts to zero on all members. By [lem-weil-pbc-pretopology-sheaf-condition], separatedness of $G_j$ gives $G(i\\to j)_U(s)=0$. For an empty covering, $G_i(U)$ is zero and the identity arrow suffices.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-pretopology-sheaf-condition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-pretopology-sheaf-condition",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 0738, proof of part (2); module formulation and arbitrary filtered-category arrow equalizations written out by S2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of a filtered colimit of etale sheaves on a quasi compact scheme that is zero becomes zero at a later stage",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a filtered colimit of etale sheaves on a quasi compact scheme that is zero becomes zero at a later stage",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, exists_appTop_map_eq_zero_of_isLimit (structure sheaves on inverse scheme limits); Scheme.zero_of_zero_cover and exists_of_res_zero_of_qcqs_of_top (structure sheaf sections). None applies to arbitrary etale module sheaves.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*(exists_rep|rep_eq)|sheaf.*colimit",
+   "results": "25 hits: sheaf stalk/skyscraper colimits, condensed colimits, and Concrete.isColimit_exists_rep applications for ringed spaces. No etale sheaf section descent theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionColimitEventualZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionColimitEventualZero.lean",
+  "declaration": "AlgebraicGeometry.etale_section_colimit_eventual_zero",
+  "statement": "theorem etale_section_colimit_eventual_zero (X : Scheme.{u}) (Λ : Type v) [CommRing Λ] (U : X.Etale) [CompactSpace U.left] (I : Type w) [SmallCategory I] [IsFiltered I] (G : I ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{max v w} Λ)) (c : Cocone G) (hc : IsColimit c) : ∀ (i : I) (s : (G.obj i).obj.obj (Opposite.op U)), ((c.ι.app i).hom.app (Opposite.op U)).hom s = 0 → ∃ (j : I) (f : i ⟶ j), ((G.map f).hom.app (Opposite.op U)).hom s = 0",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T042420-L-1821327",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T042420-L-1821327",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

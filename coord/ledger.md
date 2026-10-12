@@ -6001,3 +6001,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/S1/Sheaf.AlgebraicGeometry.IntegralConstantModulePushforwardColimit (stage 3; reviewer PASS; first push; landing 20261012T042419-L-1820990 (interface); batch 20261012T042402; modules 3; new nodes 2)
 - 04:24 L: merged deliver/S1/WeilConjectures.AlgebraicGeometry.Curve.Brauer (stage 3; reviewer PASS; first push; landing 20261012T042419-L-1821106 (interface); batch 20261012T042402; modules 3; new nodes 2)
 - 04:24 L: merged deliver/S2/Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions (stage 3; reviewer PASS; first push; landing 20261012T042419-L-1821220 (interface); batch 20261012T042402; modules 4; new nodes 3)
+- 04:24 L: merged deliver/S2/Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit (stage 3; reviewer PASS; first push; landing 20261012T042420-L-1821327 (interface); batch 20261012T042402; modules 3; new nodes 2)
