@@ -7,7 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.HomComplex
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.HomTensorDifferential
+import Sheaf.Algebra.Homology.HomTensorNaturality
 
 /-!
 # Hom complexes and the total tensor complex
@@ -72,6 +73,22 @@ theorem homComplex_tensorTotal_iso :
               (HomologicalComplex.mapBifunctorMap f g (curriedTensor Mod) (.up ℤ)).op).app M) ≫
             ((homComplexFunctor (R := R)).obj
               (op (CochainComplex.mapBifunctor K' L' (curriedTensor Mod)))).map h := by
-  sorry
+  let := SheafOfModules.monoidalCategory R
+  have (K L M : CochainComplex Mod ℤ) (n : ℤ) :
+      IsIso (homTensorDegreewiseMap R K L M n) :=
+    (homTensorDegreewiseMap_spec R K L M n).2
+  let e (K L M : CochainComplex Mod ℤ) :
+      homComplex (R := R) K (homComplex (R := R) L M) ≅
+        homComplex (R := R) (CochainComplex.mapBifunctor K L (curriedTensor Mod)) M :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun n ↦ asIso (homTensorDegreewiseMap R K L M n))
+      (fun n m _ ↦ homTensorDegreewiseMap_comm R K L M n m)
+  refine ⟨e, ?_⟩
+  intro K K' L L' M M' f g h
+  apply HomologicalComplex.hom_ext
+  intro n
+  dsimp [e]
+  simp only [HomologicalComplex.Hom.isoOfComponents_hom_f]
+  exact homTensorDegreewiseMap_natural R K K' L L' M M' f g h n
 
 end CategoryTheory

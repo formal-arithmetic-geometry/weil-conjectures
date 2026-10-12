@@ -1,0 +1,112 @@
+{
+ "id": "lem-sc-hom-tensor-naturality",
+ "kind": "statement",
+ "title": "Naturality of currying",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-hom-tensor-total",
+   "place": "functoriality",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "For cochain morphisms f : K' ⟶ K, g : L' ⟶ L, and h : M ⟶ M' of sheaf-module complexes over R, and every integer n, the degree-n currying maps commute with the induced contravariant maps in K and L and covariant map in M: precomposition and postcomposition followed by homTensorDegreewiseMap K' L' M' n equals homTensorDegreewiseMap K L M n followed by the map induced by mapBifunctorMap f g and h.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90)"
+ },
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof": [
+  {
+   "text": "functoriality.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A90"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A90"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degreewise currying of Hom complexes tensor total",
+   "results": "No exact theorem; only generic homological complex maps.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex isoOfComponents",
+   "results": "HomologicalComplex.Hom.isoOfComponents; construction used in assembly.",
+   "date": "2026-10-13",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "Hom complex tensor total in Mathlib/Algebra/Homology",
+   "results": "No exact declaration.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorTotal",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorNaturality.lean",
+  "declaration": "CategoryTheory.homTensorDegreewiseMap_natural",
+  "statement": "theorem homTensorDegreewiseMap_natural (K K' L L' M M' : CochainComplex Mod ℤ) (f : K' ⟶ K) (g : L' ⟶ L) (h : M ⟶ M') (n : ℤ) : letI := SheafOfModules.monoidalCategory R ((((homComplexFunctor (R := R)).map f.op).app (homComplex (R := R) L M)) ≫ ((homComplexFunctor (R := R)).obj (op K')).map ((((homComplexFunctor (R := R)).map g.op).app M) ≫ ((homComplexFunctor (R := R)).obj (op L')).map h)).f n ≫ homTensorDegreewiseMap R K' L' M' n = homTensorDegreewiseMap R K L M n ≫ ((((homComplexFunctor (R := R)).map (HomologicalComplex.mapBifunctorMap f g (curriedTensor Mod) (.up ℤ)).op).app M) ≫ ((homComplexFunctor (R := R)).obj (op (CochainComplex.mapBifunctor K' L' (curriedTensor Mod)))).map h).f n",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T235113-L-2172370",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T235113-L-2172370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

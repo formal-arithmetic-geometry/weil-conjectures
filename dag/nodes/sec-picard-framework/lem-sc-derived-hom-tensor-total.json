@@ -26,66 +26,36 @@
  ],
  "proof": [
   {
-   "text": "For each integer n, expand the degree-n term of the left Hom complex using [def-pur-hom-complex]: it is the product over p and q of sheaf-linear maps from K^p tensor L^q to M^{p+q+n}. The degree-n term on the right is the product over r of maps from the direct sum over p+q=r of K^p tensor L^q to M^{r+n}; by the universal property of the direct sum this is the same product over p,q. The identifications use the total-tensor definition [def-pc-tensor-complex-sheaves] and the tensor-Hom adjunction for sheaves of O-modules on a site [lem-pc-sheaf-modules-tensor-closed], applied over each object U of C to the restricted modules on the localized site C/U (a site with the sheaf of rings O|_U), so that the sheaf-Hom terms are identified sectionwise compatibly with restriction.",
+   "text": "Construct the unique invertible degreewise currying map by the tensor-Hom adjunction and product/coproduct universal properties.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "lem-sc-hom-tensor-degreewise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90), degreewise construction"
-   }
+   "elementary": false
   },
   {
-   "text": "Under the degreewise identification, a homogeneous family f=(f_{p,q}) on the left is sent to the unique map on each total-degree summand whose restriction to K^p tensor L^q is the currying of f_{p,q}; explicitly, it sends x tensor y to f_{p,q}(x)(y). Conversely, restrict a map from the total tensor to every summand K^p tensor L^q and uncurry it. The module tensor-Hom adjunction [lem-pc-sheaf-modules-tensor-closed] gives existence and uniqueness on every summand, so these constructions are mutually inverse degreewise.",
+   "text": "The degreewise maps commute with differentials by the Koszul-sign calculation.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex"
+    "lem-sc-hom-tensor-differential"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90), proof of the Hom-total-tensor correspondence"
-   }
+   "elementary": false
   },
   {
-   "text": "The correspondence is a chain map. For a component of bidegree (p,q), the Hom differential is d_M f - (-1)^n f d_K on the outer Hom and, inside the inner Hom, d_M g - (-1)^{p+n} g d_L. The total-tensor differential on K^p tensor L^q is d_K tensor 1 + (-1)^p 1 tensor d_L [def-pc-tensor-complex-sheaves]. Applying the two sides to x tensor y gives the same four terms, with the L-differential term acquiring the factor (-1)^p and the Hom-degree sign producing exactly the factor (-1)^n; hence the displayed correspondence commutes with differentials. This is the direct Koszul-sign verification from the Hom-complex formula [def-pur-hom-complex].",
+   "text": "The degreewise maps are natural in all three complexes.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex"
+    "lem-sc-hom-tensor-naturality"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90), compatibility with differentials"
-   }
-  },
-  {
-   "text": "The inverse constructions commute with maps of K, L, and M because they are defined componentwise by composition and the tensor-Hom adjunction is natural. Therefore the chain isomorphism is functorial in all three complexes.",
-   "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90), functoriality clause"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-sc-hom-tensor-degreewise",
+  "lem-sc-hom-tensor-differential",
+  "lem-sc-hom-tensor-naturality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90); direct degreewise proof because the source text is unavailable in this checkout"
+  "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90), degreewise currying, signs, and naturality"
  },
  "mathlib_searches": [
   {
@@ -188,5 +158,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T235113-L-2172370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
