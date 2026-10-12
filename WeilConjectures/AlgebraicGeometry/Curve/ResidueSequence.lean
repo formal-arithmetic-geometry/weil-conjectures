@@ -59,12 +59,6 @@ class IsFunctionFieldAlgebra (k : Type u) [Field k] (X : Scheme.{u}) [Irreducibl
 
 namespace Modules
 
-/-- Naturality of a morphism of `𝒪_X`-modules, on elements. -/
-lemma Hom.app_presheaf_map_apply {M N : X.Modules} (φ : M ⟶ N) {U U' : X.Opens} (i : U' ≤ U)
-    (s : Γ(M, U)) :
-    φ.app U' (M.presheaf.map (homOfLE i).op s) = N.presheaf.map (homOfLE i).op (φ.app U s) :=
-  ConcreteCategory.congr_hom (φ.mapPresheaf.naturality (homOfLE i).op) s
-
 variable [IsIntegral X] (k : Type u) [Field k] [Algebra k X.functionField]
   {V : Type u} [AddCommGroup V] [Module X.functionField V] [Module k V]
   [IsScalarTower k X.functionField V] {M : X.Modules}
@@ -488,7 +482,7 @@ theorem shortExact_residue : (residueShortComplex k φ).ShortExact := by
           apply hφ
           change φ.app _ (l _ _) = φ.app _ (M.presheaf.map (homOfLE i.unop.le).op (l _ _))
           rw [Hom.app_presheaf_map_apply, hl, hl]
-          exact Hom.app_presheaf_map_apply g i.unop.le a }
+          exact Hom.app_presheaf_map_apply g (homOfLE i.unop.le) a }
     refine ⟨⟨PresheafOfModules.homMk l' fun U r a ↦ hφ _ ?_⟩, ?_⟩
     · erw [Hom.app_smul, hl, hl]
       exact Hom.app_smul g r a

@@ -154,12 +154,6 @@ end ExtendRestrict
 
 section ExactSections
 
-/-- Morphisms of `𝒪_X`-modules commute with restriction of sections. -/
-lemma Hom.app_presheaf_map_apply {M N : X.Modules} (φ : M ⟶ N) {V W : X.Opens} (i : W ⟶ V)
-    (s : Γ(M, V)) : φ.app W (M.presheaf.map i.op s) = N.presheaf.map i.op (φ.app V s) :=
-  congrFun (congrArg DFunLike.coe (congrArg ConcreteCategory.hom
-    (φ.mapPresheaf.naturality i.op))) s
-
 /-- The sections over `W` of an `𝒪_X`-module, as an abelian group. -/
 noncomputable abbrev sectionsAb (W : X.Opens) : X.Modules ⥤ Ab.{u} :=
   toPresheaf X ⋙ (CategoryTheory.evaluation _ _).obj (op W)
