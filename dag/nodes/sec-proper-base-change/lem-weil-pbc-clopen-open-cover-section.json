@@ -29,11 +29,12 @@
  ],
  "proof": [
   {
-   "text": "*The images are open, closed and cover $Z$ (Stacks: 'As $V\\to Z$ is finite we see that $V_i\\to Z$ is also closed. Let $U_i\\subset Z$ be the image').* For $i=1,\\dots,n$ let $k_i:V_i\\to V$ be the inclusion of the open subscheme $V_i$, so that $p_i=p\\circ k_i$, and let $U_i=p(V_i)=p_i(V_i)\\subseteq Z$. Since $p_i$ is an open immersion, $U_i$ is open in $Z$ [def-weil-open-immersion]. Since $p$ is finite it is a closed map (part (1) of [lem-weil-pbc-finite-closed-map-finite-fibres]), and $V_i$ is closed in $V$, so $U_i=p(V_i)$ is closed in $Z$. Since $p$ is surjective [def-weil-surjective-morphism], every $z\\in Z$ is $p(v)$ for some $v\\in V=\\bigcup_iV_i$, say $v\\in V_i$, and then $z\\in U_i$; so $Z=U_1\\cup\\dots\\cup U_n$.",
+   "text": "*The images are open, closed and cover $Z$ (Stacks: 'As $V\\to Z$ is finite we see that $V_i\\to Z$ is also closed. Let $U_i\\subset Z$ be the image').* For $i=1,\\dots,n$ let $k_i:V_i\\to V$ be the inclusion of the open subscheme $V_i$, so that $p_i=p\\circ k_i$, and let $U_i=p(V_i)=p_i(V_i)\\subseteq Z$. Since $p_i$ is an open immersion, $U_i$ is open in $Z$ [def-weil-open-immersion]. Since $p$ is finite it is a closed map (part (1) of [lem-weil-pbc-finite-closed-map-finite-fibres]), and $V_i$ is closed in $V$, so $U_i=p(V_i)$ is closed in $Z$. Since $p$ is surjective [def-weil-surjective-morphism], every $z\\in Z$ is $p(v)$ for some $v\\in V=\\bigcup_iV_i$, say $v\\in V_i$, and then $z\\in U_i$; so $Z=U_1\\cup\\dots\\cup U_n$. In Lean, hcop makes Sigma.desc k an isomorphism; sigmaOpenCover covers the source coproduct, so every point of V lies in some range k_i. This uses [lem-weil-pbc-scheme-coproduct-family].",
    "uses": [
     "def-weil-open-immersion",
     "lem-weil-pbc-finite-closed-map-finite-fibres",
-    "def-weil-surjective-morphism"
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-scheme-coproduct-family"
    ],
    "elementary": false,
    "source": {
@@ -42,7 +43,7 @@
    }
   },
   {
-   "text": "*The strata (Stacks: the decomposition $Z=\\coprod_{(A,B)}\\bigcap_{i\\in A}U_i\\cap\\bigcap_{i\\in B}U_i^c$ over $\\{1,\\dots,n\\}=A\\amalg B$ with $A\\neq\\emptyset$; 'each of the strata is contained in a single $U_i$').* For a nonempty subset $A\\subseteq\\{1,\\dots,n\\}$ put $Z_A=\\bigcap_{i\\in A}U_i\\cap\\bigcap_{i\\notin A}(Z\\setminus U_i)$. Each $U_i$ and each $Z\\setminus U_i$ is open and closed in $Z$ (step 1), so $Z_A$, a finite intersection of open and closed subsets, is open and closed. For $z\\in Z$ let $A(z)=\\{i: z\\in U_i\\}$, which is nonempty by step 1; by definition $z\\in Z_A$ if and only if $A=A(z)$. Hence the $Z_A$ ($A\\neq\\emptyset$) are pairwise disjoint and cover $Z$. Put $i(A)=\\min A$; then $Z_A\\subseteq U_{i(A)}$. (Some $Z_A$ may be empty; nothing below needs them nonempty.)",
+   "text": "Refine the finite clopen cover U_i to pairwise disjoint clopens W_i contained in U_i with the same union. Explicitly choose an ordering and put W_i = U_i minus the union of the earlier U_j. Finite unions and complements of clopens are clopen. Every point of the union belongs to its first U_i, hence to W_i; membership in W_i excludes membership in any earlier U_j, so distinct W_i are disjoint. Lean uses Mathlib Fintype.exists_disjointed_le in the Boolean algebra TopologicalSpace.Clopens Z, followed by Clopens.coe_finset_sup to recover the union. This is the elementary refinement in the source, grouping the subset strata by their chosen least index; empty strata and an empty index type are allowed.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -51,7 +52,7 @@
    }
   },
   {
-   "text": "*The section on one stratum (Stacks: 'we find our section').* Fix $A\\neq\\emptyset$, write $i=i(A)$, and let $j_{Z_A}:Z_A\\to Z$ and $j_{U_i}:U_i\\to Z$ be the inclusions of the open subschemes on $Z_A$ and $U_i$ (step 1, step 2) [def-pc-scheme]. By [lem-weil-pbc-open-immersion-iso-onto-image] applied to the open immersion $p_i:V_i\\to Z$, whose image is $U_i$, there is an isomorphism $\\varphi_i:V_i\\to U_i$ with $j_{U_i}\\circ\\varphi_i=p_i$. Since $j_{Z_A}(Z_A)=Z_A\\subseteq U_i$, [lem-weil-pbc-morphism-factors-through-open-subscheme] gives a morphism $\\iota_A:Z_A\\to U_i$ with $j_{U_i}\\circ\\iota_A=j_{Z_A}$. Put $s_A=k_i\\circ\\varphi_i^{-1}\\circ\\iota_A:Z_A\\to V$. Then $p\\circ s_A=p_i\\circ\\varphi_i^{-1}\\circ\\iota_A=j_{U_i}\\circ\\varphi_i\\circ\\varphi_i^{-1}\\circ\\iota_A=j_{U_i}\\circ\\iota_A=j_{Z_A}$.",
+   "text": "For each i, let O_i be the open underlying W_i. The inclusion O_i -> U_i is Z.homOfLE for W_i <= U_i, the special case of [lem-weil-pbc-morphism-factors-through-open-subscheme]. By [lem-weil-pbc-open-immersion-iso-onto-image], pi_i.isoOpensRange identifies V_i with U_i. Compose O_i -> U_i with its inverse and k_i to obtain t_i : O_i -> V. Associativity, hpi_i, isoOpensRange_inv_comp, and homOfLE_ι give t_i composed with p equal to the inclusion O_i -> Z.",
    "uses": [
     "def-pc-scheme",
     "lem-weil-pbc-open-immersion-iso-onto-image",
@@ -64,9 +65,11 @@
    }
   },
   {
-   "text": "*Gluing the local sections.* By step 2 the open subschemes $Z_A$, $A$ running over the nonempty subsets of $\\{1,\\dots,n\\}$, form an open covering of $Z$. The morphisms $s_A:Z_A\\to V$ of step 3 agree on overlaps: for $A\\neq B$ the overlap $Z_A\\cap Z_B$ is empty (step 2), and a scheme with empty underlying space has exactly one morphism to $V$ (the empty map of spaces, and on structure sheaves the map to $\\mathcal O_{\\emptyset}(\\emptyset)=0$, the zero ring), so $s_A$ and $s_B$ restrict to the same morphism there; for $A=B$ there is nothing to check. By [lem-weil-pbc-scheme-morphism-gluing] there is a morphism $s:Z\\to V$ with $s\\circ j_{Z_A}=s_A$ for every $A$. Then for every $A$, $(p\\circ s)\\circ j_{Z_A}=p\\circ s_A=j_{Z_A}=\\mathrm{id}_Z\\circ j_{Z_A}$ (step 3), so $p\\circ s$ and $\\mathrm{id}_Z$ have the same restriction to every member of the covering, and by the uniqueness clause of [lem-weil-pbc-scheme-morphism-gluing] $p\\circ s=\\mathrm{id}_Z$: $s$ is a section of $p$.",
+   "text": "Assemble over the disjoint covering O_i by the coproduct universal property [lem-weil-pbc-scheme-coproduct-family]. Mathlib nonempty_isColimit_cofanMk_of (AlgebraicGeometry/Limits.lean:313) identifies the inclusion cofan with this coproduct: its sigma-desc map is an open immersion by disjointness, surjective by the covering equality, hence an isomorphism. Cofan.IsColimit.desc gives s with inclusion_i composed with s equal to t_i. By the computation of step 3, inclusion_i composed with s composed with p equals inclusion_i for every i. Cofan.IsColimit.hom_ext therefore gives s composed with p = id_Z. This implements the disjoint gluing of the source without overlap morphisms or a separate empty-scheme argument.",
    "uses": [
-    "lem-weil-pbc-scheme-morphism-gluing"
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion",
+    "def-weil-surjective-morphism"
    ],
    "elementary": false,
    "source": {
@@ -79,15 +82,15 @@
   "def-weil-open-immersion",
   "lem-weil-pbc-finite-closed-map-finite-fibres",
   "def-weil-surjective-morphism",
+  "lem-weil-pbc-scheme-coproduct-family",
   "def-pc-scheme",
   "lem-weil-pbc-open-immersion-iso-onto-image",
-  "lem-weil-pbc-morphism-factors-through-open-subscheme",
-  "lem-weil-pbc-scheme-morphism-gluing"
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, second paragraph ('The final statement is a consequence of the first ...')"
+  "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, second paragraph ('The final statement is a consequence of the first ...'); Lean implementation uses the finite disjointed refinement and the coproduct universal property for the disjoint gluing."
  },
  "mathlib_searches": [
   {
@@ -204,5 +207,15 @@
   "group": "K1",
   "result": "pass",
   "note": "Z V : Scheme, p : V ⟶ Z [IsFinite p] [Surjective p] (AlgebraicGeometry.* by pp.fullNames #check); ⨿V_i = Fin n family with IsColimit (Cofan.mk V k), k open+closed immersions (clopen subschemes); p_i = k i ≫ p via hpi with IsOpenImmersion; conclusion ∃ s, s ≫ p = 𝟙 Z; n=0 forces Z empty, true"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8e6c9",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T135325-L-1696276",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered proof and node match the unchanged theorem statement; all files compile, and the sole direct importer compiles with the private Limits import."
  }
 }
