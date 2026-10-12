@@ -9529,3 +9529,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:04 L: merged deliver/A2/Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisInvariants (stage 3; reviewer PASS; first push; landing 20261012T210407-L-969302 (interface); batch 20261012T210406; modules 3; new nodes 2)
 - 21:04 L: merged deliver/T3/Sheaf.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection (stage 3; reviewer PASS; first push; landing 20261012T210408-L-969449 (interface); batch 20261012T210406; modules 3; new nodes 2)
 - 21:04 L: merged deliver/X3/Sheaf.Paper.LocalStalkSectionsDescentSections (stage 3; reviewer PASS; first push; landing 20261012T210408-L-969646 (interface); batch 20261012T210406; modules 2; new nodes 1)
+- 21:04 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore (stage 3; reviewer PASS; first push; landing 20261012T210409-L-969754 (interface); batch 20261012T210406; modules 3; new nodes 2)

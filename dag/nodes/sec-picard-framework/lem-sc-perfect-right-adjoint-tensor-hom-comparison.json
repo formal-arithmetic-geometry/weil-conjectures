@@ -1,0 +1,108 @@
+{
+ "id": "lem-sc-perfect-right-adjoint-tensor-hom-comparison",
+ "kind": "statement",
+ "title": "perfect rightAdjoint tensor hom comparison",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes with the derived categories of sheaves of modules [def-pc-derived-category], derived pullback $F=Lf^*$ [def-pc-derived-pullback], derived direct image $R=Rf_*$ [def-pc-derived-direct-image], and derived tensor [def-pc-scheme-derived-tensor-structure]. Suppose $R$ preserves quasi-coherent cohomology, the tensor unit on $Y$ has quasi-coherent cohomology, and $F(J)\\otimes E$ has quasi-coherent cohomology for every quasi-coherent $J,E$. Choose a strong monoidal structure on $F$, an adjunction $a:F\\dashv R$, and a right adjoint $c$ to the restriction of $R$ to the full quasi-coherent subcategories, with adjunction $b:R\\dashv c$. Let $K,D$ be quasi-coherent objects on $Y$ with evaluation $D\\otimes K\\to1$ and coevaluation $1\\to K\\otimes D$ satisfying both triangle identities. Give their pullbacks the mapped exact pairing. Write $O$ for the unit on $Y$. For every quasi-coherent $E$ on $X$, suppose isomorphisms $p_K:R(F(K)\\otimes c(O))\\to K\\otimes R(c(O))$ and $p_D:R(F(D)\\otimes E)\\to D\\otimes R(E)$ are given, whose inverses are the $a$-adjuncts of the inverse tensorators followed by tensoring with the counit of $a$. For every $q:E\\to F(K)\\otimes c(O)$, the successive Hom bijections given by pulled tensor duality, $b^{-1}$, precomposition with $p_D^{-1}$, tensor duality on $Y$, the right unitor, and $b$ send $q$ to $q$ followed by the $b$-adjunct of $p_K$, then $K$ tensor the counit of $b$ at $O$, then the right unitor of $K$. All Hom sets are those of the full quasi-coherent subcategories, with the displayed closure hypotheses furnishing their objects.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9T"
+ },
+ "proof": [
+  {
+   "text": "transpose both sides under `adj`. Naturality of its Hom equivalence turns\npostcomposition with the mate into application of the restricted direct image to q,\nfollowed by the counit defining that mate. Expand the two tensor-Hom equivalences:\nthe first inserts evaluation of the pulled-back dual and the second inserts\ncoevaluation of the original dual. Replace the inverses of pfK and pfD by their\nspecified pullback-adjoint formulas. Naturality of the pullback and right-adjoint\ncounits moves q and evaluation through those formulas. The tensorator's naturality\nidentifies evaluation of the mapped pairing with pullback of evaluation. Its\nassociativity and unit laws rearrange the resulting evaluation-coevaluation pair;\nthe triangle identity cancels it. The remaining composite is the restricted direct\nimage of q followed by pfK, the tensor of the right-adjoint counit at the unit, and\nthe right unitor. This is precisely the transpose of the right-hand side.\nFull-subcategory morphisms have the same composition as the ambient morphisms,\nso the same calculation applies to the displayed `homMk` morphisms.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projection formula for monoidal left adjoint at dualizable object",
+   "results": "No existing theorem with the required canonical normalization. Mathlib provides tensorLeftAdjunction and conjugateEquiv; the library projection theorem concerns invertible sheaves only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ExactPairing",
+   "results": "No existing theorem with the required canonical normalization. Mathlib provides tensorLeftAdjunction and conjugateEquiv; the library projection theorem concerns invertible sheaves only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|projection.*[Ii]so",
+   "results": "No existing theorem with the required canonical normalization. Mathlib provides tensorLeftAdjunction and conjugateEquiv; the library projection theorem concerns invertible sheaves only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula dualizable object monoidal adjunction",
+   "results": "UNAVAILABLE: Internal Server Error; other searches and source grep used.",
+   "date": "2026-10-13",
+   "available": false,
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-smooth-proper-tensor-perfect-case-core",
+   "place": "canonical comparison coherence calculation"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectRightAdjointTensorHomComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectRightAdjointTensorHomComparison.lean",
+  "declaration": "AlgebraicGeometry.perfect_rightAdjoint_tensor_hom_comparison",
+  "statement": "theorem perfect_rightAdjoint_tensor_hom_comparison\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (hRf : ∀ E : schemeDerivedQCohCategory X,\n      schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj))\n    (hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y)))\n    (hTensor : ∀ (K : schemeDerivedQCohCategory Y) (E : schemeDerivedQCohCategory X),\n      schemeDerivedQCohProperty X (((derivedPullback f).obj K.obj) ⊗ E.obj))\n    [Functor.Monoidal (derivedPullback f)]\n    (a : derivedPullback f ⊣ schemeDerivedDirectImage f)\n    (c : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)\n    (adj : (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) hRf ⊣ c)\n    (K D : schemeDerivedQCohCategory Y) [ExactPairing K.obj D.obj]\n    (E : schemeDerivedQCohCategory X)\n    (pfK : (schemeDerivedDirectImage f).obj\n        (((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅\n      K.obj ⊗ (schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj)\n    (hpK : pfK.inv = (a.homEquiv _ _)\n      ((Functor.Monoidal.μIso (derivedPullback f) K.obj\n        ((schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj)).inv ≫\n        (derivedPullback f).obj K.obj ◁ a.counit.app (c.obj ⟨𝟙_ _, hO⟩).obj))\n    (pfD : (schemeDerivedDirectImage f).obj\n        (((derivedPullback f).obj D.obj) ⊗ E.obj) ≅\n      D.obj ⊗ (schemeDerivedDirectImage f).obj E.obj)\n    (hpD : pfD.inv = (a.homEquiv _ _)\n      ((Functor.Monoidal.μIso (derivedPullback f) D.obj\n        ((schemeDerivedDirectImage f).obj E.obj)).inv ≫\n        (derivedPullback f).obj D.obj ◁ a.counit.app E.obj))\n    (q : E ⟶ ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj,\n      hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩) :\n    let p := ExactPairing.map (derivedPullback f) K.obj D.obj\n    (adj.homEquiv E K)\n      (ObjectProperty.homMk\n        (tensorLeftHomEquiv ((schemeDerivedDirectImage f).obj E.obj) K.obj D.obj\n          (𝟙_ (schemeDerivedCategory Y))\n          (pfD.inv ≫ ((adj.homEquiv\n            ⟨((derivedPullback f).obj D.obj) ⊗ E.obj, hTensor D E⟩ ⟨𝟙_ _, hO⟩).symm\n            (ObjectProperty.homMk\n              ((@tensorLeftHomEquiv _ _ _ E.obj ((derivedPullback f).obj K.obj)\n                ((derivedPullback f).obj D.obj) (c.obj ⟨𝟙_ _, hO⟩).obj p).symm\n                q.hom))).hom) ≫ (ρ_ K.obj).hom)) =\n      q ≫ (adj.homEquiv\n        ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj,\n          hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)\n        (ObjectProperty.homMk (pfK.hom ≫\n          K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T210409-L-969754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T210409-L-969754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
