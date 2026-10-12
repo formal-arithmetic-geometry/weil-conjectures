@@ -3,6 +3,8 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
+import Mathlib.RingTheory.RingHom.Flat
+
 @[expose] public section
 
 universe u v
@@ -27,6 +29,23 @@ theorem standard_fpqc_quotient_topology
     (hW : ∀ j : J,
       IsOpen ((Spec.map (CommRingCat.ofHom (algebraMap R (A j)))) ⁻¹' W)) :
     IsOpen W := by
-  sorry
+  let B := ∀ j, A j
+  have hq : Topology.IsQuotientMap (PrimeSpectrum.comap (algebraMap R B)) :=
+    PrimeSpectrum.isQuotientMap_of_generalizingMap
+      PrimeSpectrum.comap_surjective_of_faithfullyFlat
+      (RingHom.Flat.generalizingMap_comap
+        (RingHom.flat_algebraMap_iff.mpr inferInstance))
+  apply hq.isOpen_preimage.mp
+  apply (PrimeSpectrum.sigmaToPiHomeo A).isOpen_preimage.mp
+  rw [isOpen_sigma_iff]
+  intro j
+  have hj : IsOpen (PrimeSpectrum.comap (algebraMap R (A j)) ⁻¹' W) := hW j
+  convert hj using 1
+  ext p
+  change PrimeSpectrum.comap (algebraMap R B)
+      (PrimeSpectrum.comap (Pi.evalRingHom A j) p) ∈ W ↔
+    PrimeSpectrum.comap (algebraMap R (A j)) p ∈ W
+  rw [← PrimeSpectrum.comap_comp_apply]
+  rfl
 
 end AlgebraicGeometry
