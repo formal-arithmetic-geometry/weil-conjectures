@@ -12,28 +12,38 @@
  ],
  "proof": [
   {
-   "text": "The triangle tau<=q-1 K -> tau<=q K -> H^q(K)[-q] with the boundary\nchosen by `TruncationCouple.existsUnique_boundary` is distinguished. Apply the\ntriangulated right derived functor and its homology sequence. Transport exactness\nacross the three bridge isomorphisms. The g-f and f-alpha pairs use the triangle at q, in total degrees p+q\nand p+q+1 respectively; the alpha-g pair uses the triangle at q+1, in total\ndegree p+q.\nThe index identities preserve total degree, and transport of exact short complexes\npreserves both their zero composites and their image-equals-kernel condition.",
+   "text": "The triangle tau<=q-1 K -> tau<=q K -> H^q(K)[-q] with the boundary chosen by `TruncationCouple.existsUnique_boundary` is distinguished. Apply the unbounded right-derived functor and its homology sequence. Transport exactness across the three bridge isomorphisms. The g-f and f-alpha pairs use the triangle at q, in total degrees p+q and p+q+1 respectively; the alpha-g pair uses the  triangle at q+1, in total degree p+q. Equality transport handles the index identities and preserves zero composites and exactness.",
    "uses": [
     "def-sp-truncation-couple",
     "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-derived-direct-image-triangulated"
+    "lem-pc-right-derived-functor-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
-    "place": "proof, step 1; Lean refinement with the same objects and canonical maps"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply DerivedCategory.HomologySequence.exact₁ and exact₃ to the image triangle at q in consecutive degrees p+q and p+q+1, and exact₂ to the image triangle at q+1 in degree p+q. These give the three exact pairs before transport to the chosen-resolution cohomology objects.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport each short complex through the three bridge isomorphisms with ShortComplex.isoMk and ShortComplex.exact_of_iso. The private exact_transport helper derives the transported zero composite by cancellation of the first isomorphism. Naturality of indexed morphisms under equality transports is proved by equality elimination; it identifies the transported arrows with f, alpha and g. The index equalities q-1+1=q, (q+1)-1=q, p+2+(q-1)=p+q+1, and p-1+(q+1)=p+q are checked by integer arithmetic. Generic equality-transport helpers account for the zero bidegree in g. No additional unproved statements are required.",
+   "uses": [
+    "def-sp-truncation-couple"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-truncation-couple",
   "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-derived-direct-image-triangulated"
+  "lem-pc-right-derived-functor-triangulated"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "S3",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-sp-truncation-e2.md",
-  "place": "Lean interface refinement of step 1"
+  "place": "proof, step 1; Lean implementation using the unbounded right-derived-functor triangulated instance"
  },
  "mathlib_searches": [
   {
@@ -116,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T070547-L-3475880",
-  "kind": "interface",
+  "landing": "20261012T144145-L-2107526",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

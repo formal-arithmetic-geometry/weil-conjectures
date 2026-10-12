@@ -8200,3 +8200,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/S2/Sheaf.CategoryTheory.SheafAbelianObjectsInjective (stage 3; reviewer PASS; first push; landing 20261012T144144-L-2107220 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/S2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (stage 3; reviewer PASS; first push; landing 20261012T144145-L-2107329 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/S3/Sheaf.AlgebraicGeometry.SmoothDiagonalIdealConormalRank (stage 3; reviewer PASS; first push; landing 20261012T144145-L-2107425 (interface); batch 20261012T144049; modules 2; new nodes 1)
+- 14:41 L: merged deliver/S3/Sheaf.CategoryTheory.TruncationRawExact (stage 3; reviewer PASS; first push; landing 20261012T144145-L-2107526 (proof); batch 20261012T144049; modules 1; new nodes 0)
