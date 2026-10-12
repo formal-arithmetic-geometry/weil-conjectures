@@ -205,7 +205,12 @@ This is weaker than an exact pairing (`CategoryTheory.ExactPairing`), which also
 coevaluation `𝟙_ C ⟶ Y ⊗ X` satisfying the zigzag identities: the evaluation of an exact
 pairing `ExactPairing X Y` is a perfect pairing `Y ⊗ X ⟶ 𝟙_ C`, but a perfect pairing of an
 object that is not dualizable is not part of an exact pairing. It is not to be confused with
-`LinearMap.IsPerfPair`, perfectness of a bilinear form on modules. -/
+`LinearMap.IsPerfPair`, perfectness of a bilinear form on modules.
+
+This is the perfectness of a pairing of blueprint `sk-def-pairing` and
+`def-pod-perfect-derived-pairing`; its symmetry in the two variables (blueprint
+`rem-ptr-pod-perfect-derived-pairing-6`) is
+`CategoryTheory.MonoidalClosed.isPerfectPairing_braiding_hom_comp_iff`. -/
 structure IsPerfectPairing {X Y : C} (b : X ⊗ Y ⟶ 𝟙_ C) : Prop where
   /-- The adjoint `Y ⟶ [X, 𝟙_ C]` of the pairing is an isomorphism. -/
   isIso : IsIso (curry b)

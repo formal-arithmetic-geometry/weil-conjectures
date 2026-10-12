@@ -56,6 +56,9 @@ complexes, where the unit is given degreewise by the unit of `adj`.
 - `CategoryTheory.Adjunction.mapHomotopyCategoryPlus_unit_app_comp_id`: the special case
   `adjB = Adjunction.id` of the previous statement, for an adjunction `L ⊣ R` of
   endofunctors and isomorphisms `L ≅ 𝟭`, `R ≅ 𝟭`.
+- `CategoryTheory.Adjunction.mapHomotopyCategoryPlus_unit_app_comp_whisker`: the variant of
+  `CategoryTheory.Adjunction.mapHomotopyCategoryPlus_unit_app_comp` for adjunctions with different
+  targets related by a functor.
 -/
 
 @[expose] public section
@@ -479,6 +482,83 @@ lemma mapHomotopyCategoryPlus_unit_app_comp [Limits.HasBinaryBiproducts C]
   exact mapHomotopyCategory_unit_app_comp (ComplexShape.up ℤ) adjA adjB u l h K.obj
 
 end Conjugate
+
+section ConjugateWhisker
+
+variable {E : Type*} [Category* E] [Preadditive E] {LA : C ⥤ D} {RA : D ⥤ C} {LB : C ⥤ E}
+  {RB : E ⥤ C} {H : E ⥤ D} [LA.Additive] [RA.Additive] [LB.Additive] [RB.Additive] [H.Additive]
+  (adjA : LA ⊣ RA) (adjB : LB ⊣ RB) (u : LA ⟶ LB ⋙ H) (l : RB ⟶ H ⋙ RA)
+  (h : ∀ M, adjA.unit.app M ≫ RA.map (u.app M) = adjB.unit.app M ≫ l.app (LB.obj M))
+
+include h in
+/-- The variant of `Adjunction.mapHomologicalComplex_unit_app_comp` for adjunctions `LA ⊣ RA`,
+`LB ⊣ RB` with different targets, related by a functor `H` and transformations
+`u : LA ⟶ LB ⋙ H`, `l : RB ⟶ H ⋙ RA` satisfying `adjA.unit ≫ RA(u) = adjB.unit ≫ l`. -/
+lemma mapHomologicalComplex_unit_app_comp_whisker (M : HomologicalComplex C c) :
+    (adjA.mapHomologicalComplex c).unit.app M ≫
+        (RA.mapHomologicalComplex c).map ((NatTrans.mapHomologicalComplex u c).app M) =
+      (adjB.mapHomologicalComplex c).unit.app M ≫
+        (NatTrans.mapHomologicalComplex l c).app ((LB.mapHomologicalComplex c).obj M) := by
+  ext n
+  exact h (M.X n)
+
+include h in
+/-- The homotopy category form of `Adjunction.mapHomologicalComplex_unit_app_comp_whisker`. -/
+lemma mapHomotopyCategory_unit_app_comp_whisker
+    [(HomotopyCategory.quotient C c).IsLocalization
+      (HomologicalComplex.homotopyEquivalences C c)]
+    [(HomotopyCategory.quotient D c).IsLocalization
+      (HomologicalComplex.homotopyEquivalences D c)]
+    [(HomotopyCategory.quotient E c).IsLocalization
+      (HomologicalComplex.homotopyEquivalences E c)]
+    (Z : HomotopyCategory C c) :
+    (adjA.mapHomotopyCategory c).unit.app Z ≫
+        (RA.mapHomotopyCategory c).map ((NatTrans.mapHomotopyCategory u c).app Z) =
+      (adjB.mapHomotopyCategory c).unit.app Z ≫
+        (NatTrans.mapHomotopyCategory l c).app ((LB.mapHomotopyCategory c).obj Z) := by
+  obtain ⟨M, rfl⟩ := HomotopyCategory.quotient_obj_surjective Z
+  have hu : (NatTrans.mapHomotopyCategory u c).app ((HomotopyCategory.quotient C c).obj M) =
+      (HomotopyCategory.quotient D c).map ((NatTrans.mapHomologicalComplex u c).app M) := rfl
+  have hl : (NatTrans.mapHomotopyCategory l c).app
+      ((LB.mapHomotopyCategory c).obj ((HomotopyCategory.quotient C c).obj M)) =
+      (HomotopyCategory.quotient C c).map
+        ((NatTrans.mapHomologicalComplex l c).app ((LB.mapHomologicalComplex c).obj M)) := rfl
+  have hmapR : ∀ {P Q : HomologicalComplex D c} (g : P ⟶ Q),
+      (RA.mapHomotopyCategory c).map ((HomotopyCategory.quotient D c).map g) =
+        (HomotopyCategory.quotient C c).map ((RA.mapHomologicalComplex c).map g) :=
+    fun _ => rfl
+  rw [mapHomotopyCategory_unit_app_quotient, mapHomotopyCategory_unit_app_quotient, hu, hl,
+    hmapR, ← Functor.map_comp, ← Functor.map_comp,
+    mapHomologicalComplex_unit_app_comp_whisker c adjA adjB u l h]
+
+include h in
+/-- The bounded below homotopy category form of
+`Adjunction.mapHomologicalComplex_unit_app_comp_whisker`. -/
+lemma mapHomotopyCategoryPlus_unit_app_comp_whisker [Limits.HasBinaryBiproducts C]
+    [Limits.HasBinaryBiproducts D] [Limits.HasBinaryBiproducts E]
+    (K : HomotopyCategory.Plus C) :
+    adjA.mapHomotopyCategoryPlus.unit.app K ≫
+        RA.mapHomotopyCategoryPlus.map ((NatTrans.mapHomotopyCategoryPlus u).app K) =
+      adjB.mapHomotopyCategoryPlus.unit.app K ≫
+        (NatTrans.mapHomotopyCategoryPlus l).app (LB.mapHomotopyCategoryPlus.obj K) := by
+  apply (HomotopyCategory.Plus.ι C).map_injective
+  have hmapR : ∀ {P Q : HomotopyCategory.Plus D} (g : P ⟶ Q),
+      (HomotopyCategory.Plus.ι C).map (RA.mapHomotopyCategoryPlus.map g) =
+        (RA.mapHomotopyCategory (ComplexShape.up ℤ)).map
+          ((HomotopyCategory.Plus.ι D).map g) := fun _ => rfl
+  have hu : (HomotopyCategory.Plus.ι D).map ((NatTrans.mapHomotopyCategoryPlus u).app K) =
+      (NatTrans.mapHomotopyCategory u (ComplexShape.up ℤ)).app
+        ((HomotopyCategory.Plus.ι C).obj K) := rfl
+  have hl : (HomotopyCategory.Plus.ι C).map
+      ((NatTrans.mapHomotopyCategoryPlus l).app (LB.mapHomotopyCategoryPlus.obj K)) =
+      (NatTrans.mapHomotopyCategory l (ComplexShape.up ℤ)).app
+        ((LB.mapHomotopyCategory (ComplexShape.up ℤ)).obj
+          ((HomotopyCategory.Plus.ι C).obj K)) := rfl
+  rw [Functor.map_comp, Functor.map_comp, hmapR, hu, hl,
+    ι_map_mapHomotopyCategoryPlus_unit_app, ι_map_mapHomotopyCategoryPlus_unit_app]
+  exact mapHomotopyCategory_unit_app_comp_whisker (ComplexShape.up ℤ) adjA adjB u l h K.obj
+
+end ConjugateWhisker
 
 section ConjugateId
 
