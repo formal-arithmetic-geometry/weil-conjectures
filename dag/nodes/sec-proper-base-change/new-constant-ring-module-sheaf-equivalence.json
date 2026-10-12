@@ -1,0 +1,141 @@
+{
+ "id": "new-constant-ring-module-sheaf-equivalence",
+ "kind": "statement",
+ "title": "Equivalence of module-valued sheaves with constant-ring module sheaves",
+ "statement": "Let X be a scheme with its small etale site [def-weil-pbc-etale-site], and let r be any natural number, including zero. The category of sheaves valued in modules over the single lift of ZMod r [def-weil-pbc-etale-sheaves] is equivalent to the category of sheaves of modules [def-weil-sheaf-of-modules-category] over the constant ring sheaf [def-weil-pbc-constant-sheaf] of the double lift of ZMod r. There exists such an equivalence E together with a natural isomorphism from the underlying-abelian-sheaf functor on the first category to E followed by the underlying-abelian-sheaf functor on the second. No injectivity condition is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03CY",
+  "place": "Modules on Sites, Lemma 18.11.1: simultaneous sheafification of a ring presheaf and its modules; specialize the ring presheaf to the constant presheaf. The equivalence is the explicit constant-ring specialization of this construction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Identify the single and double lifts of ZMod r by the ring isomorphism up(a) -> up(up(a)). Transport scalar structures along this isomorphism. All underlying abelian groups and abelian maps stay the same.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a module-valued sheaf, regard its action as an action of the constant ring presheaf. Sheafify this action together with the ring using Lemma 03CY. Concretely, locally lift a scalar section to a constant scalar, act on the restricted module section, and glue; common refinements and sheaf separatedness show independence of lifts. The module laws hold locally and hence globally. Since the underlying abelian presheaf is already a sheaf, its sheafification is canonically isomorphic to it. This gives the forward functor and its underlying-abelian-sheaf comparison.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict a constant-ring-sheaf action along the sheafification unit, and transport along the inverse lift-ring isomorphism. Restrictions are linear over constant scalars, giving a module-valued sheaf. Morphisms in both directions keep the underlying abelian map; forward linearity is checked locally and backward linearity follows by restriction. Uniqueness of action extension shows that forward and backward are inverse up to natural isomorphism, producing the required equivalence and natural forgetful comparison.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03CY",
+  "place": "Modules on Sites, Lemma 18.11.1: simultaneous sheafification of a ring presheaf and its modules; specialize the ring presheaf to the constant presheaf. The equivalence is the explicit constant-ring specialization of this construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves valued in modules are equivalent to modules over the constant sheaf of rings",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of module-valued sheaves and sheaves of modules over the constant ring sheaf",
+   "results": "Eight hits: SheafOfModules.forgetToSheafModuleCat, toSheafCompSheafToPresheafIso, toSheaf, unit, unitHomEquiv and object formulas.",
+   "date": "2026-10-12",
+   "verdict": "No equivalence with a constant ring sheaf; forgetToSheafModuleCat uses the full ring of terminal sections, which need not equal the coefficient ring."
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence|constant|sheafification in Mathlib/Algebra/Category/ModuleCat/{Sheaf,Presheaf} and project source",
+   "results": "PresheafOfModules.sheafify, sheafifyMap, sheafificationAdjunction, and full/faithful restriction primitives exist.",
+   "date": "2026-10-12",
+   "verdict": "These supply the action-extension construction, but not its packaging as the required equivalence with module-valued sheaves."
+  },
+  {
+   "tool": "blueprint",
+   "query": "constant ring; module-valued equivalence",
+   "results": "Eight blueprint matches for constant ring; none states the encoding equivalence.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate blueprint statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-p1-strict-henselian-comparison",
+   "place": "Proof, second paragraph: injective-module resolution argument; encoding comparison, step 1 of new-module-valued-injective-cohomology-comparison",
+   "via": [
+    "new-module-valued-injective-cohomology-comparison",
+    "new-module-acyclic-effacement-ladder",
+    "lem-weil-pbc-module-acyclic-cohomology-comparison",
+    "lem-weil-pbc-prime-injective-cohomology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantRingModuleSheafEquivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantRingModuleSheafEquivalence.lean",
+  "declaration": "AlgebraicGeometry.Etale.constantRing_moduleSheaf_equivalence",
+  "statement": "theorem constantRing_moduleSheaf_equivalence (X : Scheme.{u}) (r : ℕ) :\n    ∃ E : Sheaf X.smallEtaleTopology\n        (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) ≌\n      SheafOfModules.{u + 1}\n        ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj\n          (RingCat.of (ULift.{u + 1, u} (ULift.{u} (ZMod r))))),\n      Nonempty\n        (sheafCompose X.smallEtaleTopology\n            (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))\n              AddCommGrpCat.{u + 1}) ≅\n          E.functor ⋙ SheafOfModules.toSheaf _)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T032116-L-1384760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T032116-L-1384760",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

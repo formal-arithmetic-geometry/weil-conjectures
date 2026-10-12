@@ -20,48 +20,45 @@
  ],
  "proof": [
   {
-   "text": "Put R = ULift ZMod(r) in the scheme universe. The single and double lifts of ZMod(r) are canonically isomorphic rings. A module-valued sheaf has an action of the constant ring presheaf; extend it uniquely to the constant ring sheaf by locally representing a scalar by a constant scalar, acting on the restricted section, and gluing. The module laws hold locally and hence globally. Conversely restrict along the sheafification unit. On morphisms both constructions retain the underlying abelian morphism and linearity is checked locally. These inverse constructions give an equivalence commuting with the underlying abelian sheaf.",
+   "text": "Apply new-constant-ring-module-sheaf-equivalence to obtain E and the natural isomorphism e of underlying abelian sheaves. Set I = E.functor.obj J. Mathlib Equivalence.map_injective_iff transports injectivity from J to I.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification"
+    "new-constant-ring-module-sheaf-equivalence",
+    "def-sp-injective-resolutions"
    ],
    "elementary": false
   },
   {
-   "text": "Let I be the image of J under this equivalence. Given a monomorphism and a map into I, transport them to the module-valued category, extend the map by injectivity of J, and transport the extension back. Thus I is injective. The underlying abelian sheaf of I is isomorphic to the forgotten J.",
-   "uses": [
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "The terminal object of the small etale site is X with its identity map. By the constant-sheaf adjunction, maps from the constant integer sheaf to any abelian sheaf identify additively and naturally with its sections at X. Apply this identification termwise to an abelian-sheaf injective resolution. Its Hom complex computes Ext from the constant integer sheaf, and its evaluation complex computes right-derived evaluation. Taking cohomology gives an additive equivalence in each degree. Compose with the underlying-sheaf isomorphism from the preceding step. No vanishing theorem is used in this comparison.",
+   "text": "The identity etale object is terminal by MorphismProperty.Over.mkIdTerminal. Write F for the underlying abelian sheaf of I and Gamma for evaluation at that terminal object. In degree zero compose Sheaf.H.equiv₀ F hT with the inverse additive equivalence of Gamma.rightDerivedZeroIsoSelf.app F.",
    "uses": [
     "def-weil-pbc-etale-site",
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-global-sections-functor",
-    "def-weil-pbc-etale-cohomology",
-    "def-sp-injective-resolutions"
+    "def-sp-left-exact-additive"
    ],
    "elementary": false
+  },
+  {
+   "text": "In degree n+1 apply new-sheaf-cohomology-derived-evaluation to F. In every degree transport H from the forgotten J to F by mapping e.app J through Sheaf.functorH and converting the resulting abelian-group isomorphism to an additive equivalence. Compose with the preceding degree-specific comparison.",
+   "uses": [
+    "new-sheaf-cohomology-derived-evaluation",
+    "new-constant-ring-module-sheaf-equivalence"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-sheafification",
+  "new-constant-ring-module-sheaf-equivalence",
   "def-sp-injective-resolutions",
   "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-global-sections-functor",
-  "def-weil-pbc-etale-cohomology"
+  "def-sp-left-exact-additive",
+  "new-sheaf-cohomology-derived-evaluation"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/03FD",
-  "place": "Cohomology on Sites, Lemma 03FD, proof: comparison of module and abelian cohomology; the constant-ring specialization and the definition of cohomology via injective resolutions"
+  "place": "Original encoding/derived-evaluation plan, assembled in Lean using the equivalence and positive-degree bridge; degree zero and preservation of injectivity are proved directly with Mathlib."
  },
  "mathlib_searches": [
   {
@@ -159,11 +156,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-3b847",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T021211-L-1003999",
+  "landing": "20261012T032116-L-1384760",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures match both node records; the unchanged item follows its revised proof dependencies, both modules compile cleanly, and axiom checks match the documented open obligations."
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

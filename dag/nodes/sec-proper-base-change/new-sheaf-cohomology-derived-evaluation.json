@@ -1,0 +1,146 @@
+{
+ "id": "new-sheaf-cohomology-derived-evaluation",
+ "kind": "statement",
+ "title": "Positive Ext sheaf cohomology agrees with right-derived terminal evaluation",
+ "statement": "Let C be a category with Grothendieck topology J [def-weil-pbc-sites-and-cohomology]. Assume abelian-group sheafification in universe w [def-weil-pbc-sheafification], Ext groups in universe w for the abelian sheaf category, and injective resolutions in that category [def-sp-injective-resolutions]. Let T be a terminal object and F any sheaf of abelian groups. For every natural number q there is an additive equivalence between Ext^(q+1)(Z_J,F), where Z_J is the constant sheaf [def-weil-pbc-constant-sheaf] of lifted integers (Mathlib Sheaf.H F (q+1)), and the value at F of the (q+1)-st right-derived functor [def-sp-left-exact-additive] of evaluation at T after inclusion of sheaves into presheaves.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FT",
+  "place": "Cohomology on Sites, Section 21.2, Equation (21.2.0.1) and the following right-derived-functor description; identify Mathlib Sheaf.H with this definition by the constant-sheaf adjunction and the injective-resolution computation of Ext."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "Let Z_J be the constant integer sheaf. The constant-sheaf adjunction at terminal T identifies Hom(Z_J,F) with Hom(Z,F(T)), and evaluation at 1 gives an additive natural equivalence with F(T). The inverse sends a section s to n -> n*s. These formulas commute with every morphism of abelian sheaves.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose an injective resolution R of F in the abelian sheaf category. Apply the preceding natural equivalence degreewise to identify the Hom(Z_J,R) complex with the evaluation complex R(T). Naturality makes this commute with each differential, so the two complexes have additively equivalent cohomology in degree q+1.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The Hom-complex cohomology is Ext^(q+1)(Z_J,F), as computed by Mathlib InjectiveResolution.extAddEquivCohomologyClass and HomComplex.homologyAddEquiv. The evaluation-complex cohomology is right-derived evaluation, as computed by InjectiveResolution.isoRightDerivedObj. Compose the first comparison, the cohomology of the complex isomorphism, and the inverse of the second. No module-sheaf injectivity or vanishing result enters.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FT",
+  "place": "Cohomology on Sites, Section 21.2, Equation (21.2.0.1) and the following right-derived-functor description; identify Mathlib Sheaf.H with this definition by the constant-sheaf adjunction and the injective-resolution computation of Ext."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext from the constant integer sheaf is right derived evaluation at a terminal object",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext from the constant integer sheaf agrees with right derived evaluation at the terminal object",
+   "results": "Eight hits: Sheaf.H, cohomologyPresheaf, cohomologyPresheafFunctor, Ext.homEquiv, Ext.homLinearEquiv, ProjectiveResolution.isoExt.",
+   "date": "2026-10-12",
+   "verdict": "No direct bridge."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "Twelve hits, including rightDerivedZeroIsoSelf, InjectiveResolution tools, and isZero_rightDerived_obj_injective_succ.",
+   "date": "2026-10-12",
+   "verdict": "Degree-zero comparison is available and is used directly in the parent proof; no positive-degree sheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "extFunctor.*rightDerived|rightDerived.*extFunctor|extAddEquivCohomologyClass",
+   "results": "No packaged Ext/rightDerived comparison. Mathlib has InjectiveResolution.extAddEquivCohomologyClass and isoRightDerivedObj.",
+   "date": "2026-10-12",
+   "verdict": "Need to identify their intermediate Hom and evaluation complexes."
+  },
+  {
+   "tool": "blueprint",
+   "query": "derived evaluation",
+   "results": "Three blueprint matches concern proetale comparisons and restrictions, not this Ext/evaluation bridge.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate blueprint statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-p1-strict-henselian-comparison",
+   "place": "Proof, second paragraph: injective-module resolution argument; comparison of cohomology encodings, step 3 of new-module-valued-injective-cohomology-comparison",
+   "via": [
+    "new-module-valued-injective-cohomology-comparison",
+    "new-module-acyclic-effacement-ladder",
+    "lem-weil-pbc-module-acyclic-cohomology-comparison",
+    "lem-weil-pbc-prime-injective-cohomology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CohomologyDerivedEvaluation.lean",
+  "declaration": "CategoryTheory.Sheaf.cohomology_nonempty_addEquiv_rightDerived_evaluation_succ",
+  "statement": "theorem cohomology_nonempty_addEquiv_rightDerived_evaluation_succ\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{w}] [HasExt.{w} (Sheaf J AddCommGrpCat.{w})]\n    [HasInjectiveResolutions (Sheaf J AddCommGrpCat.{w})]\n    (T : C) (hT : Limits.IsTerminal T) (F : Sheaf J AddCommGrpCat.{w}) (q : ℕ) :\n    Nonempty\n      (Sheaf.H F (q + 1) ≃+\n        (((sheafToPresheaf J AddCommGrpCat.{w} ⋙\n          (evaluation Cᵒᵖ AddCommGrpCat.{w}).obj (Opposite.op T)).rightDerived\n            (q + 1)).obj F))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T032116-L-1384760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T032116-L-1384760",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

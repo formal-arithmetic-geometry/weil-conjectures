@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.AlgebraicGeometry.ConstantRingModuleSheafEquivalence
+import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
 
 /-!
 # Comparison of the two encodings of injective module sheaves
@@ -58,6 +60,26 @@ theorem moduleValued_injective_cohomology_comparison (X : Scheme.{u}) (r : ℕ)
           (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
             (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj
               (Opposite.op (Scheme.Etale.mk (𝟙 X)))).rightDerived q).obj
-            ((SheafOfModules.toSheaf _).obj I))) := by sorry
+            ((SheafOfModules.toSheaf _).obj I))) := by
+  obtain ⟨E, ⟨e⟩⟩ := constantRing_moduleSheaf_equivalence X r
+  refine ⟨E.functor.obj J, (E.map_injective_iff J).2 inferInstance, ?_⟩
+  let F := (SheafOfModules.toSheaf _).obj (E.functor.obj J)
+  let Γ := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+    (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj
+      (Opposite.op (Scheme.Etale.mk (𝟙 X)))
+  have hT : Limits.IsTerminal (Scheme.Etale.mk (𝟙 X)) :=
+    MorphismProperty.Over.mkIdTerminal _ X
+  intro q
+  have h : Nonempty (Sheaf.H F q ≃+ (Γ.rightDerived q).obj F) := by
+    cases q with
+    | zero =>
+      exact ⟨(Sheaf.H.equiv₀ F hT).trans
+        ((Γ.rightDerivedZeroIsoSelf.app F).addCommGroupIsoToAddEquiv.symm)⟩
+    | succ n =>
+      exact Sheaf.cohomology_nonempty_addEquiv_rightDerived_evaluation_succ
+        X.smallEtaleTopology (Scheme.Etale.mk (𝟙 X)) hT F n
+  obtain ⟨a⟩ := h
+  let b := (Sheaf.functorH X.smallEtaleTopology q).mapIso (e.app J)
+  exact ⟨b.addCommGroupIsoToAddEquiv.trans a⟩
 
 end AlgebraicGeometry.Etale
