@@ -146,6 +146,17 @@ lemma mapNatTrans_comp (α : F ⟶ G) (β : G ⟶ H) :
     mapNatTrans M (α ≫ β) = mapNatTrans M α ≫ mapNatTrans M β :=
   Localization.natTrans_ext (Q M C) (W M C) fun X ↦ by simp
 
+omit [IsTriangulated C] [IsTriangulated D] [∀ n : ℤ, (shiftFunctor C n).Linear R]
+  [∀ n : ℤ, (shiftFunctor D n).Linear R] in
+/-- The natural isomorphism `map M F ≅ map M G` induced by a natural isomorphism `e : F ≅ G` of
+`R`-linear triangulated functors. -/
+@[simps]
+noncomputable def mapNatIso (e : F ≅ G) : map M F ≅ map M G where
+  hom := mapNatTrans M e.hom
+  inv := mapNatTrans M e.inv
+  hom_inv_id := by rw [← mapNatTrans_comp, e.hom_inv_id, mapNatTrans_id]
+  inv_hom_id := by rw [← mapNatTrans_comp, e.inv_hom_id, mapNatTrans_id]
+
 end NatTrans
 
 section Comp
