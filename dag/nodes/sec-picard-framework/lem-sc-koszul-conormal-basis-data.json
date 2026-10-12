@@ -1,0 +1,103 @@
+{
+ "id": "lem-sc-koszul-conormal-basis-data",
+ "kind": "statement",
+ "title": "Linear independence and spanning of conormal generators",
+ "statement": "Under the hypotheses of lem-sc-koszul-conormal-basis, the conormal generators are linearly independent over A/I and their range spans I.Cotangent.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 062I, first paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-sc-koszul-conormal-comparison"
+ ],
+ "proof": [
+  {
+   "text": "H_1-vanishing identifies the kernel of the generator map with the image of the second Koszul differential; after tensoring with A/I the differential vanishes, yielding injectivity and surjectivity.",
+   "uses": [
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 062I"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "linear independence and spanning of Koszul conormal generators",
+   "results": "service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearIndependent Submodule.span Ideal.Cotangent",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszulConormalVector LinearIndependent",
+   "results": "no match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulConormalBasis",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-koszul-conormal-basis",
+   "place": "proof split",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulConormalVectorBasisData",
+  "file": "lean/Sheaf/RingTheory/KoszulConormalVectorBasisData.lean",
+  "declaration": "ExteriorAlgebra.koszulConormalVector_linearIndependent_and_span",
+  "statement": "theorem koszulConormalVector_linearIndependent_and_span (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A) (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) : LinearIndependent (A ⧸ I) (fun i => koszulConormalVector A I r f hf (Finsupp.single i 1)) ∧ ⊤ ≤ Submodule.span (A ⧸ I) (Set.range (fun i => koszulConormalVector A I r f hf (Finsupp.single i 1)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T184342-L-4019402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T184342-L-4019402",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

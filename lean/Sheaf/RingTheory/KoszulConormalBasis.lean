@@ -8,7 +8,7 @@ module
 public import Sheaf.RingTheory.KoszulConormalComparison
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.LinearAlgebra.Basis.Defs
-import Sheaf.Paper.KoszulComplex
+import Sheaf.RingTheory.KoszulConormalVectorBasisData
 
 /-!
 # Conormal basis of a Koszul-regular sequence
@@ -43,6 +43,11 @@ theorem exists_koszul_conormal_basis
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
     (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) :
     ∃ b : Module.Basis (Fin r) (A ⧸ I) I.Cotangent,
-      ∀ i, b i = koszulConormalVector A I r f hf (Finsupp.single i 1) := by sorry
+      ∀ i, b i = koszulConormalVector A I r f hf (Finsupp.single i 1) := by
+  obtain ⟨hli, hsp⟩ := koszulConormalVector_linearIndependent_and_span A I r f hreg hf
+  let b := Module.Basis.mk hli hsp
+  refine ⟨b, ?_⟩
+  intro i
+  exact Module.Basis.mk_apply hli hsp i
 
 end ExteriorAlgebra
