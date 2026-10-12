@@ -8245,3 +8245,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/X2/Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffineConstruction (stage 3; reviewer PASS; first push; landing 20261012T144159-L-2112257 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/X2/Sheaf.RingTheory.FormalFibreQuasiFiniteAscent (stage 3; reviewer PASS; first push; landing 20261012T144159-L-2112388 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:42 L: merged deliver/X3/Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated (stage 3; reviewer PASS; first push; landing 20261012T144200-L-2112551 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:42 L: merged deliver/X3/Sheaf.AlgebraicGeometry.DisjointUniversalHomeomorphismsLisseImage (stage 3; reviewer PASS; after a return; landing 20261012T144200-L-2112665 (interface); batch 20261012T144049; modules 2; new nodes 1)
