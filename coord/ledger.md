@@ -8508,3 +8508,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:08 L: merged deliver/Y3/Sheaf.Algebra.Homology.ZigzagZeroComponentBoundary (stage 3; reviewer PASS; first push; landing 20261012T160834-L-2613591 (proof); batch 20261012T160822; modules 1; new nodes 0)
 - 16:08 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.DerivedLocalizationTensorComparison (stage 3; reviewer PASS; first push; landing 20261012T160834-L-2613688 (proof); batch 20261012T160822; modules 1; new nodes 0)
 - 16:09 L: returned deliver/G3/Sheaf.Topology.ConstantSubsheafNormalizedCore (reviewer RETURN: (reviewer X-ed6e7, head ed6e79a17) E2: `constantSubsheaf_normalized_sections_compatibility` is false. Take X a one-point)
+- 16:10 L: returned deliver/J2/WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf (reviewer RETURN: (reviewer X-871d2, head 871d2489f) H10: Sheaf.AlgebraicGeometry.EtaleFreeSheafDerivedSections fails with missing Categor)
