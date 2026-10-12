@@ -44,13 +44,13 @@ open scoped CategoryTheory.Functor
 namespace CategoryTheory.Pretriangulated
 
 variable {C D : Type*} [Category* C] [Category* D] [HasZeroObject C] [HasShift C ℤ]
-  [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+  [Preadditive C] [∀ n : ℤ, (CategoryTheory.shiftFunctor C n).Additive] [Pretriangulated C]
 
 /-- A distinguished triangle whose first morphism is the counit `F G K ⟶ K` of an adjunction
 `F ⊣ G` gives one whose first morphism is the counit `F' G' K ⟶ K` of an adjunction `F' ⊣ G'`
 with `F ≅ F'`, the other morphism being unchanged: the comparison of the right adjoints is
 compatible with the counits (`CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit`). -/
-lemma Triangle.exists_distTriang_of_counit_iso {F F' : D ⥤ C} {G G' : C ⥤ D} (adj : F ⊣ G)
+lemma exists_distTriang_of_counit_iso {F F' : D ⥤ C} {G G' : C ⥤ D} (adj : F ⊣ G)
     (adj' : F' ⊣ G') (e : F ≅ F') {K L : C} {v : K ⟶ L}
     {w : L ⟶ (F.obj (G.obj K))⟦(1 : ℤ)⟧} (hw : Triangle.mk (adj.counit.app K) v w ∈ distTriang C) :
     ∃ w', Triangle.mk (adj'.counit.app K) v w' ∈ distTriang C := by
@@ -155,7 +155,7 @@ theorem exists_distTriang_closedSupport (hij : Set.range i.base = (Set.range j.b
     ((derivedLowerStarClosedUpperShriekAdjunction i j hij).ofNatIsoLeft
       (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} R) i).symm).isLeftAdjoint
   obtain ⟨w, hw, -⟩ := existsUnique_distTriang_supportedLocalization _ i j hij K
-  exact Pretriangulated.Triangle.exists_distTriang_of_counit_iso (rightDerivedUpperShriekAdjunction _ i)
+  exact Pretriangulated.exists_distTriang_of_counit_iso (rightDerivedUpperShriekAdjunction _ i)
     (derivedLowerStarClosedUpperShriekAdjunction i j hij)
     (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} R) i) hw
 

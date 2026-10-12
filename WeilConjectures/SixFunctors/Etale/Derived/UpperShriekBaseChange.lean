@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
+public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!
@@ -241,7 +243,7 @@ lemma inv_rightDerivedLowerShriekOfCompactificationBaseChangeMap (c : Compactifi
     TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.id_comp, Category.comp_id, Category.assoc, NatTrans.id_app, Functor.comp_obj]
-  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [Category.id_comp, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   simp
 
 /-- Blueprint `cor-exc-base-change-reduces-to-proper`: Base change for a general morphism
@@ -312,7 +314,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv
       simp only [Functor.id_obj] at h
       have : IsIso ((L((pullback.fst c.g g)^*[ModuleCat.{u + 1} Λ]) ⋙
           L((c'.i)^*[ModuleCat.{u + 1} Λ])).map (adjJ.counit.app N) ≫ τ.hom.app N) := by
-        rw [h]
+        rw [h, Functor.comp_map]
         infer_instance
       exact IsIso.of_isIso_comp_right _ (τ.hom.app N)
     simp only [TwoSquare.natTrans, mateEquiv_apply]
@@ -335,9 +337,10 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   simp only [rightDerivedUpperShriekBaseChangeMap]
   congr 1
-  rw [← inv_rightDerivedLowerShriekOfCompactificationBaseChangeMap]
   ext M
-  simp [rightDerivedLowerShriekBaseChangeMap, c']
+  simp only [rightDerivedLowerShriekBaseChangeMap, IsIso.inv_comp,
+    inv_rightDerivedLowerShriekOfCompactificationBaseChangeMap]
+  simp [c', α, β']
 
 end ReductionToProper
 

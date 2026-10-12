@@ -54,7 +54,7 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
 /-- The category of presheaves on an essentially small category with values in a Grothendieck
 abelian category is Grothendieck abelian: it is the category of sheaves for the trivial
 topology. -/
-instance isGrothendieckAbelian_presheaf (A : Type*) [Category.{u + 1} A] [Abelian A]
+local instance isGrothendieckAbelian_presheaf (A : Type*) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] : IsGrothendieckAbelian.{u + 1} (Cᵒᵖ ⥤ A) :=
   IsGrothendieckAbelian.of_equivalence (sheafBotEquivalence (C := C) A)
 
@@ -63,12 +63,12 @@ namespace Presheaf
 variable (Λ : Type (u + 1)) [Ring Λ]
 
 /-- Coproducts indexed by the (small) `Hom`-types of `C` exist in `ModuleCat Λ`. -/
-instance (a b : Cᵒᵖ) : HasCoproductsOfShape (a ⟶ b) (ModuleCat.{u + 1} Λ) :=
+local instance (a b : Cᵒᵖ) : HasCoproductsOfShape (a ⟶ b) (ModuleCat.{u + 1} Λ) :=
   hasCoproductsOfShape_of_small.{u + 1} _ _
 
 /-- Presheaves of `Λ`-modules form a Grothendieck abelian category, hence have K-injective
 resolutions. -/
-instance : HasKInjectiveResolutions (Cᵒᵖ ⥤ ModuleCat.{u + 1} Λ) :=
+local instance : HasKInjectiveResolutions (Cᵒᵖ ⥤ ModuleCat.{u + 1} Λ) :=
   hasKInjectiveResolutions_of_isGrothendieckAbelian.{u + 1}
 
 /-- The free presheaf of `Λ`-modules `Λ[U]` on an object `U`: the value at `U` of the left
@@ -122,16 +122,16 @@ variable (J : GrothendieckTopology C) (Λ : Type (u + 1)) [Ring Λ]
 
 /-- Sheaves of `Λ`-modules form a Grothendieck abelian category, hence have K-injective
 resolutions. -/
-instance : HasKInjectiveResolutions (Sheaf J (ModuleCat.{u + 1} Λ)) :=
+local instance : HasKInjectiveResolutions (Sheaf J (ModuleCat.{u + 1} Λ)) :=
   hasKInjectiveResolutions_of_isGrothendieckAbelian.{u + 1}
 
 /-- The category of sheaves of `Λ`-modules has small colimits. -/
-instance : HasColimitsOfSize.{u + 1, u + 1} (Sheaf J (ModuleCat.{u + 1} Λ)) :=
+local instance : HasColimitsOfSize.{u + 1, u + 1} (Sheaf J (ModuleCat.{u + 1} Λ)) :=
   IsGrothendieckAbelian.hasColimits _
 
 /-- The inclusion of sheaves into presheaves preserves K-injective complexes, being right
 adjoint to the exact sheafification functor. -/
-instance : (sheafToPresheaf J (ModuleCat.{u + 1} Λ)).PreservesKInjectiveComplexes :=
+local instance : (sheafToPresheaf J (ModuleCat.{u + 1} Λ)).PreservesKInjectiveComplexes :=
   (sheafificationAdjunction J (ModuleCat.{u + 1} Λ)).preservesKInjectiveComplexes
 
 variable [HasDerivedCategory.{u + 1} (Sheaf J (ModuleCat.{u + 1} Λ))]

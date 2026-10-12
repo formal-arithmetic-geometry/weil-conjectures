@@ -7,7 +7,10 @@ module
 
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Brown
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerStarCoproducts
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
 
@@ -102,7 +105,8 @@ namespace ProEtale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-def-sf-admissible`: the bound `FullCD(p, A; c)`.
+/-- Blueprint `sk-def-sf-admissible`: the bound `FullCD(p, A; c)`. This is blueprint
+`def-weil-full-cohomological-dimension` (Full cohomological dimension).
 
 `p : X ⟶ Y` *has uniform cohomological dimension at most `c` at `A`* if the higher direct
 images of `p`, and of all its base changes along objects of `Y_proét`, vanish above `c` on
@@ -132,6 +136,8 @@ def HasUniformCohomologicalDimensionLE (p : X ⟶ Y) (c : ℕ) : Prop :=
           ((R((p')_*[A])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
 
 /-- Blueprint `sk-def-sf-admissible`, clause (1): the ambient exceptional right adjoint datum.
+This is blueprint `def-weil-ambient-exceptional-adjoint` (Ambient exceptional right adjoint
+datum).
 
 For a morphism `f : X ⟶ Y` with a chosen compactification: a uniform cohomological-dimension
 bound `FullCD(p, A; c)` for the proper part `p` of the compactification, for some `c`. The
@@ -151,8 +157,14 @@ pro-étale sites.
 The bound `FullCD` makes `Rp_*` preserve coproducts, hence `Rf_! = Rp_* j_!` preserves
 coproducts, and Brown representability gives the right adjoint. -/
 theorem HasAmbientExceptionalRightAdjoint.isLeftAdjoint {f : X ⟶ Y} [HasCompactification f]
-    (_h : HasAmbientExceptionalRightAdjoint A f) : (R(f)_![A]).IsLeftAdjoint :=
-  sorry
+    (h : HasAmbientExceptionalRightAdjoint A f) : (R(f)_![A]).IsLeftAdjoint := by
+  let c := HasCompactification.compactification f
+  obtain ⟨N, hN⟩ := h.exists_hasUniformCohomologicalDimensionLE
+  have (K : Type (u + 1)) :=
+    preservesColimitsOfShape_rightDerivedLowerStar_of_isZero A c.g N
+      (fun F r hr ↦ hN (.mk (𝟙 Y)) (𝟙 c.Z) c.g (IsPullback.id_horiz c.g) F r hr) K
+  exact IsGrothendieckAbelian.isLeftAdjoint_of_preservesCoproducts
+    (D((c.i)_!open[A]) ⋙ R((c.g)_*[A]))
 
 section Admissibility
 
@@ -162,6 +174,8 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [Abelian.HasFunctorialFlatResolution A]
 
 /-- Blueprint `sk-def-sf-admissible`: exceptional-adjoint admissibility, clauses (1)–(3).
+This is blueprint `def-weil-exceptional-adjoint-admissibility` (Exceptional-adjoint
+admissibility), at a finite coefficient stage.
 
 The ambient exceptional right adjoint datum (1), together with the preservation clauses for
 every right adjoint `G` of `Rf_!`: `G` preserves bounded constructibility and carries each

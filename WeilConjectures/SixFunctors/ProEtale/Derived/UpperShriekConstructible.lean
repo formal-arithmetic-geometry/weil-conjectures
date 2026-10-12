@@ -92,13 +92,10 @@ lemma homologyConcentratedIn_of_mapDerivedCategory_comparisonUpperStar {X : Sche
       (hi.of_iso
         (((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategoryHomologyFunctorIso i).app G))
   obtain ⟨h₁, h₂⟩ := h
-  refine ⟨?_, ?_⟩
-  · change G.IsGE a
-    rw [_root_.DerivedCategory.isGE_iff] at h₁ ⊢
-    exact fun i hi ↦ hz i (h₁ i hi)
-  · change G.IsLE b
-    rw [_root_.DerivedCategory.isLE_iff] at h₂ ⊢
-    exact fun i hi ↦ hz i (h₂ i hi)
+  exact ⟨(_root_.DerivedCategory.isGE_iff G a).2 fun i hi ↦
+      hz i ((_root_.DerivedCategory.isGE_iff _ a).1 h₁ i hi),
+    (_root_.DerivedCategory.isLE_iff G b).2 fun i hi ↦
+      hz i ((_root_.DerivedCategory.isLE_iff _ b).1 h₂ i hi)⟩
 
 /-- `ν^*` carries `D_c^[a, b]` with Tor amplitude in `[a, b]` on the étale site to the same on
 the pro-étale site. -/
@@ -109,7 +106,7 @@ lemma constructibleTorAmplitudeIn_mapDerivedCategory_comparisonUpperStar {X : Sc
       (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj G) :=
   ⟨⟨DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj hG.1.1,
     (ν^*(X)[ModuleCat.{u + 1} Λ]).homologyConcentratedIn_mapDerivedCategory_obj hG.1.2⟩,
-    torAmplitudeIn_mapDerivedCategory Λ hG.2⟩
+    DerivedCategory.torAmplitudeIn_mapDerivedCategory Λ hG.2⟩
 
 /-- Conversely, if `ν^* G` lies in `D_c^[a, b]` with Tor amplitude in `[a, b]` and `G` is
 bounded constructible, then so does `G`. -/
@@ -120,7 +117,7 @@ lemma constructibleTorAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar {X :
       (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj G)) :
     Etale.DerivedCategory.constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X a b G :=
   ⟨⟨hbc, homologyConcentratedIn_of_mapDerivedCategory_comparisonUpperStar Λ h.1.2⟩,
-    (torAmplitudeIn_mapDerivedCategory_iff a b G).1 h.2⟩
+    (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b G).1 h.2⟩
 
 /-- Blueprint `sk-def-sf-operations`, the comparison of (v) and (vi): if `G` is a right adjoint of
 `Rf_!` on the ambient derived categories (the ambient exceptional right adjoint `Rf^×`, which
@@ -136,26 +133,29 @@ theorem nonempty_iso_rightDerivedUpperShriek_of_adjunction {X Y : Scheme.{u}} (f
     (hL : _root_.DerivedCategory.TStructure.t.plus L)
     (hGL : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X (G.obj L)) :
     Nonempty (G.obj L ≅ (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj L) := by
-  let P := DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X
-  let a : P.FullSubcategory := ⟨G.obj L, hGL⟩
-  let b : P.FullSubcategory :=
-    ⟨(rightDerivedUpperShriek _ f).obj L, plusEtaleOrigin_rightDerivedUpperShriek_obj f hL⟩
-  let e : yoneda.obj a ≅ yoneda.obj b := NatIso.ofComponents
-    (fun K ↦ Equiv.toIso
-      (P.fullyFaithfulι.homEquiv.trans
-        ((adj.homEquiv K.unop.obj L).symm.trans
-          ((rightDerivedUpperShriekHomEquiv f K.unop.property hL).trans
-            P.fullyFaithfulι.homEquiv.symm))))
-    (fun {K K'} φ ↦ by
-      ext g
-      apply ObjectProperty.hom_ext
-      change rightDerivedUpperShriekHomEquiv f K'.unop.property hL
-          ((adj.homEquiv K'.unop.obj L).symm (φ.unop.hom ≫ g.hom)) =
-        φ.unop.hom ≫ rightDerivedUpperShriekHomEquiv f K.unop.property hL
-          ((adj.homEquiv K.unop.obj L).symm g.hom)
-      rw [adj.homEquiv_naturality_left_symm,
-        rightDerivedUpperShriekHomEquiv_naturality_left f K'.unop.property K.unop.property])
-  exact ⟨P.ι.mapIso (Yoneda.fullyFaithful.preimageIso e)⟩
+  have hR := plusEtaleOrigin_rightDerivedUpperShriek_obj f hL
+  refine ⟨⟨rightDerivedUpperShriekHomEquiv f hGL hL (adj.counit.app L),
+    adj.homEquiv _ _ (rightDerivedUpperShriekCounit f L hL), ?_, ?_⟩⟩
+  · apply (adj.homEquiv _ _).symm.injective
+    rw [adj.homEquiv_naturality_left_symm, Equiv.symm_apply_apply,
+      ← rightDerivedUpperShriekHomEquiv_symm_apply f hGL hL, Equiv.symm_apply_apply,
+      Adjunction.homEquiv_counit, Functor.map_id, Category.id_comp]
+  · apply (rightDerivedUpperShriekHomEquiv f hR hL).symm.injective
+    rw [rightDerivedUpperShriekHomEquiv_naturality_left_symm f hR hGL, Equiv.symm_apply_apply,
+      rightDerivedUpperShriekHomEquiv_symm_id, ← Adjunction.homEquiv_counit,
+      Equiv.symm_apply_apply]
+
+/-- Lying in `D_c^[a, b]` with Tor amplitude in `[a, b]` is invariant under isomorphism. -/
+instance (X : Scheme.{u}) (a b : ℤ) :
+    ObjectProperty.IsClosedUnderIsomorphisms
+      (DerivedCategory.constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X a b) :=
+  have : (_root_.DerivedCategory.homologyConcentratedIn (C := Sheaf (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} Λ)) a b).IsClosedUnderIsomorphisms :=
+    ⟨fun e ⟨h₁, h₂⟩ ↦ ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e a,
+      _root_.DerivedCategory.TStructure.t.isLE_of_iso e b⟩⟩
+  inferInstanceAs (DerivedCategory.boundedConstructible _ X ⊓
+    _root_.DerivedCategory.homologyConcentratedIn a b ⊓
+    DerivedCategory.torAmplitudeIn _ X a b).IsClosedUnderIsomorphisms
 
 variable {k : Type u} [Field k] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
   [LocallyOfFiniteType aY] [QuasiCompact aY] [HasInvertibleExponent Λ Y]
@@ -224,12 +224,12 @@ theorem constructibleFiniteTor_rightDerivedLowerShriek
       ((rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj K) := by
   obtain ⟨⟨G, hG, ⟨e⟩⟩, a, b, hab⟩ := hK
   have hGt : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X G :=
-    ⟨hG, a, b, (torAmplitudeIn_mapDerivedCategory_iff a b G).1
+    ⟨hG, a, b, (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b G).1
       ((DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso e.symm hab)⟩
   exact (DerivedCategory.constructibleFiniteTor _ Y).prop_of_iso
     (((rightDerivedLowerShriekComparisonIso (ModuleCat.{u + 1} Λ) f).app ⟨G, hG.1.1⟩).symm ≪≫
       (rightDerivedLowerShriek _ f).mapIso e)
-    (constructibleFiniteTor_mapDerivedCategory Λ
+    (DerivedCategory.constructibleFiniteTor_mapDerivedCategory Λ
       (Etale.constructibleFiniteTor_rightDerivedLowerShriek Λ aY f hGt))
 
 /-- Blueprint `def-weil-exceptional-inverse-image`: the adjunction

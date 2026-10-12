@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.InternalHom
+public import WeilConjectures.AlgebraicGeometry.Sites.UpperStarSections
 
 /-!
 # Descent of morphisms of étale sheaves along surjective étale morphisms
@@ -105,9 +106,8 @@ lemma upperStarIsoLocalizationRestriction_comp (P : Sheaf R.smallEtaleTopology A
   congr 1
   apply Quiver.Hom.unop_inj
   apply MorphismProperty.Over.Hom.ext
+  simp only [etale_comp_left]
   simp
-  erw [pullbackLeftPullbackSndIso_inv_fst]
-  exact Category.id_comp (pullback.fst U.hom (g₁ ≫ g₂))
 
 /-- The inverse form of `AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction_comp`. -/
 lemma localizationRestrictionComp_hom_app_eq (P : Sheaf R.smallEtaleTopology A) :
@@ -133,7 +133,6 @@ lemma localizationRestrictionComp_inv_app_eq (P : Sheaf R.smallEtaleTopology A) 
   simp
 
 end Comp
-
 section Descent
 
 variable {A} {X' X : Scheme.{u}} (v : X' ⟶ X) [Etale v]
@@ -142,7 +141,8 @@ variable {A} {X' X : Scheme.{u}} (v : X' ⟶ X) [Etale v]
 `X'`-scheme. -/
 noncomputable def liftEtale {W : X.Etale} (q : W ⟶ Scheme.Etale.mk v) : X'.Etale :=
   haveI : Etale (q.left ≫ v) := by
-    rw [show q.left ≫ v = W.hom from MorphismProperty.Over.w q]
+    have hq : q.left ≫ v = W.hom := MorphismProperty.Over.w q
+    rw [hq]
     exact W.prop
   haveI : Etale q.left := Etale.of_comp q.left v
   Scheme.Etale.mk q.left
@@ -150,7 +150,19 @@ noncomputable def liftEtale {W : X.Etale} (q : W ⟶ Scheme.Etale.mk v) : X'.Eta
 /-- The étale `X`-scheme underlying `liftEtale v q` is `W`. -/
 noncomputable def liftEtaleIso {W : X.Etale} (q : W ⟶ Scheme.Etale.mk v) :
     (MorphismProperty.Over.map ⊤ (inferInstance : Etale v)).obj (liftEtale v q) ≅ W :=
-  MorphismProperty.Over.isoMk (Iso.refl _) (by simpa using MorphismProperty.Over.w q)
+  MorphismProperty.Over.isoMk (Iso.refl _) (by
+    have hq : q.left ≫ v = W.hom := MorphismProperty.Over.w q
+    simp [liftEtale, hq])
+
+@[simp]
+lemma liftEtaleIso_hom_left {W : X.Etale} (q : W ⟶ Scheme.Etale.mk v) :
+    (liftEtaleIso v q).hom.left = 𝟙 _ :=
+  rfl
+
+@[simp]
+lemma liftEtaleIso_inv_left {W : X.Etale} (q : W ⟶ Scheme.Etale.mk v) :
+    (liftEtaleIso v q).inv.left = 𝟙 _ :=
+  rfl
 
 variable {P Q : Sheaf X.smallEtaleTopology A}
   (ψ : (localizationRestriction A v inferInstance).obj P ⟶
@@ -165,31 +177,34 @@ noncomputable def descentComponent {W : X.Etale} (q : W ⟶ Scheme.Etale.mk v) :
 
 /-- The value of `ψ` at an étale `X'`-scheme `T`, transported along an isomorphism `T ≅ T'`. -/
 lemma hom_app_eq_of_iso {T T' : X'.Etale} (k : T ≅ T') :
-    ψ.hom.app (op T) = ((localizationRestriction A v inferInstance).obj P).obj.map k.hom.op ≫
-      ψ.hom.app (op T') ≫ ((localizationRestriction A v inferInstance).obj Q).obj.map k.inv.op := by
-  rw [← ψ.hom.naturality_assoc, ← Functor.map_comp, ← op_comp, Iso.inv_hom_id, op_id,
+    ψ.hom.app (op T) = ((localizationRestriction A v inferInstance).obj P).obj.map k.inv.op ≫
+      ψ.hom.app (op T') ≫
+        ((localizationRestriction A v inferInstance).obj Q).obj.map k.hom.op := by
+  rw [ψ.hom.naturality_assoc, ← Functor.map_comp, ← op_comp, Iso.hom_inv_id, op_id,
     CategoryTheory.Functor.map_id, Category.comp_id]
 
 lemma descentComponent_naturality {W₁ W₂ : X.Etale} (g : W₁ ⟶ W₂)
-    (q₁ : W₁ ⟶ Scheme.Etale.mk v) (q₂ : W₂ ⟶ Scheme.Etale.mk v) (h : g ≫ q₂ = q₁) :
-    P.obj.map g.op ≫ descentComponent v ψ q₁ = descentComponent v ψ q₂ ≫ Q.obj.map g.op := by
-  subst h
+    (q₂ : W₂ ⟶ Scheme.Etale.mk v) :
+    P.obj.map g.op ≫ descentComponent v ψ (g ≫ q₂) =
+      descentComponent v ψ q₂ ≫ Q.obj.map g.op := by
   let k : liftEtale v (g ≫ q₂) ⟶ liftEtale v q₂ := MorphismProperty.Over.homMk g.left
     (by simp [liftEtale])
   have hk := ψ.hom.naturality k.op
   simp only [localizationRestriction_obj_obj_map, Quiver.Hom.unop_op] at hk
-  simp only [descentComponent, Category.assoc]
   have e₁ : (liftEtaleIso v (g ≫ q₂)).hom ≫ g =
       (MorphismProperty.Over.map ⊤ (inferInstance : Etale v)).map k ≫
         (liftEtaleIso v q₂).hom := by
-    ext; simp [liftEtaleIso, k]
+    ext
+    simp [k]
   have e₂ : (liftEtaleIso v (g ≫ q₂)).inv ≫
-      (MorphismProperty.Over.map ⊤ (inferInstance : Etale v)).map k = g ≫ (liftEtaleIso v q₂).inv := by
-    ext; simp [liftEtaleIso, k]
+      (MorphismProperty.Over.map ⊤ (inferInstance : Etale v)).map k =
+        g ≫ (liftEtaleIso v q₂).inv := by
+    ext
+    simp [k]
+  simp only [descentComponent, Category.assoc]
   rw [← Functor.map_comp_assoc, ← op_comp, e₁, op_comp, Functor.map_comp_assoc]
   erw [reassoc_of% hk]
   rw [← Functor.map_comp, ← op_comp, e₂, op_comp, Functor.map_comp]
-  rfl
 
 /-- **Gluing of morphisms along a surjective étale morphism**, in terms of the restriction
 functors: a morphism `ψ` of the restrictions of `P` and `Q` to `X'` whose components at an
@@ -201,8 +216,8 @@ lemma exists_localizationRestriction_map_eq (hv : Function.Surjective v.base)
     ∃ φ : P ⟶ Q, (localizationRestriction A v inferInstance).map φ = ψ := by
   let T : X.Etale := Scheme.Etale.mk (𝟙 X)
   let f₀ : Scheme.Etale.mk v ⟶ T := MorphismProperty.Over.homMk v
-  let toT : ∀ U : X.Etale, U ⟶ T := fun U ↦ MorphismProperty.Over.homMk U.hom
-  have toT_uniq : ∀ {U : X.Etale} (a : U ⟶ T), a = toT U := fun a ↦
+  let toT (U : X.Etale) : U ⟶ T := MorphismProperty.Over.homMk U.hom
+  have toT_uniq {U : X.Etale} (a : U ⟶ T) : a = toT U :=
     MorphismProperty.Over.Hom.ext ((Category.comp_id _).symm.trans (MorphismProperty.Over.w a))
   let H := presheafHom P.obj Q.obj
   have hH : Presieve.IsSheaf X.smallEtaleTopology H :=
@@ -215,33 +230,35 @@ lemma exists_localizationRestriction_map_eq (hv : Function.Surjective v.base)
   have hT : Presieve.IsSheafFor H (Presieve.singleton f₀) :=
     (Presieve.isSheafFor_iff_generate _).2 (hH _ hS)
   let x : H.obj (op (Scheme.Etale.mk v)) :=
-    { app := fun W ↦ descentComponent v ψ W.unop.hom
-      naturality := fun W W' g ↦
-        descentComponent_naturality v ψ g.unop.left _ _ (CategoryTheory.Over.w g.unop) }
+    { app W := descentComponent v ψ W.unop.hom
+      naturality W W' g := by
+        have h := descentComponent_naturality v ψ g.unop.left W.unop.hom
+        rw [CategoryTheory.Over.w g.unop] at h
+        exact h }
   obtain ⟨y, hy, -⟩ := Presieve.isSheafFor_singleton.1 hT x (fun p₁ p₂ _ ↦ by
-    ext W : 2
+    refine NatTrans.ext (funext fun W ↦ ?_)
     exact hψ _ _ _)
   refine ⟨⟨{
-      app := fun U ↦ y.app (op (CategoryTheory.Over.mk (toT U.unop)))
-      naturality := fun U U' g ↦ ?_ }⟩, ?_⟩
-  · have := y.naturality (CategoryTheory.Over.homMk (U := CategoryTheory.Over.mk (toT U'.unop))
-      (V := CategoryTheory.Over.mk (toT U.unop)) g.unop (toT_uniq _).symm).op
-    exact this
-  · apply Sheaf.hom_ext
-    ext ⟨T'⟩ : 2
-    let α : (MorphismProperty.Over.map ⊤ (inferInstance : Etale v)).obj T' ⟶
-        Scheme.Etale.mk v := MorphismProperty.Over.homMk T'.hom
-    have hα : α ≫ f₀ = toT _ := toT_uniq _
-    have h₁ := congr_arg (fun z ↦ z.app (op (CategoryTheory.Over.mk α))) hy
-    simp only at h₁
-    rw [presheafHom_map_app α f₀ _ hα] at h₁
-    refine h₁.trans ?_
-    change descentComponent v ψ α = _
-    have he : (liftEtaleIso v α).hom = 𝟙 _ := by ext; simp [liftEtaleIso]
-    have he' : (liftEtaleIso v α).inv = 𝟙 _ := by ext; simp [liftEtaleIso]
-    simp only [descentComponent, he, he', op_id, CategoryTheory.Functor.map_id,
-      Category.id_comp, Category.comp_id]
+      app U := y.app (op (CategoryTheory.Over.mk (toT U.unop)))
+      naturality U U' g := y.naturality (CategoryTheory.Over.homMk
+        (U := CategoryTheory.Over.mk (toT U'.unop)) (V := CategoryTheory.Over.mk (toT U.unop))
+        g.unop (toT_uniq _)).op }⟩, ?_⟩
+  apply Sheaf.hom_ext
+  ext ⟨T'⟩ : 2
+  let α : (MorphismProperty.Over.map ⊤ (inferInstance : Etale v)).obj T' ⟶
+      Scheme.Etale.mk v := MorphismProperty.Over.homMk T'.hom
+  have hα : α ≫ f₀ = toT _ := toT_uniq _
+  have h₁ := congr_arg (fun z ↦ z.app (op (CategoryTheory.Over.mk α))) hy
+  simp only at h₁
+  rw [presheafHom_map_app α f₀ _ hα] at h₁
+  have he : (liftEtaleIso v α).hom = 𝟙 _ := MorphismProperty.Over.Hom.ext (by simp)
+  have he' : (liftEtaleIso v α).inv = 𝟙 _ := MorphismProperty.Over.Hom.ext (by simp)
+  have hd : descentComponent v ψ α = ψ.hom.app (op T') := by
+    rw [descentComponent, he, he', op_id, op_id]
+    erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp,
+      Category.comp_id]
     rfl
+  exact h₁.trans hd
 
 end Descent
 
