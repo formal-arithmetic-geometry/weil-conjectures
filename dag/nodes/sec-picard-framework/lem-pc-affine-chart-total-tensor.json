@@ -14,33 +14,44 @@
  ],
  "proof": [
   {
-   "text": "For coefficient modules U,V, the affine tilde tensor comparison identifies tilde(U tensor V) with tilde(U) tensor tilde(V). Restrict this identification along the canonical affine chart, then use the restriction tensor comparison. The defining pure-tensor formulas give naturality in both coefficient modules: for either module map, both composites send the germ of u tensor v to the corresponding tensor of image germs.",
+   "text": "Extract the uniquely determined affine tilde tensor morphism from affine_tilde_tensor. Its pure-global-tensor formula determines it uniquely by tensor-product extensionality and the tilde/global-sections adjunction. Applying that formula to module maps proves naturality in each factor; NatIso.ofComponents assembles these isomorphisms into tildeTensorNatIso.",
    "uses": [
     "lem-weil-pbc-affine-tilde-tensor",
-    "lem-weil-pbc-module-restriction-tensor-comparison"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Tilde is left adjoint to global sections, so preserves coproducts. Open restriction also preserves coproducts. In degree n, combine their coproduct comparison with the coefficient tensor isomorphism on every summand (p,q) with p+q=n. Naturality identifies each first differential and each signed second differential. Equivalently apply HomologicalComplex.mapBifunctorComparison to the natural coefficient comparison. Since the coefficient comparison is invertible and the functor preserves all the totalization coproducts, this chain map is invertible. Reverse its orientation to obtain the stated isomorphism. No finiteness condition is used, and empty or zero examples use the same construction.",
+   "text": "Transport the existing strong monoidal structure on scheme-module pullback along restrictFunctorIsoPullback for the canonical affine chart. Functor.Monoidal.transport gives the restriction functor U a natural invertible tensor comparison; its oplax tensorator is packaged as Functor.OplaxMonoidal.δNatTrans U. This bypasses the separately stated sectionwise restriction comparison, since only existence of a total-complex isomorphism is required.",
+   "uses": [
+    "lem-pc-scheme-pullback-monoidal-existing",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tilde functor S and the restriction functor U are left adjoints, hence preserve all small coproducts. Binary biproduct preservation makes each additive. Apply HomologicalComplex.mapBifunctorComparison first to tildeTensorNatIso and then to δNatTrans U. The recorded total-bifunctor comparison theorem makes both chain maps invertible, including for arbitrary unbounded input complexes. Invert the U comparison and compose it with the image under U.mapHomologicalComplex of the inverse S comparison. The resulting isomorphism has exactly the stated source and target.",
    "uses": [
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-pc-total-bifunctor-comparison-iso"
    ],
    "elementary": false
   }
  ],
  "kind": "statement",
  "proof_deps": [
+  "lem-pc-scheme-pullback-monoidal-existing",
+  "lem-pc-total-bifunctor-comparison-iso",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "lem-weil-pbc-affine-tilde-tensor",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-module-restriction-tensor-comparison"
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08DX",
-  "place": "perfect.tex, lemma-quasi-coherence-tensor-product, proof of (2), underived total-tensor identification, and Schemes Tag 01I8"
+  "place": "Underived affine tensor computation, implemented by existing coefficient comparisons and the total-bifunctor comparison theorem; restriction tensor comparison transported from existing scheme-module pullback using Mathlib restrictFunctorIsoPullback."
  },
  "mathlib_searches": [
   {
@@ -111,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T1",
+  "reviewer": "X-45fbd",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T163620-L-2787452",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T194133-L-462446",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module, node records, report, compilation, axioms, and sole direct importer matched the stage-3 review requirements and packet."
  }
 }

@@ -1,0 +1,104 @@
+{
+ "id": "lem-pc-scheme-pullback-monoidal-existing",
+ "kind": "statement",
+ "title": "The existing scheme-module pullback functor is strong monoidal",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme]. Equip the categories of module sheaves [def-weil-sheaf-of-modules-category] with their sheaf tensor products [def-pur-sheaf-tensor-product]. Let $f^*:\\operatorname{Mod}(\\mathcal O_Y)\\to\\operatorname{Mod}(\\mathcal O_X)$ be the existing scheme-module pullback functor, left adjoint to module pushforward. Then $f^*$ has a strong monoidal structure: its unit comparison and its natural tensor comparisons $f^*(M\\otimes N)\\cong f^*M\\otimes f^*N$ are isomorphisms satisfying the associativity and both unit coherence diagrams.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/PullbackMonoidal.lean",
+  "place": "Scheme.Modules.pullbackMonoidal, lines 71-93; strong monoidal scheme-module pullback, implementing Stacks Tag 01CD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved Scheme.Modules.pullbackMonoidal instance in the recorded source. Its construction gives the presheaf pullback followed by sheafification its composite monoidal structure. The natural isomorphism SheafOfModules.sheafificationCompPullback identifies this composite with sheafification followed by the scheme-module pullback. Since sheafification is a monoidal localization, Localization.Monoidal.functorMonoidalOfComp descends the composite structure to scheme-module pullback. That construction supplies the invertible unit and tensor comparisons and their coherence laws. No additional Lean theorem or postponed proof is introduced here.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/PullbackMonoidal.lean",
+  "place": "Scheme.Modules.pullbackMonoidal, lines 71-93; strong monoidal scheme-module pullback, implementing Stacks Tag 01CD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback functor of sheaves of modules on schemes is a strong monoidal functor",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback",
+   "results": "12 hits, including pullback, its adjunction, additive instance, and restrictFunctorIsoPullback. No monoidal instance in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "No Mathlib match; exact instance found by reading the source library."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackMonoidal",
+   "results": "No Mathlib hits. Local source file WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal contains the exact instance at lines 86-93.",
+   "date": "2026-10-13",
+   "verdict": "Existing proved source declaration; no new module needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartTotalTensor",
+  "group": "Q3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-tensor-qcoh-component",
+   "place": "Affine chart total-tensor comparison: the natural coefficient restriction tensor comparison before passing to the derived category.",
+   "via": [
+    "lem-pc-affine-chart-total-tensor",
+    "lem-pc-affine-derived-tensor-chart-comparison",
+    "lem-pc-derived-tensor-qcoh-component",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pullbackMonoidal",
+  "statement": "noncomputable instance pullbackMonoidal : (pullback f).Monoidal",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-45fbd",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T194133-L-462446",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-45fbd",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T194133-L-462446",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module, node records, report, compilation, axioms, and sole direct importer matched the stage-3 review requirements and packet."
+ }
+}
