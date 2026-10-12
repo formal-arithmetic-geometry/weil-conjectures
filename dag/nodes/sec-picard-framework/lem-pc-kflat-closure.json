@@ -22,56 +22,59 @@
  ],
  "proof": [
   {
-   "text": "The bounded-above flat-complex argument of Stacks 06YS applies to the abelian category of sheaves of $\\mathcal O$-modules: filter the tensor total complex by stupid truncations. Each associated graded piece is a tensor product with one flat term and is acyclic; induction on the upper bound gives acyclicity. Thus every bounded-above complex of flat $\\mathcal O$-modules is K-flat by [lem-pc-bounded-above-flat-kflat-site].",
+   "text": "Apply CochainComplex.isKFlat_of_boundedAbove_flat to the supplied upper bound and degreewise flatness hypotheses.",
    "uses": [
     "lem-pc-bounded-above-flat-kflat-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 06YS, bounded-above flat complexes are K-flat"
-   }
+   "elementary": true
   },
   {
-   "text": "Cones and countable direct sums of K-flat complexes of $\\mathcal O$-modules are K-flat by [lem-pc-kflat-cone-direct-sum]. The homotopy colimit of a sequence $E_0^\\bullet\\to E_1^\\bullet\\to\\cdots$ is by definition the cone of $1-\\operatorname{shift}:\\bigoplus_nE_n^\\bullet\\to\\bigoplus_nE_n^\\bullet$, as in [lem-pc-complex-hocolim-colimit]; if every $E_n^\\bullet$ is K-flat, the countable sum $\\bigoplus_nE_n^\\bullet$ is K-flat and so is the cone of this endomorphism, by the two clauses of [lem-pc-kflat-cone-direct-sum]. Hence the class of K-flat complexes is closed under homotopy colimits.",
+   "text": "For a morphism of K-flat complexes apply CochainComplex.isKFlat_mappingCone.",
    "uses": [
-    "lem-pc-kflat-cone-direct-sum",
-    "lem-pc-complex-hocolim-colimit"
+    "lem-pc-kflat-cone-direct-sum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 06YS, closure of K-flat complexes under cones and direct sums"
-   }
+   "elementary": true
   },
   {
-   "text": "Take $\\mathcal B=\\Mod(\\mathcal O)$. It is a Grothendieck abelian category by [prop-pur-kinjective-resolutions-exist] (for $\\Mod(\\mathcal O)$ to be abelian the site is small or essentially small, and replacing $\\mathcal C$ by an equivalent small site changes neither $\\Mod(\\mathcal O)$ nor $\\otimes_{\\mathcal O}$), and by [lem-pc-sheaf-modules-tensor-closed] the tensor product $\\otimes_{\\mathcal O}$ makes it symmetric, hence braided, monoidal closed, so $\\mathcal F\\otimes_{\\mathcal O}-$ is a left adjoint and right exact for every $\\mathcal F$, and $\\mathcal G\\otimes_{\\mathcal O}\\mathcal F\\cong\\mathcal F\\otimes_{\\mathcal O}\\mathcal G$ naturally. A flat $\\mathcal O$-module $\\mathcal F$ [def-pc-flat-sheaf-modules] has $-\\otimes_{\\mathcal O}\\mathcal F$, hence $\\mathcal F\\otimes_{\\mathcal O}-$, exact, so $\\mathcal F\\otimes_{\\mathcal O}-$ preserves finite limits and $\\mathcal F$ is flat in the sense of [lem-weil-pbc-flat-coproduct]. That theorem applied to a countable family $(\\mathcal F_n)_{n\\in\\mathbf N}$ of flat $\\mathcal O$-modules shows that $(\\bigoplus_n\\mathcal F_n)\\otimes_{\\mathcal O}-$ preserves finite limits; being also right exact, it is exact, and by the symmetry so is $-\\otimes_{\\mathcal O}\\bigoplus_n\\mathcal F_n$. Thus $\\bigoplus_n\\mathcal F_n$ is flat.",
+   "text": "Obtain the Grothendieck abelian property from grothendieckAbelian_with_localized_generator, and monoidal closure from tensorClosed. For any family of acyclic complexes, form in each degree the short complex of diagrams via ShortComplex.functorEquivalence. Evaluations jointly reflect isomorphisms and are exact, so the short complex of diagrams is exact. Apply Mathlib colim.exact_mapShortComplex to the termwise coproduct cocones: AB4 from the Grothendieck property makes the coproduct acyclic. Given an acyclic test complex A, the total-tensor functor in the other complex variable preserves coproducts by the source-library BifunctorColimits instance, since each tensor functor is left adjoint. Each tensor summand is acyclic by the given K-flatness. Transport acyclicity across preservesColimitIso and Discrete.compNatIsoDiscrete. This proves K-flatness of arbitrary u-small coproducts, in particular all countable ones. For index types in a separate universe that are Small.{u}, transport exactness from Discrete (Shrink.{u} I) along Discrete.equivalence (equivShrink I), using HasExactColimitsOfShape.of_domain_equivalence. The fully proved private helper isKFlat_coproduct_small therefore applies both to I : Type u and to the natural numbers without identifying universes.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding coproduct proof to the natural-number-indexed family. The endomorphism 1 - shift has that K-flat sum as both domain and codomain, so isKFlat_mappingCone proves K-flatness of its cone. The statement already writes the homotopy colimit as this cone, so no comparison to the ordinary colimit is needed.",
+   "uses": [
+    "lem-pc-kflat-cone-direct-sum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the Grothendieck abelian property and monoidal closure as above. For each flat sheaf F_i, its tensorRight is exact by definition. BraidedCategory.tensorLeftIsoTensorRight transports its finite-limit preservation to tensorLeft; closure gives finite-colimit preservation of tensorLeft automatically. Thus F_i satisfies CategoryTheory.ObjectProperty.flat. Apply ObjectProperty.flat_coproduct and take its tensorRight exactness clause, which is definitionally SheafOfModules.IsFlat of the sum.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
     "lem-pc-sheaf-modules-tensor-closed",
     "lem-weil-pbc-flat-coproduct",
     "def-pc-flat-sheaf-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EU, direct sums of flat sheaves are flat"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-bounded-above-flat-kflat-site",
   "lem-pc-kflat-cone-direct-sum",
-  "lem-pc-complex-hocolim-colimit",
-  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-ringed-site-grothendieck-abelian",
   "lem-pc-sheaf-modules-tensor-closed",
   "lem-weil-pbc-flat-coproduct",
   "def-pc-flat-sheaf-modules"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 06YS"
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 06YS, 06YR and 03EU; Lean implementation using exact coproducts and total tensor colimit preservation"
  },
  "mathlib_searches": [
   {
@@ -166,5 +169,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T085302-L-24687",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -9,11 +9,14 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
+import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
+import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorColimits
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.KFlatClosure
-import Sheaf.Algebra.Homology.TelescopeColimit
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-!
@@ -33,6 +36,56 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
+
+-- Exact coproducts preserve each three-term complex defining acyclicity.
+private theorem acyclic_coproduct {A : Type*} [Category.{u} A] [Abelian A]
+    {I : Type*} [HasColimitsOfShape (Discrete I) A]
+    [HasExactColimitsOfShape (Discrete I) A]
+    (K : I → CochainComplex A ℤ) (hK : ∀ i, (K i).Acyclic) : (∐ K).Acyclic := by
+  intro n
+  let D := Discrete.functor K
+  let S := (ShortComplex.functorEquivalence (Discrete I) A).inverse.obj
+    (D ⋙ HomologicalComplex.shortComplexFunctor A (.up ℤ) n)
+  have hEval : JointlyReflectIsomorphisms
+      (fun j : Discrete I ↦ (evaluation (Discrete I) A).obj j) :=
+    ⟨fun f h ↦ by
+      have (j : Discrete I) : IsIso (f.app j) := h j
+      exact NatIso.isIso_of_isIso_app f⟩
+  have hS : S.Exact := (hEval.exact_iff S).2 (fun j ↦ hK j.as n)
+  have hc (i : ℤ) := isColimitOfPreserves (HomologicalComplex.eval A (.up ℤ) i)
+    (colimit.isColimit D)
+  exact colim.exact_mapShortComplex hS
+    (hc ((ComplexShape.up ℤ).prev n)) (hc n) (hc ((ComplexShape.up ℤ).next n))
+    ((∐ K).d _ n) ((∐ K).d n _)
+    (fun j ↦ (colimit.ι D j).comm _ _)
+    (fun j ↦ (colimit.ι D j).comm _ _)
+
+-- Tensor commutes with small coproducts, whose exactness preserves acyclicity.
+private theorem isKFlat_coproduct_small
+    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
+    (R : Sheaf J CommRingCat.{u}) {I : Type*} [Small.{u} I]
+    (K : I → CochainComplex (SheafOfModules.{u} ((sheafCompose J
+      (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
+    (hK : ∀ i : I, (K i).IsKFlat) : (∐ K).IsKFlat := by
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let := (SheafOfModules.tensorClosed R).2.1.some
+  let := (SheafOfModules.grothendieckAbelian_with_localized_generator J R).1
+  have : HasExactColimitsOfShape (Discrete I)
+      (SheafOfModules.{u} ((sheafCompose J
+        (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) := by
+    exact HasExactColimitsOfShape.of_domain_equivalence _
+      (Discrete.equivalence (equivShrink.{u} I)).symm
+  intro A hA
+  let T := ((MonoidalCategory.curriedTensor _).map₂HomologicalComplex
+    (.up ℤ) (.up ℤ) (.up ℤ)).obj A
+  have ht : (∐ fun i ↦ T.obj (K i)).Acyclic :=
+    acyclic_coproduct _ (fun i ↦ hK i A hA)
+  let e : Discrete.functor (fun i ↦ T.obj (K i)) ≅ Discrete.functor K ⋙ T :=
+    (Discrete.compNatIsoDiscrete K T).symm
+  exact fun n ↦ (ht n).of_iso
+    (HasColimit.isoOfNatIso e ≪≫ (preservesColimitIso T (Discrete.functor K)).symm)
 
 /-- Bounded-above flat complexes are K-flat; K-flat complexes are closed under mapping
 cones, countable direct sums and sequential homotopy colimits; countable sums of flat
@@ -77,6 +130,24 @@ theorem kFlat_closure
       ∀ F : I → SheafOfModules.{u} ((sheafCompose J
         (forget₂ CommRingCat.{u} RingCat.{u})).obj R),
       (∀ i : I, SheafOfModules.IsFlat (F i)) → SheafOfModules.IsFlat (∐ F)) := by
-  sorry
+  refine ⟨fun K hb hf ↦ isKFlat_of_boundedAbove_flat K hb hf,
+    fun K L f hK hL ↦ isKFlat_mappingCone f hK hL,
+    fun I _ K hK ↦ isKFlat_coproduct_small R K hK, ?_, ?_⟩
+  · intro K t hK
+    have hsum := isKFlat_coproduct_small R K hK
+    exact isKFlat_mappingCone _ hsum hsum
+  · intro I _ F hF
+    let := SheafOfModules.monoidalCategory R
+    let := SheafOfModules.symmetricCategory R
+    let := (SheafOfModules.tensorClosed R).2.1.some
+    let := (SheafOfModules.grothendieckAbelian_with_localized_generator J R).1
+    have hflat (i : I) : ObjectProperty.flat (F i) := by
+      have hi := hF i
+      change exactFunctor _ _ (MonoidalCategory.tensorRight (F i)) at hi
+      have : PreservesFiniteLimits (MonoidalCategory.tensorRight (F i)) := hi.1
+      exact ⟨⟨preservesFiniteLimits_of_natIso
+        (BraidedCategory.tensorLeftIsoTensorRight (F i)).symm,
+        (inferInstance : PreservesFiniteColimits (MonoidalCategory.tensorLeft (F i)))⟩, hi⟩
+    exact (ObjectProperty.flat_coproduct F hflat).2
 
 end CochainComplex
