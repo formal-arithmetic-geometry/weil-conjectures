@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-popescu-delocalize-dehomogenization-equiv",
+ "kind": "statement",
+ "title": "PopescuDelocalizeDehomogenizationEquiv",
+ "statement": "Let R be a commutative ring, n,m,c,t natural numbers, f_j ∈ R[x₁,...,x_{n+m}] for j < c, g_j ∈ R[x₁,...,x_n] for j < t, and s₀,...,s_t ∈ R. Assume s_{j+1}g_j ∈ (f) after inserting the first n variables. Choose d_j bounding the sum of exponents in the last m variables in every supported monomial of f_j. Define F_j by the finite support formula: replace each original variable by the variable of index one higher and multiply its monomial by w^(d_j minus the last-m exponent sum). In P = R[x₀,x₁,...,x_{n+m},w] [def-weil-pbc-mv-polynomial-ring], set B=P/(g_j,x₀F_j) and D=P/(f_j), with f_j inserted in original variables 1,...,n+m. Write b_B and b_D for the respective images of x₀ w ∏_{j=0}^t s_j. There is an R-algebra equivalence B[1/b_B] ≃ D[1/b_D], using localization away [def-weil-ring-localization-away] and composite R-algebra structures. No condition on a Jacobian is needed.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma Tag 07F9, final displayed isomorphism and smoothness assertion; https://stacks.math.columbia.edu/tag/07F9; Jacobian criterion: Definition Tag 00T6"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Expand the support sum defining F. Substituting v_i*w for each of the last m variables gives w^d_j f_j(u,v): hdegree ensures each exponent sum equals d_j. For a unit w this gives the inverse formula with v_i=V_i/w.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In each localization x₀,w and every s_j are units. Map B to D[1/b_D] by fixing coefficients, x₀, the first n variables and w, and sending the last m variables to x_i*w. The support identity kills x₀F_j. The ideal membership gives s_{j+1}g_j=0 in D, and its unit coefficient kills g_j. Since b_B maps to a unit, extend the map to B[1/b_B].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely send each last-m variable in D to X_i/w in B[1/b_B], fixing all other variables and coefficients. The inverse support identity, F_j=0 because x₀F_j=0 and x₀ is a unit, kills every f_j. The image of b_D is a unit, so extend to D[1/b_D].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two composites fix coefficients and all variables: (x_i*w)/w=x_i and (X_i/w)*w=X_i. Polynomial extensionality, surjectivity of quotient maps and uniqueness for localization maps make both composites identities, giving the algebra equivalence. If c,m or t is zero the corresponding finite checks are empty; if a localization is zero the same universal properties apply.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-away-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Tag 07F9; universal-property and Jacobian details expanded as in the parent plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Partial homogenization and dehomogenization give an algebra isomorphism between localizations of polynomial quotients",
+   "results": "Service unavailable (HTTP Internal Server Error); no absence verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.Away, AlgEquiv",
+   "results": "IsLocalization.Away.tensorRightEquiv, IsLocalization.Away.tensorEquiv, IsLocalization.Away.tensorProductEquivTMulRight, IsLocalization.Away.tensorProductEquivTMulRight_tmul, Localization.awayEquivAdjoin, StandardEtalePair.equivAwayAdjoinRoot, StandardEtalePair.equivAwayQuotient",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; hits are general tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeniz|quotientEquiv|mvPolynomialQuotientEquiv",
+   "results": "Mathlib/RingTheory/MvPolynomial/Localization.lean, Mathlib/RingTheory/MvPolynomial/Localization.lean, Mathlib/RingTheory/MvPolynomial/Localization.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; hits are general tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Steps 1 and 4-6 of the parent plan: dehomogenization maps and inverse identities within finite-etale-lifting step 7",
+   "via": [
+    "lem-weil-pbc-popescu-delocalize-weak-localization-smooth",
+    "lem-weil-pbc-popescu-delocalize-weak",
+    "lem-weil-pbc-popescu-delocalize-height-zero",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PopescuDelocalizeDehomogenizationEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/PopescuDelocalizeDehomogenizationEquiv.lean",
+  "declaration": "Algebra.popescu_delocalize_dehomogenization_equiv_exists",
+  "statement": "theorem popescu_delocalize_dehomogenization_equiv_exists\n    (R : Type u) [CommRing R]\n    (n m c t : ℕ)\n    (f : Fin c → MvPolynomial (Fin (n + m)) R)\n    (g : Fin t → MvPolynomial (Fin n) R)\n    (s : Fin (t + 1) → R)\n    (hg : ∀ j : Fin t,\n      C (s j.succ) * rename (Fin.castLE (Nat.le_add_right n m)) (g j) ∈\n        Ideal.span (Set.range f))\n    (d : Fin c → ℕ)\n    (hdegree : ∀ j : Fin c, ∀ e ∈ (f j).support,\n      (∑ i : Fin (n + m), if n ≤ i.val then e i else 0) ≤ d j)\n    (F : Fin c → MvPolynomial (Fin (n + m + 2)) R)\n    (hF : ∀ j : Fin c, F j =\n      ∑ e ∈ (f j).support,\n        C ((f j).coeff e) *\n          (∏ i : Fin (n + m), X i.castSucc.succ ^ e i) *\n          X (Fin.last (n + m + 1)) ^\n            (d j - ∑ i : Fin (n + m), if n ≤ i.val then e i else 0)) :\n    Nonempty (Localization.Away\n      (Ideal.Quotient.mk\n        (Ideal.span\n          (Set.range (fun j : Fin t =>\n            rename (fun i : Fin n =>\n              (Fin.castLE (Nat.le_add_right n m) i).castSucc.succ) (g j)) ∪\n            Set.range (fun j : Fin c => X (0 : Fin (n + m + 2)) * F j)))\n        (X (0 : Fin (n + m + 2)) * X (Fin.last (n + m + 1)) *\n          C (∏ j : Fin (t + 1), s j))) ≃ₐ[R]\n      Localization.Away (Ideal.Quotient.mk\n        (Ideal.span (Set.range (fun j : Fin c =>\n          rename (fun i : Fin (n + m) => i.castSucc.succ) (f j))))\n        (X (0 : Fin (n + m + 2)) * X (Fin.last (n + m + 1))\n          * C (∏ j : Fin (t + 1), s j))))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T184250-L-4000068",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T184250-L-4000068",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

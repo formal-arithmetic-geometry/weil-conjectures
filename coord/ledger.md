@@ -8910,3 +8910,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/E1/Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels (stage 3; reviewer PASS; first push; landing 20261012T184249-L-3999589 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/E1/Sheaf.Algebra.FiniteReesModuleGeneration (stage 3; reviewer PASS; first push; landing 20261012T184249-L-3999776 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/E1/Sheaf.AlgebraicGeometry.FiniteTypeIdealH1Representatives (stage 3; reviewer PASS; first push; landing 20261012T184250-L-3999967 (interface); batch 20261012T184234; modules 2; new nodes 1)
+- 18:42 L: merged deliver/E1/Sheaf.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth (stage 3; reviewer PASS; after a return; landing 20261012T184250-L-4000068 (interface); batch 20261012T184234; modules 3; new nodes 2)

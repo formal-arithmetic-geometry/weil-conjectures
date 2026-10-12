@@ -6,6 +6,9 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.AlgebraicGeometry.PopescuDelocalizeJacobianLocalization
+import Sheaf.AlgebraicGeometry.PopescuDelocalizeDehomogenizationEquiv
+import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.Algebra.MvPolynomial.Rename
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
@@ -95,6 +98,10 @@ theorem popescu_delocalize_weak_localization_smooth
             Set.range (fun j : Fin c => X (0 : Fin (n + m + 2)) * F j)))
         (X (0 : Fin (n + m + 2)) * X (Fin.last (n + m + 1)) *
           C (∏ j : Fin (t + 1), s j)))) := by
-  sorry
+  have := popescu_auxiliary_isStandardSmooth R (n + m) c t hc f s h hs
+  obtain ⟨e⟩ := popescu_delocalize_dehomogenization_equiv_exists
+    R n m c t f g s hg d hdegree F hF
+  have := Algebra.IsStandardSmooth.of_algEquiv e.symm
+  infer_instance
 
 end Algebra

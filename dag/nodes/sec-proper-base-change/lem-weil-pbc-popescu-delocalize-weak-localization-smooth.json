@@ -32,104 +32,32 @@
  ],
  "proof": [
   {
-   "text": "(Notation and the dehomogenization identity.) Put $s=s_0s_1\\cdots s_t\\in R$ and $X:=X_{n+m+1}$. Claim (H): for every commutative $R$-algebra $T$ and elements $u_1,\\dots,u_n,v_1,\\dots,v_m,w\\in T$, evaluating (by the universal property of [def-weil-pbc-mv-polynomial-ring]) gives $F_j(u_1,\\dots,u_n,v_1w,\\dots,v_mw,w)=w^{d_j}\\,f_j(u_1,\\dots,u_n,v_1,\\dots,v_m)$ for $j=1,\\dots,c$. Indeed both sides are sums over the finitely many $e$ with $a_{j,e}\\ne0$, and the summand of the left side is $a_{j,e}(u)\\,(v_1w)^{e_1}\\cdots(v_mw)^{e_m}\\,w^{d_j-e_1-\\dots-e_m}=w^{d_j}\\,a_{j,e}(u)\\,v_1^{e_1}\\cdots v_m^{e_m}$, the summand of the right side (here $d_j-|e|\\ge0$ by the choice of $d_j$). Claim (H'): if moreover $w$ is a unit of $T$ and $V_1,\\dots,V_m\\in T$, then $F_j(u,V_1,\\dots,V_m,w)=w^{d_j}f_j(u,V_1w^{-1},\\dots,V_mw^{-1})$: this is (H) with $v_i=V_iw^{-1}$.",
+   "text": "Apply Algebra.popescu_auxiliary_isStandardSmooth to the original relations f and the same s, with N=n+m. This gives standard smoothness of the dehomogenized localization.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
+    "lem-weil-pbc-popescu-delocalize-jacobian-localization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2210-2225 (the displayed computation F_j(lambda) = lambda_{n+m+1}^{deg F_j} f_j(lambda_1,...,lambda_{n+m+1}/lambda_{n+m+1}) at lines 2196-2205 is the same identity)"
-   }
+   "elementary": false
   },
   {
-   "text": "(The algebra $C$ and its units.) Let $Q=R[x_0,x_1,\\dots,x_{n+m},x_{n+m+1},y,z]$ ([def-weil-pbc-mv-polynomial-ring]; $f_j$, $g_j$, $h$, $\\Delta$ are elements of $Q$ through $R[x_1,\\dots,x_{n+m}]\\subset Q$), let $C=Q/(f_1,\\dots,f_c,\\;x_0x_{n+m+1}y-1,\\;sz-1)$ and $\\pi:Q\\to C$ the quotient map, an $R$-algebra map. In $C$: (a) $x_0x_{n+m+1}$ is a unit with inverse $y$, hence $x_0$ and $x_{n+m+1}$ are units (a factor of a unit is a unit); (b) $s$ is a unit with inverse $z$, hence each $s_j$ ($0\\le j\\le t$) is a unit, with inverse $z\\prod_{k\\ne j}s_k$; (c) every element of the ideal $(f_1,\\dots,f_c)R[x_1,\\dots,x_{n+m}]$ maps to $0$ in $C$, so by hypothesis (ii) $s_jg_j=0$ in $C$, and as $s_j$ is a unit, $g_j=0$ in $C$ for $j=1,\\dots,t$; (d) by hypothesis (i), $s_0=h\\Delta$ in $C$, and $s_0$ is a unit, so $\\Delta$ is a unit of $C$ with inverse $h s_0^{-1}$.",
+   "text": "Obtain an R-algebra equivalence from the homogenized localization to the dehomogenized localization by Algebra.popescu_delocalize_dehomogenization_equiv_exists. Transport standard smoothness back using Mathlib Algebra.IsStandardSmooth.of_algEquiv; apply the standard-smooth-is-smooth instance.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2210-2225 (the ring R_{s_0...s_t}[x_0,...,x_{n+m+1},1/x_0x_{n+m+1}]/(f_1,...,f_c) of line 2222, written as a quotient of one polynomial ring; the units s_0 and s_j are chosen at lines 2185-2192)"
-   }
-  },
-  {
-   "text": "($C$ is standard smooth over $R$.) Number the $N=n+m+4$ variables of $Q$ as $w_1,\\dots,w_N$ with $(w_1,\\dots,w_c)=(x_1,\\dots,x_c)$, $w_{c+1}=y$, $w_{c+2}=z$, and $w_{c+3},\\dots,w_N$ the remaining variables $x_{c+1},\\dots,x_{n+m},x_0,x_{n+m+1}$ in any order; renaming variables is an isomorphism of $R$-algebras of polynomial rings ([def-weil-pbc-mv-polynomial-ring]). Take the $c+2\\le N$ relations $(f_1,\\dots,f_c,\\;x_0x_{n+m+1}y-1,\\;sz-1)$. Their matrix of formal partial derivatives ([def-weil-pbc-polynomial-partial-derivative]) with respect to $w_1,\\dots,w_{c+2}$: for $i,j\\le c$, $\\partial f_j/\\partial x_i$ computed in $Q$ is the same polynomial as computed in $R[x_1,\\dots,x_{n+m}]$ (monomial formula), and $\\partial f_j/\\partial y=\\partial f_j/\\partial z=0$ since $f_j$ does not involve $y,z$; $\\partial(x_0x_{n+m+1}y-1)/\\partial x_i=0$ for $1\\le i\\le c$ because $c\\le n+m$, so $x_i\\notin\\{x_0,x_{n+m+1},y\\}$, while $\\partial(x_0x_{n+m+1}y-1)/\\partial y=x_0x_{n+m+1}$ and $\\partial/\\partial z=0$; $\\partial(sz-1)/\\partial x_i=\\partial(sz-1)/\\partial y=0$ and $\\partial(sz-1)/\\partial z=s$. So the matrix is block diagonal with blocks $(\\partial f_j/\\partial x_i)_{i,j\\le c}$, $(x_0x_{n+m+1})$, $(s)$, and its determinant is $\\Delta\\cdot x_0x_{n+m+1}\\cdot s$ (for $c=0$ it is $x_0x_{n+m+1}s$, consistent with $\\Delta=1$). By Step 2 (a), (b), (d) its image in $C$ is a product of units, hence a unit. Thus $\\mathrm{id}:Q/(\\dots)\\to C$ is a standard smooth presentation of $C$ over $R$ in the sense of [def-weil-pbc-standard-smooth-algebra] (integers $N\\ge c+2\\ge0$).",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-polynomial-partial-derivative",
-    "def-weil-pbc-standard-smooth-algebra"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Definition Tag 00T6 (definition-standard-smooth), line 37236; applied as in Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2210-2225 ('smooth over R by construction')"
-   }
-  },
-  {
-   "text": "(The map $\\Phi:B_b\\to C$.) Let $P=R[x_0,x_1,\\dots,x_n,X_{n+1},\\dots,X_{n+m+1}]$ and $\\rho:P\\to B$ the quotient map. By [def-weil-pbc-mv-polynomial-ring] let $\\tilde\\varphi:P\\to C$ be the $R$-algebra map with $x_0\\mapsto x_0$, $x_i\\mapsto x_i$ ($1\\le i\\le n$), $X_{n+i}\\mapsto x_{n+i}x_{n+m+1}$ ($1\\le i\\le m$), $X_{n+m+1}\\mapsto x_{n+m+1}$ (images in $C$). It kills the generators of the ideal defining $B$: $\\tilde\\varphi(g_j)=g_j(x_1,\\dots,x_n)=0$ in $C$ by Step 2 (c); and by (H) of Step 1 with $T=C$, $u_k=x_k$, $v_i=x_{n+i}$, $w=x_{n+m+1}$, $\\tilde\\varphi(x_0F_j)=x_0\\,F_j(x_1,\\dots,x_n,x_{n+1}x_{n+m+1},\\dots,x_{n+m}x_{n+m+1},x_{n+m+1})=x_0\\,x_{n+m+1}^{d_j}f_j(x_1,\\dots,x_{n+m})=0$ in $C$. Hence $\\tilde\\varphi$ kills the ideal they generate and factors as $\\tilde\\varphi=\\varphi\\circ\\rho$ with $\\varphi:B\\to C$ an $R$-algebra map. Now $\\varphi(b)=x_0x_{n+m+1}s$, a unit of $C$ with inverse $yz$ (Step 2 (a), (b)). By [lem-weil-pbc-localization-away-universal-property] there is a unique ring map $\\Phi:B_b\\to C$ with $\\Phi(\\beta/1)=\\varphi(\\beta)$ for $\\beta\\in B$; it is an $R$-algebra map, since the structure map of $B_b$ is $R\\to B\\to B_b$ and $\\varphi$ is one.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-ring-localization-away",
-    "lem-weil-pbc-localization-away-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2210-2225 (the isomorphism B_b = R_{s_0...s_t}[x_0,...,x_{n+m+1},1/x_0x_{n+m+1}]/(f_1,...,f_c), one direction; the change of variables X_{n+i} = x_{n+i}x_{n+m+1} is left implicit in the source)"
-   }
-  },
-  {
-   "text": "(The map $\\psi:C\\to B_b$.) Write $\\bar\\beta$ for the image in $B_b$ of $\\beta\\in P$ (through $P\\to B\\to B_b$). In $B_b$ the element $b/1=\\bar x_0\\,\\bar X_{n+m+1}\\,\\bar s$ is a unit ([def-weil-ring-localization-away]), hence so are its factors $\\bar x_0$, $\\bar X_{n+m+1}$, $\\bar s$ and $\\bar x_0\\bar X_{n+m+1}$. By [def-weil-pbc-mv-polynomial-ring] let $\\tilde\\psi:Q\\to B_b$ be the $R$-algebra map with $x_0\\mapsto\\bar x_0$, $x_i\\mapsto\\bar x_i$ ($1\\le i\\le n$), $x_{n+i}\\mapsto\\bar X_{n+i}\\bar X_{n+m+1}^{-1}$ ($1\\le i\\le m$), $x_{n+m+1}\\mapsto\\bar X_{n+m+1}$, $y\\mapsto(\\bar x_0\\bar X_{n+m+1})^{-1}$, $z\\mapsto\\bar s^{-1}$. It kills the relations of $C$: $\\tilde\\psi(x_0x_{n+m+1}y-1)=0$ and $\\tilde\\psi(sz-1)=0$ by construction; and by (H') of Step 1 with $T=B_b$, $u_k=\\bar x_k$, $V_i=\\bar X_{n+i}$, $w=\\bar X_{n+m+1}$: $\\tilde\\psi(f_j)=f_j(\\bar x_1,\\dots,\\bar x_n,\\bar X_{n+1}\\bar X_{n+m+1}^{-1},\\dots,\\bar X_{n+m}\\bar X_{n+m+1}^{-1})=\\bar X_{n+m+1}^{-d_j}\\,\\overline{F_j}=\\bar X_{n+m+1}^{-d_j}\\,\\bar x_0^{-1}\\,\\overline{x_0F_j}=0$, because $x_0F_j$ is one of the relations of $B$ (this is where $x_0$ invertible turns $x_0F_j=0$ into $F_j=0$). Hence $\\tilde\\psi$ kills the ideal defining $C$ and factors as $\\tilde\\psi=\\psi\\circ\\pi$ with $\\psi:C\\to B_b$ an $R$-algebra map.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2210-2225 (the other direction of the isomorphism; the dehomogenization x_{n+i} = X_{n+i}/X_{n+m+1} is the substitution of lines 2196-2205)"
-   }
-  },
-  {
-   "text": "($\\Phi$ and $\\psi$ are inverse.) $\\Phi\\circ\\psi\\circ\\pi$ and $\\pi$ are $R$-algebra maps $Q\\to C$ agreeing on the variables: $x_0,x_i,x_{n+m+1}$ go to themselves; $x_{n+i}\\mapsto\\Phi(\\bar X_{n+i})\\Phi(\\bar X_{n+m+1})^{-1}=x_{n+i}x_{n+m+1}x_{n+m+1}^{-1}=x_{n+i}$; $y\\mapsto\\Phi(\\bar x_0\\bar X_{n+m+1})^{-1}=(x_0x_{n+m+1})^{-1}=y$; $z\\mapsto\\Phi(\\bar s)^{-1}=s^{-1}=z$ (ring maps send inverses to inverses; Step 2 (a), (b)). By the uniqueness in [def-weil-pbc-mv-polynomial-ring] they are equal, and as $\\pi$ is surjective, $\\Phi\\circ\\psi=\\mathrm{id}_C$. Conversely, $\\psi\\circ\\Phi\\circ\\lambda\\circ\\rho$ and $\\lambda\\circ\\rho$ ($\\lambda:B\\to B_b$, $\\beta\\mapsto\\beta/1$) are $R$-algebra maps $P\\to B_b$ agreeing on the variables: $x_0\\mapsto\\bar x_0$, $x_i\\mapsto\\bar x_i$, $X_{n+m+1}\\mapsto\\bar X_{n+m+1}$, and $X_{n+i}\\mapsto\\psi(x_{n+i}x_{n+m+1})=\\bar X_{n+i}\\bar X_{n+m+1}^{-1}\\bar X_{n+m+1}=\\bar X_{n+i}$; so they are equal, and as $\\rho$ is surjective, $\\psi\\circ\\Phi\\circ\\lambda=\\lambda$. By the uniqueness clause of [lem-weil-pbc-localization-away-universal-property] (applied to $\\lambda:B\\to B_b$, for which $\\lambda(b)$ is a unit), $\\psi\\circ\\Phi=\\mathrm{id}_{B_b}$. Hence $\\Phi:B_b\\to C$ is an isomorphism of $R$-algebras.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-localization-away-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2210-2225 ('Then B_b is isomorphic to ...')"
-   }
-  },
-  {
-   "text": "(Conclusion.) Composing the standard smooth presentation $Q/(f_1,\\dots,f_c,x_0x_{n+m+1}y-1,sz-1)\\xrightarrow{\\mathrm{id}}C$ of Step 3 with the $R$-algebra isomorphism $\\Phi^{-1}=\\psi:C\\to B_b$ of Step 6 gives an isomorphism of $R$-algebras $Q/(\\dots)\\to B_b$ under which the determinant maps to $\\psi(\\Delta x_0x_{n+m+1}s)$, a unit of $B_b$ (image of a unit under a ring map). So $B_b$ is a standard smooth $R$-algebra [def-weil-pbc-standard-smooth-algebra], and by [lem-weil-pbc-standard-smooth-is-smooth] $B_b$ is a smooth $R$-algebra [def-weil-pbc-smooth-ring-map].",
-   "uses": [
+    "lem-weil-pbc-popescu-delocalize-dehomogenization-equiv",
     "def-weil-pbc-standard-smooth-algebra",
-    "lem-weil-pbc-standard-smooth-is-smooth",
-    "def-weil-pbc-smooth-ring-map"
+    "lem-weil-pbc-standard-smooth-is-smooth"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2210-2225 ('which is smooth over R by construction'); Algebra, Lemma Tag 00T7 (lemma-standard-smooth) for standard smooth implies smooth"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-polynomial-partial-derivative",
+  "lem-weil-pbc-popescu-delocalize-jacobian-localization",
+  "lem-weil-pbc-popescu-delocalize-dehomogenization-equiv",
   "def-weil-pbc-standard-smooth-algebra",
-  "def-weil-ring-localization-away",
-  "lem-weil-pbc-localization-away-universal-property",
-  "lem-weil-pbc-standard-smooth-is-smooth",
-  "def-weil-pbc-smooth-ring-map"
+  "lem-weil-pbc-standard-smooth-is-smooth"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, proof of Lemma Tag 07F9 (lemma-delocalize-weak), lines 2210-2225; the isomorphism B_b = C and the explicit standard smooth presentation, which the source leaves implicit ('isomorphic to', 'by construction'), are written out by the worker; Algebra Definition Tag 00T6 and Lemma Tag 00T7 (literature/stacks-project/algebra.tex)"
+  "place": "Proof of Tag 07F9, the final localized quotient and isomorphism; parent plan steps 1-7 are grouped into Jacobian and dehomogenization components, then transported with Mathlib."
  },
  "mathlib_searches": [
   {
@@ -242,5 +170,15 @@
   "group": "H1",
   "result": "pass",
   "note": "R:Type u CommRing; n m c t, hc c≤n+m; f,g,s,h; hs (s0 - hΔ ∈ (f), Δ=det pderiv over first c vars via castLE); hg (s_{j}·g_j ∈ (f), g renamed to first n vars); d with hdegree on last-m exponents ⇔ a_{j,e}≠0 bound; F tied by hF = partial homogenization in X_last; B = quotient by g (vars 1..n) and x0·F; b = x0·X_{n+m+1}·∏s incl s0; Localization.Away, Algebra.Smooth, R-algebra via IsScalarTower; #check: C,X,rename,pderiv resolve to MvPolynomial; no let/hollow/universe issues"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T184250-L-4000068",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
