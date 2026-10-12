@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-data-target-naturality",
+ "kind": "statement",
+ "title": "Target coefficient naturality for arbitrary resolution data",
+ "statement": "For h : X → Y, phi : G → h_*F, b : F → F′, and resolution data D for phi and E for phi followed by h_*b, D.map p followed by H^p(b) equals E.map p for every natural p.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Section 01F7, Equation 01F9 and Remark 01FB; Derived Categories 013P, 013S, 05TG for resolution comparisons"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply moduleCohomologyFMap_independent to D and the chosen datum defining the canonical map, and likewise to E. Rewrite the two maps, then apply moduleCohomologyFMap_target_naturality, the target-naturality clause of the functoriality node.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 01F7, Lemma 01F8 and Remark 01FB; repair using existing independence and target-naturality clauses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived functor degree zero augmentation naturality and semilinearity of cohomology maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps on cohomology computed using injective resolutions are natural in a morphism of target sheaves",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom', CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.desc_commutes_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match for arbitrary h-map resolution data; generic comparison tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "toRightDerivedZero_eq|mapHomologyIso_inv_naturality",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match for arbitrary h-map resolution data; generic comparison tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*homology|homology.*restrictScalars|toRightDerivedZero.*naturality",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for h-map resolution data; restriction-of-scalars and augmentation comparison tools only (second reading)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology comparison for restriction of scalars along a ring homomorphism preserves scalar multiplication",
+   "results": "ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalars.smul_def', ModuleCat.restrictScalars.smul_def, CategoryTheory.Mod_.scalarRestriction_smul, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, LinearMap.restrictScalars_smul, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.restrictScalarsComp'_hom_app",
+   "date": "2026-10-13",
+   "verdict": "No exact match for h-map resolution data; restriction-of-scalars and augmentation comparison tools only (second reading)."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-13",
+   "verdict": "No exact match for h-map resolution data; restriction-of-scalars and augmentation comparison tools only (second reading)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapDataTargetNaturality",
+  "group": "E2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Basic-properties proof clause (4) comparison on homology",
+   "via": [
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapDataTargetNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyFMapDataTargetNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ModuleCohomologyFMapData.map_target_naturality",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13",
+  "statement": "theorem ModuleCohomologyFMapData.map_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)\n    {G : SheafOfModules.{u} Y.ringCatSheaf}\n    {F F' : SheafOfModules.{u} X.ringCatSheaf}\n    (φ : G ⟶ (pushforward h).obj F) (b : F ⟶ F')\n    (D : ModuleCohomologyFMapData h G F φ)\n    (E : ModuleCohomologyFMapData h G F' (φ ≫ (pushforward h).map b)) (p : ℕ) :\n    D.map p ≫ (forget₂ _ AddCommGrpCat.{u}).map\n        ((X.toRingedSpace.moduleCohomology p).map b) = E.map p"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T202236-L-703312",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T202236-L-703312",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
