@@ -3,6 +3,7 @@ module
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
+import Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsHasIsosRepresentation
 
 @[expose] public section
 
@@ -45,6 +46,16 @@ theorem colimit_site_covering_axioms_HasIsos
     (hQ : (∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔
           ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),
             S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)) :
-        Q.HasIsos := by sorry
+        Q.HasIsos := by
+  constructor
+  intro S T f hf
+  have _ := hfinite
+  have _ := hcover
+  have _ := hpullback
+  set_option linter.style.haveILetI false in
+    letI : IsIso f := hf
+  obtain ⟨j, X, R, h, hR, hmap⟩ :=
+    filtered_colimit_iso_presieve_representation J F P V hobjects harrows f
+  exact (hQ T (Presieve.singleton f)).2 ⟨j, X, R, h, hR, hmap⟩
 
 end CategoryTheory

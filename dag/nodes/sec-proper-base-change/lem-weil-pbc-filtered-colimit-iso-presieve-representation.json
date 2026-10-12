@@ -1,0 +1,103 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-iso-presieve-representation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-covering-axioms-hasisos",
+   "place": "representation step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Isomorphisms in the filtered colimit category have covering stage representatives",
+ "statement": "Let J be filtered, F a diagram of small categories, P stage precoverages with singleton isomorphisms, and V a cocone whose object and arrow cocones are colimits. For every isomorphism f:S→T in V.pt there are a stage j, an object X, a stage covering presieve R on X, and an equality h:(V.ι.app j).toFunctor.obj X=T such that transporting R.map(V.ι.app j).toFunctor along h gives the singleton presieve of f.",
+ "stmt_deps": [
+  "lem-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, filtered colimit representation of an isomorphism"
+ },
+ "proof": [
+  {
+   "text": "Represent f and its inverse by arrows at stages using joint surjectivity of the arrow colimit. Filteredness gives a common stage and representatives with matching endpoints. Apply the filtered-colimit equality criterion to both inverse equations and refine once more so both equations hold at the same stage. The resulting stage arrow is an isomorphism, whose singleton is covering by the stage HasIsos axiom; functoriality and the endpoint equality identify its image presieve with the singleton of f.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit category arrow representation isomorphism stage representative",
+   "results": "No exact theorem found; inspected filtered colimit and category colimit APIs.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*colimit.*iso|colimit.*arrow.*representative",
+   "results": "No exact Mathlib declaration matching the representation statement.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "isomorphism in filtered colimit of categories represented by stage isomorphism",
+   "results": "No exact match returned.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsHasIsos",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsHasIsosRepresentation",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteCoveringAxiomsHasIsosRepresentation.lean",
+  "declaration": "CategoryTheory.filtered_colimit_iso_presieve_representation",
+  "statement": "theorem filtered_colimit_iso_presieve_representation\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ j, (P j).HasIsos]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    {S T : V.pt} (f : S ⟶ T) [IsIso f] :\n    ∃ (j : J) (X : F.obj j) (R : Presieve X)\n      (h : (V.ι.app j).toFunctor.obj X = T),\n      R ∈ P j X ∧ h ▸ R.map (V.ι.app j).toFunctor = Presieve.singleton f",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T203944-L-830778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T203944-L-830778",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
