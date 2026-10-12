@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-etale-coefficient-injective-cokernel-system",
+ "kind": "statement",
+ "title": "Compatible stage cokernels of an injective coefficient replacement",
+ "statement": "Let $I$ be a nonempty directed preordered set and $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ a diagram of schemes [def-pc-scheme]. Let $F_i$ be abelian sheaves on the small étale site of $D_i$ [def-weil-pbc-abelian-etale-sheaves]. For $f:i\\to j$ write $u_f=D(f^{\\mathrm{op}}):D_j\\to D_i$, and suppose given $\\varphi_f:u_f^{-1}F_i\\to F_j$, where inverse image is as in [def-weil-pbc-inverse-image]. Assume $\\varphi_{\\mathrm{id}}$ is the canonical inverse-image identity comparison, including transport along $D(\\mathrm{id})=\\mathrm{id}$. Assume $\\varphi_{g\\circ f}=\\varphi_g\\circ u_g^{-1}(\\varphi_f)\\circ c_{u_g,u_f}$, with transport along $D(g\\circ f)=u_f\\circ u_g$, where $c$ identifies inverse image along a composite with iterated inverse image. There exist compatible systems $A_i,R_i$ with transitions $\\psi_f,\\varphi_{R,f}$ satisfying the same canonical identity and composition laws, and maps $a_i:F_i\\to A_i$, $b_i:A_i\\to R_i$. Every $A_i$ is injective and $0\\to F_i\\xrightarrow{a_i}A_i\\xrightarrow{b_i}R_i\\to0$ is short exact [def-weil-pbc-exact-sequence]. The maps satisfy $a_j\\varphi_f=\\psi_fu_f^{-1}(a_i)$ and $b_j\\psi_f=\\varphi_{R,f}u_f^{-1}(b_i)$. No cone or functor-category diagram is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EXZ",
+  "place": "Product/direct-image system construction in the proof of Tag 0EXZ, with exact inverse image and stage cokernels from Tag 04JC; the compatible stage cokernels of an injective coefficient replacement portion of the parent stage-diagram proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a compatible injective embedding system a_i. Put R_i=cokernel(a_i) and b_i=cokernel projection. Define the quotient transition using PreservesCokernel.iso for inverse image, followed by cokernel.map for the commuting embedding square. The cokernel projection equation gives compatibility.",
+   "uses": [
+    "lem-weil-pbc-etale-coefficient-injective-system",
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the epic inverse image of b_i to prove quotient identity and composition. Substitute quotient compatibility; naturality of the unit and composition comparisons and the system laws of psi give the required equations.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each stage is short exact: a_i is mono, cokernel projection is epi, and ShortComplex.exact_of_g_is_cokernel applied to cokernelIsCokernel gives exactness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-coefficient-injective-system",
+  "lem-weil-pbc-inverse-image-composition",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0EXZ and 04JC",
+  "place": "F1 makes the corresponding step of the stage-diagram argument explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PreservesCokernel|cokernelSequence_exact|instPiObj",
+   "date": "2026-10-12",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Abelian/Exact.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean",
+   "verdict": "No matching compatible scheme-system theorem; Mathlib has the elementary categorical ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "compatible injective embedding of an etale sheaf coefficient system and its cokernel transitions",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cokernels of compatible morphisms of sheaf systems give a compatible quotient system",
+   "date": "2026-10-12",
+   "results": "8 hits: SheafOfModules.Presentation.isColimit, SheafOfModules.generatorsOfIsCokernelFree_π, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.presentationOfIsCokernelFree_relations, SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.Presentation.map_π_eq, SheafOfModules.Presentation.map",
+   "verdict": "No matching compatible scheme-system theorem; Mathlib has the elementary categorical ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleReplacementStageDiagram",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The injective-restriction-acyclicity proof, through the étale-limit acyclic-replacement construction: stage injective embeddings and cokernels before the filtered-colimit sequence. Specifically: Compatible stage cokernels of an injective coefficient replacement.",
+   "via": [
+    "lem-weil-pbc-etale-replacement-stage-diagram",
+    "lem-weil-pbc-etale-limit-replacement-exact-systems",
+    "lem-weil-pbc-etale-limit-acyclic-replacement",
+    "lem-weil-pbc-etale-limit-cohomology-connecting-ladder",
+    "lem-weil-pbc-etale-limit-cohomology-class-descent",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoefficientInjectiveCokernelSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoefficientInjectiveCokernelSystem.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_coefficient_injective_cokernel_system",
+  "statement": "theorem etale_coefficient_injective_cokernel_system\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n :\n    ∃ (FR : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φR : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FR i) ⟶ FR j)\n    (hidentityR : ∀ i : I, φR (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (FR i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FR i))\n    (hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φR (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FR i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φR f) ≫ φR g)\n    (FI : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (ψ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FI i) ⟶ FI j)\n    (hidentityI : ∀ i : I, ψ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (FI i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FI i))\n    (hcompositionI : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      ψ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FI i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (ψ f) ≫ ψ g)\n    (ai : ∀ i : I, F i ⟶ FI i) (bi : ∀ i : I, FI i ⟶ FR i)\n    (wi : ∀ i : I, ai i ≫ bi i = 0)\n    (hi : ∀ i : I, (ShortComplex.mk (ai i) (bi i) (wi i)).ShortExact),\n      (∀ i : I, Injective (FI i)) ∧\n      (∀ (i j : I) (f : i ⟶ j),\n        φ f ≫ ai j = (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).map (ai i) ≫ ψ f) ∧\n      (∀ (i j : I) (f : i ⟶ j),\n        ψ f ≫ bi j = (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).map (bi i) ≫ φR f)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-69f47",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T184254-L-4001569",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-69f47",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T184254-L-4001569",
+  "kind": "interface",
+  "note": "independent Codex review: All four Lean signatures match their node records; the existing signature and target statements are unchanged. All delivered modules and direct importer Sheaf.AlgebraicGeometry.EtaleLimitReplacementExactSystems compile cleanly; axioms match the two documented remaining holes."
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-etale-coefficient-injective-system",
+ "kind": "statement",
+ "title": "Compatible injective embeddings of étale coefficient systems",
+ "statement": "Let $I$ be a nonempty directed preordered set and $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ a diagram of schemes [def-pc-scheme]. Let $F_i$ be abelian sheaves on the small étale site of $D_i$ [def-weil-pbc-abelian-etale-sheaves]. For $f:i\\to j$ write $u_f=D(f^{\\mathrm{op}}):D_j\\to D_i$, and suppose given $\\varphi_f:u_f^{-1}F_i\\to F_j$, where inverse image is as in [def-weil-pbc-inverse-image]. Assume $\\varphi_{\\mathrm{id}}$ is the canonical inverse-image identity comparison, including transport along $D(\\mathrm{id})=\\mathrm{id}$. Assume $\\varphi_{g\\circ f}=\\varphi_g\\circ u_g^{-1}(\\varphi_f)\\circ c_{u_g,u_f}$, with transport along $D(g\\circ f)=u_f\\circ u_g$, where $c$ identifies inverse image along a composite with iterated inverse image. There exist sheaves $A_i$, transitions $\\psi_f:u_f^{-1}A_i\\to A_j$ satisfying the same identity and composition laws, and monomorphisms $a_i:F_i\\to A_i$ with every $A_i$ injective, such that $a_j\\circ\\varphi_f=\\psi_f\\circ u_f^{-1}(a_i)$. Injective means every map into the object extends across every monomorphism. No cokernel, cone-point functor or exact diagram is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EXZ",
+  "place": "Product/direct-image system construction in the proof of Tag 0EXZ, with exact inverse image and stage cokernels from Tag 04JC; the compatible injective embeddings of étale coefficient systems portion of the parent stage-diagram proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Choose canonical Injective.under embeddings at each k, using enough injectives on the essentially small étale sites. At i form the product of direct images indexed by pairs (k,f:i to k). Exact inverse image implies direct image preserves injectives; products preserve injectivity.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-product-injectives",
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define a_i by adjunction from phi_f followed by the embedding at k. The identity-arrow component proves monicity. For f:i to j, the g:j to k component of psi_f uses projection to the factor f followed by g and the counit/direct-image composition comparison to the g factor. Compare projections and transpose through adjunction: unit, counit and composition coherence prove system identity and composition; the coefficient composition equation gives compatibility with a_i.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-product-injectives",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0EXZ and 04JC",
+  "place": "F1 makes the corresponding step of the stage-diagram argument explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible injective embedding of an etale sheaf coefficient system and its cokernel transitions",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible injective replacement system of abelian etale sheaves with cokernels",
+   "date": "2026-10-12",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, PresheafOfModules.instIsLocallyInjectiveToSheafify, CategoryTheory.Sheaf.instIsLocallyInjectiveAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, PresheafOfModules.IsLocallyInjective, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex, CategoryTheory.Presheaf.isLocallyInjective_of_injective, CategoryTheory.Sheaf.isLocallyInjective_iff_injective, CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι",
+   "verdict": "No compatible injective scheme-system theorem found; basic product and exactness ingredients exist."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesCokernel|cokernelSequence_exact|instPiObj",
+   "date": "2026-10-12",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/Kernels.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Abelian/Exact.lean, Mathlib/CategoryTheory/Abelian/Subcategory.lean",
+   "verdict": "No compatible injective scheme-system theorem found; basic product and exactness ingredients exist."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleReplacementStageDiagram",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The injective-restriction-acyclicity proof, through the étale-limit acyclic-replacement construction: stage injective embeddings and cokernels before the filtered-colimit sequence. Specifically: Compatible injective embeddings of étale coefficient systems.",
+   "via": [
+    "lem-weil-pbc-etale-replacement-stage-diagram",
+    "lem-weil-pbc-etale-limit-replacement-exact-systems",
+    "lem-weil-pbc-etale-limit-acyclic-replacement",
+    "lem-weil-pbc-etale-limit-cohomology-connecting-ladder",
+    "lem-weil-pbc-etale-limit-cohomology-class-descent",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoefficientInjectiveSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoefficientInjectiveSystem.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_coefficient_injective_system",
+  "statement": "theorem etale_coefficient_injective_system\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n :\n    ∃ (FI : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (ψ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FI i) ⟶ FI j)\n    (hidentityI : ∀ i : I, ψ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (FI i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FI i))\n    (hcompositionI : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      ψ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FI i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (ψ f) ≫ ψ g)\n    (ai : ∀ i : I, F i ⟶ FI i),\n      (∀ i : I, Injective (FI i)) ∧ (∀ i : I, Mono (ai i)) ∧\n      (∀ (i j : I) (f : i ⟶ j),\n        φ f ≫ ai j = (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).map (ai i) ≫ ψ f)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-69f47",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T184254-L-4001569",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-69f47",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T184254-L-4001569",
+  "kind": "interface",
+  "note": "independent Codex review: All four Lean signatures match their node records; the existing signature and target statements are unchanged. All delivered modules and direct importer Sheaf.AlgebraicGeometry.EtaleLimitReplacementExactSystems compile cleanly; axioms match the two documented remaining holes."
+ }
+}

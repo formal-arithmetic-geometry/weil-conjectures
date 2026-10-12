@@ -7,12 +7,11 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-public import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Mathlib.CategoryTheory.Abelian.FunctorCategory
 
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleCoefficientInjectiveCokernelSystem
+import Sheaf.AlgebraicGeometry.EtaleSystemConeFunctor
+import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # The stage diagram of an étale injective replacement
 
@@ -26,6 +25,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
+-- The existential proof binders in the unchanged interface are used by later witnesses.
+set_option linter.unusedVariables false in
 /-- Compatible injective and cokernel systems, assembled into a short exact diagram
 on the cone point, before taking any filtered colimit.
 Source: Stacks Project, Tag 0EXZ, its product-of-direct-images construction, and
@@ -125,6 +126,81 @@ theorem etale_replacement_stage_diagram
       (∀ i : I, Injective (FI i)) ∧
       (ShortComplex.mk α β w).ShortExact ∧
       (∀ i : I, (s i).τ₁ = (eG i).inv) ∧
-      (∀ i : I, (s i).τ₃ = (eGR i).inv) := by sorry
+      (∀ i : I, (s i).τ₃ = (eGR i).inv) := by
+  obtain ⟨FR, φR, hidentityR, hcompositionR, FI, ψ, hidentityI, hcompositionI,
+    ai, bi, wi, hi, hInjective, ha, hb⟩ :=
+    etale_coefficient_injective_cokernel_system D F φ hidentity hcomposition
+  obtain ⟨GI, eGI, hGI⟩ :=
+    etale_system_cone_functor D c FI ψ hidentityI hcompositionI
+  obtain ⟨GR, eGR, hGR⟩ :=
+    etale_system_cone_functor D c FR φR hidentityR hcompositionR
+  let α : G ⟶ GI :=
+    { app := fun i ↦ (eG i).hom ≫
+        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).map (ai i) ≫ (eGI i).inv
+      naturality := by
+        intro i j f
+        dsimp
+        rw [hG, hGI]
+        simp only [Category.assoc, Iso.inv_hom_id_assoc]
+        rw [← Functor.map_comp_assoc, ha i j f, Functor.map_comp]
+        have hn := (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j))
+          (D.map f.op) (c.π.app (op i)) (c.w f.op).symm).hom.naturality (ai i)
+        dsimp at hn
+        simp only [Category.assoc]
+        rw [← reassoc_of% hn] }
+  let β : GI ⟶ GR :=
+    { app := fun i ↦ (eGI i).hom ≫
+        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).map (bi i) ≫ (eGR i).inv
+      naturality := by
+        intro i j f
+        dsimp
+        rw [hGI, hGR]
+        simp only [Category.assoc, Iso.inv_hom_id_assoc]
+        rw [← Functor.map_comp_assoc, hb i j f, Functor.map_comp]
+        have hn := (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j))
+          (D.map f.op) (c.π.app (op i)) (c.w f.op).symm).hom.naturality (bi i)
+        dsimp at hn
+        simp only [Category.assoc]
+        rw [← reassoc_of% hn] }
+  have w : α ≫ β = 0 := by
+    apply NatTrans.ext
+    funext i
+    dsimp [α, β]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc, ← Functor.map_comp_assoc, wi,
+      Functor.map_zero, comp_zero, zero_comp]
+  let s : ∀ i : I,
+      (ShortComplex.mk (ai i) (bi i) (wi i)).map
+        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))) ⟶
+      ShortComplex.mk (α.app i) (β.app i) (congrArg (fun f ↦ f.app i) w) :=
+    fun i ↦
+      { τ₁ := (eG i).inv
+        τ₂ := (eGI i).inv
+        τ₃ := (eGR i).inv
+        comm₁₂ := by simp [α]
+        comm₂₃ := by simp [β] }
+  have hComponents : ∀ i : I,
+      (ShortComplex.mk (α.app i) (β.app i)
+        (congrArg (fun f ↦ f.app i) w)).ShortExact := by
+    intro i
+    have : IsIso (s i).τ₁ := by dsimp [s]; infer_instance
+    have : IsIso (s i).τ₂ := by dsimp [s]; infer_instance
+    have : IsIso (s i).τ₃ := by dsimp [s]; infer_instance
+    have : IsIso (s i) := ShortComplex.isIso_of_isIso (s i)
+    exact ShortComplex.shortExact_of_iso (asIso (s i))
+      ((hi i).map_of_exact (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))))
+  have hEval : JointlyReflectIsomorphisms
+      (fun i : I ↦ (evaluation I
+        (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})).obj i) :=
+    { isIso := by
+        intro X Y f hf
+        have : ∀ i, IsIso (f.app i) := hf
+        exact NatIso.isIso_of_isIso_app f }
+  have hShortExact : (ShortComplex.mk α β w).ShortExact := by
+    apply (hEval.shortExact_iff _).mpr
+    intro i
+    exact hComponents i
+  exact ⟨FR, φR, hidentityR, hcompositionR, GR, eGR, hGR,
+    FI, ψ, hidentityI, hcompositionI, GI, eGI, hGI, ai, bi, wi, hi,
+    α, β, w, s, hInjective, hShortExact, (fun _ ↦ rfl), (fun _ ↦ rfl)⟩
 
 end AlgebraicGeometry.Etale

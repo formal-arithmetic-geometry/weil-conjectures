@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-etale-system-cone-functor",
+ "kind": "statement",
+ "title": "Pullback of a compatible étale system to an arbitrary cone",
+ "statement": "Let $I$ be a preordered set and $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ a diagram of schemes [def-pc-scheme]. Let $F_i$ be abelian sheaves on the small étale site of $D_i$ [def-weil-pbc-abelian-etale-sheaves]. For $f:i\\to j$ write $u_f=D(f^{\\mathrm{op}}):D_j\\to D_i$, and suppose given $\\varphi_f:u_f^{-1}F_i\\to F_j$, where inverse image is as in [def-weil-pbc-inverse-image]. Assume $\\varphi_{\\mathrm{id}}$ is the canonical inverse-image identity comparison, including transport along $D(\\mathrm{id})=\\mathrm{id}$. Assume $\\varphi_{g\\circ f}=\\varphi_g\\circ u_g^{-1}(\\varphi_f)\\circ c_{u_g,u_f}$, with transport along $D(g\\circ f)=u_f\\circ u_g$, where $c$ identifies inverse image along a composite with iterated inverse image. Let $c$ be any cone over $D$ with point $X$ and legs $c_i:X\\to D_i$ [def-weil-pbc-category-colimit]. There exist a functor $G:I\\to\\operatorname{Ab}(X_{\\acute et})$ and isomorphisms $e_i:G_i\\simeq c_i^{-1}F_i$ such that $G(f)=e_j^{-1}\\circ c_j^{-1}(\\varphi_f)\\circ c_{c_j,u_f}\\circ e_i$, where the cone equation identifies $c_i$ with $c_j$ followed by $u_f$. No limit, injectivity or exactness hypothesis is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EXZ",
+  "place": "Product/direct-image system construction in the proof of Tag 0EXZ, with exact inverse image and stage cokernels from Tag 04JC; the pullback of a compatible étale system to an arbitrary cone portion of the parent stage-diagram proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Set G_i=c_i inverse image of F_i, with identity e_i. Define the arrow at f as upperStarComp for c_j and u_f followed by c_j inverse image of phi_f. Substitute the coefficient identity law and D.map_id; the right unit law for upperStarComp cancels the unit comparisons, giving map_id.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For f followed by g, substitute coefficient composition. Naturality moves the inverse image of phi_f past the cone comparison for g. Associativity of upperStarComp identifies the nested comparisons, using the cone equations and D.map_comp. This proves map_comp. Identity e_i give the displayed transition equation.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0EXZ and 04JC",
+  "place": "F1 makes the corresponding step of the stage-diagram argument explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible system of sheaves inverse images pulled back along a cone forms a functor",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of a compatible etale sheaf system to a cone gives a functor",
+   "date": "2026-10-12",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', CategoryTheory.GrothendieckTopology.diagramPullback, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctor, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverse, CategoryTheory.GrothendieckTopology.diagramPullback_app, AlgebraicGeometry.SheafedSpace.GlueData.vPullbackConeIsLimit, CategoryTheory.Meq.pullback, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctor_map_hom",
+   "verdict": "No matching compatible scheme-system theorem; Mathlib has the elementary categorical ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarComp|injective.*product",
+   "date": "2026-10-12",
+   "results": "6 hits: Mathlib/CategoryTheory/Types/Monomorphisms.lean, Mathlib/CategoryTheory/Limits/MonoCoprod.lean, Mathlib/CategoryTheory/Limits/MonoCoprod.lean, Mathlib/CategoryTheory/Limits/MonoCoprod.lean, Mathlib/CategoryTheory/Limits/Shapes/ConcreteCategory.lean, Mathlib/CategoryTheory/Limits/Shapes/FunctorToTypes.lean",
+   "verdict": "No matching compatible scheme-system theorem; Mathlib has the elementary categorical ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleReplacementStageDiagram",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The injective-restriction-acyclicity proof, through the étale-limit acyclic-replacement construction: stage injective embeddings and cokernels before the filtered-colimit sequence. Specifically: Pullback of a compatible étale system to an arbitrary cone.",
+   "via": [
+    "lem-weil-pbc-etale-replacement-stage-diagram",
+    "lem-weil-pbc-etale-limit-replacement-exact-systems",
+    "lem-weil-pbc-etale-limit-acyclic-replacement",
+    "lem-weil-pbc-etale-limit-cohomology-connecting-ladder",
+    "lem-weil-pbc-etale-limit-cohomology-class-descent",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSystemConeFunctor",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSystemConeFunctor.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_system_cone_functor",
+  "statement": "theorem etale_system_cone_functor\n    {I : Type u} [Preorder I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n :\n    ∃ (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i)),\n    ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-69f47",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T184254-L-4001569",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-69f47",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T184254-L-4001569",
+  "kind": "interface",
+  "note": "independent Codex review: All four Lean signatures match their node records; the existing signature and target statements are unchanged. All delivered modules and direct importer Sheaf.AlgebraicGeometry.EtaleLimitReplacementExactSystems compile cleanly; axioms match the two documented remaining holes."
+ }
+}
